@@ -1,0 +1,150 @@
+{
+  "type": "component",
+  "props": {
+    "src": {
+      "type": "String",
+      "desc": "[optional] Pass markdown in as a property",
+      "examples": [ "\n\"Classic markup: :wink: :joy: :cry: :angel: :heart: :beers: :laughing: :yum:\n\nShortcuts (emoticons): :-) :-( 8-) ;)\"" ]
+    },
+    "no-html": {
+      "type": "Boolean",
+      "desc": "Disable HTML tags in source"
+    },
+    "no-link": {
+      "type": "Boolean",
+      "desc": "Disable conversion of links"
+    },
+    "no-linkify": {
+      "type": "Boolean",
+      "desc": "Disable auto-convert URL-like text to links"
+    },
+    "no-typographer": {
+      "type": "Boolean",
+      "desc": "Disable language-neutral replacement + quotes beautification"
+    },
+    "no-breaks": {
+      "type": "Boolean",
+      "desc": "Disable conversion of '\\n' into <br>"
+    },
+    "no-highlight": {
+      "type": "Boolean",
+      "desc": "Disable code highlighter"
+    },
+    "no-emoji": {
+      "type": "Boolean",
+      "desc": "Disable emojie conversion"
+    },
+    "no-subscript": {
+      "type": "Boolean",
+      "desc": "Disable subscript conversion"
+    },
+    "no-superscript": {
+      "type": "Boolean",
+      "desc": "Disable superscript conversion"
+    },
+    "no-footnote": {
+      "type": "Boolean",
+      "desc": "Disable footnote conversion"
+    },
+    "no-deflist": {
+      "type": "Boolean",
+      "desc": "Disable definition list conversion"
+    },
+    "no-abbreviation": {
+      "type": "Boolean",
+      "desc": "Disable abbreviation conversion"
+    },
+    "no-insert": {
+      "type": "Boolean",
+      "desc": "Disable insert conversion"
+    },
+    "no-mark": {
+      "type": "Boolean",
+      "desc": "Disable mark conversion"
+    },
+    "no-image": {
+      "type": "Boolean",
+      "desc": "Disable image conversion"
+    },
+    "no-tasklist": {
+      "type": "Boolean",
+      "desc": "Disable tasklist conversion"
+    },
+    "no-container": {
+      "type": "Boolean",
+      "desc": "Disable container conversion"
+    },
+    "toc": {
+      "type": "Boolean",
+      "desc": "Set to true if you want a TOC automatically generated"
+    },
+    "toc-start": {
+      "type": "Number",
+      "desc": "The starting Header number for generating a TOC",
+      "values": [ 1, 2, 3, 4, 5 ]
+    },
+    "toc-end": {
+      "type": "Number",
+      "desc": "The ending Header number for generating a TOC. Must be greater than tocStart",
+      "values": [ 2, 3, 4, 5, 6 ]
+    },
+    "task-lists-enable": {
+      "type": "Boolean",
+      "desc": "Set to true to enable (not read-only) Task Lists"
+    },
+    "task-lists-label": {
+      "type": "Boolean",
+      "desc": "Set to true to wrap the rendered list items in a <label> element for UX purposes"
+    },
+    "task-lists-label-after": {
+      "type": "Boolean",
+      "desc": "to add the label after the checkbox (requires `task-lists-label` to be set to `true`)"
+    },
+    "content-class": {
+      "type": [ "Array", "String", "Object" ],
+      "desc": "Class definitions to be attributed to the markdown container",
+      "examples": [
+        "my-special-class",
+        ":content-class=\"{ 'my-special-class': <condition> }\""
+      ]
+    },
+    "content-style": {
+      "type": [ "Array", "String", "Object" ],
+      "desc": "Style definitions to be attributed to the markdown container",
+      "examples": [
+        "background-color: #ff0000",
+        ":content-style=\"{ backgroundColor: '#ff0000' }\""
+      ]
+    }
+  },
+  "events": {
+    "toc": {
+      "desc": "If `toc` property is `true` then if a TOC is generated it is emitted via this event",
+      "params": {
+        "tocData": {
+          "type": "Array",
+          "desc": "Array of one or more TOC data objects",
+          "definition": {
+            "id": {
+              "type": "String",
+              "desc": "The id for the TOC header"
+            },
+            "title": {
+              "type": "String",
+              "desc": "The TOC header title"
+            },
+            "level": {
+              "type": "Number",
+              "desc": "The TOC header type (1=h1, 2=h2, etc)"
+            }
+          }
+        }
+      }
+    }
+  },
+  "slots": {
+    "default": {
+      "desc": "This is the default slot to be used for markdown"
+    }
+  }
+}

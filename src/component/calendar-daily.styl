@@ -1,0 +1,128 @@
+.q-calendar-daily
+  background-color $grey-1
+  .q-calendar-daily__intervals-head
+    border-right $grey-4 1px solid
+  .q-calendar-daily__head-day
+    border-right $grey-4 1px solid
+    border-bottom $grey-4 1px solid
+    color $grey-10
+    &.q-past-day
+      .q-calendar-daily__head-weekday,
+      .q-calendar-daily__head-day-label
+        color rgba(0,0,0,0.38)
+  .q-calendar-daily__intervals-body
+    border-right $grey-4 1px solid
+    .q-calendar-daily__interval-text
+      color $grey-8
+  .q-calendar-daily__day
+    border-right $grey-4 1px solid
+    border-bottom $grey-4 1px solid
+    &.q-current-day
+      // border $grey-6 1px solid !important
+  .q-calendar-daily__day-interval
+    border-top $grey-4 1px solid
+    &first-child
+      border-top none !important
+.q-calendar-daily__day-interval--droppable
+  border $primary 2px dashed
+
+.q-calendar-daily
+  display flex
+  flex-wrap nowrap
+  flex-direction column
+  height 100%
+
+  &__head
+    flex none
+    display flex
+    overflow hidden
+
+  &__intervals-head
+    flex none
+    display flex
+    overflow hidden
+    // display flex
+    // flex-direction column
+    // align-items center
+    // align-content flex-end
+    // justify-content center
+    vertical-align bottom
+    width 46px
+    color $grey-8
+    border-bottom $grey-4 1px solid
+
+    &--text
+      display block
+      position relative
+      font-size 10px
+      text-align center
+      vertical-align bottom
+
+  &__head-day
+    flex 1 1 auto
+    flex-wrap nowrap
+    overflow hidden
+    width 0
+
+  &__head-weekday
+    user-select none
+    padding 4px
+    font-size 1rem
+
+  &__head-day-label
+    user-select none
+    border-radius 50%
+    padding 0.285em
+    cursor pointer
+    font-size 40px !important
+    line-height 39px !important
+    height 1.25em !important
+    width 1.25em !important
+    min-height 1.25em !important
+    min-width 1.25em !important
+
+  &__body
+    flex 1 1 60%
+    overflow hidden
+    display flex
+    position relative
+    flex-direction column
+
+  &__scroll-area
+    overflow-y scroll
+    flex 1 1 auto
+    display flex
+    align-items flex-start
+
+  &__pane
+    width 100%
+    overflow-y hidden
+    flex none
+    display flex
+    align-items flex-start
+
+  &__day-container
+    display flex
+    flex 1
+    width 100%
+    height 100%
+
+  &__intervals-body
+    flex none
+    user-select none
+    width 46px
+
+  &__interval
+    text-align center
+    border-bottom none
+
+  &__interval-text
+    display block
+    position relative
+    top -6px
+    font-size 10px
+
+  &__day
+    flex 1
+    width 0
+    position relative

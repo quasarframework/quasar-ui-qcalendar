@@ -1,0 +1,47 @@
+{
+  "name": "@quasar/quasar-app-extension-qcalendar",
+  "version": "1.0.0-alpha.1",
+  "description": "QCalendar Quasar app extension",
+  "author": "Hawkeye64 <jeff@quasar-framework.org>",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint --ext .js,.vue src",
+    "lint-fix": "eslint --ext .js,.vue src --fix",
+    "build-demo": "cd ./demo && quasar build && cd .. && rm -r -f ./docs && cp -r ./demo/dist/spa/. ./docs",
+    "test": "echo \"No test specified\" && exit 0"
+  },
+  "engines": {
+    "node": ">= 8.9.0",
+    "npm": ">= 5.6.0",
+    "yarn": ">= 1.6.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "bugs": "https://github.com/quasarframework/app-extension-qcalendar/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quasarframework/app-extension-qcalendar.git"
+  },
+  "homepage": "https://github.com/quasarframework/app-extension-qcalendar",
+  "license": "MIT",
+  "keywords": [
+    "quasar",
+    "app",
+    "app extension",
+    "extension",
+    "calendar",
+    "daily",
+    "weekly",
+    "monthly",
+    "events",
+    "reminders"
+  ],
+  "devDependencies": {
+    "@vue/eslint-config-standard": "^4.0.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-loader": "^2.1.2",
+    "eslint-plugin-vue": "^5.2.2"
+  }
+}
