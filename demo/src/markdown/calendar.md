@@ -48,10 +48,13 @@ quasar ext remove @quasar/qcalendar
 You can use `quasar describe QCalendar`
 
 # Demo Project
-Can be found [here](https://github.com/hawkeye64/app-extension-qcalendar/demo).
+Can be found [here](https://github.com/quasarframework/app-extension-qcalendar/tree/master/demo).
+
+# Docs
+Can be found [here](https://quasarframework.github.io/app-extension-qcalendar/#/).
 
 # Demo
-Can be found [here](https://hawkeye64.github.io/app-extension-qcalendar/#/calendar).
+Can be found [here](https://quasarframework.github.io/app-extension-qcalendar/#/demo).
 
 # Working with QCalendar
 
