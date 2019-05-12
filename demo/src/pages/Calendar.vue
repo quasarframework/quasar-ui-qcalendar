@@ -45,10 +45,81 @@ Duration:   {{ event.duration }}
             <q-input v-model="eventForm.title" autofocus label="Title" :rules="[v => v && v.length > 0 || 'Field cannot be empty']"></q-input>
             <q-input v-model="eventForm.details" label="Details"></q-input>
             <q-checkbox v-model="eventForm.allDay" label="All-Day event?"></q-checkbox>
-            <!-- <q-datetime-picker outlined label="Event start date &amp; time" mode="datetime" color="primary" v-model="eventForm.dateTimeStart" format24h display-value></q-datetime-picker> -->
-            <q-datetime-picker v-if="eventForm.allDay" outlined label="Event start date" mode="date" color="primary" v-model="eventForm.dateTimeStart"></q-datetime-picker>
-            <q-datetime-picker v-else outlined label="Event start date &amp; time" mode="datetime" color="primary" v-model="eventForm.dateTimeStart" format24h></q-datetime-picker>
-            <q-datetime-picker v-if="!eventForm.allDay" outlined label="Event end date &amp; time" mode="datetime" color="primary" v-model="eventForm.dateTimeEnd" format24h></q-datetime-picker>
+
+            <q-input v-if="eventForm.allDay" color="blue-6" filled v-model="eventForm.dateTimeStart" label="Enter date" mask="####-##-##">
+              <template v-slot:append>
+                <q-icon name="event" class="cursor-pointer">
+                  <q-popup-proxy v-model="showDateScrollerAllDay">
+                    <q-date-scroller
+                      v-model="eventForm.dateTimeStart"
+                      :locale="locale"
+                      :hour24-format="true"
+                      :rounded-borders="true"
+                      border-color="#2196f3"
+                      bar-color="#2196f3"
+                      color="white"
+                      background-color="primary"
+                      inner-color="primary"
+                      inner-background-color="white"
+                      :style="scrollerPopupStyle160"
+                      @close="() => { showDateScrollerAllDay = false }"
+                    />
+                  </q-popup-proxy>
+                </q-icon>
+              </template>
+            </q-input>
+
+            <div v-else class="q-gutter-sm">
+              <q-input color="blue-6" outlined v-model="eventForm.dateTimeStart" label="Event start date and time" mask="####-##-## ##:##">
+                <template v-slot:append>
+                  <q-icon name="event" class="cursor-pointer">
+                    <q-popup-proxy v-model="showDateTimeScrollerStart">
+
+                      <q-date-time-scroller
+                        v-model="eventForm.dateTimeStart"
+                        :locale="locale"
+                        :hour24-format="true"
+                        :rounded-borders="true"
+                        border-color="#2196f3"
+                        bar-color="#2196f3"
+                        color="white"
+                        background-color="primary"
+                        inner-color="primary"
+                        inner-background-color="white"
+                        :style="scrollerPopupStyle280"
+                        @close="() => { showDateTimeScrollerStart = false }"
+                      />
+
+                    </q-popup-proxy>
+                  </q-icon>
+                </template>
+              </q-input>
+              <q-input color="blue-6" outlined v-model="eventForm.dateTimeEnd" label="Event start date and time" mask="####-##-## ##:##">
+                <template v-slot:append>
+                  <q-icon name="event" class="cursor-pointer">
+                    <q-popup-proxy v-model="showDateTimeScrollerEnd">
+
+                      <q-date-time-scroller
+                        v-model="eventForm.dateTimeEnd"
+                        :locale="locale"
+                        :hour24-format="true"
+                        :rounded-borders="true"
+                        border-color="#2196f3"
+                        bar-color="#2196f3"
+                        color="white"
+                        background-color="primary"
+                        inner-color="primary"
+                        inner-background-color="white"
+                        :style="scrollerPopupStyle280"
+                        @close="() => { showDateTimeScrollerEnd = false }"
+                      />
+
+                    </q-popup-proxy>
+                  </q-icon>
+                </template>
+              </q-input>
+            </div>
+
             <q-input v-model="eventForm.icon" label="Icon"></q-input>
             <q-input
               filled
@@ -238,7 +309,10 @@ export default {
       gmt: '',
       dragging: false,
       draggedEvent: null,
-      ignoreNextSwipe: false
+      ignoreNextSwipe: false,
+      showDateScrollerAllDay: false,
+      showDateTimeScrollerStart: false,
+      showDateTimeScrollerEnd: false
     }
   },
   mounted () {
@@ -314,6 +388,34 @@ export default {
         return 'Update'
       }
       return 'Add'
+    },
+    scrollerPopupStyle160 () {
+      if (this.$q.screen.lt.sm) {
+        return {
+          width: '100vw',
+          height: '100vh'
+        }
+      } else {
+        return {
+          maxHeight: '400px',
+          height: '400px',
+          width: '160px'
+        }
+      }
+    },
+    scrollerPopupStyle280 () {
+      if (this.$q.screen.lt.sm) {
+        return {
+          width: '100vw',
+          height: '100vh'
+        }
+      } else {
+        return {
+          maxHeight: '400px',
+          height: '400px',
+          width: '280px'
+        }
+      }
     }
   },
   watch: {
@@ -417,7 +519,7 @@ export default {
       this.displayEvent = true
     },
     getEndTime (event) {
-      let endTime = new Date(event.date + 'T' + event.time + ':00')
+      let endTime = new Date(event.date + ' ' + event.time + ':00')
       endTime = date.addToDate(endTime, { minutes: event.duration })
       endTime = date.formatDate(endTime, 'HH:mm')
       return endTime
@@ -477,9 +579,9 @@ export default {
         timestamp = this.getTimestamp(this.adjustTimestamp(this.contextDay))
         let startTime = new Date(timestamp)
         let endTime = date.addToDate(startTime, { hours: 1 })
-        this.eventForm.dateTimeEnd = this.formatDate(endTime) + 'T' + this.formatTime(endTime) // endTime.toString()
+        this.eventForm.dateTimeEnd = this.formatDate(endTime) + ' ' + this.formatTime(endTime) // endTime.toString()
       } else {
-        timestamp = this.contextDay.date.replace(/-/g, '/') + ' 00:00'
+        timestamp = this.contextDay.date + ' 00:00'
       }
       this.eventForm.dateTimeStart = timestamp
       this.eventForm.allDay = this.contextDay.hasTime === false
@@ -491,13 +593,13 @@ export default {
       this.contextDay = { ...event }
       let timestamp
       if (event.time) {
-        timestamp = event.date.replace(/-/g, '/')
+        timestamp = event.date + ' ' + event.time
         let startTime = new Date(timestamp)
         let endTime = date.addToDate(startTime, { minutes: event.duration })
-        this.eventForm.dateTimeStart = this.formatDate(startTime) + 'T' + this.formatTime(startTime) // endTime.toString()
-        this.eventForm.dateTimeEnd = this.formatDate(endTime) + 'T' + this.formatTime(endTime) // endTime.toString()
+        this.eventForm.dateTimeStart = this.formatDate(startTime) + ' ' + this.formatTime(startTime) // endTime.toString()
+        this.eventForm.dateTimeEnd = this.formatDate(endTime) + ' ' + this.formatTime(endTime) // endTime.toString()
       } else {
-        timestamp = event.date.replace(/-/g, '/') + ' 00:00'
+        timestamp = event.date
         this.eventForm.dateTimeStart = timestamp
       }
       this.eventForm.allDay = !event.time
@@ -594,7 +696,7 @@ export default {
       return day
     },
     getTimestamp (day) {
-      return day.date + 'T' + padTime(day.hour) + ':' + padTime(day.minute) + ':00.000'
+      return day.date + ' ' + padTime(day.hour) + ':' + padTime(day.minute) + ':00.000'
     },
     updateFormatters () {
       try {
