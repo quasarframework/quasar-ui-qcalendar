@@ -9,7 +9,7 @@ QCalendar (@quasar/qcalendar)
 
 QCalendar is an `UI App Extension` for [Quasar Framework v1](https://v1.quasar-framework.org/). It will not work with legacy versions of Quasar Framework.
 
-This work is currently in `beta` and there are expected changes while things get worked out. Your help with testing is greatly appreciated.
+This work is currently in `alpha` and there are expected changes while things get worked out. Your help with testing is greatly appreciated.
 
 # QCalendar
 Please check out the [documentation](https://quasarframework.github.io/app-extension-qcalendar/#/).
