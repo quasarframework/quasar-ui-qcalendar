@@ -1,3 +1,5 @@
 demo
 docs
 .git
+.editorconfig
+.eslintrc.js
