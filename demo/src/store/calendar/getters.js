@@ -7,7 +7,7 @@ export const shortMonthLabel = (state) => state.shortMonthLabel
 export const showDayOfYearLabel = (state) => state.showDayOfYearLabel
 export const shortWeekdayLabel = (state) => state.shortWeekdayLabel
 export const shortIntervalLabel = (state) => state.shortIntervalLabel
-export const format24h = (state) => state.format24h
+export const hour24Format = (state) => state.hour24Format
 export const hideHeader = (state) => state.hideHeader
 export const showMonthLabel = (state) => state.showMonthLabel
 export const showWorkWeeks = (state) => state.showWorkWeeks

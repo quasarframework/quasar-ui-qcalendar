@@ -164,7 +164,7 @@ Duration:   {{ event.duration }}
         :interval-minutes="60 * intervalRangeStep"
         :interval-start="intervalStart"
         :interval-count="intervalCount"
-        :format24h="format24h"
+        :hour24-format="hour24Format"
         :short-month-label="shortMonthLabel"
         :show-day-of-year-label="showDayOfYearLabel"
         :hide-header="hideHeader"
@@ -337,7 +337,7 @@ export default {
       showDayOfYearLabel: 'calendar/showDayOfYearLabel',
       shortWeekdayLabel: 'calendar/shortWeekdayLabel',
       shortIntervalLabel: 'calendar/shortIntervalLabel',
-      format24h: 'calendar/format24h',
+      hour24Format: 'calendar/hour24Format',
       hideHeader: 'calendar/hideHeader',
       showMonthLabel: 'calendar/showMonthLabel',
       showWorkWeeks: 'calendar/showWorkWeeks',

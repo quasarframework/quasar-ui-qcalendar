@@ -25,8 +25,8 @@ export const shortWeekdayLabel = (state, b) => {
 export const shortIntervalLabel = (state, b) => {
   state.shortIntervalLabel = b
 }
-export const format24h = (state, b) => {
-  state.format24h = b
+export const hour24Format = (state, b) => {
+  state.hour24Format = b
 }
 export const hideHeader = (state, b) => {
   state.hideHeader = b
