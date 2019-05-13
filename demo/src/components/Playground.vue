@@ -48,7 +48,7 @@
     ></q-toggle>
     <q-toggle
       class="col-12"
-      v-model="format24h"
+      v-model="hour24Format"
       label="24hr interval labels"
     ></q-toggle>
     <q-toggle
@@ -146,7 +146,7 @@ export default {
       this.shortMonthLabel = true
       this.shortWeekdayLabel = true
       this.shortIntervalLabel = true
-      this.format24h = true
+      this.hour24Format = true
     }
   },
   computed: {
@@ -225,12 +225,12 @@ export default {
         this.$store.commit('calendar/shortIntervalLabel', b)
       }
     },
-    format24h: {
+    hour24Format: {
       get () {
-        return this.$store.state.calendar.format24h
+        return this.$store.state.calendar.hour24Format
       },
       set (b) {
-        this.$store.commit('calendar/format24h', b)
+        this.$store.commit('calendar/hour24Format', b)
       }
     },
     hideHeader: {

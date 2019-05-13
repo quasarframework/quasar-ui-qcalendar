@@ -8,7 +8,7 @@ export default {
   showDayOfYearLabel: false,
   shortWeekdayLabel: false,
   shortIntervalLabel: false,
-  format24h: false,
+  hour24Format: false,
   hideHeader: false,
   showMonthLabel: true,
   showWorkWeeks: false,
