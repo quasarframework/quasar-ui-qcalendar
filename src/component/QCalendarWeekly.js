@@ -134,7 +134,9 @@ export default CalendarBase.extend({
         key: day.date,
         staticClass: 'ellipsis q-calendar-weekly__head-weekday',
         class: this.getRelativeClasses(day, outside)
-      }), [ this.__renderHeadDayLabel(h, day, this.shortWeekdayLabel) ])
+      }), [
+        this.__renderHeadDayLabel(h, day, this.shortWeekdayLabel)
+      ])
     },
     
     __renderHeadDayLabel (h, day, label) {
