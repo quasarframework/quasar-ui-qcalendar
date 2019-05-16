@@ -124,7 +124,7 @@ export default CalendarIntervals.extend({
         })
       }), [
         this.__renderHeadWeekday(h, day),
-        this.__renderHeadDayLabel(h, day),
+        this.__renderHeadDayBtn(h, day),
         slot ? slot(day) : ''
       ])
     },
@@ -150,9 +150,18 @@ export default CalendarIntervals.extend({
 
       return h('div', updateColors(colorCurrent !== void 0 ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
         staticClass: 'ellipsis q-calendar-daily__head-weekday'
-      }), this.weekdayFormatter(day, this.shortWeekdayLabel))
+      }), [
+        this.__renderHeadDayLabel(h, day, this.shortWeekdayLabel)
+      ])
     },
-    __renderHeadDayLabel (h, day) {
+
+    __renderHeadDayLabel (h, day, label) {
+      return h('span', {
+        staticClass: 'ellipsis'
+      }, this.weekdayFormatter(day, label))
+    },
+
+    __renderHeadDayBtn (h, day) {
       const colorCurrent = day.current === true ? this.color : void 0
 
       let colors = new Map(), color, backgroundColor
