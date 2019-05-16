@@ -83,9 +83,10 @@
             <q-item-label caption>@quasarframework</q-item-label>
           </q-item-section>
         </q-item>
+        <q-separator />
         <q-item clickable tag="a" target="_blank" href="https://github.com/quasarframework/app-extension-qcalendar">
           <q-item-section avatar>
-            <q-icon name="bolt" />
+            <q-icon name="extension" />
           </q-item-section>
           <q-item-section>
             <q-item-label>QCalendar home</q-item-label>
@@ -94,11 +95,39 @@
         </q-item>
         <q-item clickable tag="a" target="_blank" href="https://github.com/quasarframework/app-extension-qmarkdown">
           <q-item-section avatar>
-            <q-icon name="bolt" />
+            <q-icon name="extension" />
           </q-item-section>
           <q-item-section>
             <q-item-label>QMarkdown home</q-item-label>
             <q-item-label caption>@quasar/qmarkdown</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-separator />
+        <q-item clickable to="/">
+          <q-item-section avatar>
+            <q-icon name="calendar_today" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>QCalendar docs</q-item-label>
+            <q-item-label caption>Documentation</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item clickable to="/demo">
+          <q-item-section avatar>
+            <q-icon name="calendar_today" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>QCalendar demo</q-item-label>
+            <q-item-label caption>Interactively play with properties</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item clickable to="/examples">
+          <q-item-section avatar>
+            <q-icon name="calendar_today" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>QCalendar examples</q-item-label>
+            <q-item-label caption>Examples of how to do it</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>

@@ -17,10 +17,10 @@
     "quasar": "^1.0.0-beta.23"
   },
   "devDependencies": {
-    "@quasar/app": "^1.0.0-beta.24",
+    "@quasar/app": "^1.0.0-beta.26",
     "@quasar/quasar-app-extension-qcalendar": "link:../.",
     "@quasar/quasar-app-extension-qmarkdown": "^1.0.0-beta.5",
-    "@quasar/quasar-app-extension-qscroller": "^1.0.0-alpha.2",
+    "@quasar/quasar-app-extension-qscroller": "^1.0.0-alpha.3",
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",
