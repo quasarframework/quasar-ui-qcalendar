@@ -9,7 +9,7 @@
     </section>
     <main class="flex flex-start justify-center inset-shadow">
       <div class="q-pa-md col-12-sm col-8-md col-6-lg inset-shadow" style="width: 100%; height: 3px;" />
-      <div class="q-pa-md col-12-sm col-8-md col-6-lg bg-white shadow-1" style="max-width: 800px; width: 100%; ">
+      <div class="q-pa-md col-12-sm col-8-md col-6-lg bg-white shadow-1" style="max-width: 800px; width: 100%;">
         <q-markdown :src="markdown" toc @data="onToc" />
       </div>
     </main>
@@ -38,6 +38,7 @@ export default {
         return this.$store.state.common.toc
       },
       set (toc) {
+        console.log('toc:', toc)
         this.$store.commit('common/toc', toc)
       }
     }

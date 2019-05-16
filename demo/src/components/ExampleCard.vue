@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md">
+  <div :id="slugify(title)" class="q-pa-md">
     <q-card flat bordered class="no-shadow">
       <q-toolbar>
         <q-toolbar-title class="example-title">{{ title }}</q-toolbar-title>
@@ -33,6 +33,12 @@ export default {
     name: {
       type: String,
       required: true
+    }
+  },
+
+  methods: {
+    slugify (str) {
+      return encodeURIComponent(String(str).trim().replace(/\s+/g, '-'))
     }
   }
 }
