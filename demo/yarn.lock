@@ -771,10 +771,10 @@
   resolved "https://registry.yarnpkg.com/@positron/stack-trace/-/stack-trace-1.0.0.tgz#14fcc712a530038ef9be1ce6952315a839f466a8"
   integrity sha1-FPzHEqUwA475vhzmlSMVqDn0Zqg=
 
-"@quasar/app@^1.0.0-beta.24":
-  version "1.0.0-beta.24"
-  resolved "https://registry.yarnpkg.com/@quasar/app/-/app-1.0.0-beta.24.tgz#cb75b8038b7e22c8654cddaeb07b8732f5e324f4"
-  integrity sha512-cOzGSPDP/8yfnH1lUTrcN/DOz9AP7d3THu3vxFZa+R+GO+eiRwhiaX3yMh3YJ1dJJicuWUczb1vfkOesnoZx/A==
+"@quasar/app@^1.0.0-beta.26":
+  version "1.0.0-beta.26"
+  resolved "https://registry.yarnpkg.com/@quasar/app/-/app-1.0.0-beta.26.tgz#f293d54eefb3d540591bbcfdc31290e9b893e677"
+  integrity sha512-bVwpsJJ//V1vdVY1bn1jhFVYz1xE7wuBxs1XRcKsfXJJrlANl3zZaVqtuEXtZN9IIgrtuYSwV9tYTe++QqEf8w==
   dependencies:
     "@quasar/babel-preset-app" "1.0.2"
     "@vue/preload-webpack-plugin" "1.1.0"
@@ -893,10 +893,10 @@
     prismjs "^1.16.0"
     raw-loader "^2.0.0"
 
-"@quasar/quasar-app-extension-qscroller@^1.0.0-alpha.2":
-  version "1.0.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/@quasar/quasar-app-extension-qscroller/-/quasar-app-extension-qscroller-1.0.0-alpha.2.tgz#6846f024c3d3be28db77ee1b0e24890c5c801a67"
-  integrity sha512-x/ELPToz8Y4NA819IjDAdA4/MrRNaoSfdlJ+nFgIEeCqAVjDtWCamv3wj8F87KeUGOP4Uk2DOllAYhGcXYC2VQ==
+"@quasar/quasar-app-extension-qscroller@^1.0.0-alpha.3":
+  version "1.0.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/@quasar/quasar-app-extension-qscroller/-/quasar-app-extension-qscroller-1.0.0-alpha.3.tgz#b30b341a7bcc9e5cf232e1166dc1f2a99253fca2"
+  integrity sha512-1b/3qRdDcXMm6IN5Nk9T7lDkF0wEYjD20cxOo0DFHkjabv+LsXW7oYccwU6Q8mQCRTPT9s49ZFxipOnxNBFLPA==
 
 "@types/q@^1.5.1":
   version "1.5.2"
