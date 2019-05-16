@@ -121,6 +121,34 @@
                 <q-item-label caption>@quasarframework</q-item-label>
               </q-item-section>
             </q-item>
+            <q-separator />
+            <q-item clickable to="/">
+              <q-item-section avatar>
+                <q-icon name="calendar_today" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>QCalendar docs</q-item-label>
+                <q-item-label caption>Documentation</q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item clickable to="/demo">
+              <q-item-section avatar>
+                <q-icon name="calendar_today" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>QCalendar demo</q-item-label>
+                <q-item-label caption>Interactively play with properties</q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item clickable to="/examples">
+              <q-item-section avatar>
+                <q-icon name="calendar_today" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>QCalendar examples</q-item-label>
+                <q-item-label caption>Examples of how to do it</q-item-label>
+              </q-item-section>
+            </q-item>
           </q-list>
         </q-expansion-item>
       </div>
