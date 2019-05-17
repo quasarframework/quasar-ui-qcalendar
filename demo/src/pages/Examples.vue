@@ -11,6 +11,18 @@
     <div id="5-Day-Work-Week" class="text-h4">5 Day Work Week</div>
     <example-card title="Week View - 5 Day Work Week" name="WeekViewFiveDayWorkWeek" />
     <example-card title="Month View - 5 Day Work Week" name="MonthViewFiveDayWorkWeek" />
+    <div id="Work-Weeks" class="text-h4">Work Weeks</div>
+    <example-card title="Month View - Work Weeks" name="MonthViewWorkWeeks" />
+    <div id="Short-Weekday-Label" class="text-h4">Short Weekday Label</div>
+    <example-card title="Week View - Short Weekday Label" name="WeekViewShortWeekdayLabel" />
+    <example-card title="Month View - Short Weekday Label" name="MonthViewShortWeekdayLabel" />
+    <div id="Short-Month-Label" class="text-h4">Short Month Label</div>
+    <example-card title="Month View - Short Month Label" name="MonthViewShortMonthLabel" />
+    <div id="Hour24-Format" class="text-h4">Hour24 Format</div>
+    <example-card title="Week View - Hour24 Format" name="WeekViewHour24Format" />
+    <div id="Short-Interval-Label" class="text-h4">Short Interval Label</div>
+    <example-card title="Week View - Short Interval Label" name="WeekViewShortIntervalLabel" />
+    <example-card title="Week View - Short Interval Label (Hour24Format)" name="WeekViewShortIntervalLabelHour24Format" />
   </hero>
 </template>
 
@@ -46,6 +58,19 @@ export default {
     this.addToToc('5 Day Work Week')
     this.addToToc('Week View - 5 Day Work Week', 2)
     this.addToToc('Month View - 5 Day Work Week', 2)
+    this.addToToc('Work Weeks')
+    this.addToToc('Month View - Work Weeks', 2)
+    this.addToToc('Short Weekday Label')
+    this.addToToc('Week View - Short Weekday Label', 2)
+    this.addToToc('Month View - Short Weekday Label', 2)
+    this.addToToc('Short Month Label')
+    this.addToToc('Month View - Short Month Label', 2)
+    this.addToToc('Hour24 Format')
+    this.addToToc('Week View - Hour24 Format', 2)
+    this.addToToc('Short Interval Label')
+    this.addToToc('Week View - Short Interval Label', 2)
+    this.addToToc('Week View - Short Interval Label (Hour24Format)', 2)
+
     this.toc = this.tempToc
   },
 

@@ -22,7 +22,14 @@ export default {
     WeekViewFirstDayMonday: () => import('./examples/weekview/MondayFirstDay'),
     MonthViewFirstDayMonday: () => import('./examples/monthview/MondayFirstDay'),
     WeekViewFiveDayWorkWeek: () => import('./examples/weekview/FiveDayWorkWeek'),
-    MonthViewFiveDayWorkWeek: () => import('./examples/monthview/FiveDayWorkWeek')
+    MonthViewFiveDayWorkWeek: () => import('./examples/monthview/FiveDayWorkWeek'),
+    MonthViewWorkWeeks: () => import('./examples/monthview/WorkWeekNumbers'),
+    WeekViewShortWeekdayLabel: () => import('./examples/weekview/ShortWeekdayLabel'),
+    MonthViewShortWeekdayLabel: () => import('./examples/monthview/ShortWeekdayLabel'),
+    MonthViewShortMonthLabel: () => import('./examples/monthview/ShortMonthLabel'),
+    WeekViewHour24Format: () => import('./examples/weekview/Hour24Format'),
+    WeekViewShortIntervalLabel: () => import('./examples/weekview/ShortIntervalLabel'),
+    WeekViewShortIntervalLabelHour24Format: () => import('./examples/weekview/ShortIntervalLabelHour24Format')
   },
 
   props: {
