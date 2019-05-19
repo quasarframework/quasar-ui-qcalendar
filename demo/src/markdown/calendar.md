@@ -5,11 +5,17 @@ QCalendar is a [Quasar App Extension](https://v1.quasar-framework.org/app-extens
 
 QCalendar is a less-opinionated calendar component, as it does not keep track of things like events, reminders or even disabled days (if that's what you want). This is in the hands of the developer, but QCalendar makes it easy via accessible events, slots and methods.
 
-The guiding philosophy has been to empower the developer and allow them to do what needs to be done. This is the true power of QCalendar.
+The guiding philosophy has been to empower the developer and allow them to do what needs to be done without being overly opinionated. In order to do this, the following items are followed:
+
+1. Separation of concerns
+2. Minimalization
+3. Closed to change, but open for extension
+
+This is the true power of QCalendar.
 
 # Features
 - Show month, week, day, contiguous days (ex: 3 days at a time)
-- Optional drag and drop support (even on mobile)
+- Optional drag and drop support (including mobile)
 - Automatic localization / internationalization
 - Responsive flex grid layout
 - No external dependencies (momemtjs, jQuery, etc), other than Quasar
@@ -17,7 +23,7 @@ The guiding philosophy has been to empower the developer and allow them to do wh
 - Define any day as beginning of week
 - Workweek number support
 - Day-of-the-year support
-- Easy to theme using CSS overrides or using JSON them object (see Themes below)
+- Easy to theme using CSS overrides or using JSON theme object (see Themes below)
 - Easy to customize with Vue slots
 
 ## QCalendar is not...
@@ -45,26 +51,29 @@ quasar ext remove @quasar/qcalendar
 ```
 
 # Describe
-You can use `quasar describe QCalendar`
-
-# Demo Project
-Can be found [here](https://github.com/quasarframework/app-extension-qcalendar/tree/master/demo).
+You can use `quasar describe QCalendar` (to be implemented before QCalendar v1 release)
 
 # Docs
 Can be found [here](https://quasarframework.github.io/app-extension-qcalendar/#/).
 
-# Demo
+# Examples
+Can be found [here](https://quasarframework.github.io/app-extension-qcalendar/#/examples).
+
+# Interactive Demo
 Can be found [here](https://quasarframework.github.io/app-extension-qcalendar/#/demo).
+
+# Demo Project
+Can be found [here](https://github.com/quasarframework/app-extension-qcalendar/tree/master/demo).
 
 # Working with QCalendar
 
-In order to get the best mileage from QCalendar it is important to understand all aspects which will be described below.
+In order to get the best potential from QCalendar it is important to understand all aspects which will be described below.
 
-First and foremost, it should also be known that the native date format used internally, and with the v-model, is `YYYY-mm-dd` to avoid confusion with positioning of the day and month in other date formats. All incoming and outgoing dates will use this format.
+First and foremost, the native date format used internally, and with the v-model, is `YYYY-mm-dd`. This is to avoid confusion with positioning of the day and month in other date formats as well as date separator. All incoming and outgoing dates will use this format.
 
 The default locale of QCalendar is **en-us**. This can easily be changed via the `locale` property. Any area of QCalendar that displays text and numbers is locale-aware.
 
-You will see a number of images below which have the QCalendar component, but the title bar above all images is not part QCalendar.
+You will see a number of images below which have the QCalendar component, but the title bar above all images is not part QCalendar. This is something a developer would provide in devland.
 
 ![WeekView](statics/qcalendar-toolbar.png "Week View" =800x800)
 
@@ -323,6 +332,7 @@ TODO
 | interval-height | [Number, String] | Day | The maximum height in pixels for the interval height<br>Default: 40 |
 | interval-minutes | [Number, String] | Day | The number of minutes in an interval<br>Default: 60<br>15 and 30 logically be other choices |
 | interval-count | [Number, String] | Day | The number intervals to use<br>Default: 24<br>If `interval-minutes` is set to `30` then you would set `interval count` to `48` -- double that of regular |
+| interval-start | [Number, String] | Day | The starting interval<br>Default: 0 |
 | hour24-format | Number | Day | Show intervals in 24 hour format<br>Default: false<br>If `false` the interval time shows in the selected locale |
 | |
 | day-height | Number | Month | The maximum height in pixels for the day height<br>Default: 50 |
