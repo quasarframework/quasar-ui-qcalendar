@@ -27,9 +27,15 @@ export default {
     WeekViewShortWeekdayLabel: () => import('./examples/weekview/ShortWeekdayLabel'),
     MonthViewShortWeekdayLabel: () => import('./examples/monthview/ShortWeekdayLabel'),
     MonthViewShortMonthLabel: () => import('./examples/monthview/ShortMonthLabel'),
+    MonthViewShowDayOfYearLabel: () => import('./examples/monthview/ShowDayOfYearLabel'),
     WeekViewHour24Format: () => import('./examples/weekview/Hour24Format'),
     WeekViewShortIntervalLabel: () => import('./examples/weekview/ShortIntervalLabel'),
-    WeekViewShortIntervalLabelHour24Format: () => import('./examples/weekview/ShortIntervalLabelHour24Format')
+    WeekViewShortIntervalLabelHour24Format: () => import('./examples/weekview/ShortIntervalLabelHour24Format'),
+    DayViewIntervalHeight: () => import('./examples/dayview/IntervalHeight'),
+    DayViewIntervalCount: () => import('./examples/dayview/IntervalCount'),
+    DayViewIntervalMinutes30: () => import('./examples/dayview/IntervalMinutes30'),
+    DayViewIntervalMinutes15: () => import('./examples/dayview/IntervalMinutes15'),
+    DayViewIntervalStart: () => import('./examples/dayview/IntervalStart')
   },
 
   props: {

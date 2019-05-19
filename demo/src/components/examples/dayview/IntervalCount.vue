@@ -35,20 +35,20 @@
     <q-separator />
     <q-calendar
       v-model="selectedDate"
-      :show-work-weeks="true"
-      view="month"
+      view="day"
       locale="en-us"
+      :interval-count="4"
       style="height: 400px;"
     />
   </div>
 </template>
 
 <script>
-import template from '../../../markdown/examples/template/monthview/work-week-numbers.md'
-import script from '../../../markdown/examples/script/monthview/work-week-numbers.md'
+import template from '../../../markdown/examples/template/dayview/interval-count.md'
+import script from '../../../markdown/examples/script/dayview/interval-count.md'
 
 export default {
-  name: 'WeekViewDefault',
+  name: 'DayViewDefault',
 
   data () {
     return {

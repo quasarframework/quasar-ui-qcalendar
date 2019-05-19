@@ -35,7 +35,7 @@
     <q-separator />
     <q-calendar
       v-model="selectedDate"
-      :show-work-weeks="true"
+      :show-day-of-year-label="true"
       view="month"
       locale="en-us"
       style="height: 400px;"
@@ -44,8 +44,8 @@
 </template>
 
 <script>
-import template from '../../../markdown/examples/template/monthview/work-week-numbers.md'
-import script from '../../../markdown/examples/script/monthview/work-week-numbers.md'
+import template from '../../../markdown/examples/template/monthview/show-day-of-year-label.md'
+import script from '../../../markdown/examples/script/monthview/show-day-of-year-label.md'
 
 export default {
   name: 'WeekViewDefault',
