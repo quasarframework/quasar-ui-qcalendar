@@ -23,6 +23,8 @@ export default {
     MonthViewFirstDayMonday: () => import('./examples/monthview/MondayFirstDay'),
     WeekViewFiveDayWorkWeek: () => import('./examples/weekview/FiveDayWorkWeek'),
     MonthViewFiveDayWorkWeek: () => import('./examples/monthview/FiveDayWorkWeek'),
+    WeekViewNow: () => import('./examples/weekview/Now'),
+    MonthViewNow: () => import('./examples/monthview/Now'),
     MonthViewWorkWeeks: () => import('./examples/monthview/WorkWeekNumbers'),
     WeekViewShortWeekdayLabel: () => import('./examples/weekview/ShortWeekdayLabel'),
     MonthViewShortWeekdayLabel: () => import('./examples/monthview/ShortWeekdayLabel'),
@@ -35,7 +37,9 @@ export default {
     DayViewIntervalCount: () => import('./examples/dayview/IntervalCount'),
     DayViewIntervalMinutes30: () => import('./examples/dayview/IntervalMinutes30'),
     DayViewIntervalMinutes15: () => import('./examples/dayview/IntervalMinutes15'),
-    DayViewIntervalStart: () => import('./examples/dayview/IntervalStart')
+    DayViewIntervalStart: () => import('./examples/dayview/IntervalStart'),
+    DayViewHideHeader: () => import('./examples/dayview/HideHeader'),
+    MonthViewHideHeader: () => import('./examples/monthview/HideHeader')
   },
 
   props: {

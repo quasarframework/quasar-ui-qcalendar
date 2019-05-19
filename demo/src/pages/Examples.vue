@@ -6,6 +6,10 @@
     <example-card title="Week View - Basic" name="WeekViewDefault" />
     <example-card title="Month View - Basic" name="MonthViewDefault" />
 
+    <div id="Hide-Header" class="text-h4">Hide Header</div>
+    <example-card title="Day View - Hide Header" name="DayViewHideHeader" />
+    <example-card title="Month View - Hide Header" name="MonthViewHideHeader" />
+
     <div id="First-Day-Monday" class="text-h4">First Day Monday</div>
     <example-card title="Week View - First Day Monday" name="WeekViewFirstDayMonday" />
     <example-card title="Month View - First Day Monday" name="MonthViewFirstDayMonday" />
@@ -14,8 +18,13 @@
     <example-card title="Week View - 5 Day Work Week" name="WeekViewFiveDayWorkWeek" />
     <example-card title="Month View - 5 Day Work Week" name="MonthViewFiveDayWorkWeek" />
 
+    <div id="Now" class="text-h4">Now</div>
+    <p>If you provide an empty string for the <code class="q-markdown--token">v-model</code> then you can specify the <code class="q-markdown--token">now</code> property which will use the current date.</p>
+    <example-card title="Week View - Now" name="WeekViewNow" />
+    <example-card title="Month View - Now" name="MonthViewNow" />
+
     <div id="Work-Weeks" class="text-h4">Work Weeks</div>
-    <p><code class="q-markdown--token">workweeks</code> is available only for month view.</p>
+    <p><code class="q-markdown--token">show-work-weeks</code> is available only for month view.</p>
     <example-card title="Month View - Work Weeks" name="MonthViewWorkWeeks" />
 
     <div id="Short-Weekday-Label" class="text-h4">Short Weekday Label</div>
@@ -82,6 +91,10 @@ export default {
     this.addToToc('Week View - Basic', 2)
     this.addToToc('Month View - Basic', 2)
 
+    this.addToToc('Hide Header')
+    this.addToToc('Day View - Hide Header', 2)
+    this.addToToc('Month View - Hide Header', 2)
+
     this.addToToc('First Day Monday')
     this.addToToc('Week View - First Day Monday', 2)
     this.addToToc('Month View - First Day Monday', 2)
@@ -89,6 +102,10 @@ export default {
     this.addToToc('5 Day Work Week')
     this.addToToc('Week View - 5 Day Work Week', 2)
     this.addToToc('Month View - 5 Day Work Week', 2)
+
+    this.addToToc('Now')
+    this.addToToc('Week View - Now', 2)
+    this.addToToc('Month View - Now', 2)
 
     this.addToToc('Work Weeks')
     this.addToToc('Month View - Work Weeks', 2)
