@@ -123,6 +123,7 @@ export default CalendarBase.extend({
       }
       this.keyValue = getDayIdentifier(start)
     },
+
     move (amount = 1) {
       const moved = copyTimestamp(this.parsedValue)
       const forward = amount > 0
@@ -169,12 +170,15 @@ export default CalendarBase.extend({
       this.$emit('input', moved.date)
       this.$emit('moved', moved)
     },
+
     next (amount = 1) {
       this.move(amount)
     },
+
     prev (amount = 1) {
       this.move(-amount)
     },
+
     timeStartPos (time, clamp = true) {
       const c = this.$children[0]
       if (c && c.timeStartPos) {
@@ -183,6 +187,7 @@ export default CalendarBase.extend({
         return false
       }
     },
+
     timeDurationHeight (minutes) {
       const c = this.$children[0]
       if (c && c.timeDurationHeight) {
@@ -191,6 +196,7 @@ export default CalendarBase.extend({
         return -1
       }
     },
+
     scrollToTime (time) {
       const c = this.$children[0]
       if (c && c.scrollToTime) {
@@ -199,6 +205,7 @@ export default CalendarBase.extend({
         return false
       }
     },
+
     __renderComponent (h, component, data) {
       return h(component, data)
     }
