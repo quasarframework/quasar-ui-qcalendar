@@ -1,7 +1,7 @@
 QCalendar (@quasar/qcalendar)
 ===
 
-> Please note that QCalendar is in pre-alpha state.
+> Please note that QCalendar is in alpha state.
 
 ![official icon](https://img.shields.io/badge/Quasar%201.0-Official%20UI%20App%20Extension-blue.svg)
 ![npm (scoped)](https://img.shields.io/npm/v/@quasar/quasar-app-extension-qcalendar.svg?style=plastic)
