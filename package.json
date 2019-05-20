@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint --ext .js,.vue src",
     "lint-fix": "eslint --ext .js,.vue src --fix",
-    "build-demo": "cd ./demo && quasar build && cd .. && rm -r -f ./docs && cp -r ./demo/dist/spa/. ./docs",
+    "build-demo": "cd ./demo && quasar build && cd .. && rm -r -f ./docs && cp -r ./demo/dist/spa/. ./docs && cp ./_config.yml ./docs",
     "test": "echo \"No test specified\" && exit 0"
   },
   "engines": {
