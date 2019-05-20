@@ -91,7 +91,7 @@ module.exports = function (ctx) {
     build: {
       scopeHoisting: true,
       vueRouterMode: 'history',
-      publicPath: 'https://quasarframework.github.io/app-extension-qcalendar/',
+      publicPath: 'app-extension-qcalendar',
       // vueCompiler: true,
       // gzip: true,
       // analyze: true,
