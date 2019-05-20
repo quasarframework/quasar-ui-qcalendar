@@ -12,7 +12,7 @@ export default Vue.extend({
   props: {
     now: {
       type: String,
-      validator: validateTimestamp
+      validator: v => v === '' || validateTimestamp(v)
     }
   },
 
