@@ -6,6 +6,16 @@
     border-right $grey-4 1px solid
     border-bottom $grey-4 1px solid
     color $grey-10
+    &.q-outside
+      background-color $outside-background-color
+    &.q-current-day
+      .q-calendar-daily__head-day-label
+        border 2px solid currentColor
+        font-weight 700
+        color $primary
+    &.q-future-day
+      .q-calendar-daily__head-day-label
+        color $primary
     &.q-past-day
       .q-calendar-daily__head-weekday
         color rgba(0,0,0,1.0)
@@ -77,12 +87,12 @@
     cursor pointer
     left: 2px;
     bottom: 2px;
-    font-size 40px !important
-    line-height 40px !important
-    height 1.25em !important
-    width 1.25em !important
-    min-height 1.25em !important
-    min-width 1.25em !important
+    // font-size 40px !important
+    // line-height 40px !important
+    // height 1.25em !important
+    // width 1.25em !important
+    // min-height 1.25em !important
+    // min-width 1.25em !important
 
   &__body
     flex 1 1 60%

@@ -1,5 +1,5 @@
 <template>
-  <div :id="slugify(title)" class="q-pa-md">
+  <section :id="slugifiedTitle" class="q-pa-md" @click="copyHeading(slugifiedTitle)">
     <q-card flat bordered class="no-shadow">
       <q-toolbar>
         <q-toolbar-title class="example-title">{{ title }}</q-toolbar-title>
@@ -7,10 +7,12 @@
       <q-separator />
       <component v-bind:is="name" />
     </q-card>
-  </div>
+  </section>
 </template>
 
 <script>
+import { copyHeading, slugify } from 'assets/page-utils'
+
 export default {
   name: 'ExampleCard',
 
@@ -53,17 +55,25 @@ export default {
     }
   },
 
-  methods: {
-    slugify (str) {
-      return encodeURIComponent(String(str).trim().replace(/\s+/g, '-'))
+  computed: {
+    slugifiedTitle () {
+      return slugify(this.title)
     }
+  },
+
+  methods: {
+    copyHeading
   }
 }
 </script>
 
 <style lang="stylus">
-
 .example-title
   color rgba(0, 0, 0, 0.45)
-
+  cursor pointer
+  &:after
+    content ' #'
+    opacity 0
+  &:hover:after
+    opacity 1
 </style>
