@@ -1,8 +1,8 @@
 <template>
-  <section :id="slugifiedTitle" class="q-pa-md" @click="copyHeading(slugifiedTitle)">
+  <section :id="slugifiedTitle" class="q-pa-md">
     <q-card flat bordered class="no-shadow">
       <q-toolbar>
-        <q-toolbar-title class="example-title">{{ title }}</q-toolbar-title>
+        <q-toolbar-title class="example-title" @click="copyHeading(slugifiedTitle)">{{ title }}</q-toolbar-title>
       </q-toolbar>
       <q-separator />
       <component v-bind:is="name" />
