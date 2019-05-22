@@ -48,8 +48,6 @@ import template from '../../../markdown/examples/template/dayview/hide-header.md
 import script from '../../../markdown/examples/script/dayview/hide-header.md'
 
 export default {
-  name: 'DayViewDefault',
-
   data () {
     return {
       tab: 'template',

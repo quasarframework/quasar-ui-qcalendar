@@ -48,8 +48,6 @@ import template from '../../../markdown/examples/template/dayview/interval-minut
 import script from '../../../markdown/examples/script/dayview/interval-minutes-30.md'
 
 export default {
-  name: 'DayViewDefault',
-
   data () {
     return {
       tab: 'template',

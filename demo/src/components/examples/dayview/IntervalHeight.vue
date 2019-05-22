@@ -48,8 +48,6 @@ import template from '../../../markdown/examples/template/dayview/interval-heigh
 import script from '../../../markdown/examples/script/dayview/interval-height.md'
 
 export default {
-  name: 'DayViewDefault',
-
   data () {
     return {
       tab: 'template',

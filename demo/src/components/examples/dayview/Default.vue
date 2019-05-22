@@ -47,8 +47,6 @@ import template from '../../../markdown/examples/template/dayview/default.md'
 import script from '../../../markdown/examples/script/dayview/default.md'
 
 export default {
-  name: 'DayViewDefault',
-
   data () {
     return {
       tab: 'template',
