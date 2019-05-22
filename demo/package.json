@@ -7,6 +7,7 @@
   "author": "Jeff Galbraith <jeff.galbraith@xendra.com>",
   "private": true,
   "scripts": {
+    "build": "quasar build && cp ./src/404.html ./dist/spa",
     "lint": "eslint --ext .js,.vue src",
     "lint-fix": "eslint --ext .js,.vue src --fix",
     "test": "echo \"No test specified\" && exit 0"
