@@ -70,7 +70,7 @@ export default {
   weeks: {
     dayHeight: {
       type: [Number, String],
-      default: 50,
+      default: 0,
       validate: validateNumber
     },
     dayPadding: String,

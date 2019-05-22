@@ -63,14 +63,17 @@ export default CalendarBase.extend({
       )
     },
     styles () {
-      const height = convertToUnit(this.dayHeight)
-      let style = {
-        height: height
+      if (this.dayHeight > 0) {
+        const height = convertToUnit(this.dayHeight)
+        let style = {
+          height: height
+        }
+        if (this.dayPadding !== void 0) {
+          style['padding'] = this.dayPadding
+        }
+        return style
       }
-      if (this.dayPadding !== void 0) {
-        style['padding'] = this.dayPadding
-      }
-      return style
+      return ''
     }
   },
 
