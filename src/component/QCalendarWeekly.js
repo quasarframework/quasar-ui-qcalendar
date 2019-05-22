@@ -141,13 +141,13 @@ export default CalendarBase.extend({
         this.__renderHeadDayLabel(h, day, this.shortWeekdayLabel)
       ])
     },
-    
+
     __renderHeadDayLabel (h, day, label) {
       return h('span', {
         staticClass: 'ellipsis'
       }, this.weekdayFormatter(day, label))
     },
-   
+
     __renderWeeks (h) {
       const days = this.days
       const weekDays = this.weekdays.length
