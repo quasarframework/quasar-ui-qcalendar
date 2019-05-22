@@ -186,6 +186,15 @@ export default {
       toc: 'common/toc'
     })
   },
+  mounted () {
+    // code to handle anchor link on refresh/new page, etc
+    if (location.hash !== '') {
+      const id = location.hash.substring(1, location.hash.length)
+      setTimeout(() => {
+        this.scrollTo(id)
+      }, 200)
+    }
+  },
   methods: {
     scrollTo (id) {
       this.activeToc = id
