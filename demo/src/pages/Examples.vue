@@ -40,6 +40,11 @@
       <p><code class="q-markdown--token">show-day-of-year-label</code> is available only for month view.</p>
       <example-card title="Month View - Show Day of Year Label" name="MonthViewShowDayOfYearLabel" />
 
+      <example-title title="Day Height" />
+      <p><code class="q-markdown--token">day-height</code> is available only for month view.</p>
+      <p>The example below is setting the <code class="q-markdown--token">day-height</code> to <code class="q-markdown--token">100</code>, the default is <code class="q-markdown--token">50</code>.</p>
+      <example-card title="Month View - Day Height" name="MonthViewDayHeight" />
+
       <example-title title="Hour24 Format" />
       <p><code class="q-markdown--token">hour24-format</code> is available only for one of the available day or week views.</p>
       <example-card title="Week View - Hour24 Format" name="WeekViewHour24Format" />
@@ -123,6 +128,9 @@ export default {
 
     this.addToToc('Show Day of Year Label')
     this.addToToc('Month View - Show Day of Year Label', 2)
+
+    this.addToToc('Day Height')
+    this.addToToc('Month View - Day Height', 2)
 
     this.addToToc('Hour24 Format')
     this.addToToc('Week View - Hour24 Format', 2)

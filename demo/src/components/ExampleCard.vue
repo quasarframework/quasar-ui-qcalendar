@@ -32,6 +32,7 @@ export default {
     MonthViewShortWeekdayLabel: () => import('./examples/monthview/ShortWeekdayLabel'),
     MonthViewShortMonthLabel: () => import('./examples/monthview/ShortMonthLabel'),
     MonthViewShowDayOfYearLabel: () => import('./examples/monthview/ShowDayOfYearLabel'),
+    MonthViewDayHeight: () => import('./examples/monthview/DayHeight'),
     WeekViewHour24Format: () => import('./examples/weekview/Hour24Format'),
     WeekViewShortIntervalLabel: () => import('./examples/weekview/ShortIntervalLabel'),
     WeekViewShortIntervalLabelHour24Format: () => import('./examples/weekview/ShortIntervalLabelHour24Format'),
