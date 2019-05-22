@@ -33,24 +33,29 @@
       </q-card>
     </q-expansion-item>
     <q-separator />
-    <q-calendar
-      v-model="selectedDate"
-      view="day"
-      locale="en-us"
-      style="height: 400px;"
-    />
+    <div style="overflow: auto">
+      <q-calendar
+        v-model="selectedDate"
+        view="month"
+        :day-height="100"
+        locale="en-us"
+        style="height: 400px;"
+      />
+    </div>
   </div>
 </template>
 
 <script>
-import template from '../../../markdown/examples/template/dayview/default.md'
-import script from '../../../markdown/examples/script/dayview/default.md'
+import template from '../../../markdown/examples/template/monthview/day-height.md'
+import script from '../../../markdown/examples/script/monthview/day-height.md'
 
 export default {
+  name: 'MonthViewDefault',
+
   data () {
     return {
       tab: 'template',
-      selectedDate: '2019-04-01',
+      selectedDate: '',
       template: template,
       script: script
     }

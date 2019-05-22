@@ -49,8 +49,6 @@ import template from '../../../markdown/examples/template/dayview/interval-start
 import script from '../../../markdown/examples/script/dayview/interval-start.md'
 
 export default {
-  name: 'DayViewDefault',
-
   data () {
     return {
       tab: 'template',
