@@ -1,8 +1,8 @@
 {
   "name": "quasar-app-extension-qcalendar",
   "version": "0.0.1",
-  "description": "A Quasar Framework app for QCalendar",
-  "productName": "QCalendar docs/demo",
+  "description": "QCalendar App Extension for Quasar Framework",
+  "productName": "QCalendar docs, examples and demo site",
   "cordovaId": "org.cordova.quasar.app",
   "author": "Jeff Galbraith <jeff.galbraith@xendra.com>",
   "private": true,
