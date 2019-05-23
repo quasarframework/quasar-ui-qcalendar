@@ -319,6 +319,8 @@ TODO
 | theme | Object | All | Overrides the calendar's color properties |
 | weekdays | Array | All | The days of the week to be displayed<br>Default: [0, 1, 2, 3, 4, 5, 6]<br>0=Sunday, 1=Monday, 2=Tuesday, etc |
 | hide-header | Boolean| All | Hide the calendar header<br>Default: false |
+| column-header-before | Boolean| All | Provide a column before scoped slot<br>Default: false |
+| column-header-after | Boolean| All | Provide a column after scoped slot<br>Default: false |
 | short-weekday-label | Boolean | All | Makes the days of the week short<br>Default: false<br>Sunday=Sun, Monday=Mon, Tuesday=Tue, etc |
 | locale | String | All | Changes the calendar's locale<br>Default: en-us |
 | animated | Boolean | All | Makes the calendar's prev/next animated<br>Default: false |

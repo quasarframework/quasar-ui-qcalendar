@@ -76,6 +76,7 @@ export default CalendarIntervals.extend({
         slot ? slot(this.days) : ''
       ])
     },
+
     __renderHeadDays (h) {
       return this.days.map((day) => this.__renderHeadDay(h, day))
     },
@@ -123,8 +124,10 @@ export default CalendarIntervals.extend({
           return this.getScopeForSlot(day)
         })
       }), [
+        this.columnHeaderBefore === true ? this.__renderColumnHeaderBefore(h, day) : '',
         this.__renderHeadWeekday(h, day),
         this.__renderHeadDayBtn(h, day),
+        this.columnHeaderAfter === true ? this.__renderColumnHeaderAfter(h, day) : '',
         slot ? slot(day) : ''
       ])
     },
@@ -199,6 +202,25 @@ export default CalendarIntervals.extend({
         }, _event => day)
       }), this.dayFormatter(day, false))
     },
+
+    __renderColumnHeaderBefore (h, day) {
+      const slot = this.$scopedSlots.columnHeaderBefore
+      return h('div', {
+        staticClass: 'q-calendar-daily__column-header--before'
+      }, [
+        slot ? slot(day) : ''
+      ])
+    },
+
+    __renderColumnHeaderAfter (h, day) {
+      const slot = this.$scopedSlots.columnHeaderAfter
+      return h('div', {
+        staticClass: 'q-calendar-daily__column-header--after'
+      }, [
+        slot ? slot(day) : ''
+      ])
+    },
+
     __renderBody (h) {
       return h('div', {
         staticClass: 'q-calendar-daily__body'

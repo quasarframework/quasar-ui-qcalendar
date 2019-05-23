@@ -65,7 +65,14 @@ export default {
       type: Function,
       default: null
     },
-    hour24Format: Boolean
+    hour24Format: Boolean,
+    columnHeaderBefore: Boolean,
+    columnHeaderAfter: Boolean,
+    columnCount: {
+      type: [Number, String],
+      default: 1,
+      validate: validateNumber
+    }
   },
   weeks: {
     dayHeight: {

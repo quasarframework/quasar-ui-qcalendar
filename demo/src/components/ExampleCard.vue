@@ -21,6 +21,8 @@ export default {
     DayView3Day: () => import('./examples/dayview/Day3view'),
     WeekViewDefault: () => import('./examples/weekview/Default'),
     MonthViewDefault: () => import('./examples/monthview/Default'),
+    DayViewColumnHeader: () => import('./examples/dayview/ColumnHeader'),
+    WeekViewColumnHeader: () => import('./examples/weekview/ColumnHeader'),
     WeekViewFirstDayMonday: () => import('./examples/weekview/MondayFirstDay'),
     MonthViewFirstDayMonday: () => import('./examples/monthview/MondayFirstDay'),
     WeekViewFiveDayWorkWeek: () => import('./examples/weekview/FiveDayWorkWeek'),
