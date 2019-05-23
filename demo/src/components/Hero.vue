@@ -4,7 +4,7 @@
       <h1 class="project-name">QCalendar</h1>
       <h2 class="project-tagline"></h2>
       <q-btn type="a" href="https://github.com/quasarframework/app-extension-qcalendar" target="_blank" class="btn" label="View on GitHub" no-caps flat/>
-      <q-btn to="/" class="btn" label="Docs" no-caps flat/>
+      <q-btn to="/docs" class="btn" label="Docs" no-caps flat/>
       <q-btn to="/examples" class="btn" label="Examples" no-caps flat/>
       <q-btn to="/demo" class="btn" label="Interactive Demo" no-caps flat/>
     </section>

@@ -122,7 +122,7 @@
               </q-item-section>
             </q-item>
             <q-separator />
-            <q-item clickable to="/">
+            <q-item clickable to="/docs">
               <q-item-section avatar>
                 <q-icon name="calendar_today" />
               </q-item-section>
