@@ -2,6 +2,10 @@
   background-color $grey-1
   .q-calendar-daily__intervals-head
     border-right $grey-4 1px solid
+  .q-calendar-daily__column-header--before
+    border-bottom $grey-4 1px solid
+  .q-calendar-daily__column-header--after
+    border-top $grey-4 1px solid
   .q-calendar-daily__head-day
     border-right $grey-4 1px solid
     border-bottom $grey-4 1px solid
@@ -87,12 +91,24 @@
     cursor pointer
     left: 2px;
     bottom: 2px;
-    // font-size 40px !important
-    // line-height 40px !important
-    // height 1.25em !important
-    // width 1.25em !important
-    // min-height 1.25em !important
-    // min-width 1.25em !important
+
+  &__column-header__before
+    display flex
+    flex-wrap nowrap
+    flex 1
+    user-select none
+    padding 4px
+    font-size 1rem
+    justify-content left
+
+  &__column-header__after
+    display flex
+    flex-wrap nowrap
+    flex 1
+    user-select none
+    padding 4px
+    font-size 1rem
+    justify-content left
 
   &__body
     flex 1 1 60%

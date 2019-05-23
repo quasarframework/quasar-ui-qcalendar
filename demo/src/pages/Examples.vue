@@ -7,6 +7,13 @@
       <example-card title="Week View - Basic" name="WeekViewDefault" />
       <example-card title="Month View - Basic" name="MonthViewDefault" />
 
+      <example-title title="Column Header" />
+      <p>Column Headers are scoped slots only. They are turned on with the <code class="q-markdown--token">column-header-before</code> and <code class="q-markdown--token">column-header-after</code> properties. Once each property is set to <code class="q-markdown--token">true</code> the respective slot is availale.</p>
+      <p>Column Headers are only available for the <code class="q-markdown--token">day</code> (includes 2day, 3day, etc) and <code class="q-markdown--token">week</code> views.</p>
+      <p>The <code class="q-markdown--token">day</code> information is passed to the scoped slot</p>
+      <example-card title="Day View - Column Header" name="DayViewColumnHeader" />
+      <example-card title="Week View - Column Header" name="WeekViewColumnHeader" />
+
       <example-title title="Hide Header" />
       <example-card title="Day View - Hide Header" name="DayViewHideHeader" />
       <example-card title="Month View - Hide Header" name="MonthViewHideHeader" />
@@ -99,6 +106,10 @@ export default {
     this.addToToc('Day View - 3Day', 2)
     this.addToToc('Week View - Basic', 2)
     this.addToToc('Month View - Basic', 2)
+
+    this.addToToc('Column Header')
+    this.addToToc('Day View - Column Header', 2)
+    this.addToToc('Week View - Column Header', 2)
 
     this.addToToc('Hide Header')
     this.addToToc('Day View - Hide Header', 2)
