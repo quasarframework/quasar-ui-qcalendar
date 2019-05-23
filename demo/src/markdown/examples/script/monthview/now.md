@@ -6,5 +6,6 @@ export default {
       selectedDate: ''
     }
   }
+}
 </script>
 ```

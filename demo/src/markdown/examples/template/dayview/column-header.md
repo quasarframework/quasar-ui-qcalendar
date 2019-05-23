@@ -8,12 +8,12 @@
     locale="en-us"
     style="height: 400px;"
   >
-    <template #columnHeaderBefore="days">
+    <template #columnHeaderBefore="day">
       <div class="q-ma-xs">
         columnHeaderBefore slot
       </div>
     </template>
-    <template #columnHeaderAfter="days">
+    <template #columnHeaderAfter="day">
       <div class="q-ma-xs">
         columnHeaderAfter slot
       </div>

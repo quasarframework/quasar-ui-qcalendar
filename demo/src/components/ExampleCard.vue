@@ -21,8 +21,6 @@ export default {
     DayView3Day: () => import('./examples/dayview/Day3view'),
     WeekViewDefault: () => import('./examples/weekview/Default'),
     MonthViewDefault: () => import('./examples/monthview/Default'),
-    DayViewColumnHeader: () => import('./examples/dayview/ColumnHeader'),
-    WeekViewColumnHeader: () => import('./examples/weekview/ColumnHeader'),
     WeekViewFirstDayMonday: () => import('./examples/weekview/MondayFirstDay'),
     MonthViewFirstDayMonday: () => import('./examples/monthview/MondayFirstDay'),
     WeekViewFiveDayWorkWeek: () => import('./examples/weekview/FiveDayWorkWeek'),
@@ -44,7 +42,12 @@ export default {
     DayViewIntervalMinutes15: () => import('./examples/dayview/IntervalMinutes15'),
     DayViewIntervalStart: () => import('./examples/dayview/IntervalStart'),
     DayViewHideHeader: () => import('./examples/dayview/HideHeader'),
-    MonthViewHideHeader: () => import('./examples/monthview/HideHeader')
+    MonthViewHideHeader: () => import('./examples/monthview/HideHeader'),
+    DayViewColumnHeader: () => import('./examples/dayview/ColumnHeader'),
+    WeekViewColumnHeader: () => import('./examples/weekview/ColumnHeader'),
+    DayViewColumnCount: () => import('./examples/dayview/ColumnCount'),
+    DayViewColumnHeaderCount: () => import('./examples/dayview/ColumnHeaderCount'),
+    DayViewColumnHeaderCountPaging: () => import('./examples/dayview/ColumnHeaderCountPaging')
   },
 
   props: {
