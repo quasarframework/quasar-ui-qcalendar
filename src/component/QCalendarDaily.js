@@ -78,10 +78,17 @@ export default CalendarIntervals.extend({
     },
 
     __renderHeadDays (h) {
-      return this.days.map((day) => this.__renderHeadDay(h, day))
+      if (this.days.length === 1 && this.columnCount && parseInt(this.columnCount) > 1) {
+        return [...Array(parseInt(this.columnCount))]
+          .map((_, i) => i + parseInt(this.columnIndexStart))
+          .map((idx) => this.__renderHeadDay(h, this.days[0], idx))
+      } else {
+        return this.days.map((day) => this.__renderHeadDay(h, day))
+      }
     },
-    __renderHeadDay (h, day) {
+    __renderHeadDay (h, day, idx) {
       const slot = this.$scopedSlots.dayHeader
+      const scope = this.getScopeForSlot(day, idx)
       let dragOver
 
       let colors = new Map(), color, backgroundColor
@@ -102,7 +109,7 @@ export default CalendarIntervals.extend({
       }
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
-        key: day.date,
+        key: day.date + (idx !== void 0 ? `-${idx}` : ''),
         staticClass: 'q-calendar-daily__head-day',
         class: {
           ...this.getRelativeClasses(day),
@@ -111,24 +118,24 @@ export default CalendarIntervals.extend({
         domProps: {
           ondragover: (e) => {
             if (this.dragOverFunc !== void 0) {
-              dragOver = this.dragOverFunc(e, day, 'day')
+              dragOver = this.dragOverFunc(e, day, 'day', idx)
             }
           },
           ondrop: (e) => {
             if (this.dropFunc !== void 0) {
-              this.dropFunc(e, day, 'day')
+              this.dropFunc(e, day, 'day', idx)
             }
           }
         },
         on: this.getDefaultMouseEventHandlers(':day', _event => {
-          return this.getScopeForSlot(day)
+          return scope
         })
       }), [
-        this.columnHeaderBefore === true ? this.__renderColumnHeaderBefore(h, day) : '',
+        this.columnHeaderBefore === true ? this.__renderColumnHeaderBefore(h, day, idx) : '',
         this.__renderHeadWeekday(h, day),
         this.__renderHeadDayBtn(h, day),
-        this.columnHeaderAfter === true ? this.__renderColumnHeaderAfter(h, day) : '',
-        slot ? slot(day) : ''
+        this.columnHeaderAfter === true ? this.__renderColumnHeaderAfter(h, day, idx) : '',
+        slot ? slot(scope) : ''
       ])
     },
     __renderHeadWeekday (h, day) {
@@ -203,21 +210,25 @@ export default CalendarIntervals.extend({
       }), this.dayFormatter(day, false))
     },
 
-    __renderColumnHeaderBefore (h, day) {
+    __renderColumnHeaderBefore (h, day, idx) {
       const slot = this.$scopedSlots.columnHeaderBefore
+      let scope = { ...day }
+      scope.index = idx
       return h('div', {
         staticClass: 'q-calendar-daily__column-header--before'
       }, [
-        slot ? slot(day) : ''
+        slot ? slot(scope) : ''
       ])
     },
 
-    __renderColumnHeaderAfter (h, day) {
+    __renderColumnHeaderAfter (h, day, idx) {
       const slot = this.$scopedSlots.columnHeaderAfter
+      let scope = { ...day }
+      scope.index = idx
       return h('div', {
         staticClass: 'q-calendar-daily__column-header--after'
       }, [
-        slot ? slot(day) : ''
+        slot ? slot(scope) : ''
       ])
     },
 
@@ -256,11 +267,17 @@ export default CalendarIntervals.extend({
       ])
     },
     __renderDays (h) {
-      return this.days.map((day, index) => this.__renderDay(h, day, index))
+      if (this.days.length === 1 && this.columnCount && parseInt(this.columnCount) > 1) {
+        return [...Array(parseInt(this.columnCount))]
+          .map((_, i) => i + parseInt(this.columnIndexStart))
+          .map((i) => this.__renderDay(h, this.days[0], 0, i))
+      } else {
+        return this.days.map((day, index) => this.__renderDay(h, day, index))
+      }
     },
-    __renderDay (h, day, index) {
+    __renderDay (h, day, dayIndex, idx) {
       const slot = this.$scopedSlots.dayBody
-      const scope = this.getScopeForSlot(day)
+      const scope = this.getScopeForSlot(day, idx)
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
@@ -280,14 +297,14 @@ export default CalendarIntervals.extend({
       }
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
-        key: day.date,
+        key: day.date + (idx !== void 0 ? `-${idx}` : ''),
         staticClass: 'q-calendar-daily__day',
         class: this.getRelativeClasses(day),
         on: this.getDefaultMouseEventHandlers(':time', e => {
           return this.getScopeForSlot(this.getTimestampAtEvent(e, day))
         })
       }), [
-        ...this.__renderDayIntervals(h, index),
+        ...this.__renderDayIntervals(h, dayIndex),
         slot ? slot(scope) : ''
       ])
     },

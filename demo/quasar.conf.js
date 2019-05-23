@@ -67,7 +67,8 @@ module.exports = function (ctx) {
         'QRange',
         'QRadio',
         'QTooltip',
-        'QSlider'
+        'QSlider',
+        'QAvatar'
       ],
 
       directives: [

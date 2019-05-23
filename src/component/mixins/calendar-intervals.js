@@ -92,10 +92,13 @@ export default CalendarBase.extend({
 
       return updateMinutes(timestamp, minutes, this.times.now)
     },
-    getScopeForSlot (timestamp) {
+    getScopeForSlot (timestamp, idx) {
       const scope = copyTimestamp(timestamp)
       scope.timeStartPos = this.timeStartPos
       scope.timeDurationHeight = this.timeDurationHeight
+      if (idx !== void 0) {
+        scope.index = idx
+      }
       return scope
     },
     scrollToTime (time) {

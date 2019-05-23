@@ -72,6 +72,11 @@ export default {
       type: [Number, String],
       default: 1,
       validate: validateNumber
+    },
+    columnIndexStart: {
+      type: [Number, String],
+      default: 0,
+      validate: validateNumber
     }
   },
   weeks: {

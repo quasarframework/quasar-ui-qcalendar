@@ -7,13 +7,6 @@
       <example-card title="Week View - Basic" name="WeekViewDefault" />
       <example-card title="Month View - Basic" name="MonthViewDefault" />
 
-      <example-title title="Column Header" />
-      <p>Column Headers are scoped slots only. They are turned on with the <code class="q-markdown--token">column-header-before</code> and <code class="q-markdown--token">column-header-after</code> properties. Once each property is set to <code class="q-markdown--token">true</code> the respective slot is availale.</p>
-      <p>Column Headers are only available for the <code class="q-markdown--token">day</code> (includes 2day, 3day, etc) and <code class="q-markdown--token">week</code> views.</p>
-      <p>The <code class="q-markdown--token">day</code> information is passed to the scoped slot</p>
-      <example-card title="Day View - Column Header" name="DayViewColumnHeader" />
-      <example-card title="Week View - Column Header" name="WeekViewColumnHeader" />
-
       <example-title title="Hide Header" />
       <example-card title="Day View - Hide Header" name="DayViewHideHeader" />
       <example-card title="Month View - Hide Header" name="MonthViewHideHeader" />
@@ -73,6 +66,22 @@
       <example-card title="Day View - Interval Minutes (15)" name="DayViewIntervalMinutes15" />
       <p>The example below is setting the <code class="q-markdown--token">interval-start</code> to <code class="q-markdown--token">8</code>, the default is <code class="q-markdown--token">0</code>. It is a good idea to also adjust the interval-count so that extra intervals are not displayed. In this case, the <code class="q-markdown--token">interval-count</code> is set to <code class="q-markdown--token">10</code> so the intervals displayed are from 08:00-18:00.</p>
       <example-card title="Day View - Interval Start" name="DayViewIntervalStart" />
+
+      <example-title title="Column Header" />
+      <p>Column Headers are scoped slots only. They are turned on with the <code class="q-markdown--token">column-header-before</code> and <code class="q-markdown--token">column-header-after</code> properties. Once each property is set to <code class="q-markdown--token">true</code> the respective slot is availale.</p>
+      <p>Column Headers are only available for the <code class="q-markdown--token">day</code> (includes 2day, 3day, etc) and <code class="q-markdown--token">week</code> views.</p>
+      <p>The <code class="q-markdown--token">day</code> information is passed to the scoped slot.</p>
+      <example-card title="Day View - Column Header" name="DayViewColumnHeader" />
+      <example-card title="Week View - Column Header" name="WeekViewColumnHeader" />
+
+      <example-title title="Column Count" />
+      <p>Column Count is only available for <code class="q-markdown--token">day</code> view (no other views), with the property <code class="q-markdown--token">column-count</code>.</p>
+      <p>Setting <code class="q-markdown--token">column-count</code> to a value higher than 1 (default) will display the same day in that many columns.</p>
+      <example-card title="Day View - Column Count" name="DayViewColumnCount" />
+      <p>If you combine <code class="q-markdown--token">column-header-before</code> or <code class="q-markdown--token">column-header-after</code> you can achieve a schedule.</p>
+      <example-card title="Day View - Column Header Count" name="DayViewColumnHeaderCount" />
+      <p>And finally, if you wanted the ability to page through a large number of resources, you can set the <code class="q-markdown--token">column-index-start</code> to create a paging effect.</p>
+      <example-card title="Day View - Column Header Count (Paged)" name="DayViewColumnHeaderCountPaging" />
     </div>
   </hero>
 </template>
@@ -106,10 +115,6 @@ export default {
     this.addToToc('Day View - 3Day', 2)
     this.addToToc('Week View - Basic', 2)
     this.addToToc('Month View - Basic', 2)
-
-    this.addToToc('Column Header')
-    this.addToToc('Day View - Column Header', 2)
-    this.addToToc('Week View - Column Header', 2)
 
     this.addToToc('Hide Header')
     this.addToToc('Day View - Hide Header', 2)
@@ -156,6 +161,15 @@ export default {
     this.addToToc('Day View - Interval Minutes (30)', 2)
     this.addToToc('Day View - Interval Minutes (15)', 2)
     this.addToToc('Day View - Interval Start', 2)
+
+    this.addToToc('Column Header')
+    this.addToToc('Day View - Column Header', 2)
+    this.addToToc('Week View - Column Header', 2)
+
+    this.addToToc('Column Count')
+    this.addToToc('Day View - Column Count', 2)
+    this.addToToc('Day View - Column Header Count', 2)
+    this.addToToc('Day View - Column Header Count (Paged)', 2)
 
     this.toc = this.tempToc
   },
