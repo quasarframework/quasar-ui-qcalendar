@@ -319,16 +319,18 @@ TODO
 | theme | Object | All | Overrides the calendar's color properties |
 | weekdays | Array | All | The days of the week to be displayed<br>Default: [0, 1, 2, 3, 4, 5, 6]<br>0=Sunday, 1=Monday, 2=Tuesday, etc |
 | hide-header | Boolean| All | Hide the calendar header<br>Default: false |
-| column-header-before | Boolean| All | Provide a column before scoped slot<br>Default: false |
-| column-header-after | Boolean| All | Provide a column after scoped slot<br>Default: false |
 | short-weekday-label | Boolean | All | Makes the days of the week short<br>Default: false<br>Sunday=Sun, Monday=Mon, Tuesday=Tue, etc |
 | locale | String | All | Changes the calendar's locale<br>Default: en-us |
 | animated | Boolean | All | Makes the calendar's prev/next animated<br>Default: false |
 | transition-prev | String | All | The transition to use for **prev** when `animated` is true<br>Default: slide-right |
 | transition-next | String | All | The transition to use for **next** when `animated` is true<br>Default: slide-left |
-| drag-over-func | Function | All | The function that will be called when dragging over a calendar's drop spot |
-| drop-func | Function | All | The function that will be called when dropping on a calendar's drop spot |
-| |
+| drag-over-func | Function | All | The function that will be called when dragging over a calendar's drop spot<br>dragOverFunc(e, day, 'day', index)<br>`index` is valid only if `column-count` is set > 1 in `day` view mode |
+| drop-func | Function | All | The function that will be called when dropping on a calendar's drop spot<br>dropFunc(e, day, 'day', index)<br>`index` is valid only if `column-count` is set > 1 in `day` view mode |
+| | | | Day properties |
+| column-header-before | Boolean| Day | Provide a column before scoped slot<br>Default: false |
+| column-header-after | Boolean| Day | Provide a column after scoped slot<br>Default: false |
+| column-count | Boolean| Day | Show the same day x number of times in columns. Scoped slots get this data as `index` in passed object<br>Default: 1 |
+| column-index-start | [Number, String]| Day | Starting index. This allows you to create a paging system (next/prev) when using `column-count` property<br>Default: 0 |
 | max-days | Number | Day | The maximum number of days to be displayed<br>Default: 7 |
 | short-interval-label | Boolean | Day | Makes interval labels short<br>Default: false |
 | interval-height | [Number, String] | Day | The maximum height in pixels for the interval height<br>Default: 40 |
@@ -336,7 +338,7 @@ TODO
 | interval-count | [Number, String] | Day | The number intervals to use<br>Default: 24<br>If `interval-minutes` is set to `30` then you would set `interval count` to `48` -- double that of regular |
 | interval-start | [Number, String] | Day | The starting interval<br>Default: 0 |
 | hour24-format | Number | Day | Show intervals in 24 hour format<br>Default: false<br>If `false` the interval time shows in the selected locale |
-| |
+| | | | Month properties |
 | day-height | Number | Month | The maximum height in pixels for the day height<br>Default: 50 |
 | day-padding | String | Month | Overrides the padding to be used for a day element<br>Default: in the CSS "**48px 2px**" |
 | min-weeks | Number | Month | The minimum number of weeks to be displayed<br>Default: 1 |
@@ -379,9 +381,12 @@ TODO
 ## Vue Slots
 | Vue Method | View | Data | Description |
 | --- | --- | --- | --- |
-| day-header | Day | day | |
+| day-header | Day | day | index is added if using `column-count` property |
+| day-body | Day | day | index is added if using `column-count` property |
 | intervals-header | Day | day[ ] | |
-| interval | Day | { timeStartPos, timeDurationHeight, ...day } | |
+| interval | Day | { timeStartPos, timeDurationHeight, ...day } | index is added if using `column-count` property |
+| column-header-before | Day | day |
+| column-header-after | Day | day | index is added if using `column-count` property |
 | | | | |
 | day | Month | { outside, ...day } | |
 | day-label | Month | { dayLabel, ...day } | |

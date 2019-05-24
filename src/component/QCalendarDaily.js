@@ -297,25 +297,25 @@ export default CalendarIntervals.extend({
       }
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
-        key: day.date + (idx !== void 0 ? `-${idx}` : ''),
+        key: day.date + (idx !== void 0 ? `:${idx}` : ''),
         staticClass: 'q-calendar-daily__day',
         class: this.getRelativeClasses(day),
         on: this.getDefaultMouseEventHandlers(':time', e => {
           return this.getScopeForSlot(this.getTimestampAtEvent(e, day))
         })
       }), [
-        ...this.__renderDayIntervals(h, dayIndex),
+        ...this.__renderDayIntervals(h, dayIndex, idx),
         slot ? slot(scope) : ''
       ])
     },
-    __renderDayIntervals (h, index) {
-      return this.intervals[index].map((interval) => this.__renderDayInterval(h, interval))
+    __renderDayIntervals (h, index, idx) {
+      return this.intervals[index].map((interval) => this.__renderDayInterval(h, interval, idx))
     },
-    __renderDayInterval (h, interval) {
+    __renderDayInterval (h, interval, idx) {
       const height = convertToUnit(this.intervalHeight)
       const styler = this.intervalStyle || this.intervalStyleDefault
       const slot = this.$scopedSlots.interval
-      const scope = this.getScopeForSlot(interval)
+      const scope = this.getScopeForSlot(interval, idx)
       let dragOver
 
       const data = {
