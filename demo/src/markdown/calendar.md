@@ -1,7 +1,10 @@
 QCalendar
 ===
 
-QCalendar is a [Quasar App Extension](https://v1.quasar-framework.org/app-extensions/introduction). It is a powerful calendar component that plugs right into your Quasar application and allows for both day (1-7 days for a week) and monthly views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.
+> Please note, this is currently a work-in-progress (WIP).
+
+
+QCalendar is a [Quasar App Extension](https://quasar.dev/app-extensions/introduction). It is a powerful calendar component that plugs right into your Quasar application and allows for both day (1-7 days for a week) and monthly views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.
 
 QCalendar is a less-opinionated calendar component, as it does not keep track of things like events, reminders or even disabled days (if that's what you want). This is in the hands of the developer, but QCalendar makes it easy via accessible events, slots and methods.
 
@@ -214,7 +217,7 @@ QCalendar supports locales as defined within the browser and can be changed by s
 
 QCalendar has the ability to work with themes. It does not come with any itself, but you can download the ones that are used in the demo [here](statics/themes.js).
 
-All colors in themes can be from the [Quasar Color Pallete](https://v1.quasar-framework.org/style/color-palette) or a CSS color (#, rgb, rgba, hls, etc).
+All colors in themes can be from the [Quasar Color Pallete](https://quasar.dev/style/color-palette) or a CSS color (#, rgb, rgba, hls, etc).
 
 Download and look at the themes to see what is needed. If a property is missing from a theme, then the fallback of the default CSS will be used.
 
@@ -228,7 +231,7 @@ Download and look at the themes to see what is needed. If a property is missing 
 
 # Animating
 
-Animation is when QCalendar does a `prev` or `next` action. Setting the property `:animated="true"` turns on the animation. Two other properties, `transition-prev` and `transition-next` allow you to set the type of transition to use. The default is to use `transition-prev="slide-right"` and `transition-next="slide-left"`, but you can use any of the [Quasar transitions](https://v1.quasar-framework.org/options/transitions), or build your own (see [Vue transitions](https://vuejs.org/v2/guide/transitions.html) for detailed information).
+Animation is when QCalendar does a `prev` or `next` action. Setting the property `:animated="true"` turns on the animation. Two other properties, `transition-prev` and `transition-next` allow you to set the type of transition to use. The default is to use `transition-prev="slide-right"` and `transition-next="slide-left"`, but you can use any of the [Quasar transitions](https://quasar.dev/options/transitions), or build your own (see [Vue transitions](https://vuejs.org/v2/guide/transitions.html) for detailed information).
 
 # Drag and Drop support
 QCalendar supports HTML5 **drag and drop**. If you have components that need drag and drop support you can add the following (this example is using QBadge):
