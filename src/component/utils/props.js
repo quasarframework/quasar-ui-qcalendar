@@ -40,22 +40,22 @@ export default {
     intervalHeight: {
       type: [Number, String],
       default: 40,
-      validate: validateNumber
+      validator: validateNumber
     },
     intervalMinutes: {
       type: [Number, String],
       default: 60,
-      validate: validateNumber
+      validator: validateNumber
     },
     intervalStart: {
       type: [Number, String],
       default: 0,
-      validate: validateNumber
+      validator: validateNumber
     },
     intervalCount: {
       type: [Number, String],
       default: 24,
-      validate: validateNumber
+      validator: validateNumber
     },
     intervalStyle: {
       type: Function,
@@ -71,24 +71,24 @@ export default {
     columnCount: {
       type: [Number, String],
       default: 1,
-      validate: validateNumber
+      validator: validateNumber
     },
     columnIndexStart: {
       type: [Number, String],
       default: 0,
-      validate: validateNumber
+      validator: validateNumber
     }
   },
   weeks: {
     dayHeight: {
       type: [Number, String],
       default: 0,
-      validate: validateNumber
+      validator: validateNumber
     },
     dayPadding: String,
     minWeeks: {
       type: Number,
-      validate: validateNumber,
+      validator: validateNumber,
       default: 1
     },
     shortMonthLabel: Boolean,
@@ -107,7 +107,7 @@ export default {
     },
     value: { // v-model
       type: String,
-      validate: validateTimestamp
+      validator: validateTimestamp
     }
   }
 }
