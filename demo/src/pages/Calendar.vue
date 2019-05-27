@@ -94,7 +94,7 @@ Duration:   {{ event.duration }}
                   </q-icon>
                 </template>
               </q-input>
-              <q-input color="blue-6" outlined v-model="eventForm.dateTimeEnd" label="Event start date and time" mask="####-##-## ##:##">
+              <q-input color="blue-6" outlined v-model="eventForm.dateTimeEnd" label="Event end date and time" mask="####-##-## ##:##">
                 <template v-slot:append>
                   <q-icon name="event" class="cursor-pointer">
                     <q-popup-proxy v-model="showDateTimeScrollerEnd">
