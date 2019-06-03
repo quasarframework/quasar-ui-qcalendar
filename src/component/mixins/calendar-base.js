@@ -28,12 +28,12 @@ export default Vue.extend({
     ...props.base,
     start: {
       type: String,
-      validate: validateTimestamp,
+      validator: validateTimestamp,
       default: () => parseDate(new Date()).date
     },
     end: {
       type: String,
-      validate: validateTimestamp,
+      validator: validateTimestamp,
       default: '0000-00-00'
     }
   },

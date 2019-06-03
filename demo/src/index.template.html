@@ -14,15 +14,15 @@
     <link rel="icon" type="image/png" sizes="16x16" href="statics/icons/favicon-16x16.png">
   </head>
   <body>
-      <script>
-          (function(){
-            let redirect = sessionStorage.redirect;
-            delete sessionStorage.redirect;
-            if (redirect && redirect !== location.href) {
-              history.replaceState(null, null, redirect);
-            }
-          })();
-        </script>
+    <script>
+        (function(){
+          let redirect = sessionStorage.redirect;
+          delete sessionStorage.redirect;
+          if (redirect && redirect !== location.href) {
+            history.replaceState(null, null, redirect);
+          }
+        })();
+      </script>
     <!-- DO NOT touch the following DIV -->
     <div id="q-app"></div>
   </body>

@@ -72,14 +72,3 @@ export default {
   }
 }
 </script>
-
-<style lang="stylus">
-.example-title
-  color rgba(0, 0, 0, 0.45)
-  cursor pointer
-  &:after
-    content ' #'
-    opacity 0
-  &:hover:after
-    opacity 1
-</style>

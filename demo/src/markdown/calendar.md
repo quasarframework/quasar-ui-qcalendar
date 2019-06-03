@@ -65,7 +65,7 @@ Can be found [here](https://quasarframework.github.io/app-extension-qcalendar/ex
 # Interactive Demo
 Can be found [here](https://quasarframework.github.io/app-extension-qcalendar/demo).
 
-# Demo Project
+# Demo (source) Project
 Can be found [here](https://github.com/quasarframework/app-extension-qcalendar/tree/master/demo).
 
 # Working with QCalendar
@@ -308,7 +308,7 @@ Drag and drop is typically not directly supported on mobile browsers. If you wan
 # Working with Slots
 TODO
 
-# API
+# QCalendar API
 
 ## Vue Properties
 
