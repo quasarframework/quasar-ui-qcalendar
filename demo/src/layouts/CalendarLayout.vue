@@ -17,9 +17,9 @@
         <q-icon name="far fa-calendar-alt" class="q-ml-md" size="1.5rem"></q-icon>
 
         <q-toolbar-title v-if="$q.screen.width > 500">
-          Quasar Calendar
+          QCalendar
           <q-tooltip v-if="$q.screen.width < 1077">
-            Quasar Calendar
+            QCalendar
           </q-tooltip>
         </q-toolbar-title>
 
