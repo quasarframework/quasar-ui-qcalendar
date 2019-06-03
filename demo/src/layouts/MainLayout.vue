@@ -12,8 +12,11 @@
           <q-icon name="menu" />
         </q-btn>
 
-        <q-toolbar-title>
-          QCalendar - Quasar App Extension
+        <q-toolbar-title v-if="$q.screen.width > 500">
+          QCalendar
+          <q-tooltip v-if="$q.screen.width < 1077">
+            QCalendar
+          </q-tooltip>
         </q-toolbar-title>
 
         <div>Quasar v{{ $q.version }}</div>
@@ -219,6 +222,3 @@ export default {
   }
 }
 </script>
-
-<style>
-</style>
