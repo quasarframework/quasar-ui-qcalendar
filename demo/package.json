@@ -15,13 +15,13 @@
   "dependencies": {
     "@quasar/extras": "^1.1.2",
     "drag-drop-touch": "^1.3.0",
-    "quasar": "^1.0.0-rc.2"
+    "quasar": "^1.0.0-rc.4"
   },
   "devDependencies": {
-    "@quasar/app": "^1.0.0-rc.4",
+    "@quasar/app": "^1.0.0-rc.6",
     "@quasar/quasar-app-extension-qcalendar": "link:../.",
-    "@quasar/quasar-app-extension-qmarkdown": "^1.0.0-beta.5",
-    "@quasar/quasar-app-extension-qscroller": "^1.0.0-alpha.4",
+    "@quasar/quasar-app-extension-qmarkdown": "^1.0.0-beta.9",
+    "@quasar/quasar-app-extension-qscroller": "^1.0.0-alpha.6",
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",

@@ -898,10 +898,10 @@
   resolved "https://registry.yarnpkg.com/@positron/stack-trace/-/stack-trace-1.0.0.tgz#14fcc712a530038ef9be1ce6952315a839f466a8"
   integrity sha1-FPzHEqUwA475vhzmlSMVqDn0Zqg=
 
-"@quasar/app@^1.0.0-rc.4":
-  version "1.0.0-rc.4"
-  resolved "https://registry.yarnpkg.com/@quasar/app/-/app-1.0.0-rc.4.tgz#ad01b169ba0dbec579a1f96dc7ec48f6af89c9b9"
-  integrity sha512-m4DrZ38oyYVN4TsLVmlSX174c0Px3BVjVeORnRg3Xl/KiGdHVPv0PRTLnAcG5bWZ2Pnm1lgNXhflB/PTxFgn/w==
+"@quasar/app@^1.0.0-rc.6":
+  version "1.0.0-rc.6"
+  resolved "https://registry.yarnpkg.com/@quasar/app/-/app-1.0.0-rc.6.tgz#e92cd63da16212668e6084134ea76a570277828c"
+  integrity sha512-FIISn4DjbNQikieBcY73SAE4Ilm7cXUoPPP8JTwNkYUFIN0eqLJPM0As+EZbg9PJN4M5Vl2eiHl3YynWo+YrgA==
   dependencies:
     "@quasar/babel-preset-app" "1.1.2"
     "@vue/preload-webpack-plugin" "1.1.0"
@@ -960,7 +960,7 @@
     webpack "4.32.2"
     webpack-bundle-analyzer "3.3.2"
     webpack-chain "6.0.0"
-    webpack-dev-server "3.4.1"
+    webpack-dev-server "3.3.1"
     webpack-merge "4.2.1"
     webpack-node-externals "1.7.2"
     workbox-webpack-plugin "4.3.1"
@@ -999,10 +999,10 @@
   version "0.0.0"
   uid ""
 
-"@quasar/quasar-app-extension-qmarkdown@^1.0.0-beta.5":
-  version "1.0.0-beta.5"
-  resolved "https://registry.yarnpkg.com/@quasar/quasar-app-extension-qmarkdown/-/quasar-app-extension-qmarkdown-1.0.0-beta.5.tgz#37044c37e06e5d3305cd59108e1934a7915fbcd9"
-  integrity sha512-mYqT+6cSPtU2mvFvprFoqR6J5fspuOdECxEvlm1JWOPB7pSIvH9EjWH2mlpr7bafif+SPxSLsXLBpalBe/mNvg==
+"@quasar/quasar-app-extension-qmarkdown@^1.0.0-beta.9":
+  version "1.0.0-beta.9"
+  resolved "https://registry.yarnpkg.com/@quasar/quasar-app-extension-qmarkdown/-/quasar-app-extension-qmarkdown-1.0.0-beta.9.tgz#660bf0b2fe5349a9409b44def477d66d33d98da1"
+  integrity sha512-9M235b/jGFFl8+8Amxh9NwmJR3I1TlFJ7pHPOI7XxDoc7qZ95yyMsbyVYLfmnBhlDhD6smPtJOJF9eCaVoLCEw==
   dependencies:
     markdown-it "^8.4.2"
     markdown-it-abbr "^1.0.4"
@@ -1021,10 +1021,10 @@
     prismjs "^1.16.0"
     raw-loader "^2.0.0"
 
-"@quasar/quasar-app-extension-qscroller@^1.0.0-alpha.4":
-  version "1.0.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/@quasar/quasar-app-extension-qscroller/-/quasar-app-extension-qscroller-1.0.0-alpha.4.tgz#e89089d2fba837c4f6d4c61ceb88466a682a92c1"
-  integrity sha512-Cl+mKvOYbkps1+1OccJ419jovzQuH+6U1whp4yAa9Mh8K64270xabKPNHYl4dFDupxts6oEpgOn4VkS4hRI/tg==
+"@quasar/quasar-app-extension-qscroller@^1.0.0-alpha.6":
+  version "1.0.0-alpha.6"
+  resolved "https://registry.yarnpkg.com/@quasar/quasar-app-extension-qscroller/-/quasar-app-extension-qscroller-1.0.0-alpha.6.tgz#956d32e69422ced2d1c5c60eb6f998c88de0a76f"
+  integrity sha512-daAfppjDwFBZ/FodF6rK7eqT751iVX8n/ujdamB8NC3A6APKhdN/DOsw7HZoOXobNxFQS+2tzhWmt+BOp83w7A==
 
 "@types/events@*":
   version "3.0.0"
@@ -2035,7 +2035,7 @@ chokidar@^2.0.2:
   optionalDependencies:
     fsevents "^1.2.7"
 
-chokidar@^2.1.6:
+chokidar@^2.1.5:
   version "2.1.6"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-2.1.6.tgz#b6cad653a929e244ce8a834244164d241fa954c5"
   integrity sha512-V2jUo67OKkc6ySiRpJrjlpJKl9kDuG+Xb8VgsGzb+aEouhgS1D0weyPU4lEzdAcsCAvrih2J2BqyXqHWvVLw5g==
@@ -2768,7 +2768,7 @@ define-property@^2.0.2:
     is-descriptor "^1.0.2"
     isobject "^3.0.1"
 
-del@^4.1.1:
+del@^4.1.0:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/del/-/del-4.1.1.tgz#9e8f117222ea44a31ff3a156c049b99052a9f0b4"
   integrity sha512-QwGuEUouP2kVwQenAsOof5Fv8K9t3D8Ca8NxcXKrIpEHjTXK5J2nXLdP+ALI1cgv8wj7KuwBhTwBkOZSJKM5XQ==
@@ -3337,7 +3337,7 @@ expand-brackets@^2.1.4:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
-express@4.17.1, express@^4.17.0:
+express@4.17.1, express@^4.16.4:
   version "4.17.1"
   resolved "https://registry.yarnpkg.com/express/-/express-4.17.1.tgz#4491fc38605cf51f8629d39c2b5d026f98a4c134"
   integrity sha512-mHJ9O79RqluphRrcw2X/GTh3k9tVv8YcoyY4Kkh4WDMUYKRZUq0h1o0w2rrrxBqM7VoeUVqgb27xlEMXTnYt4g==
@@ -4306,7 +4306,7 @@ inquirer@^6.2.2:
     strip-ansi "^5.0.0"
     through "^2.3.6"
 
-internal-ip@^4.3.0:
+internal-ip@^4.2.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/internal-ip/-/internal-ip-4.3.0.tgz#845452baad9d2ca3b69c635a137acb9a0dad0907"
   integrity sha512-S1zBo1D6zcsyuC6PMmY5+55YMILQ9av8lotMx447Bq6SAgo/sDK6y6uUKmuYhW7eacnIhFfsPmCNYdDzsnnDCg==
@@ -6574,10 +6574,10 @@ qs@6.7.0:
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
   integrity sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ==
 
-quasar@^1.0.0-rc.2:
-  version "1.0.0-rc.2"
-  resolved "https://registry.yarnpkg.com/quasar/-/quasar-1.0.0-rc.2.tgz#7569fa273b1834ece0a60eec473063d00127abfb"
-  integrity sha512-Gknx7NKM77kyOGGnJAKp60erUeUcOECESbCdVTAscg4A068ZrzCiWv5/GkEdsQP9jzf2ckQ470u5yobpeDswgA==
+quasar@^1.0.0-rc.4:
+  version "1.0.0-rc.4"
+  resolved "https://registry.yarnpkg.com/quasar/-/quasar-1.0.0-rc.4.tgz#a5363434e516d75035ef9eaf1b7210493013a84b"
+  integrity sha512-LHV4pNWnypleaUfUWBBg70ABoxMpZHZG853LnTlgG8Htuve6b/UmaZDytIp3KP9X6NQbsTT3W74bzHtqpvqgFg==
 
 query-string@^5.0.1:
   version "5.1.1"
@@ -8190,7 +8190,7 @@ webpack-chain@6.0.0:
     deepmerge "^1.5.2"
     javascript-stringify "^2.0.0"
 
-webpack-dev-middleware@^3.7.0:
+webpack-dev-middleware@^3.6.2:
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/webpack-dev-middleware/-/webpack-dev-middleware-3.7.0.tgz#ef751d25f4e9a5c8a35da600c5fda3582b5c6cff"
   integrity sha512-qvDesR1QZRIAZHOE3iQ4CXLZZSQ1lAUsSpnQmlB1PBfoN/xdRjmge3Dok0W4IdaVLJOGJy3sGI4sZHwjRU0PCA==
@@ -8200,23 +8200,23 @@ webpack-dev-middleware@^3.7.0:
     range-parser "^1.2.1"
     webpack-log "^2.0.0"
 
-webpack-dev-server@3.4.1:
-  version "3.4.1"
-  resolved "https://registry.yarnpkg.com/webpack-dev-server/-/webpack-dev-server-3.4.1.tgz#a5fd8dec95dec410098e7d9a037ff9405395d51a"
-  integrity sha512-CRqZQX2ryMtrg0r3TXQPpNh76eM1HD3Wmu6zDBxIKi/d2y+4aa28Ia8weNT0bfgWpY6Vs3Oq/K8+DjfbR+tWYw==
+webpack-dev-server@3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/webpack-dev-server/-/webpack-dev-server-3.3.1.tgz#7046e49ded5c1255a82c5d942bcdda552b72a62d"
+  integrity sha512-jY09LikOyGZrxVTXK0mgIq9y2IhCoJ05848dKZqX1gAGLU1YDqgpOT71+W53JH/wI4v6ky4hm+KvSyW14JEs5A==
   dependencies:
     ansi-html "0.0.7"
     bonjour "^3.5.0"
-    chokidar "^2.1.6"
+    chokidar "^2.1.5"
     compression "^1.7.4"
     connect-history-api-fallback "^1.6.0"
     debug "^4.1.1"
-    del "^4.1.1"
-    express "^4.17.0"
+    del "^4.1.0"
+    express "^4.16.4"
     html-entities "^1.2.1"
     http-proxy-middleware "^0.19.1"
     import-local "^2.0.0"
-    internal-ip "^4.3.0"
+    internal-ip "^4.2.0"
     ip "^1.1.5"
     killable "^1.0.1"
     loglevel "^1.6.1"
@@ -8232,7 +8232,7 @@ webpack-dev-server@3.4.1:
     strip-ansi "^3.0.1"
     supports-color "^6.1.0"
     url "^0.11.0"
-    webpack-dev-middleware "^3.7.0"
+    webpack-dev-middleware "^3.6.2"
     webpack-log "^2.0.0"
     yargs "12.0.5"
 

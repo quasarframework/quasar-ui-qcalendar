@@ -104,19 +104,19 @@ module.exports = function (ctx) {
           loader: 'eslint-loader',
           exclude: /node_modules/
         })
-      },
-      chainWebpack (chain, { isClient }) {
-        chain.module.rule('md')
-          .test(/\.md$/i)
-          .use('raw-loader')
-          .loader('raw-loader')
       }
     },
 
     devServer: {
       // https: true,
       // port: 8080,
-      open: true // opens browser window automatically
+      open: true, // opens browser window automatically
+      watchOptions: {
+        ignored: [
+          'node_modules',
+          '!node_modules/@quasar/quasar-app-extension-qcalendar'
+        ]
+      }
     },
 
     // animations: 'all' --- includes all animations
