@@ -198,7 +198,7 @@ export default CalendarBase.extend({
         staticClass: 'q-calendar-weekly__workweek',
         class: this.getRelativeClasses(timestamp !== false ? timestamp : day, false),
         style: {
-          height: height
+          height: this.dayHeight && this.dayHeight > 0 ? height : 'inherit'
         }
       }), slot ? slot({ workweekLabel, week }) : workweekLabel)
     },
