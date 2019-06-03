@@ -237,7 +237,7 @@ export default CalendarBase.extend({
       scopedSlots: this.$scopedSlots
     }
 
-    if (this.animated) {
+    if (this.animated === true) {
       const transition = 'q-transition--' + (this.direction === 'prev' ? this.transitionPrev : this.transitionNext)
       return h('transition', {
         props: {
