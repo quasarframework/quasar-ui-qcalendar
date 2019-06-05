@@ -107,7 +107,7 @@ export default {
     },
     value: { // v-model
       type: String,
-      validator: validateTimestamp
+      validator: v => v === '' || validateTimestamp(v)
     }
   }
 }

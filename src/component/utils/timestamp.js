@@ -228,23 +228,36 @@ export function updateFormatted (timestamp) {
 
 export function getDayOfYear (timestamp) {
   if (timestamp.year === 0) return
-  let dt = new Date(timestamp.date + ' 00:00')
-  return date.getDayOfYear(dt)
+  const ts = new Date(timestamp.year, timestamp.month - 1, timestamp.day)
+  return date.getDayOfYear(ts)
 }
 
 export function getWorkWeek (timestamp) {
   if (timestamp.year === 0) return
-  const ts = new Date(timestamp.date + ' 00:00')
+  const ts = new Date(timestamp.year, timestamp.month - 1, timestamp.day)
   return date.getWeekOfYear(ts)
 }
 
 export function getWeekday (timestamp) {
   if (timestamp.hasDay) {
-    const ts = new Date(timestamp.date + ' 00:00')
+    const ts = new Date(timestamp.year, timestamp.month - 1, timestamp.day)
     return date.getDayOfWeek(ts)
   }
 
   return timestamp.weekday
+
+  // deprecated - old way - hard to maintain
+  // if (timestamp.hasDay) {
+  //   const floor = Math.floor
+  //   const day = timestamp.day
+  //   const month = ((timestamp.month + 9) % MONTH_MAX) + 1
+  //   const century = floor(timestamp.year / 100)
+  //   const year = (timestamp.year % 100) - (timestamp.month <= 2 ? 1 : 0)
+
+  //   return (((day + floor(2.6 * month - 0.2) - 2 * century + year + floor(year / 4) + floor(century / 4)) % 7) + 7) % 7
+  // }
+
+  // return timestamp.weekday
 }
 
 export function isLeapYear (year) {
@@ -337,7 +350,7 @@ export function relativeDays (timestamp, mover = nextDay, days = 1, allowedWeekd
   return timestamp
 }
 
-export function findWeekday (timestamp, weekday, mover = nextDay, maxDays = 6) {
+export function findWeekday (timestamp, weekday, mover = nextDay, maxDays = 7) {
   while (timestamp.weekday !== weekday && --maxDays >= 0) mover(timestamp)
 
   return timestamp
@@ -414,9 +427,9 @@ export function createNativeLocaleFormatter (locale, getOptions) {
   return (timestamp, short) => {
     try {
       const intlFormatter = new Intl.DateTimeFormat(locale || void 0, getOptions(timestamp, short))
-      const time = `${padNumber(timestamp.hour, 2)}:${padNumber(timestamp.minute, 2)}`
-      const date = timestamp.date
-      return intlFormatter.format(new Date(`${date}T${time}:00+00:00`))
+      // const time = `${padNumber(timestamp.hour, 2)}:${padNumber(timestamp.minute, 2)}`
+      // const date = timestamp.date
+      return intlFormatter.format(new Date(timestamp.year, timestamp.month - 1, timestamp.day, timestamp.hour, timestamp.minute))
     } catch (e) {
       return ''
     }
