@@ -239,25 +239,26 @@ export function getWorkWeek (timestamp) {
 }
 
 export function getWeekday (timestamp) {
-  if (timestamp.hasDay) {
-    const ts = new Date(timestamp.year, timestamp.month - 1, timestamp.day)
-    return date.getDayOfWeek(ts)
-  }
-
-  return timestamp.weekday
-
-  // deprecated - old way - hard to maintain
+  // [bug] this code has issues. If 1st day of the month is 1 day of week
+  // it comes back with day of week as 7.
   // if (timestamp.hasDay) {
-  //   const floor = Math.floor
-  //   const day = timestamp.day
-  //   const month = ((timestamp.month + 9) % MONTH_MAX) + 1
-  //   const century = floor(timestamp.year / 100)
-  //   const year = (timestamp.year % 100) - (timestamp.month <= 2 ? 1 : 0)
-
-  //   return (((day + floor(2.6 * month - 0.2) - 2 * century + year + floor(year / 4) + floor(century / 4)) % 7) + 7) % 7
+  //   const ts = new Date(timestamp.year, timestamp.month - 1, timestamp.day)
+  //   return date.getDayOfWeek(ts)
   // }
 
   // return timestamp.weekday
+
+  if (timestamp.hasDay) {
+    const floor = Math.floor
+    const day = timestamp.day
+    const month = ((timestamp.month + 9) % MONTH_MAX) + 1
+    const century = floor(timestamp.year / 100)
+    const year = (timestamp.year % 100) - (timestamp.month <= 2 ? 1 : 0)
+
+    return (((day + floor(2.6 * month - 0.2) - 2 * century + year + floor(year / 4) + floor(century / 4)) % 7) + 7) % 7
+  }
+
+  return timestamp.weekday
 }
 
 export function isLeapYear (year) {
@@ -350,7 +351,7 @@ export function relativeDays (timestamp, mover = nextDay, days = 1, allowedWeekd
   return timestamp
 }
 
-export function findWeekday (timestamp, weekday, mover = nextDay, maxDays = 7) {
+export function findWeekday (timestamp, weekday, mover = nextDay, maxDays = 6) {
   while (timestamp.weekday !== weekday && --maxDays >= 0) mover(timestamp)
 
   return timestamp
