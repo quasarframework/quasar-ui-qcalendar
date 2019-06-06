@@ -105,7 +105,7 @@
       <span class="text-body2" >Day height (monthly)</span>
       <q-slider
         v-model="dayHeight"
-        :min="50"
+        :min="0"
         :max="200"
         label
         :label-value="dayHeight + 'px'"

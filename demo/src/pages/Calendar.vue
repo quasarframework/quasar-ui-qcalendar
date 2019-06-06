@@ -372,7 +372,7 @@ export default {
     },
     containerStyle () {
       let styles = {}
-      if (this.calendarView !== 'month') {
+      if (this.calendarView !== 'month' || (this.calendarView === 'month' && this.dayHeight === 0)) {
         styles.height = `calc(100vh - ${this.titlebarHeight}px)`
       }
       return styles
