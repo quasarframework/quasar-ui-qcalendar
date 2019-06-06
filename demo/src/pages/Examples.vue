@@ -42,7 +42,7 @@
 
       <example-title title="Day Height" />
       <p><code class="q-markdown--token">day-height</code> is available only for month view.</p>
-      <p>The example below is setting the <code class="q-markdown--token">day-height</code> to <code class="q-markdown--token">100</code>, the default is <code class="q-markdown--token">50</code>.</p>
+      <p>The example below is setting the <code class="q-markdown--token">day-height</code> to <code class="q-markdown--token">100</code>, the default is <code class="q-markdown--token">0</code>.</p>
       <example-card title="Month View - Day Height" name="MonthViewDayHeight" />
 
       <example-title title="Hour24 Format" />
