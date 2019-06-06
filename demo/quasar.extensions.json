@@ -1,5 +1,6 @@
 {
   "@quasar/qcalendar": {},
   "@quasar/qmarkdown": {},
-  "@quasar/qscroller": {}
+  "@quasar/qscroller": {},
+  "qribbon": {}
 }

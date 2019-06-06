@@ -1,6 +1,17 @@
 // app global css
+.qribbon__container
+  position relative
+
+.qribbon__horizontal--left
+  position unset !important
+  padding unset !important
+  margin-left -22px !important
+  z-index 1 !important
+
+  &:before
+    margin-left: -22px;
+
 .example-title
-  color rgba(0, 0, 0, 0.45)
   cursor pointer
   &:after
     content ' #'
