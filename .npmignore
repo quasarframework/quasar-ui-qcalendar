@@ -6,3 +6,4 @@ docs
 .eslintignore
 _redirects
 .github
+yarn.lock
