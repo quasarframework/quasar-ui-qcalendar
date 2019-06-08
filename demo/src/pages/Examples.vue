@@ -67,6 +67,12 @@
       <p>The example below is setting the <code class="q-markdown--token">interval-start</code> to <code class="q-markdown--token">8</code>, the default is <code class="q-markdown--token">0</code>. It is a good idea to also adjust the interval-count so that extra intervals are not displayed. In this case, the <code class="q-markdown--token">interval-count</code> is set to <code class="q-markdown--token">10</code> so the intervals displayed are from 08:00-18:00.</p>
       <example-card title="Day View - Interval Start" name="DayViewIntervalStart" />
 
+      <example-title title="Swipe Navigation" />
+      <p>For swipe support, don't forget to add the <code class="q-markdown--token">TouchSwipe</code> directive to your <code class="q-markdown--token">quasar.conf.js</code>.</p>
+      <example-card title="Day View - Swipe" name="DayViewSwipe" />
+      <example-card title="Week View - Swipe" name="WeekViewSwipe" />
+      <example-card title="Month View - Swipe" name="MonthViewSwipe" />
+
       <example-title title="Column Header" />
       <p>Column Headers are scoped slots only. They are turned on with the <code class="q-markdown--token">column-header-before</code> and <code class="q-markdown--token">column-header-after</code> properties. Once each property is set to <code class="q-markdown--token">true</code> the respective slot is availale.</p>
       <p>Column Headers are only available for the <code class="q-markdown--token">day</code> (includes 2day, 3day, etc) and <code class="q-markdown--token">week</code> views.</p>
@@ -161,6 +167,11 @@ export default {
     this.addToToc('Day View - Interval Minutes (30)', 2)
     this.addToToc('Day View - Interval Minutes (15)', 2)
     this.addToToc('Day View - Interval Start', 2)
+
+    this.addToToc('Swipe Navigation')
+    this.addToToc('Day View - Swipe', 2)
+    this.addToToc('Week View - Swipe', 2)
+    this.addToToc('Month View - Swipe', 2)
 
     this.addToToc('Column Header')
     this.addToToc('Day View - Column Header', 2)
