@@ -1,5 +1,5 @@
 <template>
-  <section :id="slugifiedTitle" class="q-pa-md">
+  <section :id="slugifiedTitle" class="q-pa-md overflow-auto">
     <q-card flat bordered class="no-shadow">
       <q-toolbar>
         <q-ribbon
@@ -56,6 +56,9 @@ export default {
     DayViewIntervalStart: () => import('./examples/dayview/IntervalStart'),
     DayViewHideHeader: () => import('./examples/dayview/HideHeader'),
     MonthViewHideHeader: () => import('./examples/monthview/HideHeader'),
+    DayViewSwipe: () => import('./examples/dayview/Swipe'),
+    WeekViewSwipe: () => import('./examples/weekview/Swipe'),
+    MonthViewSwipe: () => import('./examples/monthview/Swipe'),
     DayViewColumnHeader: () => import('./examples/dayview/ColumnHeader'),
     WeekViewColumnHeader: () => import('./examples/weekview/ColumnHeader'),
     DayViewColumnCount: () => import('./examples/dayview/ColumnCount'),

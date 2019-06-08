@@ -182,6 +182,7 @@ Then on your `q-calendar` component, add the following:
 
 ```html
 <q-calendar
+  ref="calendar"
   v-touch-swipe.mouse.left.right="handleSwipe"
   ...
 ```
@@ -200,6 +201,7 @@ handleSwipe ({ evt, ...info }) {
     }
   }
   stopAndPrevent(evt)
+}
 ```
 See the Demo code for more information (link at top of page).
 
