@@ -228,13 +228,13 @@ export function updateFormatted (timestamp) {
 
 export function getDayOfYear (timestamp) {
   if (timestamp.year === 0) return
-  const ts = new Date(timestamp.year, timestamp.month - 1, timestamp.day)
+  const ts = new Date(Date.UTC(timestamp.year, timestamp.month - 1, timestamp.day, 0, 0))
   return date.getDayOfYear(ts)
 }
 
 export function getWorkWeek (timestamp) {
   if (timestamp.year === 0) return
-  const ts = new Date(timestamp.year, timestamp.month - 1, timestamp.day)
+  const ts = new Date(Date.UTC(timestamp.year, timestamp.month - 1, timestamp.day, 0, 0))
   return date.getWeekOfYear(ts)
 }
 
@@ -242,7 +242,7 @@ export function getWeekday (timestamp) {
   // [bug] this code has issues. If 1st day of the month is 1 day of week
   // it comes back with day of week as 7.
   // if (timestamp.hasDay) {
-  //   const ts = new Date(timestamp.year, timestamp.month - 1, timestamp.day)
+  //   const ts = new Date(Date.UTC(timestamp.year, timestamp.month - 1, timestamp.day, 0, 0))
   //   return date.getDayOfWeek(ts)
   // }
 
@@ -430,7 +430,8 @@ export function createNativeLocaleFormatter (locale, getOptions) {
       const intlFormatter = new Intl.DateTimeFormat(locale || void 0, getOptions(timestamp, short))
       // const time = `${padNumber(timestamp.hour, 2)}:${padNumber(timestamp.minute, 2)}`
       // const date = timestamp.date
-      return intlFormatter.format(new Date(timestamp.year, timestamp.month - 1, timestamp.day, timestamp.hour, timestamp.minute))
+      // return intlFormatter.format(new Date(`${date}T${time}:00+00:00`))
+      return intlFormatter.format(new Date(Date.UTC(timestamp.year, timestamp.month - 1, timestamp.day, timestamp.hour, timestamp.minute)))
     } catch (e) {
       return ''
     }
