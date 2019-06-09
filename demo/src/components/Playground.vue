@@ -321,6 +321,30 @@ export default {
       })
       return list
     }
+  },
+
+  watch: {
+    intervalRangeStep (val) {
+      // normalize min/max values according to the step value
+      const calcMin = (range) => {
+        const b = Number((range % 1).toFixed(2))
+        const c = b % val
+        if (c > 0) {
+          return range + c
+        }
+        return range
+      }
+      const calcMax = (range) => {
+        const b = Number((range % 1).toFixed(2))
+        const c = b % val
+        if (c > 0) {
+          return range - c
+        }
+        return range
+      }
+      this.intervalRange.min = calcMin(this.intervalRange.min)
+      this.intervalRange.max = calcMax(this.intervalRange.max)
+    }
   }
 }
 </script>
