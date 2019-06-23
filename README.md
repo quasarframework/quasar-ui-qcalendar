@@ -13,6 +13,9 @@ QCalendar is an `UI App Extension` for [Quasar Framework v1](https://quasar.dev/
 
 This work is currently in `alpha` and there are expected changes while things get worked out. Your help with testing is greatly appreciated.
 
+[](https://github.com/quasarframework/app-extension-qcalendar/blob/dev/docs/statics/qcalendar-month-view.png)
+
+
 # QCalendar
 Please check out the [documentation](https://quasarframework.github.io/app-extension-qcalendar/).
 
