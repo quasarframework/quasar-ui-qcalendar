@@ -103,7 +103,7 @@ export default {
     view: {
       type: String,
       default: 'month',
-      validator: v => ['month', 'week', 'day', '2day', '3day', '4day', '5day', '6day'].includes(v)
+      validator: v => ['month', 'week', 'day', '2day', '3day', '4day', '5day', '6day', 'interval-month'].includes(v)
     },
     value: { // v-model
       type: String,
