@@ -180,7 +180,8 @@ export default {
         { label: 'View Day', value: 'day' },
         { label: 'View 5 Days', value: '5day' },
         { label: 'View Week', value: 'week' },
-        { label: 'View Month', value: 'month' }
+        { label: 'View Month', value: 'month' },
+        { label: 'View Interval Month', value: 'interval-month' }
       ]
     }
   },

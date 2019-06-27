@@ -96,6 +96,12 @@ When more than one day is displayed:
 
 ![WeekView](statics/qcalendar-week-view.png "Week View" =800x800)
 
+## Interval Month view
+
+The `interval-month` view allows you to display all days in a month while in the interval mode. This can get a bit busy and is only recommended for wide screens.
+
+![WeekView](statics/qcalendar-interval-month-view.png "Week View" =800x800)
+
 ## Month view
 
 ![MonthView](statics/qcalendar-month-view.png "Month View" =800x800)

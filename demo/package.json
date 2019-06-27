@@ -24,9 +24,9 @@
     "@quasar/quasar-app-extension-qscroller": "^1.0.0-alpha.7",
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.2",
-    "eslint": "^5.16.0",
+    "eslint": "^6.0.1",
     "eslint-loader": "^2.1.2",
-    "eslint-plugin-vue": "^5.2.2",
+    "eslint-plugin-vue": "^5.2.3",
     "path": "^0.12.7",
     "quasar-app-extension-qribbon": "^1.0.0-alpha.7"
   },

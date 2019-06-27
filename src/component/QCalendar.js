@@ -102,6 +102,13 @@ export default CalendarBase.extend({
           updateFormatted(end)
           maxDays = 6
           break
+        case 'interval-month':
+          component = QCalendarDaily
+          start = getStartOfMonth(around)
+          end = getEndOfMonth(around)
+          updateFormatted(end)
+          maxDays = 31
+          break
       }
 
       return { component, start, end, maxDays }
@@ -158,6 +165,10 @@ export default CalendarBase.extend({
             break
           case '6day':
             relativeDays(moved, mover, 6, this.weekdays)
+            break
+          case 'interval-month':
+            moved.day = limit
+            mover(moved)
             break
         }
       }
