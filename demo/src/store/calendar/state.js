@@ -2,6 +2,7 @@ export default {
   calendarView: 'day',
   selectedDate: '2019-04-01',
   locale: 'en-us',
+  maxDays: 1,
   fiveDayWorkWeek: false,
   firstDayMonday: false,
   shortMonthLabel: false,

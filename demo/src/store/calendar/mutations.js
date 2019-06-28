@@ -7,6 +7,9 @@ export const selectedDate = (state, date) => {
 export const locale = (state, locale) => {
   state.locale = locale
 }
+export const maxDays = (state, days) => {
+  state.maxDays = parseInt(days)
+}
 export const fiveDayWorkWeek = (state, b) => {
   state.fiveDayWorkWeek = b
 }

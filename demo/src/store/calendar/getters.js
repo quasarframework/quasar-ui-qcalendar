@@ -1,6 +1,7 @@
 export const calendarView = (state) => state.calendarView
 export const selectedDate = (state) => state.selectedDate
 export const locale = (state) => state.locale
+export const maxDays = (state) => state.maxDays
 export const fiveDayWorkWeek = (state) => state.fiveDayWorkWeek
 export const firstDayMonday = (state) => state.firstDayMonday
 export const shortMonthLabel = (state) => state.shortMonthLabel

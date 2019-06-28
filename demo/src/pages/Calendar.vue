@@ -153,6 +153,7 @@ Duration:   {{ event.duration }}
         v-touch-swipe.mouse.left.right="handleSwipe"
         v-model="selectedDate"
         :locale="locale"
+        :maxDays="maxDays"
         :animated="true"
         transition-prev="slide-right"
         transition-next="slide-left"
@@ -332,6 +333,7 @@ export default {
     ...mapGetters({
       locale: 'calendar/locale',
       titlebarHeight: 'common/titlebarHeight',
+      maxDays: 'calendar/maxDays',
       fiveDayWorkWeek: 'calendar/fiveDayWorkWeek',
       firstDayMonday: 'calendar/firstDayMonday',
       shortMonthLabel: 'calendar/shortMonthLabel',

@@ -64,45 +64,50 @@ export default CalendarBase.extend({
           component = QCalendarDaily
           start = this.getStartOfWeek(around)
           end = this.getEndOfWeek(around)
-          maxDays = 7
+          maxDays = DAYS_IN_WEEK
           break
         case 'day':
           component = QCalendarDaily
-          end = relativeDays(copyTimestamp(end), nextDay, 1, this.weekdays)
-          updateFormatted(end)
           maxDays = 1
+          end = relativeDays(copyTimestamp(end), nextDay, maxDays, this.weekdays)
+          updateFormatted(end)
           break
         case '2day':
           component = QCalendarDaily
-          end = relativeDays(copyTimestamp(end), nextDay, 2, this.weekdays)
-          updateFormatted(end)
           maxDays = 2
+          end = relativeDays(copyTimestamp(end), nextDay, maxDays, this.weekdays)
+          updateFormatted(end)
           break
         case '3day':
           component = QCalendarDaily
-          end = relativeDays(copyTimestamp(end), nextDay, 3, this.weekdays)
-          updateFormatted(end)
           maxDays = 3
+          end = relativeDays(copyTimestamp(end), nextDay, maxDays, this.weekdays)
+          updateFormatted(end)
           break
         case '4day':
           component = QCalendarDaily
-          end = relativeDays(copyTimestamp(end), nextDay, 4, this.weekdays)
-          updateFormatted(end)
           maxDays = 4
+          end = relativeDays(copyTimestamp(end), nextDay, maxDays, this.weekdays)
+          updateFormatted(end)
           break
         case '5day':
           component = QCalendarDaily
-          end = relativeDays(copyTimestamp(end), nextDay, 5, this.weekdays)
-          updateFormatted(end)
           maxDays = 5
+          end = relativeDays(copyTimestamp(end), nextDay, maxDays, this.weekdays)
+          updateFormatted(end)
           break
         case '6day':
           component = QCalendarDaily
-          end = relativeDays(copyTimestamp(end), nextDay, 6, this.weekdays)
-          updateFormatted(end)
           maxDays = 6
+          end = relativeDays(copyTimestamp(end), nextDay, maxDays, this.weekdays)
+          updateFormatted(end)
           break
-        case 'interval-month':
+        case 'custom-interval':
+          component = QCalendarDaily
+          end = relativeDays(copyTimestamp(end), nextDay, this.maxDays, this.weekdays)
+          updateFormatted(end)
+          break
+        case 'month-interval':
           component = QCalendarDaily
           start = getStartOfMonth(around)
           end = getEndOfMonth(around)
@@ -138,6 +143,7 @@ export default CalendarBase.extend({
       const limit = forward ? DAYS_IN_MONTH_MAX : DAY_MIN
       let times = forward ? amount : -amount
       this.direction = forward ? 'next' : 'prev'
+      let maxDays = this.maxDays
 
       while (--times >= 0) {
         switch (this.view) {
@@ -149,24 +155,33 @@ export default CalendarBase.extend({
             relativeDays(moved, mover, DAYS_IN_WEEK)
             break
           case 'day':
-            relativeDays(moved, mover, 1, this.weekdays)
+            maxDays = 1
+            relativeDays(moved, mover, maxDays, this.weekdays)
             break
           case '2day':
-            relativeDays(moved, mover, 2, this.weekdays)
+            maxDays = 2
+            relativeDays(moved, mover, maxDays, this.weekdays)
             break
           case '3day':
-            relativeDays(moved, mover, 3, this.weekdays)
+            maxDays = 3
+            relativeDays(moved, mover, maxDays, this.weekdays)
             break
           case '4day':
-            relativeDays(moved, mover, 4, this.weekdays)
+            maxDays = 4
+            relativeDays(moved, mover, maxDays, this.weekdays)
             break
           case '5day':
-            relativeDays(moved, mover, 5, this.weekdays)
+            maxDays = 5
+            relativeDays(moved, mover, maxDays, this.weekdays)
             break
           case '6day':
-            relativeDays(moved, mover, 6, this.weekdays)
+            maxDays = 6
+            relativeDays(moved, mover, maxDays, this.weekdays)
             break
-          case 'interval-month':
+          case 'custom-interval':
+            relativeDays(moved, mover, this.maxDays, this.weekdays)
+            break
+          case 'month-interval':
             moved.day = limit
             mover(moved)
             break

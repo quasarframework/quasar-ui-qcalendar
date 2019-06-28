@@ -21,6 +21,15 @@
       @click="displayLocale = true"
       class="col-12"
     ></q-btn>
+    <div class="col-12 q-px-md q-pb-sm">
+      <span class="text-body2" >Max days (custom)</span>
+      <q-slider
+        v-model="maxDays"
+        :min="1"
+        :max="31"
+        label
+      />
+    </div>
     <q-toggle
       class="col-12"
       v-model="fiveDayWorkWeek"
@@ -180,6 +189,14 @@ export default {
       },
       set (locale) {
         this.$store.commit('calendar/locale', locale)
+      }
+    },
+    maxDays: {
+      get () {
+        return this.$store.state.calendar.maxDays
+      },
+      set (days) {
+        this.$store.commit('calendar/maxDays', days)
       }
     },
     fiveDayWorkWeek: {
