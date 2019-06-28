@@ -21,6 +21,15 @@
       @click="displayLocale = true"
       class="col-12"
     ></q-btn>
+    <div class="col-12 q-px-md q-pb-sm">
+      <span class="text-body2" >Max days (custom)</span>
+      <q-slider
+        v-model="maxDays"
+        :min="1"
+        :max="31"
+        label
+      />
+    </div>
     <q-toggle
       class="col-12"
       v-model="fiveDayWorkWeek"
@@ -60,6 +69,11 @@
       class="col-12"
       v-model="hideHeader"
       label="Hide header"
+    ></q-toggle>
+    <q-toggle
+      class="col-12"
+      v-model="noScroll"
+      label="No scroll"
     ></q-toggle>
     <q-toggle
       class="col-12"
@@ -177,6 +191,14 @@ export default {
         this.$store.commit('calendar/locale', locale)
       }
     },
+    maxDays: {
+      get () {
+        return this.$store.state.calendar.maxDays
+      },
+      set (days) {
+        this.$store.commit('calendar/maxDays', days)
+      }
+    },
     fiveDayWorkWeek: {
       get () {
         return this.$store.state.calendar.fiveDayWorkWeek
@@ -239,6 +261,14 @@ export default {
       },
       set (b) {
         this.$store.commit('calendar/hideHeader', b)
+      }
+    },
+    noScroll: {
+      get () {
+        return this.$store.state.calendar.noScroll
+      },
+      set (b) {
+        this.$store.commit('calendar/noScroll', b)
       }
     },
     showMonthLabel: {

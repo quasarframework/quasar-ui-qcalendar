@@ -153,6 +153,7 @@ Duration:   {{ event.duration }}
         v-touch-swipe.mouse.left.right="handleSwipe"
         v-model="selectedDate"
         :locale="locale"
+        :maxDays="maxDays"
         :animated="true"
         transition-prev="slide-right"
         transition-next="slide-left"
@@ -168,6 +169,7 @@ Duration:   {{ event.duration }}
         :short-month-label="shortMonthLabel"
         :show-day-of-year-label="showDayOfYearLabel"
         :hide-header="hideHeader"
+        :no-scroll="noScroll"
         :short-weekday-label="shortWeekdayLabel"
         :short-interval-label="shortIntervalLabel"
         :interval-height="intervalHeight"
@@ -331,6 +333,7 @@ export default {
     ...mapGetters({
       locale: 'calendar/locale',
       titlebarHeight: 'common/titlebarHeight',
+      maxDays: 'calendar/maxDays',
       fiveDayWorkWeek: 'calendar/fiveDayWorkWeek',
       firstDayMonday: 'calendar/firstDayMonday',
       shortMonthLabel: 'calendar/shortMonthLabel',
@@ -339,6 +342,7 @@ export default {
       shortIntervalLabel: 'calendar/shortIntervalLabel',
       hour24Format: 'calendar/hour24Format',
       hideHeader: 'calendar/hideHeader',
+      noScroll: 'calendar/noScroll',
       showMonthLabel: 'calendar/showMonthLabel',
       showWorkWeeks: 'calendar/showWorkWeeks',
       intervalRange: 'calendar/intervalRange',

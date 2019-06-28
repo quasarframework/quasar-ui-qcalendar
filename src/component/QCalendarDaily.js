@@ -34,19 +34,32 @@ export default CalendarIntervals.extend({
     this.init()
   },
 
+  watch: {
+    noScroll (val) {
+      if (val === true) {
+        this.scrollWidth = 0
+      } else {
+        this.$nextTick(this.onResize)
+      }
+    }
+  },
+
   methods: {
     init () {
       this.$nextTick(this.onResize)
     },
+
     onResize () {
       this.scrollWidth = this.getScrollWidth()
     },
+
     getScrollWidth () {
       const area = this.$refs.scrollArea
       const pane = this.$refs.pane
 
       return area && pane ? (area.offsetWidth - pane.offsetWidth) : 0
     },
+
     __renderHead (h) {
       return h('div', {
         staticClass: 'q-calendar-daily__head',
@@ -58,6 +71,7 @@ export default CalendarIntervals.extend({
         ...this.__renderHeadDays(h)
       ])
     },
+
     __renderHeadIntervals (h) {
       const slot = this.$scopedSlots.intervalsHeader
 
@@ -86,6 +100,7 @@ export default CalendarIntervals.extend({
         return this.days.map((day) => this.__renderHeadDay(h, day))
       }
     },
+
     __renderHeadDay (h, day, idx) {
       const slot = this.$scopedSlots.dayHeader
       const scope = this.getScopeForSlot(day, idx)
@@ -138,6 +153,7 @@ export default CalendarIntervals.extend({
         slot ? slot(scope) : ''
       ])
     },
+
     __renderHeadWeekday (h, day) {
       const colorCurrent = day.current === true ? this.color : void 0
 
@@ -239,14 +255,20 @@ export default CalendarIntervals.extend({
         this.__renderScrollArea(h)
       ])
     },
+
     __renderScrollArea (h) {
-      return h('div', {
-        ref: 'scrollArea',
-        staticClass: 'q-calendar-daily__scroll-area'
-      }, [
-        this.__renderPane(h)
-      ])
+      if (this.noScroll !== void 0 && this.noScroll === true) {
+        return this.__renderPane(h)
+      } else {
+        return h('div', {
+          ref: 'scrollArea',
+          staticClass: 'q-calendar-daily__scroll-area'
+        }, [
+          this.__renderPane(h)
+        ])
+      }
     },
+
     __renderPane (h) {
       return h('div', {
         ref: 'pane',
@@ -258,6 +280,7 @@ export default CalendarIntervals.extend({
         this.__renderDayContainer(h)
       ])
     },
+
     __renderDayContainer (h) {
       return h('div', {
         staticClass: 'q-calendar-daily__day-container'
@@ -266,6 +289,7 @@ export default CalendarIntervals.extend({
         ...this.__renderDays(h)
       ])
     },
+
     __renderDays (h) {
       if (this.days.length === 1 && this.columnCount && parseInt(this.columnCount) > 1) {
         return [...Array(parseInt(this.columnCount))]
@@ -275,6 +299,7 @@ export default CalendarIntervals.extend({
         return this.days.map((day, index) => this.__renderDay(h, day, index))
       }
     },
+
     __renderDay (h, day, dayIndex, idx) {
       const slot = this.$scopedSlots.dayBody
       const scope = this.getScopeForSlot(day, idx)
@@ -308,9 +333,11 @@ export default CalendarIntervals.extend({
         slot ? slot(scope) : ''
       ])
     },
+
     __renderDayIntervals (h, index, idx) {
       return this.intervals[index].map((interval) => this.__renderDayInterval(h, interval, idx))
     },
+
     __renderDayInterval (h, interval, idx) {
       const height = convertToUnit(this.intervalHeight)
       const styler = this.intervalStyle || this.intervalStyleDefault
@@ -346,6 +373,7 @@ export default CalendarIntervals.extend({
 
       return h('div', data, children)
     },
+
     __renderBodyIntervals (h) {
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
@@ -365,9 +393,11 @@ export default CalendarIntervals.extend({
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), data), this.__renderIntervalLabels(h))
     },
+
     __renderIntervalLabels (h) {
       return this.intervals[0].map((interval) => this.__renderIntervalLabel(h, interval))
     },
+
     __renderIntervalLabel (h, interval) {
       const height = convertToUnit(this.intervalHeight)
       const short = this.shortIntervalLabel

@@ -906,14 +906,17 @@
     babel-plugin-module-resolver "3.2.0"
     babel-plugin-transform-imports "1.5.1"
 
-"@quasar/extras@^1.1.3":
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/@quasar/extras/-/extras-1.1.3.tgz#2d5250ef5b8529875a72ee62a73a06af13d294a3"
-  integrity sha512-ICdnCQkPvTogW19dlQpFlXwDug08kjxRdUqjJKr+Njtdn0PZySiN5FXcCRAIag4ri9sfA1o2OH487HjJGpub6Q==
+"@quasar/extras@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@quasar/extras/-/extras-1.1.4.tgz#a51efa11b2dced4d4d99b1f0e0410254f2593852"
+  integrity sha512-W+BrplCY+UeEN4Lwy2GcQH5CR92CrqhD2YjlcoCSbCEkSna0A35Be3kJ23qqLUMh4iuyG3jLFI1y9nUENTZqTg==
 
-"@quasar/quasar-app-extension-qcalendar@link:..":
-  version "0.0.0"
-  uid ""
+"@quasar/quasar-app-extension-qcalendar@^1.0.0-alpha.14":
+  version "1.0.0-alpha.14"
+  resolved "https://registry.yarnpkg.com/@quasar/quasar-app-extension-qcalendar/-/quasar-app-extension-qcalendar-1.0.0-alpha.14.tgz#1912fc6aab4cd9c4a1a648a057f272389ed93720"
+  integrity sha512-3nByyrkf52MSF62PfT0UfYyTaaqWxpbooTXFX1NIAoZFowGfecBRpCFSKmHyKGFGCNhOus484LvvNLUWhH7qjA==
+  dependencies:
+    npm-check-updates "^3.1.12"
 
 "@quasar/quasar-app-extension-qmarkdown@^1.0.0-beta.12":
   version "1.0.0-beta.12"

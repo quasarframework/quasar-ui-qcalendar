@@ -84,7 +84,7 @@ You would need to build out your own way of allowing the User to interact with Q
 
 # Anatomy of a calendar
 
-A calendar is made from two distict components: day and month views.
+A calendar is made from two distict components: day and month views. All other views derive from these two views.
 
 ## Day view
 
@@ -96,11 +96,17 @@ When more than one day is displayed:
 
 ![WeekView](statics/qcalendar-week-view.png "Week View" =800x800)
 
-## Interval Month view
+## Custom Interval view
 
-The `interval-month` view allows you to display all days in a month while in the interval mode. This can get a bit busy and is only recommended for wide screens.
+The `custom-interval` view allows you to display as many days as specified by the property `maxDays`. This can get a bit busy if a large number of days are displayed and is only recommended for wide screens. The imnage below has `maxDays` set to 14. 
 
-![WeekView](statics/qcalendar-interval-month-view.png "Week View" =800x800)
+![CustomInterval](statics/qcalendar-custom-interval-view.png "Custom Interval" =800x800)
+
+## Month Interval view
+
+The `month-interval` view allows you to display all days in a month while in the interval mode. This can get a bit busy and is only recommended for wide screens.
+
+![MonthInterval](statics/qcalendar-month-interval-view.png "Month Interval" =800x800)
 
 ## Month view
 
@@ -322,7 +328,7 @@ TODO
 
 | Vue Property | Type | View | Description |
 | --- | --- | --- | --- |
-| view | String | All | The currently displayed view<br>Default: "month"<br>Choices: ['month', 'week', 'day', '2day', '3day', '4day', '5day', '6day'] |
+| view | String | All | The currently displayed view<br>Default: "month"<br>Choices: ['month', 'week', 'day', '2day', '3day', '4day', '5day', '6day', 'custom-interval', 'month-interval'] |
 | value | String| All | v-model used to pass in a date and time value<br>Default: now<br>Format: 'YYYY-mm-dd  HH:mm' |
 | now | String | All | Date and time value representing a fixed date in time<br>Default: today's date |
 | color | String | All | Overrides color to be used for current date or `now`<br>Default: false<br>This can be any CSS color value or Quasar color |
@@ -337,19 +343,19 @@ TODO
 | transition-next | String | All | The transition to use for **next** when `animated` is true<br>Default: slide-left |
 | drag-over-func | Function | All | The function that will be called when dragging over a calendar's drop spot<br>dragOverFunc(e, day, 'day', index)<br>`index` is valid only if `column-count` is set > 1 in `day` view mode |
 | drop-func | Function | All | The function that will be called when dropping on a calendar's drop spot<br>dropFunc(e, day, 'day', index)<br>`index` is valid only if `column-count` is set > 1 in `day` view mode |
-| | | | Day properties |
+| | | | **Day properties** |
+| no-scroll | Boolean| Day | Hide the scrollbar<br>Default: false |
 | column-header-before | Boolean| Day | Provide a column before scoped slot<br>Default: false |
 | column-header-after | Boolean| Day | Provide a column after scoped slot<br>Default: false |
 | column-count | Boolean| Day | Show the same day x number of times in columns. Scoped slots get this data as `index` in passed object<br>Default: 1 |
 | column-index-start | [Number, String]| Day | Starting index. This allows you to create a paging system (next/prev) when using `column-count` property<br>Default: 0 |
-| max-days | Number | Day | The maximum number of days to be displayed<br>Default: 7 |
 | short-interval-label | Boolean | Day | Makes interval labels short<br>Default: false |
 | interval-height | [Number, String] | Day | The maximum height in pixels for the interval height<br>Default: 40 |
 | interval-minutes | [Number, String] | Day | The number of minutes in an interval<br>Default: 60<br>15 and 30 logically be other choices |
 | interval-count | [Number, String] | Day | The number intervals to use<br>Default: 24<br>If `interval-minutes` is set to `30` then you would set `interval count` to `48` -- double that of regular |
 | interval-start | [Number, String] | Day | The starting interval<br>Default: 0 |
 | hour24-format | Number | Day | Show intervals in 24 hour format<br>Default: false<br>If `false` the interval time shows in the selected locale |
-| | | | Month properties |
+| | | | **Month properties** |
 | day-height | Number | Month | The maximum height in pixels for the day height<br>Default: 50 |
 | day-padding | String | Month | Overrides the padding to be used for a day element<br>Default: in the CSS "**48px 2px**" |
 | min-weeks | Number | Month | The minimum number of weeks to be displayed<br>Default: 1 |
@@ -358,6 +364,9 @@ TODO
 | show-month-label | Boolean | Month | Shows the month label - this occurs on the 1st of the month<br>Default: true |
 | show-day-of-year-label | Boolean | Month | Show the say of the year - this occurs in the top right of each day element. If `show-month-label` is `true`, then that day is skipped<br>Default: false |
 | show-work-weeks | Boolean | Month | Show work weeks<br>Default: false |
+| | | | **Custom Interval properties** |
+| max-days | Number | Custom | The maximum number of days to be displayed. Ignored for most other views<br>Default: 7 |
+
 
 ## Vue Events
 | Vue Event | Args | Description |

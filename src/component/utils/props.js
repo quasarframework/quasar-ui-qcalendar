@@ -8,6 +8,7 @@ export default {
       default: () => [0, 1, 2, 3, 4, 5, 6]
     },
     hideHeader: Boolean,
+    noScroll: Boolean,
     shortWeekdayLabel: Boolean,
     locale: {
       type: String,
@@ -103,7 +104,7 @@ export default {
     view: {
       type: String,
       default: 'month',
-      validator: v => ['month', 'week', 'day', '2day', '3day', '4day', '5day', '6day', 'interval-month'].includes(v)
+      validator: v => ['month', 'week', 'day', '2day', '3day', '4day', '5day', '6day', 'custom-interval', 'month-interval'].includes(v)
     },
     value: { // v-model
       type: String,
