@@ -26,6 +26,7 @@ import {
 // Calendars
 import QCalendarMonthly from './QCalendarMonthly'
 import QCalendarDaily from './QCalendarDaily'
+import QCalendarScheduler from './QCalendarScheduler'
 
 /* @vue/component */
 export default CalendarBase.extend({
@@ -34,7 +35,8 @@ export default CalendarBase.extend({
   props: {
     ...props.calendar,
     ...props.weeks,
-    ...props.intervals
+    ...props.intervals,
+    ...props.scheduler
   },
 
   data: () => ({
@@ -114,6 +116,11 @@ export default CalendarBase.extend({
           updateFormatted(end)
           maxDays = 31
           break
+        case 'scheduler':
+          component = QCalendarScheduler
+          end = relativeDays(copyTimestamp(end), nextDay, this.maxDays, this.weekdays)
+          updateFormatted(end)
+          break
       }
 
       return { component, start, end, maxDays }
@@ -184,6 +191,9 @@ export default CalendarBase.extend({
           case 'month-interval':
             moved.day = limit
             mover(moved)
+            break
+          case 'scheduler':
+            relativeDays(moved, mover, this.maxDays, this.weekdays)
             break
         }
       }

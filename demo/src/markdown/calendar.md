@@ -23,6 +23,7 @@ This is the true power of QCalendar.
 - Responsive flex grid layout
 - No external dependencies (momentjs, jQuery, etc), other than Quasar
 - User events support (date, day, interval, time)
+- Resource scheduler
 - Define any day as beginning of week
 - Show only certain days of the week (good for work week days)
 - Workweek number support
@@ -117,9 +118,18 @@ The month view is for displaying a finite number of weeks according to the calen
 
 The weekly view comprises of a header `weekly header` which is segmented by a `weekday header` for each day of the week that is to be displayed. For each day in the display this is called the `weekly day`, which can have a sub-nature of `outside`, `past`, `current` or `future`. The text (day of the month) displayed is the `weekly day label`.
 
+## Scheduler view
+
+![SchedulerView](statics/qcalendar-scheduler-view.png "Scheduler View" =800x800)
+
+The scheduler view is for displaying days with resources on the left side. This allows you to present data for each resource. Where a resource could be a person, room, etc.
+
+To use the scheduler, you need to use the `resources` property, which currently is an array of objects, containing a single key `label`. To change the number of days displayed, use the `max-days` property.
+
+
 ## View types
 
-QCalendar has several `view` types available. They are: `month`, `week`, `day`, `2day`, `3day`, `4day`, `5day` and `6day`. It's important to know that all `view` types are linear in nature. For instance, `3day` will show three days and `next` will show the next 3 days. You can switch to a `view` type on a mobile based on the current width of the screen. For portrait mode, you could change the `view` type to `2day` and for landscape mode `4day`. When `next` or `prev` is called the next (or previous) 2 days (for protrait) or 4 days (for landscape) would be displayed.
+QCalendar has several `view` types available. They are: `month`, `week`, `day`, `2day`, `3day`, `4day`, `5day`, `6day`, `custom-interval`, `month-interval` and `scheduler`. It's important to know that all day `view` types are linear in nature. For instance, `3day` will show three days and `next` will show the next 3 days. You can switch to a `view` type on a mobile based on the current width of the screen. For portrait mode, you could change the `view` type to `2day` and for landscape mode `4day`. When `next` or `prev` is called the next (or previous) 2 days (for protrait) or 4 days (for landscape) would be displayed.
 
 ## Weekday filtering
 
@@ -329,7 +339,7 @@ TODO
 
 | Vue Property | Type | View | Description |
 | --- | --- | --- | --- |
-| view | String | All | The currently displayed view<br>Default: "month"<br>Choices: ['month', 'week', 'day', '2day', '3day', '4day', '5day', '6day', 'custom-interval', 'month-interval'] |
+| view | String | All | The currently displayed view<br>Default: "month"<br>Choices: ['month', 'week', 'day', '2day', '3day', '4day', '5day', '6day', 'custom-interval', 'month-interval', `scheduler`] |
 | value | String| All | v-model used to pass in a date and time value<br>Default: now<br>Format: 'YYYY-mm-dd  HH:mm' |
 | now | String | All | Date and time value representing a fixed date in time<br>Default: today's date |
 | color | String | All | Overrides color to be used for current date or `now`<br>Default: false<br>This can be any CSS color value or Quasar color |
@@ -365,8 +375,10 @@ TODO
 | show-month-label | Boolean | Month | Shows the month label - this occurs on the 1st of the month<br>Default: true |
 | show-day-of-year-label | Boolean | Month | Show the say of the year - this occurs in the top right of each day element. If `show-month-label` is `true`, then that day is skipped<br>Default: false |
 | show-work-weeks | Boolean | Month | Show work weeks<br>Default: false |
-| | | | **Custom Interval properties** |
-| max-days | Number | Custom | The maximum number of days to be displayed. Ignored for most other views<br>Default: 7 |
+| | | | **Scheduler properties** |
+| resources | Array | Scheduler  | An array of objects with a single key of `label`. You can add other keys if you like, which will be passed in on the appropriate slots |
+| | | | **Other properties** |
+| max-days | Number | Custom, Scheduler  | The maximum number of days to be displayed. Ignored for most other views<br>Default: 7 |
 
 
 ## Vue Events
@@ -390,6 +402,7 @@ TODO
 2. day
 3. interval
 4. time
+5. resource (for Scheduler view only)
 
 ## Vue Methods
 | Vue Method | Args | Description |
@@ -408,16 +421,23 @@ TODO
 | interval | Day | { timeStartPos, timeDurationHeight, ...day } | index is added if using `column-count` property |
 | column-header-before | Day | day |
 | column-header-after | Day | day | index is added if using `column-count` property |
-| | | | |
+| | | | **Month** |
 | day | Month | { outside, ...day } | |
 | day-label | Month | { dayLabel, ...day } | |
 | day-body | Month | { timeStartPos, timeDurationHeight, ...day } | |
 | month-label | Month | { monthLabel, ...day } | |
 | day-of-year | Month | day | |
 | workweek-label | Month | { workweekLaabel, week } | |
+| | | | **Scheduler** |
+| scheduler-resources-header | Scheduler | TBD | |
+| scheduler-day-header | Scheduler | TBD | |
+| scheduler-column-header-before | Scheduler | TBD | |
+| scheduler-column-header-after | Scheduler | TBD | |
+| scheduler-day-body | Scheduler | TBD | |
+| scheduler-resource | Scheduler | TBD | |
 
-# Patreon
-If you like (and use) this App Extension, please consider becoming a Quasar [Patreon](https://www.patreon.com/quasarframework).
+# Donate
+If you appreciate the work that went into this App Extension, please consider [donating to Quasar](https://donate.quasar.dev).
 
 ---
 This page created with [QMarkdown](https://quasarframework.github.io/app-extension-qmarkdown), another great Quasar App Extension.

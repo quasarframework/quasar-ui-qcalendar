@@ -182,7 +182,8 @@ export default {
         { label: 'View Week', value: 'week' },
         { label: 'View Month', value: 'month' },
         { label: 'View Month Interval', value: 'month-interval' },
-        { label: 'View Custom Interval', value: 'custom-interval' }
+        { label: 'View Custom Interval', value: 'custom-interval' },
+        { label: 'View Scheduler', value: 'scheduler' }
       ]
     }
   },
