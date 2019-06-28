@@ -365,7 +365,7 @@ TODO
 | show-day-of-year-label | Boolean | Month | Show the say of the year - this occurs in the top right of each day element. If `show-month-label` is `true`, then that day is skipped<br>Default: false |
 | show-work-weeks | Boolean | Month | Show work weeks<br>Default: false |
 | | | | **Custom Interval properties** |
-| max-days | Number | Custom | The maximum number of days to be displayed. Ignored for most other views<br>Default: 1 |
+| max-days | Number | Custom | The maximum number of days to be displayed. Ignored for most other views<br>Default: 7 |
 
 
 ## Vue Events
