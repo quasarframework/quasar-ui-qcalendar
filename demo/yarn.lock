@@ -911,10 +911,8 @@
   resolved "https://registry.yarnpkg.com/@quasar/extras/-/extras-1.1.4.tgz#a51efa11b2dced4d4d99b1f0e0410254f2593852"
   integrity sha512-W+BrplCY+UeEN4Lwy2GcQH5CR92CrqhD2YjlcoCSbCEkSna0A35Be3kJ23qqLUMh4iuyG3jLFI1y9nUENTZqTg==
 
-"@quasar/quasar-app-extension-qcalendar@^1.0.0-alpha.14":
-  version "1.0.0-alpha.14"
-  resolved "https://registry.yarnpkg.com/@quasar/quasar-app-extension-qcalendar/-/quasar-app-extension-qcalendar-1.0.0-alpha.14.tgz#1912fc6aab4cd9c4a1a648a057f272389ed93720"
-  integrity sha512-3nByyrkf52MSF62PfT0UfYyTaaqWxpbooTXFX1NIAoZFowGfecBRpCFSKmHyKGFGCNhOus484LvvNLUWhH7qjA==
+"@quasar/quasar-app-extension-qcalendar@../.":
+  version "1.0.0-alpha.15"
   dependencies:
     npm-check-updates "^3.1.12"
 

@@ -1,4 +1,5 @@
 import { validateNumber, validateTimestamp } from './timestamp'
+import { validateView } from './views'
 
 /* public properties */
 export default {
@@ -104,7 +105,7 @@ export default {
     view: {
       type: String,
       default: 'month',
-      validator: v => ['month', 'week', 'day', '2day', '3day', '4day', '5day', '6day', 'custom-interval', 'month-interval'].includes(v)
+      validator: validateView
     },
     value: { // v-model
       type: String,

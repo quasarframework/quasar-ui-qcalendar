@@ -21,9 +21,10 @@ This is the true power of QCalendar.
 - Optional drag and drop support (including mobile)
 - Automatic localization / internationalization
 - Responsive flex grid layout
-- No external dependencies (momemtjs, jQuery, etc), other than Quasar
-- User events (date, day, interval, time)
+- No external dependencies (momentjs, jQuery, etc), other than Quasar
+- User events support (date, day, interval, time)
 - Define any day as beginning of week
+- Show only certain days of the week (good for work week days)
 - Workweek number support
 - Day-of-the-year support
 - Easy to theme using CSS overrides or using JSON theme object (see Themes below)

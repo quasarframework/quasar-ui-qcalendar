@@ -31,7 +31,7 @@ export default {
         return this.$store.state.common.toc
       },
       set (toc) {
-        console.log('toc:', toc)
+        // console.log('toc:', toc)
         this.$store.commit('common/toc', toc)
       }
     }
