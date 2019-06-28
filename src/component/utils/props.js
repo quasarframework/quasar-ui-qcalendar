@@ -101,6 +101,9 @@ export default {
     },
     showDayOfYearLabel: Boolean
   },
+  scheduler: {
+    resources: Array
+  },
   calendar: {
     view: {
       type: String,

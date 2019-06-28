@@ -16,7 +16,7 @@ export default {
   showWorkWeeks: false,
   intervalRange: { min: 0, max: 24 },
   intervalRangeStep: 1,
-  intervalHeight: 40,
+  intervalHeight: 60,
   dayHeight: 100,
   enableThemes: false,
   theme: {}

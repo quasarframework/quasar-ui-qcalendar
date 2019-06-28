@@ -177,6 +177,7 @@ Duration:   {{ event.duration }}
         :show-month-label="showMonthLabel"
         :show-work-weeks="showWorkWeeks"
         :enable-themes="enableThemes === true"
+        :resources="resources"
         @change="onChanged"
         @moved="onMoved"
         @click:date="onDateChanged"
@@ -314,7 +315,30 @@ export default {
       ignoreNextSwipe: false,
       showDateScrollerAllDay: false,
       showDateTimeScrollerStart: false,
-      showDateTimeScrollerEnd: false
+      showDateTimeScrollerEnd: false,
+      resources: [
+        {
+          label: 'John'
+        },
+        {
+          label: 'Mary'
+        },
+        {
+          label: 'Susan'
+        },
+        {
+          label: 'Olivia'
+        },
+        {
+          label: 'Board Room'
+        },
+        {
+          label: 'Conference Room 1'
+        },
+        {
+          label: 'Conference Room 2'
+        }
+      ]
     }
   },
   mounted () {

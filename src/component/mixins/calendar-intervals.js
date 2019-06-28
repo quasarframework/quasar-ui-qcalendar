@@ -15,7 +15,10 @@ import {
 export default CalendarBase.extend({
   name: 'calendar-with-intervals',
 
-  props: props.intervals,
+  props: {
+    ...props.intervals,
+    ...props.scheduler
+  },
 
   computed: {
     parsedIntervalStart () {
