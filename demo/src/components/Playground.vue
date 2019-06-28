@@ -63,6 +63,11 @@
     ></q-toggle>
     <q-toggle
       class="col-12"
+      v-model="noScroll"
+      label="No scroll"
+    ></q-toggle>
+    <q-toggle
+      class="col-12"
       v-model="showMonthLabel"
       label="Show month label"
     ></q-toggle>
@@ -239,6 +244,14 @@ export default {
       },
       set (b) {
         this.$store.commit('calendar/hideHeader', b)
+      }
+    },
+    noScroll: {
+      get () {
+        return this.$store.state.calendar.noScroll
+      },
+      set (b) {
+        this.$store.commit('calendar/noScroll', b)
       }
     },
     showMonthLabel: {

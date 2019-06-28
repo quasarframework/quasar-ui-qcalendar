@@ -9,6 +9,7 @@ export const shortWeekdayLabel = (state) => state.shortWeekdayLabel
 export const shortIntervalLabel = (state) => state.shortIntervalLabel
 export const hour24Format = (state) => state.hour24Format
 export const hideHeader = (state) => state.hideHeader
+export const noScroll = (state) => state.noScroll
 export const showMonthLabel = (state) => state.showMonthLabel
 export const showWorkWeeks = (state) => state.showWorkWeeks
 export const intervalRange = (state) => state.intervalRange

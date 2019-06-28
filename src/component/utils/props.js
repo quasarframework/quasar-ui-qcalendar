@@ -8,6 +8,7 @@ export default {
       default: () => [0, 1, 2, 3, 4, 5, 6]
     },
     hideHeader: Boolean,
+    noScroll: Boolean,
     shortWeekdayLabel: Boolean,
     locale: {
       type: String,

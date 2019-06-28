@@ -10,6 +10,7 @@ export default {
   shortIntervalLabel: false,
   hour24Format: false,
   hideHeader: false,
+  noScroll: false,
   showMonthLabel: true,
   showWorkWeeks: false,
   intervalRange: { min: 0, max: 24 },

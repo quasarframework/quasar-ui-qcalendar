@@ -31,6 +31,9 @@ export const hour24Format = (state, b) => {
 export const hideHeader = (state, b) => {
   state.hideHeader = b
 }
+export const noScroll = (state, b) => {
+  state.noScroll = b
+}
 export const showMonthLabel = (state, b) => {
   state.showMonthLabel = b
 }

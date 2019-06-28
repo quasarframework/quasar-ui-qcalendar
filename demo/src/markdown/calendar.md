@@ -338,6 +338,7 @@ TODO
 | drag-over-func | Function | All | The function that will be called when dragging over a calendar's drop spot<br>dragOverFunc(e, day, 'day', index)<br>`index` is valid only if `column-count` is set > 1 in `day` view mode |
 | drop-func | Function | All | The function that will be called when dropping on a calendar's drop spot<br>dropFunc(e, day, 'day', index)<br>`index` is valid only if `column-count` is set > 1 in `day` view mode |
 | | | | Day properties |
+| no-scroll | Boolean| Day | Hide the scrollbar<br>Default: false |
 | column-header-before | Boolean| Day | Provide a column before scoped slot<br>Default: false |
 | column-header-after | Boolean| Day | Provide a column after scoped slot<br>Default: false |
 | column-count | Boolean| Day | Show the same day x number of times in columns. Scoped slots get this data as `index` in passed object<br>Default: 1 |
