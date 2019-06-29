@@ -19,11 +19,14 @@ const extendQuasarConf = function (conf) {
 
   conf.css.push('~@quasar/quasar-app-extension-qcalendar/src/component/calendar-weekly.styl')
   console.log(` App Extension (qcalendar) Info: 'Adding calendar-weekly.styl css reference to your quasar.conf.js'`)
+
+  conf.css.push('~@quasar/quasar-app-extension-qcalendar/src/component/calendar-scheduler.styl')
+  console.log(` App Extension (qcalendar) Info: 'Adding calendar-scheduler.styl css reference to your quasar.conf.js'`)
 }
 
 module.exports = function (api) {
   // quasar compatibility check
-  api.compatibleWith('@quasar/app', '^1.0.0-beta.26')
+  api.compatibleWith('@quasar/app', '^1.0.0-rc.1')
 
   // register JSON api
   // api.registerDescribeApi('QCalendar', './component/QCalendar.json')
