@@ -129,7 +129,7 @@ To use the scheduler, you need to use the `resources` property, which currently 
 
 ## View types
 
-QCalendar has several `view` types available. They are: `month`, `week`, `day`, `2day`, `3day`, `4day`, `5day`, `6day`, `custom-interval`, `month-interval` and `scheduler`. It's important to know that all day `view` types are linear in nature. For instance, `3day` will show three days and `next` will show the next 3 days. You can switch to a `view` type on a mobile based on the current width of the screen. For portrait mode, you could change the `view` type to `2day` and for landscape mode `4day`. When `next` or `prev` is called the next (or previous) 2 days (for protrait) or 4 days (for landscape) would be displayed.
+QCalendar has several `view` types available. They are: `month`, `week`, `day`, `2day`, `3day`, `4day`, `5day`, `6day`, `custom-interval`, `month-interval`, `scheduler`, `week-scheduler` and `month-scheduler`. It's important to know that all `view` types are linear in nature. For instance, `3day` will show three days and `next()` will show the next 3 days. You can switch to a `view` type on a mobile based on the current width of the screen. For portrait mode, you could change the `view` type to `2day` and for landscape mode `4day`. When `next()` or `prev()` are called the next (or previous) 2 days (for protrait) or 4 days (for landscape) would be displayed. Monthly views are also linear, but respect the number of days within the month that is to be displayed.
 
 ## Weekday filtering
 
@@ -339,7 +339,7 @@ TODO
 
 | Vue Property | Type | View | Description |
 | --- | --- | --- | --- |
-| view | String | All | The currently displayed view<br>Default: "month"<br>Choices: ['month', 'week', 'day', '2day', '3day', '4day', '5day', '6day', 'custom-interval', 'month-interval', `scheduler`] |
+| view | String | All | The currently displayed view<br>Default: "month"<br>Choices: [`month`, `week`, `day`, `2day`, `3day`, `4day`, `5day`, `6day`, `custom-interval`, `month-interval`, `scheduler`, `week-scheduler`, `month-scheduler`] |
 | value | String| All | v-model used to pass in a date and time value<br>Default: now<br>Format: 'YYYY-mm-dd  HH:mm' |
 | now | String | All | Date and time value representing a fixed date in time<br>Default: today's date |
 | color | String | All | Overrides color to be used for current date or `now`<br>Default: false<br>This can be any CSS color value or Quasar color |
