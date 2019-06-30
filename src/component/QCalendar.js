@@ -66,7 +66,7 @@ export default CalendarBase.extend({
           component = QCalendarDaily
           start = this.getStartOfWeek(around)
           end = this.getEndOfWeek(around)
-          maxDays = DAYS_IN_WEEK
+          maxDays = this.weekdays.length
           break
         case 'day':
           component = QCalendarDaily
@@ -114,7 +114,7 @@ export default CalendarBase.extend({
           start = getStartOfMonth(around)
           end = getEndOfMonth(around)
           updateFormatted(end)
-          maxDays = 31
+          maxDays = DAYS_IN_MONTH_MAX
           break
         case 'scheduler':
           component = QCalendarScheduler
@@ -125,14 +125,14 @@ export default CalendarBase.extend({
           component = QCalendarScheduler
           start = this.getStartOfWeek(around)
           end = this.getEndOfWeek(around)
-          maxDays = DAYS_IN_WEEK
+          maxDays = this.weekdays.length
           break
         case 'month-scheduler':
           component = QCalendarScheduler
           start = getStartOfMonth(around)
           end = getEndOfMonth(around)
           updateFormatted(end)
-          maxDays = 31
+          maxDays = DAYS_IN_MONTH_MAX
           break
       }
 
@@ -172,7 +172,7 @@ export default CalendarBase.extend({
             mover(moved)
             break
           case 'week':
-            relativeDays(moved, mover, DAYS_IN_WEEK)
+            relativeDays(moved, mover, DAYS_IN_WEEK, this.weekdays)
             break
           case 'day':
             maxDays = 1
@@ -209,7 +209,7 @@ export default CalendarBase.extend({
             relativeDays(moved, mover, this.maxDays, this.weekdays)
             break
           case 'week-scheduler':
-            relativeDays(moved, mover, DAYS_IN_WEEK)
+            relativeDays(moved, mover, DAYS_IN_WEEK, this.weekdays)
             break
           case 'month-scheduler':
             moved.day = limit

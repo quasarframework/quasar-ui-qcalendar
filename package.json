@@ -1,8 +1,8 @@
 {
   "name": "@quasar/quasar-app-extension-qcalendar",
-  "version": "1.0.0-alpha.17",
+  "version": "1.0.0-alpha.18",
   "description": "QCalendar Quasar app extension",
-  "author": "Hawkeye64 <jeff@quasar.dev>",
+  "author": "Jeff Galbraith <jeff@quasar.dev>",
   "main": "src/index.js",
   "scripts": {
     "lint": "eslint --ext .js,.vue src",
@@ -35,7 +35,8 @@
     "weekly",
     "monthly",
     "events",
-    "reminders"
+    "reminders",
+    "schedule"
   ],
   "devDependencies": {
     "@vue/eslint-config-standard": "^4.0.0",
