@@ -106,7 +106,7 @@
       </div>
     </div>
     <div class="col-12 q-px-md q-pb-sm">
-      <span class="text-body2" >Interval height (daily)</span>
+      <span class="text-body2" >Interval height (daily, scheduler)</span>
       <q-slider
         v-model="intervalHeight"
         :min="20"
