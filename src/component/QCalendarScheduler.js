@@ -433,6 +433,8 @@ export default CalendarIntervals.extend({
     },
 
     __renderResourceLabel (h, resource) {
+      const slot = this.$scopedSlots.schedulerResourcesInterval
+      const scope = resource
       const height = convertToUnit(this.intervalHeight)
       const label = resource.label
 
@@ -452,7 +454,7 @@ export default CalendarIntervals.extend({
           height
         }
       }, [
-        h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
+        slot ? slot(scope) : h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
           staticClass: 'q-calendar-scheduler__resource-text'
         }), label)
       ])
