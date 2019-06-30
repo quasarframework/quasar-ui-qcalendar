@@ -124,7 +124,7 @@ The weekly view comprises of a header `weekly header` which is segmented by a `w
 
 The scheduler view is for displaying days with resources on the left side. This allows you to present data for each resource. Where a resource could be a person, room, etc.
 
-To use the scheduler, you need to use the `resources` property, which currently is an array of objects, containing a single key `label`. To change the number of days displayed, use the `max-days` property.
+To use the scheduler, you need to use the `resources` property, which currently is an array of objects, containing a single key `label`. To change the number of days displayed, use the `max-days` property. To change the distance between each resource, use the `interval-height` property.
 
 
 ## View types
