@@ -66,11 +66,14 @@ export default CalendarIntervals.extend({
       return area && pane ? (area.offsetWidth - pane.offsetWidth) : 0
     },
 
-    getScopeForSlot (timestamp, idx) {
+    getScopeForSlot (timestamp, idx, resource) {
       const scope = copyTimestamp(timestamp)
       scope.resourceStartPos = this.resourceStartPos
       if (idx !== void 0) {
         scope.index = idx
+      }
+      if (resource !== void 0) {
+        scope.resource = resource
       }
       return scope
     },
@@ -331,7 +334,7 @@ export default CalendarIntervals.extend({
       }
     },
 
-    __renderDay (h, day, dayIndex, idx) {
+    __renderDay (h, day, idx) {
       const slot = this.$scopedSlots.schedulerDayBody
       const scope = this.getScopeForSlot(day, idx)
 
@@ -357,23 +360,23 @@ export default CalendarIntervals.extend({
         staticClass: 'q-calendar-scheduler__day',
         class: this.getRelativeClasses(day),
         on: this.getDefaultMouseEventHandlers(':time', e => {
-          return this.getScopeForSlot(this.getTimestampAtEvent(e, day))
+          return this.getScopeForSlot(this.getTimestampAtEvent(e, day), idx)
         })
       }), [
-        ...this.__renderDayResources(h, dayIndex, idx),
+        ...this.__renderDayResources(h, day, idx),
         slot ? slot(scope) : ''
       ])
     },
 
-    __renderDayResources (h, index, idx) {
-      return this.resources.map((resource) => this.__renderDayResource(h, resource, idx))
+    __renderDayResources (h, day, idx) {
+      return this.resources.map((resource) => this.__renderDayResource(h, resource, day, idx))
     },
 
-    __renderDayResource (h, resource, idx) {
+    __renderDayResource (h, resource, day, idx) {
       const height = convertToUnit(this.intervalHeight)
       const styler = this.intervalStyle || this.intervalStyleDefault
       const slot = this.$scopedSlots.schedulerResource
-      const scope = this.getScopeForSlot(resource, idx)
+      const scope = this.getScopeForSlot(day, idx, resource)
       let dragOver
 
       const data = {
@@ -430,6 +433,8 @@ export default CalendarIntervals.extend({
     },
 
     __renderResourceLabel (h, resource) {
+      const slot = this.$scopedSlots.schedulerResourcesInterval
+      const scope = resource
       const height = convertToUnit(this.intervalHeight)
       const label = resource.label
 
@@ -449,7 +454,7 @@ export default CalendarIntervals.extend({
           height
         }
       }, [
-        h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
+        slot ? slot(scope) : h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
           staticClass: 'q-calendar-scheduler__resource-text'
         }), label)
       ])

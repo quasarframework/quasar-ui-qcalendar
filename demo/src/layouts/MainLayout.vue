@@ -209,15 +209,8 @@ export default {
       }
     },
     scrollPage (el) {
-      const
-        target = scroll.getScrollTarget(el),
-        offset = el.offsetTop - el.scrollHeight
-
-      this.scrollingPage = true
-      this.scrollTimer = setTimeout(() => {
-        this.scrollingPage = false
-      }, 510)
-      scroll.setScrollPosition(target, offset, 500)
+      const offset = el.offsetTop - el.scrollHeight
+      scroll.setScrollPosition(window, offset, 500)
     }
   }
 }

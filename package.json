@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-qcalendar",
-  "version": "1.0.0-alpha.18",
+  "version": "1.0.0-alpha.19",
   "description": "QCalendar Quasar app extension",
   "author": "Jeff Galbraith <jeff@quasar.dev>",
   "main": "src/index.js",
@@ -44,8 +44,5 @@
     "eslint": "^6.0.1",
     "eslint-loader": "^2.1.2",
     "eslint-plugin-vue": "^5.2.3"
-  },
-  "dependencies": {
-    "npm-check-updates": "^3.1.12"
   }
 }
