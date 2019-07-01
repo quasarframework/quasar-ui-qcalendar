@@ -40,3 +40,6 @@ Can be found [here](https://github.com/quasarframework/app-extension-qcalendar/t
 # Documentation
 Can be found [here](https://quasarframework.github.io/app-extension-qcalendar).
 
+# Donate
+If you appreciate the work that went into this App Extension, please consider [donating to Quasar](https://donate.quasar.dev).
+
