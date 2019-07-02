@@ -912,12 +912,12 @@
   integrity sha512-W+BrplCY+UeEN4Lwy2GcQH5CR92CrqhD2YjlcoCSbCEkSna0A35Be3kJ23qqLUMh4iuyG3jLFI1y9nUENTZqTg==
 
 "@quasar/quasar-app-extension-qcalendar@../.":
-  version "1.0.0-alpha.18"
+  version "1.0.0-alpha.19"
 
-"@quasar/quasar-app-extension-qmarkdown@^1.0.0-beta.12":
-  version "1.0.0-beta.12"
-  resolved "https://registry.yarnpkg.com/@quasar/quasar-app-extension-qmarkdown/-/quasar-app-extension-qmarkdown-1.0.0-beta.12.tgz#c248b5c463755a27211ef8cc6fc49f5a083f8519"
-  integrity sha512-SwO8rrXavsWu4+9n4CDnVgzGgRH7OCRb8PrJBhIQapHfXv6Wv85w+cHxnzu5xOeq1OkaT6IzDQNl1cW5o2nPCw==
+"@quasar/quasar-app-extension-qmarkdown@^1.0.0-beta.13":
+  version "1.0.0-beta.13"
+  resolved "https://registry.yarnpkg.com/@quasar/quasar-app-extension-qmarkdown/-/quasar-app-extension-qmarkdown-1.0.0-beta.13.tgz#de287aa8b0bf48d43197303ce2f94307854da4dc"
+  integrity sha512-4GIozNRfJSLUBornbksNeH3cilKFMj310g7axzjN1H/CLOiFkwuDSauMHatcfEppkBxb/PpyiS+oW1G1Op3QrQ==
   dependencies:
     front-matter "^3.0.2"
     markdown-it "^8.4.2"
