@@ -260,7 +260,7 @@ export default CalendarBase.extend({
     __renderDayLabel (h, day) {
       const outside = this.isOutside(day)
       const colorCurrent = day.current === true ? this.color : void 0
-      const slot = this.$scopedSlots.dayLabel
+      const slot = this.$scopedSlots['day-label']
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
@@ -301,7 +301,7 @@ export default CalendarBase.extend({
     },
     __renderDayOfYearLabel (h, day) {
       const color = day.current === true ? this.color : void 0
-      const slot = this.$scopedSlots.dayOfYear
+      const slot = this.$scopedSlots['day-of-year']
 
       return h('div', this.setTextColor(color, {
         staticClass: 'q-calendar-weekly__day-month--day-of-year'
@@ -309,7 +309,7 @@ export default CalendarBase.extend({
     },
     __renderDayMonth (h, day) {
       const color = day.current === true ? this.color : void 0
-      const slot = this.$scopedSlots.monthLabel
+      const slot = this.$scopedSlots['month-label']
       const monthLabel = this.monthFormatter(day, this.shortMonthLabel)
 
       return h('div', this.setTextColor(color, {
