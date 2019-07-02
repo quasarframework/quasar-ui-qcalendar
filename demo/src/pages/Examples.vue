@@ -95,6 +95,12 @@
       <example-card title="Day View - Column Header Count" name="DayViewColumnHeaderCount" :tag-parts="getTagParts(require('!!raw-loader!../examples/DayViewColumnHeaderCount.vue').default)" />
       <p>And finally, if you wanted the ability to page through a large number of resources, you can set the <code class="q-markdown--token">column-index-start</code> to create a paging effect.</p>
       <example-card title="Day View - Column Header Count (Paged)" name="DayViewColumnHeaderCountPaging" :tag-parts="getTagParts(require('!!raw-loader!../examples/DayViewColumnHeaderCountPaging.vue').default)" />
+
+      <example-title title="Working with Slots" />
+      <example-card title="Day View - Slots" name="DayViewSlots" :tag-parts="getTagParts(require('!!raw-loader!../examples/DayViewSlots.vue').default)" />
+      <example-card title="Week View - Slots" name="WeekViewSlots" :tag-parts="getTagParts(require('!!raw-loader!../examples/WeekViewSlots.vue').default)" />
+      <example-card title="Month View - Slots" name="MonthViewSlots" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSlots.vue').default)" />
+
     </div>
   </hero>
 </template>
@@ -196,6 +202,11 @@ export default {
     this.addToToc('Day View - Column Count', 2)
     this.addToToc('Day View - Column Header Count', 2)
     this.addToToc('Day View - Column Header Count (Paged)', 2)
+
+    this.addToToc('Working with Slots')
+    this.addToToc('Day View - Slots', 2)
+    this.addToToc('Week View - Slots', 2)
+    this.addToToc('Month View - Slots', 2)
 
     this.toc = this.tempToc
   },

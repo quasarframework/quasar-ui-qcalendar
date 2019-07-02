@@ -123,7 +123,11 @@ export default {
     WeekViewColumnHeader: () => import('../examples/WeekViewColumnHeader'),
     DayViewColumnCount: () => import('../examples/DayViewColumnCount'),
     DayViewColumnHeaderCount: () => import('../examples/DayViewColumnHeaderCount'),
-    DayViewColumnHeaderCountPaging: () => import('../examples/DayViewColumnHeaderCountPaging')
+    DayViewColumnHeaderCountPaging: () => import('../examples/DayViewColumnHeaderCountPaging'),
+
+    DayViewSlots: () => import('../examples/DayViewSlots'),
+    WeekViewSlots: () => import('../examples/WeekViewSlots'),
+    MonthViewSlots: () => import('../examples/MonthViewSlots')
   },
 
   props: {
