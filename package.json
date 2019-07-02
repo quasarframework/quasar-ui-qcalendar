@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-qcalendar",
-  "version": "1.0.0-alpha.19",
+  "version": "1.0.0-alpha.20",
   "description": "QCalendar Quasar app extension",
   "author": "Jeff Galbraith <jeff@quasar.dev>",
   "main": "src/index.js",
