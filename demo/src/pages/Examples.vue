@@ -68,6 +68,12 @@
       <p>The example below is setting the <code class="q-markdown--token">interval-start</code> to <code class="q-markdown--token">8</code>, the default is <code class="q-markdown--token">0</code>. It is a good idea to also adjust the interval-count so that extra intervals are not displayed. In this case, the <code class="q-markdown--token">interval-count</code> is set to <code class="q-markdown--token">10</code> so the intervals displayed are from 08:00-18:00.</p>
       <example-card title="Day View - Interval Start" name="DayViewIntervalStart" :tag-parts="getTagParts(require('!!raw-loader!../examples/DayViewIntervalStart.vue').default)" />
 
+      <example-title title="Previous/Next" />
+      <example-card title="Day View - Prev/Next" name="DayViewPrevNext" :tag-parts="getTagParts(require('!!raw-loader!../examples/DayViewPrevNext.vue').default)" />
+      <example-card title="Week View - Prev/Next" name="WeekViewPrevNext" :tag-parts="getTagParts(require('!!raw-loader!../examples/WeekViewPrevNext.vue').default)" />
+      <example-card title="Month View - Prev/Next" name="MonthViewPrevNext" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewPrevNext.vue').default)" />
+      <example-card title="Scheduler View - Prev/Next" name="SchedulerViewPrevNext" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewPrevNext.vue').default)" />
+
       <example-title title="Swipe Navigation" />
       <p>For swipe support, don't forget to add the <code class="q-markdown--token">TouchSwipe</code> directive to your <code class="q-markdown--token">quasar.conf.js</code>.</p>
       <example-card title="Day View - Swipe" name="DayViewSwipe" :tag-parts="getTagParts(require('!!raw-loader!../examples/DayViewSwipe.vue').default)" />
@@ -170,6 +176,12 @@ export default {
     this.addToToc('Day View - Interval Minutes (30)', 2)
     this.addToToc('Day View - Interval Minutes (15)', 2)
     this.addToToc('Day View - Interval Start', 2)
+
+    this.addToToc('Previous/Next')
+    this.addToToc('Day View - Prev/Next', 2)
+    this.addToToc('Week View - Prev/Next', 2)
+    this.addToToc('Month View - Prev/Next', 2)
+    this.addToToc('Scheduler View - Prev/Next', 2)
 
     this.addToToc('Swipe Navigation')
     this.addToToc('Day View - Swipe', 2)

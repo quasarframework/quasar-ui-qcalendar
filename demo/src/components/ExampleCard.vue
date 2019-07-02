@@ -110,6 +110,11 @@ export default {
     DayViewIntervalMinutes15: () => import('../examples/DayViewIntervalMinutes15'),
     DayViewIntervalStart: () => import('../examples/DayViewIntervalStart'),
 
+    DayViewPrevNext: () => import('../examples/DayViewPrevNext'),
+    WeekViewPrevNext: () => import('../examples/WeekViewPrevNext'),
+    MonthViewPrevNext: () => import('../examples/MonthViewPrevNext'),
+    SchedulerViewPrevNext: () => import('../examples/SchedulerViewPrevNext'),
+
     DayViewSwipe: () => import('../examples/DayViewSwipe'),
     WeekViewSwipe: () => import('../examples/WeekViewSwipe'),
     MonthViewSwipe: () => import('../examples/MonthViewSwipe'),

@@ -154,7 +154,7 @@ Duration:   {{ event.duration }}
         v-model="selectedDate"
         :locale="locale"
         :maxDays="maxDays"
-        :animated="true"
+        animated
         transition-prev="slide-right"
         transition-next="slide-left"
         :dragOverFunc="onDragOver"

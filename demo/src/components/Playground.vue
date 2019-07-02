@@ -15,143 +15,144 @@
         </q-card-section>
       </q-card>
     </q-dialog>
-    <q-btn
-      dense
-      label="Change locale"
-      @click="displayLocale = true"
-      class="col-12"
-    ></q-btn>
     <div class="col-12 q-px-md q-pb-sm">
-      <span class="text-body2" >Max days (custom)</span>
-      <q-slider
-        v-model="maxDays"
-        :min="1"
-        :max="31"
-        label
-      />
-    </div>
-    <q-toggle
-      class="col-12"
-      v-model="fiveDayWorkWeek"
-      label="5 day work week"
-    ></q-toggle>
-    <q-toggle
-      class="col-12"
-      v-model="firstDayMonday"
-      label="Week starts on Monday"
-    ></q-toggle>
-    <q-toggle
-      class="col-12"
-      v-model="shortMonthLabel"
-      label="Short month label"
-    ></q-toggle>
-    <q-toggle
-      class="col-12"
-      v-model="shortWeekdayLabel"
-      label="Short weekday label"
-    ></q-toggle>
-    <q-toggle
-      class="col-12"
-      v-model="shortIntervalLabel"
-      label="Short interval label"
-    ></q-toggle>
-    <q-toggle
-      class="col-12"
-      v-model="hour24Format"
-      label="24hr interval labels"
-    ></q-toggle>
-    <q-toggle
-      class="col-12"
-      v-model="showWorkWeeks"
-      label="Show work weeks"
-    ></q-toggle>
-    <q-toggle
-      class="col-12"
-      v-model="hideHeader"
-      label="Hide header"
-    ></q-toggle>
-    <q-toggle
-      class="col-12"
-      v-model="noScroll"
-      label="No scroll"
-    ></q-toggle>
-    <q-toggle
-      class="col-12"
-      v-model="showMonthLabel"
-      label="Show month label"
-    ></q-toggle>
-    <q-toggle
-      class="col-12"
-      v-model="showDayOfYearLabel"
-      label="Show Day of Year Label"
-    ></q-toggle>
-    <div class="col-12 q-px-md">
-      <span class="text-body2" >Interval Range (daily)</span>
-      <q-range
-        v-model="intervalRange"
-        :min="0"
-        :max="24"
-        :step="intervalRangeStep"
-        label
-        :left-label-value="leftLabelRange"
-        :right-label-value="rightLabelRange"
-      />
-    </div>
-    <div class="col-12 q-px-md q-pb-sm">
-      <span class="text-body2" >Interval Step</span>
-      <div class="q-gutter-sm">
-        <q-radio v-model="intervalRangeStep" :val="1" label="60 min" />
-        <q-radio v-model="intervalRangeStep" :val="0.5" label="30 min" />
-        <q-radio v-model="intervalRangeStep" :val="0.25" label="15 min" />
+      <q-btn
+        dense
+        label="Change locale"
+        @click="displayLocale = true"
+        class="full-width"
+      ></q-btn>
+      <div class="col-12 q-px-md q-pb-sm">
+        <span class="text-body2" >Max days (custom)</span>
+        <q-slider
+          v-model="maxDays"
+          :min="1"
+          :max="31"
+          label
+        />
       </div>
+      <q-toggle
+        class="col-12"
+        v-model="fiveDayWorkWeek"
+        label="5 day work week"
+      ></q-toggle>
+      <q-toggle
+        class="col-12"
+        v-model="firstDayMonday"
+        label="Week starts on Monday"
+      ></q-toggle>
+      <q-toggle
+        class="col-12"
+        v-model="shortMonthLabel"
+        label="Short month label"
+      ></q-toggle>
+      <q-toggle
+        class="col-12"
+        v-model="shortWeekdayLabel"
+        label="Short weekday label"
+      ></q-toggle>
+      <q-toggle
+        class="col-12"
+        v-model="shortIntervalLabel"
+        label="Short interval label"
+      ></q-toggle>
+      <q-toggle
+        class="col-12"
+        v-model="hour24Format"
+        label="24hr interval labels"
+      ></q-toggle>
+      <q-toggle
+        class="col-12"
+        v-model="showWorkWeeks"
+        label="Show work weeks"
+      ></q-toggle>
+      <q-toggle
+        class="col-12"
+        v-model="hideHeader"
+        label="Hide header"
+      ></q-toggle>
+      <q-toggle
+        class="col-12"
+        v-model="noScroll"
+        label="No scroll"
+      ></q-toggle>
+      <q-toggle
+        class="col-12"
+        v-model="showMonthLabel"
+        label="Show month label"
+      ></q-toggle>
+      <q-toggle
+        class="col-12"
+        v-model="showDayOfYearLabel"
+        label="Show Day of Year Label"
+      ></q-toggle>
+      <div class="col-12 q-px-md">
+        <span class="text-body2" >Interval Range (daily)</span>
+        <q-range
+          v-model="intervalRange"
+          :min="0"
+          :max="24"
+          :step="intervalRangeStep"
+          label
+          :left-label-value="leftLabelRange"
+          :right-label-value="rightLabelRange"
+        />
+      </div>
+      <div class="col-12 q-px-md q-pb-sm">
+        <span class="text-body2" >Interval Step</span>
+        <div class="q-gutter-sm">
+          <q-radio v-model="intervalRangeStep" :val="1" label="60 min" />
+          <q-radio v-model="intervalRangeStep" :val="0.5" label="30 min" />
+          <q-radio v-model="intervalRangeStep" :val="0.25" label="15 min" />
+        </div>
+      </div>
+      <div class="col-12 q-px-md q-pb-sm">
+        <span class="text-body2" >Interval height (daily)</span>
+        <q-slider
+          v-model="intervalHeight"
+          :min="20"
+          :max="100"
+          label
+          :label-value="intervalHeight + 'px'"
+        />
+      </div>
+      <div class="col-12 q-px-md q-pb-sm">
+        <span class="text-body2" >Day height (monthly)</span>
+        <q-slider
+          v-model="dayHeight"
+          :min="0"
+          :max="200"
+          label
+          :label-value="dayHeight + 'px'"
+        />
+      </div>
+      <div class="col-12 q-px-md q-pb-sm">
+        <span class="text-body2" >Resource height (scheduler)</span>
+        <q-slider
+          v-model="resourceHeight"
+          :min="20"
+          :max="100"
+          label
+          :label-value="resourceHeight + 'px'"
+        />
+      </div>
+      <q-toggle
+        class="col-12"
+        v-model="enableThemes"
+        label="Enable themes"
+      ></q-toggle>
+      <q-select
+        outlined
+        dense
+        emit-value
+        map-options
+        label="Change theme"
+        v-model="theme"
+        :options="themesList"
+        :disable="enableThemes !== true"
+        class="col-12"
+      ></q-select>
     </div>
-    <div class="col-12 q-px-md q-pb-sm">
-      <span class="text-body2" >Interval height (daily)</span>
-      <q-slider
-        v-model="intervalHeight"
-        :min="20"
-        :max="100"
-        label
-        :label-value="intervalHeight + 'px'"
-      />
-    </div>
-    <div class="col-12 q-px-md q-pb-sm">
-      <span class="text-body2" >Day height (monthly)</span>
-      <q-slider
-        v-model="dayHeight"
-        :min="0"
-        :max="200"
-        label
-        :label-value="dayHeight + 'px'"
-      />
-    </div>
-    <div class="col-12 q-px-md q-pb-sm">
-      <span class="text-body2" >Resource height (scheduler)</span>
-      <q-slider
-        v-model="resourceHeight"
-        :min="20"
-        :max="100"
-        label
-        :label-value="resourceHeight + 'px'"
-      />
-    </div>
-    <q-toggle
-      class="col-12"
-      v-model="enableThemes"
-      label="Enable themes"
-    ></q-toggle>
-    <q-select
-      outlined
-      dense
-      emit-value
-      map-options
-      label="Change theme"
-      v-model="theme"
-      :options="themesList"
-      :disable="enableThemes !== true"
-      class="col-12"
-    ></q-select>
-
   </div>
 </template>
 
