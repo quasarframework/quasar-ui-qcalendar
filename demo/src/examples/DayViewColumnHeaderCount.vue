@@ -7,7 +7,7 @@
     locale="en-us"
     style="height: 400px;"
   >
-    <template #columnHeaderAfter="day">
+    <template #column-header-after="day">
       <div class="q-ma-xs">
         <q-item v-if="day.index === 0" clickable v-ripple>
           <q-item-section side>

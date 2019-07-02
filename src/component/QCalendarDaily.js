@@ -73,7 +73,7 @@ export default CalendarIntervals.extend({
     },
 
     __renderHeadIntervals (h) {
-      const slot = this.$scopedSlots.intervalsHeader
+      const intervalsHeader = this.$scopedSlots['intervals-header']
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
@@ -87,7 +87,7 @@ export default CalendarIntervals.extend({
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
         staticClass: 'q-calendar-daily__intervals-head q-calendar-daily__intervals-head--text'
       }), [
-        slot ? slot(this.days) : ''
+        intervalsHeader ? intervalsHeader(this.days) : ''
       ])
     },
 
@@ -102,7 +102,7 @@ export default CalendarIntervals.extend({
     },
 
     __renderHeadDay (h, day, idx) {
-      const slot = this.$scopedSlots.dayHeader
+      const slot = this.$scopedSlots['day-header']
       const scope = this.getScopeForSlot(day, idx)
       let dragOver
 
@@ -227,7 +227,7 @@ export default CalendarIntervals.extend({
     },
 
     __renderColumnHeaderBefore (h, day, idx) {
-      const slot = this.$scopedSlots.columnHeaderBefore
+      const slot = this.$scopedSlots['column-header-before']
       let scope = { ...day }
       scope.index = idx
       return h('div', {
@@ -238,7 +238,7 @@ export default CalendarIntervals.extend({
     },
 
     __renderColumnHeaderAfter (h, day, idx) {
-      const slot = this.$scopedSlots.columnHeaderAfter
+      const slot = this.$scopedSlots['column-header-after']
       let scope = { ...day }
       scope.index = idx
       return h('div', {
@@ -301,7 +301,7 @@ export default CalendarIntervals.extend({
     },
 
     __renderDay (h, day, dayIndex, idx) {
-      const slot = this.$scopedSlots.dayBody
+      const slot = this.$scopedSlots['day-body']
       const scope = this.getScopeForSlot(day, idx)
 
       let colors = new Map(), color, backgroundColor

@@ -47,7 +47,7 @@ Duration:   {{ event.duration }}
             <q-checkbox v-model="eventForm.allDay" label="All-Day event?"></q-checkbox>
 
             <q-input v-if="eventForm.allDay" color="blue-6" filled v-model="eventForm.dateTimeStart" label="Enter date" mask="####-##-##">
-              <template v-slot:append>
+              <template #append>
                 <q-icon name="event" class="cursor-pointer">
                   <q-popup-proxy v-model="showDateScrollerAllDay">
                     <q-date-scroller
@@ -71,7 +71,7 @@ Duration:   {{ event.duration }}
 
             <div v-else class="q-gutter-sm">
               <q-input color="blue-6" outlined v-model="eventForm.dateTimeStart" label="Event start date and time" mask="####-##-## ##:##">
-                <template v-slot:append>
+                <template #append>
                   <q-icon name="event" class="cursor-pointer">
                     <q-popup-proxy v-model="showDateTimeScrollerStart">
 
@@ -95,7 +95,7 @@ Duration:   {{ event.duration }}
                 </template>
               </q-input>
               <q-input color="blue-6" outlined v-model="eventForm.dateTimeEnd" label="Event end date and time" mask="####-##-## ##:##">
-                <template v-slot:append>
+                <template #append>
                   <q-icon name="event" class="cursor-pointer">
                     <q-popup-proxy v-model="showDateTimeScrollerEnd">
 
@@ -125,7 +125,7 @@ Duration:   {{ event.duration }}
               filled
               v-model="eventForm.bgcolor"
             >
-              <template v-slot:append>
+              <template #append>
                 <q-icon name="colorize" class="cursor-pointer">
                   <q-popup-proxy>
                     <q-color v-model="eventForm.bgcolor"></q-color>
@@ -188,7 +188,7 @@ Duration:   {{ event.duration }}
         @click:week="addEventMenu"
         dayPadding="35px 2px"
       >
-        <template v-slot:day="{ date }">
+        <template #day="{ date }">
           <template v-for="(event, index) in getEvents(date)">
             <q-badge
               :key="index"
@@ -207,7 +207,7 @@ Duration:   {{ event.duration }}
             </q-badge>
           </template>
         </template>
-        <template v-slot:dayHeader="{ date }">
+        <template #day-header="{ date }">
           <div class="row justify-center">
             <template v-for="(event, index) in eventsMap[date]">
               <q-badge
@@ -237,7 +237,7 @@ Duration:   {{ event.duration }}
             </template>
           </div>
         </template>
-        <template v-slot:dayBody="{ date, timeStartPos, timeDurationHeight }">
+        <template #day-body="{ date, timeStartPos, timeDurationHeight }">
           <template v-for="(event, index) in getEvents(date)">
             <q-badge
               v-if="event.time"
@@ -256,7 +256,7 @@ Duration:   {{ event.duration }}
             </q-badge>
           </template>
         </template>
-        <template v-slot:intervalsHeader="days">
+        <template #intervals-header="days">
           <div class="fit flex justify-center items-end">
             <span class="q-calendar-daily__interval-text">{{ showOffset(days) }}</span>
           </div>

@@ -7,12 +7,12 @@
     locale="en-us"
     style="height: 400px;"
   >
-    <template #columnHeaderBefore="days">
+    <template #column-header-before="days">
       <div class="q-ma-xs">
         columnHeaderBefore slot
       </div>
     </template>
-    <template #columnHeaderAfter="days">
+    <template #colum-headeafter="days">
       <div class="q-ma-xs">
         columnHeaderAfter slot
       </div>

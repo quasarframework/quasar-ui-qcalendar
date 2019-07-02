@@ -6,7 +6,7 @@
     style="height: 400px;"
     class="calendar-container"
   >
-    <template #dayHeader="{ date }">
+    <template #day-header="{ date }">
       <div class="row justify-center">
         <template v-for="(event, index) in eventsMap[date]">
           <q-badge
@@ -31,7 +31,7 @@
       </div>
     </template>
 
-    <template #dayBody="{ date, timeStartPos, timeDurationHeight }">
+    <template #day-body="{ date, timeStartPos, timeDurationHeight }">
       <template v-for="(event, index) in getEvents(date)">
         <q-badge
           v-if="event.time"

@@ -262,7 +262,7 @@ Animation is when QCalendar does a `prev` or `next` action. Setting the property
 QCalendar supports HTML5 **drag and drop**. If you have components that need drag and drop support you can add the following (this example is using QBadge):
 
 ```html
-<template v-slot:day="{ date }">
+<template #day="{ date }">
   <template v-for="(event, index) in getEvents(date)">
     <q-badge
       :key="index"
@@ -437,6 +437,7 @@ TODO
 | scheduler-column-header-after | Scheduler | TBD | |
 | scheduler-day-body | Scheduler | TBD | |
 | scheduler-resource | Scheduler | TBD | |
+| scheduler-resource-info | Scheduler | TBD | |
 
 # Donate
 If you appreciate the work that went into this App Extension, please consider [donating to Quasar](https://donate.quasar.dev).

@@ -3,7 +3,7 @@
     v-model="selectedDate"
     view="month"
     locale="en-us"
-    style="height: 400px;"
+    style="height: 500px;"
   >
     <template #day="{ date }">
       <template v-for="(event, index) in getEvents(date)">
