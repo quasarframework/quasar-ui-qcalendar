@@ -3,7 +3,7 @@
     v-model="selectedDate"
     view="scheduler"
     :resources="resources"
-    :interval-height="50"
+    :resource-height="50"
     locale="en-us"
     style="height: 400px;"
   />

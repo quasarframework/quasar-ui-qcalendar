@@ -173,6 +173,7 @@ Duration:   {{ event.duration }}
         :short-weekday-label="shortWeekdayLabel"
         :short-interval-label="shortIntervalLabel"
         :interval-height="intervalHeight"
+        :resource-height="resourceHeight"
         :day-height="dayHeight"
         :show-month-label="showMonthLabel"
         :show-work-weeks="showWorkWeeks"
@@ -372,6 +373,7 @@ export default {
       intervalRange: 'calendar/intervalRange',
       intervalRangeStep: 'calendar/intervalRangeStep',
       intervalHeight: 'calendar/intervalHeight',
+      resourceHeight: 'calendar/resourceHeight',
       dayHeight: 'calendar/dayHeight',
       enableThemes: 'calendar/enableThemes',
       theme: 'calendar/theme'

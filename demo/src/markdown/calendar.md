@@ -124,7 +124,7 @@ The weekly view comprises of a header `weekly header` which is segmented by a `w
 
 The scheduler view is for displaying days with resources on the left side. This allows you to present data for each resource. Where a resource could be a person, room, etc.
 
-To use the scheduler, you need to use the `resources` property, which currently is an array of objects, containing a single key `label`. To change the number of days displayed, use the `max-days` property. To change the distance between each resource, use the `interval-height` property.
+To use the scheduler, you need to use the `resources` property, which currently is an array of objects, containing a single key `label`. To change the number of days displayed, use the `max-days` property. To change the distance between each resource, use the `resource-height` property.
 
 
 ## View types
@@ -377,6 +377,7 @@ TODO
 | show-work-weeks | Boolean | Month | Show work weeks<br>Default: false |
 | | | | **Scheduler properties** |
 | resources | Array | Scheduler  | An array of objects with a single key of `label`. You can add other keys if you like, which will be passed in on the appropriate slots |
+| resource-height | [Number, String] | Day | The maximum height in pixels for the resource height<br>Default: 60 |
 | | | | **Other properties** |
 | max-days | Number | Custom, Scheduler  | The maximum number of days to be displayed. Ignored for most other views<br>Default: 7 |
 

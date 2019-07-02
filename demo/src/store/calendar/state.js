@@ -17,6 +17,7 @@ export default {
   intervalRange: { min: 0, max: 24 },
   intervalRangeStep: 1,
   intervalHeight: 60,
+  resourceHeight: 60,
   dayHeight: 100,
   enableThemes: false,
   theme: {}
