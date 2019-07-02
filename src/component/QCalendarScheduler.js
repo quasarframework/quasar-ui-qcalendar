@@ -5,7 +5,7 @@ import './calendar-scheduler.styl'
 import Resize from './directives/resize'
 
 // Mixins
-import CalendarIntervals from './mixins/calendar-intervals'
+import CalendarScheduler from './mixins/calendar-scheduler'
 
 // Util
 import { convertToUnit } from './utils/helpers'
@@ -14,7 +14,7 @@ import {
 } from './utils/timestamp'
 
 /* @vue/component */
-export default CalendarIntervals.extend({
+export default CalendarScheduler.extend({
   name: 'q-calendar-scheduler',
 
   directives: { Resize },
@@ -30,9 +30,6 @@ export default CalendarIntervals.extend({
       return {
         'q-calendar-scheduler': true
       }
-    },
-    bodyHeight () {
-      return this.resources.length * this.parsedIntervalHeight
     }
   },
 
@@ -66,21 +63,9 @@ export default CalendarIntervals.extend({
       return area && pane ? (area.offsetWidth - pane.offsetWidth) : 0
     },
 
-    getScopeForSlot (timestamp, idx, resource) {
-      const scope = copyTimestamp(timestamp)
-      scope.resourceStartPos = this.resourceStartPos
-      if (idx !== void 0) {
-        scope.index = idx
-      }
-      if (resource !== void 0) {
-        scope.resource = resource
-      }
-      return scope
-    },
-
     resourceStartPos (resource, clamp = true) {
       const index = this.resource.indexOf(resource)
-      let y = index * this.parsedIntervalHeight
+      let y = index * this.parsedResourceHeight
 
       if (clamp) {
         if (y < 0) {
@@ -112,8 +97,8 @@ export default CalendarIntervals.extend({
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
       if (this.enableThemes === true) {
-        color = 'colorIntervalHeader'
-        backgroundColor = 'backgroundIntervalHeader'
+        color = 'colorSchedulerHeader'
+        backgroundColor = 'backgroundSchedulerHeader'
         colors = this.getThemeColors([color, backgroundColor])
         updateColors = this.setBothColors
       }
@@ -373,14 +358,14 @@ export default CalendarIntervals.extend({
     },
 
     __renderDayResource (h, resource, day, idx) {
-      const height = convertToUnit(this.intervalHeight)
-      const styler = this.intervalStyle || this.intervalStyleDefault
+      const height = convertToUnit(this.resourceHeight)
+      const styler = this.resourceStyle || this.resourceStyleDefault
       const slot = this.$scopedSlots.schedulerResource
       const scope = this.getScopeForSlot(day, idx, resource)
       let dragOver
 
       const data = {
-        key: idx,
+        key: resource.label + '-' + idx,
         staticClass: 'q-calendar-scheduler__day-resource',
         class: {
           'q-calendar-scheduler__day-resource--droppable': dragOver
@@ -397,7 +382,7 @@ export default CalendarIntervals.extend({
           },
           ondrop: (e) => {
             if (this.dropFunc !== void 0) {
-              this.dropFunc(e, resource, 'interval')
+              this.dropFunc(e, resource, 'resource')
             }
           }
         }
@@ -412,15 +397,15 @@ export default CalendarIntervals.extend({
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
       if (this.enableThemes === true) {
-        color = 'colorIntervalBody'
-        backgroundColor = 'backgroundIntervalBody'
+        color = 'colorSchedulerBody'
+        backgroundColor = 'backgroundSchedulerBody'
         colors = this.getThemeColors([color, backgroundColor])
         updateColors = this.setBothColors
       }
 
       const data = {
         staticClass: 'q-calendar-scheduler__resources-body',
-        on: this.getDefaultMouseEventHandlers(':interval', e => {
+        on: this.getDefaultMouseEventHandlers(':resource', e => {
           return this.getTimestampAtEvent(e, this.parsedStart)
         })
       }
@@ -433,16 +418,16 @@ export default CalendarIntervals.extend({
     },
 
     __renderResourceLabel (h, resource) {
-      const slot = this.$scopedSlots.schedulerResourcesInterval
+      const slot = this.$scopedSlots.schedulerResourcesLabel
       const scope = resource
-      const height = convertToUnit(this.intervalHeight)
+      const height = convertToUnit(this.resourceHeight)
       const label = resource.label
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
       if (this.enableThemes === true) {
-        color = 'colorIntervalText'
-        backgroundColor = 'backgroundIntervalText'
+        color = 'colorSchedulerText'
+        backgroundColor = 'backgroundSchedulerText'
         colors = this.getThemeColors([color, backgroundColor])
         updateColors = this.setBothColors
       }

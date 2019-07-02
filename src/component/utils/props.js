@@ -102,7 +102,32 @@ export default {
     showDayOfYearLabel: Boolean
   },
   scheduler: {
-    resources: Array
+    resources: Array,
+    maxDays: {
+      type: Number,
+      default: 7
+    },
+    resourceHeight: {
+      type: [Number, String],
+      default: 70,
+      validator: validateNumber
+    },
+    resourceStyle: {
+      type: Function,
+      default: null
+    },
+    columnHeaderBefore: Boolean,
+    columnHeaderAfter: Boolean,
+    columnCount: {
+      type: [Number, String],
+      default: 1,
+      validator: validateNumber
+    },
+    columnIndexStart: {
+      type: [Number, String],
+      default: 0,
+      validator: validateNumber
+    }
   },
   calendar: {
     view: {

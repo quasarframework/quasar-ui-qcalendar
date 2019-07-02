@@ -106,7 +106,7 @@
       </div>
     </div>
     <div class="col-12 q-px-md q-pb-sm">
-      <span class="text-body2" >Interval height (daily, scheduler)</span>
+      <span class="text-body2" >Interval height (daily)</span>
       <q-slider
         v-model="intervalHeight"
         :min="20"
@@ -123,6 +123,16 @@
         :max="200"
         label
         :label-value="dayHeight + 'px'"
+      />
+    </div>
+    <div class="col-12 q-px-md q-pb-sm">
+      <span class="text-body2" >Resource height (scheduler)</span>
+      <q-slider
+        v-model="resourceHeight"
+        :min="20"
+        :max="100"
+        label
+        :label-value="resourceHeight + 'px'"
       />
     </div>
     <q-toggle
@@ -309,6 +319,14 @@ export default {
       },
       set (height) {
         this.$store.commit('calendar/intervalHeight', height)
+      }
+    },
+    resourceHeight: {
+      get () {
+        return this.$store.state.calendar.resourceHeight
+      },
+      set (height) {
+        this.$store.commit('calendar/resourceHeight', height)
       }
     },
     dayHeight: {

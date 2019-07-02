@@ -52,6 +52,9 @@ export const intervalRangeStep = (state, step) => {
 export const intervalHeight = (state, height) => {
   state.intervalHeight = height
 }
+export const resourceHeight = (state, height) => {
+  state.resourceHeight = height
+}
 export const dayHeight = (state, height) => {
   state.dayHeight = height
 }
