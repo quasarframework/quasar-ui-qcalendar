@@ -387,16 +387,17 @@ TODO
 | --- | --- | --- |
 | change | { start, end } | |
 | input | YYYY-mm-dd | |
-| click:context |  | |
-| contextmenu:context |  | |
-| mousedown:context |  | |
-| mouseup:context |  | |
-| mouseenter:context |  | |
-| mouseleave:context |  | |
-| mousemove:context |  | |
-| touchstart:context |  | |
-| touchend:context |  | |
-| touchmove:context |  | |
+| moved |  | |
+| click:`context` |  | |
+| contextmenu:`context` |  | |
+| mousedown:`context` |  | |
+| mouseup:`context` |  | |
+| mouseenter:`context` |  | |
+| mouseleave:`context` |  | |
+| mousemove:`context` |  | |
+| touchstart:`context` |  | |
+| touchend:`context` |  | |
+| touchmove:`context` |  | |
 
 `context` can be one of the following:
 1. date

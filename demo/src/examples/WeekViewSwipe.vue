@@ -5,7 +5,7 @@
     view="week"
     locale="en-us"
     v-touch-swipe.mouse.left.right="handleSwipe"
-    :animated="true"
+    animated
     transition-prev="slide-right"
     transition-next="slide-left"
     style="height: 400px;"

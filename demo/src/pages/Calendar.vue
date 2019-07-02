@@ -154,7 +154,7 @@ Duration:   {{ event.duration }}
         v-model="selectedDate"
         :locale="locale"
         :maxDays="maxDays"
-        :animated="true"
+        animated
         transition-prev="slide-right"
         transition-next="slide-left"
         :dragOverFunc="onDragOver"
@@ -189,7 +189,6 @@ Duration:   {{ event.duration }}
         dayPadding="35px 2px"
       >
         <template v-slot:day="{ date }">
-          <!-- <template v-for="(event, index) in eventsMap[date]"> -->
           <template v-for="(event, index) in getEvents(date)">
             <q-badge
               :key="index"

@@ -68,6 +68,12 @@
       <p>The example below is setting the <code class="q-markdown--token">interval-start</code> to <code class="q-markdown--token">8</code>, the default is <code class="q-markdown--token">0</code>. It is a good idea to also adjust the interval-count so that extra intervals are not displayed. In this case, the <code class="q-markdown--token">interval-count</code> is set to <code class="q-markdown--token">10</code> so the intervals displayed are from 08:00-18:00.</p>
       <example-card title="Day View - Interval Start" name="DayViewIntervalStart" :tag-parts="getTagParts(require('!!raw-loader!../examples/DayViewIntervalStart.vue').default)" />
 
+      <example-title title="Previous/Next" />
+      <example-card title="Day View - Prev/Next" name="DayViewPrevNext" :tag-parts="getTagParts(require('!!raw-loader!../examples/DayViewPrevNext.vue').default)" />
+      <example-card title="Week View - Prev/Next" name="WeekViewPrevNext" :tag-parts="getTagParts(require('!!raw-loader!../examples/WeekViewPrevNext.vue').default)" />
+      <example-card title="Month View - Prev/Next" name="MonthViewPrevNext" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewPrevNext.vue').default)" />
+      <example-card title="Scheduler View - Prev/Next" name="SchedulerViewPrevNext" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewPrevNext.vue').default)" />
+
       <example-title title="Swipe Navigation" />
       <p>For swipe support, don't forget to add the <code class="q-markdown--token">TouchSwipe</code> directive to your <code class="q-markdown--token">quasar.conf.js</code>.</p>
       <example-card title="Day View - Swipe" name="DayViewSwipe" :tag-parts="getTagParts(require('!!raw-loader!../examples/DayViewSwipe.vue').default)" />
@@ -89,6 +95,12 @@
       <example-card title="Day View - Column Header Count" name="DayViewColumnHeaderCount" :tag-parts="getTagParts(require('!!raw-loader!../examples/DayViewColumnHeaderCount.vue').default)" />
       <p>And finally, if you wanted the ability to page through a large number of resources, you can set the <code class="q-markdown--token">column-index-start</code> to create a paging effect.</p>
       <example-card title="Day View - Column Header Count (Paged)" name="DayViewColumnHeaderCountPaging" :tag-parts="getTagParts(require('!!raw-loader!../examples/DayViewColumnHeaderCountPaging.vue').default)" />
+
+      <example-title title="Working with Slots" />
+      <example-card title="Day View - Slots" name="DayViewSlots" :tag-parts="getTagParts(require('!!raw-loader!../examples/DayViewSlots.vue').default)" />
+      <example-card title="Week View - Slots" name="WeekViewSlots" :tag-parts="getTagParts(require('!!raw-loader!../examples/WeekViewSlots.vue').default)" />
+      <example-card title="Month View - Slots" name="MonthViewSlots" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSlots.vue').default)" />
+
     </div>
   </hero>
 </template>
@@ -171,6 +183,12 @@ export default {
     this.addToToc('Day View - Interval Minutes (15)', 2)
     this.addToToc('Day View - Interval Start', 2)
 
+    this.addToToc('Previous/Next')
+    this.addToToc('Day View - Prev/Next', 2)
+    this.addToToc('Week View - Prev/Next', 2)
+    this.addToToc('Month View - Prev/Next', 2)
+    this.addToToc('Scheduler View - Prev/Next', 2)
+
     this.addToToc('Swipe Navigation')
     this.addToToc('Day View - Swipe', 2)
     this.addToToc('Week View - Swipe', 2)
@@ -184,6 +202,11 @@ export default {
     this.addToToc('Day View - Column Count', 2)
     this.addToToc('Day View - Column Header Count', 2)
     this.addToToc('Day View - Column Header Count (Paged)', 2)
+
+    this.addToToc('Working with Slots')
+    this.addToToc('Day View - Slots', 2)
+    this.addToToc('Week View - Slots', 2)
+    this.addToToc('Month View - Slots', 2)
 
     this.toc = this.tempToc
   },
