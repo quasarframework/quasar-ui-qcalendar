@@ -7,8 +7,7 @@ import {
   parseTime,
   copyTimestamp,
   updateMinutes,
-  createDayList,
-  createIntervalList,
+  createDayList
 } from '../utils/timestamp'
 
 export default CalendarBase.extend({
@@ -24,7 +23,7 @@ export default CalendarBase.extend({
     },
     bodyHeight () {
       if (this.resources && this.resources.length > 0) {
-        return this.resources.length * this.parsedIntervalHeight
+        return this.resources.length * this.parsedResourceHeight
       }
       return 0
     },
@@ -67,41 +66,41 @@ export default CalendarBase.extend({
         scope.resource = resource
       }
       return scope
-    },
-    scrollToTime (time) {
-      const y = this.timeStartPos(time)
-      const pane = this.$refs.scrollArea
-
-      if (y === false || !pane) {
-        return false
-      }
-
-      pane.scrollTop = y
-
-      return true
-    },
-    timeDurationHeight (minutes) {
-      return minutes / this.parsedIntervalMinutes * this.parsedIntervalHeight
-    },
-    timeStartPos (time, clamp = true) {
-      const minutes = parseTime(time)
-      if (minutes === false) return false
-
-      const min = this.startMinute
-      const gap = this.parsedIntervalCount * this.parsedIntervalMinutes
-      const delta = (minutes - min) / gap
-      let y = delta * this.bodyHeight
-
-      if (clamp) {
-        if (y < 0) {
-          y = 0
-        }
-        if (y > this.bodyHeight) {
-          y = this.bodyHeight
-        }
-      }
-
-      return y
     }
+    // scrollToTime (time) {
+    //   const y = this.timeStartPos(time)
+    //   const pane = this.$refs.scrollArea
+
+    //   if (y === false || !pane) {
+    //     return false
+    //   }
+
+    //   pane.scrollTop = y
+
+    //   return true
+    // },
+    // timeDurationHeight (minutes) {
+    //   return minutes / this.parsedIntervalMinutes * this.parsedIntervalHeight
+    // },
+    // timeStartPos (time, clamp = true) {
+    //   const minutes = parseTime(time)
+    //   if (minutes === false) return false
+
+    //   const min = this.startMinute
+    //   const gap = this.parsedIntervalCount * this.parsedIntervalMinutes
+    //   const delta = (minutes - min) / gap
+    //   let y = delta * this.bodyHeight
+
+    //   if (clamp) {
+    //     if (y < 0) {
+    //       y = 0
+    //     }
+    //     if (y > this.bodyHeight) {
+    //       y = this.bodyHeight
+    //     }
+    //   }
+
+    //   return y
+    // }
   }
 })
