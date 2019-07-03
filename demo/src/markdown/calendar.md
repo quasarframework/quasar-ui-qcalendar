@@ -405,6 +405,7 @@ TODO
 3. interval
 4. time
 5. resource (for Scheduler view only)
+6. resource:day (for Scheduler view only)
 
 ## Vue Methods
 | Vue Method | Args | Description |

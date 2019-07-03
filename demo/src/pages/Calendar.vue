@@ -186,6 +186,8 @@ Duration:   {{ event.duration }}
         @click:time="addEventMenu"
         @click:day="addEventMenu"
         @click:week="addEventMenu"
+        @click:resource="resourceClicked"
+        @click:resource:day="resourceDayClicked"
         dayPadding="35px 2px"
       >
         <template #day="{ date }">
@@ -600,7 +602,16 @@ export default {
     onDateChanged (date) {
       this.calendarView = 'day'
     },
+    resourceClicked (resource) {
+      console.log('resource clicked:', resource)
+    },
+    resourceDayClicked (resource) {
+      console.log('resource:day clicked:', resource)
+    },
     addEventMenu (day, type) {
+      if (this.calendarView === 'scheduler' || this.calendarView === 'week-scheduler' || this.calendarView === 'month-scheduler') {
+        return
+      }
       this.resetForm()
       this.contextDay = { ...day }
       let timestamp
