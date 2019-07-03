@@ -32,8 +32,8 @@ export default {
         { label: 'Susan' },
         { label: 'Olivia' },
         { label: 'Board Room' },
-        { label: 'Conference Room 1' },
-        { label: 'Conference Room 2' }
+        { label: 'Room-1' },
+        { label: 'Room-2' }
       ]
     }
   },

@@ -9,12 +9,11 @@
           leaf-color="#a0a0a0"
           leaf-position="bottom"
           decoration="rounded-out"
-          class="fit"
         >
           <q-toolbar-title
           class="example-title"
           style="padding: 5px 20px;"
-          @click="copyHeading(slugifiedTitle)">{{ title }}</q-toolbar-title>
+          @click="copyHeading(slugifiedTitle)"><span class="ellipsis">{{ title }}</span></q-toolbar-title>
         </q-ribbon>
       </q-toolbar>
       <q-separator />
@@ -127,7 +126,11 @@ export default {
 
     DayViewSlots: () => import('../examples/DayViewSlots'),
     WeekViewSlots: () => import('../examples/WeekViewSlots'),
-    MonthViewSlots: () => import('../examples/MonthViewSlots')
+    MonthViewSlots: () => import('../examples/MonthViewSlots'),
+    SchedulerViewSlotResourcesHeader: () => import('../examples/SchedulerViewSlotResourcesHeader'),
+    SchedulerViewSlotDayHeader: () => import('../examples/SchedulerViewSlotDayHeader'),
+    SchedulerViewSlotResourceDay: () => import('../examples/SchedulerViewSlotResourceDay'),
+    SchedulerViewSlotResource: () => import('../examples/SchedulerViewSlotResource')
   },
 
   props: {

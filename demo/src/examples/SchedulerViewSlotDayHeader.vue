@@ -3,17 +3,22 @@
     v-model="selectedDate"
     view="scheduler"
     :resources="resources"
-    :resource-height="50"
     locale="en-us"
-    style="height: 400px;"
-  />
+    style="height: 500px;"
+  >
+    <template #scheduler-day-header="{ day }">
+      <div class="row justify-center items-center">
+        <q-btn class="fit">Day: {{ day.day }}</q-btn>
+      </div>
+    </template>
+  </q-calendar>
 </template>
 
 <script>
 export default {
   data () {
     return {
-      selectedDate: '2019-04-01',
+      selectedDate: '2019-04-08',
       resources: [
         { label: 'John' },
         { label: 'Mary' },
