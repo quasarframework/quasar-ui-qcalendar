@@ -100,6 +100,14 @@
       <example-card title="Day View - Slots" name="DayViewSlots" :tag-parts="getTagParts(require('!!raw-loader!../examples/DayViewSlots.vue').default)" />
       <example-card title="Week View - Slots" name="WeekViewSlots" :tag-parts="getTagParts(require('!!raw-loader!../examples/WeekViewSlots.vue').default)" />
       <example-card title="Month View - Slots" name="MonthViewSlots" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSlots.vue').default)" />
+      <p>Below, the slot receives an array of timestamps for the days that are being displayed.</p>
+      <example-card title="Scheduler View - Slots (scheduler-resources-header)" name="SchedulerViewSlotResourcesHeader" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewSlotResourcesHeader.vue').default)" />
+      <p>Below, the slot receives the timestamp for the day being displayed.</p>
+      <example-card title="Scheduler View - Slots (scheduler-day-header)" name="SchedulerViewSlotDayHeader" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewSlotDayHeader.vue').default)" />
+      <p>Below, the slot receives the timestamp for the day being displayed, an index, and the resource.</p>
+      <example-card title="Scheduler View - Slots (scheduler-resource-day)" name="SchedulerViewSlotResourceDay" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewSlotResourceDay.vue').default)" />
+      <p>Below, the slot receives the resource to be displayed.</p>
+      <example-card title="Scheduler View - Slots (scheduler-resource)" name="SchedulerViewSlotResource" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewSlotResource.vue').default)" />
 
     </div>
   </hero>
@@ -207,6 +215,10 @@ export default {
     this.addToToc('Day View - Slots', 2)
     this.addToToc('Week View - Slots', 2)
     this.addToToc('Month View - Slots', 2)
+    this.addToToc('Scheduler View - Slots (scheduler-resources-header)', 2)
+    this.addToToc('Scheduler View - Slots (scheduler-day-header)', 2)
+    this.addToToc('Scheduler View - Slots (scheduler-resource-day)', 2)
+    this.addToToc('Scheduler View - Slots (scheduler-resource)', 2)
 
     this.toc = this.tempToc
   },
