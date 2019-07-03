@@ -9,9 +9,6 @@ import CalendarScheduler from './mixins/calendar-scheduler'
 
 // Util
 import { convertToUnit } from './utils/helpers'
-// import {
-//   copyTimestamp
-// } from './utils/timestamp'
 
 /* @vue/component */
 export default CalendarScheduler.extend({
