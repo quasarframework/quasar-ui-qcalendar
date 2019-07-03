@@ -9,9 +9,6 @@ import CalendarScheduler from './mixins/calendar-scheduler'
 
 // Util
 import { convertToUnit } from './utils/helpers'
-// import {
-//   copyTimestamp
-// } from './utils/timestamp'
 
 /* @vue/component */
 export default CalendarScheduler.extend({
@@ -322,6 +319,7 @@ export default CalendarScheduler.extend({
     __renderDay (h, day, idx) {
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
+      let resource = this.resources && this.resources[idx] ? this.resources[idx] : void 0
       if (this.enableThemes === true) {
         if (day.past === true) {
           color = 'colorBodyPast'
@@ -341,8 +339,8 @@ export default CalendarScheduler.extend({
         key: day.date + (idx !== void 0 ? `:${idx}` : ''),
         staticClass: 'q-calendar-scheduler__day',
         class: this.getRelativeClasses(day),
-        on: this.getDefaultMouseEventHandlers(':time', e => {
-          return this.getScopeForSlot(this.getTimestampAtEvent(e, day), idx)
+        on: this.getDefaultMouseEventHandlers(':resource:day', e => {
+          return this.getScopeForSlot(this.getTimestampAtEvent(e, day), idx, resource)
         })
       }), [
         ...this.__renderDayResources(h, day, idx)
@@ -400,10 +398,7 @@ export default CalendarScheduler.extend({
       }
 
       const data = {
-        staticClass: 'q-calendar-scheduler__resources-body',
-        on: this.getDefaultMouseEventHandlers(':resource', e => {
-          return this.getTimestampAtEvent(e, this.parsedStart)
-        })
+        staticClass: 'q-calendar-scheduler__resources-body'
       }
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), data), this.__renderResourceLabels(h))
@@ -436,7 +431,8 @@ export default CalendarScheduler.extend({
         staticClass: 'q-calendar-scheduler__resource',
         style: {
           height
-        }
+        },
+        on: this.getDefaultMouseEventHandlers(':resource', e => scope)
       }, [
         slot ? slot(scope) : h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
           staticClass: 'q-calendar-scheduler__resource-text'

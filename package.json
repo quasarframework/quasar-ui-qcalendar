@@ -1,7 +1,7 @@
 {
   "name": "@quasar/quasar-app-extension-qcalendar",
-  "version": "1.0.0-alpha.21",
-  "description": "QCalendar Quasar app extension",
+  "version": "1.0.0-alpha.22",
+  "description": "QCalendar - Embed Calendars in your Quasar App",
   "author": "Jeff Galbraith <jeff@quasar.dev>",
   "main": "src/index.js",
   "scripts": {

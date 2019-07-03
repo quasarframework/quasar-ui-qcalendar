@@ -6,8 +6,8 @@ import props from '../utils/props'
 import {
   // parseTime,
   copyTimestamp,
-  updateMinutes,
-  createDayList
+  createDayList,
+  updateRelative
 } from '../utils/timestamp'
 
 export default CalendarBase.extend({
@@ -44,17 +44,7 @@ export default CalendarBase.extend({
     },
     getTimestampAtEvent (e, day) {
       const timestamp = copyTimestamp(day)
-      const bounds = (e.currentTarget).getBoundingClientRect()
-      const baseMinutes = this.startMinute
-      const touchEvent = e
-      const mouseEvent = e
-      const touches = touchEvent.changedTouches || touchEvent.touches
-      const clientY = touches && touches[0] ? touches[0].clientY : mouseEvent.clientY
-      const addIntervals = (clientY - bounds.top) / this.parsedIntervalHeight
-      const addMinutes = Math.floor(addIntervals * this.parsedIntervalMinutes)
-      const minutes = baseMinutes + addMinutes
-
-      return updateMinutes(timestamp, minutes, this.times.now)
+      return updateRelative(timestamp, this.times.now, false)
     },
     getScopeForSlot (timestamp, idx, resource) {
       const scope = {}
