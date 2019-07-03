@@ -320,9 +320,6 @@ export default CalendarScheduler.extend({
     },
 
     __renderDay (h, day, idx) {
-      const slot = this.$scopedSlots['scheduler-day-body']
-      const scope = this.getScopeForSlot(day, idx)
-
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
       if (this.enableThemes === true) {
@@ -348,8 +345,7 @@ export default CalendarScheduler.extend({
           return this.getScopeForSlot(this.getTimestampAtEvent(e, day), idx)
         })
       }), [
-        ...this.__renderDayResources(h, day, idx),
-        slot ? slot(scope) : ''
+        ...this.__renderDayResources(h, day, idx)
       ])
     },
 
@@ -360,7 +356,7 @@ export default CalendarScheduler.extend({
     __renderDayResource (h, resource, day, idx) {
       const height = convertToUnit(this.resourceHeight)
       const styler = this.resourceStyle || this.resourceStyleDefault
-      const slot = this.$scopedSlots['scheduler-resource']
+      const slot = this.$scopedSlots['scheduler-resource-day']
       const scope = this.getScopeForSlot(day, idx, resource)
       let dragOver
 
@@ -418,8 +414,11 @@ export default CalendarScheduler.extend({
     },
 
     __renderResourceLabel (h, resource, idx) {
-      const slot = this.$scopedSlots['scheduler-resource-info']
-      const scope = { ...resource, __index: idx }
+      const slot = this.$scopedSlots['scheduler-resource']
+      const scope = {
+        resource: resource,
+        index: idx
+      }
       const height = convertToUnit(this.resourceHeight)
       const label = resource.label
 

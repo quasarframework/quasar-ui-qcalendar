@@ -57,8 +57,8 @@ export default CalendarBase.extend({
       return updateMinutes(timestamp, minutes, this.times.now)
     },
     getScopeForSlot (timestamp, idx, resource) {
-      const scope = copyTimestamp(timestamp)
-      scope.resourceStartPos = this.resourceStartPos
+      const scope = {}
+      scope.day = copyTimestamp(timestamp)
       if (idx !== void 0) {
         scope.index = idx
       }
@@ -67,40 +67,5 @@ export default CalendarBase.extend({
       }
       return scope
     }
-    // scrollToTime (time) {
-    //   const y = this.timeStartPos(time)
-    //   const pane = this.$refs.scrollArea
-
-    //   if (y === false || !pane) {
-    //     return false
-    //   }
-
-    //   pane.scrollTop = y
-
-    //   return true
-    // },
-    // timeDurationHeight (minutes) {
-    //   return minutes / this.parsedIntervalMinutes * this.parsedIntervalHeight
-    // },
-    // timeStartPos (time, clamp = true) {
-    //   const minutes = parseTime(time)
-    //   if (minutes === false) return false
-
-    //   const min = this.startMinute
-    //   const gap = this.parsedIntervalCount * this.parsedIntervalMinutes
-    //   const delta = (minutes - min) / gap
-    //   let y = delta * this.bodyHeight
-
-    //   if (clamp) {
-    //     if (y < 0) {
-    //       y = 0
-    //     }
-    //     if (y > this.bodyHeight) {
-    //       y = this.bodyHeight
-    //     }
-    //   }
-
-    //   return y
-    // }
   }
 })
