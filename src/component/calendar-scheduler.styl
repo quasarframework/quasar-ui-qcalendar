@@ -1,3 +1,5 @@
+@import './calendar-variables'
+
 .q-calendar-scheduler
   background-color $grey-1
   .q-calendar-scheduler__resources-head
@@ -66,7 +68,7 @@
     display flex
     overflow hidden
     vertical-align bottom
-    width 100px
+    width $resources-body-width
     color $grey-8
     border-bottom $grey-4 1px solid
 
@@ -147,7 +149,7 @@
   &__resources-body
     flex none
     user-select none
-    width 100px
+    width $resources-body-width
 
   &__resource
     display flex

@@ -1,15 +1,4 @@
-$day-label = 24px
-$day-label-radius = 50%
-$border-color = $grey-4
-$day-past-color = $grey-13
-$day-future-color = $grey-9
-$day-current-color = $grey-9
-$day-past-color = $grey-6
-$day-outside-color = $grey-7
-$outside-background-color = $grey-3
-$background-color = $grey-1
-$work-week-width = 48px
-$work-week-color = $grey-6
+@import './calendar-variables'
 
 .q-calendar-weekly
   background-color $background-color
@@ -97,7 +86,7 @@ $work-week-color = $grey-6
     width  $work-week-width
     user-select none
     padding 0 4px
-    font-size 2rem
+    font-size $work-week-font-size
     align-items center
 
   &__day
