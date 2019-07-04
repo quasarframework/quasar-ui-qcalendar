@@ -1,6 +1,7 @@
 QCalendar
 ===
 
+> QCalendar is now in `beta` status.
 > Please note, this is currently a work-in-progress (WIP).
 
 
@@ -18,12 +19,12 @@ This is the true power of QCalendar.
 
 # Features
 - Show month, week, day, contiguous days (ex: 3 days at a time)
+- Resource scheduler
 - Optional drag and drop support (including mobile)
 - Automatic localization / internationalization
 - Responsive flex grid layout
 - No external dependencies (momentjs, jQuery, etc), other than Quasar
-- User events support (date, day, interval, time)
-- Resource scheduler
+- User events support (date, day, interval, time, resource)
 - Define any day as beginning of week
 - Show only certain days of the week (good for work week days)
 - Workweek number support
@@ -32,8 +33,8 @@ This is the true power of QCalendar.
 - Easy to customize with Vue slots
 
 ## QCalendar is not...
-- An event management system. However, you can easily do this in devland with QCalendar's slots.
-- A navigation provider (next, previous, today). However, you can easily do this in devland with QCalendar's methods.
+- An event management system. However, QCalendar supports everything you need to create an event/reminder management system using slots (check out the interactive demo).
+- An interactive navigation provider (next, previous, today). However, you can easily do this in devland with QCalendar's methods.
 - Currently there is no Agenda view, although it is up for consideration.
 - Only the Gregorian calendar is supported.
 
@@ -78,21 +79,21 @@ First and foremost, the native date format used internally, and with the v-model
 
 The default locale of QCalendar is **en-us**. This can easily be changed via the `locale` property. Any area of QCalendar that displays text and numbers is locale-aware.
 
-You will see a number of images below which have the QCalendar component, but the title bar above all images is not part QCalendar. This is something a developer would provide in devland.
+You will see a number of images below which have the QCalendar component, but the navigation bar above all images is not part of QCalendar. Navigation is something a developer would provide in devland with QCalendar methods. This gives you total control over look-and-feel of your own navigation bar.
 
 ![WeekView](statics/qcalendar-toolbar.png "Week View" =800x800)
 
 You would need to build out your own way of allowing the User to interact with QCalendar (if that is what you wish). Or, keep a fixed calendar.
 
-# Anatomy of a calendar
+# QCalendar views
 
-A calendar is made from two distict components: day and month views. All other views derive from these two views.
+QCalendar is made from three distict components: day, month and scheduler views. All other views derive from these three views.
 
 ## Day view
 
 ![DayView](statics/qcalendar-day-view.png "Day View" =800x800)
 
-The day view is for displaying time intervals on the left side and 1 or more days in a contiguous fashion on the right side. The top-left portion is the `interval header`. The intervals themselves comprise of the `interval body` and the text within that is the `interval label`. To the right, is one or more days. It comprises of the `day header` which contains `day header weekday` and `day header label`. Right below that is the `day header content`. Below the day header, is the `day intervals`.
+The `day` view is for displaying time intervals on the left side and 1 or more days in a contiguous fashion on the right side.
 
 When more than one day is displayed:
 
@@ -100,13 +101,13 @@ When more than one day is displayed:
 
 ## Custom Interval view
 
-The `custom-interval` view allows you to display as many days as specified by the property `maxDays`. This can get a bit busy if a large number of days are displayed and is only recommended for wide screens. The imnage below has `maxDays` set to 14. 
+The `custom-interval` view allows you to display as many days as specified by the property `max-days`. This can get a bit busy if a large number of days are displayed and is only recommended for wide screens. The image below has `max-days` set to 14. 
 
 ![CustomInterval](statics/qcalendar-custom-interval-view.png "Custom Interval" =800x800)
 
 ## Month Interval view
 
-The `month-interval` view allows you to display all days in a month while in the interval mode. This can get a bit busy and is only recommended for wide screens.
+The `month-interval` view allows you to display all days in a month while in the interval mode. This can get a bit busy and is only recommended for wide screens. The difference between the `month-interval` view and the `custom-interval` view is that the `month-interval` view has special handling for month length and will only go as many days as there are in the displayed month.
 
 ![MonthInterval](statics/qcalendar-month-interval-view.png "Month Interval" =800x800)
 
@@ -114,22 +115,39 @@ The `month-interval` view allows you to display all days in a month while in the
 
 ![MonthView](statics/qcalendar-month-view.png "Month View" =800x800)
 
-The month view is for displaying a finite number of weeks according to the calendar time which is the currently displayed month. For time periods which fall outside of the current month, yet are still displayed (beginning and ending days of the month view), these are known as the `outside` days. The current date is known as the `current` day (obviously). Days leading up to the current date are known as `past` days and days that come after the current date are known as `future` days.
+The `month` view is for displaying a finite number of weeks according to the calendar time which is the currently displayed month. 
 
-The weekly view comprises of a header `weekly header` which is segmented by a `weekday header` for each day of the week that is to be displayed. For each day in the display this is called the `weekly day`, which can have a sub-nature of `outside`, `past`, `current` or `future`. The text (day of the month) displayed is the `weekly day label`.
+> For time periods which fall outside of the current month, yet are still displayed (beginning and ending days of the month view), these are known as the `outside` days. The current date is known as the `current` day (obviously). Days leading up to the current date are known as `past` days and days that come after the current date are known as `future` days.
 
 ## Scheduler view
 
 ![SchedulerView](statics/qcalendar-scheduler-view.png "Scheduler View" =800x800)
 
-The scheduler view is for displaying days with resources on the left side. This allows you to present data for each resource. Where a resource could be a person, room, etc.
+The `scheduler` view is for displaying days with resources on the left side. This allows you to present data for each resource. Where a resource could be a person, room, etc.
 
 To use the scheduler, you need to use the `resources` property, which currently is an array of objects, containing a single key `label`. To change the number of days displayed, use the `max-days` property. To change the distance between each resource, use the `resource-height` property.
 
 
 ## View types
 
-QCalendar has several `view` types available. They are: `month`, `week`, `day`, `2day`, `3day`, `4day`, `5day`, `6day`, `custom-interval`, `month-interval`, `scheduler`, `week-scheduler` and `month-scheduler`. It's important to know that all `view` types are linear in nature. For instance, `3day` will show three days and `next()` will show the next 3 days. You can switch to a `view` type on a mobile based on the current width of the screen. For portrait mode, you could change the `view` type to `2day` and for landscape mode `4day`. When `next()` or `prev()` are called the next (or previous) 2 days (for protrait) or 4 days (for landscape) would be displayed. Monthly views are also linear, but respect the number of days within the month that is to be displayed.
+QCalendar has several `view` types available. They are: 
+1. `month`
+2. `week`
+3. `day`
+4. `2day`
+5. `3day`
+6. `4day`
+7. `5day`
+8. `6day`
+9. `custom-interval`
+10. `month-interval`
+11. `scheduler`
+12. `week-scheduler`
+13. `month-scheduler`
+
+It's important to know that all `view` types are linear in nature. For instance, `3day` will show three days and `next()` will show the next 3 days. A good idea could be to switch to a `view` type on a mobile based on the current width of the screen. For portrait mode, you could change the `view` type to `2day` and for landscape mode `4day`. When `next()` or `prev()` are called the next (or previous) 2 days (for protrait) or 4 days (for landscape) would be displayed.
+
+Monthly views are also linear, but respect the number of days within the month that is to be displayed.
 
 ## Weekday filtering
 
@@ -141,21 +159,21 @@ If the desire was to display only the work week (meaning Monday to Friday), the 
 
 ![Month5day](statics/qcalendar-month-view-5day.png "Month 5 day" =800x800)
 
-As well, if the goal was to display Monday as the first day of the week (as does the German calendar), the `weekdays` property would be set like this: `[1, 2, 3, 4, 5, 6, 0]`.
+As well, if the goal was to display Monday as the first day of the week (as does the German, and other, calendars), the `weekdays` property would be set like this: `[1, 2, 3, 4, 5, 6, 0]`.
 
 ![WeekMondayFirstDay](statics/qcalendar-week-view-monday-first-day.png "Week - Monday First Day" =800x800)
 
 ![MonthMondayFirstDay](statics/qcalendar-month-view-monday-first-day.png "Month - Monday First Day" =800x800)
 
 **Expected Results**
-If you are trying to do a 5-day week always use the `week` and `month` views to do the filtering. The `2day` to `5day` filters are linear and won't give you the expected results.
+If you are trying to do a 5-day week always use the `week`, `month`, `month-interval`, `week-scheduler` or `month-scheduler` views to do the filtering (basically views that respect the length of a week or month). The `2day` to `5day` as well as `custom-interval` and `scheduler` views are linear and won't give you the expected results.
 
 This image has set up a 5-day work week (`[1, 2, 3, 4, 5]`) incorrectly using a `5day` filter.
 
 ![Incorrect5Day](statics/qcalendar-5day-done-incorrectly.png "5 Day - Set up incorrectly" =800x800)
 
 ## Workweek numbers
-QCalendar supports workweek numbers (also known as [ISO week date](https://en.wikipedia.org/wiki/ISO_week_date)). That is, the numbered week from the start of the year.
+QCalendar supports workweek numbers (also known as [ISO week date](https://en.wikipedia.org/wiki/ISO_week_date)). That is, the numbered week from the start of the year. This is only available in `month` view by setting the `workweek` property to true.
 
 ![WorkWeek](statics/qcalendar-workweeks.png "Workweek or ISO Week Date" =800x800)
 
@@ -169,7 +187,7 @@ Navigating QCalendar can be done in several ways:
 4. Calling the `move()` function
 5. Calling the `updateCurrent()` function
 
-Out of this, the most common would be to use the `next()` and `prev()` functions.
+Out of this, the most common would be to use the `value` (v-model) property and the `prev()` and `next()` functions.
 
 ```html
 <q-calendar ref="calendar" ...
@@ -378,6 +396,7 @@ TODO
 | | | | **Scheduler properties** |
 | resources | Array | Scheduler  | An array of objects with a single key of `label`. You can add other keys if you like, which will be passed in on the appropriate slots |
 | resource-height | [Number, String] | Day | The maximum height in pixels for the resource height<br>Default: 60 |
+| resource-width | [Number, String] | Day | The maximum width in pixels for the resource height |
 | | | | **Other properties** |
 | max-days | Number | Custom, Scheduler  | The maximum number of days to be displayed. Ignored for most other views<br>Default: 7 |
 
@@ -385,9 +404,9 @@ TODO
 ## Vue Events
 | Vue Event | Args | Description |
 | --- | --- | --- |
-| change | { start, end } | |
-| input | YYYY-mm-dd | |
-| moved |  | |
+| change | { start, end } | Emitted when there is a change. The data is starting and ending timestamps of the display. For example, if in `month` view, the `start` would contain timestamp for the 1st of the month and the `end` would contain the last day of the month |
+| input | YYYY-mm-dd | Emitted when the selected day changes |
+| moved |   |  |
 | click:`context` |  | |
 | contextmenu:`context` |  | |
 | mousedown:`context` |  | |
