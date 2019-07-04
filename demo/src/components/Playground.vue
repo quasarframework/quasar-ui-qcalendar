@@ -23,7 +23,7 @@
         class="full-width"
       ></q-btn>
       <div class="col-12 q-px-md q-pb-sm">
-        <span class="text-body2" >Max days (custom)</span>
+        <span class="text-body2" >Max days (custom, scheduler)</span>
         <q-slider
           v-model="maxDays"
           :min="1"
@@ -134,6 +134,16 @@
           :max="100"
           label
           :label-value="resourceHeight + 'px'"
+        />
+      </div>
+      <div class="col-12 q-px-md q-pb-sm">
+        <span class="text-body2" >Resource width (scheduler)</span>
+        <q-slider
+          v-model="resourceWidth"
+          :min="50"
+          :max="200"
+          label
+          :label-value="resourceWidth + 'px'"
         />
       </div>
       <q-toggle
@@ -328,6 +338,14 @@ export default {
       },
       set (height) {
         this.$store.commit('calendar/resourceHeight', height)
+      }
+    },
+    resourceWidth: {
+      get () {
+        return this.$store.state.calendar.resourceWidth
+      },
+      set (height) {
+        this.$store.commit('calendar/resourceWidth', height)
       }
     },
     dayHeight: {

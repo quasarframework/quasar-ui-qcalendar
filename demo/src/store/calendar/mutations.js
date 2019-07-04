@@ -55,6 +55,9 @@ export const intervalHeight = (state, height) => {
 export const resourceHeight = (state, height) => {
   state.resourceHeight = height
 }
+export const resourceWidth = (state, width) => {
+  state.resourceWidth = width
+}
 export const dayHeight = (state, height) => {
   state.dayHeight = height
 }

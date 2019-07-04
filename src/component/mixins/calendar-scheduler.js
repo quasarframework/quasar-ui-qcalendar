@@ -21,6 +21,9 @@ export default CalendarBase.extend({
     parsedResourceHeight () {
       return parseFloat(this.resourceHeight)
     },
+    parsedResourceWidth () {
+      return parseFloat(this.resourceWidth)
+    },
     bodyHeight () {
       if (this.resources && this.resources.length > 0) {
         return this.resources.length * this.parsedResourceHeight

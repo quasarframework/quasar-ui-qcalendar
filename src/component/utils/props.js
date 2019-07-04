@@ -112,6 +112,10 @@ export default {
       default: 70,
       validator: validateNumber
     },
+    resourceWidth: {
+      type: [Number, String],
+      validator: v => v === void 0 || validateNumber(v)
+    },
     resourceStyle: {
       type: Function,
       default: null

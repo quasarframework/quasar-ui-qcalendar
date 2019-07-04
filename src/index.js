@@ -14,6 +14,9 @@ const extendQuasarConf = function (conf) {
   conf.build.transpileDependencies.push(/quasar-app-extension-qcalendar[\\/]src/)
 
   // make sure qcalendar css goes through webpack to avoid ssr issues
+  conf.css.push('~@quasar/quasar-app-extension-qcalendar/src/component/calendar-variables.styl')
+  console.log(` App Extension (qcalendar) Info: 'Adding calendar-variables.styl css reference to your quasar.conf.js'`)
+
   conf.css.push('~@quasar/quasar-app-extension-qcalendar/src/component/calendar-daily.styl')
   console.log(` App Extension (qcalendar) Info: 'Adding calendar-daily.styl css reference to your quasar.conf.js'`)
 
@@ -26,7 +29,7 @@ const extendQuasarConf = function (conf) {
 
 module.exports = function (api) {
   // quasar compatibility check
-  api.compatibleWith('@quasar/app', '^1.0.0-rc.1')
+  api.compatibleWith('@quasar/app', '^1.0.0')
 
   // register JSON api
   // api.registerDescribeApi('QCalendar', './component/QCalendar.json')

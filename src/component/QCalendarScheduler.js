@@ -90,6 +90,7 @@ export default CalendarScheduler.extend({
 
     __renderHeadResources (h) {
       const slot = this.$scopedSlots['scheduler-resources-header']
+      const width = convertToUnit(this.resourceWidth)
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
@@ -101,7 +102,10 @@ export default CalendarScheduler.extend({
       }
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
-        staticClass: 'q-calendar-scheduler__resources-head q-calendar-scheduler__resources-head--text'
+        staticClass: 'q-calendar-scheduler__resources-head q-calendar-scheduler__resources-head--text',
+        style: {
+          width
+        }
       }), [
         slot ? slot(this.days) : ''
       ])
@@ -388,6 +392,7 @@ export default CalendarScheduler.extend({
     },
 
     __renderBodyResources (h) {
+      const width = convertToUnit(this.resourceWidth)
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
       if (this.enableThemes === true) {
@@ -398,7 +403,10 @@ export default CalendarScheduler.extend({
       }
 
       const data = {
-        staticClass: 'q-calendar-scheduler__resources-body'
+        staticClass: 'q-calendar-scheduler__resources-body',
+        style: {
+          width
+        }
       }
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), data), this.__renderResourceLabels(h))

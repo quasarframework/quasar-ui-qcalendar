@@ -15,10 +15,10 @@
   "dependencies": {
     "@quasar/extras": "^1.1.4",
     "drag-drop-touch": "^1.3.0",
-    "quasar": "^1.0.0-rc.5"
+    "quasar": "^1.0.3"
   },
   "devDependencies": {
-    "@quasar/app": "^1.0.0-rc.7",
+    "@quasar/app": "^1.0.1",
     "@quasar/quasar-app-extension-qcalendar": "../.",
     "@quasar/quasar-app-extension-qmarkdown": "^1.0.0-beta.13",
     "@quasar/quasar-app-extension-qscroller": "^1.0.0-alpha.7",

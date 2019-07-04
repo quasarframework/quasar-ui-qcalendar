@@ -17,6 +17,7 @@ export const intervalRange = (state) => state.intervalRange
 export const intervalRangeStep = (state) => state.intervalRangeStep
 export const intervalHeight = (state) => state.intervalHeight
 export const resourceHeight = (state) => state.resourceHeight
+export const resourceWidth = (state) => state.resourceWidth
 export const dayHeight = (state) => state.dayHeight
 export const enableThemes = (state) => state.enableThemes
 export const theme = (state) => state.theme

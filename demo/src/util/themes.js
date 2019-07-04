@@ -49,7 +49,14 @@ export default [
     colorIntervalBody: 'grey-2',
     backgroundIntervalBody: 'blue-grey-8',
     colorIntervalText: 'grey-2',
-    backgroundIntervalText: 'blue-grey-8'
+    backgroundIntervalText: 'blue-grey-8',
+    // scheduler body
+    colorSchedulerHeader: 'grey-2',
+    backgroundSchedulerHeader: 'blue-grey-8',
+    colorSchedulerBody: 'grey-2',
+    backgroundSchedulerBody: 'blue-grey-8',
+    colorSchedulerText: 'grey-2',
+    backgroundSchedulerText: 'blue-grey-8'
   },
   {
     name: 'teal',
@@ -98,7 +105,14 @@ export default [
     colorIntervalBody: 'grey-2',
     backgroundIntervalBody: 'teal-8',
     colorIntervalText: 'grey-2',
-    backgroundIntervalText: 'teal-8'
+    backgroundIntervalText: 'teal-8',
+    // scheduler body
+    colorSchedulerHeader: 'grey-2',
+    backgroundSchedulerHeader: 'teal-8',
+    colorSchedulerBody: 'grey-2',
+    backgroundSchedulerBody: 'teal-8',
+    colorSchedulerText: 'grey-2',
+    backgroundSchedulerText: 'teal-8'
   },
   {
     name: 'brown',
@@ -147,7 +161,14 @@ export default [
     colorIntervalBody: 'grey-2',
     backgroundIntervalBody: 'brown-8',
     colorIntervalText: 'grey-2',
-    backgroundIntervalText: 'brown-8'
+    backgroundIntervalText: 'brown-8',
+    // scheduler body
+    colorSchedulerHeader: 'grey-2',
+    backgroundSchedulerHeader: 'brown-8',
+    colorSchedulerBody: 'grey-2',
+    backgroundSchedulerBody: 'brown-8',
+    colorSchedulerText: 'grey-2',
+    backgroundSchedulerText: 'brown-8'
   },
   {
     name: 'deep purple',
@@ -196,7 +217,14 @@ export default [
     colorIntervalBody: 'grey-2',
     backgroundIntervalBody: 'deep-purple-8',
     colorIntervalText: 'grey-2',
-    backgroundIntervalText: 'deep-purple-8'
+    backgroundIntervalText: 'deep-purple-8',
+    // scheduler body
+    colorSchedulerHeader: 'grey-2',
+    backgroundSchedulerHeader: 'deep-purple-8',
+    colorSchedulerBody: 'grey-2',
+    backgroundSchedulerBody: 'deep-purple-8',
+    colorSchedulerText: 'grey-2',
+    backgroundSchedulerText: 'deep-purple-8'
   },
   {
     name: 'indigo',
@@ -245,7 +273,14 @@ export default [
     colorIntervalBody: 'grey-2',
     backgroundIntervalBody: 'indigo-8',
     colorIntervalText: 'grey-2',
-    backgroundIntervalText: 'indigo-8'
+    backgroundIntervalText: 'indigo-8',
+    // scheduler body
+    colorSchedulerHeader: 'grey-2',
+    backgroundSchedulerHeader: 'indigo-8',
+    colorSchedulerBody: 'grey-2',
+    backgroundSchedulerBody: 'indigo-8',
+    colorSchedulerText: 'grey-2',
+    backgroundSchedulerText: 'indigo-8'
   },
   {
     name: 'blue',
@@ -294,6 +329,13 @@ export default [
     colorIntervalBody: 'grey-2',
     backgroundIntervalBody: 'blue-8',
     colorIntervalText: 'grey-2',
-    backgroundIntervalText: 'blue-8'
+    backgroundIntervalText: 'blue-8',
+    // scheduler body
+    colorSchedulerHeader: 'grey-2',
+    backgroundSchedulerHeader: 'blue-8',
+    colorSchedulerBody: 'grey-2',
+    backgroundSchedulerBody: 'blue-8',
+    colorSchedulerText: 'grey-2',
+    backgroundSchedulerText: 'blue-8'
   }
 ]

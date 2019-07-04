@@ -1,3 +1,5 @@
+@import './calendar-variables'
+
 .q-calendar-daily
   background-color $grey-1
   .q-calendar-daily__intervals-head
@@ -58,7 +60,7 @@
     display flex
     overflow hidden
     vertical-align bottom
-    width 46px
+    width $intervals-body-width
     color $grey-8
     border-bottom $grey-4 1px solid
 
@@ -139,7 +141,7 @@
   &__intervals-body
     flex none
     user-select none
-    width 46px
+    width $intervals-body-width
 
   &__interval
     text-align center
