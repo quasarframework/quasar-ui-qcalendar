@@ -8,6 +8,7 @@ export default {
       type: Array,
       default: () => [0, 1, 2, 3, 4, 5, 6]
     },
+    disabledDays: Array,
     hideHeader: Boolean,
     noScroll: Boolean,
     shortWeekdayLabel: Boolean,
@@ -86,6 +87,10 @@ export default {
       type: [Number, String],
       default: 0,
       validator: validateNumber
+    },
+    dayStyle: {
+      type: Function,
+      default: null
     },
     dayPadding: String,
     minWeeks: {

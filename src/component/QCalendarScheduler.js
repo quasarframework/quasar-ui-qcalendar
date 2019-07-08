@@ -237,7 +237,8 @@ export default CalendarScheduler.extend({
           round: true,
           dense: true,
           noCaps: true,
-          outline: day.current === true
+          outline: day.current === true,
+          disable: day.disabled
         },
         on: this.getMouseEventHandlers({
           'click:date': { event: 'click', stop: true },
@@ -362,16 +363,16 @@ export default CalendarScheduler.extend({
       const scope = this.getScopeForSlot(day, idx, resource)
       let dragOver
 
+      let style = { height: height }
+      style = Object.assign(style, styler(scope))
+
       const data = {
         key: resource.label + '-' + idx,
         staticClass: 'q-calendar-scheduler__day-resource',
         class: {
           'q-calendar-scheduler__day-resource--droppable': dragOver
         },
-        style: {
-          height,
-          ...styler(resource)
-        },
+        style: style,
         domProps: {
           ondragover: (e) => {
             if (this.dragOverFunc !== void 0) {

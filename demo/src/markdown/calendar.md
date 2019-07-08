@@ -364,6 +364,7 @@ TODO
 | enable-themes | Boolean | All | Allows themes to be used<br>Default: false<br>Note: turning this on is a performace hit |
 | theme | Object | All | Overrides the calendar's color properties |
 | weekdays | Array | All | The days of the week to be displayed<br>Default: [0, 1, 2, 3, 4, 5, 6]<br>0=Sunday, 1=Monday, 2=Tuesday, etc |
+| disabled-days | Array | All | An array of one or more strings containing days that are to be disabled (in format 'YYYY-mm-dd'). When set and a match found, then the day button will be disabled and all mouse-related events will not occur (date:context). However, all other mouse events are available (ie: day:context). Check the timestamp for the `disabled` property.<br>disabledDays: [ '2019-04-02', '2019-04-03', '2019-04-04' ] |
 | hide-header | Boolean| All | Hide the calendar header<br>Default: false |
 | short-weekday-label | Boolean | All | Makes the days of the week short<br>Default: false<br>Sunday=Sun, Monday=Mon, Tuesday=Tue, etc |
 | locale | String | All | Changes the calendar's locale<br>Default: en-us |
@@ -380,6 +381,7 @@ TODO
 | column-index-start | [Number, String]| Day | Starting index. This allows you to create a paging system (next/prev) when using `column-count` property<br>Default: 0 |
 | short-interval-label | Boolean | Day | Makes interval labels short<br>Default: false |
 | interval-height | [Number, String] | Day | The maximum height in pixels for the interval height<br>Default: 40 |
+| interval-style | Function | Day | A function that receives a timestamp object used for special formatting of the interval. Must return nothing or a Vue style object<br>Default: null |
 | interval-minutes | [Number, String] | Day | The number of minutes in an interval<br>Default: 60<br>15 and 30 logically be other choices |
 | interval-count | [Number, String] | Day | The number intervals to use<br>Default: 24<br>If `interval-minutes` is set to `30` then you would set `interval count` to `48` -- double that of regular |
 | interval-start | [Number, String] | Day | The starting interval<br>Default: 0 |
@@ -387,6 +389,7 @@ TODO
 | | | | **Month properties** |
 | day-height | Number | Month | The maximum height in pixels for the day height<br>Default: 50 |
 | day-padding | String | Month | Overrides the padding to be used for a day element<br>Default: in the CSS "**48px 2px**" |
+| day-style | Function | Month | A function that receives a timestamp object used for special formatting of the day. Must return nothing or a Vue style object<br>Default: null |
 | min-weeks | Number | Month | The minimum number of weeks to be displayed<br>Default: 1 |
 | short-month-label | Boolean | Month | Makes the month label short<br>Default: false<br>January=Jan, February=Feb, March=Mar, etc |
 | show-work-weeks | Boolean | Month | Show work weeks<br>Default: false |
@@ -397,6 +400,7 @@ TODO
 | resources | Array | Scheduler  | An array of objects with a single key of `label`. You can add other keys if you like, which will be passed in on the appropriate slots |
 | resource-height | [Number, String] | Day | The maximum height in pixels for the resource height<br>Default: 60 |
 | resource-width | [Number, String] | Day | The maximum width in pixels for the resource height |
+| resource-style | Function | Day | A function that receives an object, containing day, index and resource, used for special formatting of the resource day. Must return nothing or a Vue style object<br>Default: null |
 | | | | **Other properties** |
 | max-days | Number | Custom, Scheduler  | The maximum number of days to be displayed. Ignored for most other views<br>Default: 7 |
 
@@ -406,7 +410,7 @@ TODO
 | --- | --- | --- |
 | change | { start, end } | Emitted when there is a change. The data is starting and ending timestamps of the display. For example, if in `month` view, the `start` would contain timestamp for the 1st of the month and the `end` would contain the last day of the month |
 | input | YYYY-mm-dd | Emitted when the selected day changes |
-| moved |   |  |
+| moved | Timestamp | Timestamp of the date moved to. If this in `month` view, this is the 1st of the month. If in `week` view, then it is the first day of the week |
 |  **date** | Timestamp object |  Occurs on date button |
 | click:date |  | |
 | contextmenu:date |  | |

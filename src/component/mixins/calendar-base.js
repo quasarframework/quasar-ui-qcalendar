@@ -60,7 +60,8 @@ export default Vue.extend({
         this.parsedStart,
         this.parsedEnd,
         this.times.today,
-        this.weekdaySkips
+        this.weekdaySkips,
+        this.disabledDays
       )
     },
     dayFormatter () {

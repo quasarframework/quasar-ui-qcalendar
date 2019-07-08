@@ -154,6 +154,10 @@ Duration:   {{ event.duration }}
         v-model="selectedDate"
         :locale="locale"
         :maxDays="maxDays"
+        :disabledDays="disabledDays"
+        :intervalStyle="modifiedStyle"
+        :dayStyle="modifiedStyle"
+        :resourceStyle="modifiedStyle"
         animated
         transition-prev="slide-right"
         transition-next="slide-left"
@@ -300,11 +304,11 @@ export default {
       keyValue: 0,
       direction: 'forward',
       weekdays: [0, 1, 2, 3, 4, 5, 6],
-      viewOptions: [
-        { label: 'Day', value: 'day' },
-        { label: '5 Day', value: '5day' },
-        { label: 'Week', value: 'week' },
-        { label: 'Month', value: 'month' }
+      disabledDays: [
+        '2019-04-02',
+        '2019-04-03',
+        '2019-04-04',
+        '2019-04-05'
       ],
       addEvent: false,
       contextDay: null,
@@ -496,6 +500,18 @@ export default {
     calendarToday (today) {
       this.selectedDate = today
     },
+    modifiedStyle (scope) {
+      let date = scope
+      if ('day' in scope) {
+        date = scope.day
+      }
+      if (date.disabled === true) {
+        return {
+          backgroundColor: '#efefef!important'
+        }
+      }
+      return {}
+    },
     onChanged (data) {
       // uncomment to see data in console
       // let { start, end } = data
@@ -615,7 +631,7 @@ export default {
       console.log('resource:day clicked:', resource)
     },
     addEventMenu (day, type) {
-      if (this.calendarView === 'scheduler' || this.calendarView === 'week-scheduler' || this.calendarView === 'month-scheduler') {
+      if (day.disabled === true || this.calendarView === 'scheduler' || this.calendarView === 'week-scheduler' || this.calendarView === 'month-scheduler') {
         return
       }
       this.resetForm()

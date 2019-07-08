@@ -22,9 +22,11 @@ export default CalendarBase.extend({
     staticClass () {
       return 'q-calendar-weekly'
     },
+
     parsedMinWeeks () {
       return parseInt(this.minWeeks)
     },
+
     days () {
       const minDays = this.parsedMinWeeks * this.weekdays.length
       const start = this.getStartOfWeek(this.parsedStart)
@@ -35,10 +37,12 @@ export default CalendarBase.extend({
         end,
         this.times.today,
         this.weekdaySkips,
+        this.disabledDays,
         Number.MAX_SAFE_INTEGER,
         minDays
       )
     },
+
     todayWeek () {
       const today = this.times.today
       const start = this.getStartOfWeek(today)
@@ -49,10 +53,12 @@ export default CalendarBase.extend({
         end,
         today,
         this.weekdaySkips,
+        this.disabledDays,
         this.weekdays.length,
         this.weekdays.length
       )
     },
+
     monthFormatter () {
       const longOptions = { timeZone: 'UTC', month: 'long' }
       const shortOptions = { timeZone: 'UTC', month: 'short' }
@@ -62,6 +68,7 @@ export default CalendarBase.extend({
         (_tms, short) => short ? shortOptions : longOptions
       )
     },
+
     styles () {
       if (this.dayHeight > 0) {
         const height = convertToUnit(this.dayHeight)
@@ -84,6 +91,7 @@ export default CalendarBase.extend({
       return dayIdentifier < getDayIdentifier(this.parsedStart) ||
              dayIdentifier > getDayIdentifier(this.parsedEnd)
     },
+
     isCurrentWeek (week) {
       for (let i = 0; i < week.length; ++i) {
         if (week[i].current === true) {
@@ -92,6 +100,7 @@ export default CalendarBase.extend({
       }
       return { timestamp: false }
     },
+
     __renderHead (h) {
       return h('div', {
         staticClass: 'q-calendar-weekly__head'
@@ -100,6 +109,7 @@ export default CalendarBase.extend({
         this.__renderHeadDays(h)
       ])
     },
+
     __renderWorkWeekHead (h) {
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
@@ -114,9 +124,11 @@ export default CalendarBase.extend({
         staticClass: 'q-calendar-weekly__head-workweek'
       }), '#')
     },
+
     __renderHeadDays (h) {
       return this.todayWeek.map((day, index) => this.__renderHeadDay(h, day, index))
     },
+
     __renderHeadDay (h, day, index) {
       const outside = this.isOutside(this.days[index])
       let colors = new Map(), color, backgroundColor
@@ -158,6 +170,7 @@ export default CalendarBase.extend({
 
       return weeks
     },
+
     __renderWeek (h, week) {
       return h('div', {
         key: week[0].date,
@@ -167,6 +180,7 @@ export default CalendarBase.extend({
         week.map((day) => this.__renderDay(h, day))
       ])
     },
+
     __renderWorkWeekGutter (h, week) {
       const slot = this.$scopedSlots.workweek
       // adjust day to account for Sunday/Monday start of week calendars
@@ -202,7 +216,9 @@ export default CalendarBase.extend({
         }
       }), slot ? slot({ workweekLabel, week }) : workweekLabel)
     },
+
     __renderDay (h, day) {
+      const styler = this.dayStyle || this.dayStyleDefault
       const outside = this.isOutside(day)
       const slot = this.$scopedSlots.day
       const slotData = { outside, ...day }
@@ -229,6 +245,9 @@ export default CalendarBase.extend({
         updateColors = this.setBothColors
       }
 
+      let style = { ...this.styles }
+      style = Object.assign(style, styler(day))
+
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
         key: day.date,
         staticClass: 'q-calendar-weekly__day',
@@ -236,7 +255,7 @@ export default CalendarBase.extend({
           ...this.getRelativeClasses(day, outside),
           'q-calendar-weekly__day--droppable': dragOver
         },
-        style: this.styles,
+        style: style,
         domProps: {
           ondragover: (e) => {
             if (this.dragOverFunc !== void 0) {
@@ -257,6 +276,7 @@ export default CalendarBase.extend({
         slot ? slot(slotData) : ''
       ])
     },
+
     __renderDayLabel (h, day) {
       const outside = this.isOutside(day)
       const colorCurrent = day.current === true ? this.color : void 0
@@ -291,7 +311,8 @@ export default CalendarBase.extend({
           round: true,
           dense: true,
           noCaps: true,
-          outline: day.current === true
+          outline: day.current === true,
+          disable: day.disabled
         },
         on: this.getMouseEventHandlers({
           'click:date': { event: 'click', stop: true },
@@ -299,6 +320,7 @@ export default CalendarBase.extend({
         }, _event => day)
       }), slot ? slot({ dayLabel, ...day }) : dayLabel)
     },
+
     __renderDayOfYearLabel (h, day) {
       const color = day.current === true ? this.color : void 0
       const slot = this.$scopedSlots['day-of-year']
@@ -307,6 +329,7 @@ export default CalendarBase.extend({
         staticClass: 'q-calendar-weekly__day-month--day-of-year'
       }), slot ? slot(day) : day.doy)
     },
+
     __renderDayMonth (h, day) {
       const color = day.current === true ? this.color : void 0
       const slot = this.$scopedSlots['month-label']
