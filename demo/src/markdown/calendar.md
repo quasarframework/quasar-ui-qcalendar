@@ -364,6 +364,7 @@ TODO
 | enable-themes | Boolean | All | Allows themes to be used<br>Default: false<br>Note: turning this on is a performace hit |
 | theme | Object | All | Overrides the calendar's color properties |
 | weekdays | Array | All | The days of the week to be displayed<br>Default: [0, 1, 2, 3, 4, 5, 6]<br>0=Sunday, 1=Monday, 2=Tuesday, etc |
+| disabled-days | Array | All | An array of one or more strings containing days that are to be disabled (in format 'YYYY-mm-dd'). When set and a match found, then the day button will be disabled and all mouse-related events will not occur (date:context). However, all other mouse events are available (ie: day:context). Check the timestamp for the `disabled` property.<br>disabledDays: [ '2019-04-02', '2019-04-03', '2019-04-04' ] |
 | hide-header | Boolean| All | Hide the calendar header<br>Default: false |
 | short-weekday-label | Boolean | All | Makes the days of the week short<br>Default: false<br>Sunday=Sun, Monday=Mon, Tuesday=Tue, etc |
 | locale | String | All | Changes the calendar's locale<br>Default: en-us |

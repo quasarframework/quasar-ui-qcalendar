@@ -8,6 +8,7 @@ export default {
       type: Array,
       default: () => [0, 1, 2, 3, 4, 5, 6]
     },
+    disabledDays: Array,
     hideHeader: Boolean,
     noScroll: Boolean,
     shortWeekdayLabel: Boolean,

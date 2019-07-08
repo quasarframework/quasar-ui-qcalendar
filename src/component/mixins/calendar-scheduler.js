@@ -36,6 +36,7 @@ export default CalendarBase.extend({
         this.parsedEnd,
         this.times.today,
         this.weekdaySkips,
+        this.disabledDays,
         this.maxDays
       )
     }

@@ -35,6 +35,7 @@ export default CalendarBase.extend({
         end,
         this.times.today,
         this.weekdaySkips,
+        this.disabledDays,
         Number.MAX_SAFE_INTEGER,
         minDays
       )
@@ -49,6 +50,7 @@ export default CalendarBase.extend({
         end,
         today,
         this.weekdaySkips,
+        this.disabledDays,
         this.weekdays.length,
         this.weekdays.length
       )
@@ -291,7 +293,8 @@ export default CalendarBase.extend({
           round: true,
           dense: true,
           noCaps: true,
-          outline: day.current === true
+          outline: day.current === true,
+          disable: day.disabled
         },
         on: this.getMouseEventHandlers({
           'click:date': { event: 'click', stop: true },

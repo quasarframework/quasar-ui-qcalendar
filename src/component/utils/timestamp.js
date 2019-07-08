@@ -33,7 +33,8 @@ export const Timestamp = {
   hasTime: false, // Boolean
   past: false, // Boolean
   current: false, // Boolean
-  future: false // Boolean
+  future: false, // Boolean
+  disabled: false // Boolean
 }
 
 export const TimeObject = {
@@ -123,7 +124,8 @@ export function parsed (input) {
     hasTime: !!(parts[6] && parts[8]),
     past: false,
     current: false,
-    future: false
+    future: false,
+    disabled: false
   }
 }
 
@@ -156,7 +158,8 @@ export function parseDate (date) {
     hasTime: true,
     past: false,
     current: true,
-    future: false
+    future: false,
+    disabled: false
   })
 }
 
@@ -214,6 +217,20 @@ export function updateWorkWeek (timestamp) {
   timestamp.workweek = getWorkWeek(timestamp)
 
   return timestamp
+}
+
+export function updateDisabled (timestamp, disabledDays) {
+  if (!Array.isArray(disabledDays) || disabledDays.length === 0) {
+    return
+  }
+  const t = getDayIdentifier(timestamp)
+  for (let day in disabledDays) {
+    const d = getDayIdentifier(parseTimestamp(disabledDays[day] + ' 00:00'))
+    if (d === t) {
+      timestamp.disabled = true
+      break
+    }
+  }
 }
 
 export function updateFormatted (timestamp) {
@@ -378,7 +395,7 @@ export function getWeekdaySkips (weekdays) {
   return skips
 }
 
-export function createDayList (start, end, now, weekdaySkips, max = 42, min = 0) {
+export function createDayList (start, end, now, weekdaySkips, disabledDays = [], max = 42, min = 0) {
   const stop = getDayIdentifier(end)
   const days = []
   let current = copyTimestamp(start)
@@ -399,6 +416,7 @@ export function createDayList (start, end, now, weekdaySkips, max = 42, min = 0)
     const day = copyTimestamp(current)
     updateFormatted(day)
     updateRelative(day, now)
+    updateDisabled(day, disabledDays)
     days.push(day)
     current = relativeDays(current, nextDay, weekdaySkips[current.weekday])
   }

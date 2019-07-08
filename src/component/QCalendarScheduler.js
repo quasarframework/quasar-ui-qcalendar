@@ -237,7 +237,8 @@ export default CalendarScheduler.extend({
           round: true,
           dense: true,
           noCaps: true,
-          outline: day.current === true
+          outline: day.current === true,
+          disable: day.disabled
         },
         on: this.getMouseEventHandlers({
           'click:date': { event: 'click', stop: true },
