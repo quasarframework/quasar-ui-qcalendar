@@ -602,6 +602,10 @@ export default {
       return s
     },
     onDateChanged (date) {
+      if (this.calendarView === 'scheduler' || this.calendarView === 'week-scheduler' || this.calendarView === 'month-scheduler') {
+        return
+      }
+      // automaticallyu change to the day selected
       this.calendarView = 'day'
     },
     resourceClicked (resource) {

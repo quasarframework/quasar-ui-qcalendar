@@ -886,10 +886,10 @@
   resolved "https://registry.yarnpkg.com/@positron/stack-trace/-/stack-trace-1.0.0.tgz#14fcc712a530038ef9be1ce6952315a839f466a8"
   integrity sha1-FPzHEqUwA475vhzmlSMVqDn0Zqg=
 
-"@quasar/app@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@quasar/app/-/app-1.0.1.tgz#6825b3856ff627950f0a5c561df79daee90a68f3"
-  integrity sha512-fV/2OzBS6uX44+n5pf6czNb2OoHAlCAPBU64JtXAJgLLNfR1P+biH8w0w4w1n1Axi2mcR1DadAOCNz7GYdTW4g==
+"@quasar/app@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@quasar/app/-/app-1.0.2.tgz#565fde7c3a91c914610ba210cff7bb49e25b11a9"
+  integrity sha512-ejuyFAwH1/Vs4tXMN8fq78wD3Y9fLG1xngDy5HRNPaEApL2TqFyEMaMm4KyNflGavSKjFaBo8mHP8099zIvEKw==
   dependencies:
     "@quasar/babel-preset-app" "1.1.4"
     "@vue/preload-webpack-plugin" "1.1.0"
@@ -984,7 +984,7 @@
   integrity sha512-W+BrplCY+UeEN4Lwy2GcQH5CR92CrqhD2YjlcoCSbCEkSna0A35Be3kJ23qqLUMh4iuyG3jLFI1y9nUENTZqTg==
 
 "@quasar/quasar-app-extension-qcalendar@../.":
-  version "1.0.0-alpha.22"
+  version "1.0.0-beta.1"
 
 "@quasar/quasar-app-extension-qmarkdown@^1.0.0-beta.13":
   version "1.0.0-beta.13"

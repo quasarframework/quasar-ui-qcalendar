@@ -407,24 +407,72 @@ TODO
 | change | { start, end } | Emitted when there is a change. The data is starting and ending timestamps of the display. For example, if in `month` view, the `start` would contain timestamp for the 1st of the month and the `end` would contain the last day of the month |
 | input | YYYY-mm-dd | Emitted when the selected day changes |
 | moved |   |  |
-| click:`context` |  | |
-| contextmenu:`context` |  | |
-| mousedown:`context` |  | |
-| mouseup:`context` |  | |
-| mouseenter:`context` |  | |
-| mouseleave:`context` |  | |
-| mousemove:`context` |  | |
-| touchstart:`context` |  | |
-| touchend:`context` |  | |
-| touchmove:`context` |  | |
-
-`context` can be one of the following:
-1. date
-2. day
-3. interval
-4. time
-5. resource (for Scheduler view only)
-6. resource:day (for Scheduler view only)
+|  **date** | Timestamp object |  Occurs on date button |
+| click:date |  | |
+| contextmenu:date |  | |
+| mousedown:date |  | |
+| mouseup:date |  | |
+| mouseenter:date |  | |
+| mouseleave:date |  | |
+| mousemove:date |  | |
+| touchstart:date |  | |
+| touchend:date |  | |
+| touchmove:date |  | |
+| **day** | Timestamp object | Occurs on Day |
+| click:day |  | |
+| contextmenu:day |  | |
+| mousedown:day |  | |
+| mouseup:day |  | |
+| mouseenter:day |  | |
+| mouseleave:day |  | |
+| mousemove:day |  | |
+| touchstart:day |  | |
+| touchend:day |  | |
+| touchmove:day |  | |
+| **interval** | Timestamp object | Occurs on Interval |
+| click:interval |  | |
+| contextmenu:interval |  | |
+| mousedown:interval |  | |
+| mouseup:interval |  | |
+| mouseenter:interval |  | |
+| mouseleave:interval |  | |
+| mousemove:interval |  | |
+| touchstart:interval |  | |
+| touchend:interval |  | |
+| touchmove:interval |  | |
+| **time** | Timestamp object | Occurs on Time (interval) |
+| click:time |  | |
+| contextmenu:time |  | |
+| mousedown:time |  | |
+| mouseup:time |  | |
+| mouseenter:time |  | |
+| mouseleave:time |  | |
+| mousemove:time |  | |
+| touchstart:time |  | |
+| touchend:time |  | |
+| touchmove:time |  | |
+| **resource** | Object containing Resource object and resource index | Occurs on Resource |
+| click:resource |  | |
+| contextmenu:resource |  | |
+| mousedown:resource |  | |
+| mouseup:resource |  | |
+| mouseenter:resource |  | |
+| mouseleave:resource |  | |
+| mousemove:resource |  | |
+| touchstart:resource |  | |
+| touchend:resource |  | |
+| touchmove:resource |  | |
+| **resource:day** | Object containing Timestamp object, Resource object and resource index | Occurs on Day |
+| click:resource:day |  | |
+| contextmenu:resource:day |  | |
+| mousedown:resource:day |  | |
+| mouseup:resource:day |  | |
+| mouseenter:resource:day |  | |
+| mouseleave:resource:day |  | |
+| mousemove:resource:day |  | |
+| touchstart:resource:day |  | |
+| touchend:resource:day |  | |
+| touchmove:resource:day |  | |
 
 ## Vue Methods
 | Vue Method | Args | Description |
