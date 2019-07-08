@@ -43,7 +43,7 @@ export default CalendarBase.extend({
   },
 
   methods: {
-    resourceStyleDefault (_interval) {
+    resourceStyleDefault (_timestamp) {
       return undefined
     },
     getTimestampAtEvent (e, day) {

@@ -357,11 +357,15 @@ export default CalendarScheduler.extend({
     },
 
     __renderDayResource (h, resource, day, idx) {
+      debugger
       const height = convertToUnit(this.resourceHeight)
       const styler = this.resourceStyle || this.resourceStyleDefault
       const slot = this.$scopedSlots['scheduler-resource-day']
       const scope = this.getScopeForSlot(day, idx, resource)
       let dragOver
+
+      let style = { height: height }
+      style = Object.assign(style, styler(scope))
 
       const data = {
         key: resource.label + '-' + idx,
@@ -369,10 +373,7 @@ export default CalendarScheduler.extend({
         class: {
           'q-calendar-scheduler__day-resource--droppable': dragOver
         },
-        style: {
-          height,
-          ...styler(resource)
-        },
+        style: style,
         domProps: {
           ondragover: (e) => {
             if (this.dragOverFunc !== void 0) {

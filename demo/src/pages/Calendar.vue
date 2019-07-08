@@ -155,6 +155,9 @@ Duration:   {{ event.duration }}
         :locale="locale"
         :maxDays="maxDays"
         :disabledDays="disabledDays"
+        :intervalStyle="modifiedStyle"
+        :dayStyle="modifiedStyle"
+        :resourceStyle="modifiedStyle"
         animated
         transition-prev="slide-right"
         transition-next="slide-left"
@@ -497,6 +500,19 @@ export default {
     calendarToday (today) {
       this.selectedDate = today
     },
+    modifiedStyle (scope) {
+      debugger
+      let date = scope
+      if ('day' in scope) {
+        date = scope.day
+      }
+      if (date.disabled === true) {
+        return {
+          backgroundColor: '#efefef!important'
+        }
+      }
+      return {}
+    },
     onChanged (data) {
       // uncomment to see data in console
       // let { start, end } = data
@@ -616,7 +632,7 @@ export default {
       console.log('resource:day clicked:', resource)
     },
     addEventMenu (day, type) {
-      if (this.calendarView === 'scheduler' || this.calendarView === 'week-scheduler' || this.calendarView === 'month-scheduler') {
+      if (day.disabled === true || this.calendarView === 'scheduler' || this.calendarView === 'week-scheduler' || this.calendarView === 'month-scheduler') {
         return
       }
       this.resetForm()

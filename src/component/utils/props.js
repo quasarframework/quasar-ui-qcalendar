@@ -88,6 +88,10 @@ export default {
       default: 0,
       validator: validateNumber
     },
+    dayStyle: {
+      type: Function,
+      default: null
+    },
     dayPadding: String,
     minWeeks: {
       type: Number,
