@@ -60,10 +60,6 @@ export default CalendarIntervals.extend({
       return area && pane ? (area.offsetWidth - pane.offsetWidth) : 0
     },
 
-    dayStyleDefault (_timestamp) {
-      return undefined
-    },
-
     __renderHead (h) {
       return h('div', {
         staticClass: 'q-calendar-daily__head',
