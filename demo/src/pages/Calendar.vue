@@ -502,7 +502,7 @@ export default {
     },
     modifiedStyle (scope) {
       let date = scope
-      if ('day' in scope) {
+      if ('resource' in scope) {
         date = scope.day
       }
       if (date.disabled === true) {
