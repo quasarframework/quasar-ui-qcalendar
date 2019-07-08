@@ -62,10 +62,12 @@
         <q-expansion-item
           expand-separator
           default-opened
+          dark
           group="somegroup"
           icon="fas fa-cogs"
           label="Playground"
           caption="Play with properties"
+          header-class="text-white bg-primary"
         >
           <playground></playground>
         </q-expansion-item>
@@ -178,7 +180,11 @@ export default {
       dateFormatter: null,
       viewOptions: [
         { label: 'View Day', value: 'day' },
-        { label: 'View 5 Days', value: '5day' },
+        { label: 'View 2Day', value: '2day' },
+        { label: 'View 3Day', value: '3day' },
+        { label: 'View 4Day', value: '4day' },
+        { label: 'View 5Day', value: '5day' },
+        { label: 'View 6Day', value: '6day' },
         { label: 'View Week', value: 'week' },
         { label: 'View Month', value: 'month' },
         { label: 'View Month Interval', value: 'month-interval' },
