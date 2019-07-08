@@ -501,7 +501,6 @@ export default {
       this.selectedDate = today
     },
     modifiedStyle (scope) {
-      debugger
       let date = scope
       if ('day' in scope) {
         date = scope.day

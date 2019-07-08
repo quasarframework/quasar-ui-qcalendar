@@ -357,7 +357,6 @@ export default CalendarScheduler.extend({
     },
 
     __renderDayResource (h, resource, day, idx) {
-      debugger
       const height = convertToUnit(this.resourceHeight)
       const styler = this.resourceStyle || this.resourceStyleDefault
       const slot = this.$scopedSlots['scheduler-resource-day']

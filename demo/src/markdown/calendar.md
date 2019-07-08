@@ -410,7 +410,7 @@ TODO
 | --- | --- | --- |
 | change | { start, end } | Emitted when there is a change. The data is starting and ending timestamps of the display. For example, if in `month` view, the `start` would contain timestamp for the 1st of the month and the `end` would contain the last day of the month |
 | input | YYYY-mm-dd | Emitted when the selected day changes |
-| moved |   |  |
+| moved | Timestamp | Timestamp of the date moved to. If this in `month` view, this is the 1st of the month. If in `week` view, then it is the first day of the week |
 |  **date** | Timestamp object |  Occurs on date button |
 | click:date |  | |
 | contextmenu:date |  | |
