@@ -84,6 +84,10 @@ export default {
     DayViewHideHeader: () => import('../examples/DayViewHideHeader'),
     MonthViewHideHeader: () => import('../examples/MonthViewHideHeader'),
 
+    WeekViewDisabledDays: () => import('../examples/WeekViewDisabledDays'),
+    MonthViewDisabledDays: () => import('../examples/MonthViewDisabledDays'),
+    SchedulerViewDisabledDays: () => import('../examples/SchedulerViewDisabledDays'),
+
     WeekViewNow: () => import('../examples/WeekViewNow'),
     MonthViewNow: () => import('../examples/MonthViewNow'),
 
