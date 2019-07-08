@@ -20,6 +20,11 @@
       <example-card title="Day View - Hide Header" name="DayViewHideHeader" :tag-parts="getTagParts(require('!!raw-loader!../examples/DayViewHideHeader.vue').default)" />
       <example-card title="Month View - Hide Header" name="MonthViewHideHeader" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewHideHeader.vue').default)" />
 
+      <example-title title="Disabled Days" />
+      <example-card title="Week View - Disabled Days" name="WeekViewDisabledDays" :tag-parts="getTagParts(require('!!raw-loader!../examples/WeekViewDisabledDays.vue').default)" />
+      <example-card title="Month View - Disabled Days" name="MonthViewDisabledDays" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewDisabledDays.vue').default)" />
+      <example-card title="Scheduler View - Disabled Days" name="SchedulerViewDisabledDays" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewDisabledDays.vue').default)" />
+
       <example-title title="Now" />
       <q-markdown>
 You can use the `now` property to set a fixed date, otherwise the current date will be used. If the `v-model` property is empty, then it will receive the `now` property's value.
@@ -220,6 +225,11 @@ export default {
     this.addToToc('Hide Header')
     this.addToToc('Day View - Hide Header', 2)
     this.addToToc('Month View - Hide Header', 2)
+
+    this.addToToc('Disabled Days')
+    this.addToToc('Week View - Disabled Days', 2)
+    this.addToToc('Month View - Disabled Days', 2)
+    this.addToToc('Scheduler View - Disabled Days', 2)
 
     this.addToToc('Now')
     this.addToToc('Week View - Now', 2)

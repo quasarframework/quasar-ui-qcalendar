@@ -97,6 +97,9 @@ export default Vue.extend({
     },
     getEndOfWeek (timestamp) {
       return getEndOfWeek(timestamp, this.weekdays, this.times.today)
+    },
+    dayStyleDefault (_timestamp) {
+      return undefined
     }
   }
 })

@@ -153,16 +153,15 @@ Duration:   {{ event.duration }}
         v-touch-swipe.mouse.left.right="handleSwipe"
         v-model="selectedDate"
         :locale="locale"
-        :maxDays="maxDays"
-        :disabledDays="disabledDays"
-        :intervalStyle="modifiedStyle"
-        :dayStyle="modifiedStyle"
-        :resourceStyle="modifiedStyle"
+        :max-days="maxDays"
+        :interval-style="modifiedStyle"
+        :day-style="modifiedStyle"
+        :resource-style="modifiedStyle"
         animated
         transition-prev="slide-right"
         transition-next="slide-left"
-        :dragOverFunc="onDragOver"
-        :dropFunc="onDrop"
+        :drag-over-func="onDragOver"
+        :drop-func="onDrop"
         :theme="theme"
         :view="calendarView"
         :weekdays="weekdays"
@@ -502,7 +501,7 @@ export default {
     },
     modifiedStyle (scope) {
       let date = scope
-      if ('day' in scope) {
+      if ('resource' in scope) {
         date = scope.day
       }
       if (date.disabled === true) {

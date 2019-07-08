@@ -181,9 +181,6 @@ export default {
       activeToc: 0
     }
   },
-  beforeDestroy () {
-    clearTimeout(this.scrollTimer)
-  },
   computed: {
     ...mapGetters({
       toc: 'common/toc'
@@ -202,7 +199,6 @@ export default {
     scrollTo (id) {
       this.activeToc = id
       const el = document.getElementById(id)
-      clearTimeout(this.scrollTimer)
 
       if (el) {
         this.scrollPage(el)
