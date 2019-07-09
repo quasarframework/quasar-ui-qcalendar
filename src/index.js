@@ -32,7 +32,7 @@ module.exports = function (api) {
   api.compatibleWith('@quasar/app', '^1.0.0')
 
   // register JSON api
-  // api.registerDescribeApi('QCalendar', './component/QCalendar.json')
+  api.registerDescribeApi('QCalendar', './component/QCalendar.json')
 
   // extend quasar.conf
   api.extendQuasarConf(extendQuasarConf)
