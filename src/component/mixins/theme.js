@@ -14,7 +14,7 @@ export default Vue.extend({
   methods: {
     // this function exists for performance reasons. If you do not
     // desire the performance hit of theming, be sure to set
-    // the property 'default-theme-only' to true (default).
+    // the property 'enable-themes' to false (default).
     useDefaultTheme (color, bgColor, data = {}) {
       return data
     },

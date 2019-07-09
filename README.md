@@ -1,7 +1,7 @@
 QCalendar (@quasar/qcalendar)
 ===
 
-> Please note that QCalendar is in alpha state.
+> Please note that QCalendar is in beta state.
 
 ![official icon](https://img.shields.io/badge/Quasar%201.0-Official%20UI%20App%20Extension-blue.svg)
 ![npm (scoped)](https://img.shields.io/npm/v/@quasar/quasar-app-extension-qcalendar.svg?style=plastic)
@@ -11,7 +11,7 @@ QCalendar (@quasar/qcalendar)
 
 QCalendar is an `UI App Extension` for [Quasar Framework v1](https://quasar.dev/). It will not work with legacy versions of Quasar Framework.
 
-This work is currently in `alpha` and there are expected changes while things get worked out. Your help with testing is greatly appreciated.
+This work is currently in `beta` and there are expected changes while things get worked out. Your help with testing is greatly appreciated.
 
 ![QCalendar example month view](https://raw.githubusercontent.com/quasarframework/app-extension-qcalendar/dev/demo/src/statics/qcalendar-month-view.png)
 

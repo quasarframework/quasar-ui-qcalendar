@@ -94,7 +94,7 @@ export default {
     },
     dayPadding: String,
     minWeeks: {
-      type: Number,
+      type: [Number, String],
       validator: validateNumber,
       default: 1
     },
