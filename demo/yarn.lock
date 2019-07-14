@@ -962,6 +962,11 @@
     raw-loader "^3.0.0"
     ware-loader "^0.2.4"
 
+"@quasar/quasar-app-extension-qribbon@^1.0.0-alpha.10":
+  version "1.0.0-alpha.10"
+  resolved "https://registry.yarnpkg.com/@quasar/quasar-app-extension-qribbon/-/quasar-app-extension-qribbon-1.0.0-alpha.10.tgz#90bb02602e6ec8bc4a7c9ba5869bc5da705c845a"
+  integrity sha512-H+naWrE1ZYAcdF9jvcgOVpfMYph297Q8/ZjOdqqtMrFU5emTQBxOpD6Efnhn55gXjKox8KwnPf6NPgFztNh/1A==
+
 "@quasar/quasar-app-extension-qscroller@^1.0.0-alpha.7":
   version "1.0.0-alpha.7"
   resolved "https://registry.yarnpkg.com/@quasar/quasar-app-extension-qscroller/-/quasar-app-extension-qscroller-1.0.0-alpha.7.tgz#5ea02fa94d1cce8072fc9e89754c040c558c2f5e"
@@ -6374,11 +6379,6 @@ qs@6.7.0:
   version "6.7.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
   integrity sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ==
-
-quasar-app-extension-qribbon@^1.0.0-alpha.7:
-  version "1.0.0-alpha.8"
-  resolved "https://registry.yarnpkg.com/quasar-app-extension-qribbon/-/quasar-app-extension-qribbon-1.0.0-alpha.8.tgz#b8f844da700a66f769a819f28369b19077aa6727"
-  integrity sha512-ffWfqr+9q/pltWaJxNlqU2tD29iwkkLm1H3IYkI9KktoACzQM0K572XBtYzuOD6diXR7DGFmax3M95lHolWLMQ==
 
 quasar@^1.0.5:
   version "1.0.5"
