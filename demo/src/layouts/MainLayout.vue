@@ -117,7 +117,7 @@ export default {
       }
     },
     scrollPage (el) {
-      const offset = el.offsetTop - el.scrollHeight
+      const offset = el.offsetTop - 50
       scroll.setScrollPosition(window, offset, 500)
     }
   }
