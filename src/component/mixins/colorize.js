@@ -8,22 +8,10 @@ export default Vue.extend({
   name: 'colorize',
 
   props: {
-    color: String,
-    theme: {
-      type: Object,
-      default: () => {}
-    },
-    enableThemes: Boolean
+    color: String
   },
 
   methods: {
-    // this function exists for performance reasons. If you do not
-    // desire the performance hit of theming, be sure to set
-    // the property 'default-theme-only' to true (default).
-    useDefaultTheme (color, bgColor, data = {}) {
-      return data
-    },
-
     setBothColors (color, bgColor, data = {}) {
       return this.setTextColor(color, this.setBackgroundColor(bgColor, data))
     },
@@ -61,16 +49,6 @@ export default Vue.extend({
         }
       }
       return data
-    },
-
-    getThemeColors (keys = []) {
-      const colors = new Map()
-      if (this.theme !== void 0) {
-        keys.forEach((key) => {
-          colors.set(key, this.theme[key])
-        })
-      }
-      return colors
     }
   }
 })

@@ -2,5 +2,5 @@
   "@quasar/qcalendar": {},
   "@quasar/qmarkdown": {},
   "@quasar/qscroller": {},
-  "qribbon": {}
+  "@quasar/qribbon": {}
 }

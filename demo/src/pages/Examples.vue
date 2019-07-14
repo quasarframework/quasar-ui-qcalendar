@@ -174,7 +174,7 @@ Below, the slot receives the `timestamp` for the day being displayed, an index, 
       </q-markdown>
       <example-card title="Scheduler View - Slots (scheduler-resource-day)" name="SchedulerViewSlotResourceDay" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewSlotResourceDay.vue').default)" />
       <q-markdown>
-Below, the slot receives the `resource` to be displayed.
+Below, the slot receives the `resource` to be displayed. In this case, an avatar (or icon) is being displayed along with the resource name.
       </q-markdown>
       <example-card title="Scheduler View - Slots (scheduler-resource)" name="SchedulerViewSlotResource" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewSlotResource.vue').default)" />
 
