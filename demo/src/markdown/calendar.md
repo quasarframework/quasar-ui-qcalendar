@@ -97,7 +97,7 @@ When more than one day is displayed:
 
 ## Custom Interval view
 
-The `custom-interval` view allows you to display as many days as specified by the property `max-days`. This can get a bit busy if a large number of days are displayed and is only recommended for wide screens. The image below has `max-days` set to 14. 
+The `custom-interval` view allows you to display as many days as specified by the property `max-days`. This can get a bit busy if a large number of days are displayed and is only recommended for wide screens. The image below has `max-days` set to 14.
 
 ![CustomInterval](statics/qcalendar-custom-interval-view.png "Custom Interval" =800x800)
 
@@ -111,7 +111,7 @@ The `month-interval` view allows you to display all days in a month while in the
 
 ![MonthView](statics/qcalendar-month-view.png "Month View" =800x800)
 
-The `month` view is for displaying a finite number of weeks according to the calendar time which is the currently displayed month. 
+The `month` view is for displaying a finite number of weeks according to the calendar time which is the currently displayed month.
 
 > For time periods which fall outside of the current month, yet are still displayed (beginning and ending days of the month view), these are known as the `outside` days. The current date is known as the `current` day (obviously). Days leading up to the current date are known as `past` days and days that come after the current date are known as `future` days.
 
@@ -126,7 +126,7 @@ To use the scheduler, you need to use the `resources` property, which currently 
 
 ## View types
 
-QCalendar has several `view` types available. They are: 
+QCalendar has several `view` types available. They are:
 1. `month`
 2. `week`
 3. `day`
@@ -357,7 +357,7 @@ TODO
 | value | String| All | v-model used to pass in a date and time value<br>Default: now<br>Format: 'YYYY-mm-dd  HH:mm' |
 | now | String | All | Date and time value representing a fixed date in time<br>Default: today's date |
 | color | String | All | Overrides color to be used for current date or `now`<br>Default: `primary`<br>This can be any CSS color value or Quasar color |
-| enable-themes | Boolean | All | Allows themes to be used<br>Default: false<br>Note: turning this on is a performace hit |
+| enable-theme | Boolean | All | Allows themes to be used<br>Default: false<br>Note: turning this on is a performace hit |
 | theme | Object | All | Overrides the calendar's color properties |
 | weekdays | Array | All | The days of the week to be displayed<br>Default: [0, 1, 2, 3, 4, 5, 6]<br>0=Sunday, 1=Monday, 2=Tuesday, etc |
 | disabled-days | Array | All | An array of one or more strings containing days that are to be disabled (in format 'YYYY-mm-dd'). When set and a match found, then the day button will be disabled and all mouse-related events will not occur (date:context). However, all other mouse events are available (ie: day:context). Check the timestamp for the `disabled` property.<br>disabledDays: [ '2019-04-02', '2019-04-03', '2019-04-04' ] |

@@ -181,7 +181,7 @@ Duration:   {{ event.duration }}
         :day-height="dayHeight"
         :show-month-label="showMonthLabel"
         :show-work-weeks="showWorkWeeks"
-        :enable-themes="enableThemes === true"
+        :enable-theme="enableTheme === true"
         :resources="resources"
         @change="onChanged"
         @moved="onMoved"
@@ -381,7 +381,7 @@ export default {
       resourceHeight: 'calendar/resourceHeight',
       resourceWidth: 'calendar/resourceWidth',
       dayHeight: 'calendar/dayHeight',
-      enableThemes: 'calendar/enableThemes',
+      enableTheme: 'calendar/enableTheme',
       theme: 'calendar/theme'
     }),
     intervalStart () {

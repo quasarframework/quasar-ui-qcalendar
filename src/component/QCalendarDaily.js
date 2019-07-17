@@ -77,7 +77,7 @@ export default CalendarIntervals.extend({
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
-      if (this.enableThemes === true) {
+      if (this.enableTheme === true) {
         color = 'colorIntervalHeader'
         backgroundColor = 'backgroundIntervalHeader'
         colors = this.getThemeColors([color, backgroundColor])
@@ -108,7 +108,7 @@ export default CalendarIntervals.extend({
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
-      if (this.enableThemes === true) {
+      if (this.enableTheme === true) {
         if (day.past === true) {
           color = 'colorHeaderPast'
           backgroundColor = 'backgroundHeaderPast'
@@ -159,7 +159,7 @@ export default CalendarIntervals.extend({
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
-      if (this.enableThemes === true) {
+      if (this.enableTheme === true) {
         if (day.past === true) {
           color = 'colorDayLabelPast'
           backgroundColor = 'backgroundDayLabelPast'
@@ -192,7 +192,7 @@ export default CalendarIntervals.extend({
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
-      if (this.enableThemes === true) {
+      if (this.enableTheme === true) {
         if (day.past === true) {
           color = 'colorDayLabelPast'
           backgroundColor = 'backgroundDayLabelPast'
@@ -307,7 +307,7 @@ export default CalendarIntervals.extend({
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
-      if (this.enableThemes === true) {
+      if (this.enableTheme === true) {
         if (day.past === true) {
           color = 'colorBodyPast'
           backgroundColor = 'backgroundBodyPast'
@@ -378,7 +378,7 @@ export default CalendarIntervals.extend({
     __renderBodyIntervals (h) {
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
-      if (this.enableThemes === true) {
+      if (this.enableTheme === true) {
         color = 'colorIntervalBody'
         backgroundColor = 'backgroundIntervalBody'
         colors = this.getThemeColors([color, backgroundColor])
@@ -408,7 +408,7 @@ export default CalendarIntervals.extend({
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
-      if (this.enableThemes === true) {
+      if (this.enableTheme === true) {
         color = 'colorIntervalText'
         backgroundColor = 'backgroundIntervalText'
         colors = this.getThemeColors([color, backgroundColor])

@@ -85,12 +85,12 @@
     <q-page-container>
       <router-view></router-view>
     </q-page-container>
+
   </q-layout>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import { openURL } from 'quasar'
 import { getLocale } from '../util/getLocale'
 import { padTime } from '../util/time'
 
@@ -201,7 +201,6 @@ export default {
     }
   },
   methods: {
-    openURL,
     onPrev () {
       this.$root.$emit('calendar:prev')
     },

@@ -26,6 +26,7 @@ export default Vue.extend({
 
         if (!this.$listeners[event]) continue
 
+        // https://vuejs.org/v2/guide/render-function.html#Event-amp-Key-Modifiers
         const prefix = eventOptions.passive ? '&' : ((eventOptions.once ? '~' : '') + (eventOptions.capture ? '!' : ''))
         const key = prefix + eventOptions.event
 
