@@ -20,6 +20,6 @@ export default {
   resourceHeight: 60,
   resourceWidth: 100,
   dayHeight: 100,
-  enableThemes: false,
+  enableTheme: false,
   theme: {}
 }

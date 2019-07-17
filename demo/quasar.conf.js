@@ -1,6 +1,5 @@
 // Configuration for your app
-// const path = require('path')
-// const rawloader = require('raw-loader')
+// const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = function (ctx) {
   return {
@@ -107,7 +106,27 @@ module.exports = function (ctx) {
             formatter: require('eslint').CLIEngine.getFormatter('stylish')
           }
         })
-      }
+      } // ,
+      // chainWebpack (chain) {
+      //   const CopyWebpackPlugin = require('copy-webpack-plugin')
+      //   if (ctx.prod === true) {
+      //     const to = ctx.modeName === 'spa' ? 'dist/spa' :
+      //       ctx.modeName === 'pwa' ? 'dist/pwa' :
+      //       ctx.modeName === 'ssr' ? 'dist/ssr' : void 0
+      //     if (to !== void 0 && to.length > 0) {
+      //       chain
+      //         .plugin('copy-static')
+      //         .use(new CopyWebpackPlugin, [
+      //           [{
+      //             from: 'src/404.html',
+      //             to: to,
+      //             toType: 'file'
+      //           }]
+      //         ])
+      //         .end()
+      //       }
+      //     }
+      // }
     },
 
     devServer: {

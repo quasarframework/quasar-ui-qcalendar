@@ -113,7 +113,7 @@ export default CalendarBase.extend({
     __renderWorkWeekHead (h) {
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
-      if (this.enableThemes === true) {
+      if (this.enableTheme === true) {
         color = 'colorHeader'
         backgroundColor = 'backgroundHeader'
         colors = this.getThemeColors([color, backgroundColor])
@@ -133,7 +133,7 @@ export default CalendarBase.extend({
       const outside = this.isOutside(this.days[index])
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
-      if (this.enableThemes === true) {
+      if (this.enableTheme === true) {
         if (outside) {
           color = 'colorHeaderOutside'
           backgroundColor = 'backgroundHeaderOutside'
@@ -190,7 +190,7 @@ export default CalendarBase.extend({
       const height = convertToUnit(this.dayHeight)
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
-      if (this.enableThemes === true) {
+      if (this.enableTheme === true) {
         if ((timestamp && timestamp.current === true) || day.current === true) {
           color = 'colorWorkWeekCurrent'
           backgroundColor = 'backgroundWorkWeekCurrent'
@@ -227,7 +227,7 @@ export default CalendarBase.extend({
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
-      if (this.enableThemes === true) {
+      if (this.enableTheme === true) {
         if (outside === true) {
           color = 'colorBodyOutside'
           backgroundColor = 'backgroundBodyOutside'
@@ -284,7 +284,7 @@ export default CalendarBase.extend({
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
-      if (this.enableThemes === true) {
+      if (this.enableTheme === true) {
         if (outside === true) {
           color = 'colorDayLabelOutside'
           backgroundColor = 'backgroundDayLabelOutside'

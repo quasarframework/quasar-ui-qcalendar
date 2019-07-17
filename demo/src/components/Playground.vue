@@ -148,7 +148,7 @@
       </div>
       <q-toggle
         class="col-12"
-        v-model="enableThemes"
+        v-model="enableTheme"
         label="Enable themes"
       ></q-toggle>
       <q-select
@@ -159,7 +159,7 @@
         label="Change theme"
         v-model="theme"
         :options="themesList"
-        :disable="enableThemes !== true"
+        :disable="enableTheme !== true"
         class="col-12"
       ></q-select>
     </div>
@@ -356,12 +356,12 @@ export default {
         this.$store.commit('calendar/dayHeight', height)
       }
     },
-    enableThemes: {
+    enableTheme: {
       get () {
-        return this.$store.state.calendar.enableThemes
+        return this.$store.state.calendar.enableTheme
       },
       set (b) {
-        this.$store.commit('calendar/enableThemes', b)
+        this.$store.commit('calendar/enableTheme', b)
       }
     },
     themes: {

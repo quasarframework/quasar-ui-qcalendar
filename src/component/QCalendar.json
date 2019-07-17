@@ -96,7 +96,7 @@
         "#00CCFC"
       ]
     },
-    "enable-themes": {
+    "enable-theme": {
       "type": "Boolean",
       "category": "style",
       "desc": "Turn on theme support",

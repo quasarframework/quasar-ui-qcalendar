@@ -94,7 +94,7 @@ export default CalendarScheduler.extend({
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
-      if (this.enableThemes === true) {
+      if (this.enableTheme === true) {
         color = 'colorSchedulerHeader'
         backgroundColor = 'backgroundSchedulerHeader'
         colors = this.getThemeColors([color, backgroundColor])
@@ -128,7 +128,7 @@ export default CalendarScheduler.extend({
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
-      if (this.enableThemes === true) {
+      if (this.enableTheme === true) {
         if (day.past === true) {
           color = 'colorHeaderPast'
           backgroundColor = 'backgroundHeaderPast'
@@ -179,7 +179,7 @@ export default CalendarScheduler.extend({
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
-      if (this.enableThemes === true) {
+      if (this.enableTheme === true) {
         if (day.past === true) {
           color = 'colorDayLabelPast'
           backgroundColor = 'backgroundDayLabelPast'
@@ -212,7 +212,7 @@ export default CalendarScheduler.extend({
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
-      if (this.enableThemes === true) {
+      if (this.enableTheme === true) {
         if (day.past === true) {
           color = 'colorDayLabelPast'
           backgroundColor = 'backgroundDayLabelPast'
@@ -325,7 +325,7 @@ export default CalendarScheduler.extend({
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
       let resource = this.resources && this.resources[idx] ? this.resources[idx] : void 0
-      if (this.enableThemes === true) {
+      if (this.enableTheme === true) {
         if (day.past === true) {
           color = 'colorBodyPast'
           backgroundColor = 'backgroundBodyPast'
@@ -396,7 +396,7 @@ export default CalendarScheduler.extend({
       const width = convertToUnit(this.resourceWidth)
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
-      if (this.enableThemes === true) {
+      if (this.enableTheme === true) {
         color = 'colorSchedulerBody'
         backgroundColor = 'backgroundSchedulerBody'
         colors = this.getThemeColors([color, backgroundColor])
@@ -428,7 +428,7 @@ export default CalendarScheduler.extend({
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
-      if (this.enableThemes === true) {
+      if (this.enableTheme === true) {
         color = 'colorSchedulerText'
         backgroundColor = 'backgroundSchedulerText'
         colors = this.getThemeColors([color, backgroundColor])

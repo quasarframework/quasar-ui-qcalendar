@@ -61,8 +61,8 @@ export const resourceWidth = (state, width) => {
 export const dayHeight = (state, height) => {
   state.dayHeight = height
 }
-export const enableThemes = (state, b) => {
-  state.enableThemes = b
+export const enableTheme = (state, b) => {
+  state.enableTheme = b
 }
 export const theme = (state, theme) => {
   state.theme = { ...theme }

@@ -82,7 +82,7 @@ import { mapGetters } from 'vuex'
 import { scroll } from 'quasar'
 
 export default {
-  name: 'MyLayout',
+  name: 'MainLayout',
   components: {
     'essential-links': () => import('../components/EssentialLinks')
   },
