@@ -2,5 +2,9 @@
   "@quasar/qcalendar": {},
   "@quasar/qmarkdown": {},
   "@quasar/qscroller": {},
-  "@quasar/qribbon": {}
+  "@quasar/qribbon": {},
+  "qautomate": {
+    "quasarConfFixMode": "automatic",
+    "sort": true
+  }
 }
