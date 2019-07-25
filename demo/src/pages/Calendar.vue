@@ -528,12 +528,12 @@ export default {
           if (this.events[i].time) {
             if (events.length > 0) {
               // check for overlapping times
-              let startTime = new Date(this.events[i].date + ' ' + this.events[i].time)
-              let endTime = date.addToDate(startTime, { minutes: this.events[i].duration })
+              let startTime = new Date(this.events[i].date + ' ' + this.events[i].time).getTime()
+              let endTime = date.addToDate(startTime, { minutes: this.events[i].duration }).getTime()
               for (let j = 0; j < events.length; ++j) {
-                let startTime2 = new Date(events[j].date + ' ' + events[j].time)
-                let endTime2 = date.addToDate(startTime2, { minutes: events[j].duration })
-                if (date.isBetweenDates(startTime, startTime2, endTime2) || date.isBetweenDates(endTime, startTime2, endTime2)) {
+                let startTime2 = new Date(events[j].date + ' ' + events[j].time).getTime()
+                let endTime2 = date.addToDate(startTime2, { minutes: events[j].duration }).getTime()
+                if ((startTime >= startTime2 && startTime < endTime2) || (startTime2 >= startTime && startTime2 < endTime)) {
                   events[j].side = 'left'
                   this.events[i].side = 'right'
                   events.push(this.events[i])
