@@ -940,10 +940,10 @@
   dependencies:
     quasar-mixin-colorize "^1.0.0-alpha.4"
 
-"@quasar/quasar-app-extension-qmarkdown@^1.0.0-beta.14":
-  version "1.0.0-beta.14"
-  resolved "https://registry.yarnpkg.com/@quasar/quasar-app-extension-qmarkdown/-/quasar-app-extension-qmarkdown-1.0.0-beta.14.tgz#f5a39b89b4ce0dde18ba3c6ad784853d06dbe0fe"
-  integrity sha512-AVnQL6HTFAktvGCIqJbt+z+gZ4oqpVxX4RBgyezUB2X2jFOOf7muqFn6tyz0lhP9AWVhviQWOw0qoe2GfZ20jQ==
+"@quasar/quasar-app-extension-qmarkdown@^1.0.0-beta.15":
+  version "1.0.0-beta.15"
+  resolved "https://registry.yarnpkg.com/@quasar/quasar-app-extension-qmarkdown/-/quasar-app-extension-qmarkdown-1.0.0-beta.15.tgz#20657debfaed4206d12c9a76ed3be149b54aa434"
+  integrity sha512-taN10p1VgyoMZUHTksT4hTigVRKDVLKNV18B5fvF+Rid06o7VYFvNKvZ14Iqi/ZjPfW1m23t8c8aOjzsm5GxOQ==
   dependencies:
     front-matter "^3.0.2"
     markdown-it "^9.0.1"
