@@ -53,7 +53,7 @@ quasar ext remove @quasar/qcalendar
 ```
 
 # Describe
-You can use `quasar describe QCalendar` (to be implemented before QCalendar v1 release)
+You can use `quasar describe QCalendar`
 
 # Docs
 Can be found [here](https://quasarframework.github.io/app-extension-qcalendar).
