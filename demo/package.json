@@ -4,10 +4,10 @@
   "description": "QCalendar App Extension for Quasar Framework",
   "productName": "QCalendar docs, examples and demo site",
   "cordovaId": "org.cordova.quasar.app",
-  "author": "Jeff Galbraith <jeff.galbraith@xendra.com>",
+  "author": "Jeff Galbraith <jeff@quasar.dev>",
   "private": true,
   "scripts": {
-    "build": "quasar build",
+    "build": "quasar build && cp ./src/404.html ./dist/spa",
     "lint": "eslint --ext .js,.vue src",
     "lint-fix": "eslint --ext .js,.vue src --fix",
     "test": "echo \"No test specified\" && exit 0"
