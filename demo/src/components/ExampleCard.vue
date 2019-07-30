@@ -16,6 +16,10 @@
           @click="copyHeading(slugifiedTitle)"><span class="ellipsis">{{ title }}</span></q-toolbar-title>
         </q-ribbon>
       </q-toolbar>
+      <q-separator v-if="this.$slots.default" />
+      <q-card-section v-if="this.$slots.default">
+        <slot></slot>
+      </q-card-section>
       <q-separator />
     <q-expansion-item
       group="someGroup"
