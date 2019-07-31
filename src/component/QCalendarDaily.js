@@ -149,8 +149,8 @@ export default CalendarIntervals.extend({
         this.columnHeaderBefore === true ? this.__renderColumnHeaderBefore(h, day, idx) : '',
         !this.hideHeader ? this.__renderHeadWeekday(h, day) : '',
         !this.hideHeader ? this.__renderHeadDayBtn(h, day) : '',
-        this.columnHeaderAfter === true ? this.__renderColumnHeaderAfter(h, day, idx) : '',
-        slot ? slot(scope) : ''
+        slot ? slot(scope) : '',
+        this.columnHeaderAfter === true ? this.__renderColumnHeaderAfter(h, day, idx) : ''
       ])
     },
 
