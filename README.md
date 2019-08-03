@@ -39,3 +39,10 @@ Can be found [here](https://quasarframework.github.io/app-extension-qcalendar).
 # Donate
 If you appreciate the work that went into this App Extension, please consider [donating to Quasar](https://donate.quasar.dev).
 
+# Awesome QCalendar
+A list of awesome things related to QCalendar
+
+| Author | Links | Description | Version | Quasar Version | Other |
+| --- | --- | --- | --- | --- | --- |
+| Max Matteo | [web](https://hanack-und-partner.netlify.com/#/calendar) | Test project mockup| 1.0.2 | 1.0.5 | Using Resource Scheduler |
+
