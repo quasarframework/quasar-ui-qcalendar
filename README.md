@@ -44,5 +44,4 @@ A list of awesome things related to QCalendar
 
 | Author | Links | Description | Version | Quasar Version | Other |
 | --- | --- | --- | --- | --- | --- |
-| Max Matteo | [web](https://hanack-und-partner.netlify.com/#/calendar) | Test project mockup| 1.0.2 | 1.0.5 | Using Resource Scheduler |
 
