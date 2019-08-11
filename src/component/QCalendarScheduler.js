@@ -151,24 +151,22 @@ export default CalendarScheduler.extend({
           'q-calendar-scheduler__head-day--droppable': dragOver
         },
         domProps: {
-          ondragover: (e) => {
+          ondragover: (_event) => {
             if (this.dragOverFunc !== void 0) {
-              dragOver = this.dragOverFunc(e, day, 'day', idx)
+              dragOver = this.dragOverFunc(_event, day, 'day', idx)
             }
           },
-          ondrop: (e) => {
+          ondrop: (_event) => {
             if (this.dropFunc !== void 0) {
-              this.dropFunc(e, day, 'day', idx)
+              this.dropFunc(_event, day, 'day', idx)
             }
           }
         },
-        on: this.getDefaultMouseEventHandlers(':day', _event => {
-          return scope
-        })
+        on: this.getDefaultMouseEventHandlers(':day', _event => scope)
       }), [
         this.columnHeaderBefore === true ? this.__renderColumnHeaderBefore(h, day, idx) : '',
-        this.__renderHeadWeekday(h, day),
-        this.__renderHeadDayBtn(h, day),
+        this.__renderHeadWeekday(h, day, idx),
+        this.__renderHeadDayBtn(h, day, idx),
         this.columnHeaderAfter === true ? this.__renderColumnHeaderAfter(h, day, idx) : '',
         slot ? slot(scope) : ''
       ])
@@ -207,9 +205,10 @@ export default CalendarScheduler.extend({
       }, this.weekdayFormatter(day, label))
     },
 
-    __renderHeadDayBtn (h, day) {
+    __renderHeadDayBtn (h, day, idx) {
       const colorCurrent = day.current === true ? this.color : void 0
 
+      let scope = { day, idx }
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
       if (this.enableTheme === true) {
@@ -243,7 +242,7 @@ export default CalendarScheduler.extend({
         on: this.getMouseEventHandlers({
           'click:date': { event: 'click', stop: true },
           'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false }
-        }, _event => day)
+        }, _event => scope)
       }), this.dayFormatter(day, false))
     },
 
@@ -344,8 +343,8 @@ export default CalendarScheduler.extend({
         key: day.date + (idx !== void 0 ? `:${idx}` : ''),
         staticClass: 'q-calendar-scheduler__day',
         class: this.getRelativeClasses(day),
-        on: this.getDefaultMouseEventHandlers(':resource:day', e => {
-          return this.getScopeForSlot(this.getTimestampAtEvent(e, day), idx, resource)
+        on: this.getDefaultMouseEventHandlers(':resource:day', _event => {
+          return this.getScopeForSlot(this.getTimestampAtEvent(_event, day), idx, resource)
         })
       }), [
         ...this.__renderDayResources(h, day, idx)
@@ -374,14 +373,14 @@ export default CalendarScheduler.extend({
         },
         style: style,
         domProps: {
-          ondragover: (e) => {
+          ondragover: (_event) => {
             if (this.dragOverFunc !== void 0) {
-              dragOver = this.dragOverFunc(e, resource, 'resource')
+              dragOver = this.dragOverFunc(_event, resource, 'resource', idx)
             }
           },
-          ondrop: (e) => {
+          ondrop: (_event) => {
             if (this.dropFunc !== void 0) {
-              this.dropFunc(e, resource, 'resource')
+              this.dropFunc(_event, resource, 'resource', idx)
             }
           }
         }
@@ -441,7 +440,7 @@ export default CalendarScheduler.extend({
         style: {
           height
         },
-        on: this.getDefaultMouseEventHandlers(':resource', e => scope)
+        on: this.getDefaultMouseEventHandlers(':resource', _event => scope)
       }, [
         slot ? slot(scope) : h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
           staticClass: 'q-calendar-scheduler__resource-text'
