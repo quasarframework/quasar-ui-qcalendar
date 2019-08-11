@@ -326,8 +326,8 @@ export default CalendarIntervals.extend({
         key: day.date + (idx !== void 0 ? `:${idx}` : ''),
         staticClass: 'q-calendar-daily__day',
         class: this.getRelativeClasses(day),
-        on: this.getDefaultMouseEventHandlers(':time', e => {
-          return this.getScopeForSlot(this.getTimestampAtEvent(e, day))
+        on: this.getDefaultMouseEventHandlers(':time', _event => {
+          return this.getScopeForSlot(this.getTimestampAtEvent(_event, day), idx)
         })
       }), [
         ...this.__renderDayIntervals(h, dayIndex, idx),
@@ -387,8 +387,8 @@ export default CalendarIntervals.extend({
 
       const data = {
         staticClass: 'q-calendar-daily__intervals-body',
-        on: this.getDefaultMouseEventHandlers(':interval', e => {
-          return this.getTimestampAtEvent(e, this.parsedStart)
+        on: this.getDefaultMouseEventHandlers(':interval', _event => {
+          return this.getTimestampAtEvent(_event, this.parsedStart)
         })
       }
 
