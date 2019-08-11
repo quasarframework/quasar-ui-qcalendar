@@ -147,10 +147,10 @@ export default CalendarIntervals.extend({
         })
       }), [
         this.columnHeaderBefore === true ? this.__renderColumnHeaderBefore(h, day, idx) : '',
-        this.__renderHeadWeekday(h, day),
-        this.__renderHeadDayBtn(h, day),
-        this.columnHeaderAfter === true ? this.__renderColumnHeaderAfter(h, day, idx) : '',
-        slot ? slot(scope) : ''
+        !this.hideHeader ? this.__renderHeadWeekday(h, day) : '',
+        !this.hideHeader ? this.__renderHeadDayBtn(h, day) : '',
+        slot ? slot(scope) : '',
+        this.columnHeaderAfter === true ? this.__renderColumnHeaderAfter(h, day, idx) : ''
       ])
     },
 
@@ -438,7 +438,7 @@ export default CalendarIntervals.extend({
         value: this.onResize
       }]
     }, [
-      !this.hideHeader ? this.__renderHead(h) : '',
+      this.__renderHead(h),
       this.__renderBody(h)
     ])
   }
