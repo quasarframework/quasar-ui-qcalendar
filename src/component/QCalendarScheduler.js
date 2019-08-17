@@ -366,7 +366,7 @@ export default CalendarScheduler.extend({
       style = Object.assign(style, styler(scope))
 
       const data = {
-        key: resource.label + '-' + idx,
+        key: resource[this.resourceKey] + '-' + idx,
         staticClass: 'q-calendar-scheduler__day-resource',
         class: {
           'q-calendar-scheduler__day-resource--droppable': dragOver
