@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-qcalendar",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "QCalendar - Embed Calendars and Scedules in your Quasar Apps",
   "author": "Jeff Galbraith <jeff@quasar.dev>",
   "main": "src/index.js",

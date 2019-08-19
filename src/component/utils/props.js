@@ -108,6 +108,10 @@ export default {
   },
   scheduler: {
     resources: Array,
+    resourceKey: {
+      type: String,
+      default: 'label'
+    },
     maxDays: {
       type: Number,
       default: 7

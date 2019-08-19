@@ -165,10 +165,10 @@ export default CalendarScheduler.extend({
         on: this.getDefaultMouseEventHandlers(':day', _event => scope)
       }), [
         this.columnHeaderBefore === true ? this.__renderColumnHeaderBefore(h, day, idx) : '',
-        this.__renderHeadWeekday(h, day, idx),
-        this.__renderHeadDayBtn(h, day, idx),
-        this.columnHeaderAfter === true ? this.__renderColumnHeaderAfter(h, day, idx) : '',
-        slot ? slot(scope) : ''
+        !slot ? this.__renderHeadWeekday(h, day, idx) : '',
+        !slot ? this.__renderHeadDayBtn(h, day, idx) : '',
+        slot ? slot(scope) : '',
+        this.columnHeaderAfter === true ? this.__renderColumnHeaderAfter(h, day, idx) : ''
       ])
     },
 
@@ -366,7 +366,7 @@ export default CalendarScheduler.extend({
       style = Object.assign(style, styler(scope))
 
       const data = {
-        key: resource.label + '-' + idx,
+        key: resource[this.resourceKey] + '-' + idx,
         staticClass: 'q-calendar-scheduler__day-resource',
         class: {
           'q-calendar-scheduler__day-resource--droppable': dragOver

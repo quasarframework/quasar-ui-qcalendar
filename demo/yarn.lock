@@ -935,18 +935,20 @@
   resolved "https://registry.yarnpkg.com/@quasar/extras/-/extras-1.2.0.tgz#46520c283aa82cc4bb65c7a7b6a6e048fb356335"
   integrity sha512-DUo4KRayuwnMwzRK4vYjd6q6e6sGOkt5moD2Lz/q5PiPqvEjoNeQd9vcNPTqpSjWk7AUDVW4meDR2ThHyQMzAQ==
 
-"@quasar/quasar-app-extension-qcalendar@file:..":
-  version "1.0.2"
+"@quasar/quasar-app-extension-qcalendar@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@quasar/quasar-app-extension-qcalendar/-/quasar-app-extension-qcalendar-1.0.3.tgz#23c38f2205820efc0962e2e006b9d81a7cd06c25"
+  integrity sha512-grnhWYtL8x3B+YSgeUeSGLc6hvv2Mlg7W5l7vHkU5IJeyt+mzvcRNss6Luomq2MZ7laDwnIQHIcIlysQrPcC5w==
   dependencies:
     quasar-mixin-colorize "^1.0.0-alpha.4"
 
-"@quasar/quasar-app-extension-qmarkdown@^1.0.0-beta.17":
-  version "1.0.0-beta.17"
-  resolved "https://registry.yarnpkg.com/@quasar/quasar-app-extension-qmarkdown/-/quasar-app-extension-qmarkdown-1.0.0-beta.17.tgz#c795bc0f7a936676ef52b1a96440dced3fb006d4"
-  integrity sha512-cX4lSWTFJ3X4ErEn1gLR1p9brK00DtkfKAiXEasIqy4UtR/pg6nS7cG7oTxa6c+wZzbJSrBy5SgjDzFSjw4RfA==
+"@quasar/quasar-app-extension-qmarkdown@^1.0.0-beta.18":
+  version "1.0.0-beta.18"
+  resolved "https://registry.yarnpkg.com/@quasar/quasar-app-extension-qmarkdown/-/quasar-app-extension-qmarkdown-1.0.0-beta.18.tgz#84ecf8932a7b8d695415cfb8aa306e9697409287"
+  integrity sha512-QHh1HGTPB9BLBaQmdtUBQ0aO+iMJLrNOnI+PjZEpL+oNSAjNgx6SCulzvgnR0hu6HIqL7I7aEYKpi9YBXUmupg==
   dependencies:
     front-matter "^3.0.2"
-    markdown-it "^9.0.1"
+    markdown-it "^9.1.0"
     markdown-it-abbr "^1.0.4"
     markdown-it-container "^2.0.0"
     markdown-it-deflist "^2.0.3"
@@ -963,6 +965,13 @@
     prismjs "^1.17.1"
     raw-loader "^3.1.0"
     ware-loader "^0.2.4"
+
+"@quasar/quasar-app-extension-qpublish@^1.0.0-alpha.4":
+  version "1.0.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/@quasar/quasar-app-extension-qpublish/-/quasar-app-extension-qpublish-1.0.0-alpha.4.tgz#16800b55e24892d9435b3f1092bf92d25ba38c73"
+  integrity sha512-uO8E97r+iPv4LEMP1Qf8owPeNp7GS2l08zr0L6gEGTS4ryLV1smBz2lBvDG59pk31N1dJWfCxIM5lo9lPumAAw==
+  dependencies:
+    quasar-mixin-colorize "^1.0.0-alpha.6"
 
 "@quasar/quasar-app-extension-qribbon@^1.0.0-alpha.10":
   version "1.0.0-beta.3"
@@ -4926,10 +4935,10 @@ markdown-it-toc-and-anchor@^4.2.0:
     clone "^2.1.0"
     uslug "^1.0.4"
 
-markdown-it@^9.0.1:
-  version "9.0.1"
-  resolved "https://registry.yarnpkg.com/markdown-it/-/markdown-it-9.0.1.tgz#aafe363c43718720b6575fd10625cde6e4ff2d47"
-  integrity sha512-XC9dMBHg28Xi7y5dPuLjM61upIGPJG8AiHNHYqIaXER2KNnn7eKnM5/sF0ImNnyoV224Ogn9b1Pck8VH4k0bxw==
+markdown-it@^9.1.0:
+  version "9.1.0"
+  resolved "https://registry.yarnpkg.com/markdown-it/-/markdown-it-9.1.0.tgz#df9601c168568704d554b1fff9af0c5b561168d9"
+  integrity sha512-xHKG4C8iPriyfu/jc2hsCC045fKrMQ0VexX2F1FGYiRxDxqMB2aAhF8WauJ3fltn2kb90moGBkiiEdooGIg55w==
   dependencies:
     argparse "^1.0.7"
     entities "~1.1.1"
@@ -6433,6 +6442,11 @@ quasar-mixin-colorize@^1.0.0-alpha.4:
   version "1.0.0-alpha.4"
   resolved "https://registry.yarnpkg.com/quasar-mixin-colorize/-/quasar-mixin-colorize-1.0.0-alpha.4.tgz#94dfcf13e05fc99599e8937c4308e398d4b56d10"
   integrity sha512-ZTR4RTHaxEdrbyyV3CAJm7AZNoctB7xtoH5mZq9a+nenFFUZ1mYU5svuy7zBmtjQFsv0h7qU2uTOCpd1KRUVBg==
+
+quasar-mixin-colorize@^1.0.0-alpha.6:
+  version "1.0.0-alpha.6"
+  resolved "https://registry.yarnpkg.com/quasar-mixin-colorize/-/quasar-mixin-colorize-1.0.0-alpha.6.tgz#6cd5cdb62d37bf3bde6b740f4ca4d70bf55bfeaf"
+  integrity sha512-4G4OFMCv+4tXQ74hMV7V8RA/UhWdj1WDxE7hryjj7p9RDXO9hiGKLDTOR86MtGbkSglIBvNwBsAO6yaKxktiuQ==
 
 quasar@^1.0.5:
   version "1.0.5"

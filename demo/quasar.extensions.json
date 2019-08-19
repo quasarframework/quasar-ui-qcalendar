@@ -6,5 +6,6 @@
   "qautomate": {
     "quasarConfFixMode": "automatic",
     "sort": true
-  }
+  },
+  "@quasar/qpublish": {}
 }
