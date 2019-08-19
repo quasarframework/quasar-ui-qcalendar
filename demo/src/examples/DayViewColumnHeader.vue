@@ -9,12 +9,12 @@
   >
     <template #column-header-before="days">
       <div class="q-ma-xs">
-        columnHeaderBefore slot
+        column-header-before slot
       </div>
     </template>
     <template #column-header-after="days">
       <div class="q-ma-xs">
-        columnHeaderAfter slot
+        column-header-ater slot
       </div>
     </template>
   </q-calendar>
