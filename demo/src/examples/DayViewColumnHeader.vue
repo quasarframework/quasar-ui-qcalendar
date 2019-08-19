@@ -12,7 +12,7 @@
         columnHeaderBefore slot
       </div>
     </template>
-    <template #colum-headeafter="days">
+    <template #column-header-after="days">
       <div class="q-ma-xs">
         columnHeaderAfter slot
       </div>
