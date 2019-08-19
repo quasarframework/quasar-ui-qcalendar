@@ -20,7 +20,8 @@
   "devDependencies": {
     "@quasar/app": "^1.0.4",
     "@quasar/quasar-app-extension-qcalendar": "file:../.",
-    "@quasar/quasar-app-extension-qmarkdown": "^1.0.0-beta.17",
+    "@quasar/quasar-app-extension-qmarkdown": "^1.0.0-beta.18",
+    "@quasar/quasar-app-extension-qpublish": "^1.0.0-alpha.4",
     "@quasar/quasar-app-extension-qribbon": "^1.0.0-alpha.10",
     "@quasar/quasar-app-extension-qscroller": "^1.0.0-alpha.7",
     "@vue/eslint-config-standard": "^4.0.0",
