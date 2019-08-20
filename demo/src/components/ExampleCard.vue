@@ -177,11 +177,11 @@ export default {
     copyHeading,
     updateParts () {
       this.parts = {}
-      for (let property in this.tagParts) {
-        if (this.tagParts[property] !== '') {
-          this.parts[property] = '```\n' + this.tagParts[property] + '\n```'
+      Object.keys(this.tagParts).forEach(key => {
+        if (this.tagParts[key] !== '') {
+          this.parts[key] = '```\n' + this.tagParts[key] + '\n```'
         }
-      }
+      })
     }
   }
 }
