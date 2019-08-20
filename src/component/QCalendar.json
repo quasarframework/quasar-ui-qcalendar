@@ -11,8 +11,8 @@
         "All"
       ],
       "examples": [
-        "2019-04-01",
-        "2020-08-08"
+        "v-model=\"2019-04-01\"",
+        "v-model=\"2020-08-08\""
       ]
     },
     "view": {
@@ -38,8 +38,8 @@
         "custom-scheduler"
       ],
       "examples": [
-        "week",
-        "month"
+        "view=\"week\"",
+        "view=\"month\""
       ]
     },
     "now": {
@@ -50,8 +50,8 @@
         "All"
       ],
       "examples": [
-        "2019-04-01",
-        "2020-08-08"
+        "now=\"2019-04-01\"",
+        "now=\"2020-08-08\""
       ]
     },
     "weekdays": {
@@ -63,8 +63,8 @@
         "All"
       ],
       "examples": [
-        "[1,2,3,4,5,6,0]",
-        "[1,2,3,4,5]"
+        ":weekdays=\"[1,2,3,4,5,6,0]\"",
+        ":weekdays=\"[1,2,3,4,5]\""
       ]
     },
     "disabled-days": {
@@ -75,7 +75,7 @@
         "All"
       ],
       "examples": [
-        "['2019-04-01', '2019-04-02', '2019-04-03', '2019-04-04']"
+        ":disabled-days=\"['2019-04-01', '2019-04-02', '2019-04-03', '2019-04-04']\""
       ]
     },
     "locale": {
@@ -87,10 +87,10 @@
         "All"
       ],
       "examples": [
-        "de-de",
-        "de",
-        "fr",
-        "pl"
+        "locale=\"de-de\"",
+        "locale=\"de\"",
+        "locale=\"fr\"",
+        "locale=\"pl\""
       ]
     },
     "max-days": {
@@ -103,8 +103,8 @@
         "Scheduler"
       ],
       "examples": [
-        "14",
-        "10"
+        "max-days=\"14\"",
+        "max-days=\"10\""
       ]
     },
     "color": {
@@ -116,9 +116,9 @@
         "All"
       ],
       "examples": [
-        "orange-7",
-        "blue-grey-4",
-        "#00CCFC"
+        "color=\"orange-7\"",
+        "color=\"blue-grey-4\"",
+        "color=\"#00CCFC\""
       ]
     },
     "enable-theme": {
@@ -172,7 +172,7 @@
         "All"
       ],
       "examples": [
-        "flip-right"
+        "transition-prev=\"flip-right\""
       ]
     },
     "transition-next": {
@@ -184,7 +184,7 @@
         "All"
       ],
       "examples": [
-        "flip-left"
+        "transition-next=\"flip-left\""
       ]
     },
     "drag-over-func": {
@@ -282,8 +282,8 @@
         "Day"
       ],
       "examples": [
-        "3",
-        "5"
+        "column-count=\"3\"",
+        "column-count=\"5\""
       ]
     },
     "column-index-start": {
@@ -298,8 +298,8 @@
         "Day"
       ],
       "examples": [
-        "0",
-        "2"
+        "column-index-start=\"0\"",
+        "column-index-start=\"2\""
       ]
     },
     "short-interval-label": {
@@ -322,8 +322,8 @@
         "Day"
       ],
       "examples": [
-        "60",
-        "100"
+        "interval-height=\"60\"",
+        "interval-height=\"100\""
       ]
     },
     "interval-style": {
@@ -342,7 +342,8 @@
         "Day"
       ],
       "examples": [
-        ":interval-style=\"intervalStyle\""
+        "interval-style=\"background-color: #c0c0c0\"",
+        ":interval-style=\"myIntervalStyle\""
       ]
     },
     "interval-minutes": {
@@ -357,8 +358,8 @@
         "Day"
       ],
       "examples": [
-        "15",
-        "30"
+        "interval-minutes=\"15\"",
+        "interval-minutes=\"30\""
       ]
     },
     "interval-count": {
@@ -373,8 +374,8 @@
         "Day"
       ],
       "examples": [
-        "48",
-        "96"
+        "interval-count=\"48\"",
+        "interval-count=\"96\""
       ]
     },
     "interval-start": {
@@ -389,8 +390,8 @@
         "Day"
       ],
       "examples": [
-        "6",
-        "8"
+        "interval-start=\"6\"",
+        "interval-start=\"8\""
       ]
     },
     "hour24-format": {
@@ -413,8 +414,8 @@
         "Month"
       ],
       "examples": [
-        "80",
-        "100"
+        "day-height=\"80\"",
+        "day-height=\"100\""
       ]
     },
     "day-padding": {
@@ -426,7 +427,7 @@
         "Month"
       ],
       "examples": [
-        "20px 5px"
+        "day-padding=\"20px 5px\""
       ]
     },
     "day-style": {
@@ -445,6 +446,7 @@
         "Month"
       ],
       "examples": [
+        "day-style=\"background-color: #c0c0c0\"",
         ":day-style=\"dayStyle\""
       ]
     },
@@ -460,7 +462,7 @@
         "Month"
       ],
       "examples": [
-        "2"
+        "min-weeks=\"2\""
       ]
     },
     "short-month-label": {
@@ -515,8 +517,8 @@
         "Scheduler"
       ],
       "examples": [
-        "80",
-        "100"
+        "resource-height=\"80\"",
+        "resource-height=\"100\""
       ]
     },
     "resource-width": {
@@ -530,8 +532,8 @@
         "Scheduler"
       ],
       "examples": [
-        "120",
-        "200"
+        "resource-width=\"120\"",
+        "resource-width=\"200\""
       ]
     },
     "resource-style": {
