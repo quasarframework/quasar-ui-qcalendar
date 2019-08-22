@@ -1150,9 +1150,9 @@ punycode@^2.1.0:
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
 quasar-mixin-colorize@^1.0.0-alpha.4:
-  version "1.0.0-alpha.6"
-  resolved "https://registry.yarnpkg.com/quasar-mixin-colorize/-/quasar-mixin-colorize-1.0.0-alpha.6.tgz#6cd5cdb62d37bf3bde6b740f4ca4d70bf55bfeaf"
-  integrity sha512-4G4OFMCv+4tXQ74hMV7V8RA/UhWdj1WDxE7hryjj7p9RDXO9hiGKLDTOR86MtGbkSglIBvNwBsAO6yaKxktiuQ==
+  version "1.0.0-alpha.8"
+  resolved "https://registry.yarnpkg.com/quasar-mixin-colorize/-/quasar-mixin-colorize-1.0.0-alpha.8.tgz#db62edd20b4adf0c4bafa1b6921ff85235cba337"
+  integrity sha512-LJhgkaLlFJNmkrdZn0yLVLV9OeU1tiVi8cvdMTJzYmQfUFNrWU1fn/Kq1m6gM60ErCFSCtpisltZq2UlhVDlJA==
 
 read-pkg-up@^2.0.0:
   version "2.0.0"
