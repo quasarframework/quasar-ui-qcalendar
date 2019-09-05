@@ -350,7 +350,7 @@ export default CalendarBase.extend({
         }
       }
     }, [
-      !this.hideHeader ? this.__renderHead(h) : '',
+      !this.hideHeader && this.__renderHead(h),
       ...this.__renderWeeks(h)
     ])
   }

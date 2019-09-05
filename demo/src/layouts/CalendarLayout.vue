@@ -16,11 +16,8 @@
 
         <q-icon name="far fa-calendar-alt" class="q-ml-md" size="1.5rem"></q-icon>
 
-        <q-toolbar-title v-if="$q.screen.width > 500">
-          QCalendar
-          <q-tooltip v-if="$q.screen.width < 1077">
-            QCalendar
-          </q-tooltip>
+        <q-toolbar-title>
+          QCalendar <span class="text-subtitle2">v{{ version }}</span>
         </q-toolbar-title>
 
         <q-btn flat dense label="Today" class="q-mx-md" @click="setToday"></q-btn>
@@ -37,9 +34,10 @@
           map-options
           style="min-width: 120px;"
         ></q-select>
+
         <q-space></q-space>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div v-if="$q.screen.width > 500">Quasar v{{ $q.version }}</div>
       </q-toolbar>
     </q-header>
 
@@ -93,6 +91,7 @@
 import { mapGetters } from 'vuex'
 import { getLocale } from '../util/getLocale'
 import { padTime } from '../util/time'
+import { version } from '@quasar/quasar-app-extension-qcalendar/package.json'
 
 export default {
   name: 'CalendarLayout',
@@ -102,6 +101,7 @@ export default {
   },
   data () {
     return {
+      version: version,
       leftDrawerOpen: this.$q.platform.is.desktop,
       titleFormatter: null,
       dateFormatter: null,

@@ -181,6 +181,8 @@ Duration:   {{ event.duration }}
         :day-height="dayHeight"
         :show-month-label="showMonthLabel"
         :show-work-weeks="showWorkWeeks"
+        :no-default-header-btn="noDefaultHeaderBtn"
+        :no-default-header-text="noDefaultHeaderText"
         :enable-theme="enableTheme === true"
         :resources="resources"
         @change="onChanged"
@@ -198,7 +200,7 @@ Duration:   {{ event.duration }}
           <template v-for="(event, index) in getEvents(date)">
             <q-badge
               :key="index"
-              style="width: 100%; cursor: pointer;"
+              style="width: 100%; cursor: pointer; height: 14px; max-height: 14px"
               class="ellipsis"
               :class="badgeClasses(event, 'day')"
               :style="badgeStyles(event, 'day')"
@@ -219,7 +221,7 @@ Duration:   {{ event.duration }}
               <q-badge
                 v-if="!event.time"
                 :key="index"
-                style="width: 100%; cursor: pointer;"
+                style="width: 100%; cursor: pointer; height: 14px; max-height: 14px"
                 class="ellipsis"
                 :class="badgeClasses(event, 'header')"
                 :style="badgeStyles(event, 'header')"
@@ -235,7 +237,7 @@ Duration:   {{ event.duration }}
               <q-badge
                 v-else
                 :key="index"
-                class="q-ma-xs"
+                class="q-ma-xs self-end"
                 :class="badgeClasses(event, 'header')"
                 :style="badgeStyles(event, 'header')"
                 style="width: 10px; max-width: 10px; height: 10px; max-height: 10px"
@@ -375,6 +377,8 @@ export default {
       noScroll: 'calendar/noScroll',
       showMonthLabel: 'calendar/showMonthLabel',
       showWorkWeeks: 'calendar/showWorkWeeks',
+      noDefaultHeaderBtn: 'calendar/noDefaultHeaderBtn',
+      noDefaultHeaderText: 'calendar/noDefaultHeaderText',
       intervalRange: 'calendar/intervalRange',
       intervalRangeStep: 'calendar/intervalRangeStep',
       intervalHeight: 'calendar/intervalHeight',

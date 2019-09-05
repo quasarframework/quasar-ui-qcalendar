@@ -107,7 +107,7 @@ export default CalendarScheduler.extend({
           width
         }
       }), [
-        slot ? slot(this.days) : ''
+        slot && slot(this.days)
       ])
     },
 
@@ -164,11 +164,11 @@ export default CalendarScheduler.extend({
         },
         on: this.getDefaultMouseEventHandlers(':day', _event => scope)
       }), [
-        this.columnHeaderBefore === true ? this.__renderColumnHeaderBefore(h, day, idx) : '',
-        !slot ? this.__renderHeadWeekday(h, day, idx) : '',
-        !slot ? this.__renderHeadDayBtn(h, day, idx) : '',
-        slot ? slot(scope) : '',
-        this.columnHeaderAfter === true ? this.__renderColumnHeaderAfter(h, day, idx) : ''
+        this.columnHeaderBefore === true && this.__renderColumnHeaderBefore(h, day, idx),
+        this.noDefaultHeaderText !== true && this.__renderHeadWeekday(h, day, idx),
+        this.noDefaultHeaderBtn !== true && this.__renderHeadDayBtn(h, day, idx),
+        slot && slot(scope),
+        this.columnHeaderAfter === true && this.__renderColumnHeaderAfter(h, day, idx)
       ])
     },
 
@@ -253,7 +253,7 @@ export default CalendarScheduler.extend({
       return h('div', {
         staticClass: 'q-calendar-scheduler__column-header--before'
       }, [
-        slot ? slot(scope) : ''
+        slot && slot(scope)
       ])
     },
 
@@ -264,7 +264,7 @@ export default CalendarScheduler.extend({
       return h('div', {
         staticClass: 'q-calendar-scheduler__column-header--after'
       }, [
-        slot ? slot(scope) : ''
+        slot && slot(scope)
       ])
     },
 
@@ -458,7 +458,7 @@ export default CalendarScheduler.extend({
         value: this.onResize
       }]
     }, [
-      !this.hideHeader ? this.__renderHead(h) : '',
+      !this.hideHeader && this.__renderHead(h),
       this.__renderBody(h)
     ])
   }

@@ -14,6 +14,8 @@ export default {
   noScroll: false,
   showMonthLabel: true,
   showWorkWeeks: false,
+  noDefaultHeaderBtn: false,
+  noDefaultHeaderText: false,
   intervalRange: { min: 0, max: 24 },
   intervalRangeStep: 1,
   intervalHeight: 60,

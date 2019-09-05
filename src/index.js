@@ -13,12 +13,8 @@ const extendQuasarConf = function (conf) {
   // make sure boot file transpiles
   conf.build.transpileDependencies.push(/quasar-app-extension-qcalendar[\\/]src/)
 
-  // qcalendar is dependent on colorize mixin
-  conf.build.transpileDependencies.push(/quasar-mixin-colorize[\\/]src/)
-
   // make sure qcalendar css goes through webpack to avoid ssr issues
   conf.css.push('~@quasar/quasar-app-extension-qcalendar/src/component/calendar-variables.styl')
-  conf.css.push('~quasar-mixin-colorize/src/qColors.styl')
   console.log(` App Extension (qcalendar) Info: 'Adding calendar-variables.styl css reference to your quasar.conf.js'`)
 
   conf.css.push('~@quasar/quasar-app-extension-qcalendar/src/component/calendar-daily.styl')
@@ -34,6 +30,7 @@ const extendQuasarConf = function (conf) {
 module.exports = function (api) {
   // quasar compatibility check
   api.compatibleWith('@quasar/app', '^1.0.0')
+  api.compatibleWith('@quasar/quasar-app-extension-colorize', '^1.0.0-alpha.1')
 
   // register JSON api
   api.registerDescribeApi('QCalendar', './component/QCalendar.json')

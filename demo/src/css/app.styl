@@ -3,6 +3,18 @@
 $fgColor ?= #159957
 $bgColor ?= #155799
 
+.quasar
+  position absolute
+  left 10px
+  bottom 10px
+  opacity 0.5
+
+.byline
+  position absolute
+  bottom 10px
+  right 10px
+  opacity 0.5
+
 .qribbon__container
   position relative
 
@@ -64,6 +76,8 @@ a
 .btn + .btn
   margin-left 1rem
 
+.project-name
+  font-weight 700
 
 @media screen and (min-width 64em)
   .btn
@@ -81,9 +95,15 @@ a
     padding 0.75rem
     font-size 0.9rem
   .btn + .btn
-      margin-left 0
+    margin-left 0
+  .byline
+    left 0
+    align-text center
+  .quasar
+    opacity 0
 
 .page-header
+  position relative
   color #fff
   text-align center
   background-color $bgColor
@@ -91,45 +111,44 @@ a
 
 @media screen and (min-width 64em)
   .page-header
-    padding 5rem 6rem
+    padding 3rem 4rem
 
 @media screen and (min-width 42em) and (max-width 64em)
   .page-header
-    padding 3rem 4rem
+    padding 2rem 4rem
 
 @media screen and (max-width 42em)
   .page-header
     padding 2rem 1rem 1rem 1rem
 
-.project-name
-  font-weight 700
-  margin-top 0
-  margin-bottom 0.1rem
+  .project-name
+    font-weight 700
+    margin-top 0
+    margin-bottom 0.1rem
 
 @media screen and (min-width 64em)
+  .project-name
+    font-size 4.25rem
+
+@media screen and (min-width 42em) and (max-width 64em)
   .project-name
     font-size 3.25rem
 
-@media screen and (min-width 42em) and (max-width 64em)
-  .project-name
-    font-size 2.25rem
-
 @media screen and (max-width 42em)
   .project-name
-    font-size 1.75rem
+    font-size 2.75rem
 
-.project-tagline
-  margin-bottom 2rem
-  font-weight normal
-  opacity 0.7
+  .project-tagline
+    font-weight normal
+    opacity 0.7
 
 @media screen and (min-width 64em)
   .project-tagline
-    font-size 1.25rem
+    font-size 1.75rem
 
 @media screen and (min-width 42em) and (max-width 64em)
   .project-tagline
-    font-size 1.15rem
+    font-size 1.25rem
 
 @media screen and (max-width 42em)
   .project-tagline
@@ -143,7 +162,7 @@ a
   margin-top 2rem
   margin-bottom 1rem
   font-weight normal
-  color $fgColor
+  color #159957
 .main-content p
   margin-bottom 1em
 .main-content code

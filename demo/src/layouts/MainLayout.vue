@@ -12,14 +12,13 @@
           <q-icon name="menu" />
         </q-btn>
 
-        <q-toolbar-title v-if="$q.screen.width > 500">
-          QCalendar
-          <q-tooltip v-if="$q.screen.width < 1077">
-            QCalendar
-          </q-tooltip>
+        <q-toolbar-title>
+          QCalendar <span class="text-subtitle2">v{{ version }}</span>
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <q-space />
+
+        <div v-if="$q.screen.width > 500">Quasar v{{ $q.version }}</div>
 
         <q-btn
           flat
@@ -80,6 +79,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { scroll } from 'quasar'
+import { version } from '@quasar/quasar-app-extension-qcalendar/package.json'
 
 export default {
   name: 'MainLayout',
@@ -88,6 +88,7 @@ export default {
   },
   data () {
     return {
+      version: version,
       leftDrawerOpen: this.$q.platform.is.desktop,
       rightDrawerOpen: this.$q.platform.is.desktop,
       activeToc: 0

@@ -13,6 +13,8 @@ export const hideHeader = (state) => state.hideHeader
 export const noScroll = (state) => state.noScroll
 export const showMonthLabel = (state) => state.showMonthLabel
 export const showWorkWeeks = (state) => state.showWorkWeeks
+export const noDefaultHeaderBtn = (state) => state.noDefaultHeaderBtn
+export const noDefaultHeaderText = (state) => state.noDefaultHeaderText
 export const intervalRange = (state) => state.intervalRange
 export const intervalRangeStep = (state) => state.intervalRangeStep
 export const intervalHeight = (state) => state.intervalHeight

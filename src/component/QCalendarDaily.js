@@ -87,7 +87,7 @@ export default CalendarIntervals.extend({
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
         staticClass: 'q-calendar-daily__intervals-head q-calendar-daily__intervals-head--text'
       }), [
-        intervalsHeader ? intervalsHeader(this.days) : ''
+        intervalsHeader && intervalsHeader(this.days)
       ])
     },
 
@@ -146,11 +146,11 @@ export default CalendarIntervals.extend({
           return scope
         })
       }), [
-        this.columnHeaderBefore === true ? this.__renderColumnHeaderBefore(h, day, idx) : '',
-        !slot ? this.__renderHeadWeekday(h, day) : '',
-        !slot ? this.__renderHeadDayBtn(h, day) : '',
-        slot ? slot(scope) : '',
-        this.columnHeaderAfter === true ? this.__renderColumnHeaderAfter(h, day, idx) : ''
+        this.columnHeaderBefore === true && this.__renderColumnHeaderBefore(h, day, idx),
+        this.noDefaultHeaderText !== true && this.__renderHeadWeekday(h, day),
+        this.noDefaultHeaderBtn !== true && this.__renderHeadDayBtn(h, day),
+        slot && slot(scope),
+        this.columnHeaderAfter === true && this.__renderColumnHeaderAfter(h, day, idx)
       ])
     },
 
@@ -234,7 +234,7 @@ export default CalendarIntervals.extend({
       return h('div', {
         staticClass: 'q-calendar-daily__column-header--before'
       }, [
-        slot ? slot(scope) : ''
+        slot && slot(scope)
       ])
     },
 
@@ -245,7 +245,7 @@ export default CalendarIntervals.extend({
       return h('div', {
         staticClass: 'q-calendar-daily__column-header--after'
       }, [
-        slot ? slot(scope) : ''
+        slot && slot(scope)
       ])
     },
 
@@ -331,7 +331,7 @@ export default CalendarIntervals.extend({
         })
       }), [
         ...this.__renderDayIntervals(h, dayIndex, idx),
-        slot ? slot(scope) : ''
+        slot && slot(scope)
       ])
     },
 
@@ -438,7 +438,7 @@ export default CalendarIntervals.extend({
         value: this.onResize
       }]
     }, [
-      !this.hideHeader ? this.__renderHead(h) : '',
+      !this.hideHeader && this.__renderHead(h),
       this.__renderBody(h)
     ])
   }
