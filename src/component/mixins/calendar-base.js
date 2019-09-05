@@ -3,7 +3,8 @@ import Vue from 'vue'
 // Mixins
 import Times from './times'
 import Mouse from './mouse'
-import { Colorize, Theme } from 'quasar-mixin-colorize'
+import Colorize from '@quasar/quasar-app-extension-colorize/src/colorize.js'
+import Theme from '@quasar/quasar-app-extension-colorize/src/theme.js'
 
 // Util
 import props from '../utils/props'
