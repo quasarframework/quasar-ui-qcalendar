@@ -200,7 +200,7 @@ Duration:   {{ event.duration }}
           <template v-for="(event, index) in getEvents(date)">
             <q-badge
               :key="index"
-              style="width: 100%; cursor: pointer;"
+              style="width: 100%; cursor: pointer; height: 14px; max-height: 14px"
               class="ellipsis"
               :class="badgeClasses(event, 'day')"
               :style="badgeStyles(event, 'day')"
@@ -216,12 +216,12 @@ Duration:   {{ event.duration }}
           </template>
         </template>
         <template #day-header="{ date }">
-          <div class="row justify-center">
+          <div class="row fit justify-center">
             <template v-for="(event, index) in eventsMap[date]">
               <q-badge
                 v-if="!event.time"
                 :key="index"
-                style="width: 100%; cursor: pointer;"
+                style="width: 100%; cursor: pointer; height: 14px; max-height: 14px"
                 class="ellipsis"
                 :class="badgeClasses(event, 'header')"
                 :style="badgeStyles(event, 'header')"
@@ -237,7 +237,7 @@ Duration:   {{ event.duration }}
               <q-badge
                 v-else
                 :key="index"
-                class="q-ma-xs"
+                class="q-ma-xs self-end"
                 :class="badgeClasses(event, 'header')"
                 :style="badgeStyles(event, 'header')"
                 style="width: 10px; max-width: 10px; height: 10px; max-height: 10px"
