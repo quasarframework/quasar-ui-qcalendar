@@ -43,6 +43,12 @@ export const showMonthLabel = (state, b) => {
 export const showWorkWeeks = (state, b) => {
   state.showWorkWeeks = b
 }
+export const noDefaultHeaderBtn = (state, b) => {
+  state.noDefaultHeaderBtn = b
+}
+export const noDefaultHeaderText = (state, b) => {
+  state.noDefaultHeaderText = b
+}
 export const intervalRange = (state, r) => {
   state.intervalRange = r
 }

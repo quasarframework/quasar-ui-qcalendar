@@ -481,6 +481,24 @@
         "Month"
       ]
     },
+    "no-default-header-btn": {
+      "type": "Boolean",
+      "category": "content",
+      "desc": "Do not display the day button in the header",
+      "applicable": [
+        "Day",
+        "Schedule"
+      ]
+    },
+    "no-default-header-text": {
+      "type": "Boolean",
+      "category": "content",
+      "desc": "Do not display the day text in the header",
+      "applicable": [
+        "Day",
+        "Schedule"
+      ]
+    },
     "show-month-label": {
       "type": "Boolean",
       "category": "content",

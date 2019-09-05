@@ -12,6 +12,8 @@ export default {
     hideHeader: Boolean,
     noScroll: Boolean,
     shortWeekdayLabel: Boolean,
+    noDefaultHeaderText: Boolean,
+    noDefaultHeaderBtn: Boolean,
     locale: {
       type: String,
       default: 'en-us'

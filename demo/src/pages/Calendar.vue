@@ -181,6 +181,8 @@ Duration:   {{ event.duration }}
         :day-height="dayHeight"
         :show-month-label="showMonthLabel"
         :show-work-weeks="showWorkWeeks"
+        :no-default-header-btn="noDefaultHeaderBtn"
+        :no-default-header-text="noDefaultHeaderText"
         :enable-theme="enableTheme === true"
         :resources="resources"
         @change="onChanged"
@@ -375,6 +377,8 @@ export default {
       noScroll: 'calendar/noScroll',
       showMonthLabel: 'calendar/showMonthLabel',
       showWorkWeeks: 'calendar/showWorkWeeks',
+      noDefaultHeaderBtn: 'calendar/noDefaultHeaderBtn',
+      noDefaultHeaderText: 'calendar/noDefaultHeaderText',
       intervalRange: 'calendar/intervalRange',
       intervalRangeStep: 'calendar/intervalRangeStep',
       intervalHeight: 'calendar/intervalHeight',

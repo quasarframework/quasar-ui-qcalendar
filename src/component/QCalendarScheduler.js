@@ -165,8 +165,8 @@ export default CalendarScheduler.extend({
         on: this.getDefaultMouseEventHandlers(':day', _event => scope)
       }), [
         this.columnHeaderBefore === true ? this.__renderColumnHeaderBefore(h, day, idx) : '',
-        !slot ? this.__renderHeadWeekday(h, day, idx) : '',
-        !slot ? this.__renderHeadDayBtn(h, day, idx) : '',
+        this.noDefaultHeaderText !== true ? this.__renderHeadWeekday(h, day, idx) : '',
+        this.noDefaultHeaderBtn !== true ? this.__renderHeadDayBtn(h, day, idx) : '',
         slot ? slot(scope) : '',
         this.columnHeaderAfter === true ? this.__renderColumnHeaderAfter(h, day, idx) : ''
       ])

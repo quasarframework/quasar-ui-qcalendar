@@ -15,14 +15,14 @@
         </q-card-section>
       </q-card>
     </q-dialog>
-    <div class="col-12 q-px-md q-pb-sm">
+    <div class="col-12 full-width q-px-md q-pb-sm">
       <q-btn
         dense
         label="Change locale"
         @click="displayLocale = true"
         class="full-width"
       ></q-btn>
-      <div class="col-12 q-px-md q-pb-sm">
+      <div class="col-12 full-width q-px-md q-pb-sm">
         <span class="text-body2" >Max days (custom, scheduler)</span>
         <q-slider
           v-model="maxDays"
@@ -32,61 +32,71 @@
         />
       </div>
       <q-toggle
-        class="col-12"
+        class="col-12 full-width"
         v-model="fiveDayWorkWeek"
         label="5 day work week"
       ></q-toggle>
       <q-toggle
-        class="col-12"
+        class="col-12 full-width"
         v-model="firstDayMonday"
         label="Week starts on Monday"
       ></q-toggle>
       <q-toggle
-        class="col-12"
+        class="col-12 full-width"
         v-model="shortMonthLabel"
         label="Short month label"
       ></q-toggle>
       <q-toggle
-        class="col-12"
+        class="col-12 full-width"
         v-model="shortWeekdayLabel"
         label="Short weekday label"
       ></q-toggle>
       <q-toggle
-        class="col-12"
+        class="col-12 full-width"
         v-model="shortIntervalLabel"
         label="Short interval label"
       ></q-toggle>
       <q-toggle
-        class="col-12"
+        class="col-12 full-width"
         v-model="hour24Format"
         label="24hr interval labels"
       ></q-toggle>
       <q-toggle
-        class="col-12"
+        class="col-12 full-width"
         v-model="showWorkWeeks"
         label="Show work weeks"
       ></q-toggle>
       <q-toggle
-        class="col-12"
+        class="col-12 full-width"
+        v-model="noDefaultHeaderBtn"
+        label="No Default Header Button"
+      ></q-toggle>
+      <q-toggle
+        class="col-12 full-width"
+        v-model="noDefaultHeaderText"
+        label="No Default Header Text"
+      ></q-toggle>
+      <q-toggle
+        class="col-12 full-width"
         v-model="hideHeader"
         label="Hide header"
       ></q-toggle>
       <q-toggle
-        class="col-12"
+        class="col-12 full-width"
         v-model="noScroll"
         label="No scroll"
       ></q-toggle>
       <q-toggle
-        class="col-12"
+        class="col-12 full-width"
         v-model="showMonthLabel"
         label="Show month label"
       ></q-toggle>
       <q-toggle
-        class="col-12"
+        class="col-12 full-width"
         v-model="showDayOfYearLabel"
         label="Show Day of Year Label"
       ></q-toggle>
-      <div class="col-12 q-px-md">
+      <div class="col-12 full-width q-px-md">
         <span class="text-body2" >Interval Range (daily)</span>
         <q-range
           v-model="intervalRange"
@@ -98,7 +108,7 @@
           :right-label-value="rightLabelRange"
         />
       </div>
-      <div class="col-12 q-px-md q-pb-sm">
+      <div class="col-12 full-width q-px-md q-pb-sm">
         <span class="text-body2" >Interval Step</span>
         <div class="q-gutter-sm">
           <q-radio v-model="intervalRangeStep" :val="1" label="60 min" />
@@ -106,7 +116,7 @@
           <q-radio v-model="intervalRangeStep" :val="0.25" label="15 min" />
         </div>
       </div>
-      <div class="col-12 q-px-md q-pb-sm">
+      <div class="col-12 full-width q-px-md q-pb-sm">
         <span class="text-body2" >Interval height (daily)</span>
         <q-slider
           v-model="intervalHeight"
@@ -116,7 +126,7 @@
           :label-value="intervalHeight + 'px'"
         />
       </div>
-      <div class="col-12 q-px-md q-pb-sm">
+      <div class="col-12 full-width q-px-md q-pb-sm">
         <span class="text-body2" >Day height (monthly)</span>
         <q-slider
           v-model="dayHeight"
@@ -126,7 +136,7 @@
           :label-value="dayHeight + 'px'"
         />
       </div>
-      <div class="col-12 q-px-md q-pb-sm">
+      <div class="col-12 full-width q-px-md q-pb-sm">
         <span class="text-body2" >Resource height (scheduler)</span>
         <q-slider
           v-model="resourceHeight"
@@ -136,7 +146,7 @@
           :label-value="resourceHeight + 'px'"
         />
       </div>
-      <div class="col-12 q-px-md q-pb-sm">
+      <div class="col-12 full-width q-px-md q-pb-sm">
         <span class="text-body2" >Resource width (scheduler)</span>
         <q-slider
           v-model="resourceWidth"
@@ -147,7 +157,7 @@
         />
       </div>
       <q-toggle
-        class="col-12"
+        class="col-12 full-width"
         v-model="enableTheme"
         label="Enable themes"
       ></q-toggle>
@@ -306,6 +316,22 @@ export default {
       },
       set (b) {
         this.$store.commit('calendar/showWorkWeeks', b)
+      }
+    },
+    noDefaultHeaderBtn: {
+      get () {
+        return this.$store.state.calendar.noDefaultHeaderBtn
+      },
+      set (b) {
+        this.$store.commit('calendar/noDefaultHeaderBtn', b)
+      }
+    },
+    noDefaultHeaderText: {
+      get () {
+        return this.$store.state.calendar.noDefaultHeaderText
+      },
+      set (b) {
+        this.$store.commit('calendar/noDefaultHeaderText', b)
       }
     },
     intervalRange: {
