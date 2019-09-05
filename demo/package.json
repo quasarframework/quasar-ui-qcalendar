@@ -13,22 +13,23 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
-    "@quasar/extras": "^1.2.0",
+    "@quasar/extras": "^1.3.1",
     "drag-drop-touch": "^1.3.0",
-    "quasar": "^1.0.5"
+    "quasar": "^1.1.0"
   },
   "devDependencies": {
-    "@quasar/app": "^1.0.4",
+    "@quasar/app": "^1.0.6",
+    "@quasar/quasar-app-extension-colorize": "^1.0.0-alpha.1",
     "@quasar/quasar-app-extension-qcalendar": "file:../.",
-    "@quasar/quasar-app-extension-qmarkdown": "^1.0.0-beta.18",
-    "@quasar/quasar-app-extension-qpublish": "^1.0.0-alpha.5",
-    "@quasar/quasar-app-extension-qribbon": "^1.0.0-alpha.10",
+    "@quasar/quasar-app-extension-qmarkdown": "^1.0.0-beta.19",
+    "@quasar/quasar-app-extension-qpublish": "^1.0.0-alpha.7",
+    "@quasar/quasar-app-extension-qribbon": "^1.0.0-beta.6",
     "@quasar/quasar-app-extension-qscroller": "^1.0.0-alpha.7",
     "@vue/eslint-config-standard": "^4.0.0",
-    "babel-eslint": "^10.0.2",
+    "babel-eslint": "^10.0.3",
     "copy-webpack-plugin": "^5.0.4",
-    "eslint": "^6.2.1",
-    "eslint-loader": "^2.2.1",
+    "eslint": "^6.3.0",
+    "eslint-loader": "^3.0.0",
     "eslint-plugin-vue": "^5.2.3",
     "quasar-app-extension-qautomate": "^1.0.0-alpha.5"
   },
