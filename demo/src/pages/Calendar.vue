@@ -216,7 +216,7 @@ Duration:   {{ event.duration }}
           </template>
         </template>
         <template #day-header="{ date }">
-          <div class="row fit justify-center">
+          <div class="row justify-center">
             <template v-for="(event, index) in eventsMap[date]">
               <q-badge
                 v-if="!event.time"
