@@ -10,5 +10,4 @@ yarn-error.log*
 _redirects
 .github
 yarn.lock
-_redirects
 .vscode
