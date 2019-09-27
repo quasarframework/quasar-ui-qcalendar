@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-qcalendar",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "QCalendar - Embed Calendars and Scedules in your Quasar Apps",
   "author": "Jeff Galbraith <jeff@quasar.dev>",
   "main": "src/index.js",
@@ -42,8 +42,8 @@
   "devDependencies": {
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.3",
-    "eslint": "^6.3.0",
-    "eslint-loader": "^3.0.0",
+    "eslint": "^6.4.0",
+    "eslint-loader": "^3.0.2",
     "eslint-plugin-vue": "^5.2.3"
   }
 }

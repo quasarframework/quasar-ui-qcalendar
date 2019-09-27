@@ -1,6 +1,9 @@
 // Styles
 import './calendar-weekly.styl'
 
+// Quasar
+import { QBtn } from 'quasar'
+
 // Mixins
 import CalendarBase from './mixins/calendar-base'
 
@@ -304,7 +307,7 @@ export default CalendarBase.extend({
 
       const dayLabel = this.dayFormatter(day, false)
 
-      return h('q-btn', updateColors(colorCurrent !== void 0 ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
+      return h(QBtn, updateColors(colorCurrent !== void 0 ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
         staticClass: 'q-calendar-weekly__day-label',
         props: {
           unelevated: true,

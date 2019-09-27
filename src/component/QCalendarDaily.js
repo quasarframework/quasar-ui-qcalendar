@@ -1,6 +1,9 @@
 // Styles
 import './calendar-daily.styl'
 
+// Quasar
+import { QBtn } from 'quasar'
+
 // Directives
 import Resize from './directives/resize'
 
@@ -207,7 +210,7 @@ export default CalendarIntervals.extend({
         updateColors = this.setBothColors
       }
 
-      return h('q-btn', updateColors(colorCurrent !== void 0 ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
+      return h(QBtn, updateColors(colorCurrent !== void 0 ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
         staticClass: 'q-calendar-daily__head-day-label',
         style: {
           color: day.current === true ? colorCurrent : void 0

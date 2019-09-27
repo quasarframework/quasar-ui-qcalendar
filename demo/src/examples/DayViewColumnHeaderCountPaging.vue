@@ -20,7 +20,7 @@
         <div class="q-ma-xs">
           <q-item v-if="day.index === 0" clickable v-ripple>
             <q-item-section side>
-              <q-avatar round size="42px">
+              <q-avatar size="42px">
                 <img src="https://cdn.quasar.dev/img/avatar1.jpg" />
               </q-avatar>
             </q-item-section>
@@ -31,7 +31,7 @@
           </q-item>
           <q-item v-if="day.index === 1" clickable v-ripple>
             <q-item-section side>
-              <q-avatar round size="42px">
+              <q-avatar size="42px">
                 <img src="https://cdn.quasar.dev/img/avatar2.jpg" />
               </q-avatar>
             </q-item-section>
@@ -42,7 +42,7 @@
           </q-item>
           <q-item v-if="day.index === 2" clickable v-ripple>
             <q-item-section side>
-              <q-avatar round size="42px">
+              <q-avatar size="42px">
                 <img src="https://cdn.quasar.dev/img/avatar4.jpg" />
               </q-avatar>
             </q-item-section>
@@ -54,7 +54,7 @@
 
           <q-item v-if="day.index === 3" clickable v-ripple>
             <q-item-section side>
-              <q-avatar round size="42px">
+              <q-avatar size="42px">
                 <img src="https://cdn.quasar.dev/img/avatar3.jpg" />
               </q-avatar>
             </q-item-section>
@@ -65,7 +65,7 @@
           </q-item>
           <q-item v-if="day.index === 4" clickable v-ripple>
             <q-item-section side>
-              <q-avatar round size="42px">
+              <q-avatar size="42px">
                 <img src="https://cdn.quasar.dev/img/avatar5.jpg" />
               </q-avatar>
             </q-item-section>
@@ -76,7 +76,7 @@
           </q-item>
           <q-item v-if="day.index === 5" clickable v-ripple>
             <q-item-section side>
-              <q-avatar round size="42px">
+              <q-avatar size="42px">
                 <img src="https://cdn.quasar.dev/img/avatar6.jpg" />
               </q-avatar>
             </q-item-section>

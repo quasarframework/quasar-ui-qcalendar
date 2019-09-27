@@ -239,7 +239,7 @@ export default {
           timeZone: 'UTC'
         })
       } catch (e) {
-        console.error('Intl.DateTimeFormat not supported')
+        // console.error('Intl.DateTimeFormat not supported')
         this.dateFormatter = void 0
         this.titleFormatter = void 0
       }
