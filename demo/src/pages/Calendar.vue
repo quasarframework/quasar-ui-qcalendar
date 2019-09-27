@@ -628,10 +628,10 @@ export default {
       this.calendarView = 'day'
     },
     resourceClicked (resource) {
-      console.log('resource clicked:', resource)
+      // console.log('resource clicked:', resource)
     },
     resourceDayClicked (resource) {
-      console.log('resource:day clicked:', resource)
+      // console.log('resource:day clicked:', resource)
     },
     addEventMenu (day, type) {
       if (day.disabled === true || this.calendarView === 'scheduler' || this.calendarView === 'week-scheduler' || this.calendarView === 'month-scheduler') {
@@ -773,7 +773,7 @@ export default {
           timeZone: 'UTC'
         })
       } catch (e) {
-        console.error('Intl.DateTimeFormat not supported')
+        // console.error('Intl.DateTimeFormat not supported')
         this.dateFormatter = void 0
       }
     },
