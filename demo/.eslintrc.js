@@ -14,12 +14,14 @@ module.exports = {
     // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
     // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
     'plugin:vue/essential',
-    '@vue/standard'
+    '@vue/standard',
+    'plugin:quasar/standard'
   ],
 
   // required to lint *.vue files
   plugins: [
-    'vue'
+    'vue',
+    'quasar'
   ],
 
   globals: {
@@ -48,6 +50,8 @@ module.exports = {
     'prefer-promise-reject-errors': 'off',
 
     'import/no-webpack-loader-syntax': 'off',
+
+    'quasar/check-valid-props': 1,
 
     // allow console.log during development only
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
