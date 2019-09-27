@@ -45,6 +45,7 @@
     </q-drawer>
 
     <q-drawer
+      ref="drawer"
       v-model="rightDrawerOpen"
       side="right"
       bordered
@@ -79,6 +80,8 @@
 <script>
 import { mapGetters } from 'vuex'
 import { scroll } from 'quasar'
+const { getScrollTarget, setScrollPosition } = scroll
+import { slugify, makeUrl } from 'assets/page-utils'
 import { version } from '@quasar/quasar-app-extension-qcalendar/package.json'
 
 export default {
@@ -110,16 +113,21 @@ export default {
   },
   methods: {
     scrollTo (id) {
+      // this.$refs.drawer.hide()
       this.activeToc = id
       const el = document.getElementById(id)
 
       if (el) {
-        this.scrollPage(el)
+        setTimeout(() => {
+          this.scrollPage(el)
+          makeUrl(slugify(id))
+        }, 200)
       }
     },
     scrollPage (el) {
+      const target = getScrollTarget(el)
       const offset = el.offsetTop - 50
-      scroll.setScrollPosition(window, offset, 500)
+      setScrollPosition(target, offset, 500)
     }
   }
 }

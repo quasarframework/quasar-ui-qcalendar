@@ -24,3 +24,7 @@ export function copyHeading (id) {
 export function slugify (str) {
   return encodeURIComponent(String(str).trim().replace(/\s+/g, '-'))
 }
+
+export function makeUrl (slug) {
+  window.location = window.location.origin + window.location.pathname + '#' + slug
+}
