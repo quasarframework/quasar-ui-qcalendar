@@ -2,7 +2,7 @@
   "name": "@quasar/quasar-app-extension-qcalendar",
   "version": "1.0.8",
   "description": "A Quasar App Extension",
-  "author": "Jeff Galbraith <jeff.galbraith@xendra.com>",
+  "author": "Jeff Galbraith <jeff@quasar.dev>",
   "license": "MIT",
   "main": "src/index.js",
   "scripts": {
