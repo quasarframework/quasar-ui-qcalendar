@@ -91,7 +91,7 @@
 import { mapGetters } from 'vuex'
 import { getLocale } from '../util/getLocale'
 import { padTime } from '../util/time'
-import { version } from '@quasar/quasar-app-extension-qcalendar/package.json'
+import { version } from '@quasar/q-calendar/package.json'
 
 export default {
   name: 'CalendarLayout',

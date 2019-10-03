@@ -122,7 +122,8 @@ module.exports = function (ctx) {
       watchOptions: {
         ignored: [
           'node_modules',
-          '!node_modules/@quasar/quasar-app-extension-qcalendar'
+          '!node_modules/@quasar/quasar-app-extension-qcalendar',
+          '!node_modules/@quasar/quasar-app-extension-qcalendar/node_modules/@quasar/q-calendar'
         ]
       }
     },

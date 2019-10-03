@@ -1,0 +1,197 @@
+@import './calendar-variables'
+
+.q-calendar-scheduler
+  background-color: $grey-1
+
+  .q-calendar-scheduler__resources-head
+    border-right: $grey-4 1px solid
+
+  .q-calendar-scheduler__column-header--before
+    border-bottom: $grey-4 1px solid
+
+  .q-calendar-scheduler__column-header--after
+    border-top: $grey-4 1px solid
+
+  .q-calendar-scheduler__head-day
+    border-right: $grey-4 1px solid
+    border-bottom: $grey-4 1px solid
+    color: $grey-10
+
+    &.q-outside
+      background-color: $outside-background-color
+
+    &.q-current-day
+
+      .q-calendar-scheduler__head-day-label
+        border: 2px solid currentColor
+        font-weight: 700
+        color: $primary
+
+    &.q-future-day
+
+      .q-calendar-scheduler__head-day-label
+        color: $primary
+
+    &.q-past-day
+
+      .q-calendar-scheduler__head-weekday
+        color: rgba(0,0,0,1.0)
+
+    &.q-past-day
+
+      .q-calendar-scheduler__head-day-label
+        color: rgba(0,0,0,0.38)
+
+  .q-calendar-scheduler__resources-body
+    border-right: $grey-4 1px solid
+
+    .q-calendar-scheduler__resource-text
+      color: $grey-8
+
+  .q-calendar-scheduler__day
+    border-right: $grey-4 1px solid
+    border-bottom: $grey-4 1px solid
+
+    &.q-current-day
+      // border $grey-6 1px solid !important
+
+  .q-calendar-scheduler__resource
+    border-top: $grey-4 1px solid
+
+    &:first-child
+      border-top: none !important
+
+    &:last-child
+      border-bottom: $grey-4 1px solid
+
+  .q-calendar-scheduler__day-resource
+    border-top: $grey-4 1px solid
+
+    &:first-child
+      border-top: none !important
+
+    &:last-child
+      border-bottom: $grey-4 1px solid
+
+.q-calendar-scheduler__day-resource--droppable
+  border: $primary 2px dashed
+
+.q-calendar-scheduler
+  display: flex
+  flex-wrap: nowrap
+  flex-direction: column
+  height: 100%
+
+  &__head
+    flex: none
+    display: flex
+    overflow: hidden
+
+  &__resources-head
+    flex: none
+    display: flex
+    overflow: hidden
+    vertical-align: bottom
+    width: $resources-body-width
+    color: $grey-8
+    border-bottom: $grey-4 1px solid
+
+    &--text
+      display: block
+      position: relative
+      font-size: 10px
+      text-align: center
+      vertical-align: bottom
+
+  &__head-day
+    flex: 1 1 auto
+    flex-wrap: nowrap
+    overflow: hidden
+    width: 0
+
+  &__head-weekday
+    display: flex
+    flex-wrap: nowrap
+    flex: 1
+    user-select: none
+    padding: 4px
+    font-size: 1rem
+    justify-content: left
+
+  &__head-day-label
+    user-select: none
+    border-radius: 50%
+    padding: 0.285em
+    cursor: pointer
+    left: 2px;
+    bottom: 2px;
+
+  &__column-header__before
+    display: flex
+    flex-wrap: nowrap
+    flex: 1
+    user-select: none
+    padding: 4px
+    font-size: 1rem
+    justify-content: left
+
+  &__column-header__after
+    display: flex
+    flex-wrap: nowrap
+    flex: 1
+    user-select: none
+    padding: 4px
+    font-size: 1rem
+    justify-content: left
+
+  &__body
+    flex: 1 1 60%
+    overflow: hidden
+    display: flex
+    position: relative
+    flex-direction: column
+
+  &__scroll-area
+    overflow-y: scroll
+    flex: 1 1 auto
+    display: flex
+    align-items: flex-start
+
+  &__pane
+    width: 100%
+    overflow-y: hidden
+    flex: none
+    display: flex
+    align-items: flex-start
+
+  &__day-container
+    display: flex
+    flex: 1
+    width: 100%
+    height: 100%
+
+  &__resources-body
+    flex: none
+    user-select: none
+    width: $resources-body-width
+
+  &__resource
+    display: flex
+    flex-wrap: nowrap
+    flex: 1
+    user-select: none
+    padding: 4px
+    font-size: 1rem
+    justify-content: middle
+    overflow: hidden
+
+  &__resource-text
+    display: block
+    position: relative
+    top: 10px
+    font-size: 12px
+
+  &__day
+    flex: 1
+    width: 0
+    position: relative
