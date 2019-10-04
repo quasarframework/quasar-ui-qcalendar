@@ -1,12 +1,8 @@
 {
-  "@quasar/qcalendar": {},
   "@quasar/qmarkdown": {},
   "@quasar/qscroller": {},
   "@quasar/qribbon": {},
-  "qautomate": {
-    "quasarConfFixMode": "automatic",
-    "sort": true
-  },
   "@quasar/qpublish": {},
-  "@quasar/colorize": {}
+  "@quasar/colorize": {},
+  "@quasar/qcalendar": {}
 }

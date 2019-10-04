@@ -1,0 +1,145 @@
+@import './calendar-variables'
+
+.q-calendar-weekly
+  background-color: $background-color
+
+  .q-calendar-weekly__head-workweek
+    border-right: $border-color 1px solid
+    border-bottom: $border-color 1px solid
+    color: $day-current-color
+    font-weight: 800
+    align-items: center
+
+  .q-calendar-weekly__head-weekday
+    border-right: $border-color 1px solid
+    border-bottom: $border-color 1px solid
+    color: $day-current-color
+    font-weight: 500
+
+  .q-calendar-weekly__workweek
+    border-right: $border-color 1px solid
+    border-bottom: $border-color 1px solid
+    align-items: center
+    justify-content: center
+    font-weight: 800
+
+    &.q-past-day
+      color: $day-past-color
+
+    &.q-future-day
+      color: $primary
+
+    &.q-current-day
+      color: $primary
+
+  .q-calendar-weekly__day
+    border-right: $border-color 1px solid
+    border-bottom: $border-color 1px solid
+    color: $primary
+
+    &.q-outside
+      background-color: $outside-background-color
+
+    &.q-current-day
+
+      .q-calendar-weekly__day-label
+        border: 2px solid currentColor
+        font-weight: 700
+
+      .q-calendar-weekly__day-month
+        color: currentColor
+
+      .q-calendar-weekly__day-month--day-of-year
+        color: currentColor
+
+    &.q-past-day
+      color: $day-past-color
+
+.q-calendar-weekly__day--droppable
+    border-right: $primary 2px dashed
+
+.q-calendar-weekly
+  width: 100%
+  height: 100%
+  display: flex
+  flex: 1
+  flex-wrap: nowrap
+  flex-direction: column
+
+  &__head
+    display: flex
+    flex-wrap: nowrap
+    user-select: none
+
+  &__head-workweek
+    display: flex
+    flex-wrap: nowrap
+    width: $work-week-width
+    user-select: none
+    padding: 0 4px
+    font-size: 1rem
+    justify-content: center
+
+  &__head-weekday
+    display: flex
+    flex-wrap: nowrap
+    flex: 1
+    user-select: none
+    padding: 0 4px
+    font-size: 1rem
+    justify-content: center
+
+  &__week
+    display: flex
+    flex: 1
+    flex-wrap: nowrap
+
+  &__workweek
+    display: flex
+    flex-wrap: nowrap
+    width: $work-week-width
+    user-select: none
+    padding: 0 4px
+    font-size: $work-week-font-size
+    align-items: center
+
+  &__day
+    flex: 1
+    width: 0
+    overflow: hidden
+    user-select: none
+    position: relative
+    padding: 26px 0
+
+  &__day-label
+    position: absolute
+    text-decoration: none
+    user-select: none
+    cursor: pointer
+    box-shadow: none
+    text-align: center
+    left: 2px
+    top: 2px
+    border-radius: $day-label-radius
+    width: $day-label
+    height: $day-label
+    line-height: $day-label
+
+  &__day-month
+    position: absolute
+    text-decoration: none
+    user-select: none
+    box-shadow: none
+    top: 7px
+    right: 2px
+    height: $day-label
+    line-height: $day-label
+
+  &__day-month--day-of-year
+    position: absolute
+    text-decoration: none
+    user-select: none
+    box-shadow: none
+    top: 2px
+    right: 2px
+    font-size: 0.6rem

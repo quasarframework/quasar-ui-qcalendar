@@ -1,7 +1,7 @@
 QCalendar
 ===
 
-QCalendar is a [Quasar App Extension](https://quasar.dev/app-extensions/introduction). It is a powerful calendar component that plugs right into your Quasar application and allows for both day (1-7 days for a week) and monthly views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.
+QCalendar is a [Quasar App Extension](https://quasar.dev/app-extensions/introduction). It is a powerful calendar component that plugs right into your Quasar application and allows for both day (1-7 days for a week), monthly and scheduler views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.
 
 QCalendar is a less-opinionated calendar component, as it does not keep track of things like events, reminders or even disabled days (if that's what you want). This is in the hands of the developer, but QCalendar makes it easy via accessible events, slots and methods.
 
@@ -61,16 +61,16 @@ quasar ext remove @quasar/qcalendar
 You can use `quasar describe QCalendar`
 
 # Docs
-Can be found [here](https://quasarframework.github.io/app-extension-qcalendar).
+Can be found [here](https://quasarframework.github.io/quasar-ui-qcalendar).
 
 # Examples
-Can be found [here](https://quasarframework.github.io/app-extension-qcalendar/examples).
+Can be found [here](https://quasarframework.github.io/quasar-ui-qcalendar/examples).
 
 # Interactive Demo
-Can be found [here](https://quasarframework.github.io/app-extension-qcalendar/demo).
+Can be found [here](https://quasarframework.github.io/quasar-ui-qcalendar/demo).
 
 # Demo (source) Project
-Can be found [here](https://github.com/quasarframework/app-extension-qcalendar/tree/master/demo).
+Can be found [here](https://github.com/quasarframework/quasar-ui-qcalendar/tree/master/demo).
 
 # Working with QCalendar
 
@@ -220,7 +220,7 @@ directives: [
 ],
 ```
 
-Then on your `q-calendar` component, add the following:
+Then on your `q-calendar` tag, add the following:
 
 ```html
 <q-calendar
