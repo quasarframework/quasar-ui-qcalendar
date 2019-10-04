@@ -1,4 +1,4 @@
-QCalendar and QCalendar App Extension
+QCalendar (Vue Plugin, UMD and Quasar App Extension)
 ===
 
 ![@quasar/quasar-ui-qcalendar](https://img.shields.io/npm/v/@quasar/quasar-ui-qcalendar.svg?label=@quasar/qcalendar)
