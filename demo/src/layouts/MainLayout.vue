@@ -82,7 +82,7 @@ import { mapGetters } from 'vuex'
 import { scroll } from 'quasar'
 const { getScrollTarget, setScrollPosition } = scroll
 import { slugify, makeUrl } from 'assets/page-utils'
-import { version } from '@quasar/quasar-app-extension-qcalendar/package.json'
+import { version } from '@quasar/quasar-ui-qcalendar/package.json'
 
 export default {
   name: 'MainLayout',

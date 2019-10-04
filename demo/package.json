@@ -7,7 +7,7 @@
   "author": "Jeff Galbraith <jeff@quasar.dev>",
   "private": true,
   "scripts": {
-    "build": "quasar build && cp ./src/404.html ./dist/spa",
+    "build-demo": "quasar build && cp ./src/404.html ./dist/spa && rm -rf ../docs && cp -r ./dist/spa/. ../docs",
     "lint": "eslint --ext .js,.vue src",
     "lint-fix": "eslint --ext .js,.vue src --fix",
     "test": "echo \"No test specified\" && exit 0"
@@ -15,28 +15,27 @@
   "dependencies": {
     "@quasar/extras": "^1.3.2",
     "drag-drop-touch": "^1.3.0",
-    "quasar": "^1.1.4"
+    "quasar": "^1.1.6"
   },
   "devDependencies": {
-    "@quasar/app": "^1.1.2",
+    "@quasar/app": "^1.1.3",
     "@quasar/quasar-app-extension-colorize": "^1.0.0-alpha.1",
-    "@quasar/quasar-app-extension-qcalendar": "file:../.",
+    "@quasar/quasar-app-extension-qcalendar": "^1.0.7",
     "@quasar/quasar-app-extension-qmarkdown": "^1.0.0-beta.21",
     "@quasar/quasar-app-extension-qpublish": "^1.0.0-alpha.7",
-    "@quasar/quasar-app-extension-qribbon": "^1.0.0-beta.6",
+    "@quasar/quasar-app-extension-qribbon": "^1.0.0-beta.7",
     "@quasar/quasar-app-extension-qscroller": "^1.0.0-alpha.7",
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.3",
     "copy-webpack-plugin": "^5.0.4",
     "devtron": "^1.4.0",
-    "electron": "^6.0.10",
+    "electron": "^6.0.11",
     "electron-debug": "^3.0.1",
     "electron-devtools-installer": "^2.2.4",
-    "eslint": "^6.4.0",
+    "eslint": "^6.5.1",
     "eslint-loader": "^3.0.2",
     "eslint-plugin-quasar": "^1.0.0-alpha.11",
-    "eslint-plugin-vue": "^5.2.3",
-    "quasar-app-extension-qautomate": "^1.0.0-alpha.5"
+    "eslint-plugin-vue": "^5.2.3"
   },
   "engines": {
     "node": ">= 8.9.0",
