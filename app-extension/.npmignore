@@ -14,5 +14,4 @@ yarn-error.log*
 *.sln
 .editorconfig
 .eslintignore
-umd-test.html
 .eslintrc.js

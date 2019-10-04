@@ -1,6 +1,3 @@
-// Styles
-// import './calendar-daily.sass'
-
 // Quasar
 import { QBtn } from 'quasar'
 

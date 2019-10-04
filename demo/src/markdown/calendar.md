@@ -61,16 +61,16 @@ quasar ext remove @quasar/qcalendar
 You can use `quasar describe QCalendar`
 
 # Docs
-Can be found [here](https://quasarframework.github.io/app-extension-qcalendar).
+Can be found [here](https://quasarframework.github.io/quasar-ui-qcalendar).
 
 # Examples
-Can be found [here](https://quasarframework.github.io/app-extension-qcalendar/examples).
+Can be found [here](https://quasarframework.github.io/quasar-ui-qcalendar/examples).
 
 # Interactive Demo
-Can be found [here](https://quasarframework.github.io/app-extension-qcalendar/demo).
+Can be found [here](https://quasarframework.github.io/quasar-ui-qcalendar/demo).
 
 # Demo (source) Project
-Can be found [here](https://github.com/quasarframework/app-extension-qcalendar/tree/master/demo).
+Can be found [here](https://github.com/quasarframework/quasar-ui-qcalendar/tree/master/demo).
 
 # Working with QCalendar
 
@@ -220,7 +220,7 @@ directives: [
 ],
 ```
 
-Then on your `q-calendar` component, add the following:
+Then on your `q-calendar` tag, add the following:
 
 ```html
 <q-calendar

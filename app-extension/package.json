@@ -12,12 +12,12 @@
   "publishConfig": {
     "access": "public"
   },
-  "bugs": "https://github.com/quasarframework/app-extension-qcalendar/issues",
+  "bugs": "https://github.com/quasarframework/quasar-ui-qcalendar/issues",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/quasarframework/app-extension-qcalendar.git"
+    "url": "git+https://github.com/quasarframework/quasar-ui-qcalendar.git"
   },
-  "homepage": "https://github.com/quasarframework/app-extension-qcalendar",
+  "homepage": "https://github.com/quasarframework/quasar-ui-qcalendar",
   "keywords": [
     "quasar",
     "quasarframework",
@@ -38,7 +38,7 @@
     "yarn": ">= 1.6.0"
   },
   "dependencies": {
-    "@quasar/q-calendar": "@quasar/q-calendar"
+    "@quasar/quasar-ui-qcalendar": "latest"
   },
   "devDependencies": {
     "@vue/eslint-config-standard": "^4.0.0",

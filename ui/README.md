@@ -1,36 +1,71 @@
 QCalendar
 ===
 
-![](https://img.shields.io/npm/v/@quasar/q-calendar.svg?label=q-calendar)
-[![npm](https://img.shields.io/npm/dt/@quasar/q-calendar.svg)](https://www.npmjs.com/package/@quasar/q-calendar)
+![](https://img.shields.io/npm/v/@quasar/quasar-ui-qcalendar.svg?label=@quasar/qcalendar)
+[![npm](https://img.shields.io/npm/dt/@quasar/quasar-ui-qcalendar.svg)](https://www.npmjs.com/package/@quasar/quasar-ui-qcalendar)
 
 QCalendar is a [Quasar](https://quasar.dev) component. It is a powerful calendar that plugs right into your Quasar application and allows for viewing of day (1-7 days for a week), monthly and scheduler views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.
 
-![QCalendar example month view](https://raw.githubusercontent.com/quasarframework/app-extension-qcalendar/dev/demo/src/statics/qcalendar-month-view.png)
+![QCalendar example month view](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/src/statics/qcalendar-month-view.png)
 
 # Examples and Documentation
-Can be found [here](https://quasarframework.github.io/app-extension-qcalendar)
+Can be found [here](https://quasarframework.github.io/quasar-ui-qcalendar)
 
 # Usage
 
 ## Quasar CLI project
 
+Install the [App Extension](../app-extension).
+
+**OR**:
+
+Create and register a boot file:
+
 ```js
 import Vue from 'vue'
-import Plugin from '@quasar/q-calendar'
+import Plugin from '@quasar/quasar-ui-qcalendar'
+import '@quasar/quasar-ui-qcalendar/dist/index.css'
 
 Vue.use(Plugin)
 ```
 
-or:
+**OR**:
 
 ```js
+<style src="@quasar/quasar-ui-qcalendar/dist/index.css"></style>
+
 <script>
-import { QCalendar } from '@quasar/q-calendar'
+import { Component } from '@quasar/quasar-ui-qcalendar'
 
 export default {
   components: {
-    QCalendar
+    Component
+  }
+}
+</script>
+```
+
+## Vue CLI project
+
+```js
+import Vue from 'vue'
+import Plugin from '@quasar/quasar-ui-qcalendar'
+import '@quasar/quasar-ui-qcalendar/dist/index.css'
+
+Vue.use(Plugin)
+```
+
+**OR**:
+
+```js
+<style src="@quasar/quasar-ui-qcalendar/dist/index.css"></style>
+
+<script>
+import { Component } from '@quasar/quasar-ui-qcalendar'
+
+export default {
+  components: {
+    Component
   }
 }
 </script>
@@ -38,24 +73,25 @@ export default {
 
 ## UMD variant
 
-Exports `window.QCalendar`
+Exports `window.QCalendar`.
 
 Add the following tag(s) after the Quasar ones:
 
 ```html
 <head>
   <!-- AFTER the Quasar stylesheet tags: -->
-  <link href="https://cdn.jsdelivr.net/npm/@quasar/q-calendar/dist/index.min.css" rel="stylesheet" type="text/css">
+  <link href="https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar/dist/index.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
   <!-- at end of body, AFTER Quasar script(s): -->
-  <script src="https://cdn.jsdelivr.net/npm/@quasar/q-calendar/dist/index.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar/dist/index.umd.min.js"></script>
 </body>
 ```
 If you need the RTL variant of the CSS, then go for the following (instead of the above stylesheet link):
 ```html
-<link href="https://cdn.jsdelivr.net/npm/@quasar/q-calendar/dist/index.rtl.min.css" rel="stylesheet" type="text/css">
+<link href="https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar/dist/index.rtl.min.css" rel="stylesheet" type="text/css">
 ```
+
 ### UMD Example
 ```html
 <!DOCTYPE html>
@@ -70,7 +106,7 @@ If you need the RTL variant of the CSS, then go for the following (instead of th
     <title>UMD test</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" rel="stylesheet" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/quasar@^1.0.0/dist/quasar.min.css" rel="stylesheet" type="text/css">
-    <link href="https://cdn.jsdelivr.net/npm/@quasar/q-calendar@^1.0.0/dist/index.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@^1.0.0/dist/index.css" rel="stylesheet" type="text/css">
   </head>
   <body>
     <div id="q-app">
@@ -103,7 +139,7 @@ If you need the RTL variant of the CSS, then go for the following (instead of th
     <script src="https://cdn.jsdelivr.net/npm/quasar@^1.0.0/dist/quasar.ie.polyfills.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@^2.0.0/dist/vue.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/quasar@^1.0.0/dist/quasar.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@quasar/q-calendar@^1.0.0/dist/index.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@^1.0.0/dist/index.umd.js"></script>
 
     <script>
       new Vue({

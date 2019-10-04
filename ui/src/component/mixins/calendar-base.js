@@ -1,8 +1,8 @@
 // Mixins
 import Times from './times'
 import Mouse from './mouse'
-import QColorizeMixin from 'q-colorize-mixin'
-import QThemeMixin from 'q-theme-mixin'
+import { QColorizeMixin } from 'q-colorize-mixin'
+import { QThemeMixin } from 'q-theme-mixin'
 
 // Util
 import props from '../utils/props'
@@ -20,7 +20,12 @@ import {
 export default {
   name: 'CalendarBase',
 
-  mixins: [Times, Mouse, QColorizeMixin, QThemeMixin],
+  mixins: [
+    QColorizeMixin,
+    QThemeMixin,
+    Mouse,
+    Times
+  ],
 
   props: {
     ...props.base,

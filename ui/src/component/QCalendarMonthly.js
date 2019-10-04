@@ -1,6 +1,3 @@
-// Styles
-// import './calendar-weekly.sass'
-
 // Mixins
 import QCalendarWeekly from './QCalendarWeekly'
 

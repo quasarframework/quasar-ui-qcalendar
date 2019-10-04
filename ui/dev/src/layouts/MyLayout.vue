@@ -11,7 +11,7 @@
         />
 
         <q-toolbar-title>
-          QCalendar <span class="text-subtitle2">v{{ version }}</span>
+          quasar-ui-qcalendar <span class="text-subtitle2">v{{ version }}</span>
         </q-toolbar-title>
 
         <div>Quasar v{{ $q.version }}</div>
@@ -25,14 +25,14 @@
 </template>
 
 <script>
-import { QCalendar } from 'ui' // "ui" is aliased in quasar.conf.js
-console.log(QCalendar)
+import { version } from 'ui' // "ui" is aliased in quasar.conf.js
+
 export default {
   name: 'MyLayout',
 
   data () {
     return {
-      version: QCalendar.version
+      version
     }
   }
 }

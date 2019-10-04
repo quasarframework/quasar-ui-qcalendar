@@ -3,10 +3,13 @@
  */
 
 function kebabCase (str) {
-  return str.replace(
+  const result = str.replace(
     /[A-Z\u00C0-\u00D6\u00D8-\u00DE]/g,
     match => '-' + match.toLowerCase()
-  ).substring(1)
+  )
+  return (str[0] === str[0].toUpperCase())
+    ? result.substring(1)
+    : result
 }
 
 function slugify (str) {

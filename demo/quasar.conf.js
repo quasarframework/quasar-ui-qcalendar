@@ -97,7 +97,7 @@ module.exports = function (ctx) {
     build: {
       scopeHoisting: true,
       vueRouterMode: 'history',
-      publicPath: 'app-extension-qcalendar',
+      publicPath: 'quasar-ui-qcalendar',
       // vueCompiler: true,
       // gzip: true,
       // analyze: true,
@@ -123,7 +123,7 @@ module.exports = function (ctx) {
         ignored: [
           'node_modules',
           '!node_modules/@quasar/quasar-app-extension-qcalendar',
-          '!node_modules/@quasar/quasar-app-extension-qcalendar/node_modules/@quasar/q-calendar'
+          '!node_modules/@quasar/quasar-ui-qcalendar'
         ]
       }
     },

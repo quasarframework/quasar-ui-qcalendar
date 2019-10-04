@@ -1,4 +1,4 @@
 import Vue from 'vue'
-import QCalendar from '@quasar/q-calendar'
+import VuePlugin from '@quasar/quasar-ui-qcalendar'
 
-Vue.use(QCalendar)
+Vue.use(VuePlugin)

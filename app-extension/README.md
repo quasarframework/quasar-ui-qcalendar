@@ -5,7 +5,7 @@ The **QCalendar App Extension** allows you to seamlessly add the [QCalendar](../
 ![](https://img.shields.io/npm/v/@quasar/quasar-app-extension-qcalendar.svg?label=quasar-app-extension-qcalendar)
 [![npm](https://img.shields.io/npm/dt/@quasar/quasar-app-extension-qcalendar.svg)](https://www.npmjs.com/package/@quasar/quasar-app-extension-qcalendar)
 
-![QCalendar example month view](https://raw.githubusercontent.com/quasarframework/app-extension-qcalendar/dev/demo/src/statics/qcalendar-month-view.png)
+![QCalendar example month view](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/src/statics/qcalendar-month-view.png)
 
 # Install
 ```bash
