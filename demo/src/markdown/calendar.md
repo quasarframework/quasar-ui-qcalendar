@@ -1,9 +1,9 @@
 QCalendar
 ===
 
-QCalendar is a [Quasar App Extension](https://quasar.dev/app-extensions/introduction). It is a powerful calendar component that plugs right into your Quasar application and allows for both day (1-7 days for a week), monthly and scheduler views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.
+QCalendar is a [Quasar App Extension](https://quasar.dev/app-extensions/introduction). It is a powerful calendar component that plugs right into your Quasar application. It allows for both day (1-7 days for a week), monthly and scheduler views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.
 
-QCalendar is a less-opinionated calendar component, as it does not keep track of things like events, reminders or even disabled days (if that's what you want). This is in the hands of the developer, but QCalendar makes it easy via accessible events, slots and methods.
+QCalendar is a less-opinionated calendar component, as it does not keep track of things like events and reminders. This is in the hands of the developer, but QCalendar makes it easy via accessible events, slots and methods.
 
 The guiding philosophy has been to empower the developer and allow them to do what needs to be done without being overly opinionated. In order to do this, the following items are followed:
 
@@ -14,7 +14,7 @@ The guiding philosophy has been to empower the developer and allow them to do wh
 This is the true power of QCalendar.
 
 # Features
-- Show month, week, day, contiguous days (ex: 3 days at a time)
+- Show month, week, work-week, day, contiguous days (ex: 3 days at a time)
 - Resource scheduler
 - Optional drag and drop support (including mobile)
 - Automatic localization / internationalization
@@ -34,31 +34,115 @@ This is the true power of QCalendar.
 - Currently there is no Agenda view, although it is up for consideration.
 - Only the Gregorian calendar is supported.
 
-This work is currently in `beta` and there are expected changes while things get worked out. Your help with testing is greatly appreciated.
+# Installation Types
 
-# Install
-To add this App Extension to your Quasar application, run the following (in your Quasar app folder):
+## Quasar CLI
+
+**App Extension**
+
+:::
+#### Install
+
+To add as an App Extension to your Quasar application, run the following (in your Quasar app folder):
 ```
 quasar ext add @quasar/qcalendar
 ```
 
-QCalendar has a dependency on the `@quasar/colorize` app extension and this will also need to be installed.
-```
-quasar ext add @quasar/colorize
-```
+#### Uninstall
 
-::: tip
-QCalendar will try to take up all available space that it is in. The parent should have a fixed height and have a css `position: relative`.
-:::
-
-# Uninstall
-To remove this App Extension from your Quasar application, run the following (in your Quasar app folder):
+To remove as an App Extension from your Quasar application, run the following (in your Quasar app folder):
 ```
 quasar ext remove @quasar/qcalendar
 ```
 
-# Describe
-You can use `quasar describe QCalendar`
+#### Describe
+When installed as an App Extension, you can use `quasar describe QCalendar`
+:::
+
+**OR**:
+
+:::
+Create and register a boot file:
+
+```js
+import Vue from 'vue'
+import Plugin from '@quasar/quasar-ui-qcalendar'
+import '@quasar/quasar-ui-qcalendar/dist/index.css'
+
+Vue.use(Plugin)
+```
+:::
+
+**OR**:
+
+:::
+```html
+<style src="@quasar/quasar-ui-qcalendar/dist/index.css"></style>
+
+<script>
+import { Component as QCalendar } from '@quasar/quasar-ui-qcalendar'
+
+export default {
+  components: {
+    QCalendar
+  }
+}
+</script>
+```
+:::
+
+## Vue CLI project
+
+:::
+```js
+import Vue from 'vue'
+import Plugin from '@quasar/quasar-ui-qcalendar'
+import '@quasar/quasar-ui-qcalendar/dist/index.css'
+
+Vue.use(Plugin)
+```
+:::
+
+**OR**:
+
+:::
+```html
+<style src="@quasar/quasar-ui-qcalendar/dist/index.css"></style>
+
+<script>
+import { { Component as QCalendar } } from '@quasar/quasar-ui-qcalendar'
+
+export default {
+  components: {
+    QCalendar
+  }
+}
+</script>
+```
+:::
+
+## UMD variant
+
+Exports `window.QCalendar`.
+
+Add the following tag(s) after the Quasar ones:
+
+:::
+```html
+<head>
+  <!-- AFTER the Quasar stylesheet tags: -->
+  <link href="https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar/dist/index.min.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <!-- at end of body, AFTER Quasar script(s): -->
+  <script src="https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar/dist/index.umd.min.js"></script>
+</body>
+```
+If you need the RTL variant of the CSS, then go for the following (instead of the above stylesheet link):
+```html
+<link href="https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar/dist/index.rtl.min.css" rel="stylesheet" type="text/css">
+```
+:::
 
 # Docs
 Can be found [here](https://quasarframework.github.io/quasar-ui-qcalendar).
