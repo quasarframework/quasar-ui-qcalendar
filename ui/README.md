@@ -31,7 +31,7 @@ Vue.use(Plugin)
 
 **OR**:
 
-```js
+```html
 <style src="@quasar/quasar-ui-qcalendar/dist/index.css"></style>
 
 <script>
@@ -57,15 +57,15 @@ Vue.use(Plugin)
 
 **OR**:
 
-```js
+```html
 <style src="@quasar/quasar-ui-qcalendar/dist/index.css"></style>
 
 <script>
-import { Component } from '@quasar/quasar-ui-qcalendar'
+import { { Component as QCalendar } } from '@quasar/quasar-ui-qcalendar'
 
 export default {
   components: {
-    Component
+    QCalendar
   }
 }
 </script>
