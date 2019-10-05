@@ -144,6 +144,8 @@ If you need the RTL variant of the CSS, then go for the following (instead of th
 ```
 :::
 
+[UMD Example on Codepen](https://codepen.io/Hawkeye64/pen/RwwwKQL)
+
 # Docs
 Can be found [here](https://quasarframework.github.io/quasar-ui-qcalendar).
 
