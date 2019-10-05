@@ -181,6 +181,8 @@ If you need the RTL variant of the CSS, then go for the following (instead of th
 </html>
 ```
 
+[UMD example on Codepen](https://codepen.io/Hawkeye64/pen/RwwwKQL)
+
 # Building the Projects
 
 ## Setup
