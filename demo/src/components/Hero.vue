@@ -4,7 +4,7 @@
       <div class="text-h1 project-name">QCalendar</div>
       <div class="text-h2 project-tagline"></div>
       <div class="byline">Created and maintained by Jeff Galbraith</div>
-      <div class="quasar">A Quasar Framework App Extension</div>
+      <div class="quasar">A Quasar Framework Component and App Extension</div>
       <q-btn type="a" href="https://github.com/quasarframework/quasar-ui-qcalendar" target="_blank" class="btn" label="View on GitHub" no-caps flat/>
       <q-btn to="/docs" class="btn" label="Docs" no-caps flat/>
       <q-btn to="/examples" class="btn" label="Examples" no-caps flat/>
