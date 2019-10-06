@@ -22,7 +22,7 @@ module.exports = function (api) {
   // hard dependencies, as in a minimum version of the "quasar"
   // package or a minimum version of "@quasar/app" CLI
   api.compatibleWith('quasar', '^1.1.1')
-  api.compatibleWith('@quasar/app', '^1.1.0')
+  api.compatibleWith('@quasar/app', '^1.1.4') // needed for describe to work properly
 
   // Uncomment the line below if you provide a JSON API for your component
   api.registerDescribeApi('QCalendar', '~@quasar/quasar-ui-qcalendar/src/component/QCalendar.json')
