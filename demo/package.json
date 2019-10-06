@@ -1,7 +1,7 @@
 {
   "name": "quasar-app-extension-qcalendar",
   "version": "0.0.1",
-  "description": "QCalendar App Extension for Quasar Framework",
+  "description": "QCalendar docs, examples and demo site",
   "productName": "QCalendar docs, examples and demo site",
   "cordovaId": "org.cordova.quasar.app",
   "author": "Jeff Galbraith <jeff@quasar.dev>",
@@ -34,7 +34,7 @@
     "electron-devtools-installer": "^2.2.4",
     "eslint": "^6.5.1",
     "eslint-loader": "^3.0.2",
-    "eslint-plugin-quasar": "^1.0.0-alpha.11",
+    "eslint-plugin-quasar": "^1.0.0-alpha.13",
     "eslint-plugin-vue": "^5.2.3"
   },
   "engines": {
