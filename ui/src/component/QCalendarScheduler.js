@@ -2,13 +2,13 @@
 import { QBtn } from 'quasar'
 
 // Directives
-import Resize from './directives/resize'
+import Resize from './directives/resize.js'
 
 // Mixins
-import CalendarScheduler from './mixins/calendar-scheduler'
+import CalendarScheduler from './mixins/calendar-scheduler.js'
 
 // Util
-import { convertToUnit } from './utils/helpers'
+import { convertToUnit } from './utils/helpers.js'
 
 /* @vue/component */
 export default {
