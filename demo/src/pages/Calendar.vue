@@ -120,7 +120,22 @@ Duration:   {{ convertDurationTime(event.duration) }}
               </q-input>
             </div>
 
-            <q-input v-model="eventForm.icon" label="Icon"></q-input>
+            <q-input filled v-model="eventForm.icon" label="Icon" clearable>
+              <template v-slot:append>
+                <q-icon name="extension" class="cursor-pointer">
+                  <q-popup-proxy v-model="showIconPicker">
+                    <q-icon-picker
+                      v-model="eventForm.icon"
+                      :filter="eventForm.icon"
+                      icon-set="fontawesome-v5"
+                      tooltips
+                      :pagination.sync="pagination"
+                      style="height: 300px; width: 300px;"
+                    />
+                    </q-popup-proxy>
+                  </q-icon>
+                </template>
+              </q-input>
             <q-input
               filled
               v-model="eventForm.bgcolor"
@@ -346,7 +361,13 @@ export default {
         {
           label: 'Room-2'
         }
-      ]
+      ],
+      // Icon picker
+      showIconPicker: false,
+      pagination: {
+        itemsPerPage: 35,
+        page: 0
+      }
     }
   },
   mounted () {
