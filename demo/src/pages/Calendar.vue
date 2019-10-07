@@ -50,6 +50,7 @@ Duration:   {{ convertDurationTime(event.duration) }}
               <template #append>
                 <q-icon name="event" class="cursor-pointer">
                   <q-popup-proxy v-model="showDateScrollerAllDay">
+
                     <q-date-scroller
                       v-model="eventForm.dateTimeStart"
                       :locale="locale"
@@ -64,6 +65,7 @@ Duration:   {{ convertDurationTime(event.duration) }}
                       :style="scrollerPopupStyle160"
                       @close="() => { showDateScrollerAllDay = false }"
                     />
+
                   </q-popup-proxy>
                 </q-icon>
               </template>
@@ -124,14 +126,16 @@ Duration:   {{ convertDurationTime(event.duration) }}
               <template v-slot:append>
                 <q-icon name="extension" class="cursor-pointer">
                   <q-popup-proxy v-model="showIconPicker">
+
                     <q-icon-picker
                       v-model="eventForm.icon"
                       :filter="eventForm.icon"
                       icon-set="fontawesome-v5"
                       tooltips
                       :pagination.sync="pagination"
-                      style="height: 300px; width: 300px;"
+                      style="height: 300px; width: 300px; background-color: white;"
                     />
+
                     </q-popup-proxy>
                   </q-icon>
                 </template>
