@@ -18,7 +18,7 @@
             <pre>
 Start Time: {{ event.time }}
 End Time:   {{ getEndTime(event) }}
-Duration:   {{ event.duration }}
+Duration:   {{ convertDurationTime(event.duration) }}
             </pre>
           </div>
         </q-card-section>
@@ -709,6 +709,16 @@ export default {
       let end = new Date(dateTimeEnd)
       let diff = date.getDateDiff(end, start, unit)
       return diff
+    },
+    convertDurationTime (n) {
+      const num = n
+      const days = Math.floor(((num / 60) / 24))
+      const hours = (num / 60)
+      const rhours = Math.floor(hours)
+      const rshours = Math.floor(hours - (days * 24))
+      const minutes = (hours - rhours) * 60
+      const rminutes = Math.round(minutes)
+      return (days > 0 ? days + ' days and ' : '') + (rshours > 0 ? rshours + ' hour(s) and ' : '') + rminutes + ' minute(s).'
     },
     saveEvent () {
       let self = this
