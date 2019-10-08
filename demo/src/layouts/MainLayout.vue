@@ -115,7 +115,6 @@ export default {
   methods: {
     scrollTo (id) {
       // this.$refs.drawer.hide()
-      debugger
       this.activeToc = id
       const el = document.getElementById(id)
 
