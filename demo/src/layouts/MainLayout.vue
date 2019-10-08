@@ -80,8 +80,9 @@
 <script>
 import { mapGetters } from 'vuex'
 import { scroll } from 'quasar'
-const { getScrollTarget, setScrollPosition } = scroll
-import { slugify, makeUrl } from 'assets/page-utils'
+// const { getScrollTarget, setScrollPosition } = scroll
+const { setScrollPosition } = scroll
+// import { slugify, makeUrl } from 'assets/page-utils'
 import { version } from '@quasar/quasar-ui-qcalendar/package.json'
 
 export default {
@@ -120,14 +121,15 @@ export default {
       if (el) {
         setTimeout(() => {
           this.scrollPage(el)
-          makeUrl(slugify(id))
+          // makeUrl(slugify(id))
         }, 200)
       }
     },
     scrollPage (el) {
-      const target = getScrollTarget(el)
+      // const target = getScrollTarget(el)
       const offset = el.offsetTop - 50
-      setScrollPosition(target, offset, 500)
+      // setScrollPosition(target, offset, 500)
+      setScrollPosition(window, offset, 500)
     }
   }
 }
