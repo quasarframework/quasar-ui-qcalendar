@@ -1,5 +1,5 @@
 // Mixins
-import QCalendarWeekly from './QCalendarWeekly'
+import QCalendarWeekly from './QCalendarWeekly.js'
 
 // Util
 import {

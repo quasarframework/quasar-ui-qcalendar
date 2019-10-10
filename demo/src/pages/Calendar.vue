@@ -18,7 +18,7 @@
             <pre>
 Start Time: {{ event.time }}
 End Time:   {{ getEndTime(event) }}
-Duration:   {{ event.duration }}
+Duration:   {{ convertDurationTime(event.duration) }}
             </pre>
           </div>
         </q-card-section>
@@ -50,6 +50,7 @@ Duration:   {{ event.duration }}
               <template #append>
                 <q-icon name="event" class="cursor-pointer">
                   <q-popup-proxy v-model="showDateScrollerAllDay">
+
                     <q-date-scroller
                       v-model="eventForm.dateTimeStart"
                       :locale="locale"
@@ -64,6 +65,7 @@ Duration:   {{ event.duration }}
                       :style="scrollerPopupStyle160"
                       @close="() => { showDateScrollerAllDay = false }"
                     />
+
                   </q-popup-proxy>
                 </q-icon>
               </template>
@@ -120,7 +122,24 @@ Duration:   {{ event.duration }}
               </q-input>
             </div>
 
-            <q-input v-model="eventForm.icon" label="Icon"></q-input>
+            <q-input filled v-model="eventForm.icon" label="Icon" clearable>
+              <template v-slot:append>
+                <q-icon name="extension" class="cursor-pointer">
+                  <q-popup-proxy v-model="showIconPicker">
+
+                    <q-icon-picker
+                      v-model="eventForm.icon"
+                      :filter="eventForm.icon"
+                      icon-set="fontawesome-v5"
+                      tooltips
+                      :pagination.sync="pagination"
+                      style="height: 300px; width: 300px; background-color: white;"
+                    />
+
+                    </q-popup-proxy>
+                  </q-icon>
+                </template>
+              </q-input>
             <q-input
               filled
               v-model="eventForm.bgcolor"
@@ -346,7 +365,13 @@ export default {
         {
           label: 'Room-2'
         }
-      ]
+      ],
+      // Icon picker
+      showIconPicker: false,
+      pagination: {
+        itemsPerPage: 35,
+        page: 0
+      }
     }
   },
   mounted () {
@@ -709,6 +734,16 @@ export default {
       let end = new Date(dateTimeEnd)
       let diff = date.getDateDiff(end, start, unit)
       return diff
+    },
+    convertDurationTime (n) {
+      const num = n
+      const days = Math.floor(((num / 60) / 24))
+      const hours = (num / 60)
+      const rhours = Math.floor(hours)
+      const rshours = Math.floor(hours - (days * 24))
+      const minutes = (hours - rhours) * 60
+      const rminutes = Math.round(minutes)
+      return (days > 0 ? days + ' days and ' : '') + (rshours > 0 ? rshours + ' hour(s) and ' : '') + rminutes + ' minute(s).'
     },
     saveEvent () {
       let self = this

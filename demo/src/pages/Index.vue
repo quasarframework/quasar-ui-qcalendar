@@ -7,7 +7,7 @@
     />
     <q-markdown>
 # Donate
-If you appreciate the work that went into this App Extension, please consider [donating to Quasar](https://donate.quasar.dev).
+If you appreciate the work that went into this project, please consider [donating to Quasar](https://donate.quasar.dev).
 
 ---
 This page created with [QMarkdown](https://quasarframework.github.io/app-extension-qmarkdown), another great Quasar App Extension.

@@ -1,7 +1,7 @@
 QCalendar
 ===
 
-![](https://img.shields.io/npm/v/@quasar/quasar-ui-qcalendar.svg?label=@quasar/qcalendar)
+[![npm](https://img.shields.io/npm/v/@quasar/quasar-ui-qcalendar.svg?label=@quasar/qcalendar)](https://www.npmjs.com/package/@quasar/quasar-ui-qcalendar)
 [![npm](https://img.shields.io/npm/dt/@quasar/quasar-ui-qcalendar.svg)](https://www.npmjs.com/package/@quasar/quasar-ui-qcalendar)
 
 QCalendar is a [Quasar](https://quasar.dev) component. It is a powerful calendar that plugs right into your Quasar application and allows for viewing of day (1-7 days for a week), monthly and scheduler views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.

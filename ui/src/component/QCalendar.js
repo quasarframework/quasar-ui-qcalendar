@@ -2,7 +2,7 @@
 import CalendarBase from './mixins/calendar-base'
 
 // Util
-import props from './utils/props'
+import props from './utils/props.js'
 import {
   DAYS_IN_MONTH_MAX,
   DAY_MIN,
@@ -19,7 +19,7 @@ import {
   getStartOfMonth,
   getEndOfMonth,
   getDayIdentifier
-} from './utils/timestamp'
+} from './utils/timestamp.js'
 
 // Calendars
 import QCalendarMonthly from './QCalendarMonthly'
