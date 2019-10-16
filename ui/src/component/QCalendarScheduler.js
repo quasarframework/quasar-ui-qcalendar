@@ -450,6 +450,10 @@ export default {
           staticClass: 'q-calendar-scheduler__resource-text'
         }), label)
       ])
+    },
+
+    __renderResourcesError (h) {
+      return h('div', {}, 'No resources have been defined')
     }
   },
 
@@ -462,8 +466,9 @@ export default {
         value: this.onResize
       }]
     }, [
-      !this.hideHeader && this.__renderHead(h),
-      this.__renderBody(h)
+      !this.hideHeader && this.resources !== void 0 && this.__renderHead(h),
+      this.resources !== void 0 && this.__renderBody(h),
+      this.resources === void 0 && this.__renderResourcesError(h)
     ])
   }
 }
