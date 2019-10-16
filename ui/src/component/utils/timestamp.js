@@ -408,8 +408,11 @@ export function createDayList (start, end, now, weekdaySkips, disabledDays = [],
 
   while ((!stopped || days.length < min) && days.length < max) {
     currentIdentifier = getDayIdentifier(current)
-    stopped = stopped || currentIdentifier >= stop
-    if (stopped || weekdaySkips[current.weekday] === 0) {
+    stopped = stopped || currentIdentifier > stop
+    if (stopped) {
+      break
+    }
+    if (weekdaySkips[current.weekday] === 0) {
       current = nextDay(current)
       continue
     }
