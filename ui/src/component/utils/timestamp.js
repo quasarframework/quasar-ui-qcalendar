@@ -362,7 +362,9 @@ export function prevDay (timestamp) {
 export function relativeDays (timestamp, mover = nextDay, days = 1, allowedWeekdays = [0, 1, 2, 3, 4, 5, 6]) {
   while (--days >= 0) {
     mover(timestamp)
-    if (allowedWeekdays.length < 7 && !allowedWeekdays.includes(timestamp.weekday)) ++days
+    if (allowedWeekdays.length < 7 && !allowedWeekdays.includes(timestamp.weekday)) {
+      ++days
+    }
   }
 
   return timestamp
@@ -421,7 +423,8 @@ export function createDayList (start, end, now, weekdaySkips, disabledDays = [],
     updateRelative(day, now)
     updateDisabled(day, disabledDays)
     days.push(day)
-    current = relativeDays(current, nextDay, weekdaySkips[current.weekday])
+    // current = relativeDays(current, nextDay, weekdaySkips[current.weekday])
+    current = relativeDays(current, nextDay)
   }
 
   return days
