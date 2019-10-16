@@ -114,14 +114,12 @@ export default {
   },
   methods: {
     scrollTo (id) {
-      // this.$refs.drawer.hide()
       this.activeToc = id
       const el = document.getElementById(id)
 
       if (el) {
         setTimeout(() => {
           this.scrollPage(el)
-          // makeUrl(slugify(id))
         }, 200)
       }
     },
