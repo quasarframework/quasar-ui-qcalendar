@@ -7,6 +7,9 @@ The **QCalendar App Extension** allows you to seamlessly add the [QCalendar](../
 
 ![QCalendar example month view](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/src/statics/qcalendar-month-view.png)
 
+# Examples and Documentation for QCalendar UI Component
+Can be found [here](https://quasarframework.github.io/quasar-ui-qcalendar)
+
 # Install
 ```bash
 quasar ext add @quasar/qcalendar
