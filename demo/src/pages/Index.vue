@@ -21,7 +21,8 @@ This page created with [QMarkdown](https://quasarframework.github.io/app-extensi
 <script>
 import Hero from '../components/Hero'
 import markdown from '../markdown/calendar.md'
-import json from '@quasar/quasar-ui-qcalendar/src/component/QCalendar.json'
+// import json from '@quasar/quasar-ui-qcalendar/src/component/QCalendar.json'
+import { Api } from 'ui'
 
 export default {
   name: 'PageIndex',
@@ -33,7 +34,7 @@ export default {
   data () {
     return {
       markdown: markdown,
-      json: json
+      json: Api
     }
   },
 
