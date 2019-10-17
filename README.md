@@ -12,7 +12,8 @@ QCalendar (Vue Plugin, UMD and Quasar App Extension)
 
 * [/ui](ui) - standalone npm package
 * [/app-extension](app-extension) - Quasar app extension
-* [/demo](demo) - demo and examples
+* [/demo](demo) - docs, demo and examples project
+* [live demo](https://quasarframework.github.io/quasar-ui-qcalendar/docs) - live docs, demo and examples
 
 # Donate
 If you appreciate the work that went into this UI Component, please consider [donating to Quasar](https://donate.quasar.dev).
