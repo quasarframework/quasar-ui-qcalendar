@@ -20,7 +20,6 @@
   "devDependencies": {
     "@quasar/app": "^1.2.1",
     "@quasar/quasar-app-extension-colorize": "^1.0.0-alpha.1",
-    "@quasar/quasar-app-extension-qcalendar": "^1.0.12",
     "@quasar/quasar-app-extension-qiconpicker": "^1.0.9",
     "@quasar/quasar-app-extension-qmarkdown": "^1.0.0-beta.21",
     "@quasar/quasar-app-extension-qpublish": "^1.0.0-alpha.7",

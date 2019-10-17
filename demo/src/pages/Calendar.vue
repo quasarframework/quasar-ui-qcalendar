@@ -437,9 +437,9 @@ export default {
     },
     containerStyle () {
       let styles = {}
-      if (this.calendarView !== 'month' || (this.calendarView === 'month' && this.dayHeight === 0)) {
-        styles.height = `calc(100vh - ${this.titlebarHeight}px)`
-      }
+      // if (this.calendarView !== 'month' || (this.calendarView === 'month' && this.dayHeight === 0)) {
+      //   styles.height = `calc(100vh - ${this.titlebarHeight}px)`
+      // }
       return styles
     },
     // convert the events into a map of lists keyed by date
@@ -484,6 +484,9 @@ export default {
     }
   },
   watch: {
+    selectedDate (val) {
+      console.log('selectedDate: ', val)
+    },
     fiveDayWorkWeek () {
       if (this.fiveDayWorkWeek) {
         this.weekdays = [1, 2, 3, 4, 5]

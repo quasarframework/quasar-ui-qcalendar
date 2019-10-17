@@ -1,16 +1,19 @@
 // Configuration for your app
 // const CopyWebpackPlugin = require('copy-webpack-plugin')
 
+const path = require('path')
+
 module.exports = function (ctx) {
   return {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     boot: [
-      'components'
+      'components',
+      'qcalendar'
     ],
 
     css: [
-      'app.styl'
+      'app.sass'
     ],
 
     extras: [
@@ -111,6 +114,13 @@ module.exports = function (ctx) {
           options: {
             formatter: require('eslint').CLIEngine.getFormatter('stylish')
           }
+        })
+      },
+
+      chainWebpack (chain) {
+        chain.resolve.alias.merge({
+          'ui': path.resolve(__dirname, '../ui/src/index.js'),
+          'sass': path.resolve(__dirname, '../ui/src/index.sass')
         })
       }
     },

@@ -6,7 +6,7 @@ import props from './utils/props.js'
 import {
   DAYS_IN_MONTH_MAX,
   DAY_MIN,
-  DAYS_IN_WEEK,
+  // DAYS_IN_WEEK,
   parseTimestamp,
   relativeDays,
   nextDay,
@@ -167,6 +167,7 @@ export default {
       let times = forward ? amount : -amount
       this.direction = forward ? 'next' : 'prev'
       let maxDays = this.maxDays
+      const dayCount = this.weekdaySkips.filter(x => x !== 0).length
 
       while (--times >= 0) {
         switch (this.view) {
@@ -175,7 +176,8 @@ export default {
             mover(moved)
             break
           case 'week':
-            relativeDays(moved, mover, DAYS_IN_WEEK, this.weekdays)
+            // relativeDays(moved, mover, DAYS_IN_WEEK, this.weekdays)
+            relativeDays(moved, mover, dayCount, this.weekdays)
             break
           case 'day':
             maxDays = 1
@@ -212,7 +214,8 @@ export default {
             relativeDays(moved, mover, this.maxDays, this.weekdays)
             break
           case 'week-scheduler':
-            relativeDays(moved, mover, DAYS_IN_WEEK, this.weekdays)
+            // relativeDays(moved, mover, DAYS_IN_WEEK, this.weekdays)
+            relativeDays(moved, mover, dayCount, this.weekdays)
             break
           case 'month-scheduler':
             moved.day = limit
