@@ -1252,6 +1252,55 @@
     "updateCurrent": {
       "desc": "Update various values to be consistent with current date",
       "__exemption": [ "examples" ]
+    },
+    "timeStartPos": {
+      "desc": "Calculates the start position of the passed in time",
+      "applicable": [
+        "day",
+        "week",
+        "scheduler"
+      ],
+      "params": {
+        "time": {
+          "type": "String",
+          "examples":[
+            "09:00"
+          ]
+        }
+      }
+    },
+    "timeDurationHeight": {
+      "desc": "Calculates the height based on the passed in minutes",
+      "applicable": [
+        "day",
+        "week",
+        "scheduler"
+      ],
+      "params": {
+        "time": {
+          "type": ["Number", "String"],
+          "examples":[
+            "30",
+            "90"
+          ]
+        }
+      }
+    },
+    "scrollToTime": {
+      "desc": "When on an interval view, scroll to the passed in time",
+      "applicable": [
+        "day",
+        "week",
+        "scheduler"
+      ],
+      "params": {
+        "time": {
+          "type": "String",
+          "examples":[
+            "09:00"
+          ]
+        }
+      }
     }
   },
   "scopedSlots": {
