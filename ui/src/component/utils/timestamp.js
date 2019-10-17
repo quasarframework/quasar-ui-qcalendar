@@ -58,7 +58,6 @@ export function getStartOfWeek (timestamp, weekdays, today) {
 }
 
 export function getEndOfWeek (timestamp, weekdays, today) {
-  debugger
   // is last day of month?
   const lastDay = daysInMonth(timestamp.year, timestamp.month)
   if (lastDay === timestamp.day) {
