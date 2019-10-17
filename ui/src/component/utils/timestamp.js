@@ -43,8 +43,13 @@ export const TimeObject = {
 }
 
 export function getStartOfWeek (timestamp, weekdays, today) {
+  if (timestamp.day === 1) {
+    while (!weekdays.includes(timestamp.weekday)) {
+      nextDay(timestamp)
+    }
+  }
   const start = copyTimestamp(timestamp)
-  findWeekday(start, weekdays[0], prevDay)
+  findWeekday(start, weekdays[0], prevDay, weekdays.length)
   updateFormatted(start)
   if (today) {
     updateRelative(start, today, start.hasTime)
@@ -53,8 +58,15 @@ export function getStartOfWeek (timestamp, weekdays, today) {
 }
 
 export function getEndOfWeek (timestamp, weekdays, today) {
+  // is last day of month?
+  const lastDay = daysInMonth(timestamp.year, timestamp.month)
+  if (lastDay === timestamp.day) {
+    while (!weekdays.includes(timestamp.weekday)) {
+      prevDay(timestamp)
+    }
+  }
   const end = copyTimestamp(timestamp)
-  findWeekday(end, weekdays[weekdays.length - 1])
+  findWeekday(end, weekdays[weekdays.length - 1], nextDay, weekdays.length)
   updateFormatted(end)
   if (today) {
     updateRelative(end, today, end.hasTime)
