@@ -60,6 +60,7 @@ export default {
       const now = this.times.now
 
       if (days.length === 0) {
+        /* eslint-disable no-console */
         console.error('QCalendar: days array has no content')
       }
       return days.map(d => createIntervalList(d, first, minutes, count, now))
