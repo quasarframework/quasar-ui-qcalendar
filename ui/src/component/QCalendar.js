@@ -151,9 +151,9 @@ export default {
     checkChange (val, oldval) {
       const { start, end } = this.renderProps
       this.keyValue = 0
-      if (start !== this.lastStart || end !== this.lastEnd) {
-        this.lastStart = start
-        this.lastEnd = end
+      if (!this.lastStart || !this.lastEnd || start.date !== this.lastStart || end.date !== this.lastEnd) {
+        this.lastStart = start.date
+        this.lastEnd = end.date
         this.$emit('change', { start, end })
       }
       this.keyValue = getDayIdentifier(start)
