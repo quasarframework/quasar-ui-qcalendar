@@ -568,9 +568,9 @@ export default {
     }
   },
   watch: {
-    selectedDate (val) {
-      console.log('selectedDate: ', val)
-    },
+    // selectedDate (val) {
+    //   console.log('selectedDate: ', val)
+    // },
     fiveDayWorkWeek () {
       if (this.fiveDayWorkWeek) {
         this.weekdays = [1, 2, 3, 4, 5]
