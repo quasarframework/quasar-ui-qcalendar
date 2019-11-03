@@ -42,6 +42,7 @@ module.exports = function (ctx) {
         'QDialog',
         'QDrawer',
         'QExpansionItem',
+        'QField',
         'QForm',
         'QHeader',
         'QIcon',
@@ -95,7 +96,7 @@ module.exports = function (ctx) {
       // lang: 'de' // Quasar language
     },
 
-    supportIE: false,
+    supportIE: true,
 
     build: {
       scopeHoisting: true,
@@ -120,6 +121,7 @@ module.exports = function (ctx) {
       chainWebpack (chain) {
         chain.resolve.alias.merge({
           'ui': path.resolve(__dirname, '../ui/src/index.js'),
+          'calendar': path.resolve(__dirname, '../ui/src'),
           'sass': path.resolve(__dirname, '../ui/src/index.sass')
         })
       }

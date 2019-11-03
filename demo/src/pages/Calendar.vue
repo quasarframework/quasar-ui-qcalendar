@@ -2,164 +2,247 @@
   <q-page class="column">
     <!-- display an event -->
     <q-dialog v-model="displayEvent">
-      <q-card v-if="event">
-        <q-toolbar :class="displayClasses(event)" :style="displayStyles(event)" style="min-width: 400px;">
-          <q-toolbar-title>
-            {{ event.title }}
-          </q-toolbar-title>
-          <q-btn flat round color="white" icon="delete" v-close-popup @click="deleteEvent(event)"></q-btn>
-          <q-btn flat round color="white" icon="edit" v-close-popup @click="editEvent(event)"></q-btn>
-          <q-btn flat round color="white" icon="cancel" v-close-popup></q-btn>
-        </q-toolbar>
-        <q-card-section class="inset-shadow">
-          <div v-if="event.allDay" class="text-caption">{{ getEventDate(event) }}</div>
-          {{ event.details }}
-          <div v-if="event.time" class="text-caption">
-            <pre>
-Start Time: {{ event.time }}
-End Time:   {{ getEndTime(event) }}
-Duration:   {{ convertDurationTime(event.duration) }}
-            </pre>
-          </div>
-        </q-card-section>
-        <q-card-actions align="right">
-          <q-btn flat label="OK" color="primary" v-close-popup></q-btn>
-        </q-card-actions>
-      </q-card>
+      <div>
+        <q-card v-if="event">
+          <q-toolbar :class="displayClasses(event)" :style="displayStyles(event)" style="min-width: 400px;">
+            <q-toolbar-title>
+              {{ event.title }}
+            </q-toolbar-title>
+            <q-btn flat round color="white" icon="delete" v-close-popup @click="deleteEvent(event)"></q-btn>
+            <q-btn flat round color="white" icon="edit" v-close-popup @click="editEvent(event)"></q-btn>
+            <q-btn flat round color="white" icon="cancel" v-close-popup></q-btn>
+          </q-toolbar>
+          <q-card-section class="inset-shadow">
+            <div v-if="event.allDay" class="text-caption">{{ getEventDate(event) }}</div>
+            {{ event.details }}
+            <div v-if="event.time" class="text-caption">
+              <div class="row full-width justify-start" style="padding-top: 12px;">
+                <div class="col-12">
+                  <div class="row full-width justify-start">
+                    <div class="col-5" style="padding-left: 20px;">
+                      <strong>Start Time:</strong>
+                    </div>
+                    <div class="col-7">
+                      {{ event.time }}
+                    </div>
+                  </div>
+                  <div class="row full-width justify-start">
+                    <div class="col-5" style="padding-left: 20px;">
+                      <strong>End Time:</strong>
+                    </div>
+                    <div class="col-7">
+                      {{ getEndTime(event) }}
+                    </div>
+                  </div>
+                  <div class="row full-width justify-start">
+                    <div class="col-5" style="padding-left: 20px;">
+                      <strong>Duration:</strong>
+                    </div>
+                    <div class="col-7">
+                      {{ convertDurationTime(event.duration) }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </q-card-section>
+          <q-card-actions align="right">
+            <q-btn flat label="OK" color="primary" v-close-popup></q-btn>
+          </q-card-actions>
+        </q-card>
+      </div>
     </q-dialog>
     <!-- add/edit an event -->
     <q-dialog v-model="addEvent" no-backdrop-dismiss>
-      <q-card v-if="addEvent" style="width: 400px;">
-        <q-toolbar class="bg-primary text-white">
-          <q-toolbar-title>
-            {{ addOrUpdateEvent }} Event
-          </q-toolbar-title>
-          <q-btn flat round color="white" icon="close" v-close-popup></q-btn>
-        </q-toolbar>
-        <q-card-section class="inset-shadow">
-          <q-form
-            v-if="contextDay"
-            ref='event'
-            class="q-gutter-md"
-          >
-            <q-input v-model="eventForm.title" autofocus label="Title" :rules="[v => v && v.length > 0 || 'Field cannot be empty']"></q-input>
-            <q-input v-model="eventForm.details" label="Details"></q-input>
-            <q-checkbox v-model="eventForm.allDay" label="All-Day event?"></q-checkbox>
+      <div>
+        <q-form
+          v-if="contextDay"
+          ref='event'
+          @submit="onSubmit"
+          @reset="onReset"
+        >
+          <q-card v-if="addEvent" style="width: 400px;">
+            <q-toolbar class="bg-primary text-white">
+              <q-toolbar-title>
+                {{ addOrUpdateEvent }} Event
+              </q-toolbar-title>
+              <q-btn flat round color="white" icon="close" v-close-popup></q-btn>
+            </q-toolbar>
+            <q-card-section class="inset-shadow">
+              <q-input
+                v-model="eventForm.title"
+                label="Title"
+                :rules="[v => v && v.length > 0 || 'Field cannot be empty']"
+                autofocus
+              />
+              <q-input
+                v-model="eventForm.details"
+                label="Details"
+              />
+              <q-field
+                v-model="eventForm.allDay"
+                style="padding-bottom: 20px;"
+              >
+                <q-checkbox
+                  v-model="eventForm.allDay"
+                  label="All-Day event?"
+                />
+              </q-field>
 
-            <q-input v-if="eventForm.allDay" color="blue-6" filled v-model="eventForm.dateTimeStart" label="Enter date" mask="####-##-##">
-              <template #append>
-                <q-icon name="event" class="cursor-pointer">
-                  <q-popup-proxy v-model="showDateScrollerAllDay">
-
-                    <q-date-scroller
-                      v-model="eventForm.dateTimeStart"
-                      :locale="locale"
-                      :hour24-format="true"
-                      :rounded-borders="true"
-                      border-color="#2196f3"
-                      bar-color="#2196f3"
-                      color="white"
-                      background-color="primary"
-                      inner-color="primary"
-                      inner-background-color="white"
-                      :style="scrollerPopupStyle160"
-                      @close="() => { showDateScrollerAllDay = false }"
-                    />
-
-                  </q-popup-proxy>
-                </q-icon>
-              </template>
-            </q-input>
-
-            <div v-else class="q-gutter-sm">
-              <q-input color="blue-6" outlined v-model="eventForm.dateTimeStart" label="Event start date and time" mask="####-##-## ##:##">
+              <q-input
+                v-if="eventForm.allDay"
+                v-model="eventForm.dateTimeStart"
+                label="Enter date"
+                mask="####-##-##"
+                color="blue-6"
+                outlined
+                style="padding-bottom: 20px;"
+              >
                 <template #append>
                   <q-icon name="event" class="cursor-pointer">
-                    <q-popup-proxy v-model="showDateTimeScrollerStart">
+                    <q-popup-proxy v-model="showDateScrollerAllDay">
 
-                      <q-date-time-scroller
+                      <q-scroller
                         v-model="eventForm.dateTimeStart"
+                        view="date"
                         :locale="locale"
                         :hour24-format="true"
                         :rounded-borders="true"
                         border-color="#2196f3"
                         bar-color="#2196f3"
-                        color="white"
-                        background-color="primary"
-                        inner-color="primary"
-                        inner-background-color="white"
-                        :style="scrollerPopupStyle280"
-                        @close="() => { showDateTimeScrollerStart = false }"
+                        text-color="white"
+                        color="primary"
+                        inner-text-color="primary"
+                        inner-color="white"
+                        :style="scrollerPopupStyle160"
+                        @close="() => { showDateScrollerAllDay = false }"
                       />
 
                     </q-popup-proxy>
                   </q-icon>
                 </template>
               </q-input>
-              <q-input color="blue-6" outlined v-model="eventForm.dateTimeEnd" label="Event end date and time" mask="####-##-## ##:##">
+
+              <div v-else>
+                <q-input
+                  v-model="eventForm.dateTimeStart"
+                  ref="dateTimeStart"
+                  label="Event start date and time"
+                  mask="####-##-## ##:##"
+                  :rules="[val => checkDateTimeStart() || 'Start time cannot come after end time']"
+                  outlined
+                  color="blue-6"
+                >
+                  <template #append>
+                    <q-icon name="event" class="cursor-pointer">
+                      <q-popup-proxy v-model="showDateTimeScrollerStart">
+
+                        <q-scroller
+                          v-model="eventForm.dateTimeStart"
+                          view="date-time"
+                          :locale="locale"
+                          :hour24-format="true"
+                          :rounded-borders="true"
+                          border-color="#2196f3"
+                          bar-color="#2196f3"
+                          color="primary"
+                          text-color="white"
+                          inner-color="white"
+                          inner-text-color="primary "
+                          :style="scrollerPopupStyle280"
+                          @close="() => { showDateTimeScrollerStart = false }"
+                        />
+
+                      </q-popup-proxy>
+                    </q-icon>
+                  </template>
+                </q-input>
+
+                <q-input
+                  v-model="eventForm.dateTimeEnd"
+                  ref="dateTimeEnd"
+                  label="Event end date and time"
+                  mask="####-##-## ##:##"
+                  :rules="[val => checkDateTimeEnd() || 'Start time cannot come after end time']"
+                  color="blue-6"
+                  outlined
+                >
+                  <template #append>
+                    <q-icon name="event" class="cursor-pointer">
+                      <q-popup-proxy v-model="showDateTimeScrollerEnd">
+
+                        <q-scroller
+                          v-model="eventForm.dateTimeEnd"
+                          view="date-time"
+                          :locale="locale"
+                          :hour24-format="true"
+                          :rounded-borders="true"
+                          border-color="#2196f3"
+                          bar-color="#2196f3"
+                          color="primary"
+                          text-color="white"
+                          inner-color="white"
+                          inner-text-color="primary "
+                          :style="scrollerPopupStyle280"
+                          @close="() => { showDateTimeScrollerEnd = false }"
+                        />
+
+                      </q-popup-proxy>
+                    </q-icon>
+                  </template>
+                </q-input>
+              </div>
+
+              <q-input
+                v-model="eventForm.icon"
+                label="Icon"
+                outlined
+                clearable
+                style="padding-bottom: 20px;"
+              >
+                <template v-slot:append>
+                  <q-icon name="extension" class="cursor-pointer">
+                    <q-popup-proxy v-model="showIconPicker">
+
+                      <q-icon-picker
+                        v-model="eventForm.icon"
+                        :filter="eventForm.icon"
+                        icon-set="fontawesome-v5"
+                        tooltips
+                        :pagination.sync="pagination"
+                        style="height: 300px; width: 300px; background-color: white;"
+                      />
+
+                    </q-popup-proxy>
+                  </q-icon>
+                </template>
+              </q-input>
+
+              <q-input
+                v-model="eventForm.bgcolor"
+                label="Color"
+                outlined
+                clearable
+              >
                 <template #append>
-                  <q-icon name="event" class="cursor-pointer">
-                    <q-popup-proxy v-model="showDateTimeScrollerEnd">
-
-                      <q-date-time-scroller
-                        v-model="eventForm.dateTimeEnd"
-                        :locale="locale"
-                        :hour24-format="true"
-                        :rounded-borders="true"
-                        border-color="#2196f3"
-                        bar-color="#2196f3"
-                        color="white"
-                        background-color="primary"
-                        inner-color="primary"
-                        inner-background-color="white"
-                        :style="scrollerPopupStyle280"
-                        @close="() => { showDateTimeScrollerEnd = false }"
-                      />
-
+                  <q-icon name="colorize" class="cursor-pointer">
+                    <q-popup-proxy>
+                      <q-color v-model="eventForm.bgcolor"></q-color>
                     </q-popup-proxy>
                   </q-icon>
                 </template>
               </q-input>
-            </div>
 
-            <q-input filled v-model="eventForm.icon" label="Icon" clearable>
-              <template v-slot:append>
-                <q-icon name="extension" class="cursor-pointer">
-                  <q-popup-proxy v-model="showIconPicker">
-
-                    <q-icon-picker
-                      v-model="eventForm.icon"
-                      :filter="eventForm.icon"
-                      icon-set="fontawesome-v5"
-                      tooltips
-                      :pagination.sync="pagination"
-                      style="height: 300px; width: 300px; background-color: white;"
-                    />
-
-                    </q-popup-proxy>
-                  </q-icon>
-                </template>
-              </q-input>
-            <q-input
-              filled
-              v-model="eventForm.bgcolor"
-            >
-              <template #append>
-                <q-icon name="colorize" class="cursor-pointer">
-                  <q-popup-proxy>
-                    <q-color v-model="eventForm.bgcolor"></q-color>
-                  </q-popup-proxy>
-                </q-icon>
-              </template>
-            </q-input>
-          </q-form>
-        </q-card-section>
-        <q-card-actions align="right">
-          <q-btn flat label="OK" color="primary" @click="saveEvent"></q-btn>
-          <q-btn flat label="Cancel" color="primary" v-close-popup></q-btn>
-        </q-card-actions>
-      </q-card>
+            </q-card-section>
+            <q-card-actions align="right">
+              <q-btn flat label="OK" type="submit" color="primary"></q-btn>
+              <q-btn flat label="Cancel" type="reset" color="primary" v-close-popup></q-btn>
+            </q-card-actions>
+          </q-card>
+        </q-form>
+      </div>
     </q-dialog>
+
     <!-- the calendar -->
     <div
       class="calendar-container"
@@ -303,6 +386,7 @@ import events from '../util/events'
 import { padTime } from '../util/time'
 import { date, colors, Platform } from 'quasar'
 import { stop, prevent, stopAndPrevent } from 'quasar/src/utils/event'
+import { parsed, getDayIdentifier, getTimeIdentifier } from 'calendar/component/utils/timestamp'
 
 import 'drag-drop-touch'
 
@@ -591,6 +675,54 @@ export default {
       }
       return events
     },
+    checkDateTimeStart (/* val */) {
+      this.$refs.dateTimeEnd.resetValidation()
+      if (this.eventForm.dateTimeStart && this.eventForm.dateTimeEnd) {
+        const timestampStart = parsed(this.eventForm.dateTimeStart)
+        const timestampEnd = parsed(this.eventForm.dateTimeEnd)
+        const dayStart = getDayIdentifier(timestampStart)
+        const dayEnd = getDayIdentifier(timestampEnd)
+        if (dayStart < dayEnd) {
+          return true
+        } else if (dayStart > dayEnd) {
+          return false
+        } else {
+          const timeStart = getTimeIdentifier(timestampStart)
+          const timeEnd = getTimeIdentifier(timestampEnd)
+          if (timeStart <= timeEnd) {
+            return true
+          } else {
+            return false
+          }
+        }
+      }
+      return false
+    },
+
+    checkDateTimeEnd (val) {
+      this.$refs.dateTimeStart.resetValidation()
+      if (this.eventForm.dateTimeStart && this.eventForm.dateTimeEnd) {
+        const timestampEnd = parsed(this.eventForm.dateTimeEnd)
+        const timestampStart = parsed(this.eventForm.dateTimeStart)
+        const dayEnd = getDayIdentifier(timestampEnd)
+        const dayStart = getDayIdentifier(timestampStart)
+        if (dayEnd > dayStart) {
+          return true
+        } else if (dayEnd < dayStart) {
+          return false
+        } else {
+          const timeEnd = getTimeIdentifier(timestampEnd)
+          const timeStart = getTimeIdentifier(timestampStart)
+          if (timeEnd >= timeStart) {
+            return true
+          } else {
+            return false
+          }
+        }
+      }
+      return false
+    },
+
     resetForm () {
       this.$set(this, 'eventForm', { ...formDefault })
     },
@@ -748,6 +880,15 @@ export default {
       const rminutes = Math.round(minutes)
       return (days > 0 ? days + ' days and ' : '') + (rshours > 0 ? rshours + ' hour(s) and ' : '') + rminutes + ' minute(s).'
     },
+
+    onSubmit () {
+      this.saveEvent()
+    },
+
+    onReset () {
+
+    },
+
     saveEvent () {
       let self = this
       this.$refs.event.validate().then((success) => {
