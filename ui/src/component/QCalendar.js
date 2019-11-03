@@ -42,8 +42,8 @@ export default {
   },
 
   data: () => ({
-    lastStart: null,
-    lastEnd: null
+    lastStart: void 0,
+    lastEnd: void 0
   }),
 
   computed: {
@@ -151,7 +151,7 @@ export default {
     checkChange (val, oldval) {
       const { start, end } = this.renderProps
       this.keyValue = 0
-      if (!this.lastStart || !this.lastEnd || start.date !== this.lastStart || end.date !== this.lastEnd) {
+      if (this.lastStart === void 0 || this.lastEnd === void 0 || start.date !== this.lastStart || end.date !== this.lastEnd) {
         this.lastStart = start.date
         this.lastEnd = end.date
         this.$emit('change', { start, end })
