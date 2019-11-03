@@ -7,9 +7,10 @@
     />
     <q-markdown>
 # Donate
-If you appreciate the work that went into this project, please consider [donating to Quasar](https://donate.quasar.dev).
+If you appreciate the work that went into this, please consider donating to [Quasar](https://donate.quasar.dev) or [Jeff](https://github.com/sponsors/hawkeye64).
 
 ---
+
 This page created with [QMarkdown](https://quasarframework.github.io/app-extension-qmarkdown), another great Quasar App Extension.
     </q-markdown>
     <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
@@ -21,7 +22,6 @@ This page created with [QMarkdown](https://quasarframework.github.io/app-extensi
 <script>
 import Hero from '../components/Hero'
 import markdown from '../markdown/calendar.md'
-// import json from '@quasar/quasar-ui-qcalendar/src/component/QCalendar.json'
 import { Api } from 'ui'
 
 export default {

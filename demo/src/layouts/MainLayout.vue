@@ -80,10 +80,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { scroll } from 'quasar'
-// const { getScrollTarget, setScrollPosition } = scroll
 const { setScrollPosition } = scroll
-// import { slugify, makeUrl } from 'assets/page-utils'
-// import { version } from '@quasar/quasar-ui-qcalendar/package.json'
 import { version } from 'ui'
 
 export default {

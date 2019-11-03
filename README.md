@@ -16,7 +16,7 @@ QCalendar (Vue Plugin, UMD and Quasar App Extension)
 * [live demo](https://quasarframework.github.io/quasar-ui-qcalendar/docs) - live docs, demo and examples
 
 # Donate
-If you appreciate the work that went into this UI Component, please consider [donating to Quasar](https://donate.quasar.dev).
+If you appreciate the work that went into this, please consider donating to [Quasar](https://donate.quasar.dev) or [Jeff](https://github.com/sponsors/hawkeye64).
 
 # License
 MIT (c) Jeff Galbraith <jeff@quasar.dev>
