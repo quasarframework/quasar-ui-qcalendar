@@ -13,6 +13,8 @@
         <q-separator vertical></q-separator>
         <q-btn stretch flat label="Next" @click="calendarNext"></q-btn>
         <q-separator vertical></q-separator>
+        <q-btn stretch flat label="Scroll" @click="calendarScroll"></q-btn>
+        <q-separator vertical></q-separator>
         <q-space></q-space>
 
         <div>Quasar v{{ $q.version }}</div>
@@ -25,6 +27,7 @@
         v-model="date"
         view="month-interval"
         :weekdays="[1,2,3,4,5]"
+        style="height: 600px;"
       >
       </q-calendar>
     </q-page>
@@ -58,6 +61,10 @@ export default {
 
     calendarPrev () {
       this.$refs.calendar.prev()
+    },
+
+    calendarScroll () {
+      this.$refs.calendar.scrollToTime("16:00")
     },
 
     padNumber (num, length) {
