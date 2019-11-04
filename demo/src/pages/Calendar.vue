@@ -781,7 +781,6 @@ export default {
       return s
     },
     onDateChanged ({ day }) {
-      this.selectedDate = day.date
       if (this.calendarView === 'week-scheduler' || this.calendarView === 'month-scheduler') {
         this.calendarView = 'scheduler'
         return
