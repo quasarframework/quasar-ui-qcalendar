@@ -226,7 +226,7 @@ export default {
       const outside = this.isOutside(day)
       const slot = this.$scopedSlots.day
       const slotData = { outside, ...day }
-      const hasMonth = day.day === 1 && this.showMonthLabel
+      const hasMonth = outside === false && this.days.find(d => d.month === day.month).day === day.day && this.showMonthLabel === true
       let dragOver
 
       let colors = new Map(), color, backgroundColor
