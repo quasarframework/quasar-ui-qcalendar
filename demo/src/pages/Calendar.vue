@@ -1,5 +1,5 @@
 <template>
-  <q-page class="column">
+  <q-page class="column" style="overflow: hidden">
     <!-- display an event -->
     <q-dialog v-model="displayEvent">
       <div>
