@@ -521,9 +521,9 @@ export default {
     },
     containerStyle () {
       let styles = {}
-      // if (this.calendarView !== 'month' || (this.calendarView === 'month' && this.dayHeight === 0)) {
-      //   styles.height = `calc(100vh - ${this.titlebarHeight}px)`
-      // }
+      if (this.calendarView !== 'month') {
+        styles.height = `calc(100vh - ${this.titlebarHeight}px)`
+      }
       return styles
     },
     // convert the events into a map of lists keyed by date
