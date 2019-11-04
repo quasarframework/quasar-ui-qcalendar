@@ -133,7 +133,7 @@ export default {
       firstDayMonday: 'calendar/firstDayMonday'
     }),
     title () {
-      if (this.titleFormatter && this.locale) {
+      if (this.titleFormatter && this.locale && this.selectedDate) {
         const date = new Date(this.selectedDate)
         return this.titleFormatter.format(date)
       }
@@ -158,7 +158,11 @@ export default {
     selectedDateForQDate:
     {
       get () {
-        return this.$store.state.calendar.selectedDate.replace(/-/g, '/')
+        if (this.$store.state.calendar.selectedDate) {
+          return this.$store.state.calendar.selectedDate.replace(/-/g, '/')
+        } else {
+          return ''
+        }
       },
       set (date) {
         this.$store.commit('calendar/selectedDate', date.replace(/\//g, '-'))
