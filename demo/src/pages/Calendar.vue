@@ -780,11 +780,13 @@ export default {
       }
       return s
     },
-    onDateChanged (date) {
-      if (this.calendarView === 'scheduler' || this.calendarView === 'week-scheduler' || this.calendarView === 'month-scheduler') {
+    onDateChanged ({ day }) {
+      this.selectedDate = day.date
+      if (this.calendarView === 'week-scheduler' || this.calendarView === 'month-scheduler') {
+        this.calendarView = 'scheduler'
         return
       }
-      // automaticallyu change to the day selected
+      // automatically change to the day selected
       this.calendarView = 'day'
     },
     resourceClicked (resource) {
