@@ -23,7 +23,7 @@
     "@quasar/quasar-app-extension-qmarkdown": "^1.0.0-beta.21",
     "@quasar/quasar-app-extension-qpublish": "^1.0.0-alpha.7",
     "@quasar/quasar-app-extension-qribbon": "^1.0.0-beta.8",
-    "@quasar/quasar-app-extension-qscroller": "^1.0.0-alpha.12",
+    "@quasar/quasar-app-extension-qscroller": "^1.0.0-alpha.13",
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.3",
     "copy-webpack-plugin": "^5.0.4",
