@@ -289,7 +289,11 @@ export default {
         ...this.$listeners,
         'click:date': (day) => {
           if (this.$listeners['input']) {
-            this.$emit('input', day.date)
+            if (day.date !== void 0) {
+              this.$emit('input', day.date)
+            } else if (day.day !== void 0 && day.day.date !== void 0) {
+              this.$emit('input', day.day.date)
+            }
           }
           if (this.$listeners['click:date']) {
             this.$emit('click:date', day)
