@@ -34,7 +34,7 @@
     "eslint": "^6.6.0",
     "eslint-loader": "^3.0.2",
     "eslint-plugin-quasar": "^1.0.0-alpha.15",
-    "eslint-plugin-vue": "^5.2.3"
+    "eslint-plugin-vue": "^6.0.0"
   },
   "engines": {
     "node": ">= 8.9.0",
