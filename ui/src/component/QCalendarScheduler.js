@@ -327,7 +327,6 @@ export default {
     __renderDay (h, day, idx) {
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
-      let resource = this.resources && this.resources[idx] ? this.resources[idx] : void 0
       if (this.enableTheme === true) {
         if (day.past === true) {
           color = 'colorBodyPast'
@@ -346,10 +345,7 @@ export default {
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
         key: day.date + (idx !== void 0 ? `:${idx}` : ''),
         staticClass: 'q-calendar-scheduler__day',
-        class: this.getRelativeClasses(day),
-        on: this.getDefaultMouseEventHandlers(':resource:day', _event => {
-          return this.getScopeForSlot(this.getTimestampAtEvent(_event, day), idx, resource)
-        })
+        class: this.getRelativeClasses(day)
       }), [
         ...this.__renderDayResources(h, day, idx)
       ])
@@ -376,6 +372,9 @@ export default {
           'q-calendar-scheduler__day-resource--droppable': dragOver
         },
         style: style,
+        on: this.getDefaultMouseEventHandlers(':resource:day', _event => {
+          return this.getScopeForSlot(this.getTimestampAtEvent(_event, day), idx, resource)
+        }),
         domProps: {
           ondragover: (_event) => {
             if (this.dragOverFunc !== void 0) {
