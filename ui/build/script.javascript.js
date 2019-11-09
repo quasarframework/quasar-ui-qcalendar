@@ -70,6 +70,9 @@ const builds = [
 ]
 
 build(builds)
+  .then(() => {
+    require('./build.api')
+  })
 
 /**
  * Helpers
