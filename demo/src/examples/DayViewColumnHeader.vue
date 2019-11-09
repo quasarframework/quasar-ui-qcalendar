@@ -7,6 +7,7 @@
     locale="en-us"
     style="height: 400px;"
   >
+    <!-- eslint-disable vue/no-unused-vars -->
     <template #column-header-before="days">
       <div class="q-ma-xs">
         column-header-before slot
