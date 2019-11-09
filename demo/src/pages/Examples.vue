@@ -347,6 +347,7 @@ export default {
 
   methods: {
     getTagParts,
+
     addToToc (name, level = 1) {
       const slug = slugify(name)
       this.tempToc.push({
