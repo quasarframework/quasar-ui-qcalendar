@@ -1,10 +1,9 @@
 {
-  "type": "component",
   "props": {
     "value": {
       "type": "String",
       "category": "model",
-      "desc": "v-model; When set as YYYY-mm-dd, the calendar will display the current view on this date. If empty, then it will be changed to the current date",
+      "desc": "v-model; When set as YYYY-mm-dd, the calendar will display the current view on this date. If empty, then it will be changed to the current date which will be emitted",
       "required": true,
       "default": "now",
       "applicable": [
@@ -34,6 +33,7 @@
         "month-interval",
         "custom-interval",
         "scheduler",
+        "week-scheduler",
         "month-scheduler",
         "custom-scheduler"
       ],
@@ -57,7 +57,7 @@
     "weekdays": {
       "type": "String",
       "category": "model",
-      "desc": "This is the days of the week and in which order they are displayed. If you want Monday as the first day of the week, you would use [1,2,3,4,5,6,0]",
+      "desc": "This is the days of the week and in which order they are displayed. If you want Monday as the first day of the week, you would use [1,2,3,4,5,6,0]. If you want a 5-day work week you would use [1,2,3,4,5]",
       "default": "[0,1,2,3,4,5,6]",
       "applicable": [
         "All"
@@ -99,8 +99,9 @@
       "desc": "The number of days to be displayed. Applicable only for custom-interval and scheduler views",
       "default": 7,
       "applicable": [
-        "Custom",
-        "Scheduler"
+        "custom-interval",
+        "scheduler",
+        "custom-scheduler"
       ],
       "examples": [
         "max-days=\"14\"",
@@ -110,22 +111,21 @@
     "color": {
       "type": "String",
       "category": "style",
-      "desc": "This is the color used current day (now) highlighting. It can be from the Quasar color palette or a CSS hash value (ie: '#0000FF')",
-      "default": "",
+      "desc": "This is the color used current day (now) highlighting. It can be from the from the [Quasar Color Pallete](https://quasar.dev/style/color-palette), CSS named color or a CSS color (#, rgb, rgba, hls, etc)",
       "applicable": [
         "All"
       ],
       "examples": [
         "color=\"orange-7\"",
         "color=\"blue-grey-4\"",
-        "color=\"#00CCFC\""
+        "color=\"#00CCFC\"",
+        "color=\"crimson\""
       ]
     },
     "enable-theme": {
       "type": "Boolean",
       "category": "style",
-      "desc": "Turn on theme support",
-      "default": false,
+      "desc": "Turns on theme support",
       "applicable": [
         "All"
       ]
@@ -134,15 +134,15 @@
       "type": "Object",
       "category": "style",
       "desc": "Object containing keys and values that overrides the calendar's color properties. See online demo for format of a theme",
-      "default": "{}",
       "applicable": [
         "All"
-      ]
+      ],
+      "__exemption": [ "examples" ]
     },
     "hide-header": {
       "type": "Boolean",
       "category": "style",
-      "desc": "Hide the calendar header. Applicable to all views",
+      "desc": "Hide the calendar header.",
       "applicable": [
         "All"
       ]
@@ -190,28 +190,40 @@
     "drag-over-func": {
       "type": "Function",
       "category": "behavior",
-      "desc": "The function to handle ondragover events",
+      "desc": "The function to handle dragover events",
       "params": {
         "event": {
           "type": "Object",
-          "desc": "The event associated with the ondragover"
+          "desc": "The event associated with the dragover",
+          "__exemption": [ "examples" ]
         },
         "timestamp": {
           "type": "Object",
-          "desc": "The timestamp object associated with the date and optional time (if an interval)"
+          "desc": "The timestamp object associated with the date and optional time (if an interval)",
+          "__exemption": [ "examples" ]
         },
         "type": {
           "type": "String",
-          "desc": "This can be 'day', 'interval' or 'resource'"
+          "desc": "This can be 'day', 'interval' or 'resource'",
+          "examples": [
+            "day",
+            "interval",
+            "resource"
+          ]
         },
         "index": {
           "type": "Number",
-          "desc": "The column-count index location of the start of the drag (only available if property column-count is set)"
+          "desc": "The column-count index location of the start of the drag (only available if property `column-count` is set)",
+          "__exemption": [ "examples" ]
         }
       },
       "applicable": [
         "All"
       ],
+      "returns": {
+        "type": "Boolean",
+        "desc": "If the event was handled"
+      },
       "examples": [
         ":drag-over-func=\"onDragOver\""
       ]
@@ -223,24 +235,36 @@
       "params": {
         "event": {
           "type": "Object",
-          "desc": "The event associated with the ondrop"
+          "desc": "The event associated with the drop",
+          "__exemption": [ "examples" ]
         },
         "timestamp": {
           "type": "Object",
-          "desc": "The timestamp object associated with the date and optional time (if an interval) of the drop"
+          "desc": "The timestamp object associated with the date and optional time (if an interval) of the drop",
+          "__exemption": [ "examples" ]
         },
         "type": {
           "type": "String",
-          "desc": "This can be 'day', 'interval' or 'resource'"
+          "desc": "This can be 'day', 'interval' or 'resource'",
+          "examples": [
+            "day",
+            "interval",
+            "resource"
+          ]
         },
         "index": {
           "type": "Number",
-          "desc": "The column-count index location of the start of the drag (only available if property column-count is set)"
+          "desc": "The column-count index location of the start of the drag (only available if property `column-count` is set)",
+          "__exemption": [ "examples" ]
         }
       },
       "applicable": [
         "All"
       ],
+      "returns": {
+        "type": "Boolean",
+        "desc": "If the event was handled"
+      },
       "examples": [
         ":drop-func=\"onDrop\""
       ]
@@ -251,7 +275,19 @@
       "desc": "Turns off the internal scrollbar. Useful if you want to handle your own scrolling",
       "default": "",
       "applicable": [
-        "Day"
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
       ]
     },
     "column-header-before": {
@@ -259,7 +295,7 @@
       "category": "style",
       "desc": "Turns on the column-header-before scoped slot",
       "applicable": [
-        "Day"
+        "day"
       ]
     },
     "column-header-after": {
@@ -267,7 +303,7 @@
       "category": "style",
       "desc": "Turns on the column-header-after scoped slot",
       "applicable": [
-        "Day"
+        "day"
       ]
     },
     "column-count": {
@@ -279,7 +315,7 @@
       "desc": "Applicable only for day view. Show the same day x number of times in columns. Scoped slots get this data as index in passed object",
       "default": 1,
       "applicable": [
-        "Day"
+        "day"
       ],
       "examples": [
         "column-count=\"3\"",
@@ -295,7 +331,7 @@
       "desc": "Applicable only for day view. This is the starting index. This allows you to create a paging system (next/prev) when using column-count property",
       "default": 0,
       "applicable": [
-        "Day"
+        "day"
       ],
       "examples": [
         "column-index-start=\"0\"",
@@ -307,7 +343,19 @@
       "category": "style",
       "desc": "Makes interval labels short",
       "applicable": [
-        "Day"
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
       ]
     },
     "interval-height": {
@@ -319,7 +367,19 @@
       "desc": "The maximum height in pixels for the interval height",
       "default": "40",
       "applicable": [
-        "Day"
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
       ],
       "examples": [
         "interval-height=\"60\"",
@@ -333,13 +393,32 @@
       "params": {
         "timestamp": {
           "type": "Object",
-          "desc": "A timestamp object associated with the interval"
+          "desc": "A timestamp object associated with the interval",
+          "__exemption": [ "examples" ]
         }
       },
-      "returns": "A Vue style object",
+      "returns": {
+        "type": ["Array", "Object", "String"],
+        "desc": "A Vue style object",
+        "examples": [
+          "{ color: #ccc; }"
+        ]
+      },
       "default": "{}",
       "applicable": [
-        "Day"
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
       ],
       "examples": [
         "interval-style=\"background-color: #c0c0c0\"",
@@ -355,7 +434,19 @@
       "desc": "The number of minutes in an interval",
       "default": "60",
       "applicable": [
-        "Day"
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
       ],
       "examples": [
         "interval-minutes=\"15\"",
@@ -371,7 +462,19 @@
       "desc": "The number intervals to use. If interval-minutes is set to 30 then you would set interval count to 48 – double that of regular",
       "default": "24",
       "applicable": [
-        "Day"
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
       ],
       "examples": [
         "interval-count=\"48\"",
@@ -387,7 +490,19 @@
       "desc": "The starting interval",
       "default": "0",
       "applicable": [
-        "Day"
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
       ],
       "examples": [
         "interval-start=\"6\"",
@@ -399,7 +514,19 @@
       "category": "style",
       "desc": "Show intervals in 24 hour format",
       "applicable": [
-        "Day"
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
       ]
     },
     "day-height": {
@@ -411,7 +538,7 @@
       "desc": "The maximum height in pixels for the day height",
       "default": "50",
       "applicable": [
-        "Month"
+        "month"
       ],
       "examples": [
         "day-height=\"80\"",
@@ -424,7 +551,7 @@
       "desc": "Overrides the padding to be used for a day element. You can use any CSS padding format",
       "default": "48px 2px",
       "applicable": [
-        "Month"
+        "month"
       ],
       "examples": [
         "day-padding=\"20px 5px\""
@@ -437,13 +564,20 @@
       "params": {
         "timestamp": {
           "type": "Object",
-          "desc": "A timestamp object associated with the day"
+          "desc": "A timestamp object associated with the day",
+          "__exemption": [ "examples" ]
         }
       },
-      "returns": "A Vue style object",
+      "returns": {
+        "type": ["Array", "Object", "String"],
+        "desc": "A Vue style object",
+        "examples": [
+          "{ color: #ccc; }"
+        ]
+      },
       "default": "{}",
       "applicable": [
-        "Month"
+        "month"
       ],
       "examples": [
         "day-style=\"background-color: #c0c0c0\"",
@@ -459,7 +593,7 @@
       "desc": "The minimum number of weeks to be displayed",
       "default": 1,
       "applicable": [
-        "Month"
+        "month"
       ],
       "examples": [
         "min-weeks=\"2\""
@@ -470,7 +604,7 @@
       "category": "style",
       "desc": "Makes the month label short. January becomes Jan...",
       "applicable": [
-        "Month"
+        "month"
       ]
     },
     "show-work-weeks": {
@@ -478,7 +612,7 @@
       "category": "content",
       "desc": "Show work weeks",
       "applicable": [
-        "Month"
+        "month"
       ]
     },
     "no-default-header-btn": {
@@ -486,8 +620,8 @@
       "category": "content",
       "desc": "Do not display the day button in the header",
       "applicable": [
-        "Day",
-        "Schedule"
+        "day",
+        "scheduler"
       ]
     },
     "no-default-header-text": {
@@ -495,8 +629,8 @@
       "category": "content",
       "desc": "Do not display the day text in the header",
       "applicable": [
-        "Day",
-        "Schedule"
+        "day",
+        "scheduler"
       ]
     },
     "show-month-label": {
@@ -504,7 +638,7 @@
       "category": "content",
       "desc": "Shows the month label - this occurs on the 1st of the month",
       "applicable": [
-        "Month"
+        "month"
       ]
     },
     "show-day-of-year-label": {
@@ -512,15 +646,19 @@
       "category": "content",
       "desc": "Show the say of the year - this occurs in the top right of each day element. If show-month-label is true, then that day is skipped",
       "applicable": [
-        "Month"
+        "month"
       ]
     },
     "resources": {
       "type": "Array",
       "category": "model",
-      "desc": "Required when view is of type scheduler. An array of objects with a single key of label. You can add other keys if you like, which will be passed in on the appropriate scoped slots",
+      "required": true,
+      "desc": "An array of objects with a single key of label. You can add other keys if you like, which will be passed in on the appropriate scoped slots",
       "applicable": [
-        "Scheduler"
+        "scheduler"
+      ],
+      "examples": [
+        "[{ label: 'John' },{ label: 'Susan' }]"
       ]
     },
     "resource-height": {
@@ -532,7 +670,7 @@
       "desc": "The maximum height in pixels for the resource height",
       "default": "70",
       "applicable": [
-        "Scheduler"
+        "scheduler"
       ],
       "examples": [
         "resource-height=\"80\"",
@@ -547,7 +685,7 @@
       "category": "style",
       "desc": "The maximum width in pixels for the resource width",
       "applicable": [
-        "Scheduler"
+        "scheduler"
       ],
       "examples": [
         "resource-width=\"120\"",
@@ -562,26 +700,36 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "params": {
+          "__exemption": [ "examples" ],
+          "definition": {
             "timestamp": {
               "type": "Object",
-              "desc": "A timestamp object associated with the interval"
+              "desc": "A timestamp object associated with the interval",
+              "__exemption": [ "examples" ]
             },
             "index": {
               "type": "Number",
-              "desc": "The resource index"
+              "desc": "The resource index",
+              "__exemption": [ "examples" ]
             },
             "resource": {
               "type": "Object",
-              "desc": "The resource object"
+              "desc": "The resource object",
+              "__exemption": [ "examples" ]
             }
           }
         }
       },
-      "returns": "A Vue style object",
+      "returns": {
+        "type": ["Array", "Object", "String"],
+        "desc": "A Vue style object",
+        "examples": [
+          "{ color: #ccc; }"
+        ]
+      },
       "default": "{}",
       "applicable": [
-        "Scheduler"
+        "scheduler"
       ],
       "examples": [
         ":resource-style=\"resourceStyle\""
@@ -590,7 +738,10 @@
   },
   "events": {
     "input": {
-      "desc": "Emitted when calendar date changes",
+      "desc": "v-model; Emitted when calendar date changes",
+      "applicable": [
+        "All"
+      ],
       "params": {
         "value": {
           "type": "String",
@@ -601,7 +752,10 @@
       }
     },
     "change": {
-      "desc": "Emitted when the calendar dates change. For instance, if in `month` view, the `start` contains the timestamp object for the 1st of the month, and `end` contains the timestamp object for the last day of the month",
+      "desc": "Emitted when the calendar dates change. For instance, if in `month` view, the `start` contains the timestamp object for the 1st of the month, and `end` contains the timestamp object for the last day of the month. For week view it's the first day of the displayed week and last day of the displayed week",
+      "applicable": [
+        "All"
+      ],
       "params": {
         "start": {
           "type": "Object",
@@ -617,6 +771,9 @@
     },
     "moved": {
       "desc": "Emitted when the date is moved",
+      "applicable": [
+        "All"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -627,6 +784,9 @@
     },
     "click:date": {
       "desc": "Occurs on date button",
+      "applicable": [
+        "All"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -637,6 +797,9 @@
     },
     "contextmenu:date": {
       "desc": "Occurs on date button",
+      "applicable": [
+        "All"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -647,6 +810,9 @@
     },
     "mousedown:date": {
       "desc": "Occurs on date button",
+      "applicable": [
+        "All"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -657,6 +823,9 @@
     },
     "mouseup:date": {
       "desc": "Occurs on date button",
+      "applicable": [
+        "All"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -667,6 +836,9 @@
     },
     "mouseenter:date": {
       "desc": "Occurs on date button",
+      "applicable": [
+        "All"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -677,6 +849,9 @@
     },
     "mouseleave:date": {
       "desc": "Occurs on date button",
+      "applicable": [
+        "All"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -687,6 +862,9 @@
     },
     "mousemove:date": {
       "desc": "Occurs on date button",
+      "applicable": [
+        "All"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -697,6 +875,9 @@
     },
     "touchstart:date": {
       "desc": "Occurs on date button",
+      "applicable": [
+        "All"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -707,6 +888,9 @@
     },
     "touchend:date": {
       "desc": "Occurs on date button",
+      "applicable": [
+        "All"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -717,6 +901,9 @@
     },
     "touchmove:date": {
       "desc": "Occurs on date button",
+      "applicable": [
+        "All"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -728,6 +915,9 @@
 
     "click:day": {
       "desc": "Occurs on day area",
+      "applicable": [
+        "month"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -738,6 +928,9 @@
     },
     "contextmenu:day": {
       "desc": "Occurs on day area",
+      "applicable": [
+        "month"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -748,6 +941,9 @@
     },
     "mousedown:day": {
       "desc": "Occurs on day area",
+      "applicable": [
+        "month"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -758,6 +954,9 @@
     },
     "mouseup:day": {
       "desc": "Occurs on day area",
+      "applicable": [
+        "month"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -768,6 +967,9 @@
     },
     "mouseenter:day": {
       "desc": "Occurs on day area",
+      "applicable": [
+        "month"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -778,6 +980,9 @@
     },
     "mouseleave:day": {
       "desc": "Occurs on day area",
+      "applicable": [
+        "month"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -788,6 +993,9 @@
     },
     "mousemove:day": {
       "desc": "Occurs on day area",
+      "applicable": [
+        "month"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -798,6 +1006,9 @@
     },
     "touchstart:day": {
       "desc": "Occurs on day area",
+      "applicable": [
+        "month"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -808,6 +1019,9 @@
     },
     "touchend:day": {
       "desc": "Occurs on day area",
+      "applicable": [
+        "month"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -818,6 +1032,9 @@
     },
     "touchmove:day": {
       "desc": "Occurs on day area",
+      "applicable": [
+        "month"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -829,6 +1046,22 @@
 
     "click:interval": {
       "desc": "Occurs on interval area",
+      "applicable": [
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month",
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -839,6 +1072,22 @@
     },
     "contextmenu:interval": {
       "desc": "Occurs on interval area",
+      "applicable": [
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month",
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -849,6 +1098,22 @@
     },
     "mousedown:interval": {
       "desc": "Occurs on interval area",
+      "applicable": [
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month",
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -859,6 +1124,22 @@
     },
     "mouseup:interval": {
       "desc": "Occurs on interval area",
+      "applicable": [
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month",
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -869,6 +1150,22 @@
     },
     "mouseenter:interval": {
       "desc": "Occurs on interval area",
+      "applicable": [
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month",
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -879,6 +1176,22 @@
     },
     "mouseleave:interval": {
       "desc": "Occurs on interval area",
+      "applicable": [
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month",
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -889,6 +1202,22 @@
     },
     "mousemove:interval": {
       "desc": "Occurs on interval area",
+      "applicable": [
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month",
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -899,6 +1228,22 @@
     },
     "touchstart:interval": {
       "desc": "Occurs on interval area",
+      "applicable": [
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month",
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -909,6 +1254,22 @@
     },
     "touchend:interval": {
       "desc": "Occurs on interval area",
+      "applicable": [
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month",
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -919,6 +1280,22 @@
     },
     "touchmove:interval": {
       "desc": "Occurs on interval area",
+      "applicable": [
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month",
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -930,6 +1307,22 @@
 
     "click:time": {
       "desc": "Occurs on interval time area",
+      "applicable": [
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month",
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -940,6 +1333,22 @@
     },
     "contextmenu:time": {
       "desc": "Occurs on interval time area",
+      "applicable": [
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month",
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -950,6 +1359,22 @@
     },
     "mousedown:time": {
       "desc": "Occurs on interval time area",
+      "applicable": [
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month",
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -960,6 +1385,22 @@
     },
     "mouseup:time": {
       "desc": "Occurs on interval time area",
+      "applicable": [
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month",
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -970,6 +1411,22 @@
     },
     "mouseenter:time": {
       "desc": "Occurs on interval time area",
+      "applicable": [
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month",
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -980,6 +1437,22 @@
     },
     "mouseleave:time": {
       "desc": "Occurs on interval time area",
+      "applicable": [
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month",
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -990,6 +1463,22 @@
     },
     "mousemove:time": {
       "desc": "Occurs on interval time area",
+      "applicable": [
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month",
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -1000,6 +1489,22 @@
     },
     "touchstart:time": {
       "desc": "Occurs on interval time area",
+      "applicable": [
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month",
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -1010,6 +1515,22 @@
     },
     "touchend:time": {
       "desc": "Occurs on interval time area",
+      "applicable": [
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month",
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -1020,6 +1541,22 @@
     },
     "touchmove:time": {
       "desc": "Occurs on interval time area",
+      "applicable": [
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month",
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -1031,6 +1568,12 @@
 
     "click:resource": {
       "desc": "Occurs on resource area",
+      "applicable": [
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -1041,6 +1584,12 @@
     },
     "contextmenu:resource": {
       "desc": "Occurs on resource area",
+      "applicable": [
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -1051,6 +1600,12 @@
     },
     "mousedown:resource": {
       "desc": "Occurs on resource area",
+      "applicable": [
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -1061,6 +1616,12 @@
     },
     "mouseup:resource": {
       "desc": "Occurs on resource area",
+      "applicable": [
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -1071,6 +1632,12 @@
     },
     "mouseenter:resource": {
       "desc": "Occurs on resource area",
+      "applicable": [
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -1081,6 +1648,12 @@
     },
     "mouseleave:resource": {
       "desc": "Occurs on resource area",
+      "applicable": [
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -1091,6 +1664,12 @@
     },
     "mousemove:resource": {
       "desc": "Occurs on resource area",
+      "applicable": [
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -1101,6 +1680,12 @@
     },
     "touchstart:resource": {
       "desc": "Occurs on resource area",
+      "applicable": [
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -1111,6 +1696,12 @@
     },
     "touchend:resource": {
       "desc": "Occurs on resource area",
+      "applicable": [
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -1121,6 +1712,12 @@
     },
     "touchmove:resource": {
       "desc": "Occurs on resource area",
+      "applicable": [
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -1132,6 +1729,12 @@
 
     "click:resource:day": {
       "desc": "Occurs on resource day area",
+      "applicable": [
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -1142,6 +1745,12 @@
     },
     "contextmenu:resource:day": {
       "desc": "Occurs on resource day area",
+      "applicable": [
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -1152,6 +1761,12 @@
     },
     "mousedown:resource:day": {
       "desc": "Occurs on resource day area",
+      "applicable": [
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -1162,6 +1777,12 @@
     },
     "mouseup:resource:day": {
       "desc": "Occurs on resource day area",
+      "applicable": [
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -1172,6 +1793,12 @@
     },
     "mouseenter:resource:day": {
       "desc": "Occurs on resource day area",
+      "applicable": [
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -1182,6 +1809,12 @@
     },
     "mouseleave:resource:day": {
       "desc": "Occurs on resource day area",
+      "applicable": [
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -1192,6 +1825,12 @@
     },
     "mousemove:resource:day": {
       "desc": "Occurs on resource day area",
+      "applicable": [
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -1202,6 +1841,12 @@
     },
     "touchstart:resource:day": {
       "desc": "Occurs on resource day area",
+      "applicable": [
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -1212,6 +1857,12 @@
     },
     "touchend:resource:day": {
       "desc": "Occurs on resource day area",
+      "applicable": [
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -1222,6 +1873,12 @@
     },
     "touchmove:resource:day": {
       "desc": "Occurs on resource day area",
+      "applicable": [
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
       "params": {
         "timestamp": {
           "type": "Object",
@@ -1233,69 +1890,126 @@
   },
   "methods": {
     "prev": {
-      "desc": "Triggers component to display previous",
+      "desc": "Triggers component to display previous (ex: day, week, month)",
+      "applicable": [ "All "],
       "__exemption": [ "examples" ]
     },
     "next": {
-      "desc": "Triggers component to display next",
+      "desc": "Triggers component to display next (ex: day, week, month)",
+      "applicable": [ "All "],
       "__exemption": [ "examples" ]
     },
     "move": {
       "desc": "Triggers component to move for count iterations, depending on positive (forwards) or negative (backwards) value",
+      "applicable": [ "All "],
       "params": {
         "count": {
           "type": "Number",
-          "__exemption": [ "examples" ]
+          "desc": "The amount of iterations to move (negative for backwards, positive for forwards)",
+          "examples": [
+            "-5 (moves 5 iterations backward - if in `month` view, this would be -5 months",
+            "5 (moves 5 iterations forward - if in `day` view, this would be 5 days"
+          ]
         }
       }
     },
     "updateCurrent": {
       "desc": "Update various values to be consistent with current date",
+      "applicable": [ "All "],
       "__exemption": [ "examples" ]
     },
     "timeStartPos": {
       "desc": "Calculates the start position of the passed in time",
       "applicable": [
         "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
         "week",
-        "scheduler"
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
       ],
       "params": {
         "time": {
           "type": "String",
+          "desc": "The time for which a position is needed in 24-hour format (HHmm)",
           "examples":[
             "09:00"
           ]
         }
+      },
+      "returns": {
+        "type": "Number",
+        "desc": "The absolute y starting position",
+        "examples": [
+          "120",
+          "482"
+        ]
       }
     },
     "timeDurationHeight": {
-      "desc": "Calculates the height based on the passed in minutes",
+      "desc": "Given a duration (in seconds), will return the css height value",
       "applicable": [
         "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
         "week",
-        "scheduler"
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
       ],
       "params": {
-        "time": {
+        "duration": {
           "type": ["Number", "String"],
+          "desc": "The number of seconds for the event to calculate it's height",
           "examples":[
-            "30",
-            "90"
+            "300",
+            "900"
           ]
         }
+      },
+      "returns": {
+        "type": "Number",
+        "desc": "The height (in pixels) to be used for the event",
+        "examples": [
+          "80",
+          "120"
+        ]
       }
     },
     "scrollToTime": {
       "desc": "When on an interval view, scroll to the passed in time",
       "applicable": [
         "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
         "week",
-        "scheduler"
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
       ],
       "params": {
         "time": {
           "type": "String",
+          "desc": "The time in which to scoll to. If the time is already visible on the viewport, this function will have no affect.",
           "examples":[
             "09:00"
           ]
@@ -1306,229 +2020,249 @@
   "scopedSlots": {
     "day-header": {
       "desc": "index is added if using `column-count` property",
-      "params": {
+      "scope": {
         "day": {
-          "value": "Object",
+          "type": "Object",
           "desc": "Timestamp object",
           "__exemption": [ "examples" ]
         }
       },
       "applicable": [
-        "Day"
+        "day"
       ]
     },
     "day-body": {
       "desc": "index is added if using `column-count` property",
-      "params": {
+      "scope": {
         "day": {
-          "value": "Object",
+          "type": "Object",
           "desc": "Timestamp object",
           "__exemption": [ "examples" ]
         }
       },
       "applicable": [
-        "Day",
-        "Month"
+        "day",
+        "month"
       ]
     },
     "intervals-header": {
       "desc": "",
-      "params": {
+      "scope": {
         "days": {
-          "value": "Array",
+          "type": "Array",
           "desc": "An array of Timestamp objects",
           "__exemption": [ "examples" ]
         }
       },
       "applicable": [
-        "Day"
+        "day"
       ]
     },
     "interval": {
       "desc": "index is added if using `column-count` property",
-      "data": "",
-      "params": {
+      "scope": {
         "timeStartPos": {
-          "value": "Function",
-          "desc": "Given a time, will return the css top value",
+          "type": "Function",
+          "desc": "Calculates the start position of the passed in time",
           "params": {
             "time": {
               "type": "String",
-              "desc": "Format is HH:mm (24 hour format)",
-              "__exemption": [ "examples" ]
+              "desc": "The time for which a position is needed in 24-hour format (HHmm)",
+              "examples":[
+                "09:00"
+              ]
             }
+          },
+          "returns": {
+            "type": "Number",
+            "desc": "The absolute y starting position",
+            "examples": [
+              "120",
+              "482"
+            ]
           }
         },
         "timeDurationHeight": {
-          "value": "Function",
+          "type": "Function",
           "desc": "Given a duration (in seconds), will return the css height value",
           "params": {
             "duration": {
-              "type": "Number",
-              "desc": "The number of seconds for the event",
-              "__exemption": [ "examples" ]
+              "type": ["Number", "String"],
+              "desc": "The number of seconds for the event to calculate it's height",
+              "examples":[
+                "300",
+                "900"
+              ]
             }
+          },
+          "returns": {
+            "type": "Number",
+            "desc": "The height (in pixels) to be used for the event",
+            "examples": [
+              "80",
+              "120"
+            ]
           }
         }
       },
       "applicable": [
-        "Day"
+        "day"
       ]
     },
     "column-header-before": {
       "desc": "",
-      "params": {
+      "scope": {
         "day": {
-          "value": "Object",
+          "type": "Object",
           "desc": "Timestamp object",
           "__exemption": [ "examples" ]
         }
       },
       "applicable": [
-        "Day"
+        "day"
       ]
     },
     "column-header-after": {
       "desc": "",
-      "params": {
+      "scope": {
         "day": {
-          "value": "Object",
+          "type": "Object",
           "desc": "Timestamp object",
           "__exemption": [ "examples" ]
         }
       },
       "applicable": [
-        "Day"
+        "day"
       ]
     },
     "day": {
       "desc": "",
-      "params": {
+      "scope": {
         "day": {
-          "value": "Object",
+          "type": "Object",
           "desc": "Timestamp object",
           "__exemption": [ "examples" ]
         }
       },
       "applicable": [
-        "Month"
+        "month"
       ]
     },
     "month-label": {
       "desc": "",
-      "params": {
+      "scope": {
         "data": {
-          "value": "Object",
+          "type": "Object",
           "desc": "Timestamp object with monthLabel",
           "__exemption": [ "examples" ]
         }
       },
       "applicable": [
-        "Month"
+        "month"
       ]
     },
     "day-of-year": {
       "desc": "",
-      "params": {
+      "scope": {
         "data": {
-          "value": "Object",
+          "type": "Object",
           "desc": "Timestamp object",
           "__exemption": [ "examples" ]
         }
       },
       "applicable": [
-        "Month"
+        "month"
       ]
     },
     "work-week-label": {
       "desc": "",
-      "params": {
+      "scope": {
         "data": {
-          "value": "Object",
+          "type": "Object",
           "desc": "Timestamp object with workWeekLabel",
           "__exemption": [ "examples" ]
         }
       },
       "applicable": [
-        "Month"
+        "month"
       ]
     },
     "scheduler-resources-header": {
       "desc": "",
-      "params": {
+      "scope": {
         "data": {
-          "value": "Object",
+          "type": "Object",
           "desc": "",
           "__exemption": [ "examples" ]
         }
       },
       "applicable": [
-        "Scheduler"
+        "scheduler"
       ]
     },
     "scheduler-day-header": {
       "desc": "",
-      "params": {
+      "scope": {
         "data": {
-          "value": "Object",
+          "type": "Object",
           "desc": "",
           "__exemption": [ "examples" ]
         }
       },
       "applicable": [
-        "Scheduler"
+        "scheduler"
       ]
     },
     "scheduler-column-header-before": {
       "desc": "",
-      "params": {
+      "scope": {
         "data": {
-          "value": "Object",
+          "type": "Object",
           "desc": "",
           "__exemption": [ "examples" ]
         }
       },
       "applicable": [
-        "Scheduler"
+        "scheduler"
       ]
     },
     "scheduler-column-header-after": {
       "desc": "",
-      "params": {
+      "scope": {
         "data": {
-          "value": "Object",
+          "type": "Object",
           "desc": "",
           "__exemption": [ "examples" ]
         }
       },
       "applicable": [
-        "Scheduler"
+        "scheduler"
       ]
     },
     "scheduler-resource-day": {
       "desc": "",
-      "params": {
+      "scope": {
         "data": {
-          "value": "Object",
+          "type": "Object",
           "desc": "",
           "__exemption": [ "examples" ]
         }
       },
       "applicable": [
-        "Scheduler"
+        "scheduler"
       ]
     },
     "scheduler-resource": {
       "desc": "",
-      "params": {
+      "scope": {
         "data": {
-          "value": "Object",
+          "type": "Object",
           "desc": "",
           "__exemption": [ "examples" ]
         }
       },
       "applicable": [
-        "Scheduler"
+        "scheduler"
       ]
     }
   }

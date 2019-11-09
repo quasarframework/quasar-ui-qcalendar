@@ -2,16 +2,16 @@
 import { QBtn } from 'quasar'
 
 // Mixins
-import CalendarBase from './mixins/calendar-base.js'
+import CalendarBase from '../mixins/calendar-base.js'
 
 // Util
-import props from './utils/props.js'
+import props from '../utils/props.js'
 import {
   createDayList,
   getDayIdentifier,
   createNativeLocaleFormatter
-} from './utils/timestamp'
-import { convertToUnit } from './utils/helpers.js'
+} from '../utils/timestamp'
+import { convertToUnit } from '../utils/helpers.js'
 
 export default {
   name: 'QCalendarWeekly',
