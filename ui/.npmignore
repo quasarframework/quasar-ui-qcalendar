@@ -17,5 +17,10 @@ yarn-error.log*
 *.njsproj
 *.sln
 .editorconfig
+
+# Linters
 .eslintignore
 .eslintrc.js
+
+# Other
+/src/components/QCalendar.json
