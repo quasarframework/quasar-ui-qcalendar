@@ -6,6 +6,7 @@
     locale="en-us"
     style="height: 500px;"
   >
+    <!-- eslint-disable vue/no-unused-vars -->
     <template #scheduler-resources-header="days">
       <div class="full-height row justify-center items-center">
         <q-btn label="here" />

@@ -2,20 +2,20 @@
 import { QBtn } from 'quasar'
 
 // Directives
-import Resize from './directives/resize.js'
+import Resize from '../directives/resize.js'
 
 // Mixins
-import CalendarIntervals from './mixins/calendar-intervals.js'
+import CalendarScheduler from '../mixins/calendar-scheduler.js'
 
 // Util
-import { convertToUnit } from './utils/helpers.js'
+import { convertToUnit } from '../utils/helpers.js'
 
 /* @vue/component */
 export default {
-  name: 'QCalendarDaily',
+  name: 'QCalendarScheduler',
 
   mixins: [
-    CalendarIntervals
+    CalendarScheduler
   ],
 
   directives: { Resize },
@@ -29,7 +29,7 @@ export default {
   computed: {
     classes () {
       return {
-        'q-calendar-daily': true
+        'q-calendar-scheduler': true
       }
     }
   },
@@ -64,34 +64,54 @@ export default {
       return area && pane ? (area.offsetWidth - pane.offsetWidth) : 0
     },
 
+    resourceStartPos (resource, clamp = true) {
+      const index = this.resource.indexOf(resource)
+      let y = index * this.parsedResourceHeight
+
+      if (clamp) {
+        if (y < 0) {
+          y = 0
+        }
+        if (y > this.bodyHeight) {
+          y = this.bodyHeight
+        }
+      }
+
+      return y
+    },
+
     __renderHead (h) {
       return h('div', {
-        staticClass: 'q-calendar-daily__head',
+        staticClass: 'q-calendar-scheduler__head',
         style: {
           marginRight: this.scrollWidth + 'px'
         }
       }, [
-        this.__renderHeadIntervals(h),
+        this.__renderHeadResources(h),
         ...this.__renderHeadDays(h)
       ])
     },
 
-    __renderHeadIntervals (h) {
-      const intervalsHeader = this.$scopedSlots['intervals-header']
+    __renderHeadResources (h) {
+      const slot = this.$scopedSlots['scheduler-resources-header']
+      const width = convertToUnit(this.resourceWidth)
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
       if (this.enableTheme === true) {
-        color = 'colorIntervalHeader'
-        backgroundColor = 'backgroundIntervalHeader'
+        color = 'colorSchedulerHeader'
+        backgroundColor = 'backgroundSchedulerHeader'
         colors = this.getThemeColors([color, backgroundColor])
         updateColors = this.setBothColors
       }
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
-        staticClass: 'q-calendar-daily__intervals-head q-calendar-daily__intervals-head--text'
+        staticClass: 'q-calendar-scheduler__resources-head q-calendar-scheduler__resources-head--text',
+        style: {
+          width
+        }
       }), [
-        intervalsHeader && intervalsHeader(this.days)
+        slot && slot(this.days)
       ])
     },
 
@@ -106,7 +126,7 @@ export default {
     },
 
     __renderHeadDay (h, day, idx) {
-      const slot = this.$scopedSlots['day-header']
+      const slot = this.$scopedSlots['scheduler-day-header']
       const scope = this.getScopeForSlot(day, idx)
       let dragOver
 
@@ -129,30 +149,28 @@ export default {
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
         key: day.date + (idx !== void 0 ? `-${idx}` : ''),
-        staticClass: 'q-calendar-daily__head-day',
+        staticClass: 'q-calendar-scheduler__head-day',
         class: {
           ...this.getRelativeClasses(day),
-          'q-calendar-daily__head-day--droppable': dragOver
+          'q-calendar-scheduler__head-day--droppable': dragOver
         },
         domProps: {
-          ondragover: (e) => {
+          ondragover: (_event) => {
             if (this.dragOverFunc !== void 0) {
-              dragOver = this.dragOverFunc(e, day, 'day', idx)
+              dragOver = this.dragOverFunc(_event, day, 'day', idx)
             }
           },
-          ondrop: (e) => {
+          ondrop: (_event) => {
             if (this.dropFunc !== void 0) {
-              this.dropFunc(e, day, 'day', idx)
+              this.dropFunc(_event, day, 'day', idx)
             }
           }
         },
-        on: this.getDefaultMouseEventHandlers(':day', _event => {
-          return scope
-        })
+        on: this.getDefaultMouseEventHandlers(':day', _event => scope)
       }), [
         this.columnHeaderBefore === true && this.__renderColumnHeaderBefore(h, day, idx),
-        this.noDefaultHeaderText !== true && this.__renderHeadWeekday(h, day),
-        this.noDefaultHeaderBtn !== true && this.__renderHeadDayBtn(h, day),
+        this.noDefaultHeaderText !== true && this.__renderHeadWeekday(h, day, idx),
+        this.noDefaultHeaderBtn !== true && this.__renderHeadDayBtn(h, day, idx),
         slot && slot(scope),
         this.columnHeaderAfter === true && this.__renderColumnHeaderAfter(h, day, idx)
       ])
@@ -179,7 +197,7 @@ export default {
       }
 
       return h('div', updateColors(colorCurrent !== void 0 ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
-        staticClass: 'ellipsis q-calendar-daily__head-weekday'
+        staticClass: 'ellipsis q-calendar-scheduler__head-weekday'
       }), [
         this.__renderHeadDayLabel(h, day, this.shortWeekdayLabel)
       ])
@@ -191,9 +209,10 @@ export default {
       }, this.weekdayFormatter(day, label))
     },
 
-    __renderHeadDayBtn (h, day) {
+    __renderHeadDayBtn (h, day, idx) {
       const colorCurrent = day.current === true ? this.color : void 0
 
+      let scope = { day, idx }
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
       if (this.enableTheme === true) {
@@ -212,7 +231,7 @@ export default {
       }
 
       return h(QBtn, updateColors(colorCurrent !== void 0 ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
-        staticClass: 'q-calendar-daily__head-day-label',
+        staticClass: 'q-calendar-scheduler__head-day-label',
         style: {
           color: day.current === true ? colorCurrent : void 0
         },
@@ -227,27 +246,27 @@ export default {
         on: this.getMouseEventHandlers({
           'click:date': { event: 'click', stop: true },
           'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false }
-        }, _event => day)
+        }, _event => scope)
       }), this.dayFormatter(day, false))
     },
 
     __renderColumnHeaderBefore (h, day, idx) {
-      const slot = this.$scopedSlots['column-header-before']
+      const slot = this.$scopedSlots['scheduler-column-header-before']
       let scope = { ...day }
       scope.index = idx
       return h('div', {
-        staticClass: 'q-calendar-daily__column-header--before'
+        staticClass: 'q-calendar-scheduler__column-header--before'
       }, [
         slot && slot(scope)
       ])
     },
 
     __renderColumnHeaderAfter (h, day, idx) {
-      const slot = this.$scopedSlots['column-header-after']
+      const slot = this.$scopedSlots['scheduler-column-header-after']
       let scope = { ...day }
       scope.index = idx
       return h('div', {
-        staticClass: 'q-calendar-daily__column-header--after'
+        staticClass: 'q-calendar-scheduler__column-header--after'
       }, [
         slot && slot(scope)
       ])
@@ -255,7 +274,7 @@ export default {
 
     __renderBody (h) {
       return h('div', {
-        staticClass: 'q-calendar-daily__body'
+        staticClass: 'q-calendar-scheduler__body'
       }, [
         this.__renderScrollArea(h)
       ])
@@ -267,7 +286,7 @@ export default {
       } else {
         return h('div', {
           ref: 'scrollArea',
-          staticClass: 'q-calendar-daily__scroll-area'
+          staticClass: 'q-calendar-scheduler__scroll-area'
         }, [
           this.__renderPane(h)
         ])
@@ -277,7 +296,7 @@ export default {
     __renderPane (h) {
       return h('div', {
         ref: 'pane',
-        staticClass: 'q-calendar-daily__pane',
+        staticClass: 'q-calendar-scheduler__pane',
         style: {
           height: convertToUnit(this.bodyHeight)
         }
@@ -288,9 +307,9 @@ export default {
 
     __renderDayContainer (h) {
       return h('div', {
-        staticClass: 'q-calendar-daily__day-container'
+        staticClass: 'q-calendar-scheduler__day-container'
       }, [
-        this.__renderBodyIntervals(h),
+        this.__renderBodyResources(h),
         ...this.__renderDays(h)
       ])
     },
@@ -305,12 +324,10 @@ export default {
       }
     },
 
-    __renderDay (h, day, dayIndex, idx) {
-      const slot = this.$scopedSlots['day-body']
-      const scope = this.getScopeForSlot(day, idx)
-
+    __renderDay (h, day, idx) {
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
+      let resource = this.resources && this.resources[idx] ? this.resources[idx] : void 0
       if (this.enableTheme === true) {
         if (day.past === true) {
           color = 'colorBodyPast'
@@ -328,47 +345,46 @@ export default {
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
         key: day.date + (idx !== void 0 ? `:${idx}` : ''),
-        staticClass: 'q-calendar-daily__day',
+        staticClass: 'q-calendar-scheduler__day',
         class: this.getRelativeClasses(day),
-        on: this.getDefaultMouseEventHandlers(':time', _event => {
-          return this.getScopeForSlot(this.getTimestampAtEvent(_event, day), idx)
+        on: this.getDefaultMouseEventHandlers(':resource:day', _event => {
+          return this.getScopeForSlot(this.getTimestampAtEvent(_event, day), idx, resource)
         })
       }), [
-        ...this.__renderDayIntervals(h, dayIndex, idx),
-        slot && slot(scope)
+        ...this.__renderDayResources(h, day, idx)
       ])
     },
 
-    __renderDayIntervals (h, index, idx) {
-      return this.intervals[index].map((interval) => this.__renderDayInterval(h, interval, idx))
+    __renderDayResources (h, day, idx) {
+      return this.resources.map((resource) => this.__renderDayResource(h, resource, day, idx))
     },
 
-    __renderDayInterval (h, interval, idx) {
-      const height = convertToUnit(this.intervalHeight)
-      const styler = this.intervalStyle || this.intervalStyleDefault
-      const slot = this.$scopedSlots.interval
-      const scope = this.getScopeForSlot(interval, idx)
+    __renderDayResource (h, resource, day, idx) {
+      const height = convertToUnit(this.resourceHeight)
+      const styler = this.resourceStyle || this.resourceStyleDefault
+      const slot = this.$scopedSlots['scheduler-resource-day']
+      const scope = this.getScopeForSlot(day, idx, resource)
       let dragOver
 
+      let style = { height: height }
+      style = Object.assign(style, styler(scope))
+
       const data = {
-        key: interval.time,
-        staticClass: 'q-calendar-daily__day-interval',
+        key: resource[this.resourceKey] + '-' + idx,
+        staticClass: 'q-calendar-scheduler__day-resource',
         class: {
-          'q-calendar-daily__day-interval--droppable': dragOver
+          'q-calendar-scheduler__day-resource--droppable': dragOver
         },
-        style: {
-          height,
-          ...styler(interval)
-        },
+        style: style,
         domProps: {
-          ondragover: (e) => {
+          ondragover: (_event) => {
             if (this.dragOverFunc !== void 0) {
-              dragOver = this.dragOverFunc(e, interval, 'interval')
+              dragOver = this.dragOverFunc(_event, resource, 'resource', idx)
             }
           },
-          ondrop: (e) => {
+          ondrop: (_event) => {
             if (this.dropFunc !== void 0) {
-              this.dropFunc(e, interval, 'interval')
+              this.dropFunc(_event, resource, 'resource', idx)
             }
           }
         }
@@ -379,57 +395,65 @@ export default {
       return h('div', data, children)
     },
 
-    __renderBodyIntervals (h) {
+    __renderBodyResources (h) {
+      const width = convertToUnit(this.resourceWidth)
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
       if (this.enableTheme === true) {
-        color = 'colorIntervalBody'
-        backgroundColor = 'backgroundIntervalBody'
+        color = 'colorSchedulerBody'
+        backgroundColor = 'backgroundSchedulerBody'
         colors = this.getThemeColors([color, backgroundColor])
         updateColors = this.setBothColors
       }
 
       const data = {
-        staticClass: 'q-calendar-daily__intervals-body',
-        on: this.getDefaultMouseEventHandlers(':interval', _event => {
-          return this.getTimestampAtEvent(_event, this.parsedStart)
-        })
+        staticClass: 'q-calendar-scheduler__resources-body',
+        style: {
+          width
+        }
       }
 
-      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), data), this.__renderIntervalLabels(h))
+      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), data), this.__renderResourceLabels(h))
     },
 
-    __renderIntervalLabels (h) {
-      return this.intervals[0].map((interval) => this.__renderIntervalLabel(h, interval))
+    __renderResourceLabels (h) {
+      return this.resources.map((resource, idx) => this.__renderResourceLabel(h, resource, idx))
     },
 
-    __renderIntervalLabel (h, interval) {
-      const height = convertToUnit(this.intervalHeight)
-      const short = this.shortIntervalLabel
-      const shower = this.showIntervalLabel || this.showIntervalLabelDefault
-      const show = shower(interval)
-      const label = show ? this.intervalFormatter(interval, short) : void 0
+    __renderResourceLabel (h, resource, idx) {
+      const slot = this.$scopedSlots['scheduler-resource']
+      const scope = {
+        resource: resource,
+        index: idx
+      }
+      const height = convertToUnit(this.resourceHeight)
+      const label = resource.label
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
       if (this.enableTheme === true) {
-        color = 'colorIntervalText'
-        backgroundColor = 'backgroundIntervalText'
+        color = 'colorSchedulerText'
+        backgroundColor = 'backgroundSchedulerText'
         colors = this.getThemeColors([color, backgroundColor])
         updateColors = this.setBothColors
       }
 
       return h('div', {
-        key: interval.time,
-        staticClass: 'q-calendar-daily__interval',
+        key: resource.label,
+        staticClass: 'q-calendar-scheduler__resource',
         style: {
           height
-        }
+        },
+        on: this.getDefaultMouseEventHandlers(':resource', _event => scope)
       }, [
-        h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
-          staticClass: 'q-calendar-daily__interval-text'
+        slot ? slot(scope) : h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
+          staticClass: 'q-calendar-scheduler__resource-text'
         }), label)
       ])
+    },
+
+    __renderResourcesError (h) {
+      return h('div', {}, 'No resources have been defined')
     }
   },
 
@@ -442,8 +466,9 @@ export default {
         value: this.onResize
       }]
     }, [
-      !this.hideHeader && this.__renderHead(h),
-      this.__renderBody(h)
+      !this.hideHeader && this.resources !== void 0 && this.__renderHead(h),
+      this.resources !== void 0 && this.__renderBody(h),
+      this.resources === void 0 && this.__renderResourcesError(h)
     ])
   }
 }

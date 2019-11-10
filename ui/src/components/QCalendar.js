@@ -1,12 +1,11 @@
 // Mixins
-import CalendarBase from './mixins/calendar-base'
+import CalendarBase from '../mixins/calendar-base'
 
 // Util
-import props from './utils/props.js'
+import props from '../utils/props.js'
 import {
   DAYS_IN_MONTH_MAX,
   DAY_MIN,
-  // DAYS_IN_WEEK,
   parseTimestamp,
   relativeDays,
   nextDay,
@@ -19,7 +18,7 @@ import {
   getStartOfMonth,
   getEndOfMonth,
   getDayIdentifier
-} from './utils/timestamp.js'
+} from '../utils/timestamp.js'
 
 // Calendars
 import QCalendarMonthly from './QCalendarMonthly'
@@ -144,11 +143,11 @@ export default {
   },
 
   watch: {
-    renderProps: 'checkChange'
+    renderProps: '__checkChange'
   },
 
   methods: {
-    checkChange (val, oldval) {
+    __checkChange (val, oldval) {
       const { start, end } = this.renderProps
       this.keyValue = 0
       if (this.lastStart === void 0 || this.lastEnd === void 0 || start.date !== this.lastStart || end.date !== this.lastEnd) {
