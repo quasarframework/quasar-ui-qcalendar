@@ -25,7 +25,7 @@ module.exports = function (api) {
   api.compatibleWith('@quasar/app', '^1.1.4') // needed for describe to work properly
 
   // Uncomment the line below if you provide a JSON API for your component
-  api.registerDescribeApi('QCalendar', '~@quasar/quasar-ui-qcalendar/src/component/QCalendar.json')
+  api.registerDescribeApi('QCalendar', '~@quasar/quasar-ui-qcalendar/dist/api/QCalendar.json')
 
   // We extend /quasar.conf.js
   api.extendQuasarConf(extendConf)
