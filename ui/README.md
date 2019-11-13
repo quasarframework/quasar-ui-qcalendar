@@ -220,6 +220,9 @@ $ yarn dev:electron
 ## Building package
 ```bash
 $ yarn build
+
+# build just the JSON API
+$ yarn build:api
 ```
 
 # Donate
