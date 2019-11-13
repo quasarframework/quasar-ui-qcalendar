@@ -108,6 +108,7 @@ export default {
     __renderHeadDay (h, day, idx) {
       const slot = this.$scopedSlots['day-header']
       const scope = this.getScopeForSlot(day, idx)
+      const width = 100 / this.days.length
       let dragOver
 
       let colors = new Map(), color, backgroundColor
@@ -133,6 +134,9 @@ export default {
         class: {
           ...this.getRelativeClasses(day),
           'q-calendar-daily__head-day--droppable': dragOver
+        },
+        style: {
+          maxWidth: width + '%'
         },
         domProps: {
           ondragover: (e) => {
@@ -308,6 +312,7 @@ export default {
     __renderDay (h, day, dayIndex, idx) {
       const slot = this.$scopedSlots['day-body']
       const scope = this.getScopeForSlot(day, idx)
+      const width = 100 / this.days.length
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
@@ -330,6 +335,9 @@ export default {
         key: day.date + (idx !== void 0 ? `:${idx}` : ''),
         staticClass: 'q-calendar-daily__day',
         class: this.getRelativeClasses(day),
+        style: {
+          maxWidth: width + '%'
+        },
         on: this.getDefaultMouseEventHandlers(':time', _event => {
           return this.getScopeForSlot(this.getTimestampAtEvent(_event, day), idx)
         })
