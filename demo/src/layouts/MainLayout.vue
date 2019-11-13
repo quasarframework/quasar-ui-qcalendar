@@ -96,11 +96,6 @@ export default {
       activeToc: 0
     }
   },
-  computed: {
-    ...mapGetters({
-      toc: 'common/toc'
-    })
-  },
   mounted () {
     // code to handle anchor link on refresh/new page, etc
     if (location.hash !== '') {
@@ -109,6 +104,11 @@ export default {
         this.scrollTo(id)
       }, 200)
     }
+  },
+  computed: {
+    ...mapGetters({
+      toc: 'common/toc'
+    })
   },
   methods: {
     scrollTo (id) {
