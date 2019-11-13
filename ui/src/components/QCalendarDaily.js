@@ -291,11 +291,13 @@ export default {
     },
 
     __renderDayContainer (h) {
+      const slot = this.$scopedSlots['day-container']
       return h('div', {
         staticClass: 'q-calendar-daily__day-container'
       }, [
         this.__renderBodyIntervals(h),
-        ...this.__renderDays(h)
+        ...this.__renderDays(h),
+        slot && slot(this.days)
       ])
     },
 
