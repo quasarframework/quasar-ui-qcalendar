@@ -211,6 +211,15 @@ Below, the slot receives the `resource` to be displayed. In this case, an avatar
         </q-markdown>
       </example-card>
 
+      <example-title title="More Slots" />
+      <example-card title="Day View (Current Time) - Slot (day-container)" name="DayViewCurrentTime" :tag-parts="getTagParts(require('!!raw-loader!../examples/DayViewCurrentTime.vue').default)">
+        <q-markdown>
+You can use the scopedSlot `day-container` to set an absolute position for a time tracking bar.
+        </q-markdown>
+      </example-card>
+      <example-card title="Week View (Current Time) - Slot (day-container)" name="WeekViewCurrentTime" :tag-parts="getTagParts(require('!!raw-loader!../examples/WeekViewCurrentTime.vue').default)">
+      </example-card>
+
     </div>
     <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
       <q-btn fab icon="keyboard_arrow_up" color="primary" />
@@ -329,6 +338,10 @@ export default {
     this.addToToc('Scheduler View - Slots (scheduler-day-header)', 2)
     this.addToToc('Scheduler View - Slots (scheduler-resource-day)', 2)
     this.addToToc('Scheduler View - Slots (scheduler-resource)', 2)
+
+    this.addToToc('More Slots')
+    this.addToToc('Day View (Current Time) - Slot (day-container)', 2)
+    this.addToToc('Week View (Current Time) - Slot (day-container)', 2)
 
     this.toc = this.tempToc
   },

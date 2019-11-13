@@ -386,7 +386,11 @@ import events from '../util/events'
 import { padTime } from '../util/time'
 import { date, colors, Platform } from 'quasar'
 import { stop, prevent, stopAndPrevent } from 'quasar/src/utils/event'
-import { parsed, getDayIdentifier, getTimeIdentifier } from 'calendar/utils/timestamp'
+import {
+  parsed,
+  getDayIdentifier,
+  getTimeIdentifier
+} from '@quasar/quasar-ui-qcalendar/src/utils/timestamp'
 
 import 'drag-drop-touch'
 

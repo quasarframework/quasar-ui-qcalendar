@@ -65,6 +65,9 @@ import SchedulerViewSlotDayHeader from '../examples/SchedulerViewSlotDayHeader'
 import SchedulerViewSlotResourceDay from '../examples/SchedulerViewSlotResourceDay'
 import SchedulerViewSlotResource from '../examples/SchedulerViewSlotResource'
 
+import DayViewCurrentTime from '../examples/DayViewCurrentTime'
+import WeekViewCurrentTime from '../examples/WeekViewCurrentTime'
+
 export default ({ Vue }) => {
   Vue.component('DayViewBasic', DayViewBasic)
   Vue.component('DayView3Day', DayView3Day)
@@ -115,4 +118,6 @@ export default ({ Vue }) => {
   Vue.component('SchedulerViewSlotDayHeader', SchedulerViewSlotDayHeader)
   Vue.component('SchedulerViewSlotResourceDay', SchedulerViewSlotResourceDay)
   Vue.component('SchedulerViewSlotResource', SchedulerViewSlotResource)
+  Vue.component('DayViewCurrentTime', DayViewCurrentTime)
+  Vue.component('WeekViewCurrentTime', WeekViewCurrentTime)
 }
