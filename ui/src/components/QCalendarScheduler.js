@@ -128,6 +128,7 @@ export default {
     __renderHeadDay (h, day, idx) {
       const slot = this.$scopedSlots['scheduler-day-header']
       const scope = this.getScopeForSlot(day, idx)
+      const width = 100 / this.days.length
       let dragOver
 
       let colors = new Map(), color, backgroundColor
@@ -153,6 +154,9 @@ export default {
         class: {
           ...this.getRelativeClasses(day),
           'q-calendar-scheduler__head-day--droppable': dragOver
+        },
+        style: {
+          maxWidth: width + '%'
         },
         domProps: {
           ondragover: (_event) => {
@@ -325,6 +329,7 @@ export default {
     },
 
     __renderDay (h, day, idx) {
+      const width = 100 / this.days.length
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
       let resource = this.resources && this.resources[idx] ? this.resources[idx] : void 0
@@ -347,6 +352,9 @@ export default {
         key: day.date + (idx !== void 0 ? `:${idx}` : ''),
         staticClass: 'q-calendar-scheduler__day',
         class: this.getRelativeClasses(day),
+        style: {
+          maxWidth: width + '%'
+        },
         on: this.getDefaultMouseEventHandlers(':resource:day', _event => {
           return this.getScopeForSlot(this.getTimestampAtEvent(_event, day), idx, resource)
         })

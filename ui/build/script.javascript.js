@@ -8,15 +8,17 @@ const nodeResolve = require('rollup-plugin-node-resolve')
 const buildConf = require('./config')
 const buildUtils = require('./utils')
 
+const bubleConfig = {
+  objectAssign: 'Object.assign'
+}
+
 const rollupPlugins = [
   nodeResolve({
     extensions: ['.js'],
     preferBuiltins: false
   }),
   json(),
-  buble({
-    objectAssign: 'Object.assign'
-  })
+  buble(bubleConfig)
 ]
 
 const builds = [
