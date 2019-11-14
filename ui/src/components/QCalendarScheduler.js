@@ -332,7 +332,6 @@ export default {
       const width = 100 / this.days.length
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
-      let resource = this.resources && this.resources[idx] ? this.resources[idx] : void 0
       if (this.enableTheme === true) {
         if (day.past === true) {
           color = 'colorBodyPast'
@@ -354,10 +353,7 @@ export default {
         class: this.getRelativeClasses(day),
         style: {
           maxWidth: width + '%'
-        },
-        on: this.getDefaultMouseEventHandlers(':resource:day', _event => {
-          return this.getScopeForSlot(this.getTimestampAtEvent(_event, day), idx, resource)
-        })
+        }
       }), [
         ...this.__renderDayResources(h, day, idx)
       ])
@@ -395,7 +391,10 @@ export default {
               this.dropFunc(_event, resource, 'resource', idx)
             }
           }
-        }
+        },
+        on: this.getDefaultMouseEventHandlers(':resource:day', _event => {
+          return this.getScopeForSlot(this.getTimestampAtEvent(_event, day), idx, resource)
+        })
       }
 
       const children = slot ? slot(scope) : void 0
@@ -417,7 +416,7 @@ export default {
       const data = {
         staticClass: 'q-calendar-scheduler__resources-body',
         style: {
-          width
+          width: width
         }
       }
 

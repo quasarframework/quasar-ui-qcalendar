@@ -2045,6 +2045,16 @@
         "month"
       ]
     },
+    "day-container": {
+      "desc": "The container is everything below the headers, including the intervals",
+      "scope": {
+        "days": {
+          "type": "Array",
+          "desc": "An array of timestamp objects that are to be displayed in the container. This slot does not replace the container, but allow you to add to it. Example: use css 'position: absolute` to create a 'current time' bar.",
+          "__exemption": [ "examples" ]
+        }
+      }
+    },
     "intervals-header": {
       "desc": "",
       "scope": {
