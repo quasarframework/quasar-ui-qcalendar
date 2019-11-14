@@ -391,7 +391,10 @@ export default {
               this.dropFunc(_event, resource, 'resource', idx)
             }
           }
-        }
+        },
+        on: this.getDefaultMouseEventHandlers(':resource:day', _event => {
+          return this.getScopeForSlot(this.getTimestampAtEvent(_event, day), idx, resource)
+        })
       }
 
       const children = slot ? slot(scope) : void 0
@@ -414,10 +417,7 @@ export default {
         staticClass: 'q-calendar-scheduler__resources-body',
         style: {
           width: width
-        },
-        on: this.getDefaultMouseEventHandlers(':resource:day', _event => {
-          return this.getScopeForSlot(this.getTimestampAtEvent(_event, day), idx, resource)
-        })
+        }
       }
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), data), this.__renderResourceLabels(h))
