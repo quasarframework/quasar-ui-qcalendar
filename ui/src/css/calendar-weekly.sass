@@ -1,44 +1,44 @@
 @import './calendar-variables'
 
 .q-calendar-weekly
-  background-color: $background-color
+  background-color: $calendar-background-color
 
   .q-calendar-weekly__head-workweek
-    border-right: $border-color 1px solid
-    border-bottom: $border-color 1px solid
-    color: $day-current-color
+    border-right: $calendar-border-color 1px solid
+    border-bottom: $calendar-border-color 1px solid
+    color: $calendar-day-current-color
     font-weight: 800
     align-items: center
 
   .q-calendar-weekly__head-weekday
-    border-right: $border-color 1px solid
-    border-bottom: $border-color 1px solid
-    color: $day-current-color
+    border-right: $calendar-border-color 1px solid
+    border-bottom: $calendar-border-color 1px solid
+    color: $calendar-day-current-color
     font-weight: 500
 
   .q-calendar-weekly__workweek
-    border-right: $border-color 1px solid
-    border-bottom: $border-color 1px solid
+    border-right: $calendar-border-color 1px solid
+    border-bottom: $calendar-border-color 1px solid
     align-items: center
     justify-content: center
     font-weight: 800
 
     &.q-past-day
-      color: $day-past-color
+      color: $calendar-day-past-color
 
     &.q-future-day
-      color: $primary-color
+      color: $calendar-primary-color
 
     &.q-current-day
-      color: $primary-color
+      color: $calendar-primary-color
 
   .q-calendar-weekly__day
-    border-right: $border-color 1px solid
-    border-bottom: $border-color 1px solid
-    color: $primary-color
+    border-right: $calendar-border-color 1px solid
+    border-bottom: $calendar-border-color 1px solid
+    color: $calendar-primary-color
 
     &.q-outside
-      background-color: $outside-background-color
+      background-color: $calendar-outside-background-color
 
     &.q-current-day
 
@@ -53,10 +53,10 @@
         color: currentColor
 
     &.q-past-day
-      color: $day-past-color
+      color: $calendar-day-past-color
 
 .q-calendar-weekly__day--droppable
-    border-right: $primary-color 2px dashed
+    border-right: $calendar-primary-color 2px dashed
 
 .q-calendar-weekly
   display: flex
@@ -74,7 +74,7 @@
   &__head-workweek
     display: flex
     flex-wrap: nowrap
-    width: $work-week-width
+    width: $calendar-work-week-width
     user-select: none
     padding: 0 4px
     font-size: 1rem
@@ -97,10 +97,10 @@
   &__workweek
     display: flex
     flex-wrap: nowrap
-    width: $work-week-width
+    width: $calendar-work-week-width
     user-select: none
     padding: 0 4px
-    font-size: $work-week-font-size
+    font-size: $calendar-work-week-font-size
     align-items: center
 
   &__day
@@ -120,10 +120,10 @@
     text-align: center
     left: 2px
     top: 2px
-    border-radius: $day-label-radius
-    width: $day-label
-    height: $day-label
-    line-height: $day-label
+    border-radius: $calendar-day-label-radius
+    width: $calendar-day-label
+    height: $calendar-day-label
+    line-height: $calendar-day-label
 
   &__day-month
     position: absolute
@@ -132,8 +132,8 @@
     box-shadow: none
     top: 7px
     right: 2px
-    height: $day-label
-    line-height: $day-label
+    height: $calendar-day-label
+    line-height: $calendar-day-label
 
   &__day-month--day-of-year
     position: absolute

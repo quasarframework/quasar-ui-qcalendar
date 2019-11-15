@@ -1,7 +1,7 @@
 @import './calendar-variables'
 
 .q-calendar-scheduler
-  background-color: #9e9e9e
+  background-color: $calendar-background-color
 
   .q-calendar-scheduler__resources-head
     border-right: #e0e0e0 1px solid
@@ -15,22 +15,22 @@
   .q-calendar-scheduler__head-day
     border-right: #e0e0e0 1px solid
     border-bottom: #e0e0e0 1px solid
-    color: #9e9e9e
+    color: $calendar-background-color
 
     &.q-outside
-      background-color: $outside-background-color
+      background-color: $calendar-outside-background-color
 
     &.q-current-day
 
       .q-calendar-scheduler__head-day-label
         border: 2px solid currentColor
         font-weight: 700
-        color: $primary-color
+        color: $calendar-primary-color
 
     &.q-future-day
 
       .q-calendar-scheduler__head-day-label
-        color: $primary-color
+        color: $calendar-primary-color
 
     &.q-past-day
 
@@ -74,7 +74,7 @@
       border-bottom: #e0e0e0 1px solid
 
 .q-calendar-scheduler__day-resource--droppable
-  border: $primary-color 2px dashed
+  border: $calendar-primary-color 2px dashed
 
 .q-calendar-scheduler
   display: flex
@@ -94,7 +94,7 @@
     display: flex
     overflow: hidden
     vertical-align: bottom
-    width: $resources-body-width
+    width: $calendar-resources-body-width
     color: #616161
     border-bottom: #e0e0e0 1px solid
 
@@ -176,7 +176,7 @@
   &__resources-body
     flex: none
     user-select: none
-    width: $resources-body-width
+    width: $calendar-resources-body-width
 
   &__resource
     display: flex
