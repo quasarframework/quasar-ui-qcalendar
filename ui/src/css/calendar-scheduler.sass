@@ -1,36 +1,36 @@
 @import './calendar-variables'
 
 .q-calendar-scheduler
-  background-color: $grey-1
+  background-color: $calendar-background-color
 
   .q-calendar-scheduler__resources-head
-    border-right: $grey-4 1px solid
+    border-right: #e0e0e0 1px solid
 
   .q-calendar-scheduler__column-header--before
-    border-bottom: $grey-4 1px solid
+    border-bottom: #e0e0e0 1px solid
 
   .q-calendar-scheduler__column-header--after
-    border-top: $grey-4 1px solid
+    border-top: #e0e0e0 1px solid
 
   .q-calendar-scheduler__head-day
-    border-right: $grey-4 1px solid
-    border-bottom: $grey-4 1px solid
-    color: $grey-10
+    border-right: #e0e0e0 1px solid
+    border-bottom: #e0e0e0 1px solid
+    color: $calendar-background-color
 
     &.q-outside
-      background-color: $outside-background-color
+      background-color: $calendar-outside-background-color
 
     &.q-current-day
 
       .q-calendar-scheduler__head-day-label
         border: 2px solid currentColor
         font-weight: 700
-        color: $primary
+        color: $calendar-primary-color
 
     &.q-future-day
 
       .q-calendar-scheduler__head-day-label
-        color: $primary
+        color: $calendar-primary-color
 
     &.q-past-day
 
@@ -43,38 +43,38 @@
         color: rgba(0,0,0,0.38)
 
   .q-calendar-scheduler__resources-body
-    border-right: $grey-4 1px solid
+    border-right: #e0e0e0 1px solid
 
     .q-calendar-scheduler__resource-text
-      color: $grey-8
+      color: #616161
 
   .q-calendar-scheduler__day
-    border-right: $grey-4 1px solid
-    border-bottom: $grey-4 1px solid
+    border-right: #e0e0e0 1px solid
+    border-bottom: #e0e0e0 1px solid
 
     &.q-current-day
-      // border $grey-6 1px solid !important
+      // border #9e9e9e 1px solid !important
 
   .q-calendar-scheduler__resource
-    border-top: $grey-4 1px solid
+    border-top: #e0e0e0 1px solid
 
     &:first-child
       border-top: none !important
 
     &:last-child
-      border-bottom: $grey-4 1px solid
+      border-bottom: #e0e0e0 1px solid
 
   .q-calendar-scheduler__day-resource
-    border-top: $grey-4 1px solid
+    border-top: #e0e0e0 1px solid
 
     &:first-child
       border-top: none !important
 
     &:last-child
-      border-bottom: $grey-4 1px solid
+      border-bottom: #e0e0e0 1px solid
 
 .q-calendar-scheduler__day-resource--droppable
-  border: $primary 2px dashed
+  border: $calendar-primary-color 2px dashed
 
 .q-calendar-scheduler
   display: flex
@@ -94,9 +94,9 @@
     display: flex
     overflow: hidden
     vertical-align: bottom
-    width: $resources-body-width
-    color: $grey-8
-    border-bottom: $grey-4 1px solid
+    width: $calendar-resources-body-width
+    color: #616161
+    border-bottom: #e0e0e0 1px solid
 
     &--text
       display: block
@@ -176,7 +176,7 @@
   &__resources-body
     flex: none
     user-select: none
-    width: $resources-body-width
+    width: $calendar-resources-body-width
 
   &__resource
     display: flex
