@@ -1,10 +1,11 @@
 <template>
-  <div style="overflow: hidden">
+  <div>
     <q-calendar
       ref="calendar"
       v-model="selectedDate"
-      view="month"
+      view="scheduler"
       locale="en-us"
+      :resources="resources"
       v-touch-swipe.mouse.left.right="handleSwipe"
       animated
       transition-prev="slide-right"
@@ -20,12 +21,20 @@ import { stopAndPrevent } from 'quasar/src/utils/event'
 export default {
   data () {
     return {
-      selectedDate: '2019-04-01',
+      selectedDate: '',
+      resources: [
+        { label: 'John' },
+        { label: 'Mary' },
+        { label: 'Susan' },
+        { label: 'Olivia' },
+        { label: 'Board Room' },
+        { label: 'Room-1' },
+        { label: 'Room-2' }
+      ],
       dragging: false, // used for drag-and-drop
       ignoreNextSwipe: false // used for drag-and-drop
     }
   },
-
   methods: {
     calendarNext () {
       this.$refs.calendar.next()

@@ -15,7 +15,7 @@
       animated
       transition-prev="slide-right"
       transition-next="slide-left"
-      style="height: 400px;"
+      style="height: 400px; overflow: hidden"
     />
   </div>
 </template>

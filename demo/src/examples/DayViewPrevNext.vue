@@ -15,7 +15,7 @@
       animated
       transition-prev="slide-right"
       transition-next="slide-left"
-      style="height: 400px;"
+      style="height: 400px; overflow: hidden"
     />
   </div>
 </template>
@@ -24,7 +24,7 @@
 export default {
   data () {
     return {
-      selectedDate: '2019-04-01'
+      selectedDate: ''
     }
   },
   methods: {

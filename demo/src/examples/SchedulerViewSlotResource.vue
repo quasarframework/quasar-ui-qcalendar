@@ -20,7 +20,7 @@
 export default {
   data () {
     return {
-      selectedDate: '2019-04-08',
+      selectedDate: '',
       resources: [
         { label: 'John', avatar: 'https://cdn.quasar.dev/img/avatar4.jpg' },
         { label: 'Mary', avatar: 'https://cdn.quasar.dev/img/avatar2.jpg' },

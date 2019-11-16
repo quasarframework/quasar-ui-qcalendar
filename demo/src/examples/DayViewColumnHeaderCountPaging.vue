@@ -95,7 +95,7 @@
 export default {
   data () {
     return {
-      selectedDate: '2019-04-01',
+      selectedDate: '',
       columnCount: 3,
       totalPages: 2,
       currentPage: 0

@@ -18,7 +18,7 @@
 export default {
   data () {
     return {
-      selectedDate: '2019-04-08',
+      selectedDate: '',
       resources: [
         { label: 'John' },
         { label: 'Mary' },

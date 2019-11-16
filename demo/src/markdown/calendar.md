@@ -176,7 +176,7 @@ You would need to build out your own way of allowing the User to interact with Q
 
 # QCalendar views
 
-QCalendar is made from three distict components: day, month and scheduler views. All other views derive from these three views.
+QCalendar is made from three distict components: **day**, **month** and **scheduler** views. All other views derive from these three views. For instance, the **week** view is really a 7-**day** view.
 
 ## Day view
 
