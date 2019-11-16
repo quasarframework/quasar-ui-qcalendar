@@ -1,15 +1,18 @@
 <template>
-  <q-calendar
-    ref="calendar"
-    v-model="selectedDate"
-    view="day"
-    locale="en-us"
-    v-touch-swipe.mouse.left.right="handleSwipe"
-    animated
-    transition-prev="slide-right"
-    transition-next="slide-left"
-    style="height: 400px; overflow: hidden"
-  />
+  <div>
+    <q-calendar
+      ref="calendar"
+      v-model="selectedDate"
+      view="scheduler"
+      locale="en-us"
+      :resources="resources"
+      v-touch-swipe.mouse.left.right="handleSwipe"
+      animated
+      transition-prev="slide-right"
+      transition-next="slide-left"
+      style="height: 400px; overflow: hidden"
+    />
+  </div>
 </template>
 
 <script>
@@ -19,11 +22,19 @@ export default {
   data () {
     return {
       selectedDate: '',
+      resources: [
+        { label: 'John' },
+        { label: 'Mary' },
+        { label: 'Susan' },
+        { label: 'Olivia' },
+        { label: 'Board Room' },
+        { label: 'Room-1' },
+        { label: 'Room-2' }
+      ],
       dragging: false, // used for drag-and-drop
       ignoreNextSwipe: false // used for drag-and-drop
     }
   },
-
   methods: {
     calendarNext () {
       this.$refs.calendar.next()
@@ -32,6 +43,7 @@ export default {
       this.$refs.calendar.prev()
     },
     handleSwipe ({ evt, ...info }) {
+      debugger
       if (this.dragging === false) {
         if (info.duration >= 30 && this.ignoreNextSwipe === false) {
           if (info.direction === 'right') {

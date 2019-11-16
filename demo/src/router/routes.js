@@ -13,11 +13,47 @@ const routes = [
   },
   {
     path: '/examples',
-    component: () => import('layouts/MainLayout.vue'),
+    component: () => import('layouts/Examples.vue'),
     children: [
-      { path: '', component: () => import('pages/Examples.vue') }
+      {
+        path: '',
+        component: () => import('pages/Examples.vue'),
+        children: [
+          {
+            path: '',
+            redirect: '/examples/day-view'
+          },
+          {
+            path: 'day-view',
+            component: () => import('pages/DayView.vue')
+          },
+          {
+            path: 'week-view',
+            component: () => import('pages/WeekView.vue')
+          },
+          {
+            path: 'month-view',
+            component: () => import('pages/MonthView.vue')
+          },
+          {
+            path: 'scheduler-view',
+            component: () => import('pages/SchedulerView.vue')
+          }
+          // {
+          //   path: 'customization',
+          //   component: () => import('pages/Customization.vue')
+          // }
+        ]
+      }
     ]
   },
+  // {
+  //   path: '/examples',
+  //   component: () => import('layouts/Examples.vue'),
+  //   children: [
+  //     { path: '', component: () => import('pages/Examples.vue') }
+  //   ]
+  // },
   {
     path: '/demo',
     component: () => import('layouts/CalendarLayout.vue'),

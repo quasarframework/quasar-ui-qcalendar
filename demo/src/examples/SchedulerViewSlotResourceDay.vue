@@ -7,9 +7,7 @@
     style="height: 500px;"
   >
     <template #scheduler-resource-day="{ day, index, resource }">
-      <div class="row justify-center items-center">
-        <q-btn class="fit">{{ resource.label }}:{{ day.day }}</q-btn>
-      </div>
+      <q-btn class="fit"><span class="ellipsis" style="font-size: 10px;">{{ resource.label }}:{{ day.day }}</span></q-btn>
     </template>
   </q-calendar>
 </template>
@@ -18,7 +16,7 @@
 export default {
   data () {
     return {
-      selectedDate: '2019-04-08',
+      selectedDate: '',
       resources: [
         { label: 'John' },
         { label: 'Mary' },
