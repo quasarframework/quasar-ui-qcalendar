@@ -215,9 +215,14 @@ Below, the slot receives the `resource` to be displayed. In this case, an avatar
       <example-card title="Day View (Current Time) - Slot (day-container)" name="DayViewCurrentTime" :tag-parts="getTagParts(require('!!raw-loader!../examples/DayViewCurrentTime.vue').default)">
         <q-markdown>
 You can use the scopedSlot `day-container` to set an absolute position for a time tracking bar.
+Scroll down if the current time is later for your location.
         </q-markdown>
       </example-card>
       <example-card title="Week View (Current Time) - Slot (day-container)" name="WeekViewCurrentTime" :tag-parts="getTagParts(require('!!raw-loader!../examples/WeekViewCurrentTime.vue').default)">
+        <q-markdown>
+You can use the scopedSlot `day-container` to set an absolute position for a time tracking bar.
+Scroll down if the current time is later for your location.
+        </q-markdown>
       </example-card>
 
     </div>
