@@ -349,7 +349,7 @@ QCalendar supports locales as defined within the browser and can be changed by s
 
 QCalendar has the ability to work with themes. It does not come with any itself, but you can download the ones that are used in the demo [here](statics/themes.js).
 
-All colors in themes can be from the [Quasar Color Pallete](https://quasar.dev/style/color-palette), CSS named color or a CSS color (#, rgb, rgba, hls, etc).
+All colors in themes can be from the [Quasar Color palette](https://quasar.dev/style/color-palette), CSS named color or a CSS color (#, rgb, rgba, hls, etc).
 
 Download and look at the themes to see what is needed. If a property is missing from a theme, then the fallback of the default CSS will be used.
 
