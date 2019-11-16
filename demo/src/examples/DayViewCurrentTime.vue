@@ -74,7 +74,7 @@ export default {
 .day-view-current-time-line {
   position: absolute;
   left: 55px;
-  border-top: 2px rgba(0, 0, 255, .5) solid;
+  border-top: rgba(0, 0, 255, .5) 2px solid;
   width: calc(100% - 50px - 5px)
 }
 </style>
