@@ -43,7 +43,6 @@ export default {
       this.$refs.calendar.prev()
     },
     handleSwipe ({ evt, ...info }) {
-      debugger
       if (this.dragging === false) {
         if (info.duration >= 30 && this.ignoreNextSwipe === false) {
           if (info.direction === 'right') {
