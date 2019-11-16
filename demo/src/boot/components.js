@@ -50,6 +50,7 @@ import SchedulerViewPrevNext from '../examples/SchedulerViewPrevNext'
 import DayViewSwipe from '../examples/DayViewSwipe'
 import WeekViewSwipe from '../examples/WeekViewSwipe'
 import MonthViewSwipe from '../examples/MonthViewSwipe'
+import SchedulerViewSwipe from '../examples/SchedulerViewSwipe'
 
 import DayViewColumnHeader from '../examples/DayViewColumnHeader'
 import WeekViewColumnHeader from '../examples/WeekViewColumnHeader'
@@ -103,6 +104,7 @@ export default ({ Vue }) => {
   Vue.component('WeekViewPrevNext', WeekViewPrevNext)
   Vue.component('MonthViewPrevNext', MonthViewPrevNext)
   Vue.component('SchedulerViewPrevNext', SchedulerViewPrevNext)
+  Vue.component('SchedulerViewSwipe', SchedulerViewSwipe)
   Vue.component('DayViewSwipe', DayViewSwipe)
   Vue.component('WeekViewSwipe', WeekViewSwipe)
   Vue.component('MonthViewSwipe', MonthViewSwipe)
