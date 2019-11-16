@@ -4,21 +4,25 @@
   background-color: $calendar-background-color
 
   .q-calendar-scheduler__resources-head
-    border-right: $calendar-border-color 1px solid
+    border-right: 1px solid $calendar-border-color
 
   .q-calendar-scheduler__column-header--before
-    border-bottom: $calendar-border-color 1px solid
+    border-bottom: 1px solid $calendar-border-color
 
   .q-calendar-scheduler__column-header--after
-    border-top: $calendar-border-color 1px solid
+    border-top: 1px solid $calendar-border-color
 
   .q-calendar-scheduler__head-day
-    border-right: $calendar-border-color 1px solid
-    border-bottom: $calendar-border-color 1px solid
-    color: $calendar-background-color
+    border-right: 1px solid $calendar-border-color
+    border-bottom: 1px solid $calendar-border-color
 
     &.q-outside
       background-color: $calendar-outside-background-color
+
+    &.q-future-day
+
+      .q-calendar-scheduler__head-day-label
+        color: lighten($calendar-primary-color, 20%)
 
     &.q-current-day
 
@@ -27,51 +31,46 @@
         font-weight: 700
         color: $calendar-primary-color
 
-    &.q-future-day
-
-      .q-calendar-scheduler__head-day-label
-        color: $calendar-primary-color
-
     &.q-past-day
 
       .q-calendar-scheduler__head-weekday
-        color: rgba(0,0,0,1.0)
+        color: $calendar-day-past-color
 
     &.q-past-day
 
       .q-calendar-scheduler__head-day-label
-        color: rgba(0,0,0,0.38)
+        color: $calendar-day-past-color
 
   .q-calendar-scheduler__resources-body
-    border-right: $calendar-border-color 1px solid
+    border-right: 1px solid $calendar-border-color
 
     .q-calendar-scheduler__resource-text
-      color: #616161
+      color: $calendar-text-color
 
   .q-calendar-scheduler__day
-    border-right: $calendar-border-color 1px solid
-    border-bottom: $calendar-border-color 1px solid
+    border-right: 1px solid $calendar-border-color
+    border-bottom: 1px solid $calendar-border-color
 
     &.q-current-day
       // border #9e9e9e 1px solid !important
 
   .q-calendar-scheduler__resource
-    border-top: $calendar-border-color 1px solid
+    border-top: 1px solid $calendar-border-color
 
     &:first-child
       border-top: none !important
 
     &:last-child
-      border-bottom: $calendar-border-color 1px solid
+      border-bottom: 1px solid $calendar-border-color
 
   .q-calendar-scheduler__day-resource
-    border-top: $calendar-border-color 1px solid
+    border-top: 1px solid $calendar-border-color
 
     &:first-child
       border-top: none !important
 
     &:last-child
-      border-bottom: $calendar-border-color 1px solid
+      border-bottom: 1px solid $calendar-border-color
 
 .q-calendar-scheduler__day-resource--droppable
   border: $calendar-primary-color 2px dashed
@@ -95,8 +94,8 @@
     overflow: hidden
     vertical-align: bottom
     width: $calendar-resources-body-width
-    color: #616161
-    border-bottom: $calendar-border-color 1px solid
+    color: $calendar-text-color
+    border-bottom: 1px solid $calendar-border-color
 
     &--text
       display: block

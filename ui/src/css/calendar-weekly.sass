@@ -7,27 +7,27 @@
     border-right: $calendar-border-color 1px solid
     border-bottom: $calendar-border-color 1px solid
     color: $calendar-day-current-color
-    font-weight: 800
+    font-weight: $calendar-workweek-font-weight
     align-items: center
 
   .q-calendar-weekly__head-weekday
     border-right: $calendar-border-color 1px solid
     border-bottom: $calendar-border-color 1px solid
     color: $calendar-day-current-color
-    font-weight: 500
+    font-weight: $calendar-weekly-head-weekday-font-weight
 
   .q-calendar-weekly__workweek
     border-right: $calendar-border-color 1px solid
     border-bottom: $calendar-border-color 1px solid
     align-items: center
     justify-content: center
-    font-weight: 800
+    font-weight: $calendar-workweek-font-weight
 
     &.q-past-day
       color: $calendar-day-past-color
 
     &.q-future-day
-      color: $calendar-primary-color
+      color: lighten($calendar-primary-color, 20%)
 
     &.q-current-day
       color: $calendar-primary-color
@@ -39,6 +39,9 @@
 
     &.q-outside
       background-color: $calendar-outside-background-color
+
+    &.q-future-day
+      color: currentColor
 
     &.q-current-day
 
