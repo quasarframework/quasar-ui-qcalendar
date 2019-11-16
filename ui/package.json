@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-ui-qcalendar",
-  "version": "1.0.13",
+  "version": "1.0.16",
   "author": "Jeff Galbraith <jeff@quasar.dev>",
   "description": "QCalendar - Embed Calendars and Schedules in your Quasar Apps",
   "license": "MIT",
@@ -67,7 +67,7 @@
     "last 1 version, not dead, ie >= 11"
   ],
   "dependencies": {
-    "q-colorize-mixin": "^1.0.1",
+    "q-colorize-mixin": "^1.0.3",
     "q-theme-mixin": "^1.0.0"
   }
 }
