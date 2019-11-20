@@ -20,6 +20,10 @@
     "build:css": "node build/script.css.js",
     "build:api": "node build/build.api.js"
   },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/hawkeye64"
+  },
   "publishConfig": {
     "access": "public"
   },
