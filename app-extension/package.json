@@ -42,7 +42,7 @@
     "yarn": ">= 1.6.0"
   },
   "dependencies": {
-    "@quasar/quasar-ui-qcalendar": "^1.0.17"
+    "@quasar/quasar-ui-qcalendar": "^1.0.18"
   },
   "devDependencies": {
     "@vue/eslint-config-standard": "^4.0.0",
