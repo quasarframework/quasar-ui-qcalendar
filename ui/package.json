@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-ui-qcalendar",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "author": "Jeff Galbraith <jeff@quasar.dev>",
   "description": "QCalendar - Embed Calendars and Schedules in your Quasar Apps",
   "license": "MIT",
@@ -19,6 +19,10 @@
     "build:js": "node build/script.javascript.js",
     "build:css": "node build/script.css.js",
     "build:api": "node build/build.api.js"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/hawkeye64"
   },
   "publishConfig": {
     "access": "public"
@@ -42,7 +46,7 @@
   ],
   "devDependencies": {
     "@vue/eslint-config-standard": "^4.0.0",
-    "autoprefixer": "^9.7.1",
+    "autoprefixer": "^9.7.2",
     "babel-eslint": "^10.0.3",
     "chalk": "^3.0.0",
     "cssnano": "^4.1.10",
@@ -51,14 +55,14 @@
     "eslint-plugin-vue": "^6.0.1",
     "node-sass": "^4.13.0",
     "open": "^7.0.0",
-    "postcss": "^7.0.21",
+    "postcss": "^7.0.23",
     "postcss-rtl": "^1.5.0",
-    "quasar": "^1.4.3",
+    "quasar": "^1.4.5",
     "quasar-json-api": "^0.0.8",
     "rimraf": "^3.0.0",
-    "rollup": "^1.27.0",
-    "rollup-plugin-buble": "^0.19.8",
-    "rollup-plugin-json": "^4.0.0",
+    "rollup": "^1.27.3",
+    "@rollup/plugin-buble": "^0.20.0",
+    "@rollup/plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "uglify-es": "^3.3.9",
     "zlib": "^1.0.5"
@@ -67,7 +71,7 @@
     "last 1 version, not dead, ie >= 11"
   ],
   "dependencies": {
-    "q-colorize-mixin": "^1.0.3",
+    "q-colorize-mixin": "^1.0.4",
     "q-theme-mixin": "^1.0.0"
   }
 }

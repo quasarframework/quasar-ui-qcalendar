@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-qcalendar",
-  "version": "1.0.24",
+  "version": "1.0.25",
   "description": "A Quasar App Extension for @quasar/quasar-ui-qcalendar",
   "author": "Jeff Galbraith <jeff@quasar.dev>",
   "license": "MIT",
@@ -8,6 +8,10 @@
   "scripts": {
     "lint": "eslint --ext .js,.vue src",
     "lint-fix": "eslint --ext .js,.vue src --fix"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/hawkeye64"
   },
   "publishConfig": {
     "access": "public"
@@ -38,7 +42,7 @@
     "yarn": ">= 1.6.0"
   },
   "dependencies": {
-    "@quasar/quasar-ui-qcalendar": "^1.0.17"
+    "@quasar/quasar-ui-qcalendar": "^1.0.18"
   },
   "devDependencies": {
     "@vue/eslint-config-standard": "^4.0.0",
