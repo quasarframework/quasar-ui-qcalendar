@@ -12,7 +12,6 @@
         >
           <q-toolbar-title
           class="example-title"
-          style="padding: 5px 20px;"
           @click="copyHeading(slugifiedTitle)"><span class="ellipsis">{{ title }}</span></q-toolbar-title>
         </q-ribbon>
       </q-toolbar>
