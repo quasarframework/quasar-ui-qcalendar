@@ -20,7 +20,7 @@
   "devDependencies": {
     "@quasar/app": "^1.2.4",
     "@quasar/quasar-app-extension-qiconpicker": "^1.0.13",
-    "@quasar/quasar-app-extension-qmarkdown": "^1.0.0-beta.21",
+    "@quasar/quasar-app-extension-qmarkdown": "^1.0.1",
     "@quasar/quasar-app-extension-qpublish": "^1.0.0-alpha.13",
     "@quasar/quasar-app-extension-qribbon": "^1.0.0-beta.8",
     "@quasar/quasar-app-extension-qscroller": "^1.0.3",

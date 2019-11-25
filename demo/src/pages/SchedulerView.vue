@@ -70,7 +70,7 @@ Below, the slot receives the `resource` to be displayed. In this case, an avatar
 import ExampleTitle from '../components/ExampleTitle'
 import ExampleCard from '../components/ExampleCard'
 import { slugify } from 'assets/page-utils'
-import getTagParts from '@quasar/quasar-app-extension-qmarkdown/src/lib/getTagParts'
+import { getTagParts } from '@quasar/quasar-ui-qmarkdown'
 
 export default {
   name: 'SchedulerView',
