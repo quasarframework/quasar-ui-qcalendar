@@ -1,7 +1,10 @@
 {
-  "@quasar/qmarkdown": {},
   "@quasar/qscroller": {},
   "@quasar/qribbon": {},
   "@quasar/qpublish": {},
-  "@quasar/qiconpicker": {}
+  "@quasar/qiconpicker": {},
+  "@quasar/qmarkdown": {
+    "import_md": true,
+    "import_vmd": true
+  }
 }
