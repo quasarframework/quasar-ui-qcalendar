@@ -1,7 +1,7 @@
 @import './calendar-variables'
 
 .q-calendar-weekly
-  background-color: $calendar-background-color
+  background: $calendar-background-color
 
   .q-calendar-weekly__head-workweek
     border-right: $calendar-border-color 1px solid
@@ -38,10 +38,11 @@
     color: $calendar-primary-color
 
     &.q-outside
-      background-color: $calendar-outside-background-color
+      background: $calendar-outside-background-color
+      color: $calendar-outside-text-color
 
     &.q-future-day
-      color: currentColor
+      color: lighten($calendar-primary-color, 20%)
 
     &.q-current-day
 
@@ -124,9 +125,9 @@
     left: 2px
     top: 2px
     border-radius: $calendar-day-label-radius
-    width: $calendar-day-label
-    height: $calendar-day-label
-    line-height: $calendar-day-label
+    width: $calendar-day-label-height
+    height: $calendar-day-label-height
+    line-height: $calendar-day-label-height
 
   &__day-month
     position: absolute
@@ -135,8 +136,8 @@
     box-shadow: none
     top: 7px
     right: 2px
-    height: $calendar-day-label
-    line-height: $calendar-day-label
+    height: $calendar-day-label-height
+    line-height: $calendar-day-label-height
 
   &__day-month--day-of-year
     position: absolute
@@ -146,3 +147,60 @@
     top: 2px
     right: 2px
     font-size: 0.6rem
+
+.q-dark
+  .q-calendar-weekly
+    background: $calendar-background-color-dark
+
+  .q-calendar-weekly__head-workweek
+    border-right: $calendar-border-color-dark 1px solid
+    border-bottom: $calendar-border-color-dark 1px solid
+    color: $calendar-day-current-color-dark
+
+  .q-calendar-weekly__head-weekday
+    border-right: $calendar-border-color-dark 1px solid
+    border-bottom: $calendar-border-color-dark 1px solid
+    color: $calendar-day-current-color-dark
+
+  .q-calendar-weekly__workweek
+    border-right: $calendar-border-color-dark 1px solid
+    border-bottom: $calendar-border-color-dark 1px solid
+
+    &.q-past-day
+      color: $calendar-day-past-color-dark
+
+    &.q-future-day
+      color: lighten($calendar-primary-color-dark, 20%)
+
+    &.q-current-day
+      color: $calendar-primary-color-dark
+
+  .q-calendar-weekly__day
+    border-right: $calendar-border-color-dark 1px solid
+    border-bottom: $calendar-border-color-dark 1px solid
+    color: $calendar-primary-color-dark
+
+    &.q-outside
+      background: $calendar-outside-background-color-dark
+      color: $calendar-outside-text-color-dark
+
+    &.q-future-day
+      color: lighten($calendar-primary-color-dark, 20%)
+
+    &.q-current-day
+
+      .q-calendar-weekly__day-label
+        border: 2px solid currentColor
+        font-weight: 700
+
+      .q-calendar-weekly__day-month
+        color: currentColor
+
+      .q-calendar-weekly__day-month--day-of-year
+        color: currentColor
+
+    &.q-past-day
+      color: $calendar-day-past-color-dark
+
+  .q-calendar-weekly__day--droppable
+    border-right: $calendar-primary-color-dark 2px dashed
