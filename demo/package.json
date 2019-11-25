@@ -1,8 +1,8 @@
 {
-  "name": "quasar-app-extension-qcalendar",
+  "name": "qcalendar-docs-demo",
   "version": "0.0.1",
   "description": "QCalendar docs, examples and demo site",
-  "productName": "QCalendar docs, examples and demo site",
+  "productName": "QCalendar demo app",
   "cordovaId": "org.cordova.quasar.app",
   "author": "Jeff Galbraith <jeff@quasar.dev>",
   "private": true,
@@ -19,11 +19,11 @@
   },
   "devDependencies": {
     "@quasar/app": "^1.2.4",
-    "@quasar/quasar-app-extension-qiconpicker": "^1.0.12",
+    "@quasar/quasar-app-extension-qiconpicker": "^1.0.13",
     "@quasar/quasar-app-extension-qmarkdown": "^1.0.0-beta.21",
     "@quasar/quasar-app-extension-qpublish": "^1.0.0-alpha.13",
     "@quasar/quasar-app-extension-qribbon": "^1.0.0-beta.8",
-    "@quasar/quasar-app-extension-qscroller": "^1.0.0",
+    "@quasar/quasar-app-extension-qscroller": "^1.0.3",
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.3",
     "copy-webpack-plugin": "^5.0.5",
@@ -31,7 +31,7 @@
     "electron": "^7.1.2",
     "electron-debug": "^3.0.1",
     "electron-devtools-installer": "^2.2.4",
-    "eslint": "^6.6.0",
+    "eslint": "^6.7.0",
     "eslint-loader": "^3.0.2",
     "eslint-plugin-quasar": "^1.0.0-alpha.17",
     "eslint-plugin-vue": "^6.0.1"
@@ -45,6 +45,6 @@
     "last 1 version, not dead, ie >= 11"
   ],
   "resolutions": {
-    "ajv": "6.8.1"
+    "ajv": "6.10.2"
   }
 }

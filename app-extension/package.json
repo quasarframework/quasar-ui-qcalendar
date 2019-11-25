@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-qcalendar",
-  "version": "1.0.25",
+  "version": "1.0.26",
   "description": "A Quasar App Extension for @quasar/quasar-ui-qcalendar",
   "author": "Jeff Galbraith <jeff@quasar.dev>",
   "license": "MIT",

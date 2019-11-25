@@ -1,10 +1,11 @@
 @import './calendar-variables'
 
 .q-calendar-daily
-  background-color: $calendar-background-color
+  background: $calendar-background-color
 
   .q-calendar-daily__intervals-head
     border-right: 1px solid $calendar-border-color
+    border-bottom: 1px solid $calendar-border-color
 
   .q-calendar-daily__column-header--before
     border-bottom: 1px solid $calendar-border-color
@@ -18,7 +19,8 @@
     color: $calendar-background-color
 
     &.q-outside
-      background-color: $calendar-outside-background-color
+      background: $calendar-outside-background-color
+      color: $calendar-outside-text-color
 
     &.q-current-day
       color: $calendar-day-current-color
@@ -45,7 +47,7 @@
         color: rgba(0,0,0,0.38)
 
   .q-calendar-daily__intervals-body
-    border-right: #fcc0c0 1px solid
+    border-right: $calendar-separator 1px solid
 
     .q-calendar-daily__interval-text
       color: $calendar-text-color
@@ -183,3 +185,70 @@
     flex: 1
     width: 0
     position: relative
+
+.q-dark
+  .q-calendar-daily
+    background-color: $calendar-background-color-dark
+
+    .q-calendar-daily__intervals-head
+      border-right: 1px solid $calendar-border-color-dark
+      border-bottom: 1px solid $calendar-border-color-dark
+
+    .q-calendar-daily__column-header--before
+      border-bottom: 1px solid $calendar-border-color-dark
+
+    .q-calendar-daily__column-header--after
+      border-top: 1px solid $calendar-border-color-dark
+
+    .q-calendar-daily__head-day
+      border-right: 1px solid $calendar-border-color-dark
+      border-bottom: 1px solid $calendar-border-color-dark
+      color: $calendar-background-color-dark
+
+      &.q-outside
+        background-color: $calendar-outside-background-color-dark
+        color: $calendar-outside-text-color-dark
+
+      &.q-current-day
+        color: $calendar-day-current-color-dark
+
+        .q-calendar-daily__head-day-label
+          color: $calendar-primary-color-dark
+
+      &.q-future-day
+        color: $calendar-day-future-color
+
+        .q-calendar-daily__head-day-label
+          color: $calendar-primary-color
+
+      &.q-past-day
+
+        .q-calendar-daily__head-weekday
+          color: $calendar-day-past-color
+
+      &.q-past-day
+
+        .q-calendar-daily__head-day-label
+          color: rgba(0,0,0,0.38)
+
+    .q-calendar-daily__intervals-body
+      border-right: $calendar-separator-dark 1px solid
+
+      .q-calendar-daily__interval-text
+        color: $calendar-text-color-dark
+
+    .q-calendar-daily__day
+      border-right: 1px solid $calendar-border-color-dark
+      border-bottom: 1px solid $calendar-border-color-dark
+
+      &.q-current-day
+        // border #9e9e9e 1px solid !important
+
+    .q-calendar-daily__day-interval
+      border-top: 1px solid $calendar-border-color-dark
+
+      &:first-child
+        border-top: none !important
+
+  .q-calendar-daily__day-interval--droppable
+    border: $calendar-primary-color-dark 2px dashed

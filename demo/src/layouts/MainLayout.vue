@@ -18,6 +18,7 @@
 
         <q-space />
 
+        <q-btn flat round @click="$q.dark.toggle()" :icon="$q.dark.isActive ? 'brightness_2' : 'brightness_5'" />
         <div v-if="$q.screen.width > 500">Quasar v{{ $q.version }}</div>
 
         <q-btn
@@ -36,7 +37,6 @@
     <q-drawer
       v-model="leftDrawerOpen"
       bordered
-      content-style="background-color: #f8f8ff"
     >
       <q-list>
         <q-item-label header>Essential Links</q-item-label>
@@ -49,7 +49,6 @@
       v-model="rightDrawerOpen"
       side="right"
       bordered
-      content-style="background-color: #f8f8ff"
     >
       <q-scroll-area class="fit">
         <q-list dense>
