@@ -61,20 +61,27 @@ export default {
 }
 </script>
 
-<style>
-.week-view-current-time-indicator {
-  position: absolute;
-  left: 45px;
-  height: 10px;
-  width: 10px;
-  margin-top: -4px;
-  background-color: rgba(0, 0, 255, .5);
-  border-radius: 50%;
-}
-.week-view-current-time-line {
-  position: absolute;
-  left: 55px;
-  border-top: rgba(0, 0, 255, .5) 2px solid;
+<style lang="sass">
+.week-view-current-time-indicator
+  position: absolute
+  left: 45px
+  height: 10px
+  width: 10px
+  margin-top: -4px
+  background-color: rgba(0, 0, 255, .5)
+  border-radius: 50%
+
+.week-view-current-time-line
+  position: absolute
+  left: 55px
+  border-top: rgba(0, 0, 255, .5) 2px solid
   width: calc(100% - 50px - 5px)
-}
+
+.q-dark
+  .week-view-current-time-indicator
+    background-color: rgba(255, 255, 0, .85)
+
+  .week-view-current-time-line
+    border-top: rgba(255, 255, 0, .85) 2px solid
+
 </style>

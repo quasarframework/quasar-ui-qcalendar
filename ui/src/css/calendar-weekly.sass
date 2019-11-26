@@ -19,18 +19,18 @@
   .q-calendar-weekly__workweek
     border-right: $calendar-border-color 1px solid
     border-bottom: $calendar-border-color 1px solid
+    font-weight: $calendar-workweek-font-weight
     align-items: center
     justify-content: center
-    font-weight: $calendar-workweek-font-weight
 
     &.q-past-day
       color: $calendar-day-past-color
 
     &.q-future-day
-      color: lighten($calendar-primary-color, 20%)
+      color: $calendar-day-future-color
 
     &.q-current-day
-      color: $calendar-primary-color
+      color: $calendar-day-current-color
 
   .q-calendar-weekly__day
     border-right: $calendar-border-color 1px solid
@@ -42,12 +42,12 @@
       color: $calendar-outside-text-color
 
     &.q-future-day
-      color: lighten($calendar-primary-color, 20%)
+      color: $calendar-day-future-color
 
     &.q-current-day
 
       .q-calendar-weekly__day-label
-        border: 2px solid currentColor
+        border: currentColor solid 2px
         font-weight: 700
 
       .q-calendar-weekly__day-month
@@ -148,7 +148,7 @@
     right: 2px
     font-size: 0.6rem
 
-.q-dark
+.q-dark, .body--dark
   .q-calendar-weekly
     background: $calendar-background-color-dark
 
@@ -190,7 +190,7 @@
     &.q-current-day
 
       .q-calendar-weekly__day-label
-        border: 2px solid currentColor
+        border: currentColor solid 2px
         font-weight: 700
 
       .q-calendar-weekly__day-month

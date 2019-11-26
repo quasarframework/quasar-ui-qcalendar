@@ -27,7 +27,6 @@
         <q-select
           outlined
           dense
-          dark
           v-model="calendarView"
           :options="viewOptions"
           emit-value
@@ -56,27 +55,30 @@
           :options="options"
         ></q-date>
       </div>
+      <q-separator />
       <div class="col-12">
         <q-expansion-item
           expand-separator
           default-opened
-          dark
           group="somegroup"
           icon="fas fa-cogs"
           label="Playground"
           caption="Play with properties"
-          header-class="text-white bg-primary"
         >
+          <q-separator />
           <playground></playground>
         </q-expansion-item>
+        <q-separator />
         <q-expansion-item
           expand-separator
           group="somegroup"
           icon="fas fa-link"
           label="Essential Links"
         >
+          <q-separator />
           <essential-links />
         </q-expansion-item>
+        <q-separator />
       </div>
     </q-drawer>
 
@@ -266,7 +268,6 @@ export default {
 .q-date {
     box-shadow: none!important;
     border-radius: 0!important;
-    background: #fff;
 }
 .q-date__view {
     padding: 0!important;

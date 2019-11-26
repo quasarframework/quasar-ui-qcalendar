@@ -47,27 +47,40 @@
           label="QCalendar"
           caption="QCalendar Examples"
         >
-          <q-list dense bordered separator>
+          <q-separator />
+          <q-list dense>
 
             <q-item clickable to="/examples/day-view">
+              <q-item-section avatar>
+                <q-icon name="fas fa-calendar-day" />
+              </q-item-section>
               <q-item-section>
                 <q-item-label>Day View</q-item-label>
               </q-item-section>
             </q-item>
 
             <q-item clickable to="/examples/week-view">
+              <q-item-section avatar>
+                <q-icon name="fas fa-calendar-week" />
+              </q-item-section>
               <q-item-section>
                 <q-item-label>Week View</q-item-label>
               </q-item-section>
             </q-item>
 
             <q-item clickable to="/examples/month-view">
+              <q-item-section avatar>
+                <q-icon name="fas fa-calendar-alt" />
+              </q-item-section>
               <q-item-section>
                 <q-item-label>Month View</q-item-label>
               </q-item-section>
             </q-item>
 
             <q-item clickable to="/examples/scheduler-view">
+              <q-item-section avatar>
+                <q-icon name="fas fa-calendar" />
+              </q-item-section>
               <q-item-section>
                 <q-item-label>Scheduler View</q-item-label>
               </q-item-section>
@@ -88,8 +101,10 @@
           icon="fas fa-link"
           label="Essential Links"
         >
+          <q-separator />
           <essential-links />
         </q-expansion-item>
+        <q-separator />
       </div>
     </q-drawer>
 
