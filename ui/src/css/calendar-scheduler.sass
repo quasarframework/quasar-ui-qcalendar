@@ -203,7 +203,7 @@
     width: 0
     position: relative
 
-.q-dark
+.q-dark, .body--dark
   .q-calendar-scheduler
     background: $calendar-background-color-dark
 
@@ -229,26 +229,21 @@
       &.q-future-day
 
         .q-calendar-scheduler__head-day-label
-          color: lighten($calendar-primary-color-dark, 20%)
+          color: $calendar-day-future-color-dark
 
       &.q-current-day
 
         .q-calendar-scheduler__head-day-label
-          border: 2px solid currentColor
-          color: $calendar-primary-color-dark
+          border: currentColor solid 2px
+          color: $calendar-day-current-color-dark
 
       &.q-past-day
 
         .q-calendar-scheduler__head-weekday
           color: $calendar-day-past-color-dark
 
-      &.q-past-day
-
-        .q-calendar-scheduler__head-day-label
-          color: $calendar-day-past-color-dark
-
     .q-calendar-scheduler__resources-body
-      border-right: 1px solid $calendar-border-color-dark
+      border-right: $calendar-border-color-dark solid 1px
 
       .q-calendar-scheduler__resource-text
         color: $calendar-text-color-dark
