@@ -656,7 +656,7 @@
       "type": "Array",
       "category": "model",
       "required": true,
-      "desc": "An array of objects with a single key of label. You can add other keys if you like, which will be passed in on the appropriate scoped slots",
+      "desc": "An array of objects with a single key of label. You can add other keys if you like, which will be passed back on the appropriate scoped slots",
       "applicable": [
         "scheduler"
       ],
