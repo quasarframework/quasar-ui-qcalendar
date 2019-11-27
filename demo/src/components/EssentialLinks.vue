@@ -56,6 +56,8 @@
       </q-item-section>
     </q-item>
     <q-separator />
+    <q-item-label header>Quasar</q-item-label>
+    <q-separator />
     <q-item clickable tag="a" target="_blank" href="http://quasar.dev">
       <q-item-section avatar>
         <q-icon name="school"></q-icon>
