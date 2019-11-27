@@ -25,13 +25,15 @@
         <q-btn flat dense round icon="keyboard_arrow_right" @click="onNext"></q-btn>
         <span class="q-mr-xl q-toolbar__title nowrap">{{ title }}</span>
         <q-select
-          outlined
-          dense
           v-model="calendarView"
           :options="viewOptions"
+          outlined
+          dense
           emit-value
           map-options
-          style="min-width: 120px;"
+          :input-class="{ 'text-primary bg-white': !$q.dark.isActive }"
+          :popup-content-class="{ 'text-primary bg-white': !$q.dark.isActive }"
+          style="min-width: 120px; background: transparent; color: white"
         ></q-select>
 
         <q-space></q-space>

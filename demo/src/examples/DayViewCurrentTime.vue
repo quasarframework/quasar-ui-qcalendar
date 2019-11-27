@@ -77,7 +77,7 @@ export default {
   border-top: rgba(0, 0, 255, .5) 2px solid
   width: calc(100% - 50px - 5px)
 
-.q-dark
+.body--dark
   .day-view-current-time-indicator
     background-color: rgba(255, 255, 0, .85)
 

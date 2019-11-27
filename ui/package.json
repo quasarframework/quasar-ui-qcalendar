@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-ui-qcalendar",
-  "version": "1.0.28",
+  "version": "1.0.29",
   "author": "Jeff Galbraith <jeff@quasar.dev>",
   "description": "QCalendar - Embed Calendars and Schedules in your Quasar Apps",
   "license": "MIT",
@@ -57,8 +57,8 @@
     "open": "^7.0.0",
     "postcss": "^7.0.23",
     "postcss-rtl": "^1.5.0",
-    "quasar": "^1.4.5",
-    "quasar-json-api": "^0.0.8",
+    "quasar": "^1.5.0",
+    "quasar-json-api": "^0.0.10",
     "rimraf": "^3.0.0",
     "rollup": "^1.27.5",
     "@rollup/plugin-buble": "^0.20.0",
