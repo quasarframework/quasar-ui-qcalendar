@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-ui-qcalendar",
-  "version": "1.0.29",
+  "version": "1.1.0",
   "author": "Jeff Galbraith <jeff@quasar.dev>",
   "description": "QCalendar - Embed Calendars and Schedules in your Quasar Apps",
   "license": "MIT",
