@@ -24,6 +24,7 @@ import {
 import QCalendarMonthly from './QCalendarMonthly'
 import QCalendarDaily from './QCalendarDaily'
 import QCalendarScheduler from './QCalendarScheduler'
+import QCalendarAgendaDaily from './QCalendarAgendaDaily'
 
 /* @vue/component */
 export default {
@@ -65,43 +66,50 @@ export default {
           end = getEndOfMonth(around)
           break
         case 'week':
-          component = QCalendarDaily
+        case 'week-agenda':
+          component = this.view.endsWith('-agenda') ? QCalendarAgendaDaily : QCalendarDaily
           start = this.getStartOfWeek(around)
           end = this.getEndOfWeek(around)
           maxDays = this.weekdays.length
           break
         case 'day':
-          component = QCalendarDaily
+        case 'day-agenda':
+          component = this.view.endsWith('-agenda') ? QCalendarAgendaDaily : QCalendarDaily
           maxDays = 1
           end = relativeDays(copyTimestamp(end), nextDay, maxDays, this.weekdays)
           updateFormatted(end)
           break
         case '2day':
-          component = QCalendarDaily
+        case '2day-agenda':
+          component = this.view.endsWith('-agenda') ? QCalendarAgendaDaily : QCalendarDaily
           maxDays = 2
           end = relativeDays(copyTimestamp(end), nextDay, maxDays, this.weekdays)
           updateFormatted(end)
           break
         case '3day':
-          component = QCalendarDaily
+        case '3day-agenda':
+          component = this.view.endsWith('-agenda') ? QCalendarAgendaDaily : QCalendarDaily
           maxDays = 3
           end = relativeDays(copyTimestamp(end), nextDay, maxDays, this.weekdays)
           updateFormatted(end)
           break
         case '4day':
-          component = QCalendarDaily
+        case '4day-agenda':
+          component = this.view.endsWith('-agenda') ? QCalendarAgendaDaily : QCalendarDaily
           maxDays = 4
           end = relativeDays(copyTimestamp(end), nextDay, maxDays, this.weekdays)
           updateFormatted(end)
           break
         case '5day':
-          component = QCalendarDaily
+        case '5day-agenda':
+          component = this.view.endsWith('-agenda') ? QCalendarAgendaDaily : QCalendarDaily
           maxDays = 5
           end = relativeDays(copyTimestamp(end), nextDay, maxDays, this.weekdays)
           updateFormatted(end)
           break
         case '6day':
-          component = QCalendarDaily
+        case '6day-agenda':
+          component = this.view.endsWith('-agenda') ? QCalendarAgendaDaily : QCalendarDaily
           maxDays = 6
           end = relativeDays(copyTimestamp(end), nextDay, maxDays, this.weekdays)
           updateFormatted(end)
@@ -175,30 +183,37 @@ export default {
             mover(moved)
             break
           case 'week':
+          case 'week-agenda':
             // relativeDays(moved, mover, DAYS_IN_WEEK, this.weekdays)
             relativeDays(moved, mover, dayCount, this.weekdays)
             break
           case 'day':
+          case 'day-agenda':
             maxDays = 1
             relativeDays(moved, mover, maxDays, this.weekdays)
             break
           case '2day':
+          case '2day-agenda':
             maxDays = 2
             relativeDays(moved, mover, maxDays, this.weekdays)
             break
           case '3day':
+          case '3day-agenda':
             maxDays = 3
             relativeDays(moved, mover, maxDays, this.weekdays)
             break
           case '4day':
+          case '4day-agenda':
             maxDays = 4
             relativeDays(moved, mover, maxDays, this.weekdays)
             break
           case '5day':
+          case '5day-agenda':
             maxDays = 5
             relativeDays(moved, mover, maxDays, this.weekdays)
             break
           case '6day':
+          case '6day-agenda':
             maxDays = 6
             relativeDays(moved, mover, maxDays, this.weekdays)
             break

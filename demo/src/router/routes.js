@@ -38,6 +38,10 @@ const routes = [
           {
             path: 'scheduler-view',
             component: () => import('pages/SchedulerView.vue')
+          },
+          {
+            path: 'agenda-view',
+            component: () => import('pages/AgendaView.vue')
           }
           // {
           //   path: 'customization',

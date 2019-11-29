@@ -86,6 +86,15 @@
               </q-item-section>
             </q-item>
 
+            <q-item clickable to="/examples/agenda-view">
+              <q-item-section avatar>
+                <q-icon name="view_agenda" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>Agenda View</q-item-label>
+              </q-item-section>
+            </q-item>
+
             <!-- <q-item clickable to="/examples/customization">
               <q-item-section>
                 <q-item-label>Customization</q-item-label>

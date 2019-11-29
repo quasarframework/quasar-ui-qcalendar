@@ -1,5 +1,7 @@
 // Quasar
-import { QBtn } from 'quasar'
+import {
+  QBtn
+} from 'quasar'
 
 // Mixins
 import CalendarBase from '../mixins/calendar-base.js'

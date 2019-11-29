@@ -38,11 +38,19 @@
         "scheduler",
         "week-scheduler",
         "month-scheduler",
-        "custom-scheduler"
+        "custom-scheduler",
+        "day-agenda",
+        "2day-agenda",
+        "3day-agenda",
+        "4day-agenda",
+        "5day-agenda",
+        "6day-agenda",
+        "week-agenda"
       ],
       "examples": [
         "view=\"week\"",
-        "view=\"month\""
+        "view=\"month\"",
+        "view=\"agenda-week\""
       ]
     },
     "now": {
@@ -382,7 +390,14 @@
         "scheduler",
         "week-scheduler",
         "month-scheduler",
-        "custom-scheduler"
+        "custom-scheduler",
+        "day-agenda",
+        "2day-agenda",
+        "3day-agenda",
+        "4day-agenda",
+        "5day-agenda",
+        "6day-agenda",
+        "week-agenda"
       ],
       "examples": [
         "interval-height=\"60\"",
