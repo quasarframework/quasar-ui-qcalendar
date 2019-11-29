@@ -69,6 +69,12 @@ import SchedulerViewSlotResource from '../examples/SchedulerViewSlotResource'
 import DayViewCurrentTime from '../examples/DayViewCurrentTime'
 import WeekViewCurrentTime from '../examples/WeekViewCurrentTime'
 
+import AgendaViewBasic from '../examples/AgendaViewBasic'
+import AgendaViewWeekBasic from '../examples/AgendaViewWeekBasic'
+import AgendaViewWeekSlots from '../examples/AgendaViewWeekSlots'
+import AgendaViewWeekFirstDayMonday from '../examples/AgendaViewWeekFirstDayMonday'
+import AgendaViewWeekFiveDayWorkweek from '../examples/AgendaViewWeekFiveDayWorkweek'
+
 export default ({ Vue }) => {
   Vue.component('DayViewBasic', DayViewBasic)
   Vue.component('DayView3Day', DayView3Day)
@@ -122,4 +128,9 @@ export default ({ Vue }) => {
   Vue.component('SchedulerViewSlotResource', SchedulerViewSlotResource)
   Vue.component('DayViewCurrentTime', DayViewCurrentTime)
   Vue.component('WeekViewCurrentTime', WeekViewCurrentTime)
+  Vue.component('AgendaViewBasic', AgendaViewBasic)
+  Vue.component('AgendaViewWeekBasic', AgendaViewWeekBasic)
+  Vue.component('AgendaViewWeekSlots', AgendaViewWeekSlots)
+  Vue.component('AgendaViewWeekFirstDayMonday', AgendaViewWeekFirstDayMonday)
+  Vue.component('AgendaViewWeekFiveDayWorkweek', AgendaViewWeekFiveDayWorkweek)
 }
