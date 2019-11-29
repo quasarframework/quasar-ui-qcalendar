@@ -64,6 +64,9 @@
 .q-calendar-daily__day-interval--droppable
   border: $calendar-primary-color 2px dashed
 
+.q-calendar-daily__day--droppable
+  border: $calendar-primary-color 2px dashed
+
 .q-calendar-daily
   display: flex
   flex: 1
@@ -112,7 +115,7 @@
   &__head-day-label
     user-select: none
     border-radius: 50%
-    padding: 0.285em
+    // padding: 0.285em
     cursor: pointer
     left: 2px;
     bottom: 2px;
@@ -243,4 +246,7 @@
         border-top: none !important
 
   .q-calendar-daily__day-interval--droppable
+    border: $calendar-primary-color-dark 2px dashed
+
+  .q-calendar-daily__day--droppable
     border: $calendar-primary-color-dark 2px dashed
