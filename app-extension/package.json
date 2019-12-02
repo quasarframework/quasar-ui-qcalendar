@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-qcalendar",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A Quasar App Extension for @quasar/quasar-ui-qcalendar",
   "author": "Jeff Galbraith <jeff@quasar.dev>",
   "license": "MIT",
@@ -42,12 +42,12 @@
     "yarn": ">= 1.6.0"
   },
   "dependencies": {
-    "@quasar/quasar-ui-qcalendar": "^1.1.0"
+    "@quasar/quasar-ui-qcalendar": "^1.1.1"
   },
   "devDependencies": {
-    "@vue/eslint-config-standard": "^4.0.0",
+    "@vue/eslint-config-standard": "^5.0.0",
     "babel-eslint": "^10.0.3",
-    "eslint": "^6.7.1",
+    "eslint": "^6.7.2",
     "eslint-loader": "^3.0.2",
     "eslint-plugin-vue": "^6.0.1"
   }

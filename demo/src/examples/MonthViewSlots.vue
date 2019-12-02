@@ -97,7 +97,7 @@ export default {
         },
         {
           title: 'Vacation',
-          details: `Trails and hikes, going camping! Don't forget to bring bear spray!`,
+          details: 'Trails and hikes, going camping! Don\'t forget to bring bear spray!',
           date: '2019-04-29',
           bgcolor: 'purple',
           icon: 'fas fa-plane',
@@ -123,34 +123,34 @@ export default {
     },
 
     badgeStyles (event, type, timeStartPos, timeDurationHeight) {
-      let s = {}
+      const s = {}
       if (this.isCssColor(event.bgcolor)) {
         s['background-color'] = event.bgcolor
-        s['color'] = colors.luminosity(event.bgcolor) > 0.5 ? 'black' : 'white'
+        s.color = colors.luminosity(event.bgcolor) > 0.5 ? 'black' : 'white'
       }
       if (timeStartPos) {
-        s['top'] = timeStartPos(event.time) + 'px'
+        s.top = timeStartPos(event.time) + 'px'
       }
       if (timeDurationHeight) {
-        s['height'] = timeDurationHeight(event.duration) + 'px'
+        s.height = timeDurationHeight(event.duration) + 'px'
       }
       s['align-items'] = 'flex-start'
       return s
     },
 
     getEvents (dt) {
-      let events = []
+      const events = []
       for (let i = 0; i < this.events.length; ++i) {
         let added = false
         if (this.events[i].date === dt) {
           if (this.events[i].time) {
             if (events.length > 0) {
               // check for overlapping times
-              let startTime = new Date(this.events[i].date + ' ' + this.events[i].time)
-              let endTime = date.addToDate(startTime, { minutes: this.events[i].duration })
+              const startTime = new Date(this.events[i].date + ' ' + this.events[i].time)
+              const endTime = date.addToDate(startTime, { minutes: this.events[i].duration })
               for (let j = 0; j < events.length; ++j) {
-                let startTime2 = new Date(events[j].date + ' ' + events[j].time)
-                let endTime2 = date.addToDate(startTime2, { minutes: events[j].duration })
+                const startTime2 = new Date(events[j].date + ' ' + events[j].time)
+                const endTime2 = date.addToDate(startTime2, { minutes: events[j].duration })
                 if (date.isBetweenDates(startTime, startTime2, endTime2) || date.isBetweenDates(endTime, startTime2, endTime2)) {
                   events[j].side = 'left'
                   this.events[i].side = 'right'
@@ -167,8 +167,8 @@ export default {
           }
         } else if (this.events[i].days) {
           // check for overlapping dates
-          let startDate = new Date(this.events[i].date)
-          let endDate = date.addToDate(startDate, { days: this.events[i].days })
+          const startDate = new Date(this.events[i].date)
+          const endDate = date.addToDate(startDate, { days: this.events[i].days })
           if (date.isBetweenDates(dt, startDate, endDate)) {
             events.push(this.events[i])
             added = true

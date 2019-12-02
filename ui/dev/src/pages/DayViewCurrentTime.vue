@@ -6,7 +6,7 @@
     locale="en-us"
     style="height: 400px;"
   >
-    <template #day-container="{ days }">
+    <template #day-container="{ day }">
       <div class="day-view-current-time-indicator" :style="style" />
       <div class="day-view-current-time-line" :style="style" />
     </template>

@@ -27,10 +27,10 @@
         :weekdays="[1,2,3,4,5]"
         style="height: 600px;"
       >
-        <template #day-body="timestamp">
-          <template v-for="(agenda) in getAgenda(timestamp)">
+        <template #day-body="{ day }">
+          <template v-for="(agenda) in getAgenda(day)">
             <q-btn
-              :key="timestamp.date + agenda.time"
+              :key="day.date + agenda.time"
               :label="agenda.time"
               class="agenda-item ellipsis justify-center q-ma-sm"
             >

@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="HHh Lpr lFf">
+  <q-layout view="HHh LpR lFf">
 
     <q-header elevated>
       <q-resize-observer @resize="onTitlebarResized"></q-resize-observer>
@@ -100,7 +100,7 @@ import { version } from 'ui'
 export default {
   name: 'CalendarLayout',
   components: {
-    'playground': () => import('../components/Playground'),
+    playground: () => import('../components/Playground'),
     'essential-links': () => import('../components/EssentialLinks')
   },
   data () {
@@ -222,7 +222,7 @@ export default {
       this.$root.$emit('calendar:today', this.formatDate())
     },
     formatDate (date) {
-      let d = date !== void 0 ? new Date(date) : new Date(),
+      const d = date !== void 0 ? new Date(date) : new Date(),
         month = '' + (d.getMonth() + 1),
         day = '' + d.getDate(),
         year = d.getFullYear()
@@ -255,9 +255,9 @@ export default {
     options (date) {
       if (this.fiveDayWorkWeek) {
         // figure out if date is a weekend,
-        let parts = date.split('/')
+        const parts = date.split('/')
         // acount for months starting at 0
-        let time = new Date(parts[0], parts[1] - 1, parts[2])
+        const time = new Date(parts[0], parts[1] - 1, parts[2])
         return !!(time.getDay() % 6)
       }
       return true
