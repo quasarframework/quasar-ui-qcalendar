@@ -42,7 +42,7 @@ export default {
 
     __renderDay (h, day, dayIndex, idx) {
       const slot = this.$scopedSlots['day-body']
-      const scope = day
+      const scope = { ...day }
       const width = 100 / this.days.length
       let dragOver
 
