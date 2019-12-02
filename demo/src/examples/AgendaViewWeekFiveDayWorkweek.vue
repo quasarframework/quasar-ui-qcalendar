@@ -6,10 +6,10 @@
     locale="en-us"
     style="height: 400px;"
   >
-    <template #day-body="timestamp">
-      <template v-for="(agenda) in getAgenda(timestamp)">
+    <template #day-body="{ day }">
+      <template v-for="(agenda) in getAgenda(day)">
         <div
-          :key="timestamp.date + agenda.time"
+          :key="day.date + agenda.time"
           :label="agenda.time"
           class="justify-start q-ma-sm shadow-5 bg-grey-6"
         >

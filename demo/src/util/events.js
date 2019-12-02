@@ -67,7 +67,7 @@ export default [
   },
   {
     title: 'Vacation',
-    details: `Trails and hikes, going camping! Don't forget to bring bear spray!`,
+    details: 'Trails and hikes, going camping! Don\'t forget to bring bear spray!',
     date: '2019-04-29',
     bgcolor: 'purple',
     icon: 'fas fa-plane',

@@ -524,7 +524,7 @@ export default {
       }
     },
     containerStyle () {
-      let styles = {}
+      const styles = {}
       if (this.calendarView !== 'month') {
         styles.height = `calc(100vh - ${this.titlebarHeight}px)`
       }
@@ -641,18 +641,18 @@ export default {
       // console.log('onMoved:', moved)
     },
     getEvents (dt) {
-      let events = []
+      const events = []
       for (let i = 0; i < this.events.length; ++i) {
         let added = false
         if (this.events[i].date === dt) {
           if (this.events[i].time) {
             if (events.length > 0) {
               // check for overlapping times
-              let startTime = new Date(this.events[i].date + ' ' + this.events[i].time).getTime()
-              let endTime = date.addToDate(startTime, { minutes: this.events[i].duration }).getTime()
+              const startTime = new Date(this.events[i].date + ' ' + this.events[i].time).getTime()
+              const endTime = date.addToDate(startTime, { minutes: this.events[i].duration }).getTime()
               for (let j = 0; j < events.length; ++j) {
-                let startTime2 = new Date(events[j].date + ' ' + events[j].time).getTime()
-                let endTime2 = date.addToDate(startTime2, { minutes: events[j].duration }).getTime()
+                const startTime2 = new Date(events[j].date + ' ' + events[j].time).getTime()
+                const endTime2 = date.addToDate(startTime2, { minutes: events[j].duration }).getTime()
                 if ((startTime >= startTime2 && startTime < endTime2) || (startTime2 >= startTime && startTime2 < endTime)) {
                   events[j].side = 'left'
                   this.events[i].side = 'right'
@@ -669,8 +669,8 @@ export default {
           }
         } else if (this.events[i].days) {
           // check for overlapping dates
-          let startDate = new Date(this.events[i].date)
-          let endDate = date.addToDate(startDate, { days: this.events[i].days })
+          const startDate = new Date(this.events[i].date)
+          const endDate = date.addToDate(startDate, { days: this.events[i].days })
           if (date.isBetweenDates(dt, startDate, endDate)) {
             events.push(this.events[i])
             added = true
@@ -741,8 +741,8 @@ export default {
       return endTime
     },
     getEventDate (event) {
-      let parts = event.date.split('-')
-      let date = new Date(parts[0], parts[1] - 1, parts[2])
+      const parts = event.date.split('-')
+      const date = new Date(parts[0], parts[1] - 1, parts[2])
       return this.dateFormatter.format(date)
     },
     badgeClasses (event, type) {
@@ -756,16 +756,16 @@ export default {
       }
     },
     badgeStyles (event, type, timeStartPos, timeDurationHeight) {
-      let s = {}
+      const s = {}
       if (isCssColor(event.bgcolor)) {
         s['background-color'] = event.bgcolor
-        s['color'] = colors.luminosity(event.bgcolor) > 0.5 ? 'black' : 'white'
+        s.color = colors.luminosity(event.bgcolor) > 0.5 ? 'black' : 'white'
       }
       if (timeStartPos) {
-        s['top'] = timeStartPos(event.time) + 'px'
+        s.top = timeStartPos(event.time) + 'px'
       }
       if (timeDurationHeight) {
-        s['height'] = timeDurationHeight(event.duration) + 'px'
+        s.height = timeDurationHeight(event.duration) + 'px'
       }
       s['align-items'] = 'flex-start'
       return s
@@ -777,10 +777,10 @@ export default {
       }
     },
     displayStyles (event) {
-      let s = {}
+      const s = {}
       if (isCssColor(event.bgcolor)) {
         s['background-color'] = event.bgcolor
-        s['color'] = colors.luminosity(event.bgcolor) > 0.5 ? 'black' : 'white'
+        s.color = colors.luminosity(event.bgcolor) > 0.5 ? 'black' : 'white'
       }
       return s
     },
@@ -807,8 +807,8 @@ export default {
       let timestamp
       if (this.contextDay.hasTime === true) {
         timestamp = this.getTimestamp(this.adjustTimestamp(this.contextDay))
-        let startTime = new Date(timestamp)
-        let endTime = date.addToDate(startTime, { hours: 1 })
+        const startTime = new Date(timestamp)
+        const endTime = date.addToDate(startTime, { hours: 1 })
         this.eventForm.dateTimeEnd = this.formatDate(endTime) + ' ' + this.formatTime(endTime) // endTime.toString()
       } else {
         timestamp = this.contextDay.date + ' 00:00'
@@ -824,8 +824,8 @@ export default {
       let timestamp
       if (event.time) {
         timestamp = event.date + ' ' + event.time
-        let startTime = new Date(timestamp)
-        let endTime = date.addToDate(startTime, { minutes: event.duration })
+        const startTime = new Date(timestamp)
+        const endTime = date.addToDate(startTime, { minutes: event.duration })
         this.eventForm.dateTimeStart = this.formatDate(startTime) + ' ' + this.formatTime(startTime) // endTime.toString()
         this.eventForm.dateTimeEnd = this.formatDate(endTime) + ' ' + this.formatTime(endTime) // endTime.toString()
       } else {
@@ -840,7 +840,7 @@ export default {
       this.addEvent = true // show dialog
     },
     deleteEvent (event) {
-      let index = this.findEventIndex(event)
+      const index = this.findEventIndex(event)
       if (index >= 0) {
         this.events.splice(index, 1)
       }
@@ -855,7 +855,7 @@ export default {
       }
     },
     formatDate (date) {
-      let d = date !== void 0 ? new Date(date) : new Date(),
+      const d = date !== void 0 ? new Date(date) : new Date(),
         month = '' + (d.getMonth() + 1),
         day = '' + d.getDate(),
         year = d.getFullYear()
@@ -863,16 +863,16 @@ export default {
       return [year, padTime(month), padTime(day)].join('-')
     },
     formatTime (date) {
-      let d = date !== void 0 ? new Date(date) : new Date(),
+      const d = date !== void 0 ? new Date(date) : new Date(),
         hours = '' + d.getHours(),
         minutes = '' + d.getMinutes()
 
       return [padTime(hours), padTime(minutes)].join(':')
     },
     getDuration (dateTimeStart, dateTimeEnd, unit) {
-      let start = new Date(dateTimeStart)
-      let end = new Date(dateTimeEnd)
-      let diff = date.getDateDiff(end, start, unit)
+      const start = new Date(dateTimeStart)
+      const end = new Date(dateTimeEnd)
+      const diff = date.getDateDiff(end, start, unit)
       return diff
     },
     convertDurationTime (n) {
@@ -895,12 +895,12 @@ export default {
     },
 
     saveEvent () {
-      let self = this
+      const self = this
       this.$refs.event.validate().then((success) => {
         if (success) {
           // close the dialog
           self.addEvent = false
-          let form = { ...self.eventForm }
+          const form = { ...self.eventForm }
           let update = false
           if (self.contextDay.bgcolor) {
             // an update
@@ -908,7 +908,7 @@ export default {
           } else {
             // an add
           }
-          let data = {
+          const data = {
             title: form.title,
             details: form.details,
             icon: form.icon,
@@ -921,7 +921,7 @@ export default {
             data.duration = self.getDuration(form.dateTimeStart, form.dateTimeEnd, 'minutes')
           }
           if (update === true) {
-            let index = self.findEventIndex(self.contextDay)
+            const index = self.findEventIndex(self.contextDay)
             if (index >= 0) {
               self.events.splice(index, 1, { ...data })
             }
@@ -936,7 +936,7 @@ export default {
     },
     showOffset (days) {
       if (days.length === 0) return
-      let val = padTime(new Date(this.getTimestamp(days[0])).getTimezoneOffset() / 60)
+      const val = padTime(new Date(this.getTimestamp(days[0])).getTimezoneOffset() / 60)
       if (isNaN(val)) return ''
       return 'GMT-' + val
     },
