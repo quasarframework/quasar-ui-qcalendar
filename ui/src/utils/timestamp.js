@@ -236,7 +236,7 @@ export function updateDisabled (timestamp, disabledDays) {
     return
   }
   const t = getDayIdentifier(timestamp)
-  for (let day in disabledDays) {
+  for (const day in disabledDays) {
     const d = getDayIdentifier(parseTimestamp(disabledDays[day] + ' 00:00'))
     if (d === t) {
       timestamp.disabled = true

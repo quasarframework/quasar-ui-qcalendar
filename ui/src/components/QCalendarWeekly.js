@@ -78,11 +78,11 @@ export default {
     styles () {
       if (this.dayHeight > 0) {
         const height = convertToUnit(this.dayHeight)
-        let style = {
+        const style = {
           height: height
         }
         if (this.dayPadding !== void 0) {
-          style['padding'] = this.dayPadding
+          style.padding = this.dayPadding
         }
         return style
       }
@@ -190,8 +190,8 @@ export default {
     __renderWorkWeekGutter (h, week) {
       const slot = this.$scopedSlots.workweek
       // adjust day to account for Sunday/Monday start of week calendars
-      let day = week.length > 2 ? week[2] : week[0]
-      let { timestamp } = this.isCurrentWeek(week)
+      const day = week.length > 2 ? week[2] : week[0]
+      const { timestamp } = this.isCurrentWeek(week)
       const colorCurrent = timestamp && timestamp.current === true ? this.color : void 0
       const height = convertToUnit(this.dayHeight)
       let colors = new Map(), color, backgroundColor

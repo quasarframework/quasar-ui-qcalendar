@@ -237,7 +237,7 @@ export default {
 
     __renderColumnHeaderBefore (h, day, idx) {
       const slot = this.$scopedSlots['column-header-before']
-      let scope = { ...day }
+      const scope = { ...day }
       scope.index = idx
       return h('div', {
         staticClass: 'q-calendar-daily__column-header--before'
@@ -248,7 +248,7 @@ export default {
 
     __renderColumnHeaderAfter (h, day, idx) {
       const slot = this.$scopedSlots['column-header-after']
-      let scope = { ...day }
+      const scope = { ...day }
       scope.index = idx
       return h('div', {
         staticClass: 'q-calendar-daily__column-header--after'

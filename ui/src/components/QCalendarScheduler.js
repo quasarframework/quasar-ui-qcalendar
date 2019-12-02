@@ -216,7 +216,7 @@ export default {
     __renderHeadDayBtn (h, day, idx) {
       const colorCurrent = day.current === true ? this.color : void 0
 
-      let scope = { day, idx }
+      const scope = { day, idx }
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
       if (this.enableTheme === true) {
@@ -256,7 +256,7 @@ export default {
 
     __renderColumnHeaderBefore (h, day, idx) {
       const slot = this.$scopedSlots['scheduler-column-header-before']
-      let scope = { ...day }
+      const scope = { ...day }
       scope.index = idx
       return h('div', {
         staticClass: 'q-calendar-scheduler__column-header--before'
@@ -267,7 +267,7 @@ export default {
 
     __renderColumnHeaderAfter (h, day, idx) {
       const slot = this.$scopedSlots['scheduler-column-header-after']
-      let scope = { ...day }
+      const scope = { ...day }
       scope.index = idx
       return h('div', {
         staticClass: 'q-calendar-scheduler__column-header--after'

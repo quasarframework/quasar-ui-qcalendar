@@ -302,7 +302,7 @@ export default {
       on: {
         ...this.$listeners,
         'click:date': (day) => {
-          if (this.$listeners['input']) {
+          if (this.$listeners.input !== void 0) {
             if (day.date !== void 0) {
               this.$emit('input', day.date)
             } else if (day.day !== void 0 && day.day.date !== void 0) {
