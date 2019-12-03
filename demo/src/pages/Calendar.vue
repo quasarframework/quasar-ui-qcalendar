@@ -1019,19 +1019,19 @@ export default {
 }
 </script>
 
-<style lang="stylus">
+<style lang="sass">
   // calendar overrides
   .q-calendar-daily__day-interval:hover
-    background-color rgba(0,0,255,.1)
+    background-color: rgba(0,0,255,.1)
 
   .q-calendar-weekly__workweek:hover
-    background-color rgba(0,0,255,.1)
+    background-color: rgba(0,0,255,.1)
 
   .q-calendar-weekly__day:hover
-    background-color rgba(0,0,255,.1)
+    background-color: rgba(0,0,255,.1)
 
   .q-calendar-weekly__head-weekday:hover
-    background-color rgba(0,0,255,.1)
+    background-color: rgba(0,0,255,.1)
 
   // this page
   .calendar-container
