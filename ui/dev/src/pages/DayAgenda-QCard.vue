@@ -27,7 +27,7 @@
         :weekdays="[1,2,3,4,5]"
         style="height: 400px;"
       >
-        <template #day-body="{ day }">
+        <template #day-body="day">
           <template v-for="(agenda) in getAgenda(day)">
             <div
               :key="day.date + agenda.time"
@@ -196,8 +196,8 @@ export default {
       this.$refs.calendar.prev()
     },
 
-    getAgenda (timestamp) {
-      return this.agenda[parseInt(timestamp.weekday, 10)]
+    getAgenda (day) {
+      return this.agenda[parseInt(day.weekday, 10)]
     }
   }
 }
