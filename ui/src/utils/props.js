@@ -109,7 +109,7 @@ export default {
     showDayOfYearLabel: Boolean,
     selectedStartEndDates: {
       type: Array,
-      default: [],
+      default: () => [],
       validator: v => v.length <= 2
     }
   },
