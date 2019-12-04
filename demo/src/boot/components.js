@@ -58,6 +58,8 @@ import DayViewColumnCount from '../examples/DayViewColumnCount'
 import DayViewColumnHeaderCount from '../examples/DayViewColumnHeaderCount'
 import DayViewColumnHeaderCountPaging from '../examples/DayViewColumnHeaderCountPaging'
 
+import MonthViewSelection from '../examples/MonthViewSelection'
+
 import DayViewSlots from '../examples/DayViewSlots'
 import WeekViewSlots from '../examples/WeekViewSlots'
 import MonthViewSlots from '../examples/MonthViewSlots'
@@ -119,6 +121,7 @@ export default ({ Vue }) => {
   Vue.component('DayViewColumnCount', DayViewColumnCount)
   Vue.component('DayViewColumnHeaderCount', DayViewColumnHeaderCount)
   Vue.component('DayViewColumnHeaderCountPaging', DayViewColumnHeaderCountPaging)
+  Vue.component('MonthViewSelection', MonthViewSelection)
   Vue.component('DayViewSlots', DayViewSlots)
   Vue.component('WeekViewSlots', WeekViewSlots)
   Vue.component('MonthViewSlots', MonthViewSlots)
