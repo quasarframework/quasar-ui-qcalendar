@@ -1,7 +1,7 @@
 QCalendar
 ===
 
-**QCalendar** is a powerful calendar component that plugs right into your Quasar application. It allows for **day** (1-7 days for a week), **monthly** and **scheduler** views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.
+**QCalendar** is a powerful calendar component that plugs right into your Quasar application. It is a powerful calendar that plugs right into your Quasar application and allows for viewing of **day** (1-7 days for a week), **monthly**, **scheduler** and **agenda** views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.
 
 QCalendar is a less-opinionated calendar component, as it does not keep track of things like events and reminders. This is in the hands of the developer, but QCalendar makes it easy via accessible events, slots and methods.
 
