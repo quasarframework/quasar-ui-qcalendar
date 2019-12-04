@@ -752,6 +752,18 @@
       "examples": [
         ":resource-style=\"resourceStyle\""
       ]
+    },
+    "selected-start-end-dates": {
+      "type": "Array",
+      "category": "behavior",
+      "addedIn": "v1.2",
+      "desc": "An array of two dates (YYYY-mm-dd) for selection purposes",
+      "applicable": [
+        "month"
+      ],
+      "examples": [
+        ":selected-start-end-dates=\"getStartEndDates\""
+      ]
     }
   },
   "events": {

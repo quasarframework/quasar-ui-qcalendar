@@ -56,6 +56,17 @@ The example below is setting the `day-height` to `100`, the default is `0`, whic
     <example-title title="Swipe Navigation" />
     <example-card title="Month View - Swipe" name="MonthViewSwipe" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSwipe.vue').default)" />
 
+    <example-title title="Selection" />
+    <example-card title="Multi-Day Selection" name="MonthViewSelection" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSelection.vue').default)">
+      <q-markdown>
+The example below shows how to use the QCalendar to create a multi-day selector. The critical aspect of this is the `selected-start-end-dates` property. This takes an array of two dates (the first should be less or equal to the last). This property really doesn't do much, except to keep the calendar reactive, so that the `day-style` property can be used to style the selected days.
+
+For the example below, click a day, and while holding the mouse down, move to a different day. Keep in mind, this is just one way of handling multi-day selection. if you needed swipe navigation on a mobile, you could modify the code to have independent click on start and end days.
+
+Keep in mind that the functionality below won't work with swipe actions.
+      </q-markdown>
+    </example-card>
+
     <example-title title="Working with Slots" />
     <q-markdown>
 For slots that return `day` or `timestamp`, it looks like this:
@@ -145,6 +156,9 @@ export default {
 
     this.addToToc('Swipe Navigation')
     this.addToToc('Month View - Swipe', 2)
+
+    this.addToToc('Selection')
+    this.addToToc('Month View - Multi-Day Selection', 2)
 
     this.addToToc('Working with Slots')
     this.addToToc('Month View - Slots', 2)
