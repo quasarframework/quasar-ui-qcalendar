@@ -106,7 +106,12 @@ export default {
       type: Boolean,
       default: true
     },
-    showDayOfYearLabel: Boolean
+    showDayOfYearLabel: Boolean,
+    selectedStartEndDates: {
+      type: Array,
+      default: [],
+      validator: v => v.length <= 2
+    }
   },
   scheduler: {
     resources: Array,
