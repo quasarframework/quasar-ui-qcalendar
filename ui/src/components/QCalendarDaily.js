@@ -96,9 +96,10 @@ export default {
     },
 
     __renderHeadDays (h) {
-      if (this.days.length === 1 && this.columnCount && parseInt(this.columnCount) > 1) {
-        return [...Array(parseInt(this.columnCount))]
-          .map((_, i) => i + parseInt(this.columnIndexStart))
+      if (this.days.length === 1 && this.columnCount !== void 0 && parseInt(this.columnCount, 10) > 0) {
+        // return [...new Array(parseInt(this.columnCount, 10))]
+        return Array.apply(null, new Array(parseInt(this.columnCount, 10)))
+          .map((_, i) => i + parseInt(this.columnIndexStart, 10))
           .map((idx) => this.__renderHeadDay(h, this.days[0], idx))
       } else {
         return this.days.map((day) => this.__renderHeadDay(h, day))
@@ -302,9 +303,9 @@ export default {
     },
 
     __renderDays (h) {
-      if (this.days.length === 1 && this.columnCount && parseInt(this.columnCount) > 1) {
-        return [...Array(parseInt(this.columnCount))]
-          .map((_, i) => i + parseInt(this.columnIndexStart))
+      if (this.days.length === 1 && this.columnCount && parseInt(this.columnCount, 10) > 0) {
+        return Array.apply(null, new Array(parseInt(this.columnCount, 10)))
+          .map((_, i) => i + parseInt(this.columnIndexStart, 10))
           .map((i) => this.__renderDay(h, this.days[0], 0, i))
       } else {
         return this.days.map((day, index) => this.__renderDay(h, day, index))
