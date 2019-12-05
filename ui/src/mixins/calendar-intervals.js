@@ -25,13 +25,13 @@ export default {
 
   computed: {
     parsedIntervalStart () {
-      return parseInt(this.intervalStart)
+      return parseInt(this.intervalStart, 10)
     },
     parsedIntervalMinutes () {
-      return parseInt(this.intervalMinutes)
+      return parseInt(this.intervalMinutes, 10)
     },
     parsedIntervalCount () {
-      return parseInt(this.intervalCount)
+      return parseInt(this.intervalCount, 10)
     },
     parsedIntervalHeight () {
       return parseFloat(this.intervalHeight)

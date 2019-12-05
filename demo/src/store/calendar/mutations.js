@@ -8,7 +8,7 @@ export const locale = (state, locale) => {
   state.locale = locale
 }
 export const maxDays = (state, days) => {
-  state.maxDays = parseInt(days)
+  state.maxDays = parseInt(days, 10)
 }
 export const fiveDayWorkWeek = (state, b) => {
   state.fiveDayWorkWeek = b

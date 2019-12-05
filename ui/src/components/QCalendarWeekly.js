@@ -30,7 +30,7 @@ export default {
     },
 
     parsedMinWeeks () {
-      return parseInt(this.minWeeks)
+      return parseInt(this.minWeeks, 10)
     },
 
     days () {

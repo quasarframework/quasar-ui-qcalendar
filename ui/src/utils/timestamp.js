@@ -98,7 +98,7 @@ export function parseTime (input) {
     if (!parts) {
       return false
     }
-    return parseInt(parts[1]) * 60 + parseInt(parts[3] || 0)
+    return parseInt(parts[1], 10) * 60 + parseInt(parts[3] || 0, 10)
   } else if (typeof input === 'object') {
     // when an object is given, it must have hour and minute
     if (typeof input.hour !== 'number' || typeof input.minute !== 'number') {
@@ -124,11 +124,11 @@ export function parsed (input) {
   return {
     date: input,
     time: '',
-    year: parseInt(parts[1]),
-    month: parseInt(parts[2]),
-    day: parseInt(parts[4]) || 1,
-    hour: parseInt(parts[6]) || 0,
-    minute: parseInt(parts[8]) || 0,
+    year: parseInt(parts[1], 10),
+    month: parseInt(parts[2], 10),
+    day: parseInt(parts[4], 10) || 1,
+    hour: parseInt(parts[6], 10) || 0,
+    minute: parseInt(parts[8], 10) || 0,
     weekday: 0,
     doy: 0,
     workweek: 0,
@@ -475,5 +475,5 @@ export function createNativeLocaleFormatter (locale, getOptions) {
 }
 
 export function validateNumber (input) {
-  return isFinite(parseInt(input))
+  return isFinite(parseInt(input, 10))
 }
