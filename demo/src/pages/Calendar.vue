@@ -299,26 +299,29 @@
         dayPadding="35px 2px"
       >
         <template #day="{ date }">
-          <template v-for="(event, index) in getEvents(date)">
-            <q-badge
-              :key="index"
-              style="width: 100%; cursor: pointer; height: 14px; max-height: 14px"
-              class="ellipsis"
-              :class="badgeClasses(event, 'day')"
-              :style="badgeStyles(event, 'day')"
-              @click.stop.prevent="showEvent(event)"
-              :draggable="true"
-              @dragstart.native="(e) => onDragStart(e, event)"
-              @dragend.native="(e) => onDragEnd(e, event)"
-              @dragenter.native="(e) => onDragEnter(e, event)"
-              @touchmove.native="(e) => {}"
-            >
-              <q-icon v-if="event.icon" :name="event.icon" class="q-mr-xs"></q-icon><span class="ellipsis">{{ event.title }}</span>
-            </q-badge>
+          <template v-if="calendarView.indexOf('agenda') < 0">
+            <template v-for="(event, index) in getEvents(date)">
+              <q-badge
+                :key="index"
+                style="width: 100%; cursor: pointer; height: 14px; max-height: 14px"
+                class="ellipsis"
+                :class="badgeClasses(event, 'day')"
+                :style="badgeStyles(event, 'day')"
+                @click.stop.prevent="showEvent(event)"
+                :draggable="true"
+                @dragstart.native="(e) => onDragStart(e, event)"
+                @dragend.native="(e) => onDragEnd(e, event)"
+                @dragenter.native="(e) => onDragEnter(e, event)"
+                @touchmove.native="(e) => {}"
+              >
+                <q-icon v-if="event.icon" :name="event.icon" class="q-mr-xs"></q-icon><span class="ellipsis">{{ event.title }}</span>
+              </q-badge>
+            </template>
           </template>
         </template>
+
         <template #day-header="{ date }">
-          <div class="row justify-center">
+          <div v-if="calendarView.indexOf('agenda') < 0" class="row justify-center">
             <template v-for="(event, index) in eventsMap[date]">
               <q-badge
                 v-if="!event.time"
@@ -347,30 +350,57 @@
             </template>
           </div>
         </template>
-        <template #day-body="{ date, timeStartPos, timeDurationHeight }">
-          <template v-for="(event, index) in getEvents(date)">
-            <q-badge
-              v-if="event.time"
-              :key="index"
-              class="my-event justify-center ellipsis"
-              :class="badgeClasses(event, 'body')"
-              :style="badgeStyles(event, 'body', timeStartPos, timeDurationHeight)"
-              @click.stop.prevent="showEvent(event)"
-              :draggable="true"
-              @dragstart.native="(e) => onDragStart(e, event)"
-              @dragend.native="(e) => onDragEnd(e, event)"
-              @dragenter.native="(e) => onDragEnter(e, event)"
-              @touchmove.native="(e) => {}"
-            >
-              <q-icon v-if="event.icon" :name="event.icon" class="q-mr-xs"></q-icon><span class="ellipsis">{{ event.title }}</span>
-            </q-badge>
+
+        <template #day-body="data">
+          <template v-if="calendarView.indexOf('agenda') < 0">
+            <template v-for="(event, index) in getEvents(data.date)">
+              <q-badge
+                v-if="event.time"
+                :key="index"
+                class="my-event justify-center ellipsis"
+                :class="badgeClasses(event, 'body')"
+                :style="badgeStyles(event, 'body', data.timeStartPos, data.timeDurationHeight)"
+                @click.stop.prevent="showEvent(event)"
+                :draggable="true"
+                @dragstart.native="(e) => onDragStart(e, event)"
+                @dragend.native="(e) => onDragEnd(e, event)"
+                @dragenter.native="(e) => onDragEnter(e, event)"
+                @touchmove.native="(e) => {}"
+              >
+                <q-icon v-if="event.icon" :name="event.icon" class="q-mr-xs"></q-icon><span class="ellipsis">{{ event.title }}</span>
+              </q-badge>
+            </template>
+          </template>
+          <template v-else>
+            <template v-for="(agenda) in getAgenda(data)">
+              <div
+                :key="data.date + agenda.time"
+                :label="agenda.time"
+                class="justify-start q-ma-sm shadow-5 bg-grey-6"
+                style="overflow: hidden;"
+              >
+                <div v-if="agenda.avatar" class="row justify-center" style="margin-top: 30px; width: 100%;">
+                  <q-avatar style="margin-top: -25px; margin-bottom: 10px; font-size: 60px; max-height: 50px;">
+                    <img :src="agenda.avatar" style="border: #9e9e9e solid 5px;">
+                  </q-avatar>
+                </div>
+                <div class="col-12 q-px-sm">
+                  <strong>{{ agenda.time }}</strong>
+                </div>
+                <div v-if="agenda.desc" class="col-12 q-px-sm" style="font-size: 10px;">
+                  {{ agenda.desc }}
+                </div>
+              </div>
+            </template>
           </template>
         </template>
+
         <template #intervals-header="days">
           <div class="fit flex justify-center items-end">
             <span class="q-calendar-daily__interval-text">{{ showOffset(days) }}</span>
           </div>
         </template>
+
       </q-calendar>
     </div>
   </q-page>
@@ -454,6 +484,122 @@ export default {
           label: 'Room-2'
         }
       ],
+      agenda: {
+        // value represents day of the week
+        1: [
+          {
+            time: '08:00',
+            avatar: 'https://cdn.quasar.dev/img/boy-avatar.png',
+            desc: 'Meeting with CEO'
+          },
+          {
+            time: '08:30',
+            avatar: 'https://cdn.quasar.dev/img/avatar.png',
+            desc: 'Meeting with HR'
+          },
+          {
+            time: '10:00',
+            avatar: 'https://cdn.quasar.dev/img/avatar1.jpg',
+            desc: 'Meeting with Karen'
+          }
+        ],
+        2: [
+          {
+            time: '11:30',
+            avatar: 'https://cdn.quasar.dev/img/avatar2.jpg',
+            desc: 'Meeting with Alisha'
+          },
+          {
+            time: '17:00',
+            avatar: 'https://cdn.quasar.dev/img/avatar3.jpg',
+            desc: 'Meeting with Sarah'
+          }
+        ],
+        3: [
+          {
+            time: '08:00',
+            desc: 'Stand-up SCRUM',
+            avatar: 'https://cdn.quasar.dev/img/material.png'
+          },
+          {
+            time: '09:00',
+            avatar: 'https://cdn.quasar.dev/img/boy-avatar.png'
+          },
+          {
+            time: '10:00',
+            desc: 'Sprint planning',
+            avatar: 'https://cdn.quasar.dev/img/material.png'
+          },
+          {
+            time: '13:00',
+            avatar: 'https://cdn.quasar.dev/img/avatar1.jpg'
+          }
+        ],
+        4: [
+          {
+            time: '09:00',
+            avatar: 'https://cdn.quasar.dev/img/avatar3.jpg'
+          },
+          {
+            time: '10:00',
+            avatar: 'https://cdn.quasar.dev/img/avatar2.jpg'
+          },
+          {
+            time: '13:00',
+            avatar: 'https://cdn.quasar.dev/img/material.png'
+          }
+        ],
+        5: [
+          {
+            time: '08:00',
+            avatar: 'https://cdn.quasar.dev/img/boy-avatar.png'
+          },
+          {
+            time: '09:00',
+            avatar: 'https://cdn.quasar.dev/img/avatar2.jpg'
+          },
+          {
+            time: '09:30',
+            avatar: 'https://cdn.quasar.dev/img/avatar4.jpg'
+          },
+          {
+            time: '10:00',
+            avatar: 'https://cdn.quasar.dev/img/avatar5.jpg'
+          },
+          {
+            time: '11:30',
+            avatar: 'https://cdn.quasar.dev/img/material.png'
+          },
+          {
+            time: '13:00',
+            avatar: 'https://cdn.quasar.dev/img/avatar6.jpg'
+          },
+          {
+            time: '13:30',
+            avatar: 'https://cdn.quasar.dev/img/avatar3.jpg'
+          },
+          {
+            time: '14:00',
+            avatar: 'https://cdn.quasar.dev/img/linux-avatar.png'
+          },
+          {
+            time: '14:30',
+            avatar: 'https://cdn.quasar.dev/img/avatar.png'
+          },
+          {
+            time: '15:00',
+            avatar: 'https://cdn.quasar.dev/img/boy-avatar.png'
+          },
+          {
+            time: '15:30',
+            avatar: 'https://cdn.quasar.dev/img/avatar2.jpg'
+          },
+          {
+            time: '16:00',
+            avatar: 'https://cdn.quasar.dev/img/avatar6.jpg'
+          }
+        ]
+      },
       // Icon picker
       showIconPicker: false,
       pagination: {
@@ -731,8 +877,10 @@ export default {
       this.$set(this, 'eventForm', { ...formDefault })
     },
     showEvent (event) {
-      this.event = event
-      this.displayEvent = true
+      if (this.calendarView.indexOf('agenda') < 0) {
+        this.event = event
+        this.displayEvent = true
+      }
     },
     getEndTime (event) {
       let endTime = new Date(event.date + ' ' + event.time + ':00')
@@ -785,10 +933,14 @@ export default {
       return s
     },
     onDateChanged ({ day }) {
-      if (this.calendarView === 'week-scheduler' || this.calendarView === 'month-scheduler') {
-        this.calendarView = 'scheduler'
+      if (this.calendarView.indexOf('scheduler') > -1) {
+        this.calendarView = 'day-scheduler'
+        return
+      } else if (this.calendarView.indexOf('agenda') > -1) {
+        this.calendarView = 'day-agenda'
         return
       }
+
       // automatically change to the day selected
       this.calendarView = 'day'
     },
@@ -799,7 +951,7 @@ export default {
       // console.log('resource:day clicked:', resource)
     },
     addEventMenu (day, type) {
-      if (day.disabled === true || this.calendarView === 'scheduler' || this.calendarView === 'week-scheduler' || this.calendarView === 'month-scheduler') {
+      if (day.disabled === true || this.calendarView.indexOf('scheduler') > -1 || this.calendarView.indexOf('agenda') > -1) {
         return
       }
       this.resetForm()
@@ -1014,6 +1166,9 @@ export default {
       if (Platform.is.desktop) {
         this.ignoreNextSwipe = true
       }
+    },
+    getAgenda (day) {
+      return this.agenda[parseInt(day.weekday, 10)]
     }
   }
 }

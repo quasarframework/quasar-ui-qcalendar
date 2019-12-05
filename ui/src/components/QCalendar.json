@@ -25,32 +25,39 @@
         "All"
       ],
       "values": [
+        "month",
+        "week",
         "day",
         "2day",
         "3day",
         "4day",
         "5day",
         "6day",
-        "week",
-        "month",
-        "month-interval",
-        "custom-interval",
-        "scheduler",
-        "week-scheduler",
         "month-scheduler",
+        "week-scheduler",
+        "scheduler",
+        "day-scheduler",
+        "2day-scheduler",
+        "3day-scheduler",
+        "4day-scheduler",
+        "5day-scheduler",
+        "6day-scheduler",
         "custom-scheduler",
+        "month-agenda",
+        "week-agenda",
         "day-agenda",
         "2day-agenda",
         "3day-agenda",
         "4day-agenda",
         "5day-agenda",
         "6day-agenda",
-        "week-agenda"
+        "month-interval",
+        "custom-interval"
       ],
       "examples": [
         "view=\"week\"",
         "view=\"month\"",
-        "view=\"agenda-week\""
+        "view=\"week-agenda\""
       ]
     },
     "now": {
@@ -107,12 +114,12 @@
     "max-days": {
       "type": "String",
       "category": "model",
-      "desc": "The number of days to be displayed. Applicable only for custom-interval and scheduler views",
+      "desc": "The number of days to be displayed. Applicable only for custom-interval, scheduler and agenda views",
       "default": 7,
       "applicable": [
         "custom-interval",
         "scheduler",
-        "custom-scheduler"
+        "agenda"
       ],
       "examples": [
         "max-days=\"14\"",
@@ -295,10 +302,8 @@
         "week",
         "month-interval",
         "custom-interval",
-        "scheduler",
-        "week-scheduler",
-        "month-scheduler",
-        "custom-scheduler"
+        "all scheduler",
+        "all agenda"
       ]
     },
     "column-header-before": {
@@ -363,10 +368,7 @@
         "week",
         "month-interval",
         "custom-interval",
-        "scheduler",
-        "week-scheduler",
-        "month-scheduler",
-        "custom-scheduler"
+        "all scheduler"
       ]
     },
     "interval-height": {
@@ -390,14 +392,7 @@
         "scheduler",
         "week-scheduler",
         "month-scheduler",
-        "custom-scheduler",
-        "day-agenda",
-        "2day-agenda",
-        "3day-agenda",
-        "4day-agenda",
-        "5day-agenda",
-        "6day-agenda",
-        "week-agenda"
+        "custom-scheduler"
       ],
       "examples": [
         "interval-height=\"60\"",
@@ -433,10 +428,7 @@
         "week",
         "month-interval",
         "custom-interval",
-        "scheduler",
-        "week-scheduler",
-        "month-scheduler",
-        "custom-scheduler"
+        "all scheduler"
       ],
       "examples": [
         "interval-style=\"background-color: #c0c0c0\"",
@@ -461,10 +453,7 @@
         "week",
         "month-interval",
         "custom-interval",
-        "scheduler",
-        "week-scheduler",
-        "month-scheduler",
-        "custom-scheduler"
+        "all scheduler"
       ],
       "examples": [
         "interval-minutes=\"15\"",
@@ -489,10 +478,7 @@
         "week",
         "month-interval",
         "custom-interval",
-        "scheduler",
-        "week-scheduler",
-        "month-scheduler",
-        "custom-scheduler"
+        "all scheduler"
       ],
       "examples": [
         "interval-count=\"48\"",
@@ -517,10 +503,7 @@
         "week",
         "month-interval",
         "custom-interval",
-        "scheduler",
-        "week-scheduler",
-        "month-scheduler",
-        "custom-scheduler"
+        "all scheduler"
       ],
       "examples": [
         "interval-start=\"6\"",
@@ -541,10 +524,7 @@
         "week",
         "month-interval",
         "custom-interval",
-        "scheduler",
-        "week-scheduler",
-        "month-scheduler",
-        "custom-scheduler"
+        "all scheduler"
       ]
     },
     "day-height": {
@@ -756,7 +736,7 @@
     "selected-start-end-dates": {
       "type": "Array",
       "category": "behavior",
-      "addedIn": "v1.2",
+      "addedIn": "v1.2.0",
       "desc": "An array of two dates (YYYY-mm-dd) for selection purposes",
       "applicable": [
         "month"
@@ -2080,7 +2060,7 @@
       "scope": {
         "days": {
           "type": "Array",
-          "desc": "An array of timestamp objects that are to be displayed in the container. This slot does not replace the container, but allow you to add to it. Example: use css 'position: absolute` to create a 'current time' bar.",
+          "desc": "An array of timestamp objects that are to be displayed in the container. This slot does not replace the container, but instead, allows you to add to it. Example: use css 'position: absolute` to create a 'current time' bar.",
           "__exemption": [ "examples" ]
         }
       }
