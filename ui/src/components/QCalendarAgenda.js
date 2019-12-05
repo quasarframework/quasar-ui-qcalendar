@@ -2,7 +2,7 @@
 import QCalendarDaily from './QCalendarDaily.js'
 
 export default {
-  name: 'QCalendarAgendaDaily',
+  name: 'QCalendarAgenda',
 
   mixins: [
     QCalendarDaily

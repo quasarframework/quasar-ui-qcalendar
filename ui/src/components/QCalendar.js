@@ -24,7 +24,7 @@ import {
 import QCalendarMonthly from './QCalendarMonthly'
 import QCalendarDaily from './QCalendarDaily'
 import QCalendarScheduler from './QCalendarScheduler'
-import QCalendarAgendaDaily from './QCalendarAgendaDaily'
+import QCalendarAgenda from './QCalendarAgenda'
 
 /* @vue/component */
 export default {

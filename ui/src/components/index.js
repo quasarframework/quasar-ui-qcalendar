@@ -3,9 +3,9 @@ import QCalendarDaily from './QCalendarDaily'
 import QCalendarWeekly from './QCalendarWeekly'
 import QCalendarMonthly from './QCalendarMonthly'
 import QCalendarScheduler from './QCalendarScheduler'
-import QCalendarAgendaDaily from './QCalendarAgendaDaily'
+import QCalendarAgenda from './QCalendarAgenda'
 
-export { QCalendar, QCalendarDaily, QCalendarWeekly, QCalendarMonthly, QCalendarScheduler, QCalendarAgendaDaily }
+export { QCalendar, QCalendarDaily, QCalendarWeekly, QCalendarMonthly, QCalendarScheduler, QCalendarAgenda }
 
 export default {
   QCalendar,
@@ -13,5 +13,5 @@ export default {
   QCalendarWeekly,
   QCalendarMonthly,
   QCalendarScheduler,
-  QCalendarAgendaDaily
+  QCalendarAgenda
 }
