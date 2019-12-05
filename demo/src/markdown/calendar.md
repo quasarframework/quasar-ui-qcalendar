@@ -167,7 +167,7 @@ In order to get the best potential from QCalendar it is important to understand 
 
 First and foremost, the native date format used internally, and with the v-model, is `YYYY-mm-dd`. This is to avoid confusion with positioning of the day and month in other date formats as well as date separator. All incoming and outgoing dates will use this format.
 
-The default locale of QCalendar is **en-us**. This can easily be changed via the `locale` property. Any area of QCalendar that displays text and numbers is locale-aware.
+The default locale of QCalendar is **en-us**. This can easily be changed via the `locale` property. Any area of QCalendar that displays text and numbers is locale-aware via the browser's Internationalization (Intl) API.
 
 You will see a number of images below which have the QCalendar component, but the navigation bar above all images is not part of QCalendar. Navigation is something a developer would provide in devland with QCalendar methods. This gives you total control over look-and-feel of your own navigation bar.
 
@@ -234,22 +234,33 @@ QCalendar has many `view` types available. They are:
 6. `4day`
 7. `5day`
 8. `6day`
-9. `custom-interval`
-10. `month-interval`
-11. `scheduler`
-12. `week-scheduler`
-13. `month-scheduler`
-14. `week-agenda`
-15. `day-agenda`
-16. `2day-agenda`
-17. `3day-agenda`
-18. `4day-agenda`
-19. `5day-agenda`
-20. `6day-agenda`
+9. `month-scheduler`
+10. `week-scheduler`
+11. `custom-scheduler`
+12. `scheduler`
+13. `day-scheduler`
+14. `2day-scheduler`
+15. `3day-scheduler`
+16. `4day-scheduler`
+17. `5day-scheduler`
+18. `6day-scheduler`
+19. `month-agenda`
+20. `week-agenda`
+21. `custom-agenda`
+22. `day-agenda`
+23. `2day-agenda`
+24. `3day-agenda`
+25. `4day-agenda`
+26. `5day-agenda`
+27. `6day-agenda`
+28. `month-interval`
+29. `custom-interval`
 
 It's important to know that all `view` types are linear in nature. For instance, `3day` will show three days and `next()` will show the next 3 days. A good idea could be to switch to a `view` type on a mobile based on the current width of the screen. For portrait mode, you could change the `view` type to `2day` and for landscape mode `4day`. When `next()` or `prev()` are called the next (or previous) 2 days (for protrait) or 4 days (for landscape) would be displayed.
 
 Monthly views are also linear, but respect the number of days within the month that is to be displayed.
+
+All views respect the number of days to be displayed as per the `weekdays` filter property.
 
 ## Weekday filtering
 
@@ -378,6 +389,8 @@ Download and look at the themes to see what is needed. If a property is missing 
 
 Animation is when QCalendar does a `prev` or `next` action. Setting the property `:animated="true"` turns on the animation. Two other properties, `transition-prev` and `transition-next` allows you to set the type of transition to use. The default is to use `transition-prev="slide-right"` and `transition-next="slide-left"`, but you can use any of the [Quasar transitions](https://quasar.dev/options/transitions), or build your own (see [Vue transitions](https://vuejs.org/v2/guide/transitions.html) for detailed information).
 
+One important aspect of transitions is to avoid overflow. You can prevent this from happening by wrapping your QCalendar component with a `div` and then set `style="overflow: hidden;"`.
+
 # Drag and Drop support
 QCalendar supports HTML5 **drag and drop**. If you have components that need drag and drop support you can add the following (this example is using QBadge):
 
@@ -451,4 +464,58 @@ resetDrag () {
 Drag and drop is typically not directly supported on mobile browsers. If you want support, add the package `drag-drop-touch` to your `package.json`. And then, just `import 'drag-drop-touch'` to get it to shim into your code. When using this shim, you need the `@touchmove.native="(e) => {}"` as noted above to prevent issues with iOS.
 
 # Working with Slots
-TODO
+There is a lot of Scoped Slots support in QCalendar. Scoped Slots allows you to change the look of your calendar to suit your requirements. Almost all of the scoped slots work with the QCalendar `timestamp` (also known as `day`) object.
+
+The `timestamp` object looks like this:
+```js
+{
+  date: '',       // YYYY-mm-dd
+  time: '',       // 00:00:00 (optional)
+  year: 0,        // YYYY
+  month: 0,       // mm (Jan = 1, etc)
+  day: 0,         // day of the month
+  weekday: 0,     // week day
+  hour: 0,        // 24-hr
+  minute: 0,      // mm
+  doy: 0,         // day of year
+  workweek: 0,    // workweek number
+  hasDay: false,  // if this timestamp is supposed to have a date
+  hasTime: false, // if this timestamp is supposed to have a time
+  past: false,    // if timestamp is in the past (based on `now` property)
+  current: false, // if timestamp is current date (based on `now` property)
+  future: false   // if timestamp is in the future (based on `now` property)
+}
+```
+
+# Working with Events
+
+QCalendar has a lot of events. The normal events are:
+
+`@input => function(value)`: This is the value used by `v-model` and in the form `YYYY-mm-dd`
+
+`@change => function(start, end)`: Emitted when the calendar dates change. For instance, if in month view, the `start` contains the timestamp object for the 1st of the month, and `end` contains the timestamp object for the last day of the month. For `week` view it’s the first day of the displayed week and last day of the displayed week
+
+`@moved => function (timestamp)`: The same as `input` above, except the passed argument is a `timestamp` object.
+
+All other events are mouse/touch based. The base events are:
+1. `click`
+2. `contextmenu`
+3. `mousedown`
+4. `mousemove`
+5. `mouseup`
+6. `mouseenter`
+7. `mouseleave`
+8. `touchstart`
+9. `touchmove`
+10. `touchend`
+
+These are appended with the type of event:
+1. `:time`
+2. `:day`
+3. `:interval`
+4. `resource`
+5. `resource:day`
+
+All mouse/touch events support the Vue [Event & Key Modifiers](https://vuejs.org/v2/guide/render-function.html#Event-amp-Key-Modifiers).
+
+~~~

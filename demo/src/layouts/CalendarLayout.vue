@@ -28,11 +28,12 @@
           v-model="calendarView"
           :options="viewOptions"
           outlined
+          :dark="$q.dark.isActive"
           dense
           emit-value
           map-options
-          :input-class="{ 'text-primary bg-white': !$q.dark.isActive }"
-          :popup-content-class="{ 'text-primary bg-white': !$q.dark.isActive }"
+          :input-class="contentClass"
+          :popup-content-class="contentClass"
           style="min-width: 120px; background: transparent; color: white"
         ></q-select>
 
@@ -110,19 +111,18 @@ export default {
       titleFormatter: null,
       dateFormatter: null,
       viewOptions: [
-        { label: 'View Day', value: 'day' },
-        { label: 'View 2Day', value: '2day' },
-        { label: 'View 3Day', value: '3day' },
-        { label: 'View 4Day', value: '4day' },
-        { label: 'View 5Day', value: '5day' },
-        { label: 'View 6Day', value: '6day' },
-        { label: 'View Week', value: 'week' },
-        { label: 'View Month', value: 'month' },
-        { label: 'View Month Interval', value: 'month-interval' },
-        { label: 'View Custom Interval', value: 'custom-interval' },
-        { label: 'View Scheduler', value: 'scheduler' },
-        { label: 'View Week Scheduler', value: 'week-scheduler' },
-        { label: 'View Month Scheduler', value: 'month-scheduler' }
+        { label: 'Day', value: 'day' },
+        { label: 'Week', value: 'week' },
+        { label: 'Month', value: 'month' },
+        { label: 'Month Interval', value: 'month-interval' },
+        { label: 'Custom Interval', value: 'custom-interval' },
+        { label: 'Scheduler', value: 'scheduler' },
+        { label: 'Week Scheduler', value: 'week-scheduler' },
+        { label: 'Month Scheduler', value: 'month-scheduler' },
+        { label: 'Agenda', value: 'agenda' },
+        { label: 'Week Agenda', value: 'week-agenda' },
+        { label: 'Month Agenda', value: 'month-agenda' },
+        { label: 'Custom Agenda', value: 'custom-agenda' }
       ]
     }
   },
@@ -135,6 +135,12 @@ export default {
       fiveDayWorkWeek: 'calendar/fiveDayWorkWeek',
       firstDayMonday: 'calendar/firstDayMonday'
     }),
+    contentClass () {
+      if (this.$q.dark.isActive !== true) {
+        return 'text-primary bg-white'
+      }
+      return ''
+    },
     title () {
       if (this.titleFormatter && this.locale && this.selectedDate) {
         const date = new Date(this.selectedDate)

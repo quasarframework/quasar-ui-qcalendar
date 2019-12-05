@@ -30,6 +30,7 @@ For slots that return `day` or `timestamp`, it looks like this:
   current: false, // if timestamp is current date (based on `now` property)
   future: false   // if timestamp is in the future (based on `now` property)
 }
+```
     </q-markdown>
     <example-card title="Agenda View - Slots" name="AgendaViewWeekSlots" :tag-parts="getTagParts(require('!!raw-loader!../examples/AgendaViewWeekSlots.vue').default)" />
 
