@@ -11,7 +11,7 @@
         />
 
         <q-toolbar-title>
-          quasar-ui-qcalendar <span class="text-subtitle2">v{{ version }}</span>
+          QCalendar <span class="text-subtitle2">v{{ version }}</span>
         </q-toolbar-title>
 
         <div>Quasar v{{ $q.version }}</div>

@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-For a legitimate bug, in order to process faster, please go here https://codesandbox.io/s/qcalendar-bx1y7, fork the codesandbox, add code to reproduce the bug and submit link here:
+For a legitimate bug, in order to process faster, please go here https://codepen.io/Hawkeye64/pen/RwwwKQL, fork the codepen, add code to reproduce the bug and submit link here (don't forget to save your codepen):
 
 **Describe the bug**
 A clear and concise description of what the bug is.
