@@ -139,8 +139,7 @@ module.exports = function (ctx) {
         ignored: [
           'node_modules',
           '!node_modules/@quasar/quasar-app-extension-qcalendar',
-          '!node_modules/@quasar/quasar-ui-qcalendar',
-          '!node_modules/@quasar/quasar-app-extension-qpublish'
+          '!node_modules/@quasar/quasar-ui-qcalendar'
         ]
       }
     },

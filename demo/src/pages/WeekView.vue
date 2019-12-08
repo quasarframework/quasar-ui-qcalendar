@@ -4,7 +4,7 @@
     <example-card title="Week View - Basic" name="WeekViewBasic" :tag-parts="getTagParts(require('!!raw-loader!../examples/WeekViewBasic.vue').default)" />
 
     <example-title title="First Day Monday" />
-    <example-card title="Week View - First Day Monday" name="WeekViewFirstDayMonday" :tag-parts="getTagParts(require('!!raw-loader!../examples/WeekViewMondayFirstDay.vue').default)" />
+    <example-card title="Week View - First Day Monday" name="WeekViewMondayFirstDay" :tag-parts="getTagParts(require('!!raw-loader!../examples/WeekViewMondayFirstDay.vue').default)" />
 
     <example-title title="5 Day Work Week" />
     <example-card title="Week View - 5 Day Work Week" name="WeekViewFiveDayWorkWeek" :tag-parts="getTagParts(require('!!raw-loader!../examples/WeekViewFiveDayWorkWeek.vue').default)" />

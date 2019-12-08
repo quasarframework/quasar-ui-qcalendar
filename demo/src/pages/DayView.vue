@@ -2,7 +2,7 @@
   <div class="q-markdown">
     <example-title title="Basic" />
     <example-card title="Day View - Basic" name="DayViewBasic" :tag-parts="getTagParts(require('!!raw-loader!../examples/DayViewBasic.vue').default)" />
-    <example-card title="Day View - 3Day" name="DayView3Day" :tag-parts="getTagParts(require('!!raw-loader!../examples/DayView3day.vue').default)" />
+    <example-card title="Day View - 3Day" name="DayView3Day" :tag-parts="getTagParts(require('!!raw-loader!../examples/DayView3Day.vue').default)" />
 
     <example-title title="Hide Header" />
     <example-card title="Day View - Hide Header" name="DayViewHideHeader" :tag-parts="getTagParts(require('!!raw-loader!../examples/DayViewHideHeader.vue').default)" />
