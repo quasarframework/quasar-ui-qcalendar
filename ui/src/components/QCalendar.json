@@ -533,8 +533,8 @@
         "String"
       ],
       "category": "behavior",
-      "desc": "The maximum height in pixels for the day height",
-      "default": "50",
+      "desc": "The maximum height in pixels for the day height. Using 0 will make the rows variable height based on content.",
+      "default": "0",
       "applicable": [
         "month"
       ],

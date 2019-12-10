@@ -15,6 +15,23 @@ QCalendar (Vue Plugin, UMD and Quasar App Extension)
 * [/demo](demo) - docs, demo and examples project
 * [live demo](https://quasarframework.github.io/quasar-ui-qcalendar/docs) - live docs, demo and examples
 
+# Demo Workflow
+If you fork or download this project, make sure you have the Quasar CLI globally installed:
+
+```
+npm i -g @quasar/cli
+```
+
+The workflow to build the demo, on a fresh project, is as follows:
+```
+cd ui
+yarn
+yarn build
+cd ../demo
+yarn
+quasar dev
+```
+
 # Donate
 If you appreciate the work that went into this, please consider donating to [Quasar](https://donate.quasar.dev) or [Jeff](https://github.com/sponsors/hawkeye64).
 
