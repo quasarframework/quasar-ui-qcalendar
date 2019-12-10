@@ -76,17 +76,15 @@ export default {
     },
 
     styles () {
+      const style = {}
       if (this.dayHeight > 0) {
         const height = convertToUnit(this.dayHeight)
-        const style = {
-          height: height
-        }
-        if (this.dayPadding !== void 0) {
-          style.padding = this.dayPadding
-        }
-        return style
+        style.height = height
       }
-      return ''
+      if (this.dayPadding !== void 0) {
+        style.padding = this.dayPadding
+      }
+      return style
     }
   },
 
