@@ -744,6 +744,65 @@
       "examples": [
         ":selected-start-end-dates=\"getStartEndDates\""
       ]
+    },
+    "mini-mode": {
+      "type": ["Boolean", "String"],
+      "category": "behavior",
+      "addedIn": "v1.2.4",
+      "values": [
+        true,
+        false,
+        "auto"
+      ],
+      "desc": "When `true` puts the calendar into mini-mode. When `auto`, then the property `breakpoint` is used to determine when the calendar will be put into mini-mode",
+      "applicable": [
+        "month"
+      ],
+      "examples": [
+        "mini-mode",
+        ":mini-mode=\"true\"",
+        "mini-mode=\"auto\""
+      ]
+    },
+    "breakpoint": {
+      "type": "String",
+      "category": "behavior",
+      "addedIn": "v1.2.4",
+      "values": [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ],
+      "desc": "This property is used when `mini-mode` is set with `auto`",
+      "applicable": [
+        "month"
+      ],
+      "examples": [
+        "breakpoint=\"sm\"",
+        "breakpoint=\"md\""
+      ]
+    },
+    "month-label-size": {
+      "type": "String",
+      "category": "style",
+      "addedIn": "v1.2.4",
+      "values": [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ],
+      "desc": "This property is used change the size of the month label button. This property is ignored when `mini-mode` is set to true",
+      "applicable": [
+        "month"
+      ],
+      "examples": [
+        "month-label-size=\"sm\"",
+        "month-label-size=\"md\""
+      ]
     }
   },
   "events": {
@@ -2052,7 +2111,7 @@
       },
       "applicable": [
         "day",
-        "month"
+        "agenda"
       ]
     },
     "day-container": {
