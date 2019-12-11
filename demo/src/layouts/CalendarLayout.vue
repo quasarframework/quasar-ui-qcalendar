@@ -28,8 +28,10 @@
           v-model="calendarView"
           :options="viewOptions"
           outlined
-          :dark="$q.dark.isActive"
+          dark
+          :options-dark="$q.dark.isActive"
           dense
+          options-dense
           emit-value
           map-options
           :input-class="contentClass"
