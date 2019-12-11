@@ -77,7 +77,7 @@ Mini-Mode is a special behavior for QCalendar month view. The property is `mini-
 
 When `mini-mode="auto"`, this works for the width of the screen, not the width of QCalendar. If you need to control mini-mode dynamically, then you need to set `true` or `false` based on your own calculations.
 
-The examples below will be using QSplitter to adjust the width of the QCalendar and to dynamically switch to/from mini-mode (be sure to release QSplitter so the model is updated with new width). The breakpoint in the examples is **less than 500px**.
+The examples below will be using QSplitter to adjust the width of the QCalendar and to dynamically switch to/from mini-mode. The breakpoint in the examples is **less than 500px**.
 
 Not all examples have been copied over to `mini-mode` examples. They still work, like **Prev/Next** and **Swipe**.
 

@@ -1,7 +1,8 @@
 <template>
   <q-splitter
     v-model="splitterModel"
-    :limits="[50, 100]"
+    :limits="[30, 100]"
+    emit-immediately
   >
     <template v-slot:before>
       <q-calendar
@@ -9,7 +10,6 @@
         v-model="selectedDate"
         :weekdays="[1, 2, 3, 4, 5]"
         :mini-mode="miniMode"
-        breakpoint="sm"
         view="month"
         locale="en-us"
       />

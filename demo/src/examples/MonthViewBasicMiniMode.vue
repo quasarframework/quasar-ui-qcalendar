@@ -1,7 +1,8 @@
 <template>
   <q-splitter
     v-model="splitterModel"
-    :limits="[50, 100]"
+    :limits="[30, 100]"
+    emit-immediately
   >
     <template v-slot:before>
       <q-calendar
@@ -25,7 +26,7 @@
 export default {
   data () {
     return {
-      splitterModel: 90, // start at 90%
+      splitterModel: 90,
       selectedDate: '',
       miniMode: false
     }
@@ -34,6 +35,7 @@ export default {
     splitterModel (val) {
       const rect = this.$refs.calendar.$el.getBoundingClientRect()
       this.miniMode = rect.width < 500
+      console.log(rect)
     }
   }
 }
