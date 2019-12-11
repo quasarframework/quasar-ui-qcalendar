@@ -6,7 +6,6 @@
       :disabled-days="disabledDays"
       :day-style="modifiedStyle"
       locale="en-us"
-      style="height: 400px;"
     />
   </div>
 </template>

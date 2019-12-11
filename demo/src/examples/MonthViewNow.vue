@@ -4,7 +4,6 @@
     view="month"
     now
     locale="en-us"
-    style="height: 400px;"
   />
 </template>
 

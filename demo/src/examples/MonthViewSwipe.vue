@@ -9,7 +9,6 @@
       animated
       transition-prev="slide-right"
       transition-next="slide-left"
-      style="height: 400px; overflow: hidden"
     />
   </div>
 </template>
@@ -20,7 +19,7 @@ import { stopAndPrevent } from 'quasar/src/utils/event'
 export default {
   data () {
     return {
-      selectedDate: '2019-04-01',
+      selectedDate: '',
       dragging: false, // used for drag-and-drop
       ignoreNextSwipe: false // used for drag-and-drop
     }

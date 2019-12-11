@@ -5,7 +5,6 @@
       view="month"
       :day-height="100"
       locale="en-us"
-      style="height: 400px;"
     />
   </div>
 </template>
