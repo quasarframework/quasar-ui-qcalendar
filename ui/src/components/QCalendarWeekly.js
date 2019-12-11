@@ -221,7 +221,7 @@ export default {
         staticClass: 'q-calendar-weekly__workweek',
         class: this.getRelativeClasses(timestamp !== false ? timestamp : day, false),
         style: {
-          height: this.dayHeight && this.dayHeight > 0 ? height : '100%'
+          height: this.dayHeight && this.dayHeight > 0 ? height : 'auto'
         }
       }), slot ? slot(slotData) : workweekLabel)
     },
