@@ -26,9 +26,11 @@
       color: $calendar-day-current-color
 
       .q-calendar-daily__head-day-label
-        border: currentColor solid 2px
         font-weight: 700
         color: $calendar-primary-color
+
+        .q-btn__wrapper:before
+          border-width: 2px
 
     &.q-future-day
       color: $calendar-day-future-color
