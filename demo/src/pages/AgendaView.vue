@@ -1,14 +1,14 @@
 <template>
   <div class="q-markdown">
-    <example-title title="Basic" />
+    <example-title title="Agenda View" />
     <q-markdown>
 The `agenda` views by themselves are rather boring. It's up to the developer to fill the content via the `day-body` slot (more about this below).
     </q-markdown>
-    <example-card title="Agenda View - Basic" name="AgendaViewBasic" :tag-parts="getTagParts(require('!!raw-loader!../examples/AgendaViewBasic.vue').default)" />
+    <example-card title="Basic" name="AgendaViewBasic" :tag-parts="getTagParts(require('!!raw-loader!../examples/AgendaViewBasic.vue').default)" />
     <example-card title="Agenda View (week) - Basic" name="AgendaViewWeekBasic" :tag-parts="getTagParts(require('!!raw-loader!../examples/AgendaViewWeekBasic.vue').default)" />
 
-    <example-title title="Working with Slots" />
-    <q-markdown>
+    <example-card title="Slots" name="AgendaViewWeekSlots" :tag-parts="getTagParts(require('!!raw-loader!../examples/AgendaViewWeekSlots.vue').default)" >
+      <q-markdown>
 We are going to jump right into slot usage so that for the rest of the examples we have content that can be displayed.
 
 For slots that return `day` or `timestamp`, it looks like this:
@@ -31,14 +31,11 @@ For slots that return `day` or `timestamp`, it looks like this:
   future: false   // if timestamp is in the future (based on `now` property)
 }
 ```
-    </q-markdown>
-    <example-card title="Agenda View - Slots" name="AgendaViewWeekSlots" :tag-parts="getTagParts(require('!!raw-loader!../examples/AgendaViewWeekSlots.vue').default)" />
+      </q-markdown>
+    </example-card>
 
-    <example-title title="First Day Monday" />
-    <example-card title="Agenda View - First Day Monday" name="AgendaViewWeekFirstDayMonday" :tag-parts="getTagParts(require('!!raw-loader!../examples/AgendaViewWeekFirstDayMonday.vue').default)" />
-
-    <example-title title="Five Day Workweek" />
-    <example-card title="Agenda View - Five Day Workweek" name="AgendaViewWeekFiveDayWorkweek" :tag-parts="getTagParts(require('!!raw-loader!../examples/AgendaViewWeekFiveDayWorkweek.vue').default)" />
+    <example-card title="First Day Monday" name="AgendaViewWeekFirstDayMonday" :tag-parts="getTagParts(require('!!raw-loader!../examples/AgendaViewWeekFirstDayMonday.vue').default)" />
+    <example-card title="Five Day Workweek" name="AgendaViewWeekFiveDayWorkweek" :tag-parts="getTagParts(require('!!raw-loader!../examples/AgendaViewWeekFiveDayWorkweek.vue').default)" />
   </div>
 </template>
 
@@ -65,18 +62,12 @@ export default {
   mounted () {
     this.toc = []
     this.tempToc = []
-    this.addToToc('Basic')
-    this.addToToc('Agenda View - Basic', 2)
+    this.addToToc('Agenda View')
+    this.addToToc('Basic', 2)
     this.addToToc('Agenda View (week) - Basic', 2)
-
-    this.addToToc('Working with Slots')
-    this.addToToc('Agenda View - Slots', 2)
-
-    this.addToToc('First Day Monday')
-    this.addToToc('Agenda View - First Day Monday', 2)
-
-    this.addToToc('Five Day Workweek')
-    this.addToToc('Agenda View - Five Day Workweek', 2)
+    this.addToToc('Slots', 2)
+    this.addToToc('First Day Monday', 2)
+    this.addToToc('Five Day Workweek', 2)
 
     this.toc = this.tempToc
   },
