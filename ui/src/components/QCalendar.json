@@ -2125,7 +2125,7 @@
       }
     },
     "intervals-header": {
-      "desc": "",
+      "desc": "Use to render items in the intervals header",
       "scope": {
         "days": {
           "type": "Array",
@@ -2189,9 +2189,9 @@
       ]
     },
     "column-header-before": {
-      "desc": "",
+      "desc": "Use to render items before the column header",
       "scope": {
-        "day": {
+        "data": {
           "type": "Object",
           "desc": "Timestamp object",
           "__exemption": [ "examples" ]
@@ -2202,9 +2202,9 @@
       ]
     },
     "column-header-after": {
-      "desc": "",
+      "desc": "Use to render items after the column header",
       "scope": {
-        "day": {
+        "data": {
           "type": "Object",
           "desc": "Timestamp object",
           "__exemption": [ "examples" ]
@@ -2215,11 +2215,24 @@
       ]
     },
     "day": {
-      "desc": "",
+      "desc": "Use to add items to the `day` rendering",
       "scope": {
-        "day": {
+        "data": {
           "type": "Object",
-          "desc": "Timestamp object",
+          "desc": "Timestamp object, outside and miniMode",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "applicable": [
+        "month"
+      ]
+    },
+    "day-label": {
+      "desc": "Use to replace the `day label`",
+      "scope": {
+        "data": {
+          "type": "Object",
+          "desc": "Timestamp object, dayLabel and miniMode",
           "__exemption": [ "examples" ]
         }
       },
@@ -2228,7 +2241,7 @@
       ]
     },
     "month-label": {
-      "desc": "",
+      "desc": "Use to replace the `month label`. Not applicable in `mini-mode`",
       "scope": {
         "data": {
           "type": "Object",
@@ -2241,7 +2254,7 @@
       ]
     },
     "day-of-year": {
-      "desc": "",
+      "desc": "Use to replace the `day of year` label. Not applicable in `mini-mode`",
       "scope": {
         "data": {
           "type": "Object",
@@ -2253,12 +2266,12 @@
         "month"
       ]
     },
-    "work-week-label": {
+    "workweek": {
       "desc": "",
       "scope": {
         "data": {
           "type": "Object",
-          "desc": "Timestamp object with workWeekLabel",
+          "desc": "Timestamp object, workWeekLabel and miniMode",
           "__exemption": [ "examples" ]
         }
       },
