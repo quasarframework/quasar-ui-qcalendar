@@ -1,7 +1,8 @@
 <template>
   <q-splitter
     v-model="splitterModel"
-    :limits="[50, 100]"
+    :limits="[30, 100]"
+    emit-immediately
   >
     <template v-slot:before>
       <div style="overflow: auto">

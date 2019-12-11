@@ -1,7 +1,8 @@
 <template>
   <q-splitter
     v-model="splitterModel"
-    :limits="[50, 100]"
+    :limits="[30, 100]"
+    emit-immediately
   >
     <template v-slot:before>
       <div style="overflow: hidden;">
@@ -11,7 +12,6 @@
           view="month"
           locale="en-us"
           :mini-mode="miniMode"
-          breakpoint="sm"
           animated
           transition-prev="slide-right"
           transition-next="slide-left"
