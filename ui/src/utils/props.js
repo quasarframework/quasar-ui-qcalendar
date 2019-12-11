@@ -111,6 +111,20 @@ export default {
       type: Array,
       default: () => [],
       validator: v => v.length <= 2
+    },
+    miniMode: {
+      type: [Boolean, String],
+      validator: v => v === void 0 || v === true || v === false || v === 'auto'
+    },
+    breakpoint: {
+      type: String,
+      default: 'md',
+      validator: v => ['xs', 'sm', 'md', 'lg', 'xl'].includes(v)
+    },
+    monthLabelSize: {
+      type: String,
+      default: 'md',
+      validator: v => ['xs', 'sm', 'md', 'lg', 'xl'].includes(v)
     }
   },
   scheduler: {

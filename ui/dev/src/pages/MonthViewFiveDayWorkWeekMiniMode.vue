@@ -1,7 +1,9 @@
 <template>
   <q-calendar
     v-model="selectedDate"
-    show-day-of-year-label
+    :weekdays="[1, 2, 3, 4, 5]"
+    mini-mode="auto"
+    breakpoint="sm"
     view="month"
     locale="en-us"
   />

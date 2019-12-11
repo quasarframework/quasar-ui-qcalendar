@@ -7,16 +7,17 @@
       <q-space />
     </q-toolbar>
     <q-separator />
-    <q-calendar
-      ref="calendar"
-      v-model="selectedDate"
-      view="month"
-      locale="en-us"
-      animated
-      transition-prev="slide-right"
-      transition-next="slide-left"
-      style="height: 400px; overflow: hidden"
-    />
+    <div style="overflow: hidden">
+      <q-calendar
+        ref="calendar"
+        v-model="selectedDate"
+        view="month"
+        locale="en-us"
+        animated
+        transition-prev="slide-right"
+        transition-next="slide-left"
+      />
+    </div>
   </div>
 </template>
 
@@ -24,7 +25,7 @@
 export default {
   data () {
     return {
-      selectedDate: '2019-04-01'
+      selectedDate: ''
     }
   },
   methods: {

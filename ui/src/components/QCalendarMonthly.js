@@ -17,10 +17,6 @@ export default {
   ],
 
   computed: {
-    staticClass () {
-      return 'q-calendar-weekly'
-    },
-
     parsedStart () {
       return getStartOfMonth(parseTimestamp(this.start))
     },

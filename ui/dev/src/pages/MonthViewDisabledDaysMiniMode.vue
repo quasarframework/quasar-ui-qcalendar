@@ -4,6 +4,8 @@
       v-model="selectedDate"
       view="month"
       :disabled-days="disabledDays"
+      mini-mode="auto"
+      breakpoint="sm"
       :day-style="modifiedStyle"
       locale="en-us"
     />

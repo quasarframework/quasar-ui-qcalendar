@@ -1,5 +1,8 @@
 @import './calendar-variables'
 
+.q-calendar
+  min-width: 300px
+
 .q-calendar-weekly
   background: $calendar-background-color
 
@@ -47,8 +50,10 @@
     &.q-current-day
 
       .q-calendar-weekly__day-label
-        border: currentColor solid 2px
         font-weight: 700
+
+        .q-btn__wrapper:before
+          border-width: 2px
 
       .q-calendar-weekly__day-month
         color: currentColor
@@ -108,12 +113,14 @@
     align-items: center
 
   &__day
+    display: flex
     flex: 1
-    width: 0
     overflow: hidden
     user-select: none
     position: relative
-    padding: 26px 0
+    padding: 2.1em 0
+    min-width: $calendar-day-label-height
+    min-height: $calendar-day-label-height
 
   &__day-label
     position: absolute
@@ -121,20 +128,21 @@
     user-select: none
     cursor: pointer
     box-shadow: none
+    color: currentColor
     text-align: center
     left: 2px
     top: 2px
     border-radius: $calendar-day-label-radius
-    // width: $calendar-day-label-height
-    // height: $calendar-day-label-height
-    // line-height: $calendar-day-label-height
+    min-width: $calendar-day-label-height
+    min-height: $calendar-day-label-height
+    line-height: $calendar-day-label-height
 
   &__day-month
     position: absolute
     text-decoration: none
     user-select: none
     box-shadow: none
-    top: 3px
+    top: 5px
     right: 2px
     height: $calendar-day-label-height
     line-height: $calendar-day-label-height
@@ -148,7 +156,36 @@
     right: 2px
     font-size: 0.6rem
 
-.q-dark, .body--dark
+.q-calendar-mini
+  .q-calendar-weekly__day
+    justify-content: center
+    min-height: 2.2em
+    min-width: 2.2em
+
+  .q-calendar-weekly__head-workweek
+    border-right: unset
+    border-bottom: unset
+
+  .q-calendar-weekly__head-weekday
+    border-right: unset
+    border-bottom: unset
+
+  .q-calendar-weekly__workweek
+    border-right: unset
+    border-bottom: unset
+    font-size: 1em;
+
+  .q-calendar-weekly__day
+    border-right: unset
+    border-bottom: unset
+    padding: unset !important
+
+  .q-calendar-weekly__day-label
+    position: relative
+    text-align: center
+
+
+.body--dark
   .q-calendar-weekly
     background: $calendar-background-color-dark
 
@@ -190,7 +227,7 @@
     &.q-current-day
 
       .q-calendar-weekly__day-label
-        border: currentColor solid 2px
+        // border: currentColor solid 1px
         font-weight: 700
 
       .q-calendar-weekly__day-month

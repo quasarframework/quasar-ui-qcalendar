@@ -1,23 +1,16 @@
 <template>
   <div class="q-markdown">
-    <example-title title="Basic" />
-    <example-card title="Scheduler View - Basic" name="SchedulerViewBasic" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewBasic.vue').default)" />
-
-    <example-title title="Disabled Days" />
-    <example-card title="Scheduler View - Disabled Days" name="SchedulerViewDisabledDays" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewDisabledDays.vue').default)">
+    <example-title title="Scheduler View" />
+    <example-card title="Basic" name="SchedulerViewBasic" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewBasic.vue').default)" />
+    <example-card title="Disabled Days" name="SchedulerViewDisabledDays" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewDisabledDays.vue').default)">
       <q-markdown>
 When the property `disabled-days` has an array of disabled days, you can hook into the `resource-style` property to change the background color of the disabled day.
       </q-markdown>
     </example-card>
-
-    <example-title title="Previous/Next" />
-    <example-card title="Scheduler View - Prev/Next" name="SchedulerViewPrevNext" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewPrevNext.vue').default)" />
-
-    <example-title title="Swipe Navigation" />
-    <example-card title="Scheduler View - Swipe" name="SchedulerViewSwipe" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewSwipe.vue').default)" />
-
-    <example-title title="Working with Slots" />
-    <q-markdown>
+    <example-card title="Prev/Next" name="SchedulerViewPrevNext" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewPrevNext.vue').default)" />
+    <example-card title="Swipe" name="SchedulerViewSwipe" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewSwipe.vue').default)" />
+    <example-card title="Slots (scheduler-resources-header)" name="SchedulerViewSlotResourcesHeader" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewSlotResourcesHeader.vue').default)">
+      <q-markdown>
 For slots that return `day` or `timestamp`, it looks like this:
 ```js
 {
@@ -38,26 +31,24 @@ For slots that return `day` or `timestamp`, it looks like this:
   future: false   // if timestamp is in the future (based on `now` property)
 }
 ```
-    </q-markdown>
-    <example-card title="Scheduler View - Slots (scheduler-resources-header)" name="SchedulerViewSlotResourcesHeader" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewSlotResourcesHeader.vue').default)">
-      <q-markdown>
+
 Below, the slot receives an array of `timestamp`s for the days that are being displayed.
       </q-markdown>
     </example-card>
 
-    <example-card title="Scheduler View - Slots (scheduler-day-header)" name="SchedulerViewSlotDayHeader" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewSlotDayHeader.vue').default)">
+    <example-card title="Slots (scheduler-day-header)" name="SchedulerViewSlotDayHeader" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewSlotDayHeader.vue').default)">
       <q-markdown>
 Below, the slot receives the `timestamp` for the day being displayed.
       </q-markdown>
     </example-card>
 
-    <example-card title="Scheduler View - Slots (scheduler-resource-day)" name="SchedulerViewSlotResourceDay" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewSlotResourceDay.vue').default)">
+    <example-card title="Slots (scheduler-resource-day)" name="SchedulerViewSlotResourceDay" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewSlotResourceDay.vue').default)">
       <q-markdown>
 Below, the slot receives the `timestamp` for the day being displayed, an index, and the resource.
       </q-markdown>
     </example-card>
 
-    <example-card title="Scheduler View - Slots (scheduler-resource)" name="SchedulerViewSlotResource" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewSlotResource.vue').default)">
+    <example-card title="Slots (scheduler-resource)" name="SchedulerViewSlotResource" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewSlotResource.vue').default)">
       <q-markdown>
 Below, the slot receives the `resource` to be displayed. In this case, an avatar (or icon) is being displayed along with the resource name.
       </q-markdown>
@@ -89,23 +80,15 @@ export default {
   mounted () {
     this.toc = []
     this.tempToc = []
-    this.addToToc('Basic')
-    this.addToToc('Scheduler View - Basic', 2)
-
-    this.addToToc('Disabled Days')
-    this.addToToc('Scheduler View - Disabled Days', 2)
-
-    this.addToToc('Previous/Next')
-    this.addToToc('Scheduler View - Prev/Next', 2)
-
-    this.addToToc('Swipe Navigation')
-    this.addToToc('Scheduler View - Swipe', 2)
-
-    this.addToToc('Working with Slots')
-    this.addToToc('Scheduler View - Slots (scheduler-resources-header)', 2)
-    this.addToToc('Scheduler View - Slots (scheduler-day-header)', 2)
-    this.addToToc('Scheduler View - Slots (scheduler-resource-day)', 2)
-    this.addToToc('Scheduler View - Slots (scheduler-resource)', 2)
+    this.addToToc('Scheduler View')
+    this.addToToc('Basic', 2)
+    this.addToToc('Disabled Days', 2)
+    this.addToToc('Prev/Next', 2)
+    this.addToToc('Swipe', 2)
+    this.addToToc('Slots (scheduler-resources-header)', 2)
+    this.addToToc('Slots (scheduler-day-header)', 2)
+    this.addToToc('Slots (scheduler-resource-day)', 2)
+    this.addToToc('Slots (scheduler-resource)', 2)
 
     this.toc = this.tempToc
   },

@@ -1,62 +1,41 @@
 <template>
   <div class="q-markdown">
-    <example-title title="Basic" />
-    <example-card title="Month View - Basic" name="MonthViewBasic" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewBasic.vue').default)" />
-
-    <example-title title="First Day Monday" />
-    <example-card title="Month View - First Day Monday" name="MonthViewMondayFirstDay" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewMondayFirstDay.vue').default)" />
-
-    <example-title title="5 Day Work Week" />
-    <example-card title="Month View - 5 Day Work Week" name="MonthViewFiveDayWorkWeek" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewFiveDayWorkWeek.vue').default)" />
-
-    <example-title title="Hide Header" />
-    <example-card title="Month View - Hide Header" name="MonthViewHideHeader" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewHideHeader.vue').default)" />
-
-    <example-title title="Disabled Days" />
-    <example-card title="Month View - Disabled Days" name="MonthViewDisabledDays" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewDisabledDays.vue').default)">
+    <example-title title="Month View" />
+    <example-card title="Basic" name="MonthViewBasic" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewBasic.vue').default)" />
+    <example-card title="First Day Monday" name="MonthViewMondayFirstDay" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewMondayFirstDay.vue').default)" />
+    <example-card title="5 Day Work Week" name="MonthViewFiveDayWorkWeek" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewFiveDayWorkWeek.vue').default)" />
+    <example-card title="Hide Header" name="MonthViewHideHeader" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewHideHeader.vue').default)" />
+    <example-card title="Disabled Days" name="MonthViewDisabledDays" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewDisabledDays.vue').default)">
       <q-markdown>
 When the property `disabled-days` has an array of disabled days, you can hook into the `day-style` property to change the background color of the disabled day.
       </q-markdown>
     </example-card>
 
     <example-title title="Now" />
-    <example-card title="Month View - Now" name="MonthViewNow" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewNow.vue').default)" />
-
-    <example-title title="Work Weeks" />
-    <example-card title="Month View - Work Weeks" name="MonthViewWorkWeekNumbers" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewWorkWeekNumbers.vue').default)">
+    <example-card title="Now" name="MonthViewNow" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewNow.vue').default)" />
+    <example-card title="Work Weeks" name="MonthViewWorkWeekNumbers" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewWorkWeekNumbers.vue').default)">
       <q-markdown>
 `show-work-weeks` is available only for month view.
       </q-markdown>
     </example-card>
 
-    <example-title title="Short Weekday Label" />
-    <example-card title="Month View - Short Weekday Label" name="MonthViewShortWeekdayLabel" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewShortWeekdayLabel.vue').default)" />
-
-    <example-title title="Short Month Label" />
-    <example-card title="Month View - Short Month Label" name="MonthViewShortMonthLabel" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewShortMonthLabel.vue').default)" />
-
-    <example-title title="Show Day of Year Label" />
-    <example-card title="Month View - Show Day of Year Label" name="MonthViewShowDayOfYearLabel" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewShowDayOfYearLabel.vue').default)">
+    <example-card title="Short Weekday Label" name="MonthViewShortWeekdayLabel" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewShortWeekdayLabel.vue').default)" />
+    <example-card title="Short Month Label" name="MonthViewShortMonthLabel" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewShortMonthLabel.vue').default)" />
+    <example-card title="Show Day of Year Label" name="MonthViewShowDayOfYearLabel" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewShowDayOfYearLabel.vue').default)">
       <q-markdown>
 `show-day-of-year-label` is available only for month view.
       </q-markdown>
     </example-card>
 
-    <example-title title="Day Height" />
-    <example-card title="Month View - Day Height" name="MonthViewDayHeight" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewDayHeight.vue').default)">
+    <example-card title="Day Height" name="MonthViewDayHeight" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewDayHeight.vue').default)">
       <q-markdown>
 `day-height` is available only for month view.
 The example below is setting the `day-height` to `100`, the default is `0`, which tells the calendar component to figure out it's own height.
       </q-markdown>
     </example-card>
 
-    <example-title title="Previous/Next" />
-    <example-card title="Month View - Prev/Next" name="MonthViewPrevNext" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewPrevNext.vue').default)" />
-
-    <example-title title="Swipe Navigation" />
-    <example-card title="Month View - Swipe" name="MonthViewSwipe" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSwipe.vue').default)" />
-
-    <example-title title="Selection" />
+    <example-card title="Prev/Next" name="MonthViewPrevNext" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewPrevNext.vue').default)" />
+    <example-card title="Swipe" name="MonthViewSwipe" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSwipe.vue').default)" />
     <example-card title="Multi-Day Selection" name="MonthViewSelection" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSelection.vue').default)">
       <q-markdown>
 The example below shows how to use the QCalendar to create a multi-day selector. The critical aspect of this is the `selected-start-end-dates` property. This takes an array of two dates (the first should be less or equal to the last). This property really doesn't do much, except to keep the calendar reactive, so that the `day-style` property can be used to style the selected days.
@@ -67,7 +46,7 @@ Keep in mind that the functionality below won't work with swipe actions.
       </q-markdown>
     </example-card>
 
-    <example-title title="Working with Slots" />
+    <example-card title="Slots" name="MonthViewSlots" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSlots.vue').default)">
     <q-markdown>
 For slots that return `day` or `timestamp`, it looks like this:
 ```js
@@ -90,7 +69,36 @@ For slots that return `day` or `timestamp`, it looks like this:
 }
 ```
     </q-markdown>
-    <example-card title="Month View - Slots" name="MonthViewSlots" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSlots.vue').default)" />
+    </example-card>
+
+    <example-title title="Mini-Mode" />
+    <q-markdown>
+Mini-Mode is a special behavior for QCalendar month view. The property is `mini-mode` and can be set to `true` or `auto`. When set to `true` mini-mode is always on. When set to `auto`, mini-mode will use the `breakpoint` property to determine when to go into mini-mode.
+
+When `mini-mode="auto"`, this works for the width of the screen, not the width of QCalendar. If you need to control mini-mode dynamically, then you need to set `true` or `false` based on your own calculations.
+
+The examples below will be using QSplitter to adjust the width of the QCalendar and to dynamically switch to/from mini-mode (be sure to release QSplitter so the model is updated with new width). The breakpoint in the examples is **less than 500px**.
+
+Not all examples have been copied over to `mini-mode` examples. They still work, like **Prev/Next** and **Swipe**.
+
+Also, when in `mini-mode` there are some things to be aware of:
+
+1. The property `month-label-size` defaults to `sm`
+2. The property `short-weekday-label` is always true
+3. The property `show-day-of-year-label` has no effect
+4. The month label on first available day of the month is not displayed
+
+Also, regardless of `mini-mode` all slots associated with month view now have additional slotted data: `miniMode`, which is either set to `true` or `false`.
+    </q-markdown>
+
+    <example-card title="Mini-Mode - Basic" name="MonthViewBasicMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewBasicMiniMode.vue').default)" />
+    <example-card title="Mini-Mode - Disabled Days" name="MonthViewDisabledDaysMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewDisabledDaysMiniMode.vue').default)" />
+    <example-card title="Mini-Mode - 5 Day Work Week" name="MonthViewFiveDayWorkWeekMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewFiveDayWorkWeekMiniMode.vue').default)" />
+    <example-card title="Mini-Mode - Work Week Numbers" name="MonthViewWorkWeekNumbersMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewWorkWeekNumbersMiniMode.vue').default)" />
+    <example-card title="Mini-Mode - Selection" name="MonthViewSelectionMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSelectionMiniMode.vue').default)" />
+    <example-card title="Mini-Mode - Multi-Month Selection" name="MonthViewMultiMonthSelectionMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewMultiMonthSelectionMiniMode.vue').default)" />
+
+    <example-card title="Mini-Mode - Slots" name="MonthViewSlotsMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSlotsMiniMode.vue').default)" />
 
   </div>
 </template>
@@ -118,50 +126,31 @@ export default {
   mounted () {
     this.toc = []
     this.tempToc = []
-    this.addToToc('Basic')
-    this.addToToc('Month View - Basic', 2)
+    this.addToToc('Month View')
+    this.addToToc('Basic', 2)
+    this.addToToc('First Day Monday', 2)
+    this.addToToc('5 Day Work Week', 2)
+    this.addToToc('Hide Header', 2)
+    this.addToToc('Disabled Days', 2)
+    this.addToToc('Now', 2)
+    this.addToToc('Work Weeks', 2)
+    this.addToToc('Short Weekday Label', 2)
+    this.addToToc('Short Month Label', 2)
+    this.addToToc('Show Day of Year Label', 2)
+    this.addToToc('Day Height', 2)
+    this.addToToc('Prev/Next', 2)
+    this.addToToc('Swipe', 2)
+    this.addToToc('Multi-Day Selection', 2)
+    this.addToToc('Slots', 2)
 
-    this.addToToc('First Day Monday')
-    this.addToToc('Month View - First Day Monday', 2)
-
-    this.addToToc('5 Day Work Week')
-    this.addToToc('Month View - 5 Day Work Week', 2)
-
-    this.addToToc('Hide Header')
-    this.addToToc('Month View - Hide Header', 2)
-
-    this.addToToc('Disabled Days')
-    this.addToToc('Month View - Disabled Days', 2)
-
-    this.addToToc('Now')
-    this.addToToc('Month View - Now', 2)
-
-    this.addToToc('Work Weeks')
-    this.addToToc('Month View - Work Weeks', 2)
-
-    this.addToToc('Short Weekday Label')
-    this.addToToc('Month View - Short Weekday Label', 2)
-
-    this.addToToc('Short Month Label')
-    this.addToToc('Month View - Short Month Label', 2)
-
-    this.addToToc('Show Day of Year Label')
-    this.addToToc('Month View - Show Day of Year Label', 2)
-
-    this.addToToc('Day Height')
-    this.addToToc('Month View - Day Height', 2)
-
-    this.addToToc('Previous/Next')
-    this.addToToc('Month View - Prev/Next', 2)
-
-    this.addToToc('Swipe Navigation')
-    this.addToToc('Month View - Swipe', 2)
-
-    this.addToToc('Selection')
-    this.addToToc('Month View - Multi-Day Selection', 2)
-
-    this.addToToc('Working with Slots')
-    this.addToToc('Month View - Slots', 2)
+    this.addToToc('Mini-Mode')
+    this.addToToc('Mini-Mode - Basic', 2)
+    this.addToToc('Mini-Mode - Disabled Days', 2)
+    this.addToToc('Mini-Mode - 5 Day Work Week', 2)
+    this.addToToc('Mini-Mode - Work Week Numbers', 2)
+    this.addToToc('Mini-Mode - Selection', 2)
+    this.addToToc('Mini-Mode - Multi-Month Selection', 2)
+    this.addToToc('Mini-Mode - Slots', 2)
 
     this.toc = this.tempToc
   },

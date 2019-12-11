@@ -1,8 +1,10 @@
 <template>
   <q-calendar
     v-model="selectedDate"
-    show-day-of-year-label
+    show-work-weeks
     view="month"
+    mini-mode="auto"
+    breakpoint="sm"
     locale="en-us"
   />
 </template>
