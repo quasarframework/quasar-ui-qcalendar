@@ -16,7 +16,7 @@
           transition-prev="slide-right"
           transition-next="slide-left"
           :selected-start-end-dates="startEndDates"
-          :day-style="styleDay"
+          :day-class="classDay"
           @mousedown:day="onMouseDownDay"
           @mouseup:day="onMouseUpDay"
           @mousemove:day="onMouseMoveDay"
@@ -99,20 +99,20 @@ export default {
       this.$refs.calendar.prev()
     },
 
-    styleDay (timestamp) {
+    classDay (timestamp) {
       if (this.anchorDayIdentifier !== false && this.otherDayIdentifier !== false) {
-        if (this.isBetween(timestamp) === true) {
-          return {
-            color: 'blue',
-            background: '#CCCCFF'
-          }
-        }
+        return this.getBetween(timestamp)
       }
     },
 
-    isBetween (timestamp) {
+    getBetween (timestamp) {
+      debugger
       const nowIdentifier = getDayIdentifier(timestamp)
-      return this.lowIdentifier <= nowIdentifier && this.highIdentifier >= nowIdentifier
+      return {
+        'q-selected-day-first': this.lowIdentifier === nowIdentifier,
+        'q-selected-day': this.lowIdentifier <= nowIdentifier && this.highIdentifier >= nowIdentifier,
+        'q-selected-day-last': this.highIdentifier === nowIdentifier
+      }
     },
 
     onMouseDownDay (e) {
