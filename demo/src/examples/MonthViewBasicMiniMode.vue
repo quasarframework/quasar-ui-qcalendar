@@ -35,7 +35,6 @@ export default {
     splitterModel (val) {
       const rect = this.$refs.calendar.$el.getBoundingClientRect()
       this.miniMode = rect.width < 500
-      console.log(rect)
     }
   }
 }

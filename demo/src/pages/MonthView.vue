@@ -47,7 +47,7 @@ Keep in mind that the functionality below won't work with swipe actions.
     </example-card>
 
     <example-card title="Slots" name="MonthViewSlots" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSlots.vue').default)">
-    <q-markdown>
+      <q-markdown>
 For slots that return `day` or `timestamp`, it looks like this:
 ```js
 {
@@ -68,8 +68,9 @@ For slots that return `day` or `timestamp`, it looks like this:
   future: false   // if timestamp is in the future (based on `now` property)
 }
 ```
-    </q-markdown>
+      </q-markdown>
     </example-card>
+    <example-card title="Theme" name="MonthViewTheme" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewTheme.vue').default)" />
 
     <example-title title="Mini-Mode" />
     <q-markdown>
@@ -107,6 +108,7 @@ Using the property `short-weekday-label` while in `mini-mode` gives an even shor
     </example-card>
 
     <example-card title="Mini-Mode - Slots" name="MonthViewSlotsMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSlotsMiniMode.vue').default)" />
+    <example-card title="Mini-Mode - Theme" name="MonthViewThemeMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewThemeMiniMode.vue').default)" />
 
   </div>
 </template>
@@ -150,6 +152,7 @@ export default {
     this.addToToc('Swipe', 2)
     this.addToToc('Multi-Day Selection', 2)
     this.addToToc('Slots', 2)
+    this.addToToc('Theme', 2)
 
     this.addToToc('Mini-Mode')
     this.addToToc('Mini-Mode - Basic', 2)
@@ -159,6 +162,7 @@ export default {
     this.addToToc('Mini-Mode - Selection', 2)
     this.addToToc('Mini-Mode - Multi-Month Selection', 2)
     this.addToToc('Mini-Mode - Slots', 2)
+    this.addToToc('Mini-Mode - Theme', 2)
 
     this.toc = this.tempToc
   },
