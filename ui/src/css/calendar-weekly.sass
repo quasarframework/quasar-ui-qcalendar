@@ -41,12 +41,15 @@
     color: $calendar-text-color
 
     &.q-selected-day
-      background: lighten($calendar-primary-color, 45%)
+      background: lighten($calendar-primary-color, 45%) !important
       color: $calendar-primary-color !important
 
     &.q-outside
       background: $calendar-outside-background-color
       color: $calendar-outside-text-color
+
+      &.q-selected-day
+        color: lighten($calendar-primary-color, 30%) !important
 
     &.q-future-day
       color: $calendar-day-future-color
@@ -66,7 +69,7 @@
         color: currentColor
 
     &.q-past-day
-      color: $calendar-day-past-color
+      // color: $calendar-day-past-color
 
 .q-calendar-weekly__day--droppable
     border-right: $calendar-primary-color 1px dashed
@@ -140,6 +143,7 @@
     min-width: $calendar-day-label-height
     min-height: $calendar-day-label-height
     line-height: $calendar-day-label-height
+    font-weight: 400
 
   &__day-month
     position: absolute
@@ -189,7 +193,7 @@
 
     &.q-outside
       background: transparent !important
-      color: lighten($calendar-day-future-color, 40%) !important
+      color: lighten($calendar-day-future-color, 40%)
 
     &.q-selected-day
       background: transparent !important
