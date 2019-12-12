@@ -1,9 +1,11 @@
 <template>
   <q-calendar
     v-model="selectedDate"
-    show-day-of-year-label
     view="month"
+    mini-mode="auto"
+    breakpoint="sm"
     locale="en-us"
+    style="height: 300px;"
   />
 </template>
 
