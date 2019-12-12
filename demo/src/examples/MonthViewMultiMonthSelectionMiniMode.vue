@@ -7,7 +7,7 @@
       :mini-mode="true"
       animated
       :selected-start-end-dates="startEndDates"
-      :day-style="styleDay"
+      :day-class="classDay"
       @mousedown:day="onMouseDownDay"
       @mouseup:day="onMouseUpDay"
       @mousemove:day="onMouseMoveDay"
@@ -20,7 +20,7 @@
       :mini-mode="true"
       animated
       :selected-start-end-dates="startEndDates"
-      :day-style="styleDay"
+      :day-class="classDay"
       @mousedown:day="onMouseDownDay"
       @mouseup:day="onMouseUpDay"
       @mousemove:day="onMouseMoveDay"
@@ -94,20 +94,19 @@ export default {
   },
 
   methods: {
-    styleDay (timestamp) {
+    classDay (timestamp) {
       if (this.anchorDayIdentifier !== false && this.otherDayIdentifier !== false) {
-        if (this.isBetween(timestamp) === true) {
-          return {
-            color: 'blue',
-            background: '#CCCCFF'
-          }
-        }
+        return this.getBetween(timestamp)
       }
     },
 
-    isBetween (timestamp) {
+    getBetween (timestamp) {
       const nowIdentifier = getDayIdentifier(timestamp)
-      return this.lowIdentifier <= nowIdentifier && this.highIdentifier >= nowIdentifier
+      return {
+        'q-selected-day-first': this.lowIdentifier === nowIdentifier,
+        'q-selected-day': this.lowIdentifier <= nowIdentifier && this.highIdentifier >= nowIdentifier,
+        'q-selected-day-last': this.highIdentifier === nowIdentifier
+      }
     },
 
     onMouseDownDay (e) {

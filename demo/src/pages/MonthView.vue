@@ -95,7 +95,11 @@ Also, regardless of `mini-mode` all slots associated with month view now have ad
     <example-card title="Mini-Mode - Disabled Days" name="MonthViewDisabledDaysMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewDisabledDaysMiniMode.vue').default)" />
     <example-card title="Mini-Mode - 5 Day Work Week" name="MonthViewFiveDayWorkWeekMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewFiveDayWorkWeekMiniMode.vue').default)" />
     <example-card title="Mini-Mode - Work Week Numbers" name="MonthViewWorkWeekNumbersMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewWorkWeekNumbersMiniMode.vue').default)" />
-    <example-card title="Mini-Mode - Selection" name="MonthViewSelectionMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSelectionMiniMode.vue').default)" />
+    <example-card title="Mini-Mode - Selection" name="MonthViewSelectionMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSelectionMiniMode.vue').default)">
+      <q-markdown>
+There are some considerations when using mini-mode selections. There are 3 special classes: `.q-selected-day-first`, `.q-selected-day` and `.q-selected-day-last` in conjunction with the `day-class` property. These will help you create a selector compliant with [Material Design](https://material.io/components/pickers/#anatomy). See examples below for usage.
+      </q-markdown>
+    </example-card>
     <example-card title="Mini-Mode - Multi-Month Selection" name="MonthViewMultiMonthSelectionMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewMultiMonthSelectionMiniMode.vue').default)" />
 
     <example-card title="Mini-Mode - Slots" name="MonthViewSlotsMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSlotsMiniMode.vue').default)" />

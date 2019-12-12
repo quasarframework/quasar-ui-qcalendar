@@ -573,13 +573,40 @@
           "{ color: #ccc; }"
         ]
       },
-      "default": "{}",
+      "default": "null",
       "applicable": [
         "month"
       ],
       "examples": [
         "day-style=\"background-color: #c0c0c0\"",
         ":day-style=\"dayStyle\""
+      ]
+    },
+    "day-class": {
+      "type": "Function",
+      "category": "style",
+      "addedIn": "v1.3.1",
+      "desc": "Gets called to provide custom styling (via classes) of a day",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "desc": "A timestamp object associated with the day",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": ["Array", "Object", "String"],
+        "desc": "A Vue style object of classes",
+        "examples": [
+          "{ 'q-selected-day': true }"
+        ]
+      },
+      "default": "null",
+      "applicable": [
+        "month"
+      ],
+      "examples": [
+        ":day-class=\"getDayClass\""
       ]
     },
     "min-weeks": {
