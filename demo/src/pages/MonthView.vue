@@ -100,7 +100,11 @@ Also, regardless of `mini-mode` all slots associated with month view now have ad
 There are some considerations when using mini-mode selections. There are 3 special classes: `.q-selected-day-first`, `.q-selected-day` and `.q-selected-day-last` in conjunction with the `day-class` property. These will help you create a selector compliant with [Material Design](https://material.io/components/pickers/#anatomy). See examples below for usage.
       </q-markdown>
     </example-card>
-    <example-card title="Mini-Mode - Multi-Month Selection" name="MonthViewMultiMonthSelectionMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewMultiMonthSelectionMiniMode.vue').default)" />
+    <example-card title="Mini-Mode - Multi-Month Selection" name="MonthViewMultiMonthSelectionMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewMultiMonthSelectionMiniMode.vue').default)">
+      <q-markdown>
+Using the property `short-weekday-label` while in `mini-mode` gives an even shorter weekday label than normal.
+      </q-markdown>
+    </example-card>
 
     <example-card title="Mini-Mode - Slots" name="MonthViewSlotsMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSlotsMiniMode.vue').default)" />
 

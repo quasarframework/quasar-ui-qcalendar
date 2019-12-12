@@ -5,6 +5,7 @@
       view="month"
       locale="en-us"
       :mini-mode="true"
+      short-weekday-label
       animated
       :selected-start-end-dates="startEndDates"
       :day-class="classDay"
@@ -18,6 +19,7 @@
       view="month"
       locale="en-us"
       :mini-mode="true"
+      short-weekday-label
       animated
       :selected-start-end-dates="startEndDates"
       :day-class="classDay"
