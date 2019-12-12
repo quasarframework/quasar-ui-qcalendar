@@ -164,9 +164,10 @@ export default {
     },
 
     __renderHeadDayLabel (h, day, label) {
+      const weekdayLabel = this.weekdayFormatter(day, label)
       return h('span', {
         staticClass: 'ellipsis'
-      }, this.weekdayFormatter(day, label))
+      }, this.isMiniMode === true && this.shortWeekdayLabel === true ? weekdayLabel.charAt(0) : weekdayLabel)
     },
 
     __renderWeeks (h) {
@@ -254,17 +255,20 @@ export default {
         updateColors = this.setBothColors
       }
 
-      let style = { ...this.styles }
-      style = Object.assign(style, styler(day))
+      const style = Object.assign({ ...this.styles }, styler(day))
+      const dayClass = typeof this.dayClass === 'function' ? this.dayClass(day) : null
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
         key: day.date,
-        staticClass: 'q-calendar-weekly__day row justify-center items-center',
-        class: {
-          ...this.getRelativeClasses(day, outside),
-          'q-calendar-weekly__day--droppable': dragOver
-        },
-        style: style,
+        staticClass: 'q-calendar-weekly__day',
+        class: [
+          dayClass,
+          {
+            ...this.getRelativeClasses(day, outside),
+            'q-calendar-weekly__day--droppable': dragOver
+          }
+        ],
+        style,
         domProps: {
           ondragover: (e) => {
             if (this.dragOverFunc !== void 0) {

@@ -94,6 +94,10 @@ export default {
       type: Function,
       default: null
     },
+    dayClass: {
+      type: Function,
+      default: null
+    },
     dayPadding: String,
     minWeeks: {
       type: [Number, String],

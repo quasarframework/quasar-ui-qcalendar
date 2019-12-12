@@ -47,7 +47,7 @@ Keep in mind that the functionality below won't work with swipe actions.
     </example-card>
 
     <example-card title="Slots" name="MonthViewSlots" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSlots.vue').default)">
-    <q-markdown>
+      <q-markdown>
 For slots that return `day` or `timestamp`, it looks like this:
 ```js
 {
@@ -68,8 +68,9 @@ For slots that return `day` or `timestamp`, it looks like this:
   future: false   // if timestamp is in the future (based on `now` property)
 }
 ```
-    </q-markdown>
+      </q-markdown>
     </example-card>
+    <example-card title="Theme" name="MonthViewTheme" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewTheme.vue').default)" />
 
     <example-title title="Mini-Mode" />
     <q-markdown>
@@ -95,10 +96,19 @@ Also, regardless of `mini-mode` all slots associated with month view now have ad
     <example-card title="Mini-Mode - Disabled Days" name="MonthViewDisabledDaysMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewDisabledDaysMiniMode.vue').default)" />
     <example-card title="Mini-Mode - 5 Day Work Week" name="MonthViewFiveDayWorkWeekMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewFiveDayWorkWeekMiniMode.vue').default)" />
     <example-card title="Mini-Mode - Work Week Numbers" name="MonthViewWorkWeekNumbersMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewWorkWeekNumbersMiniMode.vue').default)" />
-    <example-card title="Mini-Mode - Selection" name="MonthViewSelectionMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSelectionMiniMode.vue').default)" />
-    <example-card title="Mini-Mode - Multi-Month Selection" name="MonthViewMultiMonthSelectionMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewMultiMonthSelectionMiniMode.vue').default)" />
+    <example-card title="Mini-Mode - Selection" name="MonthViewSelectionMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSelectionMiniMode.vue').default)">
+      <q-markdown>
+There are some considerations when using mini-mode selections. There are 3 special classes: `.q-selected-day-first`, `.q-selected-day` and `.q-selected-day-last` in conjunction with the `day-class` property. These will help you create a selector compliant with [Material Design](https://material.io/components/pickers/#anatomy). See examples below for usage.
+      </q-markdown>
+    </example-card>
+    <example-card title="Mini-Mode - Multi-Month Selection" name="MonthViewMultiMonthSelectionMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewMultiMonthSelectionMiniMode.vue').default)">
+      <q-markdown>
+Using the property `short-weekday-label` while in `mini-mode` gives an even shorter weekday label than normal.
+      </q-markdown>
+    </example-card>
 
     <example-card title="Mini-Mode - Slots" name="MonthViewSlotsMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSlotsMiniMode.vue').default)" />
+    <example-card title="Mini-Mode - Theme" name="MonthViewThemeMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewThemeMiniMode.vue').default)" />
 
   </div>
 </template>
@@ -142,6 +152,7 @@ export default {
     this.addToToc('Swipe', 2)
     this.addToToc('Multi-Day Selection', 2)
     this.addToToc('Slots', 2)
+    this.addToToc('Theme', 2)
 
     this.addToToc('Mini-Mode')
     this.addToToc('Mini-Mode - Basic', 2)
@@ -151,6 +162,7 @@ export default {
     this.addToToc('Mini-Mode - Selection', 2)
     this.addToToc('Mini-Mode - Multi-Month Selection', 2)
     this.addToToc('Mini-Mode - Slots', 2)
+    this.addToToc('Mini-Mode - Theme', 2)
 
     this.toc = this.tempToc
   },

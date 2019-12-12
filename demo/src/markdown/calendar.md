@@ -17,6 +17,9 @@ This is the true power of QCalendar.
 - Show month, week, work-week, day, contiguous days (ex: 3 days at a time)
 - Resource scheduler
 - Agenda views
+- Month view mini-mode
+- Month view multi-day selection
+- Month view multi-month/multi-day selection when combining two or more calendars
 - Optional drag and drop support (including mobile)
 - Automatic localization / internationalization
 - Responsive flex grid layout
@@ -179,6 +182,8 @@ You would need to build out your own way of allowing the User to interact with Q
 
 QCalendar is made from four distict components: **day**, **month**, **scheduler** and **agenda** views. All other views derive from these four views. For instance, the **week** view is really a 7-**day** view.
 
+Not only all these, but the **month** view has a **mini-mode** behavior.
+
 ## Day view
 
 ![DayView](statics/qcalendar-day-view.png "Day View" =800x800)
@@ -208,6 +213,16 @@ The `month-interval` view allows you to display all days in a month while in the
 The `month` view is for displaying a finite number of weeks according to the calendar time which is the currently displayed month.
 
 > For time periods which fall outside of the current month, yet are still displayed (beginning and ending days of the month view), these are known as the `outside` days. The current date is known as the `current` day (obviously). Days leading up to the current date are known as `past` days and days that come after the current date are known as `future` days.
+
+### Mini-Mode
+
+![MonthViewMiniModeSelection](statics/q-calendar-month-view-mini-mode-with-selection.png "Month View Mini-Mode with Multi-Day Selection" =400x400)
+
+The `month` view also has a `mini-mode` property with additional (if needed) `breakpoint` behavior.
+
+And, the multi-day selection, when combined with two or mode calendars allows you to have multi-month range selection.
+
+![MonthViewMiniModeMultiMonthSelection](statics/qcalendar-month-view-mini-mode-multi-month-selection.png "Month View Mini-Mode with Multi-Month Selection" =800x800)
 
 ## Scheduler view
 
