@@ -38,7 +38,7 @@
   .q-calendar-weekly__day
     border-right: $calendar-border-color 1px solid
     border-bottom: $calendar-border-color 1px solid
-    color: $calendar-primary-color
+    color: $calendar-text-color
 
     &.q-selected-day
       background: lighten($calendar-primary-color, 45%)
@@ -54,10 +54,10 @@
     &.q-current-day
 
       .q-calendar-weekly__day-label
-        font-weight: 700
+        font-weight: 400
 
         .q-btn__wrapper:before
-          border-width: 2px
+          border-width: 1px
 
       .q-calendar-weekly__day-month
         color: currentColor
@@ -69,7 +69,7 @@
       color: $calendar-day-past-color
 
 .q-calendar-weekly__day--droppable
-    border-right: $calendar-primary-color 2px dashed
+    border-right: $calendar-primary-color 1px dashed
 
 .q-calendar-weekly
   display: flex
@@ -188,11 +188,11 @@
       color: $calendar-day-future-color
 
     &.q-outside
-      background-color: transparent !important
+      background: transparent !important
       color: lighten($calendar-day-future-color, 40%) !important
 
     &.q-selected-day
-      background-color: transparent !important
+      background: transparent !important
 
       &:before
         content: ''
@@ -205,18 +205,18 @@
         bottom: 0
         left: 0
         margin: auto
-        background-color: lighten($calendar-primary-color, 45%)
-      
-      &:first-child:before
-        border-radius: 0.8em 0 0 0.8em
+        background: lighten($calendar-primary-color, 45%)
 
-      &:last-child:before
-        border-radius: 0 0.8em 0.8em 0
+      // &:first-child:before
+      //   border-radius: 0.8em 0 0 0.8em
+
+      // &:last-child:before
+      //   border-radius: 0 0.8em 0.8em 0
 
       &.q-selected-day-first,
       &.q-selected-day-last
         .q-calendar-weekly__day-label
-          background-color: $calendar-primary-color !important
+          background: $calendar-primary-color !important
           color: #fff
           border-radius: 50%
 
@@ -235,7 +235,9 @@
 
     &.q-current-day
       .q-calendar-weekly__day-label .q-btn__wrapper:before
-        border-color: #000
+        border-color: #3e3e3e
+        font-color: #3e3e3e
+        color: white
         border-width: 1px
 
   .q-calendar-weekly__day-label
@@ -289,8 +291,7 @@
     &.q-current-day
 
       .q-calendar-weekly__day-label
-        // border: currentColor solid 1px
-        font-weight: 700
+        font-weight: 400
 
       .q-calendar-weekly__day-month
         color: currentColor
@@ -302,24 +303,22 @@
       color: $calendar-day-past-color-dark
 
   .q-calendar-weekly__day--droppable
-    border-right: $calendar-primary-color-dark 2px dashed
+    border-right: $calendar-primary-color-dark 1px dashed
 
   .q-calendar-mini
     .q-calendar-weekly__day
-      color: #ffff
+      color: #fff
 
       &.q-future-day,
       &.q-past-day
         color: $calendar-day-past-color-dark
-      
+
       &.q-selected-day
-        // color: lighten($calendar-primary-color, 45%) !important
         color: #fff !important
 
         &:before
-          // background-color: darken($calendar-primary-color, 35%)
-          background-color: #393939
-      
+          background: #393939
+
       &.q-current-day
         .q-calendar-weekly__day-label .q-btn__wrapper:before
           border-color: #fff
