@@ -775,7 +775,7 @@
     "mini-mode": {
       "type": ["Boolean", "String"],
       "category": "behavior",
-      "addedIn": "v1.2.4",
+      "addedIn": "v1.3.0",
       "values": [
         true,
         false,
@@ -794,7 +794,7 @@
     "breakpoint": {
       "type": "String",
       "category": "behavior",
-      "addedIn": "v1.2.4",
+      "addedIn": "v1.3.0",
       "values": [
         "xs",
         "sm",
@@ -814,7 +814,7 @@
     "month-label-size": {
       "type": "String",
       "category": "style",
-      "addedIn": "v1.2.4",
+      "addedIn": "v1.3.0",
       "values": [
         "xs",
         "sm",
