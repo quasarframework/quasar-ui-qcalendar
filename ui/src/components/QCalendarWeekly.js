@@ -259,7 +259,7 @@ export default {
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
         key: day.date,
-        staticClass: 'q-calendar-weekly__day row justify-center items-center',
+        staticClass: 'q-calendar-weekly__day',
         class: [
           dayClass,
           {
