@@ -164,9 +164,10 @@ export default {
     },
 
     __renderHeadDayLabel (h, day, label) {
+      const weekdayLabel = this.weekdayFormatter(day, label)
       return h('span', {
         staticClass: 'ellipsis'
-      }, this.weekdayFormatter(day, label))
+      }, this.isMiniMode === true && this.shortWeekdayLabel === true ? weekdayLabel.charAt(0) : weekdayLabel)
     },
 
     __renderWeeks (h) {
