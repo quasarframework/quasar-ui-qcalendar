@@ -17,9 +17,9 @@
           animated
           transition-prev="slide-right"
           transition-next="slide-left"
-          :day-style="styleDay"
+          :day-class="classDay"
           :selected-start-end-dates="startEndDates"
-          style="height: 400px;"
+          style="height: 320px"
           @mousedown:day="onMouseDownDay"
           @mouseup:day="onMouseUpDay"
           @mousemove:day="onMouseMoveDay"
@@ -89,19 +89,18 @@ export default {
     calendarPrev () {
       this.$refs.calendar.prev()
     },
-    styleDay (timestamp) {
+    classDay (timestamp) {
       if (this.anchorDayIdentifier !== false && this.otherDayIdentifier !== false) {
-        if (this.isBetween(timestamp) === true) {
-          return {
-            color: 'blue',
-            background: '#CCCCFF'
-          }
-        }
+        return this.getBetween(timestamp)
       }
     },
-    isBetween (timestamp) {
-      let nowIdentifier = getDayIdentifier(timestamp)
-      return this.lowIdentifier <= nowIdentifier && this.highIdentifier >= nowIdentifier
+    getBetween (timestamp) {
+      const nowIdentifier = getDayIdentifier(timestamp)
+      return {
+        'q-selected-day-first': this.lowIdentifier === nowIdentifier,
+        'q-selected-day': this.lowIdentifier <= nowIdentifier && this.highIdentifier >= nowIdentifier,
+        'q-selected-day-last': this.highIdentifier === nowIdentifier
+      }
     },
     onMouseDownDay (e) {
       // mouse is down, start selection and capture current
