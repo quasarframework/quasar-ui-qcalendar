@@ -173,8 +173,7 @@
     border-bottom: unset
 
   .q-calendar-weekly__head-weekday
-    border-right: unset
-    border-bottom: unset
+    border: 0 !important
 
   .q-calendar-weekly__workweek
     border-right: unset
@@ -182,16 +181,15 @@
     font-size: 1em
 
   .q-calendar-weekly__day
-    border-right: unset
-    border-bottom: unset
-    padding: unset !important
+    padding: 0
+    border: 0 !important
 
     &.q-past-day
       color: $calendar-day-future-color
 
     &.q-outside
-      background-color: transparent
-      color: lighten($calendar-day-future-color, 40%)
+      background-color: transparent !important
+      color: lighten($calendar-day-future-color, 40%) !important
 
     &.q-selected-day
       background-color: transparent !important
@@ -208,6 +206,12 @@
         left: 0
         margin: auto
         background-color: lighten($calendar-primary-color, 45%)
+      
+      &:first-child:before
+        border-radius: 0.8em 0 0 0.8em
+
+      &:last-child:before
+        border-radius: 0 0.8em 0.8em 0
 
       &.q-selected-day-first,
       &.q-selected-day-last
@@ -229,9 +233,10 @@
           &:before
             width: 0
 
-      &.q-current-day
-        .q-calendar-weekly__day-label .q-btn__wrapper:before
-          border-color: #000
+    &.q-current-day
+      .q-calendar-weekly__day-label .q-btn__wrapper:before
+        border-color: #000
+        border-width: 1px
 
   .q-calendar-weekly__day-label
     position: absolute
@@ -241,10 +246,6 @@
     bottom: unset
     left: 0
     margin: auto
-
-    .q-btn__wrapper:before
-      border-width: 1px !important
-
 
 .body--dark
   .q-calendar-weekly
@@ -302,3 +303,23 @@
 
   .q-calendar-weekly__day--droppable
     border-right: $calendar-primary-color-dark 2px dashed
+
+  .q-calendar-mini
+    .q-calendar-weekly__day
+      color: #ffff
+
+      &.q-future-day,
+      &.q-past-day
+        color: $calendar-day-past-color-dark
+      
+      &.q-selected-day
+        // color: lighten($calendar-primary-color, 45%) !important
+        color: #fff !important
+
+        &:before
+          // background-color: darken($calendar-primary-color, 35%)
+          background-color: #393939
+      
+      &.q-current-day
+        .q-calendar-weekly__day-label .q-btn__wrapper:before
+          border-color: #fff
