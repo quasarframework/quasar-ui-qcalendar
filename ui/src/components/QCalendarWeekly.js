@@ -254,17 +254,20 @@ export default {
         updateColors = this.setBothColors
       }
 
-      let style = { ...this.styles }
-      style = Object.assign(style, styler(day))
+      const style = Object.assign({ ...this.styles }, styler(day))
+      const dayClass = typeof this.dayClass === 'function' ? this.dayClass(day) : null
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
         key: day.date,
         staticClass: 'q-calendar-weekly__day',
-        class: {
-          ...this.getRelativeClasses(day, outside),
-          'q-calendar-weekly__day--droppable': dragOver
-        },
-        style: style,
+        class: [
+          dayClass,
+          {
+            ...this.getRelativeClasses(day, outside),
+            'q-calendar-weekly__day--droppable': dragOver
+          }
+        ],
+        style,
         domProps: {
           ondragover: (e) => {
             if (this.dragOverFunc !== void 0) {
