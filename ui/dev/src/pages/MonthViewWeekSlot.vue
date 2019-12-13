@@ -48,79 +48,66 @@ export default {
       selectedDate: '2019-04-08',
       events: [
         {
-          title: 'April Fools Day',
-          details: 'Everything is funny as long as it is happening to someone else',
-          date: '2019-04-01',
-          bgcolor: 'orange'
+          title: 'April Foold Day',
+          color: 'orange',
+          start: '2019-04-01',
+          end: '2019-04-01'
         },
         {
           title: 'Sisters Birthday',
-          details: 'Buy a nice present',
-          date: '2019-04-04',
-          bgcolor: 'green',
-          icon: 'fas fa-birthday-cake'
+          color: 'green',
+          start: '2019-04-04',
+          end: '2019-04-04',
+          icon: 'cake'
         },
         {
           title: 'Meeting',
-          details: 'Time to pitch my idea to the company',
-          date: '2019-04-08',
-          time: '10:00',
-          duration: 120,
-          bgcolor: 'red',
-          icon: 'fas fa-handshake'
+          color: 'red',
+          start: '2019-04-08',
+          end: '2019-04-08',
+          icon: 'group'
         },
         {
           title: 'Lunch',
-          details: 'Company is paying!',
-          date: '2019-04-08',
-          time: '11:30',
-          duration: 90,
-          bgcolor: 'teal',
-          icon: 'fas fa-hamburger'
+          color: 'teal',
+          start: '2019-04-08',
+          end: '2019-04-08',
+          icon: 'free_breakfast'
         },
         {
-          title: 'Visit mom',
-          details: 'Always a nice chat with mom',
-          date: '2019-04-20',
-          time: '17:00',
-          duration: 90,
-          bgcolor: 'blue-grey',
-          icon: 'fas fa-car'
+          title: 'Visit Mom',
+          color: 'blue-grey',
+          start: '2019-04-20',
+          end: '2019-04-20',
+          icon: 'card_giftcard'
         },
         {
           title: 'Conference',
-          details: 'Teaching Javascript 101',
-          date: '2019-04-22',
-          time: '08:00',
-          duration: 540,
-          bgcolor: 'blue',
-          icon: 'fas fa-chalkboard-teacher'
+          color: 'blue',
+          start: '2019-04-22',
+          end: '2019-04-22',
+          icon: 'ondemand_video'
         },
         {
           title: 'Girlfriend',
-          details: 'Meet GF for dinner at Swanky Restaurant',
-          date: '2019-04-22',
-          time: '19:00',
-          duration: 180,
-          bgcolor: 'teal',
-          icon: 'fas fa-utensils'
+          color: 'teal',
+          start: '2019-04-22',
+          end: '2019-04-22',
+          icon: 'fastfood'
         },
         {
-          title: 'Fishing',
-          details: 'Time for some weekend R&R',
-          date: '2019-04-27',
-          bgcolor: 'purple',
-          icon: 'fas fa-fish',
-          days: 2
+          title: 'Rowing',
+          color: 'purple',
+          start: '2019-04-27',
+          end: '2019-04-28',
+          icon: 'rowing'
         },
         {
           title: 'Vacation',
-          details: 'Trails and hikes, going camping! Don\'t forget to bring bear spray!',
-          date: '2019-04-29',
-          endDate: '2019-05-03',
-          bgcolor: 'purple',
-          icon: 'fas fa-plane',
-          days: 5
+          color: '#9c27b0',
+          start: '2019-04-29',
+          end: '2019-05-03',
+          icon: "flight"
         }
       ]
     }
@@ -201,25 +188,28 @@ export default {
     },
 
     getWeekEvents (week, weekdays) {
-      console.log(`${week[0].date} - ${week[week.length - 1].date}`)
-
       const firstDay = getDayIdentifier(parsed(week[0].date + ' 00:00'))
       const lastDay = getDayIdentifier(parsed(week[week.length - 1].date + ' 23:59'))
 
-      const events = []
-      for (let i = 0; i < this.events.length; ++i) {
-        const startDate = parsed(this.events[i].date + ' 00:00')
-        const sd = getDayIdentifier(startDate)
+      const events = this.events.filter(event => {
+        const startDate = getDayIdentifier(parsed(event.start + ' 00:00'))
+        const endDate = getDayIdentifier(parsed(event.end + ' 23:59'))
+
+        return this.isBetweenDatesWeek(startDate, endDate, firstDay, lastDay)
+      })
+      
+      /*for (let i = 0; i < this.events.length; ++i) {
+        
 
         if (this.isBetweenDates(sd, firstDay, lastDay)) {
           console.log('matched:', `${this.events[i].date}: ${this.events[i].title}`)
           events.push(this.events[i])
         }
-        else if (this.events[i].days !== void 0 && this.containsDates(startDate, this.events[i].days, firstDay, lastDay)) {
+        else if (this.events[i].end !== void 0 && this.containsDates(startDate, this.events[i].days, firstDay, lastDay)) {
           console.log('matched:', `${this.events[i].date}: ${this.events[i].title}`)
           events.push(this.events[i])
         }
-      }
+      }*/
       console.log('events:', events)
       if (events.length > 0) {
         this.processEvents(events, week, weekdays)
@@ -259,6 +249,14 @@ export default {
         }
       }
       return false
+    },
+
+    isBetweenDatesWeek (dateStart, dateEnd, weekStart, weekEnd) {
+      return (
+          (dateEnd < weekEnd && dateEnd >= weekStart)
+          || dateEnd === weekEnd
+          || (dateEnd > weekEnd && dateStart <= weekEnd)
+        )
     }
   }
 }
