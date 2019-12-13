@@ -1,32 +1,38 @@
 <template>
-  <div class="row" style="overflow: hidden;">
-    <q-calendar
-      v-model="selectedDate1"
-      view="month"
-      locale="en-us"
-      :mini-mode="true"
-      short-weekday-label
-      animated
-      :selected-start-end-dates="startEndDates"
-      :day-class="classDay"
-      @mousedown:day="onMouseDownDay"
-      @mouseup:day="onMouseUpDay"
-      @mousemove:day="onMouseMoveDay"
-    />
-    <q-separator vertical />
-    <q-calendar
-      v-model="selectedDate2"
-      view="month"
-      locale="en-us"
-      :mini-mode="true"
-      short-weekday-label
-      animated
-      :selected-start-end-dates="startEndDates"
-      :day-class="classDay"
-      @mousedown:day="onMouseDownDay"
-      @mouseup:day="onMouseUpDay"
-      @mousemove:day="onMouseMoveDay"
-    />
+  <div>
+    <div class="q-gutter-sm">
+      <q-checkbox v-model="mobile" label="Use Touch (set if on mobile)" />
+    </div>
+    <q-separator></q-separator>
+    <div class="row" style="overflow: hidden;">
+      <q-calendar
+        v-model="selectedDate1"
+        view="month"
+        locale="en-us"
+        :mini-mode="true"
+        short-weekday-label
+        animated
+        :selected-start-end-dates="startEndDates"
+        :day-class="classDay"
+        @mousedown:day="onMouseDownDay"
+        @mouseup:day="onMouseUpDay"
+        @mousemove:day="onMouseMoveDay"
+      />
+      <q-separator vertical />
+      <q-calendar
+        v-model="selectedDate2"
+        view="month"
+        locale="en-us"
+        :mini-mode="true"
+        short-weekday-label
+        animated
+        :selected-start-end-dates="startEndDates"
+        :day-class="classDay"
+        @mousedown:day="onMouseDownDay"
+        @mouseup:day="onMouseUpDay"
+        @mousemove:day="onMouseMoveDay"
+      />
+    </div>
   </div>
 </template>
 
@@ -52,7 +58,8 @@ export default {
       selectedDate2: '',
       anchorTimestamp: '',
       otherTimestamp: '',
-      mouseDown: false
+      mouseDown: false,
+      mobile: false
     }
   },
 
@@ -112,6 +119,14 @@ export default {
     },
 
     onMouseDownDay (e) {
+      if (this.mobile === true &&
+        this.anchorTimestamp !== null &&
+        this.otherTimestamp !== null &&
+        this.anchorTimestamp.date === this.otherTimestamp.date) {
+        this.otherTimestamp = e
+        this.mouseDown = false
+        return
+      }
       // mouse is down, start selection and capture current
       this.mouseDown = true
       this.anchorTimestamp = e
