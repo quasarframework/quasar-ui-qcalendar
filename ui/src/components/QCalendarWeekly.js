@@ -287,9 +287,8 @@ export default {
         this.isMiniMode !== true && this.showDayOfYearLabel && !hasMonth ? this.__renderDayOfYearLabel(h, day) : '',
         this.isMiniMode !== true && hasMonth ? this.__renderDayMonth(h, day) : '',
         h('div', {
-          staticClass: 'row full-width justify-center'
+          staticClass: 'full-width'
         }, slot ? slot(slotData) : '')
-
       ])
     },
 
