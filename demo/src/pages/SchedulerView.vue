@@ -54,6 +54,8 @@ Below, the slot receives the `resource` to be displayed. In this case, an avatar
       </q-markdown>
     </example-card>
 
+    <example-card title="Theme" name="SchedulerViewTheme" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewTheme.vue').default)" />
+
   </div>
 </template>
 
@@ -89,6 +91,7 @@ export default {
     this.addToToc('Slots (scheduler-day-header)', 2)
     this.addToToc('Slots (scheduler-resource-day)', 2)
     this.addToToc('Slots (scheduler-resource)', 2)
+    this.addToToc('Theme', 2)
 
     this.toc = this.tempToc
   },

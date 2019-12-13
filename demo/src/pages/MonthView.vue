@@ -2,6 +2,7 @@
   <div class="q-markdown">
     <example-title title="Month View" />
     <example-card title="Basic" name="MonthViewBasic" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewBasic.vue').default)" />
+    <example-card title="Color" name="MonthViewColor" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewColor.vue').default)" />
     <example-card title="First Day Monday" name="MonthViewMondayFirstDay" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewMondayFirstDay.vue').default)" />
     <example-card title="5 Day Work Week" name="MonthViewFiveDayWorkWeek" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewFiveDayWorkWeek.vue').default)" />
     <example-card title="Hide Header" name="MonthViewHideHeader" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewHideHeader.vue').default)" />
@@ -11,7 +12,6 @@ When the property `disabled-days` has an array of disabled days, you can hook in
       </q-markdown>
     </example-card>
 
-    <example-title title="Now" />
     <example-card title="Now" name="MonthViewNow" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewNow.vue').default)" />
     <example-card title="Work Weeks" name="MonthViewWorkWeekNumbers" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewWorkWeekNumbers.vue').default)">
       <q-markdown>
@@ -138,6 +138,7 @@ export default {
     this.tempToc = []
     this.addToToc('Month View')
     this.addToToc('Basic', 2)
+    this.addToToc('Color', 2)
     this.addToToc('First Day Monday', 2)
     this.addToToc('5 Day Work Week', 2)
     this.addToToc('Hide Header', 2)
