@@ -70,6 +70,8 @@ Scroll down if the current time is later for your location to see the example.
       </q-markdown>
     </example-card>
 
+    <example-card title="Theme" name="WeekViewTheme" :tag-parts="getTagParts(require('!!raw-loader!../examples/WeekViewTheme.vue').default)" />
+
   </div>
 </template>
 
@@ -111,6 +113,7 @@ export default {
     this.addToToc('Column Header', 2)
     this.addToToc('Slots', 2)
     this.addToToc('Week View (Current Time) - Slot (day-container)', 2)
+    this.addToToc('Theme', 2)
 
     this.toc = this.tempToc
   },

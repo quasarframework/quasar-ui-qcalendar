@@ -105,6 +105,8 @@ Scroll down if the current time is later for your location to see the example.
       </q-markdown>
     </example-card>
 
+    <example-card title="Theme" name="DayViewTheme" :tag-parts="getTagParts(require('!!raw-loader!../examples/DayViewTheme.vue').default)" />
+
   </div>
 </template>
 
@@ -148,6 +150,7 @@ export default {
     this.addToToc('Column Header Count (Paged)', 2)
     this.addToToc('Slots', 2)
     this.addToToc('Day View (Current Time) - Slot (day-container)', 2)
+    this.addToToc('Theme', 2)
 
     this.toc = this.tempToc
   },

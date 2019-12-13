@@ -328,7 +328,7 @@ export default {
           dense: true,
           noCaps: true,
           outline: day.current === true,
-          disable: day.disabled
+          disable: day.disabled === true || outside === true
         },
         on: this.getMouseEventHandlers({
           'click:date': { event: 'click', stop: true },
