@@ -156,7 +156,7 @@ export default {
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
         key: day.date,
-        staticClass: 'ellipsis q-calendar-weekly__head-weekday',
+        staticClass: 'q-calendar-weekly__head-weekday',
         class: this.getRelativeClasses(day, outside)
       }), [
         this.__renderHeadDayLabel(h, day, this.shortWeekdayLabel || this.isMiniMode)
