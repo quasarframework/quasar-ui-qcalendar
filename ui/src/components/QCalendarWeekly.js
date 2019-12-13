@@ -182,12 +182,24 @@ export default {
     },
 
     __renderWeek (h, week) {
+      const slot = this.$scopedSlots.week
+      const weekdays = this.weekdays
+      const slotData = { week, weekdays, miniMode: this.isMiniMode }
       return h('div', {
         key: week[0].date,
         staticClass: 'q-calendar-weekly__week'
       }, [
         this.showWorkWeeks === true && this.__renderWorkWeekGutter(h, week),
-        week.map((day) => this.__renderDay(h, day))
+        week.map((day) => this.__renderDay(h, day)),
+        slot ? h('div', {
+          staticClass: 'absolute',
+          style: {
+            top: '2.2em',
+            left: 0,
+            right: 0,
+            bottom: 0
+          }
+        }, slot(slotData)) : ''
       ])
     },
 
