@@ -296,7 +296,7 @@
         @click:week="addEventMenu"
         @click:resource="resourceClicked"
         @click:resource:day="resourceDayClicked"
-        dayPadding="35px 2px"
+        day-padding="35px 0 0 0"
       >
         <template #day="{ date }">
           <template v-if="calendarView.indexOf('agenda') < 0">
