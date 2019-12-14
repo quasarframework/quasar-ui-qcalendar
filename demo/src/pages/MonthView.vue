@@ -70,7 +70,14 @@ For slots that return `day` or `timestamp`, it looks like this:
 ```
       </q-markdown>
     </example-card>
-    <example-card title="Slots (week)" name="MonthViewWeekSlot" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewWeekSlot.vue').default)" />
+    <example-card title="Slots (week)" name="MonthViewWeekSlot" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewWeekSlot.vue').default)">
+      <q-markdown>
+The example below uses the **#week** slot (v1.3.2). It's a bit more difficult to work with than the **#day-body** slot, but allows you to have your devland events displayed in a contiguous manner. Check out the sources to see how we did it.
+::: warning
+Do not mix #day-body and #week slots or you will have overlapping results.
+:::
+      </q-markdown>
+    </example-card>
     <example-card title="Theme" name="MonthViewTheme" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewTheme.vue').default)" />
 
     <example-title title="Mini-Mode" />
