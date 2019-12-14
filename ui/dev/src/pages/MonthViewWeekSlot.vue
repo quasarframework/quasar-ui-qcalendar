@@ -3,7 +3,7 @@
     v-model="selectedDate"
     view="month"
     locale="en-us"
-    style="height: 500px;"
+    :day-height="100"
   >
     <template #week="{ week, weekdays }">
       <template v-for="(computedEvent, index) in getWeekEvents(week, weekdays)">
@@ -20,19 +20,6 @@
         </q-badge>
       </template>
     </template>
-    <!-- <template #day="{ date }">
-      <template v-for="(event, index) in getEvents(date)">
-        <q-badge
-          :key="index"
-          style="width: 100%; cursor: pointer;"
-          class="ellipsis"
-          :class="badgeClasses(event, 'day')"
-          :style="badgeStyles(event, 'day')"
-        >
-          <q-icon v-if="event.icon" :name="event.icon" class="q-mr-xs"></q-icon><span class="ellipsis">{{ event.title }}</span>
-        </q-badge>
-      </template>
-    </template> -->
   </q-calendar>
 </template>
 
@@ -41,8 +28,18 @@ import { date, colors } from 'quasar'
 import {
   getDayIdentifier,
   parsed,
-  MILLISECONDS_IN_DAY
+  MILLISECONDS_IN_DAY,
+  parseDate
 } from '@quasar/quasar-ui-qcalendar/src/utils/timestamp'
+
+const CURRENT_DAY = new Date()
+
+function getCurrentDay (day) {
+  const newDay = new Date(CURRENT_DAY)
+  newDay.setDate(day)
+  const tm = parseDate(newDay)
+  return tm.date
+}
 
 // In ui/src/utils/timestamp.js
 function diffTimestamp (ts1, ts2, strict) {
@@ -69,68 +66,68 @@ function indexOf (array, cb) {
 export default {
   data () {
     return {
-      selectedDate: '2019-04-08',
+      selectedDate: '',
       events: [
         {
-          title: 'April Foold Day',
+          title: '1st of the Month',
           color: 'orange',
-          start: '2019-04-01',
-          end: '2019-04-01'
+          start: getCurrentDay(1),
+          end: getCurrentDay(1),
         },
         {
           title: 'Sisters Birthday',
           color: 'green',
-          start: '2019-04-04',
-          end: '2019-04-04',
+          start: getCurrentDay(4),
+          end: getCurrentDay(4),
           icon: 'cake'
         },
         {
           title: 'Meeting',
           color: 'red',
-          start: '2019-04-08',
-          end: '2019-04-08',
+          start: getCurrentDay(8),
+          end: getCurrentDay(8),
           icon: 'group'
         },
         {
           title: 'Lunch',
           color: 'teal',
-          start: '2019-04-08',
-          end: '2019-04-08',
+          start: getCurrentDay(8),
+          end: getCurrentDay(8),
           icon: 'free_breakfast'
         },
         {
           title: 'Visit Mom',
           color: 'blue-grey',
-          start: '2019-04-20',
-          end: '2019-04-20',
+          start: getCurrentDay(20),
+          end: getCurrentDay(20),
           icon: 'card_giftcard'
         },
         {
           title: 'Conference',
           color: 'blue',
-          start: '2019-04-22',
-          end: '2019-04-22',
+          start: getCurrentDay(22),
+          end: getCurrentDay(22),
           icon: 'ondemand_video'
         },
         {
           title: 'Girlfriend',
           color: 'teal',
-          start: '2019-04-22',
-          end: '2019-04-22',
+          start: getCurrentDay(22),
+          end: getCurrentDay(22),
           icon: 'fastfood'
         },
         {
           title: 'Rowing',
           color: 'purple',
-          start: '2019-04-27',
-          end: '2019-04-28',
+          start: getCurrentDay(27),
+          end: getCurrentDay(28),
           icon: 'rowing'
         },
         {
           title: 'Vacation',
           color: 'purple',
-          start: '2019-04-29',
-          end: '2019-05-03',
+          start: getCurrentDay(22),
+          end: getCurrentDay(29),
           icon: "flight"
         }
       ]
