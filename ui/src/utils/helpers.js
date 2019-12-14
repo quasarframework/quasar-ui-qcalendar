@@ -1,10 +1,10 @@
-export function convertToUnit (str, unit = 'px') {
-  if (str == null || str === '') {
+export function convertToUnit (input, unit = 'px') {
+  if (input == null || input === '') {
     return void 0
-  } else if (isNaN(str)) {
-    return String(str)
+  } else if (isNaN(input)) {
+    return String(input)
   } else {
-    return `${Number(str)}${unit}`
+    return `${Number(input)}${unit}`
   }
 }
 
