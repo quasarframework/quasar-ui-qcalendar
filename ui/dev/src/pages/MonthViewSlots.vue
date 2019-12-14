@@ -26,7 +26,7 @@ import { date, colors } from 'quasar'
 
 import {
   parseDate
-} from '@quasar/quasar-ui-qcalendar/src/utils/timestamp'
+} from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
 
 const CURRENT_DAY = new Date()
 

@@ -420,7 +420,7 @@ import {
   parsed,
   getDayIdentifier,
   getTimeIdentifier
-} from '@quasar/quasar-ui-qcalendar/src/utils/timestamp'
+} from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
 
 import 'drag-drop-touch'
 

@@ -24,7 +24,7 @@
 <script>
 import {
   getDayIdentifier
-} from '@quasar/quasar-ui-qcalendar/src/utils/timestamp'
+} from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
 
 export default {
   data () {

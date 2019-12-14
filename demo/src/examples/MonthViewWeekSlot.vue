@@ -27,9 +27,10 @@
 import {
   getDayIdentifier,
   parsed,
-  MILLISECONDS_IN_DAY,
-  parseDate
-} from '@quasar/quasar-ui-qcalendar/src/utils/timestamp'
+  parseDate,
+  diffTimestamp,
+  indexOf
+} from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
 
 const CURRENT_DAY = new Date()
 
@@ -38,28 +39,6 @@ function getCurrentDay (day) {
   newDay.setDate(day)
   const tm = parseDate(newDay)
   return tm.date
-}
-
-// In ui/src/utils/timestamp.js
-function diffTimestamp (ts1, ts2, strict) {
-  const utc1 = Date.UTC(ts1.year, ts1.month - 1, ts1.day, ts1.hour, ts1.minute)
-  const utc2 = Date.UTC(ts2.year, ts2.month - 1, ts2.day, ts2.hour, ts2.minute)
-  if (strict === true && utc2 < utc1) {
-    // Not negative number
-    // utc2 - utc1 < 0  -> utc2 < utc1 ->   NO: utc1 >= utc2
-    return 0
-  }
-  return Math.floor((utc2 - utc1) / MILLISECONDS_IN_DAY)
-}
-
-// In ui/src/utils/helpers.js
-function indexOf (array, cb) {
-  for (let i = 0; i < array.length; i++) {
-    if (cb(array[i], i) === true) {
-      return i
-    }
-  }
-  return -1
 }
 
 export default {
