@@ -18,24 +18,26 @@ export const MILLISECONDS_IN_DAY = 86400000
 export const MILLISECONDS_IN_HOUR = 3600000
 export const MILLISECONDS_IN_MINUTE = 60000
 
+/* eslint-disable no-multi-spaces */
 export const Timestamp = {
-  date: '', // String
-  time: '', // String
-  year: 0, // Number
-  month: 0, // Number
-  day: 0, // Number
-  weekday: 0, // Number
-  hour: 0, // Number
-  minute: 0, // Number
-  doy: 0, // Number (day of year)
-  workweek: 0, // Number
-  hasDay: false, // Boolean
-  hasTime: false, // Boolean
-  past: false, // Boolean
-  current: false, // Boolean
-  future: false, // Boolean
-  disabled: false // Boolean
+  date: '',       // YYYY-mm-dd
+  time: '',       // 00:00:00 (optional)
+  year: 0,        // YYYY
+  month: 0,       // mm (Jan = 1, etc)
+  day: 0,         // day of the month
+  weekday: 0,     // week day
+  hour: 0,        // 24-hr
+  minute: 0,      // mm
+  doy: 0,         // day of year
+  workweek: 0,    // workweek number
+  hasDay: false,  // if this timestamp is supposed to have a date
+  hasTime: false, // if this timestamp is supposed to have a time
+  past: false,    // if timestamp is in the past (based on `now` property)
+  current: false, // if timestamp is current date (based on `now` property)
+  future: false,  // if timestamp is in the future (based on `now` property)
+  disabled: false // if timestamp is disabled
 }
+/* eslint-enable no-multi-spaces */
 
 export const TimeObject = {
   hour: 0, // Number

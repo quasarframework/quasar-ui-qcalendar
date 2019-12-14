@@ -88,7 +88,8 @@ For slots that return `day` or `timestamp`, it looks like this:
   hasTime: false, // if this timestamp is supposed to have a time
   past: false,    // if timestamp is in the past (based on `now` property)
   current: false, // if timestamp is current date (based on `now` property)
-  future: false   // if timestamp is in the future (based on `now` property)
+  future: false,  // if timestamp is in the future (based on `now` property)
+  disabled: false // if timestamp is disabled
 }
 ```
 
