@@ -396,17 +396,8 @@ export function relativeDays (timestamp, mover = nextDay, days = 1, allowedWeekd
   return timestamp
 }
 
-export function findWeekday (timestamp, weekday, mover = nextDay, maxDays = 6, allowedWeekdays = [0, 1, 2, 3, 4, 5, 6]) {
-  while (--maxDays >= 0) {
-    mover(timestamp)
-    if (allowedWeekdays.length < 7 && !allowedWeekdays.includes(timestamp.weekday)) {
-      ++maxDays
-    }
-    if (timestamp.weekday === weekday) {
-      break
-    }
-  }
-
+export function findWeekday (timestamp, weekday, mover = nextDay, maxDays = 6) {
+  while (timestamp.weekday !== weekday && --maxDays >= 0) mover(timestamp)
   return timestamp
 }
 
