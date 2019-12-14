@@ -773,8 +773,8 @@
         }
       },
       "returns": {
-        "type": "Object",
-        "desc": "A timestamp object moved to the relatively specified days against the `allowedWeekdays`",
+        "type": "Array",
+        "desc": "An array of timestamp objects for all days that meet the criteria",
         "__exemption": [ "examples" ]
       },
     "__exemption": [ "examples" ]
@@ -815,7 +815,7 @@
       },
       "returns": {
         "type": "Array",
-        "desc": "A array of interval objects (timestamps with time)",
+        "desc": "A array of interval objects (timestamps with time) that meet the criteria",
         "__exemption": [ "examples" ]
       },
     "__exemption": [ "examples" ]
