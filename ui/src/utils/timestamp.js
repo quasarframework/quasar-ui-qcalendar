@@ -411,7 +411,6 @@ export function findWeekday (timestamp, weekday, mover = nextDay, maxDays = 6, a
 }
 
 export function getWeekdaySkips (weekdays) {
-  debugger
   const skips = [1, 1, 1, 1, 1, 1, 1]
   const filled = [0, 0, 0, 0, 0, 0, 0]
   for (let i = 0; i < weekdays.length; ++i) {
