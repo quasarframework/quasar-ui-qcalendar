@@ -6,15 +6,17 @@
     style="height: 500px;"
   >
     <template #week="{ week, weekdays }">
-      <template v-for="(event, index) in getWeekEvents(week, weekdays)">
+      <template v-for="(computedEvent, index) in getWeekEvents(week, weekdays)">
         <q-badge
           :key="index"
-          style="width: 100%; cursor: pointer;"
           class="ellipsis"
-          :class="badgeClasses(event, 'day')"
-          :style="badgeStyles(event, 'day')"
+          :class="badgeClasses(computedEvent, 'day')"
+          :style="badgeStyles(computedEvent, 'day', week.length)"
         >
-          <q-icon v-if="event.icon" :name="event.icon" class="q-mr-xs"></q-icon><span class="ellipsis">{{ event.title }}</span>
+          <template v-if="computedEvent.event">
+            <q-icon :name="computedEvent.event.icon" class="q-mr-xs"></q-icon>
+            <span class="ellipsis">{{ computedEvent.event.title }}</span>
+          </template>
         </q-badge>
       </template>
     </template>
@@ -39,8 +41,30 @@ import { date, colors } from 'quasar'
 import {
   getDayIdentifier,
   parsed,
-  nextDay
+  MILLISECONDS_IN_DAY
 } from '@quasar/quasar-ui-qcalendar/src/utils/timestamp'
+
+// In ui/src/utils/timestamp.js
+function diffTimestamp (ts1, ts2, strict) {
+  const utc1 = Date.UTC(ts1.year, ts1.month - 1, ts1.day, ts1.hour, ts1.minute)
+  const utc2 = Date.UTC(ts2.year, ts2.month - 1, ts2.day, ts2.hour, ts2.minute)
+  if (strict === true && utc2 < utc1) {
+    // Not negative number
+    // utc2 - utc1 < 0  -> utc2 < utc1 ->   NO: utc1 >= utc2
+    return 0
+  }
+  return Math.floor((utc2 - utc1) / MILLISECONDS_IN_DAY)
+}
+
+// In ui/src/utils/helpers.js
+function indexOf (array, cb) {
+  for (let i = 0; i < array.length; i++) {
+    if (cb(array[i], i) === true) {
+      return i
+    }
+  }
+  return -1
+}
 
 export default {
   data () {
@@ -104,7 +128,7 @@ export default {
         },
         {
           title: 'Vacation',
-          color: '#9c27b0',
+          color: 'purple',
           start: '2019-04-29',
           end: '2019-05-03',
           icon: "flight"
@@ -117,138 +141,118 @@ export default {
       return !!color && !!color.match(/^(#|(rgb|hsl)a?\()/)
     },
 
-    badgeClasses (event, type) {
-      const cssColor = this.isCssColor(event.bgcolor)
+    badgeClasses (infoEvent, type) {
+      const color = infoEvent.event !== void 0 ? infoEvent.event.color : 'transparent'
+      const cssColor = this.isCssColor(color)
       const isHeader = type === 'header'
+
       return {
-        [`text-white bg-${event.bgcolor}`]: !cssColor,
-        'full-width': !isHeader && (!event.side || event.side === 'full'),
-        'left-side': !isHeader && event.side === 'left',
-        'right-side': !isHeader && event.side === 'right'
+        [`text-white bg-${color}`]: !cssColor,
+        'full-width': !isHeader && (!infoEvent.side || infoEvent.side === 'full'),
+        'left-side': !isHeader && infoEvent.side === 'left',
+        'right-side': !isHeader && infoEvent.side === 'right',
+        'cursor-pointer': infoEvent.event !== void 0,
+        'event-void': infoEvent.event === void 0 // height: 0, padding: 0
       }
     },
 
-    badgeStyles (event, type, timeStartPos, timeDurationHeight) {
+    badgeStyles (infoEvent, type, weekLength, timeStartPos, timeDurationHeight) {
       const s = {}
-      if (this.isCssColor(event.bgcolor)) {
-        s['background-color'] = event.bgcolor
-        s.color = colors.luminosity(event.bgcolor) > 0.5 ? 'black' : 'white'
-      }
+      /*if (this.isCssColor(infoEvent.color)) {
+        s['background-color'] = event.color
+        s.color = colors.luminosity(event.color) > 0.5 ? 'black' : 'white'
+      }*/
       if (timeStartPos) {
-        s.top = timeStartPos(event.time) + 'px'
+        s.top = timeStartPos(infoEvent.event.time) + 'px'
       }
       if (timeDurationHeight) {
-        s.height = timeDurationHeight(event.duration) + 'px'
+        s.height = timeDurationHeight(infoEvent.event.duration) + 'px'
       }
-      if (event.meta !== void 0 && event.meta.width !== void 0) {
-        s.width = event.meta.width + '!important'
+      if (infoEvent.size !== void 0) {
+        s.width = ((100 / weekLength) * infoEvent.size) + '% !important'
       }
       // s['align-items'] = 'flex-start'
       return s
     },
 
-    getEvents (dt) {
-      const events = []
-      for (let i = 0; i < this.events.length; ++i) {
-        let added = false
-        if (this.events[i].date === dt) {
-          if (this.events[i].time) {
-            if (events.length > 0) {
-              // check for overlapping times
-              const startTime = new Date(this.events[i].date + ' ' + this.events[i].time)
-              const endTime = date.addToDate(startTime, { minutes: this.events[i].duration })
-              for (let j = 0; j < events.length; ++j) {
-                let startTime2 = new Date(events[j].date + ' ' + events[j].time)
-                let endTime2 = date.addToDate(startTime2, { minutes: events[j].duration })
-                if (date.isBetweenDates(startTime, startTime2, endTime2) || date.isBetweenDates(endTime, startTime2, endTime2)) {
-                  events[j].side = 'left'
-                  this.events[i].side = 'right'
-                  events.push(this.events[i])
-                  added = true
-                  break
-                }
-              }
-            }
-          }
-          if (!added) {
-            this.events[i].side = void 0
-            events.push(this.events[i])
-          }
-        } else if (this.events[i].days) {
-          // check for overlapping dates
-          let startDate = new Date(this.events[i].date)
-          let endDate = date.addToDate(startDate, { days: this.events[i].days })
-          if (date.isBetweenDates(dt, startDate, endDate)) {
-            events.push(this.events[i])
-            added = true
-          }
-        }
-      }
-      return events
-    },
-
     getWeekEvents (week, weekdays) {
-      const firstDay = getDayIdentifier(parsed(week[0].date + ' 00:00'))
-      const lastDay = getDayIdentifier(parsed(week[week.length - 1].date + ' 23:59'))
+      const tsFirstDay = parsed(week[0].date + ' 00:00')
+      const tsLastDay = parsed(week[week.length - 1].date + ' 23:59')
+      const firstDay = getDayIdentifier(tsFirstDay)
+      const lastDay = getDayIdentifier(tsLastDay)
 
-      const events = this.events.filter(event => {
-        const startDate = getDayIdentifier(parsed(event.start + ' 00:00'))
-        const endDate = getDayIdentifier(parsed(event.end + ' 23:59'))
+      const eventsWeek = []
+      this.events.forEach((event, id) => {
+        const tsStartDate = parsed(event.start + ' 00:00')
+        const tsEndDate = parsed(event.end + ' 23:59')
+        const startDate = getDayIdentifier(tsStartDate)
+        const endDate = getDayIdentifier(tsEndDate)
 
-        return this.isBetweenDatesWeek(startDate, endDate, firstDay, lastDay)
+        if (this.isBetweenDatesWeek(startDate, endDate, firstDay, lastDay)) {
+          const left = diffTimestamp(tsFirstDay, tsStartDate, true)
+          const right = diffTimestamp(tsEndDate, tsLastDay, true)
+
+          eventsWeek.push({
+            id, // index event
+            left, // Position initial day [0-6]
+            right, // Number days available
+            size: week.length - (left + right), // Size current event (in days)
+            event // Info
+          })
+        }
       })
-      
-      /*for (let i = 0; i < this.events.length; ++i) {
-        
 
-        if (this.isBetweenDates(sd, firstDay, lastDay)) {
-          console.log('matched:', `${this.events[i].date}: ${this.events[i].title}`)
-          events.push(this.events[i])
-        }
-        else if (this.events[i].end !== void 0 && this.containsDates(startDate, this.events[i].days, firstDay, lastDay)) {
-          console.log('matched:', `${this.events[i].date}: ${this.events[i].title}`)
-          events.push(this.events[i])
-        }
-      }*/
-      console.log('events:', events)
-      if (events.length > 0) {
-        this.processEvents(events, week, weekdays)
+      const events = []
+      if (eventsWeek.length > 0) {
+        const infoWeek = eventsWeek.sort((a, b) => a.left - b.left)
+        infoWeek.forEach((event, i) => {
+          this.insertEvent(events, week.length, infoWeek, i, 0, 0)
+        })
       }
+
       return events
     },
 
-    processEvents (events, week, weekdays) {
-      for (const index in events) {
-        const event = events[index]
-        const timestamp = parsed(event.date  + ' 00:00')
-        console.log('timestamp:', timestamp)
-        event.meta = {}
-        let days = event.days && event.days > 0 && this.daysInWeek(event, week) || 1
-        event.meta.width = ((100 / week.length) * days) + '%'
-      }
-    },
+    insertEvent (events, weekLength, infoWeek, index, availableDays, level) {
+      const iEvent = infoWeek[index]
+      if (iEvent !== void 0 && iEvent.left >= availableDays) {
+        // If you have space available, more events are placed
+        if (iEvent.left - availableDays) {
+          // It is filled with empty events
+          events.push({ size: iEvent.left - availableDays })
+        }
+        // The event is built
+        events.push({ size: iEvent.size, event: iEvent.event })
 
-    daysInWeek (event, week) {
-      let count = 1
-        // for (let i = 0; i < week.length; ++i) {
-        //   const wk =
-        // }
-      return count
+        if (level !== 0) {
+          // If it goes into recursion, then the item is deleted
+          infoWeek.splice(index, 1)
+        }
+
+        const currentAvailableDays = iEvent.left + iEvent.size
+
+        if (currentAvailableDays < weekLength) {
+          const indexNextEvent = indexOf(infoWeek, e => e.id !== iEvent.id && e.left >= currentAvailableDays)
+
+          this.insertEvent(
+            events,
+            weekLength,
+            infoWeek,
+            indexNextEvent !== -1 ? indexNextEvent : index,
+            currentAvailableDays,
+            level + 1
+          )
+        } // else: There are no more days available, end of iteration
+
+      } else {
+        events.push({ size: weekLength - availableDays })
+        // end of iteration
+      }
+
     },
 
     isBetweenDates (date, start, end) {
       return date >= start && date <= end
-    },
-
-    containsDates (date, count, start, end) {
-      let pd = date
-      for (let i = 0; i < count; ++i) {
-        pd = nextDay(pd)
-        if (this.isBetweenDates(getDayIdentifier(pd), start, end)) {
-          return true
-        }
-      }
-      return false
     },
 
     isBetweenDatesWeek (dateStart, dateEnd, weekStart, weekEnd) {
