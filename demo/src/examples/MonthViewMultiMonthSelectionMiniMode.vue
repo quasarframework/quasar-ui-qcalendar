@@ -40,7 +40,7 @@
 import {
   getDayIdentifier,
   parseDate
-} from '@quasar/quasar-ui-qcalendar/src/utils/timestamp'
+} from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
 
 const CURRENT_MONTH = new Date()
 

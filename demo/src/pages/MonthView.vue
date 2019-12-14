@@ -46,7 +46,7 @@ Keep in mind that the functionality below won't work with swipe actions.
       </q-markdown>
     </example-card>
 
-    <example-card title="Slots" name="MonthViewSlots" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSlots.vue').default)">
+    <example-card title="Slots (day-header and day-body)" name="MonthViewSlots" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSlots.vue').default)">
       <q-markdown>
 For slots that return `day` or `timestamp`, it looks like this:
 ```js
@@ -65,9 +65,18 @@ For slots that return `day` or `timestamp`, it looks like this:
   hasTime: false, // if this timestamp is supposed to have a time
   past: false,    // if timestamp is in the past (based on `now` property)
   current: false, // if timestamp is current date (based on `now` property)
-  future: false   // if timestamp is in the future (based on `now` property)
+  future: false,  // if timestamp is in the future (based on `now` property)
+  disabled: false // if timestamp is disabled
 }
 ```
+      </q-markdown>
+    </example-card>
+    <example-card title="Slots (week)" name="MonthViewWeekSlot" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewWeekSlot.vue').default)">
+      <q-markdown>
+The example below uses the **#week** slot (v1.3.2). It's a bit more difficult to work with than the **#day-body** slot, but allows you to have your devland events displayed in a contiguous manner. Check out the sources to see how it is accomplished.
+::: warning
+Do not mix #day-body and #week slots or you will have overlapping results.
+:::
       </q-markdown>
     </example-card>
     <example-card title="Theme" name="MonthViewTheme" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewTheme.vue').default)" />
@@ -152,7 +161,8 @@ export default {
     this.addToToc('Prev/Next', 2)
     this.addToToc('Swipe', 2)
     this.addToToc('Multi-Day Selection', 2)
-    this.addToToc('Slots', 2)
+    this.addToToc('Slots (day-header and day-body)', 2)
+    this.addToToc('Slots (week)', 2)
     this.addToToc('Theme', 2)
 
     this.addToToc('Mini-Mode')

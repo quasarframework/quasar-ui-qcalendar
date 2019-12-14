@@ -1,0 +1,917 @@
+{
+  "meta": {
+    "docsUrl": "https://quasarframework.github.io/quasar-ui-qcalendar/docs"
+  },
+  "methods": {
+    "getStartOfWeek": {
+      "desc": "Returns the start of the week based on the passed in arguments",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        },
+        "weekdays": {
+          "type": "Array",
+          "desc": "The normal weekdays array looks like this `[0,1,2,3,4,5,6]` where 0=Sunday, 1=Monday, etc. A week that starts on Monday, would look like this: `[1,2,3,4,5,6,0]` and a 5-day workweek would look like this: `[1,2,3,4,5]`",
+          "required": true,
+          "examples": [
+            "[0,1,2,3,4,5,6]",
+            "[1,2,3,4,5,6,0]",
+            "[1,2,3,4,5]"
+          ]
+        },
+        "today": {
+          "type": "Object",
+          "desc": "A timestamp object that represents 'today' or a specified point in time. If passed in, then the relative information to the start-of-week timestamp object will be updated",
+          "default": "undefined",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Object",
+        "desc": "A timestamp object representing the start of the week",
+        "__exemption": [ "examples" ]
+      }
+    },
+    "getEndOfWeek": {
+      "desc": "Returns the end of the week based on the passed in arguments",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        },
+        "weekdays": {
+          "type": "Array",
+          "desc": "The normal weekdays array looks like this `[0,1,2,3,4,5,6]` where 0=Sunday, 1=Monday, etc. A week that starts on Monday, would look like this: `[1,2,3,4,5,6,0]` and a 5-day workweek would look like this: `[1,2,3,4,5]`",
+          "required": true,
+          "examples": [
+            "[0,1,2,3,4,5,6]",
+            "[1,2,3,4,5,6,0]",
+            "[1,2,3,4,5]"
+          ]
+        },
+        "today": {
+          "type": "Object",
+          "desc": "A timestamp object that represent 'today' or a specified point in time. If passed in, then the relative information to the end-of-week timestamp object will be updated",
+          "default": "undefined",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Object",
+        "desc": "A timestamp object representing the end of the week",
+        "__exemption": [ "examples" ]
+      }
+    },
+    "getStartOfMonth": {
+      "desc": "Returns the start of the month based on the passed in timestamp object",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Object",
+        "desc": "A timestamp object representing the start of the month",
+        "__exemption": [ "examples" ]
+      }
+    },
+    "getEndOfMonth": {
+      "desc": "Returns the end of the month based on the passed in timestamp object",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Object",
+        "desc": "A timestamp object representing the end of the month",
+        "__exemption": [ "examples" ]
+      }
+    },
+    "parseTime": {
+      "desc": "Parses the passed in value and returns the number of seconds since midnight",
+      "params": {
+        "input": {
+          "type": [ "Number", "String", "Object" ],
+          "required": true,
+          "desc": "Value may be a Number (minutes since midnight) or String (hh:mm:ss where seconds are optional) or Object (must have keys **hour** and **minute**)",
+          "examples": [
+            "600",
+            "15:30",
+            "{ hour: 15, minute: 30 }"
+          ]
+        }
+      },
+      "returns": {
+        "type": "Number",
+        "desc": "The number of seconds since midnight",
+        "__exemption": [ "examples" ]
+      }
+    },
+    "validateTimestamp": {
+      "desc": "Validates the passed in date/time string (YYYY-mm-dd hh:mm:ss)",
+      "params": {
+        "input": {
+          "type": "String",
+          "required": true,
+          "desc": "A date/time string in the form `YYYY-mm-dd hh:mm:ss` (seconds are optional)",
+          "examples": [
+            "2020-10-02 15:00"
+          ]
+        }
+      },
+      "returns": {
+        "type": "Boolean",
+        "desc": "True if the passed in date/time string is of correct form"
+      }
+    },
+    "parsed": {
+      "desc": "Parses a date/time string to the timestamp object",
+      "params": {
+        "input": {
+          "type": "String",
+          "required": true,
+          "desc": "A date/time string in the form `YYYY-mm-dd hh:mm:ss` (seconds are optional)",
+          "examples": [
+            "2020-10-02 15:00"
+          ]
+        }
+      },
+      "returns": {
+        "type": [ "Object", "null" ],
+        "desc": "A timestamp object based on the passed in input. Returns 'null' on error",
+        "__exemption": [ "examples" ]
+      }
+    },
+    "parseTimestamp": {
+      "desc": "Parses a date/time string to the timestamp object. Very similar to the `parsed` method, except also updates timestamp with formatted and relative information",
+      "params": {
+        "input": {
+          "type": "String",
+          "required": true,
+          "desc": "A date/time string in the form `YYYY-mm-dd hh:mm:ss` (seconds are optional)",
+          "examples": [
+            "2020-10-02 15:00"
+          ]
+        }
+      },
+      "returns": {
+        "type": [ "Object", "null" ],
+        "desc": "A timestamp object based on the passed in input. Returns 'null' on error",
+        "__exemption": [ "examples" ]
+      }
+    },
+    "parseDate": {
+      "desc": "Parses a JavaScript Date object to the timestamp object",
+      "params": {
+        "input": {
+          "type": "Date",
+          "required": true,
+          "desc": "A JavaScript Date object",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": [ "Object", "null" ],
+        "desc": "A formatted timestamp object based on the passed in input (see updateFormatted)",
+        "__exemption": [ "examples" ]
+      }
+    },
+    "getDayIdentifier": {
+      "desc": "Turns passed in timestamp object to a day identifier",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Number",
+        "desc": "The returned number is in the form `YYYYmmdd`",
+        "__exemption": [ "examples" ]
+      }
+    },
+    "getTimeIdentifier": {
+      "desc": "Turns passed in timestamp object to a time identifier",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "required": true,
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Number",
+        "desc": "The returned number is in the form `hhmm`",
+        "__exemption": [ "examples" ]
+      }
+    },
+    "diffTimestamp": {
+      "desc": "Turns passed in timestamp object to a time identifier",
+      "params": {
+        "timestamp1": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        },
+        "timestamp2": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        },
+        "strict": {
+          "type": "Boolean",
+          "desc": "If true, then negative values are not allowed",
+          "required": true,
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Number",
+        "desc": "The number of days different between the two timestamp objects. 0 if **strict** is true and the value would be negative",
+        "__exemption": [ "examples" ]
+      }
+    },
+    "updateRelative": {
+      "desc": "Updates the relative information in the timestamp object. The relative information includes, compared to the **now** object, `past`, `current` and `future` booleans",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        },
+        "now": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object representing a **now** time (fixed point in time -- usually **today**)",
+          "__exemption": [ "examples" ]
+        },
+        "time": {
+          "type": "Boolean",
+          "desc": "If true, also uses time to adjust the relative information",
+          "default": false,
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Object",
+        "desc": "A timestamp object",
+        "__exemption": [ "examples" ]
+      }
+    },
+    "updateMinutes": {
+      "desc": "Updates the timestamp object with the passed in minutes",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        },
+        "minutes": {
+          "type": "Number",
+          "required": true,
+          "desc": "The number of minutes since midnight",
+          "__exemption": [ "examples" ]
+        },
+        "now": {
+          "type": "Object",
+          "desc": "A timestamp object, if set, used to adjust the relative information",
+          "default": "undefined",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Object",
+        "desc": "A timestamp object",
+        "__exemption": [ "examples" ]
+      }
+    },
+    "updateWeekday": {
+      "desc": "Updates the timestamp object with the weekday information",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Object",
+        "desc": "A timestamp object",
+        "__exemption": [ "examples" ]
+      }
+    },
+    "updateDayOfYear": {
+      "desc": "Updates the timestamp object with the doy (day of year) information",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Object",
+        "desc": "A timestamp object",
+        "__exemption": [ "examples" ]
+      }
+    },
+    "updateWorkWeek": {
+      "desc": "Updates the timestamp object with the workweek (work week) information",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Object",
+        "desc": "A timestamp object",
+        "__exemption": [ "examples" ]
+      }
+    },
+    "updateDisabled": {
+      "desc": "Updates the timestamp object to be disabled if it matches one of the items from `disabledDays`",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        },
+        "disabledDays": {
+          "type": "Array",
+          "required": true,
+          "desc": "An array of disabled days",
+          "examples": [
+            "['2020-01-01', '2020-07-04']"
+          ]
+        }
+      },
+      "returns": {
+        "type": "Object",
+        "desc": "A timestamp object with `timestamp.disabled` true if a match was found",
+        "__exemption": [ "examples" ]
+      }
+    },
+    "updateFormatted": {
+      "desc": "Updates the timestamp object with formatted information (`time`, `date`, `weekday`, `doy` and `workweek`)",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Object",
+        "desc": "A timestamp object",
+        "__exemption": [ "examples" ]
+      }
+    },
+    "getDayOfYear": {
+      "desc": "Returns the doy (day of year) for an unformatted timestamp",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Number",
+        "desc": "The day of the year",
+        "__exemption": [ "examples" ]
+      }
+    },
+    "getWorkWeek": {
+      "desc": "Returns the workweek (work week number) for an unformatted timestamp",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Number",
+        "desc": "The work week number of the year",
+        "__exemption": [ "examples" ]
+      }
+    },
+    "getWeekday": {
+      "desc": "Returns the weekday (day of the week) for an unformatted timestamp",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Number",
+        "desc": "The week day number (0=Sunday, 1=Monday, etc)",
+        "__exemption": [ "examples" ]
+      }
+    },
+    "isLeapYear": {
+      "desc": "Returns true if the passed in year is a leap year",
+      "params": {
+        "year": {
+          "type": "Number",
+          "required": true,
+          "desc": "A number representing the year in YYYY format",
+          "examples": [
+            "2020", "2021"
+          ]
+        }
+      },
+      "returns": {
+        "type": "Boolean",
+        "desc": "Returns true if the passed in year is a leap year",
+        "__exemption": [ "examples" ]
+      }
+    },
+    "daysInMonth": {
+      "desc": "Returns number of days in the spefified month for the specified year (takes into account leap years)",
+      "params": {
+        "year": {
+          "type": "Number",
+          "required": true,
+          "desc": "A number representing the year in YYYY format",
+          "examples": [
+            "2020", "2021"
+          ]
+        },
+        "month": {
+          "type": "Number",
+          "required": true,
+          "desc": "A number representing the month from 0 (January) to 11 (December). For performance reasons, no checking is done to validate this value is in range. An exception will occur if it is not",
+          "examples": [
+            "2020", "2021"
+          ]
+        }
+      },
+      "returns": {
+        "type": "Number",
+        "desc": "Returns true if the passed in year is a leap year",
+        "__exemption": [ "examples" ]
+      }
+    },
+    "copyTimestamp": {
+      "desc": "Makes a copy of the passed Timestamp",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "desc": "A timestamp object",
+          "required": true,
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Object",
+        "desc": "A copy of the passed in timestamp object",
+        "__exemption": [ "examples" ]
+      },
+    "__exemption": [ "examples" ]
+    },
+    "padNumber": {
+      "desc": "Pads the passed in number to the specfied length. Passing in `(2,2)` returns `02`",
+      "params": {
+        "x": {
+          "type": "Number",
+          "desc": "The number to pad",
+          "required": true,
+          "__exemption": [ "examples" ]
+        },
+        "length": {
+          "type": "Number",
+          "desc": "The length of the padding",
+          "required": true,
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "String",
+        "desc": "A padded value",
+        "__exemption": [ "examples" ]
+      },
+    "__exemption": [ "examples" ]
+    },
+    "getDate": {
+      "desc": "Returns the timestamp as a padded date",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "String",
+        "desc": "A date as a padded value in the form `YYYY-mm-dd`. Instead of `2020-1-2`, this function formats it as `2020-01-02`",
+        "__exemption": [ "examples" ]
+      },
+    "__exemption": [ "examples" ]
+    },
+    "getTime": {
+      "desc": "Returns the timestamp as a padded time",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "String",
+        "desc": "A time as a padded value in the form `hh:mm`. Instead of `2:3`, this function formats it as `02:03`",
+        "__exemption": [ "examples" ]
+      },
+    "__exemption": [ "examples" ]
+    },
+    "nextMinutes": {
+      "desc": "Returns the timestamp with the passed minutes added to it",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        },
+        "minutes": {
+          "type": "Number",
+          "desc": "The number of minutes to add to the timestamp. It can handle large amounts of minutes that cause increments in hours or days",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Object",
+        "desc": "A timestamp object with the additional minutes added",
+        "__exemption": [ "examples" ]
+      },
+    "__exemption": [ "examples" ]
+    },
+    "nextDay": {
+      "desc": "Returns the timestamp set to the next day, updating month and year if needed",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Object",
+        "desc": "A timestamp object incremented to the next day",
+        "__exemption": [ "examples" ]
+      },
+    "__exemption": [ "examples" ]
+    },
+    "prevDay": {
+      "desc": "Returns the timestamp set to the previous day, updating month and year if needed",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Object",
+        "desc": "A timestamp object decremented to the next day",
+        "__exemption": [ "examples" ]
+      },
+    "__exemption": [ "examples" ]
+    },
+    "relativeDays": {
+      "desc": "Returns the timestamp set to the relative day",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        },
+        "mover": {
+          "type": "Function",
+          "default": "nextDay",
+          "desc": "A function that handles the relative movement from one date to another. If moving backwards, use the `prevDay` method",
+          "params": {
+            "timestamp": {
+              "type": "Object",
+              "required": true,
+              "desc": "A timestamp object",
+              "__exemption": [ "examples" ]
+            }
+          },
+          "returns": {
+            "type": "Object",
+            "desc": "A timestamp object",
+            "__exemption": [ "examples" ]
+          }
+        },
+        "days": {
+          "type": "Number",
+          "default": 1,
+          "desc": "The number of days to move",
+          "__exemption": [ "examples" ]
+        },
+        "allowedWeekdays": {
+          "type": "Array",
+          "default": "[0,1,2,3,4,5,6]",
+          "desc": "The allow weekdays to use. The method uses this information for allowed days",
+          "examples": [
+            "[0,1,2,3,4,5,6]",
+            "[1,2,3,4,5,6,0]",
+            "[1,2,3,4,5]"
+          ]
+        }
+      },
+      "returns": {
+        "type": "Object",
+        "desc": "A timestamp object moved to the relatively specified days against the `allowedWeekdays`",
+        "__exemption": [ "examples" ]
+      },
+    "__exemption": [ "examples" ]
+    },
+    "findWeekday": {
+      "desc": "Returns the timestamp associated to the specified weekday",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        },
+        "mover": {
+          "type": "Function",
+          "default": "nextDay",
+          "desc": "A function that handles the relative movement from one date to another. If moving backwards, use the `prevDay` method",
+          "params": {
+            "timestamp": {
+              "type": "Object",
+              "required": true,
+              "desc": "A timestamp object",
+              "__exemption": [ "examples" ]
+            }
+          },
+          "returns": {
+            "type": "Object",
+            "desc": "A timestamp object",
+            "__exemption": [ "examples" ]
+          }
+        },
+        "maxDays": {
+          "type": "Number",
+          "default": 6,
+          "desc": "The maxiumum number of days to move",
+          "__exemption": [ "examples" ]
+        },
+        "allowedWeekdays": {
+          "type": "Array",
+          "default": "[0,1,2,3,4,5,6]",
+          "desc": "The allow weekdays to use. The method uses this information for allowed days",
+          "examples": [
+            "[0,1,2,3,4,5,6]",
+            "[1,2,3,4,5,6,0]",
+            "[1,2,3,4,5]"
+          ]
+        }
+      },
+      "returns": {
+        "type": "Object",
+        "desc": "A timestamp object moved to the specified days relatively against the `maxDays`",
+        "__exemption": [ "examples" ]
+      },
+    "__exemption": [ "examples" ]
+    },
+    "getWeekdaySkips": {
+      "desc": "Returns the weekday skips in an array of 0's (off) and 1's (on). Basically, can convert `[1,2,3,4,5]` to `[0,1,1,1,1,1,0]`",
+      "params": {
+        "weekdays": {
+          "type": "Array",
+          "desc": "The normal weekdays array looks like this `[0,1,2,3,4,5,6]` where 0=Sunday, 1=Monday, etc. A week that starts on Monday, would look like this: `[1,2,3,4,5,6,0]` and a 5-day workweek would look like this: `[1,2,3,4,5]`",
+          "required": true,
+          "examples": [
+            "[0,1,2,3,4,5,6]",
+            "[1,2,3,4,5,6,0]",
+            "[1,2,3,4,5]"
+          ]
+        }
+      },
+      "returns": {
+        "type": "Array",
+        "desc": "An of 7 (representing a week) of 0's (hidden) and 1's (displayed)",
+        "__exemption": [ "examples" ]
+      },
+    "__exemption": [ "examples" ]
+    },
+    "createDayList": {
+      "desc": "Returns an array of days",
+      "params": {
+        "start": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        },
+        "end": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        },
+        "now": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        },
+        "weekdaySkips": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        },
+        "disabledDays": {
+          "type": "Array",
+          "default": "[]",
+          "desc": "An array of string dates in the form `YYYY-mm-dd` that representing disabled days",
+          "__exemption": [ "examples" ]
+        },
+        "max": {
+          "type": "Number",
+          "default": "42",
+          "desc": "Maximum days required. 42 is the number of days in a fill calendar (6 rows)",
+          "__exemption": [ "examples" ]
+        },
+        "min": {
+          "type": "Number",
+          "default": "0",
+          "desc": "Minimum days required",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Object",
+        "desc": "A timestamp object moved to the relatively specified days against the `allowedWeekdays`",
+        "__exemption": [ "examples" ]
+      },
+    "__exemption": [ "examples" ]
+    },
+    "createIntervalList": {
+      "desc": "Returns an array of intervals",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object representing the day for the intervals",
+          "__exemption": [ "examples" ]
+        },
+        "first": {
+          "type": "Number",
+          "required": true,
+          "desc": "The first interval",
+          "__exemption": [ "examples" ]
+        },
+        "minutes": {
+          "type": "Number",
+          "required": true,
+          "desc": "The number of minutes in an interval",
+          "__exemption": [ "examples" ]
+        },
+        "count": {
+          "type": "Number",
+          "required": true,
+          "desc": "The count of intervals requested",
+          "__exemption": [ "examples" ]
+        },
+        "now": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object that represents 'today' or a specified point in time",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Array",
+        "desc": "A array of interval objects (timestamps with time)",
+        "__exemption": [ "examples" ]
+      },
+    "__exemption": [ "examples" ]
+    },
+    "createNativeLocaleFormatter": {
+      "desc": "Returns a function to be used for international date formatting purposes",
+      "params": {
+        "local": {
+          "type": "String",
+          "required": true,
+          "desc": "A string representing the locale to use (ie: en-us for America)",
+          "__exemption": [ "examples" ]
+        },
+        "getOptions": {
+          "type": "Function",
+          "required": true,
+          "desc": "A function that passes the timestamp and a boolean",
+          "__exemption": [ "examples" ],
+          "params": {
+            "timestamp": {
+              "type": "Object",
+              "desc": "A timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "short": {
+              "type": "Boolean",
+              "desc": "if true, specifies to use the short version (ie: 'Monday' to be returns as 'Mon', 'January' to be returned as 'Jan', etc)",
+              "__exemption": [ "examples" ]
+            }
+          },
+          "returns": {
+            "type": "Object",
+            "desc": "This uses the Intl.DateTimeFormat function of the browser. Options are specified [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DateTimeFormat)",
+            "examples": [
+              "{ timeZone: 'UTC', month: 'long' }",
+              "{ timeZone: 'UTC', month: 'short' }",
+              "{ timeZone: 'UTC', weekday: 'long' }",
+              "{ timeZone: 'UTC', weekday: 'short' }"
+            ]
+          }
+        }
+      },
+      "returns": {
+        "type": "String",
+        "desc": "The output of the operation",
+        "__exemption": [ "examples" ]
+      },
+    "__exemption": [ "examples" ]
+    },
+    "validateNumber": {
+      "desc": "Validates that input is a number",
+      "params": {
+        "input": {
+          "type": [ "Number", "String" ],
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Boolean",
+        "desc": "true if a number, otherwise false",
+        "__exemption": [ "examples" ]
+      }
+    },
+    "convertToUnit": {
+      "desc": "Converts the input to unit (default is `px`. Checks validity of value, isNan, etc",
+      "params": {
+        "input": {
+          "type": [ "Number", "String" ],
+          "required": true,
+          "desc": "The input value",
+          "__exemption": [ "examples" ]
+        },
+        "unit": {
+          "type": "String",
+          "default": "px",
+          "desc": "The type of unit to use",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "String",
+        "desc": "Returns the input value concatenated with the unit value",
+        "__exemption": [ "examples" ]
+      }
+    }
+  }
+}
