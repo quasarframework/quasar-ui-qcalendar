@@ -60,9 +60,9 @@
     "postcss": "^7.0.24",
     "postcss-rtl": "^1.5.0",
     "quasar": "^1.5.9",
-    "quasar-json-api": "^0.0.12",
+    "quasar-json-api": "^0.0.13",
     "rimraf": "^3.0.0",
-    "rollup": "^1.27.11",
+    "rollup": "^1.27.12",
     "rollup-plugin-node-resolve": "^5.2.0",
     "uglify-es": "^3.3.9",
     "zlib": "^1.0.5"
