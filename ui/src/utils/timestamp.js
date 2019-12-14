@@ -118,7 +118,7 @@ export function validateTimestamp (input) {
 }
 
 export function parsed (input) {
-  // YYYY-MM-DD hh:mm:ss
+  // YYYY-mm-dd hh:mm:ss
   const parts = PARSE_REGEX.exec(input)
 
   if (!parts) return null
@@ -246,7 +246,7 @@ export function updateWorkWeek (timestamp) {
 
 export function updateDisabled (timestamp, disabledDays) {
   if (!Array.isArray(disabledDays) || disabledDays.length === 0) {
-    return
+    return timestamp
   }
   const t = getDayIdentifier(timestamp)
   for (const day in disabledDays) {
@@ -256,6 +256,7 @@ export function updateDisabled (timestamp, disabledDays) {
       break
     }
   }
+  return timestamp
 }
 
 export function updateFormatted (timestamp) {
@@ -395,13 +396,22 @@ export function relativeDays (timestamp, mover = nextDay, days = 1, allowedWeekd
   return timestamp
 }
 
-export function findWeekday (timestamp, weekday, mover = nextDay, maxDays = 6) {
-  while (timestamp.weekday !== weekday && --maxDays >= 0) mover(timestamp)
+export function findWeekday (timestamp, weekday, mover = nextDay, maxDays = 6, allowedWeekdays = [0, 1, 2, 3, 4, 5, 6]) {
+  while (--maxDays >= 0) {
+    mover(timestamp)
+    if (allowedWeekdays.length < 7 && !allowedWeekdays.includes(timestamp.weekday)) {
+      ++maxDays
+    }
+    if (timestamp.weekday === weekday) {
+      break
+    }
+  }
 
   return timestamp
 }
 
 export function getWeekdaySkips (weekdays) {
+  debugger
   const skips = [1, 1, 1, 1, 1, 1, 1]
   const filled = [0, 0, 0, 0, 0, 0, 0]
   for (let i = 0; i < weekdays.length; ++i) {
@@ -477,9 +487,6 @@ export function createNativeLocaleFormatter (locale, getOptions) {
   return (timestamp, short) => {
     try {
       const intlFormatter = new Intl.DateTimeFormat(locale || void 0, getOptions(timestamp, short))
-      // const time = `${padNumber(timestamp.hour, 2)}:${padNumber(timestamp.minute, 2)}`
-      // const date = timestamp.date
-      // return intlFormatter.format(new Date(`${date}T${time}:00+00:00`))
       return intlFormatter.format(new Date(Date.UTC(timestamp.year, timestamp.month - 1, timestamp.day, timestamp.hour, timestamp.minute)))
     } catch (e) {
       return ''
