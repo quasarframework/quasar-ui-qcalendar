@@ -183,6 +183,17 @@ export function getTimeIdentifier (timestamp) {
   return timestamp.hour * 100 + timestamp.minute
 }
 
+export function diffTimestamp (ts1, ts2, strict) {
+  const utc1 = Date.UTC(ts1.year, ts1.month - 1, ts1.day, ts1.hour, ts1.minute)
+  const utc2 = Date.UTC(ts2.year, ts2.month - 1, ts2.day, ts2.hour, ts2.minute)
+  if (strict === true && utc2 < utc1) {
+    // Not negative number
+    // utc2 - utc1 < 0  -> utc2 < utc1 ->   NO: utc1 >= utc2
+    return 0
+  }
+  return Math.floor((utc2 - utc1) / MILLISECONDS_IN_DAY)
+}
+
 export function updateRelative (timestamp, now, time = false) {
   let a = getDayIdentifier(now)
   let b = getDayIdentifier(timestamp)
@@ -476,4 +487,63 @@ export function createNativeLocaleFormatter (locale, getOptions) {
 
 export function validateNumber (input) {
   return isFinite(parseInt(input, 10))
+}
+
+export default {
+  PARSE_REGEX,
+  PARSE_TIME,
+  DAYS_IN_MONTH,
+  DAYS_IN_MONTH_LEAP,
+  DAYS_IN_MONTH_MIN,
+  DAYS_IN_MONTH_MAX,
+  MONTH_MAX,
+  MONTH_MIN,
+  DAY_MIN,
+  DAYS_IN_WEEK,
+  MINUTES_IN_HOUR,
+  HOURS_IN_DAY,
+  FIRST_HOUR,
+  MILLISECONDS_IN_DAY,
+  MILLISECONDS_IN_HOUR,
+  MILLISECONDS_IN_MINUTE,
+  Timestamp,
+  TimeObject,
+  getStartOfWeek,
+  getEndOfWeek,
+  getStartOfMonth,
+  getEndOfMonth,
+  parseTime,
+  validateTimestamp,
+  parsed,
+  parseTimestamp,
+  parseDate,
+  getDayIdentifier,
+  getTimeIdentifier,
+  diffTimestamp,
+  updateRelative,
+  updateMinutes,
+  updateWeekday,
+  updateDayOfYear,
+  updateWorkWeek,
+  updateDisabled,
+  updateFormatted,
+  getDayOfYear,
+  getWorkWeek,
+  getWeekday,
+  isLeapYear,
+  daysInMonth,
+  copyTimestamp,
+  padNumber,
+  getDate,
+  getTime,
+  nextMinutes,
+  nextDay,
+  prevDay,
+  relativeDays,
+  findWeekday,
+  getWeekdaySkips,
+  createDayList,
+  createIntervalList,
+  createNativeLocaleFormatter,
+  validateNumber
 }

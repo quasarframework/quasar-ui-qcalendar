@@ -7,3 +7,17 @@ export function convertToUnit (str, unit = 'px') {
     return `${Number(str)}${unit}`
   }
 }
+
+export function indexOf (array, cb) {
+  for (let i = 0; i < array.length; i++) {
+    if (cb(array[i], i) === true) {
+      return i
+    }
+  }
+  return -1
+}
+
+export default {
+  convertToUnit,
+  indexOf
+}
