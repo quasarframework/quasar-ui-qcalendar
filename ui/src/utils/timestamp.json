@@ -762,7 +762,7 @@
         "max": {
           "type": "Number",
           "default": "42",
-          "desc": "Maximum days required. 42 is the number of days in a fill calendar (6 rows)",
+          "desc": "Maximum days required. 42 is the number of days in a full calendar (6 rows) month",
           "__exemption": [ "examples" ]
         },
         "min": {
