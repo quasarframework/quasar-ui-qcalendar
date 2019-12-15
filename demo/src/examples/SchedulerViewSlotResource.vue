@@ -47,7 +47,7 @@ export default {
 }
 </script>
 
-<style lang="stylus">
+<style lang="sass">
 img.q-icon.on-left
-  border-radius 50%
+  border-radius: 50%
 </style>

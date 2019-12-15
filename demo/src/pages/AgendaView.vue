@@ -103,11 +103,11 @@ export default {
 }
 </script>
 
-<style lang="stylus">
+<style lang="sass">
 .example-page
-  padding: 16px 46px;
-  font-weight: 300;
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
+  padding: 16px 46px
+  font-weight: 300
+  max-width: 900px
+  margin-left: auto
+  margin-right: auto
 </style>
