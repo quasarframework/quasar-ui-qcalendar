@@ -7,21 +7,21 @@
   background: $calendar-background-color
 
   .q-calendar-weekly__head-workweek
-    border-right: $calendar-border-color 1px solid
-    border-bottom: $calendar-border-color 1px solid
+    border-right: $calendar-border-color $calendar-border-width solid
+    border-bottom: $calendar-border-color $calendar-border-width solid
     color: $calendar-day-current-color
     font-weight: $calendar-workweek-font-weight
     align-items: center
 
   .q-calendar-weekly__head-weekday
-    border-right: $calendar-border-color 1px solid
-    border-bottom: $calendar-border-color 1px solid
+    border-right: $calendar-border-color $calendar-border-width solid
+    border-bottom: $calendar-border-color $calendar-border-width solid
     color: $calendar-day-current-color
     font-weight: $calendar-weekly-head-weekday-font-weight
 
   .q-calendar-weekly__workweek
-    border-right: $calendar-border-color 1px solid
-    border-bottom: $calendar-border-color 1px solid
+    border-right: $calendar-border-color $calendar-border-width solid
+    border-bottom: $calendar-border-color $calendar-border-width solid
     font-weight: $calendar-workweek-font-weight
     align-items: center
     justify-content: center
@@ -36,7 +36,7 @@
       color: $calendar-day-current-color
 
   .q-calendar-weekly__day
-    border-right: $calendar-border-color 1px solid
+    border-right: $calendar-border-color $calendar-border-width solid
     color: $calendar-text-color
 
     &.q-selected-day
@@ -59,7 +59,7 @@
         font-weight: 400
 
         .q-btn__wrapper:before
-          border-width: 1px
+          border-width: $calendar-border-width
 
       .q-calendar-weekly__day-month
         color: currentColor
@@ -71,7 +71,7 @@
       // color: $calendar-day-past-color
 
 .q-calendar-weekly__day--droppable
-    border-right: $calendar-primary-color 1px dashed
+    border-right: $calendar-primary-color $calendar-border-width dashed
 
 .q-calendar-weekly
   display: flex
@@ -105,7 +105,7 @@
     justify-content: center
 
   &__week
-    border-bottom: 1px solid $calendar-border-color
+    border-bottom: $calendar-border-color $calendar-border-width solid
     min-height: 6em
     position: relative
 
@@ -249,7 +249,7 @@
         border-color: #3e3e3e
         font-color: #3e3e3e
         color: white
-        border-width: 1px
+        border-width: $calendar-border-width
 
   .q-calendar-weekly__day-label
     position: absolute
@@ -282,18 +282,18 @@
     background: $calendar-background-color-dark
 
   .q-calendar-weekly__head-workweek
-    border-right: $calendar-border-color-dark 1px solid
-    border-bottom: $calendar-border-color-dark 1px solid
+    border-right: $calendar-border-color-dark $calendar-border-width solid
+    border-bottom: $calendar-border-color-dark $calendar-border-width solid
     color: $calendar-day-current-color-dark
 
   .q-calendar-weekly__head-weekday
-    border-right: $calendar-border-color-dark 1px solid
-    border-bottom: $calendar-border-color-dark 1px solid
+    border-right: $calendar-border-color-dark $calendar-border-width solid
+    border-bottom: $calendar-border-color-dark $calendar-border-width solid
     color: $calendar-day-current-color-dark
 
   .q-calendar-weekly__workweek
-    border-right: $calendar-border-color-dark 1px solid
-    border-bottom: $calendar-border-color-dark 1px solid
+    border-right: $calendar-border-color-dark $calendar-border-width solid
+    border-bottom: $calendar-border-color-dark $calendar-border-width solid
 
     &.q-past-day
       color: $calendar-day-past-color-dark
@@ -305,8 +305,8 @@
       color: $calendar-primary-color-dark
 
   .q-calendar-weekly__day
-    border-right: $calendar-border-color-dark 1px solid
-    border-bottom: $calendar-border-color-dark 1px solid
+    border-right: $calendar-border-color-dark $calendar-border-width solid
+    border-bottom: $calendar-border-color-dark $calendar-border-width solid
     color: $calendar-primary-color-dark
 
     &.q-outside
@@ -331,7 +331,7 @@
       color: $calendar-day-past-color-dark
 
   .q-calendar-weekly__day--droppable
-    border-right: $calendar-primary-color-dark 1px dashed
+    border-right: $calendar-primary-color-dark $calendar-border-width dashed
 
   .q-calendar-mini
     .q-calendar-weekly__day

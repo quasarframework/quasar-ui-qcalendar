@@ -4,18 +4,18 @@
   background: $calendar-background-color
 
   .q-calendar-scheduler__resources-head
-    border-right: 1px solid $calendar-border-color
-    border-bottom: 1px solid $calendar-border-color
+    border-right: $calendar-border-color $calendar-border-width solid
+    border-bottom: $calendar-border-color $calendar-border-width solid
 
   .q-calendar-scheduler__column-header--before
-    border-bottom: 1px solid $calendar-border-color
+    border-bottom: $calendar-border-color $calendar-border-width solid
 
   .q-calendar-scheduler__column-header--after
-    border-top: 1px solid $calendar-border-color
+    border-top: $calendar-border-color $calendar-border-width solid
 
   .q-calendar-scheduler__head-day
-    border-right: 1px solid $calendar-border-color
-    border-bottom: 1px solid $calendar-border-color
+    border-right: $calendar-border-color $calendar-border-width solid
+    border-bottom: $calendar-border-color $calendar-border-width solid
     color: $calendar-day-current-color
 
     &.q-outside
@@ -34,7 +34,7 @@
         color: $calendar-primary-color
 
         .q-btn__wrapper:before
-          border-width: 2px
+          border-width: $calendar-border-width
 
     &.q-past-day
 
@@ -47,40 +47,40 @@
         color: $calendar-day-past-color
 
   .q-calendar-scheduler__resources-body
-    border-right: 1px solid $calendar-border-color
+    border-right: $calendar-border-color $calendar-border-width solid
 
     .q-calendar-scheduler__resource-text
       color: $calendar-text-color
 
   .q-calendar-scheduler__day
-    border-right: 1px solid $calendar-border-color
-    border-bottom: 1px solid $calendar-border-color
+    border-right: $calendar-border-color $calendar-border-width solid
+    border-bottom: $calendar-border-color $calendar-border-width solid
 
     &.q-current-day
-      // border #9e9e9e 1px solid !important
+      // border $calendar-border-color $calendar-border-width solid
 
   .q-calendar-scheduler__resource
-    border-top: 1px solid $calendar-border-color
+    border-top: $calendar-border-color $calendar-border-width solid
     color: $calendar-text-color
 
     &:first-child
       border-top: none !important
 
     &:last-child
-      border-bottom: 1px solid $calendar-border-color
+      border-bottom: $calendar-border-color $calendar-border-width solid
 
   .q-calendar-scheduler__day-resource
-    border-top: 1px solid $calendar-border-color
+    border-top: $calendar-border-color $calendar-border-width solid
     color: $calendar-text-color
 
     &:first-child
       border-top: none !important
 
     &:last-child
-      border-bottom: 1px solid $calendar-border-color
+      border-bottom: $calendar-border-color $calendar-border-width solid
 
 .q-calendar-scheduler__day-resource--droppable
-  border: $calendar-primary-color 2px dashed
+  border: $calendar-primary-color calendar-border-width dashed
 
 .q-calendar-scheduler
   display: flex
@@ -102,7 +102,7 @@
     vertical-align: bottom
     width: $calendar-resources-body-width
     color: $calendar-text-color
-    border-bottom: 1px solid $calendar-border-color
+    border-bottom: $calendar-border-color $calendar-border-width solid
 
     &--text
       display: block
@@ -210,18 +210,18 @@
     background: $calendar-background-color-dark
 
     .q-calendar-scheduler__resources-head
-      border-right: 1px solid $calendar-border-color-dark
-      border-bottom: 1px solid $calendar-border-color-dark
+      border-right: $calendar-border-color-dark $calendar-border-width solid
+      border-bottom: $calendar-border-color-dark $calendar-border-width solid
 
     .q-calendar-scheduler__column-header--before
-      border-bottom: 1px solid $calendar-border-color-dark
+      border-bottom: $calendar-border-color-dark $calendar-border-width solid
 
     .q-calendar-scheduler__column-header--after
-      border-top: 1px solid $calendar-border-color-dark
+      border-top: $calendar-border-color-dark $calendar-border-width solid
 
     .q-calendar-scheduler__head-day
-      border-right: 1px solid $calendar-border-color-dark
-      border-bottom: 1px solid $calendar-border-color-dark
+      border-right: $calendar-border-color-dark $calendar-border-width solid
+      border-bottom: $calendar-border-color-dark $calendar-border-width solid
       color: $calendar-day-current-color-dark
 
       &.q-outside
@@ -245,37 +245,37 @@
           color: $calendar-day-past-color-dark
 
     .q-calendar-scheduler__resources-body
-      border-right: $calendar-border-color-dark solid 1px
+      border-right: $calendar-border-color-dark $calendar-border-width solid
 
       .q-calendar-scheduler__resource-text
         color: $calendar-text-color-dark
 
     .q-calendar-scheduler__day
-      border-right: 1px solid $calendar-border-color-dark
-      border-bottom: 1px solid $calendar-border-color-dark
+      border-right: $calendar-border-color-dark $calendar-border-width solid
+      border-bottom: $calendar-border-color-dark $calendar-border-width solid
 
       &.q-current-day
-        // border #9e9e9e 1px solid !important
+        // border $calendar-border-color-dark $calendar-border-width solid
 
     .q-calendar-scheduler__resource
-      border-top: 1px solid $calendar-border-color-dark
+      border-top: $calendar-border-color-dark $calendar-border-width solid
       color: $calendar-day-current-color-dark
 
       &:first-child
         border-top: none !important
 
       &:last-child
-        border-bottom: 1px solid $calendar-border-color-dark
+        border-bottom: $calendar-border-color-dark $calendar-border-width solid
 
     .q-calendar-scheduler__day-resource
-      border-top: 1px solid $calendar-border-color-dark
+      border-top: $calendar-border-color-dark $calendar-border-width solid
       color: $calendar-text-color-dark
 
       &:first-child
         border-top: none !important
 
       &:last-child
-        border-bottom: 1px solid $calendar-border-color-dark
+        border-bottom: $calendar-border-color-dark $calendar-border-width solid
 
   .q-calendar-scheduler__day-resource--droppable
-    border: $calendar-primary-color-dark 2px dashed
+    border: $calendar-primary-color-dark $calendar-border-width dashed
