@@ -190,15 +190,11 @@ export default {
         staticClass: 'q-calendar-weekly__week'
       }, [
         this.showWorkWeeks === true && this.__renderWorkWeekGutter(h, week),
-        week.map((day) => this.__renderDay(h, day)),
-        slot ? h('div', {
-          staticClass: 'absolute',
-          style: {
-            top: '2.2em',
-            left: 0,
-            right: 0,
-            bottom: 0
-          }
+        h('div', {
+          staticClass: 'q-calendar-weekly__week-days row'
+        }, week.map((day) => this.__renderDay(h, day))),
+        slot !== void 0 ? h('div', {
+          staticClass: 'q-calendar-weekly__week-events',
         }, slot(slotData)) : ''
       ])
     },
