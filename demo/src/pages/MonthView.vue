@@ -118,7 +118,7 @@ Using the property `short-weekday-label` while in `mini-mode` gives an even shor
       </q-markdown>
     </example-card>
 
-    <example-card title="Mini-Mode - Slots" name="MonthViewSlotsMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSlotsMiniMode.vue').default)" />
+    <example-card title="Mini-Mode - Slots (day)" name="MonthViewSlotsMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSlotsMiniMode.vue').default)" />
     <example-card title="Mini-Mode - Theme" name="MonthViewThemeMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewThemeMiniMode.vue').default)" />
 
   </div>
@@ -174,7 +174,7 @@ export default {
     this.addToToc('Mini-Mode - Work Week Numbers', 2)
     this.addToToc('Mini-Mode - Selection', 2)
     this.addToToc('Mini-Mode - Multi-Month Selection', 2)
-    this.addToToc('Mini-Mode - Slots', 2)
+    this.addToToc('Mini-Mode - Slots (day)', 2)
     this.addToToc('Mini-Mode - Theme', 2)
 
     this.toc = this.tempToc
