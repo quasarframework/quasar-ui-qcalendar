@@ -5,15 +5,9 @@ $fgColor: #159957
 $bgColor: #155799
 
 .quasar
-  position: absolute
-  left: 10px
-  bottom: 10px
   opacity: 0.5
 
 .byline
-  position: absolute
-  bottom: 10px
-  right: 10px
   opacity: 0.5
 
 .byline a
@@ -54,6 +48,10 @@ a
   &:hover
     text-decoration: underline
 
+.body--dark
+  a
+    color: $grey-2
+
 .btn
   display: inline-block
   margin-bottom: 1rem
@@ -77,28 +75,20 @@ a
 .project-name
   font-weight 700
 
-@media screen and (min-width: 64em)
-  .btn
-    padding: 0.75rem 1rem;
-
 @media screen and (min-width: 42em) and (max-width: 64em)
   .btn
-    padding: 0.6rem 0.9rem
     font-size: 0.9rem
 
 @media screen and (max-width: 42em)
   .btn
     display: block
     width: 100%
-    padding: 0.75rem
     font-size: 0.9rem
   .btn + .btn
     margin-left: 0
   .byline
     left: 0
     align-text center
-  .quasar
-    opacity: 0
 
 .page-header
   position: relative
@@ -109,15 +99,15 @@ a
 
 @media screen and (min-width: 64em)
   .page-header
-    padding: 3rem 4rem
+    padding: 1rem 2rem
 
 @media screen and (min-width: 42em) and (max-width: 64em)
   .page-header
-    padding: 2rem 4rem
+    padding: .5rem 1rem
 
 @media screen and (max-width: 42em)
   .page-header
-    padding: 2rem 1rem 1rem 1rem
+    padding: .5rem 1rem
 
   .project-name
     font-weight: 700
@@ -127,14 +117,17 @@ a
 @media screen and (min-width: 64em)
   .project-name
     font-size: 4.25rem
+    line-height: unset;
 
 @media screen and (min-width: 42em) and (max-width: 64em)
   .project-name
     font-size: 3.25rem
+    line-height: unset;
 
 @media screen and (max-width: 42em)
   .project-name
     font-size: 2.75rem
+    line-height: unset;
 
   .project-tagline
     font-weight: normal
@@ -143,14 +136,17 @@ a
 @media screen and (min-width: 64em)
   .project-tagline
     font-size: 1.75rem
+    line-height: unset;
 
 @media screen and (min-width: 42em) and (max-width: 64em)
   .project-tagline
     font-size: 1.25rem
+    line-height: unset;
 
 @media screen and (max-width: 42em)
   .project-tagline
     font-size: 1rem
+    line-height: unset;
 
 .main-content :first-child
   margin-top: 0
