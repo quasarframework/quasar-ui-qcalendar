@@ -295,7 +295,7 @@ export default {
         this.isMiniMode !== true && this.showDayOfYearLabel && !hasMonth ? this.__renderDayOfYearLabel(h, day) : '',
         this.isMiniMode !== true && hasMonth ? this.__renderDayMonth(h, day) : '',
         h('div', {
-          staticClass: 'full-width'
+          staticClass: 'full-width' + (this.isMiniMode === true ? ' row justify-around' : '')
         }, slot ? slot(slotData) : '')
       ])
     },

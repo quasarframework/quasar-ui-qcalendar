@@ -259,7 +259,7 @@
     bottom: unset
     left: 0
     margin: auto
-  
+
   .q-event:not(.q-event-void)
     &:after
       content: ''
@@ -270,7 +270,7 @@
       right: 0
       margin: auto
       background: $calendar-primary-color
-  
+
   .q-calendar-weekly__week
     min-height: 3em
 
@@ -350,3 +350,11 @@
       &.q-current-day
         .q-calendar-weekly__day-label .q-btn__wrapper:before
           border-color: #fff
+
+.q-event
+  &:first-child
+    margin-top: 2.6em
+
+.q-calendar-mini
+  .q-event
+    margin-top: 2.6em
