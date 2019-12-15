@@ -46,8 +46,10 @@ Keep in mind that the functionality below won't work with swipe actions.
       </q-markdown>
     </example-card>
 
-    <example-card title="Slots (day-header and day-body)" name="MonthViewSlots" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSlots.vue').default)">
+    <example-card title="Slots (day)" name="MonthViewSlots" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSlots.vue').default)">
       <q-markdown>
+The `#day` slot allows you to write anything into the body of the day. To avoid writing on top of the `day-label` add the css class `.q-event` to your item which adds a top margin (and also works for mini-mode).
+
 For slots that return `day` or `timestamp`, it looks like this:
 ```js
 {
@@ -161,7 +163,7 @@ export default {
     this.addToToc('Prev/Next', 2)
     this.addToToc('Swipe', 2)
     this.addToToc('Multi-Day Selection', 2)
-    this.addToToc('Slots (day-header and day-body)', 2)
+    this.addToToc('Slots (day)', 2)
     this.addToToc('Slots (week)', 2)
     this.addToToc('Theme', 2)
 
