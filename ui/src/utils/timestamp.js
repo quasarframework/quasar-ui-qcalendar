@@ -271,8 +271,7 @@ export function updateFormatted (timestamp) {
 
 export function getDayOfYear (timestamp) {
   if (timestamp.year === 0) return
-  const ts = new Date(Date.UTC(timestamp.year, timestamp.month - 1, timestamp.day, 0, 0))
-  return date.getDayOfYear(ts)
+  return (Date.UTC(timestamp.year, timestamp.month - 1, timestamp.day) - Date.UTC(timestamp.year, 0, 0)) / 24 / 60 / 60 / 1000
 }
 
 export function getWorkWeek (timestamp) {
