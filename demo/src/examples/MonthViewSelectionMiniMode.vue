@@ -110,7 +110,6 @@ export default {
     },
 
     getBetween (timestamp) {
-      debugger
       const nowIdentifier = getDayIdentifier(timestamp)
       return {
         'q-selected-day-first': this.lowIdentifier === nowIdentifier,
