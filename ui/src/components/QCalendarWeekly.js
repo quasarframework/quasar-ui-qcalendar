@@ -187,18 +187,20 @@ export default {
       const slotData = { week, weekdays, miniMode: this.isMiniMode }
       return h('div', {
         key: week[0].date,
-        staticClass: 'q-calendar-weekly__week'
+        staticClass: 'q-calendar-weekly__week--wrapper'
       }, [
         this.showWorkWeeks === true && this.__renderWorkWeekGutter(h, week),
         h('div', {
-          staticClass: 'q-calendar-weekly__week-days row',
-          style: {
-            left: this.showWorkWeeks === true ? '50px' : void 0
-          }
-        }, week.map((day) => this.__renderDay(h, day))),
-        slot !== void 0 ? h('div', {
-          staticClass: 'q-calendar-weekly__week-events'
-        }, slot(slotData)) : ''
+          key: week[0].date,
+          staticClass: 'q-calendar-weekly__week col-grow'
+        }, [
+          h('div', {
+            staticClass: 'q-calendar-weekly__week-days'
+          }, week.map((day) => this.__renderDay(h, day))),
+          slot !== void 0 ? h('div', {
+            staticClass: 'q-calendar-weekly__week-events'
+          }, slot(slotData)) : ''
+        ])
       ])
     },
 

@@ -108,8 +108,11 @@
     border-bottom: $calendar-border-color $calendar-border-width solid
     min-height: 6em
     position: relative
-    display: flex
-    flex-wrap: nowrap
+
+    &--wrapper
+      display: flex
+      flex-wrap: nowrap
+      position: relative
 
     &-days
       position: absolute
@@ -118,6 +121,8 @@
       top: 0
       right: 0
       bottom: 0
+      display: flex
+      flex-wrap: nowrap
 
     &-events
       position: relative
