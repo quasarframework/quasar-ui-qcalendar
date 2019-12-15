@@ -194,7 +194,7 @@ export default {
           staticClass: 'q-calendar-weekly__week-days row'
         }, week.map((day) => this.__renderDay(h, day))),
         slot !== void 0 ? h('div', {
-          staticClass: 'q-calendar-weekly__week-events',
+          staticClass: 'q-calendar-weekly__week-events'
         }, slot(slotData)) : ''
       ])
     },
