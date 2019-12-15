@@ -191,7 +191,10 @@ export default {
       }, [
         this.showWorkWeeks === true && this.__renderWorkWeekGutter(h, week),
         h('div', {
-          staticClass: 'q-calendar-weekly__week-days row'
+          staticClass: 'q-calendar-weekly__week-days row',
+          style: {
+            left: this.showWorkWeeks === true ? '50px' : void 0
+          }
         }, week.map((day) => this.__renderDay(h, day))),
         slot !== void 0 ? h('div', {
           staticClass: 'q-calendar-weekly__week-events'
