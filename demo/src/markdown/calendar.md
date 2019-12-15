@@ -234,6 +234,10 @@ To use the scheduler, you need to use the `resources` property, which currently 
 
 ## Agenda view
 
+::: info
+The developer is free to add whatever content they want. The example below just shows one of many ways it could be done.
+:::
+
 ![AgendaView](statics/qcalendar-agenda-view.png "Agenda View" =800x800)
 
 The `agenda` view is basically a `day` view without the intervals. It is up to the developer to provide the content via the `day-body` slot.
