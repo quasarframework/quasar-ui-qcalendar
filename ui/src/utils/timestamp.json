@@ -880,28 +880,6 @@
         "desc": "true if a number, otherwise false",
         "__exemption": [ "examples" ]
       }
-    },
-    "convertToUnit": {
-      "desc": "Converts the input to unit (default is `px`. Checks validity of value, isNan, etc",
-      "params": {
-        "input": {
-          "type": [ "Number", "String" ],
-          "required": true,
-          "desc": "The input value",
-          "__exemption": [ "examples" ]
-        },
-        "unit": {
-          "type": "String",
-          "default": "px",
-          "desc": "The type of unit to use",
-          "__exemption": [ "examples" ]
-        }
-      },
-      "returns": {
-        "type": "String",
-        "desc": "Returns the input value concatenated with the unit value",
-        "__exemption": [ "examples" ]
-      }
     }
   }
 }
