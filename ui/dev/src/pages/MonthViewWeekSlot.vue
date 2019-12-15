@@ -3,21 +3,35 @@
     v-model="selectedDate"
     view="month"
     locale="en-us"
-    :day-height="100"
+    mini-mode="auto"
+    breakpoint="sm"
   >
-    <template #week="{ week, weekdays }">
-      <template v-for="(computedEvent, index) in getWeekEvents(week, weekdays)">
-        <q-badge
+    <template #week="{ week, weekdays, miniMode }">
+      <template v-if="miniMode">
+        <div
+          v-for="(computedEvent, index) in getWeekEventsMini(week, weekdays)"
           :key="index"
-          class="ellipsis"
-          :class="badgeClasses(computedEvent, 'day')"
-          :style="badgeStyles(computedEvent, 'day', week.length)"
+          class="q-event flex inline"
+          :class="badgeClassesMini(computedEvent)"
+          :style="badgeStyles(computedEvent, week.length)"
+        ></div>
+      </template>
+      <template v-else>
+        <q-badge
+          v-for="(computedEvent, index) in getWeekEvents(week, weekdays)"
+          :key="index"
+          class="q-event ellipsis"
+          :class="badgeClasses(computedEvent)"
+          :style="badgeStyles(computedEvent, week.length)"
         >
           <template v-if="computedEvent.event">
-            <q-icon :name="computedEvent.event.icon" class="q-mr-xs"></q-icon>
+            <q-icon v-if="computedEvent.event.icon" :name="computedEvent.event.icon" class="q-mr-xs"></q-icon>
             <span class="ellipsis">{{ computedEvent.event.title }}</span>
           </template>
         </q-badge>
+      </template>
+      <template >
+        
       </template>
     </template>
   </q-calendar>
@@ -138,38 +152,64 @@ export default {
       return !!color && !!color.match(/^(#|(rgb|hsl)a?\()/)
     },
 
-    badgeClasses (infoEvent, type) {
+    badgeClasses (infoEvent) {
       const color = infoEvent.event !== void 0 ? infoEvent.event.color : 'transparent'
-      const cssColor = this.isCssColor(color)
-      const isHeader = type === 'header'
 
       return {
-        [`text-white bg-${color}`]: !cssColor,
-        'full-width': !isHeader && (!infoEvent.side || infoEvent.side === 'full'),
-        'left-side': !isHeader && infoEvent.side === 'left',
-        'right-side': !isHeader && infoEvent.side === 'right',
+        [`text-white bg-${color}`]: true,
         'cursor-pointer': infoEvent.event !== void 0,
-        'event-void': infoEvent.event === void 0 // height: 0, padding: 0
+        'q-event-void': infoEvent.event === void 0
       }
     },
 
-    badgeStyles (infoEvent, type, weekLength, timeStartPos, timeDurationHeight) {
-      const s = {}
-      /*if (this.isCssColor(infoEvent.color)) {
-        s['background-color'] = event.color
-        s.color = colors.luminosity(event.color) > 0.5 ? 'black' : 'white'
-      }*/
-      if (timeStartPos) {
-        s.top = timeStartPos(infoEvent.event.time) + 'px'
+    badgeStyles (infoEvent, weekLength) {
+      return {
+        // 'background-color': infoEvent.event.color,
+        // color: colors.luminosity(event.color) > 0.5 ? 'black' : 'white',
+        width: ((100 / weekLength) * infoEvent.size) + '% !important'
       }
-      if (timeDurationHeight) {
-        s.height = timeDurationHeight(infoEvent.event.duration) + 'px'
+    },
+
+    badgeClassesMini (infoEvent) {
+      const hasEvents = infoEvent.events.length > 0
+
+      return {
+        'cursor-pointer': hasEvents === true,
+        'q-event-void': hasEvents !== true
       }
-      if (infoEvent.size !== void 0) {
-        s.width = ((100 / weekLength) * infoEvent.size) + '% !important'
-      }
-      // s['align-items'] = 'flex-start'
-      return s
+    },
+
+    getWeekEventsMini (week, weekdays) {
+      const tsFirstDay = parsed(week[0].date + ' 00:00')
+      const tsLastDay = parsed(week[week.length - 1].date + ' 23:59')
+      const firstDay = getDayIdentifier(tsFirstDay)
+      const lastDay = getDayIdentifier(tsLastDay)
+
+      const events = []
+
+      week.forEach(tsWeekDate => {
+        const weekDate = getDayIdentifier(tsWeekDate)
+
+        const eventsDay = []
+
+        this.events.forEach(event => {
+          const tsStartDate = parsed(event.start + ' 00:00')
+          const tsEndDate = parsed(event.end + ' 23:59')
+          const startDate = getDayIdentifier(tsStartDate)
+          const endDate = getDayIdentifier(tsEndDate)
+
+          if (this.isBetweenDates(weekDate, startDate, endDate) === true) {
+            eventsDay.push(event)
+          }
+        })
+
+        events.push({
+          size: 1,
+          events: eventsDay
+        })
+      })
+
+      return events
     },
 
     getWeekEvents (week, weekdays) {
