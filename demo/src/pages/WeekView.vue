@@ -52,7 +52,8 @@ For slots that return `day` or `timestamp`, it looks like this:
   hasTime: false, // if this timestamp is supposed to have a time
   past: false,    // if timestamp is in the past (based on `now` property)
   current: false, // if timestamp is current date (based on `now` property)
-  future: false   // if timestamp is in the future (based on `now` property)
+  future: false,  // if timestamp is in the future (based on `now` property)
+  disabled: false // if timestamp is disabled
 }
 ```
 
@@ -69,6 +70,8 @@ You can use the scopedSlot `day-container` to set an absolute position for a tim
 Scroll down if the current time is later for your location to see the example.
       </q-markdown>
     </example-card>
+
+    <example-card title="Theme" name="WeekViewTheme" :tag-parts="getTagParts(require('!!raw-loader!../examples/WeekViewTheme.vue').default)" />
 
   </div>
 </template>
@@ -111,6 +114,7 @@ export default {
     this.addToToc('Column Header', 2)
     this.addToToc('Slots', 2)
     this.addToToc('Week View (Current Time) - Slot (day-container)', 2)
+    this.addToToc('Theme', 2)
 
     this.toc = this.tempToc
   },

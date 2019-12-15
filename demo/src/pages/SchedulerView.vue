@@ -28,7 +28,8 @@ For slots that return `day` or `timestamp`, it looks like this:
   hasTime: false, // if this timestamp is supposed to have a time
   past: false,    // if timestamp is in the past (based on `now` property)
   current: false, // if timestamp is current date (based on `now` property)
-  future: false   // if timestamp is in the future (based on `now` property)
+  future: false,  // if timestamp is in the future (based on `now` property)
+  disabled: false // if timestamp is disabled
 }
 ```
 
@@ -53,6 +54,8 @@ Below, the slot receives the `timestamp` for the day being displayed, an index, 
 Below, the slot receives the `resource` to be displayed. In this case, an avatar (or icon) is being displayed along with the resource name.
       </q-markdown>
     </example-card>
+
+    <example-card title="Theme" name="SchedulerViewTheme" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewTheme.vue').default)" />
 
   </div>
 </template>
@@ -89,6 +92,7 @@ export default {
     this.addToToc('Slots (scheduler-day-header)', 2)
     this.addToToc('Slots (scheduler-resource-day)', 2)
     this.addToToc('Slots (scheduler-resource)', 2)
+    this.addToToc('Theme', 2)
 
     this.toc = this.tempToc
   },

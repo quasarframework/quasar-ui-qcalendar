@@ -1,41 +1,44 @@
 <template>
-  <q-splitter
-    v-model="splitterModel"
-    :limits="[30, 100]"
-    emit-immediately
-  >
-    <template v-slot:before>
-      <div style="overflow: hidden;">
-        <q-calendar
-          ref="calendar"
-          v-model="selectedDate"
-          view="month"
-          locale="en-us"
-          :mini-mode="miniMode"
-          animated
-          transition-prev="slide-right"
-          transition-next="slide-left"
-          :selected-start-end-dates="startEndDates"
-          :day-class="classDay"
-          @mousedown:day="onMouseDownDay"
-          @mouseup:day="onMouseUpDay"
-          @mousemove:day="onMouseMoveDay"
-        />
+  <div>
+    <div class="q-gutter-sm">
+      <q-checkbox v-model="mobile" label="Use Touch (set if on mobile)" />
     </div>
-    </template>
-    <template v-slot:separator>
-      <q-avatar color="primary" text-color="white" size="40px" icon="drag_indicator" />
-    </template>
-    <template v-slot:after>
-      <div style="min-width: 20px"></div>
-    </template>
-  </q-splitter>
+    <q-separator></q-separator>
+    <q-splitter
+      v-model="splitterModel"
+      :limits="[30, 100]"
+      emit-immediately
+    >
+      <template v-slot:before>
+        <div style="overflow: hidden;">
+          <q-calendar
+            ref="calendar"
+            v-model="selectedDate"
+            view="month"
+            locale="en-us"
+            :mini-mode="miniMode"
+            :selected-start-end-dates="startEndDates"
+            :day-class="classDay"
+            @mousedown:day="onMouseDownDay"
+            @mouseup:day="onMouseUpDay"
+            @mousemove:day="onMouseMoveDay"
+          />
+      </div>
+      </template>
+      <template v-slot:separator>
+        <q-avatar color="primary" text-color="white" size="40px" icon="drag_indicator" />
+      </template>
+      <template v-slot:after>
+        <div style="min-width: 20px"></div>
+      </template>
+    </q-splitter>
+  </div>
 </template>
 
 <script>
 import {
   getDayIdentifier
-} from '@quasar/quasar-ui-qcalendar/src/utils/timestamp'
+} from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
 
 export default {
   data () {
@@ -45,7 +48,8 @@ export default {
       miniMode: false,
       anchorTimestamp: '',
       otherTimestamp: '',
-      mouseDown: false
+      mouseDown: false,
+      mobile: false
     }
   },
 
@@ -116,6 +120,14 @@ export default {
     },
 
     onMouseDownDay (e) {
+      if (this.mobile === true &&
+        this.anchorTimestamp !== null &&
+        this.otherTimestamp !== null &&
+        this.anchorTimestamp.date === this.otherTimestamp.date) {
+        this.otherTimestamp = e
+        this.mouseDown = false
+        return
+      }
       // mouse is down, start selection and capture current
       this.mouseDown = true
       this.anchorTimestamp = e

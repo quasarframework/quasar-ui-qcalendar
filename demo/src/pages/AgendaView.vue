@@ -28,7 +28,8 @@ For slots that return `day` or `timestamp`, it looks like this:
   hasTime: false, // if this timestamp is supposed to have a time
   past: false,    // if timestamp is in the past (based on `now` property)
   current: false, // if timestamp is current date (based on `now` property)
-  future: false   // if timestamp is in the future (based on `now` property)
+  future: false,  // if timestamp is in the future (based on `now` property)
+  disabled: false // if timestamp is disabled
 }
 ```
       </q-markdown>
@@ -36,6 +37,7 @@ For slots that return `day` or `timestamp`, it looks like this:
 
     <example-card title="First Day Monday" name="AgendaViewWeekFirstDayMonday" :tag-parts="getTagParts(require('!!raw-loader!../examples/AgendaViewWeekFirstDayMonday.vue').default)" />
     <example-card title="Five Day Workweek" name="AgendaViewWeekFiveDayWorkweek" :tag-parts="getTagParts(require('!!raw-loader!../examples/AgendaViewWeekFiveDayWorkweek.vue').default)" />
+    <example-card title="Theme" name="AgendaViewWeekTheme" :tag-parts="getTagParts(require('!!raw-loader!../examples/AgendaViewWeekTheme.vue').default)" />
   </div>
 </template>
 
@@ -68,6 +70,7 @@ export default {
     this.addToToc('Slots', 2)
     this.addToToc('First Day Monday', 2)
     this.addToToc('Five Day Workweek', 2)
+    this.addToToc('Theme', 2)
 
     this.toc = this.tempToc
   },

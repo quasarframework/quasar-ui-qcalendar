@@ -18,24 +18,26 @@ export const MILLISECONDS_IN_DAY = 86400000
 export const MILLISECONDS_IN_HOUR = 3600000
 export const MILLISECONDS_IN_MINUTE = 60000
 
+/* eslint-disable no-multi-spaces */
 export const Timestamp = {
-  date: '', // String
-  time: '', // String
-  year: 0, // Number
-  month: 0, // Number
-  day: 0, // Number
-  weekday: 0, // Number
-  hour: 0, // Number
-  minute: 0, // Number
-  doy: 0, // Number (day of year)
-  workweek: 0, // Number
-  hasDay: false, // Boolean
-  hasTime: false, // Boolean
-  past: false, // Boolean
-  current: false, // Boolean
-  future: false, // Boolean
-  disabled: false // Boolean
+  date: '',       // YYYY-mm-dd
+  time: '',       // 00:00:00 (optional)
+  year: 0,        // YYYY
+  month: 0,       // mm (Jan = 1, etc)
+  day: 0,         // day of the month
+  weekday: 0,     // week day
+  hour: 0,        // 24-hr
+  minute: 0,      // mm
+  doy: 0,         // day of year
+  workweek: 0,    // workweek number
+  hasDay: false,  // if this timestamp is supposed to have a date
+  hasTime: false, // if this timestamp is supposed to have a time
+  past: false,    // if timestamp is in the past (based on `now` property)
+  current: false, // if timestamp is current date (based on `now` property)
+  future: false,  // if timestamp is in the future (based on `now` property)
+  disabled: false // if timestamp is disabled
 }
+/* eslint-enable no-multi-spaces */
 
 export const TimeObject = {
   hour: 0, // Number
@@ -116,7 +118,7 @@ export function validateTimestamp (input) {
 }
 
 export function parsed (input) {
-  // YYYY-MM-DD hh:mm:ss
+  // YYYY-mm-dd hh:mm:ss
   const parts = PARSE_REGEX.exec(input)
 
   if (!parts) return null
@@ -183,6 +185,17 @@ export function getTimeIdentifier (timestamp) {
   return timestamp.hour * 100 + timestamp.minute
 }
 
+export function diffTimestamp (ts1, ts2, strict) {
+  const utc1 = Date.UTC(ts1.year, ts1.month - 1, ts1.day, ts1.hour, ts1.minute)
+  const utc2 = Date.UTC(ts2.year, ts2.month - 1, ts2.day, ts2.hour, ts2.minute)
+  if (strict === true && utc2 < utc1) {
+    // Not negative number
+    // utc2 - utc1 < 0  -> utc2 < utc1 ->   NO: utc1 >= utc2
+    return 0
+  }
+  return Math.floor((utc2 - utc1) / MILLISECONDS_IN_DAY)
+}
+
 export function updateRelative (timestamp, now, time = false) {
   let a = getDayIdentifier(now)
   let b = getDayIdentifier(timestamp)
@@ -233,7 +246,7 @@ export function updateWorkWeek (timestamp) {
 
 export function updateDisabled (timestamp, disabledDays) {
   if (!Array.isArray(disabledDays) || disabledDays.length === 0) {
-    return
+    return timestamp
   }
   const t = getDayIdentifier(timestamp)
   for (const day in disabledDays) {
@@ -243,6 +256,7 @@ export function updateDisabled (timestamp, disabledDays) {
       break
     }
   }
+  return timestamp
 }
 
 export function updateFormatted (timestamp) {
@@ -384,7 +398,6 @@ export function relativeDays (timestamp, mover = nextDay, days = 1, allowedWeekd
 
 export function findWeekday (timestamp, weekday, mover = nextDay, maxDays = 6) {
   while (timestamp.weekday !== weekday && --maxDays >= 0) mover(timestamp)
-
   return timestamp
 }
 
@@ -464,9 +477,6 @@ export function createNativeLocaleFormatter (locale, getOptions) {
   return (timestamp, short) => {
     try {
       const intlFormatter = new Intl.DateTimeFormat(locale || void 0, getOptions(timestamp, short))
-      // const time = `${padNumber(timestamp.hour, 2)}:${padNumber(timestamp.minute, 2)}`
-      // const date = timestamp.date
-      // return intlFormatter.format(new Date(`${date}T${time}:00+00:00`))
       return intlFormatter.format(new Date(Date.UTC(timestamp.year, timestamp.month - 1, timestamp.day, timestamp.hour, timestamp.minute)))
     } catch (e) {
       return ''
@@ -476,4 +486,63 @@ export function createNativeLocaleFormatter (locale, getOptions) {
 
 export function validateNumber (input) {
   return isFinite(parseInt(input, 10))
+}
+
+export default {
+  PARSE_REGEX,
+  PARSE_TIME,
+  DAYS_IN_MONTH,
+  DAYS_IN_MONTH_LEAP,
+  DAYS_IN_MONTH_MIN,
+  DAYS_IN_MONTH_MAX,
+  MONTH_MAX,
+  MONTH_MIN,
+  DAY_MIN,
+  DAYS_IN_WEEK,
+  MINUTES_IN_HOUR,
+  HOURS_IN_DAY,
+  FIRST_HOUR,
+  MILLISECONDS_IN_DAY,
+  MILLISECONDS_IN_HOUR,
+  MILLISECONDS_IN_MINUTE,
+  Timestamp,
+  TimeObject,
+  getStartOfWeek,
+  getEndOfWeek,
+  getStartOfMonth,
+  getEndOfMonth,
+  parseTime,
+  validateTimestamp,
+  parsed,
+  parseTimestamp,
+  parseDate,
+  getDayIdentifier,
+  getTimeIdentifier,
+  diffTimestamp,
+  updateRelative,
+  updateMinutes,
+  updateWeekday,
+  updateDayOfYear,
+  updateWorkWeek,
+  updateDisabled,
+  updateFormatted,
+  getDayOfYear,
+  getWorkWeek,
+  getWeekday,
+  isLeapYear,
+  daysInMonth,
+  copyTimestamp,
+  padNumber,
+  getDate,
+  getTime,
+  nextMinutes,
+  nextDay,
+  prevDay,
+  relativeDays,
+  findWeekday,
+  getWeekdaySkips,
+  createDayList,
+  createIntervalList,
+  createNativeLocaleFormatter,
+  validateNumber
 }

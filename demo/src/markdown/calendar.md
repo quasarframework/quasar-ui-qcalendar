@@ -83,7 +83,7 @@ Vue.use(Plugin)
 <style src="@quasar/quasar-ui-qcalendar/dist/index.css"></style>
 
 <script>
-import { Component as QCalendar } from '@quasar/quasar-ui-qcalendar'
+import { QCalendar } from '@quasar/quasar-ui-qcalendar'
 
 export default {
   components: {
@@ -113,7 +113,7 @@ Vue.use(Plugin)
 <style src="@quasar/quasar-ui-qcalendar/dist/index.css"></style>
 
 <script>
-import { Component as QCalendar } from '@quasar/quasar-ui-qcalendar'
+import { QCalendar } from '@quasar/quasar-ui-qcalendar'
 
 export default {
   components: {
@@ -378,6 +378,53 @@ See the Demo code for more information (link at top of page).
 
 QCalendar supports locales as defined within the browser and can be changed by setting the `locale` property. If an invalid locale is used, the fallback locale of **en-us** will be used.
 
+If you are handling a toolbar with previous, next, today options and would also like to format the current month, you can do something like this to get the browser to do the translation for you.
+
+```js
+  beforeMount () {
+    this.locale = this.$q.lang.getLocale() || 'en-us'
+    this.updateFormatter()
+  },
+```
+```js
+  watch: {
+    locale () {
+      if (this.locale.length > 2) {
+        this.updateFormatter()
+      }
+    },
+    shortMonthLabel () {
+      this.updateFormatter()
+    }
+  },
+```
+Then in `methods`:
+```js
+    updateFormatter () {
+      try {
+        this.titleFormatter = new Intl.DateTimeFormat(this.locale || void 0, {
+          month: this.shortMonthLabel ? 'short' : 'long',
+          year: 'numeric',
+          timeZone: 'UTC'
+        })
+      } catch (e) {
+        // console.error('Intl.DateTimeFormat not supported')
+        this.titleFormatter = void 0
+      }
+    },
+```
+and then in `computed`:
+```js
+    title () {
+      if (this.titleFormatter && this.locale && this.selectedDate) {
+        const date = new Date(this.selectedDate)
+        return this.titleFormatter.format(date)
+      }
+      return ''
+    },
+```
+Now, you can use the computed variable `this.title`.
+
 ![Arabic](statics/qcalendar-locale-arabic.png "Locale - Arabic" =800x800)
 ![Chinese](statics/qcalendar-locale-chinese.png "Locale - Chinese" =800x800)
 ![French](statics/qcalendar-locale-french.png "Locale - French" =800x800)
@@ -498,7 +545,8 @@ The `timestamp` object looks like this:
   hasTime: false, // if this timestamp is supposed to have a time
   past: false,    // if timestamp is in the past (based on `now` property)
   current: false, // if timestamp is current date (based on `now` property)
-  future: false   // if timestamp is in the future (based on `now` property)
+  future: false,  // if timestamp is in the future (based on `now` property)
+  disabled: false // if timestamp is disabled
 }
 ```
 
