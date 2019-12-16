@@ -15,7 +15,6 @@
         @mousedown:day="onMouseDownDay"
         @mouseup:day="onMouseUpDay"
         @mousemove:day="onMouseMoveDay"
-        style="height: 400px; overflow: hidden"
       />
     </div>
   </div>

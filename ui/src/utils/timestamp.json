@@ -762,7 +762,7 @@
         "max": {
           "type": "Number",
           "default": "42",
-          "desc": "Maximum days required. 42 is the number of days in a fill calendar (6 rows)",
+          "desc": "Maximum days required. 42 is the number of days in a full calendar (6 rows) month",
           "__exemption": [ "examples" ]
         },
         "min": {
@@ -773,8 +773,8 @@
         }
       },
       "returns": {
-        "type": "Object",
-        "desc": "A timestamp object moved to the relatively specified days against the `allowedWeekdays`",
+        "type": "Array",
+        "desc": "An array of timestamp objects for all days that meet the criteria",
         "__exemption": [ "examples" ]
       },
     "__exemption": [ "examples" ]
@@ -815,7 +815,7 @@
       },
       "returns": {
         "type": "Array",
-        "desc": "A array of interval objects (timestamps with time)",
+        "desc": "A array of interval objects (timestamps with time) that meet the criteria",
         "__exemption": [ "examples" ]
       },
     "__exemption": [ "examples" ]
@@ -878,28 +878,6 @@
       "returns": {
         "type": "Boolean",
         "desc": "true if a number, otherwise false",
-        "__exemption": [ "examples" ]
-      }
-    },
-    "convertToUnit": {
-      "desc": "Converts the input to unit (default is `px`. Checks validity of value, isNan, etc",
-      "params": {
-        "input": {
-          "type": [ "Number", "String" ],
-          "required": true,
-          "desc": "The input value",
-          "__exemption": [ "examples" ]
-        },
-        "unit": {
-          "type": "String",
-          "default": "px",
-          "desc": "The type of unit to use",
-          "__exemption": [ "examples" ]
-        }
-      },
-      "returns": {
-        "type": "String",
-        "desc": "Returns the input value concatenated with the unit value",
         "__exemption": [ "examples" ]
       }
     }

@@ -45,7 +45,7 @@ export const TimeObject = {
 }
 
 export function getStartOfWeek (timestamp, weekdays, today) {
-  if (timestamp.day === 1) {
+  if (timestamp.day === 1 || timestamp.weekday === 0) {
     while (!weekdays.includes(timestamp.weekday)) {
       nextDay(timestamp)
     }
@@ -62,7 +62,7 @@ export function getStartOfWeek (timestamp, weekdays, today) {
 export function getEndOfWeek (timestamp, weekdays, today) {
   // is last day of month?
   const lastDay = daysInMonth(timestamp.year, timestamp.month)
-  if (lastDay === timestamp.day) {
+  if (lastDay === timestamp.day || timestamp.weekday === 6) {
     while (!weekdays.includes(timestamp.weekday)) {
       prevDay(timestamp)
     }
@@ -271,8 +271,7 @@ export function updateFormatted (timestamp) {
 
 export function getDayOfYear (timestamp) {
   if (timestamp.year === 0) return
-  const ts = new Date(Date.UTC(timestamp.year, timestamp.month - 1, timestamp.day, 0, 0))
-  return date.getDayOfYear(ts)
+  return (Date.UTC(timestamp.year, timestamp.month - 1, timestamp.day) - Date.UTC(timestamp.year, 0, 0)) / 24 / 60 / 60 / 1000
 }
 
 export function getWorkWeek (timestamp) {

@@ -187,19 +187,20 @@ export default {
       const slotData = { week, weekdays, miniMode: this.isMiniMode }
       return h('div', {
         key: week[0].date,
-        staticClass: 'q-calendar-weekly__week'
+        staticClass: 'q-calendar-weekly__week--wrapper'
       }, [
         this.showWorkWeeks === true && this.__renderWorkWeekGutter(h, week),
-        week.map((day) => this.__renderDay(h, day)),
-        slot ? h('div', {
-          staticClass: 'absolute',
-          style: {
-            top: '2.2em',
-            left: 0,
-            right: 0,
-            bottom: 0
-          }
-        }, slot(slotData)) : ''
+        h('div', {
+          key: week[0].date,
+          staticClass: 'q-calendar-weekly__week col-grow'
+        }, [
+          h('div', {
+            staticClass: 'q-calendar-weekly__week-days'
+          }, week.map((day) => this.__renderDay(h, day))),
+          slot !== void 0 ? h('div', {
+            staticClass: 'q-calendar-weekly__week-events'
+          }, slot(slotData)) : ''
+        ])
       ])
     },
 
@@ -299,7 +300,7 @@ export default {
         this.isMiniMode !== true && this.showDayOfYearLabel && !hasMonth ? this.__renderDayOfYearLabel(h, day) : '',
         this.isMiniMode !== true && hasMonth ? this.__renderDayMonth(h, day) : '',
         h('div', {
-          staticClass: 'full-width'
+          staticClass: 'full-width' + (this.isMiniMode === true ? ' row justify-around' : '')
         }, slot ? slot(slotData) : '')
       ])
     },

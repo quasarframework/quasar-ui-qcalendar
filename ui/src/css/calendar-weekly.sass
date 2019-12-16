@@ -7,21 +7,21 @@
   background: $calendar-background-color
 
   .q-calendar-weekly__head-workweek
-    border-right: $calendar-border-color 1px solid
-    border-bottom: $calendar-border-color 1px solid
+    border-right: $calendar-border-color $calendar-border-width solid
+    border-bottom: $calendar-border-color $calendar-border-width solid
     color: $calendar-day-current-color
     font-weight: $calendar-workweek-font-weight
     align-items: center
 
   .q-calendar-weekly__head-weekday
-    border-right: $calendar-border-color 1px solid
-    border-bottom: $calendar-border-color 1px solid
+    border-right: $calendar-border-color $calendar-border-width solid
+    border-bottom: $calendar-border-color $calendar-border-width solid
     color: $calendar-day-current-color
     font-weight: $calendar-weekly-head-weekday-font-weight
 
   .q-calendar-weekly__workweek
-    border-right: $calendar-border-color 1px solid
-    border-bottom: $calendar-border-color 1px solid
+    border-right: $calendar-border-color $calendar-border-width solid
+    border-bottom: $calendar-border-color $calendar-border-width solid
     font-weight: $calendar-workweek-font-weight
     align-items: center
     justify-content: center
@@ -36,8 +36,7 @@
       color: $calendar-day-current-color
 
   .q-calendar-weekly__day
-    border-right: $calendar-border-color 1px solid
-    border-bottom: $calendar-border-color 1px solid
+    border-right: $calendar-border-color $calendar-border-width solid
     color: $calendar-text-color
 
     &.q-selected-day
@@ -60,7 +59,7 @@
         font-weight: 400
 
         .q-btn__wrapper:before
-          border-width: 1px
+          border-width: $calendar-border-width
 
       .q-calendar-weekly__day-month
         color: currentColor
@@ -72,7 +71,7 @@
       // color: $calendar-day-past-color
 
 .q-calendar-weekly__day--droppable
-    border-right: $calendar-primary-color 1px dashed
+    border-right: $calendar-primary-color $calendar-border-width dashed
 
 .q-calendar-weekly
   display: flex
@@ -106,10 +105,28 @@
     justify-content: center
 
   &__week
-    display: flex
-    flex: 1
-    flex-wrap: nowrap
+    border-bottom: $calendar-border-color $calendar-border-width solid
+    min-height: 6em
     position: relative
+
+    &--wrapper
+      display: flex
+      flex-wrap: nowrap
+      position: relative
+
+    &-days
+      position: absolute
+      height: 100%
+      left: 0
+      top: 0
+      right: 0
+      bottom: 0
+      display: flex
+      flex-wrap: nowrap
+
+    &-events
+      position: relative
+      padding-top: 2.6em
 
   &__workweek
     display: flex
@@ -126,9 +143,6 @@
     overflow: hidden
     user-select: none
     position: relative
-    padding: 2.6em 0
-    min-width: $calendar-day-label-height
-    min-height: $calendar-day-label-height
 
   &__day-label
     position: absolute
@@ -165,13 +179,10 @@
     right: 2px
     font-size: 0.6rem
 
+  .q-event
+    // ToDo
+
 .q-calendar-mini
-  .q-calendar-weekly__day
-    justify-content: center
-    align-items: center
-    flex-wrap: wrap
-    min-height: 2.2em
-    min-width: 2.2em
 
   .q-calendar-weekly__head-workweek
     border-right: unset
@@ -186,6 +197,11 @@
     font-size: 1em
 
   .q-calendar-weekly__day
+    justify-content: center
+    align-items: center
+    flex-wrap: wrap
+    min-height: 2.2em
+    min-width: 2.2em
     padding: 0
     border: 0 !important
 
@@ -243,7 +259,7 @@
         border-color: #3e3e3e
         font-color: #3e3e3e
         color: white
-        border-width: 1px
+        border-width: $calendar-border-width
 
   .q-calendar-weekly__day-label
     position: absolute
@@ -254,23 +270,41 @@
     left: 0
     margin: auto
 
+  .q-event:not(.q-event-void)
+    &:after
+      content: ''
+      width: 0.6em
+      height: 0.4em
+      border-radius: 50%
+      left: 0
+      right: 0
+      margin: auto
+      background: $calendar-primary-color
+
+  .q-calendar-weekly__week
+    min-height: 3em
+    border-bottom: unset
+
+  .q-calendar-weekly__week-events
+    padding-top: 1.3em
+
 .body--dark
   .q-calendar-weekly
     background: $calendar-background-color-dark
 
   .q-calendar-weekly__head-workweek
-    border-right: $calendar-border-color-dark 1px solid
-    border-bottom: $calendar-border-color-dark 1px solid
+    border-right: $calendar-border-color-dark $calendar-border-width solid
+    border-bottom: $calendar-border-color-dark $calendar-border-width solid
     color: $calendar-day-current-color-dark
 
   .q-calendar-weekly__head-weekday
-    border-right: $calendar-border-color-dark 1px solid
-    border-bottom: $calendar-border-color-dark 1px solid
+    border-right: $calendar-border-color-dark $calendar-border-width solid
+    border-bottom: $calendar-border-color-dark $calendar-border-width solid
     color: $calendar-day-current-color-dark
 
   .q-calendar-weekly__workweek
-    border-right: $calendar-border-color-dark 1px solid
-    border-bottom: $calendar-border-color-dark 1px solid
+    border-right: $calendar-border-color-dark $calendar-border-width solid
+    border-bottom: $calendar-border-color-dark $calendar-border-width solid
 
     &.q-past-day
       color: $calendar-day-past-color-dark
@@ -282,8 +316,8 @@
       color: $calendar-primary-color-dark
 
   .q-calendar-weekly__day
-    border-right: $calendar-border-color-dark 1px solid
-    border-bottom: $calendar-border-color-dark 1px solid
+    border-right: $calendar-border-color-dark $calendar-border-width solid
+    border-bottom: $calendar-border-color-dark $calendar-border-width solid
     color: $calendar-primary-color-dark
 
     &.q-outside
@@ -308,7 +342,7 @@
       color: $calendar-day-past-color-dark
 
   .q-calendar-weekly__day--droppable
-    border-right: $calendar-primary-color-dark 1px dashed
+    border-right: $calendar-primary-color-dark $calendar-border-width dashed
 
   .q-calendar-mini
     .q-calendar-weekly__day
@@ -327,3 +361,11 @@
       &.q-current-day
         .q-calendar-weekly__day-label .q-btn__wrapper:before
           border-color: #fff
+
+.q-event
+  &:first-child
+    margin-top: 2.6em
+
+.q-calendar-mini
+  .q-event
+    margin-top: 2.6em

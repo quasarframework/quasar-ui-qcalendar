@@ -7,16 +7,17 @@
       <q-space />
     </q-toolbar>
     <q-separator />
-    <q-calendar
-      ref="calendar"
-      v-model="selectedDate"
-      view="day"
-      locale="en-us"
-      animated
-      transition-prev="slide-right"
-      transition-next="slide-left"
-      style="height: 400px; overflow: hidden"
-    />
+    <div style="overflow: hidden">
+      <q-calendar
+        ref="calendar"
+        v-model="selectedDate"
+        view="day"
+        locale="en-us"
+        animated
+        transition-prev="slide-right"
+        transition-next="slide-left"
+      />
+    </div>
   </div>
 </template>
 
