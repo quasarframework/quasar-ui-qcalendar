@@ -84,6 +84,7 @@ export default {
       if (this.dayPadding !== void 0) {
         style.padding = this.dayPadding
       }
+      style.width = 100 / this.weekdays.length + '%'
       return style
     },
 
@@ -157,6 +158,9 @@ export default {
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
         key: day.date,
         staticClass: 'q-calendar-weekly__head-weekday',
+        style: {
+          width: 100 / this.weekdays.length + '%'
+        },
         class: this.getRelativeClasses(day, outside)
       }), [
         this.__renderHeadDayLabel(h, day, this.shortWeekdayLabel || this.isMiniMode)
