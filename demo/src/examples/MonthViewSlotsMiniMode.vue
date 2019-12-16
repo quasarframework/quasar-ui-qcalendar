@@ -17,8 +17,8 @@
             <template v-if="miniMode">
               <q-badge
                 :key="index"
-                style="width: 10px; max-width: 10px; height: 5px; max-height: 5px"
-                class="q-ma-xs"
+                style="width: 5px; max-width: 5px; height: 5px; max-height: 5px"
+                class="q-ma-xs q-event"
                 :class="badgeClasses(event, 'day')"
                 :style="badgeStyles(event, 'day')"
               ></q-badge>
@@ -27,7 +27,7 @@
               <q-badge
                 :key="index"
                 style="width: 100%; cursor: pointer; height: 16px; max-height: 16px"
-                class="ellipsis q-mb-xs"
+                class="q-mb-xs q-event"
                 :class="badgeClasses(event, 'day')"
                 :style="badgeStyles(event, 'day')"
               >

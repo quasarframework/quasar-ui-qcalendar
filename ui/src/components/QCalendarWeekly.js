@@ -84,6 +84,7 @@ export default {
       if (this.dayPadding !== void 0) {
         style.padding = this.dayPadding
       }
+      style.width = 100 / this.weekdays.length + '%'
       return style
     },
 
@@ -157,6 +158,9 @@ export default {
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
         key: day.date,
         staticClass: 'q-calendar-weekly__head-weekday',
+        style: {
+          width: 100 / this.weekdays.length + '%'
+        },
         class: this.getRelativeClasses(day, outside)
       }), [
         this.__renderHeadDayLabel(h, day, this.shortWeekdayLabel || this.isMiniMode)
@@ -185,17 +189,26 @@ export default {
       const slot = this.$scopedSlots.week
       const weekdays = this.weekdays
       const slotData = { week, weekdays, miniMode: this.isMiniMode }
+      const height = convertToUnit(this.dayHeight)
       return h('div', {
         key: week[0].date,
-        staticClass: 'q-calendar-weekly__week'
+        staticClass: 'q-calendar-weekly__week--wrapper',
+        style: {
+          height: this.dayHeight && this.dayHeight > 0 ? height : (this.isMiniMode ? 'auto' : '100px')
+        }
       }, [
         this.showWorkWeeks === true && this.__renderWorkWeekGutter(h, week),
         h('div', {
-          staticClass: 'q-calendar-weekly__week-days row'
-        }, week.map((day) => this.__renderDay(h, day))),
-        slot !== void 0 ? h('div', {
-          staticClass: 'q-calendar-weekly__week-events',
-        }, slot(slotData)) : ''
+          key: week[0].date,
+          staticClass: 'q-calendar-weekly__week'
+        }, [
+          h('div', {
+            staticClass: 'q-calendar-weekly__week-days'
+          }, week.map((day) => this.__renderDay(h, day))),
+          slot !== void 0 ? h('div', {
+            staticClass: 'q-calendar-weekly__week-events'
+          }, slot(slotData)) : ''
+        ])
       ])
     },
 
@@ -295,7 +308,7 @@ export default {
         this.isMiniMode !== true && this.showDayOfYearLabel && !hasMonth ? this.__renderDayOfYearLabel(h, day) : '',
         this.isMiniMode !== true && hasMonth ? this.__renderDayMonth(h, day) : '',
         h('div', {
-          staticClass: 'full-width'
+          staticClass: 'full-width' + (this.isMiniMode === true ? ' row justify-around' : '')
         }, slot ? slot(slotData) : '')
       ])
     },
@@ -371,7 +384,7 @@ export default {
   render (h) {
     return h('div', {
       staticClass: this.staticClass,
-      nativeOn: {
+      on: {
         dragstart: (e) => {
           e.preventDefault()
         }
