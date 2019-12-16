@@ -380,7 +380,7 @@ export default {
   render (h) {
     return h('div', {
       staticClass: this.staticClass,
-      nativeOn: {
+      on: {
         dragstart: (e) => {
           e.preventDefault()
         }
