@@ -185,9 +185,13 @@ export default {
       const slot = this.$scopedSlots.week
       const weekdays = this.weekdays
       const slotData = { week, weekdays, miniMode: this.isMiniMode }
+      const height = convertToUnit(this.dayHeight)
       return h('div', {
         key: week[0].date,
-        staticClass: 'q-calendar-weekly__week--wrapper'
+        staticClass: 'q-calendar-weekly__week--wrapper',
+        style: {
+          height: this.dayHeight && this.dayHeight > 0 ? height : (this.isMiniMode ? 'auto' : '100px')
+        }
       }, [
         this.showWorkWeeks === true && this.__renderWorkWeekGutter(h, week),
         h('div', {
