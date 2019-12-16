@@ -196,7 +196,7 @@ export default {
         this.showWorkWeeks === true && this.__renderWorkWeekGutter(h, week),
         h('div', {
           key: week[0].date,
-          staticClass: 'q-calendar-weekly__week col-grow'
+          staticClass: 'q-calendar-weekly__week'
         }, [
           h('div', {
             staticClass: 'q-calendar-weekly__week-days'
