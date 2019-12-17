@@ -9,7 +9,6 @@
       <template v-for="(computedEvent, index) in getWeekEvents(week, weekdays)">
         <q-badge
           :key="index"
-          class="ellipsis"
           :class="badgeClasses(computedEvent, 'day')"
           :style="badgeStyles(computedEvent, 'day', week.length)"
         >

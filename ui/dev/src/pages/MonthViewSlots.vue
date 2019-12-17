@@ -10,7 +10,6 @@
         <q-badge
           :key="index"
           style="width: 100%; cursor: pointer;"
-          class="ellipsis"
           :class="badgeClasses(event, 'day')"
           :style="badgeStyles(event, 'day')"
         >

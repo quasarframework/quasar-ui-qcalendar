@@ -13,7 +13,6 @@
             v-if="!event.time"
             :key="index"
             style="width: 100%; cursor: pointer;"
-            class="ellipsis"
             :class="badgeClasses(event, 'header')"
             :style="badgeStyles(event, 'header')"
           >

@@ -20,7 +20,7 @@
         <q-badge
           v-for="(computedEvent, index) in getWeekEvents(week, weekdays)"
           :key="index"
-          class="q-event ellipsis"
+          class="q-event"
           :class="badgeClasses(computedEvent)"
           :style="badgeStyles(computedEvent, week.length)"
         >
@@ -31,7 +31,7 @@
         </q-badge>
       </template>
       <template >
-        
+
       </template>
     </template>
   </q-calendar>

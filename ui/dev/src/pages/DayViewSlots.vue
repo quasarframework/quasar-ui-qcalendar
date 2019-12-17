@@ -13,7 +13,6 @@
             v-if="!event.time"
             :key="index"
             style="width: 100%; cursor: pointer;"
-            class="ellipsis"
             :class="badgeClasses(event, 'header')"
             :style="badgeStyles(event, 'header')"
           >
@@ -36,7 +35,7 @@
         <q-badge
           v-if="event.time"
           :key="index"
-          class="my-event justify-center ellipsis"
+          class="my-event justify-center"
           :class="badgeClasses(event, 'body')"
           :style="badgeStyles(event, 'body', timeStartPos, timeDurationHeight)"
         >

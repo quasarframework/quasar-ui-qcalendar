@@ -304,7 +304,6 @@
               <q-badge
                 :key="index"
                 style="width: 100%; cursor: pointer; height: 14px; max-height: 14px"
-                class="ellipsis"
                 :class="badgeClasses(event, 'day')"
                 :style="badgeStyles(event, 'day')"
                 @click.stop.prevent="showEvent(event)"
@@ -327,7 +326,6 @@
                 v-if="!event.time"
                 :key="index"
                 style="width: 100%; cursor: pointer; height: 14px; max-height: 14px"
-                class="ellipsis"
                 :class="badgeClasses(event, 'header')"
                 :style="badgeStyles(event, 'header')"
                 @click.stop.prevent="showEvent(event)"
@@ -357,7 +355,7 @@
               <q-badge
                 v-if="event.time"
                 :key="index"
-                class="my-event justify-center ellipsis"
+                class="my-event justify-center"
                 :class="badgeClasses(event, 'body')"
                 :style="badgeStyles(event, 'body', data.timeStartPos, data.timeDurationHeight)"
                 @click.stop.prevent="showEvent(event)"
