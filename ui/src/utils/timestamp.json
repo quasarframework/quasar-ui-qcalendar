@@ -186,6 +186,38 @@
         "__exemption": [ "examples" ]
       }
     },
+    "makeDate": {
+      "desc": "Takes a timestamp and returns a JavaScript Date with time set to 00:00",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Date",
+        "desc": "The returned value is a JavaScript Date",
+        "__exemption": [ "examples" ]
+      }
+    },
+    "makeDateTime": {
+      "desc": "Takes a timestamp and returns a JavaScript Date",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Date",
+        "desc": "The returned value is a JavaScript Date",
+        "__exemption": [ "examples" ]
+      }
+    },
     "getDayIdentifier": {
       "desc": "Turns passed in timestamp object to a day identifier",
       "params": {
