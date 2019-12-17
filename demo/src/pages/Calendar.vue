@@ -799,10 +799,10 @@ export default {
           if (this.events[i].time) {
             if (events.length > 0) {
               // check for overlapping times
-              const startTime = new Date(this.events[i].date + ' ' + this.events[i].time).getTime()
+              const startTime = timestampToDate(this.events[i].date + ' ' + this.events[i].time).getTime()
               const endTime = date.addToDate(startTime, { minutes: this.events[i].duration }).getTime()
               for (let j = 0; j < events.length; ++j) {
-                const startTime2 = new Date(events[j].date + ' ' + events[j].time).getTime()
+                const startTime2 = timestampToDate(events[j].date + ' ' + events[j].time).getTime()
                 const endTime2 = date.addToDate(startTime2, { minutes: events[j].duration }).getTime()
                 if ((startTime >= startTime2 && startTime < endTime2) || (startTime2 >= startTime && startTime2 < endTime)) {
                   events[j].side = 'left'
@@ -820,7 +820,7 @@ export default {
           }
         } else if (this.events[i].days) {
           // check for overlapping dates
-          const startDate = new Date(this.events[i].date)
+          const startDate = timestampToDate(this.events[i].date + '  00:00:00')
           const endDate = date.addToDate(startDate, { days: this.events[i].days })
           if (date.isBetweenDates(dt, startDate, endDate)) {
             events.push(this.events[i])
@@ -1027,8 +1027,8 @@ export default {
       return [padTime(hours), padTime(minutes)].join(':')
     },
     getDuration (dateTimeStart, dateTimeEnd, unit) {
-      const start = new Date(dateTimeStart)
-      const end = new Date(dateTimeEnd)
+      const start = timestampToDate(dateTimeStart)
+      const end = timestampToDate(dateTimeEnd)
       const diff = date.getDateDiff(end, start, unit)
       return diff
     },
