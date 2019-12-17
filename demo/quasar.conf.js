@@ -124,11 +124,17 @@ module.exports = function (ctx) {
       },
 
       chainWebpack (chain) {
+        if (ctx.dev === true) {
+          chain.resolve.alias.merge({
+            '@quasar/quasar-ui-qcalendar/dist/api/QCalendar.json': path.resolve(__dirname, '../ui/src/components/QCalendar.json'),
+            '@quasar/quasar-ui-qcalendar/dist/api/timestamp.json': path.resolve(__dirname, '../ui/src/utils/timestamp.json'),
+          })
+        }
         chain.resolve.alias.merge({
           'ui': path.resolve(__dirname, '../ui/src/index.js'),
           '@quasar/quasar-ui-qcalendar': path.resolve(__dirname, '../ui'),
           'sass': path.resolve(__dirname, '../ui/src/index.sass')
-        })
+        }) 
       }
     },
 

@@ -466,7 +466,6 @@ QCalendar supports HTML5 **drag and drop**. If you have components that need dra
     <q-badge
       :key="index"
       style="width: 100%; cursor: pointer;"
-      class="ellipsis"
       :class="badgeClasses(event, 'day')"
       :style="badgeStyles(event, 'day')"
       @click.stop.prevent="showEvent(event)"

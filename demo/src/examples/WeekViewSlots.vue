@@ -13,7 +13,6 @@
             v-if="!event.time"
             :key="index"
             style="width: 100%; cursor: pointer;"
-            class="ellipsis"
             :class="badgeClasses(event, 'header')"
             :style="badgeStyles(event, 'header')"
           >
@@ -36,7 +35,7 @@
         <q-badge
           v-if="event.time"
           :key="index"
-          class="my-event justify-center ellipsis"
+          class="my-event justify-center"
           :class="badgeClasses(event, 'body')"
           :style="badgeStyles(event, 'body', timeStartPos, timeDurationHeight)"
         >
@@ -51,7 +50,9 @@
 import { date, colors } from 'quasar'
 
 import {
-  parseDate
+  parseDate,
+  makeDateTime,
+  parsed
 } from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
 
 const CURRENT_DAY = new Date()
@@ -84,7 +85,7 @@ export default {
         {
           title: 'Meeting',
           details: 'Time to pitch my idea to the company',
-          date: getCurrentDay(8),
+          date: getCurrentDay(CURRENT_DAY.getDate()),
           time: '10:00',
           duration: 120,
           bgcolor: 'red',
@@ -93,7 +94,7 @@ export default {
         {
           title: 'Lunch',
           details: 'Company is paying!',
-          date: getCurrentDay(8),
+          date: getCurrentDay(CURRENT_DAY.getDate()),
           time: '11:30',
           duration: 90,
           bgcolor: 'teal',
@@ -194,10 +195,10 @@ export default {
           if (this.events[i].time) {
             if (events.length > 0) {
               // check for overlapping times
-              const startTime = new Date(this.events[i].date + ' ' + this.events[i].time)
+              const startTime = makeDateTime(parsed(this.events[i].date + ' ' + this.events[i].time))
               const endTime = date.addToDate(startTime, { minutes: this.events[i].duration })
               for (let j = 0; j < events.length; ++j) {
-                const startTime2 = new Date(events[j].date + ' ' + events[j].time)
+                const startTime2 = makeDateTime(parsed(events[j].date + ' ' + events[j].time))
                 const endTime2 = date.addToDate(startTime2, { minutes: events[j].duration })
                 if (date.isBetweenDates(startTime, startTime2, endTime2) || date.isBetweenDates(endTime, startTime2, endTime2)) {
                   events[j].side = 'left'
@@ -215,7 +216,7 @@ export default {
           }
         } else if (this.events[i].days) {
           // check for overlapping dates
-          const startDate = new Date(this.events[i].date)
+          const startDate = makeDateTime(parsed(this.events[i].date))
           const endDate = date.addToDate(startDate, { days: this.events[i].days })
           if (date.isBetweenDates(dt, startDate, endDate)) {
             events.push(this.events[i])

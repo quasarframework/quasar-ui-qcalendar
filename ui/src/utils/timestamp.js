@@ -476,11 +476,19 @@ export function createNativeLocaleFormatter (locale, getOptions) {
   return (timestamp, short) => {
     try {
       const intlFormatter = new Intl.DateTimeFormat(locale || void 0, getOptions(timestamp, short))
-      return intlFormatter.format(new Date(Date.UTC(timestamp.year, timestamp.month - 1, timestamp.day, timestamp.hour, timestamp.minute)))
+      return intlFormatter.format(makeDateTime(timestamp))
     } catch (e) {
       return ''
     }
   }
+}
+
+export function makeDate (timestamp) {
+  return new Date(Date.UTC(timestamp.year, timestamp.month - 1, timestamp.day, 0, 0))
+}
+
+export function makeDateTime (timestamp) {
+  return new Date(Date.UTC(timestamp.year, timestamp.month - 1, timestamp.day, timestamp.hour, timestamp.minute))
 }
 
 export function validateNumber (input) {

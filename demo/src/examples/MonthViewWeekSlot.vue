@@ -5,19 +5,21 @@
     locale="en-us"
     :day-height="100"
   >
-    <template #week="{ week, weekdays }">
-      <template v-for="(computedEvent, index) in getWeekEvents(week, weekdays)">
-        <q-badge
-          :key="index"
-          class="ellipsis"
-          :class="badgeClasses(computedEvent, 'day')"
-          :style="badgeStyles(computedEvent, 'day', week.length)"
-        >
-          <template v-if="computedEvent.event">
-            <q-icon :name="computedEvent.event.icon" class="q-mr-xs"></q-icon>
-            <span class="ellipsis">{{ computedEvent.event.title }}</span>
-          </template>
-        </q-badge>
+    <template #week="{ week, weekdays, miniMode }">
+      <template v-if="!miniMode">
+        <template v-for="(computedEvent, index) in getWeekEvents(week, weekdays)">
+          <q-badge
+            :key="index"
+            class="q-row-event"
+            :class="badgeClasses(computedEvent, 'day')"
+            :style="badgeStyles(computedEvent, 'day', week.length)"
+          >
+            <template v-if="computedEvent.event">
+              <q-icon :name="computedEvent.event.icon" class="q-mr-xs"></q-icon>
+              <span class="ellipsis">{{ computedEvent.event.title }}</span>
+            </template>
+          </q-badge>
+        </template>
       </template>
     </template>
   </q-calendar>

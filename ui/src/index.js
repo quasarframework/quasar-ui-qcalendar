@@ -56,6 +56,8 @@ import {
   createDayList,
   createIntervalList,
   createNativeLocaleFormatter,
+  makeDate,
+  makeDateTime,
   validateNumber
 } from './utils/timestamp.js'
 
@@ -123,6 +125,8 @@ export {
   createDayList,
   createIntervalList,
   createNativeLocaleFormatter,
+  makeDate,
+  makeDateTime,
   validateNumber,
   // helpers
   convertToUnit,

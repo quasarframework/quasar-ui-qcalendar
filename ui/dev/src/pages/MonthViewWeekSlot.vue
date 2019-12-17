@@ -3,47 +3,32 @@
     v-model="selectedDate"
     view="month"
     locale="en-us"
-    mini-mode="auto"
-    breakpoint="sm"
+    :day-height="100"
   >
-    <template #week="{ week, weekdays, miniMode }">
-      <template v-if="miniMode">
-        <div
-          v-for="(computedEvent, index) in getWeekEventsMini(week, weekdays)"
-          :key="index"
-          class="q-event flex inline"
-          :class="badgeClassesMini(computedEvent)"
-          :style="badgeStyles(computedEvent, week.length)"
-        ></div>
-      </template>
-      <template v-else>
+    <template #week="{ week, weekdays }">
+      <template v-for="(computedEvent, index) in getWeekEvents(week, weekdays)">
         <q-badge
-          v-for="(computedEvent, index) in getWeekEvents(week, weekdays)"
           :key="index"
-          class="q-event ellipsis"
-          :class="badgeClasses(computedEvent)"
-          :style="badgeStyles(computedEvent, week.length)"
+          :class="badgeClasses(computedEvent, 'day')"
+          :style="badgeStyles(computedEvent, 'day', week.length)"
         >
           <template v-if="computedEvent.event">
-            <q-icon v-if="computedEvent.event.icon" :name="computedEvent.event.icon" class="q-mr-xs"></q-icon>
+            <q-icon :name="computedEvent.event.icon" class="q-mr-xs"></q-icon>
             <span class="ellipsis">{{ computedEvent.event.title }}</span>
           </template>
         </q-badge>
-      </template>
-      <template >
-        
       </template>
     </template>
   </q-calendar>
 </template>
 
 <script>
-import { date, colors } from 'quasar'
 import {
   getDayIdentifier,
   parsed,
-  MILLISECONDS_IN_DAY,
-  parseDate
+  parseDate,
+  diffTimestamp,
+  indexOf
 } from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
 
 const CURRENT_DAY = new Date()
@@ -55,28 +40,6 @@ function getCurrentDay (day) {
   return tm.date
 }
 
-// In ui/src/utils/timestamp.js
-function diffTimestamp (ts1, ts2, strict) {
-  const utc1 = Date.UTC(ts1.year, ts1.month - 1, ts1.day, ts1.hour, ts1.minute)
-  const utc2 = Date.UTC(ts2.year, ts2.month - 1, ts2.day, ts2.hour, ts2.minute)
-  if (strict === true && utc2 < utc1) {
-    // Not negative number
-    // utc2 - utc1 < 0  -> utc2 < utc1 ->   NO: utc1 >= utc2
-    return 0
-  }
-  return Math.floor((utc2 - utc1) / MILLISECONDS_IN_DAY)
-}
-
-// In ui/src/utils/helpers.js
-function indexOf (array, cb) {
-  for (let i = 0; i < array.length; i++) {
-    if (cb(array[i], i) === true) {
-      return i
-    }
-  }
-  return -1
-}
-
 export default {
   data () {
     return {
@@ -86,7 +49,7 @@ export default {
           title: '1st of the Month',
           color: 'orange',
           start: getCurrentDay(1),
-          end: getCurrentDay(1),
+          end: getCurrentDay(1)
         },
         {
           title: 'Sisters Birthday',
@@ -142,7 +105,7 @@ export default {
           color: 'purple',
           start: getCurrentDay(22),
           end: getCurrentDay(29),
-          icon: "flight"
+          icon: 'flight'
         }
       ]
     }
@@ -152,64 +115,34 @@ export default {
       return !!color && !!color.match(/^(#|(rgb|hsl)a?\()/)
     },
 
-    badgeClasses (infoEvent) {
+    badgeClasses (infoEvent, type) {
       const color = infoEvent.event !== void 0 ? infoEvent.event.color : 'transparent'
+      const cssColor = this.isCssColor(color)
+      const isHeader = type === 'header'
 
       return {
-        [`text-white bg-${color}`]: true,
+        [`text-white bg-${color}`]: !cssColor,
+        'full-width': !isHeader && (!infoEvent.side || infoEvent.side === 'full'),
+        'left-side': !isHeader && infoEvent.side === 'left',
+        'right-side': !isHeader && infoEvent.side === 'right',
         'cursor-pointer': infoEvent.event !== void 0,
-        'q-event-void': infoEvent.event === void 0
+        'event-void': infoEvent.event === void 0 // height: 0, padding: 0
       }
     },
 
-    badgeStyles (infoEvent, weekLength) {
-      return {
-        // 'background-color': infoEvent.event.color,
-        // color: colors.luminosity(event.color) > 0.5 ? 'black' : 'white',
-        width: ((100 / weekLength) * infoEvent.size) + '% !important'
+    badgeStyles (infoEvent, type, weekLength, timeStartPos, timeDurationHeight) {
+      const s = {}
+      if (timeStartPos) {
+        s.top = timeStartPos(infoEvent.event.time) + 'px'
       }
-    },
-
-    badgeClassesMini (infoEvent) {
-      const hasEvents = infoEvent.events.length > 0
-
-      return {
-        'cursor-pointer': hasEvents === true,
-        'q-event-void': hasEvents !== true
+      if (timeDurationHeight) {
+        s.height = timeDurationHeight(infoEvent.event.duration) + 'px'
       }
-    },
-
-    getWeekEventsMini (week, weekdays) {
-      const tsFirstDay = parsed(week[0].date + ' 00:00')
-      const tsLastDay = parsed(week[week.length - 1].date + ' 23:59')
-      const firstDay = getDayIdentifier(tsFirstDay)
-      const lastDay = getDayIdentifier(tsLastDay)
-
-      const events = []
-
-      week.forEach(tsWeekDate => {
-        const weekDate = getDayIdentifier(tsWeekDate)
-
-        const eventsDay = []
-
-        this.events.forEach(event => {
-          const tsStartDate = parsed(event.start + ' 00:00')
-          const tsEndDate = parsed(event.end + ' 23:59')
-          const startDate = getDayIdentifier(tsStartDate)
-          const endDate = getDayIdentifier(tsEndDate)
-
-          if (this.isBetweenDates(weekDate, startDate, endDate) === true) {
-            eventsDay.push(event)
-          }
-        })
-
-        events.push({
-          size: 1,
-          events: eventsDay
-        })
-      })
-
-      return events
+      if (infoEvent.size !== void 0) {
+        s.width = ((100 / weekLength) * infoEvent.size) + '% !important'
+      }
+      // s['align-items'] = 'flex-start'
+      return s
     },
 
     getWeekEvents (week, weekdays) {
@@ -280,12 +213,10 @@ export default {
             level + 1
           )
         } // else: There are no more days available, end of iteration
-
       } else {
         events.push({ size: weekLength - availableDays })
         // end of iteration
       }
-
     },
 
     isBetweenDates (date, start, end) {
@@ -294,10 +225,10 @@ export default {
 
     isBetweenDatesWeek (dateStart, dateEnd, weekStart, weekEnd) {
       return (
-          (dateEnd < weekEnd && dateEnd >= weekStart)
-          || dateEnd === weekEnd
-          || (dateEnd > weekEnd && dateStart <= weekEnd)
-        )
+        (dateEnd < weekEnd && dateEnd >= weekStart) ||
+          dateEnd === weekEnd ||
+          (dateEnd > weekEnd && dateStart <= weekEnd)
+      )
     }
   }
 }
