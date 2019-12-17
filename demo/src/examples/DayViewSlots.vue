@@ -83,7 +83,7 @@ export default {
         {
           title: 'Meeting',
           details: 'Time to pitch my idea to the company',
-          date: getCurrentDay(8),
+          date: getCurrentDay(CURRENT_DAY.getDate()),
           time: '10:00',
           duration: 120,
           bgcolor: 'red',
@@ -92,7 +92,7 @@ export default {
         {
           title: 'Lunch',
           details: 'Company is paying!',
-          date: getCurrentDay(8),
+          date: getCurrentDay(CURRENT_DAY.getDate()),
           time: '11:30',
           duration: 90,
           bgcolor: 'teal',
