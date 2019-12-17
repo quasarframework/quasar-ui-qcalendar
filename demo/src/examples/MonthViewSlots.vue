@@ -87,7 +87,7 @@ export default {
         {
           title: 'Conference',
           details: 'Teaching Javascript 101',
-          date: getCurrentDay(22),
+          date: getCurrentDay(15),
           time: '08:00',
           duration: 540,
           bgcolor: 'blue',
@@ -96,27 +96,27 @@ export default {
         {
           title: 'Girlfriend',
           details: 'Meet GF for dinner at Swanky Restaurant',
-          date: getCurrentDay(22),
+          date: getCurrentDay(15),
           time: '19:00',
           duration: 180,
           bgcolor: 'teal',
           icon: 'fas fa-utensils'
         },
         {
-          title: 'Fishing',
+          title: 'Rowing',
           details: 'Time for some weekend R&R',
-          date: getCurrentDay(27),
+          date: getCurrentDay(29),
           bgcolor: 'purple',
-          icon: 'fas fa-fish',
+          icon: 'rowing',
           days: 2
         },
         {
           title: 'Vacation',
           details: 'Trails and hikes, going camping! Don\'t forget to bring bear spray!',
-          date: getCurrentDay(29),
+          date: getCurrentDay(22),
           bgcolor: 'purple',
           icon: 'fas fa-plane',
-          days: 5
+          days: 7
         }
       ]
     }
