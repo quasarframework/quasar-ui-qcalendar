@@ -50,7 +50,9 @@
 import { date, colors } from 'quasar'
 
 import {
-  parseDate
+  parseDate,
+  makeDateTime,
+  parsed
 } from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
 
 const CURRENT_DAY = new Date()
@@ -189,19 +191,20 @@ export default {
       const events = []
       for (let i = 0; i < this.events.length; ++i) {
         let added = false
-        if (this.events[i].date === dt) {
-          if (this.events[i].time) {
+        const event = this.events[i]
+        if (event.date === dt) {
+          if (event.time) {
             if (events.length > 0) {
               // check for overlapping times
-              const startTime = new Date(this.events[i].date + ' ' + this.events[i].time)
-              const endTime = date.addToDate(startTime, { minutes: this.events[i].duration })
+              const startTime = makeDateTime(parsed(event.date + ' ' + event.time))
+              const endTime = date.addToDate(startTime, { minutes: event.duration })
               for (let j = 0; j < events.length; ++j) {
-                const startTime2 = new Date(events[j].date + ' ' + events[j].time)
+                const startTime2 = makeDateTime(parsed(events[j].date + ' ' + events[j].time))
                 const endTime2 = date.addToDate(startTime2, { minutes: events[j].duration })
                 if (date.isBetweenDates(startTime, startTime2, endTime2) || date.isBetweenDates(endTime, startTime2, endTime2)) {
                   events[j].side = 'left'
-                  this.events[i].side = 'right'
-                  events.push(this.events[i])
+                  event.side = 'right'
+                  events.push(event)
                   added = true
                   break
                 }
@@ -209,15 +212,15 @@ export default {
             }
           }
           if (!added) {
-            this.events[i].side = void 0
-            events.push(this.events[i])
+            event.side = void 0
+            events.push(event)
           }
-        } else if (this.events[i].days) {
+        } else if (event.days) {
           // check for overlapping dates
-          const startDate = new Date(this.events[i].date)
-          const endDate = date.addToDate(startDate, { days: this.events[i].days })
+          const startDate = makeDateTime(parsed(event.date))
+          const endDate = date.addToDate(startDate, { days: event.days })
           if (date.isBetweenDates(dt, startDate, endDate)) {
-            events.push(this.events[i])
+            events.push(event)
             added = true
           }
         }
