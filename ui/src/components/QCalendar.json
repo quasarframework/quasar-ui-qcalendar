@@ -73,7 +73,7 @@
       ]
     },
     "weekdays": {
-      "type": "String",
+      "type": "Array",
       "category": "model",
       "desc": "This is the days of the week and in which order they are displayed. If you want Monday as the first day of the week, you would use [1,2,3,4,5,6,0]. If you want a 5-day work week you would use [1,2,3,4,5]",
       "default": "[0,1,2,3,4,5,6]",
@@ -2244,10 +2244,18 @@
     "day": {
       "desc": "Use to add items to the `day` rendering",
       "scope": {
-        "data": {
+        "outside": {
+          "type": "Boolean",
+          "desc": "true if the date is outsize of the calendar month, but still displayed"
+        },
+        "day": {
           "type": "Object",
-          "desc": "Timestamp object, outside and miniMode",
+          "desc": "A destructured timestamp for the day of the slotted content",
           "__exemption": [ "examples" ]
+        },
+        "miniMode": {
+          "type": "Boolean",
+          "desc": "true if currently in mini-mode. Handle if you have set mini-mode to `auto`"
         }
       },
       "applicable": [
@@ -2257,10 +2265,19 @@
     "day-label": {
       "desc": "Use to replace the `day label`",
       "scope": {
-        "data": {
-          "type": "Object",
-          "desc": "Timestamp object, dayLabel and miniMode",
+        "dayLabel": {
+          "type": "String",
+          "desc": "The string of the dayLabel",
           "__exemption": [ "examples" ]
+        },
+        "day": {
+          "type": "Object",
+          "desc": "A destructured timestamp for the day of the slotted content",
+          "__exemption": [ "examples" ]
+        },
+        "miniMode": {
+          "type": "Boolean",
+          "desc": "true if currently in mini-mode. Handle if you have set mini-mode to `auto`"
         }
       },
       "applicable": [
@@ -2270,10 +2287,19 @@
     "month-label": {
       "desc": "Use to replace the `month label`. Not applicable in `mini-mode`",
       "scope": {
-        "data": {
-          "type": "Object",
-          "desc": "Timestamp object with monthLabel",
+        "monthLabel": {
+          "type": "String",
+          "desc": "The string of the monthLabel",
           "__exemption": [ "examples" ]
+        },
+        "day": {
+          "type": "Object",
+          "desc": "A destructured timestamp for the day of the slotted content",
+          "__exemption": [ "examples" ]
+        },
+        "miniMode": {
+          "type": "Boolean",
+          "desc": "true if currently in mini-mode. Handle if you have set mini-mode to `auto`"
         }
       },
       "applicable": [
@@ -2296,15 +2322,49 @@
     "workweek": {
       "desc": "",
       "scope": {
-        "data": {
+        "workweekLabel": {
+          "type": "String",
+          "desc": "The string for the workweek label",
+          "__exemption": [ "examples" ]
+        },
+        "date": {
           "type": "Object",
           "desc": "Timestamp object, workWeekLabel and miniMode",
           "__exemption": [ "examples" ]
+        },
+        "miniMode": {
+          "type": "Boolean",
+          "desc": "true if currently in mini-mode. Handle if you have set mini-mode to `auto`"
         }
       },
       "applicable": [
         "month"
       ]
+    },
+    "week": {
+      "desc": "",
+      "applicable": [
+        "month"
+      ],
+      "scope": {
+        "week": {
+          "type": "Array",
+          "desc": "This is an array of timestamp objects. One for each day of the week to be displayed",
+          "__exemption": [ "examples" ]
+        },
+        "weekdays": {
+          "type": "Array",
+          "desc": "This is the days of the week and in which order they are displayed",
+          "examples": [
+            "weekdays: '[1,2,3,4,5,6,0]'",
+            "weekdays: '[1,2,3,4,5]'"
+          ]
+        },
+        "miniMode": {
+          "type": "Boolean",
+          "desc": "true if currently in mini-mode. Handle if you have set mini-mode to `auto`"
+        }
+      }
     },
     "scheduler-resources-header": {
       "desc": "",
