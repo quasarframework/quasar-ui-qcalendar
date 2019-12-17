@@ -10,7 +10,7 @@
             </q-toolbar-title>
             <q-btn flat round color="white" icon="delete" v-close-popup @click="deleteEvent(event)"></q-btn>
             <q-btn flat round color="white" icon="edit" v-close-popup @click="editEvent(event)"></q-btn>
-            <q-btn flat round color="white" icon="cancel" v-close-popup></q-btn>
+            <q-btn flat round color="white" icon="close" v-close-popup></q-btn>
           </q-toolbar>
           <q-card-section class="inset-shadow">
             <div v-if="event.allDay" class="text-caption">{{ getEventDate(event) }}</div>
@@ -424,6 +424,11 @@ import {
 
 import 'drag-drop-touch'
 
+function timestampToDate (timestampString) {
+  const ts = parsed(timestampString)
+  return new Date(ts.year, ts.month - 1, ts.day, ts.hour, ts.minute)
+}
+
 const formDefault = {
   title: '',
   details: '',
@@ -794,10 +799,10 @@ export default {
           if (this.events[i].time) {
             if (events.length > 0) {
               // check for overlapping times
-              const startTime = new Date(this.events[i].date + ' ' + this.events[i].time).getTime()
+              const startTime = timestampToDate(this.events[i].date + ' ' + this.events[i].time).getTime()
               const endTime = date.addToDate(startTime, { minutes: this.events[i].duration }).getTime()
               for (let j = 0; j < events.length; ++j) {
-                const startTime2 = new Date(events[j].date + ' ' + events[j].time).getTime()
+                const startTime2 = timestampToDate(events[j].date + ' ' + events[j].time).getTime()
                 const endTime2 = date.addToDate(startTime2, { minutes: events[j].duration }).getTime()
                 if ((startTime >= startTime2 && startTime < endTime2) || (startTime2 >= startTime && startTime2 < endTime)) {
                   events[j].side = 'left'
@@ -815,7 +820,7 @@ export default {
           }
         } else if (this.events[i].days) {
           // check for overlapping dates
-          const startDate = new Date(this.events[i].date)
+          const startDate = timestampToDate(this.events[i].date + '  00:00:00')
           const endDate = date.addToDate(startDate, { days: this.events[i].days })
           if (date.isBetweenDates(dt, startDate, endDate)) {
             events.push(this.events[i])
@@ -883,7 +888,7 @@ export default {
       }
     },
     getEndTime (event) {
-      let endTime = new Date(event.date + ' ' + event.time + ':00')
+      let endTime = timestampToDate(event.date + ' ' + event.time + ':00')
       endTime = date.addToDate(endTime, { minutes: event.duration })
       endTime = date.formatDate(endTime, 'HH:mm')
       return endTime
@@ -959,7 +964,7 @@ export default {
       let timestamp
       if (this.contextDay.hasTime === true) {
         timestamp = this.getTimestamp(this.adjustTimestamp(this.contextDay))
-        const startTime = new Date(timestamp)
+        const startTime = timestampToDate(timestamp)
         const endTime = date.addToDate(startTime, { hours: 1 })
         this.eventForm.dateTimeEnd = this.formatDate(endTime) + ' ' + this.formatTime(endTime) // endTime.toString()
       } else {
@@ -976,7 +981,7 @@ export default {
       let timestamp
       if (event.time) {
         timestamp = event.date + ' ' + event.time
-        const startTime = new Date(timestamp)
+        const startTime = timestampToDate(timestamp)
         const endTime = date.addToDate(startTime, { minutes: event.duration })
         this.eventForm.dateTimeStart = this.formatDate(startTime) + ' ' + this.formatTime(startTime) // endTime.toString()
         this.eventForm.dateTimeEnd = this.formatDate(endTime) + ' ' + this.formatTime(endTime) // endTime.toString()
@@ -1022,8 +1027,8 @@ export default {
       return [padTime(hours), padTime(minutes)].join(':')
     },
     getDuration (dateTimeStart, dateTimeEnd, unit) {
-      const start = new Date(dateTimeStart)
-      const end = new Date(dateTimeEnd)
+      const start = timestampToDate(dateTimeStart)
+      const end = timestampToDate(dateTimeEnd)
       const diff = date.getDateDiff(end, start, unit)
       return diff
     },

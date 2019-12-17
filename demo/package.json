@@ -7,6 +7,7 @@
   "author": "Jeff Galbraith <jeff@quasar.dev>",
   "private": true,
   "scripts": {
+    "dev": "quasar dev",
     "build-demo": "quasar build && cp ./src/404.html ./dist/spa && rm -rf ../docs && cp -r ./dist/spa/. ../docs",
     "lint": "eslint --ext .js,.vue src",
     "lint-fix": "eslint --ext .js,.vue src --fix",
