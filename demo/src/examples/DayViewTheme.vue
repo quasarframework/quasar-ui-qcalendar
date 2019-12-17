@@ -19,6 +19,7 @@
       locale="en-us"
       enable-theme
       :theme="theme"
+      style="height: 400px;"
     />
   </div>
 </template>
