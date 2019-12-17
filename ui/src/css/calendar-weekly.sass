@@ -129,9 +129,11 @@
       flex-wrap: nowrap
 
     &-events
-      position: relative
-      padding-top: 2.6em
+      position: absolute
+      top: 2.6em
+      bottom: 0
       width: 100%
+      overflow: hidden
 
   &__workweek
     display: flex
@@ -291,7 +293,7 @@
     border-bottom: unset
 
   .q-calendar-weekly__week-events
-    padding-top: 1.3em
+    // padding-top: 2.6em
 
 .body--dark
   .q-calendar-weekly
