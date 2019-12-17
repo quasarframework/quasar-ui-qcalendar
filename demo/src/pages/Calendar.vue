@@ -10,7 +10,7 @@
             </q-toolbar-title>
             <q-btn flat round color="white" icon="delete" v-close-popup @click="deleteEvent(event)"></q-btn>
             <q-btn flat round color="white" icon="edit" v-close-popup @click="editEvent(event)"></q-btn>
-            <q-btn flat round color="white" icon="cancel" v-close-popup></q-btn>
+            <q-btn flat round color="white" icon="close" v-close-popup></q-btn>
           </q-toolbar>
           <q-card-section class="inset-shadow">
             <div v-if="event.allDay" class="text-caption">{{ getEventDate(event) }}</div>
@@ -423,6 +423,11 @@ import {
 } from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
 
 import 'drag-drop-touch'
+
+function timestampToDate (timestampString) {
+  const ts = parsed(timestampString)
+  return new Date(ts.year, ts.month - 1, ts.day, ts.hour, ts.minute)
+}
 
 const formDefault = {
   title: '',
@@ -883,7 +888,7 @@ export default {
       }
     },
     getEndTime (event) {
-      let endTime = new Date(event.date + ' ' + event.time + ':00')
+      let endTime = timestampToDate(event.date + ' ' + event.time + ':00')
       endTime = date.addToDate(endTime, { minutes: event.duration })
       endTime = date.formatDate(endTime, 'HH:mm')
       return endTime
@@ -959,7 +964,7 @@ export default {
       let timestamp
       if (this.contextDay.hasTime === true) {
         timestamp = this.getTimestamp(this.adjustTimestamp(this.contextDay))
-        const startTime = new Date(timestamp)
+        const startTime = timestampToDate(timestamp)
         const endTime = date.addToDate(startTime, { hours: 1 })
         this.eventForm.dateTimeEnd = this.formatDate(endTime) + ' ' + this.formatTime(endTime) // endTime.toString()
       } else {
@@ -976,7 +981,7 @@ export default {
       let timestamp
       if (event.time) {
         timestamp = event.date + ' ' + event.time
-        const startTime = new Date(timestamp)
+        const startTime = timestampToDate(timestamp)
         const endTime = date.addToDate(startTime, { minutes: event.duration })
         this.eventForm.dateTimeStart = this.formatDate(startTime) + ' ' + this.formatTime(startTime) // endTime.toString()
         this.eventForm.dateTimeEnd = this.formatDate(endTime) + ' ' + this.formatTime(endTime) // endTime.toString()
