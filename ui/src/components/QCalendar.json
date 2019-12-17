@@ -2246,7 +2246,7 @@
       "scope": {
         "outside": {
           "type": "Boolean",
-          "desc": "true if the date is outsize of the calendar month, but still displayed"
+          "desc": "true if the date is outside of the calendar month, but still displayed"
         },
         "day": {
           "type": "Object",
