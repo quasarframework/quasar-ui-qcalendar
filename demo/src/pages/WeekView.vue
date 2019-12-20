@@ -1,39 +1,44 @@
 <template>
   <div class="q-markdown">
+    <q-markdown>
+::: warning
+The ability to use Codepen was recently added. There are differences in the UMD version of QCalendar, some examples won't work without a bit of manual intervention. Be patient while we get the kinks worked out and automate the necessary changes.
+:::
+    </q-markdown>
     <example-title title="Week View" />
-    <example-card title="Basic" name="WeekViewBasic" :tag-parts="getTagParts(require('!!raw-loader!../examples/WeekViewBasic.vue').default)" />
-    <example-card title="First Day Monday" name="WeekViewMondayFirstDay" :tag-parts="getTagParts(require('!!raw-loader!../examples/WeekViewMondayFirstDay.vue').default)" />
-    <example-card title="5 Day Work Week" name="WeekViewFiveDayWorkWeek" :tag-parts="getTagParts(require('!!raw-loader!../examples/WeekViewFiveDayWorkWeek.vue').default)" />
-    <example-card title="Disabled Days" name="WeekViewDisabledDays" :tag-parts="getTagParts(require('!!raw-loader!../examples/WeekViewDisabledDays.vue').default)">
+    <example-viewer title="Basic" file="WeekViewBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="First Day Monday" file="WeekViewMondayFirstDay" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="5 Day Work Week" file="WeekViewFiveDayWorkWeek" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Disabled Days" file="WeekViewDisabledDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 When the property `disabled-days` has an array of disabled days, you can hook into the `interval-style` property to change the background color of the disabled day.
       </q-markdown>
-    </example-card>
+    </example-viewer>
 
-    <example-card title="Now" name="WeekViewNow" :tag-parts="getTagParts(require('!!raw-loader!../examples/WeekViewNow.vue').default)">
+    <example-viewer title="Now" file="WeekViewNow" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 You can use the `now` property to set a fixed date, otherwise the current date will be used. If the `v-model` property is empty, then it will receive the `now` property's value.
       </q-markdown>
-    </example-card>
+    </example-viewer>
 
-    <example-card title="Short Weekday Label" name="WeekViewShortWeekdayLabel" :tag-parts="getTagParts(require('!!raw-loader!../examples/WeekViewShortWeekdayLabel.vue').default)" />
-    <example-card title="Hour24 Format" name="WeekViewHour24Format" :tag-parts="getTagParts(require('!!raw-loader!../examples/WeekViewHour24Format.vue').default)">
+    <example-viewer title="Short Weekday Label" file="WeekViewShortWeekdayLabel" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Hour24 Format" file="WeekViewHour24Format" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 `hour24-format` is available only for one of the available `day` or `week` views.
       </q-markdown>
-    </example-card>
+    </example-viewer>
 
-    <example-card title="Short Interval Label" name="WeekViewShortIntervalLabel" :tag-parts="getTagParts(require('!!raw-loader!../examples/WeekViewShortIntervalLabel.vue').default)">
+    <example-viewer title="Short Interval Label" file="WeekViewShortIntervalLabel" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 `short-interval-label` is available only for one of the available `day` or `week` views.
       </q-markdown>
-    </example-card>
+    </example-viewer>
 
-    <example-card title="Short Interval Label (Hour24Format)" name="WeekViewShortIntervalLabelHour24Format" :tag-parts="getTagParts(require('!!raw-loader!../examples/WeekViewShortIntervalLabelHour24Format.vue').default)" />
-    <example-card title="Prev/Next" name="WeekViewPrevNext" :tag-parts="getTagParts(require('!!raw-loader!../examples/WeekViewPrevNext.vue').default)" />
-    <example-card title="Swipe" name="WeekViewSwipe" :tag-parts="getTagParts(require('!!raw-loader!../examples/WeekViewSwipe.vue').default)" />
-    <example-card title="Column Header" name="WeekViewColumnHeader" :tag-parts="getTagParts(require('!!raw-loader!../examples/WeekViewColumnHeader.vue').default)" />
-    <example-card title="Slots" name="WeekViewSlots" :tag-parts="getTagParts(require('!!raw-loader!../examples/WeekViewSlots.vue').default)">
+    <example-viewer title="Short Interval Label (Hour24Format)" file="WeekViewShortIntervalLabelHour24Format" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Prev/Next" file="WeekViewPrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Swipe" file="WeekViewSwipe" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Column Header" file="WeekViewColumnHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Slots" file="WeekViewSlots" no-edit :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 For slots that return `day` or `timestamp`, it looks like this:
 ```js
@@ -61,38 +66,38 @@ You can use the slots `day-header` and `day-body` to control visual aspects of y
 The example below is using the `day-header` slot to indicate there are events on that day, in case it is not visible, indicating to the user they should scroll down to see the event.
 The `day-body` slot is used to get information about the date and time of an event and then to calculate where the absolute position of the event based on passed in functions `timeStartPos` and `timeDurationHeight`.
       </q-markdown>
-    </example-card>
+    </example-viewer>
 
     <example-title title="More Slots" />
-    <example-card title="Week View (Current Time) - Slot (day-container)" name="WeekViewCurrentTime" :tag-parts="getTagParts(require('!!raw-loader!../examples/WeekViewCurrentTime.vue').default)">
+    <example-viewer title="Week View (Current Time) - Slot (day-container)" file="WeekViewCurrentTime" no-edit :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 You can use the scopedSlot `day-container` to set an absolute position for a time tracking bar.
 Scroll down if the current time is later for your location to see the example.
       </q-markdown>
-    </example-card>
+    </example-viewer>
 
-    <example-card title="Theme" name="WeekViewTheme" :tag-parts="getTagParts(require('!!raw-loader!../examples/WeekViewTheme.vue').default)" />
+    <example-viewer title="Theme" file="WeekViewTheme" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
   </div>
 </template>
 
 <script>
 import ExampleTitle from '../components/ExampleTitle'
-import ExampleCard from '../components/ExampleCard'
 import { slugify } from 'assets/page-utils'
-import { getTagParts } from '@quasar/quasar-ui-qmarkdown'
 
 export default {
   name: 'WeekView',
 
   components: {
-    ExampleTitle,
-    ExampleCard
+    ExampleTitle
   },
 
   data () {
     return {
-      tempToc: []
+      tempToc: [],
+      locationUrl: 'https://github.com/quasarframework/quasar-ui-qcalendar/tree/dev/demo/src/examples/',
+      jsPaths: ['https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@latest/dist/index.umd.min.js'],
+      cssPaths: ['https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@latest/dist/index.min.css']
     }
   },
 
@@ -132,10 +137,12 @@ export default {
   },
 
   methods: {
-    getTagParts,
-
     addToToc (name, level = 1) {
-      const slug = slugify(name)
+      let n = name
+      if (level > 1) {
+        n = 'example-' + n
+      }
+      const slug = slugify(n)
       this.tempToc.push({
         children: [],
         id: slug,

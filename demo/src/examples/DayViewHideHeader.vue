@@ -1,11 +1,13 @@
 <template>
-  <q-calendar
-    v-model="selectedDate"
-    view="day"
-    locale="en-us"
-    :hide-header="true"
-    style="height: 400px;"
-  />
+  <div style="max-width: 800px; width: 100%;">
+    <q-calendar
+      v-model="selectedDate"
+      view="day"
+      locale="en-us"
+      :hide-header="true"
+      style="height: 400px;"
+    />
+  </div>
 </template>
 
 <script>

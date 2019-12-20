@@ -1,17 +1,19 @@
 <template>
-  <q-calendar
-    ref="calendar"
-    v-model="currentDate"
-    view="day"
-    locale="en-us"
-    style="height: 400px;"
-  >
-    <!-- eslint-disable vue/no-unused-vars -->
-    <template #day-container="{ date }">
-      <div class="day-view-current-time-indicator" :style="style" />
-      <div class="day-view-current-time-line" :style="style" />
-    </template>
-  </q-calendar>
+  <div style="max-width: 800px; width: 100%;">
+    <q-calendar
+      ref="calendar"
+      v-model="currentDate"
+      view="day"
+      locale="en-us"
+      style="height: 400px;"
+    >
+      <!-- eslint-disable vue/no-unused-vars -->
+      <template #day-container="{ date }">
+        <div class="day-view-current-time-indicator" :style="style" />
+        <div class="day-view-current-time-line" :style="style" />
+      </template>
+    </q-calendar>
+  </div>
 </template>
 
 <script>

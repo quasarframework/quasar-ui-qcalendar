@@ -127,7 +127,8 @@ module.exports = function (ctx) {
         chain.resolve.alias.merge({
           'ui': path.resolve(__dirname, '../ui/src/index.js'),
           '@quasar/quasar-ui-qcalendar': path.resolve(__dirname, '../ui'),
-          'sass': path.resolve(__dirname, '../ui/src/index.sass')
+          'sass': path.resolve(__dirname, '../ui/src/index.sass'),
+          'examples': path.resolve(__dirname, './src/examples')
         })
       }
     },
