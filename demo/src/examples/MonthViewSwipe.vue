@@ -1,5 +1,5 @@
 <template>
-  <div style="overflow: hidden">
+  <div style="max-width: 800px; width: 100%; overflow: hidden;">
     <q-calendar
       ref="calendar"
       v-model="selectedDate"
@@ -9,6 +9,7 @@
       animated
       transition-prev="slide-right"
       transition-next="slide-left"
+      style="overflow: hidden;"
     />
   </div>
 </template>

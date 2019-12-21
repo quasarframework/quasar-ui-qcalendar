@@ -2,7 +2,7 @@
   <div class="q-markdown">
     <q-markdown>
 ::: warning
-The ability to use Codepen was recently added. There are differences in the UMD version of QCalendar, some examples won't work without a bit of manual intervention. Be patient while we get the kinks worked out and automate the necessary changes.
+The ability to use Codepen was recently added to the examples. There are differences in the UMD version of QCalendar, some examples won't work without a bit of manual intervention. Be patient while we get the kinks worked out and automate the necessary changes.
 :::
     </q-markdown>
     <example-title title="Week View" />
