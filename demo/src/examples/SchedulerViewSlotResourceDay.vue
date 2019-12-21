@@ -1,15 +1,17 @@
 <template>
-  <q-calendar
-    v-model="selectedDate"
-    view="scheduler"
-    :resources="resources"
-    locale="en-us"
-    style="height: 500px;"
-  >
-    <template #scheduler-resource-day="{ day, index, resource }">
-      <q-btn class="fit"><span class="ellipsis" style="font-size: 10px;">{{ resource.label }}:{{ day.day }}</span></q-btn>
-    </template>
-  </q-calendar>
+  <div style="max-width: 800px; width: 100%;">
+    <q-calendar
+      v-model="selectedDate"
+      view="scheduler"
+      :resources="resources"
+      locale="en-us"
+      style="height: 500px;"
+    >
+      <template #scheduler-resource-day="{ day, index, resource }">
+        <q-btn class="fit"><span class="ellipsis" style="font-size: 10px;">{{ resource.label }}:{{ day.day }}</span></q-btn>
+      </template>
+    </q-calendar>
+  </div>
 </template>
 
 <script>
