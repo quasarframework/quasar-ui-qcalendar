@@ -1,5 +1,5 @@
 <template>
-  <div style="overflow: hidden; height: 400px;">
+  <div style="overflow: hidden; max-width: 800px; width: 100%;">
     <q-calendar
       ref="calendar"
       v-model="selectedDate"
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { stopAndPrevent } from 'quasar/src/utils/event'
+// import { stopAndPrevent } from 'quasar/src/utils/event'
 
 export default {
   data () {
@@ -45,7 +45,9 @@ export default {
           this.ignoreNextSwipe = false
         }
       }
-      stopAndPrevent(evt)
+      // stopAndPrevent(evt)
+      evt.cancelable !== false && evt.preventDefault()
+      evt.stopPropagation()
     }
   }
 }

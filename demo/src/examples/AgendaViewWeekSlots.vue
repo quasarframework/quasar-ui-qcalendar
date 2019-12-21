@@ -1,32 +1,34 @@
 <template>
-  <q-calendar
-    v-model="selectedDate"
-    view="week-agenda"
-    locale="en-us"
-    style="height: 400px;"
-  >
-    <template #day-body="day">
-      <template v-for="(agenda) in getAgenda(day)">
-        <div
-          :key="day.date + agenda.time"
-          :label="agenda.time"
-          class="justify-start q-ma-sm shadow-5 bg-grey-6"
-        >
-          <div v-if="agenda.avatar" class="row justify-center" style="margin-top: 30px; width: 100%;">
-            <q-avatar style="margin-top: -25px; margin-bottom: 10px; font-size: 60px; max-height: 50px;">
-              <img :src="agenda.avatar" style="border: #9e9e9e solid 5px;">
-            </q-avatar>
+  <div style="max-width: 800px; width: 100%;">
+    <q-calendar
+      v-model="selectedDate"
+      view="week-agenda"
+      locale="en-us"
+      style="height: 400px;"
+    >
+      <template #day-body="day">
+        <template v-for="(agenda) in getAgenda(day)">
+          <div
+            :key="day.date + agenda.time"
+            :label="agenda.time"
+            class="justify-start q-ma-sm shadow-5 bg-grey-6"
+          >
+            <div v-if="agenda.avatar" class="row justify-center" style="margin-top: 30px; width: 100%;">
+              <q-avatar style="margin-top: -25px; margin-bottom: 10px; font-size: 60px; max-height: 50px;">
+                <img :src="agenda.avatar" style="border: #9e9e9e solid 5px;">
+              </q-avatar>
+            </div>
+            <div class="col-12 q-px-sm">
+              <strong>{{ agenda.time }}</strong>
+            </div>
+            <div v-if="agenda.desc" class="col-12 q-px-sm" style="font-size: 10px;">
+              {{ agenda.desc }}
+            </div>
           </div>
-          <div class="col-12 q-px-sm">
-            <strong>{{ agenda.time }}</strong>
-          </div>
-          <div v-if="agenda.desc" class="col-12 q-px-sm" style="font-size: 10px;">
-            {{ agenda.desc }}
-          </div>
-        </div>
+        </template>
       </template>
-    </template>
-  </q-calendar>
+    </q-calendar>
+  </div>
 </template>
 
 <script>

@@ -1,49 +1,51 @@
 <template>
-  <q-calendar
-    v-model="selectedDate"
-    view="day"
-    locale="en-us"
-    style="height: 400px;"
-    class="calendar-container"
-  >
-    <template #day-header="{ date }">
-      <div class="row justify-center">
-        <template v-for="(event, index) in eventsMap[date]">
+  <div style="max-width: 800px; width: 100%;">
+    <q-calendar
+      v-model="selectedDate"
+      view="day"
+      locale="en-us"
+      class="calendar-container"
+      style="height: 400px;"
+    >
+      <template #day-header="{ date }">
+        <div class="row justify-center">
+          <template v-for="(event, index) in eventsMap[date]">
+            <q-badge
+              v-if="!event.time"
+              :key="index"
+              style="width: 100%; cursor: pointer;"
+              :class="badgeClasses(event, 'header')"
+              :style="badgeStyles(event, 'header')"
+            >
+              <q-icon v-if="event.icon" :name="event.icon" class="q-mr-xs"></q-icon><span class="ellipsis">{{ event.title }}</span>
+            </q-badge>
+            <q-badge
+              v-else
+              :key="index"
+              class="q-ma-xs"
+              :class="badgeClasses(event, 'header')"
+              :style="badgeStyles(event, 'header')"
+              style="width: 10px; max-width: 10px; height: 10px; max-height: 10px"
+            />
+          </template>
+        </div>
+      </template>
+
+      <template #day-body="{ date, timeStartPos, timeDurationHeight }">
+        <template v-for="(event, index) in getEvents(date)">
           <q-badge
-            v-if="!event.time"
+            v-if="event.time"
             :key="index"
-            style="width: 100%; cursor: pointer;"
-            :class="badgeClasses(event, 'header')"
-            :style="badgeStyles(event, 'header')"
+            class="my-event justify-center ellipsis"
+            :class="badgeClasses(event, 'body')"
+            :style="badgeStyles(event, 'body', timeStartPos, timeDurationHeight)"
           >
             <q-icon v-if="event.icon" :name="event.icon" class="q-mr-xs"></q-icon><span class="ellipsis">{{ event.title }}</span>
           </q-badge>
-          <q-badge
-            v-else
-            :key="index"
-            class="q-ma-xs"
-            :class="badgeClasses(event, 'header')"
-            :style="badgeStyles(event, 'header')"
-            style="width: 10px; max-width: 10px; height: 10px; max-height: 10px"
-          />
         </template>
-      </div>
-    </template>
-
-    <template #day-body="{ date, timeStartPos, timeDurationHeight }">
-      <template v-for="(event, index) in getEvents(date)">
-        <q-badge
-          v-if="event.time"
-          :key="index"
-          class="my-event justify-center ellipsis"
-          :class="badgeClasses(event, 'body')"
-          :style="badgeStyles(event, 'body', timeStartPos, timeDurationHeight)"
-        >
-          <q-icon v-if="event.icon" :name="event.icon" class="q-mr-xs"></q-icon><span class="ellipsis">{{ event.title }}</span>
-        </q-badge>
       </template>
-    </template>
-  </q-calendar>
+    </q-calendar>
+  </div>
 </template>
 
 <script>

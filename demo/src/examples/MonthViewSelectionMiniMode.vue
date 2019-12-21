@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="max-width: 800px; width: 100%;">
     <div class="q-gutter-sm">
       <q-checkbox v-model="mobile" label="Use Touch (set if on mobile)" />
     </div>

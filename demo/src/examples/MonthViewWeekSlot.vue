@@ -1,28 +1,30 @@
 <template>
-  <q-calendar
-    v-model="selectedDate"
-    view="month"
-    locale="en-us"
-    :day-height="100"
-  >
-    <template #week="{ week, weekdays, miniMode }">
-      <template v-if="!miniMode">
-        <template v-for="(computedEvent, index) in getWeekEvents(week, weekdays)">
-          <q-badge
-            :key="index"
-            class="q-row-event"
-            :class="badgeClasses(computedEvent, 'day')"
-            :style="badgeStyles(computedEvent, 'day', week.length)"
-          >
-            <template v-if="computedEvent.event">
-              <q-icon :name="computedEvent.event.icon" class="q-mr-xs"></q-icon>
-              <span class="ellipsis">{{ computedEvent.event.title }}</span>
-            </template>
-          </q-badge>
+  <div style="max-width: 800px; width: 100%;">
+    <q-calendar
+      v-model="selectedDate"
+      view="month"
+      locale="en-us"
+      :day-height="100"
+    >
+      <template #week="{ week, weekdays, miniMode }">
+        <template v-if="!miniMode">
+          <template v-for="(computedEvent, index) in getWeekEvents(week, weekdays)">
+            <q-badge
+              :key="index"
+              class="q-row-event"
+              :class="badgeClasses(computedEvent, 'day')"
+              :style="badgeStyles(computedEvent, 'day', week.length)"
+            >
+              <template v-if="computedEvent.event">
+                <q-icon :name="computedEvent.event.icon" class="q-mr-xs"></q-icon>
+                <span class="ellipsis">{{ computedEvent.event.title }}</span>
+              </template>
+            </q-badge>
+          </template>
         </template>
       </template>
-    </template>
-  </q-calendar>
+    </q-calendar>
+  </div>
 </template>
 
 <script>
