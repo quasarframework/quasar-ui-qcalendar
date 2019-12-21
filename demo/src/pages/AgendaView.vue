@@ -4,10 +4,10 @@
     <q-markdown>
 The `agenda` views by themselves are rather boring. It's up to the developer to fill the content via the `day-body` slot (more about this below).
     </q-markdown>
-    <example-card title="Basic" name="AgendaViewBasic" :tag-parts="getTagParts(require('!!raw-loader!../examples/AgendaViewBasic.vue').default)" />
-    <example-card title="Agenda View (week) - Basic" name="AgendaViewWeekBasic" :tag-parts="getTagParts(require('!!raw-loader!../examples/AgendaViewWeekBasic.vue').default)" />
+    <example-viewer title="Basic" file="AgendaViewBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Agenda View (week) - Basic" file="AgendaViewWeekBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
-    <example-card title="Slots" name="AgendaViewWeekSlots" :tag-parts="getTagParts(require('!!raw-loader!../examples/AgendaViewWeekSlots.vue').default)" >
+    <example-viewer title="Slots" file="AgendaViewWeekSlots" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 We are going to jump right into slot usage so that for the rest of the examples we have content that can be displayed.
 
@@ -33,31 +33,31 @@ For slots that return `day` or `timestamp`, it looks like this:
 }
 ```
       </q-markdown>
-    </example-card>
+    </example-viewer>
 
-    <example-card title="First Day Monday" name="AgendaViewWeekFirstDayMonday" :tag-parts="getTagParts(require('!!raw-loader!../examples/AgendaViewWeekFirstDayMonday.vue').default)" />
-    <example-card title="Five Day Workweek" name="AgendaViewWeekFiveDayWorkweek" :tag-parts="getTagParts(require('!!raw-loader!../examples/AgendaViewWeekFiveDayWorkweek.vue').default)" />
-    <example-card title="Theme" name="AgendaViewWeekTheme" :tag-parts="getTagParts(require('!!raw-loader!../examples/AgendaViewWeekTheme.vue').default)" />
+    <example-viewer title="First Day Monday" file="AgendaViewWeekFirstDayMonday" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Five Day Workweek" file="AgendaViewWeekFiveDayWorkweek" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Theme" file="AgendaViewWeekTheme" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
   </div>
 </template>
 
 <script>
 import ExampleTitle from '../components/ExampleTitle'
-import ExampleCard from '../components/ExampleCard'
 import { slugify } from 'assets/page-utils'
-import { getTagParts } from '@quasar/quasar-ui-qmarkdown'
 
 export default {
   name: 'AgendaView',
 
   components: {
-    ExampleTitle,
-    ExampleCard
+    ExampleTitle
   },
 
   data () {
     return {
-      tempToc: []
+      tempToc: [],
+      locationUrl: 'https://github.com/quasarframework/quasar-ui-qcalendar/tree/dev/demo/src/examples/',
+      jsPaths: ['https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@latest/dist/index.umd.min.js'],
+      cssPaths: ['https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@latest/dist/index.min.css']
     }
   },
 
@@ -88,10 +88,12 @@ export default {
   },
 
   methods: {
-    getTagParts,
-
     addToToc (name, level = 1) {
-      const slug = slugify(name)
+      let n = name
+      if (level > 1) {
+        n = 'example-' + n
+      }
+      const slug = slugify(n)
       this.tempToc.push({
         children: [],
         id: slug,
