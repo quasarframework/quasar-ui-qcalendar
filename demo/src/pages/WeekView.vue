@@ -38,7 +38,7 @@ You can use the `now` property to set a fixed date, otherwise the current date w
     <example-viewer title="Prev/Next" file="WeekViewPrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Swipe" file="WeekViewSwipe" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Column Header" file="WeekViewColumnHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Slots" file="WeekViewSlots" no-edit :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+    <example-viewer title="Slots" file="WeekViewSlots" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 For slots that return `day` or `timestamp`, it looks like this:
 ```js
@@ -69,7 +69,7 @@ The `day-body` slot is used to get information about the date and time of an eve
     </example-viewer>
 
     <example-title title="More Slots" />
-    <example-viewer title="Week View (Current Time) - Slot (day-container)" file="WeekViewCurrentTime" no-edit :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+    <example-viewer title="Week View (Current Time) - Slot (day-container)" file="WeekViewCurrentTime" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 You can use the scopedSlot `day-container` to set an absolute position for a time tracking bar.
 Scroll down if the current time is later for your location to see the example.
@@ -84,6 +84,7 @@ Scroll down if the current time is later for your location to see the example.
 <script>
 import ExampleTitle from '../components/ExampleTitle'
 import { slugify } from 'assets/page-utils'
+import { version } from 'ui'
 
 export default {
   name: 'WeekView',
@@ -96,8 +97,11 @@ export default {
     return {
       tempToc: [],
       locationUrl: 'https://github.com/quasarframework/quasar-ui-qcalendar/tree/dev/demo/src/examples/',
-      jsPaths: ['https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@latest/dist/index.umd.min.js'],
-      cssPaths: ['https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@latest/dist/index.min.css']
+      jsPaths: [`https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@${version}/dist/index.umd.min.js`],
+      cssPaths: [
+        `https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@${version}/dist/index.min.css`,
+        'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.0/css/all.css'
+      ]
     }
   },
 

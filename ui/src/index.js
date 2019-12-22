@@ -58,7 +58,9 @@ import {
   createNativeLocaleFormatter,
   makeDate,
   makeDateTime,
-  validateNumber
+  validateNumber,
+  isBetweenDates,
+  addToDate
 } from './utils/timestamp.js'
 
 import {
@@ -128,6 +130,8 @@ export {
   makeDate,
   makeDateTime,
   validateNumber,
+  isBetweenDates,
+  addToDate,
   // helpers
   convertToUnit,
   indexOf
@@ -192,7 +196,11 @@ export default {
   createDayList,
   createIntervalList,
   createNativeLocaleFormatter,
+  makeDate,
+  makeDateTime,
   validateNumber,
+  isBetweenDates,
+  addToDate,
   // helpers
   convertToUnit,
   indexOf,

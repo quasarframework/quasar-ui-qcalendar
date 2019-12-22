@@ -1,6 +1,6 @@
 <template>
-  <div style="max-width: 800px; width: 100%;">
-    <div class="full-width q-pa-md">
+  <div style="max-width: 800px; width: 100%; overflow: hidden;">
+    <div class="q-pa-md">
       <q-select
         outlined
         dense

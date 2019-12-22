@@ -74,7 +74,7 @@ And finally, if you wanted the ability to page through a large number of resourc
       </q-markdown>
     </example-viewer>
 
-    <example-viewer title="Slots" file="DayViewSlots" no-edit :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+    <example-viewer title="Slots" file="DayViewSlots" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 For slots that return `day` or `timestamp`, it looks like this:
 ```js
@@ -104,7 +104,7 @@ The `day-body` slot is used to get information about the date and time of an eve
       </q-markdown>
     </example-viewer>
 
-    <example-viewer title="Day View (Current Time) - Slot (day-container)" file="DayViewCurrentTime" no-edit :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+    <example-viewer title="Day View (Current Time) - Slot (day-container)" file="DayViewCurrentTime" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 You can use the scopedSlot `day-container` to set an absolute position for a time tracking bar.
 Scroll down if the current time is later for your location to see the example.
@@ -119,6 +119,7 @@ Scroll down if the current time is later for your location to see the example.
 <script>
 import ExampleTitle from '../components/ExampleTitle'
 import { slugify } from 'assets/page-utils'
+import { version } from 'ui'
 
 export default {
   name: 'DayView',
@@ -131,8 +132,11 @@ export default {
     return {
       tempToc: [],
       locationUrl: 'https://github.com/quasarframework/quasar-ui-qcalendar/tree/dev/demo/src/examples/',
-      jsPaths: ['https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@latest/dist/index.umd.min.js'],
-      cssPaths: ['https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@latest/dist/index.min.css']
+      jsPaths: [`https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@${version}/dist/index.umd.min.js`],
+      cssPaths: [
+        `https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@${version}/dist/index.min.css`,
+        'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.0/css/all.css'
+      ]
     }
   },
 

@@ -19,17 +19,17 @@ QCalendar (Vue Plugin, UMD and Quasar App Extension)
 If you fork or download this project, make sure you have the Quasar CLI globally installed:
 
 ```
-npm i -g @quasar/cli
+$ npm i -g @quasar/cli
 ```
 
 The workflow to build the demo, on a fresh project, is as follows:
 ```
-cd ui
-yarn
-yarn build
-cd ../demo
-yarn
-quasar dev
+$ cd ui
+$ yarn
+$ yarn build
+$ cd ../demo
+$ yarn
+$ quasar dev
 ```
 
 # Donate

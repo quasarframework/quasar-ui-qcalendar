@@ -17,9 +17,8 @@
 </template>
 
 <script>
-import {
-  parseDate
-} from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
+// normally you would not import "all" of QCalendar, but is needed for this example to work with UMD (codepen)
+import QCalendar from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
 
 export default {
   data () {
@@ -54,7 +53,7 @@ export default {
   methods: {
     adjustCurrentTime () {
       const now = new Date()
-      const p = parseDate(now)
+      const p = QCalendar.parseDate(now)
       this.currentDate = p.date
       this.currentTime = p.time
       this.timeStartPos = this.$refs.calendar.timeStartPos(this.currentTime)
