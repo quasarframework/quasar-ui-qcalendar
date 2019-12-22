@@ -63,6 +63,7 @@ Below, the slot receives the `resource` to be displayed. In this case, an avatar
 <script>
 import ExampleTitle from '../components/ExampleTitle'
 import { slugify } from 'assets/page-utils'
+import { version } from 'ui'
 
 export default {
   name: 'SchedulerView',
@@ -75,8 +76,11 @@ export default {
     return {
       tempToc: [],
       locationUrl: 'https://github.com/quasarframework/quasar-ui-qcalendar/tree/dev/demo/src/examples/',
-      jsPaths: ['https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@latest/dist/index.umd.min.js'],
-      cssPaths: ['https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@latest/dist/index.min.css']
+      jsPaths: [`https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@${version}/dist/index.umd.min.js`],
+      cssPaths: [
+        `https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@${version}/dist/index.min.css`,
+        'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.0/css/all.css'
+      ]
     }
   },
 
