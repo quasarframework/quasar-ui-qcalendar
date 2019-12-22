@@ -903,14 +903,123 @@
         "input": {
           "type": [ "Number", "String" ],
           "required": true,
-          "desc": "A timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "A numeric value",
+          "examples": [
+            "validateNumber(10) // true",
+            "validateNumber('10') // true",
+            "validateNumber('bob') // false"
+          ]
         }
       },
       "returns": {
         "type": "Boolean",
         "desc": "true if a number, otherwise false",
         "__exemption": [ "examples" ]
+      }
+    },
+    "isBetweenDates": {
+      "desc": "Checks passed timestamp is between start and end timestamps",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "desc": "A timestamp object",
+          "required": true,
+          "__exemption": [ "examples" ]
+        },
+        "startTimestamp": {
+          "type": "Object",
+          "desc": "The starting timestamp object to use for the comparison",
+          "required": true,
+          "__exemption": [ "examples" ]
+        },
+        "endTimestamp": {
+          "type": "Object",
+          "desc": "The ending timestamp object to use for the comparison",
+          "required": true,
+          "__exemption": [ "examples" ]
+        },
+        "useTime": {
+          "type": "Boolean",
+          "desc": "[Optional] Use time in the comparison",
+          "default": false
+        }
+      },
+      "returns": {
+        "type": "Boolean",
+        "desc": "true if a date is between the start and end dates",
+        "__exemption": [ "examples" ]
+      }
+    },
+    "addToDate": {
+      "desc": "Takes a timestamp and increments/decrements based on options",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "desc": "A timestamp object",
+          "required": true,
+          "__exemption": [ "examples" ]
+        },
+        "options": {
+          "type": "Object",
+          "desc":  "The options passed to the method. All items are optional and can be positive or negative",
+          "examples": [
+            "{ year: 1, month: -1, day: 10, hour: 2, minute: 3 }",
+            "{ month: -1 }",
+            "{ day: 3 }",
+            "{ hour: 10 }",
+            "{ minute: 10000 }"
+          ],
+          "definition": {
+            "year": {
+              "type": ["Number", "String"],
+              "desc": "[Optional] The amount to increment/decrement the year",
+              "examples": [
+                "{ year: 1 }",
+                "{ year: '-1' }"
+              ]
+            },
+            "month": {
+              "type": ["Number", "String"],
+              "desc": "[Optional] The amount to increment/decrement the month",
+              "examples": [
+                "{ month: 1 }",
+                "{ month: '-1' }"
+              ]
+            },
+            "day": {
+              "type": ["Number", "String"],
+              "desc": "[Optional] The amount to increment/decrement the day",
+              "examples": [
+                "{ day: 1 }",
+                "{ day: '-1' }"
+              ]
+            },
+            "hour": {
+              "type": ["Number", "String"],
+              "desc": "[Optional] The amount to increment/decrement the hour",
+              "examples": [
+                "{ hour: 1 }",
+                "{ hour: '-1' }"
+              ]
+            },
+            "minute": {
+              "type": ["Number", "String"],
+              "desc": "[Optional] The amount to increment/decrement the minute",
+              "examples": [
+                "{ minute: 1 }",
+                "{ minute: '-1' }"
+              ]
+            }
+          }
+        }
+      },
+      "returns": {
+        "type": "Object",
+        "desc": "A copy of the modified timestamp object",
+        "examples": [
+          "ts = addToDate(ts, { hour: 1 })",
+          "ts = addToDate(ts, { month: 3, hour: -1 })"
+        ]
       }
     }
   }

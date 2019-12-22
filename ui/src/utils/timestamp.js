@@ -37,12 +37,12 @@ export const Timestamp = {
   future: false,  // if timestamp is in the future (based on `now` property)
   disabled: false // if timestamp is disabled
 }
-/* eslint-enable no-multi-spaces */
 
 export const TimeObject = {
-  hour: 0, // Number
+  hour: 0,  // Number
   minute: 0 // Number
 }
+/* eslint-enable no-multi-spaces */
 
 export function getStartOfWeek (timestamp, weekdays, today) {
   if (timestamp.day === 1 || timestamp.weekday === 0) {
@@ -281,15 +281,6 @@ export function getWorkWeek (timestamp) {
 }
 
 export function getWeekday (timestamp) {
-  // [bug] this code has issues. If 1st day of the month is 1 day of week
-  // it comes back with day of week as 7.
-  // if (timestamp.hasDay) {
-  //   const ts = new Date(Date.UTC(timestamp.year, timestamp.month - 1, timestamp.day, 0, 0))
-  //   return date.getDayOfWeek(ts)
-  // }
-
-  // return timestamp.weekday
-
   if (timestamp.hasDay) {
     const floor = Math.floor
     const day = timestamp.day
@@ -495,6 +486,118 @@ export function validateNumber (input) {
   return isFinite(parseInt(input, 10))
 }
 
+export function isBetweenDates (timestamp, startTimestamp, endTimestamp, useTime = false) {
+  const cd = parseInt(getDayIdentifier(timestamp) + String(useTime === true ? getTimeIdentifier(timestamp) : ''), 10)
+  const sd = parseInt(getDayIdentifier(startTimestamp) + String(useTime === true ? getTimeIdentifier(startTimestamp) : ''), 10)
+  const ed = parseInt(getDayIdentifier(endTimestamp) + String(useTime === true ? getTimeIdentifier(endTimestamp) : ''), 10)
+
+  return cd >= sd && cd <= ed
+}
+
+function __normalizeMinute (ts) {
+  if (ts.minute >= MINUTES_IN_HOUR) {
+    const hours = Math.floor(ts.minute / MINUTES_IN_HOUR)
+    ts.minute -= hours * MINUTES_IN_HOUR
+    ts.hour += hours
+  } else if (ts.minute < 0) {
+    let minutes = -1 * ts.minute
+    const hours = Math.floor(minutes / MINUTES_IN_HOUR) + 1
+    minutes = minutes % MINUTES_IN_HOUR
+    ts.minute = MINUTES_IN_HOUR - minutes
+    ts.hour -= hours
+  }
+  return ts
+}
+
+function __normalizeHour (ts) {
+  if (ts.hour >= HOURS_IN_DAY) {
+    const days = Math.floor(ts.hour / HOURS_IN_DAY)
+    ts.hour -= days * HOURS_IN_DAY
+    ts.day += days
+  } else if (ts.hour < 0) {
+    let hours = -1 * ts.hour
+    const days = Math.floor(hours / HOURS_IN_DAY) + 1
+    hours = hours % HOURS_IN_DAY
+    ts.hour = HOURS_IN_DAY - hours
+    ts.day -= days
+  }
+  return ts
+}
+
+function __normalizeDay (ts) {
+  __normalizeMonth(ts)
+  let dim = daysInMonth(ts.year, ts.month)
+  if (ts.day > dim) {
+    ++ts.month
+    if (ts.month > MONTH_MAX) {
+      __normalizeMonth(ts)
+    }
+    let days = ts.day - dim
+    dim = daysInMonth(ts.year, ts.month)
+    do {
+      if (days > dim) {
+        ++ts.month
+        if (ts.month > MONTH_MAX) {
+          __normalizeMonth(ts)
+        }
+        days -= dim
+        dim = daysInMonth(ts.year, ts.month)
+      }
+    } while (days > dim)
+    ts.day = days
+  } else if (ts.day <= 0) {
+    let days = -1 * ts.day
+    --ts.month
+    if (ts.month <= 0) {
+      __normalizeMonth(ts)
+    }
+    dim = daysInMonth(ts.year, ts.month)
+    do {
+      if (days > dim) {
+        days -= dim
+        --ts.month
+        if (ts.month <= 0) {
+          __normalizeMonth(ts)
+        }
+        dim = daysInMonth(ts.year, ts.month)
+      }
+    } while (days > dim)
+    ts.day = dim - days
+  }
+  return ts
+}
+
+function __normalizeMonth (timestamp) {
+  const ts = copyTimestamp(timestamp)
+  if (ts.month > MONTH_MAX) {
+    const years = Math.floor(ts.month / MONTH_MAX)
+    ts.month = ts.month % MONTH_MAX
+    ts.year += years
+  } else if (ts.month < MONTH_MIN) {
+    const months = -1 * ts.month
+    ts.month = MONTH_MAX - months
+    --ts.year
+  }
+  return ts
+}
+
+export function addToDate (timestamp, options) {
+  const ts = copyTimestamp(timestamp)
+
+  Object.keys(options).forEach(key => {
+    if (ts[key] !== void 0) {
+      ts[key] += parseInt(options[key], 10)
+    }
+  })
+
+  // normalize timestamp
+  __normalizeMinute(ts)
+  __normalizeHour(ts)
+  __normalizeDay(ts)
+  __normalizeMonth(ts)
+  return ts
+}
+
 export default {
   PARSE_REGEX,
   PARSE_TIME,
@@ -551,5 +654,7 @@ export default {
   createDayList,
   createIntervalList,
   createNativeLocaleFormatter,
-  validateNumber
+  validateNumber,
+  isBetweenDates,
+  addToDate
 }
