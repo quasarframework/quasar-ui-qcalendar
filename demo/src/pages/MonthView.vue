@@ -41,7 +41,7 @@ The example below is setting the `day-height` to `100`, the default is `0`, whic
 
     <example-viewer title="Prev/Next" file="MonthViewPrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Swipe" file="MonthViewSwipe" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Multi-Day Selection" file="MonthViewSelection" no-edit :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+    <example-viewer title="Multi-Day Selection" file="MonthViewSelection" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 The example below shows how to use the QCalendar to create a multi-day selector. The critical aspect of this is the `selected-start-end-dates` property. This takes an array of two dates (the first should be less or equal to the last). This property really doesn't do much, except to keep the calendar reactive, so that the `day-style` property can be used to style the selected days.
 
@@ -51,7 +51,7 @@ Keep in mind that the functionality below won't work with swipe actions.
       </q-markdown>
     </example-viewer>
 
-    <example-viewer title="Slots (day)" file="MonthViewSlots" no-edit :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+    <example-viewer title="Slots (day)" file="MonthViewSlots" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 The `#day` slot allows you to write anything into the body of the day. To avoid writing on top of the `day-label` add the css class `.q-event` to your item which adds a top margin (and also works for mini-mode).
 
@@ -78,7 +78,7 @@ For slots that return `day` or `timestamp`, it looks like this:
 ```
       </q-markdown>
     </example-viewer>
-    <example-viewer title="Slots (week)" file="MonthViewWeekSlot" no-edit :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+    <example-viewer title="Slots (week)" file="MonthViewWeekSlot" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 The example below uses the **#week** slot (v1.3.2). It's a bit more difficult to work with than the **#day-body** slot, but allows you to have your devland events displayed in a contiguous manner. Check out the sources to see how it is accomplished.
 ::: warning
@@ -112,18 +112,18 @@ Also, regardless of `mini-mode` all slots associated with month view now have ad
     <example-viewer title="Mini-Mode - Disabled Days" file="MonthViewDisabledDaysMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Mini-Mode - 5 Day Work Week" file="MonthViewFiveDayWorkWeekMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Mini-Mode - Work Week Numbers" file="MonthViewWorkWeekNumbersMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Mini-Mode - Selection" file="MonthViewSelectionMiniMode" no-edit :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+    <example-viewer title="Mini-Mode - Selection" file="MonthViewSelectionMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 There are some considerations when using mini-mode selections. There are 3 special classes: `.q-selected-day-first`, `.q-selected-day` and `.q-selected-day-last` in conjunction with the `day-class` property. These will help you create a selector compliant with [Material Design](https://material.io/components/pickers/#anatomy). See examples below for usage.
       </q-markdown>
     </example-viewer>
-    <example-viewer title="Mini-Mode - Multi-Month Selection" file="MonthViewMultiMonthSelectionMiniMode" no-edit :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+    <example-viewer title="Mini-Mode - Multi-Month Selection" file="MonthViewMultiMonthSelectionMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 Using the property `short-weekday-label` while in `mini-mode` gives an even shorter weekday label than normal.
       </q-markdown>
     </example-viewer>
 
-    <example-viewer title="Mini-Mode - Slots (day)" file="MonthViewSlotsMiniMode" no-edit :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Mini-Mode - Slots (day)" file="MonthViewSlotsMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Mini-Mode - Theme" file="MonthViewThemeMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
   </div>
@@ -132,6 +132,7 @@ Using the property `short-weekday-label` while in `mini-mode` gives an even shor
 <script>
 import ExampleTitle from '../components/ExampleTitle'
 import { slugify } from 'assets/page-utils'
+import { version } from 'ui'
 
 export default {
   name: 'MonthView',
@@ -144,8 +145,11 @@ export default {
     return {
       tempToc: [],
       locationUrl: 'https://github.com/quasarframework/quasar-ui-qcalendar/tree/dev/demo/src/examples/',
-      jsPaths: ['https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@latest/dist/index.umd.min.js'],
-      cssPaths: ['https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@latest/dist/index.min.css']
+      jsPaths: [`https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@${version}/dist/index.umd.min.js`],
+      cssPaths: [
+        `https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@${version}/dist/index.min.css`,
+        'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.0/css/all.css'
+      ]
     }
   },
 
