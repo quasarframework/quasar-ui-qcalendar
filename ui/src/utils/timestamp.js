@@ -595,6 +595,7 @@ export function addToDate (timestamp, options) {
   __normalizeHour(ts)
   __normalizeDay(ts)
   __normalizeMonth(ts)
+  updateFormatted(ts)
   return ts
 }
 
