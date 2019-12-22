@@ -200,7 +200,7 @@
                 clearable
                 style="padding-bottom: 20px;"
               >
-                <template v-slot:append>
+                <template #append>
                   <q-icon name="extension" class="cursor-pointer">
                     <q-popup-proxy v-model="showIconPicker">
 
