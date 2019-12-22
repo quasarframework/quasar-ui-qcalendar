@@ -276,7 +276,7 @@ export function getDayOfYear (timestamp) {
 
 export function getWorkWeek (timestamp) {
   if (timestamp.year === 0) return
-  const ts = new Date(Date.UTC(timestamp.year, timestamp.month - 1, timestamp.day, 0, 0))
+  const ts = makeDate(timestamp)
   return date.getWeekOfYear(ts)
 }
 
