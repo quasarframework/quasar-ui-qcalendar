@@ -660,6 +660,8 @@ export default {
   createDayList,
   createIntervalList,
   createNativeLocaleFormatter,
+  makeDate,
+  makeDateTime,
   validateNumber,
   isBetweenDates,
   addToDate
