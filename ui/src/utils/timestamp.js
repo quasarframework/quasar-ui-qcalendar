@@ -331,6 +331,10 @@ export function getTime (timestamp) {
   return `${padNumber(timestamp.hour, 2)}:${padNumber(timestamp.minute, 2)}`
 }
 
+export function getDateTime (timestamp) {
+  return getDate(timestamp) + ' ' + getTime(timestamp)
+}
+
 export function nextMinutes (timestamp, minutes) {
   timestamp.minute += minutes
   while (timestamp.minute > MINUTES_IN_HOUR) {
@@ -646,6 +650,7 @@ export default {
   padNumber,
   getDate,
   getTime,
+  getDateTime,
   nextMinutes,
   nextDay,
   prevDay,
