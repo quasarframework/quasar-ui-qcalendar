@@ -1,10 +1,11 @@
 {
   "@quasar/qscroller": {},
   "@quasar/qiconpicker": {},
+  "@quasar/qribbon": {},
+  "example-viewer": {},
+  "json-api-viewer": {},
   "@quasar/qmarkdown": {
     "import_md": true,
     "import_vmd": true
-  },
-  "json-api-viewer": {},
-  "example-viewer": {}
+  }
 }
