@@ -1987,17 +1987,17 @@
   "methods": {
     "prev": {
       "desc": "Triggers component to display previous (ex: day, week, month)",
-      "applicable": [ "All "],
+      "applicable": [ "All"],
       "__exemption": [ "examples" ]
     },
     "next": {
       "desc": "Triggers component to display next (ex: day, week, month)",
-      "applicable": [ "All "],
+      "applicable": [ "All"],
       "__exemption": [ "examples" ]
     },
     "move": {
       "desc": "Triggers component to move for count iterations, depending on positive (forwards) or negative (backwards) value",
-      "applicable": [ "All "],
+      "applicable": [ "All"],
       "params": {
         "count": {
           "type": "Number",
@@ -2011,7 +2011,7 @@
     },
     "updateCurrent": {
       "desc": "Update various values to be consistent with current date",
-      "applicable": [ "All "],
+      "applicable": [ "All"],
       "__exemption": [ "examples" ]
     },
     "timeStartPos": {
