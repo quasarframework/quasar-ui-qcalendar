@@ -950,6 +950,50 @@
         "__exemption": [ "examples" ]
       }
     },
+    "daysBetween": {
+      "desc": "Returns the number days between two timestamps",
+      "params": {
+        "startTimestamp": {
+          "type": "Object",
+          "desc": "The starting timestamp object to use for the comparison",
+          "required": true,
+          "__exemption": [ "examples" ]
+        },
+        "endTimestamp": {
+          "type": "Object",
+          "desc": "The ending timestamp object to use for the comparison",
+          "required": true,
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Number",
+        "desc": "The number of days beween the two timestamps",
+        "__exemption": [ "examples" ]
+      }
+    },
+    "weeksBetween": {
+      "desc": "Returns the number weeks between two timestamps",
+      "params": {
+        "startTimestamp": {
+          "type": "Object",
+          "desc": "The starting timestamp object to use for the comparison",
+          "required": true,
+          "__exemption": [ "examples" ]
+        },
+        "endTimestamp": {
+          "type": "Object",
+          "desc": "The ending timestamp object to use for the comparison",
+          "required": true,
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Number",
+        "desc": "The number of weeks beween the two timestamps",
+        "__exemption": [ "examples" ]
+      }
+    },
     "addToDate": {
       "desc": "Takes a timestamp and increments/decrements based on options",
       "params": {

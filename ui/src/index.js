@@ -61,6 +61,8 @@ import {
   makeDateTime,
   validateNumber,
   isBetweenDates,
+  daysBetween,
+  weeksBetween,
   addToDate
 } from './utils/timestamp.js'
 
@@ -133,6 +135,8 @@ export {
   makeDateTime,
   validateNumber,
   isBetweenDates,
+  daysBetween,
+  weeksBetween,
   addToDate,
   // helpers
   convertToUnit,

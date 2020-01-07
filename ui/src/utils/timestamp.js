@@ -603,6 +603,19 @@ export function addToDate (timestamp, options) {
   return ts
 }
 
+export function daysBetween (ts1, ts2) {
+  const diff = diffTimestamp(ts1, ts2, true)
+  return diff / MILLISECONDS_IN_DAY
+}
+
+export function weeksBetween (ts1, ts2) {
+  let t1 = copyTimestamp(ts1)
+  let t2 = copyTimestamp(ts2)
+  t1 = findWeekday(t1, 0)
+  t2 = findWeekday(t2, 6)
+  return Math.ceil(daysBetween(t1, t2) / DAYS_IN_WEEK)
+}
+
 export default {
   PARSE_REGEX,
   PARSE_TIME,
@@ -664,5 +677,7 @@ export default {
   makeDateTime,
   validateNumber,
   isBetweenDates,
+  daysBetween,
+  weeksBetween,
   addToDate
 }
