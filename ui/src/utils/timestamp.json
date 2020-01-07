@@ -241,7 +241,6 @@
           "type": "Object",
           "required": true,
           "desc": "A timestamp object",
-          "required": true,
           "__exemption": [ "examples" ]
         }
       },
