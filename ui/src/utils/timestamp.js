@@ -498,36 +498,59 @@ export function isBetweenDates (timestamp, startTimestamp, endTimestamp, useTime
   return cd >= sd && cd <= ed
 }
 
+export function addToDate (ts, options) {
+  let minType
+  __forEachObject(options, (value, key) => {
+    if (ts[key] !== void 0) {
+      ts[key] += parseInt(value, 10)
+      const indexType = NORMALIZE_TYPES.indexOf(key)
+      if (indexType !== -1) {
+        if (minType === void 0) {
+          minType = indexType
+        } else {
+          minType = Math.min(indexType, minType)
+        }
+      }
+    }
+  })
+
+  // normalize timestamp
+  if (minType !== void 0) {
+    __normalize(ts, NORMALIZE_TYPES[minType])
+  }
+  return ts
+}
+
+const NORMALIZE_TYPES = ['minute', 'hour', 'day', 'month']
+
+// addToDate helper
+function __forEachObject (obj, cb) {
+  Object.keys(obj).forEach(k => cb(obj[k], k))
+}
+
+// normalize minutes
 function __normalizeMinute (ts) {
-  if (ts.minute >= MINUTES_IN_HOUR) {
+  if (ts.minute >= MINUTES_IN_HOUR || ts.minute < 0) {
     const hours = Math.floor(ts.minute / MINUTES_IN_HOUR)
     ts.minute -= hours * MINUTES_IN_HOUR
     ts.hour += hours
-  } else if (ts.minute < 0) {
-    let minutes = -1 * ts.minute
-    const hours = Math.floor(minutes / MINUTES_IN_HOUR) + 1
-    minutes = minutes % MINUTES_IN_HOUR
-    ts.minute = MINUTES_IN_HOUR - minutes
-    ts.hour -= hours
+    __normalizeHour(ts)
   }
   return ts
 }
 
+// normalize hours
 function __normalizeHour (ts) {
-  if (ts.hour >= HOURS_IN_DAY) {
+  if (ts.hour >= HOURS_IN_DAY || ts.hour < 0) {
     const days = Math.floor(ts.hour / HOURS_IN_DAY)
     ts.hour -= days * HOURS_IN_DAY
     ts.day += days
-  } else if (ts.hour < 0) {
-    let hours = -1 * ts.hour
-    const days = Math.floor(hours / HOURS_IN_DAY) + 1
-    hours = hours % HOURS_IN_DAY
-    ts.hour = HOURS_IN_DAY - hours
-    ts.day -= days
+    __normalizeDay(ts)
   }
   return ts
 }
 
+// normalize days
 function __normalizeDay (ts) {
   __normalizeMonth(ts)
   let dim = daysInMonth(ts.year, ts.month)
@@ -571,36 +594,31 @@ function __normalizeDay (ts) {
   return ts
 }
 
-function __normalizeMonth (timestamp) {
-  const ts = copyTimestamp(timestamp)
+// normalize months
+function __normalizeMonth (ts) {
   if (ts.month > MONTH_MAX) {
     const years = Math.floor(ts.month / MONTH_MAX)
     ts.month = ts.month % MONTH_MAX
     ts.year += years
   } else if (ts.month < MONTH_MIN) {
-    const months = -1 * ts.month
-    ts.month = MONTH_MAX - months
+    ts.month += MONTH_MAX
     --ts.year
   }
   return ts
 }
 
-export function addToDate (timestamp, options) {
-  const ts = copyTimestamp(timestamp)
-
-  Object.keys(options).forEach(key => {
-    if (ts[key] !== void 0) {
-      ts[key] += parseInt(options[key], 10)
-    }
-  })
-
-  // normalize timestamp
-  __normalizeMinute(ts)
-  __normalizeHour(ts)
-  __normalizeDay(ts)
-  __normalizeMonth(ts)
-  updateFormatted(ts)
-  return ts
+// normalize all
+function __normalize (ts, type) {
+  switch (type) {
+    case 'minute':
+      return __normalizeMinute(ts);
+    case 'hour':
+      return __normalizeHour(ts);
+    case 'day':
+      return __normalizeDay(ts);
+    case 'month':
+      return __normalizeMonth(ts);
+  }
 }
 
 export function daysBetween (ts1, ts2) {
