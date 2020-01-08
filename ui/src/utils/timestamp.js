@@ -193,7 +193,7 @@ export function diffTimestamp (ts1, ts2, strict) {
     // utc2 - utc1 < 0  -> utc2 < utc1 ->   NO: utc1 >= utc2
     return 0
   }
-  return Math.floor((utc2 - utc1) / MILLISECONDS_IN_DAY)
+  return utc2 - utc1
 }
 
 export function updateRelative (timestamp, now, time = false) {
@@ -605,7 +605,7 @@ export function addToDate (timestamp, options) {
 
 export function daysBetween (ts1, ts2) {
   const diff = diffTimestamp(ts1, ts2, true)
-  return diff / MILLISECONDS_IN_DAY
+  return Math.floor(diff / MILLISECONDS_IN_DAY)
 }
 
 export function weeksBetween (ts1, ts2) {

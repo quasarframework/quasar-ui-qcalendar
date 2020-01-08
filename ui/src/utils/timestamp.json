@@ -251,7 +251,7 @@
       }
     },
     "diffTimestamp": {
-      "desc": "Turns passed in timestamp object to a time identifier",
+      "desc": "Returns the number of milliseconds between the two days",
       "params": {
         "timestamp1": {
           "type": "Object",
@@ -274,7 +274,7 @@
       },
       "returns": {
         "type": "Number",
-        "desc": "The number of days different between the two timestamp objects. 0 if **strict** is true and the value would be negative",
+        "desc": "The number of milliseconds between the two timestamp objects. 0 if **strict** is true and the value would be negative",
         "__exemption": [ "examples" ]
       }
     },
