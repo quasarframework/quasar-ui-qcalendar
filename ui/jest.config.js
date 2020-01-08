@@ -11,7 +11,7 @@ module.exports = {
   collectCoverage: true,
   coverageDirectory: '<rootDir>/test/jest/coverage',
   collectCoverageFrom: [
-    '<rootDir>/src/utils/*.js'
+    '<rootDir>/src/**/*.js'
     // add other paths here if you want them
   ],
   coverageReporters: ['json-summary', 'text', 'lcov'],
