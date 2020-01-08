@@ -45,12 +45,12 @@ export const TimeObject = {
 /* eslint-enable no-multi-spaces */
 
 export function getStartOfWeek (timestamp, weekdays, today) {
-  if (timestamp.day === 1 || timestamp.weekday === 0) {
-    while (!weekdays.includes(timestamp.weekday)) {
-      nextDay(timestamp)
+  let start = copyTimestamp(timestamp)
+  if (start.day === 1 || start.weekday === 0) {
+    while (!weekdays.includes(start.weekday)) {
+      nextDay(start)
     }
   }
-  const start = copyTimestamp(timestamp)
   findWeekday(start, weekdays[0], prevDay, weekdays.length)
   updateFormatted(start)
   if (today) {
@@ -60,14 +60,14 @@ export function getStartOfWeek (timestamp, weekdays, today) {
 }
 
 export function getEndOfWeek (timestamp, weekdays, today) {
+  let end = copyTimestamp(timestamp)
   // is last day of month?
-  const lastDay = daysInMonth(timestamp.year, timestamp.month)
-  if (lastDay === timestamp.day || timestamp.weekday === 6) {
-    while (!weekdays.includes(timestamp.weekday)) {
-      prevDay(timestamp)
+  const lastDay = daysInMonth(end.year, end.month)
+  if (lastDay === end.day || end.weekday === 6) {
+    while (!weekdays.includes(end.weekday)) {
+      prevDay(end)
     }
   }
-  const end = copyTimestamp(timestamp)
   findWeekday(end, weekdays[weekdays.length - 1], nextDay, weekdays.length)
   updateFormatted(end)
   if (today) {
