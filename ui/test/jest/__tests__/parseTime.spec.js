@@ -2,6 +2,7 @@
 const timestamp = require('utils/timestamp.js')
 
 describe('[TIMESTAMP] parseTime', () => {
+
   it('parses time', async () => {
     const tests = timestamp.parseTime(141)
     expect(tests).toBe(141)

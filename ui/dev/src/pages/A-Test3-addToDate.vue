@@ -1,5 +1,6 @@
 <template>
   <div class="row full-width q-gutter-x-md" style="max-width: 400px; width: 100%;">
+    <div class="row items-center q-pa-sm full-width">addToDate testing</div>
     <div class="row items-center q-mt-sm">{{ timestamp.year }}</div>
     <q-input-ts class="col" :value="timestamp.month" type="month" @increment="increment" @decrement="decrement"></q-input-ts>
     <q-input-ts class="col" :value="timestamp.day" type="day" @increment="increment" @decrement="decrement"></q-input-ts>
@@ -95,7 +96,7 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
 .q-input-ts
   border: 1px solid black
   border-radius: 3px
