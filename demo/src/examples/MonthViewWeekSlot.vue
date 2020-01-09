@@ -159,8 +159,8 @@ export default {
         const endDate = QCalendar.getDayIdentifier(tsEndDate)
 
         if (this.isBetweenDatesWeek(startDate, endDate, firstDay, lastDay)) {
-          const left = QCalendar.diffTimestamp(tsFirstDay, tsStartDate, true)
-          const right = QCalendar.diffTimestamp(tsEndDate, tsLastDay, true)
+          const left = QCalendar.daysBetween(tsFirstDay, tsStartDate, true)
+          const right = QCalendar.daysBetween(tsEndDate, tsLastDay, true)
 
           eventsWeek.push({
             id, // index event
