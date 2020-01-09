@@ -207,6 +207,8 @@ export default {
   makeDateTime,
   validateNumber,
   isBetweenDates,
+  daysBetween,
+  weeksBetween,
   addToDate,
   // helpers
   convertToUnit,
