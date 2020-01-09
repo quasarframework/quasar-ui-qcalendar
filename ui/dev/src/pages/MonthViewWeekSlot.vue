@@ -27,7 +27,7 @@ import {
   getDayIdentifier,
   parsed,
   parseDate,
-  diffTimestamp,
+  daysBetween,
   indexOf
 } from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
 
@@ -159,8 +159,8 @@ export default {
         const endDate = getDayIdentifier(tsEndDate)
 
         if (this.isBetweenDatesWeek(startDate, endDate, firstDay, lastDay)) {
-          const left = diffTimestamp(tsFirstDay, tsStartDate, true)
-          const right = diffTimestamp(tsEndDate, tsLastDay, true)
+          const left = daysBetween(tsFirstDay, tsStartDate, true)
+          const right = daysBetween(tsEndDate, tsLastDay, true)
 
           eventsWeek.push({
             id, // index event
