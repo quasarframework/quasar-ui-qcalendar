@@ -78,9 +78,9 @@
     "postcss-rtl": "^1.5.0",
     "promise": "^8.0.3",
     "quasar": "^1.6.1",
-    "quasar-json-api": "^0.0.18",
+    "quasar-json-api": "^0.0.19",
     "rimraf": "^3.0.0",
-    "rollup": "^1.28.0",
+    "rollup": "^1.29.0",
     "uglify-es": "^3.3.9",
     "vue-jest": "^3.0.5",
     "zlib": "^1.0.5"
