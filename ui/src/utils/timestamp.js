@@ -45,7 +45,7 @@ export const TimeObject = {
 /* eslint-enable no-multi-spaces */
 
 export function getStartOfWeek (timestamp, weekdays, today) {
-  let start = copyTimestamp(timestamp)
+  const start = copyTimestamp(timestamp)
   if (start.day === 1 || start.weekday === 0) {
     while (!weekdays.includes(start.weekday)) {
       nextDay(start)
@@ -60,7 +60,7 @@ export function getStartOfWeek (timestamp, weekdays, today) {
 }
 
 export function getEndOfWeek (timestamp, weekdays, today) {
-  let end = copyTimestamp(timestamp)
+  const end = copyTimestamp(timestamp)
   // is last day of month?
   const lastDay = daysInMonth(end.year, end.month)
   if (lastDay === end.day || end.weekday === 6) {
@@ -611,13 +611,13 @@ function __normalizeMonth (ts) {
 function __normalize (ts, type) {
   switch (type) {
     case 'minute':
-      return __normalizeMinute(ts);
+      return __normalizeMinute(ts)
     case 'hour':
-      return __normalizeHour(ts);
+      return __normalizeHour(ts)
     case 'day':
-      return __normalizeDay(ts);
+      return __normalizeDay(ts)
     case 'month':
-      return __normalizeMonth(ts);
+      return __normalizeMonth(ts)
   }
 }
 
