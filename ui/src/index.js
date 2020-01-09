@@ -60,6 +60,7 @@ import {
   makeDateTime,
   validateNumber,
   isBetweenDates,
+  isOverlappingDates,
   daysBetween,
   weeksBetween,
   addToDate
@@ -133,6 +134,7 @@ export {
   makeDateTime,
   validateNumber,
   isBetweenDates,
+  isOverlappingDates,
   daysBetween,
   weeksBetween,
   addToDate,
@@ -204,6 +206,7 @@ export default {
   makeDateTime,
   validateNumber,
   isBetweenDates,
+  isOverlappingDates,
   daysBetween,
   weeksBetween,
   addToDate,

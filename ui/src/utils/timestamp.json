@@ -927,6 +927,44 @@
         "__exemption": [ "examples" ]
       }
     },
+    "isOverlappingDates": {
+      "desc": "Checks passed start and end timestamps overlap the first and last timestamps. This method can be used to find if an event, with start and end dates overlap a range, like a week",
+      "examples": [
+        "isOverlappingDates(parsed('2020-01-01'), parsed('2020-01-10'), parsed('2019-12-29'), parsed('2020-01-04')) === true",
+        "isOverlappingDates(parsed('2020-01-01'), parsed('2020-01-10'), parsed('2020-01-29'), parsed('2020-01-30')) === false"
+      ],
+      "params": {
+        "startTimestamp": {
+          "type": "Object",
+          "desc": "The starting timestamp object to use for the comparison",
+          "required": true,
+          "__exemption": [ "examples" ]
+        },
+        "endTimestamp": {
+          "type": "Object",
+          "desc": "The ending timestamp object to use for the comparison",
+          "required": true,
+          "__exemption": [ "examples" ]
+        },
+        "firstTimestamp": {
+          "type": "Object",
+          "desc": "The first timestamp object to use for the comparison (typically the first day in a week)",
+          "required": true,
+          "__exemption": [ "examples" ]
+        },
+        "lastTimestamp": {
+          "type": "Object",
+          "desc": "The last timestamp object to use for the comparison (typically the last day in a week)",
+          "required": true,
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Boolean",
+        "desc": "true if the start and end timestamps overlap the first and last timestamps",
+        "__exemption": [ "examples" ]
+      }
+    },
     "daysBetween": {
       "desc": "Returns the number days between two timestamps",
       "params": {
@@ -983,6 +1021,7 @@
         "options": {
           "type": "Object",
           "desc":  "The options passed to the method. All items are optional and can be positive or negative",
+          "required": true,
           "examples": [
             "{ year: 1, month: -1, day: 10, hour: 2, minute: 3 }",
             "{ month: -1 }",
@@ -1036,10 +1075,10 @@
       },
       "returns": {
         "type": "Object",
-        "desc": "A copy of the modified timestamp object",
+        "desc": "A copy of the modified timestamp object with the applied options",
         "examples": [
-          "ts = addToDate(ts, { hour: 1 })",
-          "ts = addToDate(ts, { month: 3, hour: -1 })"
+          "const ts1 = addToDate(timestamp, { hour: 1 })",
+          "const ts2 = addToDate(timestamp, { month: 3, hour: -1 })"
         ]
       }
     }

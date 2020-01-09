@@ -484,6 +484,18 @@ export function isBetweenDates (timestamp, startTimestamp, endTimestamp, useTime
   return cd >= sd && cd <= ed
 }
 
+export function isOverlappingDates (startTimestamp, endTimestamp, firstTimestamp, lastTimestamp) {
+  const start = getDayIdentifier(startTimestamp)
+  const end = getDayIdentifier(endTimestamp)
+  const first = getDayIdentifier(firstTimestamp)
+  const last = getDayIdentifier(lastTimestamp)
+  return (
+    (start >= first && start <= last) || // overlap left
+    (end >= first && end <= last) || // overlap right
+    (first >= start && end >= last) // surrounding
+  )
+}
+
 export function addToDate (ts, options) {
   let minType
   __forEachObject(options, (value, key) => {
@@ -680,6 +692,7 @@ export default {
   makeDateTime,
   validateNumber,
   isBetweenDates,
+  isOverlappingDates,
   daysBetween,
   weeksBetween,
   addToDate
