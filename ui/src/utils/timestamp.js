@@ -335,20 +335,6 @@ export function getDateTime (timestamp) {
   return getDate(timestamp) + ' ' + getTime(timestamp)
 }
 
-export function nextMinutes (timestamp, minutes) {
-  timestamp.minute += minutes
-  while (timestamp.minute > MINUTES_IN_HOUR) {
-    timestamp.minute -= MINUTES_IN_HOUR
-    ++timestamp.hour
-    if (timestamp.hour >= HOURS_IN_DAY) {
-      nextDay(timestamp)
-      timestamp.hour = FIRST_HOUR
-    }
-  }
-
-  return timestamp
-}
-
 export function nextDay (timestamp) {
   ++timestamp.day
   timestamp.weekday = (timestamp.weekday + 1) % DAYS_IN_WEEK
@@ -682,7 +668,6 @@ export default {
   getDate,
   getTime,
   getDateTime,
-  nextMinutes,
   nextDay,
   prevDay,
   relativeDays,

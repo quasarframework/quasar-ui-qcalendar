@@ -588,28 +588,6 @@
       },
     "__exemption": [ "examples" ]
     },
-    "nextMinutes": {
-      "desc": "Returns the timestamp with the passed minutes added to it",
-      "params": {
-        "timestamp": {
-          "type": "Object",
-          "required": true,
-          "desc": "A timestamp object",
-          "__exemption": [ "examples" ]
-        },
-        "minutes": {
-          "type": "Number",
-          "desc": "The number of minutes to add to the timestamp. It can handle large amounts of minutes that cause increments in hours or days",
-          "__exemption": [ "examples" ]
-        }
-      },
-      "returns": {
-        "type": "Object",
-        "desc": "A timestamp object with the additional minutes added",
-        "__exemption": [ "examples" ]
-      },
-    "__exemption": [ "examples" ]
-    },
     "nextDay": {
       "desc": "Returns the timestamp set to the next day, updating month and year if needed",
       "params": {
@@ -696,7 +674,7 @@
     "__exemption": [ "examples" ]
     },
     "findWeekday": {
-      "desc": "Returns the timestamp associated to the specified weekday",
+      "desc": "Returns the timestamp associated to the specified weekday. Use `parseTimestamp`, not `parsed` (or manually call `updateFormatted` before calling this method), so associated fields are updated correctly, otherwise this function will not work as expected.",
       "params": {
         "timestamp": {
           "type": "Object",
