@@ -499,7 +499,8 @@ export function isOverlappingDates (startTimestamp, endTimestamp, firstTimestamp
   )
 }
 
-export function addToDate (ts, options) {
+export function addToDate (timestamp, options) {
+  const ts = copyTimestamp(timestamp)
   let minType
   __forEachObject(options, (value, key) => {
     if (ts[key] !== void 0) {
@@ -519,6 +520,7 @@ export function addToDate (ts, options) {
   if (minType !== void 0) {
     __normalize(ts, NORMALIZE_TYPES[minType])
   }
+  updateFormatted(ts)
   return ts
 }
 
