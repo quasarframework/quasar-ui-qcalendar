@@ -170,7 +170,7 @@ export default {
         {
           title: 'Conference',
           details: 'Teaching Javascript 101',
-          date: getCurrentDay(22),
+          date: getCurrentDay(15),
           time: '08:00',
           duration: 540,
           bgcolor: 'blue',
@@ -179,7 +179,7 @@ export default {
         {
           title: 'Girlfriend',
           details: 'Meet GF for dinner at Swanky Restaurant',
-          date: getCurrentDay(22),
+          date: getCurrentDay(15),
           time: '19:00',
           duration: 180,
           bgcolor: 'teal',
@@ -188,7 +188,7 @@ export default {
         {
           title: 'Fishing',
           details: 'Time for some weekend R&R',
-          date: getCurrentDay(27),
+          date: getCurrentDay(16),
           bgcolor: 'purple',
           icon: 'fas fa-fish',
           days: 2
@@ -196,7 +196,7 @@ export default {
         {
           title: 'Vacation',
           details: 'Trails and hikes, going camping! Don\'t forget to bring bear spray!',
-          date: getCurrentDay(29),
+          date: getCurrentDay(22),
           bgcolor: 'purple',
           icon: 'fas fa-plane',
           days: 5
@@ -243,6 +243,7 @@ export default {
     },
 
     getEvents (dt) {
+      const currentDate = QCalendar.parseTimestamp(dt)
       const events = []
       for (let i = 0; i < this.events.length; ++i) {
         let added = false
@@ -250,10 +251,13 @@ export default {
           if (this.events[i].time) {
             if (events.length > 0) {
               // check for overlapping times
-              const startTime = QCalendar.parsed(this.events[i].date + ' ' + this.events[i].time)
+              debugger
+              const startTime = QCalendar.parseTimestamp(this.events[i].date + ' ' + this.events[i].time)
+              console.log('startTime:', startTime)
               const endTime = QCalendar.addToDate(startTime, { minute: this.events[i].duration })
+              console.log('endTime:', endTime)
               for (let j = 0; j < events.length; ++j) {
-                const startTime2 = QCalendar.parsed(events[j].date + ' ' + events[j].time)
+                const startTime2 = QCalendar.parseTimestamp(events[j].date + ' ' + events[j].time)
                 const endTime2 = QCalendar.addToDate(startTime2, { minute: events[j].duration })
                 if (QCalendar.isBetweenDates(startTime, startTime2, endTime2) || QCalendar.isBetweenDates(endTime, startTime2, endTime2)) {
                   events[j].side = 'left'
@@ -271,9 +275,9 @@ export default {
           }
         } else if (this.events[i].days) {
           // check for overlapping dates
-          const startDate = QCalendar.parsed(this.events[i].date)
+          const startDate = QCalendar.parseTimestamp(this.events[i].date)
           const endDate = QCalendar.addToDate(startDate, { day: this.events[i].days })
-          if (QCalendar.isBetweenDates(dt, startDate, endDate)) {
+          if (QCalendar.isBetweenDates(currentDate, startDate, endDate)) {
             events.push(this.events[i])
             added = true
           }
