@@ -21,6 +21,7 @@ yarn-error.log*
 # Linters
 .eslintignore
 .eslintrc.js
+.babelrc
 
 # Other
 /src/components/QCalendar.json
