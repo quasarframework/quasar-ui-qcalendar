@@ -51,4 +51,18 @@ describe('[TIMESTAMP] diffTimestamp', () => {
     const tests = timestamp.diffTimestamp(ts, ts2)
     expect(tests).toBe(31536000000)
   })
+
+  it('diffTimestamp 2020, reverse dates', async () => {
+    const ts = timestamp.parsed('2020-01-01')
+    const ts2 = timestamp.parsed('2020-12-31')
+    const tests = timestamp.diffTimestamp(ts2, ts)
+    expect(tests).toBe(-31536000000)
+  })
+
+  it('diffTimestamp 2020, reverse dates, with strict', async () => {
+    const ts = timestamp.parsed('2020-01-01')
+    const ts2 = timestamp.parsed('2020-12-31')
+    const tests = timestamp.diffTimestamp(ts2, ts, true)
+    expect(tests).toBe(0)
+  })
 })

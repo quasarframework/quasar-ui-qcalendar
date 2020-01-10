@@ -34,6 +34,22 @@ describe('[TIMESTAMP] addToDate', () => {
     expect(tests.day).toBe(7)
   })
 
+  it('addToDate 2019-12-31 add 50 days', async () => {
+    const ts = timestamp.parsed('2019-12-31')
+    const tests = timestamp.addToDate(ts, { day: 50 })
+    expect(tests.year).toBe(2020)
+    expect(tests.month).toBe(2)
+    expect(tests.day).toBe(19)
+  })
+
+  it('addToDate 2019-12-31 add 500 days', async () => {
+    const ts = timestamp.parsed('2019-12-31')
+    const tests = timestamp.addToDate(ts, { day: 500 })
+    expect(tests.year).toBe(2021)
+    expect(tests.month).toBe(5)
+    expect(tests.day).toBe(14)
+  })
+
   it('addToDate 2019-12-31 add 1 year (Leap Year)', async () => {
     const ts = timestamp.parsed('2019-12-31')
     const tests = timestamp.addToDate(ts, { year: 1 })
@@ -85,4 +101,26 @@ describe('[TIMESTAMP] addToDate', () => {
     expect(tests.hour).toBe(0)
     expect(tests.minute).toBe(0)
   })
+
+  it('addToDate 2019-12-31 23:59 add 1 hour', async () => {
+    const ts = timestamp.parsed('2019-12-31 23:59')
+    const tests = timestamp.addToDate(ts, { hour: 1 })
+    expect(tests.year).toBe(2020)
+    expect(tests.month).toBe(1)
+    expect(tests.day).toBe(1)
+    expect(tests.hour).toBe(0)
+    expect(tests.minute).toBe(59)
+  })
+
+  it('addToDate 2020-01-01 remove 1 hour', async () => {
+    const ts = timestamp.parsed('2020-01-01')
+    const tests = timestamp.addToDate(ts, { hour: -1 })
+    expect(tests.year).toBe(2019)
+    expect(tests.month).toBe(12)
+    expect(tests.day).toBe(31)
+    expect(tests.hour).toBe(23)
+    expect(tests.minute).toBe(0)
+  })
+
+
 })
