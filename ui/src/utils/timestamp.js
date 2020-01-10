@@ -332,7 +332,7 @@ export function getTime (timestamp) {
 }
 
 export function getDateTime (timestamp) {
-  return getDate(timestamp) + ' ' + getTime(timestamp)
+  return getDate(timestamp) + (timestamp.hasTime ? ' ' + getTime(timestamp) : '')
 }
 
 export function nextDay (timestamp) {
