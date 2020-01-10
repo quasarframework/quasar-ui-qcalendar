@@ -91,26 +91,27 @@ export function getEndOfMonth (timestamp) {
 }
 
 export function parseTime (input) {
-  if (typeof input === 'number') {
-    // when a number is given, it's minutes since 12:00am
-    return input
-  } else if (typeof input === 'string') {
-    // when a string is given, it's a hh:mm:ss format where seconds are optional
-    const parts = PARSE_TIME.exec(input)
-    if (!parts) {
-      return false
-    }
-    return parseInt(parts[1], 10) * 60 + parseInt(parts[3] || 0, 10)
-  } else if (typeof input === 'object') {
-    // when an object is given, it must have hour and minute
-    if (typeof input.hour !== 'number' || typeof input.minute !== 'number') {
-      return false
-    }
-    return input.hour * 60 + input.minute
-  } else {
-    // unsupported type
-    return false
+  const type = Object.prototype.toString.call(input)
+  switch (type) {
+    case '[object Number]':
+      // when a number is given, it's minutes since 12:00am
+      return input
+    case '[object String]':
+      // when a string is given, it's a hh:mm:ss format where seconds are optional
+      const parts = PARSE_TIME.exec(input)
+      if (!parts) {
+        return false
+      }
+      return parseInt(parts[1], 10) * 60 + parseInt(parts[3] || 0, 10)
+    case '[object Object]':
+      // when an object is given, it must have hour and minute
+      if (typeof input.hour !== 'number' || typeof input.minute !== 'number') {
+        return false
+      }
+      return input.hour * 60 + input.minute
   }
+
+  return false
 }
 
 export function validateTimestamp (input) {
