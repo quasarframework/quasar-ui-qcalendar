@@ -8,7 +8,6 @@ module.exports = function (ctx) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     boot: [
-      'components',
       'qcalendar'
     ],
 
@@ -29,59 +28,63 @@ module.exports = function (ctx) {
     ],
 
     framework: {
+      config: {
+        dark: 'auto'
+      },
+
       // iconSet: 'ionicons-v4',
       // lang: 'de', // Quasar language
 
-      // all: true, // --- includes everything; for dev only!
+      all: true, // --- includes everything; for dev only!
 
-      components: [
-        'QAvatar',
-        'QBadge',
-        'QBanner',
-        'QBtn',
-        'QCard',
-        'QCardActions',
-        'QCardSection',
-        'QCheckbox',
-        'QColor',
-        'QDate',
-        'QDialog',
-        'QDrawer',
-        'QExpansionItem',
-        'QField',
-        'QForm',
-        'QHeader',
-        'QIcon',
-        'QInput',
-        'QItem',
-        'QItemLabel',
-        'QItemSection',
-        'QLayout',
-        'QList',
-        'QMenu',
-        'QPage',
-        'QPageContainer',
-        'QPageScroller',
-        'QPopupProxy',
-        'QRadio',
-        'QRange',
-        'QResizeObserver',
-        'QRouteTab',
-        'QScrollArea',
-        'QSelect',
-        'QSeparator',
-        'QSlider',
-        'QSpace',
-        'QSplitter',
-        'QTab',
-        'QTabPanel',
-        'QTabPanels',
-        'QTabs',
-        'QToggle',
-        'QToolbar',
-        'QToolbarTitle',
-        'QTooltip'
-      ],
+      // components: [
+      //   'QAvatar',
+      //   'QBadge',
+      //   'QBanner',
+      //   'QBtn',
+      //   'QCard',
+      //   'QCardActions',
+      //   'QCardSection',
+      //   'QCheckbox',
+      //   'QColor',
+      //   'QDate',
+      //   'QDialog',
+      //   'QDrawer',
+      //   'QExpansionItem',
+      //   'QField',
+      //   'QForm',
+      //   'QHeader',
+      //   'QIcon',
+      //   'QInput',
+      //   'QItem',
+      //   'QItemLabel',
+      //   'QItemSection',
+      //   'QLayout',
+      //   'QList',
+      //   'QMenu',
+      //   'QPage',
+      //   'QPageContainer',
+      //   'QPageScroller',
+      //   'QPopupProxy',
+      //   'QRadio',
+      //   'QRange',
+      //   'QResizeObserver',
+      //   'QRouteTab',
+      //   'QScrollArea',
+      //   'QSelect',
+      //   'QSeparator',
+      //   'QSlider',
+      //   'QSpace',
+      //   'QSplitter',
+      //   'QTab',
+      //   'QTabPanel',
+      //   'QTabPanels',
+      //   'QTabs',
+      //   'QToggle',
+      //   'QToolbar',
+      //   'QToolbarTitle',
+      //   'QTooltip'
+      // ],
 
       directives: [
         'ClosePopup',
@@ -124,17 +127,12 @@ module.exports = function (ctx) {
       },
 
       chainWebpack (chain) {
-        if (ctx.dev === true) {
-          chain.resolve.alias.merge({
-            '@quasar/quasar-ui-qcalendar/dist/api/QCalendar.json': path.resolve(__dirname, '../ui/src/components/QCalendar.json'),
-            '@quasar/quasar-ui-qcalendar/dist/api/timestamp.json': path.resolve(__dirname, '../ui/src/utils/timestamp.json'),
-          })
-        }
         chain.resolve.alias.merge({
-          'ui': path.resolve(__dirname, '../ui/src/index.js'),
+          ui: path.resolve(__dirname, '../ui/src/index.js'),
           '@quasar/quasar-ui-qcalendar': path.resolve(__dirname, '../ui'),
-          'sass': path.resolve(__dirname, '../ui/src/index.sass')
-        }) 
+          sass: path.resolve(__dirname, '../ui/src/index.sass'),
+          examples: path.resolve(__dirname, './src/examples')
+        })
       }
     },
 
@@ -171,29 +169,29 @@ module.exports = function (ctx) {
         theme_color: '#027be3',
         icons: [
           {
-            'src': 'statics/icons/icon-128x128.png',
-            'sizes': '128x128',
-            'type': 'image/png'
+            src: 'statics/icons/icon-128x128.png',
+            sizes: '128x128',
+            type: 'image/png'
           },
           {
-            'src': 'statics/icons/icon-192x192.png',
-            'sizes': '192x192',
-            'type': 'image/png'
+            src: 'statics/icons/icon-192x192.png',
+            sizes: '192x192',
+            type: 'image/png'
           },
           {
-            'src': 'statics/icons/icon-256x256.png',
-            'sizes': '256x256',
-            'type': 'image/png'
+            src: 'statics/icons/icon-256x256.png',
+            sizes: '256x256',
+            type: 'image/png'
           },
           {
-            'src': 'statics/icons/icon-384x384.png',
-            'sizes': '384x384',
-            'type': 'image/png'
+            src: 'statics/icons/icon-384x384.png',
+            sizes: '384x384',
+            type: 'image/png'
           },
           {
-            'src': 'statics/icons/icon-512x512.png',
-            'sizes': '512x512',
-            'type': 'image/png'
+            src: 'statics/icons/icon-512x512.png',
+            sizes: '512x512',
+            type: 'image/png'
           }
         ]
       }

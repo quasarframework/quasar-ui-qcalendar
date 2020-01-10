@@ -24,3 +24,9 @@ yarn-error.log*
 
 # Other
 /src/components/QCalendar.json
+/src/utils/timestamp.json
+
+# Testing
+/test
+.env.jest
+jest.config.js

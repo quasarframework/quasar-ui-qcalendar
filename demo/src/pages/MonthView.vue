@@ -1,42 +1,47 @@
 <template>
   <div class="q-markdown">
+    <q-markdown>
+::: warning
+The ability to use Codepen was recently added to the examples. There are differences in the UMD version of QCalendar, some examples won't work without a bit of manual intervention. Be patient while we get the kinks worked out and automate the necessary changes.
+:::
+    </q-markdown>
     <example-title title="Month View" />
-    <example-card title="Basic" name="MonthViewBasic" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewBasic.vue').default)" />
-    <example-card title="Color" name="MonthViewColor" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewColor.vue').default)" />
-    <example-card title="First Day Monday" name="MonthViewMondayFirstDay" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewMondayFirstDay.vue').default)" />
-    <example-card title="5 Day Work Week" name="MonthViewFiveDayWorkWeek" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewFiveDayWorkWeek.vue').default)" />
-    <example-card title="Hide Header" name="MonthViewHideHeader" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewHideHeader.vue').default)" />
-    <example-card title="Disabled Days" name="MonthViewDisabledDays" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewDisabledDays.vue').default)">
+    <example-viewer title="Basic" file="MonthViewBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Color" file="MonthViewColor" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="First Day Monday" file="MonthViewMondayFirstDay" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="5 Day Work Week" file="MonthViewFiveDayWorkWeek" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Hide Header" file="MonthViewHideHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Disabled Days" file="MonthViewDisabledDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 When the property `disabled-days` has an array of disabled days, you can hook into the `day-style` property to change the background color of the disabled day.
       </q-markdown>
-    </example-card>
+    </example-viewer>
 
-    <example-card title="Now" name="MonthViewNow" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewNow.vue').default)" />
-    <example-card title="Work Weeks" name="MonthViewWorkWeekNumbers" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewWorkWeekNumbers.vue').default)">
+    <example-viewer title="Now" file="MonthViewNow" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Work Weeks" file="MonthViewWorkWeekNumbers" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 `show-work-weeks` is available only for month view.
       </q-markdown>
-    </example-card>
+    </example-viewer>
 
-    <example-card title="Short Weekday Label" name="MonthViewShortWeekdayLabel" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewShortWeekdayLabel.vue').default)" />
-    <example-card title="Short Month Label" name="MonthViewShortMonthLabel" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewShortMonthLabel.vue').default)" />
-    <example-card title="Show Day of Year Label" name="MonthViewShowDayOfYearLabel" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewShowDayOfYearLabel.vue').default)">
+    <example-viewer title="Short Weekday Label" file="MonthViewShortWeekdayLabel" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Short Month Label" file="MonthViewShortMonthLabel" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Show Day of Year Label" file="MonthViewShowDayOfYearLabel" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 `show-day-of-year-label` is available only for month view.
       </q-markdown>
-    </example-card>
+    </example-viewer>
 
-    <example-card title="Day Height" name="MonthViewDayHeight" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewDayHeight.vue').default)">
+    <example-viewer title="Day Height" file="MonthViewDayHeight" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 `day-height` is available only for month view.
 The example below is setting the `day-height` to `100`, the default is `0`, which tells the calendar component to figure out it's own height.
       </q-markdown>
-    </example-card>
+    </example-viewer>
 
-    <example-card title="Prev/Next" name="MonthViewPrevNext" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewPrevNext.vue').default)" />
-    <example-card title="Swipe" name="MonthViewSwipe" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSwipe.vue').default)" />
-    <example-card title="Multi-Day Selection" name="MonthViewSelection" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSelection.vue').default)">
+    <example-viewer title="Prev/Next" file="MonthViewPrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Swipe" file="MonthViewSwipe" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Multi-Day Selection" file="MonthViewSelection" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 The example below shows how to use the QCalendar to create a multi-day selector. The critical aspect of this is the `selected-start-end-dates` property. This takes an array of two dates (the first should be less or equal to the last). This property really doesn't do much, except to keep the calendar reactive, so that the `day-style` property can be used to style the selected days.
 
@@ -44,9 +49,9 @@ For the example below, click a day, and while holding the mouse down, move to a 
 
 Keep in mind that the functionality below won't work with swipe actions.
       </q-markdown>
-    </example-card>
+    </example-viewer>
 
-    <example-card title="Slots (day)" name="MonthViewSlots" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSlots.vue').default)">
+    <example-viewer title="Slots (day)" file="MonthViewSlots" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 The `#day` slot allows you to write anything into the body of the day. To avoid writing on top of the `day-label` add the css class `.q-event` to your item which adds a top margin (and also works for mini-mode).
 
@@ -72,20 +77,20 @@ For slots that return `day` or `timestamp`, it looks like this:
 }
 ```
       </q-markdown>
-    </example-card>
-    <example-card title="Slots (week)" name="MonthViewWeekSlot" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewWeekSlot.vue').default)">
+    </example-viewer>
+    <example-viewer title="Slots (week)" file="MonthViewWeekSlot" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 The example below uses the **#week** slot (v1.3.2). It's a bit more difficult to work with than the **#day-body** slot, but allows you to have your devland events displayed in a contiguous manner. Check out the sources to see how it is accomplished.
 ::: warning
 Do not mix #day-body and #week slots or you will have overlapping results.
 :::
       </q-markdown>
-    </example-card>
-    <example-card title="Theme" name="MonthViewTheme" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewTheme.vue').default)" />
+    </example-viewer>
+    <example-viewer title="Theme" file="MonthViewTheme" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Mini-Mode" />
     <q-markdown>
-Mini-Mode is a special behavior for QCalendar month view. The property is `mini-mode` and can be set to `true` or `auto`. When set to `true` mini-mode is always on. When set to `auto`, mini-mode will use the `breakpoint` property to determine when to go into mini-mode.
+Mini-Mode is a special behavior for QCalendar **month** view. The property is `mini-mode` and can be set to `true` or `auto`. When set to `true` mini-mode is always on. When set to `auto`, mini-mode will use the `breakpoint` property to determine when to go into mini-mode.
 
 When `mini-mode="auto"`, this works for the width of the screen, not the width of QCalendar. If you need to control mini-mode dynamically, then you need to set `true` or `false` based on your own calculations.
 
@@ -103,44 +108,48 @@ Also, when in `mini-mode` there are some things to be aware of:
 Also, regardless of `mini-mode` all slots associated with month view now have additional slotted data: `miniMode`, which is either set to `true` or `false`.
     </q-markdown>
 
-    <example-card title="Mini-Mode - Basic" name="MonthViewBasicMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewBasicMiniMode.vue').default)" />
-    <example-card title="Mini-Mode - Disabled Days" name="MonthViewDisabledDaysMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewDisabledDaysMiniMode.vue').default)" />
-    <example-card title="Mini-Mode - 5 Day Work Week" name="MonthViewFiveDayWorkWeekMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewFiveDayWorkWeekMiniMode.vue').default)" />
-    <example-card title="Mini-Mode - Work Week Numbers" name="MonthViewWorkWeekNumbersMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewWorkWeekNumbersMiniMode.vue').default)" />
-    <example-card title="Mini-Mode - Selection" name="MonthViewSelectionMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSelectionMiniMode.vue').default)">
+    <example-viewer title="Mini-Mode - Basic" file="MonthViewBasicMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Mini-Mode - Disabled Days" file="MonthViewDisabledDaysMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Mini-Mode - 5 Day Work Week" file="MonthViewFiveDayWorkWeekMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Mini-Mode - Work Week Numbers" file="MonthViewWorkWeekNumbersMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Mini-Mode - Selection" file="MonthViewSelectionMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 There are some considerations when using mini-mode selections. There are 3 special classes: `.q-selected-day-first`, `.q-selected-day` and `.q-selected-day-last` in conjunction with the `day-class` property. These will help you create a selector compliant with [Material Design](https://material.io/components/pickers/#anatomy). See examples below for usage.
       </q-markdown>
-    </example-card>
-    <example-card title="Mini-Mode - Multi-Month Selection" name="MonthViewMultiMonthSelectionMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewMultiMonthSelectionMiniMode.vue').default)">
+    </example-viewer>
+    <example-viewer title="Mini-Mode - Multi-Month Selection" file="MonthViewMultiMonthSelectionMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 Using the property `short-weekday-label` while in `mini-mode` gives an even shorter weekday label than normal.
       </q-markdown>
-    </example-card>
+    </example-viewer>
 
-    <example-card title="Mini-Mode - Slots (day)" name="MonthViewSlotsMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewSlotsMiniMode.vue').default)" />
-    <example-card title="Mini-Mode - Theme" name="MonthViewThemeMiniMode" :tag-parts="getTagParts(require('!!raw-loader!../examples/MonthViewThemeMiniMode.vue').default)" />
+    <example-viewer title="Mini-Mode - Slots (day)" file="MonthViewSlotsMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Mini-Mode - Theme" file="MonthViewThemeMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
   </div>
 </template>
 
 <script>
 import ExampleTitle from '../components/ExampleTitle'
-import ExampleCard from '../components/ExampleCard'
 import { slugify } from 'assets/page-utils'
-import { getTagParts } from '@quasar/quasar-ui-qmarkdown'
+import { version } from 'ui'
 
 export default {
   name: 'MonthView',
 
   components: {
-    ExampleTitle,
-    ExampleCard
+    ExampleTitle
   },
 
   data () {
     return {
-      tempToc: []
+      tempToc: [],
+      locationUrl: 'https://github.com/quasarframework/quasar-ui-qcalendar/tree/dev/demo/src/examples/',
+      jsPaths: [`https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@${version}/dist/index.umd.min.js`],
+      cssPaths: [
+        `https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@${version}/dist/index.min.css`,
+        'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.0/css/all.css'
+      ]
     }
   },
 
@@ -193,10 +202,12 @@ export default {
   },
 
   methods: {
-    getTagParts,
-
     addToToc (name, level = 1) {
-      const slug = slugify(name)
+      let n = name
+      if (level > 1) {
+        n = 'example-' + n
+      }
+      const slug = slugify(n)
       this.tempToc.push({
         children: [],
         id: slug,
@@ -207,12 +218,3 @@ export default {
   }
 }
 </script>
-
-<style lang="sass">
-.example-page
-  padding: 16px 46px
-  font-weight: 300
-  max-width: 900px
-  margin-left: auto
-  margin-right: auto
-</style>

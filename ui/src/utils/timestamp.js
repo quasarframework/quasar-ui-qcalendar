@@ -1,6 +1,6 @@
 import { date } from 'quasar'
 
-export const PARSE_REGEX = /^(\d{4})-(\d{1,2})(-(\d{1,2}))?([^\d]+(\d{1,2}))?(:(\d{1,2}))?(:(\d{1,2}))?$/
+export const PARSE_REGEX = /^(\d{4})-(\d{1,2})(-(\d{1,2}))?([^\d]+(\d{1,2}))?(:(\d{1,2}))?(:(\d{1,2}))?(.(\d{1,3}))?$/
 export const PARSE_TIME = /(\d\d?)(:(\d\d?)|)(:(\d\d?)|)/
 
 export const DAYS_IN_MONTH = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
@@ -37,20 +37,20 @@ export const Timestamp = {
   future: false,  // if timestamp is in the future (based on `now` property)
   disabled: false // if timestamp is disabled
 }
-/* eslint-enable no-multi-spaces */
 
 export const TimeObject = {
-  hour: 0, // Number
+  hour: 0,  // Number
   minute: 0 // Number
 }
+/* eslint-enable no-multi-spaces */
 
 export function getStartOfWeek (timestamp, weekdays, today) {
-  if (timestamp.day === 1 || timestamp.weekday === 0) {
-    while (!weekdays.includes(timestamp.weekday)) {
-      nextDay(timestamp)
+  const start = copyTimestamp(timestamp)
+  if (start.day === 1 || start.weekday === 0) {
+    while (!weekdays.includes(start.weekday)) {
+      nextDay(start)
     }
   }
-  const start = copyTimestamp(timestamp)
   findWeekday(start, weekdays[0], prevDay, weekdays.length)
   updateFormatted(start)
   if (today) {
@@ -60,14 +60,14 @@ export function getStartOfWeek (timestamp, weekdays, today) {
 }
 
 export function getEndOfWeek (timestamp, weekdays, today) {
+  const end = copyTimestamp(timestamp)
   // is last day of month?
-  const lastDay = daysInMonth(timestamp.year, timestamp.month)
-  if (lastDay === timestamp.day || timestamp.weekday === 6) {
-    while (!weekdays.includes(timestamp.weekday)) {
-      prevDay(timestamp)
+  const lastDay = daysInMonth(end.year, end.month)
+  if (lastDay === end.day || end.weekday === 6) {
+    while (!weekdays.includes(end.weekday)) {
+      prevDay(end)
     }
   }
-  const end = copyTimestamp(timestamp)
   findWeekday(end, weekdays[weekdays.length - 1], nextDay, weekdays.length)
   updateFormatted(end)
   if (today) {
@@ -193,7 +193,7 @@ export function diffTimestamp (ts1, ts2, strict) {
     // utc2 - utc1 < 0  -> utc2 < utc1 ->   NO: utc1 >= utc2
     return 0
   }
-  return Math.floor((utc2 - utc1) / MILLISECONDS_IN_DAY)
+  return utc2 - utc1
 }
 
 export function updateRelative (timestamp, now, time = false) {
@@ -276,20 +276,11 @@ export function getDayOfYear (timestamp) {
 
 export function getWorkWeek (timestamp) {
   if (timestamp.year === 0) return
-  const ts = new Date(Date.UTC(timestamp.year, timestamp.month - 1, timestamp.day, 0, 0))
+  const ts = makeDate(timestamp)
   return date.getWeekOfYear(ts)
 }
 
 export function getWeekday (timestamp) {
-  // [bug] this code has issues. If 1st day of the month is 1 day of week
-  // it comes back with day of week as 7.
-  // if (timestamp.hasDay) {
-  //   const ts = new Date(Date.UTC(timestamp.year, timestamp.month - 1, timestamp.day, 0, 0))
-  //   return date.getDayOfWeek(ts)
-  // }
-
-  // return timestamp.weekday
-
   if (timestamp.hasDay) {
     const floor = Math.floor
     const day = timestamp.day
@@ -340,18 +331,8 @@ export function getTime (timestamp) {
   return `${padNumber(timestamp.hour, 2)}:${padNumber(timestamp.minute, 2)}`
 }
 
-export function nextMinutes (timestamp, minutes) {
-  timestamp.minute += minutes
-  while (timestamp.minute > MINUTES_IN_HOUR) {
-    timestamp.minute -= MINUTES_IN_HOUR
-    ++timestamp.hour
-    if (timestamp.hour >= HOURS_IN_DAY) {
-      nextDay(timestamp)
-      timestamp.hour = FIRST_HOUR
-    }
-  }
-
-  return timestamp
+export function getDateTime (timestamp) {
+  return getDate(timestamp) + ' ' + getTime(timestamp)
 }
 
 export function nextDay (timestamp) {
@@ -476,15 +457,179 @@ export function createNativeLocaleFormatter (locale, getOptions) {
   return (timestamp, short) => {
     try {
       const intlFormatter = new Intl.DateTimeFormat(locale || void 0, getOptions(timestamp, short))
-      return intlFormatter.format(new Date(Date.UTC(timestamp.year, timestamp.month - 1, timestamp.day, timestamp.hour, timestamp.minute)))
+      return intlFormatter.format(makeDateTime(timestamp))
     } catch (e) {
       return ''
     }
   }
 }
 
+export function makeDate (timestamp) {
+  return new Date(Date.UTC(timestamp.year, timestamp.month - 1, timestamp.day, 0, 0))
+}
+
+export function makeDateTime (timestamp) {
+  return new Date(Date.UTC(timestamp.year, timestamp.month - 1, timestamp.day, timestamp.hour, timestamp.minute))
+}
+
 export function validateNumber (input) {
   return isFinite(parseInt(input, 10))
+}
+
+export function isBetweenDates (timestamp, startTimestamp, endTimestamp, useTime = false) {
+  const cd = parseInt(getDayIdentifier(timestamp) + String(useTime === true ? getTimeIdentifier(timestamp) : ''), 10)
+  const sd = parseInt(getDayIdentifier(startTimestamp) + String(useTime === true ? getTimeIdentifier(startTimestamp) : ''), 10)
+  const ed = parseInt(getDayIdentifier(endTimestamp) + String(useTime === true ? getTimeIdentifier(endTimestamp) : ''), 10)
+
+  return cd >= sd && cd <= ed
+}
+
+export function isOverlappingDates (startTimestamp, endTimestamp, firstTimestamp, lastTimestamp) {
+  const start = getDayIdentifier(startTimestamp)
+  const end = getDayIdentifier(endTimestamp)
+  const first = getDayIdentifier(firstTimestamp)
+  const last = getDayIdentifier(lastTimestamp)
+  return (
+    (start >= first && start <= last) || // overlap left
+    (end >= first && end <= last) || // overlap right
+    (first >= start && end >= last) // surrounding
+  )
+}
+
+export function addToDate (ts, options) {
+  let minType
+  __forEachObject(options, (value, key) => {
+    if (ts[key] !== void 0) {
+      ts[key] += parseInt(value, 10)
+      const indexType = NORMALIZE_TYPES.indexOf(key)
+      if (indexType !== -1) {
+        if (minType === void 0) {
+          minType = indexType
+        } else {
+          minType = Math.min(indexType, minType)
+        }
+      }
+    }
+  })
+
+  // normalize timestamp
+  if (minType !== void 0) {
+    __normalize(ts, NORMALIZE_TYPES[minType])
+  }
+  return ts
+}
+
+const NORMALIZE_TYPES = ['minute', 'hour', 'day', 'month']
+
+// addToDate helper
+function __forEachObject (obj, cb) {
+  Object.keys(obj).forEach(k => cb(obj[k], k))
+}
+
+// normalize minutes
+function __normalizeMinute (ts) {
+  if (ts.minute >= MINUTES_IN_HOUR || ts.minute < 0) {
+    const hours = Math.floor(ts.minute / MINUTES_IN_HOUR)
+    ts.minute -= hours * MINUTES_IN_HOUR
+    ts.hour += hours
+    __normalizeHour(ts)
+  }
+  return ts
+}
+
+// normalize hours
+function __normalizeHour (ts) {
+  if (ts.hour >= HOURS_IN_DAY || ts.hour < 0) {
+    const days = Math.floor(ts.hour / HOURS_IN_DAY)
+    ts.hour -= days * HOURS_IN_DAY
+    ts.day += days
+    __normalizeDay(ts)
+  }
+  return ts
+}
+
+// normalize days
+function __normalizeDay (ts) {
+  __normalizeMonth(ts)
+  let dim = daysInMonth(ts.year, ts.month)
+  if (ts.day > dim) {
+    ++ts.month
+    if (ts.month > MONTH_MAX) {
+      __normalizeMonth(ts)
+    }
+    let days = ts.day - dim
+    dim = daysInMonth(ts.year, ts.month)
+    do {
+      if (days > dim) {
+        ++ts.month
+        if (ts.month > MONTH_MAX) {
+          __normalizeMonth(ts)
+        }
+        days -= dim
+        dim = daysInMonth(ts.year, ts.month)
+      }
+    } while (days > dim)
+    ts.day = days
+  } else if (ts.day <= 0) {
+    let days = -1 * ts.day
+    --ts.month
+    if (ts.month <= 0) {
+      __normalizeMonth(ts)
+    }
+    dim = daysInMonth(ts.year, ts.month)
+    do {
+      if (days > dim) {
+        days -= dim
+        --ts.month
+        if (ts.month <= 0) {
+          __normalizeMonth(ts)
+        }
+        dim = daysInMonth(ts.year, ts.month)
+      }
+    } while (days > dim)
+    ts.day = dim - days
+  }
+  return ts
+}
+
+// normalize months
+function __normalizeMonth (ts) {
+  if (ts.month > MONTH_MAX) {
+    const years = Math.floor(ts.month / MONTH_MAX)
+    ts.month = ts.month % MONTH_MAX
+    ts.year += years
+  } else if (ts.month < MONTH_MIN) {
+    ts.month += MONTH_MAX
+    --ts.year
+  }
+  return ts
+}
+
+// normalize all
+function __normalize (ts, type) {
+  switch (type) {
+    case 'minute':
+      return __normalizeMinute(ts)
+    case 'hour':
+      return __normalizeHour(ts)
+    case 'day':
+      return __normalizeDay(ts)
+    case 'month':
+      return __normalizeMonth(ts)
+  }
+}
+
+export function daysBetween (ts1, ts2) {
+  const diff = diffTimestamp(ts1, ts2, true)
+  return Math.floor(diff / MILLISECONDS_IN_DAY)
+}
+
+export function weeksBetween (ts1, ts2) {
+  let t1 = copyTimestamp(ts1)
+  let t2 = copyTimestamp(ts2)
+  t1 = findWeekday(t1, 0)
+  t2 = findWeekday(t2, 6)
+  return Math.ceil(daysBetween(t1, t2) / DAYS_IN_WEEK)
 }
 
 export default {
@@ -534,7 +679,7 @@ export default {
   padNumber,
   getDate,
   getTime,
-  nextMinutes,
+  getDateTime,
   nextDay,
   prevDay,
   relativeDays,
@@ -543,5 +688,12 @@ export default {
   createDayList,
   createIntervalList,
   createNativeLocaleFormatter,
-  validateNumber
+  makeDate,
+  makeDateTime,
+  validateNumber,
+  isBetweenDates,
+  isOverlappingDates,
+  daysBetween,
+  weeksBetween,
+  addToDate
 }

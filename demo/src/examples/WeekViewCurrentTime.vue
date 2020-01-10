@@ -1,23 +1,24 @@
 <template>
-  <q-calendar
-  ref="calendar"
-    v-model="currentDate"
-    view="week"
-    locale="en-us"
-    style="height: 400px;"
-  >
-    <!-- eslint-disable vue/no-unused-vars -->
-    <template #day-container="{ date }">
-      <div class="week-view-current-time-indicator" :style="style" />
-      <div class="week-view-current-time-line" :style="style" />
-    </template>
-  </q-calendar>
+  <div style="max-width: 800px; width: 100%;">
+    <q-calendar
+    ref="calendar"
+      v-model="currentDate"
+      view="week"
+      locale="en-us"
+      style="height: 400px;"
+    >
+      <!-- eslint-disable vue/no-unused-vars -->
+      <template #day-container="{ date }">
+        <div class="week-view-current-time-indicator" :style="style" />
+        <div class="week-view-current-time-line" :style="style" />
+      </template>
+    </q-calendar>
+  </div>
 </template>
 
 <script>
-import {
-  parseDate
-} from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
+// normally you would not import "all" of QCalendar, but is needed for this example to work with UMD (codepen)
+import QCalendar from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
 
 export default {
   data () {
@@ -52,7 +53,7 @@ export default {
   methods: {
     adjustCurrentTime () {
       const now = new Date()
-      const p = parseDate(now)
+      const p = QCalendar.parseDate(now)
       this.currentDate = p.date
       this.currentTime = p.time
       this.timeStartPos = this.$refs.calendar.timeStartPos(this.currentTime)

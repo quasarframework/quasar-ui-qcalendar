@@ -1,19 +1,21 @@
 <template>
-  <q-calendar
-    v-model="selectedDate"
-    view="scheduler"
-    :resources="resources"
-    :resource-width="160"
-    locale="en-us"
-    style="height: 500px;"
-  >
-    <!-- eslint-disable vue/no-unused-vars -->
-    <template #scheduler-resource="{ resource, index }">
-      <div class="col-12">
-        <q-btn flat class="fit" :icon="getResourceImage(resource)" :label="resource.label"/>
-      </div>
-    </template>
-  </q-calendar>
+  <div style="max-width: 800px; width: 100%;">
+    <q-calendar
+      v-model="selectedDate"
+      view="scheduler"
+      :resources="resources"
+      :resource-width="160"
+      locale="en-us"
+      style="height: 500px;"
+    >
+      <!-- eslint-disable vue/no-unused-vars -->
+      <template #scheduler-resource="{ resource, index }">
+        <div class="col-12">
+          <q-btn flat class="fit" :icon="getResourceImage(resource)" :label="resource.label"/>
+        </div>
+      </template>
+    </q-calendar>
+  </div>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="max-width: 800px; width: 100%;">
     <div class="q-gutter-sm">
       <q-checkbox v-model="mobile" label="Use Touch (set if on mobile)" />
     </div>
@@ -37,17 +37,15 @@
 </template>
 
 <script>
-import {
-  getDayIdentifier,
-  parseDate
-} from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
+// normally you would not import "all" of QCalendar, but is needed for this example to work with UMD (codepen)
+import QCalendar from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
 
 const CURRENT_MONTH = new Date()
 
 function getCurrentMonth (month) {
   const newDay = new Date(CURRENT_MONTH)
   newDay.setMonth(month)
-  const tm = parseDate(newDay)
+  const tm = QCalendar.parseDate(newDay)
   return tm.date
 }
 
@@ -82,13 +80,13 @@ export default {
     },
     anchorDayIdentifier () {
       if (this.anchorTimestamp !== '') {
-        return getDayIdentifier(this.anchorTimestamp)
+        return QCalendar.getDayIdentifier(this.anchorTimestamp)
       }
       return false
     },
     otherDayIdentifier () {
       if (this.otherTimestamp !== '') {
-        return getDayIdentifier(this.otherTimestamp)
+        return QCalendar.getDayIdentifier(this.otherTimestamp)
       }
       return false
     },
@@ -110,7 +108,7 @@ export default {
     },
 
     getBetween (timestamp) {
-      const nowIdentifier = getDayIdentifier(timestamp)
+      const nowIdentifier = QCalendar.getDayIdentifier(timestamp)
       return {
         'q-selected-day-first': this.lowIdentifier === nowIdentifier,
         'q-selected-day': this.lowIdentifier <= nowIdentifier && this.highIdentifier >= nowIdentifier,

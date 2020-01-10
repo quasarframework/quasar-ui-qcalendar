@@ -1,66 +1,122 @@
 <template>
-  <q-calendar
-    v-model="selectedDate"
-    view="day"
-    locale="en-us"
-    style="height: 400px;"
-    class="calendar-container"
-  >
-    <template #day-header="{ date }">
-      <div class="row justify-center">
-        <template v-for="(event, index) in eventsMap[date]">
+  <div style="max-width: 800px; width: 100%;">
+    <q-calendar
+      v-model="selectedDate"
+      view="day"
+      locale="en-us"
+      class="calendar-container"
+      style="height: 400px;"
+    >
+      <template #day-header="{ date }">
+        <div class="row justify-center">
+          <template v-for="(event, index) in eventsMap[date]">
+            <q-badge
+              v-if="!event.time"
+              :key="index"
+              style="width: 100%; cursor: pointer;"
+              :class="badgeClasses(event, 'header')"
+              :style="badgeStyles(event, 'header')"
+            >
+              <q-icon v-if="event.icon" :name="event.icon" class="q-mr-xs"></q-icon><span class="ellipsis">{{ event.title }}</span>
+            </q-badge>
+            <q-badge
+              v-else
+              :key="index"
+              class="q-ma-xs"
+              :class="badgeClasses(event, 'header')"
+              :style="badgeStyles(event, 'header')"
+              style="width: 10px; max-width: 10px; height: 10px; max-height: 10px"
+            />
+          </template>
+        </div>
+      </template>
+
+      <template #day-body="{ date, timeStartPos, timeDurationHeight }">
+        <template v-for="(event, index) in getEvents(date)">
           <q-badge
-            v-if="!event.time"
+            v-if="event.time"
             :key="index"
-            style="width: 100%; cursor: pointer;"
-            class="ellipsis"
-            :class="badgeClasses(event, 'header')"
-            :style="badgeStyles(event, 'header')"
+            class="my-event justify-center ellipsis"
+            :class="badgeClasses(event, 'body')"
+            :style="badgeStyles(event, 'body', timeStartPos, timeDurationHeight)"
           >
             <q-icon v-if="event.icon" :name="event.icon" class="q-mr-xs"></q-icon><span class="ellipsis">{{ event.title }}</span>
           </q-badge>
-          <q-badge
-            v-else
-            :key="index"
-            class="q-ma-xs"
-            :class="badgeClasses(event, 'header')"
-            :style="badgeStyles(event, 'header')"
-            style="width: 10px; max-width: 10px; height: 10px; max-height: 10px"
-          />
         </template>
-      </div>
-    </template>
-
-    <template #day-body="{ date, timeStartPos, timeDurationHeight }">
-      <template v-for="(event, index) in getEvents(date)">
-        <q-badge
-          v-if="event.time"
-          :key="index"
-          class="my-event justify-center ellipsis"
-          :class="badgeClasses(event, 'body')"
-          :style="badgeStyles(event, 'body', timeStartPos, timeDurationHeight)"
-        >
-          <q-icon v-if="event.icon" :name="event.icon" class="q-mr-xs"></q-icon><span class="ellipsis">{{ event.title }}</span>
-        </q-badge>
       </template>
-    </template>
-  </q-calendar>
+    </q-calendar>
+  </div>
 </template>
 
 <script>
-import { date, colors } from 'quasar'
-
-import {
-  parseDate
-} from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
+// normally you would not import "all" of QCalendar, but is needed for this example to work with UMD (codepen)
+import QCalendar from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
 
 const CURRENT_DAY = new Date()
 
 function getCurrentDay (day) {
   const newDay = new Date(CURRENT_DAY)
   newDay.setDate(day)
-  const tm = parseDate(newDay)
+  const tm = QCalendar.parseDate(newDay)
   return tm.date
+}
+
+const reRGBA = /^\s*rgb(a)?\s*\((\s*(\d+)\s*,\s*?){2}(\d+)\s*,?\s*([01]?\.?\d*?)?\s*\)\s*$/
+
+function textToRgb (color) {
+  if (typeof color !== 'string') {
+    throw new TypeError('Expected a string')
+  }
+
+  const m = reRGBA.exec(color)
+  if (m) {
+    const rgb = {
+      r: Math.min(255, parseInt(m[2], 10)),
+      g: Math.min(255, parseInt(m[3], 10)),
+      b: Math.min(255, parseInt(m[4], 10))
+    }
+    if (m[1]) {
+      rgb.a = Math.min(1, parseFloat(m[5]))
+    }
+    return rgb
+  }
+  return hexToRgb(color)
+}
+
+function hexToRgb (hex) {
+  if (typeof hex !== 'string') {
+    throw new TypeError('Expected a string')
+  }
+
+  hex = hex.replace(/^#/, '')
+
+  if (hex.length === 3) {
+    hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2]
+  } else if (hex.length === 4) {
+    hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2] + hex[3] + hex[3]
+  }
+
+  const num = parseInt(hex, 16)
+
+  return hex.length > 6
+    ? { r: num >> 24 & 255, g: num >> 16 & 255, b: num >> 8 & 255, a: Math.round((num & 255) / 2.55) }
+    : { r: num >> 16, g: num >> 8 & 255, b: num & 255 }
+}
+
+function luminosity (color) {
+  if (typeof color !== 'string' && (!color || color.r === void 0)) {
+    throw new TypeError('Expected a string or a {r, g, b} object as color')
+  }
+
+  const
+    rgb = typeof color === 'string' ? textToRgb(color) : color,
+    r = rgb.r / 255,
+    g = rgb.g / 255,
+    b = rgb.b / 255,
+    R = r <= 0.03928 ? r / 12.92 : Math.pow((r + 0.055) / 1.055, 2.4),
+    G = g <= 0.03928 ? g / 12.92 : Math.pow((g + 0.055) / 1.055, 2.4),
+    B = b <= 0.03928 ? b / 12.92 : Math.pow((b + 0.055) / 1.055, 2.4)
+  return 0.2126 * R + 0.7152 * G + 0.0722 * B
 }
 
 export default {
@@ -84,7 +140,7 @@ export default {
         {
           title: 'Meeting',
           details: 'Time to pitch my idea to the company',
-          date: getCurrentDay(8),
+          date: getCurrentDay(CURRENT_DAY.getDate()),
           time: '10:00',
           duration: 120,
           bgcolor: 'red',
@@ -93,7 +149,7 @@ export default {
         {
           title: 'Lunch',
           details: 'Company is paying!',
-          date: getCurrentDay(8),
+          date: getCurrentDay(CURRENT_DAY.getDate()),
           time: '11:30',
           duration: 90,
           bgcolor: 'teal',
@@ -174,7 +230,7 @@ export default {
       const s = {}
       if (this.isCssColor(event.bgcolor)) {
         s['background-color'] = event.bgcolor
-        s.color = colors.luminosity(event.bgcolor) > 0.5 ? 'black' : 'white'
+        s.color = luminosity(event.bgcolor) > 0.5 ? 'black' : 'white'
       }
       if (timeStartPos) {
         s.top = timeStartPos(event.time) + 'px'
@@ -187,22 +243,24 @@ export default {
     },
 
     getEvents (dt) {
+      const currentDate = QCalendar.parsed(dt)
       const events = []
       for (let i = 0; i < this.events.length; ++i) {
         let added = false
-        if (this.events[i].date === dt) {
-          if (this.events[i].time) {
+        const event = this.events[i]
+        if (event.date === dt) {
+          if (event.time) {
             if (events.length > 0) {
               // check for overlapping times
-              const startTime = new Date(this.events[i].date + ' ' + this.events[i].time)
-              const endTime = date.addToDate(startTime, { minutes: this.events[i].duration })
+              const startTime = QCalendar.parsed(event.date + ' ' + event.time)
+              const endTime = QCalendar.addToDate(startTime, { minute: event.duration })
               for (let j = 0; j < events.length; ++j) {
-                const startTime2 = new Date(events[j].date + ' ' + events[j].time)
-                const endTime2 = date.addToDate(startTime2, { minutes: events[j].duration })
-                if (date.isBetweenDates(startTime, startTime2, endTime2) || date.isBetweenDates(endTime, startTime2, endTime2)) {
+                const startTime2 = QCalendar.parsed(events[j].date + ' ' + events[j].time)
+                const endTime2 = QCalendar.addToDate(startTime2, { minute: events[j].duration })
+                if (QCalendar.isBetweenDates(startTime, startTime2, endTime2) || QCalendar.isBetweenDates(endTime, startTime2, endTime2)) {
                   events[j].side = 'left'
-                  this.events[i].side = 'right'
-                  events.push(this.events[i])
+                  event.side = 'right'
+                  events.push(event)
                   added = true
                   break
                 }
@@ -210,15 +268,15 @@ export default {
             }
           }
           if (!added) {
-            this.events[i].side = void 0
-            events.push(this.events[i])
+            event.side = void 0
+            events.push(event)
           }
-        } else if (this.events[i].days) {
+        } else if (event.days) {
           // check for overlapping dates
-          const startDate = new Date(this.events[i].date)
-          const endDate = date.addToDate(startDate, { days: this.events[i].days })
-          if (date.isBetweenDates(dt, startDate, endDate)) {
-            events.push(this.events[i])
+          const startDate = QCalendar.parsed(event.date)
+          const endDate = QCalendar.addToDate(startDate, { day: event.days })
+          if (QCalendar.isBetweenDates(currentDate, startDate, endDate)) {
+            events.push(event)
             added = true
           }
         }

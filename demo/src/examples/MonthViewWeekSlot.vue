@@ -1,43 +1,42 @@
 <template>
-  <q-calendar
-    v-model="selectedDate"
-    view="month"
-    locale="en-us"
-    :day-height="100"
-  >
-    <template #week="{ week, weekdays }">
-      <template v-for="(computedEvent, index) in getWeekEvents(week, weekdays)">
-        <q-badge
-          :key="index"
-          class="ellipsis"
-          :class="badgeClasses(computedEvent, 'day')"
-          :style="badgeStyles(computedEvent, 'day', week.length)"
-        >
-          <template v-if="computedEvent.event">
-            <q-icon :name="computedEvent.event.icon" class="q-mr-xs"></q-icon>
-            <span class="ellipsis">{{ computedEvent.event.title }}</span>
+  <div style="max-width: 800px; width: 100%;">
+    <q-calendar
+      v-model="selectedDate"
+      view="month"
+      locale="en-us"
+      :day-height="100"
+    >
+      <template #week="{ week, weekdays, miniMode }">
+        <template v-if="!miniMode">
+          <template v-for="(computedEvent, index) in getWeekEvents(week, weekdays)">
+            <q-badge
+              :key="index"
+              class="q-row-event"
+              :class="badgeClasses(computedEvent, 'day')"
+              :style="badgeStyles(computedEvent, 'day', week.length)"
+            >
+              <template v-if="computedEvent.event">
+                <q-icon :name="computedEvent.event.icon" class="q-mr-xs"></q-icon>
+                <span class="ellipsis">{{ computedEvent.event.title }}</span>
+              </template>
+            </q-badge>
           </template>
-        </q-badge>
+        </template>
       </template>
-    </template>
-  </q-calendar>
+    </q-calendar>
+  </div>
 </template>
 
 <script>
-import {
-  getDayIdentifier,
-  parsed,
-  parseDate,
-  diffTimestamp,
-  indexOf
-} from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
+// normally you would not import "all" of QCalendar, but is needed for this example to work with UMD (codepen)
+import QCalendar from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
 
 const CURRENT_DAY = new Date()
 
 function getCurrentDay (day) {
   const newDay = new Date(CURRENT_DAY)
   newDay.setDate(day)
-  const tm = parseDate(newDay)
+  const tm = QCalendar.parseDate(newDay)
   return tm.date
 }
 
@@ -147,21 +146,21 @@ export default {
     },
 
     getWeekEvents (week, weekdays) {
-      const tsFirstDay = parsed(week[0].date + ' 00:00')
-      const tsLastDay = parsed(week[week.length - 1].date + ' 23:59')
-      const firstDay = getDayIdentifier(tsFirstDay)
-      const lastDay = getDayIdentifier(tsLastDay)
+      const tsFirstDay = QCalendar.parsed(week[0].date + ' 00:00')
+      const tsLastDay = QCalendar.parsed(week[week.length - 1].date + ' 23:59')
+      const firstDay = QCalendar.getDayIdentifier(tsFirstDay)
+      const lastDay = QCalendar.getDayIdentifier(tsLastDay)
 
       const eventsWeek = []
       this.events.forEach((event, id) => {
-        const tsStartDate = parsed(event.start + ' 00:00')
-        const tsEndDate = parsed(event.end + ' 23:59')
-        const startDate = getDayIdentifier(tsStartDate)
-        const endDate = getDayIdentifier(tsEndDate)
+        const tsStartDate = QCalendar.parsed(event.start + ' 00:00')
+        const tsEndDate = QCalendar.parsed(event.end + ' 23:59')
+        const startDate = QCalendar.getDayIdentifier(tsStartDate)
+        const endDate = QCalendar.getDayIdentifier(tsEndDate)
 
         if (this.isBetweenDatesWeek(startDate, endDate, firstDay, lastDay)) {
-          const left = diffTimestamp(tsFirstDay, tsStartDate, true)
-          const right = diffTimestamp(tsEndDate, tsLastDay, true)
+          const left = QCalendar.daysBetween(tsFirstDay, tsStartDate, true)
+          const right = QCalendar.daysBetween(tsEndDate, tsLastDay, true)
 
           eventsWeek.push({
             id, // index event
@@ -203,7 +202,7 @@ export default {
         const currentAvailableDays = iEvent.left + iEvent.size
 
         if (currentAvailableDays < weekLength) {
-          const indexNextEvent = indexOf(infoWeek, e => e.id !== iEvent.id && e.left >= currentAvailableDays)
+          const indexNextEvent = QCalendar.indexOf(infoWeek, e => e.id !== iEvent.id && e.left >= currentAvailableDays)
 
           this.insertEvent(
             events,

@@ -25,7 +25,7 @@
           <q-badge
             :key="index"
             style="width: 100%; cursor: pointer; height: 16px; max-height: 16px"
-            class="ellipsis q-mb-xs"
+            class="q-mb-xs"
             :class="badgeClasses(event, 'day')"
             :style="badgeStyles(event, 'day')"
           >
@@ -40,7 +40,9 @@
 <script>
 import { date, colors } from 'quasar'
 import {
-  parseDate
+  parseDate,
+  makeDateTime,
+  parsed
 } from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
 
 const CURRENT_DAY = new Date()
@@ -175,10 +177,10 @@ export default {
           if (this.events[i].time) {
             if (events.length > 0) {
               // check for overlapping times
-              const startTime = new Date(this.events[i].date + ' ' + this.events[i].time)
+              const startTime = makeDateTime(parsed(this.events[i].date + ' ' + this.events[i].time))
               const endTime = date.addToDate(startTime, { minutes: this.events[i].duration })
               for (let j = 0; j < events.length; ++j) {
-                let startTime2 = new Date(events[j].date + ' ' + events[j].time)
+                let startTime2 = makeDateTime(parsed(events[j].date + ' ' + events[j].time))
                 let endTime2 = date.addToDate(startTime2, { minutes: events[j].duration })
                 if (date.isBetweenDates(startTime, startTime2, endTime2) || date.isBetweenDates(endTime, startTime2, endTime2)) {
                   events[j].side = 'left'
@@ -196,7 +198,7 @@ export default {
           }
         } else if (this.events[i].days) {
           // check for overlapping dates
-          let startDate = new Date(this.events[i].date)
+          let startDate = makeDateTime(parsed(this.events[i].date))
           let endDate = date.addToDate(startDate, { days: this.events[i].days })
           if (date.isBetweenDates(dt, startDate, endDate)) {
             events.push(this.events[i])

@@ -47,7 +47,7 @@ import {
   padNumber,
   getDate,
   getTime,
-  nextMinutes,
+  getDateTime,
   nextDay,
   prevDay,
   relativeDays,
@@ -56,7 +56,14 @@ import {
   createDayList,
   createIntervalList,
   createNativeLocaleFormatter,
-  validateNumber
+  makeDate,
+  makeDateTime,
+  validateNumber,
+  isBetweenDates,
+  isOverlappingDates,
+  daysBetween,
+  weeksBetween,
+  addToDate
 } from './utils/timestamp.js'
 
 import {
@@ -114,7 +121,7 @@ export {
   padNumber,
   getDate,
   getTime,
-  nextMinutes,
+  getDateTime,
   nextDay,
   prevDay,
   relativeDays,
@@ -123,7 +130,14 @@ export {
   createDayList,
   createIntervalList,
   createNativeLocaleFormatter,
+  makeDate,
+  makeDateTime,
   validateNumber,
+  isBetweenDates,
+  isOverlappingDates,
+  daysBetween,
+  weeksBetween,
+  addToDate,
   // helpers
   convertToUnit,
   indexOf
@@ -179,7 +193,7 @@ export default {
   padNumber,
   getDate,
   getTime,
-  nextMinutes,
+  getDateTime,
   nextDay,
   prevDay,
   relativeDays,
@@ -188,7 +202,14 @@ export default {
   createDayList,
   createIntervalList,
   createNativeLocaleFormatter,
+  makeDate,
+  makeDateTime,
   validateNumber,
+  isBetweenDates,
+  isOverlappingDates,
+  daysBetween,
+  weeksBetween,
+  addToDate,
   // helpers
   convertToUnit,
   indexOf,

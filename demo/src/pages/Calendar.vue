@@ -200,7 +200,7 @@
                 clearable
                 style="padding-bottom: 20px;"
               >
-                <template v-slot:append>
+                <template #append>
                   <q-icon name="extension" class="cursor-pointer">
                     <q-popup-proxy v-model="showIconPicker">
 
@@ -304,7 +304,6 @@
               <q-badge
                 :key="index"
                 style="width: 100%; cursor: pointer; height: 14px; max-height: 14px"
-                class="ellipsis"
                 :class="badgeClasses(event, 'day')"
                 :style="badgeStyles(event, 'day')"
                 @click.stop.prevent="showEvent(event)"
@@ -327,7 +326,6 @@
                 v-if="!event.time"
                 :key="index"
                 style="width: 100%; cursor: pointer; height: 14px; max-height: 14px"
-                class="ellipsis"
                 :class="badgeClasses(event, 'header')"
                 :style="badgeStyles(event, 'header')"
                 @click.stop.prevent="showEvent(event)"
@@ -357,7 +355,7 @@
               <q-badge
                 v-if="event.time"
                 :key="index"
-                class="my-event justify-center ellipsis"
+                class="my-event justify-center"
                 :class="badgeClasses(event, 'body')"
                 :style="badgeStyles(event, 'body', data.timeStartPos, data.timeDurationHeight)"
                 @click.stop.prevent="showEvent(event)"
@@ -416,18 +414,10 @@ import events from '../util/events'
 import { padTime } from '../util/time'
 import { date, colors, Platform } from 'quasar'
 import { stop, prevent, stopAndPrevent } from 'quasar/src/utils/event'
-import {
-  parsed,
-  getDayIdentifier,
-  getTimeIdentifier
-} from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
+// normally you would not import "all" of QCalendar, but is needed for this example to work with UMD (codepen)
+import QCalendar from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
 
 import 'drag-drop-touch'
-
-function timestampToDate (timestampString) {
-  const ts = parsed(timestampString)
-  return new Date(ts.year, ts.month - 1, ts.day, ts.hour, ts.minute)
-}
 
 const formDefault = {
   title: '',
@@ -792,38 +782,43 @@ export default {
       // console.log('onMoved:', moved)
     },
     getEvents (dt) {
+      const currentDate = QCalendar.parseTimestamp(dt)
       const events = []
       for (let i = 0; i < this.events.length; ++i) {
         let added = false
-        if (this.events[i].date === dt) {
-          if (this.events[i].time) {
+        const event = this.events[i]
+        if (event.date === dt) {
+          if (event.time !== void 0) {
             if (events.length > 0) {
               // check for overlapping times
-              const startTime = timestampToDate(this.events[i].date + ' ' + this.events[i].time).getTime()
-              const endTime = date.addToDate(startTime, { minutes: this.events[i].duration }).getTime()
+              const startTime = QCalendar.parseTimestamp(event.date + ' ' + event.time)
+              const endTime = QCalendar.addToDate(startTime, { minute: event.duration })
               for (let j = 0; j < events.length; ++j) {
-                const startTime2 = timestampToDate(events[j].date + ' ' + events[j].time).getTime()
-                const endTime2 = date.addToDate(startTime2, { minutes: events[j].duration }).getTime()
-                if ((startTime >= startTime2 && startTime < endTime2) || (startTime2 >= startTime && startTime2 < endTime)) {
-                  events[j].side = 'left'
-                  this.events[i].side = 'right'
-                  events.push(this.events[i])
-                  added = true
-                  break
+                const evt = events[j]
+                if (evt.time !== void 0) {
+                  const startTime2 = QCalendar.parseTimestamp(evt.date + ' ' + evt.time)
+                  const endTime2 = QCalendar.addToDate(startTime2, { minute: evt.duration })
+                  if (QCalendar.isBetweenDates(startTime, startTime2, endTime2) || QCalendar.isBetweenDates(endTime, startTime2, endTime2)) {
+                    evt.side = 'left'
+                    event.side = 'right'
+                    events.push(event)
+                    added = true
+                    break
+                  }
                 }
               }
             }
           }
           if (!added) {
-            this.events[i].side = void 0
-            events.push(this.events[i])
+            event.side = void 0
+            events.push(event)
           }
-        } else if (this.events[i].days) {
+        } else if (event.days) {
           // check for overlapping dates
-          const startDate = timestampToDate(this.events[i].date + '  00:00:00')
-          const endDate = date.addToDate(startDate, { days: this.events[i].days })
-          if (date.isBetweenDates(dt, startDate, endDate)) {
-            events.push(this.events[i])
+          const startDate = QCalendar.parseTimestamp(event.date)
+          const endDate = QCalendar.addToDate(startDate, { day: event.days })
+          if (QCalendar.isBetweenDates(currentDate, startDate, endDate)) {
+            events.push(event)
             added = true
           }
         }
@@ -833,17 +828,17 @@ export default {
     checkDateTimeStart (/* val */) {
       this.$refs.dateTimeEnd.resetValidation()
       if (this.eventForm.dateTimeStart && this.eventForm.dateTimeEnd) {
-        const timestampStart = parsed(this.eventForm.dateTimeStart)
-        const timestampEnd = parsed(this.eventForm.dateTimeEnd)
-        const dayStart = getDayIdentifier(timestampStart)
-        const dayEnd = getDayIdentifier(timestampEnd)
+        const timestampStart = QCalendar.parseTimestamp(this.eventForm.dateTimeStart)
+        const timestampEnd = QCalendar.parseTimestamp(this.eventForm.dateTimeEnd)
+        const dayStart = QCalendar.getDayIdentifier(timestampStart)
+        const dayEnd = QCalendar.getDayIdentifier(timestampEnd)
         if (dayStart < dayEnd) {
           return true
         } else if (dayStart > dayEnd) {
           return false
         } else {
-          const timeStart = getTimeIdentifier(timestampStart)
-          const timeEnd = getTimeIdentifier(timestampEnd)
+          const timeStart = QCalendar.getTimeIdentifier(timestampStart)
+          const timeEnd = QCalendar.getTimeIdentifier(timestampEnd)
           if (timeStart <= timeEnd) {
             return true
           } else {
@@ -857,17 +852,17 @@ export default {
     checkDateTimeEnd (val) {
       this.$refs.dateTimeStart.resetValidation()
       if (this.eventForm.dateTimeStart && this.eventForm.dateTimeEnd) {
-        const timestampEnd = parsed(this.eventForm.dateTimeEnd)
-        const timestampStart = parsed(this.eventForm.dateTimeStart)
-        const dayEnd = getDayIdentifier(timestampEnd)
-        const dayStart = getDayIdentifier(timestampStart)
+        const timestampEnd = QCalendar.parseTimestamp(this.eventForm.dateTimeEnd)
+        const timestampStart = QCalendar.parseTimestamp(this.eventForm.dateTimeStart)
+        const dayEnd = QCalendar.getDayIdentifier(timestampEnd)
+        const dayStart = QCalendar.getDayIdentifier(timestampStart)
         if (dayEnd > dayStart) {
           return true
         } else if (dayEnd < dayStart) {
           return false
         } else {
-          const timeEnd = getTimeIdentifier(timestampEnd)
-          const timeStart = getTimeIdentifier(timestampStart)
+          const timeEnd = QCalendar.getTimeIdentifier(timestampEnd)
+          const timeStart = QCalendar.getTimeIdentifier(timestampStart)
           if (timeEnd >= timeStart) {
             return true
           } else {
@@ -888,9 +883,9 @@ export default {
       }
     },
     getEndTime (event) {
-      let endTime = timestampToDate(event.date + ' ' + event.time + ':00')
-      endTime = date.addToDate(endTime, { minutes: event.duration })
-      endTime = date.formatDate(endTime, 'HH:mm')
+      let endTime = QCalendar.parseTimestamp(event.date + ' ' + event.time)
+      endTime = QCalendar.addToDate(endTime, { minute: event.duration })
+      endTime = QCalendar.getTime(endTime)
       return endTime
     },
     getEventDate (event) {
@@ -916,6 +911,15 @@ export default {
       }
       if (timeStartPos) {
         s.top = timeStartPos(event.time) + 'px'
+        s.position = 'absolute'
+        if (event.side !== void 0) {
+          s.width = '50%'
+          if (event.side === 'right') {
+            s.left = '50%'
+          }
+        } else {
+          s.width = '100%'
+        }
       }
       if (timeDurationHeight) {
         s.height = timeDurationHeight(event.duration) + 'px'
@@ -963,14 +967,13 @@ export default {
       this.contextDay = { ...day }
       let timestamp
       if (this.contextDay.hasTime === true) {
-        timestamp = this.getTimestamp(this.adjustTimestamp(this.contextDay))
-        const startTime = timestampToDate(timestamp)
-        const endTime = date.addToDate(startTime, { hours: 1 })
-        this.eventForm.dateTimeEnd = this.formatDate(endTime) + ' ' + this.formatTime(endTime) // endTime.toString()
+        timestamp = this.adjustTimestamp(this.contextDay)
+        const endTime = QCalendar.addToDate(timestamp, { hour: 1 })
+        this.eventForm.dateTimeEnd = QCalendar.getDateTime(endTime)
       } else {
-        timestamp = this.contextDay.date + ' 00:00'
+        timestamp = QCalendar.parseTimestamp(this.contextDay.date + ' 00:00')
       }
-      this.eventForm.dateTimeStart = timestamp
+      this.eventForm.dateTimeStart = QCalendar.getDateTime(timestamp)
       this.eventForm.allDay = this.contextDay.hasTime === false
       this.eventForm.bgcolor = '#0000FF' // starting color
       this.addEvent = true // show dialog
@@ -980,15 +983,13 @@ export default {
       this.contextDay = { ...event }
       let timestamp
       if (event.time) {
-        timestamp = event.date + ' ' + event.time
-        const startTime = timestampToDate(timestamp)
-        const endTime = date.addToDate(startTime, { minutes: event.duration })
-        this.eventForm.dateTimeStart = this.formatDate(startTime) + ' ' + this.formatTime(startTime) // endTime.toString()
-        this.eventForm.dateTimeEnd = this.formatDate(endTime) + ' ' + this.formatTime(endTime) // endTime.toString()
+        timestamp = QCalendar.parseTimestamp(event.date + ' ' + event.time)
+        const endTime = QCalendar.addToDate(timestamp, { minute: event.duration })
+        this.eventForm.dateTimeEnd = QCalendar.getDateTime(endTime)
       } else {
-        timestamp = event.date
-        this.eventForm.dateTimeStart = timestamp
+        timestamp = QCalendar.parseTimestamp(this.contextDay.date + ' 00:00')
       }
+      this.eventForm.dateTimeStart = QCalendar.getDateTime(timestamp)
       this.eventForm.allDay = !event.time
       this.eventForm.bgcolor = event.bgcolor
       this.eventForm.icon = event.icon
@@ -1011,24 +1012,9 @@ export default {
         }
       }
     },
-    formatDate (date) {
-      const d = date !== void 0 ? new Date(date) : new Date(),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear()
-
-      return [year, padTime(month), padTime(day)].join('-')
-    },
-    formatTime (date) {
-      const d = date !== void 0 ? new Date(date) : new Date(),
-        hours = '' + d.getHours(),
-        minutes = '' + d.getMinutes()
-
-      return [padTime(hours), padTime(minutes)].join(':')
-    },
     getDuration (dateTimeStart, dateTimeEnd, unit) {
-      const start = timestampToDate(dateTimeStart)
-      const end = timestampToDate(dateTimeEnd)
+      const start = QCalendar.makeDateTime(QCalendar.parseTimestamp(dateTimeStart))
+      const end = QCalendar.makeDateTime(QCalendar.parseTimestamp(dateTimeEnd))
       const diff = date.getDateDiff(end, start, unit)
       return diff
     },
@@ -1093,16 +1079,17 @@ export default {
     },
     showOffset (days) {
       if (days.length === 0) return
-      const val = padTime(new Date(this.getTimestamp(days[0])).getTimezoneOffset() / 60)
+      const val = padTime(new Date(this.getTimestampString(days[0])).getTimezoneOffset() / 60)
       if (isNaN(val)) return ''
       return 'GMT-' + val
     },
     adjustTimestamp (day) {
       day.minute = day.minute < 15 || day.minute >= 45 ? 0 : 30
+      day.time = QCalendar.getTime(day)
       return day
     },
-    getTimestamp (day) {
-      return day.date + ' ' + padTime(day.hour) + ':' + padTime(day.minute) + ':00.000'
+    getTimestampString (day) {
+      return QCalendar.getDate(day) + ' ' + QCalendar.getTime(day)
     },
     updateFormatters () {
       try {

@@ -1,15 +1,15 @@
 <template>
   <div class="q-markdown">
     <example-title title="Scheduler View" />
-    <example-card title="Basic" name="SchedulerViewBasic" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewBasic.vue').default)" />
-    <example-card title="Disabled Days" name="SchedulerViewDisabledDays" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewDisabledDays.vue').default)">
+    <example-viewer title="Basic" file="SchedulerViewBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Disabled Days" file="SchedulerViewDisabledDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 When the property `disabled-days` has an array of disabled days, you can hook into the `resource-style` property to change the background color of the disabled day.
       </q-markdown>
-    </example-card>
-    <example-card title="Prev/Next" name="SchedulerViewPrevNext" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewPrevNext.vue').default)" />
-    <example-card title="Swipe" name="SchedulerViewSwipe" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewSwipe.vue').default)" />
-    <example-card title="Slots (scheduler-resources-header)" name="SchedulerViewSlotResourcesHeader" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewSlotResourcesHeader.vue').default)">
+    </example-viewer>
+    <example-viewer title="Prev/Next" file="SchedulerViewPrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Swipe" file="SchedulerViewSwipe" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Slots (scheduler-resources-header)" file="SchedulerViewSlotResourcesHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 For slots that return `day` or `timestamp`, it looks like this:
 ```js
@@ -35,48 +35,52 @@ For slots that return `day` or `timestamp`, it looks like this:
 
 Below, the slot receives an array of `timestamp`s for the days that are being displayed.
       </q-markdown>
-    </example-card>
+    </example-viewer>
 
-    <example-card title="Slots (scheduler-day-header)" name="SchedulerViewSlotDayHeader" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewSlotDayHeader.vue').default)">
+    <example-viewer title="Slots (scheduler-day-header)" file="SchedulerViewSlotDayHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 Below, the slot receives the `timestamp` for the day being displayed.
       </q-markdown>
-    </example-card>
+    </example-viewer>
 
-    <example-card title="Slots (scheduler-resource-day)" name="SchedulerViewSlotResourceDay" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewSlotResourceDay.vue').default)">
+    <example-viewer title="Slots (scheduler-resource-day)" file="SchedulerViewSlotResourceDay" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 Below, the slot receives the `timestamp` for the day being displayed, an index, and the resource.
       </q-markdown>
-    </example-card>
+    </example-viewer>
 
-    <example-card title="Slots (scheduler-resource)" name="SchedulerViewSlotResource" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewSlotResource.vue').default)">
+    <example-viewer title="Slots (scheduler-resource)" file="SchedulerViewSlotResource" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 Below, the slot receives the `resource` to be displayed. In this case, an avatar (or icon) is being displayed along with the resource name.
       </q-markdown>
-    </example-card>
+    </example-viewer>
 
-    <example-card title="Theme" name="SchedulerViewTheme" :tag-parts="getTagParts(require('!!raw-loader!../examples/SchedulerViewTheme.vue').default)" />
+    <example-viewer title="Theme" file="SchedulerViewTheme" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
   </div>
 </template>
 
 <script>
 import ExampleTitle from '../components/ExampleTitle'
-import ExampleCard from '../components/ExampleCard'
 import { slugify } from 'assets/page-utils'
-import { getTagParts } from '@quasar/quasar-ui-qmarkdown'
+import { version } from 'ui'
 
 export default {
   name: 'SchedulerView',
 
   components: {
-    ExampleTitle,
-    ExampleCard
+    ExampleTitle
   },
 
   data () {
     return {
-      tempToc: []
+      tempToc: [],
+      locationUrl: 'https://github.com/quasarframework/quasar-ui-qcalendar/tree/dev/demo/src/examples/',
+      jsPaths: [`https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@${version}/dist/index.umd.min.js`],
+      cssPaths: [
+        `https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@${version}/dist/index.min.css`,
+        'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.0/css/all.css'
+      ]
     }
   },
 
@@ -110,10 +114,12 @@ export default {
   },
 
   methods: {
-    getTagParts,
-
     addToToc (name, level = 1) {
-      const slug = slugify(name)
+      let n = name
+      if (level > 1) {
+        n = 'example-' + n
+      }
+      const slug = slugify(n)
       this.tempToc.push({
         children: [],
         id: slug,
@@ -124,12 +130,3 @@ export default {
   }
 }
 </script>
-
-<style lang="sass">
-.example-page
-  padding: 16px 46px
-  font-weight: 300
-  max-width: 900px
-  margin-left: auto
-  margin-right: auto
-</style>

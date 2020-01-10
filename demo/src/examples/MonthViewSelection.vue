@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="max-width: 800px; width: 100%;">
     <div class="q-gutter-sm">
       <q-checkbox v-model="mobile" label="Use Touch (set if on mobile)" />
     </div>
@@ -21,9 +21,8 @@
 </template>
 
 <script>
-import {
-  getDayIdentifier
-} from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
+// normally you would not import "all" of QCalendar, but is needed for this example to work with UMD (codepen)
+import QCalendar from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
 
 export default {
   data () {
@@ -50,13 +49,13 @@ export default {
     },
     anchorDayIdentifier () {
       if (this.anchorTimestamp !== null) {
-        return getDayIdentifier(this.anchorTimestamp)
+        return QCalendar.getDayIdentifier(this.anchorTimestamp)
       }
       return false
     },
     otherDayIdentifier () {
       if (this.otherTimestamp !== null) {
-        return getDayIdentifier(this.otherTimestamp)
+        return QCalendar.getDayIdentifier(this.otherTimestamp)
       }
       return false
     },
@@ -83,7 +82,7 @@ export default {
     },
 
     isBetween (timestamp) {
-      const nowIdentifier = getDayIdentifier(timestamp)
+      const nowIdentifier = QCalendar.getDayIdentifier(timestamp)
       return this.lowIdentifier <= nowIdentifier && this.highIdentifier >= nowIdentifier
     },
 
