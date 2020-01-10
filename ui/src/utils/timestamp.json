@@ -241,7 +241,6 @@
           "type": "Object",
           "required": true,
           "desc": "A timestamp object",
-          "required": true,
           "__exemption": [ "examples" ]
         }
       },
@@ -252,7 +251,7 @@
       }
     },
     "diffTimestamp": {
-      "desc": "Turns passed in timestamp object to a time identifier",
+      "desc": "Returns the number of milliseconds between the two days",
       "params": {
         "timestamp1": {
           "type": "Object",
@@ -275,7 +274,7 @@
       },
       "returns": {
         "type": "Number",
-        "desc": "The number of days different between the two timestamp objects. 0 if **strict** is true and the value would be negative",
+        "desc": "The number of milliseconds between the two timestamp objects. 0 if **strict** is true and the value would be negative",
         "__exemption": [ "examples" ]
       }
     },
@@ -589,28 +588,6 @@
       },
     "__exemption": [ "examples" ]
     },
-    "nextMinutes": {
-      "desc": "Returns the timestamp with the passed minutes added to it",
-      "params": {
-        "timestamp": {
-          "type": "Object",
-          "required": true,
-          "desc": "A timestamp object",
-          "__exemption": [ "examples" ]
-        },
-        "minutes": {
-          "type": "Number",
-          "desc": "The number of minutes to add to the timestamp. It can handle large amounts of minutes that cause increments in hours or days",
-          "__exemption": [ "examples" ]
-        }
-      },
-      "returns": {
-        "type": "Object",
-        "desc": "A timestamp object with the additional minutes added",
-        "__exemption": [ "examples" ]
-      },
-    "__exemption": [ "examples" ]
-    },
     "nextDay": {
       "desc": "Returns the timestamp set to the next day, updating month and year if needed",
       "params": {
@@ -697,7 +674,7 @@
     "__exemption": [ "examples" ]
     },
     "findWeekday": {
-      "desc": "Returns the timestamp associated to the specified weekday",
+      "desc": "Returns the timestamp associated to the specified weekday. Use `parseTimestamp`, not `parsed` (or manually call `updateFormatted` before calling this method), so associated fields are updated correctly, otherwise this function will not work as expected.",
       "params": {
         "timestamp": {
           "type": "Object",
@@ -950,6 +927,88 @@
         "__exemption": [ "examples" ]
       }
     },
+    "isOverlappingDates": {
+      "desc": "Checks passed start and end timestamps overlap the first and last timestamps. This method can be used to find if an event, with start and end dates overlap a range, like a week",
+      "examples": [
+        "isOverlappingDates(parsed('2020-01-01'), parsed('2020-01-10'), parsed('2019-12-29'), parsed('2020-01-04')) === true",
+        "isOverlappingDates(parsed('2020-01-01'), parsed('2020-01-10'), parsed('2020-01-29'), parsed('2020-01-30')) === false"
+      ],
+      "params": {
+        "startTimestamp": {
+          "type": "Object",
+          "desc": "The starting timestamp object to use for the comparison",
+          "required": true,
+          "__exemption": [ "examples" ]
+        },
+        "endTimestamp": {
+          "type": "Object",
+          "desc": "The ending timestamp object to use for the comparison",
+          "required": true,
+          "__exemption": [ "examples" ]
+        },
+        "firstTimestamp": {
+          "type": "Object",
+          "desc": "The first timestamp object to use for the comparison (typically the first day in a week)",
+          "required": true,
+          "__exemption": [ "examples" ]
+        },
+        "lastTimestamp": {
+          "type": "Object",
+          "desc": "The last timestamp object to use for the comparison (typically the last day in a week)",
+          "required": true,
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Boolean",
+        "desc": "true if the start and end timestamps overlap the first and last timestamps",
+        "__exemption": [ "examples" ]
+      }
+    },
+    "daysBetween": {
+      "desc": "Returns the number days between two timestamps",
+      "params": {
+        "startTimestamp": {
+          "type": "Object",
+          "desc": "The starting timestamp object to use for the comparison",
+          "required": true,
+          "__exemption": [ "examples" ]
+        },
+        "endTimestamp": {
+          "type": "Object",
+          "desc": "The ending timestamp object to use for the comparison",
+          "required": true,
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Number",
+        "desc": "The number of days beween the two timestamps",
+        "__exemption": [ "examples" ]
+      }
+    },
+    "weeksBetween": {
+      "desc": "Returns the number weeks between two timestamps",
+      "params": {
+        "startTimestamp": {
+          "type": "Object",
+          "desc": "The starting timestamp object to use for the comparison",
+          "required": true,
+          "__exemption": [ "examples" ]
+        },
+        "endTimestamp": {
+          "type": "Object",
+          "desc": "The ending timestamp object to use for the comparison",
+          "required": true,
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Number",
+        "desc": "The number of weeks beween the two timestamps",
+        "__exemption": [ "examples" ]
+      }
+    },
     "addToDate": {
       "desc": "Takes a timestamp and increments/decrements based on options",
       "params": {
@@ -962,6 +1021,7 @@
         "options": {
           "type": "Object",
           "desc":  "The options passed to the method. All items are optional and can be positive or negative",
+          "required": true,
           "examples": [
             "{ year: 1, month: -1, day: 10, hour: 2, minute: 3 }",
             "{ month: -1 }",
@@ -1015,10 +1075,10 @@
       },
       "returns": {
         "type": "Object",
-        "desc": "A copy of the modified timestamp object",
+        "desc": "A copy of the modified timestamp object with the applied options",
         "examples": [
-          "ts = addToDate(ts, { hour: 1 })",
-          "ts = addToDate(ts, { month: 3, hour: -1 })"
+          "const ts1 = addToDate(timestamp, { hour: 1 })",
+          "const ts2 = addToDate(timestamp, { month: 3, hour: -1 })"
         ]
       }
     }

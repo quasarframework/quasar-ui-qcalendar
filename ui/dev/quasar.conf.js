@@ -58,7 +58,7 @@ module.exports = function (ctx) {
       chainWebpack (chain) {
         chain.resolve.alias.merge({
           'ui': path.resolve(__dirname, '../src/index.js'),
-          '@quasar/quasar-ui-qcalendar': path.resolve(__dirname, '..'),
+          '@quasar/quasar-ui-qcalendar': path.resolve(__dirname, '../src'),
         })
       }
     },

@@ -21,7 +21,13 @@ yarn-error.log*
 # Linters
 .eslintignore
 .eslintrc.js
+.babelrc
 
 # Other
 /src/components/QCalendar.json
 /src/utils/timestamp.json
+
+# Testing
+/test
+.env.jest
+jest.config.js

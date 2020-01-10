@@ -1,24 +1,26 @@
 <template>
-  <q-calendar
-    v-model="selectedDate"
-    view="month"
-    locale="en-us"
-    style="height: 500px;"
-  >
-    <template #day="{ date }">
-      <template v-for="(event, index) in getEvents(date)">
-        <q-badge
-          :key="index"
-          style="width: 100%; cursor: pointer; height: 16px; max-height: 16px"
-          class="q-event"
-          :class="badgeClasses(event, 'day')"
-          :style="badgeStyles(event, 'day')"
-        >
-          <q-icon v-if="event.icon" :name="event.icon" class="q-mr-xs"></q-icon><span class="ellipsis">{{ event.title }}</span>
-        </q-badge>
+  <div style="max-width: 800px; width: 100%;">
+    <q-calendar
+      v-model="selectedDate"
+      view="month"
+      locale="en-us"
+      style="height: 500px;"
+    >
+      <template #day="{ date }">
+        <template v-for="(event, index) in getEvents(date)">
+          <q-badge
+            :key="index"
+            style="width: 100%; cursor: pointer; height: 16px; max-height: 16px"
+            class="q-event"
+            :class="badgeClasses(event, 'day')"
+            :style="badgeStyles(event, 'day')"
+          >
+            <q-icon v-if="event.icon" :name="event.icon" class="q-mr-xs"></q-icon><span class="ellipsis">{{ event.title }}</span>
+          </q-badge>
+        </template>
       </template>
-    </template>
-  </q-calendar>
+    </q-calendar>
+  </div>
 </template>
 
 <script>
@@ -154,6 +156,7 @@ export default {
     },
 
     getEvents (dt) {
+      const currentDate = parsed(dt)
       const events = []
       for (let i = 0; i < this.events.length; ++i) {
         let added = false

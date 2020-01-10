@@ -48,7 +48,6 @@ import {
   getDate,
   getTime,
   getDateTime,
-  nextMinutes,
   nextDay,
   prevDay,
   relativeDays,
@@ -61,6 +60,9 @@ import {
   makeDateTime,
   validateNumber,
   isBetweenDates,
+  isOverlappingDates,
+  daysBetween,
+  weeksBetween,
   addToDate
 } from './utils/timestamp.js'
 
@@ -120,7 +122,6 @@ export {
   getDate,
   getTime,
   getDateTime,
-  nextMinutes,
   nextDay,
   prevDay,
   relativeDays,
@@ -133,6 +134,9 @@ export {
   makeDateTime,
   validateNumber,
   isBetweenDates,
+  isOverlappingDates,
+  daysBetween,
+  weeksBetween,
   addToDate,
   // helpers
   convertToUnit,
@@ -190,7 +194,6 @@ export default {
   getDate,
   getTime,
   getDateTime,
-  nextMinutes,
   nextDay,
   prevDay,
   relativeDays,
@@ -203,6 +206,9 @@ export default {
   makeDateTime,
   validateNumber,
   isBetweenDates,
+  isOverlappingDates,
+  daysBetween,
+  weeksBetween,
   addToDate,
   // helpers
   convertToUnit,
