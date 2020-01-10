@@ -181,7 +181,7 @@ export function parseDate (date) {
 }
 
 export function getDayIdentifier (timestamp) {
-  return timestamp.year * 10000 + timestamp.month * 100 + timestamp.day
+  return timestamp.year * 100000000 + timestamp.month * 1000000 + timestamp.day * 10000
 }
 
 export function getTimeIdentifier (timestamp) {
@@ -479,10 +479,10 @@ export function validateNumber (input) {
   return isFinite(parseInt(input, 10))
 }
 
-export function isBetweenDates (timestamp, startTimestamp, endTimestamp, useTime = false) {
-  const cd = parseInt(getDayIdentifier(timestamp) + String(useTime === true ? getTimeIdentifier(timestamp) : ''), 10)
-  const sd = parseInt(getDayIdentifier(startTimestamp) + String(useTime === true ? getTimeIdentifier(startTimestamp) : ''), 10)
-  const ed = parseInt(getDayIdentifier(endTimestamp) + String(useTime === true ? getTimeIdentifier(endTimestamp) : ''), 10)
+export function isBetweenDates (timestamp, startTimestamp, endTimestamp, useTime /* = false */) {
+  const cd = getDayIdentifier(timestamp) + (useTime === true ? getTimeIdentifier(timestamp) : 0)
+  const sd = getDayIdentifier(startTimestamp) + (useTime === true ? getTimeIdentifier(startTimestamp) : 0)
+  const ed = getDayIdentifier(endTimestamp) + (useTime === true ? getTimeIdentifier(endTimestamp) : 0)
 
   return cd >= sd && cd <= ed
 }
