@@ -251,11 +251,8 @@ export default {
           if (this.events[i].time) {
             if (events.length > 0) {
               // check for overlapping times
-              debugger
               const startTime = QCalendar.parseTimestamp(this.events[i].date + ' ' + this.events[i].time)
-              console.log('startTime:', startTime)
               const endTime = QCalendar.addToDate(startTime, { minute: this.events[i].duration })
-              console.log('endTime:', endTime)
               for (let j = 0; j < events.length; ++j) {
                 const startTime2 = QCalendar.parseTimestamp(events[j].date + ' ' + events[j].time)
                 const endTime2 = QCalendar.addToDate(startTime2, { minute: events[j].duration })
