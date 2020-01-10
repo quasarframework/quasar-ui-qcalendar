@@ -97,12 +97,14 @@ export function parseTime (input) {
       // when a number is given, it's minutes since 12:00am
       return input
     case '[object String]':
+    {
       // when a string is given, it's a hh:mm:ss format where seconds are optional
       const parts = PARSE_TIME.exec(input)
       if (!parts) {
         return false
       }
       return parseInt(parts[1], 10) * 60 + parseInt(parts[3] || 0, 10)
+    }
     case '[object Object]':
       // when an object is given, it must have hour and minute
       if (typeof input.hour !== 'number' || typeof input.minute !== 'number') {
@@ -296,7 +298,7 @@ export function getWeekday (timestamp) {
 }
 
 export function isLeapYear (year) {
-  return ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0)
+  return year % 400 === 0 || (year % 4 === 0 && year % 100 !== 0)
 }
 
 export function daysInMonth (year, month) {
