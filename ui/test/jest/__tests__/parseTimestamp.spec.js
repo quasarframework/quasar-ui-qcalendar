@@ -35,4 +35,19 @@ describe('[TIMESTAMP] parseTimestamp', () => {
     expect(tests.past).toBe(true)
   })
 
+  it('parseTimestamp invalid, with null', async () => {
+    const tests = timestamp.parseTimestamp(null)
+    expect(tests).toBe(null)
+  })
+
+  it('parseTimestamp invalid, with empty string', async () => {
+    const tests = timestamp.parseTimestamp('')
+    expect(tests).toBe(null)
+  })
+
+  it('parseTimestamp invalid, with no arg', async () => {
+    const tests = timestamp.parseTimestamp()
+    expect(tests).toBe(null)
+  })
+
 })
