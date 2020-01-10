@@ -91,26 +91,29 @@ export function getEndOfMonth (timestamp) {
 }
 
 export function parseTime (input) {
-  if (typeof input === 'number') {
-    // when a number is given, it's minutes since 12:00am
-    return input
-  } else if (typeof input === 'string') {
-    // when a string is given, it's a hh:mm:ss format where seconds are optional
-    const parts = PARSE_TIME.exec(input)
-    if (!parts) {
-      return false
+  const type = Object.prototype.toString.call(input)
+  switch (type) {
+    case '[object Number]':
+      // when a number is given, it's minutes since 12:00am
+      return input
+    case '[object String]':
+    {
+      // when a string is given, it's a hh:mm:ss format where seconds are optional
+      const parts = PARSE_TIME.exec(input)
+      if (!parts) {
+        return false
+      }
+      return parseInt(parts[1], 10) * 60 + parseInt(parts[3] || 0, 10)
     }
-    return parseInt(parts[1], 10) * 60 + parseInt(parts[3] || 0, 10)
-  } else if (typeof input === 'object') {
-    // when an object is given, it must have hour and minute
-    if (typeof input.hour !== 'number' || typeof input.minute !== 'number') {
-      return false
-    }
-    return input.hour * 60 + input.minute
-  } else {
-    // unsupported type
-    return false
+    case '[object Object]':
+      // when an object is given, it must have hour and minute
+      if (typeof input.hour !== 'number' || typeof input.minute !== 'number') {
+        return false
+      }
+      return input.hour * 60 + input.minute
   }
+
+  return false
 }
 
 export function validateTimestamp (input) {
@@ -295,7 +298,7 @@ export function getWeekday (timestamp) {
 }
 
 export function isLeapYear (year) {
-  return ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0)
+  return year % 400 === 0 || (year % 4 === 0 && year % 100 !== 0)
 }
 
 export function daysInMonth (year, month) {
@@ -332,7 +335,7 @@ export function getTime (timestamp) {
 }
 
 export function getDateTime (timestamp) {
-  return getDate(timestamp) + ' ' + getTime(timestamp)
+  return getDate(timestamp) + (timestamp.hasTime ? ' ' + getTime(timestamp) : '')
 }
 
 export function nextDay (timestamp) {
