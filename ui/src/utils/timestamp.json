@@ -135,7 +135,7 @@
       }
     },
     "parsed": {
-      "desc": "Parses a date/time string to the timestamp object",
+      "desc": "Parses a date/time string to a simple timestamp object. For a more complete timestamp, use parseTimestamp",
       "params": {
         "input": {
           "type": "String",
@@ -187,6 +187,7 @@
       }
     },
     "makeDate": {
+      "addedIn": "v1.3.9",
       "desc": "Takes a timestamp and returns a JavaScript Date with time set to 00:00",
       "params": {
         "timestamp": {
@@ -203,6 +204,7 @@
       }
     },
     "makeDateTime": {
+      "addedIn": "v1.3.9",
       "desc": "Takes a timestamp and returns a JavaScript Date",
       "params": {
         "timestamp": {
@@ -542,7 +544,7 @@
         },
         "length": {
           "type": "Number",
-          "desc": "The length of the padding",
+          "desc": "The length of the paddedIng",
           "required": true,
           "__exemption": [ "examples" ]
         }
@@ -584,6 +586,24 @@
       "returns": {
         "type": "String",
         "desc": "A time as a padded value in the form `hh:mm`. Instead of `2:3`, this function formats it as `02:03`",
+        "__exemption": [ "examples" ]
+      },
+    "__exemption": [ "examples" ]
+    },
+    "getDateTime": {
+      "addedIn": "v1.3.11",
+      "desc": "Returns the timestamp as a padded date and time. If time is not available, then only the date will be used",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "String",
+        "desc": "A date and time as a padded value in the form `YYYY-mm-dd hh:mm`. Instead of `2020-1-2`, this function formats it as `2020-01-02`",
         "__exemption": [ "examples" ]
       },
     "__exemption": [ "examples" ]
@@ -895,6 +915,7 @@
       }
     },
     "isBetweenDates": {
+      "addedIn": "v1.3.10",
       "desc": "Checks passed timestamp is between start and end timestamps",
       "params": {
         "timestamp": {
@@ -928,6 +949,7 @@
       }
     },
     "isOverlappingDates": {
+      "addedIn": "v1.3.12",
       "desc": "Checks passed start and end timestamps overlap the first and last timestamps. This method can be used to find if an event, with start and end dates overlap a range, like a week",
       "examples": [
         "isOverlappingDates(parsed('2020-01-01'), parsed('2020-01-10'), parsed('2019-12-29'), parsed('2020-01-04')) === true",
@@ -966,6 +988,7 @@
       }
     },
     "daysBetween": {
+      "addedIn": "v1.3.12",
       "desc": "Returns the number days between two timestamps",
       "params": {
         "startTimestamp": {
@@ -988,6 +1011,7 @@
       }
     },
     "weeksBetween": {
+      "addedIn": "v1.3.12",
       "desc": "Returns the number weeks between two timestamps",
       "params": {
         "startTimestamp": {
@@ -1010,6 +1034,7 @@
       }
     },
     "addToDate": {
+      "addedIn": "v1.3.10",
       "desc": "Takes a timestamp and increments/decrements based on options",
       "params": {
         "timestamp": {
