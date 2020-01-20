@@ -31,7 +31,7 @@ export default {
     parsedNow: 'updateCurrent'
   },
 
-  created () {
+  beforeMount () {
     this.updateCurrent()
     this.setCurrent()
   },
@@ -42,15 +42,18 @@ export default {
       this.times.now.past = this.times.today.past = false
       this.times.now.future = this.times.today.future = false
     },
+
     updateCurrent () {
       const now = this.parsedNow || this.getNow()
       this.updateDay(now, this.times.now)
       this.updateTime(now, this.times.now)
       this.updateDay(now, this.times.today)
     },
+
     getNow () {
       return parseDate(new Date())
     },
+
     updateDay (now, target) {
       if (now.date !== target.date) {
         target.year = now.year
@@ -60,6 +63,7 @@ export default {
         target.date = now.date
       }
     },
+
     updateTime (now, target) {
       if (now.time !== target.time) {
         target.hour = now.hour
