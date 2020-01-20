@@ -26,7 +26,6 @@
           dense
           round
           @click="rightDrawerOpen = !rightDrawerOpen"
-          aria-label="Table of Contents"
         >
           <q-icon name="menu" />
         </q-btn>
@@ -37,6 +36,8 @@
     <q-drawer
       v-model="leftDrawerOpen"
       bordered
+      aria-label="Menu"
+      class="menu"
     >
       <q-list>
         <q-item-label header>Essential Links</q-item-label>
@@ -50,6 +51,8 @@
       v-model="rightDrawerOpen"
       side="right"
       bordered
+      aria-label="Table of Contents"
+      class="toc"
     >
       <q-scroll-area class="fit">
         <q-list dense>
