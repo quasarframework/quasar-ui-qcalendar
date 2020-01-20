@@ -11,6 +11,8 @@ The `agenda` views by themselves are rather boring. It's up to the developer to 
       <q-markdown>
 We are going to jump right into slot usage so that for the rest of the examples we have content that can be displayed.
 
+Remember, the data displayed below is slotted content, so you can be as creative as you need to be.
+
 For slots that return `day` or `timestamp`, it looks like this:
 ```js
 {

@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="HHh LpR fFf">
+  <q-layout view="HHh LpR fFf" @scroll="onScroll">
     <q-header elevated>
       <q-toolbar>
         <q-btn
@@ -26,7 +26,6 @@
           dense
           round
           @click="rightDrawerOpen = !rightDrawerOpen"
-          aria-label="Table of Contents"
         >
           <q-icon name="menu" />
         </q-btn>
@@ -37,6 +36,7 @@
     <q-drawer
       v-model="leftDrawerOpen"
       bordered
+      aria-label="Menu"
     >
       <div class="col-12">
         <q-expansion-item
@@ -46,11 +46,17 @@
           icon="fas fa-cogs"
           label="QCalendar"
           caption="QCalendar Examples"
+          class="menu"
         >
           <q-separator />
           <q-list dense>
 
-            <q-item clickable to="/examples/day-view">
+            <q-item
+              to="/examples/day-view"
+              clickable
+              @click="activeMenuItem = 'day-view'"
+              :active="activeMenuItem === 'day-view'"
+            >
               <q-item-section avatar>
                 <q-icon name="fas fa-calendar-day" />
               </q-item-section>
@@ -59,7 +65,12 @@
               </q-item-section>
             </q-item>
 
-            <q-item clickable to="/examples/week-view">
+            <q-item
+              to="/examples/week-view"
+              clickable
+              @click="activeMenuItem = 'week-view'"
+              :active="activeMenuItem === 'week-view'"
+            >
               <q-item-section avatar>
                 <q-icon name="fas fa-calendar-week" />
               </q-item-section>
@@ -68,7 +79,12 @@
               </q-item-section>
             </q-item>
 
-            <q-item clickable to="/examples/month-view">
+            <q-item
+              to="/examples/month-view"
+              clickable
+              @click="activeMenuItem = 'month-view'"
+              :active="activeMenuItem === 'month-view'"
+            >
               <q-item-section avatar>
                 <q-icon name="fas fa-calendar-alt" />
               </q-item-section>
@@ -77,7 +93,12 @@
               </q-item-section>
             </q-item>
 
-            <q-item clickable to="/examples/scheduler-view">
+            <q-item
+              to="/examples/scheduler-view"
+              clickable
+              @click="activeMenuItem = 'scheduler-view'"
+              :active="activeMenuItem === 'scheduler-view'"
+            >
               <q-item-section avatar>
                 <q-icon name="fas fa-calendar" />
               </q-item-section>
@@ -86,7 +107,12 @@
               </q-item-section>
             </q-item>
 
-            <q-item clickable to="/examples/agenda-view">
+            <q-item
+              to="/examples/agenda-view"
+              clickable
+              @click="activeMenuItem = 'agenda-view'"
+              :active="activeMenuItem === 'agenda-view'"
+            >
               <q-item-section avatar>
                 <q-icon name="view_agenda" />
               </q-item-section>
@@ -122,6 +148,8 @@
       v-model="rightDrawerOpen"
       side="right"
       bordered
+      aria-label="Table of Contents"
+      class="toc"
     >
       <q-scroll-area class="fit">
         <q-list dense>
@@ -165,7 +193,8 @@ export default {
       version: version,
       leftDrawerOpen: this.$q.platform.is.desktop,
       rightDrawerOpen: this.$q.platform.is.desktop,
-      activeToc: 0
+      activeToc: 0,
+      activeMenuItem: 'day-view'
     }
   },
   mounted () {
@@ -198,6 +227,35 @@ export default {
       const offset = el.offsetTop - 50
       // setScrollPosition(target, offset, 500)
       setScrollPosition(window, offset, 500)
+    },
+    onScroll ({ position }) {
+      if (this.scrollingPage !== true) {
+        this.updateActiveToc(position)
+      }
+    },
+    updateActiveToc (position) {
+      const toc = this.toc
+      let last
+
+      for (const i in toc) {
+        const section = toc[i]
+        const item = document.getElementById(section.id)
+
+        if (item === null) {
+          continue
+        }
+
+        if (item.offsetTop >= position + 100) {
+          if (last === void 0) {
+            last = section.id
+          }
+          break
+        }
+      }
+
+      if (last !== void 0) {
+        this.activeToc = last
+      }
     }
   }
 }

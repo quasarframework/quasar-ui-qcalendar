@@ -1,5 +1,5 @@
 <template>
-  <q-list>
+  <q-list class="menu">
     <q-item clickable to="/docs">
       <q-item-section avatar>
         <q-icon name="calendar_today" />

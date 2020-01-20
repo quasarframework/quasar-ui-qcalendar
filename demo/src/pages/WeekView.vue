@@ -68,7 +68,6 @@ The `day-body` slot is used to get information about the date and time of an eve
       </q-markdown>
     </example-viewer>
 
-    <example-title title="More Slots" />
     <example-viewer title="Week View (Current Time) - Slot (day-container)" file="WeekViewCurrentTime" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 You can use the scopedSlot `day-container` to set an absolute position for a time tracking bar.
