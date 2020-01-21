@@ -48,7 +48,10 @@
 
     <q-drawer
       v-model="leftDrawerOpen"
+      show-if-above
       bordered
+      aria-label="Menu"
+      class="menu"
       :width="350"
     >
       <div class="row justify-around col-12">
