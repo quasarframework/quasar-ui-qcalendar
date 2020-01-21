@@ -35,6 +35,7 @@
 
     <q-drawer
       v-model="leftDrawerOpen"
+      show-if-above
       bordered
       aria-label="Menu"
       class="menu"
@@ -49,6 +50,7 @@
     <q-drawer
       ref="drawer"
       v-model="rightDrawerOpen"
+      show-if-above
       side="right"
       bordered
       aria-label="Table of Contents"
@@ -75,7 +77,9 @@
     </q-drawer>
 
     <q-page-container>
-      <router-view />
+      <transition name="fade">
+        <router-view />
+      </transition>
     </q-page-container>
   </q-layout>
 </template>
