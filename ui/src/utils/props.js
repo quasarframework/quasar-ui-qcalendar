@@ -116,6 +116,7 @@ export default {
       default: () => [],
       validator: v => v.length <= 2
     },
+    selectedDates: Array,
     miniMode: {
       type: [Boolean, String],
       validator: v => v === void 0 || v === true || v === false || v === 'auto'

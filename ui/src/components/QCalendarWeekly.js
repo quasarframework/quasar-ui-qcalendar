@@ -285,7 +285,7 @@ export default {
         class: [
           dayClass,
           {
-            ...this.getRelativeClasses(day, outside),
+            ...this.getRelativeClasses(day, outside, this.isMiniMode ? void 0 : this.selectedDates),
             'q-calendar-weekly__day--droppable': dragOver
           }
         ],
@@ -341,6 +341,11 @@ export default {
 
       return h(QBtn, updateColors(colorCurrent !== void 0 ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
         staticClass: 'q-calendar-weekly__day-label',
+        class: [
+          {
+            'q-selected-date': this.isMiniMode && this.selectedDates && this.selectedDates.length > 0 && this.selectedDates.includes(day.date)
+          }
+        ],
         props: {
           size: this.isMiniMode ? 'sm' : this.monthLabelSize,
           unelevated: true,

@@ -87,12 +87,17 @@ export default {
   },
 
   methods: {
-    getRelativeClasses (timestamp, outside = false) {
+    arrayHasDate (arr, timestamp) {
+      return arr && arr.length > 0 && arr.includes(timestamp.date)
+    },
+
+    getRelativeClasses (timestamp, outside = false, selectedDays) {
       return {
         'q-current-day': timestamp.current,
         'q-past-day': timestamp.past,
         'q-future-day': timestamp.future,
-        'q-outside': outside // outside the current month
+        'q-outside': outside, // outside the current month
+        'q-selected-date': this.arrayHasDate(selectedDays, timestamp)
       }
     },
     getStartOfWeek (timestamp) {

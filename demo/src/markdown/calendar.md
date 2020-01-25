@@ -18,7 +18,7 @@ This is the true power of QCalendar.
 - Resource scheduler
 - Agenda views
 - Month view mini-mode
-- Month view multi-day selection
+- Month view multi-day selection (separate and contiguous)
 - Month view multi-month/multi-day selection when combining two or more calendars
 - Optional drag and drop support (including mobile)
 - Automatic localization / internationalization

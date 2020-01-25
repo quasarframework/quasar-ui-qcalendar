@@ -6,14 +6,16 @@
       emit-immediately
     >
       <template v-slot:before>
-        <q-calendar
-          ref="calendar"
-          v-model="selectedDate"
-          show-work-weeks
-          view="month"
-          :mini-mode="miniMode"
-          locale="en-us"
-        />
+        <div style="overflow: hidden;">
+          <q-calendar
+            ref="calendar"
+            v-model="selectedDate"
+            show-work-weeks
+            view="month"
+            :mini-mode="miniMode"
+            locale="en-us"
+          />
+        </div>
       </template>
       <template v-slot:separator>
         <q-avatar color="primary" text-color="white" size="40px" icon="drag_indicator" />

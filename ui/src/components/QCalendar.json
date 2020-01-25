@@ -772,6 +772,18 @@
         ":selected-start-end-dates=\"getStartEndDates\""
       ]
     },
+    "selected-dates": {
+      "type": "Array",
+      "category": "model",
+      "addedIn": "v1.3.14",
+      "desc": "An array of string dates in the form YYYY-mm-dd that will be selected",
+      "applicable": [
+        "month"
+      ],
+      "examples": [
+        ":selected-dates=\"['2019-04-01', '2019-04-02', '2019-04-03', '2019-04-04']\""
+      ]
+    },
     "mini-mode": {
       "type": ["Boolean", "String"],
       "category": "behavior",
