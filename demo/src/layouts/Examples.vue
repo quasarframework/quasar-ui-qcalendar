@@ -250,7 +250,7 @@ export default {
           continue
         }
 
-        if (item.offsetTop >= position + 100) {
+        if (item.offsetTop >= position + 50) {
           if (last === void 0) {
             last = section.id
           }

@@ -4,6 +4,10 @@
 ::: warning
 The ability to use Codepen was recently added to the examples. There are differences in the UMD version of QCalendar, some examples won't work without a bit of manual intervention. Be patient while we get the kinks worked out and automate the necessary changes.
 :::
+
+::: warning
+In some of the examples below, where navigation is provided, when you click a date you may see the calendar redraw. This is a cause-and-effect as a result of not providing a selected date for the v-model. When a date is initially clicked, the v-model is then updated which causes Vue to redraw. Unless absolutely necessary, you should always provide the v-model with a current date, rather than an empty string.
+:::
     </q-markdown>
     <example-title title="Month View" />
     <example-viewer title="Basic" file="MonthViewBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
@@ -41,7 +45,11 @@ The example below is setting the `day-height` to `100`, the default is `0`, whic
 
     <example-viewer title="Prev/Next" file="MonthViewPrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Swipe" file="MonthViewSwipe" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Multi-Day Selection" file="MonthViewSelection" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+    <example-viewer title="Selected Dates" file="MonthViewSelectedDates" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+      <q-markdown>
+Click on dates to toggled selected on/off.
+      </q-markdown>    </example-viewer>
+    <example-viewer title="Multi-Day Selection (contiguous)" file="MonthViewSelection" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 The example below shows how to use the QCalendar to create a multi-day selector. The critical aspect of this is the `selected-start-end-dates` property. This takes an array of two dates (the first should be less or equal to the last). This property really doesn't do much, except to keep the calendar reactive, so that the `day-style` property can be used to style the selected days.
 
@@ -112,6 +120,11 @@ Also, regardless of `mini-mode` all slots associated with month view now have ad
     <example-viewer title="Mini-Mode - Disabled Days" file="MonthViewDisabledDaysMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Mini-Mode - 5 Day Work Week" file="MonthViewFiveDayWorkWeekMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Mini-Mode - Work Week Numbers" file="MonthViewWorkWeekNumbersMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Mini-Mode - Selected Dates" file="MonthViewSelectedDatesMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+      <q-markdown>
+Click on dates to toggled selected on/off.
+      </q-markdown>
+    </example-viewer>
     <example-viewer title="Mini-Mode - Selection" file="MonthViewSelectionMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 There are some considerations when using mini-mode selections. There are 3 special classes: `.q-selected-day-first`, `.q-selected-day` and `.q-selected-day-last` in conjunction with the `day-class` property. These will help you create a selector compliant with [Material Design](https://material.io/components/pickers/#anatomy). See examples below for usage.
@@ -171,6 +184,7 @@ export default {
     this.addToToc('Day Height', 2)
     this.addToToc('Prev/Next', 2)
     this.addToToc('Swipe', 2)
+    this.addToToc('Selected Dates', 2)
     this.addToToc('Multi-Day Selection', 2)
     this.addToToc('Slots (day)', 2)
     this.addToToc('Slots (week)', 2)
@@ -181,6 +195,7 @@ export default {
     this.addToToc('Mini-Mode - Disabled Days', 2)
     this.addToToc('Mini-Mode - 5 Day Work Week', 2)
     this.addToToc('Mini-Mode - Work Week Numbers', 2)
+    this.addToToc('Mini-Mode - Selected Dates', 2)
     this.addToToc('Mini-Mode - Selection', 2)
     this.addToToc('Mini-Mode - Multi-Month Selection', 2)
     this.addToToc('Mini-Mode - Slots (day)', 2)

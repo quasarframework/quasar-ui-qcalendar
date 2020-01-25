@@ -98,8 +98,9 @@ function build (builds) {
 }
 
 function genConfig (opts) {
-  const { dependencies } = require(path.resolve(__dirname, '../package.json'))
-  const external = Object.keys(dependencies || [])
+  // const { dependencies } = require(path.resolve(__dirname, '../package.json'))
+  // const external = Object.keys(dependencies || [])
+  const external = []
 
   Object.assign(opts.rollup.input, {
     plugins: rollupPlugins,

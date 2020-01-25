@@ -19,15 +19,17 @@
       emit-immediately
     >
       <template v-slot:before>
-        <q-calendar
-          ref="calendar"
-          v-model="selectedDate"
-          view="month"
-          locale="en-us"
-          enable-theme
-          :theme="theme"
-          :mini-mode="miniMode"
-        />
+        <div style="overflow: hidden;">
+          <q-calendar
+            ref="calendar"
+            v-model="selectedDate"
+            view="month"
+            locale="en-us"
+            enable-theme
+            :theme="theme"
+            :mini-mode="miniMode"
+          />
+        </div>
       </template>
       <template v-slot:separator>
         <q-avatar color="primary" text-color="white" size="40px" icon="drag_indicator" />
