@@ -39,7 +39,8 @@
     border-right: $calendar-border-color $calendar-border-width solid
     color: $calendar-text-color
 
-    &.q-selected-day
+    &.q-selected-day,
+    &.q-selected-date
       background: lighten($calendar-primary-color, 45%) !important
       color: $calendar-primary-color !important
 
@@ -47,7 +48,8 @@
       background: $calendar-outside-background-color
       color: $calendar-outside-text-color
 
-      &.q-selected-day
+      &.q-selected-day,
+      &.q-selected-date
         color: lighten($calendar-primary-color, 30%) !important
 
     &.q-future-day
@@ -241,6 +243,7 @@
       // &:last-child:before
       //   border-radius: 0 0.8em 0.8em 0
 
+      &.q-selected-date,
       &.q-selected-day-first,
       &.q-selected-day-last
         .q-calendar-weekly__day-label
@@ -248,6 +251,7 @@
           color: #fff
           border-radius: 50%
 
+      &.q-selected-date,
       &.q-selected-day-first
         &:before
           width: 50%
@@ -276,6 +280,10 @@
     bottom: unset
     left: 0
     margin: auto
+    &.q-selected-date
+      background: $calendar-primary-color !important
+      color: #fff
+      // border-radius: 50%
 
   .q-event:not(.q-event-void)
     &:after
@@ -359,6 +367,7 @@
       &.q-past-day
         color: $calendar-day-past-color-dark
 
+      &.q-selected-date,
       &.q-selected-day
         color: #fff !important
 
