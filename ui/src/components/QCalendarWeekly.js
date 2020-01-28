@@ -140,17 +140,11 @@ export default {
     },
 
     __renderHeadDay (h, day, index) {
-      const outside = this.isOutside(this.days[index])
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
       if (this.enableTheme === true) {
-        if (outside) {
-          color = 'colorHeaderOutside'
-          backgroundColor = 'backgroundHeaderOutside'
-        } else {
-          color = 'colorHeader'
-          backgroundColor = 'backgroundHeader'
-        }
+        color = 'colorHeader'
+        backgroundColor = 'backgroundHeader'
         colors = this.getThemeColors([color, backgroundColor])
         updateColors = this.setBothColors
       }
@@ -160,8 +154,7 @@ export default {
         staticClass: 'q-calendar-weekly__head-weekday',
         style: {
           width: 100 / this.weekdays.length + '%'
-        },
-        class: this.getRelativeClasses(day, outside)
+        }
       }), [
         this.__renderHeadDayLabel(h, day, this.shortWeekdayLabel || this.isMiniMode)
       ])
