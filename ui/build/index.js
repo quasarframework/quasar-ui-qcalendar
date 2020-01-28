@@ -15,6 +15,7 @@ console.log(` 📦 Building ${green('v' + require('../package.json').version)}..
 
 createFolder('dist')
 createFolder('dist/api')
+createFolder('dist/vetur')
 
 // require('./script.javascript')
 // require('./script.css')
