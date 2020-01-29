@@ -184,6 +184,7 @@ export default {
           case 'week':
           case 'week-scheduler':
           case 'week-agenda':
+          case 'scheduler':
             relativeDays(moved, mover, dayCount, this.weekdays)
             break
           case 'day':
