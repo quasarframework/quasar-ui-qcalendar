@@ -18,6 +18,7 @@ const cjsConfig = {
     /node_modules/
   ]
 }
+
 const rollupPlugins = [
   nodeResolve({
     extensions: ['.js'],
