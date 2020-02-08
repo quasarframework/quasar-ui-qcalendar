@@ -319,6 +319,8 @@ QCalendar does not provide styling for the selected date (v-model). This is in d
   background: #CCCCFF
 ```
 
+Of course, change the color to anything you want. Alternatively, provide a bordered outline as well. The choice is yours.
+
 # Navigation
 
 Navigating QCalendar can be done in several ways:
