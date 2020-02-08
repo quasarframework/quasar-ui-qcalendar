@@ -180,7 +180,7 @@ You would need to build out your own way of allowing the User to interact with Q
 
 # QCalendar views
 
-QCalendar is made from four distict components: **day**, **month**, **scheduler** and **agenda** views. All other views derive from these four views. For instance, the **week** view is really a 7-**day** view.
+QCalendar is made from four distict components: **day**, **month**, **scheduler** and **agenda** views. All other views derive from these four views. For instance, the **week** view is really a 7-**day** view with contraints.
 
 Not only all these, but the **month** view has a **mini-mode** behavior.
 
@@ -308,6 +308,16 @@ This image has set up a 5-day work week (`[1, 2, 3, 4, 5]`) incorrectly using a 
 QCalendar supports workweek numbers (also known as [ISO week date](https://en.wikipedia.org/wiki/ISO_week_date)). That is, the numbered week from the start of the year. This is only available in `month` view by setting the `workweek` property to true.
 
 ![WorkWeek](statics/qcalendar-workweeks.png "Workweek or ISO Week Date" =800x800)
+
+# Styling Selected Date
+
+QCalendar does not provide styling for the selected date (v-model). This is in dev-land, but quite easy to do via css. You can add something similar to your sass file:
+
+```css
+.q-selected-date
+  color: blue
+  background: #CCCCFF
+```
 
 # Navigation
 

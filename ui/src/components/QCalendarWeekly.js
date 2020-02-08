@@ -247,6 +247,7 @@ export default {
       const slot = this.$scopedSlots.day
       const slotData = { outside, ...day, miniMode: this.isMiniMode }
       const hasMonth = (outside === false && this.days.find(d => d.month === day.month).day === day.day && this.showMonthLabel === true)
+
       let dragOver
 
       let colors = new Map(), color, backgroundColor
@@ -314,6 +315,14 @@ export default {
       const slotData = { dayLabel, ...day, miniMode: this.isMiniMode }
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
+
+      const selectedDate = (
+        this.isMiniMode &&
+        this.selectedDates &&
+        this.selectedDates.length > 0 &&
+        this.selectedDates.includes(day.date)
+      ) || this.value === day.date
+
       if (this.enableTheme === true) {
         if (outside === true) {
           color = 'colorDayLabelOutside'
@@ -336,7 +345,7 @@ export default {
         staticClass: 'q-calendar-weekly__day-label',
         class: [
           {
-            'q-selected-date': this.isMiniMode && this.selectedDates && this.selectedDates.length > 0 && this.selectedDates.includes(day.date)
+            'q-selected-date': selectedDate
           }
         ],
         props: {

@@ -198,6 +198,7 @@ export default {
 
     __renderHeadDayBtn (h, day) {
       const colorCurrent = day.current === true ? this.color : void 0
+      const selectedDate = this.value === day.date
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
@@ -218,6 +219,11 @@ export default {
 
       return h(QBtn, updateColors(colorCurrent !== void 0 ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
         staticClass: 'q-calendar-daily__head-day-label',
+        class: [
+          {
+            'q-selected-date': selectedDate
+          }
+        ],
         style: {
           color: day.current === true ? colorCurrent : void 0
         },
