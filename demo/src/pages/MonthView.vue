@@ -5,9 +5,6 @@
 The ability to use Codepen was recently added to the examples. There are differences in the UMD version of QCalendar, some examples won't work without a bit of manual intervention. Be patient while we get the kinks worked out and automate the necessary changes.
 :::
 
-::: warning
-In some of the examples below, where navigation is provided, when you click a date you may see the calendar redraw. This is a cause-and-effect as a result of not providing a selected date for the v-model. When a date is initially clicked, the v-model is then updated which causes Vue to redraw. Unless absolutely necessary, you should always provide the v-model with a current date, rather than an empty string.
-:::
     </q-markdown>
     <example-title title="Month View" />
     <example-viewer title="Basic" file="MonthViewBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
