@@ -290,6 +290,8 @@ export default {
   render (h) {
     const { start, end, maxDays, component } = this.renderProps
 
+    this.keyValue = getDayIdentifier(start)
+
     const data = {
       staticClass: 'q-calendar',
       key: this.keyValue,

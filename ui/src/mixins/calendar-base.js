@@ -43,7 +43,7 @@ export default {
 
   data () {
     return {
-      keyValue: 'YYYY-mm-dd',
+      keyValue: 0,
       direction: 'next'
     }
   },
