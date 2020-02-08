@@ -26,7 +26,7 @@
 export default {
   data () {
     return {
-      selectedDate: '2019-04-01'
+      selectedDate: ''
     }
   },
   methods: {
@@ -39,3 +39,9 @@ export default {
   }
 }
 </script>
+
+<style lang="sass">
+.q-selected-date
+  color: blue
+  background: #CCCCFF
+</style>

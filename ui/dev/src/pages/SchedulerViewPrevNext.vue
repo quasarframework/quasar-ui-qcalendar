@@ -47,3 +47,9 @@ export default {
   }
 }
 </script>
+
+<style lang="sass">
+.q-selected-date
+  color: blue
+  background: #CCCCFF
+</style>
