@@ -41,7 +41,7 @@ export default {
 </script>
 
 <style lang="sass">
-.q-selected-date
+.q-active-date
   color: blue
   background: #CCCCFF
 </style>

@@ -85,6 +85,15 @@
         ":weekdays=\"[1,2,3,4,5]\""
       ]
     },
+    "no-active-date": {
+      "type": "Boolean",
+      "category": "behavior",
+      "addedIn": "1.4.0",
+      "desc": "This controls whether the `q-active-date` css class is set when a user clicks on a date label (button)",
+      "applicable": [
+        "All"
+      ]
+    },
     "disabled-days": {
       "type": "Array",
       "category": "model",
