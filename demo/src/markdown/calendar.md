@@ -309,17 +309,21 @@ QCalendar supports workweek numbers (also known as [ISO week date](https://en.wi
 
 ![WorkWeek](statics/qcalendar-workweeks.png "Workweek or ISO Week Date" =800x800)
 
-# Styling Selected Date
+# Styling Active Date
 
-QCalendar does not provide styling for the selected date (v-model). This is in dev-land, but quite easy to do via css. You can add something similar to your sass file:
+QCalendar does not provide styling for the active date (v-model). This is in dev-land, but quite easy to do via css. You can add something similar to your sass file:
 
 ```css
-.q-selected-date
+.q-active-date
   color: blue
-  background: #CCCCFF
+  background: #CCCCFF !important
 ```
 
 Of course, change the color to anything you want. Alternatively, provide a bordered outline as well. The choice is yours.
+
+::: info
+Note that for the User selected date, we use the css class `.q-active-date` to avoid conflict with `.q-selected-date` which is used for multi-selected dates.
+:::
 
 # Navigation
 

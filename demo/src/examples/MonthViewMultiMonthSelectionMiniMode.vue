@@ -10,6 +10,7 @@
         view="month"
         locale="en-us"
         :mini-mode="true"
+        no-active-date
         short-weekday-label
         animated
         :selected-start-end-dates="startEndDates"
@@ -24,6 +25,7 @@
         view="month"
         locale="en-us"
         :mini-mode="true"
+        no-active-date
         short-weekday-label
         animated
         :selected-start-end-dates="startEndDates"
