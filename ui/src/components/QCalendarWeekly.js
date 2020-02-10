@@ -321,7 +321,8 @@ export default {
         this.selectedDates &&
         this.selectedDates.length > 0 &&
         this.selectedDates.includes(day.date)
-      ) || this.value === day.date
+      )
+      const activeDate = this.value === day.date
 
       if (this.enableTheme === true) {
         if (outside === true) {
@@ -345,7 +346,8 @@ export default {
         staticClass: 'q-calendar-weekly__day-label',
         class: [
           {
-            'q-selected-date': selectedDate
+            'q-selected-date': selectedDate,
+            'q-active-date': this.noActiveDate !== true && activeDate
           }
         ],
         props: {

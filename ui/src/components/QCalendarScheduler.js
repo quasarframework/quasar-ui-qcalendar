@@ -215,7 +215,7 @@ export default {
 
     __renderHeadDayBtn (h, day, idx) {
       const colorCurrent = day.current === true ? this.color : void 0
-      const selectedDate = this.value === day.date
+      const activeDate = this.value === day.date
 
       const scope = { day, idx }
       let colors = new Map(), color, backgroundColor
@@ -239,7 +239,7 @@ export default {
         staticClass: 'q-calendar-scheduler__head-day-label',
         class: [
           {
-            'q-selected-date': selectedDate
+            'q-active-date': this.noActiveDate !== true && activeDate
           }
         ],
         style: {
