@@ -133,6 +133,8 @@ Using the property `short-weekday-label` while in `mini-mode` gives an even shor
       </q-markdown>
     </example-viewer>
 
+    <example-viewer title="Mini-Mode - Selection (QInput)" file="MonthViewSelectionMiniModeQInput" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+
     <example-viewer title="Mini-Mode - Slots (day)" file="MonthViewSlotsMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Mini-Mode - Theme" file="MonthViewThemeMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
@@ -195,6 +197,7 @@ export default {
     this.addToToc('Mini-Mode - Selected Dates', 2)
     this.addToToc('Mini-Mode - Selection', 2)
     this.addToToc('Mini-Mode - Multi-Month Selection', 2)
+    this.addToToc('Mini-Mode - Selection (QInput)', 2)
     this.addToToc('Mini-Mode - Slots (day)', 2)
     this.addToToc('Mini-Mode - Theme', 2)
 
