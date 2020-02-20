@@ -28,7 +28,9 @@ export default {
   data () {
     return {
       selectedDate: '',
-      theme: {},
+      theme: {
+        name: 'default'
+      },
       themes: [
         {
           name: 'default'

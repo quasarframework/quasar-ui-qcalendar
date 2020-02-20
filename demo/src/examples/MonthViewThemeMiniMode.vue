@@ -48,7 +48,9 @@ export default {
       splitterModel: 90,
       miniMode: false,
       selectedDate: '',
-      theme: {},
+      theme: {
+        name: 'default'
+      },
       themes: [
         {
           name: 'default'
