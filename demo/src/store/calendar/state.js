@@ -23,5 +23,7 @@ export default {
   resourceWidth: 100,
   dayHeight: 100,
   enableTheme: false,
-  theme: {}
+  theme: {
+    name: 'default'
+  }
 }
