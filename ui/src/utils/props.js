@@ -185,6 +185,12 @@ export default {
       validator: validateNumber
     }
   },
+  agenda: {
+    leftColumnOptions: Array,
+    rightColumnOptions: Array,
+    columnOptionsId: String,
+    columnOptionsLabel: String
+  },
   calendar: {
     view: {
       type: String,
