@@ -39,6 +39,51 @@ For slots that return `day` or `timestamp`, it looks like this:
 
     <example-viewer title="First Day Monday" file="AgendaViewWeekFirstDayMonday" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Five Day Workweek" file="AgendaViewWeekFiveDayWorkweek" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Column Options" file="AgendaViewWeekColumnOptions" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+      <q-markdown>
+There are two properties: `left-column-options` and `right-column-options`, that allow you to define extra columns on the left and right of the `week-agenda` view. If you are using QCalendar to create a Planner, you will need this functionality.
+
+These properties take an array of objects, like so:
+
+(Template code)
+```html
+    :left-column-options="leftColumnOptions"
+    :right-column-options="rightColumnOptions"
+```
+
+(JavaScript code)
+```js
+  data () {
+    return {
+      leftColumnOptions: [
+        {
+          id: 'over-due',
+          label: 'Over Due'
+        },
+        {
+          id: '90-days-overdue',
+          label: '90 Days Over'
+        }
+      ],
+      rightColumnOptions: [
+        {
+          id: 'summary'
+          label: 'Summary'
+        }
+      ]
+    }
+  }
+```
+If you do not wish to have an `id` and `label` keys in your data (say, it came from a database), you can define which keys to use for this by using the `column-options-id` and `column-options-label` to define them.
+
+```html
+    column-options-id="column_id"
+    column-options-label="name"
+```
+
+To manage data, use the `column-header` and `column-body` slots.
+      </q-markdown>
+    </example-viewer>
     <example-viewer title="Theme" file="AgendaViewWeekTheme" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
   </div>
 </template>
