@@ -60,6 +60,14 @@
         "view=\"week-agenda\""
       ]
     },
+    "bordered": {
+      "type": "Boolean",
+      "category": "style",
+      "desc": "Places a border around the calendar",
+      "applicable": [
+        "all"
+      ]
+    },
     "now": {
       "type": "String",
       "category": "model",
@@ -851,6 +859,42 @@
         "month-label-size=\"sm\"",
         "month-label-size=\"md\""
       ]
+    },
+    "left-column-options": {
+      "type": "Object",
+      "category": "behavior",
+      "addedIn": "v1.4.1",
+      "desc": "An array of objects used to add columns to the left side of the agenda. Each object must have an id and label key or define the id object key using the `column-options-id` and the label using the `column-options-label` properties. The value of the id should be unique for each object. The object is passed to slots",
+      "applicable": [
+        "week-agenda"
+      ],
+      "examples": [
+        ":left-column-options=\"leftColumnOptions\""
+      ]
+    },
+    "right-column-options": {
+      "type": "Object",
+      "category": "behavior",
+      "addedIn": "v1.4.1",
+      "desc": "An array of objects used to add columns to the right side of the agenda. Each object must have an id and label key or define the id object key using the `column-options-id` and the label using the `column-options-label` properties. The value of the id should be unique for each object. The object is passed to slots",
+      "applicable": [
+        "week-agenda"
+      ],
+      "examples": [
+        ":right-column-options=\"rightColumnOptions\""
+      ]
+    },
+    "column-options-id": {
+      "type": "String",
+      "category": "behavior",
+      "addedIn": "v1.4.1",
+      "desc": "The key in the object to use for `left-column-options` or `right-column-options` properties to define the id, otherwise `id` will be used"
+    },
+    "column-options-label": {
+      "type": "String",
+      "category": "behavior",
+      "addedIn": "v1.4.1",
+      "desc": "The key in the object to use for `left-column-options` or `right-column-options` properties to define the label, otherwise `label` will be used"
     }
   },
   "events": {
@@ -2003,6 +2047,286 @@
           "__exemption": [ "examples" ]
         }
       }
+    },
+    "click:column:head": {
+      "addedIn":"v1.4.1",
+      "desc": "Occurs on column header",
+      "applicable": [
+        "week-agenda"
+      ],
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "__exemption": [ "examples" ]
+        }
+      }
+    },
+    "contextmenu:column:head": {
+      "addedIn":"v1.4.1",
+      "desc": "Occurs on column header",
+      "applicable": [
+        "week-agenda"
+      ],
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "__exemption": [ "examples" ]
+        }
+      }
+    },
+    "mousedown:column:head": {
+      "addedIn":"v1.4.1",
+      "desc": "Occurs on column header",
+      "applicable": [
+        "week-agenda"
+      ],
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "__exemption": [ "examples" ]
+        }
+      }
+    },
+    "mouseup:column:head": {
+      "addedIn":"v1.4.1",
+      "desc": "Occurs on column header",
+      "applicable": [
+        "week-agenda"
+      ],
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "__exemption": [ "examples" ]
+        }
+      }
+    },
+    "mouseenter:column:head": {
+      "addedIn":"v1.4.1",
+      "desc": "Occurs on column header",
+      "applicable": [
+        "week-agenda"
+      ],
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "__exemption": [ "examples" ]
+        }
+      }
+    },
+    "mouseleave:column:head": {
+      "addedIn":"v1.4.1",
+      "desc": "Occurs on column header",
+      "applicable": [
+        "week-agenda"
+      ],
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "__exemption": [ "examples" ]
+        }
+      }
+    },
+    "mousemove:column:head": {
+      "addedIn":"v1.4.1",
+      "desc": "Occurs on column header",
+      "applicable": [
+        "week-agenda"
+      ],
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "__exemption": [ "examples" ]
+        }
+      }
+    },
+    "touchstart:column:head": {
+      "addedIn":"v1.4.1",
+      "desc": "Occurs on column header",
+      "applicable": [
+        "week-agenda"
+      ],
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "__exemption": [ "examples" ]
+        }
+      }
+    },
+    "touchend:column:head": {
+      "addedIn":"v1.4.1",
+      "desc": "Occurs on column header",
+      "applicable": [
+        "week-agenda"
+      ],
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "__exemption": [ "examples" ]
+        }
+      }
+    },
+    "touchmove:column:head": {
+      "addedIn":"v1.4.1",
+      "desc": "Occurs on column header",
+      "applicable": [
+        "week-agenda"
+      ],
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "__exemption": [ "examples" ]
+        }
+      }
+    },
+    "click:column": {
+      "addedIn":"v1.4.1",
+      "desc": "Occurs on column",
+      "applicable": [
+        "week-agenda"
+      ],
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "__exemption": [ "examples" ]
+        }
+      }
+    },
+    "contextmenu:column": {
+      "addedIn":"v1.4.1",
+      "desc": "Occurs on column",
+      "applicable": [
+        "week-agenda"
+      ],
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "__exemption": [ "examples" ]
+        }
+      }
+    },
+    "mousedown:column": {
+      "addedIn":"v1.4.1",
+      "desc": "Occurs on column",
+      "applicable": [
+        "week-agenda"
+      ],
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "__exemption": [ "examples" ]
+        }
+      }
+    },
+    "mouseup:column": {
+      "addedIn":"v1.4.1",
+      "desc": "Occurs on column",
+      "applicable": [
+        "week-agenda"
+      ],
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "__exemption": [ "examples" ]
+        }
+      }
+    },
+    "mouseenter:column": {
+      "addedIn":"v1.4.1",
+      "desc": "Occurs on column",
+      "applicable": [
+        "week-agenda"
+      ],
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "__exemption": [ "examples" ]
+        }
+      }
+    },
+    "mouseleave:column": {
+      "addedIn":"v1.4.1",
+      "desc": "Occurs on column",
+      "applicable": [
+        "week-agenda"
+      ],
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "__exemption": [ "examples" ]
+        }
+      }
+    },
+    "mousemove:column": {
+      "addedIn":"v1.4.1",
+      "desc": "Occurs on column",
+      "applicable": [
+        "week-agenda"
+      ],
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "__exemption": [ "examples" ]
+        }
+      }
+    },
+    "touchstart:column": {
+      "addedIn":"v1.4.1",
+      "desc": "Occurs on column",
+      "applicable": [
+        "week-agenda"
+      ],
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "__exemption": [ "examples" ]
+        }
+      }
+    },
+    "touchend:column": {
+      "addedIn":"v1.4.1",
+      "desc": "Occurs on column",
+      "applicable": [
+        "week-agenda"
+      ],
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "__exemption": [ "examples" ]
+        }
+      }
+    },
+    "touchmove:column:": {
+      "addedIn":"v1.4.1",
+      "desc": "Occurs on column",
+      "applicable": [
+        "week-agenda"
+      ],
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "__exemption": [ "examples" ]
+        }
+      }
     }
   },
   "methods": {
@@ -2148,6 +2472,20 @@
         "day"
       ]
     },
+    "day-header-label": {
+      "desc": "Used to replace the label",
+      "scope": {
+        "day": {
+          "type": "Object",
+          "desc": "Timestamp object",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "applicable": [
+        "day",
+        "week-agenda"
+      ]
+    },
     "day-body": {
       "desc": "index is added if using `column-count` property",
       "scope": {
@@ -2159,7 +2497,7 @@
       },
       "applicable": [
         "day",
-        "agenda"
+        "week-agenda"
       ]
     },
     "day-container": {
@@ -2463,6 +2801,34 @@
       },
       "applicable": [
         "scheduler"
+      ]
+    },
+    "column-header": {
+      "desc": "Use this slot to add to the column header when properties `left-column-options` or `right-column-options` are used",
+      "addedIn": "v1.4.1",
+      "scope": {
+        "data": {
+          "type": "Object",
+          "desc": "This is the object passed to properties `left-column-options` or `right-column-options`",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "applicable": [
+        "week-agenda"
+      ]
+    },
+    "column-body": {
+      "desc": "Use this slot to add to the column body when properties `left-column-options` or `right-column-options` are used",
+      "addedIn": "v1.4.1",
+      "scope": {
+        "data": {
+          "type": "Object",
+          "desc": "This is the object passed to properties `left-column-options` or `right-column-options`",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "applicable": [
+        "week-agenda"
       ]
     }
   }
