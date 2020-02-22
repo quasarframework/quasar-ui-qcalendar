@@ -200,6 +200,7 @@ export default {
     value: { // v-model
       type: String,
       validator: v => v === '' || validateTimestamp(v)
-    }
+    },
+    bordered: Boolean
   }
 }
