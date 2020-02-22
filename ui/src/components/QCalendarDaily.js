@@ -164,6 +164,8 @@ export default {
     },
 
     __renderHeadWeekday (h, day) {
+      const slot = this.$scopedSlots['day-header-label']
+      const scope = this.getScopeForSlot(day)
       const colorCurrent = day.current === true ? this.color : void 0
 
       let colors = new Map(), color, backgroundColor
@@ -186,7 +188,7 @@ export default {
       return h('div', updateColors(colorCurrent !== void 0 ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
         staticClass: 'ellipsis q-calendar-daily__head-weekday'
       }), [
-        this.__renderHeadDayLabel(h, day, this.shortWeekdayLabel)
+        (slot && slot(scope)) || this.__renderHeadDayLabel(h, day, this.shortWeekdayLabel)
       ])
     },
 
