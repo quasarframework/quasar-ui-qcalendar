@@ -31,6 +31,10 @@ export default {
       return {
         'q-calendar-daily': true
       }
+    },
+
+    computedWidth () {
+      return 100 / this.days.length
     }
   },
 
@@ -109,7 +113,7 @@ export default {
     __renderHeadDay (h, day, idx) {
       const slot = this.$scopedSlots['day-header']
       const scope = this.getScopeForSlot(day, idx)
-      const width = 100 / this.days.length
+      const width = this.computedWidth
       let dragOver
 
       let colors = new Map(), color, backgroundColor
@@ -323,7 +327,7 @@ export default {
     __renderDay (h, day, dayIndex, idx) {
       const slot = this.$scopedSlots['day-body']
       const scope = this.getScopeForSlot(day, idx)
-      const width = 100 / this.days.length
+      const width = this.computedWidth
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
