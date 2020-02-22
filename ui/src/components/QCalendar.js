@@ -38,7 +38,8 @@ export default {
     ...props.calendar,
     ...props.weeks,
     ...props.intervals,
-    ...props.scheduler
+    ...props.scheduler,
+    ...props.agenda
   },
 
   data: () => ({
@@ -294,6 +295,9 @@ export default {
 
     const data = {
       staticClass: 'q-calendar',
+      class: {
+        'q-calendar-daily__bordered': this.bordered
+      },
       key: this.keyValue,
       props: {
         ...this.$props,
