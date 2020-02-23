@@ -38,7 +38,8 @@ export default {
     ...props.calendar,
     ...props.weeks,
     ...props.intervals,
-    ...props.scheduler
+    ...props.scheduler,
+    ...props.agenda
   },
 
   data: () => ({
@@ -149,12 +150,17 @@ export default {
     }
   },
 
+  beforeMount () {
+    // get start and end dates
+    this.__checkChange()
+  },
+
   watch: {
     renderProps: '__checkChange'
   },
 
   methods: {
-    __checkChange (val, oldval) {
+    __checkChange () {
       const { start, end } = this.renderProps
       this.keyValue = 0
       if (this.lastStart === void 0 || this.lastEnd === void 0 || start.date !== this.lastStart || end.date !== this.lastEnd) {
@@ -294,6 +300,9 @@ export default {
 
     const data = {
       staticClass: 'q-calendar',
+      class: {
+        'q-calendar-daily__bordered': this.bordered
+      },
       key: this.keyValue,
       props: {
         ...this.$props,

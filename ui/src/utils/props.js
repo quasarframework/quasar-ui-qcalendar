@@ -185,6 +185,12 @@ export default {
       validator: validateNumber
     }
   },
+  agenda: {
+    leftColumnOptions: Array,
+    rightColumnOptions: Array,
+    columnOptionsId: String,
+    columnOptionsLabel: String
+  },
   calendar: {
     view: {
       type: String,
@@ -194,6 +200,7 @@ export default {
     value: { // v-model
       type: String,
       validator: v => v === '' || validateTimestamp(v)
-    }
+    },
+    bordered: Boolean
   }
 }

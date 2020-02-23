@@ -64,6 +64,13 @@ const routes = [
     children: [
       { path: '', component: () => import('pages/Calendar.vue') }
     ]
+  },
+  {
+    path: '/demos',
+    component: () => import('layouts/DemoLayout.vue'),
+    children: [
+      { path: 'planner', component: () => import('pages/Planner.vue') }
+    ]
   }
 ]
 

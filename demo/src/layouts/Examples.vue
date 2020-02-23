@@ -56,8 +56,6 @@
             <q-item
               to="/examples/day-view"
               clickable
-              @click="activeMenuItem = 'day-view'"
-              :active="activeMenuItem === 'day-view'"
             >
               <q-item-section avatar>
                 <q-icon name="fas fa-calendar-day" />
@@ -70,8 +68,6 @@
             <q-item
               to="/examples/week-view"
               clickable
-              @click="activeMenuItem = 'week-view'"
-              :active="activeMenuItem === 'week-view'"
             >
               <q-item-section avatar>
                 <q-icon name="fas fa-calendar-week" />
@@ -84,8 +80,6 @@
             <q-item
               to="/examples/month-view"
               clickable
-              @click="activeMenuItem = 'month-view'"
-              :active="activeMenuItem === 'month-view'"
             >
               <q-item-section avatar>
                 <q-icon name="fas fa-calendar-alt" />
@@ -98,8 +92,6 @@
             <q-item
               to="/examples/scheduler-view"
               clickable
-              @click="activeMenuItem = 'scheduler-view'"
-              :active="activeMenuItem === 'scheduler-view'"
             >
               <q-item-section avatar>
                 <q-icon name="fas fa-calendar" />
@@ -112,14 +104,24 @@
             <q-item
               to="/examples/agenda-view"
               clickable
-              @click="activeMenuItem = 'agenda-view'"
-              :active="activeMenuItem === 'agenda-view'"
             >
               <q-item-section avatar>
                 <q-icon name="view_agenda" />
               </q-item-section>
               <q-item-section>
                 <q-item-label>Agenda View</q-item-label>
+              </q-item-section>
+            </q-item>
+
+            <q-item
+              to="/demos/planner"
+              clickable
+            >
+              <q-item-section avatar>
+                <q-icon name="far fa-calendar-alt" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>Planner</q-item-label>
               </q-item-section>
             </q-item>
 
@@ -198,8 +200,7 @@ export default {
       version: version,
       leftDrawerOpen: this.$q.platform.is.desktop,
       rightDrawerOpen: this.$q.platform.is.desktop,
-      activeToc: 0,
-      activeMenuItem: 'day-view'
+      activeToc: 0
     }
   },
   mounted () {
