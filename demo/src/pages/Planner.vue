@@ -1,6 +1,8 @@
 <template>
   <q-page padding>
-    <div class="col-12">This is a WIP. Anyone willing to take time to PR updates would be appreciated.</div>
+    <q-markdown>
+This page is a WIP - please consider making a PR to make this better, it will be appreciated. You can view the source for [Planner](https://github.com/quasarframework/quasar-ui-qcalendar/blob/dev/demo/src/pages/Planner.vue) and [PlannerItem](https://github.com/quasarframework/quasar-ui-qcalendar/blob/dev/demo/src/components/PlannerItem.vue) on Github.
+    </q-markdown>
     <q-btn flat dense label="Today" class="q-mx-md" @click="setToday"></q-btn>
     <q-btn flat dense round icon="keyboard_arrow_left" @click="onPrev"></q-btn>
     <q-btn flat dense round icon="keyboard_arrow_right" @click="onNext"></q-btn>
@@ -14,6 +16,7 @@
       :left-column-options="leftColumnOptions"
       :right-column-options="rightColumnOptions"
       bordered
+      @change="onChange"
       style="height: calc(100vh - 200px)"
     >
       <template #column-header-label="data">
@@ -43,46 +46,19 @@
             <div class="cursor-pointer"><q-icon name="add"/>Add Job</div>
             <div class="cursor-pointer"><q-icon name="note_add" />Add Note</div>
           </q-card>
-          <template v-for="due in overdue">
-            <q-card :key="due.id" class="q-mr-xs q-mb-xs q-px-sm">
-              <div class="row items-center justify-start">
-                <div class="col" style="max-width: 30px; width: 100%">
-                  <q-icon :name="due.selected ? 'check_box' : 'check_box_outline_blank'" :class="'cursor-pointer' + (due.selected ? ' text-red-8' : ' text-blue-8')" @click="due.selected = !due.selected" />
-                </div>
-                <div :class="'ellipsis col-grow' + (due.selected ? ' text-red-8' : ' text-blue-8')">{{ due.name }}</div>
-              </div>
-              <div class="row items-center justify-start">
-                <div class="col" style="max-width: 30px; width: 100%">
-                  <q-icon name="location_on" />
-                </div>
-                <div class="ellipsis col-grow">{{ due.address }}</div>
-              </div>
-              <div class="row items-center justify-start">
-                <div class="col" style="max-width: 30px; width: 100%">
-                  <q-icon name="mail_outline" />
-                </div>
-                <div class="ellipsis col-grow">{{ due.email }}</div>
-              </div>
-              <div class="row items-center justify-start">
-                <div class="col" style="max-width: 30px; width: 100%">
-                  <q-icon name="call" />
-                </div>
-                <div class="ellipsis col-grow">{{ due.phone }}</div>
-              </div>
-              <div class="row items-center justify-start">
-                <div class="col" style="max-width: 30px; width: 100%">
-                  <q-icon name="work" />
-                </div>
-                <div class="ellipsis col-grow">{{ due.workDone }}</div>
-              </div>
-              <div class="row items-center justify-start">
-                <div class="col" style="max-width: 30px; width: 100%">
-                  <q-icon name="calendar_today" />
-                </div>
-                <div class="ellipsis col-grow">{{ due.workDate }}</div>
-                <div>${{ due.amount }}</div>
-              </div>
-            </q-card>
+          <template v-for="item in overdue">
+            <planner-item
+              :key="'overdue-' + item.id"
+              :selected.sync="item.selected"
+              :name="item.name"
+              :address="item.address"
+              :email="item.email"
+              :phone="item.phone"
+              :work-done="item.workDone"
+              :work-date="item.workDate"
+              :amount="item.amount"
+              :days-over="item.daysOver"
+            />
           </template>
         </template>
       </template>
@@ -92,24 +68,19 @@
           <div class="cursor-pointer"><q-icon name="add" />Add Job</div>
           <div class="cursor-pointer"><q-icon name="note_add" />Add Note</div>
         </q-card>
-        <template v-for="(agenda) in getAgenda(day)">
-          <div
-            :key="day.date + agenda.time"
-            :label="agenda.time"
-            class="justify-start q-ma-sm shadow-5 bg-grey-6"
-          >
-            <div v-if="agenda.avatar" class="row justify-center" style="margin-top: 30px; width: 100%;">
-              <q-avatar style="margin-top: -25px; margin-bottom: 10px; font-size: 60px; max-height: 50px;">
-                <img :src="agenda.avatar" style="border: #9e9e9e solid 5px;">
-              </q-avatar>
-            </div>
-            <div class="col-12 q-px-sm">
-              <strong>{{ agenda.time }}</strong>
-            </div>
-            <div v-if="agenda.desc" class="col-12 q-px-sm" style="font-size: 10px;">
-              {{ agenda.desc }}
-            </div>
-          </div>
+        <template v-for="item in getAgenda(day)">
+          <planner-item
+            :key="item.id"
+            :selected.sync="item.selected"
+            :name="item.name"
+            :address="item.address"
+            :email="item.email"
+            :phone="item.phone"
+            :work-done="item.workDone"
+            :work-date="item.workDate"
+            :amount="item.amount"
+            :days-over="item.daysOver"
+          />
         </template>
       </template>
 
@@ -120,14 +91,39 @@
 <script>
 import { getLocale } from '../util/getLocale'
 import { padTime } from '../util/time'
-import { createNativeLocaleFormatter } from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
+import {
+  createNativeLocaleFormatter,
+  parseTimestamp,
+  daysBetween,
+  moveRelativeDays,
+  prevDay,
+  updateFormatted,
+  padNumber
+} from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
+
+const names = ['Ezekiel Stout', 'Aurora Frank', 'Ethan Buchanan', 'Sam Parker', 'Jonathan Hall', 'Carl Flynn', 'Raymond Ingram', 'Abel Glover', 'Margaret Medina', 'Jalen Kane', 'Monserrat Stein', 'Andres Gentry']
+const addresses = ['262 East Cypress Drive', '8719 Anderson Road', '242 W. Shady Road', '4 Lexington Avenue', '7940 Sunset Court', '9866 NE. Rockaway Ave.', '9 Santa Clara Drive', '774 Charles Road', '5 East Thomas St.', '7714 Lilac Rd.', '561 Bowman St.', '517 Brickell Ave.']
+const emails = ['qmacro@me.com', 'amimojo@gmail.com', 'padme@mac.com', 'flaviog@verizon.net', 'srour@mac.com', 'retoh@outlook.com', 'pappp@me.com', 'mcraigw@hotmail.com', 'smcnabb@hotmail.com', 'rnelson@att.net', 'fwitness@live.com', 'stomv@aol.com']
+const phones = ['555-555-0000', '555-555-1111', '555-555-2222', '555-555-3333', '555-555-4444', '555-555-5555', '555-555-6666', '555-555-7777', '555-555-8888', '555-555-9999']
+// const amounts = []
+// const workDates = []
+const workDone = ['Window cleaning', 'Exterior cleaning', 'Lawn maintenance', 'Tree service']
 
 export default {
   name: 'Planner',
 
+  components: {
+    PlannerItem: () => import('../components/PlannerItem')
+  },
+
   data () {
     return {
       selectedDate: '',
+      today: '',
+      todayTimestamp: '',
+      startTimestamp: '',
+      endTimestamp: '',
+      weekdays: [1, 2, 3, 4, 5],
       leftColumnOptions: [
         {
           id: 'over-due',
@@ -151,266 +147,14 @@ export default {
         4: false,
         5: false
       },
-      overdue: [
-        {
-          selected: false,
-          id: 1,
-          address: '40 Portia Rd',
-          name: 'Danielle Narbett',
-          email: 'daniellenarbett@icloud.com',
-          phone: '555-555-5555',
-          amount: '45.00',
-          workDate: '2019-08-01',
-          workDone: 'Window cleaning'
-        },
-        {
-          selected: false,
-          id: 2,
-          address: '40 Portia Rd',
-          name: 'Danielle Narbett',
-          email: 'daniellenarbett@icloud.com',
-          phone: '555-555-5555',
-          amount: '45.00',
-          workDate: '2019-08-01',
-          workDone: 'Window cleaning'
-        },
-        {
-          selected: false,
-          id: 3,
-          address: '40 Portia Rd',
-          name: 'Danielle Narbett',
-          email: 'daniellenarbett@icloud.com',
-          phone: '555-555-5555',
-          amount: '45.00',
-          workDate: '2019-08-01',
-          workDone: 'Window cleaning'
-        },
-        {
-          selected: false,
-          id: 4,
-          address: '40 Portia Rd',
-          name: 'Danielle Narbett',
-          email: 'daniellenarbett@icloud.com',
-          phone: '555-555-5555',
-          amount: '45.00',
-          workDate: '2019-08-01',
-          workDone: 'Window cleaning'
-        },
-        {
-          selected: false,
-          id: 5,
-          address: '40 Portia Rd',
-          name: 'Danielle Narbett',
-          email: 'daniellenarbett@icloud.com',
-          phone: '555-555-5555',
-          amount: '45.00',
-          workDate: '2019-08-01',
-          workDone: 'Window cleaning'
-        },
-        {
-          selected: false,
-          id: 6,
-          address: '40 Portia Rd',
-          name: 'Danielle Narbett',
-          email: 'daniellenarbett@icloud.com',
-          phone: '555-555-5555',
-          amount: '45.00',
-          workDate: '2019-08-01',
-          workDone: 'Window cleaning'
-        },
-        {
-          selected: false,
-          id: 7,
-          address: '40 Portia Rd',
-          name: 'Danielle Narbett',
-          email: 'daniellenarbett@icloud.com',
-          phone: '555-555-5555',
-          amount: '45.00',
-          workDate: '2019-08-01',
-          workDone: 'Window cleaning'
-        },
-        {
-          selected: false,
-          id: 8,
-          address: '40 Portia Rd',
-          name: 'Danielle Narbett',
-          email: 'daniellenarbett@icloud.com',
-          phone: '555-555-5555',
-          amount: '45.00',
-          workDate: '2019-08-01',
-          workDone: 'Window cleaning'
-        },
-        {
-          selected: false,
-          id: 9,
-          address: '40 Portia Rd',
-          name: 'Danielle Narbett',
-          email: 'daniellenarbett@icloud.com',
-          phone: '555-555-5555',
-          amount: '45.00',
-          workDate: '2019-08-01',
-          workDone: 'Window cleaning'
-        },
-        {
-          selected: false,
-          id: 10,
-          address: '40 Portia Rd',
-          name: 'Danielle Narbett',
-          email: 'daniellenarbett@icloud.com',
-          phone: '555-555-5555',
-          amount: '45.00',
-          workDate: '2019-08-01',
-          workDone: 'Window cleaning'
-        },
-        {
-          selected: false,
-          id: 11,
-          address: '40 Portia Rd',
-          name: 'Danielle Narbett',
-          email: 'daniellenarbett@icloud.com',
-          phone: '555-555-5555',
-          amount: '45.00',
-          workDate: '2019-08-01',
-          workDone: 'Window cleaning'
-        },
-        {
-          selected: false,
-          id: 12,
-          address: '40 Portia Rd',
-          name: 'Danielle Narbett',
-          email: 'daniellenarbett@icloud.com',
-          phone: '555-555-5555',
-          amount: '45.00',
-          workDate: '2019-08-01',
-          workDone: 'Window cleaning'
-        },
-        {
-          selected: false,
-          id: 13,
-          address: '40 Portia Rd',
-          name: 'Danielle Narbett',
-          email: 'daniellenarbett@icloud.com',
-          phone: '555-555-5555',
-          amount: '45.00',
-          workDate: '2019-08-01',
-          workDone: 'Window cleaning'
-        }
-      ],
+      overdue: [],
       agenda: {
         // value represents day of the week
-        1: [
-          {
-            time: '08:00',
-            avatar: 'https://cdn.quasar.dev/img/boy-avatar.png',
-            desc: 'Meeting with CEO'
-          },
-          {
-            time: '08:30',
-            avatar: 'https://cdn.quasar.dev/img/avatar.png',
-            desc: 'Meeting with HR'
-          },
-          {
-            time: '10:00',
-            avatar: 'https://cdn.quasar.dev/img/avatar1.jpg',
-            desc: 'Meeting with Karen'
-          }
-        ],
-        2: [
-          {
-            time: '11:30',
-            avatar: 'https://cdn.quasar.dev/img/avatar2.jpg',
-            desc: 'Meeting with Alisha'
-          },
-          {
-            time: '17:00',
-            avatar: 'https://cdn.quasar.dev/img/avatar3.jpg',
-            desc: 'Meeting with Sarah'
-          }
-        ],
-        3: [
-          {
-            time: '08:00',
-            desc: 'Stand-up SCRUM',
-            avatar: 'https://cdn.quasar.dev/img/material.png'
-          },
-          {
-            time: '09:00',
-            avatar: 'https://cdn.quasar.dev/img/boy-avatar.png'
-          },
-          {
-            time: '10:00',
-            desc: 'Sprint planning',
-            avatar: 'https://cdn.quasar.dev/img/material.png'
-          },
-          {
-            time: '13:00',
-            avatar: 'https://cdn.quasar.dev/img/avatar1.jpg'
-          }
-        ],
-        4: [
-          {
-            time: '09:00',
-            avatar: 'https://cdn.quasar.dev/img/avatar3.jpg'
-          },
-          {
-            time: '10:00',
-            avatar: 'https://cdn.quasar.dev/img/avatar2.jpg'
-          },
-          {
-            time: '13:00',
-            avatar: 'https://cdn.quasar.dev/img/material.png'
-          }
-        ],
-        5: [
-          {
-            time: '08:00',
-            avatar: 'https://cdn.quasar.dev/img/boy-avatar.png'
-          },
-          {
-            time: '09:00',
-            avatar: 'https://cdn.quasar.dev/img/avatar2.jpg'
-          },
-          {
-            time: '09:30',
-            avatar: 'https://cdn.quasar.dev/img/avatar4.jpg'
-          },
-          {
-            time: '10:00',
-            avatar: 'https://cdn.quasar.dev/img/avatar5.jpg'
-          },
-          {
-            time: '11:30',
-            avatar: 'https://cdn.quasar.dev/img/material.png'
-          },
-          {
-            time: '13:00',
-            avatar: 'https://cdn.quasar.dev/img/avatar6.jpg'
-          },
-          {
-            time: '13:30',
-            avatar: 'https://cdn.quasar.dev/img/avatar3.jpg'
-          },
-          {
-            time: '14:00',
-            avatar: 'https://cdn.quasar.dev/img/linux-avatar.png'
-          },
-          {
-            time: '14:30',
-            avatar: 'https://cdn.quasar.dev/img/avatar.png'
-          },
-          {
-            time: '15:00',
-            avatar: 'https://cdn.quasar.dev/img/boy-avatar.png'
-          },
-          {
-            time: '15:30',
-            avatar: 'https://cdn.quasar.dev/img/avatar2.jpg'
-          },
-          {
-            time: '16:00',
-            avatar: 'https://cdn.quasar.dev/img/avatar6.jpg'
-          }
-        ]
+        1: [],
+        2: [],
+        3: [],
+        4: [],
+        5: []
       }
     }
   },
@@ -418,7 +162,13 @@ export default {
   beforeMount () {
     this.locale = getLocale()
     this.updateFormatters()
-    this.setToday()
+    this.today = this.formatDate() // save today's date
+    this.todayTimestamp = parseTimestamp(this.today)
+    this.setToday() // set calendar to today's date
+  },
+
+  mounted () {
+    this.generateLists()
   },
 
   computed: {
@@ -496,6 +246,58 @@ export default {
         this.dateFormatter = void 0
         this.titleFormatter = void 0
       }
+    },
+
+    // this is called whenever the calendar start/end dates change
+    onChange ({ start, end }) {
+      this.startTimestamp = start
+      this.endTimestamp = end
+    },
+
+    generateLists () {
+      this.generateList(this.overdue, Math.floor(Math.random() * 10) + 3, this.startTimestamp, true)
+      this.generateList(this.agenda[1], Math.floor(Math.random() * 10) + 3, this.startTimestamp)
+      this.generateList(this.agenda[2], Math.floor(Math.random() * 10) + 3, this.startTimestamp)
+      this.generateList(this.agenda[3], Math.floor(Math.random() * 10) + 3, this.startTimestamp)
+      this.generateList(this.agenda[4], Math.floor(Math.random() * 10) + 3, this.startTimestamp)
+      this.generateList(this.agenda[5], Math.floor(Math.random() * 10) + 3, this.startTimestamp)
+    },
+
+    generateList (list, count, timestamp, overdue = false) {
+      list.splice(0, list.length)
+
+      for (let i = 0; i < count; ++i) {
+        list[i] = {}
+        list[i].selected = false
+        list[i].id = i
+        list[i].address = addresses[Math.floor((Math.random() * 100) % addresses.length)]
+        list[i].name = names[Math.floor((Math.random() * 100) % names.length)]
+        list[i].email = emails[Math.floor((Math.random() * 100) % emails.length)]
+        list[i].phone = phones[Math.floor((Math.random() * 100) % phones.length)]
+        list[i].amount = this.generateAmount()
+        list[i].workDate = overdue === true ? this.generateDate(timestamp) : timestamp.date
+        list[i].workDone = workDone[Math.floor((Math.random() * 100) % workDone.length)]
+        list[i].daysOver = overdue === true ? this.getDaysBetween(list[i].workDate, this.today) : 0
+      }
+    },
+
+    generateDate (startTimestamp) {
+      const days = Math.floor((Math.random() * 100) % 30)
+      let ts = moveRelativeDays(startTimestamp, prevDay, days)
+      ts = updateFormatted(ts) // needed to update static values after date change
+      return ts.date
+    },
+
+    getDaysBetween (startDate, endDate) {
+      const timestampStart = parseTimestamp(startDate)
+      const timestampEnd = parseTimestamp(endDate)
+      return daysBetween(timestampStart, timestampEnd)
+    },
+
+    generateAmount () {
+      const integer = padNumber(Math.floor(Math.random() * 100), 2)
+      const fractional = padNumber(Math.floor(Math.random() * 100), 2)
+      return integer + '.' + fractional
     }
   }
 }
