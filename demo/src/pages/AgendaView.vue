@@ -3,6 +3,8 @@
     <example-title title="Agenda View" />
     <q-markdown>
 The `agenda` views by themselves are rather boring. It's up to the developer to fill the content via the `day-body` slot (more about this below).
+
+For another example on how to use the Agenda view, check out the [Planner example](/demos/planner).
     </q-markdown>
     <example-viewer title="Basic" file="AgendaViewBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Agenda View (week) - Basic" file="AgendaViewWeekBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
