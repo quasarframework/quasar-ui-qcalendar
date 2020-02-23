@@ -150,12 +150,17 @@ export default {
     }
   },
 
+  beforeMount () {
+    // get start and end dates
+    this.__checkChange()
+  },
+
   watch: {
     renderProps: '__checkChange'
   },
 
   methods: {
-    __checkChange (val, oldval) {
+    __checkChange () {
       const { start, end } = this.renderProps
       this.keyValue = 0
       if (this.lastStart === void 0 || this.lastEnd === void 0 || start.date !== this.lastStart || end.date !== this.lastEnd) {
