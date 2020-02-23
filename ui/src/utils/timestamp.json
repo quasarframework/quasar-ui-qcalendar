@@ -695,7 +695,7 @@
     },
     "moveRelativeDays": {
       "desc": "Returns the timestamp set to the relative day, takes into account allowed weekdays",
-      "addedIn": "v1.4.1",
+      "addedIn": "v1.5.0",
       "params": {
         "timestamp": {
           "type": "Object",

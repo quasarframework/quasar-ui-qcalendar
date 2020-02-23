@@ -863,7 +863,7 @@
     "left-column-options": {
       "type": "Object",
       "category": "behavior",
-      "addedIn": "v1.4.1",
+      "addedIn": "v1.5.0",
       "desc": "An array of objects used to add columns to the left side of the agenda. Each object must have an id and label key or define the id object key using the `column-options-id` and the label using the `column-options-label` properties. The value of the id should be unique for each object. The object is passed to slots",
       "applicable": [
         "week-agenda"
@@ -875,7 +875,7 @@
     "right-column-options": {
       "type": "Object",
       "category": "behavior",
-      "addedIn": "v1.4.1",
+      "addedIn": "v1.5.0",
       "desc": "An array of objects used to add columns to the right side of the agenda. Each object must have an id and label key or define the id object key using the `column-options-id` and the label using the `column-options-label` properties. The value of the id should be unique for each object. The object is passed to slots",
       "applicable": [
         "week-agenda"
@@ -887,7 +887,7 @@
     "column-options-id": {
       "type": "String",
       "category": "behavior",
-      "addedIn": "v1.4.1",
+      "addedIn": "v1.5.0",
       "desc": "The key in the object to use for `left-column-options` or `right-column-options` properties to define the id, otherwise `id` will be used",
       "applicable": [
         "week-agenda"
@@ -899,7 +899,7 @@
     "column-options-label": {
       "type": "String",
       "category": "behavior",
-      "addedIn": "v1.4.1",
+      "addedIn": "v1.5.0",
       "desc": "The key in the object to use for `left-column-options` or `right-column-options` properties to define the label, otherwise `label` will be used",
       "applicable": [
         "week-agenda"
@@ -2061,7 +2061,7 @@
       }
     },
     "click:column:head": {
-      "addedIn":"v1.4.1",
+      "addedIn": "v1.5.0",
       "desc": "Occurs on column header",
       "applicable": [
         "week-agenda"
@@ -2075,7 +2075,7 @@
       }
     },
     "contextmenu:column:head": {
-      "addedIn":"v1.4.1",
+      "addedIn": "v1.5.0",
       "desc": "Occurs on column header",
       "applicable": [
         "week-agenda"
@@ -2089,7 +2089,7 @@
       }
     },
     "mousedown:column:head": {
-      "addedIn":"v1.4.1",
+      "addedIn": "v1.5.0",
       "desc": "Occurs on column header",
       "applicable": [
         "week-agenda"
@@ -2103,7 +2103,7 @@
       }
     },
     "mouseup:column:head": {
-      "addedIn":"v1.4.1",
+      "addedIn": "v1.5.0",
       "desc": "Occurs on column header",
       "applicable": [
         "week-agenda"
@@ -2117,7 +2117,7 @@
       }
     },
     "mouseenter:column:head": {
-      "addedIn":"v1.4.1",
+      "addedIn": "v1.5.0",
       "desc": "Occurs on column header",
       "applicable": [
         "week-agenda"
@@ -2131,7 +2131,7 @@
       }
     },
     "mouseleave:column:head": {
-      "addedIn":"v1.4.1",
+      "addedIn": "v1.5.0",
       "desc": "Occurs on column header",
       "applicable": [
         "week-agenda"
@@ -2145,7 +2145,7 @@
       }
     },
     "mousemove:column:head": {
-      "addedIn":"v1.4.1",
+      "addedIn": "v1.5.0",
       "desc": "Occurs on column header",
       "applicable": [
         "week-agenda"
@@ -2159,7 +2159,7 @@
       }
     },
     "touchstart:column:head": {
-      "addedIn":"v1.4.1",
+      "addedIn": "v1.5.0",
       "desc": "Occurs on column header",
       "applicable": [
         "week-agenda"
@@ -2173,7 +2173,7 @@
       }
     },
     "touchend:column:head": {
-      "addedIn":"v1.4.1",
+      "addedIn": "v1.5.0",
       "desc": "Occurs on column header",
       "applicable": [
         "week-agenda"
@@ -2187,7 +2187,7 @@
       }
     },
     "touchmove:column:head": {
-      "addedIn":"v1.4.1",
+      "addedIn": "v1.5.0",
       "desc": "Occurs on column header",
       "applicable": [
         "week-agenda"
@@ -2201,7 +2201,7 @@
       }
     },
     "click:column": {
-      "addedIn":"v1.4.1",
+      "addedIn": "v1.5.0",
       "desc": "Occurs on column",
       "applicable": [
         "week-agenda"
@@ -2215,7 +2215,7 @@
       }
     },
     "contextmenu:column": {
-      "addedIn":"v1.4.1",
+      "addedIn": "v1.5.0",
       "desc": "Occurs on column",
       "applicable": [
         "week-agenda"
@@ -2229,7 +2229,7 @@
       }
     },
     "mousedown:column": {
-      "addedIn":"v1.4.1",
+      "addedIn": "v1.5.0",
       "desc": "Occurs on column",
       "applicable": [
         "week-agenda"
@@ -2243,7 +2243,7 @@
       }
     },
     "mouseup:column": {
-      "addedIn":"v1.4.1",
+      "addedIn": "v1.5.0",
       "desc": "Occurs on column",
       "applicable": [
         "week-agenda"
@@ -2257,7 +2257,7 @@
       }
     },
     "mouseenter:column": {
-      "addedIn":"v1.4.1",
+      "addedIn": "v1.5.0",
       "desc": "Occurs on column",
       "applicable": [
         "week-agenda"
@@ -2271,7 +2271,7 @@
       }
     },
     "mouseleave:column": {
-      "addedIn":"v1.4.1",
+      "addedIn": "v1.5.0",
       "desc": "Occurs on column",
       "applicable": [
         "week-agenda"
@@ -2285,7 +2285,7 @@
       }
     },
     "mousemove:column": {
-      "addedIn":"v1.4.1",
+      "addedIn": "v1.5.0",
       "desc": "Occurs on column",
       "applicable": [
         "week-agenda"
@@ -2299,7 +2299,7 @@
       }
     },
     "touchstart:column": {
-      "addedIn":"v1.4.1",
+      "addedIn": "v1.5.0",
       "desc": "Occurs on column",
       "applicable": [
         "week-agenda"
@@ -2313,7 +2313,7 @@
       }
     },
     "touchend:column": {
-      "addedIn":"v1.4.1",
+      "addedIn": "v1.5.0",
       "desc": "Occurs on column",
       "applicable": [
         "week-agenda"
@@ -2327,7 +2327,7 @@
       }
     },
     "touchmove:column:": {
-      "addedIn":"v1.4.1",
+      "addedIn": "v1.5.0",
       "desc": "Occurs on column",
       "applicable": [
         "week-agenda"
@@ -2817,7 +2817,7 @@
     },
     "column-header": {
       "desc": "Use this slot to add to the column header when properties `left-column-options` or `right-column-options` are used",
-      "addedIn": "v1.4.1",
+      "addedIn": "v1.5.0",
       "scope": {
         "data": {
           "type": "Object",
@@ -2831,7 +2831,7 @@
     },
     "column-body": {
       "desc": "Use this slot to add to the column body when properties `left-column-options` or `right-column-options` are used",
-      "addedIn": "v1.4.1",
+      "addedIn": "v1.5.0",
       "scope": {
         "data": {
           "type": "Object",
