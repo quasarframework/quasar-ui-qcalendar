@@ -2,6 +2,10 @@
   <q-page padding>
     <q-markdown>
 This page is a WIP - please consider making a PR to make this better, it will be appreciated. You can view the source for [Planner](https://github.com/quasarframework/quasar-ui-qcalendar/blob/dev/demo/src/pages/Planner.vue) and [PlannerItem](https://github.com/quasarframework/quasar-ui-qcalendar/blob/dev/demo/src/components/PlannerItem.vue) on Github.
+
+::: warning
+This Planner has not been optimized to work on mobile devices and currently requires a fairly decent width to look good.
+:::
     </q-markdown>
     <q-btn flat dense label="Today" class="q-mx-md" @click="setToday"></q-btn>
     <q-btn flat dense round icon="keyboard_arrow_left" @click="onPrev"></q-btn>
@@ -17,7 +21,7 @@ This page is a WIP - please consider making a PR to make this better, it will be
       :right-column-options="rightColumnOptions"
       bordered
       @change="onChange"
-      style="height: calc(100vh - 200px)"
+      style="height: calc(100vh - 300px)"
     >
       <template #column-header-label="data">
         <template v-if="data.id === 'over-due'">
@@ -49,7 +53,7 @@ This page is a WIP - please consider making a PR to make this better, it will be
           <template v-for="item in overdue">
             <planner-item
               :key="'overdue-' + item.id"
-              :selected.sync="item.selected"
+              v-model="item.selected"
               :name="item.name"
               :address="item.address"
               :email="item.email"
@@ -71,7 +75,7 @@ This page is a WIP - please consider making a PR to make this better, it will be
         <template v-for="item in getAgenda(day)">
           <planner-item
             :key="item.id"
-            :selected.sync="item.selected"
+            v-model="item.selected"
             :name="item.name"
             :address="item.address"
             :email="item.email"
@@ -107,7 +111,7 @@ const emails = ['qmacro@me.com', 'amimojo@gmail.com', 'padme@mac.com', 'flaviog@
 const phones = ['555-555-0000', '555-555-1111', '555-555-2222', '555-555-3333', '555-555-4444', '555-555-5555', '555-555-6666', '555-555-7777', '555-555-8888', '555-555-9999']
 // const amounts = []
 // const workDates = []
-const workDone = ['Window cleaning', 'Exterior cleaning', 'Lawn maintenance', 'Tree service']
+const workDone = ['Window cleaning', 'Exterior cleaning', 'Lawn maintenance', 'Tree service', 'Flower bed maintenance']
 
 export default {
   name: 'Planner',
@@ -159,15 +163,12 @@ export default {
     }
   },
 
-  beforeMount () {
+  mounted () {
     this.locale = getLocale()
     this.updateFormatters()
     this.today = this.formatDate() // save today's date
     this.todayTimestamp = parseTimestamp(this.today)
     this.setToday() // set calendar to today's date
-  },
-
-  mounted () {
     this.generateLists()
   },
 
@@ -204,14 +205,17 @@ export default {
 
     setToday () {
       this.selectedDate = this.formatDate()
+      this.generateLists()
     },
 
     onPrev () {
       this.$refs.calendar.prev()
+      this.generateLists()
     },
 
     onNext () {
       this.$refs.calendar.next()
+      this.generateLists()
     },
 
     formatDate (date) {
@@ -282,7 +286,7 @@ export default {
     },
 
     generateDate (startTimestamp) {
-      const days = Math.floor((Math.random() * 100) % 30)
+      const days = Math.floor((Math.random() * 100) % 30) + 1
       let ts = moveRelativeDays(startTimestamp, prevDay, days)
       ts = updateFormatted(ts) // needed to update static values after date change
       return ts.date

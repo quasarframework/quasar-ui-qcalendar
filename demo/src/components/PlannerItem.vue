@@ -2,9 +2,9 @@
   <q-card class="q-mr-xs q-mb-xs q-px-sm">
     <div class="row items-center justify-start">
       <div class="col" style="max-width: 30px; width: 100%">
-        <q-icon :name="selected ? 'check_box' : 'check_box_outline_blank'" :class="'cursor-pointer' + (selected ? ' text-red-8' : ' text-blue-8')" @click="console.log && $emit('update:selected', !selected)" />
+        <q-icon :name="value ? 'check_box' : 'check_box_outline_blank'" :class="'cursor-pointer' + (value ? ' text-red-8' : ' text-blue-8')" @click="$emit('input', !value)" />
       </div>
-      <div :class="'ellipsis col-grow' + (selected ? ' text-red-8' : ' text-blue-8')">{{ name }}</div>
+      <div :class="'ellipsis col-grow' + (value ? ' text-red-8' : ' text-blue-8')">{{ name }}</div>
     </div>
     <div class="row items-center justify-start">
       <div class="col" style="max-width: 30px; width: 100%">
@@ -56,8 +56,7 @@ export default {
   name: 'PlannerItem',
 
   props: {
-    id: [String, Number],
-    selected: Boolean,
+    value: Boolean,
     name: String,
     address: String,
     email: String,
