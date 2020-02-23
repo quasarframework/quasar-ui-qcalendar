@@ -888,13 +888,25 @@
       "type": "String",
       "category": "behavior",
       "addedIn": "v1.4.1",
-      "desc": "The key in the object to use for `left-column-options` or `right-column-options` properties to define the id, otherwise `id` will be used"
+      "desc": "The key in the object to use for `left-column-options` or `right-column-options` properties to define the id, otherwise `id` will be used",
+      "applicable": [
+        "week-agenda"
+      ],
+      "examples": [
+        "column-options-id=\"id\""
+      ]
     },
     "column-options-label": {
       "type": "String",
       "category": "behavior",
       "addedIn": "v1.4.1",
-      "desc": "The key in the object to use for `left-column-options` or `right-column-options` properties to define the label, otherwise `label` will be used"
+      "desc": "The key in the object to use for `left-column-options` or `right-column-options` properties to define the label, otherwise `label` will be used",
+      "applicable": [
+        "week-agenda"
+      ],
+      "examples": [
+        "column-options-label=\"name\""
+      ]
     }
   },
   "events": {
