@@ -693,6 +693,58 @@
       },
     "__exemption": [ "examples" ]
     },
+    "moveRelativeDays": {
+      "desc": "Returns the timestamp set to the relative day, takes into account allowed weekdays",
+      "addedIn": "v1.4.1",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        },
+        "mover": {
+          "type": "Function",
+          "default": "nextDay",
+          "desc": "A function that handles the relative movement from one date to another. If moving backwards, use the `prevDay` method",
+          "params": {
+            "timestamp": {
+              "type": "Object",
+              "required": true,
+              "desc": "A timestamp object",
+              "__exemption": [ "examples" ]
+            }
+          },
+          "returns": {
+            "type": "Object",
+            "desc": "A timestamp object",
+            "__exemption": [ "examples" ]
+          }
+        },
+        "days": {
+          "type": "Number",
+          "default": 1,
+          "desc": "The number of days to move",
+          "__exemption": [ "examples" ]
+        },
+        "allowedWeekdays": {
+          "type": "Array",
+          "default": "[0,1,2,3,4,5,6]",
+          "desc": "The allow weekdays to use. The method uses this information for allowed days",
+          "examples": [
+            "[0,1,2,3,4,5,6]",
+            "[1,2,3,4,5,6,0]",
+            "[1,2,3,4,5]"
+          ]
+        }
+      },
+      "returns": {
+        "type": "Object",
+        "desc": "A timestamp object moved to the relatively specified days against the `allowedWeekdays`",
+        "__exemption": [ "examples" ]
+      },
+    "__exemption": [ "examples" ]
+    },
     "findWeekday": {
       "desc": "Returns the timestamp associated to the specified weekday. Use `parseTimestamp`, not `parsed` (or manually call `updateFormatted` before calling this method), so associated fields are updated correctly, otherwise this function will not work as expected.",
       "params": {

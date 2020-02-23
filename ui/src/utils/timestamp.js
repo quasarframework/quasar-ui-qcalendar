@@ -368,6 +368,12 @@ export function prevDay (timestamp) {
   return timestamp
 }
 
+// Giiving a name that is easier to userstand
+export function moveRelativeDays (timestamp, mover = nextDay, days = 1, allowedWeekdays = [0, 1, 2, 3, 4, 5, 6]) {
+  return relativeDays(timestamp, mover, days, allowedWeekdays)
+}
+
+// Keeping this one so nothing breaks
 export function relativeDays (timestamp, mover = nextDay, days = 1, allowedWeekdays = [0, 1, 2, 3, 4, 5, 6]) {
   while (--days >= 0) {
     mover(timestamp)
