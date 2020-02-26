@@ -21,7 +21,7 @@ This Planner has not been optimized to work on mobile devices and currently requ
       :right-column-options="rightColumnOptions"
       bordered
       @change="onChange"
-      style="height: calc(100vh - 300px)"
+      style="height: calc(100vh - 300px); min-height: 400px;"
     >
       <template #column-header-label="data">
         <template v-if="data.id === 'over-due'">
@@ -39,7 +39,7 @@ This Planner has not been optimized to work on mobile devices and currently requ
 
       <template #day-header-label="day">
         <div class="row items-center no-wrap">
-          <q-icon :name="selected[day.weekday] ? 'check_box' : 'check_box_outline_blank'" :class="'cursor-pointer' + (selected[day.weekday] ? ' text-red-8' : ' text-blue-8')" @click="selected[day.weekday] = !selected[day.weekday]" style="font-size: 24px;"/>
+          <q-icon :name="selected[day.weekday - 1] === true ? 'check_box' : 'check_box_outline_blank'" :class="'cursor-pointer' + (selected[day.weekday - 1] ? ' text-red-8' : ' text-blue-8')" @click="$set(selected, day.weekday - 1, !selected[day.weekday - 1])" style="font-size: 24px;"/>
           <span class="ellipsis">{{ weekdayFormatter(day) }}</span>
         </div>
       </template>
@@ -109,8 +109,6 @@ const names = ['Ezekiel Stout', 'Aurora Frank', 'Ethan Buchanan', 'Sam Parker', 
 const addresses = ['262 East Cypress Drive', '8719 Anderson Road', '242 W. Shady Road', '4 Lexington Avenue', '7940 Sunset Court', '9866 NE. Rockaway Ave.', '9 Santa Clara Drive', '774 Charles Road', '5 East Thomas St.', '7714 Lilac Rd.', '561 Bowman St.', '517 Brickell Ave.']
 const emails = ['qmacro@me.com', 'amimojo@gmail.com', 'padme@mac.com', 'flaviog@verizon.net', 'srour@mac.com', 'retoh@outlook.com', 'pappp@me.com', 'mcraigw@hotmail.com', 'smcnabb@hotmail.com', 'rnelson@att.net', 'fwitness@live.com', 'stomv@aol.com']
 const phones = ['555-555-0000', '555-555-1111', '555-555-2222', '555-555-3333', '555-555-4444', '555-555-5555', '555-555-6666', '555-555-7777', '555-555-8888', '555-555-9999']
-// const amounts = []
-// const workDates = []
 const workDone = ['Window cleaning', 'Exterior cleaning', 'Lawn maintenance', 'Tree service', 'Flower bed maintenance']
 
 export default {
@@ -144,13 +142,13 @@ export default {
       dateFormatter: void 0,
       titleFormatter: void 0,
       overdueSelected: false,
-      selected: {
-        1: false,
-        2: false,
-        3: false,
-        4: false,
-        5: false
-      },
+      selected: [
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
       overdue: [],
       agenda: {
         // value represents day of the week
@@ -195,6 +193,14 @@ export default {
   watch: {
     overdueSelected (val) {
       this.overdue.forEach(due => { due.selected = val })
+    },
+
+    selected () {
+      this.selected.forEach((sel, index) => {
+        this.agenda[index + 1].forEach(ag => {
+          ag.selected = sel
+        })
+      })
     }
   },
 
@@ -268,21 +274,21 @@ export default {
     },
 
     generateList (list, count, timestamp, overdue = false) {
-      list.splice(0, list.length)
-
+      const items = []
       for (let i = 0; i < count; ++i) {
-        list[i] = {}
-        list[i].selected = false
-        list[i].id = i
-        list[i].address = addresses[Math.floor((Math.random() * 100) % addresses.length)]
-        list[i].name = names[Math.floor((Math.random() * 100) % names.length)]
-        list[i].email = emails[Math.floor((Math.random() * 100) % emails.length)]
-        list[i].phone = phones[Math.floor((Math.random() * 100) % phones.length)]
-        list[i].amount = this.generateAmount()
-        list[i].workDate = overdue === true ? this.generateDate(timestamp) : timestamp.date
-        list[i].workDone = workDone[Math.floor((Math.random() * 100) % workDone.length)]
-        list[i].daysOver = overdue === true ? this.getDaysBetween(list[i].workDate, this.today) : 0
+        items[i] = {}
+        items[i].selected = false
+        items[i].id = i
+        items[i].address = addresses[Math.floor((Math.random() * 100) % addresses.length)]
+        items[i].name = names[Math.floor((Math.random() * 100) % names.length)]
+        items[i].email = emails[Math.floor((Math.random() * 100) % emails.length)]
+        items[i].phone = phones[Math.floor((Math.random() * 100) % phones.length)]
+        items[i].amount = this.generateAmount()
+        items[i].workDate = overdue === true ? this.generateDate(timestamp) : timestamp.date
+        items[i].workDone = workDone[Math.floor((Math.random() * 100) % workDone.length)]
+        items[i].daysOver = overdue === true ? this.getDaysBetween(items[i].workDate, this.today) : 0
       }
+      list.splice(0, list.length, ...items)
     },
 
     generateDate (startTimestamp) {
