@@ -50,7 +50,7 @@ This Planner has not been optimized to work on mobile devices and currently requ
             @click="$set(selected, day.weekday - 1, !selected[day.weekday - 1])"
             style="font-size: 24px;"
           />
-          <span class="ellipsis">{{ weekdayFormatter(day, true) }}</span>
+          <span class="ellipsis">{{ weekdayFormatter(day, $q.screen.lt.lg) }}</span>
         </div>
       </template>
 
