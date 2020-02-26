@@ -3,7 +3,7 @@
 
     <div class="row items-center justify-start no-wrap">
       <div class="col" style="max-width: 25px; min-width: 25px;">
-        <q-icon :name="value ? 'check_box' : 'check_box_outline_blank'" :class="'cursor-pointer' + (value ? ' text-red-8' : ' text-blue-8')" @click.stop.prevent="$emit('input', !value)" />
+        <q-icon :name="value ? 'check_box' : 'check_box_outline_blank'" :class="'cursor-pointer' + (value ? ' text-red-8' : ' text-blue-8')" @click.stop.prevent="$emit('input', !value)" v-ripple />
       </div>
       <div :class="'ellipsis col' + (value ? ' text-red-8' : ' text-blue-8')">{{ name }}</div>
     </div>
