@@ -26,7 +26,12 @@ This Planner has not been optimized to work on mobile devices and currently requ
       <template #column-header-label="data">
         <template v-if="data.id === 'over-due'">
           <div class="row items-center no-wrap">
-            <q-icon :name="overdueSelected ? 'check_box' : 'check_box_outline_blank'" :class="'cursor-pointer' + (overdueSelected ? ' text-red-8' : ' text-blue-8')" @click="overdueSelected = !overdueSelected" style="font-size: 24px;"/>
+            <q-icon
+              :name="overdueSelected ? 'check_box' : 'check_box_outline_blank'"
+              :class="'cursor-pointer' + (overdueSelected ? ' text-red-8' : ' text-blue-8')"
+              @click="overdueSelected = !overdueSelected"
+              style="font-size: 24px;"
+            />
             <span class="ellipsis">{{ data.label }}</span>
           </div>
         </template>
@@ -39,8 +44,13 @@ This Planner has not been optimized to work on mobile devices and currently requ
 
       <template #day-header-label="day">
         <div class="row items-center no-wrap">
-          <q-icon :name="selected[day.weekday - 1] === true ? 'check_box' : 'check_box_outline_blank'" :class="'cursor-pointer' + (selected[day.weekday - 1] ? ' text-red-8' : ' text-blue-8')" @click="$set(selected, day.weekday - 1, !selected[day.weekday - 1])" style="font-size: 24px;"/>
-          <span class="ellipsis">{{ weekdayFormatter(day) }}</span>
+          <q-icon
+            :name="selected[day.weekday - 1] === true ? 'check_box' : 'check_box_outline_blank'"
+            :class="'cursor-pointer' + (selected[day.weekday - 1] ? ' text-red-8' : ' text-blue-8')"
+            @click="$set(selected, day.weekday - 1, !selected[day.weekday - 1])"
+            style="font-size: 24px;"
+          />
+          <span class="ellipsis">{{ weekdayFormatter(day, true) }}</span>
         </div>
       </template>
 
@@ -195,11 +205,33 @@ export default {
       this.overdue.forEach(due => { due.selected = val })
     },
 
-    selected () {
-      this.selected.forEach((sel, index) => {
-        this.agenda[index + 1].forEach(ag => {
-          ag.selected = sel
-        })
+    'selected.0' (val, oldVal) {
+      this.agenda[1].forEach(ag => {
+        ag.selected = val
+      })
+    },
+
+    'selected.1' (val, oldVal) {
+      this.agenda[2].forEach(ag => {
+        ag.selected = val
+      })
+    },
+
+    'selected.2' (val, oldVal) {
+      this.agenda[3].forEach(ag => {
+        ag.selected = val
+      })
+    },
+
+    'selected.3' (val, oldVal) {
+      this.agenda[4].forEach(ag => {
+        ag.selected = val
+      })
+    },
+
+    'selected.4' (val, oldVal) {
+      this.agenda[5].forEach(ag => {
+        ag.selected = val
       })
     }
   },
@@ -271,6 +303,7 @@ export default {
       this.generateList(this.agenda[3], Math.floor(Math.random() * 10) + 3, this.startTimestamp)
       this.generateList(this.agenda[4], Math.floor(Math.random() * 10) + 3, this.startTimestamp)
       this.generateList(this.agenda[5], Math.floor(Math.random() * 10) + 3, this.startTimestamp)
+      this.adjustSelected()
     },
 
     generateList (list, count, timestamp, overdue = false) {
@@ -308,6 +341,16 @@ export default {
       const integer = padNumber(Math.floor(Math.random() * 100), 2)
       const fractional = padNumber(Math.floor(Math.random() * 100), 2)
       return integer + '.' + fractional
+    },
+
+    adjustSelected () {
+      this.overdue.forEach(due => { due.selected = this.overdueSelected })
+
+      this.selected.forEach((sel, index) => {
+        this.agenda[index + 1].forEach(ag => {
+          ag.selected = sel
+        })
+      })
     }
   }
 }
