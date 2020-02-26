@@ -35,6 +35,7 @@ Drag-and-Drop has been implemented. Give it a try. :)
               :class="'cursor-pointer' + (overdueSelected ? ' text-red-8' : ' text-blue-8')"
               @click="overdueSelected = !overdueSelected"
               style="font-size: 24px;"
+              v-ripple
             />
             <span class="ellipsis">{{ data.label }}</span>
           </div>
@@ -53,6 +54,7 @@ Drag-and-Drop has been implemented. Give it a try. :)
             :class="'cursor-pointer' + (selected[day.weekday - 1] ? ' text-red-8' : ' text-blue-8')"
             @click.stop.prevent="$set(selected, day.weekday - 1, !selected[day.weekday - 1])"
             style="font-size: 24px;"
+            v-ripple
           />
           <span class="ellipsis">{{ weekdayFormatter(day, $q.screen.lt.lg) }}</span>
         </div>
@@ -573,9 +575,9 @@ export default {
         list = this.agenda[parseInt(column, 10)]
       }
 
-      // if no id, then add to beginning of list
+      // if no id, then add to end of list
       if (!id) {
-        list.splice(0, 0, item)
+        list.splice(list.length, 0, item)
         return
       } else {
         id = parseInt(id, 10)
