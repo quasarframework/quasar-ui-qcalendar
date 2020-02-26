@@ -6,6 +6,10 @@ This page is a WIP - please consider making a PR to make this better, it will be
 ::: warning
 This Planner has not been optimized to work on mobile devices and currently requires a fairly decent width to look good.
 :::
+
+Drag-and-Drop has been implemented. Give it a try. :)
+
+---
     </q-markdown>
     <q-btn flat dense label="Today" class="q-mx-md" @click="setToday"></q-btn>
     <q-btn flat dense round icon="keyboard_arrow_left" @click="onPrev"></q-btn>
@@ -47,10 +51,10 @@ This Planner has not been optimized to work on mobile devices and currently requ
           <q-icon
             :name="selected[day.weekday - 1] === true ? 'check_box' : 'check_box_outline_blank'"
             :class="'cursor-pointer' + (selected[day.weekday - 1] ? ' text-red-8' : ' text-blue-8')"
-            @click="$set(selected, day.weekday - 1, !selected[day.weekday - 1])"
+            @click.stop.prevent="$set(selected, day.weekday - 1, !selected[day.weekday - 1])"
             style="font-size: 24px;"
           />
-          <span class="ellipsis">{{ weekdayFormatter(day, true) }}</span>
+          <span class="ellipsis">{{ weekdayFormatter(day, $q.screen.lt.lg) }}</span>
         </div>
       </template>
 
@@ -60,20 +64,40 @@ This Planner has not been optimized to work on mobile devices and currently requ
             <div class="cursor-pointer"><q-icon name="add"/>Add Job</div>
             <div class="cursor-pointer"><q-icon name="note_add" />Add Note</div>
           </q-card>
-          <template v-for="item in overdue">
-            <planner-item
-              :key="'overdue-' + item.id"
-              v-model="item.selected"
-              :name="item.name"
-              :address="item.address"
-              :email="item.email"
-              :phone="item.phone"
-              :work-done="item.workDone"
-              :work-date="item.workDate"
-              :amount="item.amount"
-              :days-over="item.daysOver"
-            />
-          </template>
+          <div
+            class="planner-column"
+            data-column="overdue"
+            draggable
+            @dragstart.stop="onDragStart"
+            @dragover.stop="onDragOver"
+            @drop="onDrop"
+          >
+            <transition-group name="planner-item">
+              <template v-for="item in overdue">
+                <planner-item
+                  :data-id="item.id"
+                  :key="item.id"
+                  v-model="item.selected"
+                  :name="item.name"
+                  :address="item.address"
+                  :email="item.email"
+                  :phone="item.phone"
+                  :work-done="item.workDone"
+                  :work-date="item.workDate"
+                  :amount="item.amount"
+                  :days-over="item.daysOver"
+                  :draggable="true"
+                  @dragstart.stop.native="(e) => onDragStart(e, item)"
+                  @dragend.stop.native="(e) => onDragEnd(e, item)"
+                  @dragenter.stop.native="(e) => onDragEnter(e, item)"
+                  @dragleave.stop.native="(e) => onDragLeave(e, item)"
+                  @dragover.stop.native="(e) => onDragOver(e, item)"
+                  @drop.stop.native="(e) => onDrop(e, item)"
+                  @touchmove.stop.native="(e) => {}"
+                />
+              </template>
+            </transition-group>
+          </div>
         </template>
       </template>
 
@@ -82,20 +106,40 @@ This Planner has not been optimized to work on mobile devices and currently requ
           <div class="cursor-pointer"><q-icon name="add" />Add Job</div>
           <div class="cursor-pointer"><q-icon name="note_add" />Add Note</div>
         </q-card>
-        <template v-for="item in getAgenda(day)">
-          <planner-item
-            :key="item.id"
-            v-model="item.selected"
-            :name="item.name"
-            :address="item.address"
-            :email="item.email"
-            :phone="item.phone"
-            :work-done="item.workDone"
-            :work-date="item.workDate"
-            :amount="item.amount"
-            :days-over="item.daysOver"
-          />
-        </template>
+        <div
+          class="planner-column"
+          :data-column="day.weekday"
+          draggable
+          @dragstart="onDragStart"
+          @dragover.stop="onDragOver"
+          @drop="onDrop"
+        >
+          <transition-group name="planner-item">
+            <template v-for="item in getAgenda(day)">
+              <planner-item
+                :data-id="item.id"
+                :key="item.id"
+                v-model="item.selected"
+                :name="item.name"
+                :address="item.address"
+                :email="item.email"
+                :phone="item.phone"
+                :work-done="item.workDone"
+                :work-date="item.workDate"
+                :amount="item.amount"
+                :days-over="item.daysOver"
+                :draggable="true"
+                @dragstart.stop.native="(e) => onDragStart(e, item)"
+                @dragend.stop.native="(e) => onDragEnd(e, item)"
+                @dragenter.stop.native="(e) => onDragEnter(e, item)"
+                @dragleave.stop.native="(e) => onDragLeave(e, item)"
+                @dragover.stop.native="(e) => onDragOver(e, item)"
+                @drop.stop.native="(e) => onDrop(e, item)"
+                @touchmove.stop.native="(e) => {}"
+              />
+            </template>
+          </transition-group>
+        </div>
       </template>
 
     </q-calendar>
@@ -103,6 +147,9 @@ This Planner has not been optimized to work on mobile devices and currently requ
 </template>
 
 <script>
+// import 'drag-drop-touch'
+let itemId = 1
+
 import { getLocale } from '../util/getLocale'
 import { padTime } from '../util/time'
 import {
@@ -167,7 +214,9 @@ export default {
         3: [],
         4: [],
         5: []
-      }
+      },
+      dragging: false,
+      dragItem: null
     }
   },
 
@@ -178,6 +227,16 @@ export default {
     this.todayTimestamp = parseTimestamp(this.today)
     this.setToday() // set calendar to today's date
     this.generateLists()
+    // we do this here because we don't want it Vue reactive
+    this.dragEl = null
+    this.curColEl = null
+    this.curChildEl = null
+    this.placeholderEl = null
+    this.currentColumn = null
+    this.currentItemId = null
+    this.currentItem = null
+    this.targetColumn = null
+    this.targetItemId = null
   },
 
   computed: {
@@ -311,7 +370,7 @@ export default {
       for (let i = 0; i < count; ++i) {
         items[i] = {}
         items[i].selected = false
-        items[i].id = i
+        items[i].id = itemId++
         items[i].address = addresses[Math.floor((Math.random() * 100) % addresses.length)]
         items[i].name = names[Math.floor((Math.random() * 100) % names.length)]
         items[i].email = emails[Math.floor((Math.random() * 100) % emails.length)]
@@ -351,11 +410,201 @@ export default {
           ag.selected = sel
         })
       })
+    },
+
+    onDragStart (e, item) {
+      // console.log('onDragStart:', e)
+      if (this.dragging === false) {
+        this.dragging = true
+        e.target.style.opacity = '0.4'
+        e.dataTransfer.setData('text/html', e.target.innerHTML)
+        this.dragEl = e.target
+        this.currentColumn = this.getColumnFromTarget(e.target)
+        this.getCurrentItemId = this.getItemIdFromTarget(e.target)
+        this.currentItem = item
+        this.dragItem = { ...item, id: 'dragging' }
+      }
+    },
+
+    onDragEnd (e, item) {
+      // console.log('onDragEnd:', e)
+      this.dragging = false
+      e.target.style.opacity = '1.0'
+
+      if (this.curChildEl) {
+        this.curChildEl.classList.remove('drag-over-item')
+      }
+
+      if (this.curColEl) {
+        this.curColEl.classList.remove('drag-over')
+      }
+    },
+
+    onDragEnter (e, item) {
+      const column = this.getCorrectTarget(e.target, 'planner-column')
+      const child = this.getCorrectTarget(e.target, 'planner-item')
+      // const targetColumn = this.getColumnFromTarget(column)
+      // const targetItemId = this.getItemIdFromTarget(child)
+
+      // check column
+      if (this.curColEl !== column) {
+        if (this.curColEl) {
+          this.curColEl.classList.remove('drag-over')
+        }
+        this.curColEl = column
+        if (this.curColEl) {
+          this.curColEl.classList.add('drag-over')
+        }
+      }
+
+      // check item
+      if (this.curChildEl !== child) {
+        if (this.curChildEl) {
+          this.curChildEl.classList.remove('drag-over-item')
+        }
+        this.curChildEl = child
+        if (this.curChildEl && this.dragEl !== child) {
+          this.curChildEl.classList.add('drag-over-item')
+        }
+      }
+    },
+
+    onDragLeave (e, item) {
+    },
+
+    onDragOver (e, item) {
+      if (e.preventDefault) {
+        e.preventDefault() // Necessary. Allows us to drop.
+      }
+
+      e.dataTransfer.dropEffect = 'move'
+
+      return false
+    },
+
+    onDrop (e, item) {
+      this.dragging = false
+      const column = this.getCorrectTarget(e.target, 'planner-column')
+      const child = this.getCorrectTarget(e.target, 'planner-item')
+      const targetColumn = this.getColumnFromTarget(column)
+      const targetItemId = this.getItemIdFromTarget(child)
+
+      if (this.dragEl === child) {
+        // no dropping on self
+        return
+      }
+
+      if (this.curChildEl) {
+        this.curChildEl.classList.remove('drag-over-item')
+      }
+
+      if (this.curColEl) {
+        this.curColEl.classList.remove('drag-over')
+      }
+
+      if (targetColumn) {
+        // get current item column
+        const currentColumnEl = this.getCorrectTarget(this.dragEl, 'planner-column')
+        const currentColumn = this.getColumnFromTarget(currentColumnEl)
+
+        // remove dragged item
+        this.removeFromColumn(currentColumn, this.currentItem.id)
+
+        // add dragged item to new location
+        this.addToColumn(targetColumn, targetItemId, this.currentItem)
+      }
+
+      // release the dom nodes
+      this.dragEl = null
+      this.curColEl = null
+      this.placeholderEl = null
+      this.curChildEl = null
+      this.targetColumn = null
+      this.targetItemId = null
+
+      return false
+    },
+
+    getCorrectTarget (el, klass) {
+      if (!el) {
+        return null
+      }
+      if (el.classList.contains(klass)) {
+        return el
+      }
+      return this.getCorrectTarget(el.parentElement, klass)
+    },
+
+    getColumnFromTarget (target) {
+      if (target) {
+        return target.dataset.column
+      }
+    },
+
+    getItemIdFromTarget (target) {
+      if (target) {
+        return target.dataset.id
+      }
+    },
+
+    removeFromColumn (column, id) {
+      let list
+      if (column === 'overdue') {
+        list = this.overdue
+      } else {
+        list = this.agenda[parseInt(column, 10)]
+      }
+
+      id = parseInt(id, 10)
+
+      for (let index = 0; index < list.length; ++index) {
+        if (list[index].id === id) {
+          list.splice(index, 1)
+          return
+        }
+      }
+    },
+
+    addToColumn (column, id, item) {
+      let list
+      if (column === 'overdue') {
+        list = this.overdue
+      } else {
+        list = this.agenda[parseInt(column, 10)]
+      }
+
+      // if no id, then add to beginning of list
+      if (!id) {
+        list.splice(0, 0, item)
+        return
+      } else {
+        id = parseInt(id, 10)
+      }
+
+      for (let index = 0; index < list.length; ++index) {
+        if (list[index].id === id) {
+          list.splice(index, 0, item)
+          return
+        }
+      }
     }
   }
 }
 </script>
 
 <style lang="sass" scoped>
+.planner-column
+  border: 1px solid transparent
+  height: 100%
+
+.planner-column.drag-over
+  border: 1px dashed red
+
+.planner-item.drag-over-item
+  // border: 1px dashed green
+  background: rgba(0,255,0, .1)
+
+.planner-item-move
+  transition: transform .5s
 
 </style>
