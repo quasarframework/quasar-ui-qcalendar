@@ -70,9 +70,12 @@ Drag-and-Drop has been implemented. Give it a try. :)
             class="planner-column"
             data-column="overdue"
             draggable
-            @dragstart.stop="onDragStart"
+            @dragend.stop="onDragEnd"
+            @dragenter.stop=" onDragEnter"
+            @dragleave.stop="onDragLeave"
             @dragover.stop="onDragOver"
-            @drop="onDrop"
+            @drop.stop="onDrop"
+            @touchmove.stop="(e) => {}"
           >
             <transition-group name="planner-item">
               <template v-for="item in overdue">
@@ -90,11 +93,11 @@ Drag-and-Drop has been implemented. Give it a try. :)
                   :days-over="item.daysOver"
                   :draggable="true"
                   @dragstart.stop.native="(e) => onDragStart(e, item)"
-                  @dragend.stop.native="(e) => onDragEnd(e, item)"
-                  @dragenter.stop.native="(e) => onDragEnter(e, item)"
-                  @dragleave.stop.native="(e) => onDragLeave(e, item)"
-                  @dragover.stop.native="(e) => onDragOver(e, item)"
-                  @drop.stop.native="(e) => onDrop(e, item)"
+                  @dragend.stop.native="onDragEnd"
+                  @dragenter.stop.native="onDragEnter"
+                  @dragleave.stop.native="onDragLeave"
+                  @dragover.stop.native="onDragOver"
+                  @drop.stop.native="onDrop"
                   @touchmove.stop.native="(e) => {}"
                 />
               </template>
@@ -112,9 +115,12 @@ Drag-and-Drop has been implemented. Give it a try. :)
           class="planner-column"
           :data-column="day.weekday"
           draggable
-          @dragstart="onDragStart"
+          @dragend.stop="onDragEnd"
+          @dragenter.stop=" onDragEnter"
+          @dragleave.stop="onDragLeave"
           @dragover.stop="onDragOver"
-          @drop="onDrop"
+          @drop.stop="onDrop"
+          @touchmove.stop="(e) => {}"
         >
           <transition-group name="planner-item">
             <template v-for="item in getAgenda(day)">
@@ -132,11 +138,11 @@ Drag-and-Drop has been implemented. Give it a try. :)
                 :days-over="item.daysOver"
                 :draggable="true"
                 @dragstart.stop.native="(e) => onDragStart(e, item)"
-                @dragend.stop.native="(e) => onDragEnd(e, item)"
-                @dragenter.stop.native="(e) => onDragEnter(e, item)"
-                @dragleave.stop.native="(e) => onDragLeave(e, item)"
-                @dragover.stop.native="(e) => onDragOver(e, item)"
-                @drop.stop.native="(e) => onDrop(e, item)"
+                @dragend.stop.native="onDragEnd"
+                @dragenter.stop.native="onDragEnter"
+                @dragleave.stop.native="onDragLeave"
+                @dragover.stop.native="onDragOver"
+                @drop.stop.native="onDrop"
                 @touchmove.stop.native="(e) => {}"
               />
             </template>
