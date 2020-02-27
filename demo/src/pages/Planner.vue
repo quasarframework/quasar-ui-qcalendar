@@ -70,9 +70,12 @@ Drag-and-Drop has been implemented. Give it a try. :)
             class="planner-column"
             data-column="overdue"
             draggable
-            @dragstart.stop="onDragStart"
+            @dragend.stop="onDragEnd"
+            @dragenter.stop=" onDragEnter"
+            @dragleave.stop="onDragLeave"
             @dragover.stop="onDragOver"
-            @drop="onDrop"
+            @drop.stop="onDrop"
+            @touchmove.stop="(e) => {}"
           >
             <transition-group name="planner-item">
               <template v-for="item in overdue">
@@ -90,11 +93,11 @@ Drag-and-Drop has been implemented. Give it a try. :)
                   :days-over="item.daysOver"
                   :draggable="true"
                   @dragstart.stop.native="(e) => onDragStart(e, item)"
-                  @dragend.stop.native="(e) => onDragEnd(e, item)"
-                  @dragenter.stop.native="(e) => onDragEnter(e, item)"
-                  @dragleave.stop.native="(e) => onDragLeave(e, item)"
-                  @dragover.stop.native="(e) => onDragOver(e, item)"
-                  @drop.stop.native="(e) => onDrop(e, item)"
+                  @dragend.stop.native="onDragEnd"
+                  @dragenter.stop.native="onDragEnter"
+                  @dragleave.stop.native="onDragLeave"
+                  @dragover.stop.native="onDragOver"
+                  @drop.stop.native="onDrop"
                   @touchmove.stop.native="(e) => {}"
                 />
               </template>
@@ -112,9 +115,12 @@ Drag-and-Drop has been implemented. Give it a try. :)
           class="planner-column"
           :data-column="day.weekday"
           draggable
-          @dragstart="onDragStart"
+          @dragend.stop="onDragEnd"
+          @dragenter.stop=" onDragEnter"
+          @dragleave.stop="onDragLeave"
           @dragover.stop="onDragOver"
-          @drop="onDrop"
+          @drop.stop="onDrop"
+          @touchmove.stop="(e) => {}"
         >
           <transition-group name="planner-item">
             <template v-for="item in getAgenda(day)">
@@ -132,11 +138,11 @@ Drag-and-Drop has been implemented. Give it a try. :)
                 :days-over="item.daysOver"
                 :draggable="true"
                 @dragstart.stop.native="(e) => onDragStart(e, item)"
-                @dragend.stop.native="(e) => onDragEnd(e, item)"
-                @dragenter.stop.native="(e) => onDragEnter(e, item)"
-                @dragleave.stop.native="(e) => onDragLeave(e, item)"
-                @dragover.stop.native="(e) => onDragOver(e, item)"
-                @drop.stop.native="(e) => onDrop(e, item)"
+                @dragend.stop.native="onDragEnd"
+                @dragenter.stop.native="onDragEnter"
+                @dragleave.stop.native="onDragLeave"
+                @dragover.stop.native="onDragOver"
+                @drop.stop.native="onDrop"
                 @touchmove.stop.native="(e) => {}"
               />
             </template>
@@ -216,9 +222,7 @@ export default {
         3: [],
         4: [],
         5: []
-      },
-      dragging: false,
-      dragItem: null
+      }
     }
   },
 
@@ -233,7 +237,6 @@ export default {
     this.dragEl = null
     this.curColEl = null
     this.curChildEl = null
-    this.placeholderEl = null
     this.currentColumn = null
     this.currentItemId = null
     this.currentItem = null
@@ -415,22 +418,15 @@ export default {
     },
 
     onDragStart (e, item) {
-      // console.log('onDragStart:', e)
-      if (this.dragging === false) {
-        this.dragging = true
-        e.target.style.opacity = '0.4'
-        e.dataTransfer.setData('text/html', e.target.innerHTML)
-        this.dragEl = e.target
-        this.currentColumn = this.getColumnFromTarget(e.target)
-        this.getCurrentItemId = this.getItemIdFromTarget(e.target)
-        this.currentItem = item
-        this.dragItem = { ...item, id: 'dragging' }
-      }
+      e.target.style.opacity = '0.4'
+      e.dataTransfer.setData('text/html', e.target.innerHTML)
+      this.dragEl = e.target
+      this.currentColumn = this.getColumnFromTarget(e.target)
+      this.getCurrentItemId = this.getItemIdFromTarget(e.target)
+      this.currentItem = item
     },
 
-    onDragEnd (e, item) {
-      // console.log('onDragEnd:', e)
-      this.dragging = false
+    onDragEnd (e) {
       e.target.style.opacity = '1.0'
 
       if (this.curChildEl) {
@@ -442,11 +438,9 @@ export default {
       }
     },
 
-    onDragEnter (e, item) {
+    onDragEnter (e) {
       const column = this.getCorrectTarget(e.target, 'planner-column')
       const child = this.getCorrectTarget(e.target, 'planner-item')
-      // const targetColumn = this.getColumnFromTarget(column)
-      // const targetItemId = this.getItemIdFromTarget(child)
 
       // check column
       if (this.curColEl !== column) {
@@ -471,10 +465,19 @@ export default {
       }
     },
 
-    onDragLeave (e, item) {
+    onDragLeave (e) {
+      // check column
+      if (this.curColEl && this.curColEl === e.target) {
+        this.curColEl.classList.remove('drag-over')
+      }
+
+      // check item
+      if (this.curChildEl && this.curChildEl === e.target) {
+        this.curChildEl.classList.remove('drag-over-item')
+      }
     },
 
-    onDragOver (e, item) {
+    onDragOver (e) {
       if (e.preventDefault) {
         e.preventDefault() // Necessary. Allows us to drop.
       }
@@ -484,8 +487,7 @@ export default {
       return false
     },
 
-    onDrop (e, item) {
-      this.dragging = false
+    onDrop (e) {
       const column = this.getCorrectTarget(e.target, 'planner-column')
       const child = this.getCorrectTarget(e.target, 'planner-item')
       const targetColumn = this.getColumnFromTarget(column)
@@ -514,13 +516,24 @@ export default {
 
         // add dragged item to new location
         this.addToColumn(targetColumn, targetItemId, this.currentItem)
+
+        // update selection status
+        if (targetColumn === 'overdue') {
+          this.overdue.forEach(due => { due.selected = this.overdueSelected })
+        } else {
+          this.agenda[targetColumn].forEach(ag => {
+            ag.selected = this.selected[targetColumn - 1]
+          })
+        }
       }
 
       // release the dom nodes
       this.dragEl = null
       this.curColEl = null
-      this.placeholderEl = null
       this.curChildEl = null
+      this.currentColumn = null
+      this.currentItemId = null
+      this.currentItem = null
       this.targetColumn = null
       this.targetItemId = null
 
