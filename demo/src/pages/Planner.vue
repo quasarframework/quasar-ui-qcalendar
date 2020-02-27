@@ -615,8 +615,18 @@ export default {
 .planner-column.drag-over
   border: 1px dashed red
 
+.planner-item
+  transition: all 0.5s
+
+.planner-item-enter, .planner-item-leave-to
+  opacity: 0
+  transform: scale(0)
+
+.planner-item-enter-to
+  opacity: 1
+  transform: scale(1)
+
 .planner-item.drag-over-item
-  // border: 1px dashed green
   background: rgba(0,255,0, .1)
 
 .planner-item-move
