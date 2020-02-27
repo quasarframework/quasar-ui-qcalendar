@@ -466,6 +466,15 @@ export default {
     },
 
     onDragLeave (e) {
+      // check column
+      if (this.curColEl && this.curColEl === e.target) {
+        this.curColEl.classList.remove('drag-over')
+      }
+
+      // check item
+      if (this.curChildEl && this.curChildEl === e.target) {
+        this.curChildEl.classList.remove('drag-over-item')
+      }
     },
 
     onDragOver (e) {
