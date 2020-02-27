@@ -1,5 +1,9 @@
 <template>
   <q-page padding>
+    <div v-if="$q.platform.is.mobile">
+      If on mobile, try rotating your screen to landscape mode for best viewing of the Planner<br><br>
+    </div>
+
     <q-markdown>
 This page is a WIP - please consider making a PR to make this better, it will be appreciated. You can view the source for [Planner](https://github.com/quasarframework/quasar-ui-qcalendar/blob/dev/demo/src/pages/Planner.vue) and [PlannerItem](https://github.com/quasarframework/quasar-ui-qcalendar/blob/dev/demo/src/components/PlannerItem.vue) on Github.
 
@@ -19,7 +23,7 @@ Drag-and-Drop has been implemented. Give it a try. :)
     <q-calendar
       ref="calendar"
       v-model="selectedDate"
-      view="week-agenda"
+      :view="$q.screen.lt.md ? '3day-agenda' : 'week-agenda'"
       :weekdays="[1,2,3,4,5]"
       :left-column-options="leftColumnOptions"
       :right-column-options="rightColumnOptions"
