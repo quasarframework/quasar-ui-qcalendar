@@ -201,12 +201,13 @@ export default {
           label: 'Over Due'
         }
       ],
-      rightColumnOptions: [
-        {
-          id: 'summary',
-          label: 'Summary'
-        }
-      ],
+      // rightColumnOptions: [
+      //   {
+      //     id: 'summary',
+      //     label: 'Summary'
+      //   }
+      // ],
+      rightColumnOptions: void 0,
       local: 'en-us',
       dateFormatter: void 0,
       titleFormatter: void 0,
@@ -630,10 +631,10 @@ export default {
   opacity: 1
   transform: scale(1)
 
-.planner-item.drag-over-item
-  background: rgba(0,255,0, .1)
-
 .planner-item-move
   transition: transform .5s
+
+.planner-item.drag-over-item
+  background: rgba(0,255,0, .1)
 
 </style>
