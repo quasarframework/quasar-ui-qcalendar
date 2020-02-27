@@ -514,6 +514,15 @@ export default {
 
         // add dragged item to new location
         this.addToColumn(targetColumn, targetItemId, this.currentItem)
+
+        // update selection status
+        if (targetColumn === 'overdue') {
+          this.overdue.forEach(due => { due.selected = this.overdueSelected })
+        } else {
+          this.agenda[targetColumn].forEach(ag => {
+            ag.selected = this.selected[targetColumn - 1]
+          })
+        }
       }
 
       // release the dom nodes
