@@ -216,9 +216,7 @@ export default {
         3: [],
         4: [],
         5: []
-      },
-      dragging: false,
-      dragItem: null
+      }
     }
   },
 
@@ -233,7 +231,6 @@ export default {
     this.dragEl = null
     this.curColEl = null
     this.curChildEl = null
-    this.placeholderEl = null
     this.currentColumn = null
     this.currentItemId = null
     this.currentItem = null
@@ -415,22 +412,15 @@ export default {
     },
 
     onDragStart (e, item) {
-      // console.log('onDragStart:', e)
-      if (this.dragging === false) {
-        this.dragging = true
-        e.target.style.opacity = '0.4'
-        e.dataTransfer.setData('text/html', e.target.innerHTML)
-        this.dragEl = e.target
-        this.currentColumn = this.getColumnFromTarget(e.target)
-        this.getCurrentItemId = this.getItemIdFromTarget(e.target)
-        this.currentItem = item
-        this.dragItem = { ...item, id: 'dragging' }
-      }
+      e.target.style.opacity = '0.4'
+      e.dataTransfer.setData('text/html', e.target.innerHTML)
+      this.dragEl = e.target
+      this.currentColumn = this.getColumnFromTarget(e.target)
+      this.getCurrentItemId = this.getItemIdFromTarget(e.target)
+      this.currentItem = item
     },
 
-    onDragEnd (e, item) {
-      // console.log('onDragEnd:', e)
-      this.dragging = false
+    onDragEnd (e) {
       e.target.style.opacity = '1.0'
 
       if (this.curChildEl) {
@@ -442,11 +432,9 @@ export default {
       }
     },
 
-    onDragEnter (e, item) {
+    onDragEnter (e) {
       const column = this.getCorrectTarget(e.target, 'planner-column')
       const child = this.getCorrectTarget(e.target, 'planner-item')
-      // const targetColumn = this.getColumnFromTarget(column)
-      // const targetItemId = this.getItemIdFromTarget(child)
 
       // check column
       if (this.curColEl !== column) {
@@ -471,10 +459,10 @@ export default {
       }
     },
 
-    onDragLeave (e, item) {
+    onDragLeave (e) {
     },
 
-    onDragOver (e, item) {
+    onDragOver (e) {
       if (e.preventDefault) {
         e.preventDefault() // Necessary. Allows us to drop.
       }
@@ -484,8 +472,7 @@ export default {
       return false
     },
 
-    onDrop (e, item) {
-      this.dragging = false
+    onDrop (e) {
       const column = this.getCorrectTarget(e.target, 'planner-column')
       const child = this.getCorrectTarget(e.target, 'planner-item')
       const targetColumn = this.getColumnFromTarget(column)
@@ -528,8 +515,10 @@ export default {
       // release the dom nodes
       this.dragEl = null
       this.curColEl = null
-      this.placeholderEl = null
       this.curChildEl = null
+      this.currentColumn = null
+      this.currentItemId = null
+      this.currentItem = null
       this.targetColumn = null
       this.targetItemId = null
 
