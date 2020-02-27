@@ -5,11 +5,7 @@
     </div>
 
     <q-markdown>
-This page is a WIP - please consider making a PR to make this better, it will be appreciated. You can view the source for [Planner](https://github.com/quasarframework/quasar-ui-qcalendar/blob/dev/demo/src/pages/Planner.vue) and [PlannerItem](https://github.com/quasarframework/quasar-ui-qcalendar/blob/dev/demo/src/components/PlannerItem.vue) on Github.
-
-::: warning
-This Planner has not been optimized to work on mobile devices and currently requires a fairly decent width to look good.
-:::
+This page is a **WIP** - please consider making a **PR** to make this better, it will be appreciated :heart:. You can view the source for [Planner](https://github.com/quasarframework/quasar-ui-qcalendar/blob/dev/demo/src/pages/Planner.vue) and [PlannerItem](https://github.com/quasarframework/quasar-ui-qcalendar/blob/dev/demo/src/components/PlannerItem.vue) on Github.
 
 Drag-and-Drop has been implemented. Give it a try. :)
 
@@ -620,6 +616,9 @@ export default {
 .planner-column.drag-over
   border: 1px dashed red
 
+.planner-item.drag-over-item
+  background: rgba(0,255,0, .1)
+
 .planner-item
   transition: all 0.5s
 
@@ -633,8 +632,5 @@ export default {
 
 .planner-item-move
   transition: transform .5s
-
-.planner-item.drag-over-item
-  background: rgba(0,255,0, .1)
 
 </style>
