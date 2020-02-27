@@ -235,12 +235,18 @@ To use the scheduler, you need to use the `resources` property, which is an arra
 ## Agenda view
 
 ::: info
-The developer is free to add whatever content they want. The example below just shows one of many ways it could be done.
+In **Agenda** view mode, the developer is free to add whatever content they want. The example below just shows one of many ways it could be done.
 :::
 
 ![AgendaView](statics/qcalendar-agenda-view.png "Agenda View" =800x800)
 
 The `agenda` view is basically a `day` view without the intervals. It is up to the developer to provide the content via the `day-body` slot.
+
+While in **Agenda** view, you can define extra columns on the left-side or right-side of the calendar. This is perfect for creating Planners.
+
+![PlannerExample](statics/qcalendar-agenda-view--planner.png "Planner Example" =800x800)
+
+If this interests you, check out the [Planner Example](/demos/planner).
 
 ## View types
 
