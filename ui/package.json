@@ -50,9 +50,9 @@
     "attributes": "dist/vetur/attributes.json"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.4",
+    "@babel/core": "^7.8.6",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-env": "^7.8.6",
     "@rollup/plugin-buble": "^0.21.1",
     "@rollup/plugin-commonjs": "^11.0.2",
     "@rollup/plugin-json": "^4.0.2",
@@ -82,10 +82,10 @@
     "postcss": "^7.0.27",
     "postcss-rtl": "^1.7.2",
     "promise": "^8.0.3",
-    "quasar": "^1.9.4",
+    "quasar": "^1.9.6",
     "quasar-json-api": "^0.0.20",
     "rimraf": "^3.0.2",
-    "rollup": "^1.31.1",
+    "rollup": "^1.32.0",
     "uglify-es": "^3.3.9",
     "vue-jest": "^3.0.5",
     "zlib": "^1.0.5"
