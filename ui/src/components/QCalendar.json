@@ -2069,7 +2069,7 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
           "__exemption": [ "examples" ]
         }
       }
@@ -2083,7 +2083,7 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
           "__exemption": [ "examples" ]
         }
       }
@@ -2097,7 +2097,7 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
           "__exemption": [ "examples" ]
         }
       }
@@ -2111,7 +2111,7 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
           "__exemption": [ "examples" ]
         }
       }
@@ -2125,7 +2125,7 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
           "__exemption": [ "examples" ]
         }
       }
@@ -2139,7 +2139,7 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
           "__exemption": [ "examples" ]
         }
       }
@@ -2153,7 +2153,7 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
           "__exemption": [ "examples" ]
         }
       }
@@ -2167,7 +2167,7 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
           "__exemption": [ "examples" ]
         }
       }
@@ -2181,7 +2181,7 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
           "__exemption": [ "examples" ]
         }
       }
@@ -2195,7 +2195,7 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
           "__exemption": [ "examples" ]
         }
       }
@@ -2209,7 +2209,7 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
           "__exemption": [ "examples" ]
         }
       }
@@ -2223,7 +2223,7 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
           "__exemption": [ "examples" ]
         }
       }
@@ -2237,7 +2237,7 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
           "__exemption": [ "examples" ]
         }
       }
@@ -2251,7 +2251,7 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
           "__exemption": [ "examples" ]
         }
       }
@@ -2265,7 +2265,7 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
           "__exemption": [ "examples" ]
         }
       }
@@ -2279,7 +2279,7 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
           "__exemption": [ "examples" ]
         }
       }
@@ -2293,7 +2293,7 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
           "__exemption": [ "examples" ]
         }
       }
@@ -2307,7 +2307,7 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
           "__exemption": [ "examples" ]
         }
       }
@@ -2321,7 +2321,7 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
           "__exemption": [ "examples" ]
         }
       }
@@ -2335,7 +2335,7 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right0column-options` are used",
+          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
           "__exemption": [ "examples" ]
         }
       }
