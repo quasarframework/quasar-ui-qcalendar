@@ -419,8 +419,10 @@ export default {
     },
 
     onDragStart (e, item) {
-      e.target.style.opacity = '0.4'
-      e.dataTransfer.setData('text/html', e.target.innerHTML)
+      if (e.dataTransfer) {
+        e.dataTransfer.setData('text/html', e.target.innerHTML)
+      }
+      e.target.style.opacity = '0'
       this.dragEl = e.target
       this.currentColumn = this.getColumnFromTarget(e.target)
       this.getCurrentItemId = this.getItemIdFromTarget(e.target)
@@ -467,15 +469,7 @@ export default {
     },
 
     onDragLeave (e) {
-      // check column
-      if (this.curColEl && this.curColEl === e.target) {
-        this.curColEl.classList.remove('drag-over')
-      }
-
-      // check item
-      if (this.curChildEl && this.curChildEl === e.target) {
-        this.curChildEl.classList.remove('drag-over-item')
-      }
+      // nothing to do
     },
 
     onDragOver (e) {
@@ -483,7 +477,11 @@ export default {
         e.preventDefault() // Necessary. Allows us to drop.
       }
 
-      e.dataTransfer.dropEffect = 'move'
+      if (e.dataTransfer) {
+        e.dataTransfer.dropEffect = 'move'
+      }
+
+      this.onDragEnter(e)
 
       return false
     },
