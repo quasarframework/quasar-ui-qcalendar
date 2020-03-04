@@ -2,6 +2,7 @@
   <div class="q-markdown">
     <example-title title="Scheduler View" />
     <example-viewer title="Basic" file="SchedulerViewBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Dark" file="SchedulerViewDark" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Disabled Days" file="SchedulerViewDisabledDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 When the property `disabled-days` has an array of disabled days, you can hook into the `resource-style` property to change the background color of the disabled day.
@@ -89,6 +90,7 @@ export default {
     this.tempToc = []
     this.addToToc('Scheduler View')
     this.addToToc('Basic', 2)
+    this.addToToc('Dark', 2)
     this.addToToc('Disabled Days', 2)
     this.addToToc('Prev/Next', 2)
     this.addToToc('Swipe', 2)

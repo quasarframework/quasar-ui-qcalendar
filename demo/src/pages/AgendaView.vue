@@ -39,6 +39,7 @@ For slots that return `day` or `timestamp`, it looks like this:
       </q-markdown>
     </example-viewer>
 
+    <example-viewer title="Dark" file="AgendaViewWeekDark" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="First Day Monday" file="AgendaViewWeekFirstDayMonday" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Five Day Workweek" file="AgendaViewWeekFiveDayWorkweek" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Column Options" file="AgendaViewWeekColumnOptions" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
@@ -121,6 +122,7 @@ export default {
     this.addToToc('Basic', 2)
     this.addToToc('Agenda View (week) - Basic', 2)
     this.addToToc('Slots', 2)
+    this.addToToc('Dark', 2)
     this.addToToc('First Day Monday', 2)
     this.addToToc('Five Day Workweek', 2)
     this.addToToc('Theme', 2)

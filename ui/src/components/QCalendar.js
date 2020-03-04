@@ -299,7 +299,7 @@ export default {
     this.keyValue = getDayIdentifier(start)
 
     const data = {
-      staticClass: 'q-calendar',
+      staticClass: 'q-calendar' + (this.dark === true ? ' q-calendar--dark' : ''),
       class: {
         'q-calendar-daily__bordered': this.bordered
       },

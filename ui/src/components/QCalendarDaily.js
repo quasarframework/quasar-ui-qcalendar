@@ -27,12 +27,6 @@ export default {
   },
 
   computed: {
-    classes () {
-      return {
-        'q-calendar-daily': true
-      }
-    },
-
     computedWidth () {
       return 100 / this.days.length
     }
@@ -458,7 +452,7 @@ export default {
 
   render (h) {
     return h('div', {
-      class: this.classes,
+      staticClass: 'q-calendar-daily',
       directives: [{
         modifiers: { quiet: true },
         name: 'resize',

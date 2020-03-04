@@ -8,6 +8,7 @@ The ability to use Codepen was recently added to the examples. There are differe
     </q-markdown>
     <example-title title="Month View" />
     <example-viewer title="Basic" file="MonthViewBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Dark" file="MonthViewDark" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Color" file="MonthViewColor" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="First Day Monday" file="MonthViewMondayFirstDay" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="5 Day Work Week" file="MonthViewFiveDayWorkWeek" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
@@ -170,6 +171,7 @@ export default {
     this.tempToc = []
     this.addToToc('Month View')
     this.addToToc('Basic', 2)
+    this.addToToc('Dark', 2)
     this.addToToc('Color', 2)
     this.addToToc('First Day Monday', 2)
     this.addToToc('5 Day Work Week', 2)

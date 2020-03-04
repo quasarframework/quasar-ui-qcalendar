@@ -1,7 +1,6 @@
 @import './calendar-variables'
 
 .q-calendar-scheduler
-  background: $calendar-background-color
 
   .q-calendar-scheduler__resources-head
     border-right: $calendar-border-color $calendar-border-width solid
@@ -205,13 +204,13 @@
     width: 0
     position: relative
 
-.q-dark, .body--dark
+.q-dark, .body--dark, .q-calendar--dark
   .q-calendar-scheduler
-    background: $calendar-background-color-dark
 
     .q-calendar-scheduler__resources-head
       border-right: $calendar-border-color-dark $calendar-border-width solid
       border-bottom: $calendar-border-color-dark $calendar-border-width solid
+      color: $calendar-day-current-color-dark
 
     .q-calendar-scheduler__column-header--before
       border-bottom: $calendar-border-color-dark $calendar-border-width solid
