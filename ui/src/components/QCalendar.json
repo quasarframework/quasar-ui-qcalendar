@@ -60,13 +60,23 @@
         "view=\"week-agenda\""
       ]
     },
+    "dark": {
+      "type": "Boolean",
+      "category": "style",
+      "desc": "Places a calendar in dark mode",
+      "applicable": [
+        "all"
+      ],
+      "addedIn": "v1.5.1"
+    },
     "bordered": {
       "type": "Boolean",
       "category": "style",
       "desc": "Places a border around the calendar",
       "applicable": [
         "all"
-      ]
+      ],
+      "addedIn": "v1.5.0"
     },
     "now": {
       "type": "String",

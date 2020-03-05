@@ -1,7 +1,6 @@
 @import './calendar-variables'
 
-.q-calendar-daily
-  background: $calendar-background-color
+.q-calendar-daily, .q-calendar-agenda
 
   &__bordered
     border: $calendar-border-color $calendar-border-width solid
@@ -11,7 +10,6 @@
 
   .q-calendar-daily__intervals-head
     border-right: $calendar-border-color $calendar-border-width solid
-
 
   .q-calendar-daily__column-header--before
     border-bottom: $calendar-border-color $calendar-border-width solid
@@ -80,7 +78,7 @@
 .q-calendar-daily__day--droppable
   border: $calendar-primary-color $calendar-border-width dashed
 
-.q-calendar-daily
+.q-calendar-daily, .q-calendar-agenda
   display: flex
   flex: 1
   flex-wrap: nowrap
@@ -198,10 +196,11 @@
     width: 0
     position: relative
 
-.body--dark
-  .q-calendar-daily
-    background: $calendar-background-color-dark
-
+.q-dark div,
+.body--dark div,
+.q-calendar--dark,
+  &.q-calendar-daily,
+  &.q-calendar-agenda
     &__bordered
       border: $calendar-border-color-dark $calendar-border-width solid
 
@@ -210,7 +209,7 @@
 
     .q-calendar-daily__intervals-head
       border-right: $calendar-border-color-dark $calendar-border-width solid
-      border-bottom: $calendar-border-color-dark $calendar-border-width solid
+      // border-bottom: $calendar-border-color-dark $calendar-border-width solid
 
     .q-calendar-daily__column-header--before
       border-bottom: $calendar-border-color-dark $calendar-border-width solid

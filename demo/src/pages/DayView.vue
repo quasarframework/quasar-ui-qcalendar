@@ -7,6 +7,7 @@ The ability to use Codepen was recently added to the examples. There are differe
     </q-markdown>
     <example-title title="Day View" />
     <example-viewer title="Basic" file="DayViewBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Dark" file="DayViewDark" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="3Day" file="DayView3Day" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Hide Header" file="DayViewHideHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Interval Height" file="DayViewIntervalHeight" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
@@ -145,6 +146,7 @@ export default {
     this.tempToc = []
     this.addToToc('Day View')
     this.addToToc('Basic', 2)
+    this.addToToc('Dark', 2)
     this.addToToc('3Day', 2)
     this.addToToc('Hide Header', 2)
     this.addToToc('Interval Height', 2)

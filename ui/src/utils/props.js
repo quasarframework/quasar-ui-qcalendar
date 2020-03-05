@@ -201,6 +201,7 @@ export default {
       type: String,
       validator: v => v === '' || validateTimestamp(v)
     },
-    bordered: Boolean
+    bordered: Boolean,
+    dark: Boolean
   }
 }
