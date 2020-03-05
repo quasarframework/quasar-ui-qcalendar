@@ -2,7 +2,7 @@
   <div style="max-width: 800px; width: 100%;">
     <q-calendar
       v-model="selectedDate"
-      view="scheduler"
+      view="week-scheduler"
       dark
       :resources="resources"
       :resource-height="50"

@@ -15,7 +15,7 @@
     <q-separator></q-separator>
     <q-calendar
       v-model="selectedDate"
-      view="scheduler"
+      view="week-scheduler"
       :resources="resources"
       :resource-height="50"
       enable-theme
