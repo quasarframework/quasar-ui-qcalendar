@@ -69,13 +69,8 @@ Drag-and-Drop has been implemented. Give it a try. :)
           <div
             class="planner-column"
             data-column="overdue"
-            draggable
-            @dragend.stop="onDragEnd"
-            @dragenter.stop=" onDragEnter"
-            @dragleave.stop="onDragLeave"
             @dragover.stop="onDragOver"
             @drop.stop="onDrop"
-            @touchmove.stop="(e) => {}"
           >
             <transition-group name="planner-item">
               <template v-for="item in overdue">
@@ -114,13 +109,8 @@ Drag-and-Drop has been implemented. Give it a try. :)
         <div
           class="planner-column"
           :data-column="day.weekday"
-          draggable
-          @dragend.stop="onDragEnd"
-          @dragenter.stop=" onDragEnter"
-          @dragleave.stop="onDragLeave"
           @dragover.stop="onDragOver"
           @drop.stop="onDrop"
-          @touchmove.stop="(e) => {}"
         >
           <transition-group name="planner-item">
             <template v-for="item in getAgenda(day)">
