@@ -196,9 +196,11 @@
     width: 0
     position: relative
 
-.q-dark, .body--dark, .q-calendar--dark
-  .q-calendar-daily, .q-calendar-agenda
-
+.q-dark div,
+.body--dark div,
+.q-calendar--dark,
+  &.q-calendar-daily,
+  &.q-calendar-agenda
     &__bordered
       border: $calendar-border-color-dark $calendar-border-width solid
 

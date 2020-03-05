@@ -204,8 +204,10 @@
     width: 0
     position: relative
 
-.q-dark, .body--dark, .q-calendar--dark
-  .q-calendar-scheduler
+.q-dark div,
+.body--dark div,
+.q-calendar--dark
+  &.q-calendar-scheduler
 
     .q-calendar-scheduler__resources-head
       border-right: $calendar-border-color-dark $calendar-border-width solid
@@ -240,7 +242,8 @@
 
       &.q-past-day
 
-        .q-calendar-scheduler__head-weekday
+        .q-calendar-scheduler__head-weekday,
+        .q-calendar-scheduler__head-day-label
           color: $calendar-day-past-color-dark
 
     .q-calendar-scheduler__resources-body
