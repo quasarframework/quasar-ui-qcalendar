@@ -26,14 +26,6 @@ export default {
     }
   },
 
-  computed: {
-    classes () {
-      return {
-        'q-calendar-scheduler': true
-      }
-    }
-  },
-
   mounted () {
     this.init()
   },
@@ -472,7 +464,7 @@ export default {
 
   render (h) {
     return h('div', {
-      class: this.classes,
+      staticClass: 'q-calendar-scheduler',
       directives: [{
         modifiers: { quiet: true },
         name: 'resize',

@@ -25,15 +25,18 @@ export default {
     parsedResourceHeight () {
       return parseFloat(this.resourceHeight)
     },
+
     parsedResourceWidth () {
       return parseFloat(this.resourceWidth)
     },
+
     bodyHeight () {
       if (this.resources && this.resources.length > 0) {
         return this.resources.length * this.parsedResourceHeight
       }
       return 0
     },
+
     days () {
       return createDayList(
         this.parsedStart,
@@ -50,10 +53,12 @@ export default {
     resourceStyleDefault (_timestamp) {
       return undefined
     },
+
     getTimestampAtEvent (e, day) {
       const timestamp = copyTimestamp(day)
       return updateRelative(timestamp, this.times.now, false)
     },
+
     getScopeForSlot (timestamp, idx, resource) {
       const scope = {}
       scope.day = copyTimestamp(timestamp)

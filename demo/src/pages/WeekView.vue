@@ -7,6 +7,7 @@ The ability to use Codepen was recently added to the examples. There are differe
     </q-markdown>
     <example-title title="Week View" />
     <example-viewer title="Basic" file="WeekViewBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Dark" file="WeekViewDark" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="First Day Monday" file="WeekViewMondayFirstDay" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="5 Day Work Week" file="WeekViewFiveDayWorkWeek" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Disabled Days" file="WeekViewDisabledDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
@@ -109,6 +110,7 @@ export default {
     this.tempToc = []
     this.addToToc('Week View')
     this.addToToc('Basic', 2)
+    this.addToToc('Dark', 2)
     this.addToToc('First Day Monday', 2)
     this.addToToc('5 Day Work Week', 2)
     this.addToToc('Disabled Days', 2)

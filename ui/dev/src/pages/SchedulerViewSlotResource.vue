@@ -1,13 +1,13 @@
 <template>
   <q-calendar
     v-model="selectedDate"
-    view="scheduler"
+    view="week-scheduler"
     :resources="resources"
     :resource-width="160"
     locale="en-us"
     style="height: 500px;"
   >
-    <template #scheduler-resource="{ resource, index }">
+    <template #scheduler-resource="{ resource }">
       <div class="col-12">
         <q-btn flat class="fit" :icon="getResourceImage(resource)" :label="resource.label"/>
       </div>

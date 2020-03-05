@@ -3,7 +3,7 @@
     <q-calendar
       ref="calendar"
       v-model="selectedDate"
-      view="scheduler"
+      view="week-scheduler"
       locale="en-us"
       :resources="resources"
       v-touch-swipe.mouse.left.right="handleSwipe"

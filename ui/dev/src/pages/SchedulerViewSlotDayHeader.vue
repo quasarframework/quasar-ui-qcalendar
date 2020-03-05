@@ -1,7 +1,7 @@
 <template>
   <q-calendar
     v-model="selectedDate"
-    view="scheduler"
+    view="week-scheduler"
     :resources="resources"
     locale="en-us"
     style="height: 500px;"

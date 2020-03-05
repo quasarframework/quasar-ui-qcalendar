@@ -1,12 +1,12 @@
 <template>
   <q-calendar
     v-model="selectedDate"
-    view="scheduler"
+    view="week-scheduler"
     :resources="resources"
     locale="en-us"
     style="height: 500px;"
   >
-    <template #scheduler-resources-header="days">
+    <template #scheduler-resources-header>
       <div class="full-height row justify-center items-center">
         <q-btn label="here" />
       </div>

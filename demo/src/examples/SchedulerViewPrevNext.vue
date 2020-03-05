@@ -11,7 +11,7 @@
       <q-calendar
         ref="calendar"
         v-model="selectedDate"
-        view="scheduler"
+        view="week-scheduler"
         :resources="resources"
         locale="en-us"
         animated

@@ -51,7 +51,7 @@ export function getStartOfWeek (timestamp, weekdays, today) {
       nextDay(start)
     }
   }
-  findWeekday(start, weekdays[0], prevDay, weekdays.length)
+  findWeekday(start, weekdays[0], prevDay)
   updateFormatted(start)
   if (today) {
     updateRelative(start, today, start.hasTime)
@@ -68,7 +68,7 @@ export function getEndOfWeek (timestamp, weekdays, today) {
       prevDay(end)
     }
   }
-  findWeekday(end, weekdays[weekdays.length - 1], nextDay, weekdays.length)
+  findWeekday(end, weekdays[weekdays.length - 1], nextDay)
   updateFormatted(end)
   if (today) {
     updateRelative(end, today, end.hasTime)

@@ -16,7 +16,7 @@ This is the true power of QCalendar.
 # Features
 - Show month, week, work-week, day, contiguous days (ex: 3 days at a time)
 - Resource scheduler
-- Agenda views
+- Agenda views (with optional Planner modes)
 - Month view mini-mode
 - Month view multi-day selection (separate and contiguous)
 - Month view multi-month/multi-day selection when combining two or more calendars
@@ -31,6 +31,7 @@ This is the true power of QCalendar.
 - Day-of-the-year support
 - Easy to theme using CSS overrides or using JSON theme object (see Themes below)
 - Easy to customize with Vue slots
+- Support for Dark mode
 
 ## QCalendar is not...
 - An event management system. However, QCalendar supports everything you need to create an event/reminder management system using slots (check out the interactive demo).
@@ -242,6 +243,8 @@ In **Agenda** view mode, the developer is free to add whatever content they want
 
 The `agenda` view is basically a `day` view without the intervals. It is up to the developer to provide the content via the `day-body` slot.
 
+## Agenda view (Planner)
+
 While in **Agenda** view, you can define extra columns on the left-side or right-side of the calendar. This is perfect for creating Planners.
 
 ![PlannerExample](statics/qcalendar-agenda-view--planner.png "Planner Example" =800x800)
@@ -251,33 +254,33 @@ If this interests you, check out the [Planner Example](/demos/planner).
 ## View types
 
 QCalendar has many `view` types available. They are:
-1. `month`
-2. `week`
-3. `day`
-4. `2day`
-5. `3day`
-6. `4day`
-7. `5day`
-8. `6day`
-9. `month-scheduler`
-10. `week-scheduler`
-11. `custom-scheduler`
-12. `scheduler`
-13. `day-scheduler`
-14. `2day-scheduler`
-15. `3day-scheduler`
-16. `4day-scheduler`
-17. `5day-scheduler`
-18. `6day-scheduler`
-19. `month-agenda`
-20. `week-agenda`
-21. `custom-agenda`
-22. `day-agenda`
-23. `2day-agenda`
-24. `3day-agenda`
-25. `4day-agenda`
-26. `5day-agenda`
-27. `6day-agenda`
+1. `day`
+2. `2day`
+3. `3day`
+4. `4day`
+5. `5day`
+6. `6day`
+7. `week`
+8. `month`
+9. `scheduler`
+10. `day-scheduler`
+11. `2day-scheduler`
+12. `3day-scheduler`
+13. `4day-scheduler`
+14. `5day-scheduler`
+15. `6day-scheduler`
+16. `week-scheduler`
+17. `month-scheduler`
+18. `custom-scheduler`
+19. `day-agenda`
+20. `2day-agenda`
+21. `3day-agenda`
+22. `4day-agenda`
+23. `5day-agenda`
+24. `6day-agenda`
+25. `month-agenda`
+26. `week-agenda`
+27. `custom-agenda`
 28. `month-interval`
 29. `custom-interval`
 
@@ -330,6 +333,14 @@ Of course, change the color to anything you want. Alternatively, provide a borde
 ::: info
 Note that for the User selected date, we use the css class `.q-active-date` to avoid conflict with `.q-selected-date` which is used for multi-selected dates.
 :::
+
+# Styling Monthly Mini-mode Dates
+The styling for month view is to have the text left-justified. For mini-mode, this may not appeal to you. You can resolve this with the following sass which centers the text:
+
+```css
+.q-calendar-weekly__day
+  display: block !important
+```
 
 # Navigation
 
