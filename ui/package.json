@@ -83,7 +83,7 @@
     "postcss-rtl": "^1.7.2",
     "promise": "^8.1.0",
     "quasar": "^1.9.8",
-    "quasar-json-api": "^0.0.20",
+    "quasar-json-api": "^0.0.21",
     "rimraf": "^3.0.2",
     "rollup": "^1.32.0",
     "uglify-es": "^3.3.9",
