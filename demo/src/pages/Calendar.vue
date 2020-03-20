@@ -1182,22 +1182,22 @@ export default {
 
   // this page
   .calendar-container
-    position relative
+    position: relative
 
   .my-event
-    width 100%
-    position absolute
-    font-size 12px
+    width: 100%
+    position: absolute
+    font-size: 12px
 
   .full-width
-    left 0
-    width 100%
+    left: 0
+    width: 100%
 
   .left-side
-    left 0
-    width 49.75%
+    left: 0
+    width: 49.75%
 
   .right-side
-    left 50.25%
-    width 49.75%
+    left: 50.25%
+    width: 49.75%
   </style>
