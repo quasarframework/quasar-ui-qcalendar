@@ -940,14 +940,9 @@
         "All"
       ],
       "params": {
-        "start": {
+        "{start, end}": {
           "type": "Object",
-          "desc": "The timestamp object for the first valid date being displayed",
-          "__exemption": [ "examples" ]
-        },
-        "end": {
-          "type": "Object",
-          "desc": "The timestamp object for the last valid date being displayed",
+          "desc": "The timestamp objects for the first and last valid date being displayed",
           "__exemption": [ "examples" ]
         }
       }
