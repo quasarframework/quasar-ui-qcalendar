@@ -2412,7 +2412,7 @@
       }
     },
     "timeDurationHeight": {
-      "desc": "Given a duration (in seconds), will return the css height value",
+      "desc": "Given a duration (in minutes), will return the css height value",
       "applicable": [
         "day",
         "2day",
@@ -2431,7 +2431,7 @@
       "params": {
         "duration": {
           "type": ["Number", "String"],
-          "desc": "The number of seconds for the event to calculate it's height",
+          "desc": "The number of minutes for the event to calculate it's height",
           "examples":[
             "300",
             "900"
