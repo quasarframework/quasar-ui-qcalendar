@@ -11,7 +11,8 @@
             ref="calendar"
             v-model="selectedDate"
             view="month"
-            :disabled-days="disabledDays"
+            :disabled-before="disabledBefore"
+            :disabled-after="disabledAfter"
             :mini-mode="miniMode"
             :day-style="modifiedStyle"
             locale="en-us"
@@ -29,24 +30,60 @@
 </template>
 
 <script>
+import {
+  parseDate,
+  parseTimestamp,
+  addToDate,
+  daysInMonth
+} from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
+const CURRENT_DAY = new Date()
+
+function getCurrentDay (day) {
+  const newDay = new Date(CURRENT_DAY)
+  newDay.setDate(day)
+  const tm = parseDate(newDay)
+  return tm.date
+}
+
 export default {
   data () {
     return {
-      selectedDate: '2019-04-01',
+      selectedDate: '',
       splitterModel: 90, // start at 90%
-      miniMode: false,
-      disabledDays: [
-        '2019-04-02',
-        '2019-04-03',
-        '2019-04-04',
-        '2019-04-05'
-      ]
+      miniMode: false
     }
   },
   watch: {
     splitterModel (val) {
       const rect = this.$refs.calendar.$el.getBoundingClientRect()
       this.miniMode = rect.width < 500
+    }
+  },
+  beforeMount () {
+    // set to today's date
+    this.selectedDate = getCurrentDay(CURRENT_DAY.getDate())
+  },
+  computed: {
+    disabledBefore () {
+      // find the last day of the previous month
+      if (this.selectedDate) {
+        let ts = parseTimestamp(this.selectedDate)
+        ts = addToDate(ts, { day: -ts.day })
+        return ts.date
+      }
+      return void 0
+    },
+
+    disabledAfter () {
+      // find the 1st day of the next month
+      if (this.selectedDate) {
+        let ts = parseTimestamp(this.selectedDate)
+        // get days in month
+        const days = daysInMonth(ts.year, ts.month)
+        ts = addToDate(ts, { day: (days - ts.day) })
+        return ts.date
+      }
+      return void 0
     }
   },
   methods: {

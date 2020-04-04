@@ -393,6 +393,16 @@
           "desc": "A timestamp object",
           "__exemption": [ "examples" ]
         },
+        "disabledBefore": {
+          "type": "String",
+          "desc": "A date in the form `YYYY-mm-dd` where all dates before, and including, will be disabled",
+          "__exemption": [ "examples" ]
+        },
+        "disabledAfter": {
+          "type": "String",
+          "desc": "A date in the form `YYYY-mm-dd` where all dates after, and including, will be disabled",
+          "__exemption": [ "examples" ]
+        },
         "disabledDays": {
           "type": "Array",
           "required": true,
@@ -834,7 +844,17 @@
           "desc": "A timestamp object",
           "__exemption": [ "examples" ]
         },
-        "disabledDays": {
+        "disabledBefore": {
+          "type": "String",
+          "desc": "A date in the form `YYYY-mm-dd` where all dates before, and including, will be disabled",
+          "__exemption": [ "examples" ]
+        },
+        "disabledAfter": {
+          "type": "String",
+          "desc": "A date in the form `YYYY-mm-dd` where all dates after, and including, will be disabled",
+          "__exemption": [ "examples" ]
+        },
+            "disabledDays": {
           "type": "Array",
           "default": "[]",
           "desc": "An array of string dates in the form `YYYY-mm-dd` that representing disabled days",

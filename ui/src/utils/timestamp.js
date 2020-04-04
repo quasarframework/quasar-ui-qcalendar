@@ -247,18 +247,33 @@ export function updateWorkWeek (timestamp) {
   return timestamp
 }
 
-export function updateDisabled (timestamp, disabledDays) {
-  if (!Array.isArray(disabledDays) || disabledDays.length === 0) {
-    return timestamp
-  }
+export function updateDisabled (timestamp, disabledBefore, disabledAfter, disabledDays) {
   const t = getDayIdentifier(timestamp)
-  for (const day in disabledDays) {
-    const d = getDayIdentifier(parseTimestamp(disabledDays[day] + ' 00:00'))
-    if (d === t) {
+
+  if (disabledBefore !== void 0) {
+    const before = getDayIdentifier(parsed(disabledBefore))
+    if (t <= before) {
       timestamp.disabled = true
-      break
     }
   }
+
+  if (timestamp.disabled !== true && disabledAfter !== void 0) {
+    const after = getDayIdentifier(parsed(disabledAfter))
+    if (t >= after) {
+      timestamp.disabled = true
+    }
+  }
+
+  if (timestamp.disabled !== true && Array.isArray(disabledDays) && disabledDays.length > 0) {
+    for (const day in disabledDays) {
+      const d = getDayIdentifier(parseTimestamp(disabledDays[day] + ' 00:00'))
+      if (d === t) {
+        timestamp.disabled = true
+        break
+      }
+    }
+  }
+
   return timestamp
 }
 
@@ -411,7 +426,7 @@ export function getWeekdaySkips (weekdays) {
   return skips
 }
 
-export function createDayList (start, end, now, weekdaySkips, disabledDays = [], max = 42, min = 0) {
+export function createDayList (start, end, now, weekdaySkips, disabledBefore, disabledAfter, disabledDays = [], max = 42, min = 0) {
   const stop = getDayIdentifier(end)
   const days = []
   let current = copyTimestamp(start)
@@ -435,7 +450,7 @@ export function createDayList (start, end, now, weekdaySkips, disabledDays = [],
     const day = copyTimestamp(current)
     updateFormatted(day)
     updateRelative(day, now)
-    updateDisabled(day, disabledDays)
+    updateDisabled(day, disabledBefore, disabledAfter, disabledDays)
     days.push(day)
     // current = relativeDays(current, nextDay, weekdaySkips[current.weekday])
     current = relativeDays(current, nextDay)

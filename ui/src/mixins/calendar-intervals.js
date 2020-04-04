@@ -27,31 +27,40 @@ export default {
     parsedIntervalStart () {
       return parseInt(this.intervalStart, 10)
     },
+
     parsedIntervalMinutes () {
       return parseInt(this.intervalMinutes, 10)
     },
+
     parsedIntervalCount () {
       return parseInt(this.intervalCount, 10)
     },
+
     parsedIntervalHeight () {
       return parseFloat(this.intervalHeight)
     },
+
     startMinute () {
       return this.parsedIntervalStart * this.parsedIntervalMinutes
     },
+
     bodyHeight () {
       return this.parsedIntervalCount * this.parsedIntervalHeight
     },
+
     days () {
       return createDayList(
         this.parsedStart,
         this.parsedEnd,
         this.times.today,
         this.weekdaySkips,
+        this.disabledBefore,
+        this.disabledAfter,
         this.disabledDays,
         this.maxDays
       )
     },
+
     intervals () {
       const days = this.days
       const first = this.parsedIntervalStart
@@ -65,6 +74,7 @@ export default {
       }
       return days.map(d => createIntervalList(d, first, minutes, count, now))
     },
+
     intervalFormatter () {
       const longOptions = { timeZone: 'UTC', hour12: !this.hour24Format, hour: '2-digit', minute: '2-digit' }
       const shortOptions = { timeZone: 'UTC', hour12: !this.hour24Format, hour: 'numeric', minute: '2-digit' }
@@ -83,9 +93,11 @@ export default {
       const isFirst = first.hour === interval.hour && first.minute === interval.minute
       return !isFirst && interval.minute === 0
     },
+
     intervalStyleDefault (_interval) {
       return undefined
     },
+
     getTimestampAtEvent (e, day) {
       const timestamp = copyTimestamp(day)
       const bounds = (e.currentTarget).getBoundingClientRect()
@@ -100,6 +112,7 @@ export default {
 
       return updateMinutes(timestamp, minutes, this.times.now)
     },
+
     getScopeForSlot (timestamp, idx) {
       const scope = copyTimestamp(timestamp)
       scope.timeStartPos = this.timeStartPos
@@ -109,6 +122,7 @@ export default {
       }
       return scope
     },
+
     scrollToTime (time) {
       const y = this.timeStartPos(time)
       const pane = this.$refs.scrollArea
@@ -121,9 +135,11 @@ export default {
 
       return true
     },
+
     timeDurationHeight (minutes) {
       return minutes / this.parsedIntervalMinutes * this.parsedIntervalHeight
     },
+
     timeStartPos (time, clamp = true) {
       const minutes = parseTime(time)
       if (minutes === false) return false

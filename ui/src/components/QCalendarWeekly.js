@@ -43,6 +43,8 @@ export default {
         end,
         this.times.today,
         this.weekdaySkips,
+        this.disabledBefore,
+        this.disabledAfter,
         this.disabledDays,
         Number.MAX_SAFE_INTEGER,
         minDays
@@ -59,6 +61,8 @@ export default {
         end,
         today,
         this.weekdaySkips,
+        this.disabledBefore,
+        this.disabledAfter,
         this.disabledDays,
         this.weekdays.length,
         this.weekdays.length

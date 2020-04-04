@@ -15,6 +15,11 @@ The ability to use Codepen was recently added to the examples. There are differe
 When the property `disabled-days` has an array of disabled days, you can hook into the `interval-style` property to change the background color of the disabled day.
       </q-markdown>
     </example-viewer>
+    <example-viewer title="Disabled Before/After" file="WeekViewDisabledBeforeAfter" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+      <q-markdown>
+In this example, the `disabled-before` is set to the monday of this week and the `disabled-after` is set to the friday of this week.
+      </q-markdown>
+    </example-viewer>
 
     <example-viewer title="Now" file="WeekViewNow" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
@@ -114,6 +119,7 @@ export default {
     this.addToToc('First Day Monday', 2)
     this.addToToc('5 Day Work Week', 2)
     this.addToToc('Disabled Days', 2)
+    this.addToToc('Disabled Before/After', 2)
     this.addToToc('Now', 2)
     this.addToToc('Short Weekday Label', 2)
     this.addToToc('Hour24 Format', 2)
