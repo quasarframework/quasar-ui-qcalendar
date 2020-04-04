@@ -43,6 +43,8 @@ export default {
         this.parsedEnd,
         this.times.today,
         this.weekdaySkips,
+        this.disabledBefore,
+        this.disabledAfter,
         this.disabledDays,
         this.maxDays
       )

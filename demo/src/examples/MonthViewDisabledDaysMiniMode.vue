@@ -53,7 +53,8 @@ export default {
     modifiedStyle (scope) {
       if (scope.disabled === true) {
         return {
-          backgroundColor: '#ffcb9c!important'
+          backgroundColor: '#ffcb9c!important',
+          cursor: 'not-allowed'
         }
       }
       return {}

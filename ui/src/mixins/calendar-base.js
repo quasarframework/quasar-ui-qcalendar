@@ -52,21 +52,27 @@ export default {
     weekdaySkips () {
       return getWeekdaySkips(this.weekdays)
     },
+
     parsedStart () {
       return parseTimestamp(this.start)
     },
+
     parsedEnd () {
       return parseTimestamp(this.end)
     },
+
     days () {
       return createDayList(
         this.parsedStart,
         this.parsedEnd,
         this.times.today,
         this.weekdaySkips,
+        this.disabledBefore,
+        this.disabledAfter,
         this.disabledDays
       )
     },
+
     dayFormatter () {
       const options = { timeZone: 'UTC', day: 'numeric' }
 
@@ -75,6 +81,7 @@ export default {
         (_tms, _short) => options
       )
     },
+
     weekdayFormatter () {
       const longOptions = { timeZone: 'UTC', weekday: 'long' }
       const shortOptions = { timeZone: 'UTC', weekday: 'short' }
@@ -100,12 +107,15 @@ export default {
         'q-selected-date': this.arrayHasDate(selectedDays, timestamp)
       }
     },
+
     getStartOfWeek (timestamp) {
       return getStartOfWeek(timestamp, this.weekdays, this.times.today)
     },
+
     getEndOfWeek (timestamp) {
       return getEndOfWeek(timestamp, this.weekdays, this.times.today)
     },
+
     dayStyleDefault (_timestamp) {
       return undefined
     }

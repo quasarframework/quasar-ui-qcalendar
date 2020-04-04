@@ -494,6 +494,14 @@ One important aspect of transitions is to avoid overflow. You can prevent this f
 QCalendar supports HTML5 **drag and drop**. If you have components that need drag and drop support you can add the following (this example is using QBadge):
 
 ```html
+  <q-calendar
+    :drag-over-func="onDragOver"
+    :drop-func="onDrop"
+  >
+```
+The above is need to set the calendar as a drop point.
+
+```html
 <template #day="{ date }">
   <template v-for="(event, index) in getEvents(date)">
     <q-badge
@@ -517,23 +525,26 @@ Remember, to kick off a drag and drop, you must `preventDefault` during the `dra
 
 ```js
 onDragEnter (ev, event) {
-  prevent(ev)
+  ev.preventDefault()
 },
 onDragStart (ev, event) {
   this.dragging = true
   this.draggedEvent = event
-  stop(ev)
+  ev.stopPropagation()
 },
 onDragEnd (ev, event) {
-  stopAndPrevent(ev)
+  ev.preventDefault()
+  ev.stopPropagation()
   this.resetDrag()
 },
 onDragOver (ev, day, type) {
   if (type === 'day') {
-    stopAndPrevent(ev)
+    ev.preventDefault()
+    ev.stopPropagation()
     return this.draggedEvent.date !== day.date
   } else if (type === 'interval') {
-    stopAndPrevent(ev)
+    ev.preventDefault()
+    ev.stopPropagation()
     return this.draggedEvent.date !== day.date && this.draggedEvent.time !== day.time
   }
 },
