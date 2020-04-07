@@ -23,11 +23,9 @@ When the property `disabled-days` has an array of disabled days, you can hook in
 In this example, the `disabled-before` is set to the last day of the previous month and the `disabled-after` is set to the first day of the next month. Essentially, this disables all dates but the current month.
       </q-markdown>
     </example-viewer>
-
-    <example-viewer title="Now" file="MonthViewNow" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Work Weeks" file="MonthViewWorkWeekNumbers" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+    <example-viewer title="Disabled Days of Week" file="MonthViewDisabledWeekdays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
-`show-work-weeks` is available only for month view.
+In this example, the `disabled days of week` is set to `[1,5,6]`
       </q-markdown>
     </example-viewer>
 
@@ -122,6 +120,7 @@ Also, regardless of `mini-mode` all slots associated with month view now have ad
     <example-viewer title="Mini-Mode - Basic" file="MonthViewBasicMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Mini-Mode - Disabled Days" file="MonthViewDisabledDaysMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Mini-Mode - Disabled Before/After" file="MonthViewDisabledBeforeAfterMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Mini-Mode - Disabled Days of Week" file="MonthViewDisabledWeekdaysMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Mini-Mode - 5 Day Work Week" file="MonthViewFiveDayWorkWeekMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Mini-Mode - Work Week Numbers" file="MonthViewWorkWeekNumbersMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Mini-Mode - Selected Dates" file="MonthViewSelectedDatesMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
@@ -184,6 +183,7 @@ export default {
     this.addToToc('Hide Header', 2)
     this.addToToc('Disabled Days', 2)
     this.addToToc('Disabled Before/After', 2)
+    this.addToToc('Disabled Days of Week', 2)
     this.addToToc('Now', 2)
     this.addToToc('Work Weeks', 2)
     this.addToToc('Short Weekday Label', 2)
@@ -202,6 +202,7 @@ export default {
     this.addToToc('Mini-Mode - Basic', 2)
     this.addToToc('Mini-Mode - Disabled Days', 2)
     this.addToToc('Mini-Mode - Disabled Before/After', 2)
+    this.addToToc('Mini-Mode - Disabled Days of Week', 2)
     this.addToToc('Mini-Mode - 5 Day Work Week', 2)
     this.addToToc('Mini-Mode - Work Week Numbers', 2)
     this.addToToc('Mini-Mode - Selected Dates', 2)
