@@ -45,6 +45,7 @@ export default {
         this.weekdaySkips,
         this.disabledBefore,
         this.disabledAfter,
+        this.disabledWeekdays,
         this.disabledDays,
         Number.MAX_SAFE_INTEGER,
         minDays
@@ -63,6 +64,7 @@ export default {
         this.weekdaySkips,
         this.disabledBefore,
         this.disabledAfter,
+        this.disabledWeekdays,
         this.disabledDays,
         this.weekdays.length,
         this.weekdays.length
