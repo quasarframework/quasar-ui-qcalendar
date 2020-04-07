@@ -56,6 +56,7 @@ export default {
         this.weekdaySkips,
         this.disabledBefore,
         this.disabledAfter,
+        this.disabledWeekdays,
         this.disabledDays,
         this.maxDays
       )

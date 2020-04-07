@@ -403,6 +403,12 @@
           "desc": "A date in the form `YYYY-mm-dd` where all dates after, and including, will be disabled",
           "__exemption": [ "examples" ]
         },
+        "disabledWeekdays": {
+          "type": "Array",
+          "required": true,
+          "desc": "An array of disabled week days",
+          "examples": ["[1, 2]"]
+        },
         "disabledDays": {
           "type": "Array",
           "required": true,
@@ -854,7 +860,13 @@
           "desc": "A date in the form `YYYY-mm-dd` where all dates after, and including, will be disabled",
           "__exemption": [ "examples" ]
         },
-            "disabledDays": {
+        "disabledWeekdays": {
+          "type": "Array",
+          "default": "[]",
+          "desc": "An array of number of day of the week in the form that representing disabled days",
+          "__exemption": ["examples"]
+        },
+        "disabledDays": {
           "type": "Array",
           "default": "[]",
           "desc": "An array of string dates in the form `YYYY-mm-dd` that representing disabled days",

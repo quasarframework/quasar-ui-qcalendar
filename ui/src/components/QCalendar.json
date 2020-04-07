@@ -145,6 +145,13 @@
         "disabled-before=\"2019-04-01\""
       ]
     },
+    "disabled-weekdays": {
+      "type": "Array",
+      "category": "model",
+      "desc": "This is the days of the week to be disabled",
+      "applicable": ["All"],
+      "examples": ["disabled-weekdays=\"[0,1,2,3,4,5]\""]
+    },
     "locale": {
       "type": "String",
       "category": "model",

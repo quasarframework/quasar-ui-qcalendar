@@ -16,6 +16,7 @@ export default {
     disabledDays: Array,
     disabledBefore: String,
     disabledAfter: String,
+    disabledWeekdays: Array,
     hideHeader: Boolean,
     noScroll: Boolean,
     shortWeekdayLabel: Boolean,
