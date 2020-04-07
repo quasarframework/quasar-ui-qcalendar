@@ -247,7 +247,7 @@ export function updateWorkWeek (timestamp) {
   return timestamp
 }
 
-export function updateDisabled (timestamp, disabledBefore, disabledAfter, disabledDays) {
+export function updateDisabled (timestamp, disabledBefore, disabledAfter, disabledWeekdays, disabledDays) {
   const t = getDayIdentifier(timestamp)
 
   if (disabledBefore !== void 0) {
@@ -261,6 +261,15 @@ export function updateDisabled (timestamp, disabledBefore, disabledAfter, disabl
     const after = getDayIdentifier(parsed(disabledAfter))
     if (t >= after) {
       timestamp.disabled = true
+    }
+  }
+
+  if (timestamp.disabled !== true && Array.isArray(disabledWeekdays) && disabledWeekdays.length > 0) {
+    for (const weekday in disabledWeekdays) {
+      if (disabledWeekdays[weekday] === timestamp.weekday) {
+        timestamp.disabled = true
+        break
+      }
     }
   }
 
@@ -426,7 +435,7 @@ export function getWeekdaySkips (weekdays) {
   return skips
 }
 
-export function createDayList (start, end, now, weekdaySkips, disabledBefore, disabledAfter, disabledDays = [], max = 42, min = 0) {
+export function createDayList (start, end, now, weekdaySkips, disabledBefore, disabledAfter, disabledWeekdays = [], disabledDays = [], max = 42, min = 0) {
   const stop = getDayIdentifier(end)
   const days = []
   let current = copyTimestamp(start)
@@ -450,7 +459,7 @@ export function createDayList (start, end, now, weekdaySkips, disabledBefore, di
     const day = copyTimestamp(current)
     updateFormatted(day)
     updateRelative(day, now)
-    updateDisabled(day, disabledBefore, disabledAfter, disabledDays)
+    updateDisabled(day, disabledBefore, disabledAfter, disabledWeekdays, disabledDays)
     days.push(day)
     // current = relativeDays(current, nextDay, weekdaySkips[current.weekday])
     current = relativeDays(current, nextDay)

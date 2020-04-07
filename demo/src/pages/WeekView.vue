@@ -20,6 +20,11 @@ When the property `disabled-days` has an array of disabled days, you can hook in
 In this example, the `disabled-before` is set to the monday of this week and the `disabled-after` is set to the friday of this week.
       </q-markdown>
     </example-viewer>
+    <example-viewer title="Disabled Weekdays" file="WeekViewDisabledWeekdays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+      <q-markdown>
+In this example, the `disabled-weekdays` is set to disable the weekends.
+      </q-markdown>
+    </example-viewer>
 
     <example-viewer title="Now" file="WeekViewNow" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
@@ -120,6 +125,7 @@ export default {
     this.addToToc('5 Day Work Week', 2)
     this.addToToc('Disabled Days', 2)
     this.addToToc('Disabled Before/After', 2)
+    this.addToToc('Disabled Weekdays', 2)
     this.addToToc('Now', 2)
     this.addToToc('Short Weekday Label', 2)
     this.addToToc('Hour24 Format', 2)

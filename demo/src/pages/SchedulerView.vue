@@ -13,6 +13,11 @@ When the property `disabled-days` has an array of disabled days, you can hook in
 In this example, the `disabled-before` is set to the monday of this week and the `disabled-after` is set to the friday of this week.
       </q-markdown>
     </example-viewer>
+    <example-viewer title="Disabled Weekdays" file="SchedulerViewDisabledWeekdays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+      <q-markdown>
+In this example, the `disabled-weekdays` is set to disable the weekends.
+      </q-markdown>
+    </example-viewer>
     <example-viewer title="Prev/Next" file="SchedulerViewPrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Swipe" file="SchedulerViewSwipe" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Slots (scheduler-resources-header)" file="SchedulerViewSlotResourcesHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
@@ -98,6 +103,7 @@ export default {
     this.addToToc('Dark', 2)
     this.addToToc('Disabled Days', 2)
     this.addToToc('Disabled Before/After', 2)
+    this.addToToc('Disabled Weekdays', 2)
     this.addToToc('Prev/Next', 2)
     this.addToToc('Swipe', 2)
     this.addToToc('Slots (scheduler-resources-header)', 2)
