@@ -14,7 +14,7 @@
           <q-badge
             :key="index"
             style="width: 10px; max-width: 10px; height: 5px; max-height: 5px"
-            class="q-ma-xs"
+            class="q-event"
             :class="badgeClasses(event, 'day')"
             :style="badgeStyles(event, 'day')"
           >
@@ -25,7 +25,7 @@
           <q-badge
             :key="index"
             style="width: 100%; cursor: pointer; height: 16px; max-height: 16px"
-            class="q-mb-xs"
+            class="q-event"
             :class="badgeClasses(event, 'day')"
             :style="badgeStyles(event, 'day')"
           >
