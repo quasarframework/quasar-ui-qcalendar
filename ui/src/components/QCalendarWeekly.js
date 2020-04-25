@@ -193,7 +193,7 @@ export default {
         key: week[0].date,
         staticClass: 'q-calendar-weekly__week--wrapper',
         style: {
-          height: this.dayHeight && this.dayHeight > 0 ? height : (this.isMiniMode ? 'auto' : '100px')
+          height: this.dayHeight && this.dayHeight > 0 ? height : (this.isMiniMode ? 'auto' : 'auto')
         }
       }, [
         this.showWorkWeeks === true && this.__renderWorkWeekGutter(h, week),
@@ -308,7 +308,7 @@ export default {
         this.isMiniMode !== true && this.showDayOfYearLabel && !hasMonth ? this.__renderDayOfYearLabel(h, day) : '',
         this.isMiniMode !== true && hasMonth ? this.__renderDayMonth(h, day) : '',
         h('div', {
-          staticClass: 'full-width' + (this.isMiniMode === true ? ' row justify-around' : '')
+          staticClass: 'q-calendar-weekly__day--content full-width' + (this.isMiniMode === true ? ' row justify-around' : '')
         }, slot ? slot(slotData) : '')
       ])
     },
