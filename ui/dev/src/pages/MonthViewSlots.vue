@@ -3,8 +3,9 @@
     <q-calendar
       v-model="selectedDate"
       view="month"
+      day-height="0"
       locale="en-us"
-      style="height: 500px;"
+      style="height: 800px; height: 100%;"
     >
       <template #day="{ date }">
         <template v-for="(event, index) in getEvents(date)">
@@ -89,7 +90,7 @@ export default {
         {
           title: 'Conference',
           details: 'Teaching Javascript 101',
-          date: getCurrentDay(22),
+          date: getCurrentDay(20),
           time: '08:00',
           duration: 540,
           bgcolor: 'blue',
@@ -98,7 +99,7 @@ export default {
         {
           title: 'Girlfriend',
           details: 'Meet GF for dinner at Swanky Restaurant',
-          date: getCurrentDay(22),
+          date: getCurrentDay(20),
           time: '19:00',
           duration: 180,
           bgcolor: 'teal',
@@ -107,7 +108,7 @@ export default {
         {
           title: 'Fishing',
           details: 'Time for some weekend R&R',
-          date: getCurrentDay(27),
+          date: getCurrentDay(20),
           bgcolor: 'purple',
           icon: 'fas fa-fish',
           days: 2
