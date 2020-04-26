@@ -119,7 +119,7 @@ function addAssets (builds, type, injectName) {
           output: {
             file: addExtension(resolve(`../dist/${type}/${file}`), 'umd'),
             format: 'umd',
-            name: `QVerticalExpansionItem.${injectName}.${name}`
+            name: `QCalendar.${injectName}.${name}`
           }
         },
         build: {
