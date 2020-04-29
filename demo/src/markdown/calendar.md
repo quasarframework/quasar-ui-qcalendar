@@ -622,10 +622,11 @@ All other events are mouse/touch based. The base events are:
 These are appended with the type of event:
 1. `:time`
 2. `:day`
-3. `:interval`
-4. `resource`
-5. `resource:day`
-6. `column`
+3. `:workweek`
+4. `:interval`
+5. `resource`
+6. `resource:day`
+7. `column`
 
 All mouse/touch events support the Vue [Event & Key Modifiers](https://vuejs.org/v2/guide/render-function.html#Event-amp-Key-Modifiers).
 

@@ -243,7 +243,10 @@ export default {
         class: this.getRelativeClasses(timestamp !== false ? timestamp : day, false),
         style: {
           height: this.dayHeight && this.dayHeight > 0 ? height : 'auto'
-        }
+        },
+        on: this.getDefaultMouseEventHandlers(':workweek', _event => {
+          return slotData
+        })
       }), slot ? slot(slotData) : workweekLabel)
     },
 
