@@ -1244,6 +1244,238 @@
       }
     },
 
+
+    "click:workweek": {
+      "desc": "Occurs on workweek",
+      "addedIn": "v1.5.6",
+      "applicable": [
+        "month"
+      ],
+      "params": {
+        "mimimode": {
+          "type": "Boolean",
+          "__exemption": [ "examples" ]
+        },
+        "week": {
+          "type": "Array",
+          "desc": "An array of timestamp objects representing the week",
+          "__exemption": [ "examples" ]
+        },
+        "workweekLabel": {
+          "type": "String",
+          "desc": "The workweek lebel",
+          "examples": [ "18", "22" ]
+        }
+      }
+    },
+    "contextmenu:workweek": {
+      "desc": "Occurs on workweek",
+      "addedIn": "v1.5.6",
+      "applicable": [
+        "month"
+      ],
+      "params": {
+        "mimimode": {
+          "type": "Boolean",
+          "__exemption": [ "examples" ]
+        },
+        "week": {
+          "type": "Array",
+          "desc": "An array of timestamp objects representing the week",
+          "__exemption": [ "examples" ]
+        },
+        "workweekLabel": {
+          "type": "String",
+          "desc": "The workweek lebel",
+          "examples": [ "18", "22" ]
+        }
+      }
+    },
+    "mousedown:workweek": {
+      "desc": "Occurs on workweek",
+      "addedIn": "v1.5.6",
+      "applicable": [
+        "month"
+      ],
+      "params": {
+        "mimimode": {
+          "type": "Boolean",
+          "__exemption": [ "examples" ]
+        },
+        "week": {
+          "type": "Array",
+          "desc": "An array of timestamp objects representing the week",
+          "__exemption": [ "examples" ]
+        },
+        "workweekLabel": {
+          "type": "String",
+          "desc": "The workweek lebel",
+          "examples": [ "18", "22" ]
+        }
+      }
+    },
+    "mouseup:workweek": {
+      "desc": "Occurs on workweek",
+      "addedIn": "v1.5.6",
+      "applicable": [
+        "month"
+      ],
+      "params": {
+        "mimimode": {
+          "type": "Boolean",
+          "__exemption": [ "examples" ]
+        },
+        "week": {
+          "type": "Array",
+          "desc": "An array of timestamp objects representing the week",
+          "__exemption": [ "examples" ]
+        },
+        "workweekLabel": {
+          "type": "String",
+          "desc": "The workweek lebel",
+          "examples": [ "18", "22" ]
+        }
+      }
+    },
+    "mouseenter:workweek": {
+      "desc": "Occurs on workweek",
+      "addedIn": "v1.5.6",
+      "applicable": [
+        "month"
+      ],
+      "params": {
+        "mimimode": {
+          "type": "Boolean",
+          "__exemption": [ "examples" ]
+        },
+        "week": {
+          "type": "Array",
+          "desc": "An array of timestamp objects representing the week",
+          "__exemption": [ "examples" ]
+        },
+        "workweekLabel": {
+          "type": "String",
+          "desc": "The workweek lebel",
+          "examples": [ "18", "22" ]
+        }
+      }
+    },
+    "mouseleave:workweek": {
+      "desc": "Occurs on workweek",
+      "addedIn": "v1.5.6",
+      "applicable": [
+        "month"
+      ],
+      "params": {
+        "mimimode": {
+          "type": "Boolean",
+          "__exemption": [ "examples" ]
+        },
+        "week": {
+          "type": "Array",
+          "desc": "An array of timestamp objects representing the week",
+          "__exemption": [ "examples" ]
+        },
+        "workweekLabel": {
+          "type": "String",
+          "desc": "The workweek lebel",
+          "examples": [ "18", "22" ]
+        }
+      }
+    },
+    "mousemove:workweek": {
+      "desc": "Occurs on workweek",
+      "addedIn": "v1.5.6",
+      "applicable": [
+        "month"
+      ],
+      "params": {
+        "mimimode": {
+          "type": "Boolean",
+          "__exemption": [ "examples" ]
+        },
+        "week": {
+          "type": "Array",
+          "desc": "An array of timestamp objects representing the week",
+          "__exemption": [ "examples" ]
+        },
+        "workweekLabel": {
+          "type": "String",
+          "desc": "The workweek lebel",
+          "examples": [ "18", "22" ]
+        }
+      }
+    },
+    "touchstart:workweek": {
+      "desc": "Occurs on workweek",
+      "addedIn": "v1.5.6",
+      "applicable": [
+        "month"
+      ],
+      "params": {
+        "mimimode": {
+          "type": "Boolean",
+          "__exemption": [ "examples" ]
+        },
+        "week": {
+          "type": "Array",
+          "desc": "An array of timestamp objects representing the week",
+          "__exemption": [ "examples" ]
+        },
+        "workweekLabel": {
+          "type": "String",
+          "desc": "The workweek lebel",
+          "examples": [ "18", "22" ]
+        }
+      }
+    },
+    "touchend:workweek": {
+      "desc": "Occurs on workweek",
+      "addedIn": "v1.5.6",
+      "applicable": [
+        "month"
+      ],
+      "params": {
+        "mimimode": {
+          "type": "Boolean",
+          "__exemption": [ "examples" ]
+        },
+        "week": {
+          "type": "Array",
+          "desc": "An array of timestamp objects representing the week",
+          "__exemption": [ "examples" ]
+        },
+        "workweekLabel": {
+          "type": "String",
+          "desc": "The workweek lebel",
+          "examples": [ "18", "22" ]
+        }
+      }
+    },
+    "touchmove:workweek": {
+      "desc": "Occurs on workweek",
+      "addedIn": "v1.5.6",
+      "applicable": [
+        "month"
+      ],
+      "params": {
+        "mimimode": {
+          "type": "Boolean",
+          "__exemption": [ "examples" ]
+        },
+        "week": {
+          "type": "Array",
+          "desc": "An array of timestamp objects representing the week",
+          "__exemption": [ "examples" ]
+        },
+        "workweekLabel": {
+          "type": "String",
+          "desc": "The workweek lebel",
+          "examples": [ "18", "22" ]
+        }
+      }
+    },
+
     "click:interval": {
       "desc": "Occurs on interval area",
       "applicable": [
