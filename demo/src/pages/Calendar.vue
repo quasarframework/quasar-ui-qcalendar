@@ -429,6 +429,10 @@ const formDefault = {
   bgcolor: '#0000FF'
 }
 
+// function leftClick (e) {
+//   return e.button === 0
+// }
+
 export default {
   name: 'PageIndex',
 
@@ -942,7 +946,7 @@ export default {
       }
       return s
     },
-    onDateChanged ({ day }) {
+    onDateChanged ({ scope, event }) {
       if (this.calendarView.indexOf('scheduler') > -1) {
         this.calendarView = 'day-scheduler'
         return
@@ -954,18 +958,18 @@ export default {
       // automatically change to the day selected
       this.calendarView = 'day'
     },
-    resourceClicked (resource) {
-      // console.log('resource clicked:', resource)
+    resourceClicked ({ scope, event }) {
+      // console.log('resource clicked:', scope)
     },
-    resourceDayClicked (resource) {
-      // console.log('resource:day clicked:', resource)
+    resourceDayClicked ({ scope, event }) {
+      // console.log('resource:day clicked:', scope)
     },
-    addEventMenu (day, type) {
-      if (day.disabled === true || this.calendarView.indexOf('scheduler') > -1 || this.calendarView.indexOf('agenda') > -1) {
+    addEventMenu ({ scope, event }) {
+      if (scope.disabled === true || this.calendarView.indexOf('scheduler') > -1 || this.calendarView.indexOf('agenda') > -1) {
         return
       }
       this.resetForm()
-      this.contextDay = { ...day }
+      this.contextDay = { ...scope }
       let timestamp
       if (this.contextDay.hasTime === true) {
         timestamp = this.adjustTimestamp(this.contextDay)

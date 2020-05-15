@@ -123,8 +123,8 @@ export default {
             }
           }
         },
-        on: this.getDefaultMouseEventHandlers(':column:head', _event => {
-          return scope
+        on: this.getDefaultMouseEventHandlers(':column:head', event => {
+          return { scope, event }
         })
       }), [
         this.noDefaultHeaderText !== true && this.__renderHeadColumn(h, column),
@@ -229,8 +229,8 @@ export default {
             }
           }
         },
-        on: this.getDefaultMouseEventHandlers(':column', _event => {
-          return scope
+        on: this.getDefaultMouseEventHandlers(':column', event => {
+          return { scope, event }
         })
       }), [
         slot && slot(scope)
@@ -282,8 +282,9 @@ export default {
             }
           }
         },
-        on: this.getDefaultMouseEventHandlers(':time', _event => {
-          return this.getScopeForSlot(this.getTimestampAtEvent(_event, day), idx)
+        on: this.getDefaultMouseEventHandlers(':time', event => {
+          const scope = this.getScopeForSlot(this.getTimestampAtEvent(event, day), idx)
+          return { scope, event }
         })
       }), [
         slot && slot(scope)

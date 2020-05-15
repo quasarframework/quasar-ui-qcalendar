@@ -149,8 +149,8 @@ export default {
             }
           }
         },
-        on: this.getDefaultMouseEventHandlers(':day', _event => {
-          return scope
+        on: this.getDefaultMouseEventHandlers(':day', event => {
+          return { scope, event }
         })
       }), [
         this.columnHeaderBefore === true && this.__renderColumnHeaderBefore(h, day, idx),
@@ -347,8 +347,9 @@ export default {
         style: {
           maxWidth: width + '%'
         },
-        on: this.getDefaultMouseEventHandlers(':time', _event => {
-          return this.getScopeForSlot(this.getTimestampAtEvent(_event, day), idx)
+        on: this.getDefaultMouseEventHandlers(':time', event => {
+          const scope = this.getScopeForSlot(this.getTimestampAtEvent(event, day), idx)
+          return { scope, event }
         })
       }), [
         ...this.__renderDayIntervals(h, dayIndex, idx),

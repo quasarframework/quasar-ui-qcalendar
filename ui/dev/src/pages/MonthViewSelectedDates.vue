@@ -25,6 +25,10 @@
 </template>
 
 <script>
+function leftClick (e) {
+  return e.button === 0
+}
+
 export default {
   data () {
     return {
@@ -42,18 +46,20 @@ export default {
       this.$refs.calendar.prev()
     },
 
-    onToggleDate (timestamp) {
-      if (this.selectedDates.includes(timestamp.date)) {
-        // remove the date
-        for (let i = 0; i < this.selectedDates.length; ++i) {
-          if (timestamp.date === this.selectedDates[i]) {
-            this.selectedDates.splice(i, 1)
-            break
+    onToggleDate ({ scope, event }) {
+      if (leftClick(event)) {
+        if (this.selectedDates.includes(scope.date)) {
+          // remove the date
+          for (let i = 0; i < this.selectedDates.length; ++i) {
+            if (scope.date === this.selectedDates[i]) {
+              this.selectedDates.splice(i, 1)
+              break
+            }
           }
+        } else {
+          // add the date
+          this.selectedDates.push(scope.date)
         }
-      } else {
-        // add the date
-        this.selectedDates.push(timestamp.date)
       }
     }
   }

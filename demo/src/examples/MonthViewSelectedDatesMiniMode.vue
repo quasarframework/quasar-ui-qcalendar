@@ -72,18 +72,18 @@ export default {
       }
     },
 
-    onToggleDate (timestamp) {
-      if (this.selectedDates.includes(timestamp.date)) {
+    onToggleDate ({ scope, event }) {
+      if (this.selectedDates.includes(scope.date)) {
         // remove the date
         for (let i = 0; i < this.selectedDates.length; ++i) {
-          if (timestamp.date === this.selectedDates[i]) {
+          if (scope.date === this.selectedDates[i]) {
             this.selectedDates.splice(i, 1)
             break
           }
         }
       } else {
         // add the date
-        this.selectedDates.push(timestamp.date)
+        this.selectedDates.push(scope.date)
       }
     }
   }
