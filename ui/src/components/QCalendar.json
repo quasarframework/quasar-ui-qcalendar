@@ -988,10 +988,22 @@
         "All"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1001,10 +1013,22 @@
         "All"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1014,10 +1038,22 @@
         "All"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1027,10 +1063,22 @@
         "All"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1040,10 +1088,22 @@
         "All"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1053,10 +1113,22 @@
         "All"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1066,10 +1138,22 @@
         "All"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1079,10 +1163,22 @@
         "All"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1092,10 +1188,22 @@
         "All"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1105,10 +1213,22 @@
         "All"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1119,10 +1239,22 @@
         "month"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1132,10 +1264,22 @@
         "month"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1145,10 +1289,22 @@
         "month"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1158,10 +1314,22 @@
         "month"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1171,10 +1339,22 @@
         "month"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1184,10 +1364,22 @@
         "month"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1197,10 +1389,22 @@
         "month"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1210,10 +1414,22 @@
         "month"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1223,10 +1439,22 @@
         "month"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1236,10 +1464,22 @@
         "month"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1252,19 +1492,38 @@
         "month"
       ],
       "params": {
-        "mimimode": {
-          "type": "Boolean",
-          "__exemption": [ "examples" ]
-        },
-        "week": {
-          "type": "Array",
-          "desc": "An array of timestamp objects representing the week",
-          "__exemption": [ "examples" ]
-        },
-        "workweekLabel": {
-          "type": "String",
-          "desc": "The workweek lebel",
-          "examples": [ "18", "22" ]
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The data object",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "minimode": {
+                  "type": "Boolean",
+                  "__exemption": [ "examples" ]
+                },
+                "week": {
+                  "type": "Array",
+                  "desc": "An array of timestamp objects representing the week",
+                  "__exemption": [ "examples" ]
+                },
+                "workweekLabel": {
+                  "type": "String",
+                  "desc": "The workweek label",
+                  "examples": [ "18", "22" ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1275,19 +1534,38 @@
         "month"
       ],
       "params": {
-        "mimimode": {
-          "type": "Boolean",
-          "__exemption": [ "examples" ]
-        },
-        "week": {
-          "type": "Array",
-          "desc": "An array of timestamp objects representing the week",
-          "__exemption": [ "examples" ]
-        },
-        "workweekLabel": {
-          "type": "String",
-          "desc": "The workweek lebel",
-          "examples": [ "18", "22" ]
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The data object",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "minimode": {
+                  "type": "Boolean",
+                  "__exemption": [ "examples" ]
+                },
+                "week": {
+                  "type": "Array",
+                  "desc": "An array of timestamp objects representing the week",
+                  "__exemption": [ "examples" ]
+                },
+                "workweekLabel": {
+                  "type": "String",
+                  "desc": "The workweek label",
+                  "examples": [ "18", "22" ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1298,19 +1576,38 @@
         "month"
       ],
       "params": {
-        "mimimode": {
-          "type": "Boolean",
-          "__exemption": [ "examples" ]
-        },
-        "week": {
-          "type": "Array",
-          "desc": "An array of timestamp objects representing the week",
-          "__exemption": [ "examples" ]
-        },
-        "workweekLabel": {
-          "type": "String",
-          "desc": "The workweek lebel",
-          "examples": [ "18", "22" ]
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The data object",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "minimode": {
+                  "type": "Boolean",
+                  "__exemption": [ "examples" ]
+                },
+                "week": {
+                  "type": "Array",
+                  "desc": "An array of timestamp objects representing the week",
+                  "__exemption": [ "examples" ]
+                },
+                "workweekLabel": {
+                  "type": "String",
+                  "desc": "The workweek label",
+                  "examples": [ "18", "22" ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1321,19 +1618,38 @@
         "month"
       ],
       "params": {
-        "mimimode": {
-          "type": "Boolean",
-          "__exemption": [ "examples" ]
-        },
-        "week": {
-          "type": "Array",
-          "desc": "An array of timestamp objects representing the week",
-          "__exemption": [ "examples" ]
-        },
-        "workweekLabel": {
-          "type": "String",
-          "desc": "The workweek lebel",
-          "examples": [ "18", "22" ]
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The data object",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "minimode": {
+                  "type": "Boolean",
+                  "__exemption": [ "examples" ]
+                },
+                "week": {
+                  "type": "Array",
+                  "desc": "An array of timestamp objects representing the week",
+                  "__exemption": [ "examples" ]
+                },
+                "workweekLabel": {
+                  "type": "String",
+                  "desc": "The workweek label",
+                  "examples": [ "18", "22" ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1344,19 +1660,38 @@
         "month"
       ],
       "params": {
-        "mimimode": {
-          "type": "Boolean",
-          "__exemption": [ "examples" ]
-        },
-        "week": {
-          "type": "Array",
-          "desc": "An array of timestamp objects representing the week",
-          "__exemption": [ "examples" ]
-        },
-        "workweekLabel": {
-          "type": "String",
-          "desc": "The workweek lebel",
-          "examples": [ "18", "22" ]
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The data object",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "minimode": {
+                  "type": "Boolean",
+                  "__exemption": [ "examples" ]
+                },
+                "week": {
+                  "type": "Array",
+                  "desc": "An array of timestamp objects representing the week",
+                  "__exemption": [ "examples" ]
+                },
+                "workweekLabel": {
+                  "type": "String",
+                  "desc": "The workweek label",
+                  "examples": [ "18", "22" ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1367,19 +1702,38 @@
         "month"
       ],
       "params": {
-        "mimimode": {
-          "type": "Boolean",
-          "__exemption": [ "examples" ]
-        },
-        "week": {
-          "type": "Array",
-          "desc": "An array of timestamp objects representing the week",
-          "__exemption": [ "examples" ]
-        },
-        "workweekLabel": {
-          "type": "String",
-          "desc": "The workweek lebel",
-          "examples": [ "18", "22" ]
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The data object",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "minimode": {
+                  "type": "Boolean",
+                  "__exemption": [ "examples" ]
+                },
+                "week": {
+                  "type": "Array",
+                  "desc": "An array of timestamp objects representing the week",
+                  "__exemption": [ "examples" ]
+                },
+                "workweekLabel": {
+                  "type": "String",
+                  "desc": "The workweek label",
+                  "examples": [ "18", "22" ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1390,19 +1744,38 @@
         "month"
       ],
       "params": {
-        "mimimode": {
-          "type": "Boolean",
-          "__exemption": [ "examples" ]
-        },
-        "week": {
-          "type": "Array",
-          "desc": "An array of timestamp objects representing the week",
-          "__exemption": [ "examples" ]
-        },
-        "workweekLabel": {
-          "type": "String",
-          "desc": "The workweek lebel",
-          "examples": [ "18", "22" ]
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The data object",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "minimode": {
+                  "type": "Boolean",
+                  "__exemption": [ "examples" ]
+                },
+                "week": {
+                  "type": "Array",
+                  "desc": "An array of timestamp objects representing the week",
+                  "__exemption": [ "examples" ]
+                },
+                "workweekLabel": {
+                  "type": "String",
+                  "desc": "The workweek label",
+                  "examples": [ "18", "22" ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1413,19 +1786,38 @@
         "month"
       ],
       "params": {
-        "mimimode": {
-          "type": "Boolean",
-          "__exemption": [ "examples" ]
-        },
-        "week": {
-          "type": "Array",
-          "desc": "An array of timestamp objects representing the week",
-          "__exemption": [ "examples" ]
-        },
-        "workweekLabel": {
-          "type": "String",
-          "desc": "The workweek lebel",
-          "examples": [ "18", "22" ]
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The data object",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "minimode": {
+                  "type": "Boolean",
+                  "__exemption": [ "examples" ]
+                },
+                "week": {
+                  "type": "Array",
+                  "desc": "An array of timestamp objects representing the week",
+                  "__exemption": [ "examples" ]
+                },
+                "workweekLabel": {
+                  "type": "String",
+                  "desc": "The workweek label",
+                  "examples": [ "18", "22" ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1436,19 +1828,38 @@
         "month"
       ],
       "params": {
-        "mimimode": {
-          "type": "Boolean",
-          "__exemption": [ "examples" ]
-        },
-        "week": {
-          "type": "Array",
-          "desc": "An array of timestamp objects representing the week",
-          "__exemption": [ "examples" ]
-        },
-        "workweekLabel": {
-          "type": "String",
-          "desc": "The workweek lebel",
-          "examples": [ "18", "22" ]
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The data object",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "minimode": {
+                  "type": "Boolean",
+                  "__exemption": [ "examples" ]
+                },
+                "week": {
+                  "type": "Array",
+                  "desc": "An array of timestamp objects representing the week",
+                  "__exemption": [ "examples" ]
+                },
+                "workweekLabel": {
+                  "type": "String",
+                  "desc": "The workweek label",
+                  "examples": [ "18", "22" ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1459,19 +1870,38 @@
         "month"
       ],
       "params": {
-        "mimimode": {
-          "type": "Boolean",
-          "__exemption": [ "examples" ]
-        },
-        "week": {
-          "type": "Array",
-          "desc": "An array of timestamp objects representing the week",
-          "__exemption": [ "examples" ]
-        },
-        "workweekLabel": {
-          "type": "String",
-          "desc": "The workweek lebel",
-          "examples": [ "18", "22" ]
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The data object",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "minimode": {
+                  "type": "Boolean",
+                  "__exemption": [ "examples" ]
+                },
+                "week": {
+                  "type": "Array",
+                  "desc": "An array of timestamp objects representing the week",
+                  "__exemption": [ "examples" ]
+                },
+                "workweekLabel": {
+                  "type": "String",
+                  "desc": "The workweek label",
+                  "examples": [ "18", "22" ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1495,10 +1925,22 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1521,10 +1963,22 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1547,10 +2001,22 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1573,10 +2039,22 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1599,10 +2077,22 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1625,10 +2115,22 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1651,10 +2153,22 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1677,10 +2191,22 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1703,10 +2229,22 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1729,10 +2267,22 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1756,10 +2306,22 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1782,10 +2344,22 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1808,10 +2382,22 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1834,10 +2420,22 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1860,10 +2458,22 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1886,10 +2496,22 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1912,10 +2534,22 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1938,10 +2572,22 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1964,10 +2610,22 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -1990,10 +2648,22 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "The timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The timestamp object",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2007,10 +2677,22 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "Object contains resource object and resource index",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "Object contains resource object and resource index",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2023,10 +2705,22 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "Object contains resource object and resource index",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "Object contains resource object and resource index",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2039,10 +2733,22 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "Object contains resource object and resource index",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "Object contains resource object and resource index",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2055,10 +2761,22 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "Object contains resource object and resource index",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "Object contains resource object and resource index",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2071,10 +2789,22 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "Object contains resource object and resource index",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "Object contains resource object and resource index",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2087,10 +2817,22 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "Object contains resource object and resource index",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "Object contains resource object and resource index",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2103,10 +2845,22 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "Object contains resource object and resource index",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "Object contains resource object and resource index",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2119,10 +2873,22 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "Object contains resource object and resource index",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "Object contains resource object and resource index",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2135,10 +2901,22 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "Object contains resource object and resource index",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "Object contains resource object and resource index",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2151,10 +2929,22 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "Object contains resource object and resource index",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "Object contains resource object and resource index",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2168,10 +2958,39 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "Object contains resource object, resource index and the timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The data object",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "resource": {
+                  "type": "Object",
+                  "desc": "The resource object",
+                  "__exemption": [ "examples" ]
+                },
+                "resourceIndex": {
+                  "type": "Number",
+                  "desc": "The resource index",
+                  "__exemption": [ "examples" ]
+                },
+                "timestamp": {
+                  "type": "Object",
+                  "desc": "The timestamp object",
+                  "__exemption": [ "examples" ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2184,10 +3003,39 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "Object contains resource object, resource index and the timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The data object",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "resource": {
+                  "type": "Object",
+                  "desc": "The resource object",
+                  "__exemption": [ "examples" ]
+                },
+                "resourceIndex": {
+                  "type": "Number",
+                  "desc": "The resource index",
+                  "__exemption": [ "examples" ]
+                },
+                "timestamp": {
+                  "type": "Object",
+                  "desc": "The timestamp object",
+                  "__exemption": [ "examples" ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2200,10 +3048,39 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "Object contains resource object, resource index and the timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The data object",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "resource": {
+                  "type": "Object",
+                  "desc": "The resource object",
+                  "__exemption": [ "examples" ]
+                },
+                "resourceIndex": {
+                  "type": "Number",
+                  "desc": "The resource index",
+                  "__exemption": [ "examples" ]
+                },
+                "timestamp": {
+                  "type": "Object",
+                  "desc": "The timestamp object",
+                  "__exemption": [ "examples" ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2216,10 +3093,39 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "Object contains resource object, resource index and the timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The data object",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "resource": {
+                  "type": "Object",
+                  "desc": "The resource object",
+                  "__exemption": [ "examples" ]
+                },
+                "resourceIndex": {
+                  "type": "Number",
+                  "desc": "The resource index",
+                  "__exemption": [ "examples" ]
+                },
+                "timestamp": {
+                  "type": "Object",
+                  "desc": "The timestamp object",
+                  "__exemption": [ "examples" ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2232,10 +3138,39 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "Object contains resource object, resource index and the timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The data object",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "resource": {
+                  "type": "Object",
+                  "desc": "The resource object",
+                  "__exemption": [ "examples" ]
+                },
+                "resourceIndex": {
+                  "type": "Number",
+                  "desc": "The resource index",
+                  "__exemption": [ "examples" ]
+                },
+                "timestamp": {
+                  "type": "Object",
+                  "desc": "The timestamp object",
+                  "__exemption": [ "examples" ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2248,10 +3183,39 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "Object contains resource object, resource index and the timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The data object",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "resource": {
+                  "type": "Object",
+                  "desc": "The resource object",
+                  "__exemption": [ "examples" ]
+                },
+                "resourceIndex": {
+                  "type": "Number",
+                  "desc": "The resource index",
+                  "__exemption": [ "examples" ]
+                },
+                "timestamp": {
+                  "type": "Object",
+                  "desc": "The timestamp object",
+                  "__exemption": [ "examples" ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2264,10 +3228,39 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "Object contains resource object, resource index and the timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The data object",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "resource": {
+                  "type": "Object",
+                  "desc": "The resource object",
+                  "__exemption": [ "examples" ]
+                },
+                "resourceIndex": {
+                  "type": "Number",
+                  "desc": "The resource index",
+                  "__exemption": [ "examples" ]
+                },
+                "timestamp": {
+                  "type": "Object",
+                  "desc": "The timestamp object",
+                  "__exemption": [ "examples" ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2280,10 +3273,39 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "Object contains resource object, resource index and the timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The data object",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "resource": {
+                  "type": "Object",
+                  "desc": "The resource object",
+                  "__exemption": [ "examples" ]
+                },
+                "resourceIndex": {
+                  "type": "Number",
+                  "desc": "The resource index",
+                  "__exemption": [ "examples" ]
+                },
+                "timestamp": {
+                  "type": "Object",
+                  "desc": "The timestamp object",
+                  "__exemption": [ "examples" ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2296,10 +3318,39 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "Object contains resource object, resource index and the timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The data object",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "resource": {
+                  "type": "Object",
+                  "desc": "The resource object",
+                  "__exemption": [ "examples" ]
+                },
+                "resourceIndex": {
+                  "type": "Number",
+                  "desc": "The resource index",
+                  "__exemption": [ "examples" ]
+                },
+                "timestamp": {
+                  "type": "Object",
+                  "desc": "The timestamp object",
+                  "__exemption": [ "examples" ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2312,10 +3363,39 @@
         "custom-scheduler"
       ],
       "params": {
-        "timestamp": {
+        "data": {
           "type": "Object",
-          "desc": "Object contains resource object, resource index and the timestamp object",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The data object",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "resource": {
+                  "type": "Object",
+                  "desc": "The resource object",
+                  "__exemption": [ "examples" ]
+                },
+                "resourceIndex": {
+                  "type": "Number",
+                  "desc": "The resource index",
+                  "__exemption": [ "examples" ]
+                },
+                "timestamp": {
+                  "type": "Object",
+                  "desc": "The timestamp object",
+                  "__exemption": [ "examples" ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2328,8 +3408,20 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2342,8 +3434,20 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2356,8 +3460,20 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2370,8 +3486,20 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2384,8 +3512,20 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2398,8 +3538,20 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2412,8 +3564,20 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2426,8 +3590,20 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2440,8 +3616,20 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2454,8 +3642,20 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2468,8 +3668,20 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2482,8 +3694,20 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2496,8 +3720,20 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2510,8 +3746,20 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2524,8 +3772,20 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2538,8 +3798,20 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2552,8 +3824,20 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2566,8 +3850,20 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2580,8 +3876,20 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     },
@@ -2594,8 +3902,20 @@
       "params": {
         "data": {
           "type": "Object",
-          "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
-          "__exemption": [ "examples" ]
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
+              "__exemption": [ "examples" ]
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [ "examples" ]
+            }
+          }
         }
       }
     }
