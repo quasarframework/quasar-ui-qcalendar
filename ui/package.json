@@ -2,7 +2,7 @@
   "name": "@quasar/quasar-ui-qcalendar",
   "version": "1.5.6",
   "author": "Jeff Galbraith <jeff@quasar.dev>",
-  "description": "QCalendar - Embed Calendars, Schedules and Agendas in your Quasar Apps",
+  "description": "QCalendar - Day/Month/Week Calendars, Popups, Schedules, Agendas and Planners for your Quasar Apps",
   "license": "MIT",
   "module": "dist/index.esm.js",
   "main": "dist/index.common.js",
