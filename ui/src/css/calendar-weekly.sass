@@ -215,6 +215,7 @@
     font-size: 1em
 
   .q-calendar-weekly__day
+    display: block
     justify-content: center
     align-items: center
     flex-wrap: wrap
@@ -243,7 +244,7 @@
         right: 0
         bottom: 0
         left: 0
-        margin: auto
+        // margin: auto
         background: lighten($calendar-primary-color, 45%)
 
       // &:first-child:before
@@ -263,15 +264,16 @@
       &.q-selected-date,
       &.q-selected-day-first
         &:before
-          border-top-left-radius: 50%
-          border-bottom-left-radius: 50%
+          // border-top-left-radius: 50%
+          // border-bottom-left-radius: 50%
+          left: 50%
 
       &.q-selected-day-last
         &:before
-          width: 25%
+          width: 50%
           right: auto
-          border-top-right-radius: 50%
-          border-bottom-right-radius: 50%
+          // border-top-right-radius: 50%
+          // border-bottom-right-radius: 50%
         &.q-selected-day-first
           &:before
             width: 0
