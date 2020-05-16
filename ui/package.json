@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-ui-qcalendar",
-  "version": "1.5.7",
+  "version": "1.5.8",
   "author": "Jeff Galbraith <jeff@quasar.dev>",
   "description": "QCalendar - Embed Calendars, Schedules and Agendas in your Quasar Apps",
   "license": "MIT",
@@ -78,7 +78,7 @@
     "jest-serializer-vue": "^2.0.2",
     "jest-transform-stub": "^2.0.0",
     "node-sass": "^4.14.1",
-    "open": "^7.0.3",
+    "open": "^7.0.4",
     "postcss": "^7.0.30",
     "postcss-rtl": "^1.7.3",
     "promise": "^8.1.0",
