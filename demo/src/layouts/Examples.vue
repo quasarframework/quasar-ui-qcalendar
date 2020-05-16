@@ -90,6 +90,18 @@
             </q-item>
 
             <q-item
+              to="/examples/month-view-mini-mode"
+              clickable
+            >
+              <q-item-section avatar>
+                <q-icon name="far fa-calendar" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>Month View (mini-mode)</q-item-label>
+              </q-item-section>
+            </q-item>
+
+            <q-item
               to="/examples/scheduler-view"
               clickable
             >
@@ -118,7 +130,7 @@
               clickable
             >
               <q-item-section avatar>
-                <q-icon name="far fa-calendar-alt" />
+                <q-icon name="fas fa-th" />
               </q-item-section>
               <q-item-section>
                 <q-item-label>Planner</q-item-label>

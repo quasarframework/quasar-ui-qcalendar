@@ -1,10 +1,10 @@
 <template>
-  <div style="max-width: 800px; width: 100%;">
+  <div class="row justify-center" style="max-width: 800px; width: 100%; overflow: hidden;">
     <div class="q-gutter-sm">
       <q-checkbox v-model="mobile" label="Use Touch (set if on mobile)" />
     </div>
-    <q-separator></q-separator>
-    <q-input color="blue-8" filled v-model="convertedDates" @input="onInputChanged" label="Enter date range" mask="####-##-## - ####-##-##">
+    <q-separator class="full-width" />
+    <q-input color="blue-8" filled v-model="convertedDates" @input="onInputChanged" label="Enter date range" mask="####-##-## - ####-##-##" class="q-pa-sm">
       <template v-slot:after>
         <div class="q-gutter-sm" style="overflow: hidden;">
           <span>
@@ -15,7 +15,7 @@
                 v-model="selectedDate"
                 view="month"
                 locale="en-us"
-                :mini-mode="true"
+                mini-mode
                 :selected-start-end-dates="startEndDates"
                 :day-class="classDay"
                 @mousedown:day="onMouseDownDay"
@@ -63,22 +63,26 @@ export default {
       }
       return dates
     },
+
     anchorDayIdentifier () {
       if (this.anchorTimestamp !== '') {
         return QCalendar.getDayIdentifier(this.anchorTimestamp)
       }
       return false
     },
+
     otherDayIdentifier () {
       if (this.otherTimestamp !== '') {
         return QCalendar.getDayIdentifier(this.otherTimestamp)
       }
       return false
     },
+
     lowIdentifier () {
       // returns lowest of the two values
       return Math.min(this.anchorDayIdentifier, this.otherDayIdentifier)
     },
+
     highIdentifier () {
       // returns highest of the two values
       return Math.max(this.anchorDayIdentifier, this.otherDayIdentifier)

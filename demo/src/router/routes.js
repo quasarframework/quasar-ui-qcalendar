@@ -36,6 +36,10 @@ const routes = [
             component: () => import('pages/MonthView.vue')
           },
           {
+            path: 'month-view-mini-mode',
+            component: () => import('pages/MonthViewMiniMode.vue')
+          },
+          {
             path: 'scheduler-view',
             component: () => import('pages/SchedulerView.vue')
           },

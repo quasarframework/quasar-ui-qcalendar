@@ -1,37 +1,24 @@
 <template>
-  <div style="max-width: 800px; width: 100%;">
+  <div class="row justify-center" style="max-width: 800px; width: 100%; overflow: hidden;">
     <div class="q-gutter-sm">
       <q-checkbox v-model="mobile" label="Use Touch (set if on mobile)" />
     </div>
-    <q-separator></q-separator>
-    <q-splitter
-      v-model="splitterModel"
-      :limits="[30, 100]"
-      emit-immediately
-    >
-      <template v-slot:before>
-        <div style="overflow: hidden;">
-          <q-calendar
-            ref="calendar"
-            v-model="selectedDate"
-            view="month"
-            locale="en-us"
-            :mini-mode="miniMode"
-            :selected-start-end-dates="startEndDates"
-            :day-class="classDay"
-            @mousedown:day="onMouseDownDay"
-            @mouseup:day="onMouseUpDay"
-            @mousemove:day="onMouseMoveDay"
-          />
-      </div>
-      </template>
-      <template v-slot:separator>
-        <q-avatar color="primary" text-color="white" size="40px" icon="drag_indicator" />
-      </template>
-      <template v-slot:after>
-        <div style="min-width: 20px"></div>
-      </template>
-    </q-splitter>
+    <q-separator class="full-width" />
+    <div class="row justify-center" style="max-width: 800px; width: 100%; overflow: hidden;">
+      <q-calendar
+        ref="calendar"
+        v-model="selectedDate"
+        view="month"
+        locale="en-us"
+        mini-mode
+        :selected-start-end-dates="startEndDates"
+        :day-class="classDay"
+        @mousedown:day="onMouseDownDay"
+        @mouseup:day="onMouseUpDay"
+        @mousemove:day="onMouseMoveDay"
+        style="max-width: 300px;"
+      />
+    </div>
   </div>
 </template>
 
@@ -68,32 +55,29 @@ export default {
       }
       return dates
     },
+
     anchorDayIdentifier () {
       if (this.anchorTimestamp !== '') {
         return QCalendar.getDayIdentifier(this.anchorTimestamp)
       }
       return false
     },
+
     otherDayIdentifier () {
       if (this.otherTimestamp !== '') {
         return QCalendar.getDayIdentifier(this.otherTimestamp)
       }
       return false
     },
+
     lowIdentifier () {
       // returns lowest of the two values
       return Math.min(this.anchorDayIdentifier, this.otherDayIdentifier)
     },
+
     highIdentifier () {
       // returns highest of the two values
       return Math.max(this.anchorDayIdentifier, this.otherDayIdentifier)
-    }
-  },
-
-  watch: {
-    splitterModel (val) {
-      const rect = this.$refs.calendar.$el.getBoundingClientRect()
-      this.miniMode = rect.width < 500
     }
   },
 
