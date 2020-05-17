@@ -100,6 +100,7 @@ Do not mix #day-body and #week slots or you will have overlapping results.
       </q-markdown>
     </example-viewer>
     <example-viewer title="Theme" file="MonthViewTheme" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Locale" file="MonthViewLocale" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
   </div>
 </template>
@@ -154,6 +155,7 @@ export default {
     this.addToToc('Slots (day)', 2)
     this.addToToc('Slots (week)', 2)
     this.addToToc('Theme', 2)
+    this.addToToc('Locale', 2)
 
     this.toc = this.tempToc
   },

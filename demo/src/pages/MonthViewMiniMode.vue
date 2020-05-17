@@ -96,6 +96,7 @@ For slots that return `day` or `timestamp`, it looks like this:
 Look at the source below to see how you can create your own themes.
       </q-markdown>
     </example-viewer>
+    <example-viewer title="Locale" file="MiniModeLocale" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
   </div>
 </template>
@@ -147,6 +148,7 @@ export default {
     this.addToToc('Selection (QInput)', 2)
     this.addToToc('Slots (day)', 2)
     this.addToToc('Theme', 2)
+    this.addToToc('Locale', 2)
 
     this.toc = this.tempToc
   },

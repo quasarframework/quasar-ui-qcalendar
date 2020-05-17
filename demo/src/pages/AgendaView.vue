@@ -88,6 +88,7 @@ To manage data, use the `column-header` and `column-body` slots.
       </q-markdown>
     </example-viewer>
     <example-viewer title="Theme" file="AgendaViewWeekTheme" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Locale" file="AgendaViewWeekLocale" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
   </div>
 </template>
 
@@ -126,6 +127,7 @@ export default {
     this.addToToc('First Day Monday', 2)
     this.addToToc('Five Day Workweek', 2)
     this.addToToc('Theme', 2)
+    this.addToToc('Locale', 2)
 
     this.toc = this.tempToc
   },

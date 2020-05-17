@@ -87,6 +87,7 @@ Scroll down if the current time is later for your location to see the example.
     </example-viewer>
 
     <example-viewer title="Theme" file="WeekViewTheme" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Locale" file="WeekViewLocale" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
   </div>
 </template>
@@ -137,6 +138,7 @@ export default {
     this.addToToc('Slots', 2)
     this.addToToc('Week View (Current Time) - Slot (day-container)', 2)
     this.addToToc('Theme', 2)
+    this.addToToc('Locale', 2)
 
     this.toc = this.tempToc
   },

@@ -67,6 +67,7 @@ Below, the slot receives the `resource` to be displayed. In this case, an avatar
     </example-viewer>
 
     <example-viewer title="Theme" file="SchedulerViewTheme" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Locale" file="SchedulerViewLocale" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
   </div>
 </template>
@@ -111,6 +112,7 @@ export default {
     this.addToToc('Slots (scheduler-resource-day)', 2)
     this.addToToc('Slots (scheduler-resource)', 2)
     this.addToToc('Theme', 2)
+    this.addToToc('Locale', 2)
 
     this.toc = this.tempToc
   },
