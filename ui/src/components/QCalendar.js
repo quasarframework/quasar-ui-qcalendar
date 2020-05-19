@@ -25,6 +25,7 @@ import QCalendarMonthly from './QCalendarMonthly'
 import QCalendarDaily from './QCalendarDaily'
 import QCalendarScheduler from './QCalendarScheduler'
 import QCalendarAgenda from './QCalendarAgenda'
+import QCalendarResource from './QCalendarResource'
 
 /* @vue/component */
 export default {
@@ -39,6 +40,7 @@ export default {
     ...props.weeks,
     ...props.intervals,
     ...props.scheduler,
+    ...props.resource,
     ...props.agenda
   },
 
@@ -144,8 +146,14 @@ export default {
           updateFormatted(end)
           maxDays = DAYS_IN_MONTH_MAX
           break
+        case 'resource':
+        case 'day-resource':
+          component = QCalendarResource
+          maxDays = 1
+          end = relativeDays(copyTimestamp(end), nextDay, maxDays, this.weekdays)
+          updateFormatted(end)
+          break
       }
-
       return { component, start, end, maxDays }
     }
   },

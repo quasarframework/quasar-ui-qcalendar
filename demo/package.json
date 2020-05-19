@@ -1,5 +1,5 @@
 {
-  "name": "qcalendar-docs-demo",
+  "name": "q-calendar-docs-demo",
   "version": "0.0.1",
   "description": "QCalendar docs, examples and demo site",
   "productName": "QCalendar demo app",
@@ -26,7 +26,6 @@
     "@quasar/quasar-app-extension-qscroller": "^1.0.8",
     "@vue/eslint-config-standard": "^5.1.2",
     "babel-eslint": "^10.1.0",
-    "copy-webpack-plugin": "^6.0.1",
     "devtron": "^1.4.0",
     "electron": "^8.3.0",
     "electron-debug": "^3.0.1",
@@ -52,7 +51,6 @@
     "last 1 version, not dead, ie >= 11"
   ],
   "resolutions": {
-    "ajv": "6.10.2",
     "@babel/parser": "7.7.5"
   }
 }
