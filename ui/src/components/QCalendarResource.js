@@ -56,17 +56,12 @@ export default {
       return parseFloat(this.resourceWidth)
     },
 
-    parsedIntervalWidth () {
-      return parseFloat(this.intervalWidth)
-    },
-
     parsedIntervalHeight () {
       const height = parseFloat(this.intervalHeight)
       if (height === 0) {
         return 'auto'
       }
       return height
-
     }
   },
 
@@ -100,11 +95,17 @@ export default {
     //   return area && pane ? (area.offsetWidth - pane.offsetWidth) : 0
     // },
 
+    __getParentWidth () {
+      if (this.$parent && this.$parent.$el) {
+        return this.$parent.$el.getBoundingClientRect().width + 15
+      }
+    },
+
     __renderHeadIntervals (h) {
       return h('div', {
         staticClass: 'q-calendar-resource__head-intervals'
       }, [
-        this.intervals.map(day => day.map((interval, index) => this.__renderHeadInterval(h, interval, index)))
+        this.intervals.map(intervals => intervals.map((interval, index) => this.__renderHeadInterval(h, interval, index)))
       ])
     },
 
@@ -205,16 +206,18 @@ export default {
     },
 
     __renderResouceRow (h, resource, idx) {
+      const slot = this.$scopedSlots['resource-row']
       return h('div', {
         staticClass: 'q-calendar-resource__resource-row'
       }, [
         this.__renderResourceLabel(h, resource, idx),
-        this.__renderResourceIntervals(h)
+        this.__renderResourceIntervals(h, resource),
+        slot && slot({ resource, index: idx })
       ])
     },
 
     __renderResourceLabel (h, resource, idx) {
-      const slot = this.$scopedSlots['resource-resource']
+      const slot = this.$scopedSlots['resource-label']
       const scope = {
         resource: resource,
         index: idx
@@ -255,16 +258,23 @@ export default {
       }, label)
     },
 
-    __renderResourceIntervals (h) {
+    __renderResourceIntervals (h, resource) {
+      const slot = this.$scopedSlots['resource-intervals']
+      const timeStartPosX = this.timeStartPosX,
+        timeDurationWidth = this.timeDurationWidth,
+        intervals = this.intervals
       return h('div', {
         staticClass: 'q-calendar-resource__resource-intervals'
       }, [
-        this.intervals.map(day => day.map((interval, index) => this.__renderResourceInterval(h, interval, index)))
+        this.intervals.map(intervals => intervals.map(interval => this.__renderResourceInterval(h, resource, interval))),
+        slot && slot({ resource, intervals, timeStartPosX, timeDurationWidth })
       ])
     },
 
     // interval related to resource
-    __renderResourceInterval (h, interval, index) {
+    __renderResourceInterval (h, resource, interval) {
+      // called for each interval
+      const slot = this.$scopedSlots['resource-interval']
       const width = convertToUnit(this.parsedIntervalWidth)
       const height = convertToUnit(this.parsedResourceHeight)
       return h('div', {
@@ -274,7 +284,9 @@ export default {
           minWidth: width,
           height
         }
-      })
+      }, [
+        slot && slot({ resource, interval })
+      ])
     },
 
     __renderResourcesError (h) {
@@ -283,13 +295,17 @@ export default {
   },
 
   render (h) {
+    const maxWidth = convertToUnit(this.__getParentWidth())
     return h('div', {
       staticClass: 'q-calendar-resource',
       directives: [{
         modifiers: { quiet: true },
         name: 'resize',
         value: this.onResize
-      }]
+      }],
+      style: {
+        maxWidth: maxWidth
+      }
     }, [
       this.__renderBody(h)
     ])

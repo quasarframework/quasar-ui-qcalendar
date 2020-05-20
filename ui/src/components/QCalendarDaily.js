@@ -75,7 +75,7 @@ export default {
     },
 
     __renderHeadIntervals (h) {
-      const intervalsHeader = this.$scopedSlots['intervals-header']
+      const slot = this.$scopedSlots['intervals-header']
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
@@ -89,7 +89,7 @@ export default {
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
         staticClass: 'q-calendar-daily__intervals-head q-calendar-daily__intervals-head--text'
       }), [
-        intervalsHeader && intervalsHeader(this.days)
+        slot && slot(this.days)
       ])
     },
 

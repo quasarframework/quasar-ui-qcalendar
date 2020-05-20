@@ -68,7 +68,7 @@ Keep in mind that the functionality below won't work with swipe actions.
       <q-markdown>
 The `#day` slot allows you to write anything into the body of the day. To avoid writing on top of the `day-label` add the css class `.q-event` to your item which adds a top margin (and also works for mini-mode).
 
-For slots that return `day` or `timestamp`, it looks like this:
+For slots that return `day`, `interval` or `timestamp`, it looks like this:
 ```js
 {
   date: '',       // YYYY-mm-dd

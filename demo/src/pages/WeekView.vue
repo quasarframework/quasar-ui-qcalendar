@@ -51,7 +51,7 @@ You can use the `now` property to set a fixed date, otherwise the current date w
     <example-viewer title="Column Header" file="WeekViewColumnHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Slots" file="WeekViewSlots" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
-For slots that return `day` or `timestamp`, it looks like this:
+For slots that return `day`, `interval` or `timestamp`, it looks like this:
 ```js
 {
   date: '',       // YYYY-mm-dd

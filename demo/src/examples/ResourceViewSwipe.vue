@@ -1,15 +1,17 @@
 <template>
-  <div style="max-width: 800px; width: 100%; overflow: hidden;">
+  <div class="row justify-center full-width q-pa-md">
     <q-calendar
       ref="calendar"
       v-model="selectedDate"
-      view="week-scheduler"
-      locale="en-us"
+      view="day-resource"
       :resources="resources"
+      :resource-height="50"
+      locale="en-us"
       v-touch-swipe.mouse.left.right="handleSwipe"
       animated
       transition-prev="slide-right"
       transition-next="slide-left"
+      style="height: 200px; max-width: 800px; width: 100%;"
     />
   </div>
 </template>
@@ -18,7 +20,7 @@
 export default {
   data () {
     return {
-      selectedDate: '',
+      selectedDate: '2019-04-01',
       resources: [
         { label: 'John' },
         { label: 'Mary' },

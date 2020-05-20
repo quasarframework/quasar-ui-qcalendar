@@ -44,6 +44,10 @@ const routes = [
             component: () => import('pages/SchedulerView.vue')
           },
           {
+            path: 'resource-view',
+            component: () => import('pages/ResourceView.vue')
+          },
+          {
             path: 'agenda-view',
             component: () => import('pages/AgendaView.vue')
           }

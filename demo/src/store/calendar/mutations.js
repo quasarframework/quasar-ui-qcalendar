@@ -10,6 +10,9 @@ export const locale = (state, locale) => {
 export const maxDays = (state, days) => {
   state.maxDays = parseInt(days, 10)
 }
+export const bordered = (state, b) => {
+  state.bordered = b
+}
 export const fiveDayWorkWeek = (state, b) => {
   state.fiveDayWorkWeek = b
 }

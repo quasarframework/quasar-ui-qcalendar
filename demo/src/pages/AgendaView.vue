@@ -15,7 +15,7 @@ We are going to jump right into slot usage so that for the rest of the examples 
 
 Remember, the data displayed below is slotted content, so you can be as creative as you need to be.
 
-For slots that return `day` or `timestamp`, it looks like this:
+For slots that return `day`, `interval` or `timestamp`, it looks like this:
 ```js
 {
   date: '',       // YYYY-mm-dd

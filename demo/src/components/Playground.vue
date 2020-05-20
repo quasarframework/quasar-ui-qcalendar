@@ -33,6 +33,11 @@
       </div>
       <q-toggle
         class="col-12 full-width"
+        v-model="bordered"
+        label="bordered"
+      ></q-toggle>
+      <q-toggle
+        class="col-12 full-width"
         v-model="fiveDayWorkWeek"
         label="5 day work week"
       ></q-toggle>
@@ -228,6 +233,14 @@ export default {
       },
       set (days) {
         this.$store.commit('calendar/maxDays', days)
+      }
+    },
+    bordered: {
+      get () {
+        return this.$store.state.calendar.bordered
+      },
+      set (b) {
+        this.$store.commit('calendar/bordered', b)
       }
     },
     fiveDayWorkWeek: {

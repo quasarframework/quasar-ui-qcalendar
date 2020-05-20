@@ -1,20 +1,15 @@
 <template>
   <div class="row justify-center full-width q-pa-md">
-    <div class="q-gutter-sm full-width row justify-center">
-      <q-checkbox v-model="bordered" label="Bordered" />
-      <q-checkbox v-model="sticky" label="Sticky" />
-      <q-checkbox v-model="short" label="Short Interval Label" />
-    </div>
-    <div class="q-gutter-sm">
+    <div style="max-width: 800px; width: 100%;">
       <q-calendar
         v-model="selectedDate"
         view="day-resource"
         :resources="resources"
-        :bordered="bordered"
-        :sticky="sticky"
-        :short-interval-label="short"
+        :resource-height="50"
+        interval-minutes="15"
+        bordered
         locale="en-us"
-        style="height: 200px; max-width: 800px; width: 100%;"
+          style="height: 200px; max-width: 800px; width: 100%;"
       />
     </div>
   </div>
@@ -24,9 +19,6 @@
 export default {
   data () {
     return {
-      bordered: false,
-      sticky: false,
-      short: false,
       selectedDate: '2019-04-01',
       resources: [
         { label: 'John' },

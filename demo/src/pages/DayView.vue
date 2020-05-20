@@ -77,7 +77,7 @@ And finally, if you wanted the ability to page through a large number of resourc
 
     <example-viewer title="Slots" file="DayViewSlots" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
-For slots that return `day` or `timestamp`, it looks like this:
+For slots that return `day`, `interval` or `timestamp`, it looks like this:
 ```js
 {
   date: '',       // YYYY-mm-dd

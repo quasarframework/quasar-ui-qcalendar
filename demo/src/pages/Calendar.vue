@@ -256,6 +256,7 @@
         v-model="selectedDate"
         :locale="locale"
         :max-days="maxDays"
+        :bordered="bordered"
         :interval-style="modifiedStyle"
         :day-style="modifiedStyle"
         :resource-style="modifiedStyle"
@@ -624,6 +625,7 @@ export default {
       locale: 'calendar/locale',
       titlebarHeight: 'common/titlebarHeight',
       maxDays: 'calendar/maxDays',
+      bordered: 'calendar/bordered',
       fiveDayWorkWeek: 'calendar/fiveDayWorkWeek',
       firstDayMonday: 'calendar/firstDayMonday',
       shortMonthLabel: 'calendar/shortMonthLabel',
@@ -670,9 +672,12 @@ export default {
     },
     containerStyle () {
       const styles = {}
-      if (this.calendarView !== 'month') {
+      if (this.calendarView === 'month' || this.calendarView.endsWith('resource')) {
+        styles.height = 'auto'
+      } else {
         styles.height = `calc(100vh - ${this.titlebarHeight}px)`
       }
+      styles.width = 'auto'
       return styles
     },
     // convert the events into a map of lists keyed by date

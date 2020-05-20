@@ -55,47 +55,7 @@ module.exports = function (/* ctx */) {
         dark: 'auto'
       },
 
-      // components: [
-      //   'QBtn',
-      //   'QCard',
-      //   'QCardSection',
-      //   'QCheckbox',
-      //   'QDialog',
-      //   'QDrawer',
-      //   'QExpansionItem',
-      //   'QHeader',
-      //   'QIcon',
-      //   'QInput',
-      //   'QItem',
-      //   'QItemLabel',
-      //   'QItemSection',
-      //   'QLayout',
-      //   'QList',
-      //   'QMenu',
-      //   'QPage',
-      //   'QPageContainer',
-      //   'QPageScroller',
-      //   'QPopupProxy',
-      //   'QResizeObserver',
-      //   'QScrollArea',
-      //   'QSelect',
-      //   'QSeparator',
-      //   'QSpace',
-      //   'QTab',
-      //   'QTabPanel',
-      //   'QTabPanels',
-      //   'QTabs',
-      //   'QToggle',
-      //   'QToolbar',
-      //   'QToolbarTitle',
-      //   'QTooltip'
-      // ],
 
-      // directives: [
-      //   'ClosePopup',
-      //   'Ripple',
-      //   'Scroll'
-      // ],
 
       // Quasar plugins
       plugins: [
@@ -153,14 +113,6 @@ module.exports = function (/* ctx */) {
       https: false,
       port: 8080,
       open: true // opens browser window automatically
-
-      // watchOptions: {
-      //   ignored: [
-      //     'node_modules',
-      //     '!node_modules/@quasar/quasar-app-extension-qcalendar',
-      //     '!node_modules/@quasar/quasar-ui-qcalendar'
-      //   ]
-      // }
     },
 
     // animations: 'all', // --- includes all animations
@@ -245,7 +197,7 @@ module.exports = function (/* ctx */) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'test-hmr'
+        appId: 'quasar-app'
       },
 
       // More info: https://quasar.dev/quasar-cli/developing-electron-apps/node-integration

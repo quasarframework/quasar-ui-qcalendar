@@ -138,6 +138,7 @@ export default {
   },
   computed: {
     ...mapGetters({
+      bordered: 'calendar/bordered',
       fiveDayWorkWeek: 'calendar/fiveDayWorkWeek',
       firstDayMonday: 'calendar/firstDayMonday'
     }),

@@ -2,9 +2,6 @@
 
 .q-calendar-resource
 
-  &__bordered
-    border: $calendar-border-color $calendar-border-width solid
-
   &__head-resource
     border-right: $calendar-border-color $calendar-border-width solid
     border-bottom: $calendar-border-color $calendar-border-width solid
@@ -20,14 +17,14 @@
     color: $calendar-text-color
     background: $calendar-background-color
 
+    &:last-child
+      border-right: none
+
   &__resource
     border-bottom: $calendar-border-color $calendar-border-width solid
     border-right: $calendar-border-color $calendar-border-width solid
     color: $calendar-text-color
     background: $calendar-background-color
-
-    &:last-child
-      border-right: none
 
   &__resource-interval
     border-bottom: $calendar-border-color $calendar-border-width solid
@@ -36,13 +33,18 @@
     &:last-child
       border-right: none
 
+.q-calendar-resource__resource-row:last-child > .q-calendar-resource__resource
+  border-bottom: none
+
+.q-calendar-resource__resource-row:last-child > .q-calendar-resource__resource-intervals > .q-calendar-resource__resource-interval
+  border-bottom: none
+
 .q-calendar-resource
   display: flex
   flex: 1
   flex-wrap: nowrap
   flex-direction: column
-  height: 100%
-  width: 100%
+  width: fit-content
 
   &__body
     flex: 1 1 60%
@@ -149,10 +151,7 @@
 .q-dark div,
 .body--dark div,
 .q-calendar--dark
-  &.q-calendar-resource
-
-    &__bordered
-      border: $calendar-border-color-dark $calendar-border-width solid
+  .q-calendar-resource
 
     &__body
       border-top: $calendar-border-color-dark $calendar-border-width solid
@@ -161,19 +160,19 @@
       border-right: $calendar-border-color-dark $calendar-border-width solid
       border-bottom: $calendar-border-color-dark $calendar-border-width solid
       color: $calendar-text-color-dark
-      background: $calendar-background-color-dark
+      background: unset
 
     &__head-label
       border-right: $calendar-border-color-dark $calendar-border-width solid
       border-bottom: $calendar-border-color-dark $calendar-border-width solid
       color: $calendar-text-color-dark
-      background: $calendar-background-color-dark
+      background: unset
 
     &__resource
       border-bottom: $calendar-border-color-dark $calendar-border-width solid
       border-right: $calendar-border-color-dark $calendar-border-width solid
       color: $calendar-text-color-dark
-      background: $calendar-background-color-dark
+      background: unset
 
     &__resource-interval
       border-bottom: $calendar-border-color-dark $calendar-border-width solid

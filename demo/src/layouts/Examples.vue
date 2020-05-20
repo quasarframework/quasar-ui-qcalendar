@@ -114,6 +114,18 @@
             </q-item>
 
             <q-item
+              to="/examples/resource-view"
+              clickable
+            >
+              <q-item-section avatar>
+                <q-icon name="fas fa-grip-horizontal" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>Resource View</q-item-label>
+              </q-item-section>
+            </q-item>
+
+            <q-item
               to="/examples/agenda-view"
               clickable
             >
