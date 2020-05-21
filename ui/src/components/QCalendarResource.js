@@ -1,20 +1,8 @@
-// Quasar
-// import { QBtn } from 'quasar'
-
-// Directives
-import Resize from '../directives/resize.js'
-
 // Mixins
 import CalendarIntervals from '../mixins/calendar-intervals.js'
 
 // Util
 import props from '../utils/props'
-// import {
-//   // parseTime,
-//   copyTimestamp,
-//   createDayList,
-//   updateRelative
-// } from '../utils/timestamp'
 import { convertToUnit } from '../utils/helpers.js'
 
 /* @vue/component */
@@ -24,8 +12,6 @@ export default {
   mixins: [
     CalendarIntervals
   ],
-
-  directives: { Resize },
 
   props: {
     ...props.intervals,
@@ -40,10 +26,6 @@ export default {
   },
 
   computed: {
-    computedWidth () {
-      // return 100 / this.days.length
-      return 0
-    },
     parsedResourceHeight () {
       const height = parseFloat(this.resourceHeight)
       if (height === 0) {
@@ -65,36 +47,7 @@ export default {
     }
   },
 
-  mounted () {
-    this.init()
-  },
-
-  watch: {
-    noScroll (val) {
-      if (val === true) {
-        this.scrollWidth = 0
-      } else {
-        this.$nextTick(this.onResize)
-      }
-    }
-  },
-
   methods: {
-    init () {
-      this.$nextTick(this.onResize)
-    },
-
-    onResize () {
-      // this.scrollWidth = this.getScrollWidth()
-    },
-
-    // getScrollWidth () {
-    //   const area = this.$refs.scrollArea
-    //   const pane = this.$refs.pane
-
-    //   return area && pane ? (area.offsetWidth - pane.offsetWidth) : 0
-    // },
-
     __getParentWidth () {
       if (this.$parent && this.$parent.$el) {
         return this.$parent.$el.getBoundingClientRect().width + 15
@@ -110,6 +63,15 @@ export default {
     },
 
     __renderHeadInterval (h, interval, index) {
+      let colors = new Map(), color, backgroundColor
+      let updateColors = this.useDefaultTheme
+      if (this.enableTheme === true) {
+        color = 'colorIntervalBody'
+        backgroundColor = 'backgroundIntervalBody'
+        colors = this.getThemeColors([color, backgroundColor])
+        updateColors = this.setBothColors
+      }
+
       const width = convertToUnit(this.parsedIntervalWidth)
       const height = convertToUnit(this.parsedIntervalHeight)
       const slot = this.$scopedSlots['head-label']
@@ -120,14 +82,14 @@ export default {
         index,
         label
       }
-      return slot ? slot(scope) : h('div', {
+      return slot ? slot(scope) : h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
         staticClass: 'q-calendar-resource__head-label',
         style: {
           maxWidth: width,
           minWidth: width,
           height
         }
-      }, label)
+      }), label)
     },
 
     __renderBody (h) {
@@ -161,17 +123,31 @@ export default {
     },
 
     __renderHeadResource (h) {
+      const slot = this.$scopedSlots['resource-header']
       const width = convertToUnit(this.parsedResourceWidth)
       const height = convertToUnit(this.parsedIntervalHeight)
 
-      return h('div', {
+      let colors = new Map(), color, backgroundColor
+      let updateColors = this.useDefaultTheme
+      if (this.enableTheme === true) {
+        color = 'colorResourceText'
+        backgroundColor = 'backgroundResourceText'
+        colors = this.getThemeColors([color, backgroundColor])
+        updateColors = this.setBothColors
+      }
+
+      const intervals = this.intervals
+
+      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
         staticClass: 'q-calendar-resource__head-resource' + (this.sticky === true ? ' q-calendar__sticky' : ''),
         style: {
           maxWidth: width,
           minWidth: width,
           height
         }
-      })
+      }), [
+        slot && slot({ date: this.value, intervals })
+      ])
     },
 
     __renderDayContainer (h) {
@@ -298,11 +274,6 @@ export default {
     const maxWidth = convertToUnit(this.__getParentWidth())
     return h('div', {
       staticClass: 'q-calendar-resource',
-      directives: [{
-        modifiers: { quiet: true },
-        name: 'resize',
-        value: this.onResize
-      }],
       style: {
         maxWidth: maxWidth
       }

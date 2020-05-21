@@ -13,10 +13,8 @@
     >
       <template #resource-intervals="scope">
         <template v-if="scope.resource.events && scope.resource.events.length > 0">
-          {{ showScope(scope) }}
           <template v-for="(event, index) in scope.resource.events">
             <template v-if="event.date === scope.intervals[0][0].date">
-              {{ showEvent(event) }}
               <q-badge
                 v-if="event.time"
                 :key="index"
@@ -270,37 +268,7 @@ export default {
       }
       s['align-items'] = 'flex-start'
       return s
-    },
-
-    showScope (scope) {
-      console.log('showScope:', scope)
-    },
-
-    showEvent (event) {
-      console.log('showEvent:', event)
     }
   }
 }
 </script>
-
-<style lang="sass">
-  // this page
-  .calendar-container
-    position: relative
-
-  .my-event
-    position: absolute
-    font-size: 12px
-
-  // .full-width
-  //   left: 0
-  //   width: 100%
-
-  // .left-side
-  //   left: 0
-  //   width: 49.75%
-
-  // .right-side
-  //   left: 50.25%
-  //   width: 49.75%
-  </style>

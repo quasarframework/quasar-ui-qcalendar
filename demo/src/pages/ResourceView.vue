@@ -58,9 +58,14 @@ For slots that return `day`, `interval` or `timestamp`, it looks like this:
 
 You can use the slots `resource-intervals` and `resource-interval` to control visual aspects of your event system.
 The example below is using the `resource-label` slot to indicate there are events in that time interval, in case it is not visible, indicating to the user they should scroll sideways to see the event.
-The `resource-intervals` slot is used to get information about the date and time of an event and then to calculate where the absolute position of the event based on passed in functions `timeStartPos` and `timeDurationWidth`.
+The `resource-intervals` slot is used to get information about the date and time of an event and then to calculate where the absolute position of the event based on passed in functions `timeStartPosX` and `timeDurationWidth`.
       </q-markdown>
     </example-viewer>
+
+    <example-viewer title="Slot - Resource Header" file="ResourceViewSlotResourceHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+
+    <example-viewer title="Theme" file="ResourceViewTheme" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Locale" file="ResourceViewLocale" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
   </div>
 </template>
@@ -105,6 +110,9 @@ export default {
     this.addToToc('Interval Minutes (15)', 2)
     this.addToToc('Interval Start', 2)
     this.addToToc('Slots', 2)
+    this.addToToc('Slot - Resource Header', 2)
+    this.addToToc('Theme', 2)
+    this.addToToc('Locale', 2)
 
     this.toc = this.tempToc
   },
