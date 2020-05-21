@@ -162,7 +162,9 @@ export default {
             }
           }
         },
-        on: this.getDefaultMouseEventHandlers(':day', _event => scope)
+        on: this.getDefaultMouseEventHandlers(':day', event => {
+          return { scope, event }
+        })
       }), [
         this.columnHeaderBefore === true && this.__renderColumnHeaderBefore(h, day, idx),
         this.noDefaultHeaderText !== true && this.__renderHeadWeekday(h, day, idx),
@@ -390,8 +392,9 @@ export default {
             }
           }
         },
-        on: this.getDefaultMouseEventHandlers(':resource:day', _event => {
-          return this.getScopeForSlot(this.getTimestampAtEvent(_event, day), idx, resource)
+        on: this.getDefaultMouseEventHandlers(':resource:day', event => {
+          const scope = this.getScopeForSlot(this.getTimestampAtEvent(event, day), idx, resource)
+          return { scope, event }
         })
       }
 
@@ -449,7 +452,9 @@ export default {
         style: {
           height
         },
-        on: this.getDefaultMouseEventHandlers(':resource', _event => scope)
+        on: this.getDefaultMouseEventHandlers(':resource', event => {
+          return { scope, event }
+        })
       }, [
         slot ? slot(scope) : h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
           staticClass: 'q-calendar-scheduler__resource-text'

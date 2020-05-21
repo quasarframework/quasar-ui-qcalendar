@@ -40,12 +40,20 @@ export default {
       return parseFloat(this.intervalHeight)
     },
 
+    parsedIntervalWidth () {
+      return parseFloat(this.intervalWidth)
+    },
+
     startMinute () {
       return this.parsedIntervalStart * this.parsedIntervalMinutes
     },
 
     bodyHeight () {
       return this.parsedIntervalCount * this.parsedIntervalHeight
+    },
+
+    bodyWidth () {
+      return this.parsedIntervalCount * this.parsedIntervalWidth
     },
 
     days () {
@@ -137,8 +145,25 @@ export default {
       return true
     },
 
+    scrollToTimeX (time) {
+      const x = this.timeStartPosX(time)
+      const pane = this.$refs.scrollArea
+
+      if (x === false || !pane) {
+        return false
+      }
+
+      pane.scrollLeft = x
+
+      return true
+    },
+
     timeDurationHeight (minutes) {
       return minutes / this.parsedIntervalMinutes * this.parsedIntervalHeight
+    },
+
+    timeDurationWidth (minutes) {
+      return minutes / this.parsedIntervalMinutes * this.parsedIntervalWidth
     },
 
     timeStartPos (time, clamp = true) {
@@ -160,6 +185,27 @@ export default {
       }
 
       return y
+    },
+
+    timeStartPosX (time, clamp = true) {
+      const minutes = parseTime(time)
+      if (minutes === false) return false
+
+      const min = this.startMinute
+      const gap = this.parsedIntervalCount * this.parsedIntervalMinutes
+      const delta = (minutes - min) / gap
+      let x = delta * this.bodyWidth
+
+      if (clamp) {
+        if (x < 0) {
+          x = 0
+        }
+        if (x > this.bodyWidth) {
+          x = this.bodyWidth
+        }
+      }
+
+      return x
     }
   }
 }

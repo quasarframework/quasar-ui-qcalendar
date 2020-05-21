@@ -22,7 +22,7 @@ In this example, the `disabled-weekdays` is set to disable the weekends.
     <example-viewer title="Swipe" file="SchedulerViewSwipe" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Slots (scheduler-resources-header)" file="SchedulerViewSlotResourcesHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
-For slots that return `day` or `timestamp`, it looks like this:
+For slots that return `day`, `interval` or `timestamp`, it looks like this:
 ```js
 {
   date: '',       // YYYY-mm-dd
@@ -67,6 +67,7 @@ Below, the slot receives the `resource` to be displayed. In this case, an avatar
     </example-viewer>
 
     <example-viewer title="Theme" file="SchedulerViewTheme" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Locale" file="SchedulerViewLocale" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
   </div>
 </template>
@@ -111,6 +112,7 @@ export default {
     this.addToToc('Slots (scheduler-resource-day)', 2)
     this.addToToc('Slots (scheduler-resource)', 2)
     this.addToToc('Theme', 2)
+    this.addToToc('Locale', 2)
 
     this.toc = this.tempToc
   },

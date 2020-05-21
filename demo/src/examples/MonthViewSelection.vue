@@ -24,6 +24,10 @@
 // normally you would not import "all" of QCalendar, but is needed for this example to work with UMD (codepen)
 import QCalendar from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
 
+function leftClick (e) {
+  return e.button === 0
+}
+
 export default {
   data () {
     return {
@@ -86,30 +90,34 @@ export default {
       return this.lowIdentifier <= nowIdentifier && this.highIdentifier >= nowIdentifier
     },
 
-    onMouseDownDay (e) {
-      if (this.mobile === true &&
-        this.anchorTimestamp !== null &&
-        this.otherTimestamp !== null &&
-        this.anchorTimestamp.date === this.otherTimestamp.date) {
-        this.otherTimestamp = e
-        this.mouseDown = false
-        return
+    onMouseDownDay ({ scope, event }) {
+      if (leftClick(event)) {
+        if (this.mobile === true &&
+          this.anchorTimestamp !== null &&
+          this.otherTimestamp !== null &&
+          this.anchorTimestamp.date === this.otherTimestamp.date) {
+          this.otherTimestamp = scope
+          this.mouseDown = false
+          return
+        }
+        // mouse is down, start selection and capture current
+        this.mouseDown = true
+        this.anchorTimestamp = scope
+        this.otherTimestamp = scope
       }
-      // mouse is down, start selection and capture current
-      this.mouseDown = true
-      this.anchorTimestamp = e
-      this.otherTimestamp = e
     },
 
-    onMouseUpDay (e) {
-      // mouse is up, capture last and cancel selection
-      this.otherTimestamp = e
-      this.mouseDown = false
+    onMouseUpDay ({ scope, event }) {
+      if (leftClick(event)) {
+        // mouse is up, capture last and cancel selection
+        this.otherTimestamp = scope
+        this.mouseDown = false
+      }
     },
 
-    onMouseMoveDay (e) {
+    onMouseMoveDay ({ scope, event }) {
       if (this.mouseDown === true) {
-        this.otherTimestamp = e
+        this.otherTimestamp = scope
       }
     }
   }

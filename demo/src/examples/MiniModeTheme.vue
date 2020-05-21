@@ -1,5 +1,5 @@
 <template>
-  <div style="max-width: 800px; width: 100%;">
+  <div class="row justify-center q-pa-md" style="max-width: 800px; width: 100%; overflow: hidden;">
     <div class="full-width q-pa-md">
       <q-select
         outlined
@@ -12,32 +12,19 @@
         class="col-12"
       ></q-select>
     </div>
-    <q-separator></q-separator>
-    <q-splitter
-      v-model="splitterModel"
-      :limits="[30, 100]"
-      emit-immediately
-    >
-      <template v-slot:before>
-        <div style="overflow: hidden;">
-          <q-calendar
-            ref="calendar"
-            v-model="selectedDate"
-            view="month"
-            locale="en-us"
-            enable-theme
-            :theme="theme"
-            :mini-mode="miniMode"
-          />
-        </div>
-      </template>
-      <template v-slot:separator>
-        <q-avatar color="primary" text-color="white" size="40px" icon="drag_indicator" />
-      </template>
-      <template v-slot:after>
-        <div style="min-width: 20px"></div>
-      </template>
-    </q-splitter>
+    <q-separator />
+    <div class="row justify-center q-pa-md" style="max-width: 800px; width: 100%; overflow: hidden;">
+      <q-calendar
+        ref="calendar"
+        v-model="selectedDate"
+        view="month"
+        locale="en-us"
+        enable-theme
+        :theme="theme"
+        mini-mode
+        style="max-width: 300px;"
+      />
+    </div>
   </div>
 </template>
 
@@ -45,8 +32,6 @@
 export default {
   data () {
     return {
-      splitterModel: 90,
-      miniMode: false,
       selectedDate: '',
       theme: {
         name: 'default'
@@ -404,12 +389,6 @@ export default {
         })
       })
       return list
-    }
-  },
-  watch: {
-    splitterModel (val) {
-      const rect = this.$refs.calendar.$el.getBoundingClientRect()
-      this.miniMode = rect.width < 500
     }
   }
 }

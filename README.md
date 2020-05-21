@@ -6,11 +6,23 @@ QCalendar (Vue Plugin, UMD and Quasar App Extension)
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/quasarframework/quasar-ui-qcalendar.svg)]()
 [![GitHub repo size in bytes](https://img.shields.io/github/repo-size/quasarframework/quasar-ui-qcalendar.svg)]()
 
+## Everything you need for a complete Calendar solution.
+
+**Month view with events**
+
 ![QCalendar example month view](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/src/statics/qcalendar-month-view.png)
+
+**Planner example**
+
+![QCalendar example planner](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/src/statics/qcalendar-agenda-view--planner.png)
+
+**Monthly Mini-mode**
+
+![QCalendar example planner](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/src/statics/q-calendar-month-view-mini-mode-with-selection.png)
 
 # Structure
 
-* [/ui](ui) - standalone npm package
+* [/ui](ui) - standalone npm package (go here for more information)
 * [/app-extension](app-extension) - Quasar app extension
 * [/demo](demo) - docs, demo and examples project
 * [live demo](https://quasarframework.github.io/quasar-ui-qcalendar/docs) - live docs, demo and examples

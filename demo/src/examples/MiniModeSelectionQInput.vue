@@ -1,10 +1,10 @@
 <template>
-  <div style="max-width: 800px; width: 100%;">
+  <div class="row justify-center" style="max-width: 800px; width: 100%; overflow: hidden;">
     <div class="q-gutter-sm">
       <q-checkbox v-model="mobile" label="Use Touch (set if on mobile)" />
     </div>
-    <q-separator></q-separator>
-    <q-input color="blue-8" filled v-model="convertedDates" @input="onInputChanged" label="Enter date range" mask="####-##-## - ####-##-##">
+    <q-separator class="full-width" />
+    <q-input color="blue-8" filled v-model="convertedDates" @input="onInputChanged" label="Enter date range" mask="####-##-## - ####-##-##" class="q-pa-sm">
       <template v-slot:after>
         <div class="q-gutter-sm" style="overflow: hidden;">
           <span>
@@ -15,7 +15,7 @@
                 v-model="selectedDate"
                 view="month"
                 locale="en-us"
-                :mini-mode="true"
+                mini-mode
                 :selected-start-end-dates="startEndDates"
                 :day-class="classDay"
                 @mousedown:day="onMouseDownDay"
@@ -33,6 +33,10 @@
 <script>
 // normally you would not import "all" of QCalendar, but is needed for this example to work with UMD (codepen)
 import QCalendar from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
+
+function leftClick (e) {
+  return e.button === 0
+}
 
 export default {
   data () {
@@ -59,22 +63,26 @@ export default {
       }
       return dates
     },
+
     anchorDayIdentifier () {
       if (this.anchorTimestamp !== '') {
         return QCalendar.getDayIdentifier(this.anchorTimestamp)
       }
       return false
     },
+
     otherDayIdentifier () {
       if (this.otherTimestamp !== '') {
         return QCalendar.getDayIdentifier(this.otherTimestamp)
       }
       return false
     },
+
     lowIdentifier () {
       // returns lowest of the two values
       return Math.min(this.anchorDayIdentifier, this.otherDayIdentifier)
     },
+
     highIdentifier () {
       // returns highest of the two values
       return Math.max(this.anchorDayIdentifier, this.otherDayIdentifier)
@@ -118,30 +126,34 @@ export default {
       }
     },
 
-    onMouseDownDay (e) {
-      if (this.mobile === true &&
-        this.anchorTimestamp !== null &&
-        this.otherTimestamp !== null &&
-        this.anchorTimestamp.date === this.otherTimestamp.date) {
-        this.otherTimestamp = e
-        this.mouseDown = false
-        return
+    onMouseDownDay ({ scope, event }) {
+      if (leftClick(event)) {
+        if (this.mobile === true &&
+          this.anchorTimestamp !== null &&
+          this.otherTimestamp !== null &&
+          this.anchorTimestamp.date === this.otherTimestamp.date) {
+          this.otherTimestamp = scope
+          this.mouseDown = false
+          return
+        }
+        // mouse is down, start selection and capture current
+        this.mouseDown = true
+        this.anchorTimestamp = scope
+        this.otherTimestamp = scope
       }
-      // mouse is down, start selection and capture current
-      this.mouseDown = true
-      this.anchorTimestamp = e
-      this.otherTimestamp = e
     },
 
-    onMouseUpDay (e) {
-      // mouse is up, capture last and cancel selection
-      this.otherTimestamp = e
-      this.mouseDown = false
+    onMouseUpDay ({ scope, event }) {
+      if (leftClick(event)) {
+        // mouse is up, capture last and cancel selection
+        this.otherTimestamp = scope
+        this.mouseDown = false
+      }
     },
 
-    onMouseMoveDay (e) {
+    onMouseMoveDay ({ scope, event }) {
       if (this.mouseDown === true) {
-        this.otherTimestamp = e
+        this.otherTimestamp = scope
       }
     }
   }

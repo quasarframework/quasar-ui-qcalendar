@@ -45,7 +45,6 @@ export default {
           this.ignoreNextSwipe = false
         }
       }
-      // stopAndPrevent(evt)
       evt.cancelable !== false && evt.preventDefault()
       evt.stopPropagation()
     }

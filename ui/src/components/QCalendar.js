@@ -25,6 +25,7 @@ import QCalendarMonthly from './QCalendarMonthly'
 import QCalendarDaily from './QCalendarDaily'
 import QCalendarScheduler from './QCalendarScheduler'
 import QCalendarAgenda from './QCalendarAgenda'
+import QCalendarResource from './QCalendarResource'
 
 /* @vue/component */
 export default {
@@ -39,6 +40,7 @@ export default {
     ...props.weeks,
     ...props.intervals,
     ...props.scheduler,
+    ...props.resource,
     ...props.agenda
   },
 
@@ -144,8 +146,14 @@ export default {
           updateFormatted(end)
           maxDays = DAYS_IN_MONTH_MAX
           break
+        case 'resource':
+        case 'day-resource':
+          component = QCalendarResource
+          maxDays = 1
+          end = relativeDays(copyTimestamp(end), nextDay, maxDays, this.weekdays)
+          updateFormatted(end)
+          break
       }
-
       return { component, start, end, maxDays }
     }
   },
@@ -241,6 +249,11 @@ export default {
             moved.day = limit
             mover(moved)
             break
+          case 'resource':
+          case 'day-resource':
+            maxDays = 1
+            relativeDays(moved, mover, maxDays, this.weekdays)
+            break
         }
       }
 
@@ -270,10 +283,30 @@ export default {
       }
     },
 
+    timeStartPosX (time, clamp = true) {
+      const c = this.$children[0]
+      if (c && c.timeStartPosX) {
+        return c.timeStartPosX(time, clamp)
+      } else {
+        return false
+      }
+    },
+
     timeDurationHeight (minutes) {
+      debugger
       const c = this.$children[0]
       if (c && c.timeDurationHeight) {
         return c.timeDurationHeight(minutes)
+      } else {
+        return -1
+      }
+    },
+
+    timeDurationWidth (minutes) {
+      debugger
+      const c = this.$children[0]
+      if (c && c.timeDurationWidth) {
+        return c.timeDurationWidth(minutes)
       } else {
         return -1
       }
@@ -283,6 +316,15 @@ export default {
       const c = this.$children[0]
       if (c && c.scrollToTime) {
         return c.scrollToTime(time)
+      } else {
+        return false
+      }
+    },
+
+    scrollToTimeX (time) {
+      const c = this.$children[0]
+      if (c && c.scrollToTimeX) {
+        return c.scrollToTimeX(time)
       } else {
         return false
       }
@@ -301,7 +343,7 @@ export default {
     const data = {
       staticClass: 'q-calendar' + (this.dark === true ? ' q-calendar--dark' : ''),
       class: {
-        'q-calendar-daily__bordered': this.bordered
+        'q-calendar__bordered': this.bordered
       },
       key: this.keyValue,
       props: {

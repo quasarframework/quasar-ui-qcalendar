@@ -1,7 +1,7 @@
 QCalendar
 ===
 
-**QCalendar** is a powerful calendar component that plugs right into your Quasar application. It allows for viewing of **day** (1-6 days), **week**, **monthly** (including **mini-mode**), **scheduler** and **agenda** views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.
+**QCalendar** is a powerful calendar component that plugs right into your Quasar application. It allows for viewing of **day** (1-6 days), **week**, **monthly** (including **mini-mode**), **scheduler**, **resource** and **agenda** views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.
 
 QCalendar is a less-opinionated calendar component, as it does not keep track of things like events and reminders. This is in the hands of the developer, but QCalendar makes it easy via accessible events, slots and methods (see examples how to accomplish these endeavors).
 
@@ -15,8 +15,9 @@ This is the true power of QCalendar.
 
 # Features
 - Show month, week, work-week, day, contiguous days (ex: 3 days at a time)
-- Resource scheduler
-- Agenda views (with optional Planner modes)
+- Scheduler view
+- Resource view
+- Agenda view (with optional Planner modes)
 - Month view mini-mode
 - Month view multi-day selection (separate and contiguous)
 - Month view multi-month/multi-day selection when combining two or more calendars
@@ -181,7 +182,7 @@ You would need to build out your own way of allowing the User to interact with Q
 
 # QCalendar views
 
-QCalendar is made from four distict components: **day**, **month**, **scheduler** and **agenda** views. All other views derive from these four views. For instance, the **week** view is really a 7-**day** view with contraints.
+QCalendar is made from four distict components: **day**, **month**, **scheduler**, **resource** and **agenda** views. All other views derive from these four views. For instance, the **week** view is really a 7-**day** view with contraints.
 
 Not only all these, but the **month** view has a **mini-mode** behavior.
 
@@ -233,6 +234,36 @@ The `scheduler` view is for displaying days with resources on the left side. Thi
 
 To use the scheduler, you need to use the `resources` property, which is an array of objects, containing a mandatory key `label`. To change the number of days displayed, use the `max-days` property. To change the distance between each resource, use the `resource-height` property.
 
+## Resource view
+
+![ResourceView](statics/qcalendar-resource-view.png "Resource View" =800x800)
+
+The `resource` view is for displaying resources (people, rooms, etc) down the side and with time intervals on top.
+
+To use the `resource` view, you need to use the `resources` property, which is an array of objects, containing a mandatory key `label`.
+
+For example:
+
+```js
+:resources="resources"
+```
+
+where:
+
+```js
+resources: [
+  { lable: 'John',
+    events: [
+      { date: '2002-05-30', time: '10:00', duration: 60, title: 'meeting' },
+      ...
+    ]}
+]
+```
+
+Your resources can contain whatever data you want and will be accessible via slots where the resouce is passed.
+
+If you wanted to hold event information as the above example, and wanted to make it more dynamic, listen for the `change` event, which gives you start and end timestamps, collect the data from the server, then dynamically set it on your resource. Remember, don't assign the data directly, or you will use Vue reactivity, instead use the `splice` command.
+
 ## Agenda view
 
 ::: info
@@ -272,19 +303,21 @@ QCalendar has many `view` types available. They are:
 16. `week-scheduler`
 17. `month-scheduler`
 18. `custom-scheduler`
-19. `day-agenda`
-20. `2day-agenda`
-21. `3day-agenda`
-22. `4day-agenda`
-23. `5day-agenda`
-24. `6day-agenda`
-25. `month-agenda`
-26. `week-agenda`
-27. `custom-agenda`
-28. `month-interval`
-29. `custom-interval`
+19. `resource`
+20. `day-resource`
+21. `day-agenda`
+22. `2day-agenda`
+23. `3day-agenda`
+24. `4day-agenda`
+25. `5day-agenda`
+26. `6day-agenda`
+27. `month-agenda`
+28. `week-agenda`
+29. `custom-agenda`
+30. `month-interval`
+31. `custom-interval`
 
-It's important to know that all `view` types are linear in nature. For instance, `3day` will show three days and `next()` will show the next 3 days. A good idea could be to switch to a `view` type on a mobile based on the current width of the screen. For portrait mode, you could change the `view` type to `2day` and for landscape mode `4day`. When `next()` or `prev()` are called the next (or previous) 2 days (for protrait) or 4 days (for landscape) would be displayed. Also, it is important to understand, if using a 5-day work week, then use the `week` view for a nice consistent linear calendar. If you use a `5day` view with a 5-day workweek (`[1,2,3,4,5]`), then you can't expect the monday to be on the first day of the week.
+It's important to know that all `view` types are linear in nature. For instance, `3day` will show three days and the `next()` method will show the next 3 days. A good idea could be to switch to a `view` type on a mobile based on the current width of the screen. For portrait mode, you could change the `view` type to `2day` and for landscape mode `4day`. When `next()` or `prev()` methods are called the next (or previous) 2 days (for protrait) or 4 days (for landscape) would be displayed. Also, it is important to understand, if using a 5-day work week, then use the `week` view for a nice consistent linear calendar. If you use a `5day` view with a 5-day workweek (`[1,2,3,4,5]`), then you can't expect the monday to be on the first day of the week.
 
 Monthly views are also linear, but respect the number of days within the month that is to be displayed.
 
@@ -309,7 +342,7 @@ As well, if the goal was to display Monday as the first day of the week (as does
 **Expected Results**
 If you are trying to do a 5-day week always use the `week`, `month`, `month-interval`, `week-scheduler`, `month-scheduler` or `week-agenda` views to do the filtering (basically views that respect the length of a week or month). The `2day` to `6day` views as well as `custom-interval` and `scheduler` views are linear and won't give you the expected results.
 
-This image has set up a 5-day work week (`[1, 2, 3, 4, 5]`) incorrectly using a `5day` filter.
+This image has set up a 5-day work week (`[1, 2, 3, 4, 5]`) **incorrectly** using a `5day` filter.
 
 ![Incorrect5Day](statics/qcalendar-5day-done-incorrectly.png "5 Day - Set up incorrectly" =800x800)
 
@@ -333,14 +366,6 @@ Of course, change the color to anything you want. Alternatively, provide a borde
 ::: info
 Note that for the User selected date, we use the css class `.q-active-date` to avoid conflict with `.q-selected-date` which is used for multi-selected dates.
 :::
-
-# Styling Monthly Mini-mode Dates
-The styling for month view is to have the text left-justified. For mini-mode, this may not appeal to you. You can resolve this with the following sass which centers the text:
-
-```css
-.q-calendar-weekly__day
-  display: block !important
-```
 
 # Navigation
 
@@ -406,7 +431,8 @@ handleSwipe ({ evt, ...info }) {
       }
     }
   }
-  stopAndPrevent(evt)
+  evt.cancelable !== false && evt.preventDefault()
+  evt.stopPropagation()
 }
 ```
 See the Demo code for more information (link at top of page).
