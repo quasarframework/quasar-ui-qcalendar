@@ -74,7 +74,7 @@ export default {
 
       const width = convertToUnit(this.parsedIntervalWidth)
       const height = convertToUnit(this.parsedIntervalHeight)
-      const slot = this.$scopedSlots['head-label']
+      const slot = this.$scopedSlots['interval-label']
       const short = this.shortIntervalLabel
       const label = this.intervalFormatter(interval, short)
       const scope = {
