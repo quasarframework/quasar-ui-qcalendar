@@ -8,6 +8,7 @@
       interval-start="8"
       interval-count="10"
       bordered
+      sticky
       locale="en-us"
         style="height: 200px; max-width: 800px; width: 100%;"
     />

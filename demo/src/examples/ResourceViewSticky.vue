@@ -1,12 +1,10 @@
 <template>
-  <div style="max-width: 800px; width: 100%;">
+  <div class="row justify-center full-width q-pa-md">
     <q-calendar
       v-model="selectedDate"
       view="day-resource"
       :resources="resources"
       :resource-height="50"
-      interval-minutes="30"
-      bordered
       sticky
       locale="en-us"
       style="height: 200px; max-width: 800px; width: 100%;"

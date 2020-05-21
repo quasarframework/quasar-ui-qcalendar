@@ -20,6 +20,7 @@
         :interval-width="intervalWidth"
         :interval-height="intervalHeight"
         locale="en-us"
+        sticky
         style="height: 200px; max-width: 800px; width: 100%;"
       />
     </div>
