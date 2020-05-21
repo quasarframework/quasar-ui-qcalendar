@@ -14,6 +14,7 @@
       :resources="resources"
       :resource-height="50"
       locale="en-us"
+      sticky
       animated
       transition-prev="slide-right"
       transition-next="slide-left"

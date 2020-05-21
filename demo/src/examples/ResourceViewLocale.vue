@@ -25,6 +25,7 @@
       :resources="resources"
       :resource-height="50"
       :locale="locale"
+      sticky
       :short-interval-label="short"
       :hour24-format="hour24Format"
       style="height: 200px; max-width: 800px; width: 100%;"

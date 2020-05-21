@@ -7,6 +7,7 @@
       :resources="resources"
       :resource-height="50"
       :locale="locale"
+      sticky
       style="height: 200px; max-width: 800px; width: 100%;"
     >
       <template #resource-header="scope">

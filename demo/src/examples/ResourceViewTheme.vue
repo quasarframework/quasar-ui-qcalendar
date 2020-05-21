@@ -20,6 +20,7 @@
       :resource-height="50"
       enable-theme
       :theme="theme"
+      sticky
       locale="en-us"
       style="height: 200px; max-width: 800px; width: 100%;"
     />

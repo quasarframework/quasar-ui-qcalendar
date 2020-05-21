@@ -2,6 +2,13 @@
   <div class="q-markdown">
     <example-title title="Resource View" />
     <example-viewer title="Basic" file="ResourceViewBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+
+    <example-viewer title="Sticky" file="ResourceViewSticky" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+      <q-markdown>
+You can set the `sticky` property to make the resource column and interval labels row **sticky** so they don't scroll. Note: This will not work with IE/Edge.
+      </q-markdown>
+    </example-viewer>
+
     <example-viewer title="Bordered" file="ResourceViewBordered" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Dark" file="ResourceViewDark" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Prev/Next" file="ResourceViewPrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
@@ -99,6 +106,7 @@ export default {
     this.tempToc = []
     this.addToToc('Resource View')
     this.addToToc('Basic', 2)
+    this.addToToc('Sticky', 2)
     this.addToToc('Bordered', 2)
     this.addToToc('Dark', 2)
     this.addToToc('Prev/Next', 2)
