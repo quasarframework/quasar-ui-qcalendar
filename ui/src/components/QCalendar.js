@@ -293,7 +293,6 @@ export default {
     },
 
     timeDurationHeight (minutes) {
-      debugger
       const c = this.$children[0]
       if (c && c.timeDurationHeight) {
         return c.timeDurationHeight(minutes)
@@ -303,7 +302,6 @@ export default {
     },
 
     timeDurationWidth (minutes) {
-      debugger
       const c = this.$children[0]
       if (c && c.timeDurationWidth) {
         return c.timeDurationWidth(minutes)
