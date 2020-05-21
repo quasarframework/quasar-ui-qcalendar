@@ -13,7 +13,7 @@ describe('[TIMESTAMP] relativeDays', () => {
 
   it('relativeDays 2020-01-01, prevDay', async () => {
     const ts = timestamp.parseTimestamp('2020-01-01')
-    const tests = timestamp.relativeDays(ts, timestamp.prevDay)
+    const tests = timestamp.moveRelativeDays(ts, timestamp.prevDay)
     expect(tests.year).toBe(2019)
     expect(tests.month).toBe(12)
     expect(tests.day).toBe(31)
