@@ -244,8 +244,9 @@ export default {
         style: {
           height: this.dayHeight && this.dayHeight > 0 ? height : 'auto'
         },
-        on: this.getDefaultMouseEventHandlers(':workweek', _event => {
-          return slotData
+        on: this.getDefaultMouseEventHandlers(':workweek', event => {
+          const scope = slotData
+          return { scope, event }
         })
       }), slot ? slot(slotData) : workweekLabel)
     },
@@ -305,7 +306,10 @@ export default {
             }
           }
         },
-        on: this.getDefaultMouseEventHandlers(':day', _event => day)
+        on: this.getDefaultMouseEventHandlers(':day', event => {
+          const scope = day
+          return { scope, event }
+        })
       }), [
         this.__renderDayLabel(h, day),
         this.isMiniMode !== true && this.showDayOfYearLabel && !hasMonth ? this.__renderDayOfYearLabel(h, day) : '',

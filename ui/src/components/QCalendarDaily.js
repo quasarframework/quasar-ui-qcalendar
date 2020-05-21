@@ -75,7 +75,7 @@ export default {
     },
 
     __renderHeadIntervals (h) {
-      const intervalsHeader = this.$scopedSlots['intervals-header']
+      const slot = this.$scopedSlots['intervals-header']
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
@@ -89,7 +89,7 @@ export default {
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
         staticClass: 'q-calendar-daily__intervals-head q-calendar-daily__intervals-head--text'
       }), [
-        intervalsHeader && intervalsHeader(this.days)
+        slot && slot(this.days)
       ])
     },
 
@@ -149,8 +149,8 @@ export default {
             }
           }
         },
-        on: this.getDefaultMouseEventHandlers(':day', _event => {
-          return scope
+        on: this.getDefaultMouseEventHandlers(':day', event => {
+          return { scope, event }
         })
       }), [
         this.columnHeaderBefore === true && this.__renderColumnHeaderBefore(h, day, idx),
@@ -347,8 +347,9 @@ export default {
         style: {
           maxWidth: width + '%'
         },
-        on: this.getDefaultMouseEventHandlers(':time', _event => {
-          return this.getScopeForSlot(this.getTimestampAtEvent(_event, day), idx)
+        on: this.getDefaultMouseEventHandlers(':time', event => {
+          const scope = this.getScopeForSlot(this.getTimestampAtEvent(event, day), idx)
+          return { scope, event }
         })
       }), [
         ...this.__renderDayIntervals(h, dayIndex, idx),

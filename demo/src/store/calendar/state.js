@@ -3,6 +3,7 @@ export default {
   selectedDate: '2019-04-01',
   locale: 'en-us',
   maxDays: 1,
+  bordered: false,
   fiveDayWorkWeek: false,
   firstDayMonday: false,
   shortMonthLabel: false,

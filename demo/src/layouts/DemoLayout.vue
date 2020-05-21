@@ -91,7 +91,19 @@
                 <q-icon name="fas fa-calendar" />
               </q-item-section>
               <q-item-section>
-                <q-item-label>Scheduler View</q-item-label>
+                <q-item-label>Resource View</q-item-label>
+              </q-item-section>
+            </q-item>
+
+            <q-item
+              to="/examples/resource-view"
+              clickable
+            >
+              <q-item-section avatar>
+                <q-icon name="fas fa-persons" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>Resource View</q-item-label>
               </q-item-section>
             </q-item>
 

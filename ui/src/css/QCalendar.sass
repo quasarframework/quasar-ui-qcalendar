@@ -1,3 +1,19 @@
+@import './calendar-variables'
+
+.q-calendar
+
+  &__bordered
+    border: $calendar-border-color $calendar-border-width solid
+
+.q-dark div,
+.body--dark div,
+.q-calendar--dark
+  &.q-calendar
+
+    &__bordered
+      border: $calendar-border-color-dark $calendar-border-width solid
+
+
 .q-calendar--dark
   color: #fff
   background: #424242
@@ -6,3 +22,4 @@
 @import './calendar-daily.sass'
 @import './calendar-weekly.sass'
 @import './calendar-scheduler.sass'
+@import './calendar-resource.sass'

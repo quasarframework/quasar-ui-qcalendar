@@ -124,6 +124,7 @@ export default {
         { label: 'Scheduler', value: 'scheduler' },
         { label: 'Week Scheduler', value: 'week-scheduler' },
         { label: 'Month Scheduler', value: 'month-scheduler' },
+        { label: 'Resource', value: 'resource' },
         { label: 'Agenda', value: 'agenda' },
         { label: 'Week Agenda', value: 'week-agenda' },
         { label: 'Month Agenda', value: 'month-agenda' },
@@ -137,6 +138,7 @@ export default {
   },
   computed: {
     ...mapGetters({
+      bordered: 'calendar/bordered',
       fiveDayWorkWeek: 'calendar/fiveDayWorkWeek',
       firstDayMonday: 'calendar/firstDayMonday'
     }),

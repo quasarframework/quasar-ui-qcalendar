@@ -191,6 +191,38 @@ export default {
       validator: validateNumber
     }
   },
+  resource: {
+    resources: Array,
+    resourceKey: {
+      type: String,
+      default: 'label'
+    },
+    resourceHeight: {
+      type: [Number, String],
+      default: 70,
+      validator: validateNumber
+    },
+    resourceWidth: {
+      type: [Number, String],
+      default: 100,
+      validator: v => v === void 0 || validateNumber(v)
+    },
+    resourceStyle: {
+      type: Function,
+      default: null
+    },
+    intervalWidth: {
+      type: [Number, String],
+      default: 100,
+      validator: validateNumber
+    },
+    intervalHeight: {
+      type: [Number, String],
+      default: 20,
+      validator: validateNumber
+    },
+    sticky: Boolean
+  },
   agenda: {
     leftColumnOptions: Array,
     rightColumnOptions: Array,

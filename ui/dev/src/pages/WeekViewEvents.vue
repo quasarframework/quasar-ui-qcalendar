@@ -42,11 +42,11 @@ export default {
     calendarPrev () {
       this.$refs.calendar.prev()
     },
-    onMouseDownTime (e) {
-      console.log('down:', e)
+    onMouseDownTime ({ scope, event }) {
+      console.log('down:', scope, event)
     },
-    onMouseUpTime (e) {
-      console.log('up:', e)
+    onMouseUpTime ({ scope, event }) {
+      console.log('up:', scope, event)
     }
   }
 }

@@ -15,8 +15,6 @@
 </template>
 
 <script>
-// import { stopAndPrevent } from 'quasar/src/utils/event'
-
 export default {
   data () {
     return {
@@ -53,7 +51,6 @@ export default {
           this.ignoreNextSwipe = false
         }
       }
-      // stopAndPrevent(evt)
       evt.cancelable !== false && evt.preventDefault()
       evt.stopPropagation()
     }

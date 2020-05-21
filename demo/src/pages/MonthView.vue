@@ -1,9 +1,6 @@
 <template>
   <div class="q-markdown">
     <q-markdown>
-::: warning
-The ability to use Codepen was recently added to the examples. There are differences in the UMD version of QCalendar, some examples won't work without a bit of manual intervention. Be patient while we get the kinks worked out and automate the necessary changes.
-:::
 
     </q-markdown>
     <example-title title="Month View" />
@@ -71,7 +68,7 @@ Keep in mind that the functionality below won't work with swipe actions.
       <q-markdown>
 The `#day` slot allows you to write anything into the body of the day. To avoid writing on top of the `day-label` add the css class `.q-event` to your item which adds a top margin (and also works for mini-mode).
 
-For slots that return `day` or `timestamp`, it looks like this:
+For slots that return `day`, `interval` or `timestamp`, it looks like this:
 ```js
 {
   date: '',       // YYYY-mm-dd
@@ -103,53 +100,7 @@ Do not mix #day-body and #week slots or you will have overlapping results.
       </q-markdown>
     </example-viewer>
     <example-viewer title="Theme" file="MonthViewTheme" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-
-    <example-title title="Mini-Mode" />
-    <q-markdown>
-Mini-Mode is a special behavior for QCalendar **month** view. The property is `mini-mode` and can be set to `true` or `auto`. When set to `true` mini-mode is always on. When set to `auto`, mini-mode will use the `breakpoint` property to determine when to go into mini-mode.
-
-When `mini-mode="auto"`, this works for the width of the screen, not the width of QCalendar. If you need to control mini-mode dynamically, then you need to set `true` or `false` based on your own calculations.
-
-The examples below will be using QSplitter to adjust the width of the QCalendar and to dynamically switch to/from mini-mode. The breakpoint in the examples is **less than 500px**.
-
-Not all examples have been copied over to `mini-mode` examples. They still work, like **Prev/Next** and **Swipe**.
-
-Also, when in `mini-mode` there are some things to be aware of:
-
-1. The property `month-label-size` defaults to `sm`
-2. The property `short-weekday-label` is always true
-3. The property `show-day-of-year-label` has no effect
-4. The month label on first available day of the month is not displayed
-
-Also, regardless of `mini-mode` all slots associated with month view now have additional slotted data: `miniMode`, which is either set to `true` or `false`.
-    </q-markdown>
-
-    <example-viewer title="Mini-Mode - Basic" file="MonthViewBasicMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Mini-Mode - Disabled Days" file="MonthViewDisabledDaysMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Mini-Mode - Disabled Before/After" file="MonthViewDisabledBeforeAfterMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Mini-Mode - Disabled Weekdays" file="MonthViewDisabledWeekdaysMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Mini-Mode - 5 Day Work Week" file="MonthViewFiveDayWorkWeekMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Mini-Mode - Work Week Numbers" file="MonthViewWorkWeekNumbersMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Mini-Mode - Selected Dates" file="MonthViewSelectedDatesMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
-      <q-markdown>
-Click on dates to toggled selected on/off.
-      </q-markdown>
-    </example-viewer>
-    <example-viewer title="Mini-Mode - Selection" file="MonthViewSelectionMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
-      <q-markdown>
-There are some considerations when using mini-mode selections. There are 3 special classes: `.q-selected-day-first`, `.q-selected-day` and `.q-selected-day-last` in conjunction with the `day-class` property. These will help you create a selector compliant with [Material Design](https://material.io/components/pickers/#anatomy). See examples below for usage.
-      </q-markdown>
-    </example-viewer>
-    <example-viewer title="Mini-Mode - Multi-Month Selection" file="MonthViewMultiMonthSelectionMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
-      <q-markdown>
-Using the property `short-weekday-label` while in `mini-mode` gives an even shorter weekday label than normal.
-      </q-markdown>
-    </example-viewer>
-
-    <example-viewer title="Mini-Mode - Selection (QInput)" file="MonthViewSelectionMiniModeQInput" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-
-    <example-viewer title="Mini-Mode - Slots (day)" file="MonthViewSlotsMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Mini-Mode - Theme" file="MonthViewThemeMiniMode" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Locale" file="MonthViewLocale" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
   </div>
 </template>
@@ -204,20 +155,7 @@ export default {
     this.addToToc('Slots (day)', 2)
     this.addToToc('Slots (week)', 2)
     this.addToToc('Theme', 2)
-
-    this.addToToc('Mini-Mode')
-    this.addToToc('Mini-Mode - Basic', 2)
-    this.addToToc('Mini-Mode - Disabled Days', 2)
-    this.addToToc('Mini-Mode - Disabled Before/After', 2)
-    this.addToToc('Mini-Mode - Disabled Weekdays', 2)
-    this.addToToc('Mini-Mode - 5 Day Work Week', 2)
-    this.addToToc('Mini-Mode - Work Week Numbers', 2)
-    this.addToToc('Mini-Mode - Selected Dates', 2)
-    this.addToToc('Mini-Mode - Selection', 2)
-    this.addToToc('Mini-Mode - Multi-Month Selection', 2)
-    this.addToToc('Mini-Mode - Selection (QInput)', 2)
-    this.addToToc('Mini-Mode - Slots (day)', 2)
-    this.addToToc('Mini-Mode - Theme', 2)
+    this.addToToc('Locale', 2)
 
     this.toc = this.tempToc
   },
