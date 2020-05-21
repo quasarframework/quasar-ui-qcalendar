@@ -19,14 +19,15 @@ module.exports = {
 
   // required to lint *.vue files
   plugins: [
-    'vue'
+    'vue',
+    'jest'
   ],
 
   globals: {
-    'ga': true, // Google Analytics
-    'cordova': true,
-    '__statics': true,
-    'process': true
+    ga: true, // Google Analytics
+    cordova: true,
+    __statics: true,
+    process: true
   },
 
   // add your custom rules here
@@ -46,6 +47,12 @@ module.exports = {
     'import/no-unresolved': 'off',
     'import/no-extraneous-dependencies': 'off',
     'prefer-promise-reject-errors': 'off',
+
+    'jest/no-disabled-tests': 'warn',
+    'jest/no-focused-tests': 'error',
+    'jest/no-identical-title': 'error',
+    'jest/prefer-to-have-length': 'warn',
+    'jest/valid-expect': 'error',
 
     'no-void': 'off',
     // allow console.log during development only
