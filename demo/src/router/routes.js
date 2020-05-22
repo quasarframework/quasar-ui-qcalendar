@@ -59,13 +59,6 @@ const routes = [
       }
     ]
   },
-  // {
-  //   path: '/examples',
-  //   component: () => import('layouts/Examples.vue'),
-  //   children: [
-  //     { path: '', component: () => import('pages/Examples.vue') }
-  //   ]
-  // },
   {
     path: '/demo',
     component: () => import('layouts/CalendarLayout.vue'),
