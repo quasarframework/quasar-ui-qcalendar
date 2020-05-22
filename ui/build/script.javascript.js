@@ -1,6 +1,6 @@
 const path = require('path')
-// const fs = require('fs')
-// const fse = require('fs-extra')
+const fs = require('fs')
+const fse = require('fs-extra')
 const rollup = require('rollup')
 const uglify = require('uglify-es')
 const buble = require('@rollup/plugin-buble')
@@ -15,6 +15,11 @@ const bubleConfig = {
   objectAssign: 'Object.assign'
 }
 
+const nodeResolveConfig = {
+  extensions: ['.js'],
+  preferBuiltins: false
+}
+
 const cjsConfig = {
   include: [
     /node_modules/
@@ -22,10 +27,7 @@ const cjsConfig = {
 }
 
 const rollupPlugins = [
-  nodeResolve({
-    extensions: ['.js'],
-    preferBuiltins: false
-  }),
+  nodeResolve(nodeResolveConfig),
   json(),
   cjs(cjsConfig),
   buble(bubleConfig)
@@ -35,10 +37,10 @@ const builds = [
   {
     rollup: {
       input: {
-        input: pathResolve('entry/index.esm.js')
+        input: resolve('entry/index.esm.js')
       },
       output: {
-        file: pathResolve('../dist/index.esm.js'),
+        file: resolve('../dist/index.esm.js'),
         format: 'es'
       }
     },
@@ -50,10 +52,10 @@ const builds = [
   {
     rollup: {
       input: {
-        input: pathResolve('entry/index.common.js')
+        input: resolve('entry/index.common.js')
       },
       output: {
-        file: pathResolve('../dist/index.common.js'),
+        file: resolve('../dist/index.common.js'),
         format: 'cjs'
       }
     },
@@ -65,11 +67,11 @@ const builds = [
   {
     rollup: {
       input: {
-        input: pathResolve('entry/index.umd.js')
+        input: resolve('entry/index.umd.js')
       },
       output: {
         name: 'QCalendar',
-        file: pathResolve('../dist/index.umd.js'),
+        file: resolve('../dist/index.umd.js'),
         format: 'umd'
       }
     },
@@ -94,40 +96,41 @@ build(builds)
  * Helpers
  */
 
-function pathResolve (_path) {
+function resolve (_path) {
   return path.resolve(__dirname, _path)
 }
 
-// function addAssets (builds, type, injectName) {
-//   const
-//     files = fs.readdirSync(pathResolve('../../ui/src/components/' + type)),
-//     plugins = [buble(bubleConfig)],
-//     outputDir = pathResolve(`../dist/${type}`)
+// eslint-disable-next-line no-unused-vars
+function addAssets (builds, type, injectName) {
+  const
+    files = fs.readdirSync(resolve('../../ui/src/components/' + type)),
+    plugins = [buble(bubleConfig)],
+    outputDir = resolve(`../dist/${type}`)
 
-//   fse.mkdirp(outputDir)
+  fse.mkdirp(outputDir)
 
-//   files
-//     .filter(file => file.endsWith('.js'))
-//     .forEach(file => {
-//       const name = file.substr(0, file.length - 3).replace(/-([a-z])/g, g => g[1].toUpperCase())
-//       builds.push({
-//         rollup: {
-//           input: {
-//             input: pathResolve(`../src/components/${type}/${file}`),
-//             plugins
-//           },
-//           output: {
-//             file: addExtension(pathResolve(`../dist/${type}/${file}`), 'umd'),
-//             format: 'umd',
-//             name: `QCalendar.${injectName}.${name}`
-//           }
-//         },
-//         build: {
-//           minified: true
-//         }
-//       })
-//     })
-// }
+  files
+    .filter(file => file.endsWith('.js'))
+    .forEach(file => {
+      const name = file.substr(0, file.length - 3).replace(/-([a-z])/g, g => g[1].toUpperCase())
+      builds.push({
+        rollup: {
+          input: {
+            input: resolve(`../src/components/${type}/${file}`),
+            plugins
+          },
+          output: {
+            file: addExtension(resolve(`../dist/${type}/${file}`), 'umd'),
+            format: 'umd',
+            name: `QCalendar.${injectName}.${name}`
+          }
+        },
+        build: {
+          minified: true
+        }
+      })
+    })
+}
 
 function build (builds) {
   return Promise
@@ -136,13 +139,9 @@ function build (builds) {
 }
 
 function genConfig (opts) {
-  // const { dependencies } = require(path.resolve(__dirname, '../package.json'))
-  // const external = Object.keys(dependencies || [])
-  const external = []
-
   Object.assign(opts.rollup.input, {
     plugins: rollupPlugins,
-    external: ['vue', 'quasar', ...external]
+    external: [ 'vue', 'quasar' ]
   })
 
   Object.assign(opts.rollup.output, {
