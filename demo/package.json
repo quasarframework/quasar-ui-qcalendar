@@ -28,7 +28,7 @@
     "babel-eslint": "^10.1.0",
     "devtron": "^1.4.0",
     "electron": "^9.0.0",
-    "electron-debug": "^3.0.1",
+    "electron-debug": "^3.1.0",
     "electron-devtools-installer": "^3.0.0",
     "eslint": "^7.0.0",
     "eslint-loader": "^4.0.2",
@@ -49,8 +49,5 @@
   },
   "browserslist": [
     "last 1 version, not dead, ie >= 11"
-  ],
-  "resolutions": {
-    "@babel/parser": "7.7.5"
-  }
+  ]
 }

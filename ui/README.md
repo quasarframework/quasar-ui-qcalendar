@@ -181,6 +181,8 @@ If you need the RTL variant of the CSS, then go for the following (instead of th
 </html>
 ```
 
+# Codepen
+
 [UMD example on Codepen](https://codepen.io/Hawkeye64/pen/RwwwKQL)
 
 # Building the Projects
@@ -218,14 +220,18 @@ $ yarn dev:electron
 ```
 
 ## Building package
+
 ```bash
 $ yarn build
+```
 
 # build just the JSON API
+```bash
 $ yarn build:api
 ```
 
 # Donate
+
 If you appreciate the work that went into this, please consider donating to [Quasar](https://donate.quasar.dev) or [Jeff](https://github.com/sponsors/hawkeye64).
 
 # License
