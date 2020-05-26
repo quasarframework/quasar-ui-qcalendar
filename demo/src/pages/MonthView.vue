@@ -101,6 +101,13 @@ Do not mix #day-body and #week slots or you will have overlapping results.
     </example-viewer>
     <example-viewer title="Theme" file="MonthViewTheme" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Locale" file="MonthViewLocale" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Toolbar" file="MonthViewToolbar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+      <q-markdown>
+QCalendar does not come with a navigation toolbar out-of-the-box. This keeps QCalendar less opinionated of how you want your calendar to look.
+
+This example is only one of many ways you can style your own QCalendar.
+      </q-markdown>
+    </example-viewer>
 
   </div>
 </template>
@@ -156,6 +163,7 @@ export default {
     this.addToToc('Slots (week)', 2)
     this.addToToc('Theme', 2)
     this.addToToc('Locale', 2)
+    this.addToToc('Toolbar', 2)
 
     this.toc = this.tempToc
   },
