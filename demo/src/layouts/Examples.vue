@@ -230,7 +230,7 @@ export default {
   mounted () {
     // code to handle anchor link on refresh/new page, etc
     if (location.hash !== '') {
-      const id = location.hash.substring(1, location.hash.length)
+      const id = location.hash.slice(1)
       setTimeout(() => {
         this.scrollTo(id)
       }, 200)
