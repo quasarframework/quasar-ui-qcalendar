@@ -101,16 +101,12 @@ export default {
     },
 
     __renderScrollArea (h) {
-      if (this.noScroll !== void 0 && this.noScroll === true) {
-        return this.__renderPane(h)
-      } else {
-        return h('div', {
-          ref: 'scrollArea',
-          staticClass: 'q-calendar-resource__scroll-area'
-        }, [
-          this.__renderDayContainer(h)
-        ])
-      }
+      return h('div', {
+        ref: 'scrollArea',
+        staticClass: 'q-calendar-resource__scroll-area'
+      }, [
+        this.__renderDayContainer(h)
+      ])
     },
 
     __renderHead (h) {
