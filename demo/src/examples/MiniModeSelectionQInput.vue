@@ -5,7 +5,7 @@
     </div>
     <q-separator class="full-width" />
     <q-input color="blue-8" filled v-model="convertedDates" @input="onInputChanged" label="Enter date range" mask="####-##-## - ####-##-##" class="q-pa-sm">
-      <template v-slot:after>
+      <template v-slot:append>
         <div class="q-gutter-sm" style="overflow: hidden;">
           <span>
             <q-icon name="far fa-calendar" class="cursor-pointer q-ma-md" />
