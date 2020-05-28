@@ -18,6 +18,9 @@
     color: $calendar-text-color
     font-weight: $calendar-weekly-head-weekday-font-weight
 
+    &:last-child
+      border-right: none !important
+
   .q-calendar-weekly__workweek
     border-right: $calendar-border-color $calendar-border-width solid
     border-bottom: $calendar-border-color $calendar-border-width solid
@@ -34,9 +37,18 @@
     &.q-current-day
       color: $calendar-day-current-color
 
+  .q-calendar-weekly__week--wrapper
+    border-bottom: $calendar-border-color $calendar-border-width solid
+
+    &:last-child
+      border-bottom: none !important
+
   .q-calendar-weekly__day
     border-right: $calendar-border-color $calendar-border-width solid
     color: $calendar-text-color
+
+    &:last-child
+      border-right: none !important
 
     &.q-selected-day,
     &.q-selected-date
@@ -106,7 +118,6 @@
     justify-content: center
 
   &__week
-    border-bottom: $calendar-border-color $calendar-border-width solid
     // min-height: 6em
     position: relative
     display: flex
@@ -333,6 +344,9 @@
       border-bottom: $calendar-border-color-dark $calendar-border-width solid
       color: $calendar-day-current-color-dark
 
+      &:last-child
+        border-right: none !important
+
     .q-calendar-weekly__workweek
       border-right: $calendar-border-color-dark $calendar-border-width solid
       border-bottom: $calendar-border-color-dark $calendar-border-width solid
@@ -346,10 +360,19 @@
       &.q-current-day
         color: $calendar-primary-color-dark
 
+    .q-calendar-weekly__week--wrapper
+      border-bottom: $calendar-border-color $calendar-border-width solid
+
+      &:last-child
+        border-bottom: none !important
+
     .q-calendar-weekly__day
       border-right: $calendar-border-color-dark $calendar-border-width solid
       border-bottom: $calendar-border-color-dark $calendar-border-width solid
       color: $calendar-primary-color-dark
+
+      &:last-child
+        border-right: none !important
 
       &.q-outside
         background: $calendar-outside-background-color-dark

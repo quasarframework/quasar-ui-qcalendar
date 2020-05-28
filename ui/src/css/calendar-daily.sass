@@ -61,13 +61,18 @@
 
   .q-calendar-daily__day
     border-right: $calendar-border-color $calendar-border-width solid
-    border-bottom: $calendar-border-color $calendar-border-width solid
+
+    &:last-child
+      border-right: none !important
 
   .q-calendar-daily__day-interval
     border-top: $calendar-border-color $calendar-border-width solid
 
     &:first-child
       border-top: none !important
+
+    &:last-child
+      border-bottom: none !important
 
 .q-calendar-daily__day-interval--droppable
   border: $calendar-primary-color $calendar-border-width dashed
@@ -96,7 +101,6 @@
     vertical-align: bottom
     width: $calendar-intervals-body-width
     color: $calendar-text-color
-    border-bottom: 1px solid $calendar-border-color
 
     &--text
       display: block
@@ -206,7 +210,6 @@
 
     .q-calendar-daily__intervals-head
       border-right: $calendar-border-color-dark $calendar-border-width solid
-      // border-bottom: $calendar-border-color-dark $calendar-border-width solid
 
     .q-calendar-daily__column-header--before
       border-bottom: $calendar-border-color-dark $calendar-border-width solid
@@ -259,12 +262,17 @@
     .q-calendar-daily__day
       border-right: $calendar-border-color-dark $calendar-border-width solid
 
+      &:last-child
+        border-right: none !important
 
     .q-calendar-daily__day-interval
       border-top: $calendar-border-color-dark $calendar-border-width solid
 
       &:first-child
         border-top: none !important
+
+      &:last-child
+        border-bottom: none !important
 
   .q-calendar-daily__day-interval--droppable
     border: $calendar-border-color-dark $calendar-border-width solid$calendar-border-color-dark $calendar-border-width dashed
