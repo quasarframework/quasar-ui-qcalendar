@@ -16,7 +16,7 @@
     "@quasar/extras": "^1.8.1"
   },
   "devDependencies": {
-    "@quasar/app": "^1.8.10",
+    "@quasar/app": "^1.9.0",
     "@quasar/quasar-app-extension-qmarkdown": "^1.0.27"
   },
   "engines": {
