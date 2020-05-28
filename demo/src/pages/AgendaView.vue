@@ -87,6 +87,15 @@ If you do not wish to have an `id` and `label` keys in your data (say, it came f
 To manage data, use the `column-header` and `column-body` slots.
       </q-markdown>
     </example-viewer>
+    <example-viewer title="No Scroll" file="AgendaViewNoScroll" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+      <q-markdown>
+There may be circumstances where you wish to control the scrolling. In this case, use the `no-scroll` property and provide your own scroll wrapper.
+
+:::
+Note: The header area of the calendar will now scroll with the rest of the calendar
+:::
+      </q-markdown>
+    </example-viewer>
     <example-viewer title="Theme" file="AgendaViewWeekTheme" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Locale" file="AgendaViewWeekLocale" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
   </div>
@@ -126,6 +135,7 @@ export default {
     this.addToToc('Dark', 2)
     this.addToToc('First Day Monday', 2)
     this.addToToc('Five Day Workweek', 2)
+    this.addToToc('No Scroll', 2)
     this.addToToc('Theme', 2)
     this.addToToc('Locale', 2)
 

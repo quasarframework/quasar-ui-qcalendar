@@ -1,32 +1,14 @@
 <template>
-  <q-layout view="lHh Lpr fff">
-    <q-header class="glossy bg-primary">
-      <q-toolbar>
-        <q-toolbar-title shrink>
-          QCalendar <span class="text-subtitle2">v{{ version }}</span>
-        </q-toolbar-title>
-
-        <q-space></q-space>
-
-        <q-separator vertical></q-separator>
-        <q-btn stretch flat label="Prev" @click="calendarPrev"></q-btn>
-        <q-separator vertical></q-separator>
-        <q-btn stretch flat label="Next" @click="calendarNext"></q-btn>
-        <q-separator vertical></q-separator>
-        <q-space></q-space>
-
-        <div>Quasar v{{ $q.version }}</div>
-      </q-toolbar>
-    </q-header>
-
-    <q-page>
+  <div class="row justify-center q-pa-lg">
+    <q-scroll-area
+      style="height: 400px; max-width: 600px; width: 100%;"
+      class="content-bordered"
+    >
       <q-calendar
-        ref="calendar"
-        v-model="date"
+        v-model="selectedDate"
         view="week-agenda"
-        :weekdays="[1,2,3,4,5]"
-        :left-column-options="leftColumnOptions"
-        :right-column-options="rightColumnOptions"
+        locale="en-us"
+        no-scroll
       >
         <template #day-body="day">
           <template v-for="(agenda) in getAgenda(day)">
@@ -51,18 +33,15 @@
         </template>
 
       </q-calendar>
-    </q-page>
-  </q-layout>
+    </q-scroll-area>
+  </div>
 </template>
 
 <script>
-import { version } from 'ui'
-
 export default {
   data () {
     return {
-      date: '',
-      version: version,
+      selectedDate: '2019-04-01',
       agenda: {
         // value represents day of the week
         1: [
@@ -178,41 +157,19 @@ export default {
             avatar: 'https://cdn.quasar.dev/img/avatar6.jpg'
           }
         ]
-      },
-      leftColumnOptions: [
-        {
-          label: 'Over Due'
-        },
-        {
-          label: '90 Days Over'
-        }
-      ],
-      rightColumnOptions: [
-        {
-          label: 'Summary'
-        }
-      ]
-    }
-  },
-
-  watch: {
-    date (val) {
-      console.log('Date: ', val)
+      }
     }
   },
 
   methods: {
-    calendarNext () {
-      this.$refs.calendar.next()
-    },
-
-    calendarPrev () {
-      this.$refs.calendar.prev()
-    },
-
     getAgenda (day) {
       return this.agenda[parseInt(day.weekday, 10)]
     }
   }
 }
 </script>
+
+<style lang="sass">
+.content-bordered
+  border: 1px solid #e0e0e0
+</style>

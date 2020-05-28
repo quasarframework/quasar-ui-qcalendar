@@ -112,6 +112,15 @@ Scroll down if the current time is later for your location to see the example.
       </q-markdown>
     </example-viewer>
 
+    <example-viewer title="No Scroll" file="DayViewNoScroll" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+      <q-markdown>
+There may be circumstances where you wish to control the scrolling. In this case, use the `no-scroll` property and provide your own scroll wrapper.
+
+:::
+Note: The header area of the calendar will now scroll with the rest of the calendar
+:::
+      </q-markdown>
+    </example-viewer>
     <example-viewer title="Theme" file="DayViewTheme" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Locale" file="DayViewLocale" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
@@ -163,6 +172,7 @@ export default {
     this.addToToc('Column Header Count (Paged)', 2)
     this.addToToc('Slots', 2)
     this.addToToc('Day View (Current Time) - Slot (day-container)', 2)
+    this.addToToc('No Scroll', 2)
     this.addToToc('Theme', 2)
     this.addToToc('Locale', 2)
 
