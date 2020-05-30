@@ -50,7 +50,8 @@
 import { date, colors } from 'quasar'
 import {
   makeDateTime,
-  parsed
+  parsed,
+  parseDate
 } from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
 
 const CURRENT_DAY = new Date()
