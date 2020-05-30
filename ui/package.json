@@ -43,7 +43,10 @@
     "monthly",
     "events",
     "reminders",
-    "schedule"
+    "agenda",
+    "resource",
+    "schedule",
+    "range selection"
   ],
   "vetur": {
     "tags": "dist/vetur/tags.json",
@@ -83,7 +86,7 @@
     "postcss": "^7.0.31",
     "postcss-rtl": "^1.7.3",
     "promise": "^8.1.0",
-    "quasar": "^1.12.0",
+    "quasar": "^1.12.2",
     "quasar-json-api": "^0.0.21",
     "rimraf": "^3.0.2",
     "rollup": "^2.11.2",
