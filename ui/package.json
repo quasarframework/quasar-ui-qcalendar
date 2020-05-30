@@ -43,7 +43,10 @@
     "monthly",
     "events",
     "reminders",
-    "schedule"
+    "agenda",
+    "resource",
+    "schedule",
+    "range selection"
   ],
   "vetur": {
     "tags": "dist/vetur/tags.json",

@@ -1177,37 +1177,35 @@ export default {
 </script>
 
 <style lang="sass">
-  // calendar overrides
-  .q-calendar-daily__day-interval:hover
-    background-color: rgba(0,0,255,.1)
+.q-calendar-daily__day-interval:hover
+  background-color: rgba(0,0,255,.1)
 
-  .q-calendar-weekly__workweek:hover
-    background-color: rgba(0,0,255,.1)
+.q-calendar-weekly__workweek:hover
+  background-color: rgba(0,0,255,.1)
 
-  .q-calendar-weekly__day:hover
-    background-color: rgba(0,0,255,.1)
+.q-calendar-weekly__day:hover
+  background-color: rgba(0,0,255,.1)
 
-  .q-calendar-weekly__head-weekday:hover
-    background-color: rgba(0,0,255,.1)
+.q-calendar-weekly__head-weekday:hover
+  background-color: rgba(0,0,255,.1)
 
-  // this page
-  .calendar-container
-    position: relative
+.calendar-container
+  position: relative
 
-  .my-event
-    width: 100%
-    position: absolute
-    font-size: 12px
+.my-event
+  width: 100%
+  position: absolute
+  font-size: 12px
 
-  .full-width
-    left: 0
-    width: 100%
+.full-width
+  left: 0
+  width: 100%
 
-  .left-side
-    left: 0
-    width: 49.75%
+.left-side
+  left: 0
+  width: 49.75%
 
-  .right-side
-    left: 50.25%
-    width: 49.75%
+.right-side
+  left: 50.25%
+  width: 49.75%
   </style>

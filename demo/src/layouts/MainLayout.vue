@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="HHh LpR fFf">
+  <q-layout view="HHh LpR fFf" @scroll="onScroll">
     <q-header elevated>
       <q-toolbar>
         <q-btn
@@ -26,6 +26,7 @@
           dense
           round
           @click="rightDrawerOpen = !rightDrawerOpen"
+          aria-label="Table of Contents"
         >
           <q-icon name="menu" />
         </q-btn>
@@ -133,6 +134,35 @@ export default {
       const offset = el.offsetTop - 50
       // setScrollPosition(target, offset, 500)
       setScrollPosition(window, offset, 500)
+    },
+    onScroll ({ position }) {
+      if (this.scrollingPage !== true) {
+        this.updateActiveToc(position)
+      }
+    },
+    updateActiveToc (position) {
+      const toc = this.toc
+      let last
+
+      for (const i in toc) {
+        const section = toc[i]
+        const item = document.getElementById(section.id)
+
+        if (item === null) {
+          continue
+        }
+
+        if (item.offsetTop >= position + 50) {
+          if (last === void 0) {
+            last = section.id
+          }
+          break
+        }
+      }
+
+      if (last !== void 0) {
+        this.activeToc = last
+      }
     }
   }
 }

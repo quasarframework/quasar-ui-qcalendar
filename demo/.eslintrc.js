@@ -51,8 +51,8 @@ module.exports = {
 
     'import/no-webpack-loader-syntax': 'off',
 
-    'quasar/check-valid-props': 1,
-    'quasar/no-invalid-qfield-usage': 1,
+    'quasar/no-invalid-props': 'error',
+    'quasar/no-invalid-qfield-usage': 'error',
 
     'no-void': 'off',
     // allow console.log during development only
