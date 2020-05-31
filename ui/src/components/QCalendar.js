@@ -73,7 +73,7 @@ export default {
         case 'week-scheduler':
           component = this.view.endsWith('-agenda') ? QCalendarAgenda : this.view.endsWith('-scheduler') ? QCalendarScheduler : QCalendarDaily
           start = this.getStartOfWeek(around)
-          end = this.getEndOfWeek(around)
+          end = this.getEndOfWeek(start)
           maxDays = this.weekdays.length
           break
         case 'day':

@@ -23,7 +23,7 @@ export default {
 
   computed: {
     parsedNow () {
-      return this.now ? parseTimestamp(this.now) : null
+      return this.now ? parseTimestamp(this.now) : this.getNow()
     }
   },
 
