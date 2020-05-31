@@ -20,6 +20,13 @@ export default {
 
   directives: { Resize },
 
+  props: {
+    direction: {
+      type: String,
+      default: 'next'
+    }
+  },
+
   data () {
     return {
       scrollWidth: 0
@@ -73,7 +80,7 @@ export default {
     },
 
     __renderHead (h) {
-      return h('div', {
+      const component = h('div', {
         staticClass: 'q-calendar-scheduler__head',
         style: {
           marginRight: this.scrollWidth + 'px'
@@ -82,6 +89,19 @@ export default {
         this.__renderHeadResources(h),
         ...this.__renderHeadDays(h)
       ])
+
+      if (this.animated === true) {
+        const transition = 'q-transition--' + (this.direction === 'prev' ? this.transitionPrev : this.transitionNext)
+        return h('transition', {
+          props: {
+            name: transition,
+            appear: true
+          }
+        }, [
+          component
+        ])
+      }
+      return component
     },
 
     __renderHeadResources (h) {
@@ -277,11 +297,24 @@ export default {
     },
 
     __renderBody (h) {
-      return h('div', {
+      const component = h('div', {
         staticClass: 'q-calendar-scheduler__body'
       }, [
         this.__renderScrollArea(h)
       ])
+
+      if (this.animated === true) {
+        const transition = 'q-transition--' + (this.direction === 'prev' ? this.transitionPrev : this.transitionNext)
+        return h('transition', {
+          props: {
+            name: transition,
+            appear: true
+          }
+        }, [
+          component
+        ])
+      }
+      return component
     },
 
     __renderScrollArea (h) {

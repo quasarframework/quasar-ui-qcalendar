@@ -15,8 +15,6 @@
 </template>
 
 <script>
-// import { stopAndPrevent } from 'quasar/src/utils/event'
-
 export default {
   data () {
     return {

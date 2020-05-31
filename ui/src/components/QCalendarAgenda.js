@@ -37,12 +37,25 @@ export default {
 
   methods: {
     __renderHead (h) {
-      return h('div', {
+      const component = h('div', {
         staticClass: 'q-calendar-daily__head',
         style: {
           marginRight: this.scrollWidth + 'px'
         }
       }, this.__renderHeadDays(h))
+
+      if (this.animated === true) {
+        const transition = 'q-transition--' + (this.direction === 'prev' ? this.transitionPrev : this.transitionNext)
+        return h('transition', {
+          props: {
+            name: transition,
+            appear: true
+          }
+        }, [
+          component
+        ])
+      }
+      return component
     },
 
     __renderHeadDays (h) {

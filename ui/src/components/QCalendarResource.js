@@ -15,7 +15,11 @@ export default {
 
   props: {
     ...props.intervals,
-    ...props.resource
+    ...props.resource,
+    direction: {
+      type: String,
+      default: 'next'
+    }
   },
 
   data () {
@@ -147,13 +151,26 @@ export default {
     },
 
     __renderDayContainer (h) {
-      return h('div', {
+      const component = h('div', {
         staticClass: 'q-calendar-resource__day-container'
       }, [
         this.__renderHead(h),
         this.resources === void 0 && this.__renderResourcesError(h),
         this.resources !== void 0 && this.__renderBodyResources(h)
       ])
+
+      if (this.animated === true) {
+        const transition = 'q-transition--' + (this.direction === 'prev' ? this.transitionPrev : this.transitionNext)
+        return h('transition', {
+          props: {
+            name: transition,
+            appear: true
+          }
+        }, [
+          component
+        ])
+      }
+      return component
     },
 
     __renderBodyResources (h) {

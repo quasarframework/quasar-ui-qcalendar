@@ -346,6 +346,7 @@ export default {
       key: this.keyValue,
       props: {
         ...this.$props,
+        direction: this.direction,
         start: start.date,
         end: end.date,
         maxDays
@@ -368,18 +369,6 @@ export default {
       scopedSlots: this.$scopedSlots
     }
 
-    if (this.animated === true) {
-      const transition = 'q-transition--' + (this.direction === 'prev' ? this.transitionPrev : this.transitionNext)
-      return h('transition', {
-        props: {
-          name: transition,
-          appear: true
-        }
-      }, [
-        this.__renderComponent(h, component, data)
-      ])
-    } else {
-      return this.__renderComponent(h, component, data)
-    }
+    return this.__renderComponent(h, component, data)
   }
 }
