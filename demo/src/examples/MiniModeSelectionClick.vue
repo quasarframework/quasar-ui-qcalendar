@@ -9,7 +9,18 @@
     </q-toolbar>
     <q-separator class="full-width" />
     <div class="row justify-center" style="max-width: 800px; width: 100%; overflow: hidden;">
-      <q-calendar ref="calendar" v-model="selectedDate" view="month" locale="it" mini-mode @click:date="handleClick" @mousemove:day="handleHoverStart" @mouseleave:day="handleHoverEnd" :day-class="classDay" style="max-width: 300px;" />
+      <q-calendar
+        ref="calendar"
+        v-model="selectedDate"
+        view="month"
+        locale="en-us"
+        mini-mode
+        @click:date="handleClick"
+        @mousemove:day="handleHoverStart"
+        @mouseleave:day="handleHoverEnd"
+        :day-class="classDay"
+        style="max-width: 300px;"
+      />
     </div>
   </div>
 </template>
