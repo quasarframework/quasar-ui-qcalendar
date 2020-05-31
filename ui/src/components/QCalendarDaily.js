@@ -18,6 +18,13 @@ export default {
     CalendarIntervals
   ],
 
+  props: {
+    direction: {
+      type: String,
+      default: 'next'
+    }
+  },
+
   directives: { Resize },
 
   data () {
@@ -63,7 +70,7 @@ export default {
     },
 
     __renderHead (h) {
-      return h('div', {
+      const component = h('div', {
         staticClass: 'q-calendar-daily__head',
         style: {
           marginRight: this.scrollWidth + 'px'
@@ -72,6 +79,19 @@ export default {
         this.__renderHeadIntervals(h),
         ...this.__renderHeadDays(h)
       ])
+
+      if (this.animated === true) {
+        const transition = 'q-transition--' + (this.direction === 'prev' ? this.transitionPrev : this.transitionNext)
+        return h('transition', {
+          props: {
+            name: transition,
+            appear: true
+          }
+        }, [
+          component
+        ])
+      }
+      return component
     },
 
     __renderHeadIntervals (h) {
@@ -299,13 +319,27 @@ export default {
 
     __renderDayContainer (h) {
       const slot = this.$scopedSlots['day-container']
-      return h('div', {
+
+      const component = h('div', {
         staticClass: 'q-calendar-daily__day-container'
       }, [
         this.__renderBodyIntervals(h),
         ...this.__renderDays(h),
         slot && slot(this.days)
       ])
+
+      if (this.animated === true) {
+        const transition = 'q-transition--' + (this.direction === 'prev' ? this.transitionPrev : this.transitionNext)
+        return h('transition', {
+          props: {
+            name: transition,
+            appear: true
+          }
+        }, [
+          component
+        ])
+      }
+      return component
     },
 
     __renderDays (h) {

@@ -42,6 +42,8 @@ For slots that return `day`, `interval` or `timestamp`, it looks like this:
     <example-viewer title="Dark" file="AgendaViewWeekDark" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="First Day Monday" file="AgendaViewWeekFirstDayMonday" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Five Day Workweek" file="AgendaViewWeekFiveDayWorkweek" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Prev/Next" file="AgendaViewWeekPrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Swipe" file="AgendaViewWeekSwipe" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Column Options" file="AgendaViewWeekColumnOptions" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 There are two properties: `left-column-options` and `right-column-options`, that allow you to define extra columns on the left and right of the `week-agenda` view. If you are using QCalendar to create a Planner, you will need this functionality.
@@ -135,6 +137,8 @@ export default {
     this.addToToc('Dark', 2)
     this.addToToc('First Day Monday', 2)
     this.addToToc('Five Day Workweek', 2)
+    this.addToToc('Prev/Next', 2)
+    this.addToToc('Swipe', 2)
     this.addToToc('No Scroll', 2)
     this.addToToc('Theme', 2)
     this.addToToc('Locale', 2)

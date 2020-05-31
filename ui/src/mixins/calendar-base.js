@@ -43,8 +43,7 @@ export default {
 
   data () {
     return {
-      keyValue: 0,
-      direction: 'next'
+      keyValue: 0
     }
   },
 

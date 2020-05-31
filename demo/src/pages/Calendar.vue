@@ -440,7 +440,7 @@ export default {
   data () {
     return {
       keyValue: 0,
-      direction: 'forward',
+      direction: 'next',
       weekdays: [0, 1, 2, 3, 4, 5, 6],
       disabledDays: [
         '2019-04-02',

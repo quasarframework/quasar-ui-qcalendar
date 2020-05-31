@@ -22,7 +22,13 @@ export default {
     CalendarBase
   ],
 
-  props: props.weeks,
+  props: {
+    ...props.weeks,
+    direction: {
+      type: String,
+      default: 'next'
+    }
+  },
 
   computed: {
     staticClass () {
@@ -115,6 +121,27 @@ export default {
         }
       }
       return { timestamp: false }
+    },
+
+    __renderContainer (h) {
+      const component = h('div', {
+        staticClass: 'q-calendar-weekly__container'
+      }, [
+        ...this.__renderWeeks(h)
+      ])
+
+      if (this.animated === true) {
+        const transition = 'q-transition--' + (this.direction === 'prev' ? this.transitionPrev : this.transitionNext)
+        return h('transition', {
+          props: {
+            name: transition,
+            appear: true
+          }
+        }, [
+          component
+        ])
+      }
+      return component
     },
 
     __renderHead (h) {
@@ -413,7 +440,7 @@ export default {
       }
     }, [
       !this.hideHeader && this.__renderHead(h),
-      ...this.__renderWeeks(h)
+      this.__renderContainer(h)
     ])
   }
 }

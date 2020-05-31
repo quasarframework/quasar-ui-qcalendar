@@ -12,7 +12,7 @@
 export default {
   data () {
     return {
-      selectedDate: ''
+      selectedDate: '2020-05-31'
     }
   }
 }
