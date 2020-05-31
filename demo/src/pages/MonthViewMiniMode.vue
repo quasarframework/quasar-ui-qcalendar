@@ -55,6 +55,7 @@ There are some considerations when using mini-mode selections. There are 3 speci
 The examples below has a `touch` boolean. This does not change anything with QCalendar. What it does is change the devland logic. When **not** set, the mouse down, mouse move and mouse up control the selection. When set (checked), the first click sets the anchor point and the second click sets the second anchor point.
       </q-markdown>
     </example-viewer>
+    <example-viewer title="Selection Click" file="MiniModeSelectionClick" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Multi-Month Selection" file="MiniModeMultiMonthSelection" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 Using the property `short-weekday-label` while in `mini-mode` gives an even shorter weekday label than normal.
