@@ -146,6 +146,7 @@ export default {
     this.addToToc('Prev/Next', 2)
     this.addToToc('Selected Dates', 2)
     this.addToToc('Selection', 2)
+    this.addToToc('Selection Click', 2)
     this.addToToc('Multi-Month Selection', 2)
     this.addToToc('Selection (QInput)', 2)
     this.addToToc('Advanced Popup', 2)
