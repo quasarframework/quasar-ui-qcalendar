@@ -255,14 +255,16 @@ export default {
               const startTime = QCalendar.parsed(event.date + ' ' + event.time)
               const endTime = QCalendar.addToDate(startTime, { minute: event.duration })
               for (let j = 0; j < events.length; ++j) {
-                const startTime2 = QCalendar.parsed(events[j].date + ' ' + events[j].time)
-                const endTime2 = QCalendar.addToDate(startTime2, { minute: events[j].duration })
-                if (QCalendar.isBetweenDates(startTime, startTime2, endTime2) || QCalendar.isBetweenDates(endTime, startTime2, endTime2)) {
-                  events[j].side = 'left'
-                  event.side = 'right'
-                  events.push(event)
-                  added = true
-                  break
+                if (events[j].time) {
+                  const startTime2 = QCalendar.parsed(events[j].date + ' ' + events[j].time)
+                  const endTime2 = QCalendar.addToDate(startTime2, { minute: events[j].duration })
+                  if (QCalendar.isBetweenDates(startTime, startTime2, endTime2) || QCalendar.isBetweenDates(endTime, startTime2, endTime2)) {
+                    events[j].side = 'left'
+                    event.side = 'right'
+                    events.push(event)
+                    added = true
+                    break
+                  }
                 }
               }
             }

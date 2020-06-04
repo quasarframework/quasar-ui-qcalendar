@@ -199,14 +199,16 @@ export default {
               const startTime = makeDateTime(parsed(event.date + ' ' + event.time))
               const endTime = date.addToDate(startTime, { minutes: event.duration })
               for (let j = 0; j < events.length; ++j) {
-                const startTime2 = makeDateTime(parsed(events[j].date + ' ' + events[j].time))
-                const endTime2 = date.addToDate(startTime2, { minutes: events[j].duration })
-                if (date.isBetweenDates(startTime, startTime2, endTime2) || date.isBetweenDates(endTime, startTime2, endTime2)) {
-                  events[j].side = 'left'
-                  event.side = 'right'
-                  events.push(event)
-                  added = true
-                  break
+                if (events[j].time) {
+                  const startTime2 = makeDateTime(parsed(events[j].date + ' ' + events[j].time))
+                  const endTime2 = date.addToDate(startTime2, { minutes: events[j].duration })
+                  if (date.isBetweenDates(startTime, startTime2, endTime2) || date.isBetweenDates(endTime, startTime2, endTime2)) {
+                    events[j].side = 'left'
+                    event.side = 'right'
+                    events.push(event)
+                    added = true
+                    break
+                  }
                 }
               }
             }
