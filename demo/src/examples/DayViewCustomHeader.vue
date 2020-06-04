@@ -5,7 +5,7 @@
       <transition :name="transition" appear>
         <div :key="parsedStart" class="row justify-between items-center text-white" style="width: calc(100% - 112px)">
           <div v-for="day in days" :key="day.date" class="col-auto" :style="dayStyle">
-            <q-btn flat :class="dayClass(day)" style="line-height: unset;" @click="selectedDate = day.date">
+            <q-btn flat :class="dayClass(day)" style="line-height: unset;" @click="selectedDate = day.date; transition = ''">
               <div class="text-center" style="width: 100%;">{{ monthFormatter(day, true) }}</div>
               <div class="text-center text-bold" style="width: 100%;  font-size: 16px;">{{ dayFormatter(day, false) }}</div>
               <div class="text-center" style="width: 100%; font-size: 10px;">{{ weekdayFormatter(day, true) }}</div>
