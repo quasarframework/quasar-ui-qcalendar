@@ -8,6 +8,8 @@ QCalendar (Vue Plugin, UMD and Quasar App Extension)
 
 ## Everything you need for a complete Calendar solution.
 
+QCalendar is a [Quasar](https://quasar.dev) component. It is a powerful calendar that plugs right into your Quasar application and allows for viewing of **day** (1-7 days for a week), **monthly**, **scheduler** and **agenda** views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.
+
 **Month view with events**
 
 ![QCalendar example month view](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/src/statics/qcalendar-month-view.png)
@@ -43,6 +45,9 @@ $ cd ../demo
 $ yarn
 $ quasar dev
 ```
+
+# Codepen
+[UMD example on Codepen](https://codepen.io/Hawkeye64/pen/RwwwKQL)
 
 # Donate
 If you appreciate the work that went into this, please consider donating to [Quasar](https://donate.quasar.dev) or [Jeff](https://github.com/sponsors/hawkeye64).
