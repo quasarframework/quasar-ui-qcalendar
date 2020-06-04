@@ -3,7 +3,7 @@
     <div class="title-bar row items-center">
       <q-btn flat color="white" icon="fas fa-chevron-left" style="height: 100%" @click="onPrev" />
       <transition :name="transition" appear>
-        <div :key="parsedStart" class="row justify-between items-center text-white" style="width: calc(100% - 112px)">
+        <div :key="parsedStart.date" class="row justify-between items-center text-white" style="width: calc(100% - 112px)">
           <div v-for="day in days" :key="day.date" class="col-auto" :style="dayStyle">
             <q-btn flat :class="dayClass(day)" style="line-height: unset;" @click="selectedDate = day.date; transition = ''">
               <div class="text-center" style="width: 100%;">{{ monthFormatter(day, true) }}</div>
@@ -116,7 +116,6 @@ export default {
     },
 
     dayClass (day) {
-      debugger
       return {
         row: true,
         'justify-center': true,
