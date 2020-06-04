@@ -9,7 +9,6 @@ The ability to use Codepen was recently added to the examples. There are differe
     <example-viewer title="Basic" file="DayViewBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Dark" file="DayViewDark" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="3Day" file="DayView3Day" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Hide Header" file="DayViewHideHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Interval Height" file="DayViewIntervalHeight" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 `interval-height` is available only for one of the available `day` or `week` views.
@@ -47,6 +46,9 @@ The example below is setting the `interval-start` to `8`, the default is `0`. It
 For swipe support, don't forget to add the `TouchSwipe` directive to your `quasar.conf.js`.
       </q-markdown>
     </example-viewer>
+
+    <example-viewer title="Hide Header" file="DayViewHideHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Custom Header" file="DayViewCustomHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-viewer title="Column Header" file="DayViewColumnHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
@@ -158,7 +160,6 @@ export default {
     this.addToToc('Basic', 2)
     this.addToToc('Dark', 2)
     this.addToToc('3Day', 2)
-    this.addToToc('Hide Header', 2)
     this.addToToc('Interval Height', 2)
     this.addToToc('Interval Count', 2)
     this.addToToc('Interval Minutes (30)', 2)
@@ -166,6 +167,8 @@ export default {
     this.addToToc('Interval Start', 2)
     this.addToToc('Prev/Next', 2)
     this.addToToc('Swipe', 2)
+    this.addToToc('Hide Header', 2)
+    this.addToToc('Custom Header', 2)
     this.addToToc('Column Header', 2)
     this.addToToc('Column Count', 2)
     this.addToToc('Column Header Count', 2)
