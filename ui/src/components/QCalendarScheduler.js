@@ -138,7 +138,8 @@ export default {
     },
 
     __renderHeadDay (h, day, idx) {
-      const slot = this.$scopedSlots['scheduler-day-header']
+      const headDaySlot = this.$scopedSlots['head-day']
+      const dayHeaderSlot = this.$scopedSlots['scheduler-day-header']
       const scope = this.getScopeForSlot(day, idx)
       const width = 100 / this.days.length
       let dragOver
@@ -186,11 +187,12 @@ export default {
           return { scope, event }
         })
       }), [
-        this.columnHeaderBefore === true && this.__renderColumnHeaderBefore(h, day, idx),
-        this.noDefaultHeaderText !== true && this.__renderHeadWeekday(h, day, idx),
-        this.noDefaultHeaderBtn !== true && this.__renderHeadDayBtn(h, day, idx),
-        slot && slot(scope),
-        this.columnHeaderAfter === true && this.__renderColumnHeaderAfter(h, day, idx)
+        headDaySlot !== void 0 && headDaySlot(scope),
+        headDaySlot === void 0 && this.columnHeaderBefore === true && this.__renderColumnHeaderBefore(h, day, idx),
+        headDaySlot === void 0 && this.noDefaultHeaderText !== true && this.__renderHeadWeekday(h, day, idx),
+        headDaySlot === void 0 && this.noDefaultHeaderBtn !== true && this.__renderHeadDayBtn(h, day, idx),
+        headDaySlot === void 0 && dayHeaderSlot && dayHeaderSlot(scope),
+        headDaySlot === void 0 && this.columnHeaderAfter === true && this.__renderColumnHeaderAfter(h, day, idx)
       ])
     },
 
