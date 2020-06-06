@@ -173,6 +173,9 @@ export default {
     },
 
     __renderHeadDay (h, day, index) {
+      const width = 100 / this.weekdays.length + '%'
+      const headDaySlot = this.$scopedSlots['head-day']
+      const slotData = { day, index, miniMode: this.isMiniMode }
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
       if (this.enableTheme === true) {
@@ -186,15 +189,16 @@ export default {
         key: day.date,
         staticClass: 'q-calendar-weekly__head-weekday',
         style: {
-          width: 100 / this.weekdays.length + '%'
+          width
         }
       }), [
-        this.__renderHeadDayLabel(h, day, this.shortWeekdayLabel || this.isMiniMode)
+        headDaySlot === void 0 && this.__renderHeadDayLabel(h, day, this.shortWeekdayLabel || this.isMiniMode),
+        headDaySlot !== void 0 && headDaySlot(slotData)
       ])
     },
 
-    __renderHeadDayLabel (h, day, label) {
-      const weekdayLabel = this.weekdayFormatter(day, label)
+    __renderHeadDayLabel (h, day, shortWeekdayLabel) {
+      const weekdayLabel = this.weekdayFormatter(day, shortWeekdayLabel)
       return h('span', {
         staticClass: 'ellipsis'
       }, this.isMiniMode === true && this.shortWeekdayLabel === true ? weekdayLabel.charAt(0) : weekdayLabel)

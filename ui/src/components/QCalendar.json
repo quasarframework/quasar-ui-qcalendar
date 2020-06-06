@@ -361,6 +361,7 @@
         "5day",
         "6day",
         "week",
+        "month",
         "month-interval",
         "custom-interval",
         "all scheduler",
@@ -4228,6 +4229,39 @@
     }
   },
   "scopedSlots": {
+    "head-day": {
+      "desc": "Replaces the complete internal day header",
+      "scope": {
+        "day": {
+          "type": "Object",
+          "desc": "Timestamp object",
+          "__exemption": [ "examples" ]
+        },
+        "index": {
+          "type": "Number",
+          "desc": "The index of the iteration",
+          "__exemption": [ "examples" ]
+        },
+        "miniMode": {
+          "type": "Boolean",
+          "desc": "If currently in mini-mode (applied to Month calendars only)",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "applicable": [
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month-interval",
+        "custom-interval",
+        "all scheduler",
+        "all agenda"
+      ]
+    },
     "day-header": {
       "desc": "index is added if using `column-count` property",
       "scope": {
