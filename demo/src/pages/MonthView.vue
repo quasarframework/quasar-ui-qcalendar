@@ -64,7 +64,7 @@ Keep in mind that the functionality below won't work with swipe actions.
       </q-markdown>
     </example-viewer>
 
-    <example-viewer title="Slots (day)" file="MonthViewSlots" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+    <example-viewer title="Slot (day)" file="MonthViewSlots" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 The `#day` slot allows you to write anything into the body of the day. To avoid writing on top of the `day-label` add the css class `.q-event` to your item which adds a top margin (and also works for mini-mode).
 
@@ -91,7 +91,9 @@ For slots that return `day`, `interval` or `timestamp`, it looks like this:
 ```
       </q-markdown>
     </example-viewer>
-    <example-viewer title="Slots (week)" file="MonthViewWeekSlot" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+
+    <example-viewer title="Slot (head-day)" file="MonthViewSlotHeadDay" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Slot (week)" file="MonthViewWeekSlot" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 The example below uses the **#week** slot (v1.3.2). It's a bit more difficult to work with than the **#day-body** slot, but allows you to have your devland events displayed in a contiguous manner. Check out the sources to see how it is accomplished.
 ::: warning
@@ -159,8 +161,9 @@ export default {
     this.addToToc('Swipe', 2)
     this.addToToc('Selected Dates', 2)
     this.addToToc('Multi-Day Selection', 2)
-    this.addToToc('Slots (day)', 2)
-    this.addToToc('Slots (week)', 2)
+    this.addToToc('Slot (day)', 2)
+    this.addToToc('Slot (head-day)', 2)
+    this.addToToc('Slot (week)', 2)
     this.addToToc('Theme', 2)
     this.addToToc('Locale', 2)
     this.addToToc('Toolbar', 2)

@@ -20,7 +20,7 @@ In this example, the `disabled-weekdays` is set to disable the weekends.
     </example-viewer>
     <example-viewer title="Prev/Next" file="SchedulerViewPrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Swipe" file="SchedulerViewSwipe" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Slots (scheduler-resources-header)" file="SchedulerViewSlotResourcesHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+    <example-viewer title="Slot (scheduler-resources-header)" file="SchedulerViewSlotResourcesHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 For slots that return `day`, `interval` or `timestamp`, it looks like this:
 ```js
@@ -48,19 +48,21 @@ Below, the slot receives an array of `timestamp`s for the days that are being di
       </q-markdown>
     </example-viewer>
 
-    <example-viewer title="Slots (scheduler-day-header)" file="SchedulerViewSlotDayHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+    <example-viewer title="Slot (head-day)" file="SchedulerViewSlotHeadDay" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+
+    <example-viewer title="Slot (scheduler-day-header)" file="SchedulerViewSlotDayHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 Below, the slot receives the `timestamp` for the day being displayed.
       </q-markdown>
     </example-viewer>
 
-    <example-viewer title="Slots (scheduler-resource-day)" file="SchedulerViewSlotResourceDay" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+    <example-viewer title="Slot (scheduler-resource-day)" file="SchedulerViewSlotResourceDay" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 Below, the slot receives the `timestamp` for the day being displayed, an index, and the resource.
       </q-markdown>
     </example-viewer>
 
-    <example-viewer title="Slots (scheduler-resource)" file="SchedulerViewSlotResource" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+    <example-viewer title="Slot (scheduler-resource)" file="SchedulerViewSlotResource" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 Below, the slot receives the `resource` to be displayed. In this case, an avatar (or icon) is being displayed along with the resource name.
       </q-markdown>
@@ -107,10 +109,11 @@ export default {
     this.addToToc('Disabled Weekdays', 2)
     this.addToToc('Prev/Next', 2)
     this.addToToc('Swipe', 2)
-    this.addToToc('Slots (scheduler-resources-header)', 2)
-    this.addToToc('Slots (scheduler-day-header)', 2)
-    this.addToToc('Slots (scheduler-resource-day)', 2)
-    this.addToToc('Slots (scheduler-resource)', 2)
+    this.addToToc('Slot (scheduler-resources-header)', 2)
+    this.addToToc('Slot (head-day)', 2)
+    this.addToToc('Slot (scheduler-day-header)', 2)
+    this.addToToc('Slot (scheduler-resource-day)', 2)
+    this.addToToc('Slot (scheduler-resource)', 2)
     this.addToToc('Theme', 2)
     this.addToToc('Locale', 2)
 

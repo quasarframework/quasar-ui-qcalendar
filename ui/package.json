@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-ui-qcalendar",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "author": "Jeff Galbraith <jeff@quasar.dev>",
   "description": "QCalendar - Day/Month/Week Calendars, Popups, Schedules, Agendas and Planners for your Quasar Apps",
   "license": "MIT",
