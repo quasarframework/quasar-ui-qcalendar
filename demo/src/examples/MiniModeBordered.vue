@@ -7,7 +7,7 @@
       locale="en-us"
       mini-mode
       bordered
-      style="max-width: 300px;"
+      style="max-width: 300px; min-width: auto; overflow: hidden"
     />
   </div>
 </template>

@@ -12,7 +12,7 @@
       :selected-dates="selectedDates"
       @click:day="onToggleDate"
       @click:date="onToggleDate"
-      style="max-width: 300px;"
+      style="max-width: 300px; min-width: auto; overflow: hidden"
     />
   </div>
 </template>

@@ -55,8 +55,6 @@ module.exports = function (/* ctx */) {
         dark: 'auto'
       },
 
-
-
       // Quasar plugins
       plugins: [
         'Dark',

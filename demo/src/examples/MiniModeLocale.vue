@@ -20,7 +20,7 @@
         view="month"
         :locale="locale"
         mini-mode
-        style="max-width: 300px;"
+        style="max-width: 300px; min-width: auto; overflow: hidden"
       />
     </div>
   </div>

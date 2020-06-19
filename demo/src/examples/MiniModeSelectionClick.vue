@@ -19,7 +19,7 @@
         @mousemove:day="handleHoverStart"
         @mouseleave:day="handleHoverEnd"
         :day-class="classDay"
-        style="max-width: 300px;"
+        style="max-width: 300px; min-width: auto; overflow: hidden"
       />
     </div>
   </div>
