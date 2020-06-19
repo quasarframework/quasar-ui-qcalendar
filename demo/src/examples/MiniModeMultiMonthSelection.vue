@@ -18,7 +18,7 @@
         @mousedown:day="onMouseDownDay"
         @mouseup:day="onMouseUpDay"
         @mousemove:day="onMouseMoveDay"
-        style="max-width: 300px;"
+        style="max-width: 300px; min-width: auto; overflow: hidden"
       />
       <q-separator vertical />
       <q-calendar
@@ -34,7 +34,7 @@
         @mousedown:day="onMouseDownDay"
         @mouseup:day="onMouseUpDay"
         @mousemove:day="onMouseMoveDay"
-        style="max-width: 300px;"
+        style="max-width: 300px; min-width: auto; overflow: hidden"
       />
     </div>
   </div>

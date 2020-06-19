@@ -7,7 +7,7 @@
       mini-mode
       view="month"
       locale="en-us"
-      style="max-width: 300px;"
+      style="max-width: 300px; min-width: auto; overflow: hidden"
     />
   </div>
 </template>
