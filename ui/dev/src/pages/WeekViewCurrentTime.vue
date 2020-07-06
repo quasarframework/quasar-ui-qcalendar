@@ -50,7 +50,7 @@ export default {
 
   methods: {
     adjustCurrentTime () {
-      const now = new Date
+      const now = new Date()
       const p = parseDate(now)
       this.currentDate = p.date
       this.currentTime = p.time

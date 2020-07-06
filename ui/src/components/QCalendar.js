@@ -353,16 +353,16 @@ export default {
       },
       on: {
         ...this.$listeners,
-        'click:date': (day) => {
+        'click:date': (timestamp) => {
           if (this.$listeners.input !== void 0) {
-            if (day.date !== void 0) {
-              this.$emit('input', day.date)
-            } else if (day.day !== void 0 && day.day.date !== void 0) {
-              this.$emit('input', day.day.date)
+            if (timestamp.date !== void 0) {
+              this.$emit('input', timestamp.date)
+            } else if (timestamp.day !== void 0 && timestamp.day.date !== void 0) {
+              this.$emit('input', timestamp.day.date)
             }
           }
           if (this.$listeners['click:date']) {
-            this.$emit('click:date', day)
+            this.$emit('click:date', timestamp)
           }
         }
       },

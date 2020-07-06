@@ -6,6 +6,8 @@
   "cordovaId": "org.cordova.quasar.app",
   "private": true,
   "scripts": {
+    "lint": "eslint --ext .js,.vue src",
+    "lint-fix": "eslint --ext .js,.vue src --fix",
     "dev": "quasar dev",
     "dev:ssr": "quasar dev -m ssr",
     "dev:ios": "quasar dev -m ios",
@@ -16,7 +18,7 @@
     "@quasar/extras": "^1.8.2"
   },
   "devDependencies": {
-    "@quasar/app": "^2.0.0",
+    "@quasar/app": "^2.0.1",
     "@quasar/quasar-app-extension-qmarkdown": "^1.0.29"
   },
   "engines": {

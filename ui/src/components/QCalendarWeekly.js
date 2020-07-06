@@ -436,7 +436,6 @@ export default {
 
   render (h) {
     return h('div', {
-      // staticClass: this.staticClass,
       class: this.staticClass,
       on: {
         dragstart: (e) => {

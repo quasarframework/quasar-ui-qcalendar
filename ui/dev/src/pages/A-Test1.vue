@@ -64,7 +64,7 @@ export default {
     },
 
     calendarScroll () {
-      this.$refs.calendar.scrollToTime("16:00")
+      this.$refs.calendar.scrollToTime('16:00')
     },
 
     padNumber (num, length) {

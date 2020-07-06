@@ -55,7 +55,7 @@ export default {
   computed: {
     startEndDates () {
       const dates = []
-      if (this.anchorDayIdentifier !== false && this.otherDayIdentifier !== false ) {
+      if (this.anchorDayIdentifier !== false && this.otherDayIdentifier !== false) {
         if (this.anchorDayIdentifier <= this.otherDayIdentifier) {
           dates.push(this.anchorTimestamp.date, this.otherTimestamp.date)
         } else {
