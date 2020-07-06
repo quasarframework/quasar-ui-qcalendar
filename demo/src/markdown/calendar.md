@@ -33,10 +33,11 @@ This is the true power of QCalendar.
 - Easy to theme using CSS overrides or using JSON theme object (see Themes below)
 - Easy to customize with Vue slots
 - Support for Dark mode
+- Rich support of date functions that are also exported for use in your own apps
 
 ## QCalendar is not...
 - An event management system. However, QCalendar supports everything you need to create an event/reminder management system using slots (check out the interactive demo).
-- An interactive navigation provider (next, previous, today). However, you can easily do this in devland with QCalendar's methods.
+- An interactive navigation provider (next, previous, today). However, you can easily do this in devland with QCalendar's methods (see examples).
 - Only the Gregorian calendar is supported.
 
 # Installation Types
@@ -176,7 +177,7 @@ The default locale of QCalendar is **en-us**. This can easily be changed via the
 
 You will see a number of images below which have the QCalendar component, but the navigation bar above all images is not part of QCalendar. Navigation is something a developer would provide in devland with QCalendar methods. This gives you total control over look-and-feel of your own navigation bar.
 
-![WeekView](statics/qcalendar-toolbar.png "Week View" =800x800)
+![WeekView](qcalendar-toolbar.png "Week View" =800x800)
 
 You would need to build out your own way of allowing the User to interact with QCalendar (if that is what you wish). Or, keep a fixed calendar.
 
@@ -188,29 +189,29 @@ Not only all these, but the **month** view has a **mini-mode** behavior.
 
 ## Day view
 
-![DayView](statics/qcalendar-day-view.png "Day View" =800x800)
+![DayView](qcalendar-day-view.png "Day View" =800x800)
 
 The `day` view is for displaying time intervals on the left side and 1 or more days in a contiguous fashion on the right side.
 
 When more than one day is displayed:
 
-![WeekView](statics/qcalendar-week-view.png "Week View" =800x800)
+![WeekView](qcalendar-week-view.png "Week View" =800x800)
 
 ## Custom Interval view
 
 The `custom-interval` view allows you to display as many days as specified by the property `max-days`. This can get a bit busy if a large number of days are displayed and is only recommended for wide screens. The image below has `max-days` set to 14.
 
-![CustomInterval](statics/qcalendar-custom-interval-view.png "Custom Interval" =800x800)
+![CustomInterval](qcalendar-custom-interval-view.png "Custom Interval" =800x800)
 
 ## Month Interval view
 
 The `month-interval` view allows you to display all days in a month while in the interval mode. This can get a bit busy and is only recommended for wide screens. The difference between the `month-interval` view and the `custom-interval` view is that the `month-interval` view has special handling for month length and will only go as many days as there are in the displayed month.
 
-![MonthInterval](statics/qcalendar-month-interval-view.png "Month Interval" =800x800)
+![MonthInterval](qcalendar-month-interval-view.png "Month Interval" =800x800)
 
 ## Month view
 
-![MonthView](statics/qcalendar-month-view.png "Month View" =800x800)
+![MonthView](qcalendar-month-view.png "Month View" =800x800)
 
 The `month` view is for displaying a finite number of weeks according to the calendar time which is the currently displayed month.
 
@@ -218,17 +219,17 @@ The `month` view is for displaying a finite number of weeks according to the cal
 
 ### Mini-Mode
 
-![MonthViewMiniModeSelection](statics/q-calendar-month-view-mini-mode-with-selection.png "Month View Mini-Mode with Multi-Day Selection" =400x400)
+![MonthViewMiniModeSelection](q-calendar-month-view-mini-mode-with-selection.png "Month View Mini-Mode with Multi-Day Selection" =400x400)
 
 The `month` view also has a `mini-mode` property with additional (if needed) `breakpoint` behavior.
 
 And, the multi-day selection, when combined with two or mode calendars allows you to have multi-month range selection.
 
-![MonthViewMiniModeMultiMonthSelection](statics/qcalendar-month-view-mini-mode-multi-month-selection.png "Month View Mini-Mode with Multi-Month Selection" =800x800)
+![MonthViewMiniModeMultiMonthSelection](qcalendar-month-view-mini-mode-multi-month-selection.png "Month View Mini-Mode with Multi-Month Selection" =800x800)
 
 ## Scheduler view
 
-![SchedulerView](statics/qcalendar-scheduler-view.png "Scheduler View" =800x800)
+![SchedulerView](qcalendar-scheduler-view.png "Scheduler View" =800x800)
 
 The `scheduler` view is for displaying days with resources on the left side. This allows you to present data for each resource. Where a resource could be a person, room, etc.
 
@@ -236,7 +237,7 @@ To use the scheduler, you need to use the `resources` property, which is an arra
 
 ## Resource view
 
-![ResourceView](statics/qcalendar-resource-view.png "Resource View" =800x800)
+![ResourceView](qcalendar-resource-view.png "Resource View" =800x800)
 
 The `resource` view is for displaying resources (people, rooms, etc) down the side and with time intervals on top.
 
@@ -270,7 +271,7 @@ If you wanted to hold event information as the above example, and wanted to make
 In **Agenda** view mode, the developer is free to add whatever content they want. The example below just shows one of many ways it could be done.
 :::
 
-![AgendaView](statics/qcalendar-agenda-view.png "Agenda View" =800x800)
+![AgendaView](qcalendar-agenda-view.png "Agenda View" =800x800)
 
 The `agenda` view is basically a `day` view without the intervals. It is up to the developer to provide the content via the `day-body` slot.
 
@@ -278,7 +279,7 @@ The `agenda` view is basically a `day` view without the intervals. It is up to t
 
 While in **Agenda** view, you can define extra columns on the left-side or right-side of the calendar. This is perfect for creating Planners.
 
-![PlannerExample](statics/qcalendar-agenda-view--planner.png "Planner Example" =800x800)
+![PlannerExample](qcalendar-agenda-view--planner.png "Planner Example" =800x800)
 
 If this interests you, check out the [Planner Example](/demos/planner).
 
@@ -329,27 +330,27 @@ QCalendar supports weekday filtering using the `weekdays` property. This is an a
 
 If the desire was to display only the work week (meaning Monday to Friday), the `weekdays` property would be set like this: `[1, 2, 3, 4, 5]`.
 
-![Week5day](statics/qcalendar-week-view-5day.png "Week 5 day" =800x800)
+![Week5day](qcalendar-week-view-5day.png "Week 5 day" =800x800)
 
-![Month5day](statics/qcalendar-month-view-5day.png "Month 5 day" =800x800)
+![Month5day](qcalendar-month-view-5day.png "Month 5 day" =800x800)
 
 As well, if the goal was to display Monday as the first day of the week (as does the German, and other, calendars), the `weekdays` property would be set like this: `[1, 2, 3, 4, 5, 6, 0]`.
 
-![WeekMondayFirstDay](statics/qcalendar-week-view-monday-first-day.png "Week - Monday First Day" =800x800)
+![WeekMondayFirstDay](qcalendar-week-view-monday-first-day.png "Week - Monday First Day" =800x800)
 
-![MonthMondayFirstDay](statics/qcalendar-month-view-monday-first-day.png "Month - Monday First Day" =800x800)
+![MonthMondayFirstDay](qcalendar-month-view-monday-first-day.png "Month - Monday First Day" =800x800)
 
 **Expected Results**
 If you are trying to do a 5-day week always use the `week`, `month`, `month-interval`, `week-scheduler`, `month-scheduler` or `week-agenda` views to do the filtering (basically views that respect the length of a week or month). The `2day` to `6day` views as well as `custom-interval` and `scheduler` views are linear and won't give you the expected results.
 
 This image has set up a 5-day work week (`[1, 2, 3, 4, 5]`) **incorrectly** using a `5day` filter.
 
-![Incorrect5Day](statics/qcalendar-5day-done-incorrectly.png "5 Day - Set up incorrectly" =800x800)
+![Incorrect5Day](qcalendar-5day-done-incorrectly.png "5 Day - Set up incorrectly" =800x800)
 
 ## Workweek numbers
 QCalendar supports workweek numbers (also known as [ISO week date](https://en.wikipedia.org/wiki/ISO_week_date)). That is, the numbered week from the start of the year. This is only available in `month` view by setting the `workweek` property to true.
 
-![WorkWeek](statics/qcalendar-workweeks.png "Workweek or ISO Week Date" =800x800)
+![WorkWeek](qcalendar-workweeks.png "Workweek or ISO Week Date" =800x800)
 
 # Styling Active Date
 
@@ -488,26 +489,26 @@ and then in `computed`:
 ```
 Now, you can use the computed variable `this.title`.
 
-![Arabic](statics/qcalendar-locale-arabic.png "Locale - Arabic" =800x800)
-![Chinese](statics/qcalendar-locale-chinese.png "Locale - Chinese" =800x800)
-![French](statics/qcalendar-locale-french.png "Locale - French" =800x800)
-![German](statics/qcalendar-locale-german.png "Locale - German" =800x800)
-![Romanian](statics/qcalendar-locale-romanian.png "Locale - Romanian" =800x800)
+![Arabic](qcalendar-locale-arabic.png "Locale - Arabic" =800x800)
+![Chinese](qcalendar-locale-chinese.png "Locale - Chinese" =800x800)
+![French](qcalendar-locale-french.png "Locale - French" =800x800)
+![German](qcalendar-locale-german.png "Locale - German" =800x800)
+![Romanian](qcalendar-locale-romanian.png "Locale - Romanian" =800x800)
 
 # Themes
 
-QCalendar has the ability to work with themes. It does not come with any itself, but you can download the ones that are used in the demo [here](statics/themes.js).
+QCalendar has the ability to work with themes. It does not come with any itself, but you can download the ones that are used in the demo [here](themes.js).
 
 All colors in themes can be from the [Quasar Color Palette](https://quasar.dev/style/color-palette), CSS named color or a CSS color (#, rgb, rgba, hls, etc).
 
 Download and look at the themes to see what is needed. If a property is missing from a theme, then the fallback of the default CSS will be used.
 
-![ThemeDark](statics/qcalendar-theme-dark.png "Theme - Dark" =800x800)
-![ThemeTeal](statics/qcalendar-theme-teal.png "Theme - Teal" =800x800)
-![ThemeBrown](statics/qcalendar-theme-brown.png "Theme - Brown" =800x800)
-![ThemeDeepPurple](statics/qcalendar-theme-deep-purple.png "Theme - Deep Purple" =800x800)
-![ThemeIndigo](statics/qcalendar-theme-indigo.png "Theme - Indigo" =800x800)
-![ThemeBlue](statics/qcalendar-theme-blue.png "Theme - Blue" =800x800)
+![ThemeDark](qcalendar-theme-dark.png "Theme - Dark" =800x800)
+![ThemeTeal](qcalendar-theme-teal.png "Theme - Teal" =800x800)
+![ThemeBrown](qcalendar-theme-brown.png "Theme - Brown" =800x800)
+![ThemeDeepPurple](qcalendar-theme-deep-purple.png "Theme - Deep Purple" =800x800)
+![ThemeIndigo](qcalendar-theme-indigo.png "Theme - Indigo" =800x800)
+![ThemeBlue](qcalendar-theme-blue.png "Theme - Blue" =800x800)
 
 
 # Animating

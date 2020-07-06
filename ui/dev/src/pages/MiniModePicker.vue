@@ -20,17 +20,17 @@
 </template>
 
 <script>
-import Vue from 'vue'
+// import Vue from 'vue'
 
-const QCalendarPicker = Vue.extend({
-  name: 'QCalendarPicker',
-  props: [],
-  render (h) {
-    h('q-card', {
+// const QCalendarPicker = Vue.extend({
+//   name: 'QCalendarPicker',
+//   props: [],
+//   render (h) {
+//     return h('q-card', {
+//     })
+//   }
+// })
 
-    })
-  }
-})
 export default {
   data () {
     return {

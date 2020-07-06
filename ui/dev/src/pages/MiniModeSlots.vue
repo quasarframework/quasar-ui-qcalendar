@@ -200,8 +200,8 @@ export default {
           }
         } else if (this.events[i].days) {
           // check for overlapping dates
-          let startDate = makeDateTime(parsed(this.events[i].date))
-          let endDate = date.addToDate(startDate, { days: this.events[i].days })
+          const startDate = makeDateTime(parsed(this.events[i].date))
+          const endDate = date.addToDate(startDate, { days: this.events[i].days })
           if (date.isBetweenDates(dt, startDate, endDate)) {
             events.push(this.events[i])
             added = true

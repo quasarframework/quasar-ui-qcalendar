@@ -123,7 +123,7 @@ export default {
 
     onMouseMoveDay ({ scope, event }) {
       if (this.mouseDown === true) {
-        this.otherTimestamp = e
+        this.otherTimestamp = event
       }
     }
   }

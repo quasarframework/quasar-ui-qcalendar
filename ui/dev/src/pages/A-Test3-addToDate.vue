@@ -29,38 +29,33 @@ const QInputTs = {
         staticClass: 'row items-center'
       }, [
         h('span', { staticClass: 'col' }, this.value),
-      h('span', { staticClass: 'column' }, [
-        h(QBtn, {
-          staticClass: 'q-btn-arrow',
-          props: {
-            dense: true,
-            flat: true,
-            icon: 'arrow_drop_up'
-          },
-          on: {
-            click: e => this.$emit('increment', this.type)
-          }
-        }),
-        h(QBtn, {
-          staticClass: 'q-btn-arrow',
-          props: {
-            dense: true,
-            flat: true,
-            icon: 'arrow_drop_down'
-          },
-          on: {
-            click: e => this.$emit('decrement', this.type)
-          }
-        })
+        h('span', { staticClass: 'column' }, [
+          h(QBtn, {
+            staticClass: 'q-btn-arrow',
+            props: {
+              dense: true,
+              flat: true,
+              icon: 'arrow_drop_up'
+            },
+            on: {
+              click: e => this.$emit('increment', this.type)
+            }
+          }),
+          h(QBtn, {
+            staticClass: 'q-btn-arrow',
+            props: {
+              dense: true,
+              flat: true,
+              icon: 'arrow_drop_down'
+            },
+            on: {
+              click: e => this.$emit('decrement', this.type)
+            }
+          })
+        ])
       ])
-      ])
-
     ])
   }
-}
-
-function forEachObject (obj, cb) {
-  Object.keys(obj).forEach(k => cb(obj[k], k))
 }
 
 export default {
@@ -70,16 +65,17 @@ export default {
 
   data () {
     return {
+      /* eslint-disable no-multi-spaces */
       timestamp: {
         date: '',       // YYYY-mm-dd
         time: '',       // 00:00:00 (optional)
-        year: 2019,        // YYYY
+        year: 2019,     // YYYY
         month: 1,       // mm (Jan = 1, etc)
         day: 1,         // day of the month
         hour: 0,        // 24-hr
         minute: 0,      // mm
         hasDay: false,  // if this timestamp is supposed to have a date
-        hasTime: false, // if this timestamp is supposed to have a time
+        hasTime: false // if this timestamp is supposed to have a time
       }
     }
   },
@@ -87,10 +83,10 @@ export default {
   methods: {
     addToDate,
     increment (key) {
-      this.addToDate(this.timestamp, { [key]: 1 })
+      this.timestamp = this.addToDate(this.timestamp, { [key]: 1 })
     },
     decrement (key) {
-      this.addToDate(this.timestamp, { [key]: -1 })
+      this.timestamp = this.addToDate(this.timestamp, { [key]: -1 })
     }
   }
 }

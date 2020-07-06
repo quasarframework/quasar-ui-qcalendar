@@ -12,15 +12,15 @@ QCalendar is a [Quasar](https://quasar.dev) component. It is a powerful calendar
 
 **Month view with events**
 
-![QCalendar example month view](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/src/statics/qcalendar-month-view.png)
+![QCalendar example month view](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/src/public/qcalendar-month-view.png)
 
 **Planner example**
 
-![QCalendar example planner](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/src/statics/qcalendar-agenda-view--planner.png)
+![QCalendar example planner](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/src/public/qcalendar-agenda-view--planner.png)
 
 **Monthly Mini-mode**
 
-![QCalendar example planner](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/src/statics/q-calendar-month-view-mini-mode-with-selection.png)
+![QCalendar example planner](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/src/public/q-calendar-month-view-mini-mode-with-selection.png)
 
 # Structure
 
