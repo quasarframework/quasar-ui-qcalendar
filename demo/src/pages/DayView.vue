@@ -107,8 +107,8 @@ The `day-body` slot is used to get information about the date and time of an eve
       </q-markdown>
     </example-viewer>
 
-    <example-viewer title="Day View - Slot (head-day)" file="DayViewSlotHeadDay" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Day View (Current Time) - Slot (day-container)" file="DayViewCurrentTime" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+    <example-viewer title="Slot (head-day)" file="DayViewSlotHeadDay" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Current Time - Slot (day-container)" file="DayViewCurrentTime" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 You can use the scopedSlot `day-container` to set an absolute position for a time tracking bar.
 Scroll down if the current time is later for your location to see the example.
@@ -175,8 +175,8 @@ export default {
     this.addToToc('Column Header Count', 2)
     this.addToToc('Column Header Count (Paged)', 2)
     this.addToToc('Slots', 2)
-    this.addToToc('Day View - Slot (head-day)', 2)
-    this.addToToc('Day View (Current Time) - Slot (day-container)', 2)
+    this.addToToc('Slot (head-day)', 2)
+    this.addToToc('Current Time - Slot (day-container)', 2)
     this.addToToc('No Scroll', 2)
     this.addToToc('Theme', 2)
     this.addToToc('Locale', 2)

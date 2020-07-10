@@ -1,17 +1,18 @@
 <template>
-  <q-calendar
-    v-model="selectedDate"
-    view="month"
-    locale="en-us"
-    style="height: 400px;"
-  />
+  <div style="max-width: 800px; width: 100%;">
+    <q-calendar
+      v-model="selectedDate"
+      view="month"
+      locale="en-us"
+    />
+  </div>
 </template>
 
 <script>
 export default {
   data () {
     return {
-      selectedDate: '2019-04-01'
+      selectedDate: ''
     }
   }
 }

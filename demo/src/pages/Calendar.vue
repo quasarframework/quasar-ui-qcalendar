@@ -299,9 +299,9 @@
         @click:resource:day="resourceDayClicked"
         day-padding="35px 0 0 0"
       >
-        <template #day="{ date }">
+        <template #day="{ timestamp }">
           <template v-if="calendarView.indexOf('agenda') < 0">
-            <template v-for="(event, index) in getEvents(date)">
+            <template v-for="(event, index) in getEvents(timestamp.date)">
               <q-badge
                 :key="index"
                 style="width: 100%; cursor: pointer; height: 14px; max-height: 14px"
@@ -320,9 +320,9 @@
           </template>
         </template>
 
-        <template #day-header="{ date }">
+        <template #day-header="{ timestamp }">
           <div v-if="calendarView.indexOf('agenda') < 0" class="row justify-center">
-            <template v-for="(event, index) in eventsMap[date]">
+            <template v-for="(event, index) in eventsMap[timestamp.date]">
               <q-badge
                 v-if="!event.time"
                 :key="index"
@@ -350,15 +350,15 @@
           </div>
         </template>
 
-        <template #day-body="data">
+        <template #day-body="{ timestamp, timeStartPos, timeDurationHeight }">
           <template v-if="calendarView.indexOf('agenda') < 0">
-            <template v-for="(event, index) in getEvents(data.date)">
+            <template v-for="(event, index) in getEvents(timestamp.date)">
               <q-badge
                 v-if="event.time"
                 :key="index"
                 class="my-event justify-center"
                 :class="badgeClasses(event, 'body')"
-                :style="badgeStyles(event, 'body', data.timeStartPos, data.timeDurationHeight)"
+                :style="badgeStyles(event, 'body', timeStartPos, timeDurationHeight)"
                 @click.stop.prevent="showEvent(event)"
                 :draggable="true"
                 @dragstart.native="(e) => onDragStart(e, event)"
@@ -371,9 +371,9 @@
             </template>
           </template>
           <template v-else>
-            <template v-for="(agenda) in getAgenda(data)">
+            <template v-for="(agenda) in getAgenda(timestamp)">
               <div
-                :key="data.date + agenda.time"
+                :key="timestamp.date + agenda.time"
                 :label="agenda.time"
                 class="justify-start q-ma-sm shadow-5 bg-grey-6"
                 style="overflow: hidden;"
@@ -1169,8 +1169,8 @@ export default {
         this.ignoreNextSwipe = true
       }
     },
-    getAgenda (day) {
-      return this.agenda[parseInt(day.weekday, 10)]
+    getAgenda (timestamp) {
+      return this.agenda[parseInt(timestamp.weekday, 10)]
     }
   }
 }

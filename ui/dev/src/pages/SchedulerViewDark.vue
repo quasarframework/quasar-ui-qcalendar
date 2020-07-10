@@ -1,20 +1,22 @@
 <template>
-  <q-calendar
-    v-model="selectedDate"
-    view="week-scheduler"
-    :resources="resources"
-    :resource-height="50"
-    locale="en-us"
-    dark
-    style="height: 400px;"
-  />
+  <div style="max-width: 800px; width: 100%;">
+    <q-calendar
+      v-model="selectedDate"
+      view="week-scheduler"
+      dark
+      :resources="resources"
+      :resource-height="50"
+      locale="en-us"
+      style="height: 400px;"
+    />
+  </div>
 </template>
 
 <script>
 export default {
   data () {
     return {
-      selectedDate: '2019-04-01',
+      selectedDate: '',
       resources: [
         { label: 'John' },
         { label: 'Mary' },

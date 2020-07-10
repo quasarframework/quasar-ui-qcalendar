@@ -1,11 +1,12 @@
 <template>
-  <q-calendar
-    v-model="selectedDate"
-    view="month"
-    locale="en-us"
-    color="orange-8"
-    style="height: 400px;"
-  />
+  <div style="max-width: 800px; width: 100%;">
+    <q-calendar
+      v-model="selectedDate"
+      view="month"
+      locale="en-us"
+      color="#FF0000"
+    />
+  </div>
 </template>
 
 <script>

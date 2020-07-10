@@ -1,13 +1,14 @@
 <template>
-  <div style="overflow: auto">
+  <div class="row justify-center q-pa-md" style="max-width: 800px; width: 100%;">
     <q-calendar
+      ref="calendar"
       v-model="selectedDate"
       view="month"
       :disabled-days="disabledDays"
-      mini-mode="auto"
-      breakpoint="sm"
+      mini-mode
       :day-style="modifiedStyle"
       locale="en-us"
+      style="max-width: 300px; min-width: auto; overflow: hidden"
     />
   </div>
 </template>

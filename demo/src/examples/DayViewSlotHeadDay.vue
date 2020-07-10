@@ -5,7 +5,7 @@
     locale="en-us"
     style="height: 400px;"
   >
-    <template #head-day="timestamp">
+    <template #head-day="{ timestamp }">
       {{ getHeadDay(timestamp) }}
     </template>
   </q-calendar>

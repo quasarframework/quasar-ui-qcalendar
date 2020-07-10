@@ -1,37 +1,30 @@
 <template>
-  <div>
-    <q-toolbar>
-      <q-btn stretch flat label="Prev" @click="calendarPrev" />
-      <q-separator vertical />
-      <q-btn stretch flat label="Next" @click="calendarNext" />
-      <q-space />
-    </q-toolbar>
-    <q-separator />
-    <div style="overflow: hidden;">
+  <div class="row justify-center" style="max-width: 800px; width: 100%; overflow: hidden;">
+    <div class="q-gutter-sm">
+      <q-checkbox v-model="mobile" label="Use Touch (set if on mobile)" />
+    </div>
+    <q-separator class="full-width" />
+    <div class="row justify-center" style="max-width: 800px; width: 100%; overflow: hidden;">
       <q-calendar
         ref="calendar"
         v-model="selectedDate"
         view="month"
         locale="en-us"
-        mini-mode="auto"
-        breakpoint="sm"
-        animated
-        transition-prev="slide-right"
-        transition-next="slide-left"
+        mini-mode
         :selected-start-end-dates="startEndDates"
         :day-class="classDay"
         @mousedown:day="onMouseDownDay"
         @mouseup:day="onMouseUpDay"
         @mousemove:day="onMouseMoveDay"
+        style="max-width: 300px; min-width: auto; overflow: hidden"
       />
     </div>
   </div>
 </template>
 
 <script>
-import {
-  getDayIdentifier
-} from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
+// normally you would not import "all" of QCalendar, but is needed for this example to work with UMD (codepen)
+import QCalendar from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
 
 function leftClick (e) {
   return e.button === 0
@@ -40,10 +33,13 @@ function leftClick (e) {
 export default {
   data () {
     return {
+      splitterModel: 90, // start at 90%
       selectedDate: '',
+      miniMode: false,
       anchorTimestamp: '',
       otherTimestamp: '',
-      mouseDown: false
+      mouseDown: false,
+      mobile: false
     }
   },
 
@@ -59,22 +55,26 @@ export default {
       }
       return dates
     },
+
     anchorDayIdentifier () {
       if (this.anchorTimestamp !== '') {
-        return getDayIdentifier(this.anchorTimestamp)
+        return QCalendar.getDayIdentifier(this.anchorTimestamp)
       }
       return false
     },
+
     otherDayIdentifier () {
       if (this.otherTimestamp !== '') {
-        return getDayIdentifier(this.otherTimestamp)
+        return QCalendar.getDayIdentifier(this.otherTimestamp)
       }
       return false
     },
+
     lowIdentifier () {
       // returns lowest of the two values
       return Math.min(this.anchorDayIdentifier, this.otherDayIdentifier)
     },
+
     highIdentifier () {
       // returns highest of the two values
       return Math.max(this.anchorDayIdentifier, this.otherDayIdentifier)
@@ -97,7 +97,7 @@ export default {
     },
 
     getBetween (timestamp) {
-      const nowIdentifier = getDayIdentifier(timestamp)
+      const nowIdentifier = QCalendar.getDayIdentifier(timestamp)
       return {
         'q-selected-day-first': this.lowIdentifier === nowIdentifier,
         'q-selected-day': this.lowIdentifier <= nowIdentifier && this.highIdentifier >= nowIdentifier,
@@ -107,6 +107,14 @@ export default {
 
     onMouseDownDay ({ scope, event }) {
       if (leftClick(event)) {
+        if (this.mobile === true &&
+          this.anchorTimestamp !== null &&
+          this.otherTimestamp !== null &&
+          this.anchorTimestamp.date === this.otherTimestamp.date) {
+          this.otherTimestamp = scope
+          this.mouseDown = false
+          return
+        }
         // mouse is down, start selection and capture current
         this.mouseDown = true
         this.anchorTimestamp = scope

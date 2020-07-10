@@ -6,8 +6,8 @@
       locale="en-us"
       style="height: 500px;"
     >
-      <template #day="{ date }">
-        <template v-for="(event, index) in getEvents(date)">
+      <template #day="{ timestamp }">
+        <template v-for="(event, index) in getEvents(timestamp.date)">
           <q-badge
             :key="index"
             style="width: 100%; cursor: pointer; height: 16px; max-height: 16px"

@@ -27,8 +27,8 @@ Drag-and-Drop has been implemented. Give it a try. :)
       @change="onChange"
       style="height: calc(100vh - 300px); min-height: 400px;"
     >
-      <template #column-header-label="data">
-        <template v-if="data.id === 'over-due'">
+      <template #column-header-label="{ id, label }">
+        <template v-if="id === 'over-due'">
           <div class="row items-center no-wrap">
             <q-icon
               :name="overdueSelected ? 'check_box' : 'check_box_outline_blank'"
@@ -37,31 +37,31 @@ Drag-and-Drop has been implemented. Give it a try. :)
               style="font-size: 24px;"
               v-ripple
             />
-            <span class="ellipsis">{{ data.label }}</span>
+            <span class="ellipsis">{{ label }}</span>
           </div>
         </template>
         <template v-else>
           <div class="row items-center no-wrap">
-            <span class="ellipsis">{{ data.label }}</span>
+            <span class="ellipsis">{{ label }}</span>
           </div>
         </template>
       </template>
 
-      <template #day-header-label="day">
+      <template #day-header-label="{ timestamp }">
         <div class="row items-center no-wrap">
           <q-icon
-            :name="selected[day.weekday - 1] === true ? 'check_box' : 'check_box_outline_blank'"
-            :class="'cursor-pointer' + (selected[day.weekday - 1] ? ' text-red-8' : ' text-blue-8')"
-            @click.stop.prevent="$set(selected, day.weekday - 1, !selected[day.weekday - 1])"
+            :name="selected[timestamp.weekday - 1] === true ? 'check_box' : 'check_box_outline_blank'"
+            :class="'cursor-pointer' + (selected[timestamp.weekday - 1] ? ' text-red-8' : ' text-blue-8')"
+            @click.stop.prevent="$set(selected, timestamp.weekday - 1, !selected[timestamp.weekday - 1])"
             style="font-size: 24px;"
             v-ripple
           />
-          <span class="ellipsis">{{ weekdayFormatter(day, $q.screen.lt.lg) }}</span>
+          <span class="ellipsis">{{ weekdayFormatter(timestamp, $q.screen.lt.lg) }}</span>
         </div>
       </template>
 
-      <template #column-body="data">
-        <template v-if="data.id === 'over-due'">
+      <template #column-body="{ column }">
+        <template v-if="column.id === 'over-due'">
           <q-card class="q-mr-xs q-mb-xs q-px-sm row justify-between">
             <div class="cursor-pointer"><q-icon name="add"/>Add Job</div>
             <div class="cursor-pointer"><q-icon name="note_add" />Add Note</div>
@@ -103,19 +103,19 @@ Drag-and-Drop has been implemented. Give it a try. :)
         </template>
       </template>
 
-      <template #day-body="day">
+      <template #day-body="{ timestamp }">
         <q-card class="q-mr-xs q-mb-xs q-px-sm row justify-between">
           <div class="cursor-pointer"><q-icon name="add" />Add Job</div>
           <div class="cursor-pointer"><q-icon name="note_add" />Add Note</div>
         </q-card>
         <div
           class="planner-column"
-          :data-column="day.weekday"
+          :data-column="timestamp.weekday"
           @dragover.stop="onDragOver"
           @drop.stop="onDrop"
         >
           <transition-group name="planner-item">
-            <template v-for="item in getAgenda(day)">
+            <template v-for="item in getAgenda(timestamp)">
               <planner-item
                 :data-id="item.id"
                 :key="item.id"
@@ -227,7 +227,7 @@ export default {
     this.today = this.formatDate() // save today's date
     this.todayTimestamp = parseTimestamp(this.today)
     this.setToday() // set calendar to today's date
-    this.generateLists()
+    // this.generateLists()
     // we do this here because we don't want it Vue reactive
     this.dragEl = null
     this.curColEl = null

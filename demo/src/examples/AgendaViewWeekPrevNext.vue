@@ -1,11 +1,10 @@
 <template>
   <div style="max-width: 800px; width: 100%;">
-    <q-toolbar>
-      <q-btn stretch flat label="Prev" @click="calendarPrev" />
+    <div class="row justify-center items-center">
+      <q-btn flat label="Prev" @click="calendarPrev" />
       <q-separator vertical />
-      <q-btn stretch flat label="Next" @click="calendarNext" />
-      <q-space />
-    </q-toolbar>
+      <q-btn flat label="Next" @click="calendarNext" />
+    </div>
     <q-separator />
     <div style="overflow: hidden">
       <q-calendar
@@ -18,10 +17,10 @@
         locale="en-us"
         style="height: 400px;"
       >
-        <template #day-body="day">
-          <template v-for="(agenda) in getAgenda(day)">
-            <div
-              :key="day.date + agenda.time"
+      <template #day-body="{ timestamp }">
+        <template v-for="(agenda) in getAgenda(timestamp)">
+          <div
+            :key="timestamp.date + agenda.time"
               :label="agenda.time"
               class="justify-start q-ma-sm shadow-5 bg-grey-6"
             >

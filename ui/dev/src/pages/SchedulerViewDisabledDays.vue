@@ -1,13 +1,15 @@
 <template>
-  <q-calendar
-    v-model="selectedDate"
-    view="week-scheduler"
-    :resources="resources"
-    :disabled-days="disabledDays"
-    :resource-style="modifiedStyle"
-    locale="en-us"
-    style="height: 400px;"
-  />
+  <div style="max-width: 800px; width: 100%;">
+    <q-calendar
+      v-model="selectedDate"
+      view="week-scheduler"
+      :resources="resources"
+      :disabled-days="disabledDays"
+      :resource-style="modifiedStyle"
+      locale="en-us"
+      style="height: 400px;"
+    />
+  </div>
 </template>
 
 <script>

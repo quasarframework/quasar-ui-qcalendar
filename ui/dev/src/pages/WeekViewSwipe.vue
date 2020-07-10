@@ -1,5 +1,5 @@
 <template>
-  <div style="overflow: hidden;">
+  <div style="max-width: 800px; width: 100%;">
     <q-calendar
       ref="calendar"
       v-model="selectedDate"
@@ -9,18 +9,16 @@
       animated
       transition-prev="slide-right"
       transition-next="slide-left"
-      style="height: 400px;"
+      style="height: 400px; overflow: hidden"
     />
   </div>
 </template>
 
 <script>
-// import { stopAndPrevent } from 'quasar/src/utils/event'
-
 export default {
   data () {
     return {
-      selectedDate: '2019-04-01',
+      selectedDate: '',
       dragging: false, // used for drag-and-drop
       ignoreNextSwipe: false // used for drag-and-drop
     }
@@ -46,6 +44,8 @@ export default {
         }
       }
       // stopAndPrevent(evt)
+      evt.cancelable !== false && evt.preventDefault()
+      evt.stopPropagation()
     }
   }
 }
