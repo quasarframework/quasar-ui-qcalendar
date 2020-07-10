@@ -1,21 +1,15 @@
 <template>
-  <div>
-    <q-toolbar>
-      <q-btn stretch flat label="Prev" @click="calendarPrev" />
-      <q-separator vertical />
-      <q-btn stretch flat label="Next" @click="calendarNext" />
-      <q-space />
-    </q-toolbar>
-    <q-separator />
+  <div style="max-width: 800px; width: 100%;">
+    <div class="q-gutter-sm">
+      <q-checkbox v-model="mobile" label="Use Touch (set if on mobile)" />
+    </div>
+    <q-separator></q-separator>
     <div style="overflow: hidden;">
       <q-calendar
         ref="calendar"
         v-model="selectedDate"
         view="month"
         locale="en-us"
-        animated
-        transition-prev="slide-right"
-        transition-next="slide-left"
         :selected-start-end-dates="startEndDates"
         :day-style="styleDay"
         @mousedown:day="onMouseDownDay"
@@ -27,9 +21,8 @@
 </template>
 
 <script>
-import {
-  getDayIdentifier
-} from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
+// normally you would not import "all" of QCalendar, but is needed for this example to work with UMD (codepen)
+import QCalendar from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
 
 function leftClick (e) {
   return e.button === 0
@@ -39,9 +32,10 @@ export default {
   data () {
     return {
       selectedDate: '',
-      anchorTimestamp: '',
-      otherTimestamp: '',
-      mouseDown: false
+      anchorTimestamp: null,
+      otherTimestamp: null,
+      mouseDown: false,
+      mobile: false
     }
   },
 
@@ -58,14 +52,14 @@ export default {
       return dates
     },
     anchorDayIdentifier () {
-      if (this.anchorTimestamp !== '') {
-        return getDayIdentifier(this.anchorTimestamp)
+      if (this.anchorTimestamp !== null) {
+        return QCalendar.getDayIdentifier(this.anchorTimestamp)
       }
       return false
     },
     otherDayIdentifier () {
-      if (this.otherTimestamp !== '') {
-        return getDayIdentifier(this.otherTimestamp)
+      if (this.otherTimestamp !== null) {
+        return QCalendar.getDayIdentifier(this.otherTimestamp)
       }
       return false
     },
@@ -80,14 +74,6 @@ export default {
   },
 
   methods: {
-    calendarNext () {
-      this.$refs.calendar.next()
-    },
-
-    calendarPrev () {
-      this.$refs.calendar.prev()
-    },
-
     styleDay (timestamp) {
       if (this.anchorDayIdentifier !== false && this.otherDayIdentifier !== false) {
         if (this.isBetween(timestamp) === true) {
@@ -100,12 +86,20 @@ export default {
     },
 
     isBetween (timestamp) {
-      const nowIdentifier = getDayIdentifier(timestamp)
+      const nowIdentifier = QCalendar.getDayIdentifier(timestamp)
       return this.lowIdentifier <= nowIdentifier && this.highIdentifier >= nowIdentifier
     },
 
     onMouseDownDay ({ scope, event }) {
       if (leftClick(event)) {
+        if (this.mobile === true &&
+          this.anchorTimestamp !== null &&
+          this.otherTimestamp !== null &&
+          this.anchorTimestamp.date === this.otherTimestamp.date) {
+          this.otherTimestamp = scope
+          this.mouseDown = false
+          return
+        }
         // mouse is down, start selection and capture current
         this.mouseDown = true
         this.anchorTimestamp = scope
@@ -123,7 +117,7 @@ export default {
 
     onMouseMoveDay ({ scope, event }) {
       if (this.mouseDown === true) {
-        this.otherTimestamp = event
+        this.otherTimestamp = scope
       }
     }
   }

@@ -27,8 +27,8 @@ Drag-and-Drop has been implemented. Give it a try. :)
       @change="onChange"
       style="height: calc(100vh - 300px); min-height: 400px;"
     >
-      <template #column-header-label="data">
-        <template v-if="data.id === 'over-due'">
+      <template #column-header-label="{ id, label }">
+        <template v-if="id === 'over-due'">
           <div class="row items-center no-wrap">
             <q-icon
               :name="overdueSelected ? 'check_box' : 'check_box_outline_blank'"
@@ -37,31 +37,31 @@ Drag-and-Drop has been implemented. Give it a try. :)
               style="font-size: 24px;"
               v-ripple
             />
-            <span class="ellipsis">{{ data.label }}</span>
+            <span class="ellipsis">{{ label }}</span>
           </div>
         </template>
         <template v-else>
           <div class="row items-center no-wrap">
-            <span class="ellipsis">{{ data.label }}</span>
+            <span class="ellipsis">{{ label }}</span>
           </div>
         </template>
       </template>
 
-      <template #day-header-label="day">
+      <template #day-header-label="{ timestamp }">
         <div class="row items-center no-wrap">
           <q-icon
-            :name="selected[day.weekday - 1] === true ? 'check_box' : 'check_box_outline_blank'"
-            :class="'cursor-pointer' + (selected[day.weekday - 1] ? ' text-red-8' : ' text-blue-8')"
-            @click.stop.prevent="$set(selected, day.weekday - 1, !selected[day.weekday - 1])"
+            :name="selected[timestamp.weekday - 1] === true ? 'check_box' : 'check_box_outline_blank'"
+            :class="'cursor-pointer' + (selected[timestamp.weekday - 1] ? ' text-red-8' : ' text-blue-8')"
+            @click.stop.prevent="$set(selected, timestamp.weekday - 1, !selected[timestamp.weekday - 1])"
             style="font-size: 24px;"
             v-ripple
           />
-          <span class="ellipsis">{{ weekdayFormatter(day, $q.screen.lt.lg) }}</span>
+          <span class="ellipsis">{{ weekdayFormatter(timestamp, $q.screen.lt.lg) }}</span>
         </div>
       </template>
 
-      <template #column-body="data">
-        <template v-if="data.id === 'over-due'">
+      <template #column-body="{ column }">
+        <template v-if="column.id === 'over-due'">
           <q-card class="q-mr-xs q-mb-xs q-px-sm row justify-between">
             <div class="cursor-pointer"><q-icon name="add"/>Add Job</div>
             <div class="cursor-pointer"><q-icon name="note_add" />Add Note</div>
@@ -69,13 +69,8 @@ Drag-and-Drop has been implemented. Give it a try. :)
           <div
             class="planner-column"
             data-column="overdue"
-            draggable
-            @dragend.stop="onDragEnd"
-            @dragenter.stop=" onDragEnter"
-            @dragleave.stop="onDragLeave"
             @dragover.stop="onDragOver"
             @drop.stop="onDrop"
-            @touchmove.stop="(e) => {}"
           >
             <transition-group name="planner-item">
               <template v-for="item in overdue">
@@ -98,7 +93,9 @@ Drag-and-Drop has been implemented. Give it a try. :)
                   @dragleave.stop.native="onDragLeave"
                   @dragover.stop.native="onDragOver"
                   @drop.stop.native="onDrop"
-                  @touchmove.stop.native="(e) => {}"
+                  @touchmove.stop.native="(e) => onTouchMove(e, item)"
+                  @touchstart.stop.native="(e) => onTouchStart(e, item)"
+                  @touchend.stop.native="onTouchEnd"
                 />
               </template>
             </transition-group>
@@ -106,24 +103,19 @@ Drag-and-Drop has been implemented. Give it a try. :)
         </template>
       </template>
 
-      <template #day-body="day">
+      <template #day-body="{ timestamp }">
         <q-card class="q-mr-xs q-mb-xs q-px-sm row justify-between">
           <div class="cursor-pointer"><q-icon name="add" />Add Job</div>
           <div class="cursor-pointer"><q-icon name="note_add" />Add Note</div>
         </q-card>
         <div
           class="planner-column"
-          :data-column="day.weekday"
-          draggable
-          @dragend.stop="onDragEnd"
-          @dragenter.stop=" onDragEnter"
-          @dragleave.stop="onDragLeave"
+          :data-column="timestamp.weekday"
           @dragover.stop="onDragOver"
           @drop.stop="onDrop"
-          @touchmove.stop="(e) => {}"
         >
           <transition-group name="planner-item">
-            <template v-for="item in getAgenda(day)">
+            <template v-for="item in getAgenda(timestamp)">
               <planner-item
                 :data-id="item.id"
                 :key="item.id"
@@ -143,7 +135,9 @@ Drag-and-Drop has been implemented. Give it a try. :)
                 @dragleave.stop.native="onDragLeave"
                 @dragover.stop.native="onDragOver"
                 @drop.stop.native="onDrop"
-                @touchmove.stop.native="(e) => {}"
+                @touchmove.stop.native="(e) => onTouchMove(e, item)"
+                @touchstart.stop.native="(e) => onTouchStart(e, item)"
+                @touchend.stop.native="onTouchEnd"
               />
             </template>
           </transition-group>
@@ -233,7 +227,7 @@ export default {
     this.today = this.formatDate() // save today's date
     this.todayTimestamp = parseTimestamp(this.today)
     this.setToday() // set calendar to today's date
-    this.generateLists()
+    // this.generateLists()
     // we do this here because we don't want it Vue reactive
     this.dragEl = null
     this.curColEl = null
@@ -243,6 +237,14 @@ export default {
     this.currentItem = null
     this.targetColumn = null
     this.targetItemId = null
+    this.copyElement = null
+    this.pageX = 0
+    this.pageY = 0
+  },
+
+  beforeDestroy () {
+    // just to make sure there are no memory leaks
+    this.cleanup()
   },
 
   computed: {
@@ -419,16 +421,19 @@ export default {
     },
 
     onDragStart (e, item) {
-      e.target.style.opacity = '0.4'
-      e.dataTransfer.setData('text/html', e.target.innerHTML)
-      this.dragEl = e.target
-      this.currentColumn = this.getColumnFromTarget(e.target)
-      this.getCurrentItemId = this.getItemIdFromTarget(e.target)
+      if (e.dataTransfer) {
+        e.dataTransfer.setData('text/html', e.currentTarget.innerHTML)
+      }
+      const child = this.getCorrectTarget(e.currentTarget, 'planner-item')
+      child.style.opacity = '0'
+      this.dragEl = child
+      this.currentColumn = this.getColumnFromTarget(child)
+      this.getCurrentItemId = this.getItemIdFromTarget(child)
       this.currentItem = item
     },
 
     onDragEnd (e) {
-      e.target.style.opacity = '1.0'
+      e.currentTarget.style.opacity = '1.0'
 
       if (this.curChildEl) {
         this.curChildEl.classList.remove('drag-over-item')
@@ -439,9 +444,11 @@ export default {
       }
     },
 
-    onDragEnter (e) {
-      const column = this.getCorrectTarget(e.target, 'planner-column')
-      const child = this.getCorrectTarget(e.target, 'planner-item')
+    onDragEnter (e, column, child) {
+      if (!column && !child) {
+        column = this.getCorrectTarget(e.currentTarget, 'planner-column')
+        child = this.getCorrectTarget(e.currentTarget, 'planner-item')
+      }
 
       // check column
       if (this.curColEl !== column) {
@@ -467,15 +474,7 @@ export default {
     },
 
     onDragLeave (e) {
-      // check column
-      if (this.curColEl && this.curColEl === e.target) {
-        this.curColEl.classList.remove('drag-over')
-      }
-
-      // check item
-      if (this.curChildEl && this.curChildEl === e.target) {
-        this.curChildEl.classList.remove('drag-over-item')
-      }
+      // nothing to do
     },
 
     onDragOver (e) {
@@ -483,20 +482,27 @@ export default {
         e.preventDefault() // Necessary. Allows us to drop.
       }
 
-      e.dataTransfer.dropEffect = 'move'
+      if (e.dataTransfer) {
+        e.dataTransfer.dropEffect = 'move'
+      }
+
+      this.onDragEnter(e)
 
       return false
     },
 
-    onDrop (e) {
-      const column = this.getCorrectTarget(e.target, 'planner-column')
-      const child = this.getCorrectTarget(e.target, 'planner-item')
+    onDrop (e, column, child) {
+      if (!column && !child) {
+        column = this.getCorrectTarget(e.currentTarget, 'planner-column')
+        child = this.getCorrectTarget(e.currentTarget, 'planner-item')
+      }
+
       const targetColumn = this.getColumnFromTarget(column)
       const targetItemId = this.getItemIdFromTarget(child)
 
       if (this.dragEl === child) {
         // no dropping on self
-        return
+        return false
       }
 
       if (this.curChildEl) {
@@ -510,24 +516,32 @@ export default {
       if (targetColumn) {
         // get current item column
         const currentColumnEl = this.getCorrectTarget(this.dragEl, 'planner-column')
-        const currentColumn = this.getColumnFromTarget(currentColumnEl)
+        if (currentColumnEl) {
+          const currentColumn = this.getColumnFromTarget(currentColumnEl)
 
-        // remove dragged item
-        this.removeFromColumn(currentColumn, this.currentItem.id)
+          // remove dragged item
+          this.removeFromColumn(currentColumn, this.currentItem.id)
 
-        // add dragged item to new location
-        this.addToColumn(targetColumn, targetItemId, this.currentItem)
+          // add dragged item to new location
+          this.addToColumn(targetColumn, targetItemId, this.currentItem)
 
-        // update selection status
-        if (targetColumn === 'overdue') {
-          this.overdue.forEach(due => { due.selected = this.overdueSelected })
-        } else {
-          this.agenda[targetColumn].forEach(ag => {
-            ag.selected = this.selected[targetColumn - 1]
-          })
+          // update selection status
+          if (targetColumn === 'overdue') {
+            this.overdue.forEach(due => { due.selected = this.overdueSelected })
+          } else {
+            this.agenda[targetColumn].forEach(ag => {
+              ag.selected = this.selected[targetColumn - 1]
+            })
+          }
         }
       }
 
+      this.cleanup()
+
+      return false
+    },
+
+    cleanup () {
       // release the dom nodes
       this.dragEl = null
       this.curColEl = null
@@ -537,8 +551,96 @@ export default {
       this.currentItem = null
       this.targetColumn = null
       this.targetItemId = null
+      this.copyElement = null
+      this.pageX = 0
+      this.pageY = 0
+    },
 
-      return false
+    moveElement (el, left, top) {
+      el.style.left = left + 'px'
+      el.style.top = top + 'px'
+    },
+
+    getTouchOffsets (el, left, top) {
+      const rect = el.getBoundingClientRect()
+      return { left: left - rect.width / 2, top: top - rect.height / 2 }
+    },
+
+    findTargets () {
+      let column, child
+      const els = document.elementsFromPoint(this.pageX, this.pageY)
+
+      for (let i = 0; i < els.length; ++i) {
+        const el = els[i]
+        if (el.classList.contains('planner-item')) {
+          child = el
+        } else if (el.classList.contains('planner-column')) {
+          column = el
+        }
+        if (column && child) break
+      }
+
+      return { column, child }
+    },
+
+    onTouchMove (e, item) {
+      const touchLocation = e.targetTouches[0]
+
+      const touchStart = this.copyElement === null
+
+      // assign box new coordinates based on the touch.
+      this.pageX = touchLocation.pageX
+      this.pageY = touchLocation.pageY
+
+      const { column, child } = this.findTargets()
+      if (column || child) {
+        if (touchStart) {
+          if (child) {
+            this.onDragStart(e, item)
+            this.copyElement = child.cloneNode(true)
+            this.copyElement.style.position = 'absolute'
+            this.copyElement.style.opacity = '0.5'
+          } else {
+            // fail - probably trying to drag a column
+            this.cleanup()
+            return
+          }
+        }
+
+        const { left, top } = this.getTouchOffsets(this.copyElement, this.pageX, this.pageY)
+
+        this.moveElement(this.copyElement, left, top)
+
+        // add the copy to the body
+        document.body.appendChild(this.copyElement)
+
+        this.onDragEnter(e, column, child)
+      }
+    },
+
+    onTouchStart (e, item) {
+      // we don't do anything here because we want the
+      // system to register a move, before we start things
+    },
+
+    onTouchEnd (e) {
+      if (this.copyElement) {
+        // remove the copy to the body
+        document.body.removeChild(this.copyElement)
+
+        const { column, child } = this.findTargets()
+        if (column || child) {
+          this.onDragEnd(e)
+
+          if (this.dragEl === child) {
+            // no dropping on self, restore it all
+            this.dragEl.style.opacity = '1.0'
+            this.cleanup()
+          } else {
+            this.onDrop(e, column, child)
+          }
+        }
+      }
     },
 
     getCorrectTarget (el, klass) {

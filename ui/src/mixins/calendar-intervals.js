@@ -122,10 +122,35 @@ export default {
       return updateMinutes(timestamp, minutes, this.times.now)
     },
 
+    getTimestampAtEventX (e, day) {
+      const timestamp = copyTimestamp(day)
+      const bounds = (e.currentTarget).getBoundingClientRect()
+      // const baseMinutes = this.startMinute
+      const touchEvent = e
+      const mouseEvent = e
+      const touches = touchEvent.changedTouches || touchEvent.touches
+      const clientX = touches && touches[0] ? touches[0].clientX : mouseEvent.clientX
+      const addIntervals = (clientX - bounds.left) / this.parsedIntervalWidth
+      const addMinutes = Math.floor(addIntervals * this.parsedIntervalMinutes)
+      const minutes = addMinutes + (day.hour * 60 + day.minute)
+
+      return updateMinutes(timestamp, minutes, this.times.now)
+    },
+
     getScopeForSlot (timestamp, idx) {
-      const scope = copyTimestamp(timestamp)
+      const scope = { timestamp: copyTimestamp(timestamp) }
       scope.timeStartPos = this.timeStartPos
       scope.timeDurationHeight = this.timeDurationHeight
+      if (idx !== void 0) {
+        scope.index = idx
+      }
+      return scope
+    },
+
+    getScopeForSlotX (timestamp, idx) {
+      const scope = { timestamp: copyTimestamp(timestamp) }
+      scope.timeStartPosX = this.timeStartPosX
+      scope.timeDurationWidth = this.timeDurationWidth
       if (idx !== void 0) {
         scope.index = idx
       }

@@ -763,7 +763,23 @@
     "show-day-of-year-label": {
       "type": "Boolean",
       "category": "content",
-      "desc": "Show the say of the year - this occurs in the top right of each day element. If show-month-label is true, then that day is skipped",
+      "desc": "Show the day of the year - this occurs in the top right of each day element. If show-month-label is true, then that day is skipped",
+      "applicable": [
+        "month"
+      ]
+    },
+    "enable-outside-days": {
+      "type": "Boolean",
+      "category": "behavior",
+      "desc": "By default, outside days are disabled in month view. Use the property to enable them.",
+      "applicable": [
+        "month"
+      ]
+    },
+    "hide-outside-days": {
+      "type": "Boolean",
+      "category": "behavior",
+      "desc": "Hide the labels of outside days",
       "applicable": [
         "month"
       ]
@@ -4232,7 +4248,7 @@
     "head-day": {
       "desc": "Replaces the complete internal day header",
       "scope": {
-        "day": {
+        "timestamp": {
           "type": "Object",
           "desc": "Timestamp object",
           "__exemption": [ "examples" ]
@@ -4265,9 +4281,14 @@
     "day-header": {
       "desc": "index is added if using `column-count` property",
       "scope": {
-        "day": {
+        "timestamp": {
           "type": "Object",
           "desc": "Timestamp object",
+          "__exemption": [ "examples" ]
+        },
+        "index": {
+          "type": "Number",
+          "desc": "If applicable, the index of the column-header",
           "__exemption": [ "examples" ]
         }
       },
@@ -4278,9 +4299,14 @@
     "day-header-label": {
       "desc": "Used to replace the label",
       "scope": {
-        "day": {
+        "timestamp": {
           "type": "Object",
           "desc": "Timestamp object",
+          "__exemption": [ "examples" ]
+        },
+        "shortWeekdayLabel": {
+          "type": "Boolean",
+          "desc": "True if `short-weekday-label` property is set",
           "__exemption": [ "examples" ]
         }
       },
@@ -4292,7 +4318,7 @@
     "day-body": {
       "desc": "index is added if using `column-count` property",
       "scope": {
-        "day": {
+        "timestamp": {
           "type": "Object",
           "desc": "Timestamp object",
           "__exemption": [ "examples" ]
@@ -4380,7 +4406,7 @@
     "column-header-before": {
       "desc": "Use to render items before the column header",
       "scope": {
-        "data": {
+        "timestamp": {
           "type": "Object",
           "desc": "Timestamp object",
           "__exemption": [ "examples" ]
@@ -4393,7 +4419,7 @@
     "column-header-after": {
       "desc": "Use to render items after the column header",
       "scope": {
-        "data": {
+        "timestamp": {
           "type": "Object",
           "desc": "Timestamp object",
           "__exemption": [ "examples" ]
@@ -4432,9 +4458,47 @@
           "desc": "The string of the dayLabel",
           "__exemption": [ "examples" ]
         },
-        "day": {
+        "timestamp": {
           "type": "Object",
-          "desc": "A destructured timestamp for the day of the slotted content",
+          "desc": "A timestamp for the day of the slotted content",
+          "__exemption": [ "examples" ]
+        },
+        "miniMode": {
+          "type": "Boolean",
+          "desc": "true if currently in mini-mode. Handle if you have set mini-mode to `auto`"
+        }
+      },
+      "applicable": [
+        "month"
+      ]
+    },
+    "day-btn": {
+      "addedIn": "v2.2.0",
+      "desc": "Use to replace the `day button`",
+      "scope": {
+        "dayLabel": {
+          "type": "String",
+          "desc": "The string of the dayLabel",
+          "__exemption": [ "examples" ]
+        },
+        "timestamp": {
+          "type": "Object",
+          "desc": "A timestamp for the day of the slotted content",
+          "__exemption": [ "examples" ]
+        },
+        "outside": {
+          "type": "Boolean",
+          "desc": "If this day is considered `outside` the current month",
+          "__exemption": [ "examples" ]
+        },
+        "selectedDate": {
+          "type": "Boolean",
+          "desc": "If this day is a selected date (applicable only for mini-mode)",
+          "__exemption": [ "examples" ]
+        },
+        "activeDate": {
+          "type": "Boolean",
+          "desc": "If this day is the currently selected date (v-model)",
           "__exemption": [ "examples" ]
         },
         "miniMode": {
@@ -4454,9 +4518,9 @@
           "desc": "The string of the monthLabel",
           "__exemption": [ "examples" ]
         },
-        "day": {
+        "timestamp": {
           "type": "Object",
-          "desc": "A destructured timestamp for the day of the slotted content",
+          "desc": "A timestamp for the day of the slotted content",
           "__exemption": [ "examples" ]
         },
         "miniMode": {
@@ -4471,7 +4535,7 @@
     "day-of-year": {
       "desc": "Use to replace the `day of year` label. Not applicable in `mini-mode`",
       "scope": {
-        "data": {
+        "timestamp": {
           "type": "Object",
           "desc": "Timestamp object",
           "__exemption": [ "examples" ]

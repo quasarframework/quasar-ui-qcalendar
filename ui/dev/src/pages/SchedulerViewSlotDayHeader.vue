@@ -1,24 +1,26 @@
 <template>
-  <q-calendar
-    v-model="selectedDate"
-    view="week-scheduler"
-    :resources="resources"
-    locale="en-us"
-    style="height: 500px;"
-  >
-    <template #scheduler-day-header="{ day }">
-      <div class="row justify-center items-center">
-        <q-btn class="fit">Day: {{ day.day }}</q-btn>
-      </div>
-    </template>
-  </q-calendar>
+  <div style="max-width: 800px; width: 100%;">
+    <q-calendar
+      v-model="selectedDate"
+      view="week-scheduler"
+      :resources="resources"
+      locale="en-us"
+      style="height: 500px;"
+    >
+      <template #scheduler-day-header="{ timestamp }">
+        <div class="row justify-center items-center">
+          <q-btn class="fit">Day: {{ timestamp.day }}</q-btn>
+        </div>
+      </template>
+    </q-calendar>
+  </div>
 </template>
 
 <script>
 export default {
   data () {
     return {
-      selectedDate: '2019-04-08',
+      selectedDate: '',
       resources: [
         { label: 'John' },
         { label: 'Mary' },

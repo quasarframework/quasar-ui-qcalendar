@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="max-width: 800px; width: 100%;">
     <q-toolbar>
       <q-btn stretch flat label="Prev" @click="prev" />
       <q-separator vertical />
@@ -95,7 +95,7 @@
 export default {
   data () {
     return {
-      selectedDate: '2019-04-01',
+      selectedDate: '',
       columnCount: 3,
       totalPages: 2,
       currentPage: 0

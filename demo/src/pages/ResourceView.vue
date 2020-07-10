@@ -64,8 +64,12 @@ For slots that return `day`, `interval` or `timestamp`, it looks like this:
 ```
 
 You can use the slots `resource-intervals` and `resource-interval` to control visual aspects of your event system.
+
 The example below is using the `resource-label` slot to indicate there are events in that time interval, in case it is not visible, indicating to the user they should scroll sideways to see the event.
+
 The `resource-intervals` slot is used to get information about the date and time of an event and then to calculate where the absolute position of the event based on passed in functions `timeStartPosX` and `timeDurationWidth`.
+
+Scroll until you see 10:00am to see example.
       </q-markdown>
     </example-viewer>
 

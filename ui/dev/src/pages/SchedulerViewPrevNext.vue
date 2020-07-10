@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="max-width: 800px; width: 100%;">
     <q-toolbar>
       <q-btn stretch flat label="Prev" @click="calendarPrev" />
       <q-separator vertical />
@@ -7,17 +7,18 @@
       <q-space />
     </q-toolbar>
     <q-separator />
-    <q-calendar
-      ref="calendar"
-      v-model="selectedDate"
-      view="week-scheduler"
-      :resources="resources"
-      locale="en-us"
-      animated
-      transition-prev="slide-right"
-      transition-next="slide-left"
-      style="height: 400px;"
-    />
+    <div style="overflow: hidden">
+      <q-calendar
+        ref="calendar"
+        v-model="selectedDate"
+        view="week-scheduler"
+        :resources="resources"
+        locale="en-us"
+        animated
+        transition-prev="slide-right"
+        transition-next="slide-left"
+      />
+    </div>
   </div>
 </template>
 
@@ -25,7 +26,7 @@
 export default {
   data () {
     return {
-      selectedDate: '2019-04-01',
+      selectedDate: '',
       resources: [
         { label: 'John' },
         { label: 'Mary' },
@@ -47,9 +48,3 @@ export default {
   }
 }
 </script>
-
-<style lang="sass">
-.q-active-date
-  color: blue
-  background: #CCCCFF
-</style>

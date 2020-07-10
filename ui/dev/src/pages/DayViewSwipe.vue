@@ -1,5 +1,5 @@
 <template>
-  <div style="overflow: hidden;">
+  <div style="overflow: hidden; max-width: 800px; width: 100%;">
     <q-calendar
       ref="calendar"
       v-model="selectedDate"
@@ -20,7 +20,7 @@
 export default {
   data () {
     return {
-      selectedDate: '2019-04-01',
+      selectedDate: '',
       dragging: false, // used for drag-and-drop
       ignoreNextSwipe: false // used for drag-and-drop
     }
@@ -45,6 +45,7 @@ export default {
           this.ignoreNextSwipe = false
         }
       }
+      // stopAndPrevent(evt)
       evt.cancelable !== false && evt.preventDefault()
       evt.stopPropagation()
     }

@@ -63,8 +63,7 @@ export default {
     },
 
     getScopeForSlot (timestamp, idx, resource) {
-      const scope = {}
-      scope.day = copyTimestamp(timestamp)
+      const scope = { timestamp: copyTimestamp(timestamp) }
       if (idx !== void 0) {
         scope.index = idx
       }

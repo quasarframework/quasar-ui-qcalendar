@@ -24,6 +24,12 @@ Also, regardless of `mini-mode` all slots associated with month view now have ad
     <example-viewer title="Basic" file="MiniModeBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Bordered" file="MiniModeBordered" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Dark" file="MiniModeDark" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Enable Outside Days" file="MiniModeEnableOutsideDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+      <q-markdown>
+Outside days, in month view, are those days before and after the currently displayed month. By default, these days are disable to avoid navigation issues when getting selected days from the User. Using the `enable-outside-days` property enables these days.
+      </q-markdown>
+    </example-viewer>
+    <example-viewer title="Hide Outside Days" file="MiniModeHideOutsideDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Short Weekday Label" file="MiniModeShortWeekdayLabel" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Breakpoint" file="MiniModeBreakpoint" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
@@ -135,6 +141,8 @@ export default {
     this.addToToc('Basic', 2)
     this.addToToc('Bordered', 2)
     this.addToToc('Dark', 2)
+    this.addToToc('Enable Outside Days', 2)
+    this.addToToc('Hide Outside Days', 2)
     this.addToToc('Short Weekday Label', 2)
     this.addToToc('Breakpoint', 2)
     this.addToToc('Dynamic Breakpoint', 2)

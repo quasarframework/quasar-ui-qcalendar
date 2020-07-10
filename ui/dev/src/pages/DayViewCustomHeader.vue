@@ -1,16 +1,18 @@
 <template>
-  <div>
+  <div style="max-width: 800px; width: 100%;">
     <div class="title-bar row items-center">
       <q-btn flat color="white" icon="fas fa-chevron-left" style="height: 100%" @click="onPrev" />
-      <div class="row justify-between items-center text-white" style="width: calc(100% - 112px)">
-        <div v-for="day in days" :key="day.date" class="col-auto" :style="dayStyle">
-          <q-btn flat class="row justify-center" style="line-height: unset;" @click="selectedDate = day.date">
-            <div class="text-center" style="width: 100%;">{{ monthFormatter(day, true) }}</div>
-            <div class="text-center text-bold" style="width: 100%;  font-size: 16px;">{{ dayFormatter(day, false) }}</div>
-            <div class="text-center" style="width: 100%; font-size: 10px;">{{ weekdayFormatter(day, true) }}</div>
-          </q-btn>
+      <transition :name="transition" appear>
+        <div :key="parsedStart.date" class="row justify-between items-center text-white" style="width: calc(100% - 112px)">
+          <div v-for="day in days" :key="day.date" class="col-auto" :style="dayStyle">
+            <q-btn flat :class="dayClass(day)" style="line-height: unset;" @click="selectedDate = day.date; transition = ''">
+              <div class="text-center" style="width: 100%;">{{ monthFormatter(day, true) }}</div>
+              <div class="text-center text-bold" style="width: 100%;  font-size: 16px;">{{ dayFormatter(day, false) }}</div>
+              <div class="text-center" style="width: 100%; font-size: 10px;">{{ weekdayFormatter(day, true) }}</div>
+            </q-btn>
+          </div>
         </div>
-      </div>
+      </transition>
       <q-btn flat color="white" icon="fas fa-chevron-right" style="height: 100%" @click="onNext" />
     </div>
     <q-calendar
@@ -26,22 +28,15 @@
 </template>
 
 <script>
-import {
-  parseDate,
-  parseTimestamp,
-  getWeekdaySkips,
-  getStartOfWeek,
-  getEndOfWeek,
-  createDayList,
-  createNativeLocaleFormatter,
-  addToDate
-} from '@quasar/quasar-ui-qcalendar'
+// normally you would not import "all" of QCalendar, but is needed for this example to work with UMD (codepen)
+import QCalendar from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
+
 const CURRENT_DAY = new Date()
 
 function getCurrentDay (day) {
   const newDay = new Date(CURRENT_DAY)
   newDay.setDate(day)
-  const tm = parseDate(newDay)
+  const tm = QCalendar.parseDate(newDay)
   return tm.date
 }
 
@@ -65,32 +60,32 @@ export default {
 
   computed: {
     weekdaySkips () {
-      return getWeekdaySkips(this.weekdays)
+      return QCalendar.getWeekdaySkips(this.weekdays)
     },
 
     parsedStart () {
       if (this.selectedDate) {
-        return getStartOfWeek(parseTimestamp(this.selectedDate), this.weekdays, this.today)
+        return QCalendar.getStartOfWeek(QCalendar.parseTimestamp(this.selectedDate), this.weekdays, this.today)
       }
       return void 0
     },
 
     parsedEnd () {
       if (this.selectedDate) {
-        return getEndOfWeek(parseTimestamp(this.selectedDate), this.weekdays, this.today)
+        return QCalendar.getEndOfWeek(QCalendar.parseTimestamp(this.selectedDate), this.weekdays, this.today)
       }
       return void 0
     },
 
     today () {
       const newDay = new Date(CURRENT_DAY)
-      const tm = parseDate(newDay)
+      const tm = QCalendar.parseDate(newDay)
       return tm
     },
 
     days () {
       if (this.parsedStart && this.parsedEnd) {
-        return createDayList(
+        return QCalendar.createDayList(
           this.parsedStart,
           this.parsedEnd,
           this.today,
@@ -109,22 +104,30 @@ export default {
 
   methods: {
     onPrev () {
-      const ts = addToDate(this.parsedStart, { day: -7 })
+      const ts = QCalendar.addToDate(this.parsedStart, { day: -7 })
       this.selectedDate = ts.date
       this.transition = 'q-transition--' + this.transitionPrev
     },
 
     onNext () {
-      const ts = addToDate(this.parsedStart, { day: 7 })
+      const ts = QCalendar.addToDate(this.parsedStart, { day: 7 })
       this.selectedDate = ts.date
       this.transition = 'q-transition--' + this.transitionNext
+    },
+
+    dayClass (day) {
+      return {
+        row: true,
+        'justify-center': true,
+        'selected-date': this.selectedDate === day.date
+      }
     },
 
     monthFormatterFunc () {
       const longOptions = { timeZone: 'UTC', month: 'long' }
       const shortOptions = { timeZone: 'UTC', month: 'short' }
 
-      return createNativeLocaleFormatter(
+      return QCalendar.createNativeLocaleFormatter(
         this.locale,
         (_tms, short) => short ? shortOptions : longOptions
       )
@@ -134,7 +137,7 @@ export default {
       const longOptions = { timeZone: 'UTC', weekday: 'long' }
       const shortOptions = { timeZone: 'UTC', weekday: 'short' }
 
-      return createNativeLocaleFormatter(
+      return QCalendar.createNativeLocaleFormatter(
         this.locale,
         (_tms, short) => short ? shortOptions : longOptions
       )
@@ -144,7 +147,7 @@ export default {
       const longOptions = { timeZone: 'UTC', day: '2-digit' }
       const shortOptions = { timeZone: 'UTC', day: 'numeric' }
 
-      return createNativeLocaleFormatter(
+      return QCalendar.createNativeLocaleFormatter(
         this.locale,
         (_tms, short) => short ? shortOptions : longOptions
       )
@@ -157,8 +160,12 @@ export default {
 .title-bar
   width: 100%
   height: 70px
-  background: $accent
+  background: #9c27b0
   display: flex
   flex-direction: row
   flex: 1
+
+.selected-date
+  color: #9c27b0
+  background: white
 </style>

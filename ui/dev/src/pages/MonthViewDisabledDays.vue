@@ -1,12 +1,11 @@
 <template>
-  <div style="overflow: auto">
+  <div style="max-width: 800px; width: 100%; overflow: auto; ">
     <q-calendar
       v-model="selectedDate"
       view="month"
       :disabled-days="disabledDays"
       :day-style="modifiedStyle"
       locale="en-us"
-      style="height: 400px;"
     />
   </div>
 </template>

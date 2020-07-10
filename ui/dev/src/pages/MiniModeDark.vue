@@ -1,13 +1,15 @@
 <template>
-  <q-calendar
-    v-model="selectedDate"
-    view="month"
-    mini-mode="auto"
-    breakpoint="sm"
-    locale="en-us"
-    dark
-    style="height: 300px;"
-  />
+  <div class="row justify-center q-pa-md" style="max-width: 800px; width: 100%; overflow: hidden;">
+    <q-calendar
+      ref="calendar"
+      v-model="selectedDate"
+      view="month"
+      locale="en-us"
+      mini-mode
+      dark
+      style="max-width: 300px; min-width: auto; overflow: hidden"
+    />
+  </div>
 </template>
 
 <script>

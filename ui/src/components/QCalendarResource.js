@@ -92,7 +92,10 @@ export default {
           maxWidth: width,
           minWidth: width,
           height
-        }
+        },
+        on: this.getDefaultMouseEventHandlers(':interval', event => {
+          return { interval, index, label, event }
+        })
       }), label)
     },
 
@@ -232,7 +235,7 @@ export default {
           height
         },
         on: this.getDefaultMouseEventHandlers(':resource', event => {
-          return { scope, event }
+          return { resource, index: idx, event }
         })
       }), [
         slot ? slot(scope) : this.__renderResourceText(h, resource)
@@ -264,6 +267,7 @@ export default {
     __renderResourceInterval (h, resource, interval) {
       // called for each interval
       const slot = this.$scopedSlots['resource-interval']
+      const slotData = { resource, interval }
       const width = convertToUnit(this.parsedIntervalWidth)
       const height = convertToUnit(this.parsedResourceHeight)
       return h('div', {
@@ -272,9 +276,13 @@ export default {
           maxWidth: width,
           minWidth: width,
           height
-        }
+        },
+        on: this.getDefaultMouseEventHandlers(':time', event => {
+          const scope = this.getScopeForSlotX(this.getTimestampAtEventX(event, interval))
+          return { scope, resource, event }
+        })
       }, [
-        slot && slot({ resource, interval })
+        slot && slot(slotData)
       ])
     },
 

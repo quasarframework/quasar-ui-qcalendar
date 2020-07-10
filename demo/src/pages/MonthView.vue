@@ -7,6 +7,12 @@
     <example-viewer title="Basic" file="MonthViewBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Dark" file="MonthViewDark" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Color" file="MonthViewColor" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Enable Outside Days" file="MonthViewEnableOutsideDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+      <q-markdown>
+Outside days, in month view, are those days before and after the currently displayed month. By default, these days are disable to avoid navigation issues when getting selected days from the User. Using the `enable-outside-days` property enables these days.
+      </q-markdown>
+    </example-viewer>
+    <example-viewer title="Hide Outside Days" file="MonthViewHideOutsideDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="First Day Monday" file="MonthViewMondayFirstDay" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="5 Day Work Week" file="MonthViewFiveDayWorkWeek" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Hide Header" file="MonthViewHideHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
@@ -145,6 +151,8 @@ export default {
     this.addToToc('Basic', 2)
     this.addToToc('Dark', 2)
     this.addToToc('Color', 2)
+    this.addToToc('Enable Outside Days', 2)
+    this.addToToc('Hide Outside Days', 2)
     this.addToToc('First Day Monday', 2)
     this.addToToc('5 Day Work Week', 2)
     this.addToToc('Hide Header', 2)

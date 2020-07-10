@@ -1,12 +1,15 @@
 <template>
-  <q-calendar
-    v-model="selectedDate"
-    :weekdays="[1, 2, 3, 4, 5]"
-    mini-mode="auto"
-    breakpoint="sm"
-    view="month"
-    locale="en-us"
-  />
+  <div class="row justify-center q-pa-md" style="max-width: 800px; width: 100%; overflow: hidden;">
+    <q-calendar
+      ref="calendar"
+      v-model="selectedDate"
+      :weekdays="[1, 2, 3, 4, 5]"
+      mini-mode
+      view="month"
+      locale="en-us"
+      style="max-width: 300px; min-width: auto; overflow: hidden"
+    />
+  </div>
 </template>
 
 <script>

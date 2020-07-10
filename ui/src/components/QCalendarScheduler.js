@@ -232,8 +232,12 @@ export default {
     __renderHeadDayBtn (h, day, idx) {
       const colorCurrent = day.current === true ? this.color : void 0
       const activeDate = this.value === day.date
+      const dayLabel = this.dayFormatter(day, false)
+      const dayLabelSlot = this.$scopedSlots['day-label']
+      const dayBtnSlot = this.$scopedSlots['day-btn']
+      const scope = { timestamp: day, idx }
+      const slotData = Object.assign(scope, { dayLabel, activeDate })
 
-      const scope = { day, idx }
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
       if (this.enableTheme === true) {
@@ -251,7 +255,7 @@ export default {
         updateColors = this.setBothColors
       }
 
-      return h(QBtn, updateColors(colorCurrent !== void 0 ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
+      return dayBtnSlot ? dayBtnSlot(slotData) : h(QBtn, updateColors(colorCurrent !== void 0 ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
         staticClass: 'q-calendar-scheduler__head-day-label',
         class: [
           {
@@ -273,12 +277,14 @@ export default {
           'click:date': { event: 'click', stop: true },
           'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false }
         }, _event => scope)
-      }), this.dayFormatter(day, false))
+      }), [
+        dayLabelSlot ? dayLabelSlot(slotData) : dayLabel
+      ])
     },
 
     __renderColumnHeaderBefore (h, day, idx) {
       const slot = this.$scopedSlots['scheduler-column-header-before']
-      const scope = { ...day }
+      const scope = { timestamp: day }
       scope.index = idx
       return h('div', {
         staticClass: 'q-calendar-scheduler__column-header--before'
@@ -289,7 +295,7 @@ export default {
 
     __renderColumnHeaderAfter (h, day, idx) {
       const slot = this.$scopedSlots['scheduler-column-header-after']
-      const scope = { ...day }
+      const scope = { timestamp: day }
       scope.index = idx
       return h('div', {
         staticClass: 'q-calendar-scheduler__column-header--after'
@@ -406,7 +412,7 @@ export default {
       let dragOver
 
       let style = { height: height }
-      style = Object.assign(style, styler(scope))
+      style = Object.assign(style, styler(day))
 
       const data = {
         key: resource[this.resourceKey] + '-' + idx,

@@ -1,5 +1,5 @@
 <template>
-  <div style="overflow: hidden;">
+  <div style="max-width: 800px; width: 100%; overflow: hidden;">
     <q-calendar
       ref="calendar"
       v-model="selectedDate"
@@ -9,7 +9,7 @@
       animated
       transition-prev="slide-right"
       transition-next="slide-left"
-      style="height: 400px;"
+      style="overflow: hidden;"
     />
   </div>
 </template>
@@ -20,7 +20,7 @@
 export default {
   data () {
     return {
-      selectedDate: '2019-04-01',
+      selectedDate: '',
       dragging: false, // used for drag-and-drop
       ignoreNextSwipe: false // used for drag-and-drop
     }

@@ -186,6 +186,7 @@ export default {
     __renderHeadWeekday (h, day) {
       const slot = this.$scopedSlots['day-header-label']
       const scope = this.getScopeForSlot(day)
+      scope.shortWeekdayLabel = this.shortWeekdayLabel
       const colorCurrent = day.current === true ? this.color : void 0
 
       let colors = new Map(), color, backgroundColor
@@ -221,6 +222,10 @@ export default {
     __renderHeadDayBtn (h, day) {
       const colorCurrent = day.current === true ? this.color : void 0
       const activeDate = this.value === day.date
+      const dayLabel = this.dayFormatter(day, false)
+      const dayLabelSlot = this.$scopedSlots['day-label']
+      const dayBtnSlot = this.$scopedSlots['day-btn']
+      const slotData = { dayLabel, timestamp: day, activeDate }
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
@@ -239,7 +244,7 @@ export default {
         updateColors = this.setBothColors
       }
 
-      return h(QBtn, updateColors(colorCurrent !== void 0 ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
+      return dayBtnSlot ? dayBtnSlot(slotData) : h(QBtn, updateColors(colorCurrent !== void 0 ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
         staticClass: 'q-calendar-daily__head-day-label',
         class: [
           {
@@ -261,12 +266,14 @@ export default {
           'click:date': { event: 'click', stop: true },
           'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false }
         }, _event => day)
-      }), this.dayFormatter(day, false))
+      }), [
+        dayLabelSlot ? dayLabelSlot(slotData) : dayLabel
+      ])
     },
 
     __renderColumnHeaderBefore (h, day, idx) {
       const slot = this.$scopedSlots['column-header-before']
-      const scope = { ...day }
+      const scope = { timestamp: day }
       scope.index = idx
       return h('div', {
         staticClass: 'q-calendar-daily__column-header--before'
@@ -277,7 +284,7 @@ export default {
 
     __renderColumnHeaderAfter (h, day, idx) {
       const slot = this.$scopedSlots['column-header-after']
-      const scope = { ...day }
+      const scope = { timestamp: day }
       scope.index = idx
       return h('div', {
         staticClass: 'q-calendar-daily__column-header--after'
@@ -417,12 +424,12 @@ export default {
         domProps: {
           ondragover: (e) => {
             if (this.dragOverFunc !== void 0) {
-              dragOver = this.dragOverFunc(e, interval, 'interval')
+              dragOver = this.dragOverFunc(e, interval, 'interval', idx)
             }
           },
           ondrop: (e) => {
             if (this.dropFunc !== void 0) {
-              this.dropFunc(e, interval, 'interval')
+              this.dropFunc(e, interval, 'interval', idx)
             }
           }
         }
