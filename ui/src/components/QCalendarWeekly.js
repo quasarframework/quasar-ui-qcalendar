@@ -357,8 +357,11 @@ export default {
       const dayLabel = this.dayFormatter(day, false)
       const slot = this.$scopedSlots['day-label']
       const slotData = { dayLabel, ...day, miniMode: this.isMiniMode }
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
+
+      // return if outside days are hidden
+      if (outside && this.hideOutsideDays === true) {
+        return ''
+      }
 
       const selectedDate = (
         this.isMiniMode &&
@@ -401,7 +404,7 @@ export default {
           dense: true,
           noCaps: true,
           outline: day.current === true,
-          disable: day.disabled === true || outside === true
+          disable: day.disabled === true || (outside === true && this.enableOutsideDays !== true)
         },
         on: this.getMouseEventHandlers({
           'click:date': { event: 'click', stop: true },

@@ -764,6 +764,18 @@
       "type": "Boolean",
       "category": "content",
       "desc": "Show the say of the year - this occurs in the top right of each day element. If show-month-label is true, then that day is skipped",
+    "enable-outside-days": {
+      "type": "Boolean",
+      "category": "behavior",
+      "desc": "By default, outside days are disabled in month view. Use the property to enable them.",
+      "applicable": [
+        "month"
+      ]
+    },
+    "hide-outside-days": {
+      "type": "Boolean",
+      "category": "behavior",
+      "desc": "Hide the labels of outside days",
       "applicable": [
         "month"
       ]
