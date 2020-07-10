@@ -763,7 +763,11 @@
     "show-day-of-year-label": {
       "type": "Boolean",
       "category": "content",
-      "desc": "Show the say of the year - this occurs in the top right of each day element. If show-month-label is true, then that day is skipped",
+      "desc": "Show the day of the year - this occurs in the top right of each day element. If show-month-label is true, then that day is skipped",
+      "applicable": [
+        "month"
+      ]
+    },
     "enable-outside-days": {
       "type": "Boolean",
       "category": "behavior",
