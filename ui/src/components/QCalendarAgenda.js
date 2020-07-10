@@ -199,7 +199,7 @@ export default {
 
     __renderColumn (h, column, idx) {
       const slot = this.$scopedSlots['column-body']
-      const scope = column
+      const scope = { column, index: idx }
       const width = this.computedWidth
       let dragOver
 
