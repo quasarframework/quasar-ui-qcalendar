@@ -417,12 +417,12 @@ export default {
         domProps: {
           ondragover: (e) => {
             if (this.dragOverFunc !== void 0) {
-              dragOver = this.dragOverFunc(e, interval, 'interval')
+              dragOver = this.dragOverFunc(e, interval, 'interval', idx)
             }
           },
           ondrop: (e) => {
             if (this.dropFunc !== void 0) {
-              this.dropFunc(e, interval, 'interval')
+              this.dropFunc(e, interval, 'interval', idx)
             }
           }
         }
