@@ -221,6 +221,10 @@ export default {
     __renderHeadDayBtn (h, day) {
       const colorCurrent = day.current === true ? this.color : void 0
       const activeDate = this.value === day.date
+      const dayLabel = this.dayFormatter(day, false)
+      const dayLabelSlot = this.$scopedSlots['day-label']
+      const dayBtnSlot = this.$scopedSlots['day-btn']
+      const slotData = { dayLabel, timestamp: day, activeDate }
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
@@ -239,7 +243,7 @@ export default {
         updateColors = this.setBothColors
       }
 
-      return h(QBtn, updateColors(colorCurrent !== void 0 ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
+      return dayBtnSlot ? dayBtnSlot(slotData) : h(QBtn, updateColors(colorCurrent !== void 0 ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
         staticClass: 'q-calendar-daily__head-day-label',
         class: [
           {

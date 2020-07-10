@@ -356,7 +356,7 @@ export default {
       const colorCurrent = day.current === true ? this.color : void 0
       const dayLabel = this.dayFormatter(day, false)
       const slot = this.$scopedSlots['day-label']
-      const slotData = { dayLabel, ...day, miniMode: this.isMiniMode }
+      const dayBtnSlot = this.$scopedSlots['day-btn']
 
       // return if outside days are hidden
       if (outside && this.hideOutsideDays === true) {
@@ -370,6 +370,8 @@ export default {
         this.selectedDates.includes(day.date)
       )
       const activeDate = this.value === day.date
+
+      const slotData = { dayLabel, timestamp: day, outside, selectedDate, activeDate, miniMode: this.isMiniMode }
 
       if (this.enableTheme === true) {
         if (outside === true) {
@@ -389,7 +391,7 @@ export default {
         updateColors = this.setBothColors
       }
 
-      return h(QBtn, updateColors(colorCurrent !== void 0 ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
+      return dayBtnSlot ? dayBtnSlot(slotData) : h(QBtn, updateColors(colorCurrent !== void 0 ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
         staticClass: 'q-calendar-weekly__day-label',
         class: [
           {
