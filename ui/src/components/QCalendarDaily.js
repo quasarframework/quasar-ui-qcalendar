@@ -265,12 +265,14 @@ export default {
           'click:date': { event: 'click', stop: true },
           'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false }
         }, _event => day)
-      }), this.dayFormatter(day, false))
+      }), [
+        dayLabelSlot ? dayLabelSlot(slotData) : dayLabel
+      ])
     },
 
     __renderColumnHeaderBefore (h, day, idx) {
       const slot = this.$scopedSlots['column-header-before']
-      const scope = { ...day }
+      const scope = { timestamp: day }
       scope.index = idx
       return h('div', {
         staticClass: 'q-calendar-daily__column-header--before'
@@ -281,7 +283,7 @@ export default {
 
     __renderColumnHeaderAfter (h, day, idx) {
       const slot = this.$scopedSlots['column-header-after']
-      const scope = { ...day }
+      const scope = { timestamp: day }
       scope.index = idx
       return h('div', {
         staticClass: 'q-calendar-daily__column-header--after'

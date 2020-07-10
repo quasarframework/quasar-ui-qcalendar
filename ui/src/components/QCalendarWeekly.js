@@ -1,7 +1,5 @@
 // Quasar
-import {
-  QBtn
-} from 'quasar'
+import { QBtn } from 'quasar'
 
 // Mixins
 import CalendarBase from '../mixins/calendar-base.js'
@@ -175,7 +173,7 @@ export default {
     __renderHeadDay (h, day, index) {
       const width = 100 / this.weekdays.length + '%'
       const headDaySlot = this.$scopedSlots['head-day']
-      const slotData = { day, index, miniMode: this.isMiniMode }
+      const slotData = { timestamp: day, index, miniMode: this.isMiniMode }
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
       if (this.enableTheme === true) {
@@ -286,7 +284,7 @@ export default {
       const styler = this.dayStyle || this.dayStyleDefault
       const outside = this.isOutside(day)
       const slot = this.$scopedSlots.day
-      const slotData = { outside, ...day, miniMode: this.isMiniMode }
+      const slotData = { outside, timestamp: day, miniMode: this.isMiniMode }
       const hasMonth = (outside === false && this.days.find(d => d.month === day.month).day === day.day && this.showMonthLabel === true)
 
       let dragOver
@@ -355,7 +353,7 @@ export default {
       const outside = this.isOutside(day)
       const colorCurrent = day.current === true ? this.color : void 0
       const dayLabel = this.dayFormatter(day, false)
-      const slot = this.$scopedSlots['day-label']
+      const dayLabelSlot = this.$scopedSlots['day-label']
       const dayBtnSlot = this.$scopedSlots['day-btn']
 
       // return if outside days are hidden
@@ -372,6 +370,9 @@ export default {
       const activeDate = this.value === day.date
 
       const slotData = { dayLabel, timestamp: day, outside, selectedDate, activeDate, miniMode: this.isMiniMode }
+
+      let colors = new Map(), color, backgroundColor
+      let updateColors = this.useDefaultTheme
 
       if (this.enableTheme === true) {
         if (outside === true) {
@@ -413,14 +414,14 @@ export default {
           'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false }
         }, _event => day)
       }), [
-        slot ? slot(slotData) : dayLabel
+        dayLabelSlot ? dayLabelSlot(slotData) : dayLabel
       ])
     },
 
     __renderDayOfYearLabel (h, day) {
       const color = day.current === true ? this.color : void 0
       const slot = this.$scopedSlots['day-of-year']
-      const slotData = { ...day }
+      const slotData = { timestamp: day }
 
       return h('div', this.setTextColor(color, {
         staticClass: 'q-calendar-weekly__day-month--day-of-year'
@@ -431,7 +432,7 @@ export default {
       const color = day.current === true ? this.color : void 0
       const slot = this.$scopedSlots['month-label']
       const monthLabel = this.monthFormatter(day, this.shortMonthLabel)
-      const slotData = { monthLabel, ...day, miniMode: this.isMiniMode }
+      const slotData = { monthLabel, timestamp: day, miniMode: this.isMiniMode }
 
       return h('div', this.setTextColor(color, {
         staticClass: 'q-calendar-weekly__day-month'

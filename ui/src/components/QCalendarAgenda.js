@@ -252,7 +252,7 @@ export default {
 
     __renderDay (h, day, dayIndex, idx) {
       const slot = this.$scopedSlots['day-body']
-      const scope = { ...day }
+      const scope = { timestamp: day }
       const width = this.computedWidth
       let dragOver
 
