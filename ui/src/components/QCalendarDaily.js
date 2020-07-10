@@ -186,6 +186,7 @@ export default {
     __renderHeadWeekday (h, day) {
       const slot = this.$scopedSlots['day-header-label']
       const scope = this.getScopeForSlot(day)
+      scope.shortWeekdayLabel = this.shortWeekdayLabel
       const colorCurrent = day.current === true ? this.color : void 0
 
       let colors = new Map(), color, backgroundColor
