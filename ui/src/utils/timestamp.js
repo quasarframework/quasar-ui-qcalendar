@@ -20,7 +20,7 @@ export const MILLISECONDS_IN_MINUTE = 60000
 
 /* eslint-disable no-multi-spaces */
 export const Timestamp = {
-  date: '',       // YYYY-mm-dd
+  date: '',       // YYYY-MM-DD
   time: '',       // 00:00:00 (optional)
   year: 0,        // YYYY
   month: 0,       // mm (Jan = 1, etc)
@@ -126,9 +126,9 @@ export function validateTimestamp (input) {
   return !!PARSE_REGEX.exec(input)
 }
 
-// low-level parser (fast) for YYYY-mm-dd hh:mm:ss, use 'parseTimestamp' for formatted and relative updates
+// low-level parser (fast) for YYYY-MM-DD hh:mm:ss, use 'parseTimestamp' for formatted and relative updates
 export function parsed (input) {
-  // YYYY-mm-dd hh:mm:ss
+  // YYYY-MM-DD hh:mm:ss
   const parts = PARSE_REGEX.exec(input)
 
   if (!parts) return null
@@ -153,7 +153,7 @@ export function parsed (input) {
   }
 }
 
-// high-level parser (slower) for YYYY-mm-dd hh:mm:ss
+// high-level parser (slower) for YYYY-MM-DD hh:mm:ss
 export function parseTimestamp (input, now) {
   const timestamp = parsed(input)
   if (timestamp === null) return null
@@ -382,7 +382,7 @@ export function getTime (timestamp) {
   return `${padNumber(timestamp.hour, 2)}:${padNumber(timestamp.minute, 2)}`
 }
 
-// get date/time in "YYYY-mm-dd HH:mm" format
+// get date/time in "YYYY-MM-DD HH:mm" format
 export function getDateTime (timestamp) {
   return getDate(timestamp) + (timestamp.hasTime ? ' ' + getTime(timestamp) : '')
 }

@@ -118,12 +118,12 @@
       }
     },
     "validateTimestamp": {
-      "desc": "Validates the passed in date/time string (YYYY-mm-dd hh:mm:ss)",
+      "desc": "Validates the passed in date/time string (YYYY-MM-DD hh:mm:ss)",
       "params": {
         "input": {
           "type": "String",
           "required": true,
-          "desc": "A date/time string in the form `YYYY-mm-dd hh:mm:ss` (seconds are optional)",
+          "desc": "A date/time string in the form `YYYY-MM-DD hh:mm:ss` (seconds are optional)",
           "examples": [
             "2020-10-02 15:00"
           ]
@@ -140,7 +140,7 @@
         "input": {
           "type": "String",
           "required": true,
-          "desc": "A date/time string in the form `YYYY-mm-dd hh:mm:ss` (seconds are optional)",
+          "desc": "A date/time string in the form `YYYY-MM-DD hh:mm:ss` (seconds are optional)",
           "examples": [
             "2020-10-02 15:00"
           ]
@@ -158,7 +158,7 @@
         "input": {
           "type": "String",
           "required": true,
-          "desc": "A date/time string in the form `YYYY-mm-dd hh:mm:ss` (seconds are optional)",
+          "desc": "A date/time string in the form `YYYY-MM-DD hh:mm:ss` (seconds are optional)",
           "examples": [
             "2020-10-02 15:00"
           ]
@@ -395,12 +395,12 @@
         },
         "disabledBefore": {
           "type": "String",
-          "desc": "A date in the form `YYYY-mm-dd` where all dates before, and including, will be disabled",
+          "desc": "A date in the form `YYYY-MM-DD` where all dates before, and including, will be disabled",
           "__exemption": [ "examples" ]
         },
         "disabledAfter": {
           "type": "String",
-          "desc": "A date in the form `YYYY-mm-dd` where all dates after, and including, will be disabled",
+          "desc": "A date in the form `YYYY-MM-DD` where all dates after, and including, will be disabled",
           "__exemption": [ "examples" ]
         },
         "disabledWeekdays": {
@@ -586,7 +586,7 @@
       },
       "returns": {
         "type": "String",
-        "desc": "A date as a padded value in the form `YYYY-mm-dd`. Instead of `2020-1-2`, this function formats it as `2020-01-02`",
+        "desc": "A date as a padded value in the form `YYYY-MM-DD`. Instead of `2020-1-2`, this function formats it as `2020-01-02`",
         "__exemption": [ "examples" ]
       },
     "__exemption": [ "examples" ]
@@ -621,7 +621,7 @@
       },
       "returns": {
         "type": "String",
-        "desc": "A date and time as a padded value in the form `YYYY-mm-dd hh:mm`. Instead of `2020-1-2`, this function formats it as `2020-01-02`",
+        "desc": "A date and time as a padded value in the form `YYYY-MM-DD hh:mm`. Instead of `2020-1-2`, this function formats it as `2020-01-02`",
         "__exemption": [ "examples" ]
       },
     "__exemption": [ "examples" ]
@@ -854,12 +854,12 @@
         },
         "disabledBefore": {
           "type": "String",
-          "desc": "A date in the form `YYYY-mm-dd` where all dates before, and including, will be disabled",
+          "desc": "A date in the form `YYYY-MM-DD` where all dates before, and including, will be disabled",
           "__exemption": [ "examples" ]
         },
         "disabledAfter": {
           "type": "String",
-          "desc": "A date in the form `YYYY-mm-dd` where all dates after, and including, will be disabled",
+          "desc": "A date in the form `YYYY-MM-DD` where all dates after, and including, will be disabled",
           "__exemption": [ "examples" ]
         },
         "disabledWeekdays": {
@@ -873,7 +873,7 @@
         "disabledDays": {
           "type": "Array",
           "default": "[]",
-          "desc": "An array of string dates in the form `YYYY-mm-dd` that representing disabled days",
+          "desc": "An array of string dates in the form `YYYY-MM-DD` that representing disabled days",
           "__exemption": [ "examples" ]
         },
         "max": {

@@ -67,7 +67,7 @@ export default {
     return {
       /* eslint-disable no-multi-spaces */
       timestamp: {
-        date: '',       // YYYY-mm-dd
+        date: '',       // YYYY-MM-DD
         time: '',       // 00:00:00 (optional)
         year: 2019,     // YYYY
         month: 1,       // mm (Jan = 1, etc)

@@ -6,7 +6,7 @@
     "value": {
       "type": "String",
       "category": "model",
-      "desc": "v-model; When set as `YYYY-mm-dd`, the calendar will display the current view on this date. If empty, then it will be changed to the current date which will be emitted",
+      "desc": "v-model; When set as `YYYY-MM-DD`, the calendar will display the current view on this date. If empty, then it will be changed to the current date which will be emitted",
       "required": true,
       "default": "now",
       "applicable": [
@@ -117,7 +117,7 @@
     "disabled-days": {
       "type": "Array",
       "category": "model",
-      "desc": "An array of string dates in the form `YYYY-mm-dd` that will be disabled",
+      "desc": "An array of string dates in the form `YYYY-MM-DD` that will be disabled",
       "applicable": [
         "All"
       ],
@@ -128,7 +128,7 @@
     "disabled-before": {
       "type": "String",
       "category": "model",
-      "desc": "A date in the form `YYYY-mm-dd` where all dates before, and including, will be disabled",
+      "desc": "A date in the form `YYYY-MM-DD` where all dates before, and including, will be disabled",
       "applicable": [
         "All"
       ],
@@ -139,7 +139,7 @@
     "disabled-after": {
       "type": "String",
       "category": "model",
-      "desc": "A date in the form `YYYY-mm-dd` where all dates after, and including, will be disabled",
+      "desc": "A date in the form `YYYY-MM-DD` where all dates after, and including, will be disabled",
       "applicable": [
         "All"
       ],
@@ -880,7 +880,7 @@
       "type": "Array",
       "category": "behavior",
       "addedIn": "v1.2.0",
-      "desc": "An array of two dates in format `YYYY-mm-dd` for selection purposes",
+      "desc": "An array of two dates in format `YYYY-MM-DD` for selection purposes",
       "applicable": [
         "month"
       ],
@@ -892,7 +892,7 @@
       "type": "Array",
       "category": "model",
       "addedIn": "v1.3.14",
-      "desc": "An array of string dates in the form `YYYY-mm-dd` that will be selected",
+      "desc": "An array of string dates in the form `YYYY-MM-DD` that will be selected",
       "applicable": [
         "month"
       ],
@@ -1017,7 +1017,7 @@
       "params": {
         "value": {
           "type": "String",
-          "desc": "In `YYYY-mm-dd` format",
+          "desc": "In `YYYY-MM-DD` format",
           "required": true,
           "__exemption": [ "examples" ]
         }
@@ -4732,7 +4732,7 @@
       "scope": {
         "date": {
           "type": "String",
-          "desc": "The current date (YYYY-mm-dd)",
+          "desc": "The current date (YYYY-MM-DD)",
           "examples": [
             "2020-05-30"
           ]

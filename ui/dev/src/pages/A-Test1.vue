@@ -44,7 +44,7 @@ export default {
   },
   beforeMount () {
     const now = new Date()
-    // set initially to today's date (YYYY-mm-dd)
+    // set initially to today's date (YYYY-MM-DD)
     this.date = now.getFullYear() + '-' + (this.padNumber(now.getMonth() + 1, 2)) + '-' + this.padNumber(now.getDay(), 2)
   },
 
