@@ -12,21 +12,45 @@ QCalendar is a [Quasar](https://quasar.dev) component. It is a powerful calendar
 
 **Month view with events**
 
-![QCalendar example month view](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/src/public/qcalendar-month-view.png)
+![QCalendar example month view](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/public/qcalendar-month-view.png)
 
 **Planner example**
 
-![QCalendar example planner](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/src/public/qcalendar-agenda-view--planner.png)
+![QCalendar example planner](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/public/qcalendar-agenda-view--planner.png)
 
 **Monthly Mini-mode**
 
-![QCalendar example planner](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/src/public/q-calendar-month-view-mini-mode-with-selection.png)
+![QCalendar example planner](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/public/q-calendar-month-view-mini-mode-with-selection.png)
+
+**Multi-month selector (mini-mode)**
+
+![QCalendar example planner](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/public/qcalendar-month-view-mini-mode-multi-month-selection.png)
+
+**Agenda view with custom content**
+
+![QCalendar example planner](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/public/qcalendar-agenda-view.png)
+
+**Day view with events**
+
+![QCalendar example planner](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/public/qcalendar-day-view.png)
+
+**Resource view with events**
+
+![QCalendar example planner](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/public/qcalendar-resource-view.png)
+
+**Scheduler view**
+
+![QCalendar example planner](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/public/qcalendar-scheduler-view.png)
+
+Including support for locales, optional theming, 1st day Monday, 5-day work weeks, work week numbers, selected days, disabled days, day of year...
+
+...and many more!
 
 # Structure
 
 * [/ui](ui) - standalone npm package (go here for more information)
 * [/app-extension](app-extension) - Quasar app extension
-* [/demo](demo) - docs, demo and examples project
+* [/demo](demo) - sources for docs, demo and examples project
 * [live demo](https://quasarframework.github.io/quasar-ui-qcalendar/docs) - live docs, demo and examples
 
 # Demo Workflow
