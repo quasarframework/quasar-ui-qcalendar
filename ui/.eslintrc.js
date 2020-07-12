@@ -7,7 +7,8 @@ module.exports = {
   },
 
   env: {
-    browser: true
+    browser: true,
+    jest: true
   },
 
   extends: [
