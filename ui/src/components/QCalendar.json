@@ -117,7 +117,7 @@
     "disabled-days": {
       "type": "Array",
       "category": "model",
-      "desc": "An array of string dates in the form `YYYY-MM-DD` that will be disabled",
+      "desc": "An array of string dates in the form `YYYY-MM-DD` that will be disabled. If an array is contained within the array with a start and end date, it will be treated as a range",
       "applicable": [
         "All"
       ],

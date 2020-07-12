@@ -1,10 +1,22 @@
 <template>
-  <div class="row justify-center q-pa-md" style="max-width: 800px; width: 100%;">
+  <div class="row justify-center q-pa-md q-gutter-sm" style="max-width: 800px; width: 100%;">
     <q-calendar
       ref="calendar"
       v-model="selectedDate"
       view="month"
+      bordered
       :disabled-days="disabledDays"
+      mini-mode
+      :day-style="modifiedStyle"
+      locale="en-us"
+      style="max-width: 300px; min-width: auto; overflow: hidden"
+    />
+    <q-calendar
+      ref="calendar"
+      v-model="selectedDate"
+      view="month"
+      bordered
+      :disabled-days="disabledDays2"
       mini-mode
       :day-style="modifiedStyle"
       locale="en-us"
@@ -23,7 +35,11 @@ export default {
         '2019-04-03',
         '2019-04-04',
         '2019-04-05'
-      ]
+      ],
+      disabledDays2: [[
+        '2019-04-02',
+        '2019-04-05'
+      ]]
     }
   },
   methods: {

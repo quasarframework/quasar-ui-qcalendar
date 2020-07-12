@@ -423,9 +423,10 @@
         "disabledDays": {
           "type": "Array",
           "required": true,
-          "desc": "An array of disabled days",
+          "desc": "An array of disabled days. If an array is contained within the array with a start and end date, it will be treated as a range",
           "examples": [
-            "['2020-01-01', '2020-07-04']"
+            "['2020-01-01', '2020-07-04']",
+            "['2020-01-01', ['2020-07-04', '2020-07-11']]"
           ]
         }
       },

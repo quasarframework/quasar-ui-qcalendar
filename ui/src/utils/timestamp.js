@@ -298,10 +298,19 @@ export function updateDisabled (timestamp, disabledBefore, disabledAfter, disabl
 
   if (timestamp.disabled !== true && Array.isArray(disabledDays) && disabledDays.length > 0) {
     for (const day in disabledDays) {
-      const d = getDayIdentifier(parseTimestamp(disabledDays[day] + ' 00:00'))
-      if (d === t) {
-        timestamp.disabled = true
-        break
+      if (Array.isArray(disabledDays[day]) && disabledDays[day].length === 2) {
+        const start = parsed(disabledDays[day][0])
+        const end = parsed(disabledDays[day][1])
+        if (isBetweenDates(timestamp, start, end)) {
+          timestamp.disabled = true
+          break
+        }
+      } else {
+        const d = getDayIdentifier(parseTimestamp(disabledDays[day] + ' 00:00'))
+        if (d === t) {
+          timestamp.disabled = true
+          break
+        }
       }
     }
   }
