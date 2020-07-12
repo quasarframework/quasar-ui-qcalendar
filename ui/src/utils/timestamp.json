@@ -3,6 +3,15 @@
     "docsUrl": "https://quasarframework.github.io/quasar-ui-qcalendar/docs"
   },
   "methods": {
+    "today": {
+      "addedIn": "v2.2.1",
+      "desc": "Returns today's date in YYYY-MM-DD format",
+      "returns": {
+        "type": "String",
+        "desc": "Returns today's date in YYYY-MM-DD format",
+        "__exemption": [ "examples" ]
+      }
+    },
     "getStartOfWeek": {
       "desc": "Returns the start of the week based on the passed in arguments",
       "params": {

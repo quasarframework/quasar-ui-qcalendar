@@ -44,6 +44,15 @@ export const TimeObject = {
 }
 /* eslint-enable no-multi-spaces */
 
+export function today () {
+  const d = new Date(),
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear()
+
+  return [year, padNumber(month, 2), padNumber(day, 2)].join('-')
+}
+
 // get the start of the week (based on weekdays)
 export function getStartOfWeek (timestamp, weekdays, today) {
   const start = copyTimestamp(timestamp)
@@ -364,7 +373,7 @@ export function padNumber (x, length) {
   return padded
 }
 
-// get date in YYY-mm-dd format
+// get date in YYYY-MM-DD format
 export function getDate (timestamp) {
   let str = `${padNumber(timestamp.year, 4)}-${padNumber(timestamp.month, 2)}`
 
@@ -725,6 +734,7 @@ export default {
   MILLISECONDS_IN_MINUTE,
   Timestamp,
   TimeObject,
+  today,
   getStartOfWeek,
   getEndOfWeek,
   getStartOfMonth,
