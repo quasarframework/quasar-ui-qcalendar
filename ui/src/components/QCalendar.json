@@ -769,6 +769,7 @@
       ]
     },
     "enable-outside-days": {
+      "addedIn": "v2.2.0",
       "type": "Boolean",
       "category": "behavior",
       "desc": "By default, outside days are disabled in month view. Use the property to enable them.",
@@ -777,6 +778,7 @@
       ]
     },
     "hide-outside-days": {
+      "addedIn": "v2.2.0",
       "type": "Boolean",
       "category": "behavior",
       "desc": "Hide the labels of outside days",
