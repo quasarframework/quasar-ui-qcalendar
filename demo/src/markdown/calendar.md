@@ -171,7 +171,7 @@ Can be found [here](https://github.com/quasarframework/quasar-ui-qcalendar/tree/
 
 In order to get the best potential from QCalendar it is important to understand all aspects which will be described below.
 
-First and foremost, the native date format used internally, and with the v-model, is `YYYY-mm-dd`. This is to avoid confusion with positioning of the day and month in other date formats as well as date separator. All incoming and outgoing dates will use this format.
+First and foremost, the native date format used internally, and with the v-model, is `YYYY-MM-DD`. This is to avoid confusion with positioning of the day and month in other date formats as well as date separator. All incoming and outgoing dates will use this format.
 
 The default locale of QCalendar is **en-us**. This can easily be changed via the `locale` property. Any area of QCalendar that displays text and numbers is locale-aware via the browser's Internationalization (Intl) API.
 
@@ -605,7 +605,7 @@ There is a lot of Scoped Slots support in QCalendar. Scoped Slots allows you to 
 The `timestamp` object looks like this:
 ```js
 {
-  date: '',       // YYYY-mm-dd
+  date: '',       // YYYY-MM-DD
   time: '',       // 00:00:00 (optional)
   year: 0,        // YYYY
   month: 0,       // mm (Jan = 1, etc)
@@ -628,7 +628,7 @@ The `timestamp` object looks like this:
 
 QCalendar has a lot of events. The normal events are:
 
-`@input => function(value)`: This is the value used by `v-model` and in the form `YYYY-mm-dd`
+`@input => function(value)`: This is the value used by `v-model` and in the form `YYYY-MM-DD`
 
 `@change => function(start, end)`: Emitted when the calendar dates change. For instance, if in month view, the `start` contains the timestamp object for the 1st of the month, and `end` contains the timestamp object for the last day of the month. For `week` view it’s the first day of the displayed week and last day of the displayed week
 

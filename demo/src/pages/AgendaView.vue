@@ -18,7 +18,7 @@ Remember, the data displayed below is slotted content, so you can be as creative
 For slots that return `day`, `interval` or `timestamp`, it looks like this:
 ```js
 {
-  date: '',       // YYYY-mm-dd
+  date: '',       // YYYY-MM-DD
   time: '',       // 00:00:00 (optional)
   year: 0,        // YYYY
   month: 0,       // mm (Jan = 1, etc)

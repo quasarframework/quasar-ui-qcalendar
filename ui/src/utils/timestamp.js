@@ -20,7 +20,7 @@ export const MILLISECONDS_IN_MINUTE = 60000
 
 /* eslint-disable no-multi-spaces */
 export const Timestamp = {
-  date: '',       // YYYY-mm-dd
+  date: '',       // YYYY-MM-DD
   time: '',       // 00:00:00 (optional)
   year: 0,        // YYYY
   month: 0,       // mm (Jan = 1, etc)
@@ -43,6 +43,15 @@ export const TimeObject = {
   minute: 0 // Number
 }
 /* eslint-enable no-multi-spaces */
+
+export function today () {
+  const d = new Date(),
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear()
+
+  return [year, padNumber(month, 2), padNumber(day, 2)].join('-')
+}
 
 // get the start of the week (based on weekdays)
 export function getStartOfWeek (timestamp, weekdays, today) {
@@ -126,9 +135,9 @@ export function validateTimestamp (input) {
   return !!PARSE_REGEX.exec(input)
 }
 
-// low-level parser (fast) for YYYY-mm-dd hh:mm:ss, use 'parseTimestamp' for formatted and relative updates
+// low-level parser (fast) for YYYY-MM-DD hh:mm:ss, use 'parseTimestamp' for formatted and relative updates
 export function parsed (input) {
-  // YYYY-mm-dd hh:mm:ss
+  // YYYY-MM-DD hh:mm:ss
   const parts = PARSE_REGEX.exec(input)
 
   if (!parts) return null
@@ -153,7 +162,7 @@ export function parsed (input) {
   }
 }
 
-// high-level parser (slower) for YYYY-mm-dd hh:mm:ss
+// high-level parser (slower) for YYYY-MM-DD hh:mm:ss
 export function parseTimestamp (input, now) {
   const timestamp = parsed(input)
   if (timestamp === null) return null
@@ -289,10 +298,19 @@ export function updateDisabled (timestamp, disabledBefore, disabledAfter, disabl
 
   if (timestamp.disabled !== true && Array.isArray(disabledDays) && disabledDays.length > 0) {
     for (const day in disabledDays) {
-      const d = getDayIdentifier(parseTimestamp(disabledDays[day] + ' 00:00'))
-      if (d === t) {
-        timestamp.disabled = true
-        break
+      if (Array.isArray(disabledDays[day]) && disabledDays[day].length === 2) {
+        const start = parsed(disabledDays[day][0])
+        const end = parsed(disabledDays[day][1])
+        if (isBetweenDates(timestamp, start, end)) {
+          timestamp.disabled = true
+          break
+        }
+      } else {
+        const d = getDayIdentifier(parseTimestamp(disabledDays[day] + ' 00:00'))
+        if (d === t) {
+          timestamp.disabled = true
+          break
+        }
       }
     }
   }
@@ -364,7 +382,7 @@ export function padNumber (x, length) {
   return padded
 }
 
-// get date in YYY-mm-dd format
+// get date in YYYY-MM-DD format
 export function getDate (timestamp) {
   let str = `${padNumber(timestamp.year, 4)}-${padNumber(timestamp.month, 2)}`
 
@@ -382,7 +400,7 @@ export function getTime (timestamp) {
   return `${padNumber(timestamp.hour, 2)}:${padNumber(timestamp.minute, 2)}`
 }
 
-// get date/time in "YYYY-mm-dd HH:mm" format
+// get date/time in "YYYY-MM-DD HH:mm" format
 export function getDateTime (timestamp) {
   return getDate(timestamp) + (timestamp.hasTime ? ' ' + getTime(timestamp) : '')
 }
@@ -725,6 +743,7 @@ export default {
   MILLISECONDS_IN_MINUTE,
   Timestamp,
   TimeObject,
+  today,
   getStartOfWeek,
   getEndOfWeek,
   getStartOfMonth,
