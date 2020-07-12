@@ -4064,13 +4064,19 @@
       "params": {
         "count": {
           "type": "Number",
-          "desc": "The amount of iterations to move (negative for backwards, positive for forwards)",
+          "desc": "The amount of iterations to move (negative for backwards, positive for forwards). If value is 0, emits `today's date` to v-model",
           "examples": [
             "-5 (moves 5 iterations backward - if in `month` view, this would be -5 months",
             "5 (moves 5 iterations forward - if in `day` view, this would be 5 days"
           ]
         }
       }
+    },
+    "moveToToday": {
+      "addedIn": "v2.2.1",
+      "desc": "Emits `today's date` to v-model",
+      "applicable": [ "All"],
+      "__exemption": [ "examples" ]
     },
     "updateCurrent": {
       "desc": "Update various values to be consistent with current date",

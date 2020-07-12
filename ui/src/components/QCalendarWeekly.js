@@ -367,6 +367,7 @@ export default {
         this.selectedDates.length > 0 &&
         this.selectedDates.includes(day.date)
       )
+
       const activeDate = this.value === day.date
 
       const slotData = { dayLabel, timestamp: day, outside, selectedDate, activeDate, miniMode: this.isMiniMode }

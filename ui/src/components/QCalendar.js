@@ -6,6 +6,7 @@ import props from '../utils/props.js'
 import {
   DAYS_IN_MONTH_MAX,
   DAY_MIN,
+  today,
   parseTimestamp,
   relativeDays,
   nextDay,
@@ -180,6 +181,10 @@ export default {
     },
 
     move (amount = 1) {
+      if (amount === 0) {
+        this.moveToToday()
+        return
+      }
       const moved = copyTimestamp(this.parsedValue)
       const forward = amount > 0
       const mover = forward ? nextDay : prevDay
@@ -264,6 +269,10 @@ export default {
 
       this.$emit('input', moved.date)
       this.$emit('moved', moved)
+    },
+
+    moveToToday () {
+      this.$emit('input', today())
     },
 
     next (amount = 1) {
