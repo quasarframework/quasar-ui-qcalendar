@@ -38,7 +38,7 @@
     "eslint-plugin-quasar": "^1.0.0",
     "eslint-plugin-standard": "^4.0.1",
     "eslint-plugin-vue": "^6.2.2",
-    "quasar-app-extension-example-viewer": "^0.0.25",
+    "quasar-app-extension-example-viewer": "^1.0.0",
     "quasar-app-extension-json-api-viewer": "^1.0.15",
     "raw-loader": "^4.0.1"
   },
