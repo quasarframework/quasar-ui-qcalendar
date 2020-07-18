@@ -16,10 +16,10 @@
   "dependencies": {
     "@quasar/extras": "^1.8.2",
     "drag-drop-touch": "^1.3.1",
-    "quasar": "^1.12.9"
+    "quasar": "^1.12.12"
   },
   "devDependencies": {
-    "@quasar/app": "^2.0.4",
+    "@quasar/app": "^2.0.6",
     "@quasar/quasar-app-extension-qiconpicker": "^1.2.2",
     "@quasar/quasar-app-extension-qmarkdown": "^1.0.29",
     "@quasar/quasar-app-extension-qribbon": "^1.0.0-beta.15",
@@ -29,7 +29,7 @@
     "devtron": "^1.4.0",
     "electron": "^9.1.0",
     "electron-debug": "^3.1.0",
-    "electron-devtools-installer": "^3.1.0",
+    "electron-devtools-installer": "^3.1.1",
     "eslint": "^7.4.0",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-import": "^2.22.0",
@@ -38,8 +38,8 @@
     "eslint-plugin-quasar": "^1.0.0",
     "eslint-plugin-standard": "^4.0.1",
     "eslint-plugin-vue": "^6.2.2",
-    "quasar-app-extension-example-viewer": "^0.0.25",
-    "quasar-app-extension-json-api-viewer": "^1.0.15",
+    "quasar-app-extension-example-viewer": "^1.0.0",
+    "quasar-app-extension-json-api-viewer": "^1.0.16",
     "raw-loader": "^4.0.1"
   },
   "engines": {
