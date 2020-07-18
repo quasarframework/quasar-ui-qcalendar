@@ -118,9 +118,9 @@ export default {
         // return [...new Array(parseInt(this.columnCount, 10))]
         return Array.apply(null, new Array(parseInt(this.columnCount, 10)))
           .map((_, i) => i + parseInt(this.columnIndexStart, 10))
-          .map((idx) => this.__renderHeadDay(h, this.days[0], idx))
+          .map(idx => this.__renderHeadDay(h, this.days[0], idx))
       } else {
-        return this.days.map((day) => this.__renderHeadDay(h, day))
+        return this.days.map(day => this.__renderHeadDay(h, day))
       }
     },
 
@@ -149,7 +149,7 @@ export default {
       }
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
-        key: day.date + (idx !== void 0 ? `-${idx}` : ''),
+        key: day.date + (idx !== void 0 ? '-' + idx : ''),
         staticClass: 'q-calendar-daily__head-day',
         class: {
           ...this.getRelativeClasses(day),
@@ -355,7 +355,7 @@ export default {
       if (this.days.length === 1 && this.columnCount && parseInt(this.columnCount, 10) > 0) {
         return Array.apply(null, new Array(parseInt(this.columnCount, 10)))
           .map((_, i) => i + parseInt(this.columnIndexStart, 10))
-          .map((i) => this.__renderDay(h, this.days[0], 0, i))
+          .map(i => this.__renderDay(h, this.days[0], 0, i))
       } else {
         return this.days.map((day, index) => this.__renderDay(h, day, index))
       }
@@ -384,7 +384,7 @@ export default {
       }
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
-        key: day.date + (idx !== void 0 ? `:${idx}` : ''),
+        key: day.date + (idx !== void 0 ? ':' + idx : ''),
         staticClass: 'q-calendar-daily__day',
         class: this.getRelativeClasses(day),
         style: {

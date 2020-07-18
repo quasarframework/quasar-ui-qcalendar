@@ -232,7 +232,7 @@ export default {
         }, [
           h('div', {
             staticClass: 'q-calendar-weekly__week-days'
-          }, week.map((day) => this.__renderDay(h, day))),
+          }, week.map(day => this.__renderDay(h, day))),
           slot !== void 0 ? h('div', {
             staticClass: 'q-calendar-weekly__week-events'
           }, slot(slotData)) : ''

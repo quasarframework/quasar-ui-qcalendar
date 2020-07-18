@@ -64,12 +64,12 @@ export default {
         return [
           Array.apply(null, new Array(parseInt(this.columnCount, 10)))
             .map((_, i) => i + parseInt(this.columnIndexStart, 10))
-            .map((idx) => this.__renderHeadDay(h, this.days[0], idx))
+            .map(idx => this.__renderHeadDay(h, this.days[0], idx))
         ]
       } else {
         return [
           this.leftColumnOptionsValid === true && this.leftColumnOptions.map((column, _i) => this.__renderColumnHead(h, column, _i)),
-          this.days.map((day) => this.__renderHeadDay(h, day)),
+          this.days.map(day => this.__renderHeadDay(h, day)),
           this.rightColumnOptionsValid === true && this.rightColumnOptions.map((column, _i) => this.__renderColumnHead(h, column, _i))
         ]
       }
@@ -115,7 +115,7 @@ export default {
       }
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
-        key: (this.columnOptionsId !== void 0 ? column[this.columnOptionsId] : column.id) + (idx !== void 0 ? `-${idx}` : ''),
+        key: (this.columnOptionsId !== void 0 ? column[this.columnOptionsId] : column.id) + (idx !== void 0 ? '-' + idx : ''),
         staticClass: 'q-calendar-daily__head-day',
         class: {
           'q-column-day': true,
@@ -221,7 +221,7 @@ export default {
       }
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
-        key: (this.columnOptionsId !== void 0 ? column[this.columnOptionsId] : column.id) + '-body-' + (idx !== void 0 ? `:${idx}` : ''),
+        key: (this.columnOptionsId !== void 0 ? column[this.columnOptionsId] : column.id) + '-body-' + (idx !== void 0 ? ':' + idx : ''),
         staticClass: 'q-calendar-daily__day',
         class: {
           'q-column-day': true,
@@ -274,7 +274,7 @@ export default {
       }
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
-        key: day.date + (idx !== void 0 ? `:${idx}` : ''),
+        key: day.date + (idx !== void 0 ? ':' + idx : ''),
         staticClass: 'q-calendar-daily__day',
         class: {
           ...this.getRelativeClasses(day),
