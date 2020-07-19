@@ -28,12 +28,12 @@
     "@vue/eslint-config-standard": "^5.1.2",
     "babel-eslint": "^10.1.0",
     "devtron": "^1.4.0",
-    "electron": "^9.1.0",
-    "electron-debug": "^3.1.0",
-    "electron-devtools-installer": "^3.1.1",
-    "eslint": "^7.4.0",
+    "electron": "^9.0.0",
+    "electron-debug": "^3.0.1",
+    "electron-devtools-installer": "^3.0.0",
+    "eslint": "^7.5.0",
+    "eslint-config-standard": "^14.1.1",
     "eslint-loader": "^4.0.2",
-    "eslint-config-standard": "^14.1.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
@@ -59,10 +59,5 @@
     "last 8 FirefoxAndroid versions",
     "last 10 iOS versions",
     "last 5 Opera versions"
-  ],
-  "engines": {
-    "node": ">= 10.18.1",
-    "npm": ">= 6.13.4",
-    "yarn": ">= 1.21.1"
-  }
+  ]
 }
