@@ -171,7 +171,7 @@ Can be found [here](https://github.com/quasarframework/quasar-ui-qcalendar/tree/
 
 In order to get the best potential from QCalendar it is important to understand all aspects which will be described below.
 
-First and foremost, the native date format used internally, and with the v-model, is `YYYY-MM-DD`. This is to avoid confusion with positioning of the day and month in other date formats as well as date separator. All incoming and outgoing dates will use this format.
+First and foremost, the date format used with the v-model, is `YYYY-MM-DD`. This is to avoid confusion with positioning of the day and month in other date formats as well as date separator. All incoming and outgoing dates will use this format.
 
 The default locale of QCalendar is **en-us**. This can easily be changed via the `locale` property. Any area of QCalendar that displays text and numbers is locale-aware via the browser's Internationalization (Intl) API.
 
@@ -183,7 +183,7 @@ You would need to build out your own way of allowing the User to interact with Q
 
 # QCalendar views
 
-QCalendar is made from four distict components: **day**, **month**, **scheduler**, **resource** and **agenda** views. All other views derive from these four views. For instance, the **week** view is really a 7-**day** view with contraints.
+QCalendar is made from five distict components: **day**, **month**, **scheduler**, **resource** and **agenda** views. All other views derive from these views. For instance, the **week** view is really a 7-**day** view with contraints.
 
 Not only all these, but the **month** view has a **mini-mode** behavior.
 

@@ -6,11 +6,10 @@
           flat
           dense
           round
+          icon="menu"
           @click="leftDrawerOpen = !leftDrawerOpen"
           aria-label="Menu"
-        >
-          <q-icon name="menu" />
-        </q-btn>
+        />
 
         <q-toolbar-title>
           QCalendar <span class="text-subtitle2">v{{ version }}</span>

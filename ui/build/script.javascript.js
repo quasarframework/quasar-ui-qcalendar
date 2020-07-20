@@ -56,7 +56,8 @@ const builds = [
       },
       output: {
         file: resolve('../dist/index.common.js'),
-        format: 'cjs'
+        format: 'cjs',
+        exports: 'auto'
       }
     },
     build: {

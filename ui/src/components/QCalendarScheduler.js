@@ -131,9 +131,9 @@ export default {
       if (this.days.length === 1 && this.columnCount && parseInt(this.columnCount, 10) > 0) {
         return Array.apply(null, new Array(parseInt(this.columnCount, 10)))
           .map((_, i) => i + parseInt(this.columnIndexStart, 10))
-          .map((idx) => this.__renderHeadDay(h, this.days[0], idx))
+          .map(idx => this.__renderHeadDay(h, this.days[0], idx))
       } else {
-        return this.days.map((day) => this.__renderHeadDay(h, day))
+        return this.days.map(day => this.__renderHeadDay(h, day))
       }
     },
 
@@ -162,7 +162,7 @@ export default {
       }
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
-        key: day.date + (idx !== void 0 ? `-${idx}` : ''),
+        key: day.date + (idx !== void 0 ? '-' + idx : ''),
         staticClass: 'q-calendar-scheduler__head-day',
         class: {
           ...this.getRelativeClasses(day),
@@ -363,7 +363,7 @@ export default {
       if (this.days.length === 1 && this.columnCount && parseInt(this.columnCount, 10) > 0) {
         return Array.apply(null, new Array(parseInt(this.columnCount, 10)))
           .map((_, i) => i + parseInt(this.columnIndexStart, 10))
-          .map((i) => this.__renderDay(h, this.days[0], 0, i))
+          .map(i => this.__renderDay(h, this.days[0], 0, i))
       } else {
         return this.days.map((day, index) => this.__renderDay(h, day, index))
       }
@@ -389,7 +389,7 @@ export default {
       }
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
-        key: day.date + (idx !== void 0 ? `:${idx}` : ''),
+        key: day.date + (idx !== void 0 ? ':' + idx : ''),
         staticClass: 'q-calendar-scheduler__day',
         class: this.getRelativeClasses(day),
         style: {
@@ -401,7 +401,7 @@ export default {
     },
 
     __renderDayResources (h, day, idx) {
-      return this.resources.map((resource) => this.__renderDayResource(h, resource, day, idx))
+      return this.resources.map(resource => this.__renderDayResource(h, resource, day, idx))
     },
 
     __renderDayResource (h, resource, day, idx) {
