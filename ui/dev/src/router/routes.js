@@ -12,6 +12,13 @@ const routes = [
     children: [
       { path: '', component: () => import('pages/Index.vue') }
     ].concat(children)
+  },
+
+  // Always leave this as last one,
+  // but you can also remove it
+  {
+    path: '*',
+    component: () => import('pages/Error404.vue')
   }
 ]
 
