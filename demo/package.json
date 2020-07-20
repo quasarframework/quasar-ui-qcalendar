@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "description": "QCalendar docs, examples and demo site",
   "productName": "QCalendar demo app",
-  "cordovaId": "org.cordova.quasar.app",
   "author": "Jeff Galbraith <jeff@quasar.dev>",
   "private": true,
   "scripts": {
