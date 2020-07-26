@@ -1,8 +1,8 @@
 {
   "name": "@quasar/quasar-ui-qcalendar",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "author": "Jeff Galbraith <jeff@quasar.dev>",
-  "description": "QCalendar - Day/Month/Week Calendars, Popups, Schedules, Agendas and Planners for your Quasar Apps",
+  "description": "QCalendar - Day/Month/Week Calendars, Popups, Date Pickers, Schedules, Agendas and Planners for your Quasar Apps",
   "license": "MIT",
   "module": "dist/index.esm.js",
   "main": "dist/index.common.js",
