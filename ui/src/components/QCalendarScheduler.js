@@ -412,7 +412,7 @@ export default {
       let dragOver
 
       let style = { height: height }
-      style = Object.assign(style, styler(day))
+      style = Object.assign(style, styler({ timestamp: day, index: idx, resource }))
 
       const data = {
         key: resource[this.resourceKey] + '-' + idx,

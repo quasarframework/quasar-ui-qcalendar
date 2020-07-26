@@ -7,16 +7,16 @@
   "private": true,
   "scripts": {
     "dev": "quasar dev",
-    "build-demo": "quasar build && cp ./src/404.html ./dist/spa && rm -rf ../docs && cp -r ./dist/spa/. ../docs",
+    "build-demo": "quasar build && rm -rf ../docs && cp -r ./dist/spa/. ../docs",
     "lint": "eslint --ext .js,.vue src",
     "lint-fix": "eslint --ext .js,.vue src --fix",
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
-    "@quasar/extras": "^1.8.2",
+    "@quasar/extras": "^1.9.0",
     "core-js": "^3.6.5",
     "drag-drop-touch": "^1.3.1",
-    "quasar": "^1.12.12"
+    "quasar": "^1.12.13"
   },
   "devDependencies": {
     "@quasar/app": "^2.0.6",
@@ -27,9 +27,9 @@
     "@vue/eslint-config-standard": "^5.1.2",
     "babel-eslint": "^10.1.0",
     "devtron": "^1.4.0",
-    "electron": "^9.0.0",
-    "electron-debug": "^3.0.1",
-    "electron-devtools-installer": "^3.0.0",
+    "electron": "^9.1.1",
+    "electron-debug": "^3.1.0",
+    "electron-devtools-installer": "^3.1.1",
     "eslint": "^7.5.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-loader": "^4.0.2",
