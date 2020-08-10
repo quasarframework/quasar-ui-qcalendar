@@ -37,6 +37,7 @@ export default {
   ],
 
   props: {
+    ...props.base,
     ...props.calendar,
     ...props.weeks,
     ...props.intervals,
