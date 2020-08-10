@@ -49,6 +49,7 @@ For swipe support, don't forget to add the `TouchSwipe` directive to your `quasa
 
     <example-viewer title="Hide Header" file="DayViewHideHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Custom Header" file="DayViewCustomHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Custom Header with Custom Scroll" file="DayViewCustomHeaderWithCustomScroll" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-viewer title="Column Header" file="DayViewColumnHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
@@ -170,6 +171,7 @@ export default {
     this.addToToc('Swipe', 2)
     this.addToToc('Hide Header', 2)
     this.addToToc('Custom Header', 2)
+    this.addToToc('Custom Header with Custom Scroll', 2)
     this.addToToc('Column Header', 2)
     this.addToToc('Column Count', 2)
     this.addToToc('Column Header Count', 2)

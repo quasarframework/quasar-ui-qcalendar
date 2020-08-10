@@ -16,7 +16,7 @@
       </template>
       <template #column-header-after="days">
         <div class="q-ma-xs">
-          column-header-ater slot
+          column-header-after slot
         </div>
       </template>
     </q-calendar>

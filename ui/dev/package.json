@@ -14,11 +14,11 @@
     "dev:electron": "quasar dev -m electron"
   },
   "dependencies": {
-    "@quasar/extras": "^1.9.0"
+    "@quasar/extras": "^1.9.3"
   },
   "devDependencies": {
     "@quasar/app": "^2.0.6",
-    "@quasar/quasar-app-extension-qmarkdown": "^1.0.29"
+    "@quasar/quasar-app-extension-qmarkdown": "^1.0.30"
   },
   "engines": {
     "node": ">= 8.9.0",
