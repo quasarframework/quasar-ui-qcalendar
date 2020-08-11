@@ -19,7 +19,6 @@ module.exports = {
     // Base ESLint recommended rules
     // 'eslint:recommended',
 
-
     // Uncomment any of the lines below to choose desired strictness,
     // but leave only one uncommented!
     // See https://eslint.vuejs.org/rules/#available-rules

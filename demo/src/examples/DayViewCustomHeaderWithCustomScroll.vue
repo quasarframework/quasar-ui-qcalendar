@@ -1,10 +1,10 @@
 <template>
   <div style="max-width: 800px; width: 100%;">
 
-    <div class="title-bar row items-center">
-      <q-btn flat color="white" icon="fas fa-chevron-left" style="height: 100%" @click="onPrev"></q-btn>
+    <div class="title-bar row items-center overflow-hidden">
+      <q-btn flat color="white" icon="fas fa-chevron-left" class="direction-button" style="height: 100%;" @click="onPrev"></q-btn>
       <transition :name="transition" appear>
-        <div :key="parsedStart.date" class="row justify-between items-center text-white" style="width: calc(100% - 112px)">
+        <div :key="parsedStart.date" class="row justify-between items-center text-white overflow-hidden" style="width: calc(100% - 112px)">
           <div v-for="day in days" :key="day.date" class="col-auto" :style="dayStyle">
             <q-btn flat :class="dayClass(day)" style="line-height: unset;" @click="selectedDate = day.date; transition = ''">
               <div class="text-center" style="width: 100%;">{{ monthFormatter(day, true) }}</div>
@@ -14,7 +14,7 @@
           </div>
         </div>
       </transition>
-      <q-btn flat color="white" icon="fas fa-chevron-right" style="height: 100%" @click="onNext"></q-btn>
+      <q-btn flat color="white" icon="fas fa-chevron-right" class="direction-button" style="height: 100%;" @click="onNext"></q-btn>
     </div>
 
     <div style="width: 800px; width: 100%; height: 200px; border: #c0c0c0 1px solid; overflow: auto;">
@@ -178,6 +178,11 @@ export default {
   display: flex
   flex-direction: row
   flex: 1
+
+.direction-button
+  background: #9c27b0
+  color: white
+  z-index: 20
 
 .selected-date
   color: #9c27b0

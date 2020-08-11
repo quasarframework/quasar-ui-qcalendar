@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     modifiedStyle (scope) {
-      if (scope.day.disabled === true) {
+      if (scope.timestamp.disabled === true) {
         return {
           backgroundColor: '#ffcb9c!important',
           cursor: 'not-allowed'

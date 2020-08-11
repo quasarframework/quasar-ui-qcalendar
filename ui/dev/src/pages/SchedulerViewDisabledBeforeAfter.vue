@@ -68,12 +68,12 @@ export default {
         ts = addToDate(ts, { day: (ts.weekday > friday ? -(ts.weekday - friday) : (friday - ts.weekday)) })
         return ts.date
       }
-      return void 0
+      return undefined
     }
   },
   methods: {
     modifiedStyle (scope) {
-      if (scope.day.disabled === true) {
+      if (scope.timestamp.disabled === true) {
         return {
           backgroundColor: '#ffcb9c!important',
           cursor: 'not-allowed'
