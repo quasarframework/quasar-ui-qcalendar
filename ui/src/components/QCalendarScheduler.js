@@ -477,6 +477,9 @@ export default {
       }
       const height = convertToUnit(this.resourceHeight)
       const label = resource.label
+      if (label === void 0) {
+        console.warn('resource object requires "label" key')
+      }
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
@@ -488,7 +491,7 @@ export default {
       }
 
       return h('div', {
-        key: resource.label,
+        key: label + (idx !== void 0 ? '-' + idx : ''),
         staticClass: 'q-calendar-scheduler__resource',
         style: {
           height
