@@ -1,5 +1,19 @@
 <template>
   <div class="q-markdown">
+    <q-markdown>
+::: tip
+To use the scheduler, you need to use the `resources` property, which is an array of objects, containing a mandatory key `label`.
+```js
+const rooms = [
+  { id: 1, label: 'Room 1' /* any other keys you want associated with the data */ },
+  { id: 2, label: 'Room 2' },
+  { id: 3, label: 'Room 3' },
+  ...
+]
+```
+:::
+    </q-markdown>
+
     <example-title title="Scheduler View" />
     <example-viewer title="Basic" file="SchedulerViewBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Dark" file="SchedulerViewDark" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />

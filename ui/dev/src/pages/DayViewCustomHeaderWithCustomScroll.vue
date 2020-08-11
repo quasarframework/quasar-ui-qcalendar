@@ -1,7 +1,7 @@
 <template>
   <div style="max-width: 800px; width: 100%;">
 
-    <div class="title-bar row items-center">
+    <div class="title-bar row items-center overflow-hidden">
       <q-btn flat color="white" icon="fas fa-chevron-left" style="height: 100%" @click="onPrev"></q-btn>
       <transition :name="transition" appear>
         <div :key="parsedStart.date" class="row justify-between items-center text-white" style="width: calc(100% - 112px)">
@@ -178,6 +178,11 @@ export default {
   display: flex
   flex-direction: row
   flex: 1
+
+.direction-button
+  background: #9c27b0
+  color: white
+  z-index: 20
 
 .selected-date
   color: #9c27b0

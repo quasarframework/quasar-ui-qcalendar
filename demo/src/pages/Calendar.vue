@@ -772,7 +772,7 @@ export default {
     modifiedStyle (scope) {
       let date = scope
       if ('resource' in scope) {
-        date = scope.day
+        date = scope.timestamp
       }
       if (date.disabled === true) {
         return {
