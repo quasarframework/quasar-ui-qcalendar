@@ -14,7 +14,7 @@
     "dev:electron": "quasar dev -m electron"
   },
   "dependencies": {
-    "@quasar/extras": "^1.9.3"
+    "@quasar/extras": "^1.9.4"
   },
   "devDependencies": {
     "@quasar/app": "^2.0.6",
