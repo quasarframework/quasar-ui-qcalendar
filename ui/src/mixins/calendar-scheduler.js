@@ -32,7 +32,11 @@ export default {
 
     bodyHeight () {
       if (this.resources && this.resources.length > 0) {
-        return this.resources.length * this.parsedResourceHeight
+        let bodyHeight = 0
+        for (let i = 0; i < this.resources.length; i++) {
+          bodyHeight += this.getResourceHeight(this.resources[i])
+        }
+        return bodyHeight
       }
       return 0
     },
@@ -71,6 +75,28 @@ export default {
         scope.resource = resource
       }
       return scope
+    },
+
+    getResourceHeight (resource) {
+      if (!resource.expanded) {
+        return this.resourceHeight
+      }
+
+      const subResource = resource[this.subResourceKey]
+      if (subResource === void 0) {
+        console.warn('resource object requires a ', this.subResourceKey + ' label')
+        return this.resourceHeight
+      }
+
+      let newResourceHeight = this.resourceHeight
+      for (let i = 0; i < subResource.length; i++) {
+        if (subResource[i].subResourceHeight === void 0) {
+          newResourceHeight += this.subResourceHeight
+        } else {
+          newResourceHeight += subResource[i].subResourceHeight
+        }
+      }
+      return newResourceHeight
     }
   }
 }

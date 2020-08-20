@@ -401,7 +401,46 @@ export default {
     },
 
     __renderDayResources (h, day, idx) {
-      return this.resources.map(resource => this.__renderDayResource(h, resource, day, idx))
+      const dayResources = []
+      this.resources.forEach((resource) => {
+        dayResources.push(this.__renderDayResource(h, resource, day, idx))
+        if (resource.expanded) {
+          dayResources.push(this.__renderDayBodySubResources(h, resource[this.subResourceKey], day))
+        }
+      })
+      return dayResources
+    },
+
+    __renderDayBodySubResources (h, subResources, day) {
+      if (subResources === void 0) {
+        console.warn('subResources not defined')
+        return
+      }
+      return h('div', {
+        staticClass: 'q-calendar-scheduler__day-sub-resources-body',
+        style: {}
+      }, [...this.__renderDaySubResources(h, subResources, day)])
+    },
+
+    __renderDaySubResources (h, subResources, day) {
+      return subResources.map((subResource, idx) => this.__renderDaySubResource(h, subResource, day, idx))
+    },
+
+    __renderDaySubResource (h, subResource, day, idx) {
+      const subResourceSlot = this.$scopedSlots['scheduler-day-sub-resource']
+      const subResourceScope = {
+        subResource,
+        timestamp: day,
+        index: idx
+      }
+      return h('div', {
+        staticClass: 'q-calendar-scheduler__day-sub-resource',
+        style: {
+          height: convertToUnit(subResource.subResourceHeight ? subResource.subResourceHeight : this.subResourceHeight)
+        }
+      }, [
+        subResourceSlot ? subResourceSlot(subResourceScope) : this.$scopedSlots.default
+      ])
     },
 
     __renderDayResource (h, resource, day, idx) {
@@ -444,6 +483,39 @@ export default {
       return h('div', data, children)
     },
 
+    __renderBodySubResources (h, subResources) {
+      if (subResources === void 0) {
+        console.warn('subResources not defined')
+        return
+      }
+      return h('div', {
+        staticClass: 'q-calendar-scheduler__sub-resources-body',
+        style: {}
+      }, [
+        ...this.__renderSubResources(h, subResources)
+      ])
+    },
+
+    __renderSubResources (h, subResources) {
+      return subResources.map((subResource, idx) => this.__renderSubResource(h, subResource, idx))
+    },
+
+    __renderSubResource (h, subResource, idx) {
+      const subResourceSlot = this.$scopedSlots['scheduler-sub-resource']
+      const subResourceScope = {
+        subResource,
+        index: idx
+      }
+      return h('div', {
+        staticClass: 'q-calendar-scheduler__sub-resource',
+        style: {
+          height: convertToUnit(subResource.subResourceHeight ? subResource.subResourceHeight : this.subResourceHeight)
+        }
+      }, [
+        subResourceSlot ? subResourceSlot(subResourceScope) : this.$scopedSlots.default
+      ])
+    },
+
     __renderBodyResources (h) {
       const width = convertToUnit(this.resourceWidth)
       let colors = new Map(), color, backgroundColor
@@ -466,7 +538,14 @@ export default {
     },
 
     __renderResourceLabels (h) {
-      return this.resources.map((resource, idx) => this.__renderResourceLabel(h, resource, idx))
+      const resourceLabels = []
+      this.resources.forEach((resource, idx) => {
+        resourceLabels.push(this.__renderResourceLabel(h, resource, idx))
+        if (resource.expanded) {
+          resourceLabels.push(this.__renderBodySubResources(h, resource[this.subResourceKey]))
+        }
+      })
+      return resourceLabels
     },
 
     __renderResourceLabel (h, resource, idx) {
@@ -494,7 +573,9 @@ export default {
         key: label + (idx !== void 0 ? '-' + idx : ''),
         staticClass: 'q-calendar-scheduler__resource',
         style: {
-          height
+          height,
+          display: 'flex',
+          flexDirection: 'column'
         },
         on: this.getDefaultMouseEventHandlers(':resource', event => {
           return { scope, event }

@@ -180,6 +180,15 @@ export default {
       type: Function,
       default: null
     },
+    subResourceKey: {
+      type: String,
+      default: 'subResourceLabel'
+    },
+    subResourceHeight: {
+      type: [Number, String],
+      default: 25,
+      validator: validateNumber
+    },
     columnHeaderBefore: Boolean,
     columnHeaderAfter: Boolean,
     columnCount: {
