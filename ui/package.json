@@ -93,7 +93,7 @@
     "rollup-plugin-vue": "=5.1.9",
     "uglify-es": "^3.3.9",
     "vue-jest": "^3.0.6",
-    "vue-template-compiler": "=2.6.11",
+    "vue-template-compiler": "=2.6.12",
     "zlib": "^1.0.5"
   },
   "browserslist": [
