@@ -2,7 +2,6 @@
 const timestamp = require('utils/timestamp.js')
 
 describe('[TIMESTAMP] updateDayOfYear', () => {
-
   it('updateDayOfYear Jan 1', async () => {
     const ts = timestamp.parseTimestamp('2020-01-01')
     const tests = timestamp.updateDayOfYear(ts)
@@ -27,5 +26,4 @@ describe('[TIMESTAMP] updateDayOfYear', () => {
     const tests = timestamp.updateDayOfYear(ts)
     expect(tests.doy).toBe(undefined)
   })
-
 })

@@ -288,7 +288,8 @@ export default {
       const c = this.$children[0]
       if (c && c.timeStartPos) {
         return c.timeStartPos(time, clamp)
-      } else {
+      }
+      else {
         return false
       }
     },
@@ -297,7 +298,8 @@ export default {
       const c = this.$children[0]
       if (c && c.timeStartPosX) {
         return c.timeStartPosX(time, clamp)
-      } else {
+      }
+      else {
         return false
       }
     },
@@ -306,7 +308,8 @@ export default {
       const c = this.$children[0]
       if (c && c.timeDurationHeight) {
         return c.timeDurationHeight(minutes)
-      } else {
+      }
+      else {
         return -1
       }
     },
@@ -315,7 +318,8 @@ export default {
       const c = this.$children[0]
       if (c && c.timeDurationWidth) {
         return c.timeDurationWidth(minutes)
-      } else {
+      }
+      else {
         return -1
       }
     },
@@ -324,7 +328,8 @@ export default {
       const c = this.$children[0]
       if (c && c.scrollToTime) {
         return c.scrollToTime(time)
-      } else {
+      }
+      else {
         return false
       }
     },
@@ -333,7 +338,8 @@ export default {
       const c = this.$children[0]
       if (c && c.scrollToTimeX) {
         return c.scrollToTimeX(time)
-      } else {
+      }
+      else {
         return false
       }
     },
@@ -367,7 +373,8 @@ export default {
           if (this.$listeners.input !== void 0) {
             if (timestamp.date !== void 0) {
               this.$emit('input', timestamp.date)
-            } else if (timestamp.day !== void 0 && timestamp.day.date !== void 0) {
+            }
+            else if (timestamp.day !== void 0 && timestamp.day.date !== void 0) {
               this.$emit('input', timestamp.day.date)
             }
           }

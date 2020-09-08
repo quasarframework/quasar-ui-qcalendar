@@ -674,7 +674,8 @@ export default {
       const styles = {}
       if (this.calendarView === 'month' || this.calendarView.endsWith('resource')) {
         styles.height = 'auto'
-      } else {
+      }
+      else {
         styles.height = `calc(100vh - ${this.titlebarHeight}px)`
       }
       styles.width = 'auto'
@@ -698,7 +699,8 @@ export default {
           width: '100vw',
           height: '100vh'
         }
-      } else {
+      }
+      else {
         return {
           maxHeight: '400px',
           height: '400px',
@@ -712,7 +714,8 @@ export default {
           width: '100vw',
           height: '100vh'
         }
-      } else {
+      }
+      else {
         return {
           maxHeight: '400px',
           height: '400px',
@@ -729,13 +732,15 @@ export default {
       if (this.fiveDayWorkWeek) {
         this.weekdays = [1, 2, 3, 4, 5]
         this.view = '5day'
-      } else {
+      }
+      else {
         if (this.view === '5day') {
           this.view = 'month'
         }
         if (this.firstDayMonday) {
           this.weekdays = [1, 2, 3, 4, 5, 6, 0]
-        } else {
+        }
+        else {
           this.weekdays = [0, 1, 2, 3, 4, 5, 6]
         }
       }
@@ -744,13 +749,15 @@ export default {
       if (this.fiveDayWorkWeek) {
         this.weekdays = [1, 2, 3, 4, 5]
         this.view = '5day'
-      } else {
+      }
+      else {
         if (this.view === '5day') {
           this.view = 'month'
         }
         if (this.firstDayMonday) {
           this.weekdays = [1, 2, 3, 4, 5, 6, 0]
-        } else {
+        }
+        else {
           this.weekdays = [0, 1, 2, 3, 4, 5, 6]
         }
       }
@@ -823,7 +830,8 @@ export default {
             event.side = void 0
             events.push(event)
           }
-        } else if (event.days) {
+        }
+        else if (event.days) {
           // check for overlapping dates
           const startDate = QCalendar.parseTimestamp(event.date)
           const endDate = QCalendar.addToDate(startDate, { day: event.days })
@@ -844,14 +852,17 @@ export default {
         const dayEnd = QCalendar.getDayIdentifier(timestampEnd)
         if (dayStart < dayEnd) {
           return true
-        } else if (dayStart > dayEnd) {
+        }
+        else if (dayStart > dayEnd) {
           return false
-        } else {
+        }
+        else {
           const timeStart = QCalendar.getTimeIdentifier(timestampStart)
           const timeEnd = QCalendar.getTimeIdentifier(timestampEnd)
           if (timeStart <= timeEnd) {
             return true
-          } else {
+          }
+          else {
             return false
           }
         }
@@ -868,14 +879,17 @@ export default {
         const dayStart = QCalendar.getDayIdentifier(timestampStart)
         if (dayEnd > dayStart) {
           return true
-        } else if (dayEnd < dayStart) {
+        }
+        else if (dayEnd < dayStart) {
           return false
-        } else {
+        }
+        else {
           const timeEnd = QCalendar.getTimeIdentifier(timestampEnd)
           const timeStart = QCalendar.getTimeIdentifier(timestampStart)
           if (timeEnd >= timeStart) {
             return true
-          } else {
+          }
+          else {
             return false
           }
         }
@@ -927,7 +941,8 @@ export default {
           if (event.side === 'right') {
             s.left = '50%'
           }
-        } else {
+        }
+        else {
           s.width = '100%'
         }
       }
@@ -955,7 +970,8 @@ export default {
       if (this.calendarView.indexOf('scheduler') > -1) {
         this.calendarView = 'day-scheduler'
         return
-      } else if (this.calendarView.indexOf('agenda') > -1) {
+      }
+      else if (this.calendarView.indexOf('agenda') > -1) {
         this.calendarView = 'day-agenda'
         return
       }
@@ -980,7 +996,8 @@ export default {
         timestamp = this.adjustTimestamp(this.contextDay)
         const endTime = QCalendar.addToDate(timestamp, { hour: 1 })
         this.eventForm.dateTimeEnd = QCalendar.getDateTime(endTime)
-      } else {
+      }
+      else {
         timestamp = QCalendar.parseTimestamp(this.contextDay.date + ' 00:00')
       }
       this.eventForm.dateTimeStart = QCalendar.getDateTime(timestamp)
@@ -996,7 +1013,8 @@ export default {
         timestamp = QCalendar.parseTimestamp(event.date + ' ' + event.time)
         const endTime = QCalendar.addToDate(timestamp, { minute: event.duration })
         this.eventForm.dateTimeEnd = QCalendar.getDateTime(endTime)
-      } else {
+      }
+      else {
         timestamp = QCalendar.parseTimestamp(this.contextDay.date + ' 00:00')
       }
       this.eventForm.dateTimeStart = QCalendar.getDateTime(timestamp)
@@ -1058,7 +1076,8 @@ export default {
           if (self.contextDay.bgcolor) {
             // an update
             update = true
-          } else {
+          }
+          else {
             // an add
           }
           const data = {
@@ -1078,7 +1097,8 @@ export default {
             if (index >= 0) {
               self.events.splice(index, 1, { ...data })
             }
-          } else {
+          }
+          else {
             // add to events array
             self.events.push(data)
           }
@@ -1110,7 +1130,8 @@ export default {
           year: 'numeric',
           timeZone: 'UTC'
         })
-      } catch (e) {
+      }
+      catch (e) {
         // console.error('Intl.DateTimeFormat not supported')
         this.dateFormatter = void 0
       }
@@ -1120,10 +1141,12 @@ export default {
         if (info.duration >= 30 && this.ignoreNextSwipe === false) {
           if (info.direction === 'right') {
             this.calendarPrev()
-          } else if (info.direction === 'left') {
+          }
+          else if (info.direction === 'left') {
             this.calendarNext()
           }
-        } else {
+        }
+        else {
           this.ignoreNextSwipe = false
         }
       }
@@ -1145,7 +1168,8 @@ export default {
       if (type === 'day') {
         stopAndPrevent(ev)
         return this.draggedEvent.date !== day.date
-      } else if (type === 'interval') {
+      }
+      else if (type === 'interval') {
         stopAndPrevent(ev)
         return this.draggedEvent.date !== day.date && this.draggedEvent.time !== day.time
       }
@@ -1156,7 +1180,8 @@ export default {
       if (type === 'day') {
         this.draggedEvent.date = day.date
         this.draggedEvent.side = void 0
-      } else if (type === 'interval') {
+      }
+      else if (type === 'interval') {
         this.draggedEvent.date = day.date
         this.draggedEvent.time = day.time
         this.draggedEvent.side = void 0

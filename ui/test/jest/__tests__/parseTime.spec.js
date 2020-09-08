@@ -2,7 +2,6 @@
 const timestamp = require('utils/timestamp.js')
 
 describe('[TIMESTAMP] parseTime', () => {
-
   it('parses time', async () => {
     const tests = timestamp.parseTime(141)
     expect(tests).toBe(141)
@@ -34,7 +33,7 @@ describe('[TIMESTAMP] parseTime', () => {
   })
 
   it('parses time invalid type (Date)', async () => {
-    const tests = timestamp.parseTime(new Date)
+    const tests = timestamp.parseTime(new Date())
     expect(tests).toBe(false)
   })
 
@@ -42,5 +41,4 @@ describe('[TIMESTAMP] parseTime', () => {
     const tests = timestamp.parseTime(['2:24'])
     expect(tests).toBe(false)
   })
-
 })

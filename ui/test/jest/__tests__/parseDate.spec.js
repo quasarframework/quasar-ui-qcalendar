@@ -2,7 +2,6 @@
 const timestamp = require('utils/timestamp.js')
 
 describe('[TIMESTAMP] parseDate', () => {
-
   it('parseDate no time', async () => {
     const tests = timestamp.parseDate(new Date(2020, 0, 1))
     expect(tests.hasDay).toBe(true)
@@ -22,5 +21,4 @@ describe('[TIMESTAMP] parseDate', () => {
     expect(tests.hour).toBe(3)
     expect(tests.minute).toBe(0)
   })
-
 })

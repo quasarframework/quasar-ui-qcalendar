@@ -1,9 +1,11 @@
 export function convertToUnit (input, unit = 'px') {
   if (input == null || input === '') {
     return void 0
-  } else if (isNaN(input)) {
+  }
+  else if (isNaN(input)) {
     return String(input)
-  } else {
+  }
+  else {
     return `${Number(input)}${unit}`
   }
 }

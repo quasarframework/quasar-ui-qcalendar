@@ -65,7 +65,8 @@ export default {
               break
             }
           }
-        } else {
+        }
+        else {
           // add the date
           this.selectedDates.push(scope.date)
         }

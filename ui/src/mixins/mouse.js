@@ -46,10 +46,12 @@ export default {
         if (key in on) {
           if (Array.isArray(on[key])) {
             (on[key]).push(handler)
-          } else {
+          }
+          else {
             on[key] = [on[key], handler]
           }
-        } else {
+        }
+        else {
           on[key] = handler
         }
       }

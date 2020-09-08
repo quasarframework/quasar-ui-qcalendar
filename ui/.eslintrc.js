@@ -30,7 +30,9 @@ module.exports = {
     ga: true, // Google Analytics
     cordova: true,
     __statics: true,
-    process: true
+    process: true,
+    Capacitor: true,
+    chrome: true
   },
 
   // add your custom rules here
@@ -50,6 +52,8 @@ module.exports = {
     'import/no-unresolved': 'off',
     'import/no-extraneous-dependencies': 'off',
     'prefer-promise-reject-errors': 'off',
+
+    'brace-style': [2, 'stroustrup', { allowSingleLine: false }],
 
     'jest/no-disabled-tests': 'warn',
     'jest/no-focused-tests': 'error',

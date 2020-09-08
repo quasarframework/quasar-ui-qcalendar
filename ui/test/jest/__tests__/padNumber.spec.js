@@ -2,7 +2,6 @@
 const timestamp = require('utils/timestamp.js')
 
 describe('[TIMESTAMP] padNumber', () => {
-
   it('padNumber 1, len 2', async () => {
     const tests = timestamp.padNumber(1, 2)
     expect(tests).toBe('01')
@@ -22,5 +21,4 @@ describe('[TIMESTAMP] padNumber', () => {
     const tests = timestamp.padNumber(10, 4)
     expect(tests).toBe('0010')
   })
-
 })

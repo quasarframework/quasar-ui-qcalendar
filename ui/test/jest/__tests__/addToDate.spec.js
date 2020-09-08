@@ -121,6 +121,4 @@ describe('[TIMESTAMP] addToDate', () => {
     expect(tests.hour).toBe(23)
     expect(tests.minute).toBe(0)
   })
-
-
 })

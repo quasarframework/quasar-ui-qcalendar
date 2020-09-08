@@ -46,7 +46,8 @@ export default {
             'q-selected-day': this.isHovering(d),
             'q-selected-day-last': this.isHoveringLast(d)
           }
-        } else if (this.dates.length === 2) {
+        }
+        else if (this.dates.length === 2) {
           return {
             'q-selected-day-first': this.isSelectedFirst(d),
             'q-selected-day': this.isBetween(d),
@@ -114,7 +115,10 @@ export default {
 
     handleClick ({ date: d }) {
       if (this.isSelected(d)) this.removeDate(d)
-      else if (this.dates.length < 2) { this.dates.push(d) } else this.dates = [d]
+      else if (this.dates.length < 2) {
+        this.dates.push(d)
+      }
+      else this.dates = [d]
     },
 
     handleHoverStart ({ scope: { date } }) {

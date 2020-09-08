@@ -49,7 +49,8 @@ export default {
       if (this.anchorDayIdentifier !== false && this.otherDayIdentifier !== false) {
         if (this.anchorDayIdentifier <= this.otherDayIdentifier) {
           dates.push(this.anchorTimestamp.date, this.otherTimestamp.date)
-        } else {
+        }
+        else {
           dates.push(this.otherTimestamp.date, this.anchorTimestamp.date)
         }
       }

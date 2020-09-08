@@ -2,7 +2,6 @@
 const timestamp = require('utils/timestamp.js')
 
 describe('[TIMESTAMP] findWeekday', () => {
-
   it('findWeekday (0) 2020-01-01', async () => {
     const ts = timestamp.parseTimestamp('2020-01-01')
     const tests = timestamp.findWeekday(ts, 0)
@@ -53,7 +52,7 @@ describe('[TIMESTAMP] findWeekday', () => {
     expect(tests.weekday).toBe(6)
   })
 
-  it('findWeekday (6) 2020-01-01', async () => {
+  it('findWeekday (6) 2020-01-01 with PrevDay', async () => {
     const ts = timestamp.parseTimestamp('2020-01-01')
     const tests = timestamp.findWeekday(ts, 6, timestamp.prevDay)
     expect(tests.hasDay).toBe(true)
@@ -62,5 +61,4 @@ describe('[TIMESTAMP] findWeekday', () => {
     expect(tests.day).toBe(28)
     expect(tests.weekday).toBe(6)
   })
-
 })

@@ -44,10 +44,12 @@ export default {
         if (info.duration >= 30 && this.ignoreNextSwipe === false) {
           if (info.direction === 'right') {
             this.calendarPrev()
-          } else if (info.direction === 'left') {
+          }
+          else if (info.direction === 'left') {
             this.calendarNext()
           }
-        } else {
+        }
+        else {
           this.ignoreNextSwipe = false
         }
       }

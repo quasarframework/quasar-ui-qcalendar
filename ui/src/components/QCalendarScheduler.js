@@ -41,7 +41,8 @@ export default {
     noScroll (val) {
       if (val === true) {
         this.scrollWidth = 0
-      } else {
+      }
+      else {
         this.$nextTick(this.onResize)
       }
     }
@@ -132,7 +133,8 @@ export default {
         return Array.apply(null, new Array(parseInt(this.columnCount, 10)))
           .map((_, i) => i + parseInt(this.columnIndexStart, 10))
           .map(idx => this.__renderHeadDay(h, this.days[0], idx))
-      } else {
+      }
+      else {
         return this.days.map(day => this.__renderHeadDay(h, day))
       }
     },
@@ -150,10 +152,12 @@ export default {
         if (day.past === true) {
           color = 'colorHeaderPast'
           backgroundColor = 'backgroundHeaderPast'
-        } else if (day.current === true) {
+        }
+        else if (day.current === true) {
           color = 'colorHeaderCurrent'
           backgroundColor = 'backgroundHeaderCurrent'
-        } else if (day.future === true) {
+        }
+        else if (day.future === true) {
           color = 'colorHeaderFuture'
           backgroundColor = 'backgroundHeaderFuture'
         }
@@ -205,10 +209,12 @@ export default {
         if (day.past === true) {
           color = 'colorDayLabelPast'
           backgroundColor = 'backgroundDayLabelPast'
-        } else if (day.current === true) {
+        }
+        else if (day.current === true) {
           color = 'colorDayLabelCurrent'
           backgroundColor = 'backgroundDayLabelCurrent'
-        } else if (day.future === true) {
+        }
+        else if (day.future === true) {
           color = 'colorDayLabelFuture'
           backgroundColor = 'backgroundDayLabelFuture'
         }
@@ -244,10 +250,12 @@ export default {
         if (day.past === true) {
           color = 'colorDayLabelPast'
           backgroundColor = 'backgroundDayLabelPast'
-        } else if (day.current === true) {
+        }
+        else if (day.current === true) {
           color = 'colorDayLabelCurrent'
           backgroundColor = 'backgroundDayLabelCurrent'
-        } else if (day.future === true) {
+        }
+        else if (day.future === true) {
           color = 'colorDayLabelFuture'
           backgroundColor = 'backgroundDayLabelFuture'
         }
@@ -328,7 +336,8 @@ export default {
     __renderScrollArea (h) {
       if (this.noScroll !== void 0 && this.noScroll === true) {
         return this.__renderPane(h)
-      } else {
+      }
+      else {
         return h('div', {
           ref: 'scrollArea',
           staticClass: 'q-calendar-scheduler__scroll-area'
@@ -364,7 +373,8 @@ export default {
         return Array.apply(null, new Array(parseInt(this.columnCount, 10)))
           .map((_, i) => i + parseInt(this.columnIndexStart, 10))
           .map(i => this.__renderDay(h, this.days[0], 0, i))
-      } else {
+      }
+      else {
         return this.days.map((day, index) => this.__renderDay(h, day, index))
       }
     },
@@ -377,10 +387,12 @@ export default {
         if (day.past === true) {
           color = 'colorBodyPast'
           backgroundColor = 'backgroundBodyPast'
-        } else if (day.current === true) {
+        }
+        else if (day.current === true) {
           color = 'colorBodyCurrent'
           backgroundColor = 'backgroundBodyCurrent'
-        } else if (day.future === true) {
+        }
+        else if (day.future === true) {
           color = 'colorBodyFuture'
           backgroundColor = 'backgroundBodyFuture'
         }
