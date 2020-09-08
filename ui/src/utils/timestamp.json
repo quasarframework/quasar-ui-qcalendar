@@ -473,14 +473,14 @@
       "params": {
         "timestamp": {
           "type": "Object",
-          "required": true,
-          "desc": "A timestamp object",
+          "required": false,
+          "desc": "A timestamp object. If no timestamp is passed, then uses current date",
           "__exemption": [ "examples" ]
         }
       },
       "returns": {
         "type": "Number",
-        "desc": "The work week number of the year",
+        "desc": "The work week number of the year. If passed an invalid date, the return value is always 0",
         "__exemption": [ "examples" ]
       }
     },
@@ -560,6 +560,90 @@
         "__exemption": [ "examples" ]
       },
     "__exemption": [ "examples" ]
+    },
+    "compareTimestamps": {
+      "desc": "Compares two timestamps",
+      "params": {
+        "timestamp1": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        },
+        "timestamp2": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Boolean",
+        "desc": "true if timestamps are the same, otherwise false"
+      }
+    },
+    "compareDate": {
+      "desc": "Compares two timestamps if the dates are the same",
+      "params": {
+        "timestamp1": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        },
+        "timestamp2": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Boolean",
+        "desc": "true if timestamps dates are the same, otherwise false"
+      }
+    },
+    "compareTime": {
+      "desc": "Compares two timestamps if the times are the same",
+      "params": {
+        "timestamp1": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        },
+        "timestamp2": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Boolean",
+        "desc": "true if timestamps times are the same, otherwise false"
+      }
+    },
+    "compareDateTime": {
+      "desc": "Compares two timestamps if the dates and times are the same",
+      "params": {
+        "timestamp1": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        },
+        "timestamp2": {
+          "type": "Object",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Boolean",
+        "desc": "true if timestamps dates and times are the same, otherwise false"
+      }
     },
     "padNumber": {
       "desc": "Pads the passed in number to the specfied length. Passing in `(2,2)` returns `02`",

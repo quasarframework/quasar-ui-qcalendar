@@ -11,6 +11,6 @@ describe('[TIMESTAMP] getDateTime', () => {
   it('getDateTime 2020-01-01 (no time)', async () => {
     const ts = timestamp.parsed('2020-01-01')
     const tests = timestamp.getDateTime(ts)
-    expect(tests).toBe('2020-01-01')
+    expect(tests).toBe('2020-01-01 00:00')
   })
 })
