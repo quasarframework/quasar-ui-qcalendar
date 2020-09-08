@@ -52,14 +52,14 @@ export default {
   }),
 
   computed: {
-    parsedValue () {
+    __parsedValue () {
       return parseTimestamp(this.value) ||
         this.parsedStart ||
         this.times.today
     },
 
-    renderProps () {
-      const around = this.parsedValue
+    __renderProps () {
+      const around = this.__parsedValue
       let component = 'div'
       let maxDays = this.maxDays
       let start = around
@@ -166,12 +166,12 @@ export default {
   },
 
   watch: {
-    renderProps: '__checkChange'
+    __renderProps: '__checkChange'
   },
 
   methods: {
     __checkChange () {
-      const { start, end } = this.renderProps
+      const { start, end } = this.__renderProps
       this.keyValue = 0
       if (this.lastStart === void 0 || this.lastEnd === void 0 || start.date !== this.lastStart || end.date !== this.lastEnd) {
         this.lastStart = start.date
@@ -186,7 +186,7 @@ export default {
         this.moveToToday()
         return
       }
-      const moved = copyTimestamp(this.parsedValue)
+      const moved = copyTimestamp(this.__parsedValue)
       const forward = amount > 0
       const mover = forward ? nextDay : prevDay
       const limit = forward ? DAYS_IN_MONTH_MAX : DAY_MIN
@@ -350,7 +350,7 @@ export default {
   },
 
   render (h) {
-    const { start, end, maxDays, component } = this.renderProps
+    const { start, end, maxDays, component } = this.__renderProps
 
     this.keyValue = getDayIdentifier(start)
 
