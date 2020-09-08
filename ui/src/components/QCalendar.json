@@ -4342,7 +4342,7 @@
       "scope": {
         "days": {
           "type": "Array",
-          "desc": "An array of timestamp objects that are to be displayed in the container. This slot does not replace the container, but instead, allows you to add to it. Example: use css 'position: absolute` to create a 'current time' bar.",
+          "desc": "An array of timestamp objects that are to be displayed in the container. This slot does not replace the container, but instead, allows you to add to it. Example: use css `position: absolute` to create a `current time` bar.",
           "__exemption": [ "examples" ]
         }
       }
