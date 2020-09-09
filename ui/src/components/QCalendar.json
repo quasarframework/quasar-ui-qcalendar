@@ -798,6 +798,19 @@
         "[{ label: 'John' },{ label: 'Susan' }]"
       ]
     },
+    "resource-key": {
+      "type": "String",
+      "category": "model",
+      "desc": "The key from the `resources` object that will be displayed",
+      "default": "label",
+      "applicable": [
+        "scheduler"
+      ],
+      "examples": [
+        "resource-key=\"label\"",
+        "resource-key=\"name\""
+      ]
+    },
     "resource-height": {
       "type": [
         "Number",
@@ -813,7 +826,7 @@
       ],
       "examples": [
         "resource-height=\"80\"",
-        "resource-height=\"100\""
+        ":resource-height=\"100\""
       ]
     },
     "resource-width": {

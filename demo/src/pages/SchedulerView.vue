@@ -2,7 +2,7 @@
   <div class="q-markdown">
     <q-markdown>
 ::: tip
-To use the scheduler, you need to use the `resources` property, which is an array of objects, containing a mandatory key `label`.
+To use the scheduler, you need to use the `resources` property, which is an array of objects, containing a key as defined by the `resource-key` (default `label`).
 ```js
 const rooms = [
   { id: 1, label: 'Room 1' /* any other keys you want associated with the data */ },

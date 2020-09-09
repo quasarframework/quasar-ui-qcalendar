@@ -237,7 +237,7 @@ And, the multi-day selection, when combined with two or mode calendars allows yo
 
 The `scheduler` view is for displaying days with resources on the left side. This allows you to present data for each resource. Where a resource could be a person, room, etc.
 
-To use the scheduler, you need to use the `resources` property, which is an array of objects, containing a mandatory key `label`. To change the number of days displayed, use the `max-days` property. To change the distance between each resource, use the `resource-height` property.
+To use the scheduler, you need to use the `resources` property, which is an array of objects, containing a key as defined by the `resource-key` (default `label`). To change the number of days displayed, use the `max-days` property. To change the distance between each resource, use the `resource-height` property.
 
 ## Resource view
 
@@ -245,12 +245,13 @@ To use the scheduler, you need to use the `resources` property, which is an arra
 
 The `resource` view is for displaying resources (people, rooms, etc) down the side and with time intervals on top.
 
-To use the `resource` view, you need to use the `resources` property, which is an array of objects, containing a mandatory key `label`.
+To use the scheduler, you need to use the `resources` property, which is an array of objects, containing a key as defined by the `resource-key` (default `label`).
 
 For example:
 
 ```js
 :resources="resources"
+resource-key="label"
 ```
 
 where:

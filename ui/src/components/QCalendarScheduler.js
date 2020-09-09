@@ -488,9 +488,9 @@ export default {
         index: idx
       }
       const height = convertToUnit(this.resourceHeight)
-      const label = resource.label
+      const label = resource[this.resourceKey]
       if (label === void 0) {
-        console.warn('resource object requires "label" key')
+        console.warn('QCalendarScheduler: resource object requires "resource-key" property to contain resource object key')
       }
 
       let colors = new Map(), color, backgroundColor
