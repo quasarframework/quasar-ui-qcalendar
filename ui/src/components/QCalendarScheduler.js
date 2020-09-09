@@ -88,7 +88,7 @@ export default {
         }
       }, [
         this.__renderHeadResources(h),
-        ...this.__renderHeadDays(h)
+        this.__renderHeadDaysWrapper(h)
       ])
 
       if (this.animated === true) {
@@ -125,6 +125,14 @@ export default {
         }
       }), [
         slot && slot(this.days)
+      ])
+    },
+
+    __renderHeadDaysWrapper (h) {
+      return h('div', {
+        staticClass: 'q-calendar-scheduler__head-days-body'
+      }, [
+        ...this.__renderHeadDays(h)
       ])
     },
 
@@ -173,6 +181,7 @@ export default {
           'q-calendar-scheduler__head-day--droppable': dragOver
         },
         style: {
+          minWidth: width + '%',
           maxWidth: width + '%'
         },
         domProps: {
@@ -363,23 +372,66 @@ export default {
       return h('div', {
         staticClass: 'q-calendar-scheduler__day-container'
       }, [
-        this.__renderBodyResources(h),
-        ...this.__renderDays(h)
+        ...this.__renderResources(h)
       ])
     },
 
-    __renderDays (h) {
+    __renderResources (h) {
+      return this.resources.map((resource, idx) => this.__renderResourceRow(h, resource, idx))
+    },
+
+    __renderResourceRow (h, resource, idx) {
+      const height = convertToUnit(this.resourceHeight)
+      const style = { height: height }
+      return h('div', {
+        staticClass: 'q-calendar-scheduler__resource-row',
+        style
+      }, [
+        this.__renderResource(h, resource, idx),
+        this.__renderBodyResources(h, resource, idx)
+      ])
+    },
+
+    __renderResource (h, resource, idx) {
+      return this.__renderResourceLabel(h, resource, idx)
+    },
+
+    __renderBodyResources (h, resource, idx) {
+      const width = convertToUnit(this.resourceWidth)
+      let colors = new Map(), color, backgroundColor
+      let updateColors = this.useDefaultTheme
+      if (this.enableTheme === true) {
+        color = 'colorSchedulerBody'
+        backgroundColor = 'backgroundSchedulerBody'
+        colors = this.getThemeColors([color, backgroundColor])
+        updateColors = this.setBothColors
+      }
+
+      const data = {
+        staticClass: 'q-calendar-scheduler__resources-body',
+        style: {
+          width
+        }
+      }
+
+      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), data),
+        [
+          ...this.__renderDays(h, resource, idx)
+        ])
+    },
+
+    __renderDays (h, resource, idx) {
       if (this.days.length === 1 && this.columnCount && parseInt(this.columnCount, 10) > 0) {
         return Array.apply(null, new Array(parseInt(this.columnCount, 10)))
           .map((_, i) => i + parseInt(this.columnIndexStart, 10))
           .map(i => this.__renderDay(h, this.days[0], 0, i))
       }
       else {
-        return this.days.map((day, index) => this.__renderDay(h, day, index))
+        return this.days.map((day, index) => this.__renderDay(h, resource, day, index))
       }
     },
 
-    __renderDay (h, day, idx) {
+    __renderDay (h, resource, day, idx) {
       const width = 100 / this.days.length
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
@@ -405,26 +457,21 @@ export default {
         staticClass: 'q-calendar-scheduler__day',
         class: this.getRelativeClasses(day),
         style: {
+          width: '100%',
           maxWidth: width + '%'
         }
       }), [
-        ...this.__renderDayResources(h, day, idx)
+        this.__renderDayResource(h, resource, day, idx)
       ])
     },
 
-    __renderDayResources (h, day, idx) {
-      return this.resources.map(resource => this.__renderDayResource(h, resource, day, idx))
-    },
-
     __renderDayResource (h, resource, day, idx) {
-      const height = convertToUnit(this.resourceHeight)
       const styler = this.resourceStyle || this.resourceStyleDefault
       const slot = this.$scopedSlots['scheduler-resource-day']
       const scope = this.getScopeForSlot(day, idx, resource)
       let dragOver
 
-      let style = { height: height }
-      style = Object.assign(style, styler({ timestamp: day, index: idx, resource }))
+      const style = styler({ timestamp: day, index: idx, resource })
 
       const data = {
         key: resource[this.resourceKey] + '-' + idx,
@@ -432,7 +479,7 @@ export default {
         class: {
           'q-calendar-scheduler__day-resource--droppable': dragOver
         },
-        style: style,
+        style,
         domProps: {
           ondragover: (_event) => {
             if (this.dragOverFunc !== void 0) {
@@ -456,27 +503,6 @@ export default {
       return h('div', data, children)
     },
 
-    __renderBodyResources (h) {
-      const width = convertToUnit(this.resourceWidth)
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-        color = 'colorSchedulerBody'
-        backgroundColor = 'backgroundSchedulerBody'
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
-
-      const data = {
-        staticClass: 'q-calendar-scheduler__resources-body',
-        style: {
-          width: width
-        }
-      }
-
-      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), data), this.__renderResourceLabels(h))
-    },
-
     __renderResourceLabels (h) {
       return this.resources.map((resource, idx) => this.__renderResourceLabel(h, resource, idx))
     },
@@ -487,7 +513,7 @@ export default {
         resource: resource,
         index: idx
       }
-      const height = convertToUnit(this.resourceHeight)
+      const width = convertToUnit(this.resourceWidth)
       const label = resource[this.resourceKey]
       if (label === void 0) {
         console.warn('QCalendarScheduler: resource object requires "resource-key" property to contain resource object key')
@@ -506,7 +532,8 @@ export default {
         key: label + (idx !== void 0 ? '-' + idx : ''),
         staticClass: 'q-calendar-scheduler__resource',
         style: {
-          height
+          maxWidth: width,
+          minWidth: width
         },
         on: this.getDefaultMouseEventHandlers(':resource', event => {
           return { scope, event }
