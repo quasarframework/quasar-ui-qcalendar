@@ -11,10 +11,8 @@ import CalendarScheduler from '../mixins/calendar-scheduler.js'
 import { convertToUnit } from '../utils/helpers.js'
 
 // Icons
-import {
-  mdiMenuRight,
-  mdiMenuUp
-} from '@quasar/extras/mdi-v5'
+const mdiMenuRight = 'M10,17L15,12L10,7V17Z'
+const mdiMenuUp = 'M7,15L12,10L17,15H7Z'
 
 /* @vue/component */
 export default {

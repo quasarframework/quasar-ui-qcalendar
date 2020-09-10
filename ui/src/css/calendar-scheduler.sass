@@ -198,7 +198,6 @@
 
   &__resource
     display: flex
-    flex-direction: column
     flex-wrap: nowrap
     flex: 1
     user-select: none
@@ -206,11 +205,15 @@
     font-size: 1rem
     justify-content: left
     overflow: hidden
+    align-items: center
+    flex-wrap: wrap
 
   &__resource-text
-    display: block
+    display: flex
     position: relative
     font-size: 12px
+    align-items: center
+    flex-wrap: wrap
 
   &__day
     flex: 1

@@ -9,10 +9,8 @@ import props from '../utils/props'
 import { convertToUnit } from '../utils/helpers.js'
 
 // Icons
-import {
-  mdiMenuRight,
-  mdiMenuUp
-} from '@quasar/extras/mdi-v5'
+const mdiMenuRight = 'M10,17L15,12L10,7V17Z'
+const mdiMenuUp = 'M7,15L12,10L17,15H7Z'
 
 /* @vue/component */
 export default {
@@ -276,7 +274,7 @@ export default {
       return h('div', {
         staticClass: 'q-calendar-resource__resource-text',
         style: {
-          paddingLeft: (10 * indentLevel + 2) + 'px'
+          paddingLeft: (10 * indentLevel) + 'px'
         }
       }, [
         resource.children && resource.children.length > 0 && h(QIcon, {
