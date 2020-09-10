@@ -5,6 +5,9 @@ export function convertToUnit (input, unit = 'px') {
   else if (isNaN(input)) {
     return String(input)
   }
+  else if (input === 'auto') {
+    return input
+  }
   else {
     return `${Number(input)}${unit}`
   }

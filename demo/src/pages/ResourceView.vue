@@ -39,6 +39,12 @@ The example below is setting the `interval-start` to `8`, the default is `0`. It
       </q-markdown>
     </example-viewer>
 
+    <example-viewer title="Children" file="ResourceViewChildren" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+      <q-markdown>
+The example below is uses keys `children` and `expanded`, in the `resources` object, to show a tree hierarchy.
+      </q-markdown>
+    </example-viewer>
+
     <example-viewer title="Slots" file="ResourceViewSlots" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 For slots that return `day`, `interval` or `timestamp`, it looks like this:
@@ -121,6 +127,7 @@ export default {
     this.addToToc('Interval Minutes (30)', 2)
     this.addToToc('Interval Minutes (15)', 2)
     this.addToToc('Interval Start', 2)
+    this.addToToc('Children', 2)
     this.addToToc('Slots', 2)
     this.addToToc('Slot - Resource Header', 2)
     this.addToToc('Theme', 2)

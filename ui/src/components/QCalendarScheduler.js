@@ -1,5 +1,5 @@
 // Quasar
-import { QBtn } from 'quasar'
+import { QBtn, QIcon } from 'quasar'
 
 // Directives
 import Resize from '../directives/resize.js'
@@ -9,6 +9,12 @@ import CalendarScheduler from '../mixins/calendar-scheduler.js'
 
 // Util
 import { convertToUnit } from '../utils/helpers.js'
+
+// Icons
+import {
+  mdiMenuRight,
+  mdiMenuUp
+} from '@quasar/extras/mdi-v5'
 
 /* @vue/component */
 export default {
@@ -31,6 +37,11 @@ export default {
     return {
       scrollWidth: 0
     }
+  },
+
+  created () {
+    this.mdiMenuRight = mdiMenuRight
+    this.mdiMenuUp = mdiMenuUp
   },
 
   mounted () {
@@ -107,7 +118,7 @@ export default {
 
     __renderHeadResources (h) {
       const slot = this.$scopedSlots['scheduler-resources-header']
-      const width = convertToUnit(this.resourceWidth)
+      const width = convertToUnit(this.parsedResourceWidth)
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
@@ -376,28 +387,38 @@ export default {
       ])
     },
 
-    __renderResources (h) {
-      return this.resources.map((resource, idx) => this.__renderResourceRow(h, resource, idx))
+    __renderResources (h, resources = void 0, indentLevel = 0) {
+      if (resources === void 0) {
+        resources = this.resources
+      }
+      return resources.map((resource, idx) => {
+        return this.__renderResourceRow(h, resource, idx, indentLevel)
+      })
     },
 
-    __renderResourceRow (h, resource, idx) {
-      const height = convertToUnit(this.resourceHeight)
+    __renderResourceRow (h, resource, idx, indentLevel = 0) {
+      const height = convertToUnit(this.parsedResourceHeight)
       const style = { height: height }
-      return h('div', {
+      const resourceRow = h('div', {
         staticClass: 'q-calendar-scheduler__resource-row',
         style
       }, [
-        this.__renderResource(h, resource, idx),
-        this.__renderBodyResources(h, resource, idx)
+        this.__renderResource(h, resource, idx, indentLevel),
+        this.__renderBodyResources(h, resource, idx, indentLevel)
       ])
+      if (resource.expanded === true) {
+        return [resourceRow, ...this.__renderResources(h, resource.children, indentLevel + 1)]
+      }
+
+      return [resourceRow]
     },
 
-    __renderResource (h, resource, idx) {
-      return this.__renderResourceLabel(h, resource, idx)
+    __renderResource (h, resource, idx, indentLevel = 0) {
+      return this.__renderResourceLabel(h, resource, idx, indentLevel)
     },
 
-    __renderBodyResources (h, resource, idx) {
-      const width = convertToUnit(this.resourceWidth)
+    __renderBodyResources (h, resource, idx, indentLevel = 0) {
+      const width = convertToUnit(this.parsedResourceWidth)
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
       if (this.enableTheme === true) {
@@ -503,17 +524,13 @@ export default {
       return h('div', data, children)
     },
 
-    __renderResourceLabels (h) {
-      return this.resources.map((resource, idx) => this.__renderResourceLabel(h, resource, idx))
-    },
-
-    __renderResourceLabel (h, resource, idx) {
+    __renderResourceLabel (h, resource, idx, indentLevel = 0) {
       const slot = this.$scopedSlots['scheduler-resource']
       const scope = {
         resource: resource,
         index: idx
       }
-      const width = convertToUnit(this.resourceWidth)
+      const width = convertToUnit(this.parsedResourceWidth)
       const label = resource[this.resourceKey]
       if (label === void 0) {
         console.warn('QCalendarScheduler: resource object requires "resource-key" property to contain resource object key')
@@ -533,7 +550,9 @@ export default {
         staticClass: 'q-calendar-scheduler__resource',
         style: {
           maxWidth: width,
-          minWidth: width
+          minWidth: width,
+          height: '100%',
+          paddingLeft: (10 * indentLevel + 2) + 'px'
         },
         on: this.getDefaultMouseEventHandlers(':resource', event => {
           return { scope, event }
@@ -541,7 +560,20 @@ export default {
       }, [
         slot ? slot(scope) : h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
           staticClass: 'q-calendar-scheduler__resource-text'
-        }), label)
+        }), [
+          resource.children && resource.children.length > 0 && h(QIcon, {
+            props: {
+              name: (resource.expanded === true ? this.mdiMenuUp : this.mdiMenuRight),
+              size: 'sm'
+            },
+            on: {
+              click: () => {
+                resource.expanded = !resource.expanded
+              }
+            }
+          }),
+          label
+        ])
       ])
     },
 
