@@ -2,7 +2,6 @@
 const timestamp = require('utils/timestamp.js')
 
 describe('[TIMESTAMP] parsed', () => {
-
   it('parses date', async () => {
     const tests = timestamp.parsed('2020-01-01')
     expect(tests.year).toBe(2020)
@@ -35,5 +34,4 @@ describe('[TIMESTAMP] parsed', () => {
     const tests = timestamp.parsed()
     expect(tests).toBe(null)
   })
-
 })

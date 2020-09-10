@@ -174,7 +174,8 @@ export default {
       if (info.duration >= 30) {
         if (info.direction === 'right') {
           this.calendarPrev()
-        } else if (info.direction === 'left') {
+        }
+        else if (info.direction === 'left') {
           this.calendarNext()
         }
       }

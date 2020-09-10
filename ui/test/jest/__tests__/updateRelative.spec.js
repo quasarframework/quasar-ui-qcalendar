@@ -2,7 +2,6 @@
 const timestamp = require('utils/timestamp.js')
 
 describe('[TIMESTAMP] updateRelative', () => {
-
   it('updateRelative 1 day', async () => {
     const ts = timestamp.parseTimestamp('2020-01-01')
     const tests = timestamp.updateRelative(ts, timestamp.parseTimestamp('2020-01-01'))
@@ -18,5 +17,4 @@ describe('[TIMESTAMP] updateRelative', () => {
     expect(tests.current).toBe(true)
     expect(tests.past).toBe(false)
   })
-
 })

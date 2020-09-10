@@ -2,7 +2,6 @@
 const timestamp = require('utils/timestamp.js')
 
 describe('[TIMESTAMP] validateNumber', () => {
-
   it('validateNumber true', async () => {
     const tests = timestamp.validateNumber(100)
     expect(tests).toBe(true)
@@ -18,5 +17,4 @@ describe('[TIMESTAMP] validateNumber', () => {
     const tests = timestamp.validateNumber('elephant')
     expect(tests).toBe(false)
   })
-
 })

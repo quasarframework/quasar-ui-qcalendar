@@ -2,7 +2,6 @@
 const timestamp = require('utils/timestamp.js')
 
 describe('[TIMESTAMP] parseTimestamp', () => {
-
   it('parseTimestamp simple', async () => {
     const tests = timestamp.parseTimestamp('2020-01-01')
     expect(tests.hasDay).toBe(true)
@@ -24,7 +23,7 @@ describe('[TIMESTAMP] parseTimestamp', () => {
   })
 
   it('parseTimestamp with now', async () => {
-    const tests = timestamp.parseTimestamp('2020-01-01 03:00', timestamp.parseDate(new Date))
+    const tests = timestamp.parseTimestamp('2020-01-01 03:00', timestamp.parseDate(new Date()))
     expect(tests.hasDay).toBe(true)
     expect(tests.hasTime).toBe(true)
     expect(tests.year).toBe(2020)
@@ -49,5 +48,4 @@ describe('[TIMESTAMP] parseTimestamp', () => {
     const tests = timestamp.parseTimestamp()
     expect(tests).toBe(null)
   })
-
 })

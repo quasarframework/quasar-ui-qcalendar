@@ -33,5 +33,4 @@ describe('[TIMESTAMP] isBetweenDates', () => {
     const tests = timestamp.isBetweenDates(date, start, end, true)
     expect(tests).toBe(false)
   })
-
 })

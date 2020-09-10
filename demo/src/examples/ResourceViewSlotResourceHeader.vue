@@ -67,7 +67,8 @@ export default {
           year: 'numeric',
           timeZone: 'UTC'
         })
-      } catch (e) {
+      }
+      catch (e) {
         //
       }
     }

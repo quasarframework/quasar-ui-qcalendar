@@ -2,7 +2,6 @@
 const timestamp = require('utils/timestamp.js')
 
 describe('[TIMESTAMP] createNativeLocaleFormatter', () => {
-
   it('monthFormatter', async () => {
     function monthFormatter () {
       const longOptions = { timeZone: 'UTC', month: 'long' }
@@ -53,5 +52,4 @@ describe('[TIMESTAMP] createNativeLocaleFormatter', () => {
     const tests = dayFormatter()(ts, true)
     expect(tests).toBe('1')
   })
-
 })

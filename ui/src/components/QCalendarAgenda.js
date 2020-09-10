@@ -66,7 +66,8 @@ export default {
             .map((_, i) => i + parseInt(this.columnIndexStart, 10))
             .map(idx => this.__renderHeadDay(h, this.days[0], idx))
         ]
-      } else {
+      }
+      else {
         return [
           this.leftColumnOptionsValid === true && this.leftColumnOptions.map((column, _i) => this.__renderColumnHead(h, column, _i)),
           this.days.map(day => this.__renderHeadDay(h, day)),
@@ -188,7 +189,8 @@ export default {
             .map((_, i) => i + parseInt(this.columnIndexStart, 10))
             .map((i) => this.__renderDay(h, this.days[0], 0, i))
         ]
-      } else {
+      }
+      else {
         return [
           this.leftColumnOptionsValid === true && this.leftColumnOptions.map((column, _i) => this.__renderColumn(h, column, _i)),
           this.days.map((day, index) => this.__renderDay(h, day, index)),
@@ -262,10 +264,12 @@ export default {
         if (day.past === true) {
           color = 'colorBodyPast'
           backgroundColor = 'backgroundBodyPast'
-        } else if (day.current === true) {
+        }
+        else if (day.current === true) {
           color = 'colorBodyCurrent'
           backgroundColor = 'backgroundBodyCurrent'
-        } else if (day.future === true) {
+        }
+        else if (day.future === true) {
           color = 'colorBodyFuture'
           backgroundColor = 'backgroundBodyFuture'
         }

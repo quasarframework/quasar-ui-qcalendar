@@ -31,8 +31,24 @@ export default {
     },
 
     bodyHeight () {
+      let count = 0
+      function getCount (resources) {
+        let count = 0
+        resources.forEach(resource => {
+          ++count
+          if (resource.children && resource.children.length > 0 && resource.expanded === true) {
+            count += getCount(resource.children)
+          }
+        })
+        return count
+      }
+
       if (this.resources && this.resources.length > 0) {
-        return this.resources.length * this.parsedResourceHeight
+        count += getCount(this.resources)
+      }
+
+      if (this.resources && this.resources.length > 0) {
+        return count * this.parsedResourceHeight
       }
       return 0
     },

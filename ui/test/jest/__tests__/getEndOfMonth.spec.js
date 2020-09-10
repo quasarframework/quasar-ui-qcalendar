@@ -2,7 +2,6 @@
 const timestamp = require('utils/timestamp.js')
 
 describe('[TIMESTAMP] getEndOfMonth', () => {
-
   it('getEndOfMonth 2020-01-01', async () => {
     const ts = timestamp.parsed('2020-01-01')
     const tests = timestamp.getEndOfMonth(ts)
@@ -20,5 +19,4 @@ describe('[TIMESTAMP] getEndOfMonth', () => {
     const tests = timestamp.getEndOfMonth(ts)
     expect(tests.day).toBe(28)
   })
-
 })

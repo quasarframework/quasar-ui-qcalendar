@@ -1,6 +1,10 @@
 QCalendar
 ===
 
+**Breaking Changes in v2.2.0**
+
+Please be aware of breaking changes in events and scoped slotted data. You can find out more information [here](https://github.com/quasarframework/quasar-ui-qcalendar/releases/tag/v2.2.0).
+
 **QCalendar** is a powerful calendar component that plugs right into your Quasar application. It allows for viewing of **day** (1-6 days), **week**, **monthly** (including **mini-mode**), **scheduler**, **resource** and **agenda** views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.
 
 QCalendar is a less-opinionated calendar component, as it does not keep track of things like events and reminders. This is in the hands of the developer, but QCalendar makes it easy via accessible events, slots and methods (see examples how to accomplish these endeavors).
@@ -15,8 +19,8 @@ This is the true power of QCalendar.
 
 # Features
 - Show month, week, work-week, day, contiguous days (ex: 3 days at a time)
-- Scheduler view
-- Resource view
+- Scheduler view (optional hierarchical trees)
+- Resource view (optional hierarchical trees)
 - Agenda view (with optional Planner modes)
 - Month view mini-mode
 - Month view multi-day selection (separate and contiguous)
@@ -233,7 +237,34 @@ And, the multi-day selection, when combined with two or mode calendars allows yo
 
 The `scheduler` view is for displaying days with resources on the left side. This allows you to present data for each resource. Where a resource could be a person, room, etc.
 
-To use the scheduler, you need to use the `resources` property, which is an array of objects, containing a mandatory key `label`. To change the number of days displayed, use the `max-days` property. To change the distance between each resource, use the `resource-height` property.
+To use the scheduler, you need to use the `resources` property, which is an array of objects, containing a key as defined by the `resource-key` (default `label`). To change the number of days displayed, use the `max-days` property. To change the distance between each resource, use the `resource-height` property.
+
+The **Scheduler View** can also show hierarchical trees. Using the `resources` object, you can add `expanded` (boolean) and `children` (array) keys. Set the `expanded` key to `true` if you wish the tree to be expanded on first draw.
+
+```js
+resources: [
+  { label: 'John' },
+  {
+    label: 'Board Room',
+    expanded: false,
+    children: [
+      { label: 'Room-1' },
+      {
+        label: 'Room-2',
+        expanded: false,
+        children: [
+          { label: 'Partition-A' },
+          { label: 'Partition-B' },
+          { label: 'Partition-C' }
+        ]
+      }
+    ]
+  },
+  { label: 'Mary' },
+  { label: 'Susan' },
+  { label: 'Olivia' }
+]
+```
 
 ## Resource view
 
@@ -241,12 +272,13 @@ To use the scheduler, you need to use the `resources` property, which is an arra
 
 The `resource` view is for displaying resources (people, rooms, etc) down the side and with time intervals on top.
 
-To use the `resource` view, you need to use the `resources` property, which is an array of objects, containing a mandatory key `label`.
+To use the scheduler, you need to use the `resources` property, which is an array of objects, containing a key as defined by the `resource-key` (default `label`).
 
 For example:
 
 ```js
 :resources="resources"
+resource-key="label"
 ```
 
 where:
@@ -263,7 +295,34 @@ resources: [
 
 Your resources can contain whatever data you want and will be accessible via slots where the resouce is passed.
 
-If you wanted to hold event information as the above example, and wanted to make it more dynamic, listen for the `change` event, which gives you start and end timestamps, collect the data from the server, then dynamically set it on your resource. Remember, don't assign the data directly, or you will use Vue reactivity, instead use the `splice` command.
+If you wanted to hold event information as the above example, and wanted to make it more dynamic, listen for the `change` event, which gives you start and end timestamps, collect the data from the server, then dynamically set it on your resource. Remember, don't assign the data directly, or you will loose Vue reactivity, instead use the `splice` command.
+
+The **Resource View** can also show hierarchical trees. Using the `resources` object, you can add `expanded` (boolean) and `children` (array) keys. Set the `expanded` key to `true` if you wish the tree to be expanded on first draw.
+
+```js
+resources: [
+  { label: 'John' },
+  {
+    label: 'Board Room',
+    expanded: false,
+    children: [
+      { label: 'Room-1' },
+      {
+        label: 'Room-2',
+        expanded: false,
+        children: [
+          { label: 'Partition-A' },
+          { label: 'Partition-B' },
+          { label: 'Partition-C' }
+        ]
+      }
+    ]
+  },
+  { label: 'Mary' },
+  { label: 'Susan' },
+  { label: 'Olivia' }
+]
+```
 
 ## Agenda view
 

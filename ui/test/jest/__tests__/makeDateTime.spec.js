@@ -2,7 +2,6 @@
 const timestamp = require('utils/timestamp.js')
 
 describe('[TIMESTAMP] makeDateTime', () => {
-
   it('makeDateTime', async () => {
     const ts = timestamp.parsed('2019-12-31 23:59')
     const tests = timestamp.makeDateTime(ts)
@@ -11,5 +10,4 @@ describe('[TIMESTAMP] makeDateTime', () => {
     expect(tests.getMonth()).toBe(11)
     expect(tests.getDate()).toBe(31)
   })
-
 })

@@ -14,9 +14,10 @@ import {
   MINUTES_IN_HOUR,
   HOURS_IN_DAY,
   FIRST_HOUR,
-  MILLISECONDS_IN_DAY,
-  MILLISECONDS_IN_HOUR,
   MILLISECONDS_IN_MINUTE,
+  MILLISECONDS_IN_HOUR,
+  MILLISECONDS_IN_DAY,
+  MILLISECONDS_IN_WEEK,
   Timestamp,
   TimeObject,
   today,
@@ -65,7 +66,11 @@ import {
   isOverlappingDates,
   daysBetween,
   weeksBetween,
-  addToDate
+  addToDate,
+  compareTimestamps,
+  compareDate,
+  compareTime,
+  compareDateTime
 } from './utils/timestamp.js'
 
 import {
@@ -90,9 +95,10 @@ export {
   MINUTES_IN_HOUR,
   HOURS_IN_DAY,
   FIRST_HOUR,
-  MILLISECONDS_IN_DAY,
-  MILLISECONDS_IN_HOUR,
   MILLISECONDS_IN_MINUTE,
+  MILLISECONDS_IN_HOUR,
+  MILLISECONDS_IN_DAY,
+  MILLISECONDS_IN_WEEK,
   Timestamp,
   TimeObject,
   today,
@@ -142,6 +148,10 @@ export {
   daysBetween,
   weeksBetween,
   addToDate,
+  compareTimestamps,
+  compareDate,
+  compareTime,
+  compareDateTime,
   // helpers
   convertToUnit,
   indexOf
@@ -164,9 +174,10 @@ export default {
   MINUTES_IN_HOUR,
   HOURS_IN_DAY,
   FIRST_HOUR,
-  MILLISECONDS_IN_DAY,
-  MILLISECONDS_IN_HOUR,
   MILLISECONDS_IN_MINUTE,
+  MILLISECONDS_IN_HOUR,
+  MILLISECONDS_IN_DAY,
+  MILLISECONDS_IN_WEEK,
   Timestamp,
   TimeObject,
   today,
@@ -216,6 +227,10 @@ export default {
   daysBetween,
   weeksBetween,
   addToDate,
+  compareTimestamps,
+  compareDate,
+  compareTime,
+  compareDateTime,
   // helpers
   convertToUnit,
   indexOf,

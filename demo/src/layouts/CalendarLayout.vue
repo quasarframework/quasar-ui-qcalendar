@@ -176,7 +176,8 @@ export default {
       get () {
         if (this.$store.state.calendar.selectedDate) {
           return this.$store.state.calendar.selectedDate.replace(/-/g, '/')
-        } else {
+        }
+        else {
           return ''
         }
       },
@@ -259,7 +260,8 @@ export default {
           year: 'numeric',
           timeZone: 'UTC'
         })
-      } catch (e) {
+      }
+      catch (e) {
         // console.error('Intl.DateTimeFormat not supported')
         this.dateFormatter = void 0
         this.titleFormatter = void 0

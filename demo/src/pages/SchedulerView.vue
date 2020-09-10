@@ -2,7 +2,7 @@
   <div class="q-markdown">
     <q-markdown>
 ::: tip
-To use the scheduler, you need to use the `resources` property, which is an array of objects, containing a mandatory key `label`.
+To use the scheduler, you need to use the `resources` property, which is an array of objects, containing a key as defined by the `resource-key` (default `label`).
 ```js
 const rooms = [
   { id: 1, label: 'Room 1' /* any other keys you want associated with the data */ },
@@ -34,6 +34,13 @@ In this example, the `disabled-weekdays` is set to disable the weekends.
     </example-viewer>
     <example-viewer title="Prev/Next" file="SchedulerViewPrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Swipe" file="SchedulerViewSwipe" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+
+    <example-viewer title="Children" file="SchedulerViewChildren" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
+      <q-markdown>
+The example below is uses keys `children` and `expanded`, in the `resources` object, to show a tree hierarchy.
+      </q-markdown>
+    </example-viewer>
+
     <example-viewer title="Slot (scheduler-resources-header)" file="SchedulerViewSlotResourcesHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
       <q-markdown>
 For slots that return `day`, `interval` or `timestamp`, it looks like this:
@@ -123,6 +130,7 @@ export default {
     this.addToToc('Disabled Weekdays', 2)
     this.addToToc('Prev/Next', 2)
     this.addToToc('Swipe', 2)
+    this.addToToc('Children', 2)
     this.addToToc('Slot (scheduler-resources-header)', 2)
     this.addToToc('Slot (head-day)', 2)
     this.addToToc('Slot (scheduler-day-header)', 2)

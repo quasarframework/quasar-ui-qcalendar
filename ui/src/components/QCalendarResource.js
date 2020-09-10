@@ -1,9 +1,16 @@
+// Quasar
+import { QIcon } from 'quasar'
+
 // Mixins
 import CalendarIntervals from '../mixins/calendar-intervals.js'
 
 // Util
 import props from '../utils/props'
 import { convertToUnit } from '../utils/helpers.js'
+
+// Icons
+const mdiMenuRight = 'M10,17L15,12L10,7V17Z'
+const mdiMenuUp = 'M7,15L12,10L17,15H7Z'
 
 /* @vue/component */
 export default {
@@ -27,6 +34,11 @@ export default {
       minWidth: '100px',
       scrollWidth: '0'
     }
+  },
+
+  created () {
+    this.mdiMenuRight = mdiMenuRight
+    this.mdiMenuUp = mdiMenuUp
   },
 
   computed: {
@@ -190,25 +202,36 @@ export default {
         staticClass: 'q-calendar-resource__resources-body'
       }
 
-      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), data), this.__renderResourceLabels(h))
+      // return h('div', updateColors(colors.get(color), colors.get(backgroundColor), data), this.__renderResourceLabels(h))
+      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), data), this.__renderResources(h))
     },
 
-    __renderResourceLabels (h) {
-      return this.resources.map((resource, idx) => this.__renderResouceRow(h, resource, idx))
+    __renderResources (h, resources = void 0, indentLevel = 0) {
+      if (resources === void 0) {
+        resources = this.resources
+      }
+      return resources.map((resource, idx) => {
+        return this.__renderResourceRow(h, resource, idx, indentLevel)
+      })
     },
 
-    __renderResouceRow (h, resource, idx) {
+    __renderResourceRow (h, resource, idx, indentLevel = 0) {
       const slot = this.$scopedSlots['resource-row']
-      return h('div', {
+      const resourceRow = h('div', {
         staticClass: 'q-calendar-resource__resource-row'
       }, [
-        this.__renderResourceLabel(h, resource, idx),
+        this.__renderResourceLabel(h, resource, idx, indentLevel),
         this.__renderResourceIntervals(h, resource),
         slot && slot({ resource, index: idx })
       ])
+      if (resource.expanded === true) {
+        return [resourceRow, ...this.__renderResources(h, resource.children, indentLevel + 1)]
+      }
+
+      return [resourceRow]
     },
 
-    __renderResourceLabel (h, resource, idx) {
+    __renderResourceLabel (h, resource, idx, indentLevel = 0) {
       const slot = this.$scopedSlots['resource-label']
       const scope = {
         resource: resource,
@@ -227,7 +250,7 @@ export default {
       }
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
-        key: resource.label,
+        key: resource[this.resourceKey] + '-' + idx,
         staticClass: 'q-calendar-resource__resource' + (this.sticky === true ? ' q-calendar__sticky' : ''),
         style: {
           maxWidth: width,
@@ -238,16 +261,35 @@ export default {
           return { resource, index: idx, event }
         })
       }), [
-        slot ? slot(scope) : this.__renderResourceText(h, resource)
+        slot ? slot(scope) : this.__renderResourceText(h, resource, idx, indentLevel)
       ])
     },
 
-    __renderResourceText (h, resource) {
-      const label = resource.label
+    __renderResourceText (h, resource, idx, indentLevel = 0) {
+      const label = resource[this.resourceKey]
+      if (label === void 0) {
+        console.warn('QCalendarResource: resource object requires "resource-key" property to contain resource object key')
+      }
 
       return h('div', {
-        staticClass: 'q-calendar-resource__resource-text'
-      }, label)
+        staticClass: 'q-calendar-resource__resource-text',
+        style: {
+          paddingLeft: (10 * indentLevel) + 'px'
+        }
+      }, [
+        resource.children && resource.children.length > 0 && h(QIcon, {
+          props: {
+            name: (resource.expanded === true ? this.mdiMenuUp : this.mdiMenuRight),
+            size: 'sm'
+          },
+          on: {
+            click: () => {
+              resource.expanded = !resource.expanded
+            }
+          }
+        }),
+        label
+      ])
     },
 
     __renderResourceIntervals (h, resource) {

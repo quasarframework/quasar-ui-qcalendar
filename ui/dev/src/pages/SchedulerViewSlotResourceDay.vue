@@ -8,7 +8,7 @@
       style="height: 500px;"
     >
       <template #scheduler-resource-day="{ timestamp, index, resource }">
-        <q-btn class="fit"><span class="ellipsis" style="font-size: 10px;">{{ resource.label }}:{{ timestamp.day }}</span></q-btn>
+        <q-btn flat class="fit"><span class="ellipsis" style="font-size: 10px;">{{ resource.label }}:{{ timestamp.day }}</span></q-btn>
       </template>
     </q-calendar>
   </div>

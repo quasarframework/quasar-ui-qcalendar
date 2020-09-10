@@ -139,6 +139,7 @@ export default {
           component
         ])
       }
+
       return component
     },
 
@@ -255,10 +256,12 @@ export default {
         if ((timestamp && timestamp.current === true) || day.current === true) {
           color = 'colorWorkWeekCurrent'
           backgroundColor = 'backgroundWorkWeekCurrent'
-        } else if ((timestamp && timestamp.past === true) || day.past === true) {
+        }
+        else if ((timestamp && timestamp.past === true) || day.past === true) {
           color = 'colorWorkWeekPast'
           backgroundColor = 'backgroundWorkWeekPast'
-        } else if ((timestamp && timestamp.future === true) || day.future === true) {
+        }
+        else if ((timestamp && timestamp.future === true) || day.future === true) {
           color = 'colorWorkWeekFuture'
           backgroundColor = 'backgroundWorkWeekFuture'
         }
@@ -295,13 +298,16 @@ export default {
         if (outside === true) {
           color = 'colorBodyOutside'
           backgroundColor = 'backgroundBodyOutside'
-        } else if (day.past === true) {
+        }
+        else if (day.past === true) {
           color = 'colorBodyPast'
           backgroundColor = 'backgroundBodyPast'
-        } else if (day.current === true) {
+        }
+        else if (day.current === true) {
           color = 'colorBodyCurrent'
           backgroundColor = 'backgroundBodyCurrent'
-        } else if (day.future === true) {
+        }
+        else if (day.future === true) {
           color = 'colorBodyFuture'
           backgroundColor = 'backgroundBodyFuture'
         }
@@ -379,13 +385,16 @@ export default {
         if (outside === true) {
           color = 'colorDayLabelOutside'
           backgroundColor = 'backgroundDayLabelOutside'
-        } else if (day.past === true) {
+        }
+        else if (day.past === true) {
           color = 'colorDayLabelPast'
           backgroundColor = 'backgroundDayLabelPast'
-        } else if (day.current === true) {
+        }
+        else if (day.current === true) {
           color = 'colorDayLabelCurrent'
           backgroundColor = 'backgroundDayLabelCurrent'
-        } else if (day.future === true) {
+        }
+        else if (day.future === true) {
           color = 'colorDayLabelFuture'
           backgroundColor = 'backgroundDayLabelFuture'
         }

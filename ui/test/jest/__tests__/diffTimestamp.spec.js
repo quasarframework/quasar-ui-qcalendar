@@ -2,7 +2,6 @@
 const timestamp = require('utils/timestamp.js')
 
 describe('[TIMESTAMP] diffTimestamp', () => {
-
   it('diffTimestamp 1 day', async () => {
     const ts = timestamp.parsed('2020-01-01')
     const ts2 = timestamp.parsed('2020-01-02')

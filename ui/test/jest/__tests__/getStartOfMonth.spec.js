@@ -2,7 +2,6 @@
 const timestamp = require('utils/timestamp.js')
 
 describe('[TIMESTAMP] getStartOfMonth', () => {
-
   it('getStartOfMonth 2020-01-01', async () => {
     const ts = timestamp.parsed('2020-01-01')
     const tests = timestamp.getStartOfMonth(ts)

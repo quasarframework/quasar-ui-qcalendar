@@ -269,7 +269,9 @@ export default {
 
   watch: {
     overdueSelected (val) {
-      this.overdue.forEach(due => { due.selected = val })
+      this.overdue.forEach(due => {
+        due.selected = val
+      })
     },
 
     'selected.0' (val, oldVal) {
@@ -350,7 +352,8 @@ export default {
           year: 'numeric',
           timeZone: 'UTC'
         })
-      } catch (e) {
+      }
+      catch (e) {
         // console.error('Intl.DateTimeFormat not supported')
         this.dateFormatter = void 0
         this.titleFormatter = void 0
@@ -411,7 +414,9 @@ export default {
     },
 
     adjustSelected () {
-      this.overdue.forEach(due => { due.selected = this.overdueSelected })
+      this.overdue.forEach(due => {
+        due.selected = this.overdueSelected
+      })
 
       this.selected.forEach((sel, index) => {
         this.agenda[index + 1].forEach(ag => {
@@ -527,8 +532,11 @@ export default {
 
           // update selection status
           if (targetColumn === 'overdue') {
-            this.overdue.forEach(due => { due.selected = this.overdueSelected })
-          } else {
+            this.overdue.forEach(due => {
+              due.selected = this.overdueSelected
+            })
+          }
+          else {
             this.agenda[targetColumn].forEach(ag => {
               ag.selected = this.selected[targetColumn - 1]
             })
@@ -574,7 +582,8 @@ export default {
         const el = els[i]
         if (el.classList.contains('planner-item')) {
           child = el
-        } else if (el.classList.contains('planner-column')) {
+        }
+        else if (el.classList.contains('planner-column')) {
           column = el
         }
         if (column && child) break
@@ -600,7 +609,8 @@ export default {
             this.copyElement = child.cloneNode(true)
             this.copyElement.style.position = 'absolute'
             this.copyElement.style.opacity = '0.5'
-          } else {
+          }
+          else {
             // fail - probably trying to drag a column
             this.cleanup()
             return
@@ -636,7 +646,8 @@ export default {
             // no dropping on self, restore it all
             this.dragEl.style.opacity = '1.0'
             this.cleanup()
-          } else {
+          }
+          else {
             this.onDrop(e, column, child)
           }
         }
@@ -669,7 +680,8 @@ export default {
       let list
       if (column === 'overdue') {
         list = this.overdue
-      } else {
+      }
+      else {
         list = this.agenda[parseInt(column, 10)]
       }
 
@@ -687,7 +699,8 @@ export default {
       let list
       if (column === 'overdue') {
         list = this.overdue
-      } else {
+      }
+      else {
         list = this.agenda[parseInt(column, 10)]
       }
 
@@ -695,7 +708,8 @@ export default {
       if (!id) {
         list.splice(list.length, 0, item)
         return
-      } else {
+      }
+      else {
         id = parseInt(id, 10)
       }
 
