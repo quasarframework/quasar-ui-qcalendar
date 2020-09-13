@@ -144,7 +144,7 @@
         "All"
       ],
       "examples": [
-        "disabled-before=\"2019-04-01\""
+        "disabled-after=\"2019-04-01\""
       ]
     },
     "locale": {
