@@ -443,7 +443,7 @@ export default {
       if (this.days.length === 1 && this.columnCount && parseInt(this.columnCount, 10) > 0) {
         return Array.apply(null, new Array(parseInt(this.columnCount, 10)))
           .map((_, i) => i + parseInt(this.columnIndexStart, 10))
-          .map(i => this.__renderDay(h, this.days[0], 0, i))
+          .map(i => this.__renderDay(h, resource, this.days[0], i))
       }
       else {
         return this.days.map((day, index) => this.__renderDay(h, resource, day, index))
