@@ -268,9 +268,10 @@ export default {
       const height = convertToUnit(this.parsedResourceHeight)
       let dragOver
       return h('div', {
+        key: resource[this.resourceKey] + '-' + interval.time,
         staticClass: 'q-calendar-resource__resource-interval',
         class: {
-          'q-calendar-scheduler__day-resource--droppable': dragOver
+          'q-calendar-scheduler__resource_interval--droppable': dragOver
         },
         style: {
           maxWidth: width,
@@ -280,12 +281,12 @@ export default {
         domProps: {
           ondragover: (_event) => {
             if (this.dragOverFunc !== void 0) {
-              dragOver = this.dragOverFunc(_event, resource, 'resource', idx)
+              dragOver = this.dragOverFunc(_event, resource, 'resource', interval)
             }
           },
           ondrop: (_event) => {
             if (this.dropFunc !== void 0) {
-              this.dropFunc(_event, resource, 'resource', idx)
+              this.dropFunc(_event, resource, 'resource', interval)
             }
           }
         },
