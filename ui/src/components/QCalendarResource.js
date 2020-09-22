@@ -266,13 +266,29 @@ export default {
       const slot = this.$scopedSlots['resource-interval']
       const width = convertToUnit(this.parsedIntervalWidth)
       const height = convertToUnit(this.parsedResourceHeight)
+      let dragOver
       return h('div', {
         staticClass: 'q-calendar-resource__resource-interval',
+        class: {
+          'q-calendar-scheduler__day-resource--droppable': dragOver
+        },
         style: {
           maxWidth: width,
           minWidth: width,
           height
-        }
+        },
+        domProps: {
+          ondragover: (_event) => {
+            if (this.dragOverFunc !== void 0) {
+              dragOver = this.dragOverFunc(_event, resource, 'resource', idx)
+            }
+          },
+          ondrop: (_event) => {
+            if (this.dropFunc !== void 0) {
+              this.dropFunc(_event, resource, 'resource', idx)
+            }
+          }
+        },
       }, [
         slot && slot({ resource, interval })
       ])
