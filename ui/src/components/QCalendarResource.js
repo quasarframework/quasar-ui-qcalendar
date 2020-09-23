@@ -251,9 +251,16 @@ export default {
       const slot = this.$scopedSlots['resource-intervals']
       const timeStartPosX = this.timeStartPosX,
         timeDurationWidth = this.timeDurationWidth,
-        intervals = this.intervals
+        intervals = this.intervals,
+        mouseEventsHolders = this.getDefaultMouseEventHandlers(':resource:intervals', event => {
+          const scope = {
+            resource: resource
+          }
+          return { scope, event }
+        })
       return h('div', {
-        staticClass: 'q-calendar-resource__resource-intervals'
+        staticClass: 'q-calendar-resource__resource-intervals',
+        on: mouseEventsHolders
       }, [
         this.intervals.map(intervals => intervals.map(interval => this.__renderResourceInterval(h, resource, interval))),
         slot && slot({ resource, intervals, timeStartPosX, timeDurationWidth })
@@ -290,6 +297,15 @@ export default {
             }
           }
         },
+        // ATTENTION: You're working here
+        // the problem is how to propagate events from parent to children
+        on: this.getDefaultMouseEventHandlers(':resource:interval', event => {
+          const scope = {
+            interval: interval,
+            resource: resource
+          }
+          return { scope, event }
+        })
       }, [
         slot && slot({ resource, interval })
       ])
