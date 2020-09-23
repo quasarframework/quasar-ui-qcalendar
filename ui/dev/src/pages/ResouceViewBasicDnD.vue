@@ -229,6 +229,7 @@ export default {
       if (scope !== undefined && scope.interval !== undefined) {
         // this is a dispatched event to get reource interval
         e.stopPropagation() // if it happend to be a resource:interval avoipropagation to parent
+        // TODO: when the new time is same as the old time revert the left or width to dndHelper copy ones
         if (this.dndHelper.start === 'before') {
 
           this.updateEventTimeValue('start', scope.interval.time)
