@@ -126,8 +126,8 @@ export default {
 
   methods: {
     getEventDurationMin (rEvent) {
-      const start = new Date(`${rEvent.date} ${rEvent.start} +0`)
-      const end = new Date(`${rEvent.date} ${rEvent.end} +0`)
+      const start = new Date(`${rEvent.date} ${rEvent.start}`)
+      const end = new Date(`${rEvent.date} ${rEvent.end}`)
       const ms = end.getTime() - start.getTime() // duration in ms
       const mins = ms / (60 * 1000) // 1 min = 60s = (60 * 1000)ms
       return mins
