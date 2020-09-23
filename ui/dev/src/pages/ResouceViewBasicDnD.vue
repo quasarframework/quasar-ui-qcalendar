@@ -8,7 +8,7 @@
       v-model="selectedDate"
       view="day-resource"
       :resources="resources"
-      :resource-height="50"
+      :resource-height="100"
       locale="en-us"
       :drop-func="onDrop"
       :drag-over-func="onDragOver"
@@ -28,8 +28,8 @@
             draggable
             @dragstart.stop="(event) => onDragStart(event, schedule)"
             @mousemove.stop="onMouseMove"
-            class="q-pa-sm"
-            :style="`position: absolute; left: ${scope.timeStartPosX(schedule.start)}px; color: ${schedule.txtColor}; background-color: ${schedule.bgColor}; width: ${eventWidth(schedule, scope.timeDurationWidth)}`"
+            class="q-pa-xs"
+            :style="`position: absolute; top: ${index * 22}px;left: ${scope.timeStartPosX(schedule.start)}px; color: ${schedule.txtColor}; background-color: ${schedule.bgColor}; width: ${eventWidth(schedule, scope.timeDurationWidth)}`"
           >
             {{schedule.title}}
           </q-badge>
@@ -112,14 +112,13 @@ export default {
 
       event.dataTransfer.setData('text/json', JSON.stringify(schedule))
       event.effectAllowed = 'copyMove'
-      event.dataTransfer.setDragImage(event.target, 0, 0);
-      // set badge position start to 
+      event.dataTransfer.setDragImage(event.target, 0, 0)
+      // set badge position start to
     },
-
 
     onDrop (event, resource, type, interval) {
       console.log('Drop')
-      console.log(event);
+      console.log(event)
       console.log(resource)
       console.log(type)
       console.log(interval)
@@ -151,8 +150,7 @@ export default {
       if (type === 'interval') {
         console.log(day)
       }
-
-    },
+    }
   }
 }
 </script>
