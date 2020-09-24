@@ -297,8 +297,6 @@ export default {
             }
           }
         },
-        // ATTENTION: You're working here
-        // the problem is how to propagate events from parent to children
         on: this.getDefaultMouseEventHandlers(':resource:interval', event => {
           const scope = {
             interval: interval,
