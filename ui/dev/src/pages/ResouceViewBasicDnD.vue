@@ -140,7 +140,16 @@ export default {
 
     updateEventTimeValue (key, value) {
       const plaEvent = this.rEvents.filter(e => e.eventId === this.dndHelper.eventId.toString())[0]
-      plaEvent[key] = value
+      if (plaEvent[key] === value) {
+        this.revertToLatestState()
+      } else {
+        plaEvent[key] = value
+      }
+    },
+
+    revertToLatestState () {
+      this.dndHelper.target.style.left = this.dndHelper.leftCopy
+      this.dndHelper.target.style.width = this.dndHelper.widthCopy
     },
 
     onMouseMove (evt) {
@@ -228,23 +237,20 @@ export default {
 
       if (scope !== undefined && scope.interval !== undefined) {
         // this is a dispatched event to get reource interval
-        e.stopPropagation() // if it happend to be a resource:interval avoipropagation to parent
-        // TODO: when the new time is same as the old time revert the left or width to dndHelper copy ones
+        e.stopPropagation() // if it happend to be a resource:interval avoid propagation to parent
         if (this.dndHelper.start === 'before') {
 
           this.updateEventTimeValue('start', scope.interval.time)
         } else if (this.dndHelper.start === 'after') {
           this.updateEventTimeValue('end', scope.interval.time)
-
         } else {
           this.dndHelper.target.style.left = this.dndHelper.leftCopy
           this.dndHelper.target.style.width = this.dndHelper.widthCopy
         }
       } else if (this.dndHelper.start === 'before') {
-        this.dndHelper.target.style.left = this.dndHelper.leftCopy
-        this.dndHelper.target.style.width = this.dndHelper.widthCopy
+        this.revertToLatestState()
       } else if (this.dndHelper.start === 'after') {
-        this.dndHelper.target.style.width = this.dndHelper.widthCopy
+        this.revertToLatestState()
       }
 
 
