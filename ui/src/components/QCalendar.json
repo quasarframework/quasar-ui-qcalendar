@@ -144,7 +144,7 @@
         "All"
       ],
       "examples": [
-        "disabled-before=\"2019-04-01\""
+        "disabled-after=\"2019-04-01\""
       ]
     },
     "locale": {
@@ -4343,10 +4343,74 @@
           "type": "Object",
           "desc": "Timestamp object",
           "__exemption": [ "examples" ]
+        },
+        "timeStartPos": {
+          "type": "Function",
+          "desc": "Calculates the starting y position of the passed in time",
+          "applicable": [
+            "day",
+            "2day",
+            "3day",
+            "4day",
+            "5day",
+            "6day"
+          ],
+          "params": {
+            "time": {
+              "type": "String",
+              "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
+              "examples":[
+                "09:00"
+              ]
+            }
+          },
+          "returns": {
+            "type": "Number",
+            "desc": "The absolute y starting position",
+            "examples": [
+              "120",
+              "482"
+            ]
+          }
+        },
+        "timeDurationHeight": {
+          "type": "Function",
+          "desc": "Given a duration (in minutes), will return the css height value",
+          "applicable": [
+            "day",
+            "2day",
+            "3day",
+            "4day",
+            "5day",
+            "6day"
+          ],
+          "params": {
+            "duration": {
+              "type": ["Number", "String"],
+              "desc": "The number of minutes for the event to calculate it's height",
+              "examples":[
+                "300",
+                "900"
+              ]
+            }
+          },
+          "returns": {
+            "type": "Number",
+            "desc": "The height (in pixels) to be used for the event",
+            "examples": [
+              "80",
+              "120"
+            ]
+          }
         }
       },
       "applicable": [
         "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
         "week-agenda"
       ]
     },
@@ -4399,11 +4463,11 @@
         },
         "timeDurationHeight": {
           "type": "Function",
-          "desc": "Given a duration (in seconds), will return the css height value",
+          "desc": "Given a duration (in minutes), will return the css height value",
           "params": {
             "duration": {
               "type": ["Number", "String"],
-              "desc": "The number of seconds for the event to calculate it's height",
+              "desc": "The number of minutes for the event to calculate it's height",
               "examples":[
                 "300",
                 "900"
@@ -4846,11 +4910,11 @@
         },
         "timeDurationWidth": {
           "type": "Function",
-          "desc": "Given a duration (in seconds), will return the css width value",
+          "desc": "Given a duration (in minutes), will return the css width value",
           "params": {
             "duration": {
               "type": ["Number", "String"],
-              "desc": "The number of seconds for the event to calculate it's width",
+              "desc": "The number of minutes for the event to calculate it's width",
               "examples":[
                 "300",
                 "900"

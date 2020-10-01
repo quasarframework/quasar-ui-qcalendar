@@ -107,7 +107,7 @@
       }
     },
     "parseTime": {
-      "desc": "Parses the passed in value and returns the number of seconds since midnight",
+      "desc": "Parses the passed in value and returns the number of minutes since midnight",
       "params": {
         "input": {
           "type": [ "Number", "String", "Object" ],
@@ -122,7 +122,7 @@
       },
       "returns": {
         "type": "Number",
-        "desc": "The number of seconds since midnight",
+        "desc": "The number of minutes since midnight",
         "__exemption": [ "examples" ]
       }
     },
