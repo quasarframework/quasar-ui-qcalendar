@@ -103,7 +103,7 @@ export function getEndOfMonth (timestamp) {
   return end
 }
 
-// returns seconds since midnight
+// returns minutes since midnight
 export function parseTime (input) {
   const type = Object.prototype.toString.call(input)
   switch (type) {
