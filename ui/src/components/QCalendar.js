@@ -379,6 +379,7 @@ export default {
             }
           }
           if (this.$listeners['click:date']) {
+            /* eslint-disable-next-line */
             this.$emit('click:date', timestamp)
           }
         }

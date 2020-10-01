@@ -381,7 +381,7 @@ It's important to know that all `view` types are linear in nature. For instance,
 
 Monthly views are also linear, but respect the number of days within the month that is to be displayed.
 
-All views respect the number of days to be displayed as per the `weekdays` filter property.
+All views respect the number of weekdays to be displayed as per the `weekdays` filter property.
 
 ## Weekday filtering
 

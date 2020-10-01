@@ -224,15 +224,18 @@ export default {
   },
   methods: {
     onPrev () {
+      /* eslint-disable-next-line */
       this.$root.$emit('calendar:prev')
     },
     onNext () {
+      /* eslint-disable-next-line */
       this.$root.$emit('calendar:next')
     },
     onTitlebarResized (size) {
       this.titlebarHeight = size.height
     },
     setToday () {
+      /* eslint-disable-next-line */
       this.$root.$emit('calendar:today', this.formatDate())
     },
     formatDate (date) {
