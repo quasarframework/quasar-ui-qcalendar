@@ -116,7 +116,7 @@ export default {
       }
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
-        key: (this.columnOptionsId !== void 0 ? column[this.columnOptionsId] : column.id) + (idx !== void 0 ? '-' + idx : ''),
+        key: (this.columnOptionsId !== undefined ? column[this.columnOptionsId] : undefined),
         staticClass: 'q-calendar-daily__head-day',
         class: {
           'q-column-day': true,
@@ -223,7 +223,7 @@ export default {
       }
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
-        key: (this.columnOptionsId !== void 0 ? column[this.columnOptionsId] : column.id) + '-body-' + (idx !== void 0 ? ':' + idx : ''),
+        key: (this.columnOptionsId !== undefined ? column[this.columnOptionsId] : undefined),
         staticClass: 'q-calendar-daily__day',
         class: {
           'q-column-day': true,
