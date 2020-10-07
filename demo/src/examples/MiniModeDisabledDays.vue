@@ -16,7 +16,7 @@
       v-model="selectedDate"
       view="month"
       bordered
-      :disabled-days="disabledDays2"
+      :disabled-days="disabledDaysRange"
       mini-mode
       :day-style="modifiedStyle"
       locale="en-us"
@@ -36,7 +36,7 @@ export default {
         '2019-04-04',
         '2019-04-05'
       ],
-      disabledDays2: [[
+      disabledDaysRange: [[
         '2019-04-02',
         '2019-04-05'
       ]]

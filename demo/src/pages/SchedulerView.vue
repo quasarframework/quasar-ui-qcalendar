@@ -2,7 +2,7 @@
   <div class="q-markdown">
     <q-markdown>
 ::: tip
-To use the scheduler, you need to use the `resources` property, which is an array of objects, containing a key as defined by the `resource-key` (default `label`).
+To use the scheduler, you need to use the `resources` property, which is an array of objects, containing a key as defined by the `resource-key` (default `label`). It's this key that will be displayed in your scheduler.
 ```js
 const rooms = [
   { id: 1, label: 'Room 1' /* any other keys you want associated with the data */ },
@@ -17,32 +17,30 @@ const rooms = [
     <example-title title="Scheduler View" />
     <example-viewer title="Basic" file="SchedulerViewBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Dark" file="SchedulerViewDark" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Disabled Days" file="SchedulerViewDisabledDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
-      <q-markdown>
+
+    <q-markdown>
 When the property `disabled-days` has an array of disabled days, you can hook into the `resource-style` property to change the background color of the disabled day.
-      </q-markdown>
-    </example-viewer>
-    <example-viewer title="Disabled Before/After" file="SchedulerViewDisabledBeforeAfter" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
-      <q-markdown>
+    </q-markdown>
+    <example-viewer title="Disabled Days" file="SchedulerViewDisabledDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+
+    <q-markdown>
 In this example, the `disabled-before` is set to the monday of this week and the `disabled-after` is set to the friday of this week.
-      </q-markdown>
-    </example-viewer>
-    <example-viewer title="Disabled Weekdays" file="SchedulerViewDisabledWeekdays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
-      <q-markdown>
+    </q-markdown>
+    <example-viewer title="Disabled Before/After" file="SchedulerViewDisabledBeforeAfter" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+
+    <q-markdown>
 In this example, the `disabled-weekdays` is set to disable the weekends.
-      </q-markdown>
-    </example-viewer>
+    </q-markdown>
+    <example-viewer title="Disabled Weekdays" file="SchedulerViewDisabledWeekdays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Prev/Next" file="SchedulerViewPrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Swipe" file="SchedulerViewSwipe" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
-    <example-viewer title="Children" file="SchedulerViewChildren" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
-      <q-markdown>
-The example below is uses keys `children` and `expanded`, in the `resources` object, to show a tree hierarchy.
-      </q-markdown>
-    </example-viewer>
+    <q-markdown>
+The example below uses the keys `children` and `expanded`, in the `resources` object, to show a tree hierarchy.
+    </q-markdown>
+    <example-viewer title="Children" file="SchedulerViewChildren" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
-    <example-viewer title="Slot (scheduler-resources-header)" file="SchedulerViewSlotResourcesHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
-      <q-markdown>
+    <q-markdown>
 For slots that return `day`, `interval` or `timestamp`, it looks like this:
 ```js
 {
@@ -66,28 +64,25 @@ For slots that return `day`, `interval` or `timestamp`, it looks like this:
 ```
 
 Below, the slot receives an array of `timestamp`s for the days that are being displayed.
-      </q-markdown>
-    </example-viewer>
+    </q-markdown>
+    <example-viewer title="Slot (scheduler-resources-header)" file="SchedulerViewSlotResourcesHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-viewer title="Slot (head-day)" file="SchedulerViewSlotHeadDay" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
-    <example-viewer title="Slot (scheduler-day-header)" file="SchedulerViewSlotDayHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
-      <q-markdown>
+    <q-markdown>
 Below, the slot receives the `timestamp` for the day being displayed.
-      </q-markdown>
-    </example-viewer>
+    </q-markdown>
+    <example-viewer title="Slot (scheduler-day-header)" file="SchedulerViewSlotDayHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
-    <example-viewer title="Slot (scheduler-resource-day)" file="SchedulerViewSlotResourceDay" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
-      <q-markdown>
+    <q-markdown>
 Below, the slot receives the `timestamp` for the day being displayed, an index, and the resource.
-      </q-markdown>
-    </example-viewer>
+    </q-markdown>
+    <example-viewer title="Slot (scheduler-resource-day)" file="SchedulerViewSlotResourceDay" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
-    <example-viewer title="Slot (scheduler-resource)" file="SchedulerViewSlotResource" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
-      <q-markdown>
+    <q-markdown>
 Below, the slot receives the `resource` to be displayed. In this case, an avatar (or icon) is being displayed along with the resource name.
-      </q-markdown>
-    </example-viewer>
+    </q-markdown>
+    <example-viewer title="Slot (scheduler-resource)" file="SchedulerViewSlotResource" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-viewer title="Theme" file="SchedulerViewTheme" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Locale" file="SchedulerViewLocale" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />

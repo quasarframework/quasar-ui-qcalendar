@@ -36,9 +36,9 @@
 </template>
 
 <script>
-import {
-  makeDate
-} from 'ui' // alias for '@quasar/quasar-ui-qcalendar'
+// normally you would not import "all" of QCalendar, but is needed for this example to work with UMD (codepen)
+import QCalendar from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
+
 export default {
   data () {
     return {
@@ -124,7 +124,7 @@ export default {
     },
 
     updateTitle () {
-      const myDate = makeDate(this.start)
+      const myDate = QCalendar.makeDate(this.start)
       if (this.dateFormatter !== undefined) {
         this.title = this.dateFormatter.format(myDate)
       }

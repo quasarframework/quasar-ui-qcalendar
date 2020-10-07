@@ -35,9 +35,8 @@
 </template>
 
 <script>
-import {
-  getDayIdentifier
-} from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
+// normally you would not import "all" of QCalendar, but is needed for this example to work with UMD (codepen)
+import QCalendar from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
 
 function leftClick (e) {
   return e.button === 0
@@ -66,13 +65,13 @@ export default {
     },
     anchorDayIdentifier () {
       if (this.anchorTimestamp !== '') {
-        return getDayIdentifier(this.anchorTimestamp)
+        return QCalendar.getDayIdentifier(this.anchorTimestamp)
       }
       return false
     },
     otherDayIdentifier () {
       if (this.otherTimestamp !== '') {
-        return getDayIdentifier(this.otherTimestamp)
+        return QCalendar.getDayIdentifier(this.otherTimestamp)
       }
       return false
     },
@@ -98,7 +97,7 @@ export default {
       }
     },
     getBetween (timestamp) {
-      const nowIdentifier = getDayIdentifier(timestamp)
+      const nowIdentifier = QCalendar.getDayIdentifier(timestamp)
       return {
         'q-selected-day-first': this.lowIdentifier === nowIdentifier,
         'q-selected-day': this.lowIdentifier <= nowIdentifier && this.highIdentifier >= nowIdentifier,

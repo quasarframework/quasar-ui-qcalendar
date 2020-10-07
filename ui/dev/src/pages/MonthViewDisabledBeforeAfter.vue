@@ -12,18 +12,15 @@
 </template>
 
 <script>
-import {
-  parseDate,
-  parseTimestamp,
-  addToDate,
-  daysInMonth
-} from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
+// normally you would not import "all" of QCalendar, but is needed for this example to work with UMD (codepen)
+import QCalendar from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
+
 const CURRENT_DAY = new Date()
 
 function getCurrentDay (day) {
   const newDay = new Date(CURRENT_DAY)
   newDay.setDate(day)
-  const tm = parseDate(newDay)
+  const tm = QCalendar.parseDate(newDay)
   return tm.date
 }
 
@@ -41,8 +38,8 @@ export default {
     disabledBefore () {
       // find the last day of the previous month
       if (this.selectedDate) {
-        let ts = parseTimestamp(this.selectedDate)
-        ts = addToDate(ts, { day: -ts.day })
+        let ts = QCalendar.parseTimestamp(this.selectedDate)
+        ts = QCalendar.addToDate(ts, { day: -ts.day })
         return ts.date
       }
       return undefined
@@ -51,10 +48,10 @@ export default {
     disabledAfter () {
       // find the 1st day of the next month
       if (this.selectedDate) {
-        let ts = parseTimestamp(this.selectedDate)
+        let ts = QCalendar.parseTimestamp(this.selectedDate)
         // get days in month
-        const days = daysInMonth(ts.year, ts.month)
-        ts = addToDate(ts, { day: (days - ts.day) })
+        const days = QCalendar.daysInMonth(ts.year, ts.month)
+        ts = QCalendar.addToDate(ts, { day: (days - ts.day) })
         return ts.date
       }
       return undefined

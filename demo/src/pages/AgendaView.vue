@@ -9,8 +9,7 @@ For another example on how to use the Agenda view, check out the [Planner exampl
     <example-viewer title="Basic" file="AgendaViewBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Agenda View (week) - Basic" file="AgendaViewWeekBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
-    <example-viewer title="Slots" file="AgendaViewWeekSlots" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
-      <q-markdown>
+    <q-markdown>
 We are going to jump right into slot usage so that for the rest of the examples we have content that can be displayed.
 
 Remember, the data displayed below is slotted content, so you can be as creative as you need to be.
@@ -36,27 +35,25 @@ For slots that return `day`, `interval` or `timestamp`, it looks like this:
   disabled: false // if timestamp is disabled
 }
 ```
-      </q-markdown>
-    </example-viewer>
-
+    </q-markdown>
+    <example-viewer title="Slots" file="AgendaViewWeekSlots" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Dark" file="AgendaViewWeekDark" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="First Day Monday" file="AgendaViewWeekFirstDayMonday" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Five Day Workweek" file="AgendaViewWeekFiveDayWorkweek" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Prev/Next" file="AgendaViewWeekPrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Swipe" file="AgendaViewWeekSwipe" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Column Options" file="AgendaViewWeekColumnOptions" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
-      <q-markdown>
+    <q-markdown>
 There are two properties: `left-column-options` and `right-column-options`, that allow you to define extra columns on the left and right of the `week-agenda` view. If you are using QCalendar to create a Planner, you will need this functionality.
 
 These properties take an array of objects, like so:
 
-(Template code)
+**Template code**
 ```html
     :left-column-options="leftColumnOptions"
     :right-column-options="rightColumnOptions"
 ```
 
-(JavaScript code)
+**JavaScript code**
 ```js
   data () {
     return {
@@ -87,17 +84,17 @@ If you do not wish to have an `id` and `label` keys in your data (say, it came f
 ```
 
 To manage data, use the `column-header` and `column-body` slots.
-      </q-markdown>
-    </example-viewer>
-    <example-viewer title="No Scroll" file="AgendaViewNoScroll" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
-      <q-markdown>
+    </q-markdown>
+    <example-viewer title="Column Options" file="AgendaViewWeekColumnOptions" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+
+    <q-markdown>
 There may be circumstances where you wish to control the scrolling. In this case, use the `no-scroll` property and provide your own scroll wrapper.
 
 :::
 Note: The header area of the calendar will now scroll with the rest of the calendar
 :::
-      </q-markdown>
-    </example-viewer>
+    </q-markdown>
+    <example-viewer title="No Scroll" file="AgendaViewNoScroll" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Theme" file="AgendaViewWeekTheme" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Locale" file="AgendaViewWeekLocale" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
   </div>
