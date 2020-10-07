@@ -61,7 +61,7 @@ export default {
 
     monthFormatter () {
       try {
-        return new Intl.DateTimeFormat(this.locale || void 0, {
+        return new Intl.DateTimeFormat(this.locale || undefined, {
           day: '2-digit',
           month: 'long',
           year: 'numeric',

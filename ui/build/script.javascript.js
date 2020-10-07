@@ -208,7 +208,7 @@ function injectVueRequirement (code) {
     return code
   }
 
-  const checkMe = ` if (Vue === void 0) {
+  const checkMe = ` if (Vue === undefined) {
     console.error('[ Quasar ] Vue is required to run. Please add a script tag for it before loading Quasar.')
     return
   }

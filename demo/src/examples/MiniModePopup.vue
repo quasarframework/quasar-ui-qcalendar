@@ -217,7 +217,7 @@ export default {
 
     monthFormatter () {
       try {
-        return new Intl.DateTimeFormat(this.locale || void 0, {
+        return new Intl.DateTimeFormat(this.locale || undefined, {
           month: 'long',
           timeZone: 'UTC'
         })

@@ -54,7 +54,7 @@ function generate (src, dest) {
     })
   })
   .then(code => buildConf.banner + code)
-  .then(code => postCssCompiler.process(code, { from: void 0 }))
+  .then(code => postCssCompiler.process(code, { from: undefined }))
   .then(code => {
     code.warnings().forEach(warn => {
       console.warn(warn.toString())
@@ -63,13 +63,13 @@ function generate (src, dest) {
   })
   .then(code => Promise.all([
     generateUMD(dest, code),
-    postCssRtlCompiler.process(code, { from: void 0 })
+    postCssRtlCompiler.process(code, { from: undefined })
       .then(code => generateUMD(dest, code.css, '.rtl'))
   ]))
 }
 
 function generateUMD (dest, code, ext = '') {
   return buildUtils.writeFile(`${dest}${ext}.css`, code, true)
-    .then(code => nano.process(code, { from: void 0 }))
+    .then(code => nano.process(code, { from: undefined }))
     .then(code => buildUtils.writeFile(`${dest}${ext}.min.css`, code.css, true))
 }

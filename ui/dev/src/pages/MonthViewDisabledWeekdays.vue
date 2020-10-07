@@ -44,7 +44,7 @@ export default {
         ts = addToDate(ts, { day: -ts.day })
         return ts.date
       }
-      return void 0
+      return undefined
     },
 
     disabledAfter () {
@@ -56,7 +56,7 @@ export default {
         ts = addToDate(ts, { day: (days - ts.day) })
         return ts.date
       }
-      return void 0
+      return undefined
     }
   },
   methods: {

@@ -152,14 +152,14 @@ export default {
         }
 
         if (item.offsetTop >= position + 50) {
-          if (last === void 0) {
+          if (last === undefined) {
             last = section.id
           }
           break
         }
       }
 
-      if (last !== void 0) {
+      if (last !== undefined) {
         this.activeToc = last
       }
     }

@@ -213,7 +213,7 @@ export default {
       return a + ':' + (c < 10 ? c + '0' : c)
     },
     displayedLocale () {
-      if (this.locale === void 0 || this.locale === '') {
+      if (this.locale === undefined || this.locale === '') {
         return 'en-US'
       }
       return this.locale

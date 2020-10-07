@@ -116,7 +116,7 @@ export default {
     },
 
     badgeClasses (infoEvent, type) {
-      const color = infoEvent.event !== void 0 ? infoEvent.event.color : 'transparent'
+      const color = infoEvent.event !== undefined ? infoEvent.event.color : 'transparent'
       const cssColor = this.isCssColor(color)
       const isHeader = type === 'header'
 
@@ -125,8 +125,8 @@ export default {
         'full-width': !isHeader && (!infoEvent.side || infoEvent.side === 'full'),
         'left-side': !isHeader && infoEvent.side === 'left',
         'right-side': !isHeader && infoEvent.side === 'right',
-        'cursor-pointer': infoEvent.event !== void 0,
-        'event-void': infoEvent.event === void 0 // height: 0, padding: 0
+        'cursor-pointer': infoEvent.event !== undefined,
+        'event-void': infoEvent.event === undefined // height: 0, padding: 0
       }
     },
 
@@ -138,7 +138,7 @@ export default {
       if (timeDurationHeight) {
         s.height = timeDurationHeight(infoEvent.event.duration) + 'px'
       }
-      if (infoEvent.size !== void 0) {
+      if (infoEvent.size !== undefined) {
         s.width = ((100 / weekLength) * infoEvent.size) + '% !important'
       }
       // s['align-items'] = 'flex-start'
@@ -185,7 +185,7 @@ export default {
 
     insertEvent (events, weekLength, infoWeek, index, availableDays, level) {
       const iEvent = infoWeek[index]
-      if (iEvent !== void 0 && iEvent.left >= availableDays) {
+      if (iEvent !== undefined && iEvent.left >= availableDays) {
         // If you have space available, more events are placed
         if (iEvent.left - availableDays) {
           // It is filled with empty events

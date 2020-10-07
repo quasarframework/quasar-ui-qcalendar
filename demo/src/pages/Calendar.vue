@@ -805,14 +805,14 @@ export default {
         let added = false
         const event = this.events[i]
         if (event.date === dt) {
-          if (event.time !== void 0) {
+          if (event.time !== undefined) {
             if (events.length > 0) {
               // check for overlapping times
               const startTime = QCalendar.parseTimestamp(event.date + ' ' + event.time)
               const endTime = QCalendar.addToDate(startTime, { minute: event.duration })
               for (let j = 0; j < events.length; ++j) {
                 const evt = events[j]
-                if (evt.time !== void 0) {
+                if (evt.time !== undefined) {
                   const startTime2 = QCalendar.parseTimestamp(evt.date + ' ' + evt.time)
                   const endTime2 = QCalendar.addToDate(startTime2, { minute: evt.duration })
                   if (QCalendar.isBetweenDates(startTime, startTime2, endTime2) || QCalendar.isBetweenDates(endTime, startTime2, endTime2)) {
@@ -827,7 +827,7 @@ export default {
             }
           }
           if (!added) {
-            event.side = void 0
+            event.side = undefined
             events.push(event)
           }
         }
@@ -936,7 +936,7 @@ export default {
       if (timeStartPos) {
         s.top = timeStartPos(event.time) + 'px'
         s.position = 'absolute'
-        if (event.side !== void 0) {
+        if (event.side !== undefined) {
           s.width = '50%'
           if (event.side === 'right') {
             s.left = '50%'
@@ -1123,7 +1123,7 @@ export default {
     },
     updateFormatters () {
       try {
-        this.dateFormatter = new Intl.DateTimeFormat(this.locale || void 0, {
+        this.dateFormatter = new Intl.DateTimeFormat(this.locale || undefined, {
           weekday: this.shortWeekdayLabel ? 'short' : 'long',
           month: this.shortMonthLabel ? 'short' : 'long',
           day: 'numeric',
@@ -1133,7 +1133,7 @@ export default {
       }
       catch (e) {
         // console.error('Intl.DateTimeFormat not supported')
-        this.dateFormatter = void 0
+        this.dateFormatter = undefined
       }
     },
     handleSwipe ({ evt, ...info }) {
@@ -1179,16 +1179,16 @@ export default {
       ev.stopPropagation()
       if (type === 'day') {
         this.draggedEvent.date = day.date
-        this.draggedEvent.side = void 0
+        this.draggedEvent.side = undefined
       }
       else if (type === 'interval') {
         this.draggedEvent.date = day.date
         this.draggedEvent.time = day.time
-        this.draggedEvent.side = void 0
+        this.draggedEvent.side = undefined
       }
     },
     resetDrag () {
-      this.draggedEvent = void 0
+      this.draggedEvent = undefined
       this.dragging = false
       if (Platform.is.desktop) {
         this.ignoreNextSwipe = true

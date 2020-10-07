@@ -36,15 +36,15 @@ module.exports.syncAppExt = function (both = true) {
   }
 
   // check dependencies
-  if (appExtJson.dependencies !== void 0) {
-    if (appExtJson.dependencies[name] !== void 0) {
+  if (appExtJson.dependencies !== undefined) {
+    if (appExtJson.dependencies[name] !== undefined) {
       appExtJson.dependencies[name] = '^' + version
       finished = true
     }
   }
   // check devDependencies, if not finished
-  if (finished === false && appExtJson.devDependencies !== void 0) {
-    if (appExtJson.devDependencies[name] !== void 0) {
+  if (finished === false && appExtJson.devDependencies !== undefined) {
+    if (appExtJson.devDependencies[name] !== undefined) {
       appExtJson.devDependencies[name] = '^' + version
       finished = true
     }

@@ -46,8 +46,8 @@ export default {
       title: '',
       shortWeekdayLabel: false,
       shortMonthLabel: false,
-      dateFormatter: void 0,
-      start: void 0,
+      dateFormatter: undefined,
+      start: undefined,
       locale: 'en-us',
       locales: [
         { value: 'ar', label: 'العربية' },
@@ -125,14 +125,14 @@ export default {
 
     updateTitle () {
       const myDate = makeDate(this.start)
-      if (this.dateFormatter !== void 0) {
+      if (this.dateFormatter !== undefined) {
         this.title = this.dateFormatter.format(myDate)
       }
     },
 
     updateFormatter () {
       try {
-        this.dateFormatter = new Intl.DateTimeFormat(this.locale || void 0, {
+        this.dateFormatter = new Intl.DateTimeFormat(this.locale || undefined, {
           month: this.shortMonthLabel ? 'short' : 'long',
           year: 'numeric',
           timeZone: 'UTC'
@@ -140,7 +140,7 @@ export default {
       }
       catch (e) {
         // console.error('Intl.DateTimeFormat not supported')
-        this.dateFormatter = void 0
+        this.dateFormatter = undefined
       }
     }
   }

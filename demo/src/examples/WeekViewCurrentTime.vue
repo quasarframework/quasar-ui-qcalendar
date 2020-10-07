@@ -23,8 +23,8 @@ import QCalendar from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
 export default {
   data () {
     return {
-      currentDate: void 0,
-      currentTime: void 0,
+      currentDate: undefined,
+      currentTime: undefined,
       intervalId: null,
       timeStartPos: 0
     }

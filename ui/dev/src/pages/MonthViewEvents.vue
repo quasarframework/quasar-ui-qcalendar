@@ -24,7 +24,7 @@
           @mouseup:day="onMouseUpDay"
           @mousemove:day="onMouseMoveDay"
         >
-          <template #day="{ date }">
+          <template #day="{ /* date */ }">
           </template>
         </q-calendar>
       </div>

@@ -19,7 +19,7 @@ export default function (/* { store, ssrContext } */) {
     scrollBehavior (to, _, savedPosition) {
       return new Promise(resolve => {
         setTimeout(() => {
-          if (to.hash !== void 0 && to.hash !== '') {
+          if (to.hash !== undefined && to.hash !== '') {
             const el = document.getElementById(to.hash.substring(1))
 
             if (el !== null) {

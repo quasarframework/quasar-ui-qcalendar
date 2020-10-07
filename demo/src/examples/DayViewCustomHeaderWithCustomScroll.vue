@@ -81,14 +81,14 @@ export default {
       if (this.selectedDate) {
         return QCalendar.getStartOfWeek(QCalendar.parseTimestamp(this.selectedDate), this.weekdays, this.today)
       }
-      return void 0
+      return undefined
     },
 
     parsedEnd () {
       if (this.selectedDate) {
         return QCalendar.getEndOfWeek(QCalendar.parseTimestamp(this.selectedDate), this.weekdays, this.today)
       }
-      return void 0
+      return undefined
     },
 
     today () {

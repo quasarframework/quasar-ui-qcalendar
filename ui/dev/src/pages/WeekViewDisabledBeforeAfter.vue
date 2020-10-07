@@ -46,7 +46,7 @@ export default {
         ts = addToDate(ts, { day: (ts.weekday > monday ? -(ts.weekday - monday) : (monday - ts.weekday)) })
         return ts.date
       }
-      return void 0
+      return undefined
     },
 
     disabledAfter () {
@@ -58,7 +58,7 @@ export default {
         ts = addToDate(ts, { day: (ts.weekday > friday ? -(ts.weekday - friday) : (friday - ts.weekday)) })
         return ts.date
       }
-      return void 0
+      return undefined
     }
   },
   methods: {

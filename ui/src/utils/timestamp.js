@@ -289,14 +289,14 @@ export function updateWorkWeek (timestamp) {
 export function updateDisabled (timestamp, disabledBefore, disabledAfter, disabledWeekdays, disabledDays) {
   const t = getDayIdentifier(timestamp)
 
-  if (disabledBefore !== void 0) {
+  if (disabledBefore !== undefined) {
     const before = getDayIdentifier(parsed(disabledBefore))
     if (t <= before) {
       timestamp.disabled = true
     }
   }
 
-  if (timestamp.disabled !== true && disabledAfter !== void 0) {
+  if (timestamp.disabled !== true && disabledAfter !== undefined) {
     const after = getDayIdentifier(parsed(disabledAfter))
     if (t >= after) {
       timestamp.disabled = true
@@ -578,7 +578,7 @@ export function createNativeLocaleFormatter (locale, getOptions) {
 
   return (timestamp, short) => {
     try {
-      const intlFormatter = new Intl.DateTimeFormat(locale || void 0, getOptions(timestamp, short))
+      const intlFormatter = new Intl.DateTimeFormat(locale || undefined, getOptions(timestamp, short))
       return intlFormatter.format(makeDateTime(timestamp))
     }
     catch (e) /* istanbul ignore next */ {
@@ -631,11 +631,11 @@ export function addToDate (timestamp, options) {
   const ts = copyTimestamp(timestamp)
   let minType
   __forEachObject(options, (value, key) => {
-    if (ts[key] !== void 0) {
+    if (ts[key] !== undefined) {
       ts[key] += parseInt(value, 10)
       const indexType = NORMALIZE_TYPES.indexOf(key)
       if (indexType !== -1) {
-        if (minType === void 0) {
+        if (minType === undefined) {
           minType = indexType
         }
         else {
@@ -647,7 +647,7 @@ export function addToDate (timestamp, options) {
   })
 
   // normalize timestamp
-  if (minType !== void 0) {
+  if (minType !== undefined) {
     __normalize(ts, NORMALIZE_TYPES[minType])
   }
   updateFormatted(ts)

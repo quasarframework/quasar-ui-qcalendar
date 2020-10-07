@@ -47,8 +47,8 @@ export default {
   },
 
   data: () => ({
-    lastStart: void 0,
-    lastEnd: void 0
+    lastStart: undefined,
+    lastEnd: undefined
   }),
 
   computed: {
@@ -173,7 +173,7 @@ export default {
     __checkChange () {
       const { start, end } = this.__renderProps
       this.keyValue = 0
-      if (this.lastStart === void 0 || this.lastEnd === void 0 || start.date !== this.lastStart || end.date !== this.lastEnd) {
+      if (this.lastStart === undefined || this.lastEnd === undefined || start.date !== this.lastStart || end.date !== this.lastEnd) {
         this.lastStart = start.date
         this.lastEnd = end.date
         this.$emit('change', { start, end })
@@ -370,11 +370,11 @@ export default {
       on: {
         ...this.$listeners,
         'click:date': (timestamp) => {
-          if (this.$listeners.input !== void 0) {
-            if (timestamp.date !== void 0) {
+          if (this.$listeners.input !== undefined) {
+            if (timestamp.date !== undefined) {
               this.$emit('input', timestamp.date)
             }
-            else if (timestamp.day !== void 0 && timestamp.day.date !== void 0) {
+            else if (timestamp.day !== undefined && timestamp.day.date !== undefined) {
               this.$emit('input', timestamp.day.date)
             }
           }
