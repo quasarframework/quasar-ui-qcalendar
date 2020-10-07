@@ -183,7 +183,7 @@ export default {
       }
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
-        key: day.date + (idx !== void 0 ? '-' + idx : ''),
+        key: day.date + (idx !== undefined ? '-' + idx : ''),
         staticClass: 'q-calendar-scheduler__head-day',
         class: {
           ...this.getRelativeClasses(day),
@@ -195,12 +195,12 @@ export default {
         },
         domProps: {
           ondragover: (_event) => {
-            if (this.dragOverFunc !== void 0) {
+            if (this.dragOverFunc !== undefined) {
               dragOver = this.dragOverFunc(_event, day, 'day', idx)
             }
           },
           ondrop: (_event) => {
-            if (this.dropFunc !== void 0) {
+            if (this.dropFunc !== undefined) {
               this.dropFunc(_event, day, 'day', idx)
             }
           }
@@ -209,17 +209,17 @@ export default {
           return { scope, event }
         })
       }), [
-        headDaySlot !== void 0 && headDaySlot(scope),
-        headDaySlot === void 0 && this.columnHeaderBefore === true && this.__renderColumnHeaderBefore(h, day, idx),
-        headDaySlot === void 0 && this.noDefaultHeaderText !== true && this.__renderHeadWeekday(h, day, idx),
-        headDaySlot === void 0 && this.noDefaultHeaderBtn !== true && this.__renderHeadDayBtn(h, day, idx),
-        headDaySlot === void 0 && dayHeaderSlot && dayHeaderSlot(scope),
-        headDaySlot === void 0 && this.columnHeaderAfter === true && this.__renderColumnHeaderAfter(h, day, idx)
+        headDaySlot !== undefined && headDaySlot(scope),
+        headDaySlot === undefined && this.columnHeaderBefore === true && this.__renderColumnHeaderBefore(h, day, idx),
+        headDaySlot === undefined && this.noDefaultHeaderText !== true && this.__renderHeadWeekday(h, day, idx),
+        headDaySlot === undefined && this.noDefaultHeaderBtn !== true && this.__renderHeadDayBtn(h, day, idx),
+        headDaySlot === undefined && dayHeaderSlot && dayHeaderSlot(scope),
+        headDaySlot === undefined && this.columnHeaderAfter === true && this.__renderColumnHeaderAfter(h, day, idx)
       ])
     },
 
     __renderHeadWeekday (h, day) {
-      const colorCurrent = day.current === true ? this.color : void 0
+      const colorCurrent = day.current === true ? this.color : undefined
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
@@ -240,7 +240,7 @@ export default {
         updateColors = this.setBothColors
       }
 
-      return h('div', updateColors(colorCurrent !== void 0 ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
+      return h('div', updateColors(colorCurrent !== undefined ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
         staticClass: 'ellipsis q-calendar-scheduler__head-weekday'
       }), [
         this.__renderHeadDayLabel(h, day, this.shortWeekdayLabel)
@@ -254,7 +254,7 @@ export default {
     },
 
     __renderHeadDayBtn (h, day, idx) {
-      const colorCurrent = day.current === true ? this.color : void 0
+      const colorCurrent = day.current === true ? this.color : undefined
       const activeDate = this.value === day.date
       const dayLabel = this.dayFormatter(day, false)
       const dayLabelSlot = this.$scopedSlots['day-label']
@@ -281,7 +281,7 @@ export default {
         updateColors = this.setBothColors
       }
 
-      return dayBtnSlot ? dayBtnSlot(slotData) : h(QBtn, updateColors(colorCurrent !== void 0 ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
+      return dayBtnSlot ? dayBtnSlot(slotData) : h(QBtn, updateColors(colorCurrent !== undefined ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
         staticClass: 'q-calendar-scheduler__head-day-label',
         class: [
           {
@@ -289,7 +289,7 @@ export default {
           }
         ],
         style: {
-          color: day.current === true ? colorCurrent : void 0
+          color: day.current === true ? colorCurrent : undefined
         },
         props: {
           unelevated: true,
@@ -352,7 +352,7 @@ export default {
     },
 
     __renderScrollArea (h) {
-      if (this.noScroll !== void 0 && this.noScroll === true) {
+      if (this.noScroll !== undefined && this.noScroll === true) {
         return this.__renderPane(h)
       }
       else {
@@ -385,8 +385,8 @@ export default {
       ])
     },
 
-    __renderResources (h, resources = void 0, indentLevel = 0) {
-      if (resources === void 0) {
+    __renderResources (h, resources = undefined, indentLevel = 0) {
+      if (resources === undefined) {
         resources = this.resources
       }
       return resources.map((resource, idx) => {
@@ -472,7 +472,7 @@ export default {
       }
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
-        key: day.date + (idx !== void 0 ? ':' + idx : ''),
+        key: day.date + (idx !== undefined ? ':' + idx : ''),
         staticClass: 'q-calendar-scheduler__day',
         class: this.getRelativeClasses(day),
         style: {
@@ -501,12 +501,12 @@ export default {
         style,
         domProps: {
           ondragover: (_event) => {
-            if (this.dragOverFunc !== void 0) {
+            if (this.dragOverFunc !== undefined) {
               dragOver = this.dragOverFunc(_event, resource, 'resource', idx)
             }
           },
           ondrop: (_event) => {
-            if (this.dropFunc !== void 0) {
+            if (this.dropFunc !== undefined) {
               this.dropFunc(_event, resource, 'resource', idx)
             }
           }
@@ -517,7 +517,7 @@ export default {
         })
       }
 
-      const children = slot ? slot(scope) : void 0
+      const children = slot ? slot(scope) : undefined
 
       return h('div', data, children)
     },
@@ -530,7 +530,7 @@ export default {
       }
       const width = convertToUnit(this.parsedResourceWidth)
       const label = resource[this.resourceKey]
-      if (label === void 0) {
+      if (label === undefined) {
         console.warn('QCalendarScheduler: resource object requires "resource-key" property to contain resource object key')
       }
 
@@ -544,7 +544,7 @@ export default {
       }
 
       return h('div', {
-        key: label + (idx !== void 0 ? '-' + idx : ''),
+        key: label + (idx !== undefined ? '-' + idx : ''),
         staticClass: 'q-calendar-scheduler__resource',
         style: {
           maxWidth: width,
@@ -589,9 +589,9 @@ export default {
         value: this.onResize
       }]
     }, [
-      !this.hideHeader && this.resources !== void 0 && this.__renderHead(h),
-      this.resources !== void 0 && this.__renderBody(h),
-      this.resources === void 0 && this.__renderResourcesError(h)
+      !this.hideHeader && this.resources !== undefined && this.__renderHead(h),
+      this.resources !== undefined && this.__renderBody(h),
+      this.resources === undefined && this.__renderResourcesError(h)
     ])
   }
 }

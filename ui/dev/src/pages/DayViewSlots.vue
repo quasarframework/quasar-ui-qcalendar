@@ -104,7 +104,7 @@ function hexToRgb (hex) {
 }
 
 function luminosity (color) {
-  if (typeof color !== 'string' && (!color || color.r === void 0)) {
+  if (typeof color !== 'string' && (!color || color.r === undefined)) {
     throw new TypeError('Expected a string or a {r, g, b} object as color')
   }
 
@@ -270,7 +270,7 @@ export default {
             }
           }
           if (!added) {
-            event.side = void 0
+            event.side = undefined
             events.push(event)
           }
         } else if (event.days) {

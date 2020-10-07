@@ -36,9 +36,9 @@
 </template>
 
 <script>
-import {
-  makeDate
-} from 'ui' // alias for '@quasar/quasar-ui-qcalendar'
+// normally you would not import "all" of QCalendar, but is needed for this example to work with UMD (codepen)
+import QCalendar from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
+
 export default {
   data () {
     return {
@@ -46,8 +46,8 @@ export default {
       title: '',
       shortWeekdayLabel: false,
       shortMonthLabel: false,
-      dateFormatter: void 0,
-      start: void 0,
+      dateFormatter: undefined,
+      start: undefined,
       locale: 'en-us',
       locales: [
         { value: 'ar', label: 'العربية' },
@@ -124,22 +124,22 @@ export default {
     },
 
     updateTitle () {
-      const myDate = makeDate(this.start)
-      if (this.dateFormatter !== void 0) {
+      const myDate = QCalendar.makeDate(this.start)
+      if (this.dateFormatter !== undefined) {
         this.title = this.dateFormatter.format(myDate)
       }
     },
 
     updateFormatter () {
       try {
-        this.dateFormatter = new Intl.DateTimeFormat(this.locale || void 0, {
+        this.dateFormatter = new Intl.DateTimeFormat(this.locale || undefined, {
           month: this.shortMonthLabel ? 'short' : 'long',
           year: 'numeric',
           timeZone: 'UTC'
         })
       } catch (e) {
         // console.error('Intl.DateTimeFormat not supported')
-        this.dateFormatter = void 0
+        this.dateFormatter = undefined
       }
     }
   }

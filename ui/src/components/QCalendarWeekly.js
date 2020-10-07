@@ -91,7 +91,7 @@ export default {
         const height = convertToUnit(this.dayHeight)
         style.height = height
       }
-      if (this.dayPadding !== void 0) {
+      if (this.dayPadding !== undefined) {
         style.padding = this.dayPadding
       }
       style.width = 100 / this.weekdays.length + '%'
@@ -191,8 +191,8 @@ export default {
           width
         }
       }), [
-        headDaySlot === void 0 && this.__renderHeadDayLabel(h, day, this.shortWeekdayLabel || this.isMiniMode),
-        headDaySlot !== void 0 && headDaySlot(slotData)
+        headDaySlot === undefined && this.__renderHeadDayLabel(h, day, this.shortWeekdayLabel || this.isMiniMode),
+        headDaySlot !== undefined && headDaySlot(slotData)
       ])
     },
 
@@ -234,7 +234,7 @@ export default {
           h('div', {
             staticClass: 'q-calendar-weekly__week-days'
           }, week.map(day => this.__renderDay(h, day))),
-          slot !== void 0 ? h('div', {
+          slot !== undefined ? h('div', {
             staticClass: 'q-calendar-weekly__week-events'
           }, slot(slotData)) : ''
         ])
@@ -248,7 +248,7 @@ export default {
       const { timestamp } = this.isCurrentWeek(week)
       const workweekLabel = Number(day.workweek).toLocaleString(this.locale)
       const slotData = { workweekLabel, week, miniMode: this.isMiniMode }
-      const colorCurrent = timestamp && timestamp.current === true ? this.color : void 0
+      const colorCurrent = timestamp && timestamp.current === true ? this.color : undefined
       const height = convertToUnit(this.dayHeight)
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
@@ -269,7 +269,7 @@ export default {
         updateColors = this.setBothColors
       }
 
-      return h('div', updateColors(colorCurrent !== void 0 ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
+      return h('div', updateColors(colorCurrent !== undefined ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
         key: day.workweek,
         staticClass: 'q-calendar-weekly__workweek',
         class: this.getRelativeClasses(timestamp !== false ? timestamp : day, false),
@@ -324,19 +324,19 @@ export default {
         class: [
           dayClass,
           {
-            ...this.getRelativeClasses(day, outside, this.isMiniMode ? void 0 : this.selectedDates),
+            ...this.getRelativeClasses(day, outside, this.isMiniMode ? undefined : this.selectedDates),
             'q-calendar-weekly__day--droppable': dragOver
           }
         ],
         style,
         domProps: {
           ondragover: (e) => {
-            if (this.dragOverFunc !== void 0) {
+            if (this.dragOverFunc !== undefined) {
               dragOver = this.dragOverFunc(e, day, 'day')
             }
           },
           ondrop: (e) => {
-            if (this.dropFunc !== void 0) {
+            if (this.dropFunc !== undefined) {
               this.dropFunc(e, day, 'day')
             }
           }
@@ -357,7 +357,7 @@ export default {
 
     __renderDayLabel (h, day) {
       const outside = this.isOutside(day)
-      const colorCurrent = day.current === true ? this.color : void 0
+      const colorCurrent = day.current === true ? this.color : undefined
       const dayLabel = this.dayFormatter(day, false)
       const dayLabelSlot = this.$scopedSlots['day-label']
       const dayBtnSlot = this.$scopedSlots['day-btn']
@@ -402,7 +402,7 @@ export default {
         updateColors = this.setBothColors
       }
 
-      return dayBtnSlot ? dayBtnSlot(slotData) : h(QBtn, updateColors(colorCurrent !== void 0 ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
+      return dayBtnSlot ? dayBtnSlot(slotData) : h(QBtn, updateColors(colorCurrent !== undefined ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
         staticClass: 'q-calendar-weekly__day-label',
         class: [
           {
@@ -429,7 +429,7 @@ export default {
     },
 
     __renderDayOfYearLabel (h, day) {
-      const color = day.current === true ? this.color : void 0
+      const color = day.current === true ? this.color : undefined
       const slot = this.$scopedSlots['day-of-year']
       const slotData = { timestamp: day }
 
@@ -439,7 +439,7 @@ export default {
     },
 
     __renderDayMonth (h, day) {
-      const color = day.current === true ? this.color : void 0
+      const color = day.current === true ? this.color : undefined
       const slot = this.$scopedSlots['month-label']
       const monthLabel = this.monthFormatter(day, this.shortMonthLabel)
       const slotData = { monthLabel, timestamp: day, miniMode: this.isMiniMode }

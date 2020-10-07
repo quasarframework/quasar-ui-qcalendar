@@ -18,7 +18,7 @@
     "core-js": "^3.6.5"
   },
   "devDependencies": {
-    "@quasar/app": "^2.1.0",
+    "@quasar/app": "^2.1.1",
     "@quasar/quasar-app-extension-qmarkdown": "^1.0.33"
   },
   "browserslist": [

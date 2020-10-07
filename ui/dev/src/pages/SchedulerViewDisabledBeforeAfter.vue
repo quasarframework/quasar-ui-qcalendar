@@ -14,17 +14,15 @@
 </template>
 
 <script>
-import {
-  parseDate,
-  parseTimestamp,
-  addToDate
-} from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
+// normally you would not import "all" of QCalendar, but is needed for this example to work with UMD (codepen)
+import QCalendar from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
+
 const CURRENT_DAY = new Date()
 
 function getCurrentDay (day) {
   const newDay = new Date(CURRENT_DAY)
   newDay.setDate(day)
-  const tm = parseDate(newDay)
+  const tm = QCalendar.parseDate(newDay)
   return tm.date
 }
 
@@ -52,20 +50,20 @@ export default {
       // find the monday of this week
       if (this.selectedDate) {
         const monday = 1 // day of week (ts.weekday)
-        let ts = parseTimestamp(this.selectedDate)
-        ts = addToDate(ts, { day: (ts.weekday > monday ? -(ts.weekday - monday) : (monday - ts.weekday)) })
+        let ts = QCalendar.parseTimestamp(this.selectedDate)
+        ts = QCalendar.addToDate(ts, { day: (ts.weekday > monday ? -(ts.weekday - monday) : (monday - ts.weekday)) })
         return ts.date
       }
-      return void 0
+      return undefined
     },
 
     disabledAfter () {
       // find the 1st day of the next month
       if (this.selectedDate) {
         const friday = 5 // day of week (ts.weekday)
-        let ts = parseTimestamp(this.selectedDate)
+        let ts = QCalendar.parseTimestamp(this.selectedDate)
         // get days in month
-        ts = addToDate(ts, { day: (ts.weekday > friday ? -(ts.weekday - friday) : (friday - ts.weekday)) })
+        ts = QCalendar.addToDate(ts, { day: (ts.weekday > friday ? -(ts.weekday - friday) : (friday - ts.weekday)) })
         return ts.date
       }
       return undefined

@@ -37,13 +37,7 @@ export default {
 
   methods: {
     getResourceImage (resource) {
-      if (resource.icon) {
-        return resource.icon
-      }
-      if (resource.avatar) {
-        return 'img:' + resource.avatar
-      }
-      return ''
+      return (resource.icon !== undefined ? resource.icon : resource.avatar !== undefined ? 'img:' + resource.avatar : '')
     }
   }
 }

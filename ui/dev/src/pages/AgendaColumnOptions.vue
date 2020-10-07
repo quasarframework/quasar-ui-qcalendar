@@ -28,10 +28,10 @@
         :left-column-options="leftColumnOptions"
         :right-column-options="rightColumnOptions"
       >
-        <template #day-body="day">
-          <template v-for="(agenda) in getAgenda(day)">
+        <template #day-body="{ timestamp }">
+          <template v-for="(agenda) in getAgenda(timestamp)">
             <div
-              :key="day.date + agenda.time"
+              :key="timestamp.date + agenda.time"
               :label="agenda.time"
               class="justify-start q-ma-sm shadow-5 bg-grey-4"
             >
@@ -210,8 +210,8 @@ export default {
       this.$refs.calendar.prev()
     },
 
-    getAgenda (day) {
-      return this.agenda[parseInt(day.weekday, 10)]
+    getAgenda (timestamp) {
+      return this.agenda[parseInt(timestamp.weekday, 10)]
     }
   }
 }

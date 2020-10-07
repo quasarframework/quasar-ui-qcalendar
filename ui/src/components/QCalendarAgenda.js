@@ -27,11 +27,11 @@ export default {
     },
 
     leftColumnOptionsValid () {
-      return this.leftColumnOptions !== void 0 && Array.isArray(this.leftColumnOptions)
+      return this.leftColumnOptions !== undefined && Array.isArray(this.leftColumnOptions)
     },
 
     rightColumnOptionsValid () {
-      return this.rightColumnOptions !== void 0 && Array.isArray(this.rightColumnOptions)
+      return this.rightColumnOptions !== undefined && Array.isArray(this.rightColumnOptions)
     }
   },
 
@@ -59,7 +59,7 @@ export default {
     },
 
     __renderHeadDays (h) {
-      if (this.days.length === 1 && this.columnCount !== void 0 && parseInt(this.columnCount, 10) > 0) {
+      if (this.days.length === 1 && this.columnCount !== undefined && parseInt(this.columnCount, 10) > 0) {
         // return [...new Array(parseInt(this.columnCount, 10))]
         return [
           Array.apply(null, new Array(parseInt(this.columnCount, 10)))
@@ -89,7 +89,7 @@ export default {
     },
 
     __renderBodyIntervals (h) {
-      return void 0
+      return undefined
     },
 
     __renderColumnHead (h, column, idx) {
@@ -116,7 +116,7 @@ export default {
       }
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
-        key: (this.columnOptionsId !== void 0 ? column[this.columnOptionsId] : column.id) + (idx !== void 0 ? '-' + idx : ''),
+        key: (this.columnOptionsId !== undefined ? column[this.columnOptionsId] : undefined),
         staticClass: 'q-calendar-daily__head-day',
         class: {
           'q-column-day': true,
@@ -127,12 +127,12 @@ export default {
         },
         domProps: {
           ondragover: (e) => {
-            if (this.dragOverFunc !== void 0) {
+            if (this.dragOverFunc !== undefined) {
               dragOver = this.dragOverFunc(e, column, 'column', idx)
             }
           },
           ondrop: (e) => {
-            if (this.dropFunc !== void 0) {
+            if (this.dropFunc !== undefined) {
               this.dropFunc(e, column, 'column', idx)
             }
           }
@@ -149,7 +149,7 @@ export default {
     __renderHeadColumn (h, column) {
       const slot = this.$scopedSlots['column-header-label']
       const scope = column
-      // const colorCurrent = day.current === true ? this.color : void 0
+      // const colorCurrent = day.current === true ? this.color : undefined
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
@@ -172,7 +172,7 @@ export default {
         staticClass: 'ellipsis q-calendar-daily__head-weekday'
       }), [
         slot && slot(scope),
-        !slot && this.__renderHeadColumnLabel(h, (this.columnOptionsLabel !== void 0 ? column[this.columnOptionsLabel] : column.label))
+        !slot && this.__renderHeadColumnLabel(h, (this.columnOptionsLabel !== undefined ? column[this.columnOptionsLabel] : column.label))
       ])
     },
 
@@ -223,7 +223,7 @@ export default {
       }
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
-        key: (this.columnOptionsId !== void 0 ? column[this.columnOptionsId] : column.id) + '-body-' + (idx !== void 0 ? ':' + idx : ''),
+        key: (this.columnOptionsId !== undefined ? column[this.columnOptionsId] : undefined),
         staticClass: 'q-calendar-daily__day',
         class: {
           'q-column-day': true,
@@ -234,12 +234,12 @@ export default {
         },
         domProps: {
           ondragover: (e) => {
-            if (this.dragOverFunc !== void 0) {
+            if (this.dragOverFunc !== undefined) {
               dragOver = this.dragOverFunc(e, column, 'column')
             }
           },
           ondrop: (e) => {
-            if (this.dropFunc !== void 0) {
+            if (this.dropFunc !== undefined) {
               this.dropFunc(e, column, 'column')
             }
           }
@@ -278,7 +278,7 @@ export default {
       }
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
-        key: day.date + (idx !== void 0 ? ':' + idx : ''),
+        key: day.date + (idx !== undefined ? ':' + idx : ''),
         staticClass: 'q-calendar-daily__day',
         class: {
           ...this.getRelativeClasses(day),
@@ -289,12 +289,12 @@ export default {
         },
         domProps: {
           ondragover: (e) => {
-            if (this.dragOverFunc !== void 0) {
+            if (this.dragOverFunc !== undefined) {
               dragOver = this.dragOverFunc(e, day, 'day')
             }
           },
           ondrop: (e) => {
-            if (this.dropFunc !== void 0) {
+            if (this.dropFunc !== undefined) {
               this.dropFunc(e, day, 'day')
             }
           }

@@ -140,7 +140,7 @@ export default {
     selectedDates: Array,
     miniMode: {
       type: [Boolean, String],
-      validator: v => v === void 0 || v === true || v === false || v === 'auto'
+      validator: v => v === undefined || v === true || v === false || v === 'auto'
     },
     breakpoint: {
       type: String,
@@ -174,7 +174,7 @@ export default {
     },
     resourceWidth: {
       type: [Number, String],
-      validator: v => v === void 0 || validateNumber(v)
+      validator: v => v === undefined || validateNumber(v)
     },
     resourceStyle: {
       type: Function,
@@ -207,7 +207,7 @@ export default {
     resourceWidth: {
       type: [Number, String],
       default: 100,
-      validator: v => v === void 0 || validateNumber(v)
+      validator: v => v === undefined || validateNumber(v)
     },
     resourceStyle: {
       type: Function,

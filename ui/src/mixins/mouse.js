@@ -30,7 +30,7 @@ export default {
 
         const handler = (e) => {
           const mouseEvent = e
-          if (eventOptions.button === void 0 || (mouseEvent.buttons > 0 && mouseEvent.button === eventOptions.button)) {
+          if (eventOptions.button === undefined || (mouseEvent.buttons > 0 && mouseEvent.button === eventOptions.button)) {
             if (eventOptions.prevent) {
               e.preventDefault()
             }

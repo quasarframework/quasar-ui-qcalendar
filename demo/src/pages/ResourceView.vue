@@ -3,11 +3,13 @@
     <example-title title="Resource View" />
     <example-viewer title="Basic" file="ResourceViewBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
-    <example-viewer title="Sticky" file="ResourceViewSticky" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
-      <q-markdown>
-You can set the `sticky` property to make the resource column and interval labels row **sticky** so they don't scroll. Note: This will not work with IE/Edge.
-      </q-markdown>
-    </example-viewer>
+    <q-markdown>
+You can set the `sticky` property to make the resource column and interval labels row **sticky** so they don't scroll.
+::: warning
+`sticky` will not work with IE/Edge.
+:::
+    </q-markdown>
+    <example-viewer title="Sticky" file="ResourceViewSticky" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-viewer title="Bordered" file="ResourceViewBordered" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Dark" file="ResourceViewDark" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
@@ -15,38 +17,33 @@ You can set the `sticky` property to make the resource column and interval label
     <example-viewer title="Swipe" file="ResourceViewSwipe" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Interval Header Width/Height" file="ResourceViewIntervalHeaderWidthHeight" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Resource Width/Height" file="ResourceViewResourceWidthHeight" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Interval Count" file="ResourceViewIntervalCount" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
-      <q-markdown>
+
+    <q-markdown>
 The example below is setting the `interval-count` to `4`, the default is `24`. This is the number of intervals to be displayed.
-      </q-markdown>
-    </example-viewer>
+    </q-markdown>
+    <example-viewer title="Interval Count" file="ResourceViewIntervalCount" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
-    <example-viewer title="Interval Minutes (30)" file="ResourceViewIntervalMinutes30" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
-      <q-markdown>
+    <q-markdown>
 The example below is setting the `interval-minutes` to `30`, the default is `60`. This is the number of minutes in an interval. For this example, if you wanted the full 24 hours, you would also need to set `interval-count` to `48` (if you cut `interval-minutes` in half, then you need to double `interval-count`).
-      </q-markdown>
-    </example-viewer>
+    </q-markdown>
+    <example-viewer title="Interval Minutes (30)" file="ResourceViewIntervalMinutes30" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
-    <example-viewer title="Interval Minutes (15)" file="ResourceViewIntervalMinutes15" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
-      <q-markdown>
+    <q-markdown>
 The example below is setting the `interval-minutes` to `15`, the default is `60`. This is the number of minutes in an interval. For this example, if you wanted the full 24 hours, you would also need to set `interval-count` to `96` (if you cut `interval-minutes` in quarter, then you need to quadruple `interval-count`).
-      </q-markdown>
-    </example-viewer>
+    </q-markdown>
+    <example-viewer title="Interval Minutes (15)" file="ResourceViewIntervalMinutes15" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
-    <example-viewer title="Interval Start" file="ResourceViewIntervalStart" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
-      <q-markdown>
+    <q-markdown>
 The example below is setting the `interval-start` to `8`, the default is `0`. It is a good idea to also adjust the `interval-count` so that extra intervals are not displayed. In this example, the `interval-count` is set to `10`, so the intervals displayed are from 08:00-18:00.
-      </q-markdown>
-    </example-viewer>
+    </q-markdown>
+    <example-viewer title="Interval Start" file="ResourceViewIntervalStart" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
-    <example-viewer title="Children" file="ResourceViewChildren" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
-      <q-markdown>
+    <q-markdown>
 The example below is uses keys `children` and `expanded`, in the `resources` object, to show a tree hierarchy.
-      </q-markdown>
-    </example-viewer>
+    </q-markdown>
+    <example-viewer title="Children" file="ResourceViewChildren" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
-    <example-viewer title="Slots" file="ResourceViewSlots" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths">
-      <q-markdown>
+    <q-markdown>
 For slots that return `day`, `interval` or `timestamp`, it looks like this:
 ```js
 {
@@ -76,8 +73,8 @@ The example below is using the `resource-label` slot to indicate there are event
 The `resource-intervals` slot is used to get information about the date and time of an event and then to calculate where the absolute position of the event based on passed in functions `timeStartPosX` and `timeDurationWidth`.
 
 Scroll until you see 10:00am to see example.
-      </q-markdown>
-    </example-viewer>
+    </q-markdown>
+    <example-viewer title="Slots" file="ResourceViewSlots" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-viewer title="Slot - Resource Header" file="ResourceViewSlotResourceHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 

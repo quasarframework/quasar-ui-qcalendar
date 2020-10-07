@@ -525,14 +525,14 @@ Then in `methods`:
 ```js
     updateFormatter () {
       try {
-        this.titleFormatter = new Intl.DateTimeFormat(this.locale || void 0, {
+        this.titleFormatter = new Intl.DateTimeFormat(this.locale || undefined, {
           month: this.shortMonthLabel ? 'short' : 'long',
           year: 'numeric',
           timeZone: 'UTC'
         })
       } catch (e) {
         // console.error('Intl.DateTimeFormat not supported')
-        this.titleFormatter = void 0
+        this.titleFormatter = undefined
       }
     },
 ```
@@ -639,15 +639,15 @@ onDrop (ev, day, type) {
   ev.stopPropagation()
   if (type === 'day') {
     this.draggedEvent.date = day.date
-    this.draggedEvent.side = void 0
+    this.draggedEvent.side = undefined
   } else if (type === 'interval') {
     this.draggedEvent.date = day.date
     this.draggedEvent.time = day.time
-    this.draggedEvent.side = void 0
+    this.draggedEvent.side = undefined
   }
 },
 resetDrag () {
-  this.draggedEvent = void 0
+  this.draggedEvent = undefined
   this.dragging = false
   if (Platform.is.desktop) {
     this.ignoreNextSwipe = true

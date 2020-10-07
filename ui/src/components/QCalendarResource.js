@@ -170,8 +170,8 @@ export default {
         staticClass: 'q-calendar-resource__day-container'
       }, [
         this.__renderHead(h),
-        this.resources === void 0 && this.__renderResourcesError(h),
-        this.resources !== void 0 && this.__renderBodyResources(h)
+        this.resources === undefined && this.__renderResourcesError(h),
+        this.resources !== undefined && this.__renderBodyResources(h)
       ])
 
       if (this.animated === true) {
@@ -206,8 +206,8 @@ export default {
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), data), this.__renderResources(h))
     },
 
-    __renderResources (h, resources = void 0, indentLevel = 0) {
-      if (resources === void 0) {
+    __renderResources (h, resources = undefined, indentLevel = 0) {
+      if (resources === undefined) {
         resources = this.resources
       }
       return resources.map((resource, idx) => {
@@ -267,7 +267,7 @@ export default {
 
     __renderResourceText (h, resource, idx, indentLevel = 0) {
       const label = resource[this.resourceKey]
-      if (label === void 0) {
+      if (label === undefined) {
         console.warn('QCalendarResource: resource object requires "resource-key" property to contain resource object key')
       }
 

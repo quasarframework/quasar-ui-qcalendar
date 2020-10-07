@@ -1,6 +1,6 @@
 export function convertToUnit (input, unit = 'px') {
   if (input == null || input === '') {
-    return void 0
+    return undefined
   }
   else if (isNaN(input)) {
     return String(input)

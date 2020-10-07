@@ -141,7 +141,7 @@ export default {
       const scope = { timestamp: copyTimestamp(timestamp) }
       scope.timeStartPos = this.timeStartPos
       scope.timeDurationHeight = this.timeDurationHeight
-      if (idx !== void 0) {
+      if (idx !== undefined) {
         scope.index = idx
       }
       return scope
@@ -151,7 +151,7 @@ export default {
       const scope = { timestamp: copyTimestamp(timestamp) }
       scope.timeStartPosX = this.timeStartPosX
       scope.timeDurationWidth = this.timeDurationWidth
-      if (idx !== void 0) {
+      if (idx !== undefined) {
         scope.index = idx
       }
       return scope

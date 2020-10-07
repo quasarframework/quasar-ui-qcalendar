@@ -154,15 +154,9 @@ let itemId = 1
 
 import { getLocale } from '../util/getLocale'
 import { padTime } from '../util/time'
-import {
-  createNativeLocaleFormatter,
-  parseTimestamp,
-  daysBetween,
-  moveRelativeDays,
-  prevDay,
-  updateFormatted,
-  padNumber
-} from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
+
+// normally you would not import "all" of QCalendar, but is needed for this example to work with UMD (codepen)
+import QCalendar from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
 
 const names = ['Ezekiel Stout', 'Aurora Frank', 'Ethan Buchanan', 'Sam Parker', 'Jonathan Hall', 'Carl Flynn', 'Raymond Ingram', 'Abel Glover', 'Margaret Medina', 'Jalen Kane', 'Monserrat Stein', 'Andres Gentry']
 const addresses = ['262 East Cypress Drive', '8719 Anderson Road', '242 W. Shady Road', '4 Lexington Avenue', '7940 Sunset Court', '9866 NE. Rockaway Ave.', '9 Santa Clara Drive', '774 Charles Road', '5 East Thomas St.', '7714 Lilac Rd.', '561 Bowman St.', '517 Brickell Ave.']
@@ -197,10 +191,10 @@ export default {
       //     label: 'Summary'
       //   }
       // ],
-      rightColumnOptions: void 0,
+      rightColumnOptions: undefined,
       local: 'en-us',
-      dateFormatter: void 0,
-      titleFormatter: void 0,
+      dateFormatter: undefined,
+      titleFormatter: undefined,
       overdueSelected: false,
       selected: [
         false,
@@ -225,7 +219,7 @@ export default {
     this.locale = getLocale()
     this.updateFormatters()
     this.today = this.formatDate() // save today's date
-    this.todayTimestamp = parseTimestamp(this.today)
+    this.todayTimestamp = QCalendar.parseTimestamp(this.today)
     this.setToday() // set calendar to today's date
     // this.generateLists()
     // we do this here because we don't want it Vue reactive
@@ -260,7 +254,7 @@ export default {
       const longOptions = { timeZone: 'UTC', weekday: 'long' }
       const shortOptions = { timeZone: 'UTC', weekday: 'short' }
 
-      return createNativeLocaleFormatter(
+      return QCalendar.createNativeLocaleFormatter(
         this.locale,
         (_tms, short) => short ? shortOptions : longOptions
       )
@@ -326,7 +320,7 @@ export default {
     },
 
     formatDate (date) {
-      const d = date !== void 0 ? new Date(date) : new Date(),
+      const d = date !== undefined ? new Date(date) : new Date(),
         month = '' + (d.getMonth() + 1),
         day = '' + d.getDate(),
         year = d.getFullYear()
@@ -336,7 +330,7 @@ export default {
 
     updateFormatters () {
       try {
-        this.dateFormatter = new Intl.DateTimeFormat(this.locale || void 0, {
+        this.dateFormatter = new Intl.DateTimeFormat(this.locale || undefined, {
           year: 'numeric',
           month: '2-digit',
           day: '2-digit',
@@ -347,7 +341,7 @@ export default {
           timeZone: 'UTC'
         })
 
-        this.titleFormatter = new Intl.DateTimeFormat(this.locale || void 0, {
+        this.titleFormatter = new Intl.DateTimeFormat(this.locale || undefined, {
           month: this.shortMonthLabel ? 'short' : 'long',
           year: 'numeric',
           timeZone: 'UTC'
@@ -355,8 +349,8 @@ export default {
       }
       catch (e) {
         // console.error('Intl.DateTimeFormat not supported')
-        this.dateFormatter = void 0
-        this.titleFormatter = void 0
+        this.dateFormatter = undefined
+        this.titleFormatter = undefined
       }
     },
 
@@ -396,20 +390,20 @@ export default {
 
     generateDate (startTimestamp) {
       const days = Math.floor((Math.random() * 100) % 30) + 1
-      let ts = moveRelativeDays(startTimestamp, prevDay, days)
-      ts = updateFormatted(ts) // needed to update static values after date change
+      let ts = QCalendar.moveRelativeDays(startTimestamp, QCalendar.prevDay, days)
+      ts = QCalendar.updateFormatted(ts) // needed to update static values after date change
       return ts.date
     },
 
     getDaysBetween (startDate, endDate) {
-      const timestampStart = parseTimestamp(startDate)
-      const timestampEnd = parseTimestamp(endDate)
-      return daysBetween(timestampStart, timestampEnd)
+      const timestampStart = QCalendar.parseTimestamp(startDate)
+      const timestampEnd = QCalendar.parseTimestamp(endDate)
+      return QCalendar.daysBetween(timestampStart, timestampEnd)
     },
 
     generateAmount () {
-      const integer = padNumber(Math.floor(Math.random() * 100), 2)
-      const fractional = padNumber(Math.floor(Math.random() * 100), 2)
+      const integer = QCalendar.padNumber(Math.floor(Math.random() * 100), 2)
+      const fractional = QCalendar.padNumber(Math.floor(Math.random() * 100), 2)
       return integer + '.' + fractional
     },
 

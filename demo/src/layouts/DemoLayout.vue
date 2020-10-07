@@ -280,7 +280,7 @@ export default {
       this.$root.$emit('calendar:today', this.formatDate())
     },
     formatDate (date) {
-      const d = date !== void 0 ? new Date(date) : new Date(),
+      const d = date !== undefined ? new Date(date) : new Date(),
         month = '' + (d.getMonth() + 1),
         day = '' + d.getDate(),
         year = d.getFullYear()
@@ -289,7 +289,7 @@ export default {
     },
     updateFormatters () {
       try {
-        this.dateFormatter = new Intl.DateTimeFormat(this.locale || void 0, {
+        this.dateFormatter = new Intl.DateTimeFormat(this.locale || undefined, {
           year: 'numeric',
           month: '2-digit',
           day: '2-digit',
@@ -299,7 +299,7 @@ export default {
           hour12: false,
           timeZone: 'UTC'
         })
-        this.titleFormatter = new Intl.DateTimeFormat(this.locale || void 0, {
+        this.titleFormatter = new Intl.DateTimeFormat(this.locale || undefined, {
           month: this.shortMonthLabel ? 'short' : 'long',
           year: 'numeric',
           timeZone: 'UTC'
@@ -307,8 +307,8 @@ export default {
       }
       catch (e) {
         // console.error('Intl.DateTimeFormat not supported')
-        this.dateFormatter = void 0
-        this.titleFormatter = void 0
+        this.dateFormatter = undefined
+        this.titleFormatter = undefined
       }
     },
     options (date) {

@@ -80,10 +80,10 @@ export default {
 
     getScopeForSlot (timestamp, idx, resource) {
       const scope = { timestamp: copyTimestamp(timestamp) }
-      if (idx !== void 0) {
+      if (idx !== undefined) {
         scope.index = idx
       }
-      if (resource !== void 0) {
+      if (resource !== undefined) {
         scope.resource = resource
       }
       return scope
