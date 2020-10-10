@@ -2417,8 +2417,70 @@
           "definition": {
             "scope": {
               "type": "Object",
-              "desc": "The timestamp object",
-              "__exemption": [ "examples" ]
+              "desc": "The scope of the event",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "desc": "The timestamp of the event",
+                  "__exemption": [ "examples" ]
+                },
+                "timeDurationHeight": {
+                  "type": "Function",
+                  "desc": "Given a duration (in minutes), will return the css height value",
+                  "__exemption": [ "examples" ],
+                  "params": {
+                    "duration": {
+                      "type": ["Number", "String"],
+                      "desc": "The number of minutes for the event to calculate it's height",
+                      "examples":[
+                        "300",
+                        "900"
+                      ]
+                    }
+                  },
+                  "returns": {
+                    "type": "Number",
+                    "desc": "The height (in pixels) to be used for the event",
+                    "examples": [
+                      "80",
+                      "120"
+                    ]
+                  }
+                },
+                "timeStartPos": {
+                  "type": "Function",
+                  "desc": "Calculates the starting y position of the passed in time",
+                  "__exemption": [ "examples" ],
+                  "params": {
+                    "time": {
+                      "type": "String",
+                      "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
+                      "examples":[
+                        "09:00"
+                      ]
+                    }
+                  },
+                  "returns": {
+                    "type": "Number",
+                    "desc": "The absolute y starting position",
+                    "examples": [
+                      "120",
+                      "482"
+                    ]
+                  }
+                },
+                "index": {
+                  "type": "Number",
+                  "desc": "The index of the column when using `column-count` property",
+                  "__exemption": [ "examples" ]
+                },
+                "resource": {
+                  "type": "Object",
+                  "desc": "The resource object associated with the event. Only applicable for resource views",
+                  "__exemption": [ "examples" ]
+                }
+              }
             },
             "event": {
               "type": "Object",
