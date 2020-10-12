@@ -153,6 +153,13 @@ export default {
     },
 
     __renderWorkWeekHead (h) {
+      const slot = this.$scopedSlots['workweek-header']
+      const scope = {
+        start: this.parsedStart,
+        end: this.parsedEnd,
+        miniMode: this.isMiniMode
+      }
+
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
       if (this.enableTheme === true) {
@@ -163,8 +170,11 @@ export default {
       }
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
-        staticClass: 'q-calendar-weekly__head-workweek'
-      }), '#')
+        staticClass: 'q-calendar-weekly__head-workweek',
+        on: this.getDefaultMouseEventHandlers(':workweek:header2', event => {
+          return { scope, event }
+        })
+      }), (slot ? slot({ scope }) : '#'))
     },
 
     __renderHeadDays (h) {
