@@ -16,11 +16,13 @@
                 view="month"
                 locale="en-us"
                 mini-mode
+                short-weekday-label
                 :selected-start-end-dates="startEndDates"
                 :day-class="classDay"
-                @mousedown:day="onMouseDownDay"
-                @mouseup:day="onMouseUpDay"
-                @mousemove:day="onMouseMoveDay"
+                @mousedown:day2="onMouseDownDay"
+                @mouseup:day2="onMouseUpDay"
+                @mousemove:day2="onMouseMoveDay"
+                style="width: 170px;"
               />
             </q-popup-proxy>
           </span>
@@ -133,28 +135,28 @@ export default {
           this.anchorTimestamp !== null &&
           this.otherTimestamp !== null &&
           this.anchorTimestamp.date === this.otherTimestamp.date) {
-          this.otherTimestamp = scope
+          this.otherTimestamp = scope.timestamp
           this.mouseDown = false
           return
         }
         // mouse is down, start selection and capture current
         this.mouseDown = true
-        this.anchorTimestamp = scope
-        this.otherTimestamp = scope
+        this.anchorTimestamp = scope.timestamp
+        this.otherTimestamp = scope.timestamp
       }
     },
 
     onMouseUpDay ({ scope, event }) {
       if (leftClick(event)) {
         // mouse is up, capture last and cancel selection
-        this.otherTimestamp = scope
+        this.otherTimestamp = scope.timestamp
         this.mouseDown = false
       }
     },
 
     onMouseMoveDay ({ scope, event }) {
       if (this.mouseDown === true) {
-        this.otherTimestamp = scope
+        this.otherTimestamp = scope.timestamp
       }
     }
   }

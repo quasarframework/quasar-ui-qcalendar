@@ -17,8 +17,8 @@
         transition-prev="slide-right"
         transition-next="slide-left"
         :selected-dates="selectedDates"
-        @click:day="onToggleDate"
-        @click:date="onToggleDate"
+        @click:day2="onToggleDay"
+        @click:date2="onToggleDate"
       />
     </div>
   </div>
@@ -42,11 +42,23 @@ export default {
       this.$refs.calendar.prev()
     },
 
-    onToggleDate ({ scope, event }) {
-      if (this.selectedDates.includes(scope.date)) {
+    onToggleDate ({ scope }) {
+      if (scope !== undefined) {
+        this.toggleDate(scope.timestamp.date)
+      }
+    },
+
+    onToggleDay ({ scope }) {
+      if (scope !== undefined) {
+        this.toggleDate(scope.timestamp.date)
+      }
+    },
+
+    toggleDate (date) {
+      if (this.selectedDates.includes(date)) {
         // remove the date
         for (let i = 0; i < this.selectedDates.length; ++i) {
-          if (scope.date === this.selectedDates[i]) {
+          if (date === this.selectedDates[i]) {
             this.selectedDates.splice(i, 1)
             break
           }
@@ -54,8 +66,13 @@ export default {
       }
       else {
         // add the date
-        this.selectedDates.push(scope.date)
+        this.selectedDates.push(date)
       }
+    }
+  },
+  watch: {
+    selectedDates (val) {
+      console.log(val)
     }
   }
 }
