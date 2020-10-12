@@ -108,7 +108,10 @@ export default {
       }
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
-        staticClass: 'q-calendar-daily__intervals-head q-calendar-daily__intervals-head--text'
+        staticClass: 'q-calendar-daily__intervals-head q-calendar-daily__intervals-head--text',
+        on: this.getDefaultMouseEventHandlers(':interval:header2', event => {
+          return { scope: { timestamp: this.parsedStart }, event }
+        })
       }), [
         slot && slot(this.days)
       ])
