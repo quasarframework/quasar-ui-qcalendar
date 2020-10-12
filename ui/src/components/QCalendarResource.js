@@ -31,8 +31,7 @@ export default {
 
   data () {
     return {
-      minWidth: '100px',
-      scrollWidth: '0'
+      minWidth: '100px'
     }
   },
 
@@ -64,12 +63,6 @@ export default {
   },
 
   methods: {
-    __getParentWidth () {
-      if (this.$parent && this.$parent.$el) {
-        return this.$parent.$el.getBoundingClientRect().width + 15
-      }
-    },
-
     __renderHeadIntervals (h) {
       return h('div', {
         staticClass: 'q-calendar-resource__head-intervals'
@@ -368,12 +361,8 @@ export default {
   },
 
   render (h) {
-    const maxWidth = convertToUnit(this.__getParentWidth())
     return h('div', {
-      staticClass: 'q-calendar-resource',
-      style: {
-        maxWidth: maxWidth
-      }
+      staticClass: 'q-calendar-resource'
     }, [
       this.__renderBody(h)
     ])
