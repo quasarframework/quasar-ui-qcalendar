@@ -26,12 +26,18 @@
     color: $calendar-text-color
     background: $calendar-background-color
 
+    &--droppable
+      border: $calendar-primary-color calendar-border-width dashed
+
   &__resource-interval
     border-bottom: $calendar-border-color $calendar-border-width solid
     border-right: $calendar-border-color $calendar-border-width solid
 
     &:last-child
       border-right: none
+
+    &--droppable
+      border: $calendar-primary-color calendar-border-width dashed
 
 .q-calendar-resource__resource-row:last-child > .q-calendar-resource__resource
   border-bottom: none
@@ -168,11 +174,17 @@
       color: $calendar-text-color-dark
       background: $calendar-background-color-dark
 
+      &--droppable
+        border: $calendar-primary-color-dark $calendar-border-width dashed
+
     &__resource
       border-bottom: $calendar-border-color-dark $calendar-border-width solid
       border-right: $calendar-border-color-dark $calendar-border-width solid
       color: $calendar-text-color-dark
       background: $calendar-background-color-dark
+
+      &--droppable
+        border: $calendar-primary-color-dark $calendar-border-width dashed
 
     &__resource-interval
       border-bottom: $calendar-border-color-dark $calendar-border-width solid

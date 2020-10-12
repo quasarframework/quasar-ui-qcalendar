@@ -98,12 +98,29 @@ export default {
         index,
         label
       }
+      let dragOver
+
       return slot ? slot(scope) : h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
         staticClass: 'q-calendar-resource__head-label',
+        class: {
+          'q-calendar-resource__head-label--droppable': dragOver
+        },
         style: {
           maxWidth: width,
           minWidth: width,
           height
+        },
+        domProps: {
+          ondragover: (e) => {
+            if (this.dragOverFunc !== undefined) {
+              dragOver = this.dragOverFunc(e, interval, 'interval', index)
+            }
+          },
+          ondrop: (e) => {
+            if (this.dropFunc !== undefined) {
+              this.dropFunc(e, interval, 'interval', index)
+            }
+          }
         },
         on: this.getDefaultMouseEventHandlers(':interval', event => {
           return { interval, index, label, event }
@@ -312,12 +329,29 @@ export default {
       const slotData = { resource, interval }
       const width = convertToUnit(this.parsedIntervalWidth)
       const height = convertToUnit(this.parsedResourceHeight)
+      let dragOver
+
       return h('div', {
         staticClass: 'q-calendar-resource__resource-interval',
+        class: {
+          'q-calendar-resource__resource-interval--droppable': dragOver
+        },
         style: {
           maxWidth: width,
           minWidth: width,
           height
+        },
+        domProps: {
+          ondragover: (e) => {
+            if (this.dragOverFunc !== undefined) {
+              dragOver = this.dragOverFunc(e, interval, 'resource', resource)
+            }
+          },
+          ondrop: (e) => {
+            if (this.dropFunc !== undefined) {
+              this.dropFunc(e, interval, 'resource', resource)
+            }
+          }
         },
         on: this.getDefaultMouseEventHandlers(':time', event => {
           const scope = this.getScopeForSlotX(this.getTimestampAtEventX(event, interval))
