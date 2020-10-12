@@ -48,7 +48,8 @@ export default {
 
   data: () => ({
     lastStart: undefined,
-    lastEnd: undefined
+    lastEnd: undefined,
+    emittedValue: ''
   }),
 
   computed: {
@@ -161,12 +162,18 @@ export default {
   },
 
   beforeMount () {
+    this.emittedValue = this.value
+
     // get start and end dates
     this.__checkChange()
   },
 
   watch: {
-    __renderProps: '__checkChange'
+    __renderProps: '__checkChange',
+
+    emittedValue (val, oldVal) {
+      this.$emit('input', val)
+    }
   },
 
   methods: {
@@ -268,12 +275,12 @@ export default {
       updateDayOfYear(moved)
       updateRelative(moved, this.times.now)
 
-      this.$emit('input', moved.date)
+      this.emittedValue = moved.date
       this.$emit('moved', moved)
     },
 
     moveToToday () {
-      this.$emit('input', today())
+      this.emittedValue = today()
     },
 
     next (amount = 1) {
