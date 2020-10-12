@@ -126,12 +126,18 @@ export default {
         colors = this.getThemeColors([color, backgroundColor])
         updateColors = this.setBothColors
       }
+      const scope = {
+        days: this.days
+      }
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
         staticClass: 'q-calendar-scheduler__resources-head q-calendar-scheduler__resources-head--text',
         style: {
           width
-        }
+        },
+        on: this.getDefaultMouseEventHandlers(':resource:header2', event => {
+          return { scope, event }
+        })
       }), [
         slot && slot(this.days)
       ])
