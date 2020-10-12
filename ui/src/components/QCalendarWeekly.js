@@ -184,7 +184,7 @@ export default {
     __renderHeadDay (h, day, index) {
       const width = 100 / this.weekdays.length + '%'
       const headDaySlot = this.$scopedSlots['head-day']
-      const slotData = { timestamp: day, index, miniMode: this.isMiniMode }
+      const scope = { timestamp: day, index, miniMode: this.isMiniMode }
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
       if (this.enableTheme === true) {
@@ -199,10 +199,13 @@ export default {
         staticClass: 'q-calendar-weekly__head-weekday',
         style: {
           width
-        }
+        },
+        on: this.getDefaultMouseEventHandlers(':day:header2', event => {
+          return { scope, event }
+        })
       }), [
         headDaySlot === undefined && this.__renderHeadDayLabel(h, day, this.shortWeekdayLabel || this.isMiniMode),
-        headDaySlot !== undefined && headDaySlot(slotData)
+        headDaySlot !== undefined && headDaySlot(scope)
       ])
     },
 
