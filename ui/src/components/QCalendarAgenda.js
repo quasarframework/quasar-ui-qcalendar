@@ -312,12 +312,7 @@ export default {
   render (h) {
     return h('div', {
       staticClass: 'q-calendar-agenda',
-      class: this.classes,
-      directives: [{
-        modifiers: { quiet: true },
-        name: 'resize',
-        value: this.onResize
-      }]
+      class: this.classes
     }, [
       !this.hideHeader && this.__renderHead(h),
       this.__renderBody(h)
