@@ -137,7 +137,8 @@ export default {
           year: 'numeric',
           timeZone: 'UTC'
         })
-      } catch (e) {
+      }
+      catch (e) {
         // console.error('Intl.DateTimeFormat not supported')
         this.dateFormatter = undefined
       }

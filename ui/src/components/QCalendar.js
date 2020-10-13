@@ -48,7 +48,8 @@ export default {
 
   data: () => ({
     lastStart: undefined,
-    lastEnd: undefined
+    lastEnd: undefined,
+    emittedValue: ''
   }),
 
   computed: {
@@ -161,12 +162,18 @@ export default {
   },
 
   beforeMount () {
+    this.emittedValue = this.value
+
     // get start and end dates
     this.__checkChange()
   },
 
   watch: {
-    __renderProps: '__checkChange'
+    __renderProps: '__checkChange',
+
+    emittedValue (val, oldVal) {
+      this.$emit('input', val)
+    }
   },
 
   methods: {
@@ -268,12 +275,12 @@ export default {
       updateDayOfYear(moved)
       updateRelative(moved, this.times.now)
 
-      this.$emit('input', moved.date)
+      this.emittedValue = moved.date
       this.$emit('moved', moved)
     },
 
     moveToToday () {
-      this.$emit('input', today())
+      this.emittedValue = today()
     },
 
     next (amount = 1) {
@@ -369,18 +376,30 @@ export default {
       },
       on: {
         ...this.$listeners,
+        // DEPRECATED in v2.4.0
         'click:date': (timestamp) => {
           if (this.$listeners.input !== undefined) {
-            if (timestamp.date !== undefined) {
-              this.$emit('input', timestamp.date)
-            }
-            else if (timestamp.day !== undefined && timestamp.day.date !== undefined) {
-              this.$emit('input', timestamp.day.date)
+            if (timestamp.date !== undefined && this.emittedValue !== timestamp.date) {
+              this.emittedValue = timestamp.date
             }
           }
+          // Because we highjack this event for input, pass it on to parent
           if (this.$listeners['click:date']) {
             /* eslint-disable-next-line */
             this.$emit('click:date', timestamp)
+          }
+        },
+        // ---
+        'click:date2': ({ scope, event }) => {
+          if (this.$listeners.input !== undefined) {
+            if (scope.timestamp.date !== undefined && this.emittedValue !== scope.timestamp.date) {
+              this.emittedValue = scope.timestamp.date
+            }
+          }
+          // Because we highjack this event for input, pass it on to parent
+          if (this.$listeners['click:date2']) {
+            /* eslint-disable-next-line */
+            this.$emit('click:date2', { scope, event })
           }
         }
       },

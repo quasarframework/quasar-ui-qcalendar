@@ -137,9 +137,16 @@ export default {
             }
           }
         },
-        on: this.getDefaultMouseEventHandlers(':column:head', event => {
-          return { scope, event }
+        // :column:head DEPRECATED in v2.4.0
+        on: this.getDefaultMouseEventHandlers2(':column:head', ':column:header2', (event, eventName) => {
+          if (eventName.indexOf('2') > -1) {
+            return { scope: { column, index: idx }, event }
+          }
+          else {
+            return { scope, event }
+          }
         })
+        // ---
       }), [
         this.noDefaultHeaderText !== true && this.__renderHeadColumn(h, column),
         slot && slot(scope)
@@ -244,9 +251,16 @@ export default {
             }
           }
         },
-        on: this.getDefaultMouseEventHandlers(':column', event => {
-          return { scope, event }
+        // :column DEPRECATED in v2.4.0
+        on: this.getDefaultMouseEventHandlers2(':column', ':column2', (event, eventName) => {
+          if (eventName.indexOf('2') > -1) {
+            return { scope: scope, event }
+          }
+          else {
+            return { scope, event }
+          }
         })
+        // ---
       }), [
         slot && slot(scope)
       ])
@@ -299,10 +313,18 @@ export default {
             }
           }
         },
-        on: this.getDefaultMouseEventHandlers(':time', event => {
+        // :time DEPRECATED in v2.4.0
+        on: this.getDefaultMouseEventHandlers2(':time', ':time2', (event, eventName) => {
           const scope = this.getScopeForSlot(this.getTimestampAtEvent(event, day), idx)
-          return { scope, event }
+          if (eventName.indexOf('2') > -1) {
+            scope.index = idx
+            return { scope, event }
+          }
+          else {
+            return { scope, event }
+          }
         })
+        // ---
       }), [
         slot && slot(scope)
       ])
@@ -312,12 +334,7 @@ export default {
   render (h) {
     return h('div', {
       staticClass: 'q-calendar-agenda',
-      class: this.classes,
-      directives: [{
-        modifiers: { quiet: true },
-        name: 'resize',
-        value: this.onResize
-      }]
+      class: this.classes
     }, [
       !this.hideHeader && this.__renderHead(h),
       this.__renderBody(h)

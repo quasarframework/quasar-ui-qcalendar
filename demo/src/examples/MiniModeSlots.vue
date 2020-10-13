@@ -13,6 +13,7 @@
             view="month"
             locale="en-us"
             :mini-mode="miniMode"
+            :short-weekday-label="shortWeekdayLabel"
           >
             <template #day="{ timestamp, miniMode }">
               <div class="q-event">
@@ -130,6 +131,7 @@ export default {
       splitterModel: 90, // start at 90%
       selectedDate: '',
       miniMode: false,
+      shortWeekdayLabel: false,
       events: [
         {
           title: '1st of the Month',
@@ -212,6 +214,7 @@ export default {
     splitterModel (val) {
       const rect = this.$refs.calendar.$el.getBoundingClientRect()
       this.miniMode = rect.width < 500
+      this.shortWeekdayLabel = rect.width < 300
     }
   },
   methods: {

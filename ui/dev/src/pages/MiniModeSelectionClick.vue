@@ -15,9 +15,9 @@
         view="month"
         locale="en-us"
         mini-mode
-        @click:date="handleClick"
-        @mousemove:day="handleHoverStart"
-        @mouseleave:day="handleHoverEnd"
+        @click:date2="handleClick"
+        @mousemove:day2="handleHoverStart"
+        @mouseleave:day2="handleHoverEnd"
         :day-class="classDay"
         style="max-width: 300px; min-width: auto; overflow: hidden"
       />
@@ -46,7 +46,8 @@ export default {
             'q-selected-day': this.isHovering(d),
             'q-selected-day-last': this.isHoveringLast(d)
           }
-        } else if (this.dates.length === 2) {
+        }
+        else if (this.dates.length === 2) {
           return {
             'q-selected-day-first': this.isSelectedFirst(d),
             'q-selected-day': this.isBetween(d),
@@ -112,15 +113,19 @@ export default {
       this.dates = this.dates.filter(v => v !== d)
     },
 
-    handleClick ({ date: d }) {
-      if (this.isSelected(d)) this.removeDate(d)
-      else if (this.dates.length < 2) { this.dates.push(d) } else this.dates = [d]
+    handleClick ({ scope: { timestamp: { date } } }) {
+      if (this.isSelected(date)) this.removeDate(date)
+      else if (this.dates.length < 2) {
+        this.dates.push(date)
+      }
+      else this.dates = [date]
     },
 
-    handleHoverStart ({ scope: { date } }) {
+    handleHoverStart ({ scope: { timestamp: { date } } }) {
       this.hover = date
     },
-    handleHoverEnd ({ scope: { date } }) {
+
+    handleHoverEnd ({ scope: { timestamp: { date } } }) {
       this.hover = null
     }
   }

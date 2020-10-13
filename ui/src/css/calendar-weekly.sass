@@ -207,9 +207,6 @@
     right: 2px
     font-size: 0.6rem
 
-  .q-event
-    // ToDo
-
 .q-calendar-mini
 
   .q-calendar-weekly
@@ -217,6 +214,7 @@
     &__head-workweek
       border-right: unset
       border-bottom: unset
+      width: 30px
 
     &__head-weekday
       border: 0 !important
@@ -229,6 +227,8 @@
       border-right: unset
       border-bottom: unset
       font-size: 1em
+      padding-bottom: 8px
+      width: 30px
 
     &__week--wrapper
       border-bottom: unset
@@ -263,7 +263,6 @@
           right: 0
           bottom: 0
           left: 0
-          // margin: auto
           background: lighten($calendar-primary-color, 45%)
 
         // &:first-child:before
@@ -434,10 +433,20 @@
       .q-calendar-weekly__week--wrapper
         border-bottom: unset
 
+// DEPRECATED v2.4.0
 .q-event
   &:first-child
     margin-top: 2.2em
 
 .q-calendar-mini
   .q-event
+    margin-top: 1.0em
+// ---
+
+.q-day-event
+  &:first-child
+    margin-top: 2.2em
+
+.q-calendar-mini
+  .q-day-event
     margin-top: 1.0em

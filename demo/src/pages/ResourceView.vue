@@ -13,10 +13,13 @@ You can set the `sticky` property to make the resource column and interval label
 
     <example-viewer title="Bordered" file="ResourceViewBordered" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Dark" file="ResourceViewDark" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+
+    <example-title title="Navigation" />
     <example-viewer title="Prev/Next" file="ResourceViewPrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Swipe" file="ResourceViewSwipe" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+
+    <example-title title="Intervals" />
     <example-viewer title="Interval Header Width/Height" file="ResourceViewIntervalHeaderWidthHeight" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Resource Width/Height" file="ResourceViewResourceWidthHeight" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
 The example below is setting the `interval-count` to `4`, the default is `24`. This is the number of intervals to be displayed.
@@ -38,13 +41,63 @@ The example below is setting the `interval-start` to `8`, the default is `0`. It
     </q-markdown>
     <example-viewer title="Interval Start" file="ResourceViewIntervalStart" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
+    <example-title title="Resource" />
+    <example-viewer title="Resource Width/Height" file="ResourceViewResourceWidthHeight" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+
+    <example-title title="Hierarchy" />
     <q-markdown>
 The example below is uses keys `children` and `expanded`, in the `resources` object, to show a tree hierarchy.
     </q-markdown>
     <example-viewer title="Children" file="ResourceViewChildren" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
+    <example-title title="Events" />
     <q-markdown>
-For slots that return `day`, `interval` or `timestamp`, it looks like this:
+::: tip
+The events below won't show up unless there is a listener for it. Therefore, if using `Vue Dev Tools`, you won't see it unless you add it.
+:::
+
+You can add a listener for the following events. An event is comprised of an `event + suffix`. By adding the event with the suffix, you get the completed listener name.
+
+| Event       | `:interval2`       | `:resource2`       | `:time2`             | `:resource:header2`| `:date2`           |
+| ----------- | :----------------: | :----------------: | :-----------------: | :----------------: | :----------------: |
+| click       | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:  | :heavy_check_mark: | :heavy_check_mark: |
+| contextmenu | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:  | :heavy_check_mark: | :heavy_check_mark: |
+| mousedown   | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:  | :heavy_check_mark: | :x:                |
+| mousemove   | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:  | :heavy_check_mark: | :x:                |
+| mouseup     | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:  | :heavy_check_mark: | :x:                |
+| mouseenter  | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:  | :heavy_check_mark: | :x:                |
+| mouseleave  | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:  | :heavy_check_mark: | :x:                |
+| touchstart  | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:  | :heavy_check_mark: | :x:                |
+| touchmove   | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:  | :heavy_check_mark: | :x:                |
+| touchend    | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:  | :heavy_check_mark: | :x:                |
+
+::: warning
+Do NOT combine suffixes. Only one suffix per event. A different suffix will give you a different event.
+:::
+
+| Suffix | Description | Data |
+| ------ | ----------- | ---- |
+| `:interval2` | The time header area | `{ scope: { timestamp: { "..." } }, event: { "..." } } |
+| `:resource2` | A resource | `{ scope: { resource: { "..."}, index, intervals: [ "..." ] }, event: { "..." } } |
+| `:time2` | The time associated with a resource | `{ scope: { timestamp: { "..." }, index, resource: { "..."} }, event: { "..." } } |
+| `:resource:header2` | The header area above the resources | `{ scope: { timestamp: { "..." }, resources: [ "..." ], intervals: [ "..." ] }, event: { "..." } } |
+| `:date2` | The date button | Date in format YYYY-MM-DD |
+
+::: tip
+`:resource:header2` is new since v2.4.0
+:::
+
+::: warning
+The events `:interval`, `:resource`, `:time` and `:date` still exist, but have been marked as deprecated starting with v2.4.0
+:::
+
+The example below is only showing `click` events as well as the `input` event.
+    </q-markdown>
+    <example-viewer title="Events" file="ResourceViewEvents" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+
+    <example-title title="Slots" />
+    <q-markdown>
+For slots that return `timestamp`, it looks like this:
 ```js
 {
   date: '',       // YYYY-MM-DD
@@ -74,11 +127,19 @@ The `resource-intervals` slot is used to get information about the date and time
 
 Scroll until you see 10:00am to see example.
     </q-markdown>
-    <example-viewer title="Slots" file="ResourceViewSlots" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="resource-interval Slot" file="ResourceViewSlots" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
-    <example-viewer title="Slot - Resource Header" file="ResourceViewSlotResourceHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="resource-header Slot" file="ResourceViewSlotResourceHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
+    <q-markdown>
+Below, the slot receives the `resource` to be displayed. In this case, an avatar (or icon) is being displayed along with the resource name.
+    </q-markdown>
+    <example-viewer title="resource-label Slot" file="ResourceViewSlotResourceLabel" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+
+    <example-title title="Themes" />
     <example-viewer title="Theme" file="ResourceViewTheme" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+
+    <example-title title="Locale Support" />
     <example-viewer title="Locale" file="ResourceViewLocale" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
   </div>
@@ -116,18 +177,36 @@ export default {
     this.addToToc('Sticky', 2)
     this.addToToc('Bordered', 2)
     this.addToToc('Dark', 2)
+
+    this.addToToc('Navigation')
     this.addToToc('Prev/Next', 2)
     this.addToToc('Swipe', 2)
+
+    this.addToToc('Intervals')
     this.addToToc('Interval Header Width/Height', 2)
-    this.addToToc('Resource Width/Height', 2)
     this.addToToc('Interval Count', 2)
     this.addToToc('Interval Minutes (30)', 2)
     this.addToToc('Interval Minutes (15)', 2)
     this.addToToc('Interval Start', 2)
+
+    this.addToToc('Resource')
+    this.addToToc('Resource Width/Height', 2)
+
+    this.addToToc('Hierarchy')
     this.addToToc('Children', 2)
-    this.addToToc('Slots', 2)
-    this.addToToc('Slot - Resource Header', 2)
+
+    this.addToToc('Events')
+    this.addToToc('Events', 2)
+
+    this.addToToc('Slots')
+    this.addToToc('resource-interval Slot', 2)
+    this.addToToc('resource-header Slot', 2)
+    this.addToToc('resource-label Slot', 2)
+
+    this.addToToc('Themes')
     this.addToToc('Theme', 2)
+
+    this.addToToc('Locale Support')
     this.addToToc('Locale', 2)
 
     this.toc = this.tempToc
@@ -148,7 +227,10 @@ export default {
   methods: {
     addToToc (name, level = 1) {
       let n = name
-      if (level > 1) {
+      if (level === 1) {
+        n = 'title-' + n
+      }
+      else {
         n = 'example-' + n
       }
       const slug = slugify(n)

@@ -4,7 +4,7 @@
       v-model="selectedDate"
       view="month"
       locale="en-us"
-      style="height: 500px;"
+      :day-height="100"
     >
       <template #day="{ timestamp }">
         <template v-for="(event, index) in getEvents(timestamp.date)">
@@ -67,7 +67,8 @@ function hexToRgb (hex) {
 
   if (hex.length === 3) {
     hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2]
-  } else if (hex.length === 4) {
+  }
+  else if (hex.length === 4) {
     hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2] + hex[3] + hex[3]
   }
 
@@ -238,7 +239,8 @@ export default {
             this.events[i].side = undefined
             events.push(this.events[i])
           }
-        } else if (this.events[i].days) {
+        }
+        else if (this.events[i].days) {
           // check for overlapping dates
           const startDate = QCalendar.parseTimestamp(this.events[i].date)
           const endDate = QCalendar.addToDate(startDate, { day: this.events[i].days })

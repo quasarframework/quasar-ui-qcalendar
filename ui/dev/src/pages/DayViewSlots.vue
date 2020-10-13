@@ -92,7 +92,8 @@ function hexToRgb (hex) {
 
   if (hex.length === 3) {
     hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2]
-  } else if (hex.length === 4) {
+  }
+  else if (hex.length === 4) {
     hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2] + hex[3] + hex[3]
   }
 
@@ -273,7 +274,8 @@ export default {
             event.side = undefined
             events.push(event)
           }
-        } else if (event.days) {
+        }
+        else if (event.days) {
           // check for overlapping dates
           const startDate = QCalendar.parsed(event.date)
           const endDate = QCalendar.addToDate(startDate, { day: event.days })

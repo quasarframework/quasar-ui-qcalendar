@@ -3,7 +3,7 @@
     <q-calendar
       v-model="selectedDate"
       view="month"
-      :hide-header="true"
+      hide-header
       locale="en-us"
     />
   </div>

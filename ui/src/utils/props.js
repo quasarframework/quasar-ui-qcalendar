@@ -149,7 +149,7 @@ export default {
     },
     monthLabelSize: {
       type: String,
-      default: 'md',
+      default: 'sm',
       validator: v => ['xs', 'sm', 'md', 'lg', 'xl'].includes(v)
     }
   },

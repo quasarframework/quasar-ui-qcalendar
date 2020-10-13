@@ -1,14 +1,16 @@
 <template>
-  <div style="max-width: 800px; width: 100%;">
+  <div class="row justify-center full-width q-pa-md">
     <q-calendar
       v-model="selectedDate"
       view="day-resource"
       :resources="resources"
       resource-key="name"
       :resource-height="50"
+      :resource-width="120"
       bordered
+      sticky
       locale="en-us"
-      style="height: 300px;"
+      style="height: 300px; max-width: 800px; width: 100%;"
     />
   </div>
 </template>

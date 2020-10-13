@@ -126,12 +126,19 @@ export default {
         colors = this.getThemeColors([color, backgroundColor])
         updateColors = this.setBothColors
       }
+      const scope = {
+        days: this.days,
+        resources: this.resources
+      }
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
         staticClass: 'q-calendar-scheduler__resources-head q-calendar-scheduler__resources-head--text',
         style: {
           width
-        }
+        },
+        on: this.getDefaultMouseEventHandlers(':resource:header2', event => {
+          return { scope, event }
+        })
       }), [
         slot && slot(this.days)
       ])
@@ -205,9 +212,11 @@ export default {
             }
           }
         },
-        on: this.getDefaultMouseEventHandlers(':day', event => {
+        // :day DEPRECATED in v2.4.0
+        on: this.getDefaultMouseEventHandlers2(':day', ':day:header2', event => {
           return { scope, event }
         })
+        // ---
       }), [
         headDaySlot !== undefined && headDaySlot(scope),
         headDaySlot === undefined && this.columnHeaderBefore === true && this.__renderColumnHeaderBefore(h, day, idx),
@@ -259,8 +268,7 @@ export default {
       const dayLabel = this.dayFormatter(day, false)
       const dayLabelSlot = this.$scopedSlots['day-label']
       const dayBtnSlot = this.$scopedSlots['day-btn']
-      const scope = { timestamp: day, idx }
-      const slotData = Object.assign(scope, { dayLabel, activeDate })
+      const scope = { timestamp: day, index: idx, dayLabel, activeDate }
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
@@ -281,7 +289,7 @@ export default {
         updateColors = this.setBothColors
       }
 
-      return dayBtnSlot ? dayBtnSlot(slotData) : h(QBtn, updateColors(colorCurrent !== undefined ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
+      return dayBtnSlot ? dayBtnSlot(scope) : h(QBtn, updateColors(colorCurrent !== undefined ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
         staticClass: 'q-calendar-scheduler__head-day-label',
         class: [
           {
@@ -299,12 +307,27 @@ export default {
           outline: day.current === true,
           disable: day.disabled
         },
-        on: this.getMouseEventHandlers({
-          'click:date': { event: 'click', stop: true },
-          'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false }
-        }, _event => scope)
+        on: {
+          ...this.getMouseEventHandlers({
+            // DEPRECATED in v2.4.0
+            'click:date': { event: 'click', stop: true },
+            'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false },
+            // ---
+            'click:date2': { event: 'click', stop: true },
+            'contextmenu:date2': { event: 'contextmenu', stop: true, prevent: true, result: false }
+          }, (event, eventName) => {
+            if (eventName.indexOf('2') > -1) {
+              return { scope, event }
+            }
+            // DEPRECATED in v2.4.0
+            else {
+              return scope
+            }
+            // ---
+          })
+        }
       }), [
-        dayLabelSlot ? dayLabelSlot(slotData) : dayLabel
+        dayLabelSlot ? dayLabelSlot(scope) : dayLabel
       ])
     },
 
@@ -446,11 +469,11 @@ export default {
           .map(i => this.__renderDay(h, resource, this.days[0], i))
       }
       else {
-        return this.days.map((day, index) => this.__renderDay(h, resource, day, index))
+        return this.days.map((day, index) => this.__renderDay(h, resource, day, index, idx))
       }
     },
 
-    __renderDay (h, resource, day, idx) {
+    __renderDay (h, resource, day, idx, resourceIndex) {
       const width = 100 / this.days.length
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
@@ -480,17 +503,17 @@ export default {
           maxWidth: width + '%'
         }
       }), [
-        this.__renderDayResource(h, resource, day, idx)
+        this.__renderDayResource(h, resource, day, idx, resourceIndex)
       ])
     },
 
-    __renderDayResource (h, resource, day, idx) {
+    __renderDayResource (h, resource, day, idx, resourceIndex) {
       const styler = this.resourceStyle || this.resourceStyleDefault
       const slot = this.$scopedSlots['scheduler-resource-day']
       const scope = this.getScopeForSlot(day, idx, resource)
       let dragOver
 
-      const style = styler({ timestamp: day, index: idx, resource })
+      const style = styler({ timestamp: day, index: resourceIndex, resource })
 
       const data = {
         key: resource[this.resourceKey] + '-' + idx,
@@ -502,19 +525,21 @@ export default {
         domProps: {
           ondragover: (_event) => {
             if (this.dragOverFunc !== undefined) {
-              dragOver = this.dragOverFunc(_event, resource, 'resource', idx)
+              dragOver = this.dragOverFunc(_event, resource, 'resource', resourceIndex)
             }
           },
           ondrop: (_event) => {
             if (this.dropFunc !== undefined) {
-              this.dropFunc(_event, resource, 'resource', idx)
+              this.dropFunc(_event, resource, 'resource', resourceIndex)
             }
           }
         },
-        on: this.getDefaultMouseEventHandlers(':resource:day', event => {
-          const scope = this.getScopeForSlot(this.getTimestampAtEvent(event, day), idx, resource)
+        // :resource:day DEPRECATED in v2.4.0
+        on: this.getDefaultMouseEventHandlers2(':resource:day', ':resource:day2', event => {
+          const scope = this.getScopeForSlot(this.getTimestampAtEvent(event, day), resourceIndex, resource)
           return { scope, event }
         })
+        // ---
       }
 
       const children = slot ? slot(scope) : undefined
@@ -526,11 +551,13 @@ export default {
       const slot = this.$scopedSlots['scheduler-resource']
       const scope = {
         resource: resource,
-        index: idx
+        index: idx,
+        days: this.days
       }
       const width = convertToUnit(this.parsedResourceWidth)
       const label = resource[this.resourceKey]
       if (label === undefined) {
+        /* eslint-disable-next-line */
         console.warn('QCalendarScheduler: resource object requires "resource-key" property to contain resource object key')
       }
 
@@ -552,9 +579,11 @@ export default {
           height: '100%',
           paddingLeft: (10 * indentLevel + 2) + 'px'
         },
-        on: this.getDefaultMouseEventHandlers(':resource', event => {
+        // :resource DEPRECATED in v2.4.0
+        on: this.getDefaultMouseEventHandlers2(':resource', ':resource2', event => {
           return { scope, event }
         })
+        // ---
       }, [
         slot ? slot(scope) : h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
           staticClass: 'q-calendar-scheduler__resource-text'

@@ -31,8 +31,7 @@ export default {
 
   data () {
     return {
-      minWidth: '100px',
-      scrollWidth: '0'
+      minWidth: '100px'
     }
   },
 
@@ -64,12 +63,6 @@ export default {
   },
 
   methods: {
-    __getParentWidth () {
-      if (this.$parent && this.$parent.$el) {
-        return this.$parent.$el.getBoundingClientRect().width + 15
-      }
-    },
-
     __renderHeadIntervals (h) {
       return h('div', {
         staticClass: 'q-calendar-resource__head-intervals'
@@ -98,16 +91,40 @@ export default {
         index,
         label
       }
+      let dragOver
+
       return slot ? slot(scope) : h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
         staticClass: 'q-calendar-resource__head-label',
+        class: {
+          'q-calendar-resource__head-label--droppable': dragOver
+        },
         style: {
           maxWidth: width,
           minWidth: width,
           height
         },
-        on: this.getDefaultMouseEventHandlers(':interval', event => {
-          return { interval, index, label, event }
+        domProps: {
+          ondragover: (e) => {
+            if (this.dragOverFunc !== undefined) {
+              dragOver = this.dragOverFunc(e, interval, 'interval', index)
+            }
+          },
+          ondrop: (e) => {
+            if (this.dropFunc !== undefined) {
+              this.dropFunc(e, interval, 'interval', index)
+            }
+          }
+        },
+        // :interval DEPRECATED in v2.4.0
+        on: this.getDefaultMouseEventHandlers2(':interval', ':interval2', (event, eventName) => {
+          if (eventName.indexOf('2') > -1) {
+            return { scope: { timestamp: interval, index, label }, event }
+          }
+          else {
+            return { interval, index, label, event }
+          }
         })
+        // ---
       }), label)
     },
 
@@ -150,7 +167,11 @@ export default {
         colors = this.getThemeColors([color, backgroundColor])
         updateColors = this.setBothColors
       }
-
+      const scope = {
+        timestamp: this.days[0],
+        resources: this.resources,
+        intervals: this.intervals[0]
+      }
       const intervals = this.intervals
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
@@ -159,7 +180,10 @@ export default {
           maxWidth: width,
           minWidth: width,
           height
-        }
+        },
+        on: this.getDefaultMouseEventHandlers(':resource:header2', event => {
+          return { scope, event }
+        })
       }), [
         slot && slot({ date: this.value, intervals })
       ])
@@ -221,7 +245,7 @@ export default {
         staticClass: 'q-calendar-resource__resource-row'
       }, [
         this.__renderResourceLabel(h, resource, idx, indentLevel),
-        this.__renderResourceIntervals(h, resource),
+        this.__renderResourceIntervals(h, resource, idx),
         slot && slot({ resource, index: idx })
       ])
       if (resource.expanded === true) {
@@ -257,9 +281,16 @@ export default {
           minWidth: width,
           height
         },
-        on: this.getDefaultMouseEventHandlers(':resource', event => {
-          return { resource, index: idx, event }
+        // :resource DEPRECATED in v2.4.0
+        on: this.getDefaultMouseEventHandlers2(':resource', ':resource2', (event, eventName) => {
+          if (eventName.indexOf('2') > -1) {
+            return { scope: { resource, index: idx, intervals: this.intervals }, event }
+          }
+          else {
+            return { resource, index: idx, event }
+          }
         })
+        // ---
       }), [
         slot ? slot(scope) : this.__renderResourceText(h, resource, idx, indentLevel)
       ])
@@ -268,6 +299,7 @@ export default {
     __renderResourceText (h, resource, idx, indentLevel = 0) {
       const label = resource[this.resourceKey]
       if (label === undefined) {
+        /* eslint-disable-next-line */
         console.warn('QCalendarResource: resource object requires "resource-key" property to contain resource object key')
       }
 
@@ -292,7 +324,7 @@ export default {
       ])
     },
 
-    __renderResourceIntervals (h, resource) {
+    __renderResourceIntervals (h, resource, idx) {
       const slot = this.$scopedSlots['resource-intervals']
       const timeStartPosX = this.timeStartPosX,
         timeDurationWidth = this.timeDurationWidth,
@@ -300,29 +332,55 @@ export default {
       return h('div', {
         staticClass: 'q-calendar-resource__resource-intervals'
       }, [
-        this.intervals.map(intervals => intervals.map(interval => this.__renderResourceInterval(h, resource, interval))),
+        this.intervals.map(intervals => intervals.map(interval => this.__renderResourceInterval(h, resource, interval, idx))),
         slot && slot({ resource, intervals, timeStartPosX, timeDurationWidth })
       ])
     },
 
     // interval related to resource
-    __renderResourceInterval (h, resource, interval) {
+    __renderResourceInterval (h, resource, interval, idx) {
       // called for each interval
       const slot = this.$scopedSlots['resource-interval']
       const slotData = { resource, interval }
       const width = convertToUnit(this.parsedIntervalWidth)
       const height = convertToUnit(this.parsedResourceHeight)
+      let dragOver
+
       return h('div', {
         staticClass: 'q-calendar-resource__resource-interval',
+        class: {
+          'q-calendar-resource__resource-interval--droppable': dragOver
+        },
         style: {
           maxWidth: width,
           minWidth: width,
           height
         },
-        on: this.getDefaultMouseEventHandlers(':time', event => {
+        domProps: {
+          ondragover: (e) => {
+            if (this.dragOverFunc !== undefined) {
+              dragOver = this.dragOverFunc(e, interval, 'resource', resource)
+            }
+          },
+          ondrop: (e) => {
+            if (this.dropFunc !== undefined) {
+              this.dropFunc(e, interval, 'resource', resource)
+            }
+          }
+        },
+        // :time DEPRECATED in v2.4.0
+        on: this.getDefaultMouseEventHandlers2(':time', ':time2', (event, eventName) => {
           const scope = this.getScopeForSlotX(this.getTimestampAtEventX(event, interval))
-          return { scope, resource, event }
+          if (eventName.indexOf('2') > -1) {
+            scope.resource = resource
+            scope.index = idx
+            return { scope, event }
+          }
+          else {
+            return { scope, resource, event }
+          }
         })
+        // ---
       }, [
         slot && slot(slotData)
       ])
@@ -334,12 +392,8 @@ export default {
   },
 
   render (h) {
-    const maxWidth = convertToUnit(this.__getParentWidth())
     return h('div', {
-      staticClass: 'q-calendar-resource',
-      style: {
-        maxWidth: maxWidth
-      }
+      staticClass: 'q-calendar-resource'
     }, [
       this.__renderBody(h)
     ])

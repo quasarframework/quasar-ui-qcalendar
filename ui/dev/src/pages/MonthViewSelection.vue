@@ -12,9 +12,9 @@
         locale="en-us"
         :selected-start-end-dates="startEndDates"
         :day-style="styleDay"
-        @mousedown:day="onMouseDownDay"
-        @mouseup:day="onMouseUpDay"
-        @mousemove:day="onMouseMoveDay"
+        @mousedown:day2="onMouseDownDay"
+        @mouseup:day2="onMouseUpDay"
+        @mousemove:day2="onMouseMoveDay"
       />
     </div>
   </div>
@@ -45,7 +45,8 @@ export default {
       if (this.anchorDayIdentifier !== false && this.otherDayIdentifier !== false) {
         if (this.anchorDayIdentifier <= this.otherDayIdentifier) {
           dates.push(this.anchorTimestamp.date, this.otherTimestamp.date)
-        } else {
+        }
+        else {
           dates.push(this.otherTimestamp.date, this.anchorTimestamp.date)
         }
       }
@@ -96,28 +97,28 @@ export default {
           this.anchorTimestamp !== null &&
           this.otherTimestamp !== null &&
           this.anchorTimestamp.date === this.otherTimestamp.date) {
-          this.otherTimestamp = scope
+          this.otherTimestamp = scope.timestamp
           this.mouseDown = false
           return
         }
         // mouse is down, start selection and capture current
         this.mouseDown = true
-        this.anchorTimestamp = scope
-        this.otherTimestamp = scope
+        this.anchorTimestamp = scope.timestamp
+        this.otherTimestamp = scope.timestamp
       }
     },
 
     onMouseUpDay ({ scope, event }) {
       if (leftClick(event)) {
         // mouse is up, capture last and cancel selection
-        this.otherTimestamp = scope
+        this.otherTimestamp = scope.timestamp
         this.mouseDown = false
       }
     },
 
     onMouseMoveDay ({ scope, event }) {
       if (this.mouseDown === true) {
-        this.otherTimestamp = scope
+        this.otherTimestamp = scope.timestamp
       }
     }
   }

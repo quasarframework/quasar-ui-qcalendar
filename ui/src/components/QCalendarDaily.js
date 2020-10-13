@@ -108,7 +108,10 @@ export default {
       }
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
-        staticClass: 'q-calendar-daily__intervals-head q-calendar-daily__intervals-head--text'
+        staticClass: 'q-calendar-daily__intervals-head q-calendar-daily__intervals-head--text',
+        on: this.getDefaultMouseEventHandlers(':interval:header2', event => {
+          return { scope: { days: this.days }, event }
+        })
       }), [
         slot && slot(this.days)
       ])
@@ -174,9 +177,13 @@ export default {
             }
           }
         },
-        on: this.getDefaultMouseEventHandlers(':day', event => {
-          return { scope, event }
-        })
+        on: {
+          // :day DEPRECATED in v2.4.0
+          ...this.getDefaultMouseEventHandlers2(':day', ':day:header2', event => {
+            return { scope, event }
+          })
+          // ---
+        }
       }), [
         headDaySlot !== undefined && headDaySlot(scope),
         headDaySlot === undefined && this.columnHeaderBefore === true && this.__renderColumnHeaderBefore(h, day, idx),
@@ -231,7 +238,7 @@ export default {
       const dayLabel = this.dayFormatter(day, false)
       const dayLabelSlot = this.$scopedSlots['day-label']
       const dayBtnSlot = this.$scopedSlots['day-btn']
-      const slotData = { dayLabel, timestamp: day, activeDate }
+      const scope = { dayLabel, timestamp: day, activeDate }
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
@@ -252,7 +259,7 @@ export default {
         updateColors = this.setBothColors
       }
 
-      return dayBtnSlot ? dayBtnSlot(slotData) : h(QBtn, updateColors(colorCurrent !== undefined ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
+      return dayBtnSlot ? dayBtnSlot(scope) : h(QBtn, updateColors(colorCurrent !== undefined ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
         staticClass: 'q-calendar-daily__head-day-label',
         class: [
           {
@@ -270,12 +277,27 @@ export default {
           outline: day.current === true,
           disable: day.disabled
         },
-        on: this.getMouseEventHandlers({
-          'click:date': { event: 'click', stop: true },
-          'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false }
-        }, _event => day)
+        on: {
+          // DEPRECATED in v2.4.0
+          ...this.getMouseEventHandlers({
+            'click:date': { event: 'click', stop: true },
+            'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false },
+            // ---
+            'click:date2': { event: 'click', stop: true },
+            'contextmenu:date2': { event: 'contextmenu', stop: true, prevent: true, result: false }
+          }, (event, eventName) => {
+            if (eventName.indexOf('2') > -1) {
+              return { scope: { timestamp: day }, event }
+            }
+            // DEPRECATED in v2.4.0
+            else {
+              return day
+            }
+            // ---
+          })
+        }
       }), [
-        dayLabelSlot ? dayLabelSlot(slotData) : dayLabel
+        dayLabelSlot ? dayLabelSlot(scope) : dayLabel
       ])
     },
 
@@ -402,10 +424,14 @@ export default {
         style: {
           maxWidth: width + '%'
         },
-        on: this.getDefaultMouseEventHandlers(':time', event => {
-          const scope = this.getScopeForSlot(this.getTimestampAtEvent(event, day), idx)
-          return { scope, event }
-        })
+        on: {
+          // :time DEPRECATED in v2.4.0
+          ...this.getDefaultMouseEventHandlers2(':time', ':time2', event => {
+            const scope = this.getScopeForSlot(this.getTimestampAtEvent(event, day), idx)
+            return { scope, event }
+          })
+          // ---
+        }
       }), [
         ...this.__renderDayIntervals(h, dayIndex, idx),
         slot && slot(scope)
@@ -464,9 +490,19 @@ export default {
 
       const data = {
         staticClass: 'q-calendar-daily__intervals-body',
-        on: this.getDefaultMouseEventHandlers(':interval', _event => {
-          return this.getTimestampAtEvent(_event, this.parsedStart)
-        })
+        on: {
+          // :interval DEPRECATED in v2.4.0
+          ...this.getDefaultMouseEventHandlers2(':interval', ':interval2', (event, eventName) => {
+            const timestamp = this.getTimestampAtEvent(event, this.parsedStart)
+            if (eventName.indexOf('2') > -1) {
+              return { scope: { timestamp }, event }
+            }
+            else {
+              return timestamp
+            }
+          })
+          // ---
+        }
       }
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), data), this.__renderIntervalLabels(h))
