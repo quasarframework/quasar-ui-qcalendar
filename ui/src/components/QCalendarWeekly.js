@@ -184,7 +184,6 @@ export default {
     __renderHeadDay (h, day, index) {
       const width = 100 / this.weekdays.length + '%'
       const headDaySlot = this.$scopedSlots['head-day']
-      const scope = { timestamp: day, index, miniMode: this.isMiniMode }
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
       if (this.enableTheme === true) {
@@ -193,6 +192,8 @@ export default {
         colors = this.getThemeColors([color, backgroundColor])
         updateColors = this.setBothColors
       }
+      const days = this.days.filter(day2 => day2.weekday === day.weekday)
+      const scope = { timestamp: day, days, index, miniMode: this.isMiniMode }
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
         key: day.date,
@@ -260,7 +261,7 @@ export default {
       const day = week.length > 2 ? week[2] : week[0]
       const { timestamp } = this.isCurrentWeek(week)
       const workweekLabel = Number(day.workweek).toLocaleString(this.locale)
-      const slotData = { workweekLabel, week, miniMode: this.isMiniMode }
+      const scope = { workweekLabel, week, miniMode: this.isMiniMode }
       const colorCurrent = timestamp && timestamp.current === true ? this.color : undefined
       const height = convertToUnit(this.dayHeight)
       let colors = new Map(), color, backgroundColor
@@ -289,18 +290,19 @@ export default {
         style: {
           height: this.dayHeight && this.dayHeight > 0 ? height : 'auto'
         },
-        on: this.getDefaultMouseEventHandlers(':workweek', event => {
-          const scope = slotData
+        // :workweek DEPRECATED in v2.4.0
+        on: this.getDefaultMouseEventHandlers2(':workweek', ':workweek2', event => {
           return { scope, event }
         })
-      }), slot ? slot(slotData) : workweekLabel)
+        // ---
+      }), slot ? slot(scope) : workweekLabel)
     },
 
     __renderDay (h, day) {
       const styler = this.dayStyle || this.dayStyleDefault
       const outside = this.isOutside(day)
       const slot = this.$scopedSlots.day
-      const slotData = { outside, timestamp: day, miniMode: this.isMiniMode }
+      const scope = { outside, timestamp: day, miniMode: this.isMiniMode }
       const hasMonth = (outside === false && this.days.find(d => d.month === day.month).day === day.day && this.showMonthLabel === true)
 
       let dragOver
@@ -354,17 +356,18 @@ export default {
             }
           }
         },
-        on: this.getDefaultMouseEventHandlers(':day', event => {
-          const scope = day
+        // :day DEPRECATED in v2.4.0
+        on: this.getDefaultMouseEventHandlers2(':day', ':day2', event => {
           return { scope, event }
         })
+        // ---
       }), [
         this.__renderDayLabel(h, day),
         this.isMiniMode !== true && this.showDayOfYearLabel && !hasMonth ? this.__renderDayOfYearLabel(h, day) : '',
         this.isMiniMode !== true && hasMonth ? this.__renderDayMonth(h, day) : '',
         h('div', {
           staticClass: 'q-calendar-weekly__day--content full-width' + (this.isMiniMode === true ? ' row justify-around' : '')
-        }, slot ? slot(slotData) : '')
+        }, slot ? slot(scope) : '')
       ])
     },
 
@@ -432,10 +435,25 @@ export default {
           outline: day.current === true,
           disable: day.disabled === true || (outside === true && this.enableOutsideDays !== true)
         },
-        on: this.getMouseEventHandlers({
-          'click:date': { event: 'click', stop: true },
-          'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false }
-        }, _event => day)
+        on: {
+          ...this.getMouseEventHandlers({
+            // DEPRECATED in v2.4.0
+            'click:date': { event: 'click', stop: true },
+            'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false },
+            // ---
+            'click:date2': { event: 'click', stop: true },
+            'contextmenu:date2': { event: 'contextmenu', stop: true, prevent: true, result: false }
+          }, (event, eventName) => {
+            if (eventName.indexOf('2') > -1) {
+              return { scope: { timestamp: day }, event }
+            }
+            // DEPRECATED in v2.4.0
+            else {
+              return day
+            }
+            // ---
+          })
+        }
       }), [
         dayLabelSlot ? dayLabelSlot(slotData) : dayLabel
       ])
