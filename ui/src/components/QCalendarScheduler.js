@@ -557,6 +557,7 @@ export default {
       const width = convertToUnit(this.parsedResourceWidth)
       const label = resource[this.resourceKey]
       if (label === undefined) {
+        /* eslint-disable-next-line */
         console.warn('QCalendarScheduler: resource object requires "resource-key" property to contain resource object key')
       }
 

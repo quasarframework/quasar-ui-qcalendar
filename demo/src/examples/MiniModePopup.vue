@@ -144,6 +144,7 @@ export default {
     },
 
     onChanged ({ start, end }) {
+      /* eslint-disable-next-line */
       console.log(start, end)
     },
 

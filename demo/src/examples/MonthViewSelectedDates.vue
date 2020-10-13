@@ -72,6 +72,7 @@ export default {
   },
   watch: {
     selectedDates (val) {
+      /* eslint-disable-next-line */
       console.log(val)
     }
   }

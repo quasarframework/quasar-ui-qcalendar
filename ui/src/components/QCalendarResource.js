@@ -299,6 +299,7 @@ export default {
     __renderResourceText (h, resource, idx, indentLevel = 0) {
       const label = resource[this.resourceKey]
       if (label === undefined) {
+        /* eslint-disable-next-line */
         console.warn('QCalendarResource: resource object requires "resource-key" property to contain resource object key')
       }
 
