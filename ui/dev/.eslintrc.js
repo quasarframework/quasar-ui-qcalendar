@@ -34,7 +34,7 @@ module.exports = {
   plugins: [
     // https://eslint.vuejs.org/user-guide/#why-doesn-t-it-work-on-vue-file
     // required to lint *.vue files
-    'vue',
+    'vue'
 
   ],
 
@@ -65,6 +65,7 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'prefer-promise-reject-errors': 'off',
 
+    'brace-style': [2, 'stroustrup', { allowSingleLine: false }],
 
     // allow debugger during development only
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
