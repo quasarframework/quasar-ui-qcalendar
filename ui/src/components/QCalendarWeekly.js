@@ -57,14 +57,14 @@ export default {
     },
 
     todayWeek () {
-      const today = this.times.today
-      const start = this.getStartOfWeek(today)
-      const end = this.getEndOfWeek(today)
+      const day = this.days[0]
+      const start = this.getStartOfWeek(day)
+      const end = this.getEndOfWeek(day)
 
       return createDayList(
         start,
         end,
-        today,
+        day,
         this.weekdaySkips,
         this.disabledBefore,
         this.disabledAfter,
