@@ -8,7 +8,7 @@
       style="height: 400px;"
     >
       <!-- eslint-disable vue/no-unused-vars -->
-      <template #day-container="{ /* date */ }">
+      <template #day-container="{ /* timestamp */ }">
         <div class="week-view-current-time-indicator" :style="style" />
         <div class="week-view-current-time-line" :style="style" />
       </template>

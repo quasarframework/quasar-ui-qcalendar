@@ -5,8 +5,8 @@
       view="month"
       locale="en-us"
     >
-      <template #head-day="{ timestamp }">
-        {{ getHeadDay(timestamp) }}
+      <template #head-day="scope">
+        {{ getHeadDay(scope) }}
       </template>
     </q-calendar>
   </div>
@@ -21,8 +21,8 @@ export default {
   },
 
   methods: {
-    getHeadDay (timestamp) {
-      return `The date is: ${timestamp.date}`
+    getHeadDay (scope) {
+      return `Top date is: ${scope.days[0].date}`
     }
   }
 }

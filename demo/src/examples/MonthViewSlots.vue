@@ -4,7 +4,7 @@
       v-model="selectedDate"
       view="month"
       locale="en-us"
-      style="height: 500px;"
+      :day-height="100"
     >
       <template #day="{ timestamp }">
         <template v-for="(event, index) in getEvents(timestamp.date)">

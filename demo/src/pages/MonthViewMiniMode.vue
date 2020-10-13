@@ -24,14 +24,20 @@ Also, regardless of `mini-mode` all slots associated with month view now have ad
     <example-viewer title="Basic" file="MiniModeBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Bordered" file="MiniModeBordered" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Dark" file="MiniModeDark" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Short Weekday Label" file="MiniModeShortWeekdayLabel" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="5 Day Work Week" file="MiniModeFiveDayWorkWeek" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Work Week Numbers" file="MiniModeWorkWeekNumbers" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="First Day Monday" file="MiniModeFirstDayMonday" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Hide Header" file="MiniModeHideHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
+    <example-title title="Outside Days" />
     <q-markdown>
 Outside days, in month view, are those days before and after the currently displayed month. By default, these days are disable to avoid navigation issues when getting selected days from the User. Using the `enable-outside-days` property enables these days.
     </q-markdown>
     <example-viewer title="Enable Outside Days" file="MiniModeEnableOutsideDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Hide Outside Days" file="MiniModeHideOutsideDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Short Weekday Label" file="MiniModeShortWeekdayLabel" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
+    <example-title title="Breakpoints" />
     <q-markdown>
 The example below uses the `breakpoint` and `mini-mode="auto"` properties to automatically go into mini-mode. It uses the `breakpoint` value `sm` (599px) for the breakpoint.
 
@@ -44,16 +50,18 @@ The example below uses QSplitter to adjust the width of the QCalendar and to **d
     </q-markdown>
     <example-viewer title="Dynamic Breakpoint" file="MiniModeDynamicBreakpoint" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
+    <example-title title="Disabled" />
     <q-markdown>
 In the first calendar, all disabled days are set explicitly. In the second example, it shows how you can set a range to do the same thing.
     </q-markdown>
     <example-viewer title="Disabled Days" file="MiniModeDisabledDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Disabled Before/After" file="MiniModeDisabledBeforeAfter" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Disabled Weekdays" file="MiniModeDisabledWeekdays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="5 Day Work Week" file="MiniModeFiveDayWorkWeek" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Work Week Numbers" file="MiniModeWorkWeekNumbers" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+
+    <example-title title="Navigation" />
     <example-viewer title="Prev/Next" file="MiniModePrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
+    <example-title title="Selection" />
     <q-markdown>
 Click on dates to toggled selected on/off.
     </q-markdown>
@@ -75,6 +83,52 @@ Using the property `short-weekday-label` while in `mini-mode` gives an even shor
     <example-viewer title="Selection (QInput)" file="MiniModeSelectionQInput" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Advanced Popup" file="MiniModePopup" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
+    <example-title title="Events" />
+    <q-markdown>
+::: tip
+The events below won't show up unless there is a listener for it. Therefore, if using `Vue Dev Tools`, you won't see it unless you add it.
+:::
+
+You can add a listener for the following events. An event is comprised of an `event + suffix`. By adding the event with the suffix, you get the completed listener name.
+
+| Event       | `:day2`            | `:workweek2`        | `:workweek:header2` | `:day:header2`     | `:date2`           |
+| ----------- | :----------------: | :----------------: | :-----------------: | :----------------: | :----------------: |
+| click       | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:  | :heavy_check_mark: | :heavy_check_mark: |
+| contextmenu | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:  | :heavy_check_mark: | :heavy_check_mark: |
+| mousedown   | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:  | :heavy_check_mark: | :x:                |
+| mousemove   | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:  | :heavy_check_mark: | :x:                |
+| mouseup     | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:  | :heavy_check_mark: | :x:                |
+| mouseenter  | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:  | :heavy_check_mark: | :x:                |
+| mouseleave  | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:  | :heavy_check_mark: | :x:                |
+| touchstart  | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:  | :heavy_check_mark: | :x:                |
+| touchmove   | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:  | :heavy_check_mark: | :x:                |
+| touchend    | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:  | :heavy_check_mark: | :x:                |
+
+::: warning
+Do NOT combine suffixes. Only one suffix per event. A different suffix will give you a different event.
+:::
+
+| Suffix | Description | Data |
+| ------ | ----------- | ---- |
+| `:day2` | The day area | `{ scope: { timestamp: { "..." }, outside, miniMode }, event: { "..." } } |
+| `:workweek2` | A workweek area | `{ scope: { workweekLabel, week: [ "..." ], miniMode }, event: { "..." } } |
+| `:workweek:header2` | The area above the workweeks | `{ scope: { start: { "..." }, end: { "..." }, miniMode }, event: { "..." } } |
+| `:day:header2` | The header area that includes weekday | `{ scope: { timestamp: { "..." }, index, miniMode }, event: { "..." } } |
+| `:date2` | The date button | Date in format YYYY-MM-DD |
+
+::: tip
+`:workweek:header2` and  `:day:header2` are new since v2.4.0
+:::
+
+::: warning
+The events `:day`, `:workweek` and `:date` still exist, but have been marked as deprecated starting with v2.4.0
+:::
+
+The example below is only showing `click` events as well as the `input` event.
+    </q-markdown>
+    <example-viewer title="Events" file="MiniModeEvents" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+
+    <example-title title="Slots" />
     <q-markdown>
 The `#day` slot allows you to write anything into the body of the day. To avoid writing on top of the `day-label` add the css class `.q-event` to your item which adds a top margin (and also works for mini-mode).
 
@@ -102,10 +156,13 @@ For slots that return `day`, `interval` or `timestamp`, it looks like this:
     </q-markdown>
     <example-viewer title="Slots (day)" file="MiniModeSlots" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
+    <example-title title="Themes" />
     <q-markdown>
 Look at the source below to see how you can create your own themes.
     </q-markdown>
     <example-viewer title="Theme" file="MiniModeTheme" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+
+    <example-title title="Locale Support" />
     <example-viewer title="Locale" file="MiniModeLocale" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
   </div>
@@ -143,25 +200,46 @@ export default {
     this.addToToc('Basic', 2)
     this.addToToc('Bordered', 2)
     this.addToToc('Dark', 2)
+    this.addToToc('Short Weekday Label', 2)
+    this.addToToc('5 Day Work Week', 2)
+    this.addToToc('Work Week Numbers', 2)
+    this.addToToc('First Day Monday', 2)
+    this.addToToc('Hide Header', 2)
+
+    this.addToToc('Outside Days')
     this.addToToc('Enable Outside Days', 2)
     this.addToToc('Hide Outside Days', 2)
-    this.addToToc('Short Weekday Label', 2)
+
+    this.addToToc('Breakpoints')
     this.addToToc('Breakpoint', 2)
     this.addToToc('Dynamic Breakpoint', 2)
+
+    this.addToToc('Disabled')
     this.addToToc('Disabled Days', 2)
     this.addToToc('Disabled Before/After', 2)
     this.addToToc('Disabled Weekdays', 2)
-    this.addToToc('5 Day Work Week', 2)
-    this.addToToc('Work Week Numbers', 2)
+
+    this.addToToc('Navigation')
     this.addToToc('Prev/Next', 2)
+
+    this.addToToc('Selection')
     this.addToToc('Selected Dates', 2)
     this.addToToc('Selection', 2)
     this.addToToc('Selection Click', 2)
     this.addToToc('Multi-Month Selection', 2)
     this.addToToc('Selection (QInput)', 2)
     this.addToToc('Advanced Popup', 2)
+
+    this.addToToc('Events')
+    this.addToToc('Events', 2)
+
+    this.addToToc('Slots')
     this.addToToc('Slots (day)', 2)
+
+    this.addToToc('Themes')
     this.addToToc('Theme', 2)
+
+    this.addToToc('Locale Support')
     this.addToToc('Locale', 2)
 
     this.toc = this.tempToc
@@ -182,7 +260,10 @@ export default {
   methods: {
     addToToc (name, level = 1) {
       let n = name
-      if (level > 1) {
+      if (level === 1) {
+        n = 'title-' + n
+      }
+      else {
         n = 'example-' + n
       }
       const slug = slugify(n)

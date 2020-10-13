@@ -17,7 +17,7 @@ export default {
 
   computed: {
     slugifiedTitle () {
-      return slugify(this.title)
+      return slugify('title-' + this.title)
     }
   },
 

@@ -23,10 +23,15 @@ export default {
   },
 
   beforeMount () {
-    // set "now" to previous day
+    // set "now" to previous day, unless today is sunday
     this.selectedDate = QCalendar.today()
     const now = QCalendar.parseTimestamp(this.selectedDate)
-    this.now = QCalendar.getDate(QCalendar.prevDay(now))
+    if (now.weekday === 0) {
+      this.now = QCalendar.getDate(QCalendar.nextDay(now))
+    }
+    else {
+      this.now = QCalendar.getDate(QCalendar.prevDay(now))
+    }
   }
 }
 </script>

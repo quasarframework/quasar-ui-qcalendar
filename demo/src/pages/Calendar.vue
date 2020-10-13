@@ -290,13 +290,13 @@
         :resources="resources"
         @change="onChanged"
         @moved="onMoved"
-        @click:date="onDateChanged"
-        @click:interval="addEventMenu"
-        @click:time="addEventMenu"
-        @click:day="addEventMenu"
-        @click:week="addEventMenu"
-        @click:resource="resourceClicked"
-        @click:resource:day="resourceDayClicked"
+        @click:date2="onDateChanged"
+        @click:interval2="addEventMenu"
+        @click:time2="addEventMenu"
+        @click:day2="addEventMenu"
+        @click:week2="addEventMenu"
+        @click:resource2="resourceClicked"
+        @click:resource:day2="resourceDayClicked"
         day-padding="35px 0 0 0"
       >
         <template #day="{ timestamp }">
@@ -986,11 +986,11 @@ export default {
       // console.log('resource:day clicked:', scope)
     },
     addEventMenu ({ scope, event }) {
-      if (scope.disabled === true || this.calendarView.indexOf('scheduler') > -1 || this.calendarView.indexOf('agenda') > -1) {
+      if (scope.timestamp.disabled === true || this.calendarView.indexOf('scheduler') > -1 || this.calendarView.indexOf('agenda') > -1) {
         return
       }
       this.resetForm()
-      this.contextDay = { ...scope }
+      this.contextDay = { ...scope.timestamp }
       let timestamp
       if (this.contextDay.hasTime === true) {
         timestamp = this.adjustTimestamp(this.contextDay)

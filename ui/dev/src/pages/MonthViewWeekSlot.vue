@@ -213,7 +213,8 @@ export default {
             level + 1
           )
         } // else: There are no more days available, end of iteration
-      } else {
+      }
+      else {
         events.push({ size: weekLength - availableDays })
         // end of iteration
       }

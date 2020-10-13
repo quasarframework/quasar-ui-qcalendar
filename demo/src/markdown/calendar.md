@@ -1,9 +1,16 @@
 QCalendar
 ===
 
-**Breaking Changes in v2.2.0**
+## Important Release Notes
 
-Please be aware of breaking changes in events and scoped slotted data. You can find out more information [here](https://github.com/quasarframework/quasar-ui-qcalendar/releases/tag/v2.2.0).
+**v2.4.0**: New slots and events added. Current event system is deprecated, but still available until the next major version is released. To see the deprecated events in the **QCalendar API** (at bottom of the page), select the hamburger menu, then select **Show deprecated**. You can find out more information [here](https://github.com/quasarframework/quasar-ui-qcalendar/releases/tag/v2.4.0).
+
+
+**v2.2.0**: Please be aware of breaking changes in events and scoped slotted data. You can find out more information [here](https://github.com/quasarframework/quasar-ui-qcalendar/releases/tag/v2.2.0).
+
+---
+
+# Description
 
 **QCalendar** is a powerful calendar component that plugs right into your Quasar application. It allows for viewing of **day** (1-6 days), **week**, **monthly** (including **mini-mode**), **scheduler**, **resource** and **agenda** views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.
 
@@ -29,7 +36,7 @@ This is the true power of QCalendar.
 - Automatic localization / internationalization
 - Responsive flex grid layout
 - No external dependencies (momentjs, jQuery, etc), other than Quasar
-- User events support (date, day, interval, time, resource)
+- User events support (date, day, interval, time, resource, etc)
 - Define any day as beginning of week
 - Show only certain days of the week (good for work week days)
 - Workweek number support
@@ -196,6 +203,8 @@ Not only all these, but the **month** view has a **mini-mode** behavior.
 ![DayView](qcalendar-day-view.png "Day View" =800x800)
 
 The `day` view is for displaying time intervals on the left side and 1 or more days in a contiguous fashion on the right side.
+
+## Week view
 
 When more than one day is displayed:
 
@@ -706,14 +715,21 @@ All other events are mouse/touch based. The base events are:
 10. `touchend`
 
 These are appended with the type of event:
-1. `:time`
-2. `:day`
-3. `:workweek`
-4. `:interval`
-5. `resource`
-6. `resource:day`
-7. `column`
+1. `:time2`
+2. `:day2`
+3. `:day:header2`
+4. `:workweek2`
+5. `:interval2`
+6. `:interval:header2`
+7. `:resource2`
+8. `:resource:day2`
+9. `:column2`
+10. `:column:header2`
+11. `:workweek2`
+12. `:workweek:header2`
 
 All mouse/touch events support the Vue [Event & Key Modifiers](https://vuejs.org/v2/guide/render-function.html#Event-amp-Key-Modifiers).
+
+All the examples for the various views have an Event example. Be sure to check it out for the view you are working with.
 
 ~~~

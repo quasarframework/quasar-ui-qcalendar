@@ -1,11 +1,10 @@
 <template>
   <div style="max-width: 800px; width: 100%;">
-    <q-toolbar>
-      <q-btn stretch flat label="Prev" @click="prev" />
+    <div class="row justify-center items-center">
+      <q-btn flat label="Prev" @click="prev" />
       <q-separator vertical />
-      <q-btn stretch flat label="Next" @click="next" />
-      <q-space />
-    </q-toolbar>
+      <q-btn flat label="Next" @click="next" />
+    </div>
     <q-separator />
     <q-calendar
       v-model="selectedDate"
@@ -16,9 +15,9 @@
       locale="en-us"
       style="height: 400px;"
     >
-      <template #column-header-after="{ /* timestamp */ }">
+      <template #column-header-after="{ index }">
         <div class="q-ma-xs">
-          <q-item v-if="day.index === 0" clickable v-ripple>
+          <q-item v-if="index === 0" clickable v-ripple>
             <q-item-section side>
               <q-avatar size="42px">
                 <img src="https://cdn.quasar.dev/img/avatar1.jpg" />
@@ -29,7 +28,7 @@
               <q-item-label caption>Content Writer</q-item-label>
             </q-item-section>
           </q-item>
-          <q-item v-if="day.index === 1" clickable v-ripple>
+          <q-item v-if="index === 1" clickable v-ripple>
             <q-item-section side>
               <q-avatar size="42px">
                 <img src="https://cdn.quasar.dev/img/avatar2.jpg" />
@@ -40,7 +39,7 @@
               <q-item-label caption>Designer</q-item-label>
             </q-item-section>
           </q-item>
-          <q-item v-if="day.index === 2" clickable v-ripple>
+          <q-item v-if="index === 2" clickable v-ripple>
             <q-item-section side>
               <q-avatar size="42px">
                 <img src="https://cdn.quasar.dev/img/avatar4.jpg" />
@@ -52,7 +51,7 @@
             </q-item-section>
           </q-item>
 
-          <q-item v-if="day.index === 3" clickable v-ripple>
+          <q-item v-if="index === 3" clickable v-ripple>
             <q-item-section side>
               <q-avatar size="42px">
                 <img src="https://cdn.quasar.dev/img/avatar3.jpg" />
@@ -63,7 +62,7 @@
               <q-item-label caption>Support Engineer</q-item-label>
             </q-item-section>
           </q-item>
-          <q-item v-if="day.index === 4" clickable v-ripple>
+          <q-item v-if="index === 4" clickable v-ripple>
             <q-item-section side>
               <q-avatar size="42px">
                 <img src="https://cdn.quasar.dev/img/avatar5.jpg" />
@@ -74,7 +73,7 @@
               <q-item-label caption>Content Analyst</q-item-label>
             </q-item-section>
           </q-item>
-          <q-item v-if="day.index === 5" clickable v-ripple>
+          <q-item v-if="index === 5" clickable v-ripple>
             <q-item-section side>
               <q-avatar size="42px">
                 <img src="https://cdn.quasar.dev/img/avatar6.jpg" />
