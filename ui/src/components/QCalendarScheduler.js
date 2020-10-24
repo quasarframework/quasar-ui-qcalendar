@@ -418,7 +418,7 @@ export default {
     },
 
     __renderResourceRow (h, resource, idx, indentLevel = 0) {
-      const height = convertToUnit(this.parsedResourceHeight)
+      const height = resource.height !== void 0 ? convertToUnit(resource.height) : convertToUnit(this.parsedResourceHeight)
       const style = { height: height }
       const resourceRow = h('div', {
         staticClass: 'q-calendar-scheduler__resource-row',

@@ -36,6 +36,11 @@ In this example, the `disabled-weekdays` is set to disable the weekends.
 
     <example-title title="Resource" />
     <example-viewer title="Resource Width/Height" file="SchedulerViewResourceWidthHeight" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <q-markdown>
+You can provide a custom height by providing a `height` key within your resource object. This is a number as `px` is assumed. If height is not given, then the property `resource-height` will be used. If you use this feature, you **cannot** set the property `resource-height` to 0, which gives `auto` height. _Added in v2.5.0_.
+    </q-markdown>
+    <example-viewer title="Custom Resource Height" file="SchedulerViewCustomHeight" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+
     <example-title title="Navigation" />
     <example-viewer title="Prev/Next" file="SchedulerViewPrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Swipe" file="SchedulerViewSwipe" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
@@ -183,6 +188,8 @@ export default {
 
     this.addToToc('Resource')
     this.addToToc('Resource Width/Height', 2)
+    this.addToToc('Custom Resource Height', 2)
+
     this.addToToc('Navigation')
     this.addToToc('Prev/Next', 2)
     this.addToToc('Swipe', 2)
