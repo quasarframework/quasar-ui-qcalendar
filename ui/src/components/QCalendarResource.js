@@ -262,7 +262,7 @@ export default {
         index: idx
       }
       const width = convertToUnit(this.parsedResourceWidth)
-      const height = convertToUnit(this.parsedResourceHeight)
+      const height = resource.height !== void 0 ? convertToUnit(resource.height) : convertToUnit(this.parsedResourceHeight)
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
@@ -343,7 +343,7 @@ export default {
       const slot = this.$scopedSlots['resource-interval']
       const slotData = { resource, interval }
       const width = convertToUnit(this.parsedIntervalWidth)
-      const height = convertToUnit(this.parsedResourceHeight)
+      const height = resource.height !== void 0 ? convertToUnit(resource.height) : convertToUnit(this.parsedResourceHeight)
       let dragOver
 
       return h('div', {

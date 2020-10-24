@@ -43,6 +43,10 @@ The example below is setting the `interval-start` to `8`, the default is `0`. It
 
     <example-title title="Resource" />
     <example-viewer title="Resource Width/Height" file="ResourceViewResourceWidthHeight" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <q-markdown>
+You can provide a custom height by providing a `height` key within your resource object. This is a number as `px` is assumed. If height is not given, then the property `resource-height` will be used. If you use this feature, you **cannot** set the property `resource-height` to 0, which gives `auto` height. _Added in v2.5.0_.
+    </q-markdown>
+    <example-viewer title="Custom Resource Height" file="ResourceViewCustomHeight" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Hierarchy" />
     <q-markdown>
@@ -191,6 +195,7 @@ export default {
 
     this.addToToc('Resource')
     this.addToToc('Resource Width/Height', 2)
+    this.addToToc('Custom Resource Height', 2)
 
     this.addToToc('Hierarchy')
     this.addToToc('Children', 2)

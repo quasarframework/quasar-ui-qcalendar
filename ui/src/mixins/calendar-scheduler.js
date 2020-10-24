@@ -23,7 +23,11 @@ export default {
 
   computed: {
     parsedResourceHeight () {
-      return parseFloat(this.resourceHeight)
+      const height = parseFloat(this.resourceHeight)
+      if (height === 0) {
+        return 'auto'
+      }
+      return height
     },
 
     parsedResourceWidth () {
@@ -31,26 +35,23 @@ export default {
     },
 
     bodyHeight () {
-      let count = 0
-      function getCount (resources) {
-        let count = 0
+      let height = 0
+      const getHeight = (resources) => {
+        let resourceHeight = 0
         resources.forEach(resource => {
-          ++count
+          resourceHeight += resource.height !== void 0 ? resource.height : this.parsedResourceHeight
           if (resource.children && resource.children.length > 0 && resource.expanded === true) {
-            count += getCount(resource.children)
+            resourceHeight += getHeight(resource.children)
           }
         })
-        return count
+        return resourceHeight
       }
 
       if (this.resources && this.resources.length > 0) {
-        count += getCount(this.resources)
+        height += getHeight(this.resources)
       }
 
-      if (this.resources && this.resources.length > 0) {
-        return count * this.parsedResourceHeight
-      }
-      return 0
+      return height
     },
 
     days () {

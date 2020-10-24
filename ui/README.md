@@ -157,7 +157,7 @@ If you need the RTL variant of the CSS, then go for the following (instead of th
     <title>UMD test</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" rel="stylesheet" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/quasar@^1.0.0/dist/quasar.min.css" rel="stylesheet" type="text/css">
-    <link href="https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@^1.0.0/dist/index.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@^2.0.0/dist/index.css" rel="stylesheet" type="text/css">
   </head>
   <body>
     <div id="q-app">
