@@ -23,7 +23,11 @@ export default {
 
   computed: {
     parsedResourceHeight () {
-      return parseFloat(this.resourceHeight)
+      const height = parseFloat(this.resourceHeight)
+      if (height === 0) {
+        return 'auto'
+      }
+      return height
     },
 
     parsedResourceWidth () {

@@ -34,6 +34,8 @@ In this example, the `disabled-weekdays` is set to disable the weekends.
     </q-markdown>
     <example-viewer title="Disabled Weekdays" file="SchedulerViewDisabledWeekdays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
+    <example-title title="Resource" />
+    <example-viewer title="Resource Width/Height" file="SchedulerViewResourceWidthHeight" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-title title="Navigation" />
     <example-viewer title="Prev/Next" file="SchedulerViewPrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Swipe" file="SchedulerViewSwipe" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
@@ -179,6 +181,8 @@ export default {
     this.addToToc('Disabled Before/After', 2)
     this.addToToc('Disabled Weekdays', 2)
 
+    this.addToToc('Resource')
+    this.addToToc('Resource Width/Height', 2)
     this.addToToc('Navigation')
     this.addToToc('Prev/Next', 2)
     this.addToToc('Swipe', 2)

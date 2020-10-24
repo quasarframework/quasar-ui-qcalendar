@@ -393,7 +393,7 @@ export default {
         ref: 'pane',
         staticClass: 'q-calendar-scheduler__pane',
         style: {
-          height: convertToUnit(this.bodyHeight)
+          height: this.resourceHeight === 0 ? 'auto' : convertToUnit(this.bodyHeight)
         }
       }, [
         this.__renderDayContainer(h)
