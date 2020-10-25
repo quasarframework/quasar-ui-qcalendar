@@ -83,7 +83,7 @@
     "jest-transform-stub": "^2.0.0",
     "node-sass": "^4.14.1",
     "open": "^7.3.0",
-    "postcss": "^7.0.35",
+    "postcss": "^8.1.4",
     "postcss-rtl": "^1.7.3",
     "promise": "^8.1.0",
     "quasar": "^1.14.2",
