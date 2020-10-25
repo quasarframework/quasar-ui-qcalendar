@@ -264,7 +264,7 @@ export default {
 
     __renderHeadDayBtn (h, day, idx) {
       const colorCurrent = day.current === true ? this.color : undefined
-      const activeDate = this.value === day.date
+      const activeDate = this.noActiveDate !== true && this.value === day.date
       const dayLabel = this.dayFormatter(day, false)
       const dayLabelSlot = this.$scopedSlots['day-label']
       const dayBtnSlot = this.$scopedSlots['day-btn']
@@ -290,12 +290,8 @@ export default {
       }
 
       return dayBtnSlot ? dayBtnSlot(scope) : h(QBtn, updateColors(colorCurrent !== undefined ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
-        staticClass: 'q-calendar-scheduler__head-day-label',
-        class: [
-          {
-            'q-active-date': this.noActiveDate !== true && activeDate
-          }
-        ],
+        staticClass: 'q-calendar-scheduler__head-day-label' +
+          (activeDate === true ? ' q-active-date' : ''),
         style: {
           color: day.current === true ? colorCurrent : undefined
         },

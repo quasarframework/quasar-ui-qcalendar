@@ -390,7 +390,7 @@ export default {
         this.selectedDates.includes(day.date)
       )
 
-      const activeDate = this.value === day.date
+      const activeDate = this.noActiveDate !== true && this.value === day.date
 
       const slotData = { dayLabel, timestamp: day, outside, selectedDate, activeDate, miniMode: this.isMiniMode }
 
@@ -419,13 +419,9 @@ export default {
       }
 
       return dayBtnSlot ? dayBtnSlot(slotData) : h(QBtn, updateColors(colorCurrent !== undefined ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
-        staticClass: 'q-calendar-weekly__day-label',
-        class: [
-          {
-            'q-selected-date': selectedDate,
-            'q-active-date': this.noActiveDate !== true && activeDate
-          }
-        ],
+        staticClass: 'q-calendar-weekly__day-label' +
+          (activeDate === true ? ' q-active-date' : '') +
+          (selectedDate === true ? ' q-selected-date' : ''),
         props: {
           size: this.isMiniMode ? 'sm' : this.monthLabelSize,
           unelevated: true,
