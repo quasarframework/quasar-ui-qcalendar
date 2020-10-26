@@ -373,15 +373,16 @@ export default {
 
     __renderDayLabel (h, day) {
       const outside = this.isOutside(day)
+
+      // return if outside days are hidden
+      if (outside === true && this.hideOutsideDays === true) {
+        return
+      }
+
       const colorCurrent = day.current === true ? this.color : undefined
       const dayLabel = this.dayFormatter(day, false)
       const dayLabelSlot = this.$scopedSlots['day-label']
       const dayBtnSlot = this.$scopedSlots['day-btn']
-
-      // return if outside days are hidden
-      if (outside && this.hideOutsideDays === true) {
-        return ''
-      }
 
       const selectedDate = (
         this.isMiniMode &&
