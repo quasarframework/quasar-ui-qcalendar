@@ -77,7 +77,7 @@ Keep in mind that the functionality below won't work with swipe actions.
     <example-title title="Events" />
     <q-markdown>
 ::: tip
-The events below won't show up unless there is a listener for it. Therefore, if using `Vue Dev Tools`, you won't see it unless you add it.
+The events below won't show up unless there is a listener for it. Therefore, if using `Vue Devtools`, you won't see it unless you add it.
 :::
 
 You can add a listener for the following events. An event is comprised of an `event + suffix`. By adding the event with the suffix, you get the completed listener name.
