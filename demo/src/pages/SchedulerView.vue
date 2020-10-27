@@ -1,5 +1,10 @@
 <template>
-  <div class="q-markdown">
+  <div>
+    <q-markdown>
+::: warning
+Codepen uses the UMD version of QCalendar. As such, the examples below must be written in such a way that they also work on that platform. If you see code like `QCalendar.addToDate`, you can instead use `import { addToDate } from '@quasar/quasar-ui-qcalendar'` in your own non-UMD code to get the best tree-shaking effects.
+:::
+    </q-markdown>
     <q-markdown>
 ::: tip
 To use the scheduler, you need to use the `resources` property, which is an array of objects, containing a key as defined by the `resource-key` (default `label`). It's this key that will be displayed in your scheduler.

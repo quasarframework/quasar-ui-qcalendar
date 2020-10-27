@@ -1,8 +1,8 @@
 <template>
-  <div class="q-markdown">
+  <div>
     <q-markdown>
 ::: warning
-The ability to use Codepen was recently added to the examples. There are differences in the UMD version of QCalendar, some examples won't work without a bit of manual intervention. Be patient while we get the kinks worked out and automate the necessary changes.
+Codepen uses the UMD version of QCalendar. As such, the examples below must be written in such a way that they also work on that platform. If you see code like `QCalendar.addToDate`, you can instead use `import { addToDate } from '@quasar/quasar-ui-qcalendar'` in your own non-UMD code to get the best tree-shaking effects.
 :::
     </q-markdown>
     <example-title title="Week View" />

@@ -1,7 +1,9 @@
 <template>
-  <div class="q-markdown">
+  <div>
     <q-markdown>
-
+::: warning
+Codepen uses the UMD version of QCalendar. As such, the examples below must be written in such a way that they also work on that platform. If you see code like `QCalendar.addToDate`, you can instead use `import { addToDate } from '@quasar/quasar-ui-qcalendar'` in your own non-UMD code to get the best tree-shaking effects.
+:::
     </q-markdown>
     <example-title title="Month View" />
     <example-viewer title="Basic" file="MonthViewBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
