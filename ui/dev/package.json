@@ -14,12 +14,12 @@
     "dev:electron": "quasar dev -m electron"
   },
   "dependencies": {
-    "@quasar/extras": "^1.9.9",
+    "@quasar/extras": "^1.9.10",
     "core-js": "^3.6.5"
   },
   "devDependencies": {
-    "@quasar/app": "^2.1.5",
-    "@quasar/quasar-app-extension-qmarkdown": "^1.0.34"
+    "@quasar/app": "^2.1.6",
+    "@quasar/quasar-app-extension-qmarkdown": "^1.0.35"
   },
   "browserslist": [
     "last 10 Chrome versions",
