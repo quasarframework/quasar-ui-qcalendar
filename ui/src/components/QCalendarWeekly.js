@@ -473,8 +473,10 @@ export default {
       const slotData = { monthLabel, timestamp: day, miniMode: this.isMiniMode }
 
       return h('div', this.setTextColor(color, {
-        staticClass: 'q-calendar-weekly__day-month'
-      }), slot ? slot(slotData) : this.isMiniMode !== true ? monthLabel : '')
+        staticClass: 'q-calendar-weekly__day-month ellipsis'
+      }), [
+        slot ? slot(slotData) : this.isMiniMode !== true ? monthLabel : ''
+      ])
     }
   },
 
