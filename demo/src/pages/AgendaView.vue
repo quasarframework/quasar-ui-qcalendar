@@ -1,5 +1,10 @@
 <template>
-  <div class="q-markdown">
+  <div>
+    <q-markdown>
+::: warning
+Codepen uses the UMD version of QCalendar. As such, the examples below must be written in such a way that they also work on that platform. If you see code like `QCalendar.addToDate`, you can instead use `import { addToDate } from '@quasar/quasar-ui-qcalendar'` in your own non-UMD code to get the best tree-shaking effects.
+:::
+    </q-markdown>
     <example-title title="Agenda View" />
     <q-markdown>
 The `agenda` views by themselves are rather boring. It's up to the developer to fill the content via the `day-body` slot (more about this below).

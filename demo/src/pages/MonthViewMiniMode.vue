@@ -1,7 +1,9 @@
 <template>
-  <div class="q-markdown">
+  <div>
     <q-markdown>
-
+::: warning
+Codepen uses the UMD version of QCalendar. As such, the examples below must be written in such a way that they also work on that platform. If you see code like `QCalendar.addToDate`, you can instead use `import { addToDate } from '@quasar/quasar-ui-qcalendar'` in your own non-UMD code to get the best tree-shaking effects.
+:::
     </q-markdown>
     <example-title title="Mini-Mode" />
     <q-markdown>
@@ -86,7 +88,7 @@ Using the property `short-weekday-label` while in `mini-mode` gives an even shor
     <example-title title="Events" />
     <q-markdown>
 ::: tip
-The events below won't show up unless there is a listener for it. Therefore, if using `Vue Dev Tools`, you won't see it unless you add it.
+The events below won't show up unless there is a listener for it. Therefore, if using `Vue Devtools`, you won't see it unless you add it.
 :::
 
 You can add a listener for the following events. An event is comprised of an `event + suffix`. By adding the event with the suffix, you get the completed listener name.

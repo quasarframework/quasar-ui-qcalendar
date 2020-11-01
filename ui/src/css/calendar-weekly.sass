@@ -24,7 +24,6 @@
 
   .q-calendar-weekly__workweek
     border-right: $calendar-border-color $calendar-border-width solid
-    border-bottom: $calendar-border-color $calendar-border-width solid
     font-weight: $calendar-workweek-font-weight
     align-items: center
     justify-content: center
@@ -103,11 +102,11 @@
   &__head-workweek
     display: flex
     flex-wrap: nowrap
-    width: $calendar-work-week-width
     user-select: none
     padding: 0 4px
-    font-size: 1rem
-    min-width: 1.5em
+    min-width: $calendar-work-week-width
+    max-width: $calendar-work-week-width
+    font-size: $calendar-work-week-font-size
     justify-content: center
 
   &__head-weekday
@@ -153,10 +152,10 @@
   &__workweek
     display: flex
     flex-wrap: nowrap
-    width: $calendar-work-week-width
     user-select: none
-    padding: 0
-    min-width: 1.5em
+    padding: 0 4px
+    min-width: $calendar-work-week-width
+    max-width: $calendar-work-week-width
     font-size: $calendar-work-week-font-size
     align-items: center
 
@@ -195,6 +194,8 @@
     box-shadow: none
     top: 5px
     right: 2px
+    left: 2px
+    margin-left: 28px
     height: $calendar-day-label-height
     line-height: $calendar-day-label-height
 
@@ -225,7 +226,6 @@
 
     &__workweek
       border-right: unset
-      border-bottom: unset
       font-size: 1em
       padding-bottom: 8px
       width: 30px
@@ -355,7 +355,6 @@
 
     .q-calendar-weekly__workweek
       border-right: $calendar-border-color-dark $calendar-border-width solid
-      border-bottom: $calendar-border-color-dark $calendar-border-width solid
 
       &.q-past-day
         color: $calendar-day-past-color-dark

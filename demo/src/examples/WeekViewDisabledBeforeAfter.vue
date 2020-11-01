@@ -28,12 +28,8 @@ function getCurrentDay (day) {
 export default {
   data () {
     return {
-      selectedDate: '2019-04-01'
+      selectedDate: getCurrentDay(CURRENT_DAY.getDate())
     }
-  },
-  beforeMount () {
-    // set to today's date
-    this.selectedDate = getCurrentDay(CURRENT_DAY.getDate())
   },
   computed: {
     disabledBefore () {

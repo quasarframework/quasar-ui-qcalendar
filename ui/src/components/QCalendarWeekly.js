@@ -373,15 +373,16 @@ export default {
 
     __renderDayLabel (h, day) {
       const outside = this.isOutside(day)
+
+      // return if outside days are hidden
+      if (outside === true && this.hideOutsideDays === true) {
+        return
+      }
+
       const colorCurrent = day.current === true ? this.color : undefined
       const dayLabel = this.dayFormatter(day, false)
       const dayLabelSlot = this.$scopedSlots['day-label']
       const dayBtnSlot = this.$scopedSlots['day-btn']
-
-      // return if outside days are hidden
-      if (outside && this.hideOutsideDays === true) {
-        return ''
-      }
 
       const selectedDate = (
         this.isMiniMode &&
@@ -390,7 +391,7 @@ export default {
         this.selectedDates.includes(day.date)
       )
 
-      const activeDate = this.value === day.date
+      const activeDate = this.noActiveDate !== true && this.value === day.date
 
       const slotData = { dayLabel, timestamp: day, outside, selectedDate, activeDate, miniMode: this.isMiniMode }
 
@@ -419,13 +420,9 @@ export default {
       }
 
       return dayBtnSlot ? dayBtnSlot(slotData) : h(QBtn, updateColors(colorCurrent !== undefined ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
-        staticClass: 'q-calendar-weekly__day-label',
-        class: [
-          {
-            'q-selected-date': selectedDate,
-            'q-active-date': this.noActiveDate !== true && activeDate
-          }
-        ],
+        staticClass: 'q-calendar-weekly__day-label' +
+          (activeDate === true ? ' q-active-date' : '') +
+          (selectedDate === true ? ' q-selected-date' : ''),
         props: {
           size: this.isMiniMode ? 'sm' : this.monthLabelSize,
           unelevated: true,
@@ -476,8 +473,10 @@ export default {
       const slotData = { monthLabel, timestamp: day, miniMode: this.isMiniMode }
 
       return h('div', this.setTextColor(color, {
-        staticClass: 'q-calendar-weekly__day-month'
-      }), slot ? slot(slotData) : this.isMiniMode !== true ? monthLabel : '')
+        staticClass: 'q-calendar-weekly__day-month ellipsis'
+      }), [
+        slot ? slot(slotData) : this.isMiniMode !== true ? monthLabel : ''
+      ])
     }
   },
 

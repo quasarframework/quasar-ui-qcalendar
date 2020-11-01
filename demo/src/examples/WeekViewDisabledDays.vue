@@ -12,16 +12,34 @@
 </template>
 
 <script>
+// normally you would not import "all" of QCalendar, but is needed for this example to work with UMD (codepen)
+import QCalendar from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
+
+const CURRENT_DAY = new Date()
+
+function getCurrentDay (day) {
+  const newDay = new Date(CURRENT_DAY)
+  newDay.setDate(day)
+  const tm = QCalendar.parseDate(newDay)
+  return tm.date
+}
+
 export default {
   data () {
     return {
-      selectedDate: '2019-04-01',
-      disabledDays: [
-        '2019-04-02',
-        '2019-04-03',
-        '2019-04-04',
-        '2019-04-05'
-      ]
+      selectedDate: getCurrentDay(CURRENT_DAY.getDate())
+    }
+  },
+  computed: {
+    disabledDays () {
+      const days = []
+      // get current day
+      const ts = QCalendar.parseTimestamp(this.selectedDate)
+      // make next 4 days, after today, disabled
+      Array.from(Array(4)).foreach((_, i) => {
+        days.push(QCalendar.addToDate(ts, { day: i + 1 }).date)
+      })
+      return days
     }
   },
   methods: {
