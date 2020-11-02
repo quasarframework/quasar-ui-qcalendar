@@ -312,7 +312,7 @@ export default {
         resource.children && resource.children.length > 0 && h(QIcon, {
           props: {
             name: (resource.expanded === true ? this.mdiMenuUp : this.mdiMenuRight),
-            size: 'sm'
+            size: 'md'
           },
           on: {
             click: (e) => {
