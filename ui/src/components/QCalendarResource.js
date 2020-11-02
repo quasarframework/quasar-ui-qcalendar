@@ -37,7 +37,7 @@ export default {
 
   created () {
     this.mdiMenuRight = mdiMenuRight
-    this.mdiMenuUp = mdiMenuUp
+    this.mdiMenuDown = mdiMenuDown
   },
 
   computed: {

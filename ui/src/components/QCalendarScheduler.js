@@ -12,7 +12,7 @@ import { convertToUnit } from '../utils/helpers.js'
 
 // Icons
 const mdiMenuRight = 'M10,17L15,12L10,7V17Z'
-const mdiMenuUp = 'M7,15L12,10L17,15H7Z'
+const mdiMenuDown = 'M7,10L12,15L17,10H7Z'
 
 /* @vue/component */
 export default {
@@ -39,7 +39,7 @@ export default {
 
   created () {
     this.mdiMenuRight = mdiMenuRight
-    this.mdiMenuUp = mdiMenuUp
+    this.mdiMenuDown = mdiMenuDown
   },
 
   mounted () {
@@ -586,7 +586,7 @@ export default {
         }), [
           resource.children && resource.children.length > 0 && h(QIcon, {
             props: {
-              name: (resource.expanded === true ? this.mdiMenuUp : this.mdiMenuRight),
+              name: (resource.expanded === true ? this.mdiMenuDown : this.mdiMenuRight),
               size: 'sm'
             },
             on: {
