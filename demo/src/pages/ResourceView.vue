@@ -100,7 +100,7 @@ Do NOT combine suffixes. Only one suffix per event. A different suffix will give
 The events `:interval`, `:resource`, `:time` and `:date` still exist, but have been marked as deprecated starting with v2.4.0
 :::
 
-The example below is only showing `click` events as well as the `input` event.
+The example below is only showing `click` events as well as the `input` and 'expanded' events.
     </q-markdown>
     <example-viewer title="Events" file="ResourceViewEvents" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 

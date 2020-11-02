@@ -590,8 +590,10 @@ export default {
               size: 'sm'
             },
             on: {
-              click: () => {
+              click: (e) => {
                 resource.expanded = !resource.expanded
+                e.stopPropagation()
+                this.$emit('expanded', resource)
               }
             }
           }),

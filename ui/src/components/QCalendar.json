@@ -1064,6 +1064,21 @@
         }
       }
     },
+    "expanded": {
+      "addedIn": "v3.0.0",
+      "desc": "Event occurs when hierarchial resources are expanded/collapses",
+      "applicable": [
+        "Scheduler",
+        "Resource"
+      ],
+      "params": {
+        "resource": {
+          "type": "Object",
+          "desc": "The resource object that was toggle, check `expanded` property for `true` or `false`",
+          "__exemption": [ "examples" ]
+        }
+      }
+    },
     "click:date": {
       "deprecated": "v2.4.0",
       "desc": "Occurs on date button",

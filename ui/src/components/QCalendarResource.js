@@ -10,7 +10,7 @@ import { convertToUnit } from '../utils/helpers.js'
 
 // Icons
 const mdiMenuRight = 'M10,17L15,12L10,7V17Z'
-const mdiMenuUp = 'M7,15L12,10L17,15H7Z'
+const mdiMenuDown = 'M7,10L12,15L17,10H7Z'
 
 /* @vue/component */
 export default {
@@ -315,8 +315,10 @@ export default {
             size: 'sm'
           },
           on: {
-            click: () => {
+            click: (e) => {
               resource.expanded = !resource.expanded
+              e.stopPropagation()
+              this.$emit('expanded', resource)
             }
           }
         }),
