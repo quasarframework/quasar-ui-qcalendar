@@ -34,7 +34,7 @@ Also, regardless of `mini-mode` all slots associated with month view now have ad
 
     <example-title title="Outside Days" />
     <q-markdown>
-Outside days, in month view, are those days before and after the currently displayed month. By default, these days are disable to avoid navigation issues when getting selected days from the User. Using the `enable-outside-days` property enables these days.
+Outside days, in month view, are those days before and after the currently displayed month. By default, these days are disabled to avoid navigation issues when getting selected days from the User. Using the `enable-outside-days` property enables these days.
     </q-markdown>
     <example-viewer title="Enable Outside Days" file="MiniModeEnableOutsideDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Hide Outside Days" file="MiniModeHideOutsideDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
@@ -57,6 +57,11 @@ The example below uses QSplitter to adjust the width of the QCalendar and to **d
 In the first calendar, all disabled days are set explicitly. In the second example, it shows how you can set a range to do the same thing.
     </q-markdown>
     <example-viewer title="Disabled Days" file="MiniModeDisabledDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+
+    <q-markdown>
+In the this example the disabled days and a range of disabled days are combined. Ranges must be an array of dates within the main array. They contain a start and and end date.
+    </q-markdown>
+    <example-viewer title="Disabled Days (combined)" file="MiniModeDisabledDaysCombined" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Disabled Before/After" file="MiniModeDisabledBeforeAfter" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Disabled Weekdays" file="MiniModeDisabledWeekdays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
@@ -78,9 +83,15 @@ The examples below has a `touch` boolean. This does not change anything with QCa
     <example-viewer title="Selection Click" file="MiniModeSelectionClick" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
+::: tip
 Using the property `short-weekday-label` while in `mini-mode` gives an even shorter weekday label than normal.
+:::
     </q-markdown>
     <example-viewer title="Multi-Month Selection" file="MiniModeMultiMonthSelection" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <q-markdown>
+Using the property `hover` with `selected-start-end-dates` while in `mini-mode` gives you a better interactive and visually appealing selection.
+    </q-markdown>
+    <example-viewer title="Multi-Month Selection with Hover Prop" file="MiniModeMultiMonthSelectionHover" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-viewer title="Selection (QInput)" file="MiniModeSelectionQInput" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Advanced Popup" file="MiniModePopup" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
@@ -218,6 +229,7 @@ export default {
 
     this.addToToc('Disabled')
     this.addToToc('Disabled Days', 2)
+    this.addToToc('Disabled Days (combined)', 2)
     this.addToToc('Disabled Before/After', 2)
     this.addToToc('Disabled Weekdays', 2)
 
@@ -229,6 +241,7 @@ export default {
     this.addToToc('Selection', 2)
     this.addToToc('Selection Click', 2)
     this.addToToc('Multi-Month Selection', 2)
+    this.addToToc('Multi-Month Selection with Hover Prop', 2)
     this.addToToc('Selection (QInput)', 2)
     this.addToToc('Advanced Popup', 2)
 
