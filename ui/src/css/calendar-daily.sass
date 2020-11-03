@@ -1,86 +1,5 @@
-@import './calendar-variables'
-
-.q-calendar-daily, .q-calendar-agenda
-
-  &__body
-    border-top: $calendar-border-color $calendar-border-width solid
-
-  .q-calendar-daily__intervals-head
-    border-right: $calendar-border-color $calendar-border-width solid
-
-  .q-calendar-daily__column-header--before
-    border-bottom: $calendar-border-color $calendar-border-width solid
-
-  .q-calendar-daily__column-header--after
-    border-top: $calendar-border-color $calendar-border-width solid
-
-  .q-calendar-daily__head-day
-    border-right: $calendar-border-color $calendar-border-width solid
-    color: $calendar-background-color
-
-    &:last-child
-      border-right: none
-
-    &.q-outside
-      background: $calendar-outside-background-color
-      color: $calendar-outside-text-color
-
-    &.q-current-day
-      color: $calendar-day-current-color
-
-      .q-calendar-daily__head-day-label
-        font-weight: 700
-        color: $calendar-primary-color
-
-        .q-btn__wrapper:before
-          border-width: $calendar-border-width
-
-    &.q-future-day
-      color: $calendar-day-future-color
-
-      .q-calendar-daily__head-day-label
-        color: $calendar-primary-color
-
-    &.q-past-day
-      color: $calendar-day-past-color
-
-      .q-calendar-daily__head-day-label
-        color: $calendar-day-past-color
-
-    &.q-column-day
-      color: $calendar-column-color
-
-      .q-calendar-daily__head-day-label
-        color: $calendar-column-color
-
-  .q-calendar-daily__intervals-body
-    border-right: $calendar-separator 1px solid
-
-    .q-calendar-daily__interval-text
-      color: $calendar-text-color
-
-  .q-calendar-daily__day
-    border-right: $calendar-border-color $calendar-border-width solid
-
-    &:last-child
-      border-right: none !important
-
-  .q-calendar-daily__day-interval
-    border-top: $calendar-border-color $calendar-border-width solid
-
-    &:first-child
-      border-top: none !important
-
-    &:last-child
-      border-bottom: none !important
-
-.q-calendar-daily__day-interval--droppable
-  border: $calendar-primary-color $calendar-border-width dashed
-
-.q-calendar-daily__day--droppable
-  border: $calendar-primary-color $calendar-border-width dashed
-
-.q-calendar-daily, .q-calendar-agenda
+.q-calendar-daily,
+.q-calendar-agenda
   display: flex
   flex: 1
   flex-wrap: nowrap
@@ -99,8 +18,6 @@
     display: flex
     overflow: hidden
     vertical-align: bottom
-    width: $calendar-intervals-body-width
-    color: $calendar-text-color
 
     &--text
       display: block
@@ -126,8 +43,6 @@
 
   &__head-day-label
     user-select: none
-    border-radius: 50%
-    // padding: 0.285em
     cursor: pointer
     left: 2px
     bottom: 2px
@@ -180,7 +95,6 @@
   &__intervals-body
     flex: none
     user-select: none
-    width: $calendar-intervals-body-width
 
   &__interval
     text-align: center
@@ -197,75 +111,120 @@
     width: 0
     position: relative
 
+// coloring and other vars
+.q-calendar-daily,
+.q-calendar-agenda
+
+  &__intervals-head
+    border-right: var(--calendar-border)
+    min-width: var(--calendar-intervals-width)
+    max-width: var(--calendar-intervals-width)
+
+  &__head-day
+    font-weight: var(--calendar-head-font-weight)
+    border-right: var(--calendar-border)
+
+    &:last-child
+      border-right: none
+
+    &.q-active-date
+      .q-btn__wrapper:before
+        color: var(--calendar-active-date-color)
+        background: var(--calendar-active-date-background)
+
+    &.q-current-day
+      color: var(--calendar-active-date-color)
+
+      .q-btn__wrapper:before
+        border: var(--calendar-border-current)
+
+  &__column-header--before
+    border-bottom: var(--calendar-border)
+
+  &__column-header--after
+    border-top: var(--calendar-border)
+
+  &__body
+    border-top: var(--calendar-border)
+
+  &__intervals-body
+    border-right: var(--calendar-border)
+    min-width: var(--calendar-intervals-width)
+    max-width: var(--calendar-intervals-width)
+
+  &__day
+    border-right: var(--calendar-border)
+
+    &:last-child
+      border-right: none !important
+
+  &__day-interval
+    width: 100%
+    border-top: var(--calendar-border)
+
+    &--section
+      border-top: var(--calendar-border-section)
+
+    &:first-child
+      border-top: none !important
+
+    &:last-child
+      border-bottom: none !important
+
+  &__day-interval--droppable
+    border: var(--calendar-border-droppable)
+
+  &__day--droppable
+    border: var(--calendar-border-droppable)
+
 .q-dark div,
 .body--dark div,
-.q-calendar--dark,
-  &.q-calendar-daily,
-  &.q-calendar-agenda
-    &__bordered
-      border: $calendar-border-color-dark $calendar-border-width solid
+.q-calendar--dark
 
-    &__body
-      border-top: $calendar-border-color-dark $calendar-border-width solid
+  .q-calendar-daily,
+  .q-calendar-agenda
 
-    .q-calendar-daily__intervals-head
-      border-right: $calendar-border-color-dark $calendar-border-width solid
+    &__intervals-head
+      border-right: var(--calendar-border-dark)
 
-    .q-calendar-daily__column-header--before
-      border-bottom: $calendar-border-color-dark $calendar-border-width solid
-
-    .q-calendar-daily__column-header--after
-      border-top: $calendar-border-color-dark $calendar-border-width solid
-
-    .q-calendar-daily__head-day
-      border-right: $calendar-border-color-dark $calendar-border-width solid
-      color: $calendar-background-color-dark
+    &__head-day
+      border-right: var(--calendar-border-dark)
+      font-weight: var(--calendar-head-font-weight)
 
       &:last-child
         border-right: none
 
-      &.q-outside
-        background: $calendar-outside-background-color-dark
-        color: $calendar-outside-text-color-dark
+      &.q-active-date
+        .q-btn__wrapper:before
+          color: var(--calendar-active-date-color-dark)
+          background: var(--calendar-active-date-background-dark)
 
       &.q-current-day
-        color: $calendar-day-current-color-dark
+        color: var(--calendar-active-date-color-dark)
 
-        .q-calendar-daily__head-day-label
-          color: $calendar-primary-color-dark
+        .q-btn__wrapper:before
+          border: var(--calendar-border-current-dark)
 
-      &.q-future-day
-        color: $calendar-day-future-color-dark
+    &__column-header--before
+      border-bottom: var(--calendar-border-dark)
 
-        .q-calendar-daily__head-day-label
-          color: $calendar-primary-color-dark
+    &__column-header--after
+      border-top: var(--calendar-border-dark)
 
-      &.q-past-day
-        color: $calendar-day-past-color-dark
+    &__body
+      border-top: var(--calendar-border-dark)
 
-        .q-calendar-daily__head-day-label
-          color: $calendar-day-past-color-dark
+    &__intervals-body
+      border-right: var(--calendar-border-dark)
 
-      &.q-column-day
-        color: $calendar-column-color-dark
-
-        .q-calendar-daily__head-day-label
-          color: $calendar-column-color-dark
-
-    .q-calendar-daily__intervals-body
-      border-right: $calendar-border-color-dark $calendar-border-width solid
-
-      .q-calendar-daily__interval-text
-        color: $calendar-text-color-dark
-
-    .q-calendar-daily__day
-      border-right: $calendar-border-color-dark $calendar-border-width solid
+    &__day
+      border-right: var(--calendar-border-dark)
 
       &:last-child
         border-right: none !important
 
-    .q-calendar-daily__day-interval
-      border-top: $calendar-border-color-dark $calendar-border-width solid
+    &__day-interval
+      border-top: var(--calendar-border-dark)
 
       &:first-child
         border-top: none !important
@@ -273,8 +232,11 @@
       &:last-child
         border-bottom: none !important
 
-  .q-calendar-daily__day-interval--droppable
-    border: $calendar-border-color-dark $calendar-border-width solid$calendar-border-color-dark $calendar-border-width dashed
+      &--section
+        border-top: var(--calendar-border-section-dark)
 
-  .q-calendar-daily__day--droppable
-    border: $calendar-border-color-dark $calendar-border-width dashed
+    &__day-interval--droppable
+      border: var(--calendar-border-droppable-dark)
+
+    &__day--droppable
+      border: var(--calendar-border-droppable-dark)

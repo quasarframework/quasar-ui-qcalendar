@@ -1,0 +1,304 @@
+.q-calendar-mini
+
+  .q-calendar-weekly
+
+    &__head-workweek
+      border-right: unset
+      border-bottom: unset
+      max-width: var(--calendar-mini-work-week-width)
+      min-width: var(--calendar-mini-work-week-width)
+
+    &__head-weekday
+      border: 0 !important
+      padding: 0
+      font-size: unset
+      min-height: 1.5em
+      min-width: 1.5em
+
+    &__week
+      min-height: unset
+
+      &--wrapper
+        border-bottom: unset
+
+    &__workweek
+      border-right: unset
+      font-size: 1em
+      max-width: var(--calendar-mini-work-week-width)
+      min-width: var(--calendar-mini-work-week-width)
+
+    &__day
+      justify-content: center
+      align-items: center
+      flex-wrap: wrap
+      min-height: 1.5em
+      min-width: 1.5em
+      padding: 0
+      border: 0 !important
+
+      &-label
+        text-align: center
+        top: unset
+        right: 0
+        bottom: unset
+        left: 0
+        margin: auto
+
+      // &.q-outside
+      //   color: var(--calendar-outside-color) !important
+      //   background: var(--calendar-outside-background)
+
+      //   .q-calendar-weekly__day-label .q-btn__wrapper:before
+      //     color: var(--calendar-outside-label-color)
+      //     background: var(--calendar-outside-label-background)
+
+      &.q-selected-date
+        color: var(--calendar-mini-selected-date-color) !important
+        background: var(--calendar-mini-selected-date-background) !important
+
+        .q-calendar-weekly__day-label .q-btn__wrapper:before
+          color: var(--calendar-mini-selected-date-label-color) !important
+          background: var(--calendar-mini-selected-date-label-background) !important
+
+      &.q-selected-day-first,
+      &.q-selected-day-last
+        color: var(--calendar-mini-selected-day-firstlast-color)
+        background: var(--calendar-mini-selected-day-firstlast-background) !important
+
+        .q-calendar-weekly__day-label .q-btn__wrapper:before
+          color: var(--calendar-mini-selected-day-firstlast-label-color) !important
+          background: var(--calendar-mini-selected-day-firstlast-label-background) !important
+
+      &.q-selected-day
+        color: unset
+        background: unset !important
+
+        &.q-selected-day-hover
+          color: var(--calendar-mini-selected-day-hover-color)
+
+      &.q-selected-day-first,
+      &.q-selected-day-last,
+      &.q-selected-day
+  
+        &:before
+          content: ''
+          display: block
+          position: absolute
+          width: 100%
+          height: 23px
+          margin-top: 4px
+          top: 0
+          right: 0
+          bottom: 0
+          left: 0
+          background: var(--calendar-mini-selected-day-connector-color)
+
+        &.q-selected-day-hover
+          &:before
+            content: ''
+            display: block
+            position: absolute
+            width: 100%
+            height: 23px
+            margin-top: 4px
+            top: 0
+            right: 0
+            bottom: 0
+            left: 0
+            color: var(--calendar-color)
+            background: var(--calendar-background)
+            border-top: var(--calendar-mini-selected-day-connector-hover-border)
+            border-bottom: var(--calendar-mini-selected-day-connector-hover-border)
+
+      &.q-selected-day-first,
+      &.q-selected-day-last
+        .q-calendar-weekly__day-label .q-btn__wrapper:before
+          color: var(--calendar-mini-selected-day-firstlast-label-color) !important
+          background: var(--calendar-mini-selected-day-firstlast-label-background) !important
+          border-radius: 50%
+
+      &.q-selected-day-first
+        &:before
+          width: 50%
+          left: 50%
+
+        &.q-selected-day-hover
+          &:before
+            width: 50%
+            left: 50%
+
+      &.q-selected-day-last
+        &:before
+          width: 50%
+          right: auto
+
+        // when first and last are same day
+        &.q-selected-day-first
+          &:before
+            width: 0
+
+        &.q-selected-day-hover
+          &:before
+            width: 50%
+            right: auto
+
+          // when first and last are same day
+          &.q-selected-day-first
+            &.q-selected-day-hover
+              &:before
+                width: 0
+
+  .q-event:not(.q-event-void)
+    &:after
+      content: ''
+      width: 0.6em
+      height: 0.4em
+      border-radius: 50%
+      left: 0
+      right: 0
+      margin: auto
+      background: var(--calendar-selected-date-background)
+
+  .q-calendar-weekly__week
+    border-bottom: unset
+    min-height: 2.2em
+    max-width: 100%
+
+  // .q-calendar-weekly__week-events
+  //   padding-top: 2.6em
+
+.q-dark div,
+.body--dark div,
+.q-calendar--dark
+
+  .q-calendar-mini
+
+    &.q-calendar-weekly
+      color: var(--calendar-color-dark)
+      background: var(--calendar-background-dark)
+
+    .q-calendar-weekly
+
+      &__head-workweek
+        border-right: unset
+        border-bottom: unset
+
+      &__workweek
+        border-right: unset
+
+      &__day
+        color: var(--calendar-color-dark)
+        background: var(--calendar-background-dark)
+
+        &.q-selected-date
+          color: var(--calendar-selected-date-color-dark)
+          background: var(--calendar-selected-date-background-dark)
+
+          .q-calendar-weekly__day-label .q-btn__wrapper:before
+            color: var(--calendar-mini-selected-date-label-color-dark) !important
+            background: var(--calendar-mini-selected-date-label-background-dark) !important
+
+        // &.q-selected-day-first,
+        // &.q-selected-day-last
+        //   color: var(--calendar-mini-selected-day-firstlast-color-dark)
+        //   background: var(--calendar-mini-selected-day-firstlast-background-dark) !important
+
+        //   .q-calendar-weekly__day-label .q-btn__wrapper:before
+        //     color: var(--calendar-mini-selected-day-firstlast-label-color-dark) !important
+        //     background: var(--calendar-mini-selected-day-firstlast-label-background-dark) !important
+
+        &.q-selected-day
+          color: var(--calendar-mini-selected-day-color-dark)
+          background: var(--calendar-mini-selected-day-background-dark)
+
+          &.q-selected-day-hover
+            color: var(--calendar-mini-selected-day-hover-color-dark)
+
+        &.q-selected-day-first,
+        &.q-selected-day-last,
+        &.q-selected-day
+    
+          &:before
+            background: var(--calendar-mini-selected-day-connector-color-dark)
+
+          &.q-selected-day-hover
+            &:before
+              color: var(--calendar-color-dark)
+              background: var(--calendar-background-dark)
+              border-top: var(--calendar-mini-selected-day-connector-hover-border-dark)
+              border-bottom: var(--calendar-mini-selected-day-connector-hover-border-dark)
+
+        // &.q-selected-day-first,
+        // &.q-selected-day-last
+        //   .q-calendar-weekly__day-label .q-btn__wrapper:before
+        //     color: var(--calendar-mini-selected-day-firstlast-label-color-dark) !important
+        //     background: var(--calendar-mini-selected-day-firstlast-label-background-dark) !important
+
+        // &.q-selected-day-first
+        //   // &:before
+        //   //   width: 50%
+        //   //   left: 50%
+
+        //   &.q-selected-day-hover
+        //     // &:before
+        //     //   width: 50%
+        //     //   left: 50%
+
+        // &.q-selected-day-last
+        //   // &:before
+        //   //   width: 50%
+        //   //   right: auto
+
+        //   // when first and last are same day
+        //   &.q-selected-day-first
+        //     // &:before
+        //     //   width: 0
+
+        //   &.q-selected-day-hover
+        //     // &:before
+        //     //   width: 50%
+        //     //   right: auto
+
+        //     // when first and last are same day
+        //     &.q-selected-day-first
+        //       &.q-selected-day-hover
+        //         &:before
+        //           // width: 0
+
+        &.q-outside
+          color: var(--calendar-outside-color-dark) !important
+          background: var(--calendar-outside-background-dark)
+
+          .q-calendar-weekly__day-label .q-btn__wrapper:before
+            color: var(--calendar-outside-label-color-dark)
+            background: var(--calendar-outside-label-background-dark)
+
+        &.q-current-day
+          color: var(--calendar-current-color-dark) !important
+          background: var(--calendar-current-background-dark) !important
+
+          .q-calendar-weekly__day-label
+            color: var(--calendar-current-label-color-dark)
+            background: var(--calendar-current-label-background-dark)
+
+            .q-btn__wrapper:before
+              border-color: var(--calendar-current-color-dark)
+              color: var(--calendar-current-color-dark)
+              background: var(--calendar-current-background-dark)
+
+      &__week--wrapper
+          border-bottom: unset
+
+      &__day--droppable
+        border-right: var($calendar-border-droppable-dark)
+
+
+// DEPRECATED v2.4.0
+.q-calendar-mini
+  .q-event
+    margin-top: 1.0em
+// ---
+
+.q-calendar-mini
+  .q-day-event
+    margin-top: 1.0em
