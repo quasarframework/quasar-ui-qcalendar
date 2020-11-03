@@ -311,7 +311,7 @@ export default {
       }, [
         resource.children && resource.children.length > 0 && h(QIcon, {
           props: {
-            name: (resource.expanded === true ? this.mdiMenuUp : this.mdiMenuRight),
+            name: (resource.expanded === true ? this.mdiMenuDown : this.mdiMenuRight),
             size: 'md'
           },
           on: {
