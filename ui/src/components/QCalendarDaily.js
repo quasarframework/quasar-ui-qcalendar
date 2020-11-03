@@ -449,7 +449,7 @@ export default {
 
       const data = {
         key: interval.time,
-        staticClass: 'q-calendar-daily__day-interval',
+        staticClass: interval.minute === 0 ? 'q-calendar-daily__day-interval' : 'q-calendar-daily__day-interval--section',
         class: {
           'q-calendar-daily__day-interval--droppable': dragOver
         },
