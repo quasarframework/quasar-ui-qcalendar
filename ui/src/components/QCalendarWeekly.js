@@ -94,8 +94,13 @@ export default {
       if (this.dayPadding !== undefined) {
         style.padding = this.dayPadding
       }
-      style.width = 100 / this.weekdays.length + '%'
+      style.minWidth = this.cellWidth + '%'
+      style.maxWidth = style.minWidth
       return style
+    },
+
+    cellWidth () {
+      return 100 / this.weekdays.length
     },
 
     isMiniMode () {
@@ -147,8 +152,12 @@ export default {
       return h('div', {
         staticClass: 'q-calendar-weekly__head'
       }, [
-        this.showWorkWeeks === true && this.__renderWorkWeekHead(h),
-        this.__renderHeadDays(h)
+        h('div', {
+          staticClass: 'q-calendar-weekly__head--wrapper'
+        }, [
+          this.showWorkWeeks === true && this.__renderWorkWeekHead(h),
+          this.__renderHeadDays(h)
+        ])
       ])
     },
 
@@ -178,11 +187,18 @@ export default {
     },
 
     __renderHeadDays (h) {
-      return this.todayWeek.map((day, index) => this.__renderHeadDay(h, day, index))
+      return h('div', {
+        staticClass: 'q-calendar-weekly__head-weekdays',
+        style: {
+          width: this.isMiniMode === true ? 'calc(100% - var(--calendar-mini-work-week-width))' : 'calc(100% - var(--calendar-work-week-width))'
+        }
+      }, [
+        ...this.todayWeek.map((day, index) => this.__renderHeadDay(h, day, index))
+      ])
     },
 
     __renderHeadDay (h, day, index) {
-      const width = 100 / this.weekdays.length + '%'
+      const width = this.cellWidth + '%'
       const headDaySlot = this.$scopedSlots['head-day']
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
@@ -199,7 +215,8 @@ export default {
         key: day.date,
         staticClass: 'q-calendar-weekly__head-weekday',
         style: {
-          width
+          minWidth: width,
+          maxWidth: width
         },
         on: this.getDefaultMouseEventHandlers(':day:header2', event => {
           return { scope, event }
@@ -243,7 +260,10 @@ export default {
         this.showWorkWeeks === true && this.__renderWorkWeekGutter(h, week),
         h('div', {
           key: week[0].date,
-          staticClass: 'q-calendar-weekly__week'
+          staticClass: 'q-calendar-weekly__week',
+          style: {
+            width: this.isMiniMode === true ? 'calc(100% - var(--calendar-mini-work-week-width))' : 'calc(100% - var(--calendar-work-week-width))'
+          }
         }, [
           h('div', {
             staticClass: 'q-calendar-weekly__week-days'
