@@ -903,6 +903,15 @@
         ":selected-start-end-dates=\"getStartEndDates\""
       ]
     },
+    "hover": {
+      "addedIn": "v3.0.0",
+      "type": "Boolean",
+      "category": "style",
+      "description": "Changes the style `selected-start-end-dates` selection when in `mini-mode`. Typically, set this to `true` on `mousedown` and `false` on `mouseup`",
+      "applcable": [
+        "month (mini-mode)"
+      ]
+    },
     "selected-dates": {
       "type": "Array",
       "category": "model",
