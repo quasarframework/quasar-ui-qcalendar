@@ -477,6 +477,13 @@ export default {
     },
 
     __renderDayOfYearLabel (h, day) {
+      const outside = this.isOutside(day)
+
+      // return if outside days are hidden
+      if (outside === true && this.hideOutsideDays === true) {
+        return
+      }
+
       const color = day.current === true ? this.color : undefined
       const slot = this.$scopedSlots['day-of-year']
       const slotData = { timestamp: day }
@@ -487,6 +494,13 @@ export default {
     },
 
     __renderDayMonth (h, day) {
+      const outside = this.isOutside(day)
+
+      // return if outside days are hidden
+      if (outside === true && this.hideOutsideDays === true) {
+        return
+      }
+
       const color = day.current === true ? this.color : undefined
       const slot = this.$scopedSlots['month-label']
       const monthLabel = this.monthFormatter(day, this.shortMonthLabel)
