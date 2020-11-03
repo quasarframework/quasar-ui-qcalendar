@@ -23,7 +23,7 @@
         class="full-width"
       ></q-btn>
       <div class="col-12 full-width q-px-md q-pb-sm">
-        <span class="text-body2" >Max days (custom, scheduler)</span>
+        <span class="text-body2" >Max days (custom, scheduler, agenda)</span>
         <q-slider
           v-model="maxDays"
           :min="1"
