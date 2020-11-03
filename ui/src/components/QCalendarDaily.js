@@ -542,7 +542,7 @@ export default {
 
   render (h) {
     return h('div', {
-      staticClass: 'q-calendar-daily',
+      class: 'q-calendar-daily',
       directives: [{
         modifiers: { quiet: true },
         name: 'resize',

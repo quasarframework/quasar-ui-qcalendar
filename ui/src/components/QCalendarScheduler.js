@@ -611,7 +611,7 @@ export default {
 
   render (h) {
     return h('div', {
-      staticClass: 'q-calendar-scheduler',
+      class: 'q-calendar-scheduler',
       directives: [{
         modifiers: { quiet: true },
         name: 'resize',

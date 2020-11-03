@@ -395,7 +395,7 @@ export default {
 
   render (h) {
     return h('div', {
-      staticClass: 'q-calendar-resource'
+      class: 'q-calendar-resource'
     }, [
       this.__renderBody(h)
     ])

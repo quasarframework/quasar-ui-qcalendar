@@ -333,8 +333,7 @@ export default {
 
   render (h) {
     return h('div', {
-      staticClass: 'q-calendar-agenda',
-      class: this.classes
+      class: 'q-calendar-agenda'
     }, [
       !this.hideHeader && this.__renderHead(h),
       this.__renderBody(h)
