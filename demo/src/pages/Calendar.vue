@@ -1202,20 +1202,20 @@ export default {
 </script>
 
 <style lang="sass">
-.q-calendar-daily__day-interval:hover
-  background-color: rgba(0,0,255,.1)
-
-.q-calendar-weekly__workweek:hover
-  background-color: rgba(0,0,255,.1)
-
-.q-calendar-weekly__day:hover
-  background-color: rgba(0,0,255,.1)
-
-.q-calendar-weekly__head-weekday:hover
-  background-color: rgba(0,0,255,.1)
-
 .calendar-container
   position: relative
+
+.calendar-container .q-calendar-daily__day-interval:hover
+  background-color: rgba(0,0,255,.1)
+
+.calendar-container .q-calendar-weekly__workweek:hover
+  background-color: rgba(0,0,255,.1)
+
+.calendar-container .q-calendar-weekly__day:hover
+  background-color: rgba(0,0,255,.1)
+
+.calendar-container .q-calendar-weekly__head-weekday:hover
+  background-color: rgba(0,0,255,.1)
 
 .my-event
   width: 100%
