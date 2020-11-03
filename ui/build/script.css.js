@@ -1,6 +1,6 @@
 /* eslint-disable array-bracket-spacing */
 const path = require('path')
-const sass = require('node-sass')
+const sass = require('sass')
 const postcss = require('postcss')
 const cssnano = require('cssnano')
 const rtl = require('postcss-rtl')
