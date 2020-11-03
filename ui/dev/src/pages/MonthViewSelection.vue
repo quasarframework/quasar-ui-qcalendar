@@ -10,8 +10,8 @@
         v-model="selectedDate"
         view="month"
         locale="en-us"
+        no-active-date
         :selected-start-end-dates="startEndDates"
-        :day-style="styleDay"
         @mousedown:day2="onMouseDownDay"
         @mouseup:day2="onMouseUpDay"
         @mousemove:day2="onMouseMoveDay"
@@ -75,22 +75,6 @@ export default {
   },
 
   methods: {
-    styleDay (timestamp) {
-      if (this.anchorDayIdentifier !== false && this.otherDayIdentifier !== false) {
-        if (this.isBetween(timestamp) === true) {
-          return {
-            color: 'blue',
-            background: '#CCCCFF'
-          }
-        }
-      }
-    },
-
-    isBetween (timestamp) {
-      const nowIdentifier = QCalendar.getDayIdentifier(timestamp)
-      return this.lowIdentifier <= nowIdentifier && this.highIdentifier >= nowIdentifier
-    },
-
     onMouseDownDay ({ scope, event }) {
       if (leftClick(event)) {
         if (this.mobile === true &&

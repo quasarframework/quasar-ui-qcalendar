@@ -36,7 +36,7 @@ export default {
       // get current day
       const ts = QCalendar.parseTimestamp(this.selectedDate)
       // make next 4 days, after today, disabled
-      Array.from(Array(4)).map((_, i) => {
+      Array.from(Array(4)).forEach((_, i) => {
         days.push(QCalendar.addToDate(ts, { day: i + 1 }).date)
       })
       return days

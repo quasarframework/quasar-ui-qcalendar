@@ -15,10 +15,10 @@
         view="month"
         locale="en-us"
         mini-mode
+        no-active-date
         @click:date2="handleClick"
         @mousemove:day2="handleHoverStart"
         @mouseleave:day2="handleHoverEnd"
-        :day-class="classDay"
         style="max-width: 300px; min-width: auto; overflow: hidden"
       />
     </div>

@@ -1,20 +1,40 @@
 <template>
-  <div style="max-width: 800px; width: 100%;">
+  <div class="row justify-center" style="max-width: 800px; width: 100%; overflow: hidden;">
     <div class="q-gutter-sm">
       <q-checkbox v-model="mobile" label="Use Touch (set if on mobile)" />
     </div>
-    <q-separator></q-separator>
-    <div style="overflow: hidden;">
+    <q-separator class="full-width" />
+    <div class="row justify-center" style="max-width: 800px; width: 100%; overflow: hidden;">
       <q-calendar
-        ref="calendar"
-        v-model="selectedDate"
+        v-model="selectedDate1"
         view="month"
         locale="en-us"
+        mini-mode
         no-active-date
+        :hover="mouseDown"
+        short-weekday-label
+        animated
         :selected-start-end-dates="startEndDates"
         @mousedown:day2="onMouseDownDay"
         @mouseup:day2="onMouseUpDay"
         @mousemove:day2="onMouseMoveDay"
+        style="max-width: 300px; min-width: auto; overflow: hidden"
+      />
+      <q-separator vertical />
+      <q-calendar
+        v-model="selectedDate2"
+        view="month"
+        locale="en-us"
+        mini-mode
+        no-active-date
+        :hover="mouseDown"
+        short-weekday-label
+        animated
+        :selected-start-end-dates="startEndDates"
+        @mousedown:day2="onMouseDownDay"
+        @mouseup:day2="onMouseUpDay"
+        @mousemove:day2="onMouseMoveDay"
+        style="max-width: 300px; min-width: auto; overflow: hidden"
       />
     </div>
   </div>
@@ -31,12 +51,20 @@ function leftClick (e) {
 export default {
   data () {
     return {
-      selectedDate: '',
-      anchorTimestamp: null,
-      otherTimestamp: null,
+      selectedDate1: '',
+      selectedDate2: '',
+      anchorTimestamp: '',
+      otherTimestamp: '',
       mouseDown: false,
       mobile: false
     }
+  },
+
+  beforeMount () {
+    this.selectedDate1 = QCalendar.today()
+    let tm = QCalendar.parseTimestamp(this.selectedDate1)
+    tm = QCalendar.addToDate(tm, { month: 1 })
+    this.selectedDate2 = tm.date
   },
 
   computed: {
@@ -52,29 +80,54 @@ export default {
       }
       return dates
     },
+
     anchorDayIdentifier () {
-      if (this.anchorTimestamp !== null) {
+      if (this.anchorTimestamp !== '') {
         return QCalendar.getDayIdentifier(this.anchorTimestamp)
       }
       return false
     },
+
     otherDayIdentifier () {
-      if (this.otherTimestamp !== null) {
+      if (this.otherTimestamp !== '') {
         return QCalendar.getDayIdentifier(this.otherTimestamp)
       }
       return false
     },
+
     lowIdentifier () {
       // returns lowest of the two values
       return Math.min(this.anchorDayIdentifier, this.otherDayIdentifier)
     },
+
     highIdentifier () {
       // returns highest of the two values
       return Math.max(this.anchorDayIdentifier, this.otherDayIdentifier)
     }
   },
 
+  watch: {
+    mouseDown (val) {
+      console.log('mouseDown:', this.mouseDown)
+    }
+  },
+
   methods: {
+    classDay (timestamp) {
+      if (this.anchorDayIdentifier !== false && this.otherDayIdentifier !== false) {
+        return this.getBetween(timestamp)
+      }
+    },
+
+    getBetween (timestamp) {
+      const nowIdentifier = QCalendar.getDayIdentifier(timestamp)
+      return {
+        'q-selected-day-first': this.lowIdentifier === nowIdentifier,
+        'q-selected-day': this.lowIdentifier <= nowIdentifier && this.highIdentifier >= nowIdentifier,
+        'q-selected-day-last': this.highIdentifier === nowIdentifier
+      }
+    },
+
     onMouseDownDay ({ scope, event }) {
       if (leftClick(event)) {
         if (this.mobile === true &&
@@ -101,7 +154,7 @@ export default {
     },
 
     onMouseMoveDay ({ scope, event }) {
-      if (this.mouseDown === true) {
+      if (this.mouseDown === true && scope.outside !== true) {
         this.otherTimestamp = scope.timestamp
       }
     }

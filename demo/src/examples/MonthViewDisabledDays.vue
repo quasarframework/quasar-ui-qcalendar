@@ -28,7 +28,12 @@ export default {
     modifiedStyle (scope) {
       if (scope.disabled === true) {
         return {
-          backgroundColor: '#ffcb9c!important',
+          '--calendar-outside-label-background': 'auto',
+          '--calendar-current-label-background': 'auto',
+          '--calendar-outside-label-background-dark': 'auto',
+          '--calendar-current-label-background-dark': 'auto',
+          '--calendar-border-color-dark': (this.$q.dark.isActive ? 'black' : '#ffcb9c') + ' !important',
+          backgroundColor: (this.$q.dark.isActive ? '#a1a1a1' : '#ffcb9c') + ' !important',
           cursor: 'not-allowed'
         }
       }
