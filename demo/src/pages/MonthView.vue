@@ -12,10 +12,13 @@ Codepen uses the UMD version of QCalendar. As such, the examples below must be w
     <example-viewer title="First Day Monday" file="MonthViewMondayFirstDay" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="5 Day Work Week" file="MonthViewFiveDayWorkWeek" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Hide Header" file="MonthViewHideHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <q-markdown>
+The `now` property allows you to set "today's date" to a different date. This property is only available for month view.
+    </q-markdown>
     <example-viewer title="Now" file="MonthViewNow" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
-The `show-work-weeks` property is available only for month view.
+The `show-work-weeks` property is available only for month view. The current Work Week will be highlighted.
     </q-markdown>
     <example-viewer title="Work Weeks" file="MonthViewWorkWeekNumbers" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
@@ -36,7 +39,7 @@ The example below is setting the `day-height` to `100`, the default is `0`, whic
 
     <example-title title="Outside Days" />
     <q-markdown>
-Outside days, in month view, are those days before and after the currently displayed month. By default, these days are disable to avoid navigation issues when getting selected days from the User. Using the `enable-outside-days` property enables these days.
+Outside days, in month view, are those days before and after the currently displayed month. By default, these days are disabled to avoid navigation issues when getting selected days from the User. Using the `enable-outside-days` property enables these days.
     </q-markdown>
     <example-viewer title="Enable Outside Days" file="MonthViewEnableOutsideDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Hide Outside Days" file="MonthViewHideOutsideDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
@@ -63,7 +66,7 @@ In this next example, the `disabled-weekdays` is set to disable the weekends.
 
     <example-title title="Selection" />
     <q-markdown>
-In the next example, click on dates to toggled selected on/off.
+In the next example, click on dates to toggled selected on/off. Care is taken to exclude `outside` dates (dates that fall outside the current month).
     </q-markdown>
     <example-viewer title="Selected Dates" file="MonthViewSelectedDates" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
