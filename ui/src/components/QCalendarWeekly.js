@@ -320,9 +320,10 @@ export default {
 
     __renderDay (h, day) {
       const styler = this.dayStyle || this.dayStyleDefault
-      const outside = this.isOutside(day)
+      const outside = this.hideOutsideDays !== true && this.isOutside(day)
+      const activeDate = this.noActiveDate !== true && this.value === day.date
       const slot = this.$scopedSlots.day
-      const scope = { outside, timestamp: day, miniMode: this.isMiniMode }
+      const scope = { outside, timestamp: day, miniMode: this.isMiniMode, activeDate }
       const hasMonth = (outside === false && this.days.find(d => d.month === day.month).day === day.day && this.showMonthLabel === true)
 
       let dragOver
@@ -356,13 +357,12 @@ export default {
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
         key: day.date,
         staticClass: 'q-calendar-weekly__day',
-        class: [
+        class: {
           dayClass,
-          {
-            ...this.getRelativeClasses(day, outside, this.isMiniMode ? undefined : this.selectedDates),
-            'q-calendar-weekly__day--droppable': dragOver
-          }
-        ],
+          ...this.getRelativeClasses(day, outside, this.selectedDates, this.selectedStartEndDates, this.hover),
+          'q-active-date': activeDate === true,
+          'q-calendar-weekly__day--droppable': dragOver
+        },
         style,
         domProps: {
           ondragover: (e) => {
@@ -413,7 +413,7 @@ export default {
 
       const activeDate = this.noActiveDate !== true && this.value === day.date
 
-      const slotData = { dayLabel, timestamp: day, outside, selectedDate, activeDate, miniMode: this.isMiniMode }
+      const slotData = { dayLabel, timestamp: day, outside, activeDate, selectedDate, miniMode: this.isMiniMode }
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
@@ -439,10 +439,8 @@ export default {
         updateColors = this.setBothColors
       }
 
-      return dayBtnSlot ? dayBtnSlot(slotData) : h(QBtn, updateColors(colorCurrent !== undefined ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
-        staticClass: 'q-calendar-weekly__day-label' +
-          (activeDate === true ? ' q-active-date' : '') +
-          (selectedDate === true ? ' q-selected-date' : ''),
+      return dayBtnSlot ? dayBtnSlot(slotData) : h(QBtn, updateColors(colors.get(color), colors.get(backgroundColor), {
+        staticClass: 'q-calendar-weekly__day-label',
         props: {
           size: this.isMiniMode ? 'sm' : this.monthLabelSize,
           unelevated: true,

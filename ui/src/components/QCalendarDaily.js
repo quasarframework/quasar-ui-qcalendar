@@ -132,7 +132,9 @@ export default {
     __renderHeadDay (h, day, idx) {
       const headDaySlot = this.$scopedSlots['head-day']
       const dayHeaderSlot = this.$scopedSlots['day-header']
+      const activeDate = this.noActiveDate !== true && this.value === day.date
       const scope = this.getScopeForSlot(day, idx)
+      scope.activeDate = activeDate
       const width = this.computedWidth
       let dragOver
 
@@ -160,6 +162,7 @@ export default {
         staticClass: 'q-calendar-daily__head-day',
         class: {
           ...this.getRelativeClasses(day),
+          'q-active-date': activeDate,
           'q-calendar-daily__head-day--droppable': dragOver
         },
         style: {
@@ -260,8 +263,7 @@ export default {
       }
 
       return dayBtnSlot ? dayBtnSlot(scope) : h(QBtn, updateColors(colorCurrent !== undefined ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
-        staticClass: 'q-calendar-daily__head-day-label' +
-          (activeDate === true ? ' q-active-date' : ''),
+        staticClass: 'q-calendar-daily__head-day-label',
         style: {
           color: day.current === true ? colorCurrent : undefined
         },

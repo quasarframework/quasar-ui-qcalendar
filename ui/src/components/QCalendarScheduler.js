@@ -166,7 +166,9 @@ export default {
     __renderHeadDay (h, day, idx) {
       const headDaySlot = this.$scopedSlots['head-day']
       const dayHeaderSlot = this.$scopedSlots['scheduler-day-header']
+      const activeDate = this.noActiveDate !== true && this.value === day.date
       const scope = this.getScopeForSlot(day, idx)
+      scope.activeDate = activeDate
       const width = 100 / this.days.length
       let dragOver
 
@@ -194,6 +196,7 @@ export default {
         staticClass: 'q-calendar-scheduler__head-day',
         class: {
           ...this.getRelativeClasses(day),
+          'q-active-date': activeDate,
           'q-calendar-scheduler__head-day--droppable': dragOver
         },
         style: {
@@ -290,8 +293,7 @@ export default {
       }
 
       return dayBtnSlot ? dayBtnSlot(scope) : h(QBtn, updateColors(colorCurrent !== undefined ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
-        staticClass: 'q-calendar-scheduler__head-day-label' +
-          (activeDate === true ? ' q-active-date' : ''),
+        staticClass: 'q-calendar-scheduler__head-day-label',
         style: {
           color: day.current === true ? colorCurrent : undefined
         },
@@ -566,7 +568,7 @@ export default {
         updateColors = this.setBothColors
       }
 
-      return h('div', {
+      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
         key: label + (idx !== undefined ? '-' + idx : ''),
         staticClass: 'q-calendar-scheduler__resource',
         style: {
@@ -580,7 +582,7 @@ export default {
           return { scope, event }
         })
         // ---
-      }, [
+      }), [
         slot ? slot(scope) : h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
           staticClass: 'q-calendar-scheduler__resource-text'
         }), [
