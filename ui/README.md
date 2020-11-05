@@ -1,7 +1,7 @@
 QCalendar
 ===
 
-[![npm](https://img.shields.io/npm/v/@quasar/quasar-ui-qcalendar.svg?label=@quasar/qcalendar)](https://www.npmjs.com/package/@quasar/quasar-ui-qcalendar)
+[![npm](https://img.shields.io/npm/v/@quasar/quasar-ui-qcalendar.svg?label=@quasar/quasar-ui-qcalendar)](https://www.npmjs.com/package/@quasar/quasar-ui-qcalendar)
 [![npm](https://img.shields.io/npm/dt/@quasar/quasar-ui-qcalendar.svg)](https://www.npmjs.com/package/@quasar/quasar-ui-qcalendar)
 
 ## Everything you need for a complete Calendar solution.
