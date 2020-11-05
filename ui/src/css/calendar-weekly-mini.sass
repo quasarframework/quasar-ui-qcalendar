@@ -148,6 +148,9 @@
               &:before
                 width: 0
 
+      &.q-calendar-weekly__day--droppable
+        border: var(--calendar-border-droppable) !important
+
   .q-event:not(.q-event-void)
     &:after
       content: ''
@@ -209,7 +212,7 @@
 
         &.q-selected-day
           color: var(--calendar-mini-selected-day-color-dark)
-          background: var(--calendar-mini-selected-day-background-dark)
+          background: var(--calendar-mini-selected-day-background-dark) !important
 
           &.q-selected-day-hover
             color: var(--calendar-mini-selected-day-hover-color-dark)
@@ -286,11 +289,8 @@
               color: var(--calendar-current-color-dark)
               background: var(--calendar-current-background-dark)
 
-      &__week--wrapper
-          border-bottom: unset
-
-      &__day--droppable
-        border-right: var($calendar-border-droppable-dark)
+        &.q-calendar-weekly__day--droppable
+          border: var(--calendar-border-droppable-dark) !important
 
 
 // DEPRECATED v2.4.0

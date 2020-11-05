@@ -1,186 +1,82 @@
-$calendar-highlight                               : #027BE3
-$calendar-highlight-dark                          : #ffff66
-$calendar-accent                                  : #fafafa
-$calendar-accent-dark                             : #121212
-
-$calendar-color                                   : #606c71
-$calendar-color-dark                              : #fafafa
-$calendar-background                              : #ffffff
-$calendar-background-dark                         : $calendar-accent-dark
-
-$calendar-current-color                           : #027BE3
-$calendar-current-color-dark                      : #ffff66
-$calendar-current-background                      : $calendar-background
-$calendar-current-background-dark                 : $calendar-background-dark
-
-$calendar-active-date-color                       : $calendar-highlight
-$calendar-active-date-background                  : #ddccf7
-$calendar-active-date-color-dark                  : $calendar-highlight-dark
-$calendar-active-date-background-dark             : #8f44ff
-
-$calendar-outside-color                           : #a1a1a1
-$calendar-outside-color-dark                      : #bebebe
-$calendar-outside-background                      : #eeeeee
-$calendar-outside-background-dark                 : $calendar-background-dark
-
-$calendar-selected-date-color                     : #027BE3
-$calendar-selected-date-color-dark                : #027BE3
-$calendar-selected-date-background                : #cce7ff
-$calendar-selected-date-background-dark           : #cce7ff
-
-$calendar-mini-selected-date-color                 : unset
-$calendar-mini-selected-date-color-dark            : #027BE3
-$calendar-mini-selected-date-background            : unset
-$calendar-mini-selected-date-background-dark       : #cce7ff
-$calendar-mini-selected-date-label-color           : #027BE3
-$calendar-mini-selected-date-label-color-dark      : #cce7ff
-$calendar-mini-selected-date-label-background      : #cce7ff
-$calendar-mini-selected-date-label-background-dark : #027BE3
-
-$calendar-selected-day-color                      : #027BE3
-$calendar-selected-day-color-dark                 : #027BE3
-$calendar-selected-day-background                 : #cce7ff
-$calendar-selected-day-background-dark            : #cce7ff
-
-$calendar-mini-selected-day-color                 : #cce7ff
-$calendar-mini-selected-day-color-dark            : #027BE3
-$calendar-mini-selected-day-background            : unset !important
-$calendar-mini-selected-day-background-dark       : unset !important
-$calendar-mini-selected-day-label-color           : #cce7ff
-$calendar-mini-selected-day-label-color-dark      : #027BE3
-$calendar-mini-selected-day-label-background      : #cce7ff
-$calendar-mini-selected-day-label-background-dark : #cce7ff
-$calendar-mini-selected-day-connector-color       : #cce7ff
-$calendar-mini-selected-day-connector-color-dark  : #ffff66
-$calendar-mini-selected-day-hover-color           : #027BE3
-$calendar-mini-selected-day-hover-color-dark      : #ffff66
-
-$calendar-mini-selected-day-firstlast-color                 : #cce7ff
-$calendar-mini-selected-day-firstlast-color-dark            : #cce7ff
-$calendar-mini-selected-day-firstlast-background            : unset
-$calendar-mini-selected-day-firstlast-background-dark       : #cce7ff
-$calendar-mini-selected-day-firstlast-label-color           : #cce7ff
-$calendar-mini-selected-day-firstlast-label-color-dark      : #cce7ff
-$calendar-mini-selected-day-firstlast-label-background      : #027BE3
-$calendar-mini-selected-day-firstlast-label-background-dark : #ffff66
-
-$calendar-border-color                            : #e0e0e0
-$calendar-border-color-dark                       : #71755d
-
-$calendar-separator                               : #bebebe
-$calendar-separator-dark                          : #eeeeee
-
-$calendar-current-border-width                    : 2px
-$calendar-border-current-width                    : 2px
-$calendar-border-width                            : 1px
-
-$calendar-border                                  : $calendar-border-color $calendar-border-width solid
-$calendar-border-dark                             : $calendar-border-color-dark $calendar-border-width solid
-$calendar-border-section                          : $calendar-border-color $calendar-border-width dashed
-$calendar-border-section-dark                     : $calendar-border-color-dark $calendar-border-width dashed
-$calendar-border-current                          : $calendar-highlight $calendar-border-current-width solid
-$calendar-border-current-dark                     : $calendar-highlight-dark $calendar-border-current-width solid
-$calendar-border-droppable                        : $calendar-highlight $calendar-border-width dashed !important
-$calendar-border-droppable-dark                   : $calendar-highlight-dark $calendar-border-width dashed !important
-$calendar-mini-selected-day-connector-hover-border : #027BE3 1px dashed
-$calendar-mini-selected-day-connector-hover-border-dark: #ffff66 1px dashed
-
-$calendar-intervals-width                         : 56px
-$calendar-work-week-width                         : 30px
-$calendar-work-week-font-size                     : 1.0em
-$calendar-mini-work-week-width                    : 30px
-$calendar-head-font-weight                        : 600
-
 \:root
-  // --calendar-highlight                            : #{$calendar-highlight}
-  // --calendar-highlight-dark                       : #{$calendar-highlight-dark}
-  // --calendar-accent                               : #{$calendar-accent}
-  // --calendar-accent-dark                          : #{$calendar-accent-dark}
+  --calendar-color                                : #606c71
+  --calendar-color-dark                           : #fafafa
+  --calendar-background                           : #ffffff
+  --calendar-background-dark                      : #121212
 
-  --calendar-color                                : #{$calendar-color}
-  --calendar-color-dark                           : #{$calendar-color-dark}
-  --calendar-background                           : #{$calendar-background}
-  --calendar-background-dark                      : #{$calendar-background-dark}
+  --calendar-current-color                        : #027BE3
+  --calendar-current-color-dark                   : #ffff66
+  --calendar-current-background                   : #ffffff
+  --calendar-current-background-dark              : #121212
 
-  --calendar-current-color                        : #{$calendar-current-color}
-  --calendar-current-color-dark                   : #{$calendar-current-color-dark}
-  --calendar-current-background                   : #{$calendar-current-background}
-  --calendar-current-background-dark              : #{$calendar-current-background-dark}
+  --calendar-active-date-color                    : #027BE3
+  --calendar-active-date-color-dark               : #ffff66
+  --calendar-active-date-background               : #ddccf7
+  --calendar-active-date-background-dark          : #8f44ff
 
-  --calendar-active-date-color                    : #{$calendar-active-date-color}
-  --calendar-active-date-color-dark               : #{$calendar-active-date-color-dark}
-  --calendar-active-date-background               : #{$calendar-active-date-background}
-  --calendar-active-date-background-dark          : #{$calendar-active-date-background-dark}
+  --calendar-outside-color                        : #a1a1a1
+  --calendar-outside-color-dark                   : #bebebe
+  --calendar-outside-background                   : #eeeeee
+  --calendar-outside-background-dark              : #121212
 
-  --calendar-outside-color                        : #{$calendar-outside-color}
-  --calendar-outside-color-dark                   : #{$calendar-outside-color-dark}
-  --calendar-outside-background                   : #{$calendar-outside-background}
-  --calendar-outside-background-dark              : #{$calendar-outside-background-dark}
+  --calendar-selected-date-color                  : #027BE3
+  --calendar-selected-date-color-dark             : #027BE3
+  --calendar-selected-date-background             : #cce7ff
+  --calendar-selected-date-background-dark        : #cce7ff
 
-  --calendar-selected-date-color                  : #{$calendar-selected-date-color}
-  --calendar-selected-date-color-dark             : #{$calendar-selected-date-color-dark}
-  --calendar-selected-date-background             : #{$calendar-selected-date-background}
-  --calendar-selected-date-background-dark        : #{$calendar-selected-date-background-dark}
+  --calendar-mini-selected-date-color                  : unset
+  --calendar-mini-selected-date-color-dark             : #027BE3
+  --calendar-mini-selected-date-background             : unset
+  --calendar-mini-selected-date-background-dark        : #cce7ff
+  --calendar-mini-selected-date-label-color            : #027BE3
+  --calendar-mini-selected-date-label-color-dark       : #cce7ff
+  --calendar-mini-selected-date-label-background       : #cce7ff
+  --calendar-mini-selected-date-label-background-dark  : #027BE3
 
-  --calendar-mini-selected-date-color                  : #{$calendar-mini-selected-date-color}
-  --calendar-mini-selected-date-color-dark             : #{$calendar-mini-selected-date-color-dark}
-  --calendar-mini-selected-date-background             : #{$calendar-mini-selected-date-background}
-  --calendar-mini-selected-date-background-dark        : #{$calendar-mini-selected-date-background-dark}
-  --calendar-mini-selected-date-label-color            : #{$calendar-mini-selected-date-label-color}
-  --calendar-mini-selected-date-label-color-dark       : #{$calendar-mini-selected-date-label-color-dark}
-  --calendar-mini-selected-date-label-background       : #{$calendar-mini-selected-date-label-background}
-  --calendar-mini-selected-date-label-background-dark  : #{$calendar-mini-selected-date-label-background-dark}
+  --calendar-selected-day-color                   : #027BE3
+  --calendar-selected-day-color-dark              : #027BE3
+  --calendar-selected-day-background              : #cce7ff
+  --calendar-selected-day-background-dark         : #cce7ff
 
-  --calendar-selected-day-color                   : #{$calendar-selected-day-color}
-  --calendar-selected-day-color-dark              : #{$calendar-selected-day-color-dark}
-  --calendar-selected-day-background              : #{$calendar-selected-day-background}
-  --calendar-selected-day-background-dark         : #{$calendar-selected-day-background-dark}
+  --calendar-mini-selected-day-color                : #cce7ff
+  --calendar-mini-selected-day-color-dark           : #027BE3
+  --calendar-mini-selected-day-background           : unset
+  --calendar-mini-selected-day-background-dark      : unset
+  --calendar-mini-selected-day-label-color          : #cce7ff
+  --calendar-mini-selected-day-label-color-dark     : #027BE3
+  --calendar-mini-selected-day-label-background     : #cce7ff
+  --calendar-mini-selected-day-label-background-dark: #cce7ff
+  --calendar-mini-selected-day-connector-color      : #cce7ff
+  --calendar-mini-selected-day-connector-color-dark : #ffff66
+  --calendar-mini-selected-day-hover-color          : #027BE3
+  --calendar-mini-selected-day-hover-color-dark     : #ffff66
 
-  --calendar-mini-selected-day-color                : #{$calendar-mini-selected-day-color}
-  --calendar-mini-selected-day-color-dark           : #{$calendar-mini-selected-day-color-dark}
-  --calendar-mini-selected-day-background           : #{$calendar-mini-selected-day-background}
-  --calendar-mini-selected-day-background-dark      : #{$calendar-mini-selected-day-background-dark}
-  --calendar-mini-selected-day-label-color          : #{$calendar-mini-selected-day-label-color}
-  --calendar-mini-selected-day-label-color-dark     : #{$calendar-mini-selected-day-label-color-dark}
-  --calendar-mini-selected-day-label-background     : #{$calendar-mini-selected-day-label-background}
-  --calendar-mini-selected-day-label-background-dark: #{$calendar-mini-selected-day-label-background-dark}
-  --calendar-mini-selected-day-connector-color      : #{$calendar-mini-selected-day-connector-color}
-  --calendar-mini-selected-day-connector-color-dark : #{$calendar-mini-selected-day-connector-color-dark}
-  --calendar-mini-selected-day-hover-color          : #{$calendar-mini-selected-day-hover-color}
-  --calendar-mini-selected-day-hover-color-dark     : #{$calendar-mini-selected-day-hover-color-dark}
+  --calendar-mini-selected-day-firstlast-color                : #cce7ff
+  --calendar-mini-selected-day-firstlast-color-dark           : #cce7ff
+  --calendar-mini-selected-day-firstlast-background           : unset
+  --calendar-mini-selected-day-firstlast-background-dark      : #cce7ff
+  --calendar-mini-selected-day-firstlast-label-color          : #cce7ff
+  --calendar-mini-selected-day-firstlast-label-color-dark     : #cce7ff
+  --calendar-mini-selected-day-firstlast-label-background     : #027BE3
+  --calendar-mini-selected-day-firstlast-label-background-dark: #ffff66
 
-  --calendar-mini-selected-day-firstlast-color                : #{$calendar-mini-selected-day-firstlast-color}
-  --calendar-mini-selected-day-firstlast-color-dark           : #{$calendar-mini-selected-day-firstlast-color-dark}
-  --calendar-mini-selected-day-firstlast-background           : #{$calendar-mini-selected-day-firstlast-background}
-  --calendar-mini-selected-day-firstlast-background-dark      : #{$calendar-mini-selected-day-firstlast-background-dark}
-  --calendar-mini-selected-day-firstlast-label-color          : #{$calendar-mini-selected-day-firstlast-label-color}
-  --calendar-mini-selected-day-firstlast-label-color-dark     : #{$calendar-mini-selected-day-firstlast-label-color-dark}
-  --calendar-mini-selected-day-firstlast-label-background     : #{$calendar-mini-selected-day-firstlast-label-background}
-  --calendar-mini-selected-day-firstlast-label-background-dark: #{$calendar-mini-selected-day-firstlast-label-background-dark}
+  // borders
+  --calendar-border                               : #e0e0e0 1px solid
+  --calendar-border-dark                          : #71755d 1px solid
+  --calendar-border-section                       : #e0e0e0 1px dashed
+  --calendar-border-section-dark                  : #71755d 1px dashed
 
-  // misc
-  // --calendar-border-color                         : #{$calendar-border-color}
-  // --calendar-border-color-dark                    : #{$calendar-border-color-dark}
+  --calendar-border-current                       : #027BE3 2px solid
+  --calendar-border-current-dark                  : #ffff66 2px solid
+  --calendar-border-droppable                     : #027BE3 1px dashed
+  --calendar-border-droppable-dark                : #ffff66 1px dashed
 
-  --calendar-separator                            : #{$calendar-separator}
-  --calendar-separator-dark                       : #{$calendar-separator-dark}
-
-  --calendar-border                               : #{$calendar-border}
-  --calendar-border-dark                          : #{$calendar-border-dark}
-  --calendar-border-section                       : #{$calendar-border-section}
-  --calendar-border-section-dark                  : #{$calendar-border-section-dark}
-  --calendar-border-current                       : #{$calendar-border-current}
-  --calendar-border-current-dark                  : #{$calendar-border-current-dark}
-  --calendar-border-droppable                     : #{$calendar-border-droppable}
-  --calendar-border-droppable-dark                : #{$calendar-border-droppable-dark}
-  --calendar-mini-selected-day-connector-hover-border: #{$calendar-mini-selected-day-connector-hover-border}
-  --calendar-mini-selected-day-connector-hover-border-dark: #{$calendar-mini-selected-day-connector-hover-border-dark}
+  --calendar-mini-selected-day-connector-hover-border: #027BE3 1px dashed
+  --calendar-mini-selected-day-connector-hover-border-dark: #ffff66 1px dashed
 
   // misc
-  --calendar-intervals-width                      : #{$calendar-intervals-width}
-  --calendar-work-week-width                      : #{$calendar-work-week-width}
-  --calendar-work-week-font-size                  : #{$calendar-work-week-font-size}
-  --calendar-mini-work-week-width                 : #{$calendar-mini-work-week-width}
-  --calendar-border-width                         : #{$calendar-border-width}
-  --calendar-head-font-weight                     : #{$calendar-head-font-weight}
-  
+  --calendar-intervals-width                      : 56px
+  --calendar-work-week-width                      : 30px
+  --calendar-mini-work-week-width                 : 30px
+  --calendar-work-week-font-size                  : 1.0em
+  --calendar-head-font-weight                     : 600
