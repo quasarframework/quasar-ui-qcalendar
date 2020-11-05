@@ -57,10 +57,7 @@ const routes = [
   },
   {
     path: '/theme-builder',
-    component: () => import('layouts/ThemeBuilder.vue'),
-    children: [
-      { path: '', component: () => import('pages/ThemeBuilder.vue') }
-    ]
+    component: () => import('layouts/ThemeBuilder.vue')
   },
   {
     path: '/demo',
