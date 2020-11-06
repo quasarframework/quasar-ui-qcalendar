@@ -1,5 +1,6 @@
 export default function () {
   return {
+    currentStyleName: '',
     style: {
       '--calendar-border': '#e0e0e0 1px solid',
       '--calendar-border-dark': '#71755d 1px solid',

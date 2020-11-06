@@ -71,7 +71,7 @@
             clickable
             v-ripple
             dense
-            :active="false"
+            :active="name === currentStyleName"
             @click="editStyle(name, value)"
           >
             <q-item-section style="max-width: 24px">
@@ -219,11 +219,15 @@ export default {
   },
   computed: {
     ...mapGetters({
-      style: 'ThemeBuilder/style'
+      style: 'ThemeBuilder/style',
+      currentStyleName: 'ThemeBuilder/currentStyleName'
     })
   },
   methods: {
-    ...mapMutations('ThemeBuilder', ['setStyle']),
+    ...mapMutations('ThemeBuilder', [
+      'setStyle',
+      'setCurrentStyleName'
+    ]),
 
     showBox (name, value) {
       return value.match(/^(#|(rgb|hsl)a?\()/) && (name.indexOf('color') > -1 || name.indexOf('background') > -1 || name.indexOf('border') > -1)
@@ -266,6 +270,7 @@ export default {
     },
 
     editStyle (name, value) {
+      this.setCurrentStyleName(name)
       this.currentName = name
       this.currentStyle = value
       this.openThemeEditor = true
