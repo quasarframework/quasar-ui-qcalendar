@@ -12,7 +12,7 @@
         <q-radio
           v-model="selectionType"
           val="date"
-          label="Date (toggle)"
+          label="Selection (toggle)"
         />
         <q-radio
           v-model="selectionType"

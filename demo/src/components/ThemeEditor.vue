@@ -2,6 +2,7 @@
   <q-dialog
     ref="borderEditor"
     v-model="openEditor"
+    position="right"
   >
     <div :class="classes" style="max-width: 280px">
       <div class="text-title">Theme Styles Picker</div>
