@@ -71,7 +71,7 @@ In the next example, click on dates to toggled selected on/off. Care is taken to
     <example-viewer title="Selected Dates" file="MonthViewSelectedDates" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
-The example below shows how to use the QCalendar to create a multi-day selector. The critical aspect of this is the `selected-start-end-dates` property. This takes an array of two dates (the first should be less or equal to the last). This property really doesn't do much, except to keep the calendar reactive, so that the `day-style` property can be used to style the selected days.
+The example below shows how to use the QCalendar to create a multi-day selector. The critical aspect of this is the `selected-start-end-dates` property. This takes an array of two dates (the first should be less or equal to the last). ~~This property really doesn't do much, except to keep the calendar reactive, so that the `day-style` property can be used to style the selected days.~~ Starting with v2.6.0 you no longer have to style the day yourself. You can change the coloring of the selected days with the following css vars: `--calendar-range-color`, `--calendar-range-color-dark`, `--calendar-range-background`, `--calendar-range-background-dark`, `--calendar-range-label-color`, `--calendar-range-label-color-dark`, `--calendar-range-label-background` and `--calendar-range-label-background-dark`.
 
 For the example below, click a day, and while holding the mouse down, move to a different day. Keep in mind, this is just one way of handling multi-day selection. if you needed swipe navigation on a mobile, you could modify the code to have independent click on start and end days.
 

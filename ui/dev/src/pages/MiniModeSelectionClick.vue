@@ -42,16 +42,16 @@ export default {
       return ({ date: d }) => {
         if (this.hover && this.dates.length === 1) {
           return {
-            'q-selected-day-first': this.isHoveringFirst(d),
-            'q-selected-day': this.isHovering(d),
-            'q-selected-day-last': this.isHoveringLast(d)
+            'q-range-first': this.isHoveringFirst(d),
+            'q-range': this.isHovering(d),
+            'q-range-last': this.isHoveringLast(d)
           }
         }
         else if (this.dates.length === 2) {
           return {
-            'q-selected-day-first': this.isSelectedFirst(d),
-            'q-selected-day': this.isBetween(d),
-            'q-selected-day-last': this.isSelectedLast(d)
+            'q-range-first': this.isSelectedFirst(d),
+            'q-range': this.isBetween(d),
+            'q-range-last': this.isSelectedLast(d)
           }
         }
       }

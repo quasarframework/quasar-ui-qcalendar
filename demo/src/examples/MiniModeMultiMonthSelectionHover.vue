@@ -122,9 +122,9 @@ export default {
     getBetween (timestamp) {
       const nowIdentifier = QCalendar.getDayIdentifier(timestamp)
       return {
-        'q-selected-day-first': this.lowIdentifier === nowIdentifier,
-        'q-selected-day': this.lowIdentifier <= nowIdentifier && this.highIdentifier >= nowIdentifier,
-        'q-selected-day-last': this.highIdentifier === nowIdentifier
+        'q-range-first': this.lowIdentifier === nowIdentifier,
+        'q-range': this.lowIdentifier <= nowIdentifier && this.highIdentifier >= nowIdentifier,
+        'q-range-last': this.highIdentifier === nowIdentifier
       }
     },
 

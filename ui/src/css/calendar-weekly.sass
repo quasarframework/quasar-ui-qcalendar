@@ -169,20 +169,20 @@
       color: var(--calendar-outside-color)
       background: var(--calendar-outside-background)
 
-    &.q-selected-date
-      color: var(--calendar-selected-date-color)
-      background: var(--calendar-selected-date-background)
+    &.q-selected
+      color: var(--calendar-selected-color)
+      background: var(--calendar-selected-background)
 
       .q-current-day
         .q-btn__wrapper:before
           // inverted
           border: var(--calendar-border-current-dark) !important
 
-    &.q-selected-day-first,
-    &.q-selected-day-last,
-    &.q-selected-day
-      color: var(--calendar-selected-day-color)
-      background: var(--calendar-selected-day-background)
+    &.q-range-first,
+    &.q-range-last,
+    &.q-range
+      color: var(--calendar-range-color)
+      background: var(--calendar-range-background)
 
       .q-current-day
         .q-btn__wrapper:before
@@ -241,20 +241,20 @@
         color: var(--calendar-outside-color-dark) !important
         background: var(--calendar-outside-background-dark)
 
-      &.q-selected-date
-        color: var(--calendar-selected-date-color-dark)
-        background: var(--calendar-selected-date-background-dark)
+      &.q-selected
+        color: var(--calendar-selected-color-dark)
+        background: var(--calendar-selected-background-dark)
 
         .q-current-day
           .q-btn__wrapper:before
             // inverted
             border: var(--calendar-border-current) !important
 
-      &.q-selected-day-first,
-      &.q-selected-day-last,
-      &.q-selected-day
-        color: var(--calendar-selected-day-color-dark)
-        background: var(--calendar-selected-day-background-dark)
+      &.q-range-first,
+      &.q-range-last,
+      &.q-range
+        color: var(--calendar-range-color-dark)
+        background: var(--calendar-range-background-dark)
 
         .q-current-day
           .q-btn__wrapper:before

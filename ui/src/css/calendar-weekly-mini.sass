@@ -52,33 +52,33 @@
       //     color: var(--calendar-outside-label-color)
       //     background: var(--calendar-outside-label-background)
 
-      &.q-selected-date
-        color: var(--calendar-mini-selected-date-color) !important
-        background: var(--calendar-mini-selected-date-background) !important
+      &.q-selected
+        color: var(--calendar-mini-selected-color) !important
+        background: var(--calendar-mini-selected-background) !important
 
         .q-calendar-weekly__day-label .q-btn__wrapper:before
-          color: var(--calendar-mini-selected-date-label-color) !important
-          background: var(--calendar-mini-selected-date-label-background) !important
+          color: var(--calendar-mini-selected-label-color) !important
+          background: var(--calendar-mini-selected-label-background) !important
 
-      &.q-selected-day-first,
-      &.q-selected-day-last
-        color: var(--calendar-mini-selected-day-firstlast-color)
-        background: var(--calendar-mini-selected-day-firstlast-background) !important
+      &.q-range-first,
+      &.q-range-last
+        color: var(--calendar-mini-range-firstlast-color)
+        background: var(--calendar-mini-range-firstlast-background) !important
 
         .q-calendar-weekly__day-label .q-btn__wrapper:before
-          color: var(--calendar-mini-selected-day-firstlast-label-color) !important
-          background: var(--calendar-mini-selected-day-firstlast-label-background) !important
+          color: var(--calendar-mini-range-firstlast-label-color) !important
+          background: var(--calendar-mini-range-firstlast-label-background) !important
 
-      &.q-selected-day
+      &.q-range
         color: unset
         background: unset !important
 
-        &.q-selected-day-hover
-          color: var(--calendar-mini-selected-day-hover-color)
+        &.q-range-hover
+          color: var(--calendar-mini-range-hover-color)
 
-      &.q-selected-day-first,
-      &.q-selected-day-last,
-      &.q-selected-day
+      &.q-range-first,
+      &.q-range-last,
+      &.q-range
   
         &:before
           content: ''
@@ -91,9 +91,9 @@
           right: 0
           bottom: 0
           left: 0
-          background: var(--calendar-mini-selected-day-connector-color)
+          background: var(--calendar-mini-range-connector-color)
 
-        &.q-selected-day-hover
+        &.q-range-hover
           &:before
             content: ''
             display: block
@@ -107,44 +107,44 @@
             left: 0
             color: var(--calendar-color)
             background: var(--calendar-background)
-            border-top: var(--calendar-mini-selected-day-connector-hover-border)
-            border-bottom: var(--calendar-mini-selected-day-connector-hover-border)
+            border-top: var(--calendar-mini-range-connector-hover-border)
+            border-bottom: var(--calendar-mini-range-connector-hover-border)
 
-      &.q-selected-day-first,
-      &.q-selected-day-last
+      &.q-range-first,
+      &.q-range-last
         .q-calendar-weekly__day-label .q-btn__wrapper:before
-          color: var(--calendar-mini-selected-day-firstlast-label-color) !important
-          background: var(--calendar-mini-selected-day-firstlast-label-background) !important
+          color: var(--calendar-mini-range-firstlast-label-color) !important
+          background: var(--calendar-mini-range-firstlast-label-background) !important
           border-radius: 50%
 
-      &.q-selected-day-first
+      &.q-range-first
         &:before
           width: 50%
           left: 50%
 
-        &.q-selected-day-hover
+        &.q-range-hover
           &:before
             width: 50%
             left: 50%
 
-      &.q-selected-day-last
+      &.q-range-last
         &:before
           width: 50%
           right: auto
 
         // when first and last are same day
-        &.q-selected-day-first
+        &.q-range-first
           &:before
             width: 0
 
-        &.q-selected-day-hover
+        &.q-range-hover
           &:before
             width: 50%
             right: auto
 
           // when first and last are same day
-          &.q-selected-day-first
-            &.q-selected-day-hover
+          &.q-range-first
+            &.q-range-hover
               &:before
                 width: 0
 
@@ -160,7 +160,7 @@
       left: 0
       right: 0
       margin: auto
-      background: var(--calendar-selected-date-background)
+      background: var(--calendar-selected-background)
 
   .q-calendar-weekly__week
     border-bottom: unset
@@ -193,78 +193,78 @@
         color: var(--calendar-color-dark)
         background: var(--calendar-background-dark)
 
-        &.q-selected-date
-          color: var(--calendar-selected-date-color-dark)
-          background: var(--calendar-selected-date-background-dark)
+        &.q-selected
+          color: var(--calendar-selected-color-dark)
+          background: var(--calendar-selected-background-dark)
 
           .q-calendar-weekly__day-label .q-btn__wrapper:before
-            color: var(--calendar-mini-selected-date-label-color-dark) !important
-            background: var(--calendar-mini-selected-date-label-background-dark) !important
+            color: var(--calendar-mini-selected-label-color-dark) !important
+            background: var(--calendar-mini-selected-label-background-dark) !important
 
-        // &.q-selected-day-first,
-        // &.q-selected-day-last
-        //   color: var(--calendar-mini-selected-day-firstlast-color-dark)
-        //   background: var(--calendar-mini-selected-day-firstlast-background-dark) !important
+        // &.q-range-first,
+        // &.q-range-last
+        //   color: var(--calendar-mini-range-firstlast-color-dark)
+        //   background: var(--calendar-mini-range-firstlast-background-dark) !important
 
         //   .q-calendar-weekly__day-label .q-btn__wrapper:before
-        //     color: var(--calendar-mini-selected-day-firstlast-label-color-dark) !important
-        //     background: var(--calendar-mini-selected-day-firstlast-label-background-dark) !important
+        //     color: var(--calendar-mini-range-firstlast-label-color-dark) !important
+        //     background: var(--calendar-mini-range-firstlast-label-background-dark) !important
 
-        &.q-selected-day
-          color: var(--calendar-mini-selected-day-color-dark)
-          background: var(--calendar-mini-selected-day-background-dark) !important
+        &.q-range
+          color: var(--calendar-mini-range-color-dark)
+          background: var(--calendar-mini-range-background-dark) !important
 
-          &.q-selected-day-hover
-            color: var(--calendar-mini-selected-day-hover-color-dark)
+          &.q-range-hover
+            color: var(--calendar-mini-range-hover-color-dark)
 
-        &.q-selected-day-first,
-        &.q-selected-day-last,
-        &.q-selected-day
+        &.q-range-first,
+        &.q-range-last,
+        &.q-range
     
           &:before
-            background: var(--calendar-mini-selected-day-connector-color-dark)
+            background: var(--calendar-mini-range-connector-color-dark)
 
-          &.q-selected-day-hover
+          &.q-range-hover
             &:before
               color: var(--calendar-color-dark)
               background: var(--calendar-background-dark)
-              border-top: var(--calendar-mini-selected-day-connector-hover-border-dark)
-              border-bottom: var(--calendar-mini-selected-day-connector-hover-border-dark)
+              border-top: var(--calendar-mini-range-connector-hover-border-dark)
+              border-bottom: var(--calendar-mini-range-connector-hover-border-dark)
 
-        // &.q-selected-day-first,
-        // &.q-selected-day-last
+        // &.q-range-first,
+        // &.q-range-last
         //   .q-calendar-weekly__day-label .q-btn__wrapper:before
-        //     color: var(--calendar-mini-selected-day-firstlast-label-color-dark) !important
-        //     background: var(--calendar-mini-selected-day-firstlast-label-background-dark) !important
+        //     color: var(--calendar-mini-range-firstlast-label-color-dark) !important
+        //     background: var(--calendar-mini-range-firstlast-label-background-dark) !important
 
-        // &.q-selected-day-first
+        // &.q-range-first
         //   // &:before
         //   //   width: 50%
         //   //   left: 50%
 
-        //   &.q-selected-day-hover
+        //   &.q-range-hover
         //     // &:before
         //     //   width: 50%
         //     //   left: 50%
 
-        // &.q-selected-day-last
+        // &.q-range-last
         //   // &:before
         //   //   width: 50%
         //   //   right: auto
 
         //   // when first and last are same day
-        //   &.q-selected-day-first
+        //   &.q-range-first
         //     // &:before
         //     //   width: 0
 
-        //   &.q-selected-day-hover
+        //   &.q-range-hover
         //     // &:before
         //     //   width: 50%
         //     //   right: auto
 
         //     // when first and last are same day
-        //     &.q-selected-day-first
-        //       &.q-selected-day-hover
+        //     &.q-range-first
+        //       &.q-range-hover
         //         &:before
         //           // width: 0
 

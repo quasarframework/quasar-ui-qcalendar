@@ -692,7 +692,7 @@
         "type": ["Array", "Object", "String"],
         "desc": "A Vue style object of classes",
         "examples": [
-          "{ 'q-selected-day': true }"
+          "{ 'q-range': true }"
         ]
       },
       "default": "null",

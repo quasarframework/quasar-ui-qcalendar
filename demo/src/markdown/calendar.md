@@ -433,7 +433,7 @@ QCalendar does not provide styling for the active date (v-model). This is in dev
 Of course, change the color to anything you want. Alternatively, provide a bordered outline as well. The choice is yours.
 
 ::: info
-Note that for the User selected date, we use the css class `.q-active-date` to avoid conflict with `.q-selected-date` which is used for multi-selected dates.
+Note that for the User selected date, we use the css class `.q-active-date` to avoid conflict with `.q-selected` which is used for multi-selected dates.
 :::
 
 # Navigation

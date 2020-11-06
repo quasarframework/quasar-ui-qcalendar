@@ -128,11 +128,11 @@ export default {
         'q-future-day': firstDay !== true && betweenDays !== true && lastDay !== true && isSelected !== true && outside !== true && timestamp.future,
         'q-outside': outside, // outside the current month
         'q-current-day': timestamp.current,
-        'q-selected-date': isSelected,
-        'q-selected-day-first': firstDay === true,
-        'q-selected-day': betweenDays === true,
-        'q-selected-day-last': lastDay === true,
-        'q-selected-day-hover': hover === true && (firstDay === true || lastDay === true || betweenDays === true)
+        'q-selected': isSelected,
+        'q-range-first': firstDay === true,
+        'q-range': betweenDays === true,
+        'q-range-last': lastDay === true,
+        'q-range-hover': hover === true && (firstDay === true || lastDay === true || betweenDays === true)
       }
     },
 
