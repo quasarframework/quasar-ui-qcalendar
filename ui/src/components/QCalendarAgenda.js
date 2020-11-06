@@ -156,7 +156,6 @@ export default {
     __renderHeadColumn (h, column) {
       const slot = this.$scopedSlots['column-header-label']
       const scope = column
-      // const colorCurrent = day.current === true ? this.color : undefined
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme

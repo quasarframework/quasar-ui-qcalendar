@@ -179,6 +179,7 @@
     },
     "color": {
       "type": "String",
+      "removed": "v3.0.0",
       "category": "style",
       "desc": "This is the color used current day (now) highlighting. It can be from the from the [Quasar Color Palette](https://quasar.dev/style/color-palette), CSS named color or a CSS color (#, rgb, rgba, hls, etc)",
       "applicable": [

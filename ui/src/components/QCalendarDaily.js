@@ -201,7 +201,6 @@ export default {
       const slot = this.$scopedSlots['day-header-label']
       const scope = this.getScopeForSlot(day)
       scope.shortWeekdayLabel = this.shortWeekdayLabel
-      const colorCurrent = day.current === true ? this.color : undefined
 
       let colors = new Map(), color, backgroundColor
       let updateColors = this.useDefaultTheme
@@ -222,7 +221,7 @@ export default {
         updateColors = this.setBothColors
       }
 
-      return h('div', updateColors(colorCurrent !== undefined ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
+      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
         staticClass: 'ellipsis q-calendar-daily__head-weekday'
       }), [
         (slot && slot(scope)) || this.__renderHeadDayLabel(h, day, this.shortWeekdayLabel)
@@ -236,7 +235,6 @@ export default {
     },
 
     __renderHeadDayBtn (h, day) {
-      const colorCurrent = day.current === true ? this.color : undefined
       const activeDate = this.noActiveDate !== true && this.value === day.date
       const dayLabel = this.dayFormatter(day, false)
       const dayLabelSlot = this.$scopedSlots['day-label']
@@ -262,11 +260,8 @@ export default {
         updateColors = this.setBothColors
       }
 
-      return dayBtnSlot ? dayBtnSlot(scope) : h(QBtn, updateColors(colorCurrent !== undefined ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
+      return dayBtnSlot ? dayBtnSlot(scope) : h(QBtn, updateColors(colors.get(color), colors.get(backgroundColor), {
         staticClass: 'q-calendar-daily__head-day-label',
-        style: {
-          color: day.current === true ? colorCurrent : undefined
-        },
         props: {
           unelevated: true,
           round: true,
