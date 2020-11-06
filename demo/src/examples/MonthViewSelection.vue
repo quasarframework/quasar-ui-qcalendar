@@ -101,7 +101,7 @@ export default {
     },
 
     onMouseMoveDay ({ scope, event }) {
-      if (this.mouseDown === true) {
+      if (this.mouseDown === true && scope.outside !== true) {
         this.otherTimestamp = scope.timestamp
       }
     }

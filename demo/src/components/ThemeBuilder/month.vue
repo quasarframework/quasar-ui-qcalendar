@@ -1,26 +1,30 @@
 <template>
   <div>
-    <div class="q-gutter-sm">
-      <q-checkbox v-model="mobile" label="Use Touch (set if on mobile)" />
-      <q-checkbox v-model="noActiveDate" label="No active date" />
+    <div class="q-gutter-sm q-mb-sm">
+      <q-checkbox v-model="mobile" dense label="Use Touch (set if on mobile)" />
+      <q-checkbox v-model="noActiveDate" dense label="No active date" />
+      <q-checkbox v-model="disabledDays" dense label="Disabled weekends" />
         <div class="full-width text-caption">Selection Type</div>
         <q-radio
           v-model="selectionType"
+          dense
           val="off"
           label="Off"
         />
         <q-radio
           v-model="selectionType"
+          dense
           val="date"
           label="Selection (toggle)"
         />
         <q-radio
           v-model="selectionType"
+          dense
           val="range"
           label="Range"
         />
     </div>
-    <div style="overflow: hidden;">
+    <div>
       <q-calendar
         ref="calendar"
         v-model="selectedDate"
@@ -30,6 +34,7 @@
         :no-active-date="noActiveDate"
         :selected-start-end-dates="startEndDates"
         :selected-dates="selectedDates"
+        :disabled-weekdays="disabledWeekdays"
         @click:day2="onToggleDay"
         @click:date2="onToggleDate"
         @mousedown:day2="onMouseDownDay"
@@ -65,7 +70,8 @@ export default {
       mouseDown: false,
       mobile: false,
       noActiveDate: false,
-      selectionType: 'off'
+      selectionType: 'off',
+      disabledDays: false
     }
   },
 
@@ -87,6 +93,10 @@ export default {
   },
 
   computed: {
+    disabledWeekdays () {
+      return this.disabledDays === true ? [0, 6] : []
+    },
+
     startEndDates () {
       const dates = []
       if (this.anchorDayIdentifier !== false && this.otherDayIdentifier !== false) {

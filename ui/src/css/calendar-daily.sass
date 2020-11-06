@@ -139,6 +139,10 @@
       .q-btn__wrapper:before
         border: var(--calendar-border-current)
 
+    &.q-disabled-day
+      color: var(--calendar-disabled-date-color)
+      background: var(--calendar-disabled-date-background)
+
   &__column-header--before
     border-bottom: var(--calendar-border)
 
@@ -158,6 +162,10 @@
 
     &:last-child
       border-right: none !important
+
+    &.q-disabled-day
+      color: var(--calendar-disabled-date-color)
+      background: var(--calendar-disabled-date-background)
 
   &__day-interval
     width: 100%
@@ -207,6 +215,10 @@
         .q-btn__wrapper:before
           border: var(--calendar-border-current-dark)
 
+    &.q-disabled-day
+      color: var(--calendar-disabled-date-color-dark)
+      background: var(--calendar-disabled-date-background-dark)
+
     &__column-header--before
       border-bottom: var(--calendar-border-dark)
 
@@ -224,6 +236,10 @@
 
       &:last-child
         border-right: none !important
+
+      &.q-disabled-day
+        color: var(--calendar-disabled-date-color)
+        background: var(--calendar-disabled-date-background)
 
     &__day-interval
       border-top: var(--calendar-border-dark)

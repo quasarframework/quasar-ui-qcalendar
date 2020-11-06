@@ -127,6 +127,7 @@ export default {
         'q-past-day': firstDay !== true && betweenDays !== true && lastDay !== true && isSelected !== true && outside !== true && timestamp.past,
         'q-future-day': firstDay !== true && betweenDays !== true && lastDay !== true && isSelected !== true && outside !== true && timestamp.future,
         'q-outside': outside, // outside the current month
+        'q-disabled-day': timestamp.disabled === true,
         'q-current-day': timestamp.current,
         'q-selected': isSelected,
         'q-range-first': firstDay === true,

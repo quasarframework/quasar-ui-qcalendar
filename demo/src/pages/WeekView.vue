@@ -42,9 +42,6 @@ Note: The header area of the calendar will now scroll with the rest of the calen
     <example-viewer title="No Scroll" file="WeekViewNoScroll" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Disabled" />
-    <q-markdown>
-When the property `disabled-days` has an array of disabled days, you can hook into the `interval-style` property to change the background color of the disabled day.
-    </q-markdown>
     <example-viewer title="Disabled Days" file="WeekViewDisabledDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>

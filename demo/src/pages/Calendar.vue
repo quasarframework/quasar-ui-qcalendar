@@ -783,7 +783,6 @@ export default {
       }
       if (date.disabled === true) {
         return {
-          backgroundColor: '#efefef!important',
           cursor: 'not-allowed'
         }
       }

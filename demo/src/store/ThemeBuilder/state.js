@@ -24,6 +24,11 @@ export default function () {
       '--calendar-current-background': '#ffffff',
       '--calendar-current-background-dark': '#121212',
 
+      '--calendar-disabled-date-color': '#a1a1a1',
+      '--calendar-disabled-date-color-dark': '#bebebe',
+      '--calendar-disabled-date-background': '#eeeeee',
+      '--calendar-disabled-date-background-dark': '#121212',
+
       '--calendar-active-date-color': '#027BE3',
       '--calendar-active-date-color-dark': '#ffff66',
       '--calendar-active-date-background': '#ddccf7',
@@ -104,6 +109,11 @@ export default function () {
       '--calendar-current-color-dark': '[DARK] The text color of the `current` date',
       '--calendar-current-background': 'The background color of the `current` date',
       '--calendar-current-background-dark': '[DARK] The background color of the `current` date',
+
+      '--calendar-disabled-date-color': 'The text color of the `disabled` date',
+      '--calendar-disabled-date-color-dark': '[DARK] The text color of the `disabled` date',
+      '--calendar-disabled-date-background': 'The background color of the `disabled` date',
+      '--calendar-disabled-date-background-dark': '[DARK] The background color of the `disabled` date',
 
       '--calendar-active-date-color': 'The text color of the `active` date',
       '--calendar-active-date-color-dark': '[DARK] The text color of the `active` date',

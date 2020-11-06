@@ -161,6 +161,10 @@
     &:last-child
       border-right: none
 
+    &.q-disabled-day
+      color: var(--calendar-disabled-date-color)
+      background: var(--calendar-disabled-date-background)
+
     &.q-active-date
       color: var(--calendar-active-date-color)
 
@@ -191,6 +195,10 @@
     &:last-child
       border-right: none !important
 
+    &.q-disabled-day
+      color: var(--calendar-disabled-date-color)
+      background: var(--calendar-disabled-date-background)
+
   &__day-resource--droppable
     border: var(--calendar-border-droppable)
 
@@ -215,6 +223,10 @@
       border-right: var(--calendar-border-dark)
       border-bottom: var(--calendar-border-dark)
 
+      &.q-disabled-day
+        color: var(--calendar-disabled-date-color-dark)
+        background: var(--calendar-disabled-date-background-dark)
+
       &.q-active-date
         color: var(--calendar-active-date-color-dark)
 
@@ -235,6 +247,10 @@
 
     &__day
       border-right: var(--calendar-border-dark)
+
+      &.q-disabled-day
+      color: var(--calendar-disabled-date-color-dark)
+      background: var(--calendar-disabled-date-background-dark)
 
     &__resource
       border-right: var(--calendar-border-dark)

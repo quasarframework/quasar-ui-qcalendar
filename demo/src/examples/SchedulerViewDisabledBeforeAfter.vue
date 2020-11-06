@@ -73,7 +73,6 @@ export default {
     modifiedStyle (scope) {
       if (scope.timestamp.disabled === true) {
         return {
-          backgroundColor: '#ffcb9c!important',
           cursor: 'not-allowed'
         }
       }

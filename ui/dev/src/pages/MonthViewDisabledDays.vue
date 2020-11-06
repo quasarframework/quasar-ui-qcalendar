@@ -33,7 +33,6 @@ export default {
           '--calendar-outside-label-background-dark': 'auto',
           '--calendar-current-label-background-dark': 'auto',
           '--calendar-border-color-dark': (this.$q.dark.isActive ? 'black' : '#ffcb9c') + ' !important',
-          backgroundColor: (this.$q.dark.isActive ? '#a1a1a1' : '#ffcb9c') + ' !important',
           cursor: 'not-allowed'
         }
       }

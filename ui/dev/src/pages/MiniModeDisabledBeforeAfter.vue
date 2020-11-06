@@ -64,7 +64,6 @@ export default {
     modifiedStyle (scope) {
       if (scope.disabled === true) {
         return {
-          backgroundColor: (this.$q.dark.isActive ? '#a1a1a1' : '#ffcb9c') + ' !important',
           cursor: 'not-allowed'
         }
       }

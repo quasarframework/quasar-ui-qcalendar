@@ -64,7 +64,6 @@ export default {
           '--calendar-current-label-background': 'auto',
           '--calendar-outside-label-background-dark': 'auto',
           '--calendar-current-label-background-dark': 'auto',
-          backgroundColor: (this.$q.dark.isActive ? '#a1a1a1' : '#ffcb9c') + ' !important',
           cursor: 'not-allowed'
         }
       }

@@ -30,12 +30,9 @@ function getCurrentDay (day) {
 export default {
   data () {
     return {
-      selectedDate: ''
-    }
-  },
-  beforeMount () {
     // set to today's date
-    this.selectedDate = getCurrentDay(CURRENT_DAY.getDate())
+      selectedDate: getCurrentDay(CURRENT_DAY.getDate())
+    }
   },
   computed: {
     disabledBefore () {
@@ -54,7 +51,7 @@ export default {
         let ts = QCalendar.parseTimestamp(this.selectedDate)
         // get days in month
         const days = QCalendar.daysInMonth(ts.year, ts.month)
-        ts = QCalendar.addToDate(ts, { day: (days - ts.day) })
+        ts = QCalendar.addToDate(ts, { day: (days - ts.day + 1) })
         return ts.date
       }
       return undefined
@@ -64,7 +61,6 @@ export default {
     modifiedStyle (scope) {
       if (scope.disabled === true) {
         return {
-          backgroundColor: (this.$q.dark.isActive ? '#a1a1a1' : '#ffcb9c') + ' !important',
           cursor: 'not-allowed'
         }
       }

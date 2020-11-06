@@ -208,12 +208,13 @@ export default {
         colors = this.getThemeColors([color, backgroundColor])
         updateColors = this.setBothColors
       }
+      const disabled = (this.disabledWeekdays ? this.disabledWeekdays.includes(day.weekday) : false)
       const days = this.days.filter(day2 => day2.weekday === day.weekday)
       const scope = { timestamp: day, days, index, miniMode: this.isMiniMode }
 
       return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
         key: day.date,
-        staticClass: 'q-calendar-weekly__head-weekday',
+        staticClass: 'q-calendar-weekly__head-weekday' + (disabled === true ? ' q-disabled-day' : ''),
         style: {
           minWidth: width,
           maxWidth: width

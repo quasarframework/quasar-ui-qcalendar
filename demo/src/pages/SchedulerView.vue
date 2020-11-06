@@ -24,9 +24,6 @@ const rooms = [
     <example-viewer title="Dark" file="SchedulerViewDark" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Disabled" />
-    <q-markdown>
-When the property `disabled-days` has an array of disabled days, you can hook into the `resource-style` property to change the background color of the disabled day.
-    </q-markdown>
     <example-viewer title="Disabled Days" file="SchedulerViewDisabledDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>

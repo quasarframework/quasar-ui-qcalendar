@@ -47,7 +47,6 @@ export default {
       if (scope.disabled === true) {
         return {
           '--calendar-border-color-dark': (this.$q.dark.isActive ? 'black' : '#ffcb9c') + ' !important',
-          backgroundColor: (this.$q.dark.isActive ? '#a1a1a1' : '#ffcb9c') + ' !important',
           cursor: 'not-allowed'
         }
       }

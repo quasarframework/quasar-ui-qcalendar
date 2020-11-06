@@ -62,6 +62,9 @@ In the first calendar, all disabled days are set explicitly. In the second examp
 In the this example the disabled days and a range of disabled days are combined. Ranges must be an array of dates within the main array. They contain a start and and end date.
     </q-markdown>
     <example-viewer title="Disabled Days (combined)" file="MiniModeDisabledDaysCombined" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <q-markdown>
+In this next example, the `disabled-before` is set to the last day of the previous month and the `disabled-after` is set to the first day of the next month. Essentially, this disables all dates but the current month.
+    </q-markdown>
     <example-viewer title="Disabled Before/After" file="MiniModeDisabledBeforeAfter" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Disabled Weekdays" file="MiniModeDisabledWeekdays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 

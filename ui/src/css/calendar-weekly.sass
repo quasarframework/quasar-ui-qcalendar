@@ -134,6 +134,10 @@
     &:last-child
       border-right: none !important
 
+    &.q-disabled-day
+      color: var(--calendar-disabled-date-color)
+      background: var(--calendar-disabled-date-background)
+
   &__workweek
     font-size: var(--calendar-work-week-font-size)
     border-right: var(--calendar-border)
@@ -164,6 +168,10 @@
     &.q-current-day
       .q-btn__wrapper:before
         border: var(--calendar-border-current)
+
+    &.q-disabled-day
+      color: var(--calendar-disabled-date-color)
+      background: var(--calendar-disabled-date-background)
 
     &.q-outside
       color: var(--calendar-outside-color)
@@ -209,6 +217,10 @@
       &:last-child
         border-right: none !important
 
+      &.q-disabled-day
+        color: var(--calendar-disabled-date-color-dark)
+        background: var(--calendar-disabled-date-background-dark)
+
     &__workweek
       border-right: var(--calendar-border-dark)
 
@@ -236,6 +248,10 @@
       &.q-current-day
         .q-btn__wrapper:before
           border: var(--calendar-border-current-dark)
+
+      &.q-disabled-day
+        color: var(--calendar-disabled-date-color-dark)
+        background: var(--calendar-disabled-date-background-dark)
 
       &.q-outside
         color: var(--calendar-outside-color-dark) !important
