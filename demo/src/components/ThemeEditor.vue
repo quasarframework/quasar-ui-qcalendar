@@ -5,7 +5,7 @@
   >
     <div :class="classes" style="max-width: 280px">
       <div class="text-title">Theme Styles Picker</div>
-      <q-separator />
+      <q-separator class="q-mb-md" />
       <div v-if="currentBorderSize !== void 0" class="full-width">
         <div class="full-width text-caption q-pb-lg">Border Width</div>
         <q-slider
@@ -44,11 +44,35 @@
       <br>
       <q-separator />
       Hint: current color schema is on the Palette tab
+      <div class="row justify-center">
+        <q-btn
+          label="Unset"
+          dense
+          class="q-ma-md"
+          @click="onUnset"
+        >
+          <q-tooltip>Set the style to "unset"</q-tooltip>
+        </q-btn>
+        <q-btn
+          label="Revert change"
+          dense
+          :disabled="itemStyleOrig === itemStyle"
+          class="q-ma-md"
+          @click="onRevert"
+        />
+      </div>
+      <q-separator />
+      <div class="full-width q-mt-sm">
+        <div class="text-title2">{{ itemName }}</div>
+        <q-markdown :src="hint" />
+      </div>
     </div>
   </q-dialog>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'ThemeEditor',
   props: {
@@ -63,7 +87,10 @@ export default {
       openEditor: false,
       editorSize: void 0,
       editorType: void 0,
-      editorColor: void 0
+      editorColor: void 0,
+      itemNameOrig: '',
+      itemStyleOrig: '',
+      styleCopy: {}
     }
   },
 
@@ -73,6 +100,17 @@ export default {
   },
 
   computed: {
+    ...mapGetters({
+      hints: 'ThemeBuilder/hints'
+    }),
+
+    hint () {
+      if (this.itemName) {
+        return this.hints[this.itemName]
+      }
+      return ''
+    },
+
     classes () {
       return {
         'column items-center q-pa-md': true,
@@ -80,18 +118,33 @@ export default {
         'bg-grey-9': this.$q.dark.isActive === true
       }
     },
+
     currentStyle () {
-      return (this.editorColor && this.editorColor) + (this.editorSize && ' ' + this.editorSize + 'px') + (this.editorType && ' ' + this.editorType)
+      let style = ''
+      if (this.editorColor !== void 0) style += this.editorColor
+      if (this.editorSize !== void 0) style += ' ' + this.editorSize + 'px'
+      if (this.editorType !== void 0) style += ' ' + this.editorType
+      return style
     },
-    isBorder () {
+
+    hasBorder () {
       return this.currentBorderType !== void 0
     },
-    isColor () {
+
+    hasColor () {
       return this.currentColor !== void 0
     },
-    isValue () {
-      return this.isBorder !== true && this.isColor !== true
+
+    hasUnset () {
+      return this.itemStyle === 'unset'
     },
+
+    isValue () {
+      return this.hasBorder !== true &&
+        this.hasColor !== true &&
+        this.hasUnset !== true
+    },
+
     currentColor () {
       let color
       if (this.itemStyle) {
@@ -105,6 +158,7 @@ export default {
 
       return color
     },
+
     currentBorderType () {
       let type
       if (this.itemStyle) {
@@ -117,6 +171,7 @@ export default {
       }
       return type
     },
+
     currentBorderSize () {
       let size
       if (this.itemStyle) {
@@ -129,31 +184,40 @@ export default {
       }
       return size
     },
+
+    // creates a palette of unique colors for user selection
+    // note: all colors need to be lowercase to prevent dupes
     colorPalette () {
       let colors = new Set()
       Object.keys(this.styleObject).forEach(name => {
         const value = this.styleObject[name]
         // has color
-        if (value !== 'unset') {
-          if (value.match(/^(#|(rgb|hsl)a?\()/) || name.indexOf('color') > -1 || name.indexOf('background') > -1 || name.indexOf('border') > -1) {
-            if (name.indexOf('border') > -1) {
-              const parts = value.split(' ')
-              parts.forEach(part => {
-                if (part.match(/^(#|(rgb|hsl)a?\()/)) {
-                  colors.add(part.toLowerCase())
-                }
-              })
-            }
-            else {
-              colors.add(value.toLowerCase())
-            }
+        if (
+          value !== 'unset' && (
+            value.match(/^(#|(rgb|hsl)a?\()/) ||
+            name.indexOf('color') > -1 ||
+            name.indexOf('background') > -1 ||
+            name.indexOf('border') > -1)
+        ) {
+          if (name.indexOf('border') > -1) {
+            const parts = value.split(' ')
+            parts.forEach(part => {
+              if (part.match(/^(#|(rgb|hsl)a?\()/)) {
+                colors.add(part.toLowerCase())
+              }
+            })
+          }
+          else {
+            colors.add(value.toLowerCase())
           }
         }
       })
 
+      // create normal js array from Set
       colors = Array.from(colors)
+
+      // reverse sort (looks better visually)
       colors.reverse()
-      console.log(colors)
       return colors
     }
   },
@@ -182,8 +246,22 @@ export default {
       this.editorSize = this.currentBorderSize
       this.editorType = this.currentBorderType
       this.editorColor = this.currentColor
+      if (this.itemNameOrig !== this.itemName) {
+        this.itemNameOrig = this.itemName
+        this.itemStyleOrig = this.itemStyle
+        // it's important we do this so that ThemeEditor
+        // isn't always generating a color palette each
+        // time something changes. Only when the name changes
+        this.styleCopy = JSON.parse(JSON.stringify(this.styleObject))
+      }
     },
     onValueChanged () {
+    },
+    onRevert () {
+      this.$emit('style', this.itemStyleOrig)
+    },
+    onUnset () {
+      //
     }
   }
 }
@@ -192,6 +270,12 @@ export default {
 <style lang="sass" scoped>
 .text-title
   font-size: 0.875rem
+  font-weight: 600
+  line-height: 1.375rem
+  letter-spacing: 0.00714em
+
+.text-title2
+  font-size: 0.775rem
   font-weight: 600
   line-height: 1.375rem
   letter-spacing: 0.00714em
