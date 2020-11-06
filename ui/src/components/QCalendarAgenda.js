@@ -98,24 +98,7 @@ export default {
       const width = this.computedWidth
       let dragOver
 
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-      //   if (day.past === true) {
-      //     color = 'colorHeaderPast'
-      //     backgroundColor = 'backgroundHeaderPast'
-      //   } else if (day.current === true) {
-      //     color = 'colorHeaderCurrent'
-      //     backgroundColor = 'backgroundHeaderCurrent'
-      //   } else if (day.future === true) {
-      //     color = 'colorHeaderFuture'
-      //     backgroundColor = 'backgroundHeaderFuture'
-      //   }
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
-
-      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
+      return h('div', {
         key: (this.columnOptionsId !== undefined ? column[this.columnOptionsId] : undefined),
         staticClass: 'q-calendar-daily__head-day',
         class: {
@@ -147,7 +130,7 @@ export default {
           }
         })
         // ---
-      }), [
+      }, [
         this.noDefaultHeaderText !== true && this.__renderHeadColumn(h, column),
         slot && slot(scope)
       ])
@@ -157,26 +140,9 @@ export default {
       const slot = this.$scopedSlots['column-header-label']
       const scope = column
 
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-      //   if (day.past === true) {
-      //     color = 'colorDayLabelPast'
-      //     backgroundColor = 'backgroundDayLabelPast'
-      //   } else if (day.current === true) {
-      //     color = 'colorDayLabelCurrent'
-      //     backgroundColor = 'backgroundDayLabelCurrent'
-      //   } else if (day.future === true) {
-      //     color = 'colorDayLabelFuture'
-      //     backgroundColor = 'backgroundDayLabelFuture'
-      //   }
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
-
-      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
+      return h('div', {
         staticClass: 'ellipsis q-calendar-daily__head-weekday'
-      }), [
+      }, [
         slot && slot(scope),
         !slot && this.__renderHeadColumnLabel(h, (this.columnOptionsLabel !== undefined ? column[this.columnOptionsLabel] : column.label))
       ])
@@ -211,24 +177,7 @@ export default {
       const width = this.computedWidth
       let dragOver
 
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-      //   if (day.past === true) {
-      //     color = 'colorBodyPast'
-      //     backgroundColor = 'backgroundBodyPast'
-      //   } else if (day.current === true) {
-      //     color = 'colorBodyCurrent'
-      //     backgroundColor = 'backgroundBodyCurrent'
-      //   } else if (day.future === true) {
-      //     color = 'colorBodyFuture'
-      //     backgroundColor = 'backgroundBodyFuture'
-      //   }
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
-
-      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
+      return h('div', {
         key: (this.columnOptionsId !== undefined ? column[this.columnOptionsId] : undefined),
         staticClass: 'q-calendar-daily__day',
         class: {
@@ -260,7 +209,7 @@ export default {
           }
         })
         // ---
-      }), [
+      }, [
         slot && slot(scope)
       ])
     },
@@ -271,26 +220,7 @@ export default {
       const width = this.computedWidth
       let dragOver
 
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-        if (day.past === true) {
-          color = 'colorBodyPast'
-          backgroundColor = 'backgroundBodyPast'
-        }
-        else if (day.current === true) {
-          color = 'colorBodyCurrent'
-          backgroundColor = 'backgroundBodyCurrent'
-        }
-        else if (day.future === true) {
-          color = 'colorBodyFuture'
-          backgroundColor = 'backgroundBodyFuture'
-        }
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
-
-      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
+      return h('div', {
         key: day.date + (idx !== undefined ? ':' + idx : ''),
         staticClass: 'q-calendar-daily__day',
         class: {
@@ -324,7 +254,7 @@ export default {
           }
         })
         // ---
-      }), [
+      }, [
         slot && slot(scope)
       ])
     }

@@ -179,7 +179,7 @@
     },
     "color": {
       "type": "String",
-      "removed": "v3.0.0",
+      "removedIn": "v3.0.0",
       "category": "style",
       "desc": "This is the color used current day (now) highlighting. It can be from the from the [Quasar Color Palette](https://quasar.dev/style/color-palette), CSS named color or a CSS color (#, rgb, rgba, hls, etc)",
       "applicable": [
@@ -193,17 +193,19 @@
       ]
     },
     "enable-theme": {
+      "removedIn": "v3.0.0",
       "type": "Boolean",
       "category": "style",
-      "desc": "Turns on theme support",
+      "desc": "Use css vars to control your themes",
       "applicable": [
         "All"
       ]
     },
     "theme": {
+      "removedIn": "v3.0.0",
       "type": "Object",
       "category": "style",
-      "desc": "Object containing keys and values that overrides the calendar's color properties. See online demo for format of a theme",
+      "desc": "Use css vars to control your themes",
       "applicable": [
         "All"
       ],
@@ -908,8 +910,8 @@
       "addedIn": "v3.0.0",
       "type": "Boolean",
       "category": "style",
-      "description": "Changes the style `selected-start-end-dates` selection when in `mini-mode`. Typically, set this to `true` on `mousedown` and `false` on `mouseup`",
-      "applcable": [
+      "desc": "Changes the style `selected-start-end-dates` selection when in `mini-mode`. Typically, set this to `true` on `mousedown` and `false` on `mouseup`",
+      "applicable": [
         "month (mini-mode)"
       ]
     },

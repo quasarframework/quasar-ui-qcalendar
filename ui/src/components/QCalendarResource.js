@@ -72,15 +72,6 @@ export default {
     },
 
     __renderHeadInterval (h, interval, index) {
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-        color = 'colorIntervalBody'
-        backgroundColor = 'backgroundIntervalBody'
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
-
       const width = convertToUnit(this.parsedIntervalWidth)
       const height = convertToUnit(this.parsedIntervalHeight)
       const slot = this.$scopedSlots['interval-label']
@@ -93,7 +84,7 @@ export default {
       }
       let dragOver
 
-      return slot ? slot(scope) : h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
+      return slot ? slot(scope) : h('div', {
         staticClass: 'q-calendar-resource__head-label',
         class: {
           'q-calendar-resource__head-label--droppable': dragOver
@@ -125,7 +116,7 @@ export default {
           }
         })
         // ---
-      }), label)
+      }, label)
     },
 
     __renderBody (h) {
@@ -159,14 +150,6 @@ export default {
       const width = convertToUnit(this.parsedResourceWidth)
       const height = convertToUnit(this.parsedIntervalHeight)
 
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-        color = 'colorResourceText'
-        backgroundColor = 'backgroundResourceText'
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
       const scope = {
         timestamp: this.days[0],
         resources: this.resources,
@@ -174,7 +157,7 @@ export default {
       }
       const intervals = this.intervals
 
-      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
+      return h('div', {
         staticClass: 'q-calendar-resource__head-resource' + (this.sticky === true ? ' q-calendar__sticky' : ''),
         style: {
           maxWidth: width,
@@ -184,7 +167,7 @@ export default {
         on: this.getDefaultMouseEventHandlers(':resource:header2', event => {
           return { scope, event }
         })
-      }), [
+      }, [
         slot && slot({ date: this.value, intervals })
       ])
     },
@@ -213,21 +196,11 @@ export default {
     },
 
     __renderBodyResources (h) {
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-        color = 'colorResourceBody'
-        backgroundColor = 'backgroundResourceBody'
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
-
       const data = {
         staticClass: 'q-calendar-resource__resources-body'
       }
 
-      // return h('div', updateColors(colors.get(color), colors.get(backgroundColor), data), this.__renderResourceLabels(h))
-      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), data), this.__renderResources(h))
+      return h('div', data, this.__renderResources(h))
     },
 
     __renderResources (h, resources = undefined, indentLevel = 0) {
@@ -264,16 +237,7 @@ export default {
       const width = convertToUnit(this.parsedResourceWidth)
       const height = resource.height !== void 0 ? convertToUnit(resource.height) : convertToUnit(this.parsedResourceHeight)
 
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-        color = 'colorResourceText'
-        backgroundColor = 'backgroundResourceText'
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
-
-      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
+      return h('div', {
         key: resource[this.resourceKey] + '-' + idx,
         staticClass: 'q-calendar-resource__resource' + (this.sticky === true ? ' q-calendar__sticky' : ''),
         style: {
@@ -291,7 +255,7 @@ export default {
           }
         })
         // ---
-      }), [
+      }, [
         slot ? slot(scope) : this.__renderResourceText(h, resource, idx, indentLevel)
       ])
     },

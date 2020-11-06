@@ -169,21 +169,12 @@ export default {
         miniMode: this.isMiniMode
       }
 
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-        color = 'colorHeader'
-        backgroundColor = 'backgroundHeader'
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
-
-      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
+      return h('div', {
         staticClass: 'q-calendar-weekly__head-workweek',
         on: this.getDefaultMouseEventHandlers(':workweek:header2', event => {
           return { scope, event }
         })
-      }), (slot ? slot({ scope }) : '#'))
+      }, (slot ? slot({ scope }) : '#'))
     },
 
     __renderHeadDays (h) {
@@ -200,19 +191,11 @@ export default {
     __renderHeadDay (h, day, index) {
       const width = this.cellWidth + '%'
       const headDaySlot = this.$scopedSlots['head-day']
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-        color = 'colorHeader'
-        backgroundColor = 'backgroundHeader'
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
       const disabled = (this.disabledWeekdays ? this.disabledWeekdays.includes(day.weekday) : false)
       const days = this.days.filter(day2 => day2.weekday === day.weekday)
       const scope = { timestamp: day, days, index, miniMode: this.isMiniMode }
 
-      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
+      return h('div', {
         key: day.date,
         staticClass: 'q-calendar-weekly__head-weekday' + (disabled === true ? ' q-disabled-day' : ''),
         style: {
@@ -222,7 +205,7 @@ export default {
         on: this.getDefaultMouseEventHandlers(':day:header2', event => {
           return { scope, event }
         })
-      }), [
+      }, [
         headDaySlot === undefined && this.__renderHeadDayLabel(h, day, this.shortWeekdayLabel || this.isMiniMode),
         headDaySlot !== undefined && headDaySlot(scope)
       ])
@@ -279,26 +262,8 @@ export default {
       const { timestamp } = this.isCurrentWeek(week)
       const workweekLabel = Number(day.workweek).toLocaleString(this.locale)
       const scope = { workweekLabel, week, miniMode: this.isMiniMode }
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-        if ((timestamp && timestamp.current === true) || day.current === true) {
-          color = 'colorWorkWeekCurrent'
-          backgroundColor = 'backgroundWorkWeekCurrent'
-        }
-        else if ((timestamp && timestamp.past === true) || day.past === true) {
-          color = 'colorWorkWeekPast'
-          backgroundColor = 'backgroundWorkWeekPast'
-        }
-        else if ((timestamp && timestamp.future === true) || day.future === true) {
-          color = 'colorWorkWeekFuture'
-          backgroundColor = 'backgroundWorkWeekFuture'
-        }
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
 
-      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
+      return h('div', {
         key: day.workweek,
         staticClass: 'q-calendar-weekly__workweek',
         class: this.getRelativeClasses(timestamp !== false ? timestamp : day, false),
@@ -307,7 +272,7 @@ export default {
           return { scope, event }
         })
         // ---
-      }), slot ? slot(scope) : workweekLabel)
+      }, slot ? slot(scope) : workweekLabel)
     },
 
     __renderDay (h, day) {
@@ -319,34 +284,10 @@ export default {
       const hasMonth = (outside === false && this.days.find(d => d.month === day.month).day === day.day && this.showMonthLabel === true)
 
       let dragOver
-
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-        if (outside === true) {
-          color = 'colorBodyOutside'
-          backgroundColor = 'backgroundBodyOutside'
-        }
-        else if (day.past === true) {
-          color = 'colorBodyPast'
-          backgroundColor = 'backgroundBodyPast'
-        }
-        else if (day.current === true) {
-          color = 'colorBodyCurrent'
-          backgroundColor = 'backgroundBodyCurrent'
-        }
-        else if (day.future === true) {
-          color = 'colorBodyFuture'
-          backgroundColor = 'backgroundBodyFuture'
-        }
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
-
       const style = Object.assign({ ...this.styles }, styler(day))
       const dayClass = typeof this.dayClass === 'function' ? this.dayClass(day) : null
 
-      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
+      return h('div', {
         key: day.date,
         staticClass: 'q-calendar-weekly__day',
         class: {
@@ -373,7 +314,7 @@ export default {
           return { scope, event }
         })
         // ---
-      }), [
+      }, [
         this.__renderDayLabel(h, day),
         this.isMiniMode !== true && this.showDayOfYearLabel && !hasMonth ? this.__renderDayOfYearLabel(h, day) : '',
         this.isMiniMode !== true && hasMonth ? this.__renderDayMonth(h, day) : '',
@@ -403,34 +344,9 @@ export default {
       )
 
       const activeDate = this.noActiveDate !== true && this.value === day.date
-
       const slotData = { dayLabel, timestamp: day, outside, activeDate, selectedDate, miniMode: this.isMiniMode }
 
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-
-      if (this.enableTheme === true) {
-        if (outside === true) {
-          color = 'colorDayLabelOutside'
-          backgroundColor = 'backgroundDayLabelOutside'
-        }
-        else if (day.past === true) {
-          color = 'colorDayLabelPast'
-          backgroundColor = 'backgroundDayLabelPast'
-        }
-        else if (day.current === true) {
-          color = 'colorDayLabelCurrent'
-          backgroundColor = 'backgroundDayLabelCurrent'
-        }
-        else if (day.future === true) {
-          color = 'colorDayLabelFuture'
-          backgroundColor = 'backgroundDayLabelFuture'
-        }
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
-
-      return dayBtnSlot ? dayBtnSlot(slotData) : h(QBtn, updateColors(colors.get(color), colors.get(backgroundColor), {
+      return dayBtnSlot ? dayBtnSlot(slotData) : h(QBtn, {
         staticClass: 'q-calendar-weekly__day-label',
         props: {
           size: this.isMiniMode ? 'sm' : this.monthLabelSize,
@@ -460,7 +376,7 @@ export default {
             // ---
           })
         }
-      }), [
+      }, [
         dayLabelSlot ? dayLabelSlot(slotData) : dayLabel
       ])
     },

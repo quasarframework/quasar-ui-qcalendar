@@ -644,9 +644,7 @@ export default {
       intervalHeight: 'calendar/intervalHeight',
       resourceHeight: 'calendar/resourceHeight',
       resourceWidth: 'calendar/resourceWidth',
-      dayHeight: 'calendar/dayHeight',
-      enableTheme: 'calendar/enableTheme',
-      theme: 'calendar/theme'
+      dayHeight: 'calendar/dayHeight'
     }),
     intervalStart () {
       return this.intervalRange.min * (1 / this.intervalRangeStep)
