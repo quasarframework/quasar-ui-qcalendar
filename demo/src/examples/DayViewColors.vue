@@ -19,7 +19,6 @@
       :interval-minutes="15"
       :interval-count="96"
       locale="en-us"
-      enable-theme
       :style="theme"
       style="height: 400px;"
     />
