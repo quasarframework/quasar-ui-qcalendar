@@ -44,21 +44,31 @@
         left: 0
         margin: auto
 
-      // &.q-outside
-      //   color: var(--calendar-outside-color) !important
-      //   background: var(--calendar-outside-background)
+      &.q-active-date
+        color: var(--calendar-active-date-color) !important
 
-      //   .q-calendar-weekly__day-label .q-btn__wrapper:before
-      //     color: var(--calendar-outside-label-color)
-      //     background: var(--calendar-outside-label-background)
+        .q-btn__wrapper:before
+          background: var(--calendar-active-date-background)
+
+      &.q-current-day
+        .q-btn__wrapper:before
+          border: var(--calendar-border-current)
 
       &.q-selected
-        color: var(--calendar-mini-selected-color) !important
-        background: var(--calendar-mini-selected-background) !important
+        color: var(--calendar-mini-selected-color)
+        background: var(--calendar-mini-selected-background)
 
         .q-calendar-weekly__day-label .q-btn__wrapper:before
           color: var(--calendar-mini-selected-label-color) !important
           background: var(--calendar-mini-selected-label-background) !important
+
+      &.q-disabled-day
+        color: var(--calendar-disabled-date-color)
+        background: var(--calendar-disabled-date-background) !important
+
+      &.q-outside
+        color: var(--calendar-outside-color)
+        background: var(--calendar-outside-background)
 
       &.q-range-first,
       &.q-range-last
@@ -197,22 +207,31 @@
         color: var(--calendar-color-dark)
         background: var(--calendar-background-dark)
 
+        &.q-active-date
+          color: var(--calendar-active-date-color-dark) !important
+
+          .q-btn__wrapper:before
+            background: var(--calendar-active-date-background-dark)
+
+        &.q-current-day
+          .q-btn__wrapper:before
+            border: var(--calendar-border-current-dark)
+
         &.q-selected
-          color: var(--calendar-selected-color-dark)
-          background: var(--calendar-selected-background-dark)
+          color: var(--calendar-mini-selected-color-dark)
+          background: var(--calendar-mini-selected-background-dark)
 
-          .q-calendar-weekly__day-label .q-btn__wrapper:before
-            color: var(--calendar-mini-selected-label-color-dark) !important
-            background: var(--calendar-mini-selected-label-background-dark) !important
+          .q-current-day
+            .q-btn__wrapper:before
+              border: var(--calendar-border-current)
 
-        // &.q-range-first,
-        // &.q-range-last
-        //   color: var(--calendar-mini-range-firstlast-color-dark)
-        //   background: var(--calendar-mini-range-firstlast-background-dark) !important
+        &.q-disabled-day
+          color: var(--calendar-disabled-date-color-dark)
+          background: var(--calendar-disabled-date-background-dark) !important
 
-        //   .q-calendar-weekly__day-label .q-btn__wrapper:before
-        //     color: var(--calendar-mini-range-firstlast-label-color-dark) !important
-        //     background: var(--calendar-mini-range-firstlast-label-background-dark) !important
+        &.q-outside
+          color: var(--calendar-outside-color-dark)
+          background: var(--calendar-outside-background-dark)
 
         &.q-range
           color: var(--calendar-mini-range-color-dark)
@@ -234,64 +253,6 @@
               background: var(--calendar-background-dark)
               border-top: var(--calendar-mini-range-connector-hover-border-dark)
               border-bottom: var(--calendar-mini-range-connector-hover-border-dark)
-
-        // &.q-range-first,
-        // &.q-range-last
-        //   .q-calendar-weekly__day-label .q-btn__wrapper:before
-        //     color: var(--calendar-mini-range-firstlast-label-color-dark) !important
-        //     background: var(--calendar-mini-range-firstlast-label-background-dark) !important
-
-        // &.q-range-first
-        //   // &:before
-        //   //   width: 50%
-        //   //   left: 50%
-
-        //   &.q-range-hover
-        //     // &:before
-        //     //   width: 50%
-        //     //   left: 50%
-
-        // &.q-range-last
-        //   // &:before
-        //   //   width: 50%
-        //   //   right: auto
-
-        //   // when first and last are same day
-        //   &.q-range-first
-        //     // &:before
-        //     //   width: 0
-
-        //   &.q-range-hover
-        //     // &:before
-        //     //   width: 50%
-        //     //   right: auto
-
-        //     // when first and last are same day
-        //     &.q-range-first
-        //       &.q-range-hover
-        //         &:before
-        //           // width: 0
-
-        &.q-outside
-          color: var(--calendar-outside-color-dark) !important
-          background: var(--calendar-outside-background-dark)
-
-          .q-calendar-weekly__day-label .q-btn__wrapper:before
-            color: var(--calendar-outside-label-color-dark)
-            background: var(--calendar-outside-label-background-dark)
-
-        &.q-current-day
-          color: var(--calendar-current-color-dark) !important
-          background: var(--calendar-current-background-dark) !important
-
-          .q-calendar-weekly__day-label
-            color: var(--calendar-current-label-color-dark)
-            background: var(--calendar-current-label-background-dark)
-
-            .q-btn__wrapper:before
-              border-color: var(--calendar-current-color-dark)
-              color: var(--calendar-current-color-dark)
-              background: var(--calendar-current-background-dark)
 
         &.q-calendar-weekly__day--droppable
           border: var(--calendar-border-droppable-dark) !important
