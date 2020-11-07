@@ -143,8 +143,11 @@ Below, the slot receives the `resource` to be displayed. In this case, an avatar
     </q-markdown>
     <example-viewer title="Slot (scheduler-resource)" file="SchedulerViewSlotResource" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
-    <example-title title="Theme" />
-    <example-viewer title="Theme" file="SchedulerViewTheme" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-title title="Customization" />
+    <q-markdown>
+You can create your own themes by overriding various css vars. You do not have to override all of them (as in the next example), just the ones you need.
+    </q-markdown>
+    <example-viewer title="Colors" file="SchedulerViewColors" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Locale Support" />
     <example-viewer title="Locale" file="SchedulerViewLocale" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
@@ -209,8 +212,8 @@ export default {
     this.addToToc('Slot (scheduler-resource-day)', 2)
     this.addToToc('Slot (scheduler-resource)', 2)
 
-    this.addToToc('Theme')
-    this.addToToc('Theme', 2)
+    this.addToToc('Customization')
+    this.addToToc('Colors', 2)
 
     this.addToToc('Locale Support')
     this.addToToc('Locale', 2)

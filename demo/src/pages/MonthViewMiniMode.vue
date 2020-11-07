@@ -172,11 +172,11 @@ For slots that return `day`, `interval` or `timestamp`, it looks like this:
     </q-markdown>
     <example-viewer title="Slots (day)" file="MiniModeSlots" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
-    <example-title title="Themes" />
+    <example-title title="Customization" />
     <q-markdown>
-Look at the source below to see how you can create your own themes.
+You can create your own themes by overriding various css vars. You do not have to override all of them (as in the next example), just the ones you need.
     </q-markdown>
-    <example-viewer title="Theme" file="MiniModeTheme" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Colors" file="MiniModeColors" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Locale Support" />
     <example-viewer title="Locale" file="MiniModeLocale" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
@@ -254,8 +254,8 @@ export default {
     this.addToToc('Slots')
     this.addToToc('Slots (day)', 2)
 
-    this.addToToc('Themes')
-    this.addToToc('Theme', 2)
+    this.addToToc('Customization')
+    this.addToToc('Colors', 2)
 
     this.addToToc('Locale Support')
     this.addToToc('Locale', 2)

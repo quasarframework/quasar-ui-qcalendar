@@ -114,8 +114,11 @@ This events example is using the code for the `Column Options` example.
     </q-markdown>
     <example-viewer title="Events" file="AgendaViewWeekEvents" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
-    <example-title title="Themes" />
-    <example-viewer title="Theme" file="AgendaViewWeekTheme" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-title title="Customization" />
+    <q-markdown>
+You can create your own themes by overriding various css vars. You do not have to override all of them (as in the next example), just the ones you need.
+    </q-markdown>
+    <example-viewer title="Colors" file="AgendaViewWeekColors" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Locale Support" />
     <example-viewer title="Locale" file="AgendaViewWeekLocale" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
@@ -172,8 +175,8 @@ export default {
     this.addToToc('Events')
     this.addToToc('Events', 2)
 
-    this.addToToc('Themes')
-    this.addToToc('Theme', 2)
+    this.addToToc('Customization')
+    this.addToToc('Colors', 2)
 
     this.addToToc('Locale Support')
     this.addToToc('Locale', 2)

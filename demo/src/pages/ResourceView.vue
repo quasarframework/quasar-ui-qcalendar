@@ -145,8 +145,11 @@ Below, the slot receives the `resource` to be displayed. In this case, an avatar
     </q-markdown>
     <example-viewer title="resource-label Slot" file="ResourceViewSlotResourceLabel" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
-    <example-title title="Themes" />
-    <example-viewer title="Theme" file="ResourceViewTheme" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-title title="Customization" />
+    <q-markdown>
+You can create your own themes by overriding various css vars. You do not have to override all of them (as in the next example), just the ones you need.
+    </q-markdown>
+    <example-viewer title="Colors" file="ResourceViewColors" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Locale Support" />
     <example-viewer title="Locale" file="ResourceViewLocale" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
@@ -213,8 +216,8 @@ export default {
     this.addToToc('resource-header Slot', 2)
     this.addToToc('resource-label Slot', 2)
 
-    this.addToToc('Themes')
-    this.addToToc('Theme', 2)
+    this.addToToc('Customization')
+    this.addToToc('Colors', 2)
 
     this.addToToc('Locale Support')
     this.addToToc('Locale', 2)

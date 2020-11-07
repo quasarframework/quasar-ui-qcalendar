@@ -28,11 +28,6 @@ export default {
     modifiedStyle (scope) {
       if (scope.disabled === true) {
         return {
-          '--calendar-outside-label-background': 'auto',
-          '--calendar-current-label-background': 'auto',
-          '--calendar-outside-label-background-dark': 'auto',
-          '--calendar-current-label-background-dark': 'auto',
-          '--calendar-border-color-dark': (this.$q.dark.isActive ? 'black' : '#ffcb9c') + ' !important',
           cursor: 'not-allowed'
         }
       }

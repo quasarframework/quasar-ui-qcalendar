@@ -161,8 +161,11 @@ Scroll down if the current time is later for your location to see the example.
     </q-markdown>
     <example-viewer title="day-container: Show current time" file="DayViewCurrentTime" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
-    <example-title title="Themes" />
-    <example-viewer title="Theme" file="DayViewTheme" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-title title="Customization" />
+    <q-markdown>
+You can create your own themes by overriding various css vars. You do not have to override all of them (as in the next example), just the ones you need.
+    </q-markdown>
+    <example-viewer title="Colors" file="DayViewColors" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Locale Support" />
     <example-viewer title="Locale" file="DayViewLocale" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
@@ -231,8 +234,8 @@ export default {
     this.addToToc('head-day', 2)
     this.addToToc('day-container: Show current time', 2)
 
-    this.addToToc('Themes')
-    this.addToToc('Theme', 2)
+    this.addToToc('Customization')
+    this.addToToc('Colors', 2)
 
     this.addToToc('Locale Support')
     this.addToToc('Locale', 2)
