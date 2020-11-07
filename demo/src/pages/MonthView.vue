@@ -171,7 +171,7 @@ When adding events to the `#week` slot, use the css class `q-row-event` to have 
 
     <example-title title="Customization" />
     <q-markdown>
-You can create your own themes by overriding various css vars. You do not have to override all of them (as in the next example), just the ones you need.
+You can create your own themes by overriding various css vars. You do not have to override all of them (as in the next example), just the ones you need. For building your own themes, head on over to the [Theme Builder](../../quasar-ui-qcalendar/theme-builder)
     </q-markdown>
     <example-viewer title="Colors" file="MonthViewColors" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 

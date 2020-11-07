@@ -14,6 +14,21 @@ QCalendar is a [Quasar](https://quasar.dev) component. It is a powerful calendar
 
 ## Important Release Notes
 
+**v3.0.0**: As QCalendar strives to be the most exstensible calendar available, to be consistent with this ideology, we had to make a LOT of changes.
+
+Among other updates, several things have become "native" for QCalendar:
+1. The largest overhaul was introducing css vars to allow users the ability to customize QCalendar
+2. QCalendar was compared to dozens of other calendars and the look was optimized to be more modern
+3. The original theming has been removed. The css vars are 25% faster than the previous theming code
+4. You no longer need to provide a .q-active-date class. You can now change the active date colors via css vars
+5. You no longer need to hook into the styles properties (ie: interval-style) to change the way disabled days look. You can now change the disable date colors via css vars
+6. 'activeDate' is now included in a lot of the scoped slots and events
+7. On interval-based calendars, when using the property "interval-minutes", those parts of the calendar are now called "interval sections" and can be changed via css vars. The default is to now have a "dashed" look, while at the main interval time, the lines are solid. Again, all changeable via css vars
+
+Also, check out the new [Theme Builder](https://quasarframework.github.io/quasar-ui-qcalendar/theme-builder) in the docs.
+
+You can find out more information [here](https://github.com/quasarframework/quasar-ui-qcalendar/releases/tag/v3.0.0).
+
 **v2.4.0**: New slots and events added. Current event system is deprecated, but still available until the next major version is released. To see the deprecated events in the **QCalendar API** (at bottom of the page [here](https://quasarframework.github.io/quasar-ui-qcalendar/docs)), select the hamburger menu, then select **Show deprecated**. You can find out more information [here](https://github.com/quasarframework/quasar-ui-qcalendar/releases/tag/v2.4.0).
 
 
