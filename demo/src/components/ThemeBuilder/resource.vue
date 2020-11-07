@@ -4,11 +4,9 @@
       <div class="row justify-evenly q-gutter-sm">
         <span>Note: setting any height to 0 will make it 'auto'</span>
       </div>
-      <div class="row justify-evenly q-gutter-sm">
-        <div>Resource Width: </div><q-slider v-model="resourceWidth" label label-always :min="60" :max="200" class="col" />
-      </div>
-      <div class="row justify-evenly q-gutter-sm">
-        <div>Resource Height: </div> <q-slider v-model="resourceHeight" label label-always :min="0" :max="200" class="col" />
+      <div class="row justify-evenly q-gutter-sm full-width">
+        <div class="col-5"><div class="q-mb-md">Resource Width: </div><q-slider v-model="resourceWidth" label label-always :min="60" :max="200" class="col" /></div>
+        <div class="col-5"><div class="q-mb-md">Resource Height: </div> <q-slider v-model="resourceHeight" label label-always :min="0" :max="200" class="col" /></div>
       </div>
     </div>
     <q-calendar
