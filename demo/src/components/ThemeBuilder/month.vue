@@ -4,6 +4,7 @@
       <q-checkbox v-model="mobile" dense label="Use Touch (set if on mobile)" />
       <q-checkbox v-model="noActiveDate" dense label="No active date" />
       <q-checkbox v-model="disabledDays" dense label="Disabled weekends" />
+      <q-checkbox v-model="showWorkweeks" dense label="Show workweeks" />
         <div class="full-width text-caption">Selection Type</div>
         <q-radio
           v-model="selectionType"
@@ -35,6 +36,7 @@
         :selected-start-end-dates="startEndDates"
         :selected-dates="selectedDates"
         :disabled-weekdays="disabledWeekdays"
+        :show-work-weeks="showWorkweeks"
         @click:day2="onToggleDay"
         @click:date2="onToggleDate"
         @mousedown:day2="onMouseDownDay"
@@ -71,7 +73,8 @@ export default {
       mobile: false,
       noActiveDate: false,
       selectionType: 'off',
-      disabledDays: false
+      disabledDays: false,
+      showWorkweeks: false
     }
   },
 
