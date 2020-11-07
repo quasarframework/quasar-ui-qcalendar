@@ -65,27 +65,32 @@
           <q-btn dense no-caps label="Import Theme..." @click="importTheme" />
         </div>
         <q-list dense>
-          <q-item
-            v-for="(value, name) in style"
-            :key="name"
-            clickable
-            v-ripple
-            dense
-            :active="name === currentStyleName"
-            @click="editStyle(name, value)"
-          >
-            <q-item-section style="max-width: 24px">
-              <div v-if="showBox(name, value)" class="theme-builder-box" :style="getStyle(name, value)" />
-              <div v-else class="small-text">{{ value }}</div>
-            </q-item-section>
-            <q-item-section class="small-text">{{ name }}</q-item-section>
-          </q-item>
+          <template v-for="(value, name) in style">
+            <q-item
+              v-if="value !== 'unset'"
+              :key="name"
+              clickable
+              v-ripple
+              dense
+              :active="name === currentStyleName"
+              @click="editStyle(name, value)"
+            >
+              <q-item-section style="max-width: 24px">
+                <div v-if="showBox(name, value)" class="theme-builder-box" :style="getStyle(name, value)" />
+                <div v-else class="small-text">{{ value }}</div>
+              </q-item-section>
+              <q-item-section class="small-text">{{ name }}</q-item-section>
+            </q-item>
+          </template>
         </q-list>
       </q-scroll-area>
     </q-drawer>
 
     <q-page-container>
       <q-page>
+        <theme-importer
+          v-model="openThemeImporter"
+        />
         <theme-editor
           v-model="openThemeEditor"
           :item-name="currentName"
@@ -195,7 +200,8 @@ export default {
     ThemeBuilderMinimode: () => import('../components/ThemeBuilder/miniMode'),
     ThemeBuilderScheduler: () => import('../components/ThemeBuilder/scheduler'),
     ThemeBuilderResource: () => import('../components/ThemeBuilder/resource'),
-    ThemeBuilderAgenda: () => import('../components/ThemeBuilder/agenda')
+    ThemeBuilderAgenda: () => import('../components/ThemeBuilder/agenda'),
+    ThemeImporter: () => import('../components/ThemeImporter')
   },
   data () {
     return {
@@ -205,6 +211,7 @@ export default {
       calendar: 'day', // tab
       selectedDate: '',
       openThemeEditor: false,
+      openThemeImporter: false,
 
       // current css var name and attached style
       currentName: '',
@@ -222,6 +229,11 @@ export default {
       style: 'ThemeBuilder/style',
       currentStyleName: 'ThemeBuilder/currentStyleName'
     })
+  },
+  watch: {
+    openThemeImporter (val) {
+      console.log('openThemeImporter:', val)
+    }
   },
   methods: {
     ...mapMutations('ThemeBuilder', [
@@ -266,7 +278,7 @@ export default {
     },
 
     importTheme () {
-      //
+      this.openThemeImporter = true
     },
 
     editStyle (name, value) {

@@ -7,6 +7,7 @@
     <div :class="classes" style="max-width: 280px">
       <div class="text-title">Theme Styles Picker</div>
       <q-separator class="q-mb-md" />
+
       <div v-if="currentBorderSize !== void 0" class="full-width">
         <div class="full-width text-caption q-pb-lg">Border Width</div>
         <q-slider
@@ -19,6 +20,7 @@
           class="fill-width"
         />
       </div>
+
       <div v-if="currentBorderType !== void 0" class="full-width row justify-center">
         <div class="full-width text-caption">Border Style</div>
         <q-radio
@@ -34,26 +36,35 @@
           @input="val => { editorType = val }"
         />
       </div>
-      <q-color
-        v-if="currentColor !== void 0"
-        default-view="palette"
-        :value="editorColor"
-        :palette="colorPalette"
-        style="max-width: 200px"
-        @change="val => { editorColor = val }"
+
+      <div v-if="currentColor !== void 0" class="row justify-center">
+        <q-color
+          default-view="palette"
+          :value="editorColor"
+          :palette="colorPalette"
+          style="max-width: 200px"
+          @change="val => { editorColor = val }"
+        />
+        <br>
+        <q-separator class="q-mt-sm" />
+        Hint: current color schema is on the Palette tab
+      </div>
+
+      <q-input
+        v-if="isValue === true"
+        v-model="editorValue"
+        label="Edit css value"
       />
-      <br>
-      <q-separator />
-      Hint: current color schema is on the Palette tab
+
       <div class="row justify-center">
-        <q-btn
+        <!-- <q-btn
           label="Unset"
           dense
           class="q-ma-md"
           @click="onUnset"
         >
           <q-tooltip>Set the style to "unset"</q-tooltip>
-        </q-btn>
+        </q-btn> -->
         <q-btn
           label="Revert change"
           dense
@@ -89,6 +100,7 @@ export default {
       editorSize: void 0,
       editorType: void 0,
       editorColor: void 0,
+      editorValue: void 0,
       itemNameOrig: '',
       itemStyleOrig: '',
       styleCopy: {}
@@ -122,9 +134,12 @@ export default {
 
     currentStyle () {
       let style = ''
-      if (this.editorColor !== void 0) style += this.editorColor
-      if (this.editorSize !== void 0) style += ' ' + this.editorSize + 'px'
-      if (this.editorType !== void 0) style += ' ' + this.editorType
+      if (this.editorValue !== void 0) style += this.editorValue
+      else {
+        if (this.editorColor !== void 0) style += this.editorColor
+        if (this.editorSize !== void 0) style += ' ' + this.editorSize + 'px'
+        if (this.editorType !== void 0) style += ' ' + this.editorType
+      }
       return style
     },
 
@@ -175,7 +190,7 @@ export default {
 
     currentBorderSize () {
       let size
-      if (this.itemStyle) {
+      if (this.itemStyle && this.itemName && this.itemName.indexOf('border') > -1) {
         const parts = this.itemStyle.split(' ')
         parts.forEach(part => {
           if (!part.match(/^(#|(rgb|hsl)a?\()/) && part !== 'solid' && part !== 'dashed') {
@@ -186,12 +201,20 @@ export default {
       return size
     },
 
+    currentValue () {
+      let value
+      if (this.itemStyle && this.itemName && (this.itemName.indexOf('width') > -1 || this.itemName.indexOf('font') > -1)) {
+        value = this.itemStyle
+      }
+      return value
+    },
+
     // creates a palette of unique colors for user selection
     // note: all colors need to be lowercase to prevent dupes
     colorPalette () {
       let colors = new Set()
-      Object.keys(this.styleObject).forEach(name => {
-        const value = this.styleObject[name]
+      Object.keys(this.styleCopy).forEach(name => {
+        const value = this.styleCopy[name]
         // has color
         if (
           value !== 'unset' && (
@@ -247,6 +270,8 @@ export default {
       this.editorSize = this.currentBorderSize
       this.editorType = this.currentBorderType
       this.editorColor = this.currentColor
+      this.editorValue = this.currentValue
+
       if (this.itemNameOrig !== this.itemName) {
         this.itemNameOrig = this.itemName
         this.itemStyleOrig = this.itemStyle

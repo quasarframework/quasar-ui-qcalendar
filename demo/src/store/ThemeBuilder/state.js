@@ -83,7 +83,7 @@ export default function () {
 
       '--calendar-intervals-width': '56px',
       '--calendar-work-week-width': '30px',
-      '--calendar-mini-work-week-width': '30',
+      '--calendar-mini-work-week-width': '30px',
       '--calendar-work-week-font-size': '1.0em',
       '--calendar-head-font-weight': '600'
     },
@@ -167,9 +167,9 @@ export default function () {
       '--calendar-mini-range-firstlast-label-background': 'The label background color of the first and last selected days for `monthly mini-mode`',
       '--calendar-mini-range-firstlast-label-background-dark': '[DARK] The label background color of the first and last selected days for `monthly mini-mode`',
 
-      '--calendar-intervals-width': 'The intervals width',
-      '--calendar-work-week-width': 'The work week width',
-      '--calendar-mini-work-week-width': 'The work week width for `month mini-mode`',
+      '--calendar-intervals-width': 'The intervals width. Use only `px` unit',
+      '--calendar-work-week-width': 'The work week width. Use only `px` unit',
+      '--calendar-mini-work-week-width': 'The work week width for `month mini-mode`. Use only `px` unit',
       '--calendar-work-week-font-size': 'The work week font size',
       '--calendar-head-font-weight': 'The header font weight'
     }
