@@ -265,7 +265,6 @@
         transition-next="slide-left"
         :drag-over-func="onDragOver"
         :drop-func="onDrop"
-        :theme="theme"
         :view="calendarView"
         :weekdays="weekdays"
         :interval-minutes="60 * intervalRangeStep"
@@ -286,7 +285,6 @@
         :show-work-weeks="showWorkWeeks"
         :no-default-header-btn="noDefaultHeaderBtn"
         :no-default-header-text="noDefaultHeaderText"
-        :enable-theme="enableTheme === true"
         :resources="resources"
         @change="onChanged"
         @moved="onMoved"
@@ -1202,17 +1200,26 @@ export default {
 .calendar-container
   position: relative
 
-.calendar-container .q-calendar-daily__day-interval:hover
-  background-color: rgba(0,0,255,.1)
+  .q-calendar-daily__day-interval:hover
+    background: rgba(0,0,255,.1)
 
-.calendar-container .q-calendar-weekly__workweek:hover
-  background-color: rgba(0,0,255,.1)
+  .q-calendar-weekly__workweek:hover
+    background: rgba(0,0,255,.1)
 
-.calendar-container .q-calendar-weekly__day:hover
-  background-color: rgba(0,0,255,.1)
+  .q-calendar-weekly__day:hover
+    background: rgba(0,0,255,.1)
 
-.calendar-container .q-calendar-weekly__head-weekday:hover
-  background-color: rgba(0,0,255,.1)
+  .q-calendar-weekly__head-weekday:hover
+    background: rgba(0,0,255,.1)
+
+  .q-calendar-scheduler__day:hover
+    background: rgba(0,0,255,.1)
+
+  .q-calendar-resource__resource-interval:hover
+    background: rgba(0,0,255,.1)
+
+  .q-calendar-daily__day:hover
+    background: rgba(0,0,255,.1)
 
 .my-event
   width: 100%
