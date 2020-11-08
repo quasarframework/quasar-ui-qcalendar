@@ -132,6 +132,7 @@ export default {
     showDayOfYearLabel: Boolean,
     enableOutsideDays: Boolean,
     hideOutsideDays: Boolean,
+    hover: Boolean,
     selectedStartEndDates: {
       type: Array,
       default: () => [],

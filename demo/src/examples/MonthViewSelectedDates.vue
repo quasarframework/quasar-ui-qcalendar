@@ -1,11 +1,10 @@
 <template>
   <div>
-    <q-toolbar>
-      <q-btn stretch flat label="Prev" @click="calendarPrev" />
+    <div class="row justify-center items-center">
+      <q-btn flat label="Prev" @click="prev" />
       <q-separator vertical />
-      <q-btn stretch flat label="Next" @click="calendarNext" />
-      <q-space />
-    </q-toolbar>
+      <q-btn flat label="Next" @click="next" />
+    </div>
     <q-separator />
     <div style="overflow: hidden;">
       <q-calendar
@@ -14,6 +13,7 @@
         view="month"
         locale="en-us"
         animated
+        no-active-date
         transition-prev="slide-right"
         transition-next="slide-left"
         :selected-dates="selectedDates"
@@ -34,27 +34,28 @@ export default {
   },
 
   methods: {
-    calendarNext () {
+    next () {
       this.$refs.calendar.next()
     },
 
-    calendarPrev () {
+    prev () {
       this.$refs.calendar.prev()
     },
 
     onToggleDate ({ scope }) {
       if (scope !== undefined) {
-        this.toggleDate(scope.timestamp.date)
+        this.toggleDate(scope)
       }
     },
 
     onToggleDay ({ scope }) {
       if (scope !== undefined) {
-        this.toggleDate(scope.timestamp.date)
+        this.toggleDate(scope)
       }
     },
 
-    toggleDate (date) {
+    toggleDate (scope) {
+      const date = scope.timestamp.date
       if (this.selectedDates.includes(date)) {
         // remove the date
         for (let i = 0; i < this.selectedDates.length; ++i) {
@@ -65,15 +66,17 @@ export default {
         }
       }
       else {
-        // add the date
-        this.selectedDates.push(date)
+        // add the date if not outside
+        if (scope.outside !== true) {
+          this.selectedDates.push(date)
+        }
       }
     }
   },
   watch: {
     selectedDates (val) {
       /* eslint-disable-next-line */
-      console.log(val)
+      console.log('selected dates:', val)
     }
   }
 }

@@ -8,7 +8,7 @@
       style="height: 500px;"
     >
       <!-- eslint-disable vue/no-unused-vars -->
-      <template #scheduler-resources-header="days">
+      <template #scheduler-resources-header>
         <div class="full-height row justify-center items-center">
           <q-btn label="here" />
         </div>

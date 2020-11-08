@@ -12,10 +12,13 @@ Codepen uses the UMD version of QCalendar. As such, the examples below must be w
     <example-viewer title="First Day Monday" file="MonthViewMondayFirstDay" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="5 Day Work Week" file="MonthViewFiveDayWorkWeek" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Hide Header" file="MonthViewHideHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <q-markdown>
+The `now` property allows you to set "today's date" to a different date. This property is only available for month view.
+    </q-markdown>
     <example-viewer title="Now" file="MonthViewNow" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
-The `show-work-weeks` property is available only for month view.
+The `show-work-weeks` property is available only for month view. The current Work Week will be highlighted.
     </q-markdown>
     <example-viewer title="Work Weeks" file="MonthViewWorkWeekNumbers" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
@@ -36,15 +39,12 @@ The example below is setting the `day-height` to `100`, the default is `0`, whic
 
     <example-title title="Outside Days" />
     <q-markdown>
-Outside days, in month view, are those days before and after the currently displayed month. By default, these days are disable to avoid navigation issues when getting selected days from the User. Using the `enable-outside-days` property enables these days.
+Outside days, in month view, are those days before and after the currently displayed month. By default, these days are disabled to avoid navigation issues when getting selected days from the User. Using the `enable-outside-days` property enables these days.
     </q-markdown>
     <example-viewer title="Enable Outside Days" file="MonthViewEnableOutsideDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Hide Outside Days" file="MonthViewHideOutsideDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Disabled" />
-    <q-markdown>
-When the property `disabled-days` has an array of disabled days, you can hook into the `day-style` property to change the background color of the disabled day.
-    </q-markdown>
     <example-viewer title="Disabled Days" file="MonthViewDisabledDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
@@ -63,12 +63,12 @@ In this next example, the `disabled-weekdays` is set to disable the weekends.
 
     <example-title title="Selection" />
     <q-markdown>
-In the next example, click on dates to toggled selected on/off.
+In the next example, click on dates to toggled selected on/off. Care is taken to exclude `outside` dates (dates that fall outside the current month).
     </q-markdown>
     <example-viewer title="Selected Dates" file="MonthViewSelectedDates" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
-The example below shows how to use the QCalendar to create a multi-day selector. The critical aspect of this is the `selected-start-end-dates` property. This takes an array of two dates (the first should be less or equal to the last). This property really doesn't do much, except to keep the calendar reactive, so that the `day-style` property can be used to style the selected days.
+The example below shows how to use the QCalendar to create a multi-day selector. The critical aspect of this is the `selected-start-end-dates` property. This takes an array of two dates (the first should be less or equal to the last).
 
 For the example below, click a day, and while holding the mouse down, move to a different day. Keep in mind, this is just one way of handling multi-day selection. if you needed swipe navigation on a mobile, you could modify the code to have independent click on start and end days.
 
@@ -114,7 +114,7 @@ Do NOT combine suffixes. Only one suffix per event. A different suffix will give
 :::
 
 ::: warning
-The events `:day`, `:workweek` and `:date` still exist, but have been marked as deprecated starting with v2.4.0
+The events `:day` (now `:day:header2`), `:time`, `:interval` and `:date` have been removed in v3.0.0
 :::
 
 The example below is only showing `click` events as well as the `input` event.
@@ -169,8 +169,11 @@ When adding events to the `#week` slot, use the css class `q-row-event` to have 
     <example-viewer title="Slot (week)" file="MonthViewWeekSlot" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Slot (head-day)" file="MonthViewSlotHeadDay" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
-    <example-title title="Themes" />
-    <example-viewer title="Theme" file="MonthViewTheme" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-title title="Customization" />
+    <q-markdown>
+You can create your own themes by overriding various css vars. You do not have to override all of them (as in the next example), just the ones you need. For building your own themes, head on over to the [Theme Builder](../../quasar-ui-qcalendar/theme-builder)
+    </q-markdown>
+    <example-viewer title="Colors" file="MonthViewColors" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Locale Support" />
     <example-viewer title="Locale" file="MonthViewLocale" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
@@ -252,8 +255,8 @@ export default {
     this.addToToc('Slot (week)', 2)
     this.addToToc('Slot (head-day)', 2)
 
-    this.addToToc('Themes')
-    this.addToToc('Theme', 2)
+    this.addToToc('Customization')
+    this.addToToc('Colors', 2)
 
     this.addToToc('Locale Support')
     this.addToToc('Locale', 2)

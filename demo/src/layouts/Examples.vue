@@ -6,11 +6,10 @@
           flat
           dense
           round
+          icon="menu"
           @click="leftDrawerOpen = !leftDrawerOpen"
           aria-label="Menu"
-        >
-          <q-icon name="menu" />
-        </q-btn>
+        />
 
         <q-toolbar-title>
           QCalendar <span class="text-subtitle2">v{{ version }}</span>
@@ -149,12 +148,6 @@
                 <q-item-label>Planner</q-item-label>
               </q-item-section>
             </q-item>
-
-            <!-- <q-item clickable to="/examples/customization">
-              <q-item-section>
-                <q-item-label>Customization</q-item-label>
-              </q-item-section>
-            </q-item> -->
 
           </q-list>
         </q-expansion-item>

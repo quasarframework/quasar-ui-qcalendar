@@ -1,92 +1,3 @@
-@import './calendar-variables'
-
-.q-calendar
-  // min-width: 300px
-  overflow: hidden
-
-.q-calendar-weekly
-
-  .q-calendar-weekly__head-workweek
-    border-right: $calendar-border-color $calendar-border-width solid
-    border-bottom: $calendar-border-color $calendar-border-width solid
-    color: $calendar-text-color
-    font-weight: $calendar-workweek-font-weight
-    align-items: center
-
-  .q-calendar-weekly__head-weekday
-    border-right: $calendar-border-color $calendar-border-width solid
-    border-bottom: $calendar-border-color $calendar-border-width solid
-    color: $calendar-text-color
-    font-weight: $calendar-weekly-head-weekday-font-weight
-
-    &:last-child
-      border-right: none !important
-
-  .q-calendar-weekly__workweek
-    border-right: $calendar-border-color $calendar-border-width solid
-    font-weight: $calendar-workweek-font-weight
-    align-items: center
-    justify-content: center
-
-    &.q-past-day
-      color: $calendar-day-past-color
-
-    &.q-future-day
-      color: $calendar-day-future-color
-
-    &.q-current-day
-      color: $calendar-day-current-color
-
-  .q-calendar-weekly__week--wrapper
-    border-bottom: $calendar-border-color $calendar-border-width solid
-
-    &:last-child
-      border-bottom: none !important
-
-  .q-calendar-weekly__day
-    border-right: $calendar-border-color $calendar-border-width solid
-    color: $calendar-text-color
-
-    &:last-child
-      border-right: none !important
-
-    &.q-selected-day,
-    &.q-selected-date
-      background: lighten($calendar-primary-color, 45%) !important
-      color: $calendar-primary-color !important
-
-    &.q-outside
-      background: $calendar-outside-background-color
-      color: $calendar-outside-text-color
-
-      &.q-selected-day,
-      &.q-selected-date
-        color: lighten($calendar-primary-color, 30%) !important
-
-    &.q-future-day
-      color: $calendar-day-future-color
-
-    &.q-current-day
-
-      .q-calendar-weekly__day-label
-        font-weight: 400
-        color: $calendar-day-current-color
-
-        .q-btn__wrapper:before
-          border-width: $calendar-border-width
-
-      .q-calendar-weekly__day-month
-        color: currentColor
-
-      .q-calendar-weekly__day-month--day-of-year
-        color: currentColor
-
-    &.q-past-day
-      // color: $calendar-day-past-color
-
-.q-calendar-weekly__day--droppable
-    border-right: $calendar-primary-color $calendar-border-width dashed
-
 .q-calendar-weekly
   display: flex
   flex: 1
@@ -95,56 +6,70 @@
   width: 100%
 
   &__head
-    display: flex
-    flex-wrap: nowrap
-    user-select: none
-
-  &__head-workweek
-    display: flex
-    flex-wrap: nowrap
-    user-select: none
-    padding: 0 4px
-    min-width: $calendar-work-week-width
-    max-width: $calendar-work-week-width
-    font-size: $calendar-work-week-font-size
-    justify-content: center
-
-  &__head-weekday
-    display: flex
-    flex-wrap: nowrap
-    flex: 1
-    user-select: none
-    padding: 0 4px
-    font-size: 1rem
-    justify-content: center
-    min-width: 1.5em
-
-  &__week
-    // min-height: 6em
     position: relative
     display: flex
     flex-wrap: nowrap
-    flex: 10000 1 0%
-    min-height: 5em
-    max-width: 100%
+    flex: 1 0 0%
 
     &--wrapper
       position: relative
       display: flex
       flex-wrap: nowrap
+      flex: 1 0 0%
+      min-width: 100%
+      max-width: 100%
+
+    &-workweek
+      display: flex
+      flex-wrap: nowrap
+      user-select: none
+      padding: 0 4px
+      font-size: 1rem
+      justify-content: center
+      align-items: center
+
+    &-weekdays
       position: relative
+      display: flex
+      flex-wrap: nowrap
+      flex: 1 0 0%
+      padding: 0
+      font-size: 1rem
+      width: 100%
+
+    &-weekday
+      display: flex
+      flex-wrap: nowrap
+      flex: 1
+      user-select: none
+      padding: 0 4px
+      font-size: 1rem
+      justify-content: center
+
+  &__week
+    position: relative
+    display: flex
+    flex-wrap: nowrap
+    flex: 10000 1 0%
+    min-height: 5em
+
+    &--wrapper
+      position: relative
+      display: flex
+      flex-wrap: nowrap
       flex: 10000 1 0%
+      min-width: 100%
 
     &-days
       height: 100%
       display: flex
       flex: 1 0 auto
       flex-wrap: nowrap
-      max-width: 100%
+      min-width: 100%
 
     &-events
       position: absolute
-      top: 2.6em
+      top: 1.9em
       bottom: 0
       width: 100%
       overflow: hidden
@@ -153,51 +78,35 @@
     display: flex
     flex-wrap: nowrap
     user-select: none
-    padding: 0 4px
-    min-width: $calendar-work-week-width
-    max-width: $calendar-work-week-width
-    font-size: $calendar-work-week-font-size
+    padding: 0
     align-items: center
+    justify-content: center
 
   &__day
+    position: relative
     display: flex
     flex: 1
     overflow: hidden
     user-select: none
     position: relative
 
-    &--content
-      // position: absolute
-      // top: 26px
-      // bottom: 0
-
   &__day-label
     position: absolute
     text-decoration: none
     user-select: none
-    cursor: pointer
-    box-shadow: none
-    color: currentColor
-    text-align: center
     left: 2px
     top: 2px
-    border-radius: $calendar-day-label-radius
-    min-width: $calendar-day-label-height
-    min-height: $calendar-day-label-height
-    line-height: $calendar-day-label-height
-    font-weight: 400
 
   &__day-month
     position: absolute
     text-decoration: none
     user-select: none
-    box-shadow: none
-    top: 5px
+    max-width: 80%
+    top: 3px
     right: 2px
     left: 2px
     margin-left: 28px
-    height: $calendar-day-label-height
-    line-height: $calendar-day-label-height
+    text-align: right
 
   &__day-month--day-of-year
     position: absolute
@@ -208,244 +117,168 @@
     right: 2px
     font-size: 0.6rem
 
-.q-calendar-mini
+// coloring and other vars
+.q-calendar-weekly
 
-  .q-calendar-weekly
+  &__head-workweek
+    border-right: var(--calendar-border)
+    border-bottom: var(--calendar-border)
+    max-width: var(--calendar-work-week-width)
+    min-width: var(--calendar-work-week-width)
 
-    &__head-workweek
-      border-right: unset
-      border-bottom: unset
-      width: 30px
+  &__head-weekday
+    border-right: var(--calendar-border)
+    border-bottom: var(--calendar-border)
+    font-weight: var(--calendar-head-font-weight)
 
-    &__head-weekday
-      border: 0 !important
-      padding: 0
-      font-size: unset
-      min-height: 1.5em
-      min-width: 1.5em
+    &:last-child
+      border-right: none !important
 
-    &__workweek
-      border-right: unset
-      font-size: 1em
-      padding-bottom: 8px
-      width: 30px
+    &.q-disabled-day
+      color: var(--calendar-disabled-date-color)
+      background: var(--calendar-disabled-date-background) !important
 
-    &__week--wrapper
-      border-bottom: unset
+  &__workweek
+    font-size: var(--calendar-work-week-font-size)
+    border-right: var(--calendar-border)
+    max-width: var(--calendar-work-week-width)
+    min-width: var(--calendar-work-week-width)
 
-    &__day
-      display: block
-      justify-content: center
-      align-items: center
-      flex-wrap: wrap
-      min-height: 1.5em
-      min-width: 1.5em
-      padding: 0
-      border: 0 !important
+    &.q-current-day
+      color: var(--calendar-current-color)
 
-      &.q-past-day
-        color: $calendar-day-future-color
+  &__week--wrapper
+    border-bottom: var(--calendar-border)
 
-      &.q-outside
-        background: transparent !important
-        color: lighten($calendar-day-future-color, 40%)
+    &:last-child
+      border-bottom: none !important
 
-      &.q-selected-day
-        background: transparent !important
+  &__day
+    border-right: var(--calendar-border)
 
-        &:before
-          content: ''
-          display: block
-          position: absolute
-          width: 100%
-          height: 1.6em //2.4em
-          top: 0
-          right: 0
-          bottom: 0
-          left: 0
-          background: lighten($calendar-primary-color, 45%)
+    &:last-child
+      border-right: none !important
 
-        // &:first-child:before
-        //   border-radius: 0.8em 0 0 0.8em
+    &.q-active-date
+      color: var(--calendar-active-date-color)
 
-        // &:last-child:before
-        //   border-radius: 0 0.8em 0.8em 0
+      .q-btn__wrapper:before
+        background: var(--calendar-active-date-background)
 
-        &.q-selected-date,
-        &.q-selected-day-first,
-        &.q-selected-day-last
-          .q-calendar-weekly__day-label
-            background: $calendar-primary-color !important
-            color: #fff !important
-            border-radius: 50%
+    &.q-current-day
+      .q-btn__wrapper:before
+        border: var(--calendar-border-current)
 
-        &.q-selected-date,
-        &.q-selected-day-first
-          &:before
-            // border-top-left-radius: 50%
-            // border-bottom-left-radius: 50%
-            left: 50%
+    &.q-disabled-day
+      color: var(--calendar-disabled-date-color)
+      background: var(--calendar-disabled-date-background) !important
 
-        &.q-selected-day-last
-          &:before
-            width: 50%
-            right: auto
-            // border-top-right-radius: 50%
-            // border-bottom-right-radius: 50%
-          &.q-selected-day-first
-            &:before
-              width: 0
+    &.q-outside
+      color: var(--calendar-outside-color)
+      background: var(--calendar-outside-background)
 
-      // &.q-current-day
-      //   .q-calendar-weekly__day-label .q-btn__wrapper:before
-      //     border-color: #3e3e3e
-      //     font-color: #3e3e3e
-      //     color: white
-      //     border-width: $calendar-border-width
+    &.q-selected
+      color: var(--calendar-selected-color)
+      background: var(--calendar-selected-background)
 
-  .q-calendar-weekly__day-label
-    position: absolute
-    text-align: center
-    top: unset
-    right: 0
-    bottom: unset
-    left: 0
-    margin: auto
+      .q-current-day
+        .q-btn__wrapper:before
+          // inverted
+          border: var(--calendar-border-current-dark) !important
 
-    &.q-selected-date
-      background: $calendar-primary-color !important
-      color: #fff !important
-      // border-radius: 50%
+    &.q-range-first,
+    &.q-range-last,
+    &.q-range
+      color: var(--calendar-range-color)
+      background: var(--calendar-range-background)
 
-  .q-event:not(.q-event-void)
-    &:after
-      content: ''
-      width: 0.6em
-      height: 0.4em
-      border-radius: 50%
-      left: 0
-      right: 0
-      margin: auto
-      background: $calendar-primary-color
+      .q-current-day
+        .q-btn__wrapper:before
+          // inverted
+          border: var(--calendar-border-current-dark) !important
 
-  .q-calendar-weekly__week
-    border-bottom: unset
-    min-height: 2.2em
-    max-width: 100%
-
-  .q-calendar-weekly__week-events
-    // padding-top: 2.6em
+    &.q-calendar-weekly__day--droppable
+      border: var(--calendar-border-droppable) !important
 
 .q-dark div,
 .body--dark div,
 .q-calendar--dark
-  &.q-calendar-weekly
-    .q-calendar-weekly__head-workweek
-      border-right: $calendar-border-color-dark $calendar-border-width solid
-      border-bottom: $calendar-border-color-dark $calendar-border-width solid
-      color: $calendar-day-current-color-dark
 
-    .q-calendar-weekly__head-weekday
-      border-right: $calendar-border-color-dark $calendar-border-width solid
-      border-bottom: $calendar-border-color-dark $calendar-border-width solid
-      color: $calendar-day-current-color-dark
+  .q-calendar-weekly
+
+    &__head-workweek
+      border-right: var(--calendar-border-dark)
+      border-bottom: var(--calendar-border-dark)
+
+    &__head-weekday
+      border-right: var(--calendar-border-dark)
+      border-bottom: var(--calendar-border-dark)
 
       &:last-child
         border-right: none !important
 
-    .q-calendar-weekly__workweek
-      border-right: $calendar-border-color-dark $calendar-border-width solid
+      &.q-disabled-day
+        color: var(--calendar-disabled-date-color-dark)
+        background: var(--calendar-disabled-date-background-dark) !important
 
-      &.q-past-day
-        color: $calendar-day-past-color-dark
-
-      &.q-future-day
-        color: lighten($calendar-primary-color-dark, 20%)
+    &__workweek
+      border-right: var(--calendar-border-dark)
 
       &.q-current-day
-        color: $calendar-primary-color-dark
+        color: var(--calendar-current-color-dark)
 
-    .q-calendar-weekly__week--wrapper
-      border-bottom: $calendar-border-color $calendar-border-width solid
+    &__week--wrapper
+      border-bottom: var(--calendar-border-dark)
 
       &:last-child
         border-bottom: none !important
 
-    .q-calendar-weekly__day
-      border-right: $calendar-border-color-dark $calendar-border-width solid
-      color: $calendar-primary-color-dark
+    &__day
+      border-right: var(--calendar-border-dark)
 
       &:last-child
         border-right: none !important
 
+      &.q-active-date
+        color: var(--calendar-active-date-color-dark)
+
+        .q-btn__wrapper:before
+          background: var(--calendar-active-date-background-dark)
+
+      &.q-current-day
+        .q-btn__wrapper:before
+          border: var(--calendar-border-current-dark)
+
+      &.q-disabled-day
+        color: var(--calendar-disabled-date-color-dark)
+        background: var(--calendar-disabled-date-background-dark) !important
+
       &.q-outside
-        background: $calendar-outside-background-color-dark
-        color: $calendar-outside-text-color-dark
+        color: var(--calendar-outside-color-dark) !important
+        background: var(--calendar-outside-background-dark)
 
-      &.q-future-day
-        color: lighten($calendar-primary-color-dark, 20%)
+      &.q-selected
+        color: var(--calendar-selected-color-dark)
+        background: var(--calendar-selected-background-dark)
 
-      &.q-current-day
+        .q-current-day
+          .q-btn__wrapper:before
+            border: var(--calendar-border-current) !important
 
-        .q-calendar-weekly__day-label
-          font-weight: 400
-          color: $calendar-primary-color-dark
+      &.q-range-first,
+      &.q-range-last,
+      &.q-range
+        color: var(--calendar-range-color-dark)
+        background: var(--calendar-range-background-dark)
 
-        .q-calendar-weekly__day-month
-          color: currentColor
+        .q-current-day
+          .q-btn__wrapper:before
+            // inverted
+            border: var(--calendar-border-current) !important
 
-        .q-calendar-weekly__day-month--day-of-year
-          color: currentColor
-
-      &.q-past-day
-        color: $calendar-day-past-color-dark
-
-    .q-calendar-weekly__day--droppable
-      border-right: $calendar-primary-color-dark $calendar-border-width dashed
-
-  .q-calendar-mini
-    .q-calendar-weekly__day
-      color: #fff
-
-      &.q-future-day,
-      &.q-past-day
-        color: $calendar-day-past-color-dark
-
-      &.q-selected-date,
-      &.q-selected-day
-        color: #fff !important
-
-        &:before
-          background: #393939
-
-      &.q-current-day
-        .q-calendar-weekly__day-label .q-btn__wrapper:before
-          border-color: $calendar-day-current-color-dark
-
-    &.q-calendar-weekly
-      .q-calendar-weekly__week--wrapper
-        border-bottom: unset
-
-.q-calendar--dark
-  &.q-calendar-mini
-    &.q-calendar-weekly
-      .q-calendar-weekly__week--wrapper
-        border-bottom: unset
-
-// DEPRECATED v2.4.0
-.q-event
-  &:first-child
-    margin-top: 2.2em
-
-.q-calendar-mini
-  .q-event
-    margin-top: 1.0em
-// ---
+      &.q-calendar-weekly__day--droppable
+        border: var(--calendar-border-droppable-dark) !important
 
 .q-day-event
   &:first-child
     margin-top: 2.2em
-
-.q-calendar-mini
-  .q-day-event
-    margin-top: 1.0em

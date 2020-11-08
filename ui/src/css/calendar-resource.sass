@@ -1,50 +1,3 @@
-@import './calendar-variables'
-
-.q-calendar-resource
-
-  &__head-resource
-    border-right: $calendar-border-color $calendar-border-width solid
-    border-bottom: $calendar-border-color $calendar-border-width solid
-    color: $calendar-text-color
-    background: $calendar-background-color
-
-    &:last-child
-      border-right: none
-
-  &__head-label
-    border-right: $calendar-border-color $calendar-border-width solid
-    border-bottom: $calendar-border-color $calendar-border-width solid
-    color: $calendar-text-color
-    background: $calendar-background-color
-
-    &:last-child
-      border-right: none
-
-  &__resource
-    border-bottom: $calendar-border-color $calendar-border-width solid
-    border-right: $calendar-border-color $calendar-border-width solid
-    color: $calendar-text-color
-    background: $calendar-background-color
-
-    &--droppable
-      border: $calendar-primary-color calendar-border-width dashed
-
-  &__resource-interval
-    border-bottom: $calendar-border-color $calendar-border-width solid
-    border-right: $calendar-border-color $calendar-border-width solid
-
-    &:last-child
-      border-right: none
-
-    &--droppable
-      border: $calendar-primary-color calendar-border-width dashed
-
-.q-calendar-resource__resource-row:last-child > .q-calendar-resource__resource
-  border-bottom: none
-
-.q-calendar-resource__resource-row:last-child > .q-calendar-resource__resource-intervals > .q-calendar-resource__resource-interval
-  border-bottom: none
-
 .q-calendar-resource
   display: flex
   flex: 1
@@ -138,55 +91,105 @@
     display: flex
     position: relative
 
+// sticky
 .q-calendar-resource__head.q-calendar__sticky
   position: sticky
   left: 0
   top: 0
-  z-index: 3
+  z-index: 2
 
 .q-calendar-resource__head-resource.q-calendar__sticky
   position: sticky
   left: 0
   top: 0
-  z-index: 2
+  z-index: 3
 
 .q-calendar-resource__resource.q-calendar__sticky
   position: sticky
   left: 0
   z-index: 1
 
+.q-calendar-resource
+
+  &__head
+    color: var(--calendar-color)
+    background: var(--calendar-background)
+
+  &__head-resource
+    border-right: var(--calendar-border)
+    border-bottom: var(--calendar-border)
+    color: var(--calendar-color)
+    background: var(--calendar-background)
+
+    &:last-child
+      border-right: none
+
+  &__head-label
+    border-right: var(--calendar-border)
+    border-bottom: var(--calendar-border)
+
+    &:last-child
+      border-right: none
+
+  &__resource
+    border-bottom: var(--calendar-border)
+    border-right: var(--calendar-border)
+    color: var(--calendar-color)
+    background: var(--calendar-background)
+
+    &--droppable
+      border: var(--calendar-border-droppable)
+
+  &__resource-interval
+    border-bottom: var(--calendar-border)
+    border-right: var(--calendar-border)
+
+    &:last-child
+      border-right: none
+
+    &--droppable
+      border: var(--calendar-border-droppable)
+
+.q-calendar-resource__resource-row:last-child > .q-calendar-resource__resource
+  border-bottom: none
+
+.q-calendar-resource__resource-row:last-child > .q-calendar-resource__resource-intervals > .q-calendar-resource__resource-interval
+  border-bottom: none
+
 .q-dark div,
 .body--dark div,
 .q-calendar--dark
   .q-calendar-resource
 
+    &__head
+      color: var(--calendar-color-dark)
+      background: var(--calendar-background-dark)
+
     &__body
-      border-top: $calendar-border-color-dark $calendar-border-width solid
+      border-top: var(--calendar-border-dark)
 
     &__head-resource
-      border-right: $calendar-border-color-dark $calendar-border-width solid
-      border-bottom: $calendar-border-color-dark $calendar-border-width solid
-      color: $calendar-text-color-dark
-      background: $calendar-background-color-dark
+      border-right: var(--calendar-border-dark)
+      border-bottom: var(--calendar-border-dark)
+      color: var(--calendar-color-dark)
+      background: var(--calendar-background-dark)
 
     &__head-label
-      border-right: $calendar-border-color-dark $calendar-border-width solid
-      border-bottom: $calendar-border-color-dark $calendar-border-width solid
-      color: $calendar-text-color-dark
-      background: $calendar-background-color-dark
+      border-right: var(--calendar-border-dark)
+      border-bottom: var(--calendar-border-dark)
 
       &--droppable
-        border: $calendar-primary-color-dark $calendar-border-width dashed
+        border: var(--calendar-border-droppable-dark)
 
     &__resource
-      border-bottom: $calendar-border-color-dark $calendar-border-width solid
-      border-right: $calendar-border-color-dark $calendar-border-width solid
-      color: $calendar-text-color-dark
-      background: $calendar-background-color-dark
+      border-bottom: var(--calendar-border-dark)
+      border-right: var(--calendar-border-dark)
+      color: var(--calendar-color-dark)
+      background: var(--calendar-background-dark)
 
       &--droppable
-        border: $calendar-primary-color-dark $calendar-border-width dashed
+        border: var(--calendar-border-droppable-dark)
 
     &__resource-interval
-      border-bottom: $calendar-border-color-dark $calendar-border-width solid
-      border-right: $calendar-border-color-dark $calendar-border-width solid
+      border-bottom: var(--calendar-border-dark)
+      border-right: var(--calendar-border-dark)

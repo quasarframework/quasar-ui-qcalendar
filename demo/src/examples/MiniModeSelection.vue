@@ -11,8 +11,8 @@
         view="month"
         locale="en-us"
         mini-mode
+        no-active-date
         :selected-start-end-dates="startEndDates"
-        :day-class="classDay"
         @mousedown:day2="onMouseDownDay"
         @mouseup:day2="onMouseUpDay"
         @mousemove:day2="onMouseMoveDay"
@@ -91,21 +91,6 @@ export default {
       this.$refs.calendar.prev()
     },
 
-    classDay (timestamp) {
-      if (this.anchorDayIdentifier !== false && this.otherDayIdentifier !== false) {
-        return this.getBetween(timestamp)
-      }
-    },
-
-    getBetween (timestamp) {
-      const nowIdentifier = QCalendar.getDayIdentifier(timestamp)
-      return {
-        'q-selected-day-first': this.lowIdentifier === nowIdentifier,
-        'q-selected-day': this.lowIdentifier <= nowIdentifier && this.highIdentifier >= nowIdentifier,
-        'q-selected-day-last': this.highIdentifier === nowIdentifier
-      }
-    },
-
     onMouseDownDay ({ scope, event }) {
       if (leftClick(event)) {
         if (this.mobile === true &&
@@ -132,7 +117,7 @@ export default {
     },
 
     onMouseMoveDay ({ scope, event }) {
-      if (this.mouseDown === true) {
+      if (this.mouseDown === true && scope.outside !== true) {
         this.otherTimestamp = scope.timestamp
       }
     }

@@ -10,7 +10,7 @@ import { convertToUnit } from '../utils/helpers.js'
 
 // Icons
 const mdiMenuRight = 'M10,17L15,12L10,7V17Z'
-const mdiMenuUp = 'M7,15L12,10L17,15H7Z'
+const mdiMenuDown = 'M7,10L12,15L17,10H7Z'
 
 /* @vue/component */
 export default {
@@ -37,7 +37,7 @@ export default {
 
   created () {
     this.mdiMenuRight = mdiMenuRight
-    this.mdiMenuUp = mdiMenuUp
+    this.mdiMenuDown = mdiMenuDown
   },
 
   computed: {
@@ -72,15 +72,6 @@ export default {
     },
 
     __renderHeadInterval (h, interval, index) {
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-        color = 'colorIntervalBody'
-        backgroundColor = 'backgroundIntervalBody'
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
-
       const width = convertToUnit(this.parsedIntervalWidth)
       const height = convertToUnit(this.parsedIntervalHeight)
       const slot = this.$scopedSlots['interval-label']
@@ -93,7 +84,7 @@ export default {
       }
       let dragOver
 
-      return slot ? slot(scope) : h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
+      return slot ? slot(scope) : h('div', {
         staticClass: 'q-calendar-resource__head-label',
         class: {
           'q-calendar-resource__head-label--droppable': dragOver
@@ -115,17 +106,10 @@ export default {
             }
           }
         },
-        // :interval DEPRECATED in v2.4.0
-        on: this.getDefaultMouseEventHandlers2(':interval', ':interval2', (event, eventName) => {
-          if (eventName.indexOf('2') > -1) {
-            return { scope: { timestamp: interval, index, label }, event }
-          }
-          else {
-            return { interval, index, label, event }
-          }
+        on: this.getDefaultMouseEventHandlers(':interval2', (event, eventName) => {
+          return { scope: { timestamp: interval, index, label }, event }
         })
-        // ---
-      }), label)
+      }, label)
     },
 
     __renderBody (h) {
@@ -159,14 +143,6 @@ export default {
       const width = convertToUnit(this.parsedResourceWidth)
       const height = convertToUnit(this.parsedIntervalHeight)
 
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-        color = 'colorResourceText'
-        backgroundColor = 'backgroundResourceText'
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
       const scope = {
         timestamp: this.days[0],
         resources: this.resources,
@@ -174,7 +150,7 @@ export default {
       }
       const intervals = this.intervals
 
-      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
+      return h('div', {
         staticClass: 'q-calendar-resource__head-resource' + (this.sticky === true ? ' q-calendar__sticky' : ''),
         style: {
           maxWidth: width,
@@ -184,7 +160,7 @@ export default {
         on: this.getDefaultMouseEventHandlers(':resource:header2', event => {
           return { scope, event }
         })
-      }), [
+      }, [
         slot && slot({ date: this.value, intervals })
       ])
     },
@@ -213,21 +189,11 @@ export default {
     },
 
     __renderBodyResources (h) {
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-        color = 'colorResourceBody'
-        backgroundColor = 'backgroundResourceBody'
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
-
       const data = {
         staticClass: 'q-calendar-resource__resources-body'
       }
 
-      // return h('div', updateColors(colors.get(color), colors.get(backgroundColor), data), this.__renderResourceLabels(h))
-      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), data), this.__renderResources(h))
+      return h('div', data, this.__renderResources(h))
     },
 
     __renderResources (h, resources = undefined, indentLevel = 0) {
@@ -264,16 +230,7 @@ export default {
       const width = convertToUnit(this.parsedResourceWidth)
       const height = resource.height !== void 0 ? convertToUnit(resource.height) : convertToUnit(this.parsedResourceHeight)
 
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-        color = 'colorResourceText'
-        backgroundColor = 'backgroundResourceText'
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
-
-      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
+      return h('div', {
         key: resource[this.resourceKey] + '-' + idx,
         staticClass: 'q-calendar-resource__resource' + (this.sticky === true ? ' q-calendar__sticky' : ''),
         style: {
@@ -281,17 +238,10 @@ export default {
           minWidth: width,
           height
         },
-        // :resource DEPRECATED in v2.4.0
-        on: this.getDefaultMouseEventHandlers2(':resource', ':resource2', (event, eventName) => {
-          if (eventName.indexOf('2') > -1) {
-            return { scope: { resource, index: idx, intervals: this.intervals }, event }
-          }
-          else {
-            return { resource, index: idx, event }
-          }
+        on: this.getDefaultMouseEventHandlers(':resource2', (event, eventName) => {
+          return { scope: { resource, index: idx, intervals: this.intervals }, event }
         })
-        // ---
-      }), [
+      }, [
         slot ? slot(scope) : this.__renderResourceText(h, resource, idx, indentLevel)
       ])
     },
@@ -311,12 +261,14 @@ export default {
       }, [
         resource.children && resource.children.length > 0 && h(QIcon, {
           props: {
-            name: (resource.expanded === true ? this.mdiMenuUp : this.mdiMenuRight),
-            size: 'sm'
+            name: (resource.expanded === true ? this.mdiMenuDown : this.mdiMenuRight),
+            size: 'md'
           },
           on: {
-            click: () => {
+            click: (e) => {
               resource.expanded = !resource.expanded
+              e.stopPropagation()
+              this.$emit('expanded', resource)
             }
           }
         }),
@@ -368,19 +320,12 @@ export default {
             }
           }
         },
-        // :time DEPRECATED in v2.4.0
-        on: this.getDefaultMouseEventHandlers2(':time', ':time2', (event, eventName) => {
+        on: this.getDefaultMouseEventHandlers(':time2', (event, eventName) => {
           const scope = this.getScopeForSlotX(this.getTimestampAtEventX(event, interval))
-          if (eventName.indexOf('2') > -1) {
-            scope.resource = resource
-            scope.index = idx
-            return { scope, event }
-          }
-          else {
-            return { scope, resource, event }
-          }
+          scope.resource = resource
+          scope.index = idx
+          return { scope, event }
         })
-        // ---
       }, [
         slot && slot(slotData)
       ])
@@ -393,7 +338,7 @@ export default {
 
   render (h) {
     return h('div', {
-      staticClass: 'q-calendar-resource'
+      class: 'q-calendar-resource'
     }, [
       this.__renderBody(h)
     ])

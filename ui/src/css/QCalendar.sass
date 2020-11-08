@@ -1,25 +1,27 @@
 @import './calendar-variables'
 
 .q-calendar
+  color: var(--calendar-color)
+  background: var(--calendar-background)
+  min-width: 80px
+  overflow: hidden
+  // transition: color .1s ease-in, background .1s ease-in, border .1s ease-in
 
   &__bordered
-    border: $calendar-border-color $calendar-border-width solid
+    border: var(--calendar-border)
 
 .q-dark div,
 .body--dark div,
 .q-calendar--dark
   &.q-calendar
+    color: var(--calendar-color-dark)
+    background: var(--calendar-background-dark)
 
     &__bordered
-      border: $calendar-border-color-dark $calendar-border-width solid
-
-
-.q-calendar--dark
-  color: #fff
-  background: #424242
-  background: var(--q-color-dark)
+      border: var(--calendar-border-dark)
 
 @import './calendar-daily.sass'
 @import './calendar-weekly.sass'
+@import './calendar-weekly-mini.sass'
 @import './calendar-scheduler.sass'
 @import './calendar-resource.sass'
