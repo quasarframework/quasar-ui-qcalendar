@@ -738,4 +738,36 @@ All mouse/touch events support the Vue [Event & Key Modifiers](https://vuejs.org
 
 All the examples for the various views have an Event example. Be sure to check it out for the view you are working with.
 
+# Providing Mouse Hover
+
+The Interactive Demo has mouse hover coloring. It's been asked many times how this is done. The calendar is wrapped with a class `.calendar-container`. Here is the sass that provides the hover effects:
+
+```css
+<style lang="sass">
+.calendar-container
+  position: relative
+
+  .q-calendar-daily__day-interval:hover
+    background: rgba(0,0,255,.1)
+
+  .q-calendar-weekly__workweek:hover
+    background: rgba(0,0,255,.1)
+
+  .q-calendar-weekly__day:hover
+    background: rgba(0,0,255,.1)
+
+  .q-calendar-weekly__head-weekday:hover
+    background: rgba(0,0,255,.1)
+
+  .q-calendar-scheduler__day:hover
+    background: rgba(0,0,255,.1)
+
+  .q-calendar-resource__resource-interval:hover
+    background: rgba(0,0,255,.1)
+
+  .q-calendar-daily__day:hover
+    background: rgba(0,0,255,.1)
+</style>
+```
+
 ~~~
