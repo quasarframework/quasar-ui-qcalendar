@@ -42,9 +42,6 @@ Note: The header area of the calendar will now scroll with the rest of the calen
     <example-viewer title="No Scroll" file="WeekViewNoScroll" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Disabled" />
-    <q-markdown>
-When the property `disabled-days` has an array of disabled days, you can hook into the `interval-style` property to change the background color of the disabled day.
-    </q-markdown>
     <example-viewer title="Disabled Days" file="WeekViewDisabledDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
@@ -107,7 +104,7 @@ Do NOT combine suffixes. Only one suffix per event. A different suffix will give
 :::
 
 ::: warning
-The events `:day` (now `:day:header2`), `:time`, `:interval` and `:date` still exist, but have been marked as deprecated starting with v2.4.0
+The events `:day` (now `:day:header2`), `:time`, `:interval` and `:date` have been removed in v3.0.0
 :::
 
 The example below is only showing `click` events as well as the `input` event.
@@ -152,8 +149,11 @@ Scroll down if the current time is later for your location to see the example.
     </q-markdown>
     <example-viewer title="day-container: Show current time" file="WeekViewCurrentTime" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
-    <example-title title="Themes" />
-    <example-viewer title="Theme" file="WeekViewTheme" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-title title="Customization" />
+    <q-markdown>
+You can create your own themes by overriding various css vars. You do not have to override all of them (as in the next example), just the ones you need. For building your own themes, head on over to the [Theme Builder](../../quasar-ui-qcalendar/theme-builder)
+    </q-markdown>
+    <example-viewer title="Colors" file="WeekViewColors" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Locale Support" />
     <example-viewer title="Locale" file="WeekViewLocale" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
@@ -220,8 +220,8 @@ export default {
     this.addToToc('head-day', 2)
     this.addToToc('day-container: Show current time', 2)
 
-    this.addToToc('Themes')
-    this.addToToc('Theme', 2)
+    this.addToToc('Customization')
+    this.addToToc('Colors', 2)
 
     this.addToToc('Locale Support')
     this.addToToc('Locale', 2)

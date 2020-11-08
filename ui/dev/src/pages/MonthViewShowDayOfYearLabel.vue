@@ -1,11 +1,10 @@
 <template>
   <div style="max-width: 800px; width: 100%;">
-    <q-toolbar>
-      <q-btn stretch flat label="Prev" @click="calendarPrev" />
+    <div class="row justify-center items-center">
+      <q-btn flat label="Prev" @click="prev" />
       <q-separator vertical />
-      <q-btn stretch flat label="Next" @click="calendarNext" />
-      <q-space />
-    </q-toolbar>
+      <q-btn flat label="Next" @click="next" />
+    </div>
     <q-separator />
     <div style="overflow: hidden">
       <q-calendar
@@ -30,10 +29,10 @@ export default {
     }
   },
   methods: {
-    calendarNext () {
+    next () {
       this.$refs.calendar.next()
     },
-    calendarPrev () {
+    prev () {
       this.$refs.calendar.prev()
     }
   }

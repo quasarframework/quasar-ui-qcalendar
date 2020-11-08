@@ -22,9 +22,5 @@ export default {
   intervalHeight: 60,
   resourceHeight: 60,
   resourceWidth: 100,
-  dayHeight: 100,
-  enableTheme: false,
-  theme: {
-    name: 'default'
-  }
+  dayHeight: 100
 }

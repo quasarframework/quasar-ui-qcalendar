@@ -24,9 +24,6 @@ const rooms = [
     <example-viewer title="Dark" file="SchedulerViewDark" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Disabled" />
-    <q-markdown>
-When the property `disabled-days` has an array of disabled days, you can hook into the `resource-style` property to change the background color of the disabled day.
-    </q-markdown>
     <example-viewer title="Disabled Days" file="SchedulerViewDisabledDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
@@ -94,10 +91,10 @@ Do NOT combine suffixes. Only one suffix per event. A different suffix will give
 :::
 
 ::: warning
-The events `:day` (now `:day:header2`), `:resource`, `:resource:day` and `:date` still exist, but have been marked as deprecated starting with v2.4.0
+The events `:day` (now `:day:header2`), `:time`, `:interval` and `:date` have been removed in v3.0.0
 :::
 
-The example below is only showing `click` events as well as the `input` event.
+The example below is only showing `click` events as well as the `input` and 'expanded' events.
     </q-markdown>
     <example-viewer title="Events" file="SchedulerViewEvents" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
@@ -146,8 +143,11 @@ Below, the slot receives the `resource` to be displayed. In this case, an avatar
     </q-markdown>
     <example-viewer title="Slot (scheduler-resource)" file="SchedulerViewSlotResource" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
-    <example-title title="Theme" />
-    <example-viewer title="Theme" file="SchedulerViewTheme" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-title title="Customization" />
+    <q-markdown>
+You can create your own themes by overriding various css vars. You do not have to override all of them (as in the next example), just the ones you need. For building your own themes, head on over to the [Theme Builder](../../quasar-ui-qcalendar/theme-builder)
+    </q-markdown>
+    <example-viewer title="Colors" file="SchedulerViewColors" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Locale Support" />
     <example-viewer title="Locale" file="SchedulerViewLocale" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
@@ -212,8 +212,8 @@ export default {
     this.addToToc('Slot (scheduler-resource-day)', 2)
     this.addToToc('Slot (scheduler-resource)', 2)
 
-    this.addToToc('Theme')
-    this.addToToc('Theme', 2)
+    this.addToToc('Customization')
+    this.addToToc('Colors', 2)
 
     this.addToToc('Locale Support')
     this.addToToc('Locale', 2)

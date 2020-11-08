@@ -6,6 +6,7 @@
       view="month"
       locale="en-us"
       mini-mode
+      no-active-date
       animated
       transition-prev="flip-left"
       transition-next="flip-right"
@@ -31,12 +32,6 @@ export default {
   },
 
   methods: {
-    classDay (timestamp) {
-      if (this.anchorDayIdentifier !== false && this.otherDayIdentifier !== false) {
-        return this.getBetween(timestamp)
-      }
-    },
-
     onToggleDate ({ scope, event }) {
       if (leftClick(event)) {
         if (this.selectedDates.includes(scope.timestamp.date)) {

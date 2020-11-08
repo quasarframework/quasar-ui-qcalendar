@@ -23,7 +23,7 @@
         class="full-width"
       ></q-btn>
       <div class="col-12 full-width q-px-md q-pb-sm">
-        <span class="text-body2" >Max days (custom, scheduler)</span>
+        <span class="text-body2" >Max days (custom, scheduler, agenda)</span>
         <q-slider
           v-model="maxDays"
           :min="1"
@@ -161,29 +161,12 @@
           :label-value="resourceWidth + 'px'"
         />
       </div>
-      <q-toggle
-        class="col-12 full-width"
-        v-model="enableTheme"
-        label="Enable themes"
-      ></q-toggle>
-      <q-select
-        outlined
-        dense
-        emit-value
-        map-options
-        label="Change theme"
-        v-model="theme"
-        :options="themesList"
-        :disable="enableTheme !== true"
-        class="col-12"
-      ></q-select>
     </div>
   </div>
 </template>
 
 <script>
 import { Platform } from 'quasar'
-import themes from '../util/themes'
 export default {
   name: 'Playground',
   data () {
@@ -394,38 +377,6 @@ export default {
       set (height) {
         this.$store.commit('calendar/dayHeight', height)
       }
-    },
-    enableTheme: {
-      get () {
-        return this.$store.state.calendar.enableTheme
-      },
-      set (b) {
-        this.$store.commit('calendar/enableTheme', b)
-      }
-    },
-    themes: {
-      get () {
-        return themes
-      }
-    },
-    theme:
-    {
-      get () {
-        return this.$store.state.calendar.theme
-      },
-      set (theme) {
-        this.$store.commit('calendar/theme', theme)
-      }
-    },
-    themesList () {
-      const list = []
-      this.themes.forEach((theme) => {
-        list.push({
-          label: theme.name,
-          value: { ...theme }
-        })
-      })
-      return list
     }
   },
 

@@ -12,7 +12,7 @@ import { convertToUnit } from '../utils/helpers.js'
 
 // Icons
 const mdiMenuRight = 'M10,17L15,12L10,7V17Z'
-const mdiMenuUp = 'M7,15L12,10L17,15H7Z'
+const mdiMenuDown = 'M7,10L12,15L17,10H7Z'
 
 /* @vue/component */
 export default {
@@ -39,7 +39,7 @@ export default {
 
   created () {
     this.mdiMenuRight = mdiMenuRight
-    this.mdiMenuUp = mdiMenuUp
+    this.mdiMenuDown = mdiMenuDown
   },
 
   mounted () {
@@ -118,20 +118,12 @@ export default {
       const slot = this.$scopedSlots['scheduler-resources-header']
       const width = convertToUnit(this.parsedResourceWidth)
 
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-        color = 'colorSchedulerHeader'
-        backgroundColor = 'backgroundSchedulerHeader'
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
       const scope = {
         days: this.days,
         resources: this.resources
       }
 
-      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
+      return h('div', {
         staticClass: 'q-calendar-scheduler__resources-head q-calendar-scheduler__resources-head--text',
         style: {
           width
@@ -139,7 +131,7 @@ export default {
         on: this.getDefaultMouseEventHandlers(':resource:header2', event => {
           return { scope, event }
         })
-      }), [
+      }, [
         slot && slot(this.days)
       ])
     },
@@ -166,34 +158,18 @@ export default {
     __renderHeadDay (h, day, idx) {
       const headDaySlot = this.$scopedSlots['head-day']
       const dayHeaderSlot = this.$scopedSlots['scheduler-day-header']
+      const activeDate = this.noActiveDate !== true && this.value === day.date
       const scope = this.getScopeForSlot(day, idx)
+      scope.activeDate = activeDate
       const width = 100 / this.days.length
       let dragOver
 
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-        if (day.past === true) {
-          color = 'colorHeaderPast'
-          backgroundColor = 'backgroundHeaderPast'
-        }
-        else if (day.current === true) {
-          color = 'colorHeaderCurrent'
-          backgroundColor = 'backgroundHeaderCurrent'
-        }
-        else if (day.future === true) {
-          color = 'colorHeaderFuture'
-          backgroundColor = 'backgroundHeaderFuture'
-        }
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
-
-      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
+      return h('div', {
         key: day.date + (idx !== undefined ? '-' + idx : ''),
         staticClass: 'q-calendar-scheduler__head-day',
         class: {
           ...this.getRelativeClasses(day),
+          'q-active-date': activeDate,
           'q-calendar-scheduler__head-day--droppable': dragOver
         },
         style: {
@@ -212,12 +188,10 @@ export default {
             }
           }
         },
-        // :day DEPRECATED in v2.4.0
-        on: this.getDefaultMouseEventHandlers2(':day', ':day:header2', event => {
+        on: this.getDefaultMouseEventHandlers(':day:header2', event => {
           return { scope, event }
         })
-        // ---
-      }), [
+      }, [
         headDaySlot !== undefined && headDaySlot(scope),
         headDaySlot === undefined && this.columnHeaderBefore === true && this.__renderColumnHeaderBefore(h, day, idx),
         headDaySlot === undefined && this.noDefaultHeaderText !== true && this.__renderHeadWeekday(h, day, idx),
@@ -228,30 +202,9 @@ export default {
     },
 
     __renderHeadWeekday (h, day) {
-      const colorCurrent = day.current === true ? this.color : undefined
-
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-        if (day.past === true) {
-          color = 'colorDayLabelPast'
-          backgroundColor = 'backgroundDayLabelPast'
-        }
-        else if (day.current === true) {
-          color = 'colorDayLabelCurrent'
-          backgroundColor = 'backgroundDayLabelCurrent'
-        }
-        else if (day.future === true) {
-          color = 'colorDayLabelFuture'
-          backgroundColor = 'backgroundDayLabelFuture'
-        }
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
-
-      return h('div', updateColors(colorCurrent !== undefined ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
+      return h('div', {
         staticClass: 'ellipsis q-calendar-scheduler__head-weekday'
-      }), [
+      }, [
         this.__renderHeadDayLabel(h, day, this.shortWeekdayLabel)
       ])
     },
@@ -263,38 +216,14 @@ export default {
     },
 
     __renderHeadDayBtn (h, day, idx) {
-      const colorCurrent = day.current === true ? this.color : undefined
       const activeDate = this.noActiveDate !== true && this.value === day.date
       const dayLabel = this.dayFormatter(day, false)
       const dayLabelSlot = this.$scopedSlots['day-label']
       const dayBtnSlot = this.$scopedSlots['day-btn']
       const scope = { timestamp: day, index: idx, dayLabel, activeDate }
 
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-        if (day.past === true) {
-          color = 'colorDayLabelPast'
-          backgroundColor = 'backgroundDayLabelPast'
-        }
-        else if (day.current === true) {
-          color = 'colorDayLabelCurrent'
-          backgroundColor = 'backgroundDayLabelCurrent'
-        }
-        else if (day.future === true) {
-          color = 'colorDayLabelFuture'
-          backgroundColor = 'backgroundDayLabelFuture'
-        }
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
-
-      return dayBtnSlot ? dayBtnSlot(scope) : h(QBtn, updateColors(colorCurrent !== undefined ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
-        staticClass: 'q-calendar-scheduler__head-day-label' +
-          (activeDate === true ? ' q-active-date' : ''),
-        style: {
-          color: day.current === true ? colorCurrent : undefined
-        },
+      return dayBtnSlot ? dayBtnSlot(scope) : h(QBtn, {
+        staticClass: 'q-calendar-scheduler__head-day-label',
         props: {
           unelevated: true,
           round: true,
@@ -305,24 +234,13 @@ export default {
         },
         on: {
           ...this.getMouseEventHandlers({
-            // DEPRECATED in v2.4.0
-            'click:date': { event: 'click', stop: true },
-            'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false },
-            // ---
             'click:date2': { event: 'click', stop: true },
             'contextmenu:date2': { event: 'contextmenu', stop: true, prevent: true, result: false }
           }, (event, eventName) => {
-            if (eventName.indexOf('2') > -1) {
-              return { scope, event }
-            }
-            // DEPRECATED in v2.4.0
-            else {
-              return scope
-            }
-            // ---
+            return { scope, event }
           })
         }
-      }), [
+      }, [
         dayLabelSlot ? dayLabelSlot(scope) : dayLabel
       ])
     },
@@ -436,14 +354,6 @@ export default {
 
     __renderBodyResources (h, resource, idx, indentLevel = 0) {
       const width = convertToUnit(this.parsedResourceWidth)
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-        color = 'colorSchedulerBody'
-        backgroundColor = 'backgroundSchedulerBody'
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
 
       const data = {
         staticClass: 'q-calendar-scheduler__resources-body',
@@ -452,7 +362,7 @@ export default {
         }
       }
 
-      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), data),
+      return h('div', data,
         [
           ...this.__renderDays(h, resource, idx)
         ])
@@ -471,26 +381,8 @@ export default {
 
     __renderDay (h, resource, day, idx, resourceIndex) {
       const width = 100 / this.days.length
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-        if (day.past === true) {
-          color = 'colorBodyPast'
-          backgroundColor = 'backgroundBodyPast'
-        }
-        else if (day.current === true) {
-          color = 'colorBodyCurrent'
-          backgroundColor = 'backgroundBodyCurrent'
-        }
-        else if (day.future === true) {
-          color = 'colorBodyFuture'
-          backgroundColor = 'backgroundBodyFuture'
-        }
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
 
-      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
+      return h('div', {
         key: day.date + (idx !== undefined ? ':' + idx : ''),
         staticClass: 'q-calendar-scheduler__day',
         class: this.getRelativeClasses(day),
@@ -498,7 +390,7 @@ export default {
           width: '100%',
           maxWidth: width + '%'
         }
-      }), [
+      }, [
         this.__renderDayResource(h, resource, day, idx, resourceIndex)
       ])
     },
@@ -530,12 +422,10 @@ export default {
             }
           }
         },
-        // :resource:day DEPRECATED in v2.4.0
-        on: this.getDefaultMouseEventHandlers2(':resource:day', ':resource:day2', event => {
+        on: this.getDefaultMouseEventHandlers(':resource:day2', event => {
           const scope = this.getScopeForSlot(this.getTimestampAtEvent(event, day), resourceIndex, resource)
           return { scope, event }
         })
-        // ---
       }
 
       const children = slot ? slot(scope) : undefined
@@ -557,15 +447,6 @@ export default {
         console.warn('QCalendarScheduler: resource object requires "resource-key" property to contain resource object key')
       }
 
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-        color = 'colorSchedulerText'
-        backgroundColor = 'backgroundSchedulerText'
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
-
       return h('div', {
         key: label + (idx !== undefined ? '-' + idx : ''),
         staticClass: 'q-calendar-scheduler__resource',
@@ -575,23 +456,23 @@ export default {
           height: '100%',
           paddingLeft: (10 * indentLevel + 2) + 'px'
         },
-        // :resource DEPRECATED in v2.4.0
-        on: this.getDefaultMouseEventHandlers2(':resource', ':resource2', event => {
+        on: this.getDefaultMouseEventHandlers(':resource2', event => {
           return { scope, event }
         })
-        // ---
       }, [
-        slot ? slot(scope) : h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
+        slot ? slot(scope) : h('div', {
           staticClass: 'q-calendar-scheduler__resource-text'
-        }), [
+        }, [
           resource.children && resource.children.length > 0 && h(QIcon, {
             props: {
-              name: (resource.expanded === true ? this.mdiMenuUp : this.mdiMenuRight),
-              size: 'sm'
+              name: (resource.expanded === true ? this.mdiMenuDown : this.mdiMenuRight),
+              size: 'md'
             },
             on: {
-              click: () => {
+              click: (e) => {
                 resource.expanded = !resource.expanded
+                e.stopPropagation()
+                this.$emit('expanded', resource)
               }
             }
           }),
@@ -607,7 +488,7 @@ export default {
 
   render (h) {
     return h('div', {
-      staticClass: 'q-calendar-scheduler',
+      class: 'q-calendar-scheduler',
       directives: [{
         modifiers: { quiet: true },
         name: 'resize',

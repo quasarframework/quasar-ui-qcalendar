@@ -1,8 +1,6 @@
 // Mixins
 import Times from './times'
 import Mouse from './mouse'
-import { QColorizeMixin } from 'q-colorize-mixin'
-import { QThemeMixin } from 'q-theme-mixin'
 
 // Util
 import props from '../utils/props'
@@ -10,19 +8,19 @@ import {
   validateTimestamp,
   parseTimestamp,
   parseDate,
+  parsed,
   getWeekdaySkips,
   createDayList,
   createNativeLocaleFormatter,
   getStartOfWeek,
-  getEndOfWeek
+  getEndOfWeek,
+  getDayIdentifier
 } from '../utils/timestamp'
 
 export default {
   name: 'CalendarBase',
 
   mixins: [
-    QColorizeMixin,
-    QThemeMixin,
     Mouse,
     Times
   ],
@@ -98,13 +96,40 @@ export default {
       return arr && arr.length > 0 && arr.includes(timestamp.date)
     },
 
-    getRelativeClasses (timestamp, outside = false, selectedDays) {
+    checkDays (arr, timestamp) {
+      const days = {
+        firstDay: false,
+        betweenDays: false,
+        lastDay: false
+      }
+
+      // array must have two dates ('YYYY-MM-DD') in it
+      if (arr && arr.length === 2) {
+        const current = getDayIdentifier(timestamp)
+        const first = getDayIdentifier(parsed(arr[0]))
+        const last = getDayIdentifier(parsed(arr[1]))
+        days.firstDay = first === current
+        days.lastDay = last === current
+        days.betweenDays = first < current && last > current
+      }
+      return days
+    },
+
+    getRelativeClasses (timestamp, outside = false, selectedDays = [], startEndDays = [], hover = false) {
+      const isSelected = this.arrayHasDate(selectedDays, timestamp)
+      const { firstDay, lastDay, betweenDays } = this.checkDays(startEndDays, timestamp)
+
       return {
-        'q-current-day': timestamp.current,
-        'q-past-day': timestamp.past,
-        'q-future-day': timestamp.future,
+        'q-past-day': firstDay !== true && betweenDays !== true && lastDay !== true && isSelected !== true && outside !== true && timestamp.past,
+        'q-future-day': firstDay !== true && betweenDays !== true && lastDay !== true && isSelected !== true && outside !== true && timestamp.future,
         'q-outside': outside, // outside the current month
-        'q-selected-date': this.arrayHasDate(selectedDays, timestamp)
+        'q-current-day': timestamp.current,
+        'q-selected': isSelected,
+        'q-range-first': firstDay === true,
+        'q-range': betweenDays === true,
+        'q-range-last': lastDay === true,
+        'q-range-hover': hover === true && (firstDay === true || lastDay === true || betweenDays === true),
+        'q-disabled-day': timestamp.disabled === true
       }
     },
 

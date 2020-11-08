@@ -31,7 +31,7 @@
     <q-card class="events col-4 q-pa-xs full-height column justify-start items-start">
       <q-item-section class="full-width">
         <q-item-label>Events</q-item-label>
-        <q-item-label caption>New data appended to top</q-item-label>
+        <q-item-label class="my-text-caption">New data appended to top</q-item-label>
       </q-item-section>
       <q-separator />
       <div class="scroll overflow-auto" style="height: 360px; width: 100%;">
@@ -79,3 +79,10 @@ export default {
   }
 }
 </script>
+<style lang="sass" scoped>
+.my-text-caption
+  font-size: 0.7rem
+  font-weight: 400
+  line-height: .75rem !important
+  letter-spacing: 0.03333em
+</style>

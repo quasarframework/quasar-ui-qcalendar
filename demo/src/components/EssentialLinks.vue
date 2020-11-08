@@ -18,6 +18,7 @@
         <q-item-label caption>Interactively play with properties</q-item-label>
       </q-item-section>
     </q-item>
+
     <q-item clickable to="/examples">
       <q-item-section avatar>
         <q-icon name="calendar_today" />
@@ -27,7 +28,19 @@
         <q-item-label caption>Examples of how to do it</q-item-label>
       </q-item-section>
     </q-item>
+
+    <q-item clickable to="/theme-builder">
+      <q-item-section avatar>
+        <q-icon name="fas fa-palette" />
+      </q-item-section>
+      <q-item-section>
+        <q-item-label>Theme Builder</q-item-label>
+        <q-item-label caption>Build QCalendar themes</q-item-label>
+      </q-item-section>
+    </q-item>
+
     <q-separator />
+
     <q-item clickable tag="a" target="_blank" href="https://github.com/quasarframework/quasar-ui-qcalendar">
       <q-item-section avatar>
         <q-icon name="home" />
