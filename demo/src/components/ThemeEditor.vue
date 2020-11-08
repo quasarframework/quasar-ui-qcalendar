@@ -84,6 +84,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { colors } from 'quasar'
+const { brightness } = colors
 
 export default {
   name: 'ThemeEditor',
@@ -240,8 +242,15 @@ export default {
       // create normal js array from Set
       colors = Array.from(colors)
 
-      // reverse sort (looks better visually)
-      colors.reverse()
+      colors.sort((a, b) => {
+        const a1 = brightness(a)
+        const b1 = brightness(b)
+        // reverse sort (looks better visually)
+        if (a1 < b1) return 1
+        if (a1 > b1) return -1
+        return 0
+      })
+
       return colors
     }
   },
