@@ -82,6 +82,7 @@ export default {
         newStyles = JSON.parse(this.editorValue)
       }
       catch (e) {
+        /* eslint-disable no-console */
         console.error(e.message)
         return
       }

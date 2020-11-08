@@ -106,12 +106,6 @@ export default {
     }
   },
 
-  watch: {
-    mouseDown (val) {
-      console.log('mouseDown:', this.mouseDown)
-    }
-  },
-
   methods: {
     classDay (timestamp) {
       if (this.anchorDayIdentifier !== false && this.otherDayIdentifier !== false) {

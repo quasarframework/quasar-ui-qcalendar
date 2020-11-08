@@ -230,11 +230,6 @@ export default {
       currentStyleName: 'ThemeBuilder/currentStyleName'
     })
   },
-  watch: {
-    openThemeImporter (val) {
-      console.log('openThemeImporter:', val)
-    }
-  },
   methods: {
     ...mapMutations('ThemeBuilder', [
       'setStyle',

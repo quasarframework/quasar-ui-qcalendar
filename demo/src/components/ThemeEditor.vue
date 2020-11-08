@@ -266,11 +266,7 @@ export default {
       this.updateEditor()
     },
     currentStyle (val) {
-      console.log('currentStyle:', val)
       this.$emit('style', val)
-    },
-    colorPalette (val) {
-      console.log('colorPalette has changed!')
     }
   },
 
