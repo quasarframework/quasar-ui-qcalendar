@@ -120,16 +120,9 @@ export default {
             }
           }
         },
-        // :column:head DEPRECATED in v2.4.0
-        on: this.getDefaultMouseEventHandlers2(':column:head', ':column:header2', (event, eventName) => {
-          if (eventName.indexOf('2') > -1) {
-            return { scope: { column, index: idx }, event }
-          }
-          else {
-            return { scope, event }
-          }
+        on: this.getDefaultMouseEventHandlers(':column:header2', (event, eventName) => {
+          return { scope: { column, index: idx }, event }
         })
-        // ---
       }, [
         this.noDefaultHeaderText !== true && this.__renderHeadColumn(h, column),
         slot && slot(scope)
@@ -199,8 +192,7 @@ export default {
             }
           }
         },
-        // :column DEPRECATED in v2.4.0
-        on: this.getDefaultMouseEventHandlers2(':column', ':column2', (event, eventName) => {
+        on: this.getDefaultMouseEventHandlers(':column2', (event, eventName) => {
           if (eventName.indexOf('2') > -1) {
             return { scope: scope, event }
           }
@@ -208,7 +200,6 @@ export default {
             return { scope, event }
           }
         })
-        // ---
       }, [
         slot && slot(scope)
       ])
@@ -242,18 +233,11 @@ export default {
             }
           }
         },
-        // :time DEPRECATED in v2.4.0
-        on: this.getDefaultMouseEventHandlers2(':time', ':time2', (event, eventName) => {
+        on: this.getDefaultMouseEventHandlers(':time2', (event, eventName) => {
           const scope = this.getScopeForSlot(this.getTimestampAtEvent(event, day), idx)
-          if (eventName.indexOf('2') > -1) {
-            scope.index = idx
-            return { scope, event }
-          }
-          else {
-            return { scope, event }
-          }
+          scope.index = idx
+          return { scope, event }
         })
-        // ---
       }, [
         slot && slot(scope)
       ])

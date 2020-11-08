@@ -153,11 +153,9 @@ export default {
           }
         },
         on: {
-          // :day DEPRECATED in v2.4.0
-          ...this.getDefaultMouseEventHandlers2(':day', ':day:header2', event => {
+          ...this.getDefaultMouseEventHandlers(':day:header2', event => {
             return { scope, event }
           })
-          // ---
         }
       }, [
         headDaySlot !== undefined && headDaySlot(scope),
@@ -205,22 +203,11 @@ export default {
           disable: day.disabled
         },
         on: {
-          // DEPRECATED in v2.4.0
           ...this.getMouseEventHandlers({
-            'click:date': { event: 'click', stop: true },
-            'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false },
-            // ---
             'click:date2': { event: 'click', stop: true },
             'contextmenu:date2': { event: 'contextmenu', stop: true, prevent: true, result: false }
           }, (event, eventName) => {
-            if (eventName.indexOf('2') > -1) {
-              return { scope: { timestamp: day }, event }
-            }
-            // DEPRECATED in v2.4.0
-            else {
-              return day
-            }
-            // ---
+            return { scope: { timestamp: day }, event }
           })
         }
       }, [
@@ -333,12 +320,10 @@ export default {
           maxWidth: width + '%'
         },
         on: {
-          // :time DEPRECATED in v2.4.0
-          ...this.getDefaultMouseEventHandlers2(':time', ':time2', event => {
+          ...this.getDefaultMouseEventHandlers(':time2', event => {
             const scope = this.getScopeForSlot(this.getTimestampAtEvent(event, day), idx)
             return { scope, event }
           })
-          // ---
         }
       }, [
         ...this.__renderDayIntervals(h, dayIndex, idx),
@@ -390,17 +375,10 @@ export default {
       const data = {
         staticClass: 'q-calendar-daily__intervals-body',
         on: {
-          // :interval DEPRECATED in v2.4.0
-          ...this.getDefaultMouseEventHandlers2(':interval', ':interval2', (event, eventName) => {
+          ...this.getDefaultMouseEventHandlers(':interval2', (event, eventName) => {
             const timestamp = this.getTimestampAtEvent(event, this.parsedStart)
-            if (eventName.indexOf('2') > -1) {
-              return { scope: { timestamp }, event }
-            }
-            else {
-              return timestamp
-            }
+            return { scope: { timestamp }, event }
           })
-          // ---
         }
       }
 

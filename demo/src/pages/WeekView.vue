@@ -104,7 +104,7 @@ Do NOT combine suffixes. Only one suffix per event. A different suffix will give
 :::
 
 ::: warning
-The events `:day` (now `:day:header2`), `:time`, `:interval` and `:date` still exist, but have been marked as deprecated starting with v2.4.0
+The events `:day` (now `:day:header2`), `:time`, `:interval` and `:date` have been removed in v3.0.0
 :::
 
 The example below is only showing `click` events as well as the `input` event.

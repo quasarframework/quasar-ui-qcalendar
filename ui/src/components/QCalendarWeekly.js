@@ -267,11 +267,9 @@ export default {
         key: day.workweek,
         staticClass: 'q-calendar-weekly__workweek',
         class: this.getRelativeClasses(timestamp !== false ? timestamp : day, false),
-        // :workweek DEPRECATED in v2.4.0
-        on: this.getDefaultMouseEventHandlers2(':workweek', ':workweek2', event => {
+        on: this.getDefaultMouseEventHandlers(':workweek2', event => {
           return { scope, event }
         })
-        // ---
       }, slot ? slot(scope) : workweekLabel)
     },
 
@@ -309,11 +307,9 @@ export default {
             }
           }
         },
-        // :day DEPRECATED in v2.4.0
-        on: this.getDefaultMouseEventHandlers2(':day', ':day2', event => {
+        on: this.getDefaultMouseEventHandlers(':day2', event => {
           return { scope, event }
         })
-        // ---
       }, [
         this.__renderDayLabel(h, day),
         this.isMiniMode !== true && this.showDayOfYearLabel && !hasMonth ? this.__renderDayOfYearLabel(h, day) : '',
@@ -359,21 +355,10 @@ export default {
         },
         on: {
           ...this.getMouseEventHandlers({
-            // DEPRECATED in v2.4.0
-            'click:date': { event: 'click', stop: true },
-            'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false },
-            // ---
             'click:date2': { event: 'click', stop: true },
             'contextmenu:date2': { event: 'contextmenu', stop: true, prevent: true, result: false }
           }, (event, eventName) => {
-            if (eventName.indexOf('2') > -1) {
-              return { scope: { timestamp: day }, event }
-            }
-            // DEPRECATED in v2.4.0
-            else {
-              return day
-            }
-            // ---
+            return { scope: { timestamp: day }, event }
           })
         }
       }, [

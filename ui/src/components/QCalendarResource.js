@@ -106,16 +106,9 @@ export default {
             }
           }
         },
-        // :interval DEPRECATED in v2.4.0
-        on: this.getDefaultMouseEventHandlers2(':interval', ':interval2', (event, eventName) => {
-          if (eventName.indexOf('2') > -1) {
-            return { scope: { timestamp: interval, index, label }, event }
-          }
-          else {
-            return { interval, index, label, event }
-          }
+        on: this.getDefaultMouseEventHandlers(':interval2', (event, eventName) => {
+          return { scope: { timestamp: interval, index, label }, event }
         })
-        // ---
       }, label)
     },
 
@@ -245,16 +238,9 @@ export default {
           minWidth: width,
           height
         },
-        // :resource DEPRECATED in v2.4.0
-        on: this.getDefaultMouseEventHandlers2(':resource', ':resource2', (event, eventName) => {
-          if (eventName.indexOf('2') > -1) {
-            return { scope: { resource, index: idx, intervals: this.intervals }, event }
-          }
-          else {
-            return { resource, index: idx, event }
-          }
+        on: this.getDefaultMouseEventHandlers(':resource2', (event, eventName) => {
+          return { scope: { resource, index: idx, intervals: this.intervals }, event }
         })
-        // ---
       }, [
         slot ? slot(scope) : this.__renderResourceText(h, resource, idx, indentLevel)
       ])
@@ -334,19 +320,12 @@ export default {
             }
           }
         },
-        // :time DEPRECATED in v2.4.0
-        on: this.getDefaultMouseEventHandlers2(':time', ':time2', (event, eventName) => {
+        on: this.getDefaultMouseEventHandlers(':time2', (event, eventName) => {
           const scope = this.getScopeForSlotX(this.getTimestampAtEventX(event, interval))
-          if (eventName.indexOf('2') > -1) {
-            scope.resource = resource
-            scope.index = idx
-            return { scope, event }
-          }
-          else {
-            return { scope, resource, event }
-          }
+          scope.resource = resource
+          scope.index = idx
+          return { scope, event }
         })
-        // ---
       }, [
         slot && slot(slotData)
       ])

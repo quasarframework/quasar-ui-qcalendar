@@ -1092,7 +1092,7 @@
       }
     },
     "click:date": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on date button",
       "applicable": [
         "All"
@@ -1151,7 +1151,7 @@
       }
     },
     "contextmenu:date": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on date button",
       "applicable": [
         "All"
@@ -1210,7 +1210,7 @@
       }
     },
     "mousedown:date": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on date button",
       "applicable": [
         "All"
@@ -1269,7 +1269,7 @@
       }
     },
     "mouseup:date": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on date button",
       "applicable": [
         "All"
@@ -1328,7 +1328,7 @@
       }
     },
     "mouseenter:date": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on date button",
       "applicable": [
         "All"
@@ -1387,7 +1387,7 @@
       }
     },
     "mouseleave:date": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on date button",
       "applicable": [
         "All"
@@ -1446,7 +1446,7 @@
       }
     },
     "mousemove:date": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on date button",
       "applicable": [
         "All"
@@ -1505,7 +1505,7 @@
       }
     },
     "touchstart:date": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on date button",
       "applicable": [
         "All"
@@ -1564,7 +1564,7 @@
       }
     },
     "touchend:date": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on date button",
       "applicable": [
         "All"
@@ -1623,7 +1623,7 @@
       }
     },
     "touchmove:date": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on date button",
       "applicable": [
         "All"
@@ -1683,7 +1683,7 @@
     },
 
     "click:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on day area",
       "applicable": [
         "month"
@@ -1750,7 +1750,7 @@
       }
     },
     "contextmenu:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on day area",
       "applicable": [
         "month"
@@ -1817,7 +1817,7 @@
       }
     },
     "mousedown:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on day area",
       "applicable": [
         "month"
@@ -1884,7 +1884,7 @@
       }
     },
     "mouseup:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on day area",
       "applicable": [
         "month"
@@ -1951,7 +1951,7 @@
       }
     },
     "mouseenter:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on day area",
       "applicable": [
         "month"
@@ -2018,7 +2018,7 @@
       }
     },
     "mouseleave:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on day area",
       "applicable": [
         "month"
@@ -2085,7 +2085,7 @@
       }
     },
     "mousemove:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on day area",
       "applicable": [
         "month"
@@ -2152,7 +2152,7 @@
       }
     },
     "touchstart:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on day area",
       "applicable": [
         "month"
@@ -2219,7 +2219,7 @@
       }
     },
     "touchend:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on day area",
       "applicable": [
         "month"
@@ -2286,7 +2286,7 @@
       }
     },
     "touchmove:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on day area",
       "applicable": [
         "month"
@@ -2825,7 +2825,7 @@
     },
 
     "click:workweek": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on workweek",
       "addedIn": "v1.5.6",
       "applicable": [
@@ -2910,7 +2910,7 @@
       }
     },
     "contextmenu:workweek": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on workweek",
       "addedIn": "v1.5.6",
       "applicable": [
@@ -2995,7 +2995,7 @@
       }
     },
     "mousedown:workweek": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on workweek",
       "addedIn": "v1.5.6",
       "applicable": [
@@ -3080,7 +3080,7 @@
       }
     },
     "mouseup:workweek": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on workweek",
       "addedIn": "v1.5.6",
       "applicable": [
@@ -3165,7 +3165,7 @@
       }
     },
     "mouseenter:workweek": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on workweek",
       "addedIn": "v1.5.6",
       "applicable": [
@@ -3250,7 +3250,7 @@
       }
     },
     "mouseleave:workweek": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on workweek",
       "addedIn": "v1.5.6",
       "applicable": [
@@ -3335,7 +3335,7 @@
       }
     },
     "mousemove:workweek": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on workweek",
       "addedIn": "v1.5.6",
       "applicable": [
@@ -3420,7 +3420,7 @@
       }
     },
     "touchstart:workweek": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on workweek",
       "addedIn": "v1.5.6",
       "applicable": [
@@ -3505,7 +3505,7 @@
       }
     },
     "touchend:workweek": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on workweek",
       "addedIn": "v1.5.6",
       "applicable": [
@@ -3590,7 +3590,7 @@
       }
     },
     "touchmove:workweek": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on workweek",
       "addedIn": "v1.5.6",
       "applicable": [
@@ -4057,7 +4057,7 @@
     },
 
     "click:interval": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval area",
       "applicable": [
         "day",
@@ -4144,7 +4144,7 @@
       }
     },
     "contextmenu:interval": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval area",
       "applicable": [
         "day",
@@ -4231,7 +4231,7 @@
       }
     },
     "mousedown:interval": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval area",
       "applicable": [
         "day",
@@ -4318,7 +4318,7 @@
       }
     },
     "mouseup:interval": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval area",
       "applicable": [
         "day",
@@ -4405,7 +4405,7 @@
       }
     },
     "mouseenter:interval": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval area",
       "applicable": [
         "day",
@@ -4492,7 +4492,7 @@
       }
     },
     "mouseleave:interval": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval area",
       "applicable": [
         "day",
@@ -4579,7 +4579,7 @@
       }
     },
     "mousemove:interval": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval area",
       "applicable": [
         "day",
@@ -4666,7 +4666,7 @@
       }
     },
     "touchstart:interval": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval area",
       "applicable": [
         "day",
@@ -4753,7 +4753,7 @@
       }
     },
     "touchend:interval": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval area",
       "applicable": [
         "day",
@@ -4840,7 +4840,7 @@
       }
     },
     "touchmove:interval": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval area",
       "applicable": [
         "day",
@@ -5399,7 +5399,7 @@
     },
 
     "click:time": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval time area",
       "applicable": [
         "day",
@@ -5605,7 +5605,7 @@
       }
     },
     "contextmenu:time": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval time area",
       "applicable": [
         "day",
@@ -5749,7 +5749,7 @@
       }
     },
     "mousedown:time": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval time area",
       "applicable": [
         "day",
@@ -5893,7 +5893,7 @@
       }
     },
     "mouseup:time": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval time area",
       "applicable": [
         "day",
@@ -6037,7 +6037,7 @@
       }
     },
     "mouseenter:time": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval time area",
       "applicable": [
         "day",
@@ -6181,7 +6181,7 @@
       }
     },
     "mouseleave:time": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval time area",
       "applicable": [
         "day",
@@ -6325,7 +6325,7 @@
       }
     },
     "mousemove:time": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval time area",
       "applicable": [
         "day",
@@ -6469,7 +6469,7 @@
       }
     },
     "touchstart:time": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval time area",
       "applicable": [
         "day",
@@ -6613,7 +6613,7 @@
       }
     },
     "touchend:time": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval time area",
       "applicable": [
         "day",
@@ -6757,7 +6757,7 @@
       }
     },
     "touchmove:time": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval time area",
       "applicable": [
         "day",
@@ -6902,7 +6902,7 @@
     },
 
     "click:resource": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource area",
       "applicable": [
         "scheduler",
@@ -6981,7 +6981,7 @@
       }
     },
     "contextmenu:resource": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource area",
       "applicable": [
         "scheduler",
@@ -7060,7 +7060,7 @@
       }
     },
     "mousedown:resource": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource area",
       "applicable": [
         "scheduler",
@@ -7139,7 +7139,7 @@
       }
     },
     "mouseup:resource": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource area",
       "applicable": [
         "scheduler",
@@ -7218,7 +7218,7 @@
       }
     },
     "mouseenter:resource": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource area",
       "applicable": [
         "scheduler",
@@ -7297,7 +7297,7 @@
       }
     },
     "mouseleave:resource": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource area",
       "applicable": [
         "scheduler",
@@ -7376,7 +7376,7 @@
       }
     },
     "mousemove:resource": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource area",
       "applicable": [
         "scheduler",
@@ -7455,7 +7455,7 @@
       }
     },
     "touchstart:resource": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource area",
       "applicable": [
         "scheduler",
@@ -7534,7 +7534,7 @@
       }
     },
     "touchend:resource": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource area",
       "applicable": [
         "scheduler",
@@ -7613,7 +7613,7 @@
       }
     },
     "touchmove:resource": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource area",
       "applicable": [
         "scheduler",
@@ -8174,7 +8174,7 @@
     },
 
     "click:resource:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource day area",
       "applicable": [
         "scheduler",
@@ -8266,7 +8266,7 @@
       }
     },
     "contextmenu:resource:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource day area",
       "applicable": [
         "scheduler",
@@ -8358,7 +8358,7 @@
       }
     },
     "mousedown:resource:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource day area",
       "applicable": [
         "scheduler",
@@ -8450,7 +8450,7 @@
       }
     },
     "mouseup:resource:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource day area",
       "applicable": [
         "scheduler",
@@ -8542,7 +8542,7 @@
       }
     },
     "mouseenter:resource:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource day area",
       "applicable": [
         "scheduler",
@@ -8634,7 +8634,7 @@
       }
     },
     "mouseleave:resource:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource day area",
       "applicable": [
         "scheduler",
@@ -8726,7 +8726,7 @@
       }
     },
     "mousemove:resource:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource day area",
       "applicable": [
         "scheduler",
@@ -8818,7 +8818,7 @@
       }
     },
     "touchstart:resource:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource day area",
       "applicable": [
         "scheduler",
@@ -8910,7 +8910,7 @@
       }
     },
     "touchend:resource:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource day area",
       "applicable": [
         "scheduler",
@@ -9002,7 +9002,7 @@
       }
     },
     "touchmove:resource:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource day area",
       "applicable": [
         "scheduler",
@@ -9095,7 +9095,7 @@
     },
 
     "click:column:head": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "addedIn": "v1.5.0",
       "desc": "Occurs on column header (use click:column:header2 instead)",
       "applicable": [

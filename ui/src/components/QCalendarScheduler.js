@@ -188,11 +188,9 @@ export default {
             }
           }
         },
-        // :day DEPRECATED in v2.4.0
-        on: this.getDefaultMouseEventHandlers2(':day', ':day:header2', event => {
+        on: this.getDefaultMouseEventHandlers(':day:header2', event => {
           return { scope, event }
         })
-        // ---
       }, [
         headDaySlot !== undefined && headDaySlot(scope),
         headDaySlot === undefined && this.columnHeaderBefore === true && this.__renderColumnHeaderBefore(h, day, idx),
@@ -236,21 +234,10 @@ export default {
         },
         on: {
           ...this.getMouseEventHandlers({
-            // DEPRECATED in v2.4.0
-            'click:date': { event: 'click', stop: true },
-            'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false },
-            // ---
             'click:date2': { event: 'click', stop: true },
             'contextmenu:date2': { event: 'contextmenu', stop: true, prevent: true, result: false }
           }, (event, eventName) => {
-            if (eventName.indexOf('2') > -1) {
-              return { scope, event }
-            }
-            // DEPRECATED in v2.4.0
-            else {
-              return scope
-            }
-            // ---
+            return { scope, event }
           })
         }
       }, [
@@ -435,12 +422,10 @@ export default {
             }
           }
         },
-        // :resource:day DEPRECATED in v2.4.0
-        on: this.getDefaultMouseEventHandlers2(':resource:day', ':resource:day2', event => {
+        on: this.getDefaultMouseEventHandlers(':resource:day2', event => {
           const scope = this.getScopeForSlot(this.getTimestampAtEvent(event, day), resourceIndex, resource)
           return { scope, event }
         })
-        // ---
       }
 
       const children = slot ? slot(scope) : undefined
@@ -471,11 +456,9 @@ export default {
           height: '100%',
           paddingLeft: (10 * indentLevel + 2) + 'px'
         },
-        // :resource DEPRECATED in v2.4.0
-        on: this.getDefaultMouseEventHandlers2(':resource', ':resource2', event => {
+        on: this.getDefaultMouseEventHandlers(':resource2', event => {
           return { scope, event }
         })
-        // ---
       }, [
         slot ? slot(scope) : h('div', {
           staticClass: 'q-calendar-scheduler__resource-text'
