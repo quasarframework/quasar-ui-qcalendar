@@ -250,7 +250,9 @@ The `month` view is for displaying a finite number of weeks according to the cal
 
 > For time periods which fall outside of the current month, yet are still displayed (beginning and ending days of the month view), these are known as the `outside` days. The current date is known as the `current` day (obviously). Days leading up to the current date are known as `past` days and days that come after the current date are known as `future` days.
 
-The image also highlights a number of slots used for events.
+The image above also highlights the use of the day slot for events. The next image is highlighting the week slot for better multi-day events.
+
+![MonthViewWeekSlot](qcalendar-month-view--week-slot.png "Month View week slot" =800x800)
 
 ### Mini-Mode
 
