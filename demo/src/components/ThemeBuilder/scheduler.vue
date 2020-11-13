@@ -3,6 +3,7 @@
     <div class="q-gutter-sm justify-center">
       <q-checkbox v-model="disabledDays" dense label="Disabled weekends" />
       <div class="row justify-evenly q-gutter-sm">
+        <span></span>
         <span>Note: setting any height to 0 will make it 'auto'</span>
       </div>
       <div class="row justify-evenly q-gutter-sm full-width">
