@@ -10,7 +10,7 @@ import {
   createDayList,
   getDayIdentifier,
   createNativeLocaleFormatter
-} from '../utils/timestamp'
+} from '../utils/Timestamp.js'
 import { convertToUnit } from '../utils/helpers.js'
 
 export default {
@@ -197,7 +197,7 @@ export default {
 
       return h('div', {
         key: day.date,
-        staticClass: 'q-calendar-weekly__head-weekday' + (disabled === true ? ' q-disabled-day' : ''),
+        staticClass: 'q-calendar-weekly__head-weekday' + (disabled === true ? ' q-disabled-day disabled' : ''),
         style: {
           minWidth: width,
           maxWidth: width

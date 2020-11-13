@@ -1,5 +1,5 @@
 // eslint-disable-next-line node/no-missing-require
-const timestamp = require('utils/timestamp.js')
+const timestamp = require('utils/Timestamp.js')
 
 describe('[TIMESTAMP] isOverlappingDates', () => {
   it('isOverlappingDates 2002-01-01/2020-01-10 and 2019-12-29/2020-01-04', async () => {

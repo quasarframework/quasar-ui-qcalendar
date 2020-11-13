@@ -6,7 +6,7 @@ import {
   parseTimestamp,
   getStartOfMonth,
   getEndOfMonth
-} from '../utils/timestamp'
+} from '../utils/Timestamp.js'
 
 /* @vue/component */
 export default {

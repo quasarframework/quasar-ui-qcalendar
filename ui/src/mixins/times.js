@@ -2,7 +2,7 @@ import {
   validateTimestamp,
   parseTimestamp,
   parseDate
-} from '../utils/timestamp'
+} from '../utils/Timestamp.js'
 
 export default {
   name: 'Times',

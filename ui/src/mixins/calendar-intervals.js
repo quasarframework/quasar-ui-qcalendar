@@ -10,7 +10,7 @@ import {
   createDayList,
   createIntervalList,
   createNativeLocaleFormatter
-} from '../utils/timestamp'
+} from '../utils/Timestamp.js'
 
 export default {
   name: 'CalendarWithIntervals',

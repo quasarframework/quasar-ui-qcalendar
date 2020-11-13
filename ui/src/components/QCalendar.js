@@ -19,7 +19,7 @@ import {
   getStartOfMonth,
   getEndOfMonth,
   getDayIdentifier
-} from '../utils/timestamp.js'
+} from '../utils/Timestamp.js'
 
 // Calendars
 import QCalendarMonthly from './QCalendarMonthly'
