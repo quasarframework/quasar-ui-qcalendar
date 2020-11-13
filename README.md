@@ -20,7 +20,7 @@ Among other updates, several things have become "native" for QCalendar:
 1. The largest overhaul was introducing css vars to allow users the ability to customize QCalendar
 2. QCalendar was compared to dozens of other calendars and the look was optimized to be more modern
 3. The original theming has been removed. The css vars are 25% faster than the previous theming code
-4. You no longer need to provide a .q-active-date class. You can now change the active date colors via css vars
+4. You no longer need to provide a `.q-active-date` class of your own. You can now change the active date colors via css vars
 5. You no longer need to hook into the styles properties (ie: interval-style) to change the way disabled days look. You can now change the disable date colors via css vars
 6. 'activeDate' is now included in a lot of the scoped slots and events
 7. On interval-based calendars, when using the property "interval-minutes", those parts of the calendar are now called "interval sections" and can be changed via css vars. The default is to now have a "dashed" look, while at the main interval time, the lines are solid. Again, all changeable via css vars

@@ -71,7 +71,7 @@ import {
   compareDate,
   compareTime,
   compareDateTime
-} from './utils/timestamp.js'
+} from './utils/Timestamp.js'
 
 import {
   convertToUnit,

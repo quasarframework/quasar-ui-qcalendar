@@ -1,4 +1,4 @@
-import { validateNumber, validateTimestamp } from './timestamp'
+import { validateNumber, validateTimestamp } from './Timestamp.js'
 import { validateView } from './views'
 
 /* public properties */

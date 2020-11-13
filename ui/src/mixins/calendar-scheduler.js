@@ -8,7 +8,7 @@ import {
   copyTimestamp,
   createDayList,
   updateRelative
-} from '../utils/timestamp'
+} from '../utils/Timestamp.js'
 
 export default {
   name: 'CalendarWithScheduler',

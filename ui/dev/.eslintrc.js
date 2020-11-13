@@ -7,18 +7,21 @@ module.exports = {
   parserOptions: {
     parser: 'babel-eslint',
     ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
-    sourceType: 'module' // Allows for the use of imports
+    sourceType: 'module', // Allows for the use of imports
+    ecmaFeatures: {
+      jsx: true
+    }
   },
 
   env: {
-    browser: true
+    browser: true,
+    es6: true
   },
 
   // Rules order is important, please avoid shuffling them
   extends: [
     // Base ESLint recommended rules
     // 'eslint:recommended',
-
 
     // Uncomment any of the lines below to choose desired strictness,
     // but leave only one uncommented!
@@ -27,15 +30,17 @@ module.exports = {
     // 'plugin:vue/strongly-recommended', // Priority B: Strongly Recommended (Improving Readability)
     // 'plugin:vue/recommended', // Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead)
 
-    'standard'
+    'plugin:quasar/standard',
 
+    'standard'
   ],
 
+  // required to lint *.vue files
   plugins: [
     // https://eslint.vuejs.org/user-guide/#why-doesn-t-it-work-on-vue-file
     // required to lint *.vue files
-    'vue'
-
+    'vue',
+    'quasar'
   ],
 
   globals: {
@@ -67,6 +72,12 @@ module.exports = {
 
     'brace-style': [2, 'stroustrup', { allowSingleLine: false }],
 
+    'quasar/no-invalid-props': 'error',
+    'quasar/no-invalid-qfield-usage': 'error',
+
+    'no-void': 'off',
+    // allow console.log during development only
+    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     // allow debugger during development only
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   }

@@ -15,7 +15,7 @@ import {
   getStartOfWeek,
   getEndOfWeek,
   getDayIdentifier
-} from '../utils/timestamp'
+} from '../utils/Timestamp.js'
 
 export default {
   name: 'CalendarBase',
@@ -129,7 +129,7 @@ export default {
         'q-range': betweenDays === true,
         'q-range-last': lastDay === true,
         'q-range-hover': hover === true && (firstDay === true || lastDay === true || betweenDays === true),
-        'q-disabled-day': timestamp.disabled === true
+        'q-disabled-day disabled': timestamp.disabled === true
       }
     },
 

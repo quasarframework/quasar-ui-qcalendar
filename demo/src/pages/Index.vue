@@ -33,7 +33,7 @@ This page created with [QMarkdown](https://quasarframework.github.io/quasar-ui-q
 import Hero from '../components/Hero'
 import markdown from '../markdown/calendar.md'
 import Api from '@quasar/quasar-ui-qcalendar/dist/api/QCalendar.json'
-import Api2 from '@quasar/quasar-ui-qcalendar/dist/api/timestamp.json'
+import Api2 from '@quasar/quasar-ui-qcalendar/dist/api/Timestamp.json'
 
 export default {
   name: 'PageIndex',

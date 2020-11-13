@@ -12,7 +12,6 @@
       :interval-count="96"
       :disabled-weekdays="disabledWeekdays"
       :no-active-date="noActiveDate"
-      :interval-style="modifiedStyle"
       locale="en-us"
       style="height: 400px;"
       :style="styles"
@@ -47,17 +46,6 @@ export default {
   computed: {
     disabledWeekdays () {
       return this.disabledDays === true ? [0, 6] : []
-    }
-  },
-
-  methods: {
-    modifiedStyle (scope) {
-      if (scope.disabled === true) {
-        return {
-          cursor: 'not-allowed'
-        }
-      }
-      return {}
     }
   }
 }

@@ -1,5 +1,5 @@
 // eslint-disable-next-line node/no-missing-require
-const timestamp = require('utils/timestamp.js')
+const timestamp = require('utils/Timestamp.js')
 
 describe('[TIMESTAMP] daysBetween', () => {
   it('daysBetween 2020-01-01 and 2020-12-31 (Leap Year)', async () => {

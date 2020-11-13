@@ -27,8 +27,8 @@ module.exports.syncAppExt = function (both = true) {
 
   // read app-ext package.json
   const appExtFile = resolvePath('app-extension/package.json')
-  let appExtJson = require(appExtFile),
-    finished = false
+  const appExtJson = require(appExtFile)
+  let finished = false
 
   // sync version numbers
   if (both === true) {
@@ -36,15 +36,15 @@ module.exports.syncAppExt = function (both = true) {
   }
 
   // check dependencies
-  if (appExtJson.dependencies !== undefined) {
-    if (appExtJson.dependencies[name] !== undefined) {
+  if (appExtJson.dependencies !== void 0) {
+    if (appExtJson.dependencies[name] !== void 0) {
       appExtJson.dependencies[name] = '^' + version
       finished = true
     }
   }
   // check devDependencies, if not finished
-  if (finished === false && appExtJson.devDependencies !== undefined) {
-    if (appExtJson.devDependencies[name] !== undefined) {
+  if (finished === false && appExtJson.devDependencies !== void 0) {
+    if (appExtJson.devDependencies[name] !== void 0) {
       appExtJson.devDependencies[name] = '^' + version
       finished = true
     }
@@ -56,5 +56,5 @@ module.exports.syncAppExt = function (both = true) {
     return
   }
 
-  console.error(`   App Extension version and dependency NOT synced.\n`)
+  console.error('   App Extension version and dependency NOT synced.\n')
 }

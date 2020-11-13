@@ -1,8 +1,14 @@
 <template>
   <div>
+    <div class="q-gutter-sm q-mb-sm">
+      <q-checkbox v-model="noActiveDate" dense label="No active date" />
+      <q-checkbox v-model="disabledDays" dense label="Disabled weekends" />
+    </div>
     <q-calendar
       v-model="selectedDate"
       view="week-agenda"
+      :disabled-weekdays="disabledWeekdays"
+      :no-active-date="noActiveDate"
       bordered
       locale="en-us"
       style="height: 400px;"
@@ -43,6 +49,8 @@ export default {
   data () {
     return {
       selectedDate: '',
+      noActiveDate: false,
+      disabledDays: false,
       agenda: {
         // value represents day of the week
         1: [
@@ -172,6 +180,12 @@ export default {
   methods: {
     getAgenda (day) {
       return this.agenda[parseInt(day.weekday, 10)]
+    }
+  },
+
+  computed: {
+    disabledWeekdays () {
+      return this.disabledDays === true ? [0, 6] : []
     }
   }
 }
