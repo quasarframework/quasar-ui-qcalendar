@@ -160,6 +160,12 @@
               &:before
                 width: 0
 
+        // fix issue with seeing :before on an in-range disabled button
+        &.q-range-first,
+        &.q-range-last
+          .q-btn
+            opacity: 1 !important
+
       &.q-calendar-weekly__day--droppable
         border: var(--calendar-border-droppable) !important
 
@@ -255,6 +261,13 @@
               background: var(--calendar-background-dark)
               border-top: var(--calendar-mini-range-connector-hover-border-dark)
               border-bottom: var(--calendar-mini-range-connector-hover-border-dark)
+
+        // fix issue with seeing :before on an in-range disabled button
+        &.q-range-first,
+        &.q-range-last
+          .q-btn
+            opacity: 1 !important
+
 
         &.q-calendar-weekly__day--droppable
           border: var(--calendar-border-droppable-dark) !important
