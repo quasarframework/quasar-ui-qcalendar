@@ -94,7 +94,7 @@ export default {
       if (this.dayPadding !== undefined) {
         style.padding = this.dayPadding
       }
-      style.minWidth = this.cellWidth + '%'
+      // style.minWidth = this.cellWidth + '%'
       style.maxWidth = style.minWidth
       return style
     },
@@ -199,7 +199,7 @@ export default {
         key: day.date,
         staticClass: 'q-calendar-weekly__head-weekday' + (disabled === true ? ' q-disabled-day disabled' : ''),
         style: {
-          minWidth: width,
+          // minWidth: width,
           maxWidth: width
         },
         on: this.getDefaultMouseEventHandlers(':day:header2', event => {
@@ -352,6 +352,9 @@ export default {
           noCaps: true,
           outline: day.current === true,
           disable: day.disabled === true || (outside === true && this.enableOutsideDays !== true)
+        },
+        style: {
+          lineHeight: this.isMiniMode ? 'unset' : '1.715em'
         },
         on: {
           ...this.getMouseEventHandlers({
