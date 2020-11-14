@@ -12,8 +12,8 @@
       border: 0 !important
       padding: 0
       font-size: unset
-      min-height: 1.5em
-      min-width: 1.5em
+      min-height: 1.5em !important
+      min-width: 1.5em !important
 
     &__week
       min-height: unset
@@ -28,31 +28,35 @@
       min-width: var(--calendar-mini-work-week-width)
 
     &__day
+      display: flex
+      align-items: center
       justify-content: center
       align-items: center
       flex-wrap: wrap
-      min-height: 1.5em
-      min-width: 1.5em
       padding: 0
       border: 0 !important
+      margin-top: 1px
+      margin-bottom: 1px
+      min-height: 1.5em !important
+      min-width: 1.5em !important
 
       &-label
+        position: relative
+        vertical-align: middle
         text-align: center
         top: unset
-        right: 0
-        bottom: unset
-        left: 0
-        margin: auto
-        width: 24px
-        height: 24px
+        left: unset
 
       &.q-active-date
-        color: var(--calendar-active-date-color) !important
+        color: var(--calendar-active-date-color)
 
         .q-btn__wrapper:before
           background: var(--calendar-active-date-background)
 
       &.q-current-day
+        color: var(--calendar-mini-current-color) !important
+        background: var(--calendar-mini-current-background) !important
+
         .q-btn__wrapper:before
           border: var(--calendar-border-current)
 
@@ -65,12 +69,12 @@
           background: var(--calendar-mini-selected-label-background) !important
 
       &.q-disabled-day
-        color: var(--calendar-disabled-date-color)
+        color: var(--calendar-disabled-date-color) !important
         background: var(--calendar-disabled-date-background) !important
 
       &.q-outside
-        color: var(--calendar-outside-color)
-        background: var(--calendar-outside-background)
+        color: var(--calendar-outside-color) !important
+        background: var(--calendar-outside-background) !important
 
       &.q-range-first,
       &.q-range-last
@@ -97,8 +101,6 @@
           display: block
           position: absolute
           width: 100%
-          height: 23px
-          margin-top: 4px
           top: 0
           right: 0
           bottom: 0
@@ -111,8 +113,6 @@
             display: block
             position: absolute
             width: 100%
-            height: 23px
-            margin-top: 4px
             top: 0
             right: 0
             bottom: 0
@@ -160,6 +160,12 @@
               &:before
                 width: 0
 
+        // fix issue with seeing :before on an in-range disabled button
+        &.q-range-first,
+        &.q-range-last
+          .q-btn
+            opacity: 1 !important
+
       &.q-calendar-weekly__day--droppable
         border: var(--calendar-border-droppable) !important
 
@@ -176,7 +182,6 @@
 
   .q-calendar-weekly__week
     border-bottom: unset
-    min-height: 2.2em
     max-width: 100%
 
   // .q-calendar-weekly__week-events
@@ -201,8 +206,7 @@
       &__workweek
         border-right: unset
 
-      &__week
-        &--wrapper
+      &__week--wrapper
           border-bottom: unset
 
       &__day
@@ -210,7 +214,7 @@
         background: var(--calendar-background-dark)
 
         &.q-active-date
-          color: var(--calendar-active-date-color-dark) !important
+          color: var(--calendar-active-date-color-dark)
 
           .q-btn__wrapper:before
             background: var(--calendar-active-date-background-dark)
@@ -228,12 +232,12 @@
               border: var(--calendar-border-current)
 
         &.q-disabled-day
-          color: var(--calendar-disabled-date-color-dark)
+          color: var(--calendar-disabled-date-color-dark) !important
           background: var(--calendar-disabled-date-background-dark) !important
 
         &.q-outside
-          color: var(--calendar-outside-color-dark)
-          background: var(--calendar-outside-background-dark)
+          color: var(--calendar-outside-color-dark) !important
+          background: var(--calendar-outside-background-dark) !important
 
         &.q-range
           color: var(--calendar-mini-range-color-dark)
@@ -255,6 +259,13 @@
               background: var(--calendar-background-dark)
               border-top: var(--calendar-mini-range-connector-hover-border-dark)
               border-bottom: var(--calendar-mini-range-connector-hover-border-dark)
+
+        // fix issue with seeing :before on an in-range disabled button
+        &.q-range-first,
+        &.q-range-last
+          .q-btn
+            opacity: 1 !important
+
 
         &.q-calendar-weekly__day--droppable
           border: var(--calendar-border-droppable-dark) !important

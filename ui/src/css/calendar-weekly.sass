@@ -166,15 +166,18 @@
         background: var(--calendar-active-date-background)
 
     &.q-current-day
+      color: var(--calendar-current-color) !important
+      background: var(--calendar-current-background)
       .q-btn__wrapper:before
         border: var(--calendar-border-current)
+        background: var(--calendar-current-background)
 
     &.q-disabled-day
       color: var(--calendar-disabled-date-color)
       background: var(--calendar-disabled-date-background) !important
 
     &.q-outside
-      color: var(--calendar-outside-color)
+      color: var(--calendar-outside-color) !important
       background: var(--calendar-outside-background)
 
     &.q-selected
@@ -240,14 +243,17 @@
         border-right: none !important
 
       &.q-active-date
-        color: var(--calendar-active-date-color-dark)
+        color: var(--calendar-active-date-color-dark) !important
 
         .q-btn__wrapper:before
           background: var(--calendar-active-date-background-dark)
 
       &.q-current-day
+        color: var(--calendar-current-color-dark) !important
+        background: var(--calendar-current-background-dark)
         .q-btn__wrapper:before
           border: var(--calendar-border-current-dark)
+          background: var(--calendar-current-background-dark)
 
       &.q-disabled-day
         color: var(--calendar-disabled-date-color-dark)
