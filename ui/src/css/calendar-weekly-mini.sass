@@ -28,17 +28,22 @@
       min-width: var(--calendar-mini-work-week-width)
 
     &__day
+      display: flex
+      align-items: center
       justify-content: center
       align-items: center
       flex-wrap: wrap
-      min-height: 1.5em
-      min-width: 1.5em
       padding: 0
       border: 0 !important
+      margin-top: 1px
+      margin-bottom: 1px
       min-height: 1.5em !important
       min-width: 1.5em !important
 
       &-label
+        .q-btn__wrapper:before
+        position: relative
+        vertical-align: middle
         text-align: center
         top: unset
         left: unset
