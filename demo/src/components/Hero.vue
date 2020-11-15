@@ -8,10 +8,11 @@
       <q-btn to="/docs" class="btn" label="Docs" no-caps flat/>
       <q-btn to="/examples" class="btn" label="Examples" no-caps flat/>
       <q-btn v-if="hasInteractiveDemo" to="/demo" class="btn" label="Interactive Demo" no-caps flat/>
+      <q-btn v-if="hasThemeBuilder" to="/theme-builder" class="btn" label="Theme Builder" no-caps flat/>
       <q-btn type="a" :href="donateUrl" target="_blank" class="btn" label="Donate" no-caps flat/>
       <div class="row justify-evenly items-center q-ma-sm">
         <div class="quasar">{{ quasarDesc }}</div>
-        <div class="byline">{{ byline }}<a :href="bylineTwitter" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a></div>
+        <div class="byline">{{ byline }} <a :href="bylineTwitter" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a></div>
       </div>
     </section>
     <main class="flex flex-start justify-center inset-shadow">
@@ -36,7 +37,8 @@ export default {
       quasarDesc: 'A Quasar Framework Component and App Extension',
       locationUrl: 'https://github.com/quasarframework/quasar-ui-qcalendar',
       donateUrl: 'https://github.com/sponsors/hawkeye64',
-      hasInteractiveDemo: true
+      hasInteractiveDemo: true,
+      hasThemeBuilder: true
     }
   }
 }
