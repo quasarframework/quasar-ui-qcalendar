@@ -105,7 +105,7 @@ export default {
 
     isMiniMode () {
       return this.miniMode === true ||
-        (this.miniMode === 'auto' && this.$q.screen.lt[this.breakpoint])
+        (this.miniMode === 'auto' && this.breakpoint !== void 0 && this.$q.screen.lt[this.breakpoint])
     }
   },
 
