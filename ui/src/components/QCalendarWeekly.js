@@ -111,7 +111,9 @@ export default {
 
   watch: {
     isMinimode (val) {
-      this.$emit('mini-mode', val)
+      if (this.breakpoint === 'auto') {
+        this.$emit('mini-mode', val)
+      }
     }
   },
 
