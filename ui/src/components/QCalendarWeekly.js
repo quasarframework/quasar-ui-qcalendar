@@ -94,7 +94,7 @@ export default {
       if (this.dayPadding !== undefined) {
         style.padding = this.dayPadding
       }
-      // style.minWidth = this.cellWidth + '%'
+      style.minWidth = this.cellWidth + '%'
       style.maxWidth = style.minWidth
       return style
     },
@@ -181,7 +181,11 @@ export default {
       return h('div', {
         staticClass: 'q-calendar-weekly__head-weekdays',
         style: {
-          width: this.isMiniMode === true ? 'calc(100% - var(--calendar-mini-work-week-width))' : 'calc(100% - var(--calendar-work-week-width))'
+          minWidth: this.showWorkWeeks
+            ? (this.isMiniMode === true
+              ? 'calc(100% - var(--calendar-mini-work-week-width))'
+              : 'calc(100% - var(--calendar-work-week-width))')
+            : '100%'
         }
       }, [
         ...this.todayWeek.map((day, index) => this.__renderHeadDay(h, day, index))
@@ -199,7 +203,7 @@ export default {
         key: day.date,
         staticClass: 'q-calendar-weekly__head-weekday' + (disabled === true ? ' q-disabled-day disabled' : ''),
         style: {
-          // minWidth: width,
+          minWidth: width,
           maxWidth: width
         },
         on: this.getDefaultMouseEventHandlers(':day:header2', event => {
@@ -242,7 +246,11 @@ export default {
           key: week[0].date,
           staticClass: 'q-calendar-weekly__week',
           style: {
-            width: this.isMiniMode === true ? 'calc(100% - var(--calendar-mini-work-week-width))' : 'calc(100% - var(--calendar-work-week-width))'
+            width: this.showWorkWeeks
+              ? (this.isMiniMode === true
+                ? 'calc(100% - var(--calendar-mini-work-week-width))'
+                : 'calc(100% - var(--calendar-work-week-width))')
+              : '100%'
           }
         }, [
           h('div', {
