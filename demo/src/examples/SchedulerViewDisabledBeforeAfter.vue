@@ -6,7 +6,6 @@
       :resources="resources"
       :disabled-before="disabledBefore"
       :disabled-after="disabledAfter"
-      :resource-style="modifiedStyle"
       locale="en-us"
       style="height: 400px;"
     />
@@ -67,16 +66,6 @@ export default {
         return ts.date
       }
       return undefined
-    }
-  },
-  methods: {
-    modifiedStyle (scope) {
-      if (scope.timestamp.disabled === true) {
-        return {
-          cursor: 'not-allowed'
-        }
-      }
-      return {}
     }
   }
 }

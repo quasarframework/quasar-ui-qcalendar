@@ -4,7 +4,6 @@
       v-model="selectedDate"
       view="month"
       :disabled-weekdays="[0,6]"
-      :day-style="modifiedStyle"
       locale="en-us"
     />
   </div>
@@ -54,16 +53,6 @@ export default {
         return ts.date
       }
       return undefined
-    }
-  },
-  methods: {
-    modifiedStyle (scope) {
-      if (scope.disabled === true) {
-        return {
-          cursor: 'not-allowed'
-        }
-      }
-      return {}
     }
   }
 }

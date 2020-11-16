@@ -7,7 +7,6 @@
       bordered
       :disabled-days="disabledDays"
       mini-mode
-      :day-style="modifiedStyle"
       locale="en-us"
       style="max-width: 300px; min-width: auto; overflow: hidden"
     />
@@ -18,7 +17,6 @@
       bordered
       :disabled-days="disabledDaysRange"
       mini-mode
-      :day-style="modifiedStyle"
       locale="en-us"
       style="max-width: 300px; min-width: auto; overflow: hidden"
     />
@@ -40,16 +38,6 @@ export default {
         '2019-04-02',
         '2019-04-05'
       ]]
-    }
-  },
-  methods: {
-    modifiedStyle (scope) {
-      if (scope.disabled === true) {
-        return {
-          cursor: 'not-allowed'
-        }
-      }
-      return {}
     }
   }
 }

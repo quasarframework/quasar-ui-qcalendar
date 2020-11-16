@@ -125,7 +125,7 @@ The example below is only showing `click` events as well as the `input` event.
 
     <example-title title="Slots" />
     <q-markdown>
-The `#day` slot allows you to write anything into the body of the day. To avoid writing on top of the `day-label` add the css class `.q-event` to your item which adds a top margin (and also works for mini-mode).
+The `#day` slot allows you to write anything into the content body of the day.
 
 For slots that return `timestamp`, it looks like this:
 ```js
@@ -150,9 +150,6 @@ For slots that return `timestamp`, it looks like this:
 ```
 The example below uses the `#day` slot. This constrains your slotted output to that specific day. For a less-constrained slot, look into the `#week` slot further below.
 
-::: tip
-When adding events to the `#day` slot, use the css class `q-day-event` to have your slotted output line up properly under the day button. If you make adjustments to the `month-label-size`, other than the default, you may have to override the appropriate css to get your desired results.
-:::
     </q-markdown>
     <example-viewer title="Slot (day)" file="MonthViewSlots" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
@@ -161,10 +158,6 @@ The example below uses the **#week** slot (v1.3.2). It's a bit more difficult to
 
 ::: warning
 Do not mix `#day` and `#week` slots or you will have overlapping results.
-:::
-
-::: tip
-When adding events to the `#week` slot, use the css class `q-row-event` to have your slotted data line up properly under the day button.
 :::
 
     </q-markdown>

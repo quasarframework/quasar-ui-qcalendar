@@ -4,7 +4,6 @@
       v-model="selectedDate"
       view="week"
       :disabled-days="disabledDays"
-      :interval-style="modifiedStyle"
       locale="en-us"
       style="height: 400px;"
     />
@@ -40,16 +39,6 @@ export default {
         days.push(QCalendar.addToDate(ts, { day: i + 1 }).date)
       })
       return days
-    }
-  },
-  methods: {
-    modifiedStyle (scope) {
-      if (scope.disabled === true) {
-        return {
-          cursor: 'not-allowed'
-        }
-      }
-      return {}
     }
   }
 }
