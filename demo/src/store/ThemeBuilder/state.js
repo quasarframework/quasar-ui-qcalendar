@@ -22,7 +22,7 @@ export default function () {
 
       '--calendar-current-color': '#027BE3',
       '--calendar-current-color-dark': '#ffff66',
-      '--calendar-current-background': '#ffffff',
+      '--calendar-current-background': '#00000000',
       '--calendar-current-background-dark': '#121212',
 
       '--calendar-disabled-date-color': '#a1a1a1',
@@ -35,9 +35,9 @@ export default function () {
       '--calendar-active-date-background': '#ddccf7',
       '--calendar-active-date-background-dark': '#8f44ff',
 
-      '--calendar-outside-color': '#a1a1a1',
+      '--calendar-outside-color': '#606c71',
       '--calendar-outside-color-dark': '#bebebe',
-      '--calendar-outside-background': '#ffffff',
+      '--calendar-outside-background': '#00000000',
       '--calendar-outside-background-dark': '#121212',
 
       '--calendar-selected-color': '#027BE3',
