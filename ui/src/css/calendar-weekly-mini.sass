@@ -40,6 +40,9 @@
       min-height: 1.5em !important
       min-width: 1.5em !important
 
+      &--content
+        margin-top: 0.05em
+
       &-label
         position: relative
         vertical-align: middle
@@ -169,7 +172,7 @@
       &.q-calendar-weekly__day--droppable
         border: var(--calendar-border-droppable) !important
 
-  .q-event:not(.q-event-void)
+  .q-day-event:not(.q-day-event-void)
     &:after
       content: ''
       width: 0.6em
@@ -272,4 +275,4 @@
 
 .q-calendar-mini
   .q-day-event
-    margin-top: 1.0em
+    margin-top: 0.0em

@@ -295,7 +295,7 @@ export default {
 
       return h('div', {
         key: day.date,
-        staticClass: 'q-calendar-weekly__day',
+        staticClass: 'q-calendar-weekly__day' + (this.isMiniMode !== true ? ' column' : ''),
         class: {
           ...dayClass,
           ...this.getRelativeClasses(day, outside, this.selectedDates, this.selectedStartEndDates, this.hover),
@@ -324,7 +324,7 @@ export default {
         this.isMiniMode !== true && this.showDayOfYearLabel && !hasMonth ? this.__renderDayOfYearLabel(h, day) : '',
         this.isMiniMode !== true && hasMonth ? this.__renderDayMonth(h, day) : '',
         h('div', {
-          staticClass: 'q-calendar-weekly__day--content full-width' + (this.isMiniMode === true ? ' row justify-around' : '')
+          staticClass: 'q-calendar-weekly__day--content full-width' + (this.isMiniMode === true ? ' row justify-center items-center' : '')
         }, slot ? slot(scope) : '')
       ])
     },
