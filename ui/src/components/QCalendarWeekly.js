@@ -297,7 +297,7 @@ export default {
         key: day.date,
         staticClass: 'q-calendar-weekly__day',
         class: {
-          dayClass,
+          ...dayClass,
           ...this.getRelativeClasses(day, outside, this.selectedDates, this.selectedStartEndDates, this.hover),
           'q-active-date': activeDate === true,
           disabled: this.enableOutsideDays !== true && outside === true,
