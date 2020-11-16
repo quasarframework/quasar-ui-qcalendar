@@ -30,7 +30,7 @@ export default {
 
   computed: {
     staticClass () {
-      return (this.isMiniMode ? ' q-calendar-mini ' : '') + 'q-calendar-weekly'
+      return 'q-calendar-weekly'
     },
 
     parsedMinWeeks () {

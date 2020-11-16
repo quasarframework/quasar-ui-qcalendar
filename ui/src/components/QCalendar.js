@@ -158,6 +158,11 @@ export default {
           break
       }
       return { component, start, end, maxDays }
+    },
+
+    __isMiniMode () {
+      return this.miniMode === true ||
+        (this.miniMode === 'auto' && this.breakpoint !== void 0 && this.$q.screen.lt[this.breakpoint])
     }
   },
 
@@ -362,7 +367,7 @@ export default {
     this.keyValue = getDayIdentifier(start)
 
     const data = {
-      staticClass: 'q-calendar' + (this.dark === true ? ' q-calendar--dark' : ''),
+      staticClass: (this.__isMiniMode === true ? 'q-calendar-mini' : ''),
       class: {
         'q-calendar__bordered': this.bordered
       },
@@ -392,6 +397,13 @@ export default {
       scopedSlots: this.$scopedSlots
     }
 
-    return this.__renderComponent(h, component, data)
+    return h('div', {
+      class: {
+        'q-calendar--dark': this.dark === true,
+        'q-calendar': true
+      }
+    }, [
+      this.__renderComponent(h, component, data)
+    ])
   }
 }
