@@ -283,7 +283,7 @@ export default {
 
     __renderDay (h, day) {
       const styler = this.dayStyle || this.dayStyleDefault
-      const outside = this.hideOutsideDays !== true && this.isOutside(day)
+      const outside = this.isOutside(day)
       const activeDate = this.noActiveDate !== true && this.value === day.date
       const slot = this.$scopedSlots.day
       const scope = { outside, timestamp: day, miniMode: this.isMiniMode, activeDate }
@@ -300,6 +300,7 @@ export default {
           dayClass,
           ...this.getRelativeClasses(day, outside, this.selectedDates, this.selectedStartEndDates, this.hover),
           'q-active-date': activeDate === true,
+          disabled: this.enableOutsideDays !== true && outside === true,
           'q-calendar-weekly__day--droppable': dragOver
         },
         style,
@@ -359,7 +360,7 @@ export default {
           dense: true,
           noCaps: true,
           outline: day.current === true,
-          disable: day.disabled === true || (outside === true && this.enableOutsideDays !== true)
+          disable: day.disabled === true || (this.enableOutsideDays !== true && outside === true)
         },
         style: {
           lineHeight: this.isMiniMode ? 'unset' : '1.715em'
