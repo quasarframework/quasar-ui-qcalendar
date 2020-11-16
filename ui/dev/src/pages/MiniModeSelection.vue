@@ -1,5 +1,5 @@
 <template>
-  <div class="row justify-center" style="max-width: 800px; width: 100%; overflow: hidden;">
+  <div class="row justify-center" style="max-width: 800px; width: 100%;">
     <div class="q-gutter-sm">
       <q-checkbox v-model="mobile" label="Use Touch (set if on mobile)" />
     </div>

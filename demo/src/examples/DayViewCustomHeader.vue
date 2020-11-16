@@ -21,6 +21,7 @@
       hide-header
       bordered
       :interval-height="50"
+      animated
       locale="en-us"
       style="height: 400px; border-top: none;"
     />

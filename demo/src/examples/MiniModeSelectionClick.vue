@@ -1,13 +1,11 @@
 <template>
-  <div class="row justify-center" style="max-width: 800px; width: 100%; overflow: hidden;">
-    <q-toolbar class="no-padding no-margin" style="height: 40px; min-height: auto;">
-      <q-space />
-      <q-btn flat label="Prev" @click="calendarPrev" />
+  <div class="row justify-center" style="max-width: 800px; width: 100%;">
+    <div class="row justify-center items-center">
+      <q-btn flat dense label="Prev" @click="calendarPrev" />
       <q-separator vertical />
-      <q-btn flat label="Next" @click="calendarNext" />
-      <q-space />
-    </q-toolbar>
-    <q-separator class="full-width" />
+      <q-btn flat dense label="Next" @click="calendarNext" />
+    </div>
+    <q-separator />
     <div class="row justify-center" style="max-width: 800px; width: 100%; overflow: hidden;">
       <q-calendar
         ref="calendar"

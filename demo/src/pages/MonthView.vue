@@ -8,34 +8,40 @@ Codepen uses the UMD version of QCalendar. As such, the examples below must be w
     <example-title title="Month View" />
     <example-viewer title="Basic" file="MonthViewBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Dark" file="MonthViewDark" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Color" file="MonthViewColor" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="First Day Monday" file="MonthViewMondayFirstDay" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="5 Day Work Week" file="MonthViewFiveDayWorkWeek" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Hide Header" file="MonthViewHideHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <q-markdown>
-The `now` property allows you to set "today's date" to a different date. This property is only available for month view.
+The `now` property allows you to set "today's date" to a different date. In the example below, it is set to yesterday's date. This property is only available for `month` view.
     </q-markdown>
     <example-viewer title="Now" file="MonthViewNow" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
-The `show-work-weeks` property is available only for month view. The current Work Week will be highlighted.
+The `show-work-weeks` property is available only for `month` view. The current Work Week will be highlighted.
     </q-markdown>
     <example-viewer title="Work Weeks" file="MonthViewWorkWeekNumbers" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-viewer title="Short Weekday Label" file="MonthViewShortWeekdayLabel" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <q-markdown>
+You can also use the `:showMonthLabel="false"` to turn the month label off.
+    </q-markdown>
     <example-viewer title="Short Month Label" file="MonthViewShortMonthLabel" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
-The `show-day-of-year-label` property is available only for month view.
+The `show-day-of-year-label` property is available only for `month` view.
     </q-markdown>
     <example-viewer title="Show Day of Year Label" file="MonthViewShowDayOfYearLabel" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
-The `day-height` property is available only for month view.
+The `day-height` property is available only for `month` view.
 
 The example below is setting the `day-height` to `100`, the default is `0`, which tells the calendar component to figure out it's own height.
     </q-markdown>
     <example-viewer title="Day Height" file="MonthViewDayHeight" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+
+    <example-title title="Navigation" />
+    <example-viewer title="Prev/Next" file="MonthViewPrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Swipe" file="MonthViewSwipe" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Outside Days" />
     <q-markdown>
@@ -57,10 +63,6 @@ In this next example, the `disabled-weekdays` is set to disable the weekends.
     </q-markdown>
     <example-viewer title="Disabled Weekdays" file="MonthViewDisabledWeekdays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
-    <example-title title="Navigation" />
-    <example-viewer title="Prev/Next" file="MonthViewPrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Swipe" file="MonthViewSwipe" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-
     <example-title title="Selection" />
     <q-markdown>
 In the next example, click on dates to toggled selected on/off. Care is taken to exclude `outside` dates (dates that fall outside the current month).
@@ -68,13 +70,13 @@ In the next example, click on dates to toggled selected on/off. Care is taken to
     <example-viewer title="Selected Dates" file="MonthViewSelectedDates" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
-The example below shows how to use the QCalendar to create a multi-day selector. The critical aspect of this is the `selected-start-end-dates` property. This takes an array of two dates (the first should be less or equal to the last).
+The example below shows how to use the QCalendar to create a multi-day range selector. The critical aspect of this is the `selected-start-end-dates` property. This takes an array of two dates (the first should be less or equal to the last).
 
-For the example below, click a day, and while holding the mouse down, move to a different day. Keep in mind, this is just one way of handling multi-day selection. if you needed swipe navigation on a mobile, you could modify the code to have independent click on start and end days.
+For the example below, click a day, and while holding the mouse down, move to a different day. Keep in mind, this is just one way of handling multi-day range selection. if you needed swipe navigation on a mobile, you could modify the code to have independent click on start and end days.
 
 Keep in mind that the functionality below won't work with swipe actions.
     </q-markdown>
-    <example-viewer title="Multi-Day Selection (contiguous)" file="MonthViewSelection" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Multi-Day Selection (range)" file="MonthViewSelection" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Events" />
     <q-markdown>
@@ -219,7 +221,6 @@ export default {
     this.addToToc('Month View')
     this.addToToc('Basic', 2)
     this.addToToc('Dark', 2)
-    this.addToToc('Color', 2)
     this.addToToc('First Day Monday', 2)
     this.addToToc('5 Day Work Week', 2)
     this.addToToc('Hide Header', 2)
@@ -230,6 +231,10 @@ export default {
     this.addToToc('Show Day of Year Label', 2)
     this.addToToc('Day Height', 2)
 
+    this.addToToc('Navigation')
+    this.addToToc('Prev/Next', 2)
+    this.addToToc('Swipe', 2)
+
     this.addToToc('Outside Days')
     this.addToToc('Enable Outside Days', 2)
     this.addToToc('Hide Outside Days', 2)
@@ -239,13 +244,9 @@ export default {
     this.addToToc('Disabled Before/After', 2)
     this.addToToc('Disabled Weekdays', 2)
 
-    this.addToToc('Navigation')
-    this.addToToc('Prev/Next', 2)
-    this.addToToc('Swipe', 2)
-
     this.addToToc('Selection')
     this.addToToc('Selected Dates', 2)
-    this.addToToc('Multi-Day Selection (contiguous)', 2)
+    this.addToToc('Multi-Day Selection (range)', 2)
 
     this.addToToc('Events')
     this.addToToc('Events', 2)

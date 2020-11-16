@@ -1,26 +1,24 @@
 <template>
   <div>
     <div class="row justify-center items-center">
-      <q-btn flat label="Prev" @click="prev" />
+      <q-btn flat dense label="Prev" @click="calendarPrev" />
       <q-separator vertical />
-      <q-btn flat label="Next" @click="next" />
+      <q-btn flat dense label="Next" @click="calendarNext" />
     </div>
     <q-separator />
-    <div style="overflow: hidden;">
-      <q-calendar
-        ref="calendar"
-        v-model="selectedDate"
-        view="month"
-        locale="en-us"
-        animated
-        no-active-date
-        transition-prev="slide-right"
-        transition-next="slide-left"
-        :selected-dates="selectedDates"
-        @click:day2="onToggleDay"
-        @click:date2="onToggleDate"
-      />
-    </div>
+    <q-calendar
+      ref="calendar"
+      v-model="selectedDate"
+      view="month"
+      locale="en-us"
+      animated
+      no-active-date
+      transition-prev="slide-right"
+      transition-next="slide-left"
+      :selected-dates="selectedDates"
+      @click:day2="onToggleDay"
+      @click:date2="onToggleDate"
+    />
   </div>
 </template>
 
@@ -34,11 +32,11 @@ export default {
   },
 
   methods: {
-    next () {
+    calendarNext () {
       this.$refs.calendar.next()
     },
 
-    prev () {
+    calendarPrev () {
       this.$refs.calendar.prev()
     },
 

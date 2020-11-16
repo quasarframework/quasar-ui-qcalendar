@@ -1,5 +1,5 @@
 <template>
-  <div style="max-width: 800px; width: 100%; overflow: hidden;">
+  <div style="max-width: 800px; width: 100%;">
     <div class="q-pa-md">
       <q-select
         outlined

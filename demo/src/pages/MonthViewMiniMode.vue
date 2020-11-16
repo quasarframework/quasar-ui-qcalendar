@@ -9,7 +9,7 @@ Codepen uses the UMD version of QCalendar. As such, the examples below must be w
     <q-markdown>
 Mini-Mode is a special behavior for QCalendar **month** view. The property is `mini-mode` and can be set to `true`, `false` (default) or `auto`. When set to `true` mini-mode is always on. When set to `auto`, mini-mode will use the `breakpoint` property to determine when to automatically go into mini-mode.
 
-When `mini-mode="auto"`, this works for the width of the screen, not the width of QCalendar. If you need to control mini-mode dynamically, then you need to set `true` or `false` based on your own calculations, most likely using [QResizeObserver](https://quasar.dev/vue-components/resize-observer).
+When `mini-mode="auto"`, this works for the width of the screen, not the width of QCalendar. If you need to control mini-mode dynamically, then you need to set `true` or `false` based on your own calculations, most likely using [QResizeObserver](https://quasar.dev/vue-components/resize-observer). See [Dynamic Breakpoint](#example-Dynamic-Breakpoint) example (below).
 
 Not all Monthly view examples have been copied over to `mini-mode` examples. They still work, like **Prev/Next** and **Swipe**.
 
@@ -31,6 +31,9 @@ Also, regardless of `mini-mode` all slots associated with month view now have ad
     <example-viewer title="Work Week Numbers" file="MiniModeWorkWeekNumbers" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="First Day Monday" file="MiniModeFirstDayMonday" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Hide Header" file="MiniModeHideHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+
+    <example-title title="Navigation" />
+    <example-viewer title="Prev/Next" file="MiniModePrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Outside Days" />
     <q-markdown>
@@ -67,9 +70,6 @@ In this next example, the `disabled-before` is set to the last day of the previo
     </q-markdown>
     <example-viewer title="Disabled Before/After" file="MiniModeDisabledBeforeAfter" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Disabled Weekdays" file="MiniModeDisabledWeekdays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-
-    <example-title title="Navigation" />
-    <example-viewer title="Prev/Next" file="MiniModePrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Selection" />
     <q-markdown>
@@ -222,6 +222,9 @@ export default {
     this.addToToc('First Day Monday', 2)
     this.addToToc('Hide Header', 2)
 
+    this.addToToc('Navigation')
+    this.addToToc('Prev/Next', 2)
+
     this.addToToc('Outside Days')
     this.addToToc('Enable Outside Days', 2)
     this.addToToc('Hide Outside Days', 2)
@@ -235,9 +238,6 @@ export default {
     this.addToToc('Disabled Days (combined)', 2)
     this.addToToc('Disabled Before/After', 2)
     this.addToToc('Disabled Weekdays', 2)
-
-    this.addToToc('Navigation')
-    this.addToToc('Prev/Next', 2)
 
     this.addToToc('Selection')
     this.addToToc('Selected Dates', 2)

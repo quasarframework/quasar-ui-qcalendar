@@ -7,21 +7,20 @@
         <q-btn flat dense label="Next" @click="calendarNext" />
       </div>
       <q-separator />
-      <div style="overflow: hidden; height: 390px;">
-        <q-calendar
-          ref="calendar"
-          v-model="selectedDate"
-          view="day"
-          locale="en-us"
-          animated
-          @input="onModelChanged"
-          @click:date2="onClickDate2"
-          @click:day:header2="onClickDayHeader2"
-          @click:interval2="onClickInterval2"
-          @click:time2="onClickTime2"
-          @click:interval:header2="onClickIntervalHeader2"
-        />
-      </div>
+      <q-calendar
+        ref="calendar"
+        v-model="selectedDate"
+        view="day"
+        locale="en-us"
+        animated
+        @input="onModelChanged"
+        @click:date2="onClickDate2"
+        @click:day:header2="onClickDayHeader2"
+        @click:interval2="onClickInterval2"
+        @click:time2="onClickTime2"
+        @click:interval:header2="onClickIntervalHeader2"
+        style="height: 390px;"
+      />
     </div>
     <q-card class="events col-4 q-pa-xs full-height column justify-start items-start">
       <q-item-section class="full-width">

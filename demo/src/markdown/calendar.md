@@ -68,6 +68,10 @@ This is the true power of QCalendar.
 - An interactive navigation provider (next, previous, today). However, you can easily do this in devland with QCalendar's methods (see examples).
 - Only the Gregorian calendar is supported.
 
+::: warning
+QCalendar now uses css var since `v3.0.0`. IE11 does not use css vars, so essentially QCalendar no longer works with IE11. However, there is hope. If you are interested in IE11 support, you can read [this](https://docs.microsoft.com/en-us/deployedge/edge-learnmore-neededge).
+:::
+
 # Installation Types
 
 ## Quasar CLI

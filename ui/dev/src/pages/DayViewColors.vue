@@ -19,7 +19,6 @@
       :interval-minutes="15"
       :interval-count="96"
       locale="en-us"
-      enable-theme
       :style="theme"
       style="height: 400px;"
     />
@@ -53,7 +52,7 @@ export default {
           '--calendar-background-dark': '#004d40',
           '--calendar-current-color': '#027BE3',
           '--calendar-current-color-dark': '#ffff66',
-          '--calendar-current-background': '#ffffff',
+          '--calendar-current-background': '#00000000',
           '--calendar-current-background-dark': '#004d40',
           '--calendar-disabled-date-color': '#e0f2f1',
           '--calendar-disabled-date-color-dark': '#bebebe',
@@ -126,7 +125,7 @@ export default {
           '--calendar-background-dark': '#3e2723',
           '--calendar-current-color': '#027BE3',
           '--calendar-current-color-dark': '#efebe9',
-          '--calendar-current-background': '#ffffff',
+          '--calendar-current-background': '#00000000',
           '--calendar-current-background-dark': '#3e2723',
           '--calendar-disabled-date-color': '#efebe9',
           '--calendar-disabled-date-color-dark': '#bebebe',
@@ -199,7 +198,7 @@ export default {
           '--calendar-background-dark': '#311b92',
           '--calendar-current-color': '#027BE3',
           '--calendar-current-color-dark': '#651fff',
-          '--calendar-current-background': '#ede7f6',
+          '--calendar-current-background': '#00000000',
           '--calendar-current-background-dark': '#311b92',
           '--calendar-disabled-date-color': '#ede7f6',
           '--calendar-disabled-date-color-dark': '#bebebe',
@@ -272,7 +271,7 @@ export default {
           '--calendar-background-dark': '#1a237e',
           '--calendar-current-color': '#027BE3',
           '--calendar-current-color-dark': '#3d5afe',
-          '--calendar-current-background': '#e8eaf6',
+          '--calendar-current-background': '#00000000',
           '--calendar-current-background-dark': '#1a237e',
           '--calendar-disabled-date-color': '#e8eaf6',
           '--calendar-disabled-date-color-dark': '#bebebe',

@@ -1,5 +1,5 @@
 <template>
-  <div style="max-width: 800px; width: 100%; overflow: auto">
+  <div style="max-width: 800px; width: 100%;">
     <q-calendar
       v-model="selectedDate"
       view="month"

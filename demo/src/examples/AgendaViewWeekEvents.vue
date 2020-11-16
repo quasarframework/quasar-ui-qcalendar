@@ -1,52 +1,51 @@
 <template>
   <div class="row items-center" style="max-width: 800px; width: 100%; height: 421px;">
     <div class="col-8 full-height">
-      <div class="row justify-center items-center" style="height: 30px;">
+      <div class="row justify-center items-center">
         <q-btn flat dense label="Prev" @click="calendarPrev" />
         <q-separator vertical />
         <q-btn flat dense label="Next" @click="calendarNext" />
       </div>
       <q-separator />
-      <div style="overflow: hidden; height: 390px;">
-        <q-calendar
-          ref="calendar"
-          v-model="selectedDate"
-          view="week-agenda"
-          :weekdays="[1,2,3,4,5]"
-          locale="en-us"
-          animated
-          :left-column-options="leftColumnOptions"
-          :right-column-options="rightColumnOptions"
-          @input="onModelChanged"
-          @click:date2="onClickDate2"
-          @click:day:header2="onClickDayHeader2"
-          @click:time2="onClickTime2"
-          @click:column2="onClickColumn2"
-          @click:column:header2="onClickColumnHeader2"
-        >
-          <template #day-body="{ timestamp }">
-            <template v-for="(agenda) in getAgenda(timestamp)">
-              <div
-                :key="timestamp.date + agenda.time"
-                :label="agenda.time"
-                class="justify-start q-ma-sm shadow-5 bg-grey-6"
-              >
-                <div v-if="agenda.avatar" class="row justify-center" style="margin-top: 30px; width: 100%;">
-                  <q-avatar style="margin-top: -25px; margin-bottom: 10px; font-size: 60px; max-height: 50px;">
-                    <img :src="agenda.avatar" style="border: #9e9e9e solid 5px;">
-                  </q-avatar>
-                </div>
-                <div class="col-12 q-px-sm">
-                  <strong>{{ agenda.time }}</strong>
-                </div>
-                <div v-if="agenda.desc" class="col-12 q-px-sm" style="font-size: 10px;">
-                  {{ agenda.desc }}
-                </div>
+      <q-calendar
+        ref="calendar"
+        v-model="selectedDate"
+        view="week-agenda"
+        :weekdays="[1,2,3,4,5]"
+        locale="en-us"
+        animated
+        :left-column-options="leftColumnOptions"
+        :right-column-options="rightColumnOptions"
+        @input="onModelChanged"
+        @click:date2="onClickDate2"
+        @click:day:header2="onClickDayHeader2"
+        @click:time2="onClickTime2"
+        @click:column2="onClickColumn2"
+        @click:column:header2="onClickColumnHeader2"
+        style="height: 390px;"
+      >
+        <template #day-body="{ timestamp }">
+          <template v-for="(agenda) in getAgenda(timestamp)">
+            <div
+              :key="timestamp.date + agenda.time"
+              :label="agenda.time"
+              class="justify-start q-ma-sm shadow-5 bg-grey-6"
+            >
+              <div v-if="agenda.avatar" class="row justify-center" style="margin-top: 30px; width: 100%;">
+                <q-avatar style="margin-top: -25px; margin-bottom: 10px; font-size: 60px; max-height: 50px;">
+                  <img :src="agenda.avatar" style="border: #9e9e9e solid 5px;">
+                </q-avatar>
               </div>
-            </template>
+              <div class="col-12 q-px-sm">
+                <strong>{{ agenda.time }}</strong>
+              </div>
+              <div v-if="agenda.desc" class="col-12 q-px-sm" style="font-size: 10px;">
+                {{ agenda.desc }}
+              </div>
+            </div>
           </template>
-        </q-calendar>
-      </div>
+        </template>
+      </q-calendar>
     </div>
     <q-card class="events col-4 q-pa-xs full-height column justify-start items-start">
       <q-item-section class="full-width">
