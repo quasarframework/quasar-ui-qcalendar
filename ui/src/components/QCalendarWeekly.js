@@ -109,6 +109,12 @@ export default {
     }
   },
 
+  watch: {
+    isMinimode (val) {
+      this.$emit('mini-mode', val)
+    }
+  },
+
   methods: {
     isOutside (day) {
       const dayIdentifier = getDayIdentifier(day)
