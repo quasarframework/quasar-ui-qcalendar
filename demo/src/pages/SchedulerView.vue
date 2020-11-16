@@ -23,6 +23,10 @@ const rooms = [
     <example-viewer title="Basic" file="SchedulerViewBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Dark" file="SchedulerViewDark" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
+    <example-title title="Navigation" />
+    <example-viewer title="Prev/Next" file="SchedulerViewPrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Swipe" file="SchedulerViewSwipe" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+
     <example-title title="Disabled" />
     <example-viewer title="Disabled Days" file="SchedulerViewDisabledDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
@@ -42,10 +46,6 @@ In this example, the `disabled-weekdays` is set to disable the weekends.
 You can provide a custom height by providing a `height` key within your resource object. This is a number as `px` is assumed. If height is not given, then the property `resource-height` will be used. If you use this feature, you **cannot** set the property `resource-height` to 0, which gives `auto` height. _Added in v2.5.0_.
     </q-markdown>
     <example-viewer title="Custom Resource Height" file="SchedulerViewCustomHeight" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-
-    <example-title title="Navigation" />
-    <example-viewer title="Prev/Next" file="SchedulerViewPrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Swipe" file="SchedulerViewSwipe" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Hierarchy" />
     <q-markdown>
@@ -186,6 +186,10 @@ export default {
     this.addToToc('Basic', 2)
     this.addToToc('Dark', 2)
 
+    this.addToToc('Navigation')
+    this.addToToc('Prev/Next', 2)
+    this.addToToc('Swipe', 2)
+
     this.addToToc('Disabled')
     this.addToToc('Disabled Days', 2)
     this.addToToc('Disabled Before/After', 2)
@@ -194,10 +198,6 @@ export default {
     this.addToToc('Resource')
     this.addToToc('Resource Width/Height', 2)
     this.addToToc('Custom Resource Height', 2)
-
-    this.addToToc('Navigation')
-    this.addToToc('Prev/Next', 2)
-    this.addToToc('Swipe', 2)
 
     this.addToToc('Hierarchy')
     this.addToToc('Children', 2)

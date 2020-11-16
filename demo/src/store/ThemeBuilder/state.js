@@ -22,12 +22,12 @@ export default function () {
 
       '--calendar-current-color': '#027BE3',
       '--calendar-current-color-dark': '#ffff66',
-      '--calendar-current-background': '#ffffff',
+      '--calendar-current-background': '#00000000',
       '--calendar-current-background-dark': '#121212',
 
       '--calendar-disabled-date-color': '#a1a1a1',
       '--calendar-disabled-date-color-dark': '#bebebe',
-      '--calendar-disabled-date-background': '#eeeeee',
+      '--calendar-disabled-date-background': '#ffffff',
       '--calendar-disabled-date-background-dark': '#121212',
 
       '--calendar-active-date-color': '#027BE3',
@@ -35,9 +35,9 @@ export default function () {
       '--calendar-active-date-background': '#ddccf7',
       '--calendar-active-date-background-dark': '#8f44ff',
 
-      '--calendar-outside-color': '#a1a1a1',
+      '--calendar-outside-color': '#606c71',
       '--calendar-outside-color-dark': '#bebebe',
-      '--calendar-outside-background': '#eeeeee',
+      '--calendar-outside-background': '#00000000',
       '--calendar-outside-background-dark': '#121212',
 
       '--calendar-selected-color': '#027BE3',
@@ -45,10 +45,10 @@ export default function () {
       '--calendar-selected-background': '#cce7ff',
       '--calendar-selected-background-dark': '#cce7ff',
 
-      '--calendar-mini-selected-color': 'unset',
+      '--calendar-mini-selected-color': '#027BE3',
       '--calendar-mini-selected-color-dark': '#027BE3',
-      '--calendar-mini-selected-background': 'unset',
-      '--calendar-mini-selected-background-dark': '#cce7ff',
+      '--calendar-mini-selected-background': '#00000000',
+      '--calendar-mini-selected-background-dark': '#00000000',
       '--calendar-mini-selected-label-color': '#027BE3',
       '--calendar-mini-selected-label-color-dark': '#cce7ff',
       '--calendar-mini-selected-label-background': '#cce7ff',
@@ -61,8 +61,8 @@ export default function () {
 
       '--calendar-mini-range-color': '#cce7ff',
       '--calendar-mini-range-color-dark': '#027BE3',
-      '--calendar-mini-range-background': 'unset',
-      '--calendar-mini-range-background-dark': 'unset',
+      '--calendar-mini-range-background': '#00000000',
+      '--calendar-mini-range-background-dark': '#00000000',
       '--calendar-mini-range-label-color': '#cce7ff',
       '--calendar-mini-range-label-color-dark': '#027BE3',
       '--calendar-mini-range-label-background': '#cce7ff',
@@ -74,7 +74,7 @@ export default function () {
 
       '--calendar-mini-range-firstlast-color': '#cce7ff',
       '--calendar-mini-range-firstlast-color-dark': '#cce7ff',
-      '--calendar-mini-range-firstlast-background': 'unset',
+      '--calendar-mini-range-firstlast-background': '#00000000',
       '--calendar-mini-range-firstlast-background-dark': '#cce7ff',
       '--calendar-mini-range-firstlast-label-color': '#cce7ff',
       '--calendar-mini-range-firstlast-label-color-dark': '#cce7ff',

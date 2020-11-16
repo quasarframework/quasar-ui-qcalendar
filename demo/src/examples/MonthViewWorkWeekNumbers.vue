@@ -1,23 +1,11 @@
 <template>
   <div style="max-width: 800px; width: 100%;">
-    <div class="row justify-center items-center">
-      <q-btn flat label="Prev" @click="calendarPrev" />
-      <q-separator vertical />
-      <q-btn flat label="Next" @click="calendarNext" />
-    </div>
-    <q-separator />
-    <div style="overflow: hidden">
-      <q-calendar
-        ref="calendar"
-        v-model="selectedDate"
-        view="month"
-        locale="en-us"
-        show-work-weeks
-        animated
-        transition-prev="slide-right"
-        transition-next="slide-left"
-      />
-    </div>
+    <q-calendar
+      v-model="selectedDate"
+      view="month"
+      locale="en-us"
+      show-work-weeks
+    />
   </div>
 </template>
 
@@ -26,14 +14,6 @@ export default {
   data () {
     return {
       selectedDate: ''
-    }
-  },
-  methods: {
-    calendarNext () {
-      this.$refs.calendar.next()
-    },
-    calendarPrev () {
-      this.$refs.calendar.prev()
     }
   }
 }

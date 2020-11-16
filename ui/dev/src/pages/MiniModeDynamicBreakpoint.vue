@@ -13,6 +13,7 @@
             view="month"
             locale="en-us"
             :mini-mode="miniMode"
+            :short-weekday-label="shortWeekdayLabel"
           />
         </div>
       </template>
@@ -32,13 +33,15 @@ export default {
     return {
       splitterModel: 90,
       selectedDate: '',
-      miniMode: false
+      miniMode: false,
+      shortWeekdayLabel: false
     }
   },
   watch: {
     splitterModel (val) {
       const rect = this.$refs.calendar.$el.getBoundingClientRect()
       this.miniMode = rect.width < 500
+      this.shortWeekdayLabel = rect.width < 300
     }
   }
 }

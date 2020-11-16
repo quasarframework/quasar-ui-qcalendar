@@ -16,14 +16,14 @@
     "@quasar/extras": "^1.9.10",
     "core-js": "^3.7.0",
     "drag-drop-touch": "^1.3.1",
-    "quasar": "^1.14.1"
+    "quasar": "^1.14.3"
   },
   "devDependencies": {
     "@quasar/app": "^2.1.6",
     "@quasar/quasar-app-extension-qiconpicker": "^1.2.7",
-    "@quasar/quasar-app-extension-qmarkdown": "^1.0.35",
+    "@quasar/quasar-app-extension-qmarkdown": "^1.0.36",
     "@quasar/quasar-app-extension-qribbon": "^1.0.0-beta.15",
-    "@quasar/quasar-app-extension-qscroller": "^1.0.10",
+    "@quasar/quasar-app-extension-qscroller": "^1.1.0",
     "@vue/eslint-config-standard": "^5.1.2",
     "babel-eslint": "^10.1.0",
     "devtron": "^1.4.0",
@@ -36,9 +36,9 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-quasar": "^1.0.0",
-    "eslint-plugin-standard": "^4.0.2",
+    "eslint-plugin-standard": "^4.1.0",
     "eslint-plugin-vue": "^7.1.0",
-    "eslint-webpack-plugin": "^2.2.1",
+    "eslint-webpack-plugin": "^2.3.0",
     "quasar-app-extension-example-viewer": "^1.0.4",
     "quasar-app-extension-json-api-viewer": "^1.3.0"
   },

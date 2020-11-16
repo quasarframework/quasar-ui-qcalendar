@@ -40,6 +40,9 @@
       min-height: 1.5em !important
       min-width: 1.5em !important
 
+      &--content
+        margin-top: 0.05em
+
       &-label
         position: relative
         vertical-align: middle
@@ -48,7 +51,7 @@
         left: unset
 
       &.q-active-date
-        color: var(--calendar-active-date-color)
+        color: var(--calendar-active-date-color) !important
 
         .q-btn__wrapper:before
           background: var(--calendar-active-date-background)
@@ -62,7 +65,7 @@
 
       &.q-selected
         color: var(--calendar-mini-selected-color)
-        background: var(--calendar-mini-selected-background)
+        background: var(--calendar-mini-selected-background) !important
 
         .q-calendar-weekly__day-label .q-btn__wrapper:before
           color: var(--calendar-mini-selected-label-color) !important
@@ -74,7 +77,7 @@
 
       &.q-outside
         color: var(--calendar-outside-color) !important
-        background: var(--calendar-outside-background) !important
+        background: var(--calendar-outside-background)
 
       &.q-range-first,
       &.q-range-last
@@ -169,7 +172,7 @@
       &.q-calendar-weekly__day--droppable
         border: var(--calendar-border-droppable) !important
 
-  .q-event:not(.q-event-void)
+  .q-day-event:not(.q-day-event-void)
     &:after
       content: ''
       width: 0.6em
@@ -207,7 +210,7 @@
         border-right: unset
 
       &__week--wrapper
-          border-bottom: unset
+        border-bottom: unset
 
       &__day
         color: var(--calendar-color-dark)
@@ -221,7 +224,7 @@
 
         &.q-current-day
           .q-btn__wrapper:before
-            border: var(--calendar-border-current-dark)
+            border: var(--calendar-border-current-dark) !important
 
         &.q-selected
           color: var(--calendar-mini-selected-color-dark)
@@ -272,4 +275,4 @@
 
 .q-calendar-mini
   .q-day-event
-    margin-top: 1.0em
+    margin-top: 0.0em

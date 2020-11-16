@@ -5,7 +5,6 @@
       view="week-scheduler"
       :resources="resources"
       :disabled-days="disabledDays"
-      :resource-style="modifiedStyle"
       locale="en-us"
       style="height: 400px;"
     />
@@ -32,16 +31,6 @@ export default {
         { label: 'Room-1' },
         { label: 'Room-2' }
       ]
-    }
-  },
-  methods: {
-    modifiedStyle (scope) {
-      if (scope.timestamp.disabled === true) {
-        return {
-          cursor: 'not-allowed'
-        }
-      }
-      return {}
     }
   }
 }

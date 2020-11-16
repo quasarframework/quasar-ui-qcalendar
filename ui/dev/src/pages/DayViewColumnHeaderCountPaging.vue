@@ -1,9 +1,9 @@
 <template>
   <div style="max-width: 800px; width: 100%;">
     <div class="row justify-center items-center">
-      <q-btn flat label="Prev" @click="prev" />
-      <q-separator vertical />
-      <q-btn flat label="Next" @click="next" />
+        <q-btn flat dense label="Prev" @click="calendarPrev" />
+        <q-separator vertical />
+        <q-btn flat dense label="Next" @click="calendarNext" />
     </div>
     <q-separator />
     <q-calendar
@@ -15,7 +15,7 @@
       locale="en-us"
       style="height: 400px;"
     >
-      <template #column-header-after="{ index }">
+      <template #column-header-after="{ /* timestamp, */ index }">
         <div class="q-ma-xs">
           <q-item v-if="index === 0" clickable v-ripple>
             <q-item-section side>
@@ -106,11 +106,11 @@ export default {
     }
   },
   methods: {
-    next () {
+    calendarNext () {
       if (this.currentPage + 1 === this.totalPages) return
       ++this.currentPage
     },
-    prev () {
+    calendarPrev () {
       if (this.currentPage === 0) return
       --this.currentPage
     }

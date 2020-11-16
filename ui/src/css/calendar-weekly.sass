@@ -88,7 +88,9 @@
     flex: 1
     overflow: hidden
     user-select: none
-    position: relative
+
+    &--content
+      margin-top: 1.9em
 
   &__day-label
     position: absolute
@@ -168,6 +170,7 @@
     &.q-current-day
       color: var(--calendar-current-color) !important
       background: var(--calendar-current-background)
+
       .q-btn__wrapper:before
         border: var(--calendar-border-current)
         background: var(--calendar-current-background)
@@ -251,8 +254,9 @@
       &.q-current-day
         color: var(--calendar-current-color-dark) !important
         background: var(--calendar-current-background-dark)
+
         .q-btn__wrapper:before
-          border: var(--calendar-border-current-dark)
+          border: var(--calendar-border-current-dark) !important
           background: var(--calendar-current-background-dark)
 
       &.q-disabled-day
@@ -287,4 +291,4 @@
 
 .q-day-event
   &:first-child
-    margin-top: 2.2em
+    margin-top: 0.0em

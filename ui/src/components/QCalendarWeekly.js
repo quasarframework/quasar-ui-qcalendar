@@ -30,7 +30,7 @@ export default {
 
   computed: {
     staticClass () {
-      return (this.isMiniMode ? ' q-calendar-mini ' : '') + 'q-calendar-weekly'
+      return 'q-calendar-weekly'
     },
 
     parsedMinWeeks () {
@@ -94,7 +94,7 @@ export default {
       if (this.dayPadding !== undefined) {
         style.padding = this.dayPadding
       }
-      // style.minWidth = this.cellWidth + '%'
+      style.minWidth = this.cellWidth + '%'
       style.maxWidth = style.minWidth
       return style
     },
@@ -105,7 +105,13 @@ export default {
 
     isMiniMode () {
       return this.miniMode === true ||
-        (this.miniMode === 'auto' && this.$q.screen.lt[this.breakpoint])
+        (this.miniMode === 'auto' && this.breakpoint !== void 0 && this.$q.screen.lt[this.breakpoint])
+    }
+  },
+
+  watch: {
+    isMinimode (val) {
+      this.$emit('mini-mode', val)
     }
   },
 
@@ -181,7 +187,11 @@ export default {
       return h('div', {
         staticClass: 'q-calendar-weekly__head-weekdays',
         style: {
-          width: this.isMiniMode === true ? 'calc(100% - var(--calendar-mini-work-week-width))' : 'calc(100% - var(--calendar-work-week-width))'
+          minWidth: this.showWorkWeeks
+            ? (this.isMiniMode === true
+              ? 'calc(100% - var(--calendar-mini-work-week-width))'
+              : 'calc(100% - var(--calendar-work-week-width))')
+            : '100%'
         }
       }, [
         ...this.todayWeek.map((day, index) => this.__renderHeadDay(h, day, index))
@@ -199,7 +209,7 @@ export default {
         key: day.date,
         staticClass: 'q-calendar-weekly__head-weekday' + (disabled === true ? ' q-disabled-day disabled' : ''),
         style: {
-          // minWidth: width,
+          minWidth: width,
           maxWidth: width
         },
         on: this.getDefaultMouseEventHandlers(':day:header2', event => {
@@ -242,7 +252,11 @@ export default {
           key: week[0].date,
           staticClass: 'q-calendar-weekly__week',
           style: {
-            width: this.isMiniMode === true ? 'calc(100% - var(--calendar-mini-work-week-width))' : 'calc(100% - var(--calendar-work-week-width))'
+            width: this.showWorkWeeks
+              ? (this.isMiniMode === true
+                ? 'calc(100% - var(--calendar-mini-work-week-width))'
+                : 'calc(100% - var(--calendar-work-week-width))')
+              : '100%'
           }
         }, [
           h('div', {
@@ -275,7 +289,7 @@ export default {
 
     __renderDay (h, day) {
       const styler = this.dayStyle || this.dayStyleDefault
-      const outside = this.hideOutsideDays !== true && this.isOutside(day)
+      const outside = this.isOutside(day)
       const activeDate = this.noActiveDate !== true && this.value === day.date
       const slot = this.$scopedSlots.day
       const scope = { outside, timestamp: day, miniMode: this.isMiniMode, activeDate }
@@ -287,11 +301,12 @@ export default {
 
       return h('div', {
         key: day.date,
-        staticClass: 'q-calendar-weekly__day',
+        staticClass: 'q-calendar-weekly__day' + (this.isMiniMode !== true ? ' column' : ''),
         class: {
-          dayClass,
+          ...dayClass,
           ...this.getRelativeClasses(day, outside, this.selectedDates, this.selectedStartEndDates, this.hover),
           'q-active-date': activeDate === true,
+          disabled: this.enableOutsideDays !== true && outside === true,
           'q-calendar-weekly__day--droppable': dragOver
         },
         style,
@@ -315,7 +330,7 @@ export default {
         this.isMiniMode !== true && this.showDayOfYearLabel && !hasMonth ? this.__renderDayOfYearLabel(h, day) : '',
         this.isMiniMode !== true && hasMonth ? this.__renderDayMonth(h, day) : '',
         h('div', {
-          staticClass: 'q-calendar-weekly__day--content full-width' + (this.isMiniMode === true ? ' row justify-around' : '')
+          staticClass: 'q-calendar-weekly__day--content full-width' + (this.isMiniMode === true ? ' row justify-center items-center' : '')
         }, slot ? slot(scope) : '')
       ])
     },
@@ -351,7 +366,7 @@ export default {
           dense: true,
           noCaps: true,
           outline: day.current === true,
-          disable: day.disabled === true || (outside === true && this.enableOutsideDays !== true)
+          disable: day.disabled === true || (this.enableOutsideDays !== true && outside === true)
         },
         style: {
           lineHeight: this.isMiniMode ? 'unset' : '1.715em'

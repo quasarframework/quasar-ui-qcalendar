@@ -6,42 +6,38 @@
       emit-immediately
     >
       <template v-slot:before>
-        <div style="overflow: hidden;">
-          <q-calendar
-            ref="calendar"
-            v-model="selectedDate"
-            view="month"
-            locale="en-us"
-            :mini-mode="miniMode"
-            :short-weekday-label="shortWeekdayLabel"
-          >
-            <template #day="{ timestamp, miniMode }">
-              <div class="q-event">
-                <template v-for="(event, index) in getEvents(timestamp.date)">
-                  <template v-if="miniMode">
-                    <q-badge
-                      :key="index"
-                      style="width: 5px!important; max-width: 5px; height: 5px; max-height: 5px"
-                      :class="badgeClasses(event, 'day')"
-                      :style="badgeStyles(event, 'day')"
-                    ></q-badge>
-                  </template>
-                  <template v-else>
-                    <q-badge
-                      :key="index"
-                      style="width: 100%; cursor: pointer; height: 16px; max-height: 16px"
-                      class="q-mb-xs"
-                      :class="badgeClasses(event, 'day')"
-                      :style="badgeStyles(event, 'day')"
-                    >
-                      <q-icon v-if="event.icon" :name="event.icon" class="q-mr-xs"></q-icon><span class="ellipsis">{{ event.title }}</span>
-                    </q-badge>
-                  </template>
-                </template>
-              </div>
+        <q-calendar
+          ref="calendar"
+          v-model="selectedDate"
+          view="month"
+          locale="en-us"
+          :mini-mode="miniMode"
+          :short-weekday-label="shortWeekdayLabel"
+        >
+          <template #day="{ timestamp, miniMode }">
+            <template v-for="(event, index) in getEvents(timestamp.date)">
+              <template v-if="miniMode">
+                <q-badge
+                  :key="index"
+                  style="width: 5px!important; max-width: 5px; height: 5px; max-height: 5px"
+                  :class="badgeClasses(event, 'day')"
+                  :style="badgeStyles(event, 'day')"
+                ></q-badge>
+              </template>
+              <template v-else>
+                <q-badge
+                  :key="index"
+                  style="width: 100%; cursor: pointer; height: 16px; max-height: 16px"
+                  class="q-mb-xs"
+                  :class="badgeClasses(event, 'day')"
+                  :style="badgeStyles(event, 'day')"
+                >
+                  <q-icon v-if="event.icon" :name="event.icon" class="q-mr-xs"></q-icon><span class="ellipsis">{{ event.title }}</span>
+                </q-badge>
+              </template>
             </template>
-          </q-calendar>
-        </div>
+          </template>
+        </q-calendar>
       </template>
       <template v-slot:separator>
         <q-avatar color="primary" text-color="white" size="40px" icon="drag_indicator" />

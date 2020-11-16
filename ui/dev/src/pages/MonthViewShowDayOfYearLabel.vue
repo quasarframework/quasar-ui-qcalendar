@@ -1,9 +1,9 @@
 <template>
   <div style="max-width: 800px; width: 100%;">
     <div class="row justify-center items-center">
-      <q-btn flat label="Prev" @click="prev" />
+      <q-btn flat dense label="Prev" @click="calendarPrev" />
       <q-separator vertical />
-      <q-btn flat label="Next" @click="next" />
+      <q-btn flat dense label="Next" @click="calendarNext" />
     </div>
     <q-separator />
     <div style="overflow: hidden">
@@ -29,10 +29,10 @@ export default {
     }
   },
   methods: {
-    next () {
+    calendarNext () {
       this.$refs.calendar.next()
     },
-    prev () {
+    calendarPrev () {
       this.$refs.calendar.prev()
     }
   }

@@ -9,7 +9,7 @@ Codepen uses the UMD version of QCalendar. As such, the examples below must be w
     <q-markdown>
 Mini-Mode is a special behavior for QCalendar **month** view. The property is `mini-mode` and can be set to `true`, `false` (default) or `auto`. When set to `true` mini-mode is always on. When set to `auto`, mini-mode will use the `breakpoint` property to determine when to automatically go into mini-mode.
 
-When `mini-mode="auto"`, this works for the width of the screen, not the width of QCalendar. If you need to control mini-mode dynamically, then you need to set `true` or `false` based on your own calculations, most likely using [QResizeObserver](https://quasar.dev/vue-components/resize-observer).
+When `mini-mode="auto"`, this works for the width of the screen, not the width of QCalendar. If you need to control mini-mode dynamically, then you need to set `true` or `false` based on your own calculations, most likely using [QResizeObserver](https://quasar.dev/vue-components/resize-observer). See [Dynamic Breakpoint](#example-Dynamic-Breakpoint) example (below).
 
 Not all Monthly view examples have been copied over to `mini-mode` examples. They still work, like **Prev/Next** and **Swipe**.
 
@@ -31,6 +31,9 @@ Also, regardless of `mini-mode` all slots associated with month view now have ad
     <example-viewer title="Work Week Numbers" file="MiniModeWorkWeekNumbers" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="First Day Monday" file="MiniModeFirstDayMonday" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Hide Header" file="MiniModeHideHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+
+    <example-title title="Navigation" />
+    <example-viewer title="Prev/Next" file="MiniModePrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Outside Days" />
     <q-markdown>
@@ -68,9 +71,6 @@ In this next example, the `disabled-before` is set to the last day of the previo
     <example-viewer title="Disabled Before/After" file="MiniModeDisabledBeforeAfter" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Disabled Weekdays" file="MiniModeDisabledWeekdays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
-    <example-title title="Navigation" />
-    <example-viewer title="Prev/Next" file="MiniModePrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-
     <example-title title="Selection" />
     <q-markdown>
 Click on dates to toggled selected on/off.
@@ -83,14 +83,13 @@ There are some considerations when using mini-mode selections. There are 3 speci
 The examples below has a `touch` boolean. This does not change anything with QCalendar. What it does is change the devland logic. When **not** set, the mouse down, mouse move and mouse up control the selection. When set (checked), the first click sets the anchor point and the second click sets the second anchor point.
     </q-markdown>
     <example-viewer title="Selection" file="MiniModeSelection" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Selection Click" file="MiniModeSelectionClick" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
 ::: tip
 Using the property `short-weekday-label` while in `mini-mode` gives an even shorter weekday label than normal.
 :::
     </q-markdown>
-    <example-viewer title="Multi-Month Selection" file="MiniModeMultiMonthSelection" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Multi-Month Selection (range)" file="MiniModeMultiMonthSelection" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <q-markdown>
 Using the property `hover` with `selected-start-end-dates` while in `mini-mode` gives you a better interactive and visually appealing selection.
     </q-markdown>
@@ -146,7 +145,7 @@ The example below is only showing `click` events as well as the `input` event.
 
     <example-title title="Slots" />
     <q-markdown>
-The `#day` slot allows you to write anything into the body of the day. To avoid writing on top of the `day-label` add the css class `.q-event` to your item which adds a top margin (and also works for mini-mode).
+The `#day` slot allows you to write anything into the body of the day.
 
 For slots that return `day`, `interval` or `timestamp`, it looks like this:
 ```js
@@ -222,6 +221,9 @@ export default {
     this.addToToc('First Day Monday', 2)
     this.addToToc('Hide Header', 2)
 
+    this.addToToc('Navigation')
+    this.addToToc('Prev/Next', 2)
+
     this.addToToc('Outside Days')
     this.addToToc('Enable Outside Days', 2)
     this.addToToc('Hide Outside Days', 2)
@@ -236,14 +238,10 @@ export default {
     this.addToToc('Disabled Before/After', 2)
     this.addToToc('Disabled Weekdays', 2)
 
-    this.addToToc('Navigation')
-    this.addToToc('Prev/Next', 2)
-
     this.addToToc('Selection')
     this.addToToc('Selected Dates', 2)
     this.addToToc('Selection', 2)
-    this.addToToc('Selection Click', 2)
-    this.addToToc('Multi-Month Selection', 2)
+    this.addToToc('Multi-Month Selection (range)', 2)
     this.addToToc('Multi-Month Selection with Hover Prop', 2)
     this.addToToc('Selection (QInput)', 2)
     this.addToToc('Advanced Popup', 2)

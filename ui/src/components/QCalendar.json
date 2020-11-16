@@ -1108,6 +1108,19 @@
         }
       }
     },
+    "mini-mode": {
+      "addedIn": "v3.1.2",
+      "desc": "Event occurs when switching to/from mini-mode, when the `breakpoint` property is set to `auto`",
+      "applicable": [
+        "Month"
+      ],
+      "params": {
+        "value": {
+          "type": "Boolean",
+          "desc": "If switched to `mini-mode`, then the value is `true`, otherwise it is `false"
+        }
+      }
+    },
     "click:date": {
       "removedIn": "v3.0.0",
       "desc": "Occurs on date button",

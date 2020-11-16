@@ -41,6 +41,10 @@ Note: The header area of the calendar will now scroll with the rest of the calen
     </q-markdown>
     <example-viewer title="No Scroll" file="WeekViewNoScroll" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
+    <example-title title="Navigation" />
+    <example-viewer title="Prev/Next" file="WeekViewPrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Swipe" file="WeekViewSwipe" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+
     <example-title title="Disabled" />
     <example-viewer title="Disabled Days" file="WeekViewDisabledDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
@@ -53,10 +57,6 @@ In this example, the `disabled-before` is set to the monday of this week and the
 In this example, the `disabled-weekdays` is set to disable the weekends.
     </q-markdown>
     <example-viewer title="Disabled Weekdays" file="WeekViewDisabledWeekdays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-
-    <example-title title="Navigation" />
-    <example-viewer title="Prev/Next" file="WeekViewPrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Swipe" file="WeekViewSwipe" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Header" />
     <q-markdown>
@@ -200,14 +200,14 @@ export default {
     this.addToToc('Short Interval Label (Hour24Format)', 2)
     this.addToToc('No Scroll', 2)
 
+    this.addToToc('Navigation')
+    this.addToToc('Prev/Next', 2)
+    this.addToToc('Swipe', 2)
+
     this.addToToc('Disabled')
     this.addToToc('Disabled Days', 2)
     this.addToToc('Disabled Before/After', 2)
     this.addToToc('Disabled Weekdays', 2)
-
-    this.addToToc('Navigation')
-    this.addToToc('Prev/Next', 2)
-    this.addToToc('Swipe', 2)
 
     this.addToToc('Header')
     this.addToToc('Column Header', 2)

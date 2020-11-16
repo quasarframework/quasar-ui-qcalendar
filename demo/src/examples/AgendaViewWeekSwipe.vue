@@ -9,7 +9,7 @@
       transition-prev="slide-right"
       transition-next="slide-left"
       locale="en-us"
-      style="height: 400px; overflow: hidden"
+      style="height: 400px;"
     >
       <template #day-body="{ timestamp }">
         <template v-for="(agenda) in getAgenda(timestamp)">

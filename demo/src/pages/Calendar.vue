@@ -257,9 +257,6 @@
         :locale="locale"
         :max-days="maxDays"
         :bordered="bordered"
-        :interval-style="modifiedStyle"
-        :day-style="modifiedStyle"
-        :resource-style="modifiedStyle"
         animated
         transition-prev="slide-right"
         transition-next="slide-left"
@@ -771,18 +768,6 @@ export default {
     },
     calendarToday (today) {
       this.selectedDate = today
-    },
-    modifiedStyle (scope) {
-      let date = scope
-      if ('resource' in scope) {
-        date = scope.timestamp
-      }
-      if (date.disabled === true) {
-        return {
-          cursor: 'not-allowed'
-        }
-      }
-      return {}
     },
     onChanged (data) {
       // uncomment to see data in console

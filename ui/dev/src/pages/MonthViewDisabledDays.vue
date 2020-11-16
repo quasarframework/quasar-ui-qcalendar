@@ -1,10 +1,9 @@
 <template>
-  <div style="max-width: 800px; width: 100%; overflow: auto; ">
+  <div style="max-width: 800px; width: 100%;">
     <q-calendar
       v-model="selectedDate"
       view="month"
       :disabled-days="disabledDays"
-      :day-style="modifiedStyle"
       locale="en-us"
     />
   </div>
@@ -22,16 +21,6 @@ export default {
         '2019-04-05',
         ['2019-04-22', '2019-04-27'] // date range
       ]
-    }
-  },
-  methods: {
-    modifiedStyle (scope) {
-      if (scope.disabled === true) {
-        return {
-          cursor: 'not-allowed'
-        }
-      }
-      return {}
     }
   }
 }
