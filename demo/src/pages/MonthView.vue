@@ -160,6 +160,10 @@ The example below uses the **#week** slot (v1.3.2). It's a bit more difficult to
 Do not mix `#day` and `#week` slots or you will have overlapping results.
 :::
 
+::: tip
+If you set the property `day-height` to 0, then the height will automatically be adjusted to account for events that might otherwise become hidden.
+:::
+
     </q-markdown>
     <example-viewer title="Slot (week)" file="MonthViewWeekSlot" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <example-viewer title="Slot (head-day)" file="MonthViewSlotHeadDay" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
