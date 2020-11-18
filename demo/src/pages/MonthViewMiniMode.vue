@@ -23,24 +23,24 @@ Also, when in `mini-mode` there are some things to be aware of:
 Also, regardless of `mini-mode` all slots associated with month view now have additional slotted data: `miniMode`, which is either set to `true` or `false`.
     </q-markdown>
 
-    <example-viewer title="Basic" file="MiniModeBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Bordered" file="MiniModeBordered" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Dark" file="MiniModeDark" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Short Weekday Label" file="MiniModeShortWeekdayLabel" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="5 Day Work Week" file="MiniModeFiveDayWorkWeek" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Work Week Numbers" file="MiniModeWorkWeekNumbers" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="First Day Monday" file="MiniModeFirstDayMonday" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Hide Header" file="MiniModeHideHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Basic" file="MiniModeBasic" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Bordered" file="MiniModeBordered" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Dark" file="MiniModeDark" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Short Weekday Label" file="MiniModeShortWeekdayLabel" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="5 Day Work Week" file="MiniModeFiveDayWorkWeek" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Work Week Numbers" file="MiniModeWorkWeekNumbers" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="First Day Monday" file="MiniModeFirstDayMonday" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Hide Header" file="MiniModeHideHeader" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Navigation" />
-    <example-viewer title="Prev/Next" file="MiniModePrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Prev/Next" file="MiniModePrevNext" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Outside Days" />
     <q-markdown>
 Outside days, in month view, are those days before and after the currently displayed month. By default, these days are disabled to avoid navigation issues when getting selected days from the User. Using the `enable-outside-days` property enables these days.
     </q-markdown>
-    <example-viewer title="Enable Outside Days" file="MiniModeEnableOutsideDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Hide Outside Days" file="MiniModeHideOutsideDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Enable Outside Days" file="MiniModeEnableOutsideDays" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Hide Outside Days" file="MiniModeHideOutsideDays" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Breakpoints" />
     <q-markdown>
@@ -48,55 +48,55 @@ The example below uses the `breakpoint` and `mini-mode="auto"` properties to aut
 
 Likely you will have to adjust your browser width to see this example work. For mobile, you might see this example only in mini-mode.
     </q-markdown>
-    <example-viewer title="Breakpoint" file="MiniModeBreakpoint" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Breakpoint" file="MiniModeBreakpoint" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
 The example below uses QSplitter to adjust the width of the QCalendar and to **dynamically** switch to/from `mini-mode`. The breakpoint in this example is **less than 500px**.
     </q-markdown>
-    <example-viewer title="Dynamic Breakpoint" file="MiniModeDynamicBreakpoint" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Dynamic Breakpoint" file="MiniModeDynamicBreakpoint" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Disabled" />
     <q-markdown>
 In the first calendar, all disabled days are set explicitly. In the second example, it shows how you can set a range to do the same thing.
     </q-markdown>
-    <example-viewer title="Disabled Days" file="MiniModeDisabledDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Disabled Days" file="MiniModeDisabledDays" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
 In the this example the disabled days and a range of disabled days are combined. Ranges must be an array of dates within the main array. They contain a start and and end date.
     </q-markdown>
-    <example-viewer title="Disabled Days (combined)" file="MiniModeDisabledDaysCombined" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Disabled Days (combined)" file="MiniModeDisabledDaysCombined" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <q-markdown>
 In this next example, the `disabled-before` is set to the last day of the previous month and the `disabled-after` is set to the first day of the next month. Essentially, this disables all dates but the current month.
     </q-markdown>
-    <example-viewer title="Disabled Before/After" file="MiniModeDisabledBeforeAfter" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Disabled Weekdays" file="MiniModeDisabledWeekdays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Disabled Before/After" file="MiniModeDisabledBeforeAfter" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Disabled Weekdays" file="MiniModeDisabledWeekdays" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Selection" />
     <q-markdown>
 Click on dates to toggled selected on/off.
     </q-markdown>
-    <example-viewer title="Selected Dates" file="MiniModeSelectedDates" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Selected Dates" file="MiniModeSelectedDates" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
 There are some considerations when using mini-mode selections. There are 3 special classes: `.q-range-first`, `.q-range` and `.q-range-last` in conjunction with the `day-class` property. These will help you create a selector compliant with [Material Design](https://material.io/components/pickers/#anatomy). See examples below for usage.
 
 The examples below has a `touch` boolean. This does not change anything with QCalendar. What it does is change the devland logic. When **not** set, the mouse down, mouse move and mouse up control the selection. When set (checked), the first click sets the anchor point and the second click sets the second anchor point.
     </q-markdown>
-    <example-viewer title="Selection" file="MiniModeSelection" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Selection" file="MiniModeSelection" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
 ::: tip
 Using the property `short-weekday-label` while in `mini-mode` gives an even shorter weekday label than normal.
 :::
     </q-markdown>
-    <example-viewer title="Multi-Month Selection (range)" file="MiniModeMultiMonthSelection" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Multi-Month Selection (range)" file="MiniModeMultiMonthSelection" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <q-markdown>
 Using the property `hover` with `selected-start-end-dates` while in `mini-mode` gives you a better interactive and visually appealing selection.
     </q-markdown>
-    <example-viewer title="Multi-Month Selection with Hover Prop" file="MiniModeMultiMonthSelectionHover" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Multi-Month Selection with Hover Prop" file="MiniModeMultiMonthSelectionHover" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
-    <example-viewer title="Selection (QInput)" file="MiniModeSelectionQInput" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Advanced Popup" file="MiniModePopup" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Selection (QInput)" file="MiniModeSelectionQInput" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Advanced Popup" file="MiniModePopup" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Events" />
     <q-markdown>
@@ -141,7 +141,7 @@ The events `:day` (now `:day:header2`), `:time`, `:interval` and `:date` have be
 
 The example below is only showing `click` events as well as the `input` event.
     </q-markdown>
-    <example-viewer title="Events" file="MiniModeEvents" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Events" file="MiniModeEvents" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Slots" />
     <q-markdown>
@@ -151,9 +151,9 @@ For slots that return `day`, `interval` or `timestamp`, it looks like this:
 ```js
 {
   date: '',       // YYYY-MM-DD
-  time: '',       // 00:00:00 (optional)
+  time: '',       // HH:MM (optional)
   year: 0,        // YYYY
-  month: 0,       // mm (Jan = 1, etc)
+  month: 0,       // MM (Jan = 1, etc)
   day: 0,         // day of the month
   weekday: 0,     // week day
   hour: 0,        // 24-hr
@@ -169,16 +169,16 @@ For slots that return `day`, `interval` or `timestamp`, it looks like this:
 }
 ```
     </q-markdown>
-    <example-viewer title="Slots (day)" file="MiniModeSlots" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Slots (day)" file="MiniModeSlots" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Customization" />
     <q-markdown>
 You can create your own themes by overriding various css vars. You do not have to override all of them (as in the next example), just the ones you need. For building your own themes, head on over to the [Theme Builder](../../quasar-ui-qcalendar/theme-builder)
     </q-markdown>
-    <example-viewer title="Colors" file="MiniModeColors" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Colors" file="MiniModeColors" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Locale Support" />
-    <example-viewer title="Locale" file="MiniModeLocale" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Locale" file="MiniModeLocale" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
   </div>
 </template>

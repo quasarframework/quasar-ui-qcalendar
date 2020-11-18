@@ -6,31 +6,31 @@ Codepen uses the UMD version of QCalendar. As such, the examples below must be w
 :::
     </q-markdown>
     <example-title title="Week View" />
-    <example-viewer title="Basic" file="WeekViewBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Dark" file="WeekViewDark" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="First Day Monday" file="WeekViewMondayFirstDay" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="5 Day Work Week" file="WeekViewFiveDayWorkWeek" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Basic" file="WeekViewBasic" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Dark" file="WeekViewDark" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="First Day Monday" file="WeekViewMondayFirstDay" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="5 Day Work Week" file="WeekViewFiveDayWorkWeek" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
 You can use the `now` property to set a fixed date, otherwise the current date will be used. If the `v-model` property is empty, then it will receive the `now` property's value.
 
 The example below sets the previous day to `now` unless today is Sunday, in which case it sets `now` to the next day.
     </q-markdown>
-    <example-viewer title="Now" file="WeekViewNow" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Now" file="WeekViewNow" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
-    <example-viewer title="Short Weekday Label" file="WeekViewShortWeekdayLabel" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Short Weekday Label" file="WeekViewShortWeekdayLabel" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
 `hour24-format` is available only for one of the available `day` or `week` views.
     </q-markdown>
-    <example-viewer title="Hour24 Format" file="WeekViewHour24Format" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Hour24 Format" file="WeekViewHour24Format" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
 `short-interval-label` is available only for one of the available `day` or `week` views.
     </q-markdown>
-    <example-viewer title="Short Interval Label" file="WeekViewShortIntervalLabel" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Short Interval Label" file="WeekViewShortIntervalLabel" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
-    <example-viewer title="Short Interval Label (Hour24Format)" file="WeekViewShortIntervalLabelHour24Format" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Short Interval Label (Hour24Format)" file="WeekViewShortIntervalLabelHour24Format" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
 There may be circumstances where you wish to control the scrolling. In this case, use the `no-scroll` property and provide your own scroll wrapper.
@@ -39,24 +39,24 @@ There may be circumstances where you wish to control the scrolling. In this case
 Note: The header area of the calendar will now scroll with the rest of the calendar
 :::
     </q-markdown>
-    <example-viewer title="No Scroll" file="WeekViewNoScroll" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="No Scroll" file="WeekViewNoScroll" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Navigation" />
-    <example-viewer title="Prev/Next" file="WeekViewPrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Swipe" file="WeekViewSwipe" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Prev/Next" file="WeekViewPrevNext" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Swipe" file="WeekViewSwipe" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Disabled" />
-    <example-viewer title="Disabled Days" file="WeekViewDisabledDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Disabled Days" file="WeekViewDisabledDays" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
 In this example, the `disabled-before` is set to the monday of this week and the `disabled-after` is set to the friday of this week.
     </q-markdown>
-    <example-viewer title="Disabled Before/After" file="WeekViewDisabledBeforeAfter" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Disabled Before/After" file="WeekViewDisabledBeforeAfter" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
 In this example, the `disabled-weekdays` is set to disable the weekends.
     </q-markdown>
-    <example-viewer title="Disabled Weekdays" file="WeekViewDisabledWeekdays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Disabled Weekdays" file="WeekViewDisabledWeekdays" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Header" />
     <q-markdown>
@@ -64,7 +64,7 @@ Column Headers are scoped slots only. They are turned on with the `column-header
 Column Headers are only available for the `day` (includes 2day, 3day, etc), `week` and `scheduler` views.
 The `timestamp` information is passed to the scoped slot.
     </q-markdown>
-    <example-viewer title="Column Header" file="WeekViewColumnHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Column Header" file="WeekViewColumnHeader" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Events" />
     <q-markdown>
@@ -109,7 +109,7 @@ The events `:day` (now `:day:header2`), `:time`, `:interval` and `:date` have be
 
 The example below is only showing `click` events as well as the `input` event.
     </q-markdown>
-    <example-viewer title="Events" file="WeekViewEvents" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Events" file="WeekViewEvents" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Slots" />
     <q-markdown>
@@ -117,9 +117,9 @@ For slots that return `day`, `interval` or `timestamp`, it looks like this:
 ```js
 {
   date: '',       // YYYY-MM-DD
-  time: '',       // 00:00:00 (optional)
+  time: '',       // HH:MM (optional)
   year: 0,        // YYYY
-  month: 0,       // mm (Jan = 1, etc)
+  month: 0,       // MM (Jan = 1, etc)
   day: 0,         // day of the month
   weekday: 0,     // week day
   hour: 0,        // 24-hr
@@ -139,24 +139,24 @@ You can use the slots `day-header` and `day-body` to control visual aspects of y
 The example below is using the `day-header` slot to indicate there are events on that day, in case it is not visible, indicating to the user they should scroll down to see the event.
 The `day-body` slot is used to get information about the date and time of an event and then to calculate where the absolute position of the event based on passed in functions `timeStartPos` and `timeDurationHeight`.
     </q-markdown>
-    <example-viewer title="day-header with day-body" file="WeekViewSlots" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="day-header with day-body" file="WeekViewSlots" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
-    <example-viewer title="head-day" file="WeekViewSlotHeadDay" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="head-day" file="WeekViewSlotHeadDay" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
 You can use the scopedSlot `day-container` to set an absolute position for a time tracking bar.
 Scroll down if the current time is later for your location to see the example.
     </q-markdown>
-    <example-viewer title="day-container: Show current time" file="WeekViewCurrentTime" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="day-container: Show current time" file="WeekViewCurrentTime" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Customization" />
     <q-markdown>
 You can create your own themes by overriding various css vars. You do not have to override all of them (as in the next example), just the ones you need. For building your own themes, head on over to the [Theme Builder](../../quasar-ui-qcalendar/theme-builder)
     </q-markdown>
-    <example-viewer title="Colors" file="WeekViewColors" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Colors" file="WeekViewColors" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Locale Support" />
-    <example-viewer title="Locale" file="WeekViewLocale" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Locale" file="WeekViewLocale" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
   </div>
 </template>
