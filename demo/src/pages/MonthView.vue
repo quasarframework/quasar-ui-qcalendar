@@ -6,68 +6,68 @@ Codepen uses the UMD version of QCalendar. As such, the examples below must be w
 :::
     </q-markdown>
     <example-title title="Month View" />
-    <example-viewer title="Basic" file="MonthViewBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Dark" file="MonthViewDark" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="First Day Monday" file="MonthViewMondayFirstDay" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="5 Day Work Week" file="MonthViewFiveDayWorkWeek" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Hide Header" file="MonthViewHideHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Basic" file="MonthViewBasic" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Dark" file="MonthViewDark" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="First Day Monday" file="MonthViewMondayFirstDay" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="5 Day Work Week" file="MonthViewFiveDayWorkWeek" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Hide Header" file="MonthViewHideHeader" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <q-markdown>
 The `now` property allows you to set "today's date" to a different date. In the example below, it is set to yesterday's date. This property is only available for `month` view.
     </q-markdown>
-    <example-viewer title="Now" file="MonthViewNow" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Now" file="MonthViewNow" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
 The `show-work-weeks` property is available only for `month` view. The current Work Week will be highlighted.
     </q-markdown>
-    <example-viewer title="Work Weeks" file="MonthViewWorkWeekNumbers" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Work Weeks" file="MonthViewWorkWeekNumbers" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
-    <example-viewer title="Short Weekday Label" file="MonthViewShortWeekdayLabel" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Short Weekday Label" file="MonthViewShortWeekdayLabel" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <q-markdown>
 You can also use the `:showMonthLabel="false"` to turn the month label off.
     </q-markdown>
-    <example-viewer title="Short Month Label" file="MonthViewShortMonthLabel" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Short Month Label" file="MonthViewShortMonthLabel" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
 The `show-day-of-year-label` property is available only for `month` view.
     </q-markdown>
-    <example-viewer title="Show Day of Year Label" file="MonthViewShowDayOfYearLabel" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Show Day of Year Label" file="MonthViewShowDayOfYearLabel" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
 The `day-height` property is available only for `month` view.
 
 The example below is setting the `day-height` to `100`, the default is `0`, which tells the calendar component to figure out it's own height.
     </q-markdown>
-    <example-viewer title="Day Height" file="MonthViewDayHeight" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Day Height" file="MonthViewDayHeight" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Navigation" />
-    <example-viewer title="Prev/Next" file="MonthViewPrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Swipe" file="MonthViewSwipe" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Prev/Next" file="MonthViewPrevNext" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Swipe" file="MonthViewSwipe" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Outside Days" />
     <q-markdown>
 Outside days, in month view, are those days before and after the currently displayed month. By default, these days are disabled to avoid navigation issues when getting selected days from the User. Using the `enable-outside-days` property enables these days.
     </q-markdown>
-    <example-viewer title="Enable Outside Days" file="MonthViewEnableOutsideDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Hide Outside Days" file="MonthViewHideOutsideDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Enable Outside Days" file="MonthViewEnableOutsideDays" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Hide Outside Days" file="MonthViewHideOutsideDays" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Disabled" />
-    <example-viewer title="Disabled Days" file="MonthViewDisabledDays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Disabled Days" file="MonthViewDisabledDays" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
 In this next example, the `disabled-before` is set to the last day of the previous month and the `disabled-after` is set to the first day of the next month. Essentially, this disables all dates but the current month.
     </q-markdown>
-    <example-viewer title="Disabled Before/After" file="MonthViewDisabledBeforeAfter" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Disabled Before/After" file="MonthViewDisabledBeforeAfter" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
 In this next example, the `disabled-weekdays` is set to disable the weekends.
     </q-markdown>
-    <example-viewer title="Disabled Weekdays" file="MonthViewDisabledWeekdays" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Disabled Weekdays" file="MonthViewDisabledWeekdays" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Selection" />
     <q-markdown>
 In the next example, click on dates to toggled selected on/off. Care is taken to exclude `outside` dates (dates that fall outside the current month).
     </q-markdown>
-    <example-viewer title="Selected Dates" file="MonthViewSelectedDates" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Selected Dates" file="MonthViewSelectedDates" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
 The example below shows how to use the QCalendar to create a multi-day range selector. The critical aspect of this is the `selected-start-end-dates` property. This takes an array of two dates (the first should be less or equal to the last).
@@ -76,7 +76,7 @@ For the example below, click a day, and while holding the mouse down, move to a 
 
 Keep in mind that the functionality below won't work with swipe actions.
     </q-markdown>
-    <example-viewer title="Multi-Day Selection (range)" file="MonthViewSelection" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Multi-Day Selection (range)" file="MonthViewSelection" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Events" />
     <q-markdown>
@@ -121,7 +121,7 @@ The events `:day` (now `:day:header2`), `:time`, `:interval` and `:date` have be
 
 The example below is only showing `click` events as well as the `input` event.
     </q-markdown>
-    <example-viewer title="Events" file="MonthViewEvents" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Events" file="MonthViewEvents" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Slots" />
     <q-markdown>
@@ -131,9 +131,9 @@ For slots that return `timestamp`, it looks like this:
 ```js
 {
   date: '',       // YYYY-MM-DD
-  time: '',       // 00:00:00 (optional)
+  time: '',       // HH:MM (optional)
   year: 0,        // YYYY
-  month: 0,       // mm (Jan = 1, etc)
+  month: 0,       // MM (Jan = 1, etc)
   day: 0,         // day of the month
   weekday: 0,     // week day
   hour: 0,        // 24-hr
@@ -151,7 +151,7 @@ For slots that return `timestamp`, it looks like this:
 The example below uses the `#day` slot. This constrains your slotted output to that specific day. For a less-constrained slot, look into the `#week` slot further below.
 
     </q-markdown>
-    <example-viewer title="Slot (day)" file="MonthViewSlots" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Slot (day)" file="MonthViewSlots" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
 The example below uses the **#week** slot (v1.3.2). It's a bit more difficult to work with than the **#day** slot, but allows you to have your devland events displayed in a contiguous manner. Check out the sources to see how it is accomplished.
@@ -165,17 +165,17 @@ If you set the property `day-height` to 0, then the height will automatically be
 :::
 
     </q-markdown>
-    <example-viewer title="Slot (week)" file="MonthViewWeekSlot" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Slot (head-day)" file="MonthViewSlotHeadDay" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Slot (week)" file="MonthViewWeekSlot" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Slot (head-day)" file="MonthViewSlotHeadDay" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Customization" />
     <q-markdown>
 You can create your own themes by overriding various css vars. You do not have to override all of them (as in the next example), just the ones you need. For building your own themes, head on over to the [Theme Builder](../../quasar-ui-qcalendar/theme-builder)
     </q-markdown>
-    <example-viewer title="Colors" file="MonthViewColors" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Colors" file="MonthViewColors" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Locale Support" />
-    <example-viewer title="Locale" file="MonthViewLocale" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Locale" file="MonthViewLocale" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Custom Toolbar" />
     <q-markdown>
@@ -183,7 +183,7 @@ QCalendar does not come with a navigation toolbar out-of-the-box because we beli
 
 This example is only one of many ways you can style your own QCalendar.
     </q-markdown>
-    <example-viewer title="Toolbar" file="MonthViewToolbar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Toolbar" file="MonthViewToolbar" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
   </div>
 </template>

@@ -11,8 +11,8 @@ The `agenda` views by themselves are rather boring. It's up to the developer to 
 
 For another example on how to use the Agenda view, check out the [Planner example](/demos/planner).
     </q-markdown>
-    <example-viewer title="Basic" file="AgendaViewBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Agenda View (week) - Basic" file="AgendaViewWeekBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Basic" file="AgendaViewBasic" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Agenda View (week) - Basic" file="AgendaViewWeekBasic" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Slots" />
     <q-markdown>
@@ -24,9 +24,9 @@ For slots that return `day`, `interval` or `timestamp`, it looks like this:
 ```js
 {
   date: '',       // YYYY-MM-DD
-  time: '',       // 00:00:00 (optional)
+  time: '',       // HH:MM (optional)
   year: 0,        // YYYY
-  month: 0,       // mm (Jan = 1, etc)
+  month: 0,       // MM (Jan = 1, etc)
   day: 0,         // day of the month
   weekday: 0,     // week day
   hour: 0,        // 24-hr
@@ -42,12 +42,12 @@ For slots that return `day`, `interval` or `timestamp`, it looks like this:
 }
 ```
     </q-markdown>
-    <example-viewer title="Slots" file="AgendaViewWeekSlots" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Slots" file="AgendaViewWeekSlots" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Misc" />
-    <example-viewer title="Dark" file="AgendaViewWeekDark" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="First Day Monday" file="AgendaViewWeekFirstDayMonday" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Five Day Workweek" file="AgendaViewWeekFiveDayWorkweek" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Dark" file="AgendaViewWeekDark" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="First Day Monday" file="AgendaViewWeekFirstDayMonday" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Five Day Workweek" file="AgendaViewWeekFiveDayWorkweek" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
 There may be circumstances where you wish to control the scrolling. In this case, use the `no-scroll` property and provide your own scroll wrapper.
@@ -56,11 +56,11 @@ There may be circumstances where you wish to control the scrolling. In this case
 Note: The header area of the calendar will now scroll with the rest of the calendar
 :::
     </q-markdown>
-    <example-viewer title="No Scroll" file="AgendaViewNoScroll" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="No Scroll" file="AgendaViewNoScroll" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Navigation" />
-    <example-viewer title="Prev/Next" file="AgendaViewWeekPrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Swipe" file="AgendaViewWeekSwipe" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Prev/Next" file="AgendaViewWeekPrevNext" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Swipe" file="AgendaViewWeekSwipe" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Columns" />
     <q-markdown>
@@ -106,22 +106,22 @@ If you do not wish to have an `id` and `label` keys in your data (say, it came f
 
 To manage data, use the `column-header` and `column-body` slots.
     </q-markdown>
-    <example-viewer title="Column Options" file="AgendaViewWeekColumnOptions" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Column Options" file="AgendaViewWeekColumnOptions" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Events" />
     <q-markdown>
 This events example is using the code for the `Column Options` example.
     </q-markdown>
-    <example-viewer title="Events" file="AgendaViewWeekEvents" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Events" file="AgendaViewWeekEvents" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Customization" />
     <q-markdown>
 You can create your own themes by overriding various css vars. You do not have to override all of them (as in the next example), just the ones you need. For building your own themes, head on over to the [Theme Builder](../../quasar-ui-qcalendar/theme-builder)
     </q-markdown>
-    <example-viewer title="Colors" file="AgendaViewWeekColors" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Colors" file="AgendaViewWeekColors" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Locale Support" />
-    <example-viewer title="Locale" file="AgendaViewWeekLocale" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Locale" file="AgendaViewWeekLocale" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
   </div>
 </template>
 

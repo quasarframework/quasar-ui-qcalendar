@@ -6,10 +6,10 @@ Codepen uses the UMD version of QCalendar. As such, the examples below must be w
 :::
     </q-markdown>
     <example-title title="Day View" />
-    <example-viewer title="Basic" file="DayViewBasic" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Dark" file="DayViewDark" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="3Day" file="DayView3Day" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Hide Header" file="DayViewHideHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Basic" file="DayViewBasic" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Dark" file="DayViewDark" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="3Day" file="DayView3Day" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Hide Header" file="DayViewHideHeader" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
 There may be circumstances where you wish to control the scrolling. In this case, use the `no-scroll` property and provide your own scroll wrapper.
@@ -18,65 +18,65 @@ There may be circumstances where you wish to control the scrolling. In this case
 Note: The header area of the calendar will now scroll with the rest of the calendar
 :::
     </q-markdown>
-    <example-viewer title="No Scroll" file="DayViewNoScroll" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="No Scroll" file="DayViewNoScroll" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Intervals" />
     <q-markdown>
 `interval-height` is available only for one of the available `day` or `week` views.
 The example below is setting the `interval-height` to `100`, the default is `40`.
     </q-markdown>
-    <example-viewer title="Interval Height" file="DayViewIntervalHeight" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Interval Height" file="DayViewIntervalHeight" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
 The example below is setting the `interval-count` to `4`, the default is `24`. This is the number of intervals to be displayed.
     </q-markdown>
-    <example-viewer title="Interval Count" file="DayViewIntervalCount" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Interval Count" file="DayViewIntervalCount" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
 The example below is setting the `interval-minutes` to `30`, the default is `60`. This is the number of minutes in an interval. For this example, if you wanted the full 24 hours, you would also need to set `interval-count` to `48` (if you cut `interval-minutes` in half, then you need to double `interval-count`).
     </q-markdown>
-    <example-viewer title="Interval Minutes (30)" file="DayViewIntervalMinutes30" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Interval Minutes (30)" file="DayViewIntervalMinutes30" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
 The example below is setting the `interval-minutes` to `15`, the default is `60`. This is the number of minutes in an interval. For this example, if you wanted the full 24 hours, you would also need to set `interval-count` to `96` (if you cut `interval-minutes` in quarter, then you need to quadruple `interval-count`).
     </q-markdown>
-    <example-viewer title="Interval Minutes (15)" file="DayViewIntervalMinutes15" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Interval Minutes (15)" file="DayViewIntervalMinutes15" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
 The example below is setting the `interval-start` to `8`, the default is `0`. It is a good idea to also adjust the `interval-count` so that extra intervals are not displayed. In this example, the `interval-count` is set to `10`, so the intervals displayed are from 08:00-18:00.
     </q-markdown>
-    <example-viewer title="Interval Start" file="DayViewIntervalStart" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Interval Start" file="DayViewIntervalStart" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Navigation" />
-    <example-viewer title="Prev/Next" file="DayViewPrevNext" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Swipe" file="DayViewSwipe" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Prev/Next" file="DayViewPrevNext" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Swipe" file="DayViewSwipe" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Header" />
-    <example-viewer title="Custom Header" file="DayViewCustomHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
-    <example-viewer title="Custom Header with Custom Scroll" file="DayViewCustomHeaderWithCustomScroll" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Custom Header" file="DayViewCustomHeader" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Custom Header with Custom Scroll" file="DayViewCustomHeaderWithCustomScroll" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
 Column Headers are scoped slots only. They are turned on with the `column-header-before` and `column-header-after` properties. Once each property is set to `true` the respective slot is availale.
 Column Headers are only available for the `day` (includes 2day, 3day, etc), `week` and `scheduler` views.
 The `timestamp` information is passed to the scoped slot.
     </q-markdown>
-    <example-viewer title="Column Header" file="DayViewColumnHeader" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Column Header" file="DayViewColumnHeader" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
 Column Count is only available for `day` view (no other views), with the property `column-count`.
 Setting `column-count` to a value higher than 1 (default) will display the same day in that many columns.
     </q-markdown>
-    <example-viewer title="Column Count" file="DayViewColumnCount" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Column Count" file="DayViewColumnCount" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
 If you combine `column-header-before` or `column-header-after` you can achieve a vertical schedule.
     </q-markdown>
-    <example-viewer title="Column Header Count" file="DayViewColumnHeaderCount" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Column Header Count" file="DayViewColumnHeaderCount" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
 And finally, if you wanted the ability to page through a large number of resources, you can set the `column-index-start` to create a paging effect.
     </q-markdown>
-    <example-viewer title="Column Header Count (Paged)" file="DayViewColumnHeaderCountPaging" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Column Header Count (Paged)" file="DayViewColumnHeaderCountPaging" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Events" />
     <q-markdown>
@@ -121,7 +121,7 @@ The events `:day` (now `:day:header2`), `:time`, `:interval` and `:date` have be
 
 The example below is only showing `click` events as well as the `input` event.
     </q-markdown>
-    <example-viewer title="Events" file="DayViewEvents" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Events" file="DayViewEvents" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Slots" />
     <q-markdown>
@@ -129,9 +129,9 @@ For slots that return a `timestamp`, it looks like this:
 ```js
 {
   date: '',       // YYYY-MM-DD
-  time: '',       // 00:00:00 (optional)
+  time: '',       // HH:MM (optional)
   year: 0,        // YYYY
-  month: 0,       // mm (Jan = 1, etc)
+  month: 0,       // MM (Jan = 1, etc)
   day: 0,         // day of the month
   weekday: 0,     // week day
   hour: 0,        // 24-hr
@@ -151,24 +151,24 @@ You can use the slots `day-header` and `day-body` to control visual aspects of y
 The example below is using the `day-header` slot to indicate there are events on that day, in case it is not visible, indicating to the user they should scroll down to see the event.
 The `day-body` slot is used to get information about the date and time of an event and then to calculate where the absolute position of the event based on passed in functions `timeStartPos` and `timeDurationHeight`.
     </q-markdown>
-    <example-viewer title="day-header with day-body" file="DayViewSlots" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="day-header with day-body" file="DayViewSlots" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
-    <example-viewer title="head-day" file="DayViewSlotHeadDay" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="head-day" file="DayViewSlotHeadDay" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
 You can use the scopedSlot `day-container` to set an absolute position for a time tracking bar.
 Scroll down if the current time is later for your location to see the example.
     </q-markdown>
-    <example-viewer title="day-container: Show current time" file="DayViewCurrentTime" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="day-container: Show current time" file="DayViewCurrentTime" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Customization" />
     <q-markdown>
 You can create your own themes by overriding various css vars. You do not have to override all of them (as in the next example), just the ones you need. For building your own themes, head on over to the [Theme Builder](../../quasar-ui-qcalendar/theme-builder)
     </q-markdown>
-    <example-viewer title="Colors" file="DayViewColors" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Colors" file="DayViewColors" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <example-title title="Locale Support" />
-    <example-viewer title="Locale" file="DayViewLocale" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+    <example-viewer title="Locale" file="DayViewLocale" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
   </div>
 </template>
