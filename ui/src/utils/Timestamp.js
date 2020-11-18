@@ -21,9 +21,9 @@ export const MILLISECONDS_IN_WEEK = 604800000
 /* eslint-disable no-multi-spaces */
 export const Timestamp = {
   date: '',       // YYYY-MM-DD
-  time: '',       // 00:00:00 (optional)
+  time: '',       // HH:MM (optional)
   year: 0,        // YYYY
-  month: 0,       // mm (Jan = 1, etc)
+  month: 0,       // MM (Jan = 1, etc)
   day: 0,         // day of the month
   weekday: 0,     // week day
   hour: 0,        // 24-hr
