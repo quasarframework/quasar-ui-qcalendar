@@ -1,5 +1,5 @@
 <template>
-  <div class="row justify-center q-pa-md" style="max-width: 800px; width: 100%;">
+  <div class="row justify-center" style="max-width: 800px; width: 100%;">
     <div class="row justify-center items-center">
       <q-btn flat dense label="Prev" @click="calendarPrev" />
       <q-separator vertical />

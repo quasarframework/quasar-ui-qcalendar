@@ -62,7 +62,7 @@ In the first calendar, all disabled days are set explicitly. In the second examp
     <example-viewer title="Disabled Days" file="MiniModeDisabledDays" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
-In the this example the disabled days and a range of disabled days are combined. Ranges must be an array of dates within the main array. They contain a start and and end date.
+In the this example the disabled days and a range of disabled days are combined. Ranges must be an array of dates within the main array. They contain a start and an end date.
     </q-markdown>
     <example-viewer title="Disabled Days (combined)" file="MiniModeDisabledDaysCombined" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <q-markdown>
