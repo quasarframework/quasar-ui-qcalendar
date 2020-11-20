@@ -4,7 +4,7 @@
     v-model="openEditor"
     position="right"
   >
-    <div :class="classes" style="max-width: 280px">
+    <div :class="classes" style="max-width: 360px">
       <div class="text-title">Theme Styles Picker</div>
       <q-separator class="q-mb-md" />
 
@@ -19,6 +19,7 @@
           @change="val => { editorSize = val }"
           class="fill-width"
         />
+        <q-separator class="q-mb-sm" />
       </div>
 
       <div v-if="currentBorderType !== void 0" class="full-width row justify-center">
@@ -35,6 +36,13 @@
           label="Dashed"
           @input="val => { editorType = val }"
         />
+        <q-radio
+          :value="editorType"
+          val="dotted"
+          label="Dotted"
+          @input="val => { editorType = val }"
+        />
+        <q-separator class="q-mb-sm" />
       </div>
 
       <div v-if="currentColor !== void 0" class="row justify-center">
@@ -42,29 +50,23 @@
           default-view="palette"
           :value="editorColor"
           :palette="colorPalette"
+          format-model="hexa"
           style="max-width: 200px"
           @change="val => { editorColor = val }"
         />
-        <br>
-        <q-separator class="q-mt-sm" />
-        Hint: current color schema is on the Palette tab
+        <p>Hint: current color schema is on the Palette tab</p>
+        <q-separator class="q-mb-sm" />
       </div>
 
-      <q-input
-        v-if="isValue === true"
-        v-model="editorValue"
-        label="Edit css value"
-      />
+      <div class="row justify-center">
+        <q-input
+          v-if="isValue === true"
+          v-model="editorValue"
+          label="Edit css value"
+        />
+      </div>
 
       <div class="row justify-center">
-        <!-- <q-btn
-          label="Unset"
-          dense
-          class="q-ma-md"
-          @click="onUnset"
-        >
-          <q-tooltip>Set the style to "unset"</q-tooltip>
-        </q-btn> -->
         <q-btn
           label="Revert change"
           dense
@@ -136,34 +138,44 @@ export default {
 
     currentStyle () {
       let style = ''
-      if (this.editorValue !== void 0) style += this.editorValue
+      if (this.editorValue !== void 0) {
+        style += this.editorValue
+      }
       else {
-        if (this.editorColor !== void 0) style += this.editorColor
-        if (this.editorSize !== void 0) style += ' ' + this.editorSize + 'px'
-        if (this.editorType !== void 0) style += ' ' + this.editorType
+        if (this.editorColor !== void 0) {
+          style += this.editorColor
+        }
+        if (this.editorSize !== void 0 && isNaN(this.editorSize) === false) {
+          style += ' ' + this.editorSize + 'px'
+        }
+        if (this.editorType !== void 0) {
+          style += ' ' + this.editorType
+        }
       }
       return style
     },
 
     hasBorder () {
-      return this.currentBorderType !== void 0
+      return this.itemName && this.currentBorderType !== void 0
     },
 
     hasColor () {
-      return this.currentColor !== void 0
+      return this.itemName && this.currentColor !== void 0
     },
 
     hasUnset () {
-      return this.itemStyle === 'unset'
+      return this.itemName && this.itemStyle === 'unset'
     },
 
     isValue () {
-      return this.hasBorder !== true &&
+      return this.itemName &&
+        this.hasBorder !== true &&
         this.hasColor !== true &&
         this.hasUnset !== true
     },
 
     currentColor () {
+      if (!this.itemName) return
       let color
       if (this.itemStyle) {
         const parts = this.itemStyle.split(' ')
@@ -178,11 +190,12 @@ export default {
     },
 
     currentBorderType () {
+      if (!this.itemName) return
       let type
       if (this.itemStyle) {
         const parts = this.itemStyle.split(' ')
         parts.forEach(part => {
-          if (part === 'solid' || part === 'dashed') {
+          if (part === 'solid' || part === 'dashed' || part === 'dotted') {
             type = part
           }
         })
@@ -191,11 +204,12 @@ export default {
     },
 
     currentBorderSize () {
+      if (!this.itemName) return
       let size
       if (this.itemStyle && this.itemName && this.itemName.indexOf('border') > -1) {
         const parts = this.itemStyle.split(' ')
         parts.forEach(part => {
-          if (!part.match(/^(#|(rgb|hsl)a?\()/) && part !== 'solid' && part !== 'dashed') {
+          if (!part.match(/^(#|(rgb|hsl)a?\()/) && part !== 'solid' && part !== 'dashed' && part !== 'dotted') {
             size = parseInt(part, 10)
           }
         })
@@ -204,6 +218,7 @@ export default {
     },
 
     currentValue () {
+      if (!this.itemName) return
       let value
       if (this.itemStyle && this.itemName && (this.itemName.indexOf('width') > -1 || this.itemName.indexOf('font') > -1)) {
         value = this.itemStyle
