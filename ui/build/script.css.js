@@ -3,7 +3,7 @@ const path = require('path')
 const sass = require('sass')
 const postcss = require('postcss')
 const cssnano = require('cssnano')
-const rtl = require('postcss-rtl')
+const rtl = require('rtlcss')
 const autoprefixer = require('autoprefixer')
 
 const buildConf = require('./config')

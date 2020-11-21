@@ -36,11 +36,6 @@
     "reminders",
     "schedule"
   ],
-  "engines": {
-    "node": ">= 10.0.0",
-    "npm": ">= 5.6.0",
-    "yarn": ">= 1.6.0"
-  },
   "dependencies": {
     "@quasar/quasar-ui-qcalendar": "^3.1.4"
   },
@@ -50,5 +45,10 @@
     "eslint": "^7.13.0",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-vue": "^7.1.0"
+  },
+  "engines": {
+    "node": ">= 10.0.0",
+    "npm": ">= 5.6.0",
+    "yarn": ">= 1.6.0"
   }
 }
