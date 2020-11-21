@@ -177,13 +177,18 @@ You can create your own themes by overriding various css vars. You do not have t
     <example-title title="Locale Support" />
     <example-viewer title="Locale" file="MonthViewLocale" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
-    <example-title title="Custom Toolbar" />
+    <example-title title="Customizations" />
     <q-markdown>
 QCalendar does not come with a navigation toolbar out-of-the-box because we believe developers/designers should be able to make their own custom controls that are visually appealing to their audience. This keeps QCalendar less opinionated of how you want your calendar to look.
 
 This example is only one of many ways you can style your own QCalendar.
     </q-markdown>
     <example-viewer title="Toolbar" file="MonthViewToolbar" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+
+    <q-markdown>
+This next example shows how you can customize QCalendar with some css. This example targets both the `current` and `active` dates (so don't forget to click on a date).
+    </q-markdown>
+    <example-viewer title="CSS" file="MonthViewCustomCurrentDay" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
   </div>
 </template>
@@ -259,8 +264,9 @@ export default {
     this.addToToc('Locale Support')
     this.addToToc('Locale', 2)
 
-    this.addToToc('Custom Toolbar')
+    this.addToToc('Customizations')
     this.addToToc('Toolbar', 2)
+    this.addToToc('CSS', 2)
 
     this.toc = this.tempToc
   },
