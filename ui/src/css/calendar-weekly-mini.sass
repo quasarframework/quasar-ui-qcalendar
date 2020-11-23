@@ -21,9 +21,6 @@
       &--wrapper
         border-bottom: unset
 
-      &-days
-        position: relative
-
     &__workweek
       border-right: unset
       font-size: 1em
@@ -32,19 +29,17 @@
 
     &__day
       display: flex
-      align-items: center
       justify-content: center
-      align-items: center
       flex-wrap: wrap
       padding: 0
       border: 0 !important
       margin-top: 1px
       margin-bottom: 1px
       min-height: 1.5em !important
-      min-width: 1.5em !important
 
       &--content
-        margin-top: 0.05em
+        margin-top: 1px
+        height: auto
 
       &-label
         position: relative
@@ -189,9 +184,6 @@
   .q-calendar-weekly__week
     border-bottom: unset
     max-width: 100%
-
-  // .q-calendar-weekly__week-events
-  //   padding-top: 2.6em
 
 .q-dark div,
 .body--dark div,

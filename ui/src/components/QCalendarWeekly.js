@@ -28,6 +28,14 @@ export default {
     }
   },
 
+  mounted () {
+    this.__adjustForWeekEvents()
+  },
+
+  updated () {
+    this.__adjustForWeekEvents()
+  },
+
   computed: {
     staticClass () {
       return 'q-calendar-weekly'
@@ -87,10 +95,6 @@ export default {
 
     styles () {
       const style = {}
-      if (this.dayHeight > 0) {
-        const height = convertToUnit(this.dayHeight)
-        style.height = height
-      }
       if (this.dayPadding !== undefined) {
         style.padding = this.dayPadding
       }
@@ -132,6 +136,27 @@ export default {
         }
       }
       return { timestamp: false }
+    },
+
+    __adjustForWeekEvents () {
+      if (this.isMiniMode === true) return
+      if (this.dayHeight !== 0) return
+      const slotWeek = this.$scopedSlots.week
+      if (slotWeek === void 0) return
+
+      let i = 0
+      for (; i < 7; ++i) {
+        const weekEvent = this.$refs['weekEvent' + i]
+        if (weekEvent === void 0) return
+        const wrapper = this.$refs['week' + i]
+        if (wrapper === void 0) return
+        // this sucks to have to do it this way
+        const styles = window.getComputedStyle(weekEvent)
+        const margin = parseFloat(styles.marginTop, 10) + parseFloat(styles.marginBottom, 10)
+        if (weekEvent.clientHeight + margin > wrapper.clientHeight) {
+          wrapper.style.height = weekEvent.clientHeight + margin + 'px'
+        }
+      }
     },
 
     __renderContainer (h) {
@@ -235,23 +260,29 @@ export default {
       const weekDays = this.weekdays.length
       const weeks = []
       for (let i = 0; i < days.length; i += weekDays) {
-        weeks.push(this.__renderWeek(h, days.slice(i, i + weekDays)))
+        weeks.push(this.__renderWeek(h, days.slice(i, i + weekDays), i / weekDays))
       }
 
       return weeks
     },
 
-    __renderWeek (h, week) {
-      const slot = this.$scopedSlots.week
+    __renderWeek (h, week, weekNum) {
+      const slotWeek = this.$scopedSlots.week
       const weekdays = this.weekdays
       const slotData = { week, weekdays, miniMode: this.isMiniMode }
+      const style = {}
+
+      // this applies height properly, even if workweeks are displaying
+      style.height = this.dayHeight > 0 ? convertToUnit(this.dayHeight) : 'auto'
+
       return h('div', {
         key: week[0].date,
-        staticClass: 'q-calendar-weekly__week--wrapper'
+        ref: 'week' + weekNum,
+        staticClass: 'q-calendar-weekly__week--wrapper',
+        style
       }, [
         this.showWorkWeeks === true && this.__renderWorkWeekGutter(h, week),
         h('div', {
-          key: week[0].date,
           staticClass: 'q-calendar-weekly__week',
           style: {
             width: this.showWorkWeeks
@@ -264,9 +295,12 @@ export default {
           h('div', {
             staticClass: 'q-calendar-weekly__week-days'
           }, week.map(day => this.__renderDay(h, day))),
-          slot !== undefined ? h('div', {
-            staticClass: 'q-calendar-weekly__week-events'
-          }, slot(slotData)) : ''
+          this.isMiniMode !== true && slotWeek !== undefined
+            ? h('div', {
+              ref: 'weekEvent' + weekNum,
+              staticClass: 'q-calendar-weekly__week-events'
+            }, slotWeek(slotData))
+            : ''
         ])
       ])
     },
