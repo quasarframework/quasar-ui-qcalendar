@@ -91,7 +91,11 @@ Using the property `short-weekday-label` while in `mini-mode` gives an even shor
     </q-markdown>
     <example-viewer title="Multi-Month Selection (range)" file="MiniModeMultiMonthSelection" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
     <q-markdown>
-Using the property `hover` with `selected-start-end-dates` while in `mini-mode` gives you a better interactive and visually appealing selection.
+Using the property `hover` with `selected-start-end-dates` while in `mini-mode` gives you a better interactive experience and visually appealing selection.
+
+::: warning
+The `hover` property does nothing for mobiles (unless, of course, you are using a specialized selection pen)
+:::
     </q-markdown>
     <example-viewer title="Multi-Month Selection with Hover Prop" file="MiniModeMultiMonthSelectionHover" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
@@ -168,6 +172,10 @@ For slots that return `day`, `interval` or `timestamp`, it looks like this:
   disabled: false // if timestamp is disabled
 }
 ```
+
+::: warning
+Be aware that there is no `week` slot while in mini-mode and therefore no example for it.
+:::
     </q-markdown>
     <example-viewer title="Slots (day)" file="MiniModeSlots" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
