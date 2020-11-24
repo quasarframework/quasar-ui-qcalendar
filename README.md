@@ -24,7 +24,8 @@ Among other updates, several things have become "native" for QCalendar:
 5. You no longer need to hook into the styles properties (ie: interval-style) to change the way disabled days look. You can now change the disable date colors via css vars
 6. 'activeDate' is now included in a lot of the scoped slots and events
 7. On interval-based calendars, when using the property "interval-minutes", those parts of the calendar are now called "interval sections" and can be changed via css vars. The default is to now have a "dashed" look, while at the main interval time, the lines are solid. Again, all changeable via css vars
-8. All deprecated slots and events were removed
+8. You no longer have to provide `.q-range-first`, `.q-range-last` and `.q-range` classes via `day-class` property for range selection. It's all built-in now.
+9. All deprecated slots and events were removed
 
 Also, check out the new [Theme Builder](https://quasarframework.github.io/quasar-ui-qcalendar/theme-builder) in the docs.
 
