@@ -105,21 +105,6 @@ export default {
   },
 
   methods: {
-    classDay (timestamp) {
-      if (this.anchorDayIdentifier !== false && this.otherDayIdentifier !== false) {
-        return this.getBetween(timestamp)
-      }
-    },
-
-    getBetween (timestamp) {
-      const nowIdentifier = QCalendar.getDayIdentifier(timestamp)
-      return {
-        'q-range-first': this.lowIdentifier === nowIdentifier,
-        'q-range': this.lowIdentifier <= nowIdentifier && this.highIdentifier >= nowIdentifier,
-        'q-range-last': this.highIdentifier === nowIdentifier
-      }
-    },
-
     onMouseDownDay ({ scope, event }) {
       if (leftClick(event)) {
         if (this.mobile === true &&

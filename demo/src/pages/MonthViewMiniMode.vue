@@ -78,9 +78,7 @@ Click on dates to toggled selected on/off.
     <example-viewer title="Selected Dates" file="MiniModeSelectedDates" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
     <q-markdown>
-There are some considerations when using mini-mode selections. There are 3 special classes: `.q-range-first`, `.q-range` and `.q-range-last` in conjunction with the `day-class` property. These will help you create a selector compliant with [Material Design](https://material.io/components/pickers/#anatomy). See examples below for usage.
-
-The examples below has a `touch` boolean. This does not change anything with QCalendar. What it does is change the devland logic. When **not** set, the mouse down, mouse move and mouse up control the selection. When set (checked), the first click sets the anchor point and the second click sets the second anchor point.
+The examples below have a `touch` boolean. This does not change anything with QCalendar. What it does is change the devland logic. When **not** set, the mouse down, mouse move and mouse up control the selection. When set (checked), the first click sets the anchor point and the second click sets the second anchor point.
     </q-markdown>
     <example-viewer title="Selection" file="MiniModeSelection" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
