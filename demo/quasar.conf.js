@@ -77,7 +77,7 @@ module.exports = function (/* ctx */) {
         chain.plugin('eslint-webpack-plugin')
           .use(ESLintPlugin, [{
             extensions: ['js', 'vue'],
-            exclude: ['node_modules', '.md.js']
+            exclude: ['node_modules']
           }])
 
         chain.resolve.alias.merge({
