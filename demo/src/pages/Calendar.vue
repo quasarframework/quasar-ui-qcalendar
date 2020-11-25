@@ -914,7 +914,8 @@ export default {
         s.color = colors.luminosity(event.bgcolor) > 0.5 ? 'black' : 'white'
       }
       if (timeStartPos) {
-        s.top = timeStartPos(event.time) + 'px'
+        // don't clamp position to 0px
+        s.top = timeStartPos(event.time, false) + 'px'
         s.position = 'absolute'
         if (event.side !== undefined) {
           s.width = '50%'
