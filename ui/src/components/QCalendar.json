@@ -5623,6 +5623,11 @@
                       "examples":[
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
@@ -5728,6 +5733,11 @@
                       "examples":[
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
@@ -5874,6 +5884,11 @@
                       "examples":[
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
@@ -6020,6 +6035,11 @@
                       "examples":[
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
@@ -6166,6 +6186,11 @@
                       "examples":[
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
@@ -6312,6 +6337,11 @@
                       "examples":[
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
@@ -6458,6 +6488,11 @@
                       "examples":[
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
@@ -6604,6 +6639,11 @@
                       "examples":[
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
@@ -6750,6 +6790,11 @@
                       "examples":[
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
@@ -6896,6 +6941,11 @@
                       "examples":[
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
@@ -7042,6 +7092,11 @@
                       "examples":[
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
@@ -10742,6 +10797,11 @@
           "examples":[
             "09:00"
           ]
+        },
+        "clamp": {
+          "type": "Boolean",
+          "desc": "Clamp negative values to 0",
+          "default": "true"
         }
       },
       "returns": {
@@ -10986,6 +11046,11 @@
               "examples":[
                 "09:00"
               ]
+            },
+            "clamp": {
+              "type": "Boolean",
+              "desc": "Clamp negative values to 0",
+              "default": "true"
             }
           },
           "returns": {
@@ -11076,6 +11141,11 @@
               "examples":[
                 "09:00"
               ]
+            },
+            "clamp": {
+              "type": "Boolean",
+              "desc": "Clamp negative values to 0",
+              "default": "true"
             }
           },
           "returns": {
