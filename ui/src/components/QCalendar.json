@@ -5632,7 +5632,7 @@
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -5742,7 +5742,7 @@
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -5893,7 +5893,7 @@
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -6044,7 +6044,7 @@
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -6195,7 +6195,7 @@
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -6346,7 +6346,7 @@
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -6497,7 +6497,7 @@
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -6648,7 +6648,7 @@
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -6799,7 +6799,7 @@
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -6950,7 +6950,7 @@
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -7101,7 +7101,7 @@
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -10806,7 +10806,7 @@
       },
       "returns": {
         "type": "Number",
-        "desc": "The absolute y starting position",
+        "desc": "The absolute y starting position, but `false` on invalid time parameter",
         "examples": [
           "120",
           "482"
@@ -11055,7 +11055,7 @@
           },
           "returns": {
             "type": "Number",
-            "desc": "The absolute y starting position",
+            "desc": "The absolute y starting position, but `false` on invalid time parameter",
             "examples": [
               "120",
               "482"
@@ -11150,7 +11150,7 @@
           },
           "returns": {
             "type": "Number",
-            "desc": "The absolute y starting position",
+            "desc": "The absolute y starting position, but `false` on invalid time parameter",
             "examples": [
               "120",
               "482"
