@@ -5623,11 +5623,16 @@
                       "examples":[
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -5728,11 +5733,16 @@
                       "examples":[
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -5874,11 +5884,16 @@
                       "examples":[
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -6020,11 +6035,16 @@
                       "examples":[
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -6166,11 +6186,16 @@
                       "examples":[
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -6312,11 +6337,16 @@
                       "examples":[
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -6458,11 +6488,16 @@
                       "examples":[
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -6604,11 +6639,16 @@
                       "examples":[
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -6750,11 +6790,16 @@
                       "examples":[
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -6896,11 +6941,16 @@
                       "examples":[
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -7042,11 +7092,16 @@
                       "examples":[
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -10742,11 +10797,16 @@
           "examples":[
             "09:00"
           ]
+        },
+        "clamp": {
+          "type": "Boolean",
+          "desc": "Clamp negative values to 0",
+          "default": "true"
         }
       },
       "returns": {
         "type": "Number",
-        "desc": "The absolute y starting position",
+        "desc": "The absolute y starting position, but `false` on invalid time parameter",
         "examples": [
           "120",
           "482"
@@ -10986,11 +11046,16 @@
               "examples":[
                 "09:00"
               ]
+            },
+            "clamp": {
+              "type": "Boolean",
+              "desc": "Clamp negative values to 0",
+              "default": "true"
             }
           },
           "returns": {
             "type": "Number",
-            "desc": "The absolute y starting position",
+            "desc": "The absolute y starting position, but `false` on invalid time parameter",
             "examples": [
               "120",
               "482"
@@ -11076,11 +11141,16 @@
               "examples":[
                 "09:00"
               ]
+            },
+            "clamp": {
+              "type": "Boolean",
+              "desc": "Clamp negative values to 0",
+              "default": "true"
             }
           },
           "returns": {
             "type": "Number",
-            "desc": "The absolute y starting position",
+            "desc": "The absolute y starting position, but `false` on invalid time parameter",
             "examples": [
               "120",
               "482"

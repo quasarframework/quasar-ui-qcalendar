@@ -251,6 +251,7 @@
       <q-calendar
         ref="calendar"
         class="calendar"
+        style="height: calc(100vh - 50px)"
         :key="keyValue"
         v-touch-swipe.mouse.left.right="handleSwipe"
         v-model="selectedDate"
@@ -668,7 +669,7 @@ export default {
         styles.height = 'auto'
       }
       else {
-        styles.height = `calc(100vh - ${this.titlebarHeight}px)`
+        styles.height = `calc(100% - ${this.titlebarHeight}px)`
       }
       styles.width = 'auto'
       return styles
@@ -913,7 +914,8 @@ export default {
         s.color = colors.luminosity(event.bgcolor) > 0.5 ? 'black' : 'white'
       }
       if (timeStartPos) {
-        s.top = timeStartPos(event.time) + 'px'
+        // don't clamp position to 0px
+        s.top = timeStartPos(event.time, false) + 'px'
         s.position = 'absolute'
         if (event.side !== undefined) {
           s.width = '50%'
