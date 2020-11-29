@@ -223,6 +223,10 @@ export function getTimeIdentifier (timestamp) {
   return timestamp.hour * 100 + timestamp.minute
 }
 
+export function getDayTimeIdentifier (timestamp) {
+  return getDayIdentifier(timestamp) + getTimeIdentifier(timestamp)
+}
+
 export function diffTimestamp (ts1, ts2, strict) {
   const utc1 = Date.UTC(ts1.year, ts1.month - 1, ts1.day, ts1.hour, ts1.minute)
   const utc2 = Date.UTC(ts2.year, ts2.month - 1, ts2.day, ts2.hour, ts2.minute)

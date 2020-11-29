@@ -281,6 +281,28 @@
         "__exemption": [ "examples" ]
       }
     },
+    "getDayTimeIdentifier": {
+      "desc": "Turns passed in timestamp object to a date/time identifier",
+      "addedIn": "v3.2.0",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "tsType": "Timestamp",
+          "required": true,
+          "desc": "A timestamp object",
+          "__exemption": [
+            "examples"
+          ]
+        }
+      },
+      "returns": {
+        "type": "Number",
+        "desc": "The returned number is in a number representing `YYYYMMddhhmm`",
+        "__exemption": [
+          "examples"
+        ]
+      }
+    },
     "diffTimestamp": {
       "desc": "Returns the number of milliseconds between the two days",
       "params": {
