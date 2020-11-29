@@ -964,6 +964,7 @@
       ],
       "examples": [
         ":selected-dates=\"['2019-04-01', '2019-04-02', '2019-04-03', '2019-04-04']\"",
+        ":selected-dates=\"['2019-04-01 13:00', '2019-04-01 13:15', '2019-04-01 13:30', '2019-04-01 13:45']\""
       ]
     },
     "mini-mode": {
@@ -1758,7 +1759,6 @@
         }
       }
     },
-
     "click:day": {
       "removedIn": "v3.0.0",
       "desc": "Occurs on day area",
@@ -2442,7 +2442,6 @@
         }
       }
     },
-
     "click:day:header2": {
       "addedIn": "v2.4.0",
       "desc": "Occurs on day header",
@@ -2933,7 +2932,6 @@
         }
       }
     },
-
     "click:workweek": {
       "removedIn": "v3.0.0",
       "desc": "Occurs on workweek",
@@ -3804,7 +3802,6 @@
         }
       }
     },
-
     "click:workweek:header2": {
       "addedIn": "v2.4.0",
       "desc": "Occurs on workweek",
@@ -4205,7 +4202,6 @@
         }
       }
     },
-
     "click:interval": {
       "removedIn": "v3.0.0",
       "desc": "Occurs on interval area",
@@ -5096,7 +5092,6 @@
         }
       }
     },
-
     "click:interval:header2": {
       "addedIn": "v2.4.0",
       "desc": "Occurs on interval area",
@@ -5577,7 +5572,6 @@
         }
       }
     },
-
     "click:time": {
       "removedIn": "v3.0.0",
       "desc": "Occurs on interval time area",
@@ -5624,7 +5618,7 @@
                     "duration": {
                       "type": ["Number", "String"],
                       "desc": "The number of minutes for the event to calculate it's height",
-                      "examples":[
+                      "examples": [
                         "300",
                         "900"
                       ]
@@ -5647,7 +5641,7 @@
                     "time": {
                       "type": "String",
                       "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-                      "examples":[
+                      "examples": [
                         "09:00"
                       ]
                     },
@@ -5734,7 +5728,7 @@
                     "duration": {
                       "type": ["Number", "String"],
                       "desc": "The number of minutes for the event to calculate it's height",
-                      "examples":[
+                      "examples": [
                         "300",
                         "900"
                       ]
@@ -5757,7 +5751,7 @@
                     "time": {
                       "type": "String",
                       "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-                      "examples":[
+                      "examples": [
                         "09:00"
                       ]
                     },
@@ -5885,7 +5879,7 @@
                     "duration": {
                       "type": ["Number", "String"],
                       "desc": "The number of minutes for the event to calculate it's height",
-                      "examples":[
+                      "examples": [
                         "300",
                         "900"
                       ]
@@ -5908,7 +5902,7 @@
                     "time": {
                       "type": "String",
                       "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-                      "examples":[
+                      "examples": [
                         "09:00"
                       ]
                     },
@@ -6036,7 +6030,7 @@
                     "duration": {
                       "type": ["Number", "String"],
                       "desc": "The number of minutes for the event to calculate it's height",
-                      "examples":[
+                      "examples": [
                         "300",
                         "900"
                       ]
@@ -6059,7 +6053,7 @@
                     "time": {
                       "type": "String",
                       "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-                      "examples":[
+                      "examples": [
                         "09:00"
                       ]
                     },
@@ -6187,7 +6181,7 @@
                     "duration": {
                       "type": ["Number", "String"],
                       "desc": "The number of minutes for the event to calculate it's height",
-                      "examples":[
+                      "examples": [
                         "300",
                         "900"
                       ]
@@ -6210,7 +6204,7 @@
                     "time": {
                       "type": "String",
                       "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-                      "examples":[
+                      "examples": [
                         "09:00"
                       ]
                     },
@@ -6338,7 +6332,7 @@
                     "duration": {
                       "type": ["Number", "String"],
                       "desc": "The number of minutes for the event to calculate it's height",
-                      "examples":[
+                      "examples": [
                         "300",
                         "900"
                       ]
@@ -6361,7 +6355,7 @@
                     "time": {
                       "type": "String",
                       "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-                      "examples":[
+                      "examples": [
                         "09:00"
                       ]
                     },
@@ -6489,7 +6483,7 @@
                     "duration": {
                       "type": ["Number", "String"],
                       "desc": "The number of minutes for the event to calculate it's height",
-                      "examples":[
+                      "examples": [
                         "300",
                         "900"
                       ]
@@ -6512,7 +6506,7 @@
                     "time": {
                       "type": "String",
                       "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-                      "examples":[
+                      "examples": [
                         "09:00"
                       ]
                     },
@@ -6640,7 +6634,7 @@
                     "duration": {
                       "type": ["Number", "String"],
                       "desc": "The number of minutes for the event to calculate it's height",
-                      "examples":[
+                      "examples": [
                         "300",
                         "900"
                       ]
@@ -6663,7 +6657,7 @@
                     "time": {
                       "type": "String",
                       "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-                      "examples":[
+                      "examples": [
                         "09:00"
                       ]
                     },
@@ -6791,7 +6785,7 @@
                     "duration": {
                       "type": ["Number", "String"],
                       "desc": "The number of minutes for the event to calculate it's height",
-                      "examples":[
+                      "examples": [
                         "300",
                         "900"
                       ]
@@ -6814,7 +6808,7 @@
                     "time": {
                       "type": "String",
                       "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-                      "examples":[
+                      "examples": [
                         "09:00"
                       ]
                     },
@@ -6942,7 +6936,7 @@
                     "duration": {
                       "type": ["Number", "String"],
                       "desc": "The number of minutes for the event to calculate it's height",
-                      "examples":[
+                      "examples": [
                         "300",
                         "900"
                       ]
@@ -6965,7 +6959,7 @@
                     "time": {
                       "type": "String",
                       "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-                      "examples":[
+                      "examples": [
                         "09:00"
                       ]
                     },
@@ -7093,7 +7087,7 @@
                     "duration": {
                       "type": ["Number", "String"],
                       "desc": "The number of minutes for the event to calculate it's height",
-                      "examples":[
+                      "examples": [
                         "300",
                         "900"
                       ]
@@ -7116,7 +7110,7 @@
                     "time": {
                       "type": "String",
                       "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-                      "examples":[
+                      "examples": [
                         "09:00"
                       ]
                     },
@@ -7157,7 +7151,6 @@
         }
       }
     },
-
     "click:resource": {
       "removedIn": "v3.0.0",
       "desc": "Occurs on resource area",
@@ -7968,7 +7961,6 @@
         }
       }
     },
-
     "click:resource:header2": {
       "addedIn": "v2.4.0",
       "desc": "Occurs on resource header area",
@@ -9440,7 +9432,6 @@
         }
       }
     },
-
     "click:column:head": {
       "removedIn": "v3.0.0",
       "addedIn": "v1.5.0",
@@ -10102,7 +10093,6 @@
         }
       }
     },
-
     "click:column": {
       "addedIn": "v1.5.0",
       "desc": "Occurs on column",
@@ -10821,7 +10811,7 @@
         "time": {
           "type": "String",
           "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-          "examples":[
+          "examples": [
             "09:00"
           ]
         },
@@ -10851,7 +10841,7 @@
         "time": {
           "type": "String",
           "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-          "examples":[
+          "examples": [
             "09:00"
           ]
         }
@@ -10886,7 +10876,7 @@
         "duration": {
           "type": ["Number", "String"],
           "desc": "The number of minutes for the event to calculate it's height",
-          "examples":[
+          "examples": [
             "300",
             "900"
           ]
@@ -10912,7 +10902,7 @@
         "duration": {
           "type": ["Number", "String"],
           "desc": "The number of minutes for the event to calculate it's width",
-          "examples":[
+          "examples": [
             "300",
             "900"
           ]
@@ -10948,7 +10938,7 @@
         "time": {
           "type": "String",
           "desc": "The time in which to scoll to. If the time is already visible on the viewport, this function will have no affect.",
-          "examples":[
+          "examples": [
             "09:00"
           ]
         }
@@ -10965,7 +10955,7 @@
         "time": {
           "type": "String",
           "desc": "The time in which to scoll to. If the time is already visible on the viewport, this function will have no affect.",
-          "examples":[
+          "examples": [
             "09:00"
           ]
         }
@@ -11070,7 +11060,7 @@
             "time": {
               "type": "String",
               "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-              "examples":[
+              "examples": [
                 "09:00"
               ]
             },
@@ -11104,7 +11094,7 @@
             "duration": {
               "type": ["Number", "String"],
               "desc": "The number of minutes for the event to calculate it's height",
-              "examples":[
+              "examples": [
                 "300",
                 "900"
               ]
@@ -11165,7 +11155,7 @@
             "time": {
               "type": "String",
               "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-              "examples":[
+              "examples": [
                 "09:00"
               ]
             },
@@ -11191,7 +11181,7 @@
             "duration": {
               "type": ["Number", "String"],
               "desc": "The number of minutes for the event to calculate it's height",
-              "examples":[
+              "examples": [
                 "300",
                 "900"
               ]
@@ -11660,7 +11650,7 @@
             "time": {
               "type": "String",
               "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-              "examples":[
+              "examples": [
                 "09:00"
               ]
             }
@@ -11681,7 +11671,7 @@
             "duration": {
               "type": ["Number", "String"],
               "desc": "The number of minutes for the event to calculate it's width",
-              "examples":[
+              "examples": [
                 "300",
                 "900"
               ]

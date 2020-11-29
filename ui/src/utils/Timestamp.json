@@ -260,7 +260,7 @@
       },
       "returns": {
         "type": "Number",
-        "desc": "The returned number is in the form `YYYYmmdd`",
+        "desc": "The returned number is in a number representing `YYYYMMdd`",
         "__exemption": [ "examples" ]
       }
     },
@@ -277,7 +277,7 @@
       },
       "returns": {
         "type": "Number",
-        "desc": "The returned number is in the form `hhmm`",
+        "desc": "The returned number is in a number representing `hhmm`",
         "__exemption": [ "examples" ]
       }
     },
@@ -792,7 +792,7 @@
       },
       "returns": {
         "type": "String",
-        "desc": "A date and time as a padded value in the form `YYYY-MM-DD hh:mm`. Instead of `2020-1-2`, this function formats it as `2020-01-02`",
+        "desc": "A date and time as a padded value in the form `YYYY-MM-DD hh:mm`. Instead of `2020-1-2 1:20`, this function formats it as `2020-01-02 01:20`",
         "__exemption": [ "examples" ]
       },
     "__exemption": [ "examples" ]
@@ -1356,7 +1356,7 @@
         "options": {
           "type": "Object",
           "tsType": "AddToDateOptions",
-          "desc":  "The options passed to the method. All items are optional and can be positive or negative",
+          "desc": "The options passed to the method. All items are optional and can be positive or negative",
           "required": true,
           "examples": [
             "{ year: 1, month: -1, day: 10, hour: 2, minute: 3 }",
