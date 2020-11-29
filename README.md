@@ -14,6 +14,14 @@ QCalendar is a [Quasar](https://quasar.dev) component. It is a powerful calendar
 
 ## Important Release Notes
 
+**v3.2.0**: New property for interval-based calendars: `time-clicks-clamped`. What this does, is instead of returning a timestamp with the exact time of the click position, it returns the timestamp of the interval. If normally, your timestamp would have a time of **13:20**, this property makes it return **13:00**. This is also based on your settings of `interval-minutes`. If your `interval-minutes` is set to **15**, then the same click above would return a timestamp with time set to **13:15**.
+
+**Day** and **Week** calendars now have the ability to toggle selected intervals or a range of selected intervals (even across multiple days) with properties `selected-dates` and `selected-start-end-dates`. These properties not only need the date (like the month view uses), but also the time (use the Timestamp exported method `getDateTime`). See the examples to learn how to do this.
+
+**Timestamp** has a new exported method: `getDateTimeIdentifier` which is a convenience method that combines `getDayIdentifier` and `getTimeIdentifier`.
+
+You can find out more information [here](https://github.com/quasarframework/quasar-ui-qcalendar/releases/tag/v3.2.0).
+
 **v3.0.0**: As QCalendar strives to be the most exstensible calendar available, to be consistent with this ideology, we had to make a LOT of changes.
 
 Among other updates, several things have become "native" for QCalendar:
