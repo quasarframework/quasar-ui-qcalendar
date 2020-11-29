@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="max-width: 800px; width: 100%;">
     <div class="row justify-center items-center">
       <q-btn
         flat
@@ -17,22 +17,24 @@
     </div>
     <q-separator />
     <q-calendar
-      ref="calendar"
       v-model="selectedDate"
-      view="month"
+      view="week"
       locale="en-us"
       animated
-      no-active-date
-      transition-prev="slide-right"
-      transition-next="slide-left"
+      :interval-minutes="15"
+      :interval-count="96"
+      time-clicks-clamped
       :selected-dates="selectedDates"
-      @click:day2="onToggleDay"
-      @click:date2="onToggleDate"
+      @click:time2="onToggleTime"
+      style="height: 400px;"
     />
   </div>
 </template>
 
 <script>
+// normally you would not import "all" of QCalendar, but is needed for this example to work with UMD (codepen)
+import QCalendar from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
+
 export default {
   data () {
     return {
@@ -40,7 +42,6 @@ export default {
       selectedDates: []
     }
   },
-
   methods: {
     calendarNext () {
       this.$refs.calendar.next()
@@ -50,24 +51,19 @@ export default {
       this.$refs.calendar.prev()
     },
 
-    onToggleDate ({ scope }) {
-      if (scope !== undefined) {
-        this.toggleDate(scope)
+    onToggleTime ({ scope }) {
+      if (scope === undefined) {
+        return
       }
-    },
 
-    onToggleDay ({ scope }) {
-      if (scope !== undefined) {
-        this.toggleDate(scope)
-      }
-    },
+      // get date with time
+      const t = QCalendar.getDateTime(scope.timestamp)
 
-    toggleDate (scope) {
-      const date = scope.timestamp.date
-      if (this.selectedDates.includes(date)) {
+      // toggle to/from array
+      if (this.selectedDates.includes(t)) {
         // remove the date
         for (let i = 0; i < this.selectedDates.length; ++i) {
-          if (date === this.selectedDates[i]) {
+          if (t === this.selectedDates[i]) {
             this.selectedDates.splice(i, 1)
             break
           }
@@ -76,7 +72,7 @@ export default {
       else {
         // add the date if not outside
         if (scope.outside !== true) {
-          this.selectedDates.push(date)
+          this.selectedDates.push(t)
         }
       }
     }

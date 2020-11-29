@@ -14,7 +14,9 @@ import {
   createNativeLocaleFormatter,
   getStartOfWeek,
   getEndOfWeek,
-  getDayIdentifier
+  getDayIdentifier,
+  getDayTimeIdentifier,
+  getDateTime
 } from '../utils/Timestamp.js'
 
 export default {
@@ -96,6 +98,10 @@ export default {
       return arr && arr.length > 0 && arr.includes(timestamp.date)
     },
 
+    arrayHasDateTime (arr, timestamp) {
+      return arr && arr.length > 0 && arr.includes(getDateTime(timestamp))
+    },
+
     checkDays (arr, timestamp) {
       const days = {
         firstDay: false,
@@ -108,6 +114,25 @@ export default {
         const current = getDayIdentifier(timestamp)
         const first = getDayIdentifier(parsed(arr[0]))
         const last = getDayIdentifier(parsed(arr[1]))
+        days.firstDay = first === current
+        days.lastDay = last === current
+        days.betweenDays = first < current && last > current
+      }
+      return days
+    },
+
+    checkIntervals (arr, timestamp) {
+      const days = {
+        firstDay: false,
+        betweenDays: false,
+        lastDay: false
+      }
+
+      // array must have two dates ('YYYY-MM-DD HH:MM') in it
+      if (arr && arr.length === 2) {
+        const current = getDayTimeIdentifier(timestamp)
+        const first = getDayTimeIdentifier(parsed(arr[0]))
+        const last = getDayTimeIdentifier(parsed(arr[1]))
         days.firstDay = first === current
         days.lastDay = last === current
         days.betweenDays = first < current && last > current
@@ -130,6 +155,19 @@ export default {
         'q-range-last': lastDay === true,
         'q-range-hover': hover === true && (firstDay === true || lastDay === true || betweenDays === true),
         'q-disabled-day disabled': timestamp.disabled === true
+      }
+    },
+
+    getIntervalClasses (interval, selectedDays = [], startEndDays = []) {
+      const isSelected = this.arrayHasDateTime(selectedDays, interval)
+      const { firstDay, lastDay, betweenDays } = this.checkIntervals(startEndDays, interval)
+
+      return {
+        'q-selected': isSelected,
+        'q-range-first': firstDay === true,
+        'q-range': betweenDays === true,
+        'q-range-last': lastDay === true,
+        'q-disabled-interval disabled': interval.disabled === true
       }
     },
 

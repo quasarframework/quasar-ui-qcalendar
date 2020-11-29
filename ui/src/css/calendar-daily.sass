@@ -172,8 +172,28 @@
     width: 100%
     border-top: var(--calendar-border)
 
+    &.q-selected
+      color: var(--calendar-selected-color)
+      background: var(--calendar-selected-background)
+
+    &.q-range-first,
+    &.q-range-last,
+    &.q-range
+      color: var(--calendar-range-color)
+      background: var(--calendar-range-background)
+
     &--section
       border-top: var(--calendar-border-section)
+
+      &.q-selected
+        color: var(--calendar-selected-color)
+        background: var(--calendar-selected-background)
+
+      &.q-range-first,
+      &.q-range-last,
+      &.q-range
+        color: var(--calendar-range-color)
+        background: var(--calendar-range-background)
 
     &:first-child
       border-top: none !important
@@ -246,6 +266,16 @@
     &__day-interval
       border-top: var(--calendar-border-dark)
 
+      &.q-selected
+        color: var(--calendar-selected-color-dark)
+        background: var(--calendar-selected-background-dark)
+
+      &.q-range-first,
+      &.q-range-last,
+      &.q-range
+        color: var(--calendar-range-color-dark)
+        background: var(--calendar-range-background-dark)
+
       &:first-child
         border-top: none !important
 
@@ -254,6 +284,16 @@
 
       &--section
         border-top: var(--calendar-border-section-dark)
+
+        &.q-selected
+          color: var(--calendar-selected-color-dark)
+          background: var(--calendar-selected-background-dark)
+
+        &.q-range-first,
+        &.q-range-last,
+        &.q-range
+          color: var(--calendar-range-color-dark)
+          background: var(--calendar-range-background-dark)
 
     &__day-interval--droppable
       border: var(--calendar-border-droppable-dark)

@@ -918,9 +918,18 @@
       "tsType": "StringArray",
       "category": "behavior",
       "addedIn": "v1.2.0",
-      "desc": "An array of two dates in format `YYYY-MM-DD` for selection purposes",
+      "desc": "An array of two dates in format `YYYY-MM-DD` for selection purposes. Interval-based calendars use `YYYY-MM-DD HH:mm`",
       "applicable": [
-        "month"
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month",
+        "month-interval",
+        "custom-interval"
       ],
       "examples": [
         ":selected-start-end-dates=\"getStartEndDates\""
@@ -940,12 +949,21 @@
       "tsType": "StringArray",
       "category": "model",
       "addedIn": "v1.3.14",
-      "desc": "An array of string dates in the form `YYYY-MM-DD` that will be selected",
+      "desc": "An array of string dates in the form `YYYY-MM-DD` that will be selected. Interval-based calendars use `YYYY-MM-DD HH:mm`",
       "applicable": [
-        "month"
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month",
+        "month-interval",
+        "custom-interval"
       ],
       "examples": [
-        ":selected-dates=\"['2019-04-01', '2019-04-02', '2019-04-03', '2019-04-04']\""
+        ":selected-dates=\"['2019-04-01', '2019-04-02', '2019-04-03', '2019-04-04']\"",
       ]
     },
     "mini-mode": {

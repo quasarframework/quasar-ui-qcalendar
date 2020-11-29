@@ -58,6 +58,21 @@ In this example, the `disabled-weekdays` is set to disable the weekends.
     </q-markdown>
     <example-viewer title="Disabled Weekdays" file="WeekViewDisabledWeekdays" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
+    <example-title title="Selection" />
+    <q-markdown>
+In the next example, click on intervals to toggle selected on/off.
+    </q-markdown>
+    <example-viewer title="Selected Intervals" file="WeekViewSelectedDates" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+
+    <q-markdown>
+The example below shows how to use the QCalendar to create a multi-day/multi-interval range selector. The critical aspect of this is the `selected-start-end-dates` property. This takes an array of two dates with time (the first should be less or equal to the last) in format `YYYY-MM-dd hh:mm` (use exported method `getDateTime` to extract from a Timestamp).
+
+For the example below, click an interval, and while holding the mouse down, move to a different interval. Keep in mind, this is just one way of handling multi-day range selection. if you needed swipe navigation on a mobile, you could modify the code to have independent click on start and end days.
+
+Keep in mind that the functionality below won't work with swipe actions.
+    </q-markdown>
+    <example-viewer title="Multi-Interval Selection (range)" file="WeekViewSelection" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+
     <example-title title="Header" />
     <q-markdown>
 Column Headers are scoped slots only. They are turned on with the `column-header-before` and `column-header-after` properties. Once each property is set to `true` the respective slot is availale.
@@ -208,6 +223,10 @@ export default {
     this.addToToc('Disabled Days', 2)
     this.addToToc('Disabled Before/After', 2)
     this.addToToc('Disabled Weekdays', 2)
+
+    this.addToToc('Selection')
+    this.addToToc('Selected Intervals', 2)
+    this.addToToc('Multi-Interval Selection (range)', 2)
 
     this.addToToc('Header')
     this.addToToc('Column Header', 2)
