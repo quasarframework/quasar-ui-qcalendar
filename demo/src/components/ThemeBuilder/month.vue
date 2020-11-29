@@ -6,25 +6,25 @@
       <q-checkbox v-model="disabledDays" dense label="Disabled weekends" />
       <q-checkbox v-model="hideOutside" dense label="Hide outside days" />
       <q-checkbox v-model="showWorkweeks" dense label="Show workweeks" />
-        <div class="full-width text-caption">Selection Type</div>
-        <q-radio
-          v-model="selectionType"
-          dense
-          val="off"
-          label="Off"
-        />
-        <q-radio
-          v-model="selectionType"
-          dense
-          val="date"
-          label="Selection (toggle)"
-        />
-        <q-radio
-          v-model="selectionType"
-          dense
-          val="range"
-          label="Range"
-        />
+      <div class="full-width text-caption">Selection Type</div>
+      <q-radio
+        v-model="selectionType"
+        dense
+        val="off"
+        label="Off"
+      />
+      <q-radio
+        v-model="selectionType"
+        dense
+        val="toggle"
+        label="Selection (toggle)"
+      />
+      <q-radio
+        v-model="selectionType"
+        dense
+        val="range"
+        label="Range"
+      />
     </div>
     <div>
       <q-calendar
@@ -155,7 +155,7 @@ export default {
     },
 
     toggleDate (scope) {
-      if (this.selectionType !== 'date') return
+      if (this.selectionType !== 'toggle') return
       const date = scope.timestamp.date
       if (this.selectedDates.includes(date)) {
         // remove the date
