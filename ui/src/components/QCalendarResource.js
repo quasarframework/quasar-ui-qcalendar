@@ -321,7 +321,7 @@ export default {
           }
         },
         on: this.getDefaultMouseEventHandlers(':time2', (event, eventName) => {
-          const scope = this.getScopeForSlotX(this.getTimestampAtEventX(event, interval))
+          const scope = this.getScopeForSlotX(this.getTimestampAtEventX(event, interval, this.timeClicksClamped))
           scope.resource = resource
           scope.index = idx
           return { scope, event }

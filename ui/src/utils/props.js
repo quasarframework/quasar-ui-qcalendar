@@ -97,7 +97,8 @@ export default {
       type: [Number, String],
       default: 0,
       validator: validateNumber
-    }
+    },
+    timeClicksClamped: Boolean
   },
   weeks: {
     value: { // v-model

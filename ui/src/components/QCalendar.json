@@ -271,6 +271,15 @@
         "transition-next=\"flip-left\""
       ]
     },
+    "time-clicks-clamped": {
+      "type": "Boolean",
+      "addedIn": "v3.2.0",
+      "category": "behavior",
+      "desc": "Causes the returning timestamp time to be clamped to the interval it is in",
+      "applicable": [
+        "All interval-based"
+      ]
+    },
     "drag-over-func": {
       "type": "Function",
       "category": "behavior",

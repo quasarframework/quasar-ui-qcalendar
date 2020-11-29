@@ -107,7 +107,7 @@ export default {
       return undefined
     },
 
-    getTimestampAtEvent (e, day) {
+    getTimestampAtEvent (e, day, clamp = false) {
       const timestamp = copyTimestamp(day)
       const bounds = (e.currentTarget).getBoundingClientRect()
       const baseMinutes = this.startMinute
@@ -116,13 +116,13 @@ export default {
       const touches = touchEvent.changedTouches || touchEvent.touches
       const clientY = touches && touches[0] ? touches[0].clientY : mouseEvent.clientY
       const addIntervals = (clientY - bounds.top) / this.parsedIntervalHeight
-      const addMinutes = Math.floor(addIntervals * this.parsedIntervalMinutes)
+      const addMinutes = Math.floor((clamp ? Math.floor(addIntervals) : addIntervals) * this.parsedIntervalMinutes)
       const minutes = baseMinutes + addMinutes
 
       return updateMinutes(timestamp, minutes, this.times.now)
     },
 
-    getTimestampAtEventX (e, day) {
+    getTimestampAtEventX (e, day, clamp = false) {
       const timestamp = copyTimestamp(day)
       const bounds = (e.currentTarget).getBoundingClientRect()
       // const baseMinutes = this.startMinute
@@ -131,7 +131,7 @@ export default {
       const touches = touchEvent.changedTouches || touchEvent.touches
       const clientX = touches && touches[0] ? touches[0].clientX : mouseEvent.clientX
       const addIntervals = (clientX - bounds.left) / this.parsedIntervalWidth
-      const addMinutes = Math.floor(addIntervals * this.parsedIntervalMinutes)
+      const addMinutes = Math.floor((clamp ? Math.floor(addIntervals) : addIntervals) * this.parsedIntervalMinutes)
       const minutes = addMinutes + (day.hour * 60 + day.minute)
 
       return updateMinutes(timestamp, minutes, this.times.now)
