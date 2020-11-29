@@ -45,6 +45,12 @@ export default {
     dropFunc: {
       type: Function
       // event, timestamp
+    },
+    selectedDates: Array,
+    selectedStartEndDates: {
+      type: Array,
+      default: () => [],
+      validator: v => v.length <= 2
     }
   },
   intervals: {
@@ -97,7 +103,8 @@ export default {
       type: [Number, String],
       default: 0,
       validator: validateNumber
-    }
+    },
+    timeClicksClamped: Boolean
   },
   weeks: {
     value: { // v-model
@@ -133,12 +140,6 @@ export default {
     enableOutsideDays: Boolean,
     hideOutsideDays: Boolean,
     hover: Boolean,
-    selectedStartEndDates: {
-      type: Array,
-      default: () => [],
-      validator: v => v.length <= 2
-    },
-    selectedDates: Array,
     miniMode: {
       type: [Boolean, String],
       validator: v => v === undefined || v === true || v === false || v === 'auto'

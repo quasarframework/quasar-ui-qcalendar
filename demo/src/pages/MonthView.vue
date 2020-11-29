@@ -65,7 +65,7 @@ In this next example, the `disabled-weekdays` is set to disable the weekends.
 
     <example-title title="Selection" />
     <q-markdown>
-In the next example, click on dates to toggled selected on/off. Care is taken to exclude `outside` dates (dates that fall outside the current month).
+In the next example, click on dates to toggle selected on/off. Care is taken to exclude `outside` dates (dates that fall outside the current month).
     </q-markdown>
     <example-viewer title="Selected Dates" file="MonthViewSelectedDates" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 

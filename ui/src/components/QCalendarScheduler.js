@@ -423,7 +423,7 @@ export default {
           }
         },
         on: this.getDefaultMouseEventHandlers(':resource:day2', event => {
-          const scope = this.getScopeForSlot(this.getTimestampAtEvent(event, day), resourceIndex, resource)
+          const scope = this.getScopeForSlot(this.getTimestampAtEvent(event, day, this.timeClicksClamped), resourceIndex, resource)
           return { scope, event }
         })
       }

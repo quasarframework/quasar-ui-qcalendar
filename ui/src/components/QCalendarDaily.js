@@ -9,6 +9,7 @@ import CalendarIntervals from '../mixins/calendar-intervals.js'
 
 // Util
 import { convertToUnit } from '../utils/helpers.js'
+import { getDateTime } from '../utils/Timestamp.js'
 
 /* @vue/component */
 export default {
@@ -321,7 +322,7 @@ export default {
         },
         on: {
           ...this.getDefaultMouseEventHandlers(':time2', event => {
-            const scope = this.getScopeForSlot(this.getTimestampAtEvent(event, day), idx)
+            const scope = this.getScopeForSlot(this.getTimestampAtEvent(event, day, this.timeClicksClamped), idx)
             return { scope, event }
           })
         }
@@ -343,9 +344,10 @@ export default {
       let dragOver
 
       const data = {
-        key: interval.time,
+        key: getDateTime(interval),
         staticClass: interval.minute === 0 ? 'q-calendar-daily__day-interval' : 'q-calendar-daily__day-interval--section',
         class: {
+          ...this.getIntervalClasses(interval, this.selectedDates, this.selectedStartEndDates),
           'q-calendar-daily__day-interval--droppable': dragOver
         },
         style: {
@@ -375,8 +377,8 @@ export default {
       const data = {
         staticClass: 'q-calendar-daily__intervals-body',
         on: {
-          ...this.getDefaultMouseEventHandlers(':interval2', (event, eventName) => {
-            const timestamp = this.getTimestampAtEvent(event, this.parsedStart)
+          ...this.getDefaultMouseEventHandlers(':interval2', event => {
+            const timestamp = this.getTimestampAtEvent(event, this.parsedStart, this.timeClicksClamped)
             return { scope: { timestamp }, event }
           })
         }

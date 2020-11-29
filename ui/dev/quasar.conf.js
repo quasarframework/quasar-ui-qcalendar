@@ -65,15 +65,21 @@ module.exports = function (/* ctx */) {
       // extractCSS: false,
 
       // https://quasar.dev/quasar-cli/handling-webpack
-      extendWebpack (cfg, { isServer, isClient }) {
-        cfg.plugins.push(new ESLintPlugin({
-          files: './src',
-          extensions: ['js', 'vue']
-        }))
-      },
+      // extendWebpack (cfg, { isServer, isClient }) {
+      //   cfg.plugins.push(new ESLintPlugin({
+      //     files: './src',
+      //     extensions: ['js', 'vue']
+      //   }))
+      // },
 
       // https://quasar.dev/quasar-cli/handling-webpack
       chainWebpack (chain) {
+        chain.plugin('eslint-webpack-plugin')
+          .use(ESLintPlugin, [{
+            extensions: ['js', 'vue'],
+            exclude: ['node_modules']
+          }])
+
         chain.resolve.alias.merge({
           ui: path.resolve(__dirname, '../src/index.js'),
           '@quasar/quasar-ui-qcalendar': path.resolve(__dirname, '../src')
