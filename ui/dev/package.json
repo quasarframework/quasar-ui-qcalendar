@@ -30,7 +30,7 @@
     "eslint-plugin-quasar": "^1.0.0",
     "eslint-plugin-standard": "^4.1.0",
     "eslint-plugin-vue": "^7.1.0",
-    "eslint-webpack-plugin": "^2.4.0"
+    "eslint-webpack-plugin": "^2.4.1"
   },
   "browserslist": [
     "last 10 Chrome versions",
