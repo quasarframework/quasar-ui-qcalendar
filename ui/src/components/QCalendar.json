@@ -247,6 +247,19 @@
         "day-resource"
       ]
     },
+    "cell-width": {
+      "type": "String",
+      "addedIn": "v3.3.0",
+      "category": "behavior",
+      "desc": "Sets day cell width and turns on sticky mode. Width must be css measurement",
+      "applicable": [
+        "month-scheduler",
+        "custom-scheduler"
+      ],
+      "examples": [
+        "cell-width=\"100px\""
+      ]
+    },
     "transition-prev": {
       "type": "String",
       "category": "behavior",

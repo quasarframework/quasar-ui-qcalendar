@@ -57,6 +57,12 @@ export default {
     }
   },
 
+  computed: {
+    isSticky () {
+      return this.cellWidth !== undefined
+    }
+  },
+
   methods: {
     init () {
       this.$nextTick(this.onResize)
@@ -91,7 +97,7 @@ export default {
 
     __renderHead (h) {
       const component = h('div', {
-        staticClass: 'q-calendar-scheduler__head',
+        staticClass: 'q-calendar-scheduler__head' + (this.isSticky === true ? ' q-calendar__sticky' : ''),
         style: {
           marginRight: this.scrollWidth + 'px'
         }
@@ -124,9 +130,10 @@ export default {
       }
 
       return h('div', {
-        staticClass: 'q-calendar-scheduler__resources-head q-calendar-scheduler__resources-head--text',
+        staticClass: 'q-calendar-scheduler__resource-head' + (this.isSticky === true ? ' q-calendar__sticky' : ''),
         style: {
-          width
+          minWidth: width,
+          maxWidth: width
         },
         on: this.getDefaultMouseEventHandlers(':resource:header2', event => {
           return { scope, event }
@@ -161,11 +168,11 @@ export default {
       const activeDate = this.noActiveDate !== true && this.value === day.date
       const scope = this.getScopeForSlot(day, idx)
       scope.activeDate = activeDate
-      const width = 100 / this.days.length
+      const width = this.isSticky === true ? this.cellWidth : 100 / this.days.length + '%'
       let dragOver
 
       return h('div', {
-        key: day.date + (idx !== undefined ? '-' + idx : ''),
+        key: day.date + (idx !== undefined ? ':' + idx : ''),
         staticClass: 'q-calendar-scheduler__head-day',
         class: {
           ...this.getRelativeClasses(day),
@@ -173,8 +180,8 @@ export default {
           'q-calendar-scheduler__head-day--droppable': dragOver
         },
         style: {
-          minWidth: width + '%',
-          maxWidth: width + '%'
+          minWidth: width,
+          maxWidth: width
         },
         domProps: {
           ondragover: (_event) => {
@@ -297,7 +304,8 @@ export default {
           ref: 'scrollArea',
           staticClass: 'q-calendar-scheduler__scroll-area'
         }, [
-          this.__renderPane(h)
+          this.isSticky !== true && this.__renderPane(h),
+          this.isSticky === true && this.__renderDayContainer(h)
         ])
       }
     },
@@ -318,7 +326,12 @@ export default {
       return h('div', {
         staticClass: 'q-calendar-scheduler__day-container'
       }, [
-        ...this.__renderResources(h)
+        this.isSticky === true && this.__renderHead(h),
+        h('div', {
+          staticClass: ''
+        }, [
+          this.__renderResources(h)
+        ])
       ])
     },
 
@@ -380,15 +393,16 @@ export default {
     },
 
     __renderDay (h, resource, day, idx, resourceIndex) {
-      const width = 100 / this.days.length
+      const width = this.isSticky === true ? this.cellWidth : 100 / this.days.length + '%'
+      const key = day.date + (resourceIndex !== undefined ? ':' + resourceIndex : '') + (idx !== undefined ? ':' + idx : '')
 
       return h('div', {
-        key: day.date + (idx !== undefined ? ':' + idx : ''),
+        key,
         staticClass: 'q-calendar-scheduler__day',
         class: this.getRelativeClasses(day),
         style: {
-          width: '100%',
-          maxWidth: width + '%'
+          minWidth: width,
+          maxWidth: width
         }
       }, [
         this.__renderDayResource(h, resource, day, idx, resourceIndex)
@@ -399,12 +413,13 @@ export default {
       const styler = this.resourceStyle || this.resourceStyleDefault
       const slot = this.$scopedSlots['scheduler-resource-day']
       const scope = this.getScopeForSlot(day, idx, resource)
+      const key = day.date + (resourceIndex !== undefined ? ':' + resourceIndex : '') + (idx !== undefined ? ':' + idx : '')
       let dragOver
 
       const style = styler({ timestamp: day, index: resourceIndex, resource })
 
       const data = {
-        key: resource[this.resourceKey] + '-' + idx,
+        key,
         staticClass: 'q-calendar-scheduler__day-resource',
         class: {
           'q-calendar-scheduler__day-resource--droppable': dragOver
@@ -448,8 +463,8 @@ export default {
       }
 
       return h('div', {
-        key: label + (idx !== undefined ? '-' + idx : ''),
-        staticClass: 'q-calendar-scheduler__resource',
+        key: label + (idx !== undefined ? ':' + idx : ''),
+        staticClass: 'q-calendar-scheduler__resource' + (this.isSticky === true ? ' q-calendar__sticky' : ''),
         style: {
           maxWidth: width,
           minWidth: width,
@@ -495,7 +510,7 @@ export default {
         value: this.onResize
       }]
     }, [
-      !this.hideHeader && this.resources !== undefined && this.__renderHead(h),
+      this.isSticky !== true && this.hideHeader !== true && this.resources !== undefined && this.__renderHead(h),
       this.resources !== undefined && this.__renderBody(h),
       this.resources === undefined && this.__renderResourcesError(h)
     ])
