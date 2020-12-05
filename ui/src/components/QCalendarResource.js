@@ -151,7 +151,7 @@ export default {
       const intervals = this.intervals
 
       return h('div', {
-        staticClass: 'q-calendar-resource__head-resource' + (this.sticky === true ? ' q-calendar__sticky' : ''),
+        staticClass: 'q-calendar-resource__resource-head' + (this.sticky === true ? ' q-calendar__sticky' : ''),
         style: {
           maxWidth: width,
           minWidth: width,
