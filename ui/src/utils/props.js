@@ -54,10 +54,6 @@ export default {
     }
   },
   intervals: {
-    value: { // v-model
-      type: String,
-      validator: v => v === '' || validateTimestamp(v)
-    },
     maxDays: {
       type: Number,
       default: 7
@@ -107,10 +103,6 @@ export default {
     timeClicksClamped: Boolean
   },
   weeks: {
-    value: { // v-model
-      type: String,
-      validator: v => v === '' || validateTimestamp(v)
-    },
     dayHeight: {
       type: [Number, String],
       default: 0,
@@ -156,10 +148,6 @@ export default {
     }
   },
   scheduler: {
-    value: { // v-model
-      type: String,
-      validator: v => v === '' || validateTimestamp(v)
-    },
     resources: Array,
     resourceKey: {
       type: String,
@@ -238,10 +226,6 @@ export default {
       type: String,
       default: 'month',
       validator: validateView
-    },
-    value: { // v-model
-      type: String,
-      validator: v => v === '' || validateTimestamp(v)
     },
     bordered: Boolean,
     dark: Boolean
