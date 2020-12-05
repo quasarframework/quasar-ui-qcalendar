@@ -143,6 +143,25 @@ Below, the slot receives the `resource` to be displayed. In this case, an avatar
     </q-markdown>
     <example-viewer title="Slot (scheduler-resource)" file="SchedulerViewSlotResource" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
 
+    <example-title title="Advanced" />
+    <q-markdown>
+The `cell-width` is a special property that allows you to specify the width of a day cell. When this occurs, instead of the calendar trying to fit everything into 100% of the constrained width, the calendar will exceed its width and provide a horitzontal scrollbar. Both the days and resources become **sticky** so they are locked into place while scrolling.
+
+::: tip
+It is very important to set a `max-width` on either the calendar itself or its parent.
+:::
+
+::: warning
+Sticky columns and rows will not work with IE/Edge.
+:::
+
+::: warning
+Using any `view` other than `custom-scheduler` or `month-scheduler` may not give you the desired results.
+:::
+    </q-markdown>
+
+    <example-viewer title="Cell Width + Sticky" file="SchedulerViewCellWidth" codepen-title="QCalendar" :location-url="locationUrl" :js-paths="jsPaths" :css-paths="cssPaths" />
+
     <example-title title="Customization" />
     <q-markdown>
 You can create your own themes by overriding various css vars. You do not have to override all of them (as in the next example), just the ones you need. For building your own themes, head on over to the [Theme Builder](../../quasar-ui-qcalendar/theme-builder)
@@ -211,6 +230,9 @@ export default {
     this.addToToc('Slot (scheduler-day-header)', 2)
     this.addToToc('Slot (scheduler-resource-day)', 2)
     this.addToToc('Slot (scheduler-resource)', 2)
+
+    this.addToToc('Advanced')
+    this.addToToc('Cell Width + Sticky', 2)
 
     this.addToToc('Customization')
     this.addToToc('Colors', 2)

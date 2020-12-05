@@ -170,6 +170,7 @@ export default {
       type: Function,
       default: null
     },
+    cellWidth: String,
     columnHeaderBefore: Boolean,
     columnHeaderAfter: Boolean,
     columnCount: {
