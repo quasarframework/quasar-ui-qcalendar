@@ -89,7 +89,7 @@
     "rimraf": "^3.0.2",
     "rollup": "^2.34.1",
     "rollup-plugin-vue": "=6.0.0",
-    "rtlcss": "^2.6.2",
+    "rtlcss": "^3.0.0",
     "sass": "^1.30.0",
     "uglify-es": "^3.3.9",
     "vue-jest": "^3.0.7",
