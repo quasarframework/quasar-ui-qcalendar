@@ -14,13 +14,13 @@
     "dev:electron": "quasar dev -m electron"
   },
   "dependencies": {
-    "@quasar/extras": "^1.9.10",
-    "core-js": "^3.8.0"
+    "@quasar/extras": "^1.9.11",
+    "core-js": "^3.8.1"
   },
   "devDependencies": {
-    "@quasar/app": "^2.1.9",
-    "@quasar/quasar-app-extension-qmarkdown": "^1.2.1",
-    "@vue/eslint-config-standard": "^5.1.2",
+    "@quasar/app": "^2.1.11",
+    "@quasar/quasar-app-extension-qmarkdown": "^1.4.0",
+    "@vue/eslint-config-standard": "^6.0.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.15.0",
     "eslint-config-standard": "^16.0.2",
