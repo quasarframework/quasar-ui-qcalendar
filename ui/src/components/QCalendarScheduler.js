@@ -99,7 +99,7 @@ export default {
       const component = h('div', {
         staticClass: 'q-calendar-scheduler__head' + (this.isSticky === true ? ' q-calendar__sticky' : ''),
         style: {
-          marginRight: this.scrollWidth + 'px'
+          marginRight: this.getScrollWidth() + 'px'
         }
       }, [
         this.__renderHeadResources(h),
