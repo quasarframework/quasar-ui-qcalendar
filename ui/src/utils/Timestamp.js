@@ -544,7 +544,7 @@ export function createDayList (start, end, now, weekdaySkips, disabledBefore, di
 
   while ((!stopped || days.length < min) && days.length < max) {
     currentIdentifier = getDayIdentifier(current)
-    stopped = stopped || currentIdentifier > stop
+    stopped = stopped || (currentIdentifier > stop && days.length >= min)
     if (stopped) {
       break
     }

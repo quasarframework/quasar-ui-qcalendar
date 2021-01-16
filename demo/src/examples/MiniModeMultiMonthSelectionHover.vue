@@ -13,6 +13,7 @@
         no-active-date
         :hover="mouseDown"
         short-weekday-label
+        :min-weeks="6"
         animated
         :selected-start-end-dates="startEndDates"
         @mousedown:day2="onMouseDownDay"
@@ -29,6 +30,7 @@
         no-active-date
         :hover="mouseDown"
         short-weekday-label
+        :min-weeks="6"
         animated
         :selected-start-end-dates="startEndDates"
         @mousedown:day2="onMouseDownDay"
