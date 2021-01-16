@@ -12,6 +12,7 @@
         mini-mode
         no-active-date
         short-weekday-label
+        :min-weeks="6"
         animated
         :selected-start-end-dates="startEndDates"
         @mousedown:day2="onMouseDownDay"
@@ -27,6 +28,7 @@
         mini-mode
         no-active-date
         short-weekday-label
+        :min-weeks="6"
         animated
         :selected-start-end-dates="startEndDates"
         @mousedown:day2="onMouseDownDay"
