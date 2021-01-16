@@ -18,6 +18,7 @@
                 mini-mode
                 short-weekday-label
                 :selected-start-end-dates="startEndDates"
+                no-active-date
                 @mousedown:day2="onMouseDownDay"
                 @mouseup:day2="onMouseUpDay"
                 @mousemove:day2="onMouseMoveDay"

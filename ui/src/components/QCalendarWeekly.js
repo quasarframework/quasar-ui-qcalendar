@@ -216,8 +216,8 @@ export default {
         style: {
           minWidth: this.showWorkWeeks
             ? (this.isMiniMode === true
-              ? 'calc(100% - var(--calendar-mini-work-week-width))'
-              : 'calc(100% - var(--calendar-work-week-width))')
+                ? 'calc(100% - var(--calendar-mini-work-week-width))'
+                : 'calc(100% - var(--calendar-work-week-width))')
             : '100%'
         }
       }, [
@@ -287,8 +287,8 @@ export default {
           style: {
             width: this.showWorkWeeks
               ? (this.isMiniMode === true
-                ? 'calc(100% - var(--calendar-mini-work-week-width))'
-                : 'calc(100% - var(--calendar-work-week-width))')
+                  ? 'calc(100% - var(--calendar-mini-work-week-width))'
+                  : 'calc(100% - var(--calendar-work-week-width))')
               : '100%'
           }
         }, [
@@ -297,9 +297,9 @@ export default {
           }, week.map(day => this.__renderDay(h, day))),
           this.isMiniMode !== true && slotWeek !== undefined
             ? h('div', {
-              ref: 'weekEvent' + weekNum,
-              staticClass: 'q-calendar-weekly__week-events'
-            }, slotWeek(slotData))
+                ref: 'weekEvent' + weekNum,
+                staticClass: 'q-calendar-weekly__week-events'
+              }, slotWeek(slotData))
             : ''
         ])
       ])
@@ -393,31 +393,33 @@ export default {
       const activeDate = this.noActiveDate !== true && this.value === day.date
       const slotData = { dayLabel, timestamp: day, outside, activeDate, selectedDate, miniMode: this.isMiniMode }
 
-      return dayBtnSlot ? dayBtnSlot(slotData) : h(QBtn, {
-        staticClass: 'q-calendar-weekly__day-label',
-        props: {
-          size: this.isMiniMode ? 'sm' : this.monthLabelSize,
-          unelevated: true,
-          round: true,
-          dense: true,
-          noCaps: true,
-          outline: day.current === true,
-          disable: day.disabled === true || (this.enableOutsideDays !== true && outside === true)
-        },
-        style: {
-          lineHeight: this.isMiniMode ? 'unset' : '1.715em'
-        },
-        on: {
-          ...this.getMouseEventHandlers({
-            'click:date2': { event: 'click', stop: true },
-            'contextmenu:date2': { event: 'contextmenu', stop: true, prevent: true, result: false }
-          }, (event, eventName) => {
-            return { scope: { timestamp: day }, event }
-          })
-        }
-      }, [
-        dayLabelSlot ? dayLabelSlot(slotData) : dayLabel
-      ])
+      return dayBtnSlot
+        ? dayBtnSlot(slotData)
+        : h(QBtn, {
+          staticClass: 'q-calendar-weekly__day-label',
+          props: {
+            size: this.isMiniMode ? 'sm' : this.monthLabelSize,
+            unelevated: true,
+            round: true,
+            dense: true,
+            noCaps: true,
+            outline: day.current === true,
+            disable: day.disabled === true || (this.enableOutsideDays !== true && outside === true)
+          },
+          style: {
+            lineHeight: this.isMiniMode ? 'unset' : '1.715em'
+          },
+          on: {
+            ...this.getMouseEventHandlers({
+              'click:date2': { event: 'click', stop: true },
+              'contextmenu:date2': { event: 'contextmenu', stop: true, prevent: true, result: false }
+            }, (event, eventName) => {
+              return { scope: { timestamp: day }, event }
+            })
+          }
+        }, [
+          dayLabelSlot ? dayLabelSlot(slotData) : dayLabel
+        ])
     },
 
     __renderDayOfYearLabel (h, day) {

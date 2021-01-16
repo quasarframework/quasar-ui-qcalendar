@@ -10,7 +10,8 @@ export default {
   props: {
     now: {
       type: String,
-      validator: v => v === '' || validateTimestamp(v)
+      validator: v => v === '' || validateTimestamp(v),
+      default: ''
     }
   },
 

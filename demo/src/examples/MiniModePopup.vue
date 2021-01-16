@@ -29,6 +29,8 @@
                   view="month"
                   :locale="locale"
                   mini-mode
+                  :selected-start-end-dates="startEndDates"
+                  no-active-date
                   @changed="onChanged"
                   @mousedown:day2="onMouseDownDay"
                   @mouseup:day2="onMouseUpDay"

@@ -159,26 +159,26 @@ export default {
 
     scrollToTime (time) {
       const y = this.timeStartPos(time)
-      const pane = this.$refs.scrollArea
+      const scrollArea = this.$refs.scrollArea
 
-      if (y === false || !pane) {
+      if (y === false || !scrollArea) {
         return false
       }
 
-      pane.scrollTop = y
+      scrollArea.scrollTop = y
 
       return true
     },
 
     scrollToTimeX (time) {
       const x = this.timeStartPosX(time)
-      const pane = this.$refs.scrollArea
+      const scrollArea = this.$refs.scrollArea
 
-      if (x === false || !pane) {
+      if (x === false || !scrollArea) {
         return false
       }
 
-      pane.scrollLeft = x
+      scrollArea.scrollLeft = x
 
       return true
     },
