@@ -84,6 +84,18 @@
             </q-item>
 
             <q-item
+              to="/examples/month-view-mini-mode"
+              clickable
+            >
+              <q-item-section avatar>
+                <q-icon name="far fa-calendar" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>Month View (mini-mode)</q-item-label>
+              </q-item-section>
+            </q-item>
+
+            <q-item
               to="/examples/scheduler-view"
               clickable
             >
@@ -91,7 +103,7 @@
                 <q-icon name="fas fa-calendar" />
               </q-item-section>
               <q-item-section>
-                <q-item-label>Resource View</q-item-label>
+                <q-item-label>Scheduler View</q-item-label>
               </q-item-section>
             </q-item>
 
@@ -100,7 +112,7 @@
               clickable
             >
               <q-item-section avatar>
-                <q-icon name="fas fa-persons" />
+                <q-icon name="fas fa-grip-horizontal" />
               </q-item-section>
               <q-item-section>
                 <q-item-label>Resource View</q-item-label>
@@ -124,18 +136,12 @@
               clickable
             >
               <q-item-section avatar>
-                <q-icon name="far fa-calendar-alt" />
+                <q-icon name="fas fa-th" />
               </q-item-section>
               <q-item-section>
                 <q-item-label>Planner</q-item-label>
               </q-item-section>
             </q-item>
-
-            <!-- <q-item clickable to="/examples/customization">
-              <q-item-section>
-                <q-item-label>Customization</q-item-label>
-              </q-item-section>
-            </q-item> -->
 
           </q-list>
         </q-expansion-item>
