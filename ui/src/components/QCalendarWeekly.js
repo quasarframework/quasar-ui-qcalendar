@@ -409,14 +409,9 @@ export default {
           style: {
             lineHeight: this.isMiniMode ? 'unset' : '1.715em'
           },
-          on: {
-            ...this.getMouseEventHandlers({
-              'click:date2': { event: 'click', stop: true },
-              'contextmenu:date2': { event: 'contextmenu', stop: true, prevent: true, result: false }
-            }, (event, eventName) => {
-              return { scope: { timestamp: day }, event }
-            })
-          }
+          on: this.getDefaultMouseEventHandlers(':date2', event => {
+            return { scope: { timestamp: day }, event }
+          })
         }, [
           dayLabelSlot ? dayLabelSlot(slotData) : dayLabel
         ])
