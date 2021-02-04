@@ -1,0 +1,220 @@
+.q-calendar
+  position: relative
+  display: flex
+  flex-direction: column
+  color: var(--calendar-color)
+  background: var(--calendar-background)
+  width: 100%
+  min-width: auto
+  overflow: hidden
+  // transition: color .1s ease-in, background .1s ease-in, border .1s ease-in
+
+  &__bordered
+    border: var(--calendar-border)
+
+  &__button
+    display: inline-block
+    flex-direction: row
+    align-items: center
+    position: relative
+    outline: 0
+    border: 0
+    vertical-align: middle
+    padding: 0
+    font-size: 0.75em
+    line-height: 1.715em
+    text-decoration: none
+    color: inherit
+    background: transparent
+    text-transform: uppercase
+    text-align: center
+    width: auto
+    height: auto
+    min-height: 2.0em
+    min-width: 2.0em
+    will-change: background
+    transition: background .3s
+
+    &--round
+      border-radius: 50%
+
+    &--bordered
+      border: var(--calendar-border)
+
+  &__left
+    text-align: left !important
+    justify-content: flex-start !important
+
+  &__center
+    text-align: center !important
+    justify-content: center !important
+
+  &__right
+    text-align: right !important
+    justify-content: flex-end !important
+
+  &__justify
+    justify-content: space-between !important
+
+  &__header--inline
+    display: flex
+    flex-direction: row
+    flex-wrap: nowrap
+    justify-content: space-between
+    align-items: center
+
+  &__ellipsis
+    text-overflow: ellipsis
+    overflow: hidden
+
+  &__overflow-wrap
+    overflow-wrap: break-word
+    overflow: hidden
+
+  &__parent
+    transition: transform .3s
+    border: solid currentColor
+    border-width: 0 2px 2px 0
+    display: inline-block
+    padding: 2px
+
+    &--expanded
+      margin-left: 2px
+      transform: rotate(-135deg)
+      // width: 0
+      // height: 0
+      // border-left: 5px solid transparent
+      // border-right: 5px solid transparent
+      // border-bottom: 10px solid currentColor
+
+    &--collapsed
+      // transform: rotate(180deg)
+      margin-left: 2px
+      transform: rotate(45deg)
+      // width: 0
+      // height: 0
+      // border-left: 5px solid transparent
+      // border-right: 5px solid transparent
+      // border-bottom: 10px solid currentColor
+
+  &__child
+    transition: height .5s ease-in, max-height .5s ease-in, opacity .3s ease-in
+
+    &--expanded
+      transition: height .5s ease-in, max-height .5s ease-in, opacity .3s ease-in
+      opacity: 1 !important
+
+    &--collapsed
+      transition: height .5s ease-in, max-height .5s ease-in, opacity .3s ease-in
+      opacity: 0 !important
+      border: none !important
+      height: 0 !important
+      overflow: hidden !important
+      max-height: 0 !important
+
+  &__focusable,
+  &__manual-focusable,
+  &__hoverable
+    outline: 0
+
+  &__focus-helper
+    position: absolute
+    top: 0
+    left: 0 #{"/* rtl:ignore */"}
+    width: 100%
+    height: 100%
+    pointer-events: none
+    border-radius: inherit
+    opacity: 0
+    transition: background-color .3s cubic-bezier(.25,.8,.5,1), opacity .4s cubic-bezier(.25,.8,.5,1)
+
+    &:before, &:after
+      content: ''
+      position: absolute
+      top: 0
+      left: 0 #{"/* rtl:ignore */"}
+      width: 100%
+      height: 100%
+      opacity: 0
+      border-radius: inherit
+      transition: background-color .3s cubic-bezier(.25,.8,.5,1), opacity .6s cubic-bezier(.25,.8,.5,1)
+
+    &:before
+      background: #000
+    &:after
+      background: #fff
+
+    &--rounded
+      border-radius: 4px
+    &--round
+      border-radius: 50%
+
+
+  &__focusable:focus,
+  &__manual-focusable--focused,
+  &__hoverable:hover
+    > .q-calendar__focus-helper
+      background: currentColor
+      opacity: .15
+      &:before
+        opacity: .1
+      &:after
+        opacity: .4
+
+  &__focusable:focus,
+  &__manual-focusable--focused
+    > .q-calendar__focus-helper
+      opacity: .22
+
+.disabled, [disabled]
+  &, * // @stylint ignore
+    outline: 0 !important
+    cursor: not-allowed !important
+
+.disabled, [disabled]
+  opacity: .6 !important
+
+.q-calendar__scroll
+  &::-webkit-scrollbar
+    width: 10px
+    height: 10px
+
+  // the buttons on the scrollbar (arrows pointing upwards and downwards)
+  // ::-webkit-scrollbar-button
+
+  // the track (progress bar) of the scrollbar
+  &::-webkit-scrollbar-track
+    // border-top: var(--calendar-border)
+    background: #EEE
+    box-shadow: inset 0 0 4px #EEE
+
+  // the bottom corner of the scrollbar, where both horizontal and vertical scrollbars meet
+  &::-webkit-scrollbar-corner
+    background: #EEE
+
+  // the track (progress bar) NOT covered by the handle
+  // &::-webkit-scrollbar-track-piece
+  //   background: black
+
+  // the draggable scrolling handle
+  &::-webkit-scrollbar-thumb
+    background: #888
+    border-radius: 5px
+
+    &:hover
+      background: #555
+  
+
+.q-calendar
+  color: var(--calendar-color)
+  background: var(--calendar-background)
+
+.q-dark div,
+.body--dark div,
+.q-calendar--dark
+  &.q-calendar
+    color: var(--calendar-color-dark)
+    background: var(--calendar-background-dark)
+
+    &__bordered
+      border: var(--calendar-border-dark)

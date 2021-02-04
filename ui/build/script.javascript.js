@@ -25,56 +25,129 @@ const rollupPlugins = [
   buble(bubleConfig)
 ]
 
-const builds = [
-  {
-    rollup: {
-      input: {
-        input: pathResolve('entry/index.esm.js')
-      },
-      output: {
-        file: pathResolve('../dist/index.esm.js'),
-        format: 'es'
-      }
-    },
-    build: {
-      // unminified: true,
-      minified: true
-    }
-  },
-  {
-    rollup: {
-      input: {
-        input: pathResolve('entry/index.common.js')
-      },
-      output: {
-        file: pathResolve('../dist/index.common.js'),
-        format: 'cjs',
-        exports: 'auto'
-      }
-    },
-    build: {
-      // unminified: true,
-      minified: true
-    }
-  },
-  {
-    rollup: {
-      input: {
-        input: pathResolve('entry/index.umd.js')
-      },
-      output: {
-        name: 'QCalendar',
-        file: pathResolve('../dist/index.umd.js'),
-        format: 'umd'
-      }
-    },
-    build: {
-      unminified: true,
-      minified: true,
-      minExt: true
-    }
-  }
+const buildEntries = [
+  // 'index',
+  'QCalendar',
+  'QCalendarAgenda',
+  'QCalendarDay',
+  // 'QCalendarGrid',
+  'QCalendarMonth',
+  'QCalendarResource',
+  'QCalendarScheduler'
 ]
+
+function generateBuilds() {
+  const builds = []
+
+  buildEntries.forEach(entry => {
+    builds.push({
+      rollup: {
+        input: {
+          input: pathResolve(`entry/${entry}.common.js`)
+        },
+        output: {
+          file: pathResolve(`../dist/${entry}.common.js`),
+          format: 'cjs',
+          exports: 'auto'
+        }
+      },
+      build: {
+        unminified: true,
+        minified: true,
+        minExt: true
+      }
+    })
+    builds.push({
+      rollup: {
+        input: {
+          input: pathResolve(`entry/${entry}.common.js`)
+        },
+        output: {
+          file: pathResolve(`../dist/${entry}.common.js`),
+          format: 'cjs',
+          exports: 'auto'
+        }
+      },
+      build: {
+        unminified: true,
+        minified: true,
+        minExt: true
+      }
+    })
+    builds.push({
+      rollup: {
+        input: {
+          input: pathResolve(`entry/${entry}.umd.js`)
+        },
+        output: {
+          name: entry,
+          file: pathResolve(`../dist/${entry}.umd.js`),
+          format: 'umd'
+        }
+      },
+      build: {
+        unminified: true,
+        minified: true,
+        minExt: true
+      }
+    })
+  })
+
+  return builds
+}
+
+const builds = generateBuilds()
+
+// const builds = [
+//   {
+//     rollup: {
+//       input: {
+//         input: pathResolve('entry/index.esm.js')
+//       },
+//       output: {
+//         file: pathResolve('../dist/index.esm.js'),
+//         format: 'es'
+//       }
+//     },
+//     build: {
+//       // unminified: true,
+//       minified: true
+//     },
+//   },
+//   {
+//     rollup: {
+//       input: {
+//         input: pathResolve('entry/index.common.js')
+//       },
+//       output: {
+//         file: pathResolve('../dist/index.common.js'),
+//         format: 'cjs',
+//         exports: 'auto'
+//       }
+//     },
+//     build: {
+//       // unminified: true,
+//       minified: true
+//     }
+//   },
+//   {
+//     rollup: {
+//       input: {
+//         input: pathResolve('entry/index.umd.js')
+//       },
+//       output: {
+//         name: 'QCalendar',
+//         file: pathResolve('../dist/index.umd.js'),
+//         format: 'umd'
+//       }
+//     },
+//     build: {
+//       unminified: true,
+//       minified: true,
+//       minExt: true
+//     }
+//   }
+// ]
 
 // Add your asset folders here, if needed
 // addAssets(builds, 'icon-set', 'iconSet')

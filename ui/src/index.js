@@ -1,5 +1,6 @@
 import { version } from '../package.json'
 import QCalendar from './components/QCalendar.js'
+
 import {
   PARSE_REGEX,
   PARSE_TIME,
@@ -82,6 +83,7 @@ import {
 export {
   version,
   QCalendar,
+
   // timestamp
   PARSE_REGEX,
   PARSE_TIME,
@@ -162,6 +164,7 @@ export {
 export default {
   version,
   QCalendar,
+
   // timestamp
   PARSE_REGEX,
   PARSE_TIME,

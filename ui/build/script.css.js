@@ -25,7 +25,13 @@ const nano = postcss([
 
 Promise
   .all([
-    generate('src/index.sass', 'dist/index')
+    generate('src/index.sass', 'dist/index'),
+    generate('src/QCalendar.sass', 'dist/QCalendar'),
+    generate('src/QCalendarAgenda.sass', 'dist/QCalendarAgenda'),
+    generate('src/QCalendarDay.sass', 'dist/QCalendarDay'),
+    generate('src/QCalendarMonth.sass', 'dist/QCalendarMonth'),
+    generate('src/QCalendarResource.sass', 'dist/QCalendarResource'),
+    generate('src/QCalendarScheduler.sass', 'dist/QCalendarScheduler')
   ])
   .catch(e => {
     console.error(e)

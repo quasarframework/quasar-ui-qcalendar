@@ -15,8 +15,8 @@ module.exports = {
 
   env: {
     browser: true,
-    jest: true,
-    es6: true
+    es6: true,
+    'jest/globals': true
   },
 
   // Rules order is important, please avoid shuffling them
@@ -26,23 +26,27 @@ module.exports = {
 
     // Uncomment any of the lines below to choose desired strictness,
     // but leave only one uncommented!
+    'plugin:vue/vue3-recommended',
     // See https://eslint.vuejs.org/rules/#available-rules
-    'plugin:vue/essential', // Priority A: Essential (Error Prevention)
+    // 'plugin:vue/essential', // Priority A: Essential (Error Prevention)
     // 'plugin:vue/strongly-recommended', // Priority B: Strongly Recommended (Improving Readability)
     // 'plugin:vue/recommended', // Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead)
 
-    'plugin:quasar/standard',
+    // 'plugin:quasar/standard',
 
-    'standard'
+    'standard',
+    'plugin:promise/recommended'
   ],
 
-  // required to lint *.vue files
   plugins: [
     // https://eslint.vuejs.org/user-guide/#why-doesn-t-it-work-on-vue-file
     // required to lint *.vue files
     'vue',
-    'jest',
-    'quasar'
+    'jsdoc',
+    'standard',
+    'node',
+    'promise',
+    'import'
   ],
 
   globals: {
@@ -56,11 +60,30 @@ module.exports = {
 
   // add your custom rules here
   rules: {
-    // allow async-await
+    'brace-style': [ 'error', 'stroustrup', { allowSingleLine: true } ],
+    'prefer-const': 'error',
+    'prefer-promise-reject-errors': 'off',
+    'multiline-ternary': 'off',
+    'no-prototype-builtins': 'off',
+    'no-case-declarations': 'off',
     'generator-star-spacing': 'off',
-    // allow paren-less arrow functions
     'arrow-parens': 'off',
+    'object-property-newline': 'off',
     'one-var': 'off',
+    'no-void': 'off',
+    'no-lone-blocks': 'error',
+    'no-unused-expressions': 'error',
+    'no-useless-concat': 'error',
+    'no-useless-return': 'error',
+    'no-unneeded-ternary': 'error',
+    'no-confusing-arrow': [ 'error', { allowParens: true } ],
+    'operator-linebreak': [ 'error', 'before' ],
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+
+    'array-bracket-spacing': [ 'error', 'always', { singleValue: false } ],
+    'object-curly-spacing': [ 'error', 'always' ],
+    'computed-property-spacing': [ 'error', 'always' ],
+    'template-curly-spacing': [ 'error', 'always' ],
 
     'import/first': 'off',
     'import/named': 'error',
@@ -70,12 +93,25 @@ module.exports = {
     'import/extensions': 'off',
     'import/no-unresolved': 'off',
     'import/no-extraneous-dependencies': 'off',
-    'prefer-promise-reject-errors': 'off',
 
-    'brace-style': [2, 'stroustrup', { allowSingleLine: false }],
+    'import/no-webpack-loader-syntax': 'off',
 
-    'quasar/no-invalid-props': 'error',
-    'quasar/no-invalid-qfield-usage': 'error',
+    'vue/singleline-html-element-content-newline': 'off',
+    'vue/no-multiple-template-root': 'off',
+
+    'jsdoc/check-param-names': 1,
+    'jsdoc/check-tag-names': 1,
+    'jsdoc/check-types': 0,
+    'jsdoc/newline-after-description': 0,
+    'jsdoc/require-description-complete-sentence': 0,
+    'jsdoc/require-example': 0,
+    'jsdoc/require-hyphen-before-param-description': 0,
+    'jsdoc/require-param': 1,
+    'jsdoc/require-param-description': 1,
+    'jsdoc/require-param-name': 1,
+    'jsdoc/require-param-type': 1,
+    'jsdoc/require-returns-description': 1,
+    'jsdoc/require-returns-type': 0,
 
     'jest/no-disabled-tests': 'warn',
     'jest/no-focused-tests': 'error',
@@ -83,10 +119,7 @@ module.exports = {
     'jest/prefer-to-have-length': 'warn',
     'jest/valid-expect': 'error',
 
-    'no-void': 'off',
     // allow console.log during development only
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    // allow debugger during development only
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
   }
 }

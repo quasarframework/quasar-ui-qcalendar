@@ -1,0 +1,293 @@
+.q-calendar-mini
+
+  .q-calendar-month
+
+    &__head
+      border: 0 !important
+      
+      &--workweek
+        border-right: unset
+        border-bottom: unset
+
+      &--weekday
+        border-right: 0 !important
+        min-height: 1.5em !important
+        min-width: 1.5em !important
+
+    &__workweek
+      border-right: unset
+      font-size: 1em
+
+    &__week
+      &--wrapper
+        border-bottom: 0
+
+    &__day
+      display: flex
+      justify-content: center
+      flex-direction: column
+      flex-wrap: wrap
+      padding: 0
+      border: 0 !important
+      min-height: 1.5em !important
+
+      &--content
+        height: auto
+
+      &--label
+        position: relative
+        vertical-align: middle
+        text-align: center
+        top: unset
+        left: unset
+
+  // coloring and other vars
+  .q-calendar-month
+
+    &__head
+
+      &--workweek
+        max-width: var(--calendar-mini-work-week-width)
+        min-width: var(--calendar-mini-work-week-width)
+
+    &__workweek
+      max-width: var(--calendar-mini-work-week-width)
+      min-width: var(--calendar-mini-work-week-width)
+
+    &__day
+      color: var(--calendar-color)
+      background: var(--calendar-background)
+
+      &.q-active-date
+        .q-calendar__button
+          color: var(--calendar-active-date-color)
+          background: var(--calendar-active-date-background)
+
+      &.q-current-day
+        .q-calendar__button
+          border: var(--calendar-border-current)
+
+      &.q-selected
+        color: var(--calendar-mini-selected-color)
+        background: var(--calendar-mini-selected-background) !important
+
+        .q-calendar__button
+          color: var(--calendar-mini-selected-label-color) !important
+          background: var(--calendar-mini-selected-label-background) !important
+
+      &.q-disabled-day
+        color: var(--calendar-disabled-date-color) !important
+        background: var(--calendar-disabled-date-background) !important
+
+      &.q-outside
+        color: var(--calendar-outside-color) !important
+        background: var(--calendar-outside-background)
+
+      &.q-range-first,
+      &.q-range-last
+        color: var(--calendar-mini-range-firstlast-color)
+        background: var(--calendar-mini-range-firstlast-background) !important
+
+        .q-calendar__button
+          color: var(--calendar-mini-range-firstlast-label-color) !important
+          background: var(--calendar-mini-range-firstlast-label-background) !important
+
+      &.q-range
+        color: unset
+        background: unset
+
+        &.q-range-hover
+          color: var(--calendar-mini-range-hover-color)
+
+      &.q-range-first,
+      &.q-range-last,
+      &.q-range
+  
+        .q-calendar-month__day--label__wrapper
+          &:before
+            content: ''
+            display: block
+            position: absolute
+            width: 100%
+            top: 0
+            right: 0
+            bottom: 0
+            left: 0 #{"/* rtl:ignore */"}
+            background: var(--calendar-mini-range-connector-color)
+
+        &.q-range-hover
+          .q-calendar-month__day--label__wrapper
+            &:before
+              content: ''
+              display: block
+              position: absolute
+              width: 100%
+              margin: 1px 0 1px 0
+              top: 0
+              right: 0
+              bottom: 0
+              left: 0 #{"/* rtl:ignore */"}
+              color: var(--calendar-color)
+              background: var(--calendar-background)
+              border-top: var(--calendar-mini-range-connector-hover-border)
+              border-bottom: var(--calendar-mini-range-connector-hover-border)
+
+      &.q-range-first,
+      &.q-range-last
+        .q-calendar-month__day--label__wrapper
+          .q-calendar__button
+            color: var(--calendar-mini-range-firstlast-label-color) !important
+            background: var(--calendar-mini-range-firstlast-label-background) !important
+            border-radius: 50%
+
+      &.q-range-first
+        .q-calendar-month__day--label__wrapper
+          &:before
+            width: 50%
+            left: 50%
+
+        &.q-range-hover
+          .q-calendar-month__day--label__wrapper
+            &:before
+              width: 50%
+              left: 50%
+
+      &.q-range-last
+        .q-calendar-month__day--label__wrapper
+          &:before
+            width: 50%
+            right: auto
+
+        // when first and last are same day
+        &.q-range-first
+          .q-calendar-month__day--label__wrapper
+            &:before
+              width: 0
+
+        &.q-range-hover
+          .q-calendar-month__day--label__wrapper
+            &:before
+              width: 50%
+              right: auto
+
+          // when first and last are same day
+          &.q-range-first
+            &.q-range-hover
+              .q-calendar-month__day--label__wrapper
+                &:before
+                  width: 0
+
+        // fix issue with seeing :before on an in-range disabled button
+        &.q-range-first,
+        &.q-range-last
+          .q-button
+            opacity: 1 !important
+
+      &.q-calendar-month__day--droppable
+        border: var(--calendar-border-droppable) !important
+
+  .q-day-event:not(.q-day-event-void)
+    .q-calendar-month__day--label__wrapper
+      &:after
+        content: ''
+        width: 0.6em
+        height: 0.4em
+        border-radius: 50%
+        left: 0 #{"/* rtl:ignore */"}
+        right: 0
+        margin: auto
+        background: var(--calendar-selected-background)
+
+  .q-calendar-month__week
+    border-bottom: unset
+    max-width: 100%
+
+.q-dark div,
+.body--dark div,
+.q-calendar--dark
+
+  .q-calendar-mini
+
+    &.q-calendar-month
+      color: var(--calendar-color-dark)
+      background: var(--calendar-background-dark)
+
+    .q-calendar-month
+
+      &__head--workweek
+        border-right: unset
+        border-bottom: unset
+
+      &__workweek
+        border-right: unset
+
+      &__week--wrapper
+        border-bottom: unset
+
+      &__day
+        color: var(--calendar-color-dark)
+        background: var(--calendar-background-dark)
+
+        &.q-active-date
+          color: var(--calendar-active-date-color-dark)
+
+          .q-calendar__button
+            background: var(--calendar-active-date-background-dark)
+
+        &.q-current-day
+          .q-calendar__button
+            border: var(--calendar-border-current-dark) !important
+
+        &.q-selected
+          color: var(--calendar-mini-selected-color-dark)
+          background: var(--calendar-mini-selected-background-dark)
+
+          .q-calendar__button
+            color: var(--calendar-mini-selected-label-color-dark) !important
+            background: var(--calendar-mini-selected-label-background-dark) !important
+
+        &.q-disabled-day
+          color: var(--calendar-disabled-date-color-dark) !important
+          background: var(--calendar-disabled-date-background-dark) !important
+
+        &.q-outside
+          color: var(--calendar-outside-color-dark) !important
+          background: var(--calendar-outside-background-dark) !important
+
+        &.q-range
+          color: var(--calendar-mini-range-color-dark)
+          background: var(--calendar-mini-range-background-dark) !important
+
+          &.q-range-hover
+            color: var(--calendar-mini-range-hover-color-dark)
+
+        &.q-range-first,
+        &.q-range-last,
+        &.q-range
+    
+          .q-calendar-month__day--label__wrapper
+            &:before
+              background: var(--calendar-mini-range-connector-color-dark)
+
+          &.q-range-hover
+            .q-calendar-month__day--label__wrapper
+              &:before
+                color: var(--calendar-color-dark)
+                background: var(--calendar-background-dark)
+                border-top: var(--calendar-mini-range-connector-hover-border-dark)
+                border-bottom: var(--calendar-mini-range-connector-hover-border-dark)
+
+        // fix issue with seeing :before on an in-range disabled button
+        &.q-range-first,
+        &.q-range-last
+          .q-calendar__button
+            opacity: 1 !important
+
+
+        &.q-calendar-month__day--droppable
+          border: var(--calendar-border-droppable-dark) !important
+
+    .q-day-event:not(.q-day-event-void)
+      .q-calendar-month__day--label__wrapper
+        &:after
+          background: var(--calendar-selected-background-dark)

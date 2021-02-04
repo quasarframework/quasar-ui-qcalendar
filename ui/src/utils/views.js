@@ -9,5 +9,5 @@ export function validateView (view) {
     'month-agenda', 'week-agenda', 'custom-agenda',
     'agenda', 'day-agenda', '2day-agenda', '3day-agenda',
     '4day-agenda', '5day-agenda', '6day-agenda',
-    'month-interval', 'custom-interval'].includes(view)
+    'month-interval', 'custom-interval' ].includes(view)
 }
