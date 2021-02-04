@@ -229,27 +229,24 @@ export default {
       const dayBtnSlot = this.$scopedSlots['day-btn']
       const scope = { timestamp: day, index: idx, dayLabel, activeDate }
 
-      return dayBtnSlot ? dayBtnSlot(scope) : h(QBtn, {
-        staticClass: 'q-calendar-scheduler__head-day-label',
-        props: {
-          unelevated: true,
-          round: true,
-          dense: true,
-          noCaps: true,
-          outline: day.current === true,
-          disable: day.disabled
-        },
-        on: {
-          ...this.getMouseEventHandlers({
-            'click:date2': { event: 'click', stop: true },
-            'contextmenu:date2': { event: 'contextmenu', stop: true, prevent: true, result: false }
-          }, (event, eventName) => {
-            return { scope, event }
+      return dayBtnSlot
+        ? dayBtnSlot(scope)
+        : h(QBtn, {
+          staticClass: 'q-calendar-scheduler__head-day-label',
+          props: {
+            unelevated: true,
+            round: true,
+            dense: true,
+            noCaps: true,
+            outline: day.current === true,
+            disable: day.disabled
+          },
+          on: this.getDefaultMouseEventHandlers(':date2', event => {
+            return { scope: { timestamp: day }, event }
           })
-        }
-      }, [
-        dayLabelSlot ? dayLabelSlot(scope) : dayLabel
-      ])
+        }, [
+          dayLabelSlot ? dayLabelSlot(scope) : dayLabel
+        ])
     },
 
     __renderColumnHeaderBefore (h, day, idx) {
@@ -475,24 +472,26 @@ export default {
           return { scope, event }
         })
       }, [
-        slot ? slot(scope) : h('div', {
-          staticClass: 'q-calendar-scheduler__resource-text'
-        }, [
-          resource.children && resource.children.length > 0 && h(QIcon, {
-            props: {
-              name: (resource.expanded === true ? this.mdiMenuDown : this.mdiMenuRight),
-              size: 'md'
-            },
-            on: {
-              click: (e) => {
-                resource.expanded = !resource.expanded
-                e.stopPropagation()
-                this.$emit('expanded', resource)
+        slot
+          ? slot(scope)
+          : h('div', {
+            staticClass: 'q-calendar-scheduler__resource-text'
+          }, [
+            resource.children && resource.children.length > 0 && h(QIcon, {
+              props: {
+                name: (resource.expanded === true ? this.mdiMenuDown : this.mdiMenuRight),
+                size: 'md'
+              },
+              on: {
+                click: (e) => {
+                  resource.expanded = !resource.expanded
+                  e.stopPropagation()
+                  this.$emit('expanded', resource)
+                }
               }
-            }
-          }),
-          label
-        ])
+            }),
+            label
+          ])
       ])
     },
 
