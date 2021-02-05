@@ -1,19 +1,25 @@
 <template>
-  <div class="row justify-center q-pa-md" style="max-width: 800px; width: 100%;">
+  <div
+    class="row justify-center q-pa-md"
+    style="max-width: 800px; width: 100%;"
+  >
     <div class="full-width q-pa-md">
       <q-select
+        v-model="theme"
         outlined
         dense
         emit-value
         map-options
         label="Change theme"
-        v-model="theme"
         :options="themesList"
         class="col-12"
-      ></q-select>
+      />
     </div>
     <q-separator />
-    <div class="row justify-center q-pa-md" style="max-width: 800px; width: 100%;">
+    <div
+      class="row justify-center q-pa-md"
+      style="max-width: 800px; width: 100%;"
+    >
       <q-calendar
         ref="calendar"
         v-model="selectedDate"
@@ -23,10 +29,10 @@
         :hover="mouseDown"
         :style="theme"
         :selected-start-end-dates="startEndDates"
+        style="max-width: 300px; min-width: auto; overflow: hidden"
         @mousedown:day2="onMouseDownDay"
         @mouseup:day2="onMouseUpDay"
         @mousemove:day2="onMouseMoveDay"
-        style="max-width: 300px; min-width: auto; overflow: hidden"
       />
     </div>
   </div>
@@ -426,7 +432,7 @@ export default {
       Object.keys(this.themes).forEach((theme) => {
         list.push({
           label: theme,
-          value: { ...this.themes[theme] }
+          value: { ...this.themes[ theme ] }
         })
       })
       return list
@@ -481,10 +487,10 @@ export default {
 
     onMouseDownDay ({ scope, event }) {
       if (leftClick(event)) {
-        if (this.mobile === true &&
-          this.anchorTimestamp !== null &&
-          this.otherTimestamp !== null &&
-          this.anchorTimestamp.date === this.otherTimestamp.date) {
+        if (this.mobile === true
+          && this.anchorTimestamp !== null
+          && this.otherTimestamp !== null
+          && this.anchorTimestamp.date === this.otherTimestamp.date) {
           this.otherTimestamp = scope.timestamp
           this.mouseDown = false
           return

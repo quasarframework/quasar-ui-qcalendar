@@ -1,19 +1,65 @@
 <template>
   <div style="max-width: 800px; width: 100%;">
     <div class="title-bar row items-center overflow-hidden">
-      <q-btn flat color="white" icon="fas fa-chevron-left" class="direction-button" style="height: 100%" @click="onPrev" />
-      <transition :name="transition" appear>
-        <div :key="parsedStart.date" class="row justify-between items-center text-white overflow-hidden" style="width: calc(100% - 112px)">
-          <div v-for="day in days" :key="day.date" class="col-auto" :style="dayStyle">
-            <q-btn flat :class="dayClass(day)" style="line-height: unset;" @click="selectedDate = day.date; transition = ''">
-              <div class="text-center" style="width: 100%;">{{ monthFormatter(day, true) }}</div>
-              <div class="text-center text-bold" style="width: 100%;  font-size: 16px;">{{ dayFormatter(day, false) }}</div>
-              <div class="text-center" style="width: 100%; font-size: 10px;">{{ weekdayFormatter(day, true) }}</div>
+      <q-btn
+        flat
+        color="white"
+        icon="fas fa-chevron-left"
+        class="direction-button"
+        style="height: 100%"
+        @click="onPrev"
+      />
+      <transition
+        :name="transition"
+        appear
+      >
+        <div
+          :key="parsedStart.date"
+          class="row justify-between items-center text-white overflow-hidden"
+          style="width: calc(100% - 112px)"
+        >
+          <div
+            v-for="day in days"
+            :key="day.date"
+            class="col-auto"
+            :style="dayStyle"
+          >
+            <q-btn
+              flat
+              :class="dayClass(day)"
+              style="line-height: unset;"
+              @click="selectedDate = day.date; transition = ''"
+            >
+              <div
+                class="text-center"
+                style="width: 100%;"
+              >
+                {{ monthFormatter(day, true) }}
+              </div>
+              <div
+                class="text-center text-bold"
+                style="width: 100%;  font-size: 16px;"
+              >
+                {{ dayFormatter(day, false) }}
+              </div>
+              <div
+                class="text-center"
+                style="width: 100%; font-size: 10px;"
+              >
+                {{ weekdayFormatter(day, true) }}
+              </div>
             </q-btn>
           </div>
         </div>
       </transition>
-      <q-btn flat color="white" icon="fas fa-chevron-right" class="direction-button" style="height: 100%" @click="onNext" />
+      <q-btn
+        flat
+        color="white"
+        icon="fas fa-chevron-right"
+        class="direction-button"
+        style="height: 100%"
+        @click="onNext"
+      />
     </div>
     <q-calendar
       v-model="selectedDate"
@@ -45,7 +91,7 @@ export default {
   data () {
     return {
       selectedDate: getCurrentDay(CURRENT_DAY.getDate()),
-      weekdays: [0, 1, 2, 3, 4, 5, 6],
+      weekdays: [ 0, 1, 2, 3, 4, 5, 6 ],
       locale: 'en-us',
       monthFormatter: this.monthFormatterFunc(),
       dayFormatter: this.dayFormatterFunc(),
@@ -130,7 +176,7 @@ export default {
 
       return QCalendar.createNativeLocaleFormatter(
         this.locale,
-        (_tms, short) => short ? shortOptions : longOptions
+        (_tms, short) => (short ? shortOptions : longOptions)
       )
     },
 
@@ -140,7 +186,7 @@ export default {
 
       return QCalendar.createNativeLocaleFormatter(
         this.locale,
-        (_tms, short) => short ? shortOptions : longOptions
+        (_tms, short) => (short ? shortOptions : longOptions)
       )
     },
 
@@ -150,7 +196,7 @@ export default {
 
       return QCalendar.createNativeLocaleFormatter(
         this.locale,
-        (_tms, short) => short ? shortOptions : longOptions
+        (_tms, short) => (short ? shortOptions : longOptions)
       )
     }
   }

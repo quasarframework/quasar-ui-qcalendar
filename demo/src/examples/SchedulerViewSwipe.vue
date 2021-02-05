@@ -3,10 +3,10 @@
     <q-calendar
       ref="calendar"
       v-model="selectedDate"
+      v-touch-swipe.mouse.left.right="handleSwipe"
       view="week-scheduler"
       locale="en-us"
       :resources="resources"
-      v-touch-swipe.mouse.left.right="handleSwipe"
       animated
       transition-prev="slide-right"
       transition-next="slide-left"

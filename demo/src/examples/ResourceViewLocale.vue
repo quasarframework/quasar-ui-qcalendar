@@ -1,23 +1,32 @@
 <template>
   <div class="row justify-center full-width q-pa-md">
-    <div class="column justify-center full-width q-pa-md" style="max-width: 800px; width: 100%;">
+    <div
+      class="column justify-center full-width q-pa-md"
+      style="max-width: 800px; width: 100%;"
+    >
       <div class="q-gutter-sm full-width row justify-center">
-        <q-checkbox v-model="short" label="Short Interval Label" />
-        <q-checkbox v-model="hour24Format" label="24h Format" />
+        <q-checkbox
+          v-model="short"
+          label="Short Interval Label"
+        />
+        <q-checkbox
+          v-model="hour24Format"
+          label="24h Format"
+        />
       </div>
       <div class="q-pa-md full-width">
         <q-select
+          v-model="locale"
           outlined
           dense
           emit-value
           map-options
           label="Change locale"
-          v-model="locale"
           :options="locales"
           class="col-12"
-        ></q-select>
+        />
       </div>
-      <q-separator class="full-width"></q-separator>
+      <q-separator class="full-width" />
     </div>
     <div class="row justify-center full-width q-pa-md">
       <q-calendar

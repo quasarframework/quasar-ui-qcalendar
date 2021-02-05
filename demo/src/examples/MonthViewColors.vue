@@ -2,17 +2,17 @@
   <div style="max-width: 800px; width: 100%;">
     <div class="q-pa-md">
       <q-select
+        v-model="theme"
         outlined
         dense
         emit-value
         map-options
         label="Change theme"
-        v-model="theme"
         :options="themesList"
         class="col-12"
-      ></q-select>
+      />
     </div>
-    <q-separator></q-separator>
+    <q-separator />
     <q-calendar
       v-model="selectedDate"
       view="month"
@@ -406,7 +406,7 @@ export default {
       Object.keys(this.themes).forEach((theme) => {
         list.push({
           label: theme,
-          value: { ...this.themes[theme] }
+          value: { ...this.themes[ theme ] }
         })
       })
       return list

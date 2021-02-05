@@ -1,9 +1,12 @@
 <template>
   <div style="max-width: 800px; width: 100%;">
     <div class="q-gutter-sm">
-      <q-checkbox v-model="mobile" label="Use Touch (set if on mobile)" />
+      <q-checkbox
+        v-model="mobile"
+        label="Use Touch (set if on mobile)"
+      />
     </div>
-    <q-separator></q-separator>
+    <q-separator />
     <div style="overflow: hidden;">
       <q-calendar
         ref="calendar"
@@ -77,10 +80,10 @@ export default {
   methods: {
     onMouseDownDay ({ scope, event }) {
       if (leftClick(event)) {
-        if (this.mobile === true &&
-          this.anchorTimestamp !== null &&
-          this.otherTimestamp !== null &&
-          this.anchorTimestamp.date === this.otherTimestamp.date) {
+        if (this.mobile === true
+          && this.anchorTimestamp !== null
+          && this.otherTimestamp !== null
+          && this.anchorTimestamp.date === this.otherTimestamp.date) {
           this.otherTimestamp = scope.timestamp
           this.mouseDown = false
           return

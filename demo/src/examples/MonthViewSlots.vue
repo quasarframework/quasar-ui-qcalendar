@@ -7,14 +7,20 @@
       :day-height="100"
     >
       <template #day="{ timestamp }">
-        <template v-for="(event, index) in getEvents(timestamp.date)">
+        <template
+          v-for="(event, index) in getEvents(timestamp.date)"
+          :key="index"
+        >
           <q-badge
-            :key="index"
             style="width: 100%; cursor: pointer; height: 16px; max-height: 16px"
             :class="badgeClasses(event, 'day')"
             :style="badgeStyles(event, 'day')"
           >
-            <q-icon v-if="event.icon" :name="event.icon" class="q-mr-xs"></q-icon><span class="ellipsis">{{ event.title }}</span>
+            <q-icon
+              v-if="event.icon"
+              :name="event.icon"
+              class="q-mr-xs"
+            /><span class="ellipsis">{{ event.title }}</span>
           </q-badge>
         </template>
       </template>
@@ -45,12 +51,12 @@ function textToRgb (color) {
   const m = reRGBA.exec(color)
   if (m) {
     const rgb = {
-      r: Math.min(255, parseInt(m[2], 10)),
-      g: Math.min(255, parseInt(m[3], 10)),
-      b: Math.min(255, parseInt(m[4], 10))
+      r: Math.min(255, parseInt(m[ 2 ], 10)),
+      g: Math.min(255, parseInt(m[ 3 ], 10)),
+      b: Math.min(255, parseInt(m[ 4 ], 10))
     }
-    if (m[1]) {
-      rgb.a = Math.min(1, parseFloat(m[5]))
+    if (m[ 1 ]) {
+      rgb.a = Math.min(1, parseFloat(m[ 5 ]))
     }
     return rgb
   }
@@ -65,10 +71,10 @@ function hexToRgb (hex) {
   hex = hex.replace(/^#/, '')
 
   if (hex.length === 3) {
-    hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2]
+    hex = hex[ 0 ] + hex[ 0 ] + hex[ 1 ] + hex[ 1 ] + hex[ 2 ] + hex[ 2 ]
   }
   else if (hex.length === 4) {
-    hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2] + hex[3] + hex[3]
+    hex = hex[ 0 ] + hex[ 0 ] + hex[ 1 ] + hex[ 1 ] + hex[ 2 ] + hex[ 2 ] + hex[ 3 ] + hex[ 3 ]
   }
 
   const num = parseInt(hex, 16)
@@ -185,7 +191,7 @@ export default {
       const cssColor = this.isCssColor(event.bgcolor)
       const isHeader = type === 'header'
       return {
-        [`text-white bg-${event.bgcolor}`]: !cssColor,
+        [ `text-white bg-${ event.bgcolor }` ]: !cssColor,
         'full-width': !isHeader && (!event.side || event.side === 'full'),
         'left-side': !isHeader && event.side === 'left',
         'right-side': !isHeader && event.side === 'right'
@@ -195,7 +201,7 @@ export default {
     badgeStyles (event, type, timeStartPos, timeDurationHeight) {
       const s = {}
       if (this.isCssColor(event.bgcolor)) {
-        s['background-color'] = event.bgcolor
+        s[ 'background-color' ] = event.bgcolor
         s.color = luminosity(event.bgcolor) > 0.5 ? 'black' : 'white'
       }
       if (timeStartPos) {
@@ -204,7 +210,7 @@ export default {
       if (timeDurationHeight) {
         s.height = timeDurationHeight(event.duration) + 'px'
       }
-      s['align-items'] = 'flex-start'
+      s[ 'align-items' ] = 'flex-start'
       return s
     },
 
@@ -213,20 +219,20 @@ export default {
       const events = []
       for (let i = 0; i < this.events.length; ++i) {
         let added = false
-        if (this.events[i].date === dt) {
-          if (this.events[i].time) {
+        if (this.events[ i ].date === dt) {
+          if (this.events[ i ].time) {
             if (events.length > 0) {
               // check for overlapping times
-              const startTime = QCalendar.parseTimestamp(this.events[i].date + ' ' + this.events[i].time)
-              const endTime = QCalendar.addToDate(startTime, { minute: this.events[i].duration })
+              const startTime = QCalendar.parseTimestamp(this.events[ i ].date + ' ' + this.events[ i ].time)
+              const endTime = QCalendar.addToDate(startTime, { minute: this.events[ i ].duration })
               for (let j = 0; j < events.length; ++j) {
-                if (events[j].time) {
-                  const startTime2 = QCalendar.parseTimestamp(events[j].date + ' ' + events[j].time)
-                  const endTime2 = QCalendar.addToDate(startTime2, { minute: events[j].duration })
+                if (events[ j ].time) {
+                  const startTime2 = QCalendar.parseTimestamp(events[ j ].date + ' ' + events[ j ].time)
+                  const endTime2 = QCalendar.addToDate(startTime2, { minute: events[ j ].duration })
                   if (QCalendar.isBetweenDates(startTime, startTime2, endTime2) || QCalendar.isBetweenDates(endTime, startTime2, endTime2)) {
-                    events[j].side = 'left'
-                    this.events[i].side = 'right'
-                    events.push(this.events[i])
+                    events[ j ].side = 'left'
+                    this.events[ i ].side = 'right'
+                    events.push(this.events[ i ])
                     added = true
                     break
                   }
@@ -235,16 +241,16 @@ export default {
             }
           }
           if (!added) {
-            this.events[i].side = undefined
-            events.push(this.events[i])
+            this.events[ i ].side = undefined
+            events.push(this.events[ i ])
           }
         }
-        else if (this.events[i].days) {
+        else if (this.events[ i ].days) {
           // check for overlapping dates
-          const startDate = QCalendar.parseTimestamp(this.events[i].date)
-          const endDate = QCalendar.addToDate(startDate, { day: this.events[i].days })
+          const startDate = QCalendar.parseTimestamp(this.events[ i ].date)
+          const endDate = QCalendar.addToDate(startDate, { day: this.events[ i ].days })
           if (QCalendar.isBetweenDates(currentDate, startDate, endDate)) {
-            events.push(this.events[i])
+            events.push(this.events[ i ])
             added = true
           }
         }

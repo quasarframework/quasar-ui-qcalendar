@@ -1,9 +1,19 @@
 <template>
   <div>
     <div class="row justify-center items-center">
-      <q-btn flat dense label="Prev" @click="calendarPrev" />
+      <q-btn
+        flat
+        dense
+        label="Prev"
+        @click="calendarPrev"
+      />
       <q-separator vertical />
-      <q-btn flat dense label="Next" @click="calendarNext" />
+      <q-btn
+        flat
+        dense
+        label="Next"
+        @click="calendarNext"
+      />
     </div>
     <q-separator />
     <q-calendar
@@ -28,6 +38,12 @@ export default {
     return {
       selectedDate: '',
       selectedDates: []
+    }
+  },
+  watch: {
+    selectedDates (val) {
+      /* eslint-disable-next-line */
+      console.log('selected dates:', val)
     }
   },
 
@@ -57,7 +73,7 @@ export default {
       if (this.selectedDates.includes(date)) {
         // remove the date
         for (let i = 0; i < this.selectedDates.length; ++i) {
-          if (date === this.selectedDates[i]) {
+          if (date === this.selectedDates[ i ]) {
             this.selectedDates.splice(i, 1)
             break
           }
@@ -69,12 +85,6 @@ export default {
           this.selectedDates.push(date)
         }
       }
-    }
-  },
-  watch: {
-    selectedDates (val) {
-      /* eslint-disable-next-line */
-      console.log('selected dates:', val)
     }
   }
 }

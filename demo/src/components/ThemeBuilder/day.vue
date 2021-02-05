@@ -1,11 +1,17 @@
 <template>
   <div>
     <div class="q-gutter-sm q-mb-sm">
-      <q-checkbox v-model="noActiveDate" dense label="No active date" />
+      <q-checkbox
+        v-model="noActiveDate"
+        dense
+        label="No active date"
+      />
     </div>
     <div class="row justify-evenly q-gutter-sm full-width">
       <div class="col-5">
-        <div class="q-mb-md">Interval Range: </div>
+        <div class="q-mb-md">
+          Interval Range:
+        </div>
         <q-range
           v-model="intervalRange"
           label
@@ -19,7 +25,9 @@
         />
       </div>
       <div class="col-5">
-        <div class="q-mb-md">Interval Height: </div>
+        <div class="q-mb-md">
+          Interval Height:
+        </div>
         <q-slider
           v-model="intervalHeight"
           :min="20"
@@ -31,11 +39,23 @@
       </div>
     </div>
     <div class="col-12 full-width q-px-md q-pb-sm">
-      <span class="text-body2" >Interval Step (Section)</span>
+      <span class="text-body2">Interval Step (Section)</span>
       <div class="q-gutter-sm">
-        <q-radio v-model="intervalRangeStep" :val="1" label="60 min" />
-        <q-radio v-model="intervalRangeStep" :val="0.5" label="30 min" />
-        <q-radio v-model="intervalRangeStep" :val="0.25" label="15 min" />
+        <q-radio
+          v-model="intervalRangeStep"
+          :val="1"
+          label="60 min"
+        />
+        <q-radio
+          v-model="intervalRangeStep"
+          :val="0.5"
+          label="30 min"
+        />
+        <q-radio
+          v-model="intervalRangeStep"
+          :val="0.25"
+          label="15 min"
+        />
       </div>
     </div>
     <q-calendar
@@ -51,7 +71,6 @@
       style="height: 400px;"
       :style="styles"
     />
-
   </div>
 </template>
 
@@ -70,9 +89,6 @@ export default {
       intervalRangeStep: 1,
       intervalHeight: 20
     }
-  },
-  beforeMount () {
-    this.selectedDate = this.value
   },
   computed: {
     leftLabelRange () {
@@ -119,6 +135,9 @@ export default {
       this.intervalRange.min = calcMin(this.intervalRange.min)
       this.intervalRange.max = calcMax(this.intervalRange.max)
     }
+  },
+  beforeMount () {
+    this.selectedDate = this.value
   }
 }
 </script>

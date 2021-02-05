@@ -1,9 +1,19 @@
 <template>
   <div style="max-width: 800px; width: 100%;">
     <div class="row justify-center items-center">
-        <q-btn flat dense label="Prev" @click="calendarPrev" />
-        <q-separator vertical />
-        <q-btn flat dense label="Next" @click="calendarNext" />
+      <q-btn
+        flat
+        dense
+        label="Prev"
+        @click="calendarPrev"
+      />
+      <q-separator vertical />
+      <q-btn
+        flat
+        dense
+        label="Next"
+        @click="calendarNext"
+      />
     </div>
     <q-separator />
     <q-calendar
@@ -17,71 +27,107 @@
     >
       <template #column-header-after="{ /* timestamp, */ index }">
         <div class="q-ma-xs">
-          <q-item v-if="index === 0" clickable v-ripple>
+          <q-item
+            v-if="index === 0"
+            v-ripple
+            clickable
+          >
             <q-item-section side>
               <q-avatar size="42px">
-                <img src="https://cdn.quasar.dev/img/avatar1.jpg" />
+                <img src="https://cdn.quasar.dev/img/avatar1.jpg">
               </q-avatar>
             </q-item-section>
             <q-item-section>
               <q-item-label>Mary</q-item-label>
-              <q-item-label caption>Content Writer</q-item-label>
+              <q-item-label caption>
+                Content Writer
+              </q-item-label>
             </q-item-section>
           </q-item>
-          <q-item v-if="index === 1" clickable v-ripple>
+          <q-item
+            v-if="index === 1"
+            v-ripple
+            clickable
+          >
             <q-item-section side>
               <q-avatar size="42px">
-                <img src="https://cdn.quasar.dev/img/avatar2.jpg" />
+                <img src="https://cdn.quasar.dev/img/avatar2.jpg">
               </q-avatar>
             </q-item-section>
             <q-item-section>
               <q-item-label>Jessica</q-item-label>
-              <q-item-label caption>Designer</q-item-label>
+              <q-item-label caption>
+                Designer
+              </q-item-label>
             </q-item-section>
           </q-item>
-          <q-item v-if="index === 2" clickable v-ripple>
+          <q-item
+            v-if="index === 2"
+            v-ripple
+            clickable
+          >
             <q-item-section side>
               <q-avatar size="42px">
-                <img src="https://cdn.quasar.dev/img/avatar4.jpg" />
+                <img src="https://cdn.quasar.dev/img/avatar4.jpg">
               </q-avatar>
             </q-item-section>
             <q-item-section>
               <q-item-label>Scott</q-item-label>
-              <q-item-label caption>Software Developer</q-item-label>
+              <q-item-label caption>
+                Software Developer
+              </q-item-label>
             </q-item-section>
           </q-item>
 
-          <q-item v-if="index === 3" clickable v-ripple>
+          <q-item
+            v-if="index === 3"
+            v-ripple
+            clickable
+          >
             <q-item-section side>
               <q-avatar size="42px">
-                <img src="https://cdn.quasar.dev/img/avatar3.jpg" />
+                <img src="https://cdn.quasar.dev/img/avatar3.jpg">
               </q-avatar>
             </q-item-section>
             <q-item-section>
               <q-item-label>Elaine</q-item-label>
-              <q-item-label caption>Support Engineer</q-item-label>
+              <q-item-label caption>
+                Support Engineer
+              </q-item-label>
             </q-item-section>
           </q-item>
-          <q-item v-if="index === 4" clickable v-ripple>
+          <q-item
+            v-if="index === 4"
+            v-ripple
+            clickable
+          >
             <q-item-section side>
               <q-avatar size="42px">
-                <img src="https://cdn.quasar.dev/img/avatar5.jpg" />
+                <img src="https://cdn.quasar.dev/img/avatar5.jpg">
               </q-avatar>
             </q-item-section>
             <q-item-section>
               <q-item-label>Carol</q-item-label>
-              <q-item-label caption>Content Analyst</q-item-label>
+              <q-item-label caption>
+                Content Analyst
+              </q-item-label>
             </q-item-section>
           </q-item>
-          <q-item v-if="index === 5" clickable v-ripple>
+          <q-item
+            v-if="index === 5"
+            v-ripple
+            clickable
+          >
             <q-item-section side>
               <q-avatar size="42px">
-                <img src="https://cdn.quasar.dev/img/avatar6.jpg" />
+                <img src="https://cdn.quasar.dev/img/avatar6.jpg">
               </q-avatar>
             </q-item-section>
             <q-item-section>
               <q-item-label>Heather</q-item-label>
-              <q-item-label caption>Team Lead</q-item-label>
+              <q-item-label caption>
+                Team Lead
+              </q-item-label>
             </q-item-section>
           </q-item>
         </div>

@@ -1,4 +1,6 @@
-export default {
-  titlebarHeight: 0,
-  toc: []
+export default function () {
+  return {
+    titlebarHeight: 0,
+    toc: []
+  }
 }

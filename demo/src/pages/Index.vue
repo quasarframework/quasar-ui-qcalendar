@@ -1,6 +1,10 @@
 <template>
   <hero>
-    <q-markdown :src="markdown" toc @data="onToc" />
+    <q-markdown
+      :src="markdown"
+      toc
+      @data="onToc"
+    />
     <json-api-viewer
       title="QCalendar API"
       :json="json"
@@ -12,14 +16,18 @@
       starting-tab="methods"
     />
     <q-markdown>
-# Donate
-If you appreciate the work that went into this, please consider donating to [Quasar](https://donate.quasar.dev) or [Jeff](https://github.com/sponsors/hawkeye64).
+      # Donate
+      If you appreciate the work that went into this, please consider donating to [Quasar](https://donate.quasar.dev) or [Jeff](https://github.com/sponsors/hawkeye64).
 
----
+      ---
 
-This page created with [QMarkdown](https://quasarframework.github.io/quasar-ui-qmarkdown), another great Quasar App Extension.
+      This page created with [QMarkdown](https://quasarframework.github.io/quasar-ui-qmarkdown), another great Quasar App Extension.
     </q-markdown>
-    <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
+    <q-page-scroller
+      position="bottom-right"
+      :scroll-offset="150"
+      :offset="[18, 18]"
+    >
       <q-btn
         fab
         icon="keyboard_arrow_up"
@@ -30,12 +38,13 @@ This page created with [QMarkdown](https://quasarframework.github.io/quasar-ui-q
 </template>
 
 <script>
+import { defineComponent } from 'vue'
 import Hero from '../components/Hero'
 import markdown from '../markdown/calendar.md'
 import Api from '@quasar/quasar-ui-qcalendar/dist/api/QCalendar.json'
 import Api2 from '@quasar/quasar-ui-qcalendar/dist/api/Timestamp.json'
 
-export default {
+export default defineComponent({
   name: 'PageIndex',
 
   components: {
@@ -72,5 +81,5 @@ export default {
       this.toc = toc
     }
   }
-}
+})
 </script>

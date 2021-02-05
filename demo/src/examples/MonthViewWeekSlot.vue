@@ -7,15 +7,20 @@
     >
       <template #week="{ week, weekdays, miniMode }">
         <template v-if="!miniMode">
-          <template v-for="(computedEvent, index) in getWeekEvents(week, weekdays)">
+          <template
+            v-for="(computedEvent, index) in getWeekEvents(week, weekdays)"
+            :key="index"
+          >
             <q-badge
-              :key="index"
               class="q-row-event"
               :class="badgeClasses(computedEvent, 'day')"
               :style="badgeStyles(computedEvent, 'day', week.length)"
             >
               <template v-if="computedEvent.event">
-                <q-icon :name="computedEvent.event.icon" class="q-mr-xs"></q-icon>
+                <q-icon
+                  :name="computedEvent.event.icon"
+                  class="q-mr-xs"
+                />
                 <span class="ellipsis">{{ computedEvent.event.title }}</span>
               </template>
             </q-badge>
@@ -127,7 +132,7 @@ export default {
       const isHeader = type === 'header'
 
       return {
-        [`text-white bg-${color}`]: !cssColor,
+        [ `text-white bg-${ color }` ]: !cssColor,
         'full-width': !isHeader && (!infoEvent.side || infoEvent.side === 'full'),
         'left-side': !isHeader && infoEvent.side === 'left',
         'right-side': !isHeader && infoEvent.side === 'right',
@@ -152,8 +157,8 @@ export default {
     },
 
     getWeekEvents (week, weekdays) {
-      const tsFirstDay = QCalendar.parsed(week[0].date + ' 00:00')
-      const tsLastDay = QCalendar.parsed(week[week.length - 1].date + ' 23:59')
+      const tsFirstDay = QCalendar.parsed(week[ 0 ].date + ' 00:00')
+      const tsLastDay = QCalendar.parsed(week[ week.length - 1 ].date + ' 23:59')
       const firstDay = QCalendar.getDayIdentifier(tsFirstDay)
       const lastDay = QCalendar.getDayIdentifier(tsLastDay)
 
@@ -190,7 +195,7 @@ export default {
     },
 
     insertEvent (events, weekLength, infoWeek, index, availableDays, level) {
-      const iEvent = infoWeek[index]
+      const iEvent = infoWeek[ index ]
       if (iEvent !== undefined && iEvent.left >= availableDays) {
         // If you have space available, more events are placed
         if (iEvent.left - availableDays) {
@@ -232,9 +237,9 @@ export default {
 
     isBetweenDatesWeek (dateStart, dateEnd, weekStart, weekEnd) {
       return (
-        (dateEnd < weekEnd && dateEnd >= weekStart) ||
-          dateEnd === weekEnd ||
-          (dateEnd > weekEnd && dateStart <= weekEnd)
+        (dateEnd < weekEnd && dateEnd >= weekStart)
+          || dateEnd === weekEnd
+          || (dateEnd > weekEnd && dateStart <= weekEnd)
       )
     }
   }

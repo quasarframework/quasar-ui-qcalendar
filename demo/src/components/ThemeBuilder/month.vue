@@ -1,12 +1,34 @@
 <template>
   <div>
     <div class="q-gutter-sm q-mb-sm">
-      <q-checkbox v-model="mobile" dense label="Use Touch (set if on mobile)" />
-      <q-checkbox v-model="noActiveDate" dense label="No active date" />
-      <q-checkbox v-model="disabledDays" dense label="Disabled weekends" />
-      <q-checkbox v-model="hideOutside" dense label="Hide outside days" />
-      <q-checkbox v-model="showWorkweeks" dense label="Show workweeks" />
-      <div class="full-width text-caption">Selection Type</div>
+      <q-checkbox
+        v-model="mobile"
+        dense
+        label="Use Touch (set if on mobile)"
+      />
+      <q-checkbox
+        v-model="noActiveDate"
+        dense
+        label="No active date"
+      />
+      <q-checkbox
+        v-model="disabledDays"
+        dense
+        label="Disabled weekends"
+      />
+      <q-checkbox
+        v-model="hideOutside"
+        dense
+        label="Hide outside days"
+      />
+      <q-checkbox
+        v-model="showWorkweeks"
+        dense
+        label="Show workweeks"
+      />
+      <div class="full-width text-caption">
+        Selection Type
+      </div>
       <q-radio
         v-model="selectionType"
         dense
@@ -39,12 +61,12 @@
         :disabled-weekdays="disabledWeekdays"
         :hide-outside-days="hideOutside"
         :show-work-weeks="showWorkweeks"
+        :style="styles"
         @click:day2="onToggleDay"
         @click:date2="onToggleDate"
         @mousedown:day2="onMouseDownDay"
         @mouseup:day2="onMouseUpDay"
         @mousemove:day2="onMouseMoveDay"
-        :style="styles"
       />
     </div>
   </div>
@@ -81,26 +103,9 @@ export default {
     }
   },
 
-  beforeMount () {
-    this.selectedDate = this.value
-  },
-
-  watch: {
-    value (val) {
-      this.selectedDate = val
-    },
-
-    selectionType (val) {
-      // clear any existing data
-      this.anchorTimestamp = null
-      this.otherTimestamp = null
-      this.selectedDates.splice(0, this.selectedDates.length)
-    }
-  },
-
   computed: {
     disabledWeekdays () {
-      return this.disabledDays === true ? [0, 6] : []
+      return this.disabledDays === true ? [ 0, 6 ] : []
     },
 
     startEndDates () {
@@ -141,6 +146,23 @@ export default {
     }
   },
 
+  watch: {
+    value (val) {
+      this.selectedDate = val
+    },
+
+    selectionType (val) {
+      // clear any existing data
+      this.anchorTimestamp = null
+      this.otherTimestamp = null
+      this.selectedDates.splice(0, this.selectedDates.length)
+    }
+  },
+
+  beforeMount () {
+    this.selectedDate = this.value
+  },
+
   methods: {
     onToggleDate ({ scope }) {
       if (scope !== undefined) {
@@ -160,7 +182,7 @@ export default {
       if (this.selectedDates.includes(date)) {
         // remove the date
         for (let i = 0; i < this.selectedDates.length; ++i) {
-          if (date === this.selectedDates[i]) {
+          if (date === this.selectedDates[ i ]) {
             this.selectedDates.splice(i, 1)
             break
           }
@@ -177,10 +199,10 @@ export default {
     onMouseDownDay ({ scope, event }) {
       if (this.selectionType !== 'range') return
       if (leftClick(event)) {
-        if (this.mobile === true &&
-          this.anchorTimestamp !== null &&
-          this.otherTimestamp !== null &&
-          this.anchorTimestamp.date === this.otherTimestamp.date) {
+        if (this.mobile === true
+          && this.anchorTimestamp !== null
+          && this.otherTimestamp !== null
+          && this.anchorTimestamp.date === this.otherTimestamp.date) {
           this.otherTimestamp = scope.timestamp
           this.mouseDown = false
           return

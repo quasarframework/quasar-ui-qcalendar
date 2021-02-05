@@ -1,5 +1,8 @@
 <template>
-  <div class="row justify-left" style="width: 100%;">
+  <div
+    class="row justify-left"
+    style="width: 100%;"
+  >
     <q-dialog v-model="displayLocale">
       <q-card style="min-width: 300px;">
         <q-toolbar class="bg-blue-8 text-grey-1">
@@ -11,7 +14,11 @@
           Enter a new locale:
         </q-card-section>
         <q-card-section>
-          <q-input v-model="locale" autofocus label="Locale"></q-input>
+          <q-input
+            v-model="locale"
+            autofocus
+            label="Locale"
+          />
         </q-card-section>
       </q-card>
     </q-dialog>
@@ -19,11 +26,11 @@
       <q-btn
         dense
         label="Change locale"
-        @click="displayLocale = true"
         class="full-width"
-      ></q-btn>
+        @click="displayLocale = true"
+      />
       <div class="col-12 full-width q-px-md q-pb-sm">
-        <span class="text-body2" >Max days (custom, scheduler, agenda)</span>
+        <span class="text-body2">Max days (custom, scheduler, agenda)</span>
         <q-slider
           v-model="maxDays"
           :min="1"
@@ -32,77 +39,77 @@
         />
       </div>
       <q-toggle
-        class="col-12 full-width"
         v-model="bordered"
+        class="col-12 full-width"
         label="bordered"
-      ></q-toggle>
+      />
       <q-toggle
-        class="col-12 full-width"
         v-model="fiveDayWorkWeek"
+        class="col-12 full-width"
         label="5 day work week"
-      ></q-toggle>
+      />
       <q-toggle
-        class="col-12 full-width"
         v-model="firstDayMonday"
+        class="col-12 full-width"
         label="Week starts on Monday"
-      ></q-toggle>
+      />
       <q-toggle
-        class="col-12 full-width"
         v-model="shortMonthLabel"
+        class="col-12 full-width"
         label="Short month label"
-      ></q-toggle>
+      />
       <q-toggle
-        class="col-12 full-width"
         v-model="shortWeekdayLabel"
+        class="col-12 full-width"
         label="Short weekday label"
-      ></q-toggle>
+      />
       <q-toggle
-        class="col-12 full-width"
         v-model="shortIntervalLabel"
+        class="col-12 full-width"
         label="Short interval label"
-      ></q-toggle>
+      />
       <q-toggle
-        class="col-12 full-width"
         v-model="hour24Format"
+        class="col-12 full-width"
         label="24hr interval labels"
-      ></q-toggle>
+      />
       <q-toggle
-        class="col-12 full-width"
         v-model="showWorkWeeks"
+        class="col-12 full-width"
         label="Show work weeks"
-      ></q-toggle>
+      />
       <q-toggle
-        class="col-12 full-width"
         v-model="noDefaultHeaderBtn"
+        class="col-12 full-width"
         label="No Default Header Button"
-      ></q-toggle>
+      />
       <q-toggle
-        class="col-12 full-width"
         v-model="noDefaultHeaderText"
+        class="col-12 full-width"
         label="No Default Header Text"
-      ></q-toggle>
+      />
       <q-toggle
-        class="col-12 full-width"
         v-model="hideHeader"
+        class="col-12 full-width"
         label="Hide header"
-      ></q-toggle>
+      />
       <q-toggle
-        class="col-12 full-width"
         v-model="noScroll"
+        class="col-12 full-width"
         label="No scroll"
-      ></q-toggle>
+      />
       <q-toggle
-        class="col-12 full-width"
         v-model="showMonthLabel"
-        label="Show month label"
-      ></q-toggle>
-      <q-toggle
         class="col-12 full-width"
+        label="Show month label"
+      />
+      <q-toggle
         v-model="showDayOfYearLabel"
+        class="col-12 full-width"
         label="Show Day of Year Label"
-      ></q-toggle>
+      />
       <div class="col-12 full-width q-px-md">
-        <span class="text-body2" >Interval Range (daily)</span>
+        <span class="text-body2">Interval Range (daily)</span>
         <q-range
           v-model="intervalRange"
           :min="0"
@@ -114,15 +121,27 @@
         />
       </div>
       <div class="col-12 full-width q-px-md q-pb-sm">
-        <span class="text-body2" >Interval Step</span>
+        <span class="text-body2">Interval Step</span>
         <div class="q-gutter-sm">
-          <q-radio v-model="intervalRangeStep" :val="1" label="60 min" />
-          <q-radio v-model="intervalRangeStep" :val="0.5" label="30 min" />
-          <q-radio v-model="intervalRangeStep" :val="0.25" label="15 min" />
+          <q-radio
+            v-model="intervalRangeStep"
+            :val="1"
+            label="60 min"
+          />
+          <q-radio
+            v-model="intervalRangeStep"
+            :val="0.5"
+            label="30 min"
+          />
+          <q-radio
+            v-model="intervalRangeStep"
+            :val="0.25"
+            label="15 min"
+          />
         </div>
       </div>
       <div class="col-12 full-width q-px-md q-pb-sm">
-        <span class="text-body2" >Interval height (daily)</span>
+        <span class="text-body2">Interval height (daily)</span>
         <q-slider
           v-model="intervalHeight"
           :min="20"
@@ -132,7 +151,7 @@
         />
       </div>
       <div class="col-12 full-width q-px-md q-pb-sm">
-        <span class="text-body2" >Day height (monthly)</span>
+        <span class="text-body2">Day height (monthly)</span>
         <q-slider
           v-model="dayHeight"
           :min="0"
@@ -142,7 +161,7 @@
         />
       </div>
       <div class="col-12 full-width q-px-md q-pb-sm">
-        <span class="text-body2" >Resource height (scheduler)</span>
+        <span class="text-body2">Resource height (scheduler)</span>
         <q-slider
           v-model="resourceHeight"
           :min="20"
@@ -152,7 +171,7 @@
         />
       </div>
       <div class="col-12 full-width q-px-md q-pb-sm">
-        <span class="text-body2" >Resource width (scheduler)</span>
+        <span class="text-body2">Resource width (scheduler)</span>
         <q-slider
           v-model="resourceWidth"
           :min="50"
@@ -172,14 +191,6 @@ export default {
   data () {
     return {
       displayLocale: false
-    }
-  },
-  mounted () {
-    if (Platform.is.mobile) {
-      this.shortMonthLabel = true
-      this.shortWeekdayLabel = true
-      this.shortIntervalLabel = true
-      this.hour24Format = true
     }
   },
   computed: {
@@ -401,6 +412,14 @@ export default {
       }
       this.intervalRange.min = calcMin(this.intervalRange.min)
       this.intervalRange.max = calcMax(this.intervalRange.max)
+    }
+  },
+  mounted () {
+    if (Platform.is.mobile) {
+      this.shortMonthLabel = true
+      this.shortWeekdayLabel = true
+      this.shortIntervalLabel = true
+      this.hour24Format = true
     }
   }
 }

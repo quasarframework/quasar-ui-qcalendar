@@ -1,28 +1,49 @@
 <template>
   <q-layout view="HHh LpR lFf">
-
     <q-header elevated>
-      <q-resize-observer @resize="onTitlebarResized"></q-resize-observer>
+      <q-resize-observer @resize="onTitlebarResized" />
       <q-toolbar>
         <q-btn
           flat
           dense
           round
-          @click="leftDrawerOpen = !leftDrawerOpen"
           aria-label="Menu"
+          @click="leftDrawerOpen = !leftDrawerOpen"
         >
-          <q-icon name="menu"></q-icon>
+          <q-icon name="menu" />
         </q-btn>
 
-        <q-icon name="far fa-calendar-alt" class="q-ml-md" size="1.5rem"></q-icon>
+        <q-icon
+          name="far fa-calendar-alt"
+          class="q-ml-md"
+          size="1.5rem"
+        />
 
         <q-toolbar-title>
           QCalendar <span class="text-subtitle2">v{{ version }}</span>
         </q-toolbar-title>
 
-        <q-btn flat dense label="Today" class="q-mx-md" @click="setToday"></q-btn>
-        <q-btn flat dense round icon="keyboard_arrow_left" @click="onPrev"></q-btn>
-        <q-btn flat dense round icon="keyboard_arrow_right" @click="onNext"></q-btn>
+        <q-btn
+          flat
+          dense
+          label="Today"
+          class="q-mx-md"
+          @click="setToday"
+        />
+        <q-btn
+          flat
+          dense
+          round
+          icon="keyboard_arrow_left"
+          @click="onPrev"
+        />
+        <q-btn
+          flat
+          dense
+          round
+          icon="keyboard_arrow_right"
+          @click="onNext"
+        />
         <span class="q-mr-xl q-toolbar__title nowrap">{{ title }}</span>
         <q-select
           v-model="calendarView"
@@ -37,12 +58,19 @@
           :input-class="contentClass"
           :popup-content-class="contentClass"
           style="min-width: 120px; background: transparent; color: white"
-        ></q-select>
+        />
 
-        <q-space></q-space>
+        <q-space />
 
-        <q-btn flat round @click="$q.dark.toggle()" :icon="$q.dark.isActive ? 'brightness_2' : 'brightness_5'" />
-        <div v-if="$q.screen.width > 500">Quasar v{{ $q.version }}</div>
+        <q-btn
+          flat
+          round
+          :icon="$q.dark.isActive ? 'brightness_2' : 'brightness_5'"
+          @click="$q.dark.toggle()"
+        />
+        <div v-if="$q.screen.width > 500">
+          Quasar v{{ $q.version }}
+        </div>
       </q-toolbar>
     </q-header>
 
@@ -61,7 +89,7 @@
           class="fit"
           :first-day-of-week="firstDayMonday === true ? 1 : 0"
           :options="options"
-        ></q-date>
+        />
       </div>
       <q-separator />
       <div class="col-12">
@@ -74,7 +102,7 @@
           caption="Play with properties"
         >
           <q-separator />
-          <playground></playground>
+          <playground />
         </q-expansion-item>
         <q-separator />
         <q-expansion-item
@@ -91,9 +119,8 @@
     </q-drawer>
 
     <q-page-container>
-      <router-view></router-view>
+      <router-view />
     </q-page-container>
-
   </q-layout>
 </template>
 
@@ -131,10 +158,6 @@ export default {
         { label: 'Custom Agenda', value: 'custom-agenda' }
       ]
     }
-  },
-  beforeMount () {
-    this.locale = getLocale()
-    this.updateFormatters()
   },
   computed: {
     ...mapGetters({
@@ -222,6 +245,10 @@ export default {
       this.updateFormatters()
     }
   },
+  beforeMount () {
+    this.locale = getLocale()
+    this.updateFormatters()
+  },
   methods: {
     onPrev () {
       /* eslint-disable-next-line */
@@ -244,7 +271,7 @@ export default {
         day = '' + d.getDate(),
         year = d.getFullYear()
 
-      return [year, padTime(month), padTime(day)].join('-')
+      return [ year, padTime(month), padTime(day) ].join('-')
     },
     updateFormatters () {
       try {
@@ -275,7 +302,7 @@ export default {
         // figure out if date is a weekend,
         const parts = date.split('/')
         // acount for months starting at 0
-        const time = new Date(parts[0], parts[1] - 1, parts[2])
+        const time = new Date(parts[ 0 ], parts[ 1 ] - 1, parts[ 2 ])
         return !!(time.getDay() % 6)
       }
       return true

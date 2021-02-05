@@ -3,12 +3,12 @@
     <q-calendar
       ref="calendar"
       v-model="selectedDate"
+      v-touch-swipe.mouse.left.right="handleSwipe"
       view="day-resource"
       :resources="resources"
       :resource-height="50"
       locale="en-us"
       sticky
-      v-touch-swipe.mouse.left.right="handleSwipe"
       animated
       transition-prev="slide-right"
       transition-next="slide-left"

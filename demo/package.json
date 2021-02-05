@@ -16,10 +16,10 @@
     "@quasar/extras": "^1.9.15",
     "core-js": "^3.8.3",
     "drag-drop-touch": "^1.3.1",
-    "quasar": "^1.15.2"
+    "quasar": "^2.0.0-beta.1"
   },
   "devDependencies": {
-    "@quasar/app": "^2.1.14",
+    "@quasar/app": "^3.0.0-beta.1",
     "@quasar/quasar-app-extension-qiconpicker": "^1.2.9",
     "@quasar/quasar-app-extension-qmarkdown": "^1.4.1",
     "@quasar/quasar-app-extension-qribbon": "^1.0.0-beta.15",

@@ -28,10 +28,6 @@ export default {
       selectedDate: '2019-04-01'
     }
   },
-  beforeMount () {
-    // set to today's date
-    this.selectedDate = getCurrentDay(CURRENT_DAY.getDate())
-  },
   computed: {
     disabledBefore () {
       // find the last day of the previous month
@@ -54,6 +50,10 @@ export default {
       }
       return undefined
     }
+  },
+  beforeMount () {
+    // set to today's date
+    this.selectedDate = getCurrentDay(CURRENT_DAY.getDate())
   }
 }
 </script>

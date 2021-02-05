@@ -10,21 +10,34 @@
       style="height: 400px;"
     >
       <template #day-body="{ timestamp }">
-        <template v-for="(agenda) in getAgenda(timestamp)">
+        <template
+          v-for="(agenda) in getAgenda(timestamp)"
+          :key="timestamp.date + agenda.time"
+        >
           <div
-            :key="timestamp.date + agenda.time"
             :label="agenda.time"
             class="justify-start q-ma-sm shadow-5 bg-grey-6"
           >
-            <div v-if="agenda.avatar" class="row justify-center" style="margin-top: 30px; width: 100%;">
+            <div
+              v-if="agenda.avatar"
+              class="row justify-center"
+              style="margin-top: 30px; width: 100%;"
+            >
               <q-avatar style="margin-top: -25px; margin-bottom: 10px; font-size: 60px; max-height: 50px;">
-                <img :src="agenda.avatar" style="border: #9e9e9e solid 5px;">
+                <img
+                  :src="agenda.avatar"
+                  style="border: #9e9e9e solid 5px;"
+                >
               </q-avatar>
             </div>
             <div class="col-12 q-px-sm">
               <strong>{{ agenda.time }}</strong>
             </div>
-            <div v-if="agenda.desc" class="col-12 q-px-sm" style="font-size: 10px;">
+            <div
+              v-if="agenda.desc"
+              class="col-12 q-px-sm"
+              style="font-size: 10px;"
+            >
               {{ agenda.desc }}
             </div>
           </div>
@@ -172,7 +185,7 @@ export default {
 
   methods: {
     getAgenda (day) {
-      return this.agenda[parseInt(day.weekday, 10)]
+      return this.agenda[ parseInt(day.weekday, 10) ]
     }
   }
 }

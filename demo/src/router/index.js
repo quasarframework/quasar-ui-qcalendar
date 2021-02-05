@@ -1,9 +1,6 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-
+import { route } from 'quasar/wrappers'
+import { createRouter, createMemoryHistory, createWebHistory, createWebHashHistory } from 'vue-router'
 import routes from './routes'
-
-Vue.use(VueRouter)
 
 /*
  * If not building with SSR mode, you can
@@ -14,8 +11,12 @@ Vue.use(VueRouter)
  * with the Router instance.
  */
 
-export default function (/* { store, ssrContext } */) {
-  const Router = new VueRouter({
+export default route(function (/* { store, ssrContext } */) {
+  const createHistory = process.env.MODE === 'ssr'
+    ? createMemoryHistory
+    : process.env.VUE_ROUTER_MODE === 'history' ? createWebHistory : createWebHashHistory
+
+  const Router = createRouter({
     scrollBehavior (to, _, savedPosition) {
       return new Promise(resolve => {
         setTimeout(() => {
@@ -23,12 +24,12 @@ export default function (/* { store, ssrContext } */) {
             const el = document.getElementById(to.hash.substring(1))
 
             if (el !== null) {
-              resolve({ x: 0, y: el.offsetTop - el.scrollHeight })
+              resolve({ left: 0, right: el.offsetTop - el.scrollHeight })
               return
             }
           }
 
-          resolve(savedPosition || { x: 0, y: 0 })
+          resolve(savedPosition || { left: 0, right: 0 })
         }, 100)
       })
     },
@@ -37,9 +38,8 @@ export default function (/* { store, ssrContext } */) {
     // Leave these as they are and change in quasar.conf.js instead!
     // quasar.conf.js -> build -> vueRouterMode
     // quasar.conf.js -> build -> publicPath
-    mode: process.env.VUE_ROUTER_MODE,
-    base: process.env.VUE_ROUTER_BASE
+    history: createHistory(process.env.MODE === 'ssr' ? void 0 : process.env.VUE_ROUTER_BASE)
   })
 
   return Router
-}
+})

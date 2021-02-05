@@ -25,8 +25,8 @@
       :interval-count="96"
       time-clicks-clamped
       :selected-dates="selectedDates"
-      @click:time2="onToggleTime"
       style="height: 400px;"
+      @click:time2="onToggleTime"
     />
   </div>
 </template>
@@ -40,6 +40,12 @@ export default {
     return {
       selectedDate: '',
       selectedDates: []
+    }
+  },
+  watch: {
+    selectedDates (val) {
+      /* eslint-disable-next-line */
+      console.log('selected dates:', val)
     }
   },
   methods: {
@@ -66,7 +72,7 @@ export default {
       if (this.selectedDates.includes(t)) {
         // remove the date
         for (let i = 0; i < this.selectedDates.length; ++i) {
-          if (t === this.selectedDates[i]) {
+          if (t === this.selectedDates[ i ]) {
             this.selectedDates.splice(i, 1)
             break
           }
@@ -78,12 +84,6 @@ export default {
           this.selectedDates.push(t)
         }
       }
-    }
-  },
-  watch: {
-    selectedDates (val) {
-      /* eslint-disable-next-line */
-      console.log('selected dates:', val)
     }
   }
 }

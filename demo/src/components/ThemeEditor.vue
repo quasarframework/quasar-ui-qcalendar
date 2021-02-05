@@ -4,26 +4,41 @@
     v-model="openEditor"
     position="right"
   >
-    <div :class="classes" style="max-width: 360px">
-      <div class="text-title">Theme Styles Picker</div>
+    <div
+      :class="classes"
+      style="max-width: 360px"
+    >
+      <div class="text-title">
+        Theme Styles Picker
+      </div>
       <q-separator class="q-mb-md" />
 
-      <div v-if="currentBorderSize !== void 0" class="full-width">
-        <div class="full-width text-caption q-pb-lg">Border Width</div>
+      <div
+        v-if="currentBorderSize !== void 0"
+        class="full-width"
+      >
+        <div class="full-width text-caption q-pb-lg">
+          Border Width
+        </div>
         <q-slider
           :value="editorSize"
           :min="1"
           :max="5"
           label
           label-always
-          @change="val => { editorSize = val }"
           class="fill-width"
+          @change="val => { editorSize = val }"
         />
         <q-separator class="q-mb-sm" />
       </div>
 
-      <div v-if="currentBorderType !== void 0" class="full-width row justify-center">
-        <div class="full-width text-caption">Border Style</div>
+      <div
+        v-if="currentBorderType !== void 0"
+        class="full-width row justify-center"
+      >
+        <div class="full-width text-caption">
+          Border Style
+        </div>
         <q-radio
           :value="editorType"
           val="solid"
@@ -45,7 +60,10 @@
         <q-separator class="q-mb-sm" />
       </div>
 
-      <div v-if="currentColor !== void 0" class="row justify-center">
+      <div
+        v-if="currentColor !== void 0"
+        class="row justify-center"
+      >
         <q-color
           default-view="palette"
           :value="editorColor"
@@ -77,7 +95,9 @@
       </div>
       <q-separator />
       <div class="full-width q-mt-sm">
-        <div class="text-title2">{{ itemName }}</div>
+        <div class="text-title2">
+          {{ itemName }}
+        </div>
         <q-markdown :src="hint" />
       </div>
     </div>
@@ -98,6 +118,11 @@ export default {
     styleObject: Object
   },
 
+  emits: [
+    'input',
+    'style'
+  ],
+
   data () {
     return {
       openEditor: false,
@@ -111,11 +136,6 @@ export default {
     }
   },
 
-  beforeMount () {
-    this.openEditor = this.value
-    this.updateEditor()
-  },
-
   computed: {
     ...mapGetters({
       hints: 'ThemeBuilder/hints'
@@ -123,7 +143,7 @@ export default {
 
     hint () {
       if (this.itemName) {
-        return this.hints[this.itemName]
+        return this.hints[ this.itemName ]
       }
       return ''
     },
@@ -168,10 +188,10 @@ export default {
     },
 
     isValue () {
-      return this.itemName &&
-        this.hasBorder !== true &&
-        this.hasColor !== true &&
-        this.hasUnset !== true
+      return this.itemName
+        && this.hasBorder !== true
+        && this.hasColor !== true
+        && this.hasUnset !== true
     },
 
     currentColor () {
@@ -231,14 +251,14 @@ export default {
     colorPalette () {
       let colors = new Set()
       Object.keys(this.styleCopy).forEach(name => {
-        const value = this.styleCopy[name]
+        const value = this.styleCopy[ name ]
         // has color
         if (
           value !== 'unset' && (
-            value.match(/^(#|(rgb|hsl)a?\()/) ||
-            name.indexOf('color') > -1 ||
-            name.indexOf('background') > -1 ||
-            name.indexOf('border') > -1)
+            value.match(/^(#|(rgb|hsl)a?\()/)
+            || name.indexOf('color') > -1
+            || name.indexOf('background') > -1
+            || name.indexOf('border') > -1)
         ) {
           if (name.indexOf('border') > -1) {
             const parts = value.split(' ')
@@ -283,6 +303,11 @@ export default {
     currentStyle (val) {
       this.$emit('style', val)
     }
+  },
+
+  beforeMount () {
+    this.openEditor = this.value
+    this.updateEditor()
   },
 
   methods: {

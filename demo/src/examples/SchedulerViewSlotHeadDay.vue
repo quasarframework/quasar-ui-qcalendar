@@ -36,7 +36,7 @@ export default {
 
   methods: {
     getHeadDay (timestamp) {
-      return `${timestamp.date}`
+      return `${ timestamp.date }`
     }
   }
 }

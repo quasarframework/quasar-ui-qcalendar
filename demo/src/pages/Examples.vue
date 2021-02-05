@@ -5,13 +5,14 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue'
 import Hero from '../components/Hero'
 
-export default {
+export default defineComponent({
   name: 'ExamplesPage',
 
   components: {
     Hero
   }
-}
+})
 </script>

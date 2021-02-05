@@ -1,26 +1,41 @@
 <template>
   <div style="max-width: 800px; width: 100%;">
     <q-toolbar class="text-primary row justify-between items-center">
-      <q-btn-group flat class="col-3">
-        <q-btn color="primary" flat label="Prev" @click="onPrev" />
-        <q-btn color="primary" flat label="Next" @click="onNext" />
+      <q-btn-group
+        flat
+        class="col-3"
+      >
+        <q-btn
+          color="primary"
+          flat
+          label="Prev"
+          @click="onPrev"
+        />
+        <q-btn
+          color="primary"
+          flat
+          label="Next"
+          @click="onNext"
+        />
       </q-btn-group>
 
-      <div class="col-4" style="text-align: center;">
-      {{ title }}
+      <div
+        class="col-4"
+        style="text-align: center;"
+      >
+        {{ title }}
       </div>
 
       <q-select
+        v-model="locale"
         outlined
         dense
         emit-value
         map-options
         label="Change locale"
-        v-model="locale"
         :options="locales"
         class="col-4"
-      ></q-select>
-
+      />
     </q-toolbar>
     <q-separator class="full-width" />
     <q-calendar
@@ -98,15 +113,15 @@ export default {
     }
   },
 
-  beforeMount () {
-    this.updateFormatter()
-  },
-
   watch: {
     locale () {
       this.updateFormatter()
       this.updateTitle()
     }
+  },
+
+  beforeMount () {
+    this.updateFormatter()
   },
 
   methods: {

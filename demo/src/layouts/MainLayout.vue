@@ -1,5 +1,8 @@
 <template>
-  <q-layout view="HHh LpR fFf" @scroll="onScroll">
+  <q-layout
+    view="HHh LpR fFf"
+    @scroll="onScroll"
+  >
     <q-header elevated>
       <q-toolbar>
         <q-btn
@@ -7,26 +10,32 @@
           dense
           round
           icon="menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
           aria-label="Menu"
+          @click="leftDrawerOpen = !leftDrawerOpen"
         />
 
         <q-toolbar-title>
           QCalendar <span class="text-subtitle2">v{{ version }}</span>
         </q-toolbar-title>
 
-        <q-btn flat round @click="$q.dark.toggle()" :icon="$q.dark.isActive ? 'brightness_2' : 'brightness_5'" />
-        <div v-if="$q.screen.width > 500">Quasar v{{ $q.version }}</div>
+        <q-btn
+          flat
+          round
+          :icon="$q.dark.isActive ? 'brightness_2' : 'brightness_5'"
+          @click="$q.dark.toggle()"
+        />
+        <div v-if="$q.screen.width > 500">
+          Quasar v{{ $q.version }}
+        </div>
 
         <q-btn
           flat
           dense
           round
           icon="menu"
-          @click="rightDrawerOpen = !rightDrawerOpen"
           aria-label="Table of Contents"
+          @click="rightDrawerOpen = !rightDrawerOpen"
         />
-
       </q-toolbar>
     </q-header>
 
@@ -39,7 +48,11 @@
     >
       <q-list>
         <q-item-label header>
-          <q-icon name="fas fa-link" size="1.5em" class="q-mr-md" /><span style="font-size: 1.5em">Essential Links</span>
+          <q-icon
+            name="fas fa-link"
+            size="1.5em"
+            class="q-mr-md"
+          /><span style="font-size: 1.5em">Essential Links</span>
         </q-item-label>
         <q-separator />
       </q-list>
@@ -60,16 +73,23 @@
           <q-item
             v-for="item in toc"
             :key="item.id"
-            clickable
             v-ripple
+            clickable
             dense
-            @click="scrollTo(item.id)"
             :active="activeToc === item.id"
+            @click="scrollTo(item.id)"
           >
-          <q-item-section v-if="item.level > 1" side> • </q-item-section>
+            <q-item-section
+              v-if="item.level > 1"
+              side
+            >
+              •
+            </q-item-section>
             <q-item-section
               :class="`toc-item toc-level-${item.level}`"
-            >{{ item.label }}</q-item-section>
+            >
+              {{ item.label }}
+            </q-item-section>
           </q-item>
         </q-list>
       </q-scroll-area>
@@ -102,6 +122,11 @@ export default {
       activeToc: 0
     }
   },
+  computed: {
+    ...mapGetters({
+      toc: 'common/toc'
+    })
+  },
   mounted () {
     // code to handle anchor link on refresh/new page, etc
     if (location.hash !== '') {
@@ -110,11 +135,6 @@ export default {
         this.scrollTo(id)
       }, 200)
     }
-  },
-  computed: {
-    ...mapGetters({
-      toc: 'common/toc'
-    })
   },
   methods: {
     scrollTo (id) {
@@ -143,7 +163,7 @@ export default {
       let last
 
       for (const i in toc) {
-        const section = toc[i]
+        const section = toc[ i ]
         const item = document.getElementById(section.id)
 
         if (item === null) {

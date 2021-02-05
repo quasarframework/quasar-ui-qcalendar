@@ -1,26 +1,65 @@
 <template>
-  <div class="row justify-center" style="max-width: 800px; width: 100%; overflow: hidden;">
+  <div
+    class="row justify-center"
+    style="max-width: 800px; width: 100%; overflow: hidden;"
+  >
     <div class="q-gutter-sm">
-      <q-checkbox v-model="mobile" label="Use Touch (set if on mobile)" />
+      <q-checkbox
+        v-model="mobile"
+        label="Use Touch (set if on mobile)"
+      />
     </div>
     <q-separator class="full-width" />
-    <q-input color="blue-8" filled v-model="convertedDates" @input="onInputChanged" label="Enter date range" mask="####-##-## - ####-##-##" class="q-pa-sm">
-      <template v-slot:append>
-        <div class="q-gutter-sm" style="overflow: hidden;">
+    <q-input
+      v-model="convertedDates"
+      color="blue-8"
+      filled
+      label="Enter date range"
+      mask="####-##-## - ####-##-##"
+      class="q-pa-sm"
+      @input="onInputChanged"
+    >
+      <template #append>
+        <div
+          class="q-gutter-sm"
+          style="overflow: hidden;"
+        >
           <span>
-            <q-icon name="far fa-calendar" class="cursor-pointer q-ma-md" />
-            <q-popup-proxy v-model="showCalendar" anchor="top right" self="bottom middle">
+            <q-icon
+              name="far fa-calendar"
+              class="cursor-pointer q-ma-md"
+            />
+            <q-popup-proxy
+              v-model="showCalendar"
+              anchor="top right"
+              self="bottom middle"
+            >
               <div style="width: 300px;">
                 <div class="row q-pa-sm">
                   <div class="col-8 row justify-evenly items-center">
-                    <q-icon name="fas fa-chevron-left" @click="calendarPrev" />
-                    <div class="text-center" style="min-width: 100px;">{{ formattedMonth }}</div>
-                    <q-icon name="fas fa-chevron-right" @click="calendarNext" />
+                    <q-icon
+                      name="fas fa-chevron-left"
+                      @click="calendarPrev"
+                    />
+                    <div
+                      class="text-center"
+                      style="min-width: 100px;"
+                    >{{ formattedMonth }}</div>
+                    <q-icon
+                      name="fas fa-chevron-right"
+                      @click="calendarNext"
+                    />
                   </div>
                   <div class="col-4 row justify-evenly items-center">
-                    <q-icon name="fas fa-chevron-left" @click="addToYear(-1)" />
+                    <q-icon
+                      name="fas fa-chevron-left"
+                      @click="addToYear(-1)"
+                    />
                     {{ selectedYear }}
-                    <q-icon name="fas fa-chevron-right" @click="addToYear(1)" />
+                    <q-icon
+                      name="fas fa-chevron-right"
+                      @click="addToYear(1)"
+                    />
                   </div>
                 </div>
                 <q-calendar
@@ -31,14 +70,20 @@
                   mini-mode
                   :selected-start-end-dates="startEndDates"
                   no-active-date
+                  style="height: 250px;"
                   @changed="onChanged"
                   @mousedown:day2="onMouseDownDay"
                   @mouseup:day2="onMouseUpDay"
                   @mousemove:day2="onMouseMoveDay"
-                  style="height: 250px;"
                 />
                 <div class="row justify-center q-pa-xs">
-                  <q-btn label="Today" no-caps flat size="sm" @click="onToday" />
+                  <q-btn
+                    label="Today"
+                    no-caps
+                    flat
+                    size="sm"
+                    @click="onToday"
+                  />
                 </div>
               </div>
             </q-popup-proxy>
@@ -127,8 +172,8 @@ export default {
 
   watch: {
     startEndDates () {
-      const [start, end] = this.startEndDates
-      this.convertedDates = `${start} - ${end}`
+      const [ start, end ] = this.startEndDates
+      this.convertedDates = `${ start } - ${ end }`
     },
 
     selectedDate () {
@@ -140,8 +185,8 @@ export default {
   methods: {
     onInputChanged (val) {
       const items = val.split(' - ')
-      if (items[0] && items[0].length === 10) this.anchorTimestamp = QCalendar.parseTimestamp(items[0])
-      if (items[1] && items[1].length === 10) this.otherTimestamp = QCalendar.parseTimestamp(items[1])
+      if (items[ 0 ] && items[ 0 ].length === 10) this.anchorTimestamp = QCalendar.parseTimestamp(items[ 0 ])
+      if (items[ 1 ] && items[ 1 ].length === 10) this.otherTimestamp = QCalendar.parseTimestamp(items[ 1 ])
     },
 
     onChanged ({ start, end }) {
@@ -173,10 +218,10 @@ export default {
 
     onMouseDownDay ({ scope, event }) {
       if (leftClick(event)) {
-        if (this.mobile === true &&
-          this.anchorTimestamp !== null &&
-          this.otherTimestamp !== null &&
-          this.anchorTimestamp.date === this.otherTimestamp.date) {
+        if (this.mobile === true
+          && this.anchorTimestamp !== null
+          && this.otherTimestamp !== null
+          && this.anchorTimestamp.date === this.otherTimestamp.date) {
           this.otherTimestamp = scope.timestamp
           this.mouseDown = false
           return

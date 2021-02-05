@@ -21,7 +21,11 @@
                 :class="badgeClasses(event, 'body')"
                 :style="badgeStyles(event, 'body', scope.timeStartPosX, scope.timeDurationWidth)"
               >
-                <q-icon v-if="event.icon" :name="event.icon" class="q-mr-xs" /><span class="ellipsis">{{ event.title }}</span>
+                <q-icon
+                  v-if="event.icon"
+                  :name="event.icon"
+                  class="q-mr-xs"
+                /><span class="ellipsis">{{ event.title }}</span>
               </q-badge>
             </template>
           </template>
@@ -54,12 +58,12 @@ function textToRgb (color) {
   const m = reRGBA.exec(color)
   if (m) {
     const rgb = {
-      r: Math.min(255, parseInt(m[2], 10)),
-      g: Math.min(255, parseInt(m[3], 10)),
-      b: Math.min(255, parseInt(m[4], 10))
+      r: Math.min(255, parseInt(m[ 2 ], 10)),
+      g: Math.min(255, parseInt(m[ 3 ], 10)),
+      b: Math.min(255, parseInt(m[ 4 ], 10))
     }
-    if (m[1]) {
-      rgb.a = Math.min(1, parseFloat(m[5]))
+    if (m[ 1 ]) {
+      rgb.a = Math.min(1, parseFloat(m[ 5 ]))
     }
     return rgb
   }
@@ -74,10 +78,10 @@ function hexToRgb (hex) {
   hex = hex.replace(/^#/, '')
 
   if (hex.length === 3) {
-    hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2]
+    hex = hex[ 0 ] + hex[ 0 ] + hex[ 1 ] + hex[ 1 ] + hex[ 2 ] + hex[ 2 ]
   }
   else if (hex.length === 4) {
-    hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2] + hex[3] + hex[3]
+    hex = hex[ 0 ] + hex[ 0 ] + hex[ 1 ] + hex[ 1 ] + hex[ 2 ] + hex[ 2 ] + hex[ 3 ] + hex[ 3 ]
   }
 
   const num = parseInt(hex, 16)
@@ -200,7 +204,7 @@ export default {
     // convert the events into a map of lists keyed by date
     eventsMap () {
       const map = {}
-      this.events.forEach((event) => (map[event.date] = map[event.date] || []).push(event))
+      this.events.forEach((event) => (map[ event.date ] = map[ event.date ] || []).push(event))
       return map
     }
   },
@@ -213,7 +217,7 @@ export default {
     badgeClasses (event, type) {
       const cssColor = this.isCssColor(event.bgcolor)
       return {
-        [`text-white bg-${event.bgcolor}`]: !cssColor
+        [ `text-white bg-${ event.bgcolor }` ]: !cssColor
       }
     },
 
@@ -221,7 +225,7 @@ export default {
       const s = {}
       s.position = 'absolute'
       if (this.isCssColor(event.bgcolor)) {
-        s['background-color'] = event.bgcolor
+        s[ 'background-color' ] = event.bgcolor
         s.color = luminosity(event.bgcolor) > 0.5 ? 'black' : 'white'
       }
       if (timeStartPosX) {
@@ -230,7 +234,7 @@ export default {
       if (timeDurationWidth) {
         s.width = timeDurationWidth(event.duration) + 'px'
       }
-      s['align-items'] = 'flex-start'
+      s[ 'align-items' ] = 'flex-start'
       return s
     }
   }

@@ -5,15 +5,33 @@
     </div>
 
     <q-markdown>
-This page is a **WIP** - please consider making a **PR** to make this better, it will be appreciated :heart:. You can view the source for [Planner](https://github.com/quasarframework/quasar-ui-qcalendar/blob/dev/demo/src/pages/Planner.vue) and [PlannerItem](https://github.com/quasarframework/quasar-ui-qcalendar/blob/dev/demo/src/components/PlannerItem.vue) on Github.
+      This page is a **WIP** - please consider making a **PR** to make this better, it will be appreciated :heart:. You can view the source for [Planner](https://github.com/quasarframework/quasar-ui-qcalendar/blob/dev/demo/src/pages/Planner.vue) and [PlannerItem](https://github.com/quasarframework/quasar-ui-qcalendar/blob/dev/demo/src/components/PlannerItem.vue) on Github.
 
-Drag-and-Drop has been implemented. Give it a try. :)
+      Drag-and-Drop has been implemented. Give it a try. :)
 
----
+      ---
     </q-markdown>
-    <q-btn flat dense label="Today" class="q-mx-md" @click="setToday"></q-btn>
-    <q-btn flat dense round icon="keyboard_arrow_left" @click="onPrev"></q-btn>
-    <q-btn flat dense round icon="keyboard_arrow_right" @click="onNext"></q-btn>
+    <q-btn
+      flat
+      dense
+      label="Today"
+      class="q-mx-md"
+      @click="setToday"
+    />
+    <q-btn
+      flat
+      dense
+      round
+      icon="keyboard_arrow_left"
+      @click="onPrev"
+    />
+    <q-btn
+      flat
+      dense
+      round
+      icon="keyboard_arrow_right"
+      @click="onNext"
+    />
     <span class="q-mr-xl q-toolbar__title nowrap">{{ title }}</span>
 
     <q-calendar
@@ -24,18 +42,18 @@ Drag-and-Drop has been implemented. Give it a try. :)
       :left-column-options="leftColumnOptions"
       :right-column-options="rightColumnOptions"
       bordered
-      @change="onChange"
       style="height: calc(100vh - 300px); min-height: 400px;"
+      @change="onChange"
     >
       <template #column-header-label="{ id, label }">
         <template v-if="id === 'over-due'">
           <div class="row items-center no-wrap">
             <q-icon
+              v-ripple
               :name="overdueSelected ? 'check_box' : 'check_box_outline_blank'"
               :class="'cursor-pointer' + (overdueSelected ? ' text-red-8' : ' text-blue-8')"
-              @click="overdueSelected = !overdueSelected"
               style="font-size: 24px;"
-              v-ripple
+              @click="overdueSelected = !overdueSelected"
             />
             <span class="ellipsis">{{ label }}</span>
           </div>
@@ -50,11 +68,11 @@ Drag-and-Drop has been implemented. Give it a try. :)
       <template #day-header-label="{ timestamp }">
         <div class="row items-center no-wrap">
           <q-icon
+            v-ripple
             :name="selected[timestamp.weekday - 1] === true ? 'check_box' : 'check_box_outline_blank'"
             :class="'cursor-pointer' + (selected[timestamp.weekday - 1] ? ' text-red-8' : ' text-blue-8')"
-            @click.stop.prevent="$set(selected, timestamp.weekday - 1, !selected[timestamp.weekday - 1])"
             style="font-size: 24px;"
-            v-ripple
+            @click.stop.prevent="$set(selected, timestamp.weekday - 1, !selected[timestamp.weekday - 1])"
           />
           <span class="ellipsis">{{ weekdayFormatter(timestamp, $q.screen.lt.lg) }}</span>
         </div>
@@ -63,8 +81,12 @@ Drag-and-Drop has been implemented. Give it a try. :)
       <template #column-body="{ column }">
         <template v-if="column.id === 'over-due'">
           <q-card class="q-mr-xs q-mb-xs q-px-sm row justify-between">
-            <div class="cursor-pointer"><q-icon name="add"/>Add Job</div>
-            <div class="cursor-pointer"><q-icon name="note_add" />Add Note</div>
+            <div class="cursor-pointer">
+              <q-icon name="add" />Add Job
+            </div>
+            <div class="cursor-pointer">
+              <q-icon name="note_add" />Add Note
+            </div>
           </q-card>
           <div
             class="planner-column"
@@ -73,11 +95,13 @@ Drag-and-Drop has been implemented. Give it a try. :)
             @drop.stop="onDrop"
           >
             <transition-group name="planner-item">
-              <template v-for="item in overdue">
+              <template
+                v-for="item in overdue"
+                :key="item.id"
+              >
                 <planner-item
-                  :data-id="item.id"
-                  :key="item.id"
                   v-model="item.selected"
+                  :data-id="item.id"
                   :name="item.name"
                   :address="item.address"
                   :email="item.email"
@@ -87,15 +111,15 @@ Drag-and-Drop has been implemented. Give it a try. :)
                   :amount="item.amount"
                   :days-over="item.daysOver"
                   :draggable="true"
-                  @dragstart.stop.native="(e) => onDragStart(e, item)"
-                  @dragend.stop.native="onDragEnd"
-                  @dragenter.stop.native="onDragEnter"
-                  @dragleave.stop.native="onDragLeave"
-                  @dragover.stop.native="onDragOver"
-                  @drop.stop.native="onDrop"
-                  @touchmove.stop.native="(e) => onTouchMove(e, item)"
-                  @touchstart.stop.native="(e) => onTouchStart(e, item)"
-                  @touchend.stop.native="onTouchEnd"
+                  @dragstart.stop="(e) => onDragStart(e, item)"
+                  @dragend.stop="onDragEnd"
+                  @dragenter.stop="onDragEnter"
+                  @dragleave.stop="onDragLeave"
+                  @dragover.stop="onDragOver"
+                  @drop.stop="onDrop"
+                  @touchmove.stop="(e) => onTouchMove(e, item)"
+                  @touchstart.stop="(e) => onTouchStart(e, item)"
+                  @touchend.stop="onTouchEnd"
                 />
               </template>
             </transition-group>
@@ -105,8 +129,12 @@ Drag-and-Drop has been implemented. Give it a try. :)
 
       <template #day-body="{ timestamp }">
         <q-card class="q-mr-xs q-mb-xs q-px-sm row justify-between">
-          <div class="cursor-pointer"><q-icon name="add" />Add Job</div>
-          <div class="cursor-pointer"><q-icon name="note_add" />Add Note</div>
+          <div class="cursor-pointer">
+            <q-icon name="add" />Add Job
+          </div>
+          <div class="cursor-pointer">
+            <q-icon name="note_add" />Add Note
+          </div>
         </q-card>
         <div
           class="planner-column"
@@ -115,11 +143,13 @@ Drag-and-Drop has been implemented. Give it a try. :)
           @drop.stop="onDrop"
         >
           <transition-group name="planner-item">
-            <template v-for="item in getAgenda(timestamp)">
+            <template
+              v-for="item in getAgenda(timestamp)"
+              :key="item.id"
+            >
               <planner-item
-                :data-id="item.id"
-                :key="item.id"
                 v-model="item.selected"
+                :data-id="item.id"
                 :name="item.name"
                 :address="item.address"
                 :email="item.email"
@@ -129,26 +159,27 @@ Drag-and-Drop has been implemented. Give it a try. :)
                 :amount="item.amount"
                 :days-over="item.daysOver"
                 :draggable="true"
-                @dragstart.stop.native="(e) => onDragStart(e, item)"
-                @dragend.stop.native="onDragEnd"
-                @dragenter.stop.native="onDragEnter"
-                @dragleave.stop.native="onDragLeave"
-                @dragover.stop.native="onDragOver"
-                @drop.stop.native="onDrop"
-                @touchmove.stop.native="(e) => onTouchMove(e, item)"
-                @touchstart.stop.native="(e) => onTouchStart(e, item)"
-                @touchend.stop.native="onTouchEnd"
+                @dragstart.stop="(e) => onDragStart(e, item)"
+                @dragend.stop="onDragEnd"
+                @dragenter.stop="onDragEnter"
+                @dragleave.stop="onDragLeave"
+                @dragover.stop="onDragOver"
+                @drop.stop="onDrop"
+                @touchmove.stop="(e) => onTouchMove(e, item)"
+                @touchstart.stop="(e) => onTouchStart(e, item)"
+                @touchend.stop="onTouchEnd"
               />
             </template>
           </transition-group>
         </div>
       </template>
-
     </q-calendar>
   </q-page>
 </template>
 
 <script>
+import { defineComponent } from 'vue'
+
 // import 'drag-drop-touch'
 let itemId = 1
 
@@ -158,13 +189,13 @@ import { padTime } from '../util/time'
 // normally you would not import "all" of QCalendar, but is needed for this example to work with UMD (codepen)
 import QCalendar from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
 
-const names = ['Ezekiel Stout', 'Aurora Frank', 'Ethan Buchanan', 'Sam Parker', 'Jonathan Hall', 'Carl Flynn', 'Raymond Ingram', 'Abel Glover', 'Margaret Medina', 'Jalen Kane', 'Monserrat Stein', 'Andres Gentry']
-const addresses = ['262 East Cypress Drive', '8719 Anderson Road', '242 W. Shady Road', '4 Lexington Avenue', '7940 Sunset Court', '9866 NE. Rockaway Ave.', '9 Santa Clara Drive', '774 Charles Road', '5 East Thomas St.', '7714 Lilac Rd.', '561 Bowman St.', '517 Brickell Ave.']
-const emails = ['qmacro@me.com', 'amimojo@gmail.com', 'padme@mac.com', 'flaviog@verizon.net', 'srour@mac.com', 'retoh@outlook.com', 'pappp@me.com', 'mcraigw@hotmail.com', 'smcnabb@hotmail.com', 'rnelson@att.net', 'fwitness@live.com', 'stomv@aol.com']
-const phones = ['555-555-0000', '555-555-1111', '555-555-2222', '555-555-3333', '555-555-4444', '555-555-5555', '555-555-6666', '555-555-7777', '555-555-8888', '555-555-9999']
-const workDone = ['Window cleaning', 'Exterior cleaning', 'Lawn maintenance', 'Tree service', 'Flower bed maintenance']
+const names = [ 'Ezekiel Stout', 'Aurora Frank', 'Ethan Buchanan', 'Sam Parker', 'Jonathan Hall', 'Carl Flynn', 'Raymond Ingram', 'Abel Glover', 'Margaret Medina', 'Jalen Kane', 'Monserrat Stein', 'Andres Gentry' ]
+const addresses = [ '262 East Cypress Drive', '8719 Anderson Road', '242 W. Shady Road', '4 Lexington Avenue', '7940 Sunset Court', '9866 NE. Rockaway Ave.', '9 Santa Clara Drive', '774 Charles Road', '5 East Thomas St.', '7714 Lilac Rd.', '561 Bowman St.', '517 Brickell Ave.' ]
+const emails = [ 'qmacro@me.com', 'amimojo@gmail.com', 'padme@mac.com', 'flaviog@verizon.net', 'srour@mac.com', 'retoh@outlook.com', 'pappp@me.com', 'mcraigw@hotmail.com', 'smcnabb@hotmail.com', 'rnelson@att.net', 'fwitness@live.com', 'stomv@aol.com' ]
+const phones = [ '555-555-0000', '555-555-1111', '555-555-2222', '555-555-3333', '555-555-4444', '555-555-5555', '555-555-6666', '555-555-7777', '555-555-8888', '555-555-9999' ]
+const workDone = [ 'Window cleaning', 'Exterior cleaning', 'Lawn maintenance', 'Tree service', 'Flower bed maintenance' ]
 
-export default {
+export default defineComponent({
   name: 'Planner',
 
   components: {
@@ -178,7 +209,7 @@ export default {
       todayTimestamp: '',
       startTimestamp: '',
       endTimestamp: '',
-      weekdays: [1, 2, 3, 4, 5],
+      weekdays: [ 1, 2, 3, 4, 5 ],
       leftColumnOptions: [
         {
           id: 'over-due',
@@ -215,6 +246,64 @@ export default {
     }
   },
 
+  computed: {
+    title () {
+      if (this.titleFormatter && this.locale && this.selectedDate) {
+        const date = new Date(this.selectedDate)
+        return this.titleFormatter.format(date)
+      }
+      return ''
+    },
+
+    weekdayFormatter () {
+      const longOptions = { timeZone: 'UTC', weekday: 'long' }
+      const shortOptions = { timeZone: 'UTC', weekday: 'short' }
+
+      return QCalendar.createNativeLocaleFormatter(
+        this.locale,
+        (_tms, short) => (short ? shortOptions : longOptions)
+      )
+    }
+  },
+
+  watch: {
+    overdueSelected (val) {
+      this.overdue.forEach(due => {
+        due.selected = val
+      })
+    },
+
+    'selected.0' (val, oldVal) {
+      this.agenda[ 1 ].forEach(ag => {
+        ag.selected = val
+      })
+    },
+
+    'selected.1' (val, oldVal) {
+      this.agenda[ 2 ].forEach(ag => {
+        ag.selected = val
+      })
+    },
+
+    'selected.2' (val, oldVal) {
+      this.agenda[ 3 ].forEach(ag => {
+        ag.selected = val
+      })
+    },
+
+    'selected.3' (val, oldVal) {
+      this.agenda[ 4 ].forEach(ag => {
+        ag.selected = val
+      })
+    },
+
+    'selected.4' (val, oldVal) {
+      this.agenda[ 5 ].forEach(ag => {
+        ag.selected = val
+      })
+    }
+  },
+
   mounted () {
     this.locale = getLocale()
     this.updateFormatters()
@@ -236,72 +325,14 @@ export default {
     this.pageY = 0
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     // just to make sure there are no memory leaks
     this.cleanup()
   },
 
-  computed: {
-    title () {
-      if (this.titleFormatter && this.locale && this.selectedDate) {
-        const date = new Date(this.selectedDate)
-        return this.titleFormatter.format(date)
-      }
-      return ''
-    },
-
-    weekdayFormatter () {
-      const longOptions = { timeZone: 'UTC', weekday: 'long' }
-      const shortOptions = { timeZone: 'UTC', weekday: 'short' }
-
-      return QCalendar.createNativeLocaleFormatter(
-        this.locale,
-        (_tms, short) => short ? shortOptions : longOptions
-      )
-    }
-  },
-
-  watch: {
-    overdueSelected (val) {
-      this.overdue.forEach(due => {
-        due.selected = val
-      })
-    },
-
-    'selected.0' (val, oldVal) {
-      this.agenda[1].forEach(ag => {
-        ag.selected = val
-      })
-    },
-
-    'selected.1' (val, oldVal) {
-      this.agenda[2].forEach(ag => {
-        ag.selected = val
-      })
-    },
-
-    'selected.2' (val, oldVal) {
-      this.agenda[3].forEach(ag => {
-        ag.selected = val
-      })
-    },
-
-    'selected.3' (val, oldVal) {
-      this.agenda[4].forEach(ag => {
-        ag.selected = val
-      })
-    },
-
-    'selected.4' (val, oldVal) {
-      this.agenda[5].forEach(ag => {
-        ag.selected = val
-      })
-    }
-  },
-
   methods: {
     getAgenda (day) {
-      return this.agenda[parseInt(day.weekday, 10)]
+      return this.agenda[ parseInt(day.weekday, 10) ]
     },
 
     setToday () {
@@ -325,7 +356,7 @@ export default {
         day = '' + d.getDate(),
         year = d.getFullYear()
 
-      return [year, padTime(month), padTime(day)].join('-')
+      return [ year, padTime(month), padTime(day) ].join('-')
     },
 
     updateFormatters () {
@@ -362,28 +393,28 @@ export default {
 
     generateLists () {
       this.generateList(this.overdue, Math.floor(Math.random() * 10) + 3, this.startTimestamp, true)
-      this.generateList(this.agenda[1], Math.floor(Math.random() * 10) + 3, this.startTimestamp)
-      this.generateList(this.agenda[2], Math.floor(Math.random() * 10) + 3, this.startTimestamp)
-      this.generateList(this.agenda[3], Math.floor(Math.random() * 10) + 3, this.startTimestamp)
-      this.generateList(this.agenda[4], Math.floor(Math.random() * 10) + 3, this.startTimestamp)
-      this.generateList(this.agenda[5], Math.floor(Math.random() * 10) + 3, this.startTimestamp)
+      this.generateList(this.agenda[ 1 ], Math.floor(Math.random() * 10) + 3, this.startTimestamp)
+      this.generateList(this.agenda[ 2 ], Math.floor(Math.random() * 10) + 3, this.startTimestamp)
+      this.generateList(this.agenda[ 3 ], Math.floor(Math.random() * 10) + 3, this.startTimestamp)
+      this.generateList(this.agenda[ 4 ], Math.floor(Math.random() * 10) + 3, this.startTimestamp)
+      this.generateList(this.agenda[ 5 ], Math.floor(Math.random() * 10) + 3, this.startTimestamp)
       this.adjustSelected()
     },
 
     generateList (list, count, timestamp, overdue = false) {
       const items = []
       for (let i = 0; i < count; ++i) {
-        items[i] = {}
-        items[i].selected = false
-        items[i].id = itemId++
-        items[i].address = addresses[Math.floor((Math.random() * 100) % addresses.length)]
-        items[i].name = names[Math.floor((Math.random() * 100) % names.length)]
-        items[i].email = emails[Math.floor((Math.random() * 100) % emails.length)]
-        items[i].phone = phones[Math.floor((Math.random() * 100) % phones.length)]
-        items[i].amount = this.generateAmount()
-        items[i].workDate = overdue === true ? this.generateDate(timestamp) : timestamp.date
-        items[i].workDone = workDone[Math.floor((Math.random() * 100) % workDone.length)]
-        items[i].daysOver = overdue === true ? this.getDaysBetween(items[i].workDate, this.today) : 0
+        items[ i ] = {}
+        items[ i ].selected = false
+        items[ i ].id = itemId++
+        items[ i ].address = addresses[ Math.floor((Math.random() * 100) % addresses.length) ]
+        items[ i ].name = names[ Math.floor((Math.random() * 100) % names.length) ]
+        items[ i ].email = emails[ Math.floor((Math.random() * 100) % emails.length) ]
+        items[ i ].phone = phones[ Math.floor((Math.random() * 100) % phones.length) ]
+        items[ i ].amount = this.generateAmount()
+        items[ i ].workDate = overdue === true ? this.generateDate(timestamp) : timestamp.date
+        items[ i ].workDone = workDone[ Math.floor((Math.random() * 100) % workDone.length) ]
+        items[ i ].daysOver = overdue === true ? this.getDaysBetween(items[ i ].workDate, this.today) : 0
       }
       list.splice(0, list.length, ...items)
     },
@@ -413,7 +444,7 @@ export default {
       })
 
       this.selected.forEach((sel, index) => {
-        this.agenda[index + 1].forEach(ag => {
+        this.agenda[ index + 1 ].forEach(ag => {
           ag.selected = sel
         })
       })
@@ -531,8 +562,8 @@ export default {
             })
           }
           else {
-            this.agenda[targetColumn].forEach(ag => {
-              ag.selected = this.selected[targetColumn - 1]
+            this.agenda[ targetColumn ].forEach(ag => {
+              ag.selected = this.selected[ targetColumn - 1 ]
             })
           }
         }
@@ -573,7 +604,7 @@ export default {
       const els = document.elementsFromPoint(this.pageX, this.pageY)
 
       for (let i = 0; i < els.length; ++i) {
-        const el = els[i]
+        const el = els[ i ]
         if (el.classList.contains('planner-item')) {
           child = el
         }
@@ -587,7 +618,7 @@ export default {
     },
 
     onTouchMove (e, item) {
-      const touchLocation = e.targetTouches[0]
+      const touchLocation = e.targetTouches[ 0 ]
 
       const touchStart = this.copyElement === null
 
@@ -676,13 +707,13 @@ export default {
         list = this.overdue
       }
       else {
-        list = this.agenda[parseInt(column, 10)]
+        list = this.agenda[ parseInt(column, 10) ]
       }
 
       id = parseInt(id, 10)
 
       for (let index = 0; index < list.length; ++index) {
-        if (list[index].id === id) {
+        if (list[ index ].id === id) {
           list.splice(index, 1)
           return
         }
@@ -695,7 +726,7 @@ export default {
         list = this.overdue
       }
       else {
-        list = this.agenda[parseInt(column, 10)]
+        list = this.agenda[ parseInt(column, 10) ]
       }
 
       // if no id, then add to end of list
@@ -708,14 +739,14 @@ export default {
       }
 
       for (let index = 0; index < list.length; ++index) {
-        if (list[index].id === id) {
+        if (list[ index ].id === id) {
           list.splice(index, 0, item)
           return
         }
       }
     }
   }
-}
+})
 </script>
 
 <style lang="sass" scoped>

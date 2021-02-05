@@ -1,10 +1,19 @@
 <template>
-  <div class="row justify-center" style="max-width: 800px; width: 100%;">
+  <div
+    class="row justify-center"
+    style="max-width: 800px; width: 100%;"
+  >
     <div class="q-gutter-sm">
-      <q-checkbox v-model="mobile" label="Use Touch (set if on mobile)" />
+      <q-checkbox
+        v-model="mobile"
+        label="Use Touch (set if on mobile)"
+      />
     </div>
     <q-separator class="full-width" />
-    <div class="row justify-center" style="max-width: 800px; width: 100%; overflow: hidden;">
+    <div
+      class="row justify-center"
+      style="max-width: 800px; width: 100%; overflow: hidden;"
+    >
       <q-calendar
         v-model="selectedDate1"
         view="month"
@@ -16,10 +25,10 @@
         :min-weeks="6"
         animated
         :selected-start-end-dates="startEndDates"
+        style="max-width: 300px; min-width: auto; overflow: hidden"
         @mousedown:day2="onMouseDownDay"
         @mouseup:day2="onMouseUpDay"
         @mousemove:day2="onMouseMoveDay"
-        style="max-width: 300px; min-width: auto; overflow: hidden"
       />
       <q-separator vertical />
       <q-calendar
@@ -33,10 +42,10 @@
         :min-weeks="6"
         animated
         :selected-start-end-dates="startEndDates"
+        style="max-width: 300px; min-width: auto; overflow: hidden"
         @mousedown:day2="onMouseDownDay"
         @mouseup:day2="onMouseUpDay"
         @mousemove:day2="onMouseMoveDay"
-        style="max-width: 300px; min-width: auto; overflow: hidden"
       />
     </div>
   </div>
@@ -60,13 +69,6 @@ export default {
       mouseDown: false,
       mobile: false
     }
-  },
-
-  beforeMount () {
-    this.selectedDate1 = QCalendar.today()
-    let tm = QCalendar.parseTimestamp(this.selectedDate1)
-    tm = QCalendar.addToDate(tm, { month: 1 })
-    this.selectedDate2 = tm.date
   },
 
   computed: {
@@ -108,13 +110,20 @@ export default {
     }
   },
 
+  beforeMount () {
+    this.selectedDate1 = QCalendar.today()
+    let tm = QCalendar.parseTimestamp(this.selectedDate1)
+    tm = QCalendar.addToDate(tm, { month: 1 })
+    this.selectedDate2 = tm.date
+  },
+
   methods: {
     onMouseDownDay ({ scope, event }) {
       if (leftClick(event)) {
-        if (this.mobile === true &&
-          this.anchorTimestamp !== null &&
-          this.otherTimestamp !== null &&
-          this.anchorTimestamp.date === this.otherTimestamp.date) {
+        if (this.mobile === true
+          && this.anchorTimestamp !== null
+          && this.otherTimestamp !== null
+          && this.anchorTimestamp.date === this.otherTimestamp.date) {
           this.otherTimestamp = scope.timestamp
           this.mouseDown = false
           return

@@ -22,7 +22,7 @@ export default {
 
   methods: {
     getHeadDay (scope) {
-      return `${scope.days[0].date}`
+      return `${ scope.days[ 0 ].date }`
     }
   }
 }

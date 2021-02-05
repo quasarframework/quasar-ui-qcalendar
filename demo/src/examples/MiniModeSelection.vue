@@ -1,10 +1,19 @@
 <template>
-  <div class="row justify-center" style="max-width: 800px; width: 100%;">
+  <div
+    class="row justify-center"
+    style="max-width: 800px; width: 100%;"
+  >
     <div class="q-gutter-sm">
-      <q-checkbox v-model="mobile" label="Use Touch (set if on mobile)" />
+      <q-checkbox
+        v-model="mobile"
+        label="Use Touch (set if on mobile)"
+      />
     </div>
     <q-separator class="full-width" />
-    <div class="row justify-center" style="max-width: 800px; width: 100%; overflow: hidden;">
+    <div
+      class="row justify-center"
+      style="max-width: 800px; width: 100%; overflow: hidden;"
+    >
       <q-calendar
         ref="calendar"
         v-model="selectedDate"
@@ -13,10 +22,10 @@
         mini-mode
         no-active-date
         :selected-start-end-dates="startEndDates"
+        style="max-width: 300px; min-width: auto; overflow: hidden"
         @mousedown:day2="onMouseDownDay"
         @mouseup:day2="onMouseUpDay"
         @mousemove:day2="onMouseMoveDay"
-        style="max-width: 300px; min-width: auto; overflow: hidden"
       />
     </div>
   </div>
@@ -93,10 +102,10 @@ export default {
 
     onMouseDownDay ({ scope, event }) {
       if (leftClick(event)) {
-        if (this.mobile === true &&
-          this.anchorTimestamp !== null &&
-          this.otherTimestamp !== null &&
-          this.anchorTimestamp.date === this.otherTimestamp.date) {
+        if (this.mobile === true
+          && this.anchorTimestamp !== null
+          && this.otherTimestamp !== null
+          && this.anchorTimestamp.date === this.otherTimestamp.date) {
           this.otherTimestamp = scope.timestamp
           this.mouseDown = false
           return

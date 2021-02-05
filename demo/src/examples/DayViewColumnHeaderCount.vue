@@ -11,37 +11,55 @@
       <!-- eslint-disable vue/no-unused-vars -->
       <template #column-header-after="{ timestamp, index }">
         <div class="q-ma-xs">
-          <q-item v-if="index === 0" clickable v-ripple>
+          <q-item
+            v-if="index === 0"
+            v-ripple
+            clickable
+          >
             <q-item-section side>
               <q-avatar size="42px">
-                <img src="https://cdn.quasar.dev/img/avatar1.jpg" />
+                <img src="https://cdn.quasar.dev/img/avatar1.jpg">
               </q-avatar>
             </q-item-section>
             <q-item-section>
               <q-item-label>Mary</q-item-label>
-              <q-item-label caption>Content Writer</q-item-label>
+              <q-item-label caption>
+                Content Writer
+              </q-item-label>
             </q-item-section>
           </q-item>
-          <q-item v-if="index === 1" clickable v-ripple>
+          <q-item
+            v-if="index === 1"
+            v-ripple
+            clickable
+          >
             <q-item-section side>
               <q-avatar size="42px">
-                <img src="https://cdn.quasar.dev/img/avatar2.jpg" />
+                <img src="https://cdn.quasar.dev/img/avatar2.jpg">
               </q-avatar>
             </q-item-section>
             <q-item-section>
               <q-item-label>Jessica</q-item-label>
-              <q-item-label caption>Designer</q-item-label>
+              <q-item-label caption>
+                Designer
+              </q-item-label>
             </q-item-section>
           </q-item>
-          <q-item v-if="index === 2" clickable v-ripple>
+          <q-item
+            v-if="index === 2"
+            v-ripple
+            clickable
+          >
             <q-item-section side>
               <q-avatar size="42px">
-                <img src="https://cdn.quasar.dev/img/avatar4.jpg" />
+                <img src="https://cdn.quasar.dev/img/avatar4.jpg">
               </q-avatar>
             </q-item-section>
             <q-item-section>
               <q-item-label>Scott</q-item-label>
-              <q-item-label caption>Software Developer</q-item-label>
+              <q-item-label caption>
+                Software Developer
+              </q-item-label>
             </q-item-section>
           </q-item>
         </div>

@@ -2,17 +2,17 @@
   <div style="max-width: 800px; width: 100%;">
     <div class="col-12 full-width q-pa-md">
       <q-select
+        v-model="locale"
         outlined
         dense
         emit-value
         map-options
         label="Change locale"
-        v-model="locale"
         :options="locales"
         class="col-12"
-      ></q-select>
+      />
     </div>
-    <q-separator></q-separator>
+    <q-separator />
     <q-calendar
       v-model="selectedDate"
       view="week"

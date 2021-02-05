@@ -81,10 +81,10 @@ export default {
   methods: {
     onMouseDownTime ({ scope, event }) {
       if (leftClick(event)) {
-        if (this.mobile === true &&
-          this.anchorTimestamp !== null &&
-          this.otherTimestamp !== null &&
-          QCalendar.getDateTime(this.anchorTimestamp) === QCalendar.getDateTime(this.otherTimestamp)) {
+        if (this.mobile === true
+          && this.anchorTimestamp !== null
+          && this.otherTimestamp !== null
+          && QCalendar.getDateTime(this.anchorTimestamp) === QCalendar.getDateTime(this.otherTimestamp)) {
           this.otherTimestamp = scope.timestamp
           this.mouseDown = false
           return

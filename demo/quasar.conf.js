@@ -9,8 +9,9 @@
 
 const path = require('path')
 const ESLintPlugin = require('eslint-webpack-plugin')
+const { configure } = require('quasar/wrappers')
 
-module.exports = function (/* ctx */) {
+module.exports = configure(function (/* ctx */) {
   return {
     // https://quasar.dev/quasar-cli/supporting-ts
     supportTS: false,
@@ -66,13 +67,7 @@ module.exports = function (/* ctx */) {
       // extractCSS: false,
 
       // https://quasar.dev/quasar-cli/handling-webpack
-      // extendWebpack (cfg) {
-      //   cfg.plugins.push(new ESLintPlugin({
-      //     files: './src',
-      //     extensions: ['js', 'vue']
-      //   }))
-      // },
-
+      // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
       chainWebpack (chain) {
         chain.plugin('eslint-webpack-plugin')
           .use(ESLintPlugin, [{
@@ -87,6 +82,13 @@ module.exports = function (/* ctx */) {
           examples: path.resolve(__dirname, './src/examples')
         })
       }
+
+      // extendWebpack (cfg) {
+      //   cfg.plugins.push(new ESLintPlugin({
+      //     files: './src',
+      //     extensions: ['js', 'vue']
+      //   }))
+      // },
     },
 
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-devServer
@@ -98,16 +100,19 @@ module.exports = function (/* ctx */) {
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
     framework: {
-      iconSet: 'material-icons', // Quasar icon set
-      lang: 'en-us', // Quasar language pack
       config: {
         dark: 'auto'
       },
 
-      // Possible values for "importStrategy":
-      // * 'auto' - (DEFAULT) Auto-import needed Quasar components & directives
-      // * 'all'  - Manually specify what to import
-      importStrategy: 'auto',
+      iconSet: 'material-icons', // Quasar icon set
+      lang: 'en-US', // Quasar language pack
+
+      // For special cases outside of where the auto-import stategy can have an impact
+      // (like functional components as one of the examples),
+      // you can manually specify Quasar components/directives to be available everywhere:
+      //
+      // components: [],
+      // directives: [],
 
       // Quasar plugins
       plugins: [
@@ -213,4 +218,4 @@ module.exports = function (/* ctx */) {
       }
     }
   }
-}
+})

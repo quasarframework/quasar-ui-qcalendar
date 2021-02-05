@@ -1,15 +1,39 @@
 <template>
-  <div class="row justify-center full-width" style="max-width: 800px; width: 100%;">
+  <div
+    class="row justify-center full-width"
+    style="max-width: 800px; width: 100%;"
+  >
     <div class="row justify-center full-width q-pa-md">
       <div class="q-gutter-sm column justify-center">
-        <div class="row justify-evenly q-gutter-sm" style="width: 400px;">
+        <div
+          class="row justify-evenly q-gutter-sm"
+          style="width: 400px;"
+        >
           <span>Note: setting any height to 0 will make it 'auto'</span>
         </div>
-        <div class="row justify-evenly q-gutter-sm" style="width: 400px;">
-          <span>Resource Width</span> <q-slider v-model="resourceWidth" label label-always :min="60" :max="200"/>
+        <div
+          class="row justify-evenly q-gutter-sm"
+          style="width: 400px;"
+        >
+          <span>Resource Width</span> <q-slider
+            v-model="resourceWidth"
+            label
+            label-always
+            :min="60"
+            :max="200"
+          />
         </div>
-        <div class="row justify-evenly q-gutter-sm" style="width: 400px;">
-          <span>Resource Height</span> <q-slider v-model="resourceHeight" label label-always :min="0" :max="200"/>
+        <div
+          class="row justify-evenly q-gutter-sm"
+          style="width: 400px;"
+        >
+          <span>Resource Height</span> <q-slider
+            v-model="resourceHeight"
+            label
+            label-always
+            :min="0"
+            :max="200"
+          />
         </div>
       </div>
     </div>

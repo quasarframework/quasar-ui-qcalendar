@@ -9,7 +9,12 @@
     >
       <template #scheduler-day-header="{ timestamp }">
         <div class="row justify-center items-center">
-          <q-btn flat class="fit">Day: {{ timestamp.day }}</q-btn>
+          <q-btn
+            flat
+            class="fit"
+          >
+            Day: {{ timestamp.day }}
+          </q-btn>
         </div>
       </template>
     </q-calendar>

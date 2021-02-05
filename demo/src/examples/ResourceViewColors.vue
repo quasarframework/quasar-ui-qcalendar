@@ -1,19 +1,22 @@
 <template>
   <div class="row justify-center full-width q-pa-md">
-    <div class="column justify-center full-width q-pa-md" style="max-width: 800px; width: 100%;">
+    <div
+      class="column justify-center full-width q-pa-md"
+      style="max-width: 800px; width: 100%;"
+    >
       <div class="q-pa-md full-width">
         <q-select
+          v-model="theme"
           outlined
           dense
           emit-value
           map-options
           label="Change theme"
-          v-model="theme"
           :options="themesList"
           class="col-12"
-        ></q-select>
+        />
       </div>
-      <q-separator class="full-width"></q-separator>
+      <q-separator class="full-width" />
     </div>
     <div class="row justify-center full-width q-pa-md">
       <q-calendar
@@ -425,7 +428,7 @@ export default {
       Object.keys(this.themes).forEach((theme) => {
         list.push({
           label: theme,
-          value: { ...this.themes[theme] }
+          value: { ...this.themes[ theme ] }
         })
       })
       return list

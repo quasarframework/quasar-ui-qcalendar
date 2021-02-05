@@ -5,7 +5,7 @@
       :limits="[30, 100]"
       emit-immediately
     >
-      <template v-slot:before>
+      <template #before>
         <div style="overflow: hidden;">
           <q-calendar
             ref="calendar"
@@ -17,11 +17,16 @@
           />
         </div>
       </template>
-      <template v-slot:separator>
-        <q-avatar color="primary" text-color="white" size="40px" icon="drag_indicator" />
+      <template #separator>
+        <q-avatar
+          color="primary"
+          text-color="white"
+          size="40px"
+          icon="drag_indicator"
+        />
       </template>
-      <template v-slot:after>
-        <div style="min-width: 20px"></div>
+      <template #after>
+        <div style="min-width: 20px" />
       </template>
     </q-splitter>
   </div>

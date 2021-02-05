@@ -2,8 +2,13 @@
   <q-dialog
     v-model="openImporter"
   >
-    <div :class="classes" style="max-width: 380px; width: 100%">
-      <div class="text-title">Theme Importer</div>
+    <div
+      :class="classes"
+      style="max-width: 380px; width: 100%"
+    >
+      <div class="text-title">
+        Theme Importer
+      </div>
       <q-separator class="q-mb-md" />
       <q-input
         v-model="editorValue"
@@ -12,8 +17,15 @@
         class="full-width"
       />
       <div class="row justify-center full-width q-mt-sm q-gutter-sm">
-        <q-btn label="Import" @click="onImport" />
-        <q-btn label="Revert" @click="onRevert" :disable="stylesCopy === void 0" />
+        <q-btn
+          label="Import"
+          @click="onImport"
+        />
+        <q-btn
+          label="Revert"
+          :disable="stylesCopy === void 0"
+          @click="onRevert"
+        />
       </div>
     </div>
   </q-dialog>
@@ -29,16 +41,16 @@ export default {
     value: Boolean
   },
 
+  emits: [
+    'input'
+  ],
+
   data () {
     return {
       openImporter: false,
       editorValue: '',
       stylesCopy: void 0
     }
-  },
-
-  beforeMount () {
-    this.openImporter = this.value
   },
 
   computed: {
@@ -67,6 +79,10 @@ export default {
     }
   },
 
+  beforeMount () {
+    this.openImporter = this.value
+  },
+
   methods: {
     ...mapMutations('ThemeBuilder', [
       'setStyle'
@@ -91,8 +107,8 @@ export default {
         Object.keys(newStyles).forEach(name => {
           // make sure there is a corresponding name in styles
           // and if a match, only then import
-          if (this.style[name] !== void 0) {
-            this.setStyle({ name, value: newStyles[name] })
+          if (this.style[ name ] !== void 0) {
+            this.setStyle({ name, value: newStyles[ name ] })
           }
         })
       }
@@ -101,7 +117,7 @@ export default {
     onRevert () {
       if (this.stylesCopy !== void 0) {
         Object.keys(this.stylesCopy).forEach(name => {
-          this.setStyle({ name, value: this.stylesCopy[name] })
+          this.setStyle({ name, value: this.stylesCopy[ name ] })
         })
       }
     }

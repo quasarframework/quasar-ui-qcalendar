@@ -8,8 +8,14 @@
       style="height: 400px;"
     >
       <template #day-container="{ /* timestamp */ }">
-        <div class="day-view-current-time-indicator" :style="style" />
-        <div class="day-view-current-time-line" :style="style" />
+        <div
+          class="day-view-current-time-indicator"
+          :style="style"
+        />
+        <div
+          class="day-view-current-time-line"
+          :style="style"
+        />
       </template>
     </q-calendar>
   </div>
@@ -29,6 +35,14 @@ export default {
     }
   },
 
+  computed: {
+    style () {
+      return {
+        top: this.timeStartPos + 'px'
+      }
+    }
+  },
+
   mounted () {
     this.adjustCurrentTime()
     // now, adjust the time every minute
@@ -37,16 +51,8 @@ export default {
     }, 60000)
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     clearInterval(this.intervalId)
-  },
-
-  computed: {
-    style () {
-      return {
-        top: this.timeStartPos + 'px'
-      }
-    }
   },
 
   methods: {

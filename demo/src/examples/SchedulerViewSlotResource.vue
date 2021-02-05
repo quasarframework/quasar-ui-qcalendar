@@ -10,7 +10,12 @@
     >
       <template #scheduler-resource="{ resource /*, index */ }">
         <div class="col-12">
-          <q-btn flat class="fit" :icon="getResourceImage(resource)" :label="resource.label"/>
+          <q-btn
+            flat
+            class="fit"
+            :icon="getResourceImage(resource)"
+            :label="resource.label"
+          />
         </div>
       </template>
     </q-calendar>

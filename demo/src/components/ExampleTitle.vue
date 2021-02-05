@@ -1,5 +1,11 @@
 <template>
-  <h1 :id="slugifiedTitle" class="q-markdown--heading-h1 q-markdown--title-heavy example-title" @click="copyHeading(slugifiedTitle)">{{ title }}</h1>
+  <h1
+    :id="slugifiedTitle"
+    class="q-markdown--heading-h1 q-markdown--title-heavy example-title"
+    @click="copyHeading(slugifiedTitle)"
+  >
+    {{ title }}
+  </h1>
 </template>
 
 <script>

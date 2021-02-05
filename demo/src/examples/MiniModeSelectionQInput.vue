@@ -1,15 +1,39 @@
 <template>
-  <div class="row justify-center" style="max-width: 800px; width: 100%; overflow: hidden;">
+  <div
+    class="row justify-center"
+    style="max-width: 800px; width: 100%; overflow: hidden;"
+  >
     <div class="q-gutter-sm">
-      <q-checkbox v-model="mobile" label="Use Touch (set if on mobile)" />
+      <q-checkbox
+        v-model="mobile"
+        label="Use Touch (set if on mobile)"
+      />
     </div>
     <q-separator class="full-width" />
-    <q-input color="blue-8" filled v-model="convertedDates" @input="onInputChanged" label="Enter date range" mask="####-##-## - ####-##-##" class="q-pa-sm">
-      <template v-slot:append>
-        <div class="q-gutter-sm" style="overflow: hidden;">
+    <q-input
+      v-model="convertedDates"
+      color="blue-8"
+      filled
+      label="Enter date range"
+      mask="####-##-## - ####-##-##"
+      class="q-pa-sm"
+      @input="onInputChanged"
+    >
+      <template #append>
+        <div
+          class="q-gutter-sm"
+          style="overflow: hidden;"
+        >
           <span>
-            <q-icon name="far fa-calendar" class="cursor-pointer q-ma-md" />
-            <q-popup-proxy v-model="showCalendar" anchor="top right" self="bottom middle">
+            <q-icon
+              name="far fa-calendar"
+              class="cursor-pointer q-ma-md"
+            />
+            <q-popup-proxy
+              v-model="showCalendar"
+              anchor="top right"
+              self="bottom middle"
+            >
               <q-calendar
                 ref="calendar"
                 v-model="selectedDate"
@@ -19,10 +43,10 @@
                 short-weekday-label
                 :selected-start-end-dates="startEndDates"
                 no-active-date
+                style="width: 170px;"
                 @mousedown:day2="onMouseDownDay"
                 @mouseup:day2="onMouseUpDay"
                 @mousemove:day2="onMouseMoveDay"
-                style="width: 170px;"
               />
             </q-popup-proxy>
           </span>
@@ -94,16 +118,16 @@ export default {
 
   watch: {
     startEndDates () {
-      const [start, end] = this.startEndDates
-      this.convertedDates = `${start} - ${end}`
+      const [ start, end ] = this.startEndDates
+      this.convertedDates = `${ start } - ${ end }`
     }
   },
 
   methods: {
     onInputChanged (val) {
       const items = val.split(' - ')
-      if (items[0] && items[0].length === 10) this.anchorTimestamp = QCalendar.parseTimestamp(items[0])
-      if (items[1] && items[1].length === 10) this.otherTimestamp = QCalendar.parseTimestamp(items[1])
+      if (items[ 0 ] && items[ 0 ].length === 10) this.anchorTimestamp = QCalendar.parseTimestamp(items[ 0 ])
+      if (items[ 1 ] && items[ 1 ].length === 10) this.otherTimestamp = QCalendar.parseTimestamp(items[ 1 ])
     },
 
     calendarNext () {
@@ -116,10 +140,10 @@ export default {
 
     onMouseDownDay ({ scope, event }) {
       if (leftClick(event)) {
-        if (this.mobile === true &&
-          this.anchorTimestamp !== null &&
-          this.otherTimestamp !== null &&
-          this.anchorTimestamp.date === this.otherTimestamp.date) {
+        if (this.mobile === true
+          && this.anchorTimestamp !== null
+          && this.otherTimestamp !== null
+          && this.anchorTimestamp.date === this.otherTimestamp.date) {
           this.otherTimestamp = scope.timestamp
           this.mouseDown = false
           return

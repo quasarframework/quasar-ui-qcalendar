@@ -1,10 +1,24 @@
 <template>
   <div>
     <div class="q-gutter-sm q-mb-sm">
-      <q-checkbox v-model="mobile" dense label="Use Touch (set if on mobile)" />
-      <q-checkbox v-model="noActiveDate" dense label="No active date" />
-      <q-checkbox v-model="disabledDays" dense label="Disabled weekends" />
-      <div class="full-width text-caption">Selection Type</div>
+      <q-checkbox
+        v-model="mobile"
+        dense
+        label="Use Touch (set if on mobile)"
+      />
+      <q-checkbox
+        v-model="noActiveDate"
+        dense
+        label="No active date"
+      />
+      <q-checkbox
+        v-model="disabledDays"
+        dense
+        label="Disabled weekends"
+      />
+      <div class="full-width text-caption">
+        Selection Type
+      </div>
       <q-radio
         v-model="selectionType"
         dense
@@ -26,7 +40,9 @@
     </div>
     <div class="row justify-evenly q-gutter-sm full-width">
       <div class="col-5">
-        <div class="q-mb-md">Interval Range: </div>
+        <div class="q-mb-md">
+          Interval Range:
+        </div>
         <q-range
           v-model="intervalRange"
           label
@@ -40,7 +56,9 @@
         />
       </div>
       <div class="col-5">
-        <div class="q-mb-md">Interval Height: </div>
+        <div class="q-mb-md">
+          Interval Height:
+        </div>
         <q-slider
           v-model="intervalHeight"
           :min="20"
@@ -52,11 +70,23 @@
       </div>
     </div>
     <div class="col-12 full-width q-px-md q-pb-sm">
-      <span class="text-body2" >Interval Step (Section)</span>
+      <span class="text-body2">Interval Step (Section)</span>
       <div class="q-gutter-sm">
-        <q-radio v-model="intervalRangeStep" :val="1" label="60 min" />
-        <q-radio v-model="intervalRangeStep" :val="0.5" label="30 min" />
-        <q-radio v-model="intervalRangeStep" :val="0.25" label="15 min" />
+        <q-radio
+          v-model="intervalRangeStep"
+          :val="1"
+          label="60 min"
+        />
+        <q-radio
+          v-model="intervalRangeStep"
+          :val="0.5"
+          label="30 min"
+        />
+        <q-radio
+          v-model="intervalRangeStep"
+          :val="0.25"
+          label="15 min"
+        />
       </div>
     </div>
     <q-calendar
@@ -115,13 +145,10 @@ export default {
       selectionType: 'off'
     }
   },
-  beforeMount () {
-    this.selectedDate = this.value
-  },
 
   computed: {
     disabledWeekdays () {
-      return this.disabledDays === true ? [0, 6] : []
+      return this.disabledDays === true ? [ 0, 6 ] : []
     },
     leftLabelRange () {
       const a = Math.floor(this.intervalRange.min)
@@ -207,6 +234,9 @@ export default {
       this.selectedDates.splice(0, this.selectedDates.length)
     }
   },
+  beforeMount () {
+    this.selectedDate = this.value
+  },
   methods: {
     onToggleTime ({ scope }) {
       if (this.selectionType !== 'toggle' || scope === undefined) {
@@ -220,7 +250,7 @@ export default {
       if (this.selectedDates.includes(t)) {
         // remove the date
         for (let i = 0; i < this.selectedDates.length; ++i) {
-          if (t === this.selectedDates[i]) {
+          if (t === this.selectedDates[ i ]) {
             this.selectedDates.splice(i, 1)
             break
           }
@@ -236,10 +266,10 @@ export default {
     onMouseDownTime ({ scope, event }) {
       if (this.selectionType !== 'range') return
       if (leftClick(event)) {
-        if (this.mobile === true &&
-          this.anchorTimestamp !== null &&
-          this.otherTimestamp !== null &&
-          getDateTime(this.anchorTimestamp) === getDateTime(this.otherTimestamp)) {
+        if (this.mobile === true
+          && this.anchorTimestamp !== null
+          && this.otherTimestamp !== null
+          && getDateTime(this.anchorTimestamp) === getDateTime(this.otherTimestamp)) {
           this.otherTimestamp = scope.timestamp
           this.mouseDown = false
           return

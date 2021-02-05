@@ -1,7 +1,7 @@
 <template>
   <div style="max-width: 800px; width: 100%;">
     <q-calendar
-    ref="calendar"
+      ref="calendar"
       v-model="currentDate"
       view="week"
       locale="en-us"
@@ -9,8 +9,14 @@
     >
       <!-- eslint-disable vue/no-unused-vars -->
       <template #day-container="{ /* timestamp */ }">
-        <div class="week-view-current-time-indicator" :style="style" />
-        <div class="week-view-current-time-line" :style="style" />
+        <div
+          class="week-view-current-time-indicator"
+          :style="style"
+        />
+        <div
+          class="week-view-current-time-line"
+          :style="style"
+        />
       </template>
     </q-calendar>
   </div>
@@ -30,6 +36,14 @@ export default {
     }
   },
 
+  computed: {
+    style () {
+      return {
+        top: this.timeStartPos + 'px'
+      }
+    }
+  },
+
   mounted () {
     this.adjustCurrentTime()
     // now, adjust the time every minute
@@ -38,16 +52,8 @@ export default {
     }, 60000)
   },
 
-  beforeDestroy () {
+  beforeUnmount () {
     clearInterval(this.intervalId)
-  },
-
-  computed: {
-    style () {
-      return {
-        top: this.timeStartPos + 'px'
-      }
-    }
   },
 
   methods: {

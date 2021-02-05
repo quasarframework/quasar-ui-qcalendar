@@ -1,9 +1,22 @@
 <template>
-  <div class="row justify-center" style="max-width: 800px; width: 100%;">
+  <div
+    class="row justify-center"
+    style="max-width: 800px; width: 100%;"
+  >
     <div class="row justify-center items-center">
-      <q-btn flat dense label="Prev" @click="calendarPrev" />
+      <q-btn
+        flat
+        dense
+        label="Prev"
+        @click="calendarPrev"
+      />
       <q-separator vertical />
-      <q-btn flat dense label="Next" @click="calendarNext" />
+      <q-btn
+        flat
+        dense
+        label="Next"
+        @click="calendarNext"
+      />
     </div>
     <q-separator />
     <q-calendar

@@ -3,9 +3,9 @@
     <q-calendar
       ref="calendar"
       v-model="selectedDate"
+      v-touch-swipe.mouse.left.right="handleSwipe"
       view="month"
       locale="en-us"
-      v-touch-swipe.mouse.left.right="handleSwipe"
       animated
       transition-prev="slide-right"
       transition-next="slide-left"

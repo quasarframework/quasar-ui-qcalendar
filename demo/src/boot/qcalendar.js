@@ -1,4 +1,6 @@
-import Vue from 'vue'
+import { boot } from 'quasar/wrappers'
 import VuePlugin from 'ui' // "ui" is aliased in quasar.conf.js
 
-Vue.use(VuePlugin)
+export default boot(({ app }) => {
+  app.use(VuePlugin)
+})

@@ -1,5 +1,6 @@
 <template>
-  <q-layout view="hHh LpR fFf"> <!-- Be sure to play with the Layout demo on docs -->
+  <q-layout view="hHh LpR fFf">
+    <!-- Be sure to play with the Layout demo on docs -->
 
     <!-- (Optional) The Header -->
     <q-header elevated>
@@ -9,30 +10,38 @@
           round
           dense
           icon="menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
           aria-label="Menu"
+          @click="leftDrawerOpen = !leftDrawerOpen"
         />
 
         <q-toolbar-title>
           QCalendar <span class="text-subtitle2">v{{ version }}</span>
         </q-toolbar-title>
 
-        <div class="theme-builder-title">Theme Builder</div>
+        <div class="theme-builder-title">
+          Theme Builder
+        </div>
         <q-space />
 
-        <q-btn flat round @click="$q.dark.toggle()" :icon="$q.dark.isActive ? 'brightness_2' : 'brightness_5'" />
-        <div v-if="$q.screen.width > 500">Quasar v{{ $q.version }}</div>
+        <q-btn
+          flat
+          round
+          :icon="$q.dark.isActive ? 'brightness_2' : 'brightness_5'"
+          @click="$q.dark.toggle()"
+        />
+        <div v-if="$q.screen.width > 500">
+          Quasar v{{ $q.version }}
+        </div>
 
         <q-btn
           flat
           dense
           round
-          @click="rightDrawerOpen = !rightDrawerOpen"
           aria-label="Table of Contents"
+          @click="rightDrawerOpen = !rightDrawerOpen"
         >
           <q-icon name="menu" />
         </q-btn>
-
       </q-toolbar>
     </q-header>
 
@@ -44,7 +53,9 @@
       class="menu"
     >
       <q-list>
-        <q-item-label header>Essential Links</q-item-label>
+        <q-item-label header>
+          Essential Links
+        </q-item-label>
         <q-separator />
       </q-list>
       <essential-links />
@@ -61,25 +72,46 @@
     >
       <q-scroll-area class="fit">
         <div class="row justify-center full-width q-ma-xs q-gutter-sm">
-          <q-btn dense no-caps label="Copy Theme" @click="copyTheme" />
-          <q-btn dense no-caps label="Import Theme..." @click="importTheme" />
+          <q-btn
+            dense
+            no-caps
+            label="Copy Theme"
+            @click="copyTheme"
+          />
+          <q-btn
+            dense
+            no-caps
+            label="Import Theme..."
+            @click="importTheme"
+          />
         </div>
         <q-list dense>
           <template v-for="(value, name) in style">
             <q-item
               v-if="value !== 'unset'"
               :key="name"
-              clickable
               v-ripple
+              clickable
               dense
               :active="name === currentStyleName"
               @click="editStyle(name, value)"
             >
               <q-item-section style="max-width: 24px">
-                <div v-if="showBox(name, value)" class="theme-builder-box" :style="getStyle(name, value)" />
-                <div v-else class="small-text">{{ value }}</div>
+                <div
+                  v-if="showBox(name, value)"
+                  class="theme-builder-box"
+                  :style="getStyle(name, value)"
+                />
+                <div
+                  v-else
+                  class="small-text"
+                >
+                  {{ value }}
+                </div>
               </q-item-section>
-              <q-item-section class="small-text">{{ name }}</q-item-section>
+              <q-item-section class="small-text">
+                {{ name }}
+              </q-item-section>
             </q-item>
           </template>
         </q-list>
@@ -104,73 +136,117 @@
               v-model="calendar"
               vertical
             >
-              <q-tab name="day" icon="fas fa-calendar-day" label="Day" />
-              <q-tab name="week" icon="fas fa-calendar-week" label="Week" />
-              <q-tab name="month" icon="fas fa-calendar-alt" label="Month" />
-              <q-tab name="mini-mode" icon="far fa-calendar" label="Mini-Mode" />
-              <q-tab name="scheduler" icon="fas fa-calendar" label="Scheduler" />
-              <q-tab name="resource" icon="fas fa-grip-horizontal" label="Resource" />
-              <q-tab name="agenda" icon="view_agenda" label="Agenda" />
+              <q-tab
+                name="day"
+                icon="fas fa-calendar-day"
+                label="Day"
+              />
+              <q-tab
+                name="week"
+                icon="fas fa-calendar-week"
+                label="Week"
+              />
+              <q-tab
+                name="month"
+                icon="fas fa-calendar-alt"
+                label="Month"
+              />
+              <q-tab
+                name="mini-mode"
+                icon="far fa-calendar"
+                label="Mini-Mode"
+              />
+              <q-tab
+                name="scheduler"
+                icon="fas fa-calendar"
+                label="Scheduler"
+              />
+              <q-tab
+                name="resource"
+                icon="fas fa-grip-horizontal"
+                label="Resource"
+              />
+              <q-tab
+                name="agenda"
+                icon="view_agenda"
+                label="Agenda"
+              />
             </q-tabs>
           </div>
           <div class="col">
-            <q-tab-panels v-model="calendar" animated>
+            <q-tab-panels
+              v-model="calendar"
+              animated
+            >
               <q-tab-panel name="day">
-                <div class="text-h6">Day</div>
-                  <theme-builder-day
-                    v-model="selectedDate"
-                    :styles="style"
-                  />
+                <div class="text-h6">
+                  Day
+                </div>
+                <theme-builder-day
+                  v-model="selectedDate"
+                  :styles="style"
+                />
               </q-tab-panel>
 
               <q-tab-panel name="week">
-                <div class="text-h6">Week</div>
-                  <theme-builder-week
-                    v-model="selectedDate"
-                    :styles="style"
-                  />
+                <div class="text-h6">
+                  Week
+                </div>
+                <theme-builder-week
+                  v-model="selectedDate"
+                  :styles="style"
+                />
               </q-tab-panel>
 
               <q-tab-panel name="month">
-                <div class="text-h6">Month</div>
-                  <theme-builder-month
-                    v-model="selectedDate"
-                    :styles="style"
-                  />
+                <div class="text-h6">
+                  Month
+                </div>
+                <theme-builder-month
+                  v-model="selectedDate"
+                  :styles="style"
+                />
               </q-tab-panel>
 
               <q-tab-panel name="mini-mode">
-                <div class="text-h6">Mini-mode</div>
-                  <theme-builder-minimode
-                    v-model="selectedDate"
-                    :styles="style"
-                  />
+                <div class="text-h6">
+                  Mini-mode
+                </div>
+                <theme-builder-minimode
+                  v-model="selectedDate"
+                  :styles="style"
+                />
               </q-tab-panel>
 
               <q-tab-panel name="scheduler">
-                <div class="text-h6">Scheduler</div>
-                  <theme-builder-scheduler
-                    v-model="selectedDate"
-                    :styles="style"
-                  />
+                <div class="text-h6">
+                  Scheduler
+                </div>
+                <theme-builder-scheduler
+                  v-model="selectedDate"
+                  :styles="style"
+                />
               </q-tab-panel>
 
               <q-tab-panel name="resource">
-                <div class="text-h6">Resource</div>
-                  <theme-builder-resource
-                    v-model="selectedDate"
-                    :styles="style"
-                  />
+                <div class="text-h6">
+                  Resource
+                </div>
+                <theme-builder-resource
+                  v-model="selectedDate"
+                  :styles="style"
+                />
               </q-tab-panel>
 
               <q-tab-panel name="agenda">
-                <div class="text-h6">Agenda</div>
-                  <theme-builder-agenda
-                    v-model="selectedDate"
-                    :styles="style"
-                  />
+                <div class="text-h6">
+                  Agenda
+                </div>
+                <theme-builder-agenda
+                  v-model="selectedDate"
+                  :styles="style"
+                />
               </q-tab-panel>
-
             </q-tab-panels>
           </div>
         </div>
@@ -179,7 +255,6 @@
       <!-- This is where pages get injected -->
       <!-- <router-view /> -->
     </q-page-container>
-
   </q-layout>
 </template>
 

@@ -1,25 +1,66 @@
 <template>
-  <q-page class="column" style="overflow: hidden">
+  <q-page
+    class="column"
+    style="overflow: hidden"
+  >
     <!-- display an event -->
     <q-dialog v-model="displayEvent">
       <div>
         <q-card v-if="event">
-          <q-toolbar :class="displayClasses(event)" :style="displayStyles(event)" style="min-width: 400px;">
+          <q-toolbar
+            :class="displayClasses(event)"
+            :style="displayStyles(event)"
+            style="min-width: 400px;"
+          >
             <q-toolbar-title>
               {{ event.title }}
             </q-toolbar-title>
-            <q-btn flat round color="white" icon="delete" v-close-popup @click="deleteEvent(event)"></q-btn>
-            <q-btn flat round color="white" icon="edit" v-close-popup @click="editEvent(event)"></q-btn>
-            <q-btn flat round color="white" icon="close" v-close-popup></q-btn>
+            <q-btn
+              v-close-popup
+              flat
+              round
+              color="white"
+              icon="delete"
+              @click="deleteEvent(event)"
+            />
+            <q-btn
+              v-close-popup
+              flat
+              round
+              color="white"
+              icon="edit"
+              @click="editEvent(event)"
+            />
+            <q-btn
+              v-close-popup
+              flat
+              round
+              color="white"
+              icon="close"
+            />
           </q-toolbar>
           <q-card-section class="inset-shadow">
-            <div v-if="event.allDay" class="text-caption">{{ getEventDate(event) }}</div>
+            <div
+              v-if="event.allDay"
+              class="text-caption"
+            >
+              {{ getEventDate(event) }}
+            </div>
             {{ event.details }}
-            <div v-if="event.time" class="text-caption">
-              <div class="row full-width justify-start" style="padding-top: 12px;">
+            <div
+              v-if="event.time"
+              class="text-caption"
+            >
+              <div
+                class="row full-width justify-start"
+                style="padding-top: 12px;"
+              >
                 <div class="col-12">
                   <div class="row full-width justify-start">
-                    <div class="col-5" style="padding-left: 20px;">
+                    <div
+                      class="col-5"
+                      style="padding-left: 20px;"
+                    >
                       <strong>Start Time:</strong>
                     </div>
                     <div class="col-7">
@@ -27,7 +68,10 @@
                     </div>
                   </div>
                   <div class="row full-width justify-start">
-                    <div class="col-5" style="padding-left: 20px;">
+                    <div
+                      class="col-5"
+                      style="padding-left: 20px;"
+                    >
                       <strong>End Time:</strong>
                     </div>
                     <div class="col-7">
@@ -35,7 +79,10 @@
                     </div>
                   </div>
                   <div class="row full-width justify-start">
-                    <div class="col-5" style="padding-left: 20px;">
+                    <div
+                      class="col-5"
+                      style="padding-left: 20px;"
+                    >
                       <strong>Duration:</strong>
                     </div>
                     <div class="col-7">
@@ -47,26 +94,43 @@
             </div>
           </q-card-section>
           <q-card-actions align="right">
-            <q-btn flat label="OK" color="primary" v-close-popup></q-btn>
+            <q-btn
+              v-close-popup
+              flat
+              label="OK"
+              color="primary"
+            />
           </q-card-actions>
         </q-card>
       </div>
     </q-dialog>
     <!-- add/edit an event -->
-    <q-dialog v-model="addEvent" no-backdrop-dismiss>
+    <q-dialog
+      v-model="addEvent"
+      no-backdrop-dismiss
+    >
       <div>
         <q-form
           v-if="contextDay"
-          ref='event'
+          ref="event"
           @submit="onSubmit"
           @reset="onReset"
         >
-          <q-card v-if="addEvent" style="width: 400px;">
+          <q-card
+            v-if="addEvent"
+            style="width: 400px;"
+          >
             <q-toolbar class="bg-primary text-white">
               <q-toolbar-title>
                 {{ addOrUpdateEvent }} Event
               </q-toolbar-title>
-              <q-btn flat round color="white" icon="close" v-close-popup></q-btn>
+              <q-btn
+                v-close-popup
+                flat
+                round
+                color="white"
+                icon="close"
+              />
             </q-toolbar>
             <q-card-section class="inset-shadow">
               <q-input
@@ -99,9 +163,11 @@
                 style="padding-bottom: 20px;"
               >
                 <template #append>
-                  <q-icon name="event" class="cursor-pointer">
+                  <q-icon
+                    name="event"
+                    class="cursor-pointer"
+                  >
                     <q-popup-proxy v-model="showDateScrollerAllDay">
-
                       <q-scroller
                         v-model="eventForm.dateTimeStart"
                         view="date"
@@ -117,7 +183,6 @@
                         :style="scrollerPopupStyle160"
                         @close="() => { showDateScrollerAllDay = false }"
                       />
-
                     </q-popup-proxy>
                   </q-icon>
                 </template>
@@ -125,8 +190,8 @@
 
               <div v-else>
                 <q-input
-                  v-model="eventForm.dateTimeStart"
                   ref="dateTimeStart"
+                  v-model="eventForm.dateTimeStart"
                   label="Event start date and time"
                   mask="####-##-## ##:##"
                   :rules="[val => checkDateTimeStart() || 'Start time cannot come after end time']"
@@ -134,9 +199,11 @@
                   color="blue-6"
                 >
                   <template #append>
-                    <q-icon name="event" class="cursor-pointer">
+                    <q-icon
+                      name="event"
+                      class="cursor-pointer"
+                    >
                       <q-popup-proxy v-model="showDateTimeScrollerStart">
-
                         <q-scroller
                           v-model="eventForm.dateTimeStart"
                           view="date-time"
@@ -152,15 +219,14 @@
                           :style="scrollerPopupStyle280"
                           @close="() => { showDateTimeScrollerStart = false }"
                         />
-
                       </q-popup-proxy>
                     </q-icon>
                   </template>
                 </q-input>
 
                 <q-input
-                  v-model="eventForm.dateTimeEnd"
                   ref="dateTimeEnd"
+                  v-model="eventForm.dateTimeEnd"
                   label="Event end date and time"
                   mask="####-##-## ##:##"
                   :rules="[val => checkDateTimeEnd() || 'Start time cannot come after end time']"
@@ -168,9 +234,11 @@
                   outlined
                 >
                   <template #append>
-                    <q-icon name="event" class="cursor-pointer">
+                    <q-icon
+                      name="event"
+                      class="cursor-pointer"
+                    >
                       <q-popup-proxy v-model="showDateTimeScrollerEnd">
-
                         <q-scroller
                           v-model="eventForm.dateTimeEnd"
                           view="date-time"
@@ -186,7 +254,6 @@
                           :style="scrollerPopupStyle280"
                           @close="() => { showDateTimeScrollerEnd = false }"
                         />
-
                       </q-popup-proxy>
                     </q-icon>
                   </template>
@@ -201,18 +268,19 @@
                 style="padding-bottom: 20px;"
               >
                 <template #append>
-                  <q-icon name="extension" class="cursor-pointer">
+                  <q-icon
+                    name="extension"
+                    class="cursor-pointer"
+                  >
                     <q-popup-proxy v-model="showIconPicker">
-
                       <q-icon-picker
                         v-model="eventForm.icon"
+                        v-model:pagination="pagination"
                         :filter="eventForm.icon"
                         icon-set="fontawesome-v5"
                         tooltips
-                        :pagination.sync="pagination"
                         style="height: 300px; width: 300px; background-color: white;"
                       />
-
                     </q-popup-proxy>
                   </q-icon>
                 </template>
@@ -225,18 +293,31 @@
                 clearable
               >
                 <template #append>
-                  <q-icon name="colorize" class="cursor-pointer">
+                  <q-icon
+                    name="colorize"
+                    class="cursor-pointer"
+                  >
                     <q-popup-proxy>
-                      <q-color v-model="eventForm.bgcolor"></q-color>
+                      <q-color v-model="eventForm.bgcolor" />
                     </q-popup-proxy>
                   </q-icon>
                 </template>
               </q-input>
-
             </q-card-section>
             <q-card-actions align="right">
-              <q-btn flat label="OK" type="submit" color="primary"></q-btn>
-              <q-btn flat label="Cancel" type="reset" color="primary" v-close-popup></q-btn>
+              <q-btn
+                flat
+                label="OK"
+                type="submit"
+                color="primary"
+              />
+              <q-btn
+                v-close-popup
+                flat
+                label="Cancel"
+                type="reset"
+                color="primary"
+              />
             </q-card-actions>
           </q-card>
         </q-form>
@@ -250,11 +331,11 @@
     >
       <q-calendar
         ref="calendar"
+        :key="keyValue"
+        v-model="selectedDate"
+        v-touch-swipe.mouse.left.right="handleSwipe"
         class="calendar"
         style="height: calc(100vh - 50px)"
-        :key="keyValue"
-        v-touch-swipe.mouse.left.right="handleSwipe"
-        v-model="selectedDate"
         :locale="locale"
         :max-days="maxDays"
         :bordered="bordered"
@@ -296,49 +377,62 @@
       >
         <template #day="{ timestamp }">
           <template v-if="calendarView.indexOf('agenda') < 0">
-            <template v-for="(event, index) in getEvents(timestamp.date)">
+            <template
+              v-for="(event2, index) in getEvents(timestamp.date)"
+              :key="index"
+            >
               <q-badge
-                :key="index"
                 style="width: 100%; cursor: pointer; height: 14px; max-height: 14px"
-                :class="badgeClasses(event, 'day')"
-                :style="badgeStyles(event, 'day')"
-                @click.stop.prevent="showEvent(event)"
+                :class="badgeClasses(event2, 'day')"
+                :style="badgeStyles(event2, 'day')"
                 :draggable="true"
-                @dragstart.native="(e) => onDragStart(e, event)"
-                @dragend.native="(e) => onDragEnd(e, event)"
-                @dragenter.native="(e) => onDragEnter(e, event)"
-                @touchmove.native="(e) => {}"
+                @click.stop.prevent="showEvent(event2)"
+                @dragstart="(e) => onDragStart(e, event2)"
+                @dragend="(e) => onDragEnd(e, event2)"
+                @dragenter="(e) => onDragEnter(e, event2)"
+                @touchmove="(e) => {}"
               >
-                <q-icon v-if="event.icon" :name="event.icon" class="q-mr-xs"></q-icon><span class="ellipsis">{{ event.title }}</span>
+                <q-icon
+                  v-if="event2.icon"
+                  :name="event2.icon"
+                  class="q-mr-xs"
+                /><span class="ellipsis">{{ event2.title }}</span>
               </q-badge>
             </template>
           </template>
         </template>
 
         <template #day-header="{ timestamp }">
-          <div v-if="calendarView.indexOf('agenda') < 0" class="row justify-center">
-            <template v-for="(event, index) in eventsMap[timestamp.date]">
+          <div
+            v-if="calendarView.indexOf('agenda') < 0"
+            class="row justify-center"
+          >
+            <template v-for="(event3, index) in eventsMap[timestamp.date]">
               <q-badge
-                v-if="!event.time"
-                :key="index"
+                v-if="!event3.time"
+                :key="index + 'a'"
                 style="width: 100%; cursor: pointer; height: 14px; max-height: 14px"
-                :class="badgeClasses(event, 'header')"
-                :style="badgeStyles(event, 'header')"
-                @click.stop.prevent="showEvent(event)"
+                :class="badgeClasses(event3, 'header')"
+                :style="badgeStyles(event3, 'header')"
                 :draggable="true"
-                @dragstart.native="(e) => onDragStart(e, event)"
-                @dragend.native="(e) => onDragEnd(e, event)"
-                @dragenter.native="(e) => onDragEnter(e, event)"
-                @touchmove.native="(e) => {}"
+                @click.stop.prevent="showEvent(event3)"
+                @dragstart="(e) => onDragStart(e, event3)"
+                @dragend="(e) => onDragEnd(e, event3)"
+                @dragenter="(e) => onDragEnter(e, event3)"
+                @touchmove="(e) => {}"
               >
-                <q-icon v-if="event.icon" :name="event.icon" class="q-mr-xs"></q-icon><span class="ellipsis">{{ event.title }}</span>
+                <q-icon
+                  v-if="event3.icon"
+                  :name="event3.icon"
+                  class="q-mr-xs"
+                /><span class="ellipsis">{{ event3.title }}</span>
               </q-badge>
               <q-badge
                 v-else
-                :key="index"
+                :key="index + 'b'"
                 class="q-ma-xs self-end"
-                :class="badgeClasses(event, 'header')"
-                :style="badgeStyles(event, 'header')"
+                :class="badgeClasses(event3, 'header')"
+                :style="badgeStyles(event3, 'header')"
                 style="width: 10px; max-width: 10px; height: 10px; max-height: 10px"
               />
             </template>
@@ -347,42 +441,59 @@
 
         <template #day-body="{ timestamp, timeStartPos, timeDurationHeight }">
           <template v-if="calendarView.indexOf('agenda') < 0">
-            <template v-for="(event, index) in getEvents(timestamp.date)">
+            <template v-for="(event4, index) in getEvents(timestamp.date)">
               <q-badge
-                v-if="event.time"
+                v-if="event4.time"
                 :key="index"
                 class="my-event justify-center"
-                :class="badgeClasses(event, 'body')"
-                :style="badgeStyles(event, 'body', timeStartPos, timeDurationHeight)"
-                @click.stop.prevent="showEvent(event)"
+                :class="badgeClasses(event4, 'body')"
+                :style="badgeStyles(event4, 'body', timeStartPos, timeDurationHeight)"
                 :draggable="true"
-                @dragstart.native="(e) => onDragStart(e, event)"
-                @dragend.native="(e) => onDragEnd(e, event)"
-                @dragenter.native="(e) => onDragEnter(e, event)"
-                @touchmove.native="(e) => {}"
+                @click.stop.prevent="showEvent(event4)"
+                @dragstart="(e) => onDragStart(e, event4)"
+                @dragend="(e) => onDragEnd(e, event4)"
+                @dragenter="(e) => onDragEnter(e, event4)"
+                @touchmove="(e) => {}"
               >
-                <q-icon v-if="event.icon" :name="event.icon" class="q-mr-xs"></q-icon><span class="ellipsis">{{ event.title }}</span>
+                <q-icon
+                  v-if="event4.icon"
+                  :name="event4.icon"
+                  class="q-mr-xs"
+                /><span class="ellipsis">{{ event4.title }}</span>
               </q-badge>
             </template>
           </template>
           <template v-else>
-            <template v-for="(agenda) in getAgenda(timestamp)">
+            <template
+              v-for="(agenda2) in getAgenda(timestamp)"
+              :key="timestamp.date + agenda2.time"
+            >
               <div
-                :key="timestamp.date + agenda.time"
-                :label="agenda.time"
+                :label="agenda2.time"
                 class="justify-start q-ma-sm shadow-5 bg-grey-6"
                 style="overflow: hidden;"
               >
-                <div v-if="agenda.avatar" class="row justify-center" style="margin-top: 30px; width: 100%;">
+                <div
+                  v-if="agenda2.avatar"
+                  class="row justify-center"
+                  style="margin-top: 30px; width: 100%;"
+                >
                   <q-avatar style="margin-top: -25px; margin-bottom: 10px; font-size: 60px; max-height: 50px;">
-                    <img :src="agenda.avatar" style="border: #9e9e9e solid 5px;">
+                    <img
+                      :src="agenda2.avatar"
+                      style="border: #9e9e9e solid 5px;"
+                    >
                   </q-avatar>
                 </div>
                 <div class="col-12 q-px-sm">
-                  <strong>{{ agenda.time }}</strong>
+                  <strong>{{ agenda2.time }}</strong>
                 </div>
-                <div v-if="agenda.desc" class="col-12 q-px-sm" style="font-size: 10px;">
-                  {{ agenda.desc }}
+                <div
+                  v-if="agenda2.desc"
+                  class="col-12 q-px-sm"
+                  style="font-size: 10px;"
+                >
+                  {{ agenda2.desc }}
                 </div>
               </div>
             </template>
@@ -394,16 +505,13 @@
             <span class="q-calendar-daily__interval-text">{{ showOffset(days) }}</span>
           </div>
         </template>
-
       </q-calendar>
     </div>
   </q-page>
 </template>
 
-<style>
-</style>
-
 <script>
+import { defineComponent } from 'vue'
 import { mapGetters } from 'vuex'
 import { isCssColor } from '../util/color'
 import events from '../util/events'
@@ -429,14 +537,14 @@ const formDefault = {
 //   return e.button === 0
 // }
 
-export default {
+export default defineComponent({
   name: 'PageIndex',
 
   data () {
     return {
       keyValue: 0,
       direction: 'next',
-      weekdays: [0, 1, 2, 3, 4, 5, 6],
+      weekdays: [ 0, 1, 2, 3, 4, 5, 6 ],
       disabledDays: [
         '2019-04-02',
         '2019-04-03',
@@ -603,18 +711,6 @@ export default {
       }
     }
   },
-  mounted () {
-    this.$root.$on('calendar:next', this.calendarNext)
-    this.$root.$on('calendar:prev', this.calendarPrev)
-    this.$root.$on('calendar:today', this.calendarToday)
-    this.events = events
-    this.updateFormatters()
-  },
-  beforeDestroy () {
-    this.$root.$off('calendar:next', this.calendarNext)
-    this.$root.$off('calendar:prev', this.calendarPrev)
-    this.$root.$off('calendar:today', this.calendarToday)
-  },
   computed: {
     ...mapGetters({
       locale: 'calendar/locale',
@@ -669,7 +765,7 @@ export default {
         styles.height = 'auto'
       }
       else {
-        styles.height = `calc(100% - ${this.titlebarHeight}px)`
+        styles.height = `calc(100% - ${ this.titlebarHeight }px)`
       }
       styles.width = 'auto'
       return styles
@@ -677,7 +773,7 @@ export default {
     // convert the events into a map of lists keyed by date
     eventsMap () {
       const map = {}
-      this.events.forEach((event) => (map[event.date] = map[event.date] || []).push(event))
+      this.events.forEach((event) => (map[ event.date ] = map[ event.date ] || []).push(event))
       return map
     },
     addOrUpdateEvent () {
@@ -723,7 +819,7 @@ export default {
     // },
     fiveDayWorkWeek () {
       if (this.fiveDayWorkWeek) {
-        this.weekdays = [1, 2, 3, 4, 5]
+        this.weekdays = [ 1, 2, 3, 4, 5 ]
         this.view = '5day'
       }
       else {
@@ -731,16 +827,16 @@ export default {
           this.view = 'month'
         }
         if (this.firstDayMonday) {
-          this.weekdays = [1, 2, 3, 4, 5, 6, 0]
+          this.weekdays = [ 1, 2, 3, 4, 5, 6, 0 ]
         }
         else {
-          this.weekdays = [0, 1, 2, 3, 4, 5, 6]
+          this.weekdays = [ 0, 1, 2, 3, 4, 5, 6 ]
         }
       }
     },
     firstDayMonday () {
       if (this.fiveDayWorkWeek) {
-        this.weekdays = [1, 2, 3, 4, 5]
+        this.weekdays = [ 1, 2, 3, 4, 5 ]
         this.view = '5day'
       }
       else {
@@ -748,16 +844,28 @@ export default {
           this.view = 'month'
         }
         if (this.firstDayMonday) {
-          this.weekdays = [1, 2, 3, 4, 5, 6, 0]
+          this.weekdays = [ 1, 2, 3, 4, 5, 6, 0 ]
         }
         else {
-          this.weekdays = [0, 1, 2, 3, 4, 5, 6]
+          this.weekdays = [ 0, 1, 2, 3, 4, 5, 6 ]
         }
       }
     },
     locale () {
       this.updateFormatters()
     }
+  },
+  mounted () {
+    this.$root.$on('calendar:next', this.calendarNext)
+    this.$root.$on('calendar:prev', this.calendarPrev)
+    this.$root.$on('calendar:today', this.calendarToday)
+    this.events = events
+    this.updateFormatters()
+  },
+  beforeUnmount () {
+    this.$root.$off('calendar:next', this.calendarNext)
+    this.$root.$off('calendar:prev', this.calendarPrev)
+    this.$root.$off('calendar:today', this.calendarToday)
   },
   methods: {
     calendarNext () {
@@ -783,7 +891,7 @@ export default {
       const events = []
       for (let i = 0; i < this.events.length; ++i) {
         let added = false
-        const event = this.events[i]
+        const event = this.events[ i ]
         if (event.date === dt) {
           if (event.time !== undefined) {
             if (events.length > 0) {
@@ -791,7 +899,7 @@ export default {
               const startTime = QCalendar.parseTimestamp(event.date + ' ' + event.time)
               const endTime = QCalendar.addToDate(startTime, { minute: event.duration })
               for (let j = 0; j < events.length; ++j) {
-                const evt = events[j]
+                const evt = events[ j ]
                 if (evt.time !== undefined) {
                   const startTime2 = QCalendar.parseTimestamp(evt.date + ' ' + evt.time)
                   const endTime2 = QCalendar.addToDate(startTime2, { minute: evt.duration })
@@ -894,14 +1002,14 @@ export default {
     },
     getEventDate (event) {
       const parts = event.date.split('-')
-      const date = new Date(parts[0], parts[1] - 1, parts[2])
+      const date = new Date(parts[ 0 ], parts[ 1 ] - 1, parts[ 2 ])
       return this.dateFormatter.format(date)
     },
     badgeClasses (event, type) {
       const cssColor = isCssColor(event.bgcolor)
       const isHeader = type === 'header'
       return {
-        [`text-white bg-${event.bgcolor}`]: !cssColor,
+        [ `text-white bg-${ event.bgcolor }` ]: !cssColor,
         'full-width': !isHeader && (!event.side || event.side === 'full'),
         'left-side': !isHeader && event.side === 'left',
         'right-side': !isHeader && event.side === 'right'
@@ -910,7 +1018,7 @@ export default {
     badgeStyles (event, type, timeStartPos, timeDurationHeight) {
       const s = {}
       if (isCssColor(event.bgcolor)) {
-        s['background-color'] = event.bgcolor
+        s[ 'background-color' ] = event.bgcolor
         s.color = colors.luminosity(event.bgcolor) > 0.5 ? 'black' : 'white'
       }
       if (timeStartPos) {
@@ -930,19 +1038,19 @@ export default {
       if (timeDurationHeight) {
         s.height = timeDurationHeight(event.duration) + 'px'
       }
-      s['align-items'] = 'flex-start'
+      s[ 'align-items' ] = 'flex-start'
       return s
     },
     displayClasses (event) {
       return {
-        [`bg-${event.bgcolor}`]: !isCssColor(event.bgcolor),
+        [ `bg-${ event.bgcolor }` ]: !isCssColor(event.bgcolor),
         'text-white': !isCssColor(event.bgcolor)
       }
     },
     displayStyles (event) {
       const s = {}
       if (isCssColor(event.bgcolor)) {
-        s['background-color'] = event.bgcolor
+        s[ 'background-color' ] = event.bgcolor
         s.color = colors.luminosity(event.bgcolor) > 0.5 ? 'black' : 'white'
       }
       return s
@@ -1014,9 +1122,9 @@ export default {
     },
     findEventIndex (event) {
       for (let i = 0; i < this.events.length; ++i) {
-        if (event.title === this.events[i].title &&
-          event.details === this.events[i].details &&
-          event.date === this.events[i].date) {
+        if (event.title === this.events[ i ].title
+          && event.details === this.events[ i ].details
+          && event.date === this.events[ i ].date) {
           return i
         }
       }
@@ -1048,49 +1156,55 @@ export default {
 
     saveEvent () {
       const self = this
-      this.$refs.event.validate().then((success) => {
-        if (success) {
+      this.$refs.event.validate()
+        .then((success) => {
+          if (success) {
           // close the dialog
-          self.addEvent = false
-          const form = { ...self.eventForm }
-          let update = false
-          if (self.contextDay.bgcolor) {
+            self.addEvent = false
+            const form = { ...self.eventForm }
+            let update = false
+            if (self.contextDay.bgcolor) {
             // an update
-            update = true
-          }
-          else {
-            // an add
-          }
-          const data = {
-            title: form.title,
-            details: form.details,
-            icon: form.icon,
-            bgcolor: form.bgcolor,
-            date: String(form.dateTimeStart).slice(0, 10).replace(/\//g, '-')
-          }
-          if (form.allDay === false) {
-            // get time into separate var
-            data.time = String(form.dateTimeStart).slice(11, 16)
-            data.duration = self.getDuration(form.dateTimeStart, form.dateTimeEnd, 'minutes')
-          }
-          if (update === true) {
-            const index = self.findEventIndex(self.contextDay)
-            if (index >= 0) {
-              self.events.splice(index, 1, { ...data })
+              update = true
             }
-          }
-          else {
+            else {
+            // an add
+            }
+            const data = {
+              title: form.title,
+              details: form.details,
+              icon: form.icon,
+              bgcolor: form.bgcolor,
+              date: String(form.dateTimeStart).slice(0, 10).replace(/\//g, '-')
+            }
+            if (form.allDay === false) {
+            // get time into separate var
+              data.time = String(form.dateTimeStart).slice(11, 16)
+              data.duration = self.getDuration(form.dateTimeStart, form.dateTimeEnd, 'minutes')
+            }
+            if (update === true) {
+              const index = self.findEventIndex(self.contextDay)
+              if (index >= 0) {
+                self.events.splice(index, 1, { ...data })
+              }
+            }
+            else {
             // add to events array
-            self.events.push(data)
-          }
+              self.events.push(data)
+            }
 
-          self.contextDay = null
-        }
-      })
+            self.contextDay = null
+            return true
+          }
+          return false
+        })
+        .catch(error => {
+          throw error
+        })
     },
     showOffset (days) {
       if (days.length === 0) return
-      const val = padTime(new Date(this.getTimestampString(days[0])).getTimezoneOffset() / 60)
+      const val = padTime(new Date(this.getTimestampString(days[ 0 ])).getTimezoneOffset() / 60)
       if (isNaN(val)) return ''
       return 'GMT-' + val
     },
@@ -1176,10 +1290,10 @@ export default {
       }
     },
     getAgenda (timestamp) {
-      return this.agenda[parseInt(timestamp.weekday, 10)]
+      return this.agenda[ parseInt(timestamp.weekday, 10) ]
     }
   }
-}
+})
 </script>
 
 <style lang="sass">
