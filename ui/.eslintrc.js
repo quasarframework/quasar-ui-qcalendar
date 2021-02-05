@@ -43,7 +43,7 @@ module.exports = {
     // required to lint *.vue files
     'vue',
     'jsdoc',
-    'standard',
+    // 'standard',
     'node',
     'promise',
     'import'
