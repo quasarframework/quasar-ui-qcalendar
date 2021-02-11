@@ -47,6 +47,10 @@ module.exports = {
     ga: true, // Google Analytics
     cordova: true,
     __statics: true,
+    __QUASAR_SSR__: true,
+    __QUASAR_SSR_SERVER__: true,
+    __QUASAR_SSR_CLIENT__: true,
+    __QUASAR_SSR_PWA__: true,
     process: true,
     Capacitor: true,
     chrome: true
