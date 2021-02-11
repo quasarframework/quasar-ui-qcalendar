@@ -1,10 +1,11 @@
 {
   "name": "qcalendar",
   "version": "1.0.0",
-  "description": "QCalendar is the quickest Calendar for Vue 3",
+  "description": "Vetur config for mono-repos",
   "main": "vetur.config.js",
   "author": "Jeff Galbraith <jeff@quasar.dev>",
   "license": "MIT",
+  "private": true,
   "devDependencies": {
     "fast-glob": "^3.2.5"
   }
