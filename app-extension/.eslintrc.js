@@ -11,10 +11,17 @@ module.exports = {
   },
 
   extends: [
-    // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
-    // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
-    'plugin:vue/essential',
-    '@vue/standard'
+    // Base ESLint recommended rules
+    // 'eslint:recommended',
+
+    // Uncomment any of the lines below to choose desired strictness,
+    // but leave only one uncommented!
+    // See https://eslint.vuejs.org/rules/#available-rules
+    'plugin:vue/vue3-essential', // Priority A: Essential (Error Prevention)
+    // 'plugin:vue/vue3-strongly-recommended', // Priority B: Strongly Recommended (Improving Readability)
+    // 'plugin:vue/vue3-recommended', // Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead)
+
+    'standard'
   ],
 
   // required to lint *.vue files

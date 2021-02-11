@@ -1,4 +1,5 @@
-import Vue from 'vue'
 import VuePlugin from '@quasar/quasar-ui-qcalendar'
 
-Vue.use(VuePlugin)
+export default ({ app }) => {
+  app.use(VuePlugin);
+}
