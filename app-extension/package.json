@@ -40,11 +40,14 @@
     "@quasar/quasar-ui-qcalendar": "^3.3.5"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.12.16",
     "@vue/eslint-config-standard": "^6.0.0",
-    "babel-eslint": "^10.1.0",
     "eslint": "^7.19.0",
-    "eslint-loader": "^4.0.2",
-    "eslint-plugin-vue": "^7.5.0"
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-vue": "^7.5.0",
+    "eslint-webpack-plugin": "^2.5.0"
   },
   "engines": {
     "node": ">= 10.0.0",
