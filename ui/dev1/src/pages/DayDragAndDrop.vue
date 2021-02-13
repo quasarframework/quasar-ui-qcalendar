@@ -1,0 +1,238 @@
+<template>
+  <div style="display: flex; flex-direction: column; width: 100%;">
+    <div style="display: flex; justify-content: center; width: 100%; font-size: 12px;">Drag any items in the list to a calendar interval or the top header.</div>
+    <div style="display: flex; justify-content: center; width: 100%; padding: 6px;">
+      <div style="margin: 10px;">
+        <ul class="list">
+          <li
+            v-for="item in dragItems"
+            :key="item.id"
+            class="list-item"
+            draggable="true"
+            @dragstart="onDragStart($event, item)"
+          >
+            {{ item.name }}
+          </li>
+        </ul>
+      </div>
+      <QCalendarDay
+        ref="calendar"
+        v-model="selectedDate"
+        view="day"
+        :interval-class="onIntervalClass"
+        :interval-start="24"
+        :interval-minutes="15"
+        :interval-count="56"
+        :interval-height="28"
+        :weekdays="[1,2,3,4,5]"
+        hoverable
+        bordered
+        style="max-width: 800px; width: 100%; height: 400px; display: inline-flex;"
+        :drag-enter-func="onDragEnter"
+        :drag-over-func="onDragOver"
+        :drag-leave-func="onDragLeave"
+        :drop-func="onDrop"
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-time="onClickTime"
+        @click-interval="onClickInterval"
+        @click-head-intervals="onClickHeadIntervals"
+        @click-head-day="onClickHeadDay"
+      >
+        <template #head-date="{ scope: { timestamp } }">
+          <div
+            v-if="allDayEventsMap[timestamp.date] && allDayEventsMap[timestamp.date].length > 0"
+            style="display: flex; justify-content: space-evenly; flex-wrap: nowrap; align-items: center; font-weight: 400; font-size: 12px;"
+          >
+            <template
+              v-for="event in allDayEventsMap[timestamp.date]"
+              :key="event.time"
+            >
+              <div style="flex-wrap: nowrap;">
+                {{ event.name }}
+              </div>
+            </template>
+          </div>
+        </template>
+
+        <template #day-interval="{ scope: { timestamp } }">
+          <div
+            v-if="hasEvents(timestamp)"
+            style="display: flex; justify-content: space-evenly; flex-wrap: nowrap; align-items: center; font-size: 12px;"
+          >
+            <template
+              v-for="event in getEvents(timestamp)"
+              :key="event.time"
+            >
+              <div style="flex-wrap: nowrap; border: 1px solid pink; border-radius: 2px; padding: 2px; margin: 1px;">
+                {{ event.name }}: {{ event.time }}
+              </div>
+            </template>
+          </div>
+        </template>
+      </QCalendarDay>
+    </div>
+  </div>
+</template>
+
+<script>
+import { QCalendarDay } from '@quasar/quasar-ui-qcalendar/QCalendarDay.js'
+import { today } from '@quasar/quasar-ui-qcalendar/Timestamp.js'
+import '@quasar/quasar-ui-qcalendar/QCalendarVariables.sass'
+import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
+import '@quasar/quasar-ui-qcalendar/QCalendarDay.sass'
+
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  name: 'DayDragAndDrop',
+  components: {
+    QCalendarDay
+  },
+  data () {
+    return {
+      selectedDate: today(),
+      dragItems: [
+        {
+          id: 1,
+          name: 'Appointment'
+        },
+        {
+          id: 2,
+          name: 'Reminder'
+        },
+        {
+          id: 3,
+          name: 'Task'
+        }
+      ],
+      defaultEvent: {
+        id: 0,
+        type: 0,
+        name: '',
+        date: '',
+        time: '',
+        allDay: false
+      },
+      events: []
+    }
+  },
+
+  computed: {
+    // convert the events into a map of lists keyed by date
+    eventsMap () {
+      const map = {}
+      this.events.forEach(event => event.allDay !== true && ((map[ event.date ] = map[ event.date ] || []).push(event)))
+      return map
+    },
+
+    allDayEventsMap () {
+      const map = {}
+      if (this.events.length > 0) {
+        this.events.forEach(event => event.allDay === true && ((map[ event.date ] = map[ event.date ] || []).push(event)))
+      }
+      return map
+    }
+  },
+
+  methods: {
+    onDragStart (event, item) {
+      console.log('onDragStart called')
+      event.dataTransfer.dropEffect = 'copy'
+      event.dataTransfer.effectAllowed = 'move'
+      event.dataTransfer.setData('ID', item.id)
+    },
+
+    onDragEnter (e, type, scope) {
+      console.log('onDragEnter')
+      event.preventDefault()
+      return true
+    },
+
+    onDragOver (e, type, scope) {
+      console.log('onDragOver')
+      event.preventDefault()
+      return true
+    },
+
+    onDragLeave (e, type, scope) {
+      console.log('onDragLeave')
+      return false
+    },
+
+    onDrop (e, type, scope) {
+      console.log('onDrop')
+      const itemID = parseInt(e.dataTransfer.getData('ID'), 10)
+      const event = { ...this.defaultEvent }
+      event.id = this.events.length + 1
+      const item = this.dragItems.filter(item => item.id === itemID)
+      event.type = item[ 0 ].id
+      event.name = item[ 0 ].name
+      event.date = scope.timestamp.date
+      if (type === 'interval') {
+        event.time = scope.timestamp.time
+      }
+      else { // head-day
+        event.allDay = true
+      }
+      this.events.push(event)
+      return false
+    },
+
+    getEvents (timestamp) {
+      const times = this.eventsMap[ timestamp.date ]
+      if (times) {
+        return times.filter(item => item.time === timestamp.time)
+      }
+      return []
+    },
+
+    hasEvents (timestamp) {
+      return this.getEvents(timestamp).length > 0
+    },
+
+    onIntervalClass ({ scope }) {
+      return {
+        droppable: scope.droppable === true
+      }
+    },
+
+    onMoved (data) {
+      console.log('onMoved', data)
+    },
+    onChange (data) {
+      console.log('onChange', data)
+    },
+    onClickDate (data) {
+      console.log('onClickDate', data)
+    },
+    onClickTime (data) {
+      console.log('onClickTime', data)
+    },
+    onClickInterval (data) {
+      console.log('onClickInterval', data)
+    },
+    onClickHeadIntervals (data) {
+      console.log('onClickHeadIntervals', data)
+    },
+    onClickHeadDay (data) {
+      console.log('onClickHeadDay', data)
+    }
+  }
+})
+</script>
+
+<style lang="sass" scoped>
+.list
+  margin: 0
+  list-style-type: none
+.list-item
+  text-align: left
+  margin: 4px
+</style>
+
+<style lang="sass">
+.droppable
+  box-shadow: inset 0 0 0 1px blue
+</style>

@@ -13,7 +13,7 @@ module.exports = {
   settings: {
     'vetur.useWorkspaceDependencies': true,
     'vetur.validation.template': false,
-    'vetur.experimental.templateInterpolationService': true,
+    'vetur.experimental.templateInterpolationService': true
   },
   // support monorepos
   projects

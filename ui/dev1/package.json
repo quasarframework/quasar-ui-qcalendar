@@ -1,0 +1,50 @@
+{
+  "name": "dev",
+  "version": "0.0.1",
+  "description": "A Quasar Framework app",
+  "productName": "Quasar App",
+  "author": "Jeff Galbraith <jeff.galbraith@xendra.com>",
+  "private": true,
+  "scripts": {
+    "lint": "eslint --ext .js,.vue ./",
+    "lint-fix": "eslint --ext .js,.vue src --fix",
+    "dev": "quasar dev",
+    "dev:ssr": "quasar dev -m ssr",
+    "dev:ios": "quasar dev -m ios",
+    "dev:android": "quasar dev -m android",
+    "dev:electron": "quasar dev -m electron"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.0.0",
+    "core-js": "^3.6.5",
+    "quasar": "^2.0.0-beta.1"
+  },
+  "devDependencies": {
+    "@quasar/app": "^3.0.0-beta.1",
+    "@vue/eslint-config-standard": "^6.0.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^7.14.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-vue": "^7.0.0",
+    "eslint-webpack-plugin": "^2.4.0"
+  },
+  "browserslist": [
+    "last 10 Chrome versions",
+    "last 10 Firefox versions",
+    "last 4 Edge versions",
+    "last 7 Safari versions",
+    "last 8 Android versions",
+    "last 8 ChromeAndroid versions",
+    "last 8 FirefoxAndroid versions",
+    "last 10 iOS versions",
+    "last 5 Opera versions"
+  ],
+  "engines": {
+    "node": ">= 10.18.1",
+    "npm": ">= 6.13.4",
+    "yarn": ">= 1.21.1"
+  }
+}
