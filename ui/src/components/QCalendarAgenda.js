@@ -16,7 +16,7 @@ export default defineComponent({
   // emits: [],
 
   setup (props, { slots, emit }) {
-    return h('div')
+    return () => h('div')
   }
 
 })
