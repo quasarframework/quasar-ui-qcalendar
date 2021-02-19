@@ -1,3 +1,4 @@
+// Vetur mono-repo support
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const fg = require('fast-glob')
 const projects = fg.sync('./*', {
@@ -13,7 +14,7 @@ module.exports = {
   settings: {
     'vetur.useWorkspaceDependencies': true,
     'vetur.validation.template': false,
-    'vetur.experimental.templateInterpolationService': true
+    'vetur.experimental.templateInterpolationService': false
   },
   // support monorepos
   projects

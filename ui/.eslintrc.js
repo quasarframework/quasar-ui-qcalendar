@@ -4,13 +4,11 @@ module.exports = {
   // Remove this if you have an higher level ESLint config file (it usually happens into a monorepos)
   root: true,
 
-  parser: "@babel/eslint-parser",
+  parser: '@babel/eslint-parser',
   parserOptions: {
     ecmaVersion: 2019, // Allows for the parsing of modern ECMAScript features
     sourceType: 'module', // Allows for the use of imports
-    ecmaFeatures: {
-      jsx: true
-    }
+    requireConfigFile: false
   },
 
   env: {
@@ -27,15 +25,15 @@ module.exports = {
     // Uncomment any of the lines below to choose desired strictness,
     // but leave only one uncommented!
     // See https://eslint.vuejs.org/rules/#available-rules
-    // 'plugin:vue/vue3-essential', // Priority A: Essential (Error Prevention)
+    'plugin:vue/vue3-essential', // Priority A: Essential (Error Prevention)
     // 'plugin:vue/vue3-strongly-recommended', // Priority B: Strongly Recommended (Improving Readability)
-    'plugin:vue/vue3-recommended', // Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead)
+    // 'plugin:vue/vue3-recommended', // Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead)
 
     // 'plugin:quasar/standard',
 
-    'standard',
+    'standard'
     // 'plugin:jest/recommended',
-    'plugin:promise/recommended'
+    // 'plugin:promise/recommended'
   ],
 
   plugins: [
@@ -43,11 +41,11 @@ module.exports = {
     // required to lint *.vue files
     'vue',
     'jest',
-    'jsdoc',
+    'jsdoc'
     // 'standard',
-    'node',
-    'promise',
-    'import'
+    // 'node',
+    // 'promise',
+    // 'import'
   ],
 
   globals: {
