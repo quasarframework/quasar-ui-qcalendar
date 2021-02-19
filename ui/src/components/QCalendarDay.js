@@ -598,8 +598,8 @@ export default defineComponent({
           return h('div', {
             class: 'q-calendar__header--inline'
           }, [
-            props.noDefaultHeaderBtn !== true && __renderHeadDayDate(day),
-            props.noDefaultHeaderText !== true && __renderHeadWeekday(day)
+            props.noDefaultHeaderText !== true && __renderHeadWeekday(day),
+            props.noDefaultHeaderBtn !== true && __renderHeadDayDate(day)
           ])
         }
         else {
@@ -624,8 +624,8 @@ export default defineComponent({
           return h('div', {
             class: 'q-calendar__header--inline'
           }, [
-            props.noDefaultHeaderText !== true && __renderHeadWeekday(day),
-            props.noDefaultHeaderBtn !== true && __renderHeadDayDate(day)
+            props.noDefaultHeaderBtn !== true && __renderHeadDayDate(day),
+            props.noDefaultHeaderText !== true && __renderHeadWeekday(day)
           ])
         }
         else {
