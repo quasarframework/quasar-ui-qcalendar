@@ -45,7 +45,7 @@
       <div class="fit q-pa-sm">
         <div
           v-if="$route.path !== '/'"
-          style="width: 100%; text-align: left"
+          style="width: 100%; text-align: left; margin: 8px;"
         >
           <button
             class="button"
