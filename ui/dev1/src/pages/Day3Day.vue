@@ -1,26 +1,28 @@
 <template>
   <div style="margin: 12px;">
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onToday"
-    >
-      Today
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onPrev"
-    >
-      &lt; Prev
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onNext"
-    >
-      Next &gt;
-    </button>
+    <div class="button-bar">
+      <button
+        class="button"
+        style="margin: 2px;"
+        @click="onToday"
+      >
+        Today
+      </button>
+      <button
+        class="button"
+        style="margin: 2px;"
+        @click="onPrev"
+      >
+        &lt; Prev
+      </button>
+      <button
+        class="button"
+        style="margin: 2px;"
+        @click="onNext"
+      >
+        Next &gt;
+      </button>
+    </div>
     <div
       class="line"
     >
