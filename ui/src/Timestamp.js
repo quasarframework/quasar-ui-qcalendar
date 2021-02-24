@@ -1,3 +1,4 @@
+import { version } from '../package.json'
 import {
   PARSE_REGEX,
   PARSE_TIME,
@@ -78,7 +79,7 @@ import {
 } from './utils/helpers.js'
 
 export {
-  // version,
+  version,
   PARSE_REGEX,
   PARSE_TIME,
   DAYS_IN_MONTH,
@@ -156,7 +157,7 @@ export {
 }
 
 export default {
-  // version,
+  version,
   PARSE_REGEX,
   PARSE_TIME,
   DAYS_IN_MONTH,
