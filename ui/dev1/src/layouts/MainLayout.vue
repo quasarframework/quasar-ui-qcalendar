@@ -45,7 +45,7 @@
       <div class="fit q-pa-sm">
         <div
           v-if="$route.path !== '/'"
-          style="width: 100%; text-align: left; margin: 8px;"
+          style="width: 100%; text-align: left; margin: 8px; display: flex;"
         >
           <button
             class="button"
@@ -53,7 +53,17 @@
           >
             Home
           </button>
+          <div style="display: flex; justify-content: center;">
+            <a
+              v-if="path !== null"
+              :href="path"
+              target="_blank"
+              class="button link"
+            >View Source on Github
+            </a>
+          </div>
         </div>
+
         <div class="flex flex-center">
           <div style="max-width: 800px; width: 100%;">
             <router-view />
