@@ -122,8 +122,8 @@ const linksList = [
   }
 ]
 
-import { defineComponent, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { defineComponent, ref, onMounted, watch } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 
 export default defineComponent({
   name: 'MainLayout',
@@ -133,10 +133,31 @@ export default defineComponent({
   },
 
   setup () {
-    const $router = useRouter()
-    const leftDrawerOpen = ref(false)
+    const path = ref(null),
+      basePath = 'https://github.com/quasarframework/quasar-ui-qcalendar/tree/next/ui/dev1/src/pages/',
+      $router = useRouter(),
+      $route = useRoute(),
+      leftDrawerOpen = ref(false)
+
+    onMounted(() => {
+      handleRouteChange()
+    })
+
+    watch($route, () => {
+      handleRouteChange()
+    })
+
+    function handleRouteChange () {
+      if ($route.fullPath === '/' || $route.name === undefined) {
+        path.value = null
+      }
+      else {
+        path.value = basePath + $route.name + '.vue'
+      }
+    }
 
     return {
+      path,
       essentialLinks: linksList,
       leftDrawerOpen,
       toggleLeftDrawer () {
