@@ -111,7 +111,7 @@ export default defineComponent({
       }
       return props.view
     })
-  
+
     const vm = getCurrentInstance()
     if (vm === null) {
       throw new Error('current instance is null')
@@ -863,7 +863,7 @@ export default defineComponent({
         resources = props.modelResources
       }
       return resources.map((resource, resourceIndex) => {
-        return  __renderResourceRow(resource, resourceIndex, indentLevel, expanded)
+        return __renderResourceRow(resource, resourceIndex, indentLevel, expanded)
       })
     }
 
@@ -872,7 +872,7 @@ export default defineComponent({
       const style = { height: height }
 
       const resourceRow = h('div', {
-        key: resource[props.resourceKey],
+        key: resource[ props.resourceKey ],
         class: {
           'q-calendar-scheduler__resource--row': true,
           'q-calendar__child': indentLevel > 0,
@@ -906,17 +906,17 @@ export default defineComponent({
         style.minHeight = convertToUnit(parseInt(props.dayMinHeight, 10))
       }
       const styler = props.resourceStyle || styleDefault
-      const label = resource[props.resourceLabel]
+      const label = resource[ props.resourceLabel ]
 
       const isFocusable = props.focusable === true && props.focusType.includes('resource') && expanded === true
       const scope = { resource, days: days.value, resourceIndex, indentLevel, label }
-      const dragValue = resource[props.resourceKey]
+      const dragValue = resource[ props.resourceKey ]
       scope.droppable = dragOverResource.value === dragValue
       const resourceClass = typeof props.resourceClass === 'function' ? props.resourceClass({ scope }) : {}
 
       return h('div', {
-        key: resource[props.resourceKey],
-        ref: (el) => { resourcesRef.value[ resource[props.resourceKey] ] = el },
+        key: resource[ props.resourceKey ],
+        ref: (el) => { resourcesRef.value[ resource[ props.resourceKey ] ] = el },
         tabindex: isFocusable === true ? 0 : -1,
         class: {
           'q-calendar-scheduler__resource': indentLevel === 0,
@@ -980,34 +980,35 @@ export default defineComponent({
         slotResourceLabel
           ? slotResourceLabel({ scope })
           : [
-            h('div', {
-              class: {
-                'q-calendar__parent': resource.children !== undefined,
-                'q-calendar__parent--expanded': resource.children !== undefined && resource.expanded === true,
-                'q-calendar__parent--collapsed': resource.children !== undefined && resource.expanded !== true
-              },
-              onClick: (e) => {
-                e.stopPropagation()
-                resource.expanded = !resource.expanded
-                emit('update:modelResources', props.modelResources)
-                emit('resource-expanded', { expanded: resource.expanded, scope })
-                nextTick(() => {
-                  __updateScrollbar() // verify scrollbar
-                })
-              }
-            }),
-            h('div', {
-            class: {
-              'q-calendar-scheduler__resource--text': true,
-              'q-calendar__overflow-wrap': true
-            },
-            style: {
-              paddingLeft: (10 * indentLevel + 2) + 'px'
-            }}, [
-              label
-            ]),
-            useFocusHelper()
-          ]
+              h('div', {
+                class: {
+                  'q-calendar__parent': resource.children !== undefined,
+                  'q-calendar__parent--expanded': resource.children !== undefined && resource.expanded === true,
+                  'q-calendar__parent--collapsed': resource.children !== undefined && resource.expanded !== true
+                },
+                onClick: (e) => {
+                  e.stopPropagation()
+                  resource.expanded = !resource.expanded
+                  emit('update:modelResources', props.modelResources)
+                  emit('resource-expanded', { expanded: resource.expanded, scope })
+                  nextTick(() => {
+                    __updateScrollbar() // verify scrollbar
+                  })
+                }
+              }),
+              h('div', {
+                class: {
+                  'q-calendar-scheduler__resource--text': true,
+                  'q-calendar__overflow-wrap': true
+                },
+                style: {
+                  paddingLeft: (10 * indentLevel + 2) + 'px'
+                }
+              }, [
+                label
+              ]),
+              useFocusHelper()
+            ]
       ])
     }
 
@@ -1045,7 +1046,7 @@ export default defineComponent({
 
       const styler = props.dayStyle || dayStyleDefault
       const activeDate = props.noActiveDate !== true && parsedValue.value.date === day.date
-      const dragValue = day.date + ':' + resource[props.resourceKey] + (columnIndex !== undefined ? ':' + columnIndex : '')
+      const dragValue = day.date + ':' + resource[ props.resourceKey ] + (columnIndex !== undefined ? ':' + columnIndex : '')
       const droppable = dragOverResource.value === dragValue
       const scope = { timestamp: day, columnIndex, resource, resourceIndex, indentLevel, activeDate, droppable }
 
