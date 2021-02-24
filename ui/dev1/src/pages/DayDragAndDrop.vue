@@ -1,13 +1,37 @@
 <template>
+  <div style="margin: 12px;">
+    <button
+      class="button"
+      style="margin: 2px;"
+      @click="onToday"
+    >
+      Today
+    </button>
+    <button
+      class="button"
+      style="margin: 2px;"
+      @click="onPrev"
+    >
+      &lt; Prev
+    </button>
+    <button
+      class="button"
+      style="margin: 2px;"
+      @click="onNext"
+    >
+      Next &gt;
+    </button>
+    <div class="line">Drag any items in the list to a calendar interval or the top header.</div>
+  </div>
+
   <div style="display: flex; flex-direction: column; width: 100%;">
-    <div style="display: flex; justify-content: center; width: 100%; font-size: 12px;">Drag any items in the list to a calendar interval or the top header.</div>
     <div style="display: flex; justify-content: center; width: 100%; padding: 6px;">
       <div style="margin: 10px;">
         <ul class="list">
           <li
             v-for="item in dragItems"
             :key="item.id"
-            class="list-item"
+            class="button list-item"
             draggable="true"
             @dragstart="onDragStart($event, item)"
           >
@@ -19,6 +43,7 @@
         ref="calendar"
         v-model="selectedDate"
         view="day"
+        :weekday-class="onWeekdayClass"
         :interval-class="onIntervalClass"
         :interval-start="24"
         :interval-minutes="15"
@@ -26,6 +51,7 @@
         :interval-height="28"
         :weekdays="[1,2,3,4,5]"
         hoverable
+        animated
         bordered
         style="max-width: 800px; width: 100%; height: 400px; display: inline-flex;"
         :drag-enter-func="onDragEnter"
@@ -146,13 +172,13 @@ export default defineComponent({
 
     onDragEnter (e, type, scope) {
       console.log('onDragEnter')
-      event.preventDefault()
+      e.preventDefault()
       return true
     },
 
     onDragOver (e, type, scope) {
       console.log('onDragOver')
-      event.preventDefault()
+      e.preventDefault()
       return true
     },
 
@@ -198,6 +224,21 @@ export default defineComponent({
       }
     },
 
+    onWeekdayClass ({ scope }) {
+      return {
+        droppable: scope.droppable === true
+      }
+    },
+
+    onToday () {
+      this.$refs.calendar.moveToToday()
+    },
+    onPrev () {
+      this.$refs.calendar.prev()
+    },
+    onNext () {
+      this.$refs.calendar.next()
+    },
     onMoved (data) {
       console.log('onMoved', data)
     },
@@ -222,15 +263,6 @@ export default defineComponent({
   }
 })
 </script>
-
-<style lang="sass" scoped>
-.list
-  margin: 0
-  list-style-type: none
-.list-item
-  text-align: left
-  margin: 4px
-</style>
 
 <style lang="sass">
 .droppable

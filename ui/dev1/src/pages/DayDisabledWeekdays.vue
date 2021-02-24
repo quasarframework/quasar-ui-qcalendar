@@ -21,6 +21,7 @@
     >
       Next &gt;
     </button>
+    <div class="line">The weekends have been disabled with the <code class="token">disabled-weekdays</code> property.</div>
   </div>
 
   <QCalendarDay

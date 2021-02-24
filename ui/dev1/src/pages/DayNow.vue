@@ -21,6 +21,7 @@
     >
       Next &gt;
     </button>
+    <div style="width: 100%;">The current date has been set to tomorrow via the <code class="token">now</code> property.</div>
   </div>
 
   <QCalendarDay

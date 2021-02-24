@@ -21,6 +21,7 @@
     >
       Next &gt;
     </button>
+    <div class="line">The next 4 days after the current day have been disabled with the <code class="token">disabled-days</code> property.</div>
   </div>
 
   <QCalendarDay

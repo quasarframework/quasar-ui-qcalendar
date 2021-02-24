@@ -23,6 +23,7 @@
         Next &gt;
       </button>
     </div>
+    <div class="line">The example below uses the <code class="token">selected-dates</code> property in conjunction with mouse events to toggle selected intervals.</div>
   </div>
 
   <QCalendarDay

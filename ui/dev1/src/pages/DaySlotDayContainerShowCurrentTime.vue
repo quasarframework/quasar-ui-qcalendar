@@ -1,26 +1,29 @@
 <template>
   <div style="margin: 12px;">
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onToday"
-    >
-      Today
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onPrev"
-    >
-      &lt; Prev
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onNext"
-    >
-      Next &gt;
-    </button>
+    <div style="width: 100%">
+      <button
+        class="button"
+        style="margin: 2px;"
+        @click="onToday"
+      >
+        Today
+      </button>
+      <button
+        class="button"
+        style="margin: 2px;"
+        @click="onPrev"
+      >
+        &lt; Prev
+      </button>
+      <button
+        class="button"
+        style="margin: 2px;"
+        @click="onNext"
+      >
+        Next &gt;
+      </button>
+    </div>
+    <div class="line">The example below uses the <code class="token">day-container</code> slot to show a current time indicator absolutely positioned.</div>
   </div>
 
   <QCalendarDay
@@ -165,9 +168,6 @@ export default defineComponent({
 </script>
 
 <style lang="sass">
-.button
-  margin: 5px 2px 10px 5px
-
 .day-view-current-time-indicator
   position: absolute
   left: -5px

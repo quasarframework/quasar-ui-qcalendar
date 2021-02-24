@@ -5,6 +5,7 @@
       id="theme"
       v-model="theme"
       name="theme"
+      class="button"
     >
       <option
         v-for="t in themesList"

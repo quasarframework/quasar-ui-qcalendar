@@ -21,7 +21,7 @@
     >
       Next &gt;
     </button>
-    <div style="width: 100%;">The 'column-count' property allows for a single day to be displayed multiple times.</div>
+    <div class="line">The <code class="token">column-count</code> property allows for a single day to be displayed multiple times.</div>
   </div>
 
   <QCalendarDay

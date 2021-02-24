@@ -21,8 +21,12 @@
     >
       Next &gt;
     </button>
-    <div style="width: 100%;">With the 'day' view, you can specifiy any number of days you want visible with the 'max-days' property.</div>
-    <div style="width: 100%;">However, the first day displayed will always be today's date.</div>
+    <div
+      class="line"
+    >
+      With the <code class="token">QCalendarDay</code>, you can specifiy any number of days you want visible with the <code class="token">max-days</code> property.<br>
+      However, the first day displayed will always be today's date.
+    </div>
   </div>
 
   <QCalendarDay

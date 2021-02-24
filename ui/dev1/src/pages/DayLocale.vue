@@ -5,6 +5,7 @@
       id="locale"
       v-model="locale"
       name="locale"
+      class="button"
     >
       <option
         v-for="local in locales"

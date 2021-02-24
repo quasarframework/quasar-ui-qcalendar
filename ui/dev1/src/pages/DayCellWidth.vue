@@ -21,8 +21,12 @@
     >
       Next &gt;
     </button>
-    <div style="width: 100%;">You can specify the 'cell-width' property to make your calendar overrun it's boundaries.</div>
-    <div style="width: 100%;">The calendar goes into a special 'sticky' mode when this happens so you can scroll.</div>
+    <div
+      class="line"
+    >
+      You can specify the <code class="token">cell-width</code> property to make your calendar overrun it's boundaries.<br>
+      The calendar goes into a special <code class="token">sticky</code> mode when this happens so you can scroll vertically and/or horizontally.
+    </div>
   </div>
 
   <QCalendarDay

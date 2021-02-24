@@ -21,6 +21,7 @@
     >
       Next &gt;
     </button>
+    <p class="line">This example uses the <code class="token">use-navigation</code> property.<br>If the calendar has focus you can use the <kbd>&larr;</kbd> and <kbd>&rarr;</kbd> keys on your keyboard for navigation.</p>
   </div>
 
   <QCalendarDay
