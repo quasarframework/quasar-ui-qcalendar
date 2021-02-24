@@ -77,7 +77,7 @@ export default defineComponent({
     ...getRawMouseEvents('-time')
   ],
 
-  setup (props, { slots, emit }) {
+  setup (props, { slots, emit, expose }) {
     const
       scrollArea = ref(null),
       pane = ref(null),
@@ -141,6 +141,7 @@ export default defineComponent({
       weekdayFormatter,
       ariaDateFormatter,
       // methods
+      dayStyleDefault,
       getRelativeClasses
     } = useCommon(props, { startDate, endDate, times })
 
@@ -508,13 +509,16 @@ export default defineComponent({
       scope.droppable = dragOverHeadDayRef.value === day.date
 
       const width = isSticky.value === true ? props.cellWidth : computedWidth.value
+      const styler = props.weekdayStyle || dayStyleDefault
       const style = {
         width,
-        maxWidth: width
+        maxWidth: width,
+        ...styler({ scope })
       }
       if (isSticky.value === true) {
         style.minWidth = width
       }
+      const weekdayClass = typeof props.weekdayClass === 'function' ? props.weekdayClass({ scope }) : {}
       const isFocusable = props.focusable === true && props.focusType.includes('weekday')
 
       const data = {
@@ -523,6 +527,7 @@ export default defineComponent({
         tabindex: isFocusable === true ? 0 : -1,
         class: {
           'q-calendar-day__head--day': true,
+          ...weekdayClass,
           ...getRelativeClasses(day),
           'q-active-date': activeDate,
           'q-calendar__hoverable': props.hoverable === true,
@@ -1040,7 +1045,7 @@ export default defineComponent({
     }
 
     // expose public methods
-    Object.assign(vm.proxy, {
+    expose({
       prev,
       next,
       move,
@@ -1050,6 +1055,17 @@ export default defineComponent({
       timeDurationHeight,
       scrollToTime
     })
+
+    // Object.assign(vm.proxy, {
+    //   prev,
+    //   next,
+    //   move,
+    //   moveToToday,
+    //   updateCurrent,
+    //   timeStartPos,
+    //   timeDurationHeight,
+    //   scrollToTime
+    // })
 
     return () => __renderCalendar()
   }

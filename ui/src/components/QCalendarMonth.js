@@ -75,7 +75,7 @@ export default defineComponent({
     ...getRawMouseEvents('-workweek')
   ],
 
-  setup (props, { slots, emit }) {
+  setup (props, { slots, emit, expose }) {
     const
       scrollArea = ref(null),
       pane = ref(null),
@@ -866,13 +866,20 @@ export default defineComponent({
     }
 
     // expose public methods
-    Object.assign(vm.proxy, {
+    expose({
       prev,
       next,
       move,
       moveToToday,
       updateCurrent
     })
+    // Object.assign(vm.proxy, {
+    //   prev,
+    //   next,
+    //   move,
+    //   moveToToday,
+    //   updateCurrent
+    // })
 
     return () => __renderCalendar()
   }
