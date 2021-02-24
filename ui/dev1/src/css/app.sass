@@ -1,5 +1,8 @@
-// app global css in Sass form
 .button, kbd
+  display: flex
+  flex-direction: row
+  justify-content: center
+  align-items: center
   margin: 5px
   padding: 4px 15px
   border-radius: 4px
@@ -7,6 +10,7 @@
   background: rgba(0,200,200,.20)
   color: rgba(0,140,200,.8)
   outline: 0
+  font-size: .8em
   transition: color 0.2s, background 0.2s, border 0.2s
 
   &:hover
@@ -15,20 +19,40 @@
   &:focus
     border: 1px solid rgba(0,140,200,.8)
 
+.button > div
+  color: rgba(0,140,200,.5)
+  &:hover
+    color: rgba(0,140,200,.8)
+
+.button-bar
+  width: 100%
+  display: flex
+  justify-content: center
+  align-items: center
+
 kbd
   margin: 2px
   padding: 2px 7px
+  outline: 0
 
 .link
   text-decoration: none
+  outline: 0
 
 .select
+  background: transparent
+  color: rgba(0,140,200,.8)
+  border: 1px solid rgba(0,255,255,.50)
   display: flex
-  flex: 1 1 100%
   flex-direction: row
   justify-content: center
-  margin: 4px
   align-items: center
+  margin: 4px
+  outline: 0
+
+.button > .select
+  border: transparent
+  margin: 0
 
 .list
   margin: 0
