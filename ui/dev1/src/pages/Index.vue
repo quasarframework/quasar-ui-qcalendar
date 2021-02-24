@@ -3,15 +3,20 @@
     <div style="display: flex; flex-direction: column; flex: 0 1 0;">
       <div style="display: flex; justify-content: center;">Found: {{ filteredPages.length }} examples</div>
       <div style="display: flex; justify-content: center; items-align: center; margin-bottom: 10px;">
-        <div style="display: flex; justify-content: center; align-items: center; border: 2px rgba(0,0,255, .22) solid; border-radius: 4px;">
+        <div
+          class="button"
+        >
           <input
             v-model="filter"
-            style="margin: 8px 0 8px 0; border: transparent; outline: 0"
+            class="select"
           >
           <div
             v-if="filter.length > 0"
             style="margin: 2px; font-weight: 700; cursor: pointer;"
-            @click="onClearFilter">X</div>
+            @click="onClearFilter"
+          >
+            X
+          </div>
         </div>
       </div>
 
