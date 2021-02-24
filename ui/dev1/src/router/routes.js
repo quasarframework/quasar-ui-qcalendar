@@ -1,9 +1,12 @@
 import pages from './pages'
 
-const children = pages.map(page => ({
-  path: page.path,
-  component: () => import('pages/' + page.file + '.vue')
-}))
+const children = pages.map(page => {
+  return {
+    name: page.file,
+    path: page.path,
+    component: () => import('pages/' + page.file + '.vue')
+  }
+})
 
 const routes = [
   {
