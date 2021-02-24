@@ -52,6 +52,14 @@ export const useIntervalProps = {
     type: Function,
     default: null
   },
+  weekdayStyle: {
+    type: Function,
+    default: null
+  },
+  weekdayClass: {
+    type: Function,
+    default: null
+  },
   showIntervalLabel: {
     type: Function,
     default: null
