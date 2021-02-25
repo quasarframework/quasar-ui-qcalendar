@@ -5,6 +5,7 @@
       @prev="onPrev"
       @next="onNext"
     />
+    <div class="line">You can use the properties <code class="token">date-header</code>, <code class="token">date-align</code> and <code class="token">weekday-align</code> to manipulate how the header area looks.</div>
     <div
       class="button-bar"
       style="margin: 12px;"
