@@ -271,6 +271,11 @@ export default defineComponent({
       return ((100 / days.value.length) / columnCount) + '%'
     })
 
+    watch(computedWidth, (val) => {
+      console.log('computedWidth', val)
+    })
+
+
     function __isCheckChange () {
       if (checkChange() === true
       && props.useNavigation === true
