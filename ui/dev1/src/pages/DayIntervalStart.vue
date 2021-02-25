@@ -50,6 +50,16 @@ export default defineComponent({
     }
   },
   methods: {
+    onToday () {
+      this.$refs.calendar.moveToToday()
+    },
+    onPrev () {
+      this.$refs.calendar.prev()
+    },
+    onNext () {
+      this.$refs.calendar.next()
+    },
+
     onMoved (data) {
       console.log('onMoved', data)
     },

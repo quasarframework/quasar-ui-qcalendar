@@ -16,7 +16,7 @@
         no-active-date
         use-navigation
         focusable
-        focus-type="['day']"
+        :focus-type="['day']"
         animated
         bordered
         :weekdays="[1,2,3,4,5]"

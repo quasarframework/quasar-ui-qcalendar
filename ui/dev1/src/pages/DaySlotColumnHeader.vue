@@ -97,9 +97,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style lang="sass">
-.button
-  margin: 5px 2px 10px 5px
-
-</style>

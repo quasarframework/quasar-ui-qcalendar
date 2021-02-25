@@ -15,7 +15,7 @@
         v-model="selectedDate"
         use-navigation
         focusable
-        focus-type="['day']"
+        :focus-type="['day']"
         animated
         bordered
         transition-next="slide-left"

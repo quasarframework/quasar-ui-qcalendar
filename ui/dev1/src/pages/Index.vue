@@ -44,7 +44,6 @@
 
 <script>
 import pages from '../router/pages'
-console.log(pages)
 
 import { defineComponent, ref, computed, watch, onBeforeMount } from 'vue'
 

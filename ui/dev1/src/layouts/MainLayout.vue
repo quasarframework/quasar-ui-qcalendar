@@ -30,14 +30,42 @@
           header
           class="text-grey-8"
         >
-          Essential Links
+          <div>Found: {{ filteredPages.length }} examples</div>
+          <div style="display: flex; justify-content: center; items-align: center; margin-bottom: 10px; width: 100%">
+            <div
+              class="button"
+              style="width: 100%; margin: 8px 0;"
+            >
+              <input
+                v-model="filter"
+                class="select"
+              >
+              <div
+                v-if="filter.length > 0"
+                style="margin: 2px; font-weight: 700; cursor: pointer;"
+                @click="onClearFilter"
+              >
+                X
+              </div>
+            </div>
+          </div>
         </q-item-label>
 
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
+        <div class="list">
+          <div
+            v-for="page in filteredPages"
+            :key="page.name"
+            class="button list-item"
+          >
+            <router-link
+              :to="'/' + page.path"
+              style="width: 100%"
+            >
+              {{ page.file }}
+            </router-link>
+          </div>
+        </div>
+
       </q-list>
     </q-drawer>
 
@@ -45,15 +73,12 @@
       <div class="fit q-pa-sm">
         <div
           v-if="$route.path !== '/'"
-          style="width: 100%; text-align: left; margin: 8px; display: flex;"
+          style="width: 100%; text-align: left; margin: 8px;"
         >
-          <button
-            class="button"
-            @click="onHome"
-          >
-            Home
-          </button>
-          <div style="display: flex; justify-content: center;">
+          <div style="width: 100%; display: flex; justify-content: center;">
+            <div style="font-size: 24px; font-weight: 500;">{{ name }}</div>
+          </div>
+          <div style="width: 100%; display: flex; justify-content: center;">
             <a
               v-if="path !== null"
               :href="path"
@@ -75,90 +100,77 @@
 </template>
 
 <script>
-import EssentialLink from 'components/EssentialLink.vue'
 
-const linksList = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-]
-
-import { defineComponent, ref, onMounted, watch } from 'vue'
+import { defineComponent, ref, computed, onBeforeMount, onMounted, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+
+import pages from '../router/pages'
 
 export default defineComponent({
   name: 'MainLayout',
 
   components: {
-    EssentialLink
   },
 
   setup () {
     const path = ref(null),
       basePath = 'https://github.com/quasarframework/quasar-ui-qcalendar/tree/next/ui/dev1/src/pages/',
+      name = ref(null),
       $router = useRouter(),
       $route = useRoute(),
-      leftDrawerOpen = ref(false)
+      leftDrawerOpen = ref(false),
+      filter = ref('')
 
     onMounted(() => {
       handleRouteChange()
     })
 
-    watch($route, () => {
+    const filteredPages = computed(() => {
+      if (filter.value) {
+        const filtered = filter.value.toLowerCase()
+        return pages.filter(val =>
+          val.file.toLowerCase().indexOf(filtered) > -1)
+      }
+      return pages
+    })
+
+    watch(filter, val => {
+      localStorage.setItem('filter', val)
+    })
+
+    onBeforeMount(() => {
+      const val = localStorage.getItem('filter')
+      if (val) {
+        filter.value = val
+      }
+    })
+
+    function onClearFilter () {
+      filter.value = ''
+    }
+
+    watch(() => $route.fullPath, () => {
       handleRouteChange()
     })
 
     function handleRouteChange () {
       if ($route.fullPath === '/' || $route.name === undefined) {
         path.value = null
+        name.value = null
       }
       else {
         path.value = basePath + $route.name + '.vue'
+        name.value = $route.name
       }
     }
 
     return {
+      filter,
+      pages,
+      filteredPages,
+      onClearFilter,
       path,
-      essentialLinks: linksList,
+      name,
       leftDrawerOpen,
       toggleLeftDrawer () {
         leftDrawerOpen.value = !leftDrawerOpen.value

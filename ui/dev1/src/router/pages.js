@@ -23,6 +23,7 @@ export default require.context('../pages', true, /^\.\/.*\.vue$/)
   .map(page => {
     return {
       file: page,
+      name: page,
       title: page + '.vue',
       path: slugify(kebabCase(page))
     }

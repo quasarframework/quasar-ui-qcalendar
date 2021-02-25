@@ -52,7 +52,7 @@
             mini-mode
             use-navigation
             focusable
-            focus-type="['date']"
+            :focus-type="['date']"
             no-active-date
             :selected-start-end-dates="startEndDates"
             :min-weeks="6"
