@@ -102,7 +102,7 @@
 <script>
 
 import { defineComponent, ref, computed, onBeforeMount, onMounted, watch } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
+import { useRoute } from 'vue-router'
 
 import pages from '../router/pages'
 
@@ -116,7 +116,6 @@ export default defineComponent({
     const path = ref(null),
       basePath = 'https://github.com/quasarframework/quasar-ui-qcalendar/tree/next/ui/dev1/src/pages/',
       name = ref(null),
-      $router = useRouter(),
       $route = useRoute(),
       leftDrawerOpen = ref(false),
       filter = ref('')
@@ -174,9 +173,6 @@ export default defineComponent({
       leftDrawerOpen,
       toggleLeftDrawer () {
         leftDrawerOpen.value = !leftDrawerOpen.value
-      },
-      onHome () {
-        $router.go(-1)
       }
     }
   }
