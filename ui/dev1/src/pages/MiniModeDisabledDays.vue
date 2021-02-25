@@ -1,64 +1,52 @@
 <template>
-  <div style="margin: 12px;">
-    <div style="width: 100%">
-      <button
-        class="button"
-        style="margin: 2px;"
-        @click="onToday"
-      >
-        Today
-      </button>
-      <button
-        class="button"
-        style="margin: 2px;"
-        @click="onPrev"
-      >
-        &lt; Prev
-      </button>
-      <button
-        class="button"
-        style="margin: 2px;"
-        @click="onNext"
-      >
-        Next &gt;
-      </button>
-    </div>
-    <div style="font-size: 12px;">The first example uses an array of dates to disable the next 4 days after today.<br>The second example uses a range (which is an array within an array) to disable the next 4 days after today.</div>
-  </div>
+  <div class="subcontent">
+    <navigation-bar
+      @today="onToday"
+      @prev="onPrev"
+      @next="onNext"
+    />
 
-  <div style="width: 100%; display: flex; justify-content: center; margin: 12px;">
-    <QCalendarMonth
-      ref="calendar"
-      v-model="selectedDate"
-      mini-mode
-      :disabled-days="disabledDays"
-      bordered
-      style="max-width: 280px; width: 100%;"
-      @change="onChange"
-      @moved="onMoved"
-      @click-date="onClickDate"
-      @click-day="onClickDay"
-      @click-workweek="onClickWorkweek"
-      @click-head-workweek="onClickHeadWorkweek"
-      @click-head-day="onClickHeadDay"
-    />
-  </div>
-  <div style="width: 100%; display: flex; justify-content: center; margin: 12px;">
-    <QCalendarMonth
-      ref="calendar"
-      v-model="selectedDate"
-      mini-mode
-      :disabled-days="disabledDaysRange"
-      bordered
-      style="max-width: 280px; width: 100%;"
-      @change="onChange"
-      @moved="onMoved"
-      @click-date="onClickDate"
-      @click-day="onClickDay"
-      @click-workweek="onClickWorkweek"
-      @click-head-workweek="onClickHeadWorkweek"
-      @click-head-day="onClickHeadDay"
-    />
+    <div class="line">The first example uses an array of dates to disable the next 4 days after today.<br>
+    The second example uses a range (which is an array within an array) to disable the next 4 days after today.<br>
+    Don't be confused with disabled "outside" days which are not part of the current month.
+    </div>
+
+    <div style="display: flex; justify-content: center">
+      <QCalendarMonth
+        ref="calendar"
+        v-model="selectedDate"
+        mini-mode
+        :disabled-days="disabledDays"
+        animated
+        bordered
+        style="max-width: 280px; width: 100%;"
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-day="onClickDay"
+        @click-workweek="onClickWorkweek"
+        @click-head-workweek="onClickHeadWorkweek"
+        @click-head-day="onClickHeadDay"
+      />
+    </div><br>
+    <div style="display: flex; justify-content: center">
+      <QCalendarMonth
+        ref="calendar2"
+        v-model="selectedDate"
+        mini-mode
+        :disabled-days="disabledDaysRange"
+        animated
+        bordered
+        style="max-width: 280px; width: 100%;"
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-day="onClickDay"
+        @click-workweek="onClickWorkweek"
+        @click-head-workweek="onClickHeadWorkweek"
+        @click-head-day="onClickHeadDay"
+      />
+    </div>
   </div>
 </template>
 
@@ -74,10 +62,12 @@ import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarMonth.sass'
 
 import { defineComponent } from 'vue'
+import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
   name: 'MiniModeDisabledDays',
   components: {
+    NavigationBar,
     QCalendarMonth
   },
   data () {

@@ -1,47 +1,34 @@
 <template>
-  <div style="margin: 12px;">
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onToday"
-    >
-      Today
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onPrev"
-    >
-      &lt; Prev
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onNext"
-    >
-      Next &gt;
-    </button>
-  </div>
+  <div class="subcontent">
+    <navigation-bar
+      @today="onToday"
+      @prev="onPrev"
+      @next="onNext"
+    />
 
-  <QCalendarDay
-    ref="calendar"
-    v-model="selectedDate"
-    view="week"
-    :disabled-before="disabledBefore"
-    :disabled-after="disabledAfter"
-    no-active-date
-    animated
-    transition-next="slide-left"
-    transition-prev="slide-right"
-    style="max-width: 800px; width: 100%; height: 400px; display: inline-flex;"
-    @change="onChange"
-    @moved="onMoved"
-    @click-date="onClickDate"
-    @click-time="onClickTime"
-    @click-interval="onClickInterval"
-    @click-head-intervals="onClickHeadIntervals"
-    @click-head-day="onClickHeadDay"
-  />
+    <div style="display: flex; justify-content: center">
+      <QCalendarDay
+        ref="calendar"
+        v-model="selectedDate"
+        view="week"
+        :disabled-before="disabledBefore"
+        :disabled-after="disabledAfter"
+        no-active-date
+        animated
+        bordered
+        transition-next="slide-left"
+        transition-prev="slide-right"
+        style="max-width: 800px; width: 100%; height: 400px; display: inline-flex;"
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-time="onClickTime"
+        @click-interval="onClickInterval"
+        @click-head-intervals="onClickHeadIntervals"
+        @click-head-day="onClickHeadDay"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -56,10 +43,12 @@ import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarDay.sass'
 
 import { defineComponent } from 'vue'
+import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
   name: 'WeekDisabledBeforeAfter',
   components: {
+    NavigationBar,
     QCalendarDay
   },
   data () {
@@ -119,8 +108,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style lang="sass" scoped>
-.button
-  margin: 5px 2px 10px 5px
-</style>

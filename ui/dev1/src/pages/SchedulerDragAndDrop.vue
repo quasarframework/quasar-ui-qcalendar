@@ -1,89 +1,75 @@
 <template>
-  <div style="margin: 12px;">
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onToday"
-    >
-      Today
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onPrev"
-    >
-      &lt; Prev
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onNext"
-    >
-      Next &gt;
-    </button>
-  </div>
+  <div class="subcontent">
+    <navigation-bar
+      @today="onToday"
+      @prev="onPrev"
+      @next="onNext"
+    />
 
-  <div style="display: flex; flex-direction: column; width: 100%;">
-    <div style="display: flex; justify-content: center; width: 100%; font-size: 12px;">Drag any items in the list to a calendar interval or the top header.</div>
-    <div style="display: flex; justify-content: center; width: 100%; padding: 6px;">
-      <div style="margin: 10px;">
-        <ul class="list">
-          <li
-            v-for="item in dragItems"
-            :key="item.id"
-            class="list-item"
-            draggable="true"
-            @dragstart="onDragStart($event, item)"
-          >
-            {{ item.name }}
-          </li>
-        </ul>
-      </div>
+    <div class="line">Drag any items in the list to a calendar resource day.</div>
 
-      <QCalendarScheduler
-        ref="calendar"
-        v-model="selectedDate"
-        v-model:modelResources="resources"
-        view="week"
-        :drag-enter-func="onDragEnter"
-        :drag-over-func="onDragOver"
-        :drag-leave-func="onDragLeave"
-        :drop-func="onDrop"
-        :weekdays="[1,2,3,4,5]"
-        hoverable
-        focusable
-        :focus-type="['day', 'date', 'weekday', 'resource']"
-        bordered
-        animated
-        :day-min-height="50"
-        :day-height="0"
-        :day-class="onDayClass"
-        :weekday-class="onWeekdayClass"
-        style="max-width: 800px; width: 100%; display: inline-flex;"
-        @change="onChange"
-        @moved="onMoved"
-        @click-date="onClickDate"
-        @click-day-resource="onClickDayResource"
-        @click-resource="onClickResource"
-        @click-head-resources="onClickHeadResources"
-        @click-head-day="onClickHeadDay"
-      >
-        <template #day="{ scope: { timestamp, resource } }">
-          <div
-            v-if="hasEvents(timestamp, resource)"
-            style="display: flex; flex: 1 0 auto; flex-wrap: wrap; justify-content: space-evenly; align-items: center; font-size: 12px;"
-          >
-            <template
-              v-for="event in getEvents(timestamp, resource)"
-              :key="event.id"
-            >
-              <span style="border: 1px solid pink; border-radius: 2px; padding: 2px; margin: 1px; user-select: none;">
-                {{ event.name }}
-              </span>
-            </template>
+    <div style="display: flex; justify-content: center">
+      <div style="display: flex; flex-direction: column; width: 100%;">
+        <div style="display: flex; justify-content: center; width: 100%; padding: 6px;">
+          <div style="margin: 10px;">
+            <ul class="list">
+              <li
+                v-for="item in dragItems"
+                :key="item.id"
+                class="button list-item"
+                draggable="true"
+                @dragstart="onDragStart($event, item)"
+              >
+                {{ item.name }}
+              </li>
+            </ul>
           </div>
-        </template>
-      </QCalendarScheduler>
+          <QCalendarScheduler
+            ref="calendar"
+            v-model="selectedDate"
+            v-model:modelResources="resources"
+            view="week"
+            :drag-enter-func="onDragEnter"
+            :drag-over-func="onDragOver"
+            :drag-leave-func="onDragLeave"
+            :drop-func="onDrop"
+            :weekdays="[1,2,3,4,5]"
+            hoverable
+            focusable
+            :focus-type="['day', 'date', 'weekday', 'resource']"
+            animated
+            bordered
+            :day-min-height="50"
+            :day-height="0"
+            :day-class="onDayClass"
+            :weekday-class="onWeekdayClass"
+            style="max-width: 800px; width: 100%; display: inline-flex;"
+            @change="onChange"
+            @moved="onMoved"
+            @click-date="onClickDate"
+            @click-day-resource="onClickDayResource"
+            @click-resource="onClickResource"
+            @click-head-resources="onClickHeadResources"
+            @click-head-day="onClickHeadDay"
+          >
+            <template #day="{ scope: { timestamp, resource } }">
+              <div
+                v-if="hasEvents(timestamp, resource)"
+                style="display: flex; flex: 1 0 auto; flex-wrap: wrap; justify-content: space-evenly; align-items: center; font-size: 12px;"
+              >
+                <template
+                  v-for="event in getEvents(timestamp, resource)"
+                  :key="event.id"
+                >
+                  <span style="border: 1px solid pink; border-radius: 2px; padding: 2px; margin: 1px; user-select: none;">
+                    {{ event.name }}
+                  </span>
+                </template>
+              </div>
+            </template>
+          </QCalendarScheduler>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -96,10 +82,12 @@ import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarScheduler.sass'
 
 import { defineComponent } from 'vue'
+import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
   name: 'SchedulerDragAndDrop',
   components: {
+    NavigationBar,
     QCalendarScheduler
   },
   data () {
@@ -222,12 +210,9 @@ export default defineComponent({
     },
 
     onWeekdayClass ({ scope }) {
-      if (scope.droppable === true) {
-        return {
-          cursor: 'not-allowed !important'
-        }
+      return {
+        droppable: false
       }
-      return {}
     },
 
     onToday () {

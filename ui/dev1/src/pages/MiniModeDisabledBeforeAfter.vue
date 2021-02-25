@@ -1,48 +1,32 @@
 <template>
-  <div style="margin: 12px;">
-    <div style="width: 100%">
-      <button
-        class="button"
-        style="margin: 2px;"
-        @click="onToday"
-      >
-        Today
-      </button>
-      <button
-        class="button"
-        style="margin: 2px;"
-        @click="onPrev"
-      >
-        &lt; Prev
-      </button>
-      <button
-        class="button"
-        style="margin: 2px;"
-        @click="onNext"
-      >
-        Next &gt;
-      </button>
-    </div>
-    <div style="font-size: 12px;">The example below uses the properties 'disable-before' and 'disable-after' to disable all days except the current month.</div>
-  </div>
-
-  <div style="width: 100%; display: flex; justify-content: center">
-    <QCalendarMonth
-      ref="calendar"
-      v-model="selectedDate"
-      mini-mode
-      :disabled-before="disabledBefore"
-      :disabled-after="disabledAfter"
-      bordered
-      style="max-width: 280px; width: 100%;"
-      @change="onChange"
-      @moved="onMoved"
-      @click-date="onClickDate"
-      @click-day="onClickDay"
-      @click-workweek="onClickWorkweek"
-      @click-head-workweek="onClickHeadWorkweek"
-      @click-head-day="onClickHeadDay"
+  <div class="subcontent">
+    <navigation-bar
+      @today="onToday"
+      @prev="onPrev"
+      @next="onNext"
     />
+
+    <div class="line">The example below uses the properties <span class="token">disable-before</span> and <span class="token">disable-after</span> to disable all days except the current month.</div>
+
+    <div style="display: flex; justify-content: center">
+      <QCalendarMonth
+        ref="calendar"
+        v-model="selectedDate"
+        mini-mode
+        :disabled-before="disabledBefore"
+        :disabled-after="disabledAfter"
+        animated
+        bordered
+        style="max-width: 280px; width: 100%;"
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-day="onClickDay"
+        @click-workweek="onClickWorkweek"
+        @click-head-workweek="onClickHeadWorkweek"
+        @click-head-day="onClickHeadDay"
+      />
+    </div>
   </div>
 </template>
 
@@ -59,10 +43,12 @@ import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarMonth.sass'
 
 import { defineComponent, ref, computed } from 'vue'
+import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
   name: 'MiniModeDisabledBeforeAfter',
   components: {
+    NavigationBar,
     QCalendarMonth
   },
   setup () {

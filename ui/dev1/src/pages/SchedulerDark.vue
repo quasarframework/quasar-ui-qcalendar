@@ -1,44 +1,31 @@
 <template>
-  <div style="margin: 12px;">
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onToday"
-    >
-      Today
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onPrev"
-    >
-      &lt; Prev
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onNext"
-    >
-      Next &gt;
-    </button>
-  </div>
+  <div class="subcontent">
+    <navigation-bar
+      @today="onToday"
+      @prev="onPrev"
+      @next="onNext"
+    />
 
-  <QCalendarScheduler
-    ref="calendar"
-    v-model="selectedDate"
-    v-model:modelResources="resources"
-    view="week"
-    dark
-    bordered
-    style="max-width: 800px; width: 100%; display: inline-flex;"
-    @change="onChange"
-    @moved="onMoved"
-    @click-date="onClickDate"
-    @click-day-resource="onClickDayResource"
-    @click-resource="onClickResource"
-    @click-head-resources="onClickHeadResources"
-    @click-head-day="onClickHeadDay"
-  />
+    <div style="display: flex; justify-content: center">
+      <QCalendarScheduler
+        ref="calendar"
+        v-model="selectedDate"
+        v-model:modelResources="resources"
+        view="week"
+        dark
+        animated
+        bordered
+        style="max-width: 800px; width: 100%; display: inline-flex;"
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-day-resource="onClickDayResource"
+        @click-resource="onClickResource"
+        @click-head-resources="onClickHeadResources"
+        @click-head-day="onClickHeadDay"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -49,10 +36,12 @@ import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarScheduler.sass'
 
 import { defineComponent } from 'vue'
+import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
   name: 'SchedulerDark',
   components: {
+    NavigationBar,
     QCalendarScheduler
   },
   data () {

@@ -1,60 +1,48 @@
 <template>
-  <div class="select">
-    <label for="theme">Choose a theme:&nbsp;</label>
-    <select
-      id="theme"
-      v-model="theme"
-      name="theme"
-    >
-      <option
-        v-for="t in themesList"
-        :key="t.label"
-        :value="t.value"
-      >
-        {{ t.label }}
-      </option>
-    </select>
-  </div>
-
-  <div style="margin: 12px;">
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onToday"
-    >
-      Today
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onPrev"
-    >
-      &lt; Prev
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onNext"
-    >
-      Next &gt;
-    </button>
-  </div>
-
-  <div style="width: 100%; display: flex; justify-content: center">
-    <QCalendarMonth
-      ref="calendar"
-      v-model="selectedDate"
-      bordered
-      :style="theme"
-      style="max-width: 800px; width: 100%; height: 400px;"
-      @change="onChange"
-      @moved="onMoved"
-      @click-date="onClickDate"
-      @click-day="onClickDay"
-      @click-workweek="onClickWorkweek"
-      @click-head-workweek="onClickHeadWorkweek"
-      @click-head-day="onClickHeadDay"
+  <div class="subcontent">
+    <navigation-bar
+      @today="onToday"
+      @prev="onPrev"
+      @next="onNext"
     />
+
+    <div style="display: flex; justify-content: center">
+      <div style="display: flex; justify-content: center; align-items: center;">
+        <label for="theme" style="white-space: nowrap">Choose a theme:&nbsp;</label>
+        <select
+          id="theme"
+          v-model="theme"
+          name="theme"
+          class="button select"
+        >
+          <option
+            v-for="t in themesList"
+            :key="t.label"
+            :value="t.value"
+          >
+            {{ t.label }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div style="display: flex; justify-content: center">
+      <QCalendarMonth
+        ref="calendar"
+        v-model="selectedDate"
+        animated
+        bordered
+        :style="theme"
+        style="max-width: 800px; width: 100%; height: 400px;"
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-day="onClickDay"
+        @click-workweek="onClickWorkweek"
+        @click-head-workweek="onClickHeadWorkweek"
+        @click-head-day="onClickHeadDay"
+      />
+    </div>
   </div>
 </template>
 
@@ -66,10 +54,12 @@ import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarMonth.sass'
 
 import { defineComponent } from 'vue'
+import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
   name: 'MonthTheme',
   components: {
+    NavigationBar,
     QCalendarMonth
   },
   data () {
@@ -494,13 +484,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style lang="sass" scoped>
-.select
-  display: flex
-  flex: 1 1 100%
-  flex-direction: row
-  justify-content: center
-  margin: 4px
-
-</style>

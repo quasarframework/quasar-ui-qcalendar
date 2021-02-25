@@ -1,47 +1,35 @@
 <template>
-  <div style="margin: 12px;">
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onToday"
-    >
-      Today
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onPrev"
-    >
-      &lt; Prev
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onNext"
-    >
-      Next &gt;
-    </button>
-    <div style="width: 100%;">All days before and after the current day have been disabled with the properties <code class="token">disable-before</code> and <code class="token">disabled-after</code>.</div>
-  </div>
+  <div class="subcontent">
+    <navigation-bar
+      @today="onToday"
+      @prev="onPrev"
+      @next="onNext"
+    />
 
-  <QCalendarDay
-    ref="calendar"
-    v-model="selectedDate"
-    :disabled-before="disabledBefore"
-    :disabled-after="disabledAfter"
-    no-active-date
-    animated
-    transition-next="slide-left"
-    transition-prev="slide-right"
-    style="max-width: 800px; width: 100%; height: 400px; display: inline-flex;"
-    @change="onChange"
-    @moved="onMoved"
-    @click-date="onClickDate"
-    @click-time="onClickTime"
-    @click-interval="onClickInterval"
-    @click-head-intervals="onClickHeadIntervals"
-    @click-head-day="onClickHeadDay"
-  />
+    <div class="line">All days before and after the current day have been disabled with the properties <code class="token">disable-before</code> and <code class="token">disabled-after</code>.</div>
+
+    <div style="display: flex; justify-content: center">
+      <QCalendarDay
+        ref="calendar"
+        v-model="selectedDate"
+        :disabled-before="disabledBefore"
+        :disabled-after="disabledAfter"
+        no-active-date
+        animated
+        bordered
+        transition-next="slide-left"
+        transition-prev="slide-right"
+        style="max-width: 800px; width: 100%; height: 400px; display: inline-flex;"
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-time="onClickTime"
+        @click-interval="onClickInterval"
+        @click-head-intervals="onClickHeadIntervals"
+        @click-head-day="onClickHeadDay"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -56,10 +44,12 @@ import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarDay.sass'
 
 import { defineComponent } from 'vue'
+import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
   name: 'DayDisabledBeforeAfter',
   components: {
+    NavigationBar,
     QCalendarDay
   },
   data () {
@@ -90,6 +80,7 @@ export default defineComponent({
     onNext () {
       this.$refs.calendar.next()
     },
+
     onMoved (data) {
       console.log('onMoved', data)
     },

@@ -1,45 +1,30 @@
 <template>
-  <div style="margin: 12px;">
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onToday"
-    >
-      Today
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onPrev"
-    >
-      &lt; Prev
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onNext"
-    >
-      Next &gt;
-    </button>
-  </div>
-
-  <div style="width: 100%; display: flex; justify-content: center">
-    <QCalendarMonth
-      ref="calendar"
-      v-model="selectedDate"
-      bordered
-      mini-mode
-      show-work-weeks
-      animated
-      style="max-width: 300px; width: 100%;"
-      @change="onChange"
-      @moved="onMoved"
-      @click-date="onClickDate"
-      @click-day="onClickDay"
-      @click-workweek="onClickWorkweek"
-      @click-head-workweek="onClickHeadWorkweek"
-      @click-head-day="onClickHeadDay"
+  <div class="subcontent">
+    <navigation-bar
+      @today="onToday"
+      @prev="onPrev"
+      @next="onNext"
     />
+
+    <div style="display: flex; justify-content: center">
+      <QCalendarMonth
+        ref="calendar"
+        v-model="selectedDate"
+        show-work-weeks
+        :weekdays="[1,2,3,4,5,6,0]"
+        animated
+        bordered
+        mini-mode
+        style="max-width: 300px; width: 100%;"
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-day="onClickDay"
+        @click-workweek="onClickWorkweek"
+        @click-head-workweek="onClickHeadWorkweek"
+        @click-head-day="onClickHeadDay"
+      />
+    </div>
   </div>
 </template>
 
@@ -51,10 +36,12 @@ import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarMonth.sass'
 
 import { defineComponent } from 'vue'
+import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
   name: 'MiniModeBasic',
   components: {
+    NavigationBar,
     QCalendarMonth
   },
   data () {

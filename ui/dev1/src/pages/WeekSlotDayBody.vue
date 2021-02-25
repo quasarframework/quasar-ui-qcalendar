@@ -1,105 +1,91 @@
 <template>
-  <div style="margin: 12px;">
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onToday"
-    >
-      Today
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onPrev"
-    >
-      &lt; Prev
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onNext"
-    >
-      Next &gt;
-    </button>
-  </div>
+  <div class="subcontent">
+    <navigation-bar
+      @today="onToday"
+      @prev="onPrev"
+      @next="onNext"
+    />
 
-  <QCalendarDay
-    ref="calendar"
-    v-model="selectedDate"
-    view="week"
-    bordered
-    animated
-    transition-next="slide-left"
-    transition-prev="slide-right"
-    no-active-date
-    :interval-start="6"
-    :interval-count="18"
-    :interval-height="28"
-    style="max-width: 800px; width: 100%; height: 400px; display: inline-flex;"
-    @change="onChange"
-    @moved="onMoved"
-    @click-date="onClickDate"
-    @click-time="onClickTime"
-    @click-interval="onClickInterval"
-    @click-head-intervals="onClickHeadIntervals"
-    @click-head-day="onClickHeadDay"
-  >
-    <template #head-day-event="{ scope: { timestamp } }">
-      <div style="display: flex; justify-content: center; flex-wrap: wrap; padding: 2px;">
-        <template
-          v-for="event in eventsMap[timestamp.date]"
-          :key="event.id"
-        >
-          <div
-            v-if="!event.time"
-            :class="badgeClasses(event, 'header')"
-            :style="badgeStyles(event, 'header')"
-            style="width: 100%; cursor: pointer; height: 12px; font-size: 10px; margin: 1px;"
-          >
-            <abbr
-              :title="event.details"
-              class="tooltip"
-              style="width: 100%"
+    <div style="display: flex; justify-content: center">
+      <QCalendarDay
+        ref="calendar"
+        v-model="selectedDate"
+        view="week"
+        animated
+        bordered
+        transition-next="slide-left"
+        transition-prev="slide-right"
+        no-active-date
+        :interval-start="6"
+        :interval-count="18"
+        :interval-height="28"
+        style="max-width: 800px; width: 100%; height: 400px; display: inline-flex;"
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-time="onClickTime"
+        @click-interval="onClickInterval"
+        @click-head-intervals="onClickHeadIntervals"
+        @click-head-day="onClickHeadDay"
+      >
+        <template #head-day-event="{ scope: { timestamp } }">
+          <div style="display: flex; justify-content: center; flex-wrap: wrap; padding: 2px;">
+            <template
+              v-for="event in eventsMap[timestamp.date]"
+              :key="event.id"
             >
-              <span class="title q-calendar__ellipsis">{{ event.title }}</span>
-            </abbr>
-          </div>
-          <div
-            v-else
-            :class="badgeClasses(event, 'header')"
-            :style="badgeStyles(event, 'header')"
-            style="margin: 1px; width: 10px; max-width: 10px; height: 10px; max-height: 10px"
-          >
-            <abbr
-              :title="event.time + ' - ' + event.details"
-              class="title tooltip"
-            />
+              <div
+                v-if="!event.time"
+                :class="badgeClasses(event, 'header')"
+                :style="badgeStyles(event, 'header')"
+                style="width: 100%; cursor: pointer; height: 12px; font-size: 10px; margin: 1px;"
+              >
+                <abbr
+                  :title="event.details"
+                  class="tooltip"
+                  style="width: 100%"
+                >
+                  <span class="title q-calendar__ellipsis">{{ event.title }}</span>
+                </abbr>
+              </div>
+              <div
+                v-else
+                :class="badgeClasses(event, 'header')"
+                :style="badgeStyles(event, 'header')"
+                style="margin: 1px; width: 10px; max-width: 10px; height: 10px; max-height: 10px"
+              >
+                <abbr
+                  :title="event.time + ' - ' + event.details"
+                  class="title tooltip"
+                />
+              </div>
+            </template>
           </div>
         </template>
-      </div>
-    </template>
 
-    <template #day-body="{ scope: { timestamp, timeStartPos, timeDurationHeight } }">
-      <template
-        v-for="event in getEvents(timestamp.date)"
-        :key="event.id"
-      >
-        <div
-          v-if="event.time !== undefined"
-          class="my-event"
-          :class="badgeClasses(event, 'body')"
-          :style="badgeStyles(event, 'body', timeStartPos, timeDurationHeight)"
-        >
-          <abbr
-            :title="event.time + ' - ' + event.details"
-            class="tooltip"
+        <template #day-body="{ scope: { timestamp, timeStartPos, timeDurationHeight } }">
+          <template
+            v-for="event in getEvents(timestamp.date)"
+            :key="event.id"
           >
-            <span class="title q-calendar__ellipsis">{{ event.title }}</span>
-          </abbr>
-        </div>
-      </template>
-    </template>
-  </QCalendarDay>
+            <div
+              v-if="event.time !== undefined"
+              class="my-event"
+              :class="badgeClasses(event, 'body')"
+              :style="badgeStyles(event, 'body', timeStartPos, timeDurationHeight)"
+            >
+              <abbr
+                :title="event.time + ' - ' + event.details"
+                class="tooltip"
+              >
+                <span class="title q-calendar__ellipsis">{{ event.title }}</span>
+              </abbr>
+            </div>
+          </template>
+        </template>
+      </QCalendarDay>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -117,6 +103,9 @@ import '@quasar/quasar-ui-qcalendar/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarDay.sass'
 
+import { defineComponent } from 'vue'
+import NavigationBar from '../components/NavigationBar.vue'
+
 // The function below is used to set up our demo data
 const CURRENT_DAY = new Date()
 function getCurrentDay (day) {
@@ -126,11 +115,10 @@ function getCurrentDay (day) {
   return tm.date
 }
 
-import { defineComponent } from 'vue'
-
 export default defineComponent({
   name: 'WeekSlotHeadDay',
   components: {
+    NavigationBar,
     QCalendarDay
   },
   data () {

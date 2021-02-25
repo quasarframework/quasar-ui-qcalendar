@@ -1,62 +1,50 @@
 <template>
-  <div style="margin: 12px;">
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onToday"
-    >
-      Today
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onPrev"
-    >
-      &lt; Prev
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onNext"
-    >
-      Next &gt;
-    </button>
-  </div>
+  <div class="subcontent">
+    <navigation-bar
+      @today="onToday"
+      @prev="onPrev"
+      @next="onNext"
+    />
 
-  <QCalendarDay
-    ref="calendar"
-    v-model="selectedDate"
-    view="week"
-    animated
-    bordered
-    :hour24-format="toggled"
-    :interval-minutes="15"
-    :interval-count="96"
-    :interval-height="10"
-    transition-next="slide-left"
-    transition-prev="slide-right"
-    style="max-width: 800px; width: 100%; height: 400px; display: inline-flex;"
-    @change="onChange"
-    @moved="onMoved"
-    @click-date="onClickDate"
-    @click-time="onClickTime"
-    @click-interval="onClickInterval"
-    @click-head-intervals="onClickHeadIntervals"
-    @click-head-day="onClickHeadDay"
-  >
-    <template #day-container="{ scope: { days }}">
-      <template v-if="hasDate(days)">
-        <div
-          class="day-view-current-time-indicator"
-          :style="style"
-        />
-        <div
-          class="day-view-current-time-line"
-          :style="style"
-        />
-      </template>
-    </template>
-  </QCalendarDay>
+    <div class="line">The example below uses the <code class="token">day-container</code> slot to show a current time indicator absolutely positioned.</div>
+
+    <div style="display: flex; justify-content: center">
+      <QCalendarDay
+        ref="calendar"
+        v-model="selectedDate"
+        view="week"
+        animated
+        bordered
+        :hour24-format="toggled"
+        :interval-minutes="15"
+        :interval-count="96"
+        :interval-height="10"
+        transition-next="slide-left"
+        transition-prev="slide-right"
+        style="max-width: 800px; width: 100%; height: 400px; display: inline-flex;"
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-time="onClickTime"
+        @click-interval="onClickInterval"
+        @click-head-intervals="onClickHeadIntervals"
+        @click-head-day="onClickHeadDay"
+      >
+        <template #day-container="{ scope: { days }}">
+          <template v-if="hasDate(days)">
+            <div
+              class="day-view-current-time-indicator"
+              :style="style"
+            />
+            <div
+              class="day-view-current-time-line"
+              :style="style"
+            />
+          </template>
+        </template>
+      </QCalendarDay>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -67,10 +55,12 @@ import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarDay.sass'
 
 import { defineComponent, ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
   name: 'WeekSlotDayContainerShowCurrentTime',
   components: {
+    NavigationBar,
     QCalendarDay
   },
   setup () {

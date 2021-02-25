@@ -1,62 +1,51 @@
 <template>
-  <div class="select">
-    <label for="locale">Choose a locale:&nbsp;</label>
-    <select
-      id="locale"
-      v-model="locale"
-      name="locale"
-    >
-      <option
-        v-for="local in locales"
-        :key="local.value"
-        :value="local.value"
-      >
-        {{ local.label }}
-      </option>
-    </select>
-  </div>
+  <div class="subcontent">
+    <navigation-bar
+      @today="onToday"
+      @prev="onPrev"
+      @next="onNext"
+    />
 
-  <div style="margin: 12px;">
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onToday"
-    >
-      Today
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onPrev"
-    >
-      &lt; Prev
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onNext"
-    >
-      Next &gt;
-    </button>
-  </div>
+    <div style="display: flex; justify-content: center">
+      <div style="display: flex; justify-content: center; align-items: center">
+        <label for="locale" style="white-space: nowrap">Choose a locale:&nbsp;</label>
+        <select
+          id="locale"
+          v-model="locale"
+          name="locale"
+          class="button select"
+        >
+          <option
+            v-for="local in locales"
+            :key="local.value"
+            :value="local.value"
+          >
+            {{ local.label }}
+          </option>
+        </select>
+      </div>
+    </div>
 
-  <QCalendarScheduler
-    ref="calendar"
-    v-model="selectedDate"
-    v-model:modelResources="resources"
-    view="week"
-    :locale="locale"
-    animated
-    bordered
-    style="max-width: 800px; width: 100%; display: inline-flex;"
-    @change="onChange"
-    @moved="onMoved"
-    @click-date="onClickDate"
-    @click-day-resource="onClickDayResource"
-    @click-resource="onClickResource"
-    @click-head-resources="onClickHeadResources"
-    @click-head-day="onClickHeadDay"
-  />
+    <div style="width: 100%; display: flex; justify-content: center">
+      <QCalendarScheduler
+        ref="calendar"
+        v-model="selectedDate"
+        v-model:modelResources="resources"
+        view="week"
+        :locale="locale"
+        animated
+        bordered
+        style="max-width: 800px; width: 100%; display: inline-flex;"
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-day-resource="onClickDayResource"
+        @click-resource="onClickResource"
+        @click-head-resources="onClickHeadResources"
+        @click-head-day="onClickHeadDay"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -67,10 +56,12 @@ import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarScheduler.sass'
 
 import { defineComponent } from 'vue'
+import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
   name: 'SchedulerLocale',
   components: {
+    NavigationBar,
     QCalendarScheduler
   },
   data () {

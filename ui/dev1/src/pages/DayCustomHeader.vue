@@ -1,91 +1,94 @@
 <template>
-  <div style="margin: 12px;">
+  <div class="subcontent">
     <div class="line">This example shows how you can build your own custom navigation bar.</div>
-  </div>
-  <div style="display: inline-flex; flex-direction: column;">
-    <div
-      class="title-bar"
-      style="max-width: 800px; width: 100%; display: inline-flex;"
-    >
-      <button
-        tabindex="0"
-        class="date-button direction-button direction-button__left"
-        @click="onPrev"
-      >
-        <span
-          class="q-calendar__focus-helper"
-          tabindex="-1"
-        />
-      </button>
-      <div class="dates-holder">
-        <transition
-          :name="transition"
-          appear
+
+    <div style="display: flex; flex-direction: row; justify-content: center; width: 100%;">
+      <div style="max-width: 800px; width: 100%; display: flex; flex-direction: column;">
+        <div
+          class="title-bar"
+          style="display: flex;"
         >
-          <div
-            :key="parsedStart.date"
-            class="internal-dates-holder"
+          <button
+            tabindex="0"
+            class="date-button direction-button direction-button__left"
+            @click="onPrev"
           >
-            <div
-              v-for="day in days"
-              :key="day.date"
-              :style="dayStyle"
+            <span
+              class="q-calendar__focus-helper"
+              tabindex="-1"
+            />
+          </button>
+          <div class="dates-holder">
+            <transition
+              :name="transition"
+              appear
             >
-              <button
-                tabindex="0"
-                style="width: 100%;"
-                :class="dayClass(day)"
-                @click="selectedDate = day.date; transition = ''"
+              <div
+                :key="parsedStart.date"
+                class="internal-dates-holder"
               >
-                <span
-                  class="q-calendar__focus-helper"
-                  tabindex="-1"
-                />
                 <div
-                  style="width: 100%;"
+                  v-for="day in days"
+                  :key="day.date"
+                  :style="dayStyle"
                 >
-                  {{ monthFormatter(day, true) }}
+                  <button
+                    tabindex="0"
+                    style="width: 100%;"
+                    :class="dayClass(day)"
+                    @click="selectedDate = day.date; transition = ''"
+                  >
+                    <span
+                      class="q-calendar__focus-helper"
+                      tabindex="-1"
+                    />
+                    <div
+                      style="width: 100%;"
+                    >
+                      {{ monthFormatter(day, true) }}
+                    </div>
+                    <div
+                      style="width: 100%; font-size: 16px; font-weight: 700;"
+                    >
+                      {{ dayFormatter(day, false) }}
+                    </div>
+                    <div
+                      style="width: 100%; font-size: 10px;"
+                    >
+                      {{ weekdayFormatter(day, true) }}
+                    </div>
+                  </button>
                 </div>
-                <div
-                  style="width: 100%; font-size: 16px; font-weight: 700;"
-                >
-                  {{ dayFormatter(day, false) }}
-                </div>
-                <div
-                  style="width: 100%; font-size: 10px;"
-                >
-                  {{ weekdayFormatter(day, true) }}
-                </div>
-              </button>
-            </div>
+              </div>
+            </transition>
           </div>
-        </transition>
-      </div>
-      <button
-        tabindex="0"
-        class="date-button direction-button direction-button__right"
-        @click="onNext"
-      >
-        <span
-          class="q-calendar__focus-helper"
-          tabindex="-1"
+          <button
+            tabindex="0"
+            class="date-button direction-button direction-button__right"
+            @click="onNext"
+          >
+            <span
+              class="q-calendar__focus-helper"
+              tabindex="-1"
+            />
+          </button>
+        </div>
+        <QCalendarDay
+          ref="calendar"
+          v-model="selectedDate"
+          bordered
+          animated
+          style="height: 400px;"
+          @change="onChange"
+          @moved="onMoved"
+          @click-date="onClickDate"
+          @click-time="onClickTime"
+          @click-interval="onClickInterval"
+          @click-head-intervals="onClickHeadIntervals"
+          @click-head-day="onClickHeadDay"
         />
-      </button>
+      </div>
     </div>
-    <QCalendarDay
-      ref="calendar"
-      v-model="selectedDate"
-      bordered
-      animated
-      style="max-width: 800px; width: 100%; height: 400px; display: inline-flex;"
-      @change="onChange"
-      @moved="onMoved"
-      @click-date="onClickDate"
-      @click-time="onClickTime"
-      @click-interval="onClickInterval"
-      @click-head-intervals="onClickHeadIntervals"
-      @click-head-day="onClickHeadDay"
-    />
   </div>
 </template>
 

@@ -1,54 +1,38 @@
 <template>
-  <div style="margin: 12px;">
-    <div class="button-bar">
-      <button
-        class="button"
-        style="margin: 2px;"
-        @click="onToday"
-      >
-        Today
-      </button>
-      <button
-        class="button"
-        style="margin: 2px;"
-        @click="onPrev"
-      >
-        &lt; Prev
-      </button>
-      <button
-        class="button"
-        style="margin: 2px;"
-        @click="onNext"
-      >
-        Next &gt;
-      </button>
-    </div>
+  <div class="subcontent">
+    <navigation-bar
+      @today="onToday"
+      @prev="onPrev"
+      @next="onNext"
+    />
     <div
       class="line"
     >
       With the <code class="token">QCalendarDay</code>, you can specifiy any number of days you want visible with the <code class="token">max-days</code> property.<br>
       However, the first day displayed will always be today's date.
     </div>
-  </div>
 
-  <QCalendarDay
-    ref="calendar"
-    v-model="selectedDate"
-    view="day"
-    :max-days="3"
-    bordered
-    animated
-    transition-next="slide-left"
-    transition-prev="slide-right"
-    style="max-width: 800px; width: 100%; height: 400px; display: inline-flex;"
-    @change="onChange"
-    @moved="onMoved"
-    @click-date="onClickDate"
-    @click-time="onClickTime"
-    @click-interval="onClickInterval"
-    @click-head-intervals="onClickHeadIntervals"
-    @click-head-day="onClickHeadDay"
-  />
+    <div style="display: flex; justify-content: center">
+      <QCalendarDay
+        ref="calendar"
+        v-model="selectedDate"
+        view="day"
+        :max-days="3"
+        bordered
+        animated
+        transition-next="slide-left"
+        transition-prev="slide-right"
+        style="max-width: 800px; width: 100%; height: 400px;"
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-time="onClickTime"
+        @click-interval="onClickInterval"
+        @click-head-intervals="onClickHeadIntervals"
+        @click-head-day="onClickHeadDay"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -59,10 +43,12 @@ import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarDay.sass'
 
 import { defineComponent } from 'vue'
+import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
   name: 'Day3Day',
   components: {
+    NavigationBar,
     QCalendarDay
   },
   data () {
@@ -71,15 +57,16 @@ export default defineComponent({
     }
   },
   methods: {
-    onNext () {
-      this.$refs.calendar.next()
+    onToday () {
+      this.$refs.calendar.moveToToday()
     },
     onPrev () {
       this.$refs.calendar.prev()
     },
-    onToday () {
-      this.$refs.calendar.moveToToday()
+    onNext () {
+      this.$refs.calendar.next()
     },
+
     onMoved (data) {
       console.log('onMoved', data)
     },

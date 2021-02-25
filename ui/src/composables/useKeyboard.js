@@ -183,8 +183,8 @@ export default function (props, {
   }
 
   /**
-   * Sets focus on previous day. Takes into account weekdaySkips. Applies to all calendars.
-   * @param {KeyboardEvent} e
+   * Sets focus on previous day/week/month. Takes into account weekdaySkips. Applies to all calendars.
+   * @param {KeyboardEvent} e The keyboard event
    */
   function onLeftArrow (e) {
     let tm = copyTimestamp(focusValue.value)
@@ -216,8 +216,8 @@ export default function (props, {
   }
 
   /**
-   * Sets focus on next day. Takes into account weekdaySkips. Applies to all calendars.
-   * @param {KeyboardEvent} e
+   * Sets focus on next day/week/month. Takes into account weekdaySkips. Applies to all calendars.
+   * @param {KeyboardEvent} e The keyboard event
    */
   function onRightArrow (e) {
     let tm = copyTimestamp(focusValue.value)

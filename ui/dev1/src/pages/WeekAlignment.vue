@@ -1,53 +1,64 @@
 <template>
-  <div style="margin: 12px; display: inline-flex;">
-    <div style="width: 200px;">
-      <label
-        for="date-header"
-        style="margin-right: 2px;"
-      >date-header:</label>
-      <select
-        id="date-header"
-        v-model="dateHeader"
-      >
-        <option>stacked</option>
-        <option>inline</option>
-        <option>inverted</option>
-      </select>
+  <div class="subcontent">
+    <navigation-bar
+      @today="onToday"
+      @prev="onPrev"
+      @next="onNext"
+    />
+    <div
+      class="button-bar"
+      style="margin: 12px;"
+    >
+      <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
+        <label
+          for="date-header"
+          style="margin-right: 2px;"
+        >date-header:</label>
+        <select
+          id="date-header"
+          v-model="dateHeader"
+          class="button select"
+        >
+          <option>stacked</option>
+          <option>inline</option>
+          <option>inverted</option>
+        </select>
+      </div>
+
+      <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
+        <label
+          for="date-align"
+          style="margin-right: 2px;"
+        >date-align:</label>
+        <select
+          id="date-align"
+          v-model="dateAlign"
+          class="button select"
+        >
+          <option>center</option>
+          <option>left</option>
+          <option>right</option>
+        </select>
+      </div>
+
+      <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
+        <label
+          for="weekday-align"
+          style="margin-right: 2px;"
+        >weekday-align:</label>
+        <select
+          id="weekday-align"
+          v-model="weekdayAlign"
+          class="button select"
+        >
+          <option>center</option>
+          <option>left</option>
+          <option>right</option>
+        </select>
+      </div>
     </div>
 
-    <div style="width: 200px;">
-      <label
-        for="date-align"
-        style="margin-right: 2px;"
-      >date-align:</label>
-      <select
-        id="date-align"
-        v-model="dateAlign"
-      >
-        <option>center</option>
-        <option>left</option>
-        <option>right</option>
-      </select>
-    </div>
-
-    <div style="width: 200px;">
-      <label
-        for="weekday-align"
-        style="margin-right: 2px;"
-      >weekday-align:</label>
-      <select
-        id="weekday-align"
-        v-model="weekdayAlign"
-      >
-        <option>center</option>
-        <option>left</option>
-        <option>right</option>
-      </select>
-    </div>
-  </div>
-
-  <div>
-    <div style="margin: 10px;">
+    <div style="display: flex; justify-content: center">
       <QCalendarDay
         v-model="selectedDate"
         view="week"
@@ -55,6 +66,7 @@
         :date-header="dateHeader"
         :weekday-align="weekdayAlign"
         :date-align="dateAlign"
+        animated
         bordered
         style="max-width: 800px; width: 100%; height: 400px; display: inline-flex;"
         @change="onChange"
@@ -77,10 +89,12 @@ import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarDay.sass'
 
 import { defineComponent } from 'vue'
+import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
   name: 'WeekAlignment',
   components: {
+    NavigationBar,
     QCalendarDay
   },
   data () {
@@ -92,6 +106,16 @@ export default defineComponent({
     }
   },
   methods: {
+    onToday () {
+      this.$refs.calendar.moveToToday()
+    },
+    onPrev () {
+      this.$refs.calendar.prev()
+    },
+    onNext () {
+      this.$refs.calendar.next()
+    },
+
     onMoved (data) {
       console.log('onMoved', data)
     },

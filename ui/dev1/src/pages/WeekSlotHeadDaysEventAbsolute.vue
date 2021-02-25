@@ -1,48 +1,60 @@
 <template>
-  <QCalendarDay
-    ref="calendar"
-    v-model="selectedDate"
-    view="week"
-    :weekdays="weekdays"
-    style="max-width: 800px; width: 100%; height: 400px; display: inline-flex;"
-    @change="onChange"
-    @moved="onMoved"
-    @click-date="onClickDate"
-    @click-time="onClickTime"
-    @click-interval="onClickInterval"
-    @click-head-intervals="onClickHeadIntervals"
-    @click-head-day="onClickHeadDay"
-  >
-    <template #head-days-events="{ scope: { days, ref } }">
-      <div
-        :ref="ref"
-        class="inner-row"
+  <div class="subcontent">
+    <navigation-bar
+      @today="onToday"
+      @prev="onPrev"
+      @next="onNext"
+    />
+
+    <div style="display: flex; justify-content: center">
+      <QCalendarDay
+        ref="calendar"
+        v-model="selectedDate"
+        view="week"
+        :weekdays="weekdays"
+        animated
+        bordered
+        style="max-width: 800px; width: 100%; height: 400px; display: inline-flex;"
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-time="onClickTime"
+        @click-interval="onClickInterval"
+        @click-head-intervals="onClickHeadIntervals"
+        @click-head-day="onClickHeadDay"
       >
-        <template
-          v-for="(day, index) in days"
-          :key="index"
-        >
-          <template
-            v-for="event in allDayEventsMap[day.date]"
-            :key="event.id"
+        <template #head-days-events="{ scope: { days, ref } }">
+          <div
+            :ref="ref"
+            class="inner-row"
           >
-            <div
-              class="my-event"
-              :class="badgeClasses(event)"
-              :style="badgeStyles(day, event)"
+            <template
+              v-for="(day, index) in days"
+              :key="index"
             >
-              <abbr
-                :title="event.details"
-                class="tooltip"
+              <template
+                v-for="event in allDayEventsMap[day.date]"
+                :key="event.id"
               >
-                <span class="title q-calendar__ellipsis">{{ event.title }}</span>
-              </abbr>
-            </div>
-          </template>
+                <div
+                  class="my-event"
+                  :class="badgeClasses(event)"
+                  :style="badgeStyles(day, event)"
+                >
+                  <abbr
+                    :title="event.details"
+                    class="tooltip"
+                  >
+                    <span class="title q-calendar__ellipsis">{{ event.title }}</span>
+                  </abbr>
+                </div>
+              </template>
+            </template>
+          </div>
         </template>
-      </div>
-    </template>
-  </QCalendarDay>
+      </QCalendarDay>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -58,13 +70,16 @@ import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarDay.sass'
 
 import { defineComponent, ref, computed, onBeforeMount } from 'vue'
+import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
   name: 'WeelSlotHeadDaysEvents',
   components: {
+    NavigationBar,
     QCalendarDay
   },
   setup () {
+    const calendar = ref(null)
     const selectedDate = ref(today())
     const weekdays = [ 0, 1, 2, 3, 4, 5, 6 ]
     // we only need 2 events for this example
@@ -125,6 +140,16 @@ export default defineComponent({
       return s
     }
 
+    function onToday () {
+      calendar.value.moveToToday()
+    }
+    function onPrev () {
+      calendar.value.prev()
+    }
+    function onNext () {
+      calendar.value.next()
+    }
+
     function onMoved (data) {
       console.log('onMoved', data)
     }
@@ -155,6 +180,9 @@ export default defineComponent({
       parsedCellWidth,
       badgeClasses,
       badgeStyles,
+      onToday,
+      onPrev,
+      onNext,
       onMoved,
       onChange,
       onClickDate,

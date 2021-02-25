@@ -1,46 +1,35 @@
 <template>
-  <div style="margin: 12px;">
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onToday"
-    >
-      Today
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onPrev"
-    >
-      &lt; Prev
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onNext"
-    >
-      Next &gt;
-    </button>
-  </div>
-
-  <div style="width: 100%; display: flex; justify-content: center">
-    <QCalendarMonth
-      ref="calendar"
-      v-model="selectedDate"
-      no-active-date
-      use-navigation
-      bordered
-      animated
-      :weekdays="[1,2,3,4,5]"
-      style="max-width: 800px; width: 100%; height: 400px;"
-      @change="onChange"
-      @moved="onMoved"
-      @click-date="onClickDate"
-      @click-day="onClickDay"
-      @click-workweek="onClickWorkweek"
-      @click-head-workweek="onClickHeadWorkweek"
-      @click-head-day="onClickHeadDay"
+  <div class="subcontent">
+    <navigation-bar
+      @today="onToday"
+      @prev="onPrev"
+      @next="onNext"
     />
+
+    <div class="line">For keyboard navigation use the <span class="token">use-navigation</span> property along with the <span class="token">focusable</span> and <span class="token">focus-type</span> properties.</div>
+    <div class="line">Hint: When the calendar has focus use the <kbd>Home</kbd>, <kbd>End</kbd>, <kbd>&larr;</kbd>, <kbd>&rarr;</kbd>, <kbd>&uarr;</kbd> and <kbd>&darr;</kbd> keys.</div>
+
+    <div style="display: flex; justify-content: center">
+      <QCalendarMonth
+        ref="calendar"
+        v-model="selectedDate"
+        no-active-date
+        use-navigation
+        focusable
+        focus-type="['day']"
+        animated
+        bordered
+        :weekdays="[1,2,3,4,5]"
+        style="max-width: 800px; width: 100%; height: 400px;"
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-day="onClickDay"
+        @click-workweek="onClickWorkweek"
+        @click-head-workweek="onClickHeadWorkweek"
+        @click-head-day="onClickHeadDay"
+      />
+    </div>
   </div>
 </template>
 
@@ -52,10 +41,12 @@ import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarMonth.sass'
 
 import { defineComponent } from 'vue'
+import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
   name: 'MonthNavigation',
   components: {
+    NavigationBar,
     QCalendarMonth
   },
   data () {

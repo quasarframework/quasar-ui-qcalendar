@@ -1,28 +1,10 @@
 <template>
-  <div style="margin: 12px;">
-    <div class="button-bar">
-      <button
-        class="button"
-        style="margin: 2px;"
-        @click="onToday"
-      >
-        Today
-      </button>
-      <button
-        class="button"
-        style="margin: 2px;"
-        @click="onPrev"
-      >
-        &lt; Prev
-      </button>
-      <button
-        class="button"
-        style="margin: 2px;"
-        @click="onNext"
-      >
-        Next &gt;
-      </button>
-    </div>
+  <div class="subcontent">
+    <navigation-bar
+      @today="onToday"
+      @prev="onPrev"
+      @next="onNext"
+    />
     <div
       class="button-bar"
       style="margin: 12px;"
@@ -75,10 +57,8 @@
         </select>
       </div>
     </div>
-  </div>
 
-  <div>
-    <div style="margin: 10px;">
+    <div style="display: flex; justify-content: center">
       <QCalendarDay
         ref="calendar"
         v-model="selectedDate"
@@ -110,10 +90,12 @@ import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarDay.sass'
 
 import { defineComponent } from 'vue'
+import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
   name: 'DayAlignment',
   components: {
+    NavigationBar,
     QCalendarDay
   },
   data () {
@@ -125,15 +107,16 @@ export default defineComponent({
     }
   },
   methods: {
-    onNext () {
-      this.$refs.calendar.next()
+    onToday () {
+      this.$refs.calendar.moveToToday()
     },
     onPrev () {
       this.$refs.calendar.prev()
     },
-    onToday () {
-      this.$refs.calendar.moveToToday()
+    onNext () {
+      this.$refs.calendar.next()
     },
+
     onMoved (data) {
       console.log('onMoved', data)
     },

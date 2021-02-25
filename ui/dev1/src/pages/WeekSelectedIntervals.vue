@@ -1,46 +1,34 @@
 <template>
-  <div style="margin: 12px;">
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onToday"
-    >
-      Today
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onPrev"
-    >
-      &lt; Prev
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onNext"
-    >
-      Next &gt;
-    </button>
-  </div>
+  <div class="subcontent">
+    <navigation-bar
+      @today="onToday"
+      @prev="onPrev"
+      @next="onNext"
+    />
 
-  <QCalendarDay
-    ref="calendar"
-    v-model="selectedDate"
-    view="week"
-    style="max-width: 800px; width: 100%; height: 400px; display: inline-flex;"
-    :interval-minutes="15"
-    :interval-count="96"
-    :interval-height="15"
-    time-clicks-clamped
-    :selected-dates="selectedDates"
-    @click-time="onToggleTime"
-    @change="onChange"
-    @moved="onMoved"
-    @click-date="onClickDate"
-    @click-interval="onClickInterval"
-    @click-head-intervals="onClickHeadIntervals"
-    @click-head-day="onClickHeadDay"
-  />
+    <div style="display: flex; justify-content: center">
+      <QCalendarDay
+        ref="calendar"
+        v-model="selectedDate"
+        view="week"
+        style="max-width: 800px; width: 100%; height: 400px; display: inline-flex;"
+        :interval-minutes="15"
+        :interval-count="96"
+        :interval-height="15"
+        time-clicks-clamped
+        :selected-dates="selectedDates"
+        animated
+        bordered
+        @click-time="onToggleTime"
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-interval="onClickInterval"
+        @click-head-intervals="onClickHeadIntervals"
+        @click-head-day="onClickHeadDay"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -55,10 +43,12 @@ import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarDay.sass'
 
 import { defineComponent } from 'vue'
+import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
   name: 'WeekSelectedIntervals',
   components: {
+    NavigationBar,
     QCalendarDay
   },
   data () {

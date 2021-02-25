@@ -1,64 +1,49 @@
 <template>
-  <div style="margin: 12px;">
-    <div style="width: 100%">
-      <button
-        class="button"
-        style="margin: 2px;"
-        @click="onToday"
-      >
-        Today
-      </button>
-      <button
-        class="button"
-        style="margin: 2px;"
-        @click="onPrev"
-      >
-        &lt; Prev
-      </button>
-      <button
-        class="button"
-        style="margin: 2px;"
-        @click="onNext"
-      >
-        Next &gt;
-      </button>
-    </div>
-    <input
-      id="mobile"
-      v-model="mobile"
-      type="checkbox"
-    >
-    <label for="mobile">Mobile selection</label>
-    <input
-      id="hover"
-      v-model="useHover"
-      type="checkbox"
-    >
-    <label for="hover">Use Hover</label>
-  </div>
-
-  <div style="width: 100%; display: flex; justify-content: center">
-    <QCalendarMonth
-      ref="calendar"
-      v-model="selectedDate"
-      mini-mode
-      no-active-date
-      :selected-start-end-dates="startEndDates"
-      :hover="hover"
-      animated
-      bordered
-      style="max-width: 280px; width: 100%;"
-      @mousedown-day="onMouseDownDay"
-      @mouseup-day="onMouseUpDay"
-      @mousemove-day="onMouseMoveDay"
-      @change="onChange"
-      @moved="onMoved"
-      @click-day="onClickDay"
-      @click-date="onClickDate"
-      @click-workweek="onClickWorkweek"
-      @click-head-workweek="onClickHeadWorkweek"
-      @click-head-day="onClickHeadDay"
+  <div class="subcontent">
+    <navigation-bar
+      @today="onToday"
+      @prev="onPrev"
+      @next="onNext"
     />
+
+    <div style="display: flex; justify-content: center">
+      <input
+        id="mobile"
+        v-model="mobile"
+        type="checkbox"
+      >
+      <label for="mobile">Mobile selection</label>
+      <input
+        id="hover"
+        v-model="useHover"
+        type="checkbox"
+      >
+      <label for="hover">Use Hover</label>
+    </div>
+
+    <div style="display: flex; justify-content: center">
+      <QCalendarMonth
+        ref="calendar"
+        v-model="selectedDate"
+        mini-mode
+        no-active-date
+        :selected-start-end-dates="startEndDates"
+        :hover="hover"
+        animated
+        bordered
+        style="max-width: 280px; width: 100%;"
+        @mousedown-day="onMouseDownDay"
+        @mouseup-day="onMouseUpDay"
+        @mousemove-day="onMouseMoveDay"
+        @change="onChange"
+        @moved="onMoved"
+        @click-day="onClickDay"
+        @click-date="onClickDate"
+        @click-workweek="onClickWorkweek"
+        @click-head-workweek="onClickHeadWorkweek"
+        @click-head-day="onClickHeadDay"
+      />
+    </div>
   </div>
 </template>
 
@@ -72,15 +57,17 @@ import '@quasar/quasar-ui-qcalendar/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarMonth.sass'
 
+import { defineComponent, ref, computed } from 'vue'
+import NavigationBar from '../components/NavigationBar.vue'
+
 function leftClick (e) {
   return e.button === 0
 }
 
-import { defineComponent, ref, computed } from 'vue'
-
 export default defineComponent({
   name: 'MiniModeSelection',
   components: {
+    NavigationBar,
     QCalendarMonth
   },
   setup () {

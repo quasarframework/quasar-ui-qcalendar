@@ -1,95 +1,85 @@
 <template>
-  <div style="margin: 12px; display: inline-flex;">
-    <div style="width: 200px;">
-      <label
-        for="date-header"
-        style="margin-right: 2px;"
-      >date-header:</label>
-      <select
-        id="date-header"
-        v-model="dateHeader"
-      >
-        <option>stacked</option>
-        <option>inline</option>
-        <option>inverted</option>
-      </select>
-    </div>
-
-    <div style="width: 200px;">
-      <label
-        for="date-align"
-        style="margin-right: 2px;"
-      >date-align:</label>
-      <select
-        id="date-align"
-        v-model="dateAlign"
-      >
-        <option>center</option>
-        <option>left</option>
-        <option>right</option>
-      </select>
-    </div>
-
-    <div style="width: 200px;">
-      <label
-        for="weekday-align"
-        style="margin-right: 2px;"
-      >weekday-align:</label>
-      <select
-        id="weekday-align"
-        v-model="weekdayAlign"
-      >
-        <option>center</option>
-        <option>left</option>
-        <option>right</option>
-      </select>
-    </div>
-  </div>
-
-  <div style="margin: 12px;">
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onToday"
-    >
-      Today
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onPrev"
-    >
-      &lt; Prev
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onNext"
-    >
-      Next &gt;
-    </button>
-  </div>
-
-  <div style="margin: 10px;">
-    <QCalendarScheduler
-      ref="calendar"
-      v-model="selectedDate"
-      v-model:modelResources="resources"
-      view="week"
-      short-weekday-label
-      :date-header="dateHeader"
-      :weekday-align="weekdayAlign"
-      :date-align="dateAlign"
-      bordered
-      style="max-width: 800px; width: 100%; display: inline-flex;"
-      @change="onChange"
-      @moved="onMoved"
-      @click-date="onClickDate"
-      @click-day-resource="onClickDayResource"
-      @click-resource="onClickResource"
-      @click-head-resources="onClickHeadResources"
-      @click-head-day="onClickHeadDay"
+  <div class="subcontent">
+    <navigation-bar
+      @today="onToday"
+      @prev="onPrev"
+      @next="onNext"
     />
+    <div
+      class="button-bar"
+      style="margin: 12px;"
+    >
+      <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
+        <label
+          for="date-header"
+          style="margin-right: 2px;"
+        >date-header:</label>
+        <select
+          id="date-header"
+          v-model="dateHeader"
+          class="button select"
+        >
+          <option>stacked</option>
+          <option>inline</option>
+          <option>inverted</option>
+        </select>
+      </div>
+
+      <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
+        <label
+          for="date-align"
+          style="margin-right: 2px;"
+        >date-align:</label>
+        <select
+          id="date-align"
+          v-model="dateAlign"
+          class="button select"
+        >
+          <option>center</option>
+          <option>left</option>
+          <option>right</option>
+        </select>
+      </div>
+
+      <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
+        <label
+          for="weekday-align"
+          style="margin-right: 2px;"
+        >weekday-align:</label>
+        <select
+          id="weekday-align"
+          v-model="weekdayAlign"
+          class="button select"
+        >
+          <option>center</option>
+          <option>left</option>
+          <option>right</option>
+        </select>
+      </div>
+    </div>
+
+    <div style="display: flex; justify-content: center">
+      <QCalendarScheduler
+        ref="calendar"
+        v-model="selectedDate"
+        v-model:modelResources="resources"
+        view="week"
+        short-weekday-label
+        :date-header="dateHeader"
+        :weekday-align="weekdayAlign"
+        :date-align="dateAlign"
+        animated
+        bordered
+        style="max-width: 800px; width: 100%; display: inline-flex;"
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-day-resource="onClickDayResource"
+        @click-resource="onClickResource"
+        @click-head-resources="onClickHeadResources"
+        @click-head-day="onClickHeadDay"
+      />
+    </div>
   </div>
 </template>
 
@@ -101,10 +91,12 @@ import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarScheduler.sass'
 
 import { defineComponent } from 'vue'
+import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
   name: 'SchedulerAlignment',
   components: {
+    NavigationBar,
     QCalendarScheduler
   },
   data () {

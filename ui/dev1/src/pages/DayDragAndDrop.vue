@@ -1,103 +1,90 @@
 <template>
-  <div style="margin: 12px;">
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onToday"
-    >
-      Today
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onPrev"
-    >
-      &lt; Prev
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onNext"
-    >
-      Next &gt;
-    </button>
+  <div class="subcontent">
+    <navigation-bar
+      @today="onToday"
+      @prev="onPrev"
+      @next="onNext"
+    />
+
     <div class="line">Drag any items in the list to a calendar interval or the top header.</div>
-  </div>
 
-  <div style="display: flex; flex-direction: column; width: 100%;">
-    <div style="display: flex; justify-content: center; width: 100%; padding: 6px;">
-      <div style="margin: 10px;">
-        <ul class="list">
-          <li
-            v-for="item in dragItems"
-            :key="item.id"
-            class="button list-item"
-            draggable="true"
-            @dragstart="onDragStart($event, item)"
+    <div style="display: flex; justify-content: center">
+      <div style="display: flex; flex-direction: column; width: 100%;">
+        <div style="display: flex; justify-content: center; width: 100%; padding: 6px;">
+          <div style="margin: 10px;">
+            <ul class="list">
+              <li
+                v-for="item in dragItems"
+                :key="item.id"
+                class="button list-item"
+                draggable="true"
+                @dragstart="onDragStart($event, item)"
+              >
+                {{ item.name }}
+              </li>
+            </ul>
+          </div>
+          <QCalendarDay
+            ref="calendar"
+            v-model="selectedDate"
+            view="day"
+            :weekday-class="onWeekdayClass"
+            :interval-class="onIntervalClass"
+            :interval-start="24"
+            :interval-minutes="15"
+            :interval-count="56"
+            :interval-height="28"
+            :weekdays="[1,2,3,4,5]"
+            hoverable
+            animated
+            bordered
+            style="max-width: 800px; width: 100%; height: 400px; display: inline-flex;"
+            :drag-enter-func="onDragEnter"
+            :drag-over-func="onDragOver"
+            :drag-leave-func="onDragLeave"
+            :drop-func="onDrop"
+            @change="onChange"
+            @moved="onMoved"
+            @click-date="onClickDate"
+            @click-time="onClickTime"
+            @click-interval="onClickInterval"
+            @click-head-intervals="onClickHeadIntervals"
+            @click-head-day="onClickHeadDay"
           >
-            {{ item.name }}
-          </li>
-        </ul>
+            <template #head-date="{ scope: { timestamp } }">
+              <div
+                v-if="allDayEventsMap[timestamp.date] && allDayEventsMap[timestamp.date].length > 0"
+                style="display: flex; justify-content: space-evenly; flex-wrap: nowrap; align-items: center; font-weight: 400; font-size: 12px;"
+              >
+                <template
+                  v-for="event in allDayEventsMap[timestamp.date]"
+                  :key="event.time"
+                >
+                  <div style="flex-wrap: nowrap;">
+                    {{ event.name }}
+                  </div>
+                </template>
+              </div>
+            </template>
+
+            <template #day-interval="{ scope: { timestamp } }">
+              <div
+                v-if="hasEvents(timestamp)"
+                style="display: flex; justify-content: space-evenly; flex-wrap: nowrap; align-items: center; font-size: 12px;"
+              >
+                <template
+                  v-for="event in getEvents(timestamp)"
+                  :key="event.time"
+                >
+                  <div style="flex-wrap: nowrap; border: 1px solid pink; border-radius: 2px; padding: 2px; margin: 1px;">
+                    {{ event.name }}: {{ event.time }}
+                  </div>
+                </template>
+              </div>
+            </template>
+          </QCalendarDay>
+        </div>
       </div>
-      <QCalendarDay
-        ref="calendar"
-        v-model="selectedDate"
-        view="day"
-        :weekday-class="onWeekdayClass"
-        :interval-class="onIntervalClass"
-        :interval-start="24"
-        :interval-minutes="15"
-        :interval-count="56"
-        :interval-height="28"
-        :weekdays="[1,2,3,4,5]"
-        hoverable
-        animated
-        bordered
-        style="max-width: 800px; width: 100%; height: 400px; display: inline-flex;"
-        :drag-enter-func="onDragEnter"
-        :drag-over-func="onDragOver"
-        :drag-leave-func="onDragLeave"
-        :drop-func="onDrop"
-        @change="onChange"
-        @moved="onMoved"
-        @click-date="onClickDate"
-        @click-time="onClickTime"
-        @click-interval="onClickInterval"
-        @click-head-intervals="onClickHeadIntervals"
-        @click-head-day="onClickHeadDay"
-      >
-        <template #head-date="{ scope: { timestamp } }">
-          <div
-            v-if="allDayEventsMap[timestamp.date] && allDayEventsMap[timestamp.date].length > 0"
-            style="display: flex; justify-content: space-evenly; flex-wrap: nowrap; align-items: center; font-weight: 400; font-size: 12px;"
-          >
-            <template
-              v-for="event in allDayEventsMap[timestamp.date]"
-              :key="event.time"
-            >
-              <div style="flex-wrap: nowrap;">
-                {{ event.name }}
-              </div>
-            </template>
-          </div>
-        </template>
-
-        <template #day-interval="{ scope: { timestamp } }">
-          <div
-            v-if="hasEvents(timestamp)"
-            style="display: flex; justify-content: space-evenly; flex-wrap: nowrap; align-items: center; font-size: 12px;"
-          >
-            <template
-              v-for="event in getEvents(timestamp)"
-              :key="event.time"
-            >
-              <div style="flex-wrap: nowrap; border: 1px solid pink; border-radius: 2px; padding: 2px; margin: 1px;">
-                {{ event.name }}: {{ event.time }}
-              </div>
-            </template>
-          </div>
-        </template>
-      </QCalendarDay>
     </div>
   </div>
 </template>
@@ -110,10 +97,12 @@ import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarDay.sass'
 
 import { defineComponent } from 'vue'
+import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
   name: 'DayDragAndDrop',
   components: {
+    NavigationBar,
     QCalendarDay
   },
   data () {

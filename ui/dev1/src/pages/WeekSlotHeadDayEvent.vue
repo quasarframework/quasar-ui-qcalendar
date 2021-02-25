@@ -1,22 +1,34 @@
 <template>
-  <QCalendarDay
-    ref="calendar"
-    v-model="selectedDate"
-    view="week"
-    style="max-width: 800px; width: 100%; height: 400px; display: inline-flex;"
-    @change="onChange"
-    @moved="onMoved"
-    @click-date="onClickDate"
-    @click-time="onClickTime"
-    @click-interval="onClickInterval"
-    @click-head-intervals="onClickHeadIntervals"
-    @click-head-day="onClickHeadDay"
-  >
-    <template #head-day-event="{ scope }">
-      <!-- do every other slot -->
-      <span>{{ scope.timestamp.weekday % 2 ? scope.timestamp.date : undefined }}</span>
-    </template>
-  </QCalendarDay>
+  <div class="subcontent">
+    <navigation-bar
+      @today="onToday"
+      @prev="onPrev"
+      @next="onNext"
+    />
+
+    <div style="display: flex; justify-content: center">
+      <QCalendarDay
+        ref="calendar"
+        v-model="selectedDate"
+        view="week"
+        animated
+        bordered
+        style="max-width: 800px; width: 100%; height: 400px; display: inline-flex;"
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-time="onClickTime"
+        @click-interval="onClickInterval"
+        @click-head-intervals="onClickHeadIntervals"
+        @click-head-day="onClickHeadDay"
+      >
+        <template #head-day-event="{ scope }">
+          <!-- do every other slot -->
+          <span>{{ scope.timestamp.weekday % 2 ? scope.timestamp.date : undefined }}</span>
+        </template>
+      </QCalendarDay>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -27,10 +39,12 @@ import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarDay.sass'
 
 import { defineComponent } from 'vue'
+import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
   name: 'WeekSlotHeadDayEvent',
   components: {
+    NavigationBar,
     QCalendarDay
   },
   data () {
@@ -39,6 +53,16 @@ export default defineComponent({
     }
   },
   methods: {
+    onToday () {
+      this.$refs.calendar.moveToToday()
+    },
+    onPrev () {
+      this.$refs.calendar.prev()
+    },
+    onNext () {
+      this.$refs.calendar.next()
+    },
+
     onMoved (data) {
       console.log('onMoved', data)
     },

@@ -1,86 +1,71 @@
 <template>
-  <div style="margin: 12px;">
-    <div style="width: 100%">
-      <button
-        class="button"
-        style="margin: 2px;"
-        @click="onToday"
-      >
-        Today
-      </button>
-      <button
-        class="button"
-        style="margin: 2px;"
-        @click="onPrev"
-      >
-        &lt; Prev
-      </button>
-      <button
-        class="button"
-        style="margin: 2px;"
-        @click="onNext"
-      >
-        Next &gt;
-      </button>
-    </div>
-    <input
-      id="mobile"
-      v-model="mobile"
-      type="checkbox"
-    >
-    <label for="mobile">Mobile selection</label>
-    <input
-      id="hover"
-      v-model="hover"
-      type="checkbox"
-    >
-    <label for="hover">Hover mode</label>
-  </div>
+  <div class="subcontent">
+    <navigation-bar
+      @today="onToday"
+      @prev="onPrev"
+      @next="onNext"
+    />
 
-  <div style="width: 100%; display: flex; justify-content: center">
-    <QCalendarMonth
-      ref="calendar1"
-      v-model="selectedDate1"
-      mini-mode
-      no-active-date
-      :hover="canHover"
-      :selected-start-end-dates="startEndDates"
-      :min-weeks="6"
-      bordered
-      animated
-      style="max-width: 280px; width: 100%;"
-      @mousedown-day="onMouseDownDay"
-      @mouseup-day="onMouseUpDay"
-      @mousemove-day="onMouseMoveDay"
-      @change="onChange"
-      @moved="onMoved"
-      @click-day="onClickDay"
-      @click-workweek="onClickWorkweek"
-      @click-head-workweek="onClickHeadWorkweek"
-      @click-head-day="onClickHeadDay"
-    />
-    <QCalendarMonth
-      ref="calendar2"
-      v-model="selectedDate2"
-      mini-mode
-      no-active-date
-      :hover="canHover"
-      :selected-start-end-dates="startEndDates"
-      :min-weeks="6"
-      bordered
-      animated
-      style="max-width: 280px; width: 100%;"
-      @mousedown-day="onMouseDownDay"
-      @mouseup-day="onMouseUpDay"
-      @mousemove-day="onMouseMoveDay"
-      @change="onChange"
-      @moved="onMoved"
-      @click-date="onClickDate"
-      @click-day="onClickDay"
-      @click-workweek="onClickWorkweek"
-      @click-head-workweek="onClickHeadWorkweek"
-      @click-head-day="onClickHeadDay"
-    />
+    <div style="display: flex; justify-content: center">
+      <input
+        id="mobile"
+        v-model="mobile"
+        type="checkbox"
+      >
+      <label for="mobile">Mobile selection</label>
+      <input
+        id="hover"
+        v-model="hover"
+        type="checkbox"
+      >
+      <label for="hover">Hover mode</label>
+    </div>
+
+    <div style="display: flex; justify-content: center">
+      <QCalendarMonth
+        ref="calendar1"
+        v-model="selectedDate1"
+        mini-mode
+        no-active-date
+        :hover="canHover"
+        :selected-start-end-dates="startEndDates"
+        :min-weeks="6"
+        bordered
+        animated
+        style="max-width: 280px; width: 100%;"
+        @mousedown-day="onMouseDownDay"
+        @mouseup-day="onMouseUpDay"
+        @mousemove-day="onMouseMoveDay"
+        @change="onChange"
+        @moved="onMoved"
+        @click-day="onClickDay"
+        @click-workweek="onClickWorkweek"
+        @click-head-workweek="onClickHeadWorkweek"
+        @click-head-day="onClickHeadDay"
+      />
+      <QCalendarMonth
+        ref="calendar2"
+        v-model="selectedDate2"
+        mini-mode
+        no-active-date
+        :hover="canHover"
+        :selected-start-end-dates="startEndDates"
+        :min-weeks="6"
+        bordered
+        animated
+        style="max-width: 280px; width: 100%;"
+        @mousedown-day="onMouseDownDay"
+        @mouseup-day="onMouseUpDay"
+        @mousemove-day="onMouseMoveDay"
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-day="onClickDay"
+        @click-workweek="onClickWorkweek"
+        @click-head-workweek="onClickHeadWorkweek"
+        @click-head-day="onClickHeadDay"
+      />
+    </div>
   </div>
 </template>
 
@@ -101,10 +86,12 @@ function leftClick (e) {
 }
 
 import { defineComponent, ref, computed, onBeforeMount } from 'vue'
+import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
   name: 'MiniModeMultiMonthSelection',
   components: {
+    NavigationBar,
     QCalendarMonth
   },
   setup () {

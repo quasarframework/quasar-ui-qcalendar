@@ -1,46 +1,33 @@
 <template>
-  <div style="margin: 12px;">
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onToday"
-    >
-      Today
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onPrev"
-    >
-      &lt; Prev
-    </button>
-    <button
-      class="button"
-      style="margin: 2px;"
-      @click="onNext"
-    >
-      Next &gt;
-    </button>
-  </div>
+  <div class="subcontent">
+    <navigation-bar
+      @today="onToday"
+      @prev="onPrev"
+      @next="onNext"
+    />
 
-  <QCalendarScheduler
-    ref="calendar"
-    v-model="selectedDate"
-    v-model:modelResources="resources"
-    view="week"
-    resource-key="id"
-    resource-label="name"
-    bordered
-    style="max-width: 800px; width: 100%; max-height: 400px; display: inline-flex;"
-    @change="onChange"
-    @moved="onMoved"
-    @resource-expanded="onResourceExpanded"
-    @click-date="onClickDate"
-    @click-day-resource="onClickDayResource"
-    @click-resource="onClickResource"
-    @click-head-resources="onClickHeadResources"
-    @click-head-day="onClickHeadDay"
-  />
+    <div style="display: flex; justify-content: center">
+      <QCalendarScheduler
+        ref="calendar"
+        v-model="selectedDate"
+        v-model:modelResources="resources"
+        view="week"
+        resource-key="id"
+        resource-label="name"
+        animated
+        bordered
+        style="max-width: 800px; width: 100%; max-height: 400px; display: inline-flex;"
+        @change="onChange"
+        @moved="onMoved"
+        @resource-expanded="onResourceExpanded"
+        @click-date="onClickDate"
+        @click-day-resource="onClickDayResource"
+        @click-resource="onClickResource"
+        @click-head-resources="onClickHeadResources"
+        @click-head-day="onClickHeadDay"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -51,10 +38,12 @@ import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarScheduler.sass'
 
 import { defineComponent } from 'vue'
+import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
   name: 'SchedulerBasic',
   components: {
+    NavigationBar,
     QCalendarScheduler
   },
   data () {

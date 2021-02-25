@@ -1,54 +1,68 @@
 <template>
-  <div class="select">
-    <label for="theme">Choose a theme color:&nbsp;</label>
-    <select
-      id="theme"
-      v-model="theme"
-      name="theme"
-    >
-      <option
-        v-for="theme2 in themesList"
-        :key="theme2.label"
-        :value="theme2.value"
-      >
-        {{ theme2.label }}
-      </option>
-    </select>
-  </div>
+  <div class="subcontent">
+    <navigation-bar
+      @today="onToday"
+      @prev="onPrev"
+      @next="onNext"
+    />
 
-  <QCalendarDay
-    ref="calendar"
-    v-model="selectedDate"
-    view="week"
-    bordered
-    :interval-minutes="15"
-    :interval-count="96"
-    :interval-height="10"
-    :style="theme"
-    style="max-width: 800px; width: 100%; height: 400px; display: inline-flex;"
-    @change="onChange"
-    @moved="onMoved"
-    @click-date="onClickDate"
-    @click-time="onClickTime"
-    @click-interval="onClickInterval"
-    @click-head-intervals="onClickHeadIntervals"
-    @click-head-day="onClickHeadDay"
-  />
+    <div style="display: flex; justify-content: center">
+      <div style="display: flex; justify-content: center; align-items: center;">
+        <label for="theme" style="white-space: nowrap">Choose a theme:&nbsp;</label>
+        <select
+          id="theme"
+          v-model="theme"
+          name="theme"
+          class="button select"
+        >
+          <option
+            v-for="t in themesList"
+            :key="t.label"
+            :value="t.value"
+          >
+            {{ t.label }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div style="display: flex; justify-content: center">
+      <QCalendarScheduler
+        ref="calendar"
+        v-model="selectedDate"
+        v-model:modelResources="resources"
+        view="week"
+        animated
+        bordered
+        :style="theme"
+        style="max-width: 800px; width: 100%; display: inline-flex;"
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-day-resource="onClickDayResource"
+        @click-resource="onClickResource"
+        @click-head-resources="onClickHeadResources"
+        @click-head-day="onClickHeadDay"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
-import { QCalendarDay } from '@quasar/quasar-ui-qcalendar/QCalendarDay.js'
+import { QCalendarScheduler } from '@quasar/quasar-ui-qcalendar/QCalendarScheduler.js'
 import { today } from '@quasar/quasar-ui-qcalendar/Timestamp.js'
 import '@quasar/quasar-ui-qcalendar/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
-import '@quasar/quasar-ui-qcalendar/QCalendarDay.sass'
+import '@quasar/quasar-ui-qcalendar/QCalendarScheduler.sass'
 
 import { defineComponent } from 'vue'
+import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
-  name: 'WeekColor',
+  name: 'SchedulerColor',
   components: {
-    QCalendarDay
+    NavigationBar,
+    QCalendarScheduler
   },
   data () {
     return {
@@ -424,7 +438,16 @@ export default defineComponent({
           '--calendar-work-week-font-size': '1.0em',
           '--calendar-head-font-weight': '600'
         }
-      }
+      },
+      resources: [
+        { id: 1, label: 'John' },
+        { id: 2, label: 'Mary' },
+        { id: 3, label: 'Susan' },
+        { id: 4, label: 'Olivia' },
+        { id: 5, label: 'Board Room' },
+        { id: 6, label: 'Room-1' },
+        { id: 7, label: 'Room-2' }
+      ]
     }
   },
   computed: {
@@ -440,6 +463,15 @@ export default defineComponent({
     }
   },
   methods: {
+    onToday () {
+      this.$refs.calendar.moveToToday()
+    },
+    onPrev () {
+      this.$refs.calendar.prev()
+    },
+    onNext () {
+      this.$refs.calendar.next()
+    },
     onMoved (data) {
       console.log('onMoved', data)
     },
@@ -449,14 +481,14 @@ export default defineComponent({
     onClickDate (data) {
       console.log('onClickDate', data)
     },
-    onClickTime (data) {
-      console.log('onClickTime', data)
+    onClickDayResource (data) {
+      console.log('onClickDayResource', data)
     },
-    onClickInterval (data) {
-      console.log('onClickInterval', data)
+    onClickResource (data) {
+      console.log('onClickResource', data)
     },
-    onClickHeadIntervals (data) {
-      console.log('onClickHeadIntervals', data)
+    onClickHeadResources (data) {
+      console.log('onClickHeadResources', data)
     },
     onClickHeadDay (data) {
       console.log('onClickHeadDay', data)
@@ -464,13 +496,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style lang="sass" scoped>
-.select
-  display: flex
-  flex: 1 1 100%
-  flex-direction: row
-  justify-content: center
-  margin: 4px
-
-</style>

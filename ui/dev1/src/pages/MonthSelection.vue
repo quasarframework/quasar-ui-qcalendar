@@ -1,54 +1,40 @@
 <template>
-  <div style="margin: 12px;">
-    <div style="width: 100%">
-      <button
-        class="button"
-        style="margin: 2px;"
-        @click="onToday"
-      >
-        Today
-      </button>
-      <button
-        class="button"
-        style="margin: 2px;"
-        @click="onPrev"
-      >
-        &lt; Prev
-      </button>
-      <button
-        class="button"
-        style="margin: 2px;"
-        @click="onNext"
-      >
-        Next &gt;
-      </button>
-    </div>
-    <input
-      id="mobile"
-      v-model="mobile"
-      type="checkbox"
-    >
-    <label for="mobile">Mobile selection</label>
-  </div>
-
-  <div style="width: 100%; display: flex; justify-content: center">
-    <QCalendarMonth
-      ref="calendar"
-      v-model="selectedDate"
-      :selected-start-end-dates="startEndDates"
-      no-active-date
-      bordered
-      style="max-width: 800px; width: 100%; height: 400px;"
-      @mousedown-day="onMouseDownDay"
-      @mouseup-day="onMouseUpDay"
-      @mousemove-day="onMouseMoveDay"
-      @change="onChange"
-      @moved="onMoved"
-      @click-date="onClickDate"
-      @click-workweek="onClickWorkweek"
-      @click-head-workweek="onClickHeadWorkweek"
-      @click-head-day="onClickHeadDay"
+  <div class="subcontent">
+    <navigation-bar
+      @today="onToday"
+      @prev="onPrev"
+      @next="onNext"
     />
+
+    <div style="display: flex; justify-content: center">
+      <input
+        id="mobile"
+        v-model="mobile"
+        type="checkbox"
+      >
+      <label for="mobile">Mobile selection</label>
+    </div>
+
+    <div style="display: flex; justify-content: center">
+      <QCalendarMonth
+        ref="calendar"
+        v-model="selectedDate"
+        :selected-start-end-dates="startEndDates"
+        no-active-date
+        animated
+        bordered
+        style="max-width: 800px; width: 100%; height: 400px;"
+        @mousedown-day="onMouseDownDay"
+        @mouseup-day="onMouseUpDay"
+        @mousemove-day="onMouseMoveDay"
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-workweek="onClickWorkweek"
+        @click-head-workweek="onClickHeadWorkweek"
+        @click-head-day="onClickHeadDay"
+      />
+    </div>
   </div>
 </template>
 
@@ -62,15 +48,17 @@ import '@quasar/quasar-ui-qcalendar/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarMonth.sass'
 
+import { defineComponent, ref, computed } from 'vue'
+import NavigationBar from '../components/NavigationBar.vue'
+
 function leftClick (e) {
   return e.button === 0
 }
 
-import { defineComponent, ref, computed } from 'vue'
-
 export default defineComponent({
   name: 'MonthSelection',
   components: {
+    NavigationBar,
     QCalendarMonth
   },
   setup () {

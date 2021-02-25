@@ -1,56 +1,48 @@
 <template>
-  <div style="margin: 12px;">
-    <div style="width: 100%">
-      <button
-        class="button"
-        style="margin: 2px;"
-        @click="onToday"
-      >
-        Today
-      </button>
-      <button
-        class="button"
-        style="margin: 2px;"
-        @click="onPrev"
-      >
-        &lt; Prev
-      </button>
-      <button
-        class="button"
-        style="margin: 2px;"
-        @click="onNext"
-      >
-        Next &gt;
-      </button>
-    </div>
-    <input
-      id="mobile"
-      v-model="mobile"
-      type="checkbox"
-    >
-    <label for="mobile">Mobile selection</label>
-  </div>
+  <div class="subcontent">
+    <navigation-bar
+      @today="onToday"
+      @prev="onPrev"
+      @next="onNext"
+    />
 
-  <QCalendarDay
-    ref="calendar"
-    v-model="selectedDate"
-    view="week"
-    style="max-width: 800px; width: 100%; height: 400px; display: inline-flex;"
-    :interval-minutes="15"
-    :interval-count="96"
-    :interval-height="15"
-    time-clicks-clamped
-    :selected-start-end-dates="startEndDates"
-    @change="onChange"
-    @moved="onMoved"
-    @mousedown-time="onMouseDownTime"
-    @mouseup-time="onMouseUpTime"
-    @mousemove-time="onMouseMoveTime"
-    @click-date="onClickDate"
-    @click-interval="onClickInterval"
-    @click-head-intervals="onClickHeadIntervals"
-    @click-head-day="onClickHeadDay"
-  />
+    <div class="line">The example below uses the <code class="token">selected-start-end-dates</code> property in conjunction with mouse events to select iterval ranges.</div>
+    <div class="line">Try toggling the <code class="token">Mobile selection</code> to see how selection can be changed.</div>
+
+    <div style="display: flex; justify-content: center">
+      <input
+        id="mobile"
+        v-model="mobile"
+        type="checkbox"
+      >
+      <label for="mobile">Mobile selection (first click, second click)</label>
+    </div>
+
+    <div style="display: flex; justify-content: center">
+      <QCalendarDay
+        ref="calendar"
+        v-model="selectedDate"
+        view="week"
+        style="max-width: 800px; width: 100%; height: 400px; display: inline-flex;"
+        :interval-minutes="15"
+        :interval-count="96"
+        :interval-height="15"
+        time-clicks-clamped
+        :selected-start-end-dates="startEndDates"
+        animated
+        bordered
+        @change="onChange"
+        @moved="onMoved"
+        @mousedown-time="onMouseDownTime"
+        @mouseup-time="onMouseUpTime"
+        @mousemove-time="onMouseMoveTime"
+        @click-date="onClickDate"
+        @click-interval="onClickInterval"
+        @click-head-intervals="onClickHeadIntervals"
+        @click-head-day="onClickHeadDay"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -64,15 +56,17 @@ import '@quasar/quasar-ui-qcalendar/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarDay.sass'
 
+import { defineComponent, ref, computed } from 'vue'
+import NavigationBar from '../components/NavigationBar.vue'
+
 function leftClick (e) {
   return e.button === 0
 }
 
-import { defineComponent, ref, computed } from 'vue'
-
 export default defineComponent({
   name: 'WeekSelection',
   components: {
+    NavigationBar,
     QCalendarDay
   },
   setup () {
