@@ -51,20 +51,16 @@
           </div>
         </q-item-label>
 
-        <div class="list">
-          <div
-            v-for="page in filteredPages"
-            :key="page.name"
-            class="button list-item"
-          >
-            <router-link
-              :to="'/' + page.path"
-              style="width: 100%"
-            >
-              {{ page.file }}
-            </router-link>
-          </div>
-        </div>
+      <div class="list">
+        <button
+          v-for="page in filteredPages"
+          :key="page.path"
+          class="button list-item ellipsis"
+          @click="onClick(page.path)"
+        >
+          {{ page.name }}
+        </button>
+      </div>
 
       </q-list>
     </q-drawer>
@@ -102,7 +98,7 @@
 <script>
 
 import { defineComponent, ref, computed, onBeforeMount, onMounted, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 import pages from '../router/pages'
 
@@ -117,6 +113,7 @@ export default defineComponent({
       basePath = 'https://github.com/quasarframework/quasar-ui-qcalendar/tree/next/ui/dev1/src/pages/',
       name = ref(null),
       $route = useRoute(),
+      $router = useRouter(),
       leftDrawerOpen = ref(false),
       filter = ref('')
 
@@ -163,6 +160,10 @@ export default defineComponent({
       }
     }
 
+    function onClick (path) {
+      $router.push('/' + path)
+    }
+
     return {
       filter,
       pages,
@@ -173,7 +174,8 @@ export default defineComponent({
       leftDrawerOpen,
       toggleLeftDrawer () {
         leftDrawerOpen.value = !leftDrawerOpen.value
-      }
+      },
+      onClick
     }
   }
 })
