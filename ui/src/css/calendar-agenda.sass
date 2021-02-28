@@ -3,93 +3,102 @@
 .q-calendar-agenda
   display: flex
   flex: 1
-  flex-wrap: nowrap
   flex-direction: column
+  flex-wrap: nowrap
   height: 100%
   width: 100%
 
   &__head
+    position: relative
     flex: none
     display: flex
-    overflow: hidden
-    min-height: 25px
+    flex-direction: row
 
-  &__intervals-head
-    flex: none
-    display: flex
-    overflow: hidden
-    vertical-align: bottom
-
-    &--text
-      display: block
-      position: relative
-      font-size: 10px
-      text-align: center
+    &--intervals
+      flex: none
+      display: flex
       vertical-align: bottom
 
-  &__head-day
-    flex: 1 1 auto
-    flex-wrap: nowrap
-    overflow: hidden
-    width: 0
+    &--days
+      &__column
+        position: relative
+        display: flex
+        flex-direction: column
+        flex: 1 1 100%
+        user-select: none
 
-  &__head-days
-    &--events-container
-      display: flex
-      flex: 1
+      &__weekdays
+        position: relative
+        display: flex
+        flex-direction: row
+        flex-wrap: nowrap
+        user-select: none
+        font-size: 1rem
+
+      &__event
+        position: relative
+        display: flex
+        flex-direction: row
+        flex-wrap: nowrap
+        height: auto
+
+      &__events
+        position: absolute
+        display: flex
+        flex-direction: row
+        flex-wrap: nowrap
+        bottom: 0
+        left: 0
+        right: 0
+
+    &--day
+      position: relative
+      flex: 1 1 100%
       flex-wrap: nowrap
-      flex-direction: row
-      width: 100%
+      overflow: hidden
+      width: 0
+      outline: 0
 
+      &__event
+        position: relative
+        flex: 1 1 auto
+        flex-wrap: nowrap
+        overflow: hidden
 
-  &__head--weekday
-    display: flex
-    flex-wrap: nowrap
-    flex: 1
-    user-select: none
-    padding: 4px
-    font-size: 1rem
-    justify-content: center
-
-  &__head-day-label
-    user-select: none
-    cursor: pointer
-    margin: 2px
-
-  &__column-header--before
-    display: flex
-    flex-wrap: nowrap
-    flex: 1
-    user-select: none
-    padding: 4px
-    font-size: 1rem
-    justify-content: left
-
+  &__head--weekday,
+  &__head--date,
+  &__column-header--before,
   &__column-header--after
     display: flex
     flex-wrap: nowrap
-    flex: 1
+    // flex: 1
     user-select: none
-    padding: 4px
     font-size: 1rem
-    justify-content: left
+
+  &__head--weekday,
+  &__head--date
+    margin: 2px
+    flex: 1 0 0
+
+  &__head--day__label
+    user-select: none
+    cursor: pointer
 
   &__body
     flex: 1 1 60%
     overflow: hidden
     display: flex
     position: relative
-    flex-direction: column
+    // flex-direction: column
 
   &__scroll-area
-    overflow-y: scroll
+    overflow: auto
     flex: 1 1 auto
     display: flex
     align-items: flex-start
 
   &__pane
     width: 100%
-    // overflow-y: hidden
     overflow: hidden
     flex: none
     display: flex
@@ -99,39 +108,89 @@
     position: relative
     display: flex
     flex: 1
-    width: 100%
-    height: 100%
+    flex-direction: column
 
-  &__intervals-body
-    flex: none
+  &__intervals-column
+    position: relative
+    display: flex
+    flex-direction: column
+    flex: 1 1 100%
     user-select: none
 
   &__interval
-    text-align: center
+    // position: relative
+    text-align: left
+    outline: 0
 
-  &__interval--text
-    display: block
-    position: relative
-    top: -6px
-    font-size: 10px
+    &--section
+      position: relative
+      text-align: left
+      outline: 0
+
+    &--text
+      display: block
+      position: relative
+      top: -6px
+      font-size: 10px
+      width: 100%
+      text-align: center
 
   &__day
+    position: relative
+    display: flex
+    flex-direction: column
     flex: 1
     width: 0
+
+  &__day-interval
     position: relative
+    outline: 0
+
+    &--section
+      position: relative
+      outline: 0
+
+// sticky
+.q-calendar-agenda__intervals-column.q-calendar__sticky
+  position: sticky
+  left: 0 #{"/* rtl:ignore */"}
+  z-index: 1
+
+.q-calendar-agenda__head.q-calendar__sticky
+  position: sticky
+  left: 0 #{"/* rtl:ignore */"}
+  top: 0
+  z-index: 2
+
+.q-calendar-agenda__head--intervals.q-calendar__sticky
+  position: sticky
+  left: 0 #{"/* rtl:ignore */"}
+  top: 0
+  z-index: 3
 
 // coloring and other vars
 .q-calendar-agenda
 
-  &__interval
-    // border-bottom: var(--calendar-background) 1px solid
+  &__head
+    border-bottom: var(--calendar-border)
+    color: var(--calendar-color)
+    background: var(--calendar-background)
 
-  &__intervals-head
+  // hide the interval lines
+  // needed for correct spacing
+  &__interval
+    border-bottom: var(--calendar-background) 1px solid
+    color: var(--calendar-color)
+    background: var(--calendar-background)
+
+  &__head--intervals
     border-right: var(--calendar-border)
     min-width: var(--calendar-intervals-width)
     max-width: var(--calendar-intervals-width)
+    color: var(--calendar-color)
+    background: var(--calendar-background)
 
-  &__head-day
+  &__head--day
     font-weight: var(--calendar-head-font-weight)
     border-right: var(--calendar-border)
 
@@ -139,21 +198,24 @@
       border-right: none
 
     &.q-active-date
-      .q-btn
+      .q-calendar__button
         color: var(--calendar-active-date-color)
-
-      .q-btn__wrapper:before
         background: var(--calendar-active-date-background)
 
     &.q-current-day
-      color: var(--calendar-current-date-color)
-
-      .q-btn__wrapper:before
+      .q-calendar__button
+        // color: var(--calendar-current-date-color)
         border: var(--calendar-border-current)
 
     &.q-disabled-day
       color: var(--calendar-disabled-date-color)
       background: var(--calendar-disabled-date-background) !important
+
+    &__event
+      border-right: var(--calendar-border)
+
+      &:last-child
+        border-right: none
 
   &__column-header--before
     border-bottom: var(--calendar-border)
@@ -161,10 +223,7 @@
   &__column-header--after
     border-top: var(--calendar-border)
 
-  &__body
-    border-top: var(--calendar-border)
-
-  &__intervals-body
+  &__intervals-column
     border-right: var(--calendar-border)
     min-width: var(--calendar-intervals-width)
     max-width: var(--calendar-intervals-width)
@@ -212,25 +271,30 @@
     &:last-child
       border-bottom: none !important
 
-  &__day-interval--droppable
-    border: var(--calendar-border-droppable)
-
-  &__day--droppable
-    border: var(--calendar-border-droppable)
-
 .q-dark div,
 .body--dark div,
 .q-calendar--dark
 
   .q-calendar-agenda
 
+    &__head
+      border-bottom: var(--calendar-border-dark)
+      color: var(--calendar-color-dark)
+      background: var(--calendar-background-dark)
+
+    // hide the interval lines
+    // needed for correct spacing
     &__interval
-      // border-bottom: var(--calendar-background-dark) 1px solid
+      border-bottom: var(--calendar-background-dark) 1px solid
+      color: var(--calendar-color-dark)
+      background: var(--calendar-background-dark)
 
-    &__intervals-head
+    &__head--intervals
       border-right: var(--calendar-border-dark)
+      color: var(--calendar-color-dark)
+      background: var(--calendar-background-dark)
 
-    &__head-day
+    &__head--day
       border-right: var(--calendar-border-dark)
       font-weight: var(--calendar-head-font-weight)
 
@@ -238,21 +302,20 @@
         border-right: none
 
       &.q-active-date
-        .q-btn
+        .q-calendar__button
           color: var(--calendar-active-date-color-dark)
-
-        .q-btn__wrapper:before
           background: var(--calendar-active-date-background-dark)
 
       &.q-current-day
-        color: var(--calendar-current-date-color-dark)
-
-        .q-btn__wrapper:before
+        .q-calendar__button
           border: var(--calendar-border-current-dark)
 
-    &.q-disabled-day
-      color: var(--calendar-disabled-date-color-dark)
-      background: var(--calendar-disabled-date-background-dark) !important
+      &__event
+        border-right: var(--calendar-border-dark)
+
+      &.q-disabled-day
+        color: var(--calendar-disabled-date-color-dark)
+        background: var(--calendar-disabled-date-background-dark) !important
 
     &__column-header--before
       border-bottom: var(--calendar-border-dark)
@@ -260,10 +323,7 @@
     &__column-header--after
       border-top: var(--calendar-border-dark)
 
-    &__body
-      border-top: var(--calendar-border-dark)
-
-    &__intervals-body
+    &__intervals-column
       border-right: var(--calendar-border-dark)
 
     &__day
@@ -307,9 +367,3 @@
         &.q-range
           color: var(--calendar-range-color-dark)
           background: var(--calendar-range-background-dark)
-
-    &__day-interval--droppable
-      border: var(--calendar-border-droppable-dark)
-
-    &__day--droppable
-      border: var(--calendar-border-droppable-dark)

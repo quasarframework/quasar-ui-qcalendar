@@ -132,6 +132,58 @@ export const useSchedulerProps = {
   }
 }
 
+export const useAgendaProps = {
+  view: {
+    type: String,
+    validator: v => [ 'day', 'week', 'month', 'month-interval' ].includes(v),
+    default: 'day'
+  },
+  leftColumnOptions: {
+    type: Array
+  },
+  rightColumnOptions: {
+    type: Array
+  },
+  columnOptionsId: {
+    type: String
+  },
+  columnOptionsLabel: {
+    type: String
+  },
+  weekdayStyle: {
+    type: Function,
+    default: null
+  },
+  weekdayClass: {
+    type: Function,
+    default: null
+  },
+  dayStyle: {
+    type: Function,
+    default: null
+  },
+  dayClass: {
+    type: Function,
+    default: null
+  },
+  dateHeader: {
+    type: String,
+    default: 'stacked',
+    validator: v => [ 'stacked', 'inline', 'inverted' ].includes(v)
+  },
+  dayHeight: {
+    type: [ Number, String ],
+    default: 0,
+    validator: validateNumber
+  },
+  dayMinHeight: {
+    type: [ Number, String ],
+    default: 40,
+    validator: validateNumber
+  }
+}
+
+
 export default function (props, {
   weekdaySkips,
   times,
