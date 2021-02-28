@@ -1,12 +1,12 @@
 <template>
   <div class="subcontent">
+    <div class="line">The example below uses the <code class="token">day-container</code> slot to show a current time indicator absolutely positioned.</div>
+
     <navigation-bar
       @today="onToday"
       @prev="onPrev"
       @next="onNext"
     />
-
-    <div class="line">The example below uses the <code class="token">day-container</code> slot to show a current time indicator absolutely positioned.</div>
 
     <div style="display: flex; justify-content: center">
       <QCalendarDay

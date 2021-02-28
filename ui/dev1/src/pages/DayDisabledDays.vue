@@ -1,12 +1,12 @@
 <template>
   <div class="subcontent">
+    <div class="line">The next 4 days after the current day have been disabled with the <code class="token">disabled-days</code> property.</div>
+
     <navigation-bar
       @today="onToday"
       @prev="onPrev"
       @next="onNext"
     />
-
-    <div class="line">The next 4 days after the current day have been disabled with the <code class="token">disabled-days</code> property.</div>
 
     <div style="display: flex; justify-content: center">
       <QCalendarDay

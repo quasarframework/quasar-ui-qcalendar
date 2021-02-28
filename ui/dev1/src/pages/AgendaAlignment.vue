@@ -1,6 +1,7 @@
 <template>
   <div class="subcontent">
     <div class="line">You can use the properties <code class="token">date-header</code>, <code class="token">date-align</code> and <code class="token">weekday-align</code> to manipulate how the header area looks.</div>
+
     <div
       class="button-bar"
       style="margin: 12px;"
@@ -61,14 +62,18 @@
     />
 
     <div style="display: flex; justify-content: center">
-      <QCalendarDay
+      <QCalendarAgenda
         ref="calendar"
         v-model="selectedDate"
-        view="day"
+        view="week"
         short-weekday-label
         :date-header="dateHeader"
         :weekday-align="weekdayAlign"
         :date-align="dateAlign"
+        :left-column-options="leftColumnOptions"
+        column-options-id="id"
+        column-options-label="label"
+        :day-min-height="200"
         bordered
         animated
         style="max-width: 800px; width: 100%; height: 200px; display: inline-flex;"
@@ -85,11 +90,11 @@
 </template>
 
 <script>
-import { QCalendarDay } from '@quasar/quasar-ui-qcalendar/QCalendarDay.js'
+import { QCalendarAgenda } from '@quasar/quasar-ui-qcalendar/QCalendarAgenda.js'
 import { today } from '@quasar/quasar-ui-qcalendar/Timestamp.js'
 import '@quasar/quasar-ui-qcalendar/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
-import '@quasar/quasar-ui-qcalendar/QCalendarDay.sass'
+import '@quasar/quasar-ui-qcalendar/QCalendarAgenda.sass'
 
 import { defineComponent } from 'vue'
 import NavigationBar from '../components/NavigationBar.vue'
@@ -98,14 +103,24 @@ export default defineComponent({
   name: 'DayAlignment',
   components: {
     NavigationBar,
-    QCalendarDay
+    QCalendarAgenda
   },
   data () {
     return {
       selectedDate: today(),
       dateAlign: 'center',
       weekdayAlign: 'center',
-      dateHeader: 'stacked'
+      dateHeader: 'stacked',
+      leftColumnOptions: [
+        {
+          id: 1,
+          label: 'Left 1'
+        },
+        {
+          id: 2,
+          label: 'Left 2'
+        }
+      ]
     }
   },
   methods: {
@@ -143,18 +158,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style lang="sass" scoped>
-.q-gutter-xs, .q-gutter-y-xs
-    margin-top: -4px
-
-.q-gutter-x-xs, .q-gutter-xs
-    margin-left: -4px
-
-.q-gutter-xs>*, .q-gutter-y-xs>*
-    margin-top: 4px
-
-.q-gutter-x-xs>*, .q-gutter-xs>*
-    margin-left: 4px
-
-</style>

@@ -1,17 +1,17 @@
 <template>
   <div class="subcontent">
-    <navigation-bar
-      @today="onToday"
-      @prev="onPrev"
-      @next="onNext"
-    />
-
     <div
       class="line"
     >
       You can specify the <code class="token">cell-width</code> property to make your calendar overrun it's boundaries.<br>
       The calendar goes into a special <code class="token">sticky</code> mode when this happens so you can scroll vertically and/or horizontally.
     </div>
+
+    <navigation-bar
+      @today="onToday"
+      @prev="onPrev"
+      @next="onNext"
+    />
 
     <div style="display: flex; justify-content: center">
       <QCalendarDay

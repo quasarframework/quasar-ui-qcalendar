@@ -1,12 +1,12 @@
 <template>
   <div class="subcontent">
+    <div class="line">Drag any items in the list to a calendar day.</div>
+
     <navigation-bar
       @today="onToday"
       @prev="onPrev"
       @next="onNext"
     />
-
-    <div class="line">Drag any items in the list to a calendar day.</div>
 
     <div style="display: flex; justify-content: center">
       <div style="display: flex; flex-direction: column; width: 100%;">

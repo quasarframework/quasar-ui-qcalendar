@@ -1,12 +1,12 @@
 <template>
   <div class="subcontent">
+    <div class="line">Drag any items in the list to a calendar interval or the top header.</div>
+
     <navigation-bar
       @today="onToday"
       @prev="onPrev"
       @next="onNext"
     />
-
-    <div class="line">Drag any items in the list to a calendar interval or the top header.</div>
 
     <div style="display: flex; justify-content: center">
       <div style="display: flex; flex-direction: column; width: 100%;">

@@ -1,12 +1,12 @@
 <template>
   <div class="subcontent">
+    <div class="line">The example below uses the properties <span class="token">disable-before</span> and <span class="token">disable-after</span> to disable all days except the current month.</div>
+
     <navigation-bar
       @today="onToday"
       @prev="onPrev"
       @next="onNext"
     />
-
-    <div class="line">The example below uses the properties <span class="token">disable-before</span> and <span class="token">disable-after</span> to disable all days except the current month.</div>
 
     <div style="display: flex; justify-content: center">
       <QCalendarMonth

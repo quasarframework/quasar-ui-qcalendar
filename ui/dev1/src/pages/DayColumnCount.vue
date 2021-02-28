@@ -1,11 +1,12 @@
 <template>
   <div class="subcontent">
+    <div class="line">The <code class="token">column-count</code> property allows for a single day to be displayed multiple times.</div>
+
     <navigation-bar
       @today="onToday"
       @prev="onPrev"
       @next="onNext"
     />
-    <div class="line">The <code class="token">column-count</code> property allows for a single day to be displayed multiple times.</div>
 
     <div style="display: flex; justify-content: center">
       <QCalendarDay

@@ -1,12 +1,12 @@
 <template>
   <div class="subcontent">
+    <div class="line">This example uses the <span class="token">disabled-weekdays</span> property to disable the weekends.</div>
+
     <navigation-bar
       @today="onToday"
       @prev="onPrev"
       @next="onNext"
     />
-
-    <div class="line">This example uses the <span class="token">disabled-weekdays</span> property to disable the weekends.</div>
 
     <div style="display: flex; justify-content: center">
       <QCalendarMonth

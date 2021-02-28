@@ -1,12 +1,12 @@
 <template>
   <div class="subcontent">
+    <div class="line">All days before and after the current day have been disabled with the properties <code class="token">disable-before</code> and <code class="token">disabled-after</code>.</div>
+
     <navigation-bar
       @today="onToday"
       @prev="onPrev"
       @next="onNext"
     />
-
-    <div class="line">All days before and after the current day have been disabled with the properties <code class="token">disable-before</code> and <code class="token">disabled-after</code>.</div>
 
     <div style="display: flex; justify-content: center">
       <QCalendarDay

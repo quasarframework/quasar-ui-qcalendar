@@ -1,13 +1,13 @@
 <template>
   <div class="subcontent">
+    <p class="line">This example uses the <code class="token">use-navigation</code> property along with the <code class="token">focusable</code> and <code class="token">focus-type</code> properties.<br>If the calendar has focus you can use the <kbd>&larr;</kbd> and <kbd>&rarr;</kbd> keys on your keyboard for navigation.</p>
+    <p class="line">On the intervals, you can use <kbd>Tab</kbd> and <kbd>Shift</kbd>+<kbd>Tab</kbd> for navigation.</p>
+
     <navigation-bar
       @today="onToday"
       @prev="onPrev"
       @next="onNext"
     />
-
-    <p class="line">This example uses the <code class="token">use-navigation</code> property along with the <code class="token">focusable</code> and <code class="token">focus-type</code> properties.<br>If the calendar has focus you can use the <kbd>&larr;</kbd> and <kbd>&rarr;</kbd> keys on your keyboard for navigation.</p>
-    <p class="line">On the intervals, you can use <kbd>Tab</kbd> and <kbd>Shift</kbd>+<kbd>Tab</kbd> for navigation.</p>
 
     <div style="display: flex; justify-content: center">
       <QCalendarDay

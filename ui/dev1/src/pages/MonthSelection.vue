@@ -6,7 +6,7 @@
       @next="onNext"
     />
 
-    <div style="display: flex; justify-content: center">
+    <div style="display: flex; justify-content: center; align-items: center;">
       <input
         id="mobile"
         v-model="mobile"

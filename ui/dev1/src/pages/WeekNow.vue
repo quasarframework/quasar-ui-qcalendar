@@ -1,12 +1,12 @@
 <template>
   <div class="subcontent">
+    <div class="line">The current date has been set to tomorrow via the <code class="token">now</code> property.</div>
+
     <navigation-bar
       @today="onToday"
       @prev="onPrev"
       @next="onNext"
     />
-
-    <div class="line">The current date has been set to tomorrow via the <code class="token">now</code> property.</div>
 
     <div style="display: flex; justify-content: center">
       <QCalendarDay

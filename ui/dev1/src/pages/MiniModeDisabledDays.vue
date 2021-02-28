@@ -1,15 +1,16 @@
 <template>
   <div class="subcontent">
+    <div class="line">
+      The first example uses an array of dates to disable the next 4 days after today.<br>
+      The second example uses a range (which is an array within an array) to disable the next 4 days after today.<br>
+      Don't be confused with disabled "outside" days which are not part of the current month.
+    </div>
+
     <navigation-bar
       @today="onToday"
       @prev="onPrev"
       @next="onNext"
     />
-
-    <div class="line">The first example uses an array of dates to disable the next 4 days after today.<br>
-    The second example uses a range (which is an array within an array) to disable the next 4 days after today.<br>
-    Don't be confused with disabled "outside" days which are not part of the current month.
-    </div>
 
     <div style="display: flex; justify-content: center">
       <QCalendarMonth

@@ -1,15 +1,9 @@
 <template>
   <div class="subcontent">
-    <navigation-bar
-      @today="onToday"
-      @prev="onPrev"
-      @next="onNext"
-    />
-
     <div class="line">The example below uses the <code class="token">selected-start-end-dates</code> property in conjunction with mouse events to select iterval ranges.</div>
     <div class="line">Try toggling the <code class="token">Mobile selection</code> to see how selection can be changed.</div>
 
-    <div style="display: flex; justify-content: center">
+    <div style="display: flex; justify-content: center; align-items: center;">
       <input
         id="mobile"
         v-model="mobile"
@@ -17,6 +11,12 @@
       >
       <label for="mobile">Mobile selection (first click, second click)</label>
     </div>
+
+    <navigation-bar
+      @today="onToday"
+      @prev="onPrev"
+      @next="onNext"
+    />
 
     <div style="display: flex; justify-content: center">
       <QCalendarDay

@@ -1,13 +1,13 @@
 <template>
   <div class="subcontent">
+    <div class="line">For keyboard navigation use the <span class="token">use-navigation</span> property along with the <span class="token">focusable</span> and <span class="token">focus-type</span> properties.</div>
+    <div class="line">Hint: When the calendar has focus use the <kbd>Home</kbd>, <kbd>End</kbd>, <kbd>&larr;</kbd>, <kbd>&rarr;</kbd>, <kbd>&uarr;</kbd> and <kbd>&darr;</kbd> keys.</div>
+
     <navigation-bar
       @today="onToday"
       @prev="onPrev"
       @next="onNext"
     />
-
-    <div class="line">For keyboard navigation use the <span class="token">use-navigation</span> property along with the <span class="token">focusable</span> and <span class="token">focus-type</span> properties.</div>
-    <div class="line">Hint: When the calendar has focus use the <kbd>Home</kbd>, <kbd>End</kbd>, <kbd>&larr;</kbd>, <kbd>&rarr;</kbd>, <kbd>&uarr;</kbd> and <kbd>&darr;</kbd> keys.</div>
 
     <div style="display: flex; justify-content: center">
       <QCalendarMonth
