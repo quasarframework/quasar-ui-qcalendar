@@ -254,10 +254,6 @@ export default defineComponent({
       return props.rightColumnOptions !== undefined && Array.isArray(props.rightColumnOptions)
     })
 
-    // const intervalsWidth = computed(() => {
-    //   return 0
-    // })
-
     const borderWidth = computed(() => {
       if (rootRef.value) {
         const calendarBorderWidth = getComputedStyle(rootRef.value).getPropertyValue('--calendar-border')
@@ -269,19 +265,19 @@ export default defineComponent({
     })
 
     const computedWidth = computed(() => {
-      const columnCount = props.columnCount !== undefined ? parseInt(props.columnCount, 10) : 1
-      // if (rootRef.value) {
-      //   const width = size.width || rootRef.value.getBoundingClientRect().width
-      //   if (width && intervalsWidth.value && borderWidth.value) {
-      //     return ((width - scrollWidth.value - intervalsWidth.value - (borderWidth.value * days.value.length)) / days.value.length) / columnCount + 'px'
-      //   }
-      // }
+      if (rootRef.value) {
+        const width = size.width || rootRef.value.getBoundingClientRect().width
+        if (width && borderWidth.value && parsedColumnCount.value) {
+          return (
+            (width - scrollWidth.value - (borderWidth.value * parsedColumnCount.value)) / parsedColumnCount.value) + 'px'
+        }
+      }
       return (100 / parsedColumnCount.value) + '%'
     })
 
-    watch(computedWidth, (val) => {
-      console.log('computedWidth', val)
-    })
+    // watch(computedWidth, (val) => {
+    //   console.log('computedWidth', val)
+    // })
 
     function __isCheckChange () {
       if (checkChange() === true

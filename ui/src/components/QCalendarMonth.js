@@ -153,8 +153,9 @@ export default defineComponent({
       if (props.dayPadding !== undefined) {
         style.padding = props.dayPadding
       }
-      // style.minWidth = computedWidth.value
+      style.minWidth = computedWidth.value
       style.maxWidth = computedWidth.value
+      style.width = computedWidth.value
       return style
     })
 
@@ -235,6 +236,11 @@ export default defineComponent({
       return 0
     })
 
+    const parsedColumnCount = computed(() => {
+      return props.weekdays.length
+    })
+
+
     const borderWidth = computed(() => {
       if (rootRef.value) {
         const calendarBorderWidth = getComputedStyle(rootRef.value).getPropertyValue('--calendar-border')
@@ -248,11 +254,11 @@ export default defineComponent({
     const computedWidth = computed(() => {
       if (rootRef.value) {
         const width = size.width || rootRef.value.getBoundingClientRect().width
-        if (width && borderWidth.value) {
-          return ((width - workweekWidth.value - (borderWidth.value * props.weekdays.length)) / props.weekdays.length) + 'px'
+        if (width && borderWidth.value && parsedColumnCount.value) {
+          return ((width - workweekWidth.value - (borderWidth.value * parsedColumnCount.value)) / parsedColumnCount.value) + 'px'
         }
       }
-      return (100 / props.weekdays.length) + '%'
+      return (100 / parsedColumnCount.value) + '%'
     })
 
     function __isCheckChange () {
@@ -462,6 +468,7 @@ export default defineComponent({
       const scope = { timestamp: day, days: filteredDays, index, miniMode: isMiniMode.value }
       const ariaLabel = weekdayFormatter.value(day, false)
       const isFocusable = props.focusable === true && props.focusType.includes('weekday')
+      const width = computedWidth.value
 
       return h('div', {
         ariaLabel,
@@ -475,8 +482,9 @@ export default defineComponent({
           'q-calendar__focusable': true
         },
         style: {
-          // minWidth: computedWidth.value,
-          maxWidth: computedWidth.value
+          maxWidth: width,
+          minWidth: width,
+          width
         },
         ...getDefaultMouseEventHandlers('-head-day', event => {
           return { scope, event }
@@ -585,9 +593,8 @@ export default defineComponent({
       const hasMonth = (outside === false && props.showMonthLabel === true && days.value.find(d => d.month === day.month).day === day.day)
       const scope = { outside, timestamp: day, miniMode: isMiniMode.value, activeDate, hasMonth, droppable: dragOverDayRef.value === day.date }
 
-      const style = Object.assign({ ...computedStyles }, styler({ scope }))
+      const style = Object.assign({ ...computedStyles.value }, styler({ scope }))
       const dayClass = typeof props.dayClass === 'function' ? props.dayClass({ scope }) : {}
-      style.maxWidth = computedWidth.value
       const ariaLabel = ariaDateFormatter.value(day)
       const isFocusable = props.focusable === true && props.focusType.includes('day') && isMiniMode.value !== true
 

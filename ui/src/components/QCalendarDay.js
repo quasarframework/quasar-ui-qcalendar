@@ -243,6 +243,16 @@ export default defineComponent({
       times
     })
 
+    const parsedColumnCount = computed(() => {
+      if (props.view === 'day' && props.columnCount !== undefined && props.columnCount > 1) {
+        return parseInt(props.columnCount, 10)
+      }
+      else if (props.view === 'day' && props.maxDays && props.maxDays > 1) {
+        return props.maxDays
+      }
+      return days.value.length
+    })
+
     const intervalsWidth = computed(() => {
       if (rootRef.value) {
         return parseInt(getComputedStyle(rootRef.value).getPropertyValue('--calendar-intervals-width'), 10)
@@ -261,14 +271,13 @@ export default defineComponent({
     })
 
     const computedWidth = computed(() => {
-      const columnCount = props.columnCount !== undefined ? parseInt(props.columnCount, 10) : 1
       if (rootRef.value) {
         const width = size.width || rootRef.value.getBoundingClientRect().width
-        if (width && intervalsWidth.value && borderWidth.value) {
-          return ((width - scrollWidth.value - intervalsWidth.value - (borderWidth.value * days.value.length)) / days.value.length) / columnCount + 'px'
+        if (width && intervalsWidth.value && borderWidth.value && parsedColumnCount.value) {
+          return ((width - scrollWidth.value - intervalsWidth.value - (borderWidth.value * parsedColumnCount.value)) / parsedColumnCount.value) + 'px'
         }
       }
-      return ((100 / days.value.length) / columnCount) + '%'
+      return (100 / parsedColumnCount.value) + '%'
     })
 
     watch(computedWidth, (val) => {
@@ -518,6 +527,7 @@ export default defineComponent({
       const style = {
         width,
         maxWidth: width,
+        minWidth: width,
         ...styler({ scope })
       }
       if (isSticky.value === true) {
@@ -657,7 +667,8 @@ export default defineComponent({
       const width = isSticky.value === true ? props.cellWidth : computedWidth.value
       const style = {
         width,
-        maxWidth: width
+        maxWidth: width,
+        minWidth: width
       }
       if (isSticky.value === true) {
         style.minWidth = width
@@ -867,7 +878,8 @@ export default defineComponent({
       const width = isSticky.value === true ? props.cellWidth : computedWidth.value
       const style = {
         width,
-        maxWidth: width
+        maxWidth: width,
+        minWidth: width
       }
       if (isSticky.value === true) {
         style.minWidth = width
