@@ -17,7 +17,7 @@
         animated
         bordered
         :weekdays="[1,2,3,4,5]"
-        style="max-width: 800px; width: 100%; height: 400px; display: inline-flex;"
+        style="max-width: 800px; width: 100%; height: 400px;"
         @change="onChange"
         @moved="onMoved"
         @click-date="onClickDate"

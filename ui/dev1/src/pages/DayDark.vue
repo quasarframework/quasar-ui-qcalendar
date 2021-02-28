@@ -12,7 +12,7 @@
         v-model="selectedDate"
         dark
         animated
-        style="max-width: 800px; width: 100%; height: 400px; display: inline-flex;"
+        style="max-width: 800px; width: 100%; height: 400px;"
         @change="onChange"
         @moved="onMoved"
         @click-date="onClickDate"

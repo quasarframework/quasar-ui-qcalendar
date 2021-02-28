@@ -71,7 +71,7 @@
         :date-align="dateAlign"
         bordered
         animated
-        style="max-width: 800px; width: 100%; height: 200px; display: inline-flex;"
+        style="max-width: 800px; width: 100%; height: 200px;"
         @change="onChange"
         @moved="onMoved"
         @click-date="onClickDate"

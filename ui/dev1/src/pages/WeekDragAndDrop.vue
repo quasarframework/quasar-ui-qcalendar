@@ -36,7 +36,7 @@
             :weekdays="[1,2,3,4,5]"
             hoverable
             bordered
-            style="max-width: 800px; width: 100%; height: 400px; display: inline-flex;"
+            style="max-width: 800px; width: 100%; height: 400px;"
             :drag-enter-func="onDragEnter"
             :drag-over-func="onDragOver"
             :drag-leave-func="onDragLeave"

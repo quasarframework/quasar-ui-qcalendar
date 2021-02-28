@@ -55,7 +55,7 @@
         :focus-type="focusType"
         animated
         bordered
-        style="max-width: 800px; width: 100%; display: inline-flex;"
+        style="max-width: 800px; width: 100%;"
         @change="onChange"
         @moved="onMoved"
         @click-date="onClickDate"

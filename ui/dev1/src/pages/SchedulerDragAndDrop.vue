@@ -43,7 +43,7 @@
             :day-height="0"
             :day-class="onDayClass"
             :weekday-class="onWeekdayClass"
-            style="max-width: 800px; width: 100%; display: inline-flex;"
+            style="max-width: 800px; width: 100%;"
             @change="onChange"
             @moved="onMoved"
             @click-date="onClickDate"

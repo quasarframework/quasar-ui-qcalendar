@@ -71,12 +71,13 @@
         :weekday-align="weekdayAlign"
         :date-align="dateAlign"
         :left-column-options="leftColumnOptions"
+        :right-column-options="rightColumnOptions"
         column-options-id="id"
         column-options-label="label"
         :day-min-height="200"
         bordered
         animated
-        style="max-width: 800px; width: 100%; height: 200px; display: inline-flex;"
+        style="max-width: 800px; width: 100%; height: 200px;"
         @change="onChange"
         @moved="onMoved"
         @click-date="onClickDate"

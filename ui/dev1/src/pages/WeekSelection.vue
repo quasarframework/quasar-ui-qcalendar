@@ -23,7 +23,7 @@
         ref="calendar"
         v-model="selectedDate"
         view="week"
-        style="max-width: 800px; width: 100%; height: 400px; display: inline-flex;"
+        style="max-width: 800px; width: 100%; height: 400px;"
         :interval-minutes="15"
         :interval-count="96"
         :interval-height="15"
