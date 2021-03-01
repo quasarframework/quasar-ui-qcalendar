@@ -16,9 +16,7 @@ import {
 
 // Utility
 import {
-  getDateTime,
   getDayIdentifier,
-  getDayTimeIdentifier,
   isBetweenDates,
   parsed,
   parseTimestamp,
@@ -92,7 +90,7 @@ export default defineComponent({
       emittedValue = ref(props.modelValue),
       size = reactive({ width: 0, height: 0 }),
       dragOverHeadDayRef = ref(false),
-      dragOverInterval = ref(false),
+      // dragOverDay = ref(false),
       // keep track of last seen start and end dates
       lastStart = ref(null),
       lastEnd = ref(null)
@@ -179,16 +177,10 @@ export default defineComponent({
     const {
       // computed
       days,
-      intervals,
-      intervalFormatter,
-      ariaDateTimeFormatter,
+      // ariaDateTimeFormatter,
       parsedCellWidth,
       // methods
-      getIntervalClasses,
-      showIntervalLabelDefault,
-      styleDefault,
-      getTimestampAtEventInterval,
-      getTimestampAtEvent,
+      // styleDefault,
       getScopeForSlot,
       scrollToTime,
       timeDurationHeight,
@@ -241,9 +233,10 @@ export default defineComponent({
     })
 
     const parsedColumnCount = computed(() => {
-      return days.value.length +
-        (isLeftColumnOptionsValid.value === true ? props.leftColumnOptions.length : 0) +
-        (isRightColumnOptionsValid.value === true ? props.rightColumnOptions.length : 0)
+      return days.value.length
+        + (isLeftColumnOptionsValid.value === true ? props.leftColumnOptions.length : 0)
+        + (isRightColumnOptionsValid.value === true ? props.rightColumnOptions.length : 0)
+        + days.value.length === 1 && props.columnCount > 0 ? props.columnCount : 0
     })
 
     const isLeftColumnOptionsValid = computed(() => {
@@ -382,9 +375,9 @@ export default defineComponent({
     // Render functions
 
     function __renderHeadColumn (column, index) {
-      const slot = slots['head-column']
+      const slot = slots[ 'head-column' ]
       const scope = { column, index, days: days.value }
-      const width = computedWidth.value
+      const width = isSticky.value === true ? props.cellWidth : computedWidth.value
       const isFocusable = props.focusable === true && props.focusType.includes('weekday')
       const id = (props.columnOptionsId !== undefined ? column[props.columnOptionsId] : undefined)
 
@@ -432,7 +425,7 @@ export default defineComponent({
           }
         },
         ...getDefaultMouseEventHandlers('-head-column', (event, eventName) => {
-          return { scope: { column, index: idx }, event }
+          return { scope: { column, index }, event }
         })
       }, [
         props.noDefaultHeaderText !== true && __renderHeadColumnLabel(column),
@@ -442,15 +435,15 @@ export default defineComponent({
     }
 
     function __renderHeadColumnLabel (column) {
-      const slot = slots['head-column-label']
+      const slot = slots[ 'head-column-label' ]
       const scope = column
-      const label = props.columnOptionsLabel !== undefined ? column[props.columnOptionsLabel] : column.label
+      const label = props.columnOptionsLabel !== undefined ? column[ props.columnOptionsLabel ] : column.label
 
       const vNode = h('div', {
         class: {
           'q-calendar-agenda__head--weekday': true,
           [ 'q-calendar__' + props.weekdayAlign ]: true,
-          'ellipsis': true
+          ellipsis: true
         },
         style: {
           alignSelf: 'center'
@@ -551,9 +544,13 @@ export default defineComponent({
 
     function __renderHeadDays () {
       if (days.value.length === 1 && props.columnCount !== undefined && parseInt(props.columnCount, 10) > 0) {
-        return Array.apply(null, new Array(parseInt(props.columnCount, 10)))
-          .map((_, i) => i + parseInt(props.columnIndexStart, 10))
-          .map(columnIndex => __renderHeadDay(days.value[ 0 ], columnIndex))
+        return [
+          isLeftColumnOptionsValid.value === true && props.leftColumnOptions.map((column, index) => __renderHeadColumn(column, index)),
+          Array.apply(null, new Array(parseInt(props.columnCount, 10)))
+            .map((_, i) => i + parseInt(props.columnIndexStart, 10))
+            .map(columnIndex => __renderHeadDay(days.value[ 0 ], columnIndex)),
+          isRightColumnOptionsValid.value === true && props.rightColumnOptions.map((column, index) => __renderHeadColumn(column, index))
+        ]
       }
       else {
         return [
@@ -566,9 +563,11 @@ export default defineComponent({
 
     function __renderHeadDaysEvents () {
       if (days.value.length === 1 && props.columnCount !== undefined && parseInt(props.columnCount, 10) > 0) {
-        return Array.apply(null, new Array(parseInt(props.columnCount, 10)))
-          .map((_, i) => i + parseInt(props.columnIndexStart, 10))
-          .map(columnIndex => __renderHeadDayEvent(days.value[ 0 ], columnIndex))
+        return [
+          Array.apply(null, new Array(parseInt(props.columnCount, 10)))
+            .map((_, i) => i + parseInt(props.columnIndexStart, 10))
+            .map(columnIndex => __renderHeadDayEvent(days.value[ 0 ], columnIndex)),
+        ]
       }
       else {
         return days.value.map(day => __renderHeadDayEvent(day))
@@ -894,9 +893,13 @@ export default defineComponent({
 
     function __renderDays () {
       if (days.value.length === 1 && props.columnCount && parseInt(props.columnCount, 10) > 0) {
-        return Array.apply(null, new Array(parseInt(props.columnCount, 10)))
-          .map((_, i) => i + parseInt(props.columnIndexStart, 10))
-          .map(i => __renderDay(days.value[ 0 ], 0, i))
+        return [
+          isLeftColumnOptionsValid.value === true && props.leftColumnOptions.map((column, index) => __renderColumn(column, index)),
+          Array.apply(null, new Array(parseInt(props.columnCount, 10)))
+            .map((_, i) => i + parseInt(props.columnIndexStart, 10))
+            .map(i => __renderDay(days.value[ 0 ], 0, i)),
+            isRightColumnOptionsValid.value === true && props.rightColumnOptions.map((column, index) => __renderColumn(column, index))
+        ]
       }
       else {
         return [
@@ -908,11 +911,11 @@ export default defineComponent({
     }
 
     function __renderColumn (column, index) {
-      const slot = slots[column]
+      const slot = slots[ column ]
       const scope = { column, days: days.value, index }
-      const width = computedWidth
+      const width = isSticky.value === true ? props.cellWidth : computedWidth.value
       const isFocusable = props.focusable === true && props.focusType.includes('day')
-      const id = (props.columnOptionsId !== undefined ? column[props.columnOptionsId] : undefined)
+      const id = (props.columnOptionsId !== undefined ? column[ props.columnOptionsId ] : undefined)
 
       return h('div', {
         key: id,
@@ -956,7 +959,7 @@ export default defineComponent({
           }
         },
         ...getDefaultMouseEventHandlers('-column', (event, eventName) => {
-          return { scope: { column, index: idx }, event }
+          return { scope: { column, index }, event }
         })
       }, [
         slot && slot(scope),
