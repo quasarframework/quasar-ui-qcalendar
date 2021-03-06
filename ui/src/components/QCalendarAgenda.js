@@ -1003,12 +1003,14 @@ export default defineComponent({
         maxDaysRendered.value = maxDays
       }
 
+      const hasWidth = size.width > 0
+
       const agenda = withDirectives(h('div', {
         class: 'q-calendar-agenda',
         key: startDate.value
       }, [
-        isSticky.value !== true && props.noHeader !== true && __renderHead(),
-        __renderBody()
+        hasWidth === true && isSticky.value !== true && props.noHeader !== true && __renderHead(),
+        hasWidth === true && __renderBody()
       ]), [[
         ResizeObserver,
         __onResize

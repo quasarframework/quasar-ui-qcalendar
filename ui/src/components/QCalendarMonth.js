@@ -847,6 +847,8 @@ export default defineComponent({
       startDate.value = start.date
       endDate.value = end.date
 
+      const hasWidth = size.width > 0
+
       const weekly = withDirectives(h('div', {
         class: {
           'q-calendar-mini': isMiniMode.value === true,
@@ -854,8 +856,8 @@ export default defineComponent({
         },
         key: startDate.value
       }, [
-        props.noHeader !== true && __renderHead(),
-        __renderBody()
+        hasWidth === true && props.noHeader !== true && __renderHead(),
+        hasWidth === true && __renderBody()
       ]), [[
         ResizeObserver,
         __onResize

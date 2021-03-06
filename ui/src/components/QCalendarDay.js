@@ -280,11 +280,6 @@ export default defineComponent({
       return (100 / parsedColumnCount.value) + '%'
     })
 
-    watch(computedWidth, (val) => {
-      console.log('computedWidth', val)
-    })
-
-
     function __isCheckChange () {
       if (checkChange() === true
       && props.useNavigation === true
@@ -1039,12 +1034,14 @@ export default defineComponent({
         maxDaysRendered.value = maxDays
       }
 
+      const hasWidth = size.width > 0
+
       const daily = withDirectives(h('div', {
         class: 'q-calendar-day',
         key: startDate.value
       }, [
-        isSticky.value !== true && props.noHeader !== true && __renderHead(),
-        __renderBody()
+        hasWidth === true && isSticky.value !== true && props.noHeader !== true && __renderHead(),
+        hasWidth && __renderBody()
       ]), [[
         ResizeObserver,
         __onResize

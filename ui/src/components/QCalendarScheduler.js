@@ -177,7 +177,6 @@ export default defineComponent({
     const {
       rootRef,
       scrollWidth,
-      __updateScrollbar,
       __initCalendar,
       __renderCalendar
     } = useCalendar(props, __renderScheduler, {
@@ -249,6 +248,16 @@ export default defineComponent({
       times
     })
 
+    const parsedColumnCount = computed(() => {
+      if (props.view === 'day' && props.columnCount !== undefined && props.columnCount > 1) {
+        return parseInt(props.columnCount, 10)
+      }
+      else if (props.view === 'day' && props.maxDays && props.maxDays > 1) {
+        return props.maxDays
+      }
+      return days.value.length
+    })
+
     const resourcesWidth = computed(() => {
       if (rootRef.value) {
         return parseInt(getComputedStyle(rootRef.value).getPropertyValue('--calendar-resources-width'), 10)
@@ -267,14 +276,13 @@ export default defineComponent({
     })
 
     const computedWidth = computed(() => {
-      const columnCount = props.columnCount !== undefined ? parseInt(props.columnCount, 10) : 1
       if (rootRef.value) {
         const width = size.width || rootRef.value.getBoundingClientRect().width
-        if (width && resourcesWidth.value && borderWidth.value) {
-          return ((width - scrollWidth.value - resourcesWidth.value - (borderWidth.value * days.value.length)) / days.value.length) / columnCount + 'px'
+        if (width && resourcesWidth.value && borderWidth.value && parsedColumnCount.value) {
+          return ((width - scrollWidth.value - resourcesWidth.value - (borderWidth.value * parsedColumnCount.value)) / parsedColumnCount.value) + 'px'
         }
       }
-      return ((100 / days.value.length) / columnCount) + '%'
+      return (100 / parsedColumnCount.value) + '%'
     })
 
     function __isCheckChange () {
@@ -524,18 +532,18 @@ export default defineComponent({
     function __renderHeadDay (day, columnIndex) {
       const headDaySlot = slots[ 'head-day' ]
       const headDateSlot = slots[ 'head-date' ]
-
-      const styler = props.dayStyle || dayStyleDefault
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
-      const dragValue = day.date
 
-      const droppable = dragOverHeadDayRef.value === day.date
-      const scope = { timestamp: day, columnIndex, resources: props.modelResources, droppable, activeDate }
+      const scope = getScopeForSlot(day, columnIndex)
+      scope.activeDate = activeDate
+      scope.droppable = dragOverHeadDayRef.value === day.date
 
       const width = isSticky.value === true ? props.cellWidth : computedWidth.value
+      const styler = props.weekdayStyle || dayStyleDefault
       const style = {
         width,
         maxWidth: width,
+        minWidth: width,
         ...styler({ scope })
       }
       if (isSticky.value === true) {
@@ -560,28 +568,28 @@ export default defineComponent({
         onDragenter: (e) => {
           if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
             props.dragEnterFunc(e, 'head-day', scope)
-              ? dragOverHeadDayRef.value = dragValue
+              ? dragOverHeadDayRef.value = day.date
               : dragOverHeadDayRef.value = ''
           }
         },
         onDragover: (e) => {
           if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
             props.dragOverFunc(e, 'head-day', scope)
-              ? dragOverHeadDayRef.value = dragValue
+              ? dragOverHeadDayRef.value = day.date
               : dragOverHeadDayRef.value = ''
           }
         },
         onDragleave: (e) => {
           if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
             props.dragLeaveFunc(e, 'head-day', scope)
-              ? dragOverHeadDayRef.value = dragValue
+              ? dragOverHeadDayRef.value = day.date
               : dragOverHeadDayRef.value = ''
           }
         },
         onDrop: (e) => {
           if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
             props.dropFunc(e, 'head-day', scope)
-              ? dragOverHeadDayRef.value = dragValue
+              ? dragOverHeadDayRef.value = day.date
               : dragOverHeadDayRef.value = ''
           }
         },
@@ -596,7 +604,7 @@ export default defineComponent({
       }
 
       return h('div', data, [
-        /// head-day slot replaces everything below it
+        // head-day slot replaces everything below it
         headDaySlot !== undefined && headDaySlot({ scope }),
         headDaySlot === undefined && __renderColumnHeaderBefore(day, columnIndex),
         headDaySlot === undefined && __renderDateHeader(day),
@@ -675,7 +683,8 @@ export default defineComponent({
       const width = isSticky.value === true ? props.cellWidth : computedWidth.value
       const style = {
         width,
-        maxWidth: width
+        maxWidth: width,
+        minWidth: width
       }
       if (isSticky.value === true) {
         style.minWidth = width
@@ -991,9 +1000,6 @@ export default defineComponent({
                   resource.expanded = !resource.expanded
                   emit('update:modelResources', props.modelResources)
                   emit('resource-expanded', { expanded: resource.expanded, scope })
-                  nextTick(() => {
-                    __updateScrollbar() // verify scrollbar
-                  })
                 }
               }),
               h('div', {
@@ -1132,130 +1138,6 @@ export default defineComponent({
       ])
     }
 
-    // function __renderDayResources (day, columnIndex, resources = undefined, indentLevel = 0) {
-    //   if (resources === undefined) {
-    //     resources = props.modelResources
-    //   }
-    //   return props.modelResources.map((resource) => __renderDayResource(resource, day, columnIndex, indentLevel))
-    // }
-
-    // function __renderDayResource (resource, day, columnIndex, indentLevel) {
-    //   const style = {}
-    //   // const activeResource = __isActiveResource(resource)
-    //   // const height = convertToUnit(props.resourceHeight)
-    //   style.height = parseInt(props.dayHeight, 10) > 0 ? convertToUnit(parseInt(props.dayHeight, 10)) : 'auto'
-    //   if (parseInt(props.dayMinHeight, 10) > 0) {
-    //     style.minHeight = convertToUnit(parseInt(props.dayMinHeight, 10))
-    //   }
-
-    //   const styler = props.resourceStyle || styleDefault
-    //   const slotDayResource = slots[ 'day-resource' ]
-    //   const isFocusable = props.focusable === true && props.focusType.includes('day')
-
-    //   const scope = { resource, timestamp: day, columnIndex, indentLevel }
-    //   // TODO: Jeff - need key here
-    //   scope.droppable = dragOverResource.value === resource[props.resourceKey]
-
-    //   const resourceClass = typeof props.resourceClass === 'function' ? props.resourceClass({ scope }) : {}
-    //   // const ariaLabel = ariaDateTimeFormatter.value(resource)
-
-    //   const data = {
-    //     key: getDate(day) + ':' + resource[props.resourceKey],
-    //     // ariaLabel,
-    //     tabindex: isFocusable === true ? 0 : -1,
-    //     class: {
-    //       'q-calendar-scheduler__day--resource': indentLevel === 0,
-    //       'q-calendar-scheduler__day--resource__section': indentLevel !== 0,
-    //       ...resourceClass,
-    //       ...getResourceClasses(resource, props.selectedDates, props.selectedStartEndDates),
-    //       'q-calendar__hoverable': props.hoverable === true,
-    //       'q-calendar__focusable': isFocusable === true
-    //     },
-    //     style: {
-    //       ...style,
-    //       ...styler({ scope })
-    //     },
-    //     onDragenter: (e) => {
-    //       if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
-    //         props.dragEnterFunc(e, 'resource', scope)
-    //           ? dragOverResource.value = resource[props.resourceKey]
-    //           : dragOverResource.value = ''
-    //       }
-    //     },
-    //     onDragover: (e) => {
-    //       if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
-    //         props.dragOverFunc(e, 'resource', scope)
-    //           ? dragOverResource.value = resource[props.resourceKey]
-    //           : dragOverResource.value = ''
-    //       }
-    //     },
-    //     onDragleave: (e) => {
-    //       if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
-    //         props.dragLeaveFunc(e, 'resource', scope)
-    //           ? dragOverResource.value = resource[props.resourceKey]
-    //           : dragOverResource.value = ''
-    //       }
-    //     },
-    //     onDrop: (e) => {
-    //       if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
-    //         props.dropFunc(e, 'resource', scope)
-    //           ? dragOverResource.value = resource[props.resourceKey]
-    //           : dragOverResource.value = ''
-    //       }
-    //     },
-    //     onKeydown: (event) => {
-    //       if (isKeyCode(event, [ 13, 32 ])) {
-    //         event.stopPropagation()
-    //         event.preventDefault()
-    //       }
-    //     },
-    //     onKeyup: (event) => {
-    //       // allow selection of date via Enter or Space keys
-    //       if (isKeyCode(event, [ 13, 32 ])) {
-    //         emittedValue.value = scope.timestamp.date
-    //         if (emitListeners.value.onClickResource !== undefined) {
-    //           // eslint-disable-next-line vue/require-explicit-emits
-    //           emit('click-resource', { scope, event })
-    //         }
-    //       }
-    //     },
-    //     ...getDefaultMouseEventHandlers('-day-resource', event => {
-    //       return { scope, event }
-    //     })
-    //   }
-
-    //   const slottedDayResource = slotDayResource ? slotDayResource({ scope }) : undefined
-
-    //   const resourceRow =  h('div', data, [ slottedDayResource, useFocusHelper() ])
-
-    //   if (resource.children && resource.children.length > 0) {
-    //     return [resourceRow, ...__renderResources()]
-    //   }
-
-    //   return resourceRow
-    // }
-
-    // function __renderBodyResources () {
-    //   const data = {
-    //     ariaHidden: 'true',
-    //     class: {
-    //       'q-calendar-scheduler__resources--column': true,
-    //       'q-calendar__ellipsis': true,
-    //       'q-calendar__sticky': isSticky.value === true
-    //     },
-    //     ...getDefaultMouseEventHandlers('-resource', event => {
-    //       const timestamp = getTimestampAtEvent(event, parsedStart.value, props.timeClicksClamped, times.now)
-    //       return { scope: { timestamp }, event }
-    //     })
-    //   }
-
-    //   return h('div', data, __renderResourceLabels())
-    // }
-
-    // function __renderResourceLabels () {
-    //   return props.modelResources.map((resource) => __renderResourceLabel(resource))
-    // }
-
     function __renderResourcesError () {
       return h('div', {}, 'No resources have been defined')
     }
@@ -1268,12 +1150,16 @@ export default defineComponent({
         maxDaysRendered.value = maxDays
       }
 
+      const hasWidth = size.width > 0
+      const hasResources = props.modelResources.length > 0
+
       const scheduler = withDirectives(h('div', {
         class: 'q-calendar-scheduler',
         key: startDate.value
       }, [
-        isSticky.value !== true && props.noHeader !== true && __renderHead(),
-        __renderBody()
+        hasWidth === true && hasResources === true && isSticky.value !== true && props.noHeader !== true && __renderHead(),
+        hasWidth === true && hasResources === true && __renderBody(),
+        hasResources === false && __renderResourcesError()
       ]), [[
         ResizeObserver,
         __onResize
