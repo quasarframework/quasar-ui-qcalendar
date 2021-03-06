@@ -1,14 +1,14 @@
 // Vue
 import {
+  computed,
   h,
-  nextTick,
   ref,
-  watch,
+  reactive,
   withDirectives
 } from 'vue'
 
 // Directives
-import Resize from '../directives/Resize.js'
+import ResizeObserver from '../directives/ResizeObserver.js'
 
 export default function (props, renderFunc, {
   scrollArea,
@@ -20,34 +20,25 @@ export default function (props, renderFunc, {
     throw new Error(msg)
   }
 
-  const rootRef = ref(null)
-  const scrollWidth = ref(15) // default
+  const size = reactive({ width: 0, height: 0 }),
+    rootRef = ref(null)
+
+  function __onResize ({ width, height }) {
+    size.width = width
+    size.height = height
+  }
+
+  const scrollWidth = computed(() => {
+    return props.noScroll !== true
+      ? scrollArea.value && pane.value && size.height // force recalc with height change
+        ? (scrollArea.value.offsetWidth - pane.value.offsetWidth)
+        : 0
+      : 0
+  })
 
   function __initCalendar () {
-    nextTick(__onResize)
+    //
   }
-
-  function __onResize () {
-    scrollWidth.value = __getScrollWidth()
-  }
-
-  function __getScrollWidth () {
-    return scrollArea.value && pane.value ? (scrollArea.value.offsetWidth - pane.value.offsetWidth) : 0
-  }
-
-  function __updateScrollbar () {
-    __onResize()
-  }
-
-  // watch for toggle of noScroll
-  watch(() => props.noScroll, val => {
-    if (val === true) {
-      scrollWidth.value = 0
-    }
-    else {
-      nextTick(__onResize)
-    }
-  })
 
   function __renderCalendar () {
     const data = {
@@ -64,23 +55,20 @@ export default function (props, renderFunc, {
     return withDirectives(
       h('div', data, [
         renderFunc()
-      ]),
-      [[
-        Resize,
-        __onResize,
-        undefined,
-        {
-          quiet: true, // no initial event fired
-          passive: true
-        }
+      ]), [[
+        ResizeObserver,
+        __onResize
       ]]
     )
+
+    // return h('div', data, [
+    //     renderFunc()
+    // ])
   }
 
   return {
     rootRef,
     scrollWidth,
-    __updateScrollbar,
     __initCalendar,
     __renderCalendar
   }
