@@ -31,9 +31,9 @@ module.exports = {
 
     // 'plugin:quasar/standard',
 
-    'standard'
+    'standard',
     // 'plugin:jest/recommended',
-    // 'plugin:promise/recommended'
+    'plugin:promise/recommended'
   ],
 
   plugins: [
@@ -41,11 +41,11 @@ module.exports = {
     // required to lint *.vue files
     'vue',
     'jest',
-    'jsdoc'
-    // 'standard',
-    // 'node',
-    // 'promise',
-    // 'import'
+    'jsdoc',
+    'standard',
+    'node',
+    'promise',
+    'import'
   ],
 
   globals: {
