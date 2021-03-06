@@ -70,6 +70,7 @@ export default defineComponent({
     return {
       selectedDate: today(),
       theme: {
+        default: {}
       },
       themes: {
         default: {

@@ -1,6 +1,10 @@
 <template>
   <div class="subcontent">
-    <div class="line">Drag any items in the list to a calendar day.</div>
+    <div class="line">
+      Drag any items in the list to a calendar day.<br>
+      Don't use css <code class="token">border</code> to outline a cell. It won't look right.<br>
+      Instead use <code class="token">box-shadow</code> to create an inset like this <code class="token">box-shadow: inset 0 0 0 1px rgba(0,140,200,.8)</code>
+    </div>
 
     <navigation-bar
       @today="onToday"
@@ -50,7 +54,7 @@
             <template #day="{ scope: { timestamp } }">
               <div
                 v-if="hasEvents(timestamp)"
-                style="display: flex; flex: 1 0 auto; flex-wrap: wrap; justify-content: space-evenly; align-items: center; font-size: 12px;"
+                style="display: flex; justify-content: space-evenly; flex-wrap: wrap; align-items: center; font-weight: 400; font-size: 12px; height: auto;"
               >
                 <template
                   v-for="event in getEvents(timestamp)"
@@ -222,16 +226,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="sass" scoped>
-.list
-  margin: 0
-  list-style-type: none
-.list-item
-  text-align: left
-  margin: 4px
-</style>
-
 <style lang="sass">
 .droppable
-  box-shadow: inset 0 0 0 1px blue
+  box-shadow: inset 0 0 0 1px rgba(0,140,200,.8)
 </style>

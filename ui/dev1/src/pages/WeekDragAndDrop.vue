@@ -1,6 +1,10 @@
 <template>
   <div class="subcontent">
-    <div class="line">Drag any items in the list to a calendar interval or the top header.</div>
+    <div class="line">
+      Drag any items in the list to a calendar interval or the top header.<br>
+      Don't use css <code class="token">border</code> to outline a cell. It won't look right.<br>
+      Instead use <code class="token">box-shadow</code> to create an inset like this <code class="token">box-shadow: inset 0 0 0 1px rgba(0,140,200,.8)</code>
+    </div>
 
     <navigation-bar
       @today="onToday"
@@ -28,6 +32,11 @@
             ref="calendar"
             v-model="selectedDate"
             view="week"
+            :drag-enter-func="onDragEnter"
+            :drag-over-func="onDragOver"
+            :drag-leave-func="onDragLeave"
+            :drop-func="onDrop"
+            :weekday-class="onWeekdayClass"
             :interval-class="onIntervalClass"
             :interval-start="24"
             :interval-minutes="15"
@@ -35,12 +44,9 @@
             :interval-height="28"
             :weekdays="[1,2,3,4,5]"
             hoverable
+            animated
             bordered
             style="max-width: 800px; width: 100%; height: 400px;"
-            :drag-enter-func="onDragEnter"
-            :drag-over-func="onDragOver"
-            :drag-leave-func="onDragLeave"
-            :drop-func="onDrop"
             @change="onChange"
             @moved="onMoved"
             @click-date="onClickDate"
@@ -52,13 +58,13 @@
             <template #head-date="{ scope: { timestamp } }">
               <div
                 v-if="allDayEventsMap[timestamp.date] && allDayEventsMap[timestamp.date].length > 0"
-                style="display: flex; justify-content: space-evenly; flex-wrap: nowrap; align-items: center; font-weight: 400; font-size: 12px; overflow: hidden;"
+                style="display: flex; justify-content: space-evenly; flex-wrap: wrap; align-items: center; font-weight: 400; font-size: 12px; height: auto;"
               >
                 <template
                   v-for="event in allDayEventsMap[timestamp.date]"
                   :key="event.time"
                 >
-                  <div style="flex-wrap: nowrap;">
+                  <div>
                     {{ event.name }}
                   </div>
                 </template>
@@ -68,13 +74,13 @@
             <template #day-interval="{ scope: { timestamp } }">
               <div
                 v-if="hasEvents(timestamp)"
-                style="display: flex; justify-content: space-evenly; flex-wrap: nowrap; align-items: center; font-size: 10px;"
+                style="display: flex; justify-content: space-evenly; align-items: center; font-size: 10px;"
               >
                 <template
                   v-for="event in getEvents(timestamp)"
                   :key="event.time"
                 >
-                  <div style="flex-wrap: nowrap; border: 1px solid pink; border-radius: 2px; padding: 2px; margin: 1px;">
+                  <div style="border: 1px solid pink; border-radius: 2px; padding: 2px; margin: 1px;">
                     {{ event.name.charAt(0) }}: {{ event.time }}
                   </div>
                 </template>
@@ -98,7 +104,7 @@ import { defineComponent } from 'vue'
 import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
-  name: 'DayDragAndDrop',
+  name: 'WeekDragAndDrop',
   components: {
     NavigationBar,
     QCalendarDay
@@ -137,7 +143,6 @@ export default defineComponent({
     eventsMap () {
       const map = {}
       this.events.forEach(event => event.allDay !== true && ((map[ event.date ] = map[ event.date ] || []).push(event)))
-      // console.log('eventsMap', map)
       return map
     },
 
@@ -146,7 +151,6 @@ export default defineComponent({
       if (this.events.length > 0) {
         this.events.forEach(event => event.allDay === true && ((map[ event.date ] = map[ event.date ] || []).push(event)))
       }
-      // console.log('allDayEventsMap', map)
       return map
     }
   },
@@ -160,24 +164,24 @@ export default defineComponent({
     },
 
     onDragEnter (e, type, scope) {
-      // console.log('onDragEnter')
+      console.log('onDragEnter')
       e.preventDefault()
       return true
     },
 
     onDragOver (e, type, scope) {
-      // console.log('onDragOver')
+      console.log('onDragOver')
       e.preventDefault()
       return true
     },
 
     onDragLeave (e, type, scope) {
-      // console.log('onDragLeave')
+      console.log('onDragLeave')
       return false
     },
 
     onDrop (e, type, scope) {
-      // console.log('onDrop')
+      console.log('onDrop', type, scope)
       const itemID = parseInt(e.dataTransfer.getData('ID'), 10)
       const event = { ...this.defaultEvent }
       event.id = this.events.length + 1
@@ -208,6 +212,12 @@ export default defineComponent({
     },
 
     onIntervalClass ({ scope }) {
+      return {
+        droppable: scope.droppable === true
+      }
+    },
+
+    onWeekdayClass ({ scope }) {
       return {
         droppable: scope.droppable === true
       }
@@ -246,12 +256,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style lang="sass" scoped>
-.list
-  margin: 0
-  list-style-type: none
-.list-item
-  text-align: left
-  margin: 4px
-</style>

@@ -45,12 +45,12 @@
 </template>
 
 <script>
-import { QCalendarDay } from '@quasar/quasar-ui-qcalendar/QCalendarDay.js'
 import {
   today,
   getDateTime,
   getDayTimeIdentifier
 } from '@quasar/quasar-ui-qcalendar/Timestamp.js'
+import { QCalendarDay } from '@quasar/quasar-ui-qcalendar/QCalendarDay.js'
 import '@quasar/quasar-ui-qcalendar/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarDay.sass'

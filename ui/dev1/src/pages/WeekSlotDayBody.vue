@@ -89,7 +89,6 @@
 </template>
 
 <script>
-import { QCalendarDay } from '@quasar/quasar-ui-qcalendar/QCalendarDay.js'
 import {
   addToDate,
   isBetweenDates,
@@ -99,6 +98,7 @@ import {
   parseTimestamp,
   today
 } from '@quasar/quasar-ui-qcalendar/Timestamp.js'
+import { QCalendarDay } from '@quasar/quasar-ui-qcalendar/QCalendarDay.js'
 import '@quasar/quasar-ui-qcalendar/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarDay.sass'
@@ -288,15 +288,16 @@ export default defineComponent({
       return events
     },
 
-    onNext () {
-      this.$refs.calendar.next()
+    onToday () {
+      this.$refs.calendar.moveToToday()
     },
     onPrev () {
       this.$refs.calendar.prev()
     },
-    onToday () {
-      this.$refs.calendar.moveToToday()
+    onNext () {
+      this.$refs.calendar.next()
     },
+
     onMoved (data) {
       console.log('onMoved', data)
     },
@@ -323,9 +324,6 @@ export default defineComponent({
 </script>
 
 <style lang="sass" scoped>
-.button
-  margin: 5px 2px 10px 5px
-
 .my-event
   position: absolute
   font-size: 12px

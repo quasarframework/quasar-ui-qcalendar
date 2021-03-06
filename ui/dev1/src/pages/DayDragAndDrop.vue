@@ -1,6 +1,10 @@
 <template>
   <div class="subcontent">
-    <div class="line">Drag any items in the list to a calendar interval or the top header.</div>
+    <div class="line">
+      Drag any items in the list to a calendar interval or the top header.<br>
+      Don't use css <code class="token">border</code> to outline a cell. It won't look right.<br>
+      Instead use <code class="token">box-shadow</code> to create an inset like this <code class="token">box-shadow: inset 0 0 0 1px rgba(0,140,200,.8)</code>
+    </div>
 
     <navigation-bar
       @today="onToday"
@@ -28,6 +32,10 @@
             ref="calendar"
             v-model="selectedDate"
             view="day"
+            :drag-enter-func="onDragEnter"
+            :drag-over-func="onDragOver"
+            :drag-leave-func="onDragLeave"
+            :drop-func="onDrop"
             :weekday-class="onWeekdayClass"
             :interval-class="onIntervalClass"
             :interval-start="24"
@@ -39,10 +47,6 @@
             animated
             bordered
             style="max-width: 800px; width: 100%; height: 400px;"
-            :drag-enter-func="onDragEnter"
-            :drag-over-func="onDragOver"
-            :drag-leave-func="onDragLeave"
-            :drop-func="onDrop"
             @change="onChange"
             @moved="onMoved"
             @click-date="onClickDate"
@@ -54,13 +58,13 @@
             <template #head-date="{ scope: { timestamp } }">
               <div
                 v-if="allDayEventsMap[timestamp.date] && allDayEventsMap[timestamp.date].length > 0"
-                style="display: flex; justify-content: space-evenly; flex-wrap: nowrap; align-items: center; font-weight: 400; font-size: 12px;"
+                style="display: flex; justify-content: space-evenly; flex-wrap: wrap; align-items: center; font-weight: 400; font-size: 12px; height: auto;"
               >
                 <template
                   v-for="event in allDayEventsMap[timestamp.date]"
                   :key="event.time"
                 >
-                  <div style="flex-wrap: nowrap;">
+                  <div>
                     {{ event.name }}
                   </div>
                 </template>
@@ -70,13 +74,13 @@
             <template #day-interval="{ scope: { timestamp } }">
               <div
                 v-if="hasEvents(timestamp)"
-                style="display: flex; justify-content: space-evenly; flex-wrap: nowrap; align-items: center; font-size: 12px;"
+                style="display: flex; justify-content: space-evenly; align-items: center; font-size: 12px;"
               >
                 <template
                   v-for="event in getEvents(timestamp)"
                   :key="event.time"
                 >
-                  <div style="flex-wrap: nowrap; border: 1px solid pink; border-radius: 2px; padding: 2px; margin: 1px;">
+                  <div style="border: 1px solid pink; border-radius: 2px; padding: 2px; margin: 1px;">
                     {{ event.name }}: {{ event.time }}
                   </div>
                 </template>
@@ -177,7 +181,7 @@ export default defineComponent({
     },
 
     onDrop (e, type, scope) {
-      console.log('onDrop')
+      console.log('onDrop', type, scope)
       const itemID = parseInt(e.dataTransfer.getData('ID'), 10)
       const event = { ...this.defaultEvent }
       event.id = this.events.length + 1
@@ -255,5 +259,5 @@ export default defineComponent({
 
 <style lang="sass">
 .droppable
-  box-shadow: inset 0 0 0 1px blue
+  box-shadow: inset 0 0 0 1px rgba(0,140,200,.8)
 </style>

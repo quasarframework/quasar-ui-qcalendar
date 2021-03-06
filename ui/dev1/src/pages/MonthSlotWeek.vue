@@ -51,7 +51,6 @@
 </template>
 
 <script>
-import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar/QCalendarMonth.js'
 import {
   daysBetween,
   isOverlappingDates,
@@ -60,6 +59,7 @@ import {
   today,
   indexOf
 } from '@quasar/quasar-ui-qcalendar/Timestamp.js'
+import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar/QCalendarMonth.js'
 import '@quasar/quasar-ui-qcalendar/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarMonth.sass'

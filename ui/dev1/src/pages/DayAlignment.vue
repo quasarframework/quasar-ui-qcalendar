@@ -143,18 +143,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style lang="sass" scoped>
-.q-gutter-xs, .q-gutter-y-xs
-    margin-top: -4px
-
-.q-gutter-x-xs, .q-gutter-xs
-    margin-left: -4px
-
-.q-gutter-xs>*, .q-gutter-y-xs>*
-    margin-top: 4px
-
-.q-gutter-x-xs>*, .q-gutter-xs>*
-    margin-left: 4px
-
-</style>

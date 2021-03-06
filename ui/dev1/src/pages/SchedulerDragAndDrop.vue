@@ -1,6 +1,10 @@
 <template>
   <div class="subcontent">
-    <div class="line">Drag any items in the list to a calendar resource day.</div>
+    <div class="line">
+      Drag any items in the list to a calendar day or the top header.<br>
+      Don't use css <code class="token">border</code> to outline a cell. It won't look right.<br>
+      Instead use <code class="token">box-shadow</code> to create an inset like this <code class="token">box-shadow: inset 0 0 0 1px rgba(0,140,200,.8)</code>
+    </div>
 
     <navigation-bar
       @today="onToday"
@@ -33,16 +37,14 @@
             :drag-over-func="onDragOver"
             :drag-leave-func="onDragLeave"
             :drop-func="onDrop"
+            :weekday-class="onWeekdayClass"
+            :day-class="onDayClass"
             :weekdays="[1,2,3,4,5]"
             hoverable
-            focusable
-            :focus-type="['day', 'date', 'weekday', 'resource']"
             animated
             bordered
             :day-min-height="50"
             :day-height="0"
-            :day-class="onDayClass"
-            :weekday-class="onWeekdayClass"
             style="max-width: 800px; width: 100%;"
             @change="onChange"
             @moved="onMoved"
@@ -52,6 +54,24 @@
             @click-head-resources="onClickHeadResources"
             @click-head-day="onClickHeadDay"
           >
+            <template #head-day-event="{ scope: { timestamp } }">
+              <div
+                v-if="allDayEventsMap[timestamp.date] && allDayEventsMap[timestamp.date].length > 0"
+                style="display: flex; flex: 1 0 0; flex-wrap: wrap; justify-content: space-evenly; align-items: center; font-size: 12px;"
+              >
+                <template
+                  v-for="event in allDayEventsMap[timestamp.date]"
+                  :key="event.time"
+                >
+                  <div
+                    style="display: flex; flex: 1 0 auto; flex-wrap: wrap; justify-content: space-evenly; align-items: center; font-size: 12px;"
+                  >
+                    {{ event.name }}
+                  </div>
+                </template>
+              </div>
+            </template>
+
             <template #day="{ scope: { timestamp, resource } }">
               <div
                 v-if="hasEvents(timestamp, resource)"
@@ -61,7 +81,9 @@
                   v-for="event in getEvents(timestamp, resource)"
                   :key="event.id"
                 >
-                  <span style="border: 1px solid pink; border-radius: 2px; padding: 2px; margin: 1px; user-select: none;">
+                  <span
+                    v-if="event.resource"
+                    style="border: 1px solid pink; border-radius: 2px; padding: 2px; margin: 1px; user-select: none;">
                     {{ event.name }}
                   </span>
                 </template>
@@ -137,6 +159,14 @@ export default defineComponent({
       }
       console.log('eventsMap', map)
       return map
+    },
+
+    allDayEventsMap () {
+      const map = {}
+      if (this.events.length > 0) {
+        this.events.forEach(event => event.allDay === true && ((map[ event.date ] = map[ event.date ] || []).push(event)))
+      }
+      return map
     }
   },
   methods: {
@@ -149,7 +179,7 @@ export default defineComponent({
 
     onDragEnter (e, type, scope) {
       console.log('onDragEnter')
-      if (type === 'day') {
+      if (type === 'day' || type === 'head-day') {
         e.preventDefault()
         return true
       }
@@ -157,7 +187,7 @@ export default defineComponent({
 
     onDragOver (e, type, scope) {
       console.log('onDragOver')
-      if (type === 'day') {
+      if (type === 'day' || type === 'head-day') {
         e.preventDefault()
         return true
       }
@@ -165,14 +195,14 @@ export default defineComponent({
 
     onDragLeave (e, type, scope) {
       console.log('onDragLeave')
-      if (type === 'day') {
+      if (type === 'day' || type === 'head-day') {
         return false
       }
     },
 
     onDrop (e, type, scope) {
       console.log('onDrop', scope)
-      if (type === 'day') {
+      if (type === 'day' || type === 'head-day') {
         const itemID = parseInt(e.dataTransfer.getData('ID'), 10)
         const event = { ...this.defaultEvent }
         event.id = this.events.length + 1
@@ -193,7 +223,12 @@ export default defineComponent({
       if (resource) {
         const events = this.eventsMap[ timestamp.date ]
         if (events) {
-          return events.filter(item => item.date === timestamp.date && item.resource.id === resource.id)
+          return events.filter(item => {
+            if (item.resource) {
+              return item.date === timestamp.date && item.resource.id === resource.id
+            }
+            return item.date === timestamp.date
+          })
         }
       }
       return []
@@ -211,7 +246,7 @@ export default defineComponent({
 
     onWeekdayClass ({ scope }) {
       return {
-        droppable: false
+        droppable: scope.droppable === true
       }
     },
 
@@ -249,16 +284,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="sass" scoped>
-.list
-  margin: 0
-  list-style-type: none
-.list-item
-  text-align: left
-  margin: 4px
-</style>
-
 <style lang="sass">
 .droppable
-  box-shadow: inset 0 0 0 1px blue
+  box-shadow: inset 0 0 0 1px rgba(0,140,200,.8)
 </style>
