@@ -268,10 +268,6 @@ export default defineComponent({
       return (100 / parsedColumnCount.value) + '%'
     })
 
-    // watch(computedWidth, (val) => {
-    //   console.log('computedWidth', val)
-    // })
-
     function __isCheckChange () {
       if (checkChange() === true
       && props.useNavigation === true
@@ -449,7 +445,7 @@ export default defineComponent({
           alignSelf: 'center'
         }
       }, [
-        slot && slot(scope),
+        slot && slot({ scope }),
         !slot && h('span', {
           class: 'ellipsis'
         }, label)
@@ -648,7 +644,7 @@ export default defineComponent({
       }
 
       return h('div', data, [
-        /// head-day slot replaces everything below it
+        // head-day slot replaces everything below it
         headDaySlot !== undefined && headDaySlot({ scope }),
         headDaySlot === undefined && __renderDateHeader(day),
         headDaySlot === undefined && headDateSlot && headDateSlot({ scope }),
@@ -959,10 +955,10 @@ export default defineComponent({
           }
         },
         ...getDefaultMouseEventHandlers('-column', (event, eventName) => {
-          return { scope: { column, index }, event }
+          return { scope, event }
         })
       }, [
-        slot && slot(scope),
+        slot && slot({ scope })
         useFocusHelper()
       ])
     }
