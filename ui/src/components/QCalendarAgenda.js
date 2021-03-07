@@ -907,7 +907,7 @@ export default defineComponent({
     }
 
     function __renderColumn (column, index) {
-      const slot = slots[ column ]
+      const slot = slots[ 'column' ]
       const scope = { column, days: days.value, index }
       const width = isSticky.value === true ? props.cellWidth : computedWidth.value
       const isFocusable = props.focusable === true && props.focusType.includes('day')
