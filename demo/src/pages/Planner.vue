@@ -223,7 +223,7 @@ export default defineComponent({
       //   }
       // ],
       rightColumnOptions: undefined,
-      local: 'en-us',
+      locale: 'en-us',
       dateFormatter: undefined,
       titleFormatter: undefined,
       overdueSelected: false,
