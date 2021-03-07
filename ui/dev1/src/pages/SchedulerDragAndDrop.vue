@@ -54,10 +54,10 @@
             @click-head-resources="onClickHeadResources"
             @click-head-day="onClickHeadDay"
           >
-            <template #head-day-event="{ scope: { timestamp } }">
+            <template #head-date="{ scope: { timestamp } }">
               <div
                 v-if="allDayEventsMap[timestamp.date] && allDayEventsMap[timestamp.date].length > 0"
-                style="display: flex; flex: 1 0 0; flex-wrap: wrap; justify-content: space-evenly; align-items: center; font-size: 12px;"
+                style="display: flex; justify-content: space-evenly; flex-wrap: wrap; align-items: center; font-weight: 400; font-size: 12px; height: auto;"
               >
                 <template
                   v-for="event in allDayEventsMap[timestamp.date]"
