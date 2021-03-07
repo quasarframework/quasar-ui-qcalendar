@@ -963,7 +963,7 @@ export default defineComponent({
     }
 
     function __renderDay (day, dayIndex, columnIndex) {
-      const slot = slots[ 'day-body' ]
+      const slot = slots[ 'day' ]
       const scope = getScopeForSlot(day, columnIndex)
       const width = isSticky.value === true ? props.cellWidth : computedWidth.value
       const style = {
