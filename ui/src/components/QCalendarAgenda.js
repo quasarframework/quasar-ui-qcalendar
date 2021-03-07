@@ -959,7 +959,6 @@ export default defineComponent({
         })
       }, [
         slot && slot({ scope })
-        useFocusHelper()
       ])
     }
 
