@@ -50,7 +50,7 @@ import useKeyboard, { useNavigationProps } from '../composables/useKeyboard.js'
 import ResizeObserver from '../directives/ResizeObserver.js'
 
 export default defineComponent({
-  name: 'QCalendarDay',
+  name: 'QCalendarAgenda',
 
   directives: [ResizeObserver],
 
@@ -432,7 +432,7 @@ export default defineComponent({
 
     function __renderHeadColumnLabel (column) {
       const slot = slots[ 'head-column-label' ]
-      const scope = column
+      const scope = { column }
       const label = props.columnOptionsLabel !== undefined ? column[ props.columnOptionsLabel ] : column.label
 
       const vNode = h('div', {
