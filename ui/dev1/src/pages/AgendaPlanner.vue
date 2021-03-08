@@ -175,11 +175,11 @@ import {
   prevDay,
   daysBetween,
   createNativeLocaleFormatter
-} from '@quick2/calendar/Timestamp.js'
-import { QCalendarAgenda } from '@quick2/calendar/QCalendarAgenda.js'
-import '@quick2/calendar/QCalendarVariables.sass'
-import '@quick2/calendar/QCalendarTransitions.sass'
-import '@quick2/calendar/QCalendarAgenda.sass'
+} from '@quasar/quasar-ui-qcalendar/Timestamp.js'
+import { QCalendarAgenda } from '@quasar/quasar-ui-qcalendar/QCalendarAgenda.js'
+import '@quasar/quasar-ui-qcalendar/QCalendarVariables.sass'
+import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
+import '@quasar/quasar-ui-qcalendar/QCalendarAgenda.sass'
 
 import Checkbox from '@carbon/icons-vue/es/checkbox/24'
 import CheckboxChecked from '@carbon/icons-vue/es/checkbox--checked/24'
