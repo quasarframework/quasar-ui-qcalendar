@@ -138,7 +138,7 @@ export default function (props, {
 
   function onUpArrow (e) {
     let tm = copyTimestamp(focusValue.value)
-    console.log(tm)
+    // console.log(tm)
 
     if (parsedView.value === 'month') {
       tm = addToDate(tm, { day: -7 })
@@ -161,7 +161,7 @@ export default function (props, {
 
   function onDownArrow (e) {
     let tm = copyTimestamp(focusValue.value)
-    console.log(tm)
+    // console.log(tm)
 
     if (parsedView.value === 'month') {
       tm = addToDate(tm, { day: 7 })

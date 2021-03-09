@@ -190,7 +190,7 @@ export default function (props, emit, {
 
   /**
    * Returns a Timestamp of the start of the week
-   * @param {Timestamp} day
+   * @param {Timestamp} day The day in which to find the start of the week
    */
   function __getStartOfWeek (day) {
     return getStartOfWeek(day, props.weekdays, times.today)
@@ -198,7 +198,7 @@ export default function (props, emit, {
 
   /**
    * Returns a Timestamp of the end of the week
-   * @param {Timestamp} day
+   * @param {Timestamp} day The day in which to find the end of the week
    */
   function __getEndOfWeek (day) {
     return getEndOfWeek(day, props.weekdays, times.today)
@@ -206,7 +206,7 @@ export default function (props, emit, {
 
   /**
    * Returns a Timestamp of the start of the month
-   * @param {Timestamp} day
+   * @param {Timestamp} day The day in which to find the start of the month
    */
   function __getStartOfMonth (day) {
     return getStartOfMonth(day)
@@ -214,7 +214,7 @@ export default function (props, emit, {
 
   /**
    * Returns a Timestamp of the end of the month
-   * @param {Timestamp} day
+   * @param {Timestamp} day The day in which to find the end of the month
    */
   function __getEndOfMonth (day) {
     return getEndOfMonth(day)
@@ -222,7 +222,7 @@ export default function (props, emit, {
 
   /**
    * Returns boolean if the passed Timestamp is an outside day
-   * @param {Timestamp} day
+   * @param {Timestamp} day The day to check if is deemed an outside day
    */
   function isOutside (day) {
     const dayIdentifier = getDayIdentifier(day)

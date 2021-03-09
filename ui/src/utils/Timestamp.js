@@ -360,7 +360,7 @@ export function diffTimestamp (ts1, ts2, strict) {
  * @param {Timestamp} timestamp The {@link Timestamp} that needs relative data updated
  * @param {Timestamp} now {@link Timestamp} that represents the current date (optional time)
  * @param {boolean=} time Optional flag to include time ('timestamp' and 'now' params should have time values)
- * @returns{Timestamp} The updated {@link Timestamp}
+ * @returns {Timestamp} The updated {@link Timestamp}
  */
 export function updateRelative (timestamp, now, time = false) {
   let a = getDayIdentifier(now)
@@ -385,7 +385,7 @@ export function updateRelative (timestamp, now, time = false) {
  * @param {Timestamp} timestamp The {@link Timestamp} to modify
  * @param {number} minutes The number of minutes to set from midnight
  * @param {Timestamp=} now Optional {@link Timestamp} representing current date and time
- * @returns{Timestamp} The updated {@link Timestamp}
+ * @returns {Timestamp} The updated {@link Timestamp}
  */
 export function updateMinutes (timestamp, minutes, now) {
   timestamp.hasTime = true
@@ -767,8 +767,8 @@ export function getWeekdaySkips (weekdays) {
 /**
  * Creates an array of {@link Timestamp}s based on start and end params
  * @param {Timestamp} start The starting {@link Timestamp}
- * @param Timestamp} end The ending {@link Timestamp}
- * @param Timestamp} now The relative day
+ * @param {Timestamp} end The ending {@link Timestamp}
+ * @param {Timestamp} now The relative day
  * @param {number[]} weekdaySkips An array representing available and skipped weekdays
  * @param {string} [disabledBefore] Days before this date are disabled (YYYY-MM-DD)
  * @param {string} [disabledAfter] Days after this date are disabled (YYYY-MM-DD)
@@ -1103,6 +1103,7 @@ export function weeksBetween (ts1, ts2) {
 // the exports...
 export default {
   PARSE_REGEX,
+  PARSE_DATE,
   PARSE_TIME,
   DAYS_IN_MONTH,
   DAYS_IN_MONTH_LEAP,

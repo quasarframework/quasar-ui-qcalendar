@@ -84,11 +84,11 @@ export const useSchedulerProps = {
     required: true
   },
   resourceKey: {
-    type: [String, Number],
+    type: [ String, Number ],
     default: 'id'
   },
   resourceLabel: {
-    type: [String, Number],
+    type: [ String, Number ],
     default: 'label'
   },
   weekdayStyle: {
@@ -182,7 +182,6 @@ export const useAgendaProps = {
     validator: validateNumber
   }
 }
-
 
 export default function (props, {
   weekdaySkips,
@@ -303,7 +302,6 @@ export default function (props, {
   function getResourceClasses (interval, selectedDays = [], startEndDays = []) {
     return []
   }
-  
 
   /**
    * Returns a function that uses the locale property
@@ -450,6 +448,7 @@ export default function (props, {
    * This function is used for horizontal intervals
    * @param {Timestamp} timestamp
    * @param {Number} index
+   * @param idx
    */
   function getScopeForSlotX (timestamp, idx) {
     const scope = { timestamp: copyTimestamp(timestamp) }

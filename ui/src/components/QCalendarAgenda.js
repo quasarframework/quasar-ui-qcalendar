@@ -236,7 +236,7 @@ export default defineComponent({
       return days.value.length
         + (isLeftColumnOptionsValid.value === true ? props.leftColumnOptions.length : 0)
         + (isRightColumnOptionsValid.value === true ? props.rightColumnOptions.length : 0)
-        + days.value.length === 1 && props.columnCount > 0 ? props.columnCount : 0
+        + days.value.length === 1 && parseInt(props.columnCount, 10) > 0 ? parseInt(props.columnCount, 10) : 0
     })
 
     const isLeftColumnOptionsValid = computed(() => {
@@ -375,7 +375,7 @@ export default defineComponent({
       const scope = { column, index, days: days.value }
       const width = isSticky.value === true ? props.cellWidth : computedWidth.value
       const isFocusable = props.focusable === true && props.focusType.includes('weekday')
-      const id = (props.columnOptionsId !== undefined ? column[props.columnOptionsId] : undefined)
+      const id = (props.columnOptionsId !== undefined ? column[ props.columnOptionsId ] : undefined)
 
       const style = {
         maxWidth: width,
@@ -506,7 +506,7 @@ export default defineComponent({
       const slot = slots[ 'head-days-events' ]
 
       nextTick(() => {
-        if (headDayEventsChildRef.value && props.columnCount === undefined && window) {
+        if (headDayEventsChildRef.value && props.columnCount === 0 && window) {
           try {
             const styles = window.getComputedStyle(headDayEventsChildRef.value)
             headDayEventsParentRef.value.parentElement.style.height = styles.height
@@ -539,7 +539,7 @@ export default defineComponent({
     }
 
     function __renderHeadDays () {
-      if (days.value.length === 1 && props.columnCount !== undefined && parseInt(props.columnCount, 10) > 0) {
+      if (days.value.length === 1 && parseInt(props.columnCount, 10) > 0) {
         return [
           isLeftColumnOptionsValid.value === true && props.leftColumnOptions.map((column, index) => __renderHeadColumn(column, index)),
           Array.apply(null, new Array(parseInt(props.columnCount, 10)))
@@ -558,11 +558,11 @@ export default defineComponent({
     }
 
     function __renderHeadDaysEvents () {
-      if (days.value.length === 1 && props.columnCount !== undefined && parseInt(props.columnCount, 10) > 0) {
+      if (days.value.length === 1 && parseInt(props.columnCount, 10) > 0) {
         return [
           Array.apply(null, new Array(parseInt(props.columnCount, 10)))
             .map((_, i) => i + parseInt(props.columnIndexStart, 10))
-            .map(columnIndex => __renderHeadDayEvent(days.value[ 0 ], columnIndex)),
+            .map(columnIndex => __renderHeadDayEvent(days.value[ 0 ], columnIndex))
         ]
       }
       else {
@@ -888,13 +888,13 @@ export default defineComponent({
     }
 
     function __renderDays () {
-      if (days.value.length === 1 && props.columnCount && parseInt(props.columnCount, 10) > 0) {
+      if (days.value.length === 1 && parseInt(props.columnCount, 10) > 0) {
         return [
           isLeftColumnOptionsValid.value === true && props.leftColumnOptions.map((column, index) => __renderColumn(column, index)),
           Array.apply(null, new Array(parseInt(props.columnCount, 10)))
             .map((_, i) => i + parseInt(props.columnIndexStart, 10))
             .map(i => __renderDay(days.value[ 0 ], 0, i)),
-            isRightColumnOptionsValid.value === true && props.rightColumnOptions.map((column, index) => __renderColumn(column, index))
+          isRightColumnOptionsValid.value === true && props.rightColumnOptions.map((column, index) => __renderColumn(column, index))
         ]
       }
       else {
@@ -907,7 +907,7 @@ export default defineComponent({
     }
 
     function __renderColumn (column, index) {
-      const slot = slots[ 'column' ]
+      const slot = slots.column
       const scope = { column, days: days.value, index }
       const width = isSticky.value === true ? props.cellWidth : computedWidth.value
       const isFocusable = props.focusable === true && props.focusType.includes('day')
@@ -963,7 +963,7 @@ export default defineComponent({
     }
 
     function __renderDay (day, dayIndex, columnIndex) {
-      const slot = slots[ 'day' ]
+      const slot = slots.day
       const scope = getScopeForSlot(day, columnIndex)
       const width = isSticky.value === true ? props.cellWidth : computedWidth.value
       const style = {

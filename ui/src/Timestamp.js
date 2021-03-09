@@ -1,6 +1,7 @@
 import { version } from '../package.json'
 import {
   PARSE_REGEX,
+  PARSE_DATE,
   PARSE_TIME,
   DAYS_IN_MONTH,
   DAYS_IN_MONTH_LEAP,
@@ -81,6 +82,7 @@ import {
 export {
   version,
   PARSE_REGEX,
+  PARSE_DATE,
   PARSE_TIME,
   DAYS_IN_MONTH,
   DAYS_IN_MONTH_LEAP,
@@ -159,6 +161,7 @@ export {
 export default {
   version,
   PARSE_REGEX,
+  PARSE_DATE,
   PARSE_TIME,
   DAYS_IN_MONTH,
   DAYS_IN_MONTH_LEAP,

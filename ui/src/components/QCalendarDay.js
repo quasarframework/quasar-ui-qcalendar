@@ -244,7 +244,7 @@ export default defineComponent({
     })
 
     const parsedColumnCount = computed(() => {
-      if (props.view === 'day' && props.columnCount !== undefined && props.columnCount > 1) {
+      if (props.view === 'day' && parseInt(props.columnCount, 10) > 0) {
         return parseInt(props.columnCount, 10)
       }
       else if (props.view === 'day' && props.maxDays && props.maxDays > 1) {
@@ -454,7 +454,7 @@ export default defineComponent({
       const slot = slots[ 'head-days-events' ]
 
       nextTick(() => {
-        if (headDayEventsChildRef.value && props.columnCount === undefined && window) {
+        if (headDayEventsChildRef.value && parseInt(props.columnCount, 10) === 0 && window) {
           try {
             const styles = window.getComputedStyle(headDayEventsChildRef.value)
             headDayEventsParentRef.value.parentElement.style.height = styles.height
@@ -487,7 +487,7 @@ export default defineComponent({
     }
 
     function __renderHeadDays () {
-      if (days.value.length === 1 && props.columnCount !== undefined && parseInt(props.columnCount, 10) > 0) {
+      if (days.value.length === 1 && parseInt(props.columnCount, 10) > 0) {
         return Array.apply(null, new Array(parseInt(props.columnCount, 10)))
           .map((_, i) => i + parseInt(props.columnIndexStart, 10))
           .map(columnIndex => __renderHeadDay(days.value[ 0 ], columnIndex))
@@ -498,7 +498,7 @@ export default defineComponent({
     }
 
     function __renderHeadDaysEvents () {
-      if (days.value.length === 1 && props.columnCount !== undefined && parseInt(props.columnCount, 10) > 0) {
+      if (days.value.length === 1 && parseInt(props.columnCount, 10) > 0) {
         return Array.apply(null, new Array(parseInt(props.columnCount, 10)))
           .map((_, i) => i + parseInt(props.columnIndexStart, 10))
           .map(columnIndex => __renderHeadDayEvent(days.value[ 0 ], columnIndex))
@@ -857,7 +857,7 @@ export default defineComponent({
     }
 
     function __renderDays () {
-      if (days.value.length === 1 && props.columnCount && parseInt(props.columnCount, 10) > 0) {
+      if (days.value.length === 1 && parseInt(props.columnCount, 10) > 0) {
         return Array.apply(null, new Array(parseInt(props.columnCount, 10)))
           .map((_, i) => i + parseInt(props.columnIndexStart, 10))
           .map(i => __renderDay(days.value[ 0 ], 0, i))

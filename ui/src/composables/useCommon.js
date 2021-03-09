@@ -103,7 +103,7 @@ export const useCommonProps = {
   focusable: Boolean,
   focusType: {
     type: Array,
-    default: [ 'date' ],
+    default: ['date'],
     validator: v => {
       let val = true
       v.forEach(type => {
@@ -111,7 +111,7 @@ export const useCommonProps = {
           val = false
         }
       })
-      return val      
+      return val
     }
   }
 }

@@ -35,6 +35,8 @@ export const useMoveEmits = [
  * @param {Timestamp} param.times.now
  * @param {import('vue').Ref} param.emittedValue reactive sting that is emitted when changed (YYYY-MM-DD)
  * @param {Function} param.emit Vue emit function
+ * @param param.parsedView
+ * @param param.direction
  */
 export default function (props, {
   parsedView,
@@ -52,7 +54,7 @@ export default function (props, {
    * A week calendar moves by prev/next week
    * Other considerations are the 'weekdaySkips'; if a day of the week shoud be displayed (ie: weekends turned off)
    * @param {Number} amount
-   * @emits 'moved' with current Timestamp
+   * @fires 'moved' with current Timestamp
    */
   function move (amount = 1) {
     if (amount === 0) {

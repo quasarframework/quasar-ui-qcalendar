@@ -18,6 +18,7 @@
     "@carbon/icons-vue": "^10.27.0",
     "@quasar/extras": "^1.9.19",
     "core-js": "^3.9.1",
+    "date-holidays": "^2.0.2",
     "quasar": "^2.0.0-beta.1"
   },
   "devDependencies": {

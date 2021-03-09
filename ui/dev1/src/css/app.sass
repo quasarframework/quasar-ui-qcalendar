@@ -39,13 +39,13 @@ ul
   transition: color 0.2s, background 0.2s, border 0.2s
   cursor: pointer
   text-decoration: none
-  transition: background .2s, background .2s, border .2s
 
   &:hover,
   &:active
     background: rgba(0,200,200,.30)
 
-  &:focus
+  &:focus,
+  &.active
     background: rgba(0,200,200,.40)
     border: 1px solid rgba(0,140,200,.8)
 
@@ -95,20 +95,37 @@ kbd
   outline: 0
   color: rgba(0,140,200,.8)
 
-.select
-  background: transparent
-  color: rgba(0,140,200,.8)
-  border: 1px solid rgba(0,255,255,.50)
+.select, input[type="radio"]
   display: flex
   flex-direction: row
   justify-content: center
   align-items: center
-  margin: 4px
+  margin: 5px
+  padding: 4px 15px
+  border-radius: 4px
+  border: 1px solid rgba(0,255,255,.50)
+  background: rgba(0,200,200,.20)
+  color: rgba(0,140,200,.8)
   outline: 0
+  font-size: 0.8em
+  cursor: pointer
+  text-decoration: none
+  transition: color .2s, background .2s, border .2s
+
+  &:hover,
+  &:active
+    background: inherit
+
+  &:focus
+    background: inherit
+    border: 1px solid rgba(0,140,200,.8)
 
 .button > .select
+  background: transparent
   border: transparent
-  margin: 0
+  margin: 2px
+  padding: 0 4px
+  font-size: 1.2em
 
 .list
   display: flex
@@ -122,10 +139,9 @@ kbd
   margin: 2px
 
 .line
-  line-height: 1.52em
+  line-height: 1.48em
   margin-top: 8px
   margin-bottom: 4px
-  text-align: center
 
 .token
   white-space: nowrap

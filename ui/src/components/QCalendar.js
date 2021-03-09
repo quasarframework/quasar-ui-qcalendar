@@ -11,11 +11,11 @@ import QCalendarMonth from './QCalendarMonth.js'
 import QCalendarResource from './QCalendarResource.js'
 import QCalendarScheduler from './QCalendarScheduler.js'
 
-function __suffixView(suffix) {
-  return ['day', 'week', 'month'].map(v => v + suffix)
+function __suffixView (suffix) {
+  return [ 'day', 'week', 'month' ].map(v => v + suffix)
 }
 
-function __validateView(v) {
+function __validateView (v) {
   return [ 'month-interval', ...__suffixView(''), ...__suffixView('-agenda'), ...__suffixView('-resource'), ...__suffixView('-scheduler') ].includes(v)
 }
 
@@ -28,10 +28,10 @@ export default defineComponent({
       default: 'day'
     }
   },
-  setup(props, {attrs, slots}) {
+  setup (props, { attrs, slots }) {
     const component = computed(() => {
       const view = props.view.split('-')
-      switch (view[view.length - 1]) {
+      switch (view[ view.length - 1 ]) {
         case 'agenda':
           return QCalendarAgenda
         case 'resource':
@@ -47,6 +47,6 @@ export default defineComponent({
           return QCalendarDay
       }
     })
-    return () => h(component.value, {...attrs, 'view': props.view.split('-')[0]}, slots)
+    return () => h(component.value, { ...attrs, view: props.view.split('-')[ 0 ] }, slots)
   }
 })

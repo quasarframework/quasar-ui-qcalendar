@@ -240,7 +240,6 @@ export default defineComponent({
       return props.weekdays.length
     })
 
-
     const borderWidth = computed(() => {
       if (rootRef.value) {
         const calendarBorderWidth = getComputedStyle(rootRef.value).getPropertyValue('--calendar-border')
@@ -557,9 +556,9 @@ export default defineComponent({
           }, week.map((day, index) => __renderDay(day))),
           isMiniMode.value !== true && slotWeek !== undefined
             ? h('div', {
-                ref: (el) => { weekEventRef.value[ weekNum ] = el },
-                class: 'q-calendar-month__week--events'
-              }, slotWeek({ scope }))
+              ref: (el) => { weekEventRef.value[ weekNum ] = el },
+              class: 'q-calendar-month__week--events'
+            }, slotWeek({ scope }))
             : undefined
         ])
       ])

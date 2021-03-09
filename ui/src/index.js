@@ -3,6 +3,7 @@ import QCalendar from './components/QCalendar.js'
 
 import {
   PARSE_REGEX,
+  PARSE_DATE,
   PARSE_TIME,
   DAYS_IN_MONTH,
   DAYS_IN_MONTH_LEAP,
@@ -86,6 +87,7 @@ export {
 
   // timestamp
   PARSE_REGEX,
+  PARSE_DATE,
   PARSE_TIME,
   DAYS_IN_MONTH,
   DAYS_IN_MONTH_LEAP,
@@ -167,6 +169,7 @@ export default {
 
   // timestamp
   PARSE_REGEX,
+  PARSE_DATE,
   PARSE_TIME,
   DAYS_IN_MONTH,
   DAYS_IN_MONTH_LEAP,
