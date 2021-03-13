@@ -863,7 +863,7 @@ export default defineComponent({
         resources = props.modelResources
       }
       return resources.map((resource, resourceIndex) => {
-        return __renderResourceRow(resource, resourceIndex, indentLevel, expanded)
+        return __renderResourceRow(resource, resourceIndex, indentLevel, resource.children !== undefined ? resource.expanded : expanded)
       })
     }
 
