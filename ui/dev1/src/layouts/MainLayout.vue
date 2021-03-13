@@ -36,6 +36,7 @@
               class="button"
               style="width: 100%; margin: 8px 0;"
             >
+              <div style="width: 44px">Search:</div>
               <input
                 v-model="filter"
                 class="select"
