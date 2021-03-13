@@ -372,6 +372,8 @@ export default defineComponent({
       move(-amount)
     }
 
+    // private functions
+
     function __onResize ({ width, height }) {
       size.width = width
       size.height = height

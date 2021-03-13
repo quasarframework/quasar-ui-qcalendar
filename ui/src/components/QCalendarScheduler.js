@@ -57,7 +57,6 @@ export default defineComponent({
   props: {
     ...useCommonProps,
     ...useSchedulerProps,
-    // ...useResourceProps,
     ...useColumnProps,
     ...useMaxDaysProps,
     ...useTimesProps,
@@ -440,14 +439,6 @@ export default defineComponent({
         slot && slot({ scope })
       ])
     }
-
-    // function __renderHeadDaysBody () {
-    //   return h('div', {
-    //     class: 'q-calendar-scheduler__head--days__body'
-    //   }, [
-    //     ...__renderHeadDays(h)
-    //   ])
-    // }
 
     function __renderHeadDaysColumn () {
       return h('div', {
@@ -906,6 +897,7 @@ export default defineComponent({
 
     function __renderResource (resource, resourceIndex, indentLevel = 0, expanded = true) {
       const slotResourceLabel = slots[ 'resource-label' ]
+
       const style = {
         minWidth: resourcesWidth.value + 'px',
         width: resourcesWidth.value + 'px'
