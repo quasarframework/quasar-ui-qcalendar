@@ -91,19 +91,29 @@ export const useSchedulerProps = {
     type: [ String, Number ],
     default: 'label'
   },
-  weekdayStyle: {
-    type: Function,
-    default: null
+  resourceHeight: {
+    type: [ Number, String ],
+    default: 0,
+    validator: validateNumber
   },
-  weekdayClass: {
-    type: Function,
-    default: null
+  resourceMinHeight: {
+    type: [ Number, String ],
+    default: 70,
+    validator: validateNumber
   },
   resourceStyle: {
     type: Function,
     default: null
   },
   resourceClass: {
+    type: Function,
+    default: null
+  },
+  weekdayStyle: {
+    type: Function,
+    default: null
+  },
+  weekdayClass: {
     type: Function,
     default: null
   },
@@ -119,16 +129,6 @@ export const useSchedulerProps = {
     type: String,
     default: 'stacked',
     validator: v => [ 'stacked', 'inline', 'inverted' ].includes(v)
-  },
-  dayHeight: {
-    type: [ Number, String ],
-    default: 0,
-    validator: validateNumber
-  },
-  dayMinHeight: {
-    type: [ Number, String ],
-    default: 40,
-    validator: validateNumber
   }
 }
 
@@ -235,7 +235,7 @@ export default function (props, {
   parsedEnd,
   maxDays,
   size,
-  headDaysColumnRef
+  headerColumnRef
 }) {
   const parsedIntervalStart = computed(() => parseInt(props.intervalStart, 10))
   const parsedIntervalMinutes = computed(() => parseInt(props.intervalMinutes, 10))
@@ -246,8 +246,8 @@ export default function (props, {
     if (props.cellWidth) {
       width = props.cellWidth
     }
-    else if (size.width > 0 && headDaysColumnRef.value) {
-      width = headDaysColumnRef.value.offsetWidth / (props.columnCount > 1 ? props.columnCount : maxDays.value)
+    else if (size.width > 0 && headerColumnRef.value) {
+      width = headerColumnRef.value.offsetWidth / (props.columnCount > 1 ? props.columnCount : maxDays.value)
     }
     return width + 1 // for border
   })

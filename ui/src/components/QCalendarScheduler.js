@@ -257,7 +257,7 @@ export default defineComponent({
       return days.value.length
     })
 
-    const resourcesWidth = computed(() => {
+    const parsedResourceWidth = computed(() => {
       if (rootRef.value) {
         return parseInt(getComputedStyle(rootRef.value).getPropertyValue('--calendar-resources-width'), 10)
       }
@@ -277,8 +277,8 @@ export default defineComponent({
     const computedWidth = computed(() => {
       if (rootRef.value) {
         const width = size.width || rootRef.value.getBoundingClientRect().width
-        if (width && resourcesWidth.value && borderWidth.value && parsedColumnCount.value) {
-          return ((width - scrollWidth.value - resourcesWidth.value - (borderWidth.value * parsedColumnCount.value)) / parsedColumnCount.value) + 'px'
+        if (width && parsedResourceWidth.value && borderWidth.value && parsedColumnCount.value) {
+          return ((width - scrollWidth.value - parsedResourceWidth.value - (borderWidth.value * parsedColumnCount.value)) / parsedColumnCount.value) + 'px'
         }
       }
       return (100 / parsedColumnCount.value) + '%'
@@ -421,9 +421,9 @@ export default defineComponent({
       }
 
       const style = {
-        minWidth: resourcesWidth.value + 'px',
-        // maxWidth: resourcesWidth.value + 'px',
-        width: resourcesWidth.value + 'px'
+        minWidth: parsedResourceWidth.value + 'px',
+        // maxWidth: parsedResourceWidth.value + 'px',
+        width: parsedResourceWidth.value + 'px'
       }
 
       return h('div', {
@@ -899,12 +899,12 @@ export default defineComponent({
       const slotResourceLabel = slots[ 'resource-label' ]
 
       const style = {
-        minWidth: resourcesWidth.value + 'px',
-        width: resourcesWidth.value + 'px'
+        minWidth: parsedResourceWidth.value + 'px',
+        width: parsedResourceWidth.value + 'px'
       }
-      style.height = parseInt(props.dayHeight, 10) > 0 ? convertToUnit(parseInt(props.dayHeight, 10)) : 'auto'
-      if (parseInt(props.dayMinHeight, 10) > 0) {
-        style.minHeight = convertToUnit(parseInt(props.dayMinHeight, 10))
+      style.height = parseInt(props.resourceHeight, 10) > 0 ? convertToUnit(parseInt(props.resourceHeight, 10)) : 'auto'
+      if (parseInt(props.resourceMinHeight, 10) > 0) {
+        style.minHeight = convertToUnit(parseInt(props.resourceMinHeight, 10))
       }
       const styler = props.resourceStyle || styleDefault
       const label = resource[ props.resourceLabel ]
@@ -1012,9 +1012,9 @@ export default defineComponent({
 
     function __renderDayResources (resource, resourceIndex, indentLevel = 0, expanded = true) {
       const style = {}
-      style.height = parseInt(props.dayHeight, 10) > 0 ? convertToUnit(parseInt(props.dayHeight, 10)) : 'auto'
-      if (parseInt(props.dayMinHeight, 10) > 0) {
-        style.minHeight = convertToUnit(parseInt(props.dayMinHeight, 10))
+      style.height = parseInt(props.resourceHeight, 10) > 0 ? convertToUnit(parseInt(props.resourceHeight, 10)) : 'auto'
+      if (parseInt(props.resourceMinHeight, 10) > 0) {
+        style.minHeight = convertToUnit(parseInt(props.resourceMinHeight, 10))
       }
 
       const data = {
@@ -1057,9 +1057,9 @@ export default defineComponent({
       if (isSticky.value === true) {
         style.minWidth = width
       }
-      style.height = parseInt(props.dayHeight, 10) > 0 ? convertToUnit(parseInt(props.dayHeight, 10)) : 'auto'
-      if (parseInt(props.dayMinHeight, 10) > 0) {
-        style.minHeight = convertToUnit(parseInt(props.dayMinHeight, 10))
+      style.height = parseInt(props.resourceHeight, 10) > 0 ? convertToUnit(parseInt(props.resourceHeight, 10)) : 'auto'
+      if (parseInt(props.resourceMinHeight, 10) > 0) {
+        style.minHeight = convertToUnit(parseInt(props.resourceMinHeight, 10))
       }
       const dayClass = typeof props.dayClass === 'function' ? props.dayClass({ scope }) : {}
       const isFocusable = props.focusable === true && props.focusType.includes('day') && expanded === true
