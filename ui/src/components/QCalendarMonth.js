@@ -89,7 +89,7 @@ export default defineComponent({
       datesRef = ref({}),
       weekEventRef = ref([]),
       weekRef = ref([]),
-      headDaysColumnRef = ref(null),
+      headerColumnRef = ref(null),
       size = reactive({ width: 0, height: 0 }),
       dragOverDayRef = ref(false),
       // keep track of last seen start and end dates
@@ -190,7 +190,7 @@ export default defineComponent({
       parsedStart,
       parsedEnd,
       size,
-      headDaysColumnRef
+      headerColumnRef
     })
 
     const { move } = useMove(props, {
@@ -414,7 +414,7 @@ export default defineComponent({
 
     function __renderHeadDaysRow () {
       return h('div', {
-        ref: headDaysColumnRef,
+        ref: headerColumnRef,
         class: {
           'q-calendar-month__head--weekdays': true
         }

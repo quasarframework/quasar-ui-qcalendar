@@ -82,7 +82,7 @@ export default defineComponent({
       scrollArea = ref(null),
       pane = ref(null),
       headerRef = ref(null),
-      headDaysColumnRef = ref(null),
+      headerColumnRef = ref(null),
       focusRef = ref(null),
       focusValue = ref(null),
       // resourceFocusRef = ref(null),
@@ -208,7 +208,7 @@ export default defineComponent({
       parsedEnd,
       maxDays: maxDaysRendered,
       size,
-      headDaysColumnRef
+      headerColumnRef
     })
 
     const { move } = useMove(props, {
@@ -442,7 +442,7 @@ export default defineComponent({
 
     function __renderHeadDaysColumn () {
       return h('div', {
-        ref: headDaysColumnRef,
+        ref: headerColumnRef,
         class: {
           'q-calendar-scheduler__head--days__column': true
         }

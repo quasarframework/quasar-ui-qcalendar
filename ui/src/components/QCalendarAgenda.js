@@ -77,7 +77,7 @@ export default defineComponent({
     const
       scrollArea = ref(null),
       pane = ref(null),
-      headDaysColumnRef = ref(null),
+      headerColumnRef = ref(null),
       focusRef = ref(null),
       focusValue = ref(null),
       datesRef = ref({}),
@@ -193,7 +193,7 @@ export default defineComponent({
       parsedEnd,
       maxDays: maxDaysRendered,
       size,
-      headDaysColumnRef
+      headerColumnRef
     })
 
     const { move } = useMove(props, {
@@ -482,7 +482,7 @@ export default defineComponent({
 
     function __renderHeadDaysColumn () {
       return h('div', {
-        ref: headDaysColumnRef,
+        ref: headerColumnRef,
         class: {
           'q-calendar-agenda__head--days__column': true
         }

@@ -73,7 +73,7 @@ export default function (props, emit, {
   parsedStart,
   parsedEnd,
   size,
-  headDaysColumnRef
+  headerColumnRef
 }) {
   const parsedMinWeeks = computed(() => parseInt(props.minWeeks, 10))
   const parsedMinDays = computed(() => parsedMinWeeks.value * props.weekdays.length)
@@ -84,8 +84,8 @@ export default function (props, emit, {
     if (props.cellWidth) {
       width = props.cellWidth
     }
-    else if (size.width > 0 && headDaysColumnRef.value) {
-      width = headDaysColumnRef.value.offsetWidth / props.weekdays.length
+    else if (size.width > 0 && headerColumnRef.value) {
+      width = headerColumnRef.value.offsetWidth / props.weekdays.length
     }
     return width + 1 // for border
   })
