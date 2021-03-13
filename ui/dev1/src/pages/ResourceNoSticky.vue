@@ -15,6 +15,7 @@
         resource-label="name"
         animated
         bordered
+        no-sticky
         style="max-width: 800px; width: 100%; height: 300px;"
         @change="onChange"
         @moved="onMoved"
