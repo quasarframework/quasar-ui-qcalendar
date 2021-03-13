@@ -12,10 +12,10 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          QCalendar <span style="font-size: 12px;">v{{ version }}</span>
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div>Quasar <span style="font-size: 12px;">v{{ $q.version }}</span></div>
       </q-toolbar>
     </q-header>
 
@@ -31,7 +31,7 @@
           class="text-grey-8"
         >
           <div>Found: {{ filteredPages.length }} examples</div>
-          <div style="display: flex; justify-content: center; items-align: center; margin-bottom: 10px; width: 100%">
+          <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 10px; width: 100%">
             <div
               class="button"
               style="width: 100%; margin: 8px 0;"
@@ -100,6 +100,7 @@
 
 import { defineComponent, ref, computed, onBeforeMount, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { version } from '@quasar/quasar-ui-qcalendar'
 
 import pages from '../router/pages'
 
@@ -166,6 +167,7 @@ export default defineComponent({
     }
 
     return {
+      version,
       filter,
       pages,
       filteredPages,
