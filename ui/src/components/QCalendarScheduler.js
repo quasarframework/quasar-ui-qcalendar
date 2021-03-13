@@ -869,15 +869,14 @@ export default defineComponent({
 
     function __renderResourceRow (resource, resourceIndex, indentLevel = 0, expanded = true) {
       const height = resource.height !== void 0 ? convertToUnit(resource.height) : 'auto'
-      const style = { height: height }
+      const style = {
+        height
+      }
 
       const resourceRow = h('div', {
-        key: resource[ props.resourceKey ],
+        key: resource[ props.resourceKey ] + '-' + resourceIndex,
         class: {
-          'q-calendar-scheduler__resource--row': true,
-          'q-calendar__child': indentLevel > 0,
-          'q-calendar__child--expanded': indentLevel > 0 && expanded === true,
-          'q-calendar__child--collapsed': indentLevel > 0 && expanded !== true
+          'q-calendar-scheduler__resource--row': true
         },
         style
       }, [
@@ -888,7 +887,15 @@ export default defineComponent({
       if (resource.children !== undefined) {
         return [
           resourceRow,
-          ...__renderResources(resource.children, indentLevel + 1, (expanded === false ? expanded : resource.expanded))
+          h('div', {
+            class: {
+              'q-calendar__child': true,
+              'q-calendar__child--expanded': expanded === true,
+              'q-calendar__child--collapsed': expanded !== true
+            }
+          }, [
+            __renderResources(resource.children, indentLevel + 1, (expanded === false ? expanded : resource.expanded))
+          ])
         ]
       }
 
@@ -910,13 +917,19 @@ export default defineComponent({
       const label = resource[ props.resourceLabel ]
 
       const isFocusable = props.focusable === true && props.focusType.includes('resource') && expanded === true
-      const scope = { resource, days: days.value, resourceIndex, indentLevel, label }
+      const scope = {
+        resource,
+        days: days.value,
+        resourceIndex,
+        indentLevel,
+        label
+      }
       const dragValue = resource[ props.resourceKey ]
       scope.droppable = dragOverResource.value === dragValue
       const resourceClass = typeof props.resourceClass === 'function' ? props.resourceClass({ scope }) : {}
 
       return h('div', {
-        key: resource[ props.resourceKey ],
+        key: resource[ props.resourceKey ] + '-' + resourceIndex,
         ref: (el) => { resourcesRef.value[ resource[ props.resourceKey ] ] = el },
         tabindex: isFocusable === true ? 0 : -1,
         class: {
@@ -992,6 +1005,21 @@ export default defineComponent({
                   resource.expanded = !resource.expanded
                   emit('update:modelResources', props.modelResources)
                   emit('resource-expanded', { expanded: resource.expanded, scope })
+                  if (resourcesRef.value[ resource[ props.resourceKey ] ]) {
+                    const el = resourcesRef.value[ resource[ props.resourceKey ] ]
+                    const parent = el.parentNode
+                    const child = parent.nextSibling
+                    const scrollHeight = child.scrollHeight
+                    let p = parent
+                    do {
+                      p = p.parentNode.closest('.q-calendar__child')
+                      if (p) {
+                        const mh = parseInt(p.style.maxHeight)
+                        p.style.maxHeight = mh + scrollHeight + 'px'
+                      }
+                    } while (p)
+                    child.style.maxHeight = scrollHeight + 'px'
+                  }
                 }
               }),
               h('div', {

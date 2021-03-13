@@ -73,33 +73,33 @@
     overflow: hidden
 
   &__parent
-    transition: transform .3s
+    transition: transform .3s // rotate
     border: solid currentColor
-    border-width: 0 2px 2px 0
+    border-width: 0 2px 2px 0 // makes 2 sides of a square, then rotate 45% degrees
     display: inline-block
     padding: 2px
+    width: 2px
+    height: 2px
 
     &--expanded
-      margin-left: 2px
+      margin: 0 2px
       transform: rotate(-135deg)
 
     &--collapsed
-      margin-left: 2px
+      margin: 0 2px
       transform: rotate(45deg)
 
   &__child
-    transition: height .5s ease-in, max-height .5s ease-in, opacity .3s ease-in
+    overflow: hidden
+    transition-property: max-height
+    transition-duration: .5s
 
     &--expanded
-      transition: height .5s ease-in, max-height .5s ease-in, opacity .3s ease-in
-      opacity: 1 !important
+      aria-hidden: false
 
     &--collapsed
-      transition: height .5s ease-in, max-height .5s ease-in, opacity .3s ease-in
-      opacity: 0 !important
+      aria-hidden: true
       border: none !important
-      height: 0 !important
-      overflow: hidden !important
       max-height: 0 !important
 
   &__focusable,
