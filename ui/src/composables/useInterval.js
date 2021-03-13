@@ -183,6 +183,50 @@ export const useAgendaProps = {
   }
 }
 
+export const useResourceProps = {
+  modelResources: {
+    type: Array,
+    required: true
+  },
+  resourceKey: {
+    type: [ String, Number ],
+    default: 'id'
+  },
+  resourceLabel: {
+    type: [ String, Number ],
+    default: 'label'
+  },
+  resourceHeight: {
+    type: [ Number, String ],
+    default: 0,
+    validator: validateNumber
+  },
+  resourceMinHeight: {
+    type: [ Number, String ],
+    default: 70,
+    validator: validateNumber
+  },
+  resourceStyle: {
+    type: Function,
+    default: null
+  },
+  resourceClass: {
+    type: Function,
+    default: null
+  },
+  intervalHeaderWidth: {
+    type: [ Number, String ],
+    default: 100,
+    validator: validateNumber
+  },
+  intervalHeaderHeight: {
+    type: [ Number, String ],
+    default: 20,
+    validator: validateNumber
+  },
+  noSticky: Boolean
+}
+
 export default function (props, {
   weekdaySkips,
   times,
