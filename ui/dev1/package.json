@@ -19,12 +19,12 @@
     "@quasar/extras": "^1.9.19",
     "core-js": "^3.9.1",
     "date-holidays": "^2.0.2",
-    "quasar": "^2.0.0-beta.1"
+    "quasar": "^2.0.0-beta.9"
   },
   "devDependencies": {
-    "@quasar/app": "^3.0.0-beta.1",
+    "@quasar/app": "^3.0.0-beta.9",
     "babel-eslint": "^10.0.1",
-    "eslint": "^7.21.0",
+    "eslint": "^7.22.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
