@@ -116,6 +116,20 @@ export default defineComponent({
       ]
     })
 
+    function getColor (item) {
+      console.log(item.type)
+      switch (item.type) {
+        case 'public':
+          return 'blue'
+        case 'observance':
+          return 'green'
+        case 'optional':
+          return 'red'
+        default: // bank|school
+          return 'orange'
+      }
+    }
+
     /// where the magic happens...
     const eventsMap = computed(() => {
       const map = {}
@@ -133,7 +147,7 @@ export default defineComponent({
               title: item.name,
               details: item.type,
               date: (PARSE_DATE.exec(item.date))[ 0 ],
-              bgcolor: 'orange'
+              bgcolor: getColor(item)
             }
           })
           .forEach(event => {
@@ -154,7 +168,6 @@ export default defineComponent({
             }
           })
       }
-      console.log('holidays', map)
       return map
     })
 
