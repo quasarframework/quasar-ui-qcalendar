@@ -1,0 +1,166 @@
+@import './q-calendar.sass'
+
+.q-calendar-grid
+  display: flex
+  flex: 1
+  flex-direction: column
+  flex-wrap: nowrap
+  height: 100%
+  width: 100%
+
+  &__head
+    position: relative
+    display: flex
+    flex: none
+    flex-direction: row
+
+    &--task
+      position: relative
+      display: flex
+
+    &--days
+      position: relative
+      display: flex
+      flex-direction: row
+      flex-wrap: nowrap
+      user-select: none
+      font-size: 1rem
+
+    &--day
+      display: flex
+      flex-direction: column
+
+  &__container
+    position: relative
+    display: flex
+    // flex: 1 1 60%
+    // overflow: hidden
+
+  &__body
+    position: relative
+    display: flex
+    flex: none
+    flex-direction: column
+    // font-size: .8em
+
+  &__scroll-area
+    overflow: auto
+    flex: 1 1 auto
+    display: flex
+    align-items: flex-start
+
+  &__task
+    position: relative
+    display: flex
+    flex: none
+    flex-direction: row
+    width: 100%
+
+    &--item
+      position: relative
+      display: flex
+      flex: none
+      flex-direction: row
+
+    &--day
+      display: flex
+      justify-content: center
+      align-items: center
+
+  &__footer
+    position: relative
+    display: flex
+    flex: none
+    flex-direction: row
+    width: 100%
+
+    &--task,
+    &--day-wrapper
+      position: relative
+      display: flex
+      flex: none
+      flex-direction: row
+
+
+
+// sticky
+.q-calendar-grid__head.q-calendar__sticky
+  position: sticky
+  left: 0 #{"/* rtl:ignore */"}
+  top: 0
+  z-index: 2
+
+.q-calendar-grid__head--task.q-calendar__sticky
+  position: sticky
+  left: 0 #{"/* rtl:ignore */"}
+  top: 0
+  z-index: 2
+
+.q-calendar-grid__task--item.q-calendar__sticky
+  position: sticky
+  left: 0 #{"/* rtl:ignore */"}
+  z-index: 2
+
+.q-calendar-grid__footer.q-calendar__sticky
+  position: sticky
+  left: 0 #{"/* rtl:ignore */"}
+  bottom: 0
+  z-index: 2
+
+.q-calendar-grid__footer--task.q-calendar__sticky
+  position: sticky
+  left: 0 #{"/* rtl:ignore */"}
+  z-index: 2
+
+.q-calendar-grid__footer--day.q-calendar__sticky
+  position: sticky
+  left: 0 #{"/* rtl:ignore */"}
+  z-index: 2
+
+
+// coloring and other vars
+.q-calendar-grid
+
+  &__head
+    color: var(--calendar-color)
+    background: var(--calendar-background)
+    border-bottom: var(--calendar-border)
+
+    &--task
+      color: var(--calendar-color)
+      background: var(--calendar-background)
+      border-right: var(--calendar-border)
+
+    &--day
+      border-right: var(--calendar-border)
+
+  &__task
+    border-bottom: var(--calendar-border)
+
+    &--item
+      background: var(--calendar-background)
+      border-right: var(--calendar-border)
+
+    &--day
+      border-right: var(--calendar-border)
+
+  &__footer
+
+    &--task
+      background: var(--calendar-background)
+      border-right: var(--calendar-border)
+
+    &--day
+      border-right: var(--calendar-border)
+
+.q-dark div,
+.body--dark div,
+.q-calendar--dark
+
+  .q-calendar-grid
+
+    &__head
+      border-bottom: var(--calendar-border-dark)
+      color: var(--calendar-color-dark)
+      background: var(--calendar-background-dark)
+
