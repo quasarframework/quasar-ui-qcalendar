@@ -190,11 +190,8 @@ export default defineComponent({
   },
   methods: {
     getWeekEvents (week, weekdays) {
-      // console.log(week, weekdays)
       const firstDay = parsed(week[ 0 ].date + ' 00:00')
       const lastDay = parsed(week[ week.length - 1 ].date + ' 23:59')
-      // const firstDay = getDayIdentifier(tsFirstDay)
-      // const lastDay = getDayIdentifier(tsLastDay)
 
       const eventsWeek = []
       this.events.forEach((event, id) => {

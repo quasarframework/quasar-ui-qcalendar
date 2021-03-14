@@ -267,14 +267,6 @@ export default defineComponent({
       pageX = 0,
       pageY = 0
 
-    const title = computed(() => {
-      if (titleFormatter.value && locale.value && selectedDate.value) {
-        const date = new Date(selectedDate) // TODO: needs fixing for Safari
-        return titleFormatter.value.format(date)
-      }
-      return ''
-    })
-
     const weekdayFormatter = computed(() => {
       const longOptions = { timeZone: 'UTC', weekday: 'long' }
       const shortOptions = { timeZone: 'UTC', weekday: 'short' }
@@ -355,16 +347,6 @@ export default defineComponent({
     function onChange ({ start, end }) {
       console.log('onChange', start, end)
       startTimestamp.value = parseTimestamp(start)
-    }
-
-    // TODO: fix for Safari
-    function formatDate (date) {
-      const d = date !== undefined ? new Date(date) : new Date(),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear()
-
-      return [ year, padNumber(month), padNumber(day) ].join('-')
     }
 
     function updateFormatters () {
@@ -768,14 +750,12 @@ export default defineComponent({
       selected,
       overdue,
       agenda,
-      title,
       weekdayFormatter,
       // methods
       onToday,
       onPrev,
       onNext,
       onChange,
-      formatDate,
       getAgenda,
       onDragStart,
       onDragEnter,

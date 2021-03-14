@@ -343,12 +343,6 @@ export default defineComponent({
       maxDaysRendered.value = val
     })
 
-    // Get initial rendering data
-    // const { start, end, maxDays } = renderValues.value
-    // startDate.value = start.date
-    // endDate.value = end.date
-    // maxDaysRendered.value = maxDays
-
     onBeforeUpdate(() => {
       datesRef.value = {}
       // intervalsRef.value = {}
@@ -1039,8 +1033,8 @@ export default defineComponent({
       const hasWidth = size.width > 0
 
       const daily = withDirectives(h('div', {
-        class: 'q-calendar-day',
-        key: startDate.value
+        key: startDate.value,
+        class: 'q-calendar-day'
       }, [
         hasWidth === true && isSticky.value !== true && props.noHeader !== true && __renderHead(),
         hasWidth && __renderBody()

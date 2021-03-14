@@ -46,10 +46,6 @@ import useKeyboard, { useNavigationProps } from '../composables/useKeyboard.js'
 // Directives
 import ResizeObserver from '../directives/ResizeObserver.js'
 
-// CSS
-// import '../css/calendar-month.sass'
-// import '../css/calendar-month-mini.sass'
-
 export default defineComponent({
   name: 'QCalendarMonth',
 
@@ -169,7 +165,7 @@ export default defineComponent({
       rootRef,
       __initCalendar,
       __renderCalendar
-    } = useCalendar(props, __rendermonth, {
+    } = useCalendar(props, __renderMonth, {
       scrollArea,
       pane
     })
@@ -841,7 +837,7 @@ export default defineComponent({
       ])
     }
 
-    function __rendermonth () {
+    function __renderMonth () {
       const { start, end } = renderValues.value
       startDate.value = start.date
       endDate.value = end.date
