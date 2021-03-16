@@ -10,7 +10,7 @@
       <QCalendarTask
         ref="calendar"
         v-model="selectedDate"
-        :tasks="tasks"
+        :tasks="parsedTasks"
         :task-width="240"
         :min-label-length="2"
         :weekday-class="weekdayClass"
@@ -99,6 +99,8 @@ export default defineComponent({
   data () {
     return {
       selectedDate: today(),
+      startDate: today(),
+      endDate: today(),
       tasks: [
         {
           icon: 'done',
@@ -193,6 +195,28 @@ export default defineComponent({
           ]
         }
       ]
+    }
+  },
+  computed: {
+    /**
+     * Returns tasks between startDate and endDate (captured via onChange event)
+     */
+    parsedTasks () {
+      const start = parsed(this.startDate)
+      const end = parsed(this.endDate)
+      const tasks = []
+
+      for (let i = 0; i < this.tasks.length; ++i) {
+        const task = this.tasks[ i ]
+        for (let j = 0; j < task.logged.length; ++j) {
+          const loggedTimestamp = parsed(task.logged[ j ].date)
+          if (isBetweenDates(loggedTimestamp, start, end)) {
+            tasks.push(task)
+            break
+          }
+        }
+      }
+      return tasks
     }
   },
   methods: {
@@ -311,6 +335,8 @@ export default defineComponent({
     },
     onChange (data) {
       console.log('onChange', data)
+      this.startDate = data.start
+      this.endDate = data.end
     },
     onClickDate (data) {
       console.log('onClickDate', data)
