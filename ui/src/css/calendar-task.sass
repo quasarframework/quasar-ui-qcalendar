@@ -1,6 +1,6 @@
 @import './q-calendar.sass'
 
-.q-calendar-grid
+.q-calendar-task
   display: flex
   flex: 1
   flex-direction: column
@@ -29,19 +29,19 @@
     &--day
       display: flex
       flex-direction: column
+      align-items: center
 
   &__container
     position: relative
     display: flex
-    // flex: 1 1 60%
-    // overflow: hidden
+    flex: 1 1 60%
+    overflow: hidden
 
   &__body
     position: relative
     display: flex
-    flex: none
+    flex: 1
     flex-direction: column
-    // font-size: .8em
 
   &__scroll-area
     overflow: auto
@@ -84,47 +84,49 @@
 
 
 // sticky
-.q-calendar-grid__head.q-calendar__sticky
+.q-calendar-task__head.q-calendar__sticky
   position: sticky
   left: 0 #{"/* rtl:ignore */"}
   top: 0
-  z-index: 2
+  z-index: 3
 
-.q-calendar-grid__head--task.q-calendar__sticky
+.q-calendar-task__head--task.q-calendar__sticky
   position: sticky
   left: 0 #{"/* rtl:ignore */"}
   top: 0
-  z-index: 2
+  z-index: 3
 
-.q-calendar-grid__task--item.q-calendar__sticky
+.q-calendar-task__task--item.q-calendar__sticky
   position: sticky
   left: 0 #{"/* rtl:ignore */"}
   z-index: 2
 
-.q-calendar-grid__footer.q-calendar__sticky
+.q-calendar-task__footer.q-calendar__sticky
   position: sticky
   left: 0 #{"/* rtl:ignore */"}
   bottom: 0
   z-index: 2
 
-.q-calendar-grid__footer--task.q-calendar__sticky
+.q-calendar-task__footer--task.q-calendar__sticky
   position: sticky
   left: 0 #{"/* rtl:ignore */"}
+  bottom: 0
   z-index: 2
 
-.q-calendar-grid__footer--day.q-calendar__sticky
+.q-calendar-task__footer--day.q-calendar__sticky
   position: sticky
   left: 0 #{"/* rtl:ignore */"}
   z-index: 2
 
 
 // coloring and other vars
-.q-calendar-grid
+.q-calendar-task
 
   &__head
     color: var(--calendar-color)
     background: var(--calendar-background)
     border-bottom: var(--calendar-border)
+    // box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2)
 
     &--task
       color: var(--calendar-color)
@@ -137,6 +139,10 @@
   &__task
     border-bottom: var(--calendar-border)
 
+    &:last-child
+      border-bottom: none !important
+      // border-bottom: var(--calendar-background) // hide border
+
     &--item
       background: var(--calendar-background)
       border-right: var(--calendar-border)
@@ -145,19 +151,22 @@
       border-right: var(--calendar-border)
 
   &__footer
+    border-top: var(--calendar-border)
+    // box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2)
 
     &--task
       background: var(--calendar-background)
       border-right: var(--calendar-border)
 
     &--day
+      background: var(--calendar-background)
       border-right: var(--calendar-border)
 
 .q-dark div,
 .body--dark div,
 .q-calendar--dark
 
-  .q-calendar-grid
+  .q-calendar-task
 
     &__head
       border-bottom: var(--calendar-border-dark)

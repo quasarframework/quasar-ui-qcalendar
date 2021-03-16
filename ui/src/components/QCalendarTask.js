@@ -30,7 +30,7 @@ import useMouse, { getRawMouseEvents } from '../composables/useMouse.js'
 
 import useCalendar from '../composables/useCalendar.js'
 import useCommon, { useCommonProps } from '../composables/useCommon.js'
-import useGrid, { useGridProps } from '../composables/useGrid.js'
+import useTask, { useTaskProps } from '../composables/useTask.js'
 import useTimes, { useTimesProps } from '../composables/useTimes.js'
 import useRenderValues from '../composables/useRenderValues.js'
 import useMove, { useMoveEmits } from '../composables/useMove.js'
@@ -46,12 +46,12 @@ import useKeyboard, { useNavigationProps } from '../composables/useKeyboard.js'
 import ResizeObserver from '../directives/ResizeObserver.js'
 
 export default defineComponent({
-  name: 'QCalendarGrid',
+  name: 'QCalendarTask',
 
   directives: [ResizeObserver],
 
   props: {
-    ...useGridProps,
+    ...useTaskProps,
     ...useTimesProps,
     ...useNavigationProps
   },
@@ -149,7 +149,7 @@ export default defineComponent({
       rootRef,
       __initCalendar,
       __renderCalendar
-    } = useCalendar(props, __renderGrid, {
+    } = useCalendar(props, __renderTask, {
       scrollArea,
       pane
     })
@@ -160,7 +160,7 @@ export default defineComponent({
       parsedEndDate,
       days
       // methods
-    } = useGrid(props, emit, {
+    } = useTask(props, emit, {
       weekdaySkips,
       times
     })
@@ -341,7 +341,7 @@ export default defineComponent({
 
       return h('div', {
         class: {
-          'q-calendar-grid__task--day': true,
+          'q-calendar-task__task--day': true,
           ...dayClass
         },
         style
@@ -382,7 +382,7 @@ export default defineComponent({
 
       return h('div', {
         class: {
-          'q-calendar-grid__task--item': true,
+          'q-calendar-task__task--item': true,
           'q-calendar__sticky': true
         },
         style
@@ -391,9 +391,9 @@ export default defineComponent({
       ])
     }
 
-    function __renderTask (task, index) {
+    function __renderTaskRow (task, index) {
       return h('div', {
-        class: 'q-calendar-grid__task'
+        class: 'q-calendar-task__task'
       }, [
         __renderTaskItem(task, index),
         __renderTaskDaysWrapper(task, index)
@@ -401,7 +401,7 @@ export default defineComponent({
     }
 
     function __renderTasks () {
-      return props.tasks.map((task, index) => __renderTask(task, index))
+      return props.tasks.map((task, index) => __renderTaskRow(task, index))
     }
 
     function __renderFooterTask () {
@@ -420,7 +420,7 @@ export default defineComponent({
 
       return h('div', {
         class: {
-          'q-calendar-grid__footer--task': true,
+          'q-calendar-task__footer--task': true,
           'q-calendar__sticky': true
         },
         style
@@ -446,7 +446,7 @@ export default defineComponent({
 
       return h('div', {
         class: {
-          'q-calendar-grid__footer--day': true,
+          'q-calendar-task__footer--day': true,
           ...footerDayClass
         },
         style
@@ -457,7 +457,7 @@ export default defineComponent({
 
     function __renderFooterDays () {
       return h('div', {
-        class: 'q-calendar-grid__footer--day-wrapper'
+        class: 'q-calendar-task__footer--day-wrapper'
       }, [
         days.value.map(day => __renderFooterDay(day))
       ])
@@ -465,7 +465,10 @@ export default defineComponent({
 
     function __renderFooter () {
       return h('div', {
-        class: 'q-calendar-grid__footer'
+        class: {
+          'q-calendar-task__footer': true,
+          'q-calendar__sticky': true
+        }
       }, [
         __renderFooterTask(),
         __renderFooterDays()
@@ -475,7 +478,7 @@ export default defineComponent({
     function __renderBody () {
       return h('div', {
         class: {
-          'q-calendar-grid__body': true
+          'q-calendar-task__body': true
         }
       }, [
         props.noHeader !== true && __renderHead(),
@@ -499,7 +502,7 @@ export default defineComponent({
 
       return h('div', {
         class: {
-          'q-calendar-grid__head--task': true,
+          'q-calendar-task__head--task': true,
           'q-calendar__sticky': true
         },
         style
@@ -532,7 +535,7 @@ export default defineComponent({
 
       return h('div', {
         class: {
-          'q-calendar-grid__head--day': true,
+          'q-calendar-task__head--day': true,
           ...weekdayClass
         },
         style
@@ -549,7 +552,7 @@ export default defineComponent({
     function __renderHeadDaysRow () {
       return h('div', {
         class: {
-          'q-calendar-grid__head--days': true
+          'q-calendar-task__head--days': true
         }
       }, [
         ...__renderHeadDays()
@@ -562,7 +565,7 @@ export default defineComponent({
       return h('div', {
         roll: 'presentation',
         class: {
-          'q-calendar-grid__head': true,
+          'q-calendar-task__head': true,
           'q-calendar__sticky': true
         },
         style: {
@@ -575,7 +578,7 @@ export default defineComponent({
 
     function __renderContainer () {
       return h('div', {
-        class: 'q-calendar-grid__container'
+        class: 'q-calendar-task__container'
       }, [
         __renderScrollArea()
       ])
@@ -585,7 +588,7 @@ export default defineComponent({
       return h('div', {
         ref: scrollArea,
         class: {
-          'q-calendar-grid__scroll-area': true,
+          'q-calendar-task__scroll-area': true,
           'q-calendar__scroll': true
         }
       }, [
@@ -593,7 +596,7 @@ export default defineComponent({
       ])
     }
 
-    function __renderGrid () {
+    function __renderTask () {
       const { start, end } = renderValues.value
       startDate.value = start.date
       endDate.value = end.date
@@ -602,7 +605,7 @@ export default defineComponent({
 
       const weekly = withDirectives(h('div', {
         key: startDate.value,
-        class: 'q-calendar-grid'
+        class: 'q-calendar-task'
       }, [
         hasWidth === true && __renderContainer()
       ]), [[

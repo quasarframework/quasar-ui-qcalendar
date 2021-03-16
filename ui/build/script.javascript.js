@@ -30,10 +30,10 @@ const buildEntries = [
   'QCalendar',
   'QCalendarAgenda',
   'QCalendarDay',
-  // 'QCalendarGrid',
   'QCalendarMonth',
   'QCalendarResource',
-  'QCalendarScheduler'
+  'QCalendarScheduler',
+  'QCalendarTask'
 ]
 
 function generateBuilds() {

@@ -20,7 +20,7 @@ import {
   validateTimestamp
 } from '../utils/Timestamp.js'
 
-export const useGridProps = {
+export const useTaskProps = {
   modelValue: { // v-model
     type: String,
     default: today(),
@@ -139,7 +139,7 @@ export default function (props, emit, {
       return getStartOfMonth(parseTimestamp(props.modelValue), props.weekdays, times.today)
     }
     else {
-      throw new Error(`QCalendarGrid: unknown 'view' type (${ props.view })`)
+      throw new Error(`QCalendarTask: unknown 'view' type (${ props.view })`)
     }
   })
 
@@ -173,7 +173,7 @@ export default function (props, emit, {
       }
     }
     else {
-      throw new Error(`QCalendarGrid: unknown 'view' type (${ props.view })`)
+      throw new Error(`QCalendarTask: unknown 'view' type (${ props.view })`)
     }
   })
 

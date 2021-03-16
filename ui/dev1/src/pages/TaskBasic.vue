@@ -7,7 +7,7 @@
     />
 
     <div style="display: flex; justify-content: center">
-      <QCalendarGrid
+      <QCalendarTask
         ref="calendar"
         v-model="selectedDate"
         :tasks="tasks"
@@ -18,7 +18,7 @@
         :footer-day-class="footerDayClass"
         animated
         bordered
-        style="max-width: 800px; width: 100%;"
+        style="max-width: 800px; width: 100%; max-height: 220px;"
         @change="onChange"
         @moved="onMoved"
         @click-date="onClickDate"
@@ -64,7 +64,7 @@
         <template #footer-day="{ scope }">
           <div class="logged-time">{{ getLoggedSummary(scope.day.date, scope.tasks) }}</div>
         </template>
-      </QCalendarGrid>
+      </QCalendarTask>
     </div>
   </div>
 </template>
@@ -75,10 +75,10 @@ import {
   isBetweenDates,
   parsed
 } from '@quasar/quasar-ui-qcalendar/Timestamp.js'
-import { QCalendarGrid } from '@quasar/quasar-ui-qcalendar/QCalendarGrid.js'
+import { QCalendarTask } from '@quasar/quasar-ui-qcalendar/QCalendarTask.js'
 import '@quasar/quasar-ui-qcalendar/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
-import '@quasar/quasar-ui-qcalendar/QCalendarGrid.sass'
+import '@quasar/quasar-ui-qcalendar/QCalendarTask.sass'
 
 import { defineComponent } from 'vue'
 import NavigationBar from '../components/NavigationBar.vue'
@@ -88,10 +88,10 @@ import Pending from '@carbon/icons-vue/es/pending/16'
 import Blocking from '@carbon/icons-vue/es/undefined/16'
 
 export default defineComponent({
-  name: 'Grid',
+  name: 'TaskBasic',
   components: {
     NavigationBar,
-    QCalendarGrid,
+    QCalendarTask,
     Done,
     Pending,
     Blocking
@@ -260,19 +260,19 @@ export default defineComponent({
 
     weekdayClass (data) {
       return {
-        'grid__weekday--style': true
+        'task__weekday--style': true
       }
     },
 
     dayClass (data) {
       return {
-        'grid__day--style': true
+        'task__day--style': true
       }
     },
 
     footerDayClass (data) {
       return {
-        'grid__footer--day__style': true
+        'task__footer--day__style': true
       }
     },
 
@@ -353,6 +353,7 @@ export default defineComponent({
   padding: 2px
   font-size: .9em
   font-weight: 700
+  width: 100%
   .title
     display: flex
     justify-content: flex-start
@@ -374,12 +375,12 @@ export default defineComponent({
 </style>
 
 <style lang="sass">
-.grid__weekday--style
+.task__weekday--style
   font-size: 0.8em
   font-weight: 600
-.grid__day--style
+.task__day--style
   font-size: 0.8em
-.grid__footer--day__style
+.task__footer--day__style
   font-size: 0.8em
   font-weight: 600
 </style>

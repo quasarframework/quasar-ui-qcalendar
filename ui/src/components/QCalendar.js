@@ -6,7 +6,7 @@ import {
 
 import QCalendarAgenda from './QCalendarAgenda.js'
 import QCalendarDay from './QCalendarDay.js'
-// import QCalendarGrid from './QCalendarGrid.js'
+// import QCalendarTask from './QCalendarTask.js'
 import QCalendarMonth from './QCalendarMonth.js'
 import QCalendarResource from './QCalendarResource.js'
 import QCalendarScheduler from './QCalendarScheduler.js'
