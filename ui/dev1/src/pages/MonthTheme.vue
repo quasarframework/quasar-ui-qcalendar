@@ -26,14 +26,13 @@
       </div>
     </div>
 
-    <div style="display: flex; justify-content: center">
+    <div style="display: flex; justify-content: center; max-width: 800px; width: 100%; height: 400px;">
       <QCalendarMonth
         ref="calendar"
         v-model="selectedDate"
         animated
         bordered
         :style="theme"
-        style="max-width: 800px; width: 100%; height: 400px;"
         @change="onChange"
         @moved="onMoved"
         @click-date="onClickDate"
@@ -71,6 +70,12 @@ export default defineComponent({
         default: {
         },
         teal: {
+          '--calendar-scrollbar-track': '#4db6ac',
+          '--calendar-scrollbar-thumb': '#004d40',
+          '--calendar-scrollbar-thumb-hover': '#00897b',
+          '--calendar-scrollbar-track-dark': '#4db6ac',
+          '--calendar-scrollbar-thumb-dark': '#004d40',
+          '--calendar-scrollbar-thumb-hover-dark': '#00897b',
           '--calendar-border': '#4db6ac 1px solid',
           '--calendar-border-dark': '#e0f2f1 1px solid',
           '--calendar-border-section': '#80cbc4 1px dashed',
@@ -144,6 +149,12 @@ export default defineComponent({
           '--calendar-head-font-weight': '600'
         },
         brown: {
+          '--calendar-scrollbar-track': '#a1887f',
+          '--calendar-scrollbar-thumb': '#3e2723',
+          '--calendar-scrollbar-thumb-hover': '#6d4c41',
+          '--calendar-scrollbar-track-dark': '#a1887f',
+          '--calendar-scrollbar-thumb-dark': '#3e2723',
+          '--calendar-scrollbar-thumb-hover-dark': '#6d4c41',
           '--calendar-border': '#a1887f 1px solid',
           '--calendar-border-dark': '#efebe9 1px solid',
           '--calendar-border-section': '#bcaaa4 1px dashed',
@@ -217,6 +228,12 @@ export default defineComponent({
           '--calendar-head-font-weight': '600'
         },
         'deep purple': {
+          '--calendar-scrollbar-track': '#9575cd',
+          '--calendar-scrollbar-thumb': '#311b92',
+          '--calendar-scrollbar-thumb-hover': '#5e35b1',
+          '--calendar-scrollbar-track-dark': '#9575cd',
+          '--calendar-scrollbar-thumb-dark': '#311b92',
+          '--calendar-scrollbar-thumb-hover-dark': '#5e35b1',
           '--calendar-border': '#9575cd 1px solid',
           '--calendar-border-dark': '#ede7f6 1px solid',
           '--calendar-border-section': '#b39ddb 1px dashed',
@@ -290,6 +307,12 @@ export default defineComponent({
           '--calendar-head-font-weight': '600'
         },
         indigo: {
+          '--calendar-scrollbar-track': '#7986cb',
+          '--calendar-scrollbar-thumb': '#1a237e',
+          '--calendar-scrollbar-thumb-hover': '#3949ab',
+          '--calendar-scrollbar-track-dark': '#7986cb',
+          '--calendar-scrollbar-thumb-dark': '#1a237e',
+          '--calendar-scrollbar-thumb-hover-dark': '#3949ab',
           '--calendar-border': '#7986cb 1px solid',
           '--calendar-border-dark': '#e8eaf6 1px solid',
           '--calendar-border-section': '#9fa8da 1px dashed',
@@ -363,6 +386,12 @@ export default defineComponent({
           '--calendar-head-font-weight': '600'
         },
         blue: {
+          '--calendar-scrollbar-track': '#64b5f6',
+          '--calendar-scrollbar-thumb': '#0d47a0',
+          '--calendar-scrollbar-thumb-hover': '#1e88e5',
+          '--calendar-scrollbar-track-dark': '#64b5f6',
+          '--calendar-scrollbar-thumb-dark': '#0d47a0',
+          '--calendar-scrollbar-thumb-hover-dark': '#1e88e5',
           '--calendar-border': '#64b5f6 1px solid',
           '--calendar-border-dark': '#e3f2fd 1px solid',
           '--calendar-border-section': '#90caf9 1px dashed',

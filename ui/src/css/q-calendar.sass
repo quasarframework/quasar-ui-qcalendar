@@ -165,40 +165,41 @@
 .disabled, [disabled]
   opacity: .6 !important
 
-.q-calendar__scroll
-  &::-webkit-scrollbar
-    width: 10px
-    height: 10px
-
-  // the buttons on the scrollbar (arrows pointing upwards and downwards)
-  // ::-webkit-scrollbar-button
-
-  // the track (progress bar) of the scrollbar
-  &::-webkit-scrollbar-track
-    // border-top: var(--calendar-border)
-    background: #EEE
-    box-shadow: inset 0 0 4px #EEE
-
-  // the bottom corner of the scrollbar, where both horizontal and vertical scrollbars meet
-  &::-webkit-scrollbar-corner
-    background: #EEE
-
-  // the track (progress bar) NOT covered by the handle
-  // &::-webkit-scrollbar-track-piece
-  //   background: black
-
-  // the draggable scrolling handle
-  &::-webkit-scrollbar-thumb
-    background: #888
-    border-radius: 5px
-
-    &:hover
-      background: #555
-  
 
 .q-calendar
   color: var(--calendar-color)
   background: var(--calendar-background)
+
+  .q-calendar__scroll
+    &::-webkit-scrollbar
+      width: var(--calendar-scrollbar-width-height)
+      height: var(--calendar-scrollbar-width-height)
+
+    // the buttons on the scrollbar (arrows pointing upwards and downwards)
+    // ::-webkit-scrollbar-button
+
+    // the track (progress bar) of the scrollbar
+    &::-webkit-scrollbar-track
+      // border-top: var(--calendar-border)
+      background: var(--calendar-scrollbar-track)
+      box-shadow: inset 0 0 4px var(--calendar-scrollbar-track)
+
+    // the bottom corner of the scrollbar, where both horizontal and vertical scrollbars meet
+    &::-webkit-scrollbar-corner
+      background: var(--calendar-scrollbar-track)
+
+    // the track (progress bar) NOT covered by the handle
+    // &::-webkit-scrollbar-track-piece
+    //   background: black
+
+    // the draggable scrolling handle
+    &::-webkit-scrollbar-thumb
+      background: var(--calendar-scrollbar-thumb)
+      border-radius: 5px
+
+      &:hover
+        background: var(--calendar-scrollbar-thumb-hover)
+    
 
 .q-dark div,
 .body--dark div,
@@ -209,3 +210,33 @@
 
     &__bordered
       border: var(--calendar-border-dark)
+
+    .q-calendar__scroll
+      &::-webkit-scrollbar
+        width: var(--calendar-scrollbar-width-height)
+        height: var(--calendar-scrollbar-width-height)
+
+      // the buttons on the scrollbar (arrows pointing upwards and downwards)
+      // ::-webkit-scrollbar-button
+
+      // the track (progress bar) of the scrollbar
+      &::-webkit-scrollbar-track
+        // border-top: var(--calendar-border)
+        background: var(--calendar-scrollbar-track-dark)
+        box-shadow: inset 0 0 4px var(--calendar-scrollbar-track-dark)
+
+      // the bottom corner of the scrollbar, where both horizontal and vertical scrollbars meet
+      &::-webkit-scrollbar-corner
+        background: var(--calendar-scrollbar-track-dark)
+
+      // the track (progress bar) NOT covered by the handle
+      // &::-webkit-scrollbar-track-piece
+      //   background: black
+
+      // the draggable scrolling handle
+      &::-webkit-scrollbar-thumb
+        background: var(--calendar-scrollbar-thumb-dark)
+        border-radius: 5px
+
+        &:hover
+          background: var(--calendar-scrollbar-thumb-hover-dark)
