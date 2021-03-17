@@ -54,7 +54,7 @@ export const useTaskProps = {
   },
   minLabelLength: {
     type: [ Number, String ],
-    default: 1
+    default: 2
   },
   bordered: Boolean,
   dark: Boolean,
