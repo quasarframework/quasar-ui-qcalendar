@@ -106,7 +106,7 @@ export const useTaskProps = {
     validator: v => {
       let val = true
       v.forEach(type => {
-        if ([ 'day', 'date', 'weekday', 'resource' ].includes(type) !== true) {
+        if ([ 'day', 'date', 'task' ].includes(type) !== true) {
           val = false
         }
       })
