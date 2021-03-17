@@ -16,6 +16,9 @@
         :weekday-class="weekdayClass"
         :day-class="dayClass"
         :footer-day-class="footerDayClass"
+        :focus-type="['day', 'date', 'task']"
+        focusable
+        hoverable
         animated
         bordered
         style="max-width: 800px; width: 100%; max-height: 220px;"
@@ -49,7 +52,7 @@
         </template>
 
         <template #day="{ scope }">
-          <template v-for="time in getLogged(scope.day.date, scope.task.logged)" :key="time">
+          <template v-for="time in getLogged(scope.timestamp.date, scope.task.logged)" :key="time">
             <div class="logged-time">{{ time.logged }}</div>
           </template>
         </template>
@@ -62,7 +65,7 @@
         </template>
 
         <template #footer-day="{ scope }">
-          <div class="logged-time">{{ getLoggedSummary(scope.day.date, scope.tasks) }}</div>
+          <div class="logged-time">{{ getLoggedSummary(scope.timestamp.date, scope.tasks) }}</div>
         </template>
       </QCalendarTask>
     </div>
