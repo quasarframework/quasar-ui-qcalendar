@@ -18,6 +18,7 @@ import {
   getDayIdentifier,
   parsed,
   parseTimestamp,
+  Timestamp,
   today
 } from '../utils/Timestamp.js'
 
@@ -345,15 +346,19 @@ export default defineComponent({
       }
 
       const dayClass = typeof props.dayClass === 'function' ? props.dayClass({ scope }) : {}
+      const isFocusable = props.focusable === true && props.focusType.includes('day')
 
       return h('div', {
         class: {
           'q-calendar-task__task--day': true,
-          ...dayClass
+          ...dayClass,
+          'q-calendar__hoverable': props.hoverable === true,
+          'q-calendar__focusable': isFocusable === true
         },
         style
       }, [
-        slot && slot({ scope })
+        slot && slot({ scope }),
+        useFocusHelper()
       ])
     }
 
@@ -399,11 +404,18 @@ export default defineComponent({
     }
 
     function __renderTaskRow (task, index) {
+      const isFocusable = props.focusable === true && props.focusType.includes('task')
+
       return h('div', {
-        class: 'q-calendar-task__task'
+        class: {
+          'q-calendar-task__task': true,
+          'q-calendar__hoverable': props.hoverable === true,
+          'q-calendar__focusable': isFocusable === true
+        }
       }, [
         __renderTaskItem(task, index),
-        __renderTaskDaysWrapper(task, index)
+        __renderTaskDaysWrapper(task, index),
+        useFocusHelper()
       ])
     }
 
@@ -461,11 +473,14 @@ export default defineComponent({
       }
 
       const footerDayClass = typeof props.footerDayClass === 'function' ? props.footerDayClass({ scope }) : {}
+      const isFocusable = props.focusable === true && props.focusType.includes('day')
 
       return h('div', {
         class: {
           'q-calendar-task__footer--day': true,
-          ...footerDayClass
+          ...footerDayClass,
+          'q-calendar__hoverable': props.hoverable === true,
+          'q-calendar__focusable': isFocusable === true
         },
         style
       }, [
@@ -482,10 +497,14 @@ export default defineComponent({
     }
 
     function __renderFooter () {
+      const isFocusable = props.focusable === true && props.focusType.includes('task')
+
       return h('div', {
         class: {
           'q-calendar-task__footer': true,
-          'q-calendar__sticky': true
+          'q-calendar__sticky': true,
+          'q-calendar__hoverable': props.hoverable === true,
+          'q-calendar__focusable': isFocusable === true
         }
       }, [
         __renderFooterTask(),
