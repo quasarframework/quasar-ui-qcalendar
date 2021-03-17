@@ -37,14 +37,14 @@
               :key="option"
               :value="option"
             >
-              {{ option }} {{ focusType.includes(option) ? ' ✔' : '' }}
+              {{ option + (focusType.includes(option) ? ' ✔' : '') }}
             </option>
           </select>
         </div>
       </div>
     </div>
 
-    <div style="display: flex; justify-content: center">
+    <div style="display: flex; justify-content: center; max-width: 800px; width: 100%;">
       <QCalendarScheduler
         ref="calendar"
         v-model="selectedDate"
