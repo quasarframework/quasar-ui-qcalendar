@@ -290,7 +290,7 @@ export default defineComponent({
       }
     }
 
-    watch([days], __isCheckChange, { deep: true })
+    watch([days], __isCheckChange, { deep: true, immediate: true })
 
     watch(() => props.modelValue, (val, oldVal) => {
       if (emittedValue.value !== val) {
