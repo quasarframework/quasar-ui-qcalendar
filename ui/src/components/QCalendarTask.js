@@ -51,9 +51,9 @@ export default defineComponent({
   directives: [ResizeObserver],
 
   props: {
-    ...useTaskProps,
     ...useTimesProps,
-    ...useNavigationProps
+    ...useNavigationProps,
+    ...useTaskProps // last for any overrides
   },
 
   emits: [
@@ -156,9 +156,9 @@ export default defineComponent({
 
     const {
       // computed
+      days,
       parsedStartDate,
-      parsedEndDate,
-      days
+      parsedEndDate
       // methods
     } = useTask(props, emit, {
       weekdaySkips,
@@ -323,10 +323,17 @@ export default defineComponent({
     //   return day.date === emittedValue.value
     // }
 
+    /**
+     * Renders the given day with the associated task
+     * @param {Timestamp} day Timestamp representing the day
+     * @param {any} task The Task
+     * @param {number} index The task index
+     * @returns VNode
+     */
     function __renderTaskDay (day, task, index) {
       const slot = slots.day
       const scope = {
-        day,
+        timestamp: day,
         task,
         index
       }
@@ -432,7 +439,7 @@ export default defineComponent({
     function __renderFooterDay (day) {
       const slot = slots[ 'footer-day' ]
       const scope = {
-        day,
+        timestamp: day,
         tasks: props.tasks
       }
       const width = convertToUnit(parsedCellWidth.value)
