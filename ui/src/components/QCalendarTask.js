@@ -411,6 +411,17 @@ export default defineComponent({
       return props.tasks.map((task, index) => __renderTaskRow(task, index))
     }
 
+    function __renderTasksContainer () {
+      return h('div', {
+        class: {
+          'q-calendar-task__task--container': true,
+          'q-calendar__sticky': true
+        },
+      }, [
+        __renderTasks()
+      ])
+    }
+
     function __renderFooterTask () {
       const slot = slots[ 'footer-task' ]
       const scope = {
@@ -489,7 +500,7 @@ export default defineComponent({
         }
       }, [
         props.noHeader !== true && __renderHead(),
-        __renderTasks(),
+        __renderTasksContainer(),
         __renderFooter()
       ])
     }
