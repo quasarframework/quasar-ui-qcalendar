@@ -6,15 +6,14 @@
       @next="onNext"
     />
 
-    <div style="display: flex; justify-content: center;">
-      <div style="max-width: 800px; width: 100%; height: 400px; padding: 2px; overflow: auto; border: 1px solid #ddd">
+    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
+      <div style="display: flex; max-width: 800px; width: 100%; height: 400px; padding: 2px; overflow: auto; border: 1px solid #ddd;">
         <QCalendarDay
           ref="calendar"
           v-model="selectedDate"
           view="week"
           no-scroll
           animated
-          style="max-width: 800px; width: 100%;"
           @change="onChange"
           @moved="onMoved"
           @click-date="onClickDate"

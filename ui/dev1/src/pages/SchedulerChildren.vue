@@ -6,26 +6,27 @@
       @next="onNext"
     />
 
-    <div style="display: flex; justify-content: center">
-      <QCalendarScheduler
-        ref="calendar"
-        v-model="selectedDate"
-        v-model:modelResources="resources"
-        view="week"
-        resource-key="id"
-        resource-label="name"
-        animated
-        bordered
-        style="max-width: 800px; width: 100%; max-height: 400px;"
-        @change="onChange"
-        @moved="onMoved"
-        @resource-expanded="onResourceExpanded"
-        @click-date="onClickDate"
-        @click-day-resource="onClickDayResource"
-        @click-resource="onClickResource"
-        @click-head-resources="onClickHeadResources"
-        @click-head-day="onClickHeadDay"
-      />
+    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
+      <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
+        <QCalendarScheduler
+          ref="calendar"
+          v-model="selectedDate"
+          v-model:modelResources="resources"
+          view="week"
+          resource-key="id"
+          resource-label="name"
+          animated
+          bordered
+          @change="onChange"
+          @moved="onMoved"
+          @resource-expanded="onResourceExpanded"
+          @click-date="onClickDate"
+          @click-day-resource="onClickDayResource"
+          @click-resource="onClickResource"
+          @click-head-resources="onClickHeadResources"
+          @click-head-day="onClickHeadDay"
+        />
+      </div>
     </div>
   </div>
 </template>

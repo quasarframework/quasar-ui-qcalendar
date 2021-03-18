@@ -6,53 +6,54 @@
       @next="onNext"
     />
 
-    <div style="display: flex; justify-content: center">
-      <QCalendarDay
-        ref="calendar"
-        v-model="selectedDate"
-        view="week"
-        :weekdays="weekdays"
-        animated
-        bordered
-        style="max-width: 800px; width: 100%; height: 400px;"
-        @change="onChange"
-        @moved="onMoved"
-        @click-date="onClickDate"
-        @click-time="onClickTime"
-        @click-interval="onClickInterval"
-        @click-head-intervals="onClickHeadIntervals"
-        @click-head-day="onClickHeadDay"
-      >
-        <template #head-days-events="{ scope: { days, ref } }">
-          <div
-            :ref="ref"
-            class="inner-row"
-          >
-            <template
-              v-for="(day, index) in days"
-              :key="index"
+    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
+      <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
+        <QCalendarDay
+          ref="calendar"
+          v-model="selectedDate"
+          view="week"
+          :weekdays="weekdays"
+          animated
+          bordered
+          @change="onChange"
+          @moved="onMoved"
+          @click-date="onClickDate"
+          @click-time="onClickTime"
+          @click-interval="onClickInterval"
+          @click-head-intervals="onClickHeadIntervals"
+          @click-head-day="onClickHeadDay"
+        >
+          <template #head-days-events="{ scope: { days, ref } }">
+            <div
+              :ref="ref"
+              class="inner-row"
             >
               <template
-                v-for="event in allDayEventsMap[day.date]"
-                :key="event.id"
+                v-for="(day, index) in days"
+                :key="index"
               >
-                <div
-                  class="my-event"
-                  :class="badgeClasses(event)"
-                  :style="badgeStyles(day, event)"
+                <template
+                  v-for="event in allDayEventsMap[day.date]"
+                  :key="event.id"
                 >
-                  <abbr
-                    :title="event.details"
-                    class="tooltip"
+                  <div
+                    class="my-event"
+                    :class="badgeClasses(event)"
+                    :style="badgeStyles(day, event)"
                   >
-                    <span class="title q-calendar__ellipsis">{{ event.title }}</span>
-                  </abbr>
-                </div>
+                    <abbr
+                      :title="event.details"
+                      class="tooltip"
+                    >
+                      <span class="title q-calendar__ellipsis">{{ event.title }}</span>
+                    </abbr>
+                  </div>
+                </template>
               </template>
-            </template>
-          </div>
-        </template>
-      </QCalendarDay>
+            </div>
+          </template>
+        </QCalendarDay>
+      </div>
     </div>
   </div>
 </template>
@@ -173,6 +174,7 @@ export default defineComponent({
     }
 
     return {
+      calendar,
       selectedDate,
       weekdays,
       events,

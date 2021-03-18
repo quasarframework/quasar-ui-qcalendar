@@ -25,46 +25,47 @@
         </select>
       </div>
 
-    <div style="display: flex; justify-content: center">
-      <QCalendarMonth
-        ref="calendar"
-        v-model="selectedDate"
-        animated
-        bordered
-        focusable
-        hoverable
-        no-active-date
-        :day-min-height="60"
-        :day-height="0"
-        style="max-width: 800px; width: 100%;"
-        @change="onChange"
-        @moved="onMoved"
-        @click-date="onClickDate"
-        @click-day="onClickDay"
-        @click-workweek="onClickWorkweek"
-        @click-head-workweek="onClickHeadWorkweek"
-        @click-head-day="onClickHeadDay"
-      >
-        <template #day="{ scope: { timestamp } }">
-          <template
-            v-for="event in eventsMap[timestamp.date]"
-            :key="event.id"
-          >
-            <div
-              :class="badgeClasses(event, 'day')"
-              :style="badgeStyles(event, 'day')"
-              class="my-event"
+    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
+      <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
+        <QCalendarMonth
+          ref="calendar"
+          v-model="selectedDate"
+          animated
+          bordered
+          focusable
+          hoverable
+          no-active-date
+          :day-min-height="60"
+          :day-height="0"
+          @change="onChange"
+          @moved="onMoved"
+          @click-date="onClickDate"
+          @click-day="onClickDay"
+          @click-workweek="onClickWorkweek"
+          @click-head-workweek="onClickHeadWorkweek"
+          @click-head-day="onClickHeadDay"
+        >
+          <template #day="{ scope: { timestamp } }">
+            <template
+              v-for="event in eventsMap[timestamp.date]"
+              :key="event.id"
             >
-              <abbr
-                :title="event.details"
-                class="tooltip"
+              <div
+                :class="badgeClasses(event, 'day')"
+                :style="badgeStyles(event, 'day')"
+                class="my-event"
               >
-                <span class="title q-calendar__ellipsis">{{ event.title + (event.time ? ' - ' + event.time : '') }}</span>
-              </abbr>
-            </div>
+                <abbr
+                  :title="event.details"
+                  class="tooltip"
+                >
+                  <span class="title q-calendar__ellipsis">{{ event.title + (event.time ? ' - ' + event.time : '') }}</span>
+                </abbr>
+              </div>
+            </template>
           </template>
-        </template>
-      </QCalendarMonth>
+        </QCalendarMonth>
+      </div>
     </div>
   </div>
 </template>

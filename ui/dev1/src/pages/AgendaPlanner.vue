@@ -14,55 +14,105 @@
       @next="onNext"
     />
 
-    <div style="display: flex; justify-content: center">
-      <QCalendarAgenda
-        ref="calendar"
-        v-model="selectedDate"
-        view="week"
-        :weekdays="[1,2,3,4,5]"
-        :left-column-options="leftColumnOptions"
-        column-options-id="id"
-        column-options-label="label"
-        :day-min-height="200"
-        :locale="locale"
-        animated
-        bordered
-        hoverable
-        @change="onChange"
-      >
-        <template #head-column-label="{ scope: { column: { id, label } } }">
-          <template v-if="id === 'overdue'">
+    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
+      <div style="display: flex; max-width: 800px; width: 100%;">
+        <QCalendarAgenda
+          ref="calendar"
+          v-model="selectedDate"
+          view="week"
+          :weekdays="[1,2,3,4,5]"
+          :left-column-options="leftColumnOptions"
+          column-options-id="id"
+          column-options-label="label"
+          :day-min-height="200"
+          :locale="locale"
+          animated
+          bordered
+          hoverable
+          @change="onChange"
+        >
+          <template #head-column-label="{ scope: { column: { id, label } } }">
+            <template v-if="id === 'overdue'">
+              <div style="display: flex; justify-content: space-evenly; align-items: center; flex-wrap: nowrap; height: 100%; width: 100%;">
+                <CheckboxChecked v-if="overdueSelected" @click="overdueSelected = false" />
+                <Checkbox v-else @click="overdueSelected = true" />
+                <span class="ellipsis">{{ label }}</span>
+              </div>
+            </template>
+            <template v-else>
+              <div class="row items-center no-wrap">
+                <span class="ellipsis">{{ label }}</span>
+              </div>
+            </template>
+          </template>
+
+          <template #head-day="{ scope: { timestamp }}">
             <div style="display: flex; justify-content: space-evenly; align-items: center; flex-wrap: nowrap; height: 100%; width: 100%;">
-              <CheckboxChecked v-if="overdueSelected" @click="overdueSelected = false" />
-              <Checkbox v-else @click="overdueSelected = true" />
-              <span class="ellipsis">{{ label }}</span>
+              <CheckboxChecked
+                v-if="selected[timestamp.weekday - 1]"
+                style="cursor: pointer;"
+                @click="selected[ timestamp.weekday - 1 ] = false"
+              />
+              <Checkbox
+                v-else
+                style="cursor: pointer;"
+                @click="selected[ timestamp.weekday - 1 ] = true"
+              />
+              <span class="ellipsis">{{ weekdayFormatter(timestamp, false) }} {{ timestamp.day }}</span>
             </div>
           </template>
-          <template v-else>
-            <div class="row items-center no-wrap">
-              <span class="ellipsis">{{ label }}</span>
+
+        <template #column="{ scope: { column } }">
+          <template v-if="column.id === 'overdue'">
+            <div style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; flex-wrap: nowrap; font-size: 12px; padding: 2px;">
+              <div class="cursor-pointer" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; font-size: 12px; width: 100%;">
+                <div class="cursor-pointer" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; font-size: 12px;">
+                  <AddAlt />
+                  Add Job
+                </div>
+                <div class="cursor-pointer" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; font-size: 12px;">
+                  <AddAlt />
+                  Add Note
+                </div>
+              </div>
+            </div>
+            <div
+              class="planner-column"
+              data-column="overdue"
+              @dragover.stop="onDragOver"
+              @drop.stop="onDrop"
+            >
+              <transition-group name="planner-item">
+                <template v-for="item in overdue" :key="item.id">
+                  <planner-item
+                    :data-id="item.id"
+                    v-model="item.selected"
+                    :name="item.name"
+                    :address="item.address"
+                    :email="item.email"
+                    :phone="item.phone"
+                    :work-done="item.workDone"
+                    :work-date="item.workDate"
+                    :amount="item.amount"
+                    :days-over="item.daysOver"
+                    :draggable="true"
+                    @dragstart.stop="(e) => onDragStart(e, item)"
+                    @dragend.stop="onDragEnd"
+                    @dragenter.stop="onDragEnter"
+                    @dragleave.stop="onDragLeave"
+                    @dragover.stop="onDragOver"
+                    @drop.stop="onDrop"
+                    @touchmove.stop="(e) => onTouchMove(e, item)"
+                    @touchstart.stop="(e) => onTouchStart(e, item)"
+                    @touchend.stop="onTouchEnd"
+                  />
+                </template>
+              </transition-group>
             </div>
           </template>
         </template>
 
-        <template #head-day="{ scope: { timestamp }}">
-          <div style="display: flex; justify-content: space-evenly; align-items: center; flex-wrap: nowrap; height: 100%; width: 100%;">
-            <CheckboxChecked
-              v-if="selected[timestamp.weekday - 1]"
-              style="cursor: pointer;"
-              @click="selected[ timestamp.weekday - 1 ] = false"
-            />
-            <Checkbox
-              v-else
-              style="cursor: pointer;"
-              @click="selected[ timestamp.weekday - 1 ] = true"
-            />
-            <span class="ellipsis">{{ weekdayFormatter(timestamp, false) }} {{ timestamp.day }}</span>
-          </div>
-        </template>
-
-      <template #column="{ scope: { column } }">
-        <template v-if="column.id === 'overdue'">
+        <template #day="{ scope: { timestamp } }">
           <div style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; flex-wrap: nowrap; font-size: 12px; padding: 2px;">
             <div class="cursor-pointer" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; font-size: 12px; width: 100%;">
               <div class="cursor-pointer" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; font-size: 12px;">
@@ -77,12 +127,12 @@
           </div>
           <div
             class="planner-column"
-            data-column="overdue"
+            :data-column="timestamp.weekday"
             @dragover.stop="onDragOver"
             @drop.stop="onDrop"
           >
             <transition-group name="planner-item">
-              <template v-for="item in overdue" :key="item.id">
+              <template v-for="item in getAgenda(timestamp)" :key="item.id">
                 <planner-item
                   :data-id="item.id"
                   v-model="item.selected"
@@ -109,57 +159,9 @@
             </transition-group>
           </div>
         </template>
-      </template>
 
-      <template #day="{ scope: { timestamp } }">
-        <div style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; flex-wrap: nowrap; font-size: 12px; padding: 2px;">
-          <div class="cursor-pointer" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; font-size: 12px; width: 100%;">
-            <div class="cursor-pointer" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; font-size: 12px;">
-              <AddAlt />
-              Add Job
-            </div>
-            <div class="cursor-pointer" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; font-size: 12px;">
-              <AddAlt />
-              Add Note
-            </div>
-          </div>
-        </div>
-        <div
-          class="planner-column"
-          :data-column="timestamp.weekday"
-          @dragover.stop="onDragOver"
-          @drop.stop="onDrop"
-        >
-          <transition-group name="planner-item">
-            <template v-for="item in getAgenda(timestamp)" :key="item.id">
-              <planner-item
-                :data-id="item.id"
-                v-model="item.selected"
-                :name="item.name"
-                :address="item.address"
-                :email="item.email"
-                :phone="item.phone"
-                :work-done="item.workDone"
-                :work-date="item.workDate"
-                :amount="item.amount"
-                :days-over="item.daysOver"
-                :draggable="true"
-                @dragstart.stop="(e) => onDragStart(e, item)"
-                @dragend.stop="onDragEnd"
-                @dragenter.stop="onDragEnter"
-                @dragleave.stop="onDragLeave"
-                @dragover.stop="onDragOver"
-                @drop.stop="onDrop"
-                @touchmove.stop="(e) => onTouchMove(e, item)"
-                @touchstart.stop="(e) => onTouchStart(e, item)"
-                @touchend.stop="onTouchEnd"
-              />
-            </template>
-          </transition-group>
-        </div>
-      </template>
-
-      </QCalendarAgenda>
+        </QCalendarAgenda>
+      </div>
     </div>
 
   </div>

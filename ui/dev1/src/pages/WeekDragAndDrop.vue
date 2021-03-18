@@ -28,65 +28,67 @@
               </li>
             </ul>
           </div>
-          <QCalendarDay
-            ref="calendar"
-            v-model="selectedDate"
-            view="week"
-            :drag-enter-func="onDragEnter"
-            :drag-over-func="onDragOver"
-            :drag-leave-func="onDragLeave"
-            :drop-func="onDrop"
-            :weekday-class="onWeekdayClass"
-            :interval-class="onIntervalClass"
-            :interval-start="24"
-            :interval-minutes="15"
-            :interval-count="56"
-            :interval-height="28"
-            :weekdays="[1,2,3,4,5]"
-            hoverable
-            animated
-            bordered
-            style="max-width: 800px; width: 100%; height: 400px;"
-            @change="onChange"
-            @moved="onMoved"
-            @click-date="onClickDate"
-            @click-time="onClickTime"
-            @click-interval="onClickInterval"
-            @click-head-intervals="onClickHeadIntervals"
-            @click-head-day="onClickHeadDay"
-          >
-            <template #head-date="{ scope: { timestamp } }">
-              <div
-                v-if="allDayEventsMap[timestamp.date] && allDayEventsMap[timestamp.date].length > 0"
-                style="display: flex; justify-content: space-evenly; flex-wrap: wrap; align-items: center; font-weight: 400; font-size: 12px; height: auto;"
-              >
-                <template
-                  v-for="event in allDayEventsMap[timestamp.date]"
-                  :key="event.time"
+          <div style="display: flex; justify-content: center; max-width: 800px; width: 100%; height: 400px;">
+            <QCalendarDay
+              ref="calendar"
+              v-model="selectedDate"
+              view="week"
+              :drag-enter-func="onDragEnter"
+              :drag-over-func="onDragOver"
+              :drag-leave-func="onDragLeave"
+              :drop-func="onDrop"
+              :weekday-class="onWeekdayClass"
+              :interval-class="onIntervalClass"
+              :interval-start="24"
+              :interval-minutes="15"
+              :interval-count="56"
+              :interval-height="28"
+              :weekdays="[1,2,3,4,5]"
+              hoverable
+              animated
+              bordered
+              style="max-width: 800px; width: 100%; height: 400px;"
+              @change="onChange"
+              @moved="onMoved"
+              @click-date="onClickDate"
+              @click-time="onClickTime"
+              @click-interval="onClickInterval"
+              @click-head-intervals="onClickHeadIntervals"
+              @click-head-day="onClickHeadDay"
+            >
+              <template #head-date="{ scope: { timestamp } }">
+                <div
+                  v-if="allDayEventsMap[timestamp.date] && allDayEventsMap[timestamp.date].length > 0"
+                  style="display: flex; justify-content: space-evenly; flex-wrap: wrap; align-items: center; font-weight: 400; font-size: 12px; height: auto;"
                 >
-                  <div>
-                    {{ event.name }}
-                  </div>
-                </template>
-              </div>
-            </template>
+                  <template
+                    v-for="event in allDayEventsMap[timestamp.date]"
+                    :key="event.time"
+                  >
+                    <div>
+                      {{ event.name }}
+                    </div>
+                  </template>
+                </div>
+              </template>
 
-            <template #day-interval="{ scope: { timestamp } }">
-              <div
-                v-if="hasEvents(timestamp)"
-                style="display: flex; justify-content: space-evenly; align-items: center; font-size: 10px;"
-              >
-                <template
-                  v-for="event in getEvents(timestamp)"
-                  :key="event.time"
+              <template #day-interval="{ scope: { timestamp } }">
+                <div
+                  v-if="hasEvents(timestamp)"
+                  style="display: flex; justify-content: space-evenly; align-items: center; font-size: 10px;"
                 >
-                  <div style="border: 1px solid pink; border-radius: 2px; padding: 2px; margin: 1px;">
-                    {{ event.name.charAt(0) }}: {{ event.time }}
-                  </div>
-                </template>
-              </div>
-            </template>
-          </QCalendarDay>
+                  <template
+                    v-for="event in getEvents(timestamp)"
+                    :key="event.time"
+                  >
+                    <div style="border: 1px solid pink; border-radius: 2px; padding: 2px; margin: 1px;">
+                      {{ event.name.charAt(0) }}: {{ event.time }}
+                    </div>
+                  </template>
+                </div>
+              </template>
+            </QCalendarDay>
+          </div>
         </div>
       </div>
     </div>

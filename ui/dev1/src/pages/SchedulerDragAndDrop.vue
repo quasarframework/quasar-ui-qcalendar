@@ -12,85 +12,83 @@
       @next="onNext"
     />
 
-    <div style="display: flex; justify-content: center">
-      <div style="display: flex; flex-direction: column; width: 100%;">
-        <div style="display: flex; justify-content: center; width: 100%; padding: 6px;">
-          <div style="margin: 10px;">
-            <ul class="list">
-              <li
-                v-for="item in dragItems"
-                :key="item.id"
-                class="button list-item"
-                draggable="true"
-                @dragstart="onDragStart($event, item)"
-              >
-                {{ item.name }}
-              </li>
-            </ul>
-          </div>
-          <QCalendarScheduler
-            ref="calendar"
-            v-model="selectedDate"
-            v-model:modelResources="resources"
-            view="week"
-            :drag-enter-func="onDragEnter"
-            :drag-over-func="onDragOver"
-            :drag-leave-func="onDragLeave"
-            :drop-func="onDrop"
-            :weekday-class="onWeekdayClass"
-            :day-class="onDayClass"
-            :weekdays="[1,2,3,4,5]"
-            hoverable
-            animated
-            bordered
-            :day-min-height="50"
-            :day-height="0"
-            style="max-width: 800px; width: 100%;"
-            @change="onChange"
-            @moved="onMoved"
-            @click-date="onClickDate"
-            @click-day-resource="onClickDayResource"
-            @click-resource="onClickResource"
-            @click-head-resources="onClickHeadResources"
-            @click-head-day="onClickHeadDay"
+    <div style="display: flex; justify-content: center; width: 100%;">
+      <div style="margin: 10px;">
+        <ul class="list">
+          <li
+            v-for="item in dragItems"
+            :key="item.id"
+            class="button list-item"
+            draggable="true"
+            @dragstart="onDragStart($event, item)"
           >
-            <template #head-date="{ scope: { timestamp } }">
-              <div
-                v-if="allDayEventsMap[timestamp.date] && allDayEventsMap[timestamp.date].length > 0"
-                style="display: flex; justify-content: space-evenly; flex-wrap: wrap; align-items: center; font-weight: 400; font-size: 12px; height: auto;"
+            {{ item.name }}
+          </li>
+        </ul>
+      </div>
+      <div style="display: flex; justify-content: center; max-width: 800px; width: 100%; height: 400px;">
+        <QCalendarScheduler
+          ref="calendar"
+          v-model="selectedDate"
+          v-model:modelResources="resources"
+          view="week"
+          :drag-enter-func="onDragEnter"
+          :drag-over-func="onDragOver"
+          :drag-leave-func="onDragLeave"
+          :drop-func="onDrop"
+          :weekday-class="onWeekdayClass"
+          :day-class="onDayClass"
+          :weekdays="[1,2,3,4,5]"
+          hoverable
+          animated
+          bordered
+          :day-min-height="50"
+          :day-height="0"
+          style="max-width: 800px; width: 100%;"
+          @change="onChange"
+          @moved="onMoved"
+          @click-date="onClickDate"
+          @click-day-resource="onClickDayResource"
+          @click-resource="onClickResource"
+          @click-head-resources="onClickHeadResources"
+          @click-head-day="onClickHeadDay"
+        >
+          <template #head-date="{ scope: { timestamp } }">
+            <div
+              v-if="allDayEventsMap[timestamp.date] && allDayEventsMap[timestamp.date].length > 0"
+              style="display: flex; justify-content: space-evenly; flex-wrap: wrap; align-items: center; font-weight: 400; font-size: 12px; height: auto;"
+            >
+              <template
+                v-for="event in allDayEventsMap[timestamp.date]"
+                :key="event.time"
               >
-                <template
-                  v-for="event in allDayEventsMap[timestamp.date]"
-                  :key="event.time"
+                <div
+                  style="display: flex; flex: 1 0 auto; flex-wrap: wrap; justify-content: space-evenly; align-items: center; font-size: 12px;"
                 >
-                  <div
-                    style="display: flex; flex: 1 0 auto; flex-wrap: wrap; justify-content: space-evenly; align-items: center; font-size: 12px;"
-                  >
-                    {{ event.name }}
-                  </div>
-                </template>
-              </div>
-            </template>
+                  {{ event.name }}
+                </div>
+              </template>
+            </div>
+          </template>
 
-            <template #day="{ scope: { timestamp, resource } }">
-              <div
-                v-if="hasEvents(timestamp, resource)"
-                style="display: flex; flex: 1 0 auto; flex-wrap: wrap; justify-content: space-evenly; align-items: center; font-size: 12px;"
+          <template #day="{ scope: { timestamp, resource } }">
+            <div
+              v-if="hasEvents(timestamp, resource)"
+              style="display: flex; flex: 1 0 auto; flex-wrap: wrap; justify-content: space-evenly; align-items: center; font-size: 12px;"
+            >
+              <template
+                v-for="event in getEvents(timestamp, resource)"
+                :key="event.id"
               >
-                <template
-                  v-for="event in getEvents(timestamp, resource)"
-                  :key="event.id"
-                >
-                  <span
-                    v-if="event.resource"
-                    style="border: 1px solid pink; border-radius: 2px; padding: 2px; margin: 1px; user-select: none;">
-                    {{ event.name }}
-                  </span>
-                </template>
-              </div>
-            </template>
-          </QCalendarScheduler>
-        </div>
+                <span
+                  v-if="event.resource"
+                  style="border: 1px solid pink; border-radius: 2px; padding: 2px; margin: 1px; user-select: none;">
+                  {{ event.name }}
+                </span>
+              </template>
+            </div>
+          </template>
+        </QCalendarScheduler>
       </div>
     </div>
   </div>

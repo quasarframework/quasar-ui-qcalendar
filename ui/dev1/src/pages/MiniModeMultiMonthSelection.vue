@@ -21,50 +21,50 @@
       <label for="hover">Hover mode</label>
     </div>
 
-    <div style="display: flex; justify-content: center">
-      <QCalendarMonth
-        ref="calendar1"
-        v-model="selectedDate1"
-        mini-mode
-        no-active-date
-        :hover="canHover"
-        :selected-start-end-dates="startEndDates"
-        :min-weeks="6"
-        bordered
-        animated
-        style="max-width: 280px; width: 100%;"
-        @mousedown-day="onMouseDownDay"
-        @mouseup-day="onMouseUpDay"
-        @mousemove-day="onMouseMoveDay"
-        @change="onChange"
-        @moved="onMoved"
-        @click-day="onClickDay"
-        @click-workweek="onClickWorkweek"
-        @click-head-workweek="onClickHeadWorkweek"
-        @click-head-day="onClickHeadDay"
-      />
-      <QCalendarMonth
-        ref="calendar2"
-        v-model="selectedDate2"
-        mini-mode
-        no-active-date
-        :hover="canHover"
-        :selected-start-end-dates="startEndDates"
-        :min-weeks="6"
-        bordered
-        animated
-        style="max-width: 280px; width: 100%;"
-        @mousedown-day="onMouseDownDay"
-        @mouseup-day="onMouseUpDay"
-        @mousemove-day="onMouseMoveDay"
-        @change="onChange"
-        @moved="onMoved"
-        @click-date="onClickDate"
-        @click-day="onClickDay"
-        @click-workweek="onClickWorkweek"
-        @click-head-workweek="onClickHeadWorkweek"
-        @click-head-day="onClickHeadDay"
-      />
+    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
+      <div style="display: flex; max-width: 560px; width: 100%;">
+        <QCalendarMonth
+          ref="calendar1"
+          v-model="selectedDate1"
+          mini-mode
+          no-active-date
+          :hover="canHover"
+          :selected-start-end-dates="startEndDates"
+          :min-weeks="6"
+          bordered
+          animated
+          @mousedown-day="onMouseDownDay"
+          @mouseup-day="onMouseUpDay"
+          @mousemove-day="onMouseMoveDay"
+          @change="onChange"
+          @moved="onMoved"
+          @click-day="onClickDay"
+          @click-workweek="onClickWorkweek"
+          @click-head-workweek="onClickHeadWorkweek"
+          @click-head-day="onClickHeadDay"
+        />
+        <QCalendarMonth
+          ref="calendar2"
+          v-model="selectedDate2"
+          mini-mode
+          no-active-date
+          :hover="canHover"
+          :selected-start-end-dates="startEndDates"
+          :min-weeks="6"
+          bordered
+          animated
+          @mousedown-day="onMouseDownDay"
+          @mouseup-day="onMouseUpDay"
+          @mousemove-day="onMouseMoveDay"
+          @change="onChange"
+          @moved="onMoved"
+          @click-date="onClickDate"
+          @click-day="onClickDay"
+          @click-workweek="onClickWorkweek"
+          @click-head-workweek="onClickHeadWorkweek"
+          @click-head-day="onClickHeadDay"
+        />
+      </div>
     </div>
   </div>
 </template>

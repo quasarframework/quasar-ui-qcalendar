@@ -42,23 +42,24 @@
       </div>
     </div>
 
-    <div style="display: flex; justify-content: center">
-      <QCalendarMonth
-        v-model="selectedDate"
-        :weekday-align="weekdayAlign"
-        :date-align="dateAlign"
-        show-day-of-year-label
-        animated
-        bordered
-        style="max-width: 800px; width: 100%; height: 200px;"
-        @change="onChange"
-        @moved="onMoved"
-        @click-date="onClickDate"
-        @click-day="onClickDay"
-        @click-workweek="onClickWorkweek"
-        @click-head-workweek="onClickHeadWorkweek"
-        @click-head-day="onClickHeadDay"
-      />
+    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
+      <div style="display: flex; max-width: 800px; width: 100%; height: 200px;">
+        <QCalendarMonth
+          v-model="selectedDate"
+          :weekday-align="weekdayAlign"
+          :date-align="dateAlign"
+          show-day-of-year-label
+          animated
+          bordered
+          @change="onChange"
+          @moved="onMoved"
+          @click-date="onClickDate"
+          @click-day="onClickDay"
+          @click-workweek="onClickWorkweek"
+          @click-head-workweek="onClickHeadWorkweek"
+          @click-head-day="onClickHeadDay"
+        />
+      </div>
     </div>
   </div>
 </template>

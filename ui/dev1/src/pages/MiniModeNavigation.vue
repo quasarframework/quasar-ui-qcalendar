@@ -45,30 +45,32 @@
             >&gt;</span>
           </div>
         </div>
-        <div style="width: 100%; display: flex; justify-content: center">
-          <QCalendarMonth
-            ref="calendar"
-            v-model="selectedDate"
-            mini-mode
-            use-navigation
-            focusable
-            :focus-type="['date']"
-            no-active-date
-            :selected-start-end-dates="startEndDates"
-            :min-weeks="6"
-            animated
-            style="max-width: 280px; width: 100%;"
-            @mousedown-day="onMouseDownDay"
-            @mouseup-day="onMouseUpDay"
-            @mousemove-day="onMouseMoveDay"
-            @change="onChange"
-            @moved="onMoved"
-            @click-date="onClickDate"
-            @click-day="onClickDay"
-            @click-workweek="onClickWorkweek"
-            @click-head-workweek="onClickHeadWorkweek"
-            @click-head-day="onClickHeadDay"
-          />
+
+        <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
+          <div style="display: flex; max-width: 280px; width: 100%;">
+            <QCalendarMonth
+              ref="calendar"
+              v-model="selectedDate"
+              mini-mode
+              use-navigation
+              focusable
+              :focus-type="['date']"
+              no-active-date
+              :selected-start-end-dates="startEndDates"
+              :min-weeks="6"
+              animated
+              @mousedown-day="onMouseDownDay"
+              @mouseup-day="onMouseUpDay"
+              @mousemove-day="onMouseMoveDay"
+              @change="onChange"
+              @moved="onMoved"
+              @click-date="onClickDate"
+              @click-day="onClickDay"
+              @click-workweek="onClickWorkweek"
+              @click-head-workweek="onClickHeadWorkweek"
+              @click-head-day="onClickHeadDay"
+            />
+          </div>
         </div>
       </div>
     </div>

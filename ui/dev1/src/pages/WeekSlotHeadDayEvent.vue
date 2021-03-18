@@ -6,27 +6,28 @@
       @next="onNext"
     />
 
-    <div style="display: flex; justify-content: center">
-      <QCalendarDay
-        ref="calendar"
-        v-model="selectedDate"
-        view="week"
-        animated
-        bordered
-        style="max-width: 800px; width: 100%; height: 400px;"
-        @change="onChange"
-        @moved="onMoved"
-        @click-date="onClickDate"
-        @click-time="onClickTime"
-        @click-interval="onClickInterval"
-        @click-head-intervals="onClickHeadIntervals"
-        @click-head-day="onClickHeadDay"
-      >
-        <template #head-day-event="{ scope }">
-          <!-- do every other slot -->
-          <span>{{ scope.timestamp.weekday % 2 ? scope.timestamp.date : undefined }}</span>
-        </template>
-      </QCalendarDay>
+    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
+      <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
+        <QCalendarDay
+          ref="calendar"
+          v-model="selectedDate"
+          view="week"
+          animated
+          bordered
+          @change="onChange"
+          @moved="onMoved"
+          @click-date="onClickDate"
+          @click-time="onClickTime"
+          @click-interval="onClickInterval"
+          @click-head-intervals="onClickHeadIntervals"
+          @click-head-day="onClickHeadDay"
+        >
+          <template #head-day-event="{ scope }">
+            <!-- do every other slot -->
+            <span>{{ scope.timestamp.weekday % 2 ? scope.timestamp.date : undefined }}</span>
+          </template>
+        </QCalendarDay>
+      </div>
     </div>
   </div>
 </template>

@@ -6,46 +6,47 @@
       @next="onNext"
     />
 
-    <div style="display: flex; justify-content: center">
-      <QCalendarMonth
-        ref="calendar"
-        v-model="selectedDate"
-        animated
-        bordered
-        focusable
-        hoverable
-        no-active-date
-        :day-min-height="60"
-        :day-height="0"
-        style="max-width: 800px; width: 100%;"
-        @change="onChange"
-        @moved="onMoved"
-        @click-date="onClickDate"
-        @click-day="onClickDay"
-        @click-workweek="onClickWorkweek"
-        @click-head-workweek="onClickHeadWorkweek"
-        @click-head-day="onClickHeadDay"
-      >
-        <template #week="{ scope: { week, weekdays } }">
-          <template
-            v-for="(computedEvent, index) in getWeekEvents(week, weekdays)"
-            :key="index"
-          >
-            <div
-              :class="badgeClasses(computedEvent)"
-              :style="badgeStyles(computedEvent, week.length)"
+    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
+      <div style="display: flex; max-width: 800px; width: 100%;">
+        <QCalendarMonth
+          ref="calendar"
+          v-model="selectedDate"
+          animated
+          bordered
+          focusable
+          hoverable
+          no-active-date
+          :day-min-height="60"
+          :day-height="0"
+          @change="onChange"
+          @moved="onMoved"
+          @click-date="onClickDate"
+          @click-day="onClickDay"
+          @click-workweek="onClickWorkweek"
+          @click-head-workweek="onClickHeadWorkweek"
+          @click-head-day="onClickHeadDay"
+        >
+          <template #week="{ scope: { week, weekdays } }">
+            <template
+              v-for="(computedEvent, index) in getWeekEvents(week, weekdays)"
+              :key="index"
             >
-              <abbr
-                v-if="computedEvent.event && computedEvent.event.details"
-                :title="computedEvent.event.details"
-                class="tooltip"
+              <div
+                :class="badgeClasses(computedEvent)"
+                :style="badgeStyles(computedEvent, week.length)"
               >
-                <span class="title q-calendar__ellipsis">{{ computedEvent.event.title + (computedEvent.event.time ? ' - ' + computedEvent.event.time : '') }}</span>
-              </abbr>
-            </div>
+                <abbr
+                  v-if="computedEvent.event && computedEvent.event.details"
+                  :title="computedEvent.event.details"
+                  class="tooltip"
+                >
+                  <span class="title q-calendar__ellipsis">{{ computedEvent.event.title + (computedEvent.event.time ? ' - ' + computedEvent.event.time : '') }}</span>
+                </abbr>
+              </div>
+            </template>
           </template>
-        </template>
-      </QCalendarMonth>
+        </QCalendarMonth>
+      </div>
     </div>
   </div>
 </template>

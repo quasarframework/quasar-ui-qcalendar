@@ -1,12 +1,17 @@
 <template>
   <div class="subcontent">
+    <div class="line">
+      When the property <code class="token">no-scroll</code> is used, you must provide<br>
+      an outter div that has <code class="token">overflow: auto</code> to control the scrolling.<br>
+    </div>
+
     <navigation-bar
       @today="onToday"
       @prev="onPrev"
       @next="onNext"
     />
 
-    <div style="display: flex; justify-content: center;">
+    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
       <div style="max-width: 800px; width: 100%; height: 400px; padding: 2px; overflow: auto; border: 1px solid #ddd">
         <QCalendarDay
           ref="calendar"

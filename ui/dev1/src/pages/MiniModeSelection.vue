@@ -21,28 +21,29 @@
       <label for="hover">Use Hover</label>
     </div>
 
-    <div style="display: flex; justify-content: center">
-      <QCalendarMonth
-        ref="calendar"
-        v-model="selectedDate"
-        mini-mode
-        no-active-date
-        :selected-start-end-dates="startEndDates"
-        :hover="hover"
-        animated
-        bordered
-        style="max-width: 280px; width: 100%;"
-        @mousedown-day="onMouseDownDay"
-        @mouseup-day="onMouseUpDay"
-        @mousemove-day="onMouseMoveDay"
-        @change="onChange"
-        @moved="onMoved"
-        @click-day="onClickDay"
-        @click-date="onClickDate"
-        @click-workweek="onClickWorkweek"
-        @click-head-workweek="onClickHeadWorkweek"
-        @click-head-day="onClickHeadDay"
-      />
+    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
+      <div style="display: flex; max-width: 280px; width: 100%;">
+        <QCalendarMonth
+          ref="calendar"
+          v-model="selectedDate"
+          mini-mode
+          no-active-date
+          :selected-start-end-dates="startEndDates"
+          :hover="hover"
+          animated
+          bordered
+          @mousedown-day="onMouseDownDay"
+          @mouseup-day="onMouseUpDay"
+          @mousemove-day="onMouseMoveDay"
+          @change="onChange"
+          @moved="onMoved"
+          @click-day="onClickDay"
+          @click-date="onClickDate"
+          @click-workweek="onClickWorkweek"
+          @click-head-workweek="onClickHeadWorkweek"
+          @click-head-day="onClickHeadDay"
+        />
+      </div>
     </div>
   </div>
 </template>

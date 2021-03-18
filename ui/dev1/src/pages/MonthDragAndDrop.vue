@@ -12,62 +12,60 @@
       @next="onNext"
     />
 
-    <div style="display: flex; justify-content: center">
-      <div style="display: flex; flex-direction: column; width: 100%;">
-        <div style="display: flex; justify-content: center; width: 100%; padding: 6px;">
-          <div style="margin: 10px;">
-            <ul class="list">
-              <li
-                v-for="item in dragItems"
-                :key="item.id"
-                class="button list-item"
-                draggable="true"
-                @dragstart="onDragStart($event, item)"
-              >
-                {{ item.name }}
-              </li>
-            </ul>
-          </div>
-          <QCalendarMonth
-            ref="calendar"
-            v-model="selectedDate"
-            :weekdays="[1,2,3,4,5]"
-            hoverable
-            bordered
-            animated
-            :day-min-height="50"
-            :day-height="0"
-            :day-class="onDayClass"
-            style="max-width: 800px; width: 100%;"
-            :drag-enter-func="onDragEnter"
-            :drag-over-func="onDragOver"
-            :drag-leave-func="onDragLeave"
-            :drop-func="onDrop"
-            @change="onChange"
-            @moved="onMoved"
-            @click-date="onClickDate"
-            @click-day="onClickDay"
-            @click-workweek="onClickWorkweek"
-            @click-head-workweek="onClickHeadWorkweek"
-            @click-head-day="onClickHeadDay"
+    <div style="display: flex; justify-content: center; width: 100%;">
+      <div style="margin: 10px;">
+        <ul class="list">
+          <li
+            v-for="item in dragItems"
+            :key="item.id"
+            class="button list-item"
+            draggable="true"
+            @dragstart="onDragStart($event, item)"
           >
-            <template #day="{ scope: { timestamp } }">
-              <div
-                v-if="hasEvents(timestamp)"
-                style="display: flex; justify-content: space-evenly; flex-wrap: wrap; align-items: center; font-weight: 400; font-size: 12px; height: auto;"
+            {{ item.name }}
+          </li>
+        </ul>
+      </div>
+
+      <div style="display: flex; justify-content: center; max-width: 800px; width: 100%;">
+        <QCalendarMonth
+          ref="calendar"
+          v-model="selectedDate"
+          :weekdays="[1,2,3,4,5]"
+          hoverable
+          bordered
+          animated
+          :day-min-height="50"
+          :day-height="0"
+          :day-class="onDayClass"
+          :drag-enter-func="onDragEnter"
+          :drag-over-func="onDragOver"
+          :drag-leave-func="onDragLeave"
+          :drop-func="onDrop"
+          @change="onChange"
+          @moved="onMoved"
+          @click-date="onClickDate"
+          @click-day="onClickDay"
+          @click-workweek="onClickWorkweek"
+          @click-head-workweek="onClickHeadWorkweek"
+          @click-head-day="onClickHeadDay"
+        >
+          <template #day="{ scope: { timestamp } }">
+            <div
+              v-if="hasEvents(timestamp)"
+              style="display: flex; justify-content: space-evenly; flex-wrap: wrap; align-items: center; font-weight: 400; font-size: 12px; height: auto;"
+            >
+              <template
+                v-for="event in getEvents(timestamp)"
+                :key="event.time"
               >
-                <template
-                  v-for="event in getEvents(timestamp)"
-                  :key="event.time"
-                >
-                  <span style="border: 1px solid pink; border-radius: 2px; padding: 2px; margin: 1px;">
-                    {{ event.name }}
-                  </span>
-                </template>
-              </div>
-            </template>
-          </QCalendarMonth>
-        </div>
+                <span style="border: 1px solid pink; border-radius: 2px; padding: 2px; margin: 1px;">
+                  {{ event.name }}
+                </span>
+              </template>
+            </div>
+          </template>
+        </QCalendarMonth>
       </div>
     </div>
   </div>

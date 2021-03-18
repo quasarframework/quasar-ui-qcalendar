@@ -6,84 +6,85 @@
       @next="onNext"
     />
 
-    <div style="display: flex; justify-content: center">
-      <QCalendarDay
-        ref="calendar"
-        v-model="selectedDate"
-        view="week"
-        animated
-        bordered
-        transition-next="slide-left"
-        transition-prev="slide-right"
-        no-active-date
-        :interval-start="6"
-        :interval-count="18"
-        :interval-height="28"
-        style="max-width: 800px; width: 100%; height: 400px;"
-        @change="onChange"
-        @moved="onMoved"
-        @click-date="onClickDate"
-        @click-time="onClickTime"
-        @click-interval="onClickInterval"
-        @click-head-intervals="onClickHeadIntervals"
-        @click-head-day="onClickHeadDay"
-      >
-        <template #head-day-event="{ scope: { timestamp } }">
-          <div style="display: flex; justify-content: center; flex-wrap: wrap; padding: 2px;">
+    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
+      <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
+        <QCalendarDay
+          ref="calendar"
+          v-model="selectedDate"
+          view="week"
+          animated
+          bordered
+          transition-next="slide-left"
+          transition-prev="slide-right"
+          no-active-date
+          :interval-start="6"
+          :interval-count="18"
+          :interval-height="28"
+          @change="onChange"
+          @moved="onMoved"
+          @click-date="onClickDate"
+          @click-time="onClickTime"
+          @click-interval="onClickInterval"
+          @click-head-intervals="onClickHeadIntervals"
+          @click-head-day="onClickHeadDay"
+        >
+          <template #head-day-event="{ scope: { timestamp } }">
+            <div style="display: flex; justify-content: center; flex-wrap: wrap; padding: 2px;">
+              <template
+                v-for="event in eventsMap[timestamp.date]"
+                :key="event.id"
+              >
+                <div
+                  v-if="!event.time"
+                  :class="badgeClasses(event, 'header')"
+                  :style="badgeStyles(event, 'header')"
+                  style="width: 100%; cursor: pointer; height: 12px; font-size: 10px; margin: 1px;"
+                >
+                  <abbr
+                    :title="event.details"
+                    class="tooltip"
+                    style="width: 100%"
+                  >
+                    <span class="title q-calendar__ellipsis">{{ event.title }}</span>
+                  </abbr>
+                </div>
+                <div
+                  v-else
+                  :class="badgeClasses(event, 'header')"
+                  :style="badgeStyles(event, 'header')"
+                  style="margin: 1px; width: 10px; max-width: 10px; height: 10px; max-height: 10px"
+                >
+                  <abbr
+                    :title="event.time + ' - ' + event.details"
+                    class="title tooltip"
+                  />
+                </div>
+              </template>
+            </div>
+          </template>
+
+          <template #day-body="{ scope: { timestamp, timeStartPos, timeDurationHeight } }">
             <template
-              v-for="event in eventsMap[timestamp.date]"
+              v-for="event in getEvents(timestamp.date)"
               :key="event.id"
             >
               <div
-                v-if="!event.time"
-                :class="badgeClasses(event, 'header')"
-                :style="badgeStyles(event, 'header')"
-                style="width: 100%; cursor: pointer; height: 12px; font-size: 10px; margin: 1px;"
+                v-if="event.time !== undefined"
+                class="my-event"
+                :class="badgeClasses(event, 'body')"
+                :style="badgeStyles(event, 'body', timeStartPos, timeDurationHeight)"
               >
                 <abbr
-                  :title="event.details"
+                  :title="event.time + ' - ' + event.details"
                   class="tooltip"
-                  style="width: 100%"
                 >
                   <span class="title q-calendar__ellipsis">{{ event.title }}</span>
                 </abbr>
               </div>
-              <div
-                v-else
-                :class="badgeClasses(event, 'header')"
-                :style="badgeStyles(event, 'header')"
-                style="margin: 1px; width: 10px; max-width: 10px; height: 10px; max-height: 10px"
-              >
-                <abbr
-                  :title="event.time + ' - ' + event.details"
-                  class="title tooltip"
-                />
-              </div>
             </template>
-          </div>
-        </template>
-
-        <template #day-body="{ scope: { timestamp, timeStartPos, timeDurationHeight } }">
-          <template
-            v-for="event in getEvents(timestamp.date)"
-            :key="event.id"
-          >
-            <div
-              v-if="event.time !== undefined"
-              class="my-event"
-              :class="badgeClasses(event, 'body')"
-              :style="badgeStyles(event, 'body', timeStartPos, timeDurationHeight)"
-            >
-              <abbr
-                :title="event.time + ' - ' + event.details"
-                class="tooltip"
-              >
-                <span class="title q-calendar__ellipsis">{{ event.title }}</span>
-              </abbr>
-            </div>
           </template>
-        </template>
-      </QCalendarDay>
+        </QCalendarDay>
+      </div>
     </div>
   </div>
 </template>

@@ -119,6 +119,13 @@ export default defineComponent({
       leftDrawerOpen = ref(false),
       filter = ref('')
 
+    onBeforeMount(() => {
+      const val = localStorage.getItem('filter')
+      if (val) {
+        filter.value = val
+      }
+    })
+
     onMounted(() => {
       handleRouteChange()
     })
@@ -134,13 +141,6 @@ export default defineComponent({
 
     watch(filter, val => {
       localStorage.setItem('filter', val)
-    })
-
-    onBeforeMount(() => {
-      const val = localStorage.getItem('filter')
-      if (val) {
-        filter.value = val
-      }
     })
 
     function onClearFilter () {

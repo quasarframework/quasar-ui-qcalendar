@@ -60,26 +60,27 @@
       @next="onNext"
     />
 
-    <div style="display: flex; justify-content: center">
-      <QCalendarDay
-        ref="calendar"
-        v-model="selectedDate"
-        view="day"
-        short-weekday-label
-        :date-header="dateHeader"
-        :weekday-align="weekdayAlign"
-        :date-align="dateAlign"
-        bordered
-        animated
-        style="max-width: 800px; width: 100%; height: 200px;"
-        @change="onChange"
-        @moved="onMoved"
-        @click-date="onClickDate"
-        @click-time="onClickTime"
-        @click-interval="onClickInterval"
-        @click-head-intervals="onClickHeadIntervals"
-        @click-head-day="onClickHeadDay"
-      />
+    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
+      <div style="display: flex; max-width: 800px; width: 100%; height: 200px;">
+        <QCalendarDay
+          ref="calendar"
+          v-model="selectedDate"
+          view="day"
+          short-weekday-label
+          :date-header="dateHeader"
+          :weekday-align="weekdayAlign"
+          :date-align="dateAlign"
+          bordered
+          animated
+          @change="onChange"
+          @moved="onMoved"
+          @click-date="onClickDate"
+          @click-time="onClickTime"
+          @click-interval="onClickInterval"
+          @click-head-intervals="onClickHeadIntervals"
+          @click-head-day="onClickHeadDay"
+        />
+      </div>
     </div>
   </div>
 </template>

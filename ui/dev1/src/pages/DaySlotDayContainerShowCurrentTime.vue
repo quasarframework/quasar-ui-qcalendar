@@ -1,6 +1,9 @@
 <template>
   <div class="subcontent">
-    <div class="line">The example below uses the <code class="token">day-container</code> slot to show a current time indicator absolutely positioned.</div>
+    <div class="line">
+      The example below uses the <code class="token">day-container</code> slot to show a current time indicator absolutely positioned.<br>
+      You might have to scroll down to the current time to see the example working.
+    </div>
 
     <navigation-bar
       @today="onToday"
@@ -8,41 +11,42 @@
       @next="onNext"
     />
 
-    <div style="display: flex; justify-content: center">
-      <QCalendarDay
-        ref="calendar"
-        v-model="selectedDate"
-        view="day"
-        bordered
-        :hour24-format="toggled"
-        :interval-minutes="15"
-        :interval-count="96"
-        :interval-height="10"
-        animated
-        transition-next="slide-left"
-        transition-prev="slide-right"
-        style="max-width: 800px; width: 100%; height: 400px;"
-        @change="onChange"
-        @moved="onMoved"
-        @click-date="onClickDate"
-        @click-time="onClickTime"
-        @click-interval="onClickInterval"
-        @click-head-intervals="onClickHeadIntervals"
-        @click-head-day="onClickHeadDay"
-      >
-        <template #day-container="{ scope: { days }}">
-          <template v-if="hasDate(days)">
-            <div
-              class="day-view-current-time-indicator"
-              :style="style"
-            />
-            <div
-              class="day-view-current-time-line"
-              :style="style"
-            />
+    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
+      <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
+        <QCalendarDay
+          ref="calendar"
+          v-model="selectedDate"
+          view="day"
+          bordered
+          :hour24-format="toggled"
+          :interval-minutes="15"
+          :interval-count="96"
+          :interval-height="10"
+          animated
+          transition-next="slide-left"
+          transition-prev="slide-right"
+          @change="onChange"
+          @moved="onMoved"
+          @click-date="onClickDate"
+          @click-time="onClickTime"
+          @click-interval="onClickInterval"
+          @click-head-intervals="onClickHeadIntervals"
+          @click-head-day="onClickHeadDay"
+        >
+          <template #day-container="{ scope: { days }}">
+            <template v-if="hasDate(days)">
+              <div
+                class="day-view-current-time-indicator"
+                :style="style"
+              />
+              <div
+                class="day-view-current-time-line"
+                :style="style"
+              />
+            </template>
           </template>
-        </template>
-      </QCalendarDay>
+        </QCalendarDay>
+      </div>
     </div>
   </div>
 </template>

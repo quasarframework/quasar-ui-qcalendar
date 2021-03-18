@@ -18,28 +18,29 @@
       @next="onNext"
     />
 
-    <div style="display: flex; justify-content: center">
-      <QCalendarDay
-        ref="calendar"
-        v-model="selectedDate"
-        style="max-width: 800px; width: 100%; height: 400px;"
-        :interval-minutes="15"
-        :interval-count="96"
-        :interval-height="15"
-        time-clicks-clamped
-        :selected-start-end-dates="startEndDates"
-        animated
-        bordered
-        @change="onChange"
-        @moved="onMoved"
-        @mousedown-time="onMouseDownTime"
-        @mouseup-time="onMouseUpTime"
-        @mousemove-time="onMouseMoveTime"
-        @click-date="onClickDate"
-        @click-interval="onClickInterval"
-        @click-head-intervals="onClickHeadIntervals"
-        @click-head-day="onClickHeadDay"
-      />
+    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
+      <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
+        <QCalendarDay
+          ref="calendar"
+          v-model="selectedDate"
+          :interval-minutes="15"
+          :interval-count="96"
+          :interval-height="15"
+          time-clicks-clamped
+          :selected-start-end-dates="startEndDates"
+          animated
+          bordered
+          @change="onChange"
+          @moved="onMoved"
+          @mousedown-time="onMouseDownTime"
+          @mouseup-time="onMouseUpTime"
+          @mousemove-time="onMouseMoveTime"
+          @click-date="onClickDate"
+          @click-interval="onClickInterval"
+          @click-head-intervals="onClickHeadIntervals"
+          @click-head-day="onClickHeadDay"
+        />
+      </div>
     </div>
   </div>
 </template>

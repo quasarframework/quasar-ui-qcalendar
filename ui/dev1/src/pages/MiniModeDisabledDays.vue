@@ -12,41 +12,40 @@
       @next="onNext"
     />
 
-    <div style="display: flex; justify-content: center">
-      <QCalendarMonth
-        ref="calendar"
-        v-model="selectedDate"
-        mini-mode
-        :disabled-days="disabledDays"
-        animated
-        bordered
-        style="max-width: 280px; width: 100%;"
-        @change="onChange"
-        @moved="onMoved"
-        @click-date="onClickDate"
-        @click-day="onClickDay"
-        @click-workweek="onClickWorkweek"
-        @click-head-workweek="onClickHeadWorkweek"
-        @click-head-day="onClickHeadDay"
-      />
-    </div><br>
-    <div style="display: flex; justify-content: center">
-      <QCalendarMonth
-        ref="calendar2"
-        v-model="selectedDate"
-        mini-mode
-        :disabled-days="disabledDaysRange"
-        animated
-        bordered
-        style="max-width: 280px; width: 100%;"
-        @change="onChange"
-        @moved="onMoved"
-        @click-date="onClickDate"
-        @click-day="onClickDay"
-        @click-workweek="onClickWorkweek"
-        @click-head-workweek="onClickHeadWorkweek"
-        @click-head-day="onClickHeadDay"
-      />
+    <div style="display: flex; justify-content: center; width: 100%;">
+      <div style="display: flex; flex-direction: column; max-width: 280px; width: 100%;">
+        <QCalendarMonth
+          ref="calendar"
+          v-model="selectedDate"
+          mini-mode
+          :disabled-days="disabledDays"
+          animated
+          bordered
+          @change="onChange"
+          @moved="onMoved"
+          @click-date="onClickDate"
+          @click-day="onClickDay"
+          @click-workweek="onClickWorkweek"
+          @click-head-workweek="onClickHeadWorkweek"
+          @click-head-day="onClickHeadDay"
+        />
+        <QCalendarMonth
+          ref="calendar2"
+          v-model="selectedDate"
+          mini-mode
+          :disabled-days="disabledDaysRange"
+          animated
+          bordered
+          style="max-width: 280px; width: 100%;"
+          @change="onChange"
+          @moved="onMoved"
+          @click-date="onClickDate"
+          @click-day="onClickDay"
+          @click-workweek="onClickWorkweek"
+          @click-head-workweek="onClickHeadWorkweek"
+          @click-head-day="onClickHeadDay"
+        />
+      </div>
     </div>
   </div>
 </template>
