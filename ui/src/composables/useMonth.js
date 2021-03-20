@@ -17,7 +17,7 @@ import {
 export const useMonthProps = {
   view: {
     type: String,
-    validator: v => [ 'month', 'picker', 'strip' ].includes(v),
+    validator: v => ['month'].includes(v),
     default: 'month'
   },
   dayHeight: {
