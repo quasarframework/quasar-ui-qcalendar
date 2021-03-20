@@ -87,6 +87,7 @@ export default defineComponent({
       weekRef = ref([]),
       headerColumnRef = ref(null),
       size = reactive({ width: 0, height: 0 }),
+      dragOverHeadDayRef = ref(false),
       dragOverDayRef = ref(false),
       // keep track of last seen start and end dates
       lastStart = ref(null),
@@ -470,12 +471,26 @@ export default defineComponent({
 
     function __renderHeadDay (day, index) {
       const headDaySlot = slots[ 'head-day' ]
-      const disabled = (props.disabledWeekdays ? props.disabledWeekdays.includes(day.weekday) : false)
+
       const filteredDays = days.value.filter(day2 => day2.weekday === day.weekday)
-      const scope = { timestamp: day, days: filteredDays, index, miniMode: isMiniMode.value }
+      const weekday = filteredDays[ 0 ].weekday
+      const scope = { weekday, timestamp: day, days: filteredDays, index, miniMode: isMiniMode.value }
+      scope.droppable = dragOverHeadDayRef.value === day.weekday
+
+      const disabled = (props.disabledWeekdays ? props.disabledWeekdays.includes(day.weekday) : false)
       const ariaLabel = weekdayFormatter.value(day, false)
+
+      const weekdayClass = typeof props.weekdayClass === 'function' ? props.weekdayClass({ scope }) : {}
       const isFocusable = props.focusable === true && props.focusType.includes('weekday')
+
       const width = computedWidth.value
+      const styler = props.weekdayStyle || dayStyleDefault
+      const style = {
+        width,
+        maxWidth: width,
+        minWidth: width,
+        ...styler({ scope })
+      }
 
       return h('div', {
         ariaLabel,
@@ -483,15 +498,45 @@ export default defineComponent({
         tabindex: isFocusable === true ? 0 : -1,
         class: {
           'q-calendar-month__head--weekday': true,
+          ...weekdayClass,
           'q-disabled-day disabled': disabled === true,
           [ 'q-calendar__' + props.weekdayAlign ]: true,
           'q-calendar__ellipsis': true,
           'q-calendar__focusable': isFocusable === true
         },
-        style: {
-          maxWidth: width,
-          minWidth: width,
-          width
+        style,
+        onDragenter: (e) => {
+          if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
+            props.dragEnterFunc(e, 'head-day', scope)
+              ? dragOverHeadDayRef.value = day.weekday
+              : dragOverHeadDayRef.value = ''
+          }
+        },
+        onDragover: (e) => {
+          if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
+            props.dragOverFunc(e, 'head-day', scope)
+              ? dragOverHeadDayRef.value = day.weekday
+              : dragOverHeadDayRef.value = ''
+          }
+        },
+        onDragleave: (e) => {
+          if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
+            props.dragLeaveFunc(e, 'head-day', scope)
+              ? dragOverHeadDayRef.value = day.weekday
+              : dragOverHeadDayRef.value = ''
+          }
+        },
+        onDrop: (e) => {
+          if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
+            props.dropFunc(e, 'head-day', scope)
+              ? dragOverHeadDayRef.value = day.weekday
+              : dragOverHeadDayRef.value = ''
+          }
+        },
+        onFocus: (e) => {
+          if (isFocusable === true) {
+            focusRef.value = day.date
+          }
         },
         ...getDefaultMouseEventHandlers('-head-day', event => {
           return { scope, event }
@@ -508,13 +553,24 @@ export default defineComponent({
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
       const disabled = (props.disabledWeekdays ? props.disabledWeekdays.includes(day.weekday) : false)
       const filteredDays = days.value.filter(day2 => day2.weekday === day.weekday)
-      const scope = { timestamp: day, days: filteredDays, index, miniMode: isMiniMode.value, activeDate, disabled }
+      const weekday = filteredDays[ 0 ].weekday
+      const scope = { weekday, timestamp: day, days: filteredDays, index, miniMode: isMiniMode.value, activeDate, disabled }
+
+      const width = computedWidth.value
+      const styler = props.weekdayStyle || dayStyleDefault
+      const style = {
+        width,
+        maxWidth: width,
+        minWidth: width,
+        ...styler({ scope })
+      }
 
       return h('div', {
         key: 'event-' + day.date + (index !== undefined ? '-' + index : ''),
         class: {
           'q-calendar-month__head--event': true
-        }
+        },
+        style
       }, [
         headDayEventSlot !== undefined && headDayEventSlot({ scope })
       ])
