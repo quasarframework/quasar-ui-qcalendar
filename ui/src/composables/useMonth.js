@@ -33,6 +33,14 @@ export const useMonthProps = {
     type: Function,
     default: null
   },
+  weekdayStyle: {
+    type: Function,
+    default: null
+  },
+  weekdayClass: {
+    type: Function,
+    default: null
+  },
   dayPadding: String,
   minWeeks: {
     type: [ Number, String ],
