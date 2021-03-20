@@ -49,10 +49,12 @@
     &--weekday
       position: relative
       display: flex
-      flex-wrap: nowrap
+      flex: 1 0 100%
+      flex-direction: column
+      justify-content: flex-start
+      height: auto
+      overflow: hidden
       user-select: none
-      font-size: 1rem
-      width: 100%
       outline: 0
 
   &__body
@@ -164,6 +166,13 @@
       background: var(--calendar-background)
 
     &--weekday
+      border-right: var(--calendar-border)
+      font-weight: var(--calendar-head-font-weight)
+
+      &:last-child
+        border-right: none !important
+
+    &--event
       border-right: var(--calendar-border)
       font-weight: var(--calendar-head-font-weight)
 
