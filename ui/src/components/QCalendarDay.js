@@ -715,8 +715,8 @@ export default defineComponent({
     function __renderHeadDayBtn (day) {
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
       const dayLabel = dayFormatter.value(day, false)
-      const dayLabelSlot = slots[ 'head-day-button' ]
-      const headDayValueSlot = slots[ 'head-day-button-value' ]
+      const headDayLabelSlot = slots[ 'head-day-label' ]
+      const headDayButtonSlot = slots[ 'head-day-button' ]
       const scope = { dayLabel, timestamp: day, activeDate }
       const ariaLabel = ariaDateFormatter.value(day)
 
@@ -756,9 +756,9 @@ export default defineComponent({
         })
       }
 
-      return headDayValueSlot
-        ? headDayValueSlot({ scope })
-        : useButton(props, data, dayLabelSlot ? dayLabelSlot({ scope }) : dayLabel)
+      return headDayButtonSlot
+        ? headDayButtonSlot({ scope })
+        : useButton(props, data, headDayLabelSlot ? headDayLabelSlot({ scope }) : dayLabel)
     }
 
     function __renderColumnHeaderBefore (day, columnIndex) {
