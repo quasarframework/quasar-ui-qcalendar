@@ -256,29 +256,33 @@ export default defineComponent({
       return (100 / parsedColumnCount.value) + '%'
     })
 
-    function __isCheckChange () {
-      if (checkChange() === true
-      && props.useNavigation === true
-      && datesRef.value
-      && focusRef.value) {
-        if (document && document.activeElement !== datesRef.value[ focusRef.value ]) {
-          let count = 0
-          const interval = setInterval(() => {
-            if (datesRef.value[ focusRef.value ]) {
-              datesRef.value[ focusRef.value ].focus()
-              if (++count === 10 || document.activeElement === datesRef.value[ focusRef.value ]) {
-                clearInterval(interval)
-              }
-            }
-            else {
-              clearInterval(interval)
-            }
-          }, 250)
+    const isDayFocusable = computed(() => {
+      return props.focusable === true && props.focusType.includes('day') && isMiniMode.value !== true
+    })
+
+    const isDateFocusable = computed(() => {
+      return props.focusable === true && props.focusType.includes('date') && isDayFocusable.value !== true
+    })
+
+    // attempts to set focus on the focusRef date
+    // this function is called when the month changes,
+    // so retry until we get it (or count expires)
+    function tryFocus () {
+      let count = 0
+      const interval = setInterval(() => {
+        if (datesRef.value[ focusRef.value ]) {
+          datesRef.value[ focusRef.value ].focus()
+          if (++count === 20 || document.activeElement === datesRef.value[ focusRef.value ]) {
+            clearInterval(interval)
+          }
         }
-      }
+        else {
+          clearInterval(interval)
+        }
+      }, 250)
     }
 
-    watch([days], __isCheckChange, { deep: true, immediate: true })
+    watch([days], checkChange, { deep: true, immediate: true })
 
     watch(() => props.modelValue, (val, oldVal) => {
       if (emittedValue.value !== val) {
@@ -306,12 +310,20 @@ export default defineComponent({
     watch(focusRef, val => {
       if (val) {
         focusValue.value = parseTimestamp(val)
+        if (emittedValue.value !== val) {
+          emittedValue.value = val
+        }
       }
     })
 
     watch(focusValue, (val) => {
       if (datesRef.value[ focusRef.value ]) {
         datesRef.value[ focusRef.value ].focus()
+      }
+      else {
+        // if focusRef is not in the list of current dates of dateRef,
+        // then assume month is changing
+        tryFocus()
       }
     })
 
@@ -474,7 +486,7 @@ export default defineComponent({
           'q-disabled-day disabled': disabled === true,
           [ 'q-calendar__' + props.weekdayAlign ]: true,
           'q-calendar__ellipsis': true,
-          'q-calendar__focusable': true
+          'q-calendar__focusable': isFocusable === true
         },
         style: {
           maxWidth: width,
@@ -591,13 +603,16 @@ export default defineComponent({
       const style = Object.assign({ ...computedStyles.value }, styler({ scope }))
       const dayClass = typeof props.dayClass === 'function' ? props.dayClass({ scope }) : {}
       const ariaLabel = ariaDateFormatter.value(day)
-      const isFocusable = props.focusable === true && props.focusType.includes('day') && isMiniMode.value !== true
 
       const data = {
         ariaLabel,
         key: day.date,
-        ref: (el) => { datesRef.value[ day.date ] = el },
-        tabindex: isFocusable === true ? 0 : -1,
+        ref: (el) => {
+          if (isDayFocusable.value === true) {
+            datesRef.value[ day.date ] = el
+          }
+        },
+        tabindex: isDayFocusable.value === true ? 0 : -1,
         class: {
           'q-calendar-month__day': true,
           ...dayClass,
@@ -605,12 +620,12 @@ export default defineComponent({
           'q-active-date': activeDate === true,
           disabled: props.enableOutsideDays !== true && outside === true,
           'q-calendar__hoverable': props.hoverable === true,
-          'q-calendar__focusable': props.focusable === true,
+          'q-calendar__focusable': isDayFocusable.value === true,
           'q-calendar-month__day--droppable': scope.droppable === true && outside !== true
         },
         style,
         onFocus: (e) => {
-          if (isFocusable === true) {
+          if (isDayFocusable.value === true) {
             focusRef.value = day.date
           }
         },
@@ -630,7 +645,7 @@ export default defineComponent({
             event.stopPropagation()
             event.preventDefault()
             // emit only if there is a listener
-            if (emitListeners.value.onClickDay !== undefined) {
+            if (emitListeners.value.onClickDay !== undefined && isMiniMode.value !== true) {
               // eslint-disable-next-line vue/require-explicit-emits
               emit('click-day', { scope, event })
             }
@@ -683,7 +698,7 @@ export default defineComponent({
             'q-calendar-month__day--content': true
           }
         }, slot ? slot({ scope }) : undefined),
-        isFocusable === true && isMiniMode.value !== true && useFocusHelper()
+        isDayFocusable.value === true && useFocusHelper()
       ])
     }
 
@@ -751,17 +766,30 @@ export default defineComponent({
 
       const data = {
         ariaLabel,
+        key: day.date,
+        ref: (el) => {
+          if (isDateFocusable.value === true) {
+            datesRef.value[ day.date ] = el
+          }
+        },
+        tabindex: isDateFocusable.value === true ? 0 : -1,
         class: {
           'q-calendar-month__day--label': true,
           'q-calendar__button': true,
           'q-calendar__button--round': props.dateType === 'round',
           'q-calendar__button--bordered': day.current === true,
-          'q-calendar__focusable': props.focusable === true
+          'q-calendar__hoverable': props.hoverable === true,
+          'q-calendar__focusable': isDateFocusable.value === true
         },
         // style: {
         //   lineHeight: isMiniMode.value ? 'unset' : '1.715em'
         // },
         disabled: day.disabled === true || (props.enableOutsideDays !== true && outside === true),
+        onFocus: (e) => {
+          if (isDateFocusable.value === true) {
+            focusRef.value = day.date
+          }
+        },
         onKeydown: (e) => {
           if (outside !== true
             && day.disabled !== true
@@ -772,7 +800,8 @@ export default defineComponent({
         },
         onKeyup: (event) => {
           // allow selection of date via Enter or Space keys
-          if (outside !== true
+          if (isDateFocusable.value === true
+            && outside !== true
             && day.disabled !== true
             && isKeyCode(event, [ 13, 32 ])) {
             event.stopPropagation()
@@ -785,6 +814,8 @@ export default defineComponent({
           }
         },
         ...getDefaultMouseEventHandlers('-date', (event, eventName) => {
+          // don't allow date clicks to propagate to day mouse handlers
+          event.stopPropagation()
           if (eventName === 'click-date' || eventName === 'contextmenu-date') {
             emittedValue.value = day.date
           }
@@ -792,9 +823,12 @@ export default defineComponent({
         })
       }
 
-      return dayBtnSlot
-        ? dayBtnSlot({ scope })
-        : useButton(props, data, dayLabelSlot ? dayLabelSlot({ scope }) : dayLabel)
+      return [
+        dayBtnSlot
+          ? dayBtnSlot({ scope })
+          : useButton(props, data, dayLabelSlot ? dayLabelSlot({ scope }) : dayLabel),
+        isDateFocusable.value === true && useFocusHelper()
+      ]
     }
 
     function __renderDayOfYearLabel (day, outside) {
