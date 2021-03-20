@@ -39,15 +39,13 @@
               :drop-func="onDrop"
               :weekday-class="onWeekdayClass"
               :interval-class="onIntervalClass"
-              :interval-start="24"
-              :interval-minutes="15"
-              :interval-count="56"
-              :interval-height="28"
+              :interval-start="8"
+              :interval-count="9"
+              :interval-height="100"
               :weekdays="[1,2,3,4,5]"
               hoverable
               animated
               bordered
-              style="max-width: 800px; width: 100%; height: 400px;"
               @change="onChange"
               @moved="onMoved"
               @click-date="onClickDate"
@@ -159,7 +157,7 @@ export default defineComponent({
 
   methods: {
     onDragStart (event, item) {
-      // console.log('onDragStart called')
+      console.log('onDragStart called')
       event.dataTransfer.dropEffect = 'copy'
       event.dataTransfer.effectAllowed = 'move'
       event.dataTransfer.setData('ID', item.id)
@@ -258,3 +256,8 @@ export default defineComponent({
   }
 })
 </script>
+
+<style lang="sass">
+.droppable
+  box-shadow: inset 0 0 0 1px rgba(0,140,200,.8)
+</style>

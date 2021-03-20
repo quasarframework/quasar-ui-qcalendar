@@ -38,6 +38,7 @@
           :day-min-height="50"
           :day-height="0"
           :day-class="onDayClass"
+          :weekday-class="onWeekdayClass"
           :drag-enter-func="onDragEnter"
           :drag-over-func="onDragOver"
           :drag-leave-func="onDragLeave"
@@ -50,6 +51,22 @@
           @click-head-workweek="onClickHeadWorkweek"
           @click-head-day="onClickHeadDay"
         >
+          <template #head-day-event="{ scope: { weekday } }">
+            <div
+              v-if="hasWeekdayEvents(weekday)"
+              style="display: flex; justify-content: space-evenly; flex-wrap: wrap; align-items: center; font-weight: 400; font-size: 12px; height: auto;"
+            >
+              <template
+                v-for="(event, index) in getWeekdayEvents(weekday)"
+                :key="event.weekday + index"
+              >
+                <span style="border: 1px solid pink; border-radius: 2px; padding: 2px; margin: 1px;">
+                  {{ event.name }}
+                </span>
+              </template>
+            </div>
+          </template>"
+
           <template #day="{ scope: { timestamp } }">
             <div
               v-if="hasEvents(timestamp)"
@@ -117,11 +134,11 @@ export default defineComponent({
   },
 
   computed: {
-    // convert the events into a map of lists keyed by date
+    // convert the events into a map of lists keyed by date or weekday
     eventsMap () {
       const map = {}
       if (this.events.length > 0) {
-        this.events.forEach(event => (map[ event.date ] = map[ event.date ] || []).push(event))
+        this.events.forEach(event => (map[ event.date || event.weekday ] = map[ event.date || event.weekday ] || []).push(event))
       }
       console.log('eventsMap', map)
       return map
@@ -161,30 +178,45 @@ export default defineComponent({
       const item = this.dragItems.filter(item => item.id === itemID)
       event.type = item[ 0 ].id
       event.name = item[ 0 ].name
-      event.date = scope.timestamp.date
-      if (type === 'interval') {
+      if (type === 'day') {
+        event.date = scope.timestamp.date
         event.time = scope.timestamp.time
       }
       else { // head-day
         event.allDay = true
+        event.weekday = scope.timestamp.weekday
       }
       this.events.push(event)
       return false
     },
 
     getEvents (timestamp) {
-      const times = this.eventsMap[ timestamp.date ]
-      if (times) {
-        return times.filter(item => item.time === timestamp.time)
-      }
-      return []
+      const events = this.eventsMap[ timestamp.date ]
+      if (!events) return []
+      return events
+    },
+
+    getWeekdayEvents (weekday) {
+      const events = this.eventsMap[ weekday ]
+      if (!events) return []
+      return events
     },
 
     hasEvents (timestamp) {
       return this.getEvents(timestamp).length > 0
     },
 
+    hasWeekdayEvents (weekday) {
+      return this.getWeekdayEvents(weekday).length > 0
+    },
+
     onDayClass ({ scope }) {
+      return {
+        droppable: scope.droppable === true
+      }
+    },
+
+    onWeekdayClass ({ scope }) {
       return {
         droppable: scope.droppable === true
       }
