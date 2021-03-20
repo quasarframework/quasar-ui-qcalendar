@@ -2,7 +2,7 @@
   <div class="subcontent">
     <div class="line">
       The example below uses the <code class="token">day-container</code> slot to show a current time indicator absolutely positioned.<br>
-      You might have to scroll down to the current time to see the example working.
+      Hint: You might have to scroll down to the current time to see the example working.
     </div>
 
     <navigation-bar
