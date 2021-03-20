@@ -415,8 +415,7 @@ export default defineComponent({
         h('div', {
           class: 'q-calendar-month__head--wrapper'
         }, [
-          __renderHeadDaysRow(),
-          __renderHeadDaysEventsRow()
+          __renderHeadDaysRow()
         ])
       ])
     }
@@ -429,19 +428,6 @@ export default defineComponent({
         }
       }, [
         ...__renderHeadDays()
-      ])
-    }
-
-    function __renderHeadDaysEventsRow () {
-      const slot = slots[ 'head-row-events' ]
-
-      return h('div', {
-        class: {
-          'q-calendar-month__head--events': true
-        }
-      }, [
-        ...__renderHeadDaysEvents(),
-        slot && slot({ scope: { days: days.value } })
       ])
     }
 
@@ -463,10 +449,6 @@ export default defineComponent({
 
     function __renderHeadDays () {
       return todayWeek.value.map((day, index) => __renderHeadDay(day, index))
-    }
-
-    function __renderHeadDaysEvents () {
-      return todayWeek.value.map((day, index) => __renderHeadDayEvent(day, index))
     }
 
     function __renderHeadDay (day, index) {
@@ -544,6 +526,7 @@ export default defineComponent({
       }, [
         headDaySlot === undefined && __renderHeadWeekdayLabel(day, props.shortWeekdayLabel || isMiniMode.value),
         headDaySlot !== undefined && headDaySlot({ scope }),
+        __renderHeadDayEvent(day, index),
         isFocusable === true && useFocusHelper()
       ])
     }
