@@ -1,8 +1,6 @@
 <template>
   <div class="subcontent">
-    <div class="line">For keyboard navigation use the <span class="token">use-navigation</span> property along with the <span class="token">focusable</span> and <span class="token">focus-type</span> properties.</div>
-    <div class="line">Hint: When the calendar has focus use the <kbd>Home</kbd>, <kbd>End</kbd>, <kbd>&larr;</kbd>, <kbd>&rarr;</kbd>, <kbd>&uarr;</kbd>, <kbd>&darr;</kbd>, <kbd>PgUp</kbd>, <kbd>PgDn</kbd>, <kbd>Home</kbd> and , <kbd>End</kbd>keys.</div>
-    <div class="line">You can also use <kbd>Tab</kbd> and <kbd>Shift</kbd>+<kbd>Tab</kbd> for regular browser navigation.</div>
+    <div class="line">The <code class="token">column-count</code> property allows for a single day to be displayed multiple times.</div>
 
     <navigation-bar
       @today="onToday"
@@ -10,50 +8,59 @@
       @next="onNext"
     />
 
+    {{ selectedDate }}
+
     <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
       <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
-        <QCalendarMonth
+        <QCalendarDay
           ref="calendar"
           v-model="selectedDate"
-          no-active-date
-          use-navigation
-          focusable
-          :focus-type="['day']"
-          animated
+          view="day"
+          :column-count="4"
           bordered
-          :weekdays="[1,2,3,4,5]"
+          animated
           @change="onChange"
           @moved="onMoved"
           @click-date="onClickDate"
-          @click-day="onClickDay"
-          @click-workweek="onClickWorkweek"
-          @click-head-workweek="onClickHeadWorkweek"
+          @click-time="onClickTime"
+          @click-interval="onClickInterval"
+          @click-head-intervals="onClickHeadIntervals"
           @click-head-day="onClickHeadDay"
-        />
+        >
+          <template #head-day="{ scope }">
+            {{ persons[ scope.columnIndex ].name }}
+          </template>
+        </QCalendarDay>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar/QCalendarMonth.js'
+import { QCalendarDay } from '@quasar/quasar-ui-qcalendar/QCalendarDay.js'
 import { today } from '@quasar/quasar-ui-qcalendar/Timestamp.js'
 import '@quasar/quasar-ui-qcalendar/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
-import '@quasar/quasar-ui-qcalendar/QCalendarMonth.sass'
+import '@quasar/quasar-ui-qcalendar/QCalendarDay.sass'
 
 import { defineComponent } from 'vue'
 import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
-  name: 'MonthNavigation',
+  name: 'DayColumnCount',
   components: {
     NavigationBar,
-    QCalendarMonth
+    QCalendarDay
   },
   data () {
     return {
-      selectedDate: today()
+      selectedDate: today(),
+      persons: [
+        { name: 'James Smith' },
+        { name: 'John Williams' },
+        { name: 'David Miller' },
+        { name: 'Linda Brown' }
+      ]
     }
   },
   methods: {
@@ -75,17 +82,17 @@ export default defineComponent({
     onClickDate (data) {
       console.log('onClickDate', data)
     },
-    onClickDay (data) {
-      console.log('onClickDay', data)
+    onClickTime (data) {
+      console.log('onClickTime', data)
     },
-    onClickWorkweek (data) {
-      console.log('onClickWorkweek', data)
+    onClickInterval (data) {
+      console.log('onClickInterval', data)
+    },
+    onClickHeadIntervals (data) {
+      console.log('onClickHeadIntervals', data)
     },
     onClickHeadDay (data) {
       console.log('onClickHeadDay', data)
-    },
-    onClickHeadWorkweek (data) {
-      console.log('onClickHeadWorkweek', data)
     }
   }
 })

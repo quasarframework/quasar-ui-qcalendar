@@ -7,18 +7,22 @@
     />
 
     <div style="display: flex; justify-content: center; align-items: center;">
-      <input
-        id="mobile"
-        v-model="mobile"
-        type="checkbox"
-      >
-      <label for="mobile">Mobile selection</label>
-      <input
-        id="hover"
-        v-model="useHover"
-        type="checkbox"
-      >
-      <label for="hover">Use Hover</label>
+      <div class="button">
+        <input
+          id="mobile"
+          v-model="mobile"
+          type="checkbox"
+        >
+        <label for="mobile">Mobile selection</label>
+      </div>
+      <div class="button">
+        <input
+          id="hover"
+          v-model="useHover"
+          type="checkbox"
+        >
+        <label for="hover">Use Hover</label>
+      </div>
     </div>
 
     <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">

@@ -8,38 +8,44 @@
 
     <div style="display: flex; justify-content: center; align-items: center">
       <div style="display: flex; justify-content: center; align-items: center">
-        <label for="hoverable">Hoverable:</label>
-        <input
-          id="hoverable"
-          v-model="hoverable"
-          type="checkbox"
-        >
+        <div class="button">
+          <label for="hoverable">Hoverable:</label>
+          <input
+            id="hoverable"
+            v-model="hoverable"
+            type="checkbox"
+          >
+        </div>
       </div>
       <div style="display: flex; justify-content: center; align-items: center">
-        <label for="focusable">Focusable:</label>
-        <input
-          id="focusable"
-          v-model="focusable"
-          type="checkbox"
-        >
-        <div style="display: flex; justify-content: center; align-items: center">
-          <label
-            for="focus-type"
-            style="margin-right: 2px;"
-          >focus-type:</label>
-          <select
-            id="focus-type"
-            v-model="focusTypeSelection"
-            class="button select"
+        <div class="button">
+          <label for="focusable">Focusable:</label>
+          <input
+            id="focusable"
+            v-model="focusable"
+            type="checkbox"
           >
-            <option
-              v-for="option in options"
-              :key="option"
-              :value="option"
+        </div>
+        <div style="display: flex; justify-content: center; align-items: center">
+          <div class="button">
+            <label
+              for="focus-type"
+              style="margin-right: 2px;"
+            >focus-type:</label>
+            <select
+              id="focus-type"
+              v-model="focusTypeSelection"
+              class="button select"
             >
-            {{ option + (focusType.includes(option) ? ' ✔' : '') }}
-            </option>
-          </select>
+              <option
+                v-for="option in options"
+                :key="option"
+                :value="option"
+              >
+              {{ option + (focusType.includes(option) ? ' ✔' : '') }}
+              </option>
+            </select>
+          </div>
         </div>
       </div>
     </div>

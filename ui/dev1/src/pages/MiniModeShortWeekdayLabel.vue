@@ -7,27 +7,33 @@
     />
 
     <div style="display: flex; justify-content: center; align-items: center;">
-      <input
-        id="1char"
-        v-model="minLabelLength"
-        value="1"
-        type="radio"
-      >
-      <label for="1char">1 char.</label>
-      <input
-        id="2char"
-        v-model="minLabelLength"
-        value="2"
-        type="radio"
-      >
-      <label for="2char">2 char.</label>
-      <input
-        id="3char"
-        v-model="minLabelLength"
-        value="3"
-        type="radio"
-      >
-      <label for="3char">3 char.</label>
+      <div class="button">
+        <input
+          id="1char"
+          v-model="minLabelLength"
+          value="1"
+          type="radio"
+        >
+        <label for="1char">1 char.</label>
+      </div>
+      <div class="button">
+        <input
+          id="2char"
+          v-model="minLabelLength"
+          value="2"
+          type="radio"
+        >
+        <label for="2char">2 char.</label>
+      </div>
+      <div class="button">
+        <input
+          id="3char"
+          v-model="minLabelLength"
+          value="3"
+          type="radio"
+        >
+        <label for="3char">3 char.</label>
+      </div>
     </div>
 
     <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">

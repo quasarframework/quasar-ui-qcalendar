@@ -4,12 +4,14 @@
     <div class="line">Try toggling the <code class="token">Mobile selection</code> to see how selection can be changed.</div>
 
     <div style="display: flex; justify-content: center; align-items: center;">
-      <input
-        id="mobile"
-        v-model="mobile"
-        type="checkbox"
-      >
-      <label for="mobile">Mobile selection (first click, second click)</label>
+      <div class="button">
+        <input
+          id="mobile"
+          v-model="mobile"
+          type="checkbox"
+        >
+        <label for="mobile">Mobile selection (first click, second click)</label>
+      </div>
     </div>
 
     <navigation-bar

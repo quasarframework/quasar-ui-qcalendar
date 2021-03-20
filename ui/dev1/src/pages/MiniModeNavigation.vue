@@ -1,19 +1,14 @@
 <template>
   <div class="subcontent">
+    <div class="line">For keyboard navigation use the <span class="token">use-navigation</span> property along with the <span class="token">focusable</span> and <span class="token">focus-type</span> properties.</div>
+    <div class="line">Hint: When the calendar has focus use the <kbd>Home</kbd>, <kbd>End</kbd>, <kbd>&larr;</kbd>, <kbd>&rarr;</kbd>, <kbd>&uarr;</kbd>, <kbd>&darr;</kbd>, <kbd>PgUp</kbd>, <kbd>PgDn</kbd>, <kbd>Home</kbd> and , <kbd>End</kbd>keys.</div>
+    <div class="line">You can also use <kbd>Tab</kbd> and <kbd>Shift</kbd>+<kbd>Tab</kbd> for regular browser navigation.</div>
+
     <navigation-bar
       @today="onToday"
       @prev="onPrev"
       @next="onNext"
     />
-
-    <div style="display: flex; justify-content: center; align-items: center;">
-      <input
-        id="mobile"
-        v-model="mobile"
-        type="checkbox"
-      >
-      <label for="mobile">Mobile selection</label>
-    </div>
 
     <div style="display: flex; justify-content: center">
       <div style="max-width: 280px; width: 100%; display: flex; flex-direction: column; justify-content: center; border: 1px solid #ccc; border-radius: 4px; padding: 10px;">
@@ -53,15 +48,12 @@
               v-model="selectedDate"
               mini-mode
               use-navigation
-              focusable
-              :focus-type="['date']"
               no-active-date
-              :selected-start-end-dates="startEndDates"
+              hoverable
+              focusable
+              :focus-type="['date', 'weekday']"
               :min-weeks="6"
               animated
-              @mousedown-day="onMouseDownDay"
-              @mouseup-day="onMouseUpDay"
-              @mousemove-day="onMouseMoveDay"
               @change="onChange"
               @moved="onMoved"
               @click-date="onClickDate"
@@ -80,7 +72,6 @@
 <script>
 import {
   addToDate,
-  getDayIdentifier,
   parseTimestamp,
   today
 } from '@quasar/quasar-ui-qcalendar/Timestamp.js'
@@ -92,10 +83,6 @@ import '@quasar/quasar-ui-qcalendar/QCalendarMonth.sass'
 import { defineComponent, ref, computed } from 'vue'
 import NavigationBar from '../components/NavigationBar.vue'
 
-function leftClick (e) {
-  return e.button === 0
-}
-
 export default defineComponent({
   name: 'MiniModeNavigation',
   components: {
@@ -106,74 +93,12 @@ export default defineComponent({
     const selectedDate = ref(today()),
       calendar = ref(null),
       selectedYear = ref(new Date().getFullYear()),
-      anchorTimestamp = ref(null),
-      otherTimestamp = ref(null),
-      mouseDown = ref(false),
-      mobile = ref(false),
       locale = 'en-us'
-
-    const startEndDates = computed(() => {
-      const dates = []
-      if (anchorDayIdentifier.value !== false && otherDayIdentifier.value !== false) {
-        if (anchorDayIdentifier.value <= otherDayIdentifier.value) {
-          dates.push(anchorTimestamp.value.date, otherTimestamp.value.date)
-        }
-        else {
-          dates.push(otherTimestamp.value.date, anchorTimestamp.value.date)
-        }
-      }
-      return dates
-    })
-
-    const anchorDayIdentifier = computed(() => {
-      if (anchorTimestamp.value !== null) {
-        return getDayIdentifier(anchorTimestamp.value)
-      }
-      return false
-    })
-
-    const otherDayIdentifier = computed(() => {
-      if (otherTimestamp.value !== null) {
-        return getDayIdentifier(otherTimestamp.value)
-      }
-      return false
-    })
 
     const formattedMonth = computed(() => {
       const date = new Date(selectedDate.value)
       return monthFormatter().format(date)
     })
-
-    function onMouseDownDay ({ scope, event }) {
-      if (leftClick(event)) {
-        if (mobile.value === true
-          && anchorTimestamp.value !== null
-          && otherTimestamp.value !== null
-          && anchorTimestamp.value.date === otherTimestamp.value.date) {
-          otherTimestamp.value = scope.timestamp
-          mouseDown.value = false
-          return
-        }
-        // mouse is down, start selection and capture current
-        mouseDown.value = true
-        anchorTimestamp.value = scope.timestamp
-        otherTimestamp.value = scope.timestamp
-      }
-    }
-
-    function onMouseUpDay ({ scope, event }) {
-      if (leftClick(event)) {
-        // mouse is up, capture last and cancel selection
-        otherTimestamp.value = scope.timestamp
-        mouseDown.value = false
-      }
-    }
-
-    function onMouseMoveDay ({ scope, event }) {
-      if (mouseDown.value === true && scope.outside !== true) {
-        otherTimestamp.value = scope.timestamp
-      }
-    }
 
     function monthFormatter () {
       try {
@@ -232,13 +157,8 @@ export default defineComponent({
       selectedDate,
       calendar,
       selectedYear,
-      mobile,
-      startEndDates,
       formattedMonth,
       addToYear,
-      onMouseDownDay,
-      onMouseUpDay,
-      onMouseMoveDay,
       onToday,
       onPrev,
       onNext,
