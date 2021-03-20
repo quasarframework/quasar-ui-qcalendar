@@ -478,7 +478,7 @@ export default function (props, {
    * @param {Number} columnIndex
    */
   function getScopeForSlot (timestamp, columnIndex) {
-    const scope = { timestamp: copyTimestamp(timestamp) }
+    const scope = { timestamp }
     scope.timeStartPos = timeStartPos
     scope.timeDurationHeight = timeDurationHeight
     if (columnIndex !== undefined) {
