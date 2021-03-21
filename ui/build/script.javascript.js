@@ -26,8 +26,7 @@ const rollupPlugins = [
 ]
 
 const buildEntries = [
-  'index',
-  'QCalendar',
+  'index', // 'QCalendar'
   'QCalendarAgenda',
   'QCalendarDay',
   'QCalendarMonth',
