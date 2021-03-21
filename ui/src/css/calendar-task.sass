@@ -131,7 +131,6 @@
     color: var(--calendar-color)
     background: var(--calendar-background)
     border-bottom: var(--calendar-border)
-    // box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2)
 
     &--task
       color: var(--calendar-color)
@@ -174,7 +173,35 @@
   .q-calendar-task
 
     &__head
-      border-bottom: var(--calendar-border-dark)
       color: var(--calendar-color-dark)
       background: var(--calendar-background-dark)
+      border-bottom: var(--calendar-border-dark)
 
+      &--task
+        color: var(--calendar-color-dark)
+        background: var(--calendar-background-dark)
+        border-right: var(--calendar-border-dark)
+
+      &--day
+        border-right: var(--calendar-border-dark)
+
+    &__task
+      border-bottom: var(--calendar-border-dark)
+
+      &--item
+        background: var(--calendar-background-dark)
+        border-right: var(--calendar-border-dark)
+
+      &--day
+        border-right: var(--calendar-border-dark)
+
+    &__footer
+      border-top: var(--calendar-border-dark)
+
+      &--task
+        background: var(--calendar-background-dark)
+        border-right: var(--calendar-border-dark)
+
+      &--day
+        background: var(--calendar-background-dark)
+        border-right: var(--calendar-border-dark)
