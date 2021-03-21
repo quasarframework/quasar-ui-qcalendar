@@ -34,7 +34,27 @@ export const useTaskProps = {
     type: Array,
     default: () => [ 0, 1, 2, 3, 4, 5, 6 ]
   },
-  view: {
+  dateType: {
+    type: String,
+    default: 'round',
+    validator: v => [ 'round', 'square' ].includes(v)
+  },
+  dateHeader: {
+    type: String,
+    default: 'stacked',
+    validator: v => [ 'stacked', 'inline', 'inverted' ].includes(v)
+  },
+  weekdayAlign: {
+    type: String,
+    default: 'center',
+    validator: v => [ 'left', 'center', 'right' ].includes(v)
+  },
+  dateAlign: {
+    type: String,
+    default: 'center',
+    validator: v => [ 'left', 'center', 'right' ].includes(v)
+  },
+  view: { // TODO: this needs rework
     type: String,
     validator: v => [ 'day', 'week', 'month' ].includes(v),
     default: 'month'
@@ -43,18 +63,6 @@ export const useTaskProps = {
     type: Number,
     default: 1,
     validator: v => validateNumber(v) && v > 0
-  },
-  cellWidth: {
-    type: Object,
-    default: {
-      day: '50px',
-      week: '50px',
-      month: '50px'
-    }
-  },
-  minLabelLength: {
-    type: [ Number, String ],
-    default: 2
   },
   bordered: Boolean,
   dark: Boolean,
@@ -66,6 +74,19 @@ export const useTaskProps = {
     default: () => []
   },
   noHeader: Boolean,
+  cellWidth: {
+    type: [ Number, String ],
+    default: 75
+  },
+  minLabelLength: {
+    type: [ Number, String ],
+    default: 2
+  },
+  labelBreakpoints: {
+    type: Array,
+    default: () => [ 75, 35 ],
+    validator: v => v.length === 2
+  },
   locale: {
     type: String,
     default: 'en-us'

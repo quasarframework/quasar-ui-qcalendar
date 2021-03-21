@@ -30,7 +30,7 @@ import {
 import useMouse, { getRawMouseEvents } from '../composables/useMouse.js'
 
 import useCalendar from '../composables/useCalendar.js'
-import useCommon, { useCommonProps } from '../composables/useCommon.js'
+import useCommon from '../composables/useCommon.js'
 import useTask, { useTaskProps } from '../composables/useTask.js'
 import useTimes, { useTimesProps } from '../composables/useTimes.js'
 import useRenderValues from '../composables/useRenderValues.js'
@@ -38,7 +38,6 @@ import useMove, { useMoveEmits } from '../composables/useMove.js'
 import useEmitListeners from '../composables/useEmitListeners.js'
 import useButton from '../composables/useButton.js'
 import useFocusHelper from '../composables/useFocusHelper.js'
-import useCellWidth, { useCellWidthProps } from '../composables/useCellWidth.js'
 import useCheckChange, { useCheckChangeEmits } from '../composables/useCheckChange.js'
 import useEvents from '../composables/useEvents.js'
 import useKeyboard, { useNavigationProps } from '../composables/useKeyboard.js'
@@ -60,10 +59,10 @@ export default defineComponent({
   emits: [
     'update:modelValue',
     ...useCheckChangeEmits,
-    ...useMoveEmits
-    // ...getRawMouseEvents('-date'),
+    ...useMoveEmits,
+    ...getRawMouseEvents('-date'),
     // ...getRawMouseEvents('-day'),
-    // ...getRawMouseEvents('-head-day')
+    ...getRawMouseEvents('-head-day')
   ],
 
   setup (props, { slots, emit, expose }) {
@@ -83,7 +82,7 @@ export default defineComponent({
       // weekRef = ref([]),
       // headerColumnRef = ref(null),
       size = reactive({ width: 0, height: 0 }),
-      // dragOverDayRef = ref(false),
+      dragOverHeadDayRef = ref(false),
       // keep track of last seen start and end dates
       lastStart = ref(null),
       lastEnd = ref(null)
@@ -115,12 +114,12 @@ export default defineComponent({
       weekdaySkips,
       parsedStart,
       // parsedEnd,
-      // dayFormatter,
-      weekdayFormatter
-      // ariaDateFormatter,
+      dayFormatter,
+      weekdayFormatter,
+      ariaDateFormatter,
       // methods
-      // dayStyleDefault,
-      // getRelativeClasses
+      dayStyleDefault,
+      getRelativeClasses
     } = useCommon(props, { startDate, endDate, times })
 
     const parsedValue = computed(() => {
@@ -216,8 +215,12 @@ export default defineComponent({
       return 0
     })
 
+    const isSticky = true
     const parsedCellWidth = computed(() => {
-      return props.cellWidth[ props.view ]
+      if (props.cellWidth !== undefined) {
+        return parseInt(props.cellWidth, 10)
+      }
+      return 150
     })
 
     // const computedWidth = computed(() => {
@@ -303,9 +306,9 @@ export default defineComponent({
       size.height = height
     }
 
-    // function __isActiveDate (day) {
-    //   return day.date === emittedValue.value
-    // }
+    function __isActiveDate (day) {
+      return day.date === emittedValue.value
+    }
 
     /**
      * Renders the given day with the associated task
@@ -378,7 +381,7 @@ export default defineComponent({
       return h('div', {
         class: {
           'q-calendar-task__task--item': true,
-          'q-calendar__sticky': true
+          'q-calendar__sticky': isSticky === true
         },
         style
       }, [
@@ -410,7 +413,7 @@ export default defineComponent({
       return h('div', {
         class: {
           'q-calendar-task__task--container': true,
-          'q-calendar__sticky': true
+          'q-calendar__sticky': isSticky === true
         },
       }, [
         __renderTasks()
@@ -434,7 +437,7 @@ export default defineComponent({
       return h('div', {
         class: {
           'q-calendar-task__footer--task': true,
-          'q-calendar__sticky': true
+          'q-calendar__sticky': isSticky === true
         },
         style
       }, [
@@ -485,7 +488,7 @@ export default defineComponent({
       return h('div', {
         class: {
           'q-calendar-task__footer': true,
-          'q-calendar__sticky': true,
+          'q-calendar__sticky': isSticky === true,
           'q-calendar__hoverable': props.hoverable === true,
           'q-calendar__focusable': isFocusable === true
         }
@@ -523,7 +526,7 @@ export default defineComponent({
       return h('div', {
         class: {
           'q-calendar-task__head--task': true,
-          'q-calendar__sticky': true
+          'q-calendar__sticky': isSticky === true
         },
         style
       }, [
@@ -532,36 +535,229 @@ export default defineComponent({
     }
 
     function __renderHeadWeekday (day) {
-      const weekdayLabel = minCharWidth(weekdayFormatter.value(day, true), props.minLabelLength)
-      return h('div', {}, weekdayLabel)
-    }
-
-    function __renderHeadDate (day) {
-      return h('div', {}, day.day)
-    }
-
-    function __renderHeadDay (day) {
-      const width = convertToUnit(parsedCellWidth.value)
-      const style = {
-        width,
-        minWidth: width,
-        maxWidth: width
-      }
+      const slot = slots[ 'head-weekday-label' ]
       const scope = {
         timestamp: day
       }
 
-      const weekdayClass = typeof props.weekdayClass === 'function' ? props.weekdayClass({ scope }) : {}
+      const data = {
+        class: {
+          'q-calendar-task__head--weekday': true,
+          [ 'q-calendar__' + props.weekdayAlign ]: true,
+          'q-calendar__ellipsis': true
+        }
+      }
 
-      return h('div', {
+      return h('div', data, (slot && slot({ scope })) || __renderHeadWeekdayLabel(day, props.shortWeekdayLabel))
+    }
+
+    function __renderHeadWeekdayLabel (day, shortWeekdayLabel) {
+      const weekdayLabel = weekdayFormatter.value(day, shortWeekdayLabel || (props.labelBreakpoints[ 0 ] > 0 && parsedCellWidth.value <= props.labelBreakpoints[ 0 ]))
+      return h('span', {
+        class: 'q-calendar__ellipsis'
+      }, props.labelBreakpoints[ 1 ] > 0 && parsedCellWidth.value <= props.labelBreakpoints[ 1 ] ? minCharWidth(weekdayLabel, props.minLabelLength) : weekdayLabel)
+    }
+
+    function __renderHeadDayDate (day) {
+      const data = {
+        class: {
+          'q-calendar-task__head--date': true,
+          [ 'q-calendar__' + props.dateAlign ]: true
+        }
+      }
+
+      return h('div', data, __renderHeadDayBtn(day))
+    }
+
+    function __renderHeadDayBtn (day) {
+      const activeDate = props.noActiveDate !== true && __isActiveDate(day)
+      const dayLabel = dayFormatter.value(day, false)
+      const headDayLabelSlot = slots[ 'head-day-label' ]
+      const headDayButtonSlot = slots[ 'head-day-button' ]
+      const scope = { dayLabel, timestamp: day, activeDate }
+      const ariaLabel = ariaDateFormatter.value(day)
+
+      const data = {
+        ariaLabel,
+        class: {
+          'q-calendar-task__head--day__label': true,
+          'q-calendar__button': true,
+          'q-calendar__button--round': props.dateType === 'round',
+          'q-calendar__button--bordered': day.current === true,
+          'q-calendar__focusable': true
+        },
+        disabled: day.disabled,
+        onKeydown: (e) => {
+          if (day.disabled !== true
+            && isKeyCode(e, [ 13, 32 ])) {
+            e.stopPropagation()
+            e.preventDefault()
+          }
+        },
+        onKeyup: (e) => {
+          // allow selection of date via Enter or Space keys
+          if (day.disabled !== true
+            && isKeyCode(e, [ 13, 32 ])) {
+            emittedValue.value = day.date
+            if (emitListeners.value.onClickDate !== undefined) {
+              // eslint-disable-next-line vue/require-explicit-emits
+              emit('click-date', { scope })
+            }
+          }
+        },
+        ...getDefaultMouseEventHandlers('-date', (event, eventName) => {
+          if (eventName === 'click-date' || eventName === 'contextmenu-date') {
+            emittedValue.value = day.date
+          }
+          return { scope, event }
+        })
+      }
+
+      return headDayButtonSlot
+        ? headDayButtonSlot({ scope })
+        : useButton(props, data, headDayLabelSlot ? headDayLabelSlot({ scope }) : dayLabel)
+    }
+
+    function __renderDateHeader (day) {
+      if (props.dateHeader === 'stacked') {
+        return [
+          props.noDefaultHeaderText !== true && __renderHeadWeekday(day),
+          props.noDefaultHeaderBtn !== true && __renderHeadDayDate(day)
+        ]
+      }
+      else if (props.dateHeader === 'inline') {
+        if (props.weekdayAlign === 'left' && props.dateAlign === 'right') {
+          return h('div', {
+            class: 'q-calendar__header--inline'
+          }, [
+            props.noDefaultHeaderText !== true && __renderHeadWeekday(day),
+            props.noDefaultHeaderBtn !== true && __renderHeadDayDate(day)
+          ])
+        }
+        else if (props.weekdayAlign === 'right' && props.dateAlign === 'left') {
+          return h('div', {
+            class: 'q-calendar__header--inline'
+          }, [
+            props.noDefaultHeaderText !== true && __renderHeadWeekday(day),
+            props.noDefaultHeaderBtn !== true && __renderHeadDayDate(day)
+          ])
+        }
+        else {
+          return h('div', {
+            class: 'q-calendar__header--inline'
+          }, [
+            props.noDefaultHeaderText !== true && __renderHeadWeekday(day),
+            props.noDefaultHeaderBtn !== true && __renderHeadDayDate(day)
+          ])
+        }
+      }
+      else if (props.dateHeader === 'inverted') {
+        if (props.weekdayAlign === 'left' && props.dateAlign === 'right') {
+          return h('div', {
+            class: 'q-calendar__header--inline'
+          }, [
+            props.noDefaultHeaderBtn !== true && __renderHeadDayDate(day),
+            props.noDefaultHeaderText !== true && __renderHeadWeekday(day)
+          ])
+        }
+        else if (props.weekdayAlign === 'right' && props.dateAlign === 'left') {
+          return h('div', {
+            class: 'q-calendar__header--inline'
+          }, [
+            props.noDefaultHeaderBtn !== true && __renderHeadDayDate(day),
+            props.noDefaultHeaderText !== true && __renderHeadWeekday(day)
+          ])
+        }
+        else {
+          return h('div', {
+            class: 'q-calendar__header--inline'
+          }, [
+            props.noDefaultHeaderBtn !== true && __renderHeadDayDate(day),
+            props.noDefaultHeaderText !== true && __renderHeadWeekday(day)
+          ])
+        }
+      }
+    }
+
+    function __renderHeadDay (day) {
+      const headDaySlot = slots[ 'head-day' ]
+      const headDateSlot = slots[ 'head-date' ]
+      const activeDate = props.noActiveDate !== true && __isActiveDate(day)
+
+      const scope = {
+        timestamp: day,
+        activeDate
+      }
+
+      const styler = props.weekdayStyle || dayStyleDefault
+      const weekdayClass = typeof props.weekdayClass === 'function' ? props.weekdayClass({ scope }) : {}
+      const isFocusable = props.focusable === true && props.focusType.includes('weekday')
+
+      const width = convertToUnit(parsedCellWidth.value)
+      const style = {
+        width,
+        minWidth: width,
+        maxWidth: width,
+        ...styler({ scope })
+      }
+
+      const data = {
+        key: day.date,
+        ref: (el) => { datesRef.value[ day.date ] = el },
+        tabindex: isFocusable === true ? 0 : -1,
         class: {
           'q-calendar-task__head--day': true,
-          ...weekdayClass
+          ...weekdayClass,
+          ...getRelativeClasses(day),
+          'q-active-date': activeDate,
+          'q-calendar__hoverable': props.hoverable === true,
+          'q-calendar__focusable': isFocusable === true
         },
-        style
-      }, [
-        __renderHeadDate(day),
-        __renderHeadWeekday(day)
+        style,
+        onDragenter: (e) => {
+          if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
+            props.dragEnterFunc(e, 'head-day', scope)
+              ? dragOverHeadDayRef.value = day.date
+              : dragOverHeadDayRef.value = ''
+          }
+        },
+        onDragover: (e) => {
+          if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
+            props.dragOverFunc(e, 'head-day', scope)
+              ? dragOverHeadDayRef.value = day.date
+              : dragOverHeadDayRef.value = ''
+          }
+        },
+        onDragleave: (e) => {
+          if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
+            props.dragLeaveFunc(e, 'head-day', scope)
+              ? dragOverHeadDayRef.value = day.date
+              : dragOverHeadDayRef.value = ''
+          }
+        },
+        onDrop: (e) => {
+          if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
+            props.dropFunc(e, 'head-day', scope)
+              ? dragOverHeadDayRef.value = day.date
+              : dragOverHeadDayRef.value = ''
+          }
+        },
+        onFocus: (e) => {
+          if (isFocusable === true) {
+            focusRef.value = day.date
+          }
+        },
+        ...getDefaultMouseEventHandlers('-head-day', event => {
+          return { scope, event }
+        })
+      }
+
+      return h('div', data, [
+        // head-day slot replaces everything below it
+        headDaySlot !== undefined && headDaySlot({ scope }),
+        headDaySlot === undefined && __renderDateHeader(day),
+        headDaySlot === undefined && headDateSlot && headDateSlot({ scope }),
+        useFocusHelper()
       ])
     }
 
@@ -586,7 +782,7 @@ export default defineComponent({
         roll: 'presentation',
         class: {
           'q-calendar-task__head': true,
-          'q-calendar__sticky': true
+          'q-calendar__sticky': isSticky === true
         },
         style: {
         }

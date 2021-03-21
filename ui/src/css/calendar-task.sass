@@ -27,9 +27,20 @@
       font-size: 1rem
 
     &--day
-      display: flex
-      flex-direction: column
-      align-items: center
+      position: relative
+      flex: 1 1 100%
+      flex-wrap: nowrap
+      overflow: hidden
+      width: 0
+      outline: 0
+
+  &__head--weekday,
+  &__head--date
+    display: flex
+    flex-wrap: nowrap
+    user-select: none
+    margin: 2px
+    flex: 1 0 0
 
   &__container
     position: relative
@@ -133,12 +144,30 @@
     border-bottom: var(--calendar-border)
 
     &--task
+      font-weight: var(--calendar-head-font-weight)
       color: var(--calendar-color)
       background: var(--calendar-background)
       border-right: var(--calendar-border)
 
     &--day
+      font-weight: var(--calendar-head-font-weight)
       border-right: var(--calendar-border)
+
+      &:last-child
+        border-right: none
+
+      &.q-active-date
+        .q-calendar__button
+          color: var(--calendar-active-date-color)
+          background: var(--calendar-active-date-background)
+
+      &.q-current-day
+        .q-calendar__button
+          border: var(--calendar-border-current)
+
+      &.q-disabled-day
+        color: var(--calendar-disabled-date-color)
+        background: var(--calendar-disabled-date-background) !important
 
   &__task
     border-bottom: var(--calendar-border)
@@ -184,6 +213,19 @@
 
       &--day
         border-right: var(--calendar-border-dark)
+
+        &.q-active-date
+          .q-calendar__button
+            color: var(--calendar-active-date-color-dark)
+            background: var(--calendar-active-date-background-dark)
+
+        &.q-current-day
+          .q-calendar__button
+            border: var(--calendar-border-current-dark)
+
+        &.q-disabled-day
+          color: var(--calendar-disabled-date-color-dark)
+          background: var(--calendar-disabled-date-background-dark) !important
 
     &__task
       border-bottom: var(--calendar-border-dark)
