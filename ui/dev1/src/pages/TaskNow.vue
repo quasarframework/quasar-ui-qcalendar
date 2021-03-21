@@ -1,5 +1,9 @@
 <template>
   <div class="subcontent">
+    <div class="line">
+      The current date has been set to tomorrow via the <code class="token">now</code> property.
+    </div>
+
     <navigation-bar
       @today="onToday"
       @prev="onPrev"
@@ -12,7 +16,7 @@
           ref="calendar"
           v-model="selectedDate"
           :tasks="parsedTasks"
-          no-active-date
+          :now="nowDate"
           :task-width="240"
           :min-label-length="2"
           :weekday-class="weekdayClass"
@@ -78,7 +82,9 @@
 import {
   today,
   isBetweenDates,
-  parsed
+  parsed,
+  addToDate,
+  parseTimestamp
 } from '@quasar/quasar-ui-qcalendar/Timestamp.js'
 import { QCalendarTask } from '@quasar/quasar-ui-qcalendar/QCalendarTask.js'
 import '@quasar/quasar-ui-qcalendar/QCalendarVariables.sass'
@@ -93,7 +99,7 @@ import Pending from '@carbon/icons-vue/es/pending/16'
 import Blocking from '@carbon/icons-vue/es/undefined/16'
 
 export default defineComponent({
-  name: 'TaskNoActiveDate',
+  name: 'TaskTimesheet',
   components: {
     NavigationBar,
     QCalendarTask,
@@ -104,6 +110,7 @@ export default defineComponent({
   data () {
     return {
       selectedDate: today(),
+      nowDate: addToDate(parseTimestamp(today()), { day: 1 }).date,
       startDate: today(),
       endDate: today(),
       tasks: [
