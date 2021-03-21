@@ -1,0 +1,13 @@
+{
+  "meta": {
+    "docsUrl": "https://quasarframework.github.io/quasar-ui-qcalendar/docs"
+  },
+  "props": {
+  },
+  "events": {
+  },
+  "methods": {
+  },
+  "slots": {
+  }
+}
