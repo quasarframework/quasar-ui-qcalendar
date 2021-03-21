@@ -230,29 +230,25 @@ export default defineComponent({
     //   return (100 / parsedColumnCount.value) + '%'
     // })
 
-    function __isCheckChange () {
-      if (checkChange() === true
-      && props.useNavigation === true
-      && datesRef.value
-      && focusRef.value) {
-        if (document && document.activeElement !== datesRef.value[ focusRef.value ]) {
-          let count = 0
-          const interval = setInterval(() => {
-            if (datesRef.value[ focusRef.value ]) {
-              datesRef.value[ focusRef.value ].focus()
-              if (++count === 10 || document.activeElement === datesRef.value[ focusRef.value ]) {
-                clearInterval(interval)
-              }
-            }
-            else {
-              clearInterval(interval)
-            }
-          }, 250)
+    // attempts to set focus on the focusRef date
+    // this function is called when the month changes,
+    // so retry until we get it (or count expires)
+    function tryFocus () {
+      let count = 0
+      const interval = setInterval(() => {
+        if (datesRef.value[ focusRef.value ]) {
+          datesRef.value[ focusRef.value ].focus()
+          if (++count === 20 || document.activeElement === datesRef.value[ focusRef.value ]) {
+            clearInterval(interval)
+          }
         }
-      }
+        else {
+          clearInterval(interval)
+        }
+      }, 250)
     }
 
-    watch([days], __isCheckChange, { deep: true, immediate: true })
+    watch([days], checkChange, { deep: true, immediate: true })
 
     watch(() => props.modelValue, (val, oldVal) => {
       if (emittedValue.value !== val) {
@@ -286,6 +282,11 @@ export default defineComponent({
     watch(focusValue, (val) => {
       if (datesRef.value[ focusRef.value ]) {
         datesRef.value[ focusRef.value ].focus()
+      }
+      else {
+        // if focusRef is not in the list of current dates of dateRef,
+        // then assume month is changing
+        tryFocus()
       }
     })
 

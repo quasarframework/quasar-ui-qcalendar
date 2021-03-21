@@ -108,7 +108,7 @@ export default defineComponent({
       selectedMonth = reactive([]),
       year = ref(new Date().getFullYear()),
       calendar = ref(null),
-      country = ref('en-ca'), // start with Canada
+      country = ref('CA'), // start with Canada
       // map the holiday contry codes to actual ISO 639-1 locale codes
       // so the calendar can show the correct language
       countryCodes = {
@@ -260,8 +260,6 @@ export default defineComponent({
         ZW: 'en' // 'Zimbabwe' English
       }
 
-    console.log(countryCodes)
-
     const locale = computed(() => {
       if (country.value) {
         return countryCodes[ country.value ]
@@ -297,7 +295,6 @@ export default defineComponent({
     })
 
     function getColor (item) {
-      console.log(item.type)
       switch (item.type) {
         case 'public':
           return 'blue'

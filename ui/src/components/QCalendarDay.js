@@ -88,6 +88,7 @@ export default defineComponent({
       headDayEventsParentRef = ref({}),
       headDayEventsChildRef = ref({}),
       // intervalsHeadRef = ref(null),
+      // intervalsRef = ref({}),
       direction = ref('next'),
       startDate = ref(today()),
       endDate = ref('0000-00-00'),
@@ -280,29 +281,25 @@ export default defineComponent({
       return (100 / parsedColumnCount.value) + '%'
     })
 
-    function __isCheckChange () {
-      if (checkChange() === true
-      && props.useNavigation === true
-      && datesRef.value
-      && focusRef.value) {
-        if (document && document.activeElement !== datesRef.value[ focusRef.value ]) {
-          let count = 0
-          const interval = setInterval(() => {
-            if (datesRef.value[ focusRef.value ]) {
-              datesRef.value[ focusRef.value ].focus()
-              if (++count === 10 || document.activeElement === datesRef.value[ focusRef.value ]) {
-                clearInterval(interval)
-              }
-            }
-            else {
-              clearInterval(interval)
-            }
-          }, 250)
+    // attempts to set focus on the focusRef date/time
+    // this function is called when the displayed day(s) changes,
+    // so retry until we get it (or count expires)
+    function tryFocus () {
+      let count = 0
+      const interval = setInterval(() => {
+        if (datesRef.value[ focusRef.value ]) {
+          datesRef.value[ focusRef.value ].focus()
+          if (++count === 20 || document.activeElement === datesRef.value[ focusRef.value ]) {
+            clearInterval(interval)
+          }
         }
-      }
+        else {
+          clearInterval(interval)
+        }
+      }, 250)
     }
 
-    watch([days], __isCheckChange, { deep: true, immediate: true })
+    watch([days], checkChange, { deep: true, immediate: true })
 
     watch(() => props.modelValue, (val, oldVal) => {
       if (emittedValue.value !== val) {
@@ -337,6 +334,11 @@ export default defineComponent({
       if (datesRef.value[ focusRef.value ]) {
         datesRef.value[ focusRef.value ].focus()
       }
+      else {
+        // if focusRef is not in the list of current dates of dateRef,
+        // then assume list of days is changing
+        tryFocus()
+      }
     })
 
     watch(() => props.maxDays, val => {
@@ -345,6 +347,8 @@ export default defineComponent({
 
     onBeforeUpdate(() => {
       datesRef.value = {}
+      headDayEventsParentRef.value = {}
+      headDayEventsChildRef.value = {}
       // intervalsRef.value = {}
     })
 
@@ -904,10 +908,12 @@ export default defineComponent({
 
       const intervalClass = typeof props.intervalClass === 'function' ? props.intervalClass({ scope }) : {}
       const ariaLabel = ariaDateTimeFormatter.value(interval)
-      const isFocusable = props.focusable === true && props.focusType.includes('day')
+      const isFocusable = props.focusable === true && props.focusType.includes('interval')
+      const dateTime = getDateTime(interval)
 
       const data = {
-        key: getDateTime(interval),
+        key: dateTime,
+        // ref: (el) => { intervalsRef.value[ dateTime ] = el },
         ariaLabel,
         tabindex: isFocusable === true ? 0 : -1,
         class: {
