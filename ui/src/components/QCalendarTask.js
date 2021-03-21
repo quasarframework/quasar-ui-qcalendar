@@ -18,7 +18,6 @@ import {
   getDayIdentifier,
   parsed,
   parseTimestamp,
-  Timestamp,
   today
 } from '../utils/Timestamp.js'
 
@@ -201,19 +200,19 @@ export default defineComponent({
       times
     })
 
-    const parsedColumnCount = computed(() => {
-      return days.value.length
-    })
+    // const parsedColumnCount = computed(() => {
+    //   return days.value.length
+    // })
 
-    const borderWidth = computed(() => {
-      if (rootRef.value) {
-        const calendarBorderWidth = getComputedStyle(rootRef.value).getPropertyValue('--calendar-border')
-        const parts = calendarBorderWidth.split(' ')
-        const part = parts.filter(part => part.indexOf('px') > -1)
-        return parseInt(part[ 0 ], 0)
-      }
-      return 0
-    })
+    // const borderWidth = computed(() => {
+    //   if (rootRef.value) {
+    //     const calendarBorderWidth = getComputedStyle(rootRef.value).getPropertyValue('--calendar-border')
+    //     const parts = calendarBorderWidth.split(' ')
+    //     const part = parts.filter(part => part.indexOf('px') > -1)
+    //     return parseInt(part[ 0 ], 0)
+    //   }
+    //   return 0
+    // })
 
     const isSticky = true
     const parsedCellWidth = computed(() => {
@@ -338,6 +337,7 @@ export default defineComponent({
         class: {
           'q-calendar-task__task--day': true,
           ...dayClass,
+          ...getRelativeClasses(day),
           'q-calendar__hoverable': props.hoverable === true,
           'q-calendar__focusable': isFocusable === true
         },
@@ -414,7 +414,7 @@ export default defineComponent({
         class: {
           'q-calendar-task__task--container': true,
           'q-calendar__sticky': isSticky === true
-        },
+        }
       }, [
         __renderTasks()
       ])
@@ -465,6 +465,7 @@ export default defineComponent({
         class: {
           'q-calendar-task__footer--day': true,
           ...footerDayClass,
+          ...getRelativeClasses(day),
           'q-calendar__hoverable': props.hoverable === true,
           'q-calendar__focusable': isFocusable === true
         },
