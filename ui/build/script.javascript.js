@@ -43,11 +43,11 @@ function generateBuilds() {
     builds.push({
       rollup: {
         input: {
-          input: pathResolve(`entry/${entry}.common.js`)
+          input: pathResolve(`entry/${entry}.esm.js`)
         },
         output: {
-          file: pathResolve(`../dist/${entry}.common.js`),
-          format: 'cjs',
+          file: pathResolve(`../dist/${entry}.esm.js`),
+          format: 'es',
           exports: 'auto'
         }
       },
