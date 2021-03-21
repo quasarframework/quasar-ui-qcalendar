@@ -862,7 +862,8 @@ export default defineComponent({
         h('div', {
           style: {
             display: 'flex',
-            flexDirection: 'row'
+            flexDirection: 'row',
+            height: '100%'
           }
         }, [
           ...__renderDays()
