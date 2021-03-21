@@ -18,6 +18,7 @@
           ref="calendar"
           v-model="selectedDate"
           use-navigation
+          hoverable
           focusable
           :focus-type="['interval', 'weekday']"
           animated

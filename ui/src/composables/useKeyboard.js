@@ -98,6 +98,24 @@ export default function (props, {
     return false
   }
 
+  // attempts to set focus on the focusRef date
+  // this function is called when the dates change,
+  // so retry until we get it (or count expires)
+  function tryFocus () {
+    let count = 0
+    const interval = setInterval(() => {
+      if (datesRef.value[ focusRef.value ]) {
+        datesRef.value[ focusRef.value ].focus()
+        if (++count === 20 || document.activeElement === datesRef.value[ focusRef.value ]) {
+          clearInterval(interval)
+        }
+      }
+      else {
+        clearInterval(interval)
+      }
+    }, 250)
+  }
+
   function onKeyDown (e) {
     if (canNavigate(e) && isKeyCode(e, [ 33, 34, 35, 36, 37, 38, 39, 40 ])) {
       e.stopPropagation()
@@ -334,6 +352,7 @@ export default function (props, {
 
   return {
     startNavigation,
-    endNavigation
+    endNavigation,
+    tryFocus
   }
 }

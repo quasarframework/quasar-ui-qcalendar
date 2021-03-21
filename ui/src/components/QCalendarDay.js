@@ -231,7 +231,7 @@ export default defineComponent({
       isKeyCode
     } = useEvents()
 
-    useKeyboard(props, {
+    const { tryFocus } = useKeyboard(props, {
       rootRef,
       focusRef,
       focusValue,
@@ -280,24 +280,6 @@ export default defineComponent({
       }
       return (100 / parsedColumnCount.value) + '%'
     })
-
-    // attempts to set focus on the focusRef date/time
-    // this function is called when the displayed day(s) changes,
-    // so retry until we get it (or count expires)
-    function tryFocus () {
-      let count = 0
-      const interval = setInterval(() => {
-        if (datesRef.value[ focusRef.value ]) {
-          datesRef.value[ focusRef.value ].focus()
-          if (++count === 20 || document.activeElement === datesRef.value[ focusRef.value ]) {
-            clearInterval(interval)
-          }
-        }
-        else {
-          clearInterval(interval)
-        }
-      }, 250)
-    }
 
     watch([days], checkChange, { deep: true, immediate: true })
 
