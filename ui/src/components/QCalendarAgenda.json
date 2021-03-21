@@ -1,0 +1,395 @@
+{
+  "meta": {
+    "docsUrl": "https://quasarframework.github.io/quasar-ui-qcalendar/docs"
+  },
+  "props": {
+    "model-value": {
+      "type": "String",
+      "category": "model",
+      "desc": "v-model; When set as `YYYY-MM-DD`, the calendar will display the current view on this date. If empty, then it will be changed to the current date which will be emitted",
+      "required": true,
+      "default": "today()",
+      "examples": [
+        "v-model=\"2019-04-01\"",
+        "v-model=\"2020-08-08\""
+      ]
+    },
+    "weekdays": {
+      "type": "Array",
+      "tsType": "NumberArray",
+      "category": "model",
+      "desc": "This is the days of the week and in which order they are displayed. If you want Monday as the first day of the week, you would use [1,2,3,4,5,6,0]. If you want a 5-day work week you would use [1,2,3,4,5]",
+      "default": "[0,1,2,3,4,5,6]",
+      "examples": [
+        ":weekdays=\"[1,2,3,4,5,6,0]\"",
+        ":weekdays=\"[1,2,3,4,5]\""
+      ]
+    },
+    "date-type": {
+      "addedIn": "v4.0.0",
+      "type": "String",
+      "category": ["behavior", "style"],
+      "desc": "Shows the current date button as either a circle or a square",
+      "values": ["round", "square"],
+      "default": "round",
+      "examples": [
+        "date-type=\"square\""
+      ]
+    },
+    "weekday-align": {
+      "addedIn": "v4.0.0",
+      "type": "String",
+      "category": ["behavior", "style"],
+      "desc": "Determines the weekday (ie: Sunday, Monday, etc) alignment",
+      "values": ["left", "center", "right"],
+      "default": "center",
+      "examples": [
+        "weekday-align=\"left\""
+      ]
+    },
+    "date-align": {
+      "addedIn": "v4.0.0",
+      "type": "String",
+      "category": ["behavior", "style"],
+      "desc": "Determines the date (ie: 2, 3, etc) alignment",
+      "values": ["left", "center", "right"],
+      "default": "center",
+      "examples": [
+        "date-align=\"left\""
+      ]
+    },
+    "date-header": {
+      "addedIn": "v4.0.0",
+      "type": "String",
+      "category": ["behavior", "style"],
+      "desc": "Determines how the date header will be displayed",
+      "values": ["stacked", "inline", "inverted"],
+      "default": "stacked",
+      "examples": [
+        "date-header=\"inline\""
+      ]
+    },
+    "bordered": {
+      "type": "Boolean",
+      "category": "style",
+      "desc": "Places a border around the calendar"
+    },
+    "dark": {
+      "type": "Boolean",
+      "category": "style",
+      "desc": "Places the calendar into dark mode"
+    },
+    "no-active-date": {
+      "type": "Boolean",
+      "category": "behavior",
+      "desc": "This controls whether the `q-active-date` css class is set when a user clicks on a date label (button)"
+    },
+    "short-weekday-label": {
+      "type": "Boolean",
+      "category": "style",
+      "desc": "Displays the weekday label in short format. For instance, 'Monday' would become 'Mon'"
+    },
+    "no-default-header-text": {
+      "type": "Boolean",
+      "category": "content",
+      "desc": "Do not display the weekday text in the header"
+    },
+    "no-default-header-btn": {
+      "type": "Boolean",
+      "category": "content",
+      "desc": "Do not display the date button in the header"
+    },
+    "min-label-length": {
+      "addedIn": "v4.0.0",
+      "type": ["Number", "String"],
+      "category": "behavior",
+      "desc": "The minimal number of weekday characters when truncation occurs",
+      "default": 1,
+      "examples": [
+        ":min-label-length=\"2\""
+      ]
+    },
+    "label-breakpoints": {
+      "addedIn": "v4.0.0",
+      "type": "Array",
+      "tsType": "NumberArray",
+      "category": "behavior",
+      "desc": "The breakpoint widths where weekday truncation occurs (needs 2 values)",
+      "default": [ 75, 35 ],
+      "examples": [
+        ":label-breakpoints=\"[68, 32]\""
+      ]
+    },
+    "locale": {
+      "type": "String",
+      "category": "model",
+      "desc": "Used to change the locale of the calendar. Any acceptable locale can be used that is recognized by the browser. If the locale fails, then 'en-us' is the fallback",
+      "default": "en-us",
+      "examples": [
+        "locale=\"de-de\"",
+        "locale=\"de\"",
+        "locale=\"fr\"",
+        "locale=\"pl\""
+      ]
+    },
+    "animated": {
+      "type": "Boolean",
+      "category": "behavior",
+      "desc": "Turns on animated transitions"
+    },
+    "transition-prev": {
+      "type": "String",
+      "category": "behavior",
+      "desc": "When animated property is true, transition to use for previous calendar display",
+      "default": "slide-right",
+      "examples": [
+        "transition-prev=\"flip-right\""
+      ]
+    },
+    "transition-next": {
+      "type": "String",
+      "category": "behavior",
+      "desc": "When animated property is true, transition to use for next calendar display",
+      "default": "slide-left",
+      "examples": [
+        "transition-next=\"flip-left\""
+      ]
+    },
+    "drag-enter-func": {
+      "addedIn": "v4.0.0",
+      "type": "Function",
+      "category": "behavior",
+      "desc": "The function to handle dragenter events",
+      "params": {
+        "event": {
+          "type": "Object",
+          "desc": "The event associated with the dragenter",
+          "__exemption": [ "examples" ]
+        },
+        "type": {
+          "type": "String",
+          "desc": "This can be 'head-day', 'head-column' or 'column'",
+          "examples": [
+            "head-day",
+            "head-column",
+            "column"
+          ]
+        },
+        "data": {
+          "scope": {
+            "column": {
+              "type": "Object",
+              "tsType": "ColumnObject",
+              "desc": "The column object used to build the column",
+              "__exemption": [ "examples" ]
+            },
+            "index": {
+              "type": "Number",
+              "desc": "The column index",
+              "__exemption": [ "examples" ]
+            },
+            "days": {
+              "type": "Array",
+              "tsType": "TimestampArray",
+              "applicable": ["head-column", "column"],
+              "desc": "An array of Timestamp objects representing the days associated with the column(s)",
+              "__exemption": [ "examples" ]
+            },
+            "timestamp": {
+              "type": "Object",
+              "tsType": "Timestamp",
+              "applicable": ["head-day"],
+              "desc": "For 'head-day'. The Timestamp object associated with the date",
+              "__exemption": [ "examples" ]
+            }
+          }
+        }
+      },
+      "returns": {
+        "type": "Boolean",
+        "desc": "If the event is applicable"
+      },
+      "examples": [
+        ":drag-enter-func=\"onDragEnterFunc\""
+      ]
+    },
+    "drag-over-func": {
+      "type": "Function",
+      "category": "behavior",
+      "desc": "The function to handle dragover events. You must call in your `e.preventDefault()` for Drag and Drop to work properly",
+      "params": {
+        "data": {
+          "event": {
+            "type": "Object",
+            "desc": "The event associated with the dragover",
+            "__exemption": [ "examples" ]
+          },
+          "type": {
+            "type": "String",
+            "desc": "This can be 'head-day', 'head-column' or 'column'",
+            "examples": [
+              "head-day",
+              "head-column",
+              "column"
+            ]
+          },
+          "scope": {
+            "column": {
+              "type": "Object",
+              "tsType": "ColumnObject",
+              "desc": "The column object used to build the column",
+              "__exemption": [ "examples" ]
+            },
+            "index": {
+              "type": "Number",
+              "desc": "The column index",
+              "__exemption": [ "examples" ]
+            },
+            "days": {
+              "type": "Array",
+              "tsType": "TimestampArray",
+              "applicable": ["head-column", "column"],
+              "desc": "An array of Timestamp objects representing the days associated with the column(s)",
+              "__exemption": [ "examples" ]
+            },
+            "timestamp": {
+              "type": "Object",
+              "tsType": "Timestamp",
+              "applicable": ["head-day"],
+              "desc": "For 'head-day'. The Timestamp object associated with the date",
+              "__exemption": [ "examples" ]
+            }
+          }
+        }
+      },
+      "returns": {
+        "type": "Boolean",
+        "desc": "If the event is applicable"
+      },
+      "examples": [
+        ":drag-over-func=\"onDragOverFunc\""
+      ]
+    },
+    "drag-leave-func": {
+      "addedIn": "v4.0.0",
+      "type": "Function",
+      "category": "behavior",
+      "desc": "The function to handle dragleave events",
+      "params": {
+        "event": {
+          "type": "Object",
+          "desc": "The event associated with the dragleave",
+          "__exemption": [ "examples" ]
+        },
+        "type": {
+          "type": "String",
+          "desc": "This can be 'head-day', 'head-column' or 'column'",
+          "examples": [
+            "head-day",
+            "head-column",
+            "column"
+          ]
+        },
+        "data": {
+          "scope": {
+            "column": {
+              "type": "Object",
+              "tsType": "ColumnObject",
+              "desc": "The column object used to build the column",
+              "__exemption": [ "examples" ]
+            },
+            "index": {
+              "type": "Number",
+              "desc": "The column index",
+              "__exemption": [ "examples" ]
+            },
+            "days": {
+              "type": "Array",
+              "tsType": "TimestampArray",
+              "applicable": ["head-column", "column"],
+              "desc": "An array of Timestamp objects representing the days associated with the column(s)",
+              "__exemption": [ "examples" ]
+            },
+            "timestamp": {
+              "type": "Object",
+              "tsType": "Timestamp",
+              "applicable": ["head-day"],
+              "desc": "For 'head-day'. The Timestamp object associated with the date",
+              "__exemption": [ "examples" ]
+            }
+          }
+        }
+      },
+      "returns": {
+        "type": "Boolean",
+        "desc": "If the event is applicable"
+      },
+      "examples": [
+        ":drag-leave-func=\"onDragLeaveFunc\""
+      ]
+    },
+    "drop-func": {
+      "type": "Function",
+      "category": "behavior",
+      "desc": "The function to handle drop events",
+      "params": {
+        "event": {
+          "type": "Object",
+          "desc": "The event associated with the drop",
+          "__exemption": [ "examples" ]
+        },
+        "type": {
+          "type": "String",
+          "desc": "This can be 'head-day', 'head-column' or 'column'",
+          "examples": [
+            "head-day",
+            "head-column",
+            "column"
+          ]
+        },
+        "data": {
+          "scope": {
+            "column": {
+              "type": "Object",
+              "tsType": "ColumnObject",
+              "desc": "The column object used to build the column",
+              "__exemption": [ "examples" ]
+            },
+            "index": {
+              "type": "Number",
+              "desc": "The column index",
+              "__exemption": [ "examples" ]
+            },
+            "days": {
+              "type": "Array",
+              "tsType": "TimestampArray",
+              "applicable": ["head-column", "column"],
+              "desc": "An array of Timestamp objects representing the days associated with the column(s)",
+              "__exemption": [ "examples" ]
+            },
+            "timestamp": {
+              "type": "Object",
+              "tsType": "Timestamp",
+              "applicable": ["head-day"],
+              "desc": "For 'head-day'. The Timestamp object associated with the date",
+              "__exemption": [ "examples" ]
+            }
+          }
+        }
+      },
+      "returns": {
+        "type": "Boolean",
+        "desc": "If the event is applicable"
+      },
+      "examples": [
+        ":drop-func=\"onDropFunc\""
+      ]
+    }
+  },
+  "events": {
+  },
+  "methods": {
+  },
+  "slots": {
+  }
+}
