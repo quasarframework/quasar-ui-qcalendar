@@ -217,6 +217,7 @@ export default defineComponent({
       rootRef,
       focusRef,
       focusValue,
+      datesRef,
       days,
       parsedView,
       parsedValue,

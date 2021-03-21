@@ -24,6 +24,7 @@ export default function (props, {
   rootRef,
   focusRef,
   focusValue,
+  datesRef,
   days,
   parsedView,
   parsedValue,
