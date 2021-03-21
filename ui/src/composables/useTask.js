@@ -66,6 +66,7 @@ export const useTaskProps = {
   },
   bordered: Boolean,
   dark: Boolean,
+  noActiveDate: Boolean,
   disabledDays: Array,
   disabledBefore: String,
   disabledAfter: String,
