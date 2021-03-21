@@ -565,7 +565,7 @@ export default defineComponent({
       }
 
       return h('div', data, [
-        /// head-day slot replaces everything below it
+        // head-day slot replaces everything below it
         headDaySlot !== undefined && headDaySlot({ scope }),
         headDaySlot === undefined && __renderColumnHeaderBefore(day, columnIndex),
         headDaySlot === undefined && __renderDateHeader(day),
