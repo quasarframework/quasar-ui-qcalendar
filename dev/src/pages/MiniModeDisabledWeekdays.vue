@@ -10,7 +10,7 @@
 
     <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
       <div style="display: flex; max-width: 280px; width: 100%;">
-        <QCalendarMonth
+        <q-calendar-month
           ref="calendar"
           v-model="selectedDate"
           mini-mode

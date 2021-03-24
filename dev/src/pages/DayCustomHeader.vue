@@ -73,7 +73,7 @@
             />
           </button>
         </div>
-        <QCalendarDay
+        <q-calendar-day
           ref="calendar"
           v-model="selectedDate"
           bordered

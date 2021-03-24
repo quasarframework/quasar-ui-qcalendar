@@ -28,7 +28,7 @@
       </div>
 
       <div style="display: flex; justify-content: center; max-width: 800px; width: 100%;">
-        <QCalendarMonth
+        <q-calendar-month
           ref="calendar"
           v-model="selectedDate"
           :weekdays="[1,2,3,4,5]"
@@ -82,7 +82,7 @@
               </template>
             </div>
           </template>
-        </QCalendarMonth>
+        </q-calendar-month>
       </div>
     </div>
   </div>

@@ -8,7 +8,7 @@
 
     <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
       <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
-        <QCalendarMonth
+        <q-calendar-month
           ref="calendar"
           v-model="selectedDate"
           no-outside-days

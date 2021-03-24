@@ -27,7 +27,7 @@
         </ul>
       </div>
       <div style="display: flex; justify-content: center; max-width: 800px; width: 100%; height: 400px;">
-        <QCalendarScheduler
+        <q-calendar-scheduler
           ref="calendar"
           v-model="selectedDate"
           v-model:modelResources="resources"
@@ -88,7 +88,7 @@
               </template>
             </div>
           </template>
-        </QCalendarScheduler>
+        </q-calendar-scheduler>
       </div>
     </div>
   </div>

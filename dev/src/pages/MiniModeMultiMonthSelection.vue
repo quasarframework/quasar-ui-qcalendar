@@ -27,7 +27,7 @@
 
     <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
       <div style="display: flex; max-width: 560px; width: 100%;">
-        <QCalendarMonth
+        <q-calendar-month
           ref="calendar1"
           v-model="selectedDate1"
           mini-mode
@@ -47,7 +47,7 @@
           @click-head-workweek="onClickHeadWorkweek"
           @click-head-day="onClickHeadDay"
         />
-        <QCalendarMonth
+        <q-calendar-month
           ref="calendar2"
           v-model="selectedDate2"
           mini-mode

@@ -28,7 +28,7 @@
 
     <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
       <div style="display: flex; max-width: 800px; width: 100%; height: 220px;">
-        <QCalendarTask
+        <q-calendar-task
           ref="calendar"
           v-model="selectedDate"
           :tasks="parsedTasks"
@@ -88,7 +88,7 @@
           <template #footer-day="{ scope }">
             <div class="logged-time">{{ getLoggedSummary(scope.timestamp.date, scope.tasks) }}</div>
           </template>
-        </QCalendarTask>
+        </q-calendar-task>
       </div>
     </div>
   </div>

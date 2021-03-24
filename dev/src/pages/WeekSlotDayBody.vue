@@ -8,7 +8,7 @@
 
     <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
       <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
-        <QCalendarDay
+        <q-calendar-day
           ref="calendar"
           v-model="selectedDate"
           view="week"
@@ -83,7 +83,7 @@
               </div>
             </template>
           </template>
-        </QCalendarDay>
+        </q-calendar-day>
       </div>
     </div>
   </div>
