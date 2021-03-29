@@ -6,7 +6,7 @@ QCalendar
 
 ## Everything you need for a complete Calendar solution.
 
-QCalendar is a [Quasar](https://quasar.dev) component. It is a powerful calendar that plugs right into your Quasar application and allows for viewing of **day** (1-6 days), **week**, **monthly**, **scheduler** and **agenda** views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.
+QCalendar is a powerful calendar that allows for viewing of **day** (1-6 days), **week**, **monthly**, **scheduler**, **agenda** and **task** views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.
 
 ---
 
