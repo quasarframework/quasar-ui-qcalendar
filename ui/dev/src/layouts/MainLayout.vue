@@ -58,15 +58,42 @@
             style="display: flex; flex-direction: column; width: 100%;"
             :class="childClasses(parent)"
           >
-            <div
+            <template
               v-for="child in parent.children"
               :key="child.name"
-              :tabindex="parent.expanded === true ? 0 : -1"
-              class="list-item child__item ellipsis"
-              @click="onChildClick(child.path)"
             >
-              {{ child.name }}
-            </div>
+              <a
+                v-if="child.link !== undefined"
+                :tabindex="parent.expanded === true ? 0 : -1"
+                class="list-item child__item ellipsis"
+                style="display: flex; align-items: center;"
+                :href="child.link"
+                target="_blank"
+              >
+                {{ child.name }}
+                <svg
+                  focusable="false"
+                  preserveAspectRatio="xMidYMid meet"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  class="parent parent__collapsed"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 32 32"
+                  aria-hidden="true"
+                >
+                  <path :d="biLink"></path>
+                </svg>
+              </a>
+              <div
+                v-else
+                :tabindex="parent.expanded === true ? 0 : -1"
+                class="list-item child__item ellipsis"
+                @click="onChildClick(child.path)"
+              >
+                {{ child.name }}
+              </div>
+            </template>
           </div>
         </template>
       </div>
@@ -184,6 +211,7 @@ import menuItems from './menu.js'
 import { useMarkdownStore } from 'assets/markdown-store.js'
 
 import CaretDown from '@carbon/icons-vue/es/caret--down/16'
+import { biLink } from '@quasar/extras/bootstrap-icons'
 
 export default defineComponent({
   name: 'MainLayout',
@@ -252,9 +280,9 @@ export default defineComponent({
 
     function onToggleMenuItem (item) {
       let doExpand = true
-      if (item.expanded === true) doExpand = false
+      if (item !== undefined && item.expanded === true) doExpand = false
       menu.forEach(itm => { itm.expanded = false })
-      if (doExpand === true) item.expanded = true
+      if (item !== undefined && doExpand === true) item.expanded = true
     }
 
     function onChildClick (path) {
@@ -262,6 +290,7 @@ export default defineComponent({
     }
 
     function onExampleClick (path) {
+      onToggleMenuItem() // close accordian menu
       $router.push('/examples/' + path)
     }
 
@@ -365,7 +394,8 @@ export default defineComponent({
         rightDrawerOpen.value = !rightDrawerOpen.value
       },
       onScroll,
-      scrollTo
+      scrollTo,
+      biLink
     }
   }
 })
@@ -439,8 +469,8 @@ export default defineComponent({
   display: flex
   flex-direction: column
   align-items: flex-start
-  will-change: max-height
-  transition: max-height 0.5s cubic-bezier(0.215, 0.61, 0.355, 1), border 0.5s cubic-bezier(0.215, 0.61, 0.355, 1)
+  will-change: max-height, border
+  transition: max-height 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), border 0.2s cubic-bezier(0.215, 0.61, 0.355, 1)
 
   &__expanded
     // opacity: 1
@@ -450,7 +480,6 @@ export default defineComponent({
     // opacity: 0
     border: none !important
     max-height: 0 !important
-    // transition: max-height 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), border 0.5s cubic-bezier(0.215, 0.61, 0.355, 1)
 
   &__item
     display: flex
@@ -460,17 +489,18 @@ export default defineComponent({
     padding: 2px 15px
     width: 100%
     outline: 0
+    border-top-left-radius: 5px
+    border-bottom-left-radius: 5px
+    text-decoration: none
+    color: inherit
+    border: 1px solid rgba(0,200,200,.0)
 
     &:hover,
     &:active
       background: rgba(0,200,200,.30)
-      border-top-left-radius: 5px
-      border-bottom-left-radius: 5px
 
     &:focus,
     &.active
       background: rgba(0,200,200,.40)
       border: 1px solid rgba(0,140,200,.8)
-      border-top-left-radius: 5px
-      border-bottom-left-radius: 5px
 </style>

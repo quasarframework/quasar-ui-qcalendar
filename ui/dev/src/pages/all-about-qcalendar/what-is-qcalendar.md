@@ -1,7 +1,7 @@
 ---
 title: What is QCalendar
 desc: Everything you need for a complete Calendar solution
-keys: QCalendar
+keys: All about QCalendar
 related:
   - /all-about-qcalendar/installation--types
   - /all-about-qcalendar/anatomy--of--a--calendar
@@ -10,6 +10,12 @@ related:
 # What is QCalendar
 
 ## Everything you need for a complete Calendar solution
+
+QCalendar allows for viewing of **day** (1-6 days), **week**, **monthly**, **scheduler**, **agenda**, **resource** and **task** views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.
+
+QCalendar is a less-opinionated calendar component, as it does not keep track of things like events and reminders. This is in the hands of the developer, but QCalendar makes it easy via accessible events, slots and methods (see examples how to accomplish these endeavors).
+
+The guiding philosophy has been to empower the developer and allow them to do what needs to be done without being overly opinionated. 
 
 QCalendar is actually an accumulation of several other dedicated components:
 
@@ -20,11 +26,6 @@ QCalendar is actually an accumulation of several other dedicated components:
 5. QCalendarScheduler
 6. QCalendarTask
 
-QCalendar allows for viewing of **day** (1-6 days), **week**, **monthly**, **scheduler**, **agenda**, **resource** and **task** views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.
-
-QCalendar is a less-opinionated calendar component, as it does not keep track of things like events and reminders. This is in the hands of the developer, but QCalendar makes it easy via accessible events, slots and methods (see examples how to accomplish these endeavors).
-
-The guiding philosophy has been to empower the developer and allow them to do what needs to be done without being overly opinionated. 
 
 # Features
 

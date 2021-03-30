@@ -1,6 +1,6 @@
 <template>
   <div class="subcontent">
-    <div class="line">The example below uses the properties <span class="token">disable-before</span> and <span class="token">disable-after</span> to disable all days except the current month.</div>
+    <div class="line">The example below uses the properties <span class="example-token">disable-before</span> and <span class="example-token">disable-after</span> to disable all days except the current month.</div>
 
     <navigation-bar
       @today="onToday"

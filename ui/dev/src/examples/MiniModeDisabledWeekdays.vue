@@ -1,6 +1,6 @@
 <template>
   <div class="subcontent">
-    <div class="line">This example uses the <span class="token">disabled-weekdays</span> property to disable the weekends.</div>
+    <div class="line">This example uses the <span class="example-token">disabled-weekdays</span> property to disable the weekends.</div>
 
     <navigation-bar
       @today="onToday"

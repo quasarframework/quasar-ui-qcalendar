@@ -1,7 +1,7 @@
 <template>
   <div class="subcontent">
     <div class="line">
-      The current date has been set to tomorrow via the <code class="token">now</code> property.
+      The current date has been set to tomorrow via the <code class="example-token">now</code> property.
     </div>
 
     <navigation-bar

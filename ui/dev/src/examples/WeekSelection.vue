@@ -1,7 +1,7 @@
 <template>
   <div class="subcontent">
-    <div class="line">The example below uses the <code class="token">selected-start-end-dates</code> property in conjunction with mouse events to select iterval ranges.</div>
-    <div class="line">Try toggling the <code class="token">Mobile selection</code> to see how selection can be changed.</div>
+    <div class="line">The example below uses the <code class="example-token">selected-start-end-dates</code> property in conjunction with mouse events to select iterval ranges.</div>
+    <div class="line">Try toggling the <code class="example-token">Mobile selection</code> to see how selection can be changed.</div>
 
     <div style="display: flex; justify-content: center; align-items: center;">
       <input

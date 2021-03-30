@@ -1,6 +1,6 @@
 <template>
   <div class="subcontent">
-    <div class="line">This example tests the <span class="token">mini-mode="auto"</span> with <span class="token">breakpoint="sm"</span>.<br>You will have to open your dev tools and change the width of the web page to see this example in action.</div>
+    <div class="line">This example tests the <span class="example-token">mini-mode="auto"</span> with <span class="example-token">breakpoint="sm"</span>.<br>You will have to open your dev tools and change the width of the web page to see this example in action.</div>
 
     <navigation-bar
       @today="onToday"

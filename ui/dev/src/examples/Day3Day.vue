@@ -3,7 +3,7 @@
     <div
       class="line"
     >
-      With the <code class="token">QCalendarDay</code> using the <code class="token">day</code> view, you can specifiy any number of days you want visible with the <code class="token">max-days</code> property.<br>
+      With the <code class="example-token">QCalendarDay</code> using the <code class="example-token">day</code> view, you can specifiy any number of days you want visible with the <code class="example-token">max-days</code> property.<br>
       However, the first day displayed will always be today's date.
     </div>
 

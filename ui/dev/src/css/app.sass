@@ -4,13 +4,18 @@
 
 \:root
   // scrollbars
-  --markdown-scrollbar-width-height                  : 10px
-  --markdown-scrollbar-track                         : #eeeeee
-  --markdown-scrollbar-thumb                         : #888888
-  --markdown-scrollbar-thumb-hover                   : #555555
-  --markdown-scrollbar-track-dark                    : #eeeeee
-  --markdown-scrollbar-thumb-dark                    : #888888
-  --markdown-scrollbar-thumb-hover-dark              : #555555
+  --markdown-scrollbar-width-height        : 10px
+  --markdown-scrollbar-track               : #eeeeee
+  --markdown-scrollbar-thumb               : #888888
+  --markdown-scrollbar-thumb-hover         : #555555
+  --markdown-scrollbar-track-dark          : #eeeeee
+  --markdown-scrollbar-thumb-dark          : #888888
+  --markdown-scrollbar-thumb-hover-dark    : #555555
+
+  --background-color                       : rgb(33,118,210)
+  --text-color                             : rgb(255,255,255)
+  --background-color-hover                 : rgb(204,231,255)
+
 
 ul
   padding-inline-start: 0
@@ -47,28 +52,20 @@ ul
   margin: 5px
   padding: 4px 15px
   border-radius: 4px
-  border: 1px solid rgba(0,255,255,.50)
-  background: rgba(0,200,200,.20)
-  color: rgba(0,140,200,.8)
+  border: 1px solid var(--background-color)
+  background: var(--background-color)
+  color: var(--text-color)
   outline: 0
   font-size: .8em
   transition: color 0.2s, background 0.2s, border 0.2s
   cursor: pointer
   text-decoration: none
 
+  &:focus,
   &:hover,
   &:active
-    background: rgba(0,200,200,.30)
-
-  &:focus,
-  &.active
-    background: rgba(0,200,200,.40)
-    border: 1px solid rgba(0,140,200,.8)
-
-// .button > div
-//   color: rgba(0,140,200,.5)
-//   &:hover
-//     color: rgba(0,140,200,.8)
+    background: var(--background-color-hover)
+    color: var(--background-color)
 
 .button > a
   color: inherit
@@ -109,7 +106,7 @@ kbd
 .icon-link
   text-decoration: none
   outline: 0
-  color: rgba(0,140,200,.8)
+  color: var(--text-color)
 
 .select, input[type="radio"]
   display: flex
@@ -119,9 +116,9 @@ kbd
   margin: 5px
   padding: 4px 15px
   border-radius: 4px
-  border: 1px solid rgba(0,255,255,.50)
-  background: rgba(0,200,200,.20)
-  color: rgba(0,140,200,.8)
+  border: 1px solid var(--background-color)
+  background: var(--background-color)
+  color: var(--text-color)
   outline: 0
   font-size: 0.8em
   cursor: pointer
@@ -130,11 +127,8 @@ kbd
 
   &:hover,
   &:active
-    background: inherit
-
   &:focus
-    background: inherit
-    border: 1px solid rgba(0,140,200,.8)
+    background: var(--background-color-hover)
 
 .button > .select
   background: transparent
@@ -160,7 +154,7 @@ kbd
   margin-bottom: 4px
   text-align: center
 
-.token
+.example-token
   white-space: nowrap
   background: #fafafa
   color: #212121
@@ -170,14 +164,13 @@ kbd
   font-family: monospace
 
 .toc .q-item
-  // border: 1px solid rgba(0,255,255,.50)
-  // background: rgba(0,200,200,.20)
-  // color: rgba(0,140,200,.8)
+  border: 1px solid var(--background-color)
+  background: var(--background-color)
+  color: var(--text-color)
 
 .toc .q-item.q-item--active
-  // border: 1px solid rgba(0,255,255,.50)
-  background: rgba(0,200,200,.20)
-  color: rgba(0,140,200,.8)
+  background: var(--background-color-hover)
+  color: var(--background-color)
 
   &:hover,
   &:active
@@ -185,7 +178,7 @@ kbd
     // border: 1px solid rgba(0,140,200,.8)
 
 .menu .q-router-link--active
-  background: rgba(0,200,200,.40)
+  background: var(--background-color)
 
 .q-dark div,
 .body--dark div

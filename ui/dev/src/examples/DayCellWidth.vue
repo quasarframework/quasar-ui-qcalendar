@@ -3,9 +3,9 @@
     <div
       class="line"
     >
-      You can specify the <code class="token">cell-width</code> property to make your calendar overrun it's boundaries.<br>
-      The calendar goes into a special <code class="token">sticky</code> mode when this happens so you can scroll vertically and/or horizontally.<br>
-      This example also uses the <code class="token">max-days</code> property.
+      You can specify the <code class="example-token">cell-width</code> property to make your calendar overrun it's boundaries.<br>
+      The calendar goes into a special <code class="example-token">sticky</code> mode when this happens so you can scroll vertically and/or horizontally.<br>
+      This example also uses the <code class="example-token">max-days</code> property.
     </div>
 
     <navigation-bar

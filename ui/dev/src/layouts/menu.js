@@ -1,141 +1,162 @@
 const menu = [
   {
     name: 'All about QCalendar',
+    path: 'all-about-qcalendar',
     expanded: false,
     children: [
       {
         name: 'What is QCalendar',
-        path: 'what-is-qcalendar',
-        component: () => import('../pages/all-about-qcalendar/what--is--q-calendar.md')
+        path: 'all-about-qcalendar/what-is-qcalendar',
+        component: () => import('../pages/all-about-qcalendar/what-is-qcalendar.md')
       },
       {
         name: 'Installation Types',
-        path: 'installation--types',
-        component: () => import('../pages/all-about-qcalendar/installation--types.md')
+        path: 'all-about-qcalendar/installation-types',
+        component: () => import('../pages/all-about-qcalendar/installation-types.md')
       },
       {
         name: 'Anatomy of a calendar',
-        path: 'anatomy-of-a-calendar',
-        component: () => import('../pages/all-about-qcalendar/anatomy--of--a--calendar.md')
+        path: 'all-about-qcalendar/anatomy-of-a-calendar',
+        component: () => import('../pages/all-about-qcalendar/anatomy-of-a-calendar.md')
       }
     ]
   },
   {
     name: 'Designing with QCalendar',
+    path: 'designing-with-qcalendar',
     expanded: false,
     children: [
       {
+        name: 'Getting started',
+        path: 'designing-with-qcalendar/getting-started',
+        component: () => import('../pages/designing-with-qcalendar/getting-started.md')
+      },
+      {
         name: 'Themes',
-        path: 'themes',
-        component: () => import('../pages/designing-with-qcalendar/Themes.vue')
+        path: 'designing-with-qcalendar/themes',
+        component: () => import('../pages/designing-with-qcalendar/themes.md')
       },
       {
         name: 'Theme builder',
-        path: 'theme-builder',
+        path: 'designing-with-qcalendar/theme-builder',
         component: () => import('../pages/designing-with-qcalendar/ThemeBuilder.vue')
+      },
+      {
+        name: 'Tutorials',
+        path: 'designing-with-qcalendar/tutorials',
+        component: () => import('../pages/designing-with-qcalendar/tutorials.md')
       }
     ]
   },
   {
     name: 'Developing',
+    path: 'developing',
     expanded: false,
     children: [
       {
         name: 'Getting started',
-        path: 'getting-started',
-        component: () => import('../pages/developing/GettingStarted.vue')
+        path: 'developing/getting-started',
+        component: () => import('../pages/developing/getting-started.md')
       },
       {
         name: 'QCalendarDay',
-        path: 'qcalendarday',
-        component: () => import('../pages/developing/QCalendarDay.vue')
+        path: 'developing/qcalendarday',
+        component: () => import('../pages/developing/qcalendarday.md')
       },
       {
         name: 'QCalendarMonth',
-        path: 'qcalendarmonth',
-        component: () => import('../pages/developing/QCalendarMonth.vue')
+        path: 'developing/qcalendarmonth',
+        component: () => import('../pages/developing/qcalendarmonth.md')
       },
       {
-        name: 'QCalendarMonth (mini-mode)',
-        path: 'qcalendarmonth-mini-mode',
-        component: () => import('../pages/developing/QCalendarMonth-MiniMode.vue')
+        name: 'QCalendarMonth (minimode)',
+        path: 'developing/qcalendarmonth-minimode',
+        component: () => import('../pages/developing/qcalendarmonth-minimode.md')
       },
       {
         name: 'QCalendarAgenda',
-        path: 'qcalendaragenda',
-        component: () => import('../pages/developing/QCalendarAgenda.vue')
+        path: 'developing/qcalendaragenda',
+        component: () => import('../pages/developing/qcalendaragenda.md')
       },
       {
         name: 'QCalendarResource',
-        path: 'qcalendarresource',
-        component: () => import('../pages/developing/QCalendarResource.vue')
+        path: 'developing/qcalendarresource',
+        component: () => import('../pages/developing/qcalendarresource.md')
       },
       {
         name: 'QCalendarScheduler',
-        path: 'qcalendarscheduler',
-        component: () => import('../pages/developing/QCalendarScheduler.vue')
+        path: 'developing/qcalendarscheduler',
+        component: () => import('../pages/developing/qcalendarscheduler.md')
       },
       {
         name: 'QCalendarTask',
-        path: 'qcalendartask',
-        component: () => import('../pages/developing/QCalendarTask.vue')
+        path: 'developing/qcalendartask',
+        component: () => import('../pages/developing/qcalendartask.md')
       }
     ]
   },
   {
     name: 'Contributing',
+    path: 'contributing',
     expanded: false,
     children: [
       {
         name: 'Overview',
-        path: 'contributing-overview',
-        component: () => import('../pages/contributing/Overview.vue')
+        path: 'contributing/overview',
+        component: () => import('../pages/contributing/overview.md')
       },
       {
         name: 'Bugs and feature requests',
-        path: 'bugs-and-feature-requests',
-        component: () => import('../pages/contributing/BugsAndFeatureRequests.vue')
+        path: 'contributing/bugs-and-feature-requests',
+        component: () => import('../pages/contributing/bugs-and-feature-requests.md')
       },
       {
         name: 'Documentation',
-        path: 'contributing-documentation',
-        component: () => import('../pages/contributing/Documentation.vue')
+        path: 'contributing/documentation',
+        component: () => import('../pages/contributing/documentation.md')
       },
       {
         name: 'Components',
-        path: 'contributing-components',
-        component: () => import('../pages/contributing/Components.vue')
+        path: 'contributing/components',
+        component: () => import('../pages/contributing/components.md')
+      },
+      {
+        name: 'Sponsor',
+        path: 'contributing/sponsor',
+        component: () => import('../pages/contributing/sponsor.md')
       }
     ]
   },
   {
     name: 'Latest news',
+    path: 'latest-news',
     expanded: false,
     children: [
       {
         name: 'Changelog',
-        path: 'changelog',
-        component: () => import('../pages/latest-news/Changelog.vue')
+        path: 'latest-news/changelog',
+        component: () => import('../pages/latest-news/changelog.md')
       },
       {
         name: 'Roadmap',
-        path: 'roadmap',
-        component: () => import('../pages/latest-news/Roadmap.vue')
+        path: 'latest-news/roadmap',
+        component: () => import('../pages/latest-news/roadmap.md')
       },
       {
         name: 'News and articles',
-        path: 'news-and-articles',
-        component: () => import('../pages/latest-news/NewsAndArticles.vue')
+        path: 'latest-news/news-and-articles',
+        component: () => import('../pages/latest-news/news-and-articles.md')
       }
     ]
   },
   {
     name: 'Components (examples)',
+    path: 'components',
     expanded: false,
     children: [
       {
         name: 'Overview',
-        path: ''
+        path: 'components/overview'
       },
       {
         name: 'QCalendarDay',
@@ -158,7 +179,7 @@ const menu = [
         path: ''
       },
       {
-        name: 'QCalendarMonth (mini-mode)',
+        name: 'QCalendarMonth (minimode)',
         path: ''
       },
       {
@@ -181,30 +202,31 @@ const menu = [
   },
   {
     name: 'Help',
+    path: 'help',
     expanded: false,
     children: [
       {
         name: 'Github',
-        link: ''
+        link: 'https://github.com/quasarframework/quasar-ui-qcalendar'
       },
       {
         name: 'Twitter',
-        link: ''
+        link: 'https://twitter.com/jgalbraith64'
       },
       {
         name: 'FAQ',
-        path: 'faq',
-        component: () => import('../pages/help/FAQ.vue')
+        path: 'help/faq',
+        component: () => import('../pages/help/faq.md')
       },
       {
         name: 'Migration guide',
-        path: 'migration-guide',
-        component: () => import('../pages/help/MigrationGuide.vue')
+        path: 'help/migration-guide',
+        component: () => import('../pages/help/migration-guide.md')
       },
       {
         name: 'Contact us',
-        path: 'contact-us',
-        component: () => import('../pages/help/ContactUs.vue')
+        path: 'help/contact-us',
+        component: () => import('../pages/help/contact-us.md')
       }
     ]
   }
