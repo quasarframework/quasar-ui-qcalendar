@@ -109,7 +109,7 @@ function extendImage (md) {
   }
 }
 
-function extendHeading (md, tocData = [], toc = false, tocStart = 1, tocEnd = 3) {
+function extendHeading (md, tocData = [], toc = false, tocStart = 2, tocEnd = 3) {
   md.renderer.rules.heading_open = (tokens, idx, options, env, self) => {
     const token = tokens[ idx ]
 

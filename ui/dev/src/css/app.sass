@@ -3,25 +3,50 @@
 @import 'QMarkdown.sass'
 
 \:root
-  // scrollbars
-  --markdown-scrollbar-width-height        : 10px
-  --markdown-scrollbar-track               : #eeeeee
-  --markdown-scrollbar-thumb               : #888888
-  --markdown-scrollbar-thumb-hover         : #555555
-  --markdown-scrollbar-track-dark          : #eeeeee
-  --markdown-scrollbar-thumb-dark          : #888888
-  --markdown-scrollbar-thumb-hover-dark    : #555555
-
-  // --background-color                       : rgb(33,118,210)
-  // --text-color                             : rgb(255,255,255)
-  // --background-color-hover                 : rgb(204,231,255)
-
   --background-color                       : rgb(204,231,255)
   --text-color                             : rgb(33,118,210)
   --border-color                           : rgb(33,118,210)
   --text-color-hover                       : rgb(204,231,255)
   --background-color-hover                 : rgb(33,118,210)
 
+  // scrollbars
+  --markdown-scrollbar-width-height        : 10px
+  --markdown-scrollbar-track               : #eeeeee
+  --markdown-scrollbar-thumb               : var(--background-color)
+  --markdown-scrollbar-thumb-hover         : var(--background-color-hover)
+  --markdown-scrollbar-track-dark          : #eeeeee
+  --markdown-scrollbar-thumb-dark          : var(--background-color)
+  --markdown-scrollbar-thumb-hover-dark    : var(--background-color-hover)
+
+
+::-webkit-scrollbar
+  width: var(--markdown-scrollbar-width-height)
+  height: var(--markdown-scrollbar-width-height)
+
+// the buttons on the scrollbar (arrows pointing upwards and downwards)
+// ::-webkit-scrollbar-button
+
+// the track (progress bar) of the scrollbar
+::-webkit-scrollbar-track
+  // border-top: var(--markdown-border)
+  background: var(--markdown-scrollbar-track-dark)
+  box-shadow: inset 0 0 4px var(--markdown-scrollbar-track-dark)
+
+// the bottom corner of the scrollbar, where both horizontal and vertical scrollbars meet
+::-webkit-scrollbar-corner
+  background: var(--markdown-scrollbar-track-dark)
+
+// the track (progress bar) NOT covered by the handle
+// &::-webkit-scrollbar-track-piece
+//   background: black
+
+// the draggable scrolling handle
+::-webkit-scrollbar-thumb
+  background: var(--markdown-scrollbar-thumb-dark)
+  border-radius: 5px
+
+  &:hover
+    background: var(--markdown-scrollbar-thumb-hover-dark)
 
 ul
   padding-inline-start: 0
@@ -63,7 +88,7 @@ ul
   color: var(--text-color)
   outline: 0
   font-size: .8em
-  transition: color 0.2s, background 0.2s, border 0.2s
+  transition: color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), background 0.2s cubic-bezier(0.215, 0.61, 0.355, 1), border 0.2s cubic-bezier(0.215, 0.61, 0.355, 1)
   cursor: pointer
   text-decoration: none
 
@@ -129,7 +154,7 @@ kbd
   font-size: 0.8em
   cursor: pointer
   text-decoration: none
-  transition: color .2s, background .2s, border .2s
+  transition: color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), background 0.2s cubic-bezier(0.215, 0.61, 0.355, 1), border 0.2s cubic-bezier(0.215, 0.61, 0.355, 1)
 
   &:hover,
   &:active
@@ -169,22 +194,28 @@ kbd
   border-radius: 4px
   font-family: monospace
 
-.toc .q-item
+.toc .q-item,
+.toc .q-item .q-item__section--side
   border: 1px solid var(--background-color)
   background: var(--background-color)
   color: var(--text-color)
+  transition: color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), background 0.2s cubic-bezier(0.215, 0.61, 0.355, 1), border 0.2s cubic-bezier(0.215, 0.61, 0.355, 1)
+  font-size: 12px
 
-.toc .q-item.q-item--active
+.toc .q-item.q-item--active,
+.toc .q-item.q-item--active .q-item__section--side
   background: var(--background-color-hover)
-  color: var(--background-color)
+  color: var(--text-color-hover)
+  border: 1px solid var(--background-color-hover)
 
   &:hover,
   &:active
-    background: rgba(0,200,200,.40)
-    // border: 1px solid rgba(0,140,200,.8)
+    background: var(--background-color-hover)
+    color: var(--text-color-hover)
+    border: 1px solid var(--background-color-hover)
 
-.menu .q-router-link--active
-  background: var(--background-color)
+// .menu .q-router-link--active
+//   background: var(--background-color)
 
 .q-dark div,
 .body--dark div

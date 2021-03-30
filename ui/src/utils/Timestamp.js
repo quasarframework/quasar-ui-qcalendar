@@ -44,8 +44,8 @@ export const Timestamp = {
   year: 0,        // YYYY
   month: 0,       // MM (Jan = 1, etc)
   day: 0,         // day of the month
-  weekday: 0,     // week day
-  hour: 0,        // 24-hr
+  weekday: 0,     // week day (0=Sunday...6=Saturday)
+  hour: 0,        // 24-hr format
   minute: 0,      // mm
   doy: 0,         // day of year
   workweek: 0,    // workweek number

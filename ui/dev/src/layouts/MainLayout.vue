@@ -36,7 +36,6 @@
     <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
-      bordered
       class="menu markdown__scroll"
     >
       <div
@@ -131,7 +130,6 @@
       v-model="rightDrawerOpen"
       show-if-above
       side="right"
-      bordered
       aria-label="Table of Contents"
       class="toc markdown__scroll"
     >
@@ -145,10 +143,14 @@
             dense
             @click="scrollTo(item.id)"
             :active="activeToc === item.id"
+            :class="`toc-item toc-level-${item.level}`"
           >
-          <q-item-section v-if="item.level > 1" side> • </q-item-section>
+          <q-item-section
+            v-if="item.level > 2"
+            side
+            :class="`toc-item toc-level-${item.level}`"
+          > » </q-item-section>
             <q-item-section
-              :class="`toc-item toc-level-${item.level}`"
             >{{ item.label }}</q-item-section>
           </q-item>
         </q-list>
