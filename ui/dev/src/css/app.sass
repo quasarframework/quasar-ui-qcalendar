@@ -51,6 +51,12 @@
 ul
   padding-inline-start: 0
 
+// override Quasar's p { margin-top: 16px }
+// with something more suited for this site
+p
+  margin-top: 8px !important
+  margin-bottom: 8px !important
+
 .page
   position: relative
   display: flex
@@ -157,7 +163,7 @@ kbd
   transition: color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), background 0.2s cubic-bezier(0.215, 0.61, 0.355, 1), border 0.2s cubic-bezier(0.215, 0.61, 0.355, 1)
 
   &:hover,
-  &:active
+  &:active,
   &:focus
     background: var(--background-color-hover)
 

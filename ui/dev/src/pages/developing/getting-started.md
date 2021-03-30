@@ -20,7 +20,7 @@ This section will highlight a number common properties and generalities amonst t
 
 QCalendar comes with a built-in `Timestamp` library that handles all of the needs and wants of each calendar type. In fact, you can use it too! Before including another date/time library, and possibly adding bloat to your app, verify the Timestamp library can handle what you need to do. If not, suggestions and PRs are welcomed.
 
-The two most important things to know what's happening in behind the scenes is Timestamp's format, which is `YYYY-MM-DD` and the actual `Timestamp` object. This object is used in many slots and events.
+The two most important things to know what's happening behind the scenes is Timestamp's format, which is `YYYY-MM-DD` and the actual `Timestamp` object. This object is used in many slots and events.
 
 ```js
 export const Timestamp = {
@@ -42,6 +42,8 @@ export const Timestamp = {
   disabled: false // if timestamp is disabled
 }
 ```
+
+If you need your own Timestamps, to be used with other exported functions, then the exported function `parseTimestamp` will fill in most of these fields, give a date in format of `YYYY-MM-DD HH:mm` with optional time. However, that can be expensive time-wise, so if you use this and need the minimal, then use the exported `parsed` function. If you have a JavaScript `Date`, then you can use the exported `parseDate` function to generate your Timestamp for you.
 
 ## Date format
 
@@ -241,3 +243,62 @@ flip
 | selected-start-end-dates | Array        |              |
 
 ## Drag and drop
+
+### Drag enter
+
+| Property | Type           | Example      |
+| -------  | -------------- | -----------  |
+| drag-enter-func | Funtion       |              |
+
+### Drag over
+
+| Property | Type           | Example      |
+| -------  | -------------- | -----------  |
+| drag-over-func | Funtion       |              |
+
+### Drag leave
+
+| Property | Type           | Example      |
+| -------  | -------------- | -----------  |
+| drag-leave-func | Funtion       |              |
+
+### Drop
+
+| Property | Type           | Example      |
+| -------  | -------------- | -----------  |
+| drag-func | Funtion       |              |
+
+## Slots and events
+
+Slots and events look very similar to each other. Different slots have different data, but they all have the `scope` in common.
+
+Your slotted data will look like this:
+
+```js
+{
+  scope: { /* more data */ }
+}
+```
+
+Where as an event will look like this:
+
+```js
+{
+  scope: { /* more data */ },
+  event: { /* the event data */ }
+}
+```
+
+You can always destructure the `scope` from the slotted data:
+
+```html
+<q-calendar-day #day="{ scope }" />
+```
+
+If the scope has a timestamp within it and that's all you need, then you can destructure even further:
+
+```html
+<q-calendar-day #day="{ scope: { timestamp } }" />
+```
+
+The pattern here is to **always** be recognizable to the developer and to know what to expect.
