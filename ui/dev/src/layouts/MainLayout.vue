@@ -444,11 +444,11 @@ export default defineComponent({
 
 .child
   overflow: hidden
-  color: rgba(0, 140, 200, 0.8)
-  background: rgba(0,200,200,.20)
-  border-left: 1px solid rgba(0,255,255,.50)
-  border-right: 1px solid rgba(0,255,255,.50)
-  border-bottom: 1px solid rgba(0,255,255,.50)
+  color: var(--text-color)
+  background: var(--background-color)
+  border-left: 1px solid var(--border-color)
+  border-right: 1px solid var(--border-color)
+  border-bottom: 1px solid var(--border-color)
   max-width: calc(100% - 10px)
   border-bottom-right-radius: 5px
   border-bottom-left-radius: 5px
@@ -462,13 +462,13 @@ export default defineComponent({
   transition: max-height 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), border 0.2s cubic-bezier(0.215, 0.61, 0.355, 1)
 
   &__expanded
-    // opacity: 1
     max-height: 1000px
 
   &__collapsed
-    // opacity: 0
-    border: none !important
     max-height: 0 !important
+    border-left: 1px solid var(--background-color)
+    border-right: 1px solid var(--background-color)
+    border-bottom: 1px solid var(--background-color)
 
   &__item
     display: flex
@@ -482,14 +482,18 @@ export default defineComponent({
     border-bottom-left-radius: 5px
     text-decoration: none
     color: inherit
-    border: 1px solid rgba(0,200,200,.0)
+    border: 1px solid var(--background-color)
+    transition: background 0.3 cubic-bezier(0.215, 0.61, 0.355, 1), color 0.3 cubic-bezier(0.215, 0.61, 0.355, 1), border 0.3 cubic-bezier(0.215, 0.61, 0.355, 1)
 
     &:hover,
     &:active
-      background: rgba(0,200,200,.30)
+      background: var(--background-color-hover)
+      color: var(--text-color-hover)
+      border: 1px solid var(--background-color-hover)
 
     &:focus,
     &.active
-      background: rgba(0,200,200,.40)
-      border: 1px solid rgba(0,140,200,.8)
+      background: var(--background-color-hover)
+      color: var(--text-color-hover)
+      border: 1px solid var(--background-color-hover)
 </style>
