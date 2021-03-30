@@ -43,8 +43,8 @@ export default {
         : { title: props.metaTitle }
     )
 
-    const $store = useMarkdownStore()
-    $store.toc = props.toc !== void 0 ? props.toc : []
+    const store = useMarkdownStore()
+    store.toc = props.toc !== void 0 ? props.toc : []
 
     return {
       path

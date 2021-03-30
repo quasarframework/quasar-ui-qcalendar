@@ -71,19 +71,7 @@
                 target="_blank"
               >
                 {{ child.name }}
-                <svg
-                  focusable="false"
-                  preserveAspectRatio="xMidYMid meet"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  class="parent parent__collapsed"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 32 32"
-                  aria-hidden="true"
-                >
-                  <path :d="biLink"></path>
-                </svg>
+                <q-icon :name="biLink" />
               </a>
               <div
                 v-else
@@ -290,6 +278,7 @@ export default defineComponent({
     }
 
     function onExampleClick (path) {
+      store.toc = [] // remove toc
       onToggleMenuItem() // close accordian menu
       $router.push('/examples/' + path)
     }

@@ -3,8 +3,10 @@ title: What is QCalendar
 desc: Everything you need for a complete Calendar solution
 keys: All about QCalendar
 related:
-  - /all-about-qcalendar/installation--types
-  - /all-about-qcalendar/anatomy--of--a--calendar
+  - /contributing/bugs-and-feature-requests
+  - /all-about-qcalendar/components
+  - /all-about-qcalendar/documentation
+  - /all-about-qcalendar/sponsor
 ---
 
 # What is QCalendar
