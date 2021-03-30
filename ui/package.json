@@ -54,8 +54,8 @@
     "attributes": "dist/vetur/attributes.json"
   },
   "devDependencies": {
-    "@babel/core": "^7.13.13",
-    "@babel/eslint-parser": "^7.13.10",
+    "@babel/core": "^7.13.14",
+    "@babel/eslint-parser": "^7.13.14",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/preset-env": "^7.13.12",
     "@rollup/plugin-buble": "^0.21.3",
@@ -86,7 +86,7 @@
     "quasar": "^2.0.0-beta.5",
     "quasar-json-api": "^1.2.6",
     "rimraf": "^3.0.2",
-    "rollup": "^2.43.1",
+    "rollup": "^2.44.0",
     "rollup-plugin-vue": "=6.0.0",
     "rtlcss": "^3.1.2",
     "sass": "^1.32.8",
