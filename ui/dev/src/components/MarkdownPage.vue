@@ -36,7 +36,7 @@ export default {
     console.log(props)
     const $route = useRoute(),
       path = $route.path
-    console.log($route)
+
     useMeta(
       props.metaDesc !== void 0
         ? { title: props.metaTitle, meta: getMeta(props.metaTitle + ' | QCalendar', props.metaDesc) }

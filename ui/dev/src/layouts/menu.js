@@ -27,7 +27,7 @@ const menu = [
     expanded: false,
     children: [
       {
-        name: 'Getting started',
+        name: 'Getting Started',
         path: 'designing-with-qcalendar/getting-started',
         component: () => import('../pages/designing-with-qcalendar/getting-started.md')
       },

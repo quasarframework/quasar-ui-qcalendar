@@ -2,6 +2,8 @@
 title: Installation Types
 desc: How to install QCalendar
 keys: All about QCalendar
+related:
+  - /all-about-qcalendar/what-is-qcalendar
 ---
 
 # Installation Types
