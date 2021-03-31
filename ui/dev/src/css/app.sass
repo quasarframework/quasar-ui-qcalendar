@@ -203,16 +203,20 @@ kbd
   border-radius: 4px
   font-family: monospace
 
-.toc .q-item,
-.toc .q-item .q-item__section--side
+.toc .q-item
   border: 1px solid var(--background-color)
   background: var(--background-color)
   color: var(--text-color)
   transition: color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), background 0.2s cubic-bezier(0.215, 0.61, 0.355, 1), border 0.2s cubic-bezier(0.215, 0.61, 0.355, 1)
   font-size: 12px
 
-.toc .q-item.q-item--active,
-.toc .q-item.q-item--active .q-item__section--side
+  &:hover,
+  &:active
+    background: var(--background-color-hover)
+    color: var(--text-color-hover)
+    border: 1px solid var(--background-color-hover)
+
+.toc .q-item.q-item--active
   background: var(--background-color-hover)
   color: var(--text-color-hover)
   border: 1px solid var(--background-color-hover)
@@ -222,6 +226,11 @@ kbd
     background: var(--background-color-hover)
     color: var(--text-color-hover)
     border: 1px solid var(--background-color-hover)
+
+// make TOC work with hover colors
+.toc .q-item .q-item__section--side
+  background: transparent
+  color: inherit !important
 
 // .menu .q-router-link--active
 //   background: var(--background-color)
