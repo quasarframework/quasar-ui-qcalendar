@@ -22,33 +22,6 @@ const menu = [
     ]
   },
   {
-    name: 'Designing with QCalendar',
-    path: 'designing-with-qcalendar',
-    expanded: false,
-    children: [
-      {
-        name: 'Getting Started',
-        path: 'designing-with-qcalendar/getting-started',
-        component: () => import('../pages/designing-with-qcalendar/getting-started.md')
-      },
-      {
-        name: 'Themes',
-        path: 'designing-with-qcalendar/themes',
-        component: () => import('../pages/designing-with-qcalendar/themes.md')
-      },
-      {
-        name: 'Theme builder',
-        path: 'designing-with-qcalendar/theme-builder',
-        component: () => import('../pages/designing-with-qcalendar/ThemeBuilder.vue')
-      },
-      {
-        name: 'Tutorials',
-        path: 'designing-with-qcalendar/tutorials',
-        component: () => import('../pages/designing-with-qcalendar/tutorials.md')
-      }
-    ]
-  },
-  {
     name: 'Developing',
     path: 'developing',
     expanded: false,
@@ -92,6 +65,33 @@ const menu = [
         name: 'QCalendarTask',
         path: 'developing/qcalendartask',
         component: () => import('../pages/developing/qcalendartask.md')
+      }
+    ]
+  },
+  {
+    name: 'Designing with QCalendar',
+    path: 'designing-with-qcalendar',
+    expanded: false,
+    children: [
+      {
+        name: 'Getting Started',
+        path: 'designing-with-qcalendar/getting-started',
+        component: () => import('../pages/designing-with-qcalendar/getting-started.md')
+      },
+      {
+        name: 'Themes',
+        path: 'designing-with-qcalendar/themes',
+        component: () => import('../pages/designing-with-qcalendar/themes.md')
+      },
+      {
+        name: 'Theme builder',
+        path: 'designing-with-qcalendar/theme-builder',
+        component: () => import('../pages/designing-with-qcalendar/ThemeBuilder.vue')
+      },
+      {
+        name: 'Tutorials',
+        path: 'designing-with-qcalendar/tutorials',
+        component: () => import('../pages/designing-with-qcalendar/tutorials.md')
       }
     ]
   },
