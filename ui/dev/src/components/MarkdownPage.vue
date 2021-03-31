@@ -14,7 +14,8 @@
 <script>
 import { useRoute } from 'vue-router'
 import { useMeta } from 'quasar'
-// import { copyHeading } from 'assets/page-utils'
+// eslint-disable-next-line no-unused-vars
+import { copyHeading } from 'assets/page-utils'
 import getMeta from 'assets/get-meta'
 import { useMarkdownStore } from 'assets/markdown-store.js'
 
