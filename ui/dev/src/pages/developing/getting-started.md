@@ -14,7 +14,7 @@ related:
 
 # Getting started
 
-This section will highlight a number common properties and generalities amonst the various calendars. Other, more specific properties will be discussed in their respective sections.
+This section will highlight a number common properties and generalities amongst the various calendars. Other, more specific properties will be discussed in their respective sections.
 
 ## Timestamp
 
@@ -51,20 +51,27 @@ If you need your own Timestamps, to be used with other exported functions, then 
 | -------  | -------------- | -----------  |
 | model-value | String      | YYYY-DD-MM   |
 
+`model-value` is how the date is set in QCalendar and is the User selected date when there is an interactive calendar. This is the current date and can be use to move the calendar to a previous or next view (ie: day, week, month, etc). Typically, you set this with something like `v-model="selectedDate"`. If your `selectedDate` contains a `null`, then the current date (today's date) will be used. 
+
 ## Now
 
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
 | now      | String         | YYYY-DD-MM   |
 
+If you do not set the `now` property it will be set to the current date (today's date). This property represents **today**, but it doesn't have to be today.
+
 ## Localization
-### Locale
+
+Internally, QCalendar uses the browser's `Intl.DateTimeFormat` for all localization. Therefore, QCalendar can only display the localization properly if it is supported by the User's browser. If for some reason, it is not supported, then the fallback is to use American English (`en-US`). If you wanted to display French Canadian, then you would use `fr-CA`, or Brazilian Portuguese `pt-BR`.
 
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
 | locale    | String         | en-US        |
 
 ## Dark and bordered
+
+If you want a calendar to display dark mode, then set the `dark` property. As well, if you want a calendar to have a border, then set the `bordered` property.
 
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
@@ -73,11 +80,15 @@ If you need your own Timestamps, to be used with other exported functions, then 
 
 ## Weekdays
 
+`weekdays` is a property that allows you to adjust the order of the days of the week. It is an array of numbers from 0 (Sunday) to 6 (Saturday). The default is `[0,1,2,3,4,5,6]`. If you wanted to have a 5 day work week, you would remove the Sunday and Saturday representations like this: `[1,2,3,4,5]`. If you wanted a calenday where Monday was the first day of the week, then you would move Sunday to the end, like this: `[1,2,3,4,5,6,0]`. Don't get too funky with this as you may get unexpected results and handling.
+
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
 | weekdays | Array          | [0,1,2,3,4,5,6] |
 
 ## Date type
+
+The only two values accepted for the `date-type` property are `round` (default) and `square`.
 
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
@@ -85,7 +96,11 @@ If you need your own Timestamps, to be used with other exported functions, then 
 
 ## Alignment
 
+The calendars all support header alignment in one way or another. There is another property, not displayed here, that is for interval-based calendars only called `date-header` that gives even more control. You will have to look at the respective calendars to read about this property.
+
 ### Weekday
+
+The acceptable values are `left`, `center` (default) and `right`.
 
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
@@ -93,13 +108,19 @@ If you need your own Timestamps, to be used with other exported functions, then 
 
 ### Date
 
+The acceptable values are `left`, `center` (default) and `right`. 
+
+::: warning
+When using `QCalendarMonth`, the month name and day of the year values cannot be displayed if this alignment is set to `center`.
+:::
+
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
 | date-align | String       | right        |
 
 ## Active date
 
-### No active date
+The active date is changes when the User clicks on a date or navigates using previous or next. In some edge cases, it is preferable not to show the active date (like when making a calendar date range selection).
 
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
@@ -109,11 +130,15 @@ If you need your own Timestamps, to be used with other exported functions, then 
 
 ### Disabled days
 
+This property is an Array of dates in the format `YYYY-MM-DD`.
+
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
 | disabled-days | Array     |              |
 
 ### Disabled before
+
+This property is a date String in the format `YYYY-MM-DD`. Any date before this date, including the given date, will be disabled.
 
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
@@ -121,11 +146,15 @@ If you need your own Timestamps, to be used with other exported functions, then 
 
 ### Disabled after
 
+This property is a date String in the format `YYYY-MM-DD`. Any date after this date, including the given date, will be disabled.
+
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
 | disabled-after | String   | YYYY-MM-DD   |
 
 ### Disabled weekdays
+
+The `disabled-weekdays` property uses the same input as the `weekdays` property. Any value in the array will be disabled. Remember, 0=Sunday and 6=Saturday. So, to disable weekends, simply use `[0,6]`.
 
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
@@ -133,17 +162,24 @@ If you need your own Timestamps, to be used with other exported functions, then 
 
 ## No header
 
+There may be some edge-cases where the header is not desireable. There is an example that shows how to build your own navigation with header information.
+
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
 | no-header | Boolean       |              |
 
 ## No scroll
 
+All calendars try to take up 100% width and height. Either use styles to constrain a calendar or have a parent element (like a div) do it. In either case, the calendar will display it's own scrollbar. Mostly so that headers are still visible. If you have an edge-case where this is not desireable, then you can turn it off with the `no-scroll` property.
+
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
 | no-scroll | Boolean       |              |
 
 ## Labels
+
+All labels in the calendars are formatted with the browsers `Intl.DateTimeFormat` function. This function allows you to specify a short-format. For instance, `Saturday` becomes `Sat`. All calendars have the ability to automatically shrink label values. Some may first get an ellipsis, then short-format and even smaller, if needed.
+
 ### Short weekday label
 
 | Property | Type           | Example      |
@@ -152,11 +188,15 @@ If you need your own Timestamps, to be used with other exported functions, then 
 
 ### Minimum label Length
 
+As explained above, the calendars can format weekday labels smaller than the `Intl.DateTimeFormat` short-format. The edge-case for this is to create a very small calendar picker. In this case, you could set the `min-label-length` to 1, in which case only the first character of the label will be used. This may not be desireable for some languages, as the weekdays may all have the same first character. In this case, set it to 2 or 3, whatever best suits the locale that you are aiming for.
+
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
 | min-label-length | Number \| String       |              |
 
 ### Label breakpoints
+
+The `label-breakpoints` property is an array of two numbers. The parent div that contains the label knows it's width. The array contains the values where you want label values to go from long format to short format automatically. The second value is for when you want the values to start using extra-short format based on the `min-label-length` property.
 
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
@@ -164,46 +204,51 @@ If you need your own Timestamps, to be used with other exported functions, then 
 
 ## Transitions
 
-### Animated
+Transition are a way to make your calendar come-alive to you end-user. When a calendar changes to a previous or next week/month, instead of just instantly displaying it, we can use the `animated` property to turn on transitions.
 
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
 | animated | Boolean        |              |
 
-### Previous transition
+Then you can use the `transiton-prev` and `transiton-next` properties to change the default behavior, which is `slide-right` and -slide-left`, respectively.
 
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
 | transiton-prev | String   | slide-right  |
-
-### Next transition
-
-| Property | Type           | Example      |
-| -------  | -------------- | -----------  |
 | transiton-next | String   | slide-left   |
 
 ### Transitions types
 
-roll-right
-roll-left
-roll-up
-roll-down
+QCalendar support the transition types listed below:
 
-slide-right
-slide-left
-slide-up
-slide-down
+| Roll |
+| ---- |
+| roll-right |
+| roll-left |
+| roll-up |
+| roll-down |
 
-jump-right
-jump-left
-jump-up
-jump-down
+| Slide |
+| ---- |
+| slide-right |
+| slide-left |
+| slide-up |
+| slide-down |
 
-fade
-scale
-rotate
-spin
-flip
+| Jump |
+| ---- |
+| jump-right |
+| jump-left |
+| jump-up |
+| jump-down |
+
+| Misc. |
+| ---- |
+| fade |
+| scale |
+| rotate |
+| spin |
+| flip |
 
 
 ## Hoverable and focusable
