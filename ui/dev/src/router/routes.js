@@ -26,7 +26,13 @@ const routes = [
   {
     path: '/',
     component: () => import('../layouts/MainLayout.vue'),
-    children: [].concat(menuRoutes)
+    children: [
+      {
+        name: 'Default Page',
+        path: '',
+        component: () => import('../pages/default.md')
+      }
+    ].concat(menuRoutes)
   },
   {
     path: '/examples',
