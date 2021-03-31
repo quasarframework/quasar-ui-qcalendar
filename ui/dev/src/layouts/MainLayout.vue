@@ -12,7 +12,16 @@
         />
 
         <q-toolbar-title>
-          QCalendar <span style="font-size: 12px;">v{{ version }}</span>
+          <q-btn
+            flat
+            no-caps
+            type="a"
+            href="\"
+          >
+          <div>
+            <span style="font-size: 20px;">QCalendar &nbsp; </span><span style="font-size: 12px;">v{{ version }}</span>
+          </div>
+          </q-btn>
         </q-toolbar-title>
 
         <q-space />
@@ -22,6 +31,7 @@
         <div v-if="$q.screen.width > 500">Quasar <span style="font-size: 12px;">v{{ $q.version }}</span></div>
 
         <q-btn
+          v-if="isExample === true || store.toc.length > 0"
           flat
           dense
           round
@@ -126,6 +136,7 @@
     </q-drawer>
 
     <q-drawer
+      v-if="isExample === true || store.toc.length > 0"
       ref="drawer"
       v-model="rightDrawerOpen"
       show-if-above
@@ -143,12 +154,11 @@
             dense
             @click="scrollTo(item.id)"
             :active="activeToc === item.id"
-            :class="`toc-item toc-level-${item.level}`"
+            class="toc"
           >
           <q-item-section
             v-if="item.level > 2"
             side
-            :class="`toc-item toc-level-${item.level}`"
           > » </q-item-section>
             <q-item-section
             >{{ item.label }}</q-item-section>
@@ -158,9 +168,10 @@
     </q-drawer>
 
     <q-page-container>
+
       <div class="fit q-pa-sm">
         <div
-        v-if="$route.path !== '/' && isExample === true"
+          v-if="isExample === true"
           style="width: 100%; text-align: left; margin: 8px;"
         >
           <div style="width: 100%; display: flex; justify-content: center;">
@@ -177,12 +188,13 @@
           </div>
         </div>
 
-        <div class="flex flex-center">
+        <div :class="'flex ' + (isExample === true ? 'flex-center' : 'flex-start')">
           <div style="max-width: 800px; width: 100%;">
             <router-view />
           </div>
         </div>
       </div>
+
     </q-page-container>
   </q-layout>
 </template>
