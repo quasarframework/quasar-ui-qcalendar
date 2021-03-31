@@ -35,6 +35,15 @@
     width: max-content
 
   &--heading
+    cursor: pointer
+
+    &:after
+      content: ' #'
+      opacity: 0
+      transition: opacity .2s
+
+    &:hover:after
+      opacity: 1
 
     &-h1
       font-size: 2rem
