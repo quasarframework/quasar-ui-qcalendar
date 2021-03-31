@@ -117,7 +117,7 @@ function extendHeading (md, tocData = [], toc = false, tocStart = 2, tocEnd = 3)
       .children
       .reduce((acc, t) => acc + t.content, '')
 
-    let classes = `q-markdown--heading-${ token.tag }`
+    let classes = `q-markdown--heading q-markdown--heading-${ token.tag }`
 
     if (token.markup === '=') {
       classes += ' q-markdown--title-heavy'
@@ -130,6 +130,7 @@ function extendHeading (md, tocData = [], toc = false, tocStart = 2, tocEnd = 3)
     token.attrSet('id', id)
     token.attrSet('name', id)
     token.attrSet('class', classes)
+    token.attrSet('@click', `copyHeading(\`${ id }\`)`)
 
     if (toc) {
       const tokenNumber = parseInt(token.tag[ 1 ])
