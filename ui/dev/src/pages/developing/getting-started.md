@@ -219,69 +219,49 @@ Then you can use the `transiton-prev` and `transiton-next` properties to change 
 
 ### Transitions types
 
-QCalendar support the transition types listed below:
+QCalendar support the following transition types:
 
-| Roll |
-| ---- |
-| roll-right |
-| roll-left |
-| roll-up |
-| roll-down |
-
-| Slide |
-| ---- |
-| slide-right |
-| slide-left |
-| slide-up |
-| slide-down |
-
-| Jump |
-| ---- |
-| jump-right |
-| jump-left |
-| jump-up |
-| jump-down |
-
-| Misc. |
-| ---- |
-| fade |
-| scale |
-| rotate |
-| spin |
-| flip |
+| Roll       | Slide       | Jump       | Misc   |
+| ----       | ----        | ----       | ----   |
+| roll-right | slide-right | jump-right | fade   |
+| roll-left  | slide-left  | jump-left  | scale  |
+| roll-up    | slide-up    | jump-up    | rotate |
+| roll-down  | slide-down  | jump-down  | spin   |
+|            |             |            | flip   |
 
 
 ## Hoverable and focusable
+
+The `hoverable` property allows each cell in a calendar to display a hovering effect. Sometimes this can be beneficial for the user, as well as giving your calendar a bit of pizzaz. It comes with overhead, so it is optional.
+
+The `focusable` property allows various cells within the calendar to have focus. This allows end-users to tab or shift-tab with navigation.
+
+The `focus-type` property works with the `focusable` property to determine what can have focus. This is an array of values. The values are: `day`, `date`, `weekday`, `interval` and `resource`.
+
+::: warning
+Not all `focus-type` values can be used with all calendars. For instance, `interval` won't work with QCalendarMonth and `day` won't work for interval-based calendars.
+:::
 
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
 | hoverable | Boolean       |              |
 | focusable | Boolean       |              |
+| focus-type | Array        | ['day','weekday']|
 
-## Focus type
-
-| Property | Type           | Example      |
-| -------  | -------------- | -----------  |
-| focus-type | Array        |              |
-
-
-| Value    | Description    |
-| -------  | -------------- |
-| day      |                |
-| date     |                |
-| weekday  |                |
-| interval |                |
-| resource |                |
 
 ## Selection
 ### Selected dates
 
+The `selected-dates` property is an array of dates in the form of `YYYY-MM-DD`.
+
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
-| selected-dates | Array        |              |
+| selected-dates | Array    |              |
 
 
 ### Selected start and end dates
+
+The property `selected-start-end-dates` takes an arry of arrays. Each internal array contains and start and end date that is a selection. This allows you to have multiple selections if you wish.
 
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
@@ -291,31 +271,43 @@ QCalendar support the transition types listed below:
 
 ### Drag enter
 
+::: warning
+When the `drag-enter-func` property is called, which is pointing to your function, you must call within that function `e.preventDefault()`, otherwise Drag and Drop will not work.
+:::
+
+All functions receive a function signature of `(e, type, scope)`. `e` is the actual event, `type` is a string, denoting where it came from. For instance, `day`, `weekday`, `interval`, etc. And, `scope` will be the data associate with this particular cell.
+
+For all functions, you can return `true` or `false`. If true, this tells the calendar to add additional `droppable` property into the `scope`. Then you can use `day-class`, `interval-class` or `weekday-class` to modify the CSS.
+
+As an example:
+
+```js
+  onWeekdayClass ({ scope }) {
+    return {
+      droppable: scope.droppable === true
+    }
+  }
+```
+Then you can have CSS which defines your `droppable` class.
+
+:::
+The `day-class`, `interval-class` and `weekday-class` properties are explained in their respective calendars.
+:::
+
+::: tip
+Don't forget to check out the Drag and Drop examples and look at their sources on Github.
+:::
+
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
-| drag-enter-func | Funtion       |              |
-
-### Drag over
-
-| Property | Type           | Example      |
-| -------  | -------------- | -----------  |
-| drag-over-func | Funtion       |              |
-
-### Drag leave
-
-| Property | Type           | Example      |
-| -------  | -------------- | -----------  |
-| drag-leave-func | Funtion       |              |
-
-### Drop
-
-| Property | Type           | Example      |
-| -------  | -------------- | -----------  |
-| drag-func | Funtion       |              |
+| drag-enter-func | Funtion | :drag-enter-func="onDragEnter" |
+| drag-over-func | Funtion  | :drag-over-func="onDragOver" |
+| drag-leave-func | Funtion | :drag-leave-func="onDragLeave" |
+| drop-func | Funtion       | :drop-func="onDrop" |
 
 ## Slots and events
 
-Slots and events look very similar to each other. Different slots have different data, but they all have the `scope` in common.
+Slots and events look very similar to each other. Different slots have different data, but they all have the `scope` key in common.
 
 Your slotted data will look like this:
 
