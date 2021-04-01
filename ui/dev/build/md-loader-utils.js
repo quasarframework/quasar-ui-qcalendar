@@ -21,7 +21,7 @@ function getComponentsDeclaration (comp) {
 module.exports.getVueComponent = function (rendered, data, toc) {
   return `
     <template>
-      <markdown-page :meta-title="metaTitle" title="${ data.heading !== false ? data.title : '' }"${ data.related !== void 0 ? ' :related="related"' : '' }${ data.nav !== void 0 ? ' :nav="nav"' : '' }${ data.badge !== void 0 ? ' :badge="badge"' : '' }${ data.related !== void 0 || data.nav !== void 0 ? ' :toc="toc"' : '' }${ data.desc !== void 0 ? ' :meta-desc="metaDesc"' : '' }>${ rendered }</markdown-page>
+      <markdown-page :meta-title="metaTitle" title="${ data.heading !== false ? data.title : '' }"${ data.related !== void 0 ? ' :related="related"' : '' }${ data.nav !== void 0 ? ' :nav="nav"' : '' }${ data.badge !== void 0 ? ' :badge="badge"' : '' }${ data.related !== void 0 || data.nav !== void 0 ? ' :toc="toc"' : '' }${ data.desc !== void 0 ? ' :meta-desc="metaDesc"' : '' }${ data.noEdit !== void 0 ? ' no-edit' : '' }>${ rendered }</markdown-page>
     </template>
     <script>
     import { copyHeading } from 'assets/page-utils'
