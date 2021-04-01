@@ -107,7 +107,7 @@ export const useCommonProps = {
     validator: v => {
       let val = true
       v.forEach(type => {
-        if ([ 'day', 'date', 'weekday', 'interval', 'resource' ].includes(type) !== true) {
+        if ([ 'day', 'date', 'weekday', 'interval', 'resource', 'task' ].includes(type) !== true) {
           val = false
         }
       })
