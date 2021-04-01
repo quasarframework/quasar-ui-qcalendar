@@ -29,7 +29,7 @@ QCalendar is actually an accumulation of several other dedicated components:
 6. QCalendarTask
 
 
-# Features
+## Features
 
 1. Show month, week, work-week, day, contiguous days (ex: 3 days at a time)
 2. Scheduler view (optional hierarchical trees)
@@ -54,7 +54,7 @@ QCalendar is actually an accumulation of several other dedicated components:
 22. Support for Dark mode
 23. Rich support of date functions that are also exported for making your own calendars
 
-# QCalendar is not…
+## QCalendar is not…
 
 - An event management system. However, QCalendar supports everything you need to create an event/reminder management system using slots.
 - An interactive navigation provider (next, previous, today). However, you can easily do this in devland with QCalendar’s methods (see examples).
