@@ -28,9 +28,9 @@ const routes = [
     component: () => import('../layouts/MainLayout.vue'),
     children: [
       {
-        name: 'Default Page',
+        name: 'Landing Page',
         path: '',
-        component: () => import('../pages/default.md')
+        component: () => import('../pages/landing-page.md')
       }
     ].concat(menuRoutes)
   },
