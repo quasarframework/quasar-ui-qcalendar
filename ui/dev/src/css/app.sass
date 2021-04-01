@@ -3,11 +3,23 @@
 @import 'QMarkdown.sass'
 
 \:root
-  --background-color                       : rgb(204,231,255)
+  --background-color                       : transparent
   --text-color                             : rgb(33,118,210)
-  --border-color                           : rgb(33,118,210)
-  --text-color-hover                       : rgb(204,231,255)
-  --background-color-hover                 : rgb(33,118,210)
+  --border-color                           : transparent
+
+  --text-color-hover                       : rgb(33,118,210)
+  --background-color-hover                 : transparent
+  --border-color-hover                     : transparent
+
+  --text-color-active                      : rgb(33,118,210)
+  --background-color-active                : rgba(33,118,210, .08)
+  --border-color-active                    : transparent
+
+  // --background-color                       : rgb(204,231,255)
+  // --text-color                             : rgb(33,118,210)
+  // --border-color                           : rgb(33,118,210)
+  // --text-color-hover                       : rgb(204,231,255)
+  // --background-color-hover                 : rgb(33,118,210)
 
   // scrollbars
   --markdown-scrollbar-width-height        : 10px
@@ -90,8 +102,8 @@ p
   padding: 4px 15px
   border-radius: 4px
   border: 1px solid var(--border-color)
-  background: var(--background-color)
   color: var(--text-color)
+  background: var(--background-color)
   outline: 0
   font-size: .8em
   transition: color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), background 0.2s cubic-bezier(0.215, 0.61, 0.355, 1), border 0.2s cubic-bezier(0.215, 0.61, 0.355, 1)
@@ -101,8 +113,8 @@ p
   &:focus,
   &:hover,
   &:active
+    color: var(--text-color-hover)
     background: var(--background-color-hover)
-    color: var(--background-color)
 
 .button > a
   color: inherit
@@ -154,8 +166,8 @@ kbd
   padding: 4px 15px
   border-radius: 4px
   border: 1px solid var(--border-color)
-  background: var(--background-color)
   color: var(--text-color)
+  background: var(--background-color)
   outline: 0
   font-size: 0.8em
   cursor: pointer
@@ -165,8 +177,8 @@ kbd
   &:hover,
   &:active,
   &:focus
-    background: var(--background-color-hover)
     color: var(--text-color-hover)
+    background: var(--background-color-hover)
 
 .button > .select
   background: inherit
@@ -203,32 +215,37 @@ kbd
   border-radius: 4px
   font-family: monospace
 
-.toc .q-item
-  border: 1px solid var(--background-color)
-  background: var(--background-color)
+.toc .q-item,
+.menu .q-item
+  border: 1px solid var(--border-color)
   color: var(--text-color)
+  background: var(--background-color)
   transition: color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), background 0.2s cubic-bezier(0.215, 0.61, 0.355, 1), border 0.2s cubic-bezier(0.215, 0.61, 0.355, 1)
   font-size: 12px
 
-  &:hover,
-  &:active
-    background: var(--background-color-hover)
-    color: var(--text-color-hover)
-    border: 1px solid var(--background-color-hover)
-
-.toc .q-item.q-item--active
-  background: var(--background-color-hover)
-  color: var(--text-color-hover)
-  border: 1px solid var(--background-color-hover)
+.toc .q-item.q-item--active,
+.toc .q-item.q-router-link--active,
+.menu .q-item.q-item--active,
+.menu .q-item.q-router-link--active
+  border: 1px solid var(--border-color-active)
+  color: var(--text-color-active)
+  background: var(--background-color-active)
 
   &:hover,
-  &:active
-    background: var(--background-color-hover)
+  &:focus
+    border: 1px solid var(--border-color-hover)
     color: var(--text-color-hover)
-    border: 1px solid var(--background-color-hover)
+    background: var(--background-color-hover)
+
+  &:active
+    border: 1px solid var(--border-color-active)
+    color: var(--text-color-active)
+    background: var(--background-color-active)
+
 
 // make TOC work with hover colors
-.toc .q-item .q-item__section--side
+.toc .q-item .q-item__section--side,
+.menu .q-item .q-item__section--side
   background: transparent
   color: inherit !important
 
