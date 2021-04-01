@@ -9,35 +9,35 @@
     <div style="display: flex; justify-content: center">
       <div class="button-bar" style="margin: 12px;">
         <div style="display: flex; align-items: center">
-          <label
-            for="date-align"
-            style="margin-right: 2px;"
-          >date-align:</label>
-          <select
-            id="date-align"
+          <q-select
             v-model="dateAlign"
-            class="button select"
-          >
-            <option>center</option>
-            <option>left</option>
-            <option>right</option>
-          </select>
-        </div>
+            label="date-align"
+            outlined
+            dense
+            options-dense
+            :options="[
+              'center',
+              'left',
+              'right'
+            ]"
+            class="button"
+            style="min-width: 160px;"
+          />
 
-        <div style="display: flex; align-items: center">
-          <label
-            for="weekday-align"
-            style="margin-right: 2px;"
-          >weekday-align:</label>
-          <select
-            id="weekday-align"
+          <q-select
             v-model="weekdayAlign"
-            class="button select"
-          >
-            <option>center</option>
-            <option>left</option>
-            <option>right</option>
-          </select>
+            label="weekday-align"
+            outlined
+            dense
+            options-dense
+            :options="[
+              'center',
+              'left',
+              'right'
+            ]"
+            class="button"
+            style="min-width: 160px;"
+          />
         </div>
       </div>
     </div>

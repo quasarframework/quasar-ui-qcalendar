@@ -115,7 +115,8 @@
 import {
   today,
   isBetweenDates,
-  parsed
+  parsed,
+  padNumber
 } from '@quasar/quasar-ui-qcalendar/Timestamp.js'
 import { QCalendarTask } from '@quasar/quasar-ui-qcalendar/QCalendarTask.js'
 import '@quasar/quasar-ui-qcalendar/QCalendarVariables.sass'
@@ -147,7 +148,7 @@ export default defineComponent({
       focusable: true,
       focusType: [],
       focusTypeSelection: '',
-      options: [ 'day', 'weekday', 'date', 'resource' ],
+      options: [ 'weekday', 'date', 'task' ],
       tasks: [
         {
           icon: 'done',
@@ -265,6 +266,19 @@ export default defineComponent({
       }
       return tasks
     }
+  },
+  beforeMount () {
+    // adjust all the dates for the current month
+    const date = new Date()
+    const year = date.getFullYear()
+    const month = padNumber((date.getMonth() + 1), 2)
+    this.tasks.forEach(task => {
+      task.logged.forEach(logged => {
+        // get last 2 digited from current date (day)
+        const day = logged.date.slice(-2)
+        logged.date = [ year, padNumber(month, 2), padNumber(day, 2) ].join('-')
+      })
+    })
   },
   methods: {
     getLogged (date, logged) {

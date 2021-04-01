@@ -2,64 +2,62 @@
   <div class="subcontent">
     <div class="line">You can use the properties <code class="example-token">date-header</code>, <code class="example-token">date-align</code> and <code class="example-token">weekday-align</code> to manipulate how the header area looks.</div>
 
-    <div
-      class="button-bar"
-      style="margin: 12px;"
-    >
-      <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
-        <label
-          for="date-header"
-          style="margin-right: 2px;"
-        >date-header:</label>
-        <select
-          id="date-header"
-          v-model="dateHeader"
-          class="button select"
-        >
-          <option>stacked</option>
-          <option>inline</option>
-          <option>inverted</option>
-        </select>
-      </div>
-
-      <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
-        <label
-          for="date-align"
-          style="margin-right: 2px;"
-        >date-align:</label>
-        <select
-          id="date-align"
-          v-model="dateAlign"
-          class="button select"
-        >
-          <option>center</option>
-          <option>left</option>
-          <option>right</option>
-        </select>
-      </div>
-
-      <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
-        <label
-          for="weekday-align"
-          style="margin-right: 2px;"
-        >weekday-align:</label>
-        <select
-          id="weekday-align"
-          v-model="weekdayAlign"
-          class="button select"
-        >
-          <option>center</option>
-          <option>left</option>
-          <option>right</option>
-        </select>
-      </div>
-    </div>
-
     <navigation-bar
       @today="onToday"
       @prev="onPrev"
       @next="onNext"
     />
+
+    <div
+      class="button-bar"
+      style="margin: 12px;"
+    >
+      <q-select
+        v-model="dateHeader"
+        label="date-header"
+        outlined
+        dense
+        options-dense
+        :options="[
+          'stacked',
+          'inline',
+          'inverted'
+        ]"
+        class="button"
+        style="min-width: 160px;"
+      />
+
+      <q-select
+        v-model="dateAlign"
+        label="date-align"
+        outlined
+        dense
+        options-dense
+        :options="[
+          'center',
+          'left',
+          'right'
+        ]"
+        class="button"
+        style="min-width: 160px;"
+      />
+
+      <q-select
+        v-model="weekdayAlign"
+        label="weekday-align"
+        outlined
+        dense
+        options-dense
+        :options="[
+          'center',
+          'left',
+          'right'
+        ]"
+        class="button"
+        style="min-width: 160px;"
+      />
+
+    </div>
 
     <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
       <div style="display: flex; max-width: 800px; width: 100%; height: 200px;">

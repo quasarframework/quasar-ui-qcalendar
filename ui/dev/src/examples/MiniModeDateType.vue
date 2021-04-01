@@ -6,25 +6,21 @@
       @next="onNext"
     />
 
-    <div style="display: flex; justify-content: center; align-items: center;">
-      <div class="button">
-        <input
-          id="1char"
-          v-model="dateType"
-          value="round"
-          type="radio"
-        >
-        <label for="1char">round</label>
-      </div>
-      <div class="button">
-        <input
-          id="2char"
-          v-model="dateType"
-          value="square"
-          type="radio"
-        >
-        <label for="2char">square</label>
-      </div>
+    <div class="q-ma-sm flex justify-center">
+      <q-radio
+        v-model="dateType"
+        val="round"
+        label="round"
+        dense
+        style="min-width: 100px;"
+      />
+      <q-radio
+        v-model="dateType"
+        val="square"
+        label="square"
+        dense
+        style="min-width: 100px;"
+      />
     </div>
 
     <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">

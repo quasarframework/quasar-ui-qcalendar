@@ -140,7 +140,6 @@ export default {
   },
   methods: {
     onClicked () {
-      debugger
       this.$emit('update:modelValue', !this.modelValue)
     }
   }

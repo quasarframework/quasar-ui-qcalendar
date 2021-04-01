@@ -10,53 +10,50 @@
       class="button-bar"
       style="margin: 12px;"
     >
-      <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
-        <label
-          for="date-header"
-          style="margin-right: 2px;"
-        >date-header:</label>
-        <select
-          id="date-header"
-          v-model="dateHeader"
-          class="button select"
-        >
-          <option>stacked</option>
-          <option>inline</option>
-          <option>inverted</option>
-        </select>
-      </div>
+      <q-select
+        v-model="dateHeader"
+        label="date-header"
+        outlined
+        dense
+        options-dense
+        :options="[
+          'stacked',
+          'inline',
+          'inverted'
+        ]"
+        class="button"
+        style="min-width: 160px;"
+      />
 
-      <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
-        <label
-          for="date-align"
-          style="margin-right: 2px;"
-        >date-align:</label>
-        <select
-          id="date-align"
-          v-model="dateAlign"
-          class="button select"
-        >
-          <option>center</option>
-          <option>left</option>
-          <option>right</option>
-        </select>
-      </div>
+      <q-select
+        v-model="dateAlign"
+        label="date-align"
+        outlined
+        dense
+        options-dense
+        :options="[
+          'center',
+          'left',
+          'right'
+        ]"
+        class="button"
+        style="min-width: 160px;"
+      />
 
-      <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
-        <label
-          for="weekday-align"
-          style="margin-right: 2px;"
-        >weekday-align:</label>
-        <select
-          id="weekday-align"
-          v-model="weekdayAlign"
-          class="button select"
-        >
-          <option>center</option>
-          <option>left</option>
-          <option>right</option>
-        </select>
-      </div>
+      <q-select
+        v-model="weekdayAlign"
+        label="weekday-align"
+        outlined
+        dense
+        options-dense
+        :options="[
+          'center',
+          'left',
+          'right'
+        ]"
+        class="button"
+        style="min-width: 160px;"
+      />
     </div>
 
     <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
@@ -74,7 +71,7 @@
           :weekday-class="weekdayClass"
           :day-class="dayClass"
           :footer-day-class="footerDayClass"
-          :focus-type="['day', 'date', 'task']"
+          :focus-type="['weekday', 'date', 'task']"
           focusable
           hoverable
           animated
@@ -134,7 +131,8 @@
 import {
   today,
   isBetweenDates,
-  parsed
+  parsed,
+  padNumber
 } from '@quasar/quasar-ui-qcalendar/Timestamp.js'
 import { QCalendarTask } from '@quasar/quasar-ui-qcalendar/QCalendarTask.js'
 import '@quasar/quasar-ui-qcalendar/QCalendarVariables.sass'
@@ -282,6 +280,19 @@ export default defineComponent({
       }
       return tasks
     }
+  },
+  beforeMount () {
+    // adjust all the dates for the current month
+    const date = new Date()
+    const year = date.getFullYear()
+    const month = padNumber((date.getMonth() + 1), 2)
+    this.tasks.forEach(task => {
+      task.logged.forEach(logged => {
+        // get last 2 digited from current date (day)
+        const day = logged.date.slice(-2)
+        logged.date = [ year, padNumber(month, 2), padNumber(day, 2) ].join('-')
+      })
+    })
   },
   methods: {
     getLogged (date, logged) {
