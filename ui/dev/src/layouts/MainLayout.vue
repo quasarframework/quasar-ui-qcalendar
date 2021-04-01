@@ -48,89 +48,73 @@
       show-if-above
       class="menu markdown__scroll"
     >
-      <div
-        v-for="parent in menu"
-        :key="parent.name"
-        style="display: flex; flex-direction: column; width: 100%;"
-      >
-        <div
-          :tabindex="0"
-          style="display: flex; justify-content: space-between;"
-          :class="klasses(parent)"
-          @click="onToggleMenuItem(parent)"
+      <q-list dense>
+        <q-expansion-item
+          v-for="parent in menu"
+          :key="parent.name"
+          group="menu"
+          dense
+          dense-toggle
+          :label="parent.name"
         >
-          <div>{{ parent.name }}</div>
-          <caret-down v-if="parent.children !== undefined" :class="parentClasses(parent)" />
-        </div>
-        <template v-if="parent.children !== undefined">
-          <div
-            style="display: flex; flex-direction: column; width: 100%;"
-            :class="childClasses(parent)"
+          <template
+            v-for="child in parent.children"
+            :key="child.name"
           >
-            <template
-              v-for="child in parent.children"
-              :key="child.name"
+            <q-item
+              v-if="child.path"
+              clickable
+              v-ripple
+              dense
+              @click="onChildClick(child.path)"
+              :active="child.name !== undefined && child.name === $route.name"
+              class="menu ellipsis"
             >
-              <a
-                v-if="child.link !== undefined"
-                :tabindex="parent.expanded === true ? 0 : -1"
-                class="list-item child__item ellipsis"
-                style="display: flex; align-items: center;"
-                :href="child.link"
-                target="_blank"
-              >
-                {{ child.name }}
-                <q-icon :name="biLink" />
-              </a>
-              <div
-                v-else
-                :tabindex="parent.expanded === true ? 0 : -1"
-                class="list-item child__item ellipsis"
-                @click="onChildClick(child.path)"
-              >
-                {{ child.name }}
-              </div>
-            </template>
-          </div>
-        </template>
-      </div>
+              <q-item-section side></q-item-section>
+              <q-item-section>{{ child.name }}</q-item-section>
+            </q-item>
 
-      <q-list>
+            <q-item
+              v-if="child.link"
+              tag="a"
+              :href="child.link"
+              target="_blank"
+              dense
+              :label="child.name"
+              class="menu ellipsis"
+            >
+              <q-item-section side></q-item-section>
+              <q-item-section>{{ child.name }}</q-item-section>
+              <q-item-section side><q-icon :name="getMenuIcon(child)" /></q-item-section>
+            </q-item>
+
+          </template>
+        </q-expansion-item>
+
         <q-item-label
           header
         >
           <div>Found: {{ filteredPages.length }} examples</div>
-          <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 10px; width: 100%">
-            <div
-              class="button"
-              style="width: 100%; margin: 8px 0;"
-            >
-              <div style="width: 44px">Search:</div>
-              <input
-                v-model="filter"
-                class="select"
-              >
-              <div
-                v-if="filter.length > 0"
-                style="margin: 2px; font-weight: 700; cursor: pointer;"
-                @click="onClearFilter"
-              >
-                X
-              </div>
-            </div>
-          </div>
+          <q-input
+            v-model="filter"
+            dense
+            clearable
+            label="Search"
+          />
         </q-item-label>
 
-      <div class="list">
-        <button
+        <q-item
           v-for="page in filteredPages"
           :key="page.path"
-          :class="klasses(page)"
+          clickable
+          v-ripple
+          dense
           @click="onExampleClick(page.path)"
+          :active="page.name !== undefined && page.name === $route.name"
+          class="menu ellipsis"
         >
-          {{ page.name }}
-        </button>
-      </div>
+          <q-item-section>{{ page.name }}</q-item-section>
+       </q-item>
 
       </q-list>
     </q-drawer>
@@ -156,12 +140,10 @@
             :active="activeToc === item.id"
             class="toc"
           >
-          <q-item-section
-            v-if="item.level > 2"
-            side
-          > » </q-item-section>
             <q-item-section
-            >{{ item.label }}</q-item-section>
+              v-if="item.level > 2"
+              side> » </q-item-section>
+            <q-item-section>{{ item.label }}</q-item-section>
           </q-item>
         </q-list>
       </q-scroll-area>
@@ -212,14 +194,16 @@ import children from '../router/children.js'
 import menuItems from './menu.js'
 import { useMarkdownStore } from 'assets/markdown-store.js'
 
-import CaretDown from '@carbon/icons-vue/es/caret--down/16'
-import { biLink } from '@quasar/extras/bootstrap-icons'
+import {
+  biLink,
+  biTwitter,
+  biGithub
+} from '@quasar/extras/bootstrap-icons'
 
 export default defineComponent({
   name: 'MainLayout',
 
   components: {
-    CaretDown
   },
 
   setup () {
@@ -299,9 +283,8 @@ export default defineComponent({
 
     function klasses (item) {
       return {
-        button: true,
+        menu: true,
         active: item.name !== undefined && item.name === $route.name,
-        'list-item': true,
         ellipsis: true
       }
     }
@@ -371,6 +354,14 @@ export default defineComponent({
       }
     }
 
+    function getMenuIcon (child) {
+      switch (child.name) {
+        case 'Github': return biGithub
+        case 'Twitter': return biTwitter
+        default: return biLink
+      }
+    }
+
     return {
       version,
       isExample,
@@ -398,7 +389,10 @@ export default defineComponent({
       },
       onScroll,
       scrollTo,
-      biLink
+      getMenuIcon,
+      biLink,
+      biTwitter,
+      biGithub
     }
   }
 })
