@@ -204,13 +204,13 @@ The `label-breakpoints` property is an array of two numbers. The parent div that
 
 ## Transitions
 
-Transition are a way to make your calendar come-alive to you end-user. When a calendar changes to a previous or next week/month, instead of just instantly displaying it, we can use the `animated` property to turn on transitions.
+Transition are a way to make your calendar come-alive to your end-user. When a calendar changes to a previous or next week/month, instead of just instantly displaying it, we can use the `animated` property to turn on transitions.
 
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
 | animated | Boolean        |              |
 
-Then you can use the `transiton-prev` and `transiton-next` properties to change the default behavior, which is `slide-right` and -slide-left`, respectively.
+Then you can use the `transiton-prev` and `transiton-next` properties to change the default behavior, which is `slide-right` and `slide-left`, respectively.
 
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
@@ -228,7 +228,6 @@ QCalendar support the following transition types:
 | roll-up    | slide-up    | jump-up    | rotate |
 | roll-down  | slide-down  | jump-down  | spin   |
 |            |             |            | flip   |
-
 
 ## Hoverable and focusable
 

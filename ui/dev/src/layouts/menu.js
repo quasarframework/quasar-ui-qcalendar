@@ -32,6 +32,11 @@ const menu = [
         component: () => import('../pages/developing/getting-started.md')
       },
       {
+        name: 'QCalendar Transitions',
+        path: 'developing/qcalendar-transitions',
+        component: () => import('../pages/developing/qcalendar-transitions.md')
+      },
+      {
         name: 'QCalendarDay',
         path: 'developing/qcalendarday',
         component: () => import('../pages/developing/qcalendarday.md')
@@ -82,6 +87,11 @@ const menu = [
         name: 'Themes',
         path: 'designing-with-qcalendar/themes',
         component: () => import('../pages/designing-with-qcalendar/themes.md')
+      },
+      {
+        name: 'QCalendar SASS Variables',
+        path: 'designing-with-qcalendar/qcalendar-sass-variables',
+        component: () => import('../pages/designing-with-qcalendar/qcalendar-sass-variables.md')
       },
       {
         name: 'Theme builder',
