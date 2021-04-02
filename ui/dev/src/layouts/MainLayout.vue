@@ -103,7 +103,7 @@
             v-model="filter"
             dense
             clearable
-            label="Search"
+            label="Search examples"
           />
         </q-item-label>
 
@@ -236,9 +236,7 @@ export default defineComponent({
 
     onBeforeMount(() => {
       const val = localStorage.getItem('filter')
-      if (val) {
-        filter.value = val
-      }
+      filter.value = val || ''
     })
 
     onMounted(() => {
@@ -246,7 +244,9 @@ export default defineComponent({
     })
 
     watch(filter, (val) => {
-      localStorage.setItem('filter', val)
+      if (val || val === '') {
+        localStorage.setItem('filter', val)
+      }
     })
 
     function onClearFilter () {
