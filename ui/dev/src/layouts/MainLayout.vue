@@ -164,13 +164,16 @@
             <div style="font-size: 24px; font-weight: 500;">{{ name }}</div>
           </div>
           <div style="width: 100%; display: flex; justify-content: center;">
-            <a
+            <q-btn
               v-if="path !== null"
+              no-caps
+              type="a"
+              :icon="biGithub"
               :href="path"
               target="_blank"
               class="button link"
             >View Source on Github
-            </a>
+            </q-btn>
           </div>
         </div>
 
