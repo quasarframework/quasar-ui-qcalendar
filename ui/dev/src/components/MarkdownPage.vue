@@ -1,13 +1,15 @@
 <template>
-  <slot></slot>
-  <div v-if="path && noEdit !== true">
-    <br><br><br><br>Found an error on this page or feel it could be improved?
-    <a
-      :href="'https://github.com/quasarframework/quasar-ui-qcalendar/tree/dev/ui/dev/src/pages' + path"
-      target="_blank"
-    >
-      Edit this page on Github
-    </a>
+  <div>
+    <slot></slot>
+    <div v-if="path && noEdit !== true">
+      <br><br><br><br>Found an error on this page or feel it could be improved?
+      <a
+        :href="'https://github.com/quasarframework/quasar-ui-qcalendar/tree/dev/ui/dev/src/pages' + path"
+        target="_blank"
+      >
+        Edit this page on Github
+      </a>
+    </div>
   </div>
 </template>
 

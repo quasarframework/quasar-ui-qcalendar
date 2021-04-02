@@ -52,75 +52,7 @@
       show-if-above
       class="menu markdown__scroll"
     >
-      <q-list dense>
-        <q-expansion-item
-          v-for="parent in menu"
-          :key="parent.name"
-          group="menu"
-          dense
-          dense-toggle
-          :label="parent.name"
-        >
-          <template
-            v-for="child in parent.children"
-            :key="child.name"
-          >
-            <q-item
-              v-if="child.path"
-              clickable
-              v-ripple
-              dense
-              @click="onChildClick(child.path)"
-              :active="child.name !== undefined && child.name === $route.name"
-              class="menu ellipsis"
-            >
-              <q-item-section side></q-item-section>
-              <q-item-section>{{ child.name }}</q-item-section>
-            </q-item>
-
-            <q-item
-              v-if="child.link"
-              tag="a"
-              :href="child.link"
-              target="_blank"
-              dense
-              :label="child.name"
-              class="menu ellipsis"
-            >
-              <q-item-section side></q-item-section>
-              <q-item-section>{{ child.name }}</q-item-section>
-              <q-item-section side><q-icon :name="getMenuIcon(child)" /></q-item-section>
-            </q-item>
-
-          </template>
-        </q-expansion-item>
-
-        <q-item-label
-          header
-        >
-          <div>Found: {{ filteredPages.length }} examples</div>
-          <q-input
-            v-model="filter"
-            dense
-            clearable
-            label="Search examples"
-          />
-        </q-item-label>
-
-        <q-item
-          v-for="page in filteredPages"
-          :key="page.path"
-          clickable
-          v-ripple
-          dense
-          @click="onExampleClick(page.path)"
-          :active="page.name !== undefined && page.name === $route.name"
-          class="menu ellipsis"
-        >
-          <q-item-section>{{ page.name }}</q-item-section>
-       </q-item>
-
-      </q-list>
+      <left-menu />
     </q-drawer>
 
     <q-drawer
@@ -185,32 +117,45 @@
       </div>
 
     </q-page-container>
+
+    <q-page-scroller
+      position="bottom-right"
+      :scroll-offset="150"
+      :offset="[18, 18]"
+    >
+      <q-fab
+        padding="sm"
+        icon="keyboard_arrow_up"
+        :class="{ 'text-black bg-grey-4': $q.dark.isActive, 'text-white bg-primary': !$q.dark.isActive }"
+      />
+    </q-page-scroller>
+
   </q-layout>
 </template>
 
 <script>
 
-import { defineComponent, ref, reactive, computed, onBeforeMount, onMounted, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { defineComponent, ref, computed, onMounted, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import { version } from '@quasar/quasar-ui-qcalendar'
 
 import { scroll } from 'quasar'
 const { setVerticalScrollPosition } = scroll
 
-import children from '../router/children.js'
-import menuItems from './menu.js'
 import { useMarkdownStore } from 'assets/markdown-store.js'
 
-import {
-  biLink,
-  biTwitter,
-  biGithub
-} from '@quasar/extras/bootstrap-icons'
+// import {
+//   biLink,
+//   biTwitter,
+//   biGithub
+// } from '@quasar/extras/bootstrap-icons'
+import LeftMenu from '../components/LeftMenu.vue'
 
 export default defineComponent({
   name: 'MainLayout',
 
   components: {
+    LeftMenu
   },
 
   setup () {
@@ -219,42 +164,15 @@ export default defineComponent({
       name = ref(null),
       store = useMarkdownStore(),
       $route = useRoute(),
-      $router = useRouter(),
       leftDrawerOpen = ref(false),
       rightDrawerOpen = ref(false),
-      filter = ref(''),
-      menu = reactive(menuItems),
       activeToc = ref(0)
 
     const isExample = computed(() => $route.path.startsWith('/examples'))
 
-    const filteredPages = computed(() => {
-      if (filter.value) {
-        const filtered = filter.value.toLowerCase()
-        return children.filter(val =>
-          val.name.toLowerCase().indexOf(filtered) > -1)
-      }
-      return children
-    })
-
-    onBeforeMount(() => {
-      const val = localStorage.getItem('filter')
-      filter.value = val || ''
-    })
-
     onMounted(() => {
       handleRouteChange()
     })
-
-    watch(filter, (val) => {
-      if (val || val === '') {
-        localStorage.setItem('filter', val)
-      }
-    })
-
-    function onClearFilter () {
-      filter.value = ''
-    }
 
     watch(() => $route.fullPath, () => {
       handleRouteChange()
@@ -271,44 +189,11 @@ export default defineComponent({
       }
     }
 
-    function onToggleMenuItem (item) {
-      let doExpand = true
-      if (item !== undefined && item.expanded === true) doExpand = false
-      menu.forEach(itm => { itm.expanded = false })
-      if (item !== undefined && doExpand === true) item.expanded = true
-    }
-
-    function onChildClick (path) {
-      $router.push('/' + path)
-    }
-
-    function onExampleClick (path) {
-      store.toc = [] // remove toc
-      onToggleMenuItem() // close accordian menu
-      $router.push('/examples/' + path)
-    }
-
     function klasses (item) {
       return {
         menu: true,
         active: item.name !== undefined && item.name === $route.name,
         ellipsis: true
-      }
-    }
-
-    function parentClasses (parent) {
-      return {
-        parent: true,
-        parent__expanded: parent.expanded === true,
-        parent__collapsed: parent.expanded === false
-      }
-    }
-
-    function childClasses (parent) {
-      return {
-        child: true,
-        child__expanded: parent.expanded === true,
-        child__collapsed: parent.expanded === false
       }
     }
 
@@ -361,30 +246,13 @@ export default defineComponent({
       }
     }
 
-    function getMenuIcon (child) {
-      switch (child.name) {
-        case 'Github': return biGithub
-        case 'Twitter': return biTwitter
-        default: return biLink
-      }
-    }
-
     return {
       version,
       isExample,
       store,
-      menu,
       path,
       name,
-      filter,
-      filteredPages,
-      onClearFilter,
-      onChildClick,
-      onExampleClick,
       klasses,
-      parentClasses,
-      childClasses,
-      onToggleMenuItem,
       activeToc,
       leftDrawerOpen,
       rightDrawerOpen,
@@ -395,11 +263,7 @@ export default defineComponent({
         rightDrawerOpen.value = !rightDrawerOpen.value
       },
       onScroll,
-      scrollTo,
-      getMenuIcon,
-      biLink,
-      biTwitter,
-      biGithub
+      scrollTo
     }
   }
 })

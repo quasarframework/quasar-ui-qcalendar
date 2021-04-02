@@ -95,8 +95,7 @@ const menu = [
       },
       {
         name: 'Theme builder',
-        path: 'designing-with-qcalendar/theme-builder',
-        component: () => import('../pages/designing-with-qcalendar/ThemeBuilder.vue')
+        path: 'theme-builder'
       },
       {
         name: 'Tutorials',

@@ -7,6 +7,7 @@ import { defineComponent } from 'vue'
 import { useMeta } from 'quasar'
 
 import { provideMarkdownStore } from 'assets/markdown-store.js'
+import { provideThemeBuilderStore } from 'assets/theme-builder-store.js'
 import getMeta from 'assets/get-meta.js'
 
 export default defineComponent({
@@ -24,6 +25,7 @@ export default defineComponent({
     })
 
     provideMarkdownStore()
+    provideThemeBuilderStore()
   }
 })
 </script>

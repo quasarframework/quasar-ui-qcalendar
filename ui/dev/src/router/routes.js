@@ -1,4 +1,4 @@
-import menuItems from '../layouts/menu.js'
+import menuItems from './menu.js'
 import children from './children.js'
 
 const menuRoutes = []
@@ -13,14 +13,6 @@ for (const parent of menuItems) {
     }
   }
 }
-
-// const children = pages.map(page => {
-//   return {
-//     name: page.file,
-//     path: page.path,
-//     component: () => import('examples/' + page.file + '.vue')
-//   }
-// })
 
 const routes = [
   {
@@ -39,6 +31,11 @@ const routes = [
     component: () => import('../layouts/MainLayout.vue'),
     children: [].concat(children)
   },
+  {
+    path: '/theme-builder',
+    component: () => import('layouts/ThemeBuilder.vue')
+  },
+
   // Always leave this as last one,
   // but you can also remove it
   {
