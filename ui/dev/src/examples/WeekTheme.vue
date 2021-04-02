@@ -8,21 +8,18 @@
 
     <div style="display: flex; justify-content: center">
       <div style="display: flex; justify-content: center; align-items: center;">
-        <label for="theme" style="white-space: nowrap">Choose a theme:&nbsp;</label>
-        <select
-          id="theme"
+        <q-select
           v-model="theme"
-          name="theme"
-          class="button select"
-        >
-          <option
-            v-for="t in themesList"
-            :key="t.label"
-            :value="t.value"
-          >
-            {{ t.label }}
-          </option>
-        </select>
+          label="Choose a theme"
+          outlined
+          dense
+          map-options
+          emit-value
+          options-dense
+          :options="themesList"
+          class="button"
+          style="min-width: 180px;"
+        />
       </div>
     </div>
 

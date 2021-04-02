@@ -24,6 +24,10 @@
           </q-btn>
         </q-toolbar-title>
 
+        <q-toolbar-title v-if="$q.screen.width > 500">
+          Make Beautiful, Responsive Calendars
+        </q-toolbar-title>
+
         <q-space />
 
         <q-btn flat round @click="$q.dark.toggle()" :icon="$q.dark.isActive ? 'brightness_2' : 'brightness_5'" />
@@ -171,7 +175,7 @@
         </div>
 
         <div :class="'flex ' + (isExample === true ? 'flex-center' : 'flex-start')">
-          <div style="max-width: 800px; width: 100%;">
+          <div :style="'max-width: ' + ($route.path === '/' ? '1000' : '800') + 'px; width: 100%;'">
             <router-view />
           </div>
         </div>

@@ -3,22 +3,18 @@
     <div class="line">The example below uses the <code class="example-token">selected-start-end-dates</code> property in conjunction with mouse events to select iterval ranges.</div>
     <div class="line">Try toggling the <code class="example-token">Mobile selection</code> to see how selection can be changed.</div>
 
-    <div style="display: flex; justify-content: center; align-items: center;">
-      <div class="button">
-        <input
-          id="mobile"
-          v-model="mobile"
-          type="checkbox"
-        >
-        <label for="mobile">Mobile selection (first click, second click)</label>
-      </div>
-    </div>
-
     <navigation-bar
       @today="onToday"
       @prev="onPrev"
       @next="onNext"
     />
+
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <q-checkbox
+        v-model="mobile"
+        label="Mobile selection (first click, second click)"
+      />
+    </div>
 
     <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
       <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">

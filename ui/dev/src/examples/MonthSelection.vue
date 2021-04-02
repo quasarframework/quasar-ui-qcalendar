@@ -7,14 +7,10 @@
     />
 
     <div style="display: flex; justify-content: center; align-items: center;">
-      <div class="button">
-        <input
-          id="mobile"
-          v-model="mobile"
-          type="checkbox"
-        >
-        <label for="mobile">Mobile selection</label>
-      </div>
+      <q-checkbox
+        v-model="mobile"
+        label="Mobile selection (first click, second click)"
+      />
     </div>
 
     <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">

@@ -8,21 +8,18 @@
 
     <div style="display: flex; justify-content: center">
       <div style="display: flex; justify-content: center; align-items: center">
-        <label for="locale">Choose a locale:&nbsp;</label>
-        <select
-          id="locale"
+        <q-select
           v-model="locale"
-          name="locale"
-          class="button select"
-        >
-          <option
-            v-for="local in locales"
-            :key="local.value"
-            :value="local.value"
-          >
-            {{ local.label }}
-          </option>
-        </select>
+          label="Choose a locale"
+          outlined
+          dense
+          map-options
+          emit-value
+          options-dense
+          :options="locales"
+          class="button"
+          style="min-width: 180px;"
+        />
       </div>
     </div>
 
@@ -69,7 +66,7 @@ export default defineComponent({
   data () {
     return {
       selectedDate: today(),
-      locale: 'en-us',
+      locale: 'en-US',
       locales: [
         { value: 'ar', label: 'العربية' },
         { value: 'bg', label: 'български език' },
@@ -77,11 +74,11 @@ export default defineComponent({
         { value: 'cs', label: 'Čeština' },
         { value: 'da', label: 'Dansk' },
         { value: 'de', label: 'Deutsch' },
-        { value: 'en-gb', label: 'English (UK)' },
-        { value: 'en-us', label: 'English (US)' },
+        { value: 'en-GB', label: 'English (UK)' },
+        { value: 'en-US', label: 'English (US)' },
         { value: 'eo', label: 'Esperanto' },
         { value: 'es', label: 'Español' },
-        { value: 'fa-ir', label: 'فارسی' },
+        { value: 'fa-IR', label: 'فارسی' },
         { value: 'fi', label: 'Suomi' },
         { value: 'fr', label: 'Français' },
         { value: 'gn', label: 'Avañe\'ẽ' },
@@ -92,15 +89,15 @@ export default defineComponent({
         { value: 'it', label: 'Italiano' },
         { value: 'ja', label: '日本語 (にほんご)' },
         { value: 'km', label: 'ខ្មែរ' },
-        { value: 'ko-kr', label: '한국어' },
+        { value: 'ko-KR', label: '한국어' },
         { value: 'lu', label: 'Kiluba' },
         { value: 'lv', label: 'Latviešu valoda' },
         { value: 'ml', label: 'മലയാളം' },
         { value: 'ms', label: 'Bahasa Melayu' },
-        { value: 'nb-no', label: 'Norsk' },
+        { value: 'nb-NO', label: 'Norsk' },
         { value: 'nl', label: 'Nederlands' },
         { value: 'pl', label: 'Polski' },
-        { value: 'pt-br', label: 'Português (BR)' },
+        { value: 'pt-BR', label: 'Português (BR)' },
         { value: 'pt', label: 'Português' },
         { value: 'ro', label: 'Română' },
         { value: 'ru', label: 'русский' },
@@ -113,8 +110,8 @@ export default defineComponent({
         { value: 'tr', label: 'Türkçe' },
         { value: 'uk', label: 'Українська' },
         { value: 'vi', label: 'Tiếng Việt' },
-        { value: 'zh-hans', label: '中文(简体)' },
-        { value: 'zh-hant', label: '中文(繁體)' }
+        { value: 'zh-HANS', label: '中文(简体)' },
+        { value: 'zh-HANT', label: '中文(繁體)' }
       ]
     }
   },

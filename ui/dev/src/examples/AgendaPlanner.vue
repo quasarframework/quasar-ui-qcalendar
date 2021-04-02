@@ -227,7 +227,7 @@ export default defineComponent({
       shortMonthLabel = ref(false),
       todayDate = ref(today()),
       todayTimestamp = reactive(parseTimestamp(todayDate.value)),
-      locale = ref('en-us'),
+      locale = ref('en-US'),
       dateFormatter = ref(null),
       titleFormatter = ref(null),
       leftColumnOptions = reactive([

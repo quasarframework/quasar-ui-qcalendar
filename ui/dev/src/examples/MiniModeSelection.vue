@@ -7,22 +7,14 @@
     />
 
     <div style="display: flex; justify-content: center; align-items: center;">
-      <div class="button">
-        <input
-          id="mobile"
-          v-model="mobile"
-          type="checkbox"
-        >
-        <label for="mobile">Mobile selection</label>
-      </div>
-      <div class="button">
-        <input
-          id="hover"
-          v-model="useHover"
-          type="checkbox"
-        >
-        <label for="hover">Use Hover</label>
-      </div>
+      <q-checkbox
+        v-model="mobile"
+        label="Mobile selection (first click, second click)"
+      />
+      <q-checkbox
+        v-model="hover"
+        label="Hover mode"
+      />
     </div>
 
     <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
@@ -82,8 +74,7 @@ export default defineComponent({
       otherTimestamp = ref(null),
       mouseDown = ref(false),
       mobile = ref(false),
-      hover = ref(false),
-      useHover = ref(false)
+      hover = ref(false)
 
     const startEndDates = computed(() => {
       const dates = []
@@ -126,7 +117,6 @@ export default defineComponent({
         mouseDown.value = true
         anchorTimestamp.value = scope.timestamp
         otherTimestamp.value = scope.timestamp
-        hover.value = useHover.value
       }
     }
 
@@ -181,7 +171,6 @@ export default defineComponent({
       calendar,
       mobile,
       hover,
-      useHover,
       startEndDates,
       onMouseDownDay,
       onMouseUpDay,

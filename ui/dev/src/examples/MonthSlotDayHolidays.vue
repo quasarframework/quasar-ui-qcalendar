@@ -120,7 +120,7 @@ export default defineComponent({
         AM: 'hy', // 'Հայաստան', Armenian
         AO: 'pt', // 'Angola', Potuguese
         AR: 'es-ar', // 'Argentina', Spanish
-        AS: 'en-us', // 'American Samoa', American English
+        AS: 'en-US', // 'American Samoa', American English
         AT: 'de-at', // 'Österreich', German (Austrian)/Bavarian
         AU: 'en-au', // 'Australia', Austraian English
         AW: 'nl', // 'Aruba', Dutch
@@ -140,7 +140,7 @@ export default defineComponent({
         BN: 'en', // 'Negara Brunei Darussalam', Maylay/English
         BO: 'es-bo', // 'Bolivia', English Bolian
         BQ: 'nl', // Caribisch Nederland', Dutch
-        BR: 'pt-br', // 'Brasil', Portuguese Brazil
+        BR: 'pt-BR', // 'Brasil', Portuguese Brazil
         BS: 'bah', // 'Bahamas', Bahamian Creole
         BW: 'tn', // 'Botswana', Setswana
         BY: 'ru', // 'Рэспубліка Беларусь', Russian
@@ -174,7 +174,7 @@ export default defineComponent({
         FO: 'de', // 'Føroyar', German
         FR: 'fr', // 'France', French
         GA: 'fr', // 'Gabon', French
-        GB: 'en-gb', // 'United Kingdom', English Great Britain
+        GB: 'en-GB', // 'United Kingdom', English Great Britain
         GD: 'en', // 'Grenada', Englsih
         GE: 'ka', // 'საქართველო', Georgian
         GF: 'fr-gy', // 'Guyane', Grench Guyane
@@ -248,7 +248,7 @@ export default defineComponent({
         TZ: 'sw', // 'Tanzania', Swahili
         UA: 'uk', // 'Україна', Ukraine
         UG: 'en-ug', // 'Uganda', English Uganda
-        US: 'en-us', // 'United States of America', English USA
+        US: 'en-US', // 'United States of America', English USA
         UY: 'es-uy', // 'Uruguay', Spanish Uruguay
         VA: 'it', // 'Stato della Città del Vaticano', Italian
         VE: 'es-ve', // 'Venezuela', Spanish Venezuela

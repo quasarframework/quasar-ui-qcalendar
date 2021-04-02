@@ -119,7 +119,7 @@ export default defineComponent({
     const selectedDate = ref(today()),
       calendar = ref(null),
       weekdays = reactive([ 0, 1, 2, 3, 4, 5, 6 ]),
-      locale = ref('en-us'),
+      locale = ref('en-US'),
       monthFormatter = monthFormatterFunc(),
       dayFormatter = dayFormatterFunc(),
       weekdayFormatter = weekdayFormatterFunc(),

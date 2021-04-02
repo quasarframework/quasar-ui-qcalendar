@@ -93,7 +93,7 @@ export default defineComponent({
     const selectedDate = ref(today()),
       calendar = ref(null),
       selectedYear = ref(new Date().getFullYear()),
-      locale = 'en-us'
+      locale = 'en-US'
 
     const formattedMonth = computed(() => {
       const date = new Date(selectedDate.value)
