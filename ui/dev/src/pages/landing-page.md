@@ -8,6 +8,4 @@ components:
 
 ---
 
-# Landing Page
-
 <landing-page-content />

@@ -1,7 +1,7 @@
 ---
-title: QCalendarMonth (minimode)
+title: QCalendarMonth (mini-mode)
 desc: 
 keys: developing
 ---
 
-# QCalendarMonth (minimode)
+# QCalendarMonth (mini-mode)

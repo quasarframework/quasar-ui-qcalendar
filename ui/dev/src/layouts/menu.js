@@ -47,7 +47,7 @@ const menu = [
         component: () => import('../pages/developing/qcalendarmonth.md')
       },
       {
-        name: 'QCalendarMonth (minimode)',
+        name: 'QCalendarMonth (mini-mode)',
         path: 'developing/qcalendarmonth-minimode',
         component: () => import('../pages/developing/qcalendarmonth-minimode.md')
       },
