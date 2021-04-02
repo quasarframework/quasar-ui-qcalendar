@@ -1,6 +1,6 @@
 ---
 title: QCalendar - simply the best and easiest calendar for Vue
-desc: Make spectacular, interactive and engaging calendars for your Vue app
+desc: Make Beautiful, Responsive Calendars
 keys: Help
 noEdit: true,
 components:
