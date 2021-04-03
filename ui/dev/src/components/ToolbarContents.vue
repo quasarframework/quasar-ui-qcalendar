@@ -13,8 +13,7 @@
     <q-btn
       flat
       no-caps
-      type="a"
-      href="\"
+      to="/"
       style="padding-left: 0"
     >
     <div>
