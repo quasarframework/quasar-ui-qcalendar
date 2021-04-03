@@ -1155,7 +1155,7 @@ export default defineComponent({
       }
 
       const hasWidth = size.width > 0
-      const hasResources = props.modelResources.length > 0
+      const hasResources = props.modelResources && props.modelResources.length > 0
 
       const scheduler = withDirectives(h('div', {
         class: 'q-calendar-scheduler',
