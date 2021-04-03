@@ -7,7 +7,7 @@ import { computed } from 'vue'
  */
 
 export const useCellWidthProps = {
-  cellWidth: String
+  cellWidth: [ Number, String ],
 }
 
 export default function (props) {

@@ -6,47 +6,55 @@ import {
 
 import QCalendarAgenda from './QCalendarAgenda.js'
 import QCalendarDay from './QCalendarDay.js'
-// import QCalendarTask from './QCalendarTask.js'
 import QCalendarMonth from './QCalendarMonth.js'
 import QCalendarResource from './QCalendarResource.js'
 import QCalendarScheduler from './QCalendarScheduler.js'
+import QCalendarTask from './QCalendarTask.js'
 
-function __suffixView (suffix) {
-  return [ 'day', 'week', 'month' ].map(v => v + suffix)
-}
-
-function __validateView (v) {
-  return [ 'month-interval', ...__suffixView(''), ...__suffixView('-agenda'), ...__suffixView('-resource'), ...__suffixView('-scheduler') ].includes(v)
-}
+import { useCommonProps } from '../composables/useCommon.js'
+import { useIntervalProps, useSchedulerProps, useResourceProps } from '../composables/useInterval.js'
+import { useMaxDaysProps } from '../composables/useMaxDays.js'
+import { useTimesProps } from '../composables/useTimes.js'
+import { useCellWidthProps } from '../composables/useCellWidth.js'
+import { useNavigationProps } from '../composables/useKeyboard.js'
+import { useMonthProps } from '../composables/useMonth.js'
+import { useTaskProps } from '../composables/useTask.js'
 
 export default defineComponent({
   name: 'QCalendar',
   props: {
-    view: {
+    mode: {
       type: String,
-      validator: __validateView,
+      validator: v=> ['day', 'month', 'agenda', 'resource', 'scheduler', 'task'].includes(v),
       default: 'day'
-    }
+    },
+    ...useCommonProps,
+    ...useMonthProps,
+    ...useTimesProps,
+    ...useCellWidthProps,
+    ...useNavigationProps,
+    ...useIntervalProps,
+    ...useSchedulerProps,
+    ...useResourceProps,
+    ...useMaxDaysProps,
+    ...useTaskProps
   },
   setup (props, { attrs, slots }) {
     const component = computed(() => {
-      const view = props.view.split('-')
-      switch (view[ view.length - 1 ]) {
-        case 'agenda':
-          return QCalendarAgenda
-        case 'resource':
-          return QCalendarResource
-        case 'scheduler':
-          return QCalendarScheduler
-        case 'month':
-          return QCalendarMonth
+      console.log('mode:', props.mode)
+      console.log('attrs:', attrs)
+      switch (props.mode) {
+        case 'agenda': return QCalendarAgenda
+        case 'resource':return QCalendarResource
+        case 'scheduler': return QCalendarScheduler
+        case 'month': return QCalendarMonth
+        case 'day': return QCalendarDay
+        case 'task': return QCalendarTask
         case 'day':
-        case 'week':
-        case 'interval':
         default:
           return QCalendarDay
       }
     })
-    return () => h(component.value, { ...attrs, view: props.view.split('-')[ 0 ] }, slots)
+    return () => h(component.value, { ...props, ...attrs }, slots)
   }
 })

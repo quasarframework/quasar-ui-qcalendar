@@ -80,8 +80,8 @@ export const useSchedulerProps = {
     default: 'day'
   },
   modelResources: {
-    type: Array,
-    required: true
+    type: Array
+    // required: true
   },
   resourceKey: {
     type: [ String, Number ],
@@ -185,8 +185,8 @@ export const useAgendaProps = {
 
 export const useResourceProps = {
   modelResources: {
-    type: Array,
-    required: true
+    type: Array
+    // required: true
   },
   resourceKey: {
     type: [ String, Number ],

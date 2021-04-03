@@ -56,8 +56,8 @@ export const useTaskProps = {
   },
   view: { // TODO: this needs rework
     type: String,
-    validator: v => [ 'day', 'week', 'month' ].includes(v),
-    default: 'month'
+    validator: v => [ 'day', 'week', 'month' ].includes(v)
+    // default: 'month'
   },
   viewCount: {
     type: Number,
@@ -75,10 +75,11 @@ export const useTaskProps = {
     default: () => []
   },
   noHeader: Boolean,
-  cellWidth: {
-    type: [ Number, String ],
-    default: 75
-  },
+  cellWidth: [ Number, String ],
+  // cellWidth: {
+  //   type: [ Number, String ],
+  //   default: 75
+  // },
   minLabelLength: {
     type: [ Number, String ],
     default: 2

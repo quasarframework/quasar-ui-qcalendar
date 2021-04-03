@@ -15,11 +15,11 @@ import {
 } from '../utils/Timestamp.js'
 
 export const useMonthProps = {
-  view: {
-    type: String,
-    validator: v => ['month'].includes(v),
-    default: 'month'
-  },
+  // view: {
+  //   type: String,
+  //   validator: v => ['month'].includes(v),
+  //   default: 'month'
+  // },
   dayHeight: {
     type: [ Number, String ],
     default: 0,
