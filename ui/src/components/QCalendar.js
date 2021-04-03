@@ -41,8 +41,6 @@ export default defineComponent({
   },
   setup (props, { attrs, slots }) {
     const component = computed(() => {
-      console.log('mode:', props.mode)
-      console.log('attrs:', attrs)
       switch (props.mode) {
         case 'agenda': return QCalendarAgenda
         case 'resource':return QCalendarResource
