@@ -144,11 +144,9 @@ const { setVerticalScrollPosition } = scroll
 
 import { useMarkdownStore } from 'assets/markdown-store.js'
 
-// import {
-//   biLink,
-//   biTwitter,
-//   biGithub
-// } from '@quasar/extras/bootstrap-icons'
+import {
+  biGithub
+} from '@quasar/extras/bootstrap-icons'
 import LeftMenu from '../components/LeftMenu.vue'
 
 export default defineComponent({
@@ -263,7 +261,8 @@ export default defineComponent({
         rightDrawerOpen.value = !rightDrawerOpen.value
       },
       onScroll,
-      scrollTo
+      scrollTo,
+      biGithub
     }
   }
 })
