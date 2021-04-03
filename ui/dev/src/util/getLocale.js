@@ -3,6 +3,6 @@ export const getLocale = () => {
     return navigator.languages[ 0 ]
   }
   else {
-    return navigator.userLanguages || navigator.language || navigator.browserLanguages || 'en-us'
+    return navigator.userLanguages || navigator.language || navigator.browserLanguages || 'en-US'
   }
 }

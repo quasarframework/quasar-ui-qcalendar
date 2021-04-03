@@ -64,7 +64,7 @@ export const useCommonProps = {
   },
   locale: {
     type: String,
-    default: 'en-us'
+    default: 'en-US'
   },
   animated: Boolean,
   transitionPrev: {

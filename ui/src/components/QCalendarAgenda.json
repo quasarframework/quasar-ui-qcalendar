@@ -144,8 +144,8 @@
     "locale": {
       "type": "String",
       "category": "model",
-      "desc": "Used to change the locale of the calendar. Any acceptable locale can be used that is recognized by the browser. If the locale fails, then 'en-us' is the fallback",
-      "default": "en-us",
+      "desc": "Used to change the locale of the calendar. Any acceptable locale can be used that is recognized by the browser. If the locale fails, then 'en-US' is the fallback",
+      "default": "en-US",
       "examples": [
         "locale=\"de-de\"",
         "locale=\"de\"",

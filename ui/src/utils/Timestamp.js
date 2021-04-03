@@ -847,7 +847,7 @@ export function createIntervalList (timestamp, first, minutes, count, now) {
 
 /**
  * Returns a function that uses Intl.DateTimeFormat formatting
- * @param {string} locale The locale to use (ie: en-us)
+ * @param {string} locale The locale to use (ie: en-US)
  * @param {getOptions} cb The function to call for options. This function should return an Intl formatted object. The function is passed (timestamp, short).
  * @returns {formatter} The function has params (timestamp, short). The short is to use the short options.
  */

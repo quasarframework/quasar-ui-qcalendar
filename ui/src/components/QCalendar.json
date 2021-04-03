@@ -136,7 +136,7 @@
       "type": "String",
       "category": "model",
       "desc": "Used to change the locale of the calendar",
-      "default": "en-us",
+      "default": "en-US",
       "applicable": [
         "All"
       ],

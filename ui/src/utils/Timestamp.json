@@ -1150,7 +1150,7 @@
         "local": {
           "type": "String",
           "required": true,
-          "desc": "A string representing the locale to use (ie: en-us for America)",
+          "desc": "A string representing the locale to use (ie: en-US for America)",
           "__exemption": [ "examples" ]
         },
         "getOptions": {

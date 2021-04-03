@@ -132,7 +132,7 @@ This image will explain the QCalendarDay alignment:
 
 ## Other
 - There is a new look for calendars that have scrollbars (not Firefox, it will still have default scrollbars).
-- The top-level calendar `div` now gets the [`lang` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang) based on the passed in `locale` property (default: `en-us`). This allows all descendants to word-break appropriately, by the browser, based on the language.
+- The top-level calendar `div` now gets the [`lang` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang) based on the passed in `locale` property (default: `en-US`). This allows all descendants to word-break appropriately, by the browser, based on the language.
 - Functionality has been added for tab (tabindex) support. Users can now use `Tab` and `Shift+Tab` to navigate the calendar. Add the new `focusable` property to have this functionality.
 - Allow calendar date selection via keyboard (Enter or Space keys) when `focusable` property is set.
 - When using `max-days` property (for contiguous days display) and clicking on a date, the calendar no longer navigates to the selected date, which previously became first date in the visible days. ie: the calendar is static until a new date that is not visible is selected programmatically, by v-model or prev/next/move methods are used (`max-days` does not apply to constrained `week` and `month` views).

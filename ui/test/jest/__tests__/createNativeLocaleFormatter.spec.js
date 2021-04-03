@@ -8,7 +8,7 @@ describe('[TIMESTAMP] createNativeLocaleFormatter', () => {
       const shortOptions = { timeZone: 'UTC', month: 'short' }
 
       return timestamp.createNativeLocaleFormatter(
-        'en-us',
+        'en-US',
         (_tms, short) => short ? shortOptions : longOptions
       )
     }
@@ -26,7 +26,7 @@ describe('[TIMESTAMP] createNativeLocaleFormatter', () => {
       const shortOptions = { timeZone: 'UTC', weekday: 'short' }
 
       return timestamp.createNativeLocaleFormatter(
-        'en-us',
+        'en-US',
         (_tms, short) => short ? shortOptions : longOptions
       )
     }
@@ -43,7 +43,7 @@ describe('[TIMESTAMP] createNativeLocaleFormatter', () => {
       const options = { timeZone: 'UTC', day: 'numeric' }
 
       return timestamp.createNativeLocaleFormatter(
-        'en-us',
+        'en-US',
         (_tms, _short) => options
       )
     }
