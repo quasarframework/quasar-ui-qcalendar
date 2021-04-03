@@ -182,70 +182,70 @@
                 <div class="text-h6">
                   Day
                 </div>
-                <!-- <theme-builder-day
+                <theme-builder-day
                   v-model="selectedDate"
                   :styles="store.style"
-                /> -->
+                />
               </q-tab-panel>
 
               <q-tab-panel name="week">
                 <div class="text-h6">
                   Week
                 </div>
-                <!-- <theme-builder-week
+                <theme-builder-week
                   v-model="selectedDate"
                   :styles="store.style"
-                /> -->
+                />
               </q-tab-panel>
 
               <q-tab-panel name="month">
                 <div class="text-h6">
                   Month
                 </div>
-                <!-- <theme-builder-month
+                <theme-builder-month
                   v-model="selectedDate"
                   :styles="store.style"
-                /> -->
+                />
               </q-tab-panel>
 
               <q-tab-panel name="mini-mode">
                 <div class="text-h6">
                   Mini-mode
                 </div>
-                <!-- <theme-builder-minimode
+                <theme-builder-minimode
                   v-model="selectedDate"
                   :styles="store.style"
-                /> -->
+                />
               </q-tab-panel>
 
               <q-tab-panel name="scheduler">
                 <div class="text-h6">
                   Scheduler
                 </div>
-                <!-- <theme-builder-scheduler
+                <theme-builder-scheduler
                   v-model="selectedDate"
                   :styles="store.style"
-                /> -->
+                />
               </q-tab-panel>
 
               <q-tab-panel name="resource">
                 <div class="text-h6">
                   Resource
                 </div>
-                <!-- <theme-builder-resource
+                <theme-builder-resource
                   v-model="selectedDate"
                   :styles="store.style"
-                /> -->
+                />
               </q-tab-panel>
 
               <q-tab-panel name="agenda">
                 <div class="text-h6">
                   Agenda
                 </div>
-                <!-- <theme-builder-agenda
+                <theme-builder-agenda
                   v-model="selectedDate"
                   :styles="store.style"
-                /> -->
+                />
               </q-tab-panel>
 
               <q-tab-panel name="task">
@@ -277,18 +277,25 @@ import { today } from '@quasar/quasar-ui-qcalendar/Timestamp.js'
 import LeftMenu from '../components/LeftMenu.vue'
 import ThemeEditor from '../components/ThemeEditor.vue'
 import ThemeImporter from '../components/ThemeImporter'
+import ThemeBuilderDay from '../components/ThemeBuilder/day'
+import ThemeBuilderWeek from '../components/ThemeBuilder/week'
+import ThemeBuilderMonth from '../components/ThemeBuilder/month'
+import ThemeBuilderMinimode from '../components/ThemeBuilder/miniMode'
+import ThemeBuilderScheduler from '../components/ThemeBuilder/scheduler'
+import ThemeBuilderResource from '../components/ThemeBuilder/resource'
+import ThemeBuilderAgenda from '../components/ThemeBuilder/agenda'
 
 export default defineComponent({
   name: 'ThemeBuilderLayout',
   components: {
     ThemeEditor,
-    // ThemeBuilderDay: () => import('../components/ThemeBuilder/day'),
-    // ThemeBuilderWeek: () => import('../components/ThemeBuilder/week'),
-    // ThemeBuilderMonth: () => import('../components/ThemeBuilder/month'),
-    // ThemeBuilderMinimode: () => import('../components/ThemeBuilder/miniMode'),
-    // ThemeBuilderScheduler: () => import('../components/ThemeBuilder/scheduler'),
-    // ThemeBuilderResource: () => import('../components/ThemeBuilder/resource'),
-    // ThemeBuilderAgenda: () => import('../components/ThemeBuilder/agenda'),
+    ThemeBuilderDay,
+    ThemeBuilderWeek,
+    ThemeBuilderMonth,
+    ThemeBuilderMinimode,
+    ThemeBuilderScheduler,
+    ThemeBuilderResource,
+    ThemeBuilderAgenda,
     ThemeImporter,
     LeftMenu
   },
@@ -362,12 +369,12 @@ export default defineComponent({
 
     function onStyleChange (value) {
       currentStyle.value = value
-      setStyle({ name: currentName, styles: currentStyle })
+      setStyle({ name: currentName.value, style: currentStyle.value })
     }
 
-    function setStyle ({ name, styles }) {
+    function setStyle ({ name, style }) {
       setCurrentStyleName(name)
-      Object(store.style).splice(0, Object.keys(store.style).length, ...styles)
+      store.style[ name ] = style
     }
 
     function setCurrentStyleName (name) {
@@ -396,16 +403,8 @@ export default defineComponent({
       copyTheme,
       importTheme,
       editStyle,
-      onStyleChange,
-      $q
+      onStyleChange
     }
-  },
-  methods: {
-    // ...mapMutations('ThemeBuilder', [
-    //   'setStyle',
-    //   'setCurrentStyleName'
-    // ]),
-
   }
 })
 </script>

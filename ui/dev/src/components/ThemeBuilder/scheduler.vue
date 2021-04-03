@@ -37,15 +37,16 @@
         </div>
       </div>
     </div>
-    <q-calendar
+    <q-calendar-scheduler
       v-model="selectedDate"
-      view="week-scheduler"
-      locale="en-us"
+      v-model:modelResources="resources"
+      resource-key="id"
+      resource-label="name"
+      view="week"
+      locale="en-US"
       bordered
       no-scroll
       :disabled-weekdays="disabledWeekdays"
-      :resources="resources"
-      resource-key="name"
       :resource-height="resourceHeight"
       :resource-width="resourceWidth"
       :style="styles"
@@ -54,10 +55,18 @@
 </template>
 
 <script>
+import { QCalendarScheduler } from '@quasar/quasar-ui-qcalendar/QCalendarScheduler.js'
+import '@quasar/quasar-ui-qcalendar/QCalendarVariables.sass'
+import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
+import '@quasar/quasar-ui-qcalendar/QCalendarScheduler.sass'
+
 export default {
   name: 'ThemeBuilderScheduler',
+  components: {
+    QCalendarScheduler
+  },
   props: {
-    value: String,
+    modelValue: String,
     styles: Object
   },
   data () {
@@ -67,26 +76,28 @@ export default {
       resourceWidth: 150,
       resourceHeight: 70,
       resources: [
-        { name: 'John' },
+        { id: '1', name: 'John' },
         {
+          id: '2',
           name: 'Board Room',
           expanded: false,
           children: [
-            { name: 'Room-1' },
+            { id: '2.1', name: 'Room-1' },
             {
+              id: '2.2',
               name: 'Room-2',
               expanded: false,
               children: [
-                { name: 'Partition-A' },
-                { name: 'Partition-B' },
-                { name: 'Partition-C' }
+                { id: '2.2.1', name: 'Partition-A' },
+                { id: '2.2.2', name: 'Partition-B' },
+                { id: '2.2.2', name: 'Partition-C' }
               ]
             }
           ]
         },
-        { name: 'Mary' },
-        { name: 'Susan' },
-        { name: 'Olivia' }
+        { id: '3', name: 'Mary' },
+        { id: '4', name: 'Susan' },
+        { id: '5', name: 'Olivia' }
       ]
     }
   },
@@ -98,13 +109,13 @@ export default {
   },
 
   watch: {
-    value (val) {
+    modelValue (val) {
       this.selectedDate = val
     }
   },
 
   beforeMount () {
-    this.selectedDate = this.value
+    this.selectedDate = this.modelValue
   }
 }
 </script>

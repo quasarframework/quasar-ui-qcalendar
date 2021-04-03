@@ -31,14 +31,15 @@
         </div>
       </div>
     </div>
-    <q-calendar
+    <q-calendar-resource
       v-model="selectedDate"
-      view="day-resource"
-      locale="en-us"
+      v-model:modelResources="resources"
+      resource-key="id"
+      resource-label="name"
+      locale="en-US"
       bordered
       sticky
       :resources="resources"
-      resource-key="name"
       :resource-height="resourceHeight"
       :resource-width="resourceWidth"
       :style="styles"
@@ -47,10 +48,18 @@
 </template>
 
 <script>
+import { QCalendarResource } from '@quasar/quasar-ui-qcalendar/QCalendarResource.js'
+import '@quasar/quasar-ui-qcalendar/QCalendarVariables.sass'
+import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
+import '@quasar/quasar-ui-qcalendar/QCalendarResource.sass'
+
 export default {
   name: 'ThemeBuilderResource',
+  components: {
+    QCalendarResource
+  },
   props: {
-    value: String,
+    modelValue: String,
     styles: Object
   },
   data () {
@@ -59,36 +68,38 @@ export default {
       resourceWidth: 150,
       resourceHeight: 70,
       resources: [
-        { name: 'John' },
+        { id: '1', name: 'John' },
         {
+          id: '2',
           name: 'Board Room',
           expanded: false,
           children: [
-            { name: 'Room-1' },
+            { id: '2.1', name: 'Room-1' },
             {
+              id: '2.2',
               name: 'Room-2',
               expanded: false,
               children: [
-                { name: 'Partition-A' },
-                { name: 'Partition-B' },
-                { name: 'Partition-C' }
+                { id: '2.2.1', name: 'Partition-A' },
+                { id: '2.2.2', name: 'Partition-B' },
+                { id: '2.2.2', name: 'Partition-C' }
               ]
             }
           ]
         },
-        { name: 'Mary' },
-        { name: 'Susan' },
-        { name: 'Olivia' }
+        { id: '3', name: 'Mary' },
+        { id: '4', name: 'Susan' },
+        { id: '5', name: 'Olivia' }
       ]
     }
   },
   watch: {
-    value (val) {
+    modelValue (val) {
       this.selectedDate = val
     }
   },
   beforeMount () {
-    this.selectedDate = this.value
+    this.selectedDate = this.modelValue
   }
 }
 </script>

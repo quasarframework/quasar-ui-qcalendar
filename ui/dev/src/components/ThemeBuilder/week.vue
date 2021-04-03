@@ -89,7 +89,7 @@
         />
       </div>
     </div>
-    <q-calendar
+    <q-calendar-day
       v-model="selectedDate"
       view="week"
       bordered
@@ -102,7 +102,7 @@
       :no-active-date="noActiveDate"
       :selected-dates="selectedDates"
       :selected-start-end-dates="startEndDates"
-      locale="en-us"
+      locale="en-US"
       style="height: 400px;"
       :style="styles"
       @click:time2="onToggleTime"
@@ -114,6 +114,11 @@
 </template>
 
 <script>
+import { QCalendarDay } from '@quasar/quasar-ui-qcalendar/QCalendarDay.js'
+import '@quasar/quasar-ui-qcalendar/QCalendarVariables.sass'
+import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
+import '@quasar/quasar-ui-qcalendar/QCalendarDay.sass'
+
 import {
   getDayTimeIdentifier,
   getDateTime
@@ -125,8 +130,11 @@ function leftClick (e) {
 
 export default {
   name: 'ThemeBuilderWeek',
+  components: {
+    QCalendarDay
+  },
   props: {
-    value: String,
+    modelValue: String,
     styles: Object
   },
   data () {
@@ -203,7 +211,7 @@ export default {
   },
 
   watch: {
-    value (val) {
+    modelValue (val) {
       this.selectedDate = val
     },
     intervalRangeStep (val) {
@@ -235,7 +243,7 @@ export default {
     }
   },
   beforeMount () {
-    this.selectedDate = this.value
+    this.selectedDate = this.modelValue
   },
   methods: {
     onToggleTime ({ scope }) {

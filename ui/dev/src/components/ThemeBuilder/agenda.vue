@@ -12,31 +12,32 @@
         label="Disabled weekends"
       />
     </div>
-    <q-calendar
+    <q-calendar-agenda
       v-model="selectedDate"
-      view="week-agenda"
+      view="week"
       :disabled-weekdays="disabledWeekdays"
       :no-active-date="noActiveDate"
       bordered
-      locale="en-us"
+      locale="en-US"
       style="height: 400px;"
       :style="styles"
     >
-      <template #day-body="{ timestamp }">
+      <template #day="{ scope: { timestamp } }">
         <template
-          v-for="(agenda) in getAgenda(timestamp)"
+          v-for="agenda in getAgenda(timestamp)"
           :key="timestamp.date + agenda.time"
         >
           <div
             :label="agenda.time"
             class="justify-start q-ma-sm shadow-5 bg-grey-6"
+            style="margin-top: 25px;"
           >
             <div
               v-if="agenda.avatar"
               class="row justify-center"
               style="margin-top: 30px; width: 100%;"
             >
-              <q-avatar style="margin-top: -25px; margin-bottom: 10px; font-size: 60px; max-height: 50px;">
+              <q-avatar style="margin-top: -50px; margin-bottom: 10px; font-size: 60px;">
                 <img
                   :src="agenda.avatar"
                   style="border: #9e9e9e solid 5px;"
@@ -56,15 +57,23 @@
           </div>
         </template>
       </template>
-    </q-calendar>
+    </q-calendar-agenda>
   </div>
 </template>
 
 <script>
+import { QCalendarAgenda } from '@quasar/quasar-ui-qcalendar/QCalendarAgenda.js'
+import '@quasar/quasar-ui-qcalendar/QCalendarVariables.sass'
+import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
+import '@quasar/quasar-ui-qcalendar/QCalendarAgenda.sass'
+
 export default {
   name: 'ThemeBuilderAgenda',
+  components: {
+    QCalendarAgenda
+  },
   props: {
-    value: String,
+    modelValue: String,
     styles: Object
   },
   data () {
@@ -197,12 +206,12 @@ export default {
     }
   },
   watch: {
-    value (val) {
+    modelValue (val) {
       this.selectedDate = val
     }
   },
   beforeMount () {
-    this.selectedDate = this.value
+    this.selectedDate = this.modelValue
   },
   methods: {
     getAgenda (day) {

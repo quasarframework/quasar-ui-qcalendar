@@ -58,10 +58,10 @@
         />
       </div>
     </div>
-    <q-calendar
+    <q-calendar-day
       v-model="selectedDate"
       view="day"
-      locale="en-us"
+      locale="en-US"
       bordered
       :interval-minutes="60 * intervalRangeStep"
       :interval-start="intervalStart"
@@ -75,10 +75,18 @@
 </template>
 
 <script>
+import { QCalendarDay } from '@quasar/quasar-ui-qcalendar/QCalendarDay.js'
+import '@quasar/quasar-ui-qcalendar/QCalendarVariables.sass'
+import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
+import '@quasar/quasar-ui-qcalendar/QCalendarDay.sass'
+
 export default {
   name: 'ThemeBuilderDay',
+  components: {
+    QCalendarDay
+  },
   props: {
-    value: String,
+    modelValue: String,
     styles: Object
   },
   data () {
@@ -111,7 +119,7 @@ export default {
     }
   },
   watch: {
-    value (val) {
+    modelValue (val) {
       this.selectedDate = val
     },
     intervalRangeStep (val) {
@@ -137,7 +145,7 @@ export default {
     }
   },
   beforeMount () {
-    this.selectedDate = this.value
+    this.selectedDate = this.modelValue
   }
 }
 </script>

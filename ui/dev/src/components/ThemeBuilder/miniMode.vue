@@ -55,13 +55,13 @@
       />
     </div>
     <div>
-      <q-calendar
+      <q-calendar-month
         ref="calendar"
         v-model="selectedDate"
         view="month"
         mini-mode
         short-weekday-label
-        locale="en-us"
+        locale="en-US"
         bordered
         :no-active-date="noActiveDate"
         :selected-start-end-dates="startEndDates"
@@ -83,6 +83,11 @@
 </template>
 
 <script>
+import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar/QCalendarMonth.js'
+import '@quasar/quasar-ui-qcalendar/QCalendarVariables.sass'
+import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
+import '@quasar/quasar-ui-qcalendar/QCalendarMonth.sass'
+
 import {
   getDayIdentifier
 } from 'ui'
@@ -93,8 +98,11 @@ function leftClick (e) {
 
 export default {
   name: 'ThemeBuilderMinimode',
+  components: {
+    QCalendarMonth
+  },
   props: {
-    value: String,
+    modelValue: String,
     styles: Object
   },
   data () {
@@ -158,7 +166,7 @@ export default {
   },
 
   watch: {
-    value (val) {
+    modelValue (val) {
       this.selectedDate = val
     },
 
@@ -171,7 +179,7 @@ export default {
   },
 
   beforeMount () {
-    this.selectedDate = this.value
+    this.selectedDate = this.modelValue
   },
 
   methods: {
