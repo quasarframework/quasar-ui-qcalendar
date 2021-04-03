@@ -25,7 +25,7 @@
         </q-toolbar-title>
 
         <q-toolbar-title v-if="$q.screen.width > 500">
-          Make Beautiful, Responsive Calendars
+          Build Beautiful, Responsive Calendars
         </q-toolbar-title>
 
         <q-space />

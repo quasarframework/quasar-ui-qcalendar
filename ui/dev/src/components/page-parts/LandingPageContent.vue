@@ -4,7 +4,7 @@
 
       <q-timeline-entry heading>
         <div style="font-size: 32px; font-weight: 600;">QCalendar</div>
-        <div style="font-size: 16px;">Make Beautiful, Responsive Calendars</div>
+        <div style="font-size: 16px;">Build Beautiful, Responsive Calendars</div>
       </q-timeline-entry>
 
       <q-timeline-entry
