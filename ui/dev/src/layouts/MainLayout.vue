@@ -2,48 +2,13 @@
   <q-layout view="HHh LpR fFf" @scroll="onScroll">
     <q-header elevated>
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
+        <toolbar-contents
+          title="Build Beautiful, Responsive Calendars"
+          left-drawer-button
+          :right-drawer-button="isExample === true || store.toc.length > 0"
+          :left-drawer-button-func="toggleLeftDrawer"
+          :right-drawer-button-func="toggleRightDrawer"
         />
-
-        <q-toolbar-title>
-          <q-btn
-            flat
-            no-caps
-            type="a"
-            href="\"
-          >
-          <div>
-            <span style="font-size: 20px;">QCalendar &nbsp; </span><span style="font-size: 12px;">v{{ version }}</span>
-          </div>
-          </q-btn>
-        </q-toolbar-title>
-
-        <q-toolbar-title v-if="$q.screen.width > 500">
-          Build Beautiful, Responsive Calendars
-        </q-toolbar-title>
-
-        <q-space />
-
-        <q-btn flat round @click="$q.dark.toggle()" :icon="$q.dark.isActive ? 'brightness_2' : 'brightness_5'" />
-
-        <div v-if="$q.screen.width > 500">Quasar <span style="font-size: 12px;">v{{ $q.version }}</span></div>
-
-        <q-btn
-          v-if="isExample === true || store.toc.length > 0"
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Table of Contents"
-          @click="toggleRightDrawer"
-        />
-
       </q-toolbar>
     </q-header>
 
@@ -137,7 +102,6 @@
 
 import { defineComponent, ref, computed, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { version } from '@quasar/quasar-ui-qcalendar'
 
 import { scroll } from 'quasar'
 const { setVerticalScrollPosition } = scroll
@@ -148,12 +112,14 @@ import {
   biGithub
 } from '@quasar/extras/bootstrap-icons'
 import LeftMenu from '../components/LeftMenu.vue'
+import ToolbarContents from '../components/ToolbarContents.vue'
 
 export default defineComponent({
   name: 'MainLayout',
 
   components: {
-    LeftMenu
+    LeftMenu,
+    ToolbarContents
   },
 
   setup () {
@@ -245,7 +211,6 @@ export default defineComponent({
     }
 
     return {
-      version,
       isExample,
       store,
       path,

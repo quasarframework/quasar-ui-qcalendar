@@ -1,47 +1,14 @@
 <template>
   <q-layout view="hHh LpR fFf">
-    <!-- Be sure to play with the Layout demo on docs -->
-
-    <!-- (Optional) The Header -->
     <q-header elevated>
       <q-toolbar>
-        <q-btn
-          flat
-          round
-          dense
-          icon="menu"
-          aria-label="Menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
+        <toolbar-contents
+          title="QCalendar » Theme Builder"
+          left-drawer-button
+          right-drawer-button
+          :left-drawer-button-func="toggleLeftDrawer"
+          :right-drawer-button-func="toggleRightDrawer"
         />
-
-        <q-toolbar-title>
-          QCalendar <span class="text-subtitle2">v{{ version }}</span>
-        </q-toolbar-title>
-
-        <div class="theme-builder-title">
-          Theme Builder
-        </div>
-        <q-space />
-
-        <q-btn
-          flat
-          round
-          :icon="$q.dark.isActive ? 'brightness_2' : 'brightness_5'"
-          @click="$q.dark.toggle()"
-        />
-        <div v-if="$q.screen.width > 500">
-          Quasar v{{ $q.version }}
-        </div>
-
-        <q-btn
-          flat
-          dense
-          round
-          aria-label="Table of Contents"
-          @click="rightDrawerOpen = !rightDrawerOpen"
-        >
-          <q-icon name="menu" />
-        </q-btn>
       </q-toolbar>
     </q-header>
 
@@ -272,7 +239,7 @@
 import { defineComponent, ref } from 'vue'
 import { useQuasar } from 'quasar'
 import { useThemeBuilderStore } from 'assets/theme-builder-store.js'
-import { version } from 'ui'
+import ToolbarContents from '../components/ToolbarContents.vue'
 import { today } from '@quasar/quasar-ui-qcalendar/Timestamp.js'
 import LeftMenu from '../components/LeftMenu.vue'
 import ThemeEditor from '../components/ThemeEditor.vue'
@@ -288,6 +255,8 @@ import ThemeBuilderAgenda from '../components/ThemeBuilder/agenda'
 export default defineComponent({
   name: 'ThemeBuilderLayout',
   components: {
+    ToolbarContents,
+    LeftMenu,
     ThemeEditor,
     ThemeBuilderDay,
     ThemeBuilderWeek,
@@ -296,8 +265,7 @@ export default defineComponent({
     ThemeBuilderScheduler,
     ThemeBuilderResource,
     ThemeBuilderAgenda,
-    ThemeImporter,
-    LeftMenu
+    ThemeImporter
   },
   setup () {
     const
@@ -382,7 +350,6 @@ export default defineComponent({
     }
 
     return {
-      version,
       leftDrawerOpen,
       rightDrawerOpen,
       store,
@@ -397,7 +364,12 @@ export default defineComponent({
       borderSize,
       borderColor,
       borderType,
-
+      toggleLeftDrawer () {
+        leftDrawerOpen.value = !leftDrawerOpen.value
+      },
+      toggleRightDrawer () {
+        rightDrawerOpen.value = !rightDrawerOpen.value
+      },
       showBox,
       getStyle,
       copyTheme,
