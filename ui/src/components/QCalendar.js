@@ -1,6 +1,7 @@
 import {
   computed,
   defineComponent,
+  ref,
   h
 } from 'vue'
 
@@ -19,6 +20,7 @@ import { useCellWidthProps } from '../composables/useCellWidth.js'
 import { useNavigationProps } from '../composables/useKeyboard.js'
 import { useMonthProps } from '../composables/useMonth.js'
 import { useTaskProps } from '../composables/useTask.js'
+import useCalendar from '../composables/useCalendar.js'
 
 export default defineComponent({
   name: 'QCalendar',
@@ -39,7 +41,9 @@ export default defineComponent({
     ...useMaxDaysProps,
     ...useTaskProps
   },
-  setup (props, { attrs, slots }) {
+  setup (props, { attrs, slots, expose }) {
+    const calendar = ref(null)
+
     const component = computed(() => {
       switch (props.mode) {
         case 'agenda': return QCalendarAgenda
@@ -53,6 +57,66 @@ export default defineComponent({
           return QCalendarDay
       }
     })
-    return () => h(component.value, { ...props, ...attrs }, slots)
+
+    function moveToToday () {
+      calendar.value.moveToToday()
+    }
+
+    function move(amount = -1) {
+      calendar.value.move(amount)
+    }
+
+    function next (amount = 1) {
+      calendar.value.next(amount)
+    }
+
+    function prev (amount = 1) {
+      calendar.value.prev(amount)
+    }
+
+    function updateCurrent () {
+      calendar.value.updateCurrent()
+    }
+
+    function timeStartPos (time, clamp = true) {
+      return calendar.value.timeStartPos(time, clamp)
+    }
+
+    function timeStartPosX (time, clamp = true) {
+      return calendar.value.timeStartPosX(time, clamp)
+    }
+
+    function timeDurationWidth (minutes) {
+      return calendar.value.timeDurationWidth(minutes)
+    }
+
+    function timeDurationHeight (minutes) {
+      return calendar.value.timeDurationHeight(minutes)
+    }
+
+    function scrollToTime (time) {
+      return calendar.value.scrollToTime(time)
+    }
+
+    function scrollToTimeX (time) {
+      return calendar.value.scrollToTimeX(time)
+    }
+
+    // expose public methods
+    expose({
+      prev,
+      next,
+      move,
+      moveToToday,
+      updateCurrent,
+      timeStartPos,
+      timeStartPosX,
+      timeDurationWidth,
+      timeDurationHeight,
+      scrollToTime,
+      scrollToTimeX
+    })
+
+    return () => h(component.value, { ref: calendar, ...props, ...attrs }, slots)
   }
 })
