@@ -276,7 +276,9 @@ export default defineComponent({
       if (rootRef.value) {
         const width = size.width || rootRef.value.getBoundingClientRect().width
         if (width && intervalsWidth.value && borderWidth.value && parsedColumnCount.value) {
-          return ((width - scrollWidth.value - intervalsWidth.value - (borderWidth.value * parsedColumnCount.value)) / parsedColumnCount.value) + 'px'
+          return (
+            (width - scrollWidth.value - intervalsWidth.value - (borderWidth.value * parsedColumnCount.value)) / parsedColumnCount.value
+          ) + 'px'
         }
       }
       return (100 / parsedColumnCount.value) + '%'

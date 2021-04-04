@@ -263,7 +263,8 @@ export default defineComponent({
         const width = size.width || rootRef.value.getBoundingClientRect().width
         if (width && borderWidth.value && parsedColumnCount.value) {
           return (
-            (width - scrollWidth.value - (borderWidth.value * parsedColumnCount.value)) / parsedColumnCount.value) + 'px'
+            (width - scrollWidth.value - (borderWidth.value * parsedColumnCount.value)) / parsedColumnCount.value
+          ) + 'px'
         }
       }
       return (100 / parsedColumnCount.value) + '%'
@@ -315,12 +316,6 @@ export default defineComponent({
       maxDaysRendered.value = val
     })
 
-    // Get initial rendering data
-    // const { start, end, maxDays } = renderValues.value
-    // startDate.value = start.date
-    // endDate.value = end.date
-    // maxDaysRendered.value = maxDays
-
     onBeforeUpdate(() => {
       datesRef.value = {}
     })
@@ -342,6 +337,8 @@ export default defineComponent({
     function prev (amount = 1) {
       move(-amount)
     }
+
+    // private functions
 
     function __onResize ({ width, height }) {
       size.width = width
