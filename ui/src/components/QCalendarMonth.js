@@ -94,7 +94,7 @@ export default defineComponent({
       lastEnd = ref(null)
 
     const parsedView = computed(() => {
-      return props.view
+      return 'month'
     })
 
     const vm = getCurrentInstance()
