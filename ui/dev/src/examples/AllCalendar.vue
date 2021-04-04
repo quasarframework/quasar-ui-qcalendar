@@ -36,6 +36,9 @@
           ref="calendar"
           :mode="selectedCalendar"
           v-model="selectedDate"
+          v-model:modelResources="resources"
+          resource-key="id"
+          resource-label="name"
           view="week"
           animated
           bordered
