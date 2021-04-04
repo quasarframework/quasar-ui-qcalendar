@@ -164,13 +164,13 @@ export default function (props, emit, {
 
   const parsedMonthLabelSize = computed(() => {
     switch (props.monthLabelSize) {
-      case 'xxs': return '8px'
-      case 'xs': return '10px'
-      case 'sm': return '12px'
-      case 'md': return '14px'
-      case 'lg': return '16px'
-      case 'xl': return '18px'
-      case 'xxl': return '20px'
+      case 'xxs': return '.4em'
+      case 'xs': return '.6em'
+      case 'sm': return '.8em'
+      case 'md': return '1.0em'
+      case 'lg': return '1.2em'
+      case 'xl': return '1.4em'
+      case 'xxl': return '1.6em'
       default: return props.monthLabelSize
     }
   })
