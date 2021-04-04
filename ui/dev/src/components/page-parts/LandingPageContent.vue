@@ -314,29 +314,9 @@
       </q-timeline-entry>
 
       <q-timeline-entry
-        title="Blue"
-        side="right"
-        color="blue"
-      >
-        <div>
-          <q-intersection
-            transition="scale"
-            once
-          >
-            <q-img
-              src="\qcalendarweek-blue-theme.png"
-              spinner-color="white"
-              style="max-width: 350px"
-              class="shadow-12"
-            />
-          </q-intersection>
-        </div>
-      </q-timeline-entry>
-
-      <q-timeline-entry
         title="Dark"
         subtitle="Automatic dark mode"
-        side="left"
+        side="right"
         color="black"
       >
         <div>
