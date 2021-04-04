@@ -107,15 +107,11 @@ export default defineComponent({
       filter.value = val || ''
     })
 
-    watch(filter, (val) => {
+    watch(filter, val => {
       if (val || val === '') {
         localStorage.setItem('filter', val)
       }
     })
-
-    function onClearFilter () {
-      filter.value = ''
-    }
 
     function onToggleMenuItem (item) {
       let doExpand = true
@@ -171,7 +167,6 @@ export default defineComponent({
       isExample,
       filter,
       filteredPages,
-      onClearFilter,
       onChildClick,
       onExampleClick,
       klasses,
