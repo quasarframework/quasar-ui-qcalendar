@@ -18,7 +18,7 @@
             once
           >
             <q-img
-              src="\qcalendarweek-blue-theme.png"
+              src="\QCalendarDay.png"
               spinner-color="white"
               style="max-width: 350px"
               class="shadow-12"
@@ -32,6 +32,17 @@
         side="right"
       >
         <div>
+          <q-intersection
+            transition="scale"
+            once
+          >
+            <q-img
+              src="\QCalendarMonth.png"
+              spinner-color="white"
+              style="max-width: 350px"
+              class="shadow-12"
+            />
+          </q-intersection>
         </div>
       </q-timeline-entry>
 
@@ -40,6 +51,17 @@
         side="left"
       >
         <div>
+          <q-intersection
+            transition="scale"
+            once
+          >
+            <q-img
+              src="\QCalendarMonth--mini-mode.png"
+              spinner-color="white"
+              style="max-width: 350px"
+              class="shadow-12"
+            />
+          </q-intersection>
         </div>
       </q-timeline-entry>
 
@@ -48,22 +70,74 @@
         side="right"
       >
         <div>
+          <q-intersection
+            transition="scale"
+            once
+          >
+            <q-img
+              src="\QCalendarAgenda.png"
+              spinner-color="white"
+              style="max-width: 350px"
+              class="shadow-12"
+            />
+          </q-intersection>
+        </div>
+      </q-timeline-entry>
+
+      <q-timeline-entry
+        title="QCalendarResource"
+        side="left"
+      >
+        <div>
+          <q-intersection
+            transition="scale"
+            once
+          >
+            <q-img
+              src="\QCalendarResource.png"
+              spinner-color="white"
+              style="max-width: 350px"
+              class="shadow-12"
+            />
+          </q-intersection>
         </div>
       </q-timeline-entry>
 
       <q-timeline-entry
         title="QCalendarScheduler"
-        side="left"
+        side="right"
       >
         <div>
+          <q-intersection
+            transition="scale"
+            once
+          >
+            <q-img
+              src="\QCalendarScheduler.png"
+              spinner-color="white"
+              style="max-width: 350px"
+              class="shadow-12"
+            />
+          </q-intersection>
         </div>
       </q-timeline-entry>
 
       <q-timeline-entry
         title="QCalendarTask"
-        side="right"
+        side="left"
       >
         <div>
+          <q-intersection
+            transition="scale"
+            once
+          >
+            <q-img
+              src="\QCalendarTask.png"
+              spinner-color="white"
+              style="max-width: 350px"
+              class="shadow-12"
+            />
+          </q-intersection>
         </div>
       </q-timeline-entry>
 
@@ -119,6 +193,17 @@
         side="left"
       >
         <div>
+          <q-intersection
+            transition="scale"
+            once
+          >
+            <q-img
+              src="\QCalendarTask.png"
+              spinner-color="white"
+              style="max-width: 350px"
+              class="shadow-12"
+            />
+          </q-intersection>
         </div>
       </q-timeline-entry>
 
