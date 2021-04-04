@@ -7,20 +7,18 @@
     />
 
     <div style="display: flex; justify-content: center">
-      <div style="display: flex; justify-content: center; align-items: center">
-        <q-select
-          v-model="locale"
-          label="Choose a locale"
-          outlined
-          dense
-          map-options
-          emit-value
-          options-dense
-          :options="locales"
-          class="button"
-          style="min-width: 180px;"
-        />
-      </div>
+      <q-select
+        v-model="locale"
+        label="Choose a locale"
+        outlined
+        dense
+        map-options
+        emit-value
+        options-dense
+        :options="locales"
+        class="button"
+        style="min-width: 180px;"
+      />
     </div>
 
     <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">

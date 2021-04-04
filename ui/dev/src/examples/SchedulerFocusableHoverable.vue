@@ -7,65 +7,51 @@
     />
 
     <div style="display: flex; justify-content: center; align-items: center">
-      <div style="display: flex; justify-content: center; align-items: center">
-        <label for="hoverable">Hoverable:</label>
-        <input
-          id="hoverable"
-          v-model="hoverable"
-          type="checkbox"
-        >
-      </div>
-      <div style="display: flex; justify-content: center; align-items: center">
-        <label for="focusable">Focusable:</label>
-        <input
-          id="focusable"
-          v-model="focusable"
-          type="checkbox"
-        >
-        <div style="display: flex; justify-content: center; align-items: center">
-          <label
-            for="focus-type"
-            style="margin-right: 2px;"
-          >focus-type:</label>
-          <select
-            id="focus-type"
-            v-model="focusTypeSelection"
-            class="button select"
-          >
-            <option
-              v-for="option in options"
-              :key="option"
-              :value="option"
-            >
-              {{ option + (focusType.includes(option) ? ' ✔' : '') }}
-            </option>
-          </select>
-        </div>
-      </div>
+      <q-checkbox
+        v-model="hoverable"
+        label="Hoverable"
+      />
+
+      <q-checkbox
+        v-model="focusable"
+        label="Focusable"
+      />
+
+      <q-select
+        v-model="focusType"
+        label="Focus Type"
+        outlined
+        dense
+        multiple
+        map-options
+        emit-value
+        options-dense
+        :options="options"
+        class="button"
+        style="min-width: 180px;"
+      />
     </div>
 
-    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
-      <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
-        <q-calendar-scheduler
-          ref="calendar"
-          v-model="selectedDate"
-          v-model:modelResources="resources"
-          view="week"
-          :hoverable="hoverable"
-          :focusable="focusable"
-          :focus-type="focusType"
-          animated
-          bordered
-          style="max-width: 800px; width: 100%;"
-          @change="onChange"
-          @moved="onMoved"
-          @click-date="onClickDate"
-          @click-day-resource="onClickDayResource"
-          @click-resource="onClickResource"
-          @click-head-resources="onClickHeadResources"
-          @click-head-day="onClickHeadDay"
-        />
-      </div>
+    <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
+      <q-calendar-scheduler
+        ref="calendar"
+        v-model="selectedDate"
+        v-model:modelResources="resources"
+        view="week"
+        :hoverable="hoverable"
+        :focusable="focusable"
+        :focus-type="focusType"
+        animated
+        bordered
+        style="max-width: 800px; width: 100%;"
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-day-resource="onClickDayResource"
+        @click-resource="onClickResource"
+        @click-head-resources="onClickHeadResources"
+        @click-head-day="onClickHeadDay"
+      />
     </div>
   </div>
 </template>
@@ -92,7 +78,6 @@ export default defineComponent({
       hoverable: true,
       focusable: true,
       focusType: [],
-      focusTypeSelection: '',
       options: [ 'day', 'weekday', 'date', 'resource' ],
       resources: [
         { id: 1, label: 'John' },

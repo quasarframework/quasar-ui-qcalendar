@@ -30,102 +30,100 @@
       />
     </div>
 
-    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
-      <div style="display: flex; max-width: 800px; width: 100%; max-height: 400px;">
-        <q-calendar
-          ref="calendar"
-          :mode="selectedCalendar"
-          v-model="selectedDate"
-          v-model:modelResources="resources"
-          resource-key="id"
-          resource-label="name"
-          view="week"
-          animated
-          bordered
-          :tasks="parsedTasks"
-          :task-width="240"
-          :min-label-length="2"
-          @change="onChange"
-        >
-          <template #head-task="{ /* scope */ }">
-            <div class="header ellipsis" style="font-weight: 600">
-              <div class="issue ellipsis">Issue</div>
-              <div class="key">Key</div>
-              <div class="logged">Logged</div>
+    <div style="display: flex; max-width: 800px; width: 100%; max-height: 400px;">
+      <q-calendar
+        ref="calendar"
+        :mode="selectedCalendar"
+        v-model="selectedDate"
+        v-model:modelResources="resources"
+        resource-key="id"
+        resource-label="name"
+        view="week"
+        animated
+        bordered
+        :tasks="parsedTasks"
+        :task-width="240"
+        :min-label-length="2"
+        @change="onChange"
+      >
+        <template #head-task="{ /* scope */ }">
+          <div class="header ellipsis" style="font-weight: 600">
+            <div class="issue ellipsis">Issue</div>
+            <div class="key">Key</div>
+            <div class="logged">Logged</div>
+          </div>
+        </template>
+
+        <template #task="{ scope }">
+          <template v-for="task in getTasks(scope.start, scope.end, scope.task)" :key="task.key">
+            <div class="header ellipsis">
+              <div class="issue ellipsis">
+                <span v-if="scope.task.icon === 'done'" class="done"><Done /></span>
+                <span v-else-if="scope.task.icon === 'pending'" class="pending"><Pending /></span>
+                <span v-else-if="scope.task.icon === 'blocking'" class="blocking"><Blocking /></span>
+                {{ scope.task.title }}
+              </div>
+              <div class="key">{{ scope.task.key }}</div>
+              <div class="logged">{{ sum(scope.start, scope.end, scope.task) }}</div>
             </div>
           </template>
+        </template>
 
-          <template #task="{ scope }">
-            <template v-for="task in getTasks(scope.start, scope.end, scope.task)" :key="task.key">
-              <div class="header ellipsis">
-                <div class="issue ellipsis">
-                  <span v-if="scope.task.icon === 'done'" class="done"><Done /></span>
-                  <span v-else-if="scope.task.icon === 'pending'" class="pending"><Pending /></span>
-                  <span v-else-if="scope.task.icon === 'blocking'" class="blocking"><Blocking /></span>
-                  {{ scope.task.title }}
+        <template #day="{ scope: { timestamp } }">
+          <template v-if="selectedCalendar === 'task'">
+            <template v-for="time in getLogged(timestamp.date, scope.task.logged)" :key="time">
+              <div class="logged-time">{{ time.logged }}</div>
+            </template>
+          </template>
+          <template v-if="selectedCalendar === 'agenda'">
+            <template
+              v-for="agenda in getAgenda(timestamp)"
+              :key="timestamp.date + agenda.time"
+            >
+              <div
+                :label="agenda.time"
+                class="justify-start q-ma-sm shadow-5 bg-grey-6"
+                style="margin-top: 25px;"
+              >
+                <div
+                  v-if="agenda.avatar"
+                  class="row justify-center"
+                  style="margin-top: 30px; width: 100%;"
+                >
+                  <q-avatar style="margin-top: -50px; margin-bottom: 10px; font-size: 60px;">
+                    <img
+                      :src="agenda.avatar"
+                      style="border: #9e9e9e solid 5px;"
+                    >
+                  </q-avatar>
                 </div>
-                <div class="key">{{ scope.task.key }}</div>
-                <div class="logged">{{ sum(scope.start, scope.end, scope.task) }}</div>
+                <div class="col-12 q-px-sm">
+                  <strong>{{ agenda.time }}</strong>
+                </div>
+                <div
+                  v-if="agenda.desc"
+                  class="col-12 q-px-sm"
+                  style="font-size: 10px;"
+                >
+                  {{ agenda.desc }}
+                </div>
               </div>
             </template>
           </template>
+        </template>
 
-          <template #day="{ scope: { timestamp } }">
-            <template v-if="selectedCalendar === 'task'">
-              <template v-for="time in getLogged(timestamp.date, scope.task.logged)" :key="time">
-                <div class="logged-time">{{ time.logged }}</div>
-              </template>
-            </template>
-            <template v-if="selectedCalendar === 'agenda'">
-              <template
-                v-for="agenda in getAgenda(timestamp)"
-                :key="timestamp.date + agenda.time"
-              >
-                <div
-                  :label="agenda.time"
-                  class="justify-start q-ma-sm shadow-5 bg-grey-6"
-                  style="margin-top: 25px;"
-                >
-                  <div
-                    v-if="agenda.avatar"
-                    class="row justify-center"
-                    style="margin-top: 30px; width: 100%;"
-                  >
-                    <q-avatar style="margin-top: -50px; margin-bottom: 10px; font-size: 60px;">
-                      <img
-                        :src="agenda.avatar"
-                        style="border: #9e9e9e solid 5px;"
-                      >
-                    </q-avatar>
-                  </div>
-                  <div class="col-12 q-px-sm">
-                    <strong>{{ agenda.time }}</strong>
-                  </div>
-                  <div
-                    v-if="agenda.desc"
-                    class="col-12 q-px-sm"
-                    style="font-size: 10px;"
-                  >
-                    {{ agenda.desc }}
-                  </div>
-                </div>
-              </template>
-            </template>
-          </template>
+        <template #footer-task="{ scope }">
+          <div class="summary ellipsis">
+            <div class="title ellipsis">TOTAL</div>
+            <div class="total">{{ totals(scope.start, scope.end, scope.tasks) }}</div>
+          </div>
+        </template>
 
-          <template #footer-task="{ scope }">
-            <div class="summary ellipsis">
-              <div class="title ellipsis">TOTAL</div>
-              <div class="total">{{ totals(scope.start, scope.end, scope.tasks) }}</div>
-            </div>
-          </template>
+        <template #footer-day="{ scope }">
+          <div class="logged-time">{{ getLoggedSummary(scope.timestamp.date, scope.tasks) }}</div>
+        </template>
 
-          <template #footer-day="{ scope }">
-            <div class="logged-time">{{ getLoggedSummary(scope.timestamp.date, scope.tasks) }}</div>
-          </template>
-
-        </q-calendar>
-      </div>
+      </q-calendar>
     </div>
   </div>
 </template>

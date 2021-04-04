@@ -13,31 +13,29 @@
       @next="onNext"
     />
 
-    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
-      <div style="display: flex; max-width: 800px; width: 100%; height: 300px;">
-        <q-calendar-scheduler
-          ref="calendar"
-          v-model="selectedDate"
-          v-model:modelResources="resources2"
-          view="month"
-          cell-width="200px"
-          resource-key="id"
-          resource-label="name"
-          weekday-align="right"
-          date-align="left"
-          date-header="inline"
-          short-weekday-label
-          animated
-          bordered
-          @change="onChange"
-          @moved="onMoved"
-          @click-date="onClickDate"
-          @click-day-resource="onClickDayResource"
-          @click-resource="onClickResource"
-          @click-head-resources="onClickHeadResources"
-          @click-head-day="onClickHeadDay"
-        />
-      </div>
+    <div style="display: flex; max-width: 800px; width: 100%; height: 300px;">
+      <q-calendar-scheduler
+        ref="calendar"
+        v-model="selectedDate"
+        v-model:modelResources="resources2"
+        view="month"
+        cell-width="200px"
+        resource-key="id"
+        resource-label="name"
+        weekday-align="right"
+        date-align="left"
+        date-header="inline"
+        short-weekday-label
+        animated
+        bordered
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-day-resource="onClickDayResource"
+        @click-resource="onClickResource"
+        @click-head-resources="onClickHeadResources"
+        @click-head-day="onClickHeadDay"
+      />
     </div>
   </div>
 </template>

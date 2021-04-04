@@ -6,76 +6,32 @@
       @next="onNext"
     />
 
+    <div>Label Size:</div>
     <div style="display: flex; justify-content: center; align-items: center;">
-      <input
-        id="xxs"
+      <q-option-group
         v-model="size"
-        value="xxs"
+        :options="options"
         type="radio"
-      >
-      <label for="xxs">xxs</label>
-      <input
-        id="xs"
-        v-model="size"
-        value="xs"
-        type="radio"
-      >
-      <label for="sm">sm</label>
-      <input
-        id="sm"
-        v-model="size"
-        value="sm"
-        type="radio"
-      >
-      <label for="sm">sm</label>
-      <input
-        id="md"
-        v-model="size"
-        value="md"
-        type="radio"
-      >
-      <label for="md">md</label>
-      <input
-        id="lg"
-        v-model="size"
-        value="lg"
-        type="radio"
-      >
-      <label for="lg">lg</label>
-      <input
-        id="xl"
-        v-model="size"
-        value="xl"
-        type="radio"
-      >
-      <label for="xl">xl</label>
-      <input
-        id="xxl"
-        v-model="size"
-        value="xxl"
-        type="radio"
-      >
-      <label for="xxl">xxl</label>
+        inline
+      />
     </div>
 
-    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
-      <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
-        <q-calendar-month
-          ref="calendar"
-          v-model="selectedDate"
-          :month-label-size="size"
-          date-align="right"
-          animated
-          bordered
-          @change="onChange"
-          @moved="onMoved"
-          @click-date="onClickDate"
-          @click-day="onClickDay"
-          @click-workweek="onClickWorkweek"
-          @click-head-workweek="onClickHeadWorkweek"
-          @click-head-day="onClickHeadDay"
-        />
-      </div>
+    <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
+      <q-calendar-month
+        ref="calendar"
+        v-model="selectedDate"
+        :month-label-size="size"
+        date-align="right"
+        animated
+        bordered
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-day="onClickDay"
+        @click-workweek="onClickWorkweek"
+        @click-head-workweek="onClickHeadWorkweek"
+        @click-head-day="onClickHeadDay"
+      />
     </div>
   </div>
 </template>
@@ -99,7 +55,16 @@ export default defineComponent({
   data () {
     return {
       selectedDate: today(),
-      size: 'sm'
+      size: 'sm',
+      options: [
+        { label: 'xxs', value: 'xxs' },
+        { label: 'xs', value: 'xs' },
+        { label: 'sm', value: 'sm' },
+        { label: 'md', value: 'md' },
+        { label: 'lg', value: 'lg' },
+        { label: 'xl', value: 'xl' },
+        { label: 'xxl', value: 'xxl' }
+      ]
     }
   },
   methods: {

@@ -6,47 +6,45 @@
       @next="onNext"
     />
 
-    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
-      <div style="display: flex; max-width: 800px; width: 100%;">
-        <q-calendar-month
-          ref="calendar"
-          v-model="selectedDate"
-          animated
-          bordered
-          focusable
-          hoverable
-          no-active-date
-          :day-min-height="60"
-          :day-height="0"
-          @change="onChange"
-          @moved="onMoved"
-          @click-date="onClickDate"
-          @click-day="onClickDay"
-          @click-workweek="onClickWorkweek"
-          @click-head-workweek="onClickHeadWorkweek"
-          @click-head-day="onClickHeadDay"
-        >
-          <template #week="{ scope: { week, weekdays } }">
-            <template
-              v-for="(computedEvent, index) in getWeekEvents(week, weekdays)"
-              :key="index"
+    <div style="display: flex; max-width: 800px; width: 100%;">
+      <q-calendar-month
+        ref="calendar"
+        v-model="selectedDate"
+        animated
+        bordered
+        focusable
+        hoverable
+        no-active-date
+        :day-min-height="60"
+        :day-height="0"
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-day="onClickDay"
+        @click-workweek="onClickWorkweek"
+        @click-head-workweek="onClickHeadWorkweek"
+        @click-head-day="onClickHeadDay"
+      >
+        <template #week="{ scope: { week, weekdays } }">
+          <template
+            v-for="(computedEvent, index) in getWeekEvents(week, weekdays)"
+            :key="index"
+          >
+            <div
+              :class="badgeClasses(computedEvent)"
+              :style="badgeStyles(computedEvent, week.length)"
             >
-              <div
-                :class="badgeClasses(computedEvent)"
-                :style="badgeStyles(computedEvent, week.length)"
+              <abbr
+                v-if="computedEvent.event && computedEvent.event.details"
+                :title="computedEvent.event.details"
+                class="tooltip"
               >
-                <abbr
-                  v-if="computedEvent.event && computedEvent.event.details"
-                  :title="computedEvent.event.details"
-                  class="tooltip"
-                >
-                  <span class="title q-calendar__ellipsis">{{ computedEvent.event.title + (computedEvent.event.time ? ' - ' + computedEvent.event.time : '') }}</span>
-                </abbr>
-              </div>
-            </template>
+                <span class="title q-calendar__ellipsis">{{ computedEvent.event.title + (computedEvent.event.time ? ' - ' + computedEvent.event.time : '') }}</span>
+              </abbr>
+            </div>
           </template>
-        </q-calendar-month>
-      </div>
+        </template>
+      </q-calendar-month>
     </div>
   </div>
 </template>

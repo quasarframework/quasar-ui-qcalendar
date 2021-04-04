@@ -12,27 +12,25 @@
       @next="onNext"
     />
 
-    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
-      <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
-        <q-calendar-day
-          ref="calendar"
-          v-model="selectedDate"
-          view="month"
-          use-navigation
-          hoverable
-          focusable
-          :focus-type="['interval', 'weekday']"
-          animated
-          bordered
-          @change="onChange"
-          @moved="onMoved"
-          @click-date="onClickDate"
-          @click-time="onClickTime"
-          @click-interval="onClickInterval"
-          @click-head-intervals="onClickHeadIntervals"
-          @click-head-day="onClickHeadDay"
-        />
-      </div>
+    <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
+      <q-calendar-day
+        ref="calendar"
+        v-model="selectedDate"
+        view="month"
+        use-navigation
+        hoverable
+        focusable
+        :focus-type="['interval', 'weekday']"
+        animated
+        bordered
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-time="onClickTime"
+        @click-interval="onClickInterval"
+        @click-head-intervals="onClickHeadIntervals"
+        @click-head-day="onClickHeadDay"
+      />
     </div>
   </div>
 </template>

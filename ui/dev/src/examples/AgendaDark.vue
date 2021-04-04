@@ -6,29 +6,27 @@
       @next="onNext"
     />
 
-    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
-      <div style="display: flex; max-width: 800px; width: 100%; height: 200px;">
-        <q-calendar-agenda
-          ref="calendar"
-          v-model="selectedDate"
-          view="day"
-          dark
-          :left-column-options="leftColumnOptions"
-          :right-column-options="rightColumnOptions"
-          column-options-id="id"
-          column-options-label="label"
-          :day-min-height="200"
-          animated
-          bordered
-          @change="onChange"
-          @moved="onMoved"
-          @click-date="onClickDate"
-          @click-time="onClickTime"
-          @click-interval="onClickInterval"
-          @click-head-intervals="onClickHeadIntervals"
-          @click-head-day="onClickHeadDay"
-        />
-      </div>
+    <div style="display: flex; max-width: 800px; width: 100%; height: 200px;">
+      <q-calendar-agenda
+        ref="calendar"
+        v-model="selectedDate"
+        view="day"
+        dark
+        :left-column-options="leftColumnOptions"
+        :right-column-options="rightColumnOptions"
+        column-options-id="id"
+        column-options-label="label"
+        :day-min-height="200"
+        animated
+        bordered
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-time="onClickTime"
+        @click-interval="onClickInterval"
+        @click-head-intervals="onClickHeadIntervals"
+        @click-head-day="onClickHeadDay"
+      />
     </div>
   </div>
 </template>

@@ -14,33 +14,31 @@
       @next="onNext"
     />
 
-    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
-      <div style="display: flex; max-width: 800px; width: 100%;">
-        <q-calendar-agenda
-          ref="calendar"
-          v-model="selectedDate"
-          view="day"
-          :max-days="10"
-          cell-width="200px"
-          day-min-height="100px"
-          :left-column-options="leftColumnOptions"
-          :right-column-options="rightColumnOptions"
-          column-options-id="id"
-          column-options-label="label"
-          weekday-align="center"
-          date-align="center"
-          date-header="inline"
-          animated
-          bordered
-          @change="onChange"
-          @moved="onMoved"
-          @click-date="onClickDate"
-          @click-time="onClickTime"
-          @click-interval="onClickInterval"
-          @click-head-intervals="onClickHeadIntervals"
-          @click-head-day="onClickHeadDay"
-        />
-      </div>
+    <div style="display: flex; max-width: 800px; width: 100%;">
+      <q-calendar-agenda
+        ref="calendar"
+        v-model="selectedDate"
+        view="day"
+        :max-days="10"
+        cell-width="200px"
+        day-min-height="100px"
+        :left-column-options="leftColumnOptions"
+        :right-column-options="rightColumnOptions"
+        column-options-id="id"
+        column-options-label="label"
+        weekday-align="center"
+        date-align="center"
+        date-header="inline"
+        animated
+        bordered
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-time="onClickTime"
+        @click-interval="onClickInterval"
+        @click-head-intervals="onClickHeadIntervals"
+        @click-head-day="onClickHeadDay"
+      />
     </div>
   </div>
 </template>

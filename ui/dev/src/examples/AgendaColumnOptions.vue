@@ -7,61 +7,63 @@
       @next="onNext"
     />
 
-    <q-calendar-agenda
-    ref="calendar"
-      v-model="selectedDate"
-      view="week"
-      :left-column-options="leftColumnOptions"
-      :right-column-options="rightColumnOptions"
-      :weekdays="[1,2,3,4,5]"
-      :day-min-height="200"
-      bordered
-      animated
-      locale="en-US"
-      @change="onChange"
-      @moved="onMoved"
-      @click-date="onClickDate"
-      @click-time="onClickTime"
-      @click-interval="onClickInterval"
-      @click-head-intervals="onClickHeadIntervals"
-      @click-head-day="onClickHeadDay"
-    >
-      <template #day="{ scope: { timestamp } }">
-        <template
-          v-for="agenda in getAgenda(timestamp)"
-          :key="timestamp.date + agenda.time"
-        >
-          <div
-            :label="agenda.time"
-            class="justify-start q-ma-sm shadow-5 bg-grey-6"
-            style="margin-top: 25px;"
+    <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
+      <q-calendar-agenda
+      ref="calendar"
+        v-model="selectedDate"
+        view="week"
+        :left-column-options="leftColumnOptions"
+        :right-column-options="rightColumnOptions"
+        :weekdays="[1,2,3,4,5]"
+        :day-min-height="200"
+        bordered
+        animated
+        locale="en-US"
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-time="onClickTime"
+        @click-interval="onClickInterval"
+        @click-head-intervals="onClickHeadIntervals"
+        @click-head-day="onClickHeadDay"
+      >
+        <template #day="{ scope: { timestamp } }">
+          <template
+            v-for="agenda in getAgenda(timestamp)"
+            :key="timestamp.date + agenda.time"
           >
             <div
-              v-if="agenda.avatar"
-              class="row justify-center"
-              style="margin-top: 30px; width: 100%;"
+              :label="agenda.time"
+              class="justify-start q-ma-sm shadow-5 bg-grey-6"
+              style="margin-top: 25px;"
             >
-              <q-avatar style="margin-top: -50px; margin-bottom: 10px; font-size: 60px;">
-                <img
-                  :src="agenda.avatar"
-                  style="border: #9e9e9e solid 5px;"
-                >
-              </q-avatar>
+              <div
+                v-if="agenda.avatar"
+                class="row justify-center"
+                style="margin-top: 30px; width: 100%;"
+              >
+                <q-avatar style="margin-top: -50px; margin-bottom: 10px; font-size: 60px;">
+                  <img
+                    :src="agenda.avatar"
+                    style="border: #9e9e9e solid 5px;"
+                  >
+                </q-avatar>
+              </div>
+              <div class="col-12 q-px-sm">
+                <strong>{{ agenda.time }}</strong>
+              </div>
+              <div
+                v-if="agenda.desc"
+                class="col-12 q-px-sm"
+                style="font-size: 10px;"
+              >
+                {{ agenda.desc }}
+              </div>
             </div>
-            <div class="col-12 q-px-sm">
-              <strong>{{ agenda.time }}</strong>
-            </div>
-            <div
-              v-if="agenda.desc"
-              class="col-12 q-px-sm"
-              style="font-size: 10px;"
-            >
-              {{ agenda.desc }}
-            </div>
-          </div>
+          </template>
         </template>
-      </template>
-    </q-calendar-agenda>
+      </q-calendar-agenda>
+    </div>
   </div>
 </template>
 

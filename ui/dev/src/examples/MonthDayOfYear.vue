@@ -6,24 +6,22 @@
       @next="onNext"
     />
 
-    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
-      <div style="display: flex; max-width: 800px; width: 100%;">
-        <q-calendar-month
-          ref="calendar"
-          v-model="selectedDate"
-          show-day-of-year-label
-          animated
-          bordered
-          date-align="right"
-          @change="onChange"
-          @moved="onMoved"
-          @click-date="onClickDate"
-          @click-day="onClickDay"
-          @click-workweek="onClickWorkweek"
-          @click-head-workweek="onClickHeadWorkweek"
-          @click-head-day="onClickHeadDay"
-        />
-      </div>
+    <div style="display: flex; max-width: 800px; width: 100%;">
+      <q-calendar-month
+        ref="calendar"
+        v-model="selectedDate"
+        show-day-of-year-label
+        animated
+        bordered
+        date-align="right"
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-day="onClickDay"
+        @click-workweek="onClickWorkweek"
+        @click-head-workweek="onClickHeadWorkweek"
+        @click-head-day="onClickHeadDay"
+      />
     </div>
   </div>
 </template>

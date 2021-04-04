@@ -6,34 +6,14 @@
       @next="onNext"
     />
 
+    <div>Min. Label Length:</div>
     <div style="display: flex; justify-content: center; align-items: center;">
-      <div class="button">
-        <input
-          id="1char"
-          v-model="minLabelLength"
-          value="1"
-          type="radio"
-        >
-        <label for="1char">1 char.</label>
-      </div>
-      <div class="button">
-        <input
-          id="2char"
-          v-model="minLabelLength"
-          value="2"
-          type="radio"
-        >
-        <label for="2char">2 char.</label>
-      </div>
-      <div class="button">
-        <input
-          id="3char"
-          v-model="minLabelLength"
-          value="3"
-          type="radio"
-        >
-        <label for="3char">3 char.</label>
-      </div>
+      <q-option-group
+        v-model="minLabelLength"
+        :options="options"
+        type="radio"
+        inline
+      />
     </div>
 
     <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
@@ -78,7 +58,12 @@ export default defineComponent({
   data () {
     return {
       selectedDate: today(),
-      minLabelLength: 1
+      minLabelLength: 1,
+      options: [
+        { label: '1 Char.', value: 1 },
+        { label: '2 Char.', value: 2 },
+        { label: '3 Char.', value: 3 }
+      ]
     }
   },
   methods: {

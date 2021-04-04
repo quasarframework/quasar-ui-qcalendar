@@ -7,39 +7,35 @@
     />
 
     <div style="display: flex; justify-content: center">
-      <div style="display: flex; justify-content: center; align-items: center">
-        <q-select
-          v-model="locale"
-          label="Choose a locale"
-          outlined
-          dense
-          map-options
-          emit-value
-          options-dense
-          :options="locales"
-          class="button"
-          style="min-width: 180px;"
-        />
-      </div>
+      <q-select
+        v-model="locale"
+        label="Choose a locale"
+        outlined
+        dense
+        map-options
+        emit-value
+        options-dense
+        :options="locales"
+        class="button"
+        style="min-width: 180px;"
+      />
     </div>
 
-    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
-      <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
-        <q-calendar-month
-          ref="calendar"
-          v-model="selectedDate"
-          :locale="locale"
-          animated
-          bordered
-          @change="onChange"
-          @moved="onMoved"
-          @click-date="onClickDate"
-          @click-day="onClickDay"
-          @click-workweek="onClickWorkweek"
-          @click-head-workweek="onClickHeadWorkweek"
-          @click-head-day="onClickHeadDay"
-        />
-      </div>
+    <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
+      <q-calendar-month
+        ref="calendar"
+        v-model="selectedDate"
+        :locale="locale"
+        animated
+        bordered
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-day="onClickDay"
+        @click-workweek="onClickWorkweek"
+        @click-head-workweek="onClickHeadWorkweek"
+        @click-head-day="onClickHeadDay"
+      />
     </div>
   </div>
 </template>
