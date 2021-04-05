@@ -38,7 +38,9 @@ export function copyHeading (id) {
   Notify.create({
     message: 'Anchor has been copied to clipboard.',
     position: 'top',
-    actions: [{ icon: 'cancel', color: 'white', dense: true, round: true }],
+    color: 'white',
+    textColor: 'primary',
+    actions: [{ icon: 'cancel', color: 'red-8', dense: true, round: true }],
     timeout: 2000
   })
 }
