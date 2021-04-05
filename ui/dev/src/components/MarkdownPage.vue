@@ -1,5 +1,5 @@
 <template>
-  <div class="q-mx-xl">
+  <div :class="path !== '/' ? 'q-mx-xl' : ''">
     <slot></slot>
     <div v-if="path && noEdit !== true">
       <br><br><br><br>Found an error on this page or feel it could be improved?
