@@ -4,4 +4,3 @@ desc:
 keys: Contributing
 ---
 
-# Documentation

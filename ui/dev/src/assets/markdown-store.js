@@ -7,7 +7,8 @@ export function useMarkdownStore () {
 
 export function provideMarkdownStore () {
   const store = {
-    toc: []
+    toc: [],
+    title: 'Build Beautiful, Responsive Calendars'
   }
 
   provide(

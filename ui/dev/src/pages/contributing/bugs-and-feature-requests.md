@@ -4,8 +4,6 @@ desc:
 keys: Contributing
 ---
 
-# Bugs and Feature Requests
-
 ## Checking for known issues
 
 ### Github

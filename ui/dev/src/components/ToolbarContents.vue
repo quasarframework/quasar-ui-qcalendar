@@ -9,21 +9,28 @@
     @click="leftDrawerButtonFunc"
   />
 
-  <q-toolbar-title>
-    <q-btn
-      flat
-      no-caps
-      to="/"
-      style="padding-left: 0"
-    >
-    <div>
-      <span style="font-size: 20px;">QCalendar &nbsp; </span><span style="font-size: 12px;">v{{ version }}</span>
-    </div>
-    </q-btn>
-  </q-toolbar-title>
+  <q-btn
+    flat
+    no-caps
+    to="/"
+  >
+  <div v-if="$q.screen.width > 500">
+    <span style="font-size: 20px;">
+      QCalendar &nbsp;
+    </span>
+    <span style="font-size: 12px;">
+      v{{ version }}
+    </span>
+  </div>
+  <div v-else>
+    Home
+  </div>
+  </q-btn>
 
-  <q-toolbar-title v-if="$q.screen.width > 500">
-    {{ title }}
+  <q-toolbar-title>
+    <div class="row justify-center">
+      {{ title }}
+    </div>
   </q-toolbar-title>
 
   <q-btn flat round @click="$q.dark.toggle()" :icon="$q.dark.isActive ? 'brightness_2' : 'brightness_5'" />
@@ -48,7 +55,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: ''
+      default: 'Build Beautiful, Responsive Calendars'
     },
     leftDrawerButton: Boolean,
     rightDrawerButton: Boolean,

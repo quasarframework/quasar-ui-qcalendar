@@ -6,8 +6,6 @@ related:
   - /all-about-qcalendar/what-is-qcalendar
 ---
 
-# Installation Types
-
 ## Quasar CLI
 
 **App Extension**

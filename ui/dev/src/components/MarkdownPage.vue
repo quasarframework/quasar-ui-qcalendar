@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="q-mx-xl">
     <slot></slot>
     <div v-if="path && noEdit !== true">
       <br><br><br><br>Found an error on this page or feel it could be improved?
@@ -10,6 +10,7 @@
         Edit this page on Github
       </a>
     </div>
+    <div class="q-mb-md"></div>
   </div>
 </template>
 
@@ -42,12 +43,17 @@ export default {
 
     useMeta(
       props.metaDesc !== void 0
-        ? { title: props.metaTitle, meta: getMeta(props.metaTitle + ' | QCalendar', props.metaDesc) }
+        ? { title: props.metaTitle, meta: getMeta(props.metaTitle + ' » QCalendar', props.metaDesc) }
         : { title: props.metaTitle }
     )
 
+    function getTitle () {
+      return props.metaTitle
+    }
+
     const store = useMarkdownStore()
     store.toc = props.toc !== void 0 ? props.toc : []
+    store.title = getTitle()
 
     return {
       path

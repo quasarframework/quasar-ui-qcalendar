@@ -4,8 +4,6 @@ desc: Usingh QCalendar Transitions
 keys: All about QCalendar
 ---
 
-# QCalendar Transitions
-
 Transitons allows your calendar component to be animated when the view changes (ie: next/prev day, week, month, etc). It is turned on with the use of the `animated` property and works in conjunction with the `transiton-prev` and `transiton-next` properties.
 
 ## Transitions

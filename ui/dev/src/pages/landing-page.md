@@ -1,5 +1,5 @@
 ---
-title: QCalendar - simply the best and easiest calendar for Vue
+title: QCalendar » Simply the BEST Calendars
 desc: Build Beautiful, Responsive Calendars
 keys: Help
 noEdit: true,

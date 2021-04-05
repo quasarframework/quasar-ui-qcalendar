@@ -3,7 +3,7 @@
     <q-header elevated>
       <q-toolbar>
         <toolbar-contents
-          title="Build Beautiful, Responsive Calendars"
+          :title="title"
           left-drawer-button
           :right-drawer-button="isExample === true || store.toc.length > 0"
           :left-drawer-button-func="toggleLeftDrawer"
@@ -14,7 +14,7 @@
 
     <q-drawer
       v-model="leftDrawerOpen"
-      show-if-above
+      :show-if-above="$route.path !== '/'"
       class="menu markdown__scroll"
     >
       <left-menu />
@@ -52,7 +52,7 @@
 
     <q-page-container>
 
-      <div class="fit q-pa-sm">
+      <div class="fit full-width">
         <div
           v-if="isExample === true"
           style="width: 100%; text-align: left; margin: 8px;"
@@ -75,7 +75,7 @@
         </div>
 
         <div :class="'flex ' + (isExample === true ? 'flex-center' : 'flex-start')">
-          <div :style="'max-width: ' + ($route.path === '/' ? '1000' : '800') + 'px; width: 100%;'">
+          <div :style="'max-width: ' + ($route.path === '/' ? '100%' : '800px') + '; width: 100%;'">
             <router-view />
           </div>
         </div>
@@ -130,7 +130,8 @@ export default defineComponent({
       $route = useRoute(),
       leftDrawerOpen = ref(false),
       rightDrawerOpen = ref(false),
-      activeToc = ref(0)
+      activeToc = ref(0),
+      title = ref(undefined)
 
     const isExample = computed(() => $route.path.startsWith('/examples'))
 
@@ -140,6 +141,10 @@ export default defineComponent({
 
     watch(() => $route.fullPath, () => {
       handleRouteChange()
+    })
+
+    watch(() => store.title, val => {
+      title.value = val
     })
 
     function handleRouteChange () {
@@ -227,7 +232,8 @@ export default defineComponent({
       },
       onScroll,
       scrollTo,
-      biGithub
+      biGithub,
+      title
     }
   }
 })

@@ -7,8 +7,6 @@ related:
   - /all-about-qcalendar/anatomy-of-a-calendar
 ---
 
-# Overview
-
 Interested in contributing to QCalendar? Here's how you can contribute:
 
 ## Introduction

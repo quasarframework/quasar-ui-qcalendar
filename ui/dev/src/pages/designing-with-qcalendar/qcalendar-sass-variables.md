@@ -4,4 +4,3 @@ desc: Using QCalendar SASS Variables
 keys: All about QCalendar
 ---
 
-# QCalendar SASS Variables

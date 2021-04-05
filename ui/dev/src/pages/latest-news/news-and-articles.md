@@ -4,4 +4,3 @@ desc:
 keys: latest-news
 ---
 
-# News and Articles

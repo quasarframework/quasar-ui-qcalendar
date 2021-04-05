@@ -4,4 +4,3 @@ desc:
 keys: Designing with QCalendar
 ---
 
-# Getting Started

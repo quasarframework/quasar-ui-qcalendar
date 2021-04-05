@@ -15,8 +15,8 @@ export default defineComponent({
 
   setup () {
     useMeta({
-      title: 'Quasar Framework',
-      titleTemplate: title => `${ title } | QCalendar`,
+      title: 'QCalendar » Build Beautiful, Responsive Calendars',
+      titleTemplate: title => `${ title } » QCalendar`,
 
       meta: getMeta(
         'QCalendar - Day/Month/Week Calendars, Popups, Date Pickers, Schedules, Agendas, Planners and Tasks for your Vue Apps',
