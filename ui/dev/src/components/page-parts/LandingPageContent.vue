@@ -243,6 +243,7 @@
         title="Blue"
         side="left"
         color="blue"
+        subtitle="Change your calendar with CSS vars"
       >
         <div>
           <q-intersection
@@ -263,6 +264,7 @@
         title="Indigo"
         side="right"
         color="indigo"
+        subtitle="Use our Theme Builder to create themes"
       >
         <div>
           <q-intersection
@@ -283,6 +285,7 @@
         title="Deep Purple"
         side="left"
         color="deep-purple"
+        subtitle="Create stunning calendars"
       >
         <div>
           <q-intersection
