@@ -12,7 +12,7 @@ related:
   - /developing/qcalendartask
 ---
 
-This section will highlight a number common properties and generalities amongst the various calendars. Other, more specific properties will be discussed in their respective sections.
+This section will highlight a number common properties and generalities amongst the various calendars. Other, more specific properties will be discussed in their respective calendar sections.
 
 ## Timestamp
 
