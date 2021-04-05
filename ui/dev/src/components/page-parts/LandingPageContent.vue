@@ -15,6 +15,7 @@
     <div class="full-width row justify-center q-pb-xl">
       <q-btn
         to="/all-about-qcalendar/what-is-qcalendar"
+        no-caps
         class="bg-red-8"
       >
         <div class="row justify-around items-center" style="width: 140px;">
