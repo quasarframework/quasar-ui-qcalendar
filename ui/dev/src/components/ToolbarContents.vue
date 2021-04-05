@@ -49,8 +49,9 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue'
 import { version } from '@quasar/quasar-ui-qcalendar'
-export default {
+export default defineComponent({
   name: 'ToolbarContents',
   props: {
     title: {
@@ -67,5 +68,5 @@ export default {
       version
     }
   }
-}
+})
 </script>
