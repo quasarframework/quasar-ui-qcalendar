@@ -217,7 +217,7 @@ Then you can use the `transiton-prev` and `transiton-next` properties to change 
 
 ### Transitions types
 
-QCalendar support the following transition types:
+QCalendar supports the following transition types:
 
 | Roll       | Slide       | Jump       | Misc   |
 | ----       | ----        | ----       | ----   |
