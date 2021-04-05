@@ -37,6 +37,11 @@ const menu = [
         component: () => import('../pages/developing/qcalendar-transitions.md')
       },
       {
+        name: 'QCalendar (wrapper)',
+        path: 'developing/qcalendar',
+        component: () => import('../pages/developing/qcalendar.md')
+      },
+      {
         name: 'QCalendarDay',
         path: 'developing/qcalendarday',
         component: () => import('../pages/developing/qcalendarday.md')
