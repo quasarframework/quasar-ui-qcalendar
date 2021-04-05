@@ -28,7 +28,7 @@
   </q-btn>
 
   <q-toolbar-title>
-    <div class="row justify-center">
+    <div v-if="title" class="row justify-center">
       {{ title }}
     </div>
   </q-toolbar-title>
