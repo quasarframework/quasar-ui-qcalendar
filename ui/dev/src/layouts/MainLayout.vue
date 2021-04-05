@@ -155,6 +155,8 @@ export default defineComponent({
       else {
         path.value = basePath + $route.name + '.vue'
         name.value = $route.name
+        // auto-open left menu
+        leftDrawerOpen.value = true
       }
     }
 
