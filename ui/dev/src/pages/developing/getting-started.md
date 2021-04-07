@@ -186,15 +186,15 @@ All labels in the calendars are formatted with the browsers `Intl.DateTimeFormat
 
 ### Minimum label Length
 
-As explained above, the calendars can format weekday labels smaller than the `Intl.DateTimeFormat` short-format. The edge-case for this is to create a very small calendar picker. In this case, you could set the `min-label-length` to 1, in which case only the first character of the label will be used. This may not be desireable for some languages, as the weekdays may all have the same first character. In this case, set it to 2 or 3, whatever best suits the locale that you are aiming for.
+As explained above, the calendars can format weekday labels smaller than the `Intl.DateTimeFormat` short-format. The edge-case for this is to create a very small calendar picker. In this case, you could set the `min-weekday-length` to 1, in which case only the first character of the label will be used. This may not be desireable for some languages, as the weekdays may all have the same first character. In this case, set it to 2 or 3, whatever best suits the locale that you are aiming for.
 
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
-| min-label-length | Number \| String       |              |
+| min-weekday-length | Number \| String       |              |
 
 ### Label breakpoints
 
-The `label-breakpoints` property is an array of two numbers. The parent div that contains the label knows it's width. The array contains the values where you want label values to go from long format to short format automatically. The second value is for when you want the values to start using extra-short format based on the `min-label-length` property.
+The `label-breakpoints` property is an array of two numbers. The parent div that contains the label knows it's width. The array contains the values where you want label values to go from long format to short format automatically. The second value is for when you want the values to start using extra-short format based on the `min-weekday-length` property.
 
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |

@@ -29,7 +29,7 @@
         :tasks="parsedTasks"
         :task-width="240"
         :locale="locale"
-        :min-label-length="2"
+        :min-weekday-length="2"
         :weekday-class="weekdayClass"
         :day-class="dayClass"
         :footer-day-class="footerDayClass"

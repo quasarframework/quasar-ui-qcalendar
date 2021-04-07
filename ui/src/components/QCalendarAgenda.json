@@ -120,14 +120,14 @@
       "category": "content",
       "desc": "Do not display the date button in the header"
     },
-    "min-label-length": {
+    "min-weekday-length": {
       "addedIn": "v4.0.0",
       "type": ["Number", "String"],
       "category": "behavior",
       "desc": "The minimal number of weekday characters when truncation occurs",
       "default": 1,
       "examples": [
-        ":min-label-length=\"2\""
+        ":min-weekday-length=\"2\""
       ]
     },
     "label-breakpoints": {

@@ -80,7 +80,7 @@ export const useTaskProps = {
   //   type: [ Number, String ],
   //   default: 75
   // },
-  minLabelLength: {
+  minWeekdayLabel: {
     type: [ Number, String ],
     default: 2
   },

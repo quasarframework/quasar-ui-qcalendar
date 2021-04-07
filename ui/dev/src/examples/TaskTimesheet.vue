@@ -13,7 +13,7 @@
         view="month"
         :tasks="parsedTasks"
         :task-width="240"
-        :min-label-length="2"
+        :min-weekday-length="2"
         :weekday-class="weekdayClass"
         :day-class="dayClass"
         :footer-day-class="footerDayClass"

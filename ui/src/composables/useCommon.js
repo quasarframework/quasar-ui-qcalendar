@@ -53,7 +53,7 @@ export const useCommonProps = {
   shortWeekdayLabel: Boolean,
   noDefaultHeaderText: Boolean,
   noDefaultHeaderBtn: Boolean,
-  minLabelLength: {
+  minWeekdayLabel: {
     type: [ Number, String ],
     default: 1
   },

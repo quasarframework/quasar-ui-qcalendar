@@ -9,7 +9,7 @@
     <div>Min. Label Length:</div>
     <div style="display: flex; justify-content: center; align-items: center;">
       <q-option-group
-        v-model="minLabelLength"
+        v-model="minWeekdayLabel"
         :options="options"
         type="radio"
         inline
@@ -23,7 +23,7 @@
           v-model="selectedDate"
           mini-mode
           short-weekday-label
-          :min-label-length="minLabelLength"
+          :min-weekday-length="minWeekdayLabel"
           animated
           bordered
           @change="onChange"
@@ -58,7 +58,7 @@ export default defineComponent({
   data () {
     return {
       selectedDate: today(),
-      minLabelLength: 1,
+      minWeekdayLabel: 1,
       options: [
         { label: '1 Char.', value: 1 },
         { label: '2 Char.', value: 2 },

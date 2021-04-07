@@ -546,7 +546,7 @@ export default defineComponent({
       const weekdayLabel = weekdayFormatter.value(day, shortWeekdayLabel || (props.labelBreakpoints[ 0 ] > 0 && parsedCellWidth.value <= props.labelBreakpoints[ 0 ]))
       return h('span', {
         class: 'q-calendar__ellipsis'
-      }, (isMiniMode.value === true && props.shortWeekdayLabel === true) || (props.labelBreakpoints[ 1 ] > 0 && parsedCellWidth.value <= props.labelBreakpoints[ 1 ]) ? minCharWidth(weekdayLabel, props.minLabelLength) : weekdayLabel)
+      }, (isMiniMode.value === true && props.shortWeekdayLabel === true) || (props.labelBreakpoints[ 1 ] > 0 && parsedCellWidth.value <= props.labelBreakpoints[ 1 ]) ? minCharWidth(weekdayLabel, props.minWeekdayLabel) : weekdayLabel)
     }
 
     function __renderWeeks () {

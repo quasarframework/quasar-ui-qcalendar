@@ -700,7 +700,7 @@ export default defineComponent({
       const weekdayLabel = weekdayFormatter.value(day, shortWeekdayLabel)
       return h('span', {
         class: 'q-calendar__ellipsis'
-      }, shortCellWidth === true ? minCharWidth(weekdayLabel, props.minLabelLength) : weekdayLabel)
+      }, shortCellWidth === true ? minCharWidth(weekdayLabel, props.minWeekdayLabel) : weekdayLabel)
     }
 
     function __renderHeadDayDate (day) {

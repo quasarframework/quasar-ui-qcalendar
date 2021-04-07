@@ -44,7 +44,7 @@
         bordered
         :tasks="parsedTasks"
         :task-width="240"
-        :min-label-length="2"
+        :min-weekday-length="2"
         @change="onChange"
       >
         <template v-if="selectedCalendar === 'task'" #head-task="{ /* scope */ }">
