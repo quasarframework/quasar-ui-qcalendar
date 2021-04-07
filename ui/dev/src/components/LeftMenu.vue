@@ -73,6 +73,7 @@
 <script>
 import { defineComponent, ref, reactive, computed, onBeforeMount, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { LocalStorage } from 'quasar'
 import {
   biLink,
   biTwitter,
@@ -103,13 +104,13 @@ export default defineComponent({
     })
 
     onBeforeMount(() => {
-      const val = localStorage.getItem('filter')
+      const val = LocalStorage.getItem('filter')
       filter.value = val || ''
     })
 
     watch(filter, val => {
       if (val || val === '') {
-        localStorage.setItem('filter', val)
+        LocalStorage.set('filter', val)
       }
     })
 
