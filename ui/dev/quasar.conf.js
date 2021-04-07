@@ -77,7 +77,8 @@ module.exports = configure(function (ctx) {
 
         chain.resolve.alias.merge({
           ui: path.resolve(__dirname, '../src/index.js'),
-          '@quasar/quasar-ui-qcalendar': path.resolve(__dirname, '../src')
+          '@quasar/quasar-ui-qcalendar': path.resolve(__dirname, '../src'),
+          examples: path.resolve(__dirname, './src/examples')
         })
 
         const rule = chain.module.rule('md')
