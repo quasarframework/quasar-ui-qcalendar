@@ -39,6 +39,7 @@
         resource-key="id"
         resource-label="name"
         view="week"
+        :day-min-height="70"
         animated
         bordered
         :tasks="parsedTasks"
@@ -46,7 +47,7 @@
         :min-label-length="2"
         @change="onChange"
       >
-        <template #head-task="{ /* scope */ }">
+        <template v-if="selectedCalendar === 'task'" #head-task="{ /* scope */ }">
           <div class="header ellipsis" style="font-weight: 600">
             <div class="issue ellipsis">Issue</div>
             <div class="key">Key</div>
@@ -54,7 +55,7 @@
           </div>
         </template>
 
-        <template #task="{ scope }">
+        <template v-if="selectedCalendar === 'task'" #task="{ scope }">
           <template v-for="task in getTasks(scope.start, scope.end, scope.task)" :key="task.key">
             <div class="header ellipsis">
               <div class="issue ellipsis">
@@ -69,58 +70,58 @@
           </template>
         </template>
 
-        <template #day="{ scope: { timestamp } }">
-          <template v-if="selectedCalendar === 'task'">
-            <template v-for="time in getLogged(timestamp.date, scope.task.logged)" :key="time">
-              <div class="logged-time">{{ time.logged }}</div>
-            </template>
-          </template>
-          <template v-if="selectedCalendar === 'agenda'">
-            <template
-              v-for="agenda in getAgenda(timestamp)"
-              :key="timestamp.date + agenda.time"
-            >
-              <div
-                :label="agenda.time"
-                class="justify-start q-ma-sm shadow-5 bg-grey-6"
-                style="margin-top: 25px;"
-              >
-                <div
-                  v-if="agenda.avatar"
-                  class="row justify-center"
-                  style="margin-top: 30px; width: 100%;"
-                >
-                  <q-avatar style="margin-top: -50px; margin-bottom: 10px; font-size: 60px;">
-                    <img
-                      :src="agenda.avatar"
-                      style="border: #9e9e9e solid 5px;"
-                    >
-                  </q-avatar>
-                </div>
-                <div class="col-12 q-px-sm">
-                  <strong>{{ agenda.time }}</strong>
-                </div>
-                <div
-                  v-if="agenda.desc"
-                  class="col-12 q-px-sm"
-                  style="font-size: 10px;"
-                >
-                  {{ agenda.desc }}
-                </div>
-              </div>
-            </template>
+        <template v-if="selectedCalendar === 'task'" #day="{ scope: { timestamp, task } }">
+          <template v-for="time in getLogged(timestamp.date, task.logged)" :key="time">
+            <div class="logged-time">{{ time.logged }}</div>
           </template>
         </template>
 
-        <template #footer-task="{ scope }">
+        <!-- eslint-disable-next-line vue/valid-v-slot -->
+        <template v-if="selectedCalendar === 'agenda'" #day="{ scope: { timestamp } }">
+          <template
+            v-for="agenda in getAgenda(timestamp)"
+            :key="timestamp.date + agenda.time"
+          >
+            <div
+              :label="agenda.time"
+              class="justify-start q-ma-sm shadow-5 bg-grey-6"
+              style="margin-top: 25px;"
+            >
+              <div
+                v-if="agenda.avatar"
+                class="row justify-center"
+                style="margin-top: 30px; width: 100%;"
+              >
+                <q-avatar style="margin-top: -50px; margin-bottom: 10px; font-size: 60px;">
+                  <img
+                    :src="agenda.avatar"
+                    style="border: #9e9e9e solid 5px;"
+                  >
+                </q-avatar>
+              </div>
+              <div class="col-12 q-px-sm">
+                <strong>{{ agenda.time }}</strong>
+              </div>
+              <div
+                v-if="agenda.desc"
+                class="col-12 q-px-sm"
+                style="font-size: 10px;"
+              >
+                {{ agenda.desc }}
+              </div>
+            </div>
+          </template>
+        </template>
+
+        <template v-if="selectedCalendar === 'task'" #footer-task="{ scope: { start, end, tasks } }">
           <div class="summary ellipsis">
             <div class="title ellipsis">TOTAL</div>
-            <div class="total">{{ totals(scope.start, scope.end, scope.tasks) }}</div>
+            <div class="total">{{ totals(start, end, tasks) }}</div>
           </div>
         </template>
 
-        <template #footer-day="{ scope }">
-          <div class="logged-time">{{ getLoggedSummary(scope.timestamp.date, scope.tasks) }}</div>
+        <template v-if="selectedCalendar === 'task'" #footer-day="{ scope: { timestamp, tasks } }">
+          <div class="logged-time">{{ getLoggedSummary(timestamp.date, tasks) }}</div>
         </template>
 
       </q-calendar>
@@ -148,7 +149,7 @@ import Pending from '@carbon/icons-vue/es/pending/16'
 import Blocking from '@carbon/icons-vue/es/undefined/16'
 
 export default defineComponent({
-  name: 'AllCalendar',
+  name: 'CalendarAll',
   components: {
     NavigationBar,
     QCalendar,
