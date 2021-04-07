@@ -682,7 +682,7 @@ export default defineComponent({
       const slot = slots[ 'head-weekday-label' ]
       // const divisor = props.dateHeader === 'inline' || props.dateHeader === 'inverted' ? 0.5 : 1
       const shortWeekdayLabel = props.shortWeekdayLabel === true
-      // const shortCellWidth = props.labelBreakpoints[ 1 ] > 0 && (parsedCellWidth.value * divisor) <= props.labelBreakpoints[ 1 ]
+      // const shortCellWidth = props.weekdayBreakpoints[ 1 ] > 0 && (parsedCellWidth.value * divisor) <= props.weekdayBreakpoints[ 1 ]
       const scope = { timestamp: day, shortWeekdayLabel }
 
       const data = {

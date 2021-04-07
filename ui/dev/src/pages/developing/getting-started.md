@@ -194,11 +194,11 @@ As explained above, the calendars can format weekday labels smaller than the `In
 
 ### Label breakpoints
 
-The `label-breakpoints` property is an array of two numbers. The parent div that contains the label knows it's width. The array contains the values where you want label values to go from long format to short format automatically. The second value is for when you want the values to start using extra-short format based on the `min-weekday-length` property.
+The `weekday-breakpoints` property is an array of two numbers. The parent div that contains the label knows it's width. The array contains the values where you want label values to go from long format to short format automatically. The second value is for when you want the values to start using extra-short format based on the `min-weekday-length` property.
 
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
-| label-breakpoints | Array | [75,35]      |
+| weekday-breakpoints | Array | [75,35]      |
 
 ## Transitions
 

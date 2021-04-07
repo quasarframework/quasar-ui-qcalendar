@@ -84,7 +84,7 @@ export const useTaskProps = {
     type: [ Number, String ],
     default: 2
   },
-  labelBreakpoints: {
+  weekdayBreakpoints: {
     type: Array,
     default: () => [ 75, 35 ],
     validator: v => v.length === 2

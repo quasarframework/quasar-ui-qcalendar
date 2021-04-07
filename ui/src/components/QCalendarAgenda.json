@@ -130,7 +130,7 @@
         ":min-weekday-length=\"2\""
       ]
     },
-    "label-breakpoints": {
+    "weekday-breakpoints": {
       "addedIn": "v4.0.0",
       "type": "Array",
       "tsType": "NumberArray",
@@ -138,7 +138,7 @@
       "desc": "The breakpoint widths where weekday truncation occurs (needs 2 values)",
       "default": [ 75, 35 ],
       "examples": [
-        ":label-breakpoints=\"[68, 32]\""
+        ":weekday-breakpoints=\"[68, 32]\""
       ]
     },
     "locale": {

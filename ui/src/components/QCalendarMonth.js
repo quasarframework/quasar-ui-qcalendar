@@ -543,10 +543,10 @@ export default defineComponent({
     }
 
     function __renderHeadWeekdayLabel (day, shortWeekdayLabel) {
-      const weekdayLabel = weekdayFormatter.value(day, shortWeekdayLabel || (props.labelBreakpoints[ 0 ] > 0 && parsedCellWidth.value <= props.labelBreakpoints[ 0 ]))
+      const weekdayLabel = weekdayFormatter.value(day, shortWeekdayLabel || (props.weekdayBreakpoints[ 0 ] > 0 && parsedCellWidth.value <= props.weekdayBreakpoints[ 0 ]))
       return h('span', {
         class: 'q-calendar__ellipsis'
-      }, (isMiniMode.value === true && props.shortWeekdayLabel === true) || (props.labelBreakpoints[ 1 ] > 0 && parsedCellWidth.value <= props.labelBreakpoints[ 1 ]) ? minCharWidth(weekdayLabel, props.minWeekdayLabel) : weekdayLabel)
+      }, (isMiniMode.value === true && props.shortWeekdayLabel === true) || (props.weekdayBreakpoints[ 1 ] > 0 && parsedCellWidth.value <= props.weekdayBreakpoints[ 1 ]) ? minCharWidth(weekdayLabel, props.minWeekdayLabel) : weekdayLabel)
     }
 
     function __renderWeeks () {

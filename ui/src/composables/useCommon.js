@@ -57,7 +57,7 @@ export const useCommonProps = {
     type: [ Number, String ],
     default: 1
   },
-  labelBreakpoints: {
+  weekdayBreakpoints: {
     type: Array,
     default: () => [ 75, 35 ],
     validator: v => v.length === 2
