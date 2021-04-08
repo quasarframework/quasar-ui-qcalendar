@@ -87,5 +87,5 @@ export default {
       transition: color .28s
 
       &:hover
-        color: $grey-8
+        color: $red-8
 </style>
