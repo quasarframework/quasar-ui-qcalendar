@@ -1,14 +1,17 @@
 <template>
-  <div :class="path !== '/' ? 'q-mx-xl' : ''">
+  <div :class="'q-markdown ' + (path !== '/' ? 'q-mx-xl' : '')">
     <slot></slot>
-    <div v-if="path && noEdit !== true">
-      <br><br><br><br>Found an error on this page or feel it could be improved?
-      <a
-        :href="'https://github.com/quasarframework/quasar-ui-qcalendar/tree/dev/ui/dev/src/pages' + path"
-        target="_blank"
-      >
-        Edit this page on Github
-      </a>
+    <div class="markdown-page-footer">
+      <q-separator class="q-mb-lg" />
+      <div v-if="path && noEdit !== true">
+        Found an error on this page or feel it could be improved?
+        <markdown-link
+          :to="'https://github.com/quasarframework/quasar-ui-qcalendar/tree/dev/ui/dev/src/pages' + path"
+        >
+          Edit this page on Github
+        </markdown-link>
+      </div>
+      <markdown-footer />
     </div>
     <div class="q-mb-md"></div>
   </div>
@@ -17,13 +20,19 @@
 <script>
 import { useRoute } from 'vue-router'
 import { useMeta } from 'quasar'
+
 // eslint-disable-next-line no-unused-vars
 import { copyHeading } from 'assets/page-utils'
 import getMeta from 'assets/get-meta'
 import { useMarkdownStore } from 'assets/markdown-store.js'
+import MarkdownFooter from './MarkdownFooter.vue'
 
 export default {
   name: 'MarkdownPage',
+
+  components: {
+    MarkdownFooter
+  },
 
   props: {
     title: String,
@@ -37,7 +46,9 @@ export default {
   },
 
   setup (props) {
-    console.log(props)
+    // TODO: remove
+    console.log('props', props)
+
     const $route = useRoute(),
       path = $route.path
 
@@ -61,3 +72,20 @@ export default {
   }
 }
 </script>
+
+<style lang="sass">
+.markdown-page-footer
+  padding: 36px 0 16px
+
+  &__icons
+    font-size: 28px
+
+    a
+      text-decoration: none
+      outline: 0
+      color: $primary
+      transition: color .28s
+
+      &:hover
+        color: $grey-8
+</style>

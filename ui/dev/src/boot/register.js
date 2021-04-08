@@ -1,6 +1,7 @@
 import { boot } from 'quasar/wrappers'
 import VuePlugin, { version } from 'ui' // "ui" is aliased in quasar.conf.js
 import MarkdownPage from '../components/MarkdownPage.vue'
+import MarkdownLink from '../components/MarkdownLink.vue'
 import ExampleViewer, { setDefaults } from 'quasar-ui-example-viewer/src/index.js'
 
 setDefaults({
@@ -17,4 +18,5 @@ export default boot(({ app }) => {
   app.use(VuePlugin)
   app.use(ExampleViewer)
   app.component('MarkdownPage', MarkdownPage)
+  app.component('MarkdownLink', MarkdownLink)
 })
