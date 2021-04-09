@@ -4,12 +4,14 @@
     <div class="markdown-page-footer">
       <q-separator class="q-mb-lg" />
       <div v-if="path && noEdit !== true">
-        Found an error on this page or feel it could be improved?
-        <markdown-link
-          :to="'https://github.com/quasarframework/quasar-ui-qcalendar/tree/dev/ui/dev/src/pages' + path"
-        >
-          Edit this page on Github
-        </markdown-link>
+        <div class="full-width row justify-center items-center">
+          Found an error on this page or feel it could be improved?
+          <markdown-link
+            :to="'https://github.com/quasarframework/quasar-ui-qcalendar/tree/dev/ui/dev/src/pages' + path"
+          >
+            &nbsp; Edit this page on Github
+          </markdown-link>
+        </div>
       </div>
       <markdown-footer />
     </div>
