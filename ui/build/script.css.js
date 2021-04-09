@@ -31,7 +31,10 @@ Promise
     generate('src/QCalendarDay.sass', 'dist/QCalendarDay'),
     generate('src/QCalendarMonth.sass', 'dist/QCalendarMonth'),
     generate('src/QCalendarResource.sass', 'dist/QCalendarResource'),
-    generate('src/QCalendarScheduler.sass', 'dist/QCalendarScheduler')
+    generate('src/QCalendarScheduler.sass', 'dist/QCalendarScheduler'),
+    generate('src/QCalendarTask.sass', 'dist/QCalendarTask'),
+    generate('src/QCalendarTransitions.sass', 'dist/QCalendarTransitions'),
+    generate('src/QCalendarVariables.sass', 'dist/QCalendarVariables')
   ])
   .catch(e => {
     console.error(e)
