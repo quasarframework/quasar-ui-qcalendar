@@ -219,10 +219,10 @@
                 <div class="text-h6">
                   Task
                 </div>
-                <!-- <theme-builder-agenda
+                <theme-builder-task
                   v-model="selectedDate"
                   :styles="store.style"
-                /> -->
+                />
               </q-tab-panel>
             </q-tab-panels>
           </div>
@@ -251,6 +251,7 @@ import ThemeBuilderMinimode from '../components/ThemeBuilder/miniMode'
 import ThemeBuilderScheduler from '../components/ThemeBuilder/scheduler'
 import ThemeBuilderResource from '../components/ThemeBuilder/resource'
 import ThemeBuilderAgenda from '../components/ThemeBuilder/agenda'
+import ThemeBuilderTask from '../components/ThemeBuilder/task'
 
 export default defineComponent({
   name: 'ThemeBuilderLayout',
@@ -265,6 +266,7 @@ export default defineComponent({
     ThemeBuilderScheduler,
     ThemeBuilderResource,
     ThemeBuilderAgenda,
+    ThemeBuilderTask,
     ThemeImporter
   },
   setup () {

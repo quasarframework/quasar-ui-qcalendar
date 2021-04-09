@@ -61,6 +61,7 @@
         :disabled-weekdays="disabledWeekdays"
         :hide-outside-days="hideOutside"
         :show-work-weeks="showWorkweeks"
+        :day-min-height="70"
         :style="styles"
         @click:day2="onToggleDay"
         @click:date2="onToggleDate"

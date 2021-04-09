@@ -98,6 +98,7 @@
         <div class="text-title2">
           {{ itemName }}
         </div>
+        {{ hint }}
         <!-- <q-markdown :src="hint" /> -->
       </div>
     </div>
@@ -107,6 +108,7 @@
 <script>
 import { colors } from 'quasar'
 const { brightness } = colors
+import { useThemeBuilderStore } from 'assets/theme-builder-store.js'
 
 export default {
   name: 'ThemeEditor',
@@ -118,7 +120,7 @@ export default {
   },
 
   emits: [
-    'input',
+    'update:modelValue',
     'style'
   ],
 
@@ -131,19 +133,20 @@ export default {
       editorValue: void 0,
       itemNameOrig: '',
       itemStyleOrig: '',
-      styleCopy: {}
+      styleCopy: {},
+      store: useThemeBuilderStore()
     }
   },
 
   computed: {
-    // ...mapGetters({
-    //   hints: 'ThemeBuilder/hints'
-    // }),
+    hints () {
+      return this.store.hints
+    },
 
     hint () {
-      // if (this.itemName) {
-      //   return this.hints[ this.itemName ]
-      // }
+      if (this.itemName) {
+        return this.hints[ this.itemName ]
+      }
       return ''
     },
 
@@ -294,7 +297,7 @@ export default {
       this.openEditor = this.modelValue
     },
     openEditor (val) {
-      this.$emit('input', val)
+      this.$emit('update:modelValue', val)
     },
     itemStyle (val) {
       this.updateEditor()

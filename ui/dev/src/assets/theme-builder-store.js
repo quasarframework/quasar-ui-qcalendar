@@ -8,6 +8,7 @@ export function useThemeBuilderStore () {
 export function provideThemeBuilderStore () {
   const store = {
     currentStyleName: '',
+    // TODO: make css vars consistent with actual
     style: {
       '--calendar-border': '#e0e0e0 1px solid',
       '--calendar-border-dark': '#71755d 1px solid',

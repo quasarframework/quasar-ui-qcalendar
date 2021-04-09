@@ -42,7 +42,7 @@ export default {
   },
 
   emits: [
-    'input'
+    'update:modelValue'
   ],
 
   data () {
@@ -73,7 +73,7 @@ export default {
     },
 
     openImporter (val) {
-      this.$emit('input', val)
+      this.$emit('update:modelValue', val)
     },
 
     setStyle ({ name, styles }) {
