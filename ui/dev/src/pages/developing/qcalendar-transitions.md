@@ -1,6 +1,6 @@
 ---
 title: QCalendar Transitions
-desc: Usingh QCalendar Transitions
+desc: Using QCalendar Transitions
 keys: All about QCalendar
 ---
 

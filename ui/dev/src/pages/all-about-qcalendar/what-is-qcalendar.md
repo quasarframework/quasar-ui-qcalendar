@@ -9,6 +9,7 @@ related:
   - /all-about-qcalendar/sponsor
 ---
 
+> If you are looking for a **Migration Guide** from v3 to v4, go [here](/help/migration-guide) in the **Help** section.
 ## Everything you need for a complete Calendar solution
 
 QCalendar allows for viewing of **day** (1-6 days), **week**, **monthly**, **scheduler**, **agenda**, **resource** and **task** views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.
