@@ -17,6 +17,18 @@
         "v-model=\"2020-08-08\""
       ]
     },
+    "mode": {
+      "type": "String",
+      "category": "behavior",
+      "desc": "Tells QCalendar (wrapper) which calendar component to use",
+      "required": true,
+      "default": "day",
+      "values" : ["day", "month", "agenda", "resource", "scheduler", "task"],
+      "examples": [
+        "mode=\"week\"",
+        "mode=\"month\""
+      ]
+    },
     "view": {
       "type": "String",
       "category": "model",
