@@ -72,11 +72,108 @@ const menu = [
       },
       {
         name: 'QCalendarScheduler',
-        path: 'qcalendarscheduler'
+        path: 'qcalendarscheduler',
+        // fasCalendar
+        children: [
+          {
+            name: 'Scheduler - Getting Started',
+            path: 'scheduler-getting-started'
+          },
+          {
+            name: 'Scheduler - Alignment',
+            path: 'scheduler-alignment'
+          },
+          {
+            name: 'Scheduler - Dark',
+            path: 'scheduler-dark'
+          },
+          {
+            name: 'Scheduler - Date Type',
+            path: 'scheduler-date-type'
+          },
+          {
+            name: 'Scheduler - Focusable/Hoverable',
+            path: 'scheduler-focusable-hoverable'
+          },
+          {
+            name: 'Scheduler - Cell Width',
+            path: 'scheduler-cell-width'
+          },
+          {
+            name: 'Scheduler - Drag and Drop',
+            path: 'scheduler-drag-and-drop'
+          },
+          {
+            name: 'Scheduler - Locale',
+            path: 'scheduler-locale'
+          },
+          {
+            name: 'Scheduler - Theme',
+            path: 'scheduler-theme'
+          }
+        ]
       },
       {
         name: 'QCalendarTask',
-        path: 'qcalendartask'
+        path: 'qcalendartask',
+        children: [
+          {
+            name: 'Task - Getting Started',
+            path: 'task-getting-started'
+          },
+          {
+            name: 'Task - Timesheet',
+            path: 'task-timesheet'
+          },
+          {
+            name: 'Task - Alignment',
+            path: 'task-alignment'
+          },
+          {
+            name: 'Task - Colored Weekends',
+            path: 'task-colored-weekends'
+          },
+          {
+            name: 'Task - Dark',
+            path: 'task-dark'
+          },
+          {
+            name: 'Task - Date Type',
+            path: 'task-date-type'
+          },
+          {
+            name: 'Task - No Active Date',
+            path: 'task-no-active-date'
+          },
+          {
+            name: 'Task - Now',
+            path: 'task-now'
+          },
+          {
+            name: 'Task - Disabled Days',
+            path: 'task-disabled-days'
+          },
+          {
+            name: 'Task - Disabled Before/After',
+            path: 'task-disabled-before-after'
+          },
+          {
+            name: 'Task - Disabled Weekdays',
+            path: 'task-disabled-weekdays'
+          },
+          {
+            name: 'Task - Focusable/Hoverable',
+            path: 'task-focusable-hoverable'
+          },
+          {
+            name: 'Task - Locale',
+            path: 'task-locale'
+          },
+          {
+            name: 'Task - Theme',
+            path: 'task-theme'
+          }
+        ]
       }
     ]
   },
@@ -99,8 +196,8 @@ const menu = [
       },
       {
         name: 'Theme builder',
-        path: '/theme-builder',
-        external: true
+        path: '/theme-builder'
+        // external: true
       },
       {
         name: 'Tutorials',

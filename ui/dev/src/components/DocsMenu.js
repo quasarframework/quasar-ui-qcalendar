@@ -9,7 +9,7 @@ import {
 } from 'quasar'
 
 // import { mdiArrowDownThinCircleOutline } from '@quasar/extras/mdi-v5'
-import { biCaretDown } from '@quasar/extras/bootstrap-icons'
+import { biCaretDown, biCaretDownFill } from '@quasar/extras/bootstrap-icons'
 import { h, ref, watch, onBeforeUpdate, withDirectives } from 'vue'
 import { useRoute } from 'vue-router'
 
@@ -72,15 +72,19 @@ export default {
             label: menu.name,
             dense: true,
             icon: menu.icon,
-            expandIcon: biCaretDown,
+            contentInsetLevel: level > 0 ? 0.5 : 0.25,
+            expandIcon: level > 0 ? biCaretDownFill : biCaretDown,
             defaultOpened: menu.expanded || routePath.startsWith(path),
             expandSeparator: true,
-            switchToggleSide: level > 0,
             denseToggle: level > 0
           },
           () => menu.children.map(item => getDrawerMenu(
             item,
-            path + (item.path !== void 0 ? '/' + item.path : ''),
+            item.path !== void 0
+              ? item.path.charAt(0) === '/'
+                ? item.path
+                : path + '/' + item.path
+              : '',
             level + 1
           ))
         )
@@ -89,10 +93,11 @@ export default {
       const props = {
         ref: vm => { if (vm) { childRefs[ path ] = vm } },
         key: path,
-        class: 'app-menu-entry non-selectable',
+        class: 'non-selectable',
         to: path,
-        dense: level > 0,
-        insetLevel: level > 1 ? 0 : level / 3
+        dense: level > 0
+        // insetLevel: level > 1 ? 0 : level / 2.5
+        // insetLevel: level > 1 ? 0.8 : level
       }
 
       menu.external === true && Object.assign(props, {
@@ -122,7 +127,7 @@ export default {
         }, () => h(QIcon, { name: menu.rightIcon }))
       )
 
-      menu.badge !== void 0 && child.push(
+      menu.badge !== void 0 && menu.rightIcon === void 0 && child.push(
         h(QItemSection, {
           side: true
         }, () => h(QBadge, { label: menu.badge }))

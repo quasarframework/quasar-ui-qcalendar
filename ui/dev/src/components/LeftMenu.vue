@@ -36,11 +36,6 @@
 import { defineComponent, ref, reactive, computed, onBeforeMount, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { LocalStorage } from 'quasar'
-import {
-  biLink,
-  biTwitter,
-  biGithub
-} from '@quasar/extras/bootstrap-icons'
 import { useMarkdownStore } from 'assets/markdown-store.js'
 import menuItems from '../assets/menu.js'
 import examples from '../assets/examples.js'
@@ -121,14 +116,6 @@ export default defineComponent({
       }
     }
 
-    function getMenuIcon (child) {
-      switch (child.name) {
-        case 'Github': return biGithub
-        case 'Twitter': return biTwitter
-        default: return biLink
-      }
-    }
-
     return {
       menu,
       isExample,
@@ -139,8 +126,7 @@ export default defineComponent({
       klasses,
       parentClasses,
       childClasses,
-      onToggleMenuItem,
-      getMenuIcon
+      onToggleMenuItem
     }
   }
 })

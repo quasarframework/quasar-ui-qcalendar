@@ -75,11 +75,13 @@ const routes = [
     component: () => import('../layouts/MainLayout.vue'),
     children: menuRoutes
   },
+
   {
     path: '/examples',
     component: () => import('../layouts/MainLayout.vue'),
     children: [].concat(examples)
   },
+
   {
     path: '/theme-builder',
     component: () => import('layouts/ThemeBuilder.vue')
@@ -91,21 +93,6 @@ const routes = [
     path: '/:catchAll(.*)*',
     component: () => import('pages/Error404.vue')
   }
-
-  // {
-  //   path: '/',
-  //   component: () => import('layouts/MainLayout.vue'),
-  //   children: [
-  //     { path: '', component: () => import('pages/Index.vue') }
-  //   ].concat(children)
-  // },
-
-  // // Always leave this as last one,
-  // // but you can also remove it
-  // {
-  //   path: '/:catchAll(.*)*',
-  //   component: () => import('pages/Error404.vue')
-  // }
 ]
 
 export default routes
