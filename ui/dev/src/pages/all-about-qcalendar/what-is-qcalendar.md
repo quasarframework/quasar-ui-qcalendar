@@ -4,9 +4,9 @@ desc: Everything you need for a complete Calendar solution
 keys: All about QCalendar
 related:
   - /contributing/bugs-and-feature-requests
-  - /all-about-qcalendar/components
-  - /all-about-qcalendar/documentation
-  - /all-about-qcalendar/sponsor
+  - /contributing/components
+  - /contributing/documentation
+  - /contributing/sponsor
 ---
 
 > If you are looking for a **Migration Guide** from v3 to v4, go [here](/help/migration-guide) in the **Help** section.
@@ -14,7 +14,7 @@ related:
 
 QCalendar allows for viewing of **day** (1-6 days), **week**, **monthly**, **scheduler**, **agenda**, **resource** and **task** views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.
 
-QCalendar is a less-opinionated calendar component, as it does not keep track of things like events and reminders. This is in the hands of the developer, but QCalendar makes it easy via accessible events, slots and methods (see examples how to accomplish these endeavors).
+QCalendar is a less-opinionated calendar component, as it does not keep track of things like events and reminders. This is in the hands of the developer, but QCalendar makes it easy via events, slots and methods (see examples how to accomplish these endeavors).
 
 The guiding philosophy has been to empower the developer and allow them to do what needs to be done without being overly opinionated. 
 
