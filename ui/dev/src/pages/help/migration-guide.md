@@ -47,7 +47,7 @@ In your app.sass:
 @import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
 ```
 
-If you don't use the calendar transitions, it's likely you would need to import that file.
+If you don't use the calendar transitions, it's likely you would NOT need to import that file.
 
 Once the package is installed into your node_modules, you can import the calendar-type you want to deal with:
 
@@ -166,7 +166,7 @@ Below is a list of all existing slots. Some are new, some have changed and some 
 | week |  |  | QCalendarMonth |
 | workweek |  |  | QCalendarMonth |
 | day |  |  | QCalendarMonth |
-| head-resources | scheduler-resources-header | { scope: { days: [], resources: [] } } | QCalendarScheduler |
+| head-resources | scheduler-resources-header | `{ scope: { days: [], resources: [] } }` | QCalendarScheduler |
 
 
 ### Events
@@ -188,33 +188,22 @@ Below is a list of all existing slots. Some are new, some have changed and some 
 
 ### Properties
 - `interval-style`, `day-style` and `day-class` all receive a scope object
-
 - new (QCalendarDay) `interval-class` that will be called when drawing each interval to add extra css classes in object form.
-
 - new `min-weekday-length` (default: `1`). This property is used for fluid text length. The browser supports `long` and `short` formats. This is an **extra short** format taken from the beginning characters of the browser's `short` format. There are some languages that begin with the same character, so having this set to 1 (one) may not work. In that case, depending on your locale, set it to two or more.
-
 - new `weekday-breakpoints` (default: `[75, 35]`). This is the cell width breakpoint for the fluid text length. At the first breakpoint, this is where the calendar will use the `short` format, unless `short-weekday-label` or `short-month-label` are already being used. The second breakpoint is for the **extra short** format will be used. To not use a breakpoint, set it to 0.
-
 - new `day-min-height` property is to set the min-height of a calendar cell. Use this instead of static `day-height` when you want calendar rows to automatically grow in height depending on content.
-
 - new `date-type` (default: `round`), values `['round', 'square']`
-
 - new `weekday-align` (default: `center`), values `['left', 'center', 'right']`
-
 - new `date-align` (default: `center`), values `['left', 'center', 'right']`
-
 - new (QCalendarDay) `date-header` (default: `stacked`), values `['stacked', 'inline', 'inverted']`. This allows you to have the date-header area displayed inline. When the `inline` value is used, the placement is controlled by the `weekday-align` and `date-align` properties. Using the `inverted` value is the exact opposite of `inline` display for right/left placement.
-
 This image will explain the QCalendarDay alignment:
-
 ![image](https://user-images.githubusercontent.com/10262924/103442538-3eb46a00-4c14-11eb-9278-43e3aacc0e76.png)
-
 - new `use-navigation` property turns on keyboard focus navigation. This takes into account weekday skips (ie: weekends not being displayed). **TIP**: use with `no-active-date` for better visual UX and `focusable` for visual acuity.
   1. QCalendarMonth: `left` navigates to previous day, `right` navigates to next day, `up` takes you to previous week, `down` navigates to next week, `home` navigates to start of month, `end` navigates to end of month, `pgUp` navigates to previous month and `pgDown` navigates to next month.
   2. QCalendarDay is a bit more complicated. There is both weekday navigation and interval navigation [wip]. When focused on a weekday:
-      1. view="day": `left` navigates to previous day and `right` navigates to next day. `home`, `end`, `pgUp` and `pgDown` have no meaning.
-      2. view="week": `left` navigates to previous day, `right` navigates to next day, `home` navigates to the beginning of the week and `end` navigates to the end of the week.
-      3. view="month-interval": `left' navigates to previous day, `right` navigates to next day, `home` navigates to the beginning of the month and `end` navigates to the end of the month.
+      - view="day": `left` navigates to previous day and `right` navigates to next day. `home`, `end`, `pgUp` and `pgDown` have no meaning.
+      - view="week": `left` navigates to previous day, `right` navigates to next day, `home` navigates to the beginning of the week and `end` navigates to the end of the week.
+      - view="month-interval": `left` navigates to previous day, `right` navigates to next day, `home` navigates to the beginning of the month and `end` navigates to the end of the month.
 - All calendars have additional drag and drop functionality (as props). They are: `drag-enter-func`, `drag-over-func`, `drag-leave-func` and `drop-func`. The arguments are specific for the drag and drop operations, so look them up in the API docs. Each function should return a boolean (true/false) as to whether the item (day, interval, etc) should receive a `droppable` flag in the scoped object. This is handy when using one of the styling classes (ie: `dayClass`) to visually modify the calendar cell when an item can be dropped.
 - `month-label-size` in QCalendarMonth has additional values added: `xxs` and `xxl`. The values now are as follows: `xxs`='.4em', `xs`='.6em', `sm`='.8em', `md`='1.0em', `lg`='1.2em', `xl`='1.4em' and `xxl`='1.6em'. As well, you can pass in your own value (ex: '0.75em', '11px', etc)
 - `breakpoint` property values are as follows: `xs`='300', `sm`='350', `md`='400', `lg`='450' and `xl`='500'. As well, you can pass in your own value as long as it is a number which will be used as pixels.
