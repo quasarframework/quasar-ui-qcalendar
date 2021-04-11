@@ -5,7 +5,7 @@
     <a href="https://github.com/sponsors/hawkeye64" target="_blank" rel="noopener"><q-icon :name="mdiCharity" /></a>
   </div>
   <div class="full-width row justify-center items-center">
-    <p class="markdown-copyright">MIT License | Copyright &copy; 2018 - {{ year }} Jeff Galbraith</p>
+    <p class="markdown-copyright">CC-BY / MIT License | Copyright &copy; 2018 - {{ year }} Jeff Galbraith</p>
   </div>
 </template>
 
