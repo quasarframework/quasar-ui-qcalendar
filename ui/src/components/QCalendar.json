@@ -110,6 +110,11 @@
         "All"
       ]
     },
+    "no-aria": {
+      "type": "Boolean",
+      "category": "behavior",
+      "desc": "Turns off automatical generation of aria labels for timestamps"
+    },
     "disabled-days": {
       "type": "Array",
       "tsType": "StringArray",
