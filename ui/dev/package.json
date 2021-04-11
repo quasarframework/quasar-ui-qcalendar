@@ -20,16 +20,16 @@
     "@quasar/extras": "^1.10.2",
     "core-js": "^3.10.1",
     "date-holidays": "2.0.2",
-    "quasar-ui-example-viewer": "^2.0.0-alpha.4"
+    "quasar-ui-example-viewer": "^2.0.0-alpha.5"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.13.14",
     "@quasar/app": "^3.0.0-beta.13",
-    "eslint": "^7.23.0",
+    "eslint": "^7.24.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-vue": "^7.8.0",
     "eslint-webpack-plugin": "^2.5.3",
     "gray-matter": "^4.0.2",
