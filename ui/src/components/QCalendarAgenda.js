@@ -761,10 +761,8 @@ export default defineComponent({
       const headDayLabelSlot = slots[ 'head-day-label' ]
       const headDayButtonSlot = slots[ 'head-day-button' ]
       const scope = { dayLabel, timestamp: day, activeDate }
-      const ariaLabel = ariaDateFormatter.value(day)
 
       const data = {
-        ariaLabel,
         class: {
           'q-calendar-agenda__head--day__label': true,
           'q-calendar__button': true,
@@ -797,6 +795,10 @@ export default defineComponent({
           }
           return { scope, event }
         })
+      }
+
+      if (props.noAria !== true) {
+        data.ariaLabel = ariaDateFormatter.value(day)
       }
 
       return headDayButtonSlot

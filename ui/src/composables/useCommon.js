@@ -41,6 +41,7 @@ export const useCommonProps = {
   bordered: Boolean,
   dark: Boolean,
   noActiveDate: Boolean,
+  noAria: Boolean,
   disabledDays: Array,
   disabledBefore: String,
   disabledAfter: String,

@@ -443,8 +443,6 @@ export default defineComponent({
       scope.droppable = dragOverHeadDayRef.value === day.weekday
 
       const disabled = (props.disabledWeekdays ? props.disabledWeekdays.includes(day.weekday) : false)
-      const ariaLabel = weekdayFormatter.value(day, false)
-
       const weekdayClass = typeof props.weekdayClass === 'function' ? props.weekdayClass({ scope }) : {}
       const isFocusable = props.focusable === true && props.focusType.includes('weekday')
 
@@ -457,8 +455,7 @@ export default defineComponent({
         ...styler({ scope })
       }
 
-      return h('div', {
-        ariaLabel,
+      const data = {
         key: day.date + (index !== undefined ? '-' + index : ''),
         tabindex: isFocusable === true ? 0 : -1,
         class: {
@@ -506,7 +503,13 @@ export default defineComponent({
         ...getDefaultMouseEventHandlers('-head-day', event => {
           return { scope, event }
         })
-      }, [
+      }
+
+      if (props.noAria !== true) {
+        data.ariaLabel = weekdayFormatter.value(day, false)
+      }
+
+      return h('div', data, [
         headDaySlot === undefined && __renderHeadWeekdayLabel(day, props.shortWeekdayLabel || isMiniMode.value),
         headDaySlot !== undefined && headDaySlot({ scope }),
         __renderHeadDayEvent(day, index),
@@ -624,10 +627,8 @@ export default defineComponent({
 
       const style = Object.assign({ ...computedStyles.value }, styler({ scope }))
       const dayClass = typeof props.dayClass === 'function' ? props.dayClass({ scope }) : {}
-      const ariaLabel = ariaDateFormatter.value(day)
 
       const data = {
-        ariaLabel,
         key: day.date,
         ref: (el) => {
           if (isDayFocusable.value === true) {
@@ -713,6 +714,10 @@ export default defineComponent({
         Object.assign(data, dragAndDrop)
       }
 
+      if (props.noAria !== true) {
+        data.ariaLabel = ariaDateFormatter.value(day)
+      }
+
       return h('div', data, [
         __renderDayLabelContainer(day, outside, hasMonth),
         h('div', {
@@ -782,12 +787,10 @@ export default defineComponent({
 
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
       const scope = { dayLabel, timestamp: day, outside, activeDate, selectedDate, miniMode: isMiniMode.value }
-      const ariaLabel = ariaDateFormatter.value(day)
 
       // const size = isMiniMode.value ? 'sm' : props.monthLabelSize
 
       const data = {
-        ariaLabel,
         key: day.date,
         ref: (el) => {
           if (isDateFocusable.value === true) {
@@ -843,6 +846,10 @@ export default defineComponent({
           }
           return { scope, event }
         })
+      }
+
+      if (props.noAria !== true) {
+        data.ariaLabel = ariaDateFormatter.value(day)
       }
 
       return [

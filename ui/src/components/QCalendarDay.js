@@ -707,10 +707,8 @@ export default defineComponent({
       const headDayLabelSlot = slots[ 'head-day-label' ]
       const headDayButtonSlot = slots[ 'head-day-button' ]
       const scope = { dayLabel, timestamp: day, activeDate }
-      const ariaLabel = ariaDateFormatter.value(day)
 
       const data = {
-        ariaLabel,
         class: {
           'q-calendar-day__head--day__label': true,
           'q-calendar__button': true,
@@ -743,6 +741,10 @@ export default defineComponent({
           }
           return { scope, event }
         })
+      }
+
+      if (props.noAria !== true) {
+        data.ariaLabel = ariaDateFormatter.value(day)
       }
 
       return headDayButtonSlot
@@ -892,14 +894,12 @@ export default defineComponent({
       scope.droppable = dragOverInterval.value === getDayTimeIdentifier(interval)
 
       const intervalClass = typeof props.intervalClass === 'function' ? props.intervalClass({ scope }) : {}
-      const ariaLabel = ariaDateTimeFormatter.value(interval)
       const isFocusable = props.focusable === true && props.focusType.includes('interval')
       const dateTime = getDateTime(interval)
 
       const data = {
         key: dateTime,
         // ref: (el) => { intervalsRef.value[ dateTime ] = el },
-        ariaLabel,
         tabindex: isFocusable === true ? 0 : -1,
         class: {
           'q-calendar-day__day-interval': interval.minute === 0,
@@ -962,6 +962,10 @@ export default defineComponent({
           const scope = getScopeForSlot(getTimestampAtEventInterval(event, interval, props.timeClicksClamped, times.now), columnIndex)
           return { scope, event }
         })
+      }
+
+      if (props.noAria !== true) {
+        data.ariaLabel = ariaDateTimeFormatter.value(interval)
       }
 
       const children = slotDayInterval ? slotDayInterval({ scope }) : undefined
