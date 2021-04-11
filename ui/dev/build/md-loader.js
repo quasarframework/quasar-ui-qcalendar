@@ -7,7 +7,8 @@ const
 //   { convertToRelated, flatMenu } = require('./flat-menu')
 
 const
-  md = require('./markdown.js')
+  md = require('./markdown.js'),
+  { convertToRelated, flatMenu } = require('./flat-menu')
 
 const {
   getVueComponent,
@@ -28,28 +29,30 @@ module.exports = function (source) {
 
   data.title = data.title || 'Generic Page'
 
-  // if (data.related !== void 0) {
-  //   data.related = data.related.map(entry => convertToRelated(entry))
-  // }
-
-  // if (flatMenu[this.resourcePath]) {
-  //   const { prev, next } = flatMenu[this.resourcePath]
-
-  //   if (prev !== void 0 || next !== void 0) {
-  //     data.nav = []
-  //   }
-
-  //   if (prev !== void 0) {
-  //     data.nav.push({ ...prev, dir: 'left' })
-  //   }
-  //   if (next !== void 0) {
-  //     data.nav.push({ ...next, dir: 'right' })
-  //   }
-  // }
-
-  md.$data = {
-    toc: []
+  if (data.related !== void 0) {
+    data.related = data.related.map(entry => convertToRelated(entry))
   }
+
+  if (flatMenu[ this.resourcePath ]) {
+    const { prev, next } = flatMenu[ this.resourcePath ]
+
+    if (prev !== void 0 || next !== void 0) {
+      data.nav = []
+    }
+
+    if (prev !== void 0) {
+      data.nav.push({ ...prev, dir: 'left' })
+    }
+    if (next !== void 0) {
+      data.nav.push({ ...next, dir: 'right' })
+    }
+  }
+
+  // console.log('data', data)
+
+  // md.$data = {
+  //   toc: []
+  // }
 
   const { rendered, tocData } = md.render(content)
   const toc = tocData
@@ -57,7 +60,7 @@ module.exports = function (source) {
   //   ? md.$data.toc
   //   : []
 
-  md.$data = {}
+  // md.$data = {}
 
   const res = getVueComponent(
     rendered,

@@ -68,6 +68,7 @@
               :icon="biGithub"
               :href="path"
               target="_blank"
+              rel="noopener"
               class="button link"
             >View Source on Github
             </q-btn>

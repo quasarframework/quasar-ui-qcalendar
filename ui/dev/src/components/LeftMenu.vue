@@ -1,73 +1,35 @@
 <template>
-  <q-list dense>
-    <q-expansion-item
-      v-for="parent in menu"
-      :key="parent.name"
-      group="menu"
-      dense
-      dense-toggle
-      :label="parent.name"
-    >
-      <template
-        v-for="child in parent.children"
-        :key="child.name"
+  <div>
+    <docs-menu />
+
+    <q-list dense>
+      <q-item-label
+        header
       >
-        <q-item
-          v-if="child.path"
-          clickable
-          v-ripple
+        <div>Found: {{ filteredPages.length }} examples</div>
+        <q-input
+          v-model="filter"
           dense
-          @click="onChildClick(child.path)"
-          :active="child.name !== undefined && child.name === $route.name"
-          class="menu ellipsis"
-        >
-          <q-item-section side></q-item-section>
-          <q-item-section>{{ child.name }}</q-item-section>
-        </q-item>
+          clearable
+          label="Search examples"
+        />
+      </q-item-label>
 
-        <q-item
-          v-if="child.link"
-          tag="a"
-          :href="child.link"
-          target="_blank"
-          dense
-          :label="child.name"
-          class="menu ellipsis"
-        >
-          <q-item-section side></q-item-section>
-          <q-item-section>{{ child.name }}</q-item-section>
-          <q-item-section side><q-icon :name="getMenuIcon(child)" /></q-item-section>
-        </q-item>
-
-      </template>
-    </q-expansion-item>
-
-    <q-item-label
-      header
-    >
-      <div>Found: {{ filteredPages.length }} examples</div>
-      <q-input
-        v-model="filter"
+      <q-item
+        v-for="page in filteredPages"
+        :key="page.path"
+        clickable
+        v-ripple
         dense
-        clearable
-        label="Search examples"
-      />
-    </q-item-label>
+        @click="onExampleClick(page.path)"
+        :active="page.name !== undefined && page.name === $route.name"
+        class="menu ellipsis"
+      >
+        <q-item-section>{{ page.name }}</q-item-section>
+      </q-item>
 
-    <q-item
-      v-for="page in filteredPages"
-      :key="page.path"
-      clickable
-      v-ripple
-      dense
-      @click="onExampleClick(page.path)"
-      :active="page.name !== undefined && page.name === $route.name"
-      class="menu ellipsis"
-    >
-      <q-item-section>{{ page.name }}</q-item-section>
-    </q-item>
-
-  </q-list>
+    </q-list>
+  </div>
 </template>
 
 <script>
@@ -80,11 +42,15 @@ import {
   biGithub
 } from '@quasar/extras/bootstrap-icons'
 import { useMarkdownStore } from 'assets/markdown-store.js'
-import menuItems from '../router/menu.js'
-import children from '../router/children.js'
+import menuItems from '../assets/menu.js'
+import examples from '../assets/examples.js'
+import DocsMenu from './DocsMenu.js'
 
 export default defineComponent({
   name: 'LeftMenu',
+  components: {
+    DocsMenu
+  },
   setup () {
     const menu = reactive(menuItems),
       store = useMarkdownStore(),
@@ -97,10 +63,10 @@ export default defineComponent({
     const filteredPages = computed(() => {
       if (filter.value) {
         const filtered = filter.value.toLowerCase()
-        return children.filter(val =>
+        return examples.filter(val =>
           val.name.toLowerCase().indexOf(filtered) > -1)
       }
-      return children
+      return examples
     })
 
     onBeforeMount(() => {

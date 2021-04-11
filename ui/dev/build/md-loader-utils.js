@@ -31,6 +31,7 @@ module.exports.getVueComponent = function (rendered, data, toc) {
       ${ data.components !== void 0 ? getComponentsDeclaration(data.components) : '' }
       setup () {
         return {
+          data: ${ JSON.stringify(data) },
           metaTitle: ${ JSON.stringify(data.title) },
           ${ data.desc !== void 0 ? `metaDesc: ${ JSON.stringify(data.desc) },` : '' }
           ${ data.related !== void 0 ? `related: ${ JSON.stringify(data.related) },` : '' }

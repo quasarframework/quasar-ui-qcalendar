@@ -94,6 +94,7 @@ function extendLink (md) {
     else {
       token.attrSet('class', 'q-markdown--link q-markdown--link-external')
       token.attrSet('target', '_blank')
+      token.attrSet('rel', 'noopener')
     }
 
     return self.renderToken(tokens, idx, options)
@@ -234,8 +235,6 @@ md.use(mark)
 md.use(emoji)
 md.use(imsize)
 md.use(taskLists, { enabled: true, label: true, labelAfter: true })
-
-md.$data = {}
 
 function render (source) {
   const tocData = []
