@@ -259,8 +259,6 @@ export default defineComponent({
 .my-event
   position: relative
   font-size: 12px
-  height: 16px
-  max-height: 16px
   width: 100%
   margin: 1px 0 0 0
   justify-content: center
