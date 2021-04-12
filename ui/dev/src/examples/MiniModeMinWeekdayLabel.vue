@@ -6,7 +6,10 @@
       @next="onNext"
     />
 
-    <div>Min. Label Length:</div>
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <div>Min. Weekday Label:</div>
+    </div>
+
     <div style="display: flex; justify-content: center; align-items: center;">
       <q-option-group
         v-model="minWeekdayLabel"
@@ -23,7 +26,7 @@
           v-model="selectedDate"
           mini-mode
           short-weekday-label
-          :min-weekday-length="minWeekdayLabel"
+          :min-weekday-label="minWeekdayLabel"
           animated
           bordered
           @change="onChange"

@@ -60,15 +60,141 @@ const menu = [
       },
       {
         name: 'QCalendarMonth (mini-mode)',
-        path: 'qcalendarmonth-minimode'
+        path: 'qcalendarmonth-minimode',
+        children: [
+          {
+            name: 'Mini-mode - Getting Started',
+            path: 'minimode-getting-started'
+          },
+          {
+            name: 'Mini-mode - Date Type',
+            path: 'minimode-date-type'
+          },
+          {
+            name: 'Mini-mode - Dark',
+            path: 'minimode-dark'
+          },
+          {
+            name: 'Mini-mode - Min. Weekday Label',
+            path: 'minimode-min-weekday-label'
+          },
+          {
+            name: 'Mini-mode - Min Weeks',
+            path: 'minimode-min-weeks'
+          },
+          {
+            name: 'Mini-mode - 1st Day Monday',
+            path: 'minimode-first-day-monday'
+          },
+          {
+            name: 'Mini-mode - 5 Day Workweek',
+            path: 'minimode-5-day-workweek'
+          },
+          {
+            name: 'Mini-mode - No Outside Days',
+            path: 'minimode-no-outside-days'
+          },
+          {
+            name: 'Mini-mode - Workweeks',
+            path: 'minimode-workweeks'
+          },
+          {
+            name: 'Mini-mode - Breakpoint',
+            path: 'minimode-breakpoint'
+          },
+          {
+            name: 'Mini-mode - Disabled Days',
+            path: 'minimode-disabled-days'
+          },
+          {
+            name: 'Mini-mode - Disabled Weekdays',
+            path: 'minimode-disabled-weekdays'
+          },
+          {
+            name: 'Mini-mode - Disabled Before/After',
+            path: 'minimode-disabled-before-after'
+          },
+          {
+            name: 'Mini-mode - Navigation',
+            path: 'minimode-navigation'
+          },
+          {
+            name: 'Mini-mode - Selected Days',
+            path: 'minimode-selected-days'
+          },
+          {
+            name: 'Mini-mode - Range Selection',
+            path: 'minimode-selection'
+          },
+          {
+            name: 'Mini-mode - Multi-Month Range Selection',
+            path: 'minimode-multi-month-selection'
+          },
+          {
+            name: 'Mini-mode - Locale',
+            path: 'minimode-locale'
+          },
+          {
+            name: 'Mini-mode - Theme',
+            path: 'minimode-theme'
+          }
+        ]
       },
       {
         name: 'QCalendarAgenda',
-        path: 'qcalendaragenda'
+        path: 'qcalendaragenda',
+        children: [
+          {
+            name: 'Agenda - Getting Started',
+            path: 'agenda-getting-started'
+          },
+          {
+            name: 'Agenda - Column Count',
+            path: 'agenda-column-count'
+          },
+          {
+            name: 'Agenda - Column Options',
+            path: 'agenda-column-options'
+          },
+          {
+            name: 'Agenda - Alignment',
+            path: 'agenda-alignment'
+          },
+          {
+            name: 'Agenda - Dark',
+            path: 'agenda-dark'
+          },
+          {
+            name: 'Agenda - Cell Width',
+            path: 'agenda-cell-width'
+          },
+          {
+            name: 'Agenda - Planner',
+            path: 'agenda-planner'
+          }
+        ]
       },
       {
         name: 'QCalendarResource',
-        path: 'qcalendarresource'
+        path: 'qcalendarresource',
+        children: [
+          {
+            name: 'Resource - Getting Started',
+            path: 'resource-getting-started'
+          },
+          {
+            name: 'Resource - Dark',
+            path: 'resource-dark'
+          },
+          {
+            name: 'Resource - No Sticky',
+            path: 'resource-no-sticky'
+          },
+          {
+            name: 'Resource - Children',
+            path: 'resource-children'
+          }
+        ]
       },
       {
         name: 'QCalendarScheduler',

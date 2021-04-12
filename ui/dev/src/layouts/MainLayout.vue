@@ -75,7 +75,7 @@
           </div>
         </div>
 
-        <div :class="'flex ' + (isExample === true ? 'flex-center' : 'flex-start')">
+        <div :class="'flex ' + (isExample === true ? 'flex-center' : 'flex-center')">
           <div :style="'max-width: ' + ($route.path === '/' ? '100%' : '800px') + '; width: 100%;'">
             <router-view />
           </div>
