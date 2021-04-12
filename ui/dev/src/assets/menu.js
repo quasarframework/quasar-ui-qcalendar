@@ -56,7 +56,89 @@ const menu = [
       },
       {
         name: 'QCalendarMonth',
-        path: 'qcalendarmonth'
+        path: 'qcalendarmonth',
+        children: [
+          {
+            name: 'Month - Getting Started',
+            path: 'month-getting-started'
+          },
+          {
+            name: 'Month - Date Type',
+            path: 'month-date-type'
+          },
+          {
+            name: 'Month - Alignment',
+            path: 'month-alignment'
+          },
+          {
+            name: 'Month - Dark',
+            path: 'month-dark'
+          },
+          {
+            name: 'Month - Day of Year',
+            path: 'month-day-of-year'
+          },
+          {
+            name: 'Month - Workweeks',
+            path: 'month-workweeks'
+          },
+          {
+            name: 'Month - Day Height',
+            path: 'month-day-height'
+          },
+          {
+            name: 'Month - No Active Date',
+            path: 'month-no-active-date'
+          },
+          {
+            name: 'Month - No Outside Days',
+            path: 'month-no-outside-days'
+          },
+          {
+            name: 'Month - Label Size',
+            path: 'month-label-size'
+          },
+          {
+            name: 'Month - Focusable/Hoverable',
+            path: 'month-focusable-hoverable'
+          },
+          {
+            name: 'Month - Navigation',
+            path: 'month-navigation'
+          },
+          {
+            name: 'Month - Selected Dates',
+            path: 'month-selected-dates'
+          },
+          {
+            name: 'Month - Range Selection',
+            path: 'month-range-selection'
+          },
+          {
+            name: 'Month - Drag and Drop',
+            path: 'month-drag-and-drop'
+          },
+          {
+            name: 'Month - Locale',
+            path: 'month-locale'
+          },
+          {
+            name: 'Month - Theme',
+            path: 'month-theme'
+          },
+          {
+            name: 'Month - Slot Day',
+            path: 'month-slot-day'
+          },
+          {
+            name: 'Month - Slot Week',
+            path: 'month-slot-week'
+          },
+          {
+            name: 'Month - Slot Day (Holidays)',
+            path: 'month-slot-day-holidays'
+          }
+        ]
       },
       {
         name: 'QCalendarMonth (mini-mode)',
