@@ -7,25 +7,21 @@
     />
 
     <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
-        <label
-          for="countries"
-          style="margin-right: 2px;"
-        >Pick a Country:</label>
-        <select
-          id="date-align"
-          v-model="country"
-          class="button select"
-          style="min-width: 280px;"
-        >
-          <option
-            v-for="(name, key) in countries"
-            :key="key"
-            :value="key"
-            >{{ name }}</option>
-        </select>
-      </div>
+      <q-select
+        v-model="country"
+        label="Pick a Country"
+        outlined
+        dense
+        options-dense
+        map-options
+        emit-value
+        :options="countriesList"
+        class="button"
+        style="min-width: 320px;"
+      />
+    </div>
 
-      {{ formattedMonth }}
+    <div style="font-size: 2em;">{{ formattedMonth }}</div>
 
     <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
       <q-calendar-month
@@ -117,17 +113,17 @@ export default defineComponent({
         AL: 'sq', // 'Shqipëri', Albanian
         AM: 'hy', // 'Հայաստան', Armenian
         AO: 'pt', // 'Angola', Potuguese
-        AR: 'es-ar', // 'Argentina', Spanish
+        AR: 'es-AR', // 'Argentina', Spanish
         AS: 'en-US', // 'American Samoa', American English
-        AT: 'de-at', // 'Österreich', German (Austrian)/Bavarian
-        AU: 'en-au', // 'Australia', Austraian English
+        AT: 'de-AT', // 'Österreich', German (Austrian)/Bavarian
+        AU: 'en-AU', // 'Australia', Austraian English
         AW: 'nl', // 'Aruba', Dutch
-        AX: 'sv-fi', // 'Landskapet Åland', Swedish (finnish)
+        AX: 'sv-FI', // 'Landskapet Åland', Swedish (finnish)
         AZ: 'az', // 'Azərbaycan Respublikası', Azerbaijani
         BA: 'bs', // 'Bosna i Hercegovina', Bosnian
         BB: 'en', // 'Barbados', English
         BD: 'bn', // 'গণপ্রজাতন্ত্রী বাংলাদেশ', Bengali
-        BE: 'nl-be', // 'Belgique', Ditch (Belgian)
+        BE: 'nl-BE', // 'Belgique', Ditch (Belgian)
         BF: 'nl', // 'Burkina Faso', Dutch
         BG: 'mk', // 'България', Macedonian
         BH: 'ar', // 'مملكة البحرين', Arabix
@@ -136,35 +132,35 @@ export default defineComponent({
         BL: 'fr', // 'St. Barthélemy', French
         BM: 'en', // 'Bermuda', English
         BN: 'en', // 'Negara Brunei Darussalam', Maylay/English
-        BO: 'es-bo', // 'Bolivia', English Bolian
+        BO: 'es-BO', // 'Bolivia', English Bolian
         BQ: 'nl', // Caribisch Nederland', Dutch
         BR: 'pt-BR', // 'Brasil', Portuguese Brazil
         BS: 'bah', // 'Bahamas', Bahamian Creole
         BW: 'tn', // 'Botswana', Setswana
         BY: 'ru', // 'Рэспубліка Беларусь', Russian
-        BZ: 'en-bz', // 'Belize', English Belize
-        CA: 'en-ca', // 'Canada',
+        BZ: 'en-BZ', // 'Belize', English Belize
+        CA: 'en-CA', // 'Canada',
         CC: 'en', // 'Cocos (Keeling) Islands', Maylay/English
         CD: 'fr', // 'République démocratique du Congo', French
         CF: 'fr', // 'République centrafricaine', French
         CG: 'fr', // 'République du Congo', French
-        CH: 'de-li', // 'Schweiz', German Swiss
-        CL: 'es-cl', // 'Chile', Spanish Chile
+        CH: 'de-LI', // 'Schweiz', German Swiss
+        CL: 'es-CL', // 'Chile', Spanish Chile
         CM: 'fr', // 'Cameroun', French
         CN: 'zh', // '中华人民共和国', Mandarin (Chinese)
-        CO: 'es-co', // 'Colombia', Spanish Columbian
-        CR: 'es-cr', // 'Costa Rica', Spanish Costa Rica
-        CU: 'es-cu', // 'Cuba', Spanish
+        CO: 'es-CO', // 'Colombia', Spanish Columbian
+        CR: 'es-CR', // 'Costa Rica', Spanish Costa Rica
+        CU: 'es-CU', // 'Cuba', Spanish
         CV: 'kea', // 'República de Cabo Verde', Spanish (ISO 693-3)
         CW: 'nl', // 'Curaçao', Dutch
         CX: 'en', // 'Christmas Island', English
         CY: 'el', // 'Κύπρος', Greek
         CZ: 'cs', // 'Česká republika', Czech
-        DE: 'de-de', // 'Deutschland', German Germany
+        DE: 'de-DE', // 'Deutschland', German Germany
         DK: 'da', // 'Danmark', Danish
         DM: 'fr', // 'Dominica', French
         DO: 'fr', // 'República Dominicana', French
-        EC: 'es-ec', // 'Ecuador', Spanish Ecuador
+        EC: 'es-EC', // 'Ecuador', Spanish Ecuador
         EE: 'et', // 'Eesti', Estonian
         ES: 'es', // 'España', Spanish
         ET: 'ak', // 'ኢትዮጵያ', Afrikans
@@ -175,36 +171,36 @@ export default defineComponent({
         GB: 'en-GB', // 'United Kingdom', English Great Britain
         GD: 'en', // 'Grenada', Englsih
         GE: 'ka', // 'საქართველო', Georgian
-        GF: 'fr-gy', // 'Guyane', Grench Guyane
+        GF: 'fr-GY', // 'Guyane', Grench Guyane
         GG: 'fr', // 'Guernsey', French
         GI: 'es', // 'Gibraltar', Spanish
         GL: 'kl', // 'Kalaallit Nunaat', (ISO 639-1)
         GP: 'fr', // 'Guadeloupe', French
         GQ: 'fr', // 'República de Guinea Ecuatorial', French (Spanish, Portuguese)
         GR: 'el', // 'Ελλάδα', Greek
-        GT: 'es-gt', // 'Guatemala', Spanish Guatemala
+        GT: 'es-GT', // 'Guatemala', Spanish Guatemala
         GU: 'ch', // 'Guam', Chamorro
         GY: 'en', // 'Guyana', English
-        HN: 'es-hn', // 'Honduras', English Honduras
+        HN: 'es-HN', // 'Honduras', English Honduras
         HR: 'hr', // 'Hrvatska', Croation
         HT: 'ht', // 'Haïti', Haitian
         HU: 'hu', // 'Magyarország', Hungary
-        ID: 'hy-am', // 'Indonesia', Armenian
-        IE: 'en-ie', // 'Ireland', English Ireland
+        ID: 'hy-AM', // 'Indonesia', Armenian
+        IE: 'en-IE', // 'Ireland', English Ireland
         IM: 'en', // 'Isle of Man', English
         IS: 'is', // 'Ísland', Icelandic
         IT: 'it', // 'Italia', Italian
         JE: 'en', // 'Jersey', English
-        JM: 'en-jm', // 'Jamaica', English Jamaica
+        JM: 'en-JM', // 'Jamaica', English Jamaica
         JP: 'ja', // '日本', Japanese
         KE: 'sw', // 'Kenya', Swahili
-        KR: 'ko-kp', // '대한민국', Korean (South)
+        KR: 'ko-KP', // '대한민국', Korean (South)
         LI: 'gsw', // 'Lichtenstein', Swiss German
         LS: 'en', // "'Muso oa Lesotho", English
         LT: 'lt', // 'Lietuva', Lithuanian
-        LU: 'fr-lu', // 'Luxembourg', French Luxembourg
+        LU: 'fr-LU', // 'Luxembourg', French Luxembourg
         LV: 'lv', // 'Latvija', Latvian
-        MC: 'fr-mc', // 'Monaco', French Monaco
+        MC: 'fr-MC', // 'Monaco', French Monaco
         MD: 'mo', // 'Republica Moldova',
         ME: 'bs', // 'Crna Gora', Bosnian
         MG: 'mg', // "Repoblikan'i Madagasikara", Madagascar
@@ -212,16 +208,16 @@ export default defineComponent({
         MQ: 'fr', // 'Martinique', French
         MT: 'mt', // 'Malta', Malta
         MW: 'en', // 'Malawi', English
-        MX: 'es-mx', // 'México', Spanish Mexican
+        MX: 'es-MX', // 'México', Spanish Mexican
         MZ: 'pt', // 'Moçambique', Potuguese
         NA: 'en', // 'Namibia', English (German)
-        NI: 'es-ni', // 'Nicaragua', Spanish Nicaragua
-        NL: 'nl-nl', // 'Nederland', Dutch Netherlands
+        NI: 'es-NI', // 'Nicaragua', Spanish Nicaragua
+        NL: 'nl-NL', // 'Nederland', Dutch Netherlands
         NO: 'no', // 'Norge', Norwegian
-        NZ: 'en-nz', // 'New Zealand', English New Zealand
+        NZ: 'en-NZ', // 'New Zealand', English New Zealand
         PA: 'es', // 'Panamá', Spanish
-        PE: 'es-pe', // 'Perú', Spanish Peru
-        PH: 'en-ph', // 'Philippines', English Philippines
+        PE: 'es-PE', // 'Perú', Spanish Peru
+        PH: 'en-PH', // 'Philippines', English Philippines
         PL: 'pl', // 'Polska', Polish
         PT: 'pt', // 'Portugal', Portuguese
         PY: 'gn', // 'Paraguay', Paraguay
@@ -231,7 +227,7 @@ export default defineComponent({
         RU: 'ru', // 'Россия', Russian
         RW: 'rw', // "Repubulika y'u Rwanda", Rwanda
         SE: 'sv', // 'Sverige', Swedish
-        SG: 'zh-sg', // 'Singapore', Chinese Singapore
+        SG: 'zh-SG', // 'Singapore', Chinese Singapore
         SH: 'en', // 'St. Helena', English
         SI: 'sq', // 'Republika Slovenija', Albanian
         SJ: 'no', // 'Svalbard & Jan Mayen', Norwegian
@@ -239,17 +235,17 @@ export default defineComponent({
         SM: 'it', // 'San Marino', Italian
         SO: 'ar', // 'Jamhuuriyadda Federaalka Soomaaliya', Arabic
         SS: 'en', // 'South Sudan', English
-        SV: 'es-sv', // 'El Salvador', Spanish El Salvador
+        SV: 'es-SV', // 'El Salvador', Spanish El Salvador
         TG: 'fr', // 'République togolaise', French
         TO: 'to', // 'Puleʻanga Fakatuʻi ʻo Tonga', Tongan
         TR: 'tr', // 'Türkiye', Turkish
         TZ: 'sw', // 'Tanzania', Swahili
         UA: 'uk', // 'Україна', Ukraine
-        UG: 'en-ug', // 'Uganda', English Uganda
+        UG: 'en-UG', // 'Uganda', English Uganda
         US: 'en-US', // 'United States of America', English USA
-        UY: 'es-uy', // 'Uruguay', Spanish Uruguay
+        UY: 'es-UY', // 'Uruguay', Spanish Uruguay
         VA: 'it', // 'Stato della Città del Vaticano', Italian
-        VE: 'es-ve', // 'Venezuela', Spanish Venezuela
+        VE: 'es-VE', // 'Venezuela', Spanish Venezuela
         VN: 'vi', // 'Cộng hòa Xã hội chủ nghĩa Việt Nam', Vietnamese
         XK: 'sq', // 'Republika e Kosovës', Albanian
         YT: 'fr', // 'Mayotte', French
@@ -258,11 +254,19 @@ export default defineComponent({
         ZW: 'en' // 'Zimbabwe' English
       }
 
+    const countriesList = computed(() => {
+      return Object.keys(countries).map(key => {
+        return { label: countries[ key ], value: key }
+      })
+    })
+
+    console.log(countriesList.value)
+
     const locale = computed(() => {
       if (country.value) {
         return countryCodes[ country.value ]
       }
-      return 'en-ca'
+      return 'en-CA'
     })
 
     const formattedMonth = computed(() => {
@@ -405,6 +409,7 @@ export default defineComponent({
       selectedDate,
       calendar,
       countries,
+      countriesList,
       country,
       locale,
       eventsMap,
