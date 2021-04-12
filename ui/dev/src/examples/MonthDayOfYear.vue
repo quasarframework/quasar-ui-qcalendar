@@ -14,6 +14,7 @@
         animated
         bordered
         date-align="right"
+        day-min-height="50"
         @change="onChange"
         @moved="onMoved"
         @click-date="onClickDate"
