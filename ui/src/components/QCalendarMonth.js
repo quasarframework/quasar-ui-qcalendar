@@ -238,21 +238,11 @@ export default defineComponent({
       return props.weekdays.length
     })
 
-    const borderWidth = computed(() => {
-      if (rootRef.value) {
-        const calendarBorderWidth = getComputedStyle(rootRef.value).getPropertyValue('--calendar-border')
-        const parts = calendarBorderWidth.split(' ')
-        const part = parts.filter(part => part.indexOf('px') > -1)
-        return parseInt(part[ 0 ], 0)
-      }
-      return 0
-    })
-
     const computedWidth = computed(() => {
       if (rootRef.value) {
         const width = size.width || rootRef.value.getBoundingClientRect().width
-        if (width && borderWidth.value && parsedColumnCount.value) {
-          return ((width - workweekWidth.value - (borderWidth.value * parsedColumnCount.value)) / parsedColumnCount.value) + 'px'
+        if (width && parsedColumnCount.value) {
+          return ((width - workweekWidth.value) / parsedColumnCount.value) + 'px'
         }
       }
       return (100 / parsedColumnCount.value) + '%'

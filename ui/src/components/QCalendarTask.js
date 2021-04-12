@@ -226,8 +226,8 @@ export default defineComponent({
     // const computedWidth = computed(() => {
     //   if (rootRef.value) {
     //     const width = size.width || rootRef.value.getBoundingClientRect().width
-    //     if (width && borderWidth.value && parsedColumnCount.value) {
-    //       return ((width - (borderWidth.value * parsedColumnCount.value)) / parsedColumnCount.value) + 'px'
+    //     if (width && parsedColumnCount.value) {
+    //       return (width / parsedColumnCount.value) + 'px'
     //     }
     //   }
     //   return (100 / parsedColumnCount.value) + '%'

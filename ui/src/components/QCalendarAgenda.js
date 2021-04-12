@@ -248,22 +248,12 @@ export default defineComponent({
       return props.rightColumnOptions !== undefined && Array.isArray(props.rightColumnOptions)
     })
 
-    const borderWidth = computed(() => {
-      if (rootRef.value) {
-        const calendarBorderWidth = getComputedStyle(rootRef.value).getPropertyValue('--calendar-border')
-        const parts = calendarBorderWidth.split(' ')
-        const part = parts.filter(part => part.indexOf('px') > -1)
-        return parseInt(part[ 0 ], 0)
-      }
-      return 0
-    })
-
     const computedWidth = computed(() => {
       if (rootRef.value) {
         const width = size.width || rootRef.value.getBoundingClientRect().width
-        if (width && borderWidth.value && parsedColumnCount.value) {
+        if (width && parsedColumnCount.value) {
           return (
-            (width - scrollWidth.value - (borderWidth.value * parsedColumnCount.value)) / parsedColumnCount.value
+            (width - scrollWidth.value) / parsedColumnCount.value
           ) + 'px'
         }
       }
