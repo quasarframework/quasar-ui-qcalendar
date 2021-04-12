@@ -276,7 +276,7 @@ export default defineComponent({
     badgeStyles (computedEvent, weekLength) {
       const s = {}
       if (computedEvent.size !== undefined) {
-        s.width = ((100 / weekLength) * computedEvent.size) + '% !important'
+        s.width = ((100 / weekLength) * computedEvent.size) + '%'
       }
       return s
     },
