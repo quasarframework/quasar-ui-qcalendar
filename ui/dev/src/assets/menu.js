@@ -44,7 +44,141 @@ const menu = [
       },
       {
         name: 'QCalendarDay (week)',
-        path: 'qcalendarday-week'
+        path: 'qcalendarday-week',
+        children: [
+          {
+            name: 'Week - Getting Started',
+            path: 'week-getting-started'
+          },
+          {
+            name: 'Week - Alignment',
+            path: 'week-alignment'
+          },
+          {
+            name: 'Week - Date Type',
+            path: 'week-date-type'
+          },
+          {
+            name: 'Week - Dark',
+            path: 'week-dark'
+          },
+          {
+            name: 'Week - No Active Date',
+            path: 'week-no-active-date'
+          },
+          {
+            name: 'Week - Now',
+            path: 'week-now'
+          },
+          {
+            name: 'Week - First Day Monday',
+            path: 'week-first-day-monday'
+          },
+          {
+            name: 'Week - No Weekends',
+            path: 'week-no-weekends'
+          },
+          {
+            name: 'Week - No Header',
+            path: 'week-no-header'
+          },
+          {
+            name: 'Week - No Scroll',
+            path: 'week-no-scroll'
+          },
+          {
+            name: 'Week - Disabled Before/After',
+            path: 'week-disabled-before-after'
+          },
+          {
+            name: 'Week - Disabled Days',
+            path: 'week-disabled-days'
+          },
+          {
+            name: 'Week - Disabled Weekdays',
+            path: 'week-disabled-weekdays'
+          },
+          {
+            name: 'Week - Cell Width',
+            path: 'week-cell-width'
+          },
+          {
+            name: 'Week - Focusable/Hoverable',
+            path: 'week-focusable-hoverable'
+          },
+          {
+            name: 'Week - Interval Count',
+            path: 'week-interval-count'
+          },
+          {
+            name: 'Week - Interval Height',
+            path: 'week-interval-height'
+          },
+          {
+            name: 'Week - Interval Minutes (15)',
+            path: 'week-interval-minutes-15'
+          },
+          {
+            name: 'Week - Interval Minutes (30)',
+            path: 'week-interval-minutes-30'
+          },
+          {
+            name: 'Week - Interval Start',
+            path: 'week-interval-start'
+          },
+          {
+            name: 'Week - Selected Intervals',
+            path: 'week-selected-intervals'
+          },
+          {
+            name: 'Week - Range Selection',
+            path: 'week-range-selection'
+          },
+          {
+            name: 'Week - Drag and Drop',
+            path: 'week-drag-and-drop'
+          },
+          {
+            name: 'Week - Locale',
+            path: 'week-locale'
+          },
+          {
+            name: 'Week - Navigation',
+            path: 'week-navigation'
+          },
+          {
+            name: 'Week - Theme',
+            path: 'week-theme'
+          },
+          {
+            name: 'Week - (Slot) Column Header',
+            path: 'week-slot-column-header'
+          },
+          {
+            name: 'Week - (Slot) Day Body',
+            path: 'week-slot-day-body'
+          },
+          {
+            name: 'Week - (Slot) Head Day',
+            path: 'week-slot-head-day'
+          },
+          {
+            name: 'Week - (Slot) Head Day Event',
+            path: 'week-slot-head-day-event'
+          },
+          {
+            name: 'Week - (Slot) Head Days Event Absolute',
+            path: 'week-slot-head-days-event-absolute'
+          },
+          {
+            name: 'Week - (Slot) Head Intervals',
+            path: 'week-slot-head-intervals'
+          },
+          {
+            name: 'Week - (Slot) Show Current Time',
+            path: 'week-slot-show-current-time'
+          }
+        ]
       },
       {
         name: 'QCalendarDay (month)',

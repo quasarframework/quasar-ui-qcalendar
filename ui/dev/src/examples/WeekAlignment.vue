@@ -57,6 +57,7 @@
 
     <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
       <q-calendar-day
+        ref="calendar"
         v-model="selectedDate"
         view="week"
         short-weekday-label
@@ -136,18 +137,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style lang="sass" scoped>
-.q-gutter-xs, .q-gutter-y-xs
-    margin-top: -4px
-
-.q-gutter-x-xs, .q-gutter-xs
-    margin-left: -4px
-
-.q-gutter-xs>*, .q-gutter-y-xs>*
-    margin-top: 4px
-
-.q-gutter-x-xs>*, .q-gutter-xs>*
-    margin-left: 4px
-
-</style>

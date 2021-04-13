@@ -76,7 +76,7 @@ export default defineComponent({
       hoverable: true,
       focusable: true,
       focusType: [],
-      options: [ 'day', 'weekday', 'date' ]
+      options: [ 'interval', 'weekday', 'date' ]
     }
   },
   watch: {
