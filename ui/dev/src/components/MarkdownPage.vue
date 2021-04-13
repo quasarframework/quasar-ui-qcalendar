@@ -1,5 +1,10 @@
 <template>
   <div :class="'q-markdown ' + (path !== '/' ? 'q-mx-xl' : '')">
+    <markdown-nav-bar
+      v-if="path !== '/' && nav.length > 0"
+      :title="title"
+      :nav="nav"
+    />
     <slot></slot>
     <div class="markdown-page-footer">
       <q-separator class="q-mb-lg" />
@@ -28,12 +33,14 @@ import { copyHeading } from 'assets/page-utils'
 import getMeta from 'assets/get-meta'
 import { useMarkdownStore } from 'assets/markdown-store.js'
 import MarkdownFooter from './MarkdownFooter.vue'
+import MarkdownNavBar from './MarkdownNavBar.vue'
 
 export default {
   name: 'MarkdownPage',
 
   components: {
-    MarkdownFooter
+    MarkdownFooter,
+    MarkdownNavBar
   },
 
   props: {

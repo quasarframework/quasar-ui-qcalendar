@@ -27,11 +27,7 @@
   </div>
   </q-btn>
 
-  <q-toolbar-title>
-    <div v-if="title" class="row justify-center">
-      {{ title }}
-    </div>
-  </q-toolbar-title>
+  <q-space />
 
   <q-btn flat round @click="$q.dark.toggle()" :icon="$q.dark.isActive ? 'brightness_2' : 'brightness_5'" />
 
