@@ -5,7 +5,7 @@
         <toolbar-contents
           :title="title"
           left-drawer-button
-          :right-drawer-button="isExample === true || store.toc.length > 0"
+          :right-drawer-button="store.toc.length > 0"
           :left-drawer-button-func="toggleLeftDrawer"
           :right-drawer-button-func="toggleRightDrawer"
         />
@@ -21,7 +21,7 @@
     </q-drawer>
 
     <q-drawer
-      v-if="isExample === true || store.toc.length > 0"
+      v-if="store.toc.length > 0"
       ref="drawer"
       v-model="rightDrawerOpen"
       show-if-above
@@ -75,7 +75,7 @@
           </div>
         </div>
 
-        <div :class="'flex ' + (isExample === true ? 'flex-center' : 'flex-center')">
+        <div class="flex flex-center">
           <div :style="'max-width: ' + ($route.path === '/' ? '100%' : '800px') + '; width: 100%;'">
             <router-view />
           </div>
