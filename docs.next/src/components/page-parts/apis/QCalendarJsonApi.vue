@@ -2,6 +2,7 @@
   <json-api-viewer
     title="QCalendar API"
     :json="json"
+    no-menu
   />
 </template>
 

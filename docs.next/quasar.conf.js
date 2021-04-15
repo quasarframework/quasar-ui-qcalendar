@@ -78,8 +78,8 @@ module.exports = configure(function (ctx) {
         chain.resolve.alias.merge({
           // ui: path.resolve(__dirname, '../ui/src/index.js'),
           // '@quasar/quasar-ui-qcalendar': path.resolve(__dirname, '../ui/src'),
-          examples: path.resolve(__dirname, './src/examples'),
-          'quasar-ui-json-api-viewer': path.resolve(__dirname, '../../json-api-viewer/ui/src')
+          // 'quasar-ui-json-api-viewer': path.resolve(__dirname, '../../json-api-viewer/ui/src')
+          examples: path.resolve(__dirname, './src/examples')
         })
 
         const rule = chain.module.rule('md')

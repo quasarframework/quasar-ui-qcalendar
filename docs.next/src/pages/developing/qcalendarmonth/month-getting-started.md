@@ -14,4 +14,6 @@ components:
   - apis/QCalendarJsonApi
 ---
 
+## QCalendarMonth API
+
 <q-calendar-json-api />
