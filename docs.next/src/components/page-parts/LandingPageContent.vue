@@ -30,6 +30,7 @@
 
       <q-timeline-entry heading>
         <div style="font-size: 32px; font-weight: 600;">QCalendar</div>
+        <div style="font-size: 22px; font-weight: 600;" class="text-grey">It's a Family of Calendars</div>
         <!-- <div style="font-size: 16px;">Build Beautiful,Responsive Calendars</div> -->
       </q-timeline-entry>
 
@@ -55,6 +56,7 @@
 
       <q-timeline-entry
         title="QCalendarMonth"
+        subtitle="Keep track of events, reminders and tasks"
         side="right"
       >
         <div>
@@ -74,6 +76,7 @@
 
       <q-timeline-entry
         title="QCalendarMonth (mini-mode)"
+        subtitle="Create popups with multi-range selection"
         side="left"
       >
         <div>
@@ -93,6 +96,7 @@
 
       <q-timeline-entry
         title="QCalendarAgenda"
+        subtitle="Add the content you want"
         side="right"
       >
         <div>
@@ -112,6 +116,7 @@
 
       <q-timeline-entry
         title="QCalendarResource"
+        subtitle="Manage resources by the hour"
         side="left"
       >
         <div>
@@ -131,6 +136,7 @@
 
       <q-timeline-entry
         title="QCalendarScheduler"
+        subtitle="Manage resources daily"
         side="right"
       >
         <div>
@@ -150,6 +156,7 @@
 
       <q-timeline-entry
         title="QCalendarTask"
+        subtitle="Create timesheet and Gantt charts"
         side="left"
       >
         <div>
