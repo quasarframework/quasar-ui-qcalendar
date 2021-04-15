@@ -4,7 +4,7 @@ import JsonApiViewer from 'quasar-ui-json-api-viewer/src/components/JsonApiViewe
 import MarkdownPage from '../components/MarkdownPage.vue'
 import MarkdownLink from '../components/MarkdownLink.vue'
 import ExampleViewer, { setDefaults } from 'quasar-ui-example-viewer/src'
-import { version } from '@quasar/quasar-ui-qcalendar/src/QCalendar.js'
+import { version } from '@quasar/quasar-ui-qcalendar/package.json'
 
 setDefaults({
   locationUrl: 'https://github.com/quasarframework/quasar-ui-qcalendar/tree/next/ui/dev/src/examples',
