@@ -23,7 +23,7 @@
     "date-holidays": "2.0.2",
     "quasar": "^2.0.0-beta.12",
     "quasar-ui-example-viewer": "^2.0.0-alpha.5",
-    "quasar-ui-json-api-viewer": "../../json-api-viewer/ui/"
+    "quasar-ui-json-api-viewer": "^2.0.0-alpha.3"
   },
   "devDependencies": {
     "@babel/core": "^7.13.15",
