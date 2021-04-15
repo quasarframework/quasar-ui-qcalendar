@@ -62,10 +62,10 @@
 </template>
 
 <script>
-import { QCalendarAgenda } from '@quasar/quasar-ui-qcalendar/QCalendarAgenda.js'
-import '@quasar/quasar-ui-qcalendar/QCalendarVariables.sass'
-import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
-import '@quasar/quasar-ui-qcalendar/QCalendarAgenda.sass'
+import { QCalendarAgenda } from '@quasar/quasar-ui-qcalendar/src/QCalendarAgenda.js'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarAgenda.sass'
 
 export default {
   name: 'ThemeBuilderAgenda',

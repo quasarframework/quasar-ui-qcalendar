@@ -36,15 +36,15 @@ A caveat, QCalendar was made more modular. Even the SASS files were split up. Th
 In a Vue (script section) or js file:
 
 ```js
-import '@quasar/quasar-ui-qcalendar/QCalendarVariables.sass'
-import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
 ```
 
 In your app.sass:
 
 ```js
-@import '@quasar/quasar-ui-qcalendar/QCalendarVariables.sass'
-@import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
+@import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
+@import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
 ```
 
 If you don't use the calendar transitions, it's likely you would NOT need to import that file.
@@ -53,38 +53,38 @@ Once the package is installed into your node_modules, you can import the calenda
 
 **QCalendarDay:**
 ```js
-import { QCalendarDay } from '@quasar/quasar-ui-qcalendar/QCalendarDay.js'
-import '@quasar/quasar-ui-qcalendar/QCalendarDay.sass'
+import { QCalendarDay } from '@quasar/quasar-ui-qcalendar/src/QCalendarDay.js'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarDay.sass'
 ```
 
 **QCalendarMonth:**
 ```js
-import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar/QCalendarMonth.js'
-import '@quasar/quasar-ui-qcalendar/QCalendarMonth.sass'
+import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar/src/QCalendarMonth.js'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarMonth.sass'
 ```
 
 **QCalendarAgenda:**
 ```js
-import { QCalendarAgenda } from '@quasar/quasar-ui-qcalendar/QCalendarAgenda.js'
-import '@quasar/quasar-ui-qcalendar/QCalendarAgenda.sass'
+import { QCalendarAgenda } from '@quasar/quasar-ui-qcalendar/src/QCalendarAgenda.js'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarAgenda.sass'
 ```
 
 **QCalendarScheduler:**
 ```js
-import { QCalendarScheduler } from '@quasar/quasar-ui-qcalendar/QCalendarScheduler.js'
-import '@quasar/quasar-ui-qcalendar/QCalendarScheduler.sass'
+import { QCalendarScheduler } from '@quasar/quasar-ui-qcalendar/src/QCalendarScheduler.js'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarScheduler.sass'
 ```
 
 **QCalendarResource:**
 ```js
-import { QCalendarResource } from '@quasar/quasar-ui-qcalendar/QCalendarResource.js'
-import '@quasar/quasar-ui-qcalendar/QCalendarResource.sass'
+import { QCalendarResource } from '@quasar/quasar-ui-qcalendar/src/QCalendarResource.js'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarResource.sass'
 ```
 
 **QCalendarTask:**
 ```js
-import { QCalendarTask } from '@quasar/quasar-ui-qcalendar/QCalendarTask.js'
-import '@quasar/quasar-ui-qcalendar/QCalendarTask.sass'
+import { QCalendarTask } from '@quasar/quasar-ui-qcalendar/src/QCalendarTask.js'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarTask.sass'
 ```
 
 If you want to use QCalendar (wrapper) then install the QCalendar app-extension via the Quasar CLI:
@@ -94,8 +94,8 @@ If you want to use QCalendar (wrapper) then install the QCalendar app-extension 
 or
 
 ```js
-import { QCalendar } from '@quasar/quasar-ui-qcalendar/QCalendar.js'
-import '@quasar/quasar-ui-qcalendar/QCalendar.sass'
+import { QCalendar } from '@quasar/quasar-ui-qcalendar/src/QCalendar.js'
+import '@quasar/quasar-ui-qcalendar/src/QCalendar.sass'
 ```
 
 ### Boot file
@@ -104,12 +104,12 @@ If you want to create your own Quasar boot file and include a specific calendar 
 ```js
 import { boot } from 'quasar/wrappers'
 
-import '@quasar/quasar-ui-qcalendar/QCalendarVariables.sass'
-import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
-import '@quasar/quasar-ui-qcalendar/QCalendarDay.sass'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarDay.sass'
 
 // CalendarPlugin can be called anything...it's just a 'default' export
-import CalendarPlugin from '@quasar/quasar-ui-qcalendar/QCalendarDay.js'
+import CalendarPlugin from '@quasar/quasar-ui-qcalendar/src/QCalendarDay.js'
 
 export default boot(({ app }) => {
   app.use(CalendarPlugin)

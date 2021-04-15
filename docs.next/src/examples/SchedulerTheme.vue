@@ -45,11 +45,11 @@
 </template>
 
 <script>
-import { QCalendarScheduler } from '@quasar/quasar-ui-qcalendar/QCalendarScheduler.js'
-import { today } from '@quasar/quasar-ui-qcalendar/Timestamp.js'
-import '@quasar/quasar-ui-qcalendar/QCalendarVariables.sass'
-import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
-import '@quasar/quasar-ui-qcalendar/QCalendarScheduler.sass'
+import { QCalendarScheduler } from '@quasar/quasar-ui-qcalendar/src/QCalendarScheduler.js'
+import { today } from '@quasar/quasar-ui-qcalendar/src/Timestamp.js'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarScheduler.sass'
 
 import { defineComponent } from 'vue'
 import NavigationBar from '../components/NavigationBar.vue'

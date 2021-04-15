@@ -83,14 +83,14 @@
 </template>
 
 <script>
-import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar/QCalendarMonth.js'
-import '@quasar/quasar-ui-qcalendar/QCalendarVariables.sass'
-import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
-import '@quasar/quasar-ui-qcalendar/QCalendarMonth.sass'
+import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar/src/QCalendarMonth.js'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarMonth.sass'
 
 import {
   getDayIdentifier
-} from 'ui'
+} from '@quasar/quasar-ui-qcalendar/src/Timestamp.js'
 
 function leftClick (e) {
   return e.button === 0

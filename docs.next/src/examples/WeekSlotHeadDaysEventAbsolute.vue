@@ -62,11 +62,11 @@ import {
   parseTimestamp,
   getStartOfWeek,
   today
-} from '@quasar/quasar-ui-qcalendar/Timestamp.js'
-import { QCalendarDay } from '@quasar/quasar-ui-qcalendar/QCalendarDay.js'
-import '@quasar/quasar-ui-qcalendar/QCalendarVariables.sass'
-import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
-import '@quasar/quasar-ui-qcalendar/QCalendarDay.sass'
+} from '@quasar/quasar-ui-qcalendar/src/Timestamp.js'
+import { QCalendarDay } from '@quasar/quasar-ui-qcalendar/src/QCalendarDay.js'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarDay.sass'
 
 import { defineComponent, ref, computed, onBeforeMount } from 'vue'
 import NavigationBar from '../components/NavigationBar.vue'

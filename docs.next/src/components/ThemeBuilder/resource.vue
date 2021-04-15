@@ -48,10 +48,10 @@
 </template>
 
 <script>
-import { QCalendarResource } from '@quasar/quasar-ui-qcalendar/QCalendarResource.js'
-import '@quasar/quasar-ui-qcalendar/QCalendarVariables.sass'
-import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
-import '@quasar/quasar-ui-qcalendar/QCalendarResource.sass'
+import { QCalendarResource } from '@quasar/quasar-ui-qcalendar/src/QCalendarResource.js'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarResource.sass'
 
 export default {
   name: 'ThemeBuilderResource',

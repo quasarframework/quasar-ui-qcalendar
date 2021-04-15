@@ -104,11 +104,11 @@ import {
   isBetweenDates,
   parsed,
   padNumber
-} from '@quasar/quasar-ui-qcalendar/Timestamp.js'
-import { QCalendarTask } from '@quasar/quasar-ui-qcalendar/QCalendarTask.js'
-import '@quasar/quasar-ui-qcalendar/QCalendarVariables.sass'
-import '@quasar/quasar-ui-qcalendar/QCalendarTransitions.sass'
-import '@quasar/quasar-ui-qcalendar/QCalendarTask.sass'
+} from '@quasar/quasar-ui-qcalendar/src/Timestamp.js'
+import { QCalendarTask } from '@quasar/quasar-ui-qcalendar/src/QCalendarTask.js'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarTask.sass'
 
 import { defineComponent } from 'vue'
 import NavigationBar from '../components/NavigationBar.vue'
