@@ -6,7 +6,7 @@ keys: Help
 
 The information below can help you migrate from QCalendar v3.x to QCalendar v4.0.0 (beta).
 
-> QCalendar now only works with a Vue 3 instance. If you are still using Vue 2, use the [QCalendar v3 branch]() (TODO: not created yet).
+> QCalendar 4.x+ only works with a Vue 3 instance. If you are still using Vue 2, use the [QCalendar v3 branch]() (TODO: not created yet).
 
 > The information below is by no means an exhaustive list of changes and new functionality. If you see something that has been missed, please PR or let us know.
 ## QCalendar v4.0.0 Beta 1
@@ -16,7 +16,7 @@ With this update comes a lot of changes, with over 90% of QCalendar being rewrit
 
 > Until the final stable version is released, some aspects of the calendar may change. We're not planning for additional breaking changes, but unforeseen reported issues may require us to do breaking changes (unlikely, but keep this in mind). So please make sure that you read each v4 beta version's release notes carefully before upgrading.
 
-## QCalendar rewritten to use Vue v3 composition API
+## QCalendar Rewritten to use Vue v3 Composition API
 This means you get better in-editor auto-completion support amongst many other advantages.
 
 ## New Calendar
@@ -225,7 +225,7 @@ This image will explain the QCalendarDay alignment:
 - The top-level calendar `div` now gets the [`lang` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang) based on the passed in `locale` property (default: `en-US`). This allows all descendants to word-break appropriately, by the browser, based on the language.
 - Functionality has been added for tab (tabindex) support. Users can now use `Tab` and `Shift+Tab` to navigate the calendar. Add the new `focusable` property to have this functionality.
 - Allow calendar date selection via keyboard (Enter or Space keys) when `focusable` property is set.
-- When using `max-days` property (for contiguous days display) and clicking on a date, the calendar no longer navigates to the selected date, which previously became first date in the visible days. ie: the calendar is static until a new date that is not visible is selected programmatically, by v-model or prev/next/move methods are used (`max-days` does not apply to constrained `week` and `month` views).
+- When using `max-days` property (for contiguous days displayed) and clicking on a date, the calendar no longer navigates to the selected date, which previously became first date in the visible days. ie: the calendar is static until a new date that is not visible is selected programmatically, by v-model or prev/next/move methods are used (`max-days` does not apply to constrained `week` and `month` views).
 - QCalendarDay now has a slot for head days (`head-days-events`) that is a contiguous row for all displayed days. This allows for all-day events that are more than one day to be a singular item. Be sure to create a wrapper div absolute positioning OR relative positioning and add empty events that are transparent to the user to push visible events to their proper positioning. Because absolute positioned div's are outside of the browser's normal flow, you need to set an explicit height on your first child and use the passed in **ref** from the slot data (`<template #head-days-events="{ scope: { days, ref } }">`) and place the ref (`:ref="ref"`) properly for this to work. Also, you probably should not use the `head-days-events` in conjunction with the `head-day-event` slot. The `head-day-event` slot is regulated to that day only and potential overlap may occur that would not be a good UX.
 - All calendars will automatically auto-switch the weekday length based on the width of the calendar cell.
 - For calendars that show the month on the first day of the month, the text will automatically switch the month length based on width of the calendar cell.
