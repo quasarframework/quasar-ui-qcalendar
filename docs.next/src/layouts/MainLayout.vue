@@ -12,6 +12,13 @@
       </q-toolbar>
     </q-header>
 
+    <q-footer elevated>
+      <q-toolbar>
+        <!-- <q-toolbar-title>Footer</q-toolbar-title> -->
+        <div class="full-width text-center">This documentation site for QCalendar is a work in progress. If you see something missing or inaccurate, please create a PR on the Github repo.</div>
+      </q-toolbar>
+    </q-footer>
+
     <q-drawer
       v-model="leftDrawerOpen"
       :show-if-above="$route.path !== '/'"
