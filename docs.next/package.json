@@ -8,7 +8,7 @@
   "scripts": {
     "lint": "eslint --ext .js,.vue ./",
     "lint-fix": "eslint --ext .js,.vue src --fix",
-    "build:site": "quasar build",
+    "build:site": "cd ../ui && yarn link && cd ../docs.next && yarn link @quasar/quasar-ui-qcalendar && quasar build",
     "dev": "quasar dev",
     "dev:ssr": "quasar dev -m ssr",
     "dev:ios": "quasar dev -m ios",
@@ -18,7 +18,7 @@
   "dependencies": {
     "@carbon/icons-vue": "^10.29.0",
     "@quasar/extras": "^1.10.3",
-    "@quasar/quasar-ui-qcalendar": "../ui",
+    "@quasar/quasar-ui-qcalendar": "link:../ui",
     "core-js": "^3.10.1",
     "date-holidays": "2.0.2",
     "quasar": "^2.0.0-beta.12",
