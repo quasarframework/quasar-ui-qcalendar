@@ -71,32 +71,54 @@ function extendTable (md) {
 
 function extendLink (md) {
   md.renderer.rules.link_open = (tokens, idx, options, env, self) => {
+    // const token = tokens[ idx ]
+
+    // const hrefIndex = token.attrIndex('href')
+
+    // if (token.attrs[ hrefIndex ][ 1 ][ 0 ] === '#') {
+    //   if (location) {
+    //     token.attrs[ hrefIndex ][ 1 ] = location.pathname + token.attrs[ hrefIndex ][ 1 ]
+    //   }
+    // }
+
+    // if (token.attrs[ hrefIndex ][ 1 ] === '') {
+    //   token.attrSet('class', 'q-markdown--link q-markdown--link-local')
+    //   if (tokens[ idx + 1 ] && tokens[ idx + 1 ].type === 'text' && tokens[ idx + 1 ].content) {
+    //     token.attrSet('id', slugify(tokens[ idx + 1 ].content))
+    //   }
+    // }
+    // else if (token.attrs[ hrefIndex ][ 1 ][ 0 ] === '/'
+    //   || token.attrs[ hrefIndex ][ 1 ].startsWith('..')) {
+    //   token.attrSet('class', 'q-markdown--link q-markdown--link-local')
+    // }
+    // else {
+    //   token.attrSet('class', 'q-markdown--link q-markdown--link-external')
+    //   token.attrSet('target', '_blank')
+    //   token.attrSet('rel', 'noopener')
+    // }
+
+    // return self.renderToken(tokens, idx, options)
+
     const token = tokens[ idx ]
 
     const hrefIndex = token.attrIndex('href')
 
-    if (token.attrs[ hrefIndex ][ 1 ][ 0 ] === '#') {
-      if (location) {
-        token.attrs[ hrefIndex ][ 1 ] = location.pathname + token.attrs[ hrefIndex ][ 1 ]
-      }
+    if (hrefIndex >= 0) {
+      const link = token.attrs[ hrefIndex ]
+
+      link[ 0 ] = 'to'
+      link[ 1 ] = decodeURI(link[ 1 ])
+
+      token.tag = 'markdown-link'
     }
 
-    if (token.attrs[ hrefIndex ][ 1 ] === '') {
-      token.attrSet('class', 'q-markdown--link q-markdown--link-local')
-      if (tokens[ idx + 1 ] && tokens[ idx + 1 ].type === 'text' && tokens[ idx + 1 ].content) {
-        token.attrSet('id', slugify(tokens[ idx + 1 ].content))
-      }
-    }
-    else if (token.attrs[ hrefIndex ][ 1 ][ 0 ] === '/'
-      || token.attrs[ hrefIndex ][ 1 ].startsWith('..')) {
-      token.attrSet('class', 'q-markdown--link q-markdown--link-local')
-    }
-    else {
-      token.attrSet('class', 'q-markdown--link q-markdown--link-external')
-      token.attrSet('target', '_blank')
-      token.attrSet('rel', 'noopener')
-    }
+    return self.renderToken(tokens, idx, options)
+  }
 
+  md.renderer.rules.link_close = (tokens, idx, options, env, self) => {
+    const token = tokens[ idx ]
+
+    token.tag = 'markdown-link'
     return self.renderToken(tokens, idx, options)
   }
 }
