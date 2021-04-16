@@ -1,5 +1,4 @@
 import { boot } from 'quasar/wrappers'
-// import VuePlugin, { version } from 'ui' // "ui" is aliased in quasar.conf.js
 import JsonApiViewer from 'quasar-ui-json-api-viewer/src/components/JsonApiViewer.js'
 import MarkdownPage from '../components/MarkdownPage.vue'
 import MarkdownLink from '../components/MarkdownLink.vue'
