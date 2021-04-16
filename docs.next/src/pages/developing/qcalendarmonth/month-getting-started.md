@@ -11,9 +11,9 @@ related:
   - /developing/qcalendarscheduler/scheduler-getting-started
   - /developing/qcalendartask/task-getting-started
 components:
-  - apis/QCalendarJsonApi
+  - apis/QCalendarMonthJsonApi
 ---
 
 ## QCalendarMonth API
 
-<q-calendar-json-api />
+<q-calendar-month-json-api />

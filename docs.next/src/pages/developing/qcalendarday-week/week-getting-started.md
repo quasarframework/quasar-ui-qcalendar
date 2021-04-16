@@ -10,4 +10,10 @@ related:
   - /developing/qcalendarresource/resource-getting-started
   - /developing/qcalendarscheduler/scheduler-getting-started
   - /developing/qcalendartask/task-getting-started
+components:
+  - apis/QCalendarDayJsonApi
 ---
+
+## QCalendarDay API
+
+<q-calendar-day-json-api />
