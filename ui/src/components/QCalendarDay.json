@@ -3,10 +3,2069 @@
     "docsUrl": "https://quasarframework.github.io/quasar-ui-qcalendar/docs"
   },
   "props": {
+    "model-value": {
+      "type": "String",
+      "category": "model",
+      "desc": "When set as `YYYY-MM-DD`, the calendar will display the current view on this date. If empty, then it will be changed to the current date which will be emitted. Either use this property (along with a listener for 'update:modelValue' event) OR use v-model directive",
+      "required": true,
+      "default": "today()",
+      "examples": [
+        "v-model=\"2019-04-01\"",
+        "v-model=\"2020-08-08\""
+      ]
+    },
+    "view": {
+      "type": "Array",
+      "tsType": "StringArray",
+      "category": "model",
+      "desc": "The type of calendar view to be displayed",
+      "values": ["day", "week", "month"],
+      "default": "day",
+      "examples": [
+        "view=\"week\"",
+        "view=\"month\""
+      ]
+    },
+    "now": {
+      "type": "String",
+      "category": "model",
+      "desc": "This is the currently displayed date (highlighted). If not set, then the current date is used",
+      "examples": [
+        "now=\"2019-04-01\"",
+        "now=\"2020-08-08\""
+      ]
+    },
+    "weekdays": {
+      "type": "Array",
+      "tsType": "NumberArray",
+      "category": "model",
+      "desc": "This is the days of the week and in which order they are displayed. If you want Monday as the first day of the week, you would use [1,2,3,4,5,6,0]. If you want a 5-day work week you would use [1,2,3,4,5]",
+      "default": "[0,1,2,3,4,5,6]",
+      "examples": [
+        ":weekdays=\"[1,2,3,4,5,6,0]\"",
+        ":weekdays=\"[1,2,3,4,5]\""
+      ]
+    },
+    "date-type": {
+      "addedIn": "v4.0.0",
+      "type": "String",
+      "category": ["style"],
+      "desc": "Shows the current date button as either a circle or a square",
+      "values": ["round", "square"],
+      "default": "round",
+      "examples": [
+        "date-type=\"square\""
+      ]
+    },
+    "weekday-align": {
+      "addedIn": "v4.0.0",
+      "type": "String",
+      "category": ["style"],
+      "desc": "Determines the weekday (ie: Sunday, Monday, etc) alignment",
+      "values": ["left", "center", "right"],
+      "default": "center",
+      "examples": [
+        "weekday-align=\"left\""
+      ]
+    },
+    "date-align": {
+      "addedIn": "v4.0.0",
+      "type": "String",
+      "category": ["style"],
+      "desc": "Determines the date (ie: 2, 3, etc) alignment",
+      "values": ["left", "center", "right"],
+      "default": "center",
+      "examples": [
+        "date-align=\"left\""
+      ]
+    },
+    "date-header": {
+      "addedIn": "v4.0.0",
+      "type": "String",
+      "category": ["style"],
+      "desc": "Determines how the date header will be displayed",
+      "values": ["stacked", "inline", "inverted"],
+      "default": "stacked",
+      "examples": [
+        "date-header=\"inline\""
+      ]
+    },
+    "bordered": {
+      "type": "Boolean",
+      "category": "style",
+      "desc": "Places a border around the calendar"
+    },
+    "dark": {
+      "type": "Boolean",
+      "category": "style",
+      "desc": "Places the calendar into dark mode"
+    },
+    "no-active-date": {
+      "type": "Boolean",
+      "category": "behavior",
+      "desc": "This controls whether the `q-active-date` css class is set when a user clicks on a date label (button)"
+    },
+    "short-weekday-label": {
+      "type": "Boolean",
+      "category": "style",
+      "desc": "Displays the weekday label in short format. For instance, 'Monday' would become 'Mon'"
+    },
+    "no-default-header-text": {
+      "type": "Boolean",
+      "category": "content",
+      "desc": "Do not display the weekday text in the header"
+    },
+    "no-default-header-btn": {
+      "type": "Boolean",
+      "category": "content",
+      "desc": "Do not display the date button in the header"
+    },
+    "min-weekday-length": {
+      "addedIn": "v4.0.0",
+      "type": ["Number", "String"],
+      "category": "behavior",
+      "desc": "The minimal number of weekday characters when truncation occurs",
+      "default": 1,
+      "examples": [
+        ":min-weekday-length=\"2\""
+      ]
+    },
+    "weekday-breakpoints": {
+      "addedIn": "v4.0.0",
+      "type": "Array",
+      "tsType": "NumberArray",
+      "category": "behavior",
+      "desc": "The breakpoint widths where weekday truncation occurs (needs 2 values)",
+      "default": [ 75, 35 ],
+      "examples": [
+        ":weekday-breakpoints=\"[68, 32]\""
+      ]
+    },
+    "locale": {
+      "type": "String",
+      "category": "model",
+      "desc": "Used to change the locale of the calendar. Any acceptable locale can be used that is recognized by the browser. If the locale fails, then 'en-US' is the fallback",
+      "default": "en-US",
+      "examples": [
+        "locale=\"de-de\"",
+        "locale=\"de\"",
+        "locale=\"fr\"",
+        "locale=\"pl\""
+      ]
+    },
+    "animated": {
+      "type": "Boolean",
+      "category": "behavior",
+      "desc": "Turns on animated transitions"
+    },
+    "transition-prev": {
+      "type": "String",
+      "category": "behavior",
+      "desc": "When animated property is true, transition to use for previous calendar display",
+      "default": "slide-right",
+      "examples": [
+        "transition-prev=\"flip-right\""
+      ]
+    },
+    "transition-next": {
+      "type": "String",
+      "category": "behavior",
+      "desc": "When animated property is true, transition to use for next calendar display",
+      "default": "slide-left",
+      "examples": [
+        "transition-next=\"flip-left\""
+      ]
+    },
+    "drag-enter-func": {
+      "addedIn": "v4.0.0",
+      "type": "Function",
+      "category": "behavior",
+      "desc": "The function to handle dragenter events",
+      "params": {
+        "event": {
+          "type": "Object",
+          "desc": "The associated event",
+          "__exemption": [ "examples" ]
+        },
+        "type": {
+          "type": "String",
+          "desc": "This can be 'head-day', 'head-column' or 'column'",
+          "values": [
+            "head-day",
+            "head-column",
+            "column"
+          ],
+          "examples": [
+            "head-day",
+            "head-column",
+            "column"
+          ]
+        },
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope data passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                  "column": {
+                  "type": "Object",
+                  "tsType": "ColumnObject",
+                  "desc": "The column object used to build the column",
+                  "__exemption": [ "examples" ]
+                },
+                "index": {
+                  "type": "Number",
+                  "desc": "The column index",
+                  "__exemption": [ "examples" ]
+                },
+                "days": {
+                  "type": "Array",
+                  "tsType": "TimestampArray",
+                  "applicable": ["head-column", "column"],
+                  "desc": "An array of Timestamp objects representing the days associated with the column(s)",
+                  "__exemption": [ "examples" ]
+                },
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "applicable": ["head-day"],
+                  "desc": "For 'head-day'. The Timestamp object associated with the date",
+                  "__exemption": [ "examples" ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "returns": {
+        "type": "Boolean",
+        "desc": "If the event is applicable"
+      },
+      "examples": [
+        ":drag-enter-func=\"onDragEnterFunc\""
+      ]
+    },
+    "drag-over-func": {
+      "type": "Function",
+      "category": "behavior",
+      "desc": "The function to handle dragover events. You must call in your `e.preventDefault()` for Drag and Drop to work properly",
+      "params": {
+        "event": {
+          "type": "Object",
+          "desc": "The event associated with the dragover",
+          "__exemption": [ "examples" ]
+        },
+        "type": {
+          "type": "String",
+          "desc": "This can be 'head-day', 'head-column' or 'column'",
+          "values": [
+            "head-day",
+            "head-column",
+            "column"
+          ],
+          "examples": [
+            "head-day",
+            "head-column",
+            "column"
+          ]
+        },
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope data passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                  "column": {
+                  "type": "Object",
+                  "tsType": "ColumnObject",
+                  "desc": "The column object used to build the column",
+                  "__exemption": [ "examples" ]
+                },
+                "index": {
+                  "type": "Number",
+                  "desc": "The column index",
+                  "__exemption": [ "examples" ]
+                },
+                "days": {
+                  "type": "Array",
+                  "tsType": "TimestampArray",
+                  "applicable": ["head-column", "column"],
+                  "desc": "An array of Timestamp objects representing the days associated with the column(s)",
+                  "__exemption": [ "examples" ]
+                },
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "applicable": ["head-day"],
+                  "desc": "For 'head-day'. The Timestamp object associated with the date",
+                  "__exemption": [ "examples" ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "returns": {
+        "type": "Boolean",
+        "desc": "If the event is applicable"
+      },
+      "examples": [
+        ":drag-over-func=\"onDragOverFunc\""
+      ]
+    },
+    "drag-leave-func": {
+      "addedIn": "v4.0.0",
+      "type": "Function",
+      "category": "behavior",
+      "desc": "The function to handle dragleave events",
+      "params": {
+        "event": {
+          "type": "Object",
+          "desc": "The event associated with the dragleave",
+          "__exemption": [ "examples" ]
+        },
+        "type": {
+          "type": "String",
+          "desc": "This can be 'head-day', 'head-column' or 'column'",
+          "values": [
+            "head-day",
+            "head-column",
+            "column"
+          ],
+          "examples": [
+            "head-day",
+            "head-column",
+            "column"
+          ]
+        },
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope data passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                  "column": {
+                  "type": "Object",
+                  "tsType": "ColumnObject",
+                  "desc": "The column object used to build the column",
+                  "__exemption": [ "examples" ]
+                },
+                "index": {
+                  "type": "Number",
+                  "desc": "The column index",
+                  "__exemption": [ "examples" ]
+                },
+                "days": {
+                  "type": "Array",
+                  "tsType": "TimestampArray",
+                  "applicable": ["head-column", "column"],
+                  "desc": "An array of Timestamp objects representing the days associated with the column(s)",
+                  "__exemption": [ "examples" ]
+                },
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "applicable": ["head-day"],
+                  "desc": "For 'head-day'. The Timestamp object associated with the date",
+                  "__exemption": [ "examples" ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "returns": {
+        "type": "Boolean",
+        "desc": "If the event is applicable"
+      },
+      "examples": [
+        ":drag-leave-func=\"onDragLeaveFunc\""
+      ]
+    },
+    "drop-func": {
+      "type": "Function",
+      "category": "behavior",
+      "desc": "The function to handle drop events",
+      "params": {
+        "event": {
+          "type": "Object",
+          "desc": "The event associated with the drop",
+          "__exemption": [ "examples" ]
+        },
+        "type": {
+          "type": "String",
+          "desc": "This can be 'head-day', 'head-column' or 'column'",
+          "values": [
+            "head-day",
+            "head-column",
+            "column"
+          ],
+          "examples": [
+            "head-day",
+            "head-column",
+            "column"
+          ]
+        },
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope data passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                  "column": {
+                  "type": "Object",
+                  "tsType": "ColumnObject",
+                  "desc": "The column object used to build the column",
+                  "__exemption": [ "examples" ]
+                },
+                "index": {
+                  "type": "Number",
+                  "desc": "The column index",
+                  "__exemption": [ "examples" ]
+                },
+                "days": {
+                  "type": "Array",
+                  "tsType": "TimestampArray",
+                  "applicable": ["head-column", "column"],
+                  "desc": "An array of Timestamp objects representing the days associated with the column(s)",
+                  "__exemption": [ "examples" ]
+                },
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "applicable": ["head-day"],
+                  "desc": "For 'head-day'. The Timestamp object associated with the date",
+                  "__exemption": [ "examples" ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "returns": {
+        "type": "Boolean",
+        "desc": "If the event is applicable"
+      },
+      "examples": [
+        ":drop-func=\"onDropFunc\""
+      ]
+    },
+    "selected-dates": {
+      "type": "Array",
+      "tsType": "StringArray",
+      "category": "model",
+      "desc": "An array of string dates in the form `YYYY-MM-DD` that will be selected. Interval-based calendars use `YYYY-MM-DD HH:mm`",
+      "examples": [
+        ":selected-dates=\"['2019-04-01', '2019-04-02', '2019-04-03', '2019-04-04']\"",
+        ":selected-dates=\"['2019-04-01 13:00', '2019-04-01 13:15', '2019-04-01 13:30', '2019-04-01 13:45']\""
+      ]
+    },
+    "selected-start-end-dates": {
+      "type": "Array",
+      "tsType": "StringArray",
+      "category": "behavior",
+      "desc": "An array of two dates in format `YYYY-MM-DD` for selection purposes. Interval-based calendars use `YYYY-MM-DD HH:mm`",
+      "examples": [
+        ":selected-start-end-dates=\"getStartEndDates\""
+      ]
+    },
+    "hoverable": {
+      "addedIn": "v4.0.0",
+      "type": "Boolean",
+      "category": "behavior",
+      "desc": "Allows certain cells within the calendar to be hovered"
+    },
+    "focusable": {
+      "addedIn": "v4.0.0",
+      "type": "Boolean",
+      "category": "behavior",
+      "desc": "Allows certain cells within the calendar to receive focus"
+    },
+    "focus-type": {
+      "addedIn": "v4.0.0",
+      "type": "Array",
+      "tsType": "StringArray",
+      "category": "behavior",
+      "desc": "Describes what can become focusable",
+      "values": ["day", "weekday"],
+      "default": "[]",
+      "examples": [
+        ":focus-type=['day', 'weekday']"
+      ]
+    },
+    "weekday-style": {
+      "addedIn": "v4.0.0",
+      "type": "Function",
+      "category": "style",
+      "desc": "Gets called to provide custom styling of a weekday",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope data passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      },
+      "returns": {
+        "type": "Object",
+        "desc": "A Vue style object",
+        "examples": [
+          "{ color: #ccc; }"
+        ]
+      },
+      "default": "null",
+      "examples": [
+        ":weekday-style=\"getWeekdayStyle\""
+      ]
+    },
+    "weekday-class": {
+      "addedIn": "v4.0.0",
+      "type": "Function",
+      "category": "style",
+      "desc": "Gets called to provide custom styling (via classes) of a weekday",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope data passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      },
+      "returns": {
+        "type": "Object",
+        "desc": "A Vue style object of classes",
+        "examples": [
+          "{ 'my-class': true }"
+        ]
+      },
+      "default": "null",
+      "examples": [
+        ":weekday-class=\"getWeekdayClass\""
+      ]
+    },
+    "day-height": {
+      "type": ["Number", "String"],
+      "category": "behavior",
+      "desc": "The maximum height in pixels for the day height. Using 0 will make the rows variable height based on content.",
+      "default": "0",
+      "examples": [
+        ":day-height=\"80\"",
+        "day-height=\"100\""
+      ]
+    },
+    "day-min-height": {
+      "addedIn": "v4.0.0",
+      "type": ["Number", "String"],
+      "category": "behavior",
+      "desc": "The minimum height to be used",
+      "default": 40,
+      "examples": [
+        ":day-min-height=\"80\""
+      ]
+    },
+    "max-days": {
+      "type": ["String", "Number"],
+      "category": "model",
+      "desc": "The number of days to be displayed",
+      "default": 7,
+      "examples": [
+        ":max-days=\"14\"",
+        "max-days=\"10\""
+      ]
+    },
+    "cell-width": {
+      "addedIn": "v4.0.0",
+      "type": "String",
+      "category": "behavior",
+      "desc": "Sets day cell width and turns on sticky mode. Width must be css measurement",
+      "examples": [
+        "cell-width=\"100px\""
+      ]
+    },
+    "use-navigation": {
+      "addedIn": "v4.0.0",
+      "type": "Boolean",
+      "desc": "Allows keyboard navigation",
+      "category": "behavior"
+    }
   },
   "events": {
+    "update:modelValue": {
+      "desc": "Emitted when the component needs to change the model; Is also used by v-model",
+      "params": {
+        "value": {
+          "type": "String",
+          "desc": "New model value",
+          "required": true,
+          "__exemption": [ "examples" ]
+        }
+      }
+    },
+    "change": {
+      "desc": "Emitted when the calendar dates change for the current view",
+      "params": {
+        "{start, end}": {
+          "type": "Object",
+          "tsType": "Timestamp",
+          "desc": "The timestamp objects for the first and last valid dates being displayed",
+          "__exemption": [ "examples" ]
+        }
+      }
+    },
+    "moved": {
+      "desc": "Emitted when the date is moved",
+      "params": {
+        "timestamp": {
+          "type": "Object",
+          "tsType": "Timestamp",
+          "desc": "The Timestamp object of the move",
+          "__exemption": [ "examples" ]
+        }
+      }
+    },
+    "click-date": {
+      "desc": "Occurs on a date button",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "event": {
+              "type": "Object",
+              "desc": "The associated event",
+              "__exemption": [ "examples" ]
+            },
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "contextmenu-date": {
+      "desc": "Occurs on a date button",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "event": {
+              "type": "Object",
+              "desc": "The associated event",
+              "__exemption": [ "examples" ]
+            },
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "mousedown-date": {
+      "desc": "Occurs on a date button",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "event": {
+              "type": "Object",
+              "desc": "The associated event",
+              "__exemption": [ "examples" ]
+            },
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "mousemove-date": {
+      "desc": "Occurs on a date button",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "event": {
+              "type": "Object",
+              "desc": "The associated event",
+              "__exemption": [ "examples" ]
+            },
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "mouseup-date": {
+      "desc": "Occurs on a date button",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "event": {
+              "type": "Object",
+              "desc": "The associated event",
+              "__exemption": [ "examples" ]
+            },
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "mouseenter-date": {
+      "desc": "Occurs on a date button",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "event": {
+              "type": "Object",
+              "desc": "The associated event",
+              "__exemption": [ "examples" ]
+            },
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "mouseleave-date": {
+      "desc": "Occurs on a date button",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "event": {
+              "type": "Object",
+              "desc": "The associated event",
+              "__exemption": [ "examples" ]
+            },
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "touchstart-date": {
+      "desc": "Occurs on a date button",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "event": {
+              "type": "Object",
+              "desc": "The associated event",
+              "__exemption": [ "examples" ]
+            },
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "touchmove-date": {
+      "desc": "Occurs on a date button",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "event": {
+              "type": "Object",
+              "desc": "The associated event",
+              "__exemption": [ "examples" ]
+            },
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "touchend-date": {
+      "desc": "Occurs on a date button",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "event": {
+              "type": "Object",
+              "desc": "The associated event",
+              "__exemption": [ "examples" ]
+            },
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "click-head-day": {
+      "desc": "Occurs on a weekday",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "event": {
+              "type": "Object",
+              "desc": "The associated event",
+              "__exemption": [ "examples" ]
+            },
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "contextmenu-head-day": {
+      "desc": "Occurs on a weekday",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "event": {
+              "type": "Object",
+              "desc": "The associated event",
+              "__exemption": [ "examples" ]
+            },
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "mousedown-head-day": {
+      "desc": "Occurs on a weekday",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "event": {
+              "type": "Object",
+              "desc": "The associated event",
+              "__exemption": [ "examples" ]
+            },
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "mousemove-head-day": {
+      "desc": "Occurs on a weekday",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "event": {
+              "type": "Object",
+              "desc": "The associated event",
+              "__exemption": [ "examples" ]
+            },
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "mouseup-head-day": {
+      "desc": "Occurs on a weekday",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "event": {
+              "type": "Object",
+              "desc": "The associated event",
+              "__exemption": [ "examples" ]
+            },
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "mouseenter-head-day": {
+      "desc": "Occurs on a weekday",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "event": {
+              "type": "Object",
+              "desc": "The associated event",
+              "__exemption": [ "examples" ]
+            },
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "mouseleave-head-day": {
+      "desc": "Occurs on a weekday",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "event": {
+              "type": "Object",
+              "desc": "The associated event",
+              "__exemption": [ "examples" ]
+            },
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "touchstart-head-day": {
+      "desc": "Occurs on a weekday",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "event": {
+              "type": "Object",
+              "desc": "The associated event",
+              "__exemption": [ "examples" ]
+            },
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "touchmove-head-day": {
+      "desc": "Occurs on a weekday",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "event": {
+              "type": "Object",
+              "desc": "The associated event",
+              "__exemption": [ "examples" ]
+            },
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "touchend-head-day": {
+      "desc": "Occurs on a weekday",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "event": {
+              "type": "Object",
+              "desc": "The associated event",
+              "__exemption": [ "examples" ]
+            },
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "click-time": {
+      "desc": "Occurs on an interval",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "event": {
+              "type": "Object",
+              "desc": "The associated event",
+              "__exemption": [ "examples" ]
+            },
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "contextmenu-time": {
+      "desc": "Occurs on an interval",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "event": {
+              "type": "Object",
+              "desc": "The associated event",
+              "__exemption": [ "examples" ]
+            },
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "mousedown-time": {
+      "desc": "Occurs on an interval",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "event": {
+              "type": "Object",
+              "desc": "The associated event",
+              "__exemption": [ "examples" ]
+            },
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "mousemove-time": {
+      "desc": "Occurs on an interval",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "event": {
+              "type": "Object",
+              "desc": "The associated event",
+              "__exemption": [ "examples" ]
+            },
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "mouseup-time": {
+      "desc": "Occurs on an interval",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "event": {
+              "type": "Object",
+              "desc": "The associated event",
+              "__exemption": [ "examples" ]
+            },
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "mouseenter-time": {
+      "desc": "Occurs on an interval",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "event": {
+              "type": "Object",
+              "desc": "The associated event",
+              "__exemption": [ "examples" ]
+            },
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "mouseleave-time": {
+      "desc": "Occurs on an interval",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "event": {
+              "type": "Object",
+              "desc": "The associated event",
+              "__exemption": [ "examples" ]
+            },
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "touchstart-time": {
+      "desc": "Occurs on an interval",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "event": {
+              "type": "Object",
+              "desc": "The associated event",
+              "__exemption": [ "examples" ]
+            },
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "touchmove-time": {
+      "desc": "Occurs on an interval",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "event": {
+              "type": "Object",
+              "desc": "The associated event",
+              "__exemption": [ "examples" ]
+            },
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "touchend-time": {
+      "desc": "Occurs on an interval",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "event": {
+              "type": "Object",
+              "desc": "The associated event",
+              "__exemption": [ "examples" ]
+            },
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object passed to the function",
+              "__exemption": [ "examples" ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "A timestamp object associated with the weekday",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The index of the column",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the active date"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "Value is set by return value of a drag and drop function"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   },
   "methods": {
+    "prev": {
+      "desc": "Triggers the calendar to show the previous view",
+      "__exemption": [ "examples" ]
+    },
+    "next": {
+      "desc": "Triggers the calendar to show the next view",
+      "__exemption": [ "examples" ]
+    },
+    "move": {
+      "desc": "Triggers component to move for count iterations, depending on positive (forwards) or negative (backwards) value",
+      "__exemption": [ "examples" ]
+    },
+    "moveToToday": {
+      "desc": "Emits `today's date` to v-model",
+      "__exemption": [ "examples" ]
+    },
+    "updateCurrent": {
+      "desc": "Update various values to be consistent with current date",
+      "__exemption": [ "examples" ]
+    },
+    "timeStartPos": {
+      "desc": "Calculates the starting y position of the passed in time",
+      "__exemption": [ "examples" ],
+      "params": {
+        "time": {
+          "type": "String",
+          "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
+          "examples": [
+            "09:00"
+          ]
+        },
+        "clamp": {
+          "type": "Boolean",
+          "desc": "Clamp negative values to 0",
+          "default": "true"
+        }
+      },
+      "returns": {
+        "type": "Number",
+        "desc": "The absolute y starting position, but `false` on invalid time parameter",
+        "examples": [
+          "120",
+          "482"
+        ]
+      }
+    },
+    "timeDurationHeight": {
+      "__exemption": [ "examples" ],
+      "desc": "Given a duration (in minutes), will return the css height value",
+      "params": {
+        "duration": {
+          "type": ["Number", "String"],
+          "desc": "The number of minutes for the event to calculate it's height",
+          "examples": [
+            "300",
+            "900"
+          ]
+        }
+      },
+      "returns": {
+        "type": "Number",
+        "desc": "The height (in pixels) to be used for the event",
+        "examples": [
+          "80",
+          "120"
+        ]
+      }
+    },
+    "scrollToTime": {
+      "__exemption": [ "examples" ],
+      "desc": "When on an interval view, scroll to the passed in time (y position)",
+      "params": {
+        "time": {
+          "type": "String",
+          "desc": "The time in which to scoll to. If the time is already visible on the viewport, this function will have no affect.",
+          "examples": [
+            "09:00"
+          ]
+        }
+      }
+    }
   },
   "slots": {
   }
