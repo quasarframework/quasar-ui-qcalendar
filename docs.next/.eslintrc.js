@@ -93,7 +93,7 @@ module.exports = {
     'vue/singleline-html-element-content-newline': 'off',
     'vue/no-multiple-template-root': 'off',
 
-    // allow console.log during development only
+    // allow console.log during production for demo purposes
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
   }
 }
