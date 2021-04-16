@@ -12,7 +12,7 @@
         <div class="full-width row justify-center items-center">
           Found an error on this page or feel it could be improved?
           <markdown-link
-            :to="'https://github.com/quasarframework/quasar-ui-qcalendar/tree/next/ui/dev/src/pages' + path + '.md'"
+            :to="'https://github.com/quasarframework/quasar-ui-qcalendar/tree/next/docs.next/src/pages' + path + '.md'"
           >
             &nbsp; Edit this page on Github
           </markdown-link>

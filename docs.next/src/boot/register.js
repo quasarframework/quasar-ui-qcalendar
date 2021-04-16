@@ -7,7 +7,7 @@ import ExampleViewer, { setDefaults } from 'quasar-ui-example-viewer/src'
 import { version } from '@quasar/quasar-ui-qcalendar/package.json'
 
 setDefaults({
-  locationUrl: 'https://github.com/quasarframework/quasar-ui-qcalendar/tree/next/ui/dev/src/examples',
+  locationUrl: 'https://github.com/quasarframework/quasar-ui-qcalendar/tree/next/docs.next/src/examples',
   jsPaths: [`https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@${ version }/dist/index.umd.min.js`],
   cssPaths: [
     `https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@${ version }/dist/index.min.css`,

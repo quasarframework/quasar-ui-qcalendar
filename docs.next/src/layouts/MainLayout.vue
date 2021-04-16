@@ -125,7 +125,7 @@ export default defineComponent({
 
   setup () {
     const path = ref(null),
-      basePath = 'https://github.com/quasarframework/quasar-ui-qcalendar/tree/next/ui/dev/src/examples/',
+      basePath = 'https://github.com/quasarframework/quasar-ui-qcalendar/tree/next/docs.next/src/examples/',
       name = ref(null),
       store = useMarkdownStore(),
       $route = useRoute(),
