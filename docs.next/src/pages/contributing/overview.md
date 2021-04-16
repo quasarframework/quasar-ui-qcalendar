@@ -11,7 +11,7 @@ Interested in contributing to QCalendar? Here's how you can contribute:
 
 ## Introduction
 
-QCalendar is free to use (MIT License) for anybody building a web-based product or website. The QCalendar community is always working to make it better. Contributors like you help make QCalendar great! We are very happy to see you here.
+QCalendar is free to use (MIT License) for anybody building a web-based product or website. The QCalendar community is always working to make it better. Contributors like ++you++ help make QCalendar great! We are very happy to see you here.
 
 Contributions are not limited to code. We also encourage feedback, documentation, new design and tools. And, we also encourage [sponsorship](/contributing/sponsor), especially if you are using QCalendar in a business endeavor. 
 
