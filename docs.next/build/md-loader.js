@@ -2,10 +2,6 @@ const
   LRU = require('lru-cache'),
   hash = require('hash-sum')
 
-// const
-//   md = require('./md'),
-//   { convertToRelated, flatMenu } = require('./flat-menu')
-
 const
   md = require('./markdown.js'),
   { convertToRelated, flatMenu } = require('./flat-menu')
