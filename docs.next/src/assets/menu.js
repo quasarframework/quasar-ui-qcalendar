@@ -642,6 +642,16 @@ const menu = [
             path: 'task-theme'
           }
         ]
+      },
+      {
+        name: 'Timestamp',
+        path: 'timestamp',
+        children: [
+          {
+            name: 'Timestamp - Getting Started',
+            path: 'timestamp-getting-started'
+          }
+        ]
       }
     ]
   },
