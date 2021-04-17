@@ -136,7 +136,7 @@
       "tsType": "NumberArray",
       "category": "behavior",
       "desc": "The breakpoint widths where weekday truncation occurs (needs 2 values)",
-      "default": [ 75, 35 ],
+      "default": "[ 75, 35 ]",
       "examples": [
         ":weekday-breakpoints=\"[68, 32]\""
       ]
