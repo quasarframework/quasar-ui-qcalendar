@@ -53,6 +53,7 @@ export default {
 
     function showMenu (vm) {
       if (vm !== void 0 && vm !== rootRef.value) {
+        // eslint-disable-next-line no-unused-expressions
         vm.show !== void 0 && vm.show()
         const parent = getParentVm(vm)
         if (parent !== void 0) {
@@ -100,6 +101,7 @@ export default {
         // insetLevel: level > 1 ? 0.8 : level
       }
 
+      // eslint-disable-next-line no-unused-expressions
       menu.external === true && Object.assign(props, {
         to: void 0,
         clickable: true,
@@ -111,6 +113,7 @@ export default {
 
       const child = []
 
+      // eslint-disable-next-line no-unused-expressions
       menu.icon !== void 0 && child.push(
         h(QItemSection, {
           avatar: true
@@ -121,12 +124,14 @@ export default {
         h(QItemSection, () => menu.name)
       )
 
+      // eslint-disable-next-line no-unused-expressions
       menu.rightIcon !== void 0 && child.push(
         h(QItemSection, {
           avatar: true
         }, () => h(QIcon, { name: menu.rightIcon }))
       )
 
+      // eslint-disable-next-line no-unused-expressions
       menu.badge !== void 0 && menu.rightIcon === void 0 && child.push(
         h(QItemSection, {
           side: true

@@ -14,6 +14,7 @@ function parseMenuNode (node, __path) {
   const prefix = __path + (node.path !== void 0 ? '/' + node.path : '')
 
   if (node.children !== void 0) {
+    // eslint-disable-next-line no-unused-expressions
     prefix !== '/start' && menuRoutes.push({
       path: prefix,
       component: getCategoryIndex(
