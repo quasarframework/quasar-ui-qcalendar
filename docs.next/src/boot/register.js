@@ -12,7 +12,6 @@ setDefaults({
     `https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@${ version }/dist/index.min.css`,
     'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.0/css/all.css'
   ]
-
 })
 
 export default boot(({ app }) => {
