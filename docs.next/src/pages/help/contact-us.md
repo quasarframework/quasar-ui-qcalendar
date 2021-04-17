@@ -16,7 +16,7 @@ As a first step, it's always good to search open and closed issues on the QCalen
 
 Don't forget to look into the [Github Discussions](https://github.com/quasarframework/quasar-ui-qcalendar/discussions).
 
-### Frequently Asked Quastions
+### Frequently Asked Questions
 
 Answers to the most common questions regarding QCalendar can be found in the [QCalendar FAQ](/help/faq).
 
