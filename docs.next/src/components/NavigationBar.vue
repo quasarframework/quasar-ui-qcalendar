@@ -1,6 +1,6 @@
 <template>
-  <div style="margin: 12px;">
-    <div class="button-bar">
+  <div class="row justify-center">
+    <div class="q-pa-md q-gutter-sm row">
       <q-btn
         no-caps
         class="button"
