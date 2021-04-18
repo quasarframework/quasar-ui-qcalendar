@@ -12,77 +12,79 @@
       @next="onNext"
     />
 
-    <div style="display: flex; justify-content: center; width: 100%;">
-      <div style="margin: 10px;">
-        <ul class="list">
-          <li
-            v-for="item in dragItems"
-            :key="item.id"
-            class="button list-item"
-            draggable="true"
-            @dragstart="onDragStart($event, item)"
+    <div class="row justify-center">
+      <div style="display: flex; justify-content: center; width: 100%;">
+        <div style="margin: 10px;">
+          <ul class="list">
+            <li
+              v-for="item in dragItems"
+              :key="item.id"
+              class="button list-item"
+              draggable="true"
+              @dragstart="onDragStart($event, item)"
+            >
+              {{ item.name }}
+            </li>
+          </ul>
+        </div>
+
+        <div style="display: flex; justify-content: center; max-width: 600px; width: 100%;">
+          <q-calendar-month
+            ref="calendar"
+            v-model="selectedDate"
+            :weekdays="[1,2,3,4,5]"
+            hoverable
+            bordered
+            animated
+            :day-min-height="50"
+            :day-height="0"
+            :day-class="onDayClass"
+            :weekday-class="onWeekdayClass"
+            :drag-enter-func="onDragEnter"
+            :drag-over-func="onDragOver"
+            :drag-leave-func="onDragLeave"
+            :drop-func="onDrop"
+            @change="onChange"
+            @moved="onMoved"
+            @click-date="onClickDate"
+            @click-day="onClickDay"
+            @click-workweek="onClickWorkweek"
+            @click-head-workweek="onClickHeadWorkweek"
+            @click-head-day="onClickHeadDay"
           >
-            {{ item.name }}
-          </li>
-        </ul>
-      </div>
-
-      <div style="display: flex; justify-content: center; max-width: 800px; width: 100%;">
-        <q-calendar-month
-          ref="calendar"
-          v-model="selectedDate"
-          :weekdays="[1,2,3,4,5]"
-          hoverable
-          bordered
-          animated
-          :day-min-height="50"
-          :day-height="0"
-          :day-class="onDayClass"
-          :weekday-class="onWeekdayClass"
-          :drag-enter-func="onDragEnter"
-          :drag-over-func="onDragOver"
-          :drag-leave-func="onDragLeave"
-          :drop-func="onDrop"
-          @change="onChange"
-          @moved="onMoved"
-          @click-date="onClickDate"
-          @click-day="onClickDay"
-          @click-workweek="onClickWorkweek"
-          @click-head-workweek="onClickHeadWorkweek"
-          @click-head-day="onClickHeadDay"
-        >
-          <template #head-day-event="{ scope: { weekday } }">
-            <div
-              v-if="hasWeekdayEvents(weekday)"
-              style="display: flex; justify-content: space-evenly; flex-wrap: wrap; align-items: center; font-weight: 400; font-size: 12px; height: auto;"
-            >
-              <template
-                v-for="(event, index) in getWeekdayEvents(weekday)"
-                :key="event.weekday + index"
+            <template #head-day-event="{ scope: { weekday } }">
+              <div
+                v-if="hasWeekdayEvents(weekday)"
+                style="display: flex; justify-content: space-evenly; flex-wrap: wrap; align-items: center; font-weight: 400; font-size: 12px; height: auto;"
               >
-                <span style="border: 1px solid pink; border-radius: 2px; padding: 2px; margin: 1px;">
-                  {{ event.name }}
-                </span>
-              </template>
-            </div>
-          </template>"
+                <template
+                  v-for="(event, index) in getWeekdayEvents(weekday)"
+                  :key="event.weekday + index"
+                >
+                  <span style="border: 1px solid pink; border-radius: 2px; padding: 2px; margin: 1px;">
+                    {{ event.name }}
+                  </span>
+                </template>
+              </div>
+            </template>"
 
-          <template #day="{ scope: { timestamp } }">
-            <div
-              v-if="hasEvents(timestamp)"
-              style="display: flex; justify-content: space-evenly; flex-wrap: wrap; align-items: center; font-weight: 400; font-size: 12px; height: auto;"
-            >
-              <template
-                v-for="event in getEvents(timestamp)"
-                :key="event.time"
+            <template #day="{ scope: { timestamp } }">
+              <div
+                v-if="hasEvents(timestamp)"
+                style="display: flex; justify-content: space-evenly; flex-wrap: wrap; align-items: center; font-weight: 400; font-size: 12px; height: auto;"
               >
-                <span style="border: 1px solid pink; border-radius: 2px; padding: 2px; margin: 1px;">
-                  {{ event.name }}
-                </span>
-              </template>
-            </div>
-          </template>
-        </q-calendar-month>
+                <template
+                  v-for="event in getEvents(timestamp)"
+                  :key="event.time"
+                >
+                  <span style="border: 1px solid pink; border-radius: 2px; padding: 2px; margin: 1px;">
+                    {{ event.name }}
+                  </span>
+                </template>
+              </div>
+            </template>
+          </q-calendar-month>
+        </div>
       </div>
     </div>
   </div>

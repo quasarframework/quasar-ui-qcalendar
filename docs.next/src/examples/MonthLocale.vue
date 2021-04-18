@@ -21,21 +21,23 @@
       />
     </div>
 
-    <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
-      <q-calendar-month
-        ref="calendar"
-        v-model="selectedDate"
-        :locale="locale"
-        animated
-        bordered
-        @change="onChange"
-        @moved="onMoved"
-        @click-date="onClickDate"
-        @click-day="onClickDay"
-        @click-workweek="onClickWorkweek"
-        @click-head-workweek="onClickHeadWorkweek"
-        @click-head-day="onClickHeadDay"
-      />
+    <div class="row justify-center">
+      <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
+        <q-calendar-month
+          ref="calendar"
+          v-model="selectedDate"
+          :locale="locale"
+          animated
+          bordered
+          @change="onChange"
+          @moved="onMoved"
+          @click-date="onClickDate"
+          @click-day="onClickDay"
+          @click-workweek="onClickWorkweek"
+          @click-head-workweek="onClickHeadWorkweek"
+          @click-head-day="onClickHeadDay"
+        />
+      </div>
     </div>
   </div>
 </template>
