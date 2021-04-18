@@ -6,25 +6,27 @@
       @next="onNext"
     />
 
-    <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
-      <q-calendar-resource
-        ref="calendar"
-        v-model="selectedDate"
-        v-model:modelResources="resources"
-        resource-key="id"
-        resource-label="name"
-        animated
-        bordered
-        dark
-        @change="onChange"
-        @moved="onMoved"
-        @resource-expanded="onResourceExpanded"
-        @click-date="onClickDate"
-        @click-time="onClickTime"
-        @click-resource="onClickResource"
-        @click-head-resources="onClickHeadResources"
-        @click-interval="onClickInterval"
-      />
+    <div class="row justify-center">
+      <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
+        <q-calendar-resource
+          ref="calendar"
+          v-model="selectedDate"
+          v-model:modelResources="resources"
+          resource-key="id"
+          resource-label="name"
+          animated
+          bordered
+          dark
+          @change="onChange"
+          @moved="onMoved"
+          @resource-expanded="onResourceExpanded"
+          @click-date="onClickDate"
+          @click-time="onClickTime"
+          @click-resource="onClickResource"
+          @click-head-resources="onClickHeadResources"
+          @click-interval="onClickInterval"
+        />
+      </div>
     </div>
   </div>
 </template>
