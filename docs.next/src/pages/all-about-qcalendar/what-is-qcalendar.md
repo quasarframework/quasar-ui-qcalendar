@@ -48,7 +48,7 @@ QCalendar is actually an accumulation of several other dedicated components:
 17. Disable days or weekdays
 18. Workweek number support
 19. Day-of-the-year support
-20. Easy to theme using CSS vars and Theme Builder [TBD]
+20. Easy to theme using CSS vars and Theme Builder
 21. Easy to customize with Vue slots
 22. Support for Dark mode
 23. Rich support of date functions that are also exported for making your own calendars

@@ -118,7 +118,7 @@ When using `QCalendarMonth`, the month name and day of the year values cannot be
 
 ## Active date
 
-The active date is changes when the User clicks on a date or navigates using previous or next. In some edge cases, it is preferable not to show the active date (like when making a calendar date range selection).
+The active date is changed when the User clicks on a date or navigates using previous or next. In some edge cases, it is preferable not to show the active date (like when making a calendar date range selection).
 
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
@@ -215,18 +215,7 @@ Then you can use the `transiton-prev` and `transiton-next` properties to change 
 | transiton-prev | String   | slide-right  |
 | transiton-next | String   | slide-left   |
 
-### Transitions types
-
-QCalendar supports the following transition types:
-
-| Roll       | Slide       | Jump       | Misc   |
-| ----       | ----        | ----       | ----   |
-| roll-right | slide-right | jump-right | fade   |
-| roll-left  | slide-left  | jump-left  | scale  |
-| roll-up    | slide-up    | jump-up    | rotate |
-| roll-down  | slide-down  | jump-down  | spin   |
-|            |             |            | flip   |
-
+See the [QCalendar Transitions](/developing/qcalendar-transitions) for more information.
 ## Hoverable and focusable
 
 The `hoverable` property allows each cell in a calendar to display a hovering effect. Sometimes this can be beneficial for the user, as well as giving your calendar a bit of pizzaz. It comes with overhead, so it is optional.

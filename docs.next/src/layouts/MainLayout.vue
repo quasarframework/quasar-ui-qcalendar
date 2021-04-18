@@ -14,7 +14,6 @@
 
     <q-footer elevated>
       <q-toolbar>
-        <!-- <q-toolbar-title>Footer</q-toolbar-title> -->
         <div class="full-width text-center">This documentation site for QCalendar is a work in progress. If you see something missing or inaccurate, please create a PR on the <markdown-link to="https://github.com/quasarframework/quasar-ui-qcalendar/tree/next" style="color: white;">Github repo</markdown-link>.</div>
       </q-toolbar>
     </q-footer>
