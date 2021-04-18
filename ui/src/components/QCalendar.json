@@ -158,7 +158,7 @@
         "All"
       ],
       "examples": [
-        "locale=\"de-de\"",
+        "locale=\"de-DE\"",
         "locale=\"de\"",
         "locale=\"fr\"",
         "locale=\"pl\""
