@@ -107,7 +107,7 @@ export default function (props, {
     const interval = setInterval(() => {
       if (datesRef.value[ focusRef.value ]) {
         datesRef.value[ focusRef.value ].focus()
-        if (++count === 20 || document.activeElement === datesRef.value[ focusRef.value ]) {
+        if (++count === 50 || document.activeElement === datesRef.value[ focusRef.value ]) {
           clearInterval(interval)
         }
       }
