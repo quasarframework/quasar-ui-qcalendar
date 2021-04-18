@@ -5,7 +5,9 @@
       :title="title"
       :nav="nav"
     />
+
     <slot></slot>
+
     <div class="markdown-page-footer">
       <q-separator class="q-mb-lg" />
       <div v-if="path && noEdit !== true">

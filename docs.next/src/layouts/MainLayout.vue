@@ -62,7 +62,7 @@
       <div class="fit full-width">
         <div
           v-if="isExample === true"
-          style="width: 100%; text-align: left; margin: 8px;"
+          class="full-width"
         >
           <div style="width: 100%; display: flex; justify-content: center;">
             <div style="font-size: 24px; font-weight: 500;">{{ name }}</div>
@@ -83,7 +83,7 @@
         </div>
 
         <div class="flex flex-center">
-          <div :style="'max-width: ' + ($route.path === '/' ? '100%' : '800px') + '; width: 100%;'">
+          <div :style="'max-width: ' + ($route.path === '/' ? '100%' : '1000px') + '; width: 100%;'">
             <router-view />
           </div>
         </div>
