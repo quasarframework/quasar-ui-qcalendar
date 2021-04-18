@@ -76,9 +76,7 @@ module.exports = configure(function (ctx) {
           }])
 
         chain.resolve.alias.merge({
-          // ui: path.resolve(__dirname, '../ui/src/index.js'),
           '@quasar/quasar-ui-qcalendar': path.resolve(__dirname, '../ui'),
-          // 'quasar-ui-json-api-viewer': path.resolve(__dirname, '../../json-api-viewer/ui/src')
           examples: path.resolve(__dirname, './src/examples')
         })
 
@@ -103,16 +101,6 @@ module.exports = configure(function (ctx) {
 
         rule.use('md-loader')
           .loader(require.resolve('./build/md-loader.js'))
-
-        // rule.use('ware-loader')
-        //   .loader('ware-loader')
-        //   .options({
-        //     raw: true,
-        //     middleware: function (source) {
-        //       const rendered = renderMarkdown(source)
-        //       return `${rendered}`
-        //     }
-        //   })
       }
     },
 
@@ -126,7 +114,11 @@ module.exports = configure(function (ctx) {
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
     framework: {
       config: {
-        dark: 'auto'
+        dark: 'auto',
+        loadingBar: {
+          color: 'red',
+          position: 'top'
+        }
       },
 
       // iconSet: 'material-icons', // Quasar icon set
@@ -143,6 +135,7 @@ module.exports = configure(function (ctx) {
       plugins: [
         'Dark',
         'Dialog',
+        'LoadingBar',
         'Meta',
         'Notify',
         'Platform',
