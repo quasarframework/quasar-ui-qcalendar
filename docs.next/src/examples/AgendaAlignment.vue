@@ -8,10 +8,7 @@
       @next="onNext"
     />
 
-    <div
-      class="button-bar"
-      style="margin: 12px;"
-    >
+    <div class="q-ma-sm row justify-center">
       <q-select
         v-model="dateHeader"
         label="date-header"
@@ -59,30 +56,32 @@
 
     </div>
 
-    <div style="display: flex; max-width: 800px; width: 100%; height: 200px;">
-      <q-calendar-agenda
-        ref="calendar"
-        v-model="selectedDate"
-        view="week"
-        short-weekday-label
-        :date-header="dateHeader"
-        :weekday-align="weekdayAlign"
-        :date-align="dateAlign"
-        :left-column-options="leftColumnOptions"
-        :right-column-options="rightColumnOptions"
-        column-options-id="id"
-        column-options-label="label"
-        :day-min-height="200"
-        bordered
-        animated
-        @change="onChange"
-        @moved="onMoved"
-        @click-date="onClickDate"
-        @click-time="onClickTime"
-        @click-interval="onClickInterval"
-        @click-head-intervals="onClickHeadIntervals"
-        @click-head-day="onClickHeadDay"
-      />
+    <div class="row justify-center">
+      <div style="display: flex; max-width: 800px; width: 100%; height: 200px;">
+        <q-calendar-agenda
+          ref="calendar"
+          v-model="selectedDate"
+          view="week"
+          short-weekday-label
+          :date-header="dateHeader"
+          :weekday-align="weekdayAlign"
+          :date-align="dateAlign"
+          :left-column-options="leftColumnOptions"
+          :right-column-options="rightColumnOptions"
+          column-options-id="id"
+          column-options-label="label"
+          :day-min-height="200"
+          bordered
+          animated
+          @change="onChange"
+          @moved="onMoved"
+          @click-date="onClickDate"
+          @click-time="onClickTime"
+          @click-interval="onClickInterval"
+          @click-head-intervals="onClickHeadIntervals"
+          @click-head-day="onClickHeadDay"
+        />
+      </div>
     </div>
   </div>
 </template>

@@ -21,24 +21,26 @@
       />
     </div>
 
-    <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
-      <q-calendar-day
-        ref="calendar"
-        v-model="selectedDate"
-        :locale="locale"
-        bordered
-        animated
-        :interval-minutes="15"
-        :interval-count="96"
-        :interval-height="10"
-        @change="onChange"
-        @moved="onMoved"
-        @click-date="onClickDate"
-        @click-time="onClickTime"
-        @click-interval="onClickInterval"
-        @click-head-intervals="onClickHeadIntervals"
-        @click-head-day="onClickHeadDay"
-      />
+    <div class="row justify-center">
+      <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
+        <q-calendar-day
+          ref="calendar"
+          v-model="selectedDate"
+          :locale="locale"
+          bordered
+          animated
+          :interval-minutes="15"
+          :interval-count="96"
+          :interval-height="10"
+          @change="onChange"
+          @moved="onMoved"
+          @click-date="onClickDate"
+          @click-time="onClickTime"
+          @click-interval="onClickInterval"
+          @click-head-intervals="onClickHeadIntervals"
+          @click-head-day="onClickHeadDay"
+        />
+      </div>
     </div>
   </div>
 </template>

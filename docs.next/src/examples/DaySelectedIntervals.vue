@@ -8,25 +8,27 @@
       @next="onNext"
     />
 
-    <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
-      <q-calendar-day
-        ref="calendar"
-        v-model="selectedDate"
-        :interval-minutes="15"
-        :interval-count="96"
-        :interval-height="15"
-        time-clicks-clamped
-        :selected-dates="selectedDates"
-        animated
-        bordered
-        @click-time="onToggleTime"
-        @change="onChange"
-        @moved="onMoved"
-        @click-date="onClickDate"
-        @click-interval="onClickInterval"
-        @click-head-intervals="onClickHeadIntervals"
-        @click-head-day="onClickHeadDay"
-      />
+    <div class="row justify-center">
+      <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
+        <q-calendar-day
+          ref="calendar"
+          v-model="selectedDate"
+          :interval-minutes="15"
+          :interval-count="96"
+          :interval-height="15"
+          time-clicks-clamped
+          :selected-dates="selectedDates"
+          animated
+          bordered
+          @click-time="onToggleTime"
+          @change="onChange"
+          @moved="onMoved"
+          @click-date="onClickDate"
+          @click-interval="onClickInterval"
+          @click-head-intervals="onClickHeadIntervals"
+          @click-head-day="onClickHeadDay"
+        />
+      </div>
     </div>
   </div>
 </template>

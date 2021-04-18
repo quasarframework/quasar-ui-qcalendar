@@ -6,30 +6,32 @@
       @next="onNext"
     />
 
-    <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
-      <q-calendar-day
-        ref="calendar"
-        v-model="selectedDate"
-        animated
-        bordered
-        @change="onChange"
-        @moved="onMoved"
-        @click-date="onClickDate"
-        @click-time="onClickTime"
-        @click-interval="onClickInterval"
-        @click-head-intervals="onClickHeadIntervals"
-        @click-head-day="onClickHeadDay"
-      >
-        <template #head-day-event="{ scope }">
-          <div style="display: flex; justify-content: space-evenly;">
-            <span>{{ scope.timestamp.date }}</span>
-            <span>{{ scope.timestamp.date }}</span>
-            <span>{{ scope.timestamp.date }}</span>
-            <span>{{ scope.timestamp.date }}</span>
-            <span>{{ scope.timestamp.date }}</span>
-          </div>
-        </template>
-      </q-calendar-day>
+    <div class="row justify-center">
+      <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
+        <q-calendar-day
+          ref="calendar"
+          v-model="selectedDate"
+          animated
+          bordered
+          @change="onChange"
+          @moved="onMoved"
+          @click-date="onClickDate"
+          @click-time="onClickTime"
+          @click-interval="onClickInterval"
+          @click-head-intervals="onClickHeadIntervals"
+          @click-head-day="onClickHeadDay"
+        >
+          <template #head-day-event="{ scope }">
+            <div style="display: flex; justify-content: space-evenly;">
+              <span>{{ scope.timestamp.date }}</span>
+              <span>{{ scope.timestamp.date }}</span>
+              <span>{{ scope.timestamp.date }}</span>
+              <span>{{ scope.timestamp.date }}</span>
+              <span>{{ scope.timestamp.date }}</span>
+            </div>
+          </template>
+        </q-calendar-day>
+      </div>
     </div>
   </div>
 </template>

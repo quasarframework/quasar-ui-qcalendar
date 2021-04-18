@@ -8,28 +8,29 @@
       @next="onNext"
     />
 
-    {{ selectedDate }}
-
-    <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
-      <q-calendar-day
-        ref="calendar"
-        v-model="selectedDate"
-        view="day"
-        :column-count="4"
-        bordered
-        animated
-        @change="onChange"
-        @moved="onMoved"
-        @click-date="onClickDate"
-        @click-time="onClickTime"
-        @click-interval="onClickInterval"
-        @click-head-intervals="onClickHeadIntervals"
-        @click-head-day="onClickHeadDay"
-      >
-        <template #head-day="{ scope }">
-          <div style="text-align: center;">{{ persons[ scope.columnIndex ].name }}</div>
-        </template>
-      </q-calendar-day>
+    <div class="row justify-center">
+      {{ selectedDate }}
+      <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
+        <q-calendar-day
+          ref="calendar"
+          v-model="selectedDate"
+          view="day"
+          :column-count="4"
+          bordered
+          animated
+          @change="onChange"
+          @moved="onMoved"
+          @click-date="onClickDate"
+          @click-time="onClickTime"
+          @click-interval="onClickInterval"
+          @click-head-intervals="onClickHeadIntervals"
+          @click-head-day="onClickHeadDay"
+        >
+          <template #head-day="{ scope }">
+            <div style="text-align: center;">{{ persons[ scope.columnIndex ].name }}</div>
+          </template>
+        </q-calendar-day>
+      </div>
     </div>
   </div>
 </template>

@@ -5,10 +5,7 @@
       @prev="onPrev"
       @next="onNext"
     />
-    <div
-      class="button-bar"
-      style="margin: 12px;"
-    >
+    <div class="q-ma-sm row justify-center">
       <q-select
         v-model="dateHeader"
         label="date-header"

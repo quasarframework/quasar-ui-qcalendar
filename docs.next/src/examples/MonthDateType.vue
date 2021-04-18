@@ -6,7 +6,7 @@
       @next="onNext"
     />
 
-    <div class="q-ma-sm flex justify-center">
+    <div class="q-ma-sm row justify-center">
       <q-radio
         v-model="dateType"
         val="round"

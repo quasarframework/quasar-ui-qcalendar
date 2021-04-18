@@ -6,27 +6,29 @@
       @next="onNext"
     />
 
-    <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
-      <q-calendar-day
-        ref="calendar"
-        v-model="selectedDate"
-        view="day"
-        animated
-        bordered
-        transition-next="slide-left"
-        transition-prev="slide-right"
-        @change="onChange"
-        @moved="onMoved"
-        @click-date="onClickDate"
-        @click-time="onClickTime"
-        @click-interval="onClickInterval"
-        @click-head-intervals="onClickHeadIntervals"
-        @click-head-day="onClickHeadDay"
-      >
-        <template #head-day="{ scope: { timestamp }}">
-          {{ getHeadDay(timestamp) }}
-        </template>
-      </q-calendar-day>
+    <div class="row justify-center">
+      <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
+        <q-calendar-day
+          ref="calendar"
+          v-model="selectedDate"
+          view="day"
+          animated
+          bordered
+          transition-next="slide-left"
+          transition-prev="slide-right"
+          @change="onChange"
+          @moved="onMoved"
+          @click-date="onClickDate"
+          @click-time="onClickTime"
+          @click-interval="onClickInterval"
+          @click-head-intervals="onClickHeadIntervals"
+          @click-head-day="onClickHeadDay"
+        >
+          <template #head-day="{ scope: { timestamp }}">
+            {{ getHeadDay(timestamp) }}
+          </template>
+        </q-calendar-day>
+      </div>
     </div>
   </div>
 </template>
