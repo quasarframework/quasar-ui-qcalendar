@@ -275,7 +275,7 @@ export default defineComponent({
     const computedWidth = computed(() => {
       if (rootRef.value) {
         const width = size.width || rootRef.value.getBoundingClientRect().width
-        if (width && intervalsWidth.value && borderWidth.value && parsedColumnCount.value) {
+        if (width && intervalsWidth.value && parsedColumnCount.value) {
           return (
             (width - scrollWidth.value - intervalsWidth.value) / parsedColumnCount.value
           ) + 'px'
@@ -287,7 +287,7 @@ export default defineComponent({
     watch([days], checkChange, { deep: true, immediate: true })
 
     watch(() => props.modelValue, (val, oldVal) => {
-      if (emittedValue.value !== val) {
+      if (emittedValue.value !== props.modelValue) {
         if (props.animated === true) {
           const v1 = getDayIdentifier(parsed(val))
           const v2 = getDayIdentifier(parsed(oldVal))
