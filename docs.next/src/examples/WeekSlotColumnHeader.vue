@@ -6,37 +6,39 @@
       @next="onNext"
     />
 
-    <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
-      <q-calendar-day
-        ref="calendar"
-        v-model="selectedDate"
-        view="week"
-        column-header-before
-        column-header-after
-        bordered
-        animated
-        transition-next="slide-left"
-        transition-prev="slide-right"
-        @change="onChange"
-        @moved="onMoved"
-        @click-date="onClickDate"
-        @click-time="onClickTime"
-        @click-interval="onClickInterval"
-        @click-head-intervals="onClickHeadIntervals"
-        @click-head-day="onClickHeadDay"
-      >
-        <template #column-header-before="{ /* timestamp, index */ }">
-          <div style="margin: 2px;">
-            column-header-before slot
-          </div>
-        </template>
+    <div class="row justify-center">
+      <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
+        <q-calendar-day
+          ref="calendar"
+          v-model="selectedDate"
+          view="week"
+          column-header-before
+          column-header-after
+          bordered
+          animated
+          transition-next="slide-left"
+          transition-prev="slide-right"
+          @change="onChange"
+          @moved="onMoved"
+          @click-date="onClickDate"
+          @click-time="onClickTime"
+          @click-interval="onClickInterval"
+          @click-head-intervals="onClickHeadIntervals"
+          @click-head-day="onClickHeadDay"
+        >
+          <template #column-header-before="{ /* timestamp, index */ }">
+            <div style="margin: 2px;">
+              column-header-before slot
+            </div>
+          </template>
 
-        <template #column-header-after="{ /* timestamp, index */ }">
-          <div style="margin: 2px;">
-            column-header-after slot
-          </div>
-        </template>
-      </q-calendar-day>
+          <template #column-header-after="{ /* timestamp, index */ }">
+            <div style="margin: 2px;">
+              column-header-after slot
+            </div>
+          </template>
+        </q-calendar-day>
+      </div>
     </div>
   </div>
 </template>

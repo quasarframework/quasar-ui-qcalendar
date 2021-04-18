@@ -6,27 +6,29 @@
       @next="onNext"
     />
 
-    <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
-      <q-calendar-day
-        ref="calendar"
-        v-model="selectedDate"
-        view="week"
-        animated
-        bordered
-        @change="onChange"
-        @moved="onMoved"
-        @click-date="onClickDate"
-        @click-time="onClickTime"
-        @click-interval="onClickInterval"
-        @click-head-intervals="onClickHeadIntervals"
-        @click-head-day="onClickHeadDay"
-      >
-        <template #head-intervals="{ scope }">
-          <div style="display: flex; justify-content: center; flex-direction: column; width: 100%; font-size: 10px; font-weight: 700;">
-            <span>Showing: {{ scope.days.length }} days</span>
-          </div>
-        </template>
-      </q-calendar-day>
+    <div class="row justify-center">
+      <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
+        <q-calendar-day
+          ref="calendar"
+          v-model="selectedDate"
+          view="week"
+          animated
+          bordered
+          @change="onChange"
+          @moved="onMoved"
+          @click-date="onClickDate"
+          @click-time="onClickTime"
+          @click-interval="onClickInterval"
+          @click-head-intervals="onClickHeadIntervals"
+          @click-head-day="onClickHeadDay"
+        >
+          <template #head-intervals="{ scope }">
+            <div style="display: flex; justify-content: center; flex-direction: column; width: 100%; font-size: 10px; font-weight: 700;">
+              <span>Showing: {{ scope.days.length }} days</span>
+            </div>
+          </template>
+        </q-calendar-day>
+      </div>
     </div>
   </div>
 </template>

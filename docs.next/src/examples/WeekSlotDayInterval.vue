@@ -6,29 +6,31 @@
       @next="onNext"
     />
 
-    <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
-      <q-calendar-day
-        ref="calendar"
-        v-model="selectedDate"
-        view="week"
-        bordered
-        animated
-        transition-next="slide-left"
-        transition-prev="slide-right"
-        @change="onChange"
-        @moved="onMoved"
-        @click-date="onClickDate"
-        @click-time="onClickTime"
-        @click-interval="onClickInterval"
-        @click-head-intervals="onClickHeadIntervals"
-        @click-head-day="onClickHeadDay"
-      >
-        <template #day-interval="{ scope }">
-          <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; font-size: 10px;">
-            {{ getData(scope) }}
-          </div>
-        </template>
-      </q-calendar-day>
+    <div class="row justify-center">
+      <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
+        <q-calendar-day
+          ref="calendar"
+          v-model="selectedDate"
+          view="week"
+          bordered
+          animated
+          transition-next="slide-left"
+          transition-prev="slide-right"
+          @change="onChange"
+          @moved="onMoved"
+          @click-date="onClickDate"
+          @click-time="onClickTime"
+          @click-interval="onClickInterval"
+          @click-head-intervals="onClickHeadIntervals"
+          @click-head-day="onClickHeadDay"
+        >
+          <template #day-interval="{ scope }">
+            <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; font-size: 10px;">
+              {{ getData(scope) }}
+            </div>
+          </template>
+        </q-calendar-day>
+      </div>
     </div>
   </div>
 </template>
