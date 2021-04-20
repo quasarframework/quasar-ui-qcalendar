@@ -21,9 +21,11 @@
       />
     </div>
 
-    <div class="row justify-center">
+    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
       <div style="font-size: 2em;">{{ formattedMonth }}</div>
+    </div>
 
+    <div class="row justify-center">
       <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
         <q-calendar-month
           ref="calendar"
@@ -273,7 +275,7 @@ export default defineComponent({
 
     const formattedMonth = computed(() => {
       const date = new Date(selectedDate.value)
-      return monthFormatter().format(date)
+      return monthFormatter().format(date) + ' ' + date.getFullYear()
     })
 
     function monthFormatter () {
