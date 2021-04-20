@@ -9,6 +9,10 @@ related:
   - /contributing/sponsor
 ---
 
+::: warning
+Please note that the codepen links, in the documentation examples, do not work at this time.
+:::
+
 > If you are looking for a **Migration Guide** from v3 to v4, go [here](/help/migration-guide) in the **Help** section.
 ## Everything you need for a complete Calendar solution
 
