@@ -291,7 +291,12 @@ export default defineComponent({
       borderType = ref('')
 
     function showBox (name, value) {
-      return value.match(/^(#|(rgb|hsl)a?\()/) && (name.indexOf('color') > -1 || name.indexOf('background') > -1 || name.indexOf('border') > -1)
+      return value.match(/^(#|(rgb|hsl)a?\()/)
+        && (name.indexOf('color') > -1
+          || name.indexOf('background') > -1
+          || name.indexOf('border') > -1
+          || name.indexOf('scrollbar') > -1
+        )
     }
 
     function getStyle (name, value) {

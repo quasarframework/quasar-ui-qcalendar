@@ -17,8 +17,6 @@ export function provideThemeBuilderStore () {
 
       '--calendar-border-current': '#027BE3 2px solid',
       '--calendar-border-current-dark': '#ffff66 2px solid',
-      '--calendar-border-droppable': '#027BE3 1px dashed',
-      '--calendar-border-droppable-dark': '#ffff66 1px dashed',
 
       '--calendar-mini-range-connector-hover-border': '#027BE3 1px dashed',
       '--calendar-mini-range-connector-hover-border-dark': '#ffff66 1px dashed',
@@ -89,6 +87,13 @@ export function provideThemeBuilderStore () {
       '--calendar-mini-range-firstlast-label-background': '#027BE3',
       '--calendar-mini-range-firstlast-label-background-dark': '#ffff66',
 
+      '--calendar-scrollbar-track': '#eeeeee',
+      '--calendar-scrollbar-thumb': '#888888',
+      '--calendar-scrollbar-thumb-hover': '#555555',
+      '--calendar-scrollbar-track-dark': '#eeeeee',
+      '--calendar-scrollbar-thumb-dark': '#888888',
+      '--calendar-scrollbar-thumb-hover-dark': '#555555',
+
       '--calendar-intervals-width': '56px',
       '--calendar-work-week-width': '30px',
       '--calendar-mini-work-week-width': '30px',
@@ -103,8 +108,6 @@ export function provideThemeBuilderStore () {
 
       '--calendar-border-current': 'The border used for `current day`',
       '--calendar-border-current-dark': '[DARK] The border used for `current day`',
-      '--calendar-border-droppable': 'The border to be used for a `drop event`',
-      '--calendar-border-droppable-dark': '[DARK] The border to be used for a `drop event`',
 
       '--calendar-mini-range-connector-hover-border': 'The border to use beween the two selection days when `hover` property is used. Applicable for `month` calendar with property `mini-mode`',
       '--calendar-mini-range-connector-hover-border-dark': '[DARK] The border to use beween the two selection days when `hover` property is used. Applicable for `month` calendar with property `mini-mode`',
@@ -174,6 +177,13 @@ export function provideThemeBuilderStore () {
       '--calendar-mini-range-firstlast-label-color-dark': '[DARK] The label text color of the first and last selected days for `monthly mini-mode`',
       '--calendar-mini-range-firstlast-label-background': 'The label background color of the first and last selected days for `monthly mini-mode`',
       '--calendar-mini-range-firstlast-label-background-dark': '[DARK] The label background color of the first and last selected days for `monthly mini-mode`',
+
+      '--calendar-scrollbar-track': 'The color of the scroll track',
+      '--calendar-scrollbar-thumb': 'The color of the scroll thumb',
+      '--calendar-scrollbar-thumb-hover': 'The color of the scroll thumb when hovering',
+      '--calendar-scrollbar-track-dark': '[DARK] The color of the scroll track',
+      '--calendar-scrollbar-thumb-dark': '[DARK] The color of the scroll thumb',
+      '--calendar-scrollbar-thumb-hover-dark': '[DARK] The color of the scroll thumb when hovering',
 
       '--calendar-intervals-width': 'The intervals width. Use only `px` unit',
       '--calendar-work-week-width': 'The work week width. Use only `px` unit',

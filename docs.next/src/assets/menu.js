@@ -669,8 +669,8 @@ const menu = [
         path: 'themes'
       },
       {
-        name: 'QCalendar SASS Variables',
-        path: 'qcalendar-sass-variables'
+        name: 'QCalendar CSS Variables',
+        path: 'qcalendar-css-variables'
       },
       {
         name: 'Theme builder',

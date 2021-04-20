@@ -370,7 +370,33 @@
         </div>
       </q-timeline-entry>
 
+      <q-timeline-entry
+        title="Interactive Theme Builder"
+        subtitle="Create your own themes with Theme Builder"
+        side="left"
+        color="orange-8"
+      >
+        <div>
+          <q-intersection
+            transition="scale"
+            once
+          >
+            <q-img
+              src="\theme-builder.png"
+              spinner-color="white"
+              style="max-width: 350px"
+              class="shadow-12"
+            />
+          </q-intersection>
+        </div>
+      </q-timeline-entry>
     </q-timeline>
+
+    <div class="full-width column justify-center items-center">
+      <p>No dependencies other than Vue</p>
+      <p>Available for Quasar Framework CLI, Vue CLI and UMD</p>
+    </div>
+
   </div>
 </template>
 
