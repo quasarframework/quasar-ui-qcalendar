@@ -809,11 +809,10 @@
         "month"
       ]
     },
-    "hide-outside-days": {
-      "addedIn": "v2.2.0",
+    "no-outside-days": {
       "type": "Boolean",
       "category": "behavior",
-      "desc": "Hide the labels of outside days",
+      "desc": "Do not display the labels of outside days",
       "applicable": [
         "month"
       ]
