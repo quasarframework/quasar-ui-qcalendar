@@ -105,10 +105,10 @@
       locale="en-US"
       style="height: 400px;"
       :style="styles"
-      @click:time2="onToggleTime"
-      @mousedown:time2="onMouseDownTime"
-      @mouseup:time2="onMouseUpTime"
-      @mousemove:time2="onMouseMoveTime"
+      @click-time="onToggleTime"
+      @mousedown-time="onMouseDownTime"
+      @mouseup-time="onMouseUpTime"
+      @mousemove-time="onMouseMoveTime"
     />
   </div>
 </template>
@@ -121,7 +121,8 @@ import '@quasar/quasar-ui-qcalendar/src/QCalendarDay.sass'
 
 import {
   getDayTimeIdentifier,
-  getDateTime
+  getDateTime,
+  copyTimestamp
 } from '@quasar/quasar-ui-qcalendar/src/Timestamp.js'
 
 function leftClick (e) {
@@ -251,8 +252,11 @@ export default {
         return
       }
 
+      // make a copy of the timestamp
+      const ts = copyTimestamp(scope.timestamp)
+
       // get date with time
-      const t = getDateTime(scope.timestamp)
+      const t = getDateTime(ts)
 
       // toggle to/from array
       if (this.selectedDates.includes(t)) {

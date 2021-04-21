@@ -1,7 +1,7 @@
 <template>
   <div class="subcontent">
 
-    <div style="display: flex; width: 100%; height: 220px;">
+    <div style="display: flex; width: 100%; height: auto;">
       <q-calendar-task
         ref="calendar"
         v-model="selectedDate"

@@ -97,6 +97,7 @@
               v-model="calendar"
               vertical
               dense
+              :class="{ 'q-dark': $q.dark.isActive, 'bg-white text-primary': !$q.dark.isActive }"
             >
               <q-tab
                 name="day"

@@ -17,9 +17,9 @@
         label="Disabled weekends"
       />
       <q-checkbox
-        v-model="hideOutside"
+        v-model="noOutsideDays"
         dense
-        label="Hide outside days"
+        label="No outside days"
       />
       <q-checkbox
         v-model="showWorkweeks"
@@ -59,15 +59,15 @@
         :selected-start-end-dates="startEndDates"
         :selected-dates="selectedDates"
         :disabled-weekdays="disabledWeekdays"
-        :hide-outside-days="hideOutside"
+        :no-outside-days="noOutsideDays"
         :show-work-weeks="showWorkweeks"
         :day-min-height="70"
         :style="styles"
-        @click:day2="onToggleDay"
-        @click:date2="onToggleDate"
-        @mousedown:day2="onMouseDownDay"
-        @mouseup:day2="onMouseUpDay"
-        @mousemove:day2="onMouseMoveDay"
+        @click-day="onToggleDay"
+        @click-date="onToggleDate"
+        @mousedown-day="onMouseDownDay"
+        @mouseup-day="onMouseUpDay"
+        @mousemove-day="onMouseMoveDay"
       />
     </div>
   </div>
@@ -107,7 +107,7 @@ export default {
       noActiveDate: false,
       selectionType: 'off',
       disabledDays: false,
-      hideOutside: false,
+      noOutsideDays: false,
       showWorkweeks: false
     }
   },
