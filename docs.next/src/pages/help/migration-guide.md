@@ -4,17 +4,17 @@ desc: Migrate from v3 to v4
 keys: Help
 ---
 
-The information below can help you migrate from QCalendar v3.x to QCalendar v4.0.0 (beta).
+The information below can help you migrate from QCalendar v3.x to QCalendar v4.0.0 (alpha).
 
 > QCalendar 4.x+ only works with a Vue 3 instance. If you are still using Vue 2, use the [QCalendar v3 branch]() (TODO: not created yet).
 
 > The information below is by no means an exhaustive list of changes and new functionality. If you see something that has been missed, please PR or let us know.
-## QCalendar v4.0.0 Beta 1
-Welcome to the QCalendar v4.0.0 Beta release.
+## QCalendar v4.0.0 Alpha
+Welcome to the QCalendar v4.0.0 Alpha release.
 
 With this update comes a lot of changes, with over 90% of QCalendar being rewritten. Please read below to understand these changes and how they will affect you for upgrading.
 
-> Until the final stable version is released, some aspects of the calendar may change. We're not planning for additional breaking changes, but unforeseen reported issues may require us to do breaking changes (unlikely, but keep this in mind). So please make sure that you read each v4 beta version's release notes carefully before upgrading.
+> Until the final stable version is released, some aspects of the calendar may change. We're not planning for additional breaking changes, but unforeseen reported issues may require us to do breaking changes (unlikely, but keep this in mind). So please make sure that you read each v4 alpha/beta version's release notes carefully before upgrading.
 
 ## QCalendar Rewritten to use Vue v3 Composition API
 This means you get better in-editor auto-completion support amongst many other advantages.
