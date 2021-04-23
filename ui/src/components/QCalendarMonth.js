@@ -766,8 +766,8 @@ export default defineComponent({
       }
 
       const dayLabel = dayFormatter.value(day, false)
-      const dayLabelSlot = slots[ 'day-label' ]
-      const dayBtnSlot = slots[ 'day-button' ]
+      const dayLabelSlot = slots[ 'head-day-label' ]
+      const dayBtnSlot = slots[ 'head-day-button' ]
 
       const selectedDate = (
         props.selectedDates
