@@ -2056,5 +2056,38 @@
     }
   },
   "slots": {
+    "day": {
+      "desc": "For rendering associated Task information on that day",
+      "scope": {
+        "data": {
+          "desc": "The bundled data",
+          "type": "Object",
+          "definition": {
+            "scope": {
+              "desc": "The scope object",
+              "type": "Object",
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "Timestamp object",
+                  "__exemption": [ "examples" ]
+                },
+                "task": {
+                  "desc": "the Task associated with this row",
+                  "type": "Object",
+                  "__exemption": [ "examples" ]
+                },
+                "index": {
+                  "desc": "The task index",
+                  "type": "Number",
+                  "__exemption": [ "examples" ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
