@@ -391,7 +391,7 @@ export default defineComponent({
 
       const scope = {
         days: days.value,
-        resource: props.resources
+        resources: props.resources
       }
 
       const style = {
@@ -499,9 +499,14 @@ export default defineComponent({
       const headDateSlot = slots[ 'head-date' ]
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
-      const scope = getScopeForSlot(day, columnIndex)
-      scope.activeDate = activeDate
-      scope.droppable = dragOverHeadDayRef.value === day.date
+      const scope = {
+        timestamp: day,
+        activeDate,
+        droppable: dragOverHeadDayRef.value === day.date
+      }
+      if (columnIndex !== undefined) {
+        scope.columnIndex = columnIndex
+      }
 
       const width = isSticky.value === true ? props.cellWidth : computedWidth.value
       const styler = props.weekdayStyle || dayStyleDefault
@@ -643,8 +648,16 @@ export default defineComponent({
     function __renderHeadDayEvent (day, columnIndex) {
       const headDayEventSlot = slots[ 'head-day-event' ]
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
-      const scope = getScopeForSlot(day, columnIndex)
-      scope.activeDate = activeDate
+
+      const scope = {
+        timestamp: day,
+        activeDate,
+        droppable: dragOverHeadDayRef.value === day.date
+      }
+      if (columnIndex !== undefined) {
+        scope.columnIndex = columnIndex
+      }
+
       const width = isSticky.value === true ? props.cellWidth : computedWidth.value
       const style = {
         width,
