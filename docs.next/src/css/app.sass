@@ -68,6 +68,15 @@ p
   margin-top: 8px !important
   margin-bottom: 8px !important
 
+@supports (backdrop-filter: none)
+  .glass
+    background-color: rgba(25,118,210,.65)
+    backdrop-filter: blur(7px)
+
+@supports not (backdrop-filter: none)
+  .glass
+    background-color: $primary
+
 .page
   position: relative
   display: flex
