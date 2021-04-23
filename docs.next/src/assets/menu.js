@@ -590,8 +590,12 @@ const menu = [
             path: 'task-getting-started'
           },
           {
-            name: 'Task - Timesheet',
-            path: 'task-timesheet'
+            name: 'Task - week',
+            path: 'task-week'
+          },
+          {
+            name: 'Task - month',
+            path: 'task-month'
           },
           {
             name: 'Task - Alignment',
