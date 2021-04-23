@@ -35,7 +35,6 @@
       ]
     },
     "date-type": {
-      "addedIn": "v4.0.0",
       "type": "String",
       "category": ["style"],
       "desc": "Shows the current date button as either a circle or a square",
@@ -46,7 +45,6 @@
       ]
     },
     "weekday-align": {
-      "addedIn": "v4.0.0",
       "type": "String",
       "category": ["style"],
       "desc": "Determines the weekday (ie: Sunday, Monday, etc) alignment",
@@ -57,7 +55,6 @@
       ]
     },
     "date-align": {
-      "addedIn": "v4.0.0",
       "type": "String",
       "category": ["style"],
       "desc": "Determines the date (ie: 2, 3, etc) alignment",
@@ -68,7 +65,6 @@
       ]
     },
     "date-header": {
-      "addedIn": "v4.0.0",
       "type": "String",
       "category": ["style"],
       "desc": "Determines how the date header will be displayed",
@@ -109,7 +105,6 @@
       "desc": "Do not display the date button in the header"
     },
     "min-weekday-length": {
-      "addedIn": "v4.0.0",
       "type": ["Number", "String"],
       "category": "behavior",
       "desc": "The minimal number of weekday characters when truncation occurs",
@@ -119,7 +114,6 @@
       ]
     },
     "weekday-breakpoints": {
-      "addedIn": "v4.0.0",
       "type": "Array",
       "tsType": "NumberArray",
       "category": "behavior",
@@ -165,7 +159,6 @@
       ]
     },
     "drag-enter-func": {
-      "addedIn": "v4.0.0",
       "type": "Function",
       "category": "behavior",
       "desc": "The function to handle dragenter events",
@@ -310,7 +303,6 @@
       ]
     },
     "drag-leave-func": {
-      "addedIn": "v4.0.0",
       "type": "Function",
       "category": "behavior",
       "desc": "The function to handle dragleave events",
@@ -474,19 +466,16 @@
       ]
     },
     "hoverable": {
-      "addedIn": "v4.0.0",
       "type": "Boolean",
       "category": "behavior",
       "desc": "Allows certain cells within the calendar to be hovered"
     },
     "focusable": {
-      "addedIn": "v4.0.0",
       "type": "Boolean",
       "category": "behavior",
       "desc": "Allows certain cells within the calendar to receive focus"
     },
     "focus-type": {
-      "addedIn": "v4.0.0",
       "type": "Array",
       "tsType": "StringArray",
       "category": "behavior",
@@ -498,7 +487,6 @@
       ]
     },
     "weekday-style": {
-      "addedIn": "v4.0.0",
       "type": "Function",
       "category": "style",
       "desc": "Gets called to provide custom styling of a weekday",
@@ -550,7 +538,6 @@
       ]
     },
     "weekday-class": {
-      "addedIn": "v4.0.0",
       "type": "Function",
       "category": "style",
       "desc": "Gets called to provide custom styling (via classes) of a weekday",
@@ -612,7 +599,6 @@
       ]
     },
     "day-min-height": {
-      "addedIn": "v4.0.0",
       "type": ["Number", "String"],
       "category": "behavior",
       "desc": "The minimum height to be used",
@@ -632,7 +618,6 @@
       ]
     },
     "cell-width": {
-      "addedIn": "v4.0.0",
       "type": "String",
       "category": "behavior",
       "desc": "Sets day cell width and turns on sticky mode. Width must be css measurement",
@@ -641,7 +626,6 @@
       ]
     },
     "use-navigation": {
-      "addedIn": "v4.0.0",
       "type": "Boolean",
       "desc": "Allows keyboard navigation",
       "category": "behavior"
@@ -1986,73 +1970,12 @@
       "__exemption": [ "examples" ]
     },
     "moveToToday": {
-      "desc": "Emits `today's date` to v-model",
+      "desc": "Emits today's date to v-model",
       "__exemption": [ "examples" ]
     },
     "updateCurrent": {
       "desc": "Update various values to be consistent with current date",
       "__exemption": [ "examples" ]
-    },
-    "timeStartPos": {
-      "desc": "Calculates the starting y position of the passed in time",
-      "__exemption": [ "examples" ],
-      "params": {
-        "time": {
-          "type": "String",
-          "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-          "examples": [
-            "09:00"
-          ]
-        },
-        "clamp": {
-          "type": "Boolean",
-          "desc": "Clamp negative values to 0",
-          "default": "true"
-        }
-      },
-      "returns": {
-        "type": "Number",
-        "desc": "The absolute y starting position, but `false` on invalid time parameter",
-        "examples": [
-          "120",
-          "482"
-        ]
-      }
-    },
-    "timeDurationHeight": {
-      "__exemption": [ "examples" ],
-      "desc": "Given a duration (in minutes), will return the css height value",
-      "params": {
-        "duration": {
-          "type": ["Number", "String"],
-          "desc": "The number of minutes for the event to calculate it's height",
-          "examples": [
-            "300",
-            "900"
-          ]
-        }
-      },
-      "returns": {
-        "type": "Number",
-        "desc": "The height (in pixels) to be used for the event",
-        "examples": [
-          "80",
-          "120"
-        ]
-      }
-    },
-    "scrollToTime": {
-      "__exemption": [ "examples" ],
-      "desc": "When on an interval view, scroll to the passed in time (y position)",
-      "params": {
-        "time": {
-          "type": "String",
-          "desc": "The time in which to scoll to. If the time is already visible on the viewport, this function will have no affect.",
-          "examples": [
-            "09:00"
-          ]
-        }
-      }
     }
   },
   "slots": {
@@ -2081,6 +2004,274 @@
                 "index": {
                   "desc": "The task index",
                   "type": "Number",
+                  "__exemption": [ "examples" ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "task": {
+      "desc": "The slot associated with the task",
+      "scope": {
+        "data": {
+          "desc": "The bundled data",
+          "type": "Object",
+          "definition": {
+            "scope": {
+              "desc": "The scope object",
+              "type": "Object",
+              "definition": {
+                "start": {
+                  "type": "Object",
+                  "desc": "A timestamp object of the starting date",
+                  "__exemption": [ "examples" ]
+                },
+                "end": {
+                  "type": "Object",
+                  "desc": "A timestamp object of the ending date",
+                  "__exemption": [ "examples" ]
+                },
+                "task": {
+                  "desc": "the Task associated with this row",
+                  "type": "Object",
+                  "__exemption": [ "examples" ]
+                },
+                "index": {
+                  "desc": "The task index",
+                  "type": "Number",
+                  "__exemption": [ "examples" ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "head-task": {
+      "desc": "The slot associated with task header",
+      "scope": {
+        "data": {
+          "desc": "The bundled data",
+          "type": "Object",
+          "definition": {
+            "scope": {
+              "desc": "The scope object",
+              "type": "Object",
+              "definition": {
+                "start": {
+                  "type": "Object",
+                  "desc": "A timestamp object of the starting date",
+                  "__exemption": [ "examples" ]
+                },
+                "end": {
+                  "type": "Object",
+                  "desc": "A timestamp object of the ending date",
+                  "__exemption": [ "examples" ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "footer-task": {
+      "desc": "The slot associated with task footer",
+      "scope": {
+        "data": {
+          "desc": "The bundled data",
+          "type": "Object",
+          "definition": {
+            "scope": {
+              "desc": "The scope object",
+              "type": "Object",
+              "definition": {
+                "start": {
+                  "type": "Object",
+                  "desc": "A timestamp object of the starting date",
+                  "__exemption": [ "examples" ]
+                },
+                "end": {
+                  "type": "Object",
+                  "desc": "A timestamp object of the ending date",
+                  "__exemption": [ "examples" ]
+                },
+                "tasks": {
+                  "desc": "the array of all Tasks",
+                  "type": "Array",
+                  "__exemption": [ "examples" ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "footer-day": {
+      "desc": "The slot associated with task footer for a particular day",
+      "scope": {
+        "data": {
+          "desc": "The bundled data",
+          "type": "Object",
+          "definition": {
+            "scope": {
+              "desc": "The scope object",
+              "type": "Object",
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "desc": "A timestamp object of the day",
+                  "__exemption": [ "examples" ]
+                },
+                "tasks": {
+                  "desc": "the array of all Tasks",
+                  "type": "Array",
+                  "__exemption": [ "examples" ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "head-weekday-label": {
+      "desc": "The slot associated with the header weekday label",
+      "scope": {
+        "data": {
+          "desc": "The bundled data",
+          "type": "Object",
+          "definition": {
+            "scope": {
+              "desc": "The scope object",
+              "type": "Object",
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "desc": "A timestamp object of the day",
+                  "__exemption": [ "examples" ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "head-day-label": {
+      "desc": "The slot associated with the day label. Replaces the label of the button",
+      "scope": {
+        "data": {
+          "desc": "The bundled data",
+          "type": "Object",
+          "definition": {
+            "scope": {
+              "desc": "The scope object",
+              "type": "Object",
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "desc": "A timestamp object of the day",
+                  "__exemption": [ "examples" ]
+                },
+                "dayLabel": {
+                  "type": "String",
+                  "desc": "The string value that would have been used for the day label",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "true if this is the active date",
+                  "__exemption": [ "examples" ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "head-day-button": {
+      "desc": "The slot associated with the day button. Replaces the whole button",
+      "scope": {
+        "data": {
+          "desc": "The bundled data",
+          "type": "Object",
+          "definition": {
+            "scope": {
+              "desc": "The scope object",
+              "type": "Object",
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "desc": "A timestamp object of the day",
+                  "__exemption": [ "examples" ]
+                },
+                "dayLabel": {
+                  "type": "String",
+                  "desc": "The string value that would have been used for the day label",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "true if this is the active date",
+                  "__exemption": [ "examples" ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "head-day": {
+      "desc": "The slot associated with the head day. Replaces everything in the head day",
+      "scope": {
+        "data": {
+          "desc": "The bundled data",
+          "type": "Object",
+          "definition": {
+            "scope": {
+              "desc": "The scope object",
+              "type": "Object",
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "desc": "A timestamp object of the day",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "true if this is the active date",
+                  "__exemption": [ "examples" ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "head-date": {
+      "desc": "The slot associated with the head date. Used to append to the head day",
+      "scope": {
+        "data": {
+          "desc": "The bundled data",
+          "type": "Object",
+          "definition": {
+            "scope": {
+              "desc": "The scope object",
+              "type": "Object",
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "desc": "A timestamp object of the day",
+                  "__exemption": [ "examples" ]
+                },
+                "dayLabel": {
+                  "type": "String",
+                  "desc": "The string value that would have been used for the day label",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "true if this is the active date",
                   "__exemption": [ "examples" ]
                 }
               }

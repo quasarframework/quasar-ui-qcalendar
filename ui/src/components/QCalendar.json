@@ -8115,8 +8115,8 @@
         "month"
       ]
     },
-    "day-label": {
-      "desc": "Use to replace the `day label`",
+    "head-day-label": {
+      "desc": "Use to replace the head day label",
       "scope": {
         "dayLabel": {
           "type": "String",
