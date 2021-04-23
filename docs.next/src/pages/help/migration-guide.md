@@ -144,8 +144,8 @@ Below is a list of all existing slots. Some are new, some have changed and some 
 | head-day | | | QCalendarDay |
 | head-date | **new** | | QCalendarDay |
 | head-weekday-label | day-header-label | | QCalendarDay |
-| head-day-label | day-label | | QCalendarDay |
-| head-day-button | day-btn | | QCalendarDay |
+| head-day-label | day-label | | QCalendarDay, QCalendarMonth |
+| head-day-button | day-btn | | QCalendarDay, QCalendarMonth |
 | head-day-button-value |  | | QCalendarDay |
 | column-header-before | | | QCalendarDay |
 | column-header-after | | | QCalendarDay |
@@ -155,8 +155,6 @@ Below is a list of all existing slots. Some are new, some have changed and some 
 | interval-label | **new** | `{ scope: { timestamp: {…}, label: String } }` | QCalendarDay |
 | head-day-event | day-header | `{ scope: { timestamp: {...}, timeStartPos: ƒ, timeDurationHeight: ƒ } }` | QCalendarDay |
 | head-days-events | **new** | `{ scope: { days: [], ref: ref() }}` | QCalendarDay |
-| day-button | day-btn |  | QCalendarMonth |
-| day-label |  |  | QCalendarMonth |
 | day-of-year |  |  | QCalendarMonth |
 | month-label |  |  | QCalendarMonth |
 | head-row-events | **new** |  | QCalendarMonth |
