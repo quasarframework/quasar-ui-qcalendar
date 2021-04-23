@@ -2056,5 +2056,123 @@
     }
   },
   "slots": {
+    "head-resources": {
+      "desc": "The head area above the listed resources",
+      "scope": {
+        "data": {
+          "desc": "The bundled data",
+          "type": "Object",
+          "definition": {
+            "scope": {
+              "desc": "The scope object",
+              "type": "Object",
+              "definition": {
+                "days": {
+                  "type": "Array",
+                  "desc": "An array of Timestamp objects",
+                  "__exemption": [ "examples" ]
+                },
+                "resources": {
+                  "desc": "The array of resources",
+                  "type": "Array",
+                  "__exemption": [ "examples" ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "head-days-events": {
+      "desc": "For multi-day events",
+      "scope": {
+        "data": {
+          "desc": "The bundled data",
+          "type": "Object",
+          "definition": {
+            "scope": {
+              "desc": "The scope object",
+              "type": "Object",
+              "definition": {
+                "days": {
+                  "type": "Array",
+                  "desc": "An array of Timestamp objects",
+                  "__exemption": [ "examples" ]
+                },
+                "ref": {
+                  "desc": "If this slot is used, put the ref on your container so the calendar can determine automatic height, otherwise, your events will bleed into the parts below it",
+                  "type": "Ref",
+                  "__exemption": [ "examples" ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "head-day": {
+      "desc": "The slot associated with the head day. Replaces everything in the head day",
+      "scope": {
+        "data": {
+          "desc": "The bundled data",
+          "type": "Object",
+          "definition": {
+            "scope": {
+              "desc": "The scope object",
+              "type": "Object",
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "desc": "A timestamp object of the day",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "true if this is the active date",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The column index if `column-count` is not undefined",
+                  "__exemption": [ "examples" ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "head-date": {
+      "desc": "The slot associated with the head date. Used to append to the head day",
+      "scope": {
+        "data": {
+          "desc": "The bundled data",
+          "type": "Object",
+          "definition": {
+            "scope": {
+              "desc": "The scope object",
+              "type": "Object",
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "desc": "A timestamp object of the day",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "true if this is the active date",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The column index if `column-count` is not undefined",
+                  "__exemption": [ "examples" ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
