@@ -37,8 +37,9 @@
         <q-calendar-task
           ref="calendar"
           v-model="selectedDate"
+          v-model:modelTasks="parsedTasks"
+          v-model:modelFooter="footerTasks"
           view="month"
-          :tasks="parsedTasks"
           :task-width="240"
           :min-weekday-length="2"
           :weekday-class="weekdayClass"
@@ -86,13 +87,13 @@
 
           <template #footer-task="{ scope }">
             <div class="summary ellipsis">
-              <div class="title ellipsis">TOTAL</div>
-              <div class="total">{{ totals(scope.start, scope.end, scope.tasks) }}</div>
+              <div class="title ellipsis">{{ scope.footer.title }}</div>
+              <div class="total">{{ totals(scope.start, scope.end) }}</div>
             </div>
           </template>
 
           <template #footer-day="{ scope }">
-            <div class="logged-time">{{ getLoggedSummary(scope.timestamp.date, scope.tasks) }}</div>
+            <div class="logged-time">{{ getLoggedSummary(scope.timestamp.date) }}</div>
           </template>
         </q-calendar-task>
       </div>
@@ -230,6 +231,9 @@ export default defineComponent({
             { date: '2021-03-30', logged: 1.0 }
           ]
         }
+      ],
+      footerTasks: [
+        { title: 'TOTALS' }
       ]
     }
   },
@@ -280,7 +284,7 @@ export default defineComponent({
       return val
     },
 
-    getLoggedSummary (date, tasks) {
+    getLoggedSummary (date) {
       let total = 0
 
       const reducer = (accumulator, currentValue) => {
@@ -290,8 +294,8 @@ export default defineComponent({
         return accumulator
       }
 
-      for (const index in tasks) {
-        const task = tasks[ index ]
+      for (const index in this.tasks) {
+        const task = this.tasks[ index ]
         total += task.logged.reduce(reducer, 0)
       }
 
@@ -353,7 +357,7 @@ export default defineComponent({
      * Sums up the amount of time spent for all tasks
      * between the start and end dates
      */
-    totals (start, end, tasks) {
+    totals (start, end) {
       let total = 0
       const reducer = (accumulator, currentValue) => {
         const loggedTimestamp = parsed(currentValue.date)
@@ -363,8 +367,8 @@ export default defineComponent({
         return accumulator
       }
 
-      for (const task in tasks) {
-        total += tasks[ task ].logged.reduce(reducer, 0)
+      for (const task in this.tasks) {
+        total += this.tasks[ task ].logged.reduce(reducer, 0)
       }
 
       return total
@@ -447,6 +451,7 @@ export default defineComponent({
   align-items: center
   padding: 0
   margin: 0
+  height: 100%
 </style>
 
 <style lang="sass">

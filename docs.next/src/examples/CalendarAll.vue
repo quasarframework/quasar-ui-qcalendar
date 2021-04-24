@@ -34,13 +34,14 @@
           :mode="selectedCalendar"
           v-model="selectedDate"
           v-model:modelResources="resources"
+          v-model:modelTasks="parsedTasks"
+          v-model:modelFooter="footerTasks"
           resource-key="id"
           resource-label="name"
           view="week"
           :day-min-height="70"
           animated
           bordered
-          :tasks="parsedTasks"
           :task-width="240"
           :min-weekday-length="2"
           @change="onChange"
@@ -111,9 +112,9 @@
             </template>
           </template>
 
-          <template v-if="selectedCalendar === 'task'" #footer-task="{ scope: { start, end, tasks } }">
+          <template v-if="selectedCalendar === 'task'" #footer-task="{ scope: { start, end, footer } }">
             <div class="summary ellipsis">
-              <div class="title ellipsis">TOTAL</div>
+              <div class="title ellipsis">{{ footer.title }}</div>
               <div class="total">{{ totals(start, end, tasks) }}</div>
             </div>
           </template>
@@ -281,6 +282,9 @@ export default defineComponent({
           ]
         }
       ]),
+      footerTasks = reactive([
+        { title: 'TOTALS' }
+      ]),
       agenda = {
         // value represents day of the week
         1: [
@@ -446,7 +450,7 @@ export default defineComponent({
       return val
     }
 
-    function getLoggedSummary (date, tasks) {
+    function getLoggedSummary (date) {
       let total = 0
 
       const reducer = (accumulator, currentValue) => {
@@ -501,7 +505,7 @@ export default defineComponent({
      * Sums up the amount of time spent for all tasks
      * between the start and end dates
      */
-    function totals (start, end, tasks) {
+    function totals (start, end) {
       let total = 0
       const reducer = (accumulator, currentValue) => {
         const loggedTimestamp = parsed(currentValue.date)
@@ -543,6 +547,7 @@ export default defineComponent({
       onChange,
       // tasks
       parsedTasks,
+      footerTasks,
       getLogged,
       getLoggedSummary,
       sum,
@@ -603,6 +608,7 @@ export default defineComponent({
   align-items: center
   padding: 0
   margin: 0
+  height: 100%
 </style>
 
 <style lang="sass">
