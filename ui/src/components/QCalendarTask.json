@@ -10,8 +10,53 @@
       "required": true,
       "default": "today()",
       "examples": [
-        "v-model=\"2019-04-01\"",
+        "v-model=\"selectedDate\"",
         "v-model=\"2020-08-08\""
+      ]
+    },
+    "model-tasks": {
+      "type": "Array",
+      "category": "model",
+      "desc": "An array of Tasks that will be displayed",
+      "required": true,
+      "examples": [
+        "v-model:model-tasks=\"tasksArray\""
+      ]
+    },
+    "model-footer": {
+      "type": "Array",
+      "category": "model",
+      "desc": "An array of footer items, each will be displayed via a slot in the footer (summary) area",
+      "examples": [
+        "v-model:model-footer=\"footerArray\""
+      ]
+    },
+    "view": {
+      "type": "String",
+      "category": "content",
+      "desc": "Tells the calendar how to display the data",
+      "required": true,
+      "values": ["day", "week", "month"],
+      "examples": [
+        "view=\"week\"",
+        "view=\"month\""
+      ]
+    },
+    "view-count": {
+      "type": "Number",
+      "category": "content",
+      "desc": "The number of views to show. For instance, if the property `view` was `week`, then setting this property to 2 would show 2 weeks.",
+      "examples": [
+        ":view-count=\"2\""
+      ]
+    },
+    "task-width": {
+      "type": "Number",
+      "category": "content",
+      "desc": "The number of pixels needed for the tasks column",
+      "default": "200",
+      "examples": [
+        ":task-width=\"220\""
       ]
     },
     "now": {
@@ -84,6 +129,11 @@
       "category": "style",
       "desc": "Places the calendar into dark mode"
     },
+    "no-aria": {
+      "type": "Boolean",
+      "category": "behavior",
+      "desc": "Turns off automatical generation of aria labels for timestamps"
+    },
     "no-active-date": {
       "type": "Boolean",
       "category": "behavior",
@@ -104,13 +154,13 @@
       "category": "content",
       "desc": "Do not display the date button in the header"
     },
-    "min-weekday-length": {
+    "min-weekday-label": {
       "type": ["Number", "String"],
       "category": "behavior",
       "desc": "The minimal number of weekday characters when truncation occurs",
       "default": 1,
       "examples": [
-        ":min-weekday-length=\"2\""
+        ":min-weekday-label=\"2\""
       ]
     },
     "weekday-breakpoints": {
@@ -156,6 +206,41 @@
       "default": "slide-left",
       "examples": [
         "transition-next=\"flip-left\""
+      ]
+    },
+    "disabled-days": {
+      "type": "Array",
+      "tsType": "StringArray",
+      "category": "behavior",
+      "desc": "An array of string dates in the form `YYYY-MM-DD` that will be disabled. If an array is contained within the array with a start and end date, it will be treated as a range",
+      "examples": [
+        ":disabled-days=\"['2019-04-01', '2019-04-02', '2019-04-03', '2019-04-04']\""
+      ]
+    },
+    "disabled-before": {
+      "type": "String",
+      "category": "behavior",
+      "desc": "A date in the form `YYYY-MM-DD` where all dates before, and including, will be disabled",
+      "examples": [
+        "disabled-before=\"2019-04-01\""
+      ]
+    },
+    "disabled-after": {
+      "type": "String",
+      "category": "behavior",
+      "desc": "A date in the form `YYYY-MM-DD` where all dates after, and including, will be disabled",
+      "examples": [
+        "disabled-after=\"2019-04-01\""
+      ]
+    },
+    "disabled-weekdays": {
+      "type": "Array",
+      "tsType": "NumberArray",
+      "category": "behavior",
+      "default": "[]",
+      "desc": "Similar to `weekdays` property, except values included in this array are automatically made disabled",
+      "examples": [
+        "disabled-weekdays=\"[0,6]\""
       ]
     },
     "drag-enter-func": {
@@ -480,10 +565,10 @@
       "tsType": "StringArray",
       "category": "behavior",
       "desc": "Describes what can become focusable",
-      "values": ["day", "weekday"],
+      "values": ["day", "date", "weekday", "task"],
       "default": "[]",
       "examples": [
-        ":focus-type=['day', 'weekday']"
+        ":focus-type=['day', 'weekday', 'task']"
       ]
     },
     "weekday-style": {
@@ -618,11 +703,11 @@
       ]
     },
     "cell-width": {
-      "type": "String",
+      "type": ["String", "Number"],
       "category": "behavior",
-      "desc": "Sets day cell width and turns on sticky mode. Width must be css measurement",
+      "desc": "Sets day cell width and turns on sticky mode. Width is assumed to be in pixels",
       "examples": [
-        "cell-width=\"100px\""
+        "cell-width=\"100\""
       ]
     },
     "use-navigation": {
@@ -2097,8 +2182,13 @@
                   "desc": "A timestamp object of the ending date",
                   "__exemption": [ "examples" ]
                 },
-                "tasks": {
-                  "desc": "the array of all Tasks",
+                "footer": {
+                  "desc": "the array item from model `footer-tasks`",
+                  "type": "Array",
+                  "__exemption": [ "examples" ]
+                },
+                "index": {
+                  "desc": "the index into the array item from model `footer-tasks`",
                   "type": "Array",
                   "__exemption": [ "examples" ]
                 }
@@ -2124,8 +2214,13 @@
                   "desc": "A timestamp object of the day",
                   "__exemption": [ "examples" ]
                 },
-                "tasks": {
-                  "desc": "the array of all Tasks",
+                "footer": {
+                  "desc": "the array item from model `footer-tasks`",
+                  "type": "Array",
+                  "__exemption": [ "examples" ]
+                },
+                "index": {
+                  "desc": "the index into the array item from model `footer-tasks`",
                   "type": "Array",
                   "__exemption": [ "examples" ]
                 }

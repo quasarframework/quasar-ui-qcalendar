@@ -57,6 +57,7 @@ export default defineComponent({
 
   emits: [
     'update:modelValue',
+    'update:modelTasks',
     ...useCheckChangeEmits,
     ...useMoveEmits,
     ...getRawMouseEvents('-date'),
@@ -407,7 +408,7 @@ export default defineComponent({
     }
 
     function __renderTasks () {
-      return props.tasks.map((task, index) => __renderTaskRow(task, index))
+      return props.modelTasks.map((task, index) => __renderTaskRow(task, index))
     }
 
     function __renderTasksContainer () {
@@ -421,12 +422,13 @@ export default defineComponent({
       ])
     }
 
-    function __renderFooterTask () {
+    function __renderFooterTask (task, index) {
       const slot = slots[ 'footer-task' ]
       const scope = {
         start: parsedStartDate.value,
         end: parsedEndDate.value,
-        tasks: props.tasks
+        footer: task,
+        index
       }
       const width = convertToUnit(props.taskWidth)
       const style = {
@@ -446,11 +448,12 @@ export default defineComponent({
       ])
     }
 
-    function __renderFooterDay (day) {
+    function __renderFooterDay (day, task, index) {
       const slot = slots[ 'footer-day' ]
       const scope = {
         timestamp: day,
-        tasks: props.tasks
+        footer: task,
+        index
       }
       const width = convertToUnit(parsedCellWidth.value)
       const style = {
@@ -476,28 +479,40 @@ export default defineComponent({
       ])
     }
 
-    function __renderFooterDays () {
+    function __renderFooterDays (task, index) {
       return h('div', {
         class: 'q-calendar-task__footer--day-wrapper'
       }, [
-        days.value.map(day => __renderFooterDay(day))
+        days.value.map(day => __renderFooterDay(day, task, index))
       ])
     }
 
-    function __renderFooter () {
+    function __renderFooterRows () {
       const isFocusable = props.focusable === true && props.focusType.includes('task')
 
+      return props.modelFooter.map((task, index) => {
+        return h('div', {
+          class: {
+            'q-calendar-task__footer--wrapper': true,
+            'q-calendar__hoverable': props.hoverable === true,
+            'q-calendar__focusable': isFocusable === true
+          }
+        }, {
+          default: () => [
+            __renderFooterTask(task, index),
+            __renderFooterDays(task, index)
+          ]}
+        )
+      })
+    }
+
+    function __renderFooter () {
       return h('div', {
         class: {
           'q-calendar-task__footer': true,
-          'q-calendar__sticky': isSticky === true,
-          'q-calendar__hoverable': props.hoverable === true,
-          'q-calendar__focusable': isFocusable === true
+          'q-calendar__sticky': isSticky === true
         }
-      }, [
-        __renderFooterTask(),
-        __renderFooterDays()
-      ])
+      }, __renderFooterRows())
     }
 
     function __renderBody () {

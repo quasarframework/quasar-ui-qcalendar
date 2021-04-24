@@ -26,7 +26,11 @@ export const useTaskProps = {
     default: today(),
     validator: v => v === '' || validateTimestamp(v)
   },
-  tasks: {
+  modelTasks: {
+    type: Array,
+    default: []
+  },
+  modelFooter: {
     type: Array,
     default: []
   },
@@ -54,7 +58,7 @@ export const useTaskProps = {
     default: 'center',
     validator: v => [ 'left', 'center', 'right' ].includes(v)
   },
-  view: { // TODO: this needs rework
+  view: {
     type: String,
     validator: v => [ 'day', 'week', 'month' ].includes(v)
     // default: 'month'
