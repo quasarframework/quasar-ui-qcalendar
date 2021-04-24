@@ -2173,6 +2173,38 @@
           }
         }
       }
+    },
+    "head-day-event": {
+      "desc": "The slot associated with a head day event. Used to append to the head day",
+      "scope": {
+        "data": {
+          "desc": "The bundled data",
+          "type": "Object",
+          "definition": {
+            "scope": {
+              "desc": "The scope object",
+              "type": "Object",
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "desc": "A timestamp object of the day",
+                  "__exemption": [ "examples" ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "true if this is the active date",
+                  "__exemption": [ "examples" ]
+                },
+                "columnIndex": {
+                  "type": "Number",
+                  "desc": "The column index if `column-count` is not undefined",
+                  "__exemption": [ "examples" ]
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
