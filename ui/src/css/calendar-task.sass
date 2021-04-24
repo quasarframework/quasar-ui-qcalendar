@@ -87,7 +87,12 @@
     display: flex
     flex: none
     flex-direction: row
-    width: 100%
+
+    &--wrapper
+      position: relative
+      display: flex
+      flex: none
+      flex-direction: row
 
     &--task,
     &--day-wrapper
@@ -188,8 +193,10 @@
       border-right: var(--calendar-border)
 
   &__footer
-    border-top: var(--calendar-border)
-    // box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2)
+    // border-top: var(--calendar-border)
+
+    &--wrapper
+      border-top: var(--calendar-border)
 
     &--task
       background: var(--calendar-background)
@@ -242,7 +249,10 @@
         border-right: var(--calendar-border-dark)
 
     &__footer
-      border-top: var(--calendar-border-dark)
+      // border-top: var(--calendar-border-dark)
+
+      &--wrapper
+        border-top: var(--calendar-border-dark)
 
       &--task
         background: var(--calendar-background-dark)
