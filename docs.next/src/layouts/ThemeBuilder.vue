@@ -107,42 +107,42 @@
             >
               <q-tab
                 name="day"
-                icon="fas fa-calendar-day"
+                :icon="biCalendar2Date"
                 label="Day"
               />
               <q-tab
                 name="week"
-                icon="fas fa-calendar-week"
+                :icon="biCalendar2Week"
                 label="Week"
               />
               <q-tab
                 name="month"
-                icon="fas fa-calendar-alt"
+                :icon="biCalendar2Month"
                 label="Month"
               />
               <q-tab
                 name="mini-mode"
-                icon="far fa-calendar"
+                :icon="biCalendar3Range"
                 label="Mini-Mode"
               />
               <q-tab
                 name="scheduler"
-                icon="fas fa-calendar"
+                :icon="biCalendar2Plus"
                 label="Scheduler"
               />
               <q-tab
                 name="resource"
-                icon="fas fa-grip-horizontal"
+                :icon="biGrid3x2Gap"
                 label="Resource"
               />
               <q-tab
                 name="agenda"
-                icon="view_agenda"
+                :icon="biColumnsGap"
                 label="Agenda"
               />
               <q-tab
                 name="task"
-                icon="view_task"
+                :icon="biCalendar3"
                 label="Task"
               />
             </q-tabs>
@@ -234,6 +234,9 @@
             </q-tab-panels>
           </div>
         </div>
+
+        <markdown-footer />
+
       </q-page>
 
       <!-- This is where pages get injected -->
@@ -259,12 +262,25 @@ import ThemeBuilderScheduler from '../components/ThemeBuilder/scheduler'
 import ThemeBuilderResource from '../components/ThemeBuilder/resource'
 import ThemeBuilderAgenda from '../components/ThemeBuilder/agenda'
 import ThemeBuilderTask from '../components/ThemeBuilder/task'
+import MarkdownFooter from '../components/MarkdownFooter.vue'
+
+import {
+  biCalendar2Date,
+  biCalendar2Week,
+  biCalendar2Month,
+  biCalendar2Plus,
+  biColumnsGap,
+  biGrid3x2Gap,
+  biCalendar3,
+  biCalendar3Range
+} from '@quasar/extras/bootstrap-icons'
 
 export default defineComponent({
   name: 'ThemeBuilderLayout',
   components: {
     ToolbarContents,
     LeftMenu,
+    MarkdownFooter,
     ThemeEditor,
     ThemeBuilderDay,
     ThemeBuilderWeek,
@@ -389,7 +405,15 @@ export default defineComponent({
       copyTheme,
       importTheme,
       editStyle,
-      onStyleChange
+      onStyleChange,
+      biCalendar2Date,
+      biCalendar2Week,
+      biCalendar2Month,
+      biCalendar2Plus,
+      biColumnsGap,
+      biGrid3x2Gap,
+      biCalendar3,
+      biCalendar3Range
     }
   }
 })
