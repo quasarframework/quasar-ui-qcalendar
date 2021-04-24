@@ -21,10 +21,10 @@ Available values are: `day` (default), `month`, `agenda`, `resource`, `scheduler
 When using multi-calendars in this way, be sure to guard your slots to avoid errors and issues. For instance, the `footer-task` slot would get an error as an invalid slot for month mode. You can gaurd like this:
 
 ```html
-  <template v-if="selectedCalendar === 'task'" #footer-task="{ scope: { start, end, tasks } }">
+  <template v-if="selectedCalendar === 'task'" #footer-task="{ scope: { start, end, footer } }">
     <div class="summary ellipsis">
-      <div class="title ellipsis">TOTAL</div>
-      <div class="total" v-html="totals(start, end, tasks)"></div>
+      <div class="title ellipsis" v-html="footer.title"></div>
+      <div class="total" v-html="totals(start, end)"></div>
     </div>
   </template>
 ```
