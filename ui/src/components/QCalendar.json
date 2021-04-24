@@ -13,7 +13,7 @@
         "All"
       ],
       "examples": [
-        "v-model=\"2019-04-01\"",
+        "v-model=\"selectedDate\"",
         "v-model=\"2020-08-08\""
       ]
     },
@@ -99,6 +99,11 @@
         ":weekdays=\"[1,2,3,4,5]\""
       ]
     },
+    "no-aria": {
+      "type": "Boolean",
+      "category": "behavior",
+      "desc": "Turns off automatical generation of aria labels for timestamps"
+    },
     "no-active-date": {
       "type": "Boolean",
       "category": "behavior",
@@ -106,11 +111,6 @@
       "applicable": [
         "All"
       ]
-    },
-    "no-aria": {
-      "type": "Boolean",
-      "category": "behavior",
-      "desc": "Turns off automatical generation of aria labels for timestamps"
     },
     "disabled-days": {
       "type": "Array",

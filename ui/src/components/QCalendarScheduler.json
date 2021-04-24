@@ -10,7 +10,7 @@
       "required": true,
       "default": "today()",
       "examples": [
-        "v-model=\"2019-04-01\"",
+        "v-model=\"selectedDate\"",
         "v-model=\"2020-08-08\""
       ]
     },
@@ -87,6 +87,11 @@
       "type": "Boolean",
       "category": "style",
       "desc": "Places the calendar into dark mode"
+    },
+    "no-aria": {
+      "type": "Boolean",
+      "category": "behavior",
+      "desc": "Turns off aria strings in the calendar"
     },
     "no-active-date": {
       "type": "Boolean",
