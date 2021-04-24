@@ -606,6 +606,10 @@ const menu = [
             path: 'task-colored-weekends'
           },
           {
+            name: 'Task - No Weekends',
+            path: 'task-no-weekends'
+          },
+          {
             name: 'Task - Dark',
             path: 'task-dark'
           },
