@@ -642,6 +642,10 @@ const menu = [
             path: 'task-focusable-hoverable'
           },
           {
+            name: 'Task - Multiple Footer Items',
+            path: 'task-multiple-footer-items'
+          },
+          {
             name: 'Task - Locale',
             path: 'task-locale'
           },
