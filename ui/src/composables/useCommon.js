@@ -40,15 +40,8 @@ export const useCommonProps = {
   },
   bordered: Boolean,
   dark: Boolean,
-  noActiveDate: Boolean,
   noAria: Boolean,
-  disabledDays: Array,
-  disabledBefore: String,
-  disabledAfter: String,
-  disabledWeekdays: {
-    type: Array,
-    default: () => []
-  },
+  noActiveDate: Boolean,
   noHeader: Boolean,
   noScroll: Boolean,
   shortWeekdayLabel: Boolean,
@@ -75,6 +68,13 @@ export const useCommonProps = {
   transitionNext: {
     type: String,
     default: 'slide-left'
+  },
+  disabledDays: Array,
+  disabledBefore: String,
+  disabledAfter: String,
+  disabledWeekdays: {
+    type: Array,
+    default: () => []
   },
   dragEnterFunc: {
     type: Function
