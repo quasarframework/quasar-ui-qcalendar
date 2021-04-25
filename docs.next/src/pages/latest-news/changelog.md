@@ -1,5 +1,9 @@
 ---
 title: Changelog
-desc: 
+desc: The latest QCalendar releases
 keys: latest-news
+components:
+- releases/QCalendarReleases
 ---
+
+<q-calendar-releases />
