@@ -2097,6 +2097,44 @@
         }
       }
     },
+    "days": {
+      "desc": "Provide a slot for absolute positioning on top of the days",
+      "scope": {
+        "data": {
+          "desc": "The bundled data",
+          "type": "Object",
+          "definition": {
+            "scope": {
+              "desc": "The scope object",
+              "type": "Object",
+              "definition": {
+                "days": {
+                  "type": "Array",
+                  "tsType": "TimestampArray",
+                  "desc": "The array of Timestamp objects",
+                  "__exemption": [ "examples" ]
+                },
+                "task": {
+                  "desc": "the Task associated with this row",
+                  "type": "Object",
+                  "__exemption": [ "examples" ]
+                },
+                "index": {
+                  "desc": "The task index",
+                  "type": "Number",
+                  "__exemption": [ "examples" ]
+                },
+                "width": {
+                  "desc": "The width of a day cell",
+                  "type": "Number",
+                  "__exemption": [ "examples" ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "task": {
       "desc": "The slot associated with the task",
       "scope": {

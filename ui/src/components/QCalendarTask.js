@@ -354,14 +354,20 @@ export default defineComponent({
       return days.value.map(day => __renderTaskDay(day, task, index))
     }
 
-    function __renderTaskDaysWrapper (task, index) {
+    function __renderTaskDaysRow (task, index) {
+      const slot = slots.days
+      const scope = {
+        days: days.value,
+        task,
+        index,
+        width: parsedCellWidth.value
+      }
+
       return h('div', {
-        style: {
-          display: 'flex',
-          flex: 'none'
-        }
+        class: 'q-calendar-task__task--days-row'
       }, [
-        __renderTaskDays(task, index)
+        __renderTaskDays(task, index),
+        slot && slot({ scope }),
       ])
     }
 
@@ -402,7 +408,7 @@ export default defineComponent({
         }
       }, [
         __renderTaskItem(task, index),
-        __renderTaskDaysWrapper(task, index),
+        __renderTaskDaysRow(task, index),
         useFocusHelper()
       ])
     }
