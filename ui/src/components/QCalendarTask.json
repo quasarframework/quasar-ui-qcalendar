@@ -23,6 +23,14 @@
         "v-model:model-tasks=\"tasksArray\""
       ]
     },
+    "model-title": {
+      "type": "Array",
+      "category": "model",
+      "desc": "An array of title items, each will be displayed via a slot in the title area",
+      "examples": [
+        "v-model:model-title=\"titleArray\""
+      ]
+    },
     "model-footer": {
       "type": "Array",
       "category": "model",

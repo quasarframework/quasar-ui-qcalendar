@@ -30,6 +30,10 @@ export const useTaskProps = {
     type: Array,
     default: []
   },
+  modelTitle: {
+    type: Array,
+    default: []
+  },
   modelFooter: {
     type: Array,
     default: []

@@ -557,6 +557,35 @@ export default defineComponent({
       ])
     }
 
+    function __renderTitleTask (title, index) {
+      const slot = slots[ 'title-task' ]
+
+      const width = convertToUnit(props.taskWidth)
+      const style = {
+        width,
+        minWidth: width,
+        maxWidth: width
+      }
+
+      const scope = {
+        start: parsedStartDate.value,
+        end: parsedEndDate.value,
+        width,
+        title,
+        index
+      }
+
+      return h('div', {
+        class: {
+          'q-calendar-task__title--task': true,
+          'q-calendar__sticky': isSticky === true
+        },
+        style
+      }, [
+        slot && slot({ scope })
+      ])
+    }
+
     function __renderHeadWeekday (day) {
       const slot = slots[ 'head-weekday-label' ]
       const scope = {
@@ -704,6 +733,48 @@ export default defineComponent({
       }
     }
 
+    /**
+     * Renders the given day with the associated task
+     * @param {Timestamp} day Timestamp representing the day
+     * @param {any} task The Task
+     * @param {number} index The task index
+     * @returns VNode
+     */
+        function __renderTitleDay (day, title, index) {
+        const slot = slots['title-day']
+
+        const width = convertToUnit(parsedCellWidth.value)
+        const style = {
+          width,
+          minWidth: width,
+          maxWidth: width
+        }
+
+        const scope = {
+          timestamp: day,
+          title,
+          index,
+          width
+        }
+  
+        const dayClass = typeof props.dayClass === 'function' ? props.dayClass({ scope }) : {}
+        const isFocusable = props.focusable === true && props.focusType.includes('day')
+  
+        return h('div', {
+          class: {
+            'q-calendar-task__title--day': true,
+            ...dayClass,
+            ...getRelativeClasses(day),
+            'q-calendar__hoverable': props.hoverable === true,
+            'q-calendar__focusable': isFocusable === true
+          },
+          style
+        }, [
+          slot && slot({ scope }),
+          useFocusHelper()
+        ])
+      }
+
     function __renderHeadDay (day) {
       const headDaySlot = slots[ 'head-day' ]
       const headDateSlot = slots[ 'head-date' ]
@@ -790,6 +861,10 @@ export default defineComponent({
       return days.value.map(day => __renderHeadDay(day))
     }
 
+    function __renderTitleDays (title, index) {
+      return days.value.map(day => __renderTitleDay(day, title, index))
+    }
+
     function __renderHeadDaysRow () {
       return h('div', {
         class: {
@@ -797,6 +872,16 @@ export default defineComponent({
         }
       }, [
         ...__renderHeadDays()
+      ])
+    }
+
+    function __renderTitleDaysRow (title, index) {
+      return h('div', {
+        class: {
+          'q-calendar-task__title--days': true
+        }
+      }, [
+        ...__renderTitleDays(title, index)
       ])
     }
 
@@ -812,8 +897,25 @@ export default defineComponent({
         style: {
         }
       }, [
-        __renderHeadTask(),
-        __renderHeadDaysRow()
+        h('div', {
+          style: {
+            position: 'relative',
+            display: 'flex'
+          }
+        }, [
+          __renderHeadTask(),
+          __renderHeadDaysRow()
+        ]),
+        props.modelTitle.map((title, index) => h('div', {
+          class: 'q-calendar-task__title',
+          style: {
+            position: 'relative',
+            display: 'flex'
+          }
+        }, [
+          __renderTitleTask(title, index),
+          __renderTitleDaysRow(title, index)
+        ]))
       ])
     }
 

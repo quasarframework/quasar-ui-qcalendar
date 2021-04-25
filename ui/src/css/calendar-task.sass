@@ -12,6 +12,32 @@
     position: relative
     display: flex
     flex: none
+    flex-direction: column
+
+    &--task
+      position: relative
+      display: flex
+
+    &--days
+      position: relative
+      display: flex
+      flex-direction: row
+      flex-wrap: nowrap
+      user-select: none
+      font-size: 1rem
+
+    &--day
+      position: relative
+      flex: 1 1 100%
+      flex-wrap: nowrap
+      overflow: hidden
+      width: 0
+      outline: 0
+
+  &__title
+    position: relative
+    display: flex
+    flex: none
     flex-direction: row
 
     &--task
@@ -121,6 +147,12 @@
   top: 0
   z-index: 2
 
+.q-calendar-task__title--task.q-calendar__sticky
+  position: sticky
+  left: 0 #{"/* rtl:ignore */"}
+  top: 0
+  z-index: 2
+
 .q-calendar-task__task--container.q-calendar__sticky
   position: sticky
   left: 0 #{"/* rtl:ignore */"}
@@ -178,6 +210,28 @@
       &.q-current-day
         .q-calendar__button
           border: var(--calendar-border-current)
+
+      &.q-disabled-day
+        color: var(--calendar-disabled-date-color)
+        background: var(--calendar-disabled-date-background) !important
+
+  &__title
+    color: var(--calendar-color)
+    background: var(--calendar-background)
+    border-top: var(--calendar-border)
+
+    &--task
+      font-weight: var(--calendar-head-font-weight)
+      color: var(--calendar-color)
+      background: var(--calendar-background)
+      border-right: var(--calendar-border)
+
+    &--day
+      font-weight: var(--calendar-head-font-weight)
+      border-right: var(--calendar-border)
+
+      &:last-child
+        border-right: none
 
       &.q-disabled-day
         color: var(--calendar-disabled-date-color)
@@ -242,6 +296,23 @@
         &.q-disabled-day
           color: var(--calendar-disabled-date-color-dark)
           background: var(--calendar-disabled-date-background-dark) !important
+
+    &__title
+      color: var(--calendar-color-dark)
+      background: var(--calendar-background-dark)
+      border-top: var(--calendar-border-dark)
+
+      &--task
+        color: var(--calendar-color-dark)
+        background: var(--calendar-background-dark)
+        border-right: var(--calendar-border-dark)
+
+      &--day
+        border-right: var(--calendar-border-dark)
+
+      &.q-disabled-day
+        color: var(--calendar-disabled-date-color-dark)
+        background: var(--calendar-disabled-date-background-dark) !important
 
     &__task
       border-bottom: var(--calendar-border-dark)
