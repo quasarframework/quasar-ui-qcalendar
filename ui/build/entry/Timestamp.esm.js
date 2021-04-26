@@ -1,4 +1,4 @@
-import Plugin from '../../src/QCalendarScheduler'
+import Plugin from '../../src/Timestamp'
 
 export default Plugin
-export * from '../../src/QCalendarScheduler'
+export * from '../../src/Timestamp'

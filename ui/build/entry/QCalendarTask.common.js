@@ -1,3 +1,3 @@
-import Plugin from '../../src/QCalendarScheduler'
+import Plugin from '../../src/QCalendarTask'
 
 export default Plugin

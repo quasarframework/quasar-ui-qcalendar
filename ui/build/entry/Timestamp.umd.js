@@ -1,3 +1,3 @@
-import Plugin from '../../src/QCalendarScheduler'
+import Plugin from '../../src/Timestamp'
 
-export * from '../../src/QCalendarScheduler'
+export * from '../../src/Timestamp'
