@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted } from 'vue'
 import { date } from 'quasar'
 
 import PackageReleases from './PackageReleases'
@@ -47,10 +47,6 @@ export default {
     const packages = ref(packagesDefinitions)
     const currentPackage = ref('QCalendar')
     const versions = ref({})
-
-    watch(versions, (val) => {
-      console.log('versions:', val)
-    })
 
     function queryReleases (page = 1) {
       loading.value = true
