@@ -16,6 +16,7 @@
     },
     "model-tasks": {
       "type": "Array",
+      "tsType": "TaskObjectArray",
       "category": "model",
       "desc": "An array of Tasks that will be displayed",
       "required": true,
@@ -25,6 +26,7 @@
     },
     "model-title": {
       "type": "Array",
+      "tsType": "TitleObjectArray",
       "category": "model",
       "desc": "An array of title items, each will be displayed via a slot in the title area",
       "examples": [
@@ -33,6 +35,7 @@
     },
     "model-footer": {
       "type": "Array",
+      "tsType": "FooterObjectArray",
       "category": "model",
       "desc": "An array of footer items, each will be displayed via a slot in the footer (summary) area",
       "examples": [

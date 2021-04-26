@@ -55,5 +55,27 @@ export interface ResourceObject {
 
 export type ResourceObjectArray = ResourceObject[]
 
+export interface TaskObject {
+  label?: string,
+  height?: number,
+  expanded?: boolean,
+  children?: TaskObjectArray
+}
+
+export type TaskObjectArray = TaskObject[]
+
+export interface TitleObject {
+  label?: string
+}
+
+export type TitleObjectArray = TitleObject[]
+
+export interface FooterObject {
+  label?: string
+}
+
+export type FooterObjectArray = FooterObject[]
+
+
 export type NumberArray = number[]
 export type StringArray = string[]
