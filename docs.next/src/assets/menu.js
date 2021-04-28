@@ -691,7 +691,7 @@ const menu = [
       {
         name: 'Theme builder',
         path: '/theme-builder',
-        external: true
+        internal: true
       },
       {
         name: 'Tutorials',

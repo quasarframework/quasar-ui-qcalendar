@@ -38,7 +38,7 @@ function parseMenuNode (node, __path) {
                 node.children.map(node => ({
                   title: node.name,
                   name: node.name,
-                  to: prefix + (node.path !== void 0 ? '/' + node.path : ''),
+                  to: node.internal === true ? node.path : prefix + (node.path !== void 0 ? '/' + node.path : ''),
                   page: true
                 }))
               )
@@ -57,7 +57,7 @@ function parseMenuNode (node, __path) {
 
     node.children.forEach(node => parseMenuNode(node, prefix))
   }
-  else if (node.external !== true) {
+  else if (node.external !== true && node.internal !== true) {
     menuRoutes.push({
       path: prefix,
       name: node.name,
