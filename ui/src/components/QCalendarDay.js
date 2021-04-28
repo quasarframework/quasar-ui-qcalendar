@@ -713,6 +713,7 @@ export default defineComponent({
           'q-calendar-day__head--day__label': true,
           'q-calendar__button': true,
           'q-calendar__button--round': props.dateType === 'round',
+          'q-calendar__button--rounded': props.dateType === 'rounded',
           'q-calendar__button--bordered': day.current === true,
           'q-calendar__focusable': true
         },

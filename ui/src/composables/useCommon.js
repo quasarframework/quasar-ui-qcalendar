@@ -26,7 +26,7 @@ export const useCommonProps = {
   dateType: {
     type: String,
     default: 'round',
-    validator: v => [ 'round', 'square' ].includes(v)
+    validator: v => [ 'round', 'rounded', 'square' ].includes(v)
   },
   weekdayAlign: {
     type: String,

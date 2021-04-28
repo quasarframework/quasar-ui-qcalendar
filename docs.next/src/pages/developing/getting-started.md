@@ -86,7 +86,7 @@ If you want a calendar to display dark mode, then set the `dark` property. As we
 
 ## Date type
 
-The only two values accepted for the `date-type` property are `round` (default) and `square`.
+The only two values accepted for the `date-type` property are `round` (default), `rounded` and `square`.
 
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |

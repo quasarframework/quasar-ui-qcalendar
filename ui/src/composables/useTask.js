@@ -45,7 +45,7 @@ export const useTaskProps = {
   dateType: {
     type: String,
     default: 'round',
-    validator: v => [ 'round', 'square' ].includes(v)
+    validator: v => [ 'round', 'rounded', 'square' ].includes(v)
   },
   dateHeader: {
     type: String,

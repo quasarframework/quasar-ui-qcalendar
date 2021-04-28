@@ -792,6 +792,7 @@ export default defineComponent({
           'q-calendar-month__day--label': true,
           'q-calendar__button': true,
           'q-calendar__button--round': props.dateType === 'round',
+          'q-calendar__button--rounded': props.dateType === 'rounded',
           'q-calendar__button--bordered': day.current === true,
           'q-calendar__hoverable': props.hoverable === true,
           'q-calendar__focusable': isDateFocusable.value === true

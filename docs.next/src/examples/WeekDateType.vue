@@ -16,6 +16,13 @@
       />
       <q-radio
         v-model="dateType"
+        val="rounded"
+        label="rounded"
+        dense
+        style="min-width: 100px;"
+      />
+      <q-radio
+        v-model="dateType"
         val="square"
         label="square"
         dense
