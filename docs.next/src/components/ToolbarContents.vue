@@ -46,7 +46,8 @@
 
 <script>
 import { defineComponent } from 'vue'
-import { version } from '@quasar/quasar-ui-qcalendar/package.json'
+import { version } from '@quasar/quasar-ui-qcalendar'
+
 export default defineComponent({
   name: 'ToolbarContents',
   props: {
