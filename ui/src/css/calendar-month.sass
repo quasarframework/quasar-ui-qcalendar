@@ -284,10 +284,13 @@
         border-right: none !important
 
       &.q-active-date
-        color: var(--calendar-active-date-color-dark) !important
-
         .q-calendar__button
-          background: var(--calendar-active-date-background-dark)
+          color: var(--calendar-active-date-color-dark)
+          background: var(--calendar-active-date-background-dark) !important
+
+      &.q-current-day
+        .q-calendar__button
+          border: var(--calendar-border-current-dark)
 
       &.q-current-day
         color: var(--calendar-current-color-dark) !important
