@@ -1,4 +1,5 @@
-import { version } from '../package.json'
+import pkg from '../package.json'
+const { version } = pkg
 import QCalendar from './components/QCalendar.js'
 import QCalendarAgenda from './components/QCalendarAgenda.js'
 import QCalendarDay from './components/QCalendarDay.js'
