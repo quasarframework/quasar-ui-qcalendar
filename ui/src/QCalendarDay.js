@@ -1,5 +1,6 @@
 import QCalendarDay from './components/QCalendarDay.js'
-import { version } from '../package.json'
+import pkg from '../package.json'
+const { version } = pkg
 
 export {
   version,
