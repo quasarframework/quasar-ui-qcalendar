@@ -10,7 +10,7 @@ import {
 
 // import { mdiArrowDownThinCircleOutline } from '@quasar/extras/mdi-v5'
 import { biCaretDown, biCaretDownFill } from '@quasar/extras/bootstrap-icons'
-import { h, ref, watch, onBeforeUpdate, withDirectives } from 'vue'
+import { h, ref, watch, onMounted, onBeforeUpdate, withDirectives } from 'vue'
 import { useRoute } from 'vue-router'
 
 import Menu from 'assets/menu.js'
@@ -45,20 +45,34 @@ export default {
       showMenu(childRefs[ val ])
     })
 
+    onMounted(() => {
+      // needed if using different layouts or
+      // User navigated here via an external link (ie: Discord)
+      showMenu(childRefs[ $route.path ])
+    })
+
     let childRefs = []
 
     onBeforeUpdate(() => {
       childRefs = []
     })
 
+    /**
+     * Recursive method to find the QExpansionItem parent
+     * @param {any} vm The Vue node
+     * @returns 
+     */
     function showMenu (vm) {
       if (vm !== void 0 && vm !== rootRef.value) {
+        if(vm.show === void 0 && vm.$parent !== void 0) {
+          const parent = getParentVm(vm)
+          if (parent !== void 0) {
+            showMenu(parent)
+            return
+          }
+        }
         // eslint-disable-next-line no-unused-expressions
         vm.show !== void 0 && vm.show()
-        const parent = getParentVm(vm)
-        if (parent !== void 0) {
-          showMenu(parent)
-        }
       }
     }
 
