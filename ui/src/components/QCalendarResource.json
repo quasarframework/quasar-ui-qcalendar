@@ -35,7 +35,6 @@
       ]
     },
     "date-type": {
-      "addedIn": "v4.0.0",
       "type": "String",
       "category": ["style"],
       "desc": "Shows the current date button as either a circle, rounded or a square",
@@ -46,7 +45,6 @@
       ]
     },
     "weekday-align": {
-      "addedIn": "v4.0.0",
       "type": "String",
       "category": ["style"],
       "desc": "Determines the weekday (ie: Sunday, Monday, etc) alignment",
@@ -57,7 +55,6 @@
       ]
     },
     "date-align": {
-      "addedIn": "v4.0.0",
       "type": "String",
       "category": ["style"],
       "desc": "Determines the date (ie: 2, 3, etc) alignment",
@@ -68,7 +65,6 @@
       ]
     },
     "date-header": {
-      "addedIn": "v4.0.0",
       "type": "String",
       "category": ["style"],
       "desc": "Determines how the date header will be displayed",
@@ -114,7 +110,6 @@
       "desc": "Do not display the date button in the header"
     },
     "min-weekday-length": {
-      "addedIn": "v4.0.0",
       "type": ["Number", "String"],
       "category": "behavior",
       "desc": "The minimal number of weekday characters when truncation occurs",
@@ -124,7 +119,6 @@
       ]
     },
     "weekday-breakpoints": {
-      "addedIn": "v4.0.0",
       "type": "Array",
       "tsType": "NumberArray",
       "category": "behavior",
@@ -170,7 +164,6 @@
       ]
     },
     "drag-enter-func": {
-      "addedIn": "v4.0.0",
       "type": "Function",
       "category": "behavior",
       "desc": "The function to handle dragenter events",
@@ -315,7 +308,6 @@
       ]
     },
     "drag-leave-func": {
-      "addedIn": "v4.0.0",
       "type": "Function",
       "category": "behavior",
       "desc": "The function to handle dragleave events",
@@ -479,19 +471,16 @@
       ]
     },
     "hoverable": {
-      "addedIn": "v4.0.0",
       "type": "Boolean",
       "category": "behavior",
       "desc": "Allows certain cells within the calendar to be hovered"
     },
     "focusable": {
-      "addedIn": "v4.0.0",
       "type": "Boolean",
       "category": "behavior",
       "desc": "Allows certain cells within the calendar to receive focus"
     },
     "focus-type": {
-      "addedIn": "v4.0.0",
       "type": "Array",
       "tsType": "StringArray",
       "category": "behavior",
@@ -503,7 +492,6 @@
       ]
     },
     "weekday-style": {
-      "addedIn": "v4.0.0",
       "type": "Function",
       "category": "style",
       "desc": "Gets called to provide custom styling of a weekday",
@@ -555,7 +543,6 @@
       ]
     },
     "weekday-class": {
-      "addedIn": "v4.0.0",
       "type": "Function",
       "category": "style",
       "desc": "Gets called to provide custom styling (via classes) of a weekday",
@@ -617,7 +604,6 @@
       ]
     },
     "day-min-height": {
-      "addedIn": "v4.0.0",
       "type": ["Number", "String"],
       "category": "behavior",
       "desc": "The minimum height to be used",
@@ -637,7 +623,6 @@
       ]
     },
     "cell-width": {
-      "addedIn": "v4.0.0",
       "type": "String",
       "category": "behavior",
       "desc": "Sets day cell width and turns on sticky mode. Width must be css measurement",
@@ -646,7 +631,6 @@
       ]
     },
     "use-navigation": {
-      "addedIn": "v4.0.0",
       "type": "Boolean",
       "desc": "Allows keyboard navigation",
       "category": "behavior"

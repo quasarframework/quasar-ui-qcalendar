@@ -91,7 +91,6 @@
       ]
     },
     "date-type": {
-      "addedIn": "v4.0.0",
       "type": "String",
       "category": ["style"],
       "desc": "Shows the current date button as either a circle, rounded or a square",
