@@ -131,16 +131,16 @@
 
 <script>
 import { defineComponent, ref, computed, reactive, onBeforeMount } from 'vue'
-import { QCalendar } from '@quasar/quasar-ui-qcalendar/src/QCalendar.js'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
-import '@quasar/quasar-ui-qcalendar/src/QCalendar.sass'
 import {
+  QCalendar,
   today,
   padNumber,
   isBetweenDates,
   parsed
-} from '@quasar/quasar-ui-qcalendar/src/Timestamp.js'
+} from '@quasar/quasar-ui-qcalendar'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
+import '@quasar/quasar-ui-qcalendar/src/QCalendar.sass'
 
 import NavigationBar from '../components/NavigationBar.vue'
 

@@ -60,12 +60,12 @@
 
 <script>
 import {
+  QCalendarDay,
   addToDate,
   parseTimestamp,
   getStartOfWeek,
   today
-} from '@quasar/quasar-ui-qcalendar/src/Timestamp.js'
-import { QCalendarDay } from '@quasar/quasar-ui-qcalendar/src/QCalendarDay.js'
+} from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarDay.sass'

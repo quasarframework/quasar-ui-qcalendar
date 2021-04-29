@@ -67,12 +67,12 @@
 
 <script>
 import {
+  QCalendarMonth,
   addToDate,
   getDayIdentifier,
   parseTimestamp,
   today
-} from '@quasar/quasar-ui-qcalendar/src/Timestamp.js'
-import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar/src/QCalendarMonth.js'
+} from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarMonth.sass'

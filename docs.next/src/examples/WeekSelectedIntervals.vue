@@ -34,11 +34,10 @@
 
 <script>
 import {
+  QCalendarDay,
   today,
-  copyTimestamp,
-  getDateTime
-} from '@quasar/quasar-ui-qcalendar/src/Timestamp.js'
-import { QCalendarDay } from '@quasar/quasar-ui-qcalendar/src/QCalendarDay.js'
+  copyTimestamp
+} from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarDay.sass'

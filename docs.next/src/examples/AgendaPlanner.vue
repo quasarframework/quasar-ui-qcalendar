@@ -168,6 +168,7 @@
 
 <script>
 import {
+  QCalendarAgenda,
   today,
   padNumber,
   parseTimestamp,
@@ -176,8 +177,7 @@ import {
   prevDay,
   daysBetween,
   createNativeLocaleFormatter
-} from '@quasar/quasar-ui-qcalendar/src/Timestamp.js'
-import { QCalendarAgenda } from '@quasar/quasar-ui-qcalendar/src/QCalendarAgenda.js'
+} from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarAgenda.sass'

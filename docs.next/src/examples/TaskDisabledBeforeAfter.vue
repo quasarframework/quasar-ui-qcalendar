@@ -79,14 +79,14 @@
 
 <script>
 import {
+  QCalendarTask,
   today,
   isBetweenDates,
   parsed,
+  padNumber,
   addToDate,
-  parseTimestamp,
-  padNumber
-} from '@quasar/quasar-ui-qcalendar/src/Timestamp.js'
-import { QCalendarTask } from '@quasar/quasar-ui-qcalendar/src/QCalendarTask.js'
+  parseTimestamp
+} from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTask.sass'
