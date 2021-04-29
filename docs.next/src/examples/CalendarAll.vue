@@ -34,6 +34,7 @@
           :mode="selectedCalendar"
           v-model="selectedDate"
           v-model:modelResources="resources"
+          v-model:modelTitle="titleTasks"
           v-model:modelTasks="parsedTasks"
           v-model:modelFooter="footerTasks"
           resource-key="id"
@@ -46,6 +47,12 @@
           :min-weekday-length="2"
           @change="onChange"
         >
+          <template v-if="selectedCalendar === 'task'" #title-task="{ scope }">
+            <div class="summary ellipsis">
+              <div class="title ellipsis">{{ scope.title.label }}</div>
+            </div>
+          </template>
+
           <template v-if="selectedCalendar === 'task'" #head-task="{ /* scope */ }">
             <div class="header ellipsis" style="font-weight: 600">
               <div class="issue ellipsis">Issue</div>
@@ -115,12 +122,12 @@
           <template v-if="selectedCalendar === 'task'" #footer-task="{ scope: { start, end, footer } }">
             <div class="summary ellipsis">
               <div class="title ellipsis">{{ footer.title }}</div>
-              <div class="total">{{ totals(start, end, tasks) }}</div>
+              <div class="total">{{ totals(start, end) }}</div>
             </div>
           </template>
 
-          <template v-if="selectedCalendar === 'task'" #footer-day="{ scope: { timestamp, tasks } }">
-            <div class="logged-time">{{ getLoggedSummary(timestamp.date, tasks) }}</div>
+          <template v-if="selectedCalendar === 'task'" #footer-day="{ scope: { timestamp } }">
+            <div class="logged-time">{{ getLoggedSummary(timestamp.date) }}</div>
           </template>
 
         </q-calendar>
@@ -282,6 +289,10 @@ export default defineComponent({
           ]
         }
       ]),
+      titleTasks = reactive([
+        { label: 'TITLE' },
+        { label: 'SUBTITLE' }
+      ]),
       footerTasks = reactive([
         { title: 'TOTALS' }
       ]),
@@ -405,19 +416,19 @@ export default defineComponent({
     const parsedTasks = computed(() => {
       const start = parsed(startDate.value)
       const end = parsed(endDate.value)
-      const tasks2 = []
+      const t = []
 
       for (let i = 0; i < tasks.length; ++i) {
         const task = tasks[ i ]
         for (let j = 0; j < task.logged.length; ++j) {
           const loggedTimestamp = parsed(task.logged[ j ].date)
           if (isBetweenDates(loggedTimestamp, start, end)) {
-            tasks2.push(task)
+            t.push(task)
             break
           }
         }
       }
-      return tasks2
+      return t
     })
 
     onBeforeMount(() => {
@@ -547,6 +558,7 @@ export default defineComponent({
       onChange,
       // tasks
       parsedTasks,
+      titleTasks,
       footerTasks,
       getLogged,
       getLoggedSummary,
