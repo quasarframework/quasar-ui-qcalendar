@@ -709,6 +709,10 @@ const menu = [
         path: 'overview'
       },
       {
+        name: 'Call to action',
+        path: 'call-to-action'
+      },
+      {
         name: 'Bugs and feature requests',
         path: 'bugs-and-feature-requests'
       },
