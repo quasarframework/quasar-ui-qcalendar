@@ -83,6 +83,10 @@ const menu = [
             path: 'day-now'
           },
           {
+            name: 'Day - 24-hour Format',
+            path: 'day-24-hour'
+          },
+          {
             name: 'Day - No Header',
             path: 'day-no-header'
           },
@@ -203,6 +207,10 @@ const menu = [
           {
             name: 'Week - Now',
             path: 'week-now'
+          },
+          {
+            name: 'Week - 24-hour Format',
+            path: 'week-24-hour'
           },
           {
             name: 'Week - First Day Monday',
