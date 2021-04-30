@@ -65,7 +65,7 @@ export default defineComponent({
   },
 
   emits: [
-    'update:modelValue',
+    'update:model-value',
     ...useCheckChangeEmits,
     ...useMoveEmits,
     ...getRawMouseEvents('-date'),
@@ -281,7 +281,7 @@ export default defineComponent({
           const v2 = getDayIdentifier(parsed(oldVal))
           direction.value = v1 >= v2 ? 'next' : 'prev'
         }
-        emit('update:modelValue', val)
+        emit('update:model-value', val)
       }
     })
 

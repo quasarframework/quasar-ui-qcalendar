@@ -69,8 +69,8 @@ export default defineComponent({
   },
 
   emits: [
-    'update:modelValue',
-    'update:modelResources',
+    'update:model-value',
+    'update:model-resources',
     'resource-expanded',
     ...useCheckChangeEmits,
     ...useMoveEmits,
@@ -294,7 +294,7 @@ export default defineComponent({
           const v2 = getDayIdentifier(parsed(oldVal))
           direction.value = v1 >= v2 ? 'next' : 'prev'
         }
-        emit('update:modelValue', val)
+        emit('update:model-value', val)
       }
     })
 
@@ -682,7 +682,7 @@ export default defineComponent({
                 onClick: (e) => {
                   e.stopPropagation()
                   resource.expanded = !resource.expanded
-                  emit('update:modelResources', props.modelResources)
+                  emit('update:model-resources', props.modelResources)
                   emit('resource-expanded', { expanded: resource.expanded, scope })
                   if (resourcesRef.value[ resource[ props.resourceKey ] ]) {
                     const el = resourcesRef.value[ resource[ props.resourceKey ] ]
