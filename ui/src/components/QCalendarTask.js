@@ -60,6 +60,7 @@ export default defineComponent({
     'update:model-tasks',
     'update:model-title',
     'update:model-footer',
+    'task-expanded',
     ...useCheckChangeEmits,
     ...useMoveEmits,
     ...getRawMouseEvents('-date'),
@@ -363,6 +364,13 @@ export default defineComponent({
       // const key = day.date + '-' + task.id
 
       return h('div', {
+        // key,
+        // ref: (el) => {
+        //   if (isDayFocusable.value === true) {
+        //     datesRef.value[ key ] = el
+        //   }
+        // },
+        tabindex: isDayFocusable.value === true ? 0 : -1,
         class: {
           'q-calendar-task__task--day': true,
           ...dayClass,
