@@ -633,8 +633,7 @@ export default defineComponent({
           'q-active-date': activeDate === true,
           disabled: props.enableOutsideDays !== true && outside === true,
           'q-calendar__hoverable': props.hoverable === true,
-          'q-calendar__focusable': isDayFocusable.value === true,
-          'q-calendar-month__day--droppable': scope.droppable === true && outside !== true
+          'q-calendar__focusable': isDayFocusable.value === true
         },
         style,
         onFocus: (e) => {
