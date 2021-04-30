@@ -34,11 +34,11 @@ If you have a specific fix or contribution, you can generate a pull request on t
 
 ### Github Discussions
 
-If it's not an issue, bug or feature request, then you can use the [Github Discussions](https://github.com/quasarframework/quasar-ui-qcalendar/discussions) to ask questions.
+If it's not an issue, bug, or feature request, you can use the [Github Discussions](https://github.com/quasarframework/quasar-ui-qcalendar/discussions) to ask questions.
 
 ### Discord
 
-Use the [Quasar Discord](https://chat.quasar.dev) and then head to the `#app-extensions` channel.
+Use the [Quasar Discord](https://chat.quasar.dev) and head to the `#app-extensions` channel.
 
 ### Twitter
 

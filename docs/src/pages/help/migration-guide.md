@@ -12,7 +12,7 @@ The information below can help you migrate from QCalendar v3.x to QCalendar v4.0
 ## QCalendar v4.0.0 Alpha
 Welcome to the QCalendar v4.0.0 Alpha release.
 
-With this update comes a lot of changes, with over 90% of QCalendar being rewritten. Please read below to understand these changes and how they will affect you for upgrading.
+With this update comes a lot of changes, with over 90% of QCalendar being rewritten. Please read below to understand these changes and how they will affect your upgrading.
 
 > Until the final stable version is released, some aspects of the calendar may change. We're not planning for additional breaking changes, but unforeseen reported issues may require us to do breaking changes (unlikely, but keep this in mind). So please make sure that you read each v4 alpha/beta version's release notes carefully before upgrading.
 
@@ -20,7 +20,7 @@ With this update comes a lot of changes, with over 90% of QCalendar being rewrit
 This means you get better in-editor auto-completion support amongst many other advantages.
 
 ## New Calendar
-Just quickly, for information purposes, there is a new QCalendarTask component for writing timesheet and gantt-like calendars. This component is still actively being worked on (at the time this document was being written). So, just a heads up.
+Just quickly, for information purposes, there is a new QCalendarTask component for writing timesheets and Gantt-like calendars. This component is still actively being worked on (at the time this document was being written). So, just a heads up.
 
 ## Calendar Types
 Previously, the actual QCalendar component was a wrapper around other calendar components. You could specify which component-type to use via the `view` property (ex: `month`, `week`, `agenda`, etc). There were a LOT of different views. These components have now been made available on an individual basis. This is better for tree-shaking.
@@ -47,7 +47,7 @@ In your app.sass:
 @import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
 ```
 
-If you don't use the calendar transitions, it's likely you would NOT need to import that file.
+If you don't use the calendar transitions, you would NOT need to import that file.
 
 Once the package is installed into your node_modules, you can import the calendar-type you want to deal with:
 
@@ -87,7 +87,7 @@ import { QCalendarTask } from '@quasar/quasar-ui-qcalendar/src/QCalendarTask.js'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTask.sass'
 ```
 
-If you want to use QCalendar (wrapper) then install the QCalendar app-extension via the Quasar CLI:
+If you want to use QCalendar (wrapper) install the QCalendar app-extension via the Quasar CLI:
 
 > quasar ext add @quasar/qcalendar
 

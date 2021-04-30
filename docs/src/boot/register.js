@@ -1,5 +1,5 @@
 import { boot } from 'quasar/wrappers'
-import JsonApiViewer from 'quasar-ui-json-api-viewer/src/components/JsonApiViewer.js'
+import JsonApiViewer from 'quasar-ui-json-api-viewer/src/components/JsonApiViewer'
 import MarkdownPage from '../components/MarkdownPage.vue'
 import MarkdownLink from '../components/MarkdownLink.vue'
 import ExampleViewer, { setDefaults } from 'quasar-ui-example-viewer/src'

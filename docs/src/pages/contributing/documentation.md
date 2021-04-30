@@ -14,7 +14,7 @@ Alternatively, you can fork the QCalendar repo, make your changes and generate a
 
 ## Using Markdown
 
-The site is written using using a syntax called [markdown](https://en.wikipedia.org/wiki/Markdown). If you are unfamiliar with this syntax, it is quite easily learned.
+The site is written using a syntax called [markdown](https://en.wikipedia.org/wiki/Markdown). If you are unfamiliar with this syntax, it is quite easily learned.
 
 ## Guidelines for Writing Content
 

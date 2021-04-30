@@ -4,11 +4,11 @@ desc: Using QCalendar Transitions
 keys: All about QCalendar
 ---
 
-Transitions allows your calendar component to be animated when the view changes (ie: next/prev day, week, month, etc). It is turned on with the use of the `animated` property and works in conjunction with the `transiton-prev` and `transiton-next` properties.
+Transitions allow your calendar component to be animated when the view changes (ie: next/prev day, week, month, etc). It is turned on using the `animated` property and works in conjunction with the `transiton-prev` and `transiton-next` properties.
 
 To use transitions, you must include the `QCalendarTransitions.sass` or `QCalendarTransitions.css`, depending on your needs.
 
-In your own sass file:
+In your sass file:
 ```
 @import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
 ```
@@ -20,7 +20,7 @@ import '@quasar/quasar-ui-qcalendar/dist/QCalendarTransitions.css'
 
 ## Transitions
 
-Transition are a way to make your calendar come-alive to your end-user. When a calendar changes to a previous or next week/month, instead of just instantly displaying it, we can use the `animated` property to turn on transitions.
+Transitions are a way to make your calendar come alive to your end-user. When a calendar changes to a previous or next week/month, instead of just instantly displaying it, we can use the `animated` property to turn on transitions.
 
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |

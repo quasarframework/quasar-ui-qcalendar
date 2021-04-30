@@ -16,7 +16,7 @@ Please take some time to explore the content on this website before opening an i
 
 ## Creating an Issue
 
-Report bugs, request features, and leave feedback with a [GitHub issue](https://github.com/quasarframework/quasar-ui-qcalendar/issues).
+Report bugs, request features and leave feedback with a [GitHub issue](https://github.com/quasarframework/quasar-ui-qcalendar/issues).
 
 ## GitHub Pull Requests
 

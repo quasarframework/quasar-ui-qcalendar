@@ -10,7 +10,7 @@ The QCalendar component is a wrapper around all other calendar components. It ca
 Use the QCalendar (wrapper) only if necessary. By using this component, all calendar components will be loaded whether you use them or not.
 :::
 
-It has one additional property to specify which calendar type that should be displayed.
+It has one additional property to specify that determines the calendar type to be displayed.
 
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |

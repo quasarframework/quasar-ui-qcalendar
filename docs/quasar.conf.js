@@ -76,7 +76,6 @@ module.exports = configure(function (ctx) {
           }])
 
         chain.resolve.alias.merge({
-          '@quasar/quasar-ui-qcalendar': path.resolve(__dirname, '../ui'),
           examples: path.resolve(__dirname, './src/examples')
         })
 

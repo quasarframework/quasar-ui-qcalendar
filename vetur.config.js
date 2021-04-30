@@ -12,7 +12,7 @@ module.exports = {
   },
   // support monorepos
   projects: [
-    './docs.next',
+    './docs',
     './ui'
   ]
 

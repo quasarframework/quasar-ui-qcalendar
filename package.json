@@ -1,12 +1,15 @@
 {
   "name": "qcalendar",
   "version": "1.0.0",
-  "description": "Vetur config for mono-repos",
-  "main": "vetur.config.js",
+  "description": "QCalendar mono-repo",
+  "workspaces": [
+    "ui",
+    "docs"
+  ],
   "author": "Jeff Galbraith <jeff@quasar.dev>",
   "license": "MIT",
   "private": true,
-  "devDependencies": {
-    "fast-glob": "^3.2.5"
+  "scripts": {
+    "build:all": "yarn && cd ./ui && yarn build && cd ../docs && quasar build"
   }
 }

@@ -2080,7 +2080,7 @@
       "__exemption": [ "examples" ]
     },
     "move": {
-      "desc": "Triggers component to move for count iterations, depending on positive (forwards) or negative (backwards) value",
+      "desc": "Triggers component to move for count iterations, depending on positive (forward) or negative (backward) value",
       "__exemption": [ "examples" ]
     },
     "moveToToday": {
