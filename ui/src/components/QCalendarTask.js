@@ -236,6 +236,26 @@ export default defineComponent({
     //   return (100 / parsedColumnCount.value) + '%'
     // })
 
+    const isDayFocusable = computed(() => {
+      return props.focusable === true && props.focusType.includes('day') && isMiniMode.value !== true
+    })
+
+    const isDateFocusable = computed(() => {
+      return props.focusable === true && props.focusType.includes('date') && isDayFocusable.value !== true
+    })
+
+    const isWeekdayFocusable = computed(() => {
+      return props.focusable === true && props.focusType.includes('weekday')
+    })
+
+    const parsedHeight = computed(() => {
+      return parseInt(props.dayHeight, 10)
+    })
+
+    const parsedMinHeight = computed(() => {
+      return parseInt(props.dayMinHeight, 10)
+    })
+
     watch([days], checkChange, { deep: true, immediate: true })
 
     watch(() => props.modelValue, (val, oldVal) => {
@@ -335,7 +355,7 @@ export default defineComponent({
       }
 
       const dayClass = typeof props.dayClass === 'function' ? props.dayClass({ scope }) : {}
-      const isFocusable = props.focusable === true && props.focusType.includes('day')
+      // const key = day.date + '-' + task.id
 
       return h('div', {
         class: {
@@ -343,7 +363,12 @@ export default defineComponent({
           ...dayClass,
           ...getRelativeClasses(day),
           'q-calendar__hoverable': props.hoverable === true,
-          'q-calendar__focusable': isFocusable === true
+          'q-calendar__focusable': isDayFocusable.value === true
+        onFocus: (e) => {
+          if (isDayFocusable.value === true) {
+            // focusRef.value = key
+          }
+        },
         ...getDefaultMouseEventHandlers('-day', event => {
           return { scope, event }
         }),
@@ -403,6 +428,14 @@ export default defineComponent({
     }
 
     function __renderTaskRow (task, index) {
+      const height = parsedHeight.value > 0 ? convertToUnit(parsedHeight.value) : 'auto'
+      const minHeight = parsedMinHeight.value > 0 ? convertToUnit(parsedMinHeight.value) : void 0
+      const style = {
+        height
+      }
+      if (minHeight !== void 0) {
+        style.minHeight = minHeight
+      }
       const isFocusable = props.focusable === true && props.focusType.includes('task')
 
       return h('div', {
@@ -410,7 +443,8 @@ export default defineComponent({
           'q-calendar-task__task': true,
           'q-calendar__hoverable': props.hoverable === true,
           'q-calendar__focusable': isFocusable === true
-        }
+        },
+        style
       }, [
         __renderTaskItem(task, index),
         __renderTaskDaysRow(task, index),
@@ -474,7 +508,6 @@ export default defineComponent({
       }
 
       const footerDayClass = typeof props.footerDayClass === 'function' ? props.footerDayClass({ scope }) : {}
-      const isFocusable = props.focusable === true && props.focusType.includes('day')
 
       return h('div', {
         class: {
@@ -482,9 +515,14 @@ export default defineComponent({
           ...footerDayClass,
           ...getRelativeClasses(day),
           'q-calendar__hoverable': props.hoverable === true,
-          'q-calendar__focusable': isFocusable === true
+          'q-calendar__focusable': isDayFocusable.value === true
         },
-        style
+        style,
+        // onFocus: (e) => {
+        //   if (isDayFocusable.value === true) {
+        //     focusRef.value = day.date
+        //   }
+        // }
       }, [
         slot && slot({ scope })
       ])
@@ -793,7 +831,6 @@ export default defineComponent({
 
       const styler = props.weekdayStyle || dayStyleDefault
       const weekdayClass = typeof props.weekdayClass === 'function' ? props.weekdayClass({ scope }) : {}
-      const isFocusable = props.focusable === true && props.focusType.includes('weekday')
 
       const width = convertToUnit(parsedCellWidth.value)
       const style = {
@@ -806,16 +843,24 @@ export default defineComponent({
       const data = {
         key: day.date,
         ref: (el) => { datesRef.value[ day.date ] = el },
-        tabindex: isFocusable === true ? 0 : -1,
+        tabindex: isWeekdayFocusable.value === true ? 0 : -1,
         class: {
           'q-calendar-task__head--day': true,
           ...weekdayClass,
           ...getRelativeClasses(day),
           'q-active-date': activeDate,
           'q-calendar__hoverable': props.hoverable === true,
-          'q-calendar__focusable': isFocusable === true
+          'q-calendar__focusable': isWeekdayFocusable.value === true
         },
         style,
+        onFocus: (e) => {
+          if (isWeekdayFocusable.value === true) {
+            focusRef.value = key
+          }
+        },
+        ...getDefaultMouseEventHandlers('-head-day', event => {
+          return { scope, event }
+        }),
         onDragenter: (e) => {
           if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
             props.dragEnterFunc(e, 'head-day', scope)
@@ -843,15 +888,7 @@ export default defineComponent({
               ? dragOverHeadDayRef.value = day.date
               : dragOverHeadDayRef.value = ''
           }
-        },
-        onFocus: (e) => {
-          if (isFocusable === true) {
-            focusRef.value = day.date
-          }
-        },
-        ...getDefaultMouseEventHandlers('-head-day', event => {
-          return { scope, event }
-        })
+        }
       }
 
       return h('div', data, [
