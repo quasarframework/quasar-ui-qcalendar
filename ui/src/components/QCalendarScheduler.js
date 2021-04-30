@@ -521,10 +521,11 @@ export default defineComponent({
       }
       const weekdayClass = typeof props.weekdayClass === 'function' ? props.weekdayClass({ scope }) : {}
       const isFocusable = props.focusable === true && props.focusType.includes('weekday')
+      const key = day.date + (columnIndex !== undefined ? '-' + columnIndex : '')
 
       const data = {
-        key: day.date + (columnIndex !== undefined ? '-' + columnIndex : ''),
-        ref: (el) => { datesRef.value[ day.date ] = el },
+        key,
+        ref: (el) => { datesRef.value[ key ] = el },
         tabindex: isFocusable === true ? 0 : -1,
         class: {
           'q-calendar-scheduler__head--day': true,
@@ -535,6 +536,14 @@ export default defineComponent({
           'q-calendar__focusable': isFocusable === true
         },
         style,
+        onFocus: (e) => {
+          if (isFocusable === true) {
+            focusRef.value = key
+          }
+        },
+        ...getDefaultMouseEventHandlers('-head-day', event => {
+          return { scope, event }
+        }),
         onDragenter: (e) => {
           if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
             props.dragEnterFunc(e, 'head-day', scope)
@@ -562,15 +571,7 @@ export default defineComponent({
               ? dragOverHeadDayRef.value = day.date
               : dragOverHeadDayRef.value = ''
           }
-        },
-        onFocus: (e) => {
-          if (isFocusable === true) {
-            focusRef.value = day.date
-          }
-        },
-        ...getDefaultMouseEventHandlers('-head-day', event => {
-          return { scope, event }
-        })
+        }
       }
 
       return h('div', data, [
