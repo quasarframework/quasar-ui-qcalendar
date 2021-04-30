@@ -42,6 +42,24 @@
         "v-model:model-footer=\"footerArray\""
       ]
     },
+    "task-key": {
+      "type": ["Number", "String"],
+      "category": "content",
+      "default": "id",
+      "desc": "The key in an object to use as the ID",
+      "examples": [
+        "task-key=\"key\""
+      ]
+    },
+    "task-label": {
+      "type": ["Number", "String"],
+      "category": "content",
+      "default": "label",
+      "desc": "The label to be used (overridden by slot)",
+      "examples": [
+        "task-label=\"title\""
+      ]
+    },
     "view": {
       "type": "String",
       "category": "content",
