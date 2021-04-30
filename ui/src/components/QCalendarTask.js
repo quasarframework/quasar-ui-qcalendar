@@ -874,9 +874,11 @@ export default defineComponent({
         ...styler({ scope })
       }
 
+      const key = day.date
+
       const data = {
-        key: day.date,
-        ref: (el) => { datesRef.value[ day.date ] = el },
+        key,
+        ref: (el) => { datesRef.value[ key ] = el },
         tabindex: isWeekdayFocusable.value === true ? 0 : -1,
         class: {
           'q-calendar-task__head--day': true,
