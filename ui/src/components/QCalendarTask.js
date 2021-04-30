@@ -343,10 +343,13 @@ export default defineComponent({
     function __renderTaskDay (day, task, index) {
       const slot = slots.day
       const styler = props.dayStyle || dayStyleDefault
+      const activeDate = props.noActiveDate !== true && parsedValue.value.date === day.date
+
       const scope = {
         timestamp: day,
         task,
-        index
+        index,
+        activeDate
       }
       const width = convertToUnit(parsedCellWidth.value)
       const style = {
@@ -364,6 +367,7 @@ export default defineComponent({
           'q-calendar-task__task--day': true,
           ...dayClass,
           ...getRelativeClasses(day),
+          'q-active-date': activeDate === true,
           'q-calendar__hoverable': props.hoverable === true,
           'q-calendar__focusable': isDayFocusable.value === true
         },
