@@ -63,7 +63,7 @@ export default defineComponent({
     ...useCheckChangeEmits,
     ...useMoveEmits,
     ...getRawMouseEvents('-date'),
-    // ...getRawMouseEvents('-day'),
+    ...getRawMouseEvents('-day'),
     ...getRawMouseEvents('-head-day')
   ],
 
@@ -344,6 +344,9 @@ export default defineComponent({
           ...getRelativeClasses(day),
           'q-calendar__hoverable': props.hoverable === true,
           'q-calendar__focusable': isFocusable === true
+        ...getDefaultMouseEventHandlers('-day', event => {
+          return { scope, event }
+        }),
         },
         style
       }, [
