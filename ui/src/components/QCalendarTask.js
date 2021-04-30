@@ -380,8 +380,34 @@ export default defineComponent({
         ...getDefaultMouseEventHandlers('-day', event => {
           return { scope, event }
         }),
+        onDragenter: (e) => {
+          if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
+            props.dragEnterFunc(e, 'day', scope)
+              ? dragOverResource.value = dragValue
+              : dragOverResource.value = ''
+          }
+        },
+        onDragover: (e) => {
+          if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
+            props.dragOverFunc(e, 'day', scope)
+              ? dragOverResource.value = dragValue
+              : dragOverResource.value = ''
+          }
         },
         onDragleave: (e) => {
+          if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
+            props.dragLeaveFunc(e, 'day', scope)
+              ? dragOverResource.value = dragValue
+              : dragOverResource.value = ''
+          }
+        },
+        onDrop: (e) => {
+          if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
+            props.dropFunc(e, 'day', scope)
+              ? dragOverResource.value = dragValue
+              : dragOverResource.value = ''
+          }
+        }
       }, [
         slot && slot({ scope }),
         useFocusHelper()
