@@ -342,6 +342,7 @@ export default defineComponent({
      */
     function __renderTaskDay (day, task, index) {
       const slot = slots.day
+      const styler = props.dayStyle || dayStyleDefault
       const scope = {
         timestamp: day,
         task,
@@ -351,7 +352,8 @@ export default defineComponent({
       const style = {
         width,
         minWidth: width,
-        maxWidth: width
+        maxWidth: width,
+        ...styler({ scope })
       }
 
       const dayClass = typeof props.dayClass === 'function' ? props.dayClass({ scope }) : {}
@@ -364,6 +366,8 @@ export default defineComponent({
           ...getRelativeClasses(day),
           'q-calendar__hoverable': props.hoverable === true,
           'q-calendar__focusable': isDayFocusable.value === true
+        },
+        style,
         onFocus: (e) => {
           if (isDayFocusable.value === true) {
             // focusRef.value = key
@@ -373,7 +377,7 @@ export default defineComponent({
           return { scope, event }
         }),
         },
-        style
+        onDragleave: (e) => {
       }, [
         slot && slot({ scope }),
         useFocusHelper()
