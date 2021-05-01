@@ -135,6 +135,7 @@ module.exports = configure(function (ctx) {
         'Dark',
         'Dialog',
         'LoadingBar',
+        'LocalStorage',
         'Meta',
         'Notify',
         'Platform',

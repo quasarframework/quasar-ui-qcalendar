@@ -33,9 +33,9 @@
 </template>
 
 <script>
-import { defineComponent, ref, reactive, computed, onBeforeMount, watch } from 'vue'
+import { defineComponent, ref, reactive, computed, onBeforeMount, watch, getCurrentInstance } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { LocalStorage } from 'quasar'
+import { useQuasar } from 'quasar'
 import { useMarkdownStore } from 'assets/markdown-store.js'
 import menuItems from '../assets/menu.js'
 import examples from '../assets/examples.js'
@@ -49,7 +49,9 @@ export default defineComponent({
   setup () {
     const menu = reactive(menuItems),
       store = useMarkdownStore(),
-      filter = ref(''),
+      vm = getCurrentInstance(),
+      $q = useQuasar() || vm.proxy.$q || vm.ctx.$q,
+      filter = ref(null),
       $route = useRoute(),
       $router = useRouter()
 
@@ -65,14 +67,13 @@ export default defineComponent({
     })
 
     onBeforeMount(() => {
-      const val = LocalStorage.getItem('filter')
-      filter.value = val || ''
+      let val = $q.localStorage.getItem('filter')
+      if (val === 'null') val = null
+      filter.value = val
     })
 
     watch(filter, val => {
-      if (val || val === '') {
-        LocalStorage.set('filter', val)
-      }
+      $q.localStorage.set('filter', val)
     })
 
     function onToggleMenuItem (item) {
