@@ -5,7 +5,7 @@ const listenerRE = /^on[A-Z]/
 /**
  * export of default funtion
  * @param {Vue.getCurrentInstance} [vm]
- * @returns {Array} computed listeners on the instance
+ * @returns {Object} computed listeners on the instance
  */
 export default function (vm = getCurrentInstance()) {
   return {
