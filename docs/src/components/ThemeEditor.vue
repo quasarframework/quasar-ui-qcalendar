@@ -11,14 +11,14 @@
       <div class="text-title">
         Theme Styles Picker
       </div>
-      <q-separator class="q-mb-md" />
+      <q-separator class="q-mb-md full-width" />
 
       <div
         v-if="currentBorderSize !== void 0"
         class="full-width"
       >
         <div class="full-width text-caption q-pb-lg">
-          Border Width
+          <strong>Border Width</strong>
         </div>
         <q-slider
           :modelValue="editorSize"
@@ -37,33 +37,37 @@
         class="full-width row justify-center"
       >
         <div class="full-width text-caption">
-          Border Style
+          <strong>Border Style</strong>
         </div>
         <q-radio
-          :modelValue="editorType"
+          :model-value="editorType"
           val="solid"
           label="Solid"
-          @input="val => { editorType = val }"
+          @update:model-value="val => { editorType = val }"
         />
         <q-radio
-          :modelValue="editorType"
+          :model-value="editorType"
           val="dashed"
           label="Dashed"
-          @input="val => { editorType = val }"
+          @update:model-value="val => { editorType = val }"
         />
         <q-radio
-          :modelValue="editorType"
+          :model-value="editorType"
           val="dotted"
           label="Dotted"
-          @input="val => { editorType = val }"
+          @update:model-value="val => { editorType = val }"
         />
-        <q-separator class="q-mb-sm" />
+        <q-separator class="q-mb-sm full-width" />
       </div>
 
       <div
         v-if="currentColor !== void 0"
         class="row justify-center"
       >
+        <div class="full-width text-caption">
+          <strong>Color</strong>
+        </div>
+
         <q-color
           default-view="palette"
           :modelValue="editorColor"
@@ -73,7 +77,7 @@
           @change="val => { editorColor = val }"
         />
         <p>Hint: current color schema is on the Palette tab</p>
-        <q-separator class="q-mb-sm" />
+        <q-separator class="q-mb-sm full-width" />
       </div>
 
       <div class="row justify-center">
