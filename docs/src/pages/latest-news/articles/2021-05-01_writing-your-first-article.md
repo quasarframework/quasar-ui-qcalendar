@@ -74,7 +74,7 @@ For instance, I started writing this article and I wanted an avatar and a date w
 </div>
 ```
 
-But then I thoughht, instead of everyone that writes an artcle duplication the same code (and to keep a consistent look and feel), I'd just put it into a component, reference it in my yaml and then use it.
+But then I thought, instead of everyone that writes an article duplicating the same code (and to keep a consistent look and feel), I'd just put it into a component, reference it in my yaml and then use it.
 
 The yaml part of this article now has:
 
@@ -95,7 +95,7 @@ and I can use the component like this:
 
 And what you get is my avatar that you see at the top of the page.
 
-But, say this was a tutorial, you could write a component that refrences one of the QCalendar calendars. The only rule that must be followed is that the component **must** be in the `components/page-parts/articles` folder.
+But, say this was a tutorial, you could write a component that references one of the QCalendar calendar components. The only rule to be followed is that the component **must** be in the `components/page-parts/articles` folder.
 
 ### Images
 
