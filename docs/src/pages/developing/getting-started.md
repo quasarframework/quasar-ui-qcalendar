@@ -281,7 +281,7 @@ The `day-class`, `interval-class` and `weekday-class` properties are explained i
 :::
 
 ::: tip
-Don't forget to check out the Drag and Drop examples and look at their sources on Github.
+Don't forget to check out the Drag and Drop examples and look at their sources on GitHub.
 :::
 
 | Property | Type           | Example      |

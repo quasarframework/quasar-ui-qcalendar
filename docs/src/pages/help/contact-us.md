@@ -8,13 +8,13 @@ Have a question about QCalendar? We're here to help. Before you start, be sure t
 
 ## Check Existing Resources
 
-### QCalendar Github Issues
+### QCalendar GitHub Issues
 
-As a first step, it's always good to search open and closed issues on the QCalendar [Github repo](https://github.com/quasarframework/quasar-ui-qcalendar/tree/next).
+As a first step, it's always good to search open and closed issues on the QCalendar [GitHub repo](https://github.com/quasarframework/quasar-ui-qcalendar/tree/next).
 
-### QCalendar Github Discussions
+### QCalendar GitHub Discussions
 
-Don't forget to look into the [Github Discussions](https://github.com/quasarframework/quasar-ui-qcalendar/discussions).
+Don't forget to look into the [GitHub Discussions](https://github.com/quasarframework/quasar-ui-qcalendar/discussions).
 
 ### Frequently Asked Questions
 
@@ -22,19 +22,19 @@ Answers to the most common questions regarding QCalendar can be found in the [QC
 
 ## Provide a Suggestion/Contribution
 
-### Github Issues
+### GitHub Issues
 
-File on the [Github Issues](https://github.com/quasarframework/quasar-ui-qcalendar/issues) location.
+File on the [GitHub Issues](https://github.com/quasarframework/quasar-ui-qcalendar/issues) location.
 
-### Github Pull Requests (PR)
+### GitHub Pull Requests (PR)
 
 If you have a specific fix or contribution, you can generate a pull request on the [QCalendar repo](https://github.com/quasarframework/quasar-ui-qcalendar/tree/next). Make sure to use the `next` branch for QCalendar v4.x+
 
 ## Start a Discussion
 
-### Github Discussions
+### GitHub Discussions
 
-If it's not an issue, bug, or feature request, you can use the [Github Discussions](https://github.com/quasarframework/quasar-ui-qcalendar/discussions) to ask questions.
+If it's not an issue, bug, or feature request, you can use the [GitHub Discussions](https://github.com/quasarframework/quasar-ui-qcalendar/discussions) to ask questions.
 
 ### Discord
 

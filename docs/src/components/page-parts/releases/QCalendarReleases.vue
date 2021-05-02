@@ -2,12 +2,12 @@
   <q-card flat bordered>
     <q-card-section v-if="error" class="row no-wrap items-center">
       <q-icon name="warning" size="24px" color="negative" class="q=mr-sm">
-        <div>Cannot connect to Github. Try again later.</div>
+        <div>Cannot connect to GitHub. Try again later.</div>
       </q-icon>
     </q-card-section>
     <q-card-section v-else-if="loading" class="row no-wrap items-center">
       <q-spinner size="24px" color="primary" class="q-mr-sm" />
-      <div>Loading release notes from Github</div>
+      <div>Loading release notes from GitHub</div>
     </q-card-section>
     <template v-else>
       <q-tabs v-model="currentPackage" align="left" active-color="primary" active-bg-color="blue-1" indicator-color="primary" class="text-grey-7">

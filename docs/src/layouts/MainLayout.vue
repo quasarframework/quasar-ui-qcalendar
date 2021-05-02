@@ -14,7 +14,7 @@
 
     <q-footer elevated class="glass">
       <q-toolbar>
-        <div class="full-width text-center">This documentation site for QCalendar is a work in progress. If you see something missing or inaccurate, please create a PR on the <markdown-link to="https://github.com/quasarframework/quasar-ui-qcalendar/tree/next" style="color: white;">Github repo</markdown-link>.</div>
+        <div class="full-width text-center">This documentation site for QCalendar is a work in progress. If you see something missing or inaccurate, please create a PR on the <markdown-link to="https://github.com/quasarframework/quasar-ui-qcalendar/tree/next" style="color: white;">GitHub repo</markdown-link>.</div>
       </q-toolbar>
     </q-footer>
 
@@ -76,7 +76,7 @@
               target="_blank"
               rel="noopener"
               class="button link"
-            >View Source on Github
+            >View Source on GitHub
             </q-btn>
           </div>
         </div>

@@ -6,9 +6,9 @@ keys: Contributing
 
 ## Checking for Known Issues
 
-### Github
+### GitHub
 
-We use Github to track our bugs. If you have a bug to report or wish to request a new feature, please check the [existing issues](https://github.com/quasarframework/quasar-ui-qcalendar/issues) before opening a new one. There may already be something similar in the works.
+We use GitHub to track our bugs. If you have a bug to report or wish to request a new feature, please check the [existing issues](https://github.com/quasarframework/quasar-ui-qcalendar/issues) before opening a new one. There may already be something similar in the works.
 
 ### QCalendar Website
 

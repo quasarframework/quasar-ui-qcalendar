@@ -15,7 +15,7 @@ QCalendar is free to use (MIT License) for anybody building a web-based product 
 
 Contributions are not limited to code. We also encourage feedback, documentation, new design, and tools. And, we also encourage [sponsorship](/contributing/sponsor), especially if you are using QCalendar in a business endeavor. 
 
-All you need is a [Github account](https://github.com/join) to get started.
+All you need is a [GitHub account](https://github.com/join) to get started.
 
 ## Working in the open
 

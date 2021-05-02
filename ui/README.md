@@ -25,7 +25,7 @@ Go to Netlify which is hosting QCalendar v4.0.0 docs https://qcalendar.netlify.a
 # Donations
 
 QCalendar is an open source MIT project that has been made possible due to the **generous contributions** by [sponsors and backers](https://github.com/sponsors/hawkeye64). If you are interested in supporting this project, please consider:
-- [Becoming a sponsor on Github](https://github.com/users/hawkeye64/sponsorship)
+- [Becoming a sponsor on GitHub](https://github.com/users/hawkeye64/sponsorship)
 - [One-off donation via PayPal](https://paypal.me/hawkeye64)
 
 ---
