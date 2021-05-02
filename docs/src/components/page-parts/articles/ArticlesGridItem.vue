@@ -83,10 +83,11 @@ export default defineComponent({
   max-width: 225px
   max-height: 225px
   cursor: pointer
-  transition: box-shadow .3s
+  transition: box-shadow .3s, transform .3s
 
   &:hover
     box-shadow: 0 10px 13px -6px rgb(0 0 0 / 20%), 0 20px 31px 3px rgb(0 0 0 / 14%), 0 8px 38px 7px rgb(0 0 0 / 12%)
+    transform: scale(1.01, 1.01)
 
 
 
