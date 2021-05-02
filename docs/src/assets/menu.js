@@ -763,7 +763,7 @@ const menu = [
     expanded: false,
     children: [
       {
-        name: 'Github',
+        name: 'GitHub',
         external: true,
         path: 'https://github.com/quasarframework/quasar-ui-qcalendar',
         rightIcon: biGithub

@@ -1,5 +1,6 @@
 import menuItems from '../assets/menu.js'
 import examples from '../assets/examples.js'
+import articles from '../assets/articles.js'
 import getCategoryIndex from 'src/components/getCategoryIndex.js'
 
 const menuRoutes = [
@@ -69,6 +70,18 @@ function parseMenuNode (node, __path) {
 menuItems.forEach(node => {
   parseMenuNode(node, '')
 })
+
+menuRoutes.push(
+  ...articles.map(article => {
+    return {
+      path: article.path,
+      name: article.name,
+      component: article.component
+    }
+  })
+)
+
+// console.log('menuRoutes:', menuRoutes)
 
 const routes = [
   {
