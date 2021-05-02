@@ -8,7 +8,7 @@ const { version } = pkg
 
 
 setDefaults({
-  locationUrl: 'https://github.com/quasarframework/quasar-ui-qcalendar/tree/next/docs.next/src/examples',
+  locationUrl: 'https://github.com/quasarframework/quasar-ui-qcalendar/tree/next/docs/src/examples',
   jsPaths: [`https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@${ version }/dist/index.umd.min.js`],
   cssPaths: [
     `https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@${ version }/dist/index.min.css`,
