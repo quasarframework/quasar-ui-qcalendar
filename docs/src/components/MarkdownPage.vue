@@ -16,7 +16,7 @@
           <markdown-link
             :to="'https://github.com/quasarframework/quasar-ui-qcalendar/tree/next/docs.next/src/pages' + path + '.md'"
           >
-            &nbsp; Edit this page on Github
+            &nbsp; Edit this page on GitHub
           </markdown-link>
         </div>
       </div>
