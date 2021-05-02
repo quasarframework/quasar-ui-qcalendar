@@ -23,7 +23,6 @@ export default defineComponent({
     ArticlesGridItem
   },
   setup () {
-    console.log('articles:', articles)
     return {
       articles
     }

@@ -44,8 +44,6 @@ export default {
     const search = ref('')
     const selectedVersion = ref(props.latest)
 
-    console.log('props:', props)
-
     watch(() => props.latest, val => {
       selectedVersion.value = val
     })
