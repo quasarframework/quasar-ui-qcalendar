@@ -31,12 +31,12 @@ export default defineComponent({
 
           // When image is loaded, resolve the promise
           imgElement.addEventListener('load', function imgOnLoad() {
-              resolve(this)
+            resolve(this)
           })
 
           // When there's an error during load, reject the promise
           imgElement.addEventListener('error', function imgOnError() {
-              reject();
+            reject();
           })
 
           // Assign URL
@@ -48,17 +48,17 @@ export default defineComponent({
 
       const src = '/articles/' + props.article.name + '/index.jpg'
       testImage(src).then(
-          function fulfilled(img) {
-            img.style = 'max-width: 225px; max-height: 150px;'
-            coverImage.value = true
-            coverImagePath.value = src
-            imageRef.value.appendChild(img)
-          },
-          function rejected() {
-            if (process.env.NODE_ENV !== 'production') {
-              console.error('The image was not found:', src )
-            }
+        function fulfilled(img) {
+          img.style = 'max-width: 225px; max-height: 150px;'
+          coverImage.value = true
+          coverImagePath.value = src
+          imageRef.value.appendChild(img)
+        },
+        function rejected() {
+          if (process.env.NODE_ENV !== 'production') {
+            console.error('The image was not found:', src )
           }
+        }
       )
     })
 
