@@ -236,7 +236,7 @@ export default defineComponent({
     const month = padNumber((date.getMonth() + 1), 2)
     this.tasks.forEach(task => {
       task.logged.forEach(logged => {
-        // get last 2 digited from current date (day)
+        // get last 2 digits from current date (day)
         const day = logged.date.slice(-2)
         logged.date = [ year, padNumber(month, 2), padNumber(day, 2) ].join('-')
       })
