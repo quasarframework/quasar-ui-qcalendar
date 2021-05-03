@@ -19,7 +19,7 @@ components:
 
 News and Articles, like much of the content on this site, is driven by markdown. If you would like to add to the content here, by adding some news or an article, the following steps will help get you started.
 
-You will need to create a PR (Pull Request) to have your content added to the main repo. Creating a PR is beyond the scope of this article, but a quick search should find you plenty of information.
+You will need to create a PR (Pull Request) to have your content added to the main repo. Creating a PR is beyond the scope of this article. Here is a great resource to get you going, check out this [free video series](https://app.egghead.io/playlists/how-to-contribute-to-an-open-source-project-on-github).
 
 1. In `src/pages/articles` add a file for your content (**this needs to be all lowercase**)
     - the file's first 10 characters are in ISO date format (**YYYY-MM-DD**); this represents when the article will be published and the order it will appear in. If right away, then just use today's date.
