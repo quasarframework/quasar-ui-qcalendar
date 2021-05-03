@@ -77,7 +77,6 @@ export default {
         .replace(/\*([\S ]*?)\*/g, '<em>$1</em>')
         .replace(/```([\S]+)/g, '<code class="q-markdown--code__inner release__code">')
         .replace(/```\n/g, '</code>')
-        // .replace(/`([\w ]+)`/g, '<code class="example-token">$1</code>')
         .replace(/\`(.*?)\`/g, '<code class="q-markdown--token">$1</code>')
         .replace(/#([\d]+)/g, '<a class="markdown-link" href="https://github.com/quasarframework/quasar-ui-qcalendar/issues/$1" target="_blank">#$1</a>')
         .replace(/^&gt; ([\S ]+)$/gm, '<div class="release__blockquote">$1</div>')
