@@ -6,17 +6,17 @@ keys: Contributing
 
 You can contribute to the content on the QCalendar site in a few different ways. Choose the way that works best for you.
 
-## Editing Pages
+## Editing pages
 
 The easiest was to edit a page is with the ++Edit this page on GitHub++ link that appears on the bottom of almost all pages on this site. The link opens a specific GitHub page where you can edit the content and then propose the change with a Pull Request.
 
 Alternatively, you can fork the QCalendar repo, make your changes and generate a Pull Request.
 
-## Using Markdown
+## Using markdown
 
 The site is written using a syntax called [markdown](https://en.wikipedia.org/wiki/Markdown). If you are unfamiliar with this syntax, it is quite easily learned.
 
-## Guidelines for Writing Content
+## Guidelines for writing content
 
 Please keep this in mind when writing content for QCalendar:
 

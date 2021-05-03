@@ -8,7 +8,8 @@ The information below can help you migrate from QCalendar v3.x to QCalendar v4.0
 
 > QCalendar 4.x+ only works with a Vue 3 instance. If you are still using Vue 2, use the [QCalendar v3 branch]() (TODO: not created yet).
 
-> The information below is by no means an exhaustive list of changes and new functionality. If you see something that has been missed, please PR or let us know.
+> The information below is by no means an exhaustive list of changes and new functionality. If you see something that has been missed, please PR or let us know. Also check the [Changelog](/latest-news/changelog) page for ungoing updates.
+
 ## QCalendar v4.0.0 Alpha
 Welcome to the QCalendar v4.0.0 Alpha release.
 
@@ -16,13 +17,13 @@ With this update comes a lot of changes, with over 90% of QCalendar being rewrit
 
 > Until the final stable version is released, some aspects of the calendar may change. We're not planning for additional breaking changes, but unforeseen reported issues may require us to do breaking changes (unlikely, but keep this in mind). So please make sure that you read each v4 alpha/beta version's release notes carefully before upgrading.
 
-## QCalendar Rewritten to use Vue v3 Composition API
+## QCalendar rewritten to use Vue v3 Composition API
 This means you get better in-editor auto-completion support amongst many other advantages.
 
-## New Calendar
+## New calendar component
 Just quickly, for information purposes, there is a new QCalendarTask component for writing timesheets and Gantt-like calendars. This component is still actively being worked on (at the time this document was being written). So, just a heads up.
 
-## Calendar Types
+## Calendar types
 Previously, the actual QCalendar component was a wrapper around other calendar components. You could specify which component-type to use via the `view` property (ex: `month`, `week`, `agenda`, etc). There were a LOT of different views. These components have now been made available on an individual basis. This is better for tree-shaking.
 
 However, there is still a QCalendar (wrapper) component and if you have an edge-case that needs the multi-component support the new property to use is `mode` because some calendar's still need the `view` property. The available values are: `day`, `month`, `agenda`, `resource`, `scheduler` and `task`.
@@ -174,7 +175,7 @@ Below is a list of all existing slots. Some are new, some have changed and some 
 - all mouse events using `:` separator should be changed to `-` (vue3 best practices)
 - examples: `@click-date="onClickDate"`, `@click-time="onClickTime"`, `@click-interval="onClickInterval"`, ...
 
-### Drag and Drop
+### Drag and drop
 - All drag and drop function signatures have changed. `timestamp` has been removed, but `scope` has been added which contains `timestamp`. Now, the signature looks like this: `dragDropFunc(e, type, scope)`, where dragDropFunc is one of `drag-enter-func`, `drag-leave-func`, `drag-over-func` or `drop-func`. These are properties to the calendar which take a function. The function must return true if you want `droppable` attribute in the scoped data. You can then use the `droppable` attribute with `day-style`, `day-class`, `interval-style`, or `interval-class` to change the styling of the cell to indicate a drop zone. The second parameter `type`, will be one of `day`, `head-day`, `interval`, or `resource` so you know where the drag and drop is being handled. When using this technique, avoid changing borders, otherwise the UX will not look nice. Instead, use a `box-shadow` effect (ie: `box-shadow: inset 0 0 0 1px blue`).
 - Also be aware, that for drag and drop to work correctly, both `drag-enter-func` and `drag-over-func` need to call `preventDefault` on the passed in event to prevent default handling by the browser.
 - css classes ending in `--droppable` have been removed.
@@ -182,7 +183,7 @@ Below is a list of all existing slots. Some are new, some have changed and some 
 ### Other
 - For QCalendarMonth there is no longer a set minimum height of 5.0em. Use the new property `day-min-height` to control the minimum height of a day cell. And, also remember that if `day-height` is set to `"0"` then the height will automatically grow according to the content, otherwise if `day-height` is set to anything other than `"0"` the height of a day cell will be fixed.
 
-## New Functionality
+## New functionality
 
 ### Properties
 - `interval-style`, `day-style` and `day-class` all receive a scope object
