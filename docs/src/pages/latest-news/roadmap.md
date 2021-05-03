@@ -1,6 +1,6 @@
 ---
 title: Roadmap
-desc: 
+desc: The future of QCalendar
 keys: latest-news
 ---
 
