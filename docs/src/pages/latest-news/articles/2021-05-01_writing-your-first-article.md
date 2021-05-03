@@ -9,7 +9,7 @@ components:
 
 ![image](/articles/2021-05-01_writing-your-first-article/index.jpg =1200x200)
 
-## Write your first QCalendar article
+## Writing your first QCalendar article
 
 <articles-avatar
   avatar-src="https://avatars.githubusercontent.com/u/10262924"
@@ -83,7 +83,7 @@ components:
   - articles/ArticlesAvatar
 ```
 
-and I can use the component like this:
+and I can use the component like this, directly in the markdown:
 
 ```html
 <articles-avatar
