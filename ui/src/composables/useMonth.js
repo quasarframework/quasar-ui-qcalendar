@@ -93,7 +93,7 @@ export default function (props, emit, {
     else if (size.width > 0 && headerColumnRef.value) {
       width = headerColumnRef.value.offsetWidth / props.weekdays.length
     }
-    return width + 1 // for border
+    return width
   })
 
   /**

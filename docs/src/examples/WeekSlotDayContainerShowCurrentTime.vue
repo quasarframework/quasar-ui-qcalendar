@@ -132,7 +132,7 @@ export default defineComponent({
       const now = parseDate(new Date())
       currentDate.value = now.date
       currentTime.value = now.time
-      timeStartPos.value = calendar.value.timeStartPos(currentTime.value)
+      timeStartPos.value = calendar.value.timeStartPos(currentTime.value, false)
     }
 
     return {

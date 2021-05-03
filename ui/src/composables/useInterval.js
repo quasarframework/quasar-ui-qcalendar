@@ -240,7 +240,7 @@ export default function (props, {
   const parsedIntervalStart = computed(() => parseInt(props.intervalStart, 10))
   const parsedIntervalMinutes = computed(() => parseInt(props.intervalMinutes, 10))
   const parsedIntervalCount = computed(() => parseInt(props.intervalCount, 10))
-  const parsedIntervalHeight = computed(() => parseFloat(props.intervalHeight) + 1) // for border
+  const parsedIntervalHeight = computed(() => parseFloat(props.intervalHeight))
   const parsedCellWidth = computed(() => {
     let width = 0
     if (props.cellWidth) {
@@ -249,7 +249,7 @@ export default function (props, {
     else if (size.width > 0 && headerColumnRef.value) {
       width = headerColumnRef.value.offsetWidth / (props.columnCount > 1 ? props.columnCount : maxDays.value)
     }
-    return width + 1 // for border
+    return width
   })
   const parsedStartMinute = computed(() => parsedIntervalStart.value * parsedIntervalMinutes.value)
   const bodyHeight = computed(() => parsedIntervalCount.value * parsedIntervalHeight.value)
