@@ -38,13 +38,13 @@ import sanitize from './sanitize'
 import parseMdTable from './md-table-parser'
 
 export default {
-  props: [ 'latest', 'releases' ],
+  props: [ 'active', 'releases' ],
 
   setup (props) {
     const search = ref('')
-    const selectedVersion = ref(props.latest)
+    const selectedVersion = ref(props.active)
 
-    watch(() => props.latest, val => {
+    watch(() => props.active, val => {
       selectedVersion.value = val
     })
 

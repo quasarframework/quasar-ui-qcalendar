@@ -10,13 +10,13 @@
       <div>Loading release notes from GitHub</div>
     </q-card-section>
     <template v-else>
-      <q-tabs v-model="currentPackage" align="left" active-color="primary" active-bg-color="blue-1" indicator-color="primary" class="text-grey-7">
+      <!-- <q-tabs v-model="currentPackage" align="left" active-color="primary" active-bg-color="blue-1" indicator-color="primary" class="text-grey-7">
         <q-tab v-for="(packageReleases, packageName) in packages" :label="packageName" :name="packageName" :key="packageName" />
-      </q-tabs>
+      </q-tabs> -->
       <q-separator />
       <q-tab-panels v-model="currentPackage" animated class="packages-container">
         <q-tab-panel v-for="(packageReleases, packageName) in packages" :name="packageName" :key="packageName" class="q-pa-none">
-          <package-releases :lastest="versions[packageName]" :releases="packageReleases" />
+          <package-releases :active="latestVersions[packageName]" :releases="packageReleases" />
         </q-tab-panel>
       </q-tab-panels>
     </template>
@@ -47,19 +47,19 @@ export default {
     const packages = ref(packagesDefinitions)
     const currentPackage = ref('QCalendar')
     const versions = ref({})
+    const latestVersions = ref({})
 
     function queryReleases (page = 1) {
       loading.value = true
       error.value = false
 
-      const latestVersions = {}
       const xhrQuasar = new XMLHttpRequest()
 
       xhrQuasar.addEventListener('load', function () {
-        loading.value = false
         const releases = JSON.parse(this.responseText)
 
-        if (releases.length === 0) {
+        if (!releases || releases.length === 0) {
+          error.value = true
           return
         }
 
@@ -68,7 +68,7 @@ export default {
 
         for (const release of releases) {
           const [ name, version ] = release.name.split('v')
-          if (name !== '' && name.startsWith('@quasar/quasar-ui-qcalendar') !== true) {
+          if (name !== '' && name.startsWith('@quasar') === true) {
             continue
           }
 
@@ -91,16 +91,14 @@ export default {
           }
           packages.value[ packageName ].push(releaseInfo)
 
-          if (latestVersions[ packageName ] === void 0) {
-            latestVersions[ packageName ] = releaseInfo.label
+          if (latestVersions.value[ packageName ] === void 0) {
+            latestVersions.value[ packageName ] = releaseInfo.label
           }
         }
 
         if (!stopQuery) {
           queryReleases(page + 1)
         }
-
-        versions.value = Object.assign(latestVersions, versions.value)
 
         // sort by date
         packages.value.QCalendar.sort((a, b) => {
@@ -116,14 +114,15 @@ export default {
       xhrQuasar.send()
     }
 
-    onMounted(() => { queryReleases() })
+    onMounted(() => { queryReleases(); loading.value = false })
 
     return {
       loading,
       error,
       packages,
       currentPackage,
-      versions
+      versions,
+      latestVersions
     }
   }
 }
