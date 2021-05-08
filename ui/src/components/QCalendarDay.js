@@ -456,6 +456,7 @@ export default defineComponent({
       }, [
         slot && h('div', {
           ref: headDayEventsParentRef,
+          // TODO: this needs to be a class
           style: {
             position: 'absolute',
             left: 0,
@@ -686,7 +687,7 @@ export default defineComponent({
     function __renderHeadWeekdayLabel (day, shortWeekdayLabel) {
       const weekdayLabel = weekdayFormatter.value(day, shortWeekdayLabel || (props.weekdayBreakpoints[ 0 ] > 0 && parsedCellWidth.value <= props.weekdayBreakpoints[ 0 ]))
       return h('span', {
-        class: 'q-calendar__ellipsis'
+        class: 'q-calendar-day__head--weekday-label q-calendar__ellipsis'
       }, props.weekdayBreakpoints[ 1 ] > 0 && parsedCellWidth.value <= props.weekdayBreakpoints[ 1 ] ? minCharWidth(weekdayLabel, props.minWeekdayLabel) : weekdayLabel)
     }
 
@@ -1005,7 +1006,10 @@ export default defineComponent({
 
       return h('div', {
         key: interval.time,
-        class: 'q-calendar-day__interval',
+        class: {
+          'q-calendar-day__interval': interval.minute === 0,
+          'q-calendar-day__interval--section': interval.minute !== 0
+        },
         style: {
           height
         }

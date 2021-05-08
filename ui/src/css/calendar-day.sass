@@ -113,7 +113,8 @@
     flex: 1 1 100%
     user-select: none
 
-  &__interval
+  &__interval,
+  &__interval--section
     // position: relative
     text-align: left
     outline: 0
@@ -174,7 +175,8 @@
 
   // hide the interval lines
   // needed for correct spacing
-  &__interval
+  &__interval,
+  &__interval--section
     border-bottom: var(--calendar-background) 1px solid
     color: var(--calendar-color)
     background: var(--calendar-background)
@@ -279,7 +281,8 @@
 
     // hide the interval lines
     // needed for correct spacing
-    &__interval
+    &__interval,
+    &__interval--section
       border-bottom: var(--calendar-background-dark) 1px solid
       color: var(--calendar-color-dark)
       background: var(--calendar-background-dark)
