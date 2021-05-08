@@ -6,7 +6,6 @@ keys: latest-news
 components:
   - articles/ArticlesAvatar
 ---
-
 ![image](/articles/2021-05-01_writing-your-first-article/index.jpg =1200x200)
 
 ## Writing your first QCalendar article
