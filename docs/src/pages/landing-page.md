@@ -5,7 +5,5 @@ keys: Help
 noEdit: true,
 components:
   - LandingPageContent
-
 ---
-
 <landing-page-content />
