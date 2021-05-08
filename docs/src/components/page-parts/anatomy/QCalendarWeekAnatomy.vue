@@ -1,6 +1,6 @@
 <template>
   <div class="row justify-center q-mt-md text-h5 text-bold">
-    QCalendarDay
+    QCalendarDay (week)
   </div>
   <div class="row full-width q-pa-xs rounded-borders" style="border: 2px solid rgba(25,118,210,.65);">
     <q-scroll-area style="max-width: 180px; width: 100%; max-height: 300px; col">
@@ -21,8 +21,9 @@
 
     <div class="col">
       <q-calendar-day
-        id="calendar-day"
+        id="calendar-week"
         ref="calendar"
+        view="week"
         bordered
         :interval-minutes="15"
         :interval-count="96"
@@ -41,7 +42,7 @@ import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarDay.sass'
 
 export default defineComponent({
-  name: 'QCalendarDayAnatomy',
+  name: 'QCalendarWeekAnatomy',
   components: {
     QCalendarDay
   },
@@ -118,7 +119,7 @@ export default defineComponent({
     })
 
     onMounted(() => {
-      el.value = document.getElementById('calendar-day')
+      el.value = document.getElementById('calendar-week')
       setTimeout(() => {
         addClass(selected.value)
       }, 350)
