@@ -7,6 +7,7 @@ components:
   - anatomy/QCalendarWeekAnatomy
   - anatomy/QCalendarMonthAnatomy
   - anatomy/QCalendarMonthMiniModeAnatomy
+  - anatomy/QCalendarSchedulerAnatomy
 ---
 ## QCalendarDay
 <q-calendar-day-anatomy />
@@ -19,3 +20,7 @@ components:
 
 ## QCalendarMonth (mini-mode)
 <q-calendar-month-mini-mode-anatomy />
+
+## QCalendarScheduler
+<q-calendar-scheduler-anatomy />
+
