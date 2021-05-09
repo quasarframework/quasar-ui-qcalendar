@@ -1,6 +1,6 @@
 <template>
   <div class="row full-width q-pa-xs rounded-borders" style="border: 2px solid rgba(25,118,210,.65);">
-    <q-scroll-area style="max-width: 180px; width: 100%; max-height: 300px; col">
+    <q-scroll-area class="col" style="max-width: 180px; width: 100%; max-height: 300px;">
       <q-list dense>
         <q-item
           v-for="type in types"
