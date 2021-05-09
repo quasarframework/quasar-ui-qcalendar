@@ -455,6 +455,7 @@ export default defineComponent({
           'q-calendar-scheduler__head--days__event': true
         }
       }, [
+        // TODO: this needs to be in a class
         slot && h('div', {
           ref: headDayEventsParentRef,
           style: {

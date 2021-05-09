@@ -46,67 +46,67 @@ export default defineComponent({
   setup () {
     const calendar = ref(null)
     const types = reactive([
-        {
-          name: 'Head Intervals',
-          class: 'q-calendar-day__head--intervals'
-        },
-        {
-          name: 'Interval',
-          class: 'q-calendar-day__interval'
-        },
-        {
-          name: 'Interval Section',
-          class: 'q-calendar-day__interval--section'
-        },
-        {
-          name: 'Head Day',
-          class: 'q-calendar-day__head--day'
-        },
-        {
-          name: 'Head Weekday',
-          class: 'q-calendar-day__head--weekday'
-        },
-        {
-          name: 'Head Weekday Label',
-          class: 'q-calendar-day__head--weekday-label'
-        },
-        {
-          name: 'Head Date',
-          class: 'q-calendar-day__head--date'
-        },
-        {
-          name: 'Head Day Button',
-          class: 'q-calendar-day__head--day__label'
-        },
-        {
-          name: 'Head Day Event',
-          class: 'q-calendar-day__head--day__event'
-        },
-        {
-          name: 'Head Days Events',
-          class: 'q-calendar-day__head--days__event'
-        },
-        {
-          name: 'Day Container',
-          class: 'q-calendar-day__day-container'
-        },
-        {
-          name: 'Day Body',
-          class: 'q-calendar-day__body'
-        },
-        {
-          name: 'Day',
-          class: 'q-calendar-day__day'
-        },
-        {
-          name: 'Day Interval',
-          class: 'q-calendar-day__day-interval'
-        },
-        {
-          name: 'Day Section',
-          class: 'q-calendar-day__day-interval--section'
-        }
-      ])
+      {
+        name: 'Head Intervals',
+        class: 'q-calendar-day__head--intervals'
+      },
+      {
+        name: 'Interval',
+        class: 'q-calendar-day__interval'
+      },
+      {
+        name: 'Interval Section',
+        class: 'q-calendar-day__interval--section'
+      },
+      {
+        name: 'Head Day',
+        class: 'q-calendar-day__head--day'
+      },
+      {
+        name: 'Head Weekday',
+        class: 'q-calendar-day__head--weekday'
+      },
+      {
+        name: 'Head Weekday Label',
+        class: 'q-calendar-day__head--weekday-label'
+      },
+      {
+        name: 'Head Date',
+        class: 'q-calendar-day__head--date'
+      },
+      {
+        name: 'Head Day Button',
+        class: 'q-calendar-day__head--day__label'
+      },
+      {
+        name: 'Head Day Event',
+        class: 'q-calendar-day__head--day__event'
+      },
+      {
+        name: 'Head Days Events',
+        class: 'q-calendar-day__head--days__event'
+      },
+      {
+        name: 'Day Container',
+        class: 'q-calendar-day__day-container'
+      },
+      {
+        name: 'Day Body',
+        class: 'q-calendar-day__body'
+      },
+      {
+        name: 'Day',
+        class: 'q-calendar-day__day'
+      },
+      {
+        name: 'Day Interval',
+        class: 'q-calendar-day__day-interval'
+      },
+      {
+        name: 'Day Section',
+        class: 'q-calendar-day__day-interval--section'
+      }
+    ])
     const selected = ref(types[ 0 ])
     const el = ref(null)
 

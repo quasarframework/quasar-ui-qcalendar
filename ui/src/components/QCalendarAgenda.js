@@ -493,6 +493,7 @@ export default defineComponent({
         }
       }, [
         slot && h('div', {
+          // TODO: need a class
           ref: headDayEventsParentRef,
           style: {
             position: 'absolute',

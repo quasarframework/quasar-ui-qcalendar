@@ -6,6 +6,7 @@
         ref="calendar"
         v-model="selectedDate"
         v-model:modelTasks="parsedTasks"
+        v-model:modelTitle="titleTasks"
         v-model:modelFooter="footerTasks"
         view="month"
         :task-width="240"
@@ -51,6 +52,12 @@
           <template v-for="time in getLogged(scope.timestamp.date, scope.task.logged)" :key="time">
             <div class="logged-time">{{ time.logged }}</div>
           </template>
+        </template>
+
+        <template #title-task="{ scope }">
+          <div class="summary ellipsis">
+            <div class="title ellipsis">{{ scope.title.label }}</div>
+          </div>
         </template>
 
         <template #footer-task="{ scope }">
@@ -192,6 +199,10 @@ export default defineComponent({
             { date: '2021-03-30', logged: 1.0 }
           ]
         }
+      ],
+      titleTasks: [
+        { label: 'TITLE' },
+        { label: 'SUBTITLE' }
       ],
       footerTasks: [
         { title: 'TOTALS' }

@@ -8,7 +8,16 @@ components:
   - anatomy/QCalendarMonthAnatomy
   - anatomy/QCalendarMonthMiniModeAnatomy
   - anatomy/QCalendarSchedulerAnatomy
+  - anatomy/QCalendarResourceAnatomy
+  - anatomy/QCalendarAgendaAnatomy
+  - anatomy/QCalendarTaskAnatomy
 ---
+Make a selection on the left of a calendar to see the result on the right.
+
+::: warning
+Some selections may not show up correctly because of `sticky` being used, which causes the sticky section to be above the highlighted area. In some cases, it's better to view in Dark mode.
+:::
+
 ## QCalendarDay
 <q-calendar-day-anatomy />
 
@@ -23,4 +32,13 @@ components:
 
 ## QCalendarScheduler
 <q-calendar-scheduler-anatomy />
+
+## QCalendarResource
+<q-calendar-resource-anatomy />
+
+## QCalendarAgenda
+<q-calendar-agenda-anatomy />
+
+## QCalendarTask
+<q-calendar-task-anatomy />
 

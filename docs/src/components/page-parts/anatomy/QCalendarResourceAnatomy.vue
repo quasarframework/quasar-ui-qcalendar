@@ -17,10 +17,9 @@
     </q-scroll-area>
 
     <div class="col">
-      <q-calendar-scheduler
-        id="calendar-scheduler"
+      <q-calendar-resource
+        id="calendar-resource"
         ref="calendar"
-        view="week"
         bordered
         v-model:modelResources="resources"
         resource-key="id"
@@ -33,70 +32,58 @@
 
 <script>
 import { defineComponent, ref, reactive, watch, onMounted } from 'vue'
-import { QCalendarScheduler } from '@quasar/quasar-ui-qcalendar/src/QCalendarScheduler.js'
+import { QCalendarResource } from '@quasar/quasar-ui-qcalendar/src/QCalendarResource.js'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarScheduler.sass'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarResource.sass'
 
 export default defineComponent({
-  name: 'QCalendarSchedulerAnatomy',
+  name: 'QCalendarResourceAnatomy',
   components: {
-    QCalendarScheduler
+    QCalendarResource
   },
   setup () {
     const calendar = ref(null)
     const types = reactive([
       {
         name: 'Head',
-        class: 'q-calendar-scheduler__head'
+        class: 'q-calendar-resource__head'
       },
       {
         name: 'Head Resources',
-        class: 'q-calendar-scheduler__head--resources'
+        class: 'q-calendar-resource__head--resources'
       },
       {
-        name: 'Head Weekdays',
-        class: 'q-calendar-scheduler__head--days__weekdays'
+        name: 'Head Intervals',
+        class: 'q-calendar-resource__head--intervals'
       },
       {
-        name: 'Head Day',
-        class: 'q-calendar-scheduler__head--day'
-      },
-      {
-        name: 'Head Weekday',
-        class: 'q-calendar-scheduler__head--weekday'
-      },
-      {
-        name: 'Head Date',
-        class: 'q-calendar-scheduler__head--date'
-      },
-      {
-        name: 'Head Day Button',
-        class: 'q-calendar-scheduler__head--day__label'
-      },
-      {
-        name: 'Head Day Event',
-        class: 'q-calendar-scheduler__head--day__event'
+        name: 'Head Interval',
+        class: 'q-calendar-resource__head--interval'
       },
       {
         name: 'Body',
-        class: 'q-calendar-scheduler__body'
+        class: 'q-calendar-resource__body'
       },
       {
         name: 'Container',
-        class: 'q-calendar-scheduler__day--container'
+        class: 'q-calendar-resource__day--container'
+      },
+      {
+        name: 'Resources Body',
+        class: 'q-calendar-resource__resources--body'
       },
       {
         name: 'Resource Row',
-        class: 'q-calendar-scheduler__resource--row'
+        class: 'q-calendar-resource__resource--row'
       },
       {
         name: 'Resource',
-        class: 'q-calendar-scheduler__resource'
+        class: 'q-calendar-resource__resource'
       },
       {
         name: 'Resource Section',
-        class: 'q-calendar-scheduler__resource--section'
+        class: 'q-calendar-resource__resource--section'
       },
       {
         name: 'Parent',
@@ -108,19 +95,15 @@ export default defineComponent({
       },
       {
         name: 'Resource Text',
-        class: 'q-calendar-scheduler__resource--text'
+        class: 'q-calendar-resource__resource--text'
       },
       {
-        name: 'Resource Days',
-        class: 'q-calendar-scheduler__resource--days'
+        name: 'Resource Intervals',
+        class: 'q-calendar-resource__resource--intervals'
       },
       {
-        name: 'Resource Day',
-        class: 'q-calendar-scheduler__day'
-      },
-      {
-        name: 'Resource Day Section',
-        class: 'q-calendar-scheduler__day--section'
+        name: 'Resource Interval',
+        class: 'q-calendar-resource__resource--interval'
       }
     ])
     const selected = ref(types[ 0 ])
@@ -157,7 +140,7 @@ export default defineComponent({
     })
 
     onMounted(() => {
-      el.value = document.getElementById('calendar-scheduler')
+      el.value = document.getElementById('calendar-resource')
       setTimeout(() => {
         addClass(selected.value)
       }, 350)

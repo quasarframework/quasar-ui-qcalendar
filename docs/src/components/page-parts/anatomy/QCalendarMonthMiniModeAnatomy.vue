@@ -45,59 +45,59 @@ export default defineComponent({
   setup () {
     const calendar = ref(null)
     const types = reactive([
-        {
-          name: 'Head',
-          class: 'q-calendar-month__head'
-        },
-        {
-          name: 'Head Workweek',
-          class: 'q-calendar-month__head--workweek'
-        },
-        {
-          name: 'Workweek',
-          class: 'q-calendar-month__workweek'
-        },
-        {
-          name: 'Head Weekdays',
-          class: 'q-calendar-month__head--weekdays'
-        },
-        {
-          name: 'Head Weekday',
-          class: 'q-calendar-month__head--weekday'
-        },
-        {
-          name: 'Head Day Event',
-          class: 'q-calendar-month__head--event'
-        },
-        {
-          name: 'Week',
-          class: 'q-calendar-month__week--wrapper'
-        },
-        {
-          name: 'Week Days',
-          class: 'q-calendar-month__week--days'
-        },
-        {
-          name: 'Day',
-          class: 'q-calendar-month__day'
-        },
-        {
-          name: 'Day Label Wrapper',
-          class: 'q-calendar-month__day--label__wrapper'
-        },
-        {
-          name: 'Day Label',
-          class: 'q-calendar-month__day--label'
-        },
-        {
-          name: 'Day Content',
-          class: 'q-calendar-month__day--content'
-        },
-        {
-          name: 'Body',
-          class: 'q-calendar-month__body'
-        }
-      ])
+      {
+        name: 'Head',
+        class: 'q-calendar-month__head'
+      },
+      {
+        name: 'Head Workweek',
+        class: 'q-calendar-month__head--workweek'
+      },
+      {
+        name: 'Workweek',
+        class: 'q-calendar-month__workweek'
+      },
+      {
+        name: 'Head Weekdays',
+        class: 'q-calendar-month__head--weekdays'
+      },
+      {
+        name: 'Head Weekday',
+        class: 'q-calendar-month__head--weekday'
+      },
+      {
+        name: 'Head Day Event',
+        class: 'q-calendar-month__head--event'
+      },
+      {
+        name: 'Week',
+        class: 'q-calendar-month__week--wrapper'
+      },
+      {
+        name: 'Week Days',
+        class: 'q-calendar-month__week--days'
+      },
+      {
+        name: 'Day',
+        class: 'q-calendar-month__day'
+      },
+      {
+        name: 'Day Label Wrapper',
+        class: 'q-calendar-month__day--label__wrapper'
+      },
+      {
+        name: 'Day Label',
+        class: 'q-calendar-month__day--label'
+      },
+      {
+        name: 'Day Content',
+        class: 'q-calendar-month__day--content'
+      },
+      {
+        name: 'Body',
+        class: 'q-calendar-month__body'
+      }
+    ])
     const selected = ref(types[ 0 ])
     const el = ref(null)
 
