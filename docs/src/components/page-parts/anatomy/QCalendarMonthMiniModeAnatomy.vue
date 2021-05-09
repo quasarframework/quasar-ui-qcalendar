@@ -18,16 +18,14 @@
 
     <div class="col">
       <q-calendar-month
-        id="calendar-month"
+        id="calendar-month-mini-mode"
         ref="calendar"
         bordered
+        mini-mode
         show-work-weeks
         show-day-of-year-label
-        date-align="right"
-        style="height: 300px;"
-      >
-        <template #week />
-      </q-calendar-month>
+        style="height: 200px; max-width: 300px;"
+      />
     </div>
   </div>
 </template>
@@ -40,7 +38,7 @@ import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarMonth.sass'
 
 export default defineComponent({
-  name: 'QCalendarMonthAnatomy',
+  name: 'QCalendarMonthMiniModeAnatomy',
   components: {
     QCalendarMonth
   },
@@ -48,23 +46,23 @@ export default defineComponent({
     const calendar = ref(null)
     const types = reactive([
         {
-          name: 'Head Workweek',
-          class: 'q-calendar-month__head--workweek'
-        },
-        {
           name: 'Head',
           class: 'q-calendar-month__head'
+        },
+        {
+          name: 'Head Workweek',
+          class: 'q-calendar-month__head--workweek'
         },
         {
           name: 'Workweek',
           class: 'q-calendar-month__workweek'
         },
         {
-          name: 'Weekdays',
+          name: 'Head Weekdays',
           class: 'q-calendar-month__head--weekdays'
         },
         {
-          name: 'Weekday',
+          name: 'Head Weekday',
           class: 'q-calendar-month__head--weekday'
         },
         {
@@ -80,10 +78,6 @@ export default defineComponent({
           class: 'q-calendar-month__week--days'
         },
         {
-          name: 'Week Events',
-          class: 'q-calendar-month__week--events'
-        },
-        {
           name: 'Day',
           class: 'q-calendar-month__day'
         },
@@ -94,14 +88,6 @@ export default defineComponent({
         {
           name: 'Day Label',
           class: 'q-calendar-month__day--label'
-        },
-        {
-          name: 'Day of Year Label',
-          class: 'q-calendar-month__day--day-of-year'
-        },
-        {
-          name: 'Month Label',
-          class: 'q-calendar-month__day--month'
         },
         {
           name: 'Day Content',
@@ -121,7 +107,7 @@ export default defineComponent({
     })
 
     onMounted(() => {
-      el.value = document.getElementById('calendar-month')
+      el.value = document.getElementById('calendar-month-mini-mode')
       setTimeout(() => {
         addClass(selected.value)
       }, 350)
