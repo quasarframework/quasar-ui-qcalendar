@@ -572,6 +572,10 @@ const menu = [
             path: 'scheduler-focusable-hoverable'
           },
           {
+            name: 'Scheduler - Children',
+            path: 'scheduler-children'
+          },
+          {
             name: 'Scheduler - Cell width',
             path: 'scheduler-cell-width'
           },
