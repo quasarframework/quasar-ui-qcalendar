@@ -31,7 +31,8 @@
 </template>
 
 <script>
-import { QCalendarResource, today } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarResource } from '@quasar/quasar-ui-qcalendar/src/QCalendarResource.js'
+import { today } from '@quasar/quasar-ui-qcalendar/src/Timestamp.js'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarResource.sass'
