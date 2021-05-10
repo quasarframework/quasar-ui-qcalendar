@@ -365,28 +365,28 @@ export default defineComponent({
         style,
         onDragenter: (e) => {
           if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
-            props.dragEnterFunc(e, 'head-column', scope)
+            props.dragEnterFunc(e, 'head-column', scope) === true
               ? dragOverHeadDayRef.value = id
               : dragOverHeadDayRef.value = ''
           }
         },
         onDragover: (e) => {
           if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
-            props.dragOverFunc(e, 'head-column', scope)
+            props.dragOverFunc(e, 'head-column', scope) === true
               ? dragOverHeadDayRef.value = id
               : dragOverHeadDayRef.value = ''
           }
         },
         onDragleave: (e) => {
           if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
-            props.dragLeaveFunc(e, 'head-column', scope)
+            props.dragLeaveFunc(e, 'head-column', scope) === true
               ? dragOverHeadDayRef.value = id
               : dragOverHeadDayRef.value = ''
           }
         },
         onDrop: (e) => {
           if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
-            props.dropFunc(e, 'head-column', scope)
+            props.dropFunc(e, 'head-column', scope) === true
               ? dragOverHeadDayRef.value = id
               : dragOverHeadDayRef.value = ''
           }
@@ -579,28 +579,28 @@ export default defineComponent({
         style,
         onDragenter: (e) => {
           if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
-            props.dragEnterFunc(e, 'head-day', scope)
+            props.dragEnterFunc(e, 'head-day', scope) === true
               ? dragOverHeadDayRef.value = day.date
               : dragOverHeadDayRef.value = ''
           }
         },
         onDragover: (e) => {
           if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
-            props.dragOverFunc(e, 'head-day', scope)
+            props.dragOverFunc(e, 'head-day', scope) === true
               ? dragOverHeadDayRef.value = day.date
               : dragOverHeadDayRef.value = ''
           }
         },
         onDragleave: (e) => {
           if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
-            props.dragLeaveFunc(e, 'head-day', scope)
+            props.dragLeaveFunc(e, 'head-day', scope) === true
               ? dragOverHeadDayRef.value = day.date
               : dragOverHeadDayRef.value = ''
           }
         },
         onDrop: (e) => {
           if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
-            props.dropFunc(e, 'head-day', scope)
+            props.dropFunc(e, 'head-day', scope) === true
               ? dragOverHeadDayRef.value = day.date
               : dragOverHeadDayRef.value = ''
           }
@@ -904,28 +904,28 @@ export default defineComponent({
         },
         onDragenter: (e) => {
           if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
-            props.dragEnterFunc(e, 'column', scope)
+            props.dragEnterFunc(e, 'column', scope) === true
               ? dragOverHeadDayRef.value = id
               : dragOverHeadDayRef.value = ''
           }
         },
         onDragover: (e) => {
           if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
-            props.dragOverFunc(e, 'column', scope)
+            props.dragOverFunc(e, 'column', scope) === true
               ? dragOverHeadDayRef.value = id
               : dragOverHeadDayRef.value = ''
           }
         },
         onDragleave: (e) => {
           if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
-            props.dragLeaveFunc(e, 'column', scope)
+            props.dragLeaveFunc(e, 'column', scope) === true
               ? dragOverHeadDayRef.value = id
               : dragOverHeadDayRef.value = ''
           }
         },
         onDrop: (e) => {
           if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
-            props.dropFunc(e, 'column', scope)
+            props.dropFunc(e, 'column', scope) === true
               ? dragOverHeadDayRef.value = id
               : dragOverHeadDayRef.value = ''
           }

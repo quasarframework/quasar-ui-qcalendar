@@ -532,28 +532,28 @@ export default defineComponent({
         style,
         onDragenter: (e) => {
           if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
-            props.dragEnterFunc(e, 'head-day', scope)
+            props.dragEnterFunc(e, 'head-day', scope) === true
               ? dragOverHeadDayRef.value = day.date
               : dragOverHeadDayRef.value = ''
           }
         },
         onDragover: (e) => {
           if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
-            props.dragOverFunc(e, 'head-day', scope)
+            props.dragOverFunc(e, 'head-day', scope) === true
               ? dragOverHeadDayRef.value = day.date
               : dragOverHeadDayRef.value = ''
           }
         },
         onDragleave: (e) => {
           if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
-            props.dragLeaveFunc(e, 'head-day', scope)
+            props.dragLeaveFunc(e, 'head-day', scope) === true
               ? dragOverHeadDayRef.value = day.date
               : dragOverHeadDayRef.value = ''
           }
         },
         onDrop: (e) => {
           if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
-            props.dropFunc(e, 'head-day', scope)
+            props.dropFunc(e, 'head-day', scope) === true
               ? dragOverHeadDayRef.value = day.date
               : dragOverHeadDayRef.value = ''
           }
@@ -917,28 +917,28 @@ export default defineComponent({
         },
         onDragenter: (e) => {
           if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
-            props.dragEnterFunc(e, 'interval', scope)
+            props.dragEnterFunc(e, 'interval', scope) === true
               ? dragOverInterval.value = getDayTimeIdentifier(interval)
               : dragOverInterval.value = ''
           }
         },
         onDragover: (e) => {
           if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
-            props.dragOverFunc(e, 'interval', scope)
+            props.dragOverFunc(e, 'interval', scope) === true
               ? dragOverInterval.value = getDayTimeIdentifier(interval)
               : dragOverInterval.value = ''
           }
         },
         onDragleave: (e) => {
           if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
-            props.dragLeaveFunc(e, 'interval', scope)
+            props.dragLeaveFunc(e, 'interval', scope) === true
               ? dragOverInterval.value = getDayTimeIdentifier(interval)
               : dragOverInterval.value = ''
           }
         },
         onDrop: (e) => {
           if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
-            props.dropFunc(e, 'interval', scope)
+            props.dropFunc(e, 'interval', scope) === true
               ? dragOverInterval.value = getDayTimeIdentifier(interval)
               : dragOverInterval.value = ''
           }

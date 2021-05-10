@@ -390,28 +390,28 @@ export default defineComponent({
         }),
         onDragenter: (e) => {
           if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
-            props.dragEnterFunc(e, 'day', scope)
+            props.dragEnterFunc(e, 'day', scope) === true
               ? dragOverResource.value = dragValue
               : dragOverResource.value = ''
           }
         },
         onDragover: (e) => {
           if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
-            props.dragOverFunc(e, 'day', scope)
+            props.dragOverFunc(e, 'day', scope) === true
               ? dragOverResource.value = dragValue
               : dragOverResource.value = ''
           }
         },
         onDragleave: (e) => {
           if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
-            props.dragLeaveFunc(e, 'day', scope)
+            props.dragLeaveFunc(e, 'day', scope) === true
               ? dragOverResource.value = dragValue
               : dragOverResource.value = ''
           }
         },
         onDrop: (e) => {
           if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
-            props.dropFunc(e, 'day', scope)
+            props.dropFunc(e, 'day', scope) === true
               ? dragOverResource.value = dragValue
               : dragOverResource.value = ''
           }
@@ -592,8 +592,8 @@ export default defineComponent({
           default: () => [
             __renderFooterTask(task, index),
             __renderFooterDays(task, index)
-          ]}
-        )
+          ]
+        })
       })
     }
 
@@ -827,7 +827,7 @@ export default defineComponent({
      * @returns VNode
      */
         function __renderTitleDay (day, title, index) {
-        const slot = slots['title-day']
+        const slot = slots[ 'title-day' ]
 
         const width = convertToUnit(parsedCellWidth.value)
         const style = {
@@ -907,28 +907,28 @@ export default defineComponent({
         }),
         onDragenter: (e) => {
           if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
-            props.dragEnterFunc(e, 'head-day', scope)
+            props.dragEnterFunc(e, 'head-day', scope) === true
               ? dragOverHeadDayRef.value = day.date
               : dragOverHeadDayRef.value = ''
           }
         },
         onDragover: (e) => {
           if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
-            props.dragOverFunc(e, 'head-day', scope)
+            props.dragOverFunc(e, 'head-day', scope) === true
               ? dragOverHeadDayRef.value = day.date
               : dragOverHeadDayRef.value = ''
           }
         },
         onDragleave: (e) => {
           if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
-            props.dragLeaveFunc(e, 'head-day', scope)
+            props.dragLeaveFunc(e, 'head-day', scope) === true
               ? dragOverHeadDayRef.value = day.date
               : dragOverHeadDayRef.value = ''
           }
         },
         onDrop: (e) => {
           if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
-            props.dropFunc(e, 'head-day', scope)
+            props.dropFunc(e, 'head-day', scope) === true
               ? dragOverHeadDayRef.value = day.date
               : dragOverHeadDayRef.value = ''
           }

@@ -459,28 +459,28 @@ export default defineComponent({
         style,
         onDragenter: (e) => {
           if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
-            props.dragEnterFunc(e, 'head-day', scope)
+            props.dragEnterFunc(e, 'head-day', scope) === true
               ? dragOverHeadDayRef.value = day.weekday
               : dragOverHeadDayRef.value = ''
           }
         },
         onDragover: (e) => {
           if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
-            props.dragOverFunc(e, 'head-day', scope)
+            props.dragOverFunc(e, 'head-day', scope) === true
               ? dragOverHeadDayRef.value = day.weekday
               : dragOverHeadDayRef.value = ''
           }
         },
         onDragleave: (e) => {
           if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
-            props.dragLeaveFunc(e, 'head-day', scope)
+            props.dragLeaveFunc(e, 'head-day', scope) === true
               ? dragOverHeadDayRef.value = day.weekday
               : dragOverHeadDayRef.value = ''
           }
         },
         onDrop: (e) => {
           if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
-            props.dropFunc(e, 'head-day', scope)
+            props.dropFunc(e, 'head-day', scope) === true
               ? dragOverHeadDayRef.value = day.weekday
               : dragOverHeadDayRef.value = ''
           }
@@ -671,28 +671,28 @@ export default defineComponent({
       const dragAndDrop = {
         onDragenter: (e) => {
           if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
-            props.dragEnterFunc(e, 'day', scope)
+            props.dragEnterFunc(e, 'day', scope) === true
               ? dragOverDayRef.value = day.date
               : dragOverDayRef.value = ''
           }
         },
         onDragover: (e) => {
           if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
-            props.dragOverFunc(e, 'day', scope)
+            props.dragOverFunc(e, 'day', scope) === true
               ? dragOverDayRef.value = day.date
               : dragOverDayRef.value = ''
           }
         },
         onDragleave: (e) => {
           if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
-            props.dragLeaveFunc(e, 'day', scope)
+            props.dragLeaveFunc(e, 'day', scope) === true
               ? dragOverDayRef.value = day.date
               : dragOverDayRef.value = ''
           }
         },
         onDrop: (e) => {
           if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
-            props.dropFunc(e, 'day', scope)
+            props.dropFunc(e, 'day', scope) === true
               ? dragOverDayRef.value = day.date
               : dragOverDayRef.value = ''
           }

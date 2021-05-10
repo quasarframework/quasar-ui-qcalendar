@@ -547,28 +547,28 @@ export default defineComponent({
         }),
         onDragenter: (e) => {
           if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
-            props.dragEnterFunc(e, 'head-day', scope)
+            props.dragEnterFunc(e, 'head-day', scope) === true
               ? dragOverHeadDayRef.value = day.date
               : dragOverHeadDayRef.value = ''
           }
         },
         onDragover: (e) => {
           if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
-            props.dragOverFunc(e, 'head-day', scope)
+            props.dragOverFunc(e, 'head-day', scope) === true
               ? dragOverHeadDayRef.value = day.date
               : dragOverHeadDayRef.value = ''
           }
         },
         onDragleave: (e) => {
           if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
-            props.dragLeaveFunc(e, 'head-day', scope)
+            props.dragLeaveFunc(e, 'head-day', scope) === true
               ? dragOverHeadDayRef.value = day.date
               : dragOverHeadDayRef.value = ''
           }
         },
         onDrop: (e) => {
           if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
-            props.dropFunc(e, 'head-day', scope)
+            props.dropFunc(e, 'head-day', scope) === true
               ? dragOverHeadDayRef.value = day.date
               : dragOverHeadDayRef.value = ''
           }
@@ -938,28 +938,28 @@ export default defineComponent({
         },
         onDragenter: (e) => {
           if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
-            props.dragEnterFunc(e, 'resource', scope)
+            props.dragEnterFunc(e, 'resource', scope) === true
               ? dragOverResource.value = dragValue
               : dragOverResource.value = ''
           }
         },
         onDragover: (e) => {
           if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
-            props.dragOverFunc(e, 'resource', scope)
+            props.dragOverFunc(e, 'resource', scope) === true
               ? dragOverResource.value = dragValue
               : dragOverResource.value = ''
           }
         },
         onDragleave: (e) => {
           if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
-            props.dragLeaveFunc(e, 'resource', scope)
+            props.dragLeaveFunc(e, 'resource', scope) === true
               ? dragOverResource.value = dragValue
               : dragOverResource.value = ''
           }
         },
         onDrop: (e) => {
           if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
-            props.dropFunc(e, 'resource', scope)
+            props.dropFunc(e, 'resource', scope) === true
               ? dragOverResource.value = dragValue
               : dragOverResource.value = ''
           }
@@ -1098,28 +1098,28 @@ export default defineComponent({
         style,
         onDragenter: (e) => {
           if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
-            props.dragEnterFunc(e, 'day', scope)
+            props.dragEnterFunc(e, 'day', scope) === true
               ? dragOverResource.value = dragValue
               : dragOverResource.value = ''
           }
         },
         onDragover: (e) => {
           if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
-            props.dragOverFunc(e, 'day', scope)
+            props.dragOverFunc(e, 'day', scope) === true
               ? dragOverResource.value = dragValue
               : dragOverResource.value = ''
           }
         },
         onDragleave: (e) => {
           if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
-            props.dragLeaveFunc(e, 'day', scope)
+            props.dragLeaveFunc(e, 'day', scope) === true
               ? dragOverResource.value = dragValue
               : dragOverResource.value = ''
           }
         },
         onDrop: (e) => {
           if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
-            props.dropFunc(e, 'day', scope)
+            props.dropFunc(e, 'day', scope) === true
               ? dragOverResource.value = dragValue
               : dragOverResource.value = ''
           }
