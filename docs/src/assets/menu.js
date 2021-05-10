@@ -12,7 +12,7 @@ const menu = [
         path: 'what-is-qcalendar'
       },
       {
-        name: 'Installation Types',
+        name: 'Installation types',
         path: 'installation-types'
       },
       {
@@ -31,7 +31,7 @@ const menu = [
         path: 'getting-started'
       },
       {
-        name: 'QCalendar Transitions',
+        name: 'QCalendar transitions',
         path: 'qcalendar-transitions'
       },
       {
@@ -43,7 +43,7 @@ const menu = [
         path: 'qcalendarday',
         children: [
           {
-            name: 'Day - Getting Started',
+            name: 'Day - Getting started',
             path: 'day-getting-started'
           },
           {
@@ -51,7 +51,7 @@ const menu = [
             path: 'day-alignment'
           },
           {
-            name: 'Day - Date Type',
+            name: 'Day - Date type',
             path: 'day-date-type'
           },
           {
@@ -59,7 +59,7 @@ const menu = [
             path: 'day-dark'
           },
           {
-            name: 'Day - Column Count',
+            name: 'Day - Column count',
             path: 'day-column-count'
           },
           {
@@ -67,7 +67,7 @@ const menu = [
             path: 'day-3day'
           },
           {
-            name: 'Day - Max Days',
+            name: 'Day - Max days',
             path: 'day-max-days'
           },
           {
@@ -75,7 +75,7 @@ const menu = [
             path: 'day-month'
           },
           {
-            name: 'Day - No Active Date',
+            name: 'Day - No active date',
             path: 'day-no-active-date'
           },
           {
@@ -83,67 +83,67 @@ const menu = [
             path: 'day-now'
           },
           {
-            name: 'Day - 24-hour Format',
+            name: 'Day - 24-hour format',
             path: 'day-24-hour'
           },
           {
-            name: 'Day - No Header',
+            name: 'Day - No header',
             path: 'day-no-header'
           },
           {
-            name: 'Day - Custom Header',
+            name: 'Day - Custom header',
             path: 'day-custom-header'
           },
           {
-            name: 'Day - No Scroll',
+            name: 'Day - No scroll',
             path: 'day-no-scroll'
           },
           {
-            name: 'Day - Disabled Before/After',
+            name: 'Day - Disabled before/after',
             path: 'day-disabled-before-after'
           },
           {
-            name: 'Day - Disabled Days',
+            name: 'Day - Disabled days',
             path: 'day-disabled-days'
           },
           {
-            name: 'Day - Disabled Weekdays',
+            name: 'Day - Disabled weekdays',
             path: 'day-disabled-weekdays'
           },
           {
-            name: 'Day - Cell Width',
+            name: 'Day - Cell width',
             path: 'day-cell-width'
           },
           {
-            name: 'Day - Interval Count',
+            name: 'Day - Interval count',
             path: 'day-interval-count'
           },
           {
-            name: 'Day - Interval Height',
+            name: 'Day - Interval height',
             path: 'day-interval-height'
           },
           {
-            name: 'Day - Interval Minutes (15)',
+            name: 'Day - Interval minutes (15)',
             path: 'day-interval-minutes-15'
           },
           {
-            name: 'Day - Interval Minutes (30)',
+            name: 'Day - Interval minutes (30)',
             path: 'day-interval-minutes-30'
           },
           {
-            name: 'Day - Interval Start',
+            name: 'Day - Interval start',
             path: 'day-interval-start'
           },
           {
-            name: 'Day - Selected Intervals',
+            name: 'Day - Selected intervals',
             path: 'day-selected-intervals'
           },
           {
-            name: 'Day - Range Selection',
+            name: 'Day - Range selection',
             path: 'day-range-selection'
           },
           {
-            name: 'Day - Drag and Drop',
+            name: 'Day - Drag and drop',
             path: 'day-drag-and-drop'
           },
           {
@@ -159,23 +159,23 @@ const menu = [
             path: 'day-theme'
           },
           {
-            name: 'Day - (Slot) Column Header',
+            name: 'Day - (Slot) Column header',
             path: 'day-slot-column-header'
           },
           {
-            name: 'Day - (Slot) Head Day',
+            name: 'Day - (Slot) Head day',
             path: 'day-slot-head-day'
           },
           {
-            name: 'Day - (Slot) Head Day Event',
+            name: 'Day - (Slot) Head day event',
             path: 'day-slot-head-day-event'
           },
           {
-            name: 'Day - (Slot) Head Intervals',
+            name: 'Day - (Slot) Head intervals',
             path: 'day-slot-head-intervals'
           },
           {
-            name: 'Day - (Slot) Show Current Time',
+            name: 'Day - (Slot) Show current time',
             path: 'day-slot-show-current-time'
           }
         ]
@@ -185,7 +185,7 @@ const menu = [
         path: 'qcalendarday-week',
         children: [
           {
-            name: 'Week - Getting Started',
+            name: 'Week - Getting started',
             path: 'week-getting-started'
           },
           {
@@ -193,7 +193,7 @@ const menu = [
             path: 'week-alignment'
           },
           {
-            name: 'Week - Date Type',
+            name: 'Week - Date type',
             path: 'week-date-type'
           },
           {
@@ -201,7 +201,7 @@ const menu = [
             path: 'week-dark'
           },
           {
-            name: 'Week - No Active Date',
+            name: 'Week - No active date',
             path: 'week-no-active-date'
           },
           {
@@ -209,75 +209,75 @@ const menu = [
             path: 'week-now'
           },
           {
-            name: 'Week - 24-hour Format',
+            name: 'Week - 24-hour format',
             path: 'week-24-hour'
           },
           {
-            name: 'Week - First Day Monday',
+            name: 'Week - First day monday',
             path: 'week-first-day-monday'
           },
           {
-            name: 'Week - No Weekends',
+            name: 'Week - No weekends',
             path: 'week-no-weekends'
           },
           {
-            name: 'Week - No Header',
+            name: 'Week - No header',
             path: 'week-no-header'
           },
           {
-            name: 'Week - No Scroll',
+            name: 'Week - No scroll',
             path: 'week-no-scroll'
           },
           {
-            name: 'Week - Disabled Before/After',
+            name: 'Week - Disabled before/after',
             path: 'week-disabled-before-after'
           },
           {
-            name: 'Week - Disabled Days',
+            name: 'Week - Disabled days',
             path: 'week-disabled-days'
           },
           {
-            name: 'Week - Disabled Weekdays',
+            name: 'Week - Disabled weekdays',
             path: 'week-disabled-weekdays'
           },
           {
-            name: 'Week - Cell Width',
+            name: 'Week - Cell width',
             path: 'week-cell-width'
           },
           {
-            name: 'Week - Focusable/Hoverable',
+            name: 'Week - Focusable/hoverable',
             path: 'week-focusable-hoverable'
           },
           {
-            name: 'Week - Interval Count',
+            name: 'Week - Interval count',
             path: 'week-interval-count'
           },
           {
-            name: 'Week - Interval Height',
+            name: 'Week - Interval height',
             path: 'week-interval-height'
           },
           {
-            name: 'Week - Interval Minutes (15)',
+            name: 'Week - Interval minutes (15)',
             path: 'week-interval-minutes-15'
           },
           {
-            name: 'Week - Interval Minutes (30)',
+            name: 'Week - Interval minutes (30)',
             path: 'week-interval-minutes-30'
           },
           {
-            name: 'Week - Interval Start',
+            name: 'Week - Interval start',
             path: 'week-interval-start'
           },
           {
-            name: 'Week - Selected Intervals',
+            name: 'Week - Selected intervals',
             path: 'week-selected-intervals'
           },
           {
-            name: 'Week - Range Selection',
+            name: 'Week - Range selection',
             path: 'week-range-selection'
           },
           {
-            name: 'Week - Drag and Drop',
+            name: 'Week - Drag and drop',
             path: 'week-drag-and-drop'
           },
           {
@@ -293,31 +293,31 @@ const menu = [
             path: 'week-theme'
           },
           {
-            name: 'Week - (Slot) Column Header',
+            name: 'Week - (Slot) Column header',
             path: 'week-slot-column-header'
           },
           {
-            name: 'Week - (Slot) Day Body',
+            name: 'Week - (Slot) Day body',
             path: 'week-slot-day-body'
           },
           {
-            name: 'Week - (Slot) Head Day',
+            name: 'Week - (Slot) Head day',
             path: 'week-slot-head-day'
           },
           {
-            name: 'Week - (Slot) Head Day Event',
+            name: 'Week - (Slot) Head day event',
             path: 'week-slot-head-day-event'
           },
           {
-            name: 'Week - (Slot) Head Days Event Absolute',
+            name: 'Week - (Slot) Head days event absolute',
             path: 'week-slot-head-days-event-absolute'
           },
           {
-            name: 'Week - (Slot) Head Intervals',
+            name: 'Week - (Slot) Head intervals',
             path: 'week-slot-head-intervals'
           },
           {
-            name: 'Week - (Slot) Show Current Time',
+            name: 'Week - (Slot) Show current time',
             path: 'week-slot-show-current-time'
           }
         ]
@@ -327,11 +327,11 @@ const menu = [
         path: 'qcalendarmonth',
         children: [
           {
-            name: 'Month - Getting Started',
+            name: 'Month - Getting started',
             path: 'month-getting-started'
           },
           {
-            name: 'Month - Date Type',
+            name: 'Month - Date type',
             path: 'month-date-type'
           },
           {
@@ -343,7 +343,7 @@ const menu = [
             path: 'month-dark'
           },
           {
-            name: 'Month - Day of Year',
+            name: 'Month - Day of year',
             path: 'month-day-of-year'
           },
           {
@@ -351,23 +351,23 @@ const menu = [
             path: 'month-workweeks'
           },
           {
-            name: 'Month - Day Height',
+            name: 'Month - Day height',
             path: 'month-day-height'
           },
           {
-            name: 'Month - No Active Date',
+            name: 'Month - No active date',
             path: 'month-no-active-date'
           },
           {
-            name: 'Month - No Outside Days',
+            name: 'Month - No outside days',
             path: 'month-no-outside-days'
           },
           {
-            name: 'Month - Label Size',
+            name: 'Month - Label size',
             path: 'month-label-size'
           },
           {
-            name: 'Month - Focusable/Hoverable',
+            name: 'Month - Focusable/hoverable',
             path: 'month-focusable-hoverable'
           },
           {
@@ -375,15 +375,15 @@ const menu = [
             path: 'month-navigation'
           },
           {
-            name: 'Month - Selected Dates',
+            name: 'Month - Selected dates',
             path: 'month-selected-dates'
           },
           {
-            name: 'Month - Range Selection',
+            name: 'Month - Range selection',
             path: 'month-range-selection'
           },
           {
-            name: 'Month - Drag and Drop',
+            name: 'Month - Drag and drop',
             path: 'month-drag-and-drop'
           },
           {
@@ -395,15 +395,15 @@ const menu = [
             path: 'month-theme'
           },
           {
-            name: 'Month - Slot Day',
+            name: 'Month - (Slot) Day',
             path: 'month-slot-day'
           },
           {
-            name: 'Month - Slot Week',
+            name: 'Month - (Slot) Week',
             path: 'month-slot-week'
           },
           {
-            name: 'Month - Slot Day (Holidays)',
+            name: 'Month - (Slot) Day (holidays)',
             path: 'month-slot-day-holidays'
           }
         ]
@@ -413,11 +413,11 @@ const menu = [
         path: 'qcalendarmonth-minimode',
         children: [
           {
-            name: 'Mini-mode - Getting Started',
+            name: 'Mini-mode - Getting started',
             path: 'minimode-getting-started'
           },
           {
-            name: 'Mini-mode - Date Type',
+            name: 'Mini-mode - Date type',
             path: 'minimode-date-type'
           },
           {
@@ -425,23 +425,23 @@ const menu = [
             path: 'minimode-dark'
           },
           {
-            name: 'Mini-mode - Min. Weekday Label',
+            name: 'Mini-mode - Min. weekday label',
             path: 'minimode-min-weekday-label'
           },
           {
-            name: 'Mini-mode - Min Weeks',
+            name: 'Mini-mode - Min weeks',
             path: 'minimode-min-weeks'
           },
           {
-            name: 'Mini-mode - 1st Day Monday',
+            name: 'Mini-mode - 1st day monday',
             path: 'minimode-first-day-monday'
           },
           {
-            name: 'Mini-mode - 5 Day Workweek',
+            name: 'Mini-mode - 5 day workweek',
             path: 'minimode-5-day-workweek'
           },
           {
-            name: 'Mini-mode - No Outside Days',
+            name: 'Mini-mode - No outside days',
             path: 'minimode-no-outside-days'
           },
           {
@@ -453,15 +453,15 @@ const menu = [
             path: 'minimode-breakpoint'
           },
           {
-            name: 'Mini-mode - Disabled Days',
+            name: 'Mini-mode - Disabled days',
             path: 'minimode-disabled-days'
           },
           {
-            name: 'Mini-mode - Disabled Weekdays',
+            name: 'Mini-mode - Disabled weekdays',
             path: 'minimode-disabled-weekdays'
           },
           {
-            name: 'Mini-mode - Disabled Before/After',
+            name: 'Mini-mode - Disabled before/after',
             path: 'minimode-disabled-before-after'
           },
           {
@@ -469,15 +469,15 @@ const menu = [
             path: 'minimode-navigation'
           },
           {
-            name: 'Mini-mode - Selected Dates',
+            name: 'Mini-mode - Selected dates',
             path: 'minimode-selected-dates'
           },
           {
-            name: 'Mini-mode - Range Selection',
+            name: 'Mini-mode - Range selection',
             path: 'minimode-selection'
           },
           {
-            name: 'Mini-mode - Multi-Month Range Selection',
+            name: 'Mini-mode - Multi-month range selection',
             path: 'minimode-multi-month-selection'
           },
           {
@@ -495,15 +495,15 @@ const menu = [
         path: 'qcalendaragenda',
         children: [
           {
-            name: 'Agenda - Getting Started',
+            name: 'Agenda - Getting started',
             path: 'agenda-getting-started'
           },
           {
-            name: 'Agenda - Column Count',
+            name: 'Agenda - Column count',
             path: 'agenda-column-count'
           },
           {
-            name: 'Agenda - Column Options',
+            name: 'Agenda - Column options',
             path: 'agenda-column-options'
           },
           {
@@ -515,11 +515,11 @@ const menu = [
             path: 'agenda-dark'
           },
           {
-            name: 'Agenda - Cell Width',
+            name: 'Agenda - Cell width',
             path: 'agenda-cell-width'
           },
           {
-            name: 'Agenda - Planner',
+            name: 'Agenda - Planner (example)',
             path: 'agenda-planner'
           }
         ]
@@ -529,7 +529,7 @@ const menu = [
         path: 'qcalendarresource',
         children: [
           {
-            name: 'Resource - Getting Started',
+            name: 'Resource - Getting started',
             path: 'resource-getting-started'
           },
           {
@@ -537,7 +537,7 @@ const menu = [
             path: 'resource-dark'
           },
           {
-            name: 'Resource - No Sticky',
+            name: 'Resource - No sticky',
             path: 'resource-no-sticky'
           },
           {
@@ -552,7 +552,7 @@ const menu = [
         // fasCalendar
         children: [
           {
-            name: 'Scheduler - Getting Started',
+            name: 'Scheduler - Getting started',
             path: 'scheduler-getting-started'
           },
           {
@@ -564,19 +564,19 @@ const menu = [
             path: 'scheduler-dark'
           },
           {
-            name: 'Scheduler - Date Type',
+            name: 'Scheduler - Date type',
             path: 'scheduler-date-type'
           },
           {
-            name: 'Scheduler - Focusable/Hoverable',
+            name: 'Scheduler - Focusable/hoverable',
             path: 'scheduler-focusable-hoverable'
           },
           {
-            name: 'Scheduler - Cell Width',
+            name: 'Scheduler - Cell width',
             path: 'scheduler-cell-width'
           },
           {
-            name: 'Scheduler - Drag and Drop',
+            name: 'Scheduler - Drag and drop',
             path: 'scheduler-drag-and-drop'
           },
           {
@@ -594,7 +594,7 @@ const menu = [
         path: 'qcalendartask',
         children: [
           {
-            name: 'Task - Getting Started',
+            name: 'Task - Getting started',
             path: 'task-getting-started'
           },
           {
@@ -610,11 +610,11 @@ const menu = [
             path: 'task-alignment'
           },
           {
-            name: 'Task - Colored Weekends',
+            name: 'Task - Colored weekends',
             path: 'task-colored-weekends'
           },
           {
-            name: 'Task - No Weekends',
+            name: 'Task - No weekends',
             path: 'task-no-weekends'
           },
           {
@@ -622,11 +622,11 @@ const menu = [
             path: 'task-dark'
           },
           {
-            name: 'Task - Date Type',
+            name: 'Task - Date type',
             path: 'task-date-type'
           },
           {
-            name: 'Task - No Active Date',
+            name: 'Task - No active date',
             path: 'task-no-active-date'
           },
           {
@@ -634,27 +634,27 @@ const menu = [
             path: 'task-now'
           },
           {
-            name: 'Task - Disabled Days',
+            name: 'Task - Disabled days',
             path: 'task-disabled-days'
           },
           {
-            name: 'Task - Disabled Before/After',
+            name: 'Task - Disabled before/after',
             path: 'task-disabled-before-after'
           },
           {
-            name: 'Task - Disabled Weekdays',
+            name: 'Task - Disabled weekdays',
             path: 'task-disabled-weekdays'
           },
           {
-            name: 'Task - Focusable/Hoverable',
+            name: 'Task - Focusable/hoverable',
             path: 'task-focusable-hoverable'
           },
           {
-            name: 'Task - Title Rows',
+            name: 'Task - Title rows',
             path: 'task-title-rows'
           },
           {
-            name: 'Task - Multiple Footer Rows',
+            name: 'Task - Multiple footer rows',
             path: 'task-multiple-footer-rows'
           },
           {
@@ -672,7 +672,7 @@ const menu = [
         path: 'timestamp',
         children: [
           {
-            name: 'Timestamp - Getting Started',
+            name: 'Timestamp - Getting started',
             path: 'timestamp-getting-started'
           }
         ]
