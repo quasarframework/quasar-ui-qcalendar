@@ -93,16 +93,15 @@
 
   &__child
     position: relative
-    transition-property: max-height
-    transition-duration: .5s
+    transition: max-height .2s linear
 
     &--expanded
-      aria-hidden: false
+      max-height: 9000px
+      height: auto
 
     &--collapsed
-      aria-hidden: true
-      border: none !important
-      max-height: 0 !important
+      overflow-y: hidden
+      max-height: 0
 
   &__focusable,
   &__manual-focusable,

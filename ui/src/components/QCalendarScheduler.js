@@ -997,21 +997,6 @@ export default defineComponent({
                   resource.expanded = !resource.expanded
                   emit('update:model-resources', props.modelResources)
                   emit('resource-expanded', { expanded: resource.expanded, scope })
-                  if (resourcesRef.value[ resource[ props.resourceKey ] ]) {
-                    const el = resourcesRef.value[ resource[ props.resourceKey ] ]
-                    const parent = el.parentNode
-                    const child = parent.nextSibling
-                    const scrollHeight = child.scrollHeight
-                    let p = parent
-                    do {
-                      p = p.parentNode.closest('.q-calendar__child')
-                      if (p) {
-                        const mh = parseInt(p.style.maxHeight)
-                        p.style.maxHeight = mh + scrollHeight + 'px'
-                      }
-                    } while (p)
-                    child.style.maxHeight = scrollHeight + 'px'
-                  }
                 }
               }),
               h('div', {
