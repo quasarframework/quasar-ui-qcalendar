@@ -15,7 +15,7 @@ components:
 Make a selection on the left of a calendar to see the result on the right.
 
 ::: warning
-Some selections may not show up correctly because of `sticky` being used, which causes the sticky section to be above the highlighted area. In some cases, it's better to view in Dark mode.
+Some selections may not show up correctly because of `sticky` being used, which causes the sticky section to be above the highlighted area.
 :::
 
 ## QCalendarDay
