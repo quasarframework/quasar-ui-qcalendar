@@ -11,6 +11,8 @@ related:
 
 ::: warning
 Please note that the codepen links, in the documentation examples, do not work at this time.
+
+And, if you're looking to help out, check out our [Call to action](/contributing/call-to-action) in the **Contributing** section.
 :::
 
 > If you are looking for a **Migration Guide** from v3 to v4, go [here](/help/migration-guide) in the **Help** section.
