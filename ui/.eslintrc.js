@@ -31,7 +31,7 @@ module.exports = {
 
     // 'plugin:quasar/standard',
 
-    'standard',
+    // 'standard',
     // 'plugin:jest/recommended',
     'plugin:promise/recommended'
   ],
@@ -42,7 +42,7 @@ module.exports = {
     'vue',
     'jest',
     'jsdoc',
-    'standard',
+    // 'standard',
     'node',
     'promise',
     'import'
@@ -75,7 +75,7 @@ module.exports = {
     'one-var': 'off',
     'no-void': 'off',
     'no-lone-blocks': 'error',
-    'no-unused-expressions': 'error',
+    'no-unused-expressions': [ 'error', { allowTernary: true, "allowShortCircuit": true } ],
     'no-useless-concat': 'error',
     'no-useless-return': 'error',
     'no-unneeded-ternary': 'error',

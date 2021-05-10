@@ -64,7 +64,7 @@ module.exports = {
     'one-var': 'off',
     'no-void': 'off',
     'no-lone-blocks': 'error',
-    'no-unused-expressions': 'error',
+    'no-unused-expressions': [ 'error', { allowTernary: true, "allowShortCircuit": true } ],
     'no-useless-concat': 'error',
     'no-useless-return': 'error',
     'no-unneeded-ternary': 'error',
@@ -92,6 +92,7 @@ module.exports = {
     'vue/no-multiple-template-root': 'off',
 
     // allow console.log during production for demo purposes
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
+    // 'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
+    'no-console': 'off'
   }
 }
