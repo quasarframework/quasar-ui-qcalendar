@@ -133,6 +133,10 @@ export default defineComponent({
         class: 'q-calendar-task__container'
       },
       {
+        name: 'Task Container',
+        class: 'q-calendar-task__task--container'
+      },
+      {
         name: 'Head Task',
         class: 'q-calendar-task__head--task'
       },
