@@ -6,6 +6,10 @@
       @next="onNext"
     />
 
+    <div class="q-ma-sm row justify-center">
+      <q-toggle v-model="hour24" label="24-hour Format" />
+    </div>
+
     <div class="row justify-center">
       <div style="display: flex; max-width: 800px; width: 100%; height: 300px;">
         <q-calendar-resource
@@ -14,7 +18,7 @@
           v-model:modelResources="resources"
           resource-key="id"
           resource-label="name"
-          sticky
+          :hour24-format="hour24"
           animated
           bordered
           @change="onChange"
@@ -49,6 +53,7 @@ export default defineComponent({
   data () {
     return {
       selectedDate: today(),
+      hour24: true,
       resources: [
         { id: '1', name: 'John' },
         { id: '2', name: 'Board Room' },

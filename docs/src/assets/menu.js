@@ -537,6 +537,10 @@ const menu = [
             path: 'resource-dark'
           },
           {
+            name: 'Resource - Hour24 format',
+            path: 'resource-hour24-format'
+          },
+          {
             name: 'Resource - No sticky',
             path: 'resource-no-sticky'
           },
