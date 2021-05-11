@@ -25,15 +25,15 @@ v4.0.0
 
 **Month view with events**
 
-![QCalendar example month view](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/public/qcalendar-month-view.png)
+![QCalendar example month view](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/next/docs/public/qcalendarmonth-event-slots.png)
 
 **Planner example**
 
-![QCalendar example agenda view - planner](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/public/qcalendar-agenda-view--planner.png)
+![QCalendar example agenda view - planner](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/next/docs/public/qcalendaragenda-planner.png)
 
 **Monthly Mini-mode**
 
-![QCalendar example mini-mode selection](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/public/q-calendar-month-view-mini-mode-with-selection.png)
+![QCalendar example mini-mode selection](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/next/docs/public/qcalendarmonth-minimode-range-selection.png)
 
 **Multi-month selector (mini-mode)**
 
@@ -73,18 +73,17 @@ If you fork or download this project, make sure you have the Quasar CLI globally
 $ npm i -g @quasar/cli
 ```
 
-The workflow to build the demo, on a fresh project, is as follows:
+The workflow to build the demo, on a fresh project, is as follows (note: this project uses yarn workspaces, so you **must** use yarn):
 ```
+$ yarn
 $ cd ui
-$ yarn
 $ yarn build
-$ cd ../demo
-$ yarn
+$ cd ../docs
 $ quasar dev
 ```
 
 # Codepen
-[UMD example on Codepen](https://codepen.io/Hawkeye64/pen/RwwwKQL)
+[UMD example on Codepen](https://codepen.io/Hawkeye64/pen/PoWLpoq)
 
 # Donate
 If you appreciate the work that went into this, please consider donating to [Quasar](https://donate.quasar.dev) or [Jeff](https://github.com/sponsors/hawkeye64).
