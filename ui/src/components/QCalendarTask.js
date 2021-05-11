@@ -606,10 +606,10 @@ export default defineComponent({
       }, __renderFooterRows())
     }
 
-    function __renderBody () {
+    function __renderContainer () {
       return h('div', {
         class: {
-          'q-calendar-task__body': true
+          'q-calendar-task__container': true
         }
       }, [
         props.noHeader !== true && __renderHead(),
@@ -1006,9 +1006,9 @@ export default defineComponent({
       ])
     }
 
-    function __renderContainer () {
+    function __renderBody () {
       return h('div', {
-        class: 'q-calendar-task__container'
+        class: 'q-calendar-task__body'
       }, [
         __renderScrollArea()
       ])
@@ -1022,7 +1022,7 @@ export default defineComponent({
           'q-calendar__scroll': true
         }
       }, [
-        __renderBody()
+        __renderContainer()
       ])
     }
 
@@ -1037,7 +1037,7 @@ export default defineComponent({
         key: startDate.value,
         class: 'q-calendar-task'
       }, [
-        hasWidth === true && __renderContainer()
+        hasWidth === true && __renderBody()
       ]), [[
         ResizeObserver,
         __onResize
