@@ -42,7 +42,7 @@
   "devDependencies": {
     "@babel/eslint-parser": "^7.13.14",
     "@vue/eslint-config-standard": "^6.0.0",
-    "eslint": "^7.25.0",
+    "eslint": "^7.26.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
