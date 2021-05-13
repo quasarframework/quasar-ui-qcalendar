@@ -95,6 +95,7 @@ export function provideThemeBuilderStore () {
       '--calendar-scrollbar-thumb-hover-dark': '#555555',
 
       '--calendar-intervals-width': '56px',
+      '--calendar-resources-width': '56px',
       '--calendar-work-week-width': '30px',
       '--calendar-mini-work-week-width': '30px',
       '--calendar-work-week-font-size': '1.0em',
@@ -186,6 +187,7 @@ export function provideThemeBuilderStore () {
       '--calendar-scrollbar-thumb-hover-dark': '[DARK] The color of the scroll thumb when hovering',
 
       '--calendar-intervals-width': 'The intervals width. Use only `px` unit',
+      '--calendar-resources-width': 'The resource width. Use only `px` unit',
       '--calendar-work-week-width': 'The work week width. Use only `px` unit',
       '--calendar-mini-work-week-width': 'The work week width for `month mini-mode`. Use only `px` unit',
       '--calendar-work-week-font-size': 'The work week font size',

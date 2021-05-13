@@ -555,6 +555,10 @@ const menu = [
           {
             name: 'Resource - Children',
             path: 'resource-children'
+          },
+          {
+            name: 'Resource - Width/Height',
+            path: 'resource-width-height'
           }
         ]
       },
