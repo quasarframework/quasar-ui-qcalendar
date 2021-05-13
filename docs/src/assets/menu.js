@@ -515,6 +515,14 @@ const menu = [
             path: 'agenda-dark'
           },
           {
+            name: 'Agenda - First Day Monday',
+            path: 'agenda-first-day-monday'
+          },
+          {
+            name: 'Agenda - Five Day Workweek',
+            path: 'agenda-five-day-workweek'
+          },
+          {
             name: 'Agenda - Cell width',
             path: 'agenda-cell-width'
           },
