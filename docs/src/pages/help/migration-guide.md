@@ -182,6 +182,7 @@ Below is a list of all existing slots. Some are new, some have changed and some 
 
 ### Other
 - For QCalendarMonth there is no longer a set minimum height of 5.0em. Use the new property `day-min-height` to control the minimum height of a day cell. And, also remember that if `day-height` is set to `"0"` then the height will automatically grow according to the content, otherwise if `day-height` is set to anything other than `"0"` the height of a day cell will be fixed.
+- For QCalendarResource and QCalendarScheduler there is no longer a `resource-width` property. Instead, use the css variable `--calendar-resources-width`.
 
 ## New functionality
 
@@ -190,7 +191,7 @@ Below is a list of all existing slots. Some are new, some have changed and some 
 - new (QCalendarDay) `interval-class` that will be called when drawing each interval to add extra css classes in object form.
 - new `min-weekday-length` (default: `1`). This property is used for fluid text length. The browser supports `long` and `short` formats. This is an **extra short** format taken from the beginning characters of the browser's `short` format. There are some languages that begin with the same character, so having this set to 1 (one) may not work. In that case, depending on your locale, set it to two or more.
 - new `weekday-breakpoints` (default: `[75, 35]`). This is the cell width breakpoint for the fluid text length. At the first breakpoint, this is where the calendar will use the `short` format, unless `short-weekday-label` or `short-month-label` are already being used. The second breakpoint is for the **extra short** format will be used. To not use a breakpoint, set it to 0.
-- new `day-min-height` property is to set the min-height of a calendar cell. Use this instead of static `day-height` when you want calendar rows to automatically grow in height depending on content.
+- new `day-min-height` or `resource-min-height` property is to set the min-height of a calendar cell. Use this instead of static `day-height`, or `resource-height`, when you want calendar rows to automatically grow in height depending on content.
 - new `date-type` (default: `round`), values `['round', 'rounded', 'square']`
 - new `weekday-align` (default: `center`), values `['left', 'center', 'right']`
 - new `date-align` (default: `center`), values `['left', 'center', 'right']`

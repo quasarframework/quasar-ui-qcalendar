@@ -818,23 +818,6 @@
         ":resource-height=\"100\""
       ]
     },
-    "resource-width": {
-      "type": [
-        "Number",
-        "String"
-      ],
-      "category": "style",
-      "desc": "The maximum width in pixels for the resource width",
-      "applicable": [
-        "scheduler",
-        "resource",
-        "day-resource"
-      ],
-      "examples": [
-        "resource-width=\"120\"",
-        "resource-width=\"200\""
-      ]
-    },
     "resource-style": {
       "type": "Function",
       "category": "style",

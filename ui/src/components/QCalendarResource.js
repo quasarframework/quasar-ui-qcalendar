@@ -388,9 +388,6 @@ export default defineComponent({
           'q-calendar__sticky': props.noSticky !== true
         },
         style: {
-          minWidth: width,
-          maxWidth: width,
-          width,
           height
         },
         ...getDefaultMouseEventHandlers('-head-resources', event => {
@@ -579,9 +576,6 @@ export default defineComponent({
 
       const width = convertToUnit(parsedResourceWidth.value)
       const style = {
-        minWidth: width,
-        maxWidth: width,
-        width
       }
       style.height = resource.height !== void 0
         ? convertToUnit(resource.height)
@@ -728,14 +722,13 @@ export default defineComponent({
         resource,
         interval
       }
-      const width = convertToUnit(parsedIntervalHeaderWidth.value)
       const height = resource.height !== void 0 ? convertToUnit(resource.height) : convertToUnit(parsedResourceHeight.value)
 
       const isFocusable = props.focusable === true && props.focusType.includes('interval')
 
       const style = {
         maxWidth: width,
-        minWidth: width,
+        minWidth: width
         height
       }
 
