@@ -822,7 +822,7 @@ export default defineComponent({
     /**
      * Renders the given day with the associated task
      * @param {Timestamp} day Timestamp representing the day
-     * @param {any} task The Task
+     * @param {sting} title The Title
      * @param {number} index The task index
      * @returns VNode
      */
