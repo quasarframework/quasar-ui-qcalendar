@@ -537,9 +537,15 @@ export default defineComponent({
     }
 
     function __renderResourceRow (resource, resourceIndex, indentLevel = 0, expanded = true) {
-      const height = resource.height !== void 0 ? convertToUnit(resource.height) : 'auto'
       const style = {
-        height
+      }
+      style.height = resource.height !== void 0
+        ? convertToUnit(resource.height)
+        : parsedResourceHeight.value > 0
+          ? convertToUnit(parsedResourceHeight.value)
+          : 'auto'
+      if (parsedResourceMinHeight.value > 0) {
+        style.minHeight = convertToUnit(parsedResourceMinHeight.value)
       }
 
       const resourceRow = h('div', {
@@ -722,14 +728,20 @@ export default defineComponent({
         resource,
         interval
       }
-      const height = resource.height !== void 0 ? convertToUnit(resource.height) : convertToUnit(parsedResourceHeight.value)
-
       const isFocusable = props.focusable === true && props.focusType.includes('interval')
 
+      const width = convertToUnit(parsedIntervalHeaderWidth.value)
       const style = {
         maxWidth: width,
         minWidth: width
-        height
+      }
+      style.height = resource.height !== void 0
+        ? convertToUnit(resource.height)
+        : parsedResourceHeight.value > 0
+          ? convertToUnit(parsedResourceHeight.value)
+          : 'auto'
+      if (parsedResourceMinHeight.value > 0) {
+        style.minHeight = convertToUnit(parsedResourceMinHeight.value)
       }
 
       return h('div', {
