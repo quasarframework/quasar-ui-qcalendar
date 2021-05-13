@@ -1,47 +1,31 @@
 <template>
   <div>
     <div class="q-gutter-sm column justify-center">
-      <div class="row justify-evenly q-gutter-sm">
-        <span>Note: setting any height to 0 will make it 'auto'</span>
-      </div>
-      <div class="row justify-evenly q-gutter-sm full-width">
-        <div class="col-5">
-          <div class="q-mb-md">
-            Resource Width:
-          </div><q-slider
-            v-model="resourceWidth"
-            label
-            label-always
-            :min="60"
-            :max="200"
-            class="col"
-          />
+    <div class="row justify-center full-width">
+      <div class="column justify-center">
+        <div class="row justify-evenly q-gutter-sm q-mb-lg">
+          <span class="no-wrap">Note: setting Resource Height to 0 will make it 'auto' height</span>
         </div>
-        <div class="col-5">
-          <div class="q-mb-md">
-            Resource Height:
-          </div> <q-slider
-            v-model="resourceHeight"
-            label
-            label-always
-            :min="0"
-            :max="200"
-            class="col"
-          />
+        <div class="row justify-evenly no-wrap q-gutter-sm" style="width: 600px;">
+          <span class="col-shrink no-wrap" style="min-width: 142px;">Resource Height</span> <q-slider v-model="resourceHeight" label label-always :min="0" :max="200" class="col" />
+        </div>
+        <div class="row justify-evenly no-wrap q-gutter-sm" style="width: 600px;">
+          <span class="col-shrink no-wrap" style="min-width: 142px;">Resource Min. Height</span> <q-slider v-model="resourceMinHeight" label label-always :min="0" :max="200" class="col" />
         </div>
       </div>
+    </div>
     </div>
     <q-calendar-resource
       v-model="selectedDate"
       v-model:modelResources="resources"
+      :resources="resources"
+      :resource-height="resourceHeight"
+      :resource-min-height="resourceMinHeight"
       resource-key="id"
       resource-label="name"
       locale="en-US"
       bordered
       sticky
-      :resources="resources"
-      :resource-height="resourceHeight"
-      :resource-width="resourceWidth"
       :style="styles"
     />
   </div>
@@ -65,8 +49,8 @@ export default {
   data () {
     return {
       selectedDate: '',
-      resourceWidth: 150,
       resourceHeight: 70,
+      resourceMinHeight: 20,
       resources: [
         { id: '1', name: 'John' },
         {
