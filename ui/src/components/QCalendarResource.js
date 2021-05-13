@@ -247,7 +247,7 @@ export default defineComponent({
     })
 
     const parsedResourceHeight = computed(() => {
-      const height = parsedResourceHeight.value
+      const height = parseInt(props.resourceHeight, 10)
       if (height === 0) {
         return 'auto'
       }
