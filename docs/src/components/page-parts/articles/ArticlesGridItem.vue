@@ -50,6 +50,7 @@ export default defineComponent({
       testImage(src).then(
         function fulfilled(img) {
           img.style = 'max-width: 225px; max-height: 150px;'
+          img.width = '225'
           coverImage.value = true
           coverImagePath.value = src
           imageRef.value.appendChild(img)
@@ -88,8 +89,6 @@ export default defineComponent({
   &:hover
     box-shadow: 0 10px 13px -6px rgb(0 0 0 / 20%), 0 20px 31px 3px rgb(0 0 0 / 14%), 0 8px 38px 7px rgb(0 0 0 / 12%)
     transform: scale(1.01, 1.01)
-
-
 
 .article-image
   width: auto

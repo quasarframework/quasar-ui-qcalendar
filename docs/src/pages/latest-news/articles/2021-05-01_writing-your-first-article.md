@@ -27,6 +27,7 @@ You will need to create a PR (Pull Request) to have your content added to the ma
     - Finally, the extension must be `.md` or it will not be processed.
 2. If you have any images associated with your artical, they need to be placed into `public/articles/...` where `...` matches the filename of your markdown file (without the extension).
 3. Put your cover image in the folder specified in step #2 and name it `index.jpg`. All other images used in your article go in this folder and can be jpg or png format, and you use normal markdown notation to reference them. The cover image should be wider than it is tall to look better in the Article Grid. 4/3 aspect ratio will look the best.
+4. Lastly, make sure you run your images through a reducer. [tinypng](https://tinypng.com) is a very good resource.
 
 The remainer of this article will let you know how to deal with specifics, including adding a component to your article.
 
