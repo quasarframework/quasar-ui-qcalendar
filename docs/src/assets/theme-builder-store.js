@@ -95,7 +95,7 @@ export function provideThemeBuilderStore () {
       '--calendar-scrollbar-thumb-hover-dark': '#555555',
 
       '--calendar-intervals-width': '56px',
-      '--calendar-resources-width': '56px',
+      '--calendar-resources-width': '100px',
       '--calendar-work-week-width': '30px',
       '--calendar-mini-work-week-width': '30px',
       '--calendar-work-week-font-size': '1.0em',
