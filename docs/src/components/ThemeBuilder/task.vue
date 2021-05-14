@@ -11,9 +11,6 @@
         view="month"
         :task-width="240"
         :min-weekday-length="2"
-        :weekday-class="weekdayClass"
-        :day-class="dayClass"
-        :footer-day-class="footerDayClass"
         :focus-type="['weekday', 'date', 'task']"
         focusable
         hoverable
@@ -24,9 +21,10 @@
         @click-date="onClickDate"
         @click-day="onClickDay"
         @click-head-day="onClickHeadDay"
+        :style="styles"
       >
         <template #head-task="{ /* scope */ }">
-          <div class="header ellipsis" style="font-weight: 600">
+          <div class="header ellipsis">
             <div class="issue ellipsis">Issue</div>
             <div class="key">Key</div>
             <div class="logged">Logged</div>
@@ -100,6 +98,10 @@ export default defineComponent({
     Done,
     Pending,
     Blocking
+  },
+  props: {
+    modelValue: String,
+    styles: Object
   },
   data () {
     return {
@@ -307,24 +309,6 @@ export default defineComponent({
       return tasks
     },
 
-    weekdayClass (data) {
-      return {
-        'task__weekday--style': true
-      }
-    },
-
-    dayClass (data) {
-      return {
-        'task__day--style': true
-      }
-    },
-
-    footerDayClass (data) {
-      return {
-        'task__footer--day__style': true
-      }
-    },
-
     /**
      * Sums up the amount of time spent for all tasks
      * between the start and end dates
@@ -403,7 +387,7 @@ export default defineComponent({
   align-items: center
   padding: 2px
   font-size: .9em
-  font-weight: 700
+  // font-weight: 700
   width: 100%
   .title
     display: flex
@@ -424,15 +408,4 @@ export default defineComponent({
   padding: 0
   margin: 0
   height: 100%
-</style>
-
-<style lang="sass">
-.task__weekday--style
-  font-size: 0.8em
-  font-weight: 600
-.task__day--style
-  font-size: 0.8em
-.task__footer--day__style
-  font-size: 0.8em
-  font-weight: 600
 </style>
