@@ -1,45 +1,32 @@
 <template>
   <div>
-    <div class="q-gutter-sm justify-center">
+    <div class="q-gutter-sm">
       <q-checkbox
         v-model="disabledDays"
         dense
         label="Disabled weekends"
       />
-      <div class="row justify-evenly q-gutter-sm">
-        <span />
-        <span>Note: setting any height to 0 will make it 'auto'</span>
-      </div>
-      <div class="row justify-evenly q-gutter-sm full-width">
-        <div class="col-5">
-          <div class="q-mb-md">
-            Resource Width:
-          </div><q-slider
-            v-model="resourceWidth"
-            label
-            label-always
-            :min="60"
-            :max="200"
-            class="col"
-          />
-        </div>
-        <div class="col-5">
-          <div class="q-mb-md">
-            Resource Height:
-          </div> <q-slider
-            v-model="resourceHeight"
-            label
-            label-always
-            :min="0"
-            :max="200"
-            class="col"
-          />
+      <div class="q-gutter-sm column">
+        <div class="row full-width">
+          <div class="column">
+            <div class="row q-mb-lg">
+              <span class="no-wrap">Note: setting Resource Height to 0 will make it 'auto' height</span>
+            </div>
+            <div class="row no-wrap" style="width: 600px;">
+              <span class="col-shrink no-wrap" style="min-width: 142px;">Resource Height</span> <q-slider v-model="resourceHeight" label label-always :min="0" :max="200" class="col" />
+            </div>
+            <div class="row no-wrap" style="width: 600px;">
+              <span class="col-shrink no-wrap" style="min-width: 142px;">Resource Min. Height</span> <q-slider v-model="resourceMinHeight" label label-always :min="0" :max="200" class="col" />
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <q-calendar-scheduler
       v-model="selectedDate"
       v-model:modelResources="resources"
+      :resource-height="resourceHeight"
+      :resource-min-height="resourceMinHeight"
       resource-key="id"
       resource-label="name"
       view="week"
@@ -47,8 +34,6 @@
       bordered
       no-scroll
       :disabled-weekdays="disabledWeekdays"
-      :resource-height="resourceHeight"
-      :resource-width="resourceWidth"
       :style="styles"
     />
   </div>
@@ -73,8 +58,8 @@ export default {
     return {
       selectedDate: '',
       disabledDays: false,
-      resourceWidth: 150,
       resourceHeight: 70,
+      resourceMinHeight: 20,
       resources: [
         { id: '1', name: 'John' },
         {

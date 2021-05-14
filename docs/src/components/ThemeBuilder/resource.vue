@@ -1,31 +1,33 @@
 <template>
-  <div>
-    <div class="q-gutter-sm column justify-center">
-    <div class="row justify-center full-width">
-      <div class="column justify-center">
-        <div class="row justify-evenly q-gutter-sm q-mb-lg">
-          <span class="no-wrap">Note: setting Resource Height to 0 will make it 'auto' height</span>
-        </div>
-        <div class="row justify-evenly no-wrap q-gutter-sm" style="width: 600px;">
-          <span class="col-shrink no-wrap" style="min-width: 142px;">Resource Height</span> <q-slider v-model="resourceHeight" label label-always :min="0" :max="200" class="col" />
-        </div>
-        <div class="row justify-evenly no-wrap q-gutter-sm" style="width: 600px;">
-          <span class="col-shrink no-wrap" style="min-width: 142px;">Resource Min. Height</span> <q-slider v-model="resourceMinHeight" label label-always :min="0" :max="200" class="col" />
+  <div class="q-gutter-sm">
+    <div class="column">
+      <div class="row full-width">
+        <div class="column justify-center">
+          <div class="row q-mb-lg">
+            <span class="no-wrap">Note: setting Resource Height to 0 will make it 'auto' height</span>
+          </div>
+          <div class="row no-wrap" style="width: 600px;">
+            <span class="col-shrink no-wrap" style="min-width: 142px;">Resource Height</span>
+            <q-slider v-model="resourceHeight" label label-always :min="0" :max="200" class="col" />
+          </div>
+          <div class="row no-wrap" style="width: 600px;">
+            <span class="col-shrink no-wrap" style="min-width: 142px;">Resource Min. Height</span>
+            <q-slider v-model="resourceMinHeight" label label-always :min="0" :max="200" class="col" />
+          </div>
         </div>
       </div>
-    </div>
     </div>
     <q-calendar-resource
       v-model="selectedDate"
       v-model:modelResources="resources"
-      :resources="resources"
       :resource-height="resourceHeight"
       :resource-min-height="resourceMinHeight"
       resource-key="id"
       resource-label="name"
       locale="en-US"
       bordered
-      sticky
+      :disabled-weekdays="disabledWeekdays"
+      style="max-height: 400px;"
       :style="styles"
     />
   </div>
@@ -77,11 +79,13 @@ export default {
       ]
     }
   },
+
   watch: {
     modelValue (val) {
       this.selectedDate = val
     }
   },
+
   beforeMount () {
     this.selectedDate = this.modelValue
   }

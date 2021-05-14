@@ -1,46 +1,43 @@
 <template>
-  <div>
-    <div class="q-gutter-sm q-mb-sm">
+  <div class="q-gutter-sm">
+    <div class="q-mb-sm">
       <q-checkbox
         v-model="noActiveDate"
         dense
         label="No active date"
       />
     </div>
-    <div class="row justify-evenly q-gutter-sm full-width">
-      <div class="col-5">
-        <div class="q-mb-md">
-          Interval Range:
-        </div>
-        <q-range
-          v-model="intervalRange"
-          label
-          label-always
-          :min="0"
-          :max="24"
-          :step="intervalRangeStep"
-          :left-label-value="leftLabelRange"
-          :right-label-value="rightLabelRange"
-          class="col"
-        />
-      </div>
-      <div class="col-5">
-        <div class="q-mb-md">
-          Interval Height:
-        </div>
-        <q-slider
-          v-model="intervalHeight"
-          :min="20"
-          :max="100"
-          label
-          label-always
-          :label-value="intervalHeight + 'px'"
-        />
-      </div>
+
+    <div class="row no-wrap" style="width: 600px;">
+      <span class="col-shrink no-wrap" style="min-width: 142px;">Interval Range:</span>
+      <q-range
+        v-model="intervalRange"
+        label
+        label-always
+        :min="0"
+        :max="24"
+        :step="intervalRangeStep"
+        :left-label-value="leftLabelRange"
+        :right-label-value="rightLabelRange"
+        class="col"
+      />
     </div>
-    <div class="col-12 full-width q-px-md q-pb-sm">
-      <span class="text-body2">Interval Step (Section)</span>
-      <div class="q-gutter-sm">
+
+    <div class="row no-wrap" style="width: 600px;">
+      <span class="col-shrink no-wrap" style="min-width: 142px;">Interval Height:</span>
+      <q-slider
+        v-model="intervalHeight"
+        :min="20"
+        :max="100"
+        label
+        label-always
+        :label-value="intervalHeight + 'px'"
+        class="col"
+      />
+    </div>
+    <div class="row no-wrap items-center">
+      <span class="col-shrink no-wrap" style="min-width: 150px;">Interval Step (Section):</span>
+      <div class="col q-gutter-sm">
         <q-radio
           v-model="intervalRangeStep"
           :val="1"
@@ -68,7 +65,7 @@
       :interval-count="intervalCount"
       :interval-height="intervalHeight"
       :no-active-date="noActiveDate"
-      style="height: 400px;"
+      style="max-height: 400px;"
       :style="styles"
     />
   </div>
