@@ -100,11 +100,9 @@ export default defineComponent({
   },
   computed: {
     styles () {
-      const s = {
+      return {
         '--calendar-resources-width': this.resourceWidth + 'px'
       }
-      console.log(s)
-      return s
     }
   },
   methods: {
