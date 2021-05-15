@@ -670,9 +670,7 @@ export default defineComponent({
         })
         // ---
       }, [
-        slotResourceLabel
-          ? slotResourceLabel({ scope })
-          : [
+          [
               h('div', {
                 class: {
                   'q-calendar__parent': resource.children !== undefined,
@@ -695,7 +693,7 @@ export default defineComponent({
                   paddingLeft: (10 * indentLevel + 2) + 'px'
                 }
               }, [
-                label
+                slotResourceLabel ? slotResourceLabel({ scope }) : label
               ]),
               useFocusHelper()
             ]
