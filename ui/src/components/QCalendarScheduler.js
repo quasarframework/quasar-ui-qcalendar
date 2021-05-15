@@ -1000,7 +1000,7 @@ export default defineComponent({
               h('div', {
                 class: {
                   'q-calendar-scheduler__resource--text': true,
-                  'q-calendar__overflow-wrap': true
+                  'q-calendar__ellipsis': true
                 },
                 style: {
                   paddingLeft: (10 * indentLevel + 2) + 'px'
