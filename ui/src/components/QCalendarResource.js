@@ -437,7 +437,7 @@ export default defineComponent({
       const intervalClass = typeof props.intervalClass === 'function' ? props.intervalClass({ scope }) : {}
       const isFocusable = props.focusable === true && props.focusType.includes('day')
 
-      return slot ? slot(scope) : h('div', {
+      return h('div', {
         class: {
           'q-calendar-resource__head--interval': true,
           ...intervalClass,
@@ -482,7 +482,9 @@ export default defineComponent({
         ...getDefaultMouseEventHandlers('-interval', event => {
           return { scope, event }
         })
-      }, label)
+      }, [
+        slot ? slot({ scope }) : label
+      ])
     }
 
     function __renderBody () {
