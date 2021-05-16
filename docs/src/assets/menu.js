@@ -575,6 +575,10 @@ const menu = [
           {
             name: 'Resource - (Slot) Interval Label',
             path: 'resource-slot-interval-label'
+          },
+          {
+            name: 'Resource - (Slot) Resource Intervals',
+            path: 'resource-slot-resource-intervals'
           }
         ]
       },
