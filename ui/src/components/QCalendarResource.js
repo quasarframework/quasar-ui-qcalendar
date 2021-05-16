@@ -378,7 +378,7 @@ export default defineComponent({
       const height = convertToUnit(parsedIntervalHeaderHeight.value)
 
       const scope = {
-        intervals,
+        timestamps: intervals,
         date: props.modelValue,
         resources: props.modelResources,
       }
@@ -600,7 +600,7 @@ export default defineComponent({
       const isFocusable = props.focusable === true && props.focusType.includes('resource') && expanded === true
       const scope = {
         resource,
-        intervals,
+        timestamps: intervals,
         resourceIndex,
         indentLevel,
         label
@@ -703,12 +703,13 @@ export default defineComponent({
       ])
     }
 
-    function __renderResourceIntervals (resource, idx) {
+    function __renderResourceIntervals (resource, resourceIndex) {
       const slot = slots[ 'resource-intervals' ]
 
       const scope = {
         resource,
-        intervals,
+        timestamps: intervals,
+        resourceIndex,
         timeStartPosX,
         timeDurationWidth
       }
@@ -716,18 +717,19 @@ export default defineComponent({
       return h('div', {
         class: 'q-calendar-resource__resource--intervals'
       }, [
-        intervals.value.map(intervals => intervals.map(interval => __renderResourceInterval(resource, interval, idx))),
+        intervals.value.map(intervals => intervals.map(interval => __renderResourceInterval(resource, interval, resourceIndex))),
         slot && slot({ scope })
       ])
     }
 
     // interval related to resource
-    function __renderResourceInterval (resource, interval, idx) {
+    function __renderResourceInterval (resource, interval, resourceIndex) {
       // called for each interval
       const slot = slots[ 'resource-interval' ]
       const scope = {
         resource,
-        interval
+        timestamp: interval,
+        resourceIndex
       }
       const resourceKey = resource[ props.resourceKey ]
       scope.droppable = dragOverResourceInterval.value === interval.time + resourceKey
