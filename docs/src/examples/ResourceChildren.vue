@@ -63,7 +63,7 @@ export default defineComponent({
               children: [
                 { id: '2.2.1', name: 'Partition-A' },
                 { id: '2.2.2', name: 'Partition-B' },
-                { id: '2.2.2', name: 'Partition-C' }
+                { id: '2.2.3', name: 'Partition-C' }
               ]
             }
           ]
