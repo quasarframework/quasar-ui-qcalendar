@@ -377,9 +377,9 @@ export default defineComponent({
       const height = convertToUnit(parsedIntervalHeaderHeight.value)
 
       const scope = {
-        timestamp: props.modelValue,
+        intervals,
+        date: props.modelValue,
         resources: props.modelResources,
-        intervals: intervals[ 0 ]
       }
 
       return h('div', {
