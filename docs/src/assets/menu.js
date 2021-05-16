@@ -563,6 +563,10 @@ const menu = [
           {
             name: 'Resource - (Slot) Resource Label',
             path: 'resource-slot-resource-label'
+          },
+          {
+            name: 'Resource - (Slot) Head Resources',
+            path: 'resource-slot-head-resources'
           }
         ]
       },
