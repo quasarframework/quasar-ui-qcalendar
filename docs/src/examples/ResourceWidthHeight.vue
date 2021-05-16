@@ -34,7 +34,6 @@
           :resource-height="resourceHeight"
           :resource-min-height="resourceMinHeight"
           bordered
-          sticky
           @change="onChange"
           @moved="onMoved"
           @resource-expanded="onResourceExpanded"

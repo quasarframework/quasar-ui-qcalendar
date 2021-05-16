@@ -15,7 +15,6 @@
           resource-key="id"
           resource-label="name"
           bordered
-          sticky
           @change="onChange"
           @moved="onMoved"
           @resource-expanded="onResourceExpanded"
