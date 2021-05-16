@@ -141,7 +141,7 @@ Below is a list of all existing slots. Some are new, some have changed and some 
 
 | Name | Previously | Scope | Calendar |
 | -------  | -------------- | --------  | -----------  |
-| head-intervals | intervals-header | `{ scope: { days: [] } }` | QCalendarDay |
+| head-intervals | intervals-header | { scope: { days: [] } } | QCalendarDay |
 | head-day | | | QCalendarDay |
 | head-date | **new** | | QCalendarDay |
 | head-weekday-label | day-header-label | | QCalendarDay |
@@ -151,11 +151,11 @@ Below is a list of all existing slots. Some are new, some have changed and some 
 | column-header-before | | | QCalendarDay |
 | column-header-after | | | QCalendarDay |
 | day-container | | | QCalendarDay |
-| day-body | | `{ scope: { timestamp: {…}, timeStartPos: ƒ, timeDurationHeight: ƒ } }` | QCalendarDay |
-| day-interval | interval | `{ scope: {timestamp: {…}, timeStartPos: ƒ, timeDurationHeight: ƒ} }` | QCalendarDay |
-| interval-label | **new** | `{ scope: { timestamp: {…}, index: Number, label: String, droppable: Boolean } }` | QCalendarDay |
-| head-day-event | day-header | `{ scope: { timestamp: {...}, timeStartPos: ƒ, timeDurationHeight: ƒ } }` | QCalendarDay |
-| head-days-events | **new** | `{ scope: { days: [], ref: ref() }}` | QCalendarDay |
+| day-body | | { scope: { timestamp: {…}, timeStartPos: ƒ, timeDurationHeight: ƒ } } | QCalendarDay |
+| day-interval | interval | { scope: {timestamp: {…}, timeStartPos: ƒ, timeDurationHeight: ƒ } } | QCalendarDay |
+| interval-label | **new** | { scope: { timestamp: {…}, index: Number, label: String, droppable: Boolean } } | QCalendarDay |
+| head-day-event | day-header | { scope: { timestamp: {...}, timeStartPos: ƒ, timeDurationHeight: ƒ } } | QCalendarDay |
+| head-days-events | **new** | { scope: { days: [], ref: ref() } } | QCalendarDay |
 | day-of-year |  |  | QCalendarMonth |
 | month-label |  |  | QCalendarMonth |
 | head-row-events | **new** |  | QCalendarMonth |
@@ -165,8 +165,11 @@ Below is a list of all existing slots. Some are new, some have changed and some 
 | week |  |  | QCalendarMonth |
 | workweek |  |  | QCalendarMonth |
 | day |  |  | QCalendarMonth |
-| head-resources | scheduler-resources-header | `{ scope: { days: [], resources: [] } }` | QCalendarScheduler |
-| head-resources | resources-header | `{ scope: { intervals: [], resources: [], date: String } }` | QCalendarResource |
+| head-resources | scheduler-resources-header | { scope: { days: [], resources: [] } } | QCalendarScheduler |
+| head-resources | resources-header | { scope: { timestamps: [], resources: [], date: String } } | QCalendarResource |
+| resource-label |  | { scope: { timestamps: [], resource: {...}, resourceIndex: Number, indentLevel: Number, label: String, droppable: Boolean } } | QCalendarResource |
+| resource-intervals |  | { scope: {timestamps: [], resource: {...}, resourceIndex: Number,  timeStartPosX: ƒ, timeDurationWidth: ƒ } } | QCalendarResource |
+| resource-interval |  | { scope: { timestamp: {...}, resource: {...}, resourceIndex: Number, droppable: Boolean } } | QCalendarResource |
 
 
 ### Events
