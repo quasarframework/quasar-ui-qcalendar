@@ -567,6 +567,10 @@ const menu = [
           {
             name: 'Resource - (Slot) Head Resources',
             path: 'resource-slot-head-resources'
+          },
+          {
+            name: 'Resource - (Slot) Interval Label',
+            path: 'resource-slot-interval-label'
           }
         ]
       },
