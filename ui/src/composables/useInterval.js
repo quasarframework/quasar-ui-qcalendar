@@ -214,10 +214,9 @@ export const useResourceProps = {
     type: Function,
     default: null
   },
-  intervalHeaderWidth: {
+  cellWidth: {
     type: [ Number, String ],
-    default: 100,
-    validator: validateNumber
+    default: 100
   },
   intervalHeaderHeight: {
     type: [ Number, String ],

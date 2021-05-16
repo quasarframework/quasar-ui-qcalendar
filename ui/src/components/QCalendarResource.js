@@ -114,6 +114,10 @@ export default defineComponent({
       return 'day'
     })
 
+    const parsedCellWidth = computed(() => {
+      return parseInt(props.cellWidth, 10)
+    })
+
     const vm = getCurrentInstance()
     if (vm === null) {
       throw new Error('current instance is null')
@@ -266,10 +270,6 @@ export default defineComponent({
       return 0
     })
 
-    const parsedIntervalHeaderWidth = computed(() => {
-      return parseInt(props.intervalHeaderWidth, 10)
-    })
-
     const parsedIntervalHeaderHeight = computed(() => {
       return parseInt(props.intervalHeaderHeight, 10)
     })
@@ -401,6 +401,7 @@ export default defineComponent({
 
     function __renderHeadIntervals () {
       return h('div', {
+        ref: headerColumnRef,
         class: {
           'q-calendar-resource__head--intervals': true
         }
@@ -413,7 +414,7 @@ export default defineComponent({
       const slot = slots[ 'interval-label' ]
       const activeDate = props.noActiveDate !== true && __isActiveDate(interval)
 
-      const width = convertToUnit(parsedIntervalHeaderWidth.value)
+      const width = convertToUnit(parsedCellWidth.value)
       const height = convertToUnit(parsedIntervalHeaderHeight.value)
 
       const short = props.shortIntervalLabel
@@ -735,7 +736,7 @@ export default defineComponent({
       scope.droppable = dragOverResourceInterval.value === interval.time + resourceKey
       const isFocusable = props.focusable === true && props.focusType.includes('interval')
 
-      const width = convertToUnit(parsedIntervalHeaderWidth.value)
+      const width = convertToUnit(parsedCellWidth.value)
       const style = {
         maxWidth: width,
         minWidth: width
