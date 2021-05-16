@@ -561,6 +561,10 @@ const menu = [
             path: 'resource-width-height'
           },
           {
+            name: 'Resource - Custom Height',
+            path: 'resource-custom-height'
+          },
+          {
             name: 'Resource - (Slot) Resource Label',
             path: 'resource-slot-resource-label'
           },
