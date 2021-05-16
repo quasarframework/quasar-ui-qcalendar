@@ -105,6 +105,7 @@ export default defineComponent({
       size = reactive({ width: 0, height: 0 }),
       dragOverHeadDayRef = ref(false),
       dragOverResource = ref(false),
+      dragOverResourceInterval = ref(false),
       // keep track of last seen start and end dates
       lastStart = ref(null),
       lastEnd = ref(null)
@@ -728,6 +729,8 @@ export default defineComponent({
         resource,
         interval
       }
+      const resourceKey = resource[ props.resourceKey ]
+      scope.droppable = dragOverResourceInterval.value === interval.time + resourceKey
       const isFocusable = props.focusable === true && props.focusType.includes('interval')
 
       const width = convertToUnit(parsedIntervalHeaderWidth.value)
@@ -755,34 +758,34 @@ export default defineComponent({
         onDragenter: (e) => {
           if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
             props.dragEnterFunc(e, 'resource', scope) === true
-              ? dragOverHeadDayRef.value = interval.date
-              : dragOverHeadDayRef.value = ''
+              ? dragOverResourceInterval.value = (interval.time + resourceKey)
+              : dragOverResourceInterval.value = ''
           }
         },
         onDragover: (e) => {
           if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
             props.dragOverFunc(e, 'resource', scope) === true
-              ? dragOverHeadDayRef.value = interval.date
-              : dragOverHeadDayRef.value = ''
+              ? dragOverResourceInterval.value = (interval.time + resourceKey)
+              : dragOverResourceInterval.value = ''
           }
         },
         onDragleave: (e) => {
           if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
             props.dragLeaveFunc(e, 'resource', scope) === true
-              ? dragOverHeadDayRef.value = interval.date
-              : dragOverHeadDayRef.value = ''
+              ? dragOverResourceInterval.value = (interval.time + resourceKey)
+              : dragOverResourceInterval.value = ''
           }
         },
         onDrop: (e) => {
           if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
             props.dropFunc(e, 'resource', scope) === true
-              ? dragOverHeadDayRef.value = interval.date
-              : dragOverHeadDayRef.value = ''
+              ? dragOverResourceInterval.value = (interval.time + resourceKey)
+              : dragOverResourceInterval.value = ''
           }
         },
         onFocus: (e) => {
           if (isFocusable === true) {
-            focusRef.value = interval.date
+            focusRef.value = (interval.time + resourceKey)
           }
         },
         ...getDefaultMouseEventHandlers('-time', event => {
