@@ -166,6 +166,7 @@ Below is a list of all existing slots. Some are new, some have changed and some 
 | workweek |  |  | QCalendarMonth |
 | day |  |  | QCalendarMonth |
 | head-resources | scheduler-resources-header | `{ scope: { days: [], resources: [] } }` | QCalendarScheduler |
+| head-resources | resources-header | `{ scope: { intervals: [], resources: [], date: String } }` | QCalendarResource |
 
 
 ### Events
