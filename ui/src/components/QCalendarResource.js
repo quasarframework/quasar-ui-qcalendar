@@ -419,7 +419,7 @@ export default defineComponent({
       const label = intervalFormatter.value(interval, short)
 
       const scope = {
-        interval,
+        timestamp: interval,
         index,
         label
       }

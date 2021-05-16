@@ -153,7 +153,7 @@ Below is a list of all existing slots. Some are new, some have changed and some 
 | day-container | | | QCalendarDay |
 | day-body | | `{ scope: { timestamp: {…}, timeStartPos: ƒ, timeDurationHeight: ƒ } }` | QCalendarDay |
 | day-interval | interval | `{ scope: {timestamp: {…}, timeStartPos: ƒ, timeDurationHeight: ƒ} }` | QCalendarDay |
-| interval-label | **new** | `{ scope: { timestamp: {…}, label: String } }` | QCalendarDay |
+| interval-label | **new** | `{ scope: { timestamp: {…}, index: Number, label: String, droppable: Boolean } }` | QCalendarDay |
 | head-day-event | day-header | `{ scope: { timestamp: {...}, timeStartPos: ƒ, timeDurationHeight: ƒ } }` | QCalendarDay |
 | head-days-events | **new** | `{ scope: { days: [], ref: ref() }}` | QCalendarDay |
 | day-of-year |  |  | QCalendarMonth |
