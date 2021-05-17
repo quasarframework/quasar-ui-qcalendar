@@ -14,6 +14,8 @@
           v-model:modelResources="resources"
           resource-key="id"
           resource-label="name"
+          :interval-start="6"
+          :interval-count="12"
           animated
           bordered
           @change="onChange"
@@ -26,9 +28,9 @@
           @click-interval="onClickInterval"
         >
           <template #resource-intervals="{ scope }">
-            <div class="my-resource-header">
-              {{ showDate(scope) }}
-            </div>
+            <template v-for="(event, index) in getEvents(scope)" :key="index">
+              <q-badge outline color="primary" :label="event.title" :style="getStyle(event)" />
+            </template>
           </template>
 
         </q-calendar-resource>
@@ -59,33 +61,92 @@ export default defineComponent({
       locale: 'en-US',
       resources: [
         { id: '1', name: 'John' },
-        { id: '2', name: 'Board Room' },
+        {
+          id: '2',
+          name: 'Board Room',
+          expanded: false,
+          children: [
+            { id: '2.1', name: 'Room-1' },
+            {
+              id: '2.2',
+              name: 'Room-2',
+              expanded: false,
+              children: [
+                { id: '2.2.1', name: 'Partition-A' },
+                { id: '2.2.2', name: 'Partition-B' },
+                { id: '2.2.3', name: 'Partition-C' }
+              ]
+            }
+          ]
+        },
         { id: '3', name: 'Mary' },
         { id: '4', name: 'Susan' },
         { id: '5', name: 'Olivia' }
-      ]
+      ],
+      events: {
+        '1': [ // John
+          { start: '06:00', title: 'Gym', duration: 90 },
+          { start: '08:00', title: 'Corporate Training - Partition A (Train new hires)', duration: 240 },
+          { start: '12:00', title: 'Lunch', duration: 60 }
+        ],
+        '2': [ // Board room
+
+        ],
+        '2.1': [ // Room-1
+          { start: '08:00', title: 'Board Meeting', duration: 120 }
+        ],
+        '2.2': [ // Room-2
+
+        ],
+        '2.2.1': [ // Partition-A
+          { start: '08:00', title: 'Corporate Training', duration: 240 },
+        ],
+        '2.2.2': [ // Partition-B
+
+        ],
+        '2.2.3': [ // Partition-C
+
+        ],
+        '3': [ // Mary
+          { start: '08:00', title: 'Corporate Training - Partition A', duration: 240 },
+          { start: '12:00', title: 'Lunch', duration: 60 }
+        ],
+        '4': [ // Susan
+          { start: '08:00', title: 'Corporate Training - Partition A', duration: 240 },
+          { start: '12:00', title: 'Lunch', duration: 60 }
+        ],
+        '5': [ // Olivia
+          { start: '08:00', title: 'Corporate Training - Partition A', duration: 240 },
+          { start: '12:00', title: 'Lunch', duration: 60 }
+        ]
+      }
     }
   },
   methods: {
-    showDate (scope) {
-      if (scope.date) {
-        const date = new Date(scope.date)
-        return this.monthFormatter().format(date)
+    getEvents (scope) {
+      const events = []
+      // get events for the specified resource
+      const resourceEvents = this.events[ scope.resource.id ]
+      // make sure we have events
+      if (resourceEvents && resourceEvents.length > 0) {
+        // for each events figure out start position and width
+        for (let x = 0; x < resourceEvents.length; ++x) {
+          events.push({
+            left: scope.timeStartPosX(resourceEvents[ x ].start),
+            width: scope.timeDurationWidth(resourceEvents[ x ].duration),
+            title: resourceEvents[ x ].title
+          })
+        }
       }
-      return ''
+      return events
     },
 
-    monthFormatter () {
-      try {
-        return new Intl.DateTimeFormat(this.locale || undefined, {
-          day: '2-digit',
-          month: 'long',
-          year: 'numeric',
-          timeZone: 'UTC'
-        })
-      }
-      catch (e) {
-        //
+    getStyle (event) {
+      return {
+        position: 'absolute',
+        background: 'white',
+        left: event.left + 'px',
+        width: event.width + 'px'
       }
     },
 
@@ -125,15 +186,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style lang="sass" scoped>
-.my-resource-header
-  display: flex
-  flex-direction: column
-  flex: 1
-  justify-content: center
-  align-items: center
-  position: relative
-  font-size: 14px
-  font-weight: 700
-</style>
