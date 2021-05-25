@@ -553,6 +553,10 @@ const menu = [
             path: 'resource-no-sticky'
           },
           {
+            name: 'Resource - Modify Intervals',
+            path: 'resource-modify-intervals'
+          },
+          {
             name: 'Resource - Children',
             path: 'resource-children'
           },
