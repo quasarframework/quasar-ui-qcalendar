@@ -135,6 +135,10 @@ const menu = [
             path: 'day-interval-start'
           },
           {
+            name: 'Day - Modify Intervals',
+            path: 'day-modify-intervals'
+          },
+          {
             name: 'Day - Selected intervals',
             path: 'day-selected-intervals'
           },
@@ -267,6 +271,10 @@ const menu = [
           {
             name: 'Week - Interval start',
             path: 'week-interval-start'
+          },
+          {
+            name: 'Week - Modify Intervals',
+            path: 'week-modify-intervals'
           },
           {
             name: 'Week - Selected intervals',

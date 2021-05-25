@@ -38,12 +38,10 @@
 
     <div class="row justify-center">
       <div style="display: flex; max-width: 800px; width: 100%; max-height: 400px;">
-        <q-calendar-resource
+        <q-calendar-day
           ref="calendar"
           v-model="selectedDate"
-          v-model:modelResources="resources"
-          resource-key="id"
-          resource-label="name"
+          view="day"
           :interval-minutes="60 * intervalRangeStep"
           :interval-start="intervalStart"
           :interval-count="intervalCount"
@@ -51,12 +49,11 @@
           bordered
           @change="onChange"
           @moved="onMoved"
-          @resource-expanded="onResourceExpanded"
           @click-date="onClickDate"
           @click-time="onClickTime"
-          @click-resource="onClickResource"
-          @click-head-resources="onClickHeadResources"
           @click-interval="onClickInterval"
+          @click-head-intervals="onClickHeadIntervals"
+          @click-head-day="onClickHeadDay"
         />
       </div>
     </div>
@@ -64,19 +61,19 @@
 </template>
 
 <script>
-import { QCalendarResource, today } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarDay, today } from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarResource.sass'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarDay.sass'
 
 import { defineComponent } from 'vue'
 import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
-  name: 'ResourceModifyIntervals',
+  name: 'DayModifyIntervals',
   components: {
     NavigationBar,
-    QCalendarResource
+    QCalendarDay
   },
   data () {
     return {
@@ -159,23 +156,20 @@ export default defineComponent({
     onChange (data) {
       console.log('onChange', data)
     },
-    onResourceExpanded (data) {
-      console.log('onResourceExpanded', data)
-    },
     onClickDate (data) {
       console.log('onClickDate', data)
     },
     onClickTime (data) {
       console.log('onClickTime', data)
     },
-    onClickResource (data) {
-      console.log('onClickResource', data)
-    },
-    onClickHeadResources (data) {
-      console.log('onClickHeadResources', data)
-    },
     onClickInterval (data) {
       console.log('onClickInterval', data)
+    },
+    onClickHeadIntervals (data) {
+      console.log('onClickHeadIntervals', data)
+    },
+    onClickHeadDay (data) {
+      console.log('onClickHeadDay', data)
     }
   }
 })
