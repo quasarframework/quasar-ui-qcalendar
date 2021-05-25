@@ -6,8 +6,8 @@
       @next="onNext"
     />
 
-    <div>Label Size:</div>
     <div style="display: flex; justify-content: center; align-items: center;">
+      <div>Month Label Size:</div>
       <q-option-group
         v-model="size"
         :options="options"
