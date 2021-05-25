@@ -20,6 +20,9 @@
         <div class="row justify-evenly no-wrap q-gutter-sm" style="width: 600px;">
           <span class="col-shrink no-wrap" style="min-width: 142px;">Resource Min. Height</span> <q-slider v-model="resourceMinHeight" label label-always :min="0" :max="200" class="col" />
         </div>
+        <div class="row justify-evenly no-wrap q-gutter-sm" style="width: 600px;">
+          <span class="col-shrink no-wrap" style="min-width: 142px;">Cell Width</span> <q-slider v-model="cellWidth" label label-always :min="50" :max="250" class="col" />
+        </div>
       </div>
     </div>
 
@@ -33,6 +36,7 @@
           resource-label="name"
           :resource-height="resourceHeight"
           :resource-min-height="resourceMinHeight"
+          :cell-width="cellWidth"
           bordered
           @change="onChange"
           @moved="onMoved"
@@ -71,6 +75,7 @@ export default defineComponent({
       resourceWidth: 100,
       resourceHeight: 70,
       resourceMinHeight: 20,
+      cellWidth: 200,
       resources: [
         { id: '1', name: 'John' },
         {
