@@ -1,8 +1,10 @@
 QCalendar (Vue Plugin, UMD and Quasar App Extension)
 ===
 
-![@quasar/quasar-ui-qcalendar](https://img.shields.io/npm/v/@quasar/quasar-ui-qcalendar.svg?label=@quasar/quasar-ui-qcalendar)
-![@quasar/quasar-app-extension-qcalendar](https://img.shields.io/npm/v/@quasar/quasar-app-extension-qcalendar.svg?label=@quasar/quasar-app-extension-qcalendar)
+![@quasar/quasar-ui-qcalendar](https://img.shields.io/npm/v/@quasar/quasar-ui-qcalendar/next?label=@quasar/quasar-ui-qcalendar)
+![@quasar/quasar-app-extension-qcalendar](https://img.shields.io/npm/v/@quasar/quasar-app-extension-qcalendar/next?label=@quasar/quasar-app-extension-qcalendar)
+[![npm](https://img.shields.io/npm/dt/@quasar/quasar-ui-qcalendar.svg)](https://www.npmjs.com/package/@quasar/quasar-ui-qcalendar)
+![@quasar/quasar-app-extension-qcalendar](https://img.shields.io/npm/dm/@quasar/quasar-ui-qcalendar)
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/quasarframework/quasar-ui-qcalendar.svg)]()
 [![GitHub repo size in bytes](https://img.shields.io/github/repo-size/quasarframework/quasar-ui-qcalendar.svg)]()
 
@@ -15,7 +17,7 @@ QCalendar allows for viewing of **day** (1-6 days), **week**, **monthly**, **sch
 ## Important Release Notes
 
 v4.0.0
-- QCalendar v4.x lives in the **next** branch. This may change at some point in the future before the next major release.
+- QCalendar v4.x (alpha/beta) lives in the **next** branch. This will change at some point in the future when v4.0.0 release is available.
 - Be sure to read the [documentation](https://qcalendar.netlify.app/)
 ---
 
