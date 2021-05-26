@@ -561,6 +561,10 @@ const menu = [
             path: 'resource-no-sticky'
           },
           {
+            name: 'Resource - Focusable/hoverable',
+            path: 'resource-focusable-hoverable'
+          },
+          {
             name: 'Resource - Modify Intervals',
             path: 'resource-modify-intervals'
           },
@@ -604,12 +608,12 @@ const menu = [
             path: 'scheduler-getting-started'
           },
           {
-            name: 'Scheduler - Alignment',
-            path: 'scheduler-alignment'
-          },
-          {
             name: 'Scheduler - Dark',
             path: 'scheduler-dark'
+          },
+          {
+            name: 'Scheduler - Alignment',
+            path: 'scheduler-alignment'
           },
           {
             name: 'Scheduler - Date type',
