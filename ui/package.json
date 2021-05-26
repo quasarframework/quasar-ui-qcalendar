@@ -64,7 +64,7 @@
     "autoprefixer": "^10.2.4",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.1.0",
-    "babel-jest": "^26.6.3",
+    "babel-jest": "^27.0.1",
     "babel-plugin-transform-relative-paths": "^0.1.0",
     "chalk": "^4.1.0",
     "cssnano": "^4.1.10",
