@@ -107,8 +107,9 @@ export const useCommonProps = {
     default: ['date'],
     validator: v => {
       let val = true
+      // v is an array of selected types
       v.forEach(type => {
-        if ([ 'day', 'date', 'weekday', 'interval', 'resource', 'task' ].includes(type) !== true) {
+        if ([ 'day', 'date', 'weekday', 'interval', 'time', 'resource', 'task' ].includes(type) !== true) {
           val = false
         }
       })
