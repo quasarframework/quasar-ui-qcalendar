@@ -4,7 +4,8 @@
   "description": "QCalendar mono-repo",
   "workspaces": [
     "ui",
-    "docs"
+    "docs",
+    "app-extension"
   ],
   "author": "Jeff Galbraith <jeff@quasar.dev>",
   "license": "MIT",
