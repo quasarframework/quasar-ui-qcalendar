@@ -757,6 +757,9 @@ export default defineComponent({
         ...getDefaultMouseEventHandlers('-date', (event, eventName) => {
           if (eventName === 'click-date' || eventName === 'contextmenu-date') {
             emittedValue.value = day.date
+            if (eventName === 'click-date') {
+              event.preventDefault()
+            }
           }
           return { scope, event }
         })
