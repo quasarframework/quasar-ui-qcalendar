@@ -25,8 +25,8 @@
       </q-btn>
     </div>
   </section>
-  <div class="q-px-lg q-pb-lg">
-    <q-timeline :layout="layout" color="primary">
+  <div class="q-px-lg q-pb-xl">
+    <q-timeline :layout="layout" color="primary q-mb-xl">
 
       <q-timeline-entry heading>
         <div style="font-size: 32px; font-weight: 600;">QCalendar</div>
@@ -36,7 +36,7 @@
 
       <q-timeline-entry
         title="QCalendarDay"
-        subtitle="Show as many days as you want"
+        subtitle="Show as many days as needed"
         side="left"
       >
         <div>
@@ -116,7 +116,7 @@
 
       <q-timeline-entry
         title="QCalendarResource"
-        subtitle="Manage resources by the hour"
+        subtitle="Manage resources by time"
         side="left"
       >
         <div>
@@ -313,6 +313,7 @@
         title="Brown"
         side="right"
         color="brown"
+        subtitle="Be bold!"
       >
         <div>
           <q-intersection
@@ -333,6 +334,7 @@
         title="Teal"
         side="left"
         color="teal"
+        subtitle="Be creative!"
       >
         <div>
           <q-intersection
@@ -376,7 +378,7 @@
         side="left"
         color="orange-8"
       >
-        <div>
+        <div class="q-mb-xl">
           <q-intersection
             transition="scale"
             once
@@ -404,10 +406,7 @@
 import { defineComponent, computed } from 'vue'
 import { useQuasar } from 'quasar'
 import {
-  // biTwitter,
-  // biGithub,
   biArrowRightCircle
-
 } from '@quasar/extras/bootstrap-icons'
 
 export default defineComponent({
