@@ -263,13 +263,6 @@ export default defineComponent({
       return parseInt(props.resourceMinHeight, 10)
     })
 
-    const parsedResourceWidth = computed(() => {
-      if (rootRef.value) {
-        return parseInt(getComputedStyle(rootRef.value).getPropertyValue('--calendar-resources-width'), 10)
-      }
-      return 0
-    })
-
     const parsedIntervalHeaderHeight = computed(() => {
       return parseInt(props.intervalHeaderHeight, 10)
     })
@@ -374,7 +367,6 @@ export default defineComponent({
     function __renderHeadResource () {
       const slot = slots[ 'head-resources' ]
 
-      const width = convertToUnit(parsedResourceWidth.value)
       const height = convertToUnit(parsedIntervalHeaderHeight.value)
 
       const scope = {
@@ -546,11 +538,9 @@ export default defineComponent({
     function __renderResourceRow (resource, resourceIndex, indentLevel = 0, expanded = true) {
       const style = {
       }
-      style.height = resource.height !== void 0
-        ? convertToUnit(resource.height)
-        : parsedResourceHeight.value > 0
-          ? convertToUnit(parsedResourceHeight.value)
-          : 'auto'
+      style.height = parsedResourceHeight.value === 'auto'
+        ? parsedResourceHeight.value
+        : convertToUnit(parsedResourceHeight.value)
       if (parsedResourceMinHeight.value > 0) {
         style.minHeight = convertToUnit(parsedResourceMinHeight.value)
       }
@@ -587,7 +577,6 @@ export default defineComponent({
     function __renderResourceLabel (resource, resourceIndex, indentLevel = 0, expanded = true) {
       const slotResourceLabel = slots[ 'resource-label' ]
 
-      const width = convertToUnit(parsedResourceWidth.value)
       const style = {
       }
       style.height = resource.height !== void 0
@@ -740,7 +729,6 @@ export default defineComponent({
       }
       const resourceKey = resource[ props.resourceKey ]
       const dragValue = (interval.time + '-' + resourceKey)
-      console.log('dragValue', dragValue)
       scope.droppable = dragOverResourceInterval.value === dragValue
       const isFocusable = props.focusable === true && props.focusType.includes('interval')
 

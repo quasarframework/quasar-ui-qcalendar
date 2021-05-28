@@ -111,6 +111,10 @@ export default defineComponent({
       return props.view
     })
 
+    const parsedCellWidth = computed(() => {
+      return parseInt(props.cellWidth, 10)
+    })
+
     const vm = getCurrentInstance()
     if (vm === null) {
       throw new Error('current instance is null')
@@ -258,18 +262,24 @@ export default defineComponent({
       return days.value.length
     })
 
-    const parsedResourceWidth = computed(() => {
-      if (rootRef.value) {
-        return parseInt(getComputedStyle(rootRef.value).getPropertyValue('--calendar-resources-width'), 10)
+    const parsedResourceHeight = computed(() => {
+      const height = parseInt(props.resourceHeight, 10)
+      if (height === 0) {
+        return 'auto'
       }
-      return 0
+      return height
+    })
+
+    const parsedResourceMinHeight = computed(() => {
+      return parseInt(props.resourceMinHeight, 10)
     })
 
     const computedWidth = computed(() => {
       if (rootRef.value) {
+        const resourceWidth = parseInt(getComputedStyle(rootRef.value).getPropertyValue('--calendar-resources-width'), 10)
         const width = size.width || rootRef.value.getBoundingClientRect().width
-        if (width && parsedResourceWidth.value && parsedColumnCount.value) {
-          return ((width - scrollWidth.value - parsedResourceWidth.value) / parsedColumnCount.value) + 'px'
+        if (width && resourceWidth.value && parsedColumnCount.value) {
+          return ((width - scrollWidth.value - resourceWidth.value) / parsedColumnCount.value) + 'px'
         }
       }
       return (100 / parsedColumnCount.value) + '%'
@@ -394,18 +404,11 @@ export default defineComponent({
         resources: props.resources
       }
 
-      const style = {
-        minWidth: parsedResourceWidth.value + 'px',
-        // maxWidth: parsedResourceWidth.value + 'px',
-        width: parsedResourceWidth.value + 'px'
-      }
-
       return h('div', {
         class: {
           'q-calendar-scheduler__head--resources': true,
           'q-calendar__sticky': isSticky.value === true
         },
-        style,
         ...getDefaultMouseEventHandlers('-head-resources', event => {
           return { scope, event }
         })
@@ -509,16 +512,13 @@ export default defineComponent({
         scope.columnIndex = columnIndex
       }
 
-      const width = isSticky.value === true ? props.cellWidth : computedWidth.value
+      const width = isSticky.value === true ? convertToUnit(parsedCellWidth.value) : convertToUnit(computedWidth.value)
       const styler = props.weekdayStyle || dayStyleDefault
       const style = {
         width,
         maxWidth: width,
         minWidth: width,
         ...styler({ scope })
-      }
-      if (isSticky.value === true) {
-        style.minWidth = width
       }
       const weekdayClass = typeof props.weekdayClass === 'function' ? props.weekdayClass({ scope }) : {}
       const isFocusable = props.focusable === true && props.focusType.includes('weekday')
@@ -660,14 +660,11 @@ export default defineComponent({
         scope.columnIndex = columnIndex
       }
 
-      const width = isSticky.value === true ? props.cellWidth : computedWidth.value
+      const width = isSticky.value === true ? convertToUnit(parsedCellWidth.value) : convertToUnit(computedWidth.value)
       const style = {
         width,
         maxWidth: width,
         minWidth: width
-      }
-      if (isSticky.value === true) {
-        style.minWidth = width
       }
 
       return h('div', {
@@ -901,10 +898,10 @@ export default defineComponent({
       const slotResourceLabel = slots[ 'resource-label' ]
 
       const style = {
-        minWidth: parsedResourceWidth.value + 'px',
-        width: parsedResourceWidth.value + 'px'
       }
-      style.height = parseInt(props.resourceHeight, 10) > 0 ? convertToUnit(parseInt(props.resourceHeight, 10)) : 'auto'
+      style.height = parsedResourceHeight.value === 'auto'
+        ? parsedResourceHeight.value
+        : convertToUnit(parsedResourceHeight.value)
       if (parseInt(props.resourceMinHeight, 10) > 0) {
         style.minHeight = convertToUnit(parseInt(props.resourceMinHeight, 10))
       }
@@ -1054,14 +1051,11 @@ export default defineComponent({
       const droppable = dragOverResource.value === dragValue
       const scope = { timestamp: day, columnIndex, resource, resourceIndex, indentLevel, activeDate, droppable }
 
-      const width = isSticky.value === true ? props.cellWidth : computedWidth.value
+      const width = isSticky.value === true ? convertToUnit(parsedCellWidth.value) : convertToUnit(computedWidth.value)
       const style = {
         width,
         maxWidth: width,
         ...styler({ scope })
-      }
-      if (isSticky.value === true) {
-        style.minWidth = width
       }
       style.height = parseInt(props.resourceHeight, 10) > 0 ? convertToUnit(parseInt(props.resourceHeight, 10)) : 'auto'
       if (parseInt(props.resourceMinHeight, 10) > 0) {

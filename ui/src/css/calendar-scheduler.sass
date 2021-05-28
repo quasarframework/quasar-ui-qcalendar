@@ -127,6 +127,14 @@
     align-items: center
     outline: 0
 
+    &--interval
+      position: relative
+      display: flex
+      align-items: center
+      text-align: left
+      vertical-align: middle
+      outline: 0
+
     &--section
       position: relative
       display: flex
@@ -206,10 +214,19 @@
     color: var(--calendar-color)
     background: var(--calendar-background)
 
+    &--resources
+      border-right: var(--calendar-border)
+      color: var(--calendar-color)
+      background: var(--calendar-background)
+      min-width: var(--calendar-resources-width)
+      max-width: var(--calendar-resources-width)
+
   &__resource
     border-right: var(--calendar-border)
     color: var(--calendar-color)
     background: var(--calendar-background)
+    min-width: var(--calendar-resources-width)
+    max-width: var(--calendar-resources-width)
 
     &:last-child
       border-bottom: none
@@ -221,13 +238,6 @@
 
       &:last-child
         border-bottom: none
-
-  &__head--resources
-    border-right: var(--calendar-border)
-    min-width: var(--calendar-resources-width)
-    max-width: var(--calendar-resources-width)
-    color: var(--calendar-color)
-    background: var(--calendar-background)
 
   &__head--day
     border-right: var(--calendar-border)
