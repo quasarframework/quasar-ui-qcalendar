@@ -636,6 +636,10 @@ const menu = [
             path: 'scheduler-width-height'
           },
           {
+            name: 'Scheduler - Custom Height',
+            path: 'scheduler-custom-height'
+          },
+          {
             name: 'Scheduler - Drag and drop',
             path: 'scheduler-drag-and-drop'
           },

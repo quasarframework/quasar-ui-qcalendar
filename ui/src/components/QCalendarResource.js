@@ -581,7 +581,7 @@ export default defineComponent({
       }
       style.height = resource.height !== void 0
         ? convertToUnit(resource.height)
-        : parsedResourceHeight.value > 0
+        : parsedResourceHeight.value
           ? convertToUnit(parsedResourceHeight.value)
           : 'auto'
       if (parsedResourceMinHeight.value > 0) {

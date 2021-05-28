@@ -860,11 +860,17 @@ export default defineComponent({
     }
 
     function __renderResourceRow (resource, resourceIndex, indentLevel = 0, expanded = true) {
-      const height = resource.height !== void 0 ? convertToUnit(resource.height) : 'auto'
       const style = {
-        height
       }
-
+      style.height = resource.height !== void 0
+        ? convertToUnit(resource.height)
+        : parsedResourceHeight.value
+          ? convertToUnit(parsedResourceHeight.value)
+          : 'auto'
+      if (parsedResourceMinHeight.value > 0) {
+        style.minHeight = convertToUnit(parsedResourceMinHeight.value)
+      }
+    
       const resourceRow = h('div', {
         key: resource[ props.resourceKey ] + '-' + resourceIndex,
         class: {
@@ -899,9 +905,11 @@ export default defineComponent({
 
       const style = {
       }
-      style.height = parsedResourceHeight.value === 'auto'
-        ? parsedResourceHeight.value
-        : convertToUnit(parsedResourceHeight.value)
+      style.height = resource.height !== void 0
+        ? convertToUnit(resource.height)
+        : parsedResourceHeight.value
+          ? convertToUnit(parsedResourceHeight.value)
+          : 'auto'
       if (parseInt(props.resourceMinHeight, 10) > 0) {
         style.minHeight = convertToUnit(parseInt(props.resourceMinHeight, 10))
       }

@@ -8,7 +8,7 @@
 
     <div class="row justify-center">
       <div style="display: flex; max-width: 800px; width: 100%; max-height: 400px;">
-        <q-calendar-resource
+        <q-calendar-scheduler
           ref="calendar"
           v-model="selectedDate"
           v-model:modelResources="resources"
@@ -20,10 +20,10 @@
           @moved="onMoved"
           @resource-expanded="onResourceExpanded"
           @click-date="onClickDate"
-          @click-time="onClickTime"
+          @click-day-resource="onClickDayResource"
           @click-resource="onClickResource"
           @click-head-resources="onClickHeadResources"
-          @click-interval="onClickInterval"
+          @click-head-day="onClickHeadDay"
         />
       </div>
     </div>
@@ -31,20 +31,20 @@
 </template>
 
 <script>
-import { QCalendarResource } from '@quasar/quasar-ui-qcalendar/src/QCalendarResource.js'
+import { QCalendarScheduler } from '@quasar/quasar-ui-qcalendar/src/QCalendarScheduler.js'
 import { today } from '@quasar/quasar-ui-qcalendar/src/Timestamp.js'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarResource.sass'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarScheduler.sass'
 
 import { defineComponent } from 'vue'
 import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
-  name: 'ResourceCustomHeight',
+  name: 'SchedulerCustomHeight',
   components: {
     NavigationBar,
-    QCalendarResource
+    QCalendarScheduler
   },
   data () {
     return {
@@ -93,23 +93,26 @@ export default defineComponent({
     onChange (data) {
       console.log('onChange', data)
     },
-    onResourceExpanded (data) {
-      console.log('onResourceExpanded', data)
-    },
     onClickDate (data) {
       console.log('onClickDate', data)
     },
-    onClickTime (data) {
-      console.log('onClickTime', data)
+    onClickDayResource (data) {
+      console.log('onClickDayResource', data)
+    },
+    onResourceExpanded (data) {
+      console.log('onResourceExpanded', data)
     },
     onClickResource (data) {
       console.log('onClickResource', data)
+      if (data.scope.resource.expanded !== undefined) {
+        // data.scope.resource.expanded = !data.scope.resource.expanded
+      }
     },
     onClickHeadResources (data) {
       console.log('onClickHeadResources', data)
     },
-    onClickInterval (data) {
-      console.log('onClickInterval', data)
+    onClickHeadDay (data) {
+      console.log('onClickHeadDay', data)
     }
   }
 })
