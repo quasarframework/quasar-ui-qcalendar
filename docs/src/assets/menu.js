@@ -632,6 +632,10 @@ const menu = [
             path: 'scheduler-cell-width'
           },
           {
+            name: 'Scheduler - Width/Height',
+            path: 'scheduler-width-height'
+          },
+          {
             name: 'Scheduler - Drag and drop',
             path: 'scheduler-drag-and-drop'
           },
