@@ -232,12 +232,15 @@
       border-bottom: none
 
     &--section
+      border-bottom: var(--calendar-border)
       border-right: var(--calendar-border)
       color: var(--calendar-color)
       background: var(--calendar-background)
+      min-width: var(--calendar-resources-width)
+      max-width: var(--calendar-resources-width)
 
-      &:last-child
-        border-bottom: none
+      // &:last-child
+      //   border-bottom: none
 
   &__head--day
     border-right: var(--calendar-border)
