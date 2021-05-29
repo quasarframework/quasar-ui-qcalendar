@@ -730,7 +730,7 @@ export default defineComponent({
       const resourceKey = resource[ props.resourceKey ]
       const dragValue = (interval.time + '-' + resourceKey)
       scope.droppable = dragOverResourceInterval.value === dragValue
-      const isFocusable = props.focusable === true && props.focusType.includes('interval')
+      const isFocusable = props.focusable === true && props.focusType.includes('time')
 
       const styler = props.intervalStyle || dayStyleDefault
       const width = convertToUnit(parsedCellWidth.value)
