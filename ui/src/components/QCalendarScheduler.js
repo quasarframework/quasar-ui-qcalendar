@@ -1022,6 +1022,19 @@ export default defineComponent({
     }
 
     function __renderDayResources (resource, resourceIndex, indentLevel = 0, expanded = true) {
+      const slot = slots[ 'resource-days' ]
+
+      const width = isSticky.value === true ? convertToUnit(parsedCellWidth.value) : convertToUnit(computedWidth.value)
+
+      const scope = {
+        resource,
+        resourceIndex,
+        indentLevel,
+        expanded,
+        cellWidth: width,
+        days: days.value
+      }
+
       const style = {}
       style.height = parseInt(props.resourceHeight, 10) > 0 ? convertToUnit(parseInt(props.resourceHeight, 10)) : 'auto'
       if (parseInt(props.resourceMinHeight, 10) > 0) {
@@ -1035,7 +1048,8 @@ export default defineComponent({
 
       return h('div', data,
         [
-          ...__renderDays(resource, resourceIndex, indentLevel, expanded)
+          ...__renderDays(resource, resourceIndex, indentLevel, expanded),
+          slot && slot({ scope })
         ])
     }
 
