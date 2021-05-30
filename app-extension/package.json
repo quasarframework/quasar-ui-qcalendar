@@ -41,12 +41,12 @@
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",
-    "@babel/eslint-parser": "^7.14.3",
+    "@babel/eslint-parser": "^7.14.4",
     "eslint": "^7.27.0",
     "eslint-plugin-import": "^2.23.3",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
-    "eslint-plugin-vue": "^7.9.0",
+    "eslint-plugin-vue": "^7.10.0",
     "eslint-webpack-plugin": "^2.5.4"
   },
   "engines": {
