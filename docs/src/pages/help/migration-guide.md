@@ -166,10 +166,11 @@ Below is a list of all existing slots. Some are new, some have changed and some 
 | workweek |  |  | QCalendarMonth |
 | day |  |  | QCalendarMonth |
 | head-resources | scheduler-resources-header | { scope: { days: [], resources: [] } } | QCalendarScheduler |
-| head-resources | resources-header | { scope: { timestamps: [], resources: [], date: String } } | QCalendarResource |
+| head-resources | resources-header | { scope: { timestamps: [], resources: [], date: String } } | QCalendarResource, QCalendarScheduler |
 | resource-label |  | { scope: { timestamps: [], resource: {...}, resourceIndex: Number, indentLevel: Number, label: String, droppable: Boolean } } | QCalendarResource |
 | resource-intervals |  | { scope: {timestamps: [], resource: {...}, resourceIndex: Number,  timeStartPosX: ƒ, timeDurationWidth: ƒ } } | QCalendarResource |
 | resource-interval |  | { scope: { timestamp: {...}, resource: {...}, resourceIndex: Number, droppable: Boolean } } | QCalendarResource |
+| resource-days | **new** | { scope: { days: [], resource: {...}, resourceIndex: Number, indentLevel: Number, expanded: Boolean, cellWidth: String } } | QCalendarScheduler |
 
 
 ### Events
