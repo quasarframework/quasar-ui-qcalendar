@@ -62,9 +62,6 @@ export default defineComponent({
   data () {
     return {
       selectedDate: today(),
-      resourceWidth: 100,
-      resourceHeight: 70,
-      resourceMinHeight: 20,
       resources: [
         { id: '1', name: 'John', avatar: 'https://cdn.quasar.dev/img/avatar4.jpg' },
         {

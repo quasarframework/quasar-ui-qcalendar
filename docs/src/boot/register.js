@@ -13,7 +13,8 @@ setDefaults({
   cssPaths: [
     `https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@${ version }/dist/index.min.css`,
     'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.0/css/all.css'
-  ]
+  ],
+  noEdit: true
 })
 
 export default boot(({ app }) => {

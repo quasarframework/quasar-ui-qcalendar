@@ -8,56 +8,59 @@
 
     <div class="row justify-center">
       <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
-        <q-calendar-resource
+        <q-calendar-scheduler
           ref="calendar"
           v-model="selectedDate"
           v-model:modelResources="resources"
+          view="week"
           resource-key="id"
           resource-label="name"
-          :interval-start="6"
-          :interval-count="12"
           animated
           bordered
           @change="onChange"
           @moved="onMoved"
           @resource-expanded="onResourceExpanded"
           @click-date="onClickDate"
-          @click-time="onClickTime"
+          @click-day-resource="onClickDayResource"
           @click-resource="onClickResource"
           @click-head-resources="onClickHeadResources"
-          @click-interval="onClickInterval"
+          @click-head-day="onClickHeadDay"
+          :style="styles"
         >
-          <template #resource-intervals="{ scope }">
-            <template v-for="(event, index) in getEvents(scope)" :key="index">
+        <template #resource-days="{ scope }">
+          <template v-for="(event, index) in getEvents(scope)" :key="index">
               <q-badge outline color="primary" :label="event.title" :style="getStyle(event)" />
             </template>
-          </template>
+        </template>
 
-        </q-calendar-resource>
+        </q-calendar-scheduler>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { QCalendarResource } from '@quasar/quasar-ui-qcalendar/src/QCalendarResource.js'
+import { QCalendarScheduler } from '@quasar/quasar-ui-qcalendar/src/QCalendarScheduler.js'
 import { today } from '@quasar/quasar-ui-qcalendar/src/Timestamp.js'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarResource.sass'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarScheduler.sass'
 
 import { defineComponent } from 'vue'
 import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
-  name: 'ResourceDark',
+  name: 'SchedulerSlotResourceDays',
   components: {
     NavigationBar,
-    QCalendarResource
+    QCalendarScheduler
   },
   data () {
     return {
       selectedDate: today(),
+      resourceWidth: 100,
+      resourceHeight: 70,
+      resourceMinHeight: 20,
       locale: 'en-US',
       resources: [
         { id: '1', name: 'John' },
@@ -85,21 +88,21 @@ export default defineComponent({
       ],
       events: {
         '1': [ // John
-          { start: '06:00', title: 'Gym', duration: 90 },
-          { start: '08:00', title: 'Corporate Training - Partition A (Train new hires)', duration: 240 },
-          { start: '12:00', title: 'Lunch', duration: 60 }
+          { dow: 1, title: 'Gym' },
+          { dow: 3, title: 'Meeting: Olivia' },
+          { dow: 4, title: 'Training', range: 2 }
         ],
         '2': [ // Board room
 
         ],
         '2.1': [ // Room-1
-          { start: '08:00', title: 'Board Meeting', duration: 120 }
+          { dow: 2, title: 'Board Meeting', range: 2 }
         ],
         '2.2': [ // Room-2
 
         ],
         '2.2.1': [ // Partition-A
-          { start: '08:00', title: 'Corporate Training', duration: 240 },
+          { dow: 4, title: 'Corporate Training', range: 2 }
         ],
         '2.2.2': [ // Partition-B
 
@@ -108,17 +111,24 @@ export default defineComponent({
 
         ],
         '3': [ // Mary
-          { start: '08:00', title: 'Corporate Training - Partition A', duration: 240 },
-          { start: '12:00', title: 'Lunch', duration: 60 }
+          { dow: 4, title: 'Corporate Training', range: 2 },
+          // { start: '12:00', title: 'Lunch', duration: 60 }
         ],
         '4': [ // Susan
-          { start: '08:00', title: 'Corporate Training - Partition A', duration: 240 },
-          { start: '12:00', title: 'Lunch', duration: 60 }
+          { dow: 4, title: 'Corporate Training', range: 2 },
+          // { start: '12:00', title: 'Lunch', duration: 60 }
         ],
         '5': [ // Olivia
-          { start: '08:00', title: 'Corporate Training - Partition A', duration: 240 },
-          { start: '12:00', title: 'Lunch', duration: 60 }
+          { dow: 4, title: 'Corporate Training', range: 2 },
+          { dow: 3, title: 'Meeting: John' },
         ]
+      }
+    }
+  },
+  computed: {
+    styles () {
+      return {
+        '--calendar-resources-width': 150 + 'px'
       }
     }
   },
@@ -133,8 +143,8 @@ export default defineComponent({
           // for each events figure out start position and width
           for (let x = 0; x < resourceEvents.length; ++x) {
             events.push({
-              left: scope.timeStartPosX(resourceEvents[ x ].start),
-              width: scope.timeDurationWidth(resourceEvents[ x ].duration),
+              left: this.getLeft(scope, resourceEvents[ x ]),
+              width: this.getWidth(scope, resourceEvents[ x ]),
               title: resourceEvents[ x ].title
             })
           }
@@ -147,11 +157,22 @@ export default defineComponent({
       return {
         position: 'absolute',
         background: 'white',
-        left: event.left + 'px',
-        width: event.width + 'px'
+        left: event.left,
+        width: event.width
       }
     },
-
+    getLeft (scope, event) {
+      const left = event.dow * parseFloat(scope.cellWidth)
+      const val = left + (scope.cellWidth.indexOf('%') >= -1 ? '%' : 'px')
+      console.log('getLeft', val)
+      return val
+    },
+    getWidth (scope, event) {
+      const width = (event.range ? event.range : 1) * parseFloat(scope.cellWidth)
+      const val = width + (scope.cellWidth.indexOf('%') >= -1 ? '%' : 'px')
+      console.log('getWidth', val)
+      return val
+    },
     onToday () {
       this.$refs.calendar.moveToToday()
     },
@@ -173,8 +194,8 @@ export default defineComponent({
     onClickDate (data) {
       console.log('onClickDate', data)
     },
-    onClickTime (data) {
-      console.log('onClickTime', data)
+    onClickDayResource (data) {
+      console.log('onClickDayResource', data)
     },
     onClickResource (data) {
       console.log('onClickResource', data)
@@ -182,9 +203,21 @@ export default defineComponent({
     onClickHeadResources (data) {
       console.log('onClickHeadResources', data)
     },
-    onClickInterval (data) {
-      console.log('onClickInterval', data)
+    onClickHeadDay (data) {
+      console.log('onClickHeadDay', data)
     }
   }
 })
 </script>
+
+<style lang="sass" scoped>
+.my-resource-header
+  display: flex
+  flex-direction: column
+  flex: 1
+  justify-content: center
+  align-items: center
+  position: relative
+  font-size: 14px
+  font-weight: 700
+</style>

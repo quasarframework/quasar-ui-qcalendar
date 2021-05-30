@@ -650,6 +650,18 @@ const menu = [
           {
             name: 'Scheduler - Theme',
             path: 'scheduler-theme'
+          },
+          {
+            name: 'Scheduler - (Slot) Head Resources',
+            path: 'scheduler-slot-head-resources'
+          },
+          {
+            name: 'Scheduler - (Slot) Resource Label',
+            path: 'scheduler-slot-resource-label'
+          },
+          {
+            name: 'Scheduler - (Slot) Resource Days',
+            path: 'scheduler-slot-resource-days'
           }
         ]
       },
