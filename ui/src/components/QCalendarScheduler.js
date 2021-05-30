@@ -401,7 +401,8 @@ export default defineComponent({
 
       const scope = {
         days: days.value,
-        resources: props.resources
+        date: props.modelValue,
+        resources: props.modelResources
       }
 
       return h('div', {

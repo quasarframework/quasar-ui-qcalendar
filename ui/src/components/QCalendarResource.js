@@ -372,7 +372,7 @@ export default defineComponent({
       const scope = {
         timestamps: intervals,
         date: props.modelValue,
-        resources: props.modelResources,
+        resources: props.modelResources
       }
 
       return h('div', {
