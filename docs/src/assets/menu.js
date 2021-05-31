@@ -351,6 +351,14 @@ const menu = [
             path: 'month-dark'
           },
           {
+            name: 'Month - 1st day monday',
+            path: 'month-first-day-monday'
+          },
+          {
+            name: 'Month - 5 day workweek',
+            path: 'month-5-day-workweek'
+          },
+          {
             name: 'Month - Day of year',
             path: 'month-day-of-year'
           },
