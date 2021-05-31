@@ -8,7 +8,29 @@
 
     <slot></slot>
 
-    <div class="markdown-page-footer">
+    <div v-if="related !== undefined" class="full-width">
+      <h5 class="q-ma-none">Related</h5>
+      <q-separator />
+      <div class="q-gutter-md flex flex-center q-mt-md markdown-page__related">
+        <router-link
+          v-for="link in related"
+          :key="link.category + link.path"
+          :to="link.path"
+          class="markdown-page__related--link markdown-page__related--bordered rounded-borders q-pa-md cursor-pointer column justify-center bg-grey-3"
+        >
+          <div class="row no-wrap items-center justify-center">
+            <div class="col">
+              <div class="markdown-page__nav--cat">{{ link.category || 'Docs' }}</div>
+              <div class="markdown-page__nav--name text-weight-bold">{{ link.name }}</div>
+            </div>
+            <q-icon :name="biBoxArrowUpRight" class="q-ml-lg" />
+          </div>
+        </router-link>
+      </div>
+    </div>
+
+
+    <div class="markdown-page__footer">
       <q-separator class="q-mb-lg" />
       <div v-if="path && noEdit !== true">
         <div class="full-width row justify-center items-center">
@@ -41,6 +63,7 @@ import getMeta from 'assets/get-meta'
 import { useMarkdownStore } from 'assets/markdown-store.js'
 import MarkdownFooter from './MarkdownFooter.vue'
 import MarkdownNavBar from './MarkdownNavBar.vue'
+import { biBoxArrowUpRight } from '@quasar/extras/bootstrap-icons'
 
 export default {
   name: 'MarkdownPage',
@@ -83,25 +106,57 @@ export default {
     store.title = getTitle()
 
     return {
-      path
+      path,
+      biBoxArrowUpRight
     }
   }
 }
 </script>
 
-<style lang="sass">
-.markdown-page-footer
-  padding: 36px 0 16px
+<style lang="sass" scoped>
+.markdown-page
+  &__related
 
-  &__icons
-    font-size: 28px
+    &--bordered
+      border: 1px solid $separator-color
 
-    a
-      text-decoration: none
+    &--link
+      position: relative
+      color: $grey-8
+      background: $grey-3 !important
+      transition: color .28s, background .28s, border .28s
       outline: 0
-      color: $primary
-      transition: color .28s
+      text-decoration: none
 
       &:hover
-        color: $red-8
+        color: var(--text-color-active)
+        background: var(--background-color-active) !important
+        border: 1px solid var(--text-color-active)
+
+      &:before
+        content: ''
+        position: absolute
+        top: 0
+        right: 0
+        bottom: 0
+        left: 0
+        background: #000
+        opacity: 0
+        transition: opacity .28s
+
+      &:focus:before
+        opacity: .1
+
+    & + &
+      margin-top: 0
+
+    &__nav
+      &--cat
+        font-size: .8em
+
+      &--name
+        font-size: 1em
+
+  &__footer
+    padding: 36px 0 16px
 </style>
