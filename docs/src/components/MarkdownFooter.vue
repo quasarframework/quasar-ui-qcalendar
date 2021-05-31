@@ -1,5 +1,5 @@
 <template>
-  <div class="markdown-page-footer__icons q-mt-md full-width row justify-center items-center q-gutter-sm">
+  <div class="markdown-page__footer--icons q-mt-md full-width row justify-center items-center q-gutter-sm">
     <a href="https://github.com/hawkeye64" target="_blank" rel="noopener"><q-avatar size="28px"><img src="~assets/profile.png"></q-avatar></a>
     <a href="https://github.com/quasarframework/quasar-ui-qcalendar/tree/next" target="_blank" rel="noopener"><q-icon :name="fabGithub" /></a>
     <a href="https://twitter.com/jgalbraith64" target="_blank" rel="noopener"><q-icon :name="fabTwitter" /></a>
@@ -42,4 +42,17 @@ export default {
 <style lang="sass">
 .markdown-copyright
   font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace
+
+.markdown-page__footer--icons
+  font-size: 28px
+
+  a
+    text-decoration: none
+    outline: 0
+    color: $primary
+    transition: color .28s
+
+    &:hover
+      color: $red-8
+
 </style>
