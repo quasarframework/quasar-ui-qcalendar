@@ -85,7 +85,7 @@ export default {
 
           const releaseInfo = {
             version,
-            date: formatDate(extractDate(release.created_at, 'YYYY-MM-DD'), 'YYYY-MM-DD'),
+            date: formatDate(extractDate(release.published_at, 'YYYY-MM-DD'), 'YYYY-MM-DD'),
             body: release.body,
             label: version
           }
