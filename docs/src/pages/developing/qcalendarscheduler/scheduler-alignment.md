@@ -2,6 +2,11 @@
 title: Scheduler - Alignment
 desc: QCalendarScheduler - Alignment
 keys: developing
+related:
+  - /developing/qcalendarday/day-alignment
+  - /developing/qcalendarday-week/week-alignment
+  - /developing/qcalendarmonth/month-alignment
+  - /developing/qcalendaragenda/agenda-alignment
 ---
 
 <example-viewer

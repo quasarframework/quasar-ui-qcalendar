@@ -6,6 +6,8 @@
       @next="onNext"
     />
 
+    <div class="line">You can use the properties <code class="example-token">date-header</code>, <code class="example-token">date-align</code> and <code class="example-token">weekday-align</code> to manipulate how the header area looks.</div>
+
     <div style="display: flex; justify-content: center">
       <div class="button-bar" style="margin: 12px;">
         <div style="display: flex; align-items: center">

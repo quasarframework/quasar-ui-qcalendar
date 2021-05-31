@@ -2,6 +2,11 @@
 title: Month - Alignment
 desc: QCalendarMonth - Alignment
 keys: developing
+related:
+  - /developing/qcalendarday/day-alignment
+  - /developing/qcalendarday-week/week-alignment
+  - /developing/qcalendaragenda/agenda-alignment
+  - /developing/qcalendarscheduler/scheduler-alignment
 ---
 
 <example-viewer

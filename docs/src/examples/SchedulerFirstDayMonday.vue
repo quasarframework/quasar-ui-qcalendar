@@ -6,55 +6,6 @@
       @next="onNext"
     />
 
-    <div class="line">You can use the properties <code class="example-token">date-header</code>, <code class="example-token">date-align</code> and <code class="example-token">weekday-align</code> to manipulate how the header area looks.</div>
-
-    <div class="q-ma-sm row justify-center">
-      <q-select
-        v-model="dateHeader"
-        label="date-header"
-        outlined
-        dense
-        options-dense
-        :options="[
-          'stacked',
-          'inline',
-          'inverted'
-        ]"
-        class="button"
-        style="min-width: 160px;"
-      />
-
-      <q-select
-        v-model="dateAlign"
-        label="date-align"
-        outlined
-        dense
-        options-dense
-        :options="[
-          'center',
-          'left',
-          'right'
-        ]"
-        class="button"
-        style="min-width: 160px;"
-      />
-
-      <q-select
-        v-model="weekdayAlign"
-        label="weekday-align"
-        outlined
-        dense
-        options-dense
-        :options="[
-          'center',
-          'left',
-          'right'
-        ]"
-        class="button"
-        style="min-width: 160px;"
-      />
-    </div>
-
     <div class="row justify-center">
       <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
         <q-calendar-scheduler
@@ -62,10 +13,7 @@
           v-model="selectedDate"
           v-model:modelResources="resources"
           view="week"
-          short-weekday-label
-          :date-header="dateHeader"
-          :weekday-align="weekdayAlign"
-          :date-align="dateAlign"
+          :weekdays="[1,2,3,4,5,6,0]"
           animated
           bordered
           @change="onChange"
@@ -91,7 +39,7 @@ import { defineComponent } from 'vue'
 import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
-  name: 'SchedulerAlignment',
+  name: 'SchedulerDark',
   components: {
     NavigationBar,
     QCalendarScheduler
@@ -99,9 +47,6 @@ export default defineComponent({
   data () {
     return {
       selectedDate: today(),
-      dateAlign: 'center',
-      weekdayAlign: 'center',
-      dateHeader: 'stacked',
       resources: [
         { id: 1, label: 'John' },
         { id: 2, label: 'Mary' },

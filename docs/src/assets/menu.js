@@ -628,6 +628,10 @@ const menu = [
             path: 'scheduler-date-type'
           },
           {
+            name: 'Scheduler - First Day Monday',
+            path: 'scheduler-first-day-monday'
+          },
+          {
             name: 'Scheduler - Focusable/hoverable',
             path: 'scheduler-focusable-hoverable'
           },

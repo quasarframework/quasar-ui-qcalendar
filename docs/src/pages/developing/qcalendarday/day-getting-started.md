@@ -3,7 +3,7 @@ title: Day - Getting Started
 desc: Development with QCalendarDay
 keys: developing-qcalendarday
 related:
-  - /developing/qcalendarday/day-getting-started
+  - /developing/qcalendarday-week/week-getting-started
   - /developing/qcalendarmonth/month-getting-started
   - /developing/qcalendarmonth-minimode/minimode-getting-started
   - /developing/qcalendaragenda/agenda-getting-started
