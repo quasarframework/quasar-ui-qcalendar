@@ -75,17 +75,19 @@ export default defineComponent({
     const
       scrollArea = ref(null),
       pane = ref(null),
-      direction = ref('next'),
-      startDate = ref(props.modelValue || today()),
-      endDate = ref('0000-00-00'),
-      maxDaysRendered = ref(0), // always 0
-      emittedValue = ref(props.modelValue),
+
+      headerColumnRef = ref(null),
       focusRef = ref(null),
       focusValue = ref(null),
       datesRef = ref({}),
       weekEventRef = ref([]),
       weekRef = ref([]),
-      headerColumnRef = ref(null),
+
+      direction = ref('next'),
+      startDate = ref(props.modelValue || today()),
+      endDate = ref('0000-00-00'),
+      maxDaysRendered = ref(0), // always 0
+      emittedValue = ref(props.modelValue),
       size = reactive({ width: 0, height: 0 }),
       dragOverHeadDayRef = ref(false),
       dragOverDayRef = ref(false),
