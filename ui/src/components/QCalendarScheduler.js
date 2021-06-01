@@ -93,7 +93,7 @@ export default defineComponent({
       headDayEventsChildRef = ref({}),
       // resourcesHeadRef = ref(null),
       direction = ref('next'),
-      startDate = ref(today()),
+      startDate = ref(props.modelValue || today()),
       endDate = ref('0000-00-00'),
       maxDaysRendered = ref(0),
       emittedValue = ref(props.modelValue),
@@ -109,10 +109,6 @@ export default defineComponent({
         return 'month-interval'
       }
       return props.view
-    })
-
-    const parsedCellWidth = computed(() => {
-      return parseInt(props.cellWidth, 10)
     })
 
     const vm = getCurrentInstance()
@@ -193,7 +189,7 @@ export default defineComponent({
       // intervals,
       // intervalFormatter,
       // ariaDateTimeFormatter,
-      // parsedCellWidth,
+      parsedCellWidth,
       // methods
       // getResourceClasses,
       // showResourceLabelDefault,
@@ -262,6 +258,13 @@ export default defineComponent({
       return days.value.length
     })
 
+    const resourcesWidth = computed(() => {
+      if (rootRef.value) {
+        return parseInt(getComputedStyle(rootRef.value).getPropertyValue('--calendar-resources-width'), 10)
+      }
+      return 0
+    })
+
     const parsedResourceHeight = computed(() => {
       const height = parseInt(props.resourceHeight, 10)
       if (height === 0) {
@@ -276,10 +279,9 @@ export default defineComponent({
 
     const computedWidth = computed(() => {
       if (rootRef.value) {
-        const resourceWidth = parseInt(getComputedStyle(rootRef.value).getPropertyValue('--calendar-resources-width'), 10)
         const width = size.width || rootRef.value.getBoundingClientRect().width
-        if (width && resourceWidth.value && parsedColumnCount.value) {
-          return ((width - scrollWidth.value - resourceWidth.value) / parsedColumnCount.value) + 'px'
+        if (width && resourcesWidth.value && parsedColumnCount.value) {
+          return ((width - scrollWidth.value - resourcesWidth.value) / parsedColumnCount.value) + 'px'
         }
       }
       return (100 / parsedColumnCount.value) + '%'
