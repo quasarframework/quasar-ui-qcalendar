@@ -792,10 +792,6 @@ const menu = [
         name: 'Theme builder',
         path: '/theme-builder',
         internal: true
-      },
-      {
-        name: 'Tutorials',
-        path: 'tutorials'
       }
     ]
   },
@@ -844,7 +840,7 @@ const menu = [
         path: 'roadmap'
       },
       {
-        name: 'News and articles',
+        name: 'News, articles and tutorials',
         path: 'news-and-articles'
       }
     ]

@@ -1,5 +1,5 @@
 ---
-title: News and Articles
+title: News, Articles and Tutorials
 desc: 
 keys: latest-news
 components:
