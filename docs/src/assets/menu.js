@@ -351,7 +351,7 @@ const menu = [
             path: 'month-dark'
           },
           {
-            name: 'Month - 1st day monday',
+            name: 'Month - First day monday',
             path: 'month-first-day-monday'
           },
           {
@@ -449,7 +449,7 @@ const menu = [
             path: 'minimode-min-weeks'
           },
           {
-            name: 'Mini-mode - 1st day monday',
+            name: 'Mini-mode - First day monday',
             path: 'minimode-first-day-monday'
           },
           {

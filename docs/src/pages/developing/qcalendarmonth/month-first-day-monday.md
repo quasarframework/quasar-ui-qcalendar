@@ -1,6 +1,6 @@
 ---
-title: Month - 1st Day Monday
-desc: QCalendarMonth - 1st Day Monday
+title: Month - First Day Monday
+desc: QCalendarMonth - First Day Monday
 keys: developing
 related:
   - /developing/qcalendarday-week/week-first-day-monday
@@ -10,7 +10,7 @@ related:
 ---
 
 <example-viewer
-  title="1st Day Monday"
+  title="First Day Monday"
   file="MonthFirstDayMonday"
   codepen-title="QCalendarMonth"
 />

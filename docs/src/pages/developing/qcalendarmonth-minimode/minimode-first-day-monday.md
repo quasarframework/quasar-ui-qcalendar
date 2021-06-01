@@ -1,6 +1,6 @@
 ---
-title: MiniMode - 1st Day Monday
-desc: QCalendarMonth (minimode) - 1st Day Monday
+title: MiniMode - First Day Monday
+desc: QCalendarMonth (minimode) - First Day Monday
 keys: developing
 related:
   - /developing/qcalendarday-week/week-first-day-monday
@@ -10,7 +10,7 @@ related:
 ---
 
 <example-viewer
-  title="1st Day Monday"
+  title="First Day Monday"
   file="MiniModeFirstDayMonday"
   codepen-title="QCalendarMonth (mini-mode)"
 />
