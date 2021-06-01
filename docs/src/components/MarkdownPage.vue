@@ -42,11 +42,14 @@
           </markdown-link>
         </div>
       </div>
+
       <markdown-footer />
 
-      <a href="https://www.netlify.com" class="row justify-center">
-        <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" />
-      </a>
+      <div class="row justify-center">
+        <a href="https://www.netlify.com" target="_blank" noopener noreferrer class="row justify-center">
+          <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" />
+        </a>
+      </div>
 
     </div>
     <div class="q-mb-md"></div>

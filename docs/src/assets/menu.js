@@ -527,6 +527,10 @@ const menu = [
             path: 'agenda-alignment'
           },
           {
+            name: 'Agenda - Date type',
+            path: 'agenda-date-type'
+          },
+          {
             name: 'Agenda - Dark',
             path: 'agenda-dark'
           },

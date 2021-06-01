@@ -6,13 +6,37 @@
       @next="onNext"
     />
 
+    <div class="q-ma-sm row justify-center">
+      <q-radio
+        v-model="dateType"
+        val="round"
+        label="round"
+        dense
+        style="min-width: 100px;"
+      />
+      <q-radio
+        v-model="dateType"
+        val="rounded"
+        label="rounded"
+        dense
+        style="min-width: 100px;"
+      />
+      <q-radio
+        v-model="dateType"
+        val="square"
+        label="square"
+        dense
+        style="min-width: 100px;"
+      />
+    </div>
+
     <div class="row justify-center">
       <div style="display: flex; max-width: 800px; width: 100%; height: 200px;">
         <q-calendar-agenda
           ref="calendar"
           v-model="selectedDate"
-          view="day"
-          dark
+          view="week"
+          :date-type="dateType"
           :left-column-options="leftColumnOptions"
           :right-column-options="rightColumnOptions"
           column-options-id="id"
@@ -43,7 +67,7 @@ import { defineComponent } from 'vue'
 import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
-  name: 'AgendaDark',
+  name: 'AgendaDateType',
   components: {
     NavigationBar,
     QCalendarAgenda
@@ -51,6 +75,7 @@ export default defineComponent({
   data () {
     return {
       selectedDate: today(),
+      dateType: 'square',
       leftColumnOptions: [
         {
           id: 'overdue',

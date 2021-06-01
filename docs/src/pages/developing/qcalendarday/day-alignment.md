@@ -7,6 +7,7 @@ related:
   - /developing/qcalendarmonth/month-alignment
   - /developing/qcalendaragenda/agenda-alignment
   - /developing/qcalendarscheduler/scheduler-alignment
+  - /developing/qcalendartask/task-alignment
 ---
 
 <example-viewer
