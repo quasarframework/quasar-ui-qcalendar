@@ -221,8 +221,8 @@ const menu = [
             path: 'week-first-day-monday'
           },
           {
-            name: 'Week - No weekends',
-            path: 'week-no-weekends'
+            name: 'Week - Five day workweek',
+            path: 'week-five-day-workweek'
           },
           {
             name: 'Week - No header',
@@ -301,31 +301,31 @@ const menu = [
             path: 'week-theme'
           },
           {
-            name: 'Week - (Slot) Column header',
+            name: 'Week - (Slot) column header',
             path: 'week-slot-column-header'
           },
           {
-            name: 'Week - (Slot) Day body',
+            name: 'Week - (Slot) day body',
             path: 'week-slot-day-body'
           },
           {
-            name: 'Week - (Slot) Head day',
+            name: 'Week - (Slot) head day',
             path: 'week-slot-head-day'
           },
           {
-            name: 'Week - (Slot) Head day event',
+            name: 'Week - (Slot) head day event',
             path: 'week-slot-head-day-event'
           },
           {
-            name: 'Week - (Slot) Head days event absolute',
+            name: 'Week - (Slot) head days event absolute',
             path: 'week-slot-head-days-event-absolute'
           },
           {
-            name: 'Week - (Slot) Head intervals',
+            name: 'Week - (Slot) head intervals',
             path: 'week-slot-head-intervals'
           },
           {
-            name: 'Week - (Slot) Show current time',
+            name: 'Week - (Slot) show current time',
             path: 'week-slot-show-current-time'
           }
         ]
@@ -355,8 +355,8 @@ const menu = [
             path: 'month-first-day-monday'
           },
           {
-            name: 'Month - 5 day workweek',
-            path: 'month-5-day-workweek'
+            name: 'Month - five day workweek',
+            path: 'month-five-day-workweek'
           },
           {
             name: 'Month - Day of year',
@@ -411,15 +411,15 @@ const menu = [
             path: 'month-theme'
           },
           {
-            name: 'Month - (Slot) Day',
+            name: 'Month - (Slot) day',
             path: 'month-slot-day'
           },
           {
-            name: 'Month - (Slot) Week',
+            name: 'Month - (Slot) week',
             path: 'month-slot-week'
           },
           {
-            name: 'Month - (Slot) Day (holidays)',
+            name: 'Month - (Slot) day (holidays)',
             path: 'month-slot-day-holidays'
           }
         ]
@@ -453,8 +453,8 @@ const menu = [
             path: 'minimode-first-day-monday'
           },
           {
-            name: 'Mini-mode - 5 day workweek',
-            path: 'minimode-5-day-workweek'
+            name: 'Mini-mode - five day workweek',
+            path: 'minimode-five-day-workweek'
           },
           {
             name: 'Mini-mode - No outside days',
@@ -547,6 +547,14 @@ const menu = [
             path: 'agenda-cell-width'
           },
           {
+            name: 'Agenda - Locale',
+            path: 'agenda-locale'
+          },
+          {
+            name: 'Agenda - Theme',
+            path: 'agenda-theme'
+          },
+          {
             name: 'Agenda - Planner (example)',
             path: 'agenda-planner'
           }
@@ -577,7 +585,7 @@ const menu = [
             path: 'resource-focusable-hoverable'
           },
           {
-            name: 'Resource - Modify Intervals',
+            name: 'Resource - Modify intervals',
             path: 'resource-modify-intervals'
           },
           {
@@ -585,27 +593,31 @@ const menu = [
             path: 'resource-children'
           },
           {
-            name: 'Resource - Width/Height',
+            name: 'Resource - Width/height',
             path: 'resource-width-height'
           },
           {
-            name: 'Resource - Custom Height',
+            name: 'Resource - Custom height',
             path: 'resource-custom-height'
           },
           {
-            name: 'Resource - (Slot) Resource Label',
+            name: 'Resource - Theme',
+            path: 'resource-theme'
+          },
+          {
+            name: 'Resource - (Slot) resource label',
             path: 'resource-slot-resource-label'
           },
           {
-            name: 'Resource - (Slot) Head Resources',
+            name: 'Resource - (Slot) head resources',
             path: 'resource-slot-head-resources'
           },
           {
-            name: 'Resource - (Slot) Interval Label',
+            name: 'Resource - (Slot) interval label',
             path: 'resource-slot-interval-label'
           },
           {
-            name: 'Resource - (Slot) Resource Intervals',
+            name: 'Resource - (Slot) resource intervals',
             path: 'resource-slot-resource-intervals'
           }
         ]
@@ -632,8 +644,12 @@ const menu = [
             path: 'scheduler-date-type'
           },
           {
-            name: 'Scheduler - First Day Monday',
+            name: 'Scheduler - First day monday',
             path: 'scheduler-first-day-monday'
+          },
+          {
+            name: 'Scheduler - Five day workweek',
+            path: 'scheduler-five-day-workweek'
           },
           {
             name: 'Scheduler - Focusable/hoverable',
@@ -648,11 +664,11 @@ const menu = [
             path: 'scheduler-cell-width'
           },
           {
-            name: 'Scheduler - Width/Height',
+            name: 'Scheduler - Width/height',
             path: 'scheduler-width-height'
           },
           {
-            name: 'Scheduler - Custom Height',
+            name: 'Scheduler - Custom height',
             path: 'scheduler-custom-height'
           },
           {
@@ -668,15 +684,15 @@ const menu = [
             path: 'scheduler-theme'
           },
           {
-            name: 'Scheduler - (Slot) Head Resources',
+            name: 'Scheduler - (Slot) head resources',
             path: 'scheduler-slot-head-resources'
           },
           {
-            name: 'Scheduler - (Slot) Resource Label',
+            name: 'Scheduler - (Slot) resource label',
             path: 'scheduler-slot-resource-label'
           },
           {
-            name: 'Scheduler - (Slot) Resource Days',
+            name: 'Scheduler - (Slot) resource days',
             path: 'scheduler-slot-resource-days'
           }
         ]
