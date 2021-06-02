@@ -45,7 +45,7 @@ import { defineComponent } from 'vue'
 import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
-  name: 'ResourceDark',
+  name: 'ResourceHour24Format',
   components: {
     NavigationBar,
     QCalendarResource

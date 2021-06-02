@@ -102,7 +102,7 @@ import Pending from '@carbon/icons-vue/es/pending/16'
 import Blocking from '@carbon/icons-vue/es/undefined/16'
 
 export default defineComponent({
-  name: 'TaskTimesheet',
+  name: 'TaskTitleRows',
   components: {
     NavigationBar,
     QCalendarTask,

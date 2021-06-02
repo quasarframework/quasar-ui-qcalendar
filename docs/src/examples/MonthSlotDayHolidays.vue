@@ -94,7 +94,7 @@ import NavigationBar from '../components/NavigationBar.vue'
 import Holidays from 'date-holidays'
 
 export default defineComponent({
-  name: 'MonthSlotDay',
+  name: 'MonthSlotDayHolidays',
   components: {
     NavigationBar,
     QCalendarMonth

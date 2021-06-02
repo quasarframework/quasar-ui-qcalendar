@@ -15,6 +15,8 @@
           :weekdays="[1,2,3,4,5]"
           animated
           bordered
+          transition-next="slide-left"
+          transition-prev="slide-right"
           @change="onChange"
           @moved="onMoved"
           @click-date="onClickDate"
@@ -38,7 +40,7 @@ import { defineComponent } from 'vue'
 import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
-  name: 'WeekDark',
+  name: 'WeekFiveDayWorkweek',
   components: {
     NavigationBar,
     QCalendarDay

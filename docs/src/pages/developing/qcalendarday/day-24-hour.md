@@ -6,6 +6,6 @@ keys: developing
 
 <example-viewer
   title="24-hour Format"
-  file="Day24hour"
+  file="DayHour4Format"
   codepen-title="QCalendarDay"
 />

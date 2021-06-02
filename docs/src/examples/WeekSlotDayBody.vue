@@ -117,7 +117,7 @@ function getCurrentDay (day) {
 }
 
 export default defineComponent({
-  name: 'WeekSlotHeadDay',
+  name: 'WeekSlotDayBody',
   components: {
     NavigationBar,
     QCalendarDay
@@ -251,7 +251,7 @@ export default defineComponent({
       }
     },
 
-    badgeStyles (event, type, timeStartPos, timeDurationHeight) {
+    badgeStyles (event, type, timeStartPos = undefined, timeDurationHeight = undefined) {
       const s = {}
       if (timeStartPos && timeDurationHeight) {
         s.top = timeStartPos(event.time) + 'px'
