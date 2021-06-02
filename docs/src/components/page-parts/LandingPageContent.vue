@@ -6,7 +6,7 @@
         <div class="q-pa-sm">
           <img
             src="/qcalendarmonth-event-slots.png"
-            class="shadow-10"
+            class="shadow-10 rounded-borders"
             style="max-width: 340px;"
           />
         </div>
@@ -48,7 +48,7 @@
               src="\QCalendarDay.png"
               spinner-color="white"
               style="max-width: 350px"
-              class="shadow-12"
+              class="shadow-12 rounded-borders"
             />
           </q-intersection>
         </div>
@@ -68,7 +68,7 @@
               src="\QCalendarMonth.png"
               spinner-color="white"
               style="max-width: 350px"
-              class="shadow-12"
+              class="shadow-12 rounded-borders"
             />
           </q-intersection>
         </div>
@@ -88,7 +88,7 @@
               src="\QCalendarMonth--mini-mode.png"
               spinner-color="white"
               style="max-width: 200px"
-              class="shadow-12"
+              class="shadow-12 rounded-borders"
             />
           </q-intersection>
         </div>
@@ -108,7 +108,7 @@
               src="\QCalendarAgenda.png"
               spinner-color="white"
               style="max-width: 350px"
-              class="shadow-12"
+              class="shadow-12 rounded-borders"
             />
           </q-intersection>
         </div>
@@ -128,7 +128,7 @@
               src="\QCalendarResource.png"
               spinner-color="white"
               style="max-width: 350px"
-              class="shadow-12"
+              class="shadow-12 rounded-borders"
             />
           </q-intersection>
         </div>
@@ -148,7 +148,7 @@
               src="\QCalendarScheduler.png"
               spinner-color="white"
               style="max-width: 350px"
-              class="shadow-12"
+              class="shadow-12 rounded-borders"
             />
           </q-intersection>
         </div>
@@ -168,7 +168,7 @@
               src="\QCalendarTask.png"
               spinner-color="white"
               style="max-width: 350px"
-              class="shadow-12"
+              class="shadow-12 rounded-borders"
             />
           </q-intersection>
         </div>
@@ -194,7 +194,7 @@
               src="\qcalendarmonth-event-slots.png"
               spinner-color="white"
               style="max-width: 350px"
-              class="shadow-12"
+              class="shadow-12 rounded-borders"
             />
           </q-intersection>
         </div>
@@ -214,7 +214,7 @@
               src="\qcalendaragenda-planner.png"
               spinner-color="white"
               style="max-width: 350px"
-              class="shadow-12"
+              class="shadow-12 rounded-borders"
             />
           </q-intersection>
         </div>
@@ -234,7 +234,7 @@
               src="\QCalendarTask.png"
               spinner-color="white"
               style="max-width: 350px"
-              class="shadow-12"
+              class="shadow-12 rounded-borders"
             />
           </q-intersection>
         </div>
@@ -261,7 +261,7 @@
               src="\qcalendarweek-blue-theme.png"
               spinner-color="white"
               style="max-width: 350px"
-              class="shadow-12"
+              class="shadow-12 rounded-borders"
             />
           </q-intersection>
         </div>
@@ -282,7 +282,7 @@
               src="\qcalendarmonth-indigo-theme.png"
               spinner-color="white"
               style="max-width: 350px"
-              class="shadow-12"
+              class="shadow-12 rounded-borders"
             />
           </q-intersection>
         </div>
@@ -303,7 +303,7 @@
               src="\qcalendarmonth-minimode-deep-purple-theme.png"
               spinner-color="white"
               style="max-width: 240px;"
-              class="shadow-12"
+              class="shadow-12 rounded-borders"
             />
           </q-intersection>
         </div>
@@ -324,7 +324,7 @@
               src="\qcalendarscheduler-brown-theme.png"
               spinner-color="white"
               style="max-width: 350px"
-              class="shadow-12"
+              class="shadow-12 rounded-borders"
             />
           </q-intersection>
         </div>
@@ -345,7 +345,7 @@
               src="\qcalendartask-teal-theme.png"
               spinner-color="white"
               style="max-width: 350px"
-              class="shadow-12"
+              class="shadow-12 rounded-borders"
             />
           </q-intersection>
         </div>
@@ -366,7 +366,7 @@
               src="\qcalendarweek-dark-mode.png"
               spinner-color="white"
               style="max-width: 350px"
-              class="shadow-12"
+              class="shadow-12 rounded-borders"
             />
           </q-intersection>
         </div>
@@ -387,14 +387,14 @@
               src="\theme-builder.png"
               spinner-color="white"
               style="max-width: 350px"
-              class="shadow-12"
+              class="shadow-12 rounded-borders"
             />
           </q-intersection>
         </div>
       </q-timeline-entry>
     </q-timeline>
 
-    <div class="full-width column justify-center items-center">
+    <div class="full-width column justify-center items-center text-h5">
       <p>No dependencies other than Vue</p>
       <p>Available for Quasar Framework CLI, Vue CLI and UMD</p>
     </div>
