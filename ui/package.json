@@ -92,7 +92,7 @@
     "sass": "^1.32.6",
     "uglify-es": "^3.3.9",
     "vue-jest": "^3.0.7",
-    "vue-template-compiler": "=2.6.12",
+    "vue-template-compiler": "=2.6.13",
     "zlib": "^1.0.5"
   },
   "browserslist": [
