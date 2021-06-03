@@ -11,10 +11,10 @@
         <q-calendar-month
           ref="calendar"
           v-model="selectedDate"
+          mini-mode
+          no-active-date
           animated
           bordered
-          mini-mode
-          dark
           @change="onChange"
           @moved="onMoved"
           @click-date="onClickDate"
@@ -29,8 +29,7 @@
 </template>
 
 <script>
-import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar/src/QCalendarMonth.js'
-import { today } from '@quasar/quasar-ui-qcalendar/src/Timestamp.js'
+import { QCalendarMonth, today } from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarMonth.sass'
@@ -39,7 +38,7 @@ import { defineComponent } from 'vue'
 import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
-  name: 'MiniModeDark',
+  name: 'MiniModeNoActiveDate',
   components: {
     NavigationBar,
     QCalendarMonth

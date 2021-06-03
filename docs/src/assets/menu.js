@@ -457,6 +457,10 @@ const menu = [
             path: 'minimode-five-day-workweek'
           },
           {
+            name: 'Mini-mode - No active date',
+            path: 'minimode-no-active-date'
+          },
+          {
             name: 'Mini-mode - No outside days',
             path: 'minimode-no-outside-days'
           },
@@ -541,6 +545,10 @@ const menu = [
           {
             name: 'Agenda - Five Day Workweek',
             path: 'agenda-five-day-workweek'
+          },
+          {
+            name: 'Agenda - No active date',
+            path: 'agenda-no-active-date'
           },
           {
             name: 'Agenda - Cell width',
@@ -650,6 +658,10 @@ const menu = [
           {
             name: 'Scheduler - Five day workweek',
             path: 'scheduler-five-day-workweek'
+          },
+          {
+            name: 'Scheduler - No active date',
+            path: 'scheduler-no-active-date'
           },
           {
             name: 'Scheduler - Focusable/hoverable',

@@ -6,21 +6,26 @@
       @next="onNext"
     />
 
-    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap;">
-      <div style="display: flex; max-width: 280px; width: 100%;">
-        <q-calendar-month
+    <div class="row justify-center">
+      <div style="display: flex; max-width: 800px; width: 100%; height: 200px;">
+        <q-calendar-agenda
           ref="calendar"
           v-model="selectedDate"
+          view="day"
+          no-active-date
+          :left-column-options="leftColumnOptions"
+          :right-column-options="rightColumnOptions"
+          column-options-id="id"
+          column-options-label="label"
+          :day-min-height="200"
           animated
           bordered
-          mini-mode
-          dark
           @change="onChange"
           @moved="onMoved"
           @click-date="onClickDate"
-          @click-day="onClickDay"
-          @click-workweek="onClickWorkweek"
-          @click-head-workweek="onClickHeadWorkweek"
+          @click-time="onClickTime"
+          @click-interval="onClickInterval"
+          @click-head-intervals="onClickHeadIntervals"
           @click-head-day="onClickHeadDay"
         />
       </div>
@@ -29,24 +34,35 @@
 </template>
 
 <script>
-import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar/src/QCalendarMonth.js'
-import { today } from '@quasar/quasar-ui-qcalendar/src/Timestamp.js'
+import { QCalendarAgenda, today } from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarMonth.sass'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarAgenda.sass'
 
 import { defineComponent } from 'vue'
 import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
-  name: 'MiniModeDark',
+  name: 'AgendaNoActiveDate',
   components: {
     NavigationBar,
-    QCalendarMonth
+    QCalendarAgenda
   },
   data () {
     return {
-      selectedDate: today()
+      selectedDate: today(),
+      leftColumnOptions: [
+        {
+          id: 'overdue',
+          label: 'Overdue'
+        }
+      ],
+      rightColumnOptions: [
+        {
+          id: 'summary',
+          label: 'Summary'
+        }
+      ]
     }
   },
   methods: {
@@ -59,6 +75,7 @@ export default defineComponent({
     onNext () {
       this.$refs.calendar.next()
     },
+
     onMoved (data) {
       console.log('onMoved', data)
     },
@@ -68,17 +85,17 @@ export default defineComponent({
     onClickDate (data) {
       console.log('onClickDate', data)
     },
-    onClickDay (data) {
-      console.log('onClickDay', data)
+    onClickTime (data) {
+      console.log('onClickTime', data)
     },
-    onClickWorkweek (data) {
-      console.log('onClickWorkweek', data)
+    onClickInterval (data) {
+      console.log('onClickInterval', data)
+    },
+    onClickHeadIntervals (data) {
+      console.log('onClickHeadIntervals', data)
     },
     onClickHeadDay (data) {
       console.log('onClickHeadDay', data)
-    },
-    onClickHeadWorkweek (data) {
-      console.log('onClickHeadWorkweek', data)
     }
   }
 })
