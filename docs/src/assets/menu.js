@@ -375,6 +375,10 @@ const menu = [
             path: 'month-no-active-date'
           },
           {
+            name: 'Month - Now',
+            path: 'month-now'
+          },
+          {
             name: 'Month - No outside days',
             path: 'month-no-outside-days'
           },
@@ -459,6 +463,10 @@ const menu = [
           {
             name: 'Mini-mode - No active date',
             path: 'minimode-no-active-date'
+          },
+          {
+            name: 'Mini-mode - Now',
+            path: 'minimode-now'
           },
           {
             name: 'Mini-mode - No outside days',
@@ -549,6 +557,10 @@ const menu = [
           {
             name: 'Agenda - No active date',
             path: 'agenda-no-active-date'
+          },
+          {
+            name: 'Agenda - Now',
+            path: 'agenda-now'
           },
           {
             name: 'Agenda - Cell width',
@@ -662,6 +674,10 @@ const menu = [
           {
             name: 'Scheduler - No active date',
             path: 'scheduler-no-active-date'
+          },
+          {
+            name: 'Scheduler - Now',
+            path: 'scheduler-now'
           },
           {
             name: 'Scheduler - Focusable/hoverable',

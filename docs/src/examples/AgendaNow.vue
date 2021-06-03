@@ -9,15 +9,19 @@
     />
 
     <div class="row justify-center">
-      <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
-        <q-calendar-day
+      <div style="display: flex; max-width: 800px; width: 100%; height: 200px;">
+        <q-calendar-agenda
           ref="calendar"
           v-model="selectedDate"
+          view="week"
           :now="nowDate"
-          bordered
+          :left-column-options="leftColumnOptions"
+          :right-column-options="rightColumnOptions"
+          column-options-id="id"
+          column-options-label="label"
+          :day-min-height="200"
           animated
-          transition-next="slide-left"
-          transition-prev="slide-right"
+          bordered
           @change="onChange"
           @moved="onMoved"
           @click-date="onClickDate"
@@ -32,29 +36,36 @@
 </template>
 
 <script>
-import {
-  QCalendarDay,
-  addToDate,
-  parseTimestamp,
-  today
-} from '@quasar/quasar-ui-qcalendar'
+import { QCalendarAgenda, addToDate, parseTimestamp, today } from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarDay.sass'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarAgenda.sass'
 
 import { defineComponent } from 'vue'
 import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
-  name: 'DayNow',
+  name: 'AgendaNow',
   components: {
     NavigationBar,
-    QCalendarDay
+    QCalendarAgenda
   },
   data () {
     return {
       selectedDate: today(),
-      nowDate: addToDate(parseTimestamp(today()), { day: 1 }).date
+      nowDate: addToDate(parseTimestamp(today()), { day: 1 }).date,
+      leftColumnOptions: [
+        {
+          id: 'overdue',
+          label: 'Overdue'
+        }
+      ],
+      rightColumnOptions: [
+        {
+          id: 'summary',
+          label: 'Summary'
+        }
+      ]
     }
   },
   methods: {
@@ -67,6 +78,7 @@ export default defineComponent({
     onNext () {
       this.$refs.calendar.next()
     },
+
     onMoved (data) {
       console.log('onMoved', data)
     },
