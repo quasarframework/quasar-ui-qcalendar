@@ -2,6 +2,8 @@
 title: Bugs and Feature Requests
 desc: 
 keys: Contributing
+related:
+  - /contributing/sponsor
 ---
 
 ## Checking for known issues

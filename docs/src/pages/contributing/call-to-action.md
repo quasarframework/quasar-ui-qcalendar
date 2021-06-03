@@ -2,6 +2,10 @@
 title: Call to action
 desc: Things that need help from the community
 keys: Contributing
+related:
+  - /designing-with-qcalendar/getting-started
+  - /contributing/overview
+  - /contributing/sponsor
 ---
 
 ## Helping out

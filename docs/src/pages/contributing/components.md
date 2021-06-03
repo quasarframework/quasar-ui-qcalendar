@@ -2,6 +2,9 @@
 title: Components
 desc: How to contribute to components
 keys: Contributing
+related:
+  - /contributing/overview
+  - /contributing/sponsor
 ---
 
 ## Design

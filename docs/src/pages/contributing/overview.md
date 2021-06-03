@@ -5,6 +5,7 @@ keys: Contributing
 related:
   - /all-about-qcalendar/installation-types
   - /all-about-qcalendar/anatomy-of-a-calendar
+  - /contributing/sponsor
 ---
 
 Interested in contributing to QCalendar? Here's how you can contribute:

@@ -4,6 +4,8 @@ desc: How to install QCalendar
 keys: All about QCalendar
 related:
   - /all-about-qcalendar/what-is-qcalendar
+  - /contributing/bugs-and-feature-requests
+  - /contributing/sponsor
 ---
 
 ## Quasar CLI

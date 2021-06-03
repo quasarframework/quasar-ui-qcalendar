@@ -2,6 +2,9 @@
 title: Sponsor
 desc: About sponsoring QCalendar
 keys: Contributing
+related:
+  - /designing-with-qcalendar/getting-started
+  - /contributing/overview
 ---
 
 ## Introduction

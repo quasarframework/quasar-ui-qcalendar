@@ -2,6 +2,9 @@
 title: Documentation
 desc: Contribute to the Documentation
 keys: Contributing
+related:
+  - /contributing/overview
+  - /contributing/sponsor
 ---
 
 You can contribute to the content on the QCalendar site in a few different ways. Choose the way that works best for you.
