@@ -20,7 +20,7 @@ import '@quasar/quasar-ui-qcalendar/dist/QCalendarTransitions.css'
 
 ## Transitions
 
-Transitions are a way to make your calendar come alive to your end-user. When a calendar changes to a previous or next week/month, instead of just instantly displaying it, we can use the `animated` property to turn on transitions.
+Transitions are a way to make your calendar come alive for your end-user. When a calendar changes to a previous or next week/month, instead of just instantly displaying it, we can use the `animated` property to turn on transitions.
 
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
