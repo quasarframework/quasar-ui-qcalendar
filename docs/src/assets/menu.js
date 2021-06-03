@@ -163,23 +163,23 @@ const menu = [
             path: 'day-theme'
           },
           {
-            name: 'Day - (Slot) Column header',
+            name: 'Day - (Slot) column header',
             path: 'day-slot-column-header'
           },
           {
-            name: 'Day - (Slot) Head day',
+            name: 'Day - (Slot) head day',
             path: 'day-slot-head-day'
           },
           {
-            name: 'Day - (Slot) Head day event',
+            name: 'Day - (Slot) head day event',
             path: 'day-slot-head-day-event'
           },
           {
-            name: 'Day - (Slot) Head intervals',
+            name: 'Day - (Slot) head intervals',
             path: 'day-slot-head-intervals'
           },
           {
-            name: 'Day - (Slot) Show current time',
+            name: 'Day - (Slot) show current time',
             path: 'day-slot-show-current-time'
           }
         ]
