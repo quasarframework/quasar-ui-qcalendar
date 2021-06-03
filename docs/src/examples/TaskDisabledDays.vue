@@ -1,5 +1,11 @@
 <template>
   <div class="subcontent">
+    <div class="line">
+      The next 4 days after the current day have been disabled with the <code class="example-token">disabled-days</code> property.<br>
+      The first example uses an array of dates to disable each specific date.<br>
+      The second example uses a range, which is an array within an array of start and end dates.<br>
+    </div>
+
     <navigation-bar
       @today="onToday"
       @prev="onPrev"
@@ -7,7 +13,7 @@
     />
 
     <div class="row justify-center">
-      <div style="display: flex; max-width: 800px; width: 100%;">
+      <div class="q-gutter-md" style="display: flex; flex-direction: column; max-width: 800px; width: 90%;">
         <q-calendar-task
           ref="calendar"
           v-model="selectedDate"
@@ -15,6 +21,69 @@
           v-model:modelFooter="footerTasks"
           view="month"
           :disabled-days="disabledDays"
+          :task-width="240"
+          :min-weekday-length="2"
+          :weekday-class="weekdayClass"
+          :day-class="dayClass"
+          :footer-day-class="footerDayClass"
+          :focus-type="['weekday', 'date', 'task']"
+          focusable
+          hoverable
+          animated
+          bordered
+          @change="onChange"
+          @moved="onMoved"
+          @click-date="onClickDate"
+          @click-day="onClickDay"
+          @click-head-day="onClickHeadDay"
+        >
+          <template #head-task="{ /* scope */ }">
+            <div class="header ellipsis" style="font-weight: 600">
+              <div class="issue ellipsis">Issue</div>
+              <div class="key">Key</div>
+              <div class="logged">Logged</div>
+            </div>
+          </template>
+
+          <template #task="{ scope }">
+            <template v-for="task in getTasks(scope.start, scope.end, scope.task)" :key="task.key">
+              <div class="header ellipsis">
+                <div class="issue ellipsis">
+                  <span v-if="scope.task.icon === 'done'" class="done"><Done /></span>
+                  <span v-else-if="scope.task.icon === 'pending'" class="pending"><Pending /></span>
+                  <span v-else-if="scope.task.icon === 'blocking'" class="blocking"><Blocking /></span>
+                  {{ scope.task.title }}
+                </div>
+                <div class="key">{{ scope.task.key }}</div>
+                <div class="logged">{{ sum(scope.start, scope.end, scope.task) }}</div>
+              </div>
+            </template>
+          </template>
+
+          <template #day="{ scope }">
+            <template v-for="time in getLogged(scope.timestamp.date, scope.task.logged)" :key="time">
+              <div class="logged-time">{{ time.logged }}</div>
+            </template>
+          </template>
+
+          <template #footer-task="{ scope }">
+            <div class="summary ellipsis">
+              <div class="title ellipsis">{{ scope.footer.title }}</div>
+              <div class="total">{{ totals(scope.start, scope.end) }}</div>
+            </div>
+          </template>
+
+          <template #footer-day="{ scope }">
+            <div class="logged-time">{{ getLoggedSummary(scope.timestamp.date) }}</div>
+          </template>
+        </q-calendar-task>
+        <q-calendar-task
+          ref="calendar2"
+          v-model="selectedDate"
+          v-model:modelTasks="parsedTasks"
+          v-model:modelFooter="footerTasks"
+          view="month"
+          :disabled-days="disabledDaysRange"
           :task-width="240"
           :min-weekday-length="2"
           :weekday-class="weekdayClass"
@@ -219,6 +288,12 @@ export default defineComponent({
         days.push(addToDate(ts, { day: i + 1 }).date)
       })
       return days
+    },
+
+    disabledDaysRange () {
+      // create the range for example 2
+      // Note: this is an array, within an array
+      return [[ this.disabledDays[ 0 ], this.disabledDays[ this.disabledDays.length - 1 ] ]]
     },
 
     /**

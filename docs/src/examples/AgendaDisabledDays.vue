@@ -13,39 +13,48 @@
     />
 
     <div class="row justify-center">
-      <div class="q-gutter-md" style="display: flex; flex-direction: column; max-width: 280px; width: 100%;">
-        <q-calendar-month
+      <div class="q-gutter-md" style="display: flex; flex-direction: column; max-width: 800px; width: 90%;">
+        <q-calendar-agenda
           ref="calendar"
           v-model="selectedDate"
-          mini-mode
+          view="week"
           :disabled-days="disabledDays"
-          no-outside-days
+          :left-column-options="leftColumnOptions"
+          :right-column-options="rightColumnOptions"
+          column-options-id="id"
+          column-options-label="label"
+          :day-min-height="200"
           animated
           bordered
           @change="onChange"
           @moved="onMoved"
           @click-date="onClickDate"
-          @click-day="onClickDay"
-          @click-workweek="onClickWorkweek"
-          @click-head-workweek="onClickHeadWorkweek"
+          @click-time="onClickTime"
+          @click-interval="onClickInterval"
+          @click-head-intervals="onClickHeadIntervals"
           @click-head-day="onClickHeadDay"
+          style="max-height: 200px;"
         />
-        <q-calendar-month
+        <q-calendar-agenda
           ref="calendar2"
           v-model="selectedDate"
-          mini-mode
+          view="week"
           :disabled-days="disabledDaysRange"
-          no-outside-days
+          :left-column-options="leftColumnOptions"
+          :right-column-options="rightColumnOptions"
+          column-options-id="id"
+          column-options-label="label"
+          :day-min-height="200"
           animated
           bordered
-          style="max-width: 280px; width: 100%;"
           @change="onChange"
           @moved="onMoved"
           @click-date="onClickDate"
-          @click-day="onClickDay"
-          @click-workweek="onClickWorkweek"
-          @click-head-workweek="onClickHeadWorkweek"
+          @click-time="onClickTime"
+          @click-interval="onClickInterval"
+          @click-head-intervals="onClickHeadIntervals"
           @click-head-day="onClickHeadDay"
+          style="max-height: 200px;"
         />
       </div>
     </div>
@@ -54,27 +63,39 @@
 
 <script>
 import {
-  QCalendarMonth,
+  QCalendarAgenda,
   addToDate,
   parseTimestamp,
   today
 } from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarMonth.sass'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarAgenda.sass'
 
 import { defineComponent } from 'vue'
 import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
-  name: 'MiniModeDisabledDays',
+  name: 'AgendaDisabledDays',
   components: {
     NavigationBar,
-    QCalendarMonth
+    QCalendarAgenda
   },
   data () {
     return {
-      selectedDate: today()
+      selectedDate: today(),
+      leftColumnOptions: [
+        {
+          id: 'overdue',
+          label: 'Overdue'
+        }
+      ],
+      rightColumnOptions: [
+        {
+          id: 'summary',
+          label: 'Summary'
+        }
+      ]
     }
   },
   computed: {
@@ -104,6 +125,7 @@ export default defineComponent({
     onNext () {
       this.$refs.calendar.next()
     },
+
     onMoved (data) {
       console.log('onMoved', data)
     },
@@ -113,17 +135,17 @@ export default defineComponent({
     onClickDate (data) {
       console.log('onClickDate', data)
     },
-    onClickDay (data) {
-      console.log('onClickDay', data)
+    onClickTime (data) {
+      console.log('onClickTime', data)
     },
-    onClickWorkweek (data) {
-      console.log('onClickWorkweek', data)
+    onClickInterval (data) {
+      console.log('onClickInterval', data)
+    },
+    onClickHeadIntervals (data) {
+      console.log('onClickHeadIntervals', data)
     },
     onClickHeadDay (data) {
       console.log('onClickHeadDay', data)
-    },
-    onClickHeadWorkweek (data) {
-      console.log('onClickHeadWorkweek', data)
     }
   }
 })

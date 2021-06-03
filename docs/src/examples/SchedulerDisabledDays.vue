@@ -13,38 +13,37 @@
     />
 
     <div class="row justify-center">
-      <div class="q-gutter-md" style="display: flex; flex-direction: column; max-width: 280px; width: 100%;">
-        <q-calendar-month
+      <div class="q-gutter-md" style="display: flex; flex-direction: column; max-width: 800px; width: 90%; height: 500px;">
+        <q-calendar-scheduler
           ref="calendar"
           v-model="selectedDate"
-          mini-mode
+          v-model:modelResources="resources"
+          view="week"
           :disabled-days="disabledDays"
-          no-outside-days
           animated
           bordered
           @change="onChange"
           @moved="onMoved"
           @click-date="onClickDate"
-          @click-day="onClickDay"
-          @click-workweek="onClickWorkweek"
-          @click-head-workweek="onClickHeadWorkweek"
+          @click-day-resource="onClickDayResource"
+          @click-resource="onClickResource"
+          @click-head-resources="onClickHeadResources"
           @click-head-day="onClickHeadDay"
         />
-        <q-calendar-month
+        <q-calendar-scheduler
           ref="calendar2"
           v-model="selectedDate"
-          mini-mode
+          v-model:modelResources="resources"
+          view="week"
           :disabled-days="disabledDaysRange"
-          no-outside-days
           animated
           bordered
-          style="max-width: 280px; width: 100%;"
           @change="onChange"
           @moved="onMoved"
           @click-date="onClickDate"
-          @click-day="onClickDay"
-          @click-workweek="onClickWorkweek"
-          @click-head-workweek="onClickHeadWorkweek"
+          @click-day-resource="onClickDayResource"
+          @click-resource="onClickResource"
+          @click-head-resources="onClickHeadResources"
           @click-head-day="onClickHeadDay"
         />
       </div>
@@ -54,27 +53,36 @@
 
 <script>
 import {
-  QCalendarMonth,
+  QCalendarScheduler,
   addToDate,
   parseTimestamp,
   today
 } from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarMonth.sass'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarScheduler.sass'
 
 import { defineComponent } from 'vue'
 import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
-  name: 'MiniModeDisabledDays',
+  name: 'SchedulerDisabledDays',
   components: {
     NavigationBar,
-    QCalendarMonth
+    QCalendarScheduler
   },
   data () {
     return {
-      selectedDate: today()
+      selectedDate: today(),
+      resources: [
+        { id: 1, label: 'John' },
+        { id: 2, label: 'Mary' },
+        { id: 3, label: 'Susan' },
+        { id: 4, label: 'Olivia' },
+        { id: 5, label: 'Board Room' },
+        { id: 6, label: 'Room-1' },
+        { id: 7, label: 'Room-2' }
+      ]
     }
   },
   computed: {
@@ -113,17 +121,17 @@ export default defineComponent({
     onClickDate (data) {
       console.log('onClickDate', data)
     },
-    onClickDay (data) {
-      console.log('onClickDay', data)
+    onClickDayResource (data) {
+      console.log('onClickDayResource', data)
     },
-    onClickWorkweek (data) {
-      console.log('onClickWorkweek', data)
+    onClickResource (data) {
+      console.log('onClickResource', data)
+    },
+    onClickHeadResources (data) {
+      console.log('onClickHeadResources', data)
     },
     onClickHeadDay (data) {
       console.log('onClickHeadDay', data)
-    },
-    onClickHeadWorkweek (data) {
-      console.log('onClickHeadWorkweek', data)
     }
   }
 })

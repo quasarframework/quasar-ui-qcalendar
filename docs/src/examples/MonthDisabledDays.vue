@@ -13,12 +13,12 @@
     />
 
     <div class="row justify-center">
-      <div class="q-gutter-md" style="display: flex; flex-direction: column; max-width: 280px; width: 100%;">
+      <div class="q-gutter-md" style="display: flex; flex-direction: column; max-width: 800px; width: 90%;">
         <q-calendar-month
           ref="calendar"
           v-model="selectedDate"
-          mini-mode
           :disabled-days="disabledDays"
+          :day-min-height="50"
           no-outside-days
           animated
           bordered
@@ -29,16 +29,16 @@
           @click-workweek="onClickWorkweek"
           @click-head-workweek="onClickHeadWorkweek"
           @click-head-day="onClickHeadDay"
+          class="q-ma-sm"
         />
         <q-calendar-month
-          ref="calendar2"
+          ref="calendar"
           v-model="selectedDate"
-          mini-mode
           :disabled-days="disabledDaysRange"
+          :day-min-height="50"
           no-outside-days
           animated
           bordered
-          style="max-width: 280px; width: 100%;"
           @change="onChange"
           @moved="onMoved"
           @click-date="onClickDate"
@@ -46,6 +46,7 @@
           @click-workweek="onClickWorkweek"
           @click-head-workweek="onClickHeadWorkweek"
           @click-head-day="onClickHeadDay"
+          class="q-ma-sm"
         />
       </div>
     </div>
@@ -67,7 +68,7 @@ import { defineComponent } from 'vue'
 import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
-  name: 'MiniModeDisabledDays',
+  name: 'MonthDisabledDays',
   components: {
     NavigationBar,
     QCalendarMonth

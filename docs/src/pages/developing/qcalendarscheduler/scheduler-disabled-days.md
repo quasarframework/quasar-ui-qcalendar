@@ -1,6 +1,6 @@
 ---
-title: Task - Disabled Days
-desc: QCalendarTask - Disabled Days
+title: Scheduler - Disabled Days
+desc: QCalendarScheduler - Disabled Days
 keys: developing
 related:
   - /developing/qcalendarday/day-disabled-days
@@ -8,11 +8,11 @@ related:
   - /developing/qcalendarmonth/month-disabled-days
   - /developing/qcalendarmonth-minimode/minimode-disabled-days
   - /developing/qcalendaragenda/agenda-disabled-days
-  - /developing/qcalendarscheduler/scheduler-disabled-days
+  - /developing/qcalendartask/task-disabled-days
 ---
 
 <example-viewer
   title="Disabled Days"
-  file="TaskDisabledDays"
-  codepen-title="QCalendarTask"
+  file="SchedulerDisabledDays"
+  codepen-title="QCalendarScheduler"
 />

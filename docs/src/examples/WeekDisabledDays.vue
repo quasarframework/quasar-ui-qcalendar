@@ -1,4 +1,10 @@
 <template>
+    <div class="line">
+      The next 4 days after the current day have been disabled with the <code class="example-token">disabled-days</code> property.<br>
+      The first example uses an array of dates to disable each specific date.<br>
+      The second example uses a range, which is an array within an array of start and end dates.<br>
+    </div>
+
   <div class="subcontent">
     <navigation-bar
       @today="onToday"
@@ -7,7 +13,25 @@
     />
 
     <div class="row justify-center">
-      <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
+      <div class="q-gutter-md" style="display: flex; flex-direction: column; max-width: 800px; width: 90%; height: 500px;">
+        <q-calendar-day
+          ref="calendar"
+          v-model="selectedDate"
+          view="week"
+          :disabled-days="disabledDays"
+          no-active-date
+          bordered
+          animated
+          transition-next="slide-left"
+          transition-prev="slide-right"
+          @change="onChange"
+          @moved="onMoved"
+          @click-date="onClickDate"
+          @click-time="onClickTime"
+          @click-interval="onClickInterval"
+          @click-head-intervals="onClickHeadIntervals"
+          @click-head-day="onClickHeadDay"
+        />
         <q-calendar-day
           ref="calendar"
           v-model="selectedDate"

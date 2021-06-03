@@ -395,6 +395,10 @@ const menu = [
             path: 'month-navigation'
           },
           {
+            name: 'Month - Disabled days',
+            path: 'month-disabled-days'
+          },
+          {
             name: 'Month - Selected dates',
             path: 'month-selected-dates'
           },
@@ -563,6 +567,10 @@ const menu = [
             path: 'agenda-now'
           },
           {
+            name: 'Agenda - Disabled days',
+            path: 'agenda-disabled-days'
+          },
+          {
             name: 'Agenda - Cell width',
             path: 'agenda-cell-width'
           },
@@ -678,6 +686,10 @@ const menu = [
           {
             name: 'Scheduler - Now',
             path: 'scheduler-now'
+          },
+          {
+            name: 'Scheduler - Disabled days',
+            path: 'scheduler-disabled-days'
           },
           {
             name: 'Scheduler - Focusable/hoverable',
