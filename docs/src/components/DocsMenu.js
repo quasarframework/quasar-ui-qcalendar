@@ -131,7 +131,7 @@ export default {
       menu.icon !== void 0 && child.push(
         h(QItemSection, {
           avatar: true
-        }, () => h(QIcon, { name: menu.icon }))
+        }, () => h(QIcon, { name: menu.icon, color: (menu.iconColor ? menu.iconColor : undefined) }))
       )
 
       child.push(
@@ -142,14 +142,14 @@ export default {
       menu.rightIcon !== void 0 && child.push(
         h(QItemSection, {
           avatar: true
-        }, () => h(QIcon, { name: menu.rightIcon }))
+        }, () => h(QIcon, { name: menu.rightIcon, color: (menu.rightIconColor ? menu.rightIconColor : undefined) }))
       )
 
       // eslint-disable-next-line no-unused-expressions
       menu.badge !== void 0 && menu.rightIcon === void 0 && child.push(
         h(QItemSection, {
           side: true
-        }, () => h(QBadge, { label: menu.badge }))
+        }, () => h(QBadge, { label: menu.badge, color: (menu.badgeColor ? menu.badgeColor : undefined) }))
       )
 
       return withDirectives(
