@@ -1,5 +1,7 @@
 <template>
   <div class="subcontent">
+    <div class="line">All days before and after the current day have been disabled with the properties <code class="example-token">disabled-before</code> and <code class="example-token">disabled-after</code>.</div>
+
     <navigation-bar
       @today="onToday"
       @prev="onPrev"
@@ -213,19 +215,14 @@ export default defineComponent({
   },
   computed: {
     disabledBefore () {
-      // find the monday of this week
-      const monday = 1 // day of week (ts.weekday)
       let ts = parseTimestamp(today())
-      ts = addToDate(ts, { day: (ts.weekday > monday ? -(ts.weekday - monday) : (monday - ts.weekday)) })
+      ts = addToDate(ts, { day: -1 })
       return ts.date
     },
 
     disabledAfter () {
-      // find the 1st day of the next month
-      const friday = 5 // day of week (ts.weekday)
       let ts = parseTimestamp(today())
-      // get days in month
-      ts = addToDate(ts, { day: (ts.weekday > friday ? -(ts.weekday - friday) : (friday - ts.weekday)) })
+      ts = addToDate(ts, { day: 1 })
       return ts.date
     },
 

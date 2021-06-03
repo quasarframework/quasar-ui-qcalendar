@@ -99,12 +99,12 @@ const menu = [
             path: 'day-no-scroll'
           },
           {
-            name: 'Day - Disabled before/after',
-            path: 'day-disabled-before-after'
-          },
-          {
             name: 'Day - Disabled days',
             path: 'day-disabled-days'
+          },
+          {
+            name: 'Day - Disabled before/after',
+            path: 'day-disabled-before-after'
           },
           {
             name: 'Day - Disabled weekdays',
@@ -233,12 +233,12 @@ const menu = [
             path: 'week-no-scroll'
           },
           {
-            name: 'Week - Disabled before/after',
-            path: 'week-disabled-before-after'
-          },
-          {
             name: 'Week - Disabled days',
             path: 'week-disabled-days'
+          },
+          {
+            name: 'Week - Disabled before/after',
+            path: 'week-disabled-before-after'
           },
           {
             name: 'Week - Disabled weekdays',
@@ -399,6 +399,14 @@ const menu = [
             path: 'month-disabled-days'
           },
           {
+            name: 'Month - Disabled before/after',
+            path: 'month-disabled-before-after'
+          },
+          {
+            name: 'Month - Disabled weekdays',
+            path: 'month-disabled-weekdays'
+          },
+          {
             name: 'Month - Selected dates',
             path: 'month-selected-dates'
           },
@@ -489,6 +497,10 @@ const menu = [
             path: 'minimode-disabled-days'
           },
           {
+            name: 'Mini-mode - Disabled before/after',
+            path: 'minimode-disabled-before-after'
+          },
+          {
             name: 'Mini-mode - Disabled weekdays',
             path: 'minimode-disabled-weekdays'
           },
@@ -569,6 +581,14 @@ const menu = [
           {
             name: 'Agenda - Disabled days',
             path: 'agenda-disabled-days'
+          },
+          {
+            name: 'Agenda - Disabled before/after',
+            path: 'Agenda-disabled-before-after'
+          },
+          {
+            name: 'Agenda - Disabled weekdays',
+            path: 'agenda-disabled-weekdays'
           },
           {
             name: 'Agenda - Cell width',
@@ -690,6 +710,14 @@ const menu = [
           {
             name: 'Scheduler - Disabled days',
             path: 'scheduler-disabled-days'
+          },
+          {
+            name: 'Scheduler - Disabled before/after',
+            path: 'scheduler-disabled-before-after'
+          },
+          {
+            name: 'Scheduler - Disabled weekdays',
+            path: 'scheduler-disabled-weekdays'
           },
           {
             name: 'Scheduler - Focusable/hoverable',

@@ -1,6 +1,6 @@
 ---
-title: Day (week) - Disabled Weekdays
-desc: QCalendarDay (week) - Disabled Weekdays
+title: Scheduler - Disabled Weekdays
+desc: QCalendarScheduler - Disabled Weekdays
 keys: developing
 related:
   - /developing/qcalendarday/day-disabled-weekdays
@@ -8,11 +8,11 @@ related:
   - /developing/qcalendarmonth/month-disabled-weekdays
   - /developing/qcalendarmonth-minimode/minimode-disabled-weekdays
   - /developing/qcalendaragenda/agenda-disabled-weekdays
-  - /developing/qcalendarscheduler/scheduler-disabled-weekdays
+  - /developing/qcalendartask/task-disabled-weekdays
 ---
 
 <example-viewer
   title="Disabled Weekdays"
-  file="WeekDisabledWeekdays"
-  codepen-title="QCalendarDay"
+  file="SchedulerDisabledWeekdays"
+  codepen-title="QCalendarScheduler"
 />

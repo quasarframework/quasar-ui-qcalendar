@@ -1,7 +1,7 @@
 <template>
+  <div class="subcontent">
     <div class="line">All days before and after the current day have been disabled with the properties <code class="example-token">disabled-before</code> and <code class="example-token">disabled-after</code>.</div>
 
-    <div class="subcontent">
     <navigation-bar
       @today="onToday"
       @prev="onPrev"
@@ -10,23 +10,21 @@
 
     <div class="row justify-center">
       <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
-        <q-calendar-day
+        <q-calendar-scheduler
           ref="calendar"
           v-model="selectedDate"
+          v-model:modelResources="resources"
           view="week"
           :disabled-before="disabledBefore"
           :disabled-after="disabledAfter"
-          no-active-date
           animated
           bordered
-          transition-next="slide-left"
-          transition-prev="slide-right"
           @change="onChange"
           @moved="onMoved"
           @click-date="onClickDate"
-          @click-time="onClickTime"
-          @click-interval="onClickInterval"
-          @click-head-intervals="onClickHeadIntervals"
+          @click-day-resource="onClickDayResource"
+          @click-resource="onClickResource"
+          @click-head-resources="onClickHeadResources"
           @click-head-day="onClickHeadDay"
         />
       </div>
@@ -36,27 +34,36 @@
 
 <script>
 import {
-  QCalendarDay,
+  QCalendarScheduler,
   addToDate,
   parseTimestamp,
   today
 } from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarDay.sass'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarScheduler.sass'
 
 import { defineComponent } from 'vue'
 import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
-  name: 'WeekDisabledBeforeAfter',
+  name: 'SchedulerDisabledBeforeAfter',
   components: {
     NavigationBar,
-    QCalendarDay
+    QCalendarScheduler
   },
   data () {
     return {
-      selectedDate: today()
+      selectedDate: today(),
+      resources: [
+        { id: 1, label: 'John' },
+        { id: 2, label: 'Mary' },
+        { id: 3, label: 'Susan' },
+        { id: 4, label: 'Olivia' },
+        { id: 5, label: 'Board Room' },
+        { id: 6, label: 'Room-1' },
+        { id: 7, label: 'Room-2' }
+      ]
     }
   },
   computed: {
@@ -91,14 +98,14 @@ export default defineComponent({
     onClickDate (data) {
       console.log('onClickDate', data)
     },
-    onClickTime (data) {
-      console.log('onClickTime', data)
+    onClickDayResource (data) {
+      console.log('onClickDayResource', data)
     },
-    onClickInterval (data) {
-      console.log('onClickInterval', data)
+    onClickResource (data) {
+      console.log('onClickResource', data)
     },
-    onClickHeadIntervals (data) {
-      console.log('onClickHeadIntervals', data)
+    onClickHeadResources (data) {
+      console.log('onClickHeadResources', data)
     },
     onClickHeadDay (data) {
       console.log('onClickHeadDay', data)

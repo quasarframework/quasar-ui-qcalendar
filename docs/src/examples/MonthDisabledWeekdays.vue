@@ -1,7 +1,7 @@
 <template>
-    <div class="line">All days before and after the current day have been disabled with the properties <code class="example-token">disabled-before</code> and <code class="example-token">disabled-after</code>.</div>
+  <div class="subcontent">
+    <div class="line">The weekends have been disabled with the <code class="example-token">disabled-weekdays</code> property.</div>
 
-    <div class="subcontent">
     <navigation-bar
       @today="onToday"
       @prev="onPrev"
@@ -10,23 +10,19 @@
 
     <div class="row justify-center">
       <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
-        <q-calendar-day
+        <q-calendar-month
           ref="calendar"
           v-model="selectedDate"
-          view="week"
-          :disabled-before="disabledBefore"
-          :disabled-after="disabledAfter"
-          no-active-date
+          :disabled-weekdays="[0,6]"
+          no-outside-days
           animated
           bordered
-          transition-next="slide-left"
-          transition-prev="slide-right"
           @change="onChange"
           @moved="onMoved"
           @click-date="onClickDate"
-          @click-time="onClickTime"
-          @click-interval="onClickInterval"
-          @click-head-intervals="onClickHeadIntervals"
+          @click-day="onClickDay"
+          @click-workweek="onClickWorkweek"
+          @click-head-workweek="onClickHeadWorkweek"
           @click-head-day="onClickHeadDay"
         />
       </div>
@@ -36,40 +32,25 @@
 
 <script>
 import {
-  QCalendarDay,
-  addToDate,
-  parseTimestamp,
+  QCalendarMonth,
   today
 } from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarDay.sass'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarMonth.sass'
 
 import { defineComponent } from 'vue'
 import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
-  name: 'WeekDisabledBeforeAfter',
+  name: 'MonthDisabledWeekdays',
   components: {
     NavigationBar,
-    QCalendarDay
+    QCalendarMonth
   },
   data () {
     return {
       selectedDate: today()
-    }
-  },
-  computed: {
-    disabledBefore () {
-      let ts = parseTimestamp(today())
-      ts = addToDate(ts, { day: -1 })
-      return ts.date
-    },
-
-    disabledAfter () {
-      let ts = parseTimestamp(today())
-      ts = addToDate(ts, { day: 1 })
-      return ts.date
     }
   },
   methods: {
@@ -91,17 +72,17 @@ export default defineComponent({
     onClickDate (data) {
       console.log('onClickDate', data)
     },
-    onClickTime (data) {
-      console.log('onClickTime', data)
+    onClickDay (data) {
+      console.log('onClickDay', data)
     },
-    onClickInterval (data) {
-      console.log('onClickInterval', data)
-    },
-    onClickHeadIntervals (data) {
-      console.log('onClickHeadIntervals', data)
+    onClickWorkweek (data) {
+      console.log('onClickWorkweek', data)
     },
     onClickHeadDay (data) {
       console.log('onClickHeadDay', data)
+    },
+    onClickHeadWorkweek (data) {
+      console.log('onClickHeadWorkweek', data)
     }
   }
 })

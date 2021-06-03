@@ -1,7 +1,7 @@
 <template>
-    <div class="line">All days before and after the current day have been disabled with the properties <code class="example-token">disabled-before</code> and <code class="example-token">disabled-after</code>.</div>
+  <div class="subcontent">
+    <div class="line">The weekends have been disabled with the <code class="example-token">disabled-weekdays</code> property.</div>
 
-    <div class="subcontent">
     <navigation-bar
       @today="onToday"
       @prev="onPrev"
@@ -9,18 +9,19 @@
     />
 
     <div class="row justify-center">
-      <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
-        <q-calendar-day
+      <div style="display: flex; max-width: 800px; width: 100%; height: 200px;">
+        <q-calendar-agenda
           ref="calendar"
           v-model="selectedDate"
           view="week"
-          :disabled-before="disabledBefore"
-          :disabled-after="disabledAfter"
-          no-active-date
+          :disabled-weekdays="[0,6]"
+          :left-column-options="leftColumnOptions"
+          :right-column-options="rightColumnOptions"
+          column-options-id="id"
+          column-options-label="label"
+          :day-min-height="200"
           animated
           bordered
-          transition-next="slide-left"
-          transition-prev="slide-right"
           @change="onChange"
           @moved="onMoved"
           @click-date="onClickDate"
@@ -35,41 +36,35 @@
 </template>
 
 <script>
-import {
-  QCalendarDay,
-  addToDate,
-  parseTimestamp,
-  today
-} from '@quasar/quasar-ui-qcalendar'
+import { QCalendarAgenda, today } from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarDay.sass'
+import '@quasar/quasar-ui-qcalendar/src/QCalendarAgenda.sass'
 
 import { defineComponent } from 'vue'
 import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
-  name: 'WeekDisabledBeforeAfter',
+  name: 'AgendaDisabledWeekdays',
   components: {
     NavigationBar,
-    QCalendarDay
+    QCalendarAgenda
   },
   data () {
     return {
-      selectedDate: today()
-    }
-  },
-  computed: {
-    disabledBefore () {
-      let ts = parseTimestamp(today())
-      ts = addToDate(ts, { day: -1 })
-      return ts.date
-    },
-
-    disabledAfter () {
-      let ts = parseTimestamp(today())
-      ts = addToDate(ts, { day: 1 })
-      return ts.date
+      selectedDate: today(),
+      leftColumnOptions: [
+        {
+          id: 'overdue',
+          label: 'Overdue'
+        }
+      ],
+      rightColumnOptions: [
+        {
+          id: 'summary',
+          label: 'Summary'
+        }
+      ]
     }
   },
   methods: {
@@ -82,6 +77,7 @@ export default defineComponent({
     onNext () {
       this.$refs.calendar.next()
     },
+
     onMoved (data) {
       console.log('onMoved', data)
     },

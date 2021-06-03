@@ -1,6 +1,6 @@
 <template>
   <div class="subcontent">
-    <div class="line">The example below uses the properties <span class="example-token">disable-before</span> and <span class="example-token">disable-after</span> to disable all days except the current month.</div>
+    <div class="line">All days before and after the current day have been disabled with the properties <code class="example-token">disabled-before</code> and <code class="example-token">disabled-after</code>.</div>
 
     <navigation-bar
       @today="onToday"
@@ -16,6 +16,7 @@
           mini-mode
           :disabled-before="disabledBefore"
           :disabled-after="disabledAfter"
+          no-outside-days
           animated
           bordered
           @change="onChange"
@@ -35,7 +36,6 @@
 import {
   QCalendarMonth,
   addToDate,
-  daysInMonth,
   parseTimestamp,
   today
 } from '@quasar/quasar-ui-qcalendar'
@@ -58,25 +58,15 @@ export default defineComponent({
       today2 = ref(today())
 
     const disabledBefore = computed(() => {
-      // find the last day of the previous month
-      if (today2.value) {
-        let ts = parseTimestamp(today2.value)
-        ts = addToDate(ts, { day: -ts.day })
-        return ts.date
-      }
-      return undefined
+      let ts = parseTimestamp(today())
+      ts = addToDate(ts, { day: -1 })
+      return ts.date
     })
 
     const disabledAfter = computed(() => {
-      // find the 1st day of the next month
-      if (today2.value) {
-        let ts = parseTimestamp(today2.value)
-        // get days in month
-        const days = daysInMonth(ts.year, ts.month)
-        ts = addToDate(ts, { day: (days - ts.day + 1) })
-        return ts.date
-      }
-      return undefined
+      let ts = parseTimestamp(today())
+      ts = addToDate(ts, { day: 1 })
+      return ts.date
     })
 
     function onToday () {
