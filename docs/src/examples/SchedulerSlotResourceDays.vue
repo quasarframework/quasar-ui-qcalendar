@@ -140,7 +140,7 @@ export default defineComponent({
         const resourceEvents = this.events[ scope.resource.id ]
         // make sure we have events
         if (resourceEvents && resourceEvents.length > 0) {
-          // for each events figure out start position and width
+          // for each event figure out start position and width
           for (let x = 0; x < resourceEvents.length; ++x) {
             events.push({
               left: this.getLeft(scope, resourceEvents[ x ]),
@@ -163,14 +163,12 @@ export default defineComponent({
     },
     getLeft (scope, event) {
       const left = event.dow * parseFloat(scope.cellWidth)
-      const val = left + (scope.cellWidth.indexOf('%') >= -1 ? '%' : 'px')
-      console.log('getLeft', val)
+      const val = left + (scope.cellWidth.endsWith('%') ? '%' : 'px')
       return val
     },
     getWidth (scope, event) {
       const width = (event.range ? event.range : 1) * parseFloat(scope.cellWidth)
-      const val = width + (scope.cellWidth.indexOf('%') >= -1 ? '%' : 'px')
-      console.log('getWidth', val)
+      const val = width + (scope.cellWidth.endsWith('%') ? '%' : 'px')
       return val
     },
     onToday () {
