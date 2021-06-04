@@ -90,7 +90,7 @@ export default defineComponent({
       // intervalsHeadRef = ref(null),
       // intervalsRef = ref({}),
       direction = ref('next'),
-      startDate = ref(today()),
+      startDate = ref(props.modelValue || today()),
       endDate = ref('0000-00-00'),
       maxDaysRendered = ref(0),
       emittedValue = ref(props.modelValue),
@@ -118,10 +118,6 @@ export default defineComponent({
     const {
       isSticky
     } = useCellWidth(props)
-
-    watch(isSticky, (val) => {
-      // console.log('isSticky', isSticky.value)
-    })
 
     const {
       times,
@@ -246,7 +242,7 @@ export default defineComponent({
     })
 
     const parsedColumnCount = computed(() => {
-      if (props.view === 'day' && parseInt(props.columnCount, 10) > 0) {
+      if (props.view === 'day' && parseInt(props.columnCount, 10) > 1) {
         return parseInt(props.columnCount, 10)
       }
       else if (props.view === 'day' && props.maxDays && props.maxDays > 1) {
@@ -381,14 +377,16 @@ export default defineComponent({
       ])
     }
 
-    /**
+    /*
      * Outputs the header that is above the intervals
-     * @slot head-intervals
-     * @mouse '-head-intervals'
-     * @scope { scope: { days: days.value }, event }
      */
     function __renderHeadIntervals () {
       const slot = slots[ 'head-intervals' ]
+
+      const scope = {
+        days: days.value,
+        date: props.modelValue
+      }
 
       return h('div', {
         class: {
@@ -396,10 +394,10 @@ export default defineComponent({
           'q-calendar__sticky': isSticky.value === true
         },
         ...getDefaultMouseEventHandlers('-head-intervals', event => {
-          return { scope: { days: days.value }, event }
+          return { scope, event }
         })
       }, [
-        slot && slot({ scope: { days: days.value } })
+        slot && slot({ scope })
       ])
     }
 
@@ -506,10 +504,11 @@ export default defineComponent({
       }
       const weekdayClass = typeof props.weekdayClass === 'function' ? props.weekdayClass({ scope }) : {}
       const isFocusable = props.focusable === true && props.focusType.includes('weekday')
+      const key = day.date + (columnIndex !== undefined ? '-' + columnIndex : '')
 
       const data = {
-        key: day.date + (columnIndex !== undefined ? '-' + columnIndex : ''),
-        ref: (el) => { datesRef.value[ day.date ] = el },
+        key,
+        ref: (el) => { datesRef.value[ key ] = el },
         tabindex: isFocusable === true ? 0 : -1,
         class: {
           'q-calendar-day__head--day': true,
@@ -520,6 +519,14 @@ export default defineComponent({
           'q-calendar__focusable': isFocusable === true
         },
         style,
+        onFocus: (e) => {
+          if (isFocusable === true) {
+            focusRef.value = key
+          }
+        },
+        ...getDefaultMouseEventHandlers('-head-day', event => {
+          return { scope, event }
+        }),
         onDragenter: (e) => {
           if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
             props.dragEnterFunc(e, 'head-day', scope) === true
@@ -547,15 +554,7 @@ export default defineComponent({
               ? dragOverHeadDayRef.value = day.date
               : dragOverHeadDayRef.value = ''
           }
-        },
-        onFocus: (e) => {
-          if (isFocusable === true) {
-            focusRef.value = day.date
-          }
-        },
-        ...getDefaultMouseEventHandlers('-head-day', event => {
-          return { scope, event }
-        })
+        }
       }
 
       return h('div', data, [
@@ -635,7 +634,7 @@ export default defineComponent({
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
       const scope = getScopeForSlot(day, columnIndex)
       scope.activeDate = activeDate
-      const width = isSticky.value === true ? props.cellWidth : computedWidth.value
+      const width = isSticky.value === true ? convertToUnit(parsedCellWidth.value) : computedWidth.value
       const style = {
         width,
         maxWidth: width,
@@ -660,6 +659,7 @@ export default defineComponent({
 
     function __renderHeadWeekday (day) {
       const slot = slots[ 'head-weekday-label' ]
+      const shortWeekdayLabel = props.shortWeekdayLabel === true
       const scope = getScopeForSlot(day)
       scope.shortWeekdayLabel = props.shortWeekdayLabel
 
@@ -671,7 +671,7 @@ export default defineComponent({
         }
       }
 
-      return h('div', data, (slot && slot({ scope })) || __renderHeadWeekdayLabel(day, props.shortWeekdayLabel))
+      return h('div', data, (slot && slot({ scope })) || __renderHeadWeekdayLabel(day, shortWeekdayLabel))
     }
 
     function __renderHeadWeekdayLabel (day, shortWeekdayLabel) {
