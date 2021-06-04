@@ -1,5 +1,7 @@
 <template>
   <div class="subcontent">
+    <div class="line">All days before and after the current day have been disabled with the properties <code class="example-token">disabled-before</code> and <code class="example-token">disabled-after</code>.</div>
+
     <navigation-bar
       @today="onToday"
       @prev="onPrev"
@@ -11,8 +13,9 @@
         <q-calendar-agenda
           ref="calendar"
           v-model="selectedDate"
-          view="day"
-          dark
+          view="week"
+          :disabled-before="disabledBefore"
+          :disabled-after="disabledAfter"
           :left-column-options="leftColumnOptions"
           :right-column-options="rightColumnOptions"
           column-options-id="id"
@@ -34,7 +37,12 @@
 </template>
 
 <script>
-import { QCalendarAgenda, today } from '@quasar/quasar-ui-qcalendar'
+import {
+  QCalendarAgenda,
+  addToDate,
+  parseTimestamp,
+  today
+} from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarAgenda.sass'
@@ -63,6 +71,19 @@ export default defineComponent({
           label: 'Summary'
         }
       ]
+    }
+  },
+  computed: {
+    disabledBefore () {
+      let ts = parseTimestamp(today())
+      ts = addToDate(ts, { day: -1 })
+      return ts.date
+    },
+
+    disabledAfter () {
+      let ts = parseTimestamp(today())
+      ts = addToDate(ts, { day: 1 })
+      return ts.date
     }
   },
   methods: {
