@@ -81,16 +81,15 @@ export default defineComponent({
     const
       scrollArea = ref(null),
       pane = ref(null),
-      headerRef = ref(null),
       headerColumnRef = ref(null),
       focusRef = ref(null),
       focusValue = ref(null),
-      // resourceFocusRef = ref(null),
-      // resourceFocusValue = ref(null),
       datesRef = ref({}),
       resourcesRef = ref({}),
       headDayEventsParentRef = ref({}),
       headDayEventsChildRef = ref({}),
+      // resourceFocusRef = ref(null),
+      // resourceFocusValue = ref(null),
       // resourcesHeadRef = ref(null),
       direction = ref('next'),
       startDate = ref(props.modelValue || today()),
@@ -121,10 +120,6 @@ export default defineComponent({
     const {
       isSticky
     } = useCellWidth(props)
-
-    watch(isSticky, (val) => {
-      // console.log('isSticky', isSticky.value)
-    })
 
     const {
       times,
@@ -196,7 +191,7 @@ export default defineComponent({
       styleDefault,
       // getTimestampAtEventInterval,
       // getTimestampAtEvent,
-      getScopeForSlot
+      // getScopeForSlot
       // scrollToTime,
       // timeDurationHeight,
       // timeStartPos
@@ -281,7 +276,9 @@ export default defineComponent({
       if (rootRef.value) {
         const width = size.width || rootRef.value.getBoundingClientRect().width
         if (width && resourcesWidth.value && parsedColumnCount.value) {
-          return ((width - scrollWidth.value - resourcesWidth.value) / parsedColumnCount.value) + 'px'
+          return (
+            (width - scrollWidth.value - resourcesWidth.value) / parsedColumnCount.value
+          ) + 'px'
         }
       }
       return (100 / parsedColumnCount.value) + '%'
@@ -290,7 +287,7 @@ export default defineComponent({
     watch([days], checkChange, { deep: true, immediate: true })
 
     watch(() => props.modelValue, (val, oldVal) => {
-      if (emittedValue.value !== val) {
+      if (emittedValue.value !== props.modelValue) {
         if (props.animated === true) {
           const v1 = getDayIdentifier(parsed(val))
           const v2 = getDayIdentifier(parsed(oldVal))
@@ -324,7 +321,7 @@ export default defineComponent({
       }
       else {
         // if focusRef is not in the list of current dates of dateRef,
-        // then assume month is changing
+        // then assume list of days is changing
         tryFocus()
       }
     })
@@ -335,6 +332,8 @@ export default defineComponent({
 
     onBeforeUpdate(() => {
       datesRef.value = {}
+      headDayEventsParentRef.value = {}
+      headDayEventsChildRef.value = {}
       resourcesRef.value = {}
     })
 
@@ -356,6 +355,8 @@ export default defineComponent({
       move(-amount)
     }
 
+    // private functions
+
     function __onResize ({ width, height }) {
       size.width = width
       size.height = height
@@ -376,7 +377,6 @@ export default defineComponent({
 
     function __renderHead () {
       return h('div', {
-        ref: headerRef,
         roll: 'presentation',
         class: {
           'q-calendar-scheduler__head': true,
@@ -391,12 +391,8 @@ export default defineComponent({
       ])
     }
 
-    /**
+    /*
      * Outputs the header that is above the resources
-     * @slot head-resources
-     * @mouse '-head-resources'
-     * @scope { scope: { days: [], resource: [] } }
-     * @event { scope: { days: [], resource: [] }, event }
      */
     function __renderHeadResources () {
       const slot = slots[ 'head-resources' ]
@@ -461,9 +457,9 @@ export default defineComponent({
           'q-calendar-scheduler__head--days__event': true
         }
       }, [
-        // TODO: this needs to be in a class
         slot && h('div', {
           ref: headDayEventsParentRef,
+          // TODO: this needs to be in a class
           style: {
             position: 'absolute',
             left: 0,
@@ -515,13 +511,16 @@ export default defineComponent({
         scope.columnIndex = columnIndex
       }
 
-      const width = isSticky.value === true ? convertToUnit(parsedCellWidth.value) : convertToUnit(computedWidth.value)
+      const width = isSticky.value === true ? convertToUnit(parsedCellWidth.value) : computedWidth.value
       const styler = props.weekdayStyle || dayStyleDefault
       const style = {
         width,
         maxWidth: width,
         minWidth: width,
         ...styler({ scope })
+      }
+      if (isSticky.value === true) {
+        style.minWidth = width
       }
       const weekdayClass = typeof props.weekdayClass === 'function' ? props.weekdayClass({ scope }) : {}
       const isFocusable = props.focusable === true && props.focusType.includes('weekday')
@@ -663,11 +662,14 @@ export default defineComponent({
         scope.columnIndex = columnIndex
       }
 
-      const width = isSticky.value === true ? convertToUnit(parsedCellWidth.value) : convertToUnit(computedWidth.value)
+      const width = isSticky.value === true ? convertToUnit(parsedCellWidth.value) : computedWidth.value
       const style = {
         width,
         maxWidth: width,
         minWidth: width
+      }
+      if (isSticky.value === true) {
+        style.minWidth = width
       }
 
       return h('div', {
@@ -701,11 +703,11 @@ export default defineComponent({
       return h('div', data, (slot && slot({ scope })) || __renderHeadWeekdayLabel(day, shortWeekdayLabel))
     }
 
-    function __renderHeadWeekdayLabel (day, shortWeekdayLabel, shortCellWidth) {
-      const weekdayLabel = weekdayFormatter.value(day, shortWeekdayLabel)
+    function __renderHeadWeekdayLabel (day, shortWeekdayLabel) {
+      const weekdayLabel = weekdayFormatter.value(day, shortWeekdayLabel || (props.weekdayBreakpoints[ 0 ] > 0 && parsedCellWidth.value <= props.weekdayBreakpoints[ 0 ]))
       return h('span', {
-        class: 'q-calendar__ellipsis'
-      }, shortCellWidth === true ? minCharWidth(weekdayLabel, props.minWeekdayLabel) : weekdayLabel)
+        class: 'q-calendar-scheduler__head--weekday-label q-calendar__ellipsis'
+      }, props.weekdayBreakpoints[ 1 ] > 0 && parsedCellWidth.value <= props.weekdayBreakpoints[ 1 ] ? minCharWidth(weekdayLabel, props.minWeekdayLabel) : weekdayLabel)
     }
 
     function __renderHeadDayDate (day) {
@@ -1027,7 +1029,7 @@ export default defineComponent({
     function __renderDayResources (resource, resourceIndex, indentLevel = 0, expanded = true) {
       const slot = slots[ 'resource-days' ]
 
-      const width = isSticky.value === true ? convertToUnit(parsedCellWidth.value) : convertToUnit(computedWidth.value)
+      const width = isSticky.value === true ? convertToUnit(parsedCellWidth.value) : computedWidth.value
 
       const scope = {
         resource,
@@ -1076,7 +1078,7 @@ export default defineComponent({
       const droppable = dragOverResource.value === dragValue
       const scope = { timestamp: day, columnIndex, resource, resourceIndex, indentLevel, activeDate, droppable }
 
-      const width = isSticky.value === true ? convertToUnit(parsedCellWidth.value) : convertToUnit(computedWidth.value)
+      const width = isSticky.value === true ? convertToUnit(parsedCellWidth.value) : computedWidth.value
       const style = {
         width,
         maxWidth: width,
@@ -1171,8 +1173,8 @@ export default defineComponent({
       const hasResources = props.modelResources && props.modelResources.length > 0
 
       const scheduler = withDirectives(h('div', {
-        class: 'q-calendar-scheduler',
-        key: startDate.value
+        key: startDate.value,
+        class: 'q-calendar-scheduler'
       }, [
         hasWidth === true && hasResources === true && isSticky.value !== true && props.noHeader !== true && __renderHead(),
         hasWidth === true && hasResources === true && __renderBody(),

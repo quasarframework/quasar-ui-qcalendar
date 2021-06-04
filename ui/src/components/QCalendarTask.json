@@ -6,7 +6,7 @@
     "model-value": {
       "type": "String",
       "category": "model",
-      "desc": "When set as `YYYY-MM-DD`, the calendar will display the current view on this date. If empty, then it will be changed to the current date which will be emitted. Either use this property (along with a listener for 'update:modelValue' event) OR use v-model directive",
+      "desc": "When set as `YYYY-MM-DD`, the calendar will display the current view on this date. If empty, then it will be changed to the current date which will be emitted. Either use this property (along with a listener for 'update:model-value' event) OR use v-model directive",
       "required": true,
       "default": "today()",
       "examples": [
@@ -746,7 +746,7 @@
     }
   },
   "events": {
-    "update:modelValue": {
+    "update:model-value": {
       "desc": "Emitted when the component needs to change the model; Is also used by v-model",
       "params": {
         "value": {
