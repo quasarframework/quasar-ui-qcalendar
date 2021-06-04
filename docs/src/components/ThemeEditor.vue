@@ -124,7 +124,7 @@ export default {
   },
 
   emits: [
-    'update:modelValue',
+    'update:model-value',
     'style'
   ],
 
@@ -301,7 +301,7 @@ export default {
       this.openEditor = this.modelValue
     },
     openEditor (val) {
-      this.$emit('update:modelValue', val)
+      this.$emit('update:model-value', val)
     },
     itemStyle (val) {
       this.updateEditor()
