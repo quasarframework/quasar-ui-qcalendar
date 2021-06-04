@@ -140,7 +140,7 @@ export default {
   },
   methods: {
     onClicked () {
-      this.$emit('update:modelValue', !this.modelValue)
+      this.$emit('update:model-value', !this.modelValue)
     }
   }
 }
