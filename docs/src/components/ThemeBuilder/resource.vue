@@ -26,8 +26,7 @@
       resource-label="name"
       locale="en-US"
       bordered
-      :disabled-weekdays="disabledWeekdays"
-      style="max-height: 400px;"
+      style="height: 400px;"
       :style="styles"
     />
   </div>
