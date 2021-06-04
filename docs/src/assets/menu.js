@@ -585,7 +585,7 @@ const menu = [
           },
           {
             name: 'Agenda - Disabled before/after',
-            path: 'Agenda-disabled-before-after'
+            path: 'agenda-disabled-before-after'
           },
           {
             name: 'Agenda - Disabled weekdays',
