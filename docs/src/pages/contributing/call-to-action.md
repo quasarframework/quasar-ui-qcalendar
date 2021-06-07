@@ -14,7 +14,9 @@ This **Call to action** page is where items can be listed where community involv
 
 ### Docs site
 
-The Docs site has several empty pages that need to be filled in. If you think you are up to it, pick one and help out. 
+The Docs site has several empty pages that need to be filled in. If you think you are up to it, pick one and help out.
+
+In particular, all of the "Getting started" pages (one for each calendar type) need info after the API display component.
 
 ### Testing
 
