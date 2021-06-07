@@ -336,6 +336,26 @@ export default {
       }
     },
 
+    heightToMinutes (height) {
+      const c = this.$children[0]
+      if (c && c.heightToMinutes) {
+        return c.heightToMinutes(height)
+      }
+      else {
+        return -1
+      }
+    },
+
+    widthToMinutes (width) {
+      const c = this.$children[0]
+      if (c && c.widthToMinutes) {
+        return c.widthToMinutes(width)
+      }
+      else {
+        return -1
+      }
+    },
+
     scrollToTime (time) {
       const c = this.$children[0]
       if (c && c.scrollToTime) {

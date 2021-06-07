@@ -10930,6 +10930,69 @@
         ]
       }
     },
+    "heightToMinutes": {
+      "addedIn": "v3.4.0",
+      "desc": "Given a height (in pixels) return the duration (in minutes)",
+      "applicable": [
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
+      "params": {
+        "height": {
+          "type": ["Number", "String"],
+          "desc": "The number of pixels for the event to calculate it's duration",
+          "examples": [
+            "30",
+            "90px"
+          ]
+        }
+      },
+      "returns": {
+        "type": "Number",
+        "desc": "The duration (in minutes) to be used for the event",
+        "examples": [
+          "80",
+          "120"
+        ]
+      }
+    },
+    "widthToMinutes": {
+      "desc": "Given a width (in pixels) return the duration (in minutes)",
+      "addedIn": "v3.4.0",
+      "applicable": [
+        "resource",
+        "day-resource"
+      ],
+      "params": {
+        "duration": {
+          "type": ["Number", "String"],
+          "desc": "The number of pixels for the event to calculate it's duration",
+          "examples": [
+            "300px",
+            "900"
+          ]
+        }
+      },
+      "returns": {
+        "type": "Number",
+        "desc": "The duration (in minutes) to be used for the event",
+        "examples": [
+          "80",
+          "120"
+        ]
+      }
+    },
     "scrollToTime": {
       "desc": "When on an interval view, scroll to the passed in time (y position)",
       "applicable": [
