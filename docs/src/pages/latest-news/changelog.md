@@ -5,4 +5,4 @@ keys: latest-news
 components:
 - releases/QCalendarReleases
 ---
-<q-calendar-releases />
+<q-calendar-releases class="q-mt-sm"/>
