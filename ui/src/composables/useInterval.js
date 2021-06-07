@@ -545,6 +545,14 @@ export default function (props, {
     return minutes / parsedIntervalMinutes.value * parsedCellWidth.value
   }
 
+  function heightToMinutes (height) {
+    return parseInt(height, 10) * parsedIntervalMinutes.value / parsedIntervalHeight.value
+  }
+
+  function widthToMinutes (width) {
+    return parseInt(width, 10) * parsedIntervalMinutes.value / parsedCellWidth.value
+  }
+
   function timeStartPos (time, clamp = true) {
     const minutes = parseTime(time)
     if (minutes === false) return false
@@ -618,6 +626,8 @@ export default function (props, {
     scrollToTimeX,
     timeDurationHeight,
     timeDurationWidth,
+    heightToMinutes,
+    widthToMinutes,
     timeStartPos,
     timeStartPosX
   }
