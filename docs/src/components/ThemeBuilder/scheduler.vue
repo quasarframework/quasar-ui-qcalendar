@@ -34,6 +34,7 @@
       bordered
       no-scroll
       :disabled-weekdays="disabledWeekdays"
+      style="height: 400px;"
       :style="styles"
     />
   </div>
