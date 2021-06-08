@@ -25,7 +25,9 @@
           @click-head-day="onClickHeadDay"
         >
           <template #head-day="{ scope: { timestamp }}">
-            {{ getHeadDay(timestamp) }}
+            <div class="fit row justify-center">
+              {{ getHeadDay(timestamp) }}
+            </div>
           </template>
         </q-calendar-day>
       </div>

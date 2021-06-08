@@ -24,7 +24,9 @@
         >
           <template #head-day-event="{ scope }">
             <!-- do every other slot -->
-            <span>{{ scope.timestamp.weekday % 2 ? scope.timestamp.date : undefined }}</span>
+            <div class="fit row justify-center">
+              <span>{{ scope.timestamp.weekday % 2 ? scope.timestamp.date : undefined }}</span>
+            </div>
           </template>
         </q-calendar-day>
       </div>
