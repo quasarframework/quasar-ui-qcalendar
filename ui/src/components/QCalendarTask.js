@@ -713,14 +713,19 @@ export default defineComponent({
       const headDayButtonSlot = slots[ 'head-day-button' ]
       const scope = { dayLabel, timestamp: day, activeDate }
 
+      const key = day.date
+
       const data = {
+        key,
+        tabindex: isDateFocusable.value === true ? 0 : -1,
         class: {
           'q-calendar-task__head--day__label': true,
           'q-calendar__button': true,
           'q-calendar__button--round': props.dateType === 'round',
           'q-calendar__button--rounded': props.dateType === 'rounded',
           'q-calendar__button--bordered': day.current === true,
-          'q-calendar__focusable': true
+          'q-calendar__hoverable': props.hoverable === true,
+          'q-calendar__focusable': isDateFocusable.value === true
         },
         disabled: day.disabled,
         onKeydown: (e) => {
