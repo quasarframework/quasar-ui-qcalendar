@@ -1,9 +1,9 @@
 ---
-title: Day (week) - (Slot) Day Body
-desc: QCalendarDay (week) - (Slot) Day Body
+title: Day - (Slot) Day Body
+desc: QCalendarDay - (Slot) Day Body
 keys: developing
 related:
-  - /developing/qcalendarday/day-slot-day-body
+  - /developing/qcalendarday-week/week-slot-day-body
 ---
 This example uses both the `day-body` and `head-day-event` slots.
 
@@ -11,6 +11,6 @@ You can click the `head-day-event` badges which will call the calendar's `scroll
 
 <example-viewer
   title="(Slot) Day Body"
-  file="WeekSlotDayBody"
+  file="DaySlotDayBody"
   codepen-title="QCalendarDay"
 />

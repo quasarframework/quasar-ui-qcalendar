@@ -1,11 +1,11 @@
 ---
-title: Day - (Slot) Head Day
-desc: QCalendarDay - (Slot) Head Day
+title: Day - (Slot) Head Day Event
+desc: QCalendarDay - (Slot) Head Day Event
 keys: developing
 ---
 
 <example-viewer
-  title="(Slot) Head Day"
-  file="DaySlotHeadDay"
+  title="(Slot) Head Day Event"
+  file="DaySlotHeadDayEvent"
   codepen-title="QCalendarDay"
 />

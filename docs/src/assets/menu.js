@@ -181,6 +181,10 @@ const menu = [
             path: 'day-slot-head-intervals'
           },
           {
+            name: 'Day - (Slot) day body',
+            path: 'day-slot-day-body'
+          },
+          {
             name: 'Day - (Slot) show current time',
             path: 'day-slot-show-current-time'
           }

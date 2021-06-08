@@ -12,14 +12,15 @@
         <q-calendar-day
           ref="calendar"
           v-model="selectedDate"
-          view="week"
+          view="day"
           animated
           bordered
           transition-next="slide-left"
           transition-prev="slide-right"
           no-active-date
-          :interval-start="6"
-          :interval-count="18"
+          :interval-minutes="15"
+          :interval-start="24"
+          :interval-count="68"
           :interval-height="28"
           @change="onChange"
           @moved="onMoved"
@@ -53,7 +54,7 @@
                   v-else
                   :class="badgeClasses(event, 'header')"
                   :style="badgeStyles(event, 'header')"
-                  style="margin: 1px; width: 10px; max-width: 10px; height: 10px; max-height: 10px"
+                  style="margin: 1px; width: 10px; max-width: 10px; height: 10px; max-height: 10px; cursor: pointer"
                   @click="scrollToEvent(event)"
                 >
                   <abbr
@@ -93,32 +94,20 @@
 
 <script>
 import {
+  QCalendarDay,
   addToDate,
   parseTimestamp,
   isBetweenDates,
   today,
   parsed,
-  parseDate,
-  parseTime,
-} from '@quasar/quasar-ui-qcalendar/src/Timestamp.js'
-import {
-  QCalendarDay
-} from '@quasar/quasar-ui-qcalendar/src/QCalendarDay.js'
+  parseTime
+} from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarDay.sass'
 
 import { defineComponent } from 'vue'
 import NavigationBar from '../components/NavigationBar.vue'
-
-// The function below is used to set up our demo data
-const CURRENT_DAY = new Date()
-function getCurrentDay (day) {
-  const newDay = new Date(CURRENT_DAY)
-  newDay.setDate(day)
-  const tm = parseDate(newDay)
-  return tm.date
-}
 
 export default defineComponent({
   name: 'WeekSlotDayBody',
@@ -132,86 +121,43 @@ export default defineComponent({
       events: [
         {
           id: 1,
-          title: '1st of the Month',
-          details: 'Everything is funny as long as it is happening to someone else',
-          date: getCurrentDay(1),
-          bgcolor: 'orange'
-        },
-        {
-          id: 2,
-          title: 'Sisters Birthday',
-          details: 'Buy a nice present',
-          date: getCurrentDay(4),
-          bgcolor: 'green',
-          icon: 'fas fa-birthday-cake'
-        },
-        {
-          id: 3,
           title: 'Meeting',
           details: 'Time to pitch my idea to the company',
-          date: getCurrentDay(10),
-          time: '10:00',
+          date: today(),
+          time: '09:00',
           duration: 120,
           bgcolor: 'red',
           icon: 'fas fa-handshake'
         },
         {
-          id: 4,
+          id: 2,
           title: 'Lunch',
           details: 'Company is paying!',
-          date: getCurrentDay(10),
-          time: '11:30',
-          duration: 90,
+          date: today(),
+          time: '12:00',
+          duration: 60,
           bgcolor: 'teal',
           icon: 'fas fa-hamburger'
         },
         {
-          id: 5,
-          title: 'Visit mom',
-          details: 'Always a nice chat with mom',
-          date: getCurrentDay(20),
-          time: '17:00',
-          duration: 90,
-          bgcolor: 'grey',
-          icon: 'fas fa-car'
-        },
-        {
-          id: 6,
+          id: 3,
           title: 'Conference',
           details: 'Teaching Javascript 101',
-          date: getCurrentDay(22),
-          time: '08:00',
-          duration: 540,
+          date: today(),
+          time: '13:00',
+          duration: 240,
           bgcolor: 'blue',
           icon: 'fas fa-chalkboard-teacher'
         },
         {
-          id: 7,
+          id: 4,
           title: 'Girlfriend',
           details: 'Meet GF for dinner at Swanky Restaurant',
-          date: getCurrentDay(22),
+          date: today(),
           time: '19:00',
           duration: 180,
-          bgcolor: 'teal',
+          bgcolor: 'teal-2',
           icon: 'fas fa-utensils'
-        },
-        {
-          id: 8,
-          title: 'Fishing',
-          details: 'Time for some weekend R&R',
-          date: getCurrentDay(27),
-          bgcolor: 'purple',
-          icon: 'fas fa-fish',
-          days: 2
-        },
-        {
-          id: 9,
-          title: 'Vacation',
-          details: 'Trails and hikes, going camping! Don\'t forget to bring bear spray!',
-          date: getCurrentDay(29),
-          bgcolor: 'purple',
-          icon: 'fas fa-plane',
-          days: 5
         }
       ]
     }
