@@ -525,6 +525,20 @@ export default defineComponent({
             focusRef.value = key
           }
         },
+        onKeydown: (e) => {
+          if (day.disabled !== true
+            && isKeyCode(e, [ 13, 32 ])) {
+            e.stopPropagation()
+            e.preventDefault()
+          }
+        },
+        onKeyup: (e) => {
+          // allow selection of date via Enter or Space keys
+          if (day.disabled !== true
+            && isKeyCode(e, [ 13, 32 ])) {
+            emittedValue.value = day.date
+          }
+        },
         ...getDefaultMouseEventHandlers('-head-day', event => {
           return { scope, event }
         }),
