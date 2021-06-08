@@ -219,12 +219,12 @@ export default defineComponent({
     //   return 0
     // })
 
-    const isSticky = true
+    const isSticky = ref(true)
     const parsedCellWidth = computed(() => {
       if (props.cellWidth !== undefined) {
         return parseInt(props.cellWidth, 10)
       }
-      return 150
+      return 150 // default when not specified
     })
 
     // const computedWidth = computed(() => {
@@ -461,7 +461,7 @@ export default defineComponent({
       return h('div', {
         class: {
           'q-calendar-task__task--item': true,
-          'q-calendar__sticky': isSticky === true
+          'q-calendar__sticky': isSticky.value === true
         },
         style
       }, [
@@ -502,7 +502,7 @@ export default defineComponent({
       return h('div', {
         class: {
           'q-calendar-task__task--container': true,
-          'q-calendar__sticky': isSticky === true
+          'q-calendar__sticky': isSticky.value === true
         }
       }, [
         __renderTasks()
@@ -527,7 +527,7 @@ export default defineComponent({
       return h('div', {
         class: {
           'q-calendar-task__footer--task': true,
-          'q-calendar__sticky': isSticky === true
+          'q-calendar__sticky': isSticky.value === true
         },
         style
       }, [
@@ -601,7 +601,7 @@ export default defineComponent({
       return h('div', {
         class: {
           'q-calendar-task__footer': true,
-          'q-calendar__sticky': isSticky === true
+          'q-calendar__sticky': isSticky.value === true
         }
       }, __renderFooterRows())
     }
@@ -634,7 +634,7 @@ export default defineComponent({
       return h('div', {
         class: {
           'q-calendar-task__head--task': true,
-          'q-calendar__sticky': isSticky === true
+          'q-calendar__sticky': isSticky.value === true
         },
         style
       }, [
@@ -663,7 +663,7 @@ export default defineComponent({
       return h('div', {
         class: {
           'q-calendar-task__title--task': true,
-          'q-calendar__sticky': isSticky === true
+          'q-calendar__sticky': isSticky.value === true
         },
         style
       }, [
@@ -982,7 +982,7 @@ export default defineComponent({
         roll: 'presentation',
         class: {
           'q-calendar-task__head': true,
-          'q-calendar__sticky': isSticky === true
+          'q-calendar__sticky': isSticky.value === true
         },
         style: {
         }
