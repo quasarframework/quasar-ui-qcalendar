@@ -20,6 +20,11 @@ export const useMonthProps = {
     default: 0,
     validator: validateNumber
   },
+  dayMinHeight: {
+    type: [ Number, String ],
+    default: 0,
+    validator: validateNumber
+  },
   dayStyle: {
     type: Function,
     default: null
@@ -65,11 +70,6 @@ export const useMonthProps = {
     type: String,
     default: 'sm',
     validator: v => [ 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl' ].includes(v) || (!!v && v.length > 0)
-  },
-  dayMinHeight: {
-    type: [ Number, String ],
-    default: 0,
-    validator: validateNumber
   }
 }
 
