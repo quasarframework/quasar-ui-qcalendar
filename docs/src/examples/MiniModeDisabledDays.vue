@@ -1,10 +1,5 @@
 <template>
   <div class="subcontent">
-    <div class="line">
-      The next 4 days after the current day have been disabled with the <code class="example-token">disabled-days</code> property.<br>
-      The first example uses an array of dates to disable each specific date.<br>
-      The second example uses a range, which is an array within an array of start and end dates.<br>
-    </div>
 
     <navigation-bar
       @today="onToday"

@@ -10,6 +10,7 @@ related:
   - /developing/qcalendarscheduler/scheduler-disabled-before-after
   - /developing/qcalendartask/task-disabled-before-after
 ---
+All days before and after the current day have been disabled with the `disabled-before` and `disabled-after` properties.
 
 <example-viewer
   title="Disabled Before/After"

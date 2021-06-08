@@ -1,8 +1,5 @@
 <template>
   <div class="subcontent">
-    <div class="line">For keyboard navigation use the <span class="example-token">use-navigation</span> property along with the <span class="example-token">focusable</span> and <span class="example-token">focus-type</span> properties.</div>
-    <div class="line">Hint: When the calendar has focus use the <kbd>Home</kbd>, <kbd>End</kbd>, <kbd>&larr;</kbd>, <kbd>&rarr;</kbd>, <kbd>&uarr;</kbd>, <kbd>&darr;</kbd>, <kbd>PgUp</kbd>, <kbd>PgDn</kbd>, <kbd>Home</kbd> and , <kbd>End</kbd>keys.</div>
-    <div class="line">You can also use <kbd>Tab</kbd> and <kbd>Shift</kbd>+<kbd>Tab</kbd> for regular browser navigation.</div>
 
     <navigation-bar
       @today="onToday"
