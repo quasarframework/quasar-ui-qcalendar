@@ -515,10 +515,6 @@ const menu = [
             path: 'minimode-disabled-weekdays'
           },
           {
-            name: 'Mini-mode - Disabled before/after',
-            path: 'minimode-disabled-before-after'
-          },
-          {
             name: 'Mini-mode - Navigation',
             path: 'minimode-navigation'
           },
