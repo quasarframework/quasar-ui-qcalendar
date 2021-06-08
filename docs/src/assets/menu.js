@@ -357,6 +357,10 @@ const menu = [
             path: 'month-dark'
           },
           {
+            name: 'Month - Min weeks',
+            path: 'month-min-weeks'
+          },
+          {
             name: 'Month - First day monday',
             path: 'month-first-day-monday'
           },
