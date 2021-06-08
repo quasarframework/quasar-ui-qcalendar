@@ -10,6 +10,7 @@ related:
   - /developing/qcalendaragenda/agenda-disabled-weekdays
   - /developing/qcalendartask/task-disabled-weekdays
 ---
+The weekends have been disabled with the `disabled-weekdays` property.
 
 <example-viewer
   title="Disabled Weekdays"

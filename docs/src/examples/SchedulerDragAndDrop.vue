@@ -1,10 +1,5 @@
 <template>
   <div class="subcontent">
-    <div class="line">
-      Drag any items in the list to a calendar day or the top header.<br>
-      Don't use css <code class="example-token">border</code> to outline a cell. It won't look right.<br>
-      Instead use <code class="example-token">box-shadow</code> to create an inset like this <code class="example-token">box-shadow: inset 0 0 0 1px rgba(0,140,200,.8)</code>
-    </div>
 
     <navigation-bar
       @today="onToday"
