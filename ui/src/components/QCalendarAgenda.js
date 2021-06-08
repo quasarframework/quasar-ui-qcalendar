@@ -182,9 +182,6 @@ export default defineComponent({
       // methods
       // styleDefault,
       getScopeForSlot,
-      scrollToTime,
-      timeDurationHeight,
-      timeStartPos
     } = useInterval(props, {
       weekdaySkips,
       times,
@@ -1008,9 +1005,6 @@ export default defineComponent({
       move,
       moveToToday,
       updateCurrent,
-      timeStartPos,
-      timeDurationHeight,
-      scrollToTime
     })
 
     // Object.assign(vm.proxy, {
@@ -1019,9 +1013,6 @@ export default defineComponent({
     //   move,
     //   moveToToday,
     //   updateCurrent,
-    //   timeStartPos,
-    //   timeDurationHeight,
-    //   scrollToTime
     // })
 
     return () => __renderCalendar()

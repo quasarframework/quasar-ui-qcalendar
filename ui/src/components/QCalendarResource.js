@@ -200,7 +200,8 @@ export default defineComponent({
       styleDefault,
       scrollToTimeX,
       timeDurationWidth,
-      timeStartPosX
+      timeStartPosX,
+      widthToMinutes
       // getTimestampAtEventX
       // getTimestampAtEventIntervalX
     } = useInterval(props, {
@@ -842,6 +843,7 @@ export default defineComponent({
       updateCurrent,
       timeStartPosX,
       timeDurationWidth,
+      widthToMinutes,
       scrollToTimeX
     })
 
