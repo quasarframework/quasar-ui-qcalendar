@@ -1,6 +1,5 @@
 <template>
   <div class="subcontent">
-    <div class="line">The <code class="example-token">column-count</code> property allows for a single day to be displayed multiple times.</div>
 
     <navigation-bar
       @today="onToday"
@@ -9,7 +8,7 @@
     />
 
     <div class="row justify-center">
-      {{ selectedDate }}
+      <span style="font-size: 18px; font-weight: 800;">{{ selectedDate }}</span>
       <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
         <q-calendar-day
           ref="calendar"
@@ -27,7 +26,7 @@
           @click-head-day="onClickHeadDay"
         >
           <template #head-day="{ scope }">
-            <div style="text-align: center;">{{ persons[ scope.columnIndex ].name }}</div>
+            <div style="text-align: center; font-weight: 800;">{{ persons[ scope.columnIndex ].name }}</div>
           </template>
         </q-calendar-day>
       </div>

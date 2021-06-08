@@ -1,9 +1,5 @@
 <template>
   <div class="subcontent">
-    <div class="line">
-      When the property <code class="example-token">no-scroll</code> is used, you must provide<br>
-      an outter div that has <code class="example-token">overflow: auto</code> to control the scrolling.<br>
-    </div>
 
     <navigation-bar
       @today="onToday"

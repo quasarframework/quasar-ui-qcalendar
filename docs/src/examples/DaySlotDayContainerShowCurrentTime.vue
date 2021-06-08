@@ -1,9 +1,5 @@
 <template>
   <div class="subcontent">
-    <div class="line">
-      The example below uses the <code class="example-token">day-container</code> slot to show a current time indicator absolutely positioned.<br>
-      Hint: You might have to scroll down to the current time to see the example working.
-    </div>
 
     <navigation-bar
       @today="onToday"

@@ -1,6 +1,5 @@
 <template>
   <div class="subcontent">
-    <div class="line">The example below uses the <code class="example-token">selected-dates</code> property in conjunction with mouse events to toggle selected intervals.</div>
 
     <navigation-bar
       @today="onToday"

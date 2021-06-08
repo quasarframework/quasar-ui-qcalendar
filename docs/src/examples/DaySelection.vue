@@ -1,7 +1,5 @@
 <template>
   <div class="subcontent">
-    <div class="line">The example below uses the <code class="example-token">selected-start-end-dates</code> property in conjunction with mouse events to select iterval ranges.</div>
-    <div class="line">Try toggling the <code class="example-token">Mobile selection</code> to see how selection can be changed.</div>
 
     <navigation-bar
       @today="onToday"
@@ -47,7 +45,7 @@
 import {
   QCalendarDay,
   today,
-  copyTimestamp,
+  getDayTimeIdentifier,
   getDateTime
 } from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'

@@ -1,6 +1,5 @@
 <template>
   <div class="subcontent">
-    <div class="line">This example shows how you can build your own custom navigation bar.</div>
 
     <div style="display: flex; flex-direction: row; justify-content: center; width: 100%;">
       <div style="max-width: 800px; width: 100%; display: flex; flex-direction: column;">

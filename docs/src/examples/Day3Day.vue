@@ -1,11 +1,5 @@
 <template>
   <div class="subcontent">
-    <div
-      class="line"
-    >
-      With the <code class="example-token">QCalendarDay</code> using the <code class="example-token">day</code> view, you can specifiy any number of days you want visible with the <code class="example-token">max-days</code> property.<br>
-      However, the first day displayed will always be today's date or the initial date of the <code class="example-token">modelValue</code>.
-    </div>
 
     <navigation-bar
       @today="onToday"

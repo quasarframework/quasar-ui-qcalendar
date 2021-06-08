@@ -3,6 +3,7 @@ title: Day - Column Count
 desc: QCalendarDay - Column Count
 keys: developing
 ---
+The `column-count` property allows for a single day to be displayed multiple times.
 
 <example-viewer
   title="Column Count"
@@ -10,8 +11,10 @@ keys: developing
   codepen-title="QCalendarDay"
 />
 
+You can customize the display further via the `head-day` slot.
+
 <example-viewer
-  title="Column Count 2"
+  title="Column Count Extended"
   file="DayColumnCountPlus"
   codepen-title="QCalendarDay"
 />

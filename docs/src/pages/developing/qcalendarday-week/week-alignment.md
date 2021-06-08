@@ -9,6 +9,7 @@ related:
   - /developing/qcalendarscheduler/scheduler-alignment
   - /developing/qcalendartask/task-alignment
 ---
+You can use the properties `date-header`, `date-align` and `weekday-align` to manipulate how the header area looks.
 
 <example-viewer
   title="Alignment"

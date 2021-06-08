@@ -1,6 +1,5 @@
 <template>
   <div class="subcontent">
-    <div class="line">You can use the properties <code class="example-token">date-header</code>, <code class="example-token">date-align</code> and <code class="example-token">weekday-align</code> to manipulate how the header area looks.</div>
 
     <navigation-bar
       @today="onToday"
