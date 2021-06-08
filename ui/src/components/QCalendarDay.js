@@ -191,6 +191,8 @@ export default defineComponent({
       getTimestampAtEvent,
       getScopeForSlot,
       scrollToTime,
+      heightToMinutes,
+      widthToMinutes,
       timeDurationHeight,
       timeStartPos
     } = useInterval(props, {
@@ -1056,6 +1058,8 @@ export default defineComponent({
       updateCurrent,
       timeStartPos,
       timeDurationHeight,
+      heightToMinutes,
+      widthToMinutes,
       scrollToTime
     })
 
