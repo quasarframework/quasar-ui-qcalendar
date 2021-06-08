@@ -10,6 +10,7 @@ related:
   - /developing/qcalendaragenda/agenda-now
   - /developing/qcalendarscheduler/scheduler-now
 ---
+The current date has been set to tomorrow via the `now` property.
 
 <example-viewer
   title="Now"
