@@ -89,7 +89,7 @@ export default {
             icon: menu.icon,
             contentInsetLevel: level > 0 ? 0.5 : 0.25,
             expandIcon: level > 0 ? biCaretDownFill : biCaretDown,
-            defaultOpened: menu.expanded || routePath.startsWith(path),
+            defaultOpened: menu.expanded || routePath.startsWith(path + '/'),
             expandSeparator: true,
             denseToggle: level > 0
           },
