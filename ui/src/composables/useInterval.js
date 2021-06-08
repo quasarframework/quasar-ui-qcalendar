@@ -16,6 +16,10 @@ import {
   updateRelative,
   validateNumber
 } from '../utils/Timestamp.js'
+import {
+  animVerticalScrollTo,
+  animHorizontalScrollTo
+} from '../utils/scroll.js'
 
 export const useIntervalProps = {
   view: {
@@ -490,15 +494,14 @@ export default function (props, {
    * Returns the scope for the associated Timestamp
    * This function is used for horizontal intervals
    * @param {Timestamp} timestamp
-   * @param {Number} index
-   * @param idx
+   * @param {Number*} index
    */
-  function getScopeForSlotX (timestamp, idx) {
+  function getScopeForSlotX (timestamp, index) {
     const scope = { timestamp: copyTimestamp(timestamp) }
     scope.timeStartPosX = timeStartPosX
     scope.timeDurationWidth = timeDurationWidth
-    if (idx !== undefined) {
-      scope.index = idx
+    if (index !== undefined) {
+      scope.index = index
     }
     return scope
   }
@@ -507,15 +510,16 @@ export default function (props, {
    * Forces the browser to scroll to the specified time
    * This function is used for vertical intervals
    * @param {String} time in format HH:MM
+   * @param {Number*} duration in milliseconds
    */
-  function scrollToTime (time) {
+  function scrollToTime (time, duration = 0) {
     const y = timeStartPos(time)
 
     if (y === false || !scrollArea.value) {
       return false
     }
 
-    scrollArea.value.scrollTop = y
+    animVerticalScrollTo (scrollArea.value, y, duration)
 
     return true
   }
@@ -524,15 +528,16 @@ export default function (props, {
    * Forces the browser to scroll to the specified time
    * This function is used for horizontal intervals
    * @param {String} time in format HH:MM
+   * @param {Number*} duration in milliseconds
    */
-  function scrollToTimeX (time) {
+  function scrollToTimeX (time, duration = 0) {
     const x = timeStartPosX(time)
 
     if (x === false || !scrollArea.value) {
       return false
     }
 
-    scrollArea.value.scrollLeft = x
+    animHorizontalScrollTo (scrollArea.value, x, duration)
 
     return true
   }
