@@ -26,7 +26,7 @@
     </div>
 
     <div class="row justify-center">
-      <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
+      <div style="display: flex; max-width: 800px; width: 100%;">
         <q-calendar-month
           ref="calendar"
           v-model="selectedDate"

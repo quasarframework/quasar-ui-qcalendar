@@ -7,13 +7,14 @@
     />
 
     <div class="row justify-center">
-      <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
+      <div style="display: flex; max-width: 800px; width: 100%;">
         <q-calendar-month
           ref="calendar"
           v-model="selectedDate"
+          show-work-weeks
+          :day-min-height="40"
           animated
           bordered
-          show-work-weeks
           @change="onChange"
           @moved="onMoved"
           @click-date="onClickDate"

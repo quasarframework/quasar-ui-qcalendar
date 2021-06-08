@@ -55,6 +55,7 @@
         />
       </div>
     </div>
+
     <q-calendar-day
       v-model="selectedDate"
       view="day"

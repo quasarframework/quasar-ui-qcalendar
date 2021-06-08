@@ -1,6 +1,5 @@
 <template>
   <div class="subcontent">
-    <div class="line">The weekends have been disabled with the <code class="example-token">disabled-weekdays</code> property.</div>
 
     <navigation-bar
       @today="onToday"
@@ -9,12 +8,13 @@
     />
 
     <div class="row justify-center">
-      <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
+      <div style="display: flex; max-width: 800px; width: 100%;">
         <q-calendar-month
           ref="calendar"
           v-model="selectedDate"
           :disabled-weekdays="[0,6]"
           no-outside-days
+          :day-min-height="40"
           animated
           bordered
           @change="onChange"

@@ -1,6 +1,5 @@
 <template>
   <div class="subcontent">
-    <div class="line">The current date has been set to tomorrow via the <code class="example-token">now</code> property.</div>
 
     <navigation-bar
       @today="onToday"
@@ -9,11 +8,12 @@
     />
 
     <div class="row justify-center">
-      <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
+      <div style="display: flex; max-width: 800px; width: 100%;">
         <q-calendar-month
           ref="calendar"
           v-model="selectedDate"
           :now="nowDate"
+          :day-min-height="40"
           animated
           bordered
           @change="onChange"

@@ -1,6 +1,5 @@
 <template>
   <div class="subcontent">
-    <div class="line">All days before and after the current day have been disabled with the properties <code class="example-token">disabled-before</code> and <code class="example-token">disabled-after</code>.</div>
 
     <navigation-bar
       @today="onToday"
@@ -9,13 +8,14 @@
     />
 
     <div class="row justify-center">
-      <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
+      <div style="display: flex; max-width: 800px; width: 100%;">
         <q-calendar-month
           ref="calendar"
           v-model="selectedDate"
           :disabled-before="disabledBefore"
           :disabled-after="disabledAfter"
           no-outside-days
+          :day-min-height="40"
           animated
           bordered
           @change="onChange"

@@ -43,12 +43,13 @@
     </div>
 
     <div class="row justify-center">
-      <div style="display: flex; max-width: 800px; width: 100%; height: 200px;">
+      <div style="display: flex; max-width: 800px; width: 100%;">
         <q-calendar-month
           v-model="selectedDate"
           :weekday-align="weekdayAlign"
           :date-align="dateAlign"
           show-day-of-year-label
+          :day-min-height="40"
           animated
           bordered
           @change="onChange"

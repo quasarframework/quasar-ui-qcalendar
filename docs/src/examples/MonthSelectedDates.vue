@@ -7,11 +7,12 @@
     />
 
     <div class="row justify-center">
-      <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
+      <div style="display: flex; max-width: 800px; width: 100%;">
         <q-calendar-month
           ref="calendar"
           v-model="selectedDate"
           :selected-dates="selectedDates"
+          :day-min-height="40"
           animated
           bordered
           @click-day="onToggleDay"

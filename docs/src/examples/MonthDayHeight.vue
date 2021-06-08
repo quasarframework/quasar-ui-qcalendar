@@ -6,12 +6,39 @@
       @next="onNext"
     />
 
+    <div class="row no-wrap" style="width: 600px;">
+      <span class="col-shrink no-wrap" style="min-width: 142px;">Day Height:</span>
+      <q-slider
+        v-model="dayHeight"
+        :min="0"
+        :max="200"
+        label
+        label-always
+        :label-value="dayHeight + 'px'"
+        class="col"
+      />
+    </div>
+
+    <div class="row no-wrap" style="width: 600px;">
+      <span class="col-shrink no-wrap" style="min-width: 142px;">Day Min. Height:</span>
+      <q-slider
+        v-model="dayMinHeight"
+        :min="0"
+        :max="200"
+        label
+        label-always
+        :label-value="dayMinHeight + 'px'"
+        class="col"
+      />
+    </div>
+
     <div class="row justify-center">
       <div style="display: flex; max-width: 800px; width: 100%;">
         <q-calendar-month
           ref="calendar"
           v-model="selectedDate"
-          day-height="50"
+          :day-height="dayHeight"
+          :day-min-height="dayMinHeight"
           animated
           bordered
           @change="onChange"
@@ -28,7 +55,8 @@
 </template>
 
 <script>
-import { QCalendarMonth, today } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar/src/QCalendarMonth.js'
+import { today } from '@quasar/quasar-ui-qcalendar/src/Timestamp.js'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarMonth.sass'
@@ -44,7 +72,9 @@ export default defineComponent({
   },
   data () {
     return {
-      selectedDate: today()
+      selectedDate: today(),
+      dayHeight: 50,
+      dayMinHeight: 50
     }
   },
   methods: {

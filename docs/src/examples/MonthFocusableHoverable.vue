@@ -33,13 +33,14 @@
     </div>
 
     <div class="row justify-center">
-      <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
+      <div style="display: flex; max-width: 800px; width: 100%;">
         <q-calendar-month
           ref="calendar"
           v-model="selectedDate"
           :hoverable="hoverable"
           :focusable="focusable"
           :focus-type="focusType"
+          :day-min-height="40"
           animated
           bordered
           @change="onChange"
