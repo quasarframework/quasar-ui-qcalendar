@@ -1,13 +1,6 @@
 <template>
   <div class="subcontent">
 
-    <div
-      class="line"
-    >
-      This is a rudimentary Planner using QCalendarAgenda.<br>
-      On this page, you can try out the <em>Drag &amp; Drop</em>.
-    </div>
-
     <navigation-bar
       @today="onToday"
       @prev="onPrev"

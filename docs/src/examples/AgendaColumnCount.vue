@@ -1,6 +1,5 @@
 <template>
   <div class="subcontent">
-    <div class="line">The <code class="example-token">column-count</code> property allows for a single day to be displayed multiple times.</div>
 
     <navigation-bar
       @today="onToday"
