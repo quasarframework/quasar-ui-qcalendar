@@ -1,7 +1,6 @@
 <template>
-    <div class="line">All days before and after the current day have been disabled with the properties <code class="example-token">disabled-before</code> and <code class="example-token">disabled-after</code>.</div>
-
     <div class="subcontent">
+
     <navigation-bar
       @today="onToday"
       @prev="onPrev"

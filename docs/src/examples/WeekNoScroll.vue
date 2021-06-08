@@ -1,5 +1,6 @@
 <template>
   <div class="subcontent">
+
     <navigation-bar
       @today="onToday"
       @prev="onPrev"
@@ -7,7 +8,7 @@
     />
 
     <div class="row justify-center">
-      <div style="display: flex; max-width: 800px; width: 100%; height: 400px; padding: 2px; overflow: auto; border: 1px solid #ddd;">
+      <div style="max-width: 800px; width: 100%; height: 400px; padding: 2px; overflow: auto; border: 1px solid #ddd">
         <q-calendar-day
           ref="calendar"
           v-model="selectedDate"
@@ -37,7 +38,7 @@ import { defineComponent } from 'vue'
 import NavigationBar from '../components/NavigationBar.vue'
 
 export default defineComponent({
-  name: 'WeekNoScroll',
+  name: 'DayNoScroll',
   components: {
     NavigationBar,
     QCalendarDay

@@ -36,7 +36,8 @@
 import {
   QCalendarDay,
   today,
-  copyTimestamp
+  copyTimestamp,
+  getDateTime
 } from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
