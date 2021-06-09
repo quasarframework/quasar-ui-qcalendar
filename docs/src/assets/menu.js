@@ -849,7 +849,11 @@ const menu = [
           {
             name: 'Task - Children',
             path: 'task-children'
-          }
+          },
+          {
+            name: 'Task - Custom height',
+            path: 'task-custom-height'
+          },
         ]
       },
       {

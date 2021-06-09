@@ -2,6 +2,9 @@
 title: Scheduler - Custom Height
 desc: QCalendarScheduler - Custom Height
 keys: developing
+related:
+  - /developing/qcalendarresource/resource-custom-height
+  - /developing/qcalendartask/task-custom-height
 ---
 ## Customizing the resource height
 
@@ -37,7 +40,7 @@ You can have each resource row have it's own specific height by including a `hei
 ```
 
 ::: tip
-If the `resource-min-height` is more than your custom height, then you won't see the custom height work. Either set `resource-min-height` to a lower value or to 0.
+If the `resource-min-height` is more than your custom height, then you won't see the custom height work. Either set `resource-min-height` to a lower value or to 0 (for auto).
 :::
 
 <example-viewer

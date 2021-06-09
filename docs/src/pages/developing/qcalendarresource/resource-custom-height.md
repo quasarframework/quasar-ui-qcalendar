@@ -2,6 +2,9 @@
 title: Resource - Custom Height
 desc: QCalendarResource - Custom Height
 keys: developing
+related:
+  - /developing/qcalendarscheduler/scheduler-custom-height
+  - /developing/qcalendartask/task-custom-height
 ---
 ## Customizing the resource height
 
