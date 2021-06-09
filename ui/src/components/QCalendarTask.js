@@ -497,8 +497,9 @@ export default defineComponent({
     }
 
     function __renderTaskRow (task, taskIndex, indentLevel = 0, expanded = true) {
-      const height = parsedHeight.value > 0 ? convertToUnit(parsedHeight.value) : 'auto'
+      const height = task.height !== void 0 ? convertToUnit(parseInt(task.height, 10)) : parsedHeight.value > 0 ? convertToUnit(parsedHeight.value) : 'auto'
       const minHeight = parsedMinHeight.value > 0 ? convertToUnit(parsedMinHeight.value) : void 0
+      
       const style = {
         height
       }
