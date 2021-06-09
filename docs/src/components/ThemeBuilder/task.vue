@@ -23,7 +23,7 @@
         @click-head-day="onClickHeadDay"
         :style="styles"
       >
-        <template #head-task="{ /* scope */ }">
+        <template #head-tasks="{ /* scope */ }">
           <div class="header ellipsis">
             <div class="issue ellipsis">Issue</div>
             <div class="key">Key</div>

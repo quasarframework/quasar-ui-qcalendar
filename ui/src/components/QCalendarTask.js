@@ -619,7 +619,7 @@ export default defineComponent({
     }
 
     function __renderHeadTask () {
-      const slot = slots[ 'head-task' ]
+      const slot = slots[ 'head-tasks' ]
       const scope = {
         start: parsedStartDate.value,
         end: parsedEndDate.value
@@ -633,7 +633,7 @@ export default defineComponent({
 
       return h('div', {
         class: {
-          'q-calendar-task__head--task': true,
+          'q-calendar-task__head--tasks': true,
           'q-calendar__sticky': isSticky.value === true
         },
         style

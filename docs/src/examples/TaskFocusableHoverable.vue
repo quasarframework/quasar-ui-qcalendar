@@ -56,7 +56,7 @@
           @click-day="onClickDay"
           @click-head-day="onClickHeadDay"
         >
-          <template #head-task="{ /* scope */ }">
+          <template #head-tasks="{ /* scope */ }">
             <div class="header ellipsis" style="font-weight: 600">
               <div class="issue ellipsis">Issue</div>
               <div class="key">Key</div>
@@ -103,12 +103,14 @@
 
 <script>
 import {
-  QCalendarTask,
   today,
   isBetweenDates,
   parsed,
   padNumber
-} from '@quasar/quasar-ui-qcalendar'
+} from '@quasar/quasar-ui-qcalendar/src/Timestamp.js'
+import {
+  QCalendarTask,
+} from '@quasar/quasar-ui-qcalendar/src/QCalendarTask.js'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTask.sass'
