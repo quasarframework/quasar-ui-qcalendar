@@ -338,10 +338,10 @@ export default defineComponent({
      * Renders the given day with the associated task
      * @param {Timestamp} day Timestamp representing the day
      * @param {any} task The Task
-     * @param {number} index The task index
+     * @param {number} taskIndex The task index
      * @returns VNode
      */
-    function __renderTaskDay (day, task, index) {
+    function __renderTaskDay (day, task, taskIndex) {
       const slot = slots.day
       const styler = props.dayStyle || dayStyleDefault
       const activeDate = props.noActiveDate !== true && parsedValue.value.date === day.date
@@ -349,7 +349,7 @@ export default defineComponent({
       const scope = {
         timestamp: day,
         task,
-        index,
+        taskIndex,
         activeDate
       }
       const width = convertToUnit(parsedCellWidth.value)
@@ -422,34 +422,34 @@ export default defineComponent({
       ])
     }
 
-    function __renderTaskDays (task, index) {
-      return days.value.map(day => __renderTaskDay(day, task, index))
+    function __renderTaskDays (task, taskIndex) {
+      return days.value.map(day => __renderTaskDay(day, task, taskIndex))
     }
 
-    function __renderTaskDaysRow (task, index) {
+    function __renderTaskDaysRow (task, taskIndex) {
       const slot = slots.days
       const scope = {
         days: days.value,
         task,
-        index,
+        taskIndex,
         width: parsedCellWidth.value
       }
 
       return h('div', {
         class: 'q-calendar-task__task--days-row'
       }, [
-        __renderTaskDays(task, index),
+        __renderTaskDays(task, taskIndex),
         slot && slot({ scope }),
       ])
     }
 
-    function __renderTaskItem (task, index) {
+    function __renderTaskItem (task, taskIndex, indentLevel = 0, expanded = true) {
       const slot = slots.task
       const scope = {
         start: parsedStartDate.value,
         end: parsedEndDate.value,
         task,
-        index
+        taskIndex
       }
       const width = convertToUnit(props.taskWidth)
       const style = {
@@ -458,18 +458,45 @@ export default defineComponent({
         maxWidth: width
       }
 
+      const isFocusable = props.focusable === true && props.focusType.includes('task')
+
       return h('div', {
         class: {
           'q-calendar-task__task--item': true,
-          'q-calendar__sticky': isSticky.value === true
+          'q-calendar__sticky': isSticky.value === true,
+          'q-calendar__hoverable': props.hoverable === true,
+          'q-calendar__focusable': isFocusable === true
         },
         style
       }, [
-        slot && slot({ scope })
+        h('div', {
+          style: {
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: 10 + (10 * indentLevel) + 'px'
+          }
+        }, [
+          h('div', {
+            class: {
+              'q-calendar__parent': task.children !== undefined,
+              'q-calendar__parent--expanded': task.children !== undefined && task.expanded === true,
+              'q-calendar__parent--collapsed': task.children !== undefined && task.expanded !== true
+            },
+            onClick: (e) => {
+              e.stopPropagation()
+              task.expanded = !task.expanded
+              // emit('update:model-tasks', props.modelTasks)
+              emit('task-expanded', { expanded: task.expanded, scope })
+            }
+          })
+        ]),
+        slot && slot({ scope }),
+        useFocusHelper()
       ])
     }
 
-    function __renderTaskRow (task, index) {
+    function __renderTaskRow (task, taskIndex, indentLevel = 0, expanded = true) {
       const height = parsedHeight.value > 0 ? convertToUnit(parsedHeight.value) : 'auto'
       const minHeight = parsedMinHeight.value > 0 ? convertToUnit(parsedMinHeight.value) : void 0
       const style = {
@@ -478,24 +505,45 @@ export default defineComponent({
       if (minHeight !== void 0) {
         style.minHeight = minHeight
       }
-      const isFocusable = props.focusable === true && props.focusType.includes('task')
 
-      return h('div', {
+      const taskRow = h('div', {
+        key: task[ props.taskKey ] + '-' + taskIndex,
         class: {
-          'q-calendar-task__task': true,
-          'q-calendar__hoverable': props.hoverable === true,
-          'q-calendar__focusable': isFocusable === true
+          'q-calendar-task__task': indentLevel === 0,
+          'q-calendar-task__task--section': indentLevel !== 0,
         },
         style
       }, [
-        __renderTaskItem(task, index),
-        __renderTaskDaysRow(task, index),
-        useFocusHelper()
+        __renderTaskItem(task, taskIndex, indentLevel, expanded),
+        __renderTaskDaysRow(task, taskIndex, indentLevel, expanded)
       ])
+
+      if (task.children !== undefined) {
+        return [
+          taskRow,
+          h('div', {
+            class: {
+              'q-calendar__child': true,
+              'q-calendar__child--expanded': expanded === true,
+              'q-calendar__child--collapsed': expanded !== true
+            }
+          }, [
+            __renderTasks(task.children, indentLevel + 1, (expanded === false ? expanded : task.expanded))
+          ])
+        ]
+      }
+
+      return [taskRow]
+
     }
 
-    function __renderTasks () {
-      return props.modelTasks.map((task, index) => __renderTaskRow(task, index))
+    function __renderTasks (tasks = undefined, indentLevel = 0, expanded = true) {
+      if (tasks === undefined) {
+        tasks = props.modelTasks
+      }
+      return tasks.map((task, taskIndex) => {
+        return __renderTaskRow(task, taskIndex, indentLevel, task.children !== undefined ? task.expanded : expanded)
+      })
     }
 
     function __renderTasksContainer () {
@@ -624,7 +672,7 @@ export default defineComponent({
         start: parsedStartDate.value,
         end: parsedEndDate.value
       }
-      const width = convertToUnit(props.taskWidth)
+      const width = convertToUnit(parseInt(props.taskWidth, 10))
       const style = {
         width,
         minWidth: width,
@@ -645,7 +693,7 @@ export default defineComponent({
     function __renderTitleTask (title, index) {
       const slot = slots[ 'title-task' ]
 
-      const width = convertToUnit(props.taskWidth)
+      const width = convertToUnit(parseInt(props.taskWidth, 10))
       const style = {
         width,
         minWidth: width,

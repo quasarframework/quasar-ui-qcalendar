@@ -845,6 +845,10 @@ const menu = [
           {
             name: 'Task - Theme',
             path: 'task-theme'
+          },
+          {
+            name: 'Task - Children',
+            path: 'task-children'
           }
         ]
       },

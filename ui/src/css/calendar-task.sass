@@ -91,6 +91,13 @@
     flex-direction: row
     width: 100%
 
+    &--section
+      position: relative
+      display: flex
+      flex: none
+      flex-direction: row
+      width: 100%
+
     &--container
       position: relative
       min-height: 22px
@@ -239,6 +246,12 @@
       border-bottom: none !important
       // border-bottom: var(--calendar-background) // hide border
 
+    &--section
+      border-bottom: var(--calendar-border-section)
+
+      // &:last-child
+      //   border-bottom: none !important
+
     &--item
       background: var(--calendar-background)
       border-right: var(--calendar-border)
@@ -311,6 +324,9 @@
 
     &__task
       border-bottom: var(--calendar-border-dark)
+
+      &--section
+        border-bottom: var(--calendar-border-section-dark)
 
       &--item
         background: var(--calendar-background-dark)
