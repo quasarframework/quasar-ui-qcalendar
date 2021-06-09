@@ -137,8 +137,8 @@ export default defineComponent({
         class: 'q-calendar-task__task--container'
       },
       {
-        name: 'Head Task',
-        class: 'q-calendar-task__head--task'
+        name: 'Head Tasks',
+        class: 'q-calendar-task__head--tasks'
       },
       {
         name: 'Title',
