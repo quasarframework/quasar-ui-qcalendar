@@ -882,7 +882,7 @@ export default defineComponent({
       const style = {
       }
       style.height = resource.height !== void 0
-        ? convertToUnit(resource.height)
+        ? convertToUnit(parseInt(resource.height, 10))
         : parsedResourceHeight.value
           ? convertToUnit(parsedResourceHeight.value)
           : 'auto'
@@ -925,7 +925,7 @@ export default defineComponent({
       const style = {
       }
       style.height = resource.height !== void 0
-        ? convertToUnit(resource.height)
+        ? convertToUnit(parseInt(resource.height, 10))
         : parsedResourceHeight.value
           ? convertToUnit(parsedResourceHeight.value)
           : 'auto'
