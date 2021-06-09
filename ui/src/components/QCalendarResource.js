@@ -677,7 +677,7 @@ export default defineComponent({
                 onClick: (e) => {
                   e.stopPropagation()
                   resource.expanded = !resource.expanded
-                  emit('update:model-resources', props.modelResources)
+                  // emit('update:model-resources', props.modelResources)
                   emit('resource-expanded', { expanded: resource.expanded, scope })
               }
               }),
