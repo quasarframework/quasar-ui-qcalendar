@@ -364,7 +364,7 @@ const menu = [
             path: 'month-first-day-monday'
           },
           {
-            name: 'Month - five day workweek',
+            name: 'Month - Five day workweek',
             path: 'month-five-day-workweek'
           },
           {
