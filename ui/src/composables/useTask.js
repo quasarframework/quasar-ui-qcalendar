@@ -42,10 +42,6 @@ export const useTaskProps = {
     type: [ String, Number ],
     default: 'id'
   },
-  taskLabel: {
-    type: [ String, Number ],
-    default: 'label'
-  },
   weekdays: {
     type: Array,
     default: () => [ 0, 1, 2, 3, 4, 5, 6 ]
