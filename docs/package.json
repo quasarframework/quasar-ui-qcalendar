@@ -1,9 +1,9 @@
 {
-  "name": "dev",
+  "name": "docs",
   "version": "0.0.1",
   "description": "QCalendar Docs",
   "productName": "Quasar App",
-  "author": "Jeff Galbraith <jeff.galbraith@xendra.com>",
+  "author": "Jeff Galbraith <galbraith64@gmail.com>",
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue ./",
