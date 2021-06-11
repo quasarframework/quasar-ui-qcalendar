@@ -2,6 +2,10 @@
 title: Day - Navigation
 desc: QCalendarDay - Navigation
 keys: developing
+related:
+  - /developing/qcalendarday-week/week-navigation
+  - /developing/qcalendarmonth/month-navigation
+  - /developing/qcalendarmonth-minimode/minimode-navigation
 ---
 This example uses the `use-navigation` property along with the `focusable` and `focus-type` properties.
 

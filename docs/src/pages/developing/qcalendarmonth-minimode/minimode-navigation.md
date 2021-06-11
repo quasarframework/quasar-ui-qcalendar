@@ -2,6 +2,10 @@
 title: MiniMode - Navigation
 desc: QCalendarMonth (minimode) - Navigation
 keys: developing
+related:
+  - /developing/qcalendarday/day-navigation
+  - /developing/qcalendarday-week/week-navigation
+  - /developing/qcalendarmonth/month-navigation
 ---
 For keyboard navigation use the `use-navigation` property along with the `focusable` and `focus-type` properties.
 

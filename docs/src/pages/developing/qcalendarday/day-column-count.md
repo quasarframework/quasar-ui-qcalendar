@@ -2,6 +2,7 @@
 title: Day - Column Count
 desc: QCalendarDay - Column Count
 keys: developing
+  - /developing/qcalendaragenda/agenda-column-count
 ---
 The `column-count` property allows for a single day to be displayed multiple times.
 

@@ -2,6 +2,8 @@
 title: Day (week) - Selected Intervals
 desc: QCalendarDay (week) - Selected Intervals
 keys: developing
+related:
+  - /developing/qcalendarday/day-selected-intervals
 ---
 
 <example-viewer

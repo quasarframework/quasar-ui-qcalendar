@@ -2,6 +2,8 @@
 title: MiniMode - No Outside Days
 desc: QCalendarMonth (minimode) - No Outside Days
 keys: developing
+related:
+  - /developing/qcalendarmonth/month-no-outside-days
 ---
 
 <example-viewer

@@ -2,6 +2,10 @@
 title: Day - Drag and Drop
 desc: QCalendarDay - Drag and Drop
 keys: developing
+related:
+  - /developing/qcalendarday-week/week-drag-and-drop
+  - /developing/qcalendarmonth/month-drag-and-drop
+  - /developing/qcalendarscheduler/scheduler-drag-and-drop
 ---
 Drag any items in the list to a calendar interval or the top header.
 

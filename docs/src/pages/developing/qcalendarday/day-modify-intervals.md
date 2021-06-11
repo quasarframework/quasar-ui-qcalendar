@@ -2,6 +2,9 @@
 title: Day - Modify Intervals
 desc: QCalendarDay - Modify Intervals
 keys: developing
+related:
+  - /developing/qcalendarday-week/week-modify-intervals
+  - /developing/qcalendarresource/resource-modify-intervals
 ---
 Using the proerties `interval-minutes`, `interval-start` and `interval-count`, you can control how the calendar looks in terms of the range of intervals.
 

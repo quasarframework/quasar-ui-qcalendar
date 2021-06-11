@@ -2,6 +2,10 @@
 title: Month - Drag and Drop
 desc: QCalendarMonth - Drag and Drop
 keys: developing
+related:
+  - /developing/qcalendarday/day-drag-and-drop
+  - /developing/qcalendarday-week/week-drag-and-drop
+  - /developing/qcalendarscheduler/scheduler-drag-and-drop
 ---
 Drag any items in the list to a calendar day.
 
