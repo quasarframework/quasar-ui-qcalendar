@@ -107,7 +107,13 @@ module.exports = configure(function (ctx) {
     devServer: {
       https: false,
       port: 8090,
-      open: true // opens browser window automatically
+      open: true
+      // next line for testing watchOptions issue
+      // watchOptions: {
+      //   ignored: [
+      //     /node_modules([\\]+|\/)+(?!my-package-name)/
+      //   ]
+      // }
     },
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
