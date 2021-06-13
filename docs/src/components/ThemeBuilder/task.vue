@@ -5,9 +5,9 @@
       <q-calendar-task
         ref="calendar"
         v-model="selectedDate"
-        v-model:modelTasks="parsedTasks"
-        v-model:modelTitle="titleTasks"
-        v-model:modelFooter="footerTasks"
+        v-model:model-tasks="parsedTasks"
+        v-model:model-title="titleTasks"
+        v-model:model-footer="footerTasks"
         view="month"
         :task-width="240"
         :min-weekday-length="2"

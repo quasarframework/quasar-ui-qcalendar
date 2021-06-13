@@ -21,7 +21,7 @@
         id="calendar-resource"
         ref="calendar"
         bordered
-        v-model:modelResources="resources"
+        v-model:model-resources="resources"
         resource-key="id"
         resource-label="name"
         style="height: 300px;"

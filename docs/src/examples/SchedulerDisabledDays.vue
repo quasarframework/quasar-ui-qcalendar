@@ -12,7 +12,7 @@
         <q-calendar-scheduler
           ref="calendar"
           v-model="selectedDate"
-          v-model:modelResources="resources"
+          v-model:model-resources="resources"
           view="week"
           :disabled-days="disabledDays"
           animated
@@ -28,7 +28,7 @@
         <q-calendar-scheduler
           ref="calendar2"
           v-model="selectedDate"
-          v-model:modelResources="resources"
+          v-model:model-resources="resources"
           view="week"
           :disabled-days="disabledDaysRange"
           animated

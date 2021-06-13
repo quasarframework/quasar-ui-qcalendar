@@ -12,8 +12,8 @@
         <q-calendar-task
           ref="calendar"
           v-model="selectedDate"
-          v-model:modelTasks="parsedTasks"
-          v-model:modelFooter="footerTasks"
+          v-model:model-tasks="parsedTasks"
+          v-model:model-footer="footerTasks"
           view="month"
           :disabled-before="disabledBefore"
           :disabled-after="disabledAfter"

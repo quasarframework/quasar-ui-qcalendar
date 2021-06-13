@@ -19,7 +19,7 @@
     </div>
     <q-calendar-resource
       v-model="selectedDate"
-      v-model:modelResources="resources"
+      v-model:model-resources="resources"
       :resource-height="resourceHeight"
       :resource-min-height="resourceMinHeight"
       resource-key="id"

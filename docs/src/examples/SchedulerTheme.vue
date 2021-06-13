@@ -28,7 +28,7 @@
         <q-calendar-scheduler
           ref="calendar"
           v-model="selectedDate"
-          v-model:modelResources="resources"
+          v-model:model-resources="resources"
           view="week"
           animated
           bordered

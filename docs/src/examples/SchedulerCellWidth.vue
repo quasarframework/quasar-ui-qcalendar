@@ -12,7 +12,7 @@
         <q-calendar-scheduler
           ref="calendar"
           v-model="selectedDate"
-          v-model:modelResources="resources2"
+          v-model:model-resources="resources2"
           view="month"
           cell-width="200px"
           resource-key="id"

@@ -25,7 +25,7 @@
         <q-calendar-scheduler
           ref="calendar"
           v-model="selectedDate"
-          v-model:modelResources="resources"
+          v-model:model-resources="resources"
           view="week"
           :drag-enter-func="onDragEnter"
           :drag-over-func="onDragOver"

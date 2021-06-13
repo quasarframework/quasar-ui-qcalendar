@@ -11,7 +11,7 @@
         <q-calendar-scheduler
           ref="calendar"
           v-model="selectedDate"
-          v-model:modelResources="resources"
+          v-model:model-resources="resources"
           view="week"
           :weekdays="[1,2,3,4,5,6,0]"
           animated

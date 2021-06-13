@@ -224,9 +224,5 @@ or
 [QCalendarScheduler UMD Example on Codepen](https://codepen.io/Hawkeye64/pen/oNZQBLz)
 [QCalendarTask UMD Example on Codepen](https://codepen.io/Hawkeye64/pen/RwwwKQL)
 
-
-
-
-
 # Project source
 Can be found [here](https://github.com/quasarframework/quasar-ui-qcalendar/tree/next).

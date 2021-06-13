@@ -12,8 +12,8 @@
         <q-calendar-task
           ref="calendar"
           v-model="selectedDate"
-          v-model:modelTasks="parsedTasks"
-          v-model:modelFooter="footerTasks"
+          v-model:model-tasks="parsedTasks"
+          v-model:model-footer="footerTasks"
           view="month"
           :disabled-weekdays="[0,6]"
           :task-width="240"

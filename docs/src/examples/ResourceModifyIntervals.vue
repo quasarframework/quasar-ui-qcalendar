@@ -41,7 +41,7 @@
         <q-calendar-resource
           ref="calendar"
           v-model="selectedDate"
-          v-model:modelResources="resources"
+          v-model:model-resources="resources"
           resource-key="id"
           resource-label="name"
           :interval-minutes="60 * intervalRangeStep"

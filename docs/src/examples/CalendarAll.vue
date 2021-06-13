@@ -9,7 +9,7 @@
     <div class="q-ma-sm row justify-center">
       <q-select
         v-model="selectedCalendar"
-        v-model:modelResources="resources"
+        v-model:model-resources="resources"
         label="Calendar Mode"
         outlined
         dense
@@ -33,10 +33,10 @@
           ref="calendar"
           :mode="selectedCalendar"
           v-model="selectedDate"
-          v-model:modelResources="resources"
-          v-model:modelTitle="titleTasks"
-          v-model:modelTasks="parsedTasks"
-          v-model:modelFooter="footerTasks"
+          v-model:model-resources="resources"
+          v-model:model-title="titleTasks"
+          v-model:model-tasks="parsedTasks"
+          v-model:model-footer="footerTasks"
           resource-key="id"
           resource-label="name"
           view="week"
