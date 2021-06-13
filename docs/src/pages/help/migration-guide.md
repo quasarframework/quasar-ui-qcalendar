@@ -2,6 +2,9 @@
 title: Migration Guide
 desc: Migrate from v3 to v4
 keys: Help
+related:
+  - /all-about-qcalendar/installation-types
+  - /contributing/sponsor
 ---
 
 The information below can help you migrate from QCalendar v3.x to QCalendar v4.0.0 (alpha).
@@ -28,96 +31,9 @@ Previously, the actual QCalendar component was a wrapper around other calendar c
 
 However, there is still a QCalendar (wrapper) component and if you have an edge-case that needs the multi-component support the new property to use is `mode` because some calendar's still need the `view` property. The available values are: `day`, `month`, `agenda`, `resource`, `scheduler` and `task`.
 
-If you want to take an advantage of a smaller foot-print then you have the option of importing each calendar type on an individual basis. For this, you will need to **NOT** be using the QCalendar app-extension, as this will import the QCalendar (wrapper). Instead, you will want to install the UI component directly into your package.json:
+If you want to take an advantage of a smaller foot-print then you have the option of importing each calendar type on an individual basis. For this, you will need to **NOT** be using the QCalendar app-extension, as this will import the QCalendar (wrapper). Instead, you will want to install the UI component directly into your package.json
 
->  yarn add @quasar\quasar-ui-qcalendar
-
-A caveat, QCalendar was made more modular. Even the SASS files were split up. These will need to be imported as well.
-
-In a Vue (script section) or js file:
-
-```js
-import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
-```
-
-In your app.sass:
-
-```js
-@import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
-@import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
-```
-
-If you don't use the calendar transitions, you would NOT need to import that file.
-
-Once the package is installed into your node_modules, you can import the calendar-type you want to deal with:
-
-**QCalendarDay:**
-```js
-import { QCalendarDay } from '@quasar/quasar-ui-qcalendar/src/QCalendarDay.js'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarDay.sass'
-```
-
-**QCalendarMonth:**
-```js
-import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar/src/QCalendarMonth.js'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarMonth.sass'
-```
-
-**QCalendarAgenda:**
-```js
-import { QCalendarAgenda } from '@quasar/quasar-ui-qcalendar/src/QCalendarAgenda.js'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarAgenda.sass'
-```
-
-**QCalendarScheduler:**
-```js
-import { QCalendarScheduler } from '@quasar/quasar-ui-qcalendar/src/QCalendarScheduler.js'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarScheduler.sass'
-```
-
-**QCalendarResource:**
-```js
-import { QCalendarResource } from '@quasar/quasar-ui-qcalendar/src/QCalendarResource.js'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarResource.sass'
-```
-
-**QCalendarTask:**
-```js
-import { QCalendarTask } from '@quasar/quasar-ui-qcalendar/src/QCalendarTask.js'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarTask.sass'
-```
-
-If you want to use QCalendar (wrapper) install the QCalendar app-extension via the Quasar CLI:
-
-> quasar ext add @quasar/qcalendar
-
-or
-
-```js
-import { QCalendar } from '@quasar/quasar-ui-qcalendar/src/QCalendar.js'
-import '@quasar/quasar-ui-qcalendar/src/QCalendar.sass'
-```
-
-### Boot file
-If you want to create your own Quasar boot file and include a specific calendar that way, you can, but the import will be slightly different. We'll just use QCalendarDay as an example so you get the idea:
-
-```js
-import { boot } from 'quasar/wrappers'
-
-import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarDay.sass'
-
-// CalendarPlugin can be called anything...it's just a 'default' export
-import CalendarPlugin from '@quasar/quasar-ui-qcalendar/src/QCalendarDay.js'
-
-export default boot(({ app }) => {
-  app.use(CalendarPlugin)
-})
-```
-
-If you need multiple calendars, just do them in the same file.
+See [Installation types](/all-about-qcalendar/installation-types) for more information.
 
 ## Common changes
 
