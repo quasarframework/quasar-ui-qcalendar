@@ -705,7 +705,7 @@ export default defineComponent({
       const scope = {
         start: parsedStartDate.value,
         end: parsedEndDate.value,
-        width,
+        cellWidth: width,
         title,
         index
       }
