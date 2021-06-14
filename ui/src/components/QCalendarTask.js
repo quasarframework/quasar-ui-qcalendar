@@ -898,7 +898,7 @@ export default defineComponent({
           timestamp: day,
           title,
           index,
-          width
+          cellWidth: parsedCellWidth.value
         }
   
         const dayClass = typeof props.dayClass === 'function' ? props.dayClass({ scope }) : {}
