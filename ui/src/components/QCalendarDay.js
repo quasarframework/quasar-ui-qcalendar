@@ -385,7 +385,8 @@ export default defineComponent({
       const slot = slots[ 'head-intervals' ]
 
       const scope = {
-        days: days.value,
+        timestamps: days.value,
+        days: days.value, // deprecated
         date: props.modelValue
       }
 
