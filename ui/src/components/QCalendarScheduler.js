@@ -943,7 +943,8 @@ export default defineComponent({
       const isFocusable = props.focusable === true && props.focusType.includes('resource') && expanded === true
       const scope = {
         resource,
-        days: days.value,
+        timestamps: days.value,
+        days: days.value, // deprecated
         resourceIndex,
         indentLevel,
         label
