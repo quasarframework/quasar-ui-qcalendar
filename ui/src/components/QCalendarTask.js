@@ -927,7 +927,8 @@ export default defineComponent({
 
       const scope = {
         timestamp: day,
-        activeDate
+        activeDate,
+        droppable: dragOverHeadDayRef.value = day.date
       }
 
       const styler = props.weekdayStyle || dayStyleDefault
