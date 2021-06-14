@@ -1057,7 +1057,8 @@ export default defineComponent({
         indentLevel,
         expanded,
         cellWidth: width,
-        days: days.value
+        timestamps: days.value,
+        days: days.value // deprecated
       }
 
       const style = {}
