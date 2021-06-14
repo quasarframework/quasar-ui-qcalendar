@@ -450,7 +450,8 @@ export default defineComponent({
         start: parsedStartDate.value,
         end: parsedEndDate.value,
         task,
-        taskIndex
+        taskIndex,
+        expanded
       }
       const width = convertToUnit(props.taskWidth)
       const style = {
