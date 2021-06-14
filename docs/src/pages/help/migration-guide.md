@@ -13,8 +13,8 @@ The information below can help you migrate from QCalendar v3.x to QCalendar v4.0
 
 > The information below is by no means an exhaustive list of changes and new functionality. If you see something that has been missed, please PR or let us know. Also check the [Changelog](/latest-news/changelog) page for ungoing updates.
 
-## QCalendar v4.0.0 Alpha
-Welcome to the QCalendar v4.0.0 Alpha release.
+## QCalendar v4.0.0 (Alpha/Beta)
+Welcome to the QCalendar v4.0.0 release.
 
 With this update comes a lot of changes, with over 90% of QCalendar being rewritten. Please read below to understand these changes and how they will affect your upgrading.
 
@@ -57,36 +57,59 @@ Below is a list of all existing slots. Some are new, some have changed and some 
 
 | Name | Previously | Scope | Calendar |
 | -------  | -------------- | --------  | -----------  |
-| head-intervals | intervals-header | { scope: { days: [] } } | QCalendarDay |
-| head-day | | | QCalendarDay |
-| head-date | **new** | | QCalendarDay |
-| head-weekday-label | day-header-label | | QCalendarDay |
-| head-day-label | day-label | | QCalendarDay, QCalendarMonth |
-| head-day-button | day-btn | | QCalendarDay, QCalendarMonth |
+| head-intervals | intervals-header | { scope: { timestamps: Array, date: String } } | QCalendarDay |
+| head-resources | scheduler-resources-header | { scope: { timestamps: Array, resources: Array, date: String } } | QCalendarScheduler |
+| head-resources | resources-header | { scope: { timestamps: Array, resources: Array, date: String } } | QCalendarResource |
+| head-tasks | | { scope: { start: Object, end: Object } } | QCalendarTask |
+| head-day | | { scope: { timestamp: Object, columnIndex: Number, timeStartPos: ƒ, timeDurationHeight: ƒ } } | QCalendarDay, QCalendarAgenda |
+| head-day | | { scope: { timestamp: Object, activeDate: Boolean, droppable: Boolean } } | QCalendarScheduler, QCalendarTask |
+| head-date | **new** | { scope: { timestamp: Object, columnIndex: Number, timeStartPos: ƒ, timeDurationHeight: ƒ } } | QCalendarDay, QCalendarAgenda |
+| head-date | **new** | { scope: { timestamp: Object, activeDate: Boolean, droppable: Boolean } } | QCalendarScheduler, QCalendarTask |
+| head-weekday-label | day-header-label | { scope: { timestamp: Object, timeStartPos: ƒ, timeDurationHeight: ƒ } } | QCalendarDay, QCalendarAgenda |
+| head-weekday-label | day-header-label | { scope: { timestamp: Object, shortWeekdayLabel: Boolean } } | QCalendarMonth |
+| head-weekday-label | | { scope: { timestamp: Object } } | QCalendarTask |
+| head-day-label | day-label | { scope: { dayLabel: String, timestamp: Object, activeDate: Boolean } } | QCalendarDay, QCalendarAgenda, QCalendarScheduler |
+| head-day-label | day-label | { scope: { dayLabel: String, timestamp: Object, activeDate: Boolean, outside: Boolean, selectedDate: Boolean, miniMode: Boolean } } | QCalendarMonth |
+| head-day-label | day-label | { scope: { dayLabel: String, timestamp: Object, activeDate: Boolean } } | QCalendarTask |
+| head-day-button | day-btn | { scope: { dayLabel: String, timestamp: Object, activeDate: Boolean } } | QCalendarDay, QCalendarMonth, QCalendarAgenda, QCalendarScheduler |
+| head-day-button | day-btn | { scope: { dayLabel: String, timestamp: Object, activeDate: Boolean, outside: Boolean, selectedDate: Boolean, miniMode: Boolean } } | QCalendarMonth |
+| head-day-button | | { scope: { dayLabel: String, timestamp: Object, activeDate: Boolean } } | QCalendarTask |
 | head-day-button-value |  | | QCalendarDay |
-| column-header-before | | | QCalendarDay |
-| column-header-after | | | QCalendarDay |
-| day-container | | | QCalendarDay |
-| day-body | | { scope: { timestamp: {…}, timeStartPos: ƒ, timeDurationHeight: ƒ } } | QCalendarDay |
-| day-interval | interval | { scope: {timestamp: {…}, timeStartPos: ƒ, timeDurationHeight: ƒ } } | QCalendarDay |
-| interval-label | **new** | { scope: { timestamp: {…}, index: Number, label: String, droppable: Boolean } } | QCalendarDay |
-| head-day-event | day-header | { scope: { timestamp: {...}, timeStartPos: ƒ, timeDurationHeight: ƒ } } | QCalendarDay |
-| head-days-events | **new** | { scope: { days: [], ref: ref() } } | QCalendarDay |
-| day-of-year |  |  | QCalendarMonth |
-| month-label |  |  | QCalendarMonth |
+| head-day-event | day-header | { scope: { timestamp: Object, timeStartPos: ƒ, timeDurationHeight: ƒ } } | QCalendarDay, QCalendarAgenda |
+| head-day-event | day-header | { scope: { weekday: Number, timestamp: Object, days: Array, index: NUmber, miniMode: Boolean, activeDate: Boolean, disabled: Boolean } } | QCalendarMonth |
+| head-days-events | **new** | { scope: { timestamps: Array, ref: ref() } } | QCalendarDay, QCalendarAgenda |
 | head-row-events | **new** |  | QCalendarMonth |
-| head-workweek | workweek-header |  | QCalendarMonth |
-| head-day |  |  | QCalendarMonth |
-| head-day-event | **new** |  | QCalendarMonth |
-| week |  |  | QCalendarMonth |
-| workweek |  |  | QCalendarMonth |
-| day |  |  | QCalendarMonth |
-| head-resources | scheduler-resources-header | { scope: { days: [], resources: [] } } | QCalendarScheduler |
-| head-resources | resources-header | { scope: { timestamps: [], resources: [], date: String } } | QCalendarResource, QCalendarScheduler |
-| resource-label |  | { scope: { timestamps: [], resource: {...}, resourceIndex: Number, indentLevel: Number, label: String, droppable: Boolean } } | QCalendarResource |
-| resource-intervals |  | { scope: {timestamps: [], resource: {...}, resourceIndex: Number,  timeStartPosX: ƒ, timeDurationWidth: ƒ } } | QCalendarResource |
-| resource-interval |  | { scope: { timestamp: {...}, resource: {...}, resourceIndex: Number, droppable: Boolean } } | QCalendarResource |
-| resource-days | **new** | { scope: { days: [], resource: {...}, resourceIndex: Number, indentLevel: Number, expanded: Boolean, cellWidth: String } } | QCalendarScheduler |
+| head-workweek | workweek-header | { scope: { start: Object, end: Object, miniMode: Boolean } } | QCalendarMonth |
+| head-day |  | { scope: { weekday: Number, Timestamp: Object, days: Array, index: Number, miniMode: Boolean } } | QCalendarMonth |
+| head-day-event | **new** | { scope: { timestamp: Object, activeDate: Boolean, droppable: Boolean} } | QCalendarMonth |
+| head-column | | { scope: { column: Number, index: Number, days: Array } } | QCalendarAgenda |
+| head-column-label | | { scope: { column: Object } } | QCalendarAgenda |
+| column-header-before | | { scope: { timestamp: Object, columnIndex: Number } } | QCalendarDay, QCalendarScheduler |
+| column-header-after | | { scope: { timestamp: Object, columnIndex: Number } } | QCalendarDay, QCalendarScheduler |
+| column | | { scope: { column: Object, days: Array, index: Number } } | QCalendarAgenda |
+| day-container | | { scope: { days: Array } } | QCalendarDay, QCalendarAgenda |
+| day-body | | { scope: { timestamp: Object, timeStartPos: ƒ, timeDurationHeight: ƒ } } | QCalendarDay |
+| day-interval | interval | { scope: { timestamp: Object, timeStartPos: ƒ, timeDurationHeight: ƒ } } | QCalendarDay |
+| interval-label | **new** | { scope: { timestamp: Object, label: String, index: Number, droppable: Boolean } } | QCalendarDay, QCalendarResource |
+| day-of-year |  | { scope: { timestamp: Object } } | QCalendarMonth |
+| month-label |  | { scope: { monthLabel: String, timestamp: Object, miniMode: Boolean } } | QCalendarMonth |
+| week |  | { scope: { week: Array, weekdays, miniMode: Boolean } } | QCalendarMonth |
+| week-days |  | { scope: { week: Array, weekdays, miniMode: Boolean } } | QCalendarMonth |
+| workweek |  | { scope: { workWeekLabel: String, week: Array, miniMode: Boolean } } | QCalendarMonth |
+| day |  | { scope: { outside: Boolean, timestamp: Object, miniMode: Boolean } } | QCalendarMonth |
+| day |  | { scope: { timestamp: Object, columnIndex: Number } } | QCalendarAgenda |
+| day |  | { scope: { timestamp: Object, columnIndex: Number, resource: Object, resourceIndex: Number, indentLevel: Number, activeDate: Boolean, droppable: Boolean } } | QCalendarScheduler |
+| day |  | { scope: { timestamp: Object, task: Object, taskIndex: Number, activeDate: Boolean } } | QCalendarTask |
+| days |  | { scope: { timestamps: Array, task: Object, taskIndex: Number, cellWidth: Number } } | QCalendarTask |
+| resource-label |  | { scope: { timestamps: Array, resource: Object, resourceIndex: Number, indentLevel: Number, label: String, droppable: Boolean } } | QCalendarResource, QCalendarScheduler |
+| resource-intervals |  | { scope: {timestamps: Array, resource: Object, resourceIndex: Number,  timeStartPosX: ƒ, timeDurationWidth: ƒ } } | QCalendarResource |
+| resource-interval |  | { scope: { timestamp: Object, resource: Object, resourceIndex: Number, ActiveDate: Boolean, droppable: Boolean } } | QCalendarResource |
+| resource-days | **new** | { scope: { timestamps: Array, resource: Object, resourceIndex: Number, indentLevel: Number, expanded: Boolean, cellWidth: String } } | QCalendarScheduler |
+| task |  | { scope: { start: Object, end: Object, task: Object, taskIndex: Number, expanded: Boolean } } | QCalendarTask |
+| footer-task |  | { scope: { start: Object, end: Object, task: Object, taskIndex: Number} } | QCalendarTask |
+| footer-day |  | { scope: { timestamp: Object, footer: Object, index: Number} } | QCalendarTask |
+| title-task |  | { scope: { start: Object, end: Object, title: Object, index: Number, cellWidth: Number} } | QCalendarTask |
+| title-day |  | { scope: { timestamp: Object, title: Object, index: Number, cellWidth: Number} } | QCalendarTask |
 
 
 ### Events
@@ -147,7 +170,7 @@ This image will explain the QCalendarDay alignment:
 - Functionality has been added for tab (tabindex) support. Users can now use `Tab` and `Shift+Tab` to navigate the calendar. Add the new `focusable` property to have this functionality.
 - Allow calendar date selection via keyboard (Enter or Space keys) when `focusable` property is set.
 - When using `max-days` property (for contiguous days displayed) and clicking on a date, the calendar no longer navigates to the selected date, which previously became first date in the visible days. ie: the calendar is static until a new date that is not visible is selected programmatically, by v-model or prev/next/move methods are used (`max-days` does not apply to constrained `week` and `month` views).
-- QCalendarDay now has a slot for head days (`head-days-events`) that is a contiguous row for all displayed days. This allows for all-day events that are more than one day to be a singular item. Be sure to create a wrapper div absolute positioning OR relative positioning and add empty events that are transparent to the user to push visible events to their proper positioning. Because absolute positioned div's are outside of the browser's normal flow, you need to set an explicit height on your first child and use the passed in **ref** from the slot data (`<template #head-days-events="{ scope: { days, ref } }">`) and place the ref (`:ref="ref"`) properly for this to work. Also, you probably should not use the `head-days-events` in conjunction with the `head-day-event` slot. The `head-day-event` slot is regulated to that day only and potential overlap may occur that would not be a good UX.
+- QCalendarDay/QCalendarAgenda now has a slot for head days (`head-days-events`) that is a contiguous row for all displayed days. This allows for all-day events that are more than one day to be a singular item. Be sure to create a wrapper div absolute positioning OR relative positioning and add empty events that are transparent to the user to push visible events to their proper positioning. Because absolute positioned div's are outside of the browser's normal flow, you need to set an explicit height on your first child and use the passed in **ref** from the slot data (`<template #head-days-events="{ scope: { days, ref } }">`) and place the ref (`:ref="ref"`) properly for this to work. Also, you probably should not use the `head-days-events` in conjunction with the `head-day-event` slot. The `head-day-event` slot is regulated to that day only and potential overlap may occur that would not be a good UX.
 - All calendars will automatically auto-switch the weekday length based on the width of the calendar cell.
 - For calendars that show the month on the first day of the month, the text will automatically switch the month length based on width of the calendar cell.
 
