@@ -398,7 +398,8 @@ export default defineComponent({
       const slot = slots[ 'head-resources' ]
 
       const scope = {
-        days: days.value,
+        days: days.value, // deprecated
+        timestamps: days.value,
         date: props.modelValue,
         resources: props.modelResources
       }
