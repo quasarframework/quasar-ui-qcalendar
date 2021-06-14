@@ -470,7 +470,11 @@ export default defineComponent({
             zIndex: 1
           }
         }, [
-          slot({ scope: { days: days.value, ref: headDayEventsChildRef } })
+          slot({ scope: {
+            timestamps: days.value,
+            days: days.value, // deprecated
+            ref: headDayEventsChildRef
+          } })
         ]),
         ...__renderHeadDaysEvents()
       ])
