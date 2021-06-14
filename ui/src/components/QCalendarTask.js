@@ -433,7 +433,7 @@ export default defineComponent({
         days: days.value, // deprecated
         task,
         taskIndex,
-        width: parsedCellWidth.value
+        cellWidth: parsedCellWidth.value
       }
 
       return h('div', {
