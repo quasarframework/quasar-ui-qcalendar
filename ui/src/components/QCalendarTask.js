@@ -429,7 +429,8 @@ export default defineComponent({
     function __renderTaskDaysRow (task, taskIndex) {
       const slot = slots.days
       const scope = {
-        days: days.value,
+        timestamps: days.value,
+        days: days.value, // deprecated
         task,
         taskIndex,
         width: parsedCellWidth.value
