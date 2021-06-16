@@ -9,6 +9,7 @@
     "lint": "eslint --ext .js,.vue ./",
     "lint-fix": "eslint --ext .js,.vue src --fix",
     "build:site": "cd ../ui && yarn && yarn build && yarn link && cd ../docs && yarn link @quasar/quasar-ui-qcalendar && quasar build",
+    "build:site:ssr": "cd ../ui && yarn && yarn build && yarn link && cd ../docs && yarn link @quasar/quasar-ui-qcalendar && quasar build -m ssr",
     "dev": "quasar dev",
     "dev:ssr": "quasar dev -m ssr",
     "dev:ios": "quasar dev -m ios",
