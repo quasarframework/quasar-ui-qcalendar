@@ -1,5 +1,5 @@
 import { h } from 'vue'
-import useFocusHelper from './useFocusHelper'
+import useFocusHelper from './useFocusHelper.js'
 
 export default function (props, data, slotData) {
   const isFocusable = props.focusable === true && props.focusType.includes('date') === true

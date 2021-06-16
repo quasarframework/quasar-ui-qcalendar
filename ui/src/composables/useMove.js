@@ -11,7 +11,7 @@ import {
   nextDay,
   prevDay,
   today
-} from '../utils/Timestamp'
+} from '../utils/Timestamp.js'
 
 export const useMoveEmits = [
   'moved'

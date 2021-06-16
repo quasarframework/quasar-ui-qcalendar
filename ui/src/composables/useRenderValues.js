@@ -10,7 +10,7 @@ import {
   moveRelativeDays,
   updateFormatted,
   nextDay
-} from '../utils/Timestamp'
+} from '../utils/Timestamp.js'
 
 export default function (props, {
   parsedView,
