@@ -47,6 +47,8 @@
     "agenda",
     "resource",
     "schedule",
+    "task",
+    "planner",
     "range selection"
   ],
   "vetur": {
