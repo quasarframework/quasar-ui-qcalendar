@@ -13,7 +13,8 @@ module.exports = {
   // support monorepos
   projects: [
     './docs',
-    './ui'
+    './ui',
+    'app-extension'
   ]
 
 }
