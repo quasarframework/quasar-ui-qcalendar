@@ -7,7 +7,7 @@
         [
           "@babel/preset-env",
           {
-            "modules": "commonjs",
+            "modules": "es6",
             "targets": {
               "node": "current"
             }
