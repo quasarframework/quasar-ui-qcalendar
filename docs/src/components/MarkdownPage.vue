@@ -1,5 +1,5 @@
 <template>
-  <div :class="'q-markdown ' + (path !== '/' ? ($q.platform.is.mobile ? '' : 'q-mx-xl') : '')">
+  <div :class="'markdown ' + (path !== '/' ? ($q.platform.is.mobile ? '' : 'q-mx-xl') : '')">
     <markdown-nav-bar
       v-if="path !== '/' && nav && nav.length > 0"
       :title="title"

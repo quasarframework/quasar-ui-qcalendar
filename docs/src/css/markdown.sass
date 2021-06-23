@@ -1,6 +1,6 @@
 @import './prism-theme.sass'
 
-.q-markdown
+.markdown
   position: relative
 
   code, pre
@@ -8,7 +8,8 @@
 
   pre
     border-radius: $generic-border-radius
-    padding: 5px
+    // padding: 5px
+    padding: 0
     margin: 0
     background-size: 1.5em 1.5em
     background-origin: content-box
@@ -32,7 +33,7 @@
 
   pre code
     border-radius: 0
-    width: max-content
+    width: 100%
 
   &--heading
     cursor: pointer
@@ -79,7 +80,7 @@
       font-size: 0.8rem
       margin: 1rem 0
 
-    .q-markdown--link
+    .markdown--link
       border-bottom: inherit
       color: inherit
 
@@ -158,16 +159,16 @@
     color: $grey-10
     font-weight: 400
 
-    > p:last-child, .q-markdown--note:last-child
+    > p:last-child, .markdown--note:last-child
       margin-bottom: 0
 
-    .q-markdown--link
+    .markdown--link
       // color: $grey-2
 
     &--
       border-left: 10px solid lighten($grey-8, 30%)
       border-radius: 8px 0 0 8px
-      .q-markdown--link
+      .markdown--link
         color: lighten($grey-8, 10%)
 
     &--info
@@ -175,9 +176,9 @@
       border-radius: 8px 0 0 8px
       color: $grey-9
       background: $blue-2
-      .q-markdown--link
+      .markdown--link
         color: lighten($blue-8, 10%)
-      .q-markdown--note-title
+      .markdown--note-title
         color: lighten($blue-8, 10%)
 
     &--tip
@@ -185,9 +186,9 @@
       border-radius: 8px 0 0 8px
       color: $grey-9
       background: $green-2
-      .q-markdown--link
+      .markdown--link
         color: lighten($green-8, 10%)
-      .q-markdown--note-title
+      .markdown--note-title
         color: lighten($green-8, 10%)
 
     &--warning
@@ -195,9 +196,9 @@
       border-radius: 8px 0 0 8px
       color: $grey-9
       background: $orange-2
-      .q-markdown--link
+      .markdown--link
         color: lighten($orange-10, 10%)
-      .q-markdown--note-title
+      .markdown--note-title
         color: lighten($orange-10, 10%)
 
     &--danger
@@ -205,9 +206,9 @@
       border-radius: 8px 0 0 8px
       color: $grey-9
       background: $red-2
-      .q-markdown--link
+      .markdown--link
         color: lighten($red-8, 10%)
-      .q-markdown--note-title
+      .markdown--note-title
         color: lighten($red-8, 10%)
 
     &-title
@@ -309,42 +310,42 @@
   &--table tbody tr:nth-child(odd)
     background: $grey-4
 
-// .q-markdown--page > div, .q-markdown--page > pre
+// .markdown--page > div, .markdown--page > pre
 //   margin-bottom: 22px
 
-blockquote.q-markdown--link
+blockquote.markdown--link
   background: transparent
   // color: $teal-6
 
   &:hover
     // color: yellow
 
-blockquote.q-markdown--note
+blockquote.markdown--note
   border-width: 1px 8px 1px 8px
   border-radius: 8px
   border-style: solid
   border-color: $grey-6 $teal-6
 
-.q-markdown__copy
+.markdown__copy
   position: absolute
   top: 15px
   right: 15px
 
 .body--dark
-  .q-markdown
+  .markdown
     color: $grey-2
 
     code
       background: $grey-9
       color: $grey-2
 
-    .q-markdown--link
+    .markdown--link
       // color: $teal-6
 
       &:hover
         // color: yellow
 
-    blockquote.q-markdown--note
+    blockquote.markdown--note
       border-color: $grey-6 $grey-6
       background: $dark
       color: $grey-2
@@ -352,43 +353,43 @@ blockquote.q-markdown--note
     pre, pre code
       background: $dark
 
-    .q-markdown--line-numbers-wrapper
+    .markdown--line-numbers-wrapper
       background: $dark
       color: $grey-2
 
-    .q-markdown--token
+    .markdown--token
       background: $grey-6
       color: $grey-10
       border: $grey-4 solid 1px
 
-    .q-markdown--code
+    .markdown--code
       background: $dark
       color: $grey-10
 
-    .q-markdown--note
+    .markdown--note
       background: $grey-10
       color: white
       border-top: 1px solid $grey-9
       border-bottom: 1px solid $grey-9
 
-    .q-markdown--note--
+    .markdown--note--
       border-left: 10px solid $grey-6
 
-    .q-markdown--note--info
+    .markdown--note--info
       border-left: 10px solid $light-blue-10
 
-    .q-markdown--note--tip
+    .markdown--note--tip
       border-left: 10px solid $light-green-10
 
-    .q-markdown--note--warning
+    .markdown--note--warning
       border-left: 10px solid $orange-10
 
-    .q-markdown--note--danger
+    .markdown--note--danger
       border-left: 10px solid $red-10
 
-    .q-markdown--table thead tr th,
-    .q-markdown--table tbody
+    .markdown--table thead tr th,
+    .markdown--table tbody
       background-color: $dark
 
-    .q-markdown--table tbody tr:nth-child(2n+1)
+    .markdown--table tbody tr:nth-child(2n+1)
       background-color: $grey-9

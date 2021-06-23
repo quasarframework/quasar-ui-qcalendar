@@ -103,7 +103,7 @@
           {{ itemName }}
         </div>
         {{ hint }}
-        <!-- <q-markdown :src="hint" /> -->
+        <!-- <markdown :src="hint" /> -->
       </div>
     </div>
   </q-dialog>

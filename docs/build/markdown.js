@@ -41,8 +41,8 @@ function highlight (str, lang) {
   if (Prism.languages[ lang ] !== undefined) {
     const code = Prism.highlight(str, Prism.languages[ lang ], lang)
 
-    return '<pre class="q-markdown--code">'
-      + `<code class="q-markdown--code__inner language-${ lang }">${ code }</code></pre>\n`
+    return '<pre class="markdown--code">'
+      + `<code class="markdown--code__inner language-${ lang }">${ code }</code></pre>\n`
   }
 
   return ''
@@ -54,7 +54,7 @@ function extendToken (md) {
   md.renderer.rules.code_inline = (tokens, idx, options, env, self) => {
     const token = tokens[ idx ]
 
-    token.attrSet('class', 'q-markdown--token')
+    token.attrSet('class', 'markdown--token')
     return defaultRender(tokens, idx, options, env, self)
   }
 }
@@ -63,7 +63,7 @@ function extendTable (md) {
   md.renderer.rules.table_open = (tokens, idx, options, env, self) => {
     const token = tokens[ idx ]
 
-    token.attrSet('class', 'q-markdown--table')
+    token.attrSet('class', 'markdown--table')
 
     return self.renderToken(tokens, idx, options)
   }
@@ -82,17 +82,17 @@ function extendLink (md) {
     // }
 
     // if (token.attrs[ hrefIndex ][ 1 ] === '') {
-    //   token.attrSet('class', 'q-markdown--link q-markdown--link-local')
+    //   token.attrSet('class', 'markdown--link markdown--link-local')
     //   if (tokens[ idx + 1 ] && tokens[ idx + 1 ].type === 'text' && tokens[ idx + 1 ].content) {
     //     token.attrSet('id', slugify(tokens[ idx + 1 ].content))
     //   }
     // }
     // else if (token.attrs[ hrefIndex ][ 1 ][ 0 ] === '/'
     //   || token.attrs[ hrefIndex ][ 1 ].startsWith('..')) {
-    //   token.attrSet('class', 'q-markdown--link q-markdown--link-local')
+    //   token.attrSet('class', 'markdown--link markdown--link-local')
     // }
     // else {
-    //   token.attrSet('class', 'q-markdown--link q-markdown--link-external')
+    //   token.attrSet('class', 'markdown--link markdown--link-external')
     //   token.attrSet('target', '_blank')
     //   token.attrSet('rel', 'noopener')
     // }
@@ -127,7 +127,7 @@ function extendImage (md) {
   md.renderer.rules.image = (tokens, idx, options, env, self) => {
     const token = tokens[ idx ]
 
-    token.attrSet('class', 'q-markdown--image')
+    token.attrSet('class', 'markdown--image')
     return self.renderToken(tokens, idx, options)
   }
 }
@@ -140,13 +140,13 @@ function extendHeading (md, tocData = [], toc = false, tocStart = 2, tocEnd = 3)
       .children
       .reduce((acc, t) => acc + t.content, '')
 
-    let classes = `q-markdown--heading q-markdown--heading-${ token.tag }`
+    let classes = `markdown--heading markdown--heading-${ token.tag }`
 
     if (token.markup === '=') {
-      classes += ' q-markdown--title-heavy'
+      classes += ' markdown--title-heavy'
     }
     else if (token.markup === '-') {
-      classes += ' q-markdown--title-light'
+      classes += ' markdown--title-light'
     }
 
     const id = slugify(label)
@@ -177,7 +177,7 @@ function createContainer (className, defaultTitle) {
         const token = tokens[ idx ]
         const info = token.info.trim().slice(className.length).trim()
         if (token.nesting === 1) {
-          return `<div class="q-markdown--note q-markdown--note--${ className }"><p class="q-markdown--note-title">${ info || defaultTitle }</p>\n`
+          return `<div class="markdown--note markdown--note--${ className }"><p class="markdown--note-title">${ info || defaultTitle }</p>\n`
         }
         else {
           return '</div>\n'
@@ -206,7 +206,7 @@ function extendBlockQuote (md) {
   md.renderer.rules.blockquote_open = (tokens, idx, options, env, self) => {
     const token = tokens[ idx ]
 
-    token.attrSet('class', 'q-markdown--note')
+    token.attrSet('class', 'markdown--note')
     return self.renderToken(tokens, idx, options)
   }
 }
@@ -229,10 +229,10 @@ function extendBlockQuote (md) {
 //       .map((line, index) => `<span class="q-markup--line-number">${index + 1}</span><br>`).join('')
 
 //     const lineNumbersWrapperCode =
-//       `<div class="q-markdown--line-numbers non-selectable">${lineNumbersCode}</div><div class="q-markdown--code-wrapper">${rawCode}</div>`
+//       `<div class="markdown--line-numbers non-selectable">${lineNumbersCode}</div><div class="markdown--code-wrapper">${rawCode}</div>`
 
 //     const finalCode =
-//       `<div class="q-markdown--line-numbers-wrapper">${lineNumbersWrapperCode}</div>`
+//       `<div class="markdown--line-numbers-wrapper">${lineNumbersWrapperCode}</div>`
 
 //     return finalCode
 //   }
