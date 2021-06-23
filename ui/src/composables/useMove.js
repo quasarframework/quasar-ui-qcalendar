@@ -26,17 +26,16 @@ export const useMoveEmits = [
  * export of default funtion
  * @param {Object} props object passed to 'setup' function
  * @param {Object} param object containing various needed values and functions
- * @param {String} param.view the calendar view
+ * @param {String} param.parsedView the computed calendar view
  * @param {import('vue').Ref} param.parsedValue computed value (YYYY-YY-MM)
  * @param {Array} param.weekdaySkips an array of 1's and 0's representing if a day is on/off
+ * @param {import('vue').Ref} param.direction the direction for animation
  * @param {Number} param.maxDays comes from props.maxDays, not applicable for week or month views
  * @param {import('vue').ReactiveEffect} param.times reactive object
- * @param {Timestamp} param.times.today
- * @param {Timestamp} param.times.now
+ * @param {Timestamp} param.times.today The current date
+ * @param {Timestamp} param.times.now The "now" date
  * @param {import('vue').Ref} param.emittedValue reactive sting that is emitted when changed (YYYY-MM-DD)
  * @param {Function} param.emit Vue emit function
- * @param param.parsedView
- * @param param.direction
  */
 export default function (props, {
   parsedView,
@@ -53,7 +52,7 @@ export default function (props, {
    * A month calendar moves by prev/next month
    * A week calendar moves by prev/next week
    * Other considerations are the 'weekdaySkips'; if a day of the week shoud be displayed (ie: weekends turned off)
-   * @param {Number} amount
+   * @param {Number} amount The amount to move (default 1)
    * @fires 'moved' with current Timestamp
    */
   function move (amount = 1) {
