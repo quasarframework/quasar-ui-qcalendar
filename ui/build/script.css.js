@@ -73,13 +73,14 @@ function generate (src, dest) {
     })
     .then(code => Promise.all([
       generateUMD(dest, code),
+      // eslint-disable-next-line promise/no-nesting
       postCssRtlCompiler.process(code, { from: void 0 })
         .then(code => generateUMD(dest, code.css, '.rtl'))
     ]))
 }
 
 function generateUMD (dest, code, ext = '') {
-  return buildUtils.writeFile(`${dest}${ext}.css`, code, true)
+  return buildUtils.writeFile(`${ dest }${ ext }.css`, code, true)
     .then(code => nano.process(code, { from: void 0 }))
-    .then(code => buildUtils.writeFile(`${dest}${ext}.min.css`, code.css, true))
+    .then(code => buildUtils.writeFile(`${ dest }${ ext }.min.css`, code.css, true))
 }

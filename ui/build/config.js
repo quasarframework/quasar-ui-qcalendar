@@ -5,9 +5,9 @@ module.exports = {
   name,
   version,
   banner:
-    '/*!\n' +
-    ' * ' + name + ' v' + version + '\n' +
-    ' * (c) ' + year + ' ' + author + '\n' +
-    ' * Released under the MIT License.\n' +
-    ' */\n'
+    '/*!\n'
+    + ' * ' + name + ' v' + version + '\n'
+    + ' * (c) ' + year + ' ' + author + '\n'
+    + ' * Released under the MIT License.\n'
+    + ' */\n'
 }
