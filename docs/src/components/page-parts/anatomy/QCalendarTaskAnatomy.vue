@@ -80,17 +80,15 @@
 </template>
 
 <script>
+import { defineComponent, ref, reactive, watch, onMounted, onBeforeMount, computed } from 'vue'
 import {
   today,
   isBetweenDates,
   parsed,
-  padNumber
-} from '@quasar/quasar-ui-qcalendar/src/Timestamp.js'
-import { defineComponent, ref, reactive, watch, onMounted, onBeforeMount, computed } from 'vue'
-import { QCalendarTask } from '@quasar/quasar-ui-qcalendar/src/QCalendarTask.js'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarTask.sass'
+  padNumber,
+  QCalendarTask
+} from '@quasar/quasar-ui-qcalendar'
+import '@quasar/quasar-ui-qcalendar/src/index.sass'
 
 export default defineComponent({
   name: 'QCalendarTaskAnatomy',

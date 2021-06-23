@@ -41,10 +41,8 @@
 </template>
 
 <script>
-import { QCalendarScheduler } from '@quasar/quasar-ui-qcalendar/src/QCalendarScheduler.js'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarScheduler.sass'
+import { QCalendarScheduler } from '@quasar/quasar-ui-qcalendar'
+import '@quasar/quasar-ui-qcalendar/src/index.sass'
 
 export default {
   name: 'ThemeBuilderScheduler',

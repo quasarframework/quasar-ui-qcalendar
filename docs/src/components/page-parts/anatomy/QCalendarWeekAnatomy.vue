@@ -33,10 +33,8 @@
 
 <script>
 import { defineComponent, ref, reactive, watch, onMounted } from 'vue'
-import { QCalendarDay } from '@quasar/quasar-ui-qcalendar/src/QCalendarDay.js'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarDay.sass'
+import { QCalendarDay } from '@quasar/quasar-ui-qcalendar'
+import '@quasar/quasar-ui-qcalendar/src/index.sass'
 
 export default defineComponent({
   name: 'QCalendarWeekAnatomy',

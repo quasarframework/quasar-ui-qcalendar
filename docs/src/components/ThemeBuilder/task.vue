@@ -78,12 +78,10 @@ import {
   today,
   isBetweenDates,
   parsed,
-  padNumber
-} from '@quasar/quasar-ui-qcalendar/src/Timestamp.js'
-import { QCalendarTask } from '@quasar/quasar-ui-qcalendar/src/QCalendarTask.js'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
-import '@quasar/quasar-ui-qcalendar/src/QCalendarTask.sass'
+  padNumber,
+  QCalendarTask
+} from '@quasar/quasar-ui-qcalendar'
+import '@quasar/quasar-ui-qcalendar/src/index.sass'
 
 import { defineComponent } from 'vue'
 
