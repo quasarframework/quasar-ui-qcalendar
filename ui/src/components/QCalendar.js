@@ -27,7 +27,7 @@ export default defineComponent({
   props: {
     mode: {
       type: String,
-      validator: v=> ['day', 'month', 'agenda', 'resource', 'scheduler', 'task'].includes(v),
+      validator: v=> [ 'day', 'month', 'agenda', 'resource', 'scheduler', 'task' ].includes(v),
       default: 'day'
     },
     ...useCommonProps,
