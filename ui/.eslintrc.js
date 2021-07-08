@@ -42,7 +42,6 @@ module.exports = {
     'vue',
     'jest',
     'jsdoc',
-    // 'standard',
     'node',
     'promise',
     'import'

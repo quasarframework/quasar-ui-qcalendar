@@ -18,7 +18,7 @@ module.exports = {
   //   '<rootDir>/src/**/*.js'
   //   // add other paths here if you want them
   // ],
-  coverageReporters: ['json-summary', 'text', 'lcov'],
+  coverageReporters: [ 'json-summary', 'text', 'lcov' ],
   coverageThreshold: {
     global: {
       //  branches: 50,
@@ -31,11 +31,11 @@ module.exports = {
     '<rootDir>/test/jest/__tests__/**/*.spec.js',
     '<rootDir>/test/jest/__tests__/**/*.test.js'
   ],
-  moduleFileExtensions: ['js', 'json'],
+  moduleFileExtensions: [ 'js', 'json' ],
   moduleNameMapper: {
     '^~/(.*)$': '<rootDir>/$1',
-    '^vue$': '<rootDir>/../demo/node_modules/vue/dist/vue.common.js', // this is uncool
-    '^quasar$': '<rootDir>/../demo/node_modules/quasar/dist/quasar.common.js', // this is uncool
+    '^vue$': '<rootDir>/../node_modules/vue/dist/vue.cjs.js', // this is uncool
+    '^quasar$': '<rootDir>/../node_modules/quasar/dist/quasar.cjs.prod.js', // this is uncool
     '^utils/(.*)$': '<rootDir>/src/utils/$1',
     '^test/(.*)$': '<rootDir>/test/$1',
     'package.json': '<rootDir>/package.json'
