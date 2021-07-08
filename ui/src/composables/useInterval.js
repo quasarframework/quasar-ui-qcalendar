@@ -407,17 +407,15 @@ export default function (props, {
   function getTimestampAtEventInterval (e, day, clamp = false, now = undefined) {
     let timestamp = copyTimestamp(day)
     const bounds = (e.currentTarget).getBoundingClientRect()
-    const baseMinutes = parsedStartMinute.value
     const touchEvent = e
     const mouseEvent = e
     const touches = touchEvent.changedTouches || touchEvent.touches
     const clientY = touches && touches[ 0 ] ? touches[ 0 ].clientY : mouseEvent.clientY
     const addIntervals = (clientY - bounds.top) / parsedIntervalHeight.value
     const addMinutes = Math.floor((clamp ? Math.floor(addIntervals) : addIntervals) * parsedIntervalMinutes.value)
-    const minutes = baseMinutes + addMinutes
 
-    if (minutes !== 0) {
-      timestamp = addToDate(timestamp, { minute: minutes })
+    if (addMinutes !== 0) {
+      timestamp = addToDate(timestamp, { minute: addMinutes })
     }
 
     if (now) {
@@ -439,16 +437,22 @@ export default function (props, {
   function getTimestampAtEvent (e, day, clamp = false, now = undefined) {
     const timestamp = copyTimestamp(day)
     const bounds = (e.currentTarget).getBoundingClientRect()
-    const baseMinutes = parsedStartMinute.value
     const touchEvent = e
     const mouseEvent = e
     const touches = touchEvent.changedTouches || touchEvent.touches
     const clientY = touches && touches[ 0 ] ? touches[ 0 ].clientY : mouseEvent.clientY
     const addIntervals = (clientY - bounds.top) / parsedIntervalHeight.value
     const addMinutes = Math.floor((clamp ? Math.floor(addIntervals) : addIntervals) * parsedIntervalMinutes.value)
-    const minutes = baseMinutes + addMinutes
 
-    return updateMinutes(timestamp, minutes, now)
+    if (addMinutes !== 0) {
+      timestamp = addToDate(timestamp, { minute: addMinutes })
+    }
+
+    if (now) {
+      updateRelative(timestamp, now, true)
+    }
+
+    return timestamp
   }
 
   /**
@@ -469,9 +473,16 @@ export default function (props, {
     const clientX = touches && touches[ 0 ] ? touches[ 0 ].clientX : mouseEvent.clientX
     const addIntervals = (clientX - bounds.left) / parsedCellWidth.value
     const addMinutes = Math.floor((clamp ? Math.floor(addIntervals) : addIntervals) * parsedIntervalMinutes.value)
-    const minutes = addMinutes + (day.hour * 60 + day.minute)
 
-    return updateMinutes(timestamp, minutes, now)
+    if (addMinutes !== 0) {
+      timestamp = addToDate(timestamp, { minute: addMinutes })
+    }
+
+    if (now) {
+      updateRelative(timestamp, now, true)
+    }
+
+    return timestamp
   }
 
   /**
