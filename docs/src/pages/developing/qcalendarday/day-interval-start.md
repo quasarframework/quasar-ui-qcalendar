@@ -3,7 +3,7 @@ title: Day - Interval Start
 desc: QCalendarDay - Interval Start
 keys: developing
 related:
-  - /developing/qcalendarday/day-interval-start
+  - /developing/qcalendarday-week/week-interval-start
 ---
 
 <example-viewer
