@@ -191,6 +191,14 @@ export default {
       return minutes / this.parsedIntervalMinutes * this.parsedIntervalWidth
     },
 
+    heightToMinutes (height) {
+      return parseInt(height, 10) * this.parsedIntervalMinutes / this.parsedIntervalHeight
+    },
+
+    widthToMinutes (width) {
+      return parseInt(width, 10) * this.parsedIntervalMinutes / this.parsedCellWidth
+    },
+
     timeStartPos (time, clamp = true) {
       const minutes = parseTime(time)
       if (minutes === false) return false
