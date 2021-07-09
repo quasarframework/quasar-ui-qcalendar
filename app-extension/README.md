@@ -1,5 +1,7 @@
 # Quasar App Extension QCalendar
 
+> If you are looking for QCalendar that works with Vue 3, head over to the [new docs](https://qcalendar.netlify.app/).
+
 The **QCalendar App Extension** allows you to seamlessly add the [QCalendar](../ui) component into your Quasar application. It manages the boot file file and all other configuration for you.
 
 [![npm](https://img.shields.io/npm/v/@quasar/quasar-app-extension-qcalendar.svg?label=@quasar/quasar-app-extension-qcalendar)](https://www.npmjs.com/package/@quasar/quasar-app-extension-qcalendar)

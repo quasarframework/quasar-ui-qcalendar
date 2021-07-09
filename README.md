@@ -1,6 +1,8 @@
 QCalendar (Vue Plugin, UMD and Quasar App Extension)
 ===
 
+> If you are looking for QCalendar that works with Vue 3, head over to the [new docs](https://qcalendar.netlify.app/).
+
 ![@quasar/quasar-ui-qcalendar](https://img.shields.io/npm/v/@quasar/quasar-ui-qcalendar.svg?label=@quasar/quasar-ui-qcalendar)
 ![@quasar/quasar-app-extension-qcalendar](https://img.shields.io/npm/v/@quasar/quasar-app-extension-qcalendar.svg?label=@quasar/quasar-app-extension-qcalendar)
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/quasarframework/quasar-ui-qcalendar.svg)]()

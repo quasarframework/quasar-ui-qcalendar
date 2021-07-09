@@ -1,6 +1,8 @@
 QCalendar
 ===
 
+> If you are looking for QCalendar that works with Vue 3, head over to the [new docs](https://qcalendar.netlify.app/).
+
 [![npm](https://img.shields.io/npm/v/@quasar/quasar-ui-qcalendar.svg?label=@quasar/quasar-ui-qcalendar)](https://www.npmjs.com/package/@quasar/quasar-ui-qcalendar)
 [![npm](https://img.shields.io/npm/dt/@quasar/quasar-ui-qcalendar.svg)](https://www.npmjs.com/package/@quasar/quasar-ui-qcalendar)
 

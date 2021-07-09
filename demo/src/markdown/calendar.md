@@ -1,6 +1,8 @@
 QCalendar
 ===
 
+> If you are looking for QCalendar that works with Vue 3, head over to the [new docs](https://qcalendar.netlify.app/).
+
 ## Important Release Notes
 
 **v3.2.0**: New property for interval-based calendars: `time-clicks-clamped`. What this does, is instead of returning a timestamp with the exact time of the click position, it returns the timestamp of the interval. If normally, your timestamp would have a time of **13:20**, this property makes it return **13:00**. This is also based on your settings of `interval-minutes`. If your `interval-minutes` is set to **15**, then the same click above would return a timestamp with time set to **13:15**.
