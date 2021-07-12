@@ -41,13 +41,10 @@
                   :style="badgeStyles(event, 'header')"
                   style="width: 100%; cursor: pointer; height: 12px; font-size: 10px; margin: 1px;"
                 >
-                  <abbr
-                    :title="event.details"
-                    class="tooltip"
-                    style="width: 100%"
-                  >
-                    <span class="title q-calendar__ellipsis">{{ event.title }}</span>
-                  </abbr>
+                  <span class="title q-calendar__ellipsis">
+                    {{ event.title }}
+                    <q-tooltip>{{ event.details }}</q-tooltip>
+                  </span>
                 </q-badge>
                 <q-badge
                   v-else
@@ -56,10 +53,7 @@
                   style="margin: 1px; width: 10px; max-width: 10px; height: 10px; max-height: 10px"
                   @click="scrollToEvent(event)"
                 >
-                  <abbr
-                    :title="event.time + ' - ' + event.details"
-                    class="title tooltip"
-                  />
+                  <q-tooltip>{{ event.time + ' - ' + event.details }}</q-tooltip>
                 </q-badge>
               </template>
             </div>
@@ -76,12 +70,10 @@
                 :class="badgeClasses(event, 'body')"
                 :style="badgeStyles(event, 'body', timeStartPos, timeDurationHeight)"
               >
-                <abbr
-                  :title="event.time + ' - ' + event.details"
-                  class="tooltip"
-                >
-                  <span class="title q-calendar__ellipsis">{{ event.title }}</span>
-                </abbr>
+                <span class="title q-calendar__ellipsis">
+                  {{ event.title }}
+                  <q-tooltip>{{ event.details }}</q-tooltip>
+                </span>
               </div>
             </template>
           </template>
@@ -387,7 +379,4 @@ export default defineComponent({
 
 .rounded-border
   border-radius: 2px
-
-abbr.tooltip
-  text-decoration: none
 </style>

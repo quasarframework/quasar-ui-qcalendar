@@ -36,12 +36,10 @@
                 :style="badgeStyles(event, 'day')"
                 class="my-event"
               >
-                <abbr
-                  :title="event.details"
-                  class="tooltip"
-                >
-                  <span class="title q-calendar__ellipsis">{{ event.title + (event.time ? ' - ' + event.time : '') }}</span>
-                </abbr>
+                <div class="title q-calendar__ellipsis">
+                  {{ event.title + (event.time ? ' - ' + event.time : '') }}
+                  <q-tooltip>{{ event.details }}</q-tooltip>
+                </div>
               </div>
             </template>
           </template>
@@ -301,8 +299,4 @@ export default defineComponent({
 
 .rounded-border
   border-radius: 2px
-
-abbr.tooltip
-  text-decoration: none
-
 </style>

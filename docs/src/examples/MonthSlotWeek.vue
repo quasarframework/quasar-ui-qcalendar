@@ -35,13 +35,10 @@
                 :class="badgeClasses(computedEvent)"
                 :style="badgeStyles(computedEvent, week.length)"
               >
-                <abbr
-                  v-if="computedEvent.event && computedEvent.event.details"
-                  :title="computedEvent.event.details"
-                  class="tooltip"
-                >
-                  <span class="title q-calendar__ellipsis">{{ computedEvent.event.title + (computedEvent.event.time ? ' - ' + computedEvent.event.time : '') }}</span>
-                </abbr>
+                <div v-if="computedEvent.event && computedEvent.event.details" class="title q-calendar__ellipsis">
+                  {{ computedEvent.event.title + (computedEvent.event.time ? ' - ' + computedEvent.event.time : '') }}
+                  <q-tooltip>{{ computedEvent.event.details }}</q-tooltip>
+                </div>
               </div>
             </template>
           </template>
@@ -267,7 +264,8 @@ export default defineComponent({
           'my-event': true,
           'text-white': true,
           [ `bg-${ computedEvent.event.bgcolor }` ]: true,
-          'rounded-border': true
+          'rounded-border': true,
+          'q-calendar__ellipsis': true
         }
       }
       return {
@@ -377,8 +375,4 @@ export default defineComponent({
 
 .rounded-border
   border-radius: 2px
-
-abbr.tooltip
-  text-decoration: none
-
 </style>
