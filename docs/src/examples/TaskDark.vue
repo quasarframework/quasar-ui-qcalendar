@@ -83,7 +83,7 @@ import {
   isBetweenDates,
   parsed,
   padNumber
-} from '@quasar/quasar-ui-qcalendar'
+} from '@quasar/quasar-ui-qcalendar/src/index.js'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTask.sass'

@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { QCalendarMonth, today } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarMonth, today } from '@quasar/quasar-ui-qcalendar/src/index.js'
 import '@quasar/quasar-ui-qcalendar/src/index.sass'
 
 import { defineComponent } from 'vue'

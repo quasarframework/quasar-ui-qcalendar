@@ -115,7 +115,7 @@
 </template>
 
 <script>
-import { QCalendarDay } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarDay } from '@quasar/quasar-ui-qcalendar/src/index.js'
 import '@quasar/quasar-ui-qcalendar/src/index.sass'
 
 import {

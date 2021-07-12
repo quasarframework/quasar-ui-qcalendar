@@ -66,7 +66,7 @@
 
 <script>
 import { defineComponent, ref, reactive, watch, onMounted } from 'vue'
-import { QCalendarAgenda } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarAgenda } from '@quasar/quasar-ui-qcalendar/src/index.js'
 import '@quasar/quasar-ui-qcalendar/src/index.sass'
 
 export default defineComponent({

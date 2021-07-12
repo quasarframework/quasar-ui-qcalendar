@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar/src/QCalendarMonth.js'
 import '@quasar/quasar-ui-qcalendar/src/index.sass'
 
 import {

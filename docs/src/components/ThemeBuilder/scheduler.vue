@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { QCalendarScheduler } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarScheduler } from '@quasar/quasar-ui-qcalendar/src/index.js'
 import '@quasar/quasar-ui-qcalendar/src/index.sass'
 
 export default {

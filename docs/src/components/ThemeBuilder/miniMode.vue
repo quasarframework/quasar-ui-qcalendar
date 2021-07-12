@@ -85,7 +85,7 @@
 import {
   QCalendarMonth,
   getDayIdentifier
-} from '@quasar/quasar-ui-qcalendar'
+} from '@quasar/quasar-ui-qcalendar/src/index.js'
 import '@quasar/quasar-ui-qcalendar/src/index.sass'
 
 function leftClick (e) {

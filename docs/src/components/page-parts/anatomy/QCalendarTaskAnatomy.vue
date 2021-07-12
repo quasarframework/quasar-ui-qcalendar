@@ -87,7 +87,7 @@ import {
   parsed,
   padNumber,
   QCalendarTask
-} from '@quasar/quasar-ui-qcalendar'
+} from '@quasar/quasar-ui-qcalendar/src/index.js'
 import '@quasar/quasar-ui-qcalendar/src/index.sass'
 
 export default defineComponent({

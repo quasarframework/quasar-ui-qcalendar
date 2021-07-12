@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import { QCalendarDay, today } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarDay, today } from '@quasar/quasar-ui-qcalendar/src/index.js'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarDay.sass'

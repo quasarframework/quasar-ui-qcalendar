@@ -34,7 +34,7 @@
 
 <script>
 import { defineComponent, ref, reactive, watch, onMounted } from 'vue'
-import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar/src/index.js'
 import '@quasar/quasar-ui-qcalendar/src/index.sass'
 
 export default defineComponent({
