@@ -121,6 +121,8 @@ export default defineComponent({
       timeStartPosX,
       timeDurationWidth,
       timeDurationHeight,
+      heightToMinutes,
+      widthToMinutes,
       scrollToTime,
       scrollToTimeX
     })
