@@ -83,7 +83,7 @@
     "open": "^8.2.1",
     "postcss": "^8.3.5",
     "promise": "^8.1.0",
-    "quasar": "^1.15.22",
+    "quasar": "^2.0.3",
     "quasar-json-api": "^1.2.6",
     "rimraf": "^3.0.2",
     "rollup": "^2.53.0",
