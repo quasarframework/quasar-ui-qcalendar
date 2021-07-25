@@ -68,8 +68,25 @@ p
   margin-top: 8px !important
   margin-bottom: 8px !important
 
-body
+html, body, #q-app
   font-family: "Poppins", "Roboto", "-apple-system", "Helvetica Neue", Helvetica, Arial, sans-serif !important
+  font-size: 14px
+
+@media (max-width: $breakpoint-xs-max)
+  h2
+    font-size: 2.75rem !important
+@media (min-width: $breakpoint-sm-min) and (max-width: $breakpoint-sm-max)
+  h2
+    font-size: 2.85rem !important
+@media (min-width: $breakpoint-md-min) and (max-width: $breakpoint-md-max)
+  h2
+    font-size: 3rem !important
+@media (min-width: $breakpoint-lg-min) and (max-width: $breakpoint-lg-max)
+  h2
+    font-size: 3.25rem !important
+@media (min-width: $breakpoint-xl-min)
+  h2
+    font-size: 3.75rem !important
 
 @supports (backdrop-filter: none)
   .glass
