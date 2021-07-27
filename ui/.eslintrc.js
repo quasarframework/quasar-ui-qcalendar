@@ -4,17 +4,16 @@ module.exports = {
   // Remove this if you have an higher level ESLint config file (it usually happens into a monorepos)
   root: true,
 
-  parser: '@babel/eslint-parser',
   parserOptions: {
-    ecmaVersion: 2019, // Allows for the parsing of modern ECMAScript features
+    parser: '@babel/eslint-parser',
+    ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
     sourceType: 'module', // Allows for the use of imports
     requireConfigFile: false
   },
 
   env: {
     browser: true,
-    es6: true,
-    'jest/globals': true
+    es6: true
   },
 
   // Rules order is important, please avoid shuffling them
@@ -28,11 +27,6 @@ module.exports = {
     'plugin:vue/vue3-essential', // Priority A: Essential (Error Prevention)
     // 'plugin:vue/vue3-strongly-recommended', // Priority B: Strongly Recommended (Improving Readability)
     // 'plugin:vue/vue3-recommended', // Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead)
-
-    // 'plugin:quasar/standard',
-
-    // 'standard',
-    // 'plugin:jest/recommended',
     'plugin:promise/recommended'
   ],
 
@@ -48,16 +42,18 @@ module.exports = {
   ],
 
   globals: {
-    ga: true, // Google Analytics
-    cordova: true,
-    __statics: true,
-    __QUASAR_SSR__: true,
-    __QUASAR_SSR_SERVER__: true,
-    __QUASAR_SSR_CLIENT__: true,
-    __QUASAR_SSR_PWA__: true,
-    process: true,
-    Capacitor: true,
-    chrome: true
+    $q: 'readonly',
+    $router: 'readonly',
+    ga: 'readonly', // Google Analytics
+    cordova: 'readonly',
+    __statics: 'readonly',
+    __QUASAR_SSR__: 'readonly',
+    __QUASAR_SSR_SERVER__: 'readonly',
+    __QUASAR_SSR_CLIENT__: 'readonly',
+    __QUASAR_SSR_PWA__: 'readonly',
+    process: 'readonly',
+    Capacitor: 'readonly',
+    chrome: 'readonly',
   },
 
   // add your custom rules here
@@ -121,7 +117,8 @@ module.exports = {
     'jest/prefer-to-have-length': 'warn',
     'jest/valid-expect': 'error',
 
-    // allow console.log during development only
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
+    // allow console.log during production for demo purposes
+    // 'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
+    'no-console': 'off'
   }
 }

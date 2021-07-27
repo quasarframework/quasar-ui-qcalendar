@@ -36,18 +36,18 @@ module.exports = {
   ],
 
   globals: {
-    $q: true,
-    $router: true,
-    ga: true, // Google Analytics
-    cordova: true,
-    __statics: true,
-    __QUASAR_SSR__: true,
-    __QUASAR_SSR_SERVER__: true,
-    __QUASAR_SSR_CLIENT__: true,
-    __QUASAR_SSR_PWA__: true,
-    process: true,
-    Capacitor: true,
-    chrome: true
+    $q: 'readonly',
+    $router: 'readonly',
+    ga: 'readonly', // Google Analytics
+    cordova: 'readonly',
+    __statics: 'readonly',
+    __QUASAR_SSR__: 'readonly',
+    __QUASAR_SSR_SERVER__: 'readonly',
+    __QUASAR_SSR_CLIENT__: 'readonly',
+    __QUASAR_SSR_PWA__: 'readonly',
+    process: 'readonly',
+    Capacitor: 'readonly',
+    chrome: 'readonly',
   },
 
   // add your custom rules here
