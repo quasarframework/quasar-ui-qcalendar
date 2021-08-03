@@ -18,7 +18,7 @@
     "core-js": "^3.8.3"
   },
   "devDependencies": {
-    "@quasar/app": "^2.2.9",
+    "@quasar/app": "^3.0.4",
     "@quasar/quasar-app-extension-qmarkdown": "^1.4.3",
     "@vue/eslint-config-standard": "^6.0.0",
     "babel-eslint": "^10.1.0",
