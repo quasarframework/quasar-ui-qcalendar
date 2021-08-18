@@ -14,12 +14,22 @@
     "dev:electron": "quasar dev -m electron"
   },
   "dependencies": {
-    "@quasar/extras": "^1.9.10",
-    "core-js": "^3.6.5"
+    "@quasar/extras": "^1.9.16",
+    "core-js": "^3.8.3"
   },
   "devDependencies": {
-    "@quasar/app": "^2.1.6",
-    "@quasar/quasar-app-extension-qmarkdown": "^1.0.35"
+    "@quasar/app": "^2.2.9",
+    "@quasar/quasar-app-extension-qmarkdown": "^1.4.3",
+    "@vue/eslint-config-standard": "^6.0.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.28.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-quasar": "^1.0.0",
+    "eslint-plugin-vue": "^7.5.0",
+    "eslint-webpack-plugin": "^2.5.0"
   },
   "browserslist": [
     "last 10 Chrome versions",

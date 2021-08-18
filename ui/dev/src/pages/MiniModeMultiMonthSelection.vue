@@ -14,7 +14,6 @@
         short-weekday-label
         animated
         :selected-start-end-dates="startEndDates"
-        :day-class="classDay"
         @mousedown:day2="onMouseDownDay"
         @mouseup:day2="onMouseUpDay"
         @mousemove:day2="onMouseMoveDay"
@@ -30,7 +29,6 @@
         short-weekday-label
         animated
         :selected-start-end-dates="startEndDates"
-        :day-class="classDay"
         @mousedown:day2="onMouseDownDay"
         @mouseup:day2="onMouseUpDay"
         @mousemove:day2="onMouseMoveDay"
@@ -43,15 +41,6 @@
 <script>
 // normally you would not import "all" of QCalendar, but is needed for this example to work with UMD (codepen)
 import QCalendar from 'ui' // ui is aliased from '@quasar/quasar-ui-qcalendar'
-
-const CURRENT_MONTH = new Date()
-
-function getCurrentMonth (month) {
-  const newDay = new Date(CURRENT_MONTH)
-  newDay.setMonth(month)
-  const tm = QCalendar.parseDate(newDay)
-  return tm.date
-}
 
 function leftClick (e) {
   return e.button === 0
@@ -70,8 +59,10 @@ export default {
   },
 
   beforeMount () {
-    this.selectedDate1 = getCurrentMonth(CURRENT_MONTH.getMonth())
-    this.selectedDate2 = getCurrentMonth(CURRENT_MONTH.getMonth() + 1)
+    this.selectedDate1 = QCalendar.today()
+    let tm = QCalendar.parseTimestamp(this.selectedDate1)
+    tm = QCalendar.addToDate(tm, { month: 1 })
+    this.selectedDate2 = tm.date
   },
 
   computed: {
@@ -123,9 +114,9 @@ export default {
     getBetween (timestamp) {
       const nowIdentifier = QCalendar.getDayIdentifier(timestamp)
       return {
-        'q-selected-day-first': this.lowIdentifier === nowIdentifier,
-        'q-selected-day': this.lowIdentifier <= nowIdentifier && this.highIdentifier >= nowIdentifier,
-        'q-selected-day-last': this.highIdentifier === nowIdentifier
+        'q-range-first': this.lowIdentifier === nowIdentifier,
+        'q-range': this.lowIdentifier <= nowIdentifier && this.highIdentifier >= nowIdentifier,
+        'q-range-last': this.highIdentifier === nowIdentifier
       }
     },
 
@@ -155,7 +146,7 @@ export default {
     },
 
     onMouseMoveDay ({ scope, event }) {
-      if (this.mouseDown === true) {
+      if (this.mouseDown === true && scope.outside !== true) {
         this.otherTimestamp = scope.timestamp
       }
     }

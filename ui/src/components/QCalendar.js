@@ -19,7 +19,7 @@ import {
   getStartOfMonth,
   getEndOfMonth,
   getDayIdentifier
-} from '../utils/timestamp.js'
+} from '../utils/Timestamp.js'
 
 // Calendars
 import QCalendarMonthly from './QCalendarMonthly'
@@ -158,6 +158,11 @@ export default {
           break
       }
       return { component, start, end, maxDays }
+    },
+
+    __isMiniMode () {
+      return this.miniMode === true ||
+        (this.miniMode === 'auto' && this.breakpoint !== void 0 && this.$q.screen.lt[this.breakpoint])
     }
   },
 
@@ -331,6 +336,26 @@ export default {
       }
     },
 
+    heightToMinutes (height) {
+      const c = this.$children[0]
+      if (c && c.heightToMinutes) {
+        return c.heightToMinutes(height)
+      }
+      else {
+        return -1
+      }
+    },
+
+    widthToMinutes (width) {
+      const c = this.$children[0]
+      if (c && c.widthToMinutes) {
+        return c.widthToMinutes(width)
+      }
+      else {
+        return -1
+      }
+    },
+
     scrollToTime (time) {
       const c = this.$children[0]
       if (c && c.scrollToTime) {
@@ -362,7 +387,7 @@ export default {
     this.keyValue = getDayIdentifier(start)
 
     const data = {
-      staticClass: 'q-calendar' + (this.dark === true ? ' q-calendar--dark' : ''),
+      staticClass: (this.__isMiniMode === true ? 'q-calendar-mini' : ''),
       class: {
         'q-calendar__bordered': this.bordered
       },
@@ -376,20 +401,6 @@ export default {
       },
       on: {
         ...this.$listeners,
-        // DEPRECATED in v2.4.0
-        'click:date': (timestamp) => {
-          if (this.$listeners.input !== undefined) {
-            if (timestamp.date !== undefined && this.emittedValue !== timestamp.date) {
-              this.emittedValue = timestamp.date
-            }
-          }
-          // Because we highjack this event for input, pass it on to parent
-          if (this.$listeners['click:date']) {
-            /* eslint-disable-next-line */
-            this.$emit('click:date', timestamp)
-          }
-        },
-        // ---
         'click:date2': ({ scope, event }) => {
           if (this.$listeners.input !== undefined) {
             if (scope.timestamp.date !== undefined && this.emittedValue !== scope.timestamp.date) {
@@ -406,6 +417,13 @@ export default {
       scopedSlots: this.$scopedSlots
     }
 
-    return this.__renderComponent(h, component, data)
+    return h('div', {
+      class: {
+        'q-calendar--dark': this.dark === true,
+        'q-calendar': true
+      }
+    }, [
+      this.__renderComponent(h, component, data)
+    ])
   }
 }

@@ -98,24 +98,7 @@ export default {
       const width = this.computedWidth
       let dragOver
 
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-      //   if (day.past === true) {
-      //     color = 'colorHeaderPast'
-      //     backgroundColor = 'backgroundHeaderPast'
-      //   } else if (day.current === true) {
-      //     color = 'colorHeaderCurrent'
-      //     backgroundColor = 'backgroundHeaderCurrent'
-      //   } else if (day.future === true) {
-      //     color = 'colorHeaderFuture'
-      //     backgroundColor = 'backgroundHeaderFuture'
-      //   }
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
-
-      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
+      return h('div', {
         key: (this.columnOptionsId !== undefined ? column[this.columnOptionsId] : undefined),
         staticClass: 'q-calendar-daily__head-day',
         class: {
@@ -137,17 +120,10 @@ export default {
             }
           }
         },
-        // :column:head DEPRECATED in v2.4.0
-        on: this.getDefaultMouseEventHandlers2(':column:head', ':column:header2', (event, eventName) => {
-          if (eventName.indexOf('2') > -1) {
-            return { scope: { column, index: idx }, event }
-          }
-          else {
-            return { scope, event }
-          }
+        on: this.getDefaultMouseEventHandlers(':column:header2', (event, eventName) => {
+          return { scope: { column, index: idx }, event }
         })
-        // ---
-      }), [
+      }, [
         this.noDefaultHeaderText !== true && this.__renderHeadColumn(h, column),
         slot && slot(scope)
       ])
@@ -156,28 +132,10 @@ export default {
     __renderHeadColumn (h, column) {
       const slot = this.$scopedSlots['column-header-label']
       const scope = column
-      // const colorCurrent = day.current === true ? this.color : undefined
 
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-      //   if (day.past === true) {
-      //     color = 'colorDayLabelPast'
-      //     backgroundColor = 'backgroundDayLabelPast'
-      //   } else if (day.current === true) {
-      //     color = 'colorDayLabelCurrent'
-      //     backgroundColor = 'backgroundDayLabelCurrent'
-      //   } else if (day.future === true) {
-      //     color = 'colorDayLabelFuture'
-      //     backgroundColor = 'backgroundDayLabelFuture'
-      //   }
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
-
-      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
+      return h('div', {
         staticClass: 'ellipsis q-calendar-daily__head-weekday'
-      }), [
+      }, [
         slot && slot(scope),
         !slot && this.__renderHeadColumnLabel(h, (this.columnOptionsLabel !== undefined ? column[this.columnOptionsLabel] : column.label))
       ])
@@ -212,24 +170,7 @@ export default {
       const width = this.computedWidth
       let dragOver
 
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-      //   if (day.past === true) {
-      //     color = 'colorBodyPast'
-      //     backgroundColor = 'backgroundBodyPast'
-      //   } else if (day.current === true) {
-      //     color = 'colorBodyCurrent'
-      //     backgroundColor = 'backgroundBodyCurrent'
-      //   } else if (day.future === true) {
-      //     color = 'colorBodyFuture'
-      //     backgroundColor = 'backgroundBodyFuture'
-      //   }
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
-
-      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
+      return h('div', {
         key: (this.columnOptionsId !== undefined ? column[this.columnOptionsId] : undefined),
         staticClass: 'q-calendar-daily__day',
         class: {
@@ -251,8 +192,7 @@ export default {
             }
           }
         },
-        // :column DEPRECATED in v2.4.0
-        on: this.getDefaultMouseEventHandlers2(':column', ':column2', (event, eventName) => {
+        on: this.getDefaultMouseEventHandlers(':column2', (event, eventName) => {
           if (eventName.indexOf('2') > -1) {
             return { scope: scope, event }
           }
@@ -260,8 +200,7 @@ export default {
             return { scope, event }
           }
         })
-        // ---
-      }), [
+      }, [
         slot && slot(scope)
       ])
     },
@@ -272,26 +211,7 @@ export default {
       const width = this.computedWidth
       let dragOver
 
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-        if (day.past === true) {
-          color = 'colorBodyPast'
-          backgroundColor = 'backgroundBodyPast'
-        }
-        else if (day.current === true) {
-          color = 'colorBodyCurrent'
-          backgroundColor = 'backgroundBodyCurrent'
-        }
-        else if (day.future === true) {
-          color = 'colorBodyFuture'
-          backgroundColor = 'backgroundBodyFuture'
-        }
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
-
-      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
+      return h('div', {
         key: day.date + (idx !== undefined ? ':' + idx : ''),
         staticClass: 'q-calendar-daily__day',
         class: {
@@ -313,19 +233,12 @@ export default {
             }
           }
         },
-        // :time DEPRECATED in v2.4.0
-        on: this.getDefaultMouseEventHandlers2(':time', ':time2', (event, eventName) => {
-          const scope = this.getScopeForSlot(this.getTimestampAtEvent(event, day), idx)
-          if (eventName.indexOf('2') > -1) {
-            scope.index = idx
-            return { scope, event }
-          }
-          else {
-            return { scope, event }
-          }
+        on: this.getDefaultMouseEventHandlers(':time2', (event, eventName) => {
+          const scope = this.getScopeForSlot(this.getTimestampAtEvent(event, day, this.timeClicksClamped), idx)
+          scope.index = idx
+          return { scope, event }
         })
-        // ---
-      }), [
+      }, [
         slot && slot(scope)
       ])
     }
@@ -333,8 +246,7 @@ export default {
 
   render (h) {
     return h('div', {
-      staticClass: 'q-calendar-agenda',
-      class: this.classes
+      class: 'q-calendar-agenda'
     }, [
       !this.hideHeader && this.__renderHead(h),
       this.__renderBody(h)

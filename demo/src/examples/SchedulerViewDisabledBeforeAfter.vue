@@ -1,13 +1,22 @@
 <template>
   <div style="max-width: 800px; width: 100%;">
+    <div class="row justify-center items-center">
+      <q-btn flat dense label="Prev" @click="calendarPrev" />
+      <q-separator vertical />
+      <q-btn flat dense label="Next" @click="calendarNext" />
+    </div>
+    <q-separator />
     <q-calendar
+    ref="calendar"
       v-model="selectedDate"
       view="week-scheduler"
       :resources="resources"
       :disabled-before="disabledBefore"
       :disabled-after="disabledAfter"
-      :resource-style="modifiedStyle"
       locale="en-us"
+      animated
+      transition-prev="slide-right"
+      transition-next="slide-left"
       style="height: 400px;"
     />
   </div>
@@ -29,7 +38,9 @@ function getCurrentDay (day) {
 export default {
   data () {
     return {
-      selectedDate: '2019-04-01',
+      // set to today's date
+      selectedDate: getCurrentDay(CURRENT_DAY.getDate()),
+      today: getCurrentDay(CURRENT_DAY.getDate()),
       resources: [
         { label: 'John' },
         { label: 'Mary' },
@@ -41,16 +52,12 @@ export default {
       ]
     }
   },
-  beforeMount () {
-    // set to today's date
-    this.selectedDate = getCurrentDay(CURRENT_DAY.getDate())
-  },
   computed: {
     disabledBefore () {
       // find the monday of this week
-      if (this.selectedDate) {
+      if (this.today) {
         const monday = 1 // day of week (ts.weekday)
-        let ts = QCalendar.parseTimestamp(this.selectedDate)
+        let ts = QCalendar.parseTimestamp(this.today)
         ts = QCalendar.addToDate(ts, { day: (ts.weekday > monday ? -(ts.weekday - monday) : (monday - ts.weekday)) })
         return ts.date
       }
@@ -59,9 +66,9 @@ export default {
 
     disabledAfter () {
       // find the 1st day of the next month
-      if (this.selectedDate) {
+      if (this.today) {
         const friday = 5 // day of week (ts.weekday)
-        let ts = QCalendar.parseTimestamp(this.selectedDate)
+        let ts = QCalendar.parseTimestamp(this.today)
         // get days in month
         ts = QCalendar.addToDate(ts, { day: (ts.weekday > friday ? -(ts.weekday - friday) : (friday - ts.weekday)) })
         return ts.date
@@ -70,14 +77,11 @@ export default {
     }
   },
   methods: {
-    modifiedStyle (scope) {
-      if (scope.timestamp.disabled === true) {
-        return {
-          backgroundColor: '#ffcb9c!important',
-          cursor: 'not-allowed'
-        }
-      }
-      return {}
+    calendarNext () {
+      this.$refs.calendar.next()
+    },
+    calendarPrev () {
+      this.$refs.calendar.prev()
     }
   }
 }

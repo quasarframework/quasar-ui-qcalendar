@@ -32,6 +32,7 @@ import {
   parseDate,
   getDayIdentifier,
   getTimeIdentifier,
+  getDayTimeIdentifier,
   diffTimestamp,
   updateRelative,
   updateMinutes,
@@ -71,7 +72,7 @@ import {
   compareDate,
   compareTime,
   compareDateTime
-} from './utils/timestamp.js'
+} from './utils/Timestamp.js'
 
 import {
   convertToUnit,
@@ -113,6 +114,7 @@ export {
   parseDate,
   getDayIdentifier,
   getTimeIdentifier,
+  getDayTimeIdentifier,
   diffTimestamp,
   updateRelative,
   updateMinutes,
@@ -192,6 +194,7 @@ export default {
   parseDate,
   getDayIdentifier,
   getTimeIdentifier,
+  getDayTimeIdentifier,
   diffTimestamp,
   updateRelative,
   updateMinutes,

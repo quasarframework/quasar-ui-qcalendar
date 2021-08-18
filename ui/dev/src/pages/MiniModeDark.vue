@@ -1,5 +1,5 @@
 <template>
-  <div class="row justify-center q-pa-md" style="max-width: 800px; width: 100%; overflow: hidden;">
+  <div class="row justify-center q-pa-md" style="max-width: 800px; width: 100%;background: #121212;">
     <q-calendar
       ref="calendar"
       v-model="selectedDate"

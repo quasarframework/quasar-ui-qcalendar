@@ -1,5 +1,5 @@
 // eslint-disable-next-line node/no-missing-require
-const timestamp = require('utils/timestamp.js')
+const timestamp = require('utils/Timestamp.js')
 
 describe('[TIMESTAMP] updateRelative', () => {
   it('updateRelative 1 day', async () => {

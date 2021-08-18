@@ -6,18 +6,16 @@
       <q-btn flat label="Next" @click="calendarNext" />
     </div>
     <q-separator />
-    <div style="overflow: hidden">
-      <q-calendar
-        ref="calendar"
-        v-model="selectedDate"
-        view="day"
-        locale="en-us"
-        animated
-        transition-prev="slide-right"
-        transition-next="slide-left"
-        style="height: 400px;"
-      />
-    </div>
+    <q-calendar
+      ref="calendar"
+      v-model="selectedDate"
+      view="day"
+      locale="en-us"
+      animated
+      transition-prev="slide-right"
+      transition-next="slide-left"
+      style="height: 400px;"
+    />
   </div>
 </template>
 

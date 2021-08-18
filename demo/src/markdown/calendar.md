@@ -1,7 +1,34 @@
 QCalendar
 ===
 
+> If you are looking for QCalendar that works with Vue 3, head over to the [new docs](https://qcalendar.netlify.app/).
+
 ## Important Release Notes
+
+**v3.2.0**: New property for interval-based calendars: `time-clicks-clamped`. What this does, is instead of returning a timestamp with the exact time of the click position, it returns the timestamp of the interval. If normally, your timestamp would have a time of **13:20**, this property makes it return **13:00**. This is also based on your settings of `interval-minutes`. If your `interval-minutes` is set to **15**, then the same click above would return a timestamp with time set to **13:15**.
+
+**Day** and **Week** calendars now have the ability to toggle selected intervals or a range of selected intervals (even across multiple days) with properties `selected-dates` and `selected-start-end-dates`. These properties not only need the date (like the month view uses), but also the time (use the Timestamp exported method `getDateTime`). See the Week examples to learn how to do this.
+
+**Timestamp** has a new exported method: `getDateTimeIdentifier` which is a convenience method that combines `getDayIdentifier` and `getTimeIdentifier`.
+
+You can find out more information [here](https://github.com/quasarframework/quasar-ui-qcalendar/releases/tag/v3.2.0).
+
+**v3.0.0**: As QCalendar strives to be the most exstensible calendar available, to be consistent with this ideology, we had to make a LOT of changes.
+
+Among other updates, several things have become "native" for QCalendar:
+1. The largest overhaul was introducing css vars to allow users the ability to customize QCalendar
+2. QCalendar was compared to dozens of other calendars and the look was optimized to be more modern
+3. The original theming has been removed. The css vars are 25% faster than the previous theming code
+4. You no longer need to provide a `.q-active-date` class of your own. You can now change the active date colors via css vars
+5. You no longer need to hook into the styles properties (ie: interval-style) to change the way disabled days look. You can now change the disable date colors via css vars
+6. 'activeDate' is now included in a lot of the scoped slots and events
+7. On interval-based calendars, when using the property "interval-minutes", those parts of the calendar are now called "interval sections" and can be changed via css vars. The default is to now have a "dashed" look, while at the main interval time, the lines are solid. Again, all changeable via css vars
+8. You no longer have to provide `.q-range-first`, `.q-range-last` and `.q-range` classes via `day-class` property for range selection. It's all built-in now.
+9. All deprecated slots and events were removed
+
+Also, check out the new [Theme Builder](https://quasarframework.github.io/quasar-ui-qcalendar/theme-builder) in the docs.
+
+You can find out more information [here](https://github.com/quasarframework/quasar-ui-qcalendar/releases/tag/v3.0.0).
 
 **v2.4.0**: New slots and events added. Current event system is deprecated, but still available until the next major version is released. To see the deprecated events in the **QCalendar API** (at bottom of the page), select the hamburger menu, then select **Show deprecated**. You can find out more information [here](https://github.com/quasarframework/quasar-ui-qcalendar/releases/tag/v2.4.0).
 
@@ -30,8 +57,8 @@ This is the true power of QCalendar.
 - Resource view (optional hierarchical trees)
 - Agenda view (with optional Planner modes)
 - Month view mini-mode
-- Month view multi-day selection (separate and contiguous)
-- Month view multi-month/multi-day selection when combining two or more calendars
+- Month view multi-day selection (toggle and range)
+- Month view multi-month/multi-day range selection when combining two or more calendars
 - Optional drag and drop support (including mobile)
 - Automatic localization / internationalization
 - Responsive flex grid layout
@@ -39,9 +66,10 @@ This is the true power of QCalendar.
 - User events support (date, day, interval, time, resource, etc)
 - Define any day as beginning of week
 - Show only certain days of the week (good for work week days)
+- Disable days or week days
 - Workweek number support
 - Day-of-the-year support
-- Easy to theme using CSS overrides or using JSON theme object (see Themes below)
+- Easy to theme using CSS vars and [Theme Builder](https://quasarframework.github.io/quasar-ui-qcalendar/theme-builder)
 - Easy to customize with Vue slots
 - Support for Dark mode
 - Rich support of date functions that are also exported for use in your own apps
@@ -50,6 +78,10 @@ This is the true power of QCalendar.
 - An event management system. However, QCalendar supports everything you need to create an event/reminder management system using slots (check out the interactive demo).
 - An interactive navigation provider (next, previous, today). However, you can easily do this in devland with QCalendar's methods (see examples).
 - Only the Gregorian calendar is supported.
+
+::: warning
+QCalendar now uses css var since `v3.0.0`. IE11 does not use css vars, so essentially QCalendar no longer works with IE11. However, there is hope. If you are interested in IE11 support, you can read [this](https://docs.microsoft.com/en-us/deployedge/edge-learnmore-neededge).
+:::
 
 # Installation Types
 
@@ -182,7 +214,7 @@ Can be found [here](https://github.com/quasarframework/quasar-ui-qcalendar/tree/
 
 In order to get the best potential from QCalendar it is important to understand all aspects which will be described below.
 
-First and foremost, the date format used with the v-model, is `YYYY-MM-DD`. This is to avoid confusion with positioning of the day and month in other date formats as well as date separator. All incoming and outgoing dates will use this format.
+First and foremost, the date format used with the v-model, is `YYYY-MM-DD` (8601-1 format). This is to avoid confusion with positioning of the day and month in other date formats as well as date separator. All incoming and outgoing dates will use this format.
 
 The default locale of QCalendar is **en-us**. This can easily be changed via the `locale` property. Any area of QCalendar that displays text and numbers is locale-aware via the browser's Internationalization (Intl) API.
 
@@ -203,6 +235,10 @@ Not only all these, but the **month** view has a **mini-mode** behavior.
 ![DayView](qcalendar-day-view.png "Day View" =800x800)
 
 The `day` view is for displaying time intervals on the left side and 1 or more days in a contiguous fashion on the right side.
+
+![DayView](qcalendar-day-view--intervals.png "Day View" =800x800)
+
+You have full control over the granularity of the interval section.
 
 ## Week view
 
@@ -230,15 +266,19 @@ The `month` view is for displaying a finite number of weeks according to the cal
 
 > For time periods which fall outside of the current month, yet are still displayed (beginning and ending days of the month view), these are known as the `outside` days. The current date is known as the `current` day (obviously). Days leading up to the current date are known as `past` days and days that come after the current date are known as `future` days.
 
+The image above also highlights the use of the day slot for events. The next image is highlighting the week slot for better multi-day events.
+
+![MonthViewWeekSlot](qcalendar-month-view--week-slot.png "Month View week slot" =800x800)
+
 ### Mini-Mode
 
-![MonthViewMiniModeSelection](q-calendar-month-view-mini-mode-with-selection.png "Month View Mini-Mode with Multi-Day Selection" =400x400)
+![MonthViewMiniModeSelection](q-calendar-month-view-mini-mode-with-selection.png "Month View Mini-Mode with Multi-Day Selection" =300x300)
 
 The `month` view also has a `mini-mode` property with additional (if needed) `breakpoint` behavior.
 
-And, the multi-day selection, when combined with two or mode calendars allows you to have multi-month range selection.
+And, when combined with two or mode calendars allows you to have multi-month range selection.
 
-![MonthViewMiniModeMultiMonthSelection](qcalendar-month-view-mini-mode-multi-month-selection.png "Month View Mini-Mode with Multi-Month Selection" =800x800)
+![MonthViewMiniModeMultiMonthSelection](qcalendar-month-view-mini-mode-multi-month-selection.png "Month View Mini-Mode with Multi-Month Selection" =400x400)
 
 ## Scheduler view
 
@@ -247,6 +287,8 @@ And, the multi-day selection, when combined with two or mode calendars allows yo
 The `scheduler` view is for displaying days with resources on the left side. This allows you to present data for each resource. Where a resource could be a person, room, etc.
 
 To use the scheduler, you need to use the `resources` property, which is an array of objects, containing a key as defined by the `resource-key` (default `label`). To change the number of days displayed, use the `max-days` property. To change the distance between each resource, use the `resource-height` property.
+
+![SchedulerViewHierarchial](qcalendar-scheduler-view--hierarchial.png  "Scheduler View with Children" =800x800)
 
 The **Scheduler View** can also show hierarchical trees. Using the `resources` object, you can add `expanded` (boolean) and `children` (array) keys. Set the `expanded` key to `true` if you wish the tree to be expanded on first draw.
 
@@ -279,9 +321,9 @@ resources: [
 
 ![ResourceView](qcalendar-resource-view.png "Resource View" =800x800)
 
-The `resource` view is for displaying resources (people, rooms, etc) down the side and with time intervals on top.
+The `resource` view is for displaying resources (people, rooms, etc) down the side and with time intervals on top. The time intervals and resource sections can be made `sticky` with a property of the same name.
 
-To use the scheduler, you need to use the `resources` property, which is an array of objects, containing a key as defined by the `resource-key` (default `label`).
+To use the resource view, you need to use the `resources` property, which is an array of objects, containing a key as defined by the `resource-key` (default `label`).
 
 For example:
 
@@ -305,6 +347,8 @@ resources: [
 Your resources can contain whatever data you want and will be accessible via slots where the resouce is passed.
 
 If you wanted to hold event information as the above example, and wanted to make it more dynamic, listen for the `change` event, which gives you start and end timestamps, collect the data from the server, then dynamically set it on your resource. Remember, don't assign the data directly, or you will loose Vue reactivity, instead use the `splice` command.
+
+![ResourceViewHierarchial](qcalendar-resource-view--hierarchial.png "Resource View Children" =800x800)
 
 The **Resource View** can also show hierarchical trees. Using the `resources` object, you can add `expanded` (boolean) and `children` (array) keys. Set the `expanded` key to `true` if you wish the tree to be expanded on first draw.
 
@@ -339,11 +383,12 @@ resources: [
 In **Agenda** view mode, the developer is free to add whatever content they want. The example below just shows one of many ways it could be done.
 :::
 
-![AgendaView](qcalendar-agenda-view.png "Agenda View" =800x800)
+The `agenda` view is basically a `day` view without the intervals. It is up to the developer to provide the content via the `day-body` slot. But, knowing this, all the interval properties can be applied and your slotted content could adhere to proper positioning based on the time.
 
-The `agenda` view is basically a `day` view without the intervals. It is up to the developer to provide the content via the `day-body` slot.
 
 ## Agenda view (Planner)
+
+![AgendaViewColumnOptions](qcalendar-agenda-view--column-options.png "Agenda View column options" =800x800)
 
 While in **Agenda** view, you can define extra columns on the left-side or right-side of the calendar. This is perfect for creating Planners.
 
@@ -388,7 +433,7 @@ QCalendar has many `view` types available. They are:
 
 It's important to know that all `view` types are linear in nature. For instance, `3day` will show three days and the `next()` method will show the next 3 days. A good idea could be to switch to a `view` type on a mobile based on the current width of the screen. For portrait mode, you could change the `view` type to `2day` and for landscape mode `4day`. When `next()` or `prev()` methods are called the next (or previous) 2 days (for protrait) or 4 days (for landscape) would be displayed. Also, it is important to understand, if using a 5-day work week, then use the `week` view for a nice consistent linear calendar. If you use a `5day` view with a 5-day workweek (`[1,2,3,4,5]`), then you can't expect the monday to be on the first day of the week.
 
-Monthly views are also linear, but respect the number of days within the month that is to be displayed.
+Week and Month views are also linear, but respect the number of days displayed within the week or month respectfully.
 
 All views respect the number of weekdays to be displayed as per the `weekdays` filter property.
 
@@ -420,31 +465,14 @@ QCalendar supports workweek numbers (also known as [ISO week date](https://en.wi
 
 ![WorkWeek](qcalendar-workweeks.png "Workweek or ISO Week Date" =800x800)
 
-# Styling Active Date
-
-QCalendar does not provide styling for the active date (v-model). This is in dev-land, but quite easy to do via css. You can add something similar to your sass file:
-
-```css
-.q-active-date
-  color: blue
-  background: #CCCCFF !important
-```
-
-Of course, change the color to anything you want. Alternatively, provide a bordered outline as well. The choice is yours.
-
-::: info
-Note that for the User selected date, we use the css class `.q-active-date` to avoid conflict with `.q-selected-date` which is used for multi-selected dates.
-:::
-
 # Navigation
 
 Navigating QCalendar can be done in several ways:
 
 1. Setting the `value` (v-model) property
-2. Setting the `now` property
-3. Calling `next()` and `prev()` functions
-4. Calling the `move()` function
-5. Calling the `updateCurrent()` function
+2. Calling `next()` and `prev()` functions
+3. Calling the `move()` function
+4. Calling the `updateCurrent()` function
 
 Out of this, the most common would be to use the `value` (v-model) property and the `prev()` and `next()` functions.
 
@@ -491,13 +519,11 @@ And, finally, in your JavaScript, handle the `handleSwipe` function:
 
 ```js
 handleSwipe ({ evt, ...info }) {
-  if (this.dragging === false) {
-    if (info.duration >= 30) {
-      if (info.direction === 'right') {
-        this.calendarPrev()
-      } else if (info.direction === 'left') {
-        this.calendarNext()
-      }
+  if (info.duration >= 30) {
+    if (info.direction === 'right') {
+      this.calendarPrev()
+    } else if (info.direction === 'left') {
+      this.calendarNext()
     }
   }
   evt.cancelable !== false && evt.preventDefault()
@@ -565,11 +591,7 @@ Now, you can use the computed variable `this.title`.
 
 # Themes
 
-QCalendar has the ability to work with themes. It does not come with any itself, but you can download the ones that are used in the demo [here](themes.js).
-
-All colors in themes can be from the [Quasar Color Palette](https://quasar.dev/style/color-palette), CSS named color or a CSS color (#, rgb, rgba, hls, etc).
-
-Download and look at the themes to see what is needed. If a property is missing from a theme, then the fallback of the default CSS will be used.
+QCalendar has the ability to change colors via css vars with support for browser dark mode.
 
 ![ThemeDark](qcalendar-theme-dark.png "Theme - Dark" =800x800)
 ![ThemeTeal](qcalendar-theme-teal.png "Theme - Teal" =800x800)
@@ -578,12 +600,11 @@ Download and look at the themes to see what is needed. If a property is missing 
 ![ThemeIndigo](qcalendar-theme-indigo.png "Theme - Indigo" =800x800)
 ![ThemeBlue](qcalendar-theme-blue.png "Theme - Blue" =800x800)
 
+All of these themes are used in the examples. You don't have to use them. You can build out your own color themes with the [Theme Builder](https://quasarframework.github.io/quasar-ui-qcalendar/theme-builder).
 
 # Animating
 
 Animation is when QCalendar does a `prev` or `next` action. Setting the property `:animated="true"` turns on the animation. Two other properties, `transition-prev` and `transition-next` allows you to set the type of transition to use. The default is to use `transition-prev="slide-right"` and `transition-next="slide-left"`, but you can use any of the [Quasar transitions](https://quasar.dev/options/transitions), or build your own (see [Vue transitions](https://vuejs.org/v2/guide/transitions.html) for detailed information).
-
-One important aspect of transitions is to avoid overflow. You can prevent this from happening by wrapping your QCalendar component with a `div` and then set `style="overflow: hidden;"`.
 
 # Drag and Drop support
 QCalendar supports HTML5 **drag and drop**. If you have components that need drag and drop support you can add the following (this example is using QBadge):
@@ -606,10 +627,10 @@ The above is need to set the calendar as a drop point.
       :style="badgeStyles(event, 'day')"
       @click.stop.prevent="showEvent(event)"
       :draggable="true"
-      @dragstart.native="(e) => onDragStart(e, event)"
-      @dragend.native="(e) => onDragEnd(e, event)"
-      @dragenter.native="(e) => onDragEnter(e, event)"
-      @touchmove.native="(e) => {}"
+      @dragstart="(e) => onDragStart(e, event)"
+      @dragend="(e) => onDragEnd(e, event)"
+      @dragenter="(e) => onDragEnter(e, event)"
+      @touchmove="(e) => {}"
     >
       <q-icon v-if="event.icon" :name="event.icon" class="q-mr-xs" /><span class="ellipsis">{{ event.title }}</span>
     </q-badge>
@@ -674,9 +695,9 @@ The `timestamp` object looks like this:
 ```js
 {
   date: '',       // YYYY-MM-DD
-  time: '',       // 00:00:00 (optional)
+  time: '',       // HH:MM (optional)
   year: 0,        // YYYY
-  month: 0,       // mm (Jan = 1, etc)
+  month: 0,       // MM (Jan = 1, etc)
   day: 0,         // day of the month
   weekday: 0,     // week day
   hour: 0,        // 24-hr
@@ -731,5 +752,37 @@ These are appended with the type of event:
 All mouse/touch events support the Vue [Event & Key Modifiers](https://vuejs.org/v2/guide/render-function.html#Event-amp-Key-Modifiers).
 
 All the examples for the various views have an Event example. Be sure to check it out for the view you are working with.
+
+# Providing Mouse Hover
+
+The Interactive Demo has mouse hover coloring. It's been asked many times how this is done. The calendar is wrapped with a class `.calendar-container`. Here is the sass that provides the hover effects:
+
+```css
+<style lang="sass">
+.calendar-container
+  position: relative
+
+  .q-calendar-daily__day-interval:hover
+    background: rgba(0,0,255,.1)
+
+  .q-calendar-weekly__workweek:hover
+    background: rgba(0,0,255,.1)
+
+  .q-calendar-weekly__day:hover
+    background: rgba(0,0,255,.1)
+
+  .q-calendar-weekly__head-weekday:hover
+    background: rgba(0,0,255,.1)
+
+  .q-calendar-scheduler__day:hover
+    background: rgba(0,0,255,.1)
+
+  .q-calendar-resource__resource-interval:hover
+    background: rgba(0,0,255,.1)
+
+  .q-calendar-daily__day:hover
+    background: rgba(0,0,255,.1)
+</style>
+```
 
 ~~~

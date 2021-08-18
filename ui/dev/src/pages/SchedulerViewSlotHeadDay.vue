@@ -9,7 +9,9 @@
       style="height: 400px;"
     >
       <template #head-day="{ timestamp }">
-        {{ getHeadDay(timestamp) }}
+        <div class="full-height row justify-center items-center">
+          {{ getHeadDay(timestamp) }}
+        </div>
       </template>
     </q-calendar>
   </div>
@@ -34,7 +36,7 @@ export default {
 
   methods: {
     getHeadDay (timestamp) {
-      return `The date is: ${timestamp.date}`
+      return `${timestamp.date}`
     }
   }
 }

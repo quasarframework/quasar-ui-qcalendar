@@ -251,21 +251,18 @@
       <q-calendar
         ref="calendar"
         class="calendar"
+        style="height: calc(100vh - 50px)"
         :key="keyValue"
         v-touch-swipe.mouse.left.right="handleSwipe"
         v-model="selectedDate"
         :locale="locale"
         :max-days="maxDays"
         :bordered="bordered"
-        :interval-style="modifiedStyle"
-        :day-style="modifiedStyle"
-        :resource-style="modifiedStyle"
         animated
         transition-prev="slide-right"
         transition-next="slide-left"
         :drag-over-func="onDragOver"
         :drop-func="onDrop"
-        :theme="theme"
         :view="calendarView"
         :weekdays="weekdays"
         :interval-minutes="60 * intervalRangeStep"
@@ -286,7 +283,6 @@
         :show-work-weeks="showWorkWeeks"
         :no-default-header-btn="noDefaultHeaderBtn"
         :no-default-header-text="noDefaultHeaderText"
-        :enable-theme="enableTheme === true"
         :resources="resources"
         @change="onChanged"
         @moved="onMoved"
@@ -297,7 +293,6 @@
         @click:week2="addEventMenu"
         @click:resource2="resourceClicked"
         @click:resource:day2="resourceDayClicked"
-        day-padding="35px 0 0 0"
       >
         <template #day="{ timestamp }">
           <template v-if="calendarView.indexOf('agenda') < 0">
@@ -644,9 +639,7 @@ export default {
       intervalHeight: 'calendar/intervalHeight',
       resourceHeight: 'calendar/resourceHeight',
       resourceWidth: 'calendar/resourceWidth',
-      dayHeight: 'calendar/dayHeight',
-      enableTheme: 'calendar/enableTheme',
-      theme: 'calendar/theme'
+      dayHeight: 'calendar/dayHeight'
     }),
     intervalStart () {
       return this.intervalRange.min * (1 / this.intervalRangeStep)
@@ -676,7 +669,7 @@ export default {
         styles.height = 'auto'
       }
       else {
-        styles.height = `calc(100vh - ${this.titlebarHeight}px)`
+        styles.height = `calc(100% - ${this.titlebarHeight}px)`
       }
       styles.width = 'auto'
       return styles
@@ -775,19 +768,6 @@ export default {
     },
     calendarToday (today) {
       this.selectedDate = today
-    },
-    modifiedStyle (scope) {
-      let date = scope
-      if ('resource' in scope) {
-        date = scope.timestamp
-      }
-      if (date.disabled === true) {
-        return {
-          backgroundColor: '#efefef!important',
-          cursor: 'not-allowed'
-        }
-      }
-      return {}
     },
     onChanged (data) {
       // uncomment to see data in console
@@ -934,7 +914,8 @@ export default {
         s.color = colors.luminosity(event.bgcolor) > 0.5 ? 'black' : 'white'
       }
       if (timeStartPos) {
-        s.top = timeStartPos(event.time) + 'px'
+        // don't clamp position to 0px
+        s.top = timeStartPos(event.time, false) + 'px'
         s.position = 'absolute'
         if (event.side !== undefined) {
           s.width = '50%'
@@ -1202,20 +1183,29 @@ export default {
 </script>
 
 <style lang="sass">
-.q-calendar-daily__day-interval:hover
-  background-color: rgba(0,0,255,.1)
-
-.q-calendar-weekly__workweek:hover
-  background-color: rgba(0,0,255,.1)
-
-.q-calendar-weekly__day:hover
-  background-color: rgba(0,0,255,.1)
-
-.q-calendar-weekly__head-weekday:hover
-  background-color: rgba(0,0,255,.1)
-
 .calendar-container
   position: relative
+
+  .q-calendar-daily__day-interval:hover
+    background: rgba(0,0,255,.1)
+
+  .q-calendar-weekly__workweek:hover
+    background: rgba(0,0,255,.1)
+
+  .q-calendar-weekly__day:hover
+    background: rgba(0,0,255,.1)
+
+  .q-calendar-weekly__head-weekday:hover
+    background: rgba(0,0,255,.1)
+
+  .q-calendar-scheduler__day:hover
+    background: rgba(0,0,255,.1)
+
+  .q-calendar-resource__resource-interval:hover
+    background: rgba(0,0,255,.1)
+
+  .q-calendar-daily__day:hover
+    background: rgba(0,0,255,.1)
 
 .my-event
   width: 100%

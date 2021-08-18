@@ -17,7 +17,7 @@
       <q-btn flat color="white" icon="fas fa-chevron-right" class="direction-button" style="height: 100%;" @click="onNext"></q-btn>
     </div>
 
-    <div style="width: 800px; width: 100%; height: 200px; border: #c0c0c0 1px solid; overflow: auto;">
+    <div style="width: 800px; width: 100%; height: 200px; border: #c0c0c0 1px solid;">
       <q-calendar
         v-model="selectedDate"
         :interval-height="50"
@@ -25,6 +25,7 @@
         class="calendar-container"
         view="day"
         hide-header
+        animated
         locale="en-us"
         style="border-top: none; width: 1200px; height: 1200px;"
       >

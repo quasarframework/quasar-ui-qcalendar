@@ -8,6 +8,7 @@ yarn.lock
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+jsconfig.json
 
 # Editor directories and files
 .idea
@@ -25,8 +26,7 @@ yarn-error.log*
 
 # Other
 /src/components/QCalendar.json
-/src/utils/timestamp.json
-jsconfig.json
+/src/utils/Timestamp.json
 
 # Testing
 /test

@@ -1,5 +1,5 @@
 // eslint-disable-next-line node/no-missing-require
-const timestamp = require('utils/timestamp.js')
+const timestamp = require('utils/Timestamp.js')
 
 describe('[TIMESTAMP] updateDisabled', () => {
   const disabledDays = ['2020-01-01', '2020-01-02', '2020-01-03']

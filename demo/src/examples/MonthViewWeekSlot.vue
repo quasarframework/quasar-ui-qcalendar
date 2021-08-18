@@ -4,7 +4,6 @@
       v-model="selectedDate"
       view="month"
       locale="en-us"
-      :day-height="100"
     >
       <template #week="{ week, weekdays, miniMode }">
         <template v-if="!miniMode">
@@ -106,6 +105,13 @@ export default {
           start: getCurrentDay(22),
           end: getCurrentDay(29),
           icon: 'flight'
+        },
+        {
+          title: 'This Event pushes down',
+          color: 'blue',
+          start: getCurrentDay(22),
+          end: getCurrentDay(29),
+          icon: 'anchor'
         }
       ]
     }
@@ -126,7 +132,7 @@ export default {
         'left-side': !isHeader && infoEvent.side === 'left',
         'right-side': !isHeader && infoEvent.side === 'right',
         'cursor-pointer': infoEvent.event !== undefined,
-        'event-void': infoEvent.event === undefined // height: 0, padding: 0
+        'q-day-event-void': infoEvent.event === undefined // height: 0, padding: 0
       }
     },
 

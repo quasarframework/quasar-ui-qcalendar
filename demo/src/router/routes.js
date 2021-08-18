@@ -51,13 +51,13 @@ const routes = [
             path: 'agenda-view',
             component: () => import('pages/AgendaView.vue')
           }
-          // {
-          //   path: 'customization',
-          //   component: () => import('pages/Customization.vue')
-          // }
         ]
       }
     ]
+  },
+  {
+    path: '/theme-builder',
+    component: () => import('layouts/ThemeBuilder.vue')
   },
   {
     path: '/demo',

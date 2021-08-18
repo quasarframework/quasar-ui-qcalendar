@@ -7,31 +7,29 @@
         <q-btn flat dense label="Next" @click="calendarNext" />
       </div>
       <q-separator />
-      <div style="overflow: hidden; height: 400px;">
-        <q-calendar
-          ref="calendar"
-          v-model="selectedDate"
-          view="month"
-          locale="en-us"
-          show-work-weeks
-          mini-mode
-          animated
-          transition-prev="flip-left"
-          transition-next="flip-right"
-          @input="onModelChanged"
-          @click:date2="onClickDate2"
-          @click:day2="onClickDay2"
-          @click:workweek2="onClickWorkweek2"
-          @click:workweek:header2="onClickWorkweekHeader2"
-          @click:day:header2="onClickDayHeader2"
-          style="max-width: 300px; min-width: auto; overflow: hidden"
-        />
-      </div>
+      <q-calendar
+        ref="calendar"
+        v-model="selectedDate"
+        view="month"
+        locale="en-us"
+        show-work-weeks
+        mini-mode
+        animated
+        transition-prev="flip-left"
+        transition-next="flip-right"
+        @input="onModelChanged"
+        @click:date2="onClickDate2"
+        @click:day2="onClickDay2"
+        @click:workweek2="onClickWorkweek2"
+        @click:workweek:header2="onClickWorkweekHeader2"
+        @click:day:header2="onClickDayHeader2"
+        style="max-width: 300px; height: 400px; min-width: auto; overflow: hidden"
+      />
     </div>
     <q-card class="events col-4 q-pa-xs full-height column justify-start items-start">
       <q-item-section class="full-width">
         <q-item-label>Events</q-item-label>
-        <q-item-label caption>New data appended to top</q-item-label>
+        <q-item-label class="my-text-caption">New data appended to top</q-item-label>
       </q-item-section>
       <q-separator />
       <div class="scroll overflow-auto" style="height: 360px; width: 100%;">
@@ -79,3 +77,10 @@ export default {
   }
 }
 </script>
+<style lang="sass" scoped>
+.my-text-caption
+  font-size: 0.7rem
+  font-weight: 400
+  line-height: .75rem !important
+  letter-spacing: 0.03333em
+</style>

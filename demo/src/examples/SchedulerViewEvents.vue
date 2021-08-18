@@ -1,7 +1,7 @@
 <template>
   <div class="row items-center" style="max-width: 800px; width: 100%; height: 421px;">
     <div class="col-8 full-height">
-      <div class="row justify-center items-center" style="height: 30px;">
+      <div class="row justify-center items-center">
         <q-btn flat dense label="Prev" @click="calendarPrev" />
         <q-separator vertical />
         <q-btn flat dense label="Next" @click="calendarNext" />
@@ -15,7 +15,9 @@
           locale="en-us"
           short-weekday-label
           :resources="resources"
+          resource-key="name"
           :resource-height="50"
+          :resource-width="120"
           animated
           @input="onModelChanged"
           @click:date2="onClickDate2"
@@ -23,13 +25,14 @@
           @click:resource:day2="onClickResourceDay2"
           @click:resource2="onClickResource2"
           @click:resource:header2="onClickResourceHeader2"
+          @expanded="onResourceExpanded"
         />
       </div>
     </div>
     <q-card class="events col-4 q-pa-xs full-height column justify-start items-start">
       <q-item-section class="full-width">
         <q-item-label>Events</q-item-label>
-        <q-item-label caption>New data appended to top</q-item-label>
+        <q-item-label class="my-text-caption">New data appended to top</q-item-label>
       </q-item-section>
       <q-separator />
       <div class="scroll overflow-auto" style="height: 360px; width: 100%;">
@@ -48,13 +51,26 @@ export default {
       selectedDate: '',
       events: [],
       resources: [
-        { label: 'John' },
-        { label: 'Mary' },
-        { label: 'Susan' },
-        { label: 'Olivia' },
-        { label: 'Board Room' },
-        { label: 'Room-1' },
-        { label: 'Room-2' }
+        { name: 'John' },
+        {
+          name: 'Board Room',
+          expanded: false,
+          children: [
+            { name: 'Room-1' },
+            {
+              name: 'Room-2',
+              expanded: false,
+              children: [
+                { name: 'Partition-A' },
+                { name: 'Partition-B' },
+                { name: 'Partition-C' }
+              ]
+            }
+          ]
+        },
+        { name: 'Mary' },
+        { name: 'Susan' },
+        { name: 'Olivia' }
       ]
     }
   },
@@ -82,7 +98,17 @@ export default {
     },
     onClickResourceHeader2 (data) {
       this.events.unshift(`click:resource:header2: ${JSON.stringify(data)}`)
+    },
+    onResourceExpanded (data) {
+      this.events.unshift(`expanded: ${JSON.stringify(data)}`)
     }
   }
 }
 </script>
+<style lang="sass" scoped>
+.my-text-caption
+  font-size: 0.7rem
+  font-weight: 400
+  line-height: .75rem !important
+  letter-spacing: 0.03333em
+</style>

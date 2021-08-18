@@ -7,7 +7,6 @@
       locale="en-us"
       style="height: 400px;"
     >
-      <!-- eslint-disable vue/no-unused-vars -->
       <template #day-container="{ /* timestamp */ }">
         <div class="day-view-current-time-indicator" :style="style" />
         <div class="day-view-current-time-line" :style="style" />

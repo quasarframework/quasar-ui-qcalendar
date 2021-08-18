@@ -4,7 +4,6 @@
       v-model="selectedDate"
       view="week"
       :disabled-days="disabledDays"
-      :interval-style="modifiedStyle"
       locale="en-us"
       style="height: 400px;"
     />
@@ -36,21 +35,10 @@ export default {
       // get current day
       const ts = QCalendar.parseTimestamp(this.selectedDate)
       // make next 4 days, after today, disabled
-      Array.from(Array(4)).foreach((_, i) => {
+      Array.from(Array(4)).forEach((_, i) => {
         days.push(QCalendar.addToDate(ts, { day: i + 1 }).date)
       })
       return days
-    }
-  },
-  methods: {
-    modifiedStyle (scope) {
-      if (scope.disabled === true) {
-        return {
-          backgroundColor: '#ffcb9c!important',
-          cursor: 'not-allowed'
-        }
-      }
-      return {}
     }
   }
 }

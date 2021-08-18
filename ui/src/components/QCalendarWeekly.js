@@ -10,7 +10,7 @@ import {
   createDayList,
   getDayIdentifier,
   createNativeLocaleFormatter
-} from '../utils/timestamp'
+} from '../utils/Timestamp.js'
 import { convertToUnit } from '../utils/helpers.js'
 
 export default {
@@ -28,9 +28,17 @@ export default {
     }
   },
 
+  mounted () {
+    this.__adjustForWeekEvents()
+  },
+
+  updated () {
+    this.__adjustForWeekEvents()
+  },
+
   computed: {
     staticClass () {
-      return (this.isMiniMode ? ' q-calendar-mini ' : '') + 'q-calendar-weekly'
+      return 'q-calendar-weekly'
     },
 
     parsedMinWeeks () {
@@ -87,20 +95,29 @@ export default {
 
     styles () {
       const style = {}
-      if (this.dayHeight > 0) {
-        const height = convertToUnit(this.dayHeight)
-        style.height = height
-      }
       if (this.dayPadding !== undefined) {
         style.padding = this.dayPadding
       }
-      style.width = 100 / this.weekdays.length + '%'
+      style.minWidth = this.cellWidth + '%'
+      style.maxWidth = style.minWidth
       return style
+    },
+
+    cellWidth () {
+      return 100 / this.weekdays.length
     },
 
     isMiniMode () {
       return this.miniMode === true ||
-        (this.miniMode === 'auto' && this.$q.screen.lt[this.breakpoint])
+        (this.miniMode === 'auto' && this.breakpoint !== void 0 && this.$q.screen.lt[this.breakpoint])
+    }
+  },
+
+  watch: {
+    isMinimode (val) {
+      if (this.breakpoint === 'auto') {
+        this.$emit('mini-mode', val)
+      }
     }
   },
 
@@ -119,6 +136,27 @@ export default {
         }
       }
       return { timestamp: false }
+    },
+
+    __adjustForWeekEvents () {
+      if (this.isMiniMode === true) return
+      if (this.dayHeight !== 0) return
+      const slotWeek = this.$scopedSlots.week
+      if (slotWeek === void 0) return
+
+      let i = 0
+      for (; i < 7; ++i) {
+        const weekEvent = this.$refs['weekEvent' + i]
+        if (weekEvent === void 0) return
+        const wrapper = this.$refs['week' + i]
+        if (wrapper === void 0) return
+        // this sucks to have to do it this way
+        const styles = window.getComputedStyle(weekEvent)
+        const margin = parseFloat(styles.marginTop, 10) + parseFloat(styles.marginBottom, 10)
+        if (weekEvent.clientHeight + margin > wrapper.clientHeight) {
+          wrapper.style.height = weekEvent.clientHeight + margin + 'px'
+        }
+      }
     },
 
     __renderContainer (h) {
@@ -147,8 +185,12 @@ export default {
       return h('div', {
         staticClass: 'q-calendar-weekly__head'
       }, [
-        this.showWorkWeeks === true && this.__renderWorkWeekHead(h),
-        this.__renderHeadDays(h)
+        h('div', {
+          staticClass: 'q-calendar-weekly__head--wrapper'
+        }, [
+          this.showWorkWeeks === true && this.__renderWorkWeekHead(h),
+          this.__renderHeadDays(h)
+        ])
       ])
     },
 
@@ -160,51 +202,47 @@ export default {
         miniMode: this.isMiniMode
       }
 
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-        color = 'colorHeader'
-        backgroundColor = 'backgroundHeader'
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
-
-      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
+      return h('div', {
         staticClass: 'q-calendar-weekly__head-workweek',
         on: this.getDefaultMouseEventHandlers(':workweek:header2', event => {
           return { scope, event }
         })
-      }), (slot ? slot({ scope }) : '#'))
+      }, (slot ? slot({ scope }) : '#'))
     },
 
     __renderHeadDays (h) {
-      return this.todayWeek.map((day, index) => this.__renderHeadDay(h, day, index))
+      return h('div', {
+        staticClass: 'q-calendar-weekly__head-weekdays',
+        style: {
+          minWidth: this.showWorkWeeks
+            ? (this.isMiniMode === true
+                ? 'calc(100% - var(--calendar-mini-work-week-width))'
+                : 'calc(100% - var(--calendar-work-week-width))')
+            : '100%'
+        }
+      }, [
+        ...this.todayWeek.map((day, index) => this.__renderHeadDay(h, day, index))
+      ])
     },
 
     __renderHeadDay (h, day, index) {
-      const width = 100 / this.weekdays.length + '%'
+      const width = this.cellWidth + '%'
       const headDaySlot = this.$scopedSlots['head-day']
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-        color = 'colorHeader'
-        backgroundColor = 'backgroundHeader'
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
+      const disabled = (this.disabledWeekdays ? this.disabledWeekdays.includes(day.weekday) : false)
       const days = this.days.filter(day2 => day2.weekday === day.weekday)
       const scope = { timestamp: day, days, index, miniMode: this.isMiniMode }
 
-      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
+      return h('div', {
         key: day.date,
-        staticClass: 'q-calendar-weekly__head-weekday',
+        staticClass: 'q-calendar-weekly__head-weekday' + (disabled === true ? ' q-disabled-day disabled' : ''),
         style: {
-          width
+          minWidth: width,
+          maxWidth: width
         },
         on: this.getDefaultMouseEventHandlers(':day:header2', event => {
           return { scope, event }
         })
-      }), [
+      }, [
         headDaySlot === undefined && this.__renderHeadDayLabel(h, day, this.shortWeekdayLabel || this.isMiniMode),
         headDaySlot !== undefined && headDaySlot(scope)
       ])
@@ -222,35 +260,47 @@ export default {
       const weekDays = this.weekdays.length
       const weeks = []
       for (let i = 0; i < days.length; i += weekDays) {
-        weeks.push(this.__renderWeek(h, days.slice(i, i + weekDays)))
+        weeks.push(this.__renderWeek(h, days.slice(i, i + weekDays), i / weekDays))
       }
 
       return weeks
     },
 
-    __renderWeek (h, week) {
-      const slot = this.$scopedSlots.week
+    __renderWeek (h, week, weekNum) {
+      const slotWeek = this.$scopedSlots.week
       const weekdays = this.weekdays
       const slotData = { week, weekdays, miniMode: this.isMiniMode }
-      const height = convertToUnit(this.dayHeight)
+      const style = {}
+
+      // this applies height properly, even if workweeks are displaying
+      style.height = this.dayHeight > 0 ? convertToUnit(this.dayHeight) : 'auto'
+
       return h('div', {
         key: week[0].date,
+        ref: 'week' + weekNum,
         staticClass: 'q-calendar-weekly__week--wrapper',
-        style: {
-          height: this.dayHeight && this.dayHeight > 0 ? height : (this.isMiniMode ? 'auto' : 'auto')
-        }
+        style
       }, [
         this.showWorkWeeks === true && this.__renderWorkWeekGutter(h, week),
         h('div', {
-          key: week[0].date,
-          staticClass: 'q-calendar-weekly__week'
+          staticClass: 'q-calendar-weekly__week',
+          style: {
+            width: this.showWorkWeeks
+              ? (this.isMiniMode === true
+                  ? 'calc(100% - var(--calendar-mini-work-week-width))'
+                  : 'calc(100% - var(--calendar-work-week-width))')
+              : '100%'
+          }
         }, [
           h('div', {
             staticClass: 'q-calendar-weekly__week-days'
           }, week.map(day => this.__renderDay(h, day))),
-          slot !== undefined ? h('div', {
-            staticClass: 'q-calendar-weekly__week-events'
-          }, slot(slotData)) : ''
+          this.isMiniMode !== true && slotWeek !== undefined
+            ? h('div', {
+                ref: 'weekEvent' + weekNum,
+                staticClass: 'q-calendar-weekly__week-events'
+              }, slotWeek(slotData))
+            : ''
         ])
       ])
     },
@@ -262,87 +312,39 @@ export default {
       const { timestamp } = this.isCurrentWeek(week)
       const workweekLabel = Number(day.workweek).toLocaleString(this.locale)
       const scope = { workweekLabel, week, miniMode: this.isMiniMode }
-      const colorCurrent = timestamp && timestamp.current === true ? this.color : undefined
-      const height = convertToUnit(this.dayHeight)
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-        if ((timestamp && timestamp.current === true) || day.current === true) {
-          color = 'colorWorkWeekCurrent'
-          backgroundColor = 'backgroundWorkWeekCurrent'
-        }
-        else if ((timestamp && timestamp.past === true) || day.past === true) {
-          color = 'colorWorkWeekPast'
-          backgroundColor = 'backgroundWorkWeekPast'
-        }
-        else if ((timestamp && timestamp.future === true) || day.future === true) {
-          color = 'colorWorkWeekFuture'
-          backgroundColor = 'backgroundWorkWeekFuture'
-        }
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
 
-      return h('div', updateColors(colorCurrent !== undefined ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
+      return h('div', {
         key: day.workweek,
         staticClass: 'q-calendar-weekly__workweek',
         class: this.getRelativeClasses(timestamp !== false ? timestamp : day, false),
-        style: {
-          height: this.dayHeight && this.dayHeight > 0 ? height : 'auto'
-        },
-        // :workweek DEPRECATED in v2.4.0
-        on: this.getDefaultMouseEventHandlers2(':workweek', ':workweek2', event => {
+        on: this.getDefaultMouseEventHandlers(':workweek2', event => {
           return { scope, event }
         })
-        // ---
-      }), slot ? slot(scope) : workweekLabel)
+      }, slot ? slot(scope) : workweekLabel)
     },
 
     __renderDay (h, day) {
       const styler = this.dayStyle || this.dayStyleDefault
       const outside = this.isOutside(day)
+      const activeDate = this.noActiveDate !== true && this.value === day.date
       const slot = this.$scopedSlots.day
-      const scope = { outside, timestamp: day, miniMode: this.isMiniMode }
+      const scope = { outside, timestamp: day, miniMode: this.isMiniMode, activeDate }
       const hasMonth = (outside === false && this.days.find(d => d.month === day.month).day === day.day && this.showMonthLabel === true)
 
       let dragOver
-
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-      if (this.enableTheme === true) {
-        if (outside === true) {
-          color = 'colorBodyOutside'
-          backgroundColor = 'backgroundBodyOutside'
-        }
-        else if (day.past === true) {
-          color = 'colorBodyPast'
-          backgroundColor = 'backgroundBodyPast'
-        }
-        else if (day.current === true) {
-          color = 'colorBodyCurrent'
-          backgroundColor = 'backgroundBodyCurrent'
-        }
-        else if (day.future === true) {
-          color = 'colorBodyFuture'
-          backgroundColor = 'backgroundBodyFuture'
-        }
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
-
       const style = Object.assign({ ...this.styles }, styler(day))
       const dayClass = typeof this.dayClass === 'function' ? this.dayClass(day) : null
 
-      return h('div', updateColors(colors.get(color), colors.get(backgroundColor), {
+      return h('div', {
         key: day.date,
-        staticClass: 'q-calendar-weekly__day',
-        class: [
-          dayClass,
-          {
-            ...this.getRelativeClasses(day, outside, this.isMiniMode ? undefined : this.selectedDates),
-            'q-calendar-weekly__day--droppable': dragOver
-          }
-        ],
+        staticClass: 'q-calendar-weekly__day' + (this.isMiniMode !== true ? ' column' : ''),
+        class: {
+          ...dayClass,
+          ...this.getRelativeClasses(day, outside, this.selectedDates, this.selectedStartEndDates, this.hover),
+          'q-active-date': activeDate === true,
+          disabled: this.enableOutsideDays !== true && outside === true,
+          'q-calendar-weekly__day--droppable': dragOver
+        },
         style,
         domProps: {
           ondragover: (e) => {
@@ -356,17 +358,15 @@ export default {
             }
           }
         },
-        // :day DEPRECATED in v2.4.0
-        on: this.getDefaultMouseEventHandlers2(':day', ':day2', event => {
+        on: this.getDefaultMouseEventHandlers(':day2', event => {
           return { scope, event }
         })
-        // ---
-      }), [
+      }, [
         this.__renderDayLabel(h, day),
         this.isMiniMode !== true && this.showDayOfYearLabel && !hasMonth ? this.__renderDayOfYearLabel(h, day) : '',
         this.isMiniMode !== true && hasMonth ? this.__renderDayMonth(h, day) : '',
         h('div', {
-          staticClass: 'q-calendar-weekly__day--content full-width' + (this.isMiniMode === true ? ' row justify-around' : '')
+          staticClass: 'q-calendar-weekly__day--content full-width' + (this.isMiniMode === true ? ' row justify-center items-center' : '')
         }, slot ? slot(scope) : '')
       ])
     },
@@ -379,102 +379,75 @@ export default {
         return
       }
 
-      const colorCurrent = day.current === true ? this.color : undefined
       const dayLabel = this.dayFormatter(day, false)
       const dayLabelSlot = this.$scopedSlots['day-label']
       const dayBtnSlot = this.$scopedSlots['day-btn']
 
       const selectedDate = (
-        this.isMiniMode &&
+        // this.isMiniMode &&
         this.selectedDates &&
         this.selectedDates.length > 0 &&
         this.selectedDates.includes(day.date)
       )
 
       const activeDate = this.noActiveDate !== true && this.value === day.date
+      const slotData = { dayLabel, timestamp: day, outside, activeDate, selectedDate, miniMode: this.isMiniMode }
 
-      const slotData = { dayLabel, timestamp: day, outside, selectedDate, activeDate, miniMode: this.isMiniMode }
-
-      let colors = new Map(), color, backgroundColor
-      let updateColors = this.useDefaultTheme
-
-      if (this.enableTheme === true) {
-        if (outside === true) {
-          color = 'colorDayLabelOutside'
-          backgroundColor = 'backgroundDayLabelOutside'
-        }
-        else if (day.past === true) {
-          color = 'colorDayLabelPast'
-          backgroundColor = 'backgroundDayLabelPast'
-        }
-        else if (day.current === true) {
-          color = 'colorDayLabelCurrent'
-          backgroundColor = 'backgroundDayLabelCurrent'
-        }
-        else if (day.future === true) {
-          color = 'colorDayLabelFuture'
-          backgroundColor = 'backgroundDayLabelFuture'
-        }
-        colors = this.getThemeColors([color, backgroundColor])
-        updateColors = this.setBothColors
-      }
-
-      return dayBtnSlot ? dayBtnSlot(slotData) : h(QBtn, updateColors(colorCurrent !== undefined ? colorCurrent : colors.get(color), colors.get(backgroundColor), {
-        staticClass: 'q-calendar-weekly__day-label' +
-          (activeDate === true ? ' q-active-date' : '') +
-          (selectedDate === true ? ' q-selected-date' : ''),
-        props: {
-          size: this.isMiniMode ? 'sm' : this.monthLabelSize,
-          unelevated: true,
-          round: true,
-          dense: true,
-          noCaps: true,
-          outline: day.current === true,
-          disable: day.disabled === true || (outside === true && this.enableOutsideDays !== true)
-        },
-        on: {
-          ...this.getMouseEventHandlers({
-            // DEPRECATED in v2.4.0
-            'click:date': { event: 'click', stop: true },
-            'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false },
-            // ---
-            'click:date2': { event: 'click', stop: true },
-            'contextmenu:date2': { event: 'contextmenu', stop: true, prevent: true, result: false }
-          }, (event, eventName) => {
-            if (eventName.indexOf('2') > -1) {
-              return { scope: { timestamp: day }, event }
-            }
-            // DEPRECATED in v2.4.0
-            else {
-              return day
-            }
-            // ---
+      return dayBtnSlot
+        ? dayBtnSlot(slotData)
+        : h(QBtn, {
+          staticClass: 'q-calendar-weekly__day-label',
+          props: {
+            size: this.isMiniMode ? 'sm' : this.monthLabelSize,
+            unelevated: true,
+            round: true,
+            dense: true,
+            noCaps: true,
+            outline: day.current === true,
+            disable: day.disabled === true || (this.enableOutsideDays !== true && outside === true)
+          },
+          style: {
+            lineHeight: this.isMiniMode ? 'unset' : '1.715em'
+          },
+          on: this.getDefaultMouseEventHandlers(':date2', event => {
+            return { scope: { timestamp: day }, event }
           })
-        }
-      }), [
-        dayLabelSlot ? dayLabelSlot(slotData) : dayLabel
-      ])
+        }, [
+          dayLabelSlot ? dayLabelSlot(slotData) : dayLabel
+        ])
     },
 
     __renderDayOfYearLabel (h, day) {
-      const color = day.current === true ? this.color : undefined
+      const outside = this.isOutside(day)
+
+      // return if outside days are hidden
+      if (outside === true && this.hideOutsideDays === true) {
+        return
+      }
+
       const slot = this.$scopedSlots['day-of-year']
       const slotData = { timestamp: day }
 
-      return h('div', this.setTextColor(color, {
+      return h('div', {
         staticClass: 'q-calendar-weekly__day-month--day-of-year'
-      }), slot ? slot(slotData) : day.doy)
+      }, slot ? slot(slotData) : day.doy)
     },
 
     __renderDayMonth (h, day) {
-      const color = day.current === true ? this.color : undefined
+      const outside = this.isOutside(day)
+
+      // return if outside days are hidden
+      if (outside === true && this.hideOutsideDays === true) {
+        return
+      }
+
       const slot = this.$scopedSlots['month-label']
       const monthLabel = this.monthFormatter(day, this.shortMonthLabel)
       const slotData = { monthLabel, timestamp: day, miniMode: this.isMiniMode }
 
-      return h('div', this.setTextColor(color, {
+      return h('div', {
         staticClass: 'q-calendar-weekly__day-month ellipsis'
-      }), [
+      }, [
         slot ? slot(slotData) : this.isMiniMode !== true ? monthLabel : ''
       ])
     }

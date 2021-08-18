@@ -1,4 +1,4 @@
-import { validateNumber, validateTimestamp } from './timestamp'
+import { validateNumber, validateTimestamp } from './Timestamp.js'
 import { validateView } from './views'
 
 /* public properties */
@@ -45,13 +45,15 @@ export default {
     dropFunc: {
       type: Function
       // event, timestamp
+    },
+    selectedDates: Array,
+    selectedStartEndDates: {
+      type: Array,
+      default: () => [],
+      validator: v => v.length <= 2
     }
   },
   intervals: {
-    value: { // v-model
-      type: String,
-      validator: v => v === '' || validateTimestamp(v)
-    },
     maxDays: {
       type: Number,
       default: 7
@@ -97,13 +99,10 @@ export default {
       type: [Number, String],
       default: 0,
       validator: validateNumber
-    }
+    },
+    timeClicksClamped: Boolean
   },
   weeks: {
-    value: { // v-model
-      type: String,
-      validator: v => v === '' || validateTimestamp(v)
-    },
     dayHeight: {
       type: [Number, String],
       default: 0,
@@ -132,12 +131,7 @@ export default {
     showDayOfYearLabel: Boolean,
     enableOutsideDays: Boolean,
     hideOutsideDays: Boolean,
-    selectedStartEndDates: {
-      type: Array,
-      default: () => [],
-      validator: v => v.length <= 2
-    },
-    selectedDates: Array,
+    hover: Boolean,
     miniMode: {
       type: [Boolean, String],
       validator: v => v === undefined || v === true || v === false || v === 'auto'
@@ -154,10 +148,6 @@ export default {
     }
   },
   scheduler: {
-    value: { // v-model
-      type: String,
-      validator: v => v === '' || validateTimestamp(v)
-    },
     resources: Array,
     resourceKey: {
       type: String,
@@ -180,6 +170,7 @@ export default {
       type: Function,
       default: null
     },
+    cellWidth: String,
     columnHeaderBefore: Boolean,
     columnHeaderAfter: Boolean,
     columnCount: {
@@ -236,10 +227,6 @@ export default {
       type: String,
       default: 'month',
       validator: validateView
-    },
-    value: { // v-model
-      type: String,
-      validator: v => v === '' || validateTimestamp(v)
     },
     bordered: Boolean,
     dark: Boolean

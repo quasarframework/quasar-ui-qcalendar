@@ -8,13 +8,12 @@
       locale="en-us"
       style="height: 400px;"
     >
-      <!-- eslint-disable vue/no-unused-vars -->
-      <template #column-header-before="days">
+      <template #column-header-before="{ /* timestamp, index */ }">
         <div class="q-ma-xs">
           column-header-before slot
         </div>
       </template>
-      <template #column-header-after="days">
+      <template #column-header-after="{ /* timestamp, index */ }">
         <div class="q-ma-xs">
           column-header-after slot
         </div>

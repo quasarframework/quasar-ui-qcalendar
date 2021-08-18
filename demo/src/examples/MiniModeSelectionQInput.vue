@@ -18,7 +18,7 @@
                 mini-mode
                 short-weekday-label
                 :selected-start-end-dates="startEndDates"
-                :day-class="classDay"
+                no-active-date
                 @mousedown:day2="onMouseDownDay"
                 @mouseup:day2="onMouseUpDay"
                 @mousemove:day2="onMouseMoveDay"
@@ -112,21 +112,6 @@ export default {
 
     calendarPrev () {
       this.$refs.calendar.prev()
-    },
-
-    classDay (timestamp) {
-      if (this.anchorDayIdentifier !== false && this.otherDayIdentifier !== false) {
-        return this.getBetween(timestamp)
-      }
-    },
-
-    getBetween (timestamp) {
-      const nowIdentifier = QCalendar.getDayIdentifier(timestamp)
-      return {
-        'q-selected-day-first': this.lowIdentifier === nowIdentifier,
-        'q-selected-day': this.lowIdentifier <= nowIdentifier && this.highIdentifier >= nowIdentifier,
-        'q-selected-day-last': this.highIdentifier === nowIdentifier
-      }
     },
 
     onMouseDownDay ({ scope, event }) {

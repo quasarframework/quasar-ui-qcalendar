@@ -1,5 +1,11 @@
 <template>
-  <div class="row justify-center q-pa-md" style="max-width: 800px; width: 100%; overflow: hidden;">
+  <div class="row justify-center q-pa-md" style="max-width: 800px; width: 100%;">
+    <div class="row justify-center items-center">
+      <q-btn flat dense label="Prev" @click="calendarPrev" />
+      <q-separator vertical />
+      <q-btn flat dense label="Next" @click="calendarNext" />
+    </div>
+    <q-separator />
     <q-calendar
       ref="calendar"
       v-model="selectedDate"
@@ -7,8 +13,10 @@
       :disabled-before="disabledBefore"
       :disabled-after="disabledAfter"
       mini-mode
-      :day-style="modifiedStyle"
       locale="en-us"
+      animated
+      transition-prev="slide-right"
+      transition-next="slide-left"
       style="max-width: 300px; min-width: auto; overflow: hidden"
     />
   </div>
@@ -30,18 +38,16 @@ function getCurrentDay (day) {
 export default {
   data () {
     return {
-      selectedDate: ''
-    }
-  },
-  beforeMount () {
     // set to today's date
-    this.selectedDate = getCurrentDay(CURRENT_DAY.getDate())
+      selectedDate: getCurrentDay(CURRENT_DAY.getDate()),
+      today: getCurrentDay(CURRENT_DAY.getDate())
+    }
   },
   computed: {
     disabledBefore () {
       // find the last day of the previous month
-      if (this.selectedDate) {
-        let ts = QCalendar.parseTimestamp(this.selectedDate)
+      if (this.today) {
+        let ts = QCalendar.parseTimestamp(this.today)
         ts = QCalendar.addToDate(ts, { day: -ts.day })
         return ts.date
       }
@@ -50,25 +56,22 @@ export default {
 
     disabledAfter () {
       // find the 1st day of the next month
-      if (this.selectedDate) {
-        let ts = QCalendar.parseTimestamp(this.selectedDate)
+      if (this.today) {
+        let ts = QCalendar.parseTimestamp(this.today)
         // get days in month
         const days = QCalendar.daysInMonth(ts.year, ts.month)
-        ts = QCalendar.addToDate(ts, { day: (days - ts.day) })
+        ts = QCalendar.addToDate(ts, { day: (days - ts.day + 1) })
         return ts.date
       }
       return undefined
     }
   },
   methods: {
-    modifiedStyle (scope) {
-      if (scope.disabled === true) {
-        return {
-          backgroundColor: '#ffcb9c!important',
-          cursor: 'not-allowed'
-        }
-      }
-      return {}
+    calendarNext () {
+      this.$refs.calendar.next()
+    },
+    calendarPrev () {
+      this.$refs.calendar.prev()
     }
   }
 }

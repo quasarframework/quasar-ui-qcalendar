@@ -11,7 +11,7 @@ module.exports = {
   collectCoverage: true,
   coverageDirectory: '<rootDir>/test/jest/coverage',
   collectCoverageFrom: [
-    '<rootDir>/src/utils/timestamp.js'
+    '<rootDir>/src/utils/Timestamp.js'
     // add other paths here if you want them
   ],
   // collectCoverageFrom: [
@@ -43,6 +43,6 @@ module.exports = {
   transform: {
     '.*\\.js$': 'babel-jest',
     '.*\\.vue$': 'vue-jest',
-    '.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
+    '.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub'
   }
 }

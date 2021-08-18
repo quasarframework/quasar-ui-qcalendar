@@ -2,7 +2,7 @@ import {
   validateTimestamp,
   parseTimestamp,
   parseDate
-} from '../utils/timestamp'
+} from '../utils/Timestamp.js'
 
 export default {
   name: 'Times',
@@ -10,7 +10,8 @@ export default {
   props: {
     now: {
       type: String,
-      validator: v => v === '' || validateTimestamp(v)
+      validator: v => v === '' || validateTimestamp(v),
+      default: ''
     }
   },
 

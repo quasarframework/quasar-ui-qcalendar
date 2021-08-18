@@ -4,7 +4,6 @@
       v-model="selectedDate"
       view="week"
       :disabled-weekdays="[0,6]"
-      :interval-style="modifiedStyle"
       locale="en-us"
       style="height: 400px;"
     />
@@ -33,17 +32,6 @@ export default {
   beforeMount () {
     // set to today's date
     this.selectedDate = getCurrentDay(CURRENT_DAY.getDate())
-  },
-  methods: {
-    modifiedStyle (scope) {
-      if (scope.disabled === true) {
-        return {
-          backgroundColor: '#ffcb9c!important',
-          cursor: 'not-allowed'
-        }
-      }
-      return {}
-    }
   }
 }
 </script>

@@ -15,8 +15,6 @@
           QCalendar <span class="text-subtitle2">v{{ version }}</span>
         </q-toolbar-title>
 
-        <q-space />
-
         <q-btn flat round @click="$q.dark.toggle()" :icon="$q.dark.isActive ? 'brightness_2' : 'brightness_5'" />
         <div v-if="$q.screen.width > 500">Quasar v{{ $q.version }}</div>
 
@@ -24,11 +22,10 @@
           flat
           dense
           round
+          icon="menu"
           @click="rightDrawerOpen = !rightDrawerOpen"
           aria-label="Table of Contents"
-        >
-          <q-icon name="menu" />
-        </q-btn>
+        />
 
       </q-toolbar>
     </q-header>
@@ -41,7 +38,9 @@
       class="menu"
     >
       <q-list>
-        <q-item-label header>Essential Links</q-item-label>
+        <q-item-label header>
+          <q-icon name="fas fa-link" size="1.5em" class="q-mr-md" /><span style="font-size: 1.5em">Essential Links</span>
+        </q-item-label>
         <q-separator />
       </q-list>
       <essential-links />
@@ -97,7 +96,7 @@ export default {
   },
   data () {
     return {
-      version: version,
+      version,
       leftDrawerOpen: this.$q.platform.is.desktop,
       rightDrawerOpen: this.$q.platform.is.desktop,
       activeToc: 0

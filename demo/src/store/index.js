@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 import calendar from './calendar'
 import common from './common'
+import ThemeBuilder from './ThemeBuilder'
 
 Vue.use(Vuex)
 
@@ -15,7 +16,8 @@ export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
       calendar,
-      common
+      common,
+      ThemeBuilder
     },
 
     // enable strict mode (adds overhead!)

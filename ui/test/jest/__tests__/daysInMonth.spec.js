@@ -1,5 +1,5 @@
 // eslint-disable-next-line node/no-missing-require
-const timestamp = require('utils/timestamp.js')
+const timestamp = require('utils/Timestamp.js')
 
 describe('[TIMESTAMP] daysInMonth', () => {
   it('Jan 2020 has 31 days', async () => {

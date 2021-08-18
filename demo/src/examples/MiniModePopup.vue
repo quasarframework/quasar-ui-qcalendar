@@ -29,7 +29,8 @@
                   view="month"
                   :locale="locale"
                   mini-mode
-                  :day-class="classDay"
+                  :selected-start-end-dates="startEndDates"
+                  no-active-date
                   @changed="onChanged"
                   @mousedown:day2="onMouseDownDay"
                   @mouseup:day2="onMouseUpDay"
@@ -168,21 +169,6 @@ export default {
 
     calendarPrev () {
       this.$refs.calendar.prev()
-    },
-
-    classDay (timestamp) {
-      if (this.anchorDayIdentifier !== false && this.otherDayIdentifier !== false) {
-        return this.getBetween(timestamp)
-      }
-    },
-
-    getBetween (timestamp) {
-      const nowIdentifier = QCalendar.getDayIdentifier(timestamp)
-      return {
-        'q-selected-day-first': this.lowIdentifier === nowIdentifier,
-        'q-selected-day': this.lowIdentifier <= nowIdentifier && this.highIdentifier >= nowIdentifier,
-        'q-selected-day-last': this.highIdentifier === nowIdentifier
-      }
     },
 
     onMouseDownDay ({ scope, event }) {

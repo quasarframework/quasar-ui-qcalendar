@@ -1,5 +1,5 @@
 <template>
-  <div class="row justify-center full-width">
+  <div class="row justify-center full-width" style=" background: #121212;">
     <q-calendar
       v-model="selectedDate"
       view="day-resource"

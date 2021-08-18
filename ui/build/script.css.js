@@ -3,7 +3,7 @@ const path = require('path')
 const sass = require('sass')
 const postcss = require('postcss')
 const cssnano = require('cssnano')
-const rtl = require('postcss-rtl')
+const rtl = require('rtlcss')
 const autoprefixer = require('autoprefixer')
 
 const buildConf = require('./config')
@@ -55,7 +55,7 @@ function generate (src, dest) {
     })
   })
     .then(code => buildConf.banner + code)
-    .then(code => postCssCompiler.process(code, { from: undefined }))
+    .then(code => postCssCompiler.process(code, { from: void 0 }))
     .then(code => {
       code.warnings().forEach(warn => {
         console.warn(warn.toString())
@@ -64,13 +64,13 @@ function generate (src, dest) {
     })
     .then(code => Promise.all([
       generateUMD(dest, code),
-      postCssRtlCompiler.process(code, { from: undefined })
+      postCssRtlCompiler.process(code, { from: void 0 })
         .then(code => generateUMD(dest, code.css, '.rtl'))
     ]))
 }
 
 function generateUMD (dest, code, ext = '') {
   return buildUtils.writeFile(`${dest}${ext}.css`, code, true)
-    .then(code => nano.process(code, { from: undefined }))
+    .then(code => nano.process(code, { from: void 0 }))
     .then(code => buildUtils.writeFile(`${dest}${ext}.min.css`, code.css, true))
 }

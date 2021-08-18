@@ -7,26 +7,25 @@
         <q-btn flat dense label="Next" @click="calendarNext" />
       </div>
       <q-separator />
-      <div style="overflow: hidden; height: 390px;">
-        <q-calendar
-          ref="calendar"
-          v-model="selectedDate"
-          view="day"
-          locale="en-us"
-          animated
-          @input="onModelChanged"
-          @click:date2="onClickDate2"
-          @click:day:header2="onClickDayHeader2"
-          @click:interval2="onClickInterval2"
-          @click:time2="onClickTime2"
-          @click:interval:header2="onClickIntervalHeader2"
-        />
-      </div>
+      <q-calendar
+        ref="calendar"
+        v-model="selectedDate"
+        view="day"
+        locale="en-us"
+        animated
+        @input="onModelChanged"
+        @click:date2="onClickDate2"
+        @click:day:header2="onClickDayHeader2"
+        @click:interval2="onClickInterval2"
+        @click:time2="onClickTime2"
+        @click:interval:header2="onClickIntervalHeader2"
+        style="height: 390px;"
+      />
     </div>
     <q-card class="events col-4 q-pa-xs full-height column justify-start items-start">
       <q-item-section class="full-width">
         <q-item-label>Events</q-item-label>
-        <q-item-label caption>New data appended to top</q-item-label>
+        <q-item-label class="my-text-caption">New data appended to top</q-item-label>
       </q-item-section>
       <q-separator />
       <div class="scroll overflow-auto" style="height: 360px; width: 100%;">
@@ -74,3 +73,10 @@ export default {
   }
 }
 </script>
+<style lang="sass" scoped>
+.my-text-caption
+  font-size: 0.7rem
+  font-weight: 400
+  line-height: .75rem !important
+  letter-spacing: 0.03333em
+</style>

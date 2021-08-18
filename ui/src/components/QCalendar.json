@@ -94,6 +94,7 @@
     },
     "weekdays": {
       "type": "Array",
+      "tsType": "NumberArray",
       "category": "model",
       "desc": "This is the days of the week and in which order they are displayed. If you want Monday as the first day of the week, you would use [1,2,3,4,5,6,0]. If you want a 5-day work week you would use [1,2,3,4,5]",
       "default": "[0,1,2,3,4,5,6]",
@@ -116,6 +117,7 @@
     },
     "disabled-days": {
       "type": "Array",
+      "tsType": "StringArray",
       "category": "model",
       "desc": "An array of string dates in the form `YYYY-MM-DD` that will be disabled. If an array is contained within the array with a start and end date, it will be treated as a range",
       "applicable": [
@@ -179,6 +181,7 @@
     },
     "color": {
       "type": "String",
+      "removedIn": "v3.0.0",
       "category": "style",
       "desc": "This is the color used current day (now) highlighting. It can be from the from the [Quasar Color Palette](https://quasar.dev/style/color-palette), CSS named color or a CSS color (#, rgb, rgba, hls, etc)",
       "applicable": [
@@ -192,17 +195,19 @@
       ]
     },
     "enable-theme": {
+      "removedIn": "v3.0.0",
       "type": "Boolean",
       "category": "style",
-      "desc": "Turns on theme support",
+      "desc": "Since v3.0.0 use css vars to control your themes",
       "applicable": [
         "All"
       ]
     },
     "theme": {
+      "removedIn": "v3.0.0",
       "type": "Object",
       "category": "style",
-      "desc": "Object containing keys and values that overrides the calendar's color properties. See online demo for format of a theme",
+      "desc": "Since v3.0.0 use css vars to control your themes",
       "applicable": [
         "All"
       ],
@@ -242,6 +247,19 @@
         "day-resource"
       ]
     },
+    "cell-width": {
+      "type": "String",
+      "addedIn": "v3.3.0",
+      "category": "behavior",
+      "desc": "Sets day cell width and turns on sticky mode. Width must be css measurement",
+      "applicable": [
+        "month-scheduler",
+        "custom-scheduler"
+      ],
+      "examples": [
+        "cell-width=\"100px\""
+      ]
+    },
     "transition-prev": {
       "type": "String",
       "category": "behavior",
@@ -266,6 +284,15 @@
         "transition-next=\"flip-left\""
       ]
     },
+    "time-clicks-clamped": {
+      "type": "Boolean",
+      "addedIn": "v3.2.0",
+      "category": "behavior",
+      "desc": "Causes the returning timestamp time to be clamped to the interval it is in",
+      "applicable": [
+        "All interval-based"
+      ]
+    },
     "drag-over-func": {
       "type": "Function",
       "category": "behavior",
@@ -278,6 +305,7 @@
         },
         "timestamp": {
           "type": "Object",
+          "tsType": "Timestamp",
           "desc": "The timestamp object associated with the date and optional time (if an interval)",
           "__exemption": [ "examples" ]
         },
@@ -319,6 +347,7 @@
         },
         "timestamp": {
           "type": "Object",
+          "tsType": "Timestamp",
           "desc": "The timestamp object associated with the date and optional time (if an interval) of the drop",
           "__exemption": [ "examples" ]
         },
@@ -490,6 +519,7 @@
       "params": {
         "timestamp": {
           "type": "Object",
+          "tsType": "Timestamp",
           "desc": "A timestamp object associated with the interval",
           "__exemption": [ "examples" ]
         }
@@ -656,6 +686,7 @@
       "params": {
         "timestamp": {
           "type": "Object",
+          "tsType": "Timestamp",
           "desc": "A timestamp object associated with the day",
           "__exemption": [ "examples" ]
         }
@@ -684,6 +715,7 @@
       "params": {
         "timestamp": {
           "type": "Object",
+          "tsType": "Timestamp",
           "desc": "A timestamp object associated with the day",
           "__exemption": [ "examples" ]
         }
@@ -692,7 +724,7 @@
         "type": ["Array", "Object", "String"],
         "desc": "A Vue style object of classes",
         "examples": [
-          "{ 'q-selected-day': true }"
+          "{ 'q-range': true }"
         ]
       },
       "default": "null",
@@ -788,6 +820,7 @@
     },
     "resources": {
       "type": "Array",
+      "tsType": "ResourceObjectArray",
       "category": "model",
       "required": true,
       "desc": "An array of objects with a single key of label. You can add other keys if you like, which will be passed back on the appropriate scoped slots",
@@ -858,6 +891,7 @@
           "definition": {
             "timestamp": {
               "type": "Object",
+              "tsType": "Timestamp",
               "desc": "A timestamp object associated with the interval",
               "__exemption": [ "examples" ]
             },
@@ -868,6 +902,7 @@
             },
             "resource": {
               "type": "Object",
+              "tsType": "ResourceObject",
               "desc": "The resource object",
               "__exemption": [ "examples" ]
             }
@@ -893,26 +928,56 @@
     },
     "selected-start-end-dates": {
       "type": "Array",
+      "tsType": "StringArray",
       "category": "behavior",
       "addedIn": "v1.2.0",
-      "desc": "An array of two dates in format `YYYY-MM-DD` for selection purposes",
+      "desc": "An array of two dates in format `YYYY-MM-DD` for selection purposes. Interval-based calendars use `YYYY-MM-DD HH:mm`",
       "applicable": [
-        "month"
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month",
+        "month-interval",
+        "custom-interval"
       ],
       "examples": [
         ":selected-start-end-dates=\"getStartEndDates\""
       ]
     },
+    "hover": {
+      "addedIn": "v3.0.0",
+      "type": "Boolean",
+      "category": "style",
+      "desc": "Changes the style `selected-start-end-dates` selection when in `mini-mode`. Typically, set this to `true` on `mousedown` and `false` on `mouseup`",
+      "applicable": [
+        "month (mini-mode)"
+      ]
+    },
     "selected-dates": {
       "type": "Array",
+      "tsType": "StringArray",
       "category": "model",
       "addedIn": "v1.3.14",
-      "desc": "An array of string dates in the form `YYYY-MM-DD` that will be selected",
+      "desc": "An array of string dates in the form `YYYY-MM-DD` that will be selected. Interval-based calendars use `YYYY-MM-DD HH:mm`",
       "applicable": [
-        "month"
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month",
+        "month-interval",
+        "custom-interval"
       ],
       "examples": [
-        ":selected-dates=\"['2019-04-01', '2019-04-02', '2019-04-03', '2019-04-04']\""
+        ":selected-dates=\"['2019-04-01', '2019-04-02', '2019-04-03', '2019-04-04']\"",
+        ":selected-dates=\"['2019-04-01 13:00', '2019-04-01 13:15', '2019-04-01 13:30', '2019-04-01 13:45']\""
       ]
     },
     "mini-mode": {
@@ -975,7 +1040,8 @@
       ]
     },
     "left-column-options": {
-      "type": "Object",
+      "type": "Array",
+      "tsType": "ColumnObjectArray",
       "category": "behavior",
       "addedIn": "v1.5.0",
       "desc": "An array of objects used to add columns to the left side of the agenda. Each object must have an id and label key or define the id object key using the `column-options-id` and the label using the `column-options-label` properties. The value of the id should be unique for each object. The object is passed to slots",
@@ -987,7 +1053,8 @@
       ]
     },
     "right-column-options": {
-      "type": "Object",
+      "type": "Array",
+      "tsType": "ColumnObjectArray",
       "category": "behavior",
       "addedIn": "v1.5.0",
       "desc": "An array of objects used to add columns to the right side of the agenda. Each object must have an id and label key or define the id object key using the `column-options-id` and the label using the `column-options-label` properties. The value of the id should be unique for each object. The object is passed to slots",
@@ -1046,6 +1113,7 @@
       "params": {
         "{start, end}": {
           "type": "Object",
+          "tsType": "Timestamp",
           "desc": "The timestamp objects for the first and last valid date being displayed",
           "__exemption": [ "examples" ]
         }
@@ -1059,13 +1127,43 @@
       "params": {
         "timestamp": {
           "type": "Object",
+          "tsType": "Timestamp",
           "desc": "The timestamp object of the move. For instance, if in month view, this will be the timestamp object containing the 1st of the month",
           "__exemption": [ "examples" ]
         }
       }
     },
+    "expanded": {
+      "addedIn": "v3.0.0",
+      "desc": "Event occurs when hierarchial resources are expanded/collapses",
+      "applicable": [
+        "Scheduler",
+        "Resource"
+      ],
+      "params": {
+        "resource": {
+          "type": "Object",
+          "tsType": "ResourceObject",
+          "desc": "The resource object that was toggle, check `expanded` property for `true` or `false`",
+          "__exemption": [ "examples" ]
+        }
+      }
+    },
+    "mini-mode": {
+      "addedIn": "v3.1.2",
+      "desc": "Event occurs when switching to/from mini-mode, when the `breakpoint` property is set to `auto`",
+      "applicable": [
+        "Month"
+      ],
+      "params": {
+        "value": {
+          "type": "Boolean",
+          "desc": "If switched to `mini-mode`, then the value is `true`, otherwise it is `false"
+        }
+      }
+    },
     "click:date": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on date button",
       "applicable": [
         "All"
@@ -1078,6 +1176,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "Timestamp",
               "desc": "The timestamp object",
               "__exemption": [ "examples" ]
             },
@@ -1109,6 +1208,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -1124,7 +1224,7 @@
       }
     },
     "contextmenu:date": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on date button",
       "applicable": [
         "All"
@@ -1137,6 +1237,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "Timestamp",
               "desc": "The timestamp object",
               "__exemption": [ "examples" ]
             },
@@ -1168,6 +1269,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -1183,7 +1285,7 @@
       }
     },
     "mousedown:date": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on date button",
       "applicable": [
         "All"
@@ -1196,6 +1298,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "Timestamp",
               "desc": "The timestamp object",
               "__exemption": [ "examples" ]
             },
@@ -1227,6 +1330,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -1242,7 +1346,7 @@
       }
     },
     "mouseup:date": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on date button",
       "applicable": [
         "All"
@@ -1255,6 +1359,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "Timestamp",
               "desc": "The timestamp object",
               "__exemption": [ "examples" ]
             },
@@ -1286,6 +1391,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -1301,7 +1407,7 @@
       }
     },
     "mouseenter:date": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on date button",
       "applicable": [
         "All"
@@ -1314,6 +1420,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "Timestamp",
               "desc": "The timestamp object",
               "__exemption": [ "examples" ]
             },
@@ -1345,6 +1452,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -1360,7 +1468,7 @@
       }
     },
     "mouseleave:date": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on date button",
       "applicable": [
         "All"
@@ -1373,6 +1481,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "Timestamp",
               "desc": "The timestamp object",
               "__exemption": [ "examples" ]
             },
@@ -1404,6 +1513,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -1419,7 +1529,7 @@
       }
     },
     "mousemove:date": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on date button",
       "applicable": [
         "All"
@@ -1432,6 +1542,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "Timestamp",
               "desc": "The timestamp object",
               "__exemption": [ "examples" ]
             },
@@ -1463,6 +1574,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -1478,7 +1590,7 @@
       }
     },
     "touchstart:date": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on date button",
       "applicable": [
         "All"
@@ -1491,6 +1603,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "Timestamp",
               "desc": "The timestamp object",
               "__exemption": [ "examples" ]
             },
@@ -1522,6 +1635,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -1537,7 +1651,7 @@
       }
     },
     "touchend:date": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on date button",
       "applicable": [
         "All"
@@ -1550,6 +1664,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "Timestamp",
               "desc": "The timestamp object",
               "__exemption": [ "examples" ]
             },
@@ -1581,6 +1696,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -1596,7 +1712,7 @@
       }
     },
     "touchmove:date": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on date button",
       "applicable": [
         "All"
@@ -1609,6 +1725,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "Timestamp",
               "desc": "The timestamp object",
               "__exemption": [ "examples" ]
             },
@@ -1640,6 +1757,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -1654,9 +1772,8 @@
         }
       }
     },
-
     "click:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on day area",
       "applicable": [
         "month"
@@ -1669,6 +1786,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "Timestamp",
               "desc": "The timestamp object",
               "__exemption": [ "examples" ]
             },
@@ -1700,6 +1818,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 },
@@ -1723,7 +1842,7 @@
       }
     },
     "contextmenu:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on day area",
       "applicable": [
         "month"
@@ -1736,6 +1855,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "Timestamp",
               "desc": "The timestamp object",
               "__exemption": [ "examples" ]
             },
@@ -1767,6 +1887,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 },
@@ -1790,7 +1911,7 @@
       }
     },
     "mousedown:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on day area",
       "applicable": [
         "month"
@@ -1803,6 +1924,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "Timestamp",
               "desc": "The timestamp object",
               "__exemption": [ "examples" ]
             },
@@ -1834,6 +1956,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 },
@@ -1857,7 +1980,7 @@
       }
     },
     "mouseup:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on day area",
       "applicable": [
         "month"
@@ -1901,6 +2024,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 },
@@ -1924,7 +2048,7 @@
       }
     },
     "mouseenter:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on day area",
       "applicable": [
         "month"
@@ -1968,6 +2092,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 },
@@ -1991,7 +2116,7 @@
       }
     },
     "mouseleave:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on day area",
       "applicable": [
         "month"
@@ -2035,6 +2160,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 },
@@ -2058,7 +2184,7 @@
       }
     },
     "mousemove:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on day area",
       "applicable": [
         "month"
@@ -2102,6 +2228,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 },
@@ -2125,7 +2252,7 @@
       }
     },
     "touchstart:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on day area",
       "applicable": [
         "month"
@@ -2169,6 +2296,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 },
@@ -2192,7 +2320,7 @@
       }
     },
     "touchend:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on day area",
       "applicable": [
         "month"
@@ -2236,6 +2364,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 },
@@ -2259,7 +2388,7 @@
       }
     },
     "touchmove:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on day area",
       "applicable": [
         "month"
@@ -2303,6 +2432,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 },
@@ -2325,7 +2455,6 @@
         }
       }
     },
-
     "click:day:header2": {
       "addedIn": "v2.4.0",
       "desc": "Occurs on day header",
@@ -2345,11 +2474,13 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "A timestamp object representing the first day of the week for that weekday",
                   "__exemption": [ "examples" ]
                 },
                 "days": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects representing all the days in the month for that weekday",
                   "__exemption": [ "examples" ]
                 },
@@ -2392,11 +2523,13 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "A timestamp object representing the first day of the week for that weekday",
                   "__exemption": [ "examples" ]
                 },
                 "days": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects representing all the days in the month for that weekday",
                   "__exemption": [ "examples" ]
                 },
@@ -2439,11 +2572,13 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "A timestamp object representing the first day of the week for that weekday",
                   "__exemption": [ "examples" ]
                 },
                 "days": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects representing all the days in the month for that weekday",
                   "__exemption": [ "examples" ]
                 },
@@ -2486,11 +2621,13 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "A timestamp object representing the first day of the week for that weekday",
                   "__exemption": [ "examples" ]
                 },
                 "days": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects representing all the days in the month for that weekday",
                   "__exemption": [ "examples" ]
                 },
@@ -2533,11 +2670,13 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "A timestamp object representing the first day of the week for that weekday",
                   "__exemption": [ "examples" ]
                 },
                 "days": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects representing all the days in the month for that weekday",
                   "__exemption": [ "examples" ]
                 },
@@ -2580,11 +2719,13 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "A timestamp object representing the first day of the week for that weekday",
                   "__exemption": [ "examples" ]
                 },
                 "days": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects representing all the days in the month for that weekday",
                   "__exemption": [ "examples" ]
                 },
@@ -2627,11 +2768,13 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "A timestamp object representing the first day of the week for that weekday",
                   "__exemption": [ "examples" ]
                 },
                 "days": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects representing all the days in the month for that weekday",
                   "__exemption": [ "examples" ]
                 },
@@ -2674,11 +2817,13 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "A timestamp object representing the first day of the week for that weekday",
                   "__exemption": [ "examples" ]
                 },
                 "days": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects representing all the days in the month for that weekday",
                   "__exemption": [ "examples" ]
                 },
@@ -2721,11 +2866,13 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "A timestamp object representing the first day of the week for that weekday",
                   "__exemption": [ "examples" ]
                 },
                 "days": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects representing all the days in the month for that weekday",
                   "__exemption": [ "examples" ]
                 },
@@ -2768,11 +2915,13 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "A timestamp object representing the first day of the week for that weekday",
                   "__exemption": [ "examples" ]
                 },
                 "days": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects representing all the days in the month for that weekday",
                   "__exemption": [ "examples" ]
                 },
@@ -2796,9 +2945,8 @@
         }
       }
     },
-
     "click:workweek": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on workweek",
       "addedIn": "v1.5.6",
       "applicable": [
@@ -2821,6 +2969,7 @@
                 },
                 "week": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects representing the week",
                   "__exemption": [ "examples" ]
                 },
@@ -2863,6 +3012,7 @@
                 },
                 "week": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects representing the week",
                   "__exemption": [ "examples" ]
                 },
@@ -2883,7 +3033,7 @@
       }
     },
     "contextmenu:workweek": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on workweek",
       "addedIn": "v1.5.6",
       "applicable": [
@@ -2906,6 +3056,7 @@
                 },
                 "week": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects representing the week",
                   "__exemption": [ "examples" ]
                 },
@@ -2948,6 +3099,7 @@
                 },
                 "week": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects representing the week",
                   "__exemption": [ "examples" ]
                 },
@@ -2968,7 +3120,7 @@
       }
     },
     "mousedown:workweek": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on workweek",
       "addedIn": "v1.5.6",
       "applicable": [
@@ -2991,6 +3143,7 @@
                 },
                 "week": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects representing the week",
                   "__exemption": [ "examples" ]
                 },
@@ -3033,6 +3186,7 @@
                 },
                 "week": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects representing the week",
                   "__exemption": [ "examples" ]
                 },
@@ -3053,7 +3207,7 @@
       }
     },
     "mouseup:workweek": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on workweek",
       "addedIn": "v1.5.6",
       "applicable": [
@@ -3076,6 +3230,7 @@
                 },
                 "week": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects representing the week",
                   "__exemption": [ "examples" ]
                 },
@@ -3118,6 +3273,7 @@
                 },
                 "week": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects representing the week",
                   "__exemption": [ "examples" ]
                 },
@@ -3138,7 +3294,7 @@
       }
     },
     "mouseenter:workweek": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on workweek",
       "addedIn": "v1.5.6",
       "applicable": [
@@ -3161,6 +3317,7 @@
                 },
                 "week": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects representing the week",
                   "__exemption": [ "examples" ]
                 },
@@ -3203,6 +3360,7 @@
                 },
                 "week": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects representing the week",
                   "__exemption": [ "examples" ]
                 },
@@ -3223,7 +3381,7 @@
       }
     },
     "mouseleave:workweek": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on workweek",
       "addedIn": "v1.5.6",
       "applicable": [
@@ -3246,6 +3404,7 @@
                 },
                 "week": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects representing the week",
                   "__exemption": [ "examples" ]
                 },
@@ -3288,6 +3447,7 @@
                 },
                 "week": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects representing the week",
                   "__exemption": [ "examples" ]
                 },
@@ -3308,7 +3468,7 @@
       }
     },
     "mousemove:workweek": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on workweek",
       "addedIn": "v1.5.6",
       "applicable": [
@@ -3331,6 +3491,7 @@
                 },
                 "week": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects representing the week",
                   "__exemption": [ "examples" ]
                 },
@@ -3373,6 +3534,7 @@
                 },
                 "week": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects representing the week",
                   "__exemption": [ "examples" ]
                 },
@@ -3393,7 +3555,7 @@
       }
     },
     "touchstart:workweek": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on workweek",
       "addedIn": "v1.5.6",
       "applicable": [
@@ -3416,6 +3578,7 @@
                 },
                 "week": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects representing the week",
                   "__exemption": [ "examples" ]
                 },
@@ -3458,6 +3621,7 @@
                 },
                 "week": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects representing the week",
                   "__exemption": [ "examples" ]
                 },
@@ -3478,7 +3642,7 @@
       }
     },
     "touchend:workweek": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on workweek",
       "addedIn": "v1.5.6",
       "applicable": [
@@ -3501,6 +3665,7 @@
                 },
                 "week": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects representing the week",
                   "__exemption": [ "examples" ]
                 },
@@ -3543,6 +3708,7 @@
                 },
                 "week": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects representing the week",
                   "__exemption": [ "examples" ]
                 },
@@ -3563,7 +3729,7 @@
       }
     },
     "touchmove:workweek": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on workweek",
       "addedIn": "v1.5.6",
       "applicable": [
@@ -3586,6 +3752,7 @@
                 },
                 "week": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects representing the week",
                   "__exemption": [ "examples" ]
                 },
@@ -3628,6 +3795,7 @@
                 },
                 "week": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects representing the week",
                   "__exemption": [ "examples" ]
                 },
@@ -3647,7 +3815,6 @@
         }
       }
     },
-
     "click:workweek:header2": {
       "addedIn": "v2.4.0",
       "desc": "Occurs on workweek",
@@ -3667,11 +3834,13 @@
               "definition": {
                 "start": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "A timestamp object representing the first day of the week",
                   "__exemption": [ "examples" ]
                 },
                 "end": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "A timestamp object representing the last day of the week",
                   "__exemption": [ "examples" ]
                 }
@@ -3705,11 +3874,13 @@
               "definition": {
                 "start": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "A timestamp object representing the first day of the week",
                   "__exemption": [ "examples" ]
                 },
                 "end": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "A timestamp object representing the last day of the week",
                   "__exemption": [ "examples" ]
                 }
@@ -3743,11 +3914,13 @@
               "definition": {
                 "start": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "A timestamp object representing the first day of the week",
                   "__exemption": [ "examples" ]
                 },
                 "end": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "A timestamp object representing the last day of the week",
                   "__exemption": [ "examples" ]
                 }
@@ -3781,11 +3954,13 @@
               "definition": {
                 "start": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "A timestamp object representing the first day of the week",
                   "__exemption": [ "examples" ]
                 },
                 "end": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "A timestamp object representing the last day of the week",
                   "__exemption": [ "examples" ]
                 }
@@ -3819,11 +3994,13 @@
               "definition": {
                 "start": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "A timestamp object representing the first day of the week",
                   "__exemption": [ "examples" ]
                 },
                 "end": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "A timestamp object representing the last day of the week",
                   "__exemption": [ "examples" ]
                 }
@@ -3857,11 +4034,13 @@
               "definition": {
                 "start": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "A timestamp object representing the first day of the week",
                   "__exemption": [ "examples" ]
                 },
                 "end": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "A timestamp object representing the last day of the week",
                   "__exemption": [ "examples" ]
                 }
@@ -3895,11 +4074,13 @@
               "definition": {
                 "start": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "A timestamp object representing the first day of the week",
                   "__exemption": [ "examples" ]
                 },
                 "end": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "A timestamp object representing the last day of the week",
                   "__exemption": [ "examples" ]
                 }
@@ -3933,11 +4114,13 @@
               "definition": {
                 "start": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "A timestamp object representing the first day of the week",
                   "__exemption": [ "examples" ]
                 },
                 "end": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "A timestamp object representing the last day of the week",
                   "__exemption": [ "examples" ]
                 }
@@ -3971,11 +4154,13 @@
               "definition": {
                 "start": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "A timestamp object representing the first day of the week",
                   "__exemption": [ "examples" ]
                 },
                 "end": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "A timestamp object representing the last day of the week",
                   "__exemption": [ "examples" ]
                 }
@@ -4009,11 +4194,13 @@
               "definition": {
                 "start": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "A timestamp object representing the first day of the week",
                   "__exemption": [ "examples" ]
                 },
                 "end": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "A timestamp object representing the last day of the week",
                   "__exemption": [ "examples" ]
                 }
@@ -4028,9 +4215,8 @@
         }
       }
     },
-
     "click:interval": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval area",
       "applicable": [
         "day",
@@ -4057,6 +4243,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "Timestamp",
               "desc": "The timestamp object",
               "__exemption": [ "examples" ]
             },
@@ -4102,6 +4289,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -4117,7 +4305,7 @@
       }
     },
     "contextmenu:interval": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval area",
       "applicable": [
         "day",
@@ -4144,6 +4332,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "Timestamp",
               "desc": "The timestamp object",
               "__exemption": [ "examples" ]
             },
@@ -4189,6 +4378,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -4204,7 +4394,7 @@
       }
     },
     "mousedown:interval": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval area",
       "applicable": [
         "day",
@@ -4231,6 +4421,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "Timestamp",
               "desc": "The timestamp object",
               "__exemption": [ "examples" ]
             },
@@ -4276,6 +4467,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -4291,7 +4483,7 @@
       }
     },
     "mouseup:interval": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval area",
       "applicable": [
         "day",
@@ -4318,6 +4510,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "Timestamp",
               "desc": "The timestamp object",
               "__exemption": [ "examples" ]
             },
@@ -4363,6 +4556,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -4378,7 +4572,7 @@
       }
     },
     "mouseenter:interval": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval area",
       "applicable": [
         "day",
@@ -4405,6 +4599,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "Timestamp",
               "desc": "The timestamp object",
               "__exemption": [ "examples" ]
             },
@@ -4450,6 +4645,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -4465,7 +4661,7 @@
       }
     },
     "mouseleave:interval": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval area",
       "applicable": [
         "day",
@@ -4492,6 +4688,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "Timestamp",
               "desc": "The timestamp object",
               "__exemption": [ "examples" ]
             },
@@ -4537,6 +4734,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -4552,7 +4750,7 @@
       }
     },
     "mousemove:interval": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval area",
       "applicable": [
         "day",
@@ -4579,6 +4777,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "Timestamp",
               "desc": "The timestamp object",
               "__exemption": [ "examples" ]
             },
@@ -4624,6 +4823,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -4639,7 +4839,7 @@
       }
     },
     "touchstart:interval": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval area",
       "applicable": [
         "day",
@@ -4666,6 +4866,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "Timestamp",
               "desc": "The timestamp object",
               "__exemption": [ "examples" ]
             },
@@ -4711,6 +4912,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -4726,7 +4928,7 @@
       }
     },
     "touchend:interval": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval area",
       "applicable": [
         "day",
@@ -4753,6 +4955,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "Timestamp",
               "desc": "The timestamp object",
               "__exemption": [ "examples" ]
             },
@@ -4798,6 +5001,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -4813,7 +5017,7 @@
       }
     },
     "touchmove:interval": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval area",
       "applicable": [
         "day",
@@ -4840,6 +5044,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "Timestamp",
               "desc": "The timestamp object",
               "__exemption": [ "examples" ]
             },
@@ -4885,6 +5090,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -4899,7 +5105,6 @@
         }
       }
     },
-
     "click:interval:header2": {
       "addedIn": "v2.4.0",
       "desc": "Occurs on interval area",
@@ -4933,6 +5138,7 @@
               "definition": {
                 "days": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects applicable for the view",
                   "__exemption": [ "examples" ]
                 }
@@ -4980,6 +5186,7 @@
               "definition": {
                 "days": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects applicable for the view",
                   "__exemption": [ "examples" ]
                 }
@@ -5027,6 +5234,7 @@
               "definition": {
                 "days": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects applicable for the view",
                   "__exemption": [ "examples" ]
                 }
@@ -5074,6 +5282,7 @@
               "definition": {
                 "days": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects applicable for the view",
                   "__exemption": [ "examples" ]
                 }
@@ -5121,6 +5330,7 @@
               "definition": {
                 "days": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects applicable for the view",
                   "__exemption": [ "examples" ]
                 }
@@ -5168,6 +5378,7 @@
               "definition": {
                 "days": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects applicable for the view",
                   "__exemption": [ "examples" ]
                 }
@@ -5215,6 +5426,7 @@
               "definition": {
                 "days": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects applicable for the view",
                   "__exemption": [ "examples" ]
                 }
@@ -5262,6 +5474,7 @@
               "definition": {
                 "days": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects applicable for the view",
                   "__exemption": [ "examples" ]
                 }
@@ -5309,6 +5522,7 @@
               "definition": {
                 "days": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects applicable for the view",
                   "__exemption": [ "examples" ]
                 }
@@ -5356,6 +5570,7 @@
               "definition": {
                 "days": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects applicable for the view",
                   "__exemption": [ "examples" ]
                 }
@@ -5370,9 +5585,8 @@
         }
       }
     },
-
     "click:time": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval time area",
       "applicable": [
         "day",
@@ -5405,6 +5619,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp of the event",
                   "__exemption": [ "examples" ]
                 },
@@ -5416,7 +5631,7 @@
                     "duration": {
                       "type": ["Number", "String"],
                       "desc": "The number of minutes for the event to calculate it's height",
-                      "examples":[
+                      "examples": [
                         "300",
                         "900"
                       ]
@@ -5439,14 +5654,19 @@
                     "time": {
                       "type": "String",
                       "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-                      "examples":[
+                      "examples": [
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -5460,6 +5680,7 @@
                 },
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object associated with the event. Only applicable for resource views",
                   "__exemption": [ "examples" ]
                 }
@@ -5508,6 +5729,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp of the event",
                   "__exemption": [ "examples" ]
                 },
@@ -5519,7 +5741,7 @@
                     "duration": {
                       "type": ["Number", "String"],
                       "desc": "The number of minutes for the event to calculate it's height",
-                      "examples":[
+                      "examples": [
                         "300",
                         "900"
                       ]
@@ -5542,14 +5764,19 @@
                     "time": {
                       "type": "String",
                       "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-                      "examples":[
+                      "examples": [
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -5563,6 +5790,7 @@
                 },
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object associated with the event. Only applicable for resource views",
                   "__exemption": [ "examples" ]
                 }
@@ -5578,7 +5806,7 @@
       }
     },
     "contextmenu:time": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval time area",
       "applicable": [
         "day",
@@ -5652,6 +5880,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp of the event",
                   "__exemption": [ "examples" ]
                 },
@@ -5663,7 +5892,7 @@
                     "duration": {
                       "type": ["Number", "String"],
                       "desc": "The number of minutes for the event to calculate it's height",
-                      "examples":[
+                      "examples": [
                         "300",
                         "900"
                       ]
@@ -5686,14 +5915,19 @@
                     "time": {
                       "type": "String",
                       "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-                      "examples":[
+                      "examples": [
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -5707,6 +5941,7 @@
                 },
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object associated with the event. Only applicable for resource views",
                   "__exemption": [ "examples" ]
                 }
@@ -5722,7 +5957,7 @@
       }
     },
     "mousedown:time": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval time area",
       "applicable": [
         "day",
@@ -5796,6 +6031,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp of the event",
                   "__exemption": [ "examples" ]
                 },
@@ -5807,7 +6043,7 @@
                     "duration": {
                       "type": ["Number", "String"],
                       "desc": "The number of minutes for the event to calculate it's height",
-                      "examples":[
+                      "examples": [
                         "300",
                         "900"
                       ]
@@ -5830,14 +6066,19 @@
                     "time": {
                       "type": "String",
                       "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-                      "examples":[
+                      "examples": [
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -5851,6 +6092,7 @@
                 },
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object associated with the event. Only applicable for resource views",
                   "__exemption": [ "examples" ]
                 }
@@ -5866,7 +6108,7 @@
       }
     },
     "mouseup:time": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval time area",
       "applicable": [
         "day",
@@ -5940,6 +6182,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp of the event",
                   "__exemption": [ "examples" ]
                 },
@@ -5951,7 +6194,7 @@
                     "duration": {
                       "type": ["Number", "String"],
                       "desc": "The number of minutes for the event to calculate it's height",
-                      "examples":[
+                      "examples": [
                         "300",
                         "900"
                       ]
@@ -5974,14 +6217,19 @@
                     "time": {
                       "type": "String",
                       "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-                      "examples":[
+                      "examples": [
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -5995,6 +6243,7 @@
                 },
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object associated with the event. Only applicable for resource views",
                   "__exemption": [ "examples" ]
                 }
@@ -6010,7 +6259,7 @@
       }
     },
     "mouseenter:time": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval time area",
       "applicable": [
         "day",
@@ -6084,6 +6333,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp of the event",
                   "__exemption": [ "examples" ]
                 },
@@ -6095,7 +6345,7 @@
                     "duration": {
                       "type": ["Number", "String"],
                       "desc": "The number of minutes for the event to calculate it's height",
-                      "examples":[
+                      "examples": [
                         "300",
                         "900"
                       ]
@@ -6118,14 +6368,19 @@
                     "time": {
                       "type": "String",
                       "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-                      "examples":[
+                      "examples": [
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -6139,6 +6394,7 @@
                 },
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object associated with the event. Only applicable for resource views",
                   "__exemption": [ "examples" ]
                 }
@@ -6154,7 +6410,7 @@
       }
     },
     "mouseleave:time": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval time area",
       "applicable": [
         "day",
@@ -6228,6 +6484,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp of the event",
                   "__exemption": [ "examples" ]
                 },
@@ -6239,7 +6496,7 @@
                     "duration": {
                       "type": ["Number", "String"],
                       "desc": "The number of minutes for the event to calculate it's height",
-                      "examples":[
+                      "examples": [
                         "300",
                         "900"
                       ]
@@ -6262,14 +6519,19 @@
                     "time": {
                       "type": "String",
                       "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-                      "examples":[
+                      "examples": [
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -6283,6 +6545,7 @@
                 },
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object associated with the event. Only applicable for resource views",
                   "__exemption": [ "examples" ]
                 }
@@ -6298,7 +6561,7 @@
       }
     },
     "mousemove:time": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval time area",
       "applicable": [
         "day",
@@ -6372,6 +6635,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp of the event",
                   "__exemption": [ "examples" ]
                 },
@@ -6383,7 +6647,7 @@
                     "duration": {
                       "type": ["Number", "String"],
                       "desc": "The number of minutes for the event to calculate it's height",
-                      "examples":[
+                      "examples": [
                         "300",
                         "900"
                       ]
@@ -6406,14 +6670,19 @@
                     "time": {
                       "type": "String",
                       "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-                      "examples":[
+                      "examples": [
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -6427,6 +6696,7 @@
                 },
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object associated with the event. Only applicable for resource views",
                   "__exemption": [ "examples" ]
                 }
@@ -6442,7 +6712,7 @@
       }
     },
     "touchstart:time": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval time area",
       "applicable": [
         "day",
@@ -6516,6 +6786,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp of the event",
                   "__exemption": [ "examples" ]
                 },
@@ -6527,7 +6798,7 @@
                     "duration": {
                       "type": ["Number", "String"],
                       "desc": "The number of minutes for the event to calculate it's height",
-                      "examples":[
+                      "examples": [
                         "300",
                         "900"
                       ]
@@ -6550,14 +6821,19 @@
                     "time": {
                       "type": "String",
                       "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-                      "examples":[
+                      "examples": [
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -6571,6 +6847,7 @@
                 },
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object associated with the event. Only applicable for resource views",
                   "__exemption": [ "examples" ]
                 }
@@ -6586,7 +6863,7 @@
       }
     },
     "touchend:time": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval time area",
       "applicable": [
         "day",
@@ -6660,6 +6937,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp of the event",
                   "__exemption": [ "examples" ]
                 },
@@ -6671,7 +6949,7 @@
                     "duration": {
                       "type": ["Number", "String"],
                       "desc": "The number of minutes for the event to calculate it's height",
-                      "examples":[
+                      "examples": [
                         "300",
                         "900"
                       ]
@@ -6694,14 +6972,19 @@
                     "time": {
                       "type": "String",
                       "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-                      "examples":[
+                      "examples": [
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -6715,6 +6998,7 @@
                 },
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object associated with the event. Only applicable for resource views",
                   "__exemption": [ "examples" ]
                 }
@@ -6730,7 +7014,7 @@
       }
     },
     "touchmove:time": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on interval time area",
       "applicable": [
         "day",
@@ -6804,6 +7088,7 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp of the event",
                   "__exemption": [ "examples" ]
                 },
@@ -6815,7 +7100,7 @@
                     "duration": {
                       "type": ["Number", "String"],
                       "desc": "The number of minutes for the event to calculate it's height",
-                      "examples":[
+                      "examples": [
                         "300",
                         "900"
                       ]
@@ -6838,14 +7123,19 @@
                     "time": {
                       "type": "String",
                       "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-                      "examples":[
+                      "examples": [
                         "09:00"
                       ]
+                    },
+                    "clamp": {
+                      "type": "Boolean",
+                      "desc": "Clamp negative values to 0",
+                      "default": "true"
                     }
                   },
                   "returns": {
                     "type": "Number",
-                    "desc": "The absolute y starting position",
+                    "desc": "The absolute y starting position, but `false` on invalid time parameter",
                     "examples": [
                       "120",
                       "482"
@@ -6859,6 +7149,7 @@
                 },
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object associated with the event. Only applicable for resource views",
                   "__exemption": [ "examples" ]
                 }
@@ -6873,9 +7164,8 @@
         }
       }
     },
-
     "click:resource": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource area",
       "applicable": [
         "scheduler",
@@ -6929,11 +7219,13 @@
               "definition": {
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object associated with the event. Only applicable for resource views",
                   "__exemption": [ "examples" ]
                 },
                 "intervals": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamps of the intervals",
                   "__exemption": [ "examples" ]
                 },
@@ -6954,7 +7246,7 @@
       }
     },
     "contextmenu:resource": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource area",
       "applicable": [
         "scheduler",
@@ -7008,11 +7300,13 @@
               "definition": {
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object associated with the event. Only applicable for resource views",
                   "__exemption": [ "examples" ]
                 },
                 "intervals": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamps of the intervals",
                   "__exemption": [ "examples" ]
                 },
@@ -7033,7 +7327,7 @@
       }
     },
     "mousedown:resource": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource area",
       "applicable": [
         "scheduler",
@@ -7087,11 +7381,13 @@
               "definition": {
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object associated with the event. Only applicable for resource views",
                   "__exemption": [ "examples" ]
                 },
                 "intervals": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamps of the intervals",
                   "__exemption": [ "examples" ]
                 },
@@ -7112,7 +7408,7 @@
       }
     },
     "mouseup:resource": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource area",
       "applicable": [
         "scheduler",
@@ -7166,11 +7462,13 @@
               "definition": {
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object associated with the event. Only applicable for resource views",
                   "__exemption": [ "examples" ]
                 },
                 "intervals": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamps of the intervals",
                   "__exemption": [ "examples" ]
                 },
@@ -7191,7 +7489,7 @@
       }
     },
     "mouseenter:resource": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource area",
       "applicable": [
         "scheduler",
@@ -7245,11 +7543,13 @@
               "definition": {
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object associated with the event. Only applicable for resource views",
                   "__exemption": [ "examples" ]
                 },
                 "intervals": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamps of the intervals",
                   "__exemption": [ "examples" ]
                 },
@@ -7270,7 +7570,7 @@
       }
     },
     "mouseleave:resource": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource area",
       "applicable": [
         "scheduler",
@@ -7324,11 +7624,13 @@
               "definition": {
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object associated with the event. Only applicable for resource views",
                   "__exemption": [ "examples" ]
                 },
                 "intervals": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamps of the intervals",
                   "__exemption": [ "examples" ]
                 },
@@ -7349,7 +7651,7 @@
       }
     },
     "mousemove:resource": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource area",
       "applicable": [
         "scheduler",
@@ -7403,11 +7705,13 @@
               "definition": {
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object associated with the event. Only applicable for resource views",
                   "__exemption": [ "examples" ]
                 },
                 "intervals": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamps of the intervals",
                   "__exemption": [ "examples" ]
                 },
@@ -7428,7 +7732,7 @@
       }
     },
     "touchstart:resource": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource area",
       "applicable": [
         "scheduler",
@@ -7482,11 +7786,13 @@
               "definition": {
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object associated with the event. Only applicable for resource views",
                   "__exemption": [ "examples" ]
                 },
                 "intervals": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamps of the intervals",
                   "__exemption": [ "examples" ]
                 },
@@ -7507,7 +7813,7 @@
       }
     },
     "touchend:resource": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource area",
       "applicable": [
         "scheduler",
@@ -7561,11 +7867,13 @@
               "definition": {
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object associated with the event. Only applicable for resource views",
                   "__exemption": [ "examples" ]
                 },
                 "intervals": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamps of the intervals",
                   "__exemption": [ "examples" ]
                 },
@@ -7586,7 +7894,7 @@
       }
     },
     "touchmove:resource": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource area",
       "applicable": [
         "scheduler",
@@ -7640,11 +7948,13 @@
               "definition": {
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object associated with the event. Only applicable for resource views",
                   "__exemption": [ "examples" ]
                 },
                 "intervals": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamps of the intervals",
                   "__exemption": [ "examples" ]
                 },
@@ -7664,7 +7974,6 @@
         }
       }
     },
-
     "click:resource:header2": {
       "addedIn": "v2.4.0",
       "desc": "Occurs on resource header area",
@@ -7689,16 +7998,19 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object. Not in all views.",
                   "__exemption": [ "examples" ]
                 },
                 "resources": {
                   "type": "Array",
+                  "tsType": "ResourceObjectArray",
                   "desc": "An array of resource objects",
                   "__exemption": [ "examples" ]
                 },
                 "intervals": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects of the intervals",
                   "__exemption": [ "examples" ]
                 }
@@ -7737,16 +8049,19 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object. Not in all views.",
                   "__exemption": [ "examples" ]
                 },
                 "resources": {
                   "type": "Array",
+                  "tsType": "ResourceObjectArray",
                   "desc": "An array of resource objects",
                   "__exemption": [ "examples" ]
                 },
                 "intervals": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects of the intervals",
                   "__exemption": [ "examples" ]
                 }
@@ -7784,17 +8099,20 @@
               "__exemption": [ "examples" ],
               "definition": {
                 "timestamp": {
+                  "tsType": "Timestamp",
                   "type": "Object",
                   "desc": "The timestamp object. Not in all views.",
                   "__exemption": [ "examples" ]
                 },
                 "resources": {
                   "type": "Array",
+                  "tsType": "ResourceObjectArray",
                   "desc": "An array of resource objects",
                   "__exemption": [ "examples" ]
                 },
                 "intervals": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects of the intervals",
                   "__exemption": [ "examples" ]
                 }
@@ -7833,16 +8151,19 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object. Not in all views.",
                   "__exemption": [ "examples" ]
                 },
                 "resources": {
                   "type": "Array",
+                  "tsType": "ResourceObjectArray",
                   "desc": "An array of resource objects",
                   "__exemption": [ "examples" ]
                 },
                 "intervals": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects of the intervals",
                   "__exemption": [ "examples" ]
                 }
@@ -7881,16 +8202,19 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object. Not in all views.",
                   "__exemption": [ "examples" ]
                 },
                 "resources": {
                   "type": "Array",
+                  "tsType": "ResourceObjectArray",
                   "desc": "An array of resource objects",
                   "__exemption": [ "examples" ]
                 },
                 "intervals": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects of the intervals",
                   "__exemption": [ "examples" ]
                 }
@@ -7929,16 +8253,19 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object. Not in all views.",
                   "__exemption": [ "examples" ]
                 },
                 "resources": {
                   "type": "Array",
+                  "tsType": "ResourceObjectArray",
                   "desc": "An array of resource objects",
                   "__exemption": [ "examples" ]
                 },
                 "intervals": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects of the intervals",
                   "__exemption": [ "examples" ]
                 }
@@ -7977,16 +8304,19 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object. Not in all views.",
                   "__exemption": [ "examples" ]
                 },
                 "resources": {
                   "type": "Array",
+                  "tsType": "ResourceObjectArray",
                   "desc": "An array of resource objects",
                   "__exemption": [ "examples" ]
                 },
                 "intervals": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects of the intervals",
                   "__exemption": [ "examples" ]
                 }
@@ -8025,16 +8355,19 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object. Not in all views.",
                   "__exemption": [ "examples" ]
                 },
                 "resources": {
                   "type": "Array",
+                  "tsType": "ResourceObjectArray",
                   "desc": "An array of resource objects",
                   "__exemption": [ "examples" ]
                 },
                 "intervals": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects of the intervals",
                   "__exemption": [ "examples" ]
                 }
@@ -8073,16 +8406,19 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object. Not in all views.",
                   "__exemption": [ "examples" ]
                 },
                 "resources": {
                   "type": "Array",
+                  "tsType": "ResourceObjectArray",
                   "desc": "An array of resource objects",
                   "__exemption": [ "examples" ]
                 },
                 "intervals": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects of the intervals",
                   "__exemption": [ "examples" ]
                 }
@@ -8121,16 +8457,19 @@
               "definition": {
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object. Not in all views.",
                   "__exemption": [ "examples" ]
                 },
                 "resources": {
                   "type": "Array",
+                  "tsType": "ResourceObjectArray",
                   "desc": "An array of resource objects",
                   "__exemption": [ "examples" ]
                 },
                 "intervals": {
                   "type": "Array",
+                  "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects of the intervals",
                   "__exemption": [ "examples" ]
                 }
@@ -8147,7 +8486,7 @@
     },
 
     "click:resource:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource day area",
       "applicable": [
         "scheduler",
@@ -8168,6 +8507,7 @@
               "definition": {
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object",
                   "__exemption": [ "examples" ]
                 },
@@ -8178,6 +8518,7 @@
                 },
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -8214,6 +8555,7 @@
               "definition": {
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object",
                   "__exemption": [ "examples" ]
                 },
@@ -8224,6 +8566,7 @@
                 },
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -8239,7 +8582,7 @@
       }
     },
     "contextmenu:resource:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource day area",
       "applicable": [
         "scheduler",
@@ -8260,6 +8603,7 @@
               "definition": {
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object",
                   "__exemption": [ "examples" ]
                 },
@@ -8270,6 +8614,7 @@
                 },
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -8306,6 +8651,7 @@
               "definition": {
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object",
                   "__exemption": [ "examples" ]
                 },
@@ -8316,6 +8662,7 @@
                 },
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -8331,7 +8678,7 @@
       }
     },
     "mousedown:resource:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource day area",
       "applicable": [
         "scheduler",
@@ -8352,6 +8699,7 @@
               "definition": {
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object",
                   "__exemption": [ "examples" ]
                 },
@@ -8362,6 +8710,7 @@
                 },
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -8398,6 +8747,7 @@
               "definition": {
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object",
                   "__exemption": [ "examples" ]
                 },
@@ -8408,6 +8758,7 @@
                 },
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -8423,7 +8774,7 @@
       }
     },
     "mouseup:resource:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource day area",
       "applicable": [
         "scheduler",
@@ -8444,6 +8795,7 @@
               "definition": {
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object",
                   "__exemption": [ "examples" ]
                 },
@@ -8454,6 +8806,7 @@
                 },
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -8490,6 +8843,7 @@
               "definition": {
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object",
                   "__exemption": [ "examples" ]
                 },
@@ -8500,6 +8854,7 @@
                 },
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -8515,7 +8870,7 @@
       }
     },
     "mouseenter:resource:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource day area",
       "applicable": [
         "scheduler",
@@ -8536,6 +8891,7 @@
               "definition": {
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object",
                   "__exemption": [ "examples" ]
                 },
@@ -8546,6 +8902,7 @@
                 },
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -8582,6 +8939,7 @@
               "definition": {
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object",
                   "__exemption": [ "examples" ]
                 },
@@ -8592,6 +8950,7 @@
                 },
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -8607,7 +8966,7 @@
       }
     },
     "mouseleave:resource:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource day area",
       "applicable": [
         "scheduler",
@@ -8628,6 +8987,7 @@
               "definition": {
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object",
                   "__exemption": [ "examples" ]
                 },
@@ -8638,6 +8998,7 @@
                 },
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -8674,6 +9035,7 @@
               "definition": {
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object",
                   "__exemption": [ "examples" ]
                 },
@@ -8684,6 +9046,7 @@
                 },
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -8699,7 +9062,7 @@
       }
     },
     "mousemove:resource:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource day area",
       "applicable": [
         "scheduler",
@@ -8720,6 +9083,7 @@
               "definition": {
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object",
                   "__exemption": [ "examples" ]
                 },
@@ -8730,6 +9094,7 @@
                 },
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -8766,6 +9131,7 @@
               "definition": {
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object",
                   "__exemption": [ "examples" ]
                 },
@@ -8776,6 +9142,7 @@
                 },
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -8791,7 +9158,7 @@
       }
     },
     "touchstart:resource:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource day area",
       "applicable": [
         "scheduler",
@@ -8812,6 +9179,7 @@
               "definition": {
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object",
                   "__exemption": [ "examples" ]
                 },
@@ -8822,6 +9190,7 @@
                 },
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -8858,6 +9227,7 @@
               "definition": {
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object",
                   "__exemption": [ "examples" ]
                 },
@@ -8868,6 +9238,7 @@
                 },
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -8883,7 +9254,7 @@
       }
     },
     "touchend:resource:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource day area",
       "applicable": [
         "scheduler",
@@ -8904,6 +9275,7 @@
               "definition": {
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object",
                   "__exemption": [ "examples" ]
                 },
@@ -8914,6 +9286,7 @@
                 },
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -8950,6 +9323,7 @@
               "definition": {
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object",
                   "__exemption": [ "examples" ]
                 },
@@ -8960,6 +9334,7 @@
                 },
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -8975,7 +9350,7 @@
       }
     },
     "touchmove:resource:day": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "desc": "Occurs on resource day area",
       "applicable": [
         "scheduler",
@@ -8996,6 +9371,7 @@
               "definition": {
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object",
                   "__exemption": [ "examples" ]
                 },
@@ -9006,6 +9382,7 @@
                 },
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -9042,6 +9419,7 @@
               "definition": {
                 "resource": {
                   "type": "Object",
+                  "tsType": "ResourceObject",
                   "desc": "The resource object",
                   "__exemption": [ "examples" ]
                 },
@@ -9052,6 +9430,7 @@
                 },
                 "timestamp": {
                   "type": "Object",
+                  "tsType": "Timestamp",
                   "desc": "The timestamp object",
                   "__exemption": [ "examples" ]
                 }
@@ -9066,9 +9445,8 @@
         }
       }
     },
-
     "click:column:head": {
-      "deprecated": "v2.4.0",
+      "removedIn": "v3.0.0",
       "addedIn": "v1.5.0",
       "desc": "Occurs on column header (use click:column:header2 instead)",
       "applicable": [
@@ -9082,6 +9460,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "ColumnObject",
               "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
               "__exemption": [ "examples" ]
             },
@@ -9113,6 +9492,7 @@
               "definition": {
                 "column": {
                   "type": "Object",
+                  "tsType": "ColumnObject",
                   "desc": "The column object",
                   "__exemption": [ "examples" ]
                 },
@@ -9146,6 +9526,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "ColumnObject",
               "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
               "__exemption": [ "examples" ]
             },
@@ -9177,6 +9558,7 @@
               "definition": {
                 "column": {
                   "type": "Object",
+                  "tsType": "ColumnObject",
                   "desc": "The column object",
                   "__exemption": [ "examples" ]
                 },
@@ -9210,6 +9592,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "ColumnObject",
               "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
               "__exemption": [ "examples" ]
             },
@@ -9241,6 +9624,7 @@
               "definition": {
                 "column": {
                   "type": "Object",
+                  "tsType": "ColumnObject",
                   "desc": "The column object",
                   "__exemption": [ "examples" ]
                 },
@@ -9274,6 +9658,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "ColumnObject",
               "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
               "__exemption": [ "examples" ]
             },
@@ -9305,6 +9690,7 @@
               "definition": {
                 "column": {
                   "type": "Object",
+                  "tsType": "ColumnObject",
                   "desc": "The column object",
                   "__exemption": [ "examples" ]
                 },
@@ -9338,6 +9724,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "ColumnObject",
               "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
               "__exemption": [ "examples" ]
             },
@@ -9369,6 +9756,7 @@
               "definition": {
                 "column": {
                   "type": "Object",
+                  "tsType": "ColumnObject",
                   "desc": "The column object",
                   "__exemption": [ "examples" ]
                 },
@@ -9402,6 +9790,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "ColumnObject",
               "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
               "__exemption": [ "examples" ]
             },
@@ -9433,6 +9822,7 @@
               "definition": {
                 "column": {
                   "type": "Object",
+                  "tsType": "ColumnObject",
                   "desc": "The column object",
                   "__exemption": [ "examples" ]
                 },
@@ -9466,6 +9856,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "ColumnObject",
               "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
               "__exemption": [ "examples" ]
             },
@@ -9497,6 +9888,7 @@
               "definition": {
                 "column": {
                   "type": "Object",
+                  "tsType": "ColumnObject",
                   "desc": "The column object",
                   "__exemption": [ "examples" ]
                 },
@@ -9530,6 +9922,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "ColumnObject",
               "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
               "__exemption": [ "examples" ]
             },
@@ -9561,6 +9954,7 @@
               "definition": {
                 "column": {
                   "type": "Object",
+                  "tsType": "ColumnObject",
                   "desc": "The column object",
                   "__exemption": [ "examples" ]
                 },
@@ -9594,6 +9988,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "ColumnObject",
               "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
               "__exemption": [ "examples" ]
             },
@@ -9625,6 +10020,7 @@
               "definition": {
                 "column": {
                   "type": "Object",
+                  "tsType": "ColumnObject",
                   "desc": "The column object",
                   "__exemption": [ "examples" ]
                 },
@@ -9658,6 +10054,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "ColumnObject",
               "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
               "__exemption": [ "examples" ]
             },
@@ -9689,6 +10086,7 @@
               "definition": {
                 "column": {
                   "type": "Object",
+                  "tsType": "ColumnObject",
                   "desc": "The column object",
                   "__exemption": [ "examples" ]
                 },
@@ -9708,7 +10106,6 @@
         }
       }
     },
-
     "click:column": {
       "addedIn": "v1.5.0",
       "desc": "Occurs on column",
@@ -9723,6 +10120,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "ColumnObject",
               "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
               "__exemption": [ "examples" ]
             },
@@ -9754,6 +10152,7 @@
               "definition": {
                 "column": {
                   "type": "Object",
+                  "tsType": "ColumnObject",
                   "desc": "The column object",
                   "__exemption": [ "examples" ]
                 },
@@ -9787,6 +10186,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "ColumnObject",
               "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
               "__exemption": [ "examples" ]
             },
@@ -9818,6 +10218,7 @@
               "definition": {
                 "column": {
                   "type": "Object",
+                  "tsType": "ColumnObject",
                   "desc": "The column object",
                   "__exemption": [ "examples" ]
                 },
@@ -9851,6 +10252,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "ColumnObject",
               "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
               "__exemption": [ "examples" ]
             },
@@ -9882,6 +10284,7 @@
               "definition": {
                 "column": {
                   "type": "Object",
+                  "tsType": "ColumnObject",
                   "desc": "The column object",
                   "__exemption": [ "examples" ]
                 },
@@ -9915,6 +10318,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "ColumnObject",
               "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
               "__exemption": [ "examples" ]
             },
@@ -9946,6 +10350,7 @@
               "definition": {
                 "column": {
                   "type": "Object",
+                  "tsType": "ColumnObject",
                   "desc": "The column object",
                   "__exemption": [ "examples" ]
                 },
@@ -9979,6 +10384,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "ColumnObject",
               "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
               "__exemption": [ "examples" ]
             },
@@ -10010,6 +10416,7 @@
               "definition": {
                 "column": {
                   "type": "Object",
+                  "tsType": "ColumnObject",
                   "desc": "The column object",
                   "__exemption": [ "examples" ]
                 },
@@ -10043,6 +10450,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "ColumnObject",
               "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
               "__exemption": [ "examples" ]
             },
@@ -10074,6 +10482,7 @@
               "definition": {
                 "column": {
                   "type": "Object",
+                  "tsType": "ColumnObject",
                   "desc": "The column object",
                   "__exemption": [ "examples" ]
                 },
@@ -10107,6 +10516,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "ColumnObject",
               "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
               "__exemption": [ "examples" ]
             },
@@ -10138,6 +10548,7 @@
               "definition": {
                 "column": {
                   "type": "Object",
+                  "tsType": "ColumnObject",
                   "desc": "The column object",
                   "__exemption": [ "examples" ]
                 },
@@ -10171,6 +10582,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "ColumnObject",
               "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
               "__exemption": [ "examples" ]
             },
@@ -10202,6 +10614,7 @@
               "definition": {
                 "column": {
                   "type": "Object",
+                  "tsType": "ColumnObject",
                   "desc": "The column object",
                   "__exemption": [ "examples" ]
                 },
@@ -10235,6 +10648,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "ColumnObject",
               "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
               "__exemption": [ "examples" ]
             },
@@ -10266,6 +10680,7 @@
               "definition": {
                 "column": {
                   "type": "Object",
+                  "tsType": "ColumnObject",
                   "desc": "The column object",
                   "__exemption": [ "examples" ]
                 },
@@ -10299,6 +10714,7 @@
           "definition": {
             "scope": {
               "type": "Object",
+              "tsType": "ColumnObject",
               "desc": "Contains the object passed for the column when either property `left-column-options` or `right-column-options` are used",
               "__exemption": [ "examples" ]
             },
@@ -10330,6 +10746,7 @@
               "definition": {
                 "column": {
                   "type": "Object",
+                  "tsType": "ColumnObject",
                   "desc": "The column object",
                   "__exemption": [ "examples" ]
                 },
@@ -10407,14 +10824,19 @@
         "time": {
           "type": "String",
           "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-          "examples":[
+          "examples": [
             "09:00"
           ]
+        },
+        "clamp": {
+          "type": "Boolean",
+          "desc": "Clamp negative values to 0",
+          "default": "true"
         }
       },
       "returns": {
         "type": "Number",
-        "desc": "The absolute y starting position",
+        "desc": "The absolute y starting position, but `false` on invalid time parameter",
         "examples": [
           "120",
           "482"
@@ -10432,7 +10854,7 @@
         "time": {
           "type": "String",
           "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-          "examples":[
+          "examples": [
             "09:00"
           ]
         }
@@ -10467,7 +10889,7 @@
         "duration": {
           "type": ["Number", "String"],
           "desc": "The number of minutes for the event to calculate it's height",
-          "examples":[
+          "examples": [
             "300",
             "900"
           ]
@@ -10493,7 +10915,7 @@
         "duration": {
           "type": ["Number", "String"],
           "desc": "The number of minutes for the event to calculate it's width",
-          "examples":[
+          "examples": [
             "300",
             "900"
           ]
@@ -10502,6 +10924,69 @@
       "returns": {
         "type": "Number",
         "desc": "The height (in pixels) to be used for the event",
+        "examples": [
+          "80",
+          "120"
+        ]
+      }
+    },
+    "heightToMinutes": {
+      "addedIn": "v3.4.0",
+      "desc": "Given a height (in pixels) return the duration (in minutes)",
+      "applicable": [
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month-interval",
+        "custom-interval",
+        "scheduler",
+        "week-scheduler",
+        "month-scheduler",
+        "custom-scheduler"
+      ],
+      "params": {
+        "height": {
+          "type": ["Number", "String"],
+          "desc": "The number of pixels for the event to calculate it's duration",
+          "examples": [
+            "30",
+            "90px"
+          ]
+        }
+      },
+      "returns": {
+        "type": "Number",
+        "desc": "The duration (in minutes) to be used for the event",
+        "examples": [
+          "80",
+          "120"
+        ]
+      }
+    },
+    "widthToMinutes": {
+      "desc": "Given a width (in pixels) return the duration (in minutes)",
+      "addedIn": "v3.4.0",
+      "applicable": [
+        "resource",
+        "day-resource"
+      ],
+      "params": {
+        "duration": {
+          "type": ["Number", "String"],
+          "desc": "The number of pixels for the event to calculate it's duration",
+          "examples": [
+            "300px",
+            "900"
+          ]
+        }
+      },
+      "returns": {
+        "type": "Number",
+        "desc": "The duration (in minutes) to be used for the event",
         "examples": [
           "80",
           "120"
@@ -10529,7 +11014,7 @@
         "time": {
           "type": "String",
           "desc": "The time in which to scoll to. If the time is already visible on the viewport, this function will have no affect.",
-          "examples":[
+          "examples": [
             "09:00"
           ]
         }
@@ -10546,7 +11031,7 @@
         "time": {
           "type": "String",
           "desc": "The time in which to scoll to. If the time is already visible on the viewport, this function will have no affect.",
-          "examples":[
+          "examples": [
             "09:00"
           ]
         }
@@ -10559,6 +11044,7 @@
       "scope": {
         "timestamp": {
           "type": "Object",
+          "tsType": "Timestamp",
           "desc": "Timestamp object",
           "__exemption": [ "examples" ]
         },
@@ -10592,6 +11078,7 @@
       "scope": {
         "timestamp": {
           "type": "Object",
+          "tsType": "Timestamp",
           "desc": "Timestamp object",
           "__exemption": [ "examples" ]
         },
@@ -10610,6 +11097,7 @@
       "scope": {
         "timestamp": {
           "type": "Object",
+          "tsType": "Timestamp",
           "desc": "Timestamp object",
           "__exemption": [ "examples" ]
         },
@@ -10629,6 +11117,7 @@
       "scope": {
         "timestamp": {
           "type": "Object",
+          "tsType": "Timestamp",
           "desc": "Timestamp object",
           "__exemption": [ "examples" ]
         },
@@ -10647,14 +11136,19 @@
             "time": {
               "type": "String",
               "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-              "examples":[
+              "examples": [
                 "09:00"
               ]
+            },
+            "clamp": {
+              "type": "Boolean",
+              "desc": "Clamp negative values to 0",
+              "default": "true"
             }
           },
           "returns": {
             "type": "Number",
-            "desc": "The absolute y starting position",
+            "desc": "The absolute y starting position, but `false` on invalid time parameter",
             "examples": [
               "120",
               "482"
@@ -10676,7 +11170,7 @@
             "duration": {
               "type": ["Number", "String"],
               "desc": "The number of minutes for the event to calculate it's height",
-              "examples":[
+              "examples": [
                 "300",
                 "900"
               ]
@@ -10707,6 +11201,7 @@
       "scope": {
         "days": {
           "type": "Array",
+          "tsType": "TimestampArray",
           "desc": "An array of timestamp objects that are to be displayed in the container. This slot does not replace the container, but instead, allows you to add to it. Example: use css `position: absolute` to create a `current time` bar.",
           "__exemption": [ "examples" ]
         }
@@ -10717,6 +11212,7 @@
       "scope": {
         "days": {
           "type": "Array",
+          "tsType": "TimestampArray",
           "desc": "An array of Timestamp objects",
           "__exemption": [ "examples" ]
         }
@@ -10735,14 +11231,19 @@
             "time": {
               "type": "String",
               "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-              "examples":[
+              "examples": [
                 "09:00"
               ]
+            },
+            "clamp": {
+              "type": "Boolean",
+              "desc": "Clamp negative values to 0",
+              "default": "true"
             }
           },
           "returns": {
             "type": "Number",
-            "desc": "The absolute y starting position",
+            "desc": "The absolute y starting position, but `false` on invalid time parameter",
             "examples": [
               "120",
               "482"
@@ -10756,7 +11257,7 @@
             "duration": {
               "type": ["Number", "String"],
               "desc": "The number of minutes for the event to calculate it's height",
-              "examples":[
+              "examples": [
                 "300",
                 "900"
               ]
@@ -10781,6 +11282,7 @@
       "scope": {
         "timestamp": {
           "type": "Object",
+          "tsType": "Timestamp",
           "desc": "Timestamp object",
           "__exemption": [ "examples" ]
         }
@@ -10794,6 +11296,7 @@
       "scope": {
         "timestamp": {
           "type": "Object",
+          "tsType": "Timestamp",
           "desc": "Timestamp object",
           "__exemption": [ "examples" ]
         }
@@ -10811,7 +11314,8 @@
         },
         "day": {
           "type": "Object",
-          "desc": "A destructured timestamp for the day of the slotted content",
+          "tsType": "Timestamp",
+          "desc": "A timestamp for the day of the slotted content",
           "__exemption": [ "examples" ]
         },
         "miniMode": {
@@ -10833,6 +11337,7 @@
         },
         "timestamp": {
           "type": "Object",
+          "tsType": "Timestamp",
           "desc": "A timestamp for the day of the slotted content",
           "__exemption": [ "examples" ]
         },
@@ -10856,6 +11361,7 @@
         },
         "timestamp": {
           "type": "Object",
+          "tsType": "Timestamp",
           "desc": "A timestamp for the day of the slotted content",
           "__exemption": [ "examples" ]
         },
@@ -10893,6 +11399,7 @@
         },
         "timestamp": {
           "type": "Object",
+          "tsType": "Timestamp",
           "desc": "A timestamp for the day of the slotted content",
           "__exemption": [ "examples" ]
         },
@@ -10910,6 +11417,7 @@
       "scope": {
         "timestamp": {
           "type": "Object",
+          "tsType": "Timestamp",
           "desc": "Timestamp object",
           "__exemption": [ "examples" ]
         }
@@ -10928,6 +11436,7 @@
         },
         "date": {
           "type": "Object",
+          "tsType": "Timestamp",
           "desc": "Timestamp object, workWeekLabel and miniMode",
           "__exemption": [ "examples" ]
         },
@@ -10946,11 +11455,13 @@
       "scope": {
         "start": {
           "type": "Object",
+          "tsType": "Timestamp",
           "desc": "A timestamp object representing the first day of the week",
           "__exemption": [ "examples" ]
         },
         "end": {
           "type": "Object",
+          "tsType": "Timestamp",
           "desc": "A timestamp object representing the last day of the week",
           "__exemption": [ "examples" ]
         },
@@ -10971,11 +11482,13 @@
       "scope": {
         "week": {
           "type": "Array",
+          "tsType": "TimestampArray",
           "desc": "This is an array of timestamp objects. One for each day of the week to be displayed",
           "__exemption": [ "examples" ]
         },
         "weekdays": {
           "type": "Array",
+          "tsType": "NumberArray",
           "desc": "This is the days of the week and in which order they are displayed",
           "examples": [
             "weekdays: '[1,2,3,4,5,6,0]'",
@@ -11072,6 +11585,7 @@
       "scope": {
         "data": {
           "type": "Object",
+          "tsType": "ColumnObject",
           "desc": "This is the object passed to properties `left-column-options` or `right-column-options`",
           "__exemption": [ "examples" ]
         }
@@ -11086,6 +11600,7 @@
       "scope": {
         "data": {
           "type": "Object",
+          "tsType": "ColumnObject",
           "desc": "This is the object passed to properties `left-column-options` or `right-column-options`",
           "__exemption": [ "examples" ]
         }
@@ -11100,6 +11615,7 @@
       "scope": {
         "interval": {
           "type": "Object",
+          "tsType": "Timestamp",
           "desc": "The interval object for this label",
           "__exemption": [ "examples" ]
         },
@@ -11135,6 +11651,7 @@
         },
         "intervals": {
           "type": "Array",
+          "tsType": "TimestampArray",
           "desc": "An array of timestamps for the intervals that will be displayed",
           "__exemption": [ "examples" ]
         }
@@ -11150,6 +11667,7 @@
       "scope": {
         "resource": {
           "type": "Object",
+          "tsType": "ResourceObject",
           "desc": "A resource object that was passed in within the array of resources",
           "__exemption": [ "examples" ]
         },
@@ -11170,6 +11688,7 @@
       "scope": {
         "resource": {
           "type": "Object",
+          "tsType": "ResourceObject",
           "desc": "A resource object that was passed in within the array of resources",
           "__exemption": [ "examples" ]
         },
@@ -11190,11 +11709,13 @@
       "scope": {
         "resource": {
           "type": "Object",
+          "tsType": "ResourceObject",
           "desc": "A resource object that was passed in within the array of resources",
           "__exemption": [ "examples" ]
         },
         "intervals": {
           "type": "Array",
+          "tsType": "TimestampArray",
           "desc": "An array of timestamps for the intervals that will be displayed",
           "__exemption": [ "examples" ]
         },
@@ -11205,7 +11726,7 @@
             "time": {
               "type": "String",
               "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
-              "examples":[
+              "examples": [
                 "09:00"
               ]
             }
@@ -11226,7 +11747,7 @@
             "duration": {
               "type": ["Number", "String"],
               "desc": "The number of minutes for the event to calculate it's width",
-              "examples":[
+              "examples": [
                 "300",
                 "900"
               ]
@@ -11253,11 +11774,13 @@
       "scope": {
         "resource": {
           "type": "Object",
+          "tsType": "ResourceObject",
           "desc": "A resource object that was passed in within the array of resources",
           "__exemption": [ "examples" ]
         },
         "interval": {
           "type": "Object",
+          "tsType": "Timestamp",
           "desc": "The interval object",
           "__exemption": [ "examples" ]
         }

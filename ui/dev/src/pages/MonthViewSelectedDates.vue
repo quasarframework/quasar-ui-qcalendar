@@ -1,26 +1,34 @@
 <template>
   <div>
-    <q-toolbar>
-      <q-btn stretch flat label="Prev" @click="calendarPrev" />
+    <div class="row justify-center items-center">
+      <q-btn
+        flat
+        dense
+        label="Prev"
+        @click="calendarPrev"
+      />
       <q-separator vertical />
-      <q-btn stretch flat label="Next" @click="calendarNext" />
-      <q-space />
-    </q-toolbar>
-    <q-separator />
-    <div style="overflow: hidden;">
-      <q-calendar
-        ref="calendar"
-        v-model="selectedDate"
-        view="month"
-        locale="en-us"
-        animated
-        transition-prev="slide-right"
-        transition-next="slide-left"
-        :selected-dates="selectedDates"
-        @click:day2="onToggleDay"
-        @click:date2="onToggleDate"
+      <q-btn
+        flat
+        dense
+        label="Next"
+        @click="calendarNext"
       />
     </div>
+    <q-separator />
+    <q-calendar
+      ref="calendar"
+      v-model="selectedDate"
+      view="month"
+      locale="en-us"
+      animated
+      no-active-date
+      transition-prev="slide-right"
+      transition-next="slide-left"
+      :selected-dates="selectedDates"
+      @click:day2="onToggleDay"
+      @click:date2="onToggleDate"
+    />
   </div>
 </template>
 
@@ -44,17 +52,18 @@ export default {
 
     onToggleDate ({ scope }) {
       if (scope !== undefined) {
-        this.toggleDate(scope.timestamp.date)
+        this.toggleDate(scope)
       }
     },
 
     onToggleDay ({ scope }) {
       if (scope !== undefined) {
-        this.toggleDate(scope.timestamp.date)
+        this.toggleDate(scope)
       }
     },
 
-    toggleDate (date) {
+    toggleDate (scope) {
+      const date = scope.timestamp.date
       if (this.selectedDates.includes(date)) {
         // remove the date
         for (let i = 0; i < this.selectedDates.length; ++i) {
@@ -65,14 +74,17 @@ export default {
         }
       }
       else {
-        // add the date
-        this.selectedDates.push(date)
+        // add the date if not outside
+        if (scope.outside !== true) {
+          this.selectedDates.push(date)
+        }
       }
     }
   },
   watch: {
     selectedDates (val) {
-      console.log(val)
+      /* eslint-disable-next-line */
+      console.log('selected dates:', val)
     }
   }
 }

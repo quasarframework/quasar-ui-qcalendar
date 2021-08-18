@@ -8,7 +8,8 @@
       locale="en-us"
       style="height: 400px;"
     >
-      <template #column-header-after="{ index }">
+      <!-- eslint-disable vue/no-unused-vars -->
+      <template #column-header-after="{ timestamp, index }">
         <div class="q-ma-xs">
           <q-item v-if="index === 0" clickable v-ripple>
             <q-item-section side>

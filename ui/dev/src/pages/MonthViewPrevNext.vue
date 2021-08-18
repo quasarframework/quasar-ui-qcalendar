@@ -1,22 +1,20 @@
 <template>
   <div style="max-width: 800px; width: 100%;">
     <div class="row justify-center items-center">
-      <q-btn flat label="Prev" @click="calendarPrev" />
+      <q-btn dense flat label="Prev" @click="calendarPrev" />
       <q-separator vertical />
-      <q-btn flat label="Next" @click="calendarNext" />
+      <q-btn dense flat label="Next" @click="calendarNext" />
     </div>
     <q-separator />
-    <div style="overflow: hidden">
-      <q-calendar
-        ref="calendar"
-        v-model="selectedDate"
-        view="month"
-        locale="en-us"
-        animated
-        transition-prev="slide-right"
-        transition-next="slide-left"
-      />
-    </div>
+    <q-calendar
+      ref="calendar"
+      v-model="selectedDate"
+      view="month"
+      locale="en-us"
+      animated
+      transition-prev="slide-right"
+      transition-next="slide-left"
+    />
   </div>
 </template>
 
