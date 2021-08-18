@@ -80,7 +80,7 @@ css: [
 ],
 
 build: {
-  transpile = true,
+  transpile: true,
   transpileDependencies: [
     /quasar-ui-qcalendar[\\/]src/
   ]
