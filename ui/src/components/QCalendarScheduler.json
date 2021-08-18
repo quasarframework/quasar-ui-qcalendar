@@ -27,7 +27,7 @@
       "type": "Array",
       "tsType": "NumberArray",
       "category": "model",
-      "desc": "This is the days of the week and in which order they are displayed. If you want Monday as the first day of the week, you would use [1,2,3,4,5,6,0]. If you want a 5-day work week you would use [1,2,3,4,5]",
+      "desc": "The normal weekdays array looks like this `[0,1,2,3,4,5,6]` where 0=Sunday, 1=Monday, etc. A week that starts on Monday, would look like this: `[1,2,3,4,5,6,0]` and a 5-day workweek would look like this: `[1,2,3,4,5]`",
       "default": "[0,1,2,3,4,5,6]",
       "examples": [
         ":weekdays=\"[1,2,3,4,5,6,0]\"",
