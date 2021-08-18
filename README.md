@@ -24,6 +24,7 @@ v4.0.0
 [Live Demo](https://qcalendar.netlify.app/) - **live docs, demo and examples**
 
 ---
+## Examples
 
 **Month view with events**
 
@@ -57,6 +58,10 @@ v4.0.0
 
 ![QCalendar example scheduler view](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/public/qcalendar-scheduler-view.png)
 
+**Task view**
+
+![QCalendar task view](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/next/docs/public/QCalendarTask.png)
+
 Including support for locales, optional theming, 1st day Monday, 5-day work weeks, work week numbers, selected days, disabled days, day of year...
 
 ...and many more!
@@ -65,7 +70,7 @@ Including support for locales, optional theming, 1st day Monday, 5-day work week
 
 * [/ui](ui) - standalone npm package (go here for more information)
 * [/app-extension](app-extension) - Quasar app extension
-* [/demo](demo) - sources for docs, demo and examples project
+* [/docs](docs) - sources for docs, demo and examples project
 * [live demo](https://qcalendar.netlify.app/) - **live docs, demo and examples**
 
 # Demo Workflow

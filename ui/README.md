@@ -1,7 +1,7 @@
 QCalendar
 ===
 
-[![npm](https://img.shields.io/npm/v/@quasar/quasar-ui-qcalendar.svg?label=@quasar/quasar-ui-qcalendar)](https://www.npmjs.com/package/@quasar/quasar-ui-qcalendar)
+[![npm](https://img.shields.io/npm/v/@quasar/quasar-ui-qcalendar.svg?label=@quasar/quasar-ui-qcalendar/next)](https://www.npmjs.com/package/@quasar/quasar-ui-qcalendar)
 [![npm](https://img.shields.io/npm/dt/@quasar/quasar-ui-qcalendar.svg)](https://www.npmjs.com/package/@quasar/quasar-ui-qcalendar)
 ![@quasar/quasar-app-extension-qcalendar](https://img.shields.io/npm/dm/@quasar/quasar-ui-qcalendar)
 
@@ -23,27 +23,24 @@ With this update comes a lot of changes, with over 90% of QCalendar being rewrit
 
 Go to Netlify which is hosting QCalendar v4.0.0 docs https://qcalendar.netlify.app/.
 
-# Donations
-
-QCalendar is an open source MIT project that has been made possible due to the **generous contributions** by [sponsors and backers](https://github.com/sponsors/hawkeye64). If you are interested in supporting this project, please consider:
-- [Becoming a sponsor on GitHub](https://github.com/users/hawkeye64/sponsorship)
-- [One-off donation via PayPal](https://paypal.me/hawkeye64)
-
 ---
 
+[Live Demo](https://qcalendar.netlify.app/) - **live docs, demo and examples**
+
+---
 ## Examples
 
 **Month view with events**
 
-![QCalendar example month view](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/public/qcalendar-month-view.png)
+![QCalendar example month view](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/next/docs/public/qcalendarmonth-event-slots.png)
 
 **Planner example**
 
-![QCalendar example agenda view - planner](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/public/qcalendar-agenda-view--planner.png)
+![QCalendar example agenda view - planner](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/next/docs/public/qcalendaragenda-planner.png)
 
 **Monthly Mini-mode**
 
-![QCalendar example mini-mode selection](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/public/q-calendar-month-view-mini-mode-with-selection.png)
+![QCalendar example mini-mode selection](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/next/docs/public/qcalendarmonth-minimode-range-selection.png)
 
 **Multi-month selector (mini-mode)**
 
@@ -65,9 +62,19 @@ QCalendar is an open source MIT project that has been made possible due to the *
 
 ![QCalendar example scheduler view](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/dev/demo/public/qcalendar-scheduler-view.png)
 
+**Task view**
+
+![QCalendar task view](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/next/docs/public/QCalendarTask.png)
+
 Including support for locales, optional theming, 1st day Monday, 5-day work weeks, work week numbers, selected days, disabled days, day of year...
 
 ...and many more!
+
+# Donations
+
+QCalendar is an open source MIT project that has been made possible due to the **generous contributions** by [sponsors and backers](https://github.com/sponsors/hawkeye64). If you are interested in supporting this project, please consider:
+- [Becoming a sponsor on GitHub](https://github.com/users/hawkeye64/sponsorship)
+- [One-off donation via PayPal](https://paypal.me/hawkeye64)
 
 # License
 
