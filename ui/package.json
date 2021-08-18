@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-ui-qcalendar",
-  "version": "4.0.0-beta.3",
+  "version": "4.0.0-beta.4",
   "author": "Jeff Galbraith <jeff@quasar.dev>",
   "description": "QCalendar - Day/Month/Week Calendars, Popups, Date Pickers, Schedules, Agendas, Planners and Tasks for your Vue Apps",
   "license": "MIT",
