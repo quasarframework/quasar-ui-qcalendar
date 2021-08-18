@@ -51,15 +51,6 @@
         "task-key=\"key\""
       ]
     },
-    "task-label": {
-      "type": ["Number", "String"],
-      "category": "content",
-      "default": "label",
-      "desc": "The label to be used (overridden by slot)",
-      "examples": [
-        "task-label=\"title\""
-      ]
-    },
     "view": {
       "type": "String",
       "category": "content",
@@ -101,7 +92,7 @@
       "type": "Array",
       "tsType": "NumberArray",
       "category": "model",
-      "desc": "This is the days of the week and in which order they are displayed. If you want Monday as the first day of the week, you would use [1,2,3,4,5,6,0]. If you want a 5-day work week you would use [1,2,3,4,5]",
+      "desc": "The normal weekdays array looks like this `[0,1,2,3,4,5,6]` where 0=Sunday, 1=Monday, etc. A week that starts on Monday, would look like this: `[1,2,3,4,5,6,0]` and a 5-day workweek would look like this: `[1,2,3,4,5]`",
       "default": "[0,1,2,3,4,5,6]",
       "examples": [
         ":weekdays=\"[1,2,3,4,5,6,0]\"",
@@ -110,7 +101,7 @@
     },
     "date-type": {
       "type": "String",
-      "category": ["style"],
+      "category": "style",
       "desc": "Shows the current date button as either a circle, rounded or a square",
       "values": ["round", "rounded", "square"],
       "default": "round",
@@ -120,7 +111,7 @@
     },
     "weekday-align": {
       "type": "String",
-      "category": ["style"],
+      "category": "style",
       "desc": "Determines the weekday (ie: Sunday, Monday, etc) alignment",
       "values": ["left", "center", "right"],
       "default": "center",
@@ -130,7 +121,7 @@
     },
     "date-align": {
       "type": "String",
-      "category": ["style"],
+      "category": "style",
       "desc": "Determines the date (ie: 2, 3, etc) alignment",
       "values": ["left", "center", "right"],
       "default": "center",
@@ -140,7 +131,7 @@
     },
     "date-header": {
       "type": "String",
-      "category": ["style"],
+      "category": "style",
       "desc": "Determines how the date header will be displayed",
       "values": ["stacked", "inline", "inverted"],
       "default": "stacked",

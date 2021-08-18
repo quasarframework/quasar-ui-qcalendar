@@ -78,15 +78,12 @@ export const useTaskProps = {
   },
   bordered: Boolean,
   dark: Boolean,
+  noAria: Boolean,
   noActiveDate: Boolean,
-  disabledDays: Array,
-  disabledBefore: String,
-  disabledAfter: String,
-  disabledWeekdays: {
-    type: Array,
-    default: () => []
-  },
+  shortWeekdayLabel: Boolean,
   noHeader: Boolean,
+  noDefaultHeaderText: Boolean,
+  noDefaultHeaderBtn: Boolean,
   cellWidth: [ Number, String ],
   // cellWidth: {
   //   type: [ Number, String ],
@@ -113,6 +110,13 @@ export const useTaskProps = {
   transitionNext: {
     type: String,
     default: 'slide-left'
+  },
+  disabledDays: Array,
+  disabledBefore: String,
+  disabledAfter: String,
+  disabledWeekdays: {
+    type: Array,
+    default: () => []
   },
   weekdayClass: Function,
   dayClass: Function,
