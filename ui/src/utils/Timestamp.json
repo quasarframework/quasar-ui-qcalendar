@@ -185,6 +185,12 @@
           "examples": [
             "2020-10-02 15:00"
           ]
+        },
+        "now": {
+          "type": "Object",
+          "tsType": "TimestampOrNull",
+          "desc": "[Optional] A Timestamp object. If provided, the returning Timestamp will have formatted and relative information included",
+          "__exemption": [ "examples" ]
         }
       },
       "returns": {
