@@ -2,10 +2,12 @@
 
 The **QCalendar App Extension** allows you to seamlessly add the [QCalendar](../ui) component into your Quasar application. It manages the boot file file and all other configuration for you.
 
-[![npm](https://img.shields.io/npm/v/@quasar/quasar-app-extension-qcalendar.svg?label=@quasar/quasar-app-extension-qcalendar)](https://www.npmjs.com/package/@quasar/quasar-app-extension-qcalendar)
+[![npm](https://img.shields.io/npm/v/@quasar/quasar-app-extension-qcalendar/next?label=@quasar/quasar-app-extension-qcalendar)](https://www.npmjs.com/package/@quasar/quasar-app-extension-qcalendar)
 [![npm](https://img.shields.io/npm/dt/@quasar/quasar-app-extension-qcalendar.svg)](https://www.npmjs.com/package/@quasar/quasar-app-extension-qcalendar)
 ![@quasar/quasar-app-extension-qcalendar](https://img.shields.io/npm/dm/@quasar/quasar-app-extension-qcalendar)
 
+[![Discord](https://img.shields.io/badge/discord-join%20server-738ADB?style=for-the-badge&logo=discord&logoColor=738ADB)](https://chat.quasar.dev)
+[![Discord](https://img.shields.io/badge/follow-@jgalbraith64-1DA1F2?style=for-the-badge&logo=twitter&logoColor=1DA1F2)](https://twitter.com/jgalbraith64)
 ## Everything you need for a complete Calendar solution.
 
 QCalendar is a [Quasar](https://quasar.dev) component. It is a powerful calendar that plugs right into your Quasar application and allows for viewing of **day** (1-7 days for a week), **monthly**, **scheduler** and **agenda** views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.

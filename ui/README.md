@@ -1,10 +1,12 @@
 QCalendar
 ===
 
-[![npm](https://img.shields.io/npm/v/@quasar/quasar-ui-qcalendar.svg?label=@quasar/quasar-ui-qcalendar/next)](https://www.npmjs.com/package/@quasar/quasar-ui-qcalendar)
+![@quasar/quasar-ui-qcalendar](https://img.shields.io/npm/v/@quasar/quasar-ui-qcalendar/next?label=@quasar/quasar-ui-qcalendar@next)
 [![npm](https://img.shields.io/npm/dt/@quasar/quasar-ui-qcalendar.svg)](https://www.npmjs.com/package/@quasar/quasar-ui-qcalendar)
 ![@quasar/quasar-app-extension-qcalendar](https://img.shields.io/npm/dm/@quasar/quasar-ui-qcalendar)
 
+[![Discord](https://img.shields.io/badge/discord-join%20server-738ADB?style=for-the-badge&logo=discord&logoColor=738ADB)](https://chat.quasar.dev)
+[![Discord](https://img.shields.io/badge/follow-@jgalbraith64-1DA1F2?style=for-the-badge&logo=twitter&logoColor=1DA1F2)](https://twitter.com/jgalbraith64)
 ## Everything you need for a complete Calendar solution.
 
 QCalendar is a powerful calendar that allows for viewing of **day** (1-6 days), **week**, **monthly**, **scheduler**, **agenda** and **task** views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.
