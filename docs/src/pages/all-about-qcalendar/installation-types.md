@@ -34,7 +34,7 @@ By using the app extension, you will get **all** QCalendar components installed 
 
 To add as an App Extension to your Quasar application, run the following (in your Quasar app folder):
 ```
-$ quasar ext add @quasar/qcalendar
+$ quasar ext add @quasar/qcalendar@next
 ```
 
 #### Uninstall
@@ -55,9 +55,9 @@ This is the preferred way if you are targeting one or more calendar components.
 :::
 
 ```
-$ yarn add @quasar/quasar-ui-qcalendar
+$ yarn add @quasar/quasar-ui-qcalendar@next
 # or
-$ npm install @quasar/quasar-ui-qcalendar
+$ npm install @quasar/quasar-ui-qcalendar@next
 ```
 Then
 ```js
