@@ -3,7 +3,9 @@
 The **QCalendar App Extension** allows you to seamlessly add the [QCalendar](../ui) component into your Quasar application. It manages the boot file file and all other configuration for you.
 
 [![npm](https://img.shields.io/npm/v/@quasar/quasar-app-extension-qcalendar/next?label=@quasar/quasar-app-extension-qcalendar)](https://www.npmjs.com/package/@quasar/quasar-app-extension-qcalendar)
-[![npm](https://img.shields.io/npm/dt/@quasar/quasar-app-extension-qcalendar.svg)](https://www.npmjs.com/package/@quasar/quasar-app-extension-qcalendar)
+[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/quasarframework/quasar-ui-qcalendar)]()
+[![GitHub repo size in bytes](https://img.shields.io/github/repo-size/quasarframework/quasar-ui-qcalendar)]()
+[![npm](https://img.shields.io/npm/dt/@quasar/quasar-app-extension-qcalendar)](https://www.npmjs.com/package/@quasar/quasar-app-extension-qcalendar)
 ![@quasar/quasar-app-extension-qcalendar](https://img.shields.io/npm/dm/@quasar/quasar-app-extension-qcalendar)
 
 [![Discord](https://img.shields.io/badge/discord-join%20server-738ADB?style=for-the-badge&logo=discord&logoColor=738ADB)](https://chat.quasar.dev)
