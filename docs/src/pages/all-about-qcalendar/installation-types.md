@@ -59,7 +59,9 @@ $ yarn add @quasar/quasar-ui-qcalendar@next
 # or
 $ npm install @quasar/quasar-ui-qcalendar@next
 ```
+
 Then
+
 ```js
 import { boot } from 'quasar/wrappers'
 import Plugin from '@quasar/quasar-ui-qcalendar/src/QCalendarDay.js'
@@ -80,7 +82,7 @@ css: [
 ],
 
 build: {
-  transpile = true,
+  transpile: true,
   transpileDependencies: [
     /quasar-ui-qcalendar[\\/]src/
   ]
@@ -110,6 +112,7 @@ export default {
 :::
 
 ## Vue CLI or Vite
+
 ### Vue project from src
 
 :::
@@ -175,7 +178,9 @@ Add the following tag(s) after the Quasar ones:
   <script src="https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@next/dist/Timestamp.umd.min.js"></script>
 </body>
 ```
+
 If you need the RTL variant of the CSS, then go for the following (instead of the above stylesheet link):
+
 ```html
 <link href="https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@next/dist/QCalendarMonth.rtl.min.css" rel="stylesheet" type="text/css">
 ```
@@ -194,12 +199,15 @@ If you need the RTL variant of the CSS, then go for the following (instead of th
   <script src="https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@next/dist/Timestamp.umd.min.js"></script>
 </body>
 ```
+
 If you need the RTL variant of the CSS, then go for the following (instead of the above stylesheet link):
+
 ```html
 <link href="https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@next/dist/QCalendarMonth.rtl.min.css" rel="stylesheet" type="text/css">
 ```
 
 Your Vue source:
+
 ```js
 const app = Vue.createApp({
   setup() {
@@ -213,16 +221,27 @@ app.mount("#app");
 
 
 ## Testing on Codepen
+
 [QCalendar v4 Collection](https://codepen.io/collection/qOBOEG)
+
 or
+
 [QCalendarDay UMD Example on Codepen](https://codepen.io/Hawkeye64/pen/ZEemBjm)
+
 [QCalendarDay (week) UMD Example on Codepen](https://codepen.io/Hawkeye64/pen/YzZRpdW)
+
 [QCalendarMonth UMD Example on Codepen](https://codepen.io/Hawkeye64/pen/dyvpYwW)
+
 [QCalendarMonth (minimode) UMD Example on Codepen](https://codepen.io/Hawkeye64/pen/VwpVmNj)
+
 [QCalendarAgenda UMD Example on Codepen](https://codepen.io/Hawkeye64/pen/MWpzbRZ)
+
 [QCalendarResource UMD Example on Codepen](https://codepen.io/Hawkeye64/pen/xxqQgbG)
+
 [QCalendarScheduler UMD Example on Codepen](https://codepen.io/Hawkeye64/pen/oNZQBLz)
+
 [QCalendarTask UMD Example on Codepen](https://codepen.io/Hawkeye64/pen/RwwwKQL)
+
 
 # Project source
 Can be found [here](https://github.com/quasarframework/quasar-ui-qcalendar/tree/next).
