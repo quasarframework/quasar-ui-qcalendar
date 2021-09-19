@@ -8,8 +8,7 @@
 
   pre
     border-radius: $generic-border-radius
-    // padding: 5px
-    padding: 0
+    padding: 5px
     margin: 0
     background-size: 1.5em 1.5em
     background-origin: content-box
@@ -33,7 +32,7 @@
 
   pre code
     border-radius: 0
-    width: 100%
+    width: max-content
 
   &--heading
     cursor: pointer
@@ -262,6 +261,10 @@
   &--code__inner
     margin: 0
     position: relative
+    font-size: 12px
+    color: $grey-10
+    background-color: $blue-grey-1
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace
     text-align: left
     white-space: pre
     word-spacing: normal
@@ -270,20 +273,27 @@
     line-height: 1.5
     tab-size: 4
     hyphens: none
-    border-radius: $generic-border-radius
-    background: $blue-grey-1
-    color: $grey-10
-
 
   &--code
     overflow: visible
     padding: 0
+    border-radius: $generic-border-radius
 
     &__inner
+      background-color: $grey-2
       max-height: inherit
       height: inherit
+      padding: 1em
       display: block
       overflow: auto
+
+      &--prerendered
+        border-width: 1px 4px
+        border-style: solid
+        border-color: $separator-color
+        border-left-color: $primary
+        border-right-color: $primary
+        border-radius: $generic-border-radius
 
   &--table
     border-color: $grey-4

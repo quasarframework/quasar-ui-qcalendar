@@ -16,7 +16,7 @@
       <q-separator />
       <q-tab-panels v-model="currentPackage" animated class="packages-container">
         <q-tab-panel v-for="(packageReleases, packageName) in packages" :name="packageName" :key="packageName" class="q-pa-none">
-          <package-releases :active="latestVersions[packageName]" :releases="packageReleases" />
+          <package-releases :latest-version="latestVersions[packageName]" :releases="packageReleases" />
         </q-tab-panel>
       </q-tab-panels>
     </template>
@@ -31,9 +31,8 @@ import PackageReleases from './PackageReleases'
 
 const { extractDate, formatDate } = date
 
-
 export default {
-  name: 'QCalendarReleases',
+  name: 'Releases',
 
   components: {
     PackageReleases

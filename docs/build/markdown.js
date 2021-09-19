@@ -42,7 +42,7 @@ function highlight (str, lang) {
     const code = Prism.highlight(str, Prism.languages[ lang ], lang)
 
     return '<pre class="markdown--code">'
-      + `<code class="markdown--code__inner language-${ lang }">${ code }</code></pre>\n`
+      + `<code class="markdown--code__inner markdown--code__inner--prerendered language-${ lang }">${ code }</code></pre>\n`
   }
 
   return ''

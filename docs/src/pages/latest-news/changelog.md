@@ -3,6 +3,6 @@ title: Changelog
 desc: The latest QCalendar releases
 keys: latest-news
 components:
-- releases/QCalendarReleases
+- releases/Releases
 ---
-<q-calendar-releases class="q-mt-sm"/>
+<releases class="q-mt-sm"/>

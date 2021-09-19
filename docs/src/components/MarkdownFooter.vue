@@ -18,7 +18,7 @@ import {
 
 import {
   mdiCharity
-} from '@quasar/extras/mdi-v5'
+} from '@quasar/extras/mdi-v6'
 
 const year = (new Date()).getFullYear()
 

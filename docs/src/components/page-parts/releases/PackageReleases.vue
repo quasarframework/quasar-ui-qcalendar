@@ -32,19 +32,19 @@
 
 <script>
 import { ref, computed, watch } from 'vue'
-import { mdiMagnify } from '@quasar/extras/mdi-v5'
+import { mdiMagnify } from '@quasar/extras/mdi-v6'
 
 import sanitize from './sanitize'
 import parseMdTable from './md-table-parser'
 
 export default {
-  props: [ 'active', 'releases' ],
+  props: [ 'latestVersion', 'releases' ],
 
   setup (props) {
     const search = ref('')
-    const selectedVersion = ref(props.active)
+    const selectedVersion = ref(props.latestVersion)
 
-    watch(() => props.active, val => {
+    watch(() => props.latestVersion, val => {
       selectedVersion.value = val
     })
 
@@ -75,7 +75,7 @@ export default {
         .replace(/# ([\S ]+)/g, '<div class="text-h4">$1</div>')
         .replace(/\*\*([\S ]*?)\*\*/g, '<strong>$1</strong>')
         .replace(/\*([\S ]*?)\*/g, '<em>$1</em>')
-        .replace(/```([\S]+)/g, '<code class="markdown--code__inner release__code">')
+        .replace(/```([\S]+)/g, '<code class="markdown--code__inner markdown--code__inner--prerendered release__code">')
         .replace(/```\n/g, '</code>')
         .replace(/\`(.*?)\`/g, '<code class="markdown--token">$1</code>')
         .replace(/#([\d]+)/g, '<a class="markdown-link" href="https://github.com/quasarframework/quasar-ui-qcalendar/issues/$1" target="_blank">#$1</a>')
@@ -84,6 +84,7 @@ export default {
         .replace(/^ {2}[-*] ([\S .]+)$/gm, '<li class="q-pl-md">$1</li>')
         .replace(/^[-*] ([\S .]+)$/gm, '<li>$1</li>')
         .replace(/<\/li>[\s\n\r]*<li/g, '</li><li')
+        .replace(/\n/g, '<br>')
 
       return content.indexOf('| -') > -1
         ? parseMdTable(content)
