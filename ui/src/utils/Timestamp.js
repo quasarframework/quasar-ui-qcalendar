@@ -522,14 +522,11 @@ export function getDayOfYear (timestamp) {
  * @returns {number} The work week
  */
 export function getWorkWeek (timestamp) {
-  let date
   if (timestamp.year === 0) {
-    date = Date.UTC(new Date())
-  }
-  else {
-    date = makeDate(timestamp)
+    timestamp = parseTimestamp(today())
   }
 
+  const date = makeDate(timestamp)
   if (isNaN(date)) return 0
 
   // Remove time components of date
