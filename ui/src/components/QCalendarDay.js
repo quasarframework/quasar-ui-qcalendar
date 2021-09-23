@@ -727,7 +727,6 @@ export default defineComponent({
       const headDayLabelSlot = slots[ 'head-day-label' ]
       const headDayButtonSlot = slots[ 'head-day-button' ]
 
-      day.current = __isActiveWeekday(day)
       const scope = {
         dayLabel,
         timestamp: day,

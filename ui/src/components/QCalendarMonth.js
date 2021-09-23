@@ -801,7 +801,6 @@ export default defineComponent({
 
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
-      day.current = __isActiveWeekday(day)
       const scope = {
         dayLabel,
         timestamp: day,
