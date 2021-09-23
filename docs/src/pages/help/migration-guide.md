@@ -114,6 +114,9 @@ Below is a list of all existing slots. Some are new, some have changed and some 
 
 ### Events
 
+### onChange
+The `onChange` event has changed. The passed object still contains `start` and `end`. However, these are now strings, instead of Timestamp objects. Additionally, a new `days` array has been added that does contain Timestamp objects. 
+
 #### Mouse Events
 - all mouse events with a `2` on the end can have the `2` removed
 - all mouse events using `:` separator should be changed to `-` (vue3 best practices)
