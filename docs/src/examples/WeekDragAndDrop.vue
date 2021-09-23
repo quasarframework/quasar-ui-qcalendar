@@ -49,13 +49,13 @@
               @click-head-intervals="onClickHeadIntervals"
               @click-head-day="onClickHeadDay"
             >
-              <template #head-date="{ scope: { timestamp } }">
+              <template #head-date="{ scope }">
                 <div
-                  v-if="allDayEventsMap[timestamp.date] && allDayEventsMap[timestamp.date].length > 0"
+                  v-if="allDayEventsMap[scope.timestamp.date] && allDayEventsMap[scope.timestamp.date].length > 0 && printScope(scope)"
                   style="display: flex; justify-content: space-evenly; flex-wrap: wrap; align-items: center; font-weight: 400; font-size: 12px; height: auto;"
                 >
                   <template
-                    v-for="event in allDayEventsMap[timestamp.date]"
+                    v-for="event in allDayEventsMap[scope.timestamp.date]"
                     :key="event.time"
                   >
                     <div>
@@ -65,13 +65,13 @@
                 </div>
               </template>
 
-              <template #day-interval="{ scope: { timestamp } }">
+              <template #day-interval="{ scope }">
                 <div
-                  v-if="hasEvents(timestamp)"
+                  v-if="hasEvents(scope.timestamp) && printScope(scope)"
                   style="display: flex; justify-content: space-evenly; align-items: center; font-size: 10px;"
                 >
                   <template
-                    v-for="event in getEvents(timestamp)"
+                    v-for="event in getEvents(scope.timestamp)"
                     :key="event.time"
                   >
                     <div style="border: 1px solid pink; border-radius: 2px; padding: 2px; margin: 1px;">

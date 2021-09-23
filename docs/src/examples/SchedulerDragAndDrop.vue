@@ -48,13 +48,13 @@
           @click-head-resources="onClickHeadResources"
           @click-head-day="onClickHeadDay"
         >
-          <template #head-date="{ scope: { timestamp } }">
+          <template #head-date="{ scope }">
             <div
-              v-if="allDayEventsMap[timestamp.date] && allDayEventsMap[timestamp.date].length > 0"
+              v-if="allDayEventsMap[scope.timestamp.date] && allDayEventsMap[scope.timestamp.date].length > 0"
               style="display: flex; justify-content: space-evenly; flex-wrap: wrap; align-items: center; font-weight: 400; font-size: 12px; height: auto;"
             >
               <template
-                v-for="event in allDayEventsMap[timestamp.date]"
+                v-for="event in allDayEventsMap[scope.timestamp.date]"
                 :key="event.time"
               >
                 <div
@@ -66,13 +66,13 @@
             </div>
           </template>
 
-          <template #day="{ scope: { timestamp, resource } }">
+          <template #day="{ scope }">
             <div
-              v-if="hasEvents(timestamp, resource)"
+              v-if="hasEvents(scope.timestamp, scope.resource)"
               style="display: flex; flex: 1 0 auto; flex-wrap: wrap; justify-content: space-evenly; align-items: center; font-size: 12px;"
             >
               <template
-                v-for="event in getEvents(timestamp, resource)"
+                v-for="event in getEvents(scope.timestamp, scope.resource)"
                 :key="event.id"
               >
                 <span
@@ -271,6 +271,11 @@ export default defineComponent({
     },
     onClickHeadDay (data) {
       console.log('onClickHeadDay', data)
+    },
+    // this method is used only to print the scope to dev tools
+    printScope (scope) {
+      console.log('scope:', scope)
+      return true
     }
   }
 })

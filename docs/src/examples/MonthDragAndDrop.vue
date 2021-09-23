@@ -47,13 +47,13 @@
             @click-head-workweek="onClickHeadWorkweek"
             @click-head-day="onClickHeadDay"
           >
-            <template #head-day-event="{ scope: { weekday } }">
+            <template #head-day-event="{ scope }">
               <div
-                v-if="hasWeekdayEvents(weekday)"
+                v-if="hasWeekdayEvents(scope.weekday) && printScope(scope)"
                 style="display: flex; justify-content: space-evenly; flex-wrap: wrap; align-items: center; font-weight: 400; font-size: 12px; height: auto;"
               >
                 <template
-                  v-for="(event, index) in getWeekdayEvents(weekday)"
+                  v-for="(event, index) in getWeekdayEvents(scope.weekday)"
                   :key="event.weekday + index"
                 >
                   <span style="border: 1px solid pink; border-radius: 2px; padding: 2px; margin: 1px;">
@@ -63,13 +63,13 @@
               </div>
             </template>"
 
-            <template #day="{ scope: { timestamp } }">
+            <template #day="{ scope }">
               <div
-                v-if="hasEvents(timestamp)"
+                v-if="hasEvents(scope.timestamp) && printScope(scope)"
                 style="display: flex; justify-content: space-evenly; flex-wrap: wrap; align-items: center; font-weight: 400; font-size: 12px; height: auto;"
               >
                 <template
-                  v-for="event in getEvents(timestamp)"
+                  v-for="event in getEvents(scope.timestamp)"
                   :key="event.time"
                 >
                   <span style="border: 1px solid pink; border-radius: 2px; padding: 2px; margin: 1px;">
@@ -174,13 +174,13 @@ export default defineComponent({
       const item = this.dragItems.filter(item => item.id === itemID)
       event.type = item[ 0 ].id
       event.name = item[ 0 ].name
+      event.weekday = scope.timestamp.weekday
       if (type === 'day') {
         event.date = scope.timestamp.date
         event.time = scope.timestamp.time
       }
       else { // head-day
         event.allDay = true
-        event.weekday = scope.timestamp.weekday
       }
       this.events.push(event)
       return false
@@ -247,6 +247,11 @@ export default defineComponent({
     },
     onClickHeadWorkweek (data) {
       console.log('onClickHeadWorkweek', data)
+    },
+    // this method is used only to print the scope to dev tools
+    printScope (scope) {
+      console.log('scope:', scope)
+      return true
     }
   }
 })
