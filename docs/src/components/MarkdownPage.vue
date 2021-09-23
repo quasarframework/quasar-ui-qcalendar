@@ -30,7 +30,6 @@
         </div>
       </div>
 
-
       <div class="markdown-page__footer">
         <q-separator class="q-mb-lg" />
         <div v-if="path && noEdit !== true">

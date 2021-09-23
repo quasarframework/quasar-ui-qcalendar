@@ -1,5 +1,3 @@
-const { today } = require('@quasar/quasar-ui-qcalendar/src/Timestamp.js')
-
 const toKebabCase = (str) => {
   return str
     .split('')

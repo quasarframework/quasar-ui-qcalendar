@@ -95,7 +95,6 @@ build: {
 There are several variants for each calendar component, including common, es (modern), and UMD as well as minified versions of each of those. The same goes for the css, including min and rtl.
 :::
 
-:::
 ```html
 <style src="@quasar/quasar-ui-qcalendar/dist/QCalendarDay.min.css"></style>
 
@@ -109,13 +108,11 @@ export default {
 }
 </script>
 ```
-:::
 
 ## Vue CLI or Vite
 
 ### Vue project from src
 
-:::
 ```js
 import Plugin from '@quasar/quasar-ui-qcalendar/src/QCalendarDay.js'
 import '@quasar/quasar-ui-qcalendar/src/css/calendar-day.sass'
@@ -124,11 +121,9 @@ import App from './App.vue'
 const app = createApp(App)
   .use(Plugin)
 ```
-:::
 
 ### Vue project from dist
 
-:::
 ```js
 import Plugin from '@quasar/quasar-ui-qcalendar/dist/QCalendarDay.esm.js'
 import '@quasar/quasar-ui-qcalendar/dist/QCalendarDay.min.css'
@@ -137,11 +132,9 @@ import App from './App.vue'
 const app = createApp(App)
   .use(Plugin)
 ```
-:::
 
 ### Or component import
 
-:::
 ```html
 <style src="@quasar/quasar-ui-qcalendar/dist/QCalendarDay.min.css"></style>
 
@@ -155,7 +148,6 @@ export default {
 }
 </script>
 ```
-:::
 
 ## UMD variant
 
