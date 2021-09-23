@@ -435,7 +435,7 @@ export default function (props, {
    * @param {Timestamp*} now Optional Timestamp for now date/time
    */
   function getTimestampAtEvent (e, day, clamp = false, now = undefined) {
-    const timestamp = copyTimestamp(day)
+    let timestamp = copyTimestamp(day)
     const bounds = (e.currentTarget).getBoundingClientRect()
     const touchEvent = e
     const mouseEvent = e
@@ -465,7 +465,7 @@ export default function (props, {
    * @param {Timestamp*} now Optional Timestamp for now date/time
    */
   function getTimestampAtEventX (e, day, clamp = false, now = undefined) {
-    const timestamp = copyTimestamp(day)
+    let timestamp = copyTimestamp(day)
     const bounds = (e.currentTarget).getBoundingClientRect()
     const touchEvent = e
     const mouseEvent = e

@@ -431,10 +431,20 @@ export default defineComponent({
 
       const filteredDays = days.value.filter(day2 => day2.weekday === day.weekday)
       const weekday = filteredDays[ 0 ].weekday
-      const scope = { weekday, timestamp: day, days: filteredDays, index, miniMode: isMiniMode.value }
-      scope.droppable = dragOverHeadDayRef.value === day.weekday
+      const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
-      const disabled = (props.disabledWeekdays ? props.disabledWeekdays.includes(day.weekday) : false)
+
+      const scope = { 
+        activeDate,
+        weekday,
+        timestamp: day,
+        days: filteredDays,
+        index,
+        miniMode: isMiniMode.value,
+        droppable: dragOverHeadDayRef.value === day.weekday,
+        disabled: (props.disabledWeekdays ? props.disabledWeekdays.includes(day.weekday) : false)
+      }
+
       const weekdayClass = typeof props.weekdayClass === 'function' ? props.weekdayClass({ scope }) : {}
       const isFocusable = props.focusable === true && props.focusType.includes('weekday')
 
@@ -453,7 +463,7 @@ export default defineComponent({
         class: {
           'q-calendar-month__head--weekday': true,
           ...weekdayClass,
-          'q-disabled-day disabled': disabled === true,
+          'q-disabled-day disabled': scope.disabled === true,
           [ 'q-calendar__' + props.weekdayAlign ]: true,
           'q-calendar__ellipsis': true,
           'q-calendar__focusable': isFocusable === true
@@ -512,10 +522,18 @@ export default defineComponent({
     function __renderHeadDayEvent (day, index) {
       const headDayEventSlot = slots[ 'head-day-event' ]
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
-      const disabled = (props.disabledWeekdays ? props.disabledWeekdays.includes(day.weekday) : false)
       const filteredDays = days.value.filter(day2 => day2.weekday === day.weekday)
       const weekday = filteredDays[ 0 ].weekday
-      const scope = { weekday, timestamp: day, days: filteredDays, index, miniMode: isMiniMode.value, activeDate, disabled }
+
+      const scope = {
+        weekday,
+        timestamp: day,
+        days: filteredDays,
+        index,
+        miniMode: isMiniMode.value,
+        activeDate,
+        disabled: (props.disabledWeekdays ? props.disabledWeekdays.includes(day.weekday) : false)
+      }
 
       const width = computedWidth.value
       const styler = props.weekdayStyle || dayStyleDefault
@@ -777,7 +795,16 @@ export default defineComponent({
       )
 
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
-      const scope = { dayLabel, timestamp: day, outside, activeDate, selectedDate, miniMode: isMiniMode.value }
+
+      const scope = {
+        dayLabel,
+        timestamp: day,
+        outside,
+        activeDate,
+        selectedDate,
+        miniMode: isMiniMode.value,
+        disabled: (props.disabledWeekdays ? props.disabledWeekdays.includes(day.weekday) : false)
+      }
 
       // const size = isMiniMode.value ? 'sm' : props.monthLabelSize
 

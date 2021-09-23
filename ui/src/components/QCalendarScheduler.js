@@ -510,7 +510,8 @@ export default defineComponent({
       const scope = {
         timestamp: day,
         activeDate,
-        droppable: dragOverHeadDayRef.value === day.date
+        droppable: dragOverHeadDayRef.value === day.date,
+        disabled: (props.disabledWeekdays ? props.disabledWeekdays.includes(day.weekday) : false)
       }
       if (columnIndex !== undefined) {
         scope.columnIndex = columnIndex
@@ -675,8 +676,10 @@ export default defineComponent({
       const scope = {
         timestamp: day,
         activeDate,
-        droppable: dragOverHeadDayRef.value === day.date
+        droppable: dragOverHeadDayRef.value === day.date,
+        disabled: (props.disabledWeekdays ? props.disabledWeekdays.includes(day.weekday) : false)
       }
+
       if (columnIndex !== undefined) {
         scope.columnIndex = columnIndex
       }
@@ -745,7 +748,12 @@ export default defineComponent({
       const dayLabel = dayFormatter.value(day, false)
       const headDayLabelSlot = slots[ 'head-day-label' ]
       const headDayButtonSlot = slots[ 'head-day-button' ]
-      const scope = { dayLabel, timestamp: day, activeDate }
+
+      const scope = {
+        dayLabel,
+        timestamp: day,
+        activeDate
+      }
 
       const data = {
         class: {

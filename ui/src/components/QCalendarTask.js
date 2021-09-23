@@ -724,8 +724,12 @@ export default defineComponent({
 
     function __renderHeadWeekday (day) {
       const slot = slots[ 'head-weekday-label' ]
+      const activeDate = props.noActiveDate !== true && __isActiveDate(day)
+
       const scope = {
-        timestamp: day
+        activeDate,
+        timestamp: day,
+        disabled: (props.disabledWeekdays ? props.disabledWeekdays.includes(day.weekday) : false)
       }
 
       const data = {
@@ -928,7 +932,8 @@ export default defineComponent({
       const scope = {
         timestamp: day,
         activeDate,
-        droppable: dragOverHeadDayRef.value = day.date
+        droppable: dragOverHeadDayRef.value = day.date,
+        disabled: (props.disabledWeekdays ? props.disabledWeekdays.includes(day.weekday) : false)
       }
 
       const styler = props.weekdayStyle || dayStyleDefault

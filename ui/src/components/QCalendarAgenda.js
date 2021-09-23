@@ -547,6 +547,7 @@ export default defineComponent({
       const scope = getScopeForSlot(day, columnIndex)
       scope.activeDate = activeDate
       scope.droppable = dragOverHeadDayRef.value === day.date
+      scope.disabled = (props.disabledWeekdays ? props.disabledWeekdays.includes(day.weekday) : false)
 
       const width = isSticky.value === true ? props.cellWidth : computedWidth.value
       const styler = props.weekdayStyle || dayStyleDefault
@@ -687,6 +688,8 @@ export default defineComponent({
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
       const scope = getScopeForSlot(day, columnIndex)
       scope.activeDate = activeDate
+      scope.disabled = (props.disabledWeekdays ? props.disabledWeekdays.includes(day.weekday) : false)
+
       const width = isSticky.value === true ? props.cellWidth : computedWidth.value
       const style = {
         width,
@@ -748,7 +751,13 @@ export default defineComponent({
       const dayLabel = dayFormatter.value(day, false)
       const headDayLabelSlot = slots[ 'head-day-label' ]
       const headDayButtonSlot = slots[ 'head-day-button' ]
-      const scope = { dayLabel, timestamp: day, activeDate }
+
+      const scope = {
+        dayLabel,
+        timestamp: day,
+        activeDate,
+        disabled: (props.disabledWeekdays ? props.disabledWeekdays.includes(day.weekday) : false)
+      }
 
       const data = {
         class: {
