@@ -336,6 +336,10 @@ export default defineComponent({
       return day.date === emittedValue.value
     }
 
+    function __isActiveWeekday (day) {
+      return day.weekday === parsedValue.value.weekday
+    }
+
     // Render functions
 
     function __renderHeadColumn (column, index) {
@@ -544,6 +548,7 @@ export default defineComponent({
       const headDateSlot = slots[ 'head-date' ]
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
+      day.current = __isActiveWeekday(day)
       const scope = getScopeForSlot(day, columnIndex)
       scope.activeDate = activeDate
       scope.droppable = dragOverHeadDayRef.value === day.date
@@ -686,6 +691,8 @@ export default defineComponent({
     function __renderHeadDayEvent (day, columnIndex) {
       const headDayEventSlot = slots[ 'head-day-event' ]
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
+
+      day.current = __isActiveWeekday(day)
       const scope = getScopeForSlot(day, columnIndex)
       scope.activeDate = activeDate
       scope.disabled = (props.disabledWeekdays ? props.disabledWeekdays.includes(day.weekday) : false)
@@ -752,6 +759,7 @@ export default defineComponent({
       const headDayLabelSlot = slots[ 'head-day-label' ]
       const headDayButtonSlot = slots[ 'head-day-button' ]
 
+      day.current = __isActiveWeekday(day)
       const scope = {
         dayLabel,
         timestamp: day,

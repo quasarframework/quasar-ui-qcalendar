@@ -353,6 +353,10 @@ export default defineComponent({
       return day.date === emittedValue.value
     }
 
+    function __isActiveWeekday (day) {
+      return day.weekday === parsedValue.value.weekday
+    }
+
     // function __isActiveInterval (day) {
     //   return __isActiveDate(day)
     //     && day.hasTime
@@ -489,6 +493,7 @@ export default defineComponent({
       const headDateSlot = slots[ 'head-date' ]
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
+      day.current = __isActiveWeekday(day)
       const scope = getScopeForSlot(day, columnIndex)
       scope.activeDate = activeDate
       scope.droppable = dragOverHeadDayRef.value === day.date
@@ -649,6 +654,8 @@ export default defineComponent({
     function __renderHeadDayEvent (day, columnIndex) {
       const headDayEventSlot = slots[ 'head-day-event' ]
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
+
+      day.current = __isActiveWeekday(day)
       const scope = getScopeForSlot(day, columnIndex)
       scope.activeDate = activeDate
       scope.disabled = (props.disabledWeekdays ? props.disabledWeekdays.includes(day.weekday) : false)
@@ -679,6 +686,8 @@ export default defineComponent({
     function __renderHeadWeekday (day) {
       const slot = slots[ 'head-weekday-label' ]
       const shortWeekdayLabel = props.shortWeekdayLabel === true
+
+      day.current = __isActiveWeekday(day)
       const scope = getScopeForSlot(day)
       scope.shortWeekdayLabel = props.shortWeekdayLabel
       scope.disabled = (props.disabledWeekdays ? props.disabledWeekdays.includes(day.weekday) : false)
@@ -718,6 +727,7 @@ export default defineComponent({
       const headDayLabelSlot = slots[ 'head-day-label' ]
       const headDayButtonSlot = slots[ 'head-day-button' ]
 
+      day.current = __isActiveWeekday(day)
       const scope = {
         dayLabel,
         timestamp: day,

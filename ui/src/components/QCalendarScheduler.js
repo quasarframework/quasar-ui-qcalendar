@@ -366,6 +366,10 @@ export default defineComponent({
       return day.date === emittedValue.value
     }
 
+    function __isActiveWeekday (day) {
+      return day.weekday === parsedValue.value.weekday
+    }
+
     // function __isActiveResource (day) {
     //   return __isActiveDate(day)
     //     && day.hasTime
@@ -507,6 +511,7 @@ export default defineComponent({
       const headDateSlot = slots[ 'head-date' ]
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
+      day.current = __isActiveWeekday(day)
       const scope = {
         timestamp: day,
         activeDate,
@@ -673,6 +678,7 @@ export default defineComponent({
       const headDayEventSlot = slots[ 'head-day-event' ]
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
+      day.current = __isActiveWeekday(day)
       const scope = {
         timestamp: day,
         activeDate,
@@ -749,6 +755,7 @@ export default defineComponent({
       const headDayLabelSlot = slots[ 'head-day-label' ]
       const headDayButtonSlot = slots[ 'head-day-button' ]
 
+      day.current = __isActiveWeekday(day)
       const scope = {
         dayLabel,
         timestamp: day,

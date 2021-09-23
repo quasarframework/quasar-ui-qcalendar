@@ -334,6 +334,10 @@ export default defineComponent({
       return day.date === emittedValue.value
     }
 
+    function __isActiveWeekday (day) {
+      return day.weekday === parsedValue.value.weekday
+    }
+
     /**
      * Renders the given day with the associated task
      * @param {Timestamp} day Timestamp representing the day
@@ -726,6 +730,7 @@ export default defineComponent({
       const slot = slots[ 'head-weekday-label' ]
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
+      day.current = __isActiveWeekday(day)
       const scope = {
         activeDate,
         timestamp: day,
@@ -929,6 +934,7 @@ export default defineComponent({
       const headDateSlot = slots[ 'head-date' ]
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
+      day.current = __isActiveWeekday(day)
       const scope = {
         timestamp: day,
         activeDate,

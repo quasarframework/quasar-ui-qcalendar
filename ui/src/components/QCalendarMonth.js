@@ -340,6 +340,10 @@ export default defineComponent({
       return day.date === emittedValue.value
     }
 
+    function __isActiveWeekday (day) {
+      return day.weekday === parsedValue.value.weekday
+    }
+
     function isCurrentWeek (week) {
       for (let i = 0; i < week.length; ++i) {
         if (week[ i ].current === true) {
@@ -433,7 +437,7 @@ export default defineComponent({
       const weekday = filteredDays[ 0 ].weekday
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
-
+      day.current = __isActiveWeekday(day)
       const scope = { 
         activeDate,
         weekday,
@@ -525,6 +529,7 @@ export default defineComponent({
       const filteredDays = days.value.filter(day2 => day2.weekday === day.weekday)
       const weekday = filteredDays[ 0 ].weekday
 
+      day.current = __isActiveWeekday(day)
       const scope = {
         weekday,
         timestamp: day,
@@ -796,6 +801,7 @@ export default defineComponent({
 
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
+      day.current = __isActiveWeekday(day)
       const scope = {
         dayLabel,
         timestamp: day,
