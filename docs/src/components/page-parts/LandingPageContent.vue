@@ -25,13 +25,13 @@
       </q-btn>
     </div>
   </section>
+
   <div class="q-px-lg q-pb-xl">
     <q-timeline :layout="layout" color="primary q-mb-xl">
 
       <q-timeline-entry heading>
         <div style="font-size: 32px; font-weight: 600;">QCalendar</div>
         <div style="font-size: 22px; font-weight: 600;" class="text-grey">A Vue Calendar that has everything you need</div>
-        <!-- <div style="font-size: 16px;">Build Beautiful,Responsive Calendars</div> -->
       </q-timeline-entry>
 
       <q-timeline-entry
