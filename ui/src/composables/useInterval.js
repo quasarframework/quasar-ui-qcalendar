@@ -428,36 +428,6 @@ export default function (props, {
   /**
    * Returns a Timestamp based on mouse click position on the calendar
    * Also handles touch events
-   * This function is used for vertical intervals
-   * @param {MouseEvent} e Browser MouseEvent
-   * @param {Timestamp} day Timestamp associated with event
-   * @param {Boolean} clamp Whether to clamp values to nearest interval
-   * @param {Timestamp*} now Optional Timestamp for now date/time
-   */
-  function getTimestampAtEvent (e, day, clamp = false, now = undefined) {
-    const timestamp = copyTimestamp(day)
-    const bounds = (e.currentTarget).getBoundingClientRect()
-    const touchEvent = e
-    const mouseEvent = e
-    const touches = touchEvent.changedTouches || touchEvent.touches
-    const clientY = touches && touches[ 0 ] ? touches[ 0 ].clientY : mouseEvent.clientY
-    const addIntervals = (clientY - bounds.top) / parsedIntervalHeight.value
-    const addMinutes = Math.floor((clamp ? Math.floor(addIntervals) : addIntervals) * parsedIntervalMinutes.value)
-
-    if (addMinutes !== 0) {
-      timestamp = addToDate(timestamp, { minute: addMinutes })
-    }
-
-    if (now) {
-      updateRelative(timestamp, now, true)
-    }
-
-    return timestamp
-  }
-
-  /**
-   * Returns a Timestamp based on mouse click position on the calendar
-   * Also handles touch events
    * This function is used for horizontal intervals
    * @param {MouseEvent} e Browser MouseEvent
    * @param {Timestamp} day Timestamp associated with event
@@ -465,7 +435,7 @@ export default function (props, {
    * @param {Timestamp*} now Optional Timestamp for now date/time
    */
   function getTimestampAtEventX (e, day, clamp = false, now = undefined) {
-    const timestamp = copyTimestamp(day)
+    let timestamp = copyTimestamp(day)
     const bounds = (e.currentTarget).getBoundingClientRect()
     const touchEvent = e
     const mouseEvent = e
@@ -634,7 +604,7 @@ export default function (props, {
     showResourceLabelDefault,
     styleDefault,
     getTimestampAtEventInterval,
-    getTimestampAtEvent,
+    getTimestampAtEvent: getTimestampAtEventInterval,
     getTimestampAtEventX,
     getScopeForSlot,
     getScopeForSlotX,
