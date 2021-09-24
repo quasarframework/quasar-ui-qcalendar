@@ -118,7 +118,7 @@ export default function (props, emit, {
    * Returns the first week of the month for calcaulating the weekday headers
    */
   const todayWeek = computed(() => {
-    const day = days.value[ 0 ]
+    const day = times.today
     const start = __getStartOfWeek(day)
     const end = __getEndOfWeek(day)
 
