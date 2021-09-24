@@ -632,7 +632,15 @@ export default defineComponent({
       const outside = isOutside(day)
       const activeDate = props.noActiveDate !== true && parsedValue.value.date === day.date
       const hasMonth = (outside === false && props.showMonthLabel === true && days.value.find(d => d.month === day.month).day === day.day)
-      const scope = { outside, timestamp: day, miniMode: isMiniMode.value, activeDate, hasMonth, droppable: dragOverDayRef.value === day.date }
+      const scope = {
+        outside,
+        timestamp: day,
+        miniMode: isMiniMode.value,
+        activeDate,
+        hasMonth,
+        droppable: dragOverDayRef.value === day.date,
+        disabled: (props.disabledWeekdays ? props.disabledWeekdays.includes(day.weekday) : false)
+      }
 
       const style = Object.assign({ ...computedStyles.value }, styler({ scope }))
       const dayClass = typeof props.dayClass === 'function' ? props.dayClass({ scope }) : {}
