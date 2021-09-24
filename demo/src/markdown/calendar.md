@@ -431,7 +431,7 @@ QCalendar has many `view` types available. They are:
 30. `month-interval`
 31. `custom-interval`
 
-It's important to know that all `view` types are linear in nature. For instance, `3day` will show three days and the `next()` method will show the next 3 days. A good idea could be to switch to a `view` type on a mobile based on the current width of the screen. For portrait mode, you could change the `view` type to `2day` and for landscape mode `4day`. When `next()` or `prev()` methods are called the next (or previous) 2 days (for protrait) or 4 days (for landscape) would be displayed. Also, it is important to understand, if using a 5-day work week, then use the `week` view for a nice consistent linear calendar. If you use a `5day` view with a 5-day workweek (`[1,2,3,4,5]`), then you can't expect the monday to be on the first day of the week.
+It's important to know that all `view` types are linear in nature. For instance, `3day` will show three days and the `next()` method will show the next 3 days. A good idea could be to switch to a `view` type on a mobile based on the current width of the screen. For portrait mode, you could change the `view` type to `2day` and for landscape mode `4day`. When `next()` or `prev()` methods are called the next (or previous) 2 days (for portrait) or 4 days (for landscape) would be displayed. Also, it is important to understand, if using a 5-day work week, then use the `week` view for a nice consistent linear calendar. If you use a `5day` view with a 5-day workweek (`[1,2,3,4,5]`), then you can't expect the monday to be on the first day of the week.
 
 Week and Month views are also linear, but respect the number of days displayed within the week or month respectfully.
 
