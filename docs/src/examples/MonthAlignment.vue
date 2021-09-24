@@ -46,6 +46,7 @@
       <div style="display: flex; max-width: 800px; width: 100%;">
         <q-calendar-month
           v-model="selectedDate"
+          ref="calendar"
           :weekday-align="weekdayAlign"
           :date-align="dateAlign"
           show-day-of-year-label
