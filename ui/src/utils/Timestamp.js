@@ -37,24 +37,26 @@ export const MILLISECONDS_IN_WEEK = 604800000
  * @property {boolean=} Timestamp.current True if Timestamp is current day (now)
  * @property {boolean=} Timestamp.future True if Timestamp is in the future
  * @property {boolean=} Timestamp.disabled True if this is a disabled date
+ * @property {boolean=} Timestamp.currentWeekday True if this date corresponds to current weekday
  */
 export const Timestamp = {
-  date: '',       // YYYY-MM-DD
-  time: '',       // HH:MM (optional)
-  year: 0,        // YYYY
-  month: 0,       // MM (Jan = 1, etc)
-  day: 0,         // day of the month
-  weekday: 0,     // week day (0=Sunday...6=Saturday)
-  hour: 0,        // 24-hr format
-  minute: 0,      // mm
-  doy: 0,         // day of year
-  workweek: 0,    // workweek number
-  hasDay: false,  // if this timestamp is supposed to have a date
-  hasTime: false, // if this timestamp is supposed to have a time
-  past: false,    // if timestamp is in the past (based on `now` property)
-  current: false, // if timestamp is current date (based on `now` property)
-  future: false,  // if timestamp is in the future (based on `now` property)
-  disabled: false // if timestamp is disabled
+  date: '',        // YYYY-MM-DD
+  time: '',        // HH:MM (optional)
+  year: 0,         // YYYY
+  month: 0,        // MM (Jan = 1, etc)
+  day: 0,          // day of the month
+  weekday: 0,      // week day (0=Sunday...6=Saturday)
+  hour: 0,         // 24-hr format
+  minute: 0,       // mm
+  doy: 0,          // day of year
+  workweek: 0,     // workweek number
+  hasDay: false,   // if this timestamp is supposed to have a date
+  hasTime: false,  // if this timestamp is supposed to have a time
+  past: false,     // if timestamp is in the past (based on `now` property)
+  current: false,  // if timestamp is current date (based on `now` property)
+  future: false,   // if timestamp is in the future (based on `now` property)
+  disabled: false, // if timestamp is disabled
+  currentWeekday: false // if this date corresponds to current weekday 
 }
 
 export const TimeObject = {
@@ -376,6 +378,7 @@ export function updateRelative (timestamp, now, time = false) {
   timestamp.past = b < a
   timestamp.current = current
   timestamp.future = b > a
+  timestamp.currentWeekday = timestamp.weekday === now.weekday
 
   return timestamp
 }
