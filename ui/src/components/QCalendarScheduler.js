@@ -16,7 +16,6 @@ import {
 
 // Utility
 import {
-  copyTimestamp,
   getDayIdentifier,
   isBetweenDates,
   parsed,
@@ -367,10 +366,6 @@ export default defineComponent({
       return day.date === emittedValue.value
     }
 
-    function __isActiveWeekday (day) {
-      return day.weekday === parsedValue.value.weekday
-    }
-
     // function __isActiveResource (day) {
     //   return __isActiveDate(day)
     //     && day.hasTime
@@ -508,14 +503,12 @@ export default defineComponent({
     }
 
     function __renderHeadDay (day, columnIndex) {
-      const dayCopy = copyTimestamp(day)
       const headDaySlot = slots[ 'head-day' ]
       const headDateSlot = slots[ 'head-date' ]
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
-      dayCopy.current = __isActiveWeekday(day)
       const scope = {
-        timestamp: dayCopy,
+        timestamp: day,
         activeDate,
         droppable: dragOverHeadDayRef.value === day.date,
         disabled: (props.disabledWeekdays ? props.disabledWeekdays.includes(day.weekday) : false)
@@ -677,13 +670,11 @@ export default defineComponent({
     }
 
     function __renderHeadDayEvent (day, columnIndex) {
-      const dayCopy = copyTimestamp(day)
       const headDayEventSlot = slots[ 'head-day-event' ]
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
-      dayCopy.current = __isActiveWeekday(day)
       const scope = {
-        timestamp: dayCopy,
+        timestamp: day,
         activeDate,
         droppable: dragOverHeadDayRef.value === day.date,
         disabled: (props.disabledWeekdays ? props.disabledWeekdays.includes(day.weekday) : false)
