@@ -16,6 +16,7 @@ import {
 
 // Utility
 import {
+  copyTimestamp,
   getDateTime,
   getDayIdentifier,
   getDayTimeIdentifier,
@@ -489,12 +490,13 @@ export default defineComponent({
     }
 
     function __renderHeadDay (day, columnIndex) {
+      const dayCopy = copyTimestamp(day)
       const headDaySlot = slots[ 'head-day' ]
       const headDateSlot = slots[ 'head-date' ]
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
-      day.current = __isActiveWeekday(day)
-      const scope = getScopeForSlot(day, columnIndex)
+      dayCopy.current = __isActiveWeekday(day)
+      const scope = getScopeForSlot(dayCopy, columnIndex)
       scope.activeDate = activeDate
       scope.droppable = dragOverHeadDayRef.value === day.date
       scope.disabled = (props.disabledWeekdays ? props.disabledWeekdays.includes(day.weekday) : false)
@@ -652,11 +654,12 @@ export default defineComponent({
     }
 
     function __renderHeadDayEvent (day, columnIndex) {
+      const dayCopy = copyTimestamp(day)
       const headDayEventSlot = slots[ 'head-day-event' ]
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
-      day.current = __isActiveWeekday(day)
-      const scope = getScopeForSlot(day, columnIndex)
+      dayCopy.current = __isActiveWeekday(day)
+      const scope = getScopeForSlot(dayCopy, columnIndex)
       scope.activeDate = activeDate
       scope.disabled = (props.disabledWeekdays ? props.disabledWeekdays.includes(day.weekday) : false)
 
@@ -684,11 +687,12 @@ export default defineComponent({
     }
 
     function __renderHeadWeekday (day) {
+      const dayCopy = copyTimestamp(day)
       const slot = slots[ 'head-weekday-label' ]
       const shortWeekdayLabel = props.shortWeekdayLabel === true
 
-      day.current = __isActiveWeekday(day)
-      const scope = getScopeForSlot(day)
+      dayCopy.current = __isActiveWeekday(day)
+      const scope = getScopeForSlot(dayCopy)
       scope.shortWeekdayLabel = props.shortWeekdayLabel
       scope.disabled = (props.disabledWeekdays ? props.disabledWeekdays.includes(day.weekday) : false)
 
