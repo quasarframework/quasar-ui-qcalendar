@@ -1,7 +1,8 @@
-QCalendar
+QCalendar (Vue Plugin, UMD and Quasar App Extension)
 ===
 
 ![@quasar/quasar-ui-qcalendar](https://img.shields.io/npm/v/@quasar/quasar-ui-qcalendar/next?label=@quasar/quasar-ui-qcalendar@next)
+![@quasar/quasar-app-extension-qcalendar](https://img.shields.io/npm/v/@quasar/quasar-app-extension-qcalendar/next?label=@quasar/quasar-app-extension-qcalendar@next)
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/quasarframework/quasar-ui-qcalendar)]()
 [![GitHub repo size in bytes](https://img.shields.io/github/repo-size/quasarframework/quasar-ui-qcalendar)]()
 [![npm](https://img.shields.io/npm/dt/@quasar/quasar-app-extension-qcalendar)](https://www.npmjs.com/package/@quasar/quasar-app-extension-qcalendar)
@@ -10,24 +11,19 @@ QCalendar
 
 [![Discord](https://img.shields.io/badge/discord-join%20server-738ADB?style=for-the-badge&logo=discord&logoColor=738ADB)](https://chat.quasar.dev)
 [![Discord](https://img.shields.io/badge/follow-@jgalbraith64-1DA1F2?style=for-the-badge&logo=twitter&logoColor=1DA1F2)](https://twitter.com/jgalbraith64)
+
+
 ## Everything you need for a complete Calendar solution.
 
-QCalendar is a powerful calendar that allows for viewing of **day** (1-6 days), **week**, **monthly**, **scheduler**, **agenda** and **task** views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.
+QCalendar allows for viewing of **day** (1-6 days), **week**, **monthly**, **scheduler**, **agenda**, **resource** and **task** views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.
 
 ---
 
-# QCalendar v4.0.0 Alpha
-Welcome to the QCalendar v4.0.0 Alpha release
+## Important Release Notes
 
-### QCalendar is now converted to use Vue v3
-With this update comes a lot of changes, with over 90% of QCalendar being rewritten. Please read below to understand these changes and how they will affect you for upgrading.
-
-> Until the final stable version is released, some aspects of the calendar may change. We're not planning for additional changes, but unforeseen reported issues may require us to do breaking changes (unlikely, but keep this in mind). So please make sure that you read each v4 alpha/beta version's release notes carefully before upgrading.
-
-# Documentation
-
-Go to Netlify which is hosting QCalendar v4.0.0 docs https://qcalendar.netlify.app/.
-
+v4.0.0
+- QCalendar v4.x (alpha/beta) lives in the **next** branch. This will change at some point in the future when v4.0.0 release is available.
+- Be sure to read the [documentation](https://qcalendar.netlify.app/)
 ---
 
 [Live Demo](https://qcalendar.netlify.app/) - **live docs, demo and examples**
@@ -75,12 +71,36 @@ Including support for locales, optional theming, 1st day Monday, 5-day work week
 
 ...and many more!
 
-# Donations
+# Structure
 
-QCalendar is an open source MIT project that has been made possible due to the **generous contributions** by [sponsors and backers](https://github.com/sponsors/hawkeye64). If you are interested in supporting this project, please consider:
-- [Becoming a sponsor on GitHub](https://github.com/users/hawkeye64/sponsorship)
-- [One-off donation via PayPal](https://paypal.me/hawkeye64)
+This is a yarn workspace mono-repo. You cannot use npm for building.
+
+* [/ui](ui) - standalone npm package (go here for more information)
+* [/app-extension](app-extension) - Quasar app extension
+* [/docs](docs) - sources for docs, demo and examples project
+* [live demo](https://qcalendar.netlify.app/) - **live docs, demo and examples**
+
+# Demo Workflow
+If you fork or download this project, make sure you have the Quasar CLI globally installed:
+
+```
+$ npm i -g @quasar/cli
+```
+
+The workflow to build the demo, on a fresh project, is as follows (note: this project uses yarn workspaces, so you **must** use yarn):
+```
+$ yarn
+$ cd ui
+$ yarn build
+$ cd ../docs
+$ quasar dev
+```
+
+# Codepen
+[UMD examples in Codepen collection](https://codepen.io/collection/qOBOEG)
+
+# Donate
+If you appreciate the work that went into this, please consider donating to [Quasar](https://donate.quasar.dev) or [Jeff](https://github.com/sponsors/hawkeye64).
 
 # License
-
 MIT (c) Jeff Galbraith <jeff@quasar.dev>

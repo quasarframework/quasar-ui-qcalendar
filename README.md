@@ -1,8 +1,8 @@
 QCalendar (Vue Plugin, UMD and Quasar App Extension)
 ===
 
-![@quasar/quasar-ui-qcalendar](https://img.shields.io/npm/v/@quasar/quasar-ui-qcalendar/next?label=@quasar/quasar-ui-qcalendar)
-![@quasar/quasar-app-extension-qcalendar](https://img.shields.io/npm/v/@quasar/quasar-app-extension-qcalendar/next?label=@quasar/quasar-app-extension-qcalendar)
+![@quasar/quasar-ui-qcalendar](https://img.shields.io/npm/v/@quasar/quasar-ui-qcalendar/next?label=@quasar/quasar-ui-qcalendar@next)
+![@quasar/quasar-app-extension-qcalendar](https://img.shields.io/npm/v/@quasar/quasar-app-extension-qcalendar/next?label=@quasar/quasar-app-extension-qcalendar@next)
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/quasarframework/quasar-ui-qcalendar)]()
 [![GitHub repo size in bytes](https://img.shields.io/github/repo-size/quasarframework/quasar-ui-qcalendar)]()
 [![npm](https://img.shields.io/npm/dt/@quasar/quasar-app-extension-qcalendar)](https://www.npmjs.com/package/@quasar/quasar-app-extension-qcalendar)
@@ -72,6 +72,8 @@ Including support for locales, optional theming, 1st day Monday, 5-day work week
 ...and many more!
 
 # Structure
+
+This is a yarn workspace mono-repo. You cannot use npm for building.
 
 * [/ui](ui) - standalone npm package (go here for more information)
 * [/app-extension](app-extension) - Quasar app extension
