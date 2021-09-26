@@ -17,8 +17,8 @@
     "dev:electron": "quasar dev -m electron"
   },
   "dependencies": {
-    "@carbon/icons-vue": "^10.37.0",
-    "@quasar/extras": "^1.11.0",
+    "@carbon/icons-vue": "^10.39.0",
+    "@quasar/extras": "^1.11.1",
     "@quasar/quasar-ui-qcalendar": "./ui",
     "core-js": "^3.18.0",
     "date-holidays": "=2.0.2",
