@@ -157,7 +157,7 @@ This image will explain the QCalendarDay alignment:
 - property `min-weeks` now works as expected. This is useful when rendering month calendars so they have a fixed height from month-to-month. Most common would be `:min-weeks="6"`. Some months may show 4, 5 or 6 weeks, depending on which weekday the start of the month falls. **Hint**: Use `:min-weeks="6"` in `mini-mode` when using multi-month selection strategies.
 - new `hoverable` property (all calendars). Turns on mouse hover effect.
 - new `focusable` property (all calendars). Use in conjunction with the `use-navigation` property for visual acuity.
-- new property `min-day-height` (QCalendarMonth) sets a `min-height` on a date cell.
+- new property `day-min-height` (QCalendarMonth) sets a `min-height` on a date cell.
 - new property `focus-type` (QCalendarMonth) specifies the item that gets focused when property `focusable` is true. Options are `day` and `date`, `weekday` and `resource` (Default: `date`).
 - Calendars with hierarchical children (ie: scheduler and resource) now have better animation when expanding a row.
 

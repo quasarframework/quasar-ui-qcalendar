@@ -21,10 +21,10 @@
         id="calendar-month"
         ref="calendar"
         bordered
+        day-min-height="60"
         show-work-weeks
         show-day-of-year-label
         date-align="right"
-        style="height: 300px;"
       >
         <template #week />
       </q-calendar-month>

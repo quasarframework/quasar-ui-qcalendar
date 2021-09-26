@@ -1,5 +1,5 @@
 <template>
-  <div class="row full-width q-pa-xs rounded-borders relative-position" style="border: 2px solid rgba(25,118,210,.65);">
+  <div class="row full-width q-pa-xs rounded-borders relative-position" style="border: 2px solid rgba(25,118,210,.65); height: 300px;">
     <q-scroll-area class="col" style="max-width: 180px; width: 100%; max-height: 300px;">
       <q-list dense>
         <q-item
@@ -22,9 +22,10 @@
         ref="calendar"
         bordered
         mini-mode
+        day-min-height="40"
         show-work-weeks
         show-day-of-year-label
-        style="height: 200px; max-width: 300px;"
+        style="max-width: 300px;"
       />
     </div>
   </div>
