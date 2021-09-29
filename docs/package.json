@@ -20,10 +20,10 @@
     "@carbon/icons-vue": "^10.39.0",
     "@quasar/extras": "^1.11.1",
     "@quasar/quasar-ui-qcalendar": "./ui",
-    "core-js": "^3.18.0",
+    "core-js": "^3.18.1",
     "date-holidays": "=2.0.2",
     "quasar": "^2.1.0",
-    "quasar-ui-example-viewer": "^2.0.0-alpha.6",
+    "quasar-ui-example-viewer": "^2.0.0-alpha.9",
     "quasar-ui-json-api-viewer": "^2.0.0-alpha.6"
   },
   "devDependencies": {
