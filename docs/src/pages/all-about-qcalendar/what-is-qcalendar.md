@@ -63,6 +63,6 @@ QCalendar is actually an accumulation of several other dedicated components and 
 
 ## QCalendar is not…
 
-- An event management system. However, QCalendar supports everything you need to create an event/reminder management system using slots.
+- An event management system. However, QCalendar supports everything you need to create an event/reminder/task management system using slots.
 - An interactive navigation provider (next, previous, today). However, you can easily do this in devland with QCalendar’s methods (see examples).
 - Only the Gregorian calendar is supported (at this time).
