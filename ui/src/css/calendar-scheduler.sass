@@ -213,6 +213,7 @@
     border-bottom: var(--calendar-border)
     color: var(--calendar-color)
     background: var(--calendar-background)
+    font-weight: var(--calendar-head-font-weight)
 
     &--resources
       border-right: var(--calendar-border)
@@ -249,7 +250,6 @@
 
     &.q-current-day
       .q-calendar__button
-        // color: var(--calendar-current-date-color)
         border: var(--calendar-border-current)
 
     &.q-disabled-day
@@ -276,7 +276,10 @@
 
   &__resource
     &--row
-      border-bottom: var(--calendar-border)
+      border-top: var(--calendar-border)
+
+      &:first-child
+        border-top: none !important
 
   &__day,
   &__day--section
@@ -320,6 +323,9 @@
 
     &:last-child
       border-bottom: none !important
+
+  .q-calendar__child--expanded > .q-calendar-scheduler__resource--row
+    border-top: var(--calendar-border) !important
 
 .q-dark div,
 .body--dark div,
@@ -382,10 +388,7 @@
 
     &__resource
       &--row
-        border-bottom: var(--calendar-border-dark)
-
-        &:last-child
-          border-bottom: none !important
+        border-top: var(--calendar-border-dark)
 
     &__day,
     &__day--section
@@ -429,3 +432,6 @@
         &.q-range
           color: var(--calendar-range-color-dark)
           background: var(--calendar-range-background-dark)
+
+    .q-calendar__child--expanded > .q-calendar-scheduler__resource--row
+      border-top: var(--calendar-border-dark) !important
