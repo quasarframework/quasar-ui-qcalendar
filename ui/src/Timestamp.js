@@ -1,5 +1,5 @@
-import pkg from '../package.json'
-const { version } = pkg
+const version = __UI_VERSION__
+
 import {
   PARSE_REGEX,
   PARSE_DATE,

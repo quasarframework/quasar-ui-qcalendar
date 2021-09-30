@@ -1,6 +1,6 @@
 import QCalendar from './components/QCalendar.js'
-import pkg from '../package.json'
-const { version } = pkg
+
+const version = __UI_VERSION__
 
 export {
   version,

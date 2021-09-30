@@ -1,5 +1,3 @@
-import pkg from '../package.json'
-const { version } = pkg
 import QCalendar from './components/QCalendar.js'
 import QCalendarAgenda from './components/QCalendarAgenda.js'
 import QCalendarDay from './components/QCalendarDay.js'
@@ -7,6 +5,8 @@ import QCalendarMonth from './components/QCalendarMonth.js'
 import QCalendarResource from './components/QCalendarResource.js'
 import QCalendarScheduler from './components/QCalendarScheduler.js'
 import QCalendarTask from './components/QCalendarTask.js'
+
+const version = __UI_VERSION__
 
 import {
   PARSE_REGEX,

@@ -8,6 +8,7 @@
 
 /* eslint-env node */
 const path = require('path')
+const webpack = require('webpack')
 const ESLintPlugin = require('eslint-webpack-plugin')
 const { configure } = require('quasar/wrappers')
 
@@ -72,6 +73,11 @@ module.exports = configure(function (ctx) {
           .use(ESLintPlugin, [{
             extensions: [ 'js', 'vue' ],
             exclude: 'node_modules'
+          }])
+
+        chain.plugin('define-ui')
+          .use(webpack.DefinePlugin, [{
+            __UI_VERSION__: `'${ require('../ui/package.json').version }'`
           }])
 
         chain.resolve.alias.merge({
