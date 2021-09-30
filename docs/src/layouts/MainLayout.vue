@@ -76,7 +76,7 @@
               target="_blank"
               rel="noopener"
               class="button link"
-            >View Source on GitHub
+            ><span class="q-ml-xs">View Source on GitHub</span>
             </q-btn>
           </div>
         </div>
