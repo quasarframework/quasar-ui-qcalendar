@@ -6,16 +6,25 @@
 
 \:root
   --background-color                       : transparent
+  --background-color-dark                  : transparent
   --text-color                             : rgb(33,118,210)
+  --text-color-dark                        : rgb(204,231,255)
   --border-color                           : transparent
+  --border-color-dark                      : transparent
 
   --text-color-hover                       : rgb(33,118,210)
+  --text-color-hover-dark                  : rgb(204,231,255)
   --background-color-hover                 : transparent
+  --background-color-hover-dark            : transparent
   --border-color-hover                     : transparent
+  --border-color-hover-dark                : transparent
 
   --text-color-active                      : rgb(33,118,210)
+  --text-color-active-dark                 : rgb(255,255,255)
   --background-color-active                : rgba(33,118,210, .08)
+  --background-color-active-dark           : rgba(204,231,255, .4)
   --border-color-active                    : transparent
+  --border-color-active-dark               : transparent
 
   // scrollbars
   --markdown-scrollbar-width-height        : 10px
@@ -278,6 +287,47 @@ kbd
 .body--dark div
   .q-item.q-router-link--active .q-item__label--caption
     color: rgba(0,140,200,.8)
+
+  .button
+    border: 1px solid var(--border-color-dark)
+    color: var(--text-color-dark)
+    background: var(--background-color-dark)
+
+  .select, input[type="radio"]
+    border: 1px solid var(--border-color-dark)
+    color: var(--text-color-dark)
+    background: var(--background-color-dark)
+
+    &:hover,
+    &:active,
+    &:focus
+      color: var(--text-color-hover-dark)
+      background: var(--background-color-hover-dark)
+
+  .toc .q-item,
+  .menu .q-item
+    border: 1px solid var(--border-color-dark)
+    color: var(--text-color-dark)
+    background: var(--background-color-dark)
+
+  .toc .q-item.q-item--active,
+  .toc .q-item.q-router-link--active,
+  .menu .q-item.q-item--active,
+  .menu .q-item.q-router-link--active
+    border: 1px solid var(--border-color-active-dark)
+    color: var(--text-color-active-dark)
+    background: var(--background-color-active-dark)
+
+    &:hover,
+    &:focus
+      border: 1px solid var(--border-color-hover-dark)
+      color: var(--text-color-hover-dark)
+      background: var(--background-color-hover-dark)
+
+    &:active
+      border: 1px solid var(--border-color-active-dark)
+      color: var(--text-color-active-dark)
+      background: var(--background-color-active-dark)
 
 .toc .q-item
   border-radius: 10px 0 0 10px
