@@ -135,30 +135,7 @@
 
     &--resources
       border-right: var(--calendar-border)
-      color: var(--calendar-color)
-      background: var(--calendar-background)
       border-bottom: var(--calendar-border)
-      min-width: var(--calendar-resources-width)
-      max-width: var(--calendar-resources-width)
-
-    &--interval
-      border-right: var(--calendar-border)
-      // border-bottom: var(--calendar-border)
-
-      &:last-child
-        border-right: none
-
-  &__resource
-    border-bottom: var(--calendar-border)
-    border-right: var(--calendar-border)
-    color: var(--calendar-color)
-    background: var(--calendar-background)
-    min-width: var(--calendar-resources-width)
-    max-width: var(--calendar-resources-width)
-
-    &--section
-      border-bottom: var(--calendar-border)
-      border-right: var(--calendar-border)
       color: var(--calendar-color)
       background: var(--calendar-background)
       min-width: var(--calendar-resources-width)
@@ -167,12 +144,43 @@
       &:last-child
         border-bottom: none
 
+    &--interval
+      border-right: var(--calendar-border)
+
+      &:last-child
+        border-right: none
+
+  &__resource
+    border-right: var(--calendar-border)
+    color: var(--calendar-color)
+    background: var(--calendar-background)
+    min-width: var(--calendar-resources-width)
+    max-width: var(--calendar-resources-width)
+
+    &:last-child
+      border-right: none
+
+    &--row
+      border-top: var(--calendar-border)
+
+      &:first-child
+        border-top: none
+
+    &--section
+      border-right: var(--calendar-border)
+      color: var(--calendar-color)
+      background: var(--calendar-background)
+      min-width: var(--calendar-resources-width)
+      max-width: var(--calendar-resources-width)
+
   &__resource--interval
-    border-bottom: var(--calendar-border)
     border-right: var(--calendar-border)
 
     &:last-child
       border-right: none
+
+  .q-calendar__child--expanded > .q-calendar-resource__resource--row
+    border-top: var(--calendar-border) !important
 
 .q-dark div,
 .body--dark div,
@@ -186,32 +194,28 @@
 
       &--resources
         border-right: var(--calendar-border-dark)
+        border-bottom: var(--calendar-border-dark)
         color: var(--calendar-color-dark)
         background: var(--calendar-background-dark)
 
       &--interval
         border-right: var(--calendar-border-dark)
-        // border-bottom: var(--calendar-border-dark)
-
-    // &__body
-    //   border-top: var(--calendar-border-dark)
 
     &__resource
-      border-bottom: var(--calendar-border-dark)
       border-right: var(--calendar-border-dark)
       color: var(--calendar-color-dark)
       background: var(--calendar-background-dark)
 
+      &--row
+        border-top: var(--calendar-border-dark)
+
       &--section
-        border-bottom: var(--calendar-border-dark)
         border-right: var(--calendar-border-dark)
         color: var(--calendar-color-dark)
         background: var(--calendar-background-dark)
 
-      &:last-child
-        border-bottom: none
-
-
     &__resource--interval
-      border-bottom: var(--calendar-border-dark)
       border-right: var(--calendar-border-dark)
+
+    .q-calendar__child--expanded > .q-calendar-resource__resource--row
+      border-top: var(--calendar-border-dark) !important
