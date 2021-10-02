@@ -50,12 +50,15 @@ module.exports = configure(function (ctx) {
     build: {
       vueRouterMode: 'history', // available values: 'hash', 'history'
 
-      // transpile: false,
+      transpile: true,
 
       // Add dependencies for transpiling with Babel (Array of string/regex)
       // (from node_modules, which are by default not transpiled).
       // Applies only if "transpile" is set to true.
-      // transpileDependencies: [],
+      transpileDependencies: [
+        /quasar-ui-json-api-viewer[\\/]src/,
+        /quasar-ui-example-viewer[\\/]src/
+      ],
 
       // rtl: false, // https://quasar.dev/options/rtl-support
       // preloadChunks: true,
