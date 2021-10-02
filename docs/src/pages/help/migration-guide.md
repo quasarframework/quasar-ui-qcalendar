@@ -23,6 +23,31 @@ With this update comes a lot of changes, with over 90% of QCalendar being rewrit
 ## QCalendar rewritten to use Vue v3 Composition API
 This means you get better in-editor auto-completion support amongst many other advantages.
 
+::: warning
+As of QCalendar v4.0.0-beta.6, the entry-point files in `src/` were changed to use a webpack string replacement plug-in for `__UI_VERSION__`. The reason for this is that webpack no loger tree-shakes JSON files and the `package.json` was wholly loaded into the distributables, making them bloated with data not needed for run-time (except for `version`.).
+
+There are a couple options:
+1. Import from the `dist/` folder.
+
+2. If you are importing  `src/<component>`, then take it a bit further using `src/components/<component>` instead
+
+3. Or, in your own project that consumes QCalendar, add this to quasar.conf.js:
+
+At the top:
+```js
+const webpack = require('webpack')
+```
+
+In build -> chainWebpack
+
+```js
+chain.plugin('define-ui')
+  .use(webpack.DefinePlugin, [{
+    __UI_VERSION__: `'${ require('@quasar/quasar-ui-qcalendar/package.json').version }'`
+  }])
+```
+:::
+
 ## New calendar component
 Just quickly, for information purposes, there is a new QCalendarTask component for writing timesheets and Gantt-like calendars. This component is still actively being worked on (at the time this document was being written). So, just a heads up.
 

@@ -54,6 +54,10 @@ When installed as an App Extension, you can use `quasar describe QCalendar`. You
 This is the preferred way if you are targeting one or more calendar components.
 :::
 
+::: warning
+If you plan on importing from `src/` directly, please read the [Migration Guide](/help/migration-guide) on additional steps that may be needed.
+:::
+
 ```
 $ yarn add @quasar/quasar-ui-qcalendar@next
 # or
