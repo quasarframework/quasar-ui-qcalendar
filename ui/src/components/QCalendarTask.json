@@ -46,7 +46,7 @@
       "type": ["Number", "String"],
       "category": "content",
       "default": "id",
-      "desc": "The key in an object to use as the ID",
+      "desc": "The key in an object to use as the ID (must be unique)",
       "examples": [
         "task-key=\"key\""
       ]
