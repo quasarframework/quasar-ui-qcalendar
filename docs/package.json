@@ -17,7 +17,7 @@
     "dev:electron": "quasar dev -m electron"
   },
   "dependencies": {
-    "@carbon/icons-vue": "^10.39.0",
+    "@carbon/icons-vue": "^10.40.0",
     "@quasar/extras": "^1.11.1",
     "@quasar/quasar-ui-qcalendar": "./ui",
     "core-js": "^3.18.1",
@@ -31,7 +31,7 @@
     "@babel/eslint-parser": "^7.15.7",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/preset-env": "^7.15.6",
-    "@quasar/app": "^3.1.0",
+    "@quasar/app": "^3.1.2",
     "babel-loader": "^8.2.2",
     "eslint": "^7.32.0",
     "eslint-config-standard": "^16.0.3",

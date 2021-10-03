@@ -87,7 +87,7 @@
     "quasar": "^2.1.0",
     "quasar-json-api": "2.0.0-alpha.3",
     "rimraf": "^3.0.2",
-    "rollup": "^2.57.0",
+    "rollup": "^2.58.0",
     "rtlcss": "^3.3.0",
     "sass": "^1.42.1",
     "uglify-js": "^3.14.2",
