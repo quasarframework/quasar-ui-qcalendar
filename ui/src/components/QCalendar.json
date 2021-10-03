@@ -3,7 +3,7 @@
     "docsUrl": "https://quasarframework.github.io/quasar-ui-qcalendar/docs"
   },
   "props": {
-    "value": {
+    "model-value": {
       "type": "String",
       "category": "model",
       "desc": "v-model; When set as `YYYY-MM-DD`, the calendar will display the current view on this date. If empty, then it will be changed to the current date which will be emitted",
