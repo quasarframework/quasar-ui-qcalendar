@@ -8,9 +8,8 @@ const uglify = require('uglify-js')
 // const buble = require('@rollup/plugin-buble')
 const json = require('@rollup/plugin-json')
 const { nodeResolve } = require('@rollup/plugin-node-resolve')
-const replace = require('@rollup/plugin-replace')
 
-const { version } = require('../package.json')
+// const { version } = require('../package.json')
 
 const buildConf = require('./config')
 const buildUtils = require('./utils')
@@ -19,15 +18,7 @@ function pathResolve (_path) {
   return path.resolve(__dirname, _path)
 }
 
-const replaceConfig = {
-  preventAssignment: false,
-  values: {
-    __UI_VERSION__: `'${ version }'`
-  }
-}
-
 const rollupPluginsModern = [
-  replace(replaceConfig),
   nodeResolve(),
   json()
 ]

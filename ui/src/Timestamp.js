@@ -1,4 +1,4 @@
-const version = __UI_VERSION__
+import { version } from './version'
 
 import {
   PARSE_REGEX,
