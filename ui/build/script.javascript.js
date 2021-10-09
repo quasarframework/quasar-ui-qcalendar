@@ -9,8 +9,6 @@ const uglify = require('uglify-js')
 const json = require('@rollup/plugin-json')
 const { nodeResolve } = require('@rollup/plugin-node-resolve')
 
-// const { version } = require('../package.json')
-
 const buildConf = require('./config')
 const buildUtils = require('./utils')
 
@@ -82,7 +80,7 @@ const buildEntries = [
   'Timestamp'
 ]
 
-function generateBuilds() {
+function generateBuilds () {
   const builds = []
 
   buildEntries.forEach(entry => {

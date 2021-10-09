@@ -6,7 +6,7 @@ import QCalendarResource from './components/QCalendarResource.js'
 import QCalendarScheduler from './components/QCalendarScheduler.js'
 import QCalendarTask from './components/QCalendarTask.js'
 
-const version = __UI_VERSION__
+import { version } from './version'
 
 import {
   PARSE_REGEX,
