@@ -86,7 +86,7 @@ If you want a calendar to display dark mode, then set the `dark` property. If yo
 
 ## Date type
 
-The only two values accepted for the `date-type` property are `round` (default), `rounded` and `square`.
+The only three values accepted for the `date-type` property are `round` (default), `rounded` and `square`.
 
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
@@ -186,7 +186,7 @@ All labels in the calendars are formatted with the browsers internal `Intl.DateT
 
 ### Minimum label Length
 
-As explained above, the calendars can format weekday labels smaller than the `Intl.DateTimeFormat` short format. The edge-case for this is to create a very small calendar picker. In this case, you could set the `min-weekday-length` to 1, in which case only the first character of the label will be used. This may not be desireable for some languages, as the weekdays may all have the same first character. In this case, set it to 2 or 3, whatever best suits the locale you are aiming for.
+As explained above, the calendars can format weekday labels smaller than the `Intl.DateTimeFormat` short format. The edge-case for this is to create a very small calendar picker. In this case, you could set the `min-weekday-length` to 1, in which case only the first character of the label will be used. This may not be desirable for some languages, as the weekdays may all have the same first character. In this case, set it to 2 or 3, whatever best suits the locale you are aiming for.
 
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
@@ -208,12 +208,12 @@ Transitions are a way to make your calendar come alive for your end-user. When a
 | -------  | -------------- | -----------  |
 | animated | Boolean        |              |
 
-Then you can use the `transiton-prev` and `transiton-next` properties to change the default behavior, which is `slide-right` and `slide-left`, respectively.
+Then you can use the `transition-prev` and `transition-next` properties to change the default behavior, which is `slide-right` and `slide-left`, respectively.
 
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
-| transiton-prev | String   | slide-right  |
-| transiton-next | String   | slide-left   |
+| transition-prev | String   | slide-right  |
+| transition-next | String   | slide-left   |
 
 See the [QCalendar Transitions](/developing/qcalendar-transitions) for more information.
 ## Hoverable and focusable
@@ -261,9 +261,9 @@ The property `selected-start-end-dates` takes an array of arrays. Each internal 
 When the `drag-enter-func` property is called, which is pointing to your function, you must call within that function `e.preventDefault()`, otherwise Drag and Drop will not work.
 :::
 
-All functions receive a function signature of `(e, type, scope)`. `e` is the actual event, `type` is a string, denoting where it came from. For instance, `day`, `weekday`, `interval`, etc. And, `scope` will be the data associate with this particular cell.
+All functions receive a function signature of `(e, type, scope)`. `e` is the actual event, `type` is a string, denoting where it came from. For instance, `day`, `weekday`, `interval`, etc. And, `scope` will be the data associated with this particular cell.
 
-For all functions, you can return `true` or `false`. If true, this tells the calendar to add additional `droppable` property into the `scope`. Then you can use `day-class`, `interval-class` or `weekday-class` to modify the CSS.
+For all functions, you can return `true` or `false`. If true, this tells the calendar to add an additional `droppable` property into the `scope`. Then you can use `day-class`, `interval-class` or `weekday-class` to modify the CSS.
 
 As an example:
 
@@ -286,10 +286,10 @@ Don't forget to check out the Drag and Drop examples and look at their sources o
 
 | Property | Type           | Example      |
 | -------  | -------------- | -----------  |
-| drag-enter-func | Funtion | :drag-enter-func="onDragEnter" |
-| drag-over-func | Funtion  | :drag-over-func="onDragOver" |
-| drag-leave-func | Funtion | :drag-leave-func="onDragLeave" |
-| drop-func | Funtion       | :drop-func="onDrop" |
+| drag-enter-func | Function | :drag-enter-func="onDragEnter" |
+| drag-over-func | Function  | :drag-over-func="onDragOver" |
+| drag-leave-func | Function | :drag-leave-func="onDragLeave" |
+| drop-func | Function       | :drop-func="onDrop" |
 
 ## Slots and events
 
