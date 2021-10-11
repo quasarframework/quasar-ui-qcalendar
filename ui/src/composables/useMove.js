@@ -31,9 +31,7 @@ export const useMoveEmits = [
  * @param {Array} param.weekdaySkips an array of 1's and 0's representing if a day is on/off
  * @param {import('vue').Ref} param.direction the direction for animation
  * @param {Number} param.maxDays comes from props.maxDays, not applicable for week or month views
- * @param {import('vue').ReactiveEffect} param.times reactive object
- * @param {Timestamp} param.times.today The current date
- * @param {Timestamp} param.times.now The "now" date
+ * @param {import('vue').ReactiveEffect} param.times reactive object (contains `today` and `now` - both Timestamp objects)
  * @param {import('vue').Ref} param.emittedValue reactive sting that is emitted when changed (YYYY-MM-DD)
  * @param {Function} param.emit Vue emit function
  */

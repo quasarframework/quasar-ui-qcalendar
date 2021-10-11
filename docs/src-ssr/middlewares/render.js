@@ -9,6 +9,7 @@ export default ssrMiddleware(({ app, resolve, render, serve }) => {
   // over to Vue and Vue Router to render our page
   app.get(resolve.urlPath('*'), (req, res) => {
     res.setHeader('Content-Type', 'text/html')
+
     render(/* the ssrContext: */ { req, res })
       .then(html => {
         // now let's send the rendered html to the client
@@ -16,6 +17,7 @@ export default ssrMiddleware(({ app, resolve, render, serve }) => {
       })
       .catch(err => {
         // oops, we had an error while rendering the page
+
         // we were told to redirect to another URL
         if (err.url) {
           if (err.code) {
