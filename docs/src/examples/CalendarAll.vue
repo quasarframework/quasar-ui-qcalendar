@@ -6,10 +6,9 @@
       @next="onNext"
     />
 
-    <div class="q-ma-sm row justify-center">
+    <div class="q-ma-sm q-gutter-sm row justify-center">
       <q-select
         v-model="selectedCalendar"
-        v-model:model-resources="resources"
         label="Calendar Mode"
         outlined
         dense
@@ -25,21 +24,36 @@
         class="button"
         style="min-width: 160px;"
       />
+      <q-select
+        v-model="selectedView"
+        label="Calendar View"
+        outlined
+        dense
+        options-dense
+        :disable="selectedCalendar === 'month'"
+        :options="[
+          'day',
+          'week',
+          'month'
+        ]"
+        class="button"
+        style="min-width: 160px;"
+      />
     </div>
 
     <div class="row justify-center">
       <div style="display: flex; max-width: 800px; width: 100%; max-height: 400px;">
         <q-calendar
           ref="calendar"
-          :mode="selectedCalendar"
           v-model="selectedDate"
           v-model:model-resources="resources"
           v-model:model-title="titleTasks"
           v-model:model-tasks="parsedTasks"
           v-model:model-footer="footerTasks"
+          :mode="selectedCalendar"
           resource-key="id"
           resource-label="name"
-          view="week"
+          :view="selectedView"
           :day-min-height="70"
           animated
           bordered
@@ -205,6 +219,7 @@ export default defineComponent({
   setup () {
     const
       selectedCalendar = ref('day'),
+      selectedView = ref('day'),
       calendar = ref(null),
       selectedDate = ref(today()),
       resources = reactive([
@@ -587,6 +602,7 @@ export default defineComponent({
 
     return {
       selectedCalendar,
+      selectedView,
       selectedDate,
       calendar,
       resources,
