@@ -110,9 +110,17 @@ export default defineComponent({
       lastStart = ref(null),
       lastEnd = ref(null)
 
-    const parsedView = computed(() => {
-      return 'day'
-    })
+      watch(() => props.view, () => {
+        // reset maxDaysRendered
+        maxDaysRendered.value = 0
+      })
+  
+      const parsedView = computed(() => {
+        if (props.view === 'month') {
+          return 'month-interval'
+        }
+        return props.view
+      })
 
     const parsedCellWidth = computed(() => {
       return parseInt(props.cellWidth, 10)
