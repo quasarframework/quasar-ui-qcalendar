@@ -17,8 +17,8 @@ import ArticlesGridItem from './ArticlesGridItem.vue'
 import articles from 'assets/articles.js'
 
 export default defineComponent({
-  components: { ArticlesGridItem },
   name: 'ArticlesGrid',
+  components: { ArticlesGridItem },
   componenets: {
     ArticlesGridItem
   },

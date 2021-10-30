@@ -1,6 +1,5 @@
 <template>
   <div class="subcontent">
-
     <navigation-bar
       @today="onToday"
       @prev="onPrev"

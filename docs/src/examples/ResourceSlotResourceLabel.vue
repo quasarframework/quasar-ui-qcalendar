@@ -15,6 +15,7 @@
           resource-key="id"
           resource-label="name"
           bordered
+          :style="styles"
           @change="onChange"
           @moved="onMoved"
           @resource-expanded="onResourceExpanded"
@@ -23,20 +24,24 @@
           @click-resource="onClickResource"
           @click-head-resources="onClickHeadResources"
           @click-interval="onClickInterval"
-          :style="styles"
         >
-        <template #resource-label="{ scope: { resource } }">
-          <div class="col-12">
-            <q-chip>
-              <q-avatar>
-                <img v-if="resource.avatar" :src="resource.avatar">
-                <q-icon v-if="resource.icon" :name="resource.icon"></q-icon>
-              </q-avatar>
-              {{ resource.name }}
-            </q-chip>
-          </div>
-        </template>
-
+          <template #resource-label="{ scope: { resource } }">
+            <div class="col-12">
+              <q-chip>
+                <q-avatar>
+                  <img
+                    v-if="resource.avatar"
+                    :src="resource.avatar"
+                  >
+                  <q-icon
+                    v-if="resource.icon"
+                    :name="resource.icon"
+                  />
+                </q-avatar>
+                {{ resource.name }}
+              </q-chip>
+            </div>
+          </template>
         </q-calendar-resource>
       </div>
     </div>

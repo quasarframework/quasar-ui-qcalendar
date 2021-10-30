@@ -12,11 +12,37 @@
             <div class="row q-mb-lg">
               <span class="no-wrap">Note: setting Resource Height to 0 will make it 'auto' height</span>
             </div>
-            <div class="row no-wrap" style="width: 600px;">
-              <span class="col-shrink no-wrap" style="min-width: 142px;">Resource Height</span> <q-slider v-model="resourceHeight" label label-always :min="0" :max="200" class="col" />
+            <div
+              class="row no-wrap"
+              style="width: 600px;"
+            >
+              <span
+                class="col-shrink no-wrap"
+                style="min-width: 142px;"
+              >Resource Height</span> <q-slider
+                v-model="resourceHeight"
+                label
+                label-always
+                :min="0"
+                :max="200"
+                class="col"
+              />
             </div>
-            <div class="row no-wrap" style="width: 600px;">
-              <span class="col-shrink no-wrap" style="min-width: 142px;">Resource Min. Height</span> <q-slider v-model="resourceMinHeight" label label-always :min="0" :max="200" class="col" />
+            <div
+              class="row no-wrap"
+              style="width: 600px;"
+            >
+              <span
+                class="col-shrink no-wrap"
+                style="min-width: 142px;"
+              >Resource Min. Height</span> <q-slider
+                v-model="resourceMinHeight"
+                label
+                label-always
+                :min="0"
+                :max="200"
+                class="col"
+              />
             </div>
           </div>
         </div>

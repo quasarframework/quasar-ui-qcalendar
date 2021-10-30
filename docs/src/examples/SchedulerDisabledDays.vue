@@ -1,6 +1,5 @@
 <template>
   <div class="subcontent">
-
     <navigation-bar
       @today="onToday"
       @prev="onPrev"
@@ -8,7 +7,10 @@
     />
 
     <div class="row justify-center">
-      <div class="q-gutter-md" style="display: flex; flex-direction: column; max-width: 800px; width: 90%; height: 500px;">
+      <div
+        class="q-gutter-md"
+        style="display: flex; flex-direction: column; max-width: 800px; width: 90%; height: 500px;"
+      >
         <q-calendar-scheduler
           ref="calendar"
           v-model="selectedDate"

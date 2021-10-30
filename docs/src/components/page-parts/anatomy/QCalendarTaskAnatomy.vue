@@ -1,6 +1,12 @@
 <template>
-  <div class="row full-width q-pa-xs rounded-borders relative-position" style="border: 2px solid rgba(25,118,210,.65);">
-    <q-scroll-area class="col" style="max-width: 180px; width: 100%; max-height: 300px; height: 300px;">
+  <div
+    class="row full-width q-pa-xs rounded-borders relative-position"
+    style="border: 2px solid rgba(25,118,210,.65);"
+  >
+    <q-scroll-area
+      class="col"
+      style="max-width: 180px; width: 100%; max-height: 300px; height: 300px;"
+    >
       <q-list dense>
         <q-item
           v-for="type in types"
@@ -29,11 +35,14 @@
         :day-class="dayClass"
         :footer-day-class="footerDayClass"
         bordered
-        @change="onChange"
         style="height: 300px"
+        @change="onChange"
       >
         <template #head-tasks="{ /* scope */ }">
-          <div class="header ellipsis" style="font-weight: 600">
+          <div
+            class="header ellipsis"
+            style="font-weight: 600"
+          >
             <div class="issue ellipsis">Issue</div>
             <div class="key">Key</div>
             <div class="logged">Logged</div>
@@ -41,7 +50,10 @@
         </template>
 
         <template #task="{ scope }">
-          <template v-for="task in getTasks(scope.start, scope.end, scope.task)" :key="task.key">
+          <template
+            v-for="task in getTasks(scope.start, scope.end, scope.task)"
+            :key="task.key"
+          >
             <div class="header ellipsis">
               <div class="issue ellipsis">
                 {{ scope.task.title }}
@@ -53,7 +65,10 @@
         </template>
 
         <template #day="{ scope }">
-          <template v-for="time in getLogged(scope.timestamp.date, scope.task.logged)" :key="time">
+          <template
+            v-for="time in getLogged(scope.timestamp.date, scope.task.logged)"
+            :key="time"
+          >
             <div class="logged-time">{{ time.logged }}</div>
           </template>
         </template>

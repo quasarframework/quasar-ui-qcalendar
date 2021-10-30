@@ -1,6 +1,5 @@
 <template>
   <div class="subcontent">
-
     <navigation-bar
       @today="onToday"
       @prev="onPrev"
@@ -8,7 +7,10 @@
     />
 
     <div class="row justify-center">
-      <div class="q-gutter-md" style="display: flex; flex-direction: column; max-width: 800px; width: 90%;">
+      <div
+        class="q-gutter-md"
+        style="display: flex; flex-direction: column; max-width: 800px; width: 90%;"
+      >
         <q-calendar-agenda
           ref="calendar"
           v-model="selectedDate"
@@ -21,6 +23,7 @@
           :day-min-height="200"
           animated
           bordered
+          style="max-height: 200px;"
           @change="onChange"
           @moved="onMoved"
           @click-date="onClickDate"
@@ -28,7 +31,6 @@
           @click-interval="onClickInterval"
           @click-head-intervals="onClickHeadIntervals"
           @click-head-day="onClickHeadDay"
-          style="max-height: 200px;"
         />
         <q-calendar-agenda
           ref="calendar2"
@@ -42,6 +44,7 @@
           :day-min-height="200"
           animated
           bordered
+          style="max-height: 200px;"
           @change="onChange"
           @moved="onMoved"
           @click-date="onClickDate"
@@ -49,7 +52,6 @@
           @click-interval="onClickInterval"
           @click-head-intervals="onClickHeadIntervals"
           @click-head-day="onClickHeadDay"
-          style="max-height: 200px;"
         />
       </div>
     </div>

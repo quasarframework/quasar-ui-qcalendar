@@ -7,7 +7,10 @@
     />
 
     <div style="display: flex; justify-content: center">
-      <div class="button-bar" style="margin: 12px;">
+      <div
+        class="button-bar"
+        style="margin: 12px;"
+      >
         <div style="display: flex; align-items: center">
           <q-select
             v-model="dateAlign"
@@ -45,8 +48,8 @@
     <div class="row justify-center">
       <div style="display: flex; max-width: 800px; width: 100%;">
         <q-calendar-month
-          v-model="selectedDate"
           ref="calendar"
+          v-model="selectedDate"
           :weekday-align="weekdayAlign"
           :date-align="dateAlign"
           show-day-of-year-label

@@ -1,6 +1,5 @@
 <template>
   <div class="subcontent">
-
     <navigation-bar
       @today="onToday"
       @prev="onPrev"
@@ -77,7 +76,8 @@
               >
                 <span
                   v-if="event.resource"
-                  style="border: 1px solid pink; border-radius: 2px; padding: 2px; margin: 1px; user-select: none;">
+                  style="border: 1px solid pink; border-radius: 2px; padding: 2px; margin: 1px; user-select: none;"
+                >
                   {{ event.name }}
                 </span>
               </template>

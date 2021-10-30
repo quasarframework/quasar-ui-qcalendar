@@ -30,7 +30,6 @@
               {{ showDate(scope) }}
             </div>
           </template>
-
         </q-calendar-resource>
       </div>
     </div>

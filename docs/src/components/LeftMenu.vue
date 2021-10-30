@@ -18,16 +18,15 @@
       <q-item
         v-for="page in filteredPages"
         :key="page.path"
-        clickable
         v-ripple
+        clickable
         dense
-        @click="onExampleClick(page.path)"
         :active="page.name !== undefined && page.name === $route.name"
         class="menu ellipsis"
+        @click="onExampleClick(page.path)"
       >
         <q-item-section>{{ page.name }}</q-item-section>
       </q-item>
-
     </q-list>
   </div>
 </template>

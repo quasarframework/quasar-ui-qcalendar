@@ -1,6 +1,5 @@
 <template>
   <div class="subcontent">
-
     <navigation-bar
       @today="onToday"
       @prev="onPrev"
@@ -10,7 +9,7 @@
     <div class="row justify-center">
       <div style="display: flex; max-width: 800px; width: 100%; height: 400px;">
         <q-calendar-agenda
-        ref="calendar"
+          ref="calendar"
           v-model="selectedDate"
           view="week"
           :left-column-options="leftColumnOptions"
@@ -30,35 +29,35 @@
         >
           <template #day="{ scope: { timestamp } }">
             <template
-              v-for="agenda in getAgenda(timestamp)"
-              :key="timestamp.date + agenda.time"
+              v-for="a in getAgenda(timestamp)"
+              :key="timestamp.date + a.time"
             >
               <div
-                :label="agenda.time"
+                :label="a.time"
                 class="justify-start q-ma-sm shadow-5 bg-grey-6"
                 style="margin-top: 25px;"
               >
                 <div
-                  v-if="agenda.avatar"
+                  v-if="a.avatar"
                   class="row justify-center"
                   style="margin-top: 30px; width: 100%;"
                 >
                   <q-avatar style="margin-top: -50px; margin-bottom: 10px; font-size: 60px;">
                     <img
-                      :src="agenda.avatar"
+                      :src="a.avatar"
                       style="border: #9e9e9e solid 5px;"
                     >
                   </q-avatar>
                 </div>
                 <div class="col-12 q-px-sm">
-                  <strong>{{ agenda.time }}</strong>
+                  <strong>{{ a.time }}</strong>
                 </div>
                 <div
-                  v-if="agenda.desc"
+                  v-if="a.desc"
                   class="col-12 q-px-sm"
                   style="font-size: 10px;"
                 >
-                  {{ agenda.desc }}
+                  {{ a.desc }}
                 </div>
               </div>
             </template>

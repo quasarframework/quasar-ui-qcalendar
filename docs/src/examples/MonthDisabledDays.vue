@@ -1,6 +1,5 @@
 <template>
   <div class="subcontent">
-
     <navigation-bar
       @today="onToday"
       @prev="onPrev"
@@ -8,7 +7,10 @@
     />
 
     <div class="row justify-center">
-      <div class="q-gutter-md" style="display: flex; flex-direction: column; max-width: 800px; width: 90%;">
+      <div
+        class="q-gutter-md"
+        style="display: flex; flex-direction: column; max-width: 800px; width: 90%;"
+      >
         <q-calendar-month
           ref="calendar"
           v-model="selectedDate"
@@ -17,6 +19,7 @@
           no-outside-days
           animated
           bordered
+          class="q-ma-sm"
           @change="onChange"
           @moved="onMoved"
           @click-date="onClickDate"
@@ -24,7 +27,6 @@
           @click-workweek="onClickWorkweek"
           @click-head-workweek="onClickHeadWorkweek"
           @click-head-day="onClickHeadDay"
-          class="q-ma-sm"
         />
         <q-calendar-month
           ref="calendar"
@@ -34,6 +36,7 @@
           no-outside-days
           animated
           bordered
+          class="q-ma-sm"
           @change="onChange"
           @moved="onMoved"
           @click-date="onClickDate"
@@ -41,7 +44,6 @@
           @click-workweek="onClickWorkweek"
           @click-head-workweek="onClickHeadWorkweek"
           @click-head-day="onClickHeadDay"
-          class="q-ma-sm"
         />
       </div>
     </div>

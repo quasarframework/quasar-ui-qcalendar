@@ -17,6 +17,7 @@
           resource-label="name"
           animated
           bordered
+          :style="styles"
           @change="onChange"
           @moved="onMoved"
           @resource-expanded="onResourceExpanded"
@@ -25,14 +26,20 @@
           @click-resource="onClickResource"
           @click-head-resources="onClickHeadResources"
           @click-head-day="onClickHeadDay"
-          :style="styles"
         >
-        <template #resource-days="{ scope }">
-          <template v-for="(event, index) in getEvents(scope)" :key="index">
-              <q-badge outline color="primary" :label="event.title" :style="getStyle(event)" />
+          <template #resource-days="{ scope }">
+            <template
+              v-for="(event, index) in getEvents(scope)"
+              :key="index"
+            >
+              <q-badge
+                outline
+                color="primary"
+                :label="event.title"
+                :style="getStyle(event)"
+              />
             </template>
-        </template>
-
+          </template>
         </q-calendar-scheduler>
       </div>
     </div>

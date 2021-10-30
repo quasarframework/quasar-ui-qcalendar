@@ -8,8 +8,14 @@
 
     <div class="row justify-center full-width">
       <div class="column justify-center">
-        <div class="row justify-evenly no-wrap q-gutter-sm items-center" style="width: 600px;">
-          <span class="col-shrink no-wrap" style="min-width: 142px;">Interval Start</span>
+        <div
+          class="row justify-evenly no-wrap q-gutter-sm items-center"
+          style="width: 600px;"
+        >
+          <span
+            class="col-shrink no-wrap"
+            style="min-width: 142px;"
+          >Interval Start</span>
           <q-range
             v-model="intervalRange"
             label
@@ -23,8 +29,14 @@
           />
         </div>
 
-        <div class="row justify-evenly no-wrap q-gutter-sm items-center" style="width: 600px;">
-          <span class="col-shrink no-wrap" style="min-width: 142px;">Interval Minutes</span>
+        <div
+          class="row justify-evenly no-wrap q-gutter-sm items-center"
+          style="width: 600px;"
+        >
+          <span
+            class="col-shrink no-wrap"
+            style="min-width: 142px;"
+          >Interval Minutes</span>
           <q-option-group
             v-model="intervalRangeStep"
             :options="options"

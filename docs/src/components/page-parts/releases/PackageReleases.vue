@@ -1,16 +1,39 @@
 <template>
   <div>
-    <q-input v-model="search" dense quare borderless color="white" placeholder="Search..." clearable class="q-mx-md">
+    <q-input
+      v-model="search"
+      dense
+      quare
+      borderless
+      color="white"
+      placeholder="Search..."
+      clearable
+      class="q-mx-md"
+    >
       <template #prepend>
         <q-icon :name="mdiMagnify" />
       </template>
     </q-input>
     <q-separator />
-    <q-splitter :model-value="20" :limits="[14, 90]" class="release__splitter">
+    <q-splitter
+      :model-value="20"
+      :limits="[14, 90]"
+      class="release__splitter"
+    >
       <template #before>
         <q-scroll-area>
-          <q-tabs v-model="selectedVersion" vertical active-color="primary" active-bg-color="blue-1" indicator-color="primary">
-            <q-tab v-for="releaseInfo in filteredReleases" :key="releaseInfo.label" :name="releaseInfo.label">
+          <q-tabs
+            v-model="selectedVersion"
+            vertical
+            active-color="primary"
+            active-bg-color="blue-1"
+            indicator-color="primary"
+          >
+            <q-tab
+              v-for="releaseInfo in filteredReleases"
+              :key="releaseInfo.label"
+              :name="releaseInfo.label"
+            >
               <div class="q-tab__label">{{ releaseInfo.version }}</div>
               <small class="text-grey-7">{{ releaseInfo.date }}</small>
             </q-tab>
@@ -18,10 +41,24 @@
         </q-scroll-area>
       </template>
       <template #after>
-        <q-tab-panels v-model="selectedVersion" animated transition-prev="slide-down" transition-next="slide-up" class="releases-container">
-          <q-tab-panel v-for="releaseInfo in filteredReleases" :key="releaseInfo.label" :name="releaseInfo.label" class="q-pa-none">
+        <q-tab-panels
+          v-model="selectedVersion"
+          animated
+          transition-prev="slide-down"
+          transition-next="slide-up"
+          class="releases-container"
+        >
+          <q-tab-panel
+            v-for="releaseInfo in filteredReleases"
+            :key="releaseInfo.label"
+            :name="releaseInfo.label"
+            class="q-pa-none"
+          >
             <q-scroll-area>
-              <div v-html="currentReleaseBody" class="q-pa-md" />
+              <div
+                class="q-pa-md"
+                v-html="currentReleaseBody"
+              />
             </q-scroll-area>
           </q-tab-panel>
         </q-tab-panels>

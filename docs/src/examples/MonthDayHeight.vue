@@ -6,8 +6,14 @@
       @next="onNext"
     />
 
-    <div class="row no-wrap" style="width: 600px;">
-      <span class="col-shrink no-wrap" style="min-width: 142px;">Day Height:</span>
+    <div
+      class="row no-wrap"
+      style="width: 600px;"
+    >
+      <span
+        class="col-shrink no-wrap"
+        style="min-width: 142px;"
+      >Day Height:</span>
       <q-slider
         v-model="dayHeight"
         :min="0"
@@ -19,8 +25,14 @@
       />
     </div>
 
-    <div class="row no-wrap" style="width: 600px;">
-      <span class="col-shrink no-wrap" style="min-width: 142px;">Day Min. Height:</span>
+    <div
+      class="row no-wrap"
+      style="width: 600px;"
+    >
+      <span
+        class="col-shrink no-wrap"
+        style="min-width: 142px;"
+      >Day Min. Height:</span>
       <q-slider
         v-model="dayMinHeight"
         :min="0"

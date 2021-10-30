@@ -1,6 +1,12 @@
 <template>
-  <div class="row items-center" style="margin-top: -20px;">
-    <q-avatar v-if="avatarSrc !== null" size="24px">
+  <div
+    class="row items-center"
+    style="margin-top: -20px;"
+  >
+    <q-avatar
+      v-if="avatarSrc !== null"
+      size="24px"
+    >
       <img :src="avatarSrc">
     </q-avatar>
     <p class="q-ml-sm">{{ authorName }} / {{ publishedDate }}</p>

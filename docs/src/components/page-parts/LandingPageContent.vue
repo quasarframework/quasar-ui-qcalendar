@@ -2,13 +2,18 @@
   <section class="flex flex-center bg-blue-10 text-white shadow-10">
     <div class="landing-page__container">
       <div class="landing-page__splash row justify-around items-center">
-        <h2 class="text-weight-bold text-blue-2 q-pa-sm" style="padding-left: 20px;">Build Beautiful,<br>Responsive<br> Calendars</h2>
+        <h2
+          class="text-weight-bold text-blue-2 q-pa-sm"
+          style="padding-left: 20px;"
+        >
+          Build Beautiful,<br>Responsive<br> Calendars
+        </h2>
         <div class="q-pa-sm">
           <img
             src="/qcalendarmonth-event-slots.png"
             class="shadow-10 rounded-borders"
             style="max-width: 340px;"
-          />
+          >
         </div>
       </div>
     </div>
@@ -18,20 +23,30 @@
         no-caps
         class="bg-red-8"
       >
-        <div class="row justify-around items-center" style="width: 140px;">
+        <div
+          class="row justify-around items-center"
+          style="width: 140px;"
+        >
           <div>Get started</div>
-          <q-icon :name="biArrowRightCircle"/>
+          <q-icon :name="biArrowRightCircle" />
         </div>
       </q-btn>
     </div>
   </section>
 
   <div class="q-px-lg q-pb-xl">
-    <q-timeline :layout="layout" color="primary q-mb-xl">
-
+    <q-timeline
+      :layout="layout"
+      color="primary q-mb-xl"
+    >
       <q-timeline-entry heading>
         <div style="font-size: 32px; font-weight: 600;">QCalendar</div>
-        <div style="font-size: 22px; font-weight: 600;" class="text-grey">A Vue Calendar that has everything you need</div>
+        <div
+          style="font-size: 22px; font-weight: 600;"
+          class="text-grey"
+        >
+          A Vue Calendar that has everything you need
+        </div>
       </q-timeline-entry>
 
       <q-timeline-entry
@@ -398,7 +413,6 @@
       <p>No dependencies other than Vue</p>
       <p>Available for Quasar Framework CLI, Vue CLI and UMD</p>
     </div>
-
   </div>
 </template>
 
@@ -410,7 +424,7 @@ import {
 } from '@quasar/extras/bootstrap-icons'
 
 export default defineComponent({
-  name: 'Landing Page Content',
+  name: 'LandingPageContent',
 
   setup () {
     const $q = useQuasar()

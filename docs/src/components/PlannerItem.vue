@@ -1,6 +1,5 @@
 <template>
   <div class="q-mr-xs q-mb-xs q-px-sm planner-item">
-
     <div style="display: flex; align-items: center; justify-content: start; flex-wrap: nowrap;">
       <div style="max-width: 25px; min-width: 25px;">
         <CheckboxChecked
@@ -14,7 +13,12 @@
           @clicked.stop.prevent="onClicked"
         />
       </div>
-      <div class="ellipsis" :style="userStyle">{{ name }}</div>
+      <div
+        class="ellipsis"
+        :style="userStyle"
+      >
+        {{ name }}
+      </div>
     </div>
 
     <div style="display: flex; align-items: center; justify-content: start; flex-wrap: nowrap;">
@@ -61,12 +65,17 @@
 
     <div style="display: flex; align-items: center; justify-content: start; flex-wrap: nowrap;">
       <div
-        :style="overdueIconStyle">
+        :style="overdueIconStyle"
+      >
         <Alarm />
       </div>
-      <div class="ellipsis" :style="overdueStyle">{{ daysOver }} days overdue</div>
+      <div
+        class="ellipsis"
+        :style="overdueStyle"
+      >
+        {{ daysOver }} days overdue
+      </div>
     </div>
-
   </div>
 </template>
 
@@ -107,6 +116,10 @@ export default {
     amount: String,
     daysOver: Number
   },
+
+  emits: [
+    'update:model-value'
+  ],
 
   computed: {
     overdueIconStyle () {

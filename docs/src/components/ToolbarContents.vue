@@ -14,17 +14,20 @@
     no-caps
     to="/"
   >
-  <div v-if="$q.screen.width > 500" class="text-weight-bold">
-    <span style="font-size: 20px;">
-      QCalendar &nbsp;
-    </span>
-    <span style="font-size: 12px;">
-      v{{ version }}
-    </span>
-  </div>
-  <div v-else>
-    Home
-  </div>
+    <div
+      v-if="$q.screen.width > 500"
+      class="text-weight-bold"
+    >
+      <span style="font-size: 20px;">
+        QCalendar &nbsp;
+      </span>
+      <span style="font-size: 12px;">
+        v{{ version }}
+      </span>
+    </div>
+    <div v-else>
+      Home
+    </div>
   </q-btn>
 
   <q-space />
@@ -33,10 +36,16 @@
     aria-label="Dark theme toggle"
     flat
     round
-    @click="$q.dark.toggle()" :icon="$q.dark.isActive ? 'brightness_2' : 'brightness_5'"
+    :icon="$q.dark.isActive ? 'brightness_2' : 'brightness_5'"
+    @click="$q.dark.toggle()"
   />
 
-  <div v-if="$q.screen.width > 500" class="text-weight-bold">Quasar <span style="font-size: 12px;">v{{ $q.version }}</span></div>
+  <div
+    v-if="$q.screen.width > 500"
+    class="text-weight-bold"
+  >
+    Quasar <span style="font-size: 12px;">v{{ $q.version }}</span>
+  </div>
 
   <q-btn
     v-if="rightDrawerButton === true"

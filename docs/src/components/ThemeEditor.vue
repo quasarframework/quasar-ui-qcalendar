@@ -21,7 +21,7 @@
           <strong>Border Width</strong>
         </div>
         <q-slider
-          :modelValue="editorSize"
+          :model-value="editorSize"
           :min="1"
           :max="5"
           label
@@ -70,7 +70,7 @@
 
         <q-color
           default-view="palette"
-          :modelValue="editorColor"
+          :model-value="editorColor"
           :palette="colorPalette"
           format-model="hexa"
           style="max-width: 200px"

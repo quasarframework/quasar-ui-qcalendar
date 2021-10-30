@@ -11,7 +11,7 @@ The information below can help you migrate from QCalendar v3.x to QCalendar v4.0
 
 > QCalendar 4.x+ only works with a Vue 3 instance. If you are still using Vue 2, use the [QCalendar v3 branch]() (TODO: not created yet).
 
-> The information below is by no means an exhaustive list of changes and new functionality. If you see something that has been missed, please PR or let us know. Also check the [Changelog](/latest-news/changelog) page for ungoing updates.
+> The information below is by no means an exhaustive list of changes and new functionality. If you see something that has been missed, please PR or let us know. Also check the [Changelog](/latest-news/changelog) page for ongoing updates.
 
 ## QCalendar v4.0.0 (Alpha/Beta)
 Welcome to the QCalendar v4.0.0 release.

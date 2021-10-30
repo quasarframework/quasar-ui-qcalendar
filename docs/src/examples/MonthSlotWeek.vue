@@ -35,7 +35,10 @@
                 :class="badgeClasses(computedEvent)"
                 :style="badgeStyles(computedEvent, week.length)"
               >
-                <div v-if="computedEvent.event && computedEvent.event.details" class="title q-calendar__ellipsis">
+                <div
+                  v-if="computedEvent.event && computedEvent.event.details"
+                  class="title q-calendar__ellipsis"
+                >
                   {{ computedEvent.event.title + (computedEvent.event.time ? ' - ' + computedEvent.event.time : '') }}
                   <q-tooltip>{{ computedEvent.event.details }}</q-tooltip>
                 </div>

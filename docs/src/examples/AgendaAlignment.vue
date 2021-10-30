@@ -1,6 +1,5 @@
 <template>
   <div class="subcontent">
-
     <navigation-bar
       @today="onToday"
       @prev="onPrev"
@@ -52,7 +51,6 @@
         class="button"
         style="min-width: 160px;"
       />
-
     </div>
 
     <div class="row justify-center">

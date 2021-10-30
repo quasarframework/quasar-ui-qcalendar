@@ -28,11 +28,18 @@
           @click-interval="onClickInterval"
         >
           <template #resource-intervals="{ scope }">
-            <template v-for="(event, index) in getEvents(scope)" :key="index">
-              <q-badge outline color="primary" :label="event.title" :style="getStyle(event)" />
+            <template
+              v-for="(event, index) in getEvents(scope)"
+              :key="index"
+            >
+              <q-badge
+                outline
+                color="primary"
+                :label="event.title"
+                :style="getStyle(event)"
+              />
             </template>
           </template>
-
         </q-calendar-resource>
       </div>
     </div>

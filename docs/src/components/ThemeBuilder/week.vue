@@ -19,7 +19,10 @@
     </div>
 
     <div class="row no-wrap q-mb-lg">
-      <span class="no-wrap" style="min-width: 130px;">Selection Type:</span>
+      <span
+        class="no-wrap"
+        style="min-width: 130px;"
+      >Selection Type:</span>
       <div class="q-gutter-sm">
         <q-radio
           v-model="selectionType"
@@ -42,8 +45,14 @@
       </div>
     </div>
 
-    <div class="row no-wrap" style="width: 600px;">
-      <span class="col-shrink no-wrap" style="min-width: 142px;">Interval Range:</span>
+    <div
+      class="row no-wrap"
+      style="width: 600px;"
+    >
+      <span
+        class="col-shrink no-wrap"
+        style="min-width: 142px;"
+      >Interval Range:</span>
       <q-range
         v-model="intervalRange"
         label
@@ -57,8 +66,14 @@
       />
     </div>
 
-    <div class="row no-wrap" style="width: 600px;">
-      <span class="col-shrink no-wrap" style="min-width: 142px;">Interval Height:</span>
+    <div
+      class="row no-wrap"
+      style="width: 600px;"
+    >
+      <span
+        class="col-shrink no-wrap"
+        style="min-width: 142px;"
+      >Interval Height:</span>
       <q-slider
         v-model="intervalHeight"
         :min="20"
@@ -70,7 +85,10 @@
       />
     </div>
     <div class="row no-wrap items-center">
-      <span class="col-shrink no-wrap" style="min-width: 150px;">Interval Step (Section):</span>
+      <span
+        class="col-shrink no-wrap"
+        style="min-width: 150px;"
+      >Interval Step (Section):</span>
       <div class="col q-gutter-sm">
         <q-radio
           v-model="intervalRangeStep"

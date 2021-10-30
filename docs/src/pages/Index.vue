@@ -1,6 +1,8 @@
 <template>
-  <q-page padding class="row justify-center">
-  </q-page>
+  <q-page
+    padding
+    class="row justify-center"
+  />
 </template>
 
 <script>

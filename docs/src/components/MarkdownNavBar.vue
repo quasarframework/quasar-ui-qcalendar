@@ -3,7 +3,11 @@
     <div class="markdown-nav-bar__title ellipsis">
       <span class="ellipsis">{{ title }}</span>
     </div>
-    <div v-if="nav && nav.length > 0" class="markdown-nav-bar__inner" :style="innerStyle">
+    <div
+      v-if="nav && nav.length > 0"
+      class="markdown-nav-bar__inner"
+      :style="innerStyle"
+    >
       <q-btn
         v-if="leftNav"
         :to="leftNav.path"

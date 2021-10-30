@@ -11,17 +11,69 @@
         <div class="row justify-evenly q-gutter-sm q-mb-lg">
           <span class="no-wrap">Note: setting Resource Height to 0 will make it 'auto' height</span>
         </div>
-        <div class="row justify-evenly no-wrap q-gutter-sm" style="width: 600px;">
-          <span class="col-shrink no-wrap" style="min-width: 142px;">Resource Width</span> <q-slider v-model="resourceWidth" label label-always :min="60" :max="200" class="col" />
+        <div
+          class="row justify-evenly no-wrap q-gutter-sm"
+          style="width: 600px;"
+        >
+          <span
+            class="col-shrink no-wrap"
+            style="min-width: 142px;"
+          >Resource Width</span> <q-slider
+            v-model="resourceWidth"
+            label
+            label-always
+            :min="60"
+            :max="200"
+            class="col"
+          />
         </div>
-        <div class="row justify-evenly no-wrap q-gutter-sm" style="width: 600px;">
-          <span class="col-shrink no-wrap" style="min-width: 142px;">Resource Height</span> <q-slider v-model="resourceHeight" label label-always :min="0" :max="200" class="col" />
+        <div
+          class="row justify-evenly no-wrap q-gutter-sm"
+          style="width: 600px;"
+        >
+          <span
+            class="col-shrink no-wrap"
+            style="min-width: 142px;"
+          >Resource Height</span> <q-slider
+            v-model="resourceHeight"
+            label
+            label-always
+            :min="0"
+            :max="200"
+            class="col"
+          />
         </div>
-        <div class="row justify-evenly no-wrap q-gutter-sm" style="width: 600px;">
-          <span class="col-shrink no-wrap" style="min-width: 142px;">Resource Min. Height</span> <q-slider v-model="resourceMinHeight" label label-always :min="0" :max="200" class="col" />
+        <div
+          class="row justify-evenly no-wrap q-gutter-sm"
+          style="width: 600px;"
+        >
+          <span
+            class="col-shrink no-wrap"
+            style="min-width: 142px;"
+          >Resource Min. Height</span> <q-slider
+            v-model="resourceMinHeight"
+            label
+            label-always
+            :min="0"
+            :max="200"
+            class="col"
+          />
         </div>
-        <div class="row justify-evenly no-wrap q-gutter-sm" style="width: 600px;">
-          <span class="col-shrink no-wrap" style="min-width: 142px;">Cell Width</span> <q-slider v-model="cellWidth" label label-always :min="50" :max="250" class="col" />
+        <div
+          class="row justify-evenly no-wrap q-gutter-sm"
+          style="width: 600px;"
+        >
+          <span
+            class="col-shrink no-wrap"
+            style="min-width: 142px;"
+          >Cell Width</span> <q-slider
+            v-model="cellWidth"
+            label
+            label-always
+            :min="50"
+            :max="250"
+            class="col"
+          />
         </div>
       </div>
     </div>
@@ -38,6 +90,7 @@
           :resource-min-height="resourceMinHeight"
           :cell-width="cellWidth"
           bordered
+          :style="styles"
           @change="onChange"
           @moved="onMoved"
           @resource-expanded="onResourceExpanded"
@@ -46,7 +99,6 @@
           @click-resource="onClickResource"
           @click-head-resources="onClickHeadResources"
           @click-interval="onClickInterval"
-          :style="styles"
         />
       </div>
     </div>

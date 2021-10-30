@@ -33,7 +33,10 @@
           @click-head-day="onClickHeadDay"
         >
           <template #head-tasks="{ /* scope */ }">
-            <div class="header ellipsis" style="font-weight: 600">
+            <div
+              class="header ellipsis"
+              style="font-weight: 600"
+            >
               <div class="issue ellipsis">Issue</div>
               <div class="key">Key</div>
               <div class="logged">Logged</div>
@@ -41,7 +44,10 @@
           </template>
 
           <template #task="{ scope }">
-            <template v-for="task in getTasks(scope.start, scope.end, scope.task)" :key="task.key">
+            <template
+              v-for="task in getTasks(scope.start, scope.end, scope.task)"
+              :key="task.key"
+            >
               <div class="header ellipsis">
                 <div class="issue ellipsis">
                   {{ scope.task.title }}
@@ -53,9 +59,23 @@
           </template>
 
           <template #day="{ scope }">
-            <template v-for="time in getLogged(scope.timestamp.date, scope.task.logged)" :key="time">
-              <div v-if="scope.task.children !== void 0" class="logged-time" style="font-weight: 800;">{{ time.logged }}</div>
-              <div v-else class="logged-time">{{ time.logged }}</div>
+            <template
+              v-for="time in getLogged(scope.timestamp.date, scope.task.logged)"
+              :key="time"
+            >
+              <div
+                v-if="scope.task.children !== void 0"
+                class="logged-time"
+                style="font-weight: 800;"
+              >
+                {{ time.logged }}
+              </div>
+              <div
+                v-else
+                class="logged-time"
+              >
+                {{ time.logged }}
+              </div>
             </template>
           </template>
 

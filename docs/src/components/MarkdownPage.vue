@@ -7,9 +7,12 @@
     />
 
     <div :class="$route.path !== '/' ? 'q-ma-xs' : ''">
-      <slot></slot>
+      <slot />
 
-      <div v-if="related !== undefined" class="full-width">
+      <div
+        v-if="related !== undefined"
+        class="full-width"
+      >
         <h5 class="q-ma-none q-mt-lg">Related</h5>
         <q-separator />
         <div class="q-gutter-md flex flex-center q-mt-md markdown-page__related">
@@ -24,7 +27,10 @@
                 <div class="markdown-page__nav--cat">{{ link.category || 'Docs' }}</div>
                 <div class="markdown-page__nav--name text-weight-bold">{{ link.name }}</div>
               </div>
-              <q-icon :name="biBoxArrowUpRight" class="q-ml-lg" />
+              <q-icon
+                :name="biBoxArrowUpRight"
+                class="q-ml-lg"
+              />
             </div>
           </router-link>
         </div>
@@ -46,14 +52,22 @@
         <markdown-footer />
 
         <div class="row justify-center">
-          <a href="https://www.netlify.com" target="_blank" noopener noreferrer class="row justify-center">
-            <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" />
+          <a
+            href="https://www.netlify.com"
+            target="_blank"
+            noopener
+            noreferrer
+            class="row justify-center"
+          >
+            <img
+              src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg"
+              alt="Deploys by Netlify"
+            >
           </a>
         </div>
-
       </div>
     </div>
-    <div class="q-mb-md"></div>
+    <div class="q-mb-md" />
   </div>
 </template>
 

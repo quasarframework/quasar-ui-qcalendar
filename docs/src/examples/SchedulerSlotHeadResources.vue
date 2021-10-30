@@ -31,7 +31,6 @@
               {{ showDate(scope) }}
             </div>
           </template>
-
         </q-calendar-scheduler>
       </div>
     </div>

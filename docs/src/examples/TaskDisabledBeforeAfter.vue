@@ -1,6 +1,5 @@
 <template>
   <div class="subcontent">
-
     <navigation-bar
       @today="onToday"
       @prev="onPrev"
@@ -34,7 +33,10 @@
           @click-head-day="onClickHeadDay"
         >
           <template #head-tasks="{ /* scope */ }">
-            <div class="header ellipsis" style="font-weight: 600">
+            <div
+              class="header ellipsis"
+              style="font-weight: 600"
+            >
               <div class="issue ellipsis">Issue</div>
               <div class="key">Key</div>
               <div class="logged">Logged</div>
@@ -42,12 +44,24 @@
           </template>
 
           <template #task="{ scope }">
-            <template v-for="task in getTasks(scope.start, scope.end, scope.task)" :key="task.key">
+            <template
+              v-for="task in getTasks(scope.start, scope.end, scope.task)"
+              :key="task.key"
+            >
               <div class="header ellipsis">
                 <div class="issue ellipsis">
-                  <span v-if="scope.task.icon === 'done'" class="done"><Done /></span>
-                  <span v-else-if="scope.task.icon === 'pending'" class="pending"><Pending /></span>
-                  <span v-else-if="scope.task.icon === 'blocking'" class="blocking"><Blocking /></span>
+                  <span
+                    v-if="scope.task.icon === 'done'"
+                    class="done"
+                  ><Done /></span>
+                  <span
+                    v-else-if="scope.task.icon === 'pending'"
+                    class="pending"
+                  ><Pending /></span>
+                  <span
+                    v-else-if="scope.task.icon === 'blocking'"
+                    class="blocking"
+                  ><Blocking /></span>
                   {{ scope.task.title }}
                 </div>
                 <div class="key">{{ scope.task.key }}</div>
@@ -57,7 +71,10 @@
           </template>
 
           <template #day="{ scope }">
-            <template v-for="time in getLogged(scope.timestamp.date, scope.task.logged)" :key="time">
+            <template
+              v-for="time in getLogged(scope.timestamp.date, scope.task.logged)"
+              :key="time"
+            >
               <div class="logged-time">{{ time.logged }}</div>
             </template>
           </template>

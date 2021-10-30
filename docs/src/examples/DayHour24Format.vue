@@ -7,7 +7,10 @@
     />
 
     <div class="q-ma-sm row justify-center">
-      <q-toggle v-model="hour24" label="24-hour Format" />
+      <q-toggle
+        v-model="hour24"
+        label="24-hour Format"
+      />
     </div>
 
     <div class="row justify-center">

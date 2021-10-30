@@ -1,7 +1,16 @@
 <template>
-  <q-card class="article-card" @click="onClicked">
-    <q-skeleton v-if="coverImage !== true" height="150px" />
-    <div ref="imageRef" class="article-image"></div>
+  <q-card
+    class="article-card"
+    @click="onClicked"
+  >
+    <q-skeleton
+      v-if="coverImage !== true"
+      height="150px"
+    />
+    <div
+      ref="imageRef"
+      class="article-image"
+    />
     <q-card-section>
       <div class="h6-text ellipsis">{{ article.title }}</div>
       <div class="text-subtitle2">{{ article.publish }}</div>
