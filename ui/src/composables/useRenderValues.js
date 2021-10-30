@@ -14,8 +14,8 @@ import {
 
 export default function (props, {
   parsedView,
-  times,
-  parsedValue
+  parsedValue,
+  times
 }) {
   const renderValues = computed(() => {
     const around = parsedValue.value

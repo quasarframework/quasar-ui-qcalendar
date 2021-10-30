@@ -103,6 +103,11 @@ export default defineComponent({
       lastStart = ref(null),
       lastEnd = ref(null)
 
+    watch(() => props.view, () => {
+      // reset maxDaysRendered
+      maxDaysRendered.value = 0
+    })
+
     const parsedView = computed(() => {
       if (props.view === 'month') {
         return 'month-interval'
@@ -164,8 +169,8 @@ export default defineComponent({
 
     const { renderValues } = useRenderValues(props, {
       parsedView,
-      times,
-      parsedValue
+      parsedValue,
+      times
     })
 
     const {
@@ -244,10 +249,10 @@ export default defineComponent({
     })
 
     const parsedColumnCount = computed(() => {
-      if (props.view === 'day' && parseInt(props.columnCount, 10) > 1) {
+      if (parsedView.value === 'day' && parseInt(props.columnCount, 10) > 1) {
         return parseInt(props.columnCount, 10)
       }
-      else if (props.view === 'day' && props.maxDays && props.maxDays > 1) {
+      else if (parsedView.value === 'day' && props.maxDays && props.maxDays > 1) {
         return props.maxDays
       }
       return days.value.length
