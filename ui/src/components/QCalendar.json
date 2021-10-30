@@ -6648,7 +6648,7 @@
         }
       }
     },
-    "contextmenu:column:head": {
+    "contextmenu-column-head": {
       "desc": "Occurs on column header",
       "applicable": [
         "week-agenda"
