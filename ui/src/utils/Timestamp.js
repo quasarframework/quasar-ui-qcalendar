@@ -230,7 +230,7 @@ export function compareTime (ts1, ts2) {
  * Compares the date and time of two {@link Timestamp}s that have been updated with relative data
  * @param {Timestamp} ts1 The first {@link Timestamp}
  * @param {Timestamp} ts2 The second {@link Timestamp}
- * @returns {boolean} True id the dat and time are an exact match
+ * @returns {boolean} True if the date and time are an exact match
  */
 export function compareDateTime (ts1, ts2) {
   return getDateTime(ts1) === getDateTime(ts2)
@@ -898,6 +898,32 @@ export function makeDateTime (timestamp) {
  */
 export function validateNumber (input) {
   return isFinite(parseInt(input, 10))
+}
+
+/**
+ * Given an array of {@link Timestamp}s, finds the max date (and possible time)
+ * @param {Timestamp[]} timestamps This is an array of {@link Timestamp}s
+ * @param {boolean=} useTime Default false; if true, uses time in the comparison as well
+ * @returns The {@link Timestamp} with the highest date (and possibly time) value
+ */
+export function maxTimestamp (timestamps, useTime = false) {
+  const func = useTime === true ? getDayTimeIdentifier : getDayIdentifier
+  return timestamps.reduce((prev, cur) => {
+    return Math.max(func(prev), func(cur)) === func(prev) ? prev : cur
+  })
+}
+
+/**
+ * Given an array of {@link Timestamp}s, finds the min date (and possible time)
+ * @param {Timestamp[]} timestamps This is an array of {@link Timestamp}s
+ * @param {boolean=} useTime Default false; if true, uses time in the comparison as well
+ * @returns The {@link Timestamp} with the lowest date (and possibly time) value
+ */
+ export function minTimestamp (timestamps, useTime = false) {
+  const func = useTime === true ? getDayTimeIdentifier : getDayIdentifier
+  return timestamps.reduce((prev, cur) => {
+    return Math.min(func(prev), func(cur)) === func(prev) ? prev : cur
+  })
 }
 
 /**

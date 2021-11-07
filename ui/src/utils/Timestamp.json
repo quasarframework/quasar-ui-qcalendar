@@ -1218,6 +1218,52 @@
         "__exemption": [ "examples" ]
       }
     },
+    "maxTimestamp": {
+      "desc": "Given an array of Timestamps, returns the highest one",
+      "params": {
+        "timestamps": {
+          "type": "Object",
+          "tsType": "TimestampArray",
+          "desc": "An array of timestamp objects",
+          "required": true,
+          "__exemption": [ "examples" ]
+        },
+        "useTime": {
+          "type": "Boolean",
+          "desc": "[Optional] Use time in the comparison",
+          "default": false
+        }
+      },
+      "returns": {
+        "type": "Object",
+        "tsType": "Timestamp",
+        "desc": "The highest valued Timestamp",
+        "__exemption": [ "examples" ]
+      }
+    },
+    "minTimestamp": {
+      "desc": "Given an array of Timestamps, returns the lowest one",
+      "params": {
+        "timestamps": {
+          "type": "Object",
+          "tsType": "TimestampArray",
+          "desc": "An array of timestamp objects",
+          "required": true,
+          "__exemption": [ "examples" ]
+        },
+        "useTime": {
+          "type": "Boolean",
+          "desc": "[Optional] Use time in the comparison",
+          "default": false
+        }
+      },
+      "returns": {
+        "type": "Object",
+        "tsType": "Timestamp",
+        "desc": "The highest valued Timestamp",
+        "__exemption": [ "examples" ]
+      }
+    },
     "isBetweenDates": {
       "addedIn": "v1.3.10",
       "desc": "Checks passed timestamp is between start and end timestamps",
