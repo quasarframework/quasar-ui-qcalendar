@@ -133,14 +133,13 @@
 </template>
 
 <script>
-import { QCalendarDay } from '@quasar/quasar-ui-qcalendar/src/index.js'
-import '@quasar/quasar-ui-qcalendar/src/index.sass'
-
 import {
+  QCalendarDay,
   getDayTimeIdentifier,
   getDateTime,
   copyTimestamp
-} from '@quasar/quasar-ui-qcalendar/src/Timestamp.js'
+ } from '@quasar/quasar-ui-qcalendar/src/index.js'
+import '@quasar/quasar-ui-qcalendar/src/index.sass'
 
 function leftClick (e) {
   return e.button === 0

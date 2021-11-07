@@ -84,16 +84,14 @@
 
 <script>
 import {
+  QCalendarDay,
   addToDate,
   parseTimestamp,
   isBetweenDates,
   today,
   parsed,
   parseDate,
-  parseTime,
-} from '@quasar/quasar-ui-qcalendar/src/Timestamp.js'
-import {
-  QCalendarDay
+  parseTime
 } from '@quasar/quasar-ui-qcalendar/src/QCalendarDay.js'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'

@@ -29,8 +29,7 @@
 </template>
 
 <script>
-import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar/src/QCalendarMonth.js'
-import { addToDate, parseTimestamp, today } from '@quasar/quasar-ui-qcalendar/src/Timestamp.js'
+import { QCalendarMonth, addToDate, parseTimestamp, today } from '@quasar/quasar-ui-qcalendar/src/QCalendarMonth.js'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarMonth.sass'

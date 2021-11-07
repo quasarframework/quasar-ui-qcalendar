@@ -74,12 +74,8 @@
 </template>
 
 <script>
-import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar/src/QCalendarMonth.js'
+import { QCalendarMonth, getDayIdentifier } from '@quasar/quasar-ui-qcalendar/src/QCalendarMonth.js'
 import '@quasar/quasar-ui-qcalendar/src/index.sass'
-
-import {
-  getDayIdentifier
-} from '@quasar/quasar-ui-qcalendar/src/Timestamp.js'
 
 function leftClick (e) {
   return e.button === 0

@@ -36,8 +36,7 @@
 </template>
 
 <script>
-import { QCalendarScheduler } from '@quasar/quasar-ui-qcalendar/src/QCalendarScheduler.js'
-import { today } from '@quasar/quasar-ui-qcalendar/src/Timestamp.js'
+import { QCalendarScheduler, today } from '@quasar/quasar-ui-qcalendar/src/QCalendarScheduler.js'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarScheduler.sass'
