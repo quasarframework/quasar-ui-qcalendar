@@ -22,7 +22,7 @@
           'task'
         ]"
         class="button"
-        style="min-width: 160px;"
+        style="min-width: 180px;"
       />
       <q-select
         v-model="selectedView"
@@ -37,7 +37,7 @@
           'month'
         ]"
         class="button"
-        style="min-width: 160px;"
+        style="min-width: 180px;"
       />
     </div>
 
