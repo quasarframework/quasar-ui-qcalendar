@@ -103,11 +103,11 @@ There are several variants for each calendar component, including common, es (mo
 <style src="@quasar/quasar-ui-qcalendar/dist/QCalendarDay.min.css"></style>
 
 <script>
-import { QCalendar } from '@quasar/quasar-ui-qcalendar/dist/QCalendarDay.esm.js'
+import { QCalendarDay } from '@quasar/quasar-ui-qcalendar/dist/QCalendarDay.esm.js'
 
 export default {
   components: {
-    QCalendar
+    QCalendarDay
   }
 }
 </script>
