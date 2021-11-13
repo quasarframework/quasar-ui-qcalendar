@@ -17,7 +17,6 @@ import {
 // Utility
 import {
   getDayIdentifier,
-  // isBetweenDates,
   parsed,
   parseTimestamp,
   today
@@ -152,15 +151,6 @@ export default defineComponent({
 
     focusValue.value = parsedValue.value
     focusRef.value = parsedValue.value.date
-
-    // const canChangeDate = computed(() => {
-    //   if (maxDaysRendered.value === 0) return true
-    //   if (endDate.value === '0000-00-00') return true
-    //   if (days.value === undefined || days.value.length === 0) return true
-    //   const start = days.value[ 0 ]
-    //   const end = days.value[ days.value.length - 1 ]
-    //   return isBetweenDates(parsedValue.value, start, end) !== true
-    // })
 
     const { renderValues } = useRenderValues(props, {
       parsedView,
