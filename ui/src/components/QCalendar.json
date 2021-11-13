@@ -164,7 +164,7 @@
     "max-days": {
       "type": "String",
       "category": "model",
-      "desc": "The number of days to be displayed. Applicable only for custom-interval, scheduler and agenda views",
+      "desc": "The number of days to be displayed. Applicable only for custom-interval, scheduler and agenda views. Do not use with `week` or `month` views (set to 0 if setting the view dynamically)",
       "default": 7,
       "applicable": [
         "custom-interval",

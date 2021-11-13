@@ -715,7 +715,7 @@
     "max-days": {
       "type": ["String", "Number"],
       "category": "model",
-      "desc": "The number of days to be displayed",
+      "desc": "The number of days to be displayed. Do not use with `week` or `month` views (set to 0 if setting the view dynamically)",
       "default": 7,
       "examples": [
         ":max-days=\"14\"",
