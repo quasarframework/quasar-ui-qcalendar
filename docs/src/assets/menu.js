@@ -600,6 +600,10 @@ const menu = [
             path: 'agenda-cell-width'
           },
           {
+            name: 'Agenda - Day/Week with max-days',
+            path: 'agenda-day-week-max-days'
+          },
+          {
             name: 'Agenda - Locale',
             path: 'agenda-locale'
           },
