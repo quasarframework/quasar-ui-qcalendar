@@ -29,5 +29,6 @@ export function minCharWidth (str, count) {
 
 export default {
   convertToUnit,
-  indexOf
+  indexOf,
+  minCharWidth
 }

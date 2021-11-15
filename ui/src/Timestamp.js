@@ -80,7 +80,8 @@ import {
 
 import {
   convertToUnit,
-  indexOf
+  indexOf,
+  minCharWidth
 } from './utils/helpers.js'
 
 export {
@@ -162,7 +163,8 @@ export {
   compareDateTime,
   // helpers
   convertToUnit,
-  indexOf
+  indexOf,
+  minCharWidth
 }
 
 export default {
@@ -244,5 +246,6 @@ export default {
   compareDateTime,
   // helpers
   convertToUnit,
-  indexOf
+  indexOf,
+  minCharWidth
 }
