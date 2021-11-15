@@ -12,8 +12,13 @@ describe('[TIMESTAMP] validateTimestamp', () => {
     expect(tests).toBe(true)
   })
 
-  it('validateTimestamp incorrect', async () => {
+  it('validateTimestamp with forward slash', async () => {
     const tests = timestamp.validateTimestamp('2020/01/01')
-    expect(tests).toBe(false)
+    expect(tests).toBe(true)
+  })
+
+  it('validateTimestamp with dots', async () => {
+    const tests = timestamp.validateTimestamp('2020.01.01')
+    expect(tests).toBe(true)
   })
 })
