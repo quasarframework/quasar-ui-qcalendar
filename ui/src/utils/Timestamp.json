@@ -162,6 +162,36 @@
         "desc": "True if the passed in date/time string is of correct form"
       }
     },
+    "parse": {
+      "desc": "Parses into a Timestamp from 'YYYY[-/.]MM[-/.]DD HH:mm' or JavaScript Date object with optional UTC handling",
+      "params": {
+        "date": {
+          "type": ["String", "Date", "undefined", "null"],
+          "desc": "Allowed formats are 'YYYY[-/.]MM[-/.]DD HH:mm', JavaScript Dateobject, null or undefined. null or undefined will return today's Timestamp",
+          "examples": [
+            "parse('2021-11-15')",
+            "parse()",
+            "parse(new Date())"
+          ]
+        },
+        "config": {
+          "type": "Object",
+          "tsType": "ParseConfigOptions",
+          "desc": "The configuration object",
+          "__exemption": [ "examples" ],
+          "definition": {
+            "utc": {
+              "type": "Boolean",
+              "desc": "Set to true if the returned value should be based on UTC (does not aply to JavaScript Date objects)",
+              "default": false,
+              "examples": [
+                "{ utc: true }"
+              ]
+            }
+          }
+        }
+      }
+    },
     "parsed": {
       "desc": "Parses a date/time string to a simple timestamp object. For a more complete timestamp, use parseTimestamp",
       "params": {

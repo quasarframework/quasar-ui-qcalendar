@@ -39,6 +39,10 @@ export interface AddToDateOptions {
   minute?: number | string,
 }
 
+export interface ParseConfigOptions {
+  utc?: boolean
+}
+
 export interface ColumnObject {
   id?: number | string,
   key?: number | string

@@ -244,6 +244,42 @@ export function compareDateTime (ts1, ts2) {
   return getDateTime(ts1) === getDateTime(ts2)
 }
 
+export function parse (date, config) {
+  const cfg = typeof config === 'object' ? config : {}
+  cfg.date = date
+  cfg.args = arguments
+  return _parse(cfg)
+}
+
+function _parse (config) {
+  const { date, utc } = config
+  if (date === null || isUndefined(date)) {
+    return parse(today(utc))
+  }
+
+  if (date instanceof Date) return parseDate(new Date(date))
+
+  if (typeof date === 'string' && validateTimestamp(date)) {
+    const d = date.match(PARSE_TIMESTAMP)
+    if (d) {
+      const m = d[ 2 ] - 1 || 0
+      const ms = (d[ 7 ] || '0').substring(0, 3)
+      if (utc) {
+        return parseDate(new Date(Date.UTC(d[ 1 ], m, d[ 3 ]
+          || 1, d[ 4 ] || 0, d[ 5 ] || 0, d[ 6 ] || 0, ms)))
+      }
+      return parseDate(new Date(d[ 1 ], m, d[ 3 ]
+          || 1, d[ 4 ] || 0, d[ 5 ] || 0, d[ 6 ] || 0, ms))
+    }
+  }
+
+  if (utc) {
+    return parseDate(new Date(Date.UTC(date)))
+  }
+
+  return parseDate(new Date(date)) // everything else
+}
+
 /**
  * Fast low-level parser for a date string ('YYYY-MM-DD'). Does not update formatted or relative date.
  * Use 'parseTimestamp' for formatted and relative updates
