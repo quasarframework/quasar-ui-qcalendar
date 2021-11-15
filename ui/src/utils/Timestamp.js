@@ -72,13 +72,19 @@ export const TimeObject = {
  * Returns today's date
  * @returns {string} Date string in the form 'YYYY-MM-DD'
  */
-export function today () {
-  const d = new Date(),
-    month = '' + (d.getMonth() + 1),
-    day = '' + d.getDate(),
-    year = d.getFullYear()
+export function today (utc = false) {
+  let d = new Date()
 
-  return [ year, padNumber(month, 2), padNumber(day, 2) ].join('-')
+  if (utc) {
+    d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()))
+  }
+
+  const
+    year = '' + d.getFullYear(),
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate()
+
+  return [ padNumber(year, 4), padNumber(month, 2), padNumber(day, 2) ].join('-')
 }
 
 /**

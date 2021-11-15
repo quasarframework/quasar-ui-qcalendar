@@ -5,6 +5,13 @@
   "methods": {
     "today": {
       "desc": "Returns today's date in YYYY-MM-DD format",
+      "params": {
+        "utc": {
+          "type": "Boolean",
+          "desc": "Whether the returned date is representitive of the UTC",
+          "__exemption": [ "examples" ]
+        }
+      },
       "returns": {
         "type": "String",
         "desc": "Returns today's date in YYYY-MM-DD format",
