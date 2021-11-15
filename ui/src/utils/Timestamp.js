@@ -67,8 +67,11 @@ export const TimeObject = {
 }
 /* eslint-enable no-multi-spaces */
 
+const isUndefined = s => s === undefined
+
 // returns YYYY-MM-dd format
 /**
+ * @param {boolean?} utc if returned value should be UTC
  * Returns today's date
  * @returns {string} Date string in the form 'YYYY-MM-DD'
  */
