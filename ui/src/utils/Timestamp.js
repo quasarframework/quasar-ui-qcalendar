@@ -362,7 +362,7 @@ export function getDayOfYear (timestamp) {
 export function getWorkWeek (timestamp) {
   let date
   if (timestamp.year === 0) {
-    date = Date.UTC(new Date())
+    date = NaN
   }
   else {
     date = makeDate(timestamp)
