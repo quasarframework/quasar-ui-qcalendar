@@ -201,7 +201,7 @@ export function parseTime (input) {
  * @returns {boolean} True if parseable
  */
 export function validateTimestamp (input) {
-  return !!PARSE_REGEX.exec(input)
+  return !!PARSE_TIMESTAMP.exec(input)
 }
 
 /**
@@ -251,23 +251,23 @@ export function compareDateTime (ts1, ts2) {
  * @returns {Timestamp} This {@link Timestamp} is minimally filled in. The {@link Timestamp.date} and {@link Timestamp.time} as well as relative data will not be filled in.
  */
 export function parsed (input) {
-  const parts = PARSE_REGEX.exec(input)
+  const parts = PARSE_TIMESTAMP.exec(input)
 
   if (!parts) return null
 
   return {
     date: input,
-    time: padNumber(parseInt(parts[ 6 ], 10) || 0, 2) + ':' + padNumber(parseInt(parts[ 8 ], 10) || 0, 2),
+    time: padNumber(parseInt(parts[ 4 ], 10) || 0, 2) + ':' + padNumber(parseInt(parts[ 5 ], 10) || 0, 2),
     year: parseInt(parts[ 1 ], 10),
     month: parseInt(parts[ 2 ], 10),
-    day: parseInt(parts[ 4 ], 10) || 1,
-    hour: parseInt(parts[ 6 ], 10) || 0,
-    minute: parseInt(parts[ 8 ], 10) || 0,
+    day: parseInt(parts[ 3 ], 10) || 1,
+    hour: parseInt(parts[ 4 ], 10) || 0,
+    minute: parseInt(parts[ 5 ], 10) || 0,
     weekday: 0,
     doy: 0,
     workweek: 0,
-    hasDay: !!parts[ 4 ],
-    hasTime: !!(parts[ 6 ] && parts[ 8 ]),
+    hasDay: !!parts[ 3 ],
+    hasTime: !!(parts[ 4 ] && parts[ 5 ]),
     past: false,
     current: false,
     future: false,
@@ -1136,7 +1136,8 @@ export function weeksBetween (ts1, ts2) {
 
 // the exports...
 export default {
-  PARSE_REGEX,
+  PARSE_REGEX: PARSE_TIMESTAMP, // deprecated
+  PARSE_TIMESTAMP,
   PARSE_DATE,
   PARSE_TIME,
   DAYS_IN_MONTH,

@@ -2,6 +2,7 @@ import { version } from './version'
 
 import {
   PARSE_REGEX,
+  PARSE_TIMESTAMP,
   PARSE_DATE,
   PARSE_TIME,
   DAYS_IN_MONTH,
@@ -85,6 +86,7 @@ import {
 export {
   version,
   PARSE_REGEX,
+  PARSE_TIMESTAMP,
   PARSE_DATE,
   PARSE_TIME,
   DAYS_IN_MONTH,
@@ -166,6 +168,7 @@ export {
 export default {
   version,
   PARSE_REGEX,
+  PARSE_TIMESTAMP,
   PARSE_DATE,
   PARSE_TIME,
   DAYS_IN_MONTH,
