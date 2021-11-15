@@ -9,6 +9,7 @@ import { version } from './version'
 
 import {
   PARSE_REGEX,
+  PARSE_TIMESTAMP,
   PARSE_DATE,
   PARSE_TIME,
   DAYS_IN_MONTH,
@@ -100,6 +101,7 @@ export {
   QCalendarTask,
 
   PARSE_REGEX,
+  PARSE_TIMESTAMP,
   PARSE_DATE,
   PARSE_TIME,
   DAYS_IN_MONTH,
@@ -189,6 +191,7 @@ export default {
   QCalendarTask,
 
   PARSE_REGEX,
+  PARSE_TIMESTAMP,
   PARSE_DATE,
   PARSE_TIME,
   DAYS_IN_MONTH,

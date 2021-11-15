@@ -1,22 +1,24 @@
-export const PARSE_REGEX = /^(\d{4})-(\d{1,2})(-(\d{1,2}))?([^\d]+(\d{1,2}))?(:(\d{1,2}))?(:(\d{1,2}))?(.(\d{1,3}))?$/
-export const PARSE_DATE = /^(\d{4})-(\d{1,2})(-(\d{1,2}))/
-export const PARSE_TIME = /(\d\d?)(:(\d\d?)|)(:(\d\d?)|)/
+import * as C from './constants.js'
 
-export const DAYS_IN_MONTH = [ 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ]
-export const DAYS_IN_MONTH_LEAP = [ 0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ]
-export const DAYS_IN_MONTH_MIN = 28
-export const DAYS_IN_MONTH_MAX = 31
-export const MONTH_MAX = 12
-export const MONTH_MIN = 1
-export const DAY_MIN = 1
-export const DAYS_IN_WEEK = 7
-export const MINUTES_IN_HOUR = 60
-export const HOURS_IN_DAY = 24
-export const FIRST_HOUR = 0
-export const MILLISECONDS_IN_MINUTE = 60000
-export const MILLISECONDS_IN_HOUR = 3600000
-export const MILLISECONDS_IN_DAY = 86400000
-export const MILLISECONDS_IN_WEEK = 604800000
+export const PARSE_REGEX = C.PARSE_TIMESTAMP
+export const PARSE_TIMESTAMP = C.PARSE_TIMESTAMP
+export const PARSE_DATE = C.PARSE_DATE
+export const PARSE_TIME = C.PARSE_TIME
+export const DAYS_IN_MONTH = C.DAYS_IN_MONTH
+export const DAYS_IN_MONTH_LEAP = C.DAYS_IN_MONTH_LEAP
+export const DAYS_IN_MONTH_MIN = C.DAYS_IN_MONTH_MIN
+export const DAYS_IN_MONTH_MAX = C.DAYS_IN_MONTH_MAX
+export const MONTH_MAX = C.MONTH_MAX
+export const MONTH_MIN = C.MONTH_MIN
+export const DAY_MIN = C.DAY_MIN
+export const DAYS_IN_WEEK = C.DAYS_IN_WEEK
+export const MINUTES_IN_HOUR = C.MINUTES_IN_HOUR
+export const HOURS_IN_DAY = C.HOURS_IN_DAY
+export const FIRST_HOUR = C.FIRST_HOUR
+export const MILLISECONDS_IN_MINUTE = C.MILLISECONDS_IN_MINUTE
+export const MILLISECONDS_IN_HOUR = C.MILLISECONDS_IN_HOUR
+export const MILLISECONDS_IN_DAY = C.MILLISECONDS_IN_DAY
+export const MILLISECONDS_IN_WEEK = C.MILLISECONDS_IN_WEEK
 
 /* eslint-disable no-multi-spaces */
 /**
