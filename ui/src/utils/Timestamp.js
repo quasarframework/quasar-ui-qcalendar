@@ -259,7 +259,7 @@ export function parsed (input) {
     doy: 0,
     workweek: 0,
     hasDay: !!parts[ 4 ],
-    hasTime: !!(parts[ 6 ] && parts[ 8 ]),
+    hasTime: !isNaN(parts[ 6 ]) && !isNaN(parts[ 8 ]),
     past: false,
     current: false,
     future: false,
