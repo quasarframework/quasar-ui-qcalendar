@@ -154,6 +154,7 @@ export default defineComponent({
         { value: 'en-US', label: 'English (US)' },
         { value: 'eo', label: 'Esperanto' },
         { value: 'es', label: 'Español' },
+        { value: 'et', label: 'Estonian' },
         { value: 'fa-IR', label: 'فارسی' },
         { value: 'fi', label: 'Suomi' },
         { value: 'fr', label: 'Français' },
