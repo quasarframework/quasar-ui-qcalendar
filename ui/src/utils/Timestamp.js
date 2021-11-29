@@ -253,13 +253,13 @@ export function parsed (input) {
     year: parseInt(parts[ 1 ], 10),
     month: parseInt(parts[ 2 ], 10),
     day: parseInt(parts[ 4 ], 10) || 1,
-    hour: parseInt(parts[ 6 ], 10) || 0,
-    minute: parseInt(parts[ 8 ], 10) || 0,
+    hour: !isNaN(parseInt(parts[ 6 ], 10)) ? parseInt(parts[ 6 ], 10) : 0,
+    minute: !isNaN(parseInt(parts[ 8 ], 10)) ? parseInt(parts[ 8 ], 10) : 0,
     weekday: 0,
     doy: 0,
     workweek: 0,
     hasDay: !!parts[ 4 ],
-    hasTime: !isNaN(parts[ 6 ]) && !isNaN(parts[ 8 ]),
+    hasTime: true, // there is always time because no time is '00:00', which is valid
     past: false,
     current: false,
     future: false,
@@ -306,7 +306,7 @@ export function parseDate (date, utc = false) {
     doy: 0,
     workweek: 0,
     hasDay: true,
-    hasTime: !!(date[ `get${ UTC }Hours` ]() !== 0 && date[ `get${ UTC }Minutes` ]() !== 0),
+    hasTime: true, // Date always has time, even if it is '00:00'
     past: false,
     current: false,
     future: false,
@@ -501,7 +501,7 @@ export function updateDisabled (timestamp, disabledBefore, disabledAfter, disabl
  * @returns The modified {@link Timestamp}
  */
 export function updateFormatted (timestamp) {
-  timestamp.hasTime = !(timestamp.hour === 0 && timestamp.minute === 0)
+  timestamp.hasTime = true
   timestamp.time = getTime(timestamp)
   timestamp.date = getDate(timestamp)
   timestamp.weekday = getWeekday(timestamp)
