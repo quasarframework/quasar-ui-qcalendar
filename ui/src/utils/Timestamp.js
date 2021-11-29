@@ -289,22 +289,24 @@ export function parseTimestamp (input, now) {
 /**
  * Takes a JavaScript Date and returns a {@link Timestamp}. The {@link Timestamp} is not updated with relative information.
  * @param {date} date JavaScript Date
+ * @param {boolean} utc If set the {@link Timestamp} will parse the Date as UTC
  * @returns {Timestamp} A minimal {@link Timestamp} without updated or relative updates.
  */
-export function parseDate (date) {
+export function parseDate (date, utc = false) {
+  const UTC = !!utc ? 'UTC' : ''
   return updateFormatted({
-    date: padNumber(date.getFullYear(), 4) + '-' + padNumber(date.getMonth() + 1, 2) + '-' + padNumber(date.getDate(), 2),
-    time: padNumber(date.getHours() || 0, 2) + ':' + padNumber(date.getMinutes() || 0, 2),
-    year: date.getFullYear(),
-    month: date.getMonth() + 1,
-    day: date.getDate(),
-    hour: date.getHours(),
-    minute: date.getMinutes(),
+    date: padNumber(date[`get${UTC}FullYear`](), 4) + '-' + padNumber(date[`get${UTC}Month`]() + 1, 2) + '-' + padNumber(date[`get${UTC}Date`](), 2),
+    time: padNumber(date[`get${UTC}Hours`]() || 0, 2) + ':' + padNumber(date[`get${UTC}Minutes`]() || 0, 2),
+    year: date[`get${UTC}FullYear`](),
+    month: date[`get${UTC}Month`]() + 1,
+    day: date[`get${UTC}Date`](),
+    hour: date[`get${UTC}Hours`](),
+    minute: date[`get${UTC}Minutes`](),
     weekday: 0,
     doy: 0,
     workweek: 0,
     hasDay: true,
-    hasTime: !!(date.getHours() !== 0 && date.getMinutes() !== 0),
+    hasTime: !!(date[`get${UTC}Hours`]() !== 0 && date[`get${UTC}Minutes`]() !== 0),
     past: false,
     current: false,
     future: false,
@@ -875,19 +877,23 @@ export function createNativeLocaleFormatter (locale, cb) {
 /**
  * Makes a JavaScript Date from the passed {@link Timestamp}
  * @param {Timestamp} timestamp The {@link Timestamp} to use
+ * @param {boolean} utc True to get Date object using UTC
  * @returns {date} A JavaScript Date
  */
-export function makeDate (timestamp) {
-  return new Date(Date.UTC(timestamp.year, timestamp.month - 1, timestamp.day, 0, 0))
+export function makeDate (timestamp, utc = true) {
+  if (utc) return new Date(Date.UTC(timestamp.year, timestamp.month - 1, timestamp.day, 0, 0))
+  return new Date(timestamp.year, timestamp.month - 1, timestamp.day, 0, 0)
 }
 
 /**
  * Makes a JavaScript Date from the passed {@link Timestamp} (with time)
  * @param {Timestamp} timestamp The {@link Timestamp} to use
+ * @param {boolean} utc True to get Date object using UTC
  * @returns {date} A JavaScript Date
  */
-export function makeDateTime (timestamp) {
-  return new Date(Date.UTC(timestamp.year, timestamp.month - 1, timestamp.day, timestamp.hour, timestamp.minute))
+export function makeDateTime (timestamp, utc = true) {
+  if (utc) return new Date(Date.UTC(timestamp.year, timestamp.month - 1, timestamp.day, timestamp.hour, timestamp.minute))
+  return new Date(timestamp.year, timestamp.month - 1, timestamp.day, timestamp.hour, timestamp.minute)
 }
 
 // validate a number IS a number
