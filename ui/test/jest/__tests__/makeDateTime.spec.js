@@ -1,5 +1,6 @@
 // eslint-disable-next-line node/no-missing-require
 const timestamp = require('utils/Timestamp.js')
+const { compareDateTime } = require('../../../src')
 
 describe('[TIMESTAMP] makeDateTime', () => {
   it('makeDateTime', async () => {
@@ -9,5 +10,12 @@ describe('[TIMESTAMP] makeDateTime', () => {
     expect(tests.getFullYear()).toBe(2019)
     expect(tests.getMonth()).toBe(11)
     expect(tests.getDate()).toBe(31)
+  })
+
+  it ('makeDateTime and parseDate', async () => {
+    const a = new Date(2021, 11, 28, 10, 0)
+    const b = timestamp.parseDate(a)
+    const c = timestamp.makeDateTime(b)
+    expect(timestamp.compareDateTime(c, c)).toBe(true)
   })
 })
