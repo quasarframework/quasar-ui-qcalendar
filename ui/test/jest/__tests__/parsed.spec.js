@@ -7,7 +7,7 @@ describe('[TIMESTAMP] parsed', () => {
     expect(tests.year).toBe(2020)
     expect(tests.month).toBe(1)
     expect(tests.day).toBe(1)
-    expect(tests.hasTime).toBe(false)
+    expect(tests.hasTime).toBe(true)
   })
 
   it('parses date and time', async () => {

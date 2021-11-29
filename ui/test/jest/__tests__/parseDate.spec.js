@@ -5,7 +5,7 @@ describe('[TIMESTAMP] parseDate', () => {
   it('parseDate no time', async () => {
     const tests = timestamp.parseDate(new Date(2020, 0, 1))
     expect(tests.hasDay).toBe(true)
-    expect(tests.hasTime).toBe(false)
+    expect(tests.hasTime).toBe(true)
     expect(tests.year).toBe(2020)
     expect(tests.month).toBe(1)
     expect(tests.day).toBe(1)
