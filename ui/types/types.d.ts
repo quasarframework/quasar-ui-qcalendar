@@ -39,6 +39,12 @@ export interface AddToDateOptions {
   minute?: number | string,
 }
 
+export interface WeekdayFormatter {
+  weekday: string,
+  type?: string,
+  locale?: string
+}
+
 export interface ColumnObject {
   id?: number | string,
   key?: number | string

@@ -1132,6 +1132,46 @@ export function weeksBetween (ts1, ts2) {
   return Math.ceil(daysBetween(t1, t2) / DAYS_IN_WEEK)
 }
 
+// Known dates
+const weekdayDateMap = {
+  Mon: new Date('2020-01-06T00:00:00.000Z'),
+  Tue: new Date('2020-01-07T00:00:00.000Z'),
+  Wed: new Date('2020-01-08T00:00:00.000Z'),
+  Thu: new Date('2020-01-09T00:00:00.000Z'),
+  Fri: new Date('2020-01-10T00:00:00.000Z'),
+  Sat: new Date('2020-01-11T00:00:00.000Z'),
+  Sun: new Date('2020-01-12T00:00:00.000Z'),
+}
+
+export function getWeekdayFormatter () {
+  const emptyFormatter = (_d, _t) => ''
+  const options = {
+    long: { timeZone: 'UTC', weekday: 'long' },
+    short: { timeZone: 'UTC', weekday: 'short' },
+    narrow: { timeZone: 'UTC', weekday: 'narrow' }
+  }
+
+  /* istanbul ignore next */
+  if (typeof Intl === 'undefined' || typeof Intl.DateTimeFormat === 'undefined') {
+    return emptyFormatter
+  }
+
+  // type = 'narrow', 'short', 'long'
+  function weekdayFormatter (weekday, type, locale) {
+    try {
+      const intlFormatter = new Intl.DateTimeFormat(locale || undefined, options[ type ] || options[ 'long' ])
+      return intlFormatter.format(weekdayDateMap[ weekday ])
+    }
+    catch (e) /* istanbul ignore next */ {
+      /* eslint-disable-next-line */
+      console.error(`Intl.DateTimeFormat: ${e.message} -> day of week: ${ weekday }`)
+      return ''
+    }
+  }
+
+  return weekdayFormatter
+}
+
 // the exports...
 export default {
   PARSE_REGEX,
@@ -1204,5 +1244,6 @@ export default {
   compareTimestamps,
   compareDate,
   compareTime,
-  compareDateTime
+  compareDateTime,
+  getWeekdayFormatter,
 }
