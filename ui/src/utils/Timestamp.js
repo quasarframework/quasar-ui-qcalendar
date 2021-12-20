@@ -1124,7 +1124,7 @@ export function daysBetween (ts1, ts2) {
  * @param {Timestamp} ts1 The first {@link Timestamp}
  * @param {Timestamp} ts2 The second {@link Timestamp}
  */
-export function weeksBetween (ts1, ts2) {
+ export function weeksBetween (ts1, ts2) {
   let t1 = copyTimestamp(ts1)
   let t2 = copyTimestamp(ts2)
   t1 = findWeekday(t1, 0)
