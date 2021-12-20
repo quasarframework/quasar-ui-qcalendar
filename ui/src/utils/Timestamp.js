@@ -1210,6 +1210,12 @@ export function getMonthFormatter () {
   return monthFormatter
 }
 
+export function getMonthNames (type, locale) {
+  const monthFormatter = getMonthFormatter()
+  return [...Array(12).keys()]
+    .map(month => monthFormatter(month, type, locale))
+}
+
 // the exports...
 export default {
   PARSE_REGEX,
@@ -1285,4 +1291,6 @@ export default {
   compareDateTime,
   getWeekdayFormatter,
   getWeekdayNames,
+  getMonthFormatter,
+  getMonthNames
 }

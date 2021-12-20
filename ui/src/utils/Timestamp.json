@@ -1585,6 +1585,38 @@
           "monthFormatter('Sat', 'narrow', 'fi')"
         ]  
       }
+    },
+    "getMonthNames": {
+      "desc": "Returns an array of localized month names in either 'long', 'short', or 'narrow' format",
+      "params": {
+        "type": {
+          "type": "String",
+          "default": "long",
+          "values": ["long", "short", "narrow"],
+          "desc": "The values represent how the day of the month will be displayed",
+          "__exemption": [ "examples" ]
+        },
+        "locale": {
+          "type": "String",
+          "default": "en-US",
+          "desc": "Any locale accepted by the browser can be used",
+          "__exemption": [ "examples" ]
+        }
+      },
+      "returns": {
+        "type": "Array",
+        "tsType":"StringArray",
+        "desc": "An array of localized month names",
+        "examples":[
+          "[ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ]",
+          "[ 'ođđj', 'guov', 'njuk', 'cuo', 'mies', 'geas', 'suoi', 'borg', 'čakč', 'golg', 'skáb', 'juov' ]"
+        ]
+      },
+      "examples":[
+        "getMonthNames('long', 'en-US')",
+        "getMonthNames('short', 'se')",
+        "getMonthNames('narrow', 'de')"
+      ]
     }
   }
 }
