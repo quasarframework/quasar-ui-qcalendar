@@ -869,7 +869,7 @@ export function createNativeLocaleFormatter (locale, cb) {
     catch (e) /* istanbul ignore next */ {
       /* eslint-disable-next-line */
       console.error(`Intl.DateTimeFormat: ${e.message} -> ${getDateTime(timestamp)}`)
-      return ''
+      return emptyFormatter
     }
   }
 }
