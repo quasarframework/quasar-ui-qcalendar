@@ -1178,6 +1178,38 @@ export function getWeekdayNames (type, locale) {
   return shortWeekdays.map(weekday => weekdayFormatter(weekday, type, locale))
 }
 
+export function getMonthFormatter () {
+  const emptyFormatter = (_m, _t) => ''
+  const options = {
+    long: { timeZone: 'UTC', month: 'long' },
+    short: { timeZone: 'UTC', month: 'short' },
+    narrow: { timeZone: 'UTC', month: 'narrow' }
+  }
+
+  /* istanbul ignore next */
+  if (typeof Intl === 'undefined' || typeof Intl.DateTimeFormat === 'undefined') {
+    return emptyFormatter
+  }
+
+  // type = 'narrow', 'short', 'long'
+  function monthFormatter (month, type, locale) {
+    try {
+      const intlFormatter = new Intl.DateTimeFormat(locale || undefined, options[ type ] || options[ 'long' ])
+      const date = new Date()
+      date.setDate(1)
+      date.setMonth(month)
+      return intlFormatter.format(date)
+    }
+    catch (e) /* istanbul ignore next */ {
+      /* eslint-disable-next-line */
+      console.error(`Intl.DateTimeFormat: ${e.message} -> month: ${ month }`)
+      return emptyFormatter
+    }
+  }
+
+  return monthFormatter
+}
+
 // the exports...
 export default {
   PARSE_REGEX,

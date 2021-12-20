@@ -84,7 +84,8 @@ import {
   compareTime,
   compareDateTime,
   getWeekdayFormatter,
-  getWeekdayNames
+  getWeekdayNames,
+  getMonthFormatter
 } from './utils/Timestamp.js'
 
 import {
@@ -179,6 +180,7 @@ export {
   compareDateTime,
   getWeekdayFormatter,
   getWeekdayNames,
+  getMonthFormatter,
   // helpers
   convertToUnit,
   indexOf
@@ -271,6 +273,7 @@ export default {
   compareDateTime,
   getWeekdayFormatter,
   getWeekdayNames,
+  getMonthFormatter,
   // helpers
   convertToUnit,
   indexOf,

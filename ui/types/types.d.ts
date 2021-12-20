@@ -45,6 +45,12 @@ export interface WeekdayFormatter {
   locale?: string
 }
 
+export interface MonthFormatter {
+  month: number,
+  type?: string,
+  locale?: string
+}
+
 export interface ColumnObject {
   id?: number | string,
   key?: number | string

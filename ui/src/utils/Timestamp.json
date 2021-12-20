@@ -1505,14 +1505,86 @@
           "type": "String",
           "desc": "The formatted string of the specified weekday in the desired locale",
           "__exemption": [ "examples" ]
+        },
+        "examples":[
+          "weekdayFormatter('Mon')",
+          "weekdayFormatter('Sun', 'long', 'de')",
+          "weekdayFormatter('Fri', 'short', 'fr')",
+          "weekdayFormatter('Sat', 'narrow', 'fi')"
+        ]  
+      }
+    },
+    "getWeekdayNames": {
+      "desc": "Returns an array of localized weekday names in either 'long', 'short', or 'narrow' format",
+      "params": {
+        "type": {
+          "type": "String",
+          "default": "long",
+          "values": ["long", "short", "narrow"],
+          "desc": "The values represent how the day of the week will be displayed",
+          "__exemption": [ "examples" ]
+        },
+        "locale": {
+          "type": "String",
+          "default": "en-US",
+          "desc": "Any locale accepted by the browser can be used",
+          "__exemption": [ "examples" ]
         }
       },
+      "returns": {
+        "type": "Array",
+        "tsType":"StringArray",
+        "desc": "An array of localized weekday names",
+        "examples":[
+          "[ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ]",
+          "[ 'vuos', 'maŋ', 'gask', 'duor', 'bear', 'láv', 'sotn' ]"
+        ]
+      },
       "examples":[
-        "getWeekdayFormatter('Mon')",
-        "getWeekdayFormatter('Sun', 'long', 'de')",
-        "getWeekdayFormatter('Fri', 'short', 'fr')",
-        "getWeekdayFormatter('Sat', 'narrow', 'fi')"
+        "getWeekdayNames('long', 'en-US')",
+        "getWeekdayNames('short', 'se')",
+        "getWeekdayNames('narrow', 'de')"
       ]
+    },
+    "getMonthFormatter": {
+      "desc": "Returns a function to be used for international formatting purposes for the month",
+      "returns": {
+        "type": "Function",
+        "tsType": "MonthFormatter",
+        "desc": "This uses the Intl.DateTimeFormat function of the browser",
+        "params": {
+          "month": {
+            "type": "Number",
+            "required": true,
+            "desc": "The values 0-11 can be used to represent the month (0-based) and used to translate to the desired locale",
+            "__exemption": [ "examples" ]
+          },
+          "type": {
+            "type": "String",
+            "default": "long",
+            "values": ["long", "short", "narrow"],
+            "desc": "The values represent how the month will be displayed",
+            "__exemption": [ "examples" ]
+          },
+          "locale": {
+            "type": "String",
+            "default": "en-US",
+            "desc": "Any locale accepted by the browser can be used",
+            "__exemption": [ "examples" ]
+          }
+        },
+        "returns": {
+          "type": "String",
+          "desc": "The formatted string of the specified month in the desired locale",
+          "__exemption": [ "examples" ]
+        },
+        "examples":[
+          "monthFormatter('Mon')",
+          "monthFormatter('Sun', 'long', 'de')",
+          "monthFormatter('Fri', 'short', 'fr')",
+          "monthFormatter('Sat', 'narrow', 'fi')"
+        ]  
+      }
     }
   }
 }
