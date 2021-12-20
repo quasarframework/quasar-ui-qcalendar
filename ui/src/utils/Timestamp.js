@@ -1165,7 +1165,7 @@ export function getWeekdayFormatter () {
     catch (e) /* istanbul ignore next */ {
       /* eslint-disable-next-line */
       console.error(`Intl.DateTimeFormat: ${e.message} -> day of week: ${ weekday }`)
-      return ''
+      return emptyFormatter
     }
   }
 
