@@ -1172,6 +1172,12 @@ export function getWeekdayFormatter () {
   return weekdayFormatter
 }
 
+export function getWeekdayNames (type, locale) {
+  const shortWeekdays = Object.keys(weekdayDateMap)
+  const weekdayFormatter = getWeekdayFormatter()
+  return shortWeekdays.map(weekday => weekdayFormatter(weekday, type, locale))
+}
+
 // the exports...
 export default {
   PARSE_REGEX,
@@ -1246,4 +1252,5 @@ export default {
   compareTime,
   compareDateTime,
   getWeekdayFormatter,
+  getWeekdayNames,
 }
