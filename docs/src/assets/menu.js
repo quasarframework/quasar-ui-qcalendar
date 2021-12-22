@@ -518,6 +518,10 @@ const menu = [
             path: 'minimode-navigation'
           },
           {
+            name: 'Mini-mode - QInput',
+            path: 'minimode-qinput'
+          },
+          {
             name: 'Mini-mode - Selected dates',
             path: 'minimode-selected-dates'
           },
