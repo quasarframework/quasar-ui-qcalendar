@@ -104,10 +104,10 @@ function generateBuilds () {
     builds.push({
       rollup: {
         input: {
-          input: pathResolve(`entry/${ entry }.common.js`)
+          input: pathResolve(`entry/${ entry }.cjs.js`)
         },
         output: {
-          file: pathResolve(`../dist/${ entry }.common.js`),
+          file: pathResolve(`../dist/${ entry }.cjs.js`),
           format: 'cjs',
           exports: 'auto'
         }
