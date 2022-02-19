@@ -1,7 +1,23 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es6"
+    "target": "es6",
+    "baseUrl": ".",
+    "paths": {
+      "components/*": [
+        "src/components/*"
+      ],
+      "directives/*": [
+        "src/directives/*"
+      ],
+      "composables/*": [
+        "src/composables/*"
+      ],
+      "utils/*": [
+        "src/utils/*"
+      ]
+    }
+
   },
   "exclude": ["node_modules", "dist"],
   "include": ["src/**/*", "build/**/*", "test/**/*"]
