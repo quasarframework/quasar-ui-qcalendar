@@ -70,7 +70,8 @@ const uglifyJsOptions = {
 // ]
 
 const buildEntries = [
-  'index', // 'QCalendar'
+  'index',
+  'QCalendar', // same as index
   'QCalendarAgenda',
   'QCalendarDay',
   'QCalendarMonth',
