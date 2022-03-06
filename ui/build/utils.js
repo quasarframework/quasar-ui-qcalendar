@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const zlib = require('zlib')
-const { green, blue, red, magenta, yellow, underline } = require('chalk')
+const { green, blue, red, magenta, yellow, underline } = require('kolorist')
 
 const kebabRegex = /[A-Z\u00C0-\u00D6\u00D8-\u00DE]/g
 const tableData = []

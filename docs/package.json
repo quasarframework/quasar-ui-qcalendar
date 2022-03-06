@@ -17,7 +17,7 @@
     "dev:electron": "quasar dev -m electron"
   },
   "dependencies": {
-    "@carbon/icons-vue": "^10.46.0",
+    "@carbon/icons-vue": "^10.47.0",
     "@quasar/extras": "^1.12.5",
     "@quasar/quasar-ui-qcalendar": "./ui",
     "core-js": "^3.21.1",
@@ -26,7 +26,7 @@
     "quasar-ui-example-viewer": "^2.0.0-alpha.9",
     "quasar-ui-json-api-viewer": "^2.0.0-alpha.6",
     "vue": "^3.2.31",
-    "vue-router": "^4.0.12"
+    "vue-router": "^4.0.13"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",
@@ -36,12 +36,12 @@
     "@quasar/app": "^3.3.3",
     "@tauri-apps/cli": "^1.0.0-rc.5",
     "babel-loader": "^8.2.3",
-    "eslint": "^8.9.0",
+    "eslint": "^8.10.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.0.0",
-    "eslint-plugin-vue": "^8.4.1",
+    "eslint-plugin-vue": "^8.5.0",
     "eslint-webpack-plugin": "^3.1.1",
     "gray-matter": "^4.0.3",
     "markdown-it": "^12.3.2",

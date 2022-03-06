@@ -3,7 +3,7 @@ const
   path = require('path'),
   root = path.resolve(__dirname, '../..'),
   resolvePath = file => path.resolve(root, file),
-  { blue } = require('chalk')
+  { blue } = require('kolorist')
 
 const writeJson = function (file, json) {
   return fs.writeFileSync(file, JSON.stringify(json, null, 2) + '\n', 'utf-8')
