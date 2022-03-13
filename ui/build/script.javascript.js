@@ -194,7 +194,7 @@ function build (builds) {
 function genConfig (opts) {
   Object.assign(opts.rollup.input, {
     plugins: rollupPluginsModern,
-    external: ['vue']
+    external: [ 'vue' ]
   })
 
   Object.assign(opts.rollup.output, {
