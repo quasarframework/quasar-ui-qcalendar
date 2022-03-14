@@ -177,12 +177,12 @@ export default defineComponent({
       selectedDate2.value = tm.date
     }
     function onPrev () {
-      this.$refs.calendar1.prev()
-      this.$refs.calendar2.prev()
+      calendar1.value.prev()
+      calendar2.value.prev()
     }
     function onNext () {
-      this.$refs.calendar1.next()
-      this.$refs.calendar2.next()
+      calendar1.value.next()
+      calendar2.value.next()
     }
     function onMoved (data) {
       console.log('onMoved', data)
