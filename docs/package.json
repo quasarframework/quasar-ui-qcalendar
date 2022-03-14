@@ -22,14 +22,14 @@
     "@quasar/quasar-ui-qcalendar": "./ui",
     "core-js": "^3.21.1",
     "date-holidays": "=2.0.2",
-    "quasar": "^2.5.5",
+    "quasar": "^2.6.0",
     "quasar-ui-example-viewer": "^2.0.0-alpha.9",
     "quasar-ui-json-api-viewer": "^2.0.0-alpha.6",
     "vue": "^3.2.31",
     "vue-router": "^4.0.14"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.5",
+    "@babel/core": "^7.17.7",
     "@babel/eslint-parser": "^7.17.0",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/preset-env": "^7.16.11",
