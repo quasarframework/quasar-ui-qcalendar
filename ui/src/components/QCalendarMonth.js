@@ -433,7 +433,7 @@ export default defineComponent({
       const weekday = filteredDays[ 0 ].weekday
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
-      const scope = { 
+      const scope = {
         activeDate,
         weekday,
         timestamp: day,
@@ -582,11 +582,15 @@ export default defineComponent({
       if (props.dayMinHeight > 0 && isMiniMode.value !== true) {
         style.minHeight = convertToUnit(parseInt(props.dayMinHeight, 10))
       }
+      const useAutoHeight = parseInt(props.dayHeight, 10) === 0 && parseInt(props.dayMinHeight, 10) === 0
 
       return h('div', {
         key: week[ 0 ].date,
         ref: (el) => { weekRef.value[ weekNum ] = el },
-        class: 'q-calendar-month__week--wrapper',
+        class: {
+          'q-calendar-month__week--wrapper': true,
+          'q-calendar-month__week--auto-height': useAutoHeight
+        },
         style
       }, [
         props.showWorkWeeks === true ? __renderWorkWeekGutter(week) : undefined,
