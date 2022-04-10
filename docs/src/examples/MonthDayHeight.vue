@@ -45,7 +45,7 @@
     </div>
 
     <div class="row justify-center">
-      <div style="display: flex; max-width: 800px; width: 100%;">
+      <div :style="calendarStyle">
         <q-calendar-month
           ref="calendar"
           v-model="selectedDate"
@@ -86,6 +86,19 @@ export default defineComponent({
       selectedDate: today(),
       dayHeight: 50,
       dayMinHeight: 50
+    }
+  },
+  computed: {
+    calendarStyle () {
+      const style = {
+        display: 'flex',
+        maxWidth: '800px',
+        width: '100%'
+      }
+      if (this.dayHeight === 0 && this.dayMinHeight === 0) {
+        style.height = '600px'
+      }
+      return style
     }
   },
   methods: {
