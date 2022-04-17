@@ -17,7 +17,7 @@
         </div>
       </div>
     </div>
-    <div class="full-width row justify-center q-pb-xl">
+    <div class="full-width row justify-center q-pb-xl q-gutter-sm">
       <q-btn
         to="/all-about-qcalendar/what-is-qcalendar"
         no-caps
@@ -29,6 +29,19 @@
         >
           <div>Get started</div>
           <q-icon :name="biArrowRightCircle" />
+        </div>
+      </q-btn>
+      <q-btn
+        to="/developing/getting-started"
+        no-caps
+        class="bg-green-8"
+      >
+        <div
+          class="row justify-around items-center"
+          style="width: 140px;"
+        >
+          <div>Examples</div>
+          <q-icon :name="biArrowRightSquare" />
         </div>
       </q-btn>
     </div>
@@ -420,7 +433,8 @@
 import { defineComponent, computed } from 'vue'
 import { useQuasar } from 'quasar'
 import {
-  biArrowRightCircle
+  biArrowRightCircle,
+  biArrowRightSquare
 } from '@quasar/extras/bootstrap-icons'
 
 export default defineComponent({
@@ -435,7 +449,8 @@ export default defineComponent({
 
     return {
       layout,
-      biArrowRightCircle
+      biArrowRightCircle,
+      biArrowRightSquare
     }
   }
 })
