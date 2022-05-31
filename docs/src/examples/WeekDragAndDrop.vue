@@ -245,6 +245,11 @@ export default defineComponent({
     },
     onClickHeadDay (data) {
       console.log('onClickHeadDay', data)
+    },
+    // this method is used only to print the scope to dev tools
+    printScope (scope) {
+      console.log('scope:', scope)
+      return true
     }
   }
 })
