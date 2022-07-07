@@ -4,7 +4,7 @@
   "author": "Jeff Galbraith <jeff@quasar.dev>",
   "description": "QCalendar - Day/Month/Week Calendars, Popups, Date Pickers, Schedules, Agendas, Planners and Tasks for your Vue Apps",
   "license": "MIT",
-  "module": "dist/index.esm.js",
+  "module": "dist/index.umd.js",
   "main": "dist/index.cjs.js",
   "typings": "dist/types/index.d.ts",
   "files": [
