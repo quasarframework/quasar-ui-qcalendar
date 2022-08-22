@@ -653,7 +653,7 @@ onDragEnd (ev, event) {
   ev.stopPropagation()
   this.resetDrag()
 },
-onDragOver (ev, day, type) {
+onDragOver (ev, day, type, resource) {
   if (type === 'day') {
     ev.preventDefault()
     ev.stopPropagation()
@@ -664,7 +664,7 @@ onDragOver (ev, day, type) {
     return this.draggedEvent.date !== day.date && this.draggedEvent.time !== day.time
   }
 },
-onDrop (ev, day, type) {
+onDrop (ev, day, type, resource) {
   ev.preventDefault()
   ev.stopPropagation()
   if (type === 'day') {
