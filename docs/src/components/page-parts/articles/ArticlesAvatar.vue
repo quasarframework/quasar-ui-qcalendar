@@ -29,7 +29,7 @@ export default defineComponent({
     },
     publishedDate: {
       type: String,
-      default: '¯\_(ツ)_/¯'
+      default: '¯\\_(ツ)_/¯'
     }
   }
 })

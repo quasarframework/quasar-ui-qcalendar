@@ -162,7 +162,7 @@ export default defineComponent({
                 { date: '2021-03-10', logged: 4.5 },
                 { date: '2021-03-11', logged: 2.4 }
               ]
-            },
+            }
           ]
         },
         {

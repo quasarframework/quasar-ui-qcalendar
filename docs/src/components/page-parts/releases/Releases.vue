@@ -70,7 +70,7 @@ export default {
 
   setup () {
     const packagesDefinitions = {
-      'QCalendar': []
+      QCalendar: []
     }
     const loading = ref(false)
     const error = ref(false)

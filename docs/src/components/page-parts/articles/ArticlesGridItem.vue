@@ -34,18 +34,18 @@ export default defineComponent({
       $router = useRouter()
 
     onMounted(() => {
-      function testImage(url) {
-        const imgPromise = new Promise(function imgPromise(resolve, reject) {
+      function testImage (url) {
+        const imgPromise = new Promise(function imgPromise (resolve, reject) {
           const imgElement = new Image()
 
           // When image is loaded, resolve the promise
-          imgElement.addEventListener('load', function imgOnLoad() {
+          imgElement.addEventListener('load', function imgOnLoad () {
             resolve(this)
           })
 
           // When there's an error during load, reject the promise
-          imgElement.addEventListener('error', function imgOnError() {
-            reject();
+          imgElement.addEventListener('error', function imgOnError () {
+            reject()
           })
 
           // Assign URL
@@ -57,16 +57,16 @@ export default defineComponent({
 
       const src = '/articles/' + props.article.name + '/index.jpg'
       testImage(src).then(
-        function fulfilled(img) {
+        function fulfilled (img) {
           img.style = 'max-width: 225px; max-height: 150px;'
           img.width = '225'
           coverImage.value = true
           coverImagePath.value = src
           imageRef.value.appendChild(img)
         },
-        function rejected() {
+        function rejected () {
           if (process.env.NODE_ENV !== 'production') {
-            console.error('The image was not found:', src )
+            console.error('The image was not found:', src)
           }
         }
       )

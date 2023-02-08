@@ -93,18 +93,18 @@ export default defineComponent({
         { id: '5', name: 'Olivia' }
       ],
       events: {
-        '1': [ // John
+        1: [ // John
           { dow: 1, title: 'Gym' },
           { dow: 3, title: 'Meeting: Olivia' },
           { dow: 4, title: 'Training', range: 2 }
         ],
-        '2': [ // Board room
+        2: [ // Board room
 
         ],
-        '2.1': [ // Room-1
+        2.1: [ // Room-1
           { dow: 2, title: 'Board Meeting', range: 2 }
         ],
-        '2.2': [ // Room-2
+        2.2: [ // Room-2
 
         ],
         '2.2.1': [ // Partition-A
@@ -116,17 +116,17 @@ export default defineComponent({
         '2.2.3': [ // Partition-C
 
         ],
-        '3': [ // Mary
-          { dow: 4, title: 'Corporate Training', range: 2 },
+        3: [ // Mary
+          { dow: 4, title: 'Corporate Training', range: 2 }
           // { start: '12:00', title: 'Lunch', duration: 60 }
         ],
-        '4': [ // Susan
-          { dow: 4, title: 'Corporate Training', range: 2 },
+        4: [ // Susan
+          { dow: 4, title: 'Corporate Training', range: 2 }
           // { start: '12:00', title: 'Lunch', duration: 60 }
         ],
-        '5': [ // Olivia
+        5: [ // Olivia
           { dow: 4, title: 'Corporate Training', range: 2 },
-          { dow: 3, title: 'Meeting: John' },
+          { dow: 3, title: 'Meeting: John' }
         ]
       }
     }

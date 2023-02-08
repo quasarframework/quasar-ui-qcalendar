@@ -52,8 +52,7 @@ export default defineComponent({
   },
   setup () {
     const selectedDate = ref(today()),
-      calendar = ref(null),
-      today2 = ref(today())
+      calendar = ref(null)
 
     const disabledBefore = computed(() => {
       let ts = parseTimestamp(today())

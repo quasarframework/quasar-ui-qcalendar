@@ -861,7 +861,7 @@ const menu = [
           {
             name: 'Task - Custom height',
             path: 'task-custom-height'
-          },
+          }
         ]
       },
       {

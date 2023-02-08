@@ -59,11 +59,10 @@ export default {
     /**
      * Recursive method to find the QExpansionItem parent
      * @param {any} vm The Vue node
-     * @returns 
      */
     function showMenu (vm) {
       if (vm !== void 0 && vm !== rootRef.value) {
-        if(vm.show === void 0 && vm.$parent !== void 0) {
+        if (vm.show === void 0 && vm.$parent !== void 0) {
           const parent = getParentVm(vm)
           if (parent !== void 0) {
             showMenu(parent)

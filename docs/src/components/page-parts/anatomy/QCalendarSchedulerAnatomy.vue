@@ -154,7 +154,6 @@ export default defineComponent({
       { id: '5', name: 'Olivia' }
     ])
 
-
     watch(() => selected.value, (current, prev) => {
       removeClass(prev)
       addClass(current)

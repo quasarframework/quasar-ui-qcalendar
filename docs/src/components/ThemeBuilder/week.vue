@@ -138,7 +138,7 @@ import {
   getDayTimeIdentifier,
   getDateTime,
   copyTimestamp
- } from '@quasar/quasar-ui-qcalendar/src/index.js'
+} from '@quasar/quasar-ui-qcalendar/src/index.js'
 import '@quasar/quasar-ui-qcalendar/src/index.sass'
 
 function leftClick (e) {
