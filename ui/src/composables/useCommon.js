@@ -93,7 +93,7 @@ export const useCommonProps = {
     // event, timestamp
   },
   selectedDates: {
-    type: Array,
+    type: [ Array, Set ],
     default: () => []
   },
   selectedStartEndDates: {
