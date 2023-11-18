@@ -143,7 +143,8 @@ export default defineComponent({
       ariaDateFormatter,
       // methods
       dayStyleDefault,
-      getRelativeClasses
+      getRelativeClasses,
+      selectedDatesPropArray
     } = useCommon(props, { startDate, endDate, times })
 
     const parsedValue = computed(() => {
@@ -923,7 +924,7 @@ export default defineComponent({
           'q-calendar-day__day-interval': interval.minute === 0,
           'q-calendar-day__day-interval--section': interval.minute !== 0,
           ...intervalClass,
-          ...getIntervalClasses(interval, Array.from(props.selectedDates), props.selectedStartEndDates),
+          ...getIntervalClasses(interval, selectedDatesPropArray.value, props.selectedStartEndDates),
           'q-calendar__hoverable': props.hoverable === true,
           'q-calendar__focusable': isFocusable === true
         },
