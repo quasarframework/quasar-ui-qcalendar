@@ -1,4 +1,3 @@
-
 <template>
   <div>
     <div class="q-gutter-sm q-mb-sm">

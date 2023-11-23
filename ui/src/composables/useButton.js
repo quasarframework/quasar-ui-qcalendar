@@ -1,11 +1,8 @@
 import { h } from 'vue'
 import useFocusHelper from './useFocusHelper.js'
 
-export default function (props, data, slotData) {
-  const isFocusable = props.focusable === true && props.focusType.includes('date') === true
-  data.tabindex = isFocusable === true ? 0 : -1
-  return h('button', data, [
-    slotData,
-    isFocusable === true && useFocusHelper()
-  ])
+export default function ({ focusable, focusType }, data, slotData) {
+  // Ensure the button is focusable based on props
+  const isFocusable = focusable && focusType.includes('date')
+  return h('button', { ...data, tabindex: isFocusable ? 0 : -1 }, [ slotData, isFocusable && useFocusHelper() ])
 }

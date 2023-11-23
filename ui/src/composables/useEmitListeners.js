@@ -1,26 +1,28 @@
 import { computed, getCurrentInstance } from 'vue'
 
+// look for events starting with 'on'
 const listenerRE = /^on[A-Z]/
 
 /**
- * export of default funtion
+ * Returns computed listeners on the current component instance.
  * @param {Vue.getCurrentInstance} [vm]
- * @returns {Object} computed listeners on the instance
+ * @returns {Object} Computed listeners on the instance.
  */
 export default function (vm = getCurrentInstance()) {
   return {
     emitListeners: computed(() => {
-      const acc = {}
+      const listeners = {}
 
-      if (vm.vnode !== void 0 && vm.vnode !== null && vm.vnode.props !== null) {
-        Object.keys(vm.vnode.props).forEach(key => {
-          if (listenerRE.test(key) === true) {
-            acc[ key ] = true
+      // Ensure vm.vnode is defined and has props before iterating
+      if (vm.vnode && vm.vnode.props) {
+        Object.keys(vm.vnode.props).forEach((key) => {
+          if (listenerRE.test(key)) {
+            listeners[ key ] = true
           }
         })
       }
 
-      return acc
-    })
+      return listeners
+    }),
   }
 }

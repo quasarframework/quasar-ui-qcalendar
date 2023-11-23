@@ -159,7 +159,7 @@ function extendHeading (md, tocData = [], toc = false, tocStart = 2, tocEnd = 3)
       const tokenNumber = parseInt(token.tag[ 1 ])
 
       if (tocStart && tocEnd && tocStart < tocEnd && tokenNumber >= tocStart && tokenNumber <= tocEnd) {
-        tocData.push({ id: id, label: label, level: tokenNumber, children: [] })
+        tocData.push({ id, label, level: tokenNumber, children: [] })
         // console.log(tocData)
       }
     }

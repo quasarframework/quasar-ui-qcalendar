@@ -1,9 +1,4 @@
-import {
-  computed,
-  defineComponent,
-  ref,
-  h
-} from 'vue'
+import { computed, defineComponent, ref, h } from 'vue'
 
 import QCalendarAgenda from './QCalendarAgenda.js'
 import QCalendarDay from './QCalendarDay.js'
@@ -27,8 +22,8 @@ export default defineComponent({
   props: {
     mode: {
       type: String,
-      validator: v=> [ 'day', 'month', 'agenda', 'resource', 'scheduler', 'task' ].includes(v),
-      default: 'day'
+      validator: (v) => [ 'day', 'month', 'agenda', 'resource', 'scheduler', 'task' ].includes(v),
+      default: 'day',
     },
     ...useCommonProps,
     ...useMonthProps,
@@ -39,26 +34,32 @@ export default defineComponent({
     ...useSchedulerProps,
     ...useResourceProps,
     ...useMaxDaysProps,
-    ...useTaskProps
+    ...useTaskProps,
   },
-  setup (props, { attrs, slots, expose }) {
+  setup(props, { attrs, slots, expose }) {
     const calendar = ref(null)
 
     const component = computed(() => {
       switch (props.mode) {
-        case 'agenda': return QCalendarAgenda
-        case 'resource':return QCalendarResource
-        case 'scheduler': return QCalendarScheduler
-        case 'month': return QCalendarMonth
-        case 'day': return QCalendarDay
-        case 'task': return QCalendarTask
+        case 'agenda':
+          return QCalendarAgenda
+        case 'resource':
+          return QCalendarResource
+        case 'scheduler':
+          return QCalendarScheduler
+        case 'month':
+          return QCalendarMonth
+        case 'day':
+          return QCalendarDay
+        case 'task':
+          return QCalendarTask
         case 'day':
         default:
           return QCalendarDay
       }
     })
 
-    function moveToToday () {
+    function moveToToday() {
       calendar.value.moveToToday()
     }
 
@@ -66,47 +67,47 @@ export default defineComponent({
       calendar.value.move(amount)
     }
 
-    function next (amount = 1) {
+    function next(amount = 1) {
       calendar.value.next(amount)
     }
 
-    function prev (amount = 1) {
+    function prev(amount = 1) {
       calendar.value.prev(amount)
     }
 
-    function updateCurrent () {
+    function updateCurrent() {
       calendar.value.updateCurrent()
     }
 
-    function timeStartPos (time, clamp = true) {
+    function timeStartPos(time, clamp = true) {
       return calendar.value.timeStartPos(time, clamp)
     }
 
-    function timeStartPosX (time, clamp = true) {
+    function timeStartPosX(time, clamp = true) {
       return calendar.value.timeStartPosX(time, clamp)
     }
 
-    function timeDurationWidth (minutes) {
+    function timeDurationWidth(minutes) {
       return calendar.value.timeDurationWidth(minutes)
     }
 
-    function timeDurationHeight (minutes) {
+    function timeDurationHeight(minutes) {
       return calendar.value.timeDurationHeight(minutes)
     }
 
-    function heightToMinutes (height) {
+    function heightToMinutes(height) {
       return calendar.value.heightToMinutes(height)
     }
-  
+
     function widthToMinutes(width) {
       return calendar.value.widthToMinutes(width)
     }
 
-    function scrollToTime (time) {
+    function scrollToTime(time) {
       return calendar.value.scrollToTime(time)
     }
 
-    function scrollToTimeX (time) {
+    function scrollToTimeX(time) {
       return calendar.value.scrollToTimeX(time)
     }
 
@@ -124,9 +125,9 @@ export default defineComponent({
       heightToMinutes,
       widthToMinutes,
       scrollToTime,
-      scrollToTimeX
+      scrollToTimeX,
     })
 
     return () => h(component.value, { ref: calendar, ...props, ...attrs }, slots)
-  }
+  },
 })
