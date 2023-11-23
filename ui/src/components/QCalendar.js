@@ -98,8 +98,8 @@ export default defineComponent({
       return calendar.value.heightToMinutes(height)
     }
   
-    function widthToMinutes (width) {
-      return calendar.value.widthToMinutes(minutes)
+    function widthToMinutes(width) {
+      return calendar.value.widthToMinutes(width)
     }
 
     function scrollToTime (time) {
