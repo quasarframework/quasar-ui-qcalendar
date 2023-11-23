@@ -32,19 +32,19 @@ export default function (props, renderFunc, { scrollArea, pane }) {
       : 0
   })
 
-  // function __initCalendar() {
-  //   //
-  // }
+  function __initCalendar() {
+    //
+  }
 
   function __renderCalendar() {
     const data = {
       ref: rootRef,
       role: 'complementary',
       lang: props.locale,
-      class: `q-calendar ${ props.dark ? 'q-calendar--dark' : '' } ${ props.bordered ? 'q-calendar__bordered' : '' }`,
+      class: `q-calendar ${props.dark ? 'q-calendar--dark' : ''} ${props.bordered ? 'q-calendar__bordered' : ''}`,
     }
 
-    return withDirectives(h('div', { ...data }, [renderFunc()]), [[ ResizeObserver, __onResize ]])
+    return withDirectives(h('div', { ...data }, [renderFunc()]), [[ResizeObserver, __onResize]])
   }
 
   return {
