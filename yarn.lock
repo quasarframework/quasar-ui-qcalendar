@@ -1554,7 +1554,7 @@
   integrity sha512-mNSwQ6wkIVoAemhYdLm9q/FVqLHmVONZgCYdLLeqpakKNsR0r/zHQnCngzdDaXI7veYEvE0uW1gJa1wdQsxXxA==
 
 "@quasar/quasar-ui-qcalendar@./ui":
-  version "4.0.0-beta.16"
+  version "4.0.0-beta.18"
 
 "@quasar/render-ssr-error@^1.0.1":
   version "1.0.2"
