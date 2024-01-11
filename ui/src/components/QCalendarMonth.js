@@ -135,7 +135,8 @@ export default defineComponent({
       ariaDateFormatter,
       // methods
       dayStyleDefault,
-      getRelativeClasses
+      getRelativeClasses,
+      selectedDatesPropArray
     } = useCommon(props, { startDate, endDate, times })
 
     const parsedValue = computed(() => {
@@ -660,7 +661,7 @@ export default defineComponent({
         class: {
           'q-calendar-month__day': true,
           ...dayClass,
-          ...getRelativeClasses(day, outside, props.selectedDates, props.selectedStartEndDates, props.hover),
+          ...getRelativeClasses(day, outside, selectedDatesPropArray.value, props.selectedStartEndDates, props.hover),
           'q-active-date': activeDate === true,
           disabled: props.enableOutsideDays !== true && outside === true,
           'q-calendar__hoverable': props.hoverable === true,
@@ -800,9 +801,9 @@ export default defineComponent({
       const dayBtnSlot = slots[ 'head-day-button' ]
 
       const selectedDate = (
-        props.selectedDates
-          && props.selectedDates.length > 0
-          && props.selectedDates.includes(day.date)
+        selectedDatesPropArray.value
+          && selectedDatesPropArray.value.length > 0
+          && selectedDatesPropArray.value.includes(day.date)
       )
 
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)

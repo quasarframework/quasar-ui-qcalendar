@@ -93,7 +93,7 @@ export const useCommonProps = {
     // event, timestamp
   },
   selectedDates: {
-    type: Array,
+    type: [ Array, Set ],
     default: () => []
   },
   selectedStartEndDates: {
@@ -225,6 +225,10 @@ export default function (props, {
     return undefined
   }
 
+  const selectedDatesPropArray = computed(() => {
+    return props.selectedDates !== null ? Array.from(props.selectedDates) : null
+  })
+
   return {
     weekdaySkips,
     parsedStart,
@@ -238,6 +242,7 @@ export default function (props, {
     getRelativeClasses,
     startOfWeek,
     endOfWeek,
-    dayStyleDefault
+    dayStyleDefault,
+    selectedDatesPropArray
   }
 }
