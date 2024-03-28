@@ -1,4 +1,6 @@
-import Vue from 'vue'
-import VuePlugin from '@quasar/quasar-ui-qcalendar'
+const { boot } = require("quasar/wrappers");
+const VuePlugin = require("@quasar/quasar-ui-qcalendar");
 
-Vue.use(VuePlugin)
+module.exports = boot(({ app }) => {
+  app.use(VuePlugin);
+});
