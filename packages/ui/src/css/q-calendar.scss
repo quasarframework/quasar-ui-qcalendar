@@ -29,10 +29,10 @@
     text-align: center;
     width: auto;
     height: auto;
-    min-height: 2.0em;
-    min-width: 2.0em;
+    min-height: 2em;
+    min-width: 2em;
     will-change: background;
-    transition: background .3s;
+    transition: background 0.3s;
 
     &--rounded {
       border-radius: 6px;
@@ -86,7 +86,7 @@
   }
 
   &__parent {
-    transition: transform .3s; // rotate
+    transition: transform 0.3s; // rotate
     border: solid currentColor;
     border-width: 0 2px 2px 0; // makes 2 sides of a square, then rotate 45% degrees
     display: inline-block;
@@ -108,7 +108,7 @@
 
   &__child {
     position: relative;
-    transition: max-height .28s linear;
+    transition: max-height 0.28s linear;
 
     &--expanded {
       max-height: 800px;
@@ -136,9 +136,12 @@
     pointer-events: none;
     border-radius: inherit;
     opacity: 0;
-    transition: background-color .3s cubic-bezier(.25,.8,.5,1), opacity .4s cubic-bezier(.25,.8,.5,1);
+    transition:
+      background-color 0.3s cubic-bezier(0.25, 0.8, 0.5, 1),
+      opacity 0.4s cubic-bezier(0.25, 0.8, 0.5, 1);
 
-    &:before, &:after {
+    &:before,
+    &:after {
       content: '';
       position: absolute;
       top: 0;
@@ -147,7 +150,9 @@
       height: 100%;
       opacity: 0;
       border-radius: inherit;
-      transition: background-color .3s cubic-bezier(.25,.8,.5,1), opacity .6s cubic-bezier(.25,.8,.5,1);
+      transition:
+        background-color 0.3s cubic-bezier(0.25, 0.8, 0.5, 1),
+        opacity 0.6s cubic-bezier(0.25, 0.8, 0.5, 1);
     }
 
     &:before {
@@ -170,12 +175,12 @@
   &__hoverable:hover {
     > .q-calendar__focus-helper {
       background: currentColor;
-      opacity: .15;
+      opacity: 0.15;
       &:before {
-        opacity: .1;
+        opacity: 0.1;
       }
       &:after {
-        opacity: .4;
+        opacity: 0.4;
       }
     }
   }
@@ -183,19 +188,23 @@
   &__focusable:focus,
   &__manual-focusable--focused {
     > .q-calendar__focus-helper {
-      opacity: .22;
+      opacity: 0.22;
     }
   }
 
-  .disabled, [disabled] {
-    &, * { // @stylint ignore
+  .disabled,
+  [disabled] {
+    &,
+    * {
+      // @stylint ignore
       outline: 0 !important;
       cursor: not-allowed !important;
     }
   }
 
-  .disabled, [disabled] {
-    opacity: .6 !important;
+  .disabled,
+  [disabled] {
+    opacity: 0.6 !important;
   }
 }
 
