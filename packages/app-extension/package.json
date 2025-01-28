@@ -4,6 +4,7 @@
   "description": "A Quasar App Extension for @quasar/quasar-ui-qcalendar",
   "author": "Jeff Galbraith <jeff@quasar.dev>",
   "license": "MIT",
+  "type": "module",
   "main": "src/index.js",
   "funding": {
     "type": "github",
