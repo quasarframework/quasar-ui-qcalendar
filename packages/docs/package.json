@@ -25,7 +25,7 @@
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.18.0",
+    "@eslint/js": "^9.19.0",
     "@md-plugins/md-plugin-blockquote": "0.1.0-alpha.23",
     "@md-plugins/md-plugin-codeblocks": "0.1.0-alpha.23",
     "@md-plugins/md-plugin-containers": "0.1.0-alpha.23",
@@ -44,11 +44,11 @@
     "@quasar/app-vite": "^2.0.8",
     "@quasar/quasar-ui-qcalendar": "workspace:*",
     "@types/markdown-it": "^14.1.2",
-    "@types/node": "^22.10.7",
+    "@types/node": "^22.12.0",
     "@vue/eslint-config-prettier": "^10.2.0",
     "@vue/eslint-config-typescript": "^14.3.0",
     "autoprefixer": "^10.4.20",
-    "eslint": "^9.18.0",
+    "eslint": "^9.19.0",
     "eslint-plugin-vue": "^9.32.0",
     "globals": "^15.14.0",
     "markdown-it": "^14.1.0",

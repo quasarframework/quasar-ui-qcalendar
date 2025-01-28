@@ -33,7 +33,7 @@
     "schedule"
   ],
   "dependencies": {
-    "@quasar/quasar-ui-qcalendar": "^4.0.3"
+    "@quasar/quasar-ui-qcalendar": "^4.0.5"
   },
   "engines": {
     "node": "^28 || ^26 || ^24 || ^22 || ^20 || ^18",
