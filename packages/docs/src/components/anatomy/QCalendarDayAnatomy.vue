@@ -9,6 +9,7 @@
           v-for="type in types"
           :key="type.name"
           clickable
+          v-ripple
           :active="selected.name === type.name"
           @click="updateSelection(type)"
         >
