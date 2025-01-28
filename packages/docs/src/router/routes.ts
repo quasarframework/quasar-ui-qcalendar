@@ -6,6 +6,10 @@ import { slugify } from '@md-plugins/shared'
 
 const routes = [
   {
+    path: '/theme-builder',
+    component: () => import('layouts/ThemeBuilder.vue'),
+  },
+  {
     path: '/',
     component: () => import('src/.q-press/layouts/MarkdownLayout.vue'),
     children: [

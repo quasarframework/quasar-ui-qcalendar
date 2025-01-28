@@ -17,95 +17,90 @@
   </q-dialog>
 </template>
 
-<script>
-import { useThemeBuilderStore } from 'assets/theme-builder-store.js'
+<script setup lang="ts">
+import { ref, computed, watch, onBeforeMount } from 'vue'
+import { useQuasar } from 'quasar'
+import { useThemeBuilderStore } from 'stores/ThemeBuilder'
 
-export default {
-  name: 'ThemeImporter',
+interface Props {
+  modelValue: boolean
+}
 
-  props: {
-    modelValue: Boolean,
+const props = defineProps<Props>()
+const emit = defineEmits(['update:model-value'])
+
+const $q = useQuasar()
+const openImporter = ref(false)
+const editorValue = ref('')
+const stylesCopy = ref<any>(void 0)
+const store = useThemeBuilderStore()
+
+const classes = computed(() => {
+  return {
+    'column items-center q-pa-md': true,
+    'bg-grey-11': !$q.dark.isActive,
+    'bg-grey-9': $q.dark.isActive,
+  }
+})
+
+watch(
+  () => props.modelValue,
+  () => {
+    openImporter.value = props.modelValue
+    // clear anything existing
+    editorValue.value = ''
+    stylesCopy.value = void 0
   },
+)
 
-  emits: ['update:model-value'],
+watch(openImporter, (val) => {
+  emit('update:model-value', val)
+})
 
-  data() {
-    return {
-      openImporter: false,
-      editorValue: '',
-      stylesCopy: void 0,
-      store: useThemeBuilderStore(),
+function setStyle({ name, styles }: { name: string; styles: any }) {
+  setCurrentStyleName(name)
+  Object(store.style).splice(0, Object.keys(store.style).length, ...styles)
+}
+
+function setCurrentStyleName(name: string) {
+  store.currentStyleName = name
+}
+
+onBeforeMount(() => {
+  openImporter.value = props.modelValue
+})
+
+function onImport() {
+  // make a copy
+  stylesCopy.value = JSON.parse(JSON.stringify(store.style))
+
+  let newStyles
+
+  try {
+    newStyles = JSON.parse(editorValue.value)
+  } catch (e) {
+    if (e instanceof Error) {
+      console.error(e.message)
     }
-  },
+    return
+  }
 
-  computed: {
-    classes() {
-      return {
-        'column items-center q-pa-md': true,
-        'bg-grey-11': this.$q.dark.isActive === false,
-        'bg-grey-9': this.$q.dark.isActive === true,
+  if (newStyles) {
+    Object.keys(newStyles).forEach((name) => {
+      // make sure there is a corresponding name in styles
+      // and if a match, only then import
+      if (store.style[name] !== void 0) {
+        setStyle({ name, styles: newStyles[name] })
       }
-    },
-  },
+    })
+  }
+}
 
-  watch: {
-    modelValue(/*val*/) {
-      this.openImporter = this.modelValue
-      // clear anything existing
-      this.editorValue = ''
-      this.stylesCopy = void 0
-    },
-
-    openImporter(val) {
-      this.$emit('update:model-value', val)
-    },
-
-    setStyle({ name, styles }) {
-      this.setCurrentStyleName(name)
-      Object(this.store.style).splice(0, Object.keys(this.store.style).length, ...styles)
-    },
-
-    setCurrentStyleName(name) {
-      this.store.currentStyleName = name
-    },
-  },
-
-  beforeMount() {
-    this.openImporter = this.modelValue
-  },
-
-  methods: {
-    onImport() {
-      // make a copy
-      this.stylesCopy = JSON.parse(JSON.stringify(this.store.style))
-
-      let newStyles
-
-      try {
-        newStyles = JSON.parse(this.editorValue)
-      } catch (e) {
-        console.error(e.message)
-        return
-      }
-
-      if (newStyles) {
-        Object.keys(newStyles).forEach((name) => {
-          // make sure there is a corresponding name in styles
-          // and if a match, only then import
-          if (this.store.style[name] !== void 0) {
-            this.setStyle({ name, styles: newStyles[name] })
-          }
-        })
-      }
-    },
-
-    onRevert() {
-      if (this.stylesCopy !== void 0) {
-        Object.keys(this.stylesCopy).forEach((name) => {
-          this.setStyle({ name, styles: this.stylesCopy[name] })
-        })
-      }
-    },
-  },
+function onRevert() {
+  if (stylesCopy.value !== void 0) {
+    Object.keys(stylesCopy.value).forEach((name) => {
+      setStyle({ name, styles: stylesCopy.value[name] })
+    })
+  }
 }
 </script>

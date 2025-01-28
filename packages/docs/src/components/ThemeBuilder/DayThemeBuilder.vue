@@ -56,76 +56,79 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
+import { ref, computed, watch, onBeforeMount } from 'vue'
 import { QCalendarDay } from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
-export default {
-  name: 'ThemeBuilderDay',
-  components: {
-    QCalendarDay,
-  },
-  props: {
-    modelValue: String,
-    styles: Object,
-  },
-  data() {
-    return {
-      selectedDate: '',
-      noActiveDate: false,
-      intervalRange: { min: 0, max: 24 },
-      intervalRangeStep: 1,
-      intervalHeight: 20,
-    }
-  },
-  computed: {
-    leftLabelRange() {
-      const a = Math.floor(this.intervalRange.min)
-      const b = Number((this.intervalRange.min % 1).toFixed(2))
-      const c = 60 * b
-      return a + ':' + (c < 10 ? c + '0' : c)
-    },
-    rightLabelRange() {
-      const a = Math.floor(this.intervalRange.max)
-      const b = Number((this.intervalRange.max % 1).toFixed(2))
-      const c = 60 * b
-      return a + ':' + (c < 10 ? c + '0' : c)
-    },
-    intervalStart() {
-      return this.intervalRange.min * (1 / this.intervalRangeStep)
-    },
-    intervalCount() {
-      return (this.intervalRange.max - this.intervalRange.min) * (1 / this.intervalRangeStep)
-    },
-  },
-  watch: {
-    modelValue(val) {
-      this.selectedDate = val
-    },
-    intervalRangeStep(val) {
-      // normalize min/max values according to the step value
-      const calcMin = (range) => {
-        const b = Number((range % 1).toFixed(2))
-        const c = b % val
-        if (c > 0) {
-          return range + c
-        }
-        return range
-      }
-      const calcMax = (range) => {
-        const b = Number((range % 1).toFixed(2))
-        const c = b % val
-        if (c > 0) {
-          return range - c
-        }
-        return range
-      }
-      this.intervalRange.min = calcMin(this.intervalRange.min)
-      this.intervalRange.max = calcMax(this.intervalRange.max)
-    },
-  },
-  beforeMount() {
-    this.selectedDate = this.modelValue
-  },
+interface Props {
+  modelValue: string
+  styles: Record<string, any>
 }
+
+const props = defineProps<Props>()
+
+const selectedDate = ref('')
+const noActiveDate = ref(false)
+const intervalRange = ref({ min: 0, max: 24 })
+const intervalRangeStep = ref(1)
+const intervalHeight = ref(20)
+
+const leftLabelRange = computed(() => {
+  const a = Math.floor(intervalRange.value.min)
+  const b = Number((intervalRange.value.min % 1).toFixed(2))
+  const c = 60 * b
+  return a + ':' + (c < 10 ? c + '0' : c)
+})
+
+const rightLabelRange = computed(() => {
+  const a = Math.floor(intervalRange.value.max)
+  const b = Number((intervalRange.value.max % 1).toFixed(2))
+  const c = 60 * b
+  return a + ':' + (c < 10 ? c + '0' : c)
+})
+
+const intervalStart = computed(() => {
+  return intervalRange.value.min * (1 / intervalRangeStep.value)
+})
+
+const intervalCount = computed(() => {
+  return (intervalRange.value.max - intervalRange.value.min) * (1 / intervalRangeStep.value)
+})
+
+watch(
+  () => props.modelValue,
+  (val) => {
+    selectedDate.value = val
+  },
+)
+
+watch(
+  () => intervalRangeStep.value,
+  (val) => {
+    // normalize min/max values according to the step value
+    const calcMin = (range: number) => {
+      const b = Number((range % 1).toFixed(2))
+      const c = b % val
+      if (c > 0) {
+        return range + c
+      }
+      return range
+    }
+    const calcMax = (range: number) => {
+      const b = Number((range % 1).toFixed(2))
+      const c = b % val
+      if (c > 0) {
+        return range - c
+      }
+      return range
+    }
+    intervalRange.value.min = calcMin(intervalRange.value.min)
+    intervalRange.value.max = calcMax(intervalRange.value.max)
+  },
+)
+
+onBeforeMount(() => {
+  selectedDate.value = props.modelValue
+})
 </script>
