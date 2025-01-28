@@ -129,7 +129,7 @@ The emitted `change` event has changed. The passed object still contains `start`
 - Also be aware, that for drag and drop to work correctly, both `drag-enter-func` and `drag-over-func` need to call `preventDefault` on the passed in event to prevent default handling by the browser.
 - css classes ending in `--droppable` have been removed.
 
-### Other
+### New Changes Other
 
 - For QCalendarMonth there is no longer a set minimum height of 5.0em. Use the new property `day-min-height` to control the minimum height of a day cell. And, also remember that if `day-height` is set to `"0"` then the height will automatically grow according to the content, otherwise if `day-height` is set to anything other than `"0"` the height of a day cell will be fixed.
 - For QCalendarResource and QCalendarScheduler there is no longer a `resource-width` property. Instead, use the css variable `--calendar-resources-width`.
@@ -150,11 +150,11 @@ The emitted `change` event has changed. The passed object still contains `start`
   This image will explain the QCalendarDay alignment:
   ![image](https://user-images.githubusercontent.com/10262924/103442538-3eb46a00-4c14-11eb-9278-43e3aacc0e76.png)
 - new `use-navigation` property turns on keyboard focus navigation. This takes into account weekday skips (ie: weekdays not being displayed). **TIP**: use with `no-active-date` for better visual UX and `focusable` for visual acuity.
-  1. QCalendarMonth: `left` navigates to previous day, `right` navigates to next day, `up` takes you to previous week, `down` navigates to next week, `home` navigates to start of month, `end` navigates to end of month, `pgUp` navigates to previous month and `pgDown` navigates to next month.
+  1. QCalendarMonth: <kbd>left</kbd> navigates to previous day, <kbd>right</kbd> navigates to next day, <kbd>up</kbd> takes you to previous week, <kbd>down</kbd> navigates to next week, <kbd>home</kbd> navigates to start of month, <kbd>end</kbd> navigates to end of month, <kbd>pgUp</kbd> navigates to previous month and <kbd>pgDown</kbd> navigates to next month.
   2. QCalendarDay is a bit more complicated. There is both weekday navigation and interval navigation [wip]. When focused on a weekday:
-     - view="day": `left` navigates to previous day and `right` navigates to next day. `home`, `end`, `pgUp` and `pgDown` have no meaning.
-     - view="week": `left` navigates to previous day, `right` navigates to next day, `home` navigates to the beginning of the week and `end` navigates to the end of the week.
-     - view="month-interval": `left` navigates to previous day, `right` navigates to next day, `home` navigates to the beginning of the month and `end` navigates to the end of the month.
+     - view="day": <kbd>left</kbd> navigates to previous day and <kbd>right</kbd> navigates to next day. <kbd>home</kbd>, <kbd>end</kbd>, <kbd>pgUp</kbd> and <kbd>pgDown</kbd> have no meaning.
+     - view="week": <kbd>left</kbd> navigates to previous day, <kbd>right</kbd> navigates to next day, <kbd>home</kbd> navigates to the beginning of the week and <kbd>end</kbd> navigates to the end of the week.
+     - view="month-interval": <kbd>left</kbd> navigates to previous day, <kbd>right</kbd> navigates to next day, <kbd>home</kbd> navigates to the beginning of the month and <kbd>end</kbd> navigates to the end of the month.
 - All calendars have additional drag and drop functionality (as props). They are: `drag-enter-func`, `drag-over-func`, `drag-leave-func` and `drop-func`. The arguments are specific for the drag and drop operations, so look them up in the API docs. Each function should return a boolean (true/false) as to whether the item (day, interval, etc) should receive a `droppable` flag in the scoped object. This is handy when using one of the styling classes (ie: `dayClass`) to visually modify the calendar cell when an item can be dropped.
 - `month-label-size` in QCalendarMonth has additional values added: `xxs` and `xxl`. The values now are as follows: `xxs`='.4em', `xs`='.6em', `sm`='.8em', `md`='1.0em', `lg`='1.2em', `xl`='1.4em' and `xxl`='1.6em'. As well, you can pass in your own value (ex: '0.75em', '11px', etc)
 - `breakpoint` property values are as follows: `xs`='300', `sm`='350', `md`='400', `lg`='450' and `xl`='500'. As well, you can pass in your own value as long as it is a number which will be used as pixels.
@@ -171,7 +171,7 @@ The emitted `change` event has changed. The passed object still contains `start`
 - The `change` event now has an array of associated `days`
 - QCalendarScheduler new event `resource-expanded` emits an object containing `expanded` (Boolean) and `scope` (resource, days, resourceIndex, indentLevel, label). This is emitted on hierarchical parents when the side chevron is clicked.
 
-### Other
+### New Functionality Other
 
 - There is a new look for calendars that have scrollbars (not Firefox, it will still have default scrollbars).
 - The top-level calendar `div` now gets the [`lang` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang) based on the passed in `locale` property (default: `en-US`). This allows all descendants to word-break appropriately, by the browser, based on the language.

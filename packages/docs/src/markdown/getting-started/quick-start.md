@@ -130,25 +130,25 @@ The active date is changed when the user clicks on a date or navigates using pre
 
 This property is an Array of dates in the format `YYYY-MM-DD`.
 
-| Property      | Type  | Example |
-| ------------- | ----- | ------- |
-| disabled-days | Array |         |
+| Property      | Type  | Example                        |
+| ------------- | ----- | ------------------------------ |
+| disabled-days | Array | "['2019-04-01', '2019-04-02']" |
 
 ### Disabled before
 
 This property is a date String in the format `YYYY-MM-DD`. Any date before this date, including the given date, will be disabled.
 
-| Property        | Type   | Example    |
-| --------------- | ------ | ---------- |
-| disabled-before | String | YYYY-MM-DD |
+| Property        | Type   | Example      |
+| --------------- | ------ | ------------ |
+| disabled-before | String | '2019-04-01' |
 
 ### Disabled after
 
 This property is a date String in the format `YYYY-MM-DD`. Any date after this date, including the given date, will be disabled.
 
-| Property       | Type   | Example    |
-| -------------- | ------ | ---------- |
-| disabled-after | String | YYYY-MM-DD |
+| Property       | Type   | Example      |
+| -------------- | ------ | ------------ |
+| disabled-after | String | '2019-04-01' |
 
 ### Disabled weekdays
 
