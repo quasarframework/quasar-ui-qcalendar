@@ -1,4 +1,5 @@
 .q-calendar-month {
+  position: relative;
   display: flex;
   flex: 1 0 100%;
   flex-direction: column;
@@ -61,10 +62,10 @@
   }
 
   &__body {
+    position: relative;
     flex: 1 1 auto;
     overflow: hidden;
     display: flex;
-    position: relative;
     flex-direction: column;
   }
 
@@ -149,6 +150,7 @@
     }
 
     &--month {
+      position: relative;
       text-decoration: none;
       user-select: none;
       padding: 1px;
@@ -158,6 +160,7 @@
     }
 
     &--day-of-year {
+      position: relative;
       text-decoration: none;
       user-select: none;
       box-shadow: none;
