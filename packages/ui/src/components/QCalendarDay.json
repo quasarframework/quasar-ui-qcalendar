@@ -33,22 +33,6 @@
       "applicable": [
         "day"
       ]
-    },
-    "column-count": {
-      "type": [
-        "Number",
-        "String"
-      ],
-      "category": "behavior",
-      "desc": "Applicable only for day view. Show the same day x number of times in columns. Scoped slots get this data as index in passed object",
-      "default": "1",
-      "applicable": [
-        "day"
-      ],
-      "examples": [
-        "3",
-        "'5'"
-      ]
     }
   },
   "events": {},

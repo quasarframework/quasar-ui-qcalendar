@@ -5,11 +5,12 @@
         "Number",
         "String"
       ],
-      "desc": "Number of columns to display",
+      "desc": "Number of columns to display. Applicable only for day view. Show the same day x number of times in columns. Scoped slots get this data as index in passed object",
       "category": "behavior",
       "default": "0",
       "examples": [
-        "3"
+        "3",
+        "'5'"
       ]
     },
     "column-index-start": {

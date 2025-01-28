@@ -27,7 +27,8 @@
         "'month'",
         "'week-agenda'"
       ],
-      "default": "'day'"
+      "default": "'day'",
+      "__runtimeDefault": true
     },
     "short-interval-label": {
       "type": "Boolean",

@@ -8,7 +8,8 @@
     "composables/private.useInterval",
     "composables/private.useMaxDays",
     "composables/private.useTimes",
-    "composables/private.useScheduler"
+    "composables/private.useScheduler",
+    "composables/private.useResource"
   ],
   "meta": {
     "docsUrl": "https://qcalendar.netlify.app/developing/qcalendar-scheduler"

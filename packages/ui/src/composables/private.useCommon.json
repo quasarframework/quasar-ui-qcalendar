@@ -585,6 +585,18 @@
       "category": "model",
       "desc": "An array of string dates in the form `YYYY-MM-DD` that will be selected. Interval-based calendars use `YYYY-MM-DD HH:mm`",
       "default": "[]",
+      "applicable": [
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month",
+        "month-interval",
+        "custom-interval"
+      ],
       "examples": [
         "['2019-04-01', '2019-04-02', '2019-04-03', '2019-04-04']",
         "['2019-04-01 13:00', '2019-04-01 13:15', '2019-04-01 13:30', '2019-04-01 13:45']"
@@ -596,6 +608,18 @@
       "category": "behavior",
       "desc": "An array of two dates in format `YYYY-MM-DD` for selection purposes. Interval-based calendars use `YYYY-MM-DD HH:mm`",
       "default": "[]",
+      "applicable": [
+        "day",
+        "2day",
+        "3day",
+        "4day",
+        "5day",
+        "6day",
+        "week",
+        "month",
+        "month-interval",
+        "custom-interval"
+      ],
       "examples": [
         "['2023-01-01', '2023-01-07']",
         "['2023-02-01', '2023-02-28']"
