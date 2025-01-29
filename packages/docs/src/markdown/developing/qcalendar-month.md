@@ -98,4 +98,6 @@ The current date has been set to tomorrow via the `now` property.
 
 <MarkdownExample title="Theme" file="MonthTheme" no-github no-edit/>
 
+<MarkdownExample title="Transitions" file="MonthTransitions" no-github no-edit/>
+
 <MarkdownExample title="Workweeks" file="MonthWorkweeks" no-github no-edit/>

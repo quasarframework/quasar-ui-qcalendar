@@ -159,3 +159,5 @@ You might have to scroll down to the current time to see the example working.
 <MarkdownExample title="Slot - Head Intervals" file="DaySlotHeadIntervals" no-github no-edit/>
 
 <MarkdownExample title="Theme" file="DayTheme" no-github no-edit/>
+
+<MarkdownExample title="Transitions" file="DayTransitions" no-github no-edit/>

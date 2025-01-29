@@ -135,3 +135,5 @@ You can click the `head-day-event` badges which will call the calendar's `scroll
 <MarkdownExample title="Slot - Head Intervals" file="WeekSlotHeadIntervals" no-github no-edit/>
 
 <MarkdownExample title="Theme" file="WeekTheme" no-github no-edit/>
+
+<MarkdownExample title="Transitions" file="WeekTransitions" no-github no-edit/>

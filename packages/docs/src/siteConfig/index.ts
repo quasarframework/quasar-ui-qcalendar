@@ -202,6 +202,7 @@ const examplesMenu = {
         { name: 'Now', path: '/examples/agenda/now' },
         { name: 'Planner', path: '/examples/agenda/planner' },
         { name: 'Theme', path: '/examples/agenda/theme' },
+        { name: 'Transitions', path: '/examples/agenda/transitions' },
       ],
     },
     {
@@ -246,6 +247,7 @@ const examplesMenu = {
         { name: 'Slot Head Day Event', path: '/examples/day/slot-head-day-event' },
         { name: 'Slot Head Intervals', path: '/examples/day/slot-head-intervals' },
         { name: 'Theme', path: '/examples/day/theme' },
+        { name: 'Transitions', path: '/examples/day/transitions' },
       ],
     },
     {
@@ -313,6 +315,7 @@ const examplesMenu = {
         { name: 'Slot Day Holidays', path: '/examples/month/slot-day-holidays' },
         { name: 'Slot Week', path: '/examples/month/slot-week' },
         { name: 'Theme', path: '/examples/month/theme' },
+        { name: 'Transitions', path: '/examples/month/transitions' },
         { name: 'Workweeks', path: '/examples/month/workweeks' },
       ],
     },

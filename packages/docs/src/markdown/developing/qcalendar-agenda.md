@@ -66,6 +66,8 @@ The current date has been set to tomorrow via the `now` property.
 
 <MarkdownExample title="Theme" file="AgendaTheme" no-github no-edit/>
 
+<MarkdownExample title="Transitions" file="AgendaTransitions" no-github no-edit/>
+
 This is a rudimentary Planner using QCalendarAgenda.
 
 ::: tip
