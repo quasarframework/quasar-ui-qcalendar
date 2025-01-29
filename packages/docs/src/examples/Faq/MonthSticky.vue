@@ -113,8 +113,10 @@ function onNext() {
 // does not affect all your calendars
 .my-sticky {
   .q-calendar {
+    overflow: unset !important;
+
     .q-calendar-month {
-      position: relative;
+      //position: relative;
 
       .q-calendar-month__head {
         position: sticky !important;

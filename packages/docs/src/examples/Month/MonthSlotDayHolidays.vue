@@ -18,7 +18,7 @@
     </div>
 
     <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap">
-      <div style="font-size: 2em">{{ formattedMonth }}</div>
+      <div class="q-ma-md" style="font-size: 2em">{{ formattedMonth }}</div>
     </div>
 
     <div class="row justify-center">

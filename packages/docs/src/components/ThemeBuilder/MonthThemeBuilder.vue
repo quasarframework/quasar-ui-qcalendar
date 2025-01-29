@@ -18,6 +18,9 @@
         view="month"
         locale="en-US"
         bordered
+        focusable
+        hoverable
+        :focusType="['day']"
         :no-active-date="noActiveDate"
         :selected-start-end-dates="startEndDates"
         :selected-dates="selectedDates"
