@@ -3,6 +3,13 @@ import { QBadge, QBtn, Notify, QBtnToggle } from 'quasar'
 import { copyToClipboard } from './markdown-utils'
 import { mdiMinusBox, mdiPlusBox } from '@quasar/extras/mdi-v7'
 
+/**
+ * This function copies a given property name to the clipboard.
+ * It also displays a notification to the user confirming the successful copy.
+ *
+ * @param propName - The name of the property to be copied.
+ * @returns {void} - This function does not return any value.
+ */
 function copyPropName(propName: string): void {
   copyToClipboard(propName)
 
@@ -14,6 +21,16 @@ function copyPropName(propName: string): void {
   })
 }
 
+/**
+ * Generates a string representation of event parameters for a given event object.
+ *
+ * @param event - An object containing event information.
+ * @param event.params - An optional record of parameter names and their corresponding types.
+ *                       If undefined, null, or empty, an empty string is used for parameters.
+ *
+ * @returns A string representation of the event parameters in the format "(param1, param2, ...) => void".
+ *          If no parameters are present, it returns "() => void".
+ */
 function getEventParams(event: { params?: Record<string, any> | null }): string {
   const params =
     event.params === void 0 || event.params === null || event.params.length === 0
@@ -23,6 +40,21 @@ function getEventParams(event: { params?: Record<string, any> | null }): string 
   return `(${params}) => void`
 }
 
+/**
+ * Generates a string representation of method parameters.
+ *
+ * This function takes a method object and an optional flag to determine how to format the parameters.
+ * It handles cases where there are no parameters, all parameters are required, or there's a mix of required and optional parameters.
+ *
+ * @param method - An object containing information about the method.
+ * @param method.params - A record of parameter names and their corresponding details. Can be undefined, null, or empty.
+ * @param noRequired - A boolean flag. If true, all parameters are treated as required. If false or undefined, the function distinguishes between required and optional parameters.
+ *
+ * @returns A string representation of the method parameters enclosed in parentheses.
+ *          - Returns " ()" if there are no parameters.
+ *          - If noRequired is true, returns all parameters joined by commas.
+ *          - If noRequired is false or undefined, optional parameters are suffixed with "?".
+ */
 function getMethodParams(
   method: { params?: Record<string, any> | null },
   noRequired?: boolean,
@@ -51,6 +83,18 @@ function getMethodParams(
   return ' (' + str + ')'
 }
 
+/**
+ * Generates a string representation of a method's return value.
+ *
+ * @param method - An object containing information about the method.
+ * @param method.returns - An optional object containing the return type information.
+ *                         If undefined or null, the method is considered to return void.
+ * @param method.returns.type - The type of the return value.
+ *
+ * @returns A string representation of the method's return value,
+ *          prefixed with " => ". If no return value is specified,
+ *          it returns " => void".
+ */
 function getMethodReturnValue(method: { returns?: { type: any } | null }): string {
   return (
     ' => ' +
@@ -60,6 +104,12 @@ function getMethodReturnValue(method: { returns?: { type: any } | null }): strin
   )
 }
 
+/**
+ * Converts a type value to its string representation.
+ *
+ * @param type - The type value to convert. Can be an array of types or a single type.
+ * @returns A string representation of the type. If the input is an array, it joins the types with ' | '.
+ */
 function getStringType(type: any): string {
   return Array.isArray(type) ? type.join(' | ') : type
 }
@@ -67,13 +117,35 @@ function getStringType(type: any): string {
 const NAME_PROP_COLOR = ['orange-8', 'brand-primary', 'green-5', 'purple-5']
 const NAME_PROP_COLOR_LEN = NAME_PROP_COLOR.length
 
+/**
+ * Creates a div element with specific classes and content for use in a markdown API entry.
+ *
+ * @param col - The number of columns the div should span on small screens and above.
+ * @param propName - The name of the property to be displayed in the div.
+ * @param propValue - Optional. The value of the property to be displayed. If undefined, the slot will be used instead.
+ * @param slot - Optional. A slot to be used for custom content when propValue is undefined.
+ * @returns A VNode representing the created div element.
+ */
 function getDiv(col: number, propName: string, propValue?: string, slot?: any): VNode {
   return h('div', { class: `markdown-api-entry__item col-xs-12 col-sm-${col}` }, [
     h('div', { class: 'markdown-api-entry__type' }, propName),
-    propValue !== void 0 ? h('div', { class: 'markdown-api-entry__value' }, propValue) : slot,
+    propValue !== void 0
+      ? h('div', { class: 'markdown-api-entry__value' }, parseForInlineCode(propValue))
+      : slot,
   ])
 }
 
+/**
+ * Creates a div element representing a name entry in the markdown API documentation.
+ * This function generates a complex div structure with badges and labels for API properties.
+ *
+ * @param prop - An object containing property information. It may include 'required' and 'addedIn' fields.
+ * @param label - The main text label for the property.
+ * @param level - A number indicating the nesting level of the property, used for color selection.
+ * @param suffix - Optional. Additional text to be appended after the main label.
+ * @param prefix - Optional. Text to be prepended before the main label.
+ * @returns A VNode representing the constructed div element for the name entry.
+ */
 function getNameDiv(
   prop: any,
   label: string,
@@ -116,6 +188,20 @@ function getNameDiv(
   return h('div', { class: 'markdown-api-entry__item col-xs-12 col-sm-12 row items-center' }, child)
 }
 
+/**
+ * Creates an expandable section for API documentation.
+ *
+ * This function generates a VNode array representing an expandable section
+ * in the API documentation. It includes a description and, if expandable,
+ * a toggle button to show/hide additional details.
+ *
+ * @param openState - A reactive reference to an object tracking the open state of expandable sections.
+ * @param desc - The description text to be displayed.
+ * @param isExpandable - A boolean indicating whether the section should be expandable.
+ * @param key - A unique key for this expandable section, used to track its open state.
+ * @param getDetails - A function that returns an array of additional details to be shown when expanded.
+ * @returns An array of VNodes representing the expandable section.
+ */
 function getExpandable(
   openState: Ref<Record<string, boolean>>,
   desc: string,
@@ -140,7 +226,7 @@ function getExpandable(
             },
           }),
         ]),
-        h('div', { class: 'markdown-api-entry__value' }, desc),
+        h('div', { class: 'markdown-api-entry__value' }, parseForInlineCode(desc)),
       ]),
     ]
 
@@ -150,6 +236,39 @@ function getExpandable(
   }
 }
 
+/**
+ * Parses a string for inline code segments and converts them into VNodes with special styling.
+ *
+ * This function splits the input string by backticks and creates VNodes for code segments.
+ * Text outside of backticks is left as plain strings.
+ *
+ * @param code - The input string containing potential inline code segments delimited by backticks.
+ * @returns An array of VNodes and strings, where code segments are wrapped in styled span elements.
+ */
+function parseForInlineCode(code: string) {
+  const parts = code.split(/(`[^`]+`)/g)
+  return parts.map((part) => {
+    if (part.startsWith('`') && part.endsWith('`')) {
+      return h('span', { class: 'markdown-token' }, part.slice(1, -1))
+    } else {
+      return part
+    }
+  })
+}
+
+/**
+ * Generates detailed property information for API documentation.
+ *
+ * This function creates a series of VNodes that represent various aspects of a property,
+ * including its synchronization status, default value, external links, accepted values,
+ * nested properties, parameters, return types, scope, and examples.
+ *
+ * @param openState - A reactive reference to an object tracking the open state of expandable sections.
+ * @param masterKey - A unique identifier for the property, used in generating child keys.
+ * @param prop - The property object containing all the details to be displayed.
+ * @param level - The nesting level of the property, used for styling and indentation.
+ * @returns An array of VNodes representing the detailed property information.
+ */
 function getPropDetails(
   openState: Ref<Record<string, boolean>>,
   masterKey: string,
@@ -261,6 +380,21 @@ function getPropDetails(
   return details
 }
 
+/**
+ * Generates VNodes for a property in the API documentation.
+ *
+ * This function creates a detailed representation of a property, including its name,
+ * type, description, and any additional details. It handles configuration toggles,
+ * expandable sections, and nested properties.
+ *
+ * @param openState - A reactive reference to an object tracking the open state of expandable sections.
+ * @param masterKey - A unique identifier for the property, used in generating child keys.
+ * @param prop - The property object containing all the details to be displayed.
+ * @param propName - The name of the property. If undefined, the property is treated as a nested or unnamed property.
+ * @param level - The nesting level of the property, used for styling and indentation.
+ * @param onlyChildren - If true, only child elements are returned without wrapping them in a container.
+ * @returns An array of VNodes representing the property and its details.
+ */
 function getProp(
   openState: Ref<Record<string, boolean>>,
   masterKey: string,
@@ -331,6 +465,18 @@ describe.props = describePropsLike('props')
 describe.computedProps = describePropsLike('computedProps')
 describe.slots = describePropsLike('slots')
 
+/**
+ * Generates VNodes for event descriptions in the API documentation.
+ *
+ * This function creates a detailed representation of events, including their names,
+ * parameters, and descriptions. It handles expandable sections for each event
+ * and generates child elements for event parameters.
+ *
+ * @param openState - A reactive reference to an object tracking the open state of expandable sections.
+ * @param events - An object containing event definitions. Each key is an event name,
+ *                 and the value is an object describing the event.
+ * @returns An array of VNodes representing the events and their details.
+ */
 describe.events = (openState: Ref<Record<string, boolean>>, events: any): VNode[] => {
   const child: VNode[] = []
 
@@ -375,6 +521,18 @@ describe.events = (openState: Ref<Record<string, boolean>>, events: any): VNode[
   return child
 }
 
+/**
+ * Generates VNodes for method descriptions in the API documentation.
+ *
+ * This function creates a detailed representation of methods, including their names,
+ * parameters, return types, and descriptions. It handles expandable sections for each method
+ * and generates child elements for method parameters and return values.
+ *
+ * @param openState - A reactive reference to an object tracking the open state of expandable sections.
+ * @param methods - An object containing method definitions. Each key is a method name,
+ *                  and the value is an object describing the method.
+ * @returns An array of VNodes representing the methods and their details.
+ */
 describe.methods = (openState: Ref<Record<string, boolean>>, methods: any) => {
   const child: VNode[] = []
 
@@ -440,6 +598,20 @@ describe.methods = (openState: Ref<Record<string, boolean>>, methods: any) => {
   return child
 }
 
+/**
+ * Generates VNodes for describing a value in the API documentation.
+ *
+ * This function creates a detailed representation of a value, including its type
+ * and any additional properties. It uses the 'getDiv' and 'getProp' helper functions
+ * to generate the necessary VNodes.
+ *
+ * @param openState - A reactive reference to an object tracking the open state of expandable sections.
+ *                    This is used to manage the state of collapsible content.
+ * @param value - An object containing the details of the value to be described.
+ *                It should include at least a 'type' property.
+ * @returns An array of VNodes representing the value description, wrapped in a div
+ *          with the class 'markdown-api-entry row'.
+ */
 describe.value = (openState: Ref<Record<string, boolean>>, value: any): VNode[] => {
   return [
     h(
@@ -452,6 +624,20 @@ describe.value = (openState: Ref<Record<string, boolean>>, value: any): VNode[] 
   ]
 }
 
+/**
+ * Generates VNodes for describing an argument in the API documentation.
+ *
+ * This function creates a detailed representation of an argument, including its type
+ * and any additional properties. It uses the 'getDiv' and 'getProp' helper functions
+ * to generate the necessary VNodes.
+ *
+ * @param openState - A reactive reference to an object tracking the open state of expandable sections.
+ *                    This is used to manage the state of collapsible content.
+ * @param arg - An object containing the details of the argument to be described.
+ *              It should include at least a 'type' property.
+ * @returns An array containing a single VNode representing the argument description,
+ *          wrapped in a div with the class 'markdown-api-entry row'.
+ */
 describe.arg = (openState: Ref<Record<string, boolean>>, arg: any): VNode[] => {
   return [
     h(
@@ -464,6 +650,20 @@ describe.arg = (openState: Ref<Record<string, boolean>>, arg: any): VNode[] => {
   ]
 }
 
+/**
+ * Generates VNodes for describing modifiers in the API documentation.
+ *
+ * This function creates a detailed representation of modifiers, including their names
+ * and properties. It iterates through the provided modifiers and generates
+ * a VNode for each one using the 'getProp' helper function.
+ *
+ * @param openState - A reactive reference to an object tracking the open state of expandable sections.
+ *                    This is used to manage the state of collapsible content.
+ * @param modifiers - An object containing modifier definitions. Each key is a modifier name,
+ *                    and the value is an object describing the modifier.
+ * @returns An array of VNodes representing the modifiers and their details,
+ *          each wrapped in a div with the class 'markdown-api-entry row'.
+ */
 describe.modifiers = (openState: Ref<Record<string, boolean>>, modifiers: any): VNode[] => {
   const child: VNode[] = []
 
@@ -482,10 +682,37 @@ describe.modifiers = (openState: Ref<Record<string, boolean>>, modifiers: any): 
   return child
 }
 
+/**
+ * Generates a VNode array for describing an injection in the API documentation.
+ *
+ * This function creates a single div element containing the injection's name and details.
+ *
+ * @param _ - A Ref object containing a record of boolean values. This parameter is not used in the function.
+ * @param injection - An object containing the details of the injection to be described.
+ * @returns An array containing a single VNode representing the injection description,
+ *          wrapped in a div with the class 'markdown-api-entry row'.
+ */
 describe.injection = (_: Ref<Record<string, boolean>>, injection: any): VNode[] => {
   return [h('div', { class: 'markdown-api-entry row' }, [getNameDiv(injection, injection, 0)])]
 }
 
+/**
+ * Creates a configuration toggle object for managing UI and config file options.
+ *
+ * This function generates an object with properties and methods to handle
+ * the state of configuration options, allowing toggling between UI config
+ * and config file modes.
+ *
+ * @param openState - A reactive reference to an object containing boolean values
+ *                    representing the open state of various UI elements.
+ *                    The `quasarConfOptions` property is used to determine
+ *                    the current configuration mode.
+ *
+ * @returns An object with the following properties:
+ *   - enabled: A boolean indicating whether configuration options are available.
+ *   - type: A string representing the current configuration mode ('uiConfig' or 'configFile').
+ *   - setType: A function to update the configuration mode.
+ */
 function useConfigToggle(openState: Ref<Record<string, boolean>>) {
   return {
     enabled: openState.value.quasarConfOptions !== undefined,
@@ -496,6 +723,21 @@ function useConfigToggle(openState: Ref<Record<string, boolean>>) {
   }
 }
 
+/**
+ * Generates VNodes for describing Quasar configuration options in the API documentation.
+ *
+ * This function creates a detailed representation of Quasar configuration options,
+ * including their names, types, and descriptions. It handles both UI config and
+ * config file modes, and generates appropriate UI elements for each.
+ *
+ * @param openState - A reactive reference to an object tracking the open state of expandable sections.
+ *                    It also contains information about the current configuration mode.
+ * @param conf - An object containing the configuration options to be described.
+ *               It should include properties like 'propName', 'type', 'desc', and 'definition'.
+ *
+ * @returns An array containing a single VNode representing the configuration options description,
+ *          wrapped in a div with the class 'markdown-api-entry row'.
+ */
 describe.quasarConfOptions = (openState: Ref<Record<string, boolean>>, conf: any): VNode[] => {
   const configToggle = useConfigToggle(openState)
 

@@ -131,6 +131,12 @@ import MarkdownApiEntry from './MarkdownApiEntry'
 
 const defaultInnerTabName = '__default'
 
+/**
+ * Extracts and categorizes properties based on their categories.
+ *
+ * @param {Object} props - The properties object where each key is a property name and each value is an object containing a `category` string.
+ * @returns {Array<string>} - An array of unique category names sorted alphabetically. If there is only one unique category, returns an array with a default inner tab name.
+ */
 function getPropsCategories(props) {
   const acc = new Set()
 
@@ -147,6 +153,14 @@ function getPropsCategories(props) {
   return acc.size === 1 ? [defaultInnerTabName] : Array.from(acc).sort()
 }
 
+/**
+ * Retrieves the inner tabs for a given API.
+ *
+ * @param {Object} api - The API object containing the data.
+ * @param {Array} tabs - The array of tabs to be populated.
+ * @param {string} apiType - The type of the API.
+ * @returns {Array} - The array of inner tabs.
+ */
 function getInnerTabs(api, tabs, apiType) {
   const acc = {}
 
@@ -160,6 +174,13 @@ function getInnerTabs(api, tabs, apiType) {
   return acc
 }
 
+/**
+ * Parses the given API data and organizes it into tabs and inner tabs.
+ *
+ * @param {Object} api - The API data to be parsed.
+ * @param {Array} tabs - The array to store the main tabs.
+ * @param {Array} innerTabs - The array to store the inner tabs.
+ */
 function parseApi(api, tabs, innerTabs) {
   const acc = {}
 
@@ -193,6 +214,14 @@ function parseApi(api, tabs, innerTabs) {
   return acc
 }
 
+/**
+ * Checks if a given item passes the specified filter criteria.
+ *
+ * @param {string} filter - The filter criteria to apply.
+ * @param {string} name - The name of the item to check.
+ * @param {string} desc - The description of the item to check.
+ * @returns {boolean} - Returns true if the item passes the filter, otherwise false.
+ */
 function passesFilter(filter, name, desc) {
   return (
     name.toLowerCase().indexOf(filter) > -1 ||
@@ -200,6 +229,15 @@ function passesFilter(filter, name, desc) {
   )
 }
 
+/**
+ * Filters the parsed API data based on the provided filter, tabs, and innerTabs.
+ *
+ * @param {Object} parsedApi - The parsed API data to be filtered.
+ * @param {string} filter - The filter criteria to apply to the parsed API data.
+ * @param {Array} tabs - The list of tabs to consider while filtering.
+ * @param {Array} innerTabs - The list of inner tabs to consider while filtering.
+ * @returns {Object} - The filtered API data.
+ */
 function getFilteredApi(parsedApi, filter, tabs, innerTabs) {
   if (filter === '') {
     return parsedApi
@@ -263,6 +301,14 @@ function getFilteredApi(parsedApi, filter, tabs, innerTabs) {
   return acc
 }
 
+/**
+ * Calculates the count of API entries based on the provided parsed API data and tab configurations.
+ *
+ * @param {Object} parsedApi - The parsed API data.
+ * @param {Array} tabs - The array of main tab configurations.
+ * @param {Array} innerTabs - The array of inner tab configurations.
+ * @returns {number} - The count of API entries.
+ */
 function getApiCount(parsedApi, tabs, innerTabs) {
   const acc = {}
 
@@ -354,13 +400,37 @@ watch(currentTab, (val) => {
 })
 
 const inputIcon = computed(() => (filter.value !== '' ? mdiClose : mdiMagnify))
+
+/**
+ * A computed property that filters the API data based on certain criteria.
+ * The filtering logic is defined within the computed function.
+ *
+ * @returns {Array} The filtered API data.
+ */
 const filteredApi = computed(() =>
   getFilteredApi(apiDef.value, filter.value.toLowerCase(), tabsList.value, innerTabsList.value),
 )
+
+/**
+ * A computed property that returns the count of filtered API items.
+ * This property is reactive and will update whenever the dependencies change.
+ */
 const filteredApiCount = computed(() =>
   getApiCount(filteredApi.value, tabsList.value, innerTabsList.value),
 )
 
+/**
+ * Parses the API file and extracts relevant information.
+ *
+ * @param {string} name - The name of the API file.
+ * @param {Object} options - The options object containing various properties.
+ * @param {string} options.type - The type of the API.
+ * @param {string} options.behavior - The behavior of the API.
+ * @param {Object} options.meta - Metadata associated with the API.
+ * @param {string} options.addedIn - The version in which the API was added.
+ * @param {Object} api - Additional API properties.
+ * @returns {Object} The parsed API information.
+ */
 function parseApiFile(name, { type, behavior, meta, addedIn, ...api }) {
   nameBanner.value = `${name} API`
   apiPath.value = meta.docsUrl

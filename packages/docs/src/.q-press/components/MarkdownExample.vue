@@ -6,18 +6,11 @@
       <q-space />
 
       <div class="markdown-example__actions row no-wrap items-center">
-        <!-- <q-btn
-          class="header-btn"
-          dense
-          flat
-          round
-          :icon="mdiCompare"
-          @click="markdownStore.toggleDark"
-        >
+        <!-- <q-btn class="header-btn" dense flat round :icon="mdiCompare" @click="dark.toggleDark">
           <q-tooltip>Toggle dark mode</q-tooltip>
         </q-btn> -->
 
-        <q-separator class="q-mx-xs" vertical inset />
+        <!-- <q-separator class="q-mx-xs" vertical inset /> -->
 
         <q-btn
           v-if="props.noGithub !== true"
@@ -109,6 +102,7 @@ import { fabGithub, fabCodepen } from '@quasar/extras/fontawesome-v6'
 import MarkdownCode from './MarkdownCode.vue'
 import MarkdownCodepen from './MarkdownCodepen.vue'
 import MarkdownCardTitle from './MarkdownCardTitle.vue'
+// import { useDark } from '../composables/dark'
 
 import siteConfig from '../../siteConfig'
 
@@ -118,11 +112,12 @@ const props = defineProps({
   noEdit: Boolean, // no codepen edit
   scrollable: Boolean,
   overflow: Boolean,
-  noGithub: Boolean,
+  noGithub: Boolean, // no GitHub link
 })
 
 const examples = inject('_markdown_examples_')
 
+// const dark = useDark()
 const codepenRef = ref(null)
 const isBusy = ref(true)
 
@@ -134,6 +129,10 @@ const def = reactive({
 const currentTab = ref('Template')
 const expanded = ref(false)
 
+/**
+ * A computed property that returns the CSS class for the component.
+ * This class is dynamically generated based on the component's state or props.
+ */
 const componentClass = computed(() => {
   return props.scrollable === true
     ? 'markdown-example__content--scrollable scroll-y'
@@ -142,6 +141,13 @@ const componentClass = computed(() => {
       : ''
 })
 
+/**
+ * Parses a given template and applies it to the target.
+ *
+ * @param {Object} target - The target object to which the template will be applied.
+ * @param {string} template - The template string to be parsed and applied.
+ * @returns {void}
+ */
 function parseTemplate(target, template) {
   const string = `(<${target}(.*)?>[\\w\\W]*<\\/${target}>)`,
     regex = new RegExp(string, 'g'),
@@ -150,6 +156,12 @@ function parseTemplate(target, template) {
   return parsed[1] || ''
 }
 
+/**
+ * Parses a given component.
+ *
+ * @param {Object} comp - The component to be parsed.
+ * @returns {Object} The parsed component.
+ */
 function parseComponent(comp) {
   def.parts = {
     Template: parseTemplate('template', comp),

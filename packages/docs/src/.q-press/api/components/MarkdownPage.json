@@ -6,7 +6,7 @@
   "props": {
     "overline": {
       "type": "String",
-      "desc": "Text to display as an overline above the title",
+      "desc": "Text to display as an `overline` above the title",
       "examples": [
         "'Introduction'",
         "'Chapter 1'"
@@ -41,7 +41,7 @@
     },
     "isFullscreen": {
       "type": "Boolean",
-      "desc": "Flag to indicate if the page is in fullscreen mode",
+      "desc": "Flag to indicate if the page is in `fullscreen` mode",
       "category": "state"
     }
   },
