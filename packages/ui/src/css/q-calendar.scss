@@ -6,6 +6,7 @@
   background: var(--calendar-background);
   width: 100%;
   min-width: auto;
+  overflow: hidden;
 
   &__bordered {
     border: var(--calendar-border);

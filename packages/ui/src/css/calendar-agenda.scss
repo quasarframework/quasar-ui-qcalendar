@@ -1,4 +1,6 @@
 .q-calendar-agenda {
+  // don't use relative positioning here as it breaks smooth transitions
+  //position: relative;
   display: flex;
   flex: 1;
   flex-direction: column;
