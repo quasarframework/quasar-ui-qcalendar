@@ -24,7 +24,7 @@ File on the [GitHub Issues](https://github.com/quasarframework/quasar-ui-qcalend
 
 ### GitHub pull requests (PR)
 
-If you have a specific fix or contribution, you can generate a pull request on the [QCalendar repo](https://github.com/quasarframework/quasar-ui-qcalendar/tree/next).
+If you have a specific fix or contribution, you can generate a pull request on the [QCalendar repo](https://github.com/quasarframework/quasar-ui-qcalendar/tree/dev).
 
 ## Start a discussion
 

@@ -1,2 +1,2 @@
-import Plugin from '../../src/index'
+import Plugin from '../../src/QCalendar'
 export default Plugin

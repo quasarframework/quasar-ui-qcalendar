@@ -1,76 +1,76 @@
 import { describe, it, expect } from 'vitest'
-import timestamp from '../src/utils/Timestamp.js'
+import timestamp from '../src/utils/Timestamp'
 
 describe('[TIMESTAMP] getMonthFormatter', () => {
   it('getMonthFormatter (0)', async () => {
     const monthFormatter = timestamp.getMonthFormatter()
-    const val = monthFormatter(0)
+    const val = monthFormatter(0, 'long')
     expect(val).toBe('January')
   })
 
   it('getMonthFormatter (1)', async () => {
     const monthFormatter = timestamp.getMonthFormatter()
-    const val = monthFormatter(1)
+    const val = monthFormatter(1, 'long')
     expect(val).toBe('February')
   })
 
   it('getMonthFormatter (2)', async () => {
     const monthFormatter = timestamp.getMonthFormatter()
-    const val = monthFormatter(2)
+    const val = monthFormatter(2, 'long')
     expect(val).toBe('March')
   })
 
   it('getMonthFormatter (3)', async () => {
     const monthFormatter = timestamp.getMonthFormatter()
-    const val = monthFormatter(3)
+    const val = monthFormatter(3, 'long')
     expect(val).toBe('April')
   })
 
   it('getMonthFormatter (4)', async () => {
     const monthFormatter = timestamp.getMonthFormatter()
-    const val = monthFormatter(4)
+    const val = monthFormatter(4, 'long')
     expect(val).toBe('May')
   })
 
   it('getMonthFormatter (5)', async () => {
     const monthFormatter = timestamp.getMonthFormatter()
-    const val = monthFormatter(5)
+    const val = monthFormatter(5, 'long')
     expect(val).toBe('June')
   })
 
   it('getMonthFormatter (6)', async () => {
     const monthFormatter = timestamp.getMonthFormatter()
-    const val = monthFormatter(6)
+    const val = monthFormatter(6, 'long')
     expect(val).toBe('July')
   })
 
   it('getMonthFormatter (7)', async () => {
     const monthFormatter = timestamp.getMonthFormatter()
-    const val = monthFormatter(7)
+    const val = monthFormatter(7, 'long')
     expect(val).toBe('August')
   })
 
   it('getMonthFormatter (8)', async () => {
     const monthFormatter = timestamp.getMonthFormatter()
-    const val = monthFormatter(8)
+    const val = monthFormatter(8, 'long')
     expect(val).toBe('September')
   })
 
   it('getMonthFormatter (9)', async () => {
     const monthFormatter = timestamp.getMonthFormatter()
-    const val = monthFormatter(9)
+    const val = monthFormatter(9, 'long')
     expect(val).toBe('October')
   })
 
   it('getMonthFormatter (10)', async () => {
     const monthFormatter = timestamp.getMonthFormatter()
-    const val = monthFormatter(10)
+    const val = monthFormatter(10, 'long')
     expect(val).toBe('November')
   })
 
   it('getMonthFormatter (11)', async () => {
     const monthFormatter = timestamp.getMonthFormatter()
-    const val = monthFormatter(11)
+    const val = monthFormatter(11, 'long')
     expect(val).toBe('December')
   })
 

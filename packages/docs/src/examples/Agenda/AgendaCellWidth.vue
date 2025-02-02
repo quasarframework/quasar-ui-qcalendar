@@ -10,7 +10,7 @@
           view="day"
           :max-days="10"
           cell-width="200px"
-          day-min-height="100px"
+          day-min-height="100"
           :left-column-options="leftColumnOptions"
           :right-column-options="rightColumnOptions"
           column-options-id="id"

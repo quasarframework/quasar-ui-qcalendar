@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-qcalendar",
-  "version": "4.0.8",
+  "version": "4.1.0",
   "description": "A Quasar App Extension for @quasar/quasar-ui-qcalendar",
   "author": "Jeff Galbraith <jeff@quasar.dev>",
   "license": "MIT",
@@ -34,7 +34,7 @@
     "schedule"
   ],
   "dependencies": {
-    "@quasar/quasar-ui-qcalendar": "^4.0.5"
+    "@quasar/quasar-ui-qcalendar": "^4.1.0"
   },
   "engines": {
     "node": "^28 || ^26 || ^24 || ^22 || ^20 || ^18",

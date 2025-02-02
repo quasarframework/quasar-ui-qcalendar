@@ -34,21 +34,32 @@
           </div>
         </template>
 
+        <!-- Slot for top-level tasks -->
         <template #task="{ scope }">
-          <template v-for="task in getTasks(scope.start, scope.end, scope.task)" :key="task.key">
-            <div class="header ellipsis">
-              <div class="issue ellipsis">
-                <span v-if="scope.task.icon === 'done'" class="done"><Done /></span>
-                <span v-else-if="scope.task.icon === 'pending'" class="pending"><Pending /></span>
-                <span v-else-if="scope.task.icon === 'blocking'" class="blocking"
-                  ><Blocking
-                /></span>
-                {{ scope.task.title }}
-              </div>
-              <div class="key">{{ scope.task.key }}</div>
-              <div class="logged">{{ sum(scope.start, scope.end, scope.task) }}</div>
+          <div class="header ellipsis">
+            <div class="issue ellipsis">
+              <span v-if="scope.task.icon === 'done'" class="done"><Done /></span>
+              <span v-else-if="scope.task.icon === 'pending'" class="pending"><Pending /></span>
+              <span v-else-if="scope.task.icon === 'blocking'" class="blocking"><Blocking /></span>
+              {{ scope.task.title }}
             </div>
-          </template>
+            <div class="key">{{ scope.task.key }}</div>
+            <div class="logged">{{ sum(scope.start, scope.end, scope.task) }}</div>
+          </div>
+        </template>
+
+        <!-- Slot for subtasks (child tasks) -->
+        <template #subtask="{ scope }">
+          <div class="header ellipsis">
+            <div class="issue ellipsis">
+              <span v-if="scope.task.icon === 'done'" class="done"><Done /></span>
+              <span v-else-if="scope.task.icon === 'pending'" class="pending"><Pending /></span>
+              <span v-else-if="scope.task.icon === 'blocking'" class="blocking"><Blocking /></span>
+              {{ scope.task.title }}
+            </div>
+            <div class="key">{{ scope.task.key }}</div>
+            <div class="logged">{{ sum(scope.start, scope.end, scope.task) }}</div>
+          </div>
         </template>
 
         <template #day="{ scope }">
@@ -299,30 +310,6 @@ function sum(
     return accumulator
   }
   return task.logged.reduce(reducer, 0)
-}
-
-/**
- * Determines if the passed in task has logged time
- * between the start and end times
- */
-function getTasks(
-  start: Timestamp,
-  end: Timestamp,
-  task: { logged: { date: string; logged: number }[] },
-) {
-  const taskList = []
-
-  for (let index = 0; index < task.logged.length; ++index) {
-    const logged = task.logged[index]
-    if (logged) {
-      const loggedTimestamp = parsed(logged.date)
-      if (loggedTimestamp && start && end && isBetweenDates(loggedTimestamp, start, end)) {
-        taskList.push(task)
-        break
-      }
-    }
-  }
-  return taskList
 }
 
 /**

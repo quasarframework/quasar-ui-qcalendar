@@ -20,6 +20,32 @@ const writeJson = (file: string, json: PackageJson) => {
   fs.writeFileSync(file, JSON.stringify(json, null, 2) + '\n', 'utf-8')
 }
 
+/**
+ * Read JSON from file
+ */
+function readJson(file: string) {
+  return JSON.parse(fs.readFileSync(file, 'utf-8'))
+}
+
+/**
+ * Update a dependency to the correct version if it exists.
+ */
+interface Dependencies {
+  [key: string]: string
+}
+
+function updateDependency(
+  dependencies: Dependencies | undefined,
+  name: string,
+  version: string,
+): boolean {
+  if (dependencies?.[name]) {
+    dependencies[name] = `^${version}`
+    return true
+  }
+  return false
+}
+
 export function syncAppExt(syncVersion = true) {
   const appExtDir = resolvePath('app-extension')
   const uiDir = resolvePath('ui')
@@ -46,39 +72,14 @@ export function syncAppExt(syncVersion = true) {
     updated = true
   }
 
-  updated ||= updateDependency(appExtJson.dependencies, name, version)
-  updated ||= updateDependency(appExtJson.devDependencies, name, version)
+  const depUpdate =
+    updateDependency(appExtJson.dependencies, name, version) ||
+    updateDependency(appExtJson.devDependencies, name, version)
 
-  if (updated) {
+  if (updated && depUpdate) {
     writeJson(appExtPackagePath, appExtJson)
     console.log(` ⭐️ App Extension version ${blue(appExtJson.name)} synced with UI version.\n`)
   } else {
     console.error('   App Extension version and dependency NOT synced.\n')
   }
-}
-
-/**
- * Read JSON from file
- */
-function readJson(file: string) {
-  return JSON.parse(fs.readFileSync(file, 'utf-8'))
-}
-
-/**
- * Update a dependency to the correct version if it exists.
- */
-interface Dependencies {
-  [key: string]: string
-}
-
-function updateDependency(
-  dependencies: Dependencies | undefined,
-  name: string,
-  version: string,
-): boolean {
-  if (dependencies?.[name]) {
-    dependencies[name] = `^${version}`
-    return true
-  }
-  return false
 }

@@ -160,35 +160,34 @@ const eventsMap = computed<EventsMap>(() => {
   return map
 })
 
+interface Scope {
+  scope: any
+}
+
 function onDragStart(e: DragEvent, item: Event) {
   console.log('onDragStart called')
-  e.dataTransfer!.dropEffect = 'copy'
-  e.dataTransfer!.effectAllowed = 'move'
-  e.dataTransfer!.setData('ID', item.id.toString())
-}
-
-function onDragEnter(e: DragEvent /*, type, scope*/) {
-  console.log('onDragEnter')
-  e.preventDefault()
-  return true
-}
-
-function onDragOver(e: DragEvent /*, type, scope*/) {
-  console.log('onDragOver')
-  e.preventDefault()
-  return true
-}
-
-function onDragLeave(/*e, type, scope*/) {
-  console.log('onDragLeave')
-  return false
-}
-
-interface Scope {
-  scope: {
-    timestamp: Timestamp
-    droppable: boolean
+  if (e.dataTransfer) {
+    e.dataTransfer.dropEffect = 'copy'
+    e.dataTransfer.effectAllowed = 'move'
+    e.dataTransfer.setData('ID', String(item.id))
   }
+}
+
+function onDragEnter(e: DragEvent, type: string, { scope }: Scope) {
+  console.log('onDragEnter', type, scope)
+  e.preventDefault()
+  return true
+}
+
+function onDragOver(e: DragEvent, type: string, { scope }: Scope) {
+  console.log('onDragOver', type, scope)
+  e.preventDefault()
+  return true
+}
+
+function onDragLeave(_e: DragEvent, type: string, { scope }: Scope) {
+  console.log('onDragLeave', type, scope)
+  return false
 }
 
 function onDrop(e: DragEvent, type: string, { scope }: Scope) {

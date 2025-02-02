@@ -35,7 +35,7 @@
       resource-label="name"
       locale="en-US"
       bordered
-      style="height: 400px"
+      style="max-height: 400px"
       :style="styles"
     />
   </div>

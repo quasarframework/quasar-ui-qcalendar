@@ -3,7 +3,7 @@
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="row justify-center">
-      <div style="display: flex; max-width: 800px; width: 100%; height: 400px">
+      <div style="display: flex; max-width: 800px; width: 100%; max-height: 400px">
         <q-calendar-resource
           ref="calendar"
           v-model="selectedDate"
@@ -39,7 +39,6 @@ import '@quasar/quasar-ui-qcalendar/index.css'
 import { ref, reactive } from 'vue'
 import NavigationBar from 'components/NavigationBar.vue'
 
-
 interface Resource {
   id: string
   name: string
@@ -69,8 +68,8 @@ function monthFormatter() {
   try {
     return new Intl.DateTimeFormat(locale.value || undefined, {
       day: '2-digit',
-      month: 'long',
-      year: 'numeric',
+      month: 'short',
+      year: '2-digit',
       timeZone: 'UTC',
     })
   } catch {
@@ -121,13 +120,13 @@ function onClickInterval(data: Timestamp) {
 
 <style lang="scss" scoped>
 .my-resource-header {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
+  display: block;
+  width: 100%;
   position: relative;
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 </style>

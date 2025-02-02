@@ -53,7 +53,7 @@ export function relativeToRoot(...pathList: string[]): string {
   return path.relative(rootFolder, ...pathList)
 }
 
-export const { version } = readJsonFile(new URL('../package.json', import.meta.url))
+export const { version, ProductName } = readJsonFile(new URL('../package.json', import.meta.url))
 export const banner = config.banner
 
 process.on('exit', (code) => {
@@ -79,7 +79,7 @@ process.on('exit', (code) => {
     })
 
     console.log()
-    console.log(` Summary of Quasar v${version}:`)
+    console.log(` Summary of ${ProductName} v${version}:`)
     console.log(output)
   }
 })

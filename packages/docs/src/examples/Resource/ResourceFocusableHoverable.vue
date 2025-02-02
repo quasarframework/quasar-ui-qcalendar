@@ -23,7 +23,7 @@
     </div>
 
     <div class="row justify-center">
-      <div style="display: flex; max-width: 800px; width: 100%; max-height: 400px">
+      <div style="display: flex; max-width: 800px; width: 100%; max-max-height: 400px">
         <q-calendar-resource
           ref="calendar"
           v-model="selectedDate"
@@ -55,7 +55,6 @@ import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref, reactive } from 'vue'
 import NavigationBar from 'components/NavigationBar.vue'
-
 
 const calendar = ref<QCalendarResource>(),
   selectedDate = ref(today()),

@@ -103,7 +103,7 @@ const socialLinks = {
     {
       name: 'GitHub',
       icon: fabGithub,
-      path: 'https://github.com/quasarframework/quasar-ui-qcalendar/tree/next',
+      path: 'https://github.com/quasarframework/quasar-ui-qcalendar/tree/dev',
       external: true,
     },
     {
@@ -572,7 +572,7 @@ const config = {
     line2: '',
   } as CopyrightConfig,
   githubEditRootSrc:
-    'https://github.com/quasarframework/quasar-ui-qcalendar/tree/next/edit/packages/docs/src',
+    'https://github.com/quasarframework/quasar-ui-qcalendar/edit/dev/packages/docs/src',
   license: {
     label: 'MIT License',
     link: 'https://github.com/quasarframework/quasar-ui-qcalendar/blob/next/LICENSE.md',

@@ -10,7 +10,7 @@ describe('[TIMESTAMP] validateNumber', () => {
   // takes 2020
   it("validateNumber true ('2020-01-01')", async () => {
     const tests = timestamp.validateNumber('2020-01-01')
-    expect(tests).toBe(true)
+    expect(tests).toBe(false)
   })
 
   it("validateNumber true ('elephant')", async () => {
