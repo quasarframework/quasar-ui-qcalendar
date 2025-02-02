@@ -42,7 +42,7 @@ importers:
   packages/app-extension:
     dependencies:
       '@quasar/quasar-ui-qcalendar':
-        specifier: ^4.0.8
+        specifier: ^4.1.0
         version: link:../ui
 
   packages/docs:
