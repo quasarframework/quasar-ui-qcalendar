@@ -217,7 +217,7 @@ export function padNumber(x: number, length: number): string {
  * @param {number} year The year to check (ie: 1999, 2020)
  * @returns {boolean} True if the year is a leap year
  */
-function isLeapYear(year: number): boolean {
+export function isLeapYear(year: number): boolean {
   // A year is a Gregorian leap year if it is divisible by 4,
   // but not by 100, unless it is also divisible by 400.
   return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0
@@ -1122,12 +1122,6 @@ export function makeDateTime(timestamp: Timestamp, utc = true): Date {
   )
 }
 
-// validate a number IS a number
-/**
- * Teting is passed value is a number
- * @param {(string|number)} input The value to use
- * @returns {boolean} True if a number (not floating point)
- */
 /**
  * Validates if the input is a finite number.
  *
