@@ -461,7 +461,7 @@ export default defineComponent({
       indentLevel = 0,
       expanded = true,
     ): VNode {
-      const slot = slots.task
+      const slot = indentLevel === 0 ? slots.task : slots.subtask
       const scope = {
         start: parsedStartDate.value,
         end: parsedEndDate.value,
@@ -529,7 +529,7 @@ export default defineComponent({
       taskIndex: number,
       indentLevel = 0,
       expanded = true,
-    ): VNode | VNode[] {
+    ): VNode[] {
       const height =
         task.height !== void 0
           ? convertToUnit(parseInt(task.height, 10))
@@ -595,14 +595,16 @@ export default defineComponent({
       if (tasks === undefined) {
         tasks = props.modelTasks
       }
-      return (tasks as Array<Task>).flatMap((task, taskIndex) => {
-        return __renderTaskRow(
-          task,
-          taskIndex,
-          indentLevel,
-          task.children !== undefined ? task.expanded : expanded,
-        )
-      })
+      return (tasks as Array<Task>)
+        .map((task, taskIndex) => {
+          return __renderTaskRow(
+            task,
+            taskIndex,
+            indentLevel,
+            task.children !== undefined ? task.expanded : expanded,
+          )
+        })
+        .flat()
     }
 
     function __renderTasksContainer(): VNode {
