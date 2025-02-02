@@ -9,6 +9,7 @@ interface ResizeObserverData {
   callback: (_size: Size) => void
   size: Size
   observer: ResizeObserver
+  debounceTimeout?: ReturnType<typeof setTimeout>
 }
 
 // Extend HTMLElement to include our custom property.
@@ -32,7 +33,16 @@ const ResizeObserverDirective: Directive = {
         if (rect.width !== data.size.width || rect.height !== data.size.height) {
           data.size.width = rect.width
           data.size.height = rect.height
-          data.callback(data.size)
+
+          // Clear any pending debounce timeout.
+          if (data.debounceTimeout) {
+            clearTimeout(data.debounceTimeout)
+          }
+          // Set up a new debounce timeout.
+          data.debounceTimeout = setTimeout(() => {
+            data.callback(data.size)
+            data.debounceTimeout = undefined
+          }, 100) // Adjust the debounce delay (in ms) as needed.
         }
       }),
     }
@@ -47,7 +57,11 @@ const ResizeObserverDirective: Directive = {
   beforeUnmount(el: HTMLElementWithResizeObserver) {
     if (!el.__onResizeObserver) return
 
-    const { observer } = el.__onResizeObserver
+    const { observer, debounceTimeout } = el.__onResizeObserver
+    // Clear any pending debounce.
+    if (debounceTimeout) {
+      clearTimeout(debounceTimeout)
+    }
     // Stop observing the element.
     observer.unobserve(el)
     // Clean up the property.
