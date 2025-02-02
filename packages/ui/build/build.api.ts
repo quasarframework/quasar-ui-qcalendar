@@ -19,7 +19,7 @@ import {
   camelCase,
   capitalize,
   plural,
-} from './build.utils.js'
+} from './build.utils'
 
 const dest = resolveToRoot('dist/api')
 
@@ -603,7 +603,7 @@ function getApiWithMixins(api, mainFile) {
     const mixinFile = resolveToRoot('src/' + mixin + '.json')
 
     if (!fse.existsSync(mixinFile)) {
-      logError(`build.api.js: ${relativeToRoot(mainFile)} -> no such mixin ${mixin}`)
+      logError(`build.api: ${relativeToRoot(mainFile)} -> no such mixin ${mixin}`)
       process.exit(1)
     }
 
@@ -1094,7 +1094,7 @@ function parseAPI(file, apiType) {
     api = getApiWithMixins(api, file)
   }
 
-  const banner = `build.api.js: ${relativeToRoot(file)} -> `
+  const banner = `build.api: ${relativeToRoot(file)} -> `
   const printErrorAndExit = (msg) => {
     logError(`${banner} ${msg}`)
     console.log()
@@ -1187,8 +1187,8 @@ function fillAPI(apiType, list, encodeFn) {
     if (apiType === 'component') {
       let hasError = 0
 
-      const componentPath = file.replace('.json', '.js')
-      const componentName = name.replace('.json', '.js')
+      const componentPath = file.replace('.json', '.ts')
+      const componentName = name.replace('.json', '.ts')
       const componentContent = fse.readFileSync(componentPath, 'utf-8')
 
       let RuntimeComponent
@@ -1676,7 +1676,7 @@ export async function generate({ compact = false } = {}) {
   } catch (err) {
     resetRuntimeImports()
 
-    logError('build.api.js: something went wrong...')
+    logError('build.api: something went wrong...')
     console.log()
     console.error(err)
     console.log()
@@ -1687,7 +1687,7 @@ export async function generate({ compact = false } = {}) {
 function run() {
   generate()
     .then(() => {
-      console.log('build.api.js: done')
+      console.log('build.api: done')
       console.log()
     })
     .catch((error) => {

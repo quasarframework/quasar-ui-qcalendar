@@ -47,7 +47,6 @@ import '@quasar/quasar-ui-qcalendar/index.css'
 import { ref, reactive } from 'vue'
 import NavigationBar from 'components/NavigationBar.vue'
 
-
 const calendar = ref<QCalendarScheduler>(),
   selectedDate = ref(today()),
   locale = ref('en-US'),
@@ -99,28 +98,28 @@ const calendar = ref<QCalendarScheduler>(),
     { value: 'zh-HANT', label: '中文(繁體)' },
   ]),
   resources = reactive([
-    { id: '1', name: 'John' },
+    { id: '1', label: 'John' },
     {
       id: '2',
-      name: 'Board Room',
+      label: 'Board Room',
       expanded: false,
       children: [
-        { id: '2.1', name: 'Room-1' },
+        { id: '2.1', label: 'Room-1' },
         {
           id: '2.2',
-          name: 'Room-2',
+          label: 'Room-2',
           expanded: false,
           children: [
-            { id: '2.2.1', name: 'Partition-A' },
-            { id: '2.2.2', name: 'Partition-B' },
-            { id: '2.2.3', name: 'Partition-C' },
+            { id: '2.2.1', label: 'Partition-A' },
+            { id: '2.2.2', label: 'Partition-B' },
+            { id: '2.2.3', label: 'Partition-C' },
           ],
         },
       ],
     },
-    { id: '3', name: 'Mary' },
-    { id: '4', name: 'Susan' },
-    { id: '5', name: 'Olivia' },
+    { id: '3', label: 'Mary' },
+    { id: '4', label: 'Susan' },
+    { id: '5', label: 'Olivia' },
   ])
 
 function onToday() {

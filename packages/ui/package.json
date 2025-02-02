@@ -198,7 +198,7 @@
     "build:api": "tsx build/build.api.ts",
     "build:app-ext": "tsx build/script.app-ext.ts",
     "build:types:old": "tsc --emitDeclarationOnly --declarationDir dist/types",
-    "build:types": "npx -p typescript tsc src/**/*.js --declaration --allowJs --emitDeclarationOnly --outDir dist/types"
+    "build:types": "npx -p typescript tsc --declaration --allowJs --emitDeclarationOnly --target es2020 --project tsconfig.json --outDir dist/types"
   },
   "funding": {
     "type": "github",

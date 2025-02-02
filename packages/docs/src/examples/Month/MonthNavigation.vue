@@ -14,7 +14,6 @@
           :day-min-height="40"
           animated
           bordered
-          :weekdays="[1, 2, 3, 4, 5]"
           @change="onChange"
           @moved="onMoved"
           @click-date="onClickDate"
@@ -34,7 +33,6 @@ import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref } from 'vue'
 import NavigationBar from 'components/NavigationBar.vue'
-
 
 const calendar = ref<QCalendarMonth>(),
   selectedDate = ref(today())

@@ -12,10 +12,7 @@
                 :key="item.id"
                 class="button list-item"
                 draggable="true"
-                @dragstart="
-                  /// @ts-expect-error ignore
-                  onDragStart($event, item)
-                "
+                @dragstart="onDragStart($event, item)"
               >
                 {{ item.name }}
               </li>
@@ -118,7 +115,6 @@ import '@quasar/quasar-ui-qcalendar/index.css'
 import { ref, computed } from 'vue'
 import NavigationBar from 'components/NavigationBar.vue'
 
-
 interface Event {
   id: number
   type?: number
@@ -188,43 +184,45 @@ interface DragItem {
   name: string
 }
 
-function onDragStart(event: CustomDragEvent, item: DragItem) {
-  console.log('onDragStart called')
-  event.dataTransfer.dropEffect = 'copy'
-  event.dataTransfer.effectAllowed = 'move'
-  event.dataTransfer.setData('ID', item.id.toString())
+interface Scope {
+  scope: any
 }
 
-function onDragEnter(e: CustomDragEvent /*, type, scope*/) {
-  console.log('onDragEnter')
+function onDragStart(e: DragEvent, item: DragItem) {
+  console.log('onDragStart called', item)
+  if (e.dataTransfer) {
+    e.dataTransfer.dropEffect = 'copy'
+    e.dataTransfer.effectAllowed = 'move'
+    e.dataTransfer.setData('ID', String(item.id))
+  }
+}
+
+function onDragEnter(e: DragEvent, type: string, { scope }: Scope): boolean {
+  console.log('onDragEnter', type, scope)
   e.preventDefault()
   return true
 }
 
-function onDragOver(e: CustomDragEvent /*, type, scope*/) {
-  console.log('onDragOver')
+function onDragOver(e: DragEvent, type: string, { scope }: Scope): boolean {
+  console.log('onDragOver', type, scope)
   e.preventDefault()
   return true
 }
 
-function onDragLeave(/*e, type, scope*/) {
-  console.log('onDragLeave')
+function onDragLeave(_e: DragEvent, type: string, { scope }: Scope): boolean {
+  console.log('onDragLeave', type, scope)
   return false
-}
-
-interface DropScope {
-  timestamp: Timestamp
 }
 
 interface DropEvent extends CustomDragEvent {
   dataTransfer: DataTransfer
 }
 
-interface DropScope {
+interface DropScope extends Scope {
   timestamp: Timestamp
 }
 
-function onDrop(e: DropEvent, type: string, scope: DropScope): boolean {
+function onDrop(e: DropEvent, type: string, { scope }: DropScope): boolean {
   console.log('onDrop', type, scope)
   const itemID = parseInt(e.dataTransfer.getData('ID'), 10)
   const event: Event = { ...defaultEvent }

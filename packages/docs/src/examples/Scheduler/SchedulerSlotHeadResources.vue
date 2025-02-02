@@ -40,7 +40,6 @@ import '@quasar/quasar-ui-qcalendar/index.css'
 import { ref, reactive } from 'vue'
 import NavigationBar from 'components/NavigationBar.vue'
 
-
 const calendar = ref<QCalendarScheduler>(),
   selectedDate = ref(today()),
   locale = ref('en-US'),
@@ -140,7 +139,8 @@ function onClickHeadDay(data: Timestamp) {
   justify-content: center;
   align-items: center;
   position: relative;
-  font-size: 14px;
+  font-size: 10px;
   font-weight: 700;
+  flex-wrap: nowrap;
 }
 </style>

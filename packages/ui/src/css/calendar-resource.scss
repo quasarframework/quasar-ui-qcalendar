@@ -148,14 +148,14 @@
 
 .q-calendar-resource {
   &__head {
-    border-bottom: var(--calendar-border);
+    // border-bottom: var(--calendar-border);
     color: var(--calendar-color);
     background: var(--calendar-background);
     font-weight: var(--calendar-head-font-weight);
 
     &--resources {
       border-right: var(--calendar-border);
-      border-bottom: var(--calendar-border);
+      // border-bottom: var(--calendar-border);
       color: var(--calendar-color);
       background: var(--calendar-background);
       min-width: var(--calendar-resources-width);
@@ -223,11 +223,11 @@
     &__head {
       color: var(--calendar-color-dark);
       background: var(--calendar-background-dark);
-      border-bottom: var(--calendar-border-dark);
+      // border-bottom: var(--calendar-border-dark);
 
       &--resources {
         border-right: var(--calendar-border-dark);
-        border-bottom: var(--calendar-border-dark);
+        // border-bottom: var(--calendar-border-dark);
         color: var(--calendar-color-dark);
         background: var(--calendar-background-dark);
       }

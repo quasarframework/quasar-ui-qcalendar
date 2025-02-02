@@ -195,6 +195,10 @@ const allDayEventsMap = computed(() => {
   return map
 })
 
+interface Scope {
+  scope: any
+}
+
 function onDragStart(e: DragEvent, item: Item) {
   console.log('onDragStart called')
   if (e.dataTransfer) {
@@ -204,36 +208,36 @@ function onDragStart(e: DragEvent, item: Item) {
   }
 }
 
-function onDragEnter(e: MouseEvent, type: string /*, scope*/) {
-  console.log('onDragEnter')
+function onDragEnter(e: DragEvent, type: string, { scope }: Scope) {
+  console.log('onDragEnter', type, scope)
   if (type === 'day' || type === 'head-day') {
     e.preventDefault()
     return true
   }
 }
 
-function onDragOver(e: MouseEvent, type: string /*, scope*/) {
-  console.log('onDragOver')
+function onDragOver(e: DragEvent, type: string, { scope }: Scope) {
+  console.log('onDragOver', type, scope)
   if (type === 'day' || type === 'head-day') {
     e.preventDefault()
     return true
   }
 }
 
-function onDragLeave(e: MouseEvent, type: string /*, scope*/) {
-  console.log('onDragLeave')
+function onDragLeave(e: DragEvent, type: string, { scope }: Scope) {
+  console.log('onDragLeave', type, scope)
   if (type === 'day' || type === 'head-day') {
     return false
   }
 }
 
-interface DropScope {
+interface DropScope extends Scope {
   timestamp: Timestamp
   resource: Resource
 }
 
-function onDrop(e: DragEvent, type: string, scope: DropScope) {
-  console.log('onDrop', scope)
+function onDrop(e: DragEvent, type: string, { scope }: DropScope) {
+  console.log('onDrop', type, scope)
   if (type === 'day' || type === 'head-day') {
     if (!e.dataTransfer) {
       return

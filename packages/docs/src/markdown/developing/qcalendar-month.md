@@ -88,7 +88,7 @@ The current date has been set to tomorrow via the `now` property.
 
 <MarkdownExample title="Selected Dates" file="MonthSelectedDates" no-github no-edit/>
 
-<MarkdownExample title="Selection" file="MonthSelection" no-github no-edit/>
+<MarkdownExample title="Selection Range" file="MonthSelection" no-github no-edit/>
 
 <MarkdownExample title="Slot - Day (Holidays)" file="MonthSlotDayHolidays" no-github no-edit/>
 
