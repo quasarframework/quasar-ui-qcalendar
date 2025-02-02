@@ -31,7 +31,6 @@ interface NavigationContext {
   datesRef: Ref<Record<string, HTMLElement>>
   parsedView: Ref<string>
   emittedValue: Ref<string>
-  weekdaySkips: Ref<number[]>
   direction: Ref<'next' | 'prev'>
   times: { today: Timestamp }
 }
@@ -56,7 +55,6 @@ export default function useNavigation(
     datesRef,
     parsedView,
     emittedValue,
-    weekdaySkips,
     direction,
     times,
   }: NavigationContext,
@@ -183,21 +181,22 @@ export default function useNavigation(
   function onLeftArrow(): void {
     let tm = copyTimestamp(focusValue.value)
     direction.value = 'prev'
+    // Keep moving one day back until the day is allowed.
     do {
       tm = addToDate(tm, { day: -1 })
-    } while (weekdaySkips.value[Number(tm.weekday)] === 0)
+    } while (!props.weekdays.includes(Number(tm.weekday)))
     focusRef.value = tm.date
   }
 
   function onRightArrow(): void {
     let tm = copyTimestamp(focusValue.value)
     direction.value = 'next'
+    // Keep moving one day forward until the day is allowed.
     do {
       tm = addToDate(tm, { day: 1 })
-    } while (weekdaySkips.value[Number(tm.weekday)] === 0)
+    } while (!props.weekdays.includes(Number(tm.weekday)))
     focusRef.value = tm.date
   }
-
   function onPgUp(): void {
     let tm = copyTimestamp(focusValue.value)
     tm = parsedView.value === 'month' ? addToDate(tm, { month: -1 }) : addToDate(tm, { day: -7 })
@@ -214,11 +213,13 @@ export default function useNavigation(
 
   function onHome(): void {
     let tm = copyTimestamp(focusValue.value)
+    // For month view, start at the beginning of the month; for week view, get start of week.
     tm =
       parsedView.value === 'month'
         ? getStartOfMonth(tm)
         : getStartOfWeek(tm, props.weekdays || [], times.today)
-    while (weekdaySkips.value[Number(tm.weekday)] === 0) {
+    // If the computed start is not an allowed day, move backwards until you hit an allowed day.
+    while (!props.weekdays.includes(Number(tm.weekday))) {
       tm = addToDate(tm, { day: -1 })
     }
     focusRef.value = tm.date
@@ -226,16 +227,17 @@ export default function useNavigation(
 
   function onEnd(): void {
     let tm = copyTimestamp(focusValue.value)
+    // For month view, get end of month; for week view, get end of week.
     tm =
       parsedView.value === 'month'
         ? getEndOfMonth(tm)
         : getEndOfWeek(tm, props.weekdays || [], times.today)
-    while (weekdaySkips.value[Number(tm.weekday)] === 0) {
+    // If the computed end is not an allowed day, move backwards until you hit an allowed day.
+    while (!props.weekdays.includes(Number(tm.weekday))) {
       tm = addToDate(tm, { day: -1 })
     }
     focusRef.value = tm.date
   }
-
   return {
     startNavigation,
     endNavigation,

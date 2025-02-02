@@ -75,7 +75,6 @@ import {
   createNativeLocaleFormatter,
   getEndOfWeek,
   getStartOfWeek,
-  getWeekdaySkips,
   parseTimestamp,
   today,
   Timestamp,
@@ -94,10 +93,6 @@ const weekdayFormatter = weekdayFormatterFunc()
 const transitionPrev = ref('slide-left')
 const transitionNext = ref('slide-right')
 const transition = ref('')
-
-const weekdaySkips = computed(() => {
-  return getWeekdaySkips(weekdays)
-})
 
 const parsedStart = computed(() => {
   if (selectedDate.value) {
@@ -126,7 +121,7 @@ const today2 = computed(() => {
 const days = computed(() => {
   if (parsedStart.value && parsedEnd.value) {
     if (today2.value) {
-      return createDayList(parsedStart.value, parsedEnd.value, today2.value, weekdaySkips.value)
+      return createDayList(parsedStart.value, parsedEnd.value, today2.value, weekdays)
     }
   }
   return []

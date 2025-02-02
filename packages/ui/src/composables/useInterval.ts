@@ -393,7 +393,6 @@ export interface UseIntervalReturn {
 export default function useInterval(
   props: IntervalProps & AgendaProps & SchedulerProps & ResourceProps & ColumnProps & CommonProps,
   {
-    weekdaySkips,
     times,
     scrollArea,
     parsedStart,
@@ -402,7 +401,6 @@ export default function useInterval(
     size,
     headerColumnRef,
   }: {
-    weekdaySkips: Ref<number[]>
     times: { now: Timestamp; today: Timestamp }
     scrollArea: Ref<HTMLElement | null>
     parsedStart: Ref<Timestamp>
@@ -441,7 +439,7 @@ export default function useInterval(
       parsedStart.value,
       parsedEnd.value,
       times.today,
-      weekdaySkips.value,
+      props.weekdays,
       props.disabledBefore,
       props.disabledAfter,
       props.disabledWeekdays,

@@ -1020,33 +1020,6 @@
         "examples"
       ]
     },
-    "getWeekdaySkips": {
-      "desc": "Returns the weekday skips in an array of 0's (off) and 1's (on). Basically, can convert `[1,2,3,4,5]` to `[0,1,1,1,1,1,0]`",
-      "params": {
-        "weekdays": {
-          "type": "Array",
-          "tsType": "NumberArray",
-          "desc": "The normal weekdays array looks like this `[0,1,2,3,4,5,6]` where 0=Sunday, 1=Monday, etc. A week that starts on Monday, would look like this: `[1,2,3,4,5,6,0]` and a 5-day workweek would look like this: `[1,2,3,4,5]`",
-          "required": true,
-          "examples": [
-            "[0,1,2,3,4,5,6]",
-            "[1,2,3,4,5,6,0]",
-            "[1,2,3,4,5]"
-          ]
-        }
-      },
-      "returns": {
-        "type": "Array",
-        "tsType": "NumberArray",
-        "desc": "An array of 7 (representing a week) of 0's (hidden) and 1's (displayed)",
-        "__exemption": [
-          "examples"
-        ]
-      },
-      "__exemption": [
-        "examples"
-      ]
-    },
     "createDayList": {
       "desc": "Returns an array of timestamps",
       "params": {
@@ -1067,11 +1040,11 @@
             "examples"
           ]
         },
-        "weekdaySkips": {
+        "weekdays": {
           "type": "Array",
           "tsType": "NumberArray",
           "required": true,
-          "desc": "An array of 7 numbers (representing 7 days of the week) that are either a 1 or 0",
+          "desc": "An array of numbers (representing days of the week) that are 0 (=Sunday) to 6 (=Saturday)",
           "__exemption": [
             "examples"
           ]

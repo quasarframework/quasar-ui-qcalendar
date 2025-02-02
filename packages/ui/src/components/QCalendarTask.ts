@@ -126,7 +126,6 @@ export default defineComponent({
 
     const {
       // computed
-      weekdaySkips,
       parsedStart,
       // parsedEnd,
       dayFormatter,
@@ -174,14 +173,12 @@ export default defineComponent({
       // methods
       /// @ts-expect-error fix later
     } = useTask(props, emit, {
-      weekdaySkips,
       times,
     })
 
     const { move } = useMove(props, {
       parsedView,
       parsedValue,
-      weekdaySkips,
       direction,
       maxDays: maxDaysRendered,
       times,
@@ -205,7 +202,6 @@ export default defineComponent({
       parsedView,
       parsedValue,
       emittedValue,
-      weekdaySkips,
       direction,
       times,
     })

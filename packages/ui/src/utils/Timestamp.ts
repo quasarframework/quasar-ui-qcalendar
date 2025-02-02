@@ -925,37 +925,11 @@ export function findWeekday(
 }
 
 /**
- * Returns an array of 0's and mostly 1's representing skipped days (used internally)
- * @param {number[]} weekdays An array of numbers representing the weekdays. ie: [0 = Sun, ..., 6 = Sat].
- * @returns {number[]} An array of 0's and mostly 1's (other numbers may occur previous to skipped days)
- */
-export function getWeekdaySkips(weekdays: number[]): number[] {
-  const skips = [1, 1, 1, 1, 1, 1, 1]
-  const filled = [0, 0, 0, 0, 0, 0, 0]
-  for (let i = 0; i < weekdays.length; ++i) {
-    filled[weekdays[i] as number] = 1
-  }
-  for (let k = 0; k < TIME_CONSTANTS.DAYS_IN.WEEK; ++k) {
-    let skip = 1
-    for (let j = 1; j < TIME_CONSTANTS.DAYS_IN.WEEK; ++j) {
-      const next = (k + j) % TIME_CONSTANTS.DAYS_IN.WEEK
-      if (filled[next]) {
-        break
-      }
-      ++skip
-    }
-    skips[k] = filled[k]! * skip
-  }
-
-  return skips
-}
-
-/**
  * Creates an array of {@link Timestamp}s based on start and end params
  * @param {Timestamp} start The starting {@link Timestamp}
  * @param {Timestamp} end The ending {@link Timestamp}
  * @param {Timestamp} now The relative day
- * @param {number[]} weekdaySkips An array representing available and skipped weekdays
+ * @param {number[]} weekdays An array of numbers (representing days of the week) that are 0 (=Sunday) to 6 (=Saturday)
  * @param {string} [disabledBefore] Days before this date are disabled (YYYY-MM-DD)
  * @param {string} [disabledAfter] Days after this date are disabled (YYYY-MM-DD)
  * @param {number[]} [disabledWeekdays] An array representing weekdays that are disabled [0 = Sun, ..., 6 = Sat]
@@ -968,7 +942,7 @@ export function createDayList(
   start: Timestamp,
   end: Timestamp,
   now: Timestamp,
-  weekdaySkips = [1, 1, 1, 1, 1, 1, 1],
+  weekdays: number[] = [0, 1, 2, 3, 4, 5, 6],
   disabledBefore: string | undefined = undefined,
   disabledAfter: string | undefined = undefined,
   disabledWeekdays: number[] = [],
@@ -993,7 +967,7 @@ export function createDayList(
     if (stopped) {
       break
     }
-    if (weekdaySkips[Number(current.weekday)] === 0) {
+    if (!weekdays.includes(Number(current.weekday))) {
       current = relativeDays(current, nextDay)
       continue
     }
@@ -1493,7 +1467,6 @@ export default {
   prevDay,
   relativeDays,
   findWeekday,
-  getWeekdaySkips,
   createDayList,
   createIntervalList,
   createNativeLocaleFormatter,

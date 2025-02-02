@@ -106,14 +106,12 @@ export default function useMonth(
   props: MonthProps & CommonProps & CellWidthProps,
   emit: EmitFn<{ 'mini-mode': [boolean] }>,
   {
-    weekdaySkips,
     times,
     parsedStart,
     parsedEnd,
     size,
     headerColumnRef,
   }: {
-    weekdaySkips: Ref<number[]>
     times: { today: Timestamp }
     parsedStart: Ref<Timestamp>
     parsedEnd: Ref<Timestamp>
@@ -146,7 +144,7 @@ export default function useMonth(
       parsedMonthStart.value,
       parsedMonthEnd.value,
       times.today,
-      weekdaySkips.value,
+      props.weekdays,
       props.disabledBefore,
       props.disabledAfter,
       props.disabledWeekdays,
@@ -168,7 +166,7 @@ export default function useMonth(
       start,
       end,
       day,
-      weekdaySkips.value,
+      props.weekdays,
       props.disabledBefore,
       props.disabledAfter,
       props.disabledWeekdays,

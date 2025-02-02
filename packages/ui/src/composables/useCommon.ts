@@ -3,7 +3,6 @@ import {
   validateTimestamp,
   parseTimestamp,
   parsed,
-  getWeekdaySkips,
   createNativeLocaleFormatter,
   getStartOfWeek,
   getEndOfWeek,
@@ -142,7 +141,6 @@ export const useCommonProps = {
 }
 
 export interface CommonReturn {
-  weekdaySkips: Ref<number[]>
   parsedStart: Ref<Timestamp>
   parsedEnd: Ref<Timestamp>
   dayFormatter: Ref<ReturnType<typeof createNativeLocaleFormatter>>
@@ -178,7 +176,6 @@ export default function useCommon(
     times: { today: Timestamp }
   },
 ): CommonReturn {
-  const weekdaySkips = computed((): number[] => getWeekdaySkips(props.weekdays))
   const parsedStart = computed((): Timestamp => parseTimestamp(startDate.value) as Timestamp)
   const parsedEnd = computed((): Timestamp => {
     if (endDate.value === '0000-00-00') {
@@ -284,7 +281,6 @@ export default function useCommon(
   }
 
   return {
-    weekdaySkips,
     parsedStart,
     parsedEnd,
     dayFormatter,

@@ -145,7 +145,6 @@ export default defineComponent({
 
     const {
       // computed
-      weekdaySkips,
       parsedStart,
       parsedEnd,
       // dayFormatter,
@@ -203,7 +202,6 @@ export default defineComponent({
       // getTimestampAtEventIntervalX
       /// @ts-expect-error fix later
     } = useInterval(props, {
-      weekdaySkips,
       times,
       scrollArea,
       parsedStart,
@@ -216,7 +214,6 @@ export default defineComponent({
     const { move } = useMove(props, {
       parsedView,
       parsedValue,
-      weekdaySkips,
       direction,
       maxDays: maxDaysRendered,
       times,
@@ -237,7 +234,6 @@ export default defineComponent({
       datesRef,
       parsedView,
       emittedValue,
-      weekdaySkips,
       direction,
       times,
     })

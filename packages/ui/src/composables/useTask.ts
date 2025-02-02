@@ -130,10 +130,8 @@ export default function useTask(
   },
   emit: EmitFn,
   {
-    weekdaySkips,
     times,
   }: {
-    weekdaySkips: Ref<number[]>
     times: { today: Timestamp }
   },
 ): TaskReturn {
@@ -197,7 +195,7 @@ export default function useTask(
       parsedStartDate.value!,
       parsedEndDate.value!,
       times.today,
-      weekdaySkips.value,
+      props.weekdays,
       props.disabledBefore,
       props.disabledAfter,
       props.disabledWeekdays || [],
