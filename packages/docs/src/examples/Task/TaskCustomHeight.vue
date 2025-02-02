@@ -40,16 +40,22 @@
             </div>
           </template>
 
+          <!-- Slot for top-level tasks -->
           <template #task="{ scope }">
-            <template v-for="task in getTasks(scope.start, scope.end, scope.task)" :key="task.key">
-              <div class="header ellipsis">
-                <div class="issue ellipsis">
-                  {{ scope.task.title }}
-                </div>
-                <div class="key">{{ scope.task.key }}</div>
-                <div class="logged">{{ sum(scope.start, scope.end, scope.task) }}</div>
-              </div>
-            </template>
+            <div class="header ellipsis">
+              <div class="issue ellipsis">{{ scope.task.title }}</div>
+              <div class="key">{{ scope.task.key }}</div>
+              <div class="logged">{{ sum(scope.start, scope.end, scope.task) }}</div>
+            </div>
+          </template>
+
+          <!-- Slot for subtasks (child tasks) -->
+          <template #subtask="{ scope }">
+            <div class="header ellipsis">
+              <div class="issue ellipsis">{{ scope.task.title }}</div>
+              <div class="key">{{ scope.task.key }}</div>
+              <div class="logged">{{ sum(scope.start, scope.end, scope.task) }}</div>
+            </div>
           </template>
 
           <template #day="{ scope }">
@@ -99,7 +105,6 @@ import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref, reactive, computed, onBeforeMount } from 'vue'
 import NavigationBar from 'components/NavigationBar.vue'
-
 
 interface Logged {
   date: string
@@ -277,25 +282,6 @@ function sum(start: Timestamp, end: Timestamp, task: Task) {
       ? accumulator + currentValue.logged
       : accumulator
   }, 0)
-}
-
-/**
- * Determines if the passed in task has logged time
- * between the start and end times
- */
-function getTasks(start: Timestamp, end: Timestamp, task: Task): Task[] {
-  const tasks: Task[] = []
-
-  const hasLoggedInRange = task.logged.some((log) => {
-    const loggedTimestamp = parsed(log.date)
-    return loggedTimestamp !== null && isBetweenDates(loggedTimestamp, start, end)
-  })
-
-  if (hasLoggedInRange) {
-    tasks.push(task)
-  }
-
-  return tasks
 }
 
 function weekdayClass(/*data*/) {

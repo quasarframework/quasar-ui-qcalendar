@@ -51,16 +51,22 @@
           </div>
         </template>
 
+        <!-- Slot for top-level tasks -->
         <template #task="{ scope }">
-          <template v-for="task in getTasks(scope.start, scope.end, scope.task)" :key="task.key">
-            <div class="header ellipsis">
-              <div class="issue ellipsis">
-                {{ scope.task.title }}
-              </div>
-              <div class="key">{{ scope.task.key }}</div>
-              <div class="logged">{{ sum(scope.start, scope.end, scope.task) }}</div>
-            </div>
-          </template>
+          <div class="header ellipsis">
+            <div class="issue ellipsis">{{ scope.task.title }}</div>
+            <div class="key">{{ scope.task.key }}</div>
+            <div class="logged">{{ sum(scope.start, scope.end, scope.task) }}</div>
+          </div>
+        </template>
+
+        <!-- Slot for subtasks (child tasks) -->
+        <template #subtask="{ scope }">
+          <div class="header ellipsis">
+            <div class="issue ellipsis">{{ scope.task.title }}</div>
+            <div class="key">{{ scope.task.key }}</div>
+            <div class="logged">{{ sum(scope.start, scope.end, scope.task) }}</div>
+          </div>
         </template>
 
         <template #day="{ scope }">
@@ -360,23 +366,6 @@ function sum(start: Timestamp, end: Timestamp, task: Task) {
     return accumulator
   }
   return task.logged.reduce(reducer, 0)
-}
-
-/**
- * Determines if the passed in task has logged time
- * between the start and end times
- */
-function getTasks(start: Timestamp, end: Timestamp, task: Task) {
-  const t: Task[] = []
-
-  for (let index = 0; index < task.logged.length; ++index) {
-    const loggedTimestamp = parsed(task.logged[index]!.date)
-    if (loggedTimestamp && isBetweenDates(loggedTimestamp, start, end)) {
-      t.push(task)
-      break
-    }
-  }
-  return t
 }
 
 function weekdayClass() {

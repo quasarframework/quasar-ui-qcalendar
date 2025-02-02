@@ -66,20 +66,35 @@
           </template>
 
           <template v-if="selectedCalendar === 'task'" #task="{ scope }">
-            <template v-for="task in getTasks(scope.start, scope.end, scope.task)" :key="task.key">
-              <div class="header ellipsis">
-                <div class="issue ellipsis">
-                  <span v-if="scope.task.icon === 'done'" class="done"><Done /></span>
-                  <span v-else-if="scope.task.icon === 'pending'" class="pending"><Pending /></span>
-                  <span v-else-if="scope.task.icon === 'blocking'" class="blocking"
-                    ><Blocking
-                  /></span>
-                  {{ scope.task.title }}
-                </div>
-                <div class="key">{{ scope.task.key }}</div>
-                <div class="logged">{{ sum(scope.start, scope.end, scope.task) }}</div>
+            <!-- Slot for top-level tasks -->
+            <div class="header ellipsis">
+              <div class="issue ellipsis">
+                <span v-if="scope.task.icon === 'done'" class="done"><Done /></span>
+                <span v-else-if="scope.task.icon === 'pending'" class="pending"><Pending /></span>
+                <span v-else-if="scope.task.icon === 'blocking'" class="blocking"
+                  ><Blocking
+                /></span>
+                {{ scope.task.title }}
               </div>
-            </template>
+              <div class="key">{{ scope.task.key }}</div>
+              <div class="logged">{{ sum(scope.start, scope.end, scope.task) }}</div>
+            </div>
+          </template>
+
+          <template v-if="selectedCalendar === 'task'" #subtask="{ scope }">
+            <!-- Slot for subtasks (child tasks) -->
+            <div class="header ellipsis">
+              <div class="issue ellipsis">
+                <span v-if="scope.task.icon === 'done'" class="done"><Done /></span>
+                <span v-else-if="scope.task.icon === 'pending'" class="pending"><Pending /></span>
+                <span v-else-if="scope.task.icon === 'blocking'" class="blocking"
+                  ><Blocking
+                /></span>
+                {{ scope.task.title }}
+              </div>
+              <div class="key">{{ scope.task.key }}</div>
+              <div class="logged">{{ sum(scope.start, scope.end, scope.task) }}</div>
+            </div>
           </template>
 
           <template v-if="selectedCalendar === 'task'" #day="{ scope: { timestamp, task } }">
@@ -469,25 +484,6 @@ function sum(start: Timestamp, end: Timestamp, task: Task) {
       ? accumulator + currentValue.logged
       : accumulator
   }, 0)
-}
-
-/**
- * Determines if the passed in task has logged time
- * between the start and end times
- */
-function getTasks(start: Timestamp, end: Timestamp, task: Task): Task[] {
-  const tasks: Task[] = []
-
-  const hasLoggedInRange = task.logged.some((log) => {
-    const loggedTimestamp = parsed(log.date)
-    return loggedTimestamp !== null && isBetweenDates(loggedTimestamp, start, end)
-  })
-
-  if (hasLoggedInRange) {
-    tasks.push(task)
-  }
-
-  return tasks
 }
 
 /**
