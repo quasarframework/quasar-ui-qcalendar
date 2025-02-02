@@ -113,7 +113,7 @@
 </template>
 
 <script setup lang="ts">
-import { QCalendarScheduler, today, Timestamp } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarScheduler, today, type Timestamp } from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref, reactive, computed } from 'vue'
@@ -199,6 +199,11 @@ interface Scope {
   scope: any
 }
 
+interface DropScope extends Scope {
+  timestamp: Timestamp
+  resource: Resource
+}
+
 function onDragStart(e: DragEvent, item: Item) {
   console.log('onDragStart called')
   if (e.dataTransfer) {
@@ -208,7 +213,7 @@ function onDragStart(e: DragEvent, item: Item) {
   }
 }
 
-function onDragEnter(e: DragEvent, type: string, { scope }: Scope) {
+function onDragEnter(e: DragEvent, type: string, { scope }: DropScope) {
   console.log('onDragEnter', type, scope)
   if (type === 'day' || type === 'head-day') {
     e.preventDefault()
@@ -216,7 +221,7 @@ function onDragEnter(e: DragEvent, type: string, { scope }: Scope) {
   }
 }
 
-function onDragOver(e: DragEvent, type: string, { scope }: Scope) {
+function onDragOver(e: DragEvent, type: string, { scope }: DropScope) {
   console.log('onDragOver', type, scope)
   if (type === 'day' || type === 'head-day') {
     e.preventDefault()
@@ -224,16 +229,11 @@ function onDragOver(e: DragEvent, type: string, { scope }: Scope) {
   }
 }
 
-function onDragLeave(e: DragEvent, type: string, { scope }: Scope) {
+function onDragLeave(e: DragEvent, type: string, { scope }: DropScope) {
   console.log('onDragLeave', type, scope)
   if (type === 'day' || type === 'head-day') {
     return false
   }
-}
-
-interface DropScope extends Scope {
-  timestamp: Timestamp
-  resource: Resource
 }
 
 function onDrop(e: DragEvent, type: string, { scope }: DropScope) {

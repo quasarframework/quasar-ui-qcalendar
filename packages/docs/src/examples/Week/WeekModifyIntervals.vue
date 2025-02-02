@@ -62,7 +62,6 @@ import '@quasar/quasar-ui-qcalendar/index.css'
 import { ref, computed, watch } from 'vue'
 import NavigationBar from 'components/NavigationBar.vue'
 
-
 const calendar = ref<QCalendarDay>(),
   selectedDate = ref(today()),
   intervalRange = ref({ min: 0, max: 24 }),
