@@ -954,14 +954,16 @@ export default defineComponent({
       if (resources === undefined) {
         resources = props.modelResources
       }
-      return (resources as Resource[]).flatMap((resource, resourceIndex) => {
-        return __renderResourceRow(
-          resource,
-          resourceIndex,
-          indentLevel,
-          resource.children !== undefined ? resource.expanded : expanded,
-        )
-      })
+      return (resources as Resource[])
+        .map((resource, resourceIndex) => {
+          return __renderResourceRow(
+            resource,
+            resourceIndex,
+            indentLevel,
+            resource.children !== undefined ? resource.expanded : expanded,
+          )
+        })
+        .flat()
     }
 
     function __renderResourceRow(
