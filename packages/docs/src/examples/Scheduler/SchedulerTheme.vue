@@ -440,7 +440,7 @@ const themes = reactive<Record<string, Theme>>({
   },
 })
 type Resource = { id: number; label: string }
-const resources = reactive<Resource[]>([
+const resources = ref<Resource[]>([
   { id: 1, label: 'John' },
   { id: 2, label: 'Mary' },
   { id: 3, label: 'Susan' },

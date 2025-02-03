@@ -28,7 +28,7 @@
         bordered
         :interval-minutes="15"
         :interval-count="96"
-        interval-height="20px"
+        :interval-height="20"
         style="height: 300px"
       />
     </div>

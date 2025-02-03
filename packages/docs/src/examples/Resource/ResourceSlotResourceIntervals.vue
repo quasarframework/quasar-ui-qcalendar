@@ -55,7 +55,7 @@ interface Event {
 }
 const calendar = ref<QCalendarResource>(),
   selectedDate = ref(today()),
-  resources = reactive<Resource[]>([
+  resources = ref<Resource[]>([
     { id: '1', name: 'John' },
     {
       id: '2',

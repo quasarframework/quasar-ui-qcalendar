@@ -41,7 +41,6 @@ import '@quasar/quasar-ui-qcalendar/index.css'
 import { ref, reactive, computed } from 'vue'
 import NavigationBar from 'components/NavigationBar.vue'
 
-
 interface Event {
   dow: number
   title: string
@@ -62,7 +61,7 @@ interface Resource {
 
 const calendar = ref<QCalendarScheduler>(),
   selectedDate = ref(today()),
-  resources = reactive<Resource[]>([
+  resources = ref<Resource[]>([
     { id: '1', name: 'John' },
     {
       id: '2',

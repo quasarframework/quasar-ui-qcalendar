@@ -142,7 +142,7 @@ import {
 } from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
-import { ref, reactive, computed, onBeforeMount } from 'vue'
+import { ref, computed, onBeforeMount } from 'vue'
 import NavigationBar from 'components/NavigationBar.vue'
 
 import Done from '@carbon/icons-vue/es/checkmark--outline/16'
@@ -154,10 +154,15 @@ interface Logged {
   logged: number
 }
 interface Task {
-  icon: string
-  title: string
   key: string
+  title: string
+  icon?: string
+  expanded?: boolean
+  children?: Task[]
   logged: Logged[]
+}
+interface FooterTask {
+  title: string
 }
 
 const calendar = ref<QCalendarTask>(),
@@ -167,7 +172,7 @@ const calendar = ref<QCalendarTask>(),
   dateHeader = ref('stacked'),
   startDate = ref(today()),
   endDate = ref(today()),
-  tasks = reactive([
+  tasks = ref<Task[]>([
     {
       icon: 'done',
       title: 'Task 1',
@@ -261,7 +266,7 @@ const calendar = ref<QCalendarTask>(),
       ],
     },
   ]),
-  footerTasks = ref([{ title: 'TOTALS' }])
+  footerTasks = ref<FooterTask[]>([{ title: 'TOTALS' }])
 
 /**
  * Returns tasks between startDate and endDate (captured via onChange event)
@@ -269,7 +274,7 @@ const calendar = ref<QCalendarTask>(),
 const parsedTasks = computed(() => {
   const start = parsed(startDate.value)
   const end = parsed(endDate.value)
-  return tasks.filter((task) =>
+  return tasks.value.filter((task) =>
     task.logged.some((log) => {
       const parsedDate = parsed(log.date)
       return parsedDate && start && end && isBetweenDates(parsedDate, start, end)
@@ -282,7 +287,7 @@ onBeforeMount(() => {
   const date = new Date()
   const year = date.getFullYear()
   const month = padNumber(date.getMonth() + 1, 2)
-  tasks.forEach((task) => {
+  tasks.value.forEach((task) => {
     task.logged.forEach((logged) => {
       // get last 2 digits from current date (day)
       const day = logged.date.slice(-2)
@@ -297,7 +302,7 @@ function getLogged(date: string, logged: Logged[]) {
 }
 
 function getLoggedSummary(date: string): number {
-  return tasks.reduce((total, task) => {
+  return tasks.value.reduce((total, task) => {
     return (
       total +
       task.logged.reduce((accumulator, log) => {
@@ -351,7 +356,7 @@ function totals(start: Timestamp, end: Timestamp) {
       : accumulator
   }
 
-  return tasks.reduce((total, task) => total + task.logged.reduce(reducer, 0), 0)
+  return tasks.value.reduce((total, task) => total + task.logged.reduce(reducer, 0), 0)
 }
 
 function onToday() {

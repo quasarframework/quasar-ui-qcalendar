@@ -441,7 +441,7 @@ const themes = reactive<Record<string, Theme>>({
     '--calendar-head-font-weight': '600',
   },
 })
-const resources = reactive<Record<string, string>[]>([
+const resources = ref<Record<string, string>[]>([
   { id: '1', name: 'John' },
   { id: '2', name: 'Board Room' },
   { id: '3', name: 'Mary' },

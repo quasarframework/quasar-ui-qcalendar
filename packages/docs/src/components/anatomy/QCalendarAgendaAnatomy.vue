@@ -90,7 +90,7 @@ const types = reactive<Type[]>([
 ])
 const selected = ref<Type>(types[0] as Type)
 const el = ref<HTMLElement | null>(null)
-const agenda = reactive<Record<number, AgendaItem[]>>({
+const agenda = ref<Record<number, AgendaItem[]>>({
   1: [
     {
       time: '08:00',
@@ -175,6 +175,6 @@ function removeClass() {
 }
 
 function getAgenda(day: { weekday: string }) {
-  return agenda[parseInt(day.weekday, 10)]
+  return agenda.value[parseInt(day.weekday, 10)]
 }
 </script>

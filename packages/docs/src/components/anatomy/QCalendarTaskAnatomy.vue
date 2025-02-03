@@ -155,7 +155,7 @@ const types = reactive<Type[]>([
 ])
 const selected = ref<Type>(types[0] as Type)
 const el = ref<HTMLElement | null>(null)
-const tasks = reactive<Task[]>([
+const tasks = ref<Task[]>([
   {
     icon: 'done',
     title: 'Task 1',
@@ -249,8 +249,8 @@ const tasks = reactive<Task[]>([
     ],
   },
 ])
-const titleTasks = reactive<TitleTask[]>([{ label: 'TITLE' }, { label: 'SUBTITLE' }])
-const footerTasks = reactive<FooterTask[]>([{ title: 'TOTALS' }])
+const titleTasks = ref<TitleTask[]>([{ label: 'TITLE' }, { label: 'SUBTITLE' }])
+const footerTasks = ref<FooterTask[]>([{ title: 'TOTALS' }])
 const startDate = ref(today())
 const endDate = ref(today())
 
@@ -262,7 +262,7 @@ const parsedTasks = computed(() => {
     return [] as Task[]
   }
 
-  return tasks.filter((task) =>
+  return tasks.value.filter((task) =>
     task.logged.some((logged) => {
       const loggedTimestamp = parsed(logged.date)
       return loggedTimestamp && isBetweenDates(loggedTimestamp, start, end)
@@ -283,7 +283,7 @@ onBeforeMount(() => {
   const date = new Date()
   const year = date.getFullYear()
   const month = padNumber(date.getMonth() + 1, 2)
-  tasks.forEach((task) => {
+  tasks.value.forEach((task) => {
     task.logged.forEach((logged) => {
       // get last 2 digits from current date (day)
       const day = logged.date.slice(-2)
@@ -344,8 +344,8 @@ function getLoggedSummary(date: string) {
     return accumulator
   }
 
-  for (const index in tasks) {
-    const task = tasks[index]
+  for (const index in tasks.value) {
+    const task = tasks.value[index]
     total += task!.logged.reduce(reducer, 0)
   }
 
@@ -400,8 +400,8 @@ function totals(start: Timestamp, end: Timestamp) {
     return accumulator
   }
 
-  for (const task in tasks) {
-    total += tasks[task]!.logged.reduce(reducer, 0)
+  for (const task in tasks.value) {
+    total += tasks.value[task]!.logged.reduce(reducer, 0)
   }
 
   return total

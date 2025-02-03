@@ -109,6 +109,20 @@ interface Props {
   modelValue: string
   styles: Record<string, any>
 }
+interface Task {
+  key: string
+  title: string
+  icon?: string
+  expanded?: boolean
+  children?: Task[]
+  logged: { date: string; logged: number }[]
+}
+interface TitleTask {
+  label: string
+}
+interface FooterTask {
+  title: string
+}
 
 const props = defineProps<Props>()
 
@@ -116,7 +130,7 @@ const calendar = ref<QCalendarTask>()
 const selectedDate = ref(today())
 const startDate = ref(today())
 const endDate = ref(today())
-const tasks = ref([
+const tasks = ref<Task[]>([
   {
     icon: 'done',
     title: 'Task 1',
@@ -210,8 +224,8 @@ const tasks = ref([
     ],
   },
 ])
-const titleTasks = ref([{ label: 'TITLE' }, { label: 'SUBTITLE' }])
-const footerTasks = ref([{ title: 'TOTALS' }])
+const titleTasks = ref<TitleTask[]>([{ label: 'TITLE' }, { label: 'SUBTITLE' }])
+const footerTasks = ref<FooterTask[]>([{ title: 'TOTALS' }])
 
 const parsedTasks = computed(() => {
   const start = parsed(startDate.value)

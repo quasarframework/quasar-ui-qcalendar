@@ -170,9 +170,11 @@ interface Logged {
   logged: number
 }
 interface Task {
-  icon: string
-  title: string
   key: string
+  title: string
+  icon?: string
+  expanded?: boolean
+  children?: Task[]
   logged: Logged[]
 }
 interface AgendaItem {
@@ -181,11 +183,26 @@ interface AgendaItem {
   desc?: string
 }
 
+interface Resource {
+  id: string
+  name: string
+  expanded?: boolean
+  children?: Resource[]
+}
+
+interface TitleTask {
+  label: string
+}
+
+interface FooterTask {
+  title: string
+}
+
 const calendar = ref<QCalendar>(),
   selectedCalendar = ref('day'),
   selectedView = ref('day'),
   selectedDate = ref(today()),
-  resources = reactive([
+  resources = ref<Resource[]>([
     { id: '1', name: 'John' },
     {
       id: '2',
@@ -211,7 +228,7 @@ const calendar = ref<QCalendar>(),
   ]),
   startDate = ref(today()),
   endDate = ref(today()),
-  tasks = reactive([
+  tasks = ref<Task[]>([
     {
       icon: 'done',
       title: 'Task 1',
@@ -304,130 +321,130 @@ const calendar = ref<QCalendar>(),
         { date: '2021-03-30', logged: 1.0 },
       ],
     },
-  ]),
-  titleTasks = ref([{ label: 'TITLE' }, { label: 'SUBTITLE' }]),
-  footerTasks = ref([{ title: 'TOTALS' }]),
-  agenda = reactive<Record<number, AgendaItem[]>>({
-    // value represents day of the week
-    1: [
-      {
-        time: '08:00',
-        avatar: 'https://cdn.quasar.dev/img/boy-avatar.png',
-        desc: 'Meeting with CEO',
-      },
-      {
-        time: '08:30',
-        avatar: 'https://cdn.quasar.dev/img/avatar.png',
-        desc: 'Meeting with HR',
-      },
-      {
-        time: '10:00',
-        avatar: 'https://cdn.quasar.dev/img/avatar1.jpg',
-        desc: 'Meeting with Karen',
-      },
-    ],
-    2: [
-      {
-        time: '11:30',
-        avatar: 'https://cdn.quasar.dev/img/avatar2.jpg',
-        desc: 'Meeting with Alisha',
-      },
-      {
-        time: '17:00',
-        avatar: 'https://cdn.quasar.dev/img/avatar3.jpg',
-        desc: 'Meeting with Sarah',
-      },
-    ],
-    3: [
-      {
-        time: '08:00',
-        desc: 'Stand-up SCRUM',
-        avatar: 'https://cdn.quasar.dev/img/material.png',
-      },
-      {
-        time: '09:00',
-        avatar: 'https://cdn.quasar.dev/img/boy-avatar.png',
-      },
-      {
-        time: '10:00',
-        desc: 'Sprint planning',
-        avatar: 'https://cdn.quasar.dev/img/material.png',
-      },
-      {
-        time: '13:00',
-        avatar: 'https://cdn.quasar.dev/img/avatar1.jpg',
-      },
-    ],
-    4: [
-      {
-        time: '09:00',
-        avatar: 'https://cdn.quasar.dev/img/avatar3.jpg',
-      },
-      {
-        time: '10:00',
-        avatar: 'https://cdn.quasar.dev/img/avatar2.jpg',
-      },
-      {
-        time: '13:00',
-        avatar: 'https://cdn.quasar.dev/img/material.png',
-      },
-    ],
-    5: [
-      {
-        time: '08:00',
-        avatar: 'https://cdn.quasar.dev/img/boy-avatar.png',
-      },
-      {
-        time: '09:00',
-        avatar: 'https://cdn.quasar.dev/img/avatar2.jpg',
-      },
-      {
-        time: '09:30',
-        avatar: 'https://cdn.quasar.dev/img/avatar4.jpg',
-      },
-      {
-        time: '10:00',
-        avatar: 'https://cdn.quasar.dev/img/avatar5.jpg',
-      },
-      {
-        time: '11:30',
-        avatar: 'https://cdn.quasar.dev/img/material.png',
-      },
-      {
-        time: '13:00',
-        avatar: 'https://cdn.quasar.dev/img/avatar6.jpg',
-      },
-      {
-        time: '13:30',
-        avatar: 'https://cdn.quasar.dev/img/avatar3.jpg',
-      },
-      {
-        time: '14:00',
-        avatar: 'https://cdn.quasar.dev/img/linux-avatar.png',
-      },
-      {
-        time: '14:30',
-        avatar: 'https://cdn.quasar.dev/img/avatar.png',
-      },
-      {
-        time: '15:00',
-        avatar: 'https://cdn.quasar.dev/img/boy-avatar.png',
-      },
-      {
-        time: '15:30',
-        avatar: 'https://cdn.quasar.dev/img/avatar2.jpg',
-      },
-      {
-        time: '16:00',
-        avatar: 'https://cdn.quasar.dev/img/avatar6.jpg',
-      },
-    ],
-  })
+  ])
+const titleTasks = ref<TitleTask[]>([{ label: 'TITLE' }, { label: 'SUBTITLE' }])
+const footerTasks = ref<FooterTask[]>([{ title: 'TOTALS' }])
+const agenda = reactive<Record<number, AgendaItem[]>>({
+  // value represents day of the week
+  1: [
+    {
+      time: '08:00',
+      avatar: 'https://cdn.quasar.dev/img/boy-avatar.png',
+      desc: 'Meeting with CEO',
+    },
+    {
+      time: '08:30',
+      avatar: 'https://cdn.quasar.dev/img/avatar.png',
+      desc: 'Meeting with HR',
+    },
+    {
+      time: '10:00',
+      avatar: 'https://cdn.quasar.dev/img/avatar1.jpg',
+      desc: 'Meeting with Karen',
+    },
+  ],
+  2: [
+    {
+      time: '11:30',
+      avatar: 'https://cdn.quasar.dev/img/avatar2.jpg',
+      desc: 'Meeting with Alisha',
+    },
+    {
+      time: '17:00',
+      avatar: 'https://cdn.quasar.dev/img/avatar3.jpg',
+      desc: 'Meeting with Sarah',
+    },
+  ],
+  3: [
+    {
+      time: '08:00',
+      desc: 'Stand-up SCRUM',
+      avatar: 'https://cdn.quasar.dev/img/material.png',
+    },
+    {
+      time: '09:00',
+      avatar: 'https://cdn.quasar.dev/img/boy-avatar.png',
+    },
+    {
+      time: '10:00',
+      desc: 'Sprint planning',
+      avatar: 'https://cdn.quasar.dev/img/material.png',
+    },
+    {
+      time: '13:00',
+      avatar: 'https://cdn.quasar.dev/img/avatar1.jpg',
+    },
+  ],
+  4: [
+    {
+      time: '09:00',
+      avatar: 'https://cdn.quasar.dev/img/avatar3.jpg',
+    },
+    {
+      time: '10:00',
+      avatar: 'https://cdn.quasar.dev/img/avatar2.jpg',
+    },
+    {
+      time: '13:00',
+      avatar: 'https://cdn.quasar.dev/img/material.png',
+    },
+  ],
+  5: [
+    {
+      time: '08:00',
+      avatar: 'https://cdn.quasar.dev/img/boy-avatar.png',
+    },
+    {
+      time: '09:00',
+      avatar: 'https://cdn.quasar.dev/img/avatar2.jpg',
+    },
+    {
+      time: '09:30',
+      avatar: 'https://cdn.quasar.dev/img/avatar4.jpg',
+    },
+    {
+      time: '10:00',
+      avatar: 'https://cdn.quasar.dev/img/avatar5.jpg',
+    },
+    {
+      time: '11:30',
+      avatar: 'https://cdn.quasar.dev/img/material.png',
+    },
+    {
+      time: '13:00',
+      avatar: 'https://cdn.quasar.dev/img/avatar6.jpg',
+    },
+    {
+      time: '13:30',
+      avatar: 'https://cdn.quasar.dev/img/avatar3.jpg',
+    },
+    {
+      time: '14:00',
+      avatar: 'https://cdn.quasar.dev/img/linux-avatar.png',
+    },
+    {
+      time: '14:30',
+      avatar: 'https://cdn.quasar.dev/img/avatar.png',
+    },
+    {
+      time: '15:00',
+      avatar: 'https://cdn.quasar.dev/img/boy-avatar.png',
+    },
+    {
+      time: '15:30',
+      avatar: 'https://cdn.quasar.dev/img/avatar2.jpg',
+    },
+    {
+      time: '16:00',
+      avatar: 'https://cdn.quasar.dev/img/avatar6.jpg',
+    },
+  ],
+})
 
 const parsedTasks = computed(() => {
   const start = parsed(startDate.value)
   const end = parsed(endDate.value)
-  return tasks.filter((task) =>
+  return tasks.value.filter((task) =>
     task.logged.some((log) => {
       const parsedDate = parsed(log.date)
       return parsedDate && start && end && isBetweenDates(parsedDate, start, end)
@@ -440,7 +457,7 @@ onBeforeMount(() => {
   const date = new Date()
   const year = date.getFullYear()
   const month = padNumber(date.getMonth() + 1, 2)
-  tasks.forEach((task) => {
+  tasks.value.forEach((task) => {
     task.logged.forEach((logged) => {
       // get last 2 digits from current date (day)
       const day = logged.date.slice(-2)
@@ -460,7 +477,7 @@ function getLogged(date: string, logged: Logged[]) {
 }
 
 function getLoggedSummary(date: string): number {
-  return tasks.reduce((total, task) => {
+  return tasks.value.reduce((total, task) => {
     return (
       total +
       task.logged.reduce((accumulator, log) => {
@@ -496,7 +513,7 @@ function totals(start: Timestamp, end: Timestamp) {
       : accumulator
   }
 
-  return tasks.reduce((total, task) => total + task.logged.reduce(reducer, 0), 0)
+  return tasks.value.reduce((total, task) => total + task.logged.reduce(reducer, 0), 0)
 }
 
 function getAgenda(day: Timestamp) {

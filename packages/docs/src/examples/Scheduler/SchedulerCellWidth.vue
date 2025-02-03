@@ -35,13 +35,20 @@
 import { QCalendarScheduler, today, Timestamp } from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 import NavigationBar from 'components/NavigationBar.vue'
 
+interface Resource {
+  id: string
+  name: string
+  height?: number
+  expanded?: boolean
+  children?: Resource[]
+}
 
 const calendar = ref<QCalendarScheduler>(),
   selectedDate = ref(today()),
-  resources = reactive([
+  resources = ref<Resource[]>([
     { id: '1', name: 'John' },
     {
       id: '2',

@@ -119,6 +119,10 @@ import Done from '@carbon/icons-vue/es/checkmark--outline/16'
 import Pending from '@carbon/icons-vue/es/pending/16'
 import Blocking from '@carbon/icons-vue/es/undefined/16'
 
+interface FooterTask {
+  title: string
+}
+
 const calendar = ref<QCalendarTask>()
 type Theme = Record<string, string>
 
@@ -620,7 +624,7 @@ const tasks = reactive<Task[]>([
     ],
   },
 ])
-const footerTasks = reactive([{ title: 'TOTALS' }])
+const footerTasks = ref<FooterTask[]>([{ title: 'TOTALS' }])
 
 const themesList = computed(() => {
   const list: { label: string; value: Theme }[] = []

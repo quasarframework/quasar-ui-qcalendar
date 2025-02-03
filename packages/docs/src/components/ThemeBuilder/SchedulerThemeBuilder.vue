@@ -64,13 +64,20 @@ interface Props {
   styles: Record<string, any>
 }
 
+interface Resource {
+  id: string
+  name: string
+  expanded?: boolean
+  children?: Resource[]
+}
+
 const props = defineProps<Props>()
 
 const selectedDate = ref('')
 const disabledDays = ref(false)
 const resourceHeight = ref(70)
 const resourceMinHeight = ref(20)
-const resources = ref([
+const resources = ref<Resource[]>([
   { id: '1', name: 'John' },
   {
     id: '2',

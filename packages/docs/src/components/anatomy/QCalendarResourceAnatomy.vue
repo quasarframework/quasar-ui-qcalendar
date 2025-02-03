@@ -71,7 +71,7 @@ const types = reactive<Type[]>([
 ])
 const selected = ref<Type>(types[0] as Type)
 const el = ref<HTMLElement | null>(null)
-const resources = reactive<Resource[]>([
+const resources = ref<Resource[]>([
   { id: '1', name: 'John' },
   {
     id: '2',
