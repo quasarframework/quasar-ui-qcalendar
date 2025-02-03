@@ -30,6 +30,10 @@ export interface Scope {
   scope: any
 }
 
+export interface Resource {
+  [key: string]: any
+}
+
 export interface ScopeForSlot {
   timestamp: Timestamp
   timeStartPos: (_time: string, _clamp?: boolean) => number | false
@@ -129,7 +133,7 @@ export const useIntervalProps = {
 
 export interface SchedulerProps extends IntervalProps {
   view: 'day' | 'week' | 'month' | 'month-interval'
-  modelResources?: any[] // You might want to replace `any[]` with a more specific type.
+  modelResources?: Resource[]
   resourceKey: string
   resourceLabel: string
   resourceHeight: number | string
@@ -207,11 +211,8 @@ export interface AgendaProps extends IntervalProps {
   rightColumnOptions?: any[]
   columnOptionsId?: string
   columnOptionsLabel?: string
-  weekdayStyle?: (_scope: Scope) => any
-  weekdayClass?: (_scope: Scope) => string
   dayStyle?: (_scope: Scope) => any
   dayClass?: (_scope: Scope) => string
-  dateHeader: 'stacked' | 'inline' | 'inverted'
   dayHeight: number | string
   dayMinHeight: number | string
 }
@@ -268,7 +269,7 @@ export const useAgendaProps = {
 } as const
 
 export interface ResourceProps extends IntervalProps {
-  modelResources?: any[] // Consider refining this type.
+  modelResources?: Resource[]
   resourceKey: string
   resourceLabel: string
   resourceHeight: number | string
@@ -278,10 +279,6 @@ export interface ResourceProps extends IntervalProps {
   cellWidth: number | string
   intervalHeaderHeight: number | string
   noSticky?: boolean
-}
-
-export interface Resource {
-  [key: string]: any
 }
 
 export const useResourceProps = {
