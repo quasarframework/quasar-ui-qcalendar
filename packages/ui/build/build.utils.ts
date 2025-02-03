@@ -230,3 +230,7 @@ export function copyFolder(srcDir: string, destDir: string) {
       console.log()
     })
 }
+
+export function removeDuplicates<T>(array: T[]): T[] {
+  return Array.from(new Set(array))
+}

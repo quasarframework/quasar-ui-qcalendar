@@ -19,6 +19,7 @@ import {
   camelCase,
   capitalize,
   plural,
+  removeDuplicates,
 } from './build.utils'
 
 const dest = resolveToRoot('dist/api')
@@ -977,8 +978,8 @@ function parseObject({ banner, api, itemName, masterType, verifyCategory, verify
       }
 
       // after merging, make sure there are no duplicates
-      obj.examples = Array.from(new Set(obj.examples))
-      obj.type = Array.isArray(obj.type) ? Array.from(new Set(obj.type)) : obj.type
+      obj.examples = removeDuplicates(obj.examples)
+      obj.type = Array.isArray(obj.type) ? removeDuplicates(obj.type) : obj.type
 
       if (new Set(obj.examples).size !== obj.examples.length) {
         printErrorAndExit('object has "examples" Array with duplicates')
@@ -1019,6 +1020,8 @@ function parseObject({ banner, api, itemName, masterType, verifyCategory, verify
   }
 
   if (masterType === 'props') {
+    // remove dupes in type array
+    obj.type = Array.isArray(obj.type) ? removeDuplicates(obj.type) : obj.type
     if (Array.isArray(obj.type) === true && new Set(obj.type).size !== obj.type.length) {
       printErrorAndExit('object has "type" defined as Array, but the Array contains duplicates')
     }
