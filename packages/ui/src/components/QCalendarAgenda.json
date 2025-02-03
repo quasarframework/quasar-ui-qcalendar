@@ -7,18 +7,13 @@
     "composables/private.useCommon",
     "composables/private.useInterval",
     "composables/private.useMaxDays",
-    "composables/private.useTimes"
+    "composables/private.useTimes",
+    "composables/private.useNavigation"
   ],
   "meta": {
     "docsUrl": "https://qcalendar.netlify.app/developing/qcalendar-agenda"
   },
-  "props": {
-    "use-navigation": {
-      "type": "Boolean",
-      "desc": "Allows keyboard navigation",
-      "category": "behavior"
-    }
-  },
+  "props": {},
   "events": {},
   "methods": {
     "timeStartPos": {

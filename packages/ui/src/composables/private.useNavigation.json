@@ -1,0 +1,9 @@
+{
+  "props": {
+    "use-navigation": {
+      "type": "Boolean",
+      "desc": "Allows keyboard navigation",
+      "category": "behavior"
+    }
+  }
+}

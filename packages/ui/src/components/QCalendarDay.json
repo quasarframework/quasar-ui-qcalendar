@@ -7,34 +7,13 @@
     "composables/private.useCommon",
     "composables/private.useInterval",
     "composables/private.useMaxDays",
-    "composables/private.useTimes"
+    "composables/private.useTimes",
+    "composables/private.useNavigation"
   ],
   "meta": {
     "docsUrl": "https://qcalendar.netlify.app/developing/qcalendar-day"
   },
-  "props": {
-    "use-navigation": {
-      "type": "Boolean",
-      "desc": "Allows keyboard navigation",
-      "category": "behavior"
-    },
-    "column-header-before": {
-      "type": "Boolean",
-      "category": "style",
-      "desc": "Turns on the column-header-before scoped slot",
-      "applicable": [
-        "day"
-      ]
-    },
-    "column-header-after": {
-      "type": "Boolean",
-      "category": "style",
-      "desc": "Turns on the column-header-after scoped slot",
-      "applicable": [
-        "day"
-      ]
-    }
-  },
+  "props": {},
   "events": {},
   "methods": {
     "timeStartPos": {

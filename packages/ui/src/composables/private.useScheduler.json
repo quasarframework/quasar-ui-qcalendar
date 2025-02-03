@@ -159,47 +159,5 @@
       "category": "behavior"
     }
   },
-  "events": {
-    "update:model-resources": {
-      "type": "Array",
-      "desc": "Emitted when the model-resources prop is updated"
-    },
-    "resource-expanded": {
-      "type": "Object",
-      "desc": "Emitted when a resource is expanded or collapsed",
-      "params": {
-        "scope": {
-          "type": "Object",
-          "desc": "The scope object",
-          "definition": {
-            "resource": {
-              "type": "Object",
-              "desc": "The resource object"
-            },
-            "timestamps": {
-              "type": "Array",
-              "tsType": "TimestampArray",
-              "desc": "The array of timestamps for the intervals"
-            },
-            "resourceIndex": {
-              "type": "Number",
-              "desc": "The index of the resource in the model-resources array"
-            },
-            "indentLevel": {
-              "type": "Number",
-              "desc": "The indent level of the resource"
-            },
-            "label": {
-              "type": "String",
-              "desc": "The label of the resource"
-            }
-          }
-        },
-        "expanded": {
-          "type": "Boolean",
-          "desc": "True if the resource is expanded, false otherwise"
-        }
-      }
-    }
-  }
+  "events": {}
 }

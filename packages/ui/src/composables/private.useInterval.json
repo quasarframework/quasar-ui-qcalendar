@@ -27,7 +27,7 @@
         "'month'",
         "'week-agenda'"
       ],
-      "default": "'day'",
+      "default": "# 'day'",
       "__runtimeDefault": true
     },
     "short-interval-label": {
@@ -401,7 +401,8 @@
           "{ color: '#ccc' }"
         ]
       },
-      "default": "(data) => null",
+      "default": "# null",
+      "__runtimeDefault": true,
       "examples": [
         "(data) => { return { 'background-color': '#c0c0c0' } }",
         "(data) => getWeekdayStyle(data)"

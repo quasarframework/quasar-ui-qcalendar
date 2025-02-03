@@ -9,18 +9,13 @@
     "composables/private.useMaxDays",
     "composables/private.useTimes",
     "composables/private.useScheduler",
-    "composables/private.useResource"
+    "composables/private.useResource",
+    "composables/private.useNavigation"
   ],
   "meta": {
     "docsUrl": "https://qcalendar.netlify.app/developing/qcalendar-scheduler"
   },
-  "props": {
-    "use-navigation": {
-      "type": "Boolean",
-      "desc": "Allows keyboard navigation",
-      "category": "behavior"
-    }
-  },
+  "props": {},
   "events": {},
   "methods": {
     "timeStartPos": {

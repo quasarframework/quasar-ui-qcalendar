@@ -7,18 +7,13 @@
     "composables/private.useInterval",
     "composables/private.useMaxDays",
     "composables/private.useTasks",
-    "composables/private.useTimes"
+    "composables/private.useTimes",
+    "composables/private.useNavigation"
   ],
   "meta": {
     "docsUrl": "https://qcalendar.netlify.app/developing/qcalendar-task"
   },
-  "props": {
-    "use-navigation": {
-      "type": "Boolean",
-      "desc": "Allows keyboard navigation",
-      "category": "behavior"
-    }
-  },
+  "props": {},
   "slots": {
     "head-weekday-label": {
       "desc": "The slot associated with the header weekday label",

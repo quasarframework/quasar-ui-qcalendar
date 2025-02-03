@@ -6,7 +6,8 @@
     "composables/private.useCommon",
     "composables/private.useMaxDays",
     "composables/private.useMonth",
-    "composables/private.useTimes"
+    "composables/private.useTimes",
+    "composables/private.useNavigation"
   ],
   "meta": {
     "docsUrl": "https://qcalendar.netlify.app/developing/qcalendar-month"
@@ -25,11 +26,6 @@
       "examples": [
         "'inline'"
       ]
-    },
-    "use-navigation": {
-      "type": "Boolean",
-      "desc": "Allows keyboard navigation",
-      "category": "behavior"
     }
   },
   "events": {},

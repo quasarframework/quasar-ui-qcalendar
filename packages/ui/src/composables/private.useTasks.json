@@ -89,6 +89,8 @@
           }
         }
       },
+      "default": "# null",
+      "__runtimeDefault": true,
       "returns": {
         "type": "String",
         "desc": "A string of classes to apply to the footer day slot"

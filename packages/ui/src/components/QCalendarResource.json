@@ -8,17 +8,13 @@
     "composables/private.useInterval",
     "composables/private.useMaxDays",
     "composables/private.useTimes",
-    "composables/private.useResource"
+    "composables/private.useResource",
+    "composables/private.useNavigation"
   ],
   "meta": {
     "docsUrl": "https://qcalendar.netlify.app/developing/qcalendar-resource"
   },
   "props": {
-    "use-navigation": {
-      "type": "Boolean",
-      "desc": "Allows keyboard navigation",
-      "category": "behavior"
-    },
     "sticky": {
       "type": "Boolean",
       "category": "behavior",
