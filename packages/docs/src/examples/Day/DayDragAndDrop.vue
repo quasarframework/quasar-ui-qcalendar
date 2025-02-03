@@ -5,7 +5,7 @@
     <div class="row justify-center">
       <div style="display: flex; justify-content: center; width: 100%">
         <div class="q-mx-sm">
-          <ul class="list">
+          <ul class="column">
             <li
               v-for="item in dragItems"
               :key="item.id"

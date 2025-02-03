@@ -2,113 +2,101 @@
   <div class="subcontent">
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
-    <div class="row justify-center">
-      <div style="display: flex; justify-content: center">
-        <div style="display: flex; justify-content: center; align-items: center">
-          <q-select
-            v-model="selectedTheme"
-            label="Choose a theme"
-            outlined
-            dense
-            map-options
-            emit-value
-            options-dense
-            :options="themesList"
-            class="button"
-            style="min-width: 180px"
-          />
-        </div>
-      </div>
+    <div class="q-ma-sm row justify-center q-gutter-sm">
+      <q-select
+        v-model="selectedTheme"
+        label="Choose a theme"
+        outlined
+        dense
+        map-options
+        emit-value
+        options-dense
+        :options="themesList"
+        style="min-width: 180px"
+      />
+    </div>
 
-      <div style="display: flex; max-width: 800px; width: 100%">
-        <q-calendar-task
-          ref="calendar"
-          v-model="selectedDate"
-          v-model:model-tasks="parsedTasks"
-          v-model:model-footer="footerTasks"
-          view="month"
-          :task-width="240"
-          :min-weekday-length="2"
-          :weekday-class="weekdayClass"
-          :day-class="dayClass"
-          :footer-day-class="footerDayClass"
-          :focus-type="['weekday', 'date', 'task']"
-          focusable
-          hoverable
-          animated
-          bordered
-          :style="selectedTheme"
-          @change="onChange"
-          @moved="onMoved"
-          @click-date="onClickDate"
-          @click-day="onClickDay"
-          @click-head-day="onClickHeadDay"
+    <div style="display: flex; max-width: 800px; width: 100%">
+      <q-calendar-task
+        ref="calendar"
+        v-model="selectedDate"
+        v-model:model-tasks="parsedTasks"
+        v-model:model-footer="footerTasks"
+        view="month"
+        :task-width="240"
+        :min-weekday-length="2"
+        :weekday-class="weekdayClass"
+        :day-class="dayClass"
+        :footer-day-class="footerDayClass"
+        :focus-type="['weekday', 'date', 'task']"
+        focusable
+        hoverable
+        animated
+        bordered
+        :style="selectedTheme"
+        @change="onChange"
+        @moved="onMoved"
+        @click-date="onClickDate"
+        @click-day="onClickDay"
+        @click-head-day="onClickHeadDay"
+      >
+        <template
+          #head-tasks="{
+            /* scope */
+          }"
         >
-          <template
-            #head-tasks="{
-              /* scope */
-            }"
-          >
-            <div class="header ellipsis" style="font-weight: 600">
-              <div class="issue ellipsis">Issue</div>
-              <div class="key">Key</div>
-              <div class="logged">Logged</div>
+          <div class="header ellipsis" style="font-weight: 600">
+            <div class="issue ellipsis">Issue</div>
+            <div class="key">Key</div>
+            <div class="logged">Logged</div>
+          </div>
+        </template>
+
+        <!-- Slot for top-level tasks -->
+        <template #task="{ scope }">
+          <div class="header ellipsis">
+            <div class="issue ellipsis">
+              <span v-if="scope.task.icon === 'done'" class="done"><Done /></span>
+              <span v-else-if="scope.task.icon === 'pending'" class="pending"><Pending /></span>
+              <span v-else-if="scope.task.icon === 'blocking'" class="blocking"><Blocking /></span>
+              {{ scope.task.title }}
             </div>
-          </template>
+            <div class="key">{{ scope.task.key }}</div>
+            <div class="logged">{{ sum(scope.start, scope.end, scope.task) }}</div>
+          </div>
+        </template>
 
-          <!-- Slot for top-level tasks -->
-          <template #task="{ scope }">
-            <div class="header ellipsis">
-              <div class="issue ellipsis">
-                <span v-if="scope.task.icon === 'done'" class="done"><Done /></span>
-                <span v-else-if="scope.task.icon === 'pending'" class="pending"><Pending /></span>
-                <span v-else-if="scope.task.icon === 'blocking'" class="blocking"
-                  ><Blocking
-                /></span>
-                {{ scope.task.title }}
-              </div>
-              <div class="key">{{ scope.task.key }}</div>
-              <div class="logged">{{ sum(scope.start, scope.end, scope.task) }}</div>
+        <!-- Slot for subtasks (child tasks) -->
+        <template #subtask="{ scope }">
+          <div class="header ellipsis">
+            <div class="issue ellipsis">
+              <span v-if="scope.task.icon === 'done'" class="done"><Done /></span>
+              <span v-else-if="scope.task.icon === 'pending'" class="pending"><Pending /></span>
+              <span v-else-if="scope.task.icon === 'blocking'" class="blocking"><Blocking /></span>
+              {{ scope.task.title }}
             </div>
-          </template>
+            <div class="key">{{ scope.task.key }}</div>
+            <div class="logged">{{ sum(scope.start, scope.end, scope.task) }}</div>
+          </div>
+        </template>
 
-          <!-- Slot for subtasks (child tasks) -->
-          <template #subtask="{ scope }">
-            <div class="header ellipsis">
-              <div class="issue ellipsis">
-                <span v-if="scope.task.icon === 'done'" class="done"><Done /></span>
-                <span v-else-if="scope.task.icon === 'pending'" class="pending"><Pending /></span>
-                <span v-else-if="scope.task.icon === 'blocking'" class="blocking"
-                  ><Blocking
-                /></span>
-                {{ scope.task.title }}
-              </div>
-              <div class="key">{{ scope.task.key }}</div>
-              <div class="logged">{{ sum(scope.start, scope.end, scope.task) }}</div>
-            </div>
+        <template #day="{ scope }">
+          <template v-for="time in getLogged(scope.timestamp.date, scope.task.logged)" :key="time">
+            <div class="logged-time">{{ time.logged }}</div>
           </template>
+        </template>
 
-          <template #day="{ scope }">
-            <template
-              v-for="time in getLogged(scope.timestamp.date, scope.task.logged)"
-              :key="time"
-            >
-              <div class="logged-time">{{ time.logged }}</div>
-            </template>
-          </template>
+        <template #footer-task="{ scope }">
+          <div class="summary ellipsis">
+            <div class="title ellipsis">{{ scope.footer.title }}</div>
+            <div class="total">{{ totals(scope.start, scope.end) }}</div>
+          </div>
+        </template>
 
-          <template #footer-task="{ scope }">
-            <div class="summary ellipsis">
-              <div class="title ellipsis">{{ scope.footer.title }}</div>
-              <div class="total">{{ totals(scope.start, scope.end) }}</div>
-            </div>
-          </template>
-
-          <template #footer-day="{ scope }">
-            <div class="logged-time">{{ getLoggedSummary(scope.timestamp.date) }}</div>
-          </template>
-        </q-calendar-task>
-      </div>
+        <template #footer-day="{ scope }">
+          <div class="logged-time">{{ getLoggedSummary(scope.timestamp.date) }}</div>
+        </template>
+      </q-calendar-task>
     </div>
   </div>
 </template>

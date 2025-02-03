@@ -2,7 +2,7 @@
   <div class="subcontent">
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
-    <div style="display: flex; justify-content: center">
+    <div class="q-ma-sm row justify-center q-gutter-sm">
       <q-select
         v-model="locale"
         label="Choose a locale"
@@ -12,7 +12,6 @@
         emit-value
         options-dense
         :options="locales"
-        class="button"
         style="min-width: 180px"
       />
     </div>
@@ -47,7 +46,6 @@ import { QCalendarDay, today, Timestamp } from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/index.css'
 import { ref } from 'vue'
 import NavigationBar from 'components/NavigationBar.vue'
-
 
 const calendar = ref<QCalendarDay>()
 const selectedDate = ref(today())

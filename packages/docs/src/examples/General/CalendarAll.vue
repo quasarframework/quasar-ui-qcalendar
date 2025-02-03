@@ -2,7 +2,7 @@
   <div class="subcontent">
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
-    <div class="q-ma-sm q-gutter-sm row justify-center">
+    <div class="q-ma-sm row justify-center q-gutter-sm">
       <q-select
         v-model="selectedCalendar"
         label="Calendar Mode"
@@ -10,7 +10,6 @@
         dense
         options-dense
         :options="['day', 'month', 'agenda', 'resource', 'scheduler', 'task']"
-        class="button"
         style="min-width: 180px"
       />
       <q-select
@@ -21,7 +20,6 @@
         options-dense
         :disable="selectedCalendar === 'month'"
         :options="['day', 'week', 'month']"
-        class="button"
         style="min-width: 180px"
       />
     </div>

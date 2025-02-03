@@ -2,7 +2,7 @@
   <div class="subcontent">
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
-    <div style="display: flex; justify-content: center; align-items: center">
+    <div class="q-ma-sm row justify-center q-gutter-sm">
       <q-checkbox v-model="hoverable" label="Hoverable" />
 
       <q-checkbox v-model="focusable" label="Focusable" />
@@ -17,7 +17,6 @@
         emit-value
         options-dense
         :options="options"
-        class="button"
         style="min-width: 180px"
       />
     </div>
@@ -52,7 +51,6 @@ import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref, watch } from 'vue'
 import NavigationBar from 'components/NavigationBar.vue'
-
 
 const calendar = ref<QCalendarMonth>(),
   selectedDate = ref(today()),

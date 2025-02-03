@@ -5,17 +5,16 @@
     <div class="row justify-center">
       <div style="display: flex; justify-content: center; width: 100%">
         <div style="margin: 10px">
-          <ul class="list">
-            <li
+          <q-list dense bordered separator>
+            <q-item
               v-for="item in dragItems"
               :key="item.id"
-              class="button list-item"
               draggable="true"
               @dragstart="onDragStart($event, item)"
             >
-              {{ item.name }}
-            </li>
-          </ul>
+              <q-item-section>{{ item.name }}</q-item-section>
+            </q-item>
+          </q-list>
         </div>
 
         <div style="display: flex; justify-content: center; max-width: 600px; width: 100%">

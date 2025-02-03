@@ -2,21 +2,18 @@
   <div class="subcontent">
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
-    <div style="display: flex; justify-content: center">
-      <div style="display: flex; justify-content: center; align-items: center">
-        <q-select
-          v-model="selectedTheme"
-          label="Choose a theme"
-          outlined
-          dense
-          map-options
-          emit-value
-          options-dense
-          :options="themesList"
-          class="button"
-          style="min-width: 180px"
-        />
-      </div>
+    <div class="q-ma-sm row justify-center q-gutter-sm">
+      <q-select
+        v-model="selectedTheme"
+        label="Choose a theme"
+        outlined
+        dense
+        map-options
+        emit-value
+        options-dense
+        :options="themesList"
+        style="min-width: 180px"
+      />
     </div>
 
     <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap">
@@ -47,7 +44,6 @@ import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref, reactive, computed } from 'vue'
 import NavigationBar from 'components/NavigationBar.vue'
-
 
 type Theme = Record<string, string>
 

@@ -2,32 +2,26 @@
   <div class="subcontent">
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
-    <div style="display: flex; justify-content: center">
-      <div class="button-bar" style="margin: 12px">
-        <div style="display: flex; align-items: center">
-          <q-select
-            v-model="dateAlign"
-            label="date-align"
-            outlined
-            dense
-            options-dense
-            :options="['center', 'left', 'right']"
-            class="button"
-            style="min-width: 160px"
-          />
+    <div class="q-ma-sm row justify-center q-gutter-sm">
+      <q-select
+        v-model="dateAlign"
+        label="date-align"
+        outlined
+        dense
+        options-dense
+        :options="['center', 'left', 'right']"
+        style="min-width: 160px"
+      />
 
-          <q-select
-            v-model="weekdayAlign"
-            label="weekday-align"
-            outlined
-            dense
-            options-dense
-            :options="['center', 'left', 'right']"
-            class="button"
-            style="min-width: 160px"
-          />
-        </div>
-      </div>
+      <q-select
+        v-model="weekdayAlign"
+        label="weekday-align"
+        outlined
+        dense
+        options-dense
+        :options="['center', 'left', 'right']"
+        style="min-width: 160px"
+      />
     </div>
 
     <div class="row justify-center">

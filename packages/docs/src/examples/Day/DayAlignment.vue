@@ -2,7 +2,7 @@
   <div class="subcontent">
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
-    <div class="q-ma-sm row justify-center">
+    <div class="q-ma-sm row justify-center q-gutter-sm">
       <q-select
         v-model="dateHeader"
         label="date-header"
@@ -10,7 +10,6 @@
         dense
         options-dense
         :options="['stacked', 'inline', 'inverted']"
-        class="button"
         style="min-width: 160px"
       />
 
@@ -21,7 +20,6 @@
         dense
         options-dense
         :options="['center', 'left', 'right']"
-        class="button"
         style="min-width: 160px"
       />
 
@@ -32,7 +30,6 @@
         dense
         options-dense
         :options="['center', 'left', 'right']"
-        class="button"
         style="min-width: 160px"
       />
     </div>

@@ -2,7 +2,7 @@
   <div class="subcontent">
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
-    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap">
+    <div class="q-ma-sm row justify-center q-gutter-sm">
       <q-select
         v-model="country"
         label="Pick a Country"
@@ -12,7 +12,6 @@
         map-options
         emit-value
         :options="countriesList"
-        class="button"
         style="min-width: 320px"
       />
     </div>
