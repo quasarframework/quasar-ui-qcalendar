@@ -192,7 +192,7 @@
     "dev:ios": "cd dev && pnpm run 'dev:ios' && cd ..",
     "dev:android": "cd dev && pnpm run 'dev:android' && cd ..",
     "dev:electron": "cd dev && pnpm run 'dev:electron' && cd ..",
-    "build": "tsx build/index.ts",
+    "build": "pnpm build:types && tsx build/index.ts",
     "build:js": "tsx build/script.javascript.ts",
     "build:css": "tsx build/script.css.ts",
     "build:api": "tsx build/build.api.ts",
