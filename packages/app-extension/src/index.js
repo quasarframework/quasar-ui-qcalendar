@@ -14,6 +14,7 @@ function extendConf(conf, api) {
     // register the boot file
     conf.boot.push('~@quasar/quasar-app-extension-qcalendar/src/boot/webpack-register.js')
     // make sure app extension files & ui packages get transpiled
+    conf.build.transpile = true
     conf.build.webpackTranspileDependencies = conf.build.webpackTranspileDependencies || []
     conf.build.webpackTranspileDependencies.push(/quasar-app-extension-qcalendar[\\/]src/)
     conf.build.webpackTranspileDependencies.push(/quasar-ui-qcalendar[\\/]src/)
