@@ -6,7 +6,7 @@
   "license": "MIT",
   "private": true,
   "access": "private",
-  "packageManager": "pnpm@9.15.4",
+  "packageManager": "pnpm@10.2.0",
   "scripts": {
     "clean": "rm -rf node_modules pnpm-lock.yaml packages/ui/node_modules packages/docs/node_modules",
     "build": "pnpm run build:ui && pnpm run build:docs",
@@ -18,14 +18,14 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
-    "@types/node": "^22.13.0",
-    "@typescript-eslint/eslint-plugin": "^8.22.0",
-    "@vitest/coverage-istanbul": "^3.0.4",
+    "@types/node": "^22.13.1",
+    "@typescript-eslint/eslint-plugin": "^8.23.0",
+    "@vitest/coverage-istanbul": "^3.0.5",
     "eslint": "^9.19.0",
     "globals": "^15.14.0",
     "prettier": "^3.4.2",
     "typescript": "~5.7.3",
     "unbuild": "^3.3.1",
-    "vitest": "^3.0.4"
+    "vitest": "^3.0.5"
   }
 }
