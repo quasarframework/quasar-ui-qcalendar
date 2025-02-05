@@ -20,9 +20,13 @@ With this update comes a lot of changes, with over 90% of QCalendar being rewrit
 
 This means you get better in-editor auto-completion support amongst many other advantages.
 
+## QCalendar v4.1.0 rewritten fully in TypeScript
+
+Again, this means better in-editor auto-completion support amongst many other advantages.
+
 ## New calendar component
 
-Just quickly, for information purposes, there is a new **QCalendarTask** component for writing timesheets and Gantt-like calendars.
+Just quickly, for information purposes, there is a new **QCalendarTask** component for writing task-oriented calendars, like timesheets and Gantt-like calendars. Use it to track tasks and events.
 
 ## Calendar types
 
@@ -149,7 +153,13 @@ The emitted `change` event has changed. The passed object still contains `start`
 - new (QCalendarDay) `date-header` (default: `stacked`), values `['stacked', 'inline', 'inverted']`. This allows you to have the date-header area displayed inline. When the `inline` value is used, the placement is controlled by the `weekday-align` and `date-align` properties. Using the `inverted` value is the exact opposite of `inline` display for right/left placement.
   This image will explain the QCalendarDay alignment:
   ![image](https://user-images.githubusercontent.com/10262924/103442538-3eb46a00-4c14-11eb-9278-43e3aacc0e76.png)
-- new `use-navigation` property turns on keyboard focus navigation. This takes into account weekday skips (ie: weekdays not being displayed). **TIP**: use with `no-active-date` for better visual UX and `focusable` for visual acuity.
+- new `use-navigation` property turns on keyboard focus navigation. This takes into account weekday skips (ie: weekdays not being displayed).
+  ::: warning
+  Do not use `use-navigation` with more than one calendar at a time.
+  :::
+  ::: tip
+  use with `no-active-date` for better visual UX and `focusable` for visual acuity.
+  :::
   1. QCalendarMonth: <kbd>left</kbd> navigates to previous day, <kbd>right</kbd> navigates to next day, <kbd>up</kbd> takes you to previous week, <kbd>down</kbd> navigates to next week, <kbd>home</kbd> navigates to start of month, <kbd>end</kbd> navigates to end of month, <kbd>pgUp</kbd> navigates to previous month and <kbd>pgDown</kbd> navigates to next month.
   2. QCalendarDay is a bit more complicated. There is both weekday navigation and interval navigation [wip]. When focused on a weekday:
      - view="day": <kbd>left</kbd> navigates to previous day and <kbd>right</kbd> navigates to next day. <kbd>home</kbd>, <kbd>end</kbd>, <kbd>pgUp</kbd> and <kbd>pgDown</kbd> have no meaning.
@@ -178,6 +188,6 @@ The emitted `change` event has changed. The passed object still contains `start`
 - Functionality has been added for tab (tabindex) support. Users can now use `Tab` and `Shift+Tab` to navigate the calendar. Add the new `focusable` property to have this functionality.
 - Allow calendar date selection via keyboard (Enter or Space keys) when `focusable` property is set.
 - When using `max-days` property (for contiguous days displayed) and clicking on a date, the calendar no longer navigates to the selected date, which previously became first date in the visible days. ie: the calendar is static until a new date that is not visible is selected programmatically, by v-model or prev/next/move methods are used (`max-days` does not apply to constrained `week` and `month` views).
-- QCalendarDay/QCalendarAgenda now has a slot for head days (`head-days-events`) that is a contiguous row for all displayed days. This allows for all-day events that are more than one day to be a singular item. Be sure to create a wrapper div absolute positioning OR relative positioning and add empty events that are transparent to the user to push visible events to their proper positioning. Because absolute positioned div's are outside of the browser's normal flow, you need to set an explicit height on your first child and use the passed in **ref** from the slot data (`<template #head-days-events="{ scope: { days, ref } }">`) and place the ref (`:ref="ref"`) properly for this to work. Also, you probably should not use the `head-days-events` in conjunction with the `head-day-event` slot. The `head-day-event` slot is regulated to that day only and potential overlap may occur that would not be a good UX.
+- QCalendarDay/QCalendarAgenda now has a slot for head days (`head-days-events`) that is a contiguous row for all displayed days. This allows for all-day events that are more than one day to be a singular item. Be sure to create a wrapper div with absolute positioning OR relative positioning and add empty events that are transparent to the user to push visible events to their proper positioning. Because absolute positioned div's are outside of the browser's normal flow, you need to set an explicit height on your first child and use the passed in **ref** from the slot data (`<template #head-days-events="{ scope: { days, ref } }">`) and place the ref (`:ref="ref"`) properly for this to work. Also, you probably should not use the `head-days-events` in conjunction with the `head-day-event` slot. The `head-day-event` slot is regulated to that day only and potential overlap may occur that would not be a good UX.
 - All calendars will automatically auto-switch the weekday length based on the width of the calendar cell.
 - For calendars that show the month on the first day of the month, the text will automatically switch the month length based on width of the calendar cell.
