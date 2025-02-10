@@ -18,7 +18,7 @@ interface MarkdownModule {
   headers?: TocMenuItem[]
   frontmatter?: Record<string, unknown>
   filename?: string
-  render: (...args: unknown[]) => unknown
+  render: (..._args: unknown[]) => unknown
 }
 
 // Define types for menu items

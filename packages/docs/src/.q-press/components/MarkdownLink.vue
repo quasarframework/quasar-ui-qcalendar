@@ -12,7 +12,7 @@
 import { computed } from 'vue'
 import { mdiLaunch } from '@quasar/extras/mdi-v6'
 
-const props = defineProps({ to: String })
+const props = defineProps({ to: { type: String, required: true } })
 const internal = computed(
   () => props.to.charAt(0) === '/' || props.to.charAt(0) === '.' || props.to.charAt(0) === '#',
 )

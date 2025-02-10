@@ -4,7 +4,7 @@
       {{ props.overline }}
     </div>
 
-    <div v-if="!isFullscreen && props.title" class="markdown-heading markdown-h1" id="introduction">
+    <div v-if="!isFullscreen && props.title" id="introduction" class="markdown-heading markdown-h1">
       <div class="row items-center q-gutter-sm">
         <div>{{ props.title }}</div>
         <q-badge v-if="props.badge" :label="props.badge" />
@@ -30,12 +30,12 @@
       </q-btn>
     </div>
 
-    <div class="markdown-page__nav" v-if="props.related">
+    <div v-if="props.related" class="markdown-page__nav">
       <div class="q-gutter-sm flex">
         <router-link
-          class="q-link markdown-page__related rounded-borders cursor-pointer column justify-center"
           v-for="link in props.related"
           :key="link.category + link.path"
+          class="q-link markdown-page__related rounded-borders cursor-pointer column justify-center"
           :to="link.path"
         >
           <div class="markdown-page__nav-categ">{{ link.category || 'Docs' }}</div>
@@ -49,7 +49,7 @@
 
     <slot />
 
-    <div class="markdown-page__nav markdown-page__nav--footer" v-if="props.nav">
+    <div v-if="props.nav" class="markdown-page__nav markdown-page__nav--footer">
       <div class="text-h6 q-pb-md markdown-heading">Ready for more?</div>
       <div class="q-gutter-sm flex">
         <router-link
@@ -65,7 +65,7 @@
       </div>
     </div>
 
-    <div class="markdown-page__content-footer" v-if="props.editLink">
+    <div v-if="props.editLink" class="markdown-page__content-footer">
       <q-separator class="q-mb-sm" />
 
       <div class="q-mb-md">
@@ -103,19 +103,43 @@ import { useMarkdownStore } from '../stores/markdown'
 import siteConfig from '../../siteConfig'
 
 const props = defineProps({
-  title: String,
-  desc: String,
-  overline: String,
-  badge: String,
+  title: {
+    type: String,
+    default: null,
+  },
+  desc: {
+    type: String,
+    default: null,
+  },
+  overline: {
+    type: String,
+    default: null,
+  },
+  badge: {
+    type: String,
+    default: null,
+  },
 
   fullscreen: Boolean,
 
   heading: Boolean,
-  editLink: String,
+  editLink: {
+    type: String,
+    default: null,
+  },
 
-  toc: Array<TocItem>,
-  related: Array<RelatedItem>,
-  nav: Array<NavItem>,
+  toc: {
+    type: Array<TocItem>,
+    default: () => [],
+  },
+  related: {
+    type: Array<RelatedItem>,
+    default: () => [],
+  },
+  nav: {
+    type: Array<NavItem>,
+    default: () => [],
+  },
 })
 
 useMeta(

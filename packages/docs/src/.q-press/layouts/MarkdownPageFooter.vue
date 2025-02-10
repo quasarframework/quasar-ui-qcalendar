@@ -1,7 +1,7 @@
 <template>
   <div v-if="siteConfig.config.useFooter" class="markdown-page-footer markdown-brand">
     <template v-if="props.fullscreen">
-      <nav class="markdown-page-footer__nav" v-once>
+      <nav v-once class="markdown-page-footer__nav">
         <q-list v-for="entry in links" :key="entry.name" role="list">
           <q-item-label
             class="markdown-page-footer__title markdown-page-footer__margin row items-end text-weight-bold letter-spacing-225 q-mb-md"

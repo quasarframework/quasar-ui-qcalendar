@@ -23,6 +23,12 @@ export function useScroll() {
     },
   )
 
+  /**
+   * Changes the router's hash to the specified value. If the current hash is different from the provided hash,
+   * it replaces the current hash with the new one. If the hash is the same, it scrolls to the current anchor.
+   *
+   * @param hash - The new hash value to set in the router.
+   */
   function changeRouterHash(hash: string) {
     if (route.hash !== hash) {
       router.replace({ hash }).catch(() => {})
@@ -31,6 +37,12 @@ export function useScroll() {
     }
   }
 
+  /**
+   * Scrolls the page to the specified HTML element with a given delay.
+   *
+   * @param el - The HTML element to scroll to.
+   * @param delay - The delay in milliseconds for the scroll animation.
+   */
   function scrollPage(el: HTMLElement, delay: number) {
     const { top } = el.getBoundingClientRect()
     const offset = Math.max(
@@ -48,6 +60,11 @@ export function useScroll() {
     }, delay + 10)
   }
 
+  /**
+   * Scrolls the page to the HTML element with the specified ID, updates the router's hash, and sets the active TOC (table of contents) item.
+   *
+   * @param id - The ID of the HTML element to scroll to.
+   */
   function scrollTo(id: string) {
     clearTimeout(scrollTimer)
     changeRouterHash('#' + id)
@@ -57,6 +74,11 @@ export function useScroll() {
     }, scrollDuration + 50)
   }
 
+  /**
+   * Handles the page scroll event and updates the active TOC (table of contents) item, unless the TOC update is prevented.
+   *
+   * @param position - The current vertical scroll position of the page.
+   */
   function onPageScroll({ position }: { position: number }) {
     // @ts-expect-error Jeff - fix later when I can figure this one out
     if (preventTocUpdate !== true && document.qScrollPrevented !== true) {
@@ -64,6 +86,11 @@ export function useScroll() {
     }
   }
 
+  /**
+   * Scrolls the page to the current anchor element, optionally with an immediate scroll.
+   *
+   * @param immediate - If true, the scroll will be immediate without any animation.
+   */
   function scrollToCurrentAnchor(immediate?: boolean) {
     const hash = location.hash
     const el = hash.length > 1 ? document.getElementById(hash.substring(1)) : null

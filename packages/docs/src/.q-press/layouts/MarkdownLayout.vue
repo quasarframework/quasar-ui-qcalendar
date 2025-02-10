@@ -3,9 +3,9 @@
     <MarkdownHeader />
 
     <q-page-container>
-      <q-page :class="pageClass" key="q-page">
+      <q-page key="q-page" :class="pageClass">
         <router-view v-if="isFullscreen" key="page-fullscreen" />
-        <div v-else :class="pageContentClass" key="page-standard">
+        <div v-else key="page-standard" :class="pageContentClass">
           <div
             v-if="siteConfig.config.useSidebar === true"
             class="markdown-layout__menu-container row justify-center"

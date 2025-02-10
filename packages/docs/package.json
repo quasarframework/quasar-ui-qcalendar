@@ -26,9 +26,9 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
-    "@md-plugins/quasar-app-extension-q-press": "0.1.0-alpha.24",
-    "@md-plugins/vite-examples-plugin": "0.1.0-alpha.24",
-    "@md-plugins/vite-md-plugin": "0.1.0-alpha.24",
+    "@md-plugins/quasar-app-extension-q-press": "0.1.0-alpha.26",
+    "@md-plugins/vite-examples-plugin": "0.1.0-alpha.26",
+    "@md-plugins/vite-md-plugin": "0.1.0-alpha.26",
     "@quasar/app-vite": "^2.0.8",
     "@quasar/quasar-ui-qcalendar": "workspace:*",
     "@types/markdown-it": "^14.1.2",

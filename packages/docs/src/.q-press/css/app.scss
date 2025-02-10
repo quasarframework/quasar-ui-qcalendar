@@ -112,6 +112,10 @@ ul {
     .markdown-token {
       border-color: $brand-primary;
     }
+    & strong {
+      font-weight: 700;
+      color: scale-color($brand-light-text, $lightness: 90%);
+    }
   }
 
   &--tip {
@@ -125,6 +129,10 @@ ul {
     }
     .markdown-token {
       border-color: scale-color($positive, $lightness: -40%);
+    }
+    & strong {
+      font-weight: 700;
+      color: scale-color($positive, $lightness: 90%);
     }
   }
 
@@ -140,6 +148,10 @@ ul {
     .markdown-token {
       border-color: scale-color($warning, $lightness: -40%);
     }
+    & strong {
+      font-weight: 700;
+      color: scale-color($warning, $lightness: 90%);
+    }
   }
 
   &--danger {
@@ -153,6 +165,11 @@ ul {
     }
     .markdown-token {
       border-color: $negative;
+    }
+
+    & strong {
+      font-weight: 700;
+      color: scale-color($negative, $lightness: 90%);
     }
   }
 

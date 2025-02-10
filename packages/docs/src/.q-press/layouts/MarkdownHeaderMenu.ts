@@ -1,4 +1,14 @@
-import { QMenu, QIcon, QList, QItem, QItemSection, QItemLabel, QSeparator, Screen } from 'quasar'
+import {
+  QMenu,
+  QIcon,
+  QAvatar,
+  QList,
+  QItem,
+  QItemSection,
+  QItemLabel,
+  QSeparator,
+  Screen,
+} from 'quasar'
 import { h } from 'vue'
 import { mdiMenuRight } from '@quasar/extras/mdi-v7'
 
@@ -10,6 +20,8 @@ interface MenuElement {
   icon?: string
   name?: string
   mq?: string
+  color?: string
+  image?: boolean
   children?: MenuElement[]
 }
 
@@ -52,8 +64,12 @@ export default {
             () => {
               const acc: any[] = []
 
+              const iconOrImage = !entry.image
+                ? h(QIcon, { name: entry.icon, color: entry.color ? entry.color : void 0 })
+                : h(QAvatar, { size: '28px' }, () => h('img', { src: entry.icon }))
+
               if (entry.icon !== void 0) {
-                acc.push(h(QItemSection, { side: true }, () => h(QIcon, { name: entry.icon })))
+                acc.push(h(QItemSection, { side: true }, () => iconOrImage))
               }
 
               acc.push(h(QItemSection, { class: 'text-no-wrap' }, () => entry.name))

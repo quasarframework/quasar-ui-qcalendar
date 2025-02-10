@@ -24,14 +24,14 @@
           <q-tooltip>View on GitHub</q-tooltip>
         </q-btn>
         <q-btn
-          class="header-btn q-ml-xs"
           v-if="props.noEdit !== true"
+          class="header-btn q-ml-xs"
           dense
           flat
           round
           :icon="fabCodepen"
-          @click="openCodepen"
           :disable="isBusy"
+          @click="openCodepen"
         >
           <q-tooltip>Edit in Codepen</q-tooltip>
         </q-btn>
@@ -41,8 +41,8 @@
           flat
           round
           icon="code"
-          @click="toggleExpand"
           :disable="isBusy"
+          @click="toggleExpand"
         >
           <q-tooltip>View Source</q-tooltip>
         </q-btn>
@@ -52,8 +52,8 @@
     <q-slide-transition>
       <div v-show="expanded">
         <q-tabs
-          class="header-tabs"
           v-model="currentTab"
+          class="header-tabs"
           align="left"
           no-caps
           active-color="brand-primary"
@@ -68,8 +68,8 @@
 
         <q-separator />
 
-        <q-tab-panels class="text-grey-3 text-weight-regular" v-model="currentTab" animated>
-          <q-tab-panel class="q-pa-none" v-for="tab in def.tabs" :key="`pane-${tab}`" :name="tab">
+        <q-tab-panels v-model="currentTab" class="text-grey-3 text-weight-regular" animated>
+          <q-tab-panel v-for="tab in def.tabs" :key="`pane-${tab}`" class="q-pa-none" :name="tab">
             <MarkdownCode lang="markup" :code="def.parts[tab]" max-height="70vh" />
           </q-tab-panel>
         </q-tab-panels>
@@ -83,9 +83,9 @@
     <div class="row overflow-hidden">
       <q-linear-progress v-if="isBusy" color="brand-primary" indeterminate />
       <component
-        class="col markdown-example__content markdown-example-typography"
-        v-else
         :is="component"
+        v-else
+        class="col markdown-example__content markdown-example-typography"
         :class="componentClass"
       />
     </div>
@@ -107,8 +107,14 @@ import MarkdownCardTitle from './MarkdownCardTitle.vue'
 import siteConfig from '../../siteConfig'
 
 const props = defineProps({
-  title: String,
-  file: String,
+  title: {
+    type: String,
+    required: true,
+  },
+  file: {
+    type: String,
+    required: true,
+  },
   noEdit: Boolean, // no codepen edit
   scrollable: Boolean,
   overflow: Boolean,

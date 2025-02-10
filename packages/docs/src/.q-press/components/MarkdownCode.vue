@@ -12,8 +12,14 @@ import MarkdownCodePrism from './MarkdownCodePrism'
 import MarkdownCopyButton from './MarkdownCopyButton.vue'
 
 const props = defineProps({
-  code: String,
-  maxHeight: String,
+  code: {
+    type: String,
+    required: true,
+  },
+  maxHeight: {
+    type: String,
+    default: void 0,
+  },
 
   lang: {
     type: String,

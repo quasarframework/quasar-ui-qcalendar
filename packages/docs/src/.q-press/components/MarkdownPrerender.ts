@@ -8,10 +8,12 @@ export default defineComponent({
     title: {
       type: String as PropType<string>,
       required: false,
+      default: undefined,
     },
     tabs: {
       type: Array as PropType<string[]>,
       required: false,
+      default: undefined,
     },
   },
 
@@ -20,6 +22,15 @@ export default defineComponent({
 
     const hasHeader = computed(() => props.title !== undefined || props.tabs !== undefined)
 
+    /**
+     * Generates an array of VNode elements based on the provided props and slots.
+     *
+     * This function constructs a list of VNode elements to be rendered, including
+     * a title, tabs, a separator, and the main content. The content is conditionally
+     * wrapped in QTabPanels or a div based on the presence of tabs.
+     *
+     * @returns {ReturnType<typeof h>[]} An array of VNode elements to be rendered.
+     */
     function getContent() {
       const acc: ReturnType<typeof h>[] = []
 

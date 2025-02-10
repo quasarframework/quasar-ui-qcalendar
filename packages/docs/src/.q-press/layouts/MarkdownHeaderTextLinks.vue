@@ -30,8 +30,17 @@ import MarkdownHeaderMenu from './MarkdownHeaderMenu'
 import type { SiteMenuItem } from '../../siteConfig'
 
 const props = defineProps({
-  menu: Array<SiteMenuItem>,
-  mqPrefix: String,
-  navClass: String,
+  menu: {
+    type: Array<SiteMenuItem>,
+    required: true,
+  },
+  mqPrefix: {
+    type: String,
+    default: '',
+  },
+  navClass: {
+    type: String,
+    default: '',
+  },
 })
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="markdown-card-title q-my-xs q-mr-sm cursor-pointer" :id="id" @click="onClick">
+  <div :id="id" class="markdown-card-title q-my-xs q-mr-sm cursor-pointer" @click="onClick">
     {{ props.title }}
   </div>
 </template>
@@ -9,8 +9,14 @@ import { computed } from 'vue'
 import { copyHeading, slugify } from './markdown-utils'
 
 const props = defineProps({
-  title: String,
-  prefix: String,
+  title: {
+    type: String,
+    required: true,
+  },
+  prefix: {
+    type: String,
+    default: '',
+  },
 })
 
 const id = computed(() => (props.prefix || '') + slugify(props.title))

@@ -2,12 +2,12 @@
   <q-list class="markdown-page__toc">
     <q-item
       v-for="tocItem in markdownStore.toc"
-      :key="tocItem.id"
       :id="`toc--${tocItem.id}`"
+      :key="tocItem.id"
+      v-ripple
       clickable
       class="markdown-layout__item"
       active-class="markdown-layout__item--active"
-      v-ripple
       :active="markdownStore.activeToc === tocItem.id"
       @click="tocItem.onClick"
     >

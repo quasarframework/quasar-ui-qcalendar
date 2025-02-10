@@ -17,16 +17,16 @@
 
       <template v-if="prop.node.e">
         <q-icon
+          v-if="prop.node.e"
           :name="mdiInformationOutline"
           class="q-ml-sm lt-sm"
-          v-if="prop.node.e"
           color="grey"
           @click.stop
           @touchstart.stop
         >
           <q-tooltip>{{ prop.node.e }}</q-tooltip>
         </q-icon>
-        <div class="markdown-tree__explanation text-grey q-ml-sm gt-xs" v-if="prop.node.e">
+        <div v-if="prop.node.e" class="markdown-tree__explanation text-grey q-ml-sm gt-xs">
           # {{ prop.node.e }}
         </div>
       </template>
@@ -38,7 +38,10 @@
 import { mdiLaunch, mdiInformationOutline } from '@quasar/extras/mdi-v6'
 
 const props = defineProps({
-  def: Object,
+  def: {
+    type: Object,
+    required: true,
+  },
 })
 
 let id = 0

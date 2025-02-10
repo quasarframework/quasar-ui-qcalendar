@@ -8,9 +8,9 @@
         @click="onSearchFieldClick"
       >
         <input
-          class="col markdown-api__search text-right"
           ref="inputRef"
           v-model="filter"
+          class="col markdown-api__search text-right"
           name="filter"
           placeholder="Filter..."
         />
@@ -25,8 +25,8 @@
       </div>
 
       <q-btn
-        class="q-ml-sm header-btn"
         v-if="props.pageLink"
+        class="q-ml-sm header-btn"
         size="sm"
         padding="xs sm"
         no-caps
@@ -45,8 +45,8 @@
     </template>
     <template v-else>
       <q-tabs
-        class="header-tabs"
         v-model="currentTab"
+        class="header-tabs"
         active-color="brand-primary"
         indicator-color="brand-primary"
         align="left"
@@ -63,12 +63,12 @@
       <q-separator />
 
       <q-tab-panels v-model="currentTab" animated>
-        <q-tab-panel class="q-pa-none" v-for="tab in tabsList" :name="tab" :key="tab">
-          <div class="markdown-api__container row no-wrap" v-if="innerTabsList[tab].length !== 1">
+        <q-tab-panel v-for="tab in tabsList" :key="tab" class="q-pa-none" :name="tab">
+          <div v-if="innerTabsList[tab].length !== 1" class="markdown-api__container row no-wrap">
             <div class="col-auto">
               <q-tabs
-                class="header-tabs markdown-api__subtabs"
                 v-model="currentInnerTab"
+                class="header-tabs markdown-api__subtabs"
                 active-color="brand-primary"
                 indicator-color="brand-primary"
                 :breakpoint="0"
@@ -77,9 +77,9 @@
                 shrink
               >
                 <q-tab
-                  class="markdown-api__subtabs-item header-btn"
                   v-for="innerTab in innerTabsList[tab]"
                   :key="`api-inner-tab-${innerTab}`"
+                  class="markdown-api__subtabs-item header-btn"
                   :name="innerTab"
                 >
                   <div class="row no-wrap items-center self-stretch q-pl-sm">
@@ -97,23 +97,23 @@
             <q-separator vertical />
 
             <q-tab-panels
-              class="col"
               v-model="currentInnerTab"
+              class="col"
               animated
               transition-prev="slide-down"
               transition-next="slide-up"
             >
               <q-tab-panel
-                class="q-pa-none"
                 v-for="innerTab in innerTabsList[tab]"
-                :name="innerTab"
                 :key="innerTab"
+                class="q-pa-none"
+                :name="innerTab"
               >
                 <MarkdownApiEntry :type="tab" :definition="filteredApi[tab][innerTab]" />
               </q-tab-panel>
             </q-tab-panels>
           </div>
-          <div class="markdown-api__container" v-else>
+          <div v-else class="markdown-api__container">
             <MarkdownApiEntry :type="tab" :definition="filteredApi[tab][defaultInnerTabName]" />
           </div>
         </q-tab-panel>
@@ -369,12 +369,17 @@ const props = defineProps({
   file: {
     type: String,
     required: false,
+    default: '',
   },
   api: {
     type: Object,
     required: false,
+    default: null,
   },
-  name: String,
+  name: {
+    type: String,
+    default: 'API Documentation',
+  },
   pageLink: Boolean,
 })
 

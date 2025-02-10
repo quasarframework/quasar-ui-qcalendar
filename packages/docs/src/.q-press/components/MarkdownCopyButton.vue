@@ -3,7 +3,7 @@
     <q-icon :name="mdiClipboardOutline" color="brand-primary" @click="copy" />
 
     <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-      <q-badge class="absolute header-badge" v-show="copied" label="Copied to clipboard" />
+      <q-badge v-show="copied" class="absolute header-badge" label="Copied to clipboard" />
     </transition>
   </div>
 </template>
@@ -14,7 +14,10 @@ import { copyToClipboard } from './markdown-utils'
 import { mdiClipboardOutline } from '@quasar/extras/mdi-v7'
 
 const props = defineProps({
-  lang: String,
+  lang: {
+    type: String,
+    default: 'markdown',
+  },
 })
 
 const { proxy } = getCurrentInstance()
