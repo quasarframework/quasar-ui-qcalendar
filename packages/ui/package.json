@@ -253,7 +253,7 @@
     "postcss": "^8.5.1",
     "quasar": "^2.17.7",
     "rimraf": "^6.0.1",
-    "rollup": "^4.34.3",
+    "rollup": "^4.34.6",
     "rtlcss": "^4.3.0",
     "sass-embedded": "^1.83.4",
     "table": "^6.9.0",
