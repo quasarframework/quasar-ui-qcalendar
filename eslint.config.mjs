@@ -2,6 +2,7 @@ import eslintPlugin from '@typescript-eslint/eslint-plugin'
 import eslintParser from '@typescript-eslint/parser'
 import js from '@eslint/js'
 import globals from 'globals'
+import prettierSkipFormatting from '@vue/eslint-config-prettier/skip-formatting'
 
 export default [
   {
@@ -74,4 +75,6 @@ export default [
       ],
     },
   },
+
+  prettierSkipFormatting,
 ]
