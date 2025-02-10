@@ -56,7 +56,6 @@ import '@quasar/quasar-ui-qcalendar/index.css'
 import { ref, reactive, computed, onBeforeMount } from 'vue'
 import NavigationBar from 'components/NavigationBar.vue'
 
-
 interface Event {
   id: number
   title: string
@@ -150,25 +149,25 @@ function onNext() {
 }
 
 function onMoved(data: Timestamp) {
-  console.log('onMoved', data)
+  console.info('onMoved', data)
 }
 function onChange(data: { start: Timestamp; end: Timestamp; days: Timestamp[] }) {
-  console.log('onChange', data)
+  console.info('onChange', data)
 }
 function onClickDate(data: Timestamp) {
-  console.log('onClickDate', data)
+  console.info('onClickDate', data)
 }
 function onClickTime(data: Timestamp) {
-  console.log('onClickTime', data)
+  console.info('onClickTime', data)
 }
 function onClickInterval(data: Timestamp) {
-  console.log('onClickInterval', data)
+  console.info('onClickInterval', data)
 }
 function onClickHeadIntervals(data: Timestamp) {
-  console.log('onClickHeadIntervals', data)
+  console.info('onClickHeadIntervals', data)
 }
 function onClickHeadDay(data: Timestamp) {
-  console.log('onClickHeadDay', data)
+  console.info('onClickHeadDay', data)
 }
 </script>
 

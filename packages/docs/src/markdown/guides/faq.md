@@ -61,7 +61,7 @@ md.use(frontmatterPlugin, {
 const env: MarkdownItEnv = {}
 const html = md.render(code, env)
 
-console.log(env.frontmatter)
+console.info(env.frontmatter)
 ```
 
 ### How do I enhance code block rendering?

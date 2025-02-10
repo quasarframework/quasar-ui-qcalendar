@@ -51,31 +51,31 @@ const rightColumnOptions = ref([
 const calendar = ref<QCalendarAgenda>()
 
 const onChange = (date: string) => {
-  console.log('Date changed:', date)
+  console.info('Date changed:', date)
 }
 
 const onMoved = (date: string) => {
-  console.log('Date moved:', date)
+  console.info('Date moved:', date)
 }
 
 const onClickDate = (date: string) => {
-  console.log('Date clicked:', date)
+  console.info('Date clicked:', date)
 }
 
 const onClickTime = (time: string) => {
-  console.log('Time clicked:', time)
+  console.info('Time clicked:', time)
 }
 
 const onClickInterval = (interval: string) => {
-  console.log('Interval clicked:', interval)
+  console.info('Interval clicked:', interval)
 }
 
 const onClickHeadIntervals = (interval: string) => {
-  console.log('Head intervals clicked:', interval)
+  console.info('Head intervals clicked:', interval)
 }
 
 const onClickHeadDay = (day: string) => {
-  console.log('Head day clicked:', day)
+  console.info('Head day clicked:', day)
 }
 
 const onToday = () => {

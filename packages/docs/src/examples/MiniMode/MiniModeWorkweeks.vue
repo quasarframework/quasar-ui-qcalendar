@@ -32,7 +32,6 @@ import '@quasar/quasar-ui-qcalendar/index.css'
 import { ref } from 'vue'
 import NavigationBar from 'components/NavigationBar.vue'
 
-
 const calendar = ref<QCalendarMonth>(),
   selectedDate = ref(today())
 function onToday() {
@@ -51,24 +50,24 @@ function onNext() {
   }
 }
 function onMoved(data: Timestamp) {
-  console.log('onMoved', data)
+  console.info('onMoved', data)
 }
 function onChange(data: { start: Timestamp; end: Timestamp; days: Timestamp[] }) {
-  console.log('onChange', data)
+  console.info('onChange', data)
 }
 function onClickDate(data: Timestamp) {
-  console.log('onClickDate', data)
+  console.info('onClickDate', data)
 }
 function onClickDay(data: Timestamp) {
-  console.log('onClickDay', data)
+  console.info('onClickDay', data)
 }
 function onClickWorkweek(data: Timestamp) {
-  console.log('onClickWorkweek', data)
+  console.info('onClickWorkweek', data)
 }
 function onClickHeadDay(data: Timestamp) {
-  console.log('onClickHeadDay', data)
+  console.info('onClickHeadDay', data)
 }
 function onClickHeadWorkweek(data: Timestamp) {
-  console.log('onClickHeadWorkweek', data)
+  console.info('onClickHeadWorkweek', data)
 }
 </script>

@@ -45,7 +45,7 @@ const selectedDate = ref(today())
 const selectedDates = ref<string[]>([])
 
 function onToggleTime({ scope }: { scope: { timestamp: Timestamp; outside: boolean } }) {
-  console.log('click-time (scope)', scope)
+  console.info('click-time (scope)', scope)
   if (scope === undefined) {
     return
   }
@@ -89,24 +89,24 @@ function onNext() {
   }
 }
 function onMoved(data: Timestamp) {
-  console.log('onMoved', data)
+  console.info('onMoved', data)
 }
 function onChange(data: { start: Timestamp; end: Timestamp; days: Timestamp[] }) {
-  console.log('onChange', data)
+  console.info('onChange', data)
 }
 function onClickDate(data: Timestamp) {
-  console.log('onClickDate', data)
+  console.info('onClickDate', data)
 }
 // onClickTime (data) {
-//   console.log('onClickTime', data)
+//   console.info('onClickTime', data)
 // },
 function onClickInterval(data: Timestamp) {
-  console.log('onClickInterval', data)
+  console.info('onClickInterval', data)
 }
 function onClickHeadIntervals(data: Timestamp) {
-  console.log('onClickHeadIntervals', data)
+  console.info('onClickHeadIntervals', data)
 }
 function onClickHeadDay(data: Timestamp) {
-  console.log('onClickHeadDay', data)
+  console.info('onClickHeadDay', data)
 }
 </script>

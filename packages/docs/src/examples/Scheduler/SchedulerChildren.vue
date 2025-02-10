@@ -84,32 +84,32 @@ function onNext() {
   }
 }
 function onMoved(data: Timestamp) {
-  console.log('onMoved', data)
+  console.info('onMoved', data)
 }
 function onChange(data: { start: Timestamp; end: Timestamp; days: Timestamp[] }) {
-  console.log('onChange', data)
+  console.info('onChange', data)
 }
 function onClickDate(data: Timestamp) {
-  console.log('onClickDate', data)
+  console.info('onClickDate', data)
 }
 function onClickDayResource(data: Timestamp) {
-  console.log('onClickDayResource', data)
+  console.info('onClickDayResource', data)
 }
 function onResourceExpanded(data: Timestamp) {
-  console.log('onResourceExpanded', data)
+  console.info('onResourceExpanded', data)
 }
 function onClickResource(data: {
   scope: { resource: { id: string; name: string; expanded: boolean } }
 }) {
-  console.log('onClickResource', data)
+  console.info('onClickResource', data)
   if (data.scope.resource.expanded !== undefined) {
     // data.scope.resource.expanded = !data.scope.resource.expanded
   }
 }
 function onClickHeadResources(data: Timestamp) {
-  console.log('onClickHeadResources', data)
+  console.info('onClickHeadResources', data)
 }
 function onClickHeadDay(data: Timestamp) {
-  console.log('onClickHeadDay', data)
+  console.info('onClickHeadDay', data)
 }
 </script>

@@ -188,7 +188,7 @@ interface Scope {
 }
 
 function onDragStart(e: DragEvent, item: DragItem) {
-  console.log('onDragStart called', item)
+  console.info('onDragStart called', item)
   if (e.dataTransfer) {
     e.dataTransfer.dropEffect = 'copy'
     e.dataTransfer.effectAllowed = 'move'
@@ -197,19 +197,19 @@ function onDragStart(e: DragEvent, item: DragItem) {
 }
 
 function onDragEnter(e: DragEvent, type: string, { scope }: Scope): boolean {
-  console.log('onDragEnter', type, scope)
+  console.info('onDragEnter', type, scope)
   e.preventDefault()
   return true
 }
 
 function onDragOver(e: DragEvent, type: string, { scope }: Scope): boolean {
-  console.log('onDragOver', type, scope)
+  console.info('onDragOver', type, scope)
   e.preventDefault()
   return true
 }
 
 function onDragLeave(_e: DragEvent, type: string, { scope }: Scope): boolean {
-  console.log('onDragLeave', type, scope)
+  console.info('onDragLeave', type, scope)
   return false
 }
 
@@ -222,7 +222,7 @@ interface DropScope extends Scope {
 }
 
 function onDrop(e: DropEvent, type: string, { scope }: DropScope): boolean {
-  console.log('onDrop', type, scope)
+  console.info('onDrop', type, scope)
   const itemID = parseInt(e.dataTransfer.getData('ID'), 10)
   const event: Event = { ...defaultEvent }
   event.id = events.value.length + 1
@@ -284,30 +284,30 @@ function onNext() {
   }
 }
 function onMoved(data: Timestamp) {
-  console.log('onMoved', data)
+  console.info('onMoved', data)
 }
 function onChange(data: { start: Timestamp; end: Timestamp; days: Timestamp[] }) {
-  console.log('onChange', data)
+  console.info('onChange', data)
 }
 function onClickDate(data: Timestamp) {
-  console.log('onClickDate', data)
+  console.info('onClickDate', data)
 }
 function onClickTime(data: Timestamp) {
-  console.log('onClickTime', data)
+  console.info('onClickTime', data)
 }
 function onClickInterval(data: Timestamp) {
-  console.log('onClickInterval', data)
+  console.info('onClickInterval', data)
 }
 function onClickHeadIntervals(data: Timestamp) {
-  console.log('onClickHeadIntervals', data)
+  console.info('onClickHeadIntervals', data)
 }
 function onClickHeadDay(data: Timestamp) {
-  console.log('onClickHeadDay', data)
+  console.info('onClickHeadDay', data)
 }
 // this method is used only to print the scope to dev tools
 /// @ts-expect-error ignore
 function printScope(scope) {
-  console.log('scope:', scope)
+  console.info('scope:', scope)
   return true
 }
 </script>

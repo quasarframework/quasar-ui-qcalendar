@@ -365,21 +365,21 @@ function totals(start: Timestamp, end: Timestamp) {
 //   }
 // }
 function onMoved(data: any) {
-  console.log('onMoved', data)
+  console.info('onMoved', data)
 }
 function onChange(data: { start: string; end: string }) {
-  console.log('onChange', data)
+  console.info('onChange', data)
   startDate.value = data.start
   endDate.value = data.end
 }
 function onClickDate(data: any) {
-  console.log('onClickDate', data)
+  console.info('onClickDate', data)
 }
 function onClickDay(data: any) {
-  console.log('onClickDay', data)
+  console.info('onClickDay', data)
 }
 function onClickHeadDay(data: any) {
-  console.log('onClickHeadDay', data)
+  console.info('onClickHeadDay', data)
 }
 </script>
 

@@ -634,7 +634,7 @@ const themesList = computed(() => {
       value: { ...themes[theme] },
     })
   })
-  console.log('themesList', list)
+  console.info('themesList', list)
   return list
 })
 
@@ -745,21 +745,21 @@ function onNext() {
   }
 }
 function onMoved(data: Timestamp) {
-  console.log('onMoved', data)
+  console.info('onMoved', data)
 }
 function onChange(data: { start: string; end: string }) {
-  console.log('onChange', data)
+  console.info('onChange', data)
   startDate.value = data.start
   endDate.value = data.end
 }
 function onClickDate(data: Timestamp) {
-  console.log('onClickDate', data)
+  console.info('onClickDate', data)
 }
 function onClickDay(data: Timestamp) {
-  console.log('onClickDay', data)
+  console.info('onClickDay', data)
 }
 function onClickHeadDay(data: Timestamp) {
-  console.log('onClickHeadDay', data)
+  console.info('onClickHeadDay', data)
 }
 </script>
 

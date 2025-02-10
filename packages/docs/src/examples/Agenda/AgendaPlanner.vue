@@ -437,7 +437,7 @@ function onNext() {
 }
 
 function onChange({ start, end }: { start: string; end: string }) {
-  console.log('onChange', start, end)
+  console.info('onChange', start, end)
   Object.assign(startTimestamp, parseTimestamp(start))
 }
 

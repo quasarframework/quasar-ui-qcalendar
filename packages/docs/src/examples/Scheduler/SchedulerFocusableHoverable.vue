@@ -79,10 +79,10 @@ const calendar = ref<QCalendarScheduler>(),
   ])
 
 watch(hoverable, (val) => {
-  console.log(`hoverable: ${val}`)
+  console.info(`hoverable: ${val}`)
 })
 watch(focusable, (val) => {
-  console.log(`focusable: ${val}`)
+  console.info(`focusable: ${val}`)
 })
 
 function onToday() {
@@ -101,24 +101,24 @@ function onNext() {
   }
 }
 function onMoved(data: Timestamp) {
-  console.log('onMoved', data)
+  console.info('onMoved', data)
 }
 function onChange(data: { start: Timestamp; end: Timestamp; days: Timestamp[] }) {
-  console.log('onChange', data)
+  console.info('onChange', data)
 }
 function onClickDate(data: Timestamp) {
-  console.log('onClickDate', data)
+  console.info('onClickDate', data)
 }
 function onClickDayResource(data: Timestamp) {
-  console.log('onClickDayResource', data)
+  console.info('onClickDayResource', data)
 }
 function onClickResource(data: Timestamp) {
-  console.log('onClickResource', data)
+  console.info('onClickResource', data)
 }
 function onClickHeadResources(data: Timestamp) {
-  console.log('onClickHeadResources', data)
+  console.info('onClickHeadResources', data)
 }
 function onClickHeadDay(data: Timestamp) {
-  console.log('onClickHeadDay', data)
+  console.info('onClickHeadDay', data)
 }
 </script>

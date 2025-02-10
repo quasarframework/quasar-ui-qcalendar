@@ -155,7 +155,7 @@ const eventsMap = computed<EventsMap>(() => {
       map[key].push(event)
     }
   })
-  // console.log('eventsMap', map)
+  // console.info('eventsMap', map)
   return map
 })
 
@@ -164,7 +164,7 @@ interface Scope {
 }
 
 function onDragStart(e: DragEvent, item: Event) {
-  console.log('onDragStart called')
+  console.info('onDragStart called')
   if (e.dataTransfer) {
     e.dataTransfer.dropEffect = 'copy'
     e.dataTransfer.effectAllowed = 'move'
@@ -173,24 +173,24 @@ function onDragStart(e: DragEvent, item: Event) {
 }
 
 function onDragEnter(e: DragEvent, type: string, { scope }: Scope) {
-  console.log('onDragEnter', type, scope)
+  console.info('onDragEnter', type, scope)
   e.preventDefault()
   return true
 }
 
 function onDragOver(e: DragEvent, type: string, { scope }: Scope) {
-  console.log('onDragOver', type, scope)
+  console.info('onDragOver', type, scope)
   e.preventDefault()
   return true
 }
 
 function onDragLeave(_e: DragEvent, type: string, { scope }: Scope) {
-  console.log('onDragLeave', type, scope)
+  console.info('onDragLeave', type, scope)
   return false
 }
 
 function onDrop(e: DragEvent, type: string, { scope }: Scope) {
-  console.log('onDrop')
+  console.info('onDrop')
   const itemID = parseInt(e.dataTransfer!.getData('ID'), 10)
   const event = { ...defaultEvent }
   event.id = events.length + 1
@@ -259,30 +259,30 @@ function onNext() {
   }
 }
 function onMoved(data: Timestamp) {
-  console.log('onMoved', data)
+  console.info('onMoved', data)
 }
 function onChange(data: { start: Timestamp; end: Timestamp; days: Timestamp[] }) {
-  console.log('onChange', data)
+  console.info('onChange', data)
 }
 function onClickDate(data: Timestamp) {
-  console.log('onClickDate', data)
+  console.info('onClickDate', data)
 }
 function onClickDay(data: Timestamp) {
-  console.log('onClickDay', data)
+  console.info('onClickDay', data)
 }
 function onClickWorkweek(data: Timestamp) {
-  console.log('onClickWorkweek', data)
+  console.info('onClickWorkweek', data)
 }
 function onClickHeadDay(data: Timestamp) {
-  console.log('onClickHeadDay', data)
+  console.info('onClickHeadDay', data)
 }
 function onClickHeadWorkweek(data: Timestamp) {
-  console.log('onClickHeadWorkweek', data)
+  console.info('onClickHeadWorkweek', data)
 }
 
 // this method is used only to print the scope to dev tools
 function printScope({ scope }: Scope): boolean {
-  console.log('scope:', scope)
+  console.info('scope:', scope)
   return true
 }
 </script>

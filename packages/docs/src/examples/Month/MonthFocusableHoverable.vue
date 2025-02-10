@@ -60,10 +60,10 @@ const calendar = ref<QCalendarMonth>(),
   options = ref(['day', 'weekday', 'date'])
 
 watch(hoverable, (val) => {
-  console.log(`hoverable: ${val}`)
+  console.info(`hoverable: ${val}`)
 })
 watch(focusable, (val) => {
-  console.log(`focusable: ${val}`)
+  console.info(`focusable: ${val}`)
 })
 // watch(focusTypeSelection, (val) => {
 //   const index = focusType.value.indexOf(val)
@@ -72,7 +72,7 @@ watch(focusable, (val) => {
 // } else {
 //   focusType.value.push(val)
 // }
-// console.log('focusType', focusType.value)
+// console.info('focusType', focusType.value)
 // })
 
 function onToday() {
@@ -91,24 +91,24 @@ function onNext() {
   }
 }
 function onMoved(data: Timestamp) {
-  console.log('onMoved', data)
+  console.info('onMoved', data)
 }
 function onChange(data: { start: Timestamp; end: Timestamp; days: Timestamp[] }) {
-  console.log('onChange', data)
+  console.info('onChange', data)
 }
 function onClickDate(data: Timestamp) {
-  console.log('onClickDate', data)
+  console.info('onClickDate', data)
 }
 function onClickDay(data: Timestamp) {
-  console.log('onClickDay', data)
+  console.info('onClickDay', data)
 }
 function onClickWorkweek(data: Timestamp) {
-  console.log('onClickWorkweek', data)
+  console.info('onClickWorkweek', data)
 }
 function onClickHeadDay(data: Timestamp) {
-  console.log('onClickHeadDay', data)
+  console.info('onClickHeadDay', data)
 }
 function onClickHeadWorkweek(data: Timestamp) {
-  console.log('onClickHeadWorkweek', data)
+  console.info('onClickHeadWorkweek', data)
 }
 </script>

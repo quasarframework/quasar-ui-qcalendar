@@ -93,27 +93,27 @@ function onNext() {
   }
 }
 function onMoved(data: Timestamp) {
-  console.log('onMoved', data)
+  console.info('onMoved', data)
 }
 function onChange(data: { start: Timestamp; end: Timestamp; days: Timestamp[] }) {
-  console.log('onChange', data)
+  console.info('onChange', data)
 }
 function onResourceExpanded(data: Timestamp) {
-  console.log('onResourceExpanded', data)
+  console.info('onResourceExpanded', data)
 }
 function onClickDate(data: Timestamp) {
-  console.log('onClickDate', data)
+  console.info('onClickDate', data)
 }
 function onClickTime(data: Timestamp) {
-  console.log('onClickTime', data)
+  console.info('onClickTime', data)
 }
 function onClickResource(data: Timestamp) {
-  console.log('onClickResource', data)
+  console.info('onClickResource', data)
 }
 function onClickHeadResources(data: Timestamp) {
-  console.log('onClickHeadResources', data)
+  console.info('onClickHeadResources', data)
 }
 function onClickInterval(data: Timestamp) {
-  console.log('onClickInterval', data)
+  console.info('onClickInterval', data)
 }
 </script>

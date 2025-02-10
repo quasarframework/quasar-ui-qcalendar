@@ -110,7 +110,7 @@ export default defineComponent({
     const { isSticky } = useCellWidth(props)
 
     watch(isSticky, () => {
-      // console.log('isSticky', isSticky.value)
+      // console.info('isSticky', isSticky.value)
     })
 
     const { times, setCurrent, updateCurrent } = useTimes(props)

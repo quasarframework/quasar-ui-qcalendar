@@ -43,14 +43,14 @@ interface Scope {
 }
 
 function onToggleDate({ scope }: Scope) {
-  console.log('date clicked (scope)', scope)
+  console.info('date clicked (scope)', scope)
   if (scope !== undefined) {
     toggleDate(scope)
   }
 }
 
 function onToggleDay({ scope }: Scope) {
-  console.log('day clicked (scope)', scope)
+  console.info('day clicked (scope)', scope)
   if (scope !== undefined) {
     toggleDate(scope)
   }
@@ -90,24 +90,24 @@ function onNext() {
   }
 }
 function onMoved(data: Timestamp) {
-  console.log('onMoved', data)
+  console.info('onMoved', data)
 }
 function onChange(data: { start: Timestamp; end: Timestamp; days: Timestamp[] }) {
-  console.log('onChange', data)
+  console.info('onChange', data)
 }
 // onClickDate (data) {
-//   console.log('onClickDate', data)
+//   console.info('onClickDate', data)
 // },
 // onClickDay (data) {
-//   console.log('onClickDay', data)
+//   console.info('onClickDay', data)
 // },
 function onClickWorkweek(data: Timestamp) {
-  console.log('onClickWorkweek', data)
+  console.info('onClickWorkweek', data)
 }
 function onClickHeadDay(data: Timestamp) {
-  console.log('onClickHeadDay', data)
+  console.info('onClickHeadDay', data)
 }
 function onClickHeadWorkweek(data: Timestamp) {
-  console.log('onClickHeadWorkweek', data)
+  console.info('onClickHeadWorkweek', data)
 }
 </script>

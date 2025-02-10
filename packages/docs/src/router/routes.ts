@@ -2,8 +2,6 @@ import mdPageList from 'src/markdown/listing'
 import examplesPageList from 'src/examples/listing'
 import { slugify } from '@md-plugins/shared'
 
-// console.log('examplesPageList', examplesPageList)
-
 const routes = [
   {
     path: '/theme-builder',
@@ -46,7 +44,7 @@ const routes = [
             acc.path = path.join('/')
           }
 
-          // console.log('path:', acc.path)
+          // console.info('path:', acc.path)
           return acc
         }),
 
@@ -75,7 +73,7 @@ const routes = [
           acc.path = path.join('/').replace(/\/{2,}/g, '/')
         }
 
-        // console.log('path:', acc.path)
+        // console.info('path:', acc.path)
         return acc
       }),
     ],

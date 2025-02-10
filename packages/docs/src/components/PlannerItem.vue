@@ -119,7 +119,7 @@ const userStyle = computed(() => {
 })
 
 function onClicked() {
-  console.log('onClicked')
+  console.info('onClicked')
   modelValue.value = !modelValue.value
 }
 </script>

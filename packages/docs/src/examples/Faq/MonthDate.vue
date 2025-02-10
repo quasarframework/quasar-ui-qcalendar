@@ -74,10 +74,10 @@ function onNext() {
   }
 }
 function onMoved(data: Timestamp) {
-  console.log('onMoved', data)
+  console.info('onMoved', data)
 }
 function onChange(data: { start: Timestamp; end: Timestamp; days: Timestamp[] }) {
-  console.log('onChange', data)
+  console.info('onChange', data)
   selectedMonth.splice(0, selectedMonth.length, ...data.days)
   // get year of 1st of the month
   for (let index = 0; index < selectedMonth.length; ++index) {
@@ -88,18 +88,18 @@ function onChange(data: { start: Timestamp; end: Timestamp; days: Timestamp[] })
   }
 }
 function onClickDate(data: Timestamp) {
-  console.log('onClickDate', data)
+  console.info('onClickDate', data)
 }
 function onClickDay(data: Timestamp) {
-  console.log('onClickDay', data)
+  console.info('onClickDay', data)
 }
 function onClickWorkweek(data: Timestamp) {
-  console.log('onClickWorkweek', data)
+  console.info('onClickWorkweek', data)
 }
 function onClickHeadDay(data: Timestamp) {
-  console.log('onClickHeadDay', data)
+  console.info('onClickHeadDay', data)
 }
 function onClickHeadWorkweek(data: Timestamp) {
-  console.log('onClickHeadWorkweek', data)
+  console.info('onClickHeadWorkweek', data)
 }
 </script>

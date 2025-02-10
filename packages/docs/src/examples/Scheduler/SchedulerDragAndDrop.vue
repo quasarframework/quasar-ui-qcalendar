@@ -180,7 +180,7 @@ const eventsMap = computed(() => {
   if (events.length > 0) {
     events.forEach((event) => (map[event.date] = map[event.date] || []).push(event))
   }
-  // console.log('eventsMap', map)
+  // console.info('eventsMap', map)
   return map
 })
 
@@ -204,7 +204,7 @@ interface DropScope extends Scope {
 }
 
 function onDragStart(e: DragEvent, item: Item) {
-  console.log('onDragStart called')
+  console.info('onDragStart called')
   if (e.dataTransfer) {
     e.dataTransfer.dropEffect = 'copy'
     e.dataTransfer.effectAllowed = 'move'
@@ -213,7 +213,7 @@ function onDragStart(e: DragEvent, item: Item) {
 }
 
 function onDragEnter(e: DragEvent, type: string, { scope }: DropScope) {
-  console.log('onDragEnter', type, scope)
+  console.info('onDragEnter', type, scope)
   if (type === 'day' || type === 'head-day') {
     e.preventDefault()
     return true
@@ -221,7 +221,7 @@ function onDragEnter(e: DragEvent, type: string, { scope }: DropScope) {
 }
 
 function onDragOver(e: DragEvent, type: string, { scope }: DropScope) {
-  console.log('onDragOver', type, scope)
+  console.info('onDragOver', type, scope)
   if (type === 'day' || type === 'head-day') {
     e.preventDefault()
     return true
@@ -229,14 +229,14 @@ function onDragOver(e: DragEvent, type: string, { scope }: DropScope) {
 }
 
 function onDragLeave(e: DragEvent, type: string, { scope }: DropScope) {
-  console.log('onDragLeave', type, scope)
+  console.info('onDragLeave', type, scope)
   if (type === 'day' || type === 'head-day') {
     return false
   }
 }
 
 function onDrop(e: DragEvent, type: string, { scope }: DropScope) {
-  console.log('onDrop', type, scope)
+  console.info('onDrop', type, scope)
   if (type === 'day' || type === 'head-day') {
     if (!e.dataTransfer) {
       return
@@ -304,25 +304,25 @@ function onNext() {
   }
 }
 function onMoved(data: Timestamp) {
-  console.log('onMoved', data)
+  console.info('onMoved', data)
 }
 function onChange(data: { start: Timestamp; end: Timestamp; days: Timestamp[] }) {
-  console.log('onChange', data)
+  console.info('onChange', data)
 }
 function onClickDate(data: Timestamp) {
-  console.log('onClickDate', data)
+  console.info('onClickDate', data)
 }
 function onClickDayResource(data: Timestamp) {
-  console.log('onClickDayResource', data)
+  console.info('onClickDayResource', data)
 }
 function onClickResource(data: Timestamp) {
-  console.log('onClickResource', data)
+  console.info('onClickResource', data)
 }
 function onClickHeadResources(data: Timestamp) {
-  console.log('onClickHeadResources', data)
+  console.info('onClickHeadResources', data)
 }
 function onClickHeadDay(data: Timestamp) {
-  console.log('onClickHeadDay', data)
+  console.info('onClickHeadDay', data)
 }
 </script>
 

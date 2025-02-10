@@ -37,7 +37,7 @@ const selectedDate = ref(today()),
   endDate = ref(today())
 
 function onMoved(data: Timestamp) {
-  console.log('onMoved', data)
+  console.info('onMoved', data)
 }
 
 function onChange(data: { start: string; end: string }) {
@@ -57,7 +57,7 @@ function onClickDate(data: {
     timestamp: Timestamp
   }
 }) {
-  console.log('onClickDate', data)
+  console.info('onClickDate', data)
 }
 
 function onClickDay(data: {
@@ -72,7 +72,7 @@ function onClickDay(data: {
     timestamp: Timestamp
   }
 }) {
-  console.log('onClickDay', data)
+  console.info('onClickDay', data)
 }
 
 function onClickHeadDay(data: {
@@ -88,7 +88,7 @@ function onClickHeadDay(data: {
     timestamp: Timestamp
   }
 }) {
-  console.log('onClickHeadDay', data)
+  console.info('onClickHeadDay', data)
 }
 
 function onToday() {

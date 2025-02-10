@@ -64,7 +64,7 @@ This Website collects some `Personal Data` from its Users.
 
 ```js
 export default function (ctx) { // can be async too
-  console.log(ctx)
+  console.info(ctx)
 
   // Example output on console:
   {
@@ -84,7 +84,7 @@ export default function (ctx) { // can be async too
 
 ```js [highlight=2,5]
 export default function (ctx) { // can be async too
-  console.log(ctx)
+  console.info(ctx)
 
   // Example output on console:
   {
@@ -104,7 +104,7 @@ export default function (ctx) { // can be async too
 
 ```js [highlight=2,5,9,10 numbered add=3,6-7 rem=15]
 export default function (ctx) { // can be async too
-  console.log(ctx)
+  console.info(ctx)
 
   // Example output on console:
   {
@@ -125,7 +125,7 @@ export default function (ctx) { // can be async too
 
 ```js Titled code
 export default function (ctx) { // can be async too
-  console.log(ctx)
+  console.info(ctx)
 
   // Example output on console:
   {
@@ -284,7 +284,7 @@ sudo apt autoremove
 ```tabs
 <<| js [numbered] Config file |>>
 export default function (ctx) { // can be async too
-  console.log(ctx)
+  console.info(ctx)
 
   // Example output on console:
   {
@@ -310,7 +310,7 @@ const x = {
 ```tabs quasar.config file
 <<| js One |>>
 export default function (ctx) { // can be async too
-  console.log(ctx)
+  console.info(ctx)
 
   // Example output on console:
   {
