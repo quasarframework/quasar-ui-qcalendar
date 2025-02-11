@@ -6,7 +6,7 @@
   "license": "MIT",
   "private": true,
   "access": "private",
-  "packageManager": "pnpm@10.2.1",
+  "packageManager": "pnpm@10.3.0",
   "scripts": {
     "clean": "rm -rf node_modules pnpm-lock.yaml packages/ui/node_modules packages/docs/node_modules",
     "build": "pnpm run build:ui && pnpm run build:docs",
@@ -14,6 +14,7 @@
     "build:docs": "cd packages/docs && pnpm build",
     "ci:publish": "pnpm -r publish --access public --publish-branch dev",
     "test": "vitest run",
+    "deep": "ncu --deep",
     "lint": "eslint -c ./eslint.config.mjs \"packages/**/*.{ts,js,cjs,mjs,vue}\""
   },
   "devDependencies": {
