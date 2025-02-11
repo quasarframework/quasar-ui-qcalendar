@@ -7,6 +7,7 @@ const alternateUrl = 'https://qcalendar.netlify.app'
 interface Api {
   components: Component[]
   directives: Directive[]
+  utils: Util[]
 }
 
 interface Component {
@@ -27,6 +28,21 @@ interface Directive {
     value: ValueApi
     meta: Meta
   }
+}
+
+interface Util {
+  name: string
+  api: {
+    meta: Meta
+    methods: Record<string, Method>
+  }
+}
+
+interface Method {
+  addedIn?: string
+  desc: string
+  params?: Record<string, ParamApi> | null
+  returns: ReturnApi
 }
 
 interface EventApi {
@@ -62,8 +78,16 @@ interface ValueApi {
 
 interface ParamApi {
   type: string
+  tsType?: string
   desc: string
+  required?: boolean
   examples?: string[]
+}
+
+interface ReturnApi {
+  type: string
+  tsType?: string
+  desc: string
 }
 
 interface ScopeApi {
@@ -215,7 +239,7 @@ export function generate({ api, compact = false }: { api: Api; compact?: boolean
                 module: 'qcalendar',
                 symbol: name,
               },
-              required: false, // Directive is never required
+              required: false,
               description: `${name} - QCalendar directive`,
               'doc-url': meta.docsUrl || alternateUrl,
             }
@@ -234,6 +258,30 @@ export function generate({ api, compact = false }: { api: Api; compact?: boolean
             }
             return result
           }),
+
+          // Add utils section
+          utils: api.utils.map(({ api: { meta, methods }, name }) => ({
+            name,
+            methods: Object.entries(methods).map(([methodName, method]) => ({
+              name: methodName,
+              addedIn: method.addedIn,
+              description: method.desc,
+              params:
+                method.params &&
+                Object.entries(method.params).map(([paramName, param]) => ({
+                  name: paramName,
+                  type: resolveType(param),
+                  description: getDescription(param),
+                  'doc-url': meta.docsUrl || alternateUrl,
+                })),
+              returns: {
+                type: resolveType(method.returns),
+                description: getDescription(method.returns),
+                'doc-url': meta.docsUrl || alternateUrl,
+              },
+            })),
+            'doc-url': meta.docsUrl || alternateUrl,
+          })),
         },
       },
     })
