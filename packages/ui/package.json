@@ -12,6 +12,7 @@
   "main": "dist/index.cjs.js",
   "typings": "dist/types/index.d.ts",
   "types": "dist/calendar.d.ts",
+  "web-types": "dist/web-types/web-types.json",
   "files": [
     "dist",
     "src"

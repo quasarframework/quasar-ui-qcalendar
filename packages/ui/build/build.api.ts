@@ -97,6 +97,17 @@ const topSections = {
       modifiers: (val) => parseObjectWithPascalCaseProps(val, 'modifiers'),
     },
   },
+
+  util: {
+    rootProps: [], // computed after this declaration
+    rootValidations: {
+      meta: (val) => Object(val) === val || "'meta' must be an Object",
+      addedIn: parseAddedIn,
+      quasarConfOptions: (val) => parseObjectWithPascalCaseProps(val, 'quasarConfOptions'),
+      props: (val) => parseObjectWithPascalCaseProps(val, 'props'),
+      methods: (val) => parseObjectWithPascalCaseProps(val, 'methods'),
+    },
+  },
 }
 Object.keys(topSections).forEach((section) => {
   topSections[section].rootProps = Object.keys(topSections[section].rootValidations)
@@ -1638,7 +1649,12 @@ function resetRuntimeImports() {
   delete globalThis.__QUASAR_SSR_CLIENT__
 }
 
-export async function generate({ compact = false } = {}) {
+export async function generate({ compact = false } = {}): Promise<{
+  components: any[]
+  directives: any[]
+  plugins: any[]
+  utils: any[]
+}> {
   const encodeFn = compact === true ? JSON.stringify : (json) => JSON.stringify(json, null, 2)
 
   prepareRuntimeImports()
@@ -1687,11 +1703,12 @@ export async function generate({ compact = false } = {}) {
   }
 }
 
-function run() {
-  generate()
-    .then(() => {
+async function run() {
+  return generate()
+    .then((api) => {
       console.log('build.api: done')
       console.log()
+      return api
     })
     .catch((error) => {
       console.error(error)

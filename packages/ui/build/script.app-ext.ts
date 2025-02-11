@@ -46,7 +46,7 @@ function updateDependency(
   return false
 }
 
-export function syncAppExt(syncVersion = true) {
+export async function syncAppExt(syncVersion = true): Promise<void> {
   const appExtDir = resolvePath('app-extension')
   const uiDir = resolvePath('ui')
 
