@@ -17,6 +17,7 @@ export default [
       '**/eslint.config.js',
       '**/.quasar',
       '**/dist',
+      'dist/*',
       '**/*.md',
       'dist/*',
       'src-capacitor/*',
