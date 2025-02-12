@@ -28,21 +28,23 @@ const ResizeObserverDirective: Directive = {
       callback,
       size: { width: 0, height: 0 },
       observer: new ResizeObserver((entries) => {
-        const rect = entries[0].contentRect
-        // Check if the dimensions have changed.
-        if (rect.width !== data.size.width || rect.height !== data.size.height) {
-          data.size.width = rect.width
-          data.size.height = rect.height
+        if (entries && Array.isArray(entries) && entries.length > 0) {
+          const rect = entries[0]!.contentRect
+          // Check if the dimensions have changed.
+          if (rect.width !== data.size.width || rect.height !== data.size.height) {
+            data.size.width = rect.width
+            data.size.height = rect.height
 
-          // Clear any pending debounce timeout.
-          if (data.debounceTimeout) {
-            clearTimeout(data.debounceTimeout)
+            // Clear any pending debounce timeout.
+            if (data.debounceTimeout) {
+              clearTimeout(data.debounceTimeout)
+            }
+            // Set up a new debounce timeout.
+            data.debounceTimeout = setTimeout(() => {
+              data.callback(data.size)
+              clearTimeout(data.debounceTimeout)
+            }, 100) // Adjust the debounce delay (in ms) as needed.
           }
-          // Set up a new debounce timeout.
-          data.debounceTimeout = setTimeout(() => {
-            data.callback(data.size)
-            data.debounceTimeout = undefined
-          }, 100) // Adjust the debounce delay (in ms) as needed.
         }
       }),
     }

@@ -87,7 +87,7 @@ export default function useTimes(props: { now: string }): UseTimesReturn {
       target.year = now.year
       target.month = now.month
       target.day = now.day
-      target.weekday = now.weekday
+      target.weekday = now.weekday as number
       target.date = now.date
     }
   }
@@ -99,7 +99,7 @@ export default function useTimes(props: { now: string }): UseTimesReturn {
     if (now.time !== target.time) {
       target.hour = now.hour
       target.minute = now.minute
-      target.time = now.time
+      target.time = now.time as string
     }
   }
 

@@ -496,8 +496,8 @@ export default function useInterval(
     // array must have two dates ('YYYY-MM-DD HH:MM') in it
     if (arr && arr.length === 2) {
       const current = getDayTimeIdentifier(timestamp)
-      const first = getDayTimeIdentifier(parsed(arr[0]) as Timestamp)
-      const last = getDayTimeIdentifier(parsed(arr[1]) as Timestamp)
+      const first = getDayTimeIdentifier(parsed(arr[0]!) as Timestamp)
+      const last = getDayTimeIdentifier(parsed(arr[1]!) as Timestamp)
       days.firstDay = first === current
       days.lastDay = last === current
       days.betweenDays = first < current && last > current
@@ -582,8 +582,8 @@ export default function useInterval(
    * @returns `true` if the interval label should be displayed, `false` otherwise.
    */
   function showIntervalLabelDefault(interval: Timestamp): boolean {
-    const first = intervals.value[0][0]
-    const isFirst = first.hour === interval.hour && first.minute === interval.minute
+    const first = intervals.value[0]![0]
+    const isFirst = first!.hour === interval.hour && first!.minute === interval.minute
     return !isFirst && interval.minute === 0
   }
 

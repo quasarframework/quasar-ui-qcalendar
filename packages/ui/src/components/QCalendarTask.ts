@@ -24,8 +24,9 @@ import { convertToUnit, minCharWidth } from '../utils/helpers'
 import useMouse, { getRawMouseEvents } from '../composables/useMouse'
 
 import useCalendar from '../composables/useCalendar'
-import useCommon, { useCommonProps } from '../composables/useCommon'
+import useCommon, { useCommonProps, CommonProps } from '../composables/useCommon'
 import useTask, { useTaskProps, type Task } from '../composables/useTask'
+import { useMaxDaysProps } from '../composables/useMaxDays'
 import useTimes, { useTimesProps } from '../composables/useTimes'
 import useRenderValues from '../composables/useRenderValues'
 import useMove, { useMoveEmits } from '../composables/useMove'
@@ -56,6 +57,7 @@ export default defineComponent({
     ...useTimesProps,
     ...useNavigationProps,
     ...useCellWidthProps,
+    ...useMaxDaysProps,
     ...useCommonProps,
     ...useTaskProps, // last for any overrides
   },
@@ -134,7 +136,7 @@ export default defineComponent({
       // methods
       dayStyleDefault,
       getRelativeClasses,
-    } = useCommon(props, { startDate, endDate, times })
+    } = useCommon(props as CommonProps, { startDate, endDate, times })
 
     // const { isSticky } = useCellWidth(props)
 
@@ -153,7 +155,6 @@ export default defineComponent({
     //   return style
     // })
 
-    /// @ts-expect-error fix later
     const { renderValues } = useRenderValues(props, {
       parsedView,
       times,
@@ -297,8 +298,8 @@ export default defineComponent({
     })
 
     watch(focusValue, () => {
-      if (datesRef.value[focusRef.value]) {
-        datesRef.value[focusRef.value].focus()
+      if (focusRef.value && datesRef.value && datesRef.value[focusRef.value]) {
+        datesRef.value[focusRef.value]!.focus()
       } else {
         // if focusRef is not in the list of current dates of dateRef,
         // then assume month is changing
@@ -829,14 +830,20 @@ export default defineComponent({
       const weekdayLabel = weekdayFormatter.value(
         day,
         shortWeekdayLabel ||
-          (props.weekdayBreakpoints[0] > 0 && parsedCellWidth.value <= props.weekdayBreakpoints[0]),
+          (props.weekdayBreakpoints[0]! > 0 &&
+            parsedCellWidth.value <= props.weekdayBreakpoints[0]!),
       )
       return h(
         'span',
         {
           class: 'q-calendar__ellipsis',
         },
-        props.weekdayBreakpoints[1] > 0 && parsedCellWidth.value <= props.weekdayBreakpoints[1]
+        props.weekdayBreakpoints &&
+          Array.isArray(props.weekdayBreakpoints) &&
+          props.weekdayBreakpoints.length > 1 &&
+          props.weekdayBreakpoints[1] &&
+          props.weekdayBreakpoints[1] > 0 &&
+          parsedCellWidth.value <= props.weekdayBreakpoints[1]
           ? minCharWidth(weekdayLabel, Number(props.minWeekdayLabel))
           : weekdayLabel,
       )
@@ -1232,9 +1239,19 @@ export default defineComponent({
     }
 
     function __renderTask(): VNode {
-      const { start, end } = renderValues.value
-      startDate.value = start.date
-      endDate.value = end.date
+      const { start, end, maxDays } = renderValues.value
+      if (
+        startDate.value !== start.date ||
+        endDate.value !== end.date ||
+        maxDaysRendered.value !== maxDays
+      ) {
+        startDate.value = start.date
+        endDate.value = end.date
+        maxDaysRendered.value = maxDays
+      }
+
+      // startDate.value = start.date
+      // endDate.value = end.date
 
       const hasWidth = size.width > 0
 

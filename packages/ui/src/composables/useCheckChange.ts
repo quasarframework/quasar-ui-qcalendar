@@ -27,8 +27,8 @@ export default function useCheckChange(
     const dayList = days.value
     if (dayList.length === 0) return false
 
-    const start = dayList[0].date
-    const end = dayList[dayList.length - 1].date
+    const start = dayList[0]!.date
+    const end = dayList[dayList.length - 1]!.date
 
     if (!lastStart.value || !lastEnd.value || start !== lastStart.value || end !== lastEnd.value) {
       lastStart.value = start

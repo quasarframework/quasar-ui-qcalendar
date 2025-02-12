@@ -5,7 +5,7 @@ import { EmitListeners } from './useEmitListeners'
  * @param {string} str - The kebab-case string.
  * @returns {string} - The camelCase formatted string.
  */
-const toCamelCase = (str: string): string => str.replace(/(-\w)/g, (m) => m[1].toUpperCase())
+const toCamelCase = (str: string): string => str.replace(/(-\w)/g, (m) => m[1]!.toUpperCase())
 
 /**
  * Defines the structure for a mouse event configuration.
@@ -41,6 +41,7 @@ export function getMouseEventHandlers(
 
   for (const eventName in events) {
     const eventOptions = events[eventName]
+    if (!eventOptions) continue
     const eventKey = toCamelCase('on-' + eventName)
 
     if (!listeners.value) {

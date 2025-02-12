@@ -216,8 +216,8 @@ export default function useCommon(
     const days = { firstDay: false, betweenDays: false, lastDay: false }
     if (arr.length === 2) {
       const current = getDayIdentifier(timestamp)
-      const first = getDayIdentifier(parsed(arr[0]) as Timestamp)
-      const last = getDayIdentifier(parsed(arr[1]) as Timestamp)
+      const first = getDayIdentifier(parsed(arr[0]!) as Timestamp)
+      const last = getDayIdentifier(parsed(arr[1]!) as Timestamp)
       days.firstDay = first === current
       days.lastDay = last === current
       days.betweenDays = first < current && last > current

@@ -878,7 +878,6 @@ export default defineComponent({
 
     function __renderResource(): VNode {
       const { start, end, maxDays } = renderValues.value
-
       if (
         startDate.value !== start.date ||
         endDate.value !== end.date ||

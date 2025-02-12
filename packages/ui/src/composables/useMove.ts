@@ -2,7 +2,7 @@ import {
   addToDate,
   copyTimestamp,
   getEndOfMonth,
-  relativeDays,
+  moveRelativeDays,
   updateDayOfYear,
   updateFormatted,
   updateRelative,
@@ -85,15 +85,15 @@ export default function useMove(
         case 'week':
         case 'week-agenda':
         case 'week-scheduler':
-          // For week-based views, use relativeDays with allowed weekdays.
-          moved = relativeDays(moved, mover, dayCount, props.weekdays)
+          // For week-based views, use moveRelativeDays with allowed weekdays.
+          moved = moveRelativeDays(moved, mover, dayCount, props.weekdays)
           break
 
         case 'day':
         case 'scheduler':
         case 'agenda':
           // For day views, move a number of days determined by maxDays, taking allowed weekdays into account.
-          moved = relativeDays(moved, mover, maxDays.value, props.weekdays)
+          moved = moveRelativeDays(moved, mover, maxDays.value, props.weekdays)
           break
 
         case 'month-interval':
@@ -106,7 +106,7 @@ export default function useMove(
 
         case 'resource':
           // For resource view, similar to the day view.
-          moved = relativeDays(moved, mover, maxDays.value, props.weekdays)
+          moved = moveRelativeDays(moved, mover, maxDays.value, props.weekdays)
           break
       }
     }

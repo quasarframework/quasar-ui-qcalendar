@@ -311,7 +311,7 @@ export function getStartOfWeek(
       start = nextDay(start)
     }
   }
-  start = findWeekday(start, weekdays[0], prevDay)
+  start = findWeekday(start, weekdays[0] as number, prevDay)
   start = updateFormatted(start)
   if (today) {
     start = updateRelative(start, today, start.hasTime)
