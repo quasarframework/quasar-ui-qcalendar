@@ -115,7 +115,7 @@ There are no extra steps to be taken with `app-vite`, it will automatically tran
 
 #### Minified
 
-All CSS has been minified, so if you want `QCalendarDay.css` you could instead target `QCalendarDay.min.css`. This applies to all components.
+Additionally, all compiled CSS has a minified version, so if you want `QCalendarDay.css` you could instead target `QCalendarDay.min.css`. This applies to all components.
 
 ### Or target as a component import
 
@@ -151,29 +151,20 @@ There are several variants for each calendar component, including common, es (mo
 
 ## Vue CLI or Vite
 
-### Vue project from src
-
-```js
+```tabs
+<<| js Vue project from src |>>
 import Plugin from '@quasar/quasar-ui-qcalendar/src/QCalendarDay.js'
 import '@quasar/quasar-ui-qcalendar/src/css/calendar-day.scss'
 import App from './App.vue'
 
 const app = createApp(App).use(Plugin)
-```
-
-### Vue project from dist
-
-```js
+<<| js Vue project from dist |>>
 import Plugin from '@quasar/quasar-ui-qcalendar/QCalendarDay'
 import '@quasar/quasar-ui-qcalendar/QCalendarDay.min.css'
 import App from './App.vue'
 
 const app = createApp(App).use(Plugin)
-```
-
-### Or component import
-
-```html
+<<| html Component import |>>
 <style src="@quasar/quasar-ui-qcalendar/QCalendarDay.min.css"></style>
 
 <script>
@@ -191,6 +182,8 @@ const app = createApp(App).use(Plugin)
 ## UMD variant
 
 Exports `window.QCalendarDay`.
+
+> Substitute `QCalendarDay` with any of the calendar types (ex: `QCalendarMonth`).
 
 ### Quasar install
 
@@ -286,7 +279,7 @@ or
 
 [QCalendarScheduler UMD Example on Codepen](https://codepen.io/Hawkeye64/pen/oNZQBLz)
 
-[QCalendarTask UMD Example on Codepen](https://codepen.io/Hawkeye64/pen/RwwwKQL)
+[QCalendarTask UMD Example on Codepen](https://codepen.io/Hawkeye64/pen/PoWLpoqL)
 
 # Project source
 
