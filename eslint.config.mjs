@@ -74,6 +74,8 @@ export default [
           allow: ['error', 'warn'], // Allow console.error and console.warn
         },
       ],
+      // allow debugger during development only
+      'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     },
   },
 
