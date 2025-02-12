@@ -82,6 +82,11 @@ export default defineConfig(async (ctx) => {
           {
             path: ctx.appPaths.srcDir + '/markdown',
             menu: sidebar as MenuItem[],
+            config: {
+              headers: {
+                shouldAllowExample: false,
+              },
+            },
           },
         ],
         [
