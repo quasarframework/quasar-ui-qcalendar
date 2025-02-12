@@ -35,4 +35,6 @@ import QCalendarApi from '@quasar/quasar-ui-qcalendar/dist/api/QCalendar.json'
 
 <MarkdownApi :api="QCalendarApi" name="QCalendar"/>
 
+## All
+
 <MarkdownExample title="All" file="CalendarAll" no-github no-edit/>

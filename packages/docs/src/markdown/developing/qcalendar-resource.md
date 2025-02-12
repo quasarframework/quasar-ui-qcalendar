@@ -10,7 +10,11 @@ import QCalendarResourceApi from '@quasar/quasar-ui-qcalendar/dist/api/QCalendar
 
 <MarkdownApi :api="QCalendarResourceApi" name="QCalendarResource"/>
 
+## Children
+
 <MarkdownExample title="Children" file="ResourceChildren" no-github no-edit/>
+
+## Custom Height
 
 You can have each resource row have it's own specific height by including a `height` key (as a number of pixels, without the **px**) in each resource object. For example:
 
@@ -49,11 +53,21 @@ If the `resource-min-height` is more than your custom height, then you won't see
 
 <MarkdownExample title="Custom Height" file="ResourceCustomHeight" no-github no-edit/>
 
+## Dark
+
+This will only make sense if your browser is currently in light mode.
+
 <MarkdownExample title="Dark" file="ResourceDark" no-github no-edit/>
+
+## Focusable Hoverable
 
 <MarkdownExample title="Focusable Hoverable" file="ResourceFocusableHoverable" no-github no-edit/>
 
+## Hour 24 Format
+
 <MarkdownExample title="Hour 24 Format" file="ResourceHour24Format" no-github no-edit/>
+
+## Modify Intervals
 
 Using the proerties `interval-minutes`, `interval-start` and `interval-count`, you can control how the calendar looks in terms of the range of intervals.
 
@@ -65,16 +79,30 @@ Now, we change interval minutes to 15 (for 15 minute segmented intervals). That 
 
 <MarkdownExample title="Modify Intervals" file="ResourceModifyIntervals" no-github no-edit/>
 
+## No Sticky
+
 <MarkdownExample title="No Sticky" file="ResourceNoSticky" no-github no-edit/>
+
+## Slot - Head Resources
 
 <MarkdownExample title="Slot - Head Resources" file="ResourceSlotHeadResources" no-github no-edit/>
 
+## Slot - Interval Label
+
 <MarkdownExample title="Slot - Interval Label" file="ResourceSlotIntervalLabel" no-github no-edit/>
+
+## Slot - Resource Intervals
 
 <MarkdownExample title="Slot - Resource Intervals" file="ResourceSlotResourceIntervals" no-github no-edit/>
 
+## Slot - Resource Label
+
 <MarkdownExample title="Slot - Resource Label" file="ResourceSlotResourceLabel" no-github no-edit/>
 
+## Theme
+
 <MarkdownExample title="Theme" file="ResourceTheme" no-github no-edit/>
+
+## Width Height
 
 <MarkdownExample title="Width Height" file="ResourceWidthHeight" no-github no-edit/>
