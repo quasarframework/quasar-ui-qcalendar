@@ -237,7 +237,7 @@
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-typescript": "^12.1.2",
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "^22.13.1",
+    "@types/node": "^22.13.2",
     "@types/rtlcss": "^3.5.4",
     "@types/uglify-js": "^3.17.5",
     "autoprefixer": "^10.4.20",
