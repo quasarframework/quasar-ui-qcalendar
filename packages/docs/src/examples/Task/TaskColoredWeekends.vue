@@ -3,7 +3,7 @@
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="row justify-center">
-      <div style="display: flex; max-width: 800px; width: 100%">
+      <div style="display: flex; max-width: 800px; width: 100%" class="colored">
         <q-calendar-task
           ref="calendar"
           v-model="selectedDate"
@@ -447,23 +447,35 @@ function onClickHeadDay(data: Timestamp) {
 </style>
 
 <style lang="scss">
-.task__weekday--style {
-  font-size: 0.8em;
-  font-weight: 600;
+.colored {
+  .task__weekday--style {
+    font-size: 0.8em;
+    font-weight: 600;
+  }
+
+  .task__weekday--weekend,
+  .task__day--weekend,
+  .task__footer--weekend {
+    background: rgb(248, 248, 255);
+  }
+
+  .task__day--style {
+    font-size: 0.8em;
+  }
+
+  .task__footer--day__style {
+    font-size: 0.8em;
+    font-weight: 600;
+  }
 }
 
-.task__weekday--weekend,
-.task__day--weekend,
-.task__footer--weekend {
-  background: rgb(248, 248, 255);
-}
-
-.task__day--style {
-  font-size: 0.8em;
-}
-
-.task__footer--day__style {
-  font-size: 0.8em;
-  font-weight: 600;
+body.body--dark {
+  .colored {
+    .task__weekday--weekend,
+    .task__day--weekend,
+    .task__footer--weekend {
+      background: rgb(4, 4, 10);
+    }
+  }
 }
 </style>
