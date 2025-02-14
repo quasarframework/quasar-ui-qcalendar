@@ -9,6 +9,7 @@
     "composables/private.useMaxDays",
     "composables/private.useTimes",
     "composables/private.useResource",
+    "composables/private.useResourceIntervals",
     "composables/private.useNavigation"
   ],
   "meta": {

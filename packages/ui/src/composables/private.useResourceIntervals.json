@@ -1,0 +1,100 @@
+{
+  "slots": {
+    "resource-intervals": {
+      "desc": "Use this slot to place abosolute positioned events",
+      "scope": {
+        "resource": {
+          "type": "Object",
+          "tsType": "ResourceObject",
+          "desc": "A resource object that was passed in within the array of resources",
+          "__exemption": [
+            "examples"
+          ]
+        },
+        "intervals": {
+          "type": "Array",
+          "tsType": "TimestampArray",
+          "desc": "An array of timestamps for the intervals that will be displayed",
+          "__exemption": [
+            "examples"
+          ]
+        },
+        "timeStartPosX": {
+          "type": "Function",
+          "desc": "Calculates the starting x position of the passed in time",
+          "params": {
+            "time": {
+              "type": "String",
+              "desc": "The time for which a position is needed in 24-hour format (HH:mm)",
+              "examples": [
+                "'09:00'"
+              ]
+            }
+          },
+          "returns": {
+            "type": "Number",
+            "desc": "The absolute x starting position",
+            "examples": [
+              "120",
+              "482"
+            ]
+          }
+        },
+        "timeDurationWidth": {
+          "type": "Function",
+          "desc": "Given a duration (in minutes), will return the css width value",
+          "params": {
+            "duration": {
+              "type": [
+                "Number",
+                "String"
+              ],
+              "desc": "The number of minutes for the event to calculate it's width",
+              "examples": [
+                "'300'",
+                "900"
+              ]
+            }
+          },
+          "returns": {
+            "type": "Number",
+            "desc": "The width (in pixels) to be used for the event",
+            "examples": [
+              "80",
+              "120"
+            ]
+          }
+        }
+      },
+      "applicable": [
+        "resource",
+        "day-resource"
+      ]
+    },
+    "resource-interval": {
+      "desc": "Use this slot add to an interval for the specified resource",
+      "scope": {
+        "resource": {
+          "type": "Object",
+          "tsType": "ResourceObject",
+          "desc": "A resource object that was passed in within the array of resources",
+          "__exemption": [
+            "examples"
+          ]
+        },
+        "interval": {
+          "type": "Timestamp",
+          "tsType": "Timestamp",
+          "desc": "The interval object",
+          "__exemption": [
+            "examples"
+          ]
+        }
+      },
+      "applicable": [
+        "resource",
+        "day-resource"
+      ]
+    }
+  }
+}

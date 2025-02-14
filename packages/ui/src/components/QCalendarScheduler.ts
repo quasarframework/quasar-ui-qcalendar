@@ -972,6 +972,7 @@ export default defineComponent({
       indentLevel = 0,
       expanded = true,
     ): VNode[] {
+      const slotResourceRow = slots['resource-row']
       const style: CSSProperties = {}
       style.height =
         resource.height !== void 0
@@ -982,6 +983,8 @@ export default defineComponent({
       if (parsedResourceMinHeight.value > 0) {
         style.minHeight = convertToUnit(parsedResourceMinHeight.value)
       }
+
+      const scope = { resource, resourceIndex, indentLevel, expanded }
 
       const resourceRow = h(
         'div',
@@ -1021,7 +1024,7 @@ export default defineComponent({
         ]
       }
 
-      return [resourceRow]
+      return slotResourceRow ? slotResourceRow({ scope }).flat() : [resourceRow]
     }
 
     function __renderResource(
