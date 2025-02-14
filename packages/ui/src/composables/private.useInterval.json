@@ -493,7 +493,7 @@
         ]
       }
     },
-    "hour24format": {
+    "hour24-format": {
       "type": "Boolean",
       "category": "style",
       "desc": "Show intervals in 24 hour format",
