@@ -262,7 +262,7 @@
     color: var(--calendar-color);
     background: var(--calendar-background);
     min-width: var(--calendar-resources-width);
-    max-width: var (--calendar-resources-width);
+    max-width: var(--calendar-resources-width);
 
     &--section {
       border-right: var(--calendar-border);
@@ -375,7 +375,7 @@
       &.q-range-last,
       &.q-range {
         color: var(--calendar-range-color);
-        background: var (--calendar-range-background);
+        background: var(--calendar-range-background);
       }
 
       &:first-child {

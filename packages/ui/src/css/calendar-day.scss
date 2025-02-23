@@ -391,7 +391,7 @@
     }
 
     &__day {
-      border-right: var (--calendar-border-dark);
+      border-right: var(--calendar-border-dark);
 
       &:last-child {
         border-right: none !important;
