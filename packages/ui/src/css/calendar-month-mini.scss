@@ -198,12 +198,11 @@
               &:before {
                 width: 50%;
                 right: auto;
-
-                // when first and last are same day
-                &.q-range-first {
-                  &:before {
-                    width: 0;
-                  }
+              }
+              // when first and last are same day
+              &.q-range-first {
+                &:before {
+                  width: 0;
                 }
               }
             }
