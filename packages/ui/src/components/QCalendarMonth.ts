@@ -48,6 +48,14 @@ interface Size {
   height: number
 }
 
+export function shouldAdjustWeekEventHeight(
+  wrapperHeight: number,
+  weekEventHeight: number,
+  margin: number,
+): boolean {
+  return weekEventHeight + margin > wrapperHeight
+}
+
 const { renderButton } = useButton()
 
 export default defineComponent({
@@ -367,7 +375,13 @@ export default defineComponent({
           // this sucks to have to do it this way
           const styles = window.getComputedStyle(weekEvent as Element)
           const margin = parseFloat(styles.marginTop) + parseFloat(styles.marginBottom)
-          if ((wrapper as Element).clientHeight + margin > (wrapper as Element).clientHeight) {
+          if (
+            shouldAdjustWeekEventHeight(
+              (wrapper as Element).clientHeight,
+              (weekEvent as Element).clientHeight,
+              margin,
+            )
+          ) {
             ;(wrapper as HTMLElement).style.height =
               (weekEvent as Element).clientHeight + margin + 'px'
           }

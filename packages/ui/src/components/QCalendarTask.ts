@@ -47,6 +47,10 @@ interface Size {
   height: number
 }
 
+export function isTaskHeadDayDroppable(dragOverHeadDay: string, day: Timestamp): boolean {
+  return dragOverHeadDay === day.date
+}
+
 const { renderButton } = useButton()
 
 export default defineComponent({
@@ -1050,7 +1054,7 @@ export default defineComponent({
       const scope = {
         timestamp: day,
         activeDate,
-        droppable: (dragOverHeadDayRef.value = day.date),
+        droppable: isTaskHeadDayDroppable(dragOverHeadDayRef.value, day),
         disabled: props.disabledWeekdays
           ? props.disabledWeekdays.includes(Number(day.weekday))
           : false,

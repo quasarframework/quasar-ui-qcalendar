@@ -182,7 +182,7 @@ export default function useTask(
         return getEndOfMonth(parseTimestamp(props.modelValue) as Timestamp)
       } else {
         let end = copyTimestamp(parsedStartDate.value!)
-        end = addToDate(end, { month: props.viewCount })
+        end = addToDate(end, { month: props.viewCount - 1 })
         return getEndOfMonth(end)
       }
     } else {
