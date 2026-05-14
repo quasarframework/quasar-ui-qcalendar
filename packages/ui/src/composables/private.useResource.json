@@ -4,7 +4,6 @@
       "type": "Array",
       "tsType": "ResourceObjectArray",
       "category": "model",
-      "required": true,
       "desc": "An array of objects with a single key of label. You can add other keys if you like, which will be passed back on the appropriate scoped slots",
       "applicable": ["scheduler"],
       "examples": ["[{ label: 'John' },{ label: 'Susan' }]"]
