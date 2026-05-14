@@ -47,7 +47,7 @@ const calendar = ref<QCalendarDay>()
 const selectedDate = ref(today()),
   toggled = ref(false),
   currentDate = ref<string>(),
-  currentTime = ref<string>(),
+  currentTime = ref('00:00'),
   timeStartPos = ref(0)
 let intervalId: NodeJS.Timeout | undefined
 
@@ -115,7 +115,7 @@ function adjustCurrentTime() {
   const now = parseDate(new Date())
   if (now) {
     currentDate.value = now.date
-    currentTime.value = now.time
+    currentTime.value = now.time ?? '00:00'
     if (calendar.value) {
       timeStartPos.value = calendar.value.timeStartPos(currentTime.value, false)
     }

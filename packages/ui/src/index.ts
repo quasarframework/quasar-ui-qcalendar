@@ -1,11 +1,12 @@
-import { App as Application } from 'vue'
-import QCalendar from './components/QCalendar.js'
-import QCalendarAgenda from './components/QCalendarAgenda.js'
-import QCalendarDay from './components/QCalendarDay.js'
-import QCalendarMonth from './components/QCalendarMonth.js'
-import QCalendarResource from './components/QCalendarResource.js'
-import QCalendarScheduler from './components/QCalendarScheduler.js'
-import QCalendarTask from './components/QCalendarTask.js'
+import { App as Application, type Component } from 'vue'
+import './global.js'
+import QCalendarComponent from './components/QCalendar.js'
+import QCalendarAgendaComponent from './components/QCalendarAgenda.js'
+import QCalendarDayComponent from './components/QCalendarDay.js'
+import QCalendarMonthComponent from './components/QCalendarMonth.js'
+import QCalendarResourceComponent from './components/QCalendarResource.js'
+import QCalendarSchedulerComponent from './components/QCalendarScheduler.js'
+import QCalendarTaskComponent from './components/QCalendarTask.js'
 
 import { version } from './version.js'
 
@@ -38,16 +39,32 @@ type CalendarResourceInstance = CalendarNavigationInstance & {
   scrollToTimeX: (_time: string, _duration?: number) => void
 }
 
-export type QCalendar = CalendarIntervalInstance &
+type QCalendarInstance = CalendarIntervalInstance &
   CalendarResourceInstance & {
     widthToMinutes: (_width: number) => number
   }
-export type QCalendarAgenda = CalendarNavigationInstance
-export type QCalendarDay = CalendarIntervalInstance
-export type QCalendarMonth = CalendarNavigationInstance
-export type QCalendarResource = CalendarResourceInstance
-export type QCalendarScheduler = CalendarNavigationInstance
-export type QCalendarTask = CalendarNavigationInstance
+type QCalendarAgendaInstance = CalendarNavigationInstance
+type QCalendarDayInstance = CalendarIntervalInstance
+type QCalendarMonthInstance = CalendarNavigationInstance
+type QCalendarResourceInstance = CalendarResourceInstance
+type QCalendarSchedulerInstance = CalendarNavigationInstance
+type QCalendarTaskInstance = CalendarNavigationInstance
+
+const QCalendar = QCalendarComponent as Component
+const QCalendarAgenda = QCalendarAgendaComponent as Component
+const QCalendarDay = QCalendarDayComponent as Component
+const QCalendarMonth = QCalendarMonthComponent as Component
+const QCalendarResource = QCalendarResourceComponent as Component
+const QCalendarScheduler = QCalendarSchedulerComponent as Component
+const QCalendarTask = QCalendarTaskComponent as Component
+
+export type QCalendar = QCalendarInstance
+export type QCalendarAgenda = QCalendarAgendaInstance
+export type QCalendarDay = QCalendarDayInstance
+export type QCalendarMonth = QCalendarMonthInstance
+export type QCalendarResource = QCalendarResourceInstance
+export type QCalendarScheduler = QCalendarSchedulerInstance
+export type QCalendarTask = QCalendarTaskInstance
 
 export {
   version,
@@ -74,12 +91,12 @@ export default {
 
   // Vue plugin
   install(app: Application): void {
-    app.component(String(QCalendar.name), QCalendar)
-    app.component(String(QCalendarAgenda.name), QCalendarAgenda)
-    app.component(String(QCalendarDay.name), QCalendarDay)
-    app.component(String(QCalendarMonth.name), QCalendarMonth)
-    app.component(String(QCalendarResource.name), QCalendarResource)
-    app.component(String(QCalendarScheduler.name), QCalendarScheduler)
-    app.component(String(QCalendarTask.name), QCalendarTask)
+    app.component(String(QCalendarComponent.name), QCalendarComponent)
+    app.component(String(QCalendarAgendaComponent.name), QCalendarAgendaComponent)
+    app.component(String(QCalendarDayComponent.name), QCalendarDayComponent)
+    app.component(String(QCalendarMonthComponent.name), QCalendarMonthComponent)
+    app.component(String(QCalendarResourceComponent.name), QCalendarResourceComponent)
+    app.component(String(QCalendarSchedulerComponent.name), QCalendarSchedulerComponent)
+    app.component(String(QCalendarTaskComponent.name), QCalendarTaskComponent)
   },
 }

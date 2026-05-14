@@ -55,6 +55,7 @@ export function relativeToRoot(...pathList: string[]): string {
 }
 
 const packageJson = readJsonFile(new URL('../package.json', import.meta.url))
+export const packageName = String(packageJson.name)
 export const version = packageJson.version
 export const ProductName = packageJson.productName ?? packageJson.ProductName ?? packageJson.name
 export const banner = config.banner

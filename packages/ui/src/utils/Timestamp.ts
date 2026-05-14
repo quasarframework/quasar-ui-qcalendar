@@ -1015,7 +1015,7 @@ export type WeekdayFormatter = (
   _type: string,
   _locale?: string,
 ) => string
-export type MonthFormatter = (_month: number, _type: string, _locale?: string) => string
+export type MonthFormatter = (_month: number, _type?: string, _locale?: string) => string
 
 /**
  * @callback getOptions
@@ -1381,7 +1381,7 @@ export function getMonthFormatter(): MonthFormatter {
    * @param {string} [locale] - The locale to use for formatting (defaults to the system locale if not provided).
    * @returns {string} The formatted month string.
    */
-  function monthFormatter(month: number, type: string, locale?: string): string {
+  function monthFormatter(month: number, type = 'long', locale?: string): string {
     try {
       const intlFormatter = new Intl.DateTimeFormat(
         locale || undefined,

@@ -1,4 +1,4 @@
-import { version, resolveToRoot, logError, writeFile, kebabCase } from './build.utils.js'
+import { packageName, version, resolveToRoot, logError, writeFile, kebabCase } from './build.utils.js'
 
 const resolve = (file: string): string => resolveToRoot('dist/web-types', file)
 
@@ -127,7 +127,7 @@ export function generate({ api, compact = false }: { api: Api; compact?: boolean
     const webtypes = encodeFn({
       $schema: '',
       framework: 'vue',
-      name: 'qcalendar',
+      name: packageName,
       version,
       contributions: {
         html: {
@@ -166,7 +166,7 @@ export function generate({ api, compact = false }: { api: Api; compact?: boolean
             const result: any = {
               name,
               source: {
-                module: 'qcalendar',
+                module: packageName,
                 symbol: name,
               },
               attributes:
@@ -236,7 +236,7 @@ export function generate({ api, compact = false }: { api: Api; compact?: boolean
             const result: any = {
               name: 'v-' + kebabCase(name),
               source: {
-                module: 'qcalendar',
+                module: packageName,
                 symbol: name,
               },
               required: false,
