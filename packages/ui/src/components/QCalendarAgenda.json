@@ -5,7 +5,7 @@
     "composables/private.useMove",
     "composables/private.useColumn",
     "composables/private.useCommon",
-    "composables/private.useInterval",
+    "composables/private.useAgenda",
     "composables/private.useMaxDays",
     "composables/private.useTimes",
     "composables/private.useNavigation"

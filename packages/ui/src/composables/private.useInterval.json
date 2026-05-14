@@ -43,20 +43,6 @@
         "all scheduler"
       ]
     },
-    "day-height": {
-      "type": ["Number", "String"],
-      "category": "behavior",
-      "desc": "The maximum height in pixels for the day height. Using 0 will make the rows variable height based on content.",
-      "default": "0",
-      "examples": ["'80'", "100"]
-    },
-    "day-min-height": {
-      "type": ["Number", "String"],
-      "category": "behavior",
-      "desc": "The minimum height to be used",
-      "default": "40",
-      "examples": ["'80'", "100"]
-    },
     "interval-height": {
       "type": ["Number", "String"],
       "category": "behavior",
@@ -416,19 +402,6 @@
       "values": ["'stacked'", "'inline'", "'inverted'"],
       "default": "'stacked'",
       "examples": ["'inline'"]
-    },
-    "no-sticky": {
-      "type": "Boolean",
-      "category": "behavior",
-      "desc": "Disables sticky headers",
-      "applicable": ["resource"]
-    },
-    "interval-header-height": {
-      "type": ["Number", "String"],
-      "category": "style",
-      "desc": "The height of the interval header",
-      "applicable": ["resource"],
-      "default": "20"
     }
   },
   "slots": {}

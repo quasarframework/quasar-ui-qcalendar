@@ -1,5 +1,15 @@
 {
   "props": {
+    "view": {
+      "type": "String",
+      "category": "model",
+      "desc": "The type of calendar view to be displayed",
+      "applicable": ["scheduler"],
+      "values": ["'month-interval'", "'week'", "'day'", "'month'"],
+      "examples": ["'week'", "'month'"],
+      "default": "# 'day'",
+      "__runtimeDefault": true
+    },
     "model-resources": {
       "type": "Array",
       "tsType": "ResourceObjectArray",
@@ -12,6 +22,14 @@
       "type": "String",
       "category": "model",
       "desc": "The key from the `resources` object that will be displayed",
+      "default": "'id'",
+      "applicable": ["scheduler"],
+      "examples": ["'id'"]
+    },
+    "resource-label": {
+      "type": "String",
+      "category": "model",
+      "desc": "The label from the `resources` object that will be displayed",
       "default": "'label'",
       "applicable": ["scheduler"],
       "examples": ["'label'", "'name'"]
@@ -20,8 +38,8 @@
       "type": ["Number", "String"],
       "category": "behavior",
       "desc": "The maximum height in pixels for the resource height",
-      "default": "70",
-      "applicable": ["scheduler", "resource", "day-resource"],
+      "default": "0",
+      "applicable": ["scheduler"],
       "examples": ["80", "'100'"]
     },
     "resource-class": {
@@ -105,7 +123,7 @@
         "examples": ["{ color: '#ccc' }"]
       },
       "default": "(data) => { return {} }",
-      "applicable": ["scheduler", "resource", "day-resource"],
+      "applicable": ["scheduler"],
       "examples": [
         "(data) => { return { 'background-color': '#c0c0c0' } }",
         "(data) => resourceStyle(data)"
@@ -113,9 +131,93 @@
     },
     "resource-min-height": {
       "type": ["Number", "String"],
-      "default": "0",
+      "default": "70",
       "desc": "The minimum height of a resource",
       "category": "behavior"
+    },
+    "weekday-style": {
+      "type": ["Function"],
+      "category": "style",
+      "desc": "Gets called to provide custom styling of a weekday",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": ["examples"]
+        }
+      },
+      "returns": {
+        "type": "Object",
+        "desc": "A Vue style object",
+        "examples": ["{ color: '#ccc' }"]
+      },
+      "default": "# null",
+      "__runtimeDefault": true
+    },
+    "weekday-class": {
+      "type": "Function",
+      "category": "style",
+      "desc": "Gets called to provide custom classes for a weekday",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": ["examples"]
+        }
+      },
+      "returns": {
+        "type": "Object",
+        "desc": "A Vue style object of classes",
+        "examples": ["{ 'my-class': true }"]
+      },
+      "default": "# null",
+      "__runtimeDefault": true
+    },
+    "day-style": {
+      "type": "Function",
+      "category": "style",
+      "desc": "Gets called to provide custom styling of a day",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": ["examples"]
+        }
+      },
+      "returns": {
+        "type": ["Array", "Object", "String"],
+        "desc": "A Vue style object",
+        "examples": ["{ color: '#ccc' }"]
+      },
+      "default": "# null",
+      "__runtimeDefault": true
+    },
+    "day-class": {
+      "type": "Function",
+      "category": "style",
+      "desc": "Gets called to provide custom classes for a day",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": ["examples"]
+        }
+      },
+      "returns": {
+        "type": ["Array", "Object", "String"],
+        "desc": "A Vue style object of classes",
+        "examples": ["{ 'my-class': true }"]
+      },
+      "default": "# null",
+      "__runtimeDefault": true
+    },
+    "date-header": {
+      "type": "String",
+      "category": "style",
+      "desc": "Determines how the date header will be displayed",
+      "values": ["'stacked'", "'inline'", "'inverted'"],
+      "default": "'stacked'",
+      "examples": ["'inline'"]
     }
   },
   "events": {}

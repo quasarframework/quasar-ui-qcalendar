@@ -28,15 +28,28 @@
       "type": ["Number", "String"],
       "category": "behavior",
       "desc": "The maximum height in pixels for the resource height",
-      "default": "70",
+      "default": "0",
       "applicable": ["scheduler", "resource", "day-resource"],
       "examples": ["80", "'100'"]
     },
     "resource-min-height": {
       "type": ["Number", "String"],
-      "default": "0",
+      "default": "70",
       "desc": "The minimum height of a resource",
       "category": "behavior"
+    },
+    "interval-header-height": {
+      "type": ["Number", "String"],
+      "category": "style",
+      "desc": "The height of the interval header",
+      "applicable": ["resource", "day-resource"],
+      "default": "20"
+    },
+    "no-sticky": {
+      "type": "Boolean",
+      "category": "behavior",
+      "desc": "Disables sticky headers",
+      "applicable": ["resource", "day-resource"]
     },
     "resource-class": {
       "type": "Function",
@@ -658,7 +671,7 @@
         }
       }
     },
-    "click-resource-header": {
+    "click-head-resources": {
       "desc": "Occurs on resource header area",
       "applicable": [
         "scheduler",
@@ -708,7 +721,7 @@
         }
       }
     },
-    "contextmenu-resource-header": {
+    "contextmenu-head-resources": {
       "desc": "Occurs on resource header area",
       "applicable": [
         "scheduler",
@@ -758,7 +771,7 @@
         }
       }
     },
-    "mousedown-resource-header": {
+    "mousedown-head-resources": {
       "desc": "Occurs on resource header area",
       "applicable": [
         "scheduler",
@@ -808,7 +821,7 @@
         }
       }
     },
-    "mouseup-resource-header": {
+    "mouseup-head-resources": {
       "desc": "Occurs on resource header area",
       "applicable": [
         "scheduler",
@@ -858,7 +871,7 @@
         }
       }
     },
-    "mouseenter-resource-header": {
+    "mouseenter-head-resources": {
       "desc": "Occurs on resource header area",
       "applicable": [
         "scheduler",
@@ -908,7 +921,7 @@
         }
       }
     },
-    "mouseleave-resource-header": {
+    "mouseleave-head-resources": {
       "desc": "Occurs on resource header area",
       "applicable": [
         "scheduler",
@@ -958,7 +971,7 @@
         }
       }
     },
-    "mousemove-resource-header": {
+    "mousemove-head-resources": {
       "desc": "Occurs on resource header area",
       "applicable": [
         "scheduler",
@@ -1008,7 +1021,7 @@
         }
       }
     },
-    "touchstart-resource-header": {
+    "touchstart-head-resources": {
       "desc": "Occurs on resource header area",
       "applicable": [
         "scheduler",
@@ -1058,7 +1071,7 @@
         }
       }
     },
-    "touchend-resource-header": {
+    "touchend-head-resources": {
       "desc": "Occurs on resource header area",
       "applicable": [
         "scheduler",
@@ -1108,7 +1121,7 @@
         }
       }
     },
-    "touchmove-resource-header": {
+    "touchmove-head-resources": {
       "desc": "Occurs on resource header area",
       "applicable": [
         "scheduler",
@@ -1160,7 +1173,7 @@
     }
   },
   "slots": {
-    "resource-header": {
+    "head-resources": {
       "desc": "Use this slot to add to the empty area above resources",
       "scope": {
         "date": {

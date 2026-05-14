@@ -5,11 +5,9 @@
     "composables/private.useMove",
     "composables/private.useColumn",
     "composables/private.useCommon",
-    "composables/private.useInterval",
     "composables/private.useMaxDays",
     "composables/private.useTimes",
     "composables/private.useScheduler",
-    "composables/private.useResource",
     "composables/private.useNavigation"
   ],
   "meta": {
@@ -213,6 +211,27 @@
           }
         }
       }
+    },
+    "head-weekday-label": {
+      "desc": "Replaces the weekday label in the scheduler header"
+    },
+    "head-day-label": {
+      "desc": "Replaces the day label in the scheduler header button"
+    },
+    "head-day-button": {
+      "desc": "Replaces the entire scheduler day header button"
+    },
+    "column-header-before": {
+      "desc": "Adds content before the default scheduler column header content"
+    },
+    "column-header-after": {
+      "desc": "Adds content after the default scheduler column header content"
+    },
+    "resource-days": {
+      "desc": "Adds content across a rendered scheduler resource row"
+    },
+    "day": {
+      "desc": "Adds content to a rendered scheduler day cell"
     }
   }
 }

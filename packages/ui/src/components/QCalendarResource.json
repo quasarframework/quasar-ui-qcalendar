@@ -15,22 +15,7 @@
   "meta": {
     "docsUrl": "https://qcalendar.netlify.app/developing/qcalendar-resource"
   },
-  "props": {
-    "sticky": {
-      "type": "Boolean",
-      "category": "behavior",
-      "desc": "Turns on sticky resources and intervals",
-      "applicable": ["resource", "day-resource"]
-    },
-    "interval-width": {
-      "type": ["Number", "String"],
-      "category": "behavior",
-      "desc": "The maximum width in pixels for the interval width",
-      "default": "100",
-      "applicable": ["resource", "day-resource"],
-      "examples": ["60", "'100'"]
-    }
-  },
+  "props": {},
   "events": {
     "click-resource": {
       "desc": "Occurs on resource area",
@@ -580,5 +565,9 @@
       }
     }
   },
-  "slots": {}
+  "slots": {
+    "interval-label": {
+      "desc": "Replaces the default interval label in the resource header"
+    }
+  }
 }

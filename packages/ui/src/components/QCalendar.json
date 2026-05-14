@@ -24,12 +24,6 @@
       "default": "'day'",
       "values": ["'day'", "'month'", "'agenda'", "'resource'", "'scheduler'", "'task'"],
       "examples": ["'week'", "'month'"]
-    },
-    "hide-header": {
-      "type": "Boolean",
-      "category": "style",
-      "desc": "Hide the calendar header.",
-      "applicable": ["All"]
     }
   },
   "events": {

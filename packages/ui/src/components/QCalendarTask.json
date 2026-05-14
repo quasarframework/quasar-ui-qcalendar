@@ -4,7 +4,6 @@
     "composables/private.useCheckChange",
     "composables/private.useMove",
     "composables/private.useCommon",
-    "composables/private.useInterval",
     "composables/private.useMaxDays",
     "composables/private.useTasks",
     "composables/private.useTimes",
@@ -141,6 +140,15 @@
           }
         }
       }
+    },
+    "subtask": {
+      "desc": "Use this slot to render child tasks"
+    },
+    "title-task": {
+      "desc": "Use this slot to render content in the task title area"
+    },
+    "title-day": {
+      "desc": "Use this slot to render title content for a specific day column"
     }
   }
 }

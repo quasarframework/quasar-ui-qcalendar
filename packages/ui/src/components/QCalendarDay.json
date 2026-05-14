@@ -72,5 +72,48 @@
       }
     }
   },
-  "slots": {}
+  "slots": {
+    "head-intervals": {
+      "desc": "Use this slot to add content to the interval header row"
+    },
+    "head-days-events": {
+      "desc": "Use this slot to render multi-day content above the day columns"
+    },
+    "head-day": {
+      "desc": "Replaces the complete internal day header"
+    },
+    "head-date": {
+      "desc": "Appends content to the head day date area"
+    },
+    "head-day-event": {
+      "desc": "Adds content to the head day event area"
+    },
+    "head-weekday-label": {
+      "desc": "Replaces the weekday label in the day header"
+    },
+    "head-day-label": {
+      "desc": "Replaces the day label in the day header button"
+    },
+    "head-day-button": {
+      "desc": "Replaces the entire day header button"
+    },
+    "column-header-before": {
+      "desc": "Adds content before the default column header content"
+    },
+    "column-header-after": {
+      "desc": "Adds content after the default column header content"
+    },
+    "day-container": {
+      "desc": "Adds content inside the day container below the headers"
+    },
+    "day-body": {
+      "desc": "Adds content to the rendered day body"
+    },
+    "day-interval": {
+      "desc": "Adds content to a rendered interval cell"
+    },
+    "interval-label": {
+      "desc": "Replaces the default interval label"
+    }
+  }
 }

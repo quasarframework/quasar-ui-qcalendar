@@ -26,7 +26,7 @@ const dest = resolveToRoot('dist/api')
 
 const extendApi = readJsonFile(resolveToRoot('src/api.extends.json'))
 
-const showWarnings = false
+const showWarnings = true
 
 const passthroughValues = [true, false, 'child']
 

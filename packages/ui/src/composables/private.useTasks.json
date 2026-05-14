@@ -75,12 +75,118 @@
         "desc": "A string of classes to apply to the footer day slot"
       }
     },
+    "view": {
+      "type": "String",
+      "category": "model",
+      "desc": "The type of calendar view to be displayed",
+      "applicable": ["task"],
+      "values": ["'week'", "'day'", "'month'"],
+      "examples": ["'week'", "'month'"]
+    },
     "view-count": {
       "type": "Number",
       "category": "content",
       "desc": "The number of views to show. For instance, if the property `view` was `week`, then setting this property to 2 would show 2 weeks.",
       "default": "1",
       "examples": ["2"]
+    },
+    "date-header": {
+      "type": "String",
+      "category": "style",
+      "desc": "Determines how the date header will be displayed",
+      "values": ["'stacked'", "'inline'", "'inverted'"],
+      "default": "'stacked'",
+      "examples": ["'inline'"]
+    },
+    "day-height": {
+      "type": ["Number", "String"],
+      "category": "behavior",
+      "desc": "The maximum height in pixels for the day height. Using 0 will make the rows variable height based on content.",
+      "default": "0",
+      "examples": ["'80'", "100"]
+    },
+    "day-min-height": {
+      "type": ["Number", "String"],
+      "category": "behavior",
+      "desc": "The minimum height to be used",
+      "default": "40",
+      "examples": ["'80'", "100"]
+    },
+    "weekday-style": {
+      "type": ["Function"],
+      "category": "style",
+      "desc": "Gets called to provide custom styling of a weekday",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": ["examples"]
+        }
+      },
+      "returns": {
+        "type": "Object",
+        "desc": "A Vue style object",
+        "examples": ["{ color: '#ccc' }"]
+      },
+      "default": "# null",
+      "__runtimeDefault": true
+    },
+    "weekday-class": {
+      "type": "Function",
+      "category": "style",
+      "desc": "Gets called to provide custom classes for a weekday",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": ["examples"]
+        }
+      },
+      "returns": {
+        "type": "Object",
+        "desc": "A Vue style object of classes",
+        "examples": ["{ 'my-class': true }"]
+      },
+      "default": "# null",
+      "__runtimeDefault": true
+    },
+    "day-style": {
+      "type": "Function",
+      "category": "style",
+      "desc": "Gets called to provide custom styling of a day",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": ["examples"]
+        }
+      },
+      "returns": {
+        "type": ["Array", "Object", "String"],
+        "desc": "A Vue style object",
+        "examples": ["{ color: '#ccc' }"]
+      },
+      "default": "# null",
+      "__runtimeDefault": true
+    },
+    "day-class": {
+      "type": "Function",
+      "category": "style",
+      "desc": "Gets called to provide custom classes for a day",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": ["examples"]
+        }
+      },
+      "returns": {
+        "type": ["Array", "Object", "String"],
+        "desc": "A Vue style object of classes",
+        "examples": ["{ 'my-class': true }"]
+      },
+      "default": "# null",
+      "__runtimeDefault": true
     }
   },
   "slots": {

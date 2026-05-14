@@ -4,7 +4,6 @@
     "composables/private.useCheckChange",
     "composables/private.useMove",
     "composables/private.useCommon",
-    "composables/private.useMaxDays",
     "composables/private.useMonth",
     "composables/private.useTimes",
     "composables/private.useNavigation"
@@ -12,16 +11,7 @@
   "meta": {
     "docsUrl": "https://qcalendar.netlify.app/developing/qcalendar-month"
   },
-  "props": {
-    "date-header": {
-      "type": "String",
-      "category": "style",
-      "desc": "Determines how the date header will be displayed",
-      "values": ["'stacked'", "'inline'", "'inverted'"],
-      "default": "'stacked'",
-      "examples": ["'inline'"]
-    }
-  },
+  "props": {},
   "events": {},
   "methods": {
     "timeStartPos": {
@@ -80,5 +70,36 @@
       }
     }
   },
-  "slots": {}
+  "slots": {
+    "week": {
+      "desc": "Replaces the rendered week row"
+    },
+    "workweek": {
+      "desc": "Replaces the rendered workweek label cell"
+    },
+    "head-workweek": {
+      "desc": "Replaces the workweek header cell"
+    },
+    "head-day": {
+      "desc": "Replaces the complete internal day header"
+    },
+    "head-day-event": {
+      "desc": "Adds content to the month head day event area"
+    },
+    "head-day-label": {
+      "desc": "Replaces the month head day label"
+    },
+    "head-day-button": {
+      "desc": "Replaces the month head day button"
+    },
+    "day": {
+      "desc": "Adds content to a rendered month day cell"
+    },
+    "day-of-year": {
+      "desc": "Replaces the day-of-year label"
+    },
+    "month-label": {
+      "desc": "Replaces the month label shown on outside days"
+    }
+  }
 }
