@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [22.13] # pnpm v11 requires Node.js >=22.13
+        node-version: [24] # pnpm v11 requires Node.js >=22.13
 
     steps:
       # Checkout the repository code
