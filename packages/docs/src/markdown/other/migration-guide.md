@@ -46,7 +46,7 @@ When QCalendar v5 is released as stable, remove the `@beta` tag from those comma
 
 - The app extension now requires Vite. It will stop with an error if it is installed in a non-Vite Quasar app.
 - The extension registers the Vite boot file only. The previous webpack boot file has been removed.
-- The extension is compatible with `@quasar/app-vite` `>=3.0.0-beta.13`.
+- The extension is compatible with `@quasar/app-vite` `>=3.0.0-beta.14`.
 - App extension entry scripts are now TypeScript-first. The package entry should point to `src/index.ts`, with wrappers imported directly from `@quasar/app-vite`, like `defineIndexScript()`.
 - The extension runtime boot file is now `src/boot/vite-register.ts`.
 - If you generate your own boot file inside the Quasar app, it should import `defineBoot` from `#q-app`, matching the Quasar CLI Vite 3 alias.

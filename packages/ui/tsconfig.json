@@ -10,13 +10,13 @@
     "esModuleInterop": true,
     "allowJs": true,
     "noImplicitAny": false,
+    "rootDir": "src",
     "outDir": "dist/types",
-    "baseUrl": ".",
     "paths": {
-      "components/*": ["src/components/*"],
-      "directives/*": ["src/directives/*"],
-      "composables/*": ["src/composables/*"],
-      "utils/*": ["src/utils/*"]
+      "components/*": ["./src/components/*"],
+      "directives/*": ["./src/directives/*"],
+      "composables/*": ["./src/composables/*"],
+      "utils/*": ["./src/utils/*"]
     }
   },
   "include": ["src/**/*"],
