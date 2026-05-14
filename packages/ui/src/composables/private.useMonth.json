@@ -243,11 +243,11 @@
     "month-label-size": {
       "type": "String",
       "category": "style",
-      "values": ["'xs'", "'sm'", "'md'", "'lg'", "'xl'"],
-      "desc": "This property is used change the size of the month label button. This property is ignored when `mini-mode` is set to true",
+      "values": ["'xxs'", "'xs'", "'sm'", "'md'", "'lg'", "'xl'", "'xxl'"],
+      "desc": "This property changes the size of the inline month label text in month cells. It only has a visible effect when the month label is rendered, such as with `date-align` set to `left` or `right`. This property is ignored when `mini-mode` is set to true",
       "default": "'sm'",
       "applicable": ["month"],
-      "examples": ["'sm'", "'md'"]
+      "examples": ["'sm'", "'md'", "'1rem'", "'14px'"]
     }
   },
   "events": {

@@ -90,6 +90,12 @@ Instead use `box-shadow` to create an inset like this `box-shadow: inset 0 0 0 1
 
 ## Label Size
 
+The `month-label-size` property changes the size of the inline month label text rendered inside month cells.
+
+::: tip
+This property only has a visible effect when the month label is actually shown. In `QCalendarMonth`, that typically means using `date-align="left"` or `date-align="right"`. With the default centered date alignment, the inline month label is not rendered.
+:::
+
 <MarkdownExample title="Label Size" file="MonthLabelSize" no-github no-edit/>
 
 ## Locale
