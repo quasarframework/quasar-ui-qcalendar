@@ -8,16 +8,6 @@ import { defineIndexScript } from '@quasar/app-vite'
  * API: https://github.com/quasarframework/quasar/blob/master/app/lib/app-extension/IndexAPI.js
  */
 
-function extendConf(conf, api) {
-  if (api.hasVite !== true) {
-    throw new Error('This extension requires Vite')
-  }
-
-  // Register the Vite boot file and stylesheet.
-  conf.boot.push('~@quasar/quasar-app-extension-qcalendar/src/boot/vite-register.js')
-  conf.css.push('~@quasar/quasar-ui-qcalendar/src/index.scss')
-}
-
 export default defineIndexScript((api) => {
   // Quasar compatibility check; you may need
   // hard dependencies, as in a minimum version of the "quasar"
@@ -29,5 +19,12 @@ export default defineIndexScript((api) => {
   api.registerDescribeApi('QCalendar', '~@quasar/quasar-ui-qcalendar/dist/api/QCalendar.json')
 
   // We extend /quasar.conf.js
-  api.extendQuasarConf(extendConf)
+  api.extendQuasarConf((conf) => {
+    conf.boot ??= []
+    conf.css ??= []
+
+    // Register the Vite boot file and stylesheet.
+    conf.boot.push('~@quasar/quasar-app-extension-qcalendar/src/boot/vite-register.ts')
+    conf.css.push('~@quasar/quasar-ui-qcalendar/src/index.scss')
+  })
 })

@@ -27,6 +27,10 @@ These are also many ways to add the calendar components to your project. You can
 By using the app extension, you will get **all** QCalendar components installed and registered within your application.
 :::
 
+::: tip
+QCalendar v5's app extension targets Quasar CLI Vite projects using `@quasar/app-vite` `>=3.0.0-beta.13`.
+:::
+
 #### Install
 
 To add as an App Extension to your Quasar application, run the following (in your Quasar app folder):
@@ -147,7 +151,7 @@ There are several variants for each calendar component, including common, es (mo
 
 ```tabs
 <<| js Vue project from src |>>
-import Plugin from '@quasar/quasar-ui-qcalendar/src/QCalendarDay.js'
+import Plugin from '@quasar/quasar-ui-qcalendar/src/QCalendarDay'
 import '@quasar/quasar-ui-qcalendar/src/css/calendar-day.scss'
 import App from './App.vue'
 
