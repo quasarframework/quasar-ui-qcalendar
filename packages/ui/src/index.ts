@@ -1,4 +1,4 @@
-import { App as Application, type Component } from 'vue'
+import { App as Application, type DefineComponent, type SlotsType } from 'vue'
 import './global.js'
 import QCalendarComponent from './components/QCalendar.js'
 import QCalendarAgendaComponent from './components/QCalendarAgenda.js'
@@ -7,6 +7,14 @@ import QCalendarMonthComponent from './components/QCalendarMonth.js'
 import QCalendarResourceComponent from './components/QCalendarResource.js'
 import QCalendarSchedulerComponent from './components/QCalendarScheduler.js'
 import QCalendarTaskComponent from './components/QCalendarTask.js'
+import type {
+  QCalendarAgendaSlots,
+  QCalendarDaySlots,
+  QCalendarMonthSlots,
+  QCalendarResourceSlots,
+  QCalendarSchedulerSlots,
+  QCalendarTaskSlots,
+} from './slots.js'
 
 import { version } from './version.js'
 
@@ -39,6 +47,24 @@ type CalendarResourceInstance = CalendarNavigationInstance & {
   scrollToTimeX: (_time: string, _duration?: number) => void
 }
 
+type RootCalendarComponent<Instance, Slots extends Record<string, any> = {}> = DefineComponent<
+  Record<string, any>,
+  any,
+  any,
+  any,
+  any,
+  any,
+  any,
+  any,
+  any,
+  any,
+  any,
+  any,
+  SlotsType<Slots>
+> & {
+  new (): Instance
+}
+
 type QCalendarInstance = CalendarIntervalInstance &
   CalendarResourceInstance & {
     widthToMinutes: (_width: number) => number
@@ -50,13 +76,25 @@ type QCalendarResourceInstance = CalendarResourceInstance
 type QCalendarSchedulerInstance = CalendarNavigationInstance
 type QCalendarTaskInstance = CalendarNavigationInstance
 
-const QCalendar = QCalendarComponent as Component
-const QCalendarAgenda = QCalendarAgendaComponent as Component
-const QCalendarDay = QCalendarDayComponent as Component
-const QCalendarMonth = QCalendarMonthComponent as Component
-const QCalendarResource = QCalendarResourceComponent as Component
-const QCalendarScheduler = QCalendarSchedulerComponent as Component
-const QCalendarTask = QCalendarTaskComponent as Component
+const QCalendar = QCalendarComponent as RootCalendarComponent<QCalendarInstance>
+const QCalendarAgenda =
+  QCalendarAgendaComponent as RootCalendarComponent<QCalendarAgendaInstance, QCalendarAgendaSlots>
+const QCalendarDay =
+  QCalendarDayComponent as RootCalendarComponent<QCalendarDayInstance, QCalendarDaySlots>
+const QCalendarMonth =
+  QCalendarMonthComponent as RootCalendarComponent<QCalendarMonthInstance, QCalendarMonthSlots>
+const QCalendarResource =
+  QCalendarResourceComponent as RootCalendarComponent<
+    QCalendarResourceInstance,
+    QCalendarResourceSlots
+  >
+const QCalendarScheduler =
+  QCalendarSchedulerComponent as RootCalendarComponent<
+    QCalendarSchedulerInstance,
+    QCalendarSchedulerSlots
+  >
+const QCalendarTask =
+  QCalendarTaskComponent as RootCalendarComponent<QCalendarTaskInstance, QCalendarTaskSlots>
 
 export type QCalendar = QCalendarInstance
 export type QCalendarAgenda = QCalendarAgendaInstance
