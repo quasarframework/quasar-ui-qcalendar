@@ -121,7 +121,7 @@ function fetchQuery (val, onResult, onError) {
       localRequestId === requestId && onError()
     })
 
-    xhr.open('POST', `https://search.quasar.dev/indexes/${ process.env.SEARCH_INDEX }/search`)
+    xhr.open('POST', `https://search.quasar.dev/indexes/${import.meta.env.QCLI_SEARCH_INDEX}/search`)
     xhr.setRequestHeader('Content-Type', 'application/json')
     xhr.setRequestHeader('Authorization', 'Bearer b7a6ea9a9978a4e4d994c1f9451210327f207441adbcf04a4aada3d17d829359')
     xhr.send(data)

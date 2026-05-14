@@ -197,17 +197,17 @@ function toggleExpand() {
   expanded.value = expanded.value === false
 }
 
-if (process.env.CLIENT) {
+if (import.meta.env.QUASAR_CLIENT) {
   onMounted(() => {
     examples.list.then((list) => {
       component.value = markRaw(
-        process.env.DEV
+        import.meta.env.DEV
           ? list.code[`/src/examples/${examples.name}/${props.file}.vue`].default
           : list[props.file],
       )
 
       parseComponent(
-        process.env.DEV
+        import.meta.env.DEV
           ? list.source[`/src/examples/${examples.name}/${props.file}.vue`]
           : list[`Raw${props.file}`],
       )
