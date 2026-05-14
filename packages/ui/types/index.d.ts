@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ComponentOptions } from 'vue'
+import type { ComponentPublicInstance, ComponentOptions, Plugin } from 'vue'
 
 export interface QCalendar extends ComponentPublicInstance {
   /**
@@ -2022,3 +2022,7 @@ declare module 'vue' {
     QCalendarTask: typeof QCalendarTask
   }
 }
+
+declare const VuePlugin: Plugin
+
+export default VuePlugin
