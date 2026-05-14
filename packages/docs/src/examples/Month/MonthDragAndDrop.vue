@@ -56,7 +56,7 @@
               >
                 <template
                   v-for="(event, index) in getWeekdayEvents(scope.weekday)"
-                  :key="event.weekday + index"
+                  :key="event.id + '-' + index"
                 >
                   <span
                     style="border: 1px solid pink; border-radius: 2px; padding: 2px; margin: 1px"

@@ -1,7 +1,7 @@
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file
 
-import { defineConfig } from '#q-app/wrappers'
+import { defineConfig } from '@quasar/app-vite'
 import { viteMdPlugin, type MenuItem } from '@md-plugins/vite-md-plugin'
 import { viteExamplesPlugin, viteManualChunks } from '@md-plugins/vite-examples-plugin'
 
@@ -46,7 +46,13 @@ export default defineConfig(async (ctx) => {
       typescript: {
         strict: true,
         vueShim: true,
-        // extendTsConfig (tsConfig) {}
+        extendTsConfig(tsConfig) {
+          tsConfig.compilerOptions ??= {}
+          tsConfig.compilerOptions.paths ??= {}
+          tsConfig.compilerOptions.paths['@quasar/quasar-ui-qcalendar'] = [
+            './../src/types/qcalendar-shim.ts',
+          ]
+        },
       },
 
       vueRouterMode: 'history', // available values: 'hash', 'history'
@@ -100,10 +106,6 @@ export default defineConfig(async (ctx) => {
           'vite-plugin-checker',
           {
             vueTsc: true,
-            eslint: {
-              lintCommand: 'eslint -c ./eslint.config.js "./src*/**/*.{ts,js,mjs,cjs,vue}"',
-              useFlatConfig: true,
-            },
           },
           { server: false },
         ],

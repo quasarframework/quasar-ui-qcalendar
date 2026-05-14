@@ -1,34 +1,119 @@
 ---
 title: Migration Guide
-desc: Migrate from v3 to v4
-keys: Help
+desc: Migrate from v4 to v5
+keys: Help, upgrade, migration
 ---
 
-The information below can help you migrate from QCalendar v3.x to QCalendar v4.0.0 (alpha).
+Use this guide to migrate from QCalendar v4.x to QCalendar v5.0.0 beta.
 
-> QCalendar 4.x+ only works with a Vue v3.x and Quasar v2.x.
+> QCalendar v5 remains a Vue 3 and Quasar 2 calendar package. The QCalendar app extension is now Vite-only and targets Quasar CLI with `@quasar/app-vite` v3.
 
 > The information below is by no means an exhaustive list of changes and new functionality. If you see something that has been missed, please PR or let us know.
 
-## QCalendar v4.0.0
+## QCalendar v5.0.0 beta
 
-Welcome to the QCalendar v4.0.0 release.
+Welcome to the QCalendar v5.0.0 beta release.
 
-With this update comes a lot of changes, with over 90% of QCalendar being rewritten. Please read below to understand these changes and how they will affect your upgrading.
+This release prepares QCalendar for the next Quasar CLI Vite generation. The calendar component API is expected to remain compatible with QCalendar v4, but the supported app-extension runtime and project tooling have changed.
 
-## QCalendar v4.x rewritten to use Vue v3 Composition API
+## Requirements
+
+| Area                          | QCalendar v5 beta          |
+| ----------------------------- | -------------------------- |
+| Vue                           | Vue 3                      |
+| Quasar                        | Quasar 2                   |
+| Quasar CLI                    | `@quasar/app-vite` v3 beta |
+| App extension                 | Vite only                  |
+| Node.js for this repo and CI  | `>=22.13`                  |
+| Package manager for this repo | `pnpm >=11.1.0`            |
+
+If your application is still using `@quasar/app-webpack`, migrate the application to Quasar CLI Vite before installing the QCalendar v5 app extension.
+
+## Installing the beta
+
+While QCalendar v5 is in beta, install packages from the `beta` dist tag:
+
+```tabs
+<<| bash App Extension |>>
+quasar ext add @quasar/qcalendar@beta
+<<| bash UI Package |>>
+pnpm add @quasar/quasar-ui-qcalendar@beta
+```
+
+When QCalendar v5 is released as stable, remove the `@beta` tag from those commands.
+
+## App extension changes
+
+- The app extension now requires Vite. It will stop with an error if it is installed in a non-Vite Quasar app.
+- The extension registers the Vite boot file only. The previous webpack boot file has been removed.
+- The extension is compatible with `@quasar/app-vite` `>=3.0.0-beta.13`.
+- App Extension scripts such as `src/index.js` should use wrappers imported directly from `@quasar/app-vite`, like `defineIndexScript()`.
+- The generated boot file imports `defineBoot` from `#q-app`, matching the Quasar CLI Vite 3 alias.
+
+If you maintain your own QCalendar boot file, update it to use `#q-app`:
+
+```ts
+import { defineBoot } from '#q-app'
+import VuePlugin from '@quasar/quasar-ui-qcalendar/QCalendarDay'
+import '@quasar/quasar-ui-qcalendar/QCalendarDay.css'
+
+export default defineBoot(({ app }) => {
+  app.use(VuePlugin)
+})
+```
+
+## Direct UI package usage
+
+Compiled component imports remain the recommended path when you only need one or two calendar types:
+
+```ts
+import { QCalendarDay } from '@quasar/quasar-ui-qcalendar/QCalendarDay'
+import '@quasar/quasar-ui-qcalendar/QCalendarDay.css'
+```
+
+Direct `src/` imports are still available for advanced use cases. With Quasar CLI Vite 3, dependency transpilation is automatic, so no additional transpile-dependency configuration is needed.
+
+See [Installation Types](/getting-started/installation) for more installation examples.
+
+## Contributor tooling changes
+
+The QCalendar repository now uses:
+
+- `pnpm@11.1.0`
+- Node.js `>=22.13`
+- `oxlint` instead of ESLint
+- `oxfmt` instead of Prettier
+
+Use the existing scripts for local verification:
+
+```bash
+pnpm format:check
+pnpm lint
+pnpm test
+pnpm build
+```
+
+## Legacy notes: QCalendar v3 to v4
+
+The historical notes below can help if you are migrating an older application from QCalendar v3.x. Apply these changes before applying the QCalendar v5 notes above.
+
+### QCalendar v4.0.0
+
+QCalendar v4.0.0 was the Vue 3 and Quasar 2 rewrite, with over 90% of QCalendar rewritten.
+
+### QCalendar v4.x rewritten to use Vue v3 Composition API
 
 This means you get better in-editor auto-completion support amongst many other advantages.
 
-## QCalendar v4.1.0 rewritten fully in TypeScript
+### QCalendar v4.1.0 rewritten fully in TypeScript
 
 Again, this means better in-editor auto-completion support amongst many other advantages.
 
-## New calendar component
+### New calendar component
 
-Just quickly, for information purposes, there is a new **QCalendarTask** component for writing task-oriented calendars, like timesheets and Gantt-like calendars. Use it to track tasks and events.
+QCalendarTask was added for writing task-oriented calendars, like timesheets and Gantt-like calendars. Use it to track tasks and events.
 
-## Calendar types
+### Calendar types
 
 Previously, the actual QCalendar component was a wrapper around other calendar components. You could specify which component-type to use via the `view` property (ex: `month`, `week`, `agenda`, etc). There were a LOT of different views. These components have now been made available on an individual basis. This is better for tree-shaking.
 
@@ -36,7 +121,7 @@ However, there is still a QCalendar (wrapper) component and if you have an edge-
 
 If you want to take an advantage of a smaller foot-print then you have the option of importing each calendar type on an individual basis. For this, you will need to **NOT** be using the QCalendar app-extension, as this will import the QCalendar (wrapper). Instead, you will want to install the UI component directly into your package.json
 
-See [Installation types](/getting-started/installation) for more information.
+See [Installation Types](/getting-started/installation) for more information.
 
 ## Common changes
 

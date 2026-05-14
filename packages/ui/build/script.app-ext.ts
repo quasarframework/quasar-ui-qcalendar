@@ -40,7 +40,11 @@ function updateDependency(
   version: string,
 ): boolean {
   if (dependencies?.[name]) {
-    dependencies[name] = `^${version}`
+    const currentSpecifier = dependencies[name]
+
+    // Preserve workspace links in the repo so local builds don't try to
+    // resolve unpublished versions from the registry.
+    dependencies[name] = currentSpecifier.startsWith('workspace:') ? 'workspace:^' : `^${version}`
     return true
   }
   return false

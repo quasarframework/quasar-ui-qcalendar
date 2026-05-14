@@ -10,24 +10,18 @@
             "start": {
               "type": "String",
               "desc": "The new start Timestamp",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             },
             "end": {
               "type": "String",
               "desc": "The new end Timestamp",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             },
             "days": {
               "type": "Array",
               "tsType": "TimestampArray",
               "desc": "An array of Timestamps between start and end",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             }
           }
         }

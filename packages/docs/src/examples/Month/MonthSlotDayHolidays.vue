@@ -66,7 +66,6 @@
 <script setup lang="ts">
 import {
   QCalendarMonth,
-  /// @ts-expect-error ignore for now
   PARSE_DATE, // regex for parsing out date
   addToDate,
   parseTimestamp,

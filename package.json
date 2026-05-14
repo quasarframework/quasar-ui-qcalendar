@@ -1,32 +1,37 @@
 {
   "name": "qcalendar",
-  "version": "1.0.0",
-  "description": "QCalendar mono-repo",
-  "author": "Jeff Galbraith <jeff@quasar.dev>",
-  "license": "MIT",
+  "version": "5.0.0-beta.0",
   "private": true,
-  "access": "private",
-  "packageManager": "pnpm@10.3.0",
+  "description": "QCalendar mono-repo",
+  "license": "MIT",
+  "author": "Jeff Galbraith <jeff@quasar.dev>",
   "scripts": {
     "clean": "rm -rf node_modules pnpm-lock.yaml packages/ui/node_modules packages/docs/node_modules",
     "build": "pnpm run build:ui && pnpm run build:docs",
     "build:ui": "cd packages/ui && pnpm build",
     "build:docs": "cd packages/docs && pnpm build",
-    "ci:publish": "pnpm -r publish --access public --publish-branch dev",
+    "ci:publish": "pnpm --filter @quasar/quasar-ui-qcalendar publish --access public --publish-branch dev && pnpm --filter @quasar/quasar-app-extension-qcalendar publish --access public --publish-branch dev",
+    "ci:publish:beta": "pnpm --filter @quasar/quasar-ui-qcalendar publish --access public --publish-branch dev --tag beta && pnpm --filter @quasar/quasar-app-extension-qcalendar publish --access public --publish-branch dev --tag beta",
     "test": "vitest run",
     "deep": "ncu --deep",
-    "lint": "eslint -c ./eslint.config.mjs \"packages/**/*.{ts,js,cjs,mjs,vue}\""
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check"
   },
   "devDependencies": {
-    "@eslint/js": "^9.20.0",
-    "@types/node": "^22.13.2",
-    "@typescript-eslint/eslint-plugin": "^8.24.0",
+    "@types/node": "^25.7.0",
     "@vitest/coverage-istanbul": "^3.0.5",
-    "eslint": "^9.20.1",
-    "globals": "^15.15.0",
-    "prettier": "^3.5.1",
-    "typescript": "~5.7.3",
-    "unbuild": "^3.3.1",
+    "oxfmt": "^0.49.0",
+    "oxlint": "^1.64.0",
+    "typescript": "~5.9.3",
+    "unbuild": "^3.6.1",
     "vitest": "^3.0.5"
-  }
+  },
+  "engines": {
+    "node": ">=22.13",
+    "pnpm": ">=11.1.0"
+  },
+  "packageManager": "pnpm@11.1.0",
+  "access": "private"
 }

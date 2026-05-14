@@ -4,12 +4,12 @@ process.env.BABEL_ENV = 'production'
 import path from 'node:path'
 import { URL } from 'node:url'
 import * as rollup from 'rollup'
+import * as ts from 'typescript'
 import uglify from 'uglify-js'
 import json from '@rollup/plugin-json'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 // import babel from '@rollup/plugin-babel'
 // import { dts } from 'rollup-plugin-dts'
-import typescript from '@rollup/plugin-typescript'
 
 import buildConf from './config'
 import * as buildUtils from './build.utils'
@@ -18,7 +18,12 @@ function pathResolve(relativePath: string): string {
   return path.resolve(path.dirname(new URL(import.meta.url).pathname), relativePath)
 }
 
-const rollupPlugins: rollup.Plugin[] = [nodeResolve(), json(), typescript()]
+const rollupPlugins: rollup.Plugin[] = [
+  resolveTypeScriptSources(),
+  transpileTypeScript(),
+  nodeResolve({ extensions: ['.mjs', '.js', '.json', '.node', '.ts'] }),
+  json(),
+]
 
 const uglifyOptions = {
   compress: {
@@ -87,6 +92,50 @@ const builds = buildEntries.flatMap((entry) =>
 )
 
 build(builds as any)
+
+function resolveTypeScriptSources(): rollup.Plugin {
+  return {
+    name: 'resolve-typescript-sources',
+    resolveId(source, importer) {
+      if (importer === undefined || source.startsWith('.') === false) {
+        return null
+      }
+
+      const sourcePath = path.resolve(path.dirname(importer), source)
+      const candidates = source.endsWith('.js')
+        ? [sourcePath.replace(/\.js$/, '.ts')]
+        : [sourcePath, `${sourcePath}.ts`]
+
+      return candidates.find((candidate) => buildUtils.fileExists(candidate)) ?? null
+    },
+  }
+}
+
+function transpileTypeScript(): rollup.Plugin {
+  return {
+    name: 'transpile-typescript',
+    transform(code, id) {
+      if (id.endsWith('.ts') === false) {
+        return null
+      }
+
+      const result = ts.transpileModule(code, {
+        fileName: id,
+        compilerOptions: {
+          esModuleInterop: true,
+          module: ts.ModuleKind.ESNext,
+          moduleResolution: ts.ModuleResolutionKind.Bundler,
+          target: ts.ScriptTarget.ES2020,
+        },
+      })
+
+      return {
+        code: result.outputText,
+        map: null,
+      }
+    },
+  }
+}
 
 /**
  * Main Build Process

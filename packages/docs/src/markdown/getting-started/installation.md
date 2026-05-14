@@ -35,6 +35,12 @@ To add as an App Extension to your Quasar application, run the following (in you
 $ quasar ext add @quasar/qcalendar
 ```
 
+While QCalendar v5 is in beta, use the beta dist tag:
+
+```bash
+$ quasar ext add @quasar/qcalendar@beta
+```
+
 #### Uninstall
 
 To remove as an App Extension from your Quasar application, run the following (in your Quasar app folder):
@@ -59,18 +65,20 @@ If you plan on importing from `src/` directly, please read the [Migration Guide]
 
 ```tabs
 <<| bash pnpm |>>
-pnpm add @quasar/quasar-ui-qcalendar
+pnpm add @quasar/quasar-ui-qcalendar@beta
 <<| bash yarn |>>
-yarn add @quasar/quasar-ui-qcalendar
+yarn add @quasar/quasar-ui-qcalendar@beta
 <<| bash npm |>>
-npm install @quasar/quasar-ui-qcalendar
+npm install @quasar/quasar-ui-qcalendar@beta
 ```
+
+When QCalendar v5 is released as stable, remove the `@beta` tag from those commands.
 
 Now, you can access the compiled portions or access the sources directly. Choose which you want to use.
 
 ```tabs
 <<| ts Compiled |>>
-import { defineBoot } from '#q-app/wrappers'
+import { defineBoot } from '#q-app'
 import VuePlugin from '@quasar/quasar-ui-qcalendar/QCalendarDay'
 import '@quasar/quasar-ui-qcalendar/QCalendarDay.css'
 
@@ -78,7 +86,7 @@ export default defineBoot(({ app }) => {
   app.use(VuePlugin)
 })
 <<| ts Source (direct) |>>
-import { defineBoot } from '#q-app/wrappers'
+import { defineBoot } from '#q-app'
 import VuePlugin from '@quasar/quasar-ui-qcalendar/src/QCalendarDay' // notice the `src` folder
 import '@quasar/quasar-ui-qcalendar/src/css/calendar-day.scss' // notice the path to raw scss file
 
@@ -97,21 +105,7 @@ css: [
 ],
 ```
 
-If using `app-webpack` you will need to make sure your project will transpile the code.
-
-In `quasar.config` update the following:
-
-```js
-// Note: using ~ tells Quasar the file resides in node_modules
-build: {
-  webpackTranspile: true,
-  webpackTranspileDependencies: [
-    /quasar-ui-qcalendar[\\/]src/
-  ]
-}
-```
-
-There are no extra steps to be taken with `app-vite`, it will automatically transpile your dependencies.
+There are no extra steps to be taken with Quasar CLI Vite 3, as it will automatically transpile your dependencies.
 
 #### Minified
 
@@ -261,7 +255,7 @@ app.mount('#app')
 
 ## Testing on Codepen
 
-[QCalendar v4 Collection](https://codepen.io/collection/qOBOEG)
+[QCalendar Collection](https://codepen.io/collection/qOBOEG)
 
 or
 

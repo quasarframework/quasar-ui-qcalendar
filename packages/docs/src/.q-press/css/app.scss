@@ -82,7 +82,7 @@ ul {
   line-height: $font-size;
   border-radius: $generic-border-radius;
   font-family: inherit;
-  color: $brand-primary;
+  color: scale-color($brand-primary, $lightness: -35%);
   vertical-align: baseline;
   border: 1px solid currentColor;
 }
@@ -107,14 +107,14 @@ ul {
     // .markdown-note__title,
     .markdown-link,
     .markdown-token {
-      color: $brand-primary;
+      color: scale-color($brand-primary, $lightness: -35%);
     }
     .markdown-token {
-      border-color: $brand-primary;
+      border-color: scale-color($brand-primary, $lightness: -35%);
     }
     & strong {
       font-weight: 700;
-      color: scale-color($brand-light-text, $lightness: 90%);
+      color: inherit;
     }
   }
 
@@ -132,7 +132,7 @@ ul {
     }
     & strong {
       font-weight: 700;
-      color: scale-color($positive, $lightness: 90%);
+      color: inherit;
     }
   }
 
@@ -150,7 +150,7 @@ ul {
     }
     & strong {
       font-weight: 700;
-      color: scale-color($warning, $lightness: 90%);
+      color: inherit;
     }
   }
 
@@ -169,7 +169,7 @@ ul {
 
     & strong {
       font-weight: 700;
-      color: scale-color($negative, $lightness: 90%);
+      color: inherit;
     }
   }
 
@@ -597,6 +597,9 @@ body.body--dark {
       .markdown-token {
         border-color: #ddd;
         color: #ddd;
+      }
+      .markdown-link {
+        color: $brand-primary;
       }
     }
 

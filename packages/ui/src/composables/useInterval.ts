@@ -53,12 +53,7 @@ export interface ScopeForSlotX {
 }
 
 export interface IntervalProps
-  extends CommonProps,
-    ColumnProps,
-    CellWidthProps,
-    MaxDaysProps,
-    TimesProps,
-    NavigationProps {
+  extends CommonProps, ColumnProps, CellWidthProps, MaxDaysProps, TimesProps, NavigationProps {
   view: 'day' | 'week' | 'month' | 'month-interval'
   shortIntervalLabel?: boolean
   intervalHeight: number | string
@@ -355,7 +350,6 @@ export interface UseIntervalReturn {
   ) => string[]
   showIntervalLabelDefault: (_interval: Timestamp) => boolean
   showResourceLabelDefault: (_resource: any) => void
-  // eslint-disable-next-line no-unused-vars
   styleDefault: ({ scope }: { scope: any }) => {}
   getTimestampAtEventInterval: (
     _e: MouseEvent & TouchEvent,
@@ -523,11 +517,8 @@ export default function useInterval(
   }
 
   function getResourceClasses(
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _interval: Timestamp,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _selectedDays: string[],
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _startEndDays: string[],
   ): string[] {
     return []
@@ -587,7 +578,6 @@ export default function useInterval(
     return !isFirst && interval.minute === 0
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function showResourceLabelDefault(_resource: any): void {
     //
   }
@@ -597,7 +587,6 @@ export default function useInterval(
    * This is a default style function that does not apply any styles.
    * @returns An empty object.
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function styleDefault(_scope: Scope): {} {
     return {}
   }

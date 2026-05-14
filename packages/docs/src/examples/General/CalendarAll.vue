@@ -101,7 +101,6 @@
             </template>
           </template>
 
-          <!-- eslint-disable-next-line vue/valid-v-slot -->
           <template v-if="selectedCalendar === 'agenda'" #day="{ scope: { timestamp } }">
             <template v-for="a in getAgenda(timestamp)" :key="timestamp.date + a.time">
               <div

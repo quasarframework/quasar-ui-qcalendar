@@ -1,17 +1,12 @@
 {
   "props": {
     "cell-width": {
-      "type": [
-        "String",
-        "Number"
-      ],
+      "type": ["String", "Number"],
       "category": "behavior",
       "desc": "Sets day cell width and turns on sticky mode. Width must be css measurement if a string, otherwise it's in pixels",
       "default": "# 100",
       "__runtimeDefault": true,
-      "examples": [
-        "'100px'"
-      ]
+      "examples": ["'100px'"]
     }
   }
 }

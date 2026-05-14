@@ -3,7 +3,7 @@ const require = createRequire(import.meta.url)
 const { name, author, version } = require('../package.json')
 const year = new Date().getFullYear()
 
-// prettier-ignore
+// oxfmt-ignore
 export default {
   name,
   version,

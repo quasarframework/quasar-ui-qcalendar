@@ -1,14 +1,15 @@
 {
   "name": "docs",
-  "version": "0.0.1",
+  "version": "5.0.0-beta.0",
+  "private": true,
   "description": "QCalendar Documentation and examples",
-  "productName": "QCalendar Docs",
   "author": "Jeff <galbraith64@gmail.com>",
   "type": "module",
-  "private": true,
   "scripts": {
-    "lint": "eslint -c ./eslint.config.js \"./src*/**/*.{ts,js,cjs,mjs,vue}\"",
-    "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
     "test": "echo \"No test specified\" && exit 0",
     "dev": "quasar dev",
     "build": "quasar build",
@@ -16,38 +17,32 @@
   },
   "dependencies": {
     "@carbon/icons-vue": "^10.99.1",
-    "@quasar/extras": "^1.16.17",
+    "@quasar/extras": "^1.18.0",
     "date-holidays": "=3.23.21",
-    "pinia": "^3.0.1",
-    "prismjs": "^1.29.0",
-    "quasar": "^2.17.7",
-    "vue": "^3.5.13",
-    "vue-router": "^4.5.0"
+    "pinia": "^3.0.4",
+    "prismjs": "^1.30.0",
+    "quasar": "^2.19.3",
+    "vue": "^3.5.34",
+    "vue-router": "^5.0.7"
   },
   "devDependencies": {
-    "@eslint/js": "^9.20.0",
-    "@md-plugins/quasar-app-extension-q-press": "0.1.0-alpha.29",
-    "@md-plugins/vite-examples-plugin": "0.1.0-alpha.29",
-    "@md-plugins/vite-md-plugin": "0.1.0-alpha.29",
-    "@quasar/app-vite": "^2.1.0",
+    "@md-plugins/quasar-app-extension-q-press": "0.1.0-beta.0",
+    "@md-plugins/shared": "0.1.0-beta.0",
+    "@md-plugins/vite-examples-plugin": "0.1.0-beta.0",
+    "@md-plugins/vite-md-plugin": "0.1.0-beta.0",
+    "@quasar/app-vite": "3.0.0-beta.13",
     "@quasar/quasar-ui-qcalendar": "workspace:*",
     "@types/markdown-it": "^14.1.2",
-    "@types/node": "^22.13.2",
-    "@vue/eslint-config-prettier": "^10.2.0",
-    "@vue/eslint-config-typescript": "^14.4.0",
-    "autoprefixer": "^10.4.20",
-    "eslint": "^9.20.1",
-    "eslint-plugin-vue": "^9.32.0",
-    "globals": "^15.15.0",
-    "markdown-it": "^14.1.0",
-    "prettier": "^3.5.1",
-    "typescript": "~5.7.3",
-    "vite-plugin-checker": "^0.8.0",
-    "vue-tsc": "^2.2.0"
+    "@types/node": "^25.7.0",
+    "autoprefixer": "^10.5.0",
+    "markdown-it": "^14.1.1",
+    "typescript": "~5.9.3",
+    "vite-plugin-checker": "^0.13.0",
+    "vue-tsc": "^3.2.9"
   },
   "engines": {
-    "node": "^28 || ^26 || ^24 || ^22 || ^20 || ^18",
-    "npm": ">= 6.13.4",
-    "yarn": ">= 1.21.1"
-  }
+    "node": ">=22.13",
+    "pnpm": ">=11.1.0"
+  },
+  "productName": "QCalendar Docs"
 }

@@ -68,7 +68,6 @@ const calendar = ref<QCalendarMonth>(),
 onBeforeMount(() => {
   const parts = selectedDate.value.split('-')
   if (parts[1]) {
-    /// @ts-expect-error ignore for now
     month.value = monthFormatter(parseInt(parts[1], 10) - 1)
   }
 })
@@ -94,7 +93,6 @@ function onMoved(data: Timestamp) {
 function onChange(data: { start: Timestamp; end: Timestamp; days: Timestamp[] }) {
   console.info('onChange', data)
   if (data.days[8]) {
-    /// @ts-expect-error ignore for now
     month.value = monthFormatter(data.days[8].month - 1)
   }
 }

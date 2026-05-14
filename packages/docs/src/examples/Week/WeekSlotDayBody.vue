@@ -264,15 +264,13 @@ function getEvents(dt: string) {
     // check if the two events overlap and if so, select
     // left or right side alignment to prevent overlap
     const parsedDate1 = parsed(evts[0].date)
+    const parsedTime1 = evts[0].time ? parseTime(evts[0].time) : false
     const startTime =
-      parsedDate1 && evts[0].time
-        ? addToDate(parsedDate1, { minute: parseTime(evts[0].time) })
-        : null
+      parsedDate1 && parsedTime1 !== false ? addToDate(parsedDate1, { minute: parsedTime1 }) : null
     const parsedDate2 = parsed(evts[1].date)
+    const parsedTime2 = evts[1].time ? parseTime(evts[1].time) : false
     const startTime2 =
-      parsedDate2 && evts[1].time
-        ? addToDate(parsedDate2, { minute: parseTime(evts[1].time) })
-        : null
+      parsedDate2 && parsedTime2 !== false ? addToDate(parsedDate2, { minute: parsedTime2 }) : null
 
     if (startTime && startTime2) {
       const endTime = addToDate(startTime, { minute: evts[0].duration ?? 0 })

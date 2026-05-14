@@ -10,7 +10,7 @@ Please note that the codepen links, in the documentation examples, do not work a
 And, if you're looking to help out, check out our [Call to action](/other/contributing/call-to-action) in the **Contributing** section.
 :::
 
-> If you are looking for a **Migration Guide** from v3 to v4, go [here](/other/migration-guide).
+> If you are looking for the **Migration Guide** for QCalendar v5, go [here](/other/migration-guide).
 
 ## Everything You Need for a Complete Calendar Solution
 

@@ -998,7 +998,7 @@ export function createIntervalList(
   count: number,
   now: Timestamp,
 ): Timestamp[] {
-  const intervals = []
+  const intervals: Timestamp[] = []
 
   for (let i = 0; i < count; ++i) {
     const mins = (first + i) * minutes
@@ -1319,7 +1319,6 @@ export function getWeekdayFormatter(): WeekdayFormatter {
     try {
       const intlFormatter = new Intl.DateTimeFormat(
         locale || undefined,
-        /// @ts-expect-error ignore for now
         options[type] || options['long'],
       )
       return intlFormatter.format(weekdayDateMap[weekday])
@@ -1386,7 +1385,6 @@ export function getMonthFormatter(): MonthFormatter {
     try {
       const intlFormatter = new Intl.DateTimeFormat(
         locale || undefined,
-        /// @ts-expect-error ignore for now
         options[type] || options['long'],
       )
       const date = new Date()

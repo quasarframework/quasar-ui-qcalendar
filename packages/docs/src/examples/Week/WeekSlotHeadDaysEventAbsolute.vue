@@ -109,7 +109,7 @@ onBeforeMount(() => {
   // set up dates for example events
   const todayTimestamp = parseTimestamp(today())
   if (todayTimestamp) {
-    let start = getStartOfWeek(todayTimestamp, weekdays.value)
+    let start = getStartOfWeek(todayTimestamp, weekdays.value, todayTimestamp)
     events[0]!.date = start.date
     start = addToDate(start, { day: 4 })
     events[1]!.date = start.date
@@ -125,7 +125,8 @@ function badgeClasses(event: Event) {
 
 function badgeStyles(day: Timestamp, event: Event) {
   const s: Record<string, any> = {}
-  s.left = day.weekday === 0 ? 0 : day.weekday * parsedCellWidth.value + '%'
+  const weekday = day.weekday ?? 0
+  s.left = weekday === 0 ? 0 : weekday * parsedCellWidth.value + '%'
   s.top = 0
   s.bottom = 0
   s.width = event.days * parsedCellWidth.value + '%'

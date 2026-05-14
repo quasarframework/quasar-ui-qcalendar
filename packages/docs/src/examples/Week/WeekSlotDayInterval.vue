@@ -55,7 +55,7 @@ interface Scope {
 
 function getData(scope: Scope): string {
   // console.info(scope)
-  return scope.timestamp.time
+  return scope.timestamp.time ?? ''
 }
 function onToday() {
   if (calendar.value) {

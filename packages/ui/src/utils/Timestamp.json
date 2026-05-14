@@ -10,9 +10,7 @@
       "returns": {
         "type": "String",
         "desc": "Returns today's date in YYYY-MM-DD format",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "getStartOfWeek": {
@@ -27,11 +25,7 @@
           "tsType": "NumberArray",
           "desc": "The normal weekdays array looks like this `[0,1,2,3,4,5,6]` where 0=Sunday, 1=Monday, etc. A week that starts on Monday, would look like this: `[1,2,3,4,5,6,0]` and a 5-day workweek would look like this: `[1,2,3,4,5]`",
           "required": true,
-          "examples": [
-            "[0,1,2,3,4,5,6]",
-            "[1,2,3,4,5,6,0]",
-            "[1,2,3,4,5]"
-          ]
+          "examples": ["[0,1,2,3,4,5,6]", "[1,2,3,4,5,6,0]", "[1,2,3,4,5]"]
         },
         "today": {
           "extends": "timestamp",
@@ -42,9 +36,7 @@
         "type": "Timestamp",
         "tsType": "Timestamp",
         "desc": "A timestamp object representing the start of the week",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "getEndOfWeek": {
@@ -59,11 +51,7 @@
           "tsType": "NumberArray",
           "desc": "The normal weekdays array looks like this `[0,1,2,3,4,5,6]` where 0=Sunday, 1=Monday, etc. A week that starts on Monday, would look like this: `[1,2,3,4,5,6,0]` and a 5-day workweek would look like this: `[1,2,3,4,5]`",
           "required": true,
-          "examples": [
-            "[0,1,2,3,4,5,6]",
-            "[1,2,3,4,5,6,0]",
-            "[1,2,3,4,5]"
-          ]
+          "examples": ["[0,1,2,3,4,5,6]", "[1,2,3,4,5,6,0]", "[1,2,3,4,5]"]
         },
         "today": {
           "extends": "timestamp",
@@ -74,9 +62,7 @@
         "type": "Timestamp",
         "tsType": "Timestamp",
         "desc": "A timestamp object representing the end of the week",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "getStartOfMonth": {
@@ -91,9 +77,7 @@
         "type": "Timestamp",
         "tsType": "Timestamp",
         "desc": "A timestamp object representing the start of the month",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "getEndOfMonth": {
@@ -108,36 +92,24 @@
         "type": "Timestamp",
         "tsType": "Timestamp",
         "desc": "A timestamp object representing the end of the month",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "parseTime": {
       "desc": "Parses the passed in value and returns the number of minutes since midnight",
       "params": {
         "input": {
-          "type": [
-            "Number",
-            "String",
-            "Object"
-          ],
+          "type": ["Number", "String", "Object"],
           "tsType": "TimeObjectOrNumberOrString",
           "required": true,
           "desc": "Value may be a Number (minutes since midnight) or String (hh:mm:ss where seconds are optional) or Object (must have keys **hour** and **minute**)",
-          "examples": [
-            "600",
-            "'15:30'",
-            "{ hour: 15, minute: 30 }"
-          ]
+          "examples": ["600", "'15:30'", "{ hour: 15, minute: 30 }"]
         }
       },
       "returns": {
         "type": "Number",
         "desc": "The number of minutes since midnight",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "validateTimestamp": {
@@ -147,9 +119,7 @@
           "type": "String",
           "required": true,
           "desc": "A date/time string in the form `YYYY-MM-DD hh:mm:ss` (seconds are optional)",
-          "examples": [
-            "'2020-10-02 15:00'"
-          ]
+          "examples": ["'2020-10-02 15:00'"]
         }
       },
       "returns": {
@@ -164,21 +134,14 @@
           "type": "String",
           "required": true,
           "desc": "A date/time string in the form `YYYY-MM-DD hh:mm:ss` (seconds are optional)",
-          "examples": [
-            "'2020-10-02 15:00'"
-          ]
+          "examples": ["'2020-10-02 15:00'"]
         }
       },
       "returns": {
-        "type": [
-          "Object",
-          "null"
-        ],
+        "type": ["Object", "null"],
         "tsType": "TimestampOrNull",
         "desc": "A timestamp object based on the passed in argument. Returns 'null' on error",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "parseTimestamp": {
@@ -188,29 +151,20 @@
           "type": "String",
           "required": true,
           "desc": "A date/time string in the form `YYYY-MM-DD hh:mm:ss` (seconds are optional)",
-          "examples": [
-            "'2020-10-02 15:00'"
-          ]
+          "examples": ["'2020-10-02 15:00'"]
         },
         "now": {
           "type": "Object",
           "tsType": "TimestampOrNull",
           "desc": "[Optional] A Timestamp object. If provided, the returning Timestamp will have formatted and relative information included",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         }
       },
       "returns": {
-        "type": [
-          "Object",
-          "null"
-        ],
+        "type": ["Object", "null"],
         "tsType": "TimestampOrNull",
         "desc": "A timestamp object based on the passed in argument. Returns 'null' on error",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "parseDate": {
@@ -220,21 +174,14 @@
           "type": "Date",
           "required": true,
           "desc": "A JavaScript Date object",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         }
       },
       "returns": {
-        "type": [
-          "Object",
-          "null"
-        ],
+        "type": ["Object", "null"],
         "tsType": "TimestampOrNull",
         "desc": "A formatted timestamp object based on the passed in argument (see updateFormatted)",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "makeDate": {
@@ -249,9 +196,7 @@
       "returns": {
         "type": "Date",
         "desc": "The returned value is a JavaScript Date",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "makeDateTime": {
@@ -266,9 +211,7 @@
       "returns": {
         "type": "Date",
         "desc": "The returned value is a JavaScript Date",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "getDayIdentifier": {
@@ -282,9 +225,7 @@
       "returns": {
         "type": "Number",
         "desc": "The returned number is in a number representing `YYYYMMdd`",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "getTimeIdentifier": {
@@ -298,9 +239,7 @@
       "returns": {
         "type": "Number",
         "desc": "The returned number is in a number representing `hhmm`",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "getDayTimeIdentifier": {
@@ -315,9 +254,7 @@
       "returns": {
         "type": "Number",
         "desc": "The returned number is in a number representing `YYYYMMddhhmm`",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "diffTimestamp": {
@@ -335,17 +272,13 @@
           "type": "Boolean",
           "desc": "If true, then negative values are not allowed",
           "required": true,
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         }
       },
       "returns": {
         "type": "Number",
         "desc": "The number of milliseconds between the two timestamp objects. 0 if **strict** is true and the value would be negative",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "updateRelative": {
@@ -364,18 +297,14 @@
           "type": "Boolean",
           "desc": "If true, also uses time to adjust the relative information",
           "default": "false",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         }
       },
       "returns": {
         "type": "Timestamp",
         "tsType": "Timestamp",
         "desc": "A timestamp object",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "updateMinutes": {
@@ -389,9 +318,7 @@
           "type": "Number",
           "required": true,
           "desc": "The number of minutes since midnight",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         },
         "now": {
           "extends": "timestamp",
@@ -402,9 +329,7 @@
         "type": "Timestamp",
         "tsType": "Timestamp",
         "desc": "A timestamp object",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "updateWeekday": {
@@ -419,9 +344,7 @@
         "type": "Timestamp",
         "tsType": "Timestamp",
         "desc": "A timestamp object",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "updateDayOfYear": {
@@ -436,9 +359,7 @@
         "type": "Timestamp",
         "tsType": "Timestamp",
         "desc": "A timestamp object",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "updateWorkWeek": {
@@ -453,9 +374,7 @@
         "type": "Timestamp",
         "tsType": "Timestamp",
         "desc": "A timestamp object",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "updateDisabled": {
@@ -468,25 +387,19 @@
         "disabledBefore": {
           "type": "String",
           "desc": "A date in the form `YYYY-MM-DD` where all dates before, and including, will be disabled",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         },
         "disabledAfter": {
           "type": "String",
           "desc": "A date in the form `YYYY-MM-DD` where all dates after, and including, will be disabled",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         },
         "disabledWeekdays": {
           "type": "Array",
           "tsType": "NumberArray",
           "default": "[]",
           "desc": "An array of numbers representing the weekdays, where 0=Sunday to 6=Saturday. A value of '[0,6]' would disable the weekend",
-          "examples": [
-            "[0,6]"
-          ]
+          "examples": ["[0,6]"]
         },
         "disabledDays": {
           "type": "Array",
@@ -502,9 +415,7 @@
         "type": "Timestamp",
         "tsType": "Timestamp",
         "desc": "A timestamp object with `timestamp.disabled` true if a match was found",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "updateFormatted": {
@@ -519,9 +430,7 @@
         "type": "Timestamp",
         "tsType": "Timestamp",
         "desc": "A timestamp object",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "getDayOfYear": {
@@ -535,9 +444,7 @@
       "returns": {
         "type": "Number",
         "desc": "The day of the year",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "getWorkWeek": {
@@ -552,9 +459,7 @@
       "returns": {
         "type": "Number",
         "desc": "The work week number of the year. If passed an invalid date, the return value is always 0",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "getWeekday": {
@@ -568,9 +473,7 @@
       "returns": {
         "type": "Number",
         "desc": "The week day number (0=Sunday, 1=Monday, etc)",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "isLeapYear": {
@@ -580,18 +483,13 @@
           "type": "Number",
           "required": true,
           "desc": "A number representing the year in YYYY format",
-          "examples": [
-            "2020",
-            "2021"
-          ]
+          "examples": ["2020", "2021"]
         }
       },
       "returns": {
         "type": "Boolean",
         "desc": "Returns true if the passed in year is a leap year",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "daysInMonth": {
@@ -601,27 +499,19 @@
           "type": "Number",
           "required": true,
           "desc": "A number representing the year in YYYY format",
-          "examples": [
-            "2020",
-            "2021"
-          ]
+          "examples": ["2020", "2021"]
         },
         "month": {
           "type": "Number",
           "required": true,
           "desc": "A number representing the month from 0 (January) to 11 (December). For performance reasons, no checking is done to validate this value is in range. An exception will occur if it is not",
-          "examples": [
-            "2020",
-            "2021"
-          ]
+          "examples": ["2020", "2021"]
         }
       },
       "returns": {
         "type": "Number",
         "desc": "Returns true if the passed in year is a leap year",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "copyTimestamp": {
@@ -636,13 +526,9 @@
         "type": "Timestamp",
         "tsType": "Timestamp",
         "desc": "A copy of the passed in timestamp object",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       },
-      "__exemption": [
-        "examples"
-      ]
+      "__exemption": ["examples"]
     },
     "compareTimestamps": {
       "desc": "Compares two timestamps",
@@ -719,29 +605,21 @@
           "type": "Number",
           "desc": "The number to pad",
           "required": true,
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         },
         "length": {
           "type": "Number",
           "desc": "The length of the paddedIng",
           "required": true,
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         }
       },
       "returns": {
         "type": "String",
         "desc": "A padded value",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       },
-      "__exemption": [
-        "examples"
-      ]
+      "__exemption": ["examples"]
     },
     "getDate": {
       "desc": "Returns the timestamp as a padded date",
@@ -754,13 +632,9 @@
       "returns": {
         "type": "String",
         "desc": "A date as a padded value in the form `YYYY-MM-DD`. Instead of `2020-1-2`, this function formats it as `2020-01-02`",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       },
-      "__exemption": [
-        "examples"
-      ]
+      "__exemption": ["examples"]
     },
     "getTime": {
       "desc": "Returns the timestamp as a padded time",
@@ -773,13 +647,9 @@
       "returns": {
         "type": "String",
         "desc": "A time as a padded value in the form `hh:mm`. Instead of `2:3`, this function formats it as `02:03`",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       },
-      "__exemption": [
-        "examples"
-      ]
+      "__exemption": ["examples"]
     },
     "getDateTime": {
       "addedIn": "v1.3.11",
@@ -793,13 +663,9 @@
       "returns": {
         "type": "String",
         "desc": "A date and time as a padded value in the form `YYYY-MM-DD hh:mm`. Instead of `2020-1-2 1:20`, this function formats it as `2020-01-02 01:20`",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       },
-      "__exemption": [
-        "examples"
-      ]
+      "__exemption": ["examples"]
     },
     "nextDay": {
       "desc": "Returns the timestamp set to the next day, updating month and year if needed",
@@ -813,13 +679,9 @@
         "type": "Timestamp",
         "tsType": "Timestamp",
         "desc": "A timestamp object incremented to the next day",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       },
-      "__exemption": [
-        "examples"
-      ]
+      "__exemption": ["examples"]
     },
     "prevDay": {
       "desc": "Returns the timestamp set to the previous day, updating month and year if needed",
@@ -833,13 +695,9 @@
         "type": "Timestamp",
         "tsType": "Timestamp",
         "desc": "A timestamp object decremented to the next day",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       },
-      "__exemption": [
-        "examples"
-      ]
+      "__exemption": ["examples"]
     },
     "relativeDays": {
       "desc": "Returns the timestamp set to the relative day",
@@ -852,10 +710,7 @@
           "type": "Function",
           "tsType": "TimestampMoveOperation",
           "default": "# nextDay",
-          "values": [
-            "# prevDay",
-            "# nextDay"
-          ],
+          "values": ["# prevDay", "# nextDay"],
           "desc": "A reference that points to a function that handles the relative movement from one date to another. If moving backwards, specify `prevDay`",
           "params": {
             "timestamp": {
@@ -867,42 +722,30 @@
             "type": "Timestamp",
             "tsType": "Timestamp",
             "desc": "A timestamp object",
-            "__exemption": [
-              "examples"
-            ]
+            "__exemption": ["examples"]
           }
         },
         "days": {
           "type": "Number",
           "default": "1",
           "desc": "The number of days to move",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         },
         "allowedWeekdays": {
           "type": "Array",
           "tsType": "NumberArray",
           "default": "[0,1,2,3,4,5,6]",
           "desc": "The allow weekdays to use. The method uses this information for allowed days",
-          "examples": [
-            "[0,1,2,3,4,5,6]",
-            "[1,2,3,4,5,6,0]",
-            "[1,2,3,4,5]"
-          ]
+          "examples": ["[0,1,2,3,4,5,6]", "[1,2,3,4,5,6,0]", "[1,2,3,4,5]"]
         }
       },
       "returns": {
         "type": "Timestamp",
         "tsType": "Timestamp",
         "desc": "A timestamp object moved to the relatively specified days against the `allowedWeekdays`",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       },
-      "__exemption": [
-        "examples"
-      ]
+      "__exemption": ["examples"]
     },
     "moveRelativeDays": {
       "desc": "Returns the timestamp set to the relative day, takes into account allowed weekdays",
@@ -916,10 +759,7 @@
           "type": "Function",
           "tsType": "TimestampMoveOperation",
           "default": "# nextDay",
-          "values": [
-            "# prevDay",
-            "# nextDay"
-          ],
+          "values": ["# prevDay", "# nextDay"],
           "desc": "A reference that points to a function that handles the relative movement from one date to another. If moving backwards, specify `prevDay`",
           "params": {
             "timestamp": {
@@ -931,42 +771,30 @@
             "type": "Timestamp",
             "tsType": "Timestamp",
             "desc": "A timestamp object",
-            "__exemption": [
-              "examples"
-            ]
+            "__exemption": ["examples"]
           }
         },
         "days": {
           "type": "Number",
           "default": "1",
           "desc": "The number of days to move",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         },
         "allowedWeekdays": {
           "type": "Array",
           "tsType": "NumberArray",
           "default": "[0,1,2,3,4,5,6]",
           "desc": "The allow weekdays to use. The method uses this information for allowed days",
-          "examples": [
-            "[0,1,2,3,4,5,6]",
-            "[1,2,3,4,5,6,0]",
-            "[1,2,3,4,5]"
-          ]
+          "examples": ["[0,1,2,3,4,5,6]", "[1,2,3,4,5,6,0]", "[1,2,3,4,5]"]
         }
       },
       "returns": {
         "type": "Timestamp",
         "tsType": "Timestamp",
         "desc": "A timestamp object moved to the relatively specified days against the `allowedWeekdays`",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       },
-      "__exemption": [
-        "examples"
-      ]
+      "__exemption": ["examples"]
     },
     "findWeekday": {
       "desc": "Returns the timestamp associated to the specified weekday. Use `parseTimestamp`, not `parsed` (or manually call `updateFormatted` before calling this method), so associated fields are updated correctly, otherwise this function will not work as expected.",
@@ -979,10 +807,7 @@
           "type": "Function",
           "tsType": "TimestampMoveOperation",
           "default": "# nextDay",
-          "values": [
-            "# prevDay",
-            "# nextDay"
-          ],
+          "values": ["# prevDay", "# nextDay"],
           "desc": "A reference that points to a function that handles the relative movement from one date to another. If moving backwards, specify `prevDay`",
           "params": {
             "timestamp": {
@@ -994,31 +819,23 @@
             "type": "Timestamp",
             "tsType": "Timestamp",
             "desc": "A timestamp object",
-            "__exemption": [
-              "examples"
-            ]
+            "__exemption": ["examples"]
           }
         },
         "maxDays": {
           "type": "Number",
           "default": "6",
           "desc": "The maxiumum number of days to move",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         }
       },
       "returns": {
         "type": "Timestamp",
         "tsType": "Timestamp",
         "desc": "A timestamp object moved to the specified days relatively against the `maxDays`",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       },
-      "__exemption": [
-        "examples"
-      ]
+      "__exemption": ["examples"]
     },
     "createDayList": {
       "desc": "Returns an array of timestamps",
@@ -1036,79 +853,59 @@
           "tsType": "Timestamp",
           "required": true,
           "desc": "A timestamp object",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         },
         "weekdays": {
           "type": "Array",
           "tsType": "NumberArray",
           "required": true,
           "desc": "An array of numbers (representing days of the week) that are 0 (=Sunday) to 6 (=Saturday)",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         },
         "disabledBefore": {
           "type": "String",
           "desc": "A date in the form `YYYY-MM-DD` where all dates before, and including, will be disabled",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         },
         "disabledAfter": {
           "type": "String",
           "desc": "A date in the form `YYYY-MM-DD` where all dates after, and including, will be disabled",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         },
         "disabledWeekdays": {
           "type": "Array",
           "tsType": "NumberArray",
           "default": "[]",
           "desc": "An array of numbers representing the weekdays, where 0=Sunday to 6=Saturday",
-          "examples": [
-            "[0,6]"
-          ]
+          "examples": ["[0,6]"]
         },
         "disabledDays": {
           "type": "Array",
           "tsType": "StringArray",
           "default": "[]",
           "desc": "An array of string dates in the form `YYYY-MM-DD` that representing disabled days",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         },
         "max": {
           "type": "Number",
           "default": "42",
           "desc": "Maximum days required. 42 is the maxiumum number of days in a full calendar month (6 rows) with `outside` days",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         },
         "min": {
           "type": "Number",
           "default": "0",
           "desc": "Minimum days required",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         }
       },
       "returns": {
         "type": "Array",
         "tsType": "TimestampArray",
         "desc": "An array of timestamp objects for all days that meet the criteria",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       },
-      "__exemption": [
-        "examples"
-      ]
+      "__exemption": ["examples"]
     },
     "createIntervalList": {
       "desc": "Returns an array of intervals",
@@ -1121,25 +918,19 @@
           "type": "Number",
           "required": true,
           "desc": "The first interval",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         },
         "minutes": {
           "type": "Number",
           "required": true,
           "desc": "The number of minutes in an interval",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         },
         "count": {
           "type": "Number",
           "required": true,
           "desc": "The count of intervals requested",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         },
         "now": {
           "extends": "timestamp",
@@ -1151,13 +942,9 @@
         "type": "Array",
         "tsType": "TimestampArray",
         "desc": "A array of interval objects (timestamps with time) that meet the criteria",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       },
-      "__exemption": [
-        "examples"
-      ]
+      "__exemption": ["examples"]
     },
     "createNativeLocaleFormatter": {
       "desc": "Returns a function to be used for international date formatting purposes",
@@ -1166,18 +953,14 @@
           "type": "String",
           "required": true,
           "desc": "A string representing the locale to use (ie: en-US for America)",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         },
         "getOptions": {
           "type": "Function",
           "tsType": "TimestampFormatOptions",
           "required": true,
           "desc": "A function that passes the timestamp and a boolean, and returns an Intl.DateTimeFormatter",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "params": {
             "timestamp": {
               "extends": "timestamp",
@@ -1186,9 +969,7 @@
             "short": {
               "type": "Boolean",
               "desc": "if true, specifies to use the short version (ie: 'Monday' to be returns as 'Mon', 'January' to be returned as 'Jan', etc)",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             }
           },
           "returns": {
@@ -1216,31 +997,22 @@
           "short": {
             "type": "Boolean",
             "desc": "if true, specifies to use the short version (ie: 'Monday' to be returns as 'Mon', 'January' to be returned as 'Jan', etc)",
-            "__exemption": [
-              "examples"
-            ]
+            "__exemption": ["examples"]
           }
         },
         "returns": {
           "type": "String",
           "desc": "A string containing the formatted date/time",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         }
       },
-      "__exemption": [
-        "examples"
-      ]
+      "__exemption": ["examples"]
     },
     "validateNumber": {
       "desc": "Validates that input is a number",
       "params": {
         "input": {
-          "type": [
-            "Number",
-            "String"
-          ],
+          "type": ["Number", "String"],
           "required": true,
           "desc": "A numeric value",
           "examples": [
@@ -1253,9 +1025,7 @@
       "returns": {
         "type": "Boolean",
         "desc": "true if a number, otherwise false",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "maxTimestamp": {
@@ -1266,9 +1036,7 @@
           "tsType": "TimestampArray",
           "desc": "An array of timestamp objects",
           "required": true,
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         },
         "useTime": {
           "type": "Boolean",
@@ -1280,9 +1048,7 @@
         "type": "Timestamp",
         "tsType": "Timestamp",
         "desc": "The highest valued Timestamp",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "minTimestamp": {
@@ -1293,9 +1059,7 @@
           "tsType": "TimestampArray",
           "desc": "An array of timestamp objects",
           "required": true,
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         },
         "useTime": {
           "type": "Boolean",
@@ -1307,9 +1071,7 @@
         "type": "Timestamp",
         "tsType": "Timestamp",
         "desc": "The highest valued Timestamp",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "isBetweenDates": {
@@ -1339,9 +1101,7 @@
       "returns": {
         "type": "Boolean",
         "desc": "true if a date is between the start and end dates",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "isOverlappingDates": {
@@ -1376,9 +1136,7 @@
       "returns": {
         "type": "Boolean",
         "desc": "true if the start and end timestamps overlap the first and last timestamps",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "daysBetween": {
@@ -1399,9 +1157,7 @@
       "returns": {
         "type": "Number",
         "desc": "The number of days beween the two timestamps",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "weeksBetween": {
@@ -1422,9 +1178,7 @@
       "returns": {
         "type": "Number",
         "desc": "The number of weeks beween the two timestamps",
-        "__exemption": [
-          "examples"
-        ]
+        "__exemption": ["examples"]
       }
     },
     "addToDate": {
@@ -1449,59 +1203,29 @@
           ],
           "definition": {
             "year": {
-              "type": [
-                "Number",
-                "String"
-              ],
+              "type": ["Number", "String"],
               "desc": "[Optional] The amount to increment/decrement the year",
-              "examples": [
-                "# { year: 1 }",
-                "# { year: '-1' }"
-              ]
+              "examples": ["# { year: 1 }", "# { year: '-1' }"]
             },
             "month": {
-              "type": [
-                "Number",
-                "String"
-              ],
+              "type": ["Number", "String"],
               "desc": "[Optional] The amount to increment/decrement the month",
-              "examples": [
-                "# { month: 1 }",
-                "# { month: '-1' }"
-              ]
+              "examples": ["# { month: 1 }", "# { month: '-1' }"]
             },
             "day": {
-              "type": [
-                "Number",
-                "String"
-              ],
+              "type": ["Number", "String"],
               "desc": "[Optional] The amount to increment/decrement the day",
-              "examples": [
-                "# { day: 1 }",
-                "# { day: '-1' }"
-              ]
+              "examples": ["# { day: 1 }", "# { day: '-1' }"]
             },
             "hour": {
-              "type": [
-                "Number",
-                "String"
-              ],
+              "type": ["Number", "String"],
               "desc": "[Optional] The amount to increment/decrement the hour",
-              "examples": [
-                "# { hour: 1 }",
-                "# { hour: '-1' }"
-              ]
+              "examples": ["# { hour: 1 }", "# { hour: '-1' }"]
             },
             "minute": {
-              "type": [
-                "Number",
-                "String"
-              ],
+              "type": ["Number", "String"],
               "desc": "[Optional] The amount to increment/decrement the minute",
-              "examples": [
-                "# { minute: 1 }",
-                "# { minute: '-1' }"
-              ]
+              "examples": ["# { minute: 1 }", "# { minute: '-1' }"]
             }
           }
         }
@@ -1527,48 +1251,28 @@
           "weekday": {
             "type": "String",
             "required": true,
-            "values": [
-              "'Sun'",
-              "'Mon'",
-              "'Tue'",
-              "'Wed'",
-              "'Thu'",
-              "'Fri'",
-              "'Sat'"
-            ],
+            "values": ["'Sun'", "'Mon'", "'Tue'", "'Wed'", "'Thu'", "'Fri'", "'Sat'"],
             "desc": "The values represent the day of the week (in short form, Pascal-case) in English, but used to translate to the desired locale",
-            "__exemption": [
-              "examples"
-            ]
+            "__exemption": ["examples"]
           },
           "type": {
             "type": "String",
             "default": "'long'",
-            "values": [
-              "'long'",
-              "'short'",
-              "'narrow'"
-            ],
+            "values": ["'long'", "'short'", "'narrow'"],
             "desc": "The values represent how the day of the week will be displayed",
-            "__exemption": [
-              "examples"
-            ]
+            "__exemption": ["examples"]
           },
           "locale": {
             "type": "String",
             "default": "'en-US'",
             "desc": "Any locale accepted by the browser can be used",
-            "__exemption": [
-              "examples"
-            ]
+            "__exemption": ["examples"]
           }
         },
         "returns": {
           "type": "String",
           "desc": "The formatted string of the specified weekday in the desired locale",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         },
         "examples": [
           "# weekdayFormatter('Mon')",
@@ -1584,23 +1288,15 @@
         "type": {
           "type": "String",
           "default": "'long'",
-          "values": [
-            "'long'",
-            "'short'",
-            "'narrow'"
-          ],
+          "values": ["'long'", "'short'", "'narrow'"],
           "desc": "The values represent how the day of the week will be displayed",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         },
         "locale": {
           "type": "String",
           "default": "'en-US'",
           "desc": "Any locale accepted by the browser can be used",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         }
       },
       "returns": {
@@ -1630,38 +1326,26 @@
             "type": "Number",
             "required": true,
             "desc": "The values 0-11 can be used to represent the month (0-based) and used to translate to the desired locale",
-            "__exemption": [
-              "examples"
-            ]
+            "__exemption": ["examples"]
           },
           "type": {
             "type": "String",
             "default": "'long'",
-            "values": [
-              "'long'",
-              "'short'",
-              "'narrow'"
-            ],
+            "values": ["'long'", "'short'", "'narrow'"],
             "desc": "The values represent how the month will be displayed",
-            "__exemption": [
-              "examples"
-            ]
+            "__exemption": ["examples"]
           },
           "locale": {
             "type": "String",
             "default": "'en-US'",
             "desc": "Any locale accepted by the browser can be used",
-            "__exemption": [
-              "examples"
-            ]
+            "__exemption": ["examples"]
           }
         },
         "returns": {
           "type": "String",
           "desc": "The formatted string of the specified month in the desired locale",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         },
         "examples": [
           "# monthFormatter('Mon')",
@@ -1677,23 +1361,15 @@
         "type": {
           "type": "String",
           "default": "'long'",
-          "values": [
-            "'long'",
-            "'short'",
-            "'narrow'"
-          ],
+          "values": ["'long'", "'short'", "'narrow'"],
           "desc": "The values represent how the day of the month will be displayed",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         },
         "locale": {
           "type": "String",
           "default": "'en-US'",
           "desc": "Any locale accepted by the browser can be used",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         }
       },
       "returns": {

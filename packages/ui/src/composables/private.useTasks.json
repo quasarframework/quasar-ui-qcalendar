@@ -6,9 +6,7 @@
       "category": "model",
       "desc": "An array of Tasks that will be displayed",
       "default": "[]",
-      "examples": [
-        "[{ id: 1, name: 'Task 1' }, { id: 2, name: 'Task 2' }]"
-      ]
+      "examples": ["[{ id: 1, name: 'Task 1' }, { id: 2, name: 'Task 2' }]"]
     },
     "model-title": {
       "type": "Array",
@@ -16,9 +14,7 @@
       "category": "model",
       "desc": "An array of title items, each will be displayed via a slot in the title area",
       "default": "[]",
-      "examples": [
-        "[{ id: 1, title: 'Title 1' }, { id: 2, title: 'Title 2' }]"
-      ]
+      "examples": ["[{ id: 1, title: 'Title 1' }, { id: 2, title: 'Title 2' }]"]
     },
     "model-footer": {
       "type": "Array",
@@ -26,38 +22,27 @@
       "category": "model",
       "desc": "An array of footer items, each will be displayed via a slot in the footer (summary) area",
       "default": "[]",
-      "examples": [
-        "[{ id: 1, footer: 'Footer 1' }, { id: 2, footer: 'Footer 2' }]"
-      ]
+      "examples": ["[{ id: 1, footer: 'Footer 1' }, { id: 2, footer: 'Footer 2' }]"]
     },
     "task-key": {
-      "type": [
-        "Number",
-        "String"
-      ],
+      "type": ["Number", "String"],
       "category": "content",
       "default": "'id'",
       "desc": "The key in an object to use as the ID (must be unique)",
-      "examples": [
-        "'id'"
-      ]
+      "examples": ["'id'"]
     },
     "task-width": {
       "type": "Number",
       "category": "content",
       "desc": "The number of pixels needed for the tasks column",
       "default": "200",
-      "examples": [
-        "220"
-      ]
+      "examples": ["220"]
     },
     "footer-day-class": {
       "type": "Function",
       "category": "style",
       "desc": "A function that returns a string of classes to apply to the footer day slot",
-      "examples": [
-        "(data) => { return 'my-class' }"
-      ],
+      "examples": ["(data) => { return 'my-class' }"],
       "params": {
         "scope": {
           "desc": "The scope object",
@@ -67,24 +52,18 @@
               "type": "Object",
               "tsType": "Timestamp",
               "desc": "A timestamp object of the day",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             },
             "footer": {
               "desc": "the task item from model `footer-tasks`",
               "type": "Object",
               "tsType": "TaskObject",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             },
             "index": {
               "type": "Number",
               "desc": "The index of the iteration",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             }
           }
         }
@@ -101,9 +80,7 @@
       "category": "content",
       "desc": "The number of views to show. For instance, if the property `view` was `week`, then setting this property to 2 would show 2 weeks.",
       "default": "1",
-      "examples": [
-        "2"
-      ]
+      "examples": ["2"]
     }
   },
   "slots": {
@@ -122,23 +99,17 @@
                   "type": "Object",
                   "tsType": "Timestamp",
                   "desc": "Timestamp object",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "task": {
                   "desc": "the Task associated with this row",
                   "type": "Object",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "index": {
                   "desc": "The task index",
                   "type": "Number",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 }
               }
             }
@@ -161,30 +132,22 @@
                   "type": "Array",
                   "tsType": "TimestampArray",
                   "desc": "The array of Timestamp objects",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "task": {
                   "desc": "the Task associated with this row",
                   "type": "Object",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "index": {
                   "desc": "The task index",
                   "type": "Number",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "width": {
                   "desc": "The width of a day cell",
                   "type": "Number",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 }
               }
             }
@@ -206,30 +169,22 @@
                 "start": {
                   "type": "Object",
                   "desc": "A timestamp object of the starting date",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "end": {
                   "type": "Object",
                   "desc": "A timestamp object of the ending date",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "task": {
                   "desc": "the Task associated with this row",
                   "type": "Object",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "index": {
                   "desc": "The task index",
                   "type": "Number",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 }
               }
             }
@@ -251,16 +206,12 @@
                 "start": {
                   "type": "Object",
                   "desc": "A timestamp object of the starting date",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "end": {
                   "type": "Object",
                   "desc": "A timestamp object of the ending date",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 }
               }
             }
@@ -282,30 +233,22 @@
                 "start": {
                   "type": "Object",
                   "desc": "A timestamp object of the starting date",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "end": {
                   "type": "Object",
                   "desc": "A timestamp object of the ending date",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "footer": {
                   "desc": "the array item from model `footer-tasks`",
                   "type": "Array",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "index": {
                   "desc": "the index into the array item from model `footer-tasks`",
                   "type": "Array",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 }
               }
             }
@@ -327,23 +270,17 @@
                 "timestamp": {
                   "type": "Object",
                   "desc": "A timestamp object of the day",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "footer": {
                   "desc": "the array item from model `footer-tasks`",
                   "type": "Array",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "index": {
                   "desc": "the index into the array item from model `footer-tasks`",
                   "type": "Array",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 }
               }
             }
@@ -373,9 +310,7 @@
             "expanded": {
               "desc": "True if the task is expanded, false otherwise",
               "type": "Boolean",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             },
             "scope": {
               "desc": "The scope object",
@@ -385,31 +320,23 @@
                   "type": "Object",
                   "tsType": "Timestamp",
                   "desc": "A timestamp object of the starting date",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "end": {
                   "type": "Object",
                   "tsType": "Timestamp",
                   "desc": "A timestamp object of the ending date",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "task": {
                   "desc": "The expanded/collapsed task",
                   "type": "Object",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "taskIndex": {
                   "desc": "The index into the `model-tasks` array",
                   "type": "Number",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 }
               }
             }

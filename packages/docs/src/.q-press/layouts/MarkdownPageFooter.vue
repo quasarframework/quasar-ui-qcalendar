@@ -19,9 +19,14 @@
             :target="item.external ? '_blank' : void 0"
             class="markdown-layout__item"
           >
-            <q-item-section v-if="item.image" class="letter-spacing-100"
-              ><q-img :src="item.image" :style="{ maxWidth: item.maxWidth ?? '150px' }"
-            /></q-item-section>
+            <q-item-section v-if="item.image" class="letter-spacing-100">
+              <img
+                :src="item.image"
+                :alt="item.name"
+                :style="{ maxWidth: item.maxWidth ?? '150px' }"
+                class="markdown-page-footer__image"
+              />
+            </q-item-section>
             <q-item-section v-else class="letter-spacing-100">{{ item.name }}</q-item-section>
           </q-item>
         </q-list>
@@ -105,6 +110,7 @@ function getMenu(path: string): SiteMenuItem[] {
           path: item.external === true ? item.path : `/${path}/${item.path}`,
           external: item.external,
           image: item.image ?? void 0,
+          maxWidth: item.maxWidth ?? void 0,
         } as SiteMenuItem)
       }
     }
@@ -175,6 +181,12 @@ const props = defineProps({
 
   &__copyright {
     font-size: ($font-size - 2px);
+  }
+
+  &__image {
+    display: block;
+    height: auto;
+    width: 100%;
   }
 }
 

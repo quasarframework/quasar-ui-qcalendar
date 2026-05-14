@@ -1,10 +1,9 @@
 ---
-name: Feature request (v4)
+name: Feature request (v5 beta)
 about: Suggest an idea for this project
 title: ''
-labels: 'v4'
+labels: 'v5, beta'
 assignees: ''
-
 ---
 
 **Is your feature request related to a problem? Please describe.**

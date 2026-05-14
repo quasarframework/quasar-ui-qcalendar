@@ -3,6 +3,7 @@ import path from 'node:path'
 import { fileURLToPath, URL } from 'node:url'
 import fse from 'fs-extra'
 import zlib from 'zlib'
+import { createDefu } from 'defu'
 import { red, yellow, green, blue, magenta, gray, underline } from 'kolorist'
 import { table } from 'table'
 import config from './config'
@@ -32,7 +33,7 @@ export function camelCase(str: string) {
   return str.replace(camelCaseRE, (text) => text.replace(camelCaseInnerRE, '').toUpperCase())
 }
 
-const kebabRE = /([a-zA-Z])([A-Z])/g
+const kebabRE = /([a-zA-Z0-9])([A-Z])/g
 export function kebabCase(str: string) {
   // assumes pascal case "str"
   return str.replace(kebabRE, '$1-$2').toLowerCase()
@@ -53,7 +54,9 @@ export function relativeToRoot(...pathList: string[]): string {
   return path.relative(rootFolder, ...pathList)
 }
 
-export const { version, ProductName } = readJsonFile(new URL('../package.json', import.meta.url))
+const packageJson = readJsonFile(new URL('../package.json', import.meta.url))
+export const version = packageJson.version
+export const ProductName = packageJson.productName ?? packageJson.ProductName ?? packageJson.name
 export const banner = config.banner
 
 process.on('exit', (code) => {
@@ -174,6 +177,10 @@ export function readFile(file: string) {
   return fse.readFileSync(file, 'utf-8')
 }
 
+export function fileExists(file: string): boolean {
+  return fse.existsSync(file)
+}
+
 export function readJsonFile(file: string | URL): Record<string, unknown> {
   return JSON.parse(fse.readFileSync(file, 'utf-8'))
 }
@@ -211,6 +218,23 @@ export function clone(data: string) {
   if (str) {
     return JSON.parse(str)
   }
+}
+
+const mergeWithArrays = createDefu((defaults, key, value) => {
+  const defaultsRecord = defaults as Record<PropertyKey, unknown>
+  const currentValue = defaultsRecord[key]
+
+  if (Array.isArray(currentValue) && Array.isArray(value)) {
+    defaultsRecord[key] = [...currentValue, ...value]
+    return true
+  }
+
+  return false
+})
+
+export function mergeObjects(...sources: Record<string, unknown>[]): Record<string, unknown> {
+  const [source = {}, ...defaults] = [...sources].reverse()
+  return mergeWithArrays(source, ...defaults) as Record<string, unknown>
 }
 
 const privateFileRE = /test|private/

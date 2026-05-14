@@ -1,44 +1,49 @@
 {
   "name": "@quasar/quasar-app-extension-qcalendar",
-  "version": "4.1.2",
+  "version": "5.0.0-beta.0",
   "description": "A Quasar App Extension for @quasar/quasar-ui-qcalendar",
-  "author": "Jeff Galbraith <jeff@quasar.dev>",
-  "license": "MIT",
-  "type": "module",
-  "main": "src/index.js",
-  "funding": {
-    "type": "github",
-    "url": "https://github.com/sponsors/hawkeye64"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
+  "keywords": [
+    "app",
+    "app extension",
+    "calendar",
+    "daily",
+    "events",
+    "extension",
+    "monthly",
+    "quasar",
+    "quasarframework",
+    "reminders",
+    "schedule",
+    "weekly"
+  ],
+  "homepage": "https://github.com/quasarframework/quasar-ui-qcalendar",
   "bugs": "https://github.com/quasarframework/quasar-ui-qcalendar/issues",
+  "license": "MIT",
+  "author": "Jeff Galbraith <jeff@quasar.dev>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/quasarframework/quasar-ui-qcalendar.git"
   },
-  "homepage": "https://github.com/quasarframework/quasar-ui-qcalendar",
-  "keywords": [
-    "quasar",
-    "quasarframework",
-    "app",
-    "app extension",
-    "extension",
-    "calendar",
-    "daily",
-    "weekly",
-    "monthly",
-    "events",
-    "reminders",
-    "schedule"
-  ],
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/hawkeye64"
+  },
+  "type": "module",
+  "main": "src/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
-    "@quasar/quasar-ui-qcalendar": "^4.1.2"
+    "@quasar/quasar-ui-qcalendar": "workspace:^"
+  },
+  "devDependencies": {
+    "@quasar/app-vite": "3.0.0-beta.13"
+  },
+  "peerDependencies": {
+    "@quasar/app-vite": ">=3.0.0-beta.13"
   },
   "engines": {
-    "node": "^28 || ^26 || ^24 || ^22 || ^20 || ^18",
-    "npm": ">= 6.13.4",
-    "yarn": ">= 1.21.1"
+    "node": ">=22.13",
+    "pnpm": ">=11.1.0"
   }
 }

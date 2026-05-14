@@ -119,8 +119,8 @@ function adjustCurrentTime() {
   const now = parseDate(new Date())
   if (now) {
     currentDate.value = now.date
-    currentTime.value = now.time
-    if (calendar.value) {
+    currentTime.value = now.time ?? null
+    if (calendar.value && currentTime.value) {
       timeStartPos.value = calendar.value.timeStartPos(currentTime.value, false)
     }
   }

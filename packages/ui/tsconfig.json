@@ -1,5 +1,5 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "module": "esnext",
     "target": "esnext",
@@ -9,7 +9,8 @@
     "moduleResolution": "bundler",
     "esModuleInterop": true,
     "allowJs": true,
-    "outDir": "dist",
+    "noImplicitAny": false,
+    "outDir": "dist/types",
     "baseUrl": ".",
     "paths": {
       "components/*": ["src/components/*"],

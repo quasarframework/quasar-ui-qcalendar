@@ -1,0 +1,66 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2022": true
+  },
+  "globals": {
+    "ga": "readonly",
+    "cordova": "readonly",
+    "Capacitor": "readonly",
+    "chrome": "readonly",
+    "browser": "readonly"
+  },
+  "ignorePatterns": [
+    "**/node_modules/**",
+    "**/.quasar/**",
+    "packages/docs/src/.q-press/**",
+    "**/dist/**",
+    "**/coverage/**",
+    "**/quasar.config.*.temporary.compiled*"
+  ],
+  "rules": {
+    "eqeqeq": "error",
+    "no-console": [
+      "warn",
+      {
+        "allow": ["error", "warn"]
+      }
+    ],
+    "no-debugger": "error",
+    "no-prototype-builtins": "off",
+    "typescript/no-explicit-any": "off"
+  },
+  "overrides": [
+    {
+      "files": ["packages/docs/src/examples/**/*", "packages/docs/src/components/**/*"],
+      "rules": {
+        "no-console": "off"
+      }
+    },
+    {
+      "files": ["packages/ui/src/components/**/*"],
+      "rules": {
+        "no-unused-expressions": "off",
+        "unicorn/no-new-array": "off",
+        "unicorn/no-useless-spread": "off"
+      }
+    },
+    {
+      "files": ["packages/ui/build/**/*"],
+      "rules": {
+        "no-console": "off",
+        "no-unused-expressions": "off",
+        "no-unused-vars": "off",
+        "typescript/prefer-as-const": "off"
+      }
+    },
+    {
+      "files": ["packages/ui/utility/**/*"],
+      "rules": {
+        "no-console": "off"
+      }
+    }
+  ]
+}

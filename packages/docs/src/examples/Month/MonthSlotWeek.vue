@@ -250,11 +250,13 @@ function insertEvent(
   level: number,
 ) {
   const iEvent = infoWeek[index]
-  if (iEvent !== undefined && 'left' in iEvent && iEvent.left >= availableDays) {
+  const left = iEvent !== undefined && 'left' in iEvent ? (iEvent.left ?? 0) : undefined
+
+  if (iEvent !== undefined && left !== undefined && left >= availableDays) {
     // If you have space available, more events are placed
-    if (iEvent.left - availableDays) {
+    if (left - availableDays) {
       // It is filled with empty events
-      events.push({ size: iEvent.left - availableDays })
+      events.push({ size: left - availableDays })
     }
     // The event is built
     events.push({ size: iEvent.size, event: iEvent.event })
@@ -264,7 +266,7 @@ function insertEvent(
       infoWeek.splice(index, 1)
     }
 
-    const currentAvailableDays = iEvent.left + iEvent.size
+    const currentAvailableDays = left + iEvent.size
 
     if (currentAvailableDays <= weekLength) {
       const indexNextEvent = indexOf(

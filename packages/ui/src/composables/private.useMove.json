@@ -7,9 +7,7 @@
           "type": "Timestamp",
           "tsType": "Timestamp",
           "desc": "The Timestamp object of the move",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         }
       }
     }

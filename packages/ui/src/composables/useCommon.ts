@@ -160,7 +160,6 @@ export interface CommonReturn {
   ) => Record<string, boolean>
   startOfWeek: (_timestamp: Timestamp) => Timestamp
   endOfWeek: (_timestamp: Timestamp) => Timestamp
-  // eslint-disable-next-line no-unused-vars
   dayStyleDefault: ({ scope }: { scope: any }) => {}
 }
 

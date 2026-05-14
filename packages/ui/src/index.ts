@@ -16,6 +16,39 @@ import * as helpers from './utils/helpers.js'
 export * from './utils/Timestamp.js'
 export * from './utils/helpers.js'
 
+type CalendarNavigationInstance = {
+  prev: (_amount?: number) => void
+  next: (_amount?: number) => void
+  move: (_amount?: number) => void
+  moveToToday: () => void
+  updateCurrent: () => void
+}
+
+type CalendarIntervalInstance = CalendarNavigationInstance & {
+  timeStartPos: (_time: string, _clamp?: boolean) => number
+  timeDurationHeight: (_minutes: number) => number
+  heightToMinutes: (_height: number) => number
+  scrollToTime: (_time: string, _duration?: number) => void
+}
+
+type CalendarResourceInstance = CalendarNavigationInstance & {
+  timeStartPosX: (_time: string, _clamp?: boolean) => number
+  timeDurationWidth: (_minutes: number) => number
+  widthToMinutes: (_width: number) => number
+  scrollToTimeX: (_time: string, _duration?: number) => void
+}
+
+export type QCalendar = CalendarIntervalInstance &
+  CalendarResourceInstance & {
+    widthToMinutes: (_width: number) => number
+  }
+export type QCalendarAgenda = CalendarNavigationInstance
+export type QCalendarDay = CalendarIntervalInstance
+export type QCalendarMonth = CalendarNavigationInstance
+export type QCalendarResource = CalendarResourceInstance
+export type QCalendarScheduler = CalendarNavigationInstance
+export type QCalendarTask = CalendarNavigationInstance
+
 export {
   version,
   QCalendar,

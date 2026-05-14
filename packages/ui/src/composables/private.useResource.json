@@ -6,63 +6,35 @@
       "category": "model",
       "required": true,
       "desc": "An array of objects with a single key of label. You can add other keys if you like, which will be passed back on the appropriate scoped slots",
-      "applicable": [
-        "scheduler"
-      ],
-      "examples": [
-        "[{ label: 'John' },{ label: 'Susan' }]"
-      ]
+      "applicable": ["scheduler"],
+      "examples": ["[{ label: 'John' },{ label: 'Susan' }]"]
     },
     "resource-key": {
       "type": "String",
       "category": "model",
       "desc": "The key from the `resources` object that will be displayed",
       "default": "'id'",
-      "applicable": [
-        "scheduler",
-        "resource"
-      ],
-      "examples": [
-        "'id'"
-      ]
+      "applicable": ["scheduler", "resource"],
+      "examples": ["'id'"]
     },
     "resource-label": {
       "type": "String",
       "category": "model",
       "desc": "The label from the `resources` object that will be displayed",
       "default": "'label'",
-      "applicable": [
-        "scheduler",
-        "resource"
-      ],
-      "examples": [
-        "'label'",
-        "'name'"
-      ]
+      "applicable": ["scheduler", "resource"],
+      "examples": ["'label'", "'name'"]
     },
     "resource-height": {
-      "type": [
-        "Number",
-        "String"
-      ],
+      "type": ["Number", "String"],
       "category": "behavior",
       "desc": "The maximum height in pixels for the resource height",
       "default": "70",
-      "applicable": [
-        "scheduler",
-        "resource",
-        "day-resource"
-      ],
-      "examples": [
-        "80",
-        "'100'"
-      ]
+      "applicable": ["scheduler", "resource", "day-resource"],
+      "examples": ["80", "'100'"]
     },
     "resource-min-height": {
-      "type": [
-        "Number",
-        "String"
-      ],
+      "type": ["Number", "String"],
       "default": "0",
       "desc": "The minimum height of a resource",
       "category": "behavior"
@@ -120,53 +92,35 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "definition": {
             "timestamp": {
               "type": "Timestamp",
               "tsType": "Timestamp",
               "desc": "A timestamp object associated with the interval",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             },
             "index": {
               "type": "Number",
               "desc": "The resource index",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             },
             "resource": {
               "type": "Object",
               "tsType": "ResourceObject",
               "desc": "The resource object",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             }
           }
         }
       },
       "returns": {
-        "type": [
-          "Array",
-          "Object",
-          "String"
-        ],
+        "type": ["Array", "Object", "String"],
         "desc": "A Vue style object",
-        "examples": [
-          "{ color: '#ccc' }"
-        ]
+        "examples": ["{ color: '#ccc' }"]
       },
       "default": "(data) => { return {} }",
-      "applicable": [
-        "scheduler",
-        "resource",
-        "day-resource"
-      ],
+      "applicable": ["scheduler", "resource", "day-resource"],
       "examples": [
         "(data) => { return { 'background-color': '#c0c0c0' } }",
         "(data) => resourceStyle(data)"
@@ -229,48 +183,36 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope of the event",
-              "__exemption": [
-                "examples"
-              ],
+              "__exemption": ["examples"],
               "definition": {
                 "resource": {
                   "type": "Object",
                   "tsType": "ResourceObject",
                   "desc": "The resource object associated with the event. Only applicable for resource views",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "intervals": {
                   "type": "Array",
                   "tsType": "TimestampArray",
                   "desc": "An array of timestamps of the intervals",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "index": {
                   "type": "Number",
                   "desc": "The index of the resource",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 }
               }
             },
             "event": {
               "type": "Object",
               "desc": "JS event object",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             }
           }
         }
@@ -290,48 +232,36 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope of the event",
-              "__exemption": [
-                "examples"
-              ],
+              "__exemption": ["examples"],
               "definition": {
                 "resource": {
                   "type": "Object",
                   "tsType": "ResourceObject",
                   "desc": "The resource object associated with the event. Only applicable for resource views",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "intervals": {
                   "type": "Array",
                   "tsType": "TimestampArray",
                   "desc": "An array of timestamps of the intervals",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "index": {
                   "type": "Number",
                   "desc": "The index of the resource",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 }
               }
             },
             "event": {
               "type": "Object",
               "desc": "JS event object",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             }
           }
         }
@@ -351,48 +281,36 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope of the event",
-              "__exemption": [
-                "examples"
-              ],
+              "__exemption": ["examples"],
               "definition": {
                 "resource": {
                   "type": "Object",
                   "tsType": "ResourceObject",
                   "desc": "The resource object associated with the event. Only applicable for resource views",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "intervals": {
                   "type": "Array",
                   "tsType": "TimestampArray",
                   "desc": "An array of timestamps of the intervals",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "index": {
                   "type": "Number",
                   "desc": "The index of the resource",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 }
               }
             },
             "event": {
               "type": "Object",
               "desc": "JS event object",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             }
           }
         }
@@ -412,48 +330,36 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope of the event",
-              "__exemption": [
-                "examples"
-              ],
+              "__exemption": ["examples"],
               "definition": {
                 "resource": {
                   "type": "Object",
                   "tsType": "ResourceObject",
                   "desc": "The resource object associated with the event. Only applicable for resource views",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "intervals": {
                   "type": "Array",
                   "tsType": "TimestampArray",
                   "desc": "An array of timestamps of the intervals",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "index": {
                   "type": "Number",
                   "desc": "The index of the resource",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 }
               }
             },
             "event": {
               "type": "Object",
               "desc": "JS event object",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             }
           }
         }
@@ -473,48 +379,36 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope of the event",
-              "__exemption": [
-                "examples"
-              ],
+              "__exemption": ["examples"],
               "definition": {
                 "resource": {
                   "type": "Object",
                   "tsType": "ResourceObject",
                   "desc": "The resource object associated with the event. Only applicable for resource views",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "intervals": {
                   "type": "Array",
                   "tsType": "TimestampArray",
                   "desc": "An array of timestamps of the intervals",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "index": {
                   "type": "Number",
                   "desc": "The index of the resource",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 }
               }
             },
             "event": {
               "type": "Object",
               "desc": "JS event object",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             }
           }
         }
@@ -534,48 +428,36 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope of the event",
-              "__exemption": [
-                "examples"
-              ],
+              "__exemption": ["examples"],
               "definition": {
                 "resource": {
                   "type": "Object",
                   "tsType": "ResourceObject",
                   "desc": "The resource object associated with the event. Only applicable for resource views",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "intervals": {
                   "type": "Array",
                   "tsType": "TimestampArray",
                   "desc": "An array of timestamps of the intervals",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "index": {
                   "type": "Number",
                   "desc": "The index of the resource",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 }
               }
             },
             "event": {
               "type": "Object",
               "desc": "JS event object",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             }
           }
         }
@@ -595,48 +477,36 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope of the event",
-              "__exemption": [
-                "examples"
-              ],
+              "__exemption": ["examples"],
               "definition": {
                 "resource": {
                   "type": "Object",
                   "tsType": "ResourceObject",
                   "desc": "The resource object associated with the event. Only applicable for resource views",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "intervals": {
                   "type": "Array",
                   "tsType": "TimestampArray",
                   "desc": "An array of timestamps of the intervals",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "index": {
                   "type": "Number",
                   "desc": "The index of the resource",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 }
               }
             },
             "event": {
               "type": "Object",
               "desc": "JS event object",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             }
           }
         }
@@ -656,48 +526,36 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope of the event",
-              "__exemption": [
-                "examples"
-              ],
+              "__exemption": ["examples"],
               "definition": {
                 "resource": {
                   "type": "Object",
                   "tsType": "ResourceObject",
                   "desc": "The resource object associated with the event. Only applicable for resource views",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "intervals": {
                   "type": "Array",
                   "tsType": "TimestampArray",
                   "desc": "An array of timestamps of the intervals",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "index": {
                   "type": "Number",
                   "desc": "The index of the resource",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 }
               }
             },
             "event": {
               "type": "Object",
               "desc": "JS event object",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             }
           }
         }
@@ -717,48 +575,36 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope of the event",
-              "__exemption": [
-                "examples"
-              ],
+              "__exemption": ["examples"],
               "definition": {
                 "resource": {
                   "type": "Object",
                   "tsType": "ResourceObject",
                   "desc": "The resource object associated with the event. Only applicable for resource views",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "intervals": {
                   "type": "Array",
                   "tsType": "TimestampArray",
                   "desc": "An array of timestamps of the intervals",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "index": {
                   "type": "Number",
                   "desc": "The index of the resource",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 }
               }
             },
             "event": {
               "type": "Object",
               "desc": "JS event object",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             }
           }
         }
@@ -778,48 +624,36 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope of the event",
-              "__exemption": [
-                "examples"
-              ],
+              "__exemption": ["examples"],
               "definition": {
                 "resource": {
                   "type": "Object",
                   "tsType": "ResourceObject",
                   "desc": "The resource object associated with the event. Only applicable for resource views",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "intervals": {
                   "type": "Array",
                   "tsType": "TimestampArray",
                   "desc": "An array of timestamps of the intervals",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "index": {
                   "type": "Number",
                   "desc": "The index of the resource",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 }
               }
             },
             "event": {
               "type": "Object",
               "desc": "JS event object",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             }
           }
         }
@@ -839,49 +673,37 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope of the event",
-              "__exemption": [
-                "examples"
-              ],
+              "__exemption": ["examples"],
               "definition": {
                 "timestamp": {
                   "type": "Object",
                   "tsType": "Timestamp",
                   "desc": "The timestamp object. Not in all views.",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "resources": {
                   "type": "Array",
                   "tsType": "ResourceObjectArray",
                   "desc": "An array of resource objects",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "intervals": {
                   "type": "Array",
                   "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects of the intervals",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 }
               }
             },
             "event": {
               "type": "Object",
               "desc": "JS event object",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             }
           }
         }
@@ -901,49 +723,37 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope of the event",
-              "__exemption": [
-                "examples"
-              ],
+              "__exemption": ["examples"],
               "definition": {
                 "timestamp": {
                   "type": "Object",
                   "tsType": "Timestamp",
                   "desc": "The timestamp object. Not in all views.",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "resources": {
                   "type": "Array",
                   "tsType": "ResourceObjectArray",
                   "desc": "An array of resource objects",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "intervals": {
                   "type": "Array",
                   "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects of the intervals",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 }
               }
             },
             "event": {
               "type": "Object",
               "desc": "JS event object",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             }
           }
         }
@@ -963,49 +773,37 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope of the event",
-              "__exemption": [
-                "examples"
-              ],
+              "__exemption": ["examples"],
               "definition": {
                 "timestamp": {
                   "tsType": "Timestamp",
                   "type": "Object",
                   "desc": "The timestamp object. Not in all views.",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "resources": {
                   "type": "Array",
                   "tsType": "ResourceObjectArray",
                   "desc": "An array of resource objects",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "intervals": {
                   "type": "Array",
                   "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects of the intervals",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 }
               }
             },
             "event": {
               "type": "Object",
               "desc": "JS event object",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             }
           }
         }
@@ -1025,49 +823,37 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope of the event",
-              "__exemption": [
-                "examples"
-              ],
+              "__exemption": ["examples"],
               "definition": {
                 "timestamp": {
                   "type": "Object",
                   "tsType": "Timestamp",
                   "desc": "The timestamp object. Not in all views.",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "resources": {
                   "type": "Array",
                   "tsType": "ResourceObjectArray",
                   "desc": "An array of resource objects",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "intervals": {
                   "type": "Array",
                   "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects of the intervals",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 }
               }
             },
             "event": {
               "type": "Object",
               "desc": "JS event object",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             }
           }
         }
@@ -1087,49 +873,37 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope of the event",
-              "__exemption": [
-                "examples"
-              ],
+              "__exemption": ["examples"],
               "definition": {
                 "timestamp": {
                   "type": "Object",
                   "tsType": "Timestamp",
                   "desc": "The timestamp object. Not in all views.",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "resources": {
                   "type": "Array",
                   "tsType": "ResourceObjectArray",
                   "desc": "An array of resource objects",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "intervals": {
                   "type": "Array",
                   "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects of the intervals",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 }
               }
             },
             "event": {
               "type": "Object",
               "desc": "JS event object",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             }
           }
         }
@@ -1149,49 +923,37 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope of the event",
-              "__exemption": [
-                "examples"
-              ],
+              "__exemption": ["examples"],
               "definition": {
                 "timestamp": {
                   "type": "Object",
                   "tsType": "Timestamp",
                   "desc": "The timestamp object. Not in all views.",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "resources": {
                   "type": "Array",
                   "tsType": "ResourceObjectArray",
                   "desc": "An array of resource objects",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "intervals": {
                   "type": "Array",
                   "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects of the intervals",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 }
               }
             },
             "event": {
               "type": "Object",
               "desc": "JS event object",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             }
           }
         }
@@ -1211,49 +973,37 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope of the event",
-              "__exemption": [
-                "examples"
-              ],
+              "__exemption": ["examples"],
               "definition": {
                 "timestamp": {
                   "type": "Object",
                   "tsType": "Timestamp",
                   "desc": "The timestamp object. Not in all views.",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "resources": {
                   "type": "Array",
                   "tsType": "ResourceObjectArray",
                   "desc": "An array of resource objects",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "intervals": {
                   "type": "Array",
                   "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects of the intervals",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 }
               }
             },
             "event": {
               "type": "Object",
               "desc": "JS event object",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             }
           }
         }
@@ -1273,49 +1023,37 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope of the event",
-              "__exemption": [
-                "examples"
-              ],
+              "__exemption": ["examples"],
               "definition": {
                 "timestamp": {
                   "type": "Object",
                   "tsType": "Timestamp",
                   "desc": "The timestamp object. Not in all views.",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "resources": {
                   "type": "Array",
                   "tsType": "ResourceObjectArray",
                   "desc": "An array of resource objects",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "intervals": {
                   "type": "Array",
                   "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects of the intervals",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 }
               }
             },
             "event": {
               "type": "Object",
               "desc": "JS event object",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             }
           }
         }
@@ -1335,49 +1073,37 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope of the event",
-              "__exemption": [
-                "examples"
-              ],
+              "__exemption": ["examples"],
               "definition": {
                 "timestamp": {
                   "type": "Object",
                   "tsType": "Timestamp",
                   "desc": "The timestamp object. Not in all views.",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "resources": {
                   "type": "Array",
                   "tsType": "ResourceObjectArray",
                   "desc": "An array of resource objects",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "intervals": {
                   "type": "Array",
                   "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects of the intervals",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 }
               }
             },
             "event": {
               "type": "Object",
               "desc": "JS event object",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             }
           }
         }
@@ -1397,49 +1123,37 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope of the event",
-              "__exemption": [
-                "examples"
-              ],
+              "__exemption": ["examples"],
               "definition": {
                 "timestamp": {
                   "type": "Object",
                   "tsType": "Timestamp",
                   "desc": "The timestamp object. Not in all views.",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "resources": {
                   "type": "Array",
                   "tsType": "ResourceObjectArray",
                   "desc": "An array of resource objects",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "intervals": {
                   "type": "Array",
                   "tsType": "TimestampArray",
                   "desc": "An array of timestamp objects of the intervals",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 }
               }
             },
             "event": {
               "type": "Object",
               "desc": "JS event object",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             }
           }
         }
@@ -1453,23 +1167,16 @@
         "date": {
           "type": "String",
           "desc": "The current date (YYYY-MM-DD)",
-          "examples": [
-            "'2020-05-30'"
-          ]
+          "examples": ["'2020-05-30'"]
         },
         "intervals": {
           "type": "Array",
           "tsType": "TimestampArray",
           "desc": "An array of timestamps for the intervals that will be displayed",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         }
       },
-      "applicable": [
-        "resource",
-        "day-resource"
-      ]
+      "applicable": ["resource", "day-resource"]
     },
     "resource-row": {
       "desc": "This slot is the complete row, including resource and intervals",
@@ -1478,36 +1185,25 @@
           "type": "Object",
           "tsType": "ResourceObject",
           "desc": "A resource object that was passed in within the array of resources",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         },
         "resourceIndex": {
           "type": "Number",
           "desc": "The resource index from the array",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         },
         "indentLevel": {
           "type": "Number",
           "desc": "The indent level of the resource",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         },
         "expanded": {
           "type": "Boolean",
           "desc": "Whether the resource is expanded or not",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         }
       },
-      "applicable": [
-        "resource",
-        "day-resource"
-      ]
+      "applicable": ["resource", "day-resource", "scheduler"]
     },
     "resource-label": {
       "desc": "Use this slot to replace the resource label",
@@ -1516,23 +1212,15 @@
           "type": "Object",
           "tsType": "ResourceObject",
           "desc": "A resource object that was passed in within the array of resources",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         },
         "index": {
           "type": "Number",
           "desc": "The resource index from the array",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         }
       },
-      "applicable": [
-        "scheduler",
-        "resource",
-        "day-resource"
-      ]
+      "applicable": ["scheduler", "resource", "day-resource"]
     }
   }
 }

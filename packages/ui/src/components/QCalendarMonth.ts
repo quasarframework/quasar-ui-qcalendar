@@ -597,7 +597,7 @@ export default defineComponent({
 
     function __renderWeeks(): VNode[] {
       const weekDays = props.weekdays.length
-      const weeks = []
+      const weeks: VNode[] = []
       for (let i = 0; i < days.value.length; i += weekDays) {
         weeks.push(__renderWeek(days.value.slice(i, i + weekDays), i / weekDays))
       }

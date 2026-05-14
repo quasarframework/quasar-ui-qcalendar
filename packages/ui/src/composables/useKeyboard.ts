@@ -33,6 +33,7 @@ interface NavigationContext {
   emittedValue: Ref<string>
   direction: Ref<'next' | 'prev'>
   times: { today: Timestamp }
+  [key: string]: unknown
 }
 
 interface UseNavigationReturn {

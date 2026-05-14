@@ -87,10 +87,19 @@ export interface SiteConfig {
   sidebar: MenuItem[]
 }
 
+function getSidebarPath(item: MenuItem): string {
+  if (item.external === true) {
+    return item.path ?? slugify(item.name)
+  }
+
+  const path = item.path?.replace(/^\/+/, '').split('/').filter(Boolean).pop()
+  return path ?? slugify(item.name)
+}
+
 function processMenuItem(item: MenuItem): MenuItem {
   return {
     name: item.name,
-    path: slugify(item.name),
+    path: getSidebarPath(item),
     expanded: item.expanded ?? false,
     children: item.children ? item.children.map(processMenuItem) : undefined,
   }
@@ -118,7 +127,7 @@ const socialLinks = {
 const netlifyLink = {
   path: 'https://www.netlify.com',
   external: true,
-  image: 'https://www.netlify.com/img/global/badges/netlify-color-accent.svg',
+  image: 'https://www.netlify.com/assets/badges/netlify-badge-color-accent.svg',
   name: 'Deploys by Netlify',
   maxWidth: '120px',
 }
@@ -131,6 +140,7 @@ const SponsorsLinks = {
       path: netlifyLink.path,
       external: netlifyLink.external,
       image: netlifyLink.image,
+      maxWidth: netlifyLink.maxWidth,
     },
   ],
 }
@@ -500,6 +510,13 @@ const otherMenu: SiteMenuItem = {
   ],
 }
 
+const processedGettingStartedMenu = {
+  name: gettingStartedMenu.name,
+  path: slugify(gettingStartedMenu.name),
+  expanded: false,
+  children: gettingStartedMenu.children ? gettingStartedMenu.children.map(processMenuItem) : [],
+}
+
 const processedDevelopingMenu = {
   name: developingMenu.name,
   path: slugify(developingMenu.name),
@@ -512,6 +529,13 @@ const processedExamplesMenu = {
   path: slugify(examplesMenu.name),
   expanded: false,
   children: examplesMenu.children ? examplesMenu.children.map(processMenuItem) : [],
+}
+
+const processedOtherMenu = {
+  name: otherMenu.name,
+  path: slugify(otherMenu.name),
+  expanded: false,
+  children: otherMenu.children ? otherMenu.children.map(processMenuItem) : [],
 }
 
 // const processedGuidesMenu = {
@@ -538,19 +562,10 @@ export const moreLinks: SiteMenuItem[] = [
 ]
 
 export const sidebar = [
-  {
-    name: gettingStartedMenu.name,
-    path: slugify(gettingStartedMenu.name),
-    expanded: false,
-    children: gettingStartedMenu.children
-      ? gettingStartedMenu.children.map((item) => ({
-          name: item.name,
-          path: slugify(item.name),
-        }))
-      : [],
-  },
+  processedGettingStartedMenu,
   processedDevelopingMenu,
   processedExamplesMenu,
+  processedOtherMenu,
   // {
   //   name: examplesMenu.name,
   //   path: '',

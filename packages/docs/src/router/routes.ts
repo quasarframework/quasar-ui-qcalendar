@@ -27,7 +27,7 @@ const routes = [
         .map((key) => {
           const acc = {
             path: '',
-            component: mdPageList[key],
+            component: mdPageList[key]!,
           }
 
           if (acc.path === '') {
@@ -51,7 +51,7 @@ const routes = [
       ...Object.entries(examplesPageList).map(([key, _component]) => {
         const acc = {
           path: '',
-          component: examplesPageList[key],
+          component: examplesPageList[key]!,
         }
 
         if (acc.path === '') {

@@ -1,4 +1,4 @@
-# QCalendar v4.x.x
+# QCalendar v5.x.x
 
 ## What's Changed
 
@@ -6,21 +6,25 @@
 
 **Fixes:**
 
+**Migration notes:**
+
 ---
 
 ## Installing
 
 ```
-$ pnpm add @quasar/quasar-ui-qcalendar
+$ pnpm add @quasar/quasar-ui-qcalendar@beta
 # or
-$ yarn add @quasar/quasar-ui-qcalendar
+$ yarn add @quasar/quasar-ui-qcalendar@beta
 # or
-$ quasar ext add @quasar/qcalendar
+$ quasar ext add @quasar/qcalendar@beta
 ```
+
+Remove the `@beta` tag once QCalendar v5 is promoted to stable.
 
 ## Documentation
 
-[QCalendar v4 documentation](https://qcalendar.netlify.app/) is now hosted by Netlify. Visit the documentation to get more information and a Migration Guide (in the Help section). The documentation is incomplete and is currently being updated. You can help out by PR-ing deficiencies.
+[QCalendar documentation](https://qcalendar.netlify.app/) is hosted by Netlify. Visit the documentation to get more information and read the [Migration Guide](https://qcalendar.netlify.app/other/migration-guide).
 
 ## Donations
 

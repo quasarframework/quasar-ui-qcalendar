@@ -18,12 +18,7 @@
                     tabindex="0"
                     style="width: 100%"
                     :class="dayClass(day)"
-                    @click="
-                      // prettier-ignore
-                      selectedDate = day.date;
-                      // prettier-ignore
-                      transition = '';
-                    "
+                    @click="onSelectDate(day.date)"
                   >
                     <span class="q-calendar__focus-helper" tabindex="-1" />
                     <div style="width: 100%">
@@ -157,11 +152,16 @@ function dayClass(day: Timestamp) {
   }
 }
 
+function onSelectDate(date: string) {
+  selectedDate.value = date
+  transition.value = ''
+}
+
 function monthFormatterFunc() {
   const longOptions: Intl.DateTimeFormatOptions = { timeZone: 'UTC', month: 'long' } as const
   const shortOptions: Intl.DateTimeFormatOptions = { timeZone: 'UTC', month: 'short' } as const
 
-  return createNativeLocaleFormatter(locale.value, (_tms, short) =>
+  return createNativeLocaleFormatter(locale.value, (_tms: unknown, short: boolean) =>
     short ? shortOptions : longOptions,
   )
 }
@@ -170,7 +170,7 @@ function weekdayFormatterFunc() {
   const longOptions: Intl.DateTimeFormatOptions = { timeZone: 'UTC', weekday: 'long' } as const
   const shortOptions: Intl.DateTimeFormatOptions = { timeZone: 'UTC', weekday: 'short' } as const
 
-  return createNativeLocaleFormatter(locale.value, (_tms, short) =>
+  return createNativeLocaleFormatter(locale.value, (_tms: unknown, short: boolean) =>
     short ? shortOptions : longOptions,
   )
 }
@@ -179,7 +179,7 @@ function dayFormatterFunc() {
   const longOptions: Intl.DateTimeFormatOptions = { timeZone: 'UTC', day: '2-digit' } as const
   const shortOptions: Intl.DateTimeFormatOptions = { timeZone: 'UTC', day: 'numeric' } as const
 
-  return createNativeLocaleFormatter(locale.value, (_tms, short) =>
+  return createNativeLocaleFormatter(locale.value, (_tms: unknown, short: boolean) =>
     short ? shortOptions : longOptions,
   )
 }

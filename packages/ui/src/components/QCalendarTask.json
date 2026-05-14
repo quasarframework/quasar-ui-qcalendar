@@ -29,9 +29,7 @@
                 "timestamp": {
                   "type": "Object",
                   "desc": "A timestamp object of the day",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 }
               }
             }
@@ -45,17 +43,13 @@
         "dayLabel": {
           "type": "String",
           "desc": "The string of the dayLabel",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         },
         "timestamp": {
           "type": "Timestamp",
           "tsType": "Timestamp",
           "desc": "A timestamp for the day of the slotted content",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         },
         "miniMode": {
           "type": "Boolean",
@@ -77,23 +71,17 @@
                 "timestamp": {
                   "type": "Object",
                   "desc": "A timestamp object of the day",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "dayLabel": {
                   "type": "String",
                   "desc": "The string value that would have been used for the day label",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "activeDate": {
                   "type": "Boolean",
                   "desc": "true if this is the active date",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 }
               }
             }
@@ -108,23 +96,17 @@
           "type": "Timestamp",
           "tsType": "Timestamp",
           "desc": "Timestamp object",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         },
         "index": {
           "type": "Number",
           "desc": "The index of the iteration",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         },
         "miniMode": {
           "type": "Boolean",
           "desc": "If currently in mini-mode (applied to Month calendars only)",
-          "__exemption": [
-            "examples"
-          ]
+          "__exemption": ["examples"]
         }
       }
     },
@@ -142,23 +124,17 @@
                 "timestamp": {
                   "type": "Object",
                   "desc": "A timestamp object of the day",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "activeDate": {
                   "type": "Boolean",
                   "desc": "true if this is the active date",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "columnIndex": {
                   "type": "Number",
                   "desc": "The column index if `column-count` is not undefined",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 }
               }
             }

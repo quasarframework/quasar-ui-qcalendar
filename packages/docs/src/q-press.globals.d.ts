@@ -1,5 +1,23 @@
 declare module '*.md'
 
+declare module '@md-plugins/md-plugin-headers' {
+  export interface TocItem {
+    id: string
+    level: number
+    title: string
+    [key: string]: unknown
+  }
+}
+
+interface ImportMetaHot {
+  accept(callback?: (..._args: unknown[]) => unknown): void
+}
+
+interface ImportMeta {
+  glob: <T = any>(pattern: string) => Record<string, () => Promise<T>>
+  hot?: ImportMetaHot
+}
+
 // Define types for headers
 interface TocMenuItem {
   id: string

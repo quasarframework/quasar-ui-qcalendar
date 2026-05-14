@@ -391,7 +391,7 @@ let pageY = 0
 const weekdayFormatter = computed(() => {
   const longOptions: Intl.DateTimeFormatOptions = { timeZone: 'UTC', weekday: 'long' }
   const shortOptions: Intl.DateTimeFormatOptions = { timeZone: 'UTC', weekday: 'short' }
-  return createNativeLocaleFormatter(locale.value, (_tms, short) =>
+  return createNativeLocaleFormatter(locale.value, (_tms: unknown, short: boolean) =>
     short ? shortOptions : longOptions,
   )
 })

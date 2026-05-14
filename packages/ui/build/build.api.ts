@@ -4,7 +4,6 @@
 import { join, basename } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { globSync } from 'tinyglobby'
-import { merge } from 'webpack-merge'
 import fse from 'fs-extra'
 
 import {
@@ -20,6 +19,7 @@ import {
   capitalize,
   plural,
   removeDuplicates,
+  mergeObjects,
 } from './build.utils'
 
 const dest = resolveToRoot('dist/api')
@@ -621,11 +621,13 @@ function getApiWithMixins(api, mainFile) {
 
     const content = readJsonFile(mixinFile)
 
-    api = merge({}, content.mixins !== void 0 ? getApiWithMixins(content, mixinFile) : content, api)
+    api = mergeObjects(
+      content.mixins !== void 0 ? getApiWithMixins(content, mixinFile) : content,
+      api,
+    )
   })
 
-  // eslint-disable-next-line no-unused-vars
-  const { mixins, ...finalApi } = api
+  const { mixins: _mixins, ...finalApi } = api
   return finalApi
 }
 
@@ -782,7 +784,7 @@ function parseObject({ banner, api, itemName, masterType, verifyCategory, verify
       printErrorAndExit(`extends "${obj.extends}" which does not exists`)
     }
 
-    api[itemName] = merge({}, extendApi[masterType][obj.extends], api[itemName])
+    api[itemName] = mergeObjects(extendApi[masterType][obj.extends], api[itemName])
     delete api[itemName].extends
 
     obj = api[itemName]
@@ -883,8 +885,7 @@ function parseObject({ banner, api, itemName, masterType, verifyCategory, verify
 
     // Since we processed '__exemption', we can strip it
     if (obj.__exemption !== void 0) {
-      // eslint-disable-next-line no-unused-vars
-      const { __exemption, ...p } = obj
+      const { __exemption: _exemption, ...p } = obj
       api[itemName] = p
     }
 
@@ -1598,8 +1599,7 @@ function fillAPI(apiType, list, encodeFn) {
   }
 }
 
-// eslint-disable-next-line no-unused-vars
-function writeTransformAssetUrls(components, encodeFn) {
+function _writeTransformAssetUrls(components, encodeFn) {
   const transformAssetUrls = {
     base: null,
     includeAbsolute: false,
@@ -1688,7 +1688,7 @@ export async function generate({ compact = false } = {}): Promise<{
 
     resetRuntimeImports()
 
-    // writeTransformAssetUrls(components, encodeFn)
+    // _writeTransformAssetUrls(components, encodeFn)
     writeApiIndex(list.sort(), encodeFn)
 
     return { components, directives, plugins, utils }

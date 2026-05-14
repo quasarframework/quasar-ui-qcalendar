@@ -13,19 +13,19 @@ The **QCalendar App Extension** allows you to seamlessly add the [QCalendar](../
 
 ## Everything you need for a complete Calendar solution.
 
-QCalendar is a [Quasar](https://quasar.dev) component. It is a powerful calendar that plugs right into your Quasar application and allows for viewing of **day** (1-7 days for a week), **monthly**, **scheduler** and **agenda** views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.
+QCalendar is a [Quasar](https://quasar.dev) component. It is a powerful calendar that plugs right into your Quasar application and allows for viewing of **day** (1-7 days for a week), **monthly**, **scheduler**, **agenda**, **resource** and **task** views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.
 
-# QCalendar v4.x
+# QCalendar v5.0.0 beta
 
-Welcome to the QCalendar v4.x release
+Welcome to the QCalendar v5.0.0 beta release.
 
-### QCalendar is now converted to use Vue v3
+### QCalendar App Extension is now Vite-only
 
-With this update comes a lot of changes, with over 90% of QCalendar being rewritten. Please read below to understand these changes and how they will affect you for upgrading.
+QCalendar v5 prepares the app extension for Quasar CLI Vite 3. The app extension requires `@quasar/app-vite` v3 beta and no longer supports webpack-based Quasar apps. If your application is still using `@quasar/app-webpack`, migrate the application to Quasar CLI Vite before installing QCalendar v5.
 
 # Documentation
 
-Go to Netlify which is hosting QCalendar v4.0.0 docs https://qcalendar.netlify.app/.
+Go to Netlify which is hosting the QCalendar docs https://qcalendar.netlify.app/.
 
 ---
 
@@ -78,6 +78,12 @@ quasar ext add @quasar/qcalendar
 ```
 
 Quasar CLI will retrieve it from NPM and install the extension.
+
+While QCalendar v5 is in beta, install with:
+
+```bash
+quasar ext add @quasar/qcalendar@beta
+```
 
 # Uninstall
 

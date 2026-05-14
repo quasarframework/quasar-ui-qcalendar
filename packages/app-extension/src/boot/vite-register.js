@@ -1,4 +1,4 @@
-import { defineBoot } from '@quasar/app-vite/wrappers'
+import { defineBoot } from '#q-app'
 import VuePlugin from '@quasar/quasar-ui-qcalendar'
 
 export default defineBoot(({ app }) => {
