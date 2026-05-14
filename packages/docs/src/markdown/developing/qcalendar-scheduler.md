@@ -159,4 +159,10 @@ The current date has been set to tomorrow via the `now` property.
 
 ## Width Height
 
+There is no dedicated `resource-width` prop on `QCalendarScheduler`.
+
+To control the left resources pane width, set the css variable `--calendar-resources-width` on the calendar, for example through `:style` or a custom class.
+
+The example below uses that css variable together with `resource-height`, `resource-min-height`, and `cell-width`.
+
 <MarkdownExample title="Width Height" file="SchedulerWidthHeight" no-github no-edit/>
