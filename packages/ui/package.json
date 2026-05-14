@@ -60,7 +60,7 @@
       "default": "./dist/index.rtl.css"
     },
     "./QCalendar": {
-      "types": "./dist/types/components/QCalendar.d.ts",
+      "types": "./dist/types/QCalendar.d.ts",
       "import": "./dist/QCalendar.esm.js",
       "require": "./dist/QCalendar.cjs.js"
     },
@@ -77,7 +77,7 @@
       "default": "./dist/QCalendar.rtl.css"
     },
     "./QCalendarAgenda": {
-      "types": "./dist/types/components/QCalendarAgenda.d.ts",
+      "types": "./dist/types/QCalendarAgenda.d.ts",
       "import": "./dist/QCalendarAgenda.esm.js",
       "require": "./dist/QCalendarAgenda.cjs.js"
     },
@@ -94,7 +94,7 @@
       "default": "./dist/QCalendarAgenda.rtl.css"
     },
     "./QCalendarDay": {
-      "types": "./dist/types/components/QCalendarDay.d.ts",
+      "types": "./dist/types/QCalendarDay.d.ts",
       "import": "./dist/QCalendarDay.esm.js",
       "require": "./dist/QCalendarDay.cjs.js"
     },
@@ -111,7 +111,7 @@
       "default": "./dist/QCalendarDay.rtl.css"
     },
     "./QCalendarMonth": {
-      "types": "./dist/types/components/QCalendarMonth.d.ts",
+      "types": "./dist/types/QCalendarMonth.d.ts",
       "import": "./dist/QCalendarMonth.esm.js",
       "require": "./dist/QCalendarMonth.cjs.js"
     },
@@ -128,7 +128,7 @@
       "default": "./dist/QCalendarMonth.rtl.css"
     },
     "./QCalendarResource": {
-      "types": "./dist/types/components/QCalendarResource.d.ts",
+      "types": "./dist/types/QCalendarResource.d.ts",
       "import": "./dist/QCalendarResource.esm.js",
       "require": "./dist/QCalendarResource.cjs.js"
     },
@@ -145,7 +145,7 @@
       "default": "./dist/QCalendarResource.rtl.css"
     },
     "./QCalendarScheduler": {
-      "types": "./dist/types/components/QCalendarScheduler.d.ts",
+      "types": "./dist/types/QCalendarScheduler.d.ts",
       "import": "./dist/QCalendarScheduler.esm.js",
       "require": "./dist/QCalendarScheduler.cjs.js"
     },
@@ -162,7 +162,7 @@
       "default": "./dist/QCalendarScheduler.rtl.css"
     },
     "./QCalendarTask": {
-      "types": "./dist/types/components/QCalendarTask.d.ts",
+      "types": "./dist/types/QCalendarTask.d.ts",
       "import": "./dist/QCalendarTask.esm.js",
       "require": "./dist/QCalendarTask.cjs.js"
     },
