@@ -13,7 +13,7 @@ import {
   watch,
   withDirectives,
   CSSProperties,
-  SetupContext,
+  type SlotsType,
   VNode,
 } from 'vue'
 
@@ -43,6 +43,7 @@ import useFocusHelper from '../composables/useFocusHelper'
 import useCheckChange, { useCheckChangeEmits } from '../composables/useCheckChange'
 import useEvents from '../composables/useEvents'
 import useKeyboard, { useNavigationProps } from '../composables/useKeyboard'
+import type { QCalendarResourceSlots } from '../slots'
 
 // Directives
 import ResizeObserver from '../directives/ResizeObserver'
@@ -58,6 +59,8 @@ interface Size {
 
 export default defineComponent({
   name: 'QCalendarResource',
+
+  slots: Object as SlotsType<QCalendarResourceSlots>,
 
   props: {
     ...useCommonProps,
@@ -84,7 +87,7 @@ export default defineComponent({
     ...getRawMouseEvents('-resource'),
   ],
 
-  setup(props, { slots, emit, expose }: SetupContext) {
+  setup(props, { slots, emit, expose }) {
     const scrollArea = ref(null),
       pane = ref(null),
       headerRef = ref(null),

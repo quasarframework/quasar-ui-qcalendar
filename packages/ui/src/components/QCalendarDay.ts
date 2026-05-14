@@ -14,7 +14,7 @@ import {
   watch,
   withDirectives,
   CSSProperties,
-  SetupContext,
+  type SlotsType,
   VNode,
 } from 'vue'
 
@@ -48,6 +48,7 @@ import useCellWidth, { useCellWidthProps } from '../composables/useCellWidth'
 import useCheckChange, { useCheckChangeEmits } from '../composables/useCheckChange'
 import useEvents from '../composables/useEvents'
 import useKeyboard, { useNavigationProps } from '../composables/useKeyboard'
+import type { QCalendarDaySlots } from '../slots'
 
 // Directives
 import ResizeObserver from '../directives/ResizeObserver'
@@ -64,6 +65,8 @@ export default defineComponent({
   name: 'QCalendarDay',
 
   directives: { ResizeObserver },
+
+  slots: Object as SlotsType<QCalendarDaySlots>,
 
   props: {
     ...useCommonProps,
@@ -86,7 +89,7 @@ export default defineComponent({
     ...getRawMouseEvents('-time'),
   ],
 
-  setup(props: IntervalProps, { slots, emit, expose }: SetupContext) {
+  setup(props: IntervalProps, { slots, emit, expose }) {
     const scrollArea = ref(null),
       pane = ref(null),
       headerColumnRef = ref(null),

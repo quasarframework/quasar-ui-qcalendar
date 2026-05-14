@@ -13,8 +13,8 @@ import {
   Transition,
   watch,
   withDirectives,
-  SetupContext,
   CSSProperties,
+  type SlotsType,
   VNode,
 } from 'vue'
 
@@ -45,6 +45,7 @@ import useCellWidth, { useCellWidthProps } from '../composables/useCellWidth'
 import useCheckChange, { useCheckChangeEmits } from '../composables/useCheckChange'
 import useEvents from '../composables/useEvents'
 import useKeyboard, { useNavigationProps } from '../composables/useKeyboard'
+import type { QCalendarAgendaSlots } from '../slots'
 
 // Directives
 import ResizeObserver from '../directives/ResizeObserver'
@@ -61,6 +62,8 @@ export default defineComponent({
   name: 'QCalendarAgenda',
 
   directives: { ResizeObserver },
+
+  slots: Object as SlotsType<QCalendarAgendaSlots>,
 
   props: {
     ...useCommonProps,
@@ -83,7 +86,7 @@ export default defineComponent({
 
   setup(
     props: AgendaProps & SchedulerProps & ResourceProps,
-    { slots, emit, expose }: SetupContext,
+    { slots, emit, expose },
   ) {
     const scrollArea = ref(null),
       pane = ref(null),

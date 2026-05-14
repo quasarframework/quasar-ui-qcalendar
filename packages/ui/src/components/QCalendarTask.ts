@@ -12,7 +12,7 @@ import {
   watch,
   withDirectives,
   CSSProperties,
-  SetupContext,
+  type SlotsType,
   VNode,
 } from 'vue'
 
@@ -37,6 +37,7 @@ import useCheckChange, { useCheckChangeEmits } from '../composables/useCheckChan
 import useEvents from '../composables/useEvents'
 import useKeyboard, { useNavigationProps } from '../composables/useKeyboard'
 import { /*useCellWidth,*/ useCellWidthProps } from '../composables/useCellWidth'
+import type { QCalendarTaskSlots } from '../slots'
 
 // Directives
 import ResizeObserver from '../directives/ResizeObserver'
@@ -52,6 +53,8 @@ export default defineComponent({
   name: 'QCalendarTask',
 
   directives: { ResizeObserver },
+
+  slots: Object as SlotsType<QCalendarTaskSlots>,
 
   props: {
     ...useTimesProps,
@@ -75,7 +78,7 @@ export default defineComponent({
     ...getRawMouseEvents('-head-day'),
   ],
 
-  setup(props, { slots, emit, expose }: SetupContext) {
+  setup(props, { slots, emit, expose }) {
     const scrollArea = ref(null),
       pane = ref(null),
       direction = ref<'next' | 'prev'>('next'),

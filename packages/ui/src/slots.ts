@@ -13,6 +13,31 @@ export interface IntervalSlotScope extends ScopeForSlot {
   selectedDate?: boolean
 }
 
+export interface HeadDayButtonSlotScope {
+  dayLabel: string
+  timestamp: Timestamp
+  activeDate: boolean
+  disabled?: boolean
+}
+
+export interface ColumnHeaderSlotScope {
+  timestamp: Timestamp
+  columnIndex: number
+}
+
+export interface SchedulerHeadDaySlotScope {
+  timestamp: Timestamp
+  activeDate: boolean
+  droppable: boolean
+  disabled: boolean
+  columnIndex: number
+}
+
+export interface SchedulerHeadWeekdaySlotScope {
+  timestamp: Timestamp
+  shortWeekdayLabel: boolean
+}
+
 export interface MonthWeekSlotScope {
   week: Timestamp[]
   weekdays: number[]
@@ -33,13 +58,13 @@ export interface MonthHeadWorkweekSlotScope {
 
 export interface MonthHeadDaySlotScope {
   activeDate: boolean
-  weekday: number
+  weekday?: number
   timestamp: Timestamp
   days: Timestamp[]
   index: number
   miniMode: boolean
-  droppable: boolean
-  disabled: boolean
+  droppable?: boolean
+  disabled?: boolean
 }
 
 export interface MonthDaySlotScope {
@@ -145,7 +170,7 @@ export interface SchedulerResourceDaysSlotScope {
   resourceIndex: number
   indentLevel: number
   expanded: boolean
-  cellWidth: string
+  cellWidth?: string
   timestamps: Timestamp[]
   days: Timestamp[]
 }
@@ -188,7 +213,7 @@ export interface TaskDaysSlotScope {
 }
 
 export interface TaskTitleSlotScope extends TaskHeadSlotScope {
-  cellWidth: string
+  cellWidth?: string
   title: unknown
   index: number
 }
@@ -225,10 +250,10 @@ export interface QCalendarDaySlots {
   'head-date'?: SlotProps<IntervalSlotScope>
   'head-day-event'?: SlotProps<IntervalSlotScope>
   'head-weekday-label'?: SlotProps<IntervalSlotScope>
-  'head-day-label'?: SlotProps<IntervalSlotScope>
-  'head-day-button'?: SlotProps<IntervalSlotScope>
-  'column-header-before'?: SlotProps<IntervalSlotScope>
-  'column-header-after'?: SlotProps<IntervalSlotScope>
+  'head-day-label'?: SlotProps<HeadDayButtonSlotScope>
+  'head-day-button'?: SlotProps<HeadDayButtonSlotScope>
+  'column-header-before'?: SlotProps<ColumnHeaderSlotScope>
+  'column-header-after'?: SlotProps<ColumnHeaderSlotScope>
   'day-container'?: SlotProps<DayContainerSlotScope>
   'day-body'?: SlotProps<IntervalSlotScope>
   'day-interval'?: SlotProps<IntervalSlotScope>
@@ -243,8 +268,8 @@ export interface QCalendarAgendaSlots {
   'head-date'?: SlotProps<IntervalSlotScope>
   'head-day-event'?: SlotProps<IntervalSlotScope>
   'head-weekday-label'?: SlotProps<IntervalSlotScope>
-  'head-day-label'?: SlotProps<IntervalSlotScope>
-  'head-day-button'?: SlotProps<IntervalSlotScope>
+  'head-day-label'?: SlotProps<HeadDayButtonSlotScope>
+  'head-day-button'?: SlotProps<HeadDayButtonSlotScope>
   'day-container'?: SlotProps<DayContainerSlotScope>
   column?: SlotProps<AgendaColumnSlotScope>
   day?: SlotProps<IntervalSlotScope>
@@ -275,14 +300,14 @@ export interface QCalendarResourceSlots {
 export interface QCalendarSchedulerSlots {
   'head-resources'?: SlotProps<ResourceHeadSlotScope>
   'head-days-events'?: SlotProps<HeadDaysEventsSlotScope>
-  'head-day'?: SlotProps<IntervalSlotScope>
-  'head-date'?: SlotProps<IntervalSlotScope>
-  'head-day-event'?: SlotProps<IntervalSlotScope>
-  'head-weekday-label'?: SlotProps<IntervalSlotScope>
-  'head-day-label'?: SlotProps<IntervalSlotScope>
-  'head-day-button'?: SlotProps<IntervalSlotScope>
-  'column-header-before'?: SlotProps<IntervalSlotScope>
-  'column-header-after'?: SlotProps<IntervalSlotScope>
+  'head-day'?: SlotProps<SchedulerHeadDaySlotScope>
+  'head-date'?: SlotProps<SchedulerHeadDaySlotScope>
+  'head-day-event'?: SlotProps<SchedulerHeadDaySlotScope>
+  'head-weekday-label'?: SlotProps<SchedulerHeadWeekdaySlotScope>
+  'head-day-label'?: SlotProps<HeadDayButtonSlotScope>
+  'head-day-button'?: SlotProps<HeadDayButtonSlotScope>
+  'column-header-before'?: SlotProps<ColumnHeaderSlotScope>
+  'column-header-after'?: SlotProps<ColumnHeaderSlotScope>
   'resource-row'?: SlotProps<ResourceRowSlotScope>
   'resource-label'?: SlotProps<ResourceLabelSlotScope>
   'resource-days'?: SlotProps<SchedulerResourceDaysSlotScope>
