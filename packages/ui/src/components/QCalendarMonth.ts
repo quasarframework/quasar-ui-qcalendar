@@ -872,8 +872,6 @@ export default defineComponent({
         monthLabel = undefined
       }
 
-      // TODO: if miniMode just return children?
-
       const data: Record<string, any> = {
         class: {
           'q-calendar-month__day--label__wrapper': true,

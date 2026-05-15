@@ -107,7 +107,7 @@ const topSections = {
       addedIn: parseAddedIn,
       quasarConfOptions: (val) => parseObjectWithPascalCaseProps(val, 'quasarConfOptions'),
       props: (val) => parseObjectWithKebabCaseProps(val, 'props'),
-      slots: (val) => Object(val) === val || "'slots' must be an Object", // TODO Qv3: kebabCase
+      slots: (val) => parseObjectWithKebabCaseProps(val, 'slots'),
       events: (val) => parseObjectWithKebabCaseProps(val, 'events'),
       methods: (val) => parseObjectWithPascalCaseProps(val, 'methods'),
       computedProps: (val) => parseObjectWithPascalCaseProps(val, 'computedProps'),

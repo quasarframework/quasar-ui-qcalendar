@@ -519,16 +519,8 @@ export default defineComponent({
             h(
               'div',
               {
-                // TODO: need a class
                 ref: headDayEventsParentRef,
-                style: {
-                  position: 'absolute',
-                  left: 0,
-                  top: 0,
-                  right: 0,
-                  overflow: 'hidden',
-                  zIndex: 1,
-                },
+                class: 'q-calendar__head-days-event-slot',
               },
               [slot({ scope: { days: days.value, ref: headDayEventsChildRef } })],
             ),
