@@ -31,7 +31,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      # Build all packages except docs
+      # Run lint checks
+      - name: Run lint
+        run: pnpm lint
+
+      # Build all packages, including docs
       - name: Build all packages
         run: pnpm build
 

@@ -33,7 +33,7 @@
     "@quasar/app-vite": "3.0.0-beta.14",
     "@quasar/quasar-ui-qcalendar": "workspace:*",
     "@types/markdown-it": "^14.1.2",
-    "@types/node": "^25.7.0",
+    "@types/node": "^25.8.0",
     "autoprefixer": "^10.5.0",
     "markdown-it": "^14.1.1",
     "typescript": "~5.9.3",
