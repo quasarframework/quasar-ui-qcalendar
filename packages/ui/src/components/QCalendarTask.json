@@ -28,7 +28,9 @@
                 "timestamp": {
                   "type": "Object",
                   "desc": "A timestamp object of the day",
-                  "__exemption": ["examples"]
+                  "__exemption": [
+                    "examples"
+                  ]
                 }
               }
             }
@@ -42,13 +44,17 @@
         "dayLabel": {
           "type": "String",
           "desc": "The string of the dayLabel",
-          "__exemption": ["examples"]
+          "__exemption": [
+            "examples"
+          ]
         },
         "timestamp": {
           "type": "Timestamp",
           "tsType": "Timestamp",
           "desc": "A timestamp for the day of the slotted content",
-          "__exemption": ["examples"]
+          "__exemption": [
+            "examples"
+          ]
         },
         "miniMode": {
           "type": "Boolean",
@@ -70,17 +76,23 @@
                 "timestamp": {
                   "type": "Object",
                   "desc": "A timestamp object of the day",
-                  "__exemption": ["examples"]
+                  "__exemption": [
+                    "examples"
+                  ]
                 },
                 "dayLabel": {
                   "type": "String",
                   "desc": "The string value that would have been used for the day label",
-                  "__exemption": ["examples"]
+                  "__exemption": [
+                    "examples"
+                  ]
                 },
                 "activeDate": {
                   "type": "Boolean",
                   "desc": "true if this is the active date",
-                  "__exemption": ["examples"]
+                  "__exemption": [
+                    "examples"
+                  ]
                 }
               }
             }
@@ -95,17 +107,23 @@
           "type": "Timestamp",
           "tsType": "Timestamp",
           "desc": "Timestamp object",
-          "__exemption": ["examples"]
+          "__exemption": [
+            "examples"
+          ]
         },
         "index": {
           "type": "Number",
           "desc": "The index of the iteration",
-          "__exemption": ["examples"]
+          "__exemption": [
+            "examples"
+          ]
         },
         "miniMode": {
           "type": "Boolean",
           "desc": "If currently in mini-mode (applied to Month calendars only)",
-          "__exemption": ["examples"]
+          "__exemption": [
+            "examples"
+          ]
         }
       }
     },
@@ -123,17 +141,23 @@
                 "timestamp": {
                   "type": "Object",
                   "desc": "A timestamp object of the day",
-                  "__exemption": ["examples"]
+                  "__exemption": [
+                    "examples"
+                  ]
                 },
                 "activeDate": {
                   "type": "Boolean",
                   "desc": "true if this is the active date",
-                  "__exemption": ["examples"]
+                  "__exemption": [
+                    "examples"
+                  ]
                 },
                 "columnIndex": {
                   "type": "Number",
                   "desc": "The column index if `column-count` is not undefined",
-                  "__exemption": ["examples"]
+                  "__exemption": [
+                    "examples"
+                  ]
                 }
               }
             }
@@ -149,6 +173,698 @@
     },
     "title-day": {
       "desc": "Use this slot to render title content for a specific day column"
+    }
+  },
+  "events": {
+    "click-day": {
+      "desc": "Occurs on a task day area",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [
+            "examples"
+          ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object",
+              "__exemption": [
+                "examples"
+              ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "The timestamp object",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "task": {
+                  "type": "Object",
+                  "desc": "The task object for the row",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "taskIndex": {
+                  "type": "Number",
+                  "desc": "The index of the task row",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the timestamp matches the active date",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "droppable": {
+                  "type": [
+                    "Boolean",
+                    "String"
+                  ],
+                  "desc": "The current drag/drop state for the task day cell",
+                  "__exemption": [
+                    "examples"
+                  ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [
+                "examples"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "contextmenu-day": {
+      "desc": "Occurs on a task day area",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [
+            "examples"
+          ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object",
+              "__exemption": [
+                "examples"
+              ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "The timestamp object",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "task": {
+                  "type": "Object",
+                  "desc": "The task object for the row",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "taskIndex": {
+                  "type": "Number",
+                  "desc": "The index of the task row",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the timestamp matches the active date",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "droppable": {
+                  "type": [
+                    "Boolean",
+                    "String"
+                  ],
+                  "desc": "The current drag/drop state for the task day cell",
+                  "__exemption": [
+                    "examples"
+                  ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [
+                "examples"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "mousedown-day": {
+      "desc": "Occurs on a task day area",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [
+            "examples"
+          ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object",
+              "__exemption": [
+                "examples"
+              ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "The timestamp object",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "task": {
+                  "type": "Object",
+                  "desc": "The task object for the row",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "taskIndex": {
+                  "type": "Number",
+                  "desc": "The index of the task row",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the timestamp matches the active date",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "droppable": {
+                  "type": [
+                    "Boolean",
+                    "String"
+                  ],
+                  "desc": "The current drag/drop state for the task day cell",
+                  "__exemption": [
+                    "examples"
+                  ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [
+                "examples"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "mousemove-day": {
+      "desc": "Occurs on a task day area",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [
+            "examples"
+          ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object",
+              "__exemption": [
+                "examples"
+              ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "The timestamp object",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "task": {
+                  "type": "Object",
+                  "desc": "The task object for the row",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "taskIndex": {
+                  "type": "Number",
+                  "desc": "The index of the task row",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the timestamp matches the active date",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "droppable": {
+                  "type": [
+                    "Boolean",
+                    "String"
+                  ],
+                  "desc": "The current drag/drop state for the task day cell",
+                  "__exemption": [
+                    "examples"
+                  ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [
+                "examples"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "mouseup-day": {
+      "desc": "Occurs on a task day area",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [
+            "examples"
+          ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object",
+              "__exemption": [
+                "examples"
+              ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "The timestamp object",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "task": {
+                  "type": "Object",
+                  "desc": "The task object for the row",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "taskIndex": {
+                  "type": "Number",
+                  "desc": "The index of the task row",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the timestamp matches the active date",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "droppable": {
+                  "type": [
+                    "Boolean",
+                    "String"
+                  ],
+                  "desc": "The current drag/drop state for the task day cell",
+                  "__exemption": [
+                    "examples"
+                  ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [
+                "examples"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "mouseenter-day": {
+      "desc": "Occurs on a task day area",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [
+            "examples"
+          ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object",
+              "__exemption": [
+                "examples"
+              ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "The timestamp object",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "task": {
+                  "type": "Object",
+                  "desc": "The task object for the row",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "taskIndex": {
+                  "type": "Number",
+                  "desc": "The index of the task row",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the timestamp matches the active date",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "droppable": {
+                  "type": [
+                    "Boolean",
+                    "String"
+                  ],
+                  "desc": "The current drag/drop state for the task day cell",
+                  "__exemption": [
+                    "examples"
+                  ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [
+                "examples"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "mouseleave-day": {
+      "desc": "Occurs on a task day area",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [
+            "examples"
+          ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object",
+              "__exemption": [
+                "examples"
+              ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "The timestamp object",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "task": {
+                  "type": "Object",
+                  "desc": "The task object for the row",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "taskIndex": {
+                  "type": "Number",
+                  "desc": "The index of the task row",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the timestamp matches the active date",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "droppable": {
+                  "type": [
+                    "Boolean",
+                    "String"
+                  ],
+                  "desc": "The current drag/drop state for the task day cell",
+                  "__exemption": [
+                    "examples"
+                  ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [
+                "examples"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "touchstart-day": {
+      "desc": "Occurs on a task day area",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [
+            "examples"
+          ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object",
+              "__exemption": [
+                "examples"
+              ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "The timestamp object",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "task": {
+                  "type": "Object",
+                  "desc": "The task object for the row",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "taskIndex": {
+                  "type": "Number",
+                  "desc": "The index of the task row",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the timestamp matches the active date",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "droppable": {
+                  "type": [
+                    "Boolean",
+                    "String"
+                  ],
+                  "desc": "The current drag/drop state for the task day cell",
+                  "__exemption": [
+                    "examples"
+                  ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [
+                "examples"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "touchmove-day": {
+      "desc": "Occurs on a task day area",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [
+            "examples"
+          ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object",
+              "__exemption": [
+                "examples"
+              ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "The timestamp object",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "task": {
+                  "type": "Object",
+                  "desc": "The task object for the row",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "taskIndex": {
+                  "type": "Number",
+                  "desc": "The index of the task row",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the timestamp matches the active date",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "droppable": {
+                  "type": [
+                    "Boolean",
+                    "String"
+                  ],
+                  "desc": "The current drag/drop state for the task day cell",
+                  "__exemption": [
+                    "examples"
+                  ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [
+                "examples"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "touchend-day": {
+      "desc": "Occurs on a task day area",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [
+            "examples"
+          ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object",
+              "__exemption": [
+                "examples"
+              ],
+              "definition": {
+                "timestamp": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "The timestamp object",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "task": {
+                  "type": "Object",
+                  "desc": "The task object for the row",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "taskIndex": {
+                  "type": "Number",
+                  "desc": "The index of the task row",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "activeDate": {
+                  "type": "Boolean",
+                  "desc": "True if the timestamp matches the active date",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "droppable": {
+                  "type": [
+                    "Boolean",
+                    "String"
+                  ],
+                  "desc": "The current drag/drop state for the task day cell",
+                  "__exemption": [
+                    "examples"
+                  ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [
+                "examples"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }

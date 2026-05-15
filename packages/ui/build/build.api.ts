@@ -635,6 +635,17 @@ function deCapitalize(str) {
   return str.charAt(0).toLowerCase() + str.slice(1)
 }
 
+function normalizeEmitName(str) {
+  return kebabCase(deCapitalize(str))
+}
+
+function getRuntimeEmitPropName(str) {
+  const [base, ...rest] = str.split(':')
+  const normalizedName = [camelCase(base), ...rest.map((part) => camelCase(part))].join(':')
+
+  return `on${capitalize(normalizedName)}`
+}
+
 const arrayRE = /(\[.*\])/
 const objectRE = /(\{.*\})/
 const functionRE = /^(\s*\(\s*\)\s*=>\s*).+/
@@ -1226,6 +1237,7 @@ function fillAPI(apiType, list, encodeFn) {
 
       const runtimeProps = RuntimeComponent.props || {}
       const runtimeEmits = RuntimeComponent.emits || []
+      const normalizedRuntimeEmits = new Set(runtimeEmits.map((name) => normalizeEmitName(name)))
 
       let match
 
@@ -1244,10 +1256,10 @@ function fillAPI(apiType, list, encodeFn) {
 
       while ((match = emitRE.exec(componentContent)) !== null) {
         const matchedEmit = match[1]
-        const emitName = kebabCase(deCapitalize(matchedEmit)) // deCapitalize because: QTable > emit('RowClick')
-        const propName = `on${capitalize(matchedEmit)}`
+        const emitName = normalizeEmitName(matchedEmit)
+        const propName = getRuntimeEmitPropName(matchedEmit)
 
-        if (runtimeEmits.includes(matchedEmit) === false && runtimeProps[propName] === void 0) {
+        if (normalizedRuntimeEmits.has(emitName) === false && runtimeProps[propName] === void 0) {
           logError(
             `${componentName}: Component is emitting "${matchedEmit}" event without having ` +
               'it defined in its code; Solutions:' +
@@ -1280,14 +1292,13 @@ function fillAPI(apiType, list, encodeFn) {
 
         if (/^on[A-Z]/.test(runtimePropName) === true) {
           const strippedPropName = runtimePropName.slice(2) // strip "on" prefix
-          const runtimeEmitName = deCapitalize(strippedPropName)
-          const apiEventName = kebabCase(strippedPropName)
+          const apiEventName = normalizeEmitName(strippedPropName)
 
           // should not duplicate as prop and emit
-          if (runtimeEmits.includes(runtimeEmitName) === true) {
+          if (normalizedRuntimeEmits.has(apiEventName) === true) {
             logError(
               `${componentName}: Component has duplicated prop (${runtimePropName}) + ` +
-                `emit (${runtimeEmitName}); only one should be defined`,
+                `emit (${apiEventName}); only one should be defined`,
             )
             // hasError++
           }
@@ -1477,7 +1488,7 @@ function fillAPI(apiType, list, encodeFn) {
 
       // runtime emits should be defined in the API as events
       for (const runtimeEmitName of runtimeEmits) {
-        const apiEventName = kebabCase(runtimeEmitName)
+        const apiEventName = normalizeEmitName(runtimeEmitName)
 
         if (apiEvents[apiEventName] === void 0) {
           if (showWarnings) {
@@ -1488,24 +1499,13 @@ function fillAPI(apiType, list, encodeFn) {
             // hasError++
           }
         }
-
-        if (runtimeEmitName.indexOf('-') !== -1) {
-          if (showWarnings) {
-            logWarning(
-              `${componentName}: "emits" -> "${runtimeEmitName}" should be` +
-                ' in camelCase (found kebab-case)',
-            )
-            // hasError++
-          }
-        }
       }
 
       // API defined events should exist in the component
       for (const apiEventName in apiEvents) {
         const apiEntry = apiEvents[apiEventName]
 
-        const runtimeEmitName = camelCase(apiEventName)
-        const runtimePropName = `on${capitalize(runtimeEmitName)}`
+        const runtimePropName = getRuntimeEmitPropName(apiEventName)
 
         if (apiEntry.passthrough === true) {
           if (runtimeProps[runtimePropName] !== void 0) {
@@ -1517,10 +1517,10 @@ function fillAPI(apiType, list, encodeFn) {
             // hasError++
           }
 
-          if (runtimeEmits.includes(runtimeEmitName) === true) {
+          if (normalizedRuntimeEmits.has(apiEventName) === true) {
             logError(
               `${name}: "events" -> "${apiEventName}" should NOT be a "passthrough" ` +
-                `as it exists in the Component (as emits: ${runtimeEmitName})`,
+                `as it exists in the Component (as emits: ${apiEventName})`,
             )
             console.log(apiEntry)
             // hasError++
@@ -1531,7 +1531,7 @@ function fillAPI(apiType, list, encodeFn) {
 
         if (
           runtimeProps[runtimePropName] === void 0 &&
-          runtimeEmits.includes(runtimeEmitName) === false
+          normalizedRuntimeEmits.has(apiEventName) === false
         ) {
           if (showWarnings) {
             logWarning(

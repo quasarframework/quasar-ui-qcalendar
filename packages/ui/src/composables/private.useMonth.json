@@ -1,18 +1,30 @@
 {
   "props": {
     "day-height": {
-      "type": ["Number", "String"],
+      "type": [
+        "Number",
+        "String"
+      ],
       "category": "behavior",
       "desc": "The maximum height in pixels for the day height. Using 0 will make the rows variable height based on content.",
       "default": "0",
-      "examples": ["'80'", "100"]
+      "examples": [
+        "'80'",
+        "100"
+      ]
     },
     "day-min-height": {
-      "type": ["Number", "String"],
+      "type": [
+        "Number",
+        "String"
+      ],
       "category": "behavior",
       "desc": "The minimum height to be used",
-      "default": "40",
-      "examples": ["'80'", "100"]
+      "default": "0",
+      "examples": [
+        "'80'",
+        "100"
+      ]
     },
     "day-style": {
       "type": "Function",
@@ -25,15 +37,25 @@
           "type": "Timestamp",
           "tsType": "Timestamp",
           "desc": "A timestamp object associated with the day",
-          "__exemption": ["examples"]
+          "__exemption": [
+            "examples"
+          ]
         }
       },
       "returns": {
-        "type": ["Array", "Object", "String"],
+        "type": [
+          "Array",
+          "Object",
+          "String"
+        ],
         "desc": "A Vue style object",
-        "examples": ["{ color: '#ccc' }"]
+        "examples": [
+          "{ color: '#ccc' }"
+        ]
       },
-      "applicable": ["month"],
+      "applicable": [
+        "month"
+      ],
       "examples": [
         "(timestamp) => { return { 'background-color': '#c0c0c0' } }",
         "(timestamp) => dayStyle(timestamp)"
@@ -49,46 +71,66 @@
           "type": "Timestamp",
           "tsType": "Timestamp",
           "desc": "A timestamp object associated with the day",
-          "__exemption": ["examples"]
+          "__exemption": [
+            "examples"
+          ]
         }
       },
       "returns": {
-        "type": ["Array", "Object", "String"],
+        "type": [
+          "Array",
+          "Object",
+          "String"
+        ],
         "desc": "A Vue style object of classes",
-        "examples": ["{ 'q-range': true }"]
+        "examples": [
+          "{ 'q-range': true }"
+        ]
       },
       "default": "# null",
-      "applicable": ["month"],
+      "applicable": [
+        "month"
+      ],
       "examples": [
         "(timestamp) => { return { 'q-range': true } }",
         "(timestamp) => getDayClass(timestamp)"
       ]
     },
     "weekday-style": {
-      "type": ["Function"],
+      "type": [
+        "Function"
+      ],
       "category": "style",
       "desc": "Gets called to provide custom styling of a weekday",
       "params": {
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": ["examples"],
+          "__exemption": [
+            "examples"
+          ],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope data passed to the function",
-              "__exemption": ["examples"],
+              "__exemption": [
+                "examples"
+              ],
               "definition": {
                 "timestamp": {
                   "type": "Object",
                   "tsType": "Timestamp",
                   "desc": "A timestamp object associated with the weekday",
-                  "__exemption": ["examples"]
+                  "__exemption": [
+                    "examples"
+                  ]
                 },
                 "columnIndex": {
                   "type": "Number",
                   "desc": "The index of the column",
-                  "__exemption": ["examples"]
+                  "__exemption": [
+                    "examples"
+                  ]
                 },
                 "activeDate": {
                   "type": "Boolean",
@@ -106,7 +148,9 @@
       "returns": {
         "type": "Object",
         "desc": "A Vue style object",
-        "examples": ["{ color: '#ccc' }"]
+        "examples": [
+          "{ color: '#ccc' }"
+        ]
       },
       "default": "# null",
       "__runtimeDefault": true,
@@ -125,23 +169,31 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": ["examples"],
+          "__exemption": [
+            "examples"
+          ],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope data passed to the function",
-              "__exemption": ["examples"],
+              "__exemption": [
+                "examples"
+              ],
               "definition": {
                 "timestamp": {
                   "type": "Object",
                   "tsType": "Timestamp",
                   "desc": "A timestamp object associated with the weekday",
-                  "__exemption": ["examples"]
+                  "__exemption": [
+                    "examples"
+                  ]
                 },
                 "columnIndex": {
                   "type": "Number",
                   "desc": "The index of the column",
-                  "__exemption": ["examples"]
+                  "__exemption": [
+                    "examples"
+                  ]
                 },
                 "activeDate": {
                   "type": "Boolean",
@@ -159,9 +211,14 @@
       "returns": {
         "type": "Object",
         "desc": "A Vue style object of classes",
-        "examples": ["{ 'my-class': true }"]
+        "examples": [
+          "{ 'my-class': true }"
+        ]
       },
-      "examples": ["(data) => { return { 'my-class': true } }", "(data) => getWeekdayClass(data)"]
+      "examples": [
+        "(data) => { return { 'my-class': true } }",
+        "(data) => getWeekdayClass(data)"
+      ]
     },
     "day-padding": {
       "type": "String",
@@ -169,91 +226,159 @@
       "desc": "Overrides the padding to be used for a day element. You can use any CSS padding format",
       "__runtimeDefault": true,
       "default": "'48px 2px'",
-      "applicable": ["month"],
-      "examples": ["'20px 5px'"]
+      "applicable": [
+        "month"
+      ],
+      "examples": [
+        "'20px 5px'"
+      ]
     },
     "min-weeks": {
-      "type": ["Number", "String"],
+      "type": [
+        "Number",
+        "String"
+      ],
       "category": "model",
       "desc": "The minimum number of weeks to be displayed",
       "default": "1",
-      "applicable": ["month"],
-      "examples": ["2"]
+      "applicable": [
+        "month"
+      ],
+      "examples": [
+        "2"
+      ]
     },
     "short-month-label": {
       "type": "Boolean",
       "category": "style",
       "desc": "Makes the month label short. January becomes Jan...",
-      "applicable": ["month"]
+      "applicable": [
+        "month"
+      ]
     },
     "show-work-weeks": {
       "type": "Boolean",
       "category": "content",
       "desc": "Show work weeks",
-      "applicable": ["month"]
+      "applicable": [
+        "month"
+      ]
     },
     "show-month-label": {
       "type": "Boolean",
       "category": "content",
       "desc": "Shows the month label - this occurs on the 1st of the month",
       "default": "true",
-      "applicable": ["month"]
+      "applicable": [
+        "month"
+      ]
     },
     "show-day-of-year-label": {
       "type": "Boolean",
       "category": "content",
       "desc": "Show the day of the year - this occurs in the top right of each day element. If show-month-label is true, then that day is skipped",
-      "applicable": ["month"]
+      "applicable": [
+        "month"
+      ]
     },
     "enable-outside-days": {
       "type": "Boolean",
       "category": "behavior",
       "desc": "By default, outside days are disabled in month view. Use the property to enable them.",
-      "applicable": ["month"]
+      "applicable": [
+        "month"
+      ]
     },
     "no-outside-days": {
       "type": "Boolean",
       "category": "behavior",
       "desc": "Do not display the labels of outside days",
-      "applicable": ["month"]
+      "applicable": [
+        "month"
+      ]
     },
     "hover": {
       "type": "Boolean",
       "category": "style",
       "desc": "Changes the style `selected-start-end-dates` selection when in `mini-mode`. Typically, set this to `true` on `mousedown` and `false` on `mouseup`",
-      "applicable": ["month (mini-mode)"]
+      "applicable": [
+        "month (mini-mode)"
+      ]
     },
     "mini-mode": {
-      "type": ["Boolean", "String"],
+      "type": [
+        "Boolean",
+        "String"
+      ],
       "category": "behavior",
-      "values": ["true", "false", "'auto'"],
+      "values": [
+        "true",
+        "false",
+        "'auto'"
+      ],
       "desc": "When `true` puts the calendar into mini-mode. When `auto`, then the property `breakpoint` is used to determine when the calendar will be put into mini-mode",
-      "applicable": ["month"],
-      "examples": ["true", "'auto'"]
+      "applicable": [
+        "month"
+      ],
+      "examples": [
+        "true",
+        "'auto'"
+      ]
     },
     "breakpoint": {
-      "type": ["String", "Number"],
+      "type": [
+        "String",
+        "Number"
+      ],
       "category": "behavior",
-      "values": ["'xs'", "'sm'", "'md'", "'lg'", "'xl'"],
+      "values": [
+        "'xs'",
+        "'sm'",
+        "'md'",
+        "'lg'",
+        "'xl'"
+      ],
       "desc": "This property is used when `mini-mode` is set with `auto`",
       "default": "'md'",
-      "applicable": ["month"],
-      "examples": ["'sm'", "'md'"]
+      "applicable": [
+        "month"
+      ],
+      "examples": [
+        "'sm'",
+        "'md'"
+      ]
     },
     "month-label-size": {
       "type": "String",
       "category": "style",
-      "values": ["'xxs'", "'xs'", "'sm'", "'md'", "'lg'", "'xl'", "'xxl'"],
+      "values": [
+        "'xxs'",
+        "'xs'",
+        "'sm'",
+        "'md'",
+        "'lg'",
+        "'xl'",
+        "'xxl'"
+      ],
       "desc": "This property changes the size of the inline month label text in month cells. It only has a visible effect when the month label is rendered, such as with `date-align` set to `left` or `right`. This property is ignored when `mini-mode` is set to true",
       "default": "'sm'",
-      "applicable": ["month"],
-      "examples": ["'sm'", "'md'", "'1rem'", "'14px'"]
+      "applicable": [
+        "month"
+      ],
+      "examples": [
+        "'sm'",
+        "'md'",
+        "'1rem'",
+        "'14px'"
+      ]
     }
   },
   "events": {
     "mini-mode": {
       "desc": "Event occurs when switching to/from mini-mode, when the `breakpoint` property is set to `auto`",
-      "applicable": ["Month"],
+      "applicable": [
+        "Month"
+      ],
       "params": {
         "value": {
           "type": "Boolean",
@@ -263,23 +388,31 @@
     },
     "click-day": {
       "desc": "Occurs on day",
-      "applicable": ["month"],
+      "applicable": [
+        "month"
+      ],
       "params": {
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": ["examples"],
+          "__exemption": [
+            "examples"
+          ],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope object",
-              "__exemption": ["examples"],
+              "__exemption": [
+                "examples"
+              ],
               "definition": {
                 "timestamp": {
                   "type": "Object",
                   "tsType": "Timestamp",
                   "desc": "The timestamp object",
-                  "__exemption": ["examples"]
+                  "__exemption": [
+                    "examples"
+                  ]
                 },
                 "outside": {
                   "type": "Boolean",
@@ -294,7 +427,9 @@
             "event": {
               "type": "Object",
               "desc": "JS event object",
-              "__exemption": ["examples"]
+              "__exemption": [
+                "examples"
+              ]
             }
           }
         }
@@ -302,23 +437,31 @@
     },
     "contextmenu-day": {
       "desc": "Occurs on day",
-      "applicable": ["month"],
+      "applicable": [
+        "month"
+      ],
       "params": {
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": ["examples"],
+          "__exemption": [
+            "examples"
+          ],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope object",
-              "__exemption": ["examples"],
+              "__exemption": [
+                "examples"
+              ],
               "definition": {
                 "timestamp": {
                   "type": "Object",
                   "tsType": "Timestamp",
                   "desc": "The timestamp object",
-                  "__exemption": ["examples"]
+                  "__exemption": [
+                    "examples"
+                  ]
                 },
                 "outside": {
                   "type": "Boolean",
@@ -333,7 +476,9 @@
             "event": {
               "type": "Object",
               "desc": "JS event object",
-              "__exemption": ["examples"]
+              "__exemption": [
+                "examples"
+              ]
             }
           }
         }
@@ -341,23 +486,31 @@
     },
     "mousedown-day": {
       "desc": "Occurs on day",
-      "applicable": ["month"],
+      "applicable": [
+        "month"
+      ],
       "params": {
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": ["examples"],
+          "__exemption": [
+            "examples"
+          ],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope object",
-              "__exemption": ["examples"],
+              "__exemption": [
+                "examples"
+              ],
               "definition": {
                 "timestamp": {
                   "type": "Object",
                   "tsType": "Timestamp",
                   "desc": "The timestamp object",
-                  "__exemption": ["examples"]
+                  "__exemption": [
+                    "examples"
+                  ]
                 },
                 "outside": {
                   "type": "Boolean",
@@ -372,7 +525,9 @@
             "event": {
               "type": "Object",
               "desc": "JS event object",
-              "__exemption": ["examples"]
+              "__exemption": [
+                "examples"
+              ]
             }
           }
         }
@@ -380,23 +535,31 @@
     },
     "mouseup-day": {
       "desc": "Occurs on day",
-      "applicable": ["month"],
+      "applicable": [
+        "month"
+      ],
       "params": {
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": ["examples"],
+          "__exemption": [
+            "examples"
+          ],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope object",
-              "__exemption": ["examples"],
+              "__exemption": [
+                "examples"
+              ],
               "definition": {
                 "timestamp": {
                   "type": "Object",
                   "tsType": "Timestamp",
                   "desc": "The timestamp object",
-                  "__exemption": ["examples"]
+                  "__exemption": [
+                    "examples"
+                  ]
                 },
                 "outside": {
                   "type": "Boolean",
@@ -411,7 +574,9 @@
             "event": {
               "type": "Object",
               "desc": "JS event object",
-              "__exemption": ["examples"]
+              "__exemption": [
+                "examples"
+              ]
             }
           }
         }
@@ -419,23 +584,31 @@
     },
     "mouseenter-day": {
       "desc": "Occurs on day",
-      "applicable": ["month"],
+      "applicable": [
+        "month"
+      ],
       "params": {
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": ["examples"],
+          "__exemption": [
+            "examples"
+          ],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope object",
-              "__exemption": ["examples"],
+              "__exemption": [
+                "examples"
+              ],
               "definition": {
                 "timestamp": {
                   "type": "Object",
                   "tsType": "Timestamp",
                   "desc": "The timestamp object",
-                  "__exemption": ["examples"]
+                  "__exemption": [
+                    "examples"
+                  ]
                 },
                 "outside": {
                   "type": "Boolean",
@@ -450,7 +623,9 @@
             "event": {
               "type": "Object",
               "desc": "JS event object",
-              "__exemption": ["examples"]
+              "__exemption": [
+                "examples"
+              ]
             }
           }
         }
@@ -458,23 +633,31 @@
     },
     "mouseleave-day": {
       "desc": "Occurs on day",
-      "applicable": ["month"],
+      "applicable": [
+        "month"
+      ],
       "params": {
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": ["examples"],
+          "__exemption": [
+            "examples"
+          ],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope object",
-              "__exemption": ["examples"],
+              "__exemption": [
+                "examples"
+              ],
               "definition": {
                 "timestamp": {
                   "type": "Object",
                   "tsType": "Timestamp",
                   "desc": "The timestamp object",
-                  "__exemption": ["examples"]
+                  "__exemption": [
+                    "examples"
+                  ]
                 },
                 "outside": {
                   "type": "Boolean",
@@ -489,7 +672,9 @@
             "event": {
               "type": "Object",
               "desc": "JS event object",
-              "__exemption": ["examples"]
+              "__exemption": [
+                "examples"
+              ]
             }
           }
         }
@@ -497,23 +682,31 @@
     },
     "mousemove-day": {
       "desc": "Occurs on day",
-      "applicable": ["month"],
+      "applicable": [
+        "month"
+      ],
       "params": {
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": ["examples"],
+          "__exemption": [
+            "examples"
+          ],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope object",
-              "__exemption": ["examples"],
+              "__exemption": [
+                "examples"
+              ],
               "definition": {
                 "timestamp": {
                   "type": "Object",
                   "tsType": "Timestamp",
                   "desc": "The timestamp object",
-                  "__exemption": ["examples"]
+                  "__exemption": [
+                    "examples"
+                  ]
                 },
                 "outside": {
                   "type": "Boolean",
@@ -528,7 +721,9 @@
             "event": {
               "type": "Object",
               "desc": "JS event object",
-              "__exemption": ["examples"]
+              "__exemption": [
+                "examples"
+              ]
             }
           }
         }
@@ -536,23 +731,31 @@
     },
     "touchstart-day": {
       "desc": "Occurs on day",
-      "applicable": ["month"],
+      "applicable": [
+        "month"
+      ],
       "params": {
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": ["examples"],
+          "__exemption": [
+            "examples"
+          ],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope object",
-              "__exemption": ["examples"],
+              "__exemption": [
+                "examples"
+              ],
               "definition": {
                 "timestamp": {
                   "type": "Object",
                   "tsType": "Timestamp",
                   "desc": "The timestamp object",
-                  "__exemption": ["examples"]
+                  "__exemption": [
+                    "examples"
+                  ]
                 },
                 "outside": {
                   "type": "Boolean",
@@ -567,7 +770,9 @@
             "event": {
               "type": "Object",
               "desc": "JS event object",
-              "__exemption": ["examples"]
+              "__exemption": [
+                "examples"
+              ]
             }
           }
         }
@@ -575,23 +780,31 @@
     },
     "touchend-day": {
       "desc": "Occurs on day",
-      "applicable": ["month"],
+      "applicable": [
+        "month"
+      ],
       "params": {
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": ["examples"],
+          "__exemption": [
+            "examples"
+          ],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope object",
-              "__exemption": ["examples"],
+              "__exemption": [
+                "examples"
+              ],
               "definition": {
                 "timestamp": {
                   "type": "Object",
                   "tsType": "Timestamp",
                   "desc": "The timestamp object",
-                  "__exemption": ["examples"]
+                  "__exemption": [
+                    "examples"
+                  ]
                 },
                 "outside": {
                   "type": "Boolean",
@@ -606,7 +819,9 @@
             "event": {
               "type": "Object",
               "desc": "JS event object",
-              "__exemption": ["examples"]
+              "__exemption": [
+                "examples"
+              ]
             }
           }
         }
@@ -614,23 +829,31 @@
     },
     "touchmove-day": {
       "desc": "Occurs on day",
-      "applicable": ["month"],
+      "applicable": [
+        "month"
+      ],
       "params": {
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": ["examples"],
+          "__exemption": [
+            "examples"
+          ],
           "definition": {
             "scope": {
               "type": "Object",
               "desc": "The scope object",
-              "__exemption": ["examples"],
+              "__exemption": [
+                "examples"
+              ],
               "definition": {
                 "timestamp": {
                   "type": "Object",
                   "tsType": "Timestamp",
                   "desc": "The timestamp object",
-                  "__exemption": ["examples"]
+                  "__exemption": [
+                    "examples"
+                  ]
                 },
                 "outside": {
                   "type": "Boolean",
@@ -645,7 +868,989 @@
             "event": {
               "type": "Object",
               "desc": "JS event object",
-              "__exemption": ["examples"]
+              "__exemption": [
+                "examples"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "click-workweek": {
+      "desc": "Occurs on the workweek row",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [
+            "examples"
+          ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object",
+              "__exemption": [
+                "examples"
+              ],
+              "definition": {
+                "workweekLabel": {
+                  "type": "String",
+                  "desc": "The rendered workweek label",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "week": {
+                  "type": "Array",
+                  "tsType": "TimestampArray",
+                  "desc": "The timestamps in the workweek row",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "miniMode": {
+                  "type": "Boolean",
+                  "desc": "True when the calendar is currently in mini-mode",
+                  "__exemption": [
+                    "examples"
+                  ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [
+                "examples"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "contextmenu-workweek": {
+      "desc": "Occurs on the workweek row",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [
+            "examples"
+          ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object",
+              "__exemption": [
+                "examples"
+              ],
+              "definition": {
+                "workweekLabel": {
+                  "type": "String",
+                  "desc": "The rendered workweek label",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "week": {
+                  "type": "Array",
+                  "tsType": "TimestampArray",
+                  "desc": "The timestamps in the workweek row",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "miniMode": {
+                  "type": "Boolean",
+                  "desc": "True when the calendar is currently in mini-mode",
+                  "__exemption": [
+                    "examples"
+                  ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [
+                "examples"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "mousedown-workweek": {
+      "desc": "Occurs on the workweek row",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [
+            "examples"
+          ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object",
+              "__exemption": [
+                "examples"
+              ],
+              "definition": {
+                "workweekLabel": {
+                  "type": "String",
+                  "desc": "The rendered workweek label",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "week": {
+                  "type": "Array",
+                  "tsType": "TimestampArray",
+                  "desc": "The timestamps in the workweek row",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "miniMode": {
+                  "type": "Boolean",
+                  "desc": "True when the calendar is currently in mini-mode",
+                  "__exemption": [
+                    "examples"
+                  ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [
+                "examples"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "mousemove-workweek": {
+      "desc": "Occurs on the workweek row",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [
+            "examples"
+          ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object",
+              "__exemption": [
+                "examples"
+              ],
+              "definition": {
+                "workweekLabel": {
+                  "type": "String",
+                  "desc": "The rendered workweek label",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "week": {
+                  "type": "Array",
+                  "tsType": "TimestampArray",
+                  "desc": "The timestamps in the workweek row",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "miniMode": {
+                  "type": "Boolean",
+                  "desc": "True when the calendar is currently in mini-mode",
+                  "__exemption": [
+                    "examples"
+                  ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [
+                "examples"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "mouseup-workweek": {
+      "desc": "Occurs on the workweek row",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [
+            "examples"
+          ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object",
+              "__exemption": [
+                "examples"
+              ],
+              "definition": {
+                "workweekLabel": {
+                  "type": "String",
+                  "desc": "The rendered workweek label",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "week": {
+                  "type": "Array",
+                  "tsType": "TimestampArray",
+                  "desc": "The timestamps in the workweek row",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "miniMode": {
+                  "type": "Boolean",
+                  "desc": "True when the calendar is currently in mini-mode",
+                  "__exemption": [
+                    "examples"
+                  ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [
+                "examples"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "mouseenter-workweek": {
+      "desc": "Occurs on the workweek row",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [
+            "examples"
+          ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object",
+              "__exemption": [
+                "examples"
+              ],
+              "definition": {
+                "workweekLabel": {
+                  "type": "String",
+                  "desc": "The rendered workweek label",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "week": {
+                  "type": "Array",
+                  "tsType": "TimestampArray",
+                  "desc": "The timestamps in the workweek row",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "miniMode": {
+                  "type": "Boolean",
+                  "desc": "True when the calendar is currently in mini-mode",
+                  "__exemption": [
+                    "examples"
+                  ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [
+                "examples"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "mouseleave-workweek": {
+      "desc": "Occurs on the workweek row",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [
+            "examples"
+          ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object",
+              "__exemption": [
+                "examples"
+              ],
+              "definition": {
+                "workweekLabel": {
+                  "type": "String",
+                  "desc": "The rendered workweek label",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "week": {
+                  "type": "Array",
+                  "tsType": "TimestampArray",
+                  "desc": "The timestamps in the workweek row",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "miniMode": {
+                  "type": "Boolean",
+                  "desc": "True when the calendar is currently in mini-mode",
+                  "__exemption": [
+                    "examples"
+                  ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [
+                "examples"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "touchstart-workweek": {
+      "desc": "Occurs on the workweek row",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [
+            "examples"
+          ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object",
+              "__exemption": [
+                "examples"
+              ],
+              "definition": {
+                "workweekLabel": {
+                  "type": "String",
+                  "desc": "The rendered workweek label",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "week": {
+                  "type": "Array",
+                  "tsType": "TimestampArray",
+                  "desc": "The timestamps in the workweek row",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "miniMode": {
+                  "type": "Boolean",
+                  "desc": "True when the calendar is currently in mini-mode",
+                  "__exemption": [
+                    "examples"
+                  ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [
+                "examples"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "touchmove-workweek": {
+      "desc": "Occurs on the workweek row",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [
+            "examples"
+          ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object",
+              "__exemption": [
+                "examples"
+              ],
+              "definition": {
+                "workweekLabel": {
+                  "type": "String",
+                  "desc": "The rendered workweek label",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "week": {
+                  "type": "Array",
+                  "tsType": "TimestampArray",
+                  "desc": "The timestamps in the workweek row",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "miniMode": {
+                  "type": "Boolean",
+                  "desc": "True when the calendar is currently in mini-mode",
+                  "__exemption": [
+                    "examples"
+                  ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [
+                "examples"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "touchend-workweek": {
+      "desc": "Occurs on the workweek row",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [
+            "examples"
+          ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object",
+              "__exemption": [
+                "examples"
+              ],
+              "definition": {
+                "workweekLabel": {
+                  "type": "String",
+                  "desc": "The rendered workweek label",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "week": {
+                  "type": "Array",
+                  "tsType": "TimestampArray",
+                  "desc": "The timestamps in the workweek row",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "miniMode": {
+                  "type": "Boolean",
+                  "desc": "True when the calendar is currently in mini-mode",
+                  "__exemption": [
+                    "examples"
+                  ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [
+                "examples"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "click-head-workweek": {
+      "desc": "Occurs on the workweek header",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [
+            "examples"
+          ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object",
+              "__exemption": [
+                "examples"
+              ],
+              "definition": {
+                "start": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "The first day of the rendered workweek",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "end": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "The last day of the rendered workweek",
+                  "__exemption": [
+                    "examples"
+                  ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [
+                "examples"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "contextmenu-head-workweek": {
+      "desc": "Occurs on the workweek header",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [
+            "examples"
+          ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object",
+              "__exemption": [
+                "examples"
+              ],
+              "definition": {
+                "start": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "The first day of the rendered workweek",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "end": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "The last day of the rendered workweek",
+                  "__exemption": [
+                    "examples"
+                  ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [
+                "examples"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "mousedown-head-workweek": {
+      "desc": "Occurs on the workweek header",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [
+            "examples"
+          ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object",
+              "__exemption": [
+                "examples"
+              ],
+              "definition": {
+                "start": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "The first day of the rendered workweek",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "end": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "The last day of the rendered workweek",
+                  "__exemption": [
+                    "examples"
+                  ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [
+                "examples"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "mousemove-head-workweek": {
+      "desc": "Occurs on the workweek header",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [
+            "examples"
+          ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object",
+              "__exemption": [
+                "examples"
+              ],
+              "definition": {
+                "start": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "The first day of the rendered workweek",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "end": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "The last day of the rendered workweek",
+                  "__exemption": [
+                    "examples"
+                  ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [
+                "examples"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "mouseup-head-workweek": {
+      "desc": "Occurs on the workweek header",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [
+            "examples"
+          ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object",
+              "__exemption": [
+                "examples"
+              ],
+              "definition": {
+                "start": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "The first day of the rendered workweek",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "end": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "The last day of the rendered workweek",
+                  "__exemption": [
+                    "examples"
+                  ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [
+                "examples"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "mouseenter-head-workweek": {
+      "desc": "Occurs on the workweek header",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [
+            "examples"
+          ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object",
+              "__exemption": [
+                "examples"
+              ],
+              "definition": {
+                "start": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "The first day of the rendered workweek",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "end": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "The last day of the rendered workweek",
+                  "__exemption": [
+                    "examples"
+                  ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [
+                "examples"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "mouseleave-head-workweek": {
+      "desc": "Occurs on the workweek header",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [
+            "examples"
+          ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object",
+              "__exemption": [
+                "examples"
+              ],
+              "definition": {
+                "start": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "The first day of the rendered workweek",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "end": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "The last day of the rendered workweek",
+                  "__exemption": [
+                    "examples"
+                  ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [
+                "examples"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "touchstart-head-workweek": {
+      "desc": "Occurs on the workweek header",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [
+            "examples"
+          ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object",
+              "__exemption": [
+                "examples"
+              ],
+              "definition": {
+                "start": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "The first day of the rendered workweek",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "end": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "The last day of the rendered workweek",
+                  "__exemption": [
+                    "examples"
+                  ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [
+                "examples"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "touchmove-head-workweek": {
+      "desc": "Occurs on the workweek header",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [
+            "examples"
+          ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object",
+              "__exemption": [
+                "examples"
+              ],
+              "definition": {
+                "start": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "The first day of the rendered workweek",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "end": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "The last day of the rendered workweek",
+                  "__exemption": [
+                    "examples"
+                  ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [
+                "examples"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "touchend-head-workweek": {
+      "desc": "Occurs on the workweek header",
+      "params": {
+        "data": {
+          "type": "Object",
+          "desc": "The data passed to the function",
+          "__exemption": [
+            "examples"
+          ],
+          "definition": {
+            "scope": {
+              "type": "Object",
+              "desc": "The scope object",
+              "__exemption": [
+                "examples"
+              ],
+              "definition": {
+                "start": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "The first day of the rendered workweek",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "end": {
+                  "type": "Object",
+                  "tsType": "Timestamp",
+                  "desc": "The last day of the rendered workweek",
+                  "__exemption": [
+                    "examples"
+                  ]
+                }
+              }
+            },
+            "event": {
+              "type": "Object",
+              "desc": "JS event object",
+              "__exemption": [
+                "examples"
+              ]
             }
           }
         }

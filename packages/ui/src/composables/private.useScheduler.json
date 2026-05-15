@@ -4,9 +4,19 @@
       "type": "String",
       "category": "model",
       "desc": "The type of calendar view to be displayed",
-      "applicable": ["scheduler"],
-      "values": ["'month-interval'", "'week'", "'day'", "'month'"],
-      "examples": ["'week'", "'month'"],
+      "applicable": [
+        "scheduler"
+      ],
+      "values": [
+        "'month-interval'",
+        "'week'",
+        "'day'",
+        "'month'"
+      ],
+      "examples": [
+        "'week'",
+        "'month'"
+      ],
       "default": "# 'day'",
       "__runtimeDefault": true
     },
@@ -15,32 +25,53 @@
       "tsType": "ResourceObjectArray",
       "category": "model",
       "desc": "An array of objects with a single key of label. You can add other keys if you like, which will be passed back on the appropriate scoped slots",
-      "applicable": ["scheduler"],
-      "examples": ["[{ label: 'John' },{ label: 'Susan' }]"]
+      "applicable": [
+        "scheduler"
+      ],
+      "examples": [
+        "[{ label: 'John' },{ label: 'Susan' }]"
+      ]
     },
     "resource-key": {
       "type": "String",
       "category": "model",
       "desc": "The key from the `resources` object that will be displayed",
       "default": "'id'",
-      "applicable": ["scheduler"],
-      "examples": ["'id'"]
+      "applicable": [
+        "scheduler"
+      ],
+      "examples": [
+        "'id'"
+      ]
     },
     "resource-label": {
       "type": "String",
       "category": "model",
       "desc": "The label from the `resources` object that will be displayed",
       "default": "'label'",
-      "applicable": ["scheduler"],
-      "examples": ["'label'", "'name'"]
+      "applicable": [
+        "scheduler"
+      ],
+      "examples": [
+        "'label'",
+        "'name'"
+      ]
     },
     "resource-height": {
-      "type": ["Number", "String"],
+      "type": [
+        "Number",
+        "String"
+      ],
       "category": "behavior",
       "desc": "The maximum height in pixels for the resource height",
       "default": "0",
-      "applicable": ["scheduler"],
-      "examples": ["80", "'100'"]
+      "applicable": [
+        "scheduler"
+      ],
+      "examples": [
+        "80",
+        "'100'"
+      ]
     },
     "resource-class": {
       "type": "Function",
@@ -95,61 +126,87 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": ["examples"],
+          "__exemption": [
+            "examples"
+          ],
           "definition": {
             "timestamp": {
               "type": "Timestamp",
               "tsType": "Timestamp",
               "desc": "A timestamp object associated with the interval",
-              "__exemption": ["examples"]
+              "__exemption": [
+                "examples"
+              ]
             },
             "index": {
               "type": "Number",
               "desc": "The resource index",
-              "__exemption": ["examples"]
+              "__exemption": [
+                "examples"
+              ]
             },
             "resource": {
               "type": "Object",
               "tsType": "ResourceObject",
               "desc": "The resource object",
-              "__exemption": ["examples"]
+              "__exemption": [
+                "examples"
+              ]
             }
           }
         }
       },
       "returns": {
-        "type": ["Array", "Object", "String"],
+        "type": [
+          "Array",
+          "Object",
+          "String"
+        ],
         "desc": "A Vue style object",
-        "examples": ["{ color: '#ccc' }"]
+        "examples": [
+          "{ color: '#ccc' }"
+        ]
       },
-      "default": "(data) => { return {} }",
-      "applicable": ["scheduler"],
+      "default": "# null",
+      "__runtimeDefault": true,
+      "applicable": [
+        "scheduler"
+      ],
       "examples": [
         "(data) => { return { 'background-color': '#c0c0c0' } }",
         "(data) => resourceStyle(data)"
       ]
     },
     "resource-min-height": {
-      "type": ["Number", "String"],
+      "type": [
+        "Number",
+        "String"
+      ],
       "default": "70",
       "desc": "The minimum height of a resource",
       "category": "behavior"
     },
     "weekday-style": {
-      "type": ["Function"],
+      "type": [
+        "Function"
+      ],
       "category": "style",
       "desc": "Gets called to provide custom styling of a weekday",
       "params": {
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": ["examples"]
+          "__exemption": [
+            "examples"
+          ]
         }
       },
       "returns": {
         "type": "Object",
         "desc": "A Vue style object",
-        "examples": ["{ color: '#ccc' }"]
+        "examples": [
+          "{ color: '#ccc' }"
+        ]
       },
       "default": "# null",
       "__runtimeDefault": true
@@ -162,13 +219,17 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": ["examples"]
+          "__exemption": [
+            "examples"
+          ]
         }
       },
       "returns": {
         "type": "Object",
         "desc": "A Vue style object of classes",
-        "examples": ["{ 'my-class': true }"]
+        "examples": [
+          "{ 'my-class': true }"
+        ]
       },
       "default": "# null",
       "__runtimeDefault": true
@@ -181,13 +242,21 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": ["examples"]
+          "__exemption": [
+            "examples"
+          ]
         }
       },
       "returns": {
-        "type": ["Array", "Object", "String"],
+        "type": [
+          "Array",
+          "Object",
+          "String"
+        ],
         "desc": "A Vue style object",
-        "examples": ["{ color: '#ccc' }"]
+        "examples": [
+          "{ color: '#ccc' }"
+        ]
       },
       "default": "# null",
       "__runtimeDefault": true
@@ -200,13 +269,21 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": ["examples"]
+          "__exemption": [
+            "examples"
+          ]
         }
       },
       "returns": {
-        "type": ["Array", "Object", "String"],
+        "type": [
+          "Array",
+          "Object",
+          "String"
+        ],
         "desc": "A Vue style object of classes",
-        "examples": ["{ 'my-class': true }"]
+        "examples": [
+          "{ 'my-class': true }"
+        ]
       },
       "default": "# null",
       "__runtimeDefault": true
@@ -215,9 +292,15 @@
       "type": "String",
       "category": "style",
       "desc": "Determines how the date header will be displayed",
-      "values": ["'stacked'", "'inline'", "'inverted'"],
+      "values": [
+        "'stacked'",
+        "'inline'",
+        "'inverted'"
+      ],
       "default": "'stacked'",
-      "examples": ["'inline'"]
+      "examples": [
+        "'inline'"
+      ]
     }
   },
   "events": {}

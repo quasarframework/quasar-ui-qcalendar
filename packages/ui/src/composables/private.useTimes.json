@@ -4,8 +4,11 @@
       "type": "String",
       "category": "model",
       "desc": "This is the currently displayed date (highlighted). If not set, then the current date is used",
-      "default": "'now'",
-      "examples": ["'2019-04-01'", "'2020-08-08'"]
+      "default": "''",
+      "examples": [
+        "'2019-04-01'",
+        "'2020-08-08'"
+      ]
     }
   }
 }

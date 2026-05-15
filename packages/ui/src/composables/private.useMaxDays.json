@@ -4,8 +4,11 @@
       "type": "Number",
       "category": "model",
       "desc": "The number of days to be displayed. Do not use with `week` or `month` views (set to 0 if setting the view dynamically)",
-      "default": "7",
-      "examples": ["14", "10"]
+      "default": "1",
+      "examples": [
+        "14",
+        "10"
+      ]
     }
   }
 }
