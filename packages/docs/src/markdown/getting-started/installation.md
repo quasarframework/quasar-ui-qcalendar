@@ -281,4 +281,4 @@ or
 
 # Project source
 
-Can be found [here](https://github.com/quasarframework/quasar-ui-qcalendar/tree).
+Can be found [here](https://github.com/quasarframework/quasar-ui-qcalendar/tree/v5-beta).

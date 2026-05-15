@@ -2,6 +2,8 @@ import { fabGithub, fabXTwitter } from '@quasar/extras/fontawesome-v6'
 import { slugify } from '@md-plugins/shared'
 import { version, productName } from '../../../ui/package.json'
 
+const repoBranch = 'v5-beta'
+
 export interface SocialLink {
   name: string
   icon: string
@@ -112,7 +114,7 @@ const socialLinks = {
     {
       name: 'GitHub',
       icon: fabGithub,
-      path: 'https://github.com/quasarframework/quasar-ui-qcalendar/tree/dev',
+      path: `https://github.com/quasarframework/quasar-ui-qcalendar/tree/${repoBranch}`,
       external: true,
     },
     {
@@ -586,11 +588,10 @@ const config = {
     line1: `Copyright © 2018-${new Date().getFullYear()} Jeff Galbraith`,
     line2: '',
   } as CopyrightConfig,
-  githubEditRootSrc:
-    'https://github.com/quasarframework/quasar-ui-qcalendar/edit/dev/packages/docs/src',
+  githubEditRootSrc: `https://github.com/quasarframework/quasar-ui-qcalendar/edit/${repoBranch}/packages/docs/src`,
   license: {
     label: 'MIT License',
-    link: 'https://github.com/quasarframework/quasar-ui-qcalendar/blob/next/LICENSE.md',
+    link: `https://github.com/quasarframework/quasar-ui-qcalendar/blob/${repoBranch}/LICENSE.md`,
   } as LicenseConfig,
   privacy: {
     label: 'Privacy Policy',

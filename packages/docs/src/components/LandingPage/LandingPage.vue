@@ -24,7 +24,7 @@
           </div>
         </router-link>
         <a
-          href="https://github.com/quasarframework/quasar-ui-qcalendar/tree/dev"
+          href="https://github.com/quasarframework/quasar-ui-qcalendar/tree/v5-beta"
           target="_blank"
           class="hero-button q-btn q-btn-item non-selectable no-outline q-btn--standard q-btn--rectangle q-btn--actionable q-focusable q-hoverable q-btn--no-uppercase q-btn--rounded q-btn--dense"
         >
