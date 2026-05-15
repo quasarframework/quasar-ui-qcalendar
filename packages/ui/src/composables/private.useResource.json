@@ -113,7 +113,7 @@
                 "timestamps": {
                   "type": "Array",
                   "tsType": "TimestampArray",
-                  "desc": "The array of timestamps for the intervals"
+                  "desc": "The timestamps rendered for the resource row"
                 },
                 "indentLevel": {
                   "type": "Number",
@@ -122,6 +122,10 @@
                 "label": {
                   "type": "String",
                   "desc": "The label of the resource"
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "True if the resource is currently a valid drop target"
                 }
               }
             }
@@ -145,28 +149,58 @@
             "examples"
           ],
           "definition": {
-            "timestamp": {
-              "type": "Timestamp",
-              "tsType": "Timestamp",
-              "desc": "A timestamp object associated with the interval",
-              "__exemption": [
-                "examples"
-              ]
-            },
-            "index": {
-              "type": "Number",
-              "desc": "The resource index",
-              "__exemption": [
-                "examples"
-              ]
-            },
-            "resource": {
+            "scope": {
               "type": "Object",
-              "tsType": "ResourceObject",
-              "desc": "The resource object",
+              "desc": "The scope object",
               "__exemption": [
                 "examples"
-              ]
+              ],
+              "definition": {
+                "resource": {
+                  "type": "Object",
+                  "tsType": "ResourceObject",
+                  "desc": "The resource object",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "resourceIndex": {
+                  "type": "Number",
+                  "desc": "The resource index",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "timestamps": {
+                  "type": "Array",
+                  "tsType": "TimestampArray",
+                  "desc": "The timestamps rendered for the resource row",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "indentLevel": {
+                  "type": "Number",
+                  "desc": "The indent level of the resource",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "label": {
+                  "type": "String",
+                  "desc": "The label of the resource",
+                  "__exemption": [
+                    "examples"
+                  ]
+                },
+                "droppable": {
+                  "type": "Boolean",
+                  "desc": "True if the resource is currently a valid drop target",
+                  "__exemption": [
+                    "examples"
+                  ]
+                }
+              }
             }
           }
         }

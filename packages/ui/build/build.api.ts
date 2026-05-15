@@ -32,6 +32,35 @@ const passthroughValues = [true, false, 'child']
 
 const slotRE = /slots\[\s*['"](\S+)['"]\s*\]|slots\.([A-Za-z]+)/g
 const emitRE = /emit\(\s*['"](\S+)['"]/g
+const propsSpreadRE = /\.\.\.(use[A-Za-z0-9]+Props)\b/g
+const emitsSpreadRE = /\.\.\.(use[A-Za-z0-9]+Emits)\b/g
+const timeEventsRE = /getRawMouseEvents\(\s*['"]-time['"]\s*\)/
+const resourceIntervalsSlotsRE =
+  /slots\[\s*['"]resource-intervals['"]\s*\]|slots\[\s*['"]resource-interval['"]\s*\]/
+
+const propMixinMap = {
+  useAgendaProps: 'composables/private.useAgenda',
+  useCellWidthProps: 'composables/private.useCellWidth',
+  useColumnProps: 'composables/private.useColumn',
+  useCommonProps: 'composables/private.useCommon',
+  useIntervalProps: 'composables/private.useInterval',
+  useMaxDaysProps: 'composables/private.useMaxDays',
+  useMonthProps: 'composables/private.useMonth',
+  useNavigationProps: 'composables/private.useNavigation',
+  useResourceProps: 'composables/private.useResource',
+  useSchedulerProps: 'composables/private.useScheduler',
+  useTaskProps: 'composables/private.useTasks',
+  useTimesProps: 'composables/private.useTimes',
+}
+
+const emitsMixinMap = {
+  useCheckChangeEmits: 'composables/private.useCheckChange',
+  useMoveEmits: 'composables/private.useMove',
+}
+
+const manualComponentMixins = {
+  'QCalendar.ts': ['composables/private.useCheckChange', 'composables/private.useMove'],
+}
 
 const apiIgnoreValueRegex = /^# /
 const apiValuePromiseRegex = /\.then\(/
@@ -1204,10 +1233,67 @@ function orderAPI(api, apiType) {
   return ordered
 }
 
+function getExpectedComponentMixins(componentContent, componentName) {
+  const expectedMixins = new Set(manualComponentMixins[componentName] || [])
+
+  let match
+
+  while ((match = propsSpreadRE.exec(componentContent)) !== null) {
+    const mixin = propMixinMap[match[1]]
+    if (mixin !== void 0) {
+      expectedMixins.add(mixin)
+    }
+  }
+
+  while ((match = emitsSpreadRE.exec(componentContent)) !== null) {
+    const mixin = emitsMixinMap[match[1]]
+    if (mixin !== void 0) {
+      expectedMixins.add(mixin)
+    }
+  }
+
+  if (timeEventsRE.test(componentContent) === true) {
+    expectedMixins.add('composables/private.useTime')
+  }
+
+  if (resourceIntervalsSlotsRE.test(componentContent) === true) {
+    expectedMixins.add('composables/private.useResourceIntervals')
+  }
+
+  propsSpreadRE.lastIndex = 0
+  emitsSpreadRE.lastIndex = 0
+
+  return expectedMixins
+}
+
+function validateComponentMixins(componentContent, componentName, declaredMixins = []) {
+  const expectedMixins = getExpectedComponentMixins(componentContent, componentName)
+  const actualMixins = new Set(declaredMixins)
+
+  const missingMixins = [...expectedMixins].filter((mixin) => actualMixins.has(mixin) === false)
+  const unexpectedMixins = [...actualMixins].filter((mixin) => expectedMixins.has(mixin) === false)
+
+  if (missingMixins.length > 0 || unexpectedMixins.length > 0) {
+    const details = []
+
+    if (missingMixins.length > 0) {
+      details.push(`missing mixin${plural(missingMixins.length)}: ${missingMixins.join(', ')}`)
+    }
+
+    if (unexpectedMixins.length > 0) {
+      details.push(`unexpected mixin${plural(unexpectedMixins.length)}: ${unexpectedMixins.join(', ')}`)
+    }
+
+    logError(`${componentName}: JSON mixins are out of sync with the source (${details.join(' | ')})`)
+    process.exit(1)
+  }
+}
+
 function fillAPI(apiType, list, encodeFn) {
   return async (file) => {
     const name = basename(file)
     const filePath = join(dest, name)
+    const sourceApi = readJsonFile(file)
     const api = orderAPI(parseAPI(file, apiType), apiType)
 
     if (apiType === 'component') {
@@ -1230,6 +1316,8 @@ function fillAPI(apiType, list, encodeFn) {
         console.error(err)
         process.exit(1)
       }
+
+      validateComponentMixins(componentContent, componentName, sourceApi.mixins)
 
       const apiProps = api.props || {}
       const apiEvents = api.events || {}
