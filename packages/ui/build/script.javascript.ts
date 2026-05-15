@@ -3,13 +3,9 @@ process.env.BABEL_ENV = 'production'
 
 import path from 'node:path'
 import { URL } from 'node:url'
-import * as rollup from 'rollup'
+import { rolldown, type InputOptions, type OutputOptions, type Plugin } from 'rolldown'
 import * as ts from 'typescript'
 import uglify from 'uglify-js'
-import json from '@rollup/plugin-json'
-import { nodeResolve } from '@rollup/plugin-node-resolve'
-// import babel from '@rollup/plugin-babel'
-// import { dts } from 'rollup-plugin-dts'
 
 import buildConf from './config'
 import * as buildUtils from './build.utils'
@@ -18,11 +14,9 @@ function pathResolve(relativePath: string): string {
   return path.resolve(path.dirname(new URL(import.meta.url).pathname), relativePath)
 }
 
-const rollupPlugins: rollup.Plugin[] = [
+const rolldownPlugins: Plugin[] = [
   resolveTypeScriptSources(),
   transpileTypeScript(),
-  nodeResolve({ extensions: ['.mjs', '.js', '.json', '.node', '.ts'] }),
-  json(),
 ]
 
 const uglifyOptions = {
@@ -67,18 +61,17 @@ const buildEntries = [
 
 const builds = buildEntries.flatMap((entry) =>
   ['esm', 'cjs', 'umd'].map((format) => ({
-    rollup: {
+    rolldown: {
       input: {
         input: pathResolve(`entry/${entry}.${format}.js`),
-        plugins: rollupPlugins,
+        plugins: rolldownPlugins,
         external: ['vue'],
       },
       output: {
-        // sourcemap: true,
         file: pathResolve(`../dist/${entry}.${format}.js`),
         format,
         name: format === 'umd' ? entry : undefined,
-        exports: 'auto' as 'auto',
+        exports: 'auto' as const,
         banner: buildConf.banner,
         globals: { vue: 'Vue' },
       },
@@ -93,7 +86,7 @@ const builds = buildEntries.flatMap((entry) =>
 
 build(builds as any)
 
-function resolveTypeScriptSources(): rollup.Plugin {
+function resolveTypeScriptSources(): Plugin {
   return {
     name: 'resolve-typescript-sources',
     resolveId(source, importer) {
@@ -111,7 +104,7 @@ function resolveTypeScriptSources(): rollup.Plugin {
   }
 }
 
-function transpileTypeScript(): rollup.Plugin {
+function transpileTypeScript(): Plugin {
   return {
     name: 'transpile-typescript',
     transform(code, id) {
@@ -140,13 +133,13 @@ function transpileTypeScript(): rollup.Plugin {
 /**
  * Main Build Process
  */
-interface RollupConfig {
-  input: rollup.InputOptions
-  output: rollup.OutputOptions
+interface RolldownConfig {
+  input: InputOptions
+  output: OutputOptions
 }
 
 interface BuildConfig {
-  rollup: RollupConfig
+  rolldown: RolldownConfig
   build: {
     unminified: boolean
     minified: boolean
@@ -174,15 +167,15 @@ interface Output {
 
 async function buildEntry(config: BuildConfig): Promise<void> {
   try {
-    const bundle = await rollup.rollup(config.rollup.input)
-    const { output } = await bundle.generate(config.rollup.output)
+    const bundle = await rolldown(config.rolldown.input)
+    const { output } = await bundle.generate(config.rolldown.output)
     const code =
-      config.rollup.output.format === 'umd'
+      config.rolldown.output.format === 'umd'
         ? injectVueRequirement((output[0] as Output).code)
         : (output[0] as Output).code
 
-    if (config.build.unminified && config.rollup.output.file) {
-      await buildUtils.writeFile(config.rollup.output.file, code)
+    if (config.build.unminified && config.rolldown.output.file) {
+      await buildUtils.writeFile(config.rolldown.output.file, code)
     }
 
     if (config.build.minified) {
@@ -193,13 +186,15 @@ async function buildEntry(config: BuildConfig): Promise<void> {
       }
 
       const minifiedFile = config.build.minExt
-        ? addFileExtension(config.rollup.output.file as string, 'min')
-        : config.rollup.output.file
+        ? addFileExtension(config.rolldown.output.file as string, 'min')
+        : config.rolldown.output.file
 
       await buildUtils.writeFile(minifiedFile as string, buildConf.banner + minified.code, true)
     }
+
+    await bundle.close()
   } catch (error) {
-    console.error(`Error building ${config.rollup.output.file}:`, error)
+    console.error(`Error building ${config.rolldown.output.file}:`, error)
     process.exit(1)
   }
 }

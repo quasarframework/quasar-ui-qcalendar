@@ -221,9 +221,7 @@
     "dev:android": "cd dev && pnpm run 'dev:android' && cd ..",
     "dev:electron": "cd dev && pnpm run 'dev:electron' && cd ..",
     "build": "tsx build/index.ts",
-    "build:rolldown": "tsx build/index.rolldown.ts",
     "build:js": "tsx build/script.javascript.ts",
-    "build:js:rolldown": "tsx build/script.javascript.rolldown.ts",
     "build:css": "tsx build/script.css.ts",
     "build:api": "tsx build/build.api.ts",
     "build:app-ext": "tsx build/script.app-ext.ts",
@@ -231,10 +229,6 @@
     "build:types": "pnpm exec tsc --project tsconfig.json"
   },
   "devDependencies": {
-    "@rollup/plugin-babel": "^6.0.4",
-    "@rollup/plugin-buble": "^1.0.3",
-    "@rollup/plugin-json": "^6.1.0",
-    "@rollup/plugin-node-resolve": "^16.0.3",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^25.8.0",
     "@types/rtlcss": "^3.5.4",
@@ -250,7 +244,6 @@
     "quasar": "^2.19.3",
     "rimraf": "^6.1.3",
     "rolldown": "^1.0.0",
-    "rollup": "^4.60.4",
     "rtlcss": "^4.3.0",
     "sass-embedded": "^1.99.0",
     "table": "^6.9.0",

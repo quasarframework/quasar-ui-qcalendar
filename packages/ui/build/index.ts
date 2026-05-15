@@ -41,7 +41,7 @@ import('./script.app-ext').then(async ({ syncAppExt }) => {
 await import('./script.clean.js')
 
 console.log(
-  ` 📦 Building QCalendar ${green('v' + version)}...${parallel ? blue(' [multi-threaded]') : ''}\n`,
+  ` 📦 Building QCalendar ${green('v' + version)} with ${blue('Rolldown')}...${parallel ? blue(' [multi-threaded]') : ''}\n`,
 )
 
 createFolder('dist')
@@ -56,6 +56,3 @@ const api = await import('./build.api.js').then(({ generate }) => generate({ com
 import('./build.web-types.js').then(({ generate }) => generate({ api, compact: true }))
 import('./script.javascript')
 import('./script.css')
-
-// runJob(join(__dirname, './script.javascript'))
-// runJob(join(__dirname, './script.css'))
