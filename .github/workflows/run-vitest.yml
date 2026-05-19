@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [24] # pnpm v11 requires Node.js >=22.13
+        node-version: [22, 24] # Repo supports Node.js >=22.13
 
     steps:
       # Checkout the repository code
@@ -19,6 +19,9 @@ jobs:
       # Install pnpm
       - name: Install pnpm
         uses: pnpm/action-setup@v4
+        with:
+          version: 11.1.0
+          run_install: false
 
       # Use Node.js
       - name: Use Node.js ${{ matrix.node-version }}
@@ -26,10 +29,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
+          cache-dependency-path: pnpm-lock.yaml
 
       # Install dependencies for all packages
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       # Run lint checks
       - name: Run lint
