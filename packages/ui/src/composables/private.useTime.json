@@ -6,38 +6,28 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "definition": {
             "event": {
               "type": "Object",
               "desc": "The associated event",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             },
             "scope": {
               "type": "Object",
               "desc": "The scope object passed to the function",
-              "__exemption": [
-                "examples"
-              ],
+              "__exemption": ["examples"],
               "definition": {
                 "timestamp": {
                   "type": "Timestamp",
                   "tsType": "Timestamp",
                   "desc": "A timestamp object associated with the weekday",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "columnIndex": {
                   "type": "Number",
                   "desc": "The index of the column",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "activeDate": {
                   "type": "Boolean",
@@ -59,38 +49,28 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "definition": {
             "event": {
               "type": "Object",
               "desc": "The associated event",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             },
             "scope": {
               "type": "Object",
               "desc": "The scope object passed to the function",
-              "__exemption": [
-                "examples"
-              ],
+              "__exemption": ["examples"],
               "definition": {
                 "timestamp": {
                   "type": "Timestamp",
                   "tsType": "Timestamp",
                   "desc": "A timestamp object associated with the weekday",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "columnIndex": {
                   "type": "Number",
                   "desc": "The index of the column",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "activeDate": {
                   "type": "Boolean",
@@ -112,38 +92,28 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "definition": {
             "event": {
               "type": "Object",
               "desc": "The associated event",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             },
             "scope": {
               "type": "Object",
               "desc": "The scope object passed to the function",
-              "__exemption": [
-                "examples"
-              ],
+              "__exemption": ["examples"],
               "definition": {
                 "timestamp": {
                   "type": "Timestamp",
                   "tsType": "Timestamp",
                   "desc": "A timestamp object associated with the weekday",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "columnIndex": {
                   "type": "Number",
                   "desc": "The index of the column",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "activeDate": {
                   "type": "Boolean",
@@ -165,38 +135,28 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "definition": {
             "event": {
               "type": "Object",
               "desc": "The associated event",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             },
             "scope": {
               "type": "Object",
               "desc": "The scope object passed to the function",
-              "__exemption": [
-                "examples"
-              ],
+              "__exemption": ["examples"],
               "definition": {
                 "timestamp": {
                   "type": "Timestamp",
                   "tsType": "Timestamp",
                   "desc": "A timestamp object associated with the weekday",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "columnIndex": {
                   "type": "Number",
                   "desc": "The index of the column",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "activeDate": {
                   "type": "Boolean",
@@ -218,38 +178,28 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "definition": {
             "event": {
               "type": "Object",
               "desc": "The associated event",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             },
             "scope": {
               "type": "Object",
               "desc": "The scope object passed to the function",
-              "__exemption": [
-                "examples"
-              ],
+              "__exemption": ["examples"],
               "definition": {
                 "timestamp": {
                   "type": "Timestamp",
                   "tsType": "Timestamp",
                   "desc": "A timestamp object associated with the weekday",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "columnIndex": {
                   "type": "Number",
                   "desc": "The index of the column",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "activeDate": {
                   "type": "Boolean",
@@ -271,38 +221,28 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "definition": {
             "event": {
               "type": "Object",
               "desc": "The associated event",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             },
             "scope": {
               "type": "Object",
               "desc": "The scope object passed to the function",
-              "__exemption": [
-                "examples"
-              ],
+              "__exemption": ["examples"],
               "definition": {
                 "timestamp": {
                   "type": "Timestamp",
                   "tsType": "Timestamp",
                   "desc": "A timestamp object associated with the weekday",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "columnIndex": {
                   "type": "Number",
                   "desc": "The index of the column",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "activeDate": {
                   "type": "Boolean",
@@ -324,38 +264,28 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "definition": {
             "event": {
               "type": "Object",
               "desc": "The associated event",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             },
             "scope": {
               "type": "Object",
               "desc": "The scope object passed to the function",
-              "__exemption": [
-                "examples"
-              ],
+              "__exemption": ["examples"],
               "definition": {
                 "timestamp": {
                   "type": "Timestamp",
                   "tsType": "Timestamp",
                   "desc": "A timestamp object associated with the weekday",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "columnIndex": {
                   "type": "Number",
                   "desc": "The index of the column",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "activeDate": {
                   "type": "Boolean",
@@ -377,38 +307,28 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "definition": {
             "event": {
               "type": "Object",
               "desc": "The associated event",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             },
             "scope": {
               "type": "Object",
               "desc": "The scope object passed to the function",
-              "__exemption": [
-                "examples"
-              ],
+              "__exemption": ["examples"],
               "definition": {
                 "timestamp": {
                   "type": "Timestamp",
                   "tsType": "Timestamp",
                   "desc": "A timestamp object associated with the weekday",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "columnIndex": {
                   "type": "Number",
                   "desc": "The index of the column",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "activeDate": {
                   "type": "Boolean",
@@ -430,38 +350,28 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "definition": {
             "event": {
               "type": "Object",
               "desc": "The associated event",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             },
             "scope": {
               "type": "Object",
               "desc": "The scope object passed to the function",
-              "__exemption": [
-                "examples"
-              ],
+              "__exemption": ["examples"],
               "definition": {
                 "timestamp": {
                   "type": "Timestamp",
                   "tsType": "Timestamp",
                   "desc": "A timestamp object associated with the weekday",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "columnIndex": {
                   "type": "Number",
                   "desc": "The index of the column",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "activeDate": {
                   "type": "Boolean",
@@ -483,38 +393,28 @@
         "data": {
           "type": "Object",
           "desc": "The data passed to the function",
-          "__exemption": [
-            "examples"
-          ],
+          "__exemption": ["examples"],
           "definition": {
             "event": {
               "type": "Object",
               "desc": "The associated event",
-              "__exemption": [
-                "examples"
-              ]
+              "__exemption": ["examples"]
             },
             "scope": {
               "type": "Object",
               "desc": "The scope object passed to the function",
-              "__exemption": [
-                "examples"
-              ],
+              "__exemption": ["examples"],
               "definition": {
                 "timestamp": {
                   "type": "Timestamp",
                   "tsType": "Timestamp",
                   "desc": "A timestamp object associated with the weekday",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "columnIndex": {
                   "type": "Number",
                   "desc": "The index of the column",
-                  "__exemption": [
-                    "examples"
-                  ]
+                  "__exemption": ["examples"]
                 },
                 "activeDate": {
                   "type": "Boolean",

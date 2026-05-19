@@ -84,10 +84,7 @@ export default defineComponent({
     ...getRawMouseEvents('-time'),
   ],
 
-  setup(
-    props: AgendaProps & SchedulerProps & ResourceProps,
-    { slots, emit, expose },
-  ) {
+  setup(props: AgendaProps & SchedulerProps & ResourceProps, { slots, emit, expose }) {
     const scrollArea = ref(null),
       pane = ref(null),
       headerColumnRef = ref(null),

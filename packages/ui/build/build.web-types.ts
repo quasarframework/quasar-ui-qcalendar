@@ -1,4 +1,11 @@
-import { packageName, version, resolveToRoot, logError, writeFile, kebabCase } from './build.utils.js'
+import {
+  packageName,
+  version,
+  resolveToRoot,
+  logError,
+  writeFile,
+  kebabCase,
+} from './build.utils.js'
 
 const resolve = (file: string): string => resolveToRoot('dist/web-types', file)
 

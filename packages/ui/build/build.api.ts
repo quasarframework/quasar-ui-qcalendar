@@ -1281,10 +1281,14 @@ function validateComponentMixins(componentContent, componentName, declaredMixins
     }
 
     if (unexpectedMixins.length > 0) {
-      details.push(`unexpected mixin${plural(unexpectedMixins.length)}: ${unexpectedMixins.join(', ')}`)
+      details.push(
+        `unexpected mixin${plural(unexpectedMixins.length)}: ${unexpectedMixins.join(', ')}`,
+      )
     }
 
-    logError(`${componentName}: JSON mixins are out of sync with the source (${details.join(' | ')})`)
+    logError(
+      `${componentName}: JSON mixins are out of sync with the source (${details.join(' | ')})`,
+    )
     process.exit(1)
   }
 }

@@ -77,24 +77,30 @@ type QCalendarSchedulerInstance = CalendarNavigationInstance
 type QCalendarTaskInstance = CalendarNavigationInstance
 
 const QCalendar = QCalendarComponent as RootCalendarComponent<QCalendarInstance>
-const QCalendarAgenda =
-  QCalendarAgendaComponent as RootCalendarComponent<QCalendarAgendaInstance, QCalendarAgendaSlots>
-const QCalendarDay =
-  QCalendarDayComponent as RootCalendarComponent<QCalendarDayInstance, QCalendarDaySlots>
-const QCalendarMonth =
-  QCalendarMonthComponent as RootCalendarComponent<QCalendarMonthInstance, QCalendarMonthSlots>
-const QCalendarResource =
-  QCalendarResourceComponent as RootCalendarComponent<
-    QCalendarResourceInstance,
-    QCalendarResourceSlots
-  >
-const QCalendarScheduler =
-  QCalendarSchedulerComponent as RootCalendarComponent<
-    QCalendarSchedulerInstance,
-    QCalendarSchedulerSlots
-  >
-const QCalendarTask =
-  QCalendarTaskComponent as RootCalendarComponent<QCalendarTaskInstance, QCalendarTaskSlots>
+const QCalendarAgenda = QCalendarAgendaComponent as RootCalendarComponent<
+  QCalendarAgendaInstance,
+  QCalendarAgendaSlots
+>
+const QCalendarDay = QCalendarDayComponent as RootCalendarComponent<
+  QCalendarDayInstance,
+  QCalendarDaySlots
+>
+const QCalendarMonth = QCalendarMonthComponent as RootCalendarComponent<
+  QCalendarMonthInstance,
+  QCalendarMonthSlots
+>
+const QCalendarResource = QCalendarResourceComponent as RootCalendarComponent<
+  QCalendarResourceInstance,
+  QCalendarResourceSlots
+>
+const QCalendarScheduler = QCalendarSchedulerComponent as RootCalendarComponent<
+  QCalendarSchedulerInstance,
+  QCalendarSchedulerSlots
+>
+const QCalendarTask = QCalendarTaskComponent as RootCalendarComponent<
+  QCalendarTaskInstance,
+  QCalendarTaskSlots
+>
 
 export type QCalendar = QCalendarInstance
 export type QCalendarAgenda = QCalendarAgendaInstance

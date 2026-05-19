@@ -14,10 +14,7 @@ function pathResolve(relativePath: string): string {
   return path.resolve(path.dirname(new URL(import.meta.url).pathname), relativePath)
 }
 
-const rolldownPlugins: Plugin[] = [
-  resolveTypeScriptSources(),
-  transpileTypeScript(),
-]
+const rolldownPlugins: Plugin[] = [resolveTypeScriptSources(), transpileTypeScript()]
 
 const uglifyOptions = {
   compress: {
