@@ -469,7 +469,7 @@ const otherMenu: SiteMenuItem = {
   children: [
     {
       name: 'Releases',
-      path: '/other/release-notes',
+      path: '/other/releases',
     },
     {
       name: 'Migration Guide',

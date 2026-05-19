@@ -68,8 +68,27 @@ export default defineConfig(async (ctx) => {
         if (ctx.prod && isClient) {
           viteConf.build = viteConf.build || {}
           viteConf.build.chunkSizeWarningLimit = 650
-          viteConf.build.rollupOptions = {
-            output: { manualChunks: viteManualChunks },
+
+          const buildOptions = viteConf.build as typeof viteConf.build & {
+            rolldownOptions?: {
+              output?: {
+                codeSplitting?: {
+                  groups?: Array<{
+                    name: (moduleId: string) => string | null
+                  }>
+                }
+              }
+            }
+          }
+
+          buildOptions.rolldownOptions = buildOptions.rolldownOptions || {}
+          buildOptions.rolldownOptions.output = buildOptions.rolldownOptions.output || {}
+          buildOptions.rolldownOptions.output.codeSplitting = {
+            groups: [
+              {
+                name: (moduleId: string) => viteManualChunks(moduleId) ?? null,
+              },
+            ],
           }
         }
       },
