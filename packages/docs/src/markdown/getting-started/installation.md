@@ -74,6 +74,8 @@ pnpm add @quasar/quasar-ui-qcalendar@beta
 yarn add @quasar/quasar-ui-qcalendar@beta
 <<| bash npm |>>
 npm install @quasar/quasar-ui-qcalendar@beta
+<<| bash bun |>>
+bun add @quasar/quasar-ui-qcalendar@beta
 ```
 
 When QCalendar v5 is released as stable, remove the `@beta` tag from those commands.

@@ -225,7 +225,6 @@
     "build:css": "tsx build/script.css.ts",
     "build:api": "tsx build/build.api.ts",
     "build:app-ext": "tsx build/script.app-ext.ts",
-    "build:types:old": "tsc --emitDeclarationOnly --declarationDir dist/types",
     "build:types": "pnpm exec tsc --project tsconfig.json"
   },
   "devDependencies": {
