@@ -49,7 +49,7 @@
 
     <slot />
 
-    <div v-if="props.nav" class="markdown-page__nav markdown-page__nav--footer">
+    <div v-if="showFooterNav" class="markdown-page__nav markdown-page__nav--footer">
       <div class="text-h6 q-pb-md markdown-heading">Ready for more?</div>
       <div class="q-gutter-sm flex">
         <router-link
@@ -163,6 +163,8 @@ if (props.toc !== void 0) {
 const editHref = computed(() => `${siteConfig.githubEditRootSrc}/markdown/${props.editLink}.md`)
 
 const isFullscreen = computed(() => route.meta.fullscreen === true || props.fullscreen)
+
+const showFooterNav = computed(() => isFullscreen.value !== true && props.nav.length > 0)
 
 const hasToc = computed(
   () =>
