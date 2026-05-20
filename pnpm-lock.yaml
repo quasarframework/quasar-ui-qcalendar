@@ -68,17 +68,17 @@ importers:
         version: 5.0.7(@vue/compiler-sfc@3.5.34)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3))
     devDependencies:
       '@md-plugins/quasar-app-extension-q-press':
-        specifier: 0.1.0-beta.3
-        version: 0.1.0-beta.3(@quasar/app-vite@3.0.0-beta.18(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(quasar@2.19.3)(rollup@4.60.3)(sass@1.99.0)(terser@5.37.0)(tsx@4.22.0)(typescript@5.9.3)(vue-router@5.0.7(@vue/compiler-sfc@3.5.34)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3))(yaml@2.9.0))(gray-matter@4.0.3)(markdown-it-container@4.0.0)(markdown-it@14.1.1)(prismjs@1.30.0)
+        specifier: 0.1.0-beta.4
+        version: 0.1.0-beta.4(@quasar/app-vite@3.0.0-beta.18(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(quasar@2.19.3)(rollup@4.60.3)(sass@1.99.0)(terser@5.37.0)(tsx@4.22.0)(typescript@5.9.3)(vue-router@5.0.7(@vue/compiler-sfc@3.5.34)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3))(yaml@2.9.0))(gray-matter@4.0.3)(markdown-it-container@4.0.0)(markdown-it@14.1.1)(prismjs@1.30.0)
       '@md-plugins/shared':
-        specifier: 0.1.0-beta.3
-        version: 0.1.0-beta.3(markdown-it@14.1.1)
+        specifier: 0.1.0-beta.4
+        version: 0.1.0-beta.4(markdown-it@14.1.1)
       '@md-plugins/vite-examples-plugin':
-        specifier: 0.1.0-beta.3
-        version: 0.1.0-beta.3
+        specifier: 0.1.0-beta.4
+        version: 0.1.0-beta.4
       '@md-plugins/vite-md-plugin':
-        specifier: 0.1.0-beta.3
-        version: 0.1.0-beta.3(gray-matter@4.0.3)(markdown-it-container@4.0.0)(markdown-it@14.1.1)(prismjs@1.30.0)
+        specifier: 0.1.0-beta.4
+        version: 0.1.0-beta.4(gray-matter@4.0.3)(markdown-it-container@4.0.0)(markdown-it@14.1.1)(prismjs@1.30.0)
       '@quasar/app-vite':
         specifier: 3.0.0-beta.18
         version: 3.0.0-beta.18(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(quasar@2.19.3)(rollup@4.60.3)(sass@1.99.0)(terser@5.37.0)(tsx@4.22.0)(typescript@5.9.3)(vue-router@5.0.7(@vue/compiler-sfc@3.5.34)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3))(yaml@2.9.0)
@@ -654,81 +654,81 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@md-plugins/md-plugin-blockquote@0.1.0-beta.3':
-    resolution: {integrity: sha512-WdtRGa/EOqjNGyt0oWZADRZ1lrMII/FvGenzWGOQ6IZtPuusqYOiuai8RynjmmcmEUTCue/Jp1ZcvTzp7vyKig==}
+  '@md-plugins/md-plugin-blockquote@0.1.0-beta.4':
+    resolution: {integrity: sha512-vB/4QoFLPmKMugqzqt2MccbWYRdoNcO9xgDr8S4s2evyHk7woNXppVze37/+MQ0OcHZd/AmyC1+Ats25+tTuvQ==}
     peerDependencies:
       markdown-it: ^14.1.0
 
-  '@md-plugins/md-plugin-codeblocks@0.1.0-beta.3':
-    resolution: {integrity: sha512-tvKbet/3avG5tKnBT0Zua5z+5vV9wns9nn9HfQNZ70AKTvP92ZZGk2EEJ8tUO2OseOaXnXqtmY500UCMK6RfJw==}
+  '@md-plugins/md-plugin-codeblocks@0.1.0-beta.4':
+    resolution: {integrity: sha512-FdH/MsxV3rRi0E9rzjdD/BiFHD1217jkMrF5pkWZVL2xyF6ILKCzaicrP1yWemMXIMqJd0EzUU7DbkEPVzIkQQ==}
     peerDependencies:
       markdown-it: ^14.1.0
       prismjs: ^1.29.0
 
-  '@md-plugins/md-plugin-containers@0.1.0-beta.3':
-    resolution: {integrity: sha512-x6MmeqDZ/IwvyxNixtgKFPuvh2tCy84pUAFTWfe2vecWQxjVNrAO/hbuqiuSOiJPfBOTr2Ha2/BEzRxvxR5gKA==}
+  '@md-plugins/md-plugin-containers@0.1.0-beta.4':
+    resolution: {integrity: sha512-yhxDdK0BgifqVPcVvsX6oapXn5NB0Yyh6AIqqCzoxSr9M22k+ts52bTCsFkTNErTPOJIIf4mVNohpYd+/IfsQw==}
     peerDependencies:
       markdown-it: ^14.1.0
       markdown-it-container: ^4.0.0
 
-  '@md-plugins/md-plugin-frontmatter@0.1.0-beta.3':
-    resolution: {integrity: sha512-6t26MG8OZXYoJ2qyKHADEQWEDMaCO63qO4ciNZe34BhCwEEzQhDsaFnhO8Q/EoBO5gtWB0imFhGTCnlirlWtBw==}
+  '@md-plugins/md-plugin-frontmatter@0.1.0-beta.4':
+    resolution: {integrity: sha512-kzZu2PukW0P0Du65DPRQc5lSphARUxfLGEa/ItwpZ1E4MvyQbZ+hYxzhBj6AjVXoTGL8JzOGRUZt1CqEglW6fw==}
     peerDependencies:
       gray-matter: ^4.0.3
       markdown-it: ^14.1.0
 
-  '@md-plugins/md-plugin-headers@0.1.0-beta.3':
-    resolution: {integrity: sha512-uWntDqjHy7Z71qGBywcapKWfNXm5pk6ExAs6c2eYQzS6jX4uXPu0pxKPQUeDVAhlivwh4bXVNOpVpQ0VChIM/w==}
+  '@md-plugins/md-plugin-headers@0.1.0-beta.4':
+    resolution: {integrity: sha512-v/FMB8gkCesJzgtX6LrQCtqRvLyIc4En3TLa5duit/DPKRI0kPagyRh+9jBSXZhhwXmnblJVfptlNSGxIlJSrQ==}
     peerDependencies:
       markdown-it: ^14.1.0
 
-  '@md-plugins/md-plugin-image@0.1.0-beta.3':
-    resolution: {integrity: sha512-+dor7JYnJ6CiyrfsvROZTA7T7jcTAE4a+MJfjblr/p6977wVS2YzemEURb1JE3dihzWLdhYx+7HU5E2PcCaPTg==}
+  '@md-plugins/md-plugin-image@0.1.0-beta.4':
+    resolution: {integrity: sha512-CnTaRg64KINT0PFw/AD94PUkar5Jon5K2OZTbm4vYDg6AiovnzlbuGIiq8hq0CMYgruQneNvathjpD8JxppNhA==}
     peerDependencies:
       markdown-it: ^14.1.0
 
-  '@md-plugins/md-plugin-imports@0.1.0-beta.3':
-    resolution: {integrity: sha512-k/uZ13b7Vy0olsLhvtPlilf4Y/pK1POBSAAzXXNWbrSfWuC1n4uMCbefsYK8W2xLz9PZyFKxePc49h6N4ugBAw==}
+  '@md-plugins/md-plugin-imports@0.1.0-beta.4':
+    resolution: {integrity: sha512-IiddG3K7qTyXJ+UojBSyN+pfwDg1tnKyQocpFx0PqUe3swz4kgHeELrm6+O+iUgKqXQUQpBWNaXZ0tIa0+Qu+w==}
     peerDependencies:
       markdown-it: ^14.1.0
 
-  '@md-plugins/md-plugin-inlinecode@0.1.0-beta.3':
-    resolution: {integrity: sha512-q6t9Yi6Qwg0XRZZliNQiTHPh7WjF7OJB/5CdhzyUUaKPa64efL6Xx8nI8Hj4wRYQN/jgUoA4Ot6rytSGyXJAhw==}
+  '@md-plugins/md-plugin-inlinecode@0.1.0-beta.4':
+    resolution: {integrity: sha512-Ylb0+7xIIXzm5suYtOVSLKAjGurRYKFB7kA56WlA8v8kfTRy2Iuxlnnc1CgY2wNC7Orfor4qWSjndpnirTGE6g==}
     peerDependencies:
       markdown-it: ^14.1.0
 
-  '@md-plugins/md-plugin-link@0.1.0-beta.3':
-    resolution: {integrity: sha512-c1IrMxaYE7aRbyU3Gw8/ixKfc6WpWGlgywDNLSxaYk13CaTUh0od7LesM4A1AHQzpaigESjIqze25gbirW/MfQ==}
+  '@md-plugins/md-plugin-link@0.1.0-beta.4':
+    resolution: {integrity: sha512-VkI32zmz77SexpHpKuXZqDZ7Iyya/0MNcoCu8SjHvpwm7Zugtx8sJlvs9F9UDVf+VBCBp1o112qfpCDp6q0BAA==}
     peerDependencies:
       markdown-it: ^14.1.0
 
-  '@md-plugins/md-plugin-table@0.1.0-beta.3':
-    resolution: {integrity: sha512-EVG+XkczLzEl4MJNL1vU8nxbuDBDXVdeNRd+GbLJNx+9RDGblDqT3lRagK1Ejte7HJ9YSh8wYhuBJid3CKdD1g==}
+  '@md-plugins/md-plugin-table@0.1.0-beta.4':
+    resolution: {integrity: sha512-kq95v1dKJHHcgP7r7uS6Wjp6T5GSIXsDAxh/38D98eAmsNTD/X7eb/Yee7bORcUeqBg+XLY1YJ7jSf9gzZNRAw==}
     peerDependencies:
       markdown-it: ^14.1.0
 
-  '@md-plugins/md-plugin-title@0.1.0-beta.3':
-    resolution: {integrity: sha512-CbUHRuqjsFl1i2/YTmwyN2OSnYOTiY7LD/8VaLsdCojHkO0NYfAkBR9pF3UA5jzd0/qLnYEZ/wWu4Utxx+4Umw==}
+  '@md-plugins/md-plugin-title@0.1.0-beta.4':
+    resolution: {integrity: sha512-QUR3gAZnL0ZbTnnYjUBlTw7Bqm9tn25oG09xZiSmt5XxhO9dBoha281y1BLZwi6sTg9SmwyhqEf0jce8Szsxpw==}
     peerDependencies:
       markdown-it: ^14.1.0
 
-  '@md-plugins/quasar-app-extension-q-press@0.1.0-beta.3':
-    resolution: {integrity: sha512-JPHhPsfeC5L2yHxRaxo6KhUw64xEtmIjjep1FTlpoTBv2XQDv+CjLYCCgfPeN4NXAU9dmDwWfNxZ1ufKLZZU5A==}
+  '@md-plugins/quasar-app-extension-q-press@0.1.0-beta.4':
+    resolution: {integrity: sha512-A9qo73wxkjBypsXBhOAU87BpuTCKptwC8BP2Sp0w1QWiDkA7iJwenM1xv+R8YDzpZx2xWC5HWvv8EQlwsoMXjw==}
     engines: {node: '>=22.13', pnpm: '>=11.1.0'}
     peerDependencies:
-      '@quasar/app-vite': '>=3.0.0-beta.14'
+      '@quasar/app-vite': '>=3.0.0-beta.18'
       markdown-it: ^14.1.0
 
-  '@md-plugins/shared@0.1.0-beta.3':
-    resolution: {integrity: sha512-qOGnVlm0MwnJKdJW/QhH4Fbm2UbU56F12AvneqzzjhHmM/I7taosJWZprsfs0yBNE/ZDQRStTWvJxA4vvlVRUg==}
+  '@md-plugins/shared@0.1.0-beta.4':
+    resolution: {integrity: sha512-j3naD4Q0TN+v4c4FBO1zBnxiGyCadNuQXegiQht8Ab1jf21Hd0uJ8C2rocPQofML7ALec4ukg6WphmFVBKc8Sg==}
     peerDependencies:
       markdown-it: ^14.1.0
 
-  '@md-plugins/vite-examples-plugin@0.1.0-beta.3':
-    resolution: {integrity: sha512-s4iKNUXujNMpYpDYUpMcy9idSA8+u88T4IKJA+YFNzEyytyhRPup+sVrZuEj9yxIdzl2LFO1v3H6MttjpnxvQg==}
+  '@md-plugins/vite-examples-plugin@0.1.0-beta.4':
+    resolution: {integrity: sha512-V4GwZ++1wQtX519dGKP51DOLRvHRUL0qd9MMppchN0fydXIcigrN1pG2r/K/hBq7jd3d1ORVb6NoKI+SNYa6ew==}
 
-  '@md-plugins/vite-md-plugin@0.1.0-beta.3':
-    resolution: {integrity: sha512-7Z4TqVJarb4TdRXWfHgQVhrZYmHjtttCbOiPDJGAj0Vg9j9MwJCuqzijXP+9FUbCsSJM5Vx8uuxd0sf4y7YWNw==}
+  '@md-plugins/vite-md-plugin@0.1.0-beta.4':
+    resolution: {integrity: sha512-aj+8O+ry65bxEK4TTYv5nd6EcMyB9k4cJq5plWjw6ejPpxa/HkuSi1xFcrV0UxoQP3M+HdkkxMn7G0EdbGFs5g==}
     peerDependencies:
       markdown-it: ^14.1.0
 
@@ -3897,68 +3897,68 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@md-plugins/md-plugin-blockquote@0.1.0-beta.3(markdown-it@14.1.1)':
+  '@md-plugins/md-plugin-blockquote@0.1.0-beta.4(markdown-it@14.1.1)':
     dependencies:
       markdown-it: 14.1.1
 
-  '@md-plugins/md-plugin-codeblocks@0.1.0-beta.3(markdown-it@14.1.1)(prismjs@1.30.0)':
+  '@md-plugins/md-plugin-codeblocks@0.1.0-beta.4(markdown-it@14.1.1)(prismjs@1.30.0)':
     dependencies:
       markdown-it: 14.1.1
       prismjs: 1.30.0
 
-  '@md-plugins/md-plugin-containers@0.1.0-beta.3(markdown-it-container@4.0.0)(markdown-it@14.1.1)':
+  '@md-plugins/md-plugin-containers@0.1.0-beta.4(markdown-it-container@4.0.0)(markdown-it@14.1.1)':
     dependencies:
       markdown-it: 14.1.1
       markdown-it-container: 4.0.0
 
-  '@md-plugins/md-plugin-frontmatter@0.1.0-beta.3(gray-matter@4.0.3)(markdown-it@14.1.1)':
+  '@md-plugins/md-plugin-frontmatter@0.1.0-beta.4(gray-matter@4.0.3)(markdown-it@14.1.1)':
     dependencies:
       gray-matter: 4.0.3
       markdown-it: 14.1.1
 
-  '@md-plugins/md-plugin-headers@0.1.0-beta.3(markdown-it@14.1.1)':
+  '@md-plugins/md-plugin-headers@0.1.0-beta.4(markdown-it@14.1.1)':
     dependencies:
       markdown-it: 14.1.1
 
-  '@md-plugins/md-plugin-image@0.1.0-beta.3(markdown-it@14.1.1)':
+  '@md-plugins/md-plugin-image@0.1.0-beta.4(markdown-it@14.1.1)':
     dependencies:
       markdown-it: 14.1.1
 
-  '@md-plugins/md-plugin-imports@0.1.0-beta.3(markdown-it@14.1.1)':
+  '@md-plugins/md-plugin-imports@0.1.0-beta.4(markdown-it@14.1.1)':
     dependencies:
       markdown-it: 14.1.1
 
-  '@md-plugins/md-plugin-inlinecode@0.1.0-beta.3(markdown-it@14.1.1)':
+  '@md-plugins/md-plugin-inlinecode@0.1.0-beta.4(markdown-it@14.1.1)':
     dependencies:
       markdown-it: 14.1.1
 
-  '@md-plugins/md-plugin-link@0.1.0-beta.3(markdown-it@14.1.1)':
+  '@md-plugins/md-plugin-link@0.1.0-beta.4(markdown-it@14.1.1)':
     dependencies:
       markdown-it: 14.1.1
 
-  '@md-plugins/md-plugin-table@0.1.0-beta.3(markdown-it@14.1.1)':
+  '@md-plugins/md-plugin-table@0.1.0-beta.4(markdown-it@14.1.1)':
     dependencies:
       markdown-it: 14.1.1
 
-  '@md-plugins/md-plugin-title@0.1.0-beta.3(markdown-it@14.1.1)':
+  '@md-plugins/md-plugin-title@0.1.0-beta.4(markdown-it@14.1.1)':
     dependencies:
       markdown-it: 14.1.1
 
-  '@md-plugins/quasar-app-extension-q-press@0.1.0-beta.3(@quasar/app-vite@3.0.0-beta.18(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(quasar@2.19.3)(rollup@4.60.3)(sass@1.99.0)(terser@5.37.0)(tsx@4.22.0)(typescript@5.9.3)(vue-router@5.0.7(@vue/compiler-sfc@3.5.34)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3))(yaml@2.9.0))(gray-matter@4.0.3)(markdown-it-container@4.0.0)(markdown-it@14.1.1)(prismjs@1.30.0)':
+  '@md-plugins/quasar-app-extension-q-press@0.1.0-beta.4(@quasar/app-vite@3.0.0-beta.18(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(quasar@2.19.3)(rollup@4.60.3)(sass@1.99.0)(terser@5.37.0)(tsx@4.22.0)(typescript@5.9.3)(vue-router@5.0.7(@vue/compiler-sfc@3.5.34)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3))(yaml@2.9.0))(gray-matter@4.0.3)(markdown-it-container@4.0.0)(markdown-it@14.1.1)(prismjs@1.30.0)':
     dependencies:
-      '@md-plugins/md-plugin-blockquote': 0.1.0-beta.3(markdown-it@14.1.1)
-      '@md-plugins/md-plugin-codeblocks': 0.1.0-beta.3(markdown-it@14.1.1)(prismjs@1.30.0)
-      '@md-plugins/md-plugin-containers': 0.1.0-beta.3(markdown-it-container@4.0.0)(markdown-it@14.1.1)
-      '@md-plugins/md-plugin-frontmatter': 0.1.0-beta.3(gray-matter@4.0.3)(markdown-it@14.1.1)
-      '@md-plugins/md-plugin-headers': 0.1.0-beta.3(markdown-it@14.1.1)
-      '@md-plugins/md-plugin-image': 0.1.0-beta.3(markdown-it@14.1.1)
-      '@md-plugins/md-plugin-imports': 0.1.0-beta.3(markdown-it@14.1.1)
-      '@md-plugins/md-plugin-inlinecode': 0.1.0-beta.3(markdown-it@14.1.1)
-      '@md-plugins/md-plugin-link': 0.1.0-beta.3(markdown-it@14.1.1)
-      '@md-plugins/md-plugin-table': 0.1.0-beta.3(markdown-it@14.1.1)
-      '@md-plugins/md-plugin-title': 0.1.0-beta.3(markdown-it@14.1.1)
-      '@md-plugins/shared': 0.1.0-beta.3(markdown-it@14.1.1)
-      '@md-plugins/vite-md-plugin': 0.1.0-beta.3(gray-matter@4.0.3)(markdown-it-container@4.0.0)(markdown-it@14.1.1)(prismjs@1.30.0)
+      '@md-plugins/md-plugin-blockquote': 0.1.0-beta.4(markdown-it@14.1.1)
+      '@md-plugins/md-plugin-codeblocks': 0.1.0-beta.4(markdown-it@14.1.1)(prismjs@1.30.0)
+      '@md-plugins/md-plugin-containers': 0.1.0-beta.4(markdown-it-container@4.0.0)(markdown-it@14.1.1)
+      '@md-plugins/md-plugin-frontmatter': 0.1.0-beta.4(gray-matter@4.0.3)(markdown-it@14.1.1)
+      '@md-plugins/md-plugin-headers': 0.1.0-beta.4(markdown-it@14.1.1)
+      '@md-plugins/md-plugin-image': 0.1.0-beta.4(markdown-it@14.1.1)
+      '@md-plugins/md-plugin-imports': 0.1.0-beta.4(markdown-it@14.1.1)
+      '@md-plugins/md-plugin-inlinecode': 0.1.0-beta.4(markdown-it@14.1.1)
+      '@md-plugins/md-plugin-link': 0.1.0-beta.4(markdown-it@14.1.1)
+      '@md-plugins/md-plugin-table': 0.1.0-beta.4(markdown-it@14.1.1)
+      '@md-plugins/md-plugin-title': 0.1.0-beta.4(markdown-it@14.1.1)
+      '@md-plugins/shared': 0.1.0-beta.4(markdown-it@14.1.1)
+      '@md-plugins/vite-md-plugin': 0.1.0-beta.4(gray-matter@4.0.3)(markdown-it-container@4.0.0)(markdown-it@14.1.1)(prismjs@1.30.0)
       '@quasar/app-vite': 3.0.0-beta.18(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(quasar@2.19.3)(rollup@4.60.3)(sass@1.99.0)(terser@5.37.0)(tsx@4.22.0)(typescript@5.9.3)(vue-router@5.0.7(@vue/compiler-sfc@3.5.34)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3))(yaml@2.9.0)
       '@types/markdown-it': 14.1.2
       fs-extra: 11.3.5
@@ -3968,28 +3968,28 @@ snapshots:
       - markdown-it-container
       - prismjs
 
-  '@md-plugins/shared@0.1.0-beta.3(markdown-it@14.1.1)':
+  '@md-plugins/shared@0.1.0-beta.4(markdown-it@14.1.1)':
     dependencies:
       markdown-it: 14.1.1
 
-  '@md-plugins/vite-examples-plugin@0.1.0-beta.3':
+  '@md-plugins/vite-examples-plugin@0.1.0-beta.4':
     dependencies:
       tinyglobby: 0.2.16
 
-  '@md-plugins/vite-md-plugin@0.1.0-beta.3(gray-matter@4.0.3)(markdown-it-container@4.0.0)(markdown-it@14.1.1)(prismjs@1.30.0)':
+  '@md-plugins/vite-md-plugin@0.1.0-beta.4(gray-matter@4.0.3)(markdown-it-container@4.0.0)(markdown-it@14.1.1)(prismjs@1.30.0)':
     dependencies:
-      '@md-plugins/md-plugin-blockquote': 0.1.0-beta.3(markdown-it@14.1.1)
-      '@md-plugins/md-plugin-codeblocks': 0.1.0-beta.3(markdown-it@14.1.1)(prismjs@1.30.0)
-      '@md-plugins/md-plugin-containers': 0.1.0-beta.3(markdown-it-container@4.0.0)(markdown-it@14.1.1)
-      '@md-plugins/md-plugin-frontmatter': 0.1.0-beta.3(gray-matter@4.0.3)(markdown-it@14.1.1)
-      '@md-plugins/md-plugin-headers': 0.1.0-beta.3(markdown-it@14.1.1)
-      '@md-plugins/md-plugin-image': 0.1.0-beta.3(markdown-it@14.1.1)
-      '@md-plugins/md-plugin-imports': 0.1.0-beta.3(markdown-it@14.1.1)
-      '@md-plugins/md-plugin-inlinecode': 0.1.0-beta.3(markdown-it@14.1.1)
-      '@md-plugins/md-plugin-link': 0.1.0-beta.3(markdown-it@14.1.1)
-      '@md-plugins/md-plugin-table': 0.1.0-beta.3(markdown-it@14.1.1)
-      '@md-plugins/md-plugin-title': 0.1.0-beta.3(markdown-it@14.1.1)
-      '@md-plugins/shared': 0.1.0-beta.3(markdown-it@14.1.1)
+      '@md-plugins/md-plugin-blockquote': 0.1.0-beta.4(markdown-it@14.1.1)
+      '@md-plugins/md-plugin-codeblocks': 0.1.0-beta.4(markdown-it@14.1.1)(prismjs@1.30.0)
+      '@md-plugins/md-plugin-containers': 0.1.0-beta.4(markdown-it-container@4.0.0)(markdown-it@14.1.1)
+      '@md-plugins/md-plugin-frontmatter': 0.1.0-beta.4(gray-matter@4.0.3)(markdown-it@14.1.1)
+      '@md-plugins/md-plugin-headers': 0.1.0-beta.4(markdown-it@14.1.1)
+      '@md-plugins/md-plugin-image': 0.1.0-beta.4(markdown-it@14.1.1)
+      '@md-plugins/md-plugin-imports': 0.1.0-beta.4(markdown-it@14.1.1)
+      '@md-plugins/md-plugin-inlinecode': 0.1.0-beta.4(markdown-it@14.1.1)
+      '@md-plugins/md-plugin-link': 0.1.0-beta.4(markdown-it@14.1.1)
+      '@md-plugins/md-plugin-table': 0.1.0-beta.4(markdown-it@14.1.1)
+      '@md-plugins/md-plugin-title': 0.1.0-beta.4(markdown-it@14.1.1)
+      '@md-plugins/shared': 0.1.0-beta.4(markdown-it@14.1.1)
       markdown-it: 14.1.1
     transitivePeerDependencies:
       - gray-matter
