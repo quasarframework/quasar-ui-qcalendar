@@ -20,7 +20,7 @@
     "format:check": "oxfmt --check"
   },
   "devDependencies": {
-    "@types/node": "^25.9.0",
+    "@types/node": "^25.9.1",
     "@vitest/coverage-istanbul": "^3.0.5",
     "oxfmt": "^0.51.0",
     "oxlint": "^1.66.0",

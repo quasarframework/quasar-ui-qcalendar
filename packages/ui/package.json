@@ -229,7 +229,7 @@
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "^25.8.0",
+    "@types/node": "^25.9.1",
     "@types/rtlcss": "^3.5.4",
     "@types/uglify-js": "^3.17.5",
     "autoprefixer": "^10.5.0",
