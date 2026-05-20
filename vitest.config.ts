@@ -9,9 +9,6 @@ export default defineConfig({
   //     },
   //   ],
   // },
-  esbuild: {
-    target: 'node20',
-  },
   test: {
     coverage: {
       include: ['packages/*/src/**/*.ts'],

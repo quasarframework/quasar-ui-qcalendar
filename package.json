@@ -21,12 +21,12 @@
   },
   "devDependencies": {
     "@types/node": "^25.9.1",
-    "@vitest/coverage-istanbul": "^3.0.5",
+    "@vitest/coverage-istanbul": "^4.1.7",
     "oxfmt": "^0.51.0",
     "oxlint": "^1.66.0",
     "typescript": "~5.9.3",
     "unbuild": "^3.6.1",
-    "vitest": "^3.0.5"
+    "vitest": "^4.1.7"
   },
   "engines": {
     "node": ">=22.13",
