@@ -8,7 +8,7 @@
   </a>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 import { mdiLaunch } from '@quasar/extras/mdi-v6'
 

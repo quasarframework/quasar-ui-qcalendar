@@ -122,7 +122,7 @@
   </q-card>
 </template>
 
-<script setup lang="js">
+<script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue'
 import { mdiClose, mdiMagnify } from '@quasar/extras/mdi-v7'
 

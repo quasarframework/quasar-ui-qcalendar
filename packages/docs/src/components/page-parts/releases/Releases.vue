@@ -27,29 +27,39 @@
   </q-card>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { date } from 'quasar'
 
 import PackageReleases from './PackageReleases.vue'
+import type { ReleaseInfo } from './PackageReleases.vue'
 
 const { extractDate, formatDate } = date
 const packageName = 'QCalendar'
 
+interface GitHubRelease {
+  name?: string
+  tag_name?: string
+  published_at: string
+  body?: string
+}
+
+type ReleasePackageMap = Record<string, ReleaseInfo[]>
+
 const loading = ref(false)
 const error = ref(false)
-const packages = ref({ [packageName]: [] })
+const packages = ref<ReleasePackageMap>({ [packageName]: [] })
 const currentPackage = ref(packageName)
-const latestVersions = ref({})
+const latestVersions = ref<Record<string, string>>({})
 
-function getReleaseVersion(release) {
+function getReleaseVersion(release: GitHubRelease): string | undefined {
   const name = release.name || release.tag_name || ''
   const match = name.match(/(?:^|\s)v?(\d+\.\d+\.\d+(?:[-\w.]+)?)/)
 
   return match?.[1] ?? release.tag_name?.replace(/^v/, '')
 }
 
-async function queryReleases() {
+async function queryReleases(): Promise<void> {
   loading.value = true
   error.value = false
 
@@ -62,7 +72,7 @@ async function queryReleases() {
       throw new Error(`GitHub request failed with ${response.status}`)
     }
 
-    const releases = await response.json()
+    const releases = (await response.json()) as GitHubRelease[]
     const parsedReleases = releases
       .map((release) => {
         const version = getReleaseVersion(release)
@@ -78,7 +88,7 @@ async function queryReleases() {
           label: version,
         }
       })
-      .filter(Boolean)
+      .filter((release): release is ReleaseInfo => release !== null)
       .sort((a, b) => {
         return (
           Number.parseInt(b.date.replace(/-/g, ''), 10) -
@@ -91,7 +101,7 @@ async function queryReleases() {
     }
 
     packages.value = { [packageName]: parsedReleases }
-    latestVersions.value = { [packageName]: parsedReleases[0].label }
+    latestVersions.value = { [packageName]: parsedReleases[0]?.label ?? '' }
   } catch {
     error.value = true
   } finally {

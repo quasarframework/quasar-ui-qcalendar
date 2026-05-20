@@ -60,26 +60,32 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import { mdiMagnify } from '@quasar/extras/mdi-v6'
 
 import sanitize from './sanitize'
 import parseMdTable from './md-table-parser'
 
-const props = defineProps({
-  latestVersion: {
-    type: String,
-    default: undefined,
+export interface ReleaseInfo {
+  version: string
+  date: string
+  body: string
+  label: string
+}
+
+const props = withDefaults(
+  defineProps<{
+    latestVersion?: string
+    releases?: ReleaseInfo[]
+  }>(),
+  {
+    releases: () => [],
   },
-  releases: {
-    type: Array,
-    default: () => [],
-  },
-})
+)
 
 const search = ref('')
-const selectedVersion = ref(props.latestVersion)
+const selectedVersion = ref<string | undefined>(props.latestVersion)
 
 watch(
   () => props.latestVersion,
@@ -98,11 +104,11 @@ const filteredReleases = computed(() => {
   return props.releases
 })
 
-function escapeRegExp(value) {
+function escapeRegExp(value: string): string {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
 
-function parse(body) {
+function parse(body: string): string {
   let content = sanitize(body) + '\n'
 
   if (search.value !== '') {

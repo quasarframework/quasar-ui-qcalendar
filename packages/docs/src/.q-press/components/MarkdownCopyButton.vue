@@ -8,7 +8,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, getCurrentInstance } from 'vue'
 import { copyToClipboard } from './markdown-utils'
 import { mdiClipboardOutline } from '@quasar/extras/mdi-v7'

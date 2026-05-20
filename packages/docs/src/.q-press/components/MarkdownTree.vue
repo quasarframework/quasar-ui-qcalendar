@@ -34,7 +34,7 @@
   </q-tree>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { mdiLaunch, mdiInformationOutline } from '@quasar/extras/mdi-v6'
 
 const props = defineProps({

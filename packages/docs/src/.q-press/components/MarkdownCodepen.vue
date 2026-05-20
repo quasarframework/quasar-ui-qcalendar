@@ -11,7 +11,7 @@
   </form>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { Quasar } from 'quasar'
 import { ref, reactive, computed, nextTick } from 'vue'
 
