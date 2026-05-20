@@ -339,19 +339,33 @@
       <q-separator />
       <div class="byline">
         <p>
-          Don't forget to check out the Q-Press app extension for Quasar to create beautiful
-          documentation sites.
+          Don't forget to check out the
+          <a href="https://github.com/quasarframework/quasar-ui-qcalendar" target="_blank">
+            QCalendar GitHub repo
+          </a>
+          and the
+          <a href="https://github.com/hawkeye64/md-plugins" target="_blank">
+            @md-plugins GitHub repo
+          </a>
+          for the shared documentation tooling behind this site.
         </p>
         <p>
-          This site is built with Q-Press! Install it, set it up, choose a theme and start your own
-          site!
+          This site is built with
+          <a
+            href="https://www.npmjs.com/package/@md-plugins/quasar-app-extension-q-press"
+            target="_blank"
+          >
+            Q-Press
+          </a>
+          , the <code>@md-plugins</code> app extension for Quasar documentation sites. Install it,
+          set it up, choose a theme, and start your own site!
         </p>
       </div>
       <q-separator />
       <div class="byline">
         <p>
           We hope you find this documentation helpful. If you have any questions or need further
-          assistance, please don't hesitate to reach out to our support team.
+          assistance, please reach out through the QCalendar repository or GitHub Discussions.
         </p>
       </div>
     </div>
@@ -443,6 +457,15 @@ const layout = computed(() => {
 
 body.body--dark .byline {
   color: #f0f0f0;
+}
+
+.byline a {
+  color: $brand-primary;
+  font-weight: 700;
+}
+
+body.body--dark .byline a {
+  color: #8ee8ff;
 }
 
 .content {
