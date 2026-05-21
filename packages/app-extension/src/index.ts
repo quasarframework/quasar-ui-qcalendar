@@ -13,7 +13,7 @@ export default defineIndexScript((api) => {
   // hard dependencies, as in a minimum version of the "quasar"
   // package or a minimum version of "@quasar/app" CLI
   api.compatibleWith('quasar', '^2.16.0')
-  api.compatibleWith('@quasar/app-vite', '>=3.0.0-beta.18')
+  api.compatibleWith('@quasar/app-vite', '>=3.0.0-beta.19')
 
   // Uncomment the line below if you provide a JSON API for your component
   api.registerDescribeApi('QCalendar', '~@quasar/quasar-ui-qcalendar/dist/api/QCalendar.json')
@@ -21,6 +21,6 @@ export default defineIndexScript((api) => {
   // We extend /quasar.conf.js
   api.extendQuasarConf(() => ({
     boot: ['~@quasar/quasar-app-extension-qcalendar/src/boot/vite-register.ts'],
-    css: ['~@quasar/quasar-ui-qcalendar/src/index.scss']
+    css: ['~@quasar/quasar-ui-qcalendar/src/index.scss'],
   }))
 })
