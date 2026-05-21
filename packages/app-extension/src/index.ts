@@ -19,12 +19,8 @@ export default defineIndexScript((api) => {
   api.registerDescribeApi('QCalendar', '~@quasar/quasar-ui-qcalendar/dist/api/QCalendar.json')
 
   // We extend /quasar.conf.js
-  api.extendQuasarConf((conf) => {
-    conf.boot ??= []
-    conf.css ??= []
-
-    // Register the Vite boot file and stylesheet.
-    conf.boot.push('~@quasar/quasar-app-extension-qcalendar/src/boot/vite-register.ts')
-    conf.css.push('~@quasar/quasar-ui-qcalendar/src/index.scss')
-  })
+  api.extendQuasarConf(() => ({
+    boot: ['~@quasar/quasar-app-extension-qcalendar/src/boot/vite-register.ts'],
+    css: ['~@quasar/quasar-ui-qcalendar/src/index.scss']
+  }))
 })
