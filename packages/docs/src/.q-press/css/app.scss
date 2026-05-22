@@ -327,30 +327,33 @@ body.q-scroll--lock .q-page > .q-scroll--anchor {
   overflow-anchor: auto;
 }
 
-// makes the scroll bar look better for the drop-down menus in the header
-::-webkit-scrollbar {
-  height: 12px;
-  width: 14px;
-  background: transparent;
-  z-index: 12;
-  overflow: visible;
-}
+// Makes scrollbars look better for header drop-downs and search results.
+.markdown-header-menu,
+.markdown-search__results {
+  &::-webkit-scrollbar {
+    height: 12px;
+    width: 14px;
+    background: transparent;
+    z-index: 12;
+    overflow: visible;
+  }
 
-::-webkit-scrollbar-thumb {
-  width: 10px;
-  background-color: $brand-primary;
-  border-radius: 10px;
-  z-index: 12;
-  border: 4px solid rgba(0, 0, 0, 0);
-  background-clip: padding-box;
-  transition: background-color $header-quick-transition;
-  margin: 4px;
-  min-height: 32px;
-  min-width: 32px;
-}
+  &::-webkit-scrollbar-thumb {
+    width: 10px;
+    background-color: $brand-primary;
+    border-radius: 10px;
+    z-index: 12;
+    border: 4px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+    transition: background-color $header-quick-transition;
+    margin: 4px;
+    min-height: 32px;
+    min-width: 32px;
+  }
 
-::-webkit-scrollbar-thumb:hover {
-  background: $brand-primary;
+  &::-webkit-scrollbar-thumb:hover {
+    background: $brand-primary;
+  }
 }
 
 .shadow-bottom {

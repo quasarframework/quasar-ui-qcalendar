@@ -2,6 +2,7 @@
 
 ![@quasar/quasar-ui-qcalendar](https://img.shields.io/npm/v/@quasar/quasar-ui-qcalendar/beta?label=@quasar/quasar-ui-qcalendar)
 ![@quasar/quasar-app-extension-qcalendar](https://img.shields.io/npm/v/@quasar/quasar-app-extension-qcalendar/beta?label=@quasar/quasar-app-extension-qcalendar)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d1d3d132-6d34-47ef-b8eb-afeb8b0d0c4a/deploy-status)](https://app.netlify.com/projects/qcalendar/deploys)
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/quasarframework/quasar-ui-qcalendar)]()
 [![GitHub repo size in bytes](https://img.shields.io/github/repo-size/quasarframework/quasar-ui-qcalendar)]()
 [![npm](https://img.shields.io/npm/dt/@quasar/quasar-app-extension-qcalendar)](https://www.npmjs.com/package/@quasar/quasar-app-extension-qcalendar)
