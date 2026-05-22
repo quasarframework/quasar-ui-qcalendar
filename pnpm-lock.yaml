@@ -37,8 +37,8 @@ importers:
         version: link:../ui
     devDependencies:
       '@quasar/app-vite':
-        specifier: 3.0.0-beta.19
-        version: 3.0.0-beta.19(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(quasar@2.19.3)(rollup@4.60.3)(sass@1.99.0)(terser@5.37.0)(tsx@4.22.3)(typescript@5.9.3)(vue-router@5.0.7(@vue/compiler-sfc@3.5.34)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3))(yaml@2.9.0)
+        specifier: 3.0.0-beta.20
+        version: 3.0.0-beta.20(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(quasar@2.19.3)(rollup@4.60.3)(sass@1.99.0)(terser@5.37.0)(tsx@4.22.3)(typescript@5.9.3)(vue-router@5.0.7(@vue/compiler-sfc@3.5.34)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3))(yaml@2.9.0)
 
   packages/docs:
     dependencies:
@@ -69,7 +69,7 @@ importers:
     devDependencies:
       '@md-plugins/quasar-app-extension-q-press':
         specifier: 0.1.0-beta.4
-        version: 0.1.0-beta.4(@quasar/app-vite@3.0.0-beta.19(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(quasar@2.19.3)(rollup@4.60.3)(sass@1.99.0)(terser@5.37.0)(tsx@4.22.3)(typescript@5.9.3)(vue-router@5.0.7(@vue/compiler-sfc@3.5.34)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3))(yaml@2.9.0))(gray-matter@4.0.3)(markdown-it-container@4.0.0)(markdown-it@14.1.1)(prismjs@1.30.0)
+        version: 0.1.0-beta.4(@quasar/app-vite@3.0.0-beta.20(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(quasar@2.19.3)(rollup@4.60.3)(sass@1.99.0)(terser@5.37.0)(tsx@4.22.3)(typescript@5.9.3)(vue-router@5.0.7(@vue/compiler-sfc@3.5.34)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3))(yaml@2.9.0))(gray-matter@4.0.3)(markdown-it-container@4.0.0)(markdown-it@14.1.1)(prismjs@1.30.0)
       '@md-plugins/shared':
         specifier: 0.1.0-beta.4
         version: 0.1.0-beta.4(markdown-it@14.1.1)
@@ -80,8 +80,8 @@ importers:
         specifier: 0.1.0-beta.4
         version: 0.1.0-beta.4(gray-matter@4.0.3)(markdown-it-container@4.0.0)(markdown-it@14.1.1)(prismjs@1.30.0)
       '@quasar/app-vite':
-        specifier: 3.0.0-beta.19
-        version: 3.0.0-beta.19(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(quasar@2.19.3)(rollup@4.60.3)(sass@1.99.0)(terser@5.37.0)(tsx@4.22.3)(typescript@5.9.3)(vue-router@5.0.7(@vue/compiler-sfc@3.5.34)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3))(yaml@2.9.0)
+        specifier: 3.0.0-beta.20
+        version: 3.0.0-beta.20(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(quasar@2.19.3)(rollup@4.60.3)(sass@1.99.0)(terser@5.37.0)(tsx@4.22.3)(typescript@5.9.3)(vue-router@5.0.7(@vue/compiler-sfc@3.5.34)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3))(yaml@2.9.0)
       '@quasar/quasar-ui-qcalendar':
         specifier: workspace:*
         version: link:../ui
@@ -1117,8 +1117,8 @@ packages:
     resolution: {integrity: sha512-C2Xj8FZ0uHWeCXXqX5B4/gVFQmtSkiuOolzAgutjTfseNOHT3pUjljDZsTSxXFGgio54bCzVFqmEOUrIVk8RDA==}
     engines: {node: '>=20.0.0'}
 
-  '@quasar/app-vite@3.0.0-beta.19':
-    resolution: {integrity: sha512-peqGJOWVRUg3rTw/6KD99fHTn1FMstYmTHV+zD7wXFE9NBb4D47oJZc4SYfgko+e3P3odqP2fBuwLaEaj+q3CQ==}
+  '@quasar/app-vite@3.0.0-beta.20':
+    resolution: {integrity: sha512-nQXVIQO18K0vFteAN/Dja/NV9s7nTi3NqRAk890D9uCaKbGtIZwoJh/kzFJ/2EaryjLyvqxVF4VtGDG5+g/Tlw==}
     engines: {node: ^30 || ^28 || ^26 || ^24 || ^22.22.0}
     hasBin: true
     peerDependencies:
@@ -4219,7 +4219,7 @@ snapshots:
     dependencies:
       markdown-it: 14.1.1
 
-  '@md-plugins/quasar-app-extension-q-press@0.1.0-beta.4(@quasar/app-vite@3.0.0-beta.19(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(quasar@2.19.3)(rollup@4.60.3)(sass@1.99.0)(terser@5.37.0)(tsx@4.22.3)(typescript@5.9.3)(vue-router@5.0.7(@vue/compiler-sfc@3.5.34)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3))(yaml@2.9.0))(gray-matter@4.0.3)(markdown-it-container@4.0.0)(markdown-it@14.1.1)(prismjs@1.30.0)':
+  '@md-plugins/quasar-app-extension-q-press@0.1.0-beta.4(@quasar/app-vite@3.0.0-beta.20(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(quasar@2.19.3)(rollup@4.60.3)(sass@1.99.0)(terser@5.37.0)(tsx@4.22.3)(typescript@5.9.3)(vue-router@5.0.7(@vue/compiler-sfc@3.5.34)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3))(yaml@2.9.0))(gray-matter@4.0.3)(markdown-it-container@4.0.0)(markdown-it@14.1.1)(prismjs@1.30.0)':
     dependencies:
       '@md-plugins/md-plugin-blockquote': 0.1.0-beta.4(markdown-it@14.1.1)
       '@md-plugins/md-plugin-codeblocks': 0.1.0-beta.4(markdown-it@14.1.1)(prismjs@1.30.0)
@@ -4234,7 +4234,7 @@ snapshots:
       '@md-plugins/md-plugin-title': 0.1.0-beta.4(markdown-it@14.1.1)
       '@md-plugins/shared': 0.1.0-beta.4(markdown-it@14.1.1)
       '@md-plugins/vite-md-plugin': 0.1.0-beta.4(gray-matter@4.0.3)(markdown-it-container@4.0.0)(markdown-it@14.1.1)(prismjs@1.30.0)
-      '@quasar/app-vite': 3.0.0-beta.19(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(quasar@2.19.3)(rollup@4.60.3)(sass@1.99.0)(terser@5.37.0)(tsx@4.22.3)(typescript@5.9.3)(vue-router@5.0.7(@vue/compiler-sfc@3.5.34)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3))(yaml@2.9.0)
+      '@quasar/app-vite': 3.0.0-beta.20(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(quasar@2.19.3)(rollup@4.60.3)(sass@1.99.0)(terser@5.37.0)(tsx@4.22.3)(typescript@5.9.3)(vue-router@5.0.7(@vue/compiler-sfc@3.5.34)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3))(yaml@2.9.0)
       '@types/markdown-it': 14.1.2
       fs-extra: 11.3.5
       markdown-it: 14.1.1
@@ -4553,7 +4553,7 @@ snapshots:
       tslib: 2.8.1
       tsyringe: 4.10.0
 
-  '@quasar/app-vite@3.0.0-beta.19(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(quasar@2.19.3)(rollup@4.60.3)(sass@1.99.0)(terser@5.37.0)(tsx@4.22.3)(typescript@5.9.3)(vue-router@5.0.7(@vue/compiler-sfc@3.5.34)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3))(yaml@2.9.0)':
+  '@quasar/app-vite@3.0.0-beta.20(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(quasar@2.19.3)(rollup@4.60.3)(sass@1.99.0)(terser@5.37.0)(tsx@4.22.3)(typescript@5.9.3)(vue-router@5.0.7(@vue/compiler-sfc@3.5.34)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3)))(vue@3.5.34(typescript@5.9.3))(yaml@2.9.0)':
     dependencies:
       '@clack/prompts': 1.4.0
       '@quasar/render-ssr-error': 2.2.2
@@ -4576,8 +4576,8 @@ snapshots:
       mlly: 1.8.2
       open: 11.0.0
       quasar: 2.19.3
-      rolldown: 1.0.0
-      rollup-plugin-visualizer: 7.0.1(rolldown@1.0.0)(rollup@4.60.3)
+      rolldown: 1.0.2
+      rollup-plugin-visualizer: 7.0.1(rolldown@1.0.2)(rollup@4.60.3)
       sass-embedded: 1.99.0
       semver: 7.8.0
       serialize-javascript: 7.0.5
@@ -6544,14 +6544,14 @@ snapshots:
     optionalDependencies:
       '@babel/code-frame': 7.29.0
 
-  rollup-plugin-visualizer@7.0.1(rolldown@1.0.0)(rollup@4.60.3):
+  rollup-plugin-visualizer@7.0.1(rolldown@1.0.2)(rollup@4.60.3):
     dependencies:
       open: 11.0.0
       picomatch: 4.0.4
       source-map: 0.7.4
       yargs: 18.0.0
     optionalDependencies:
-      rolldown: 1.0.0
+      rolldown: 1.0.2
       rollup: 4.60.3
 
   rollup@4.60.3:
@@ -7010,7 +7010,7 @@ snapshots:
     dependencies:
       lightningcss: 1.32.0
       picomatch: 4.0.4
-      postcss: 8.5.14
+      postcss: 8.5.15
       rolldown: 1.0.0
       tinyglobby: 0.2.16
     optionalDependencies:
