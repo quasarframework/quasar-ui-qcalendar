@@ -37,10 +37,10 @@
     "@quasar/quasar-ui-qcalendar": "workspace:^"
   },
   "devDependencies": {
-    "@quasar/app-vite": "3.0.0-beta.26"
+    "@quasar/app-vite": "3.0.0-beta.27"
   },
   "peerDependencies": {
-    "@quasar/app-vite": ">=3.0.0-beta.26"
+    "@quasar/app-vite": ">=3.0.0-beta.27"
   },
   "engines": {
     "node": ">=22.13",

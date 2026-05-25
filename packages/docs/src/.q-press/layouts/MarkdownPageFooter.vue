@@ -146,6 +146,12 @@ const props = defineProps({
     font-size: ($font-size - 2px);
   }
 
+  &__image {
+    display: block;
+    height: auto;
+    width: 100%;
+  }
+
   &__nav {
     display: grid;
     grid-row-gap: 64px;
@@ -181,12 +187,6 @@ const props = defineProps({
 
   &__copyright {
     font-size: ($font-size - 2px);
-  }
-
-  &__image {
-    display: block;
-    height: auto;
-    width: 100%;
   }
 }
 

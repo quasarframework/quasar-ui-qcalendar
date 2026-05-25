@@ -94,7 +94,6 @@ import { useRoute } from 'vue-router'
 import { mdiPencil, mdiFlash, mdiLaunch } from '@quasar/extras/mdi-v7'
 
 import type { NavItem, RelatedItem } from '@md-plugins/vite-md-plugin'
-import type { TocItem } from '@md-plugins/md-plugin-headers'
 import MarkdownLink from '../components/MarkdownLink.vue'
 import MarkdownPageToc from './MarkdownPageToc.vue'
 
@@ -129,7 +128,7 @@ const props = defineProps({
   },
 
   toc: {
-    type: Array<TocItem>,
+    type: Array<TocMenuItem>,
     default: () => [],
   },
   related: {
@@ -179,7 +178,6 @@ const tocClass = computed(
   () => `markdown-page__toc-container--${props.toc !== void 0 ? 'fixed' : 'flowing'}`,
 )
 
-console.log('MarkdownPage props', props)
 </script>
 
 <style lang="scss">

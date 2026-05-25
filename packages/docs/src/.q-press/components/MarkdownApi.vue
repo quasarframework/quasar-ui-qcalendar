@@ -361,7 +361,7 @@ function getApiCount(parsedApi, tabs, innerTabs) {
 }
 
 const getJsonUrl =
-  import.meta.env.DEV === true
+  import.meta.env.QUASAR_DEV === true
     ? (file) => `/@fs/${import.meta.env.QCLI_FS_QUASAR_FOLDER}/dist/api/${file}.json`
     : (file) => `/quasar-api/${file}.json`
 

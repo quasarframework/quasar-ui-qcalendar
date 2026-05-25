@@ -201,13 +201,13 @@ if (import.meta.env.QUASAR_CLIENT) {
   onMounted(() => {
     examples.list.then((list) => {
       component.value = markRaw(
-        import.meta.env.DEV
+        import.meta.env.QUASAR_DEV
           ? list.code[`/src/examples/${examples.name}/${props.file}.vue`].default
           : list[props.file],
       )
 
       parseComponent(
-        import.meta.env.DEV
+        import.meta.env.QUASAR_DEV
           ? list.source[`/src/examples/${examples.name}/${props.file}.vue`]
           : list[`Raw${props.file}`],
       )

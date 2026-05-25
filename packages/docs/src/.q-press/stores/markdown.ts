@@ -1,7 +1,6 @@
 import { defineStore, acceptHMRUpdate } from 'pinia'
 import { useRoute } from 'vue-router'
 import { useScroll } from '../composables/scroll'
-import type { TocItem } from '@md-plugins/md-plugin-headers'
 
 export const useMarkdownStore = defineStore('markdown-store', {
   state: () => ({
@@ -60,7 +59,7 @@ export const useMarkdownStore = defineStore('markdown-store', {
       }
     },
 
-    setToc(toc: TocItem[]) {
+    setToc(toc: TocMenuItem[]) {
       const { scrollTo } = useScroll()
       this.toc =
         toc !== void 0
