@@ -5,3 +5,20 @@ allowBuilds:
   '@carbon/icons-vue': true
   '@parcel/watcher': true
   esbuild: true
+minimumReleaseAgeExclude:
+  - '@quasar/app-vite@3.0.0-beta.26'
+  - '@md-plugins/md-plugin-blockquote@0.1.0-beta.6'
+  - '@md-plugins/md-plugin-codeblocks@0.1.0-beta.6'
+  - '@md-plugins/md-plugin-containers@0.1.0-beta.6'
+  - '@md-plugins/md-plugin-frontmatter@0.1.0-beta.6'
+  - '@md-plugins/md-plugin-headers@0.1.0-beta.6'
+  - '@md-plugins/md-plugin-image@0.1.0-beta.6'
+  - '@md-plugins/md-plugin-imports@0.1.0-beta.6'
+  - '@md-plugins/md-plugin-inlinecode@0.1.0-beta.6'
+  - '@md-plugins/md-plugin-link@0.1.0-beta.6'
+  - '@md-plugins/md-plugin-table@0.1.0-beta.6'
+  - '@md-plugins/md-plugin-title@0.1.0-beta.6'
+  - '@md-plugins/quasar-app-extension-q-press@0.1.0-beta.6'
+  - '@md-plugins/shared@0.1.0-beta.6'
+  - '@md-plugins/vite-md-plugin@0.1.0-beta.6'
+  - '@md-plugins/vite-examples-plugin@0.1.0-beta.6'

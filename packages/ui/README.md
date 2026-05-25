@@ -24,7 +24,7 @@ v5.0.0 beta
 
 - QCalendar v5 prepares the project for Quasar CLI Vite 3.
 - The app extension is now Vite-only and requires `@quasar/app-vite` v3 beta.
-- This repo now requires Node.js `>=22.13` and pnpm `>=11.1.0`.
+- This repo now requires Node.js `>=22.13` and pnpm `>=11.3.0`.
 - Be sure to read the [Migration Guide](https://qcalendar.netlify.app/other/migration-guide).
 
 ---

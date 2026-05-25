@@ -1,3 +1,5 @@
+/// <reference types="@quasar/app-vite/client" />
+
 declare module '*.md'
 
 declare module '@md-plugins/md-plugin-headers' {
@@ -14,11 +16,11 @@ interface ImportMetaHot {
 }
 
 interface ImportMeta {
-  glob: <T = any>(pattern: string) => Record<string, () => Promise<T>>
+  readonly env: ImportMetaEnv
+  glob: <T = unknown>(pattern: string) => Record<string, () => Promise<T>>
   hot?: ImportMetaHot
 }
 
-// Define types for headers
 interface TocMenuItem {
   id: string
   level: number

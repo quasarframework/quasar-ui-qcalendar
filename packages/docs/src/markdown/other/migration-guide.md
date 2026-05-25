@@ -25,7 +25,7 @@ This release prepares QCalendar for the next Quasar CLI Vite generation. The cal
 | Quasar CLI                    | `@quasar/app-vite` v3 beta |
 | App extension                 | Vite only                  |
 | Node.js for this repo and CI  | `>=22.13`                  |
-| Package manager for this repo | `pnpm >=11.1.0`            |
+| Package manager for this repo | `pnpm >=11.3.0`            |
 
 If your application is still using `@quasar/app-webpack`, migrate the application to Quasar CLI Vite before installing the QCalendar v5 app extension.
 
@@ -52,7 +52,7 @@ When QCalendar v5 is released as stable, remove the `@beta` tag from those comma
 
 - The app extension now requires Vite. It will stop with an error if it is installed in a non-Vite Quasar app.
 - The extension registers the Vite boot file only. The previous webpack boot file has been removed.
-- The extension is compatible with `@quasar/app-vite` `>=3.0.0-beta.19`.
+- The extension is compatible with `@quasar/app-vite` `>=3.0.0-beta.26`.
 - App extension entry scripts are now TypeScript-first. The package entry should point to `src/index.ts`, with wrappers imported directly from `@quasar/app-vite`, like `defineIndexScript()`.
 - The extension runtime boot file is now `src/boot/vite-register.ts`.
 - If you generate your own boot file inside the Quasar app, it should import `defineBoot` from `#q-app`, matching the Quasar CLI Vite 3 alias.
@@ -86,7 +86,7 @@ See [Installation Types](/getting-started/installation) for more installation ex
 
 The QCalendar repository now uses:
 
-- `pnpm@11.1.0`
+- `pnpm@11.3.0`
 - Node.js `>=22.13`
 - `oxlint` instead of ESLint
 - `oxfmt` instead of Prettier
