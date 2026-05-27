@@ -4,16 +4,13 @@
     "docsUrl": "https://path-to-your-docs/markdown-codepen"
   },
   "props": {
-    "active": {
-      "type": "Boolean",
-      "desc": "Flag to indicate if the form should be active",
-      "category": "state"
-    },
-    "options": {
+    "title": {
       "type": "String",
-      "desc": "JSON string containing the CodePen options",
+      "desc": "Title used for the generated CodePen",
+      "required": true,
       "examples": [
-        "'{\"title\":\"My Pen\",\"html\":\"<div>Hello World</div>\"}'"
+        "'Basic Example'",
+        "'Advanced Playground'"
       ],
       "category": "content"
     }

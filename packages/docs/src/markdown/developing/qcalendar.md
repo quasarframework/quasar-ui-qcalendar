@@ -37,4 +37,4 @@ import QCalendarApi from '@quasar/quasar-ui-qcalendar/dist/api/QCalendar.json'
 
 ## All
 
-<MarkdownExample title="All" file="CalendarAll" no-github no-edit/>
+<MarkdownExample title="All" file="CalendarAll" no-edit/>

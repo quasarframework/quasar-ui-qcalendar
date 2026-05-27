@@ -93,10 +93,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, markRaw, ref, reactive, onMounted } from 'vue'
+import { computed, inject, markRaw, ref, reactive, onBeforeUnmount, onMounted } from 'vue'
 import { openURL } from 'quasar'
 
-import { fabGithub, fabCodepen } from '@quasar/extras/fontawesome-v6'
+import { fabGithub, fabCodepen } from '@quasar/extras/fontawesome-v7'
 // import { mdiCompare } from '@quasar/extras/mdi-v7'
 
 import MarkdownCode from './MarkdownCode.vue'
@@ -134,6 +134,7 @@ const def = reactive({
 })
 const currentTab = ref('Template')
 const expanded = ref(false)
+let removeHmrListener = () => {}
 
 /**
  * A computed property that returns the CSS class for the component.
@@ -186,7 +187,8 @@ function parseComponent(comp) {
 }
 
 function openGitHub() {
-  openURL(`${siteConfig.githubEditRootSrc}/examples/${examples.name}/${props.file}.vue`)
+  const root = siteConfig.githubSourceRootSrc ?? siteConfig.githubEditRootSrc.replace('/edit/', '/tree/')
+  openURL(`${root}/examples/${examples.name}/${props.file}.vue`)
 }
 
 function openCodepen() {
@@ -197,23 +199,56 @@ function toggleExpand() {
   expanded.value = expanded.value === false
 }
 
+async function loadExample() {
+  const list = await examples.list
+  const devFile = `/src/examples/${examples.name}/${props.file}.vue`
+
+  if (import.meta.env.QUASAR_DEV) {
+    const loadComponent = list.code[devFile]
+    const loadSource = list.source[devFile]
+
+    if (loadComponent === void 0 || loadSource === void 0) {
+      throw new Error(`Markdown example not found: ${devFile}`)
+    }
+
+    const componentModule = await loadComponent()
+    const source = await loadSource()
+
+    component.value = markRaw(componentModule.default)
+    parseComponent(source)
+  } else {
+    component.value = markRaw(list[props.file])
+    parseComponent(list[`Raw${props.file}`])
+  }
+
+  isBusy.value = false
+}
+
 if (import.meta.env.QUASAR_CLIENT) {
   onMounted(() => {
-    examples.list.then((list) => {
-      component.value = markRaw(
-        import.meta.env.QUASAR_DEV
-          ? list.code[`/src/examples/${examples.name}/${props.file}.vue`].default
-          : list[props.file],
-      )
+    void loadExample()
 
-      parseComponent(
-        import.meta.env.QUASAR_DEV
-          ? list.source[`/src/examples/${examples.name}/${props.file}.vue`]
-          : list[`Raw${props.file}`],
-      )
+    if (import.meta.hot) {
+      const examplePath = `/src/examples/${examples.name}/${props.file}.vue`
+      const onAfterUpdate = (payload) => {
+        const shouldReload = payload.updates.some(
+          (update) => update.path === examplePath || update.acceptedPath === examplePath,
+        )
 
-      isBusy.value = false
-    })
+        if (shouldReload === true) {
+          void loadExample()
+        }
+      }
+
+      import.meta.hot.on('vite:afterUpdate', onAfterUpdate)
+      removeHmrListener = () => {
+        import.meta.hot?.off('vite:afterUpdate', onAfterUpdate)
+      }
+    }
+  })
+
+  onBeforeUnmount(() => {
+    removeHmrListener()
   })
 }
 </script>

@@ -13,9 +13,34 @@
       ],
       "category": "content"
     },
+    "file": {
+      "type": "String",
+      "desc": "Vue example file name without the .vue extension",
+      "required": true,
+      "examples": [
+        "'Basic'",
+        "'AdvancedUsage'"
+      ],
+      "category": "content"
+    },
+    "noEdit": {
+      "type": "Boolean",
+      "desc": "Hide the CodePen edit button",
+      "category": "behavior"
+    },
     "noGithub": {
       "type": "Boolean",
-      "desc": "Flag to indicate if the GitHub button should be hidden",
+      "desc": "Hide the GitHub source button",
+      "category": "behavior"
+    },
+    "scrollable": {
+      "type": "Boolean",
+      "desc": "Constrain the example content to a scrollable area",
+      "category": "content"
+    },
+    "overflow": {
+      "type": "Boolean",
+      "desc": "Allow the example content to manage overflow automatically",
       "category": "behavior"
     }
   }

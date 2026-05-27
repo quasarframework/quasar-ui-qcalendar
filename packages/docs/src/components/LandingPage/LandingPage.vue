@@ -376,7 +376,7 @@
 import { computed } from 'vue'
 import { useQuasar } from 'quasar'
 import { QIcon } from 'quasar'
-import { fabGithub } from '@quasar/extras/fontawesome-v6'
+import { fabGithub } from '@quasar/extras/fontawesome-v7'
 import siteConfig from '../../siteConfig'
 import { biArrowRightCircle } from '@quasar/extras/bootstrap-icons'
 

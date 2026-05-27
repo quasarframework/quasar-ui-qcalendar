@@ -14,7 +14,7 @@ import QCalendarDayApi from '@quasar/quasar-ui-qcalendar/dist/api/QCalendarDay.j
 
 This will only make sense if your browser is currently in light mode.
 
-<MarkdownExample title="Dark" file="DayDark" no-github no-edit/>
+<MarkdownExample title="Dark" file="DayDark"/>
 
 ## 3 Day
 
@@ -24,13 +24,13 @@ With the QCalendarDay calendar using the `day` view, any number of days can be s
 The first day displayed will always be today's date or the initial date of the `modelValue`.
 :::
 
-<MarkdownExample title="3 Day" file="Day3Day" no-github no-edit/>
+<MarkdownExample title="3 Day" file="Day3Day"/>
 
 ## Alignment
 
 You can use the properties `date-header`, `date-align` and `weekday-align` to manipulate how the header area looks.
 
-<MarkdownExample title="Alignment" file="DayAlignment" no-github no-edit/>
+<MarkdownExample title="Alignment" file="DayAlignment"/>
 
 ## Cell Width
 
@@ -40,35 +40,35 @@ The calendar goes into a special `sticky` mode when this happens so you can scro
 
 This example also uses the `max-days` property.
 
-<MarkdownExample title="Cell Width" file="DayCellWidth" no-github no-edit/>
+<MarkdownExample title="Cell Width" file="DayCellWidth"/>
 
 ## Column Count
 
 The `column-count` property allows for a single day to be displayed multiple times.
 
-<MarkdownExample title="Column Count" file="DayColumnCount" no-github no-edit/>
+<MarkdownExample title="Column Count" file="DayColumnCount"/>
 
 ## Column Count Plus
 
 You can customize the display further via the `head-day` slot.
 
-<MarkdownExample title="Column Count Plus" file="DayColumnCountPlus" no-github no-edit/>
+<MarkdownExample title="Column Count Plus" file="DayColumnCountPlus"/>
 
 ## Custom Header
 
 This example shows how you can build your own custom navigation bar.
 
-<MarkdownExample title="CustomHeader" file="DayCustomHeader" no-github no-edit/>
+<MarkdownExample title="CustomHeader" file="DayCustomHeader"/>
 
 ## Date Type
 
-<MarkdownExample title="Date Type" file="DayDateType" no-github no-edit/>
+<MarkdownExample title="Date Type" file="DayDateType"/>
 
 ## Disabled Before After
 
 All days before and after the current day have been disabled with the properties `disabled-before` and `disabled-after`.
 
-<MarkdownExample title="Disabled Before After" file="DayDisabledBeforeAfter" no-github no-edit/>
+<MarkdownExample title="Disabled Before After" file="DayDisabledBeforeAfter"/>
 
 ## Disabled Days
 
@@ -78,13 +78,13 @@ The first example uses an array of dates to disable each specific date.
 
 The second example uses a range, which is an array within an array of start and end dates.
 
-<MarkdownExample title="Disabled Days" file="DayDisabledDays" no-github no-edit/>
+<MarkdownExample title="Disabled Days" file="DayDisabledDays"/>
 
 ## Disabled Weekdays
 
 The weekends have been disabled with the `disabled-weekdays` property.
 
-<MarkdownExample title="Disabled Weekdays" file="DayDisabledWeekdays" no-github no-edit/>
+<MarkdownExample title="Disabled Weekdays" file="DayDisabledWeekdays"/>
 
 ## Drag and Drop
 
@@ -96,39 +96,39 @@ Don't use css `border` to outline a cell. It won't look right because the calend
 Instead use `box-shadow` to create an inset like this `box-shadow: inset 0 0 0 1px rgba(0,140,200,.8)`.
 :::
 
-<MarkdownExample title="Drag and Drop" file="DayDragAndDrop" no-github no-edit/>
+<MarkdownExample title="Drag and Drop" file="DayDragAndDrop"/>
 
 ## Hour 12 Format
 
-<MarkdownExample title="Hour 24 Format" file="DayHour24Format" no-github no-edit/>
+<MarkdownExample title="Hour 24 Format" file="DayHour24Format"/>
 
 ## Interval Count
 
-<MarkdownExample title="Interval Count" file="DayIntervalCount" no-github no-edit/>
+<MarkdownExample title="Interval Count" file="DayIntervalCount"/>
 
 ## Interval Height
 
-<MarkdownExample title="Interval Height" file="DayIntervalHeight" no-github no-edit/>
+<MarkdownExample title="Interval Height" file="DayIntervalHeight"/>
 
 ## Interval Minutes (15)
 
-<MarkdownExample title="Interval Minutes (15)" file="DayIntervalMinutes15" no-github no-edit/>
+<MarkdownExample title="Interval Minutes (15)" file="DayIntervalMinutes15"/>
 
 ## Interval Minutes (30)
 
-<MarkdownExample title="Interval Minutes (30)" file="DayIntervalMinutes30" no-github no-edit/>
+<MarkdownExample title="Interval Minutes (30)" file="DayIntervalMinutes30"/>
 
 ## Interval Start
 
-<MarkdownExample title="Interval Start" file="DayIntervalStart" no-github no-edit/>
+<MarkdownExample title="Interval Start" file="DayIntervalStart"/>
 
 ## Locale
 
-<MarkdownExample title="Locale" file="DayLocale" no-github no-edit/>
+<MarkdownExample title="Locale" file="DayLocale"/>
 
 ## Max Days
 
-<MarkdownExample title="Max Days" file="DayMaxDays" no-github no-edit/>
+<MarkdownExample title="Max Days" file="DayMaxDays"/>
 
 ## Modify Intervals
 
@@ -140,11 +140,11 @@ Basically, think of a base interval as 1, which is 60 minutes. To display a full
 
 Now, we change interval minutes to 15 (for 15 minute segmented intervals). That means, there are 4 times the number of intervals to deal with for each hour. A full day would then be 96 (24h x 4). Starting at 06:00 means interval start would be 24 (6h \* 4), which also means we need to remove that number off the end to prevent bleed-over onto the next day. The interval count then becomes 72 (96 - 24).
 
-<MarkdownExample title="Modify Intervals" file="DayModifyIntervals" no-github no-edit/>
+<MarkdownExample title="Modify Intervals" file="DayModifyIntervals"/>
 
 ## Month
 
-<MarkdownExample title="Month" file="DayMonth" no-github no-edit/>
+<MarkdownExample title="Month" file="DayMonth"/>
 
 ## Navigation
 
@@ -154,15 +154,15 @@ If the calendar has focus you can use the <kbd>&larr;</kbd> and <kbd>&rarr;</kbd
 
 On the intervals, you can use <kbd>Tab</kbd> and <kbd>Shift</kbd>+<kbd>Tab</kbd> for navigation.
 
-<MarkdownExample title="Navigation" file="DayNavigation" no-github no-edit/>
+<MarkdownExample title="Navigation" file="DayNavigation"/>
 
 ## No Active Date
 
-<MarkdownExample title="No Active Date" file="DayNoActiveDate" no-github no-edit/>
+<MarkdownExample title="No Active Date" file="DayNoActiveDate"/>
 
 ## No Header
 
-<MarkdownExample title="No Header" file="DayNoHeader" no-github no-edit/>
+<MarkdownExample title="No Header" file="DayNoHeader"/>
 
 ## No Scroll
 
@@ -172,19 +172,19 @@ When the property `no-scroll` is used, you must provide an outter div that has `
 Note that the date header now scrolls with the rest of the calendar.
 :::
 
-<MarkdownExample title="No Scroll" file="DayNoScroll" no-github no-edit/>
+<MarkdownExample title="No Scroll" file="DayNoScroll"/>
 
 ## Now
 
 The current date has been set to tomorrow via the `now` property.
 
-<MarkdownExample title="Now" file="DayNow" no-github no-edit/>
+<MarkdownExample title="Now" file="DayNow"/>
 
 ## Selected Intervals
 
 The example below uses the `selected-dates` property in conjunction with mouse events to toggle selected intervals.
 
-<MarkdownExample title="Selected Intervals" file="DaySelectedIntervals" no-github no-edit/>
+<MarkdownExample title="Selected Intervals" file="DaySelectedIntervals"/>
 
 ## Selection
 
@@ -194,11 +194,11 @@ The example below uses the `selected-start-end-dates` property in conjunction wi
 Try toggling the `Mobile selection` to see how selection can be changed.
 :::
 
-<MarkdownExample title="Selection" file="DaySelection" no-github no-edit/>
+<MarkdownExample title="Selection" file="DaySelection"/>
 
 ## Slot - Column Header
 
-<MarkdownExample title="Slot - Column Header" file="DaySlotColumnHeader" no-github no-edit/>
+<MarkdownExample title="Slot - Column Header" file="DaySlotColumnHeader"/>
 
 ## Slot - Day Body
 
@@ -206,7 +206,7 @@ This example uses both the `day-body` and `head-day-event` slots.
 
 You can click the `head-day-event` badges which will call the calendar's `scrolltoTime` method.
 
-<MarkdownExample title="Slot - Day Body" file="DaySlotDayBody" no-github no-edit/>
+<MarkdownExample title="Slot - Day Body" file="DaySlotDayBody"/>
 
 ## Slot - Day Container (Show Current Time)
 
@@ -216,24 +216,24 @@ The example below uses the `day-container` slot to show a current time indicator
 You might have to scroll down to the current time to see the example working.
 :::
 
-<MarkdownExample title="Slot - Day Container (Show Current Time)" file="DaySlotDayContainerShowCurrentTime" no-github no-edit/>
+<MarkdownExample title="Slot - Day Container (Show Current Time)" file="DaySlotDayContainerShowCurrentTime"/>
 
 ## Slot - Head Day
 
-<MarkdownExample title="Slot - Head Day" file="DaySlotHeadDay" no-github no-edit/>
+<MarkdownExample title="Slot - Head Day" file="DaySlotHeadDay"/>
 
 ## Slot - Head Day (Event)
 
-<MarkdownExample title="Slot - Head Day (Event)" file="DaySlotHeadDayEvent" no-github no-edit/>
+<MarkdownExample title="Slot - Head Day (Event)" file="DaySlotHeadDayEvent"/>
 
 ## Slot - Head Intervals
 
-<MarkdownExample title="Slot - Head Intervals" file="DaySlotHeadIntervals" no-github no-edit/>
+<MarkdownExample title="Slot - Head Intervals" file="DaySlotHeadIntervals"/>
 
 ## Theme
 
-<MarkdownExample title="Theme" file="DayTheme" no-github no-edit/>
+<MarkdownExample title="Theme" file="DayTheme"/>
 
 ## Transitions
 
-<MarkdownExample title="Transitions" file="DayTransitions" no-github no-edit/>
+<MarkdownExample title="Transitions" file="DayTransitions"/>

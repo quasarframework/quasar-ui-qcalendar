@@ -102,10 +102,6 @@ $ cd ../docs
 $ quasar dev
 ```
 
-# Codepen
-
-[UMD examples in Codepen collection](https://codepen.io/collection/qOBOEG)
-
 # Donate
 
 If you appreciate the work that went into this, please consider donating to [Quasar](https://donate.quasar.dev) or [Jeff](https://github.com/sponsors/hawkeye64).

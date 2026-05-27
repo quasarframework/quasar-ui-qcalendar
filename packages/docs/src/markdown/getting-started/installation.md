@@ -259,27 +259,9 @@ app.component('QCalendarDay', QCalendarDay.QCalendarDay)
 app.mount('#app')
 ```
 
-## Testing on Codepen
+## Testing on CodePen
 
-[QCalendar Collection](https://codepen.io/collection/qOBOEG)
-
-or
-
-[QCalendarDay UMD Example on Codepen](https://codepen.io/Hawkeye64/pen/ZEemBjm)
-
-[QCalendarDay (week) UMD Example on Codepen](https://codepen.io/Hawkeye64/pen/YzZRpdW)
-
-[QCalendarMonth UMD Example on Codepen](https://codepen.io/Hawkeye64/pen/dyvpYwW)
-
-[QCalendarMonth (minimode) UMD Example on Codepen](https://codepen.io/Hawkeye64/pen/VwpVmNj)
-
-[QCalendarAgenda UMD Example on Codepen](https://codepen.io/Hawkeye64/pen/MWpzbRZ)
-
-[QCalendarResource UMD Example on Codepen](https://codepen.io/Hawkeye64/pen/xxqQgbG)
-
-[QCalendarScheduler UMD Example on Codepen](https://codepen.io/Hawkeye64/pen/oNZQBLz)
-
-[QCalendarTask UMD Example on Codepen](https://codepen.io/Hawkeye64/pen/PoWLpoqL)
+Most documentation examples include a CodePen action in the example toolbar. Use it to open the current example in CodePen with the matching QCalendar version and dependencies.
 
 # Project source
 

@@ -14,15 +14,15 @@ import QCalendarTaskApi from '@quasar/quasar-ui-qcalendar/dist/api/QCalendarTask
 
 You can use the properties `date-header`, `date-align` and `weekday-align` to manipulate how the header area looks.
 
-<MarkdownExample title="Alignment" file="TaskAlignment" no-github no-edit/>
+<MarkdownExample title="Alignment" file="TaskAlignment" no-edit/>
 
 ## Children
 
-<MarkdownExample title="Children" file="TaskChildren" no-github no-edit/>
+<MarkdownExample title="Children" file="TaskChildren"/>
 
 ## Colored Weekends
 
-<MarkdownExample title="Colored Weekends" file="TaskColoredWeekends" no-github no-edit/>
+<MarkdownExample title="Colored Weekends" file="TaskColoredWeekends" no-edit/>
 
 ## Custom Height
 
@@ -75,23 +75,23 @@ You can have each task row have it's own specific height by including a `height`
 If the `task-min-height` is more than your custom height, then you won't see the custom height work. Either set `task-min-height` to a lower value or to 0 (for auto).
 :::
 
-<MarkdownExample title="Custom Height" file="TaskCustomHeight" no-github no-edit/>
+<MarkdownExample title="Custom Height" file="TaskCustomHeight"/>
 
 ## Dark
 
 This will only make sense if your browser is currently in light mode.
 
-<MarkdownExample title="Dark" file="TaskDark" no-github no-edit/>
+<MarkdownExample title="Dark" file="TaskDark" no-edit/>
 
 ## Date Type
 
-<MarkdownExample title="Date Type" file="TaskDateType" no-github no-edit/>
+<MarkdownExample title="Date Type" file="TaskDateType" no-edit/>
 
 ## Disabled Before After
 
 All days before and after the current day have been disabled with the properties `disabled-before` and `disabled-after`.
 
-<MarkdownExample title="Disabled Before After" file="TaskDisabledBeforeAfter" no-github no-edit/>
+<MarkdownExample title="Disabled Before After" file="TaskDisabledBeforeAfter" no-edit/>
 
 ## Disabled Days
 
@@ -101,13 +101,13 @@ The first example uses an array of dates to disable each specific date.
 
 The second example uses a range, which is an array within an array of start and end dates.
 
-<MarkdownExample title="Disabled Days" file="TaskDisabledDays" no-github no-edit/>
+<MarkdownExample title="Disabled Days" file="TaskDisabledDays" no-edit/>
 
 ## Disabled Weekdays
 
 The weekends have been disabled with the `disabled-weekdays` property.
 
-<MarkdownExample title="Disabled Weekdays" file="TaskDisabledWeekdays" no-github no-edit/>
+<MarkdownExample title="Disabled Weekdays" file="TaskDisabledWeekdays" no-edit/>
 
 ## Focusable Hoverable
 
@@ -115,42 +115,42 @@ The weekends have been disabled with the `disabled-weekdays` property.
 If the property `focus-type` contains `weekday`, you can also use the <kbd>Enter</kbd> or <kbd>Space</kbd> keys for date selection.
 :::
 
-<MarkdownExample title="Focusable Hoverable" file="TaskFocusableHoverable" no-github no-edit/>
+<MarkdownExample title="Focusable Hoverable" file="TaskFocusableHoverable" no-edit/>
 
 ## Locale
 
-<MarkdownExample title="Locale" file="TaskLocale" no-github no-edit/>
+<MarkdownExample title="Locale" file="TaskLocale" no-edit/>
 
 ## Month
 
-<MarkdownExample title="Month" file="TaskMonth" no-github no-edit/>
+<MarkdownExample title="Month" file="TaskMonth" no-edit/>
 
 ## Multiple Footer Rows
 
-<MarkdownExample title="Multiple Footer Rows" file="TaskMultipleFooterRows" no-github no-edit/>
+<MarkdownExample title="Multiple Footer Rows" file="TaskMultipleFooterRows" no-edit/>
 
 ## No Active Date
 
-<MarkdownExample title="No Active Date" file="TaskNoActiveDate" no-github no-edit/>
+<MarkdownExample title="No Active Date" file="TaskNoActiveDate" no-edit/>
 
 ## No Weekends
 
-<MarkdownExample title="No Weekends" file="TaskNoWeekends" no-github no-edit/>
+<MarkdownExample title="No Weekends" file="TaskNoWeekends" no-edit/>
 
 ## Now
 
 The current date has been set to tomorrow via the `now` property.
 
-<MarkdownExample title="Now" file="TaskNow" no-github no-edit/>
+<MarkdownExample title="Now" file="TaskNow" no-edit/>
 
 ## Theme
 
-<MarkdownExample title="Theme" file="TaskTheme" no-github no-edit/>
+<MarkdownExample title="Theme" file="TaskTheme" no-edit/>
 
 ## Title Rows
 
-<MarkdownExample title="Title Rows" file="TaskTitleRows" no-github no-edit/>
+<MarkdownExample title="Title Rows" file="TaskTitleRows" no-edit/>
 
 ## Week
 
-<MarkdownExample title="Week" file="TaskWeek" no-github no-edit/>
+<MarkdownExample title="Week" file="TaskWeek" no-edit/>

@@ -6,7 +6,7 @@ labels: 'v5, beta'
 assignees: ''
 ---
 
-For a legitimate bug, in order to process faster, please go here https://codepen.io/collection/qOBOEG, select the correct CodePen for your Calendar type and fork the codepen, add code to reproduce the bug and submit link here (don't forget to save your codepen):
+For a legitimate bug, in order to process faster, please open the closest matching documentation example, use its CodePen action to create a reproduction, add the code that reproduces the bug, and submit the saved CodePen link here:
 
 **Describe the bug**
 A clear and concise description of what the bug is.
@@ -27,7 +27,7 @@ If applicable, add screenshots to help explain your problem.
 
 **QCalendar (please complete the following information):**
 
-- Version [e.g. 5.0.0-beta.1]
+- Version [e.g. 5.0.0-beta.2]
 - Install type [e.g. app extension, UI package]
 - Quasar CLI package [e.g. @quasar/app-vite 3.0.0-beta.14]
 

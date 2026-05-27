@@ -14,7 +14,7 @@ import QCalendarSchedulerApi from '@quasar/quasar-ui-qcalendar/dist/api/QCalenda
 
 You can use the properties `date-header`, `date-align` and `weekday-align` to manipulate how the header area looks.
 
-<MarkdownExample title="Alignment" file="SchedulerAlignment" no-github no-edit/>
+<MarkdownExample title="Alignment" file="SchedulerAlignment"/>
 
 ## Cell Width
 
@@ -22,11 +22,11 @@ You can specify the `cell-width` property to make your calendar overrun it's hor
 
 The calendar goes into a special `sticky` mode when this happens so you can scroll vertically and/or horizontally.
 
-<MarkdownExample title="Cell Width" file="SchedulerCellWidth" no-github no-edit/>
+<MarkdownExample title="Cell Width" file="SchedulerCellWidth"/>
 
 ## Children
 
-<MarkdownExample title="Children" file="SchedulerChildren" no-github no-edit/>
+<MarkdownExample title="Children" file="SchedulerChildren"/>
 
 ## Custom Height
 
@@ -65,23 +65,23 @@ You can have each resource row have it's own specific height by including a `hei
 If the `resource-min-height` is more than your custom height, then you won't see the custom height work. Either set `resource-min-height` to a lower value or to 0 (for auto).
 :::
 
-<MarkdownExample title="Custom Height" file="SchedulerCustomHeight" no-github no-edit/>
+<MarkdownExample title="Custom Height" file="SchedulerCustomHeight"/>
 
 ## Dark
 
 This will only make sense if your browser is currently in light mode.
 
-<MarkdownExample title="Dark" file="SchedulerDark" no-github no-edit/>
+<MarkdownExample title="Dark" file="SchedulerDark"/>
 
 ## Date Type
 
-<MarkdownExample title="Date Type" file="SchedulerDateType" no-github no-edit/>
+<MarkdownExample title="Date Type" file="SchedulerDateType"/>
 
 ## Disabled Before After
 
 All days before and after the current day have been disabled with the properties `disabled-before` and `disabled-after`.
 
-<MarkdownExample title="Disabled Before After" file="SchedulerDisabledBeforeAfter" no-github no-edit/>
+<MarkdownExample title="Disabled Before After" file="SchedulerDisabledBeforeAfter"/>
 
 ## Disabled Days
 
@@ -91,13 +91,13 @@ The first example uses an array of dates to disable each specific date.
 
 The second example uses a range, which is an array within an array of start and end dates.
 
-<MarkdownExample title="Disabled Days" file="SchedulerDisabledDays" no-github no-edit/>
+<MarkdownExample title="Disabled Days" file="SchedulerDisabledDays"/>
 
 ## Disabled Weekdays
 
 The weekends have been disabled with the `disabled-weekdays` property.
 
-<MarkdownExample title="Disabled Weekdays" file="SchedulerDisabledWeekdays" no-github no-edit/>
+<MarkdownExample title="Disabled Weekdays" file="SchedulerDisabledWeekdays"/>
 
 ## Drag And Drop
 
@@ -109,15 +109,15 @@ Don't use css `border` to outline a cell. It won't look right because the calend
 Instead use `box-shadow` to create an inset like this `box-shadow: inset 0 0 0 1px rgba(0,140,200,.8)`.
 :::
 
-<MarkdownExample title="Drag And Drop" file="SchedulerDragAndDrop" no-github no-edit/>
+<MarkdownExample title="Drag And Drop" file="SchedulerDragAndDrop"/>
 
 ## First Day Monday
 
-<MarkdownExample title="First Day Monday" file="SchedulerFirstDayMonday" no-github no-edit/>
+<MarkdownExample title="First Day Monday" file="SchedulerFirstDayMonday"/>
 
 ## Five Day Workweek
 
-<MarkdownExample title="Five Day Workweek" file="SchedulerFiveDayWorkweek" no-github no-edit/>
+<MarkdownExample title="Five Day Workweek" file="SchedulerFiveDayWorkweek"/>
 
 ## Focusable Hoverable
 
@@ -125,37 +125,37 @@ Instead use `box-shadow` to create an inset like this `box-shadow: inset 0 0 0 1
 If the property `focus-type` contains `weekday`, you can also use the <kbd>Enter</kbd> or <kbd>Space</kbd> keys for date selection.
 :::
 
-<MarkdownExample title="Focusable Hoverable" file="SchedulerFocusableHoverable" no-github no-edit/>
+<MarkdownExample title="Focusable Hoverable" file="SchedulerFocusableHoverable"/>
 
 ## Locale
 
-<MarkdownExample title="Locale" file="SchedulerLocale" no-github no-edit/>
+<MarkdownExample title="Locale" file="SchedulerLocale"/>
 
 ## No Active Date
 
-<MarkdownExample title="No Active Date" file="SchedulerNoActiveDate" no-github no-edit/>
+<MarkdownExample title="No Active Date" file="SchedulerNoActiveDate"/>
 
 ## Now
 
 The current date has been set to tomorrow via the `now` property.
 
-<MarkdownExample title="Now" file="SchedulerNow" no-github no-edit/>
+<MarkdownExample title="Now" file="SchedulerNow"/>
 
 ## Slot - Head Resources
 
-<MarkdownExample title="Slot - Head Resources" file="SchedulerSlotHeadResources" no-github no-edit/>
+<MarkdownExample title="Slot - Head Resources" file="SchedulerSlotHeadResources"/>
 
 ## Slot - Resource Days
 
-<MarkdownExample title="Slot - Resource Days" file="SchedulerSlotResourceDays" no-github no-edit/>
+<MarkdownExample title="Slot - Resource Days" file="SchedulerSlotResourceDays"/>
 
 ## Slot - Resource Label
 
-<MarkdownExample title="Slot - Resource Label" file="SchedulerSlotResourceLabel" no-github no-edit/>
+<MarkdownExample title="Slot - Resource Label" file="SchedulerSlotResourceLabel"/>
 
 ## Theme
 
-<MarkdownExample title="Theme" file="SchedulerTheme" no-github no-edit/>
+<MarkdownExample title="Theme" file="SchedulerTheme"/>
 
 ## Width Height
 
@@ -165,4 +165,4 @@ To control the left resources pane width, set the css variable `--calendar-resou
 
 The example below uses that css variable together with `resource-height`, `resource-min-height`, and `cell-width`.
 
-<MarkdownExample title="Width Height" file="SchedulerWidthHeight" no-github no-edit/>
+<MarkdownExample title="Width Height" file="SchedulerWidthHeight"/>

@@ -1,4 +1,4 @@
-import { fabGithub, fabXTwitter } from '@quasar/extras/fontawesome-v6'
+import { fabGithub, fabXTwitter } from '@quasar/extras/fontawesome-v7'
 import { slugify } from '@md-plugins/shared'
 import { version, productName } from '../../../ui/package.json'
 
@@ -72,6 +72,21 @@ export interface PrivacyConfig {
   link: string
 }
 
+export interface CodepenGlobalPackage {
+  packageName: string
+  globalName: string
+}
+
+export interface CodepenConfig {
+  cssExternal?: string[]
+  jsExternal?: string[]
+  jsPreProcessor?: string
+  titleSuffix?: string
+  jsSetup?: string
+  head?: string
+  globalPackages?: CodepenGlobalPackage[]
+}
+
 export interface SiteConfig {
   lang: string
   title: string
@@ -80,6 +95,8 @@ export interface SiteConfig {
   version: string
   copyright: CopyrightConfig
   githubEditRootSrc: string
+  githubSourceRootSrc?: string
+  codepen?: CodepenConfig
   license: LicenseConfig
   privacy: PrivacyConfig
   logoConfig: LogoConfig
@@ -589,6 +606,31 @@ const config = {
     line2: '',
   } as CopyrightConfig,
   githubEditRootSrc: `https://github.com/quasarframework/quasar-ui-qcalendar/edit/${repoBranch}/packages/docs/src`,
+  githubSourceRootSrc: `https://github.com/quasarframework/quasar-ui-qcalendar/tree/${repoBranch}/packages/docs/src`,
+  codepen: {
+    jsPreProcessor: 'typescript',
+    titleSuffix: `QCalendar v${version}`,
+    cssExternal: [
+      `https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@${version}/dist/index.min.css`,
+    ],
+    jsExternal: [
+      `https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@${version}/dist/index.umd.min.js`,
+    ],
+    globalPackages: [
+      {
+        packageName: '@quasar/quasar-ui-qcalendar',
+        globalName: '(globalThis as any).index',
+      },
+    ],
+    jsSetup: [
+      'const QCalendarPlugin = (globalThis as any).index',
+      'app.use(QCalendarPlugin)',
+      `app.component('NavigationBar', {
+  emits: ['today', 'prev', 'next'],
+  template: '<div class="row justify-center"><div class="q-pa-md q-gutter-lg row"><q-btn no-caps dense @click="$emit(\\'today\\')">Today</q-btn><q-btn no-caps dense @click="$emit(\\'prev\\')">&lt; Prev</q-btn><q-btn no-caps dense @click="$emit(\\'next\\')">Next &gt;</q-btn></div></div>',
+})`,
+    ].join('\n'),
+  },
   license: {
     label: 'MIT License',
     link: `https://github.com/quasarframework/quasar-ui-qcalendar/blob/${repoBranch}/LICENSE.md`,

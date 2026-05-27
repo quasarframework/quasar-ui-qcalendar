@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { mdiLaunch } from '@quasar/extras/mdi-v6'
+import { mdiLaunch } from '@quasar/extras/mdi-v7'
 
 const props = defineProps({ to: { type: String, required: true } })
 const internal = computed(

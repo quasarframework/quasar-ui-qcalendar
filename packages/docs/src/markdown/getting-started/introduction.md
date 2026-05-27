@@ -5,9 +5,7 @@ keys: All about QCalendar
 ---
 
 ::: warning
-Please note that the codepen links, in the documentation examples, do not work at this time.
-
-And, if you're looking to help out, check out our [Call to action](/other/contributing/call-to-action) in the **Contributing** section.
+If you're looking to help out, check out our [Call to action](/other/contributing/call-to-action) in the **Contributing** section.
 :::
 
 > If you are looking for the **Migration Guide** for QCalendar v5, go [here](/other/migration-guide).

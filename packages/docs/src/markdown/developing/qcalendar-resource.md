@@ -12,7 +12,7 @@ import QCalendarResourceApi from '@quasar/quasar-ui-qcalendar/dist/api/QCalendar
 
 ## Children
 
-<MarkdownExample title="Children" file="ResourceChildren" no-github no-edit/>
+<MarkdownExample title="Children" file="ResourceChildren"/>
 
 ## Custom Height
 
@@ -51,21 +51,21 @@ You can have each resource row have it's own specific height by including a `hei
 If the `resource-min-height` is more than your custom height, then you won't see the custom height work. Either set `resource-min-height` to a lower value or to 0.
 :::
 
-<MarkdownExample title="Custom Height" file="ResourceCustomHeight" no-github no-edit/>
+<MarkdownExample title="Custom Height" file="ResourceCustomHeight"/>
 
 ## Dark
 
 This will only make sense if your browser is currently in light mode.
 
-<MarkdownExample title="Dark" file="ResourceDark" no-github no-edit/>
+<MarkdownExample title="Dark" file="ResourceDark"/>
 
 ## Focusable Hoverable
 
-<MarkdownExample title="Focusable Hoverable" file="ResourceFocusableHoverable" no-github no-edit/>
+<MarkdownExample title="Focusable Hoverable" file="ResourceFocusableHoverable"/>
 
 ## Hour 24 Format
 
-<MarkdownExample title="Hour 24 Format" file="ResourceHour24Format" no-github no-edit/>
+<MarkdownExample title="Hour 24 Format" file="ResourceHour24Format"/>
 
 ## Modify Intervals
 
@@ -77,32 +77,32 @@ Basically, think of a base interval as 1, which is 60 minutes. To display a full
 
 Now, we change interval minutes to 15 (for 15 minute segmented intervals). That means, there are 4 times the number of intervals to deal with for each hour. A full day would then be 96 (24h x 4). Starting at 06:00 means interval start would be 24 (6h \* 4), which also means we need to remove that number off the end to prevent bleed-over onto the next day. The interval count then becomes 72 (96 - 24).
 
-<MarkdownExample title="Modify Intervals" file="ResourceModifyIntervals" no-github no-edit/>
+<MarkdownExample title="Modify Intervals" file="ResourceModifyIntervals"/>
 
 ## No Sticky
 
-<MarkdownExample title="No Sticky" file="ResourceNoSticky" no-github no-edit/>
+<MarkdownExample title="No Sticky" file="ResourceNoSticky"/>
 
 ## Slot - Head Resources
 
-<MarkdownExample title="Slot - Head Resources" file="ResourceSlotHeadResources" no-github no-edit/>
+<MarkdownExample title="Slot - Head Resources" file="ResourceSlotHeadResources"/>
 
 ## Slot - Interval Label
 
-<MarkdownExample title="Slot - Interval Label" file="ResourceSlotIntervalLabel" no-github no-edit/>
+<MarkdownExample title="Slot - Interval Label" file="ResourceSlotIntervalLabel"/>
 
 ## Slot - Resource Intervals
 
-<MarkdownExample title="Slot - Resource Intervals" file="ResourceSlotResourceIntervals" no-github no-edit/>
+<MarkdownExample title="Slot - Resource Intervals" file="ResourceSlotResourceIntervals"/>
 
 ## Slot - Resource Label
 
-<MarkdownExample title="Slot - Resource Label" file="ResourceSlotResourceLabel" no-github no-edit/>
+<MarkdownExample title="Slot - Resource Label" file="ResourceSlotResourceLabel"/>
 
 ## Theme
 
-<MarkdownExample title="Theme" file="ResourceTheme" no-github no-edit/>
+<MarkdownExample title="Theme" file="ResourceTheme"/>
 
 ## Width Height
 
-<MarkdownExample title="Width Height" file="ResourceWidthHeight" no-github no-edit/>
+<MarkdownExample title="Width Height" file="ResourceWidthHeight"/>

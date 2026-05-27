@@ -14,17 +14,17 @@ import QCalendarMonthApi from '@quasar/quasar-ui-qcalendar/dist/api/QCalendarMon
 
 You can use the properties `date-align` and `weekday-align` to manipulate how the header area looks.
 
-<MarkdownExample title="Alignment" file="MonthAlignment" no-github no-edit/>
+<MarkdownExample title="Alignment" file="MonthAlignment"/>
 
 ## Dark
 
 This will only make sense if your browser is currently in light mode.
 
-<MarkdownExample title="Dark" file="MonthDark" no-github no-edit/>
+<MarkdownExample title="Dark" file="MonthDark"/>
 
 ## Date Type
 
-<MarkdownExample title="Date Type" file="MonthDateType" no-github no-edit/>
+<MarkdownExample title="Date Type" file="MonthDateType"/>
 
 ## Day Height
 
@@ -36,17 +36,17 @@ When both `day-height` and `day-min-height` are both set to 0, and the height of
 When both `day-height` and `day-min-height` are both set to 0, in this example, the height of the calendar will be set to 600px.
 :::
 
-<MarkdownExample title="Day Height" file="MonthDayHeight" no-github no-edit/>
+<MarkdownExample title="Day Height" file="MonthDayHeight"/>
 
 ## Day of Year
 
-<MarkdownExample title="Day of Year" file="MonthDayOfYear" no-github no-edit/>
+<MarkdownExample title="Day of Year" file="MonthDayOfYear"/>
 
 ## Disabled Before After
 
 All days before and after the current day have been disabled with the `disabled-before` and `disabled-after` properties.
 
-<MarkdownExample title="Disabled Before After" file="MonthDisabledBeforeAfter" no-github no-edit/>
+<MarkdownExample title="Disabled Before After" file="MonthDisabledBeforeAfter"/>
 
 ## Disabled Days
 
@@ -56,13 +56,13 @@ The first example uses an array of dates to disable each specific date.
 
 The second example uses a range, which is an array within an array of start and end dates.
 
-<MarkdownExample title="Disabled Days" file="MonthDisabledDays" no-github no-edit/>
+<MarkdownExample title="Disabled Days" file="MonthDisabledDays"/>
 
 ## Disabled Weekdays
 
 The weekends have been disabled with the `disabled-weekdays` property.
 
-<MarkdownExample title="Disabled Weekdays" file="MonthDisabledWeekdays" no-github no-edit/>
+<MarkdownExample title="Disabled Weekdays" file="MonthDisabledWeekdays"/>
 
 ## Drag and Drop
 
@@ -74,19 +74,19 @@ Don't use css `border` to outline a cell. It won't look right because the calend
 Instead use `box-shadow` to create an inset like this `box-shadow: inset 0 0 0 1px rgba(0,140,200,.8)`.
 :::
 
-<MarkdownExample title="Drag and Drop" file="MonthDragAndDrop" no-github no-edit/>
+<MarkdownExample title="Drag and Drop" file="MonthDragAndDrop"/>
 
 ## First Day Monday
 
-<MarkdownExample title="First Day Monday" file="MonthFirstDayMonday" no-github no-edit/>
+<MarkdownExample title="First Day Monday" file="MonthFirstDayMonday"/>
 
 ## Five Day Workweek
 
-<MarkdownExample title="Five Day Workweek" file="MonthFiveDayWorkweek" no-github no-edit/>
+<MarkdownExample title="Five Day Workweek" file="MonthFiveDayWorkweek"/>
 
 ## Focusable/Hoverable
 
-<MarkdownExample title="Focusable/Hoverable" file="MonthFocusableHoverable" no-github no-edit/>
+<MarkdownExample title="Focusable/Hoverable" file="MonthFocusableHoverable"/>
 
 ## Label Size
 
@@ -96,17 +96,17 @@ The `month-label-size` property changes the size of the inline month label text 
 This property only has a visible effect when the month label is actually shown. In `QCalendarMonth`, that typically means using `date-align="left"` or `date-align="right"`. With the default centered date alignment, the inline month label is not rendered.
 :::
 
-<MarkdownExample title="Label Size" file="MonthLabelSize" no-github no-edit/>
+<MarkdownExample title="Label Size" file="MonthLabelSize"/>
 
 ## Locale
 
-<MarkdownExample title="Locale" file="MonthLocale" no-github no-edit/>
+<MarkdownExample title="Locale" file="MonthLocale"/>
 
 ## Min Weeks
 
 You can use the `min-weeks` property to keep a consistent height for your calendar (no shifting up and down of the bottom calendar for different months).
 
-<MarkdownExample title="Min Weeks" file="MonthMinWeeks" no-github no-edit/>
+<MarkdownExample title="Min Weeks" file="MonthMinWeeks"/>
 
 ## Navigation
 
@@ -116,50 +116,50 @@ When the calendar has focus use the <kbd>Home</kbd>, <kbd>End</kbd>, <kbd>&larr;
 
 You can also use <kbd>Tab</kbd> and <kbd>Shift</kbd>+<kbd>Tab</kbd> for regular browser navigation.
 
-<MarkdownExample title="Navigation" file="MonthNavigation" no-github no-edit/>
+<MarkdownExample title="Navigation" file="MonthNavigation"/>
 
 ## No Active Date
 
-<MarkdownExample title="No Active Date" file="MonthNoActiveDate" no-github no-edit/>
+<MarkdownExample title="No Active Date" file="MonthNoActiveDate"/>
 
 ## No Outside Days
 
-<MarkdownExample title="No Outside Days" file="MonthNoOutsideDays" no-github no-edit/>
+<MarkdownExample title="No Outside Days" file="MonthNoOutsideDays"/>
 
 ## Now
 
 The current date has been set to tomorrow via the `now` property.
 
-<MarkdownExample title="Now" file="MonthNow" no-github no-edit/>
+<MarkdownExample title="Now" file="MonthNow"/>
 
 ## Selected Dates
 
-<MarkdownExample title="Selected Dates" file="MonthSelectedDates" no-github no-edit/>
+<MarkdownExample title="Selected Dates" file="MonthSelectedDates"/>
 
 ## Selection Range
 
-<MarkdownExample title="Selection Range" file="MonthSelection" no-github no-edit/>
+<MarkdownExample title="Selection Range" file="MonthSelection"/>
 
 ## Slot - Day (Holidays)
 
-<MarkdownExample title="Slot - Day (Holidays)" file="MonthSlotDayHolidays" no-github no-edit/>
+<MarkdownExample title="Slot - Day (Holidays)" file="MonthSlotDayHolidays" no-edit/>
 
 ## Slot - Day
 
-<MarkdownExample title="Slot - Day" file="MonthSlotDay" no-github no-edit/>
+<MarkdownExample title="Slot - Day" file="MonthSlotDay"/>
 
 ## Slot - Week
 
-<MarkdownExample title="Slot - Week" file="MonthSlotWeek" no-github no-edit/>
+<MarkdownExample title="Slot - Week" file="MonthSlotWeek" no-edit/>
 
 ## Theme
 
-<MarkdownExample title="Theme" file="MonthTheme" no-github no-edit/>
+<MarkdownExample title="Theme" file="MonthTheme"/>
 
 ## Transitions
 
-<MarkdownExample title="Transitions" file="MonthTransitions" no-github no-edit/>
+<MarkdownExample title="Transitions" file="MonthTransitions"/>
 
 ## Workweeks
 
-<MarkdownExample title="Workweeks" file="MonthWorkweeks" no-github no-edit/>
+<MarkdownExample title="Workweeks" file="MonthWorkweeks"/>

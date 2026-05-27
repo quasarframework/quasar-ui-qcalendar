@@ -1,6 +1,6 @@
 {
   "name": "docs",
-  "version": "5.0.0-beta.1",
+  "version": "5.0.0-beta.2",
   "private": true,
   "description": "QCalendar Documentation and examples",
   "author": "Jeff <galbraith64@gmail.com>",
@@ -16,29 +16,29 @@
     "postinstall": "quasar prepare"
   },
   "dependencies": {
-    "@carbon/icons-vue": "^10.99.1",
-    "@quasar/extras": "^1.18.0",
-    "date-holidays": "=3.23.21",
+    "@carbon/icons-vue": "^10.130.0",
+    "@quasar/extras": "2.0.0-beta.1",
+    "date-holidays": "=3.30.2",
     "pinia": "^3.0.4",
     "prismjs": "^1.30.0",
     "quasar": "^2.19.3",
-    "vue": "^3.5.34",
+    "vue": "^3.5.35",
     "vue-router": "^5.0.7"
   },
   "devDependencies": {
-    "@md-plugins/quasar-app-extension-q-press": "0.1.0-beta.8",
-    "@md-plugins/shared": "0.1.0-beta.8",
-    "@md-plugins/vite-examples-plugin": "0.1.0-beta.8",
-    "@md-plugins/vite-md-plugin": "0.1.0-beta.8",
-    "@quasar/app-vite": "3.0.0-beta.27",
+    "@md-plugins/quasar-app-extension-q-press": "0.1.0-beta.12",
+    "@md-plugins/shared": "0.1.0-beta.12",
+    "@md-plugins/vite-examples-plugin": "0.1.0-beta.12",
+    "@md-plugins/vite-md-plugin": "0.1.0-beta.12",
+    "@quasar/app-vite": "3.0.0-beta.30",
     "@quasar/quasar-ui-qcalendar": "workspace:*",
     "@types/markdown-it": "^14.1.2",
     "@types/node": "^25.9.1",
     "autoprefixer": "^10.5.0",
-    "markdown-it": "^14.1.1",
+    "markdown-it": "^14.2.0",
     "typescript": "~5.9.3",
-    "vite-plugin-checker": "^0.13.0",
-    "vue-tsc": "^3.3.1"
+    "vite-plugin-checker": "^0.14.1",
+    "vue-tsc": "^3.3.2"
   },
   "engines": {
     "node": ">=22.13",

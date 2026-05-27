@@ -15,6 +15,8 @@
 ```
 $ pnpm add @quasar/quasar-ui-qcalendar@beta
 # or
+$ bun add @quasar/quasar-ui-qcalendar@beta
+# or
 $ yarn add @quasar/quasar-ui-qcalendar@beta
 # or
 $ quasar ext add @quasar/qcalendar@beta
