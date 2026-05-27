@@ -91,12 +91,12 @@ quasar ext add @quasar/qcalendar@beta
 quasar ext remove @quasar/qcalendar
 ```
 
-# Donations
+# Support
 
-QCalendar is an open source MIT project that has been made possible due to the **generous contributions** by [sponsors and backers](https://github.com/sponsors/hawkeye64). If you are interested in supporting this project, please consider:
+If QCalendar is useful in your workflow and you want to support ongoing maintenance:
 
-- [Becoming a sponsor on Github](https://github.com/users/hawkeye64/sponsorship)
-- [One-off donation via PayPal](https://paypal.me/hawkeye64)
+GitHub Sponsors: https://github.com/sponsors/hawkeye64
+PayPal: https://paypal.me/hawkeye64
 
 # License
 
