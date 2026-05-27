@@ -35,7 +35,7 @@
     "src"
   ],
   "type": "module",
-  "main": "dist/index.cjs.js",
+  "main": "dist/index.esm.js",
   "module": "dist/index.esm.js",
   "types": "dist/types/index.d.ts",
   "typings": "dist/types/index.d.ts",
@@ -45,7 +45,7 @@
     ".": {
       "types": "./dist/types/index.d.ts",
       "import": "./dist/index.esm.js",
-      "require": "./dist/index.cjs.js"
+      "default": "./dist/index.esm.js"
     },
     "./index.min.css": {
       "default": "./dist/index.min.css"
@@ -62,7 +62,7 @@
     "./QCalendar": {
       "types": "./dist/types/QCalendar.d.ts",
       "import": "./dist/QCalendar.esm.js",
-      "require": "./dist/QCalendar.cjs.js"
+      "default": "./dist/QCalendar.esm.js"
     },
     "./QCalendar.min.css": {
       "default": "./dist/QCalendar.min.css"
@@ -79,7 +79,7 @@
     "./QCalendarAgenda": {
       "types": "./dist/types/QCalendarAgenda.d.ts",
       "import": "./dist/QCalendarAgenda.esm.js",
-      "require": "./dist/QCalendarAgenda.cjs.js"
+      "default": "./dist/QCalendarAgenda.esm.js"
     },
     "./QCalendarAgenda.min.css": {
       "default": "./dist/QCalendarAgenda.min.css"
@@ -96,7 +96,7 @@
     "./QCalendarDay": {
       "types": "./dist/types/QCalendarDay.d.ts",
       "import": "./dist/QCalendarDay.esm.js",
-      "require": "./dist/QCalendarDay.cjs.js"
+      "default": "./dist/QCalendarDay.esm.js"
     },
     "./QCalendarDay.min.css": {
       "default": "./dist/QCalendarDay.min.css"
@@ -113,7 +113,7 @@
     "./QCalendarMonth": {
       "types": "./dist/types/QCalendarMonth.d.ts",
       "import": "./dist/QCalendarMonth.esm.js",
-      "require": "./dist/QCalendarMonth.cjs.js"
+      "default": "./dist/QCalendarMonth.esm.js"
     },
     "./QCalendarMonth.min.css": {
       "default": "./dist/QCalendarMonth.min.css"
@@ -130,7 +130,7 @@
     "./QCalendarResource": {
       "types": "./dist/types/QCalendarResource.d.ts",
       "import": "./dist/QCalendarResource.esm.js",
-      "require": "./dist/QCalendarResource.cjs.js"
+      "default": "./dist/QCalendarResource.esm.js"
     },
     "./QCalendarResource.min.css": {
       "default": "./dist/QCalendarResource.min.css"
@@ -147,7 +147,7 @@
     "./QCalendarScheduler": {
       "types": "./dist/types/QCalendarScheduler.d.ts",
       "import": "./dist/QCalendarScheduler.esm.js",
-      "require": "./dist/QCalendarScheduler.cjs.js"
+      "default": "./dist/QCalendarScheduler.esm.js"
     },
     "./QCalendarScheduler.min.css": {
       "default": "./dist/QCalendarScheduler.min.css"
@@ -164,7 +164,7 @@
     "./QCalendarTask": {
       "types": "./dist/types/QCalendarTask.d.ts",
       "import": "./dist/QCalendarTask.esm.js",
-      "require": "./dist/QCalendarTask.cjs.js"
+      "default": "./dist/QCalendarTask.esm.js"
     },
     "./QCalendarTask.min.css": {
       "default": "./dist/QCalendarTask.min.css"
@@ -181,7 +181,7 @@
     "./Timestamp": {
       "types": "./dist/types/utils/Timestamp.d.ts",
       "import": "./dist/Timestamp.esm.js",
-      "require": "./dist/Timestamp.cjs.js"
+      "default": "./dist/Timestamp.esm.js"
     },
     "./QCalendarTransitions.min.css": {
       "default": "./dist/QCalendarTransitions.min.css"

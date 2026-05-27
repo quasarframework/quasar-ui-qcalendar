@@ -57,7 +57,7 @@ const buildEntries = [
 ]
 
 const builds = buildEntries.flatMap((entry) =>
-  ['esm', 'cjs', 'umd'].map((format) => ({
+  ['esm', 'umd'].map((format) => ({
     rolldown: {
       input: {
         input: pathResolve(`entry/${entry}.${format}.js`),
