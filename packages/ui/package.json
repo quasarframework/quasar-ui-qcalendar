@@ -225,7 +225,9 @@
     "build:css": "tsx build/script.css.ts",
     "build:api": "tsx build/build.api.ts",
     "build:app-ext": "tsx build/script.app-ext.ts",
-    "build:types": "pnpm exec tsc --project tsconfig.json"
+    "build:types": "pnpm exec tsc --project tsconfig.json",
+    "typecheck": "pnpm build:api && tsc -p tsconfig.json --noEmit --pretty false",
+    "test:types": "pnpm build && pnpm typecheck"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
