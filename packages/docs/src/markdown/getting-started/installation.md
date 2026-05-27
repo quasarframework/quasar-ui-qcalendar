@@ -70,12 +70,12 @@ If you plan on importing from `src/` directly, please read the [Migration Guide]
 ```tabs
 <<| bash pnpm |>>
 pnpm add @quasar/quasar-ui-qcalendar@beta
+<<| bash bun |>>
+bun add @quasar/quasar-ui-qcalendar@beta
 <<| bash yarn |>>
 yarn add @quasar/quasar-ui-qcalendar@beta
 <<| bash npm |>>
 npm install @quasar/quasar-ui-qcalendar@beta
-<<| bash bun |>>
-bun add @quasar/quasar-ui-qcalendar@beta
 ```
 
 When QCalendar v5 is released as stable, remove the `@beta` tag from those commands.

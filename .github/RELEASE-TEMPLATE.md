@@ -19,6 +19,8 @@ $ bun add @quasar/quasar-ui-qcalendar@beta
 # or
 $ yarn add @quasar/quasar-ui-qcalendar@beta
 # or
+$ npm install @quasar/quasar-ui-qcalendar@beta
+# or
 $ quasar ext add @quasar/qcalendar@beta
 ```
 
