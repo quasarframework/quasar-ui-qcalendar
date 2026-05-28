@@ -31,14 +31,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # Run lint checks
-      - name: Run lint
-        run: pnpm lint
-
-      # Build all packages, including docs
-      - name: Build all packages
-        run: pnpm build
-
-      # Run Vitest tests
-      - name: Run Vitest tests
-        run: pnpm test
+      # Run checks in dependency-safe order
+      - name: Verify
+        run: pnpm verify

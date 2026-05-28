@@ -17,7 +17,10 @@
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "format": "oxfmt",
-    "format:check": "oxfmt --check"
+    "format:check": "oxfmt --check",
+    "verify": "pnpm verify:fast && pnpm verify:build",
+    "verify:fast": "pnpm format:check && pnpm lint && pnpm test",
+    "verify:build": "pnpm build"
   },
   "devDependencies": {
     "@types/node": "^25.9.1",
