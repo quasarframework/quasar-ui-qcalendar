@@ -1,5 +1,31 @@
 import { Notify } from 'quasar'
-import { slugify } from '@md-plugins/shared'
+
+const andRE = /&/g
+const rCombining = /[\u0300-\u036F]/g
+// oxlint-disable-next-line no-control-regex
+const rControl = /[\u0000-\u001f]/g
+const rSpecial = /[\s~`!@#$%^&*()\-_+=[\]{}|\\;:"'“”‘’<>,.?/]+/g
+
+/**
+ * Default slugification function used by qPress client helpers.
+ */
+export const slugify = (str: string): string =>
+  str
+    .trim()
+    .replace(/([a-z])([A-Z])/g, '$1-$2')
+    .replace(/[\s_]+/g, '-')
+    .toLowerCase()
+    .normalize('NFKD')
+    .replace(rCombining, '')
+    .replace(andRE, '-and-')
+    .replace(rControl, '-')
+    .replace(rSpecial, '-')
+    .replace(/[^a-z0-9-]+/g, '')
+    .replace(/([a-z])(\d)/g, '$1-$2')
+    .replace(/(\d)([a-z])/g, '$1-$2')
+    .replace(/-{2,}/g, '-')
+    .replace(/(^-|-$)/g, '')
+    .replace(/^(\d)/, '_$1')
 
 /**
  * Fallback function to copy text to clipboard when the Clipboard API is not available.
@@ -101,5 +127,3 @@ export function copyHeading(id: string): void {
     timeout: 2000,
   })
 }
-
-export { slugify }

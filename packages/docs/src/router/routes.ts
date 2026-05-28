@@ -1,6 +1,6 @@
 import mdPageList from '@/markdown/listing'
 import examplesPageList from '@/examples/listing'
-import { slugify } from '@md-plugins/shared'
+import { slugify } from '@/.q-press/components/markdown-utils'
 
 const routes = [
   {

@@ -15,9 +15,8 @@
 import { Quasar } from 'quasar'
 import { ref, reactive, computed, nextTick } from 'vue'
 
-import { slugify } from '@md-plugins/shared'
-
 import siteConfig from '../../siteConfig'
+import { slugify } from './markdown-utils'
 
 type CodepenParts = {
   Template?: string

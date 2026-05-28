@@ -1,6 +1,6 @@
 import { fabGithub, fabXTwitter } from '@quasar/extras/fontawesome-v7'
-import { slugify } from '@md-plugins/shared'
 import { version, productName } from '../../../ui/package.json'
+import { slugify } from '../.q-press/components/markdown-utils'
 
 const repoBranch = 'v5-beta'
 

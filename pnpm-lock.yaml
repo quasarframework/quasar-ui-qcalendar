@@ -76,9 +76,6 @@ importers:
       '@md-plugins/quasar-app-extension-q-press':
         specifier: 0.1.0-beta.12
         version: 0.1.0-beta.12(@quasar/app-vite@3.0.0-beta.31(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.35(typescript@5.9.3)))(quasar@2.19.3)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.3)(typescript@5.9.3)(vue-router@5.0.7(@vue/compiler-sfc@3.5.35)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.35(typescript@5.9.3)))(vue@3.5.35(typescript@5.9.3)))(vue@3.5.35(typescript@5.9.3))(yaml@2.9.0))(gray-matter@4.0.3)(markdown-it-container@4.0.0)(markdown-it@14.2.0)(prismjs@1.30.0)
-      '@md-plugins/shared':
-        specifier: 0.1.0-beta.12
-        version: 0.1.0-beta.12(markdown-it@14.2.0)
       '@md-plugins/vite-examples-plugin':
         specifier: 0.1.0-beta.12
         version: 0.1.0-beta.12
