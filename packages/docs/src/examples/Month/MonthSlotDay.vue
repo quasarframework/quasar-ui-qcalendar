@@ -261,7 +261,7 @@ function onClickHeadWorkweek(data: Timestamp) {
   max-width: 100%;
   margin: 1px 0 0 0;
   padding: 0 2px;
-  justify-content: start;
+  justify-content: flex-start;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;

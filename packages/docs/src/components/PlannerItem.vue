@@ -1,6 +1,6 @@
 <template>
   <div class="q-mr-xs q-mb-xs q-px-sm planner-item">
-    <div style="display: flex; align-items: center; justify-content: start; flex-wrap: nowrap">
+    <div style="display: flex; align-items: center; justify-content: flex-start; flex-wrap: nowrap">
       <div style="max-width: 25px; min-width: 25px">
         <div :style="userIconStyle">
           <CheckboxChecked v-if="modelValue === true" @click.stop.prevent="onClicked" />
@@ -12,49 +12,49 @@
       </div>
     </div>
 
-    <div style="display: flex; align-items: center; justify-content: start; flex-wrap: nowrap">
+    <div style="display: flex; align-items: center; justify-content: flex-start; flex-wrap: nowrap">
       <div style="max-width: 25px; min-width: 25px">
         <Location />
       </div>
       <div class="ellipsis col">{{ address }}</div>
     </div>
 
-    <div style="display: flex; align-items: center; justify-content: start; flex-wrap: nowrap">
+    <div style="display: flex; align-items: center; justify-content: flex-start; flex-wrap: nowrap">
       <div style="max-width: 25px; min-width: 25px">
         <Email />
       </div>
       <div class="ellipsis col">{{ email }}</div>
     </div>
 
-    <div style="display: flex; align-items: center; justify-content: start; flex-wrap: nowrap">
+    <div style="display: flex; align-items: center; justify-content: flex-start; flex-wrap: nowrap">
       <div style="max-width: 25px; min-width: 25px">
         <Phone />
       </div>
       <div class="ellipsis col">{{ phone }}</div>
     </div>
 
-    <div style="display: flex; align-items: center; justify-content: start; flex-wrap: nowrap">
+    <div style="display: flex; align-items: center; justify-content: flex-start; flex-wrap: nowrap">
       <div style="max-width: 25px; min-width: 25px">
         <Construction />
       </div>
       <div class="ellipsis col">{{ workDone }}</div>
     </div>
 
-    <div style="display: flex; align-items: center; justify-content: start; flex-wrap: nowrap">
+    <div style="display: flex; align-items: center; justify-content: flex-start; flex-wrap: nowrap">
       <div style="max-width: 25px; min-width: 25px">
         <Calendar />
       </div>
       <div class="ellipsis col">{{ workDate }}</div>
     </div>
 
-    <div style="display: flex; align-items: center; justify-content: start; flex-wrap: nowrap">
+    <div style="display: flex; align-items: center; justify-content: flex-start; flex-wrap: nowrap">
       <div style="max-width: 25px; min-width: 25px">
         <CurrencyDollar />
       </div>
       <div class="ellipsis col">{{ amount }}</div>
     </div>
 
-    <div style="display: flex; align-items: center; justify-content: start; flex-wrap: nowrap">
+    <div style="display: flex; align-items: center; justify-content: flex-start; flex-wrap: nowrap">
       <div :style="overdueIconStyle">
         <Alarm />
       </div>
