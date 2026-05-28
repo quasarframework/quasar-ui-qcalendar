@@ -25,7 +25,7 @@
 <script setup lang="ts">
 import { mdiClose } from '@quasar/extras/mdi-v7'
 
-import { useMarkdownStore } from 'src/.q-press/stores/markdown'
+import { useMarkdownStore } from '@/.q-press/stores/markdown'
 import MarkdownPageSidebar from './MarkdownPageSidebar'
 
 const markdownStore = useMarkdownStore()

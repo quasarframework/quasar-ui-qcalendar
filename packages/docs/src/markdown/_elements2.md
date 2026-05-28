@@ -345,8 +345,8 @@ import AvatarApi from 'quasar/dist/api/QAvatar.json'
 <MarkdownApi :api="AvatarApi" name="QAvatar"/>
 
 <script import>
-import MarkdownExampleApi from 'src/.q-press/api/components/MarkdownExample.json'
-import MarkdownPageApi from 'src/.q-press/api/components/MarkdownPage.json'
+import MarkdownExampleApi from '@/.q-press/api/components/MarkdownExample.json'
+import MarkdownPageApi from '@/.q-press/api/components/MarkdownPage.json'
 </script>
 
 <MarkdownApi :api="MarkdownExampleApi" name="MarkdownExample"/>

@@ -469,7 +469,7 @@ const x = {
 | Prop name    | Description                                                                                                       |
 | ------------ | ----------------------------------------------------------------------------------------------------------------- |
 | `app`        | Vue app instance                                                                                                  |
-| `router`     | Instance of Vue Router from 'src/router/index.js'                                                                 |
+| `router`     | Instance of Vue Router from '@/router/index.js'                                                                   |
 | `store`      | Instance of Pinia - **store only will be passed if your project uses Pinia (you have src/stores)**                |
 | `ssrContext` | Available only on server-side, if building for SSR. [More info](/quasar-cli-vite/developing-ssr/ssr-context)      |
 | `urlPath`    | The pathname (path + search) part of the URL. It also contains the hash on client-side.                           |
@@ -481,7 +481,7 @@ const x = {
 | Prop name    | Description                                                                                                       |
 | :----------- | :---------------------------------------------------------------------------------------------------------------- |
 | `app`        | Vue app instance                                                                                                  |
-| `router`     | Instance of Vue Router from 'src/router/index.js'                                                                 |
+| `router`     | Instance of Vue Router from '@/router/index.js'                                                                   |
 | `store`      | Instance of Pinia - **store only will be passed if your project uses Pinia (you have src/stores)**                |
 | `ssrContext` | Available only on server-side, if building for SSR. [More info](/quasar-cli-vite/developing-ssr/ssr-context)      |
 | `urlPath`    | The pathname (path + search) part of the URL. It also contains the hash on client-side.                           |
@@ -493,7 +493,7 @@ const x = {
 |    Prop name |                                                                                                       Description |
 | -----------: | ----------------------------------------------------------------------------------------------------------------: |
 |        `app` |                                                                                                  Vue app instance |
-|     `router` |                                                                 Instance of Vue Router from 'src/router/index.js' |
+|     `router` |                                                                   Instance of Vue Router from '@/router/index.js' |
 |      `store` |                Instance of Pinia - **store only will be passed if your project uses Pinia (you have src/stores)** |
 | `ssrContext` |      Available only on server-side, if building for SSR. [More info](/quasar-cli-vite/developing-ssr/ssr-context) |
 |    `urlPath` |                           The pathname (path + search) part of the URL. It also contains the hash on client-side. |
@@ -505,7 +505,7 @@ const x = {
 |  Prop name   |                                                    Description                                                    |
 | :----------: | :---------------------------------------------------------------------------------------------------------------: |
 |    `app`     |                                                 Vue app instance                                                  |
-|   `router`   |                                 Instance of Vue Router from 'src/router/index.js'                                 |
+|   `router`   |                                  Instance of Vue Router from '@/router/index.js'                                  |
 |   `store`    |        Instance of Pinia - **store only will be passed if your project uses Pinia (you have src/stores)**         |
 | `ssrContext` |   Available only on server-side, if building for SSR. [More info](/quasar-cli-vite/developing-ssr/ssr-context)    |
 |  `urlPath`   |              The pathname (path + search) part of the URL. It also contains the hash on client-side.              |
@@ -532,8 +532,8 @@ Lorem ipsum dolor sit amet, **consectetur adipiscing** elit, sed do _eiusmod_ te
 Lorem ipsum dolor sit amet, **consectetur adipiscing** elit, sed do _eiusmod_ tempor incididunt ut labore et dolore magna aliqua.
 
 <script import>
-import MarkdownExampleApi from 'src/.q-press/api/components/MarkdownExample.json'
-import MarkdownPageApi from 'src/.q-press/api/components/MarkdownPage.json'
+import MarkdownExampleApi from '@/.q-press/api/components/MarkdownExample.json'
+import MarkdownPageApi from '@/.q-press/api/components/MarkdownPage.json'
 </script>
 
 <MarkdownApi :api="MarkdownExampleApi" name="MarkdownExample"/>

@@ -76,7 +76,7 @@ import {
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref, reactive, computed } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 import Holidays from 'date-holidays'
 
 interface Holiday {

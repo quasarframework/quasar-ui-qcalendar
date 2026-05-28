@@ -38,7 +38,7 @@ import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { mdiArrowUp } from '@quasar/extras/mdi-v7'
 
-// import { useMarkdownStore } from 'src/.q-press/stores/doc'
+// import { useMarkdownStore } from '@/.q-press/stores/doc'
 import { useScroll } from '../composables/scroll'
 
 import MarkdownHeader from './MarkdownHeader.vue'

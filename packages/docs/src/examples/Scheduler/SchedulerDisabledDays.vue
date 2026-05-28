@@ -55,7 +55,7 @@ import {
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref, computed } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 interface Resource {
   id: string | number

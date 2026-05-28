@@ -122,7 +122,7 @@ import {
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref, reactive, computed, onBeforeMount } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 import Done from '@carbon/icons-vue/es/checkmark--outline/16'
 import Pending from '@carbon/icons-vue/es/pending/16'

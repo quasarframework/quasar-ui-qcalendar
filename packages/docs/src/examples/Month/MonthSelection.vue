@@ -36,7 +36,7 @@ import { QCalendarMonth, getDayIdentifier, today, Timestamp } from '@quasar/quas
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref, computed } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 function leftClick(e: MouseEvent) {
   return e.button === 0

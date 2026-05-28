@@ -65,7 +65,7 @@
 <script setup lang="ts">
 import { ref, computed, watch, onBeforeMount } from 'vue'
 import { colors } from 'quasar'
-import { useThemeBuilderStore } from 'stores/ThemeBuilder'
+import { useThemeBuilderStore } from '@/stores/ThemeBuilder'
 
 const { brightness } = colors
 

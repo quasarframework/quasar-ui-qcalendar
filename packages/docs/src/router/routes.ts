@@ -1,15 +1,15 @@
-import mdPageList from 'src/markdown/listing'
-import examplesPageList from 'src/examples/listing'
+import mdPageList from '@/markdown/listing'
+import examplesPageList from '@/examples/listing'
 import { slugify } from '@md-plugins/shared'
 
 const routes = [
   {
     path: '/theme-builder',
-    component: () => import('layouts/ThemeBuilder.vue'),
+    component: () => import('@/layouts/ThemeBuilder.vue'),
   },
   {
     path: '/',
-    component: () => import('src/.q-press/layouts/MarkdownLayout.vue'),
+    component: () => import('@/.q-press/layouts/MarkdownLayout.vue'),
     children: [
       // Include the Landing Page route first
       ...Object.entries(mdPageList)
@@ -83,7 +83,7 @@ const routes = [
   // but you can also remove it
   {
     path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue'),
+    component: () => import('@/pages/ErrorNotFound.vue'),
   },
 ]
 

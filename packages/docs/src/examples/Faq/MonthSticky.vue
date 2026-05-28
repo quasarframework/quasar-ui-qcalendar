@@ -29,7 +29,7 @@
 import { ref } from 'vue'
 import { QCalendarMonth, today, Timestamp } from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/index.css'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 const selectedDate = ref(today()),
   calendar = ref<QCalendarMonth>(),

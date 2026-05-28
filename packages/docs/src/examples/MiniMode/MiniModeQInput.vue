@@ -57,7 +57,7 @@ import { QCalendarMonth, today, getMonthFormatter, Timestamp } from '@quasar/qua
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref, onBeforeMount } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 const calendar = ref<QCalendarMonth>(),
   monthFormatter = getMonthFormatter(),

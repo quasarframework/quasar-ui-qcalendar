@@ -58,7 +58,7 @@
 import { ref, reactive } from 'vue'
 import { QCalendarAgenda, Timestamp, today } from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/index.css'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 interface AgendaItem {
   time: string

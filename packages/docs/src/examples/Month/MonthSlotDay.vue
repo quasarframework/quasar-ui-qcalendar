@@ -55,7 +55,7 @@ import {
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref, reactive, computed } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 // The function below is used to set up our demo data
 const CURRENT_DAY = new Date()

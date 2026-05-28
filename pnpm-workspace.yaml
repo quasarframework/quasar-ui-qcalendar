@@ -95,3 +95,5 @@ minimumReleaseAgeExclude:
   - '@rolldown/binding-win32-arm64-msvc@1.0.3'
   - '@rolldown/binding-win32-x64-msvc@1.0.3'
   - rolldown@1.0.3
+  - '@quasar/render-ssr-error@2.2.3'
+  - '@quasar/vite-plugin@1.12.0'

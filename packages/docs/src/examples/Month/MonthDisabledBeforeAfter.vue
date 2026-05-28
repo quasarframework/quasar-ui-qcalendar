@@ -37,7 +37,7 @@ import {
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref, computed } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 const calendar = ref<QCalendarMonth>(),
   selectedDate = ref(today())

@@ -59,7 +59,7 @@ import { ref } from 'vue'
 import { QCalendarAgenda, today } from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 const selectedDate = ref(today())
 const dateAlign = ref('center')

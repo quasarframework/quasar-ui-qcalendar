@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@carbon/icons-vue": "^10.130.0",
-    "@quasar/extras": "2.0.0-beta.1",
+    "@quasar/extras": "2.0.0",
     "date-holidays": "=3.30.2",
     "pinia": "^3.0.4",
     "prismjs": "^1.30.0",
@@ -30,7 +30,7 @@
     "@md-plugins/shared": "0.1.0-beta.12",
     "@md-plugins/vite-examples-plugin": "0.1.0-beta.12",
     "@md-plugins/vite-md-plugin": "0.1.0-beta.12",
-    "@quasar/app-vite": "3.0.0-beta.30",
+    "@quasar/app-vite": "3.0.0-beta.31",
     "@quasar/quasar-ui-qcalendar": "workspace:*",
     "@types/markdown-it": "^14.1.2",
     "@types/node": "^25.9.1",

@@ -1,5 +1,5 @@
 /*global console process */
-process.env.BABEL_ENV = 'production'
+process.env.NODE_ENV = 'production'
 
 import path from 'node:path'
 import { URL } from 'node:url'

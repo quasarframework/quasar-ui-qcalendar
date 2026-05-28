@@ -20,7 +20,7 @@
 <script setup lang="ts">
 import { ref, computed, watch, onBeforeMount } from 'vue'
 import { useQuasar } from 'quasar'
-import { useThemeBuilderStore } from 'stores/ThemeBuilder'
+import { useThemeBuilderStore } from '@/stores/ThemeBuilder'
 
 interface Props {
   modelValue: boolean

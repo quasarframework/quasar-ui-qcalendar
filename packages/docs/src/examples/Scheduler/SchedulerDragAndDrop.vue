@@ -116,7 +116,7 @@ import { QCalendarScheduler, today, type Timestamp } from '@quasar/quasar-ui-qca
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref, reactive, computed } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 interface Resource {
   id: number

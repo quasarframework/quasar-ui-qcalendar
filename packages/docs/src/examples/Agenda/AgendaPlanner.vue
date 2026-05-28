@@ -274,9 +274,9 @@ import CheckboxChecked from '@carbon/icons-vue/es/checkbox--checked/24'
 import AddAlt from '@carbon/icons-vue/es/add--alt/16'
 
 import { ref, reactive, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
-import PlannerItem from 'components/PlannerItem.vue'
-import { getLocale } from 'src/util/getLocale'
+import NavigationBar from '@/components/NavigationBar.vue'
+import PlannerItem from '@/components/PlannerItem.vue'
+import { getLocale } from '@/util/getLocale'
 
 type AgendaItem = {
   id: number
