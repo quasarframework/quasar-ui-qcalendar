@@ -8,9 +8,6 @@ jobs:
   vitest:
     name: Run Vitest
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [22, 24] # Repo supports Node.js >=22.13
 
     steps:
       # Checkout the repository code
@@ -24,10 +21,10 @@ jobs:
           run_install: false
 
       # Use Node.js
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js 24
         uses: actions/setup-node@v5
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 24
           cache: 'pnpm'
           cache-dependency-path: pnpm-lock.yaml
 
