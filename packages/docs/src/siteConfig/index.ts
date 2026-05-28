@@ -489,8 +489,8 @@ const otherMenu: SiteMenuItem = {
       path: '/other/releases',
     },
     {
-      name: 'Migration Guide',
-      path: '/other/migration-guide',
+      name: 'Upgrade Guide',
+      path: '/other/upgrade-guide',
     },
     {
       name: 'Contact',

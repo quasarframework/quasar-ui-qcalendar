@@ -64,7 +64,7 @@ This is the preferred way if you are targeting one or more calendar components.
 :::
 
 ::: warning
-If you plan on importing from `src/` directly, please read the [Migration Guide](/other/migration-guide) on additional steps that may be needed.
+If you plan on importing from `src/` directly, please read the [Upgrade Guide](/other/upgrade-guide) on additional steps that may be needed.
 :::
 
 ```tabs

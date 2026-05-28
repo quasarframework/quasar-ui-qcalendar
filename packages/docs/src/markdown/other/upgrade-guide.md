@@ -1,6 +1,6 @@
 ---
-title: Migration Guide
-desc: Migrate from v4 to v5
+title: Upgrade Guide
+desc: Upgrade from v4 to v5
 keys: Help, upgrade, migration
 ---
 

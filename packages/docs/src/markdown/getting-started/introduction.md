@@ -8,7 +8,7 @@ keys: All about QCalendar
 If you're looking to help out, check out our [Call to action](/other/contributing/call-to-action) in the **Contributing** section.
 :::
 
-> If you are looking for the **Migration Guide** for QCalendar v5, go [here](/other/migration-guide).
+> If you are looking for the **Upgrade Guide** for QCalendar v5, go [here](/other/upgrade-guide).
 
 ## Everything You Need for a Complete Calendar Solution
 
