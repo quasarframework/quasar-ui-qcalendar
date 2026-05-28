@@ -26,10 +26,11 @@
   "devDependencies": {
     "@types/node": "^25.9.1",
     "@vitest/coverage-istanbul": "^4.1.7",
+    "@vue/server-renderer": "^3.5.35",
     "npm-check-updates": "^22.2.1",
     "oxfmt": "^0.52.0",
     "oxlint": "^1.67.0",
-    "typescript": "~5.9.3",
+    "typescript": "~6.0.3",
     "unbuild": "^3.6.1",
     "vitest": "^4.1.7"
   },
