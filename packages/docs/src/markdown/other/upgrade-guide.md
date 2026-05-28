@@ -86,7 +86,7 @@ See [Installation Types](/getting-started/installation) for more installation ex
 
 The QCalendar repository now uses:
 
-- `pnpm@11.3.0`
+- `pnpm@11.4.0`
 - Node.js `>=22.13`
 - `oxlint` instead of ESLint
 - `oxfmt` instead of Prettier
