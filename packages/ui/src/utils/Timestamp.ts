@@ -1273,6 +1273,19 @@ const weekdayDateMap = {
   Sat: new Date('2020-01-11T00:00:00.000Z'),
 }
 
+type IntlNameFormat = 'long' | 'short' | 'narrow'
+
+function resolveIntlNameFormat(
+  options: Record<IntlNameFormat, Intl.DateTimeFormatOptions>,
+  type?: string,
+): Intl.DateTimeFormatOptions {
+  if (type === 'long' || type === 'short' || type === 'narrow') {
+    return options[type]
+  }
+
+  return options.long
+}
+
 /**
  * Returns a function that uses Intl.DateTimeFormat to format weekdays.
  *
@@ -1292,7 +1305,7 @@ const weekdayDateMap = {
  */
 export function getWeekdayFormatter(): WeekdayFormatter {
   const emptyFormatter = (): string => ''
-  const options = {
+  const options: Record<IntlNameFormat, Intl.DateTimeFormatOptions> = {
     long: { timeZone: 'UTC', weekday: 'long' },
     short: { timeZone: 'UTC', weekday: 'short' },
     narrow: { timeZone: 'UTC', weekday: 'narrow' },
@@ -1319,7 +1332,7 @@ export function getWeekdayFormatter(): WeekdayFormatter {
     try {
       const intlFormatter = new Intl.DateTimeFormat(
         locale || undefined,
-        options[type] || options['long'],
+        resolveIntlNameFormat(options, type),
       )
       return intlFormatter.format(weekdayDateMap[weekday])
     } catch (e) /* istanbul ignore next */ {
@@ -1362,7 +1375,7 @@ export function getWeekdayNames(type: string, locale: string): string[] {
  */
 export function getMonthFormatter(): MonthFormatter {
   const emptyFormatter = (): string => ''
-  const options: Record<'long' | 'short' | 'narrow', { timeZone: string; month: string }> = {
+  const options: Record<IntlNameFormat, Intl.DateTimeFormatOptions> = {
     long: { timeZone: 'UTC', month: 'long' },
     short: { timeZone: 'UTC', month: 'short' },
     narrow: { timeZone: 'UTC', month: 'narrow' },
@@ -1385,7 +1398,7 @@ export function getMonthFormatter(): MonthFormatter {
     try {
       const intlFormatter = new Intl.DateTimeFormat(
         locale || undefined,
-        options[type] || options['long'],
+        resolveIntlNameFormat(options, type),
       )
       const date = new Date()
       date.setDate(1)
