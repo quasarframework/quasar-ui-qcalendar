@@ -23,6 +23,17 @@
             <q-icon :name="biArrowRightCircle" />
           </div>
         </router-link>
+        <router-link
+          to="/other/upgrade-guide"
+          class="hero-button q-btn q-btn-item non-selectable no-outline q-btn--standard q-btn--rectangle q-btn--actionable q-focusable q-hoverable q-btn--no-uppercase q-btn--rounded q-btn--dense"
+        >
+          <div
+            class="row justify-around items-center q-btn__content text-center col items-center q-anchor--skip"
+            style="width: 120px"
+          >
+            <div>Upgrade Guide</div>
+          </div>
+        </router-link>
         <a
           href="https://github.com/quasarframework/quasar-ui-qcalendar/tree/v5-beta"
           target="_blank"
