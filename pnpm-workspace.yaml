@@ -10,6 +10,8 @@ allowBuilds:
   esbuild: true
 minimumReleaseAgeExclude:
   - '@quasar/app-vite'
+  - '@clack/core'
+  - '@clack/prompts'
   - '@quasar/extras'
   - '@oxfmt/binding-android-arm-eabi@0.52.0'
   - '@oxfmt/binding-android-arm64@0.52.0'

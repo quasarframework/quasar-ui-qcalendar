@@ -36,8 +36,8 @@
   },
   "engines": {
     "node": ">=22.13",
-    "pnpm": ">=11.3.0"
+    "pnpm": ">=11.5.0"
   },
-  "packageManager": "pnpm@11.4.0",
+  "packageManager": "pnpm@11.5.0",
   "access": "private"
 }
