@@ -59,7 +59,6 @@ import {
   QCalendarResource,
   addToDate,
   parseTimestamp,
-  today,
   Timestamp,
 } from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/index.css'
@@ -78,7 +77,7 @@ interface Resource {
 const calendar = ref<QCalendarResource>()
 const calendar2 = ref<QCalendarResource>()
 
-const selectedDate = ref(today())
+const selectedDate = ref('2026-05-26')
 
 const resources = ref<Resource[]>([
   { id: '1', name: 'Room 101' },
@@ -88,9 +87,9 @@ const resources = ref<Resource[]>([
 ])
 
 const disabledDays = computed(() => {
-  const ts = parseTimestamp(today())
-  // make the next 3 days, after today, disabled
-  return Array.from({ length: 3 }, (_, i) => addToDate(ts!, { day: i + 1 }).date)
+  const ts = parseTimestamp(selectedDate.value)
+  // make 3 visible days disabled, starting with the selected date
+  return Array.from({ length: 3 }, (_, i) => addToDate(ts!, { day: i }).date)
 })
 
 const disabledDaysRange = computed(() => {

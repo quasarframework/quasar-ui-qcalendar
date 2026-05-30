@@ -61,7 +61,7 @@ This will only make sense if your browser is currently in light mode.
 
 ## Disabled Days
 
-The first example disables individual days with date strings. The second example uses the object form with `from`, `to`, `color`, and `textColor` to create a reservation-style disabled range.
+The example anchors its date to a visible week. The first example disables individual days with date strings. The second example uses the object form with `from`, `to`, `color`, and `textColor` to create a reservation-style disabled range.
 
 <MarkdownExample title="Disabled Days" file="ResourceDisabledDays"/>
 

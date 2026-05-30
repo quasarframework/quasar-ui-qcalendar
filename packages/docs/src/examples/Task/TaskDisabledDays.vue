@@ -189,7 +189,6 @@
 <script setup lang="ts">
 import {
   QCalendarTask,
-  today,
   isBetweenDates,
   parsed,
   padNumber,
@@ -223,9 +222,9 @@ interface FooterTask {
 }
 
 const calendar = ref<QCalendarTask>(),
-  selectedDate = ref(today()),
-  startDate = ref(today()),
-  endDate = ref(today()),
+  selectedDate = ref('2021-03-15'),
+  startDate = ref('2021-03-15'),
+  endDate = ref('2021-03-15'),
   tasks = ref<Task[]>([
     {
       title: 'Task 1',
@@ -332,9 +331,9 @@ const calendar = ref<QCalendarTask>(),
   footerTasks = ref<FooterTask[]>([{ title: 'TOTALS' }])
 
 const disabledDays = computed(() => {
-  const ts = parseTimestamp(today())
-  // make next 4 days, after today, disabled
-  return Array.from({ length: 4 }, (_, i) => addToDate(ts!, { day: i + 1 }).date)
+  const ts = parseTimestamp(selectedDate.value)
+  // make 4 visible days disabled, starting with the selected date
+  return Array.from({ length: 4 }, (_, i) => addToDate(ts!, { day: i }).date)
 })
 
 const disabledDaysRange = computed(() => {

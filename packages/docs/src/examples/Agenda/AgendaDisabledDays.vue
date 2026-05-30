@@ -55,19 +55,13 @@
 </template>
 
 <script setup lang="ts">
-import {
-  QCalendarAgenda,
-  addToDate,
-  parseTimestamp,
-  today,
-  Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+import { QCalendarAgenda, addToDate, parseTimestamp, Timestamp } from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/index.css'
 import { ref, computed } from 'vue'
 import NavigationBar from '@/components/NavigationBar.vue'
 
 const calendar = ref<QCalendarAgenda>()
-const selectedDate = ref(today())
+const selectedDate = ref('2026-05-26')
 const leftColumnOptions = ref([
   {
     id: 'overdue',
@@ -82,9 +76,9 @@ const rightColumnOptions = ref([
 ])
 
 const disabledDays = computed(() => {
-  const ts = parseTimestamp(today())
-  // make next 4 days, after today, disabled
-  return Array.from({ length: 4 }, (_, i) => addToDate(ts!, { day: i + 1 }).date)
+  const ts = parseTimestamp(selectedDate.value)
+  // make 4 visible days disabled, starting with the selected date
+  return Array.from({ length: 4 }, (_, i) => addToDate(ts!, { day: i }).date)
 })
 
 const disabledDaysRange = computed(() => {

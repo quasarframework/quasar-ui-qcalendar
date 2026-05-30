@@ -72,7 +72,7 @@ All days before and after the current day have been disabled with the properties
 
 ## Disabled Days
 
-The next 4 days after the current day have been disabled with the `disabled-days` property.
+The example anchors its date to a visible day and disables that visible date with the `disabled-days` property.
 
 The first example uses an array of dates to disable each specific date.
 
