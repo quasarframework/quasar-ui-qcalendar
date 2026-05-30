@@ -6,7 +6,7 @@ keys: Help, upgrade, migration
 
 Use this guide to migrate from QCalendar v4.x to QCalendar v5.0.0 beta.
 
-> QCalendar v5 remains a Vue 3 and Quasar 2 calendar package. The QCalendar app extension is now Vite-only and targets Quasar CLI with `@quasar/app-vite` v3.
+> QCalendar v5 remains a Vue 3 calendar package with Quasar 2 integration. The QCalendar app extension is Vite-only and targets Quasar CLI with `@quasar/app-vite` v3, but direct UI package imports can still be used in Vue/Vite projects without installing the app extension.
 
 > The information below is by no means an exhaustive list of changes and new functionality. If you see something that has been missed, please PR or let us know.
 
@@ -27,7 +27,7 @@ This release prepares QCalendar for the next Quasar CLI Vite generation. The cal
 | Node.js for this repo and CI  | `>=22.13`                  |
 | Package manager for this repo | `pnpm >=11.3.0`            |
 
-If your application is still using `@quasar/app-webpack`, migrate the application to Quasar CLI Vite before installing the QCalendar v5 app extension.
+If your application is still using `@quasar/app-webpack`, migrate the application to Quasar CLI Vite before installing the QCalendar v5 app extension. If you are using QCalendar directly in a non-Quasar Vue/Vite app, install the UI package instead of the Quasar app extension.
 
 ## Installing the beta
 

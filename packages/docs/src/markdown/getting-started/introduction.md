@@ -18,6 +18,8 @@ QCalendar is a less-opinionated calendar component, as it does not keep track of
 
 The guiding philosophy has been to empower the developer and allow them to do what needs to be done without being overly opinionated.
 
+QCalendar can be installed directly in Vue/Vite projects using the UI package. The Quasar app extension is a convenience layer for Quasar CLI Vite projects that want automatic boot-file registration and Quasar-specific tooling integration.
+
 QCalendar is actually an accumulation of several other dedicated components and exported methods:
 
 1. QCalendar (wrapper)

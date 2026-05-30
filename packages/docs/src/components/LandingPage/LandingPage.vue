@@ -54,6 +54,10 @@
         QCalendar is your all-in-one calendar solution for Vue and Quasar.<br />Discover the power
         of QCalendar and enhance your calendar experience!
       </p>
+      <p>
+        Install the UI package directly in Vue/Vite apps, or use the Quasar app extension when you
+        want Quasar CLI Vite registration.
+      </p>
     </div>
     <div class="row justify-center hero">
       <div class="hero-title">QCalendar Features</div>
