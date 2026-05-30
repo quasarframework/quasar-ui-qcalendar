@@ -162,4 +162,6 @@ The current date has been set to tomorrow via the `now` property.
 
 ## Workweeks
 
+Use `show-work-weeks` to show the workweek column. The `head-workweek` slot replaces the header cell that defaults to `#`, and the `workweek` slot replaces each rendered workweek label. If the custom label is wider than the default, increase `--calendar-work-week-width`.
+
 <MarkdownExample title="Workweeks" file="MonthWorkweeks"/>

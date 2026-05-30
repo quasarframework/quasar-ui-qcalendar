@@ -7,6 +7,7 @@
         <q-calendar-month
           ref="calendar"
           v-model="selectedDate"
+          class="workweek-calendar"
           show-work-weeks
           :day-min-height="40"
           animated
@@ -18,7 +19,15 @@
           @click-workweek="onClickWorkweek"
           @click-head-workweek="onClickHeadWorkweek"
           @click-head-day="onClickHeadDay"
-        />
+        >
+          <template #head-workweek>
+            <span class="workweek-header">Week</span>
+          </template>
+
+          <template #workweek="{ scope }">
+            <span class="workweek-label">W{{ scope.workweekLabel }}</span>
+          </template>
+        </q-calendar-month>
       </div>
     </div>
   </div>
@@ -71,3 +80,14 @@ function onClickHeadWorkweek(data: Timestamp) {
   console.info('onClickHeadWorkweek', data)
 }
 </script>
+
+<style scoped>
+.workweek-calendar {
+  --calendar-work-week-width: 64px;
+}
+
+.workweek-header,
+.workweek-label {
+  font-weight: 700;
+}
+</style>
