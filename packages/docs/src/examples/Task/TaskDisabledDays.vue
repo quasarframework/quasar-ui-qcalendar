@@ -338,9 +338,16 @@ const disabledDays = computed(() => {
 })
 
 const disabledDaysRange = computed(() => {
-  // create the range for example 2
-  // Note: this is an array, within an array
-  return [[disabledDays.value[0], disabledDays.value[disabledDays.value.length - 1]]]
+  // create a reservation-style range for example 2
+  return [
+    {
+      from: disabledDays.value[0],
+      to: disabledDays.value[disabledDays.value.length - 1],
+      color: '#ef5350',
+      textColor: '#ffffff',
+      label: 'Reserved',
+    },
+  ]
 })
 
 /**

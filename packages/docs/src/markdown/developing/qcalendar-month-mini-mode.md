@@ -49,7 +49,7 @@ The next 4 days after the current day have been disabled with the `disabled-days
 
 The first example uses an array of dates to disable each specific date.
 
-The second example uses a range, which is an array within an array of start and end dates.
+The second example uses the object form with `from`, `to`, `color`, and `textColor` to create a reservation-style disabled range.
 
 <MarkdownExample title="Mini-Mode Disabled Days" file="MiniModeDisabledDays"/>
 

@@ -11,7 +11,7 @@
           ref="calendar"
           v-model="selectedDate"
           view="week"
-          :disabled-days="disabledDays"
+          :disabled-days="disabledDaysRange"
           no-active-date
           bordered
           animated
@@ -67,6 +67,19 @@ const disabledDays = computed(() => {
   const ts = parseTimestamp(today())
   // make next 4 days, after today, disabled
   return Array.from({ length: 4 }, (_, i) => addToDate(ts!, { day: i + 1 }).date)
+})
+
+const disabledDaysRange = computed(() => {
+  // create a reservation-style range for example 2
+  return [
+    {
+      from: disabledDays.value[0],
+      to: disabledDays.value[disabledDays.value.length - 1],
+      color: '#ef5350',
+      textColor: '#ffffff',
+      label: 'Reserved',
+    },
+  ]
 })
 
 function onToday() {

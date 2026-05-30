@@ -163,11 +163,11 @@ The active date is changed when the user clicks on a date or navigates using pre
 
 ### Disabled days
 
-This property is an Array of dates in the format `YYYY-MM-DD`.
+This property is an Array of dates in the format `YYYY-MM-DD`. It also accepts ranges and object entries with optional color metadata for reservation-style disabled days.
 
-| Property      | Type  | Example                        |
-| ------------- | ----- | ------------------------------ |
-| disabled-days | Array | "['2019-04-01', '2019-04-02']" |
+| Property      | Type  | Example                                                                                  |
+| ------------- | ----- | ---------------------------------------------------------------------------------------- |
+| disabled-days | Array | "['2019-04-01', ['2019-04-03', '2019-04-05'], { date: '2019-04-08', color: '#ef5350' }]" |
 
 ### Disabled before
 

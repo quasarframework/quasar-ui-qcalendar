@@ -5,49 +5,49 @@
     <div class="row justify-center">
       <div
         class="q-gutter-md"
-        style="display: flex; flex-direction: column; max-width: 800px; width: 90%"
+        style="display: flex; flex-direction: column; max-width: 900px; width: 100%; height: 720px"
       >
-        <q-calendar-agenda
+        <q-calendar-resource
           ref="calendar"
           v-model="selectedDate"
-          view="week"
+          v-model:model-resources="resources"
+          resource-key="id"
+          resource-label="name"
           :disabled-days="disabledDays"
-          :left-column-options="leftColumnOptions"
-          :right-column-options="rightColumnOptions"
-          column-options-id="id"
-          column-options-label="label"
-          :day-min-height="200"
+          :interval-count="8"
+          :interval-start="8"
+          :max-days="4"
           animated
           bordered
-          style="max-height: 200px"
           @change="onChange"
           @moved="onMoved"
+          @resource-expanded="onResourceExpanded"
           @click-date="onClickDate"
           @click-time="onClickTime"
+          @click-resource="onClickResource"
+          @click-head-resources="onClickHeadResources"
           @click-interval="onClickInterval"
-          @click-head-intervals="onClickHeadIntervals"
-          @click-head-day="onClickHeadDay"
         />
-        <q-calendar-agenda
+        <q-calendar-resource
           ref="calendar2"
           v-model="selectedDate"
-          view="week"
+          v-model:model-resources="resources"
+          resource-key="id"
+          resource-label="name"
           :disabled-days="disabledDaysRange"
-          :left-column-options="leftColumnOptions"
-          :right-column-options="rightColumnOptions"
-          column-options-id="id"
-          column-options-label="label"
-          :day-min-height="200"
+          :interval-count="8"
+          :interval-start="8"
+          :max-days="4"
           animated
           bordered
-          style="max-height: 200px"
           @change="onChange"
           @moved="onMoved"
+          @resource-expanded="onResourceExpanded"
           @click-date="onClickDate"
           @click-time="onClickTime"
+          @click-resource="onClickResource"
+          @click-head-resources="onClickHeadResources"
           @click-interval="onClickInterval"
-          @click-head-intervals="onClickHeadIntervals"
-          @click-head-day="onClickHeadDay"
         />
       </div>
     </div>
@@ -56,35 +56,41 @@
 
 <script setup lang="ts">
 import {
-  QCalendarAgenda,
+  QCalendarResource,
   addToDate,
   parseTimestamp,
   today,
   Timestamp,
 } from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/index.css'
-import { ref, computed } from 'vue'
+
+import { computed, ref } from 'vue'
 import NavigationBar from '@/components/NavigationBar.vue'
 
-const calendar = ref<QCalendarAgenda>()
+interface Resource {
+  id: string
+  name: string
+  height?: number
+  expanded?: boolean
+  children?: Resource[]
+}
+
+const calendar = ref<QCalendarResource>()
+const calendar2 = ref<QCalendarResource>()
+
 const selectedDate = ref(today())
-const leftColumnOptions = ref([
-  {
-    id: 'overdue',
-    label: 'Overdue',
-  },
-])
-const rightColumnOptions = ref([
-  {
-    id: 'summary',
-    label: 'Summary',
-  },
+
+const resources = ref<Resource[]>([
+  { id: '1', name: 'Room 101' },
+  { id: '2', name: 'Room 102' },
+  { id: '3', name: 'Room 103' },
+  { id: '4', name: 'Room 104' },
 ])
 
 const disabledDays = computed(() => {
   const ts = parseTimestamp(today())
-  // make next 4 days, after today, disabled
-  return Array.from({ length: 4 }, (_, i) => addToDate(ts!, { day: i + 1 }).date)
+  // make the next 3 days, after today, disabled
+  return Array.from({ length: 3 }, (_, i) => addToDate(ts!, { day: i + 1 }).date)
 })
 
 const disabledDaysRange = computed(() => {
@@ -101,26 +107,25 @@ const disabledDaysRange = computed(() => {
 })
 
 function onToday() {
-  if (calendar.value) {
-    calendar.value.moveToToday()
-  }
+  calendar.value?.moveToToday()
+  calendar2.value?.moveToToday()
 }
 function onPrev() {
-  if (calendar.value) {
-    calendar.value.prev()
-  }
+  calendar.value?.prev()
+  calendar2.value?.prev()
 }
 function onNext() {
-  if (calendar.value) {
-    calendar.value.next()
-  }
+  calendar.value?.next()
+  calendar2.value?.next()
 }
-
 function onMoved(data: Timestamp) {
   console.info('onMoved', data)
 }
 function onChange(data: { start: Timestamp; end: Timestamp; days: Timestamp[] }) {
   console.info('onChange', data)
+}
+function onResourceExpanded(data: Timestamp) {
+  console.info('onResourceExpanded', data)
 }
 function onClickDate(data: Timestamp) {
   console.info('onClickDate', data)
@@ -128,13 +133,13 @@ function onClickDate(data: Timestamp) {
 function onClickTime(data: Timestamp) {
   console.info('onClickTime', data)
 }
+function onClickResource(data: Timestamp) {
+  console.info('onClickResource', data)
+}
+function onClickHeadResources(data: Timestamp) {
+  console.info('onClickHeadResources', data)
+}
 function onClickInterval(data: Timestamp) {
   console.info('onClickInterval', data)
-}
-function onClickHeadIntervals(data: Timestamp) {
-  console.info('onClickHeadIntervals', data)
-}
-function onClickHeadDay(data: Timestamp) {
-  console.info('onClickHeadDay', data)
 }
 </script>
