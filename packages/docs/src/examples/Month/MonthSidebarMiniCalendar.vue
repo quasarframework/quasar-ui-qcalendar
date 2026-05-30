@@ -417,6 +417,10 @@ function onClickHeadWorkweek(data: Timestamp) {
   border-radius: 24px;
 }
 
+.main-calendar-wrapper :deep(.q-calendar) {
+  border-radius: inherit;
+}
+
 .calendar-event {
   display: flex;
   align-items: center;
