@@ -6,7 +6,7 @@
   "props": {
     "code": {
       "type": "String",
-      "desc": "The code to display",
+      "desc": "The code to display with Shiki syntax highlighting",
       "examples": [
         "'const a = 1;'",
         "'<div>Hello World</div>'"

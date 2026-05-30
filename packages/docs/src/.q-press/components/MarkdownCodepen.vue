@@ -40,11 +40,53 @@ const defaultJsResources = [
   `https://cdn.jsdelivr.net/npm/quasar@${Quasar.version}/dist/quasar.umd.prod.js`,
 ]
 
+function getAbsolutePublicUrl(path: string) {
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`
+
+  return typeof location === 'undefined' ? normalizedPath : `${location.origin}${normalizedPath}`
+}
+
+function rewriteRootRelativeUrls(content: string) {
+  return content
+    .replace(
+      /\b(src|href|poster)=("|')\/(?!\/)([^"']*)\2/g,
+      (_match: string, attr: string, quote: string, path: string) =>
+        `${attr}=${quote}${getAbsolutePublicUrl(path)}${quote}`,
+    )
+    .replace(
+      /url\(\s*(["']?)\/(?!\/)([^"')]+)\1\s*\)/g,
+      (_match: string, quote: string, path: string) =>
+        `url(${quote}${getAbsolutePublicUrl(path)}${quote})`,
+    )
+}
+
 function indent(code: string, spaces = 2) {
   const padding = ' '.repeat(spaces)
+  let isInsideTemplateLiteral = false
+
   return code
     .split('\n')
-    .map((line) => (line.trim().length > 0 ? padding + line : line))
+    .map((line) => {
+      const shouldIndent = line.trim().length > 0 && isInsideTemplateLiteral === false
+
+      for (let index = 0; index < line.length; index++) {
+        if (line[index] !== '`') {
+          continue
+        }
+
+        let escapeCount = 0
+
+        for (let escapeIndex = index - 1; escapeIndex >= 0 && line[escapeIndex] === '\\'; escapeIndex--) {
+          escapeCount++
+        }
+
+        if (escapeCount % 2 === 0) {
+          isInsideTemplateLiteral = !isInsideTemplateLiteral
+        }
+      }
+
+      return shouldIndent ? padding + line : line
+    })
     .join('\n')
 }
 
@@ -157,7 +199,7 @@ function getSetupReturnNames(content: string) {
   const declarationRe =
     /(?:^|\n)\s*(?:const|let|var)\s+([\s\S]*?)(?=\n\s*(?:const|let|var|function|interface|type|class)\s+|\s*$)/g
   const variableNameRe = /(?:^|\n)\s*([A-Za-z_$][\w$]*)\s*(?:[:=,]|$)/g
-  const functionRe = /(?:^|\n)\s*function\s+([A-Za-z_$][\w$]*)/g
+  const functionRe = /(?:^|\n)\s*(?:async\s+)?function\s+([A-Za-z_$][\w$]*)/g
   let match: RegExpExecArray | null
 
   while ((match = declarationRe.exec(topLevelContent)) !== null) {
@@ -270,7 +312,7 @@ const jsResources = computed(() => {
 })
 
 const css = computed(() => {
-  return (def.parts.Style || '').replace(/(<style.*?>|<\/style>)/g, '').trim()
+  return rewriteRootRelativeUrls((def.parts.Style || '').replace(/(<style.*?>|<\/style>)/g, '').trim())
 })
 
 const cssPreprocessor = computed(() => {
@@ -296,7 +338,7 @@ const jsPreProcessor = computed(() => {
 })
 
 const html = computed(() => {
-  return (def.parts.Template || '')
+  const content = (def.parts.Template || '')
     .replace(/(<template>|<\/template>$)/g, '')
     .replace(/\n/g, '\n  ')
     .replace(/([\w]+=")([^"]*?)(")/g, function (match, p1, p2, p3) {
@@ -330,6 +372,8 @@ const html = computed(() => {
     .replace(/___TEMP_REPLACEMENT___/g, '>')
     .replace(/^\s{2}/gm, '')
     .trim()
+
+  return rewriteRootRelativeUrls(content)
 })
 
 const editors = computed(() => {

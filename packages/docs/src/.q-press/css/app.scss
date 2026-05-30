@@ -2,8 +2,8 @@
 @use 'sass:color';
 @use './fonts.scss';
 
-// Keep this import so Prism shares the selected qPress theme variables.
-@import './prism-theme.scss';
+// Keep this import so Shiki code blocks share the selected qPress theme variables.
+@import './code-theme.scss';
 
 .material-icons {
   font-family: 'Material Icons';
@@ -84,9 +84,10 @@ ul {
   line-height: $font-size;
   border-radius: $generic-border-radius;
   font-family: inherit;
-  color: color.scale($brand-primary, $lightness: -35%);
+  color: $brand-light-text;
+  background-color: rgba($brand-primary, 0.08);
   vertical-align: baseline;
-  border: 1px solid currentColor;
+  border: 1px solid rgba($brand-primary, 0.5);
 }
 
 .markdown-note {
@@ -109,10 +110,13 @@ ul {
     // .markdown-note__title,
     .markdown-link,
     .markdown-token {
-      color: color.scale($brand-primary, $lightness: -35%);
+      color: $brand-light-text;
+    }
+    .markdown-link {
+      border-bottom-color: rgba($brand-primary, 0.78);
     }
     .markdown-token {
-      border-color: color.scale($brand-primary, $lightness: -35%);
+      border-color: rgba($brand-primary, 0.5);
     }
     & strong {
       font-weight: 700;
@@ -554,6 +558,12 @@ $letter-spacing-list: 40, 100, 225, 263, 300, 375, 450;
 }
 
 body.body--dark {
+  .markdown-token {
+    color: $brand-dark-text;
+    background-color: rgba($brand-primary, 0.18);
+    border-color: rgba($brand-primary, 0.72);
+  }
+
   .markdown-technical {
     color: $brand-dark-text;
     background: $brand-dark-bg;

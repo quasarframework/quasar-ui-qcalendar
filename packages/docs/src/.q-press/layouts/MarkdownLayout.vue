@@ -101,7 +101,7 @@ const pageContentClass = computed(
       }
 
       @media (max-width: 1845px) {
-        justify-content: start;
+        justify-content: flex-start;
 
         .markdown-page__toc-container--flowing {
           display: none;

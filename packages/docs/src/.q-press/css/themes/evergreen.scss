@@ -1,38 +1,34 @@
 @use 'sass:color';
 
-// Mystic Theme Variables
-$primary: #8a2be2;
-$secondary: #00ced1;
-$accent: #ff4500;
+// Evergreen Theme Variables
+$primary: #0f766e;
+$secondary: #3f8f68;
+$accent: #f59e0b;
 
 $positive: #2ecc71;
 $negative: #ff1732;
 $info: #10a0ff;
 $warning: #ffd52d;
 
-$brand-primary: #8a2be2;
-$brand-secondary: #00ced1;
-$brand-accent: #ff4500;
-$brand-dark: #8d66da;
-$brand-light: #e6e6fa;
-$brand-medium: #9370db;
-$brand-light-text: #4b0082;
-$brand-light-bg: #e6e6fa;
-$brand-dark-bg: #171122;
-$brand-dark-text: #e6e6fa;
+$brand-primary: #14b8a6;
+$brand-secondary: #3f8f68;
+$brand-accent: #f59e0b;
+$brand-dark: #173b2f;
+$brand-light: #e6f6ee;
+$brand-medium: #6b8f7a;
+$brand-light-text: #173b2f;
+$brand-light-bg: #f3faf6;
+$brand-dark-bg: #071914;
+$brand-dark-text: #d7f3e6;
+$brand-light-codeblock-bg: #e6f6ee;
+$brand-light-codeblock-text: #0f5132;
+$brand-dark-codeblock-bg: #0e2a22;
+$brand-dark-codeblock-text: #b8f5d4;
 
-$brand-light-codeblock-bg: #f8f8ff;
-$brand-light-codeblock-text: #9370db;
-$brand-dark-codeblock-bg: #4b0082;
-$brand-dark-codeblock-text: #e6e6fa;
-
-$header-btn-color--light: #8a2be2;
-$header-btn-hover-color--light: #ff4500;
-$header-btn-color--dark: #00ced1;
-$header-btn-hover-color--dark: #9370db;
-
-$light-pill: $brand-light;
-$light-text: $brand-light-text;
+$header-btn-color--light: #0f766e;
+$header-btn-hover-color--light: #b45309;
+$header-btn-color--dark: #5eead4;
+$header-btn-hover-color--dark: #fbbf24;
 
 $light-pill: $brand-light;
 $light-text: $brand-light-text;
@@ -63,7 +59,7 @@ $font-family-technical:
 $font-family-examples: $font-family-technical;
 $font-family-brand: 'Montserrat', $font-family-technical;
 
-$shadow--large: 0 24px 24px 0 rgba(0, 179, 255, 0.24);
+$shadow--large: 0 24px 24px 0 rgba($brand-primary, 0.24);
 $shadow--medium: 0 6px 6px 0 rgba($brand-primary, 0.38);
 $shadow--small: 0 6px 6px 0 rgba($brand-primary, 0.28);
 

@@ -306,7 +306,7 @@ const hasMoreLinks = computed(() => siteConfig.links.moreLinks.length > 0)
   }
 
   &__links {
-    justify-content: end;
+    justify-content: flex-end;
 
     @media (min-width: 1921px) {
       justify-content: center;
