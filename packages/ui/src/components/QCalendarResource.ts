@@ -155,7 +155,8 @@ export default defineComponent({
       // ariaDateFormatter,
       // methods
       dayStyleDefault,
-      // getRelativeClasses
+      getDisabledStyle,
+      getRelativeClasses,
     } = useCommon(props, { startDate, endDate, times })
 
     const parsedValue = computed(() => {
@@ -427,6 +428,7 @@ export default defineComponent({
         minWidth: width,
         height,
         ...styler({ scope }),
+        ...getDisabledStyle(interval),
       }
 
       const intervalClass =
@@ -440,6 +442,7 @@ export default defineComponent({
           tabindex: isFocusable === true ? 0 : -1,
           class: {
             'q-calendar-resource__head--interval': true,
+            ...getRelativeClasses(interval),
             ...intervalClass,
             'q-active-date': activeDate,
             'q-calendar__hoverable': props.hoverable === true,
@@ -813,6 +816,7 @@ export default defineComponent({
         maxWidth: width,
         minWidth: width,
         ...styler({ scope }),
+        ...getDisabledStyle(interval),
       }
       style.height =
         resource.height !== void 0
@@ -836,6 +840,7 @@ export default defineComponent({
           tabindex: isFocusable === true ? 0 : -1,
           class: {
             'q-calendar-resource__resource--interval': true,
+            ...getRelativeClasses(interval),
             'q-active-date': activeDate,
             'q-calendar__hoverable': props.hoverable === true,
             'q-calendar__focusable': isFocusable === true,

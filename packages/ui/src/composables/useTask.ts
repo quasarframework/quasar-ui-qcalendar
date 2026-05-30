@@ -12,6 +12,7 @@ import {
   today,
   validateNumber,
   validateTimestamp,
+  type DisabledDays,
   type Timestamp,
 } from '../utils/Timestamp'
 
@@ -126,7 +127,7 @@ export default function useTask(
     disabledBefore?: string
     disabledAfter?: string
     disabledWeekdays?: number[]
-    disabledDays?: string[]
+    disabledDays?: DisabledDays
   },
   emit: EmitFn,
   {

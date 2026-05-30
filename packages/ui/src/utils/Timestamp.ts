@@ -42,6 +42,26 @@ export const MONTH_MIN = 1
 export const DAY_MIN = 1
 export const FIRST_HOUR = 0
 
+export type TimestampStyle = Record<string, string | number | undefined>
+
+export type TimestampClass = string | string[] | Record<string, boolean>
+
+export interface DisabledDayConfig {
+  date?: string
+  from?: string
+  to?: string
+  start?: string
+  end?: string
+  color?: string
+  textColor?: string
+  class?: TimestampClass
+  style?: TimestampStyle
+  label?: string
+}
+
+export type DisabledDay = string | string[] | DisabledDayConfig
+export type DisabledDays = DisabledDay[]
+
 /**
  * @typedef {Object} Timestamp The Timestamp object
  * @property {string=} Timestamp.date Date string in format 'YYYY-MM-DD'
@@ -60,6 +80,11 @@ export const FIRST_HOUR = 0
  * @property {boolean=} Timestamp.current True if Timestamp is current day (now)
  * @property {boolean=} Timestamp.future True if Timestamp is in the future
  * @property {boolean=} Timestamp.disabled True if this is a disabled date
+ * @property {string=} Timestamp.disabledColor Background color for this disabled date
+ * @property {string=} Timestamp.disabledTextColor Text color for this disabled date
+ * @property {TimestampClass=} Timestamp.disabledClass Class metadata for this disabled date
+ * @property {TimestampStyle=} Timestamp.disabledStyle Inline style metadata for this disabled date
+ * @property {string=} Timestamp.disabledLabel Label associated with this disabled date
  * @property {boolean=} Timestamp.currentWeekday True if this date corresponds to current weekday
  */
 // export const Timestamp = {
@@ -104,6 +129,11 @@ export interface Timestamp {
   current?: boolean // if timestamp is current date (based on `now` property)
   future?: boolean // if timestamp is in the future (based on `now` property)
   disabled?: boolean // if timestamp is disabled
+  disabledColor?: string // background color for this disabled date
+  disabledTextColor?: string // text color for this disabled date
+  disabledClass?: TimestampClass // class for this disabled date
+  disabledStyle?: TimestampStyle // inline style for this disabled date
+  disabledLabel?: string // label associated with this disabled date
   currentWeekday?: boolean // if this date corresponds to current weekday
 }
 
@@ -626,13 +656,75 @@ export function updateWorkWeek(timestamp: Timestamp): Timestamp {
   return ts
 }
 
+function isDisabledDayConfig(value: DisabledDay): value is DisabledDayConfig {
+  return typeof value === 'object' && value !== null && Array.isArray(value) === false
+}
+
+function applyDisabledDayConfig(timestamp: Timestamp, config?: DisabledDayConfig): Timestamp {
+  timestamp.disabled = true
+
+  if (config !== undefined) {
+    timestamp.disabledColor = config.color
+    timestamp.disabledTextColor = config.textColor
+    timestamp.disabledClass = config.class
+    timestamp.disabledStyle = config.style
+    timestamp.disabledLabel = config.label
+  }
+
+  return timestamp
+}
+
+function isTimestampInDisabledDay(timestamp: Timestamp, day: DisabledDay): boolean {
+  const target = getDayIdentifier(timestamp)
+
+  if (Array.isArray(day) === true) {
+    if (day.length === 2 && day[0] && day[1]) {
+      const start = parsed(day[0])
+      const end = parsed(day[1])
+
+      return start !== null && end !== null && isBetweenDates(timestamp, start, end)
+    }
+
+    return day.some((date) => {
+      const disabledDay = parseTimestamp(date)
+
+      return disabledDay !== null && getDayIdentifier(disabledDay) === target
+    })
+  }
+
+  if (isDisabledDayConfig(day) === true) {
+    const date = day.date
+    const startDate = day.from ?? day.start
+    const endDate = day.to ?? day.end
+
+    if (date !== undefined) {
+      const disabledDay = parseTimestamp(date)
+
+      return disabledDay !== null && getDayIdentifier(disabledDay) === target
+    }
+
+    if (startDate !== undefined && endDate !== undefined) {
+      const start = parsed(startDate)
+      const end = parsed(endDate)
+
+      return start !== null && end !== null && isBetweenDates(timestamp, start, end)
+    }
+
+    return false
+  }
+
+  const disabledDay = parseTimestamp(day)
+
+  return disabledDay !== null && getDayIdentifier(disabledDay) === target
+}
+
 /**
  * Updates the passed {@link Timestamp} with disabled, if needed
  * @param {Timestamp} timestamp The {@link Timestamp} to modify
  * @param {string} [disabledBefore] In 'YYY-MM-DD' format
  * @param {string} [disabledAfter] In 'YYY-MM-DD' format
  * @param {number[]} [disabledWeekdays] An array of numbers representing weekdays [0 = Sun, ..., 6 = Sat]
- * @param {string[]|string[][]} [disabledDays] An array of days in 'YYYY-MM-DD' format. If an array with a pair of dates is in first array, then this is treated as a range.
+ * @param {DisabledDays} [disabledDays] An array of days in 'YYYY-MM-DD' format. If an array with a pair of dates is in first array, then this is treated as a range. Object entries can include date/from/to plus color metadata.
  * @returns A new {@link Timestamp}
  */
 export function updateDisabled(
@@ -640,7 +732,7 @@ export function updateDisabled(
   disabledBefore?: string,
   disabledAfter?: string,
   disabledWeekdays?: number[],
-  disabledDays?: string[] | string[][],
+  disabledDays?: DisabledDays,
 ): Timestamp {
   let ts = copyTimestamp(timestamp)
   const t = getDayIdentifier(ts)
@@ -675,42 +767,10 @@ export function updateDisabled(
   }
 
   if (ts.disabled !== true && Array.isArray(disabledDays) && disabledDays.length > 0) {
-    for (const day in disabledDays) {
-      if (
-        Array.isArray(disabledDays[day]) &&
-        disabledDays[day].length === 2 &&
-        disabledDays[day][0] &&
-        disabledDays[day][1]
-      ) {
-        const start = parsed(disabledDays[day][0])
-        const end = parsed(disabledDays[day][1])
-        if (start && end && isBetweenDates(ts, start, end)) {
-          ts.disabled = true
-          break
-        }
-      } else {
-        const disabledDayOrRange = disabledDays[day]
-        // handle ranges with multiple days
-        if (Array.isArray(disabledDayOrRange)) {
-          for (const range of disabledDayOrRange) {
-            const disabledDay = parseTimestamp(range)
-            if (disabledDay) {
-              const d = getDayIdentifier(disabledDay)
-              if (d === t) {
-                ts.disabled = true
-                break
-              }
-            }
-          }
-        } else if (disabledDayOrRange) {
-          const disabledDay = parseTimestamp(disabledDayOrRange)
-          if (disabledDay) {
-            const d = getDayIdentifier(disabledDay)
-            if (d === t) {
-              ts.disabled = true
-            }
-          }
-        }
+    for (const day of disabledDays) {
+      if (isTimestampInDisabledDay(ts, day) === true) {
+        ts = applyDisabledDayConfig(ts, isDisabledDayConfig(day) === true ? day : undefined)
+        break
       }
     }
   }
@@ -933,7 +993,7 @@ export function findWeekday(
  * @param {string} [disabledBefore] Days before this date are disabled (YYYY-MM-DD)
  * @param {string} [disabledAfter] Days after this date are disabled (YYYY-MM-DD)
  * @param {number[]} [disabledWeekdays] An array representing weekdays that are disabled [0 = Sun, ..., 6 = Sat]
- * @param {string[]} [disabledDays] An array of days in 'YYYY-MM-DD' format. If an array with a pair of dates is in first array, then this is treated as a range.
+ * @param {DisabledDays} [disabledDays] An array of days in 'YYYY-MM-DD' format. If an array with a pair of dates is in first array, then this is treated as a range.
  * @param {number} [max=42] Max days to do
  * @param {number} [min=0]  Min days to do
  * @returns {Timestamp[]} The requested array of {@link Timestamp}s
@@ -946,7 +1006,7 @@ export function createDayList(
   disabledBefore: string | undefined = undefined,
   disabledAfter: string | undefined = undefined,
   disabledWeekdays: number[] = [],
-  disabledDays: string[] = [],
+  disabledDays: DisabledDays = [],
   max = 42,
   min = 0,
 ): Timestamp[] {

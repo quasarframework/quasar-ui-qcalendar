@@ -142,6 +142,7 @@ export default defineComponent({
       ariaDateFormatter,
       // methods
       dayStyleDefault,
+      getDisabledStyle,
       getRelativeClasses,
     } = useCommon(props as CommonProps, { startDate, endDate, times })
 
@@ -376,6 +377,7 @@ export default defineComponent({
         minWidth: width,
         maxWidth: width,
         ...styler({ scope }),
+        ...getDisabledStyle(day),
       }
       const dayClass = typeof props.dayClass === 'function' ? props.dayClass({ scope }) : {}
       // const key = day.date + '-' + task.id
@@ -1070,6 +1072,7 @@ export default defineComponent({
         minWidth: width,
         maxWidth: width,
         ...styler({ scope }),
+        ...getDisabledStyle(day),
       }
 
       const key = day.date

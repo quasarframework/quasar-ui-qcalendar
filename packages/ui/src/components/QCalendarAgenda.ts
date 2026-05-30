@@ -147,6 +147,7 @@ export default defineComponent({
       ariaDateFormatter,
       // methods
       dayStyleDefault,
+      getDisabledStyle,
       getRelativeClasses,
     } = useCommon(props, { startDate, endDate, times })
 
@@ -598,6 +599,7 @@ export default defineComponent({
         width,
         maxWidth: width,
         ...styler({ scope }),
+        ...getDisabledStyle(day),
       }
       if (isSticky.value === true) {
         style.minWidth = width
@@ -761,6 +763,7 @@ export default defineComponent({
       const style: CSSProperties = {
         width,
         maxWidth: width,
+        ...getDisabledStyle(day),
       }
       if (isSticky.value === true) {
         style.minWidth = width
@@ -1074,6 +1077,7 @@ export default defineComponent({
       const style: CSSProperties = {
         width,
         maxWidth: width,
+        ...getDisabledStyle(day),
       }
       if (isSticky.value === true) {
         style.minWidth = width

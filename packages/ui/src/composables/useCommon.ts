@@ -1,4 +1,4 @@
-import { computed, Ref, PropType } from 'vue'
+import { computed, type Ref, type PropType } from 'vue'
 import {
   validateTimestamp,
   parseTimestamp,
@@ -8,7 +8,10 @@ import {
   getEndOfWeek,
   getDayIdentifier,
   today,
-  Timestamp,
+  type DisabledDays,
+  type Timestamp,
+  type TimestampClass,
+  type TimestampStyle,
 } from '../utils/Timestamp'
 
 // Define props interface
@@ -33,7 +36,7 @@ export interface CommonProps {
   animated: boolean
   transitionPrev: string
   transitionNext: string
-  disabledDays?: string[]
+  disabledDays?: DisabledDays
   disabledBefore?: string
   disabledAfter?: string
   disabledWeekdays?: number[]
@@ -110,7 +113,7 @@ export const useCommonProps = {
     type: String,
     default: 'slide-left',
   },
-  disabledDays: Array as () => string[],
+  disabledDays: Array as PropType<DisabledDays>,
   disabledBefore: String,
   disabledAfter: String,
   disabledWeekdays: {
@@ -160,7 +163,8 @@ export interface CommonReturn {
   ) => Record<string, boolean>
   startOfWeek: (_timestamp: Timestamp) => Timestamp
   endOfWeek: (_timestamp: Timestamp) => Timestamp
-  dayStyleDefault: ({ scope }: { scope: any }) => {}
+  dayStyleDefault: ({ scope }: { scope: any }) => TimestampStyle
+  getDisabledStyle: (_timestamp: Timestamp) => TimestampStyle
 }
 
 export default function useCommon(
@@ -247,6 +251,7 @@ export default function useCommon(
       'q-range-last': lastDay,
       'q-range-hover': hover && (firstDay || lastDay || betweenDays),
       'q-disabled-day disabled': timestamp.disabled === true,
+      ...normalizeClass(timestamp.disabledClass),
     }
   }
 
@@ -273,10 +278,42 @@ export default function useCommon(
   /**
    * Provides the default style for a day in the calendar.
    *
-   * This function returns `undefined`, which means that no additional styles will be applied to the day.
+   * This function applies disabled-day metadata styles when present.
    */
-  function dayStyleDefault(): {} {
-    return {}
+  function dayStyleDefault({ scope }: { scope: { timestamp?: Timestamp } }): TimestampStyle {
+    return scope.timestamp !== undefined ? getDisabledStyle(scope.timestamp) : {}
+  }
+
+  function normalizeClass(className?: TimestampClass): Record<string, boolean> {
+    if (typeof className === 'string') {
+      return { [className]: true }
+    }
+
+    if (Array.isArray(className) === true) {
+      return className.reduce<Record<string, boolean>>((classes, name) => {
+        classes[name] = true
+
+        return classes
+      }, {})
+    }
+
+    return className ?? {}
+  }
+
+  function getDisabledStyle(timestamp: Timestamp): TimestampStyle {
+    const style: TimestampStyle = { ...timestamp.disabledStyle }
+
+    if (timestamp.disabledColor !== undefined) {
+      style['--calendar-disabled-date-background'] = timestamp.disabledColor
+      style['--calendar-disabled-date-background-dark'] = timestamp.disabledColor
+    }
+
+    if (timestamp.disabledTextColor !== undefined) {
+      style['--calendar-disabled-date-color'] = timestamp.disabledTextColor
+      style['--calendar-disabled-date-color-dark'] = timestamp.disabledTextColor
+    }
+
+    return style
   }
 
   return {
@@ -291,5 +328,6 @@ export default function useCommon(
     startOfWeek,
     endOfWeek,
     dayStyleDefault,
+    getDisabledStyle,
   }
 }

@@ -140,10 +140,14 @@
     },
     "disabled-days": {
       "type": "Array",
-      "tsType": "StringArray",
+      "tsType": "DisabledDays",
       "category": "model",
-      "desc": "An array of string dates in the form `YYYY-MM-DD` that will be disabled. If an array is contained within the array with a start and end date, it will be treated as a range",
-      "examples": ["['2019-04-01', '2019-04-02', '2019-04-03', '2019-04-04']"]
+      "desc": "An array of dates in the form `YYYY-MM-DD` that will be disabled. Entries can be date strings, date ranges, or objects with `date` or `from`/`to` plus optional `color`, `textColor`, `class`, `style`, and `label` metadata",
+      "examples": [
+        "['2019-04-01', '2019-04-02', '2019-04-03', '2019-04-04']",
+        "[['2019-04-01', '2019-04-04']]",
+        "[{ from: '2019-04-01', to: '2019-04-04', color: '#ef5350', textColor: '#ffffff' }]"
+      ]
     },
     "disabled-before": {
       "type": "String",

@@ -139,6 +139,7 @@ export default defineComponent({
       ariaDateFormatter,
       // methods
       dayStyleDefault,
+      getDisabledStyle,
       getRelativeClasses,
     } = useCommon(props, { startDate, endDate, times })
 
@@ -730,7 +731,11 @@ export default defineComponent({
           : false,
       }
 
-      const style: CSSProperties = Object.assign({ ...computedStyles.value }, styler({ scope }))
+      const style: CSSProperties = Object.assign(
+        { ...computedStyles.value },
+        styler({ scope }),
+        getDisabledStyle(day),
+      )
       const dayClass = typeof props.dayClass === 'function' ? props.dayClass({ scope }) : {}
 
       const data: Record<string, any> = {

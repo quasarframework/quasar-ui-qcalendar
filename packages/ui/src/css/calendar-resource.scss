@@ -172,6 +172,11 @@
       &:last-child {
         border-right: none;
       }
+
+      &.q-disabled-day {
+        color: var(--calendar-disabled-date-color);
+        background: var(--calendar-disabled-date-background) !important;
+      }
     }
   }
 
@@ -208,6 +213,11 @@
       &:last-child {
         border-right: none;
       }
+
+      &.q-disabled-day {
+        color: var(--calendar-disabled-date-color);
+        background: var(--calendar-disabled-date-background) !important;
+      }
     }
   }
 
@@ -234,6 +244,11 @@
 
       &--interval {
         border-right: var(--calendar-border-dark);
+
+        &.q-disabled-day {
+          color: var(--calendar-disabled-date-color-dark);
+          background: var(--calendar-disabled-date-background-dark) !important;
+        }
       }
     }
 
@@ -254,6 +269,11 @@
 
       &--interval {
         border-right: var(--calendar-border-dark);
+
+        &.q-disabled-day {
+          color: var(--calendar-disabled-date-color-dark);
+          background: var(--calendar-disabled-date-background-dark) !important;
+        }
       }
     }
 

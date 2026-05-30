@@ -403,11 +403,12 @@
         },
         "disabledDays": {
           "type": "Array",
-          "tsType": "StringArray",
-          "desc": "An array of disabled days. If an array is contained within the array with a start and end date, it will be treated as a range",
+          "tsType": "DisabledDays",
+          "desc": "An array of disabled days. Entries can be date strings, date ranges, or objects with `date` or `from`/`to` plus optional color metadata",
           "examples": [
             "['2020-01-01', '2020-07-04']",
-            "['2020-01-01', ['2020-07-04', '2020-07-11']]"
+            "['2020-01-01', ['2020-07-04', '2020-07-11']]",
+            "[{ from: '2020-07-04', to: '2020-07-11', color: '#ef5350', textColor: '#ffffff' }]"
           ]
         }
       },
@@ -881,9 +882,9 @@
         },
         "disabledDays": {
           "type": "Array",
-          "tsType": "StringArray",
+          "tsType": "DisabledDays",
           "default": "[]",
-          "desc": "An array of string dates in the form `YYYY-MM-DD` that representing disabled days",
+          "desc": "An array of disabled days. Entries can be date strings, date ranges, or objects with `date` or `from`/`to` plus optional color metadata",
           "__exemption": ["examples"]
         },
         "max": {
