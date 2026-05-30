@@ -80,6 +80,12 @@ Instead use `box-shadow` to create an inset like this `box-shadow: inset 0 0 0 1
 
 <MarkdownExample title="First Day Monday" file="MonthFirstDayMonday"/>
 
+## Sidebar Mini Calendar
+
+Use a mini-mode `QCalendarMonth` beside a larger calendar when you want a navigation pattern similar to Google Calendar or Microsoft Outlook. Both calendars can share the same `v-model`, while the sidebar calendar acts as a compact date picker.
+
+<MarkdownExample title="Sidebar Mini Calendar" file="MonthSidebarMiniCalendar"/>
+
 ## Five Day Workweek
 
 <MarkdownExample title="Five Day Workweek" file="MonthFiveDayWorkweek"/>
