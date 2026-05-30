@@ -42,12 +42,12 @@ selectedTimestamp.value?.weekday
 
 Use the parser that matches what you need:
 
-| Helper | Use it when |
-| ------ | ----------- |
-| `today()` | You need today's date as a `YYYY-MM-DD` string for `v-model` or defaults. |
-| `parseTimestamp(value)` | You need a complete `Timestamp` from a date or date-time string. |
-| `parsed(value)` | You need a faster, minimal `Timestamp` and do not need relative fields. |
-| `parseDate(date)` | You already have a JavaScript `Date` and want a `Timestamp`. |
+| Helper                          | Use it when                                                                  |
+| ------------------------------- | ---------------------------------------------------------------------------- |
+| `today()`                       | You need today's date as a `YYYY-MM-DD` string for `v-model` or defaults.    |
+| `parseTimestamp(value)`         | You need a complete `Timestamp` from a date or date-time string.             |
+| `parsed(value)`                 | You need a faster, minimal `Timestamp` and do not need relative fields.      |
+| `parseDate(date)`               | You already have a JavaScript `Date` and want a `Timestamp`.                 |
 | `addToDate(timestamp, options)` | You want a new `Timestamp` offset by days, months, years, hours, or minutes. |
 
 ## Advanced usage
@@ -124,7 +124,7 @@ Many QCalendar slots and events already provide `Timestamp` objects in their `sc
 ```ts
 import type { Timestamp } from '@quasar/quasar-ui-qcalendar/Timestamp'
 
-function onClickDate ({ scope }: { scope: { timestamp: Timestamp } }) {
+function onClickDate({ scope }: { scope: { timestamp: Timestamp } }) {
   console.log(scope.timestamp.date)
   console.log(scope.timestamp.weekday)
 }

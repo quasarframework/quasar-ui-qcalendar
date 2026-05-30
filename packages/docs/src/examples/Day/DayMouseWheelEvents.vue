@@ -4,9 +4,7 @@
 
     <div class="q-mb-md text-caption">
       Wheel over an event:
-      <kbd>Ctrl</kbd> resizes,
-      <kbd>Shift</kbd> resizes in 5 minute steps,
-      <kbd>Alt</kbd> moves, and
+      <kbd>Ctrl</kbd> resizes, <kbd>Shift</kbd> resizes in 5 minute steps, <kbd>Alt</kbd> moves, and
       <kbd>Ctrl</kbd> + <kbd>Alt</kbd> zooms the interval height.
     </div>
 
@@ -42,9 +40,7 @@
                 <div class="wheel-event__title q-calendar__ellipsis">
                   {{ event.title }}
                 </div>
-                <div class="wheel-event__meta">
-                  {{ event.time }} - {{ event.duration }} mins
-                </div>
+                <div class="wheel-event__meta">{{ event.time }} - {{ event.duration }} mins</div>
                 <q-tooltip>{{ event.tooltip || eventSummary(event) }}</q-tooltip>
               </div>
             </template>

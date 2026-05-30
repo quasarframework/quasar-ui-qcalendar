@@ -2,14 +2,7 @@
   <div class="subcontent">
     <div class="calendar-shell">
       <aside class="calendar-sidebar">
-        <q-btn
-          unelevated
-          color="primary"
-          icon="add"
-          label="Create"
-          class="create-button"
-          no-caps
-        />
+        <q-btn unelevated color="primary" icon="add" label="Create" class="create-button" no-caps />
 
         <div class="mini-calendar-header">
           <q-btn dense flat round icon="chevron_left" @click="onMiniPrev" />
