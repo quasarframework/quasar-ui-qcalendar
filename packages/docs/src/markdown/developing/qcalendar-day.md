@@ -208,6 +208,14 @@ You can click the `head-day-event` badges which will call the calendar's `scroll
 
 <MarkdownExample title="Slot - Day Body" file="DaySlotDayBody"/>
 
+## Advanced
+
+### Mouse Wheel Resize and Move
+
+This example uses the `day-body` slot to render interval events, then adds wheel handlers to resize, move, and zoom the day view.
+
+<MarkdownExample title="Mouse Wheel Resize and Move" file="DayMouseWheelEvents"/>
+
 ## Slot - Day Container (Show Current Time)
 
 The example below uses the `day-container` slot to show a current time indicator absolutely positioned.
