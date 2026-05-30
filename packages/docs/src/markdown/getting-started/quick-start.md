@@ -46,6 +46,38 @@ const selectedDate: Timestamp['date'] = '2026-05-30'
 
 If you need your own Timestamps, to be used with other exported functions, then the exported function `parseTimestamp` will fill in most of these fields, give a date in format of `YYYY-MM-DD HH:mm` with optional time. However, that can be expensive time-wise, so if you use this and need the minimal, then use the exported `parsed` function. If you have a JavaScript `Date` you can use the exported `parseDate` function to generate your Timestamp object for you.
 
+Import Timestamp helpers from QCalendar's public `Timestamp` entrypoint:
+
+```ts
+import {
+  parseDate,
+  parsed,
+  parseTimestamp,
+  today,
+  type Timestamp,
+} from '@quasar/quasar-ui-qcalendar/Timestamp'
+```
+
+Do not import from `@quasar/quasar-ui-qcalendar/src/utils/Timestamp.js` in application code. The `src/` path is an implementation path, while `@quasar/quasar-ui-qcalendar/Timestamp` is the package export intended for consumers.
+
+Here is a small example that keeps a calendar model as a date string, then derives a `Timestamp` object when you need calendar metadata:
+
+```ts [twoslash]
+import { computed, ref } from 'vue'
+import { parseTimestamp, today, type Timestamp } from '@quasar/quasar-ui-qcalendar/Timestamp'
+
+const selectedDate = ref(today())
+
+const selectedTimestamp = computed<Timestamp | null>(() => {
+  return parseTimestamp(selectedDate.value)
+})
+
+selectedTimestamp.value?.weekday
+//                       ^?
+```
+
+Use `parseTimestamp` when you want a complete `Timestamp` with formatted and relative fields. Use `parsed` when you need the faster, minimal parser. Use `parseDate` when your starting point is a JavaScript `Date`.
+
 ## Date format
 
 | Property    | Type   | Example    |
