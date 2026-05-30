@@ -1,4 +1,5 @@
 @use 'sass:math';
+@use 'sass:color';
 @use './fonts.scss';
 
 // Keep this import so Prism shares the selected qPress theme variables.
@@ -83,7 +84,7 @@ ul {
   line-height: $font-size;
   border-radius: $generic-border-radius;
   font-family: inherit;
-  color: scale-color($brand-primary, $lightness: -35%);
+  color: color.scale($brand-primary, $lightness: -35%);
   vertical-align: baseline;
   border: 1px solid currentColor;
 }
@@ -108,10 +109,10 @@ ul {
     // .markdown-note__title,
     .markdown-link,
     .markdown-token {
-      color: scale-color($brand-primary, $lightness: -35%);
+      color: color.scale($brand-primary, $lightness: -35%);
     }
     .markdown-token {
-      border-color: scale-color($brand-primary, $lightness: -35%);
+      border-color: color.scale($brand-primary, $lightness: -35%);
     }
     & strong {
       font-weight: 700;
@@ -120,16 +121,16 @@ ul {
   }
 
   &--tip {
-    color: scale-color($positive, $lightness: -40%) !important;
-    background-color: scale-color($positive, $lightness: 85%);
+    color: color.scale($positive, $lightness: -40%) !important;
+    background-color: color.scale($positive, $lightness: 85%);
     border-color: $positive;
     .markdown-note__title,
     .markdown-link,
     .markdown-token {
-      color: scale-color($positive, $lightness: -40%);
+      color: color.scale($positive, $lightness: -40%);
     }
     .markdown-token {
-      border-color: scale-color($positive, $lightness: -40%);
+      border-color: color.scale($positive, $lightness: -40%);
     }
     & strong {
       font-weight: 700;
@@ -138,16 +139,16 @@ ul {
   }
 
   &--warning {
-    color: scale-color($warning, $lightness: -40%);
-    background-color: scale-color($warning, $lightness: 85%);
-    border-color: scale-color($warning, $lightness: -30%);
+    color: color.scale($warning, $lightness: -40%);
+    background-color: color.scale($warning, $lightness: 85%);
+    border-color: color.scale($warning, $lightness: -30%);
     .markdown-note__title,
     .markdown-link,
     .markdown-token {
-      color: scale-color($warning, $lightness: -40%);
+      color: color.scale($warning, $lightness: -40%);
     }
     .markdown-token {
-      border-color: scale-color($warning, $lightness: -40%);
+      border-color: color.scale($warning, $lightness: -40%);
     }
     & strong {
       font-weight: 700;
@@ -156,8 +157,8 @@ ul {
   }
 
   &--danger {
-    color: scale-color($negative, $lightness: -40%);
-    background-color: scale-color($negative, $lightness: 90%);
+    color: color.scale($negative, $lightness: -40%);
+    background-color: color.scale($negative, $lightness: 90%);
     border-color: $negative;
     .markdown-note__title,
     .markdown-link,
@@ -512,7 +513,7 @@ body.q-scroll--lock .q-page > .q-scroll--anchor {
 .markdown-heading .q-badge,
 .header-badge {
   color: $brand-primary;
-  background: scale-color($light-bg, $lightness: 15%);
+  background: color.scale($light-bg, $lightness: 15%);
   vertical-align: super;
   letter-spacing: $letter-spacing-brand;
   padding: 4px 8px;
@@ -592,9 +593,9 @@ body.body--dark {
 
   .markdown-note {
     &:not(.markdown-note--tip, .markdown-note--warning, .markdown-note--danger) {
-      color: scale-color($dark-pill, $lightness: 80%);
+      color: color.scale($dark-pill, $lightness: 80%);
       background-color: $dark-pill;
-      border-color: scale-color($dark-pill, $lightness: 50%);
+      border-color: color.scale($dark-pill, $lightness: 50%);
       .markdown-token {
         border-color: #ddd;
         color: #ddd;
@@ -606,7 +607,7 @@ body.body--dark {
 
     &--tip {
       border-color: $positive;
-      background-color: scale-color($positive, $lightness: -85%);
+      background-color: color.scale($positive, $lightness: -85%);
       .markdown-note__title,
       .markdown-link,
       .markdown-token {
@@ -619,7 +620,7 @@ body.body--dark {
 
     &--warning {
       border-color: $warning;
-      background-color: scale-color($warning, $lightness: -85%);
+      background-color: color.scale($warning, $lightness: -85%);
       .markdown-note__title,
       .markdown-link,
       .markdown-token {
@@ -632,7 +633,7 @@ body.body--dark {
 
     &--danger {
       border-color: $negative;
-      background-color: scale-color($negative, $lightness: -80%);
+      background-color: color.scale($negative, $lightness: -80%);
     }
   }
 
@@ -657,7 +658,7 @@ body.body--dark {
   padding: 4px 8px 4px 28px;
   position: relative;
   border-radius: 3px 5px 5px 0;
-  background: scale-color($brand-light, $lightness: -15%);
+  background: color.scale($brand-light, $lightness: -15%);
   color: $brand-secondary;
   font-size: ($font-size + 2px);
   letter-spacing: $letter-spacing-brand;
@@ -671,7 +672,7 @@ body.body--dark {
     height: 0;
     border: 0 solid transparent;
     border-width: 9px 0 0 11px;
-    border-top-color: scale-color($brand-light, $lightness: -25%);
+    border-top-color: color.scale($brand-light, $lightness: -25%);
   }
 }
 
@@ -679,6 +680,6 @@ body.body--dark .markdown-card-title {
   background: $brand-secondary;
   color: $dark-text;
   &:after {
-    border-top-color: scale-color($brand-secondary, $lightness: -30%);
+    border-top-color: color.scale($brand-secondary, $lightness: -30%);
   }
 }

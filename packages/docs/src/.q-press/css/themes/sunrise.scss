@@ -34,7 +34,7 @@ $light-pill: $brand-light;
 $light-text: $brand-light-text;
 $light-bg: $brand-light-bg;
 
-$dark-pill: scale-color($brand-dark, $lightness: 20%);
+$dark-pill: color.scale($brand-dark, $lightness: 20%);
 $dark-text: $brand-dark-text;
 $dark-bg: $brand-dark-bg;
 
