@@ -412,7 +412,6 @@ function onClickHeadWorkweek(data: Timestamp) {
 
 .main-calendar-wrapper {
   display: flex;
-  min-height: 580px;
   overflow: hidden;
   border-radius: 24px;
 }
