@@ -4,6 +4,10 @@
   overflow: auto;
   border-radius: inherit;
 
+  &.twoslash {
+    overflow: visible;
+  }
+
   code {
     display: block;
     padding: 16px;

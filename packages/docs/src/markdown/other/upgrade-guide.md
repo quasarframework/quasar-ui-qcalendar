@@ -73,8 +73,16 @@ export default defineBoot(({ app }) => {
 
 Compiled component imports remain the recommended path when you only need one or two calendar types:
 
-```ts
+```ts [twoslash]
 import { QCalendarDay } from '@quasar/quasar-ui-qcalendar/QCalendarDay'
+
+QCalendarDay
+// ^?
+```
+
+Import the component stylesheet alongside the component:
+
+```ts
 import '@quasar/quasar-ui-qcalendar/QCalendarDay.css'
 ```
 

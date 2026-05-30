@@ -20,7 +20,7 @@ This section will highlight a number common properties and generalities amongst 
 
 The two most important things to know what's happening behind the scenes are Timestamp's format, which is `YYYY-MM-DD`, and the actual `Timestamp` object. This object is used in many slots and events.
 
-```ts
+```ts [twoslash]
 export interface Timestamp {
   date: string // YYYY-MM-DD
   time: string // HH:MM (optional)
@@ -39,6 +39,9 @@ export interface Timestamp {
   future: boolean // if timestamp is in the future (based on `now` property)
   disabled: boolean // if timestamp is disabled
 }
+
+const selectedDate: Timestamp['date'] = '2026-05-30'
+//    ^?
 ```
 
 If you need your own Timestamps, to be used with other exported functions, then the exported function `parseTimestamp` will fill in most of these fields, give a date in format of `YYYY-MM-DD HH:mm` with optional time. However, that can be expensive time-wise, so if you use this and need the minimal, then use the exported `parsed` function. If you have a JavaScript `Date` you can use the exported `parseDate` function to generate your Timestamp object for you.
