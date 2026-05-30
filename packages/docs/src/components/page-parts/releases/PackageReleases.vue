@@ -142,6 +142,7 @@ function parse(body: string): string {
     .replace(/^ {2}[-*] ([\S .]+)$/gm, '<li class="q-pl-md">$1</li>')
     .replace(/^[-*] ([\S .]+)$/gm, '<li>$1</li>')
     .replace(/<\/li>[\s\n\r]*<li/g, '</li><li')
+    .replace(/(<li(?: class="[^"]*")?>.*?<\/li>)+/g, '<ul class="release__list">$&</ul>')
     .replace(/\n/g, '<br>')
 
   return content.includes('| -') ? parseMdTable(content) : content
@@ -164,6 +165,16 @@ const currentReleaseBody = computed(() => {
 
   .q-markup-table {
     white-space: normal;
+  }
+}
+
+.release__list {
+  margin: 8px 0 16px;
+  padding-left: 28px;
+
+  li {
+    margin: 4px 0;
+    padding-left: 4px;
   }
 }
 
