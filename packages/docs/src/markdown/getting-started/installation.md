@@ -36,7 +36,7 @@ QCalendar v5's app extension targets Quasar CLI Vite projects using `@quasar/app
 To add as an App Extension to your Quasar application, run the following (in your Quasar app folder):
 
 ```
-$ quasar ext add @quasar/qcalendar
+$ quasar ext add @quasar/qcalendar@beta
 ```
 
 While QCalendar v5 is in beta, use the beta dist tag:

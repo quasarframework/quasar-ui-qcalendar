@@ -15,9 +15,9 @@ The **QCalendar App Extension** allows you to seamlessly add the [QCalendar](../
 
 QCalendar is a [Quasar](https://quasar.dev) component. It is a powerful calendar that plugs right into your Quasar application and allows for viewing of **day** (1-7 days for a week), **monthly**, **scheduler**, **agenda**, **resource** and **task** views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.
 
-# QCalendar v5.0.0 beta
+# QCalendar v5.0.0-beta.7
 
-Welcome to the QCalendar v5.0.0 beta release.
+Welcome to the QCalendar v5.0.0-beta.7 release.
 
 ### QCalendar App Extension is now Vite-only
 
@@ -74,7 +74,7 @@ Including support for locales, optional theming, 1st day Monday, 5-day work week
 # Install
 
 ```bash
-quasar ext add @quasar/qcalendar
+quasar ext add @quasar/qcalendar@beta
 ```
 
 Quasar CLI will retrieve it from NPM and install the extension.

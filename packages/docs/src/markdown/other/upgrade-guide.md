@@ -4,15 +4,15 @@ desc: Upgrade from v4 to v5
 keys: Help, upgrade, migration
 ---
 
-Use this guide to migrate from QCalendar v4.x to QCalendar v5.0.0 beta.
+Use this guide to migrate from QCalendar v4.x to QCalendar v5.0.0-beta.7.
 
 > QCalendar v5 remains a Vue 3 calendar package with Quasar 2 integration. The QCalendar app extension is Vite-only and targets Quasar CLI with `@quasar/app-vite` v3, but direct UI package imports can still be used in Vue/Vite projects without installing the app extension.
 
 > The information below is by no means an exhaustive list of changes and new functionality. If you see something that has been missed, please PR or let us know.
 
-## QCalendar v5.0.0 beta
+## QCalendar v5.0.0-beta.7
 
-Welcome to the QCalendar v5.0.0 beta release.
+Welcome to the QCalendar v5.0.0-beta.7 release.
 
 This release prepares QCalendar for the next Quasar CLI Vite generation. The calendar component API is expected to remain compatible with QCalendar v4, but the supported app-extension runtime and project tooling have changed.
 
@@ -53,8 +53,8 @@ When QCalendar v5 is released as stable, remove the `@beta` tag from those comma
 - The app extension now requires Vite. It will stop with an error if it is installed in a non-Vite Quasar app.
 - The extension registers the Vite boot file only. The previous webpack boot file has been removed.
 - The extension is compatible with `@quasar/app-vite` `>=3.0.0-beta.27`.
-- App extension entry scripts are now TypeScript-first. The package entry should point to `src/index.ts`, with wrappers imported directly from `@quasar/app-vite`, like `defineIndexScript()`.
-- The extension runtime boot file is now `src/boot/vite-register.ts`.
+- App extension source scripts are authored in TypeScript and compiled before publishing. The package entry points to `dist/index.js` so installed beta users do not rely on Node loading TypeScript from `node_modules`.
+- The extension runtime boot file is published as `dist/boot/vite-register.js`.
 - If you generate your own boot file inside the Quasar app, it should import `defineBoot` from `#q-app`, matching the Quasar CLI Vite 3 alias.
 
 If you maintain your own QCalendar boot file, update it to use `#q-app`:
