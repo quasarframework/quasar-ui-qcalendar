@@ -120,7 +120,7 @@ Additionally, all compiled CSS has a minified version, so if you want `QCalendar
 ### Or target as a component import
 
 ::: tip
-There are several variants for each calendar component, including common, es (modern), and UMD as well as minified versions of each of those. The same goes for the css, including min and rtl.
+Each calendar component ships modern ESM entrypoints for bundlers and UMD bundles for browser-global usage. Compiled CSS is available in regular, minified, RTL, and RTL-minified variants.
 :::
 
 ```tabs
