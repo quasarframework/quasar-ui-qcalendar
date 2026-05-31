@@ -6,6 +6,30 @@ examples: Faq
 
 Here you will find useful bespoke information on how to use the calendars. These mainly come as a result from question in the issues.
 
+:::details Q. Do I need to import QCalendar CSS myself?
+
+The App Extension adds the stylesheet for you.
+
+If you install the UI package directly, import the matching stylesheet in your boot file or app entry:
+
+```ts
+import "@quasar/quasar-ui-qcalendar/QCalendarDay.css";
+```
+
+Quasar CLI projects can also centralize the stylesheet in `quasar.config.ts`:
+
+```ts
+// Note: using ~ tells Quasar the file resides in node_modules
+css: [
+  "app.scss",
+  "~@quasar/quasar-ui-qcalendar/QCalendarDay.css",
+],
+```
+
+Use `@quasar/quasar-ui-qcalendar/index.css` when registering the full plugin, or replace `QCalendarDay.css` with the component stylesheet you import.
+
+:::
+
 :::details Q. Month (Sticky Header)
 
 In this example, check out the custom `.my-sticky` css class. This works in conjunction with a parent whose height is horter than the height needed to display the calendar and setting it's style to `overflow: auto`.
