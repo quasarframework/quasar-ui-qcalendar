@@ -13,7 +13,7 @@ The App Extension adds the stylesheet for you.
 If you install the UI package directly, import the matching stylesheet in your boot file or app entry:
 
 ```ts
-import "@quasar/quasar-ui-qcalendar/QCalendarDay.css";
+import '@quasar/quasar-ui-qcalendar/QCalendarDay.css'
 ```
 
 Quasar CLI projects can also centralize the stylesheet in `quasar.config.ts`:

@@ -29,15 +29,20 @@
     "url": "https://github.com/sponsors/hawkeye64"
   },
   "type": "module",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "publishConfig": {
     "access": "public"
+  },
+  "scripts": {
+    "build": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\" && tsc -p tsconfig.build.json",
+    "prepack": "pnpm build"
   },
   "dependencies": {
     "@quasar/quasar-ui-qcalendar": "workspace:^"
   },
   "devDependencies": {
-    "@quasar/app-vite": "3.0.0-beta.33"
+    "@quasar/app-vite": "3.0.0-beta.33",
+    "typescript": "~6.0.3"
   },
   "peerDependencies": {
     "@quasar/app-vite": ">=3.0.0-beta.33"
