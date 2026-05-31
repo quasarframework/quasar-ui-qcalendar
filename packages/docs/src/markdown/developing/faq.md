@@ -30,6 +30,20 @@ Use `@quasar/quasar-ui-qcalendar/index.css` when registering the full plugin, or
 
 :::
 
+:::details Q. Can I inspect the component API from the CLI?
+
+Yes. After the App Extension is installed, run `quasar describe` for the component you want to inspect:
+
+```bash
+quasar describe QCalendar
+quasar describe QCalendarMonth
+quasar describe QCalendarDay
+```
+
+The same generated API is shown on the component API pages, such as [QCalendar API](/developing/qcalendar), [QCalendarMonth API](/developing/qcalendar-month), and [QCalendarDay API](/developing/qcalendar-day).
+
+:::
+
 :::details Q. Month (Sticky Header)
 
 In this example, check out the custom `.my-sticky` css class. This works in conjunction with a parent whose height is horter than the height needed to display the calendar and setting it's style to `overflow: auto`.
