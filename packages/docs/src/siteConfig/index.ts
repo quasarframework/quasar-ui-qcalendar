@@ -3,6 +3,7 @@ import { version, productName } from '../../../ui/package.json'
 import { slugify } from '../.q-press/components/markdown-utils'
 
 const repoBranch = 'v5-beta'
+const codepenPackageVersion = version.includes('-beta.') ? 'beta' : version
 
 export interface SocialLink {
   name: string
@@ -611,10 +612,10 @@ const config = {
     jsPreProcessor: 'typescript',
     titleSuffix: `QCalendar v${version}`,
     cssExternal: [
-      `https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@${version}/dist/index.min.css`,
+      `https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@${codepenPackageVersion}/dist/index.min.css`,
     ],
     jsExternal: [
-      `https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@${version}/dist/index.umd.min.js`,
+      `https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@${codepenPackageVersion}/dist/index.umd.min.js`,
     ],
     globalPackages: [
       {
