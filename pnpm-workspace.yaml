@@ -102,3 +102,4 @@ minimumReleaseAgeExclude:
   - vue-router@5.1.0
   - '@md-plugins/md-plugin-mermaid@0.1.0-beta.21'
   - tinyglobby@0.2.17
+  - tsx@4.22.4
