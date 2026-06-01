@@ -30,7 +30,7 @@ Use `@quasar/quasar-ui-qcalendar/index.css` when registering the full plugin, or
 
 :::
 
-:::details Q. Can I inspect the component API from the CLI?
+:::details Q. Can I inspect the component API from the Quasar CLI?
 
 Yes. After the App Extension is installed, run `quasar describe` for the component you want to inspect:
 
