@@ -693,3 +693,76 @@ body.body--dark .markdown-card-title {
     border-top-color: color.scale($brand-secondary, $lightness: -30%);
   }
 }
+
+.qpress-error-page {
+  overflow: hidden;
+  color: $brand-light-text;
+  background:
+    radial-gradient(circle at top right, rgba($brand-primary, 0.24), transparent 34rem),
+    linear-gradient(135deg, color.scale($light-bg, $lightness: 8%), $light-bg);
+
+  &__content {
+    width: min(680px, 100%);
+  }
+
+  &__eyebrow {
+    margin: 0 0 10px;
+    color: $brand-secondary;
+    font-family: $font-family-brand;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  &__code {
+    margin: 0;
+    color: $brand-primary;
+    font-family: $font-family-brand;
+    font-size: clamp(6rem, 24vw, 18rem);
+    font-weight: 800;
+    line-height: 0.85;
+    text-shadow: 0 20px 52px rgba($brand-primary, 0.22);
+  }
+
+  &__message {
+    max-width: 34rem;
+    margin: 24px auto 0;
+    color: rgba($brand-light-text, 0.78);
+    font-size: clamp(1.25rem, 3vw, 2rem);
+    line-height: 1.35;
+  }
+
+  &__button {
+    color: $brand-light-bg !important;
+    background: $brand-primary !important;
+    border: 1px solid rgba($brand-primary, 0.45);
+    box-shadow: $shadow--small;
+  }
+}
+
+body.body--dark .qpress-error-page {
+  color: $brand-dark-text;
+  background:
+    radial-gradient(circle at top right, rgba($brand-accent, 0.18), transparent 34rem),
+    linear-gradient(135deg, color.scale($brand-dark-bg, $lightness: 8%), $brand-dark-bg);
+
+  .qpress-error-page__eyebrow {
+    color: $brand-accent;
+  }
+
+  .qpress-error-page__code {
+    color: $brand-accent;
+    text-shadow: 0 20px 52px rgba($brand-accent, 0.26);
+  }
+
+  .qpress-error-page__message {
+    color: rgba($brand-dark-text, 0.78);
+  }
+
+  .qpress-error-page__button {
+    color: $brand-dark-bg !important;
+    background: $brand-accent !important;
+    border-color: rgba($brand-accent, 0.5);
+  }
+}
