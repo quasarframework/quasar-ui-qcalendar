@@ -20,7 +20,7 @@ QCalendar allows for viewing of **day** (1-6 days), **week**, **monthly**, **sch
 
 ## Important Release Notes
 
-v5.0.0-beta.7
+v5.0.0-beta.8
 
 - QCalendar v5 prepares the project for Quasar CLI Vite 3.
 - The app extension is now Vite-only and requires `@quasar/app-vite` v3 beta.

@@ -100,7 +100,7 @@ minimumReleaseAgeExclude:
   - '@quasar/render-ssr-error@2.2.3'
   - '@quasar/vite-plugin@1.12.0'
   - vue-router@5.1.0
-  - '@md-plugins/md-plugin-mermaid@0.1.0-beta.21'
+  - '@md-plugins/md-plugin-mermaid@0.1.0-beta.22'
   - tinyglobby@0.2.17
   - tsx@4.22.4
   - '@oxfmt/binding-android-arm-eabi@0.53.0'
