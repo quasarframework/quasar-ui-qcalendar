@@ -7,6 +7,9 @@ import {
 } from 'vue-router'
 import routes from './routes'
 
+type RouterFactory = Parameters<typeof defineRouter>[0]
+type AppRouter = Awaited<ReturnType<RouterFactory>>
+
 /*
  * If not building with SSR mode, you can
  * directly export the Router instantiation;
@@ -16,14 +19,14 @@ import routes from './routes'
  * with the Router instance.
  */
 
-export default defineRouter(function (/* { store, ssrContext } */) {
+const createAppRouter: RouterFactory = function (/* { store, ssrContext } */) {
   const createHistory = import.meta.env.QUASAR_SERVER
     ? createMemoryHistory
     : import.meta.env.QUASAR_VUE_ROUTER_MODE === 'history'
       ? createWebHistory
       : createWebHashHistory
 
-  const Router = createRouter({
+  const router = createRouter({
     scrollBehavior: () => ({ left: 0, top: 0 }),
     routes,
 
@@ -33,5 +36,9 @@ export default defineRouter(function (/* { store, ssrContext } */) {
     history: createHistory(import.meta.env.QUASAR_VUE_ROUTER_BASE),
   })
 
-  return Router
-})
+  // Quasar's RouteCallback can resolve Router from a different peer instance.
+  // Normalize to the wrapper's expected return type to avoid duplicate-type drift.
+  return router as AppRouter
+}
+
+export default defineRouter(createAppRouter)

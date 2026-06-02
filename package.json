@@ -27,19 +27,19 @@
   },
   "devDependencies": {
     "@types/node": "^25.9.1",
-    "@vitest/coverage-istanbul": "^4.1.7",
+    "@vitest/coverage-istanbul": "^4.1.8",
     "@vue/server-renderer": "^3.5.35",
     "npm-check-updates": "^22.2.1",
-    "oxfmt": "^0.52.0",
-    "oxlint": "^1.67.0",
+    "oxfmt": "^0.53.0",
+    "oxlint": "^1.68.0",
     "typescript": "~6.0.3",
     "unbuild": "^3.6.1",
-    "vitest": "^4.1.7"
+    "vitest": "^4.1.8"
   },
   "engines": {
     "node": ">=22.13",
     "pnpm": ">=11.5.0"
   },
-  "packageManager": "pnpm@11.5.0",
+  "packageManager": "pnpm@11.5.1",
   "access": "private"
 }
