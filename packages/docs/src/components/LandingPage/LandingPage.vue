@@ -1,565 +1,931 @@
 <template>
-  <div class="landing-page markdown-brand">
+  <section class="landing-page markdown-brand">
     <header class="hero">
-      <img src="/qcalendar-logo.png" alt="QCalendar Logo" class="hero-logo" />
-      <h1 class="hero-title">QCalendar</h1>
-      <h2 class="hero-subtitle"></h2>
-      <div class="row justify-center">
-        <p class="hero-subtitle2" style="max-width: 660px">
-          {{ siteConfig.description }}
-        </p>
-      </div>
+      <div class="hero__mesh hero__mesh--left" />
+      <div class="hero__mesh hero__mesh--right" />
 
-      <div class="hero-buttons">
-        <router-link
-          to="/getting-started/introduction"
-          class="hero-button q-btn q-btn-item non-selectable no-outline q-btn--standard q-btn--rectangle q-btn--actionable q-focusable q-hoverable q-btn--no-uppercase q-btn--rounded q-btn--dense"
-        >
-          <div
-            class="row justify-around items-center q-btn__content text-center col items-center q-anchor--skip"
-            style="width: 120px"
-          >
-            <div>Get Started</div>
-            <q-icon :name="biArrowRightCircle" />
+      <div class="hero__grid">
+        <div class="hero__copy">
+          <div class="hero__eyebrow">{{ heroEyebrow }}</div>
+          <img :src="logoSrc" :alt="logoAlt" class="hero-logo" />
+          <h1 class="hero-title">{{ productName }}</h1>
+
+          <p class="hero-subtitle">{{ siteConfig.description }}</p>
+          <p class="hero-lede">{{ heroLede }}</p>
+
+          <div class="hero-buttons">
+            <q-btn
+              to="/getting-started/introduction"
+              no-caps rounded unelevated class="hero-button hero-button--solid"
+            >
+              <div class="hero-button__content q-anchor--skip">
+                <span class="hero-button__slot hero-button__slot--empty" aria-hidden="true" />
+                <span class="hero-button__label">Get Started</span>
+                <span class="hero-button__slot">
+                  <q-icon :name="biArrowRightCircle" />
+                </span>
+              </div>
+            </q-btn>
+
+            <q-btn
+              to="/other/upgrade-guide"
+              no-caps rounded unelevated class="hero-button hero-button--ghost"
+            >
+              <div class="hero-button__content q-anchor--skip">
+                <span class="hero-button__slot hero-button__slot--empty" aria-hidden="true" />
+                <span class="hero-button__label">Upgrade Guide</span>
+                <span class="hero-button__slot">
+                  <q-icon name="upgrade" />
+                </span>
+              </div>
+            </q-btn>
+
+            <q-btn
+              :href="githubTreeUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              no-caps rounded unelevated class="hero-button hero-button--ghost"
+            >
+              <div class="hero-button__content q-anchor--skip">
+                <span class="hero-button__slot">
+                  <q-icon :name="fabGithub" />
+                </span>
+                <span class="hero-button__label">GitHub Repo</span>
+                <span class="hero-button__slot hero-button__slot--empty" aria-hidden="true" />
+              </div>
+            </q-btn>
           </div>
-        </router-link>
-        <router-link
-          to="/other/upgrade-guide"
-          class="hero-button q-btn q-btn-item non-selectable no-outline q-btn--standard q-btn--rectangle q-btn--actionable q-focusable q-hoverable q-btn--no-uppercase q-btn--rounded q-btn--dense"
-        >
-          <div
-            class="row justify-around items-center q-btn__content text-center col items-center q-anchor--skip"
-            style="width: 120px"
-          >
-            <div>Upgrade Guide</div>
+
+          <div class="hero-pills">
+            <span
+              v-for="pill in heroPills"
+              :key="pill"
+              class="hero-pill"
+            >
+              {{ pill }}
+            </span>
           </div>
-        </router-link>
-        <a
-          href="https://github.com/quasarframework/quasar-ui-qcalendar/tree/v5-beta"
-          target="_blank"
-          class="hero-button q-btn q-btn-item non-selectable no-outline q-btn--standard q-btn--rectangle q-btn--actionable q-focusable q-hoverable q-btn--no-uppercase q-btn--rounded q-btn--dense"
-        >
-          <div
-            class="row justify-around items-center q-btn__content text-center col items-center q-anchor--skip"
-            style="width: 120px"
-          >
-            <q-icon :name="fabGithub" class="q-mr-sm" />
-            GitHub Repo
+        </div>
+
+        <div class="hero__visual">
+          <div class="preview-panel">
+            <div class="preview-panel__header">
+              <span class="preview-panel__kicker">{{ previewKicker }}</span>
+              <span class="preview-panel__note">Docs and app-ready</span>
+            </div>
+
+            <div class="preview-panel__body">
+              <div class="preview-panel__copy">
+                <h2>{{ previewTitle }}</h2>
+                <p>{{ previewBody }}</p>
+              </div>
+
+              <div
+                class="preview-stack"
+                :class="{ 'preview-stack--single': previewImages.length === 1 }"
+              >
+                <div
+                  v-for="(image, index) in previewImages"
+                  :key="image.src"
+                  class="preview-card"
+                  :class="index === 0 ? 'preview-card--primary' : 'preview-card--secondary'"
+                >
+                  <q-img
+                    :src="image.src"
+                    :alt="image.alt"
+                    fit="contain"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
-        </a>
+        </div>
       </div>
     </header>
-    <div class="byline">
-      <p>
-        QCalendar is your all-in-one calendar solution for Vue and Quasar.<br />Discover the power
-        of QCalendar and enhance your calendar experience!
-      </p>
-      <p>
-        Install the UI package directly in Vue/Vite apps, or use the Quasar app extension when you
-        want Quasar CLI Vite registration.
-      </p>
-    </div>
-    <div class="row justify-center hero">
-      <div class="hero-title">QCalendar Features</div>
-    </div>
-    <div class="q-px-lg q-pb-xl">
-      <q-timeline :layout="layout" color="primary q-mb-xl">
-        <q-timeline-entry heading>
-          <div style="font-size: 32px; font-weight: 600">QCalendar</div>
-          <div style="font-size: 22px; font-weight: 600" class="text-grey">
-            A Vue Calendar that has everything you need
-          </div>
-        </q-timeline-entry>
 
-        <q-timeline-entry title="QCalendarDay" subtitle="Show as many days as needed" side="left">
-          <div>
-            <q-intersection transition="scale" once>
-              <q-img
-                src="\QCalendarDay.png"
-                spinner-color="white"
-                style="max-width: 350px"
-                class="shadow-12 rounded-borders"
-              />
-            </q-intersection>
-          </div>
-        </q-timeline-entry>
-
-        <q-timeline-entry
-          title="QCalendarMonth"
-          subtitle="Keep track of events, reminders and tasks"
-          side="right"
-        >
-          <div>
-            <q-intersection transition="scale" once>
-              <q-img
-                src="\QCalendarMonth.png"
-                spinner-color="white"
-                style="max-width: 350px"
-                class="shadow-12 rounded-borders"
-              />
-            </q-intersection>
-          </div>
-        </q-timeline-entry>
-
-        <q-timeline-entry
-          title="QCalendarMonth (mini-mode)"
-          subtitle="Create popups with multi-range selection"
-          side="left"
-        >
-          <div>
-            <q-intersection transition="scale" once>
-              <q-img
-                src="\QCalendarMonth--mini-mode.png"
-                spinner-color="white"
-                style="max-width: 200px"
-                class="shadow-12 rounded-borders"
-              />
-            </q-intersection>
-          </div>
-        </q-timeline-entry>
-
-        <q-timeline-entry title="QCalendarAgenda" subtitle="Add the content you want" side="right">
-          <div>
-            <q-intersection transition="scale" once>
-              <q-img
-                src="\QCalendarAgenda.png"
-                spinner-color="white"
-                style="max-width: 350px"
-                class="shadow-12 rounded-borders"
-              />
-            </q-intersection>
-          </div>
-        </q-timeline-entry>
-
-        <q-timeline-entry title="QCalendarResource" subtitle="Manage resources by time" side="left">
-          <div>
-            <q-intersection transition="scale" once>
-              <q-img
-                src="\QCalendarResource.png"
-                spinner-color="white"
-                style="max-width: 350px"
-                class="shadow-12 rounded-borders"
-              />
-            </q-intersection>
-          </div>
-        </q-timeline-entry>
-
-        <q-timeline-entry title="QCalendarScheduler" subtitle="Manage resources daily" side="right">
-          <div>
-            <q-intersection transition="scale" once>
-              <q-img
-                src="\QCalendarScheduler.png"
-                spinner-color="white"
-                style="max-width: 350px"
-                class="shadow-12 rounded-borders"
-              />
-            </q-intersection>
-          </div>
-        </q-timeline-entry>
-
-        <q-timeline-entry
-          title="QCalendarTask"
-          subtitle="Create timesheet and Gantt charts"
-          side="left"
-        >
-          <div>
-            <q-intersection transition="scale" once>
-              <q-img
-                src="\QCalendarTask.png"
-                spinner-color="white"
-                style="max-width: 350px"
-                class="shadow-12 rounded-borders"
-              />
-            </q-intersection>
-          </div>
-        </q-timeline-entry>
-
-        <q-timeline-entry heading>
-          <div style="font-size: 32px; font-weight: 600">Configurable</div>
-        </q-timeline-entry>
-
-        <q-timeline-entry title="Events" subtitle="Slots lets you render events" side="left">
-          <div>
-            <q-intersection transition="scale" once>
-              <q-img
-                src="\qcalendarmonth-event-slots.png"
-                spinner-color="white"
-                style="max-width: 350px"
-                class="shadow-12 rounded-borders"
-              />
-            </q-intersection>
-          </div>
-        </q-timeline-entry>
-
-        <q-timeline-entry
-          title="Planner"
-          subtitle="Add extra columns with Agenda Calendar"
-          side="right"
-        >
-          <div>
-            <q-intersection transition="scale" once>
-              <q-img
-                src="\qcalendaragenda-planner.png"
-                spinner-color="white"
-                style="max-width: 350px"
-                class="shadow-12 rounded-borders"
-              />
-            </q-intersection>
-          </div>
-        </q-timeline-entry>
-
-        <q-timeline-entry
-          title="Timesheets"
-          subtitle="Use a Footer summary with Task Calendar"
-          side="left"
-        >
-          <div>
-            <q-intersection transition="scale" once>
-              <q-img
-                src="\QCalendarTask.png"
-                spinner-color="white"
-                style="max-width: 350px"
-                class="shadow-12 rounded-borders"
-              />
-            </q-intersection>
-          </div>
-        </q-timeline-entry>
-
-        <q-timeline-entry heading>
-          <div style="font-size: 32px; font-weight: 600">User-defined Themes</div>
-        </q-timeline-entry>
-
-        <q-timeline-entry
-          title="Blue"
-          side="left"
-          color="blue"
-          subtitle="Change your calendar with CSS vars"
-        >
-          <div>
-            <q-intersection transition="scale" once>
-              <q-img
-                src="\qcalendarweek-blue-theme.png"
-                spinner-color="white"
-                style="max-width: 350px"
-                class="shadow-12 rounded-borders"
-              />
-            </q-intersection>
-          </div>
-        </q-timeline-entry>
-
-        <q-timeline-entry
-          title="Indigo"
-          side="right"
-          color="indigo"
-          subtitle="Use our Theme Builder to create themes"
-        >
-          <div>
-            <q-intersection transition="scale" once>
-              <q-img
-                src="\qcalendarmonth-indigo-theme.png"
-                spinner-color="white"
-                style="max-width: 350px"
-                class="shadow-12 rounded-borders"
-              />
-            </q-intersection>
-          </div>
-        </q-timeline-entry>
-
-        <q-timeline-entry
-          title="Deep Purple"
-          side="left"
-          color="deep-purple"
-          subtitle="Create stunning calendars"
-        >
-          <div>
-            <q-intersection transition="scale" once>
-              <q-img
-                src="\qcalendarmonth-minimode-deep-purple-theme.png"
-                spinner-color="white"
-                style="max-width: 240px"
-                class="shadow-12 rounded-borders"
-              />
-            </q-intersection>
-          </div>
-        </q-timeline-entry>
-
-        <q-timeline-entry title="Brown" side="right" color="brown" subtitle="Be bold!">
-          <div>
-            <q-intersection transition="scale" once>
-              <q-img
-                src="\qcalendarscheduler-brown-theme.png"
-                spinner-color="white"
-                style="max-width: 350px"
-                class="shadow-12 rounded-borders"
-              />
-            </q-intersection>
-          </div>
-        </q-timeline-entry>
-
-        <q-timeline-entry title="Teal" side="left" color="teal" subtitle="Be creative!">
-          <div>
-            <q-intersection transition="scale" once>
-              <q-img
-                src="\qcalendartask-teal-theme.png"
-                spinner-color="white"
-                style="max-width: 350px"
-                class="shadow-12 rounded-borders"
-              />
-            </q-intersection>
-          </div>
-        </q-timeline-entry>
-
-        <q-timeline-entry
-          title="Dark"
-          subtitle="Automatic dark mode when used with Quasar Framework"
-          side="right"
-          color="black"
-        >
-          <div>
-            <q-intersection transition="scale" once>
-              <q-img
-                src="\qcalendarweek-dark-mode.png"
-                spinner-color="white"
-                style="max-width: 350px"
-                class="shadow-12 rounded-borders"
-              />
-            </q-intersection>
-          </div>
-        </q-timeline-entry>
-
-        <q-timeline-entry
-          title="Interactive Theme Builder"
-          subtitle="Create your own themes with Theme Builder"
-          side="left"
-          color="orange-8"
-        >
-          <div class="q-mb-xl">
-            <q-intersection transition="scale" once>
-              <q-img
-                src="\theme-builder.png"
-                spinner-color="white"
-                style="max-width: 350px"
-                class="shadow-12 rounded-borders"
-              />
-            </q-intersection>
-          </div>
-        </q-timeline-entry>
-      </q-timeline>
-
-      <div class="full-width column justify-center items-center text-h5">
-        <p>No dependencies other than Vue</p>
-        <p>Available for Quasar Framework CLI, Vue CLI and UMD</p>
+    <section class="feature-section">
+      <div class="section-heading">
+        <div class="section-heading__eyebrow">Included</div>
+        <h2 class="section-heading__title">{{ sectionTitle }}</h2>
+        <p class="section-heading__text">{{ sectionText }}</p>
       </div>
 
-      <q-separator />
-      <div class="byline">
-        <p>
-          Don't forget to check out the
-          <a href="https://github.com/quasarframework/quasar-ui-qcalendar" target="_blank">
-            QCalendar GitHub repo
-          </a>
-          and the
-          <a href="https://github.com/hawkeye64/md-plugins" target="_blank">
-            @md-plugins GitHub repo
-          </a>
-          for the shared documentation tooling behind this site.
+      <div class="feature-grid">
+        <article
+          v-for="feature in featureCards"
+          :key="feature.title"
+          class="feature-card"
+        >
+          <div class="feature-card__icon">
+            <q-icon :name="feature.icon" />
+          </div>
+          <h3 class="feature-card__title">{{ feature.title }}</h3>
+          <p class="feature-card__body">{{ feature.body }}</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="resource-section">
+      <article class="resource-card resource-card--primary">
+        <div class="resource-card__eyebrow">Ecosystem</div>
+        <h2 class="resource-card__title">Built in the same docs workflow as the other md-plugins sites</h2>
+        <p class="resource-card__body">
+          This site runs on Q-Press and the shared md-plugins tooling, so {{ productName }}'s docs,
+          examples, and navigation fit into the same family as the sibling Quasar UI projects.
         </p>
-        <p>
-          This site is built with
+
+        <div class="resource-card__actions">
+          <a
+            :href="githubRepoUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="resource-link"
+          >
+            <q-icon :name="fabGithub" />
+            <span>{{ productName }} Repo</span>
+          </a>
+
+          <a
+            href="https://github.com/hawkeye64/md-plugins"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="resource-link"
+          >
+            <q-icon name="hub" />
+            <span>md-plugins</span>
+          </a>
+
           <a
             href="https://www.npmjs.com/package/@md-plugins/quasar-app-extension-q-press"
             target="_blank"
+            rel="noopener noreferrer"
+            class="resource-link"
           >
-            Q-Press
+            <q-icon name="description" />
+            <span>Q-Press</span>
           </a>
-          , the <code>@md-plugins</code> app extension for Quasar documentation sites. Install it,
-          set it up, choose a theme, and start your own site!
+        </div>
+      </article>
+
+      <article class="resource-card resource-card--secondary">
+        <div class="resource-card__eyebrow">Need Help?</div>
+        <h2 class="resource-card__title">Start with quick start, then use the examples as your map</h2>
+        <p class="resource-card__body">
+          QCalendar has the broadest surface area of the sibling projects, so the docs are designed
+          to move you from installation into anatomy, theming, and then the example collections for
+          each calendar family.
         </p>
-      </div>
-      <q-separator />
-      <div class="byline">
-        <p>
-          We hope you find this documentation helpful. If you have any questions or need further
-          assistance, please reach out through the QCalendar repository or GitHub Discussions.
-        </p>
-      </div>
-    </div>
-  </div>
+
+        <div class="resource-list">
+          <div
+            v-for="item in supportItems"
+            :key="item.title"
+            class="resource-list__item"
+          >
+            <div class="resource-list__title">{{ item.title }}</div>
+            <div class="resource-list__body">{{ item.body }}</div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </section>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useQuasar } from 'quasar'
-import { QIcon } from 'quasar'
-import { fabGithub } from '@quasar/extras/fontawesome-v7'
-import siteConfig from '../../siteConfig'
-import { biArrowRightCircle } from '@quasar/extras/bootstrap-icons'
+import { fabGithub } from "@quasar/extras/fontawesome-v7";
+import { biArrowRightCircle } from "@quasar/extras/bootstrap-icons";
+import siteConfig from "../../siteConfig";
 
-const $q = useQuasar()
+const productName = "QCalendar";
+const logoSrc = "/qcalendar-logo.png";
+const logoAlt = "QCalendar Logo";
+const githubTreeUrl = "https://github.com/quasarframework/quasar-ui-qcalendar/tree/v5-beta";
+const githubRepoUrl = "https://github.com/quasarframework/quasar-ui-qcalendar";
+const heroEyebrow = "Vue 3 + Quasar 2";
+const heroLede =
+  "Build day, week, month, agenda, resource, scheduler, and task calendars with one consistent Vue and Quasar calendar system instead of stitching several widgets together.";
+const previewKicker = "Calendar System";
+const previewTitle = "One calendar family, multiple views, and room for real application workflows";
+const previewBody =
+  "QCalendar goes beyond a single month grid: timeline views, resource planning, mini-mode selection, scheduler layouts, and task surfaces all live inside the same API family.";
+const sectionTitle = "A broad calendar toolkit for scheduling, planning, task views, and date-driven interfaces";
+const sectionText =
+  "QCalendar is intentionally wide in capability but consistent in structure: shared date logic, theming, slots, and view-specific surfaces for planning-heavy interfaces.";
 
-const layout = computed(() => {
-  return $q.screen.lt.sm ? 'dense' : $q.screen.lt.md ? 'comfortable' : 'loose'
-})
+const heroPills = ["Day", "Month", "Agenda", "Resource", "Scheduler", "Task"];
+
+const previewImages = [
+  {
+    src: "/QCalendarMonth.png",
+    alt: "QCalendar month view preview",
+  },
+  {
+    src: "/QCalendarScheduler.png",
+    alt: "QCalendar scheduler view preview",
+  },
+];
+
+const featureCards = [
+  {
+    icon: "calendar_view_day",
+    title: "Day and Week Planning",
+    body: "Use interval-based day and week views for schedules, booking flows, and detailed time-based planning.",
+  },
+  {
+    icon: "calendar_view_month",
+    title: "Month and Mini Mode",
+    body: "Handle classic month layouts and compact mini-mode selection with the same calendar family.",
+  },
+  {
+    icon: "view_agenda",
+    title: "Agenda Views",
+    body: "Build list-and-column planning surfaces when a standard grid is not the clearest way to present the schedule.",
+  },
+  {
+    icon: "group_work",
+    title: "Resource and Scheduler",
+    body: "Map time across people, rooms, equipment, or teams with resource-aware calendar layouts.",
+  },
+  {
+    icon: "timeline",
+    title: "Task and Planning Surfaces",
+    body: "Support timesheets, task views, and more planning-heavy layouts without leaving the QCalendar family.",
+  },
+  {
+    icon: "palette",
+    title: "Themes, Slots, and Locale",
+    body: "Adapt calendar presentation with custom themes, slot-driven rendering, and locale-aware date behavior.",
+  },
+];
+
+const supportItems = [
+  {
+    title: "Quick Start + Anatomy",
+    body: "Use the getting-started docs first, especially the quick start and anatomy guides, before jumping into examples.",
+  },
+  {
+    title: "Examples by View",
+    body: "The examples are organized by calendar family, which makes them the fastest way to compare day, month, resource, scheduler, and task patterns.",
+  },
+  {
+    title: "Discussions + Issues",
+    body: "Questions, bugs, and API edge cases are easiest to track in the QCalendar repo and GitHub Discussions.",
+  },
+];
 </script>
 
 <style lang="scss" scoped>
 .landing-page {
-  font-family: 'Arial', sans-serif;
-  color: #333;
+  --landing-border: rgba(232, 246, 255, 0.14);
+  --landing-border-strong: rgba(232, 246, 255, 0.22);
+  --landing-surface: rgba(22, 35, 56, 0.74);
+  --landing-surface-strong: rgba(29, 47, 74, 0.88);
+  --landing-text-soft: rgba(232, 246, 255, 0.82);
+  --landing-shadow: 0 28px 60px rgba(11, 20, 34, 0.28);
+  color: #223447;
 }
 
 .hero {
-  background: linear-gradient(135deg, $brand-primary, $brand-secondary);
-  color: white;
-  text-align: center;
-  padding: 50px 20px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 40px;
+  padding: clamp(28px, 5vw, 52px);
+  border: 1px solid var(--landing-border);
+  border-radius: 34px;
+  background:
+    radial-gradient(circle at top left, rgba(121, 203, 255, 0.24), transparent 34%),
+    radial-gradient(circle at 82% 20%, rgba(246, 252, 255, 0.08), transparent 20%),
+    linear-gradient(145deg, rgba(23, 40, 63, 0.96), rgba(12, 21, 36, 0.96));
+  box-shadow: var(--landing-shadow);
+}
+
+.hero__mesh {
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(246, 252, 255, 0.12), transparent 68%);
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+.hero__mesh--left {
+  top: -90px;
+  left: -70px;
+}
+
+.hero__mesh--right {
+  right: -40px;
+  bottom: -90px;
+}
+
+.hero__grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 30px;
+  align-items: center;
+  grid-template-columns: minmax(0, 1.06fr) minmax(320px, 0.94fr);
+}
+
+.hero__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.hero__eyebrow,
+.section-heading__eyebrow,
+.resource-card__eyebrow,
+.preview-panel__kicker {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 14px;
+  border: 1px solid var(--landing-border-strong);
+  border-radius: 999px;
+  background: rgba(246, 252, 255, 0.08);
+  color: #cde9ff;
+  font-family: "Clash Display", "Montserrat", "Segoe UI", sans-serif;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 .hero-logo {
-  max-width: 200px;
-  margin-bottom: 20px;
-  border-radius: 50%;
+  width: clamp(84px, 11vw, 120px);
+  border-radius: 28px;
+  box-shadow: 0 24px 48px rgba(11, 20, 34, 0.32);
 }
 
 .hero-title {
-  font-size: 3.5em;
-  line-height: 1.2em;
-  font-weight: 700;
   margin: 0;
-  padding: 0.2em 0;
-  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
+  font-family: "Clash Display", "Montserrat", "Segoe UI", sans-serif;
+  font-size: clamp(3.2rem, 8vw, 6rem);
+  line-height: 0.95;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  color: #f8fcff;
 }
 
 .hero-subtitle {
-  font-size: 1.8em;
-  line-height: 1.8em;
+  max-width: 620px;
   margin: 0;
+  font-family: "Clash Display", "Montserrat", "Segoe UI", sans-serif;
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  line-height: 1.45;
+  font-weight: 700;
+  color: #ecf7ff;
 }
 
-.hero-subtitle2 {
-  font-size: 1.2em;
-  line-height: 1.2em;
-  font-weight: 700;
-  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
+.hero-lede {
+  max-width: 600px;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--landing-text-soft);
+}
+
+.hero-buttons,
+.hero-pills,
+.resource-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .hero-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
+  padding-top: 8px;
+  margin-bottom: 10px;
 }
 
 .hero-button {
-  background: white;
-  color: $brand-primary;
-  padding: 10px 20px;
-  border-radius: 5px;
+  min-height: 48px;
+  padding: 0 20px;
+  border: 1px solid transparent;
   text-decoration: none;
-  font-weight: bold;
-  transition: background 0.3s;
+  transition:
+    transform 0.22s ease,
+    background-color 0.22s ease,
+    border-color 0.22s ease,
+    color 0.22s ease,
+    box-shadow 0.22s ease;
 }
 
-.hero-button:hover {
-  background: #f0f0f0;
+.hero-button:hover,
+.resource-link:hover {
+  transform: translateY(-1px);
 }
 
-.byline {
-  text-align: center;
-  font-size: 1.2em;
-  margin: 20px 0;
-  color: #35495e;
+.hero-button :deep(.q-btn__content) {
+  width: 100%;
+  min-width: 0;
 }
 
-body.body--dark .byline {
-  color: #f0f0f0;
+.hero-button--solid {
+  background: #eff8ff;
+  color: #18283d;
+  box-shadow: 0 18px 30px rgba(11, 20, 34, 0.2);
 }
 
-.byline a {
-  color: $brand-primary;
+.hero-button--ghost {
+  background: rgba(246, 252, 255, 0.08);
+  border-color: var(--landing-border-strong);
+  color: #f8fcff;
+}
+
+.hero-button__content {
+  display: grid;
+  grid-template-columns: 1.25rem minmax(0, 1fr) 1.25rem;
+  align-items: center;
+  column-gap: 10px;
+  min-width: 0;
+  width: 100%;
+  font-family: "Clash Display", "Montserrat", "Segoe UI", sans-serif;
+  font-size: 0.95rem;
   font-weight: 700;
 }
 
-body.body--dark .byline a {
-  color: #8ee8ff;
+.hero-button__slot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
-.content {
+.hero-button__slot--empty {
+  visibility: hidden;
+}
+
+.hero-button__label {
+  white-space: nowrap;
+  text-align: center;
+}
+
+.hero-pill {
+  padding: 8px 12px;
+  border: 1px solid rgba(246, 252, 255, 0.12);
+  border-radius: 999px;
+  background: rgba(246, 252, 255, 0.05);
+  color: #d7eeff;
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
+.preview-panel,
+.feature-card,
+.resource-card {
+  overflow: hidden;
+  border: 1px solid var(--landing-border);
+  border-radius: 24px;
+  background: var(--landing-surface);
+  box-shadow: 0 16px 34px rgba(11, 20, 34, 0.16);
+}
+
+.preview-panel {
+  width: 100%;
+  padding: 22px;
+  background:
+    linear-gradient(180deg, rgba(246, 252, 255, 0.08), rgba(246, 252, 255, 0.02)),
+    rgba(14, 24, 40, 0.52);
+  backdrop-filter: blur(8px);
+}
+
+.preview-panel__header {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  padding: 20px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
 }
 
-.grid-container {
+.preview-panel__note,
+.section-heading__text,
+.feature-card__body,
+.resource-card__body,
+.resource-list__body {
+  color: var(--landing-text-soft);
+}
+
+.preview-panel__note {
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
+.preview-panel__body {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 10px;
+  gap: 20px;
+}
+
+.preview-panel__copy h2,
+.section-heading__title,
+.feature-card__title,
+.resource-card__title {
+  font-family: "Clash Display", "Montserrat", "Segoe UI", sans-serif;
+  color: #f8fcff;
+}
+
+.preview-panel__copy h2 {
+  margin: 0 0 10px;
+  font-size: clamp(1.35rem, 2vw, 1.7rem);
+  line-height: 1.2;
+}
+
+.preview-panel__copy p,
+.section-heading__text,
+.feature-card__body,
+.resource-card__body,
+.resource-list__body {
+  margin: 0;
+  line-height: 1.68;
+}
+
+.preview-stack {
+  position: relative;
+  min-height: 350px;
+}
+
+.preview-card {
+  position: absolute;
+  overflow: hidden;
+  border: 1px solid rgba(246, 252, 255, 0.12);
+  border-radius: 22px;
+  background: rgba(246, 252, 255, 0.08);
+  box-shadow: 0 22px 38px rgba(11, 20, 34, 0.22);
+}
+
+.preview-card :deep(.q-img) {
+  display: block;
   width: 100%;
-  max-width: 100%;
-  justify-content: center;
-  align-content: center;
 }
 
-.grid-item {
-  // aspect-ratio: 1 / 1;
-  cursor: pointer;
+.preview-card--primary {
+  top: 0;
+  left: 0;
+  width: min(100%, 360px);
+  transform: rotate(-2deg);
 }
 
-.section {
-  flex: 1 1 300px;
-  margin: 20px;
-  padding: 20px;
-  color: white;
-  text-decoration: none;
-  background: linear-gradient(135deg, $brand-primary, $brand-secondary);
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition:
-    transform 0.3s,
-    box-shadow 0.3s;
+.preview-card--secondary {
+  right: 0;
+  bottom: 0;
+  width: min(78%, 290px);
+  transform: rotate(4deg);
 }
 
-.section:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  // change mouseover effects
-  cursor: pointer;
+.feature-section,
+.resource-section {
+  margin-top: 36px;
 }
 
-.section h2 {
-  margin-top: 0;
-  color: white;
-  font-size: 2.125rem;
-  font-weight: 400;
-  line-height: 2.5rem;
-  letter-spacing: 0.00735em;
-  font-weight: 700;
-  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
-}
-
-.section ul {
-  list-style: none;
-  padding: 0;
-}
-
-.section ul li {
-  margin: 10px 0;
-}
-
-.section ul li a {
-  color: #35495e;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.section ul li a:hover {
-  color: $brand-primary;
-}
-
-.footer {
+.section-heading {
+  max-width: 760px;
+  margin: 0 auto 24px;
   text-align: center;
-  padding: 20px;
-  background: #35495e;
-  color: white;
 }
+
+.section-heading__title {
+  margin: 14px 0 10px;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  line-height: 1.12;
+}
+
+.feature-grid,
+.resource-section {
+  display: grid;
+  gap: 18px;
+}
+
+.feature-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.resource-section {
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+}
+
+.feature-card,
+.resource-card {
+  position: relative;
+  padding: 22px;
+}
+
+.feature-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(121, 203, 255, 0.55), transparent 65%);
+}
+
+.feature-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  margin-bottom: 14px;
+  border-radius: 14px;
+  background: rgba(121, 203, 255, 0.14);
+  color: #d7eeff;
+  font-size: 1.35rem;
+}
+
+.feature-card__title,
+.resource-card__title {
+  margin: 0 0 10px;
+  font-size: 1.16rem;
+  line-height: 1.3;
+}
+
+.resource-card--primary {
+  background:
+    radial-gradient(circle at top right, rgba(121, 203, 255, 0.16), transparent 30%),
+    var(--landing-surface-strong);
+}
+
+.resource-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--landing-border-strong);
+  border-radius: 999px;
+  background: rgba(246, 252, 255, 0.05);
+  color: #ecf7ff;
+  text-decoration: none;
+  transition:
+    transform 0.22s ease,
+    border-color 0.22s ease,
+    background-color 0.22s ease;
+}
+
+.resource-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.resource-list__item {
+  padding: 16px 18px;
+  border: 1px solid rgba(246, 252, 255, 0.08);
+  border-radius: 18px;
+  background: rgba(246, 252, 255, 0.04);
+}
+
+.resource-list__title {
+  margin-bottom: 6px;
+  font-family: "Clash Display", "Montserrat", "Segoe UI", sans-serif;
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: #d7eeff;
+}
+
+@media (max-width: 1100px) {
+  .hero__grid,
+  .resource-section,
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .preview-stack {
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 700px) {
+  .hero {
+    padding: 24px 18px;
+    border-radius: 24px;
+  }
+
+  .hero__copy {
+    align-items: stretch;
+  }
+
+  .hero-buttons,
+  .resource-card__actions {
+    flex-direction: column;
+  }
+
+  .hero-button,
+  .resource-link {
+    justify-content: center;
+  }
+
+  .preview-stack {
+    min-height: 260px;
+  }
+
+  .preview-card--primary {
+    position: relative;
+    width: 100%;
+    transform: none;
+  }
+
+  .preview-card--secondary {
+    right: auto;
+    bottom: auto;
+    left: 18px;
+    width: calc(100% - 36px);
+    transform: translateY(-24px);
+  }
+
+  .feature-card,
+  .resource-card {
+    padding: 18px;
+    border-radius: 20px;
+  }
+}
+
+
+/* codex-theme-override:start */
+.landing-page {
+  --landing-page-text: #{$brand-light-text};
+  --landing-heading: #{$brand-light-text};
+  --landing-border: #{rgba($brand-secondary, 0.16)};
+  --landing-border-strong: #{rgba($brand-secondary, 0.24)};
+  --landing-surface: #{rgba($brand-light, 0.78)};
+  --landing-surface-strong: #{rgba($brand-light, 0.92)};
+  --landing-text-soft: #{rgba($brand-light-text, 0.78)};
+  --landing-shadow: 0 28px 60px #{rgba($brand-primary, 0.14)};
+  --landing-card-shadow: 0 16px 34px #{rgba($brand-secondary, 0.12)};
+  --landing-chip-bg: #{rgba($brand-light, 0.52)};
+  --landing-chip-text: #{$brand-primary};
+  --landing-solid-bg: #{$brand-primary};
+  --landing-solid-text: #{$brand-light};
+  --landing-solid-shadow: 0 18px 30px #{rgba($brand-primary, 0.24)};
+  --landing-ghost-bg: #{rgba($brand-light, 0.46)};
+  --landing-ghost-text: #{$brand-light-text};
+  --landing-pill-border: #{rgba($brand-secondary, 0.14)};
+  --landing-pill-bg: #{rgba($brand-light, 0.44)};
+  --landing-pill-text: #{$brand-primary};
+  --landing-panel-gradient-top: #{rgba($brand-light, 0.7)};
+  --landing-panel-gradient-bottom: #{rgba($brand-light, 0.22)};
+  --landing-panel-bg: #{rgba($brand-light-bg, 0.88)};
+  --landing-preview-card-border: #{rgba($brand-secondary, 0.18)};
+  --landing-preview-card-bg: #{rgba($brand-light, 0.82)};
+  --landing-preview-card-shadow: 0 22px 38px #{rgba($brand-secondary, 0.14)};
+  --landing-accent-line: #{rgba($brand-primary, 0.4)};
+  --landing-icon-bg: #{rgba($brand-primary, 0.1)};
+  --landing-icon-color: #{$brand-primary};
+  --landing-spot-accent: #{rgba($brand-primary, 0.14)};
+  --landing-resource-link-bg: #{rgba($brand-light, 0.48)};
+  --landing-resource-link-text: #{$brand-light-text};
+  --landing-resource-item-border: #{rgba($brand-secondary, 0.1)};
+  --landing-resource-item-bg: #{rgba($brand-light, 0.42)};
+  --landing-accent-text: #{$brand-primary};
+  --landing-mesh-color: #{rgba($brand-primary, 0.16)};
+  --landing-hero-glow-1: #{rgba($brand-primary, 0.18)};
+  --landing-hero-glow-2: #{rgba($brand-secondary, 0.12)};
+  --landing-hero-start: #{rgba($brand-light, 0.96)};
+  --landing-hero-end: #{rgba($brand-light-bg, 0.96)};
+  color: var(--landing-page-text);
+}
+
+body.body--dark .landing-page {
+  --landing-page-text: #{$brand-dark-text};
+  --landing-heading: #{$brand-dark-text};
+  --landing-border: #{rgba($brand-light, 0.12)};
+  --landing-border-strong: #{rgba($brand-light, 0.2)};
+  --landing-surface: #{rgba($dark-pill, 0.74)};
+  --landing-surface-strong: #{rgba($dark-pill, 0.88)};
+  --landing-text-soft: #{rgba($brand-dark-text, 0.82)};
+  --landing-shadow: 0 28px 60px #{rgba($brand-dark-bg, 0.28)};
+  --landing-card-shadow: 0 16px 34px #{rgba($brand-dark-bg, 0.24)};
+  --landing-chip-bg: #{rgba($brand-light, 0.08)};
+  --landing-chip-text: #{$brand-primary};
+  --landing-solid-bg: #{$brand-light};
+  --landing-solid-text: #{$brand-dark-bg};
+  --landing-solid-shadow: 0 18px 30px #{rgba($brand-dark-bg, 0.28)};
+  --landing-ghost-bg: #{rgba($brand-light, 0.08)};
+  --landing-ghost-text: #{$brand-dark-text};
+  --landing-pill-border: #{rgba($brand-light, 0.12)};
+  --landing-pill-bg: #{rgba($brand-light, 0.05)};
+  --landing-pill-text: #{$brand-primary};
+  --landing-panel-gradient-top: #{rgba($brand-light, 0.08)};
+  --landing-panel-gradient-bottom: #{rgba($brand-light, 0.02)};
+  --landing-panel-bg: #{rgba($brand-dark-bg, 0.56)};
+  --landing-preview-card-border: #{rgba($brand-light, 0.12)};
+  --landing-preview-card-bg: #{rgba($brand-dark-bg, 0.78)};
+  --landing-preview-card-shadow: 0 22px 38px #{rgba($brand-dark-bg, 0.28)};
+  --landing-accent-line: #{rgba($brand-primary, 0.55)};
+  --landing-icon-bg: #{rgba($brand-primary, 0.16)};
+  --landing-icon-color: #{$brand-primary};
+  --landing-spot-accent: #{rgba($brand-primary, 0.18)};
+  --landing-resource-link-bg: #{rgba($brand-light, 0.06)};
+  --landing-resource-link-text: #{$brand-dark-text};
+  --landing-resource-item-border: #{rgba($brand-light, 0.08)};
+  --landing-resource-item-bg: #{rgba($brand-light, 0.04)};
+  --landing-accent-text: #{$brand-primary};
+  --landing-mesh-color: #{rgba($brand-light, 0.12)};
+  --landing-hero-glow-1: #{rgba($brand-primary, 0.22)};
+  --landing-hero-glow-2: #{rgba($brand-light, 0.08)};
+  --landing-hero-start: #{rgba($brand-dark-bg, 0.96)};
+  --landing-hero-end: #{rgba($dark-pill, 0.96)};
+}
+
+.hero {
+  background:
+    radial-gradient(circle at top left, var(--landing-hero-glow-1), transparent 34%),
+    radial-gradient(circle at 82% 20%, var(--landing-hero-glow-2), transparent 20%),
+    linear-gradient(145deg, var(--landing-hero-start), var(--landing-hero-end));
+  box-shadow: var(--landing-shadow);
+}
+
+.hero__mesh {
+  background: radial-gradient(circle, var(--landing-mesh-color), transparent 68%);
+}
+
+.hero__eyebrow,
+.section-heading__eyebrow,
+.resource-card__eyebrow,
+.preview-panel__kicker {
+  border-color: var(--landing-border-strong);
+  background: var(--landing-chip-bg);
+  color: var(--landing-chip-text);
+}
+
+.hero-title,
+.hero-subtitle,
+.preview-panel__copy h2,
+.section-heading__title,
+.feature-card__title,
+.resource-card__title {
+  color: var(--landing-heading);
+}
+
+.hero-button--solid {
+  background: var(--landing-solid-bg);
+  color: var(--landing-solid-text);
+  box-shadow: var(--landing-solid-shadow);
+}
+
+.hero-button--ghost {
+  background: var(--landing-ghost-bg);
+  border-color: var(--landing-border-strong);
+  color: var(--landing-ghost-text);
+}
+
+.hero-pill {
+  border-color: var(--landing-pill-border);
+  background: var(--landing-pill-bg);
+  color: var(--landing-pill-text);
+}
+
+.preview-panel,
+.feature-card,
+.resource-card {
+  background: var(--landing-surface);
+  box-shadow: var(--landing-card-shadow);
+}
+
+.preview-panel {
+  background:
+    linear-gradient(180deg, var(--landing-panel-gradient-top), var(--landing-panel-gradient-bottom)),
+    var(--landing-panel-bg);
+}
+
+.preview-card {
+  border-color: var(--landing-preview-card-border);
+  background: var(--landing-preview-card-bg);
+  box-shadow: var(--landing-preview-card-shadow);
+}
+
+.feature-card::before {
+  background: linear-gradient(90deg, var(--landing-accent-line), transparent 65%);
+}
+
+.feature-card__icon {
+  background: var(--landing-icon-bg);
+  color: var(--landing-icon-color);
+}
+
+.resource-card--primary {
+  background:
+    radial-gradient(circle at top right, var(--landing-spot-accent), transparent 30%),
+    var(--landing-surface-strong);
+}
+
+.resource-link {
+  border-color: var(--landing-border-strong);
+  background: var(--landing-resource-link-bg);
+  color: var(--landing-resource-link-text);
+}
+
+.resource-list__item {
+  border-color: var(--landing-resource-item-border);
+  background: var(--landing-resource-item-bg);
+}
+
+.resource-list__title {
+  color: var(--landing-accent-text);
+}
+/* codex-theme-override:end */
 </style>
