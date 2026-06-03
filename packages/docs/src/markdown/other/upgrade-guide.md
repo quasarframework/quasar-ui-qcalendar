@@ -22,7 +22,7 @@ This release prepares QCalendar for the next Quasar CLI Vite generation. The cal
 | ----------------------------- | ---------------------------------- |
 | Vue                           | Vue 3                              |
 | Quasar                        | Quasar 2                           |
-| Quasar CLI                    | `@quasar/app-vite` >=3.0.0-beta.36 |
+| Quasar CLI                    | `@quasar/app-vite` >=3.0.0-beta.38 |
 | App extension                 | Vite only                          |
 | Node.js for this repo and CI  | `>=22.13`                          |
 | Package manager for this repo | `pnpm >=11.3.0`                    |
@@ -52,7 +52,7 @@ When QCalendar v5 is released as stable, remove the `@beta` tag from those comma
 
 - The app extension now requires Vite. It will stop with an error if it is installed in a non-Vite Quasar app.
 - The extension registers the Vite boot file only. The previous webpack boot file has been removed.
-- The extension is compatible with `@quasar/app-vite` `>=3.0.0-beta.36`.
+- The extension is compatible with `@quasar/app-vite` `>=3.0.0-beta.38`.
 - App extension source scripts are authored in TypeScript and compiled before publishing. The package entry points to `dist/index.js` so installed beta users do not rely on Node loading TypeScript from `node_modules`.
 - The extension runtime boot file is published as `dist/boot/vite-register.js`.
 - If you generate your own boot file inside the Quasar app, it should import `defineBoot` from `#q-app`, matching the Quasar CLI Vite 3 alias.

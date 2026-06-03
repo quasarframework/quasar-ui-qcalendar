@@ -30,7 +30,7 @@
     "@md-plugins/quasar-app-extension-q-press": "0.1.0-beta.22",
     "@md-plugins/vite-examples-plugin": "0.1.0-beta.22",
     "@md-plugins/vite-md-plugin": "0.1.0-beta.22",
-    "@quasar/app-vite": "3.0.0-beta.36",
+    "@quasar/app-vite": "3.0.0-beta.38",
     "@quasar/quasar-ui-qcalendar": "workspace:*",
     "@types/markdown-it": "^14.1.2",
     "@types/node": "^25.9.1",
