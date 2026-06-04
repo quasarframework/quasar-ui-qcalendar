@@ -37,7 +37,7 @@ v5.0.0-beta.8
 
 **Month view with events**
 
-![QCalendar example month view](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/refs/heads/dev/packages/docs/public/qcalendarmonth-event-slots.png)
+![QCalendar example month view](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/refs/heads/dev/packages/docs/public/qcalendar-month-view.png)
 
 **Planner example**
 

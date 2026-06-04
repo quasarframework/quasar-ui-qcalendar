@@ -38,7 +38,7 @@ Go to Netlify which is hosting the QCalendar docs https://qcalendar.netlify.app/
 
 **Month view with events**
 
-![QCalendar example month view](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/packages/docs/public/qcalendarmonth-event-slots.png)
+![QCalendar example month view](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/packages/docs/public/qcalendar-month-view.png)
 
 **Planner example**
 

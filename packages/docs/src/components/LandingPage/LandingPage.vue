@@ -89,11 +89,12 @@
                 class="preview-stack"
                 :class="{ 'preview-stack--single': previewImages.length === 1 }"
               >
+                <div class="preview-stack__badge preview-stack__badge--top">7 view families</div>
                 <div
                   v-for="(image, index) in previewImages"
                   :key="image.src"
                   class="preview-card"
-                  :class="index === 0 ? 'preview-card--primary' : 'preview-card--secondary'"
+                  :class="previewCardClass(index)"
                 >
                   <q-img :src="image.src" :alt="image.alt" fit="contain" />
                 </div>
@@ -207,14 +208,30 @@ const sectionText =
 
 const heroPills = ['Day', 'Month', 'Agenda', 'Resource', 'Scheduler', 'Task']
 
+const previewCardClass = (index: number) =>
+  [
+    'preview-card--primary',
+    'preview-card--secondary',
+    'preview-card--tertiary',
+    'preview-card--quaternary',
+  ][index] ?? 'preview-card--secondary'
+
 const previewImages = [
   {
-    src: '/QCalendarMonth.png',
-    alt: 'QCalendar month view preview',
+    src: '/qcalendar-month-view.png',
+    alt: 'QCalendar month view with events preview',
   },
   {
     src: '/QCalendarScheduler.png',
     alt: 'QCalendar scheduler view preview',
+  },
+  {
+    src: '/qcalendar-month-view-mini-mode-multi-month-selection.png',
+    alt: 'QCalendar mini-mode multi-month selection preview',
+  },
+  {
+    src: '/q-calendar-month-view-mini-mode-with-selection.png',
+    alt: 'QCalendar large month view with mini calendar selection preview',
   },
 ]
 
@@ -490,6 +507,8 @@ const supportItems = [
 }
 
 .preview-panel {
+  position: relative;
+  overflow: visible;
   width: 100%;
   padding: 20px;
   background:
@@ -551,8 +570,46 @@ const supportItems = [
 
 .preview-stack {
   position: relative;
-  min-height: clamp(250px, 30vw, 310px);
-  padding: 10px 14px 6px;
+  isolation: isolate;
+  min-height: clamp(330px, 34vw, 390px);
+  padding: 18px 14px 24px;
+  overflow: visible;
+}
+
+.preview-stack::before {
+  content: '';
+  position: absolute;
+  inset: 28px 18px 40px;
+  z-index: -1;
+  border: 1px solid var(--landing-preview-card-border);
+  border-radius: 28px;
+  background:
+    linear-gradient(135deg, rgba(121, 203, 255, 0.2), transparent 42%), rgba(246, 252, 255, 0.06);
+  transform: rotate(2deg);
+}
+
+.preview-stack__badge {
+  position: absolute;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 13px;
+  border: 1px solid var(--landing-border-strong);
+  border-radius: 999px;
+  background: var(--landing-chip-bg);
+  color: var(--landing-chip-text);
+  font-family: 'Clash Display', 'Montserrat', 'Segoe UI', sans-serif;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 14px 28px rgba(11, 20, 34, 0.16);
+}
+
+.preview-stack__badge--top {
+  top: 6px;
+  right: 18px;
 }
 
 .preview-card {
@@ -566,21 +623,49 @@ const supportItems = [
 
 .preview-card :deep(.q-img) {
   display: block;
+  height: 100%;
   width: 100%;
 }
 
+.preview-card :deep(.q-img__image) {
+  object-fit: cover !important;
+  object-position: top left;
+}
+
 .preview-card--primary {
-  top: 10px;
-  left: 10px;
-  width: min(82%, 300px);
-  transform: rotate(-2deg);
+  top: 36px;
+  left: -10px;
+  z-index: 2;
+  width: min(84%, 410px);
+  height: clamp(230px, 24vw, 290px);
+  transform: rotate(-3deg);
 }
 
 .preview-card--secondary {
-  right: 6px;
-  bottom: 4px;
-  width: min(56%, 220px);
-  transform: rotate(4deg);
+  right: -28px;
+  bottom: 64px;
+  z-index: 3;
+  width: min(62%, 300px);
+  height: clamp(150px, 16vw, 205px);
+  transform: rotate(5deg);
+}
+
+.preview-card--tertiary {
+  right: 38px;
+  bottom: 22px;
+  z-index: 4;
+  width: min(46%, 220px);
+  height: clamp(78px, 8vw, 108px);
+  transform: rotate(-1deg);
+}
+
+.preview-card--quaternary {
+  left: 34px;
+  bottom: 2px;
+  z-index: 5;
+  width: min(42%, 205px);
+  height: clamp(84px, 9vw, 118px);
+  transform: rotate(2deg);
 }
 
 .feature-section,
@@ -724,7 +809,7 @@ const supportItems = [
   }
 
   .preview-stack {
-    min-height: 320px;
+    min-height: 360px;
   }
 }
 
@@ -753,13 +838,21 @@ const supportItems = [
   }
 
   .preview-stack {
-    min-height: 260px;
+    min-height: 430px;
     padding: 6px 0 0;
+  }
+
+  .preview-stack::before,
+  .preview-stack__badge {
+    display: none;
   }
 
   .preview-card--primary {
     position: relative;
+    left: auto;
+    top: auto;
     width: 100%;
+    height: 220px;
     transform: none;
   }
 
@@ -769,6 +862,22 @@ const supportItems = [
     left: 18px;
     width: calc(100% - 36px);
     transform: translateY(-24px);
+  }
+
+  .preview-card--tertiary {
+    right: 18px;
+    bottom: 70px;
+    width: calc(100% - 72px);
+    height: 84px;
+    transform: none;
+  }
+
+  .preview-card--quaternary {
+    left: 18px;
+    bottom: 14px;
+    width: calc(100% - 72px);
+    height: 92px;
+    transform: none;
   }
 
   .feature-card,
@@ -962,7 +1071,6 @@ body.body--dark .landing-page {
 
 .resource-list__item {
   border-color: var(--landing-resource-item-border);
-  background: var(--landing-resource-item-bg);
 }
 
 .resource-list__title {
