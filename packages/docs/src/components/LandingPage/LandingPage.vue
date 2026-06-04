@@ -362,13 +362,11 @@ const supportItems = [
 
 .hero {
   position: relative;
-  isolation: isolate;
   overflow: hidden;
   margin-bottom: 32px;
   padding: clamp(24px, 4vw, 44px);
   border: 1px solid var(--landing-border);
   border-radius: 34px;
-  clip-path: inset(0 round 34px);
   background:
     radial-gradient(circle at top left, rgba(121, 203, 255, 0.24), transparent 34%),
     radial-gradient(circle at 82% 20%, rgba(246, 252, 255, 0.08), transparent 20%),
@@ -378,7 +376,6 @@ const supportItems = [
 
 .hero__mesh {
   position: absolute;
-  transform: translateZ(0);
   width: 240px;
   height: 240px;
   border-radius: 999px;
@@ -1031,7 +1028,6 @@ const supportItems = [
   .hero {
     padding: 24px 18px;
     border-radius: 24px;
-    clip-path: inset(0 round 24px);
   }
 
   .hero__copy {
