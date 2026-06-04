@@ -85,19 +85,63 @@
                 <p>{{ previewBody }}</p>
               </div>
 
-              <div
-                class="preview-stack"
-                :class="{ 'preview-stack--single': previewImages.length === 1 }"
-              >
-                <div class="preview-stack__badge preview-stack__badge--top">7 view families</div>
-                <div
-                  v-for="(image, index) in previewImages"
-                  :key="image.src"
-                  class="preview-card"
-                  :class="previewCardClass(index)"
+              <div class="preview-family-grid">
+                <article
+                  v-for="family in previewFamilies"
+                  :key="family.label"
+                  class="preview-family-card"
                 >
-                  <q-img :src="image.src" :alt="image.alt" fit="contain" />
-                </div>
+                  <div class="preview-family-card__value">{{ family.value }}</div>
+                  <div class="preview-family-card__label">{{ family.label }}</div>
+                  <p>{{ family.body }}</p>
+                </article>
+              </div>
+
+              <div class="preview-workflow" aria-label="Calendar sidebar mini workflow preview">
+                <aside class="preview-workflow__sidebar">
+                  <div class="preview-workflow__button">
+                    <q-icon name="add" />
+                    <span>Create</span>
+                  </div>
+                  <div class="preview-workflow__mini">
+                    <div class="preview-workflow__mini-title">June 2026</div>
+                    <div class="preview-workflow__weekdays">
+                      <span v-for="day in miniWeekdays" :key="day">{{ day }}</span>
+                    </div>
+                    <div class="preview-workflow__days">
+                      <span v-for="day in miniDays" :key="day" :class="miniDayClass(day)">
+                        {{ day }}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="preview-workflow__filters">
+                    <span v-for="filter in calendarFilters" :key="filter.label">
+                      <i :style="{ backgroundColor: filter.color }" />
+                      {{ filter.label }}
+                    </span>
+                  </div>
+                </aside>
+
+                <section class="preview-workflow__month">
+                  <div class="preview-workflow__toolbar">
+                    <span>Today</span>
+                    <strong>June 2026</strong>
+                    <span>Comfortable</span>
+                  </div>
+                  <div class="preview-workflow__month-grid">
+                    <span v-for="day in monthDays" :key="day" class="preview-workflow__month-day">
+                      {{ day }}
+                    </span>
+                    <span
+                      v-for="event in workflowEvents"
+                      :key="event.title"
+                      class="preview-workflow__event"
+                      :class="event.className"
+                    >
+                      {{ event.title }}
+                    </span>
+                  </div>
+                </section>
               </div>
             </div>
           </div>
@@ -208,32 +252,52 @@ const sectionText =
 
 const heroPills = ['Day', 'Month', 'Agenda', 'Resource', 'Scheduler', 'Task']
 
-const previewCardClass = (index: number) =>
-  [
-    'preview-card--primary',
-    'preview-card--secondary',
-    'preview-card--tertiary',
-    'preview-card--quaternary',
-  ][index] ?? 'preview-card--secondary'
-
-const previewImages = [
+const previewFamilies = [
   {
-    src: '/qcalendar-month-view.png',
-    alt: 'QCalendar month view with events preview',
+    value: '7',
+    label: 'View families',
+    body: 'Day, week, month, agenda, resource, scheduler, and task views share one date model.',
   },
   {
-    src: '/QCalendarScheduler.png',
-    alt: 'QCalendar scheduler view preview',
+    value: '1',
+    label: 'Calendar API',
+    body: 'Selection, navigation, formatting, slots, and events stay familiar as views change.',
   },
   {
-    src: '/qcalendar-month-view-mini-mode-multi-month-selection.png',
-    alt: 'QCalendar mini-mode multi-month selection preview',
-  },
-  {
-    src: '/q-calendar-month-view-mini-mode-with-selection.png',
-    alt: 'QCalendar large month view with mini calendar selection preview',
+    value: '∞',
+    label: 'Workflow shapes',
+    body: 'Compose full planners, compact date pickers, sidebars, schedulers, and task boards.',
   },
 ]
+
+const miniWeekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
+const miniDays = ['31', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13']
+const monthDays = Array.from({ length: 35 }, (_, index) => String(index + 1))
+const calendarFilters = [
+  { label: 'Personal', color: '#7986cb' },
+  { label: 'Family', color: '#66bb6a' },
+  { label: 'Work', color: '#29b6f6' },
+]
+
+const workflowEvents = [
+  {
+    title: 'Pay mortgage',
+    className: 'preview-workflow__event--mortgage',
+  },
+  {
+    title: 'Team check-in',
+    className: 'preview-workflow__event--team',
+  },
+  {
+    title: 'Long weekend',
+    className: 'preview-workflow__event--weekend',
+  },
+]
+
+const miniDayClass = (day: string) => ({
+  'preview-workflow__mini-day--muted': day === '31',
+  'preview-workflow__mini-day--selected': day === '4',
+})
 
 const featureCards = [
   {
@@ -568,104 +632,247 @@ const supportItems = [
   line-height: 1.68;
 }
 
-.preview-stack {
-  position: relative;
-  isolation: isolate;
-  min-height: clamp(330px, 34vw, 390px);
-  padding: 18px 14px 24px;
-  overflow: visible;
+.preview-family-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
 }
 
-.preview-stack::before {
-  content: '';
-  position: absolute;
-  inset: 28px 18px 40px;
-  z-index: -1;
+.preview-family-card {
+  min-height: 152px;
+  padding: 18px;
+  border: 1px solid var(--landing-preview-card-border);
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, rgba(246, 252, 255, 0.08), rgba(246, 252, 255, 0.03)),
+    var(--landing-preview-card-bg);
+  box-shadow: var(--landing-preview-card-shadow);
+}
+
+.preview-family-card__value {
+  color: var(--landing-chip-text);
+  font-family: 'Clash Display', 'Montserrat', 'Segoe UI', sans-serif;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.preview-family-card__label {
+  margin-top: 14px;
+  color: var(--landing-heading);
+  font-weight: 800;
+}
+
+.preview-family-card p {
+  margin: 10px 0 0;
+  color: var(--landing-text-soft);
+  font-size: 0.93rem;
+  line-height: 1.52;
+}
+
+.preview-workflow {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(150px, 0.45fr) minmax(0, 1fr);
+  gap: 18px;
+  min-height: 260px;
+  padding: 18px;
+  overflow: hidden;
   border: 1px solid var(--landing-preview-card-border);
   border-radius: 28px;
   background:
-    linear-gradient(135deg, rgba(121, 203, 255, 0.2), transparent 42%), rgba(246, 252, 255, 0.06);
-  transform: rotate(2deg);
+    radial-gradient(circle at 92% 100%, rgba(121, 203, 255, 0.18), transparent 32%),
+    linear-gradient(135deg, rgba(246, 252, 255, 0.12), rgba(246, 252, 255, 0.03));
+  box-shadow: inset 0 1px 0 rgba(246, 252, 255, 0.08);
 }
 
-.preview-stack__badge {
-  position: absolute;
-  z-index: 4;
+.preview-workflow__sidebar,
+.preview-workflow__month {
+  position: relative;
+  border: 1px solid var(--landing-preview-card-border);
+  background: rgba(11, 20, 34, 0.2);
+  box-shadow: 0 18px 38px rgba(11, 20, 34, 0.18);
+}
+
+.preview-workflow__sidebar {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 22px;
+}
+
+.preview-workflow__button {
   display: inline-flex;
   align-items: center;
-  min-height: 34px;
-  padding: 0 13px;
-  border: 1px solid var(--landing-border-strong);
+  justify-content: center;
+  gap: 8px;
+  width: min(100%, 120px);
+  min-height: 38px;
   border-radius: 999px;
-  background: var(--landing-chip-bg);
-  color: var(--landing-chip-text);
-  font-family: 'Clash Display', 'Montserrat', 'Segoe UI', sans-serif;
-  font-size: 0.74rem;
+  background: var(--landing-menu-color);
+  color: var(--landing-menu-contrast);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.preview-workflow__mini {
+  padding: 12px;
+  border-radius: 16px;
+  background: rgba(246, 252, 255, 0.86);
+  color: #27374a;
+}
+
+.preview-workflow__mini-title {
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.preview-workflow__weekdays,
+.preview-workflow__days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+}
+
+.preview-workflow__weekdays {
+  gap: 2px;
+  margin-bottom: 4px;
+  color: #0b1422;
+  font-size: 0.7rem;
+  font-weight: 900;
+}
+
+.preview-workflow__days {
+  gap: 3px;
+  font-size: 0.68rem;
+}
+
+.preview-workflow__days span {
+  display: grid;
+  min-height: 18px;
+  place-items: center;
+  border-radius: 999px;
+}
+
+.preview-workflow__mini-day--muted {
+  opacity: 0.38;
+}
+
+.preview-workflow__mini-day--selected {
+  outline: 2px solid var(--landing-menu-color);
+  color: var(--landing-menu-color);
+  font-weight: 900;
+}
+
+.preview-workflow__filters {
+  display: grid;
+  gap: 8px;
+}
+
+.preview-workflow__filters span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--landing-text-soft);
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  box-shadow: 0 14px 28px rgba(11, 20, 34, 0.16);
 }
 
-.preview-stack__badge--top {
-  top: 6px;
-  right: 18px;
+.preview-workflow__filters i {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
 }
 
-.preview-card {
-  position: absolute;
+.preview-workflow__month {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-width: 0;
   overflow: hidden;
-  border: 1px solid rgba(246, 252, 255, 0.12);
-  border-radius: 22px;
-  background: rgba(246, 252, 255, 0.08);
-  box-shadow: 0 22px 38px rgba(11, 20, 34, 0.22);
+  border-radius: 24px;
+  transform: rotate(1.2deg) translateY(8px);
 }
 
-.preview-card :deep(.q-img) {
-  display: block;
-  height: 100%;
-  width: 100%;
+.preview-workflow__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  color: var(--landing-heading);
 }
 
-.preview-card :deep(.q-img__image) {
-  object-fit: cover !important;
-  object-position: top left;
+.preview-workflow__toolbar span {
+  padding: 5px 10px;
+  border: 1px solid var(--landing-preview-card-border);
+  border-radius: 999px;
+  color: var(--landing-text-soft);
+  font-size: 0.7rem;
+  font-weight: 800;
 }
 
-.preview-card--primary {
-  top: 36px;
-  left: -10px;
+.preview-workflow__toolbar strong {
+  font-family: 'Clash Display', 'Montserrat', 'Segoe UI', sans-serif;
+  font-size: clamp(1rem, 2vw, 1.28rem);
+}
+
+.preview-workflow__month-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(30px, 1fr));
+  grid-auto-rows: minmax(34px, 1fr);
+  padding: 0 12px 14px;
+}
+
+.preview-workflow__month-day {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 5px;
+  border-top: 1px solid rgba(246, 252, 255, 0.12);
+  border-left: 1px solid rgba(246, 252, 255, 0.08);
+  color: var(--landing-text-soft);
+  font-size: 0.62rem;
+}
+
+.preview-workflow__event {
+  position: absolute;
   z-index: 2;
-  width: min(84%, 410px);
-  height: clamp(230px, 24vw, 290px);
-  transform: rotate(-3deg);
+  overflow: hidden;
+  max-width: 140px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  color: #0b1422;
+  font-size: 0.68rem;
+  font-weight: 800;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-shadow: 0 8px 18px rgba(11, 20, 34, 0.16);
 }
 
-.preview-card--secondary {
-  right: -28px;
-  bottom: 64px;
-  z-index: 3;
-  width: min(62%, 300px);
-  height: clamp(150px, 16vw, 205px);
-  transform: rotate(5deg);
+.preview-workflow__event--mortgage {
+  top: 54px;
+  left: 18%;
+  background: #7986cb;
+  color: #fff;
 }
 
-.preview-card--tertiary {
-  right: 38px;
-  bottom: 22px;
-  z-index: 4;
-  width: min(46%, 220px);
-  height: clamp(78px, 8vw, 108px);
-  transform: rotate(-1deg);
+.preview-workflow__event--team {
+  top: 148px;
+  left: 2%;
+  background: #90caf9;
 }
 
-.preview-card--quaternary {
-  left: 34px;
-  bottom: 2px;
-  z-index: 5;
-  width: min(42%, 205px);
-  height: clamp(84px, 9vw, 118px);
-  transform: rotate(2deg);
+.preview-workflow__event--weekend {
+  right: -6%;
+  bottom: 54px;
+  width: 46%;
+  max-width: none;
+  background: #ffcc80;
 }
 
 .feature-section,
@@ -808,8 +1015,8 @@ const supportItems = [
     grid-template-columns: 1fr;
   }
 
-  .preview-stack {
-    min-height: 360px;
+  .preview-family-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -837,47 +1044,19 @@ const supportItems = [
     justify-content: center;
   }
 
-  .preview-stack {
-    min-height: 430px;
-    padding: 6px 0 0;
+  .preview-workflow {
+    grid-template-columns: 1fr;
+    padding: 14px;
   }
 
-  .preview-stack::before,
-  .preview-stack__badge {
-    display: none;
-  }
-
-  .preview-card--primary {
-    position: relative;
-    left: auto;
-    top: auto;
-    width: 100%;
-    height: 220px;
+  .preview-workflow__month {
+    min-height: 240px;
     transform: none;
   }
 
-  .preview-card--secondary {
-    right: auto;
-    bottom: auto;
-    left: 18px;
-    width: calc(100% - 36px);
-    transform: translateY(-24px);
-  }
-
-  .preview-card--tertiary {
-    right: 18px;
-    bottom: 70px;
-    width: calc(100% - 72px);
-    height: 84px;
-    transform: none;
-  }
-
-  .preview-card--quaternary {
-    left: 18px;
-    bottom: 14px;
-    width: calc(100% - 72px);
-    height: 92px;
-    transform: none;
+  .preview-workflow__toolbar {
+    align-items: flex-start;
+    flex-direction: column;
   }
 
   .feature-card,
@@ -902,6 +1081,8 @@ const supportItems = [
   --landing-card-shadow: 0 16px 34px #{rgba($brand-secondary, 0.12)};
   --landing-chip-bg: #{rgba($brand-light, 0.52)};
   --landing-chip-text: #{$brand-primary};
+  --landing-menu-color: #{$brand-primary};
+  --landing-menu-contrast: #{$brand-light};
   --landing-solid-bg: #{$brand-primary};
   --landing-solid-text: #{$brand-light};
   --landing-solid-shadow: 0 18px 30px #{rgba($brand-primary, 0.24)};
@@ -947,6 +1128,8 @@ body.body--dark .landing-page {
   --landing-card-shadow: 0 16px 34px #{rgba($brand-dark-bg, 0.24)};
   --landing-chip-bg: #{rgba($brand-light, 0.08)};
   --landing-chip-text: #{$brand-primary};
+  --landing-menu-color: #{$brand-primary};
+  --landing-menu-contrast: #{$brand-light};
   --landing-solid-bg: #{$brand-light};
   --landing-solid-text: #{$brand-dark-bg};
   --landing-solid-shadow: 0 18px 30px #{rgba($brand-dark-bg, 0.28)};
@@ -1040,12 +1223,6 @@ body.body--dark .landing-page {
       var(--landing-panel-gradient-bottom)
     ),
     var(--landing-panel-bg);
-}
-
-.preview-card {
-  border-color: var(--landing-preview-card-border);
-  background: var(--landing-preview-card-bg);
-  box-shadow: var(--landing-preview-card-shadow);
 }
 
 .feature-card::before {
