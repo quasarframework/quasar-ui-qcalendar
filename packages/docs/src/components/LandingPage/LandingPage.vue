@@ -76,7 +76,7 @@
           <div class="preview-panel">
             <div class="preview-panel__header">
               <span class="preview-panel__kicker">{{ previewKicker }}</span>
-              <span class="preview-panel__note">Docs and app-ready</span>
+              <span class="preview-panel__note">Scheduling workflows</span>
             </div>
 
             <div class="preview-panel__body">
