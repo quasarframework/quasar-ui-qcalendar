@@ -108,6 +108,35 @@ function escapeRegExp(value: string): string {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
 
+function escapeHtmlAttribute(value: string): string {
+  return value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')
+}
+
+function createExternalLink(href: string, label: string): string {
+  if (!/^https?:\/\//.test(href)) {
+    return label
+  }
+
+  return `<a class="markdown-link" href="${escapeHtmlAttribute(href)}" target="_blank" rel="noopener noreferrer">${label}</a>`
+}
+
+function autoLinkBareUrls(content: string): string {
+  return content
+    .split(/(<a\b[^>]*>.*?<\/a>|<pre\b[^>]*>.*?<\/pre>|<code\b[^>]*>.*?<\/code>)/gis)
+    .map((part) => {
+      if (/^<(?:a|pre|code)\b/i.test(part)) {
+        return part
+      }
+
+      return part.replace(
+        /(^|[\s>])((?:https?:\/\/)[^\s<]+?)([),.;:!?]*)(?=$|\s|<)/g,
+        (_match, prefix: string, url: string, trailing: string) =>
+          `${prefix}${createExternalLink(url, url)}${trailing}`,
+      )
+    })
+    .join('')
+}
+
 function parse(body: string): string {
   let content = sanitize(body) + '\n'
 
@@ -132,18 +161,19 @@ function parse(body: string): string {
     .replace(/`(.*?)`/g, '<code class="markdown--token">$1</code>')
     .replace(
       /#([\d]+)/g,
-      '<a class="markdown-link" href="https://github.com/quasarframework/quasar-ui-qcalendar/issues/$1" target="_blank">#$1</a>',
+      createExternalLink('https://github.com/quasarframework/quasar-ui-qcalendar/issues/$1', '#$1'),
     )
     .replace(/^&gt; ([\S ]+)$/gm, '<div class="release__blockquote">$1</div>')
-    .replace(
-      /\[([\S ]*?)\]\((\S*?)\)/g,
-      '<a class="markdown-link" href="$2" target="_blank">$1</a>',
+    .replace(/\[([\S ]*?)\]\((\S*?)\)/g, (_match, label: string, href: string) =>
+      createExternalLink(href, label),
     )
-    .replace(/^ {2}[-*] ([\S .]+)$/gm, '<li class="q-pl-md">$1</li>')
-    .replace(/^[-*] ([\S .]+)$/gm, '<li>$1</li>')
+    .replace(/^ {2}[-*] ([^\n]+)$/gm, '<li class="q-pl-md">$1</li>')
+    .replace(/^[-*] ([^\n]+)$/gm, '<li>$1</li>')
     .replace(/<\/li>[\s\n\r]*<li/g, '</li><li')
     .replace(/(<li(?: class="[^"]*")?>.*?<\/li>)+/g, '<ul class="release__list">$&</ul>')
     .replace(/\n/g, '<br>')
+
+  content = autoLinkBareUrls(content)
 
   return content.includes('| -') ? parseMdTable(content) : content
 }
