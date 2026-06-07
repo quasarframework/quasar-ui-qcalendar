@@ -29,7 +29,7 @@ If applicable, add screenshots to help explain your problem.
 
 - Version [e.g. 5.0.0-beta.2]
 - Install type [e.g. app extension, UI package]
-- Quasar CLI package [e.g. @quasar/app-vite 3.0.0-beta.14]
+- Quasar CLI package [e.g. @quasar/app-vite 3.0.0]
 
 **Desktop (please complete the following information):**
 
