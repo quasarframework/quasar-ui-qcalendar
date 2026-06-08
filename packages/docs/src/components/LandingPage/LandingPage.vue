@@ -350,14 +350,8 @@ const supportItems = [
 
 <style lang="scss" scoped>
 .landing-page {
-  --landing-border: rgba(232, 246, 255, 0.14);
-  --landing-border-strong: rgba(232, 246, 255, 0.22);
-  --landing-surface: rgba(22, 35, 56, 0.74);
-  --landing-surface-strong: rgba(29, 47, 74, 0.88);
-  --landing-text-soft: rgba(232, 246, 255, 0.82);
-  --landing-shadow: 0 28px 60px rgba(11, 20, 34, 0.28);
   padding: 28px clamp(16px, 2.4vw, 34px) 42px;
-  color: #223447;
+  color: var(--landing-page-text);
 }
 
 .hero {
@@ -1066,100 +1060,65 @@ const supportItems = [
   }
 }
 
-/* codex-theme-override:start */
-.landing-page {
-  --landing-page-text: #{$brand-light-text};
-  --landing-heading: #{$brand-light-text};
-  --landing-body-text: #{rgba($brand-light-text, 0.84)};
-  --landing-note-text: #{rgba($brand-light-text, 0.66)};
-  --landing-border: #{rgba($brand-secondary, 0.16)};
-  --landing-border-strong: #{rgba($brand-secondary, 0.24)};
-  --landing-surface: #{rgba($brand-light, 0.78)};
-  --landing-surface-strong: #{rgba($brand-light, 0.92)};
-  --landing-text-soft: #{rgba($brand-light-text, 0.78)};
-  --landing-shadow: 0 28px 60px #{rgba($brand-primary, 0.14)};
-  --landing-card-shadow: 0 16px 34px #{rgba($brand-secondary, 0.12)};
-  --landing-chip-bg: #{rgba($brand-light, 0.52)};
-  --landing-chip-text: #{$brand-primary};
-  --landing-menu-color: #{$brand-primary};
-  --landing-menu-contrast: #{$brand-light};
-  --landing-solid-bg: #{$brand-primary};
-  --landing-solid-text: #{$brand-light};
-  --landing-solid-shadow: 0 18px 30px #{rgba($brand-primary, 0.24)};
-  --landing-ghost-bg: #{rgba($brand-light, 0.46)};
-  --landing-ghost-text: #{$brand-light-text};
-  --landing-pill-border: #{rgba($brand-secondary, 0.14)};
-  --landing-pill-bg: #{rgba($brand-light, 0.44)};
-  --landing-pill-text: #{$brand-primary};
-  --landing-panel-gradient-top: #{rgba($brand-light, 0.7)};
-  --landing-panel-gradient-bottom: #{rgba($brand-light, 0.22)};
-  --landing-panel-bg: #{rgba($brand-light-bg, 0.88)};
-  --landing-preview-card-border: #{rgba($brand-secondary, 0.18)};
-  --landing-preview-card-bg: #{rgba($brand-light, 0.82)};
-  --landing-preview-card-shadow: 0 22px 38px #{rgba($brand-secondary, 0.14)};
-  --landing-accent-line: #{rgba($brand-primary, 0.4)};
-  --landing-icon-bg: #{rgba($brand-primary, 0.1)};
-  --landing-icon-color: #{$brand-primary};
-  --landing-spot-accent: #{rgba($brand-primary, 0.14)};
-  --landing-resource-link-bg: #{rgba($brand-light, 0.48)};
-  --landing-resource-link-text: #{$brand-light-text};
-  --landing-resource-item-border: #{rgba($brand-secondary, 0.1)};
-  --landing-resource-item-bg: #{rgba($brand-light, 0.42)};
-  --landing-accent-text: #{$brand-primary};
-  --landing-mesh-color: #{rgba($brand-primary, 0.16)};
-  --landing-hero-glow-1: #{rgba($brand-primary, 0.18)};
-  --landing-hero-glow-2: #{rgba($brand-secondary, 0.12)};
-  --landing-hero-start: #{rgba($brand-light, 0.96)};
-  --landing-hero-end: #{rgba($brand-light-bg, 0.96)};
-  color: var(--landing-page-text);
-}
-
+/* qpress-theme-bridge:start */
+.landing-page,
 body.body--dark .landing-page {
-  --landing-page-text: #{$brand-dark-text};
-  --landing-heading: #{$brand-dark-text};
-  --landing-body-text: #{rgba($brand-dark-text, 0.8)};
-  --landing-note-text: #{rgba($brand-dark-text, 0.64)};
-  --landing-border: #{rgba($brand-light, 0.12)};
-  --landing-border-strong: #{rgba($brand-light, 0.2)};
-  --landing-surface: #{rgba($dark-pill, 0.74)};
-  --landing-surface-strong: #{rgba($dark-pill, 0.88)};
-  --landing-text-soft: #{rgba($brand-dark-text, 0.82)};
-  --landing-shadow: 0 28px 60px #{rgba($brand-dark-bg, 0.28)};
-  --landing-card-shadow: 0 16px 34px #{rgba($brand-dark-bg, 0.24)};
-  --landing-chip-bg: #{rgba($brand-light, 0.08)};
-  --landing-chip-text: #{$brand-primary};
-  --landing-menu-color: #{$brand-primary};
-  --landing-menu-contrast: #{$brand-light};
-  --landing-solid-bg: #{$brand-light};
-  --landing-solid-text: #{$brand-dark-bg};
-  --landing-solid-shadow: 0 18px 30px #{rgba($brand-dark-bg, 0.28)};
-  --landing-ghost-bg: #{rgba($brand-light, 0.08)};
-  --landing-ghost-text: #{$brand-dark-text};
-  --landing-pill-border: #{rgba($brand-light, 0.12)};
-  --landing-pill-bg: #{rgba($brand-light, 0.05)};
-  --landing-pill-text: #{$brand-primary};
-  --landing-panel-gradient-top: #{rgba($brand-light, 0.08)};
-  --landing-panel-gradient-bottom: #{rgba($brand-light, 0.02)};
-  --landing-panel-bg: #{rgba($brand-dark-bg, 0.56)};
-  --landing-preview-card-border: #{rgba($brand-light, 0.12)};
-  --landing-preview-card-bg: #{rgba($brand-dark-bg, 0.78)};
-  --landing-preview-card-shadow: 0 22px 38px #{rgba($brand-dark-bg, 0.28)};
-  --landing-accent-line: #{rgba($brand-primary, 0.55)};
-  --landing-icon-bg: #{rgba($brand-primary, 0.16)};
-  --landing-icon-color: #{$brand-primary};
-  --landing-spot-accent: #{rgba($brand-primary, 0.18)};
-  --landing-resource-link-bg: #{rgba($brand-light, 0.06)};
-  --landing-resource-link-text: #{$brand-dark-text};
-  --landing-resource-item-border: #{rgba($brand-light, 0.08)};
-  --landing-resource-item-bg: #{rgba($brand-light, 0.04)};
-  --landing-accent-text: #{$brand-primary};
-  --landing-mesh-color: #{rgba($brand-light, 0.12)};
-  --landing-hero-glow-1: #{rgba($brand-primary, 0.22)};
-  --landing-hero-glow-2: #{rgba($brand-light, 0.08)};
-  --landing-hero-start: #{rgba($brand-dark-bg, 0.96)};
-  --landing-hero-end: #{rgba($dark-pill, 0.96)};
+  --landing-page-text: var(--qpress-text-primary);
+  --landing-heading: var(--qpress-text-primary);
+  --landing-body-text: var(--qpress-text-body);
+  --landing-note-text: var(--qpress-text-muted);
+  --landing-border: var(--qpress-border-subtle);
+  --landing-border-strong: var(--qpress-border-strong);
+  --landing-surface: var(--qpress-surface-raised);
+  --landing-surface-strong: var(--qpress-surface-raised-strong);
+  --landing-text-soft: var(--qpress-text-soft);
+  --landing-shadow: var(--qpress-shadow-large);
+  --landing-card-shadow: var(--qpress-card-shadow);
+  --landing-chip-bg: var(--qpress-chip-bg);
+  --landing-chip-text: var(--qpress-chip-text);
+  --landing-solid-bg: var(--qpress-action-solid-bg);
+  --landing-solid-text: var(--qpress-action-solid-text);
+  --landing-solid-shadow: var(--qpress-action-solid-shadow);
+  --landing-ghost-bg: var(--qpress-action-ghost-bg);
+  --landing-ghost-text: var(--qpress-action-ghost-text);
+  --landing-pill-border: var(--qpress-pill-border);
+  --landing-pill-bg: var(--qpress-pill-bg);
+  --landing-pill-text: var(--qpress-pill-text);
+  --landing-panel-gradient-top: var(--qpress-panel-gradient-top);
+  --landing-panel-gradient-bottom: var(--qpress-panel-gradient-bottom);
+  --landing-panel-bg: var(--qpress-surface-panel);
+  --landing-preview-card-border: var(--qpress-tile-border);
+  --landing-preview-card-bg: var(--qpress-tile-bg);
+  --landing-preview-card-shadow: var(--qpress-card-shadow);
+  --landing-stat-border: var(--qpress-highlight-border);
+  --landing-stat-bg: var(--qpress-highlight-bg);
+  --landing-accent-line: var(--qpress-accent-line);
+  --landing-icon-bg: var(--qpress-icon-bg);
+  --landing-icon-color: var(--qpress-icon-color);
+  --landing-menu-color: var(--qpress-color-primary);
+  --landing-menu-contrast: var(--qpress-action-solid-text);
+  --landing-meta-text: var(--qpress-meta-text);
+  --landing-showcase-image-border: var(--qpress-tile-border);
+  --landing-showcase-image-bg: var(--qpress-tile-bg);
+  --landing-spot-accent: var(--qpress-spot-accent);
+  --landing-resource-link-bg: var(--qpress-resource-link-bg);
+  --landing-resource-link-text: var(--qpress-resource-link-text);
+  --landing-resource-item-border: var(--qpress-resource-item-border);
+  --landing-resource-item-bg: var(--qpress-resource-item-bg);
+  --landing-accent-text: var(--qpress-color-primary);
+  --landing-page-overlay-1: var(--qpress-hero-glow-primary);
+  --landing-page-overlay-2: var(--qpress-hero-glow-secondary);
+  --landing-page-overlay-start: var(--qpress-hero-start);
+  --landing-page-overlay-end: var(--qpress-hero-end);
+  --landing-mesh-color: var(--qpress-mesh-color);
+  --landing-hero-glow-1: var(--qpress-hero-glow-primary);
+  --landing-hero-glow-2: var(--qpress-hero-glow-secondary);
+  --landing-hero-start: var(--qpress-hero-start);
+  --landing-hero-end: var(--qpress-hero-end);
 }
+/* qpress-theme-bridge:end */
 
+/* landing-token-usage:start */
 .hero {
   background:
     radial-gradient(circle at top left, var(--landing-hero-glow-1), transparent 34%),
@@ -1253,63 +1212,5 @@ body.body--dark .landing-page {
 .resource-list__title {
   color: var(--landing-accent-text);
 }
-/* codex-theme-override:end */
-
-/* qpress-theme-bridge:start */
-.landing-page,
-body.body--dark .landing-page {
-  --landing-page-text: var(--qpress-text-primary);
-  --landing-heading: var(--qpress-text-primary);
-  --landing-body-text: var(--qpress-text-body);
-  --landing-note-text: var(--qpress-text-muted);
-  --landing-border: var(--qpress-border-subtle);
-  --landing-border-strong: var(--qpress-border-strong);
-  --landing-surface: var(--qpress-surface-raised);
-  --landing-surface-strong: var(--qpress-surface-raised-strong);
-  --landing-text-soft: var(--qpress-text-soft);
-  --landing-shadow: var(--qpress-shadow-large);
-  --landing-card-shadow: var(--qpress-card-shadow);
-  --landing-chip-bg: var(--qpress-chip-bg);
-  --landing-chip-text: var(--qpress-chip-text);
-  --landing-solid-bg: var(--qpress-action-solid-bg);
-  --landing-solid-text: var(--qpress-action-solid-text);
-  --landing-solid-shadow: var(--qpress-action-solid-shadow);
-  --landing-ghost-bg: var(--qpress-action-ghost-bg);
-  --landing-ghost-text: var(--qpress-action-ghost-text);
-  --landing-pill-border: var(--qpress-pill-border);
-  --landing-pill-bg: var(--qpress-pill-bg);
-  --landing-pill-text: var(--qpress-pill-text);
-  --landing-panel-gradient-top: var(--qpress-panel-gradient-top);
-  --landing-panel-gradient-bottom: var(--qpress-panel-gradient-bottom);
-  --landing-panel-bg: var(--qpress-surface-panel);
-  --landing-preview-card-border: var(--qpress-tile-border);
-  --landing-preview-card-bg: var(--qpress-tile-bg);
-  --landing-preview-card-shadow: var(--qpress-card-shadow);
-  --landing-stat-border: var(--qpress-highlight-border);
-  --landing-stat-bg: var(--qpress-highlight-bg);
-  --landing-accent-line: var(--qpress-accent-line);
-  --landing-icon-bg: var(--qpress-icon-bg);
-  --landing-icon-color: var(--qpress-icon-color);
-  --landing-menu-color: var(--qpress-color-primary);
-  --landing-menu-contrast: var(--qpress-action-solid-text);
-  --landing-meta-text: var(--qpress-meta-text);
-  --landing-showcase-image-border: var(--qpress-tile-border);
-  --landing-showcase-image-bg: var(--qpress-tile-bg);
-  --landing-spot-accent: var(--qpress-spot-accent);
-  --landing-resource-link-bg: var(--qpress-resource-link-bg);
-  --landing-resource-link-text: var(--qpress-resource-link-text);
-  --landing-resource-item-border: var(--qpress-resource-item-border);
-  --landing-resource-item-bg: var(--qpress-resource-item-bg);
-  --landing-accent-text: var(--qpress-color-primary);
-  --landing-page-overlay-1: var(--qpress-hero-glow-primary);
-  --landing-page-overlay-2: var(--qpress-hero-glow-secondary);
-  --landing-page-overlay-start: var(--qpress-hero-start);
-  --landing-page-overlay-end: var(--qpress-hero-end);
-  --landing-mesh-color: var(--qpress-mesh-color);
-  --landing-hero-glow-1: var(--qpress-hero-glow-primary);
-  --landing-hero-glow-2: var(--qpress-hero-glow-secondary);
-  --landing-hero-start: var(--qpress-hero-start);
-  --landing-hero-end: var(--qpress-hero-end);
-}
-/* qpress-theme-bridge:end */
+/* landing-token-usage:end */
 </style>
