@@ -660,90 +660,90 @@ packages:
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
   '@md-plugins/md-plugin-blockquote@0.1.0-beta.25':
-    resolution: {integrity: sha512-zbY2yhPyZNmcMen6aG2aFEjoX40P0Lc+rkB9MOqaX+irT9NKLVFYwB/msc1DLGyFtu0QaCM5s6613RYVo5oQiQ==}
+    resolution: {integrity: sha512-xps+w746XRjZHe1bS6RVu8OmD58RjdfxTCORcKF/UZole4iwh4g68B9JeIlcn9GQySOC9jJE0yayizALHcS0jg==}
     peerDependencies:
       markdown-it: ^14.2.0
 
   '@md-plugins/md-plugin-codeblocks@0.1.0-beta.25':
-    resolution: {integrity: sha512-he4kkWu/nqHBF4aheHbLpevE9rArTObFIWF7rl7CS4cbBmYjP12XGrJoAvJ3MjiPoQD4mUpiqI4C7AW7fIYhRg==}
+    resolution: {integrity: sha512-xlAm8WXF3vv4fiJvRQL2NfivmfHKGIUyVthTKe+4L/0jrkPi66xDDV3pr5Z/d22+f7gBDIYZhcEeoIbN05N6jg==}
     peerDependencies:
       markdown-it: ^14.2.0
 
   '@md-plugins/md-plugin-containers@0.1.0-beta.25':
-    resolution: {integrity: sha512-gEZ8w55bE/fJr9l3yRfSIkCFl3cC8QEhG0/GZdk5TR+pRnmHjlbYgjFEBkXl+3lFRDOSJhglJj/Ym9zu0eqiMQ==}
+    resolution: {integrity: sha512-cwiM3X20hXWM+9nlMvs/Nej2JUhGxwO/qYYeu5XXV039ui2q8hsn8KRa4Smiu/uuZc4Rl9CKQj167bWaPVlD3Q==}
     peerDependencies:
       markdown-it: ^14.2.0
       markdown-it-container: ^4.0.0
 
   '@md-plugins/md-plugin-frontmatter@0.1.0-beta.25':
-    resolution: {integrity: sha512-/9rjAgINDv0ZA/wd1d3tOEkucPtClSIkFyBbeJ0GdRCIT5WDG34v55q7StIiYiBV7V1StzO7o/Ph/CXyrjtnCw==}
+    resolution: {integrity: sha512-82cqZn/Bl45b2SKtvESQsB2cZMdMekgNEOXfW+1KFzuK7Q5ZuLtxlXvQba9cwWiZ7GL1O64IeMW6Qw1uzXIEow==}
     peerDependencies:
       gray-matter: ^4.0.3
       markdown-it: ^14.2.0
 
   '@md-plugins/md-plugin-headers@0.1.0-beta.25':
-    resolution: {integrity: sha512-C9Bdv+Za3EBsGHJ5/hBlMHiIMcQP02M9aUg3TOh1PYmzWXjsPNxA338ItvI+Va1bhUtpSOhlJRh1PIVctnWNOg==}
+    resolution: {integrity: sha512-X+uCqcbpAmhJHA7WGglDCpm0dsd14KkqwiM94+TdoeL7m5dSWK4cvN9W4bwiNYJ/D5QPUHAX+wsdLPrJDVPQPg==}
     peerDependencies:
       markdown-it: ^14.2.0
 
   '@md-plugins/md-plugin-image@0.1.0-beta.25':
-    resolution: {integrity: sha512-eY9ptocGA4RMK1R8tCQwOMJnt9LCk/BsG5xva4DqQ9VV2dlA6k3d/4Cxtv4MolVShZ6zzCF/aCjj8mQDr8FMIw==}
+    resolution: {integrity: sha512-lpSQrwW5J4hxUSHbXjatSvIhbcArcJkllFlNbofwwnx8gQOzWEQIKqW8vLWjCpJAjEmT53A6OZn38ZkyR9tgGg==}
     peerDependencies:
       markdown-it: ^14.2.0
 
   '@md-plugins/md-plugin-imports@0.1.0-beta.25':
-    resolution: {integrity: sha512-Z3m2DcVw9E1W+KM8Yn2WTq2Nlb9AaXYtISg22KwERH4lhBV3rQkkzW3kGgwM6gs7/iKRHWnoUeRFXNRa2M9BeQ==}
+    resolution: {integrity: sha512-HIyH8e8V+Ag6b1wd7lqihVzpMGDldaQFksJe1RBDt0wz/lL7TmKj4ubPVmvIpSwmB6RAr9cpraNKJYUM0VGz8g==}
     peerDependencies:
       markdown-it: ^14.2.0
 
   '@md-plugins/md-plugin-inlinecode@0.1.0-beta.25':
-    resolution: {integrity: sha512-XmDRMsq7cwSG2bK+DSNP4CuYXE0sW3Q4fRJ/yVTh4/+VIH3Tc+QXyTai5LUlqVOLr8lIZ2LgUBBxNKssHVT28g==}
+    resolution: {integrity: sha512-2PhBwk9PHElM0KuC+NPBQUIVzJkyL1Duxqgiggi4tYtOnH0wE/C4JjqqU33k1l+14fpKl7IpDRXNoJIVPaimTg==}
     peerDependencies:
       markdown-it: ^14.2.0
 
   '@md-plugins/md-plugin-link@0.1.0-beta.25':
-    resolution: {integrity: sha512-5wAVgZt2rwc+qbEpUzu6Nuirj1VuffjA2VXKPaxXxCtdRrn1vKTS2zAN3Zxr6Fdt7xnQPI4JUeRgtSDO3cqgAQ==}
+    resolution: {integrity: sha512-LoG1QB7cZoyBEICYfA5hEJTIdNPi4eBgvPWpBXULPaEEbHehab3P5trIrKruLvmMoP75K1E05e6C+5+iWr1/EA==}
     peerDependencies:
       markdown-it: ^14.2.0
 
   '@md-plugins/md-plugin-mermaid@0.1.0-beta.25':
-    resolution: {integrity: sha512-jMmKCoXOrngAO318RUbfwwgdIB/yirDE+mgKs6x/3JEM2WKKA1v55zgDLFcuCbCgJQUMvOhSCkiyuElx35AuWw==}
+    resolution: {integrity: sha512-cVZFcnK2XUD4jgi1POlsvwtKk/AaDAdgF3eD8C2o9AH8r/hhE295m9giIR6sB8jPapVssQeISbIPPnSgevkJaA==}
     peerDependencies:
       markdown-it: ^14.2.0
 
   '@md-plugins/md-plugin-table@0.1.0-beta.25':
-    resolution: {integrity: sha512-k1e01o4z8dAOon4EBhNYDHOS+6FL0N/N70AnAZlwdEQJT7kLULa/FOl5kW/ghZLZq/n9n2wFwm3ZqfoTrEiZzQ==}
+    resolution: {integrity: sha512-z3xZiToxYy0nqzF0DWS/cyhOaHnWerfULfTWPjOjmPKiEIj4bF21zfAn+bCr1U8yffTqiJKDl0Tm3A3j3eDhZg==}
     peerDependencies:
       markdown-it: ^14.2.0
 
   '@md-plugins/md-plugin-title@0.1.0-beta.25':
-    resolution: {integrity: sha512-keQqcNBO9mAuxi/B2un37sfPRCpYI2d4niA3rjZUyMRjw9D96lTT7nxo94RKxiw2ZiEtM8bQC66LdivFgqiPrg==}
+    resolution: {integrity: sha512-vmWkzsbHxcVmnQ8WmaoNgbPhiXEuAGSBnEDam5sdG/wXj4GprydLvc6x0UIVGtvk1NGgAkk5ZYUnC/zFLia+tw==}
     peerDependencies:
       markdown-it: ^14.2.0
 
   '@md-plugins/quasar-app-extension-q-press@0.1.0-beta.25':
-    resolution: {integrity: sha512-eVJnjHc+HAY6My/WOqOK6NQl+vLOf8zUFUVFsUt80F1FZ8fsLv8qTaEXbrBlmnEaw3P9r968p/LRWJDGiAL05Q==}
+    resolution: {integrity: sha512-UxpGSDEUnYX4NVmHJNJKeYabLbyNfwA9pR457CTc9i0babNwkn+8u/n7BubcEouXY/xpQEKxbvZ1ajVQ1emMKw==}
     engines: {node: '>=22.13', pnpm: '>=11.3.0'}
     hasBin: true
     peerDependencies:
-      '@quasar/app-vite': '>=3.0.0-beta.39'
+      '@quasar/app-vite': '>=3.0.0-beta.42'
       markdown-it: ^14.2.0
 
   '@md-plugins/shared@0.1.0-beta.25':
-    resolution: {integrity: sha512-KcOTRcl9aPKae/yRcPP6WkztCxBhiouLOSd3Gux6V6b1M5TY9I6b6RvNZaYkrL2EGRqJt3T1CBsIwu1s74ffIw==}
+    resolution: {integrity: sha512-J2qVKN4katIpjAnf0sUTFFowuLxjr22hzMnTJnVjcBctwaS9vt3YS/bcfCMLUNApMNyXRm4hzXjJPByXomrm2g==}
     peerDependencies:
       markdown-it: ^14.2.0
 
   '@md-plugins/vite-examples-plugin@0.1.0-beta.25':
-    resolution: {integrity: sha512-LIOaUzwSnG0iHpseiMxSKWXOp09SsuE+bzCwXcjpF9BCb4SvMTE1IWh1HNyOpQ6U5d8eldUXQE9Qj0hNPFF4xg==}
+    resolution: {integrity: sha512-C9D47f5THNsj6JRcRzHUYhRRmi3J5/zY4C4i33js/YmnQ73fykCt8fkCtDQqGyasLVoc5frFe3aEqcWXXAtxxQ==}
 
   '@md-plugins/vite-md-plugin@0.1.0-beta.25':
-    resolution: {integrity: sha512-AAc0+Io+HIq3yajvpTldFncMu82nsmSVLPQ9OUZ5leb9TkgdOrJq9GIfwa1iPpgmz4UDSZsmlwEXdBqcay4IYQ==}
+    resolution: {integrity: sha512-sRw5yLh+bOJ9JQE67ciH8SCZbUK3GDIGsg/5NG7WCC22gOZ9miprrTGKBJILL9v9FTvjaVEwxP3k8lqwVEs2wQ==}
     peerDependencies:
       markdown-it: ^14.2.0
 
   '@md-plugins/vite-ssg-plugin@0.1.0-beta.25':
-    resolution: {integrity: sha512-eZ3jiUg1KYHJ979Lx+xdtvfbhjvEb5i9kzLCtWVf4A4Bkhs8HwlMSgMK2GDuJvJ+rhC+6POPb06kxFFoE9T8Vg==}
+    resolution: {integrity: sha512-e/XMYmvanT53J0geiLVp50U+H6Fkuc79HSHnKEHf76YPwaZavqLDU/KW3UEaAZNpmcXUuErdIrbUfIVZH1yRSQ==}
     peerDependencies:
       '@vue/server-renderer': ^3.5.0
       vue: ^3.5.0
