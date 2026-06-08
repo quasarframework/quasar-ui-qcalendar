@@ -61,8 +61,8 @@ importers:
         specifier: 2.0.0
         version: 2.0.0
       '@timestamp-js/core':
-        specifier: 0.1.0-alpha.0
-        version: 0.1.0-alpha.0
+        specifier: 0.1.0-alpha.1
+        version: 0.1.0-alpha.1
       date-holidays:
         specifier: '=3.30.2'
         version: 3.30.2
@@ -125,8 +125,8 @@ importers:
   packages/ui:
     dependencies:
       '@timestamp-js/core':
-        specifier: 0.1.0-alpha.0
-        version: 0.1.0-alpha.0
+        specifier: 0.1.0-alpha.1
+        version: 0.1.0-alpha.1
     devDependencies:
       '@types/fs-extra':
         specifier: ^11.0.4
@@ -1621,8 +1621,9 @@ packages:
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
 
-  '@timestamp-js/core@0.1.0-alpha.0':
-    resolution: {integrity: sha512-8QU+/Hpy+6asYAgMg5UdG+E2O1Nwkwzai4fx3DfDocW/qJM0NG6S/C6mbMNtn/UwXQ16LS+Hli2zRUdtBEkldA==}
+  '@timestamp-js/core@0.1.0-alpha.1':
+    resolution: {integrity: sha512-ajTazSgR3ZnoU9Gewe3XvqugiG72z2eg6rFxzTcaA0OwhexagnJGxoueRPICx3+V9QEm/1yrHgTFruP5jBzW7w==}
+    engines: {node: '>=22.13', pnpm: '>=11.5.0'}
 
   '@tybys/wasm-util@0.10.2':
     resolution: {integrity: sha512-RoBvJ2X0wuKlWFIjrwffGw1IqZHKQqzIchKaadZZfnNpsAYp2mM0h36JtPCjNDAHGgYez/15uMBpfGwchhiMgg==}
@@ -5012,7 +5013,7 @@ snapshots:
 
   '@standard-schema/spec@1.1.0': {}
 
-  '@timestamp-js/core@0.1.0-alpha.0': {}
+  '@timestamp-js/core@0.1.0-alpha.1': {}
 
   '@tybys/wasm-util@0.10.2':
     dependencies:
