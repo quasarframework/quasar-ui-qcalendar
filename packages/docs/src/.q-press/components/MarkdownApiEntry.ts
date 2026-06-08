@@ -246,10 +246,15 @@ function getExpandable(
  * @returns An array of VNodes and strings, where code segments are wrapped in styled span elements.
  */
 function parseForInlineCode(code: string) {
-  const parts = code.split(/(`[^`]+`)/g)
+  const parts = code.split(/(`[^`]+`|\*\*[^*]+\*\*|__[^_]+__)/g)
   return parts.map((part) => {
     if (part.startsWith('`') && part.endsWith('`')) {
       return h('span', { class: 'markdown-token' }, part.slice(1, -1))
+    } else if (
+      (part.startsWith('**') && part.endsWith('**')) ||
+      (part.startsWith('__') && part.endsWith('__'))
+    ) {
+      return h('strong', part.slice(2, -2))
     } else {
       return part
     }
