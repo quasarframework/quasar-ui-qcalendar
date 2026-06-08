@@ -18,11 +18,9 @@ import type {
 
 import { version } from './version.js'
 
-import * as Timestamp from './utils/Timestamp.js'
 import * as helpers from './utils/helpers.js'
 
 // Explicitly export individual named properties
-export * from './utils/Timestamp.js'
 export * from './utils/helpers.js'
 
 type CalendarNavigationInstance = {
@@ -130,7 +128,6 @@ export default {
   QCalendarResource,
   QCalendarScheduler,
   QCalendarTask,
-  ...Timestamp,
   ...helpers,
 
   // Vue plugin

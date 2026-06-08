@@ -9,7 +9,7 @@ import {
   moveRelativeDays,
   updateFormatted,
   nextDay,
-} from '../utils/Timestamp'
+} from '@timestamp-js/core'
 
 /**
  * Type definitions for the properties

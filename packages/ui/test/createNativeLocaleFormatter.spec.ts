@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { createNativeLocaleFormatter, parseTimestamp, type Timestamp } from '../src/utils/Timestamp'
+import { createNativeLocaleFormatter, parseTimestamp, type Timestamp } from '@timestamp-js/core'
 
 describe('[TIMESTAMP] createNativeLocaleFormatter', () => {
   it('monthFormatter', async () => {

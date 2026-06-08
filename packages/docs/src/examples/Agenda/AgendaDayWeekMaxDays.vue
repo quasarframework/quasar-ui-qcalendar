@@ -34,7 +34,8 @@
 </template>
 
 <script setup lang="ts">
-import { QCalendarAgenda, today, Timestamp } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarAgenda } from '@quasar/quasar-ui-qcalendar'
+import { today, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 import { ref } from 'vue'
 import NavigationBar from '@/components/NavigationBar.vue'

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { parsed, parseDate, compareTime, type Timestamp } from '../src/utils/Timestamp'
+import { parsed, parseDate, compareTime, type Timestamp } from '@timestamp-js/core'
 
 describe('[TIMESTAMP] compareTime', () => {
   it('Compare 2 times are the same', async () => {

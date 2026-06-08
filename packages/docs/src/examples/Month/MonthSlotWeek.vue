@@ -52,15 +52,15 @@
 </template>
 
 <script setup lang="ts">
+import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar'
 import {
-  QCalendarMonth,
   daysBetween,
   isOverlappingDates,
   parsed,
   parseDate,
   today,
   Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+} from '@timestamp-js/core'
 import { indexOf } from '@quasar/quasar-ui-qcalendar/src/utils/helpers.js'
 import '@quasar/quasar-ui-qcalendar/index.css'
 

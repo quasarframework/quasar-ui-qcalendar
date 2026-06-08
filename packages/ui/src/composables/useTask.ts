@@ -14,7 +14,7 @@ import {
   validateTimestamp,
   type DisabledDays,
   type Timestamp,
-} from '../utils/Timestamp'
+} from '@timestamp-js/core'
 
 export interface Task {
   [key: string]: any

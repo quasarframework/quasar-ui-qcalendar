@@ -1,5 +1,5 @@
 import { Ref } from 'vue'
-import { Timestamp } from '../utils/Timestamp'
+import type { Timestamp } from '@timestamp-js/core'
 
 export const useCheckChangeEmits = ['change'] as const
 

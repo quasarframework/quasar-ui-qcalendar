@@ -53,7 +53,6 @@ const buildEntries = [
   'QCalendarResource',
   'QCalendarScheduler',
   'QCalendarTask',
-  'Timestamp',
 ]
 
 const builds = buildEntries.flatMap((entry) =>

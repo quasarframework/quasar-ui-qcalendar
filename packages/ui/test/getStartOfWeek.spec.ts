@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import * as timestamp from '../src/utils/Timestamp'
+import * as timestamp from '@timestamp-js/core'
 
 describe('[TIMESTAMP] getStartOfWeek', () => {
   it('getStartOfWeek 2020-01-01', async () => {

@@ -44,14 +44,8 @@
 </template>
 
 <script setup lang="ts">
-import {
-  QCalendarDay,
-  addToDate,
-  parseTimestamp,
-  getStartOfWeek,
-  today,
-  Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+import { QCalendarDay } from '@quasar/quasar-ui-qcalendar'
+import { addToDate, parseTimestamp, getStartOfWeek, today, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 import { ref, reactive, computed, onBeforeMount } from 'vue'
 import NavigationBar from '@/components/NavigationBar.vue'

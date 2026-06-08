@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { daysInMonth } from '../src/utils/Timestamp'
+import { daysInMonth } from '@timestamp-js/core'
 
 describe('[TIMESTAMP] daysInMonth', () => {
   it('Jan 2020 has 31 days', async () => {

@@ -6,7 +6,7 @@ import {
   prevDay,
   moveRelativeDays,
   type Timestamp,
-} from '../src/utils/Timestamp'
+} from '@timestamp-js/core'
 
 describe('[TIMESTAMP] relativeDays', () => {
   it('relativeDays 2020-01-01, nextDay', async () => {

@@ -1,10 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import {
-  parseTimestamp,
-  parseDate,
-  createIntervalList,
-  type Timestamp,
-} from '../src/utils/Timestamp'
+import { parseTimestamp, parseDate, createIntervalList, type Timestamp } from '@timestamp-js/core'
 
 describe('[TIMESTAMP] createIntervalList', () => {
   it('createIntervalList 60 12', async () => {

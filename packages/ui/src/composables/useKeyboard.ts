@@ -8,8 +8,8 @@ import {
   getEndOfMonth,
   getStartOfWeek,
   getEndOfWeek,
-} from '../utils/Timestamp'
-import type { Timestamp } from '../utils/Timestamp'
+} from '@timestamp-js/core'
+import type { Timestamp } from '@timestamp-js/core'
 import { type IntervalProps } from './useInterval'
 
 const { isKeyCode } = useEvents()

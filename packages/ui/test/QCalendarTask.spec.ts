@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { isTaskHeadDayDroppable } from '../src/components/QCalendarTask'
-import { parsed } from '../src/utils/Timestamp'
+import { parsed } from '@timestamp-js/core'
 
 describe('[QCALENDAR TASK] head day drag state', () => {
   it('returns a boolean based on comparison instead of mutating drag state', () => {

@@ -129,7 +129,7 @@
 import { ref } from 'vue'
 import { useQuasar } from 'quasar'
 import { useThemeBuilderStore } from '@/stores/ThemeBuilder'
-import { today } from '@quasar/quasar-ui-qcalendar'
+import { today } from '@timestamp-js/core'
 import MarkdownHeader from '@/.q-press/layouts/MarkdownHeader.vue'
 import MarkdownPageFooter from '@/.q-press/layouts/MarkdownPageFooter.vue'
 import ThemeEditor from '@/components/ThemeEditor.vue'

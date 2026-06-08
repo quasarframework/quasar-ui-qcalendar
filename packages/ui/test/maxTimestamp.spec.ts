@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import * as timestamp from '../src/utils/Timestamp'
+import * as timestamp from '@timestamp-js/core'
 
 describe('[TIMESTAMP] maxTimestamp', () => {
   it('Find the maximum timestamp (without time)', async () => {

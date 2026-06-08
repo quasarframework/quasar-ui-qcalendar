@@ -42,7 +42,8 @@
 <script setup lang="ts">
 import { ref, reactive, computed, watch, onBeforeMount } from 'vue'
 
-import { QCalendarAgenda, type Timestamp } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarAgenda } from '@quasar/quasar-ui-qcalendar'
+import { type Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 interface Props {

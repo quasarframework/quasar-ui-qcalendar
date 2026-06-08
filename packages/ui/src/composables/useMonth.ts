@@ -8,8 +8,8 @@ import {
   getEndOfMonth,
   getStartOfMonth,
   validateNumber,
-  Timestamp,
-} from '../utils/Timestamp'
+  type Timestamp,
+} from '@timestamp-js/core'
 
 import { CommonProps } from './useCommon'
 import { CellWidthProps } from './useCellWidth'

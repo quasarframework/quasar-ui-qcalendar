@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import * as timestamp from '../src/utils/Timestamp'
+import * as timestamp from '@timestamp-js/core'
 
 describe('[TIMESTAMP] getWorkWeek', () => {
   it('getWorkWeek 2021-01-01', async () => {
@@ -15,8 +15,10 @@ describe('[TIMESTAMP] getWorkWeek', () => {
   })
 
   it('getWorkWeek when year is 0', async () => {
-    const ts = timestamp.parsed('2021-01-04')
-    ts.year = 0
+    const ts = timestamp.copyTimestamp({
+      ...timestamp.parsed('2021-01-04'),
+      year: 0,
+    })
     const tests = timestamp.getWorkWeek(ts)
     const today = timestamp.parseTimestamp(timestamp.today())
     expect(tests).toStrictEqual(today.workweek)

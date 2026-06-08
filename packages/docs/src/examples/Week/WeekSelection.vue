@@ -35,13 +35,8 @@
 </template>
 
 <script setup lang="ts">
-import {
-  QCalendarDay,
-  today,
-  getDayTimeIdentifier,
-  getDateTime,
-  Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+import { QCalendarDay } from '@quasar/quasar-ui-qcalendar'
+import { today, getDayTimeIdentifier, getDateTime, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 import { ref, computed } from 'vue'
 import NavigationBar from '@/components/NavigationBar.vue'

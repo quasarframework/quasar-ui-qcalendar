@@ -10,8 +10,8 @@ import {
   nextDay,
   prevDay,
   today,
-  Timestamp,
-} from '../utils/Timestamp'
+  type Timestamp,
+} from '@timestamp-js/core'
 import { Ref, EmitFn } from 'vue'
 
 export const useMoveEmits = ['moved']
@@ -44,6 +44,10 @@ export default function useMove(
   props: UseMoveProps,
   { parsedView, parsedValue, direction, maxDays, times, emittedValue, emit }: UseMoveContext,
 ): UseMoveReturn {
+  function withDay(timestamp: Timestamp, day: number): Timestamp {
+    return copyTimestamp({ ...timestamp, day })
+  }
+
   /**
    * Moves the calendar the desired amount. This is based on the 'view'.
    * A month calendar moves by prev/next month
@@ -74,7 +78,7 @@ export default function useMove(
         case 'month':
           // For month view, set to the first (or last) day of the month,
           // move one day, update the weekday, and adjust until an allowed day is reached.
-          moved.day = limit
+          moved = withDay(moved, limit)
           moved = mover(moved)
           moved = updateWeekday(moved)
           while (!props.weekdays.includes(Number(moved.weekday))) {
@@ -100,7 +104,7 @@ export default function useMove(
         case 'month-agenda':
         case 'month-scheduler':
           // For these month views, just set to the first or last day then move one day.
-          moved.day = limit
+          moved = withDay(moved, limit)
           moved = mover(moved)
           break
 

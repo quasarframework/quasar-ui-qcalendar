@@ -91,14 +91,8 @@
 
 <script setup lang="ts">
 import { ref, computed, watch, onBeforeMount } from 'vue'
-import {
-  today,
-  isBetweenDates,
-  parsed,
-  padNumber,
-  QCalendarTask,
-  Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+import { QCalendarTask } from '@quasar/quasar-ui-qcalendar'
+import { today, isBetweenDates, parsed, padNumber, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import Done from '@carbon/icons-vue/es/checkmark--outline/16'

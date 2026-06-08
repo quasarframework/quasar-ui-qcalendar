@@ -148,14 +148,8 @@
 
 <script setup lang="ts">
 import { ref, computed, reactive, onBeforeMount } from 'vue'
-import {
-  QCalendar,
-  today,
-  padNumber,
-  isBetweenDates,
-  parsed,
-  Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+import { QCalendar } from '@quasar/quasar-ui-qcalendar'
+import { today, padNumber, isBetweenDates, parsed, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import NavigationBar from '@/components/NavigationBar.vue'

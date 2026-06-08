@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import timestamp from '../src/utils/Timestamp'
+import timestamp from '@timestamp-js/core'
 
 describe('[TIMESTAMP] getMonthFormatter', () => {
   it('getMonthFormatter (0)', async () => {

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { parsed, nextDay, type Timestamp } from '../src/utils/Timestamp'
+import { parsed, nextDay, type Timestamp } from '@timestamp-js/core'
 
 describe('[TIMESTAMP] nextDay', () => {
   it('nextDay rolls over to Jan 1, 2020 when given Dec 31, 2019', () => {

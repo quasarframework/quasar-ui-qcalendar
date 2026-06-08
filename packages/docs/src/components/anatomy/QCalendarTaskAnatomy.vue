@@ -98,14 +98,8 @@
 
 <script setup lang="ts">
 import { ref, reactive, watch, onMounted, onBeforeMount, computed } from 'vue'
-import {
-  today,
-  isBetweenDates,
-  parsed,
-  padNumber,
-  QCalendarTask,
-  type Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+import { QCalendarTask } from '@quasar/quasar-ui-qcalendar'
+import { today, isBetweenDates, parsed, padNumber, type Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 interface Type {

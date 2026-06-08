@@ -32,7 +32,8 @@
 </template>
 
 <script setup lang="ts">
-import { QCalendarMonth, getDayIdentifier, today, Timestamp } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar'
+import { getDayIdentifier, today, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref, computed } from 'vue'

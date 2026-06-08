@@ -77,12 +77,8 @@
 
 <script setup lang="ts">
 import { ref, computed, watch, onBeforeMount } from 'vue'
-import {
-  QCalendarDay,
-  getDayTimeIdentifier,
-  getDateTime,
-  copyTimestamp,
-} from '@quasar/quasar-ui-qcalendar'
+import { QCalendarDay } from '@quasar/quasar-ui-qcalendar'
+import { getDayTimeIdentifier, getDateTime, copyTimestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 interface Props {

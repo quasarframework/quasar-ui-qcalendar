@@ -30,7 +30,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import NavigationBar from '@/components/NavigationBar.vue'
-import { QCalendarMonth, today, Timestamp } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar'
+import { today, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 const calendar = ref<QCalendarMonth>(),

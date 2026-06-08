@@ -178,11 +178,6 @@
     "./QCalendarTask.rtl.css": {
       "default": "./dist/QCalendarTask.rtl.css"
     },
-    "./Timestamp": {
-      "types": "./dist/types/utils/Timestamp.d.ts",
-      "import": "./dist/Timestamp.esm.js",
-      "default": "./dist/Timestamp.esm.js"
-    },
     "./QCalendarTransitions.min.css": {
       "default": "./dist/QCalendarTransitions.min.css"
     },
@@ -228,6 +223,9 @@
     "build:types": "pnpm exec tsc --project tsconfig.json",
     "typecheck": "pnpm build:api && tsc -p tsconfig.json --noEmit --pretty false && tsc -p tsconfig.build.json --noEmit --pretty false",
     "test:types": "pnpm build && pnpm typecheck"
+  },
+  "dependencies": {
+    "@timestamp-js/core": "0.1.0-alpha.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",

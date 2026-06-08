@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { parseTimestamp, updateDayOfYear, type Timestamp } from '../src/utils/Timestamp'
+import { copyTimestamp, parseTimestamp, updateDayOfYear, type Timestamp } from '@timestamp-js/core'
 
 describe('[TIMESTAMP] updateDayOfYear', () => {
   it('updateDayOfYear Jan 1', async () => {
@@ -21,8 +21,10 @@ describe('[TIMESTAMP] updateDayOfYear', () => {
   })
 
   it('updateDayOfYear invalid (0)', async () => {
-    const ts = parseTimestamp('2020-01-01') as Timestamp
-    ts.year = 0
+    const ts = copyTimestamp({
+      ...(parseTimestamp('2020-01-01') as Timestamp),
+      year: 0,
+    })
     const tests = updateDayOfYear(ts)
     expect(tests.doy).toBe(0)
   })

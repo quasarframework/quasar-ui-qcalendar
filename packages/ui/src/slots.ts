@@ -1,7 +1,7 @@
 import type { ColumnObject } from './composables/useColumn'
 import type { Resource, ScopeForSlot } from './composables/useInterval'
 import type { Task } from './composables/useTask'
-import type { Timestamp } from './utils/Timestamp'
+import type { Timestamp } from '@timestamp-js/core'
 
 type SlotProps<T> = { scope: T }
 

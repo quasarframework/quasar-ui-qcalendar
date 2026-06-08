@@ -63,8 +63,8 @@
 </template>
 
 <script setup lang="ts">
+import { QCalendarDay } from '@quasar/quasar-ui-qcalendar'
 import {
-  QCalendarDay,
   addToDate,
   createDayList,
   createNativeLocaleFormatter,
@@ -73,7 +73,7 @@ import {
   parseTimestamp,
   today,
   Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+} from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 import { ref, reactive, computed } from 'vue'
 

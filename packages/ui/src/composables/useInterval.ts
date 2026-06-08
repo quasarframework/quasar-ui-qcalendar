@@ -15,8 +15,8 @@ import {
   // updateMinutes,
   updateRelative,
   validateNumber,
-  Timestamp,
-} from '../utils/Timestamp'
+  type Timestamp,
+} from '@timestamp-js/core'
 
 import { animVerticalScrollTo, animHorizontalScrollTo } from '../utils/scroll'
 import { type CommonProps } from './useCommon'

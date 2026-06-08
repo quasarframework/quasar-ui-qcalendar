@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import useTask from '../src/composables/useTask'
-import { parsed } from '../src/utils/Timestamp'
+import { parsed } from '@timestamp-js/core'
 
 describe('[QCALENDAR TASK] useTask', () => {
   it('computes the correct end date for a multi-month task view', () => {

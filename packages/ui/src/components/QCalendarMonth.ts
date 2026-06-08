@@ -18,7 +18,7 @@ import {
 } from 'vue'
 
 // Utility
-import { getDayIdentifier, parsed, parseTimestamp, today, type Timestamp } from '../utils/Timestamp'
+import { getDayIdentifier, parsed, parseTimestamp, today, type Timestamp } from '@timestamp-js/core'
 
 import { convertToUnit, minCharWidth } from '../utils/helpers'
 

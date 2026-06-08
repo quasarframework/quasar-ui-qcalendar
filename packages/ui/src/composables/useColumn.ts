@@ -1,5 +1,5 @@
 import { PropType } from 'vue'
-import { validateNumber } from '../utils/Timestamp'
+import { validateNumber } from '@timestamp-js/core'
 
 export interface ColumnObject {
   [key: string]: any

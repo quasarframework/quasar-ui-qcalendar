@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import * as timestamp from '../src/utils/Timestamp'
+import * as timestamp from '@timestamp-js/core'
 
 describe('[TIMESTAMP] isOverlappingDates', () => {
   it('isOverlappingDates 2002-01-01/2020-01-10 and 2019-12-29/2020-01-04', async () => {

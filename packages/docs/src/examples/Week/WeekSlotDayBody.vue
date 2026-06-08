@@ -73,8 +73,8 @@
 </template>
 
 <script setup lang="ts">
+import { QCalendarDay } from '@quasar/quasar-ui-qcalendar'
 import {
-  QCalendarDay,
   addToDate,
   parseTimestamp,
   isBetweenDates,
@@ -83,7 +83,7 @@ import {
   parseDate,
   parseTime,
   Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+} from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 import { ref, reactive, computed } from 'vue'
 import NavigationBar from '@/components/NavigationBar.vue'

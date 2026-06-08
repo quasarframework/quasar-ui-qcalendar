@@ -26,8 +26,8 @@ import {
   parsed,
   parseTimestamp,
   today,
-  Timestamp,
-} from '../utils/Timestamp'
+  type Timestamp,
+} from '@timestamp-js/core'
 
 import { convertToUnit, minCharWidth } from '../utils/helpers'
 

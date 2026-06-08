@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { parsed, daysBetween, type Timestamp } from '../src/utils/Timestamp'
+import { parsed, daysBetween, type Timestamp } from '@timestamp-js/core'
 
 describe('[TIMESTAMP] daysBetween', () => {
   it('daysBetween 2020-01-01 and 2020-12-31 (Leap Year)', async () => {

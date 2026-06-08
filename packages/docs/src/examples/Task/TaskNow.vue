@@ -97,8 +97,8 @@
 </template>
 
 <script setup lang="ts">
+import { QCalendarTask } from '@quasar/quasar-ui-qcalendar'
 import {
-  QCalendarTask,
   today,
   isBetweenDates,
   parsed,
@@ -106,7 +106,7 @@ import {
   parseTimestamp,
   addToDate,
   Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+} from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref, computed, onBeforeMount } from 'vue'

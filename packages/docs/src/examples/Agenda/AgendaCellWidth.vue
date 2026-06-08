@@ -35,7 +35,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { QCalendarAgenda, today } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarAgenda } from '@quasar/quasar-ui-qcalendar'
+import { today } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 import NavigationBar from '@/components/NavigationBar.vue'
 

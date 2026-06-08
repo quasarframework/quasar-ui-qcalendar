@@ -256,8 +256,8 @@
 </template>
 
 <script setup lang="ts">
+import { QCalendarAgenda } from '@quasar/quasar-ui-qcalendar'
 import {
-  QCalendarAgenda,
   today,
   padNumber,
   parseTimestamp,
@@ -267,7 +267,7 @@ import {
   daysBetween,
   createNativeLocaleFormatter,
   Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+} from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 import Checkbox from '@carbon/icons-vue/es/checkbox/24'
 import CheckboxChecked from '@carbon/icons-vue/es/checkbox--checked/24'

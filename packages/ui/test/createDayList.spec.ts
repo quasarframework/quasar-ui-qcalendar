@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { parseTimestamp, parseDate, createDayList, type Timestamp } from '../src/utils/Timestamp'
+import { parseTimestamp, parseDate, createDayList, type Timestamp } from '@timestamp-js/core'
 
 describe('[TIMESTAMP] createDayList', () => {
   it('createDayList', async () => {

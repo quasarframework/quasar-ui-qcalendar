@@ -21,6 +21,7 @@
   "dependencies": {
     "@carbon/icons-vue": "^10.130.0",
     "@quasar/extras": "2.0.0",
+    "@timestamp-js/core": "0.1.0-alpha.0",
     "date-holidays": "=3.30.2",
     "pinia": "^3.0.4",
     "quasar": "^2.19.3",

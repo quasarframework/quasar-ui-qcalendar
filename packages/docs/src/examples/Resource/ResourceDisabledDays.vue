@@ -55,12 +55,8 @@
 </template>
 
 <script setup lang="ts">
-import {
-  QCalendarResource,
-  addToDate,
-  parseTimestamp,
-  Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+import { QCalendarResource } from '@quasar/quasar-ui-qcalendar'
+import { addToDate, parseTimestamp, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { computed, ref } from 'vue'

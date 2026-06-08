@@ -48,7 +48,8 @@
 </template>
 
 <script setup lang="ts">
-import { QCalendarScheduler, today, Timestamp } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarScheduler } from '@quasar/quasar-ui-qcalendar'
+import { today, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref, watch } from 'vue'

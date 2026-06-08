@@ -12,7 +12,7 @@ import {
   type Timestamp,
   type TimestampClass,
   type TimestampStyle,
-} from '../utils/Timestamp'
+} from '@timestamp-js/core'
 
 // Define props interface
 export interface CommonProps {
