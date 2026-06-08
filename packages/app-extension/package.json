@@ -30,6 +30,9 @@
   },
   "type": "module",
   "main": "dist/index.js",
+  "imports": {
+    "#q-app": "@quasar/app-vite"
+  },
   "publishConfig": {
     "access": "public"
   },
@@ -41,11 +44,11 @@
     "@quasar/quasar-ui-qcalendar": "workspace:^"
   },
   "devDependencies": {
-    "@quasar/app-vite": "3.0.0-beta.40",
+    "@quasar/app-vite": "3.0.0-beta.41",
     "typescript": "~6.0.3"
   },
   "peerDependencies": {
-    "@quasar/app-vite": ">=3.0.0-beta.40"
+    "@quasar/app-vite": ">=3.0.0-beta.41"
   },
   "engines": {
     "node": ">=22.13",
