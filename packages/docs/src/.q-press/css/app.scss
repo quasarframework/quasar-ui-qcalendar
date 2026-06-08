@@ -5,6 +5,11 @@
 // Keep this import so Shiki code blocks share the selected qPress theme variables.
 @import './code-theme.scss';
 
+@function qpress-rgb($value) {
+  @return #{color.channel($value, "red", $space: rgb)}
+    #{color.channel($value, "green", $space: rgb)} #{color.channel($value, "blue", $space: rgb)};
+}
+
 .material-icons {
   font-family: 'Material Icons';
   font-weight: 400;
@@ -541,6 +546,134 @@ $additional-colors: (
   .text-#{$color-name} {
     color: var(--q-#{$color-name}) !important;
   }
+}
+
+:root,
+body.body--light {
+  --qpress-color-primary: #{$brand-primary};
+  --qpress-color-secondary: #{$brand-secondary};
+  --qpress-color-accent: #{$brand-accent};
+  --qpress-color-light: #{$brand-light};
+  --qpress-color-dark: #{$brand-dark-bg};
+  --qpress-rgb-primary: #{qpress-rgb($brand-primary)};
+  --qpress-rgb-secondary: #{qpress-rgb($brand-secondary)};
+  --qpress-rgb-accent: #{qpress-rgb($brand-accent)};
+  --qpress-rgb-light: #{qpress-rgb($brand-light)};
+  --qpress-rgb-dark: #{qpress-rgb($brand-dark-bg)};
+  --qpress-rgb-text: #{qpress-rgb($brand-light-text)};
+  --qpress-rgb-surface: #{qpress-rgb($brand-light-bg)};
+  --qpress-surface-page: #{$brand-light-bg};
+  --qpress-surface-base: #{$brand-light};
+  --qpress-surface-raised: rgb(var(--qpress-rgb-light) / 0.78);
+  --qpress-surface-raised-strong: rgb(var(--qpress-rgb-light) / 0.92);
+  --qpress-surface-panel: rgb(var(--qpress-rgb-surface) / 0.88);
+  --qpress-text-primary: #{$brand-light-text};
+  --qpress-text-body: rgb(var(--qpress-rgb-text) / 0.84);
+  --qpress-text-muted: rgb(var(--qpress-rgb-text) / 0.66);
+  --qpress-text-soft: rgb(var(--qpress-rgb-text) / 0.78);
+  --qpress-border-subtle: rgb(var(--qpress-rgb-secondary) / 0.16);
+  --qpress-border-strong: rgb(var(--qpress-rgb-secondary) / 0.24);
+  --qpress-card-shadow: 0 16px 34px rgb(var(--qpress-rgb-secondary) / 0.12);
+  --qpress-shadow-large: 0 28px 60px rgb(var(--qpress-rgb-primary) / 0.14);
+  --qpress-chip-bg: rgb(var(--qpress-rgb-light) / 0.52);
+  --qpress-chip-text: var(--qpress-color-primary);
+  --qpress-action-solid-bg: var(--qpress-color-primary);
+  --qpress-action-solid-text: var(--qpress-color-light);
+  --qpress-action-solid-shadow: 0 18px 30px rgb(var(--qpress-rgb-primary) / 0.24);
+  --qpress-action-ghost-bg: rgb(var(--qpress-rgb-light) / 0.46);
+  --qpress-action-ghost-text: var(--qpress-text-primary);
+  --qpress-pill-border: rgb(var(--qpress-rgb-secondary) / 0.14);
+  --qpress-pill-bg: rgb(var(--qpress-rgb-light) / 0.44);
+  --qpress-pill-text: var(--qpress-color-primary);
+  --qpress-panel-gradient-top: rgb(var(--qpress-rgb-light) / 0.7);
+  --qpress-panel-gradient-bottom: rgb(var(--qpress-rgb-light) / 0.22);
+  --qpress-highlight-border: rgb(var(--qpress-rgb-secondary) / 0.16);
+  --qpress-highlight-bg: rgb(var(--qpress-rgb-light) / 0.52);
+  --qpress-highlight-value: var(--qpress-color-primary);
+  --qpress-highlight-label: var(--qpress-text-primary);
+  --qpress-accent-line: rgb(var(--qpress-rgb-primary) / 0.4);
+  --qpress-icon-bg: rgb(var(--qpress-rgb-primary) / 0.1);
+  --qpress-icon-color: var(--qpress-color-primary);
+  --qpress-tile-border: rgb(var(--qpress-rgb-secondary) / 0.12);
+  --qpress-tile-bg: rgb(var(--qpress-rgb-light) / 0.42);
+  --qpress-tile-hover-border: rgb(var(--qpress-rgb-primary) / 0.28);
+  --qpress-tile-hover-bg: rgb(var(--qpress-rgb-light) / 0.56);
+  --qpress-tile-hover-shadow: 0 14px 28px rgb(var(--qpress-rgb-secondary) / 0.12);
+  --qpress-meta-text: var(--qpress-color-primary);
+  --qpress-spot-accent: rgb(var(--qpress-rgb-primary) / 0.14);
+  --qpress-resource-link-bg: rgb(var(--qpress-rgb-light) / 0.48);
+  --qpress-resource-link-text: var(--qpress-text-primary);
+  --qpress-resource-item-border: rgb(var(--qpress-rgb-secondary) / 0.1);
+  --qpress-resource-item-bg: rgb(var(--qpress-rgb-light) / 0.42);
+  --qpress-mesh-color: rgb(var(--qpress-rgb-primary) / 0.16);
+  --qpress-hero-glow-primary: rgb(var(--qpress-rgb-primary) / 0.18);
+  --qpress-hero-glow-secondary: rgb(var(--qpress-rgb-secondary) / 0.12);
+  --qpress-hero-start: rgb(var(--qpress-rgb-light) / 0.96);
+  --qpress-hero-end: rgb(var(--qpress-rgb-surface) / 0.96);
+}
+
+body.body--dark {
+  --qpress-color-primary: #{$brand-primary};
+  --qpress-color-secondary: #{$brand-secondary};
+  --qpress-color-accent: #{$brand-accent};
+  --qpress-color-light: #{$brand-light};
+  --qpress-color-dark: #{$brand-dark-bg};
+  --qpress-rgb-primary: #{qpress-rgb($brand-primary)};
+  --qpress-rgb-secondary: #{qpress-rgb($brand-secondary)};
+  --qpress-rgb-accent: #{qpress-rgb($brand-accent)};
+  --qpress-rgb-light: #{qpress-rgb($brand-light)};
+  --qpress-rgb-dark: #{qpress-rgb($brand-dark-bg)};
+  --qpress-rgb-text: #{qpress-rgb($brand-dark-text)};
+  --qpress-rgb-surface: #{qpress-rgb($brand-dark-bg)};
+  --qpress-rgb-surface-raised: #{qpress-rgb($dark-pill)};
+  --qpress-surface-page: #{$brand-dark-bg};
+  --qpress-surface-base: #{$dark-pill};
+  --qpress-surface-raised: rgb(var(--qpress-rgb-surface-raised) / 0.74);
+  --qpress-surface-raised-strong: rgb(var(--qpress-rgb-surface-raised) / 0.88);
+  --qpress-surface-panel: rgb(var(--qpress-rgb-surface) / 0.56);
+  --qpress-text-primary: #{$brand-dark-text};
+  --qpress-text-body: rgb(var(--qpress-rgb-text) / 0.8);
+  --qpress-text-muted: rgb(var(--qpress-rgb-text) / 0.64);
+  --qpress-text-soft: rgb(var(--qpress-rgb-text) / 0.82);
+  --qpress-border-subtle: rgb(var(--qpress-rgb-light) / 0.12);
+  --qpress-border-strong: rgb(var(--qpress-rgb-light) / 0.2);
+  --qpress-card-shadow: 0 16px 34px rgb(var(--qpress-rgb-dark) / 0.24);
+  --qpress-shadow-large: 0 28px 60px rgb(var(--qpress-rgb-dark) / 0.28);
+  --qpress-chip-bg: rgb(var(--qpress-rgb-light) / 0.08);
+  --qpress-chip-text: var(--qpress-color-primary);
+  --qpress-action-solid-bg: var(--qpress-color-light);
+  --qpress-action-solid-text: var(--qpress-color-dark);
+  --qpress-action-solid-shadow: 0 18px 30px rgb(var(--qpress-rgb-dark) / 0.28);
+  --qpress-action-ghost-bg: rgb(var(--qpress-rgb-light) / 0.08);
+  --qpress-action-ghost-text: var(--qpress-text-primary);
+  --qpress-pill-border: rgb(var(--qpress-rgb-light) / 0.12);
+  --qpress-pill-bg: rgb(var(--qpress-rgb-light) / 0.05);
+  --qpress-pill-text: var(--qpress-color-primary);
+  --qpress-panel-gradient-top: rgb(var(--qpress-rgb-light) / 0.08);
+  --qpress-panel-gradient-bottom: rgb(var(--qpress-rgb-light) / 0.02);
+  --qpress-highlight-border: rgb(var(--qpress-rgb-light) / 0.08);
+  --qpress-highlight-bg: rgb(var(--qpress-rgb-light) / 0.05);
+  --qpress-highlight-value: var(--qpress-color-primary);
+  --qpress-highlight-label: var(--qpress-text-primary);
+  --qpress-accent-line: rgb(var(--qpress-rgb-primary) / 0.55);
+  --qpress-icon-bg: rgb(var(--qpress-rgb-primary) / 0.16);
+  --qpress-icon-color: var(--qpress-color-primary);
+  --qpress-tile-border: rgb(var(--qpress-rgb-light) / 0.08);
+  --qpress-tile-bg: rgb(var(--qpress-rgb-light) / 0.04);
+  --qpress-tile-hover-border: rgb(var(--qpress-rgb-primary) / 0.34);
+  --qpress-tile-hover-bg: rgb(var(--qpress-rgb-light) / 0.08);
+  --qpress-tile-hover-shadow: 0 14px 28px rgb(var(--qpress-rgb-dark) / 0.2);
+  --qpress-meta-text: var(--qpress-color-primary);
+  --qpress-spot-accent: rgb(var(--qpress-rgb-primary) / 0.18);
+  --qpress-resource-link-bg: rgb(var(--qpress-rgb-light) / 0.06);
+  --qpress-resource-link-text: var(--qpress-text-primary);
+  --qpress-resource-item-border: rgb(var(--qpress-rgb-light) / 0.08);
+  --qpress-resource-item-bg: rgb(var(--qpress-rgb-light) / 0.04);
+  --qpress-mesh-color: rgb(var(--qpress-rgb-light) / 0.12);
+  --qpress-hero-glow-primary: rgb(var(--qpress-rgb-primary) / 0.22);
+  --qpress-hero-glow-secondary: rgb(var(--qpress-rgb-light) / 0.08);
+  --qpress-hero-start: rgb(var(--qpress-rgb-surface) / 0.96);
+  --qpress-hero-end: rgb(var(--qpress-rgb-surface-raised) / 0.96);
 }
 
 $text-size-list: 12, 14, 16, 20, 24, 36;
