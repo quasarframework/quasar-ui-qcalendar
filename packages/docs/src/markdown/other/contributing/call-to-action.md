@@ -16,11 +16,11 @@ In particular, all of the "Getting started" pages (one for each calendar type) n
 
 ### Testing
 
-Only the Timestamp library has some Jest testing done on it. It'd be very welcomed if someone could write up tests for the UI components.
+The UI package has a growing test suite, and additional coverage for component behavior, slots, and interaction patterns is very welcome.
 
 ### JSON API
 
-Each calendar component, as well as the Timestamp library, has an associated JSON file. Except for the Timestamp one, they are all missing functionality that needs to be added or updated and reviewed.
+Each calendar component has an associated JSON API file. Several are still missing functionality that needs to be added or updated and reviewed.
 
 ### Examples
 

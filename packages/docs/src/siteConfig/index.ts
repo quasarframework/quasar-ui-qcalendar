@@ -200,6 +200,7 @@ const gettingStartedMenu: SiteMenuItem = {
     { name: 'Anatomy of a Calendar', path: '/getting-started/anatomy-of-a-calendar' },
     { name: 'Transitions', path: '/getting-started/transitions' },
     { name: 'Themes', path: '/getting-started/themes' },
+    { name: 'Theme Builder', path: '/theme-builder' },
   ],
 }
 
@@ -217,7 +218,6 @@ const developingMenu = {
     { name: 'QCalendarResource', path: '/developing/qcalendar-resource' },
     { name: 'QCalendarScheduler', path: '/developing/qcalendar-scheduler' },
     { name: 'QCalendarTask', path: '/developing/qcalendar-task' },
-    { name: 'Timestamp', path: '/developing/timestamp' },
     { name: 'FAQ', path: '/developing/faq' },
   ],
 }

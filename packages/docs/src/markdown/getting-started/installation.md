@@ -15,7 +15,6 @@ The components are:
 5. QCalendarResource
 6. QCalendarScheduler
 7. QCalendarTask
-8. Timestamp (dedicated code for creating calendars)
 
 These are also many ways to add the calendar components to your project. You can install as a Quasar CLI app-extension. You might want to write your own boot file (for targeting one or more calendar components). You might want to use pre-compiled sources in dist or directly from the src folder (src folder access means your project needs to transpile QCalendar sources). Or, you may want to use a UMD variant.
 
@@ -201,9 +200,6 @@ Add the following tag(s) after the Quasar ones:
 <body>
   <!-- at end of body, AFTER Quasar script(s): -->
   <script src="https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar/dist/QCalendarMonth.umd.min.js"></script>
-
-  <!-- If you need Timestamp functions: -->
-  <script src="https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar/dist/Timestamp.umd.min.js"></script>
 </body>
 ```
 
@@ -230,9 +226,6 @@ If you need the RTL variant of the CSS, then go for the following (instead of th
 <body>
   <!-- at end of body: -->
   <script src="https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar/dist/QCalendarMonth.umd.min.js"></script>
-
-  <!-- If you need Timestamp functions: -->
-  <script src="https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar/dist/Timestamp.umd.min.js"></script>
 </body>
 ```
 

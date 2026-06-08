@@ -29,6 +29,22 @@ This release prepares QCalendar for the next Quasar CLI Vite generation. The cal
 
 If your application is still using `@quasar/app-webpack`, migrate the application to Quasar CLI Vite before installing the QCalendar v5 app extension. If you are using QCalendar directly in a non-Quasar Vue/Vite app, install the UI package instead of the Quasar app extension.
 
+## Timestamp Utilities
+
+QCalendar v5 no longer publishes the old QCalendar-owned Timestamp utility as a public import. Date and time helpers have moved to the standalone, framework-agnostic `@timestamp-js/core` package.
+
+If your application imported Timestamp helpers from QCalendar, add `@timestamp-js/core` as a direct dependency and update those imports:
+
+```bash
+pnpm add @timestamp-js/core
+```
+
+```ts
+import { parseTimestamp, today } from '@timestamp-js/core'
+```
+
+This is a breaking change for applications that used QCalendar's previous Timestamp export surface directly. QCalendar components still provide timestamp-shaped objects through their documented slots and events where applicable.
+
 ## Installing the beta
 
 While QCalendar v5 is in beta, install packages from the `beta` dist tag:
@@ -184,7 +200,7 @@ Below is a list of all existing slots. Some are new, some have changed and some 
 | head-days-events      | **new**                    | { scope: { timestamps: Array, ref: ref() } }                                                                                                                 | QCalendarDay, QCalendarAgenda                                     |
 | head-row-events       | **new**                    |                                                                                                                                                              | QCalendarMonth                                                    |
 | head-workweek         | workweek-header            | { scope: { start: Object, end: Object, miniMode: Boolean } }                                                                                                 | QCalendarMonth                                                    |
-| head-day              |                            | { scope: { weekday: Number, Timestamp: Object, days: Array, index: Number, miniMode: Boolean } }                                                             | QCalendarMonth                                                    |
+| head-day              |                            | { scope: { weekday: Number, timestamp: Object, days: Array, index: Number, miniMode: Boolean } }                                                             | QCalendarMonth                                                    |
 | head-day-event        | **new**                    | { scope: { timestamp: Object, activeDate: Boolean, droppable: Boolean} }                                                                                     | QCalendarMonth                                                    |
 | head-column           |                            | { scope: { column: Number, index: Number, days: Array } }                                                                                                    | QCalendarAgenda                                                   |
 | head-column-label     |                            | { scope: { column: Object } }                                                                                                                                | QCalendarAgenda                                                   |
@@ -219,7 +235,7 @@ Below is a list of all existing slots. Some are new, some have changed and some 
 
 ### onChange
 
-The emitted `change` event has changed. The passed object still contains `start` and `end`. However, these are now date strings, instead of Timestamp objects. Additionally, a new `days` array has been added that does contain Timestamp objects.
+The emitted `change` event has changed. The passed object still contains `start` and `end`. However, these are now date strings instead of timestamp objects. Additionally, a new `days` array has been added that does contain timestamp objects.
 
 #### Mouse Events
 

@@ -29,7 +29,6 @@ QCalendar is actually an accumulation of several other dedicated components and 
 1. QCalendarResource
 1. QCalendarScheduler
 1. QCalendarTask
-1. Timestamp (dedicated code for creating calendars)
 
 ## Features
 
@@ -44,7 +43,7 @@ QCalendar is actually an accumulation of several other dedicated components and 
 9. Optional drag and drop support (including mobile)
 10. Automatic localization / internationalization
 11. Responsive flex grid layout
-12. No external dependencies (momentjs, jQuery, etc) other than Vue
+12. No external dependencies (momentjs, jQuery, etc) other than Vue and the shared timestamp primitives used by the package
 13. User events support (date, day, interval, time, resource, etc)
 14. Define any day as beginning of week
 15. Show only certain days of the week (good for work week days)
