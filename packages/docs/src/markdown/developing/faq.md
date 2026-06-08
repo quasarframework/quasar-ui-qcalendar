@@ -30,6 +30,16 @@ Use `@quasar/quasar-ui-qcalendar/index.css` when registering the full plugin, or
 
 :::
 
+:::details Q. Can I use QCalendar without Quasar?
+
+Yes, but use the UI package directly instead of the Quasar App Extension.
+
+QCalendar components are Vue components, so they can be used in Vue/Vite applications that are not Quasar CLI projects. Install `@quasar/quasar-ui-qcalendar`, import the component and its stylesheet, and register the component in your app as you would with other Vue libraries.
+
+The Quasar App Extension is only the convenience layer for Quasar CLI projects. It wires up boot files, CSS, and Quasar-specific integration for you, but it is not required when you want direct component usage.
+
+:::
+
 :::details Q. Can I inspect the component API from the Quasar CLI?
 
 Yes. After the App Extension is installed, run `quasar describe` for the component you want to inspect:

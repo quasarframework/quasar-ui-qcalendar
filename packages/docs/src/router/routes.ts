@@ -5,6 +5,7 @@ import { slugify } from '@/.q-press/components/markdown-utils'
 const routes = [
   {
     path: '/theme-builder',
+    alias: '/getting-started/theme-builder',
     component: () => import('@/layouts/ThemeBuilder.vue'),
   },
   {

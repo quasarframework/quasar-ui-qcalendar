@@ -72,6 +72,16 @@ export default {
       }
     }
 
+    function resolveDrawerPath(parentPath: string, childPath?: string): string {
+      if (childPath === void 0) {
+        return parentPath
+      }
+
+      return childPath.startsWith('/')
+        ? childPath
+        : (parentPath + '/' + childPath).replace(/\/{2,}/g, '/')
+    }
+
     function getDrawerMenu(menu: MenuItem, path: string, level: number): VNode {
       if (menu.children !== void 0) {
         return h(
@@ -98,11 +108,7 @@ export default {
             menu.children?.map(
               (item: MenuItem) =>
                 item.name &&
-                getDrawerMenu(
-                  item,
-                  (path + (item.path !== void 0 ? '/' + item.path : '')).replace(/\/{2,}/g, '/'),
-                  level / 2 + 0.1,
-                ),
+                getDrawerMenu(item, resolveDrawerPath(path, item.path), level / 2 + 0.1),
             ),
         )
       }
