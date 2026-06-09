@@ -31,8 +31,8 @@
     "@vitest/coverage-istanbul": "^4.1.8",
     "@vue/server-renderer": "^3.5.35",
     "npm-check-updates": "^22.2.3",
-    "oxfmt": "^0.53.0",
-    "oxlint": "^1.68.0",
+    "oxfmt": "^0.54.0",
+    "oxlint": "^1.69.0",
     "typescript": "~6.0.3",
     "unbuild": "^3.6.1",
     "vitest": "^4.1.8"

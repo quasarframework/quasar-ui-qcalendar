@@ -34,7 +34,7 @@
     "@md-plugins/vite-examples-plugin": "0.1.0-beta.26",
     "@md-plugins/vite-md-plugin": "0.1.0-beta.26",
     "@md-plugins/vite-ssg-plugin": "0.1.0-beta.26",
-    "@quasar/app-vite": "3.0.0-beta.42",
+    "@quasar/app-vite": "3.0.0-beta.43",
     "@quasar/quasar-ui-qcalendar": "workspace:*",
     "@types/markdown-it": "^14.1.2",
     "@types/node": "^25.9.2",
@@ -42,7 +42,7 @@
     "markdown-it": "^14.2.0",
     "typescript": "~6.0.3",
     "vite-plugin-checker": "^0.14.1",
-    "vue-tsc": "^3.3.3"
+    "vue-tsc": "^3.3.4"
   },
   "engines": {
     "node": ">=22.13",
