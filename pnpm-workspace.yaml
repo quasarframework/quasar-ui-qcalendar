@@ -146,5 +146,6 @@ minimumReleaseAgeExclude:
   - oxlint@1.68.0
   - '@timestamp-js/core@0.1.0-alpha.0'
   - '@timestamp-js/core@0.1.0-alpha.1'
+  - '@timestamp-js/core@0.1.0-alpha.2'
 
 trustLockfile: true
