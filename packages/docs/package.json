@@ -16,7 +16,9 @@
     "build": "pnpm run build:ssg",
     "postinstall": "quasar prepare",
     "build:spa": "quasar build",
-    "build:ssg": "quasar prepare && quasar build && qpress-ssg"
+    "build:ssg": "quasar prepare && quasar build && qpress-ssg",
+    "build:ssg:renderer": "quasar prepare && quasar build -m ssr",
+    "prerender:ssg": "qpress-ssg"
   },
   "dependencies": {
     "@carbon/icons-vue": "^10.130.0",
@@ -25,16 +27,19 @@
     "date-holidays": "=3.30.2",
     "pinia": "^3.0.4",
     "quasar": "^2.19.3",
-    "shiki": "^4.2.0",
+    "shiki": "^4.1.0",
     "vue": "^3.5.35",
-    "vue-router": "^5.1.0"
+    "vue-router": "^5.1.0",
+    "@md-plugins/vite-ssg-plugin": "^0.1.0-beta.28",
+    "@vue/server-renderer": "^3.5.0",
+    "mermaid": "^11.15.0"
   },
   "devDependencies": {
-    "@md-plugins/quasar-app-extension-q-press": "0.1.0-beta.27",
-    "@md-plugins/vite-examples-plugin": "0.1.0-beta.27",
-    "@md-plugins/vite-md-plugin": "0.1.0-beta.27",
-    "@md-plugins/vite-ssg-plugin": "0.1.0-beta.27",
-    "@quasar/app-vite": "3.0.0-beta.43",
+    "@md-plugins/quasar-app-extension-q-press": "0.1.0-beta.28",
+    "@md-plugins/vite-examples-plugin": "0.1.0-beta.28",
+    "@md-plugins/vite-md-plugin": "0.1.0-beta.28",
+    "@md-plugins/vite-ssg-plugin": "0.1.0-beta.28",
+    "@quasar/app-vite": "3.0.0-beta.44",
     "@quasar/quasar-ui-qcalendar": "workspace:*",
     "@types/markdown-it": "^14.1.2",
     "@types/node": "^25.9.2",
