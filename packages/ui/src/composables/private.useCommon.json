@@ -142,7 +142,7 @@
       "type": "Array",
       "tsType": "DisabledDays",
       "category": "model",
-      "desc": "An array of dates in the form `YYYY-MM-DD` that will be disabled. Entries can be date strings, date ranges, or objects with `date` or `from`/`to` plus optional `color`, `textColor`, `class`, `style`, and `label` metadata",
+      "desc": "An array of dates in the form `YYYY-MM-DD` that will be disabled. Entries can be date strings, date ranges, or objects with `date` or `from`/`to` plus optional `color`, `textColor`, `class`, `style`, and `label` metadata. Use `@timestamp-js/core` range helpers such as `createTimestampRange()`, `mergeRanges()`, and `findRangeGaps()` when deriving these ranges from booking, resource, or availability data.",
       "examples": [
         "['2019-04-01', '2019-04-02', '2019-04-03', '2019-04-04']",
         "[['2019-04-01', '2019-04-04']]",
@@ -421,7 +421,7 @@
       "type": ["Array", "Set"],
       "tsType": "StringArray",
       "category": "model",
-      "desc": "An array of string dates in the form `YYYY-MM-DD` that will be selected. Interval-based calendars use `YYYY-MM-DD HH:mm`",
+      "desc": "An array of string dates in the form `YYYY-MM-DD` that will be selected. Interval-based calendars use `YYYY-MM-DD HH:mm`. Use `getDate()` or `getDateTime()` from `@timestamp-js/core` when converting Timestamp objects back into selection strings.",
       "default": "[]",
       "applicable": [
         "day",
@@ -444,7 +444,7 @@
       "type": "Array",
       "tsType": "StringArray",
       "category": "behavior",
-      "desc": "An array of two dates in format `YYYY-MM-DD` for selection purposes. Interval-based calendars use `YYYY-MM-DD HH:mm`",
+      "desc": "An array of two dates in format `YYYY-MM-DD` for selection purposes. Interval-based calendars use `YYYY-MM-DD HH:mm`. Use `createTimestampRange()` from `@timestamp-js/core` when validating or normalizing the selected range before passing it back to QCalendar.",
       "default": "[]",
       "applicable": [
         "day",

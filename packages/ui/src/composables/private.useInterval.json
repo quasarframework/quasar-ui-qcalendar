@@ -344,7 +344,7 @@
     "time-clicks-clamped": {
       "type": "Boolean",
       "category": "behavior",
-      "desc": "Causes the returning timestamp time to be clamped to the interval it is in",
+      "desc": "Causes the returning timestamp time to be clamped to the interval it is in. For custom snapping rules, use `roundToInterval()`, `floorToInterval()`, or `ceilToInterval()` from `@timestamp-js/core` in the click or drag handler.",
       "applicable": ["All interval-based"]
     },
     "date-header": {
