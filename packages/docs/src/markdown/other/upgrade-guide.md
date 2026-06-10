@@ -4,15 +4,15 @@ desc: Upgrade from v4 to v5
 keys: Help, upgrade, migration
 ---
 
-Use this guide to migrate from QCalendar v4.x to QCalendar v5.0.0-beta.7.
+Use this guide to migrate from QCalendar v4.x to QCalendar v5.0.0-beta.8.
 
 > QCalendar v5 remains a Vue 3 calendar package with Quasar 2 integration. The QCalendar app extension is Vite-only and targets Quasar CLI with `@quasar/app-vite` v3, but direct UI package imports can still be used in Vue/Vite projects without installing the app extension.
 
 > The information below is by no means an exhaustive list of changes and new functionality. If you see something that has been missed, please PR or let us know.
 
-## QCalendar v5.0.0-beta.7
+## QCalendar v5.0.0-beta.8
 
-Welcome to the QCalendar v5.0.0-beta.7 release.
+Welcome to the QCalendar v5.0.0-beta.8 release.
 
 This release prepares QCalendar for the next Quasar CLI Vite generation. The calendar component API is expected to remain compatible with QCalendar v4, but the supported app-extension runtime and project tooling have changed.
 
