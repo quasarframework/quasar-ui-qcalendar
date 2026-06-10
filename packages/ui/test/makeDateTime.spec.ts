@@ -5,10 +5,13 @@ describe('[TIMESTAMP] makeDateTime', () => {
   it('makeDateTime', async () => {
     const ts = timestamp.parsed('2019-12-31 23:59')
     const tests = timestamp.makeDateTime(ts)
-    expect(tests).toStrictEqual(new Date('2019-12-31T23:59:00.000Z'))
+    expect(tests).toStrictEqual(new Date(2019, 11, 31, 23, 59))
     expect(tests.getFullYear()).toBe(2019)
     expect(tests.getMonth()).toBe(11)
     expect(tests.getDate()).toBe(31)
+
+    const utc = timestamp.makeDateTimeUTC(ts)
+    expect(utc).toStrictEqual(new Date('2019-12-31T23:59:00.000Z'))
   })
 
   it('makeDateTime and parseDate', async () => {

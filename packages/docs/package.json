@@ -24,7 +24,7 @@
     "@carbon/icons-vue": "^10.130.0",
     "@md-plugins/vite-ssg-plugin": "^0.1.0-beta.28",
     "@quasar/extras": "2.0.0",
-    "@timestamp-js/core": "0.1.0-alpha.2",
+    "@timestamp-js/core": "0.1.0-beta.0",
     "@vue/server-renderer": "^3.5.0",
     "date-holidays": "=3.30.2",
     "mermaid": "^11.15.0",

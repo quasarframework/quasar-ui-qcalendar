@@ -226,7 +226,7 @@
     "prepack": "pnpm build"
   },
   "dependencies": {
-    "@timestamp-js/core": "0.1.0-alpha.2"
+    "@timestamp-js/core": "0.1.0-beta.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",

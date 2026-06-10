@@ -144,9 +144,7 @@ minimumReleaseAgeExclude:
   - '@oxlint/binding-win32-x64-msvc@1.68.0'
   - oxfmt@0.53.0
   - oxlint@1.68.0
-  - '@timestamp-js/core@0.1.0-alpha.0'
-  - '@timestamp-js/core@0.1.0-alpha.1'
-  - '@timestamp-js/core@0.1.0-alpha.2'
   - semver@7.8.4
+  - '@timestamp-js/core@0.1.0-beta.0'
 
 trustLockfile: true
