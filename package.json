@@ -27,9 +27,9 @@
     "verify:build": "pnpm build && pnpm typecheck"
   },
   "devDependencies": {
-    "@types/node": "^25.9.2",
+    "@types/node": "^25.9.3",
     "@vitest/coverage-istanbul": "^4.1.8",
-    "@vue/server-renderer": "^3.5.35",
+    "@vue/server-renderer": "^3.5.38",
     "npm-check-updates": "^22.2.3",
     "oxfmt": "^0.54.0",
     "oxlint": "^1.69.0",
@@ -41,6 +41,6 @@
     "node": ">=22.13",
     "pnpm": ">=11.5.0"
   },
-  "packageManager": "pnpm@11.5.2",
+  "packageManager": "pnpm@11.5.3",
   "access": "private"
 }
