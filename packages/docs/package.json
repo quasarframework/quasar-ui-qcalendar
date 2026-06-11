@@ -22,7 +22,6 @@
   },
   "dependencies": {
     "@carbon/icons-vue": "^10.130.0",
-    "@md-plugins/vite-ssg-plugin": "0.1.0-rc.0",
     "@quasar/extras": "2.0.0",
     "@timestamp-js/core": "0.1.0-beta.0",
     "@vue/server-renderer": "^3.5.38",
