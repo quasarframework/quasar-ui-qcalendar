@@ -29,7 +29,7 @@ v5.0.0-beta.8
 
 ---
 
-[Live Demo](https://qcalendar.netlify.app/) - **live docs, demo and examples**
+[Live Demo](https://qcalendar.netlify.app/) - **live Q-Press docs, demos, and examples**
 
 ---
 
@@ -81,8 +81,8 @@ This is a pnpm workspace mono-repo. You cannot use npm for building.
 
 - [/ui](../ui) - standalone npm package (go here for more information)
 - [/app-extension](../app-extension) - Quasar app extension
-- [/docs](../docs) - sources for docs, demo and examples project
-- [live demo](https://qcalendar.netlify.app/) - **live docs, demo and examples**
+- [/docs](../docs) - Q-Press documentation site with docs, demos, and examples
+- [live demo](https://qcalendar.netlify.app/) - **live Q-Press docs, demos, and examples**
 
 # Demo Workflow
 
