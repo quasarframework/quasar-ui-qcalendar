@@ -106,6 +106,17 @@ import MarkdownCardTitle from './MarkdownCardTitle.vue'
 
 import siteConfig from '../../siteConfig'
 
+type MarkdownExampleList = {
+  code?: Record<string, () => Promise<{ default: unknown }>>
+  source?: Record<string, () => Promise<string>>
+  [key: string]: unknown
+}
+
+type MarkdownExamples = {
+  name: string
+  list?: Promise<MarkdownExampleList> | MarkdownExampleList
+}
+
 const props = defineProps({
   title: {
     type: String,
@@ -121,7 +132,7 @@ const props = defineProps({
   noGithub: Boolean, // no GitHub link
 })
 
-const examples = inject('_markdown_examples_')
+const examples = inject<MarkdownExamples | null>('_markdown_examples_', null)
 
 // const dark = useDark()
 const codepenRef = ref(null)
@@ -187,8 +198,9 @@ function parseComponent(comp) {
 }
 
 function openGitHub() {
+  const examplesConfig = getExamplesConfig()
   const root = siteConfig.githubSourceRootSrc ?? siteConfig.githubEditRootSrc.replace('/edit/', '/tree/')
-  openURL(`${root}/examples/${examples.name}/${props.file}.vue`)
+  openURL(`${root}/examples/${examplesConfig.name}/${props.file}.vue`)
 }
 
 function openCodepen() {
@@ -200,12 +212,13 @@ function toggleExpand() {
 }
 
 async function loadExample() {
-  const list = await examples.list
-  const devFile = `/src/examples/${examples.name}/${props.file}.vue`
+  const examplesConfig = getExamplesConfig()
+  const list = await getExampleList(examplesConfig)
+  const devFile = `/src/examples/${examplesConfig.name}/${props.file}.vue`
 
   if (import.meta.env.QUASAR_DEV) {
-    const loadComponent = list.code[devFile]
-    const loadSource = list.source[devFile]
+    const loadComponent = list.code?.[devFile]
+    const loadSource = list.source?.[devFile]
 
     if (loadComponent === void 0 || loadSource === void 0) {
       throw new Error(`Markdown example not found: ${devFile}`)
@@ -229,7 +242,8 @@ if (import.meta.env.QUASAR_CLIENT) {
     void loadExample()
 
     if (import.meta.hot) {
-      const examplePath = `/src/examples/${examples.name}/${props.file}.vue`
+      const examplesConfig = getExamplesConfig()
+      const examplePath = `/src/examples/${examplesConfig.name}/${props.file}.vue`
       const onAfterUpdate = (payload) => {
         const shouldReload = payload.updates.some(
           (update) => update.path === examplePath || update.acceptedPath === examplePath,
@@ -250,6 +264,26 @@ if (import.meta.env.QUASAR_CLIENT) {
   onBeforeUnmount(() => {
     removeHmrListener()
   })
+}
+
+function getExamplesConfig(): MarkdownExamples {
+  if (examples === null) {
+    throw new Error(
+      `Markdown example "${props.file}" is missing examples frontmatter on the current page.`,
+    )
+  }
+
+  return examples
+}
+
+async function getExampleList(examplesConfig: MarkdownExamples): Promise<MarkdownExampleList> {
+  if (examplesConfig.list === undefined) {
+    throw new Error(
+      `Markdown example group "${examplesConfig.name}" was not loaded for "${props.file}".`,
+    )
+  }
+
+  return examplesConfig.list
 }
 </script>
 

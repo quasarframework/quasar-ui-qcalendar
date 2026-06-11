@@ -46,11 +46,17 @@
     line-height: inherit;
     text-align: left;
   }
+
+  &:has(.twoslash-query-persisted) > code {
+    padding-bottom: calc(16px + 2.2em);
+  }
 }
 
 .c-line {
-  position: relative;
+  position: absolute;
   display: block;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 0;
   &:before {
@@ -170,6 +176,10 @@
   .twoslash-query-persisted .twoslash-popup-container {
     z-index: 9;
     transform: translateY(1.5em);
+  }
+
+  .twoslash-query-persisted {
+    display: inline-block;
   }
 
   .twoslash-hover:hover .twoslash-popup-container,
@@ -390,6 +400,57 @@
 @media (prefers-reduced-motion: reduce) {
   .twoslash * {
     transition: none !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .markdown-code {
+    &.twoslash {
+      overflow-x: auto;
+      overflow-y: auto;
+      max-width: 100%;
+    }
+  }
+
+  .twoslash {
+    .twoslash-hover > .twoslash-popup-container,
+    .twoslash-error-hover > .twoslash-popup-container {
+      position: fixed;
+      z-index: 6000;
+      top: calc(env(safe-area-inset-top) + 88px);
+      left: 16px;
+      right: 16px;
+      min-width: 0;
+      width: auto;
+      max-width: none;
+      max-height: calc(100vh - 120px);
+      white-space: normal;
+      overflow-wrap: anywhere;
+      overflow-y: auto;
+      transform: none;
+    }
+
+    .twoslash-popup-error,
+    .twoslash-popup-docs,
+    .twoslash-popup-docs-tags {
+      max-width: 100%;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .twoslash-popup-code {
+      box-sizing: border-box;
+      display: block;
+      max-width: 100%;
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    .twoslash-completion-cursor .twoslash-completion-list,
+    .twoslash-completion-list {
+      width: min(240px, calc(100vw - 48px));
+      max-width: calc(100vw - 48px);
+    }
   }
 }
 

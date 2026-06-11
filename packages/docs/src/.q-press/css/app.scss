@@ -6,8 +6,8 @@
 @import './code-theme.scss';
 
 @function qpress-rgb($value) {
-  @return #{color.channel($value, "red", $space: rgb)}
-    #{color.channel($value, "green", $space: rgb)} #{color.channel($value, "blue", $space: rgb)};
+  @return #{color.channel($value, 'red', $space: rgb)}
+    #{color.channel($value, 'green', $space: rgb)} #{color.channel($value, 'blue', $space: rgb)};
 }
 
 .material-icons {

@@ -237,13 +237,13 @@ function getExpandable(
 }
 
 /**
- * Parses a string for inline code segments and converts them into VNodes with special styling.
+ * Parses a small, safe subset of inline Markdown used in API descriptions.
  *
- * This function splits the input string by backticks and creates VNodes for code segments.
- * Text outside of backticks is left as plain strings.
+ * This renderer intentionally returns VNodes instead of HTML strings so API descriptions
+ * can support common inline formatting without allowing arbitrary HTML injection.
  *
- * @param code - The input string containing potential inline code segments delimited by backticks.
- * @returns An array of VNodes and strings, where code segments are wrapped in styled span elements.
+ * @param code - The input string containing inline code or strong text markers.
+ * @returns An array of VNodes and strings for safe rendering in API description fields.
  */
 function parseForInlineCode(code: string) {
   const parts = code.split(/(`[^`]+`|\*\*[^*]+\*\*|__[^_]+__)/g)
