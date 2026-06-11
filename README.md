@@ -102,13 +102,13 @@ $ cd ../docs
 $ quasar dev
 ```
 
-# Support
+## Support
 
 If QCalendar is useful in your workflow and you want to support ongoing maintenance:
 
 - GitHub Sponsors: https://github.com/sponsors/hawkeye64
 - PayPal: https://paypal.me/hawkeye64
 
-# License
+## License
 
 MIT (c) Jeff Galbraith <jeff@quasar.dev>
