@@ -44,11 +44,11 @@
     "@quasar/quasar-ui-qcalendar": "workspace:^"
   },
   "devDependencies": {
-    "@quasar/app-vite": "3.0.0-rc.1",
+    "@quasar/app-vite": "3.0.0-rc.2",
     "typescript": "~6.0.3"
   },
   "peerDependencies": {
-    "@quasar/app-vite": ">=3.0.0-rc.1"
+    "@quasar/app-vite": ">=3.0.0-rc.2"
   },
   "engines": {
     "node": ">=22.13",
