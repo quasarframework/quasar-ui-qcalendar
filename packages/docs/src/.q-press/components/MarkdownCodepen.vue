@@ -30,6 +30,11 @@ type CodepenGlobalPackage = {
   globalName: string
 }
 
+type CodepenModulePackage = {
+  packageName: string
+  importUrl: string
+}
+
 const defaultCssResources = [
   'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons',
   `https://cdn.jsdelivr.net/npm/quasar@${Quasar.version}/dist/quasar.min.css`,
@@ -166,6 +171,26 @@ function getGlobalImportBindingNames(content: string) {
   ]
 }
 
+function getModulePackageImportLines(content: string) {
+  return (siteConfig.codepen?.modulePackages ?? [])
+    .flatMap(({ packageName, importUrl }: CodepenModulePackage) => {
+      const escapedPackageName = packageName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+      const importRe = new RegExp(
+        `^\\s*import\\s+([\\s\\S]*?\\s+from\\s+)['"]${escapedPackageName}['"];?\\s*$`,
+        'gm',
+      )
+      const imports: string[] = []
+      let match: RegExpExecArray | null
+
+      while ((match = importRe.exec(content)) !== null) {
+        imports.push(`import ${match[1]}'${importUrl}'`)
+      }
+
+      return imports
+    })
+    .filter((line) => line.length > 0)
+}
+
 function stripImports(content: string) {
   return content
     .replace(/^\s*import\s+type\s+[\s\S]*?\s+from\s+['"][^'"]+['"];?\s*$/gm, '')
@@ -251,6 +276,7 @@ function getAppSetup() {
 
 function createSetupScript(script: string) {
   const { content } = getScriptBlock(script, true)
+  const moduleImports = getModulePackageImportLines(content)
   const globalImports = getGlobalImportLines(content)
   const setupContent = stripCompilerMacros(stripImports(content))
   const returnNames = [
@@ -264,6 +290,7 @@ function createSetupScript(script: string) {
     .join('\n\n')
 
   return [
+    ...moduleImports,
     ...globalImports,
     `const app = Vue.createApp({
   setup () {
@@ -277,6 +304,7 @@ ${setupBody}
 
 function createOptionsScript(script: string) {
   const { content } = getScriptBlock(script, false)
+  const moduleImports = getModulePackageImportLines(content)
   const globalImports = getGlobalImportLines(content)
   const match = /export\s+default\s+{([\s\S]*)}/.exec(content)
   const beforeDefault = match === null ? stripImports(content) : stripImports(content.slice(0, match.index))
@@ -287,6 +315,7 @@ function createOptionsScript(script: string) {
   }
 
   return [
+    ...moduleImports,
     ...globalImports,
     beforeDefault,
     `const app = Vue.createApp({${component}})`,

@@ -78,6 +78,11 @@ export interface CodepenGlobalPackage {
   globalName: string
 }
 
+export interface CodepenModulePackage {
+  packageName: string
+  importUrl: string
+}
+
 export interface CodepenConfig {
   cssExternal?: string[]
   jsExternal?: string[]
@@ -86,6 +91,7 @@ export interface CodepenConfig {
   jsSetup?: string
   head?: string
   globalPackages?: CodepenGlobalPackage[]
+  modulePackages?: CodepenModulePackage[]
 }
 
 export interface SiteConfig {
@@ -636,6 +642,12 @@ const config = {
       {
         packageName: '@quasar/quasar-ui-qcalendar',
         globalName: '(globalThis as any).index',
+      },
+    ],
+    modulePackages: [
+      {
+        packageName: '@timestamp-js/core',
+        importUrl: 'https://cdn.jsdelivr.net/npm/@timestamp-js/core@0.1.0-rc.0/dist/index.js',
       },
     ],
     jsSetup: [
