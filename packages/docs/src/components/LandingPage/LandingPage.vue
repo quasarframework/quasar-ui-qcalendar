@@ -97,50 +97,25 @@
                 </article>
               </div>
 
-              <div class="preview-workflow" aria-label="Calendar sidebar mini workflow preview">
-                <aside class="preview-workflow__sidebar">
+              <div class="preview-workflow" aria-label="QCalendar mini-mode month preview">
+                <section class="preview-workflow__mini-card">
                   <div class="preview-workflow__button">
                     <q-icon name="add" />
                     <span>Create</span>
                   </div>
-                  <div class="preview-workflow__mini">
-                    <div class="preview-workflow__mini-title">June 2026</div>
-                    <div class="preview-workflow__weekdays">
-                      <span v-for="day in miniWeekdays" :key="day">{{ day }}</span>
-                    </div>
-                    <div class="preview-workflow__days">
-                      <span v-for="day in miniDays" :key="day" :class="miniDayClass(day)">
-                        {{ day }}
-                      </span>
-                    </div>
-                  </div>
-                  <div class="preview-workflow__filters">
-                    <span v-for="filter in calendarFilters" :key="filter.label">
-                      <i :style="{ backgroundColor: filter.color }" />
-                      {{ filter.label }}
-                    </span>
-                  </div>
-                </aside>
 
-                <section class="preview-workflow__month">
-                  <div class="preview-workflow__toolbar">
-                    <span>Today</span>
-                    <strong>June 2026</strong>
-                    <span>Comfortable</span>
-                  </div>
-                  <div class="preview-workflow__month-grid">
-                    <span v-for="day in monthDays" :key="day" class="preview-workflow__month-day">
-                      {{ day }}
-                    </span>
-                    <span
-                      v-for="event in workflowEvents"
-                      :key="event.title"
-                      class="preview-workflow__event"
-                      :class="event.className"
-                    >
-                      {{ event.title }}
-                    </span>
-                  </div>
+                  <q-calendar-month
+                    :model-value="previewDate"
+                    class="preview-workflow__calendar"
+                    mini-mode
+                    :dark="$q.dark.isActive"
+                    no-active-date
+                    short-weekday-label
+                    :min-weekday-label="1"
+                    :now="previewDate"
+                    :selected-dates="previewSelectedDates"
+                    :weekdays="previewWeekdays"
+                  />
                 </section>
               </div>
             </div>
@@ -231,8 +206,12 @@
 <script setup lang="ts">
 import { fabGithub } from '@quasar/extras/fontawesome-v7'
 import { biArrowRightCircle } from '@quasar/extras/bootstrap-icons'
+import { useQuasar } from 'quasar'
+import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar'
 import siteConfig from '../../siteConfig'
+import '@quasar/quasar-ui-qcalendar/index.css'
 
+const $q = useQuasar()
 const productName = 'QCalendar'
 const logoSrc = '/qcalendar-logo.png'
 const logoAlt = 'QCalendar Logo'
@@ -270,34 +249,9 @@ const previewFamilies = [
   },
 ]
 
-const miniWeekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
-const miniDays = ['31', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13']
-const monthDays = Array.from({ length: 35 }, (_, index) => String(index + 1))
-const calendarFilters = [
-  { label: 'Personal', color: '#7986cb' },
-  { label: 'Family', color: '#66bb6a' },
-  { label: 'Work', color: '#29b6f6' },
-]
-
-const workflowEvents = [
-  {
-    title: 'Pay mortgage',
-    className: 'preview-workflow__event--mortgage',
-  },
-  {
-    title: 'Team check-in',
-    className: 'preview-workflow__event--team',
-  },
-  {
-    title: 'Long weekend',
-    className: 'preview-workflow__event--weekend',
-  },
-]
-
-const miniDayClass = (day: string) => ({
-  'preview-workflow__mini-day--muted': day === '31',
-  'preview-workflow__mini-day--selected': day === '4',
-})
+const previewDate = '2026-06-09'
+const previewSelectedDates = ['2026-06-09', '2026-06-18', '2026-06-25']
+const previewWeekdays = [0, 1, 2, 3, 4, 5, 6]
 
 const featureCards = [
   {
@@ -668,33 +622,27 @@ const supportItems = [
 .preview-workflow {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(150px, 0.45fr) minmax(0, 1fr);
-  gap: 18px;
+  place-items: center;
   min-height: 260px;
-  padding: 18px;
+  padding: 14px;
   overflow: hidden;
   border: 1px solid var(--landing-preview-card-border);
   border-radius: 28px;
-  background:
-    radial-gradient(circle at 92% 100%, rgba(121, 203, 255, 0.18), transparent 32%),
-    linear-gradient(135deg, rgba(246, 252, 255, 0.12), rgba(246, 252, 255, 0.03));
-  box-shadow: inset 0 1px 0 rgba(246, 252, 255, 0.08);
+  background: var(--landing-preview-shell-bg);
+  box-shadow: var(--landing-preview-shell-shadow);
 }
 
-.preview-workflow__sidebar,
-.preview-workflow__month {
+.preview-workflow__mini-card {
   position: relative;
-  border: 1px solid var(--landing-preview-card-border);
-  background: rgba(11, 20, 34, 0.2);
-  box-shadow: 0 18px 38px rgba(11, 20, 34, 0.18);
-}
-
-.preview-workflow__sidebar {
   display: grid;
-  align-content: start;
   gap: 14px;
-  padding: 16px;
-  border-radius: 22px;
+  width: min(100%, 360px);
+  padding: 18px;
+  border: 1px solid var(--landing-preview-card-border);
+  border-radius: 24px;
+  background: var(--landing-preview-demo-bg);
+  box-shadow: var(--landing-preview-card-shadow);
+  transform: rotate(1.2deg);
 }
 
 .preview-workflow__button {
@@ -706,168 +654,54 @@ const supportItems = [
   min-height: 38px;
   border-radius: 999px;
   background: var(--landing-menu-color);
-  color: var(--landing-menu-contrast);
+  color: #fff;
   font-size: 0.86rem;
   font-weight: 800;
 }
 
-.preview-workflow__mini {
-  padding: 12px;
-  border-radius: 16px;
-  background: rgba(246, 252, 255, 0.86);
-  color: #27374a;
-}
+.preview-workflow__calendar {
+  --calendar-border: 1px solid rgba(64, 86, 108, 0.22);
+  --calendar-color: #243447;
+  --calendar-background: #f8fbff;
+  --calendar-current-color: #17324d;
+  --calendar-current-background: #f8fbff;
+  --calendar-border-current: #ffcb2f 2px solid;
+  --calendar-disabled-date-color: #9aa8b7;
+  --calendar-disabled-date-background: #f8fbff;
+  --calendar-outside-color: #8b98a6;
+  --calendar-outside-background: rgba(64, 86, 108, 0.08);
+  --calendar-mini-selected-color: #0f2742;
+  --calendar-mini-selected-background: transparent;
+  --calendar-mini-selected-label-color: #0867b7;
+  --calendar-mini-selected-label-background: #d9efff;
+  --calendar-selected-background: #7dd3fc;
 
-.preview-workflow__mini-title {
-  margin-bottom: 10px;
-  text-align: center;
-  font-size: 0.82rem;
-  font-weight: 800;
-}
-
-.preview-workflow__weekdays,
-.preview-workflow__days {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  text-align: center;
-}
-
-.preview-workflow__weekdays {
-  gap: 2px;
-  margin-bottom: 4px;
-  color: #0b1422;
-  font-size: 0.7rem;
-  font-weight: 900;
-}
-
-.preview-workflow__days {
-  gap: 3px;
-  font-size: 0.68rem;
-}
-
-.preview-workflow__days span {
-  display: grid;
-  min-height: 18px;
-  place-items: center;
-  border-radius: 999px;
-}
-
-.preview-workflow__mini-day--muted {
-  opacity: 0.38;
-}
-
-.preview-workflow__mini-day--selected {
-  outline: 2px solid var(--landing-menu-color);
-  color: var(--landing-menu-color);
-  font-weight: 900;
-}
-
-.preview-workflow__filters {
-  display: grid;
-  gap: 8px;
-}
-
-.preview-workflow__filters span {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--landing-text-soft);
-  font-size: 0.78rem;
-  font-weight: 700;
-}
-
-.preview-workflow__filters i {
-  width: 10px;
-  height: 10px;
-  border-radius: 3px;
-}
-
-.preview-workflow__month {
-  display: grid;
-  grid-template-rows: auto 1fr;
   min-width: 0;
-  overflow: hidden;
-  border-radius: 24px;
-  transform: rotate(1.2deg) translateY(8px);
+  width: 100%;
+  max-width: 320px;
+  justify-self: center;
+  padding: 12px;
+  border-radius: 18px;
+  background: var(--landing-surface);
+  box-shadow: var(--landing-card-shadow);
 }
 
-.preview-workflow__toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 12px 14px;
-  color: var(--landing-heading);
-}
-
-.preview-workflow__toolbar span {
-  padding: 5px 10px;
-  border: 1px solid var(--landing-preview-card-border);
-  border-radius: 999px;
-  color: var(--landing-text-soft);
-  font-size: 0.7rem;
-  font-weight: 800;
-}
-
-.preview-workflow__toolbar strong {
-  font-family: 'Clash Display', 'Montserrat', 'Segoe UI', sans-serif;
-  font-size: clamp(1rem, 2vw, 1.28rem);
-}
-
-.preview-workflow__month-grid {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(7, minmax(30px, 1fr));
-  grid-auto-rows: minmax(34px, 1fr);
-  padding: 0 12px 14px;
-}
-
-.preview-workflow__month-day {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-end;
-  padding: 5px;
-  border-top: 1px solid rgba(246, 252, 255, 0.12);
-  border-left: 1px solid rgba(246, 252, 255, 0.08);
-  color: var(--landing-text-soft);
-  font-size: 0.62rem;
-}
-
-.preview-workflow__event {
-  position: absolute;
-  z-index: 2;
-  overflow: hidden;
-  max-width: 140px;
-  padding: 3px 8px;
-  border-radius: 999px;
-  color: #0b1422;
-  font-size: 0.68rem;
-  font-weight: 800;
-  line-height: 1.1;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  box-shadow: 0 8px 18px rgba(11, 20, 34, 0.16);
-}
-
-.preview-workflow__event--mortgage {
-  top: 54px;
-  left: 18%;
-  background: #7986cb;
-  color: #fff;
-}
-
-.preview-workflow__event--team {
-  top: 148px;
-  left: 2%;
-  background: #90caf9;
-}
-
-.preview-workflow__event--weekend {
-  right: -6%;
-  bottom: 54px;
-  width: 46%;
-  max-width: none;
-  background: #ffcc80;
+.preview-workflow__calendar.q-calendar--dark {
+  --calendar-border-dark: 1px solid rgba(221, 237, 250, 0.16);
+  --calendar-color-dark: #eef7ff;
+  --calendar-background-dark: #17283d;
+  --calendar-current-color-dark: #fff4a3;
+  --calendar-current-background-dark: #17283d;
+  --calendar-border-current-dark: #ffef76 2px solid;
+  --calendar-disabled-date-color-dark: #8aa0b4;
+  --calendar-disabled-date-background-dark: #17283d;
+  --calendar-outside-color-dark: #8094a8;
+  --calendar-outside-background-dark: rgba(9, 18, 32, 0.3);
+  --calendar-mini-selected-color-dark: #d9efff;
+  --calendar-mini-selected-background-dark: transparent;
+  --calendar-mini-selected-label-color-dark: #10263c;
+  --calendar-mini-selected-label-background-dark: #7dd3fc;
+  --calendar-selected-background-dark: #7dd3fc;
 }
 
 .feature-section,
@@ -1040,18 +874,14 @@ const supportItems = [
   }
 
   .preview-workflow {
-    grid-template-columns: 1fr;
     padding: 14px;
+    isolation: isolate;
   }
 
-  .preview-workflow__month {
-    min-height: 240px;
+  .preview-workflow__mini-card {
+    width: min(100%, 300px);
+    padding: 14px;
     transform: none;
-  }
-
-  .preview-workflow__toolbar {
-    align-items: flex-start;
-    flex-direction: column;
   }
 
   .feature-card,
@@ -1116,6 +946,27 @@ body.body--dark .landing-page {
   --landing-hero-glow-2: var(--qpress-hero-glow-secondary);
   --landing-hero-start: var(--qpress-hero-start);
   --landing-hero-end: var(--qpress-hero-end);
+}
+
+.landing-page {
+  --landing-preview-shell-bg:
+    radial-gradient(circle at 92% 100%, rgba(66, 123, 168, 0.24), transparent 34%),
+    linear-gradient(135deg, rgba(220, 233, 242, 0.96), rgba(196, 212, 224, 0.92));
+  --landing-preview-shell-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.72), 0 18px 44px rgba(54, 73, 91, 0.16);
+  --landing-preview-demo-bg:
+    radial-gradient(circle at 84% 16%, rgba(255, 255, 255, 0.74), transparent 34%),
+    rgba(230, 239, 246, 0.94);
+}
+
+body.body--dark .landing-page {
+  --landing-preview-shell-bg:
+    radial-gradient(circle at 92% 100%, rgba(121, 203, 255, 0.18), transparent 32%),
+    linear-gradient(135deg, rgba(246, 252, 255, 0.12), rgba(246, 252, 255, 0.03));
+  --landing-preview-shell-shadow: inset 0 1px 0 rgba(246, 252, 255, 0.08);
+  --landing-preview-demo-bg:
+    radial-gradient(circle at 84% 16%, rgba(246, 252, 255, 0.1), transparent 30%),
+    var(--landing-preview-card-bg);
 }
 /* qpress-theme-bridge:end */
 
