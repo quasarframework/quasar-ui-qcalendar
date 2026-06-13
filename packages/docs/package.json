@@ -31,10 +31,10 @@
     "vue-router": "^5.1.0"
   },
   "devDependencies": {
-    "@md-plugins/quasar-app-extension-q-press": "0.1.0-rc.2",
-    "@md-plugins/vite-examples-plugin": "0.1.0-rc.2",
-    "@md-plugins/vite-md-plugin": "0.1.0-rc.2",
-    "@md-plugins/vite-ssg-plugin": "0.1.0-rc.2",
+    "@md-plugins/quasar-app-extension-q-press": "0.1.0-rc.3",
+    "@md-plugins/vite-examples-plugin": "0.1.0-rc.3",
+    "@md-plugins/vite-md-plugin": "0.1.0-rc.3",
+    "@md-plugins/vite-ssg-plugin": "0.1.0-rc.3",
     "@quasar/app-vite": "3.0.0-rc.2",
     "@quasar/quasar-ui-qcalendar": "workspace:*",
     "@types/markdown-it": "^14.1.2",
@@ -46,7 +46,7 @@
     "shiki": "^4.2.0",
     "typescript": "~6.0.3",
     "vite-plugin-checker": "^0.14.1",
-    "vue-tsc": "^3.3.4"
+    "vue-tsc": "^3.3.5"
   },
   "engines": {
     "node": ">=22.13",
