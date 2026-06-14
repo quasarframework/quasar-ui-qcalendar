@@ -641,7 +641,7 @@ const config = {
     globalPackages: [
       {
         packageName: '@quasar/quasar-ui-qcalendar',
-        globalName: '(globalThis as any).index',
+        globalName: '(globalThis as any).QCalendarPlugin',
       },
     ],
     modulePackages: [
@@ -651,7 +651,7 @@ const config = {
       },
     ],
     jsSetup: [
-      'const QCalendarPlugin = (globalThis as any).index',
+      'const QCalendarPlugin = (globalThis as any).QCalendarPlugin',
       'app.use(QCalendarPlugin)',
       `app.component('NavigationBar', {
   emits: ['today', 'prev', 'next'],

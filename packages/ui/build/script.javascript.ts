@@ -55,6 +55,10 @@ const buildEntries = [
   'QCalendarTask',
 ]
 
+const umdGlobalNames: Record<string, string> = {
+  index: 'QCalendarPlugin',
+}
+
 const builds = buildEntries.flatMap((entry) =>
   ['esm', 'umd'].map((format) => ({
     rolldown: {
@@ -66,7 +70,7 @@ const builds = buildEntries.flatMap((entry) =>
       output: {
         file: pathResolve(`../dist/${entry}.${format}.js`),
         format,
-        name: format === 'umd' ? entry : undefined,
+        name: format === 'umd' ? (umdGlobalNames[entry] ?? entry) : undefined,
         exports: 'auto' as const,
         banner: buildConf.banner,
         globals: { vue: 'Vue' },
