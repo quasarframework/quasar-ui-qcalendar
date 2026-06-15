@@ -205,7 +205,6 @@ interface DropScope extends Scope {
 }
 
 function onDragStart(e: DragEvent, item: Item) {
-  console.info('onDragStart called')
   if (e.dataTransfer) {
     e.dataTransfer.dropEffect = 'copy'
     e.dataTransfer.effectAllowed = 'move'
@@ -214,7 +213,6 @@ function onDragStart(e: DragEvent, item: Item) {
 }
 
 function onDragEnter(e: DragEvent, type: string, { scope }: DropScope) {
-  console.info('onDragEnter', type, scope)
   if (type === 'day' || type === 'head-day') {
     e.preventDefault()
     return true
@@ -222,7 +220,6 @@ function onDragEnter(e: DragEvent, type: string, { scope }: DropScope) {
 }
 
 function onDragOver(e: DragEvent, type: string, { scope }: DropScope) {
-  console.info('onDragOver', type, scope)
   if (type === 'day' || type === 'head-day') {
     e.preventDefault()
     return true
@@ -230,14 +227,12 @@ function onDragOver(e: DragEvent, type: string, { scope }: DropScope) {
 }
 
 function onDragLeave(e: DragEvent, type: string, { scope }: DropScope) {
-  console.info('onDragLeave', type, scope)
   if (type === 'day' || type === 'head-day') {
     return false
   }
 }
 
 function onDrop(e: DragEvent, type: string, { scope }: DropScope) {
-  console.info('onDrop', type, scope)
   if (type === 'day' || type === 'head-day') {
     if (!e.dataTransfer) {
       return

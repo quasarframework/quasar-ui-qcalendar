@@ -1,5 +1,5 @@
 /* global document window */
-import { onBeforeUnmount, watch, Ref } from 'vue'
+import { nextTick, onBeforeUnmount, watch, Ref } from 'vue'
 import useEvents from './useEvents'
 import {
   addToDate,
@@ -14,6 +14,111 @@ import { type IntervalProps } from './useInterval'
 
 const { isKeyCode } = useEvents()
 
+interface NavigationInstance {
+  rootRef: Ref<HTMLElement | null>
+  keyboardActive?: Ref<boolean>
+  onKeyDown: (_event: KeyboardEvent) => void
+  onKeyUp: (_event: KeyboardEvent) => void
+}
+
+const navigationInstances = new Set<NavigationInstance>()
+let activeNavigationInstance: NavigationInstance | null = null
+let documentListenersAttached = false
+
+function getDocument(): Document | undefined {
+  return typeof document !== 'undefined' ? document : undefined
+}
+
+function getWindow(): Window | undefined {
+  return typeof window !== 'undefined' ? window : undefined
+}
+
+function setActiveNavigationInstance(instance: NavigationInstance | null): void {
+  if (activeNavigationInstance === instance) return
+
+  if (activeNavigationInstance?.keyboardActive) {
+    activeNavigationInstance.keyboardActive.value = false
+  }
+
+  activeNavigationInstance = instance
+
+  if (activeNavigationInstance?.keyboardActive) {
+    activeNavigationInstance.keyboardActive.value = true
+  }
+}
+
+function findNavigationInstance(target: EventTarget | null): NavigationInstance | null {
+  if (typeof Node !== 'undefined' && target instanceof Node) {
+    for (const instance of navigationInstances) {
+      if (instance.rootRef.value?.contains(target)) {
+        return instance
+      }
+    }
+  }
+
+  return null
+}
+
+function refreshActiveNavigationInstance(): void {
+  const documentRef = getDocument()
+  setActiveNavigationInstance(findNavigationInstance(documentRef?.activeElement ?? null))
+}
+
+function onGlobalFocusIn(event: FocusEvent): void {
+  setActiveNavigationInstance(findNavigationInstance(event.target))
+}
+
+function onGlobalKeyDown(event: KeyboardEvent): void {
+  refreshActiveNavigationInstance()
+  activeNavigationInstance?.onKeyDown(event)
+}
+
+function onGlobalKeyUp(event: KeyboardEvent): void {
+  refreshActiveNavigationInstance()
+  activeNavigationInstance?.onKeyUp(event)
+}
+
+function attachDocumentListeners(): void {
+  const documentRef = getDocument()
+  if (documentRef === undefined || documentListenersAttached === true) return
+
+  documentRef.addEventListener('focusin', onGlobalFocusIn)
+  documentRef.addEventListener('keydown', onGlobalKeyDown)
+  documentRef.addEventListener('keyup', onGlobalKeyUp)
+  documentListenersAttached = true
+}
+
+function detachDocumentListeners(): void {
+  const documentRef = getDocument()
+  if (documentRef === undefined || documentListenersAttached !== true) return
+
+  documentRef.removeEventListener('focusin', onGlobalFocusIn)
+  documentRef.removeEventListener('keydown', onGlobalKeyDown)
+  documentRef.removeEventListener('keyup', onGlobalKeyUp)
+  documentListenersAttached = false
+}
+
+function registerNavigationInstance(instance: NavigationInstance): void {
+  navigationInstances.add(instance)
+  attachDocumentListeners()
+  refreshActiveNavigationInstance()
+}
+
+function unregisterNavigationInstance(instance: NavigationInstance): void {
+  navigationInstances.delete(instance)
+
+  if (activeNavigationInstance === instance) {
+    setActiveNavigationInstance(null)
+    refreshActiveNavigationInstance()
+  } else if (instance.keyboardActive) {
+    instance.keyboardActive.value = false
+  }
+
+  if (navigationInstances.size === 0) {
+    detachDocumentListeners()
+  }
+}
+
 export const useNavigationProps = {
   useNavigation: Boolean,
 }
@@ -26,6 +131,7 @@ export interface NavigationProps {
 
 interface NavigationContext {
   rootRef: Ref<HTMLElement | null>
+  keyboardActive?: Ref<boolean>
   focusRef: Ref<string>
   focusValue: Ref<Timestamp>
   datesRef: Ref<Record<string, HTMLElement>>
@@ -51,6 +157,7 @@ export default function useNavigation(
   props: NavigationProps & IntervalProps,
   {
     rootRef,
+    keyboardActive,
     focusRef,
     focusValue,
     datesRef,
@@ -61,8 +168,18 @@ export default function useNavigation(
   }: NavigationContext,
 ): UseNavigationReturn {
   let initialized = false
+  let focusRetryHandle: number | null = null
+  let focusRetryToken = 0
+
+  const navigationInstance: NavigationInstance = {
+    rootRef,
+    keyboardActive,
+    onKeyDown,
+    onKeyUp,
+  }
 
   onBeforeUnmount(() => {
+    cancelFocusRetry()
     endNavigation()
   })
 
@@ -83,26 +200,25 @@ export default function useNavigation(
 
   function startNavigation(): void {
     if (initialized) return
-    if (document) {
+    if (getDocument() !== undefined) {
       initialized = true
-      document.addEventListener('keyup', onKeyUp)
-      document.addEventListener('keydown', onKeyDown)
+      registerNavigationInstance(navigationInstance)
     }
   }
 
   function endNavigation(): void {
-    if (document) {
-      document.removeEventListener('keyup', onKeyUp)
-      document.removeEventListener('keydown', onKeyDown)
+    if (getDocument() !== undefined) {
+      unregisterNavigationInstance(navigationInstance)
       initialized = false
     }
   }
 
   function canNavigate(e?: Event): boolean {
     if (!e) return false
-    if (document) {
-      const el = document.activeElement as HTMLElement
-      if (el !== document.body && rootRef.value?.contains(el)) {
+    const documentRef = getDocument()
+    if (documentRef) {
+      const el = documentRef.activeElement as HTMLElement
+      if (el !== documentRef.body && rootRef.value?.contains(el)) {
         return true
       }
     }
@@ -110,18 +226,53 @@ export default function useNavigation(
   }
 
   function tryFocus(): void {
+    cancelFocusRetry()
+
     let count = 0
-    const interval = window.setInterval(() => {
+    const token = ++focusRetryToken
+    const focus = (): void => {
+      focusRetryHandle = null
+
+      if (token !== focusRetryToken) return
+
+      count += 1
       const focusElement = datesRef.value[focusRef.value]
       if (focusElement) {
         focusElement.focus()
-        if (++count === 50 || document.activeElement === focusElement) {
-          window.clearInterval(interval)
+        if (count === 50 || getDocument()?.activeElement === focusElement) {
+          cancelFocusRetry()
+          return
         }
-      } else {
-        window.clearInterval(interval)
       }
-    }, 250)
+
+      if (count < 50) {
+        scheduleFocusRetry(focus)
+      }
+    }
+
+    void nextTick(focus)
+  }
+
+  function scheduleFocusRetry(callback: () => void): void {
+    const windowRef = getWindow()
+    focusRetryHandle =
+      windowRef?.requestAnimationFrame !== undefined
+        ? windowRef.requestAnimationFrame(callback)
+        : Number(setTimeout(callback, 16))
+  }
+
+  function cancelFocusRetry(): void {
+    focusRetryToken += 1
+
+    if (focusRetryHandle === null) return
+
+    const windowRef = getWindow()
+    if (windowRef?.cancelAnimationFrame !== undefined) {
+      windowRef.cancelAnimationFrame(focusRetryHandle)
+    } else {
+      clearTimeout(focusRetryHandle)
+    }
+    focusRetryHandle = null
   }
 
   function onKeyDown(e: KeyboardEvent): void {

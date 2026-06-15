@@ -126,6 +126,8 @@ This example uses the `use-navigation` property along with the `focusable` and `
 
 If the calendar has focus you can use the <kbd>&larr;</kbd> and <kbd>&rarr;</kbd> keys on your keyboard for navigation.
 
+If a page contains more than one calendar with `use-navigation`, keyboard events follow the calendar that contains focus. The active calendar root receives the `q-calendar--keyboard-active` class so you can style or debug the focused calendar.
+
 On the intervals, you can use <kbd>Tab</kbd> and <kbd>Shift</kbd>+<kbd>Tab</kbd> for navigation.
 
 <MarkdownExample title="Navigation" file="WeekNavigation"/>

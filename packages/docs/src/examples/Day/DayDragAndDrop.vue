@@ -179,7 +179,6 @@ interface Scope {
 }
 
 function onDragStart(e: DragEvent, item: DragItem) {
-  console.info('onDragStart called')
   if (e.dataTransfer) {
     e.dataTransfer.dropEffect = 'copy'
     e.dataTransfer.effectAllowed = 'move'
@@ -188,19 +187,16 @@ function onDragStart(e: DragEvent, item: DragItem) {
 }
 
 function onDragEnter(e: DragEvent, type: string, { scope }: Scope) {
-  console.info('onDragEnter', type, scope)
   e.preventDefault()
   return true
 }
 
 function onDragOver(e: DragEvent, type: string, { scope }: Scope) {
-  console.info('onDragOver', type, scope)
   e.preventDefault()
   return true
 }
 
 function onDragLeave(_e: DragEvent, type: string, { scope }: Scope) {
-  console.info('onDragLeave', type, scope)
   return false
 }
 
@@ -213,7 +209,6 @@ interface DropScope extends Scope {
 }
 
 function onDrop(e: DropEvent, type: string, { scope }: DropScope): boolean {
-  console.info('onDrop', type, scope)
   const itemID = parseInt(e.dataTransfer.getData('ID'), 10)
   const event: Event = { ...defaultEvent }
   event.id = events.value.length + 1

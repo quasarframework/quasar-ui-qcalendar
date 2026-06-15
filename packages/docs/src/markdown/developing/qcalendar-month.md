@@ -118,7 +118,9 @@ You can use the `min-weeks` property to keep a consistent height for your calend
 
 For keyboard navigation use the `use-navigation` property along with the `focusable` and `focus-type` properties.
 
-When the calendar has focus use the <kbd>Home</kbd>, <kbd>End</kbd>, <kbd>&larr;</kbd>, <kbd>&rarr;</kbd>, <kbd>&uarr;</kbd>, <kbd>&darr;</kbd>, <kbd>PgUp</kbd>, <kbd>PgDn</kbd>, <kbd>Home</kbd> and , <kbd>End</kbd>keys.
+When the calendar has focus use the <kbd>Home</kbd>, <kbd>End</kbd>, <kbd>&larr;</kbd>, <kbd>&rarr;</kbd>, <kbd>&uarr;</kbd>, <kbd>&darr;</kbd>, <kbd>PgUp</kbd>, and <kbd>PgDn</kbd> keys.
+
+If a page contains more than one calendar with `use-navigation`, keyboard events follow the calendar that contains focus. The active calendar root receives the `q-calendar--keyboard-active` class so you can style or debug the focused calendar.
 
 You can also use <kbd>Tab</kbd> and <kbd>Shift</kbd>+<kbd>Tab</kbd> for regular browser navigation.
 

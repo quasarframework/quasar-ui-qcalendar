@@ -270,9 +270,7 @@ The emitted `change` event has changed. The passed object still contains `start`
   This image will explain the QCalendarDay alignment:
   ![image](https://user-images.githubusercontent.com/10262924/103442538-3eb46a00-4c14-11eb-9278-43e3aacc0e76.png)
 - new `use-navigation` property turns on keyboard focus navigation. This takes into account weekday skips (ie: weekdays not being displayed).
-  ::: warning
-  Do not use `use-navigation` with more than one calendar at a time.
-  :::
+  When multiple calendars use `use-navigation` on the same page, key events follow the calendar that contains focus and that root receives the `q-calendar--keyboard-active` class.
   ::: tip
   use with `no-active-date` for better visual UX and `focusable` for visual acuity.
   :::

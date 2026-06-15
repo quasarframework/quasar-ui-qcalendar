@@ -48,6 +48,7 @@ import useCellWidth, { useCellWidthProps } from '../composables/useCellWidth'
 import useCheckChange, { useCheckChangeEmits } from '../composables/useCheckChange'
 import useEvents from '../composables/useEvents'
 import useKeyboard, { useNavigationProps } from '../composables/useKeyboard'
+import { getDragEventHandlers } from '../composables/useDragAndDrop'
 import type { QCalendarDaySlots } from '../slots'
 
 // Directives
@@ -96,6 +97,7 @@ export default defineComponent({
       focusRef = ref<string>(props.modelValue || today()),
       focusValue = ref<Timestamp>(parsed(props.modelValue || today()) as Timestamp),
       datesRef = ref<Record<string, HTMLElement>>({}),
+      keyboardActive = ref(false),
       headDayEventsParentRef = ref<HTMLElement>(),
       headDayEventsChildRef = ref<HTMLElement>(),
       // intervalsHeadRef = ref(null),
@@ -174,6 +176,7 @@ export default defineComponent({
       {
         scrollArea,
         pane,
+        keyboardActive,
       },
     )
 
@@ -224,6 +227,7 @@ export default defineComponent({
 
     const { tryFocus } = useKeyboard(props, {
       rootRef,
+      keyboardActive,
       focusRef,
       focusValue,
       datesRef,
@@ -560,34 +564,13 @@ export default defineComponent({
         ...getDefaultMouseEventHandlers('-head-day', (event) => {
           return { scope, event }
         }),
-        onDragenter: (e: DragEvent) => {
-          if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
-            props.dragEnterFunc(e, 'head-day', { scope }) === true
-              ? (dragOverHeadDayRef.value = day.date)
-              : (dragOverHeadDayRef.value = '')
-          }
-        },
-        onDragover: (e: DragEvent) => {
-          if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
-            props.dragOverFunc(e, 'head-day', { scope }) === true
-              ? (dragOverHeadDayRef.value = day.date)
-              : (dragOverHeadDayRef.value = '')
-          }
-        },
-        onDragleave: (e: DragEvent) => {
-          if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
-            props.dragLeaveFunc(e, 'head-day', { scope }) === true
-              ? (dragOverHeadDayRef.value = day.date)
-              : (dragOverHeadDayRef.value = '')
-          }
-        },
-        onDrop: (e: DragEvent) => {
-          if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
-            props.dropFunc(e, 'head-day', { scope }) === true
-              ? (dragOverHeadDayRef.value = day.date)
-              : (dragOverHeadDayRef.value = '')
-          }
-        },
+        ...getDragEventHandlers(props, {
+          targetRef: dragOverHeadDayRef,
+          value: day.date,
+          resetValue: '',
+          type: 'head-day',
+          scope,
+        }),
       }
 
       return h('div', data, [
@@ -1015,34 +998,13 @@ export default defineComponent({
           'q-calendar__focusable': isFocusable === true,
         },
         style,
-        onDragenter: (e: DragEvent) => {
-          if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
-            props.dragEnterFunc(e, 'interval', { scope }) === true
-              ? (dragOverInterval.value = getDayTimeIdentifier(interval))
-              : (dragOverInterval.value = 0)
-          }
-        },
-        onDragover: (e: DragEvent) => {
-          if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
-            props.dragOverFunc(e, 'interval', { scope }) === true
-              ? (dragOverInterval.value = getDayTimeIdentifier(interval))
-              : (dragOverInterval.value = 0)
-          }
-        },
-        onDragleave: (e: DragEvent) => {
-          if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
-            props.dragLeaveFunc(e, 'interval', { scope }) === true
-              ? (dragOverInterval.value = getDayTimeIdentifier(interval))
-              : (dragOverInterval.value = 0)
-          }
-        },
-        onDrop: (e: DragEvent) => {
-          if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
-            props.dropFunc(e, 'interval', { scope }) === true
-              ? (dragOverInterval.value = getDayTimeIdentifier(interval))
-              : (dragOverInterval.value = 0)
-          }
-        },
+        ...getDragEventHandlers(props, {
+          targetRef: dragOverInterval,
+          value: getDayTimeIdentifier(interval),
+          resetValue: 0,
+          type: 'interval',
+          scope,
+        }),
         onKeydown: (event: KeyboardEvent) => {
           if (isKeyCode(event, [13, 32])) {
             event.stopPropagation()

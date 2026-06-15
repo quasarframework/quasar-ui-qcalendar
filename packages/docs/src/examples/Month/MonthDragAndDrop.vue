@@ -165,7 +165,6 @@ interface Scope {
 }
 
 function onDragStart(e: DragEvent, item: Event) {
-  console.info('onDragStart called')
   if (e.dataTransfer) {
     e.dataTransfer.dropEffect = 'copy'
     e.dataTransfer.effectAllowed = 'move'
@@ -174,24 +173,20 @@ function onDragStart(e: DragEvent, item: Event) {
 }
 
 function onDragEnter(e: DragEvent, type: string, { scope }: Scope) {
-  console.info('onDragEnter', type, scope)
   e.preventDefault()
   return true
 }
 
 function onDragOver(e: DragEvent, type: string, { scope }: Scope) {
-  console.info('onDragOver', type, scope)
   e.preventDefault()
   return true
 }
 
 function onDragLeave(_e: DragEvent, type: string, { scope }: Scope) {
-  console.info('onDragLeave', type, scope)
   return false
 }
 
 function onDrop(e: DragEvent, type: string, { scope }: Scope) {
-  console.info('onDrop')
   const itemID = parseInt(e.dataTransfer!.getData('ID'), 10)
   const event = { ...defaultEvent }
   event.id = events.length + 1

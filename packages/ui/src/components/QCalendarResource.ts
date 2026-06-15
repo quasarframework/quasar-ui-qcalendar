@@ -43,6 +43,7 @@ import useFocusHelper from '../composables/useFocusHelper'
 import useCheckChange, { useCheckChangeEmits } from '../composables/useCheckChange'
 import useEvents from '../composables/useEvents'
 import useKeyboard, { useNavigationProps } from '../composables/useKeyboard'
+import { getDragEventHandlers } from '../composables/useDragAndDrop'
 import type { QCalendarResourceSlots } from '../slots'
 
 // Directives
@@ -97,6 +98,7 @@ export default defineComponent({
       // resourceFocusRef = ref(null),
       // resourceFocusValue = ref(null),
       datesRef = ref<Record<string, HTMLElement>>({}),
+      keyboardActive = ref(false),
       resourcesRef = ref<Record<string, HTMLElement>>({}),
       // headDayEventsParentRef = ref({}),
       // headDayEventsChildRef = ref({}),
@@ -180,6 +182,7 @@ export default defineComponent({
     } = useCalendar(props, __renderResource, {
       scrollArea,
       pane,
+      keyboardActive,
     })
 
     const {
@@ -233,6 +236,7 @@ export default defineComponent({
 
     const { tryFocus } = useKeyboard(props, {
       rootRef,
+      keyboardActive,
       focusRef,
       focusValue,
       datesRef,
@@ -449,34 +453,13 @@ export default defineComponent({
             'q-calendar__focusable': isFocusable === true,
           },
           style,
-          onDragenter: (e: DragEvent) => {
-            if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
-              props.dragEnterFunc(e, 'interval', { scope }) === true
-                ? (dragOverHeadDayRef.value = label)
-                : (dragOverHeadDayRef.value = '')
-            }
-          },
-          onDragover: (e: DragEvent) => {
-            if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
-              props.dragOverFunc(e, 'interval', { scope }) === true
-                ? (dragOverHeadDayRef.value = label)
-                : (dragOverHeadDayRef.value = '')
-            }
-          },
-          onDragleave: (e: DragEvent) => {
-            if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
-              props.dragLeaveFunc(e, 'interval', { scope }) === true
-                ? (dragOverHeadDayRef.value = label)
-                : (dragOverHeadDayRef.value = '')
-            }
-          },
-          onDrop: (e: DragEvent) => {
-            if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
-              props.dropFunc(e, 'interval', { scope }) === true
-                ? (dragOverHeadDayRef.value = label)
-                : (dragOverHeadDayRef.value = '')
-            }
-          },
+          ...getDragEventHandlers(props, {
+            targetRef: dragOverHeadDayRef,
+            value: label,
+            resetValue: '',
+            type: 'interval',
+            scope,
+          }),
           onFocus: () => {
             if (isFocusable === true) {
               focusRef.value = label
@@ -678,34 +661,13 @@ export default defineComponent({
             ...style,
             ...styler({ scope }),
           },
-          onDragenter: (e: DragEvent) => {
-            if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
-              props.dragEnterFunc(e, 'resource', { scope }) === true
-                ? (dragOverResource.value = dragValue)
-                : (dragOverResource.value = '')
-            }
-          },
-          onDragover: (e: DragEvent) => {
-            if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
-              props.dragOverFunc(e, 'resource', { scope }) === true
-                ? (dragOverResource.value = dragValue)
-                : (dragOverResource.value = '')
-            }
-          },
-          onDragleave: (e: DragEvent) => {
-            if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
-              props.dragLeaveFunc(e, 'resource', { scope }) === true
-                ? (dragOverResource.value = dragValue)
-                : (dragOverResource.value = '')
-            }
-          },
-          onDrop: (e: DragEvent) => {
-            if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
-              props.dropFunc(e, 'resource', { scope }) === true
-                ? (dragOverResource.value = dragValue)
-                : (dragOverResource.value = '')
-            }
-          },
+          ...getDragEventHandlers(props, {
+            targetRef: dragOverResource,
+            value: dragValue,
+            resetValue: '',
+            type: 'resource',
+            scope,
+          }),
           onKeydown: (event) => {
             if (isKeyCode(event, [13, 32])) {
               event.stopPropagation()
@@ -846,34 +808,13 @@ export default defineComponent({
             'q-calendar__focusable': isFocusable === true,
           },
           style,
-          onDragenter: (e: DragEvent) => {
-            if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
-              props.dragEnterFunc(e, 'time', { scope }) === true
-                ? (dragOverResourceInterval.value = dragValue)
-                : (dragOverResourceInterval.value = '')
-            }
-          },
-          onDragover: (e: DragEvent) => {
-            if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
-              props.dragOverFunc(e, 'time', { scope }) === true
-                ? (dragOverResourceInterval.value = dragValue)
-                : (dragOverResourceInterval.value = '')
-            }
-          },
-          onDragleave: (e: DragEvent) => {
-            if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
-              props.dragLeaveFunc(e, 'time', { scope }) === true
-                ? (dragOverResourceInterval.value = dragValue)
-                : (dragOverResourceInterval.value = '')
-            }
-          },
-          onDrop: (e: DragEvent) => {
-            if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
-              props.dropFunc(e, 'time', { scope }) === true
-                ? (dragOverResourceInterval.value = dragValue)
-                : (dragOverResourceInterval.value = '')
-            }
-          },
+          ...getDragEventHandlers(props, {
+            targetRef: dragOverResourceInterval,
+            value: dragValue,
+            resetValue: '',
+            type: 'time',
+            scope,
+          }),
           onFocus: () => {
             if (isFocusable === true) {
               focusRef.value = dragValue

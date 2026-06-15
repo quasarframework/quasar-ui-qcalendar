@@ -58,7 +58,6 @@
             <div v-else class="q-pa-md text-negative">
               The QCalendar UMD bundle did not load, so the component could not be registered.
             </div>
-
           </q-page>
         </q-page-container>
       </q-layout>
@@ -71,9 +70,7 @@
     <script>
       const { ref } = Vue
       const calendarPlugin = globalThis.QCalendarPlugin
-      const bundleReady =
-        calendarPlugin !== void 0 &&
-        typeof calendarPlugin.install === 'function'
+      const bundleReady = calendarPlugin !== void 0 && typeof calendarPlugin.install === 'function'
       const bundleError =
         bundleReady === true
           ? ''

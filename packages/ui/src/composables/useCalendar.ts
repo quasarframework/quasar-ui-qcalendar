@@ -43,7 +43,11 @@ interface CalendarReturn {
 export default function useCalendar(
   props: CalendarProps,
   renderFunc: RenderFunc,
-  { scrollArea, pane }: { scrollArea: ScrollArea; pane: Pane },
+  {
+    scrollArea,
+    pane,
+    keyboardActive,
+  }: { scrollArea: ScrollArea; pane: Pane; keyboardActive?: Ref<boolean> },
 ): CalendarReturn {
   if (!renderFunc) {
     const msg = '[error: renderCalendar] no renderFunc has been supplied to useCalendar'
@@ -76,7 +80,12 @@ export default function useCalendar(
       ref: rootRef,
       role: 'complementary',
       lang: props.locale,
-      class: `q-calendar ${props.dark ? 'q-calendar--dark' : ''} ${props.bordered ? 'q-calendar__bordered' : ''}`,
+      class: {
+        'q-calendar': true,
+        'q-calendar--dark': props.dark === true,
+        'q-calendar__bordered': props.bordered === true,
+        'q-calendar--keyboard-active': keyboardActive?.value === true,
+      },
     }
 
     return withDirectives(h('div', { ...data }, [renderFunc()]), [[ResizeObserver, __onResize]])
