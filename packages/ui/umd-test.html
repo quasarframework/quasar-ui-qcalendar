@@ -60,37 +60,38 @@
     <script src="dist/index.umd.js"></script>
 
     <script>
+      const { ref } = Vue
+
+      function getTodayDate() {
+        const now = new Date()
+
+        return [
+          now.getFullYear(),
+          String(now.getMonth() + 1).padStart(2, '0'),
+          String(now.getDate()).padStart(2, '0'),
+        ].join('-')
+      }
+
       const app = Vue.createApp({
-        data() {
-          return {
-            date: '',
-            version: QCalendarPlugin.version,
+        setup() {
+          const calendar = ref(null)
+          const date = ref(getTodayDate())
+
+          function calendarNext() {
+            calendar.value?.next()
           }
-        },
-        mounted() {
-          const now = new Date()
-          // set initially to today's date
-          this.date =
-            now.getFullYear() +
-            '-' +
-            this.padNumber(now.getMonth() + 1, 2) +
-            '-' +
-            this.padNumber(now.getDate(), 2)
-        },
-        methods: {
-          calendarNext() {
-            this.$refs.calendar.next()
-          },
-          calendarPrev() {
-            this.$refs.calendar.prev()
-          },
-          padNumber(num, length) {
-            let padded = String(num)
-            while (padded.length < length) {
-              padded = '0' + padded
-            }
-            return padded
-          },
+
+          function calendarPrev() {
+            calendar.value?.prev()
+          }
+
+          return {
+            version: QCalendarPlugin.version,
+            calendar,
+            date,
+            calendarNext,
+            calendarPrev,
+          }
         },
       })
 
