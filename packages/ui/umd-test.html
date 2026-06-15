@@ -43,9 +43,24 @@
 
         <q-page-container>
           <q-page>
-            <q-calendar ref="calendar" v-model="date"></q-calendar>
+            <q-banner
+              v-if="bundleError !== ''"
+              rounded
+              inline-actions
+              class="bg-red-1 text-negative q-ma-md"
+            >
+              {{ bundleError }}
+            </q-banner>
+
+            <q-calendar v-if="bundleReady" ref="calendar" v-model="date"></q-calendar>
+
+            <div v-else class="q-pa-md text-negative">
+              The QCalendar UMD bundle did not load, so the component could not be registered.
+            </div>
+
             <ul class="q-mb-lg">
               <li>In /packages/ui, run: "pnpm build"</li>
+              <li>Start the test page with: "./start-umd.sh"</li>
               <li class="text-red">You need to build & refresh page on each change manually.</li>
               <li>Use self-closing tags only!</li>
               <li>Example: &lt;my-component&gt;&lt;/my-component&gt;</li>
@@ -61,6 +76,18 @@
 
     <script>
       const { ref } = Vue
+      const calendarPlugin = globalThis.QCalendarPlugin
+      const bundleReady =
+        calendarPlugin !== void 0 &&
+        typeof calendarPlugin.install === 'function'
+      const bundleError =
+        bundleReady === true
+          ? ''
+          : [
+              'dist/index.umd.js did not load.',
+              'This usually means the page is not being served from the packages/ui folder.',
+              'Use "./start-umd.sh" or "quasar serve -p 9000 . -i umd-test.html".',
+            ].join(' ')
 
       function getTodayDate() {
         const now = new Date()
@@ -86,7 +113,9 @@
           }
 
           return {
-            version: QCalendarPlugin.version,
+            version: bundleReady === true ? calendarPlugin.version : 'bundle missing',
+            bundleReady,
+            bundleError,
             calendar,
             date,
             calendarNext,
@@ -96,7 +125,9 @@
       })
 
       app.use(Quasar)
-      app.use(QCalendarPlugin)
+      if (bundleReady === true) {
+        app.use(calendarPlugin)
+      }
       app.mount('#q-app')
     </script>
   </body>
