@@ -641,7 +641,7 @@ const config = {
     globalPackages: [
       {
         packageName: '@quasar/quasar-ui-qcalendar',
-        globalName: '(globalThis as any).index',
+        globalName: '(globalThis as any).QCalendarPlugin || (globalThis as any).index',
       },
     ],
     modulePackages: [
