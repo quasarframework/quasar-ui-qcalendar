@@ -1,7 +1,7 @@
 import { computed, watch, Ref, EmitFn, ComputedRef } from 'vue'
 import {
   createDayList,
-  createNativeLocaleFormatter,
+  createNativeLocaleFormatterUTC,
   getDayIdentifier,
   getEndOfWeek,
   getStartOfWeek,
@@ -97,7 +97,7 @@ interface UseMonthReturn {
   days: Ref<Timestamp[]>
   todayWeek: Ref<Timestamp[]>
   isMiniMode: ComputedRef<boolean>
-  monthFormatter: Ref<ReturnType<typeof createNativeLocaleFormatter>>
+  monthFormatter: Ref<ReturnType<typeof createNativeLocaleFormatterUTC>>
   isOutside: (_timestamp: Timestamp) => boolean
 }
 
@@ -180,7 +180,7 @@ export default function useMonth(
    * Returns a function that formats the month name using the locale
    */
   const monthFormatter = computed(() =>
-    createNativeLocaleFormatter(props.locale, (_tms, short) => ({
+    createNativeLocaleFormatterUTC(props.locale, (_tms, short) => ({
       timeZone: 'UTC',
       month: short ? 'short' : 'long',
     })),

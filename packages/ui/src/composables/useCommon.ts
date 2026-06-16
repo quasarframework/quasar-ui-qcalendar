@@ -3,7 +3,7 @@ import {
   validateTimestamp,
   parseTimestamp,
   parsed,
-  createNativeLocaleFormatter,
+  createNativeLocaleFormatterUTC,
   getStartOfWeek,
   getEndOfWeek,
   getDayIdentifier,
@@ -146,9 +146,9 @@ export const useCommonProps = {
 export interface CommonReturn {
   parsedStart: Ref<Timestamp>
   parsedEnd: Ref<Timestamp>
-  dayFormatter: Ref<ReturnType<typeof createNativeLocaleFormatter>>
-  weekdayFormatter: Ref<ReturnType<typeof createNativeLocaleFormatter>>
-  ariaDateFormatter: Ref<ReturnType<typeof createNativeLocaleFormatter>>
+  dayFormatter: Ref<ReturnType<typeof createNativeLocaleFormatterUTC>>
+  weekdayFormatter: Ref<ReturnType<typeof createNativeLocaleFormatterUTC>>
+  ariaDateFormatter: Ref<ReturnType<typeof createNativeLocaleFormatterUTC>>
   arrayHasDate: (_arr: string[], _timestamp: Timestamp) => boolean
   checkDays: (
     _arr: string[],
@@ -188,21 +188,21 @@ export default function useCommon(
   })
 
   const dayFormatter = computed(() =>
-    createNativeLocaleFormatter(props.locale, () => ({
+    createNativeLocaleFormatterUTC(props.locale, () => ({
       timeZone: 'UTC',
       day: 'numeric',
     })),
   )
 
   const weekdayFormatter = computed(() =>
-    createNativeLocaleFormatter(props.locale, (_tms, short) => ({
+    createNativeLocaleFormatterUTC(props.locale, (_tms, short) => ({
       timeZone: 'UTC',
       weekday: short ? 'short' : 'long',
     })),
   )
 
   const ariaDateFormatter = computed(() =>
-    createNativeLocaleFormatter(props.locale, () => ({
+    createNativeLocaleFormatterUTC(props.locale, () => ({
       timeZone: 'UTC',
       dateStyle: 'full',
     })),

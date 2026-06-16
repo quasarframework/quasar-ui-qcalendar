@@ -4,7 +4,7 @@ import {
   addToDate,
   createDayList,
   createIntervalList,
-  createNativeLocaleFormatter,
+  createNativeLocaleFormatterUTC,
   copyTimestamp,
   getDateTime,
   getDayTimeIdentifier,
@@ -332,7 +332,7 @@ export interface UseIntervalReturn {
   days: Ref<Timestamp[]>
   intervals: Ref<Timestamp[][]>
   intervalFormatter: Ref<(_tms: Timestamp, _short: boolean) => string>
-  ariaDateTimeFormatter: Ref<ReturnType<typeof createNativeLocaleFormatter>>
+  ariaDateTimeFormatter: Ref<ReturnType<typeof createNativeLocaleFormatterUTC>>
   arrayHasDateTime: (_arr: string[], _timestamp: Timestamp) => boolean
   checkIntervals: (
     _arr: string[],
@@ -548,7 +548,7 @@ export default function useInterval(
       hour: 'numeric',
     } as const
 
-    return createNativeLocaleFormatter(props.locale, (tms, short) =>
+    return createNativeLocaleFormatterUTC(props.locale, (tms, short) =>
       short ? (tms.minute === 0 ? shortHourOptions : shortOptions) : longOptions,
     )
   })
@@ -563,7 +563,7 @@ export default function useInterval(
   const ariaDateTimeFormatter = computed(() => {
     const longOptions = { timeZone: 'UTC', dateStyle: 'full', timeStyle: 'short' } as const
 
-    return createNativeLocaleFormatter(props.locale, (/*_tms*/) => longOptions)
+    return createNativeLocaleFormatterUTC(props.locale, (/*_tms*/) => longOptions)
   })
 
   /**
