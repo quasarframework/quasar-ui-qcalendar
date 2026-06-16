@@ -223,13 +223,15 @@ export default defineComponent({
     })
 
     const parsedColumnCount = computed(() => {
-      return days.value.length +
-        (isLeftColumnOptionsValid.value === true ? props.leftColumnOptions!.length : 0) +
-        (isRightColumnOptionsValid.value === true ? props.rightColumnOptions!.length : 0) +
-        days.value.length ===
-        1 && parseInt(String(props.columnCount), 10) > 0
-        ? parseInt(String(props.columnCount), 10)
-        : 0
+      const columnCount = parseInt(String(props.columnCount), 10)
+      const visibleDayCount =
+        days.value.length === 1 && columnCount > 0 ? columnCount : days.value.length
+      const leftColumnCount =
+        isLeftColumnOptionsValid.value === true ? props.leftColumnOptions!.length : 0
+      const rightColumnCount =
+        isRightColumnOptionsValid.value === true ? props.rightColumnOptions!.length : 0
+
+      return Math.max(visibleDayCount + leftColumnCount + rightColumnCount, 1)
     })
 
     const isLeftColumnOptionsValid = computed(() => {

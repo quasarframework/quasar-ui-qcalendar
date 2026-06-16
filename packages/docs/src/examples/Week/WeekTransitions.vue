@@ -76,8 +76,8 @@ const calendar = ref<QCalendarDay>(),
     'spin',
     'flip',
   ]),
-  previousTransition = ref('slide-left'),
-  nextTransition = ref('slide-right')
+  previousTransition = ref('slide-right'),
+  nextTransition = ref('slide-left')
 
 function onToday() {
   if (calendar.value) {
