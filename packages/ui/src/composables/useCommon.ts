@@ -56,6 +56,12 @@ const isValidFocusType = (v: string[]): boolean =>
     ['day', 'date', 'weekday', 'interval', 'time', 'resource', 'task'].includes(type),
   )
 
+export const isValidWeekdays = (v: unknown): boolean =>
+  Array.isArray(v) === true &&
+  v.length > 0 &&
+  new Set(v).size === v.length &&
+  v.every((weekday) => Number.isInteger(weekday) && weekday >= 0 && weekday <= 6)
+
 // Define prop types with validators
 export const useCommonProps = {
   modelValue: {
@@ -64,8 +70,9 @@ export const useCommonProps = {
     validator: (v: string): boolean => v === '' || validateTimestamp(v),
   },
   weekdays: {
-    type: Array as () => number[],
+    type: Array as PropType<number[]>,
     default: (): number[] => [0, 1, 2, 3, 4, 5, 6],
+    validator: isValidWeekdays,
   },
   dateType: {
     type: String as () => 'round' | 'rounded' | 'square',

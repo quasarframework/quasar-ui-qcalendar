@@ -5,7 +5,6 @@ import {
   getCurrentInstance,
   onBeforeUpdate,
   onMounted,
-  // nextTick,
   reactive,
   ref,
   Transition,
@@ -37,7 +36,7 @@ import useCheckChange, { useCheckChangeEmits } from '../composables/useCheckChan
 import useEvents from '../composables/useEvents'
 import useKeyboard, { useNavigationProps } from '../composables/useKeyboard'
 import { getDragEventHandlers } from '../composables/useDragAndDrop'
-import { /*useCellWidth,*/ useCellWidthProps } from '../composables/useCellWidth'
+import { useCellWidthProps } from '../composables/useCellWidth'
 import type { QCalendarTaskSlots } from '../slots'
 
 // Directives
@@ -95,10 +94,6 @@ export default defineComponent({
       focusValue = ref<Timestamp>(parsed(props.modelValue || today()) as Timestamp),
       datesRef = ref<Record<string, HTMLElement>>({}),
       keyboardActive = ref(false),
-      // taskRef = ref(null),
-      // weekEventRef = ref([]),
-      // weekRef = ref([]),
-      // headerColumnRef = ref(null),
       size = reactive<Size>({ width: 0, height: 0 }),
       dragOverHeadDayRef = ref(''),
       dragOverResource = ref(''),
@@ -148,22 +143,12 @@ export default defineComponent({
       getRelativeClasses,
     } = useCommon(props as CommonProps, { startDate, endDate, times })
 
-    // const { isSticky } = useCellWidth(props)
-
     const parsedValue = computed(() => {
       return parseTimestamp(props.modelValue, times.now) || parsedStart.value || times.today
     })
 
     focusValue.value = parsedValue.value
     focusRef.value = parsedValue.value.date
-
-    // const computedStyles = computed(() => {
-    //   const style: CSSProperties = {}
-    //   style.minWidth = computedWidth.value
-    //   style.maxWidth = computedWidth.value
-    //   style.width = computedWidth.value
-    //   return style
-    // })
 
     const { renderValues } = useRenderValues(props, {
       parsedView,
@@ -219,20 +204,6 @@ export default defineComponent({
       times,
     })
 
-    // const parsedColumnCount = computed(() => {
-    //   return days.value.length
-    // })
-
-    // const borderWidth = computed(() => {
-    //   if (rootRef.value) {
-    //     const calendarBorderWidth = getComputedStyle(rootRef.value).getPropertyValue('--calendar-border')
-    //     const parts = calendarBorderWidth.split(' ')
-    //     const part = parts.filter(part => part.indexOf('px') > -1)
-    //     return parseInt(part[ 0 ], 0)
-    //   }
-    //   return 0
-    // })
-
     const isSticky = ref(true)
     const parsedCellWidth = computed(() => {
       if (props.cellWidth !== undefined) {
@@ -240,16 +211,6 @@ export default defineComponent({
       }
       return 150 // default when not specified
     })
-
-    // const computedWidth = computed(() => {
-    //   if (rootRef.value) {
-    //     const width = size.width || rootRef.value.getBoundingClientRect().width
-    //     if (width && parsedColumnCount.value) {
-    //       return (width / parsedColumnCount.value) + 'px'
-    //     }
-    //   }
-    //   return (100 / parsedColumnCount.value) + '%'
-    // })
 
     const isDayFocusable = computed(() => {
       return props.focusable === true && props.focusType.includes('day')

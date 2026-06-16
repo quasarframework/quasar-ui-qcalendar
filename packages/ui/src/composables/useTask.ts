@@ -15,6 +15,7 @@ import {
   type DisabledDays,
   type Timestamp,
 } from '@timestamp-js/core'
+import { isValidWeekdays } from './useCommon'
 
 export interface Task {
   [key: string]: any
@@ -43,8 +44,9 @@ export const useTaskProps = {
     default: 'id',
   },
   weekdays: {
-    type: Array as () => number[],
+    type: Array as PropType<number[]>,
     default: (): number[] => [0, 1, 2, 3, 4, 5, 6],
+    validator: isValidWeekdays,
   },
   dateType: {
     type: String as () => 'round' | 'rounded' | 'square',
