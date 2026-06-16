@@ -253,8 +253,76 @@ function getSetupReturnNames(content: string) {
 function getTopLevelContent(content: string) {
   let depth = 0
   let output = ''
+  let quote: "'" | '"' | '`' | null = null
+  let escaped = false
+  let comment: 'line' | 'block' | null = null
 
-  for (const char of content) {
+  for (let index = 0; index < content.length; index++) {
+    const char = content[index] ?? ''
+    const next = content[index + 1]
+
+    if (comment === 'line') {
+      if (char === '\n') {
+        output += char
+        comment = null
+      } else {
+        output += ' '
+      }
+      continue
+    }
+
+    if (comment === 'block') {
+      if (char === '\n') {
+        output += char
+      } else {
+        output += ' '
+      }
+
+      if (char === '*' && next === '/') {
+        output += ' '
+        index++
+        comment = null
+      }
+      continue
+    }
+
+    if (quote !== null) {
+      output += char === '\n' ? char : ' '
+
+      if (escaped === true) {
+        escaped = false
+        continue
+      }
+
+      if (char === '\\') {
+        escaped = true
+      } else if (char === quote) {
+        quote = null
+      }
+      continue
+    }
+
+    if (char === '/' && next === '/') {
+      output += '  '
+      index++
+      comment = 'line'
+      continue
+    }
+
+    if (char === '/' && next === '*') {
+      output += '  '
+      index++
+      comment = 'block'
+      continue
+    }
+
+    if (char === "'" || char === '"' || char === '`') {
+      output += ' '
+      quote = char
+      escaped = false
+      continue
+    }
+
     if (depth === 0 || char === '\n') {
       output += char
     } else {

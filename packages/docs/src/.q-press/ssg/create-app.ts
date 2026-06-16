@@ -59,6 +59,9 @@ const defaultQuasarOptions: QPressQuasarOptions = {
   },
 }
 
+/**
+ * Merges user Quasar SSR options with the plugins required by Q-Press docs.
+ */
 function mergeQuasarOptions(options: QPressQuasarOptions | undefined): QPressQuasarOptions {
   return {
     ...defaultQuasarOptions,
@@ -74,6 +77,9 @@ function mergeQuasarOptions(options: QPressQuasarOptions | undefined): QPressQua
   }
 }
 
+/**
+ * Creates the SSR context object consumed by Quasar, Pinia, and Q-Press meta hooks.
+ */
 function createSsrContext(
   route: SsgRoute,
   options: QPressSsgAppOptions,
@@ -93,14 +99,23 @@ function createSsrContext(
   }
 }
 
+/**
+ * Resolves the app's Pinia instance from either a factory function or direct export.
+ */
 async function resolveStore(args: StoreFactoryArgs): Promise<Pinia> {
   return typeof createStore === 'function' ? await createStore(args) : createStore
 }
 
+/**
+ * Resolves the app router from either a factory function or direct export.
+ */
 async function resolveRouter(args: RouterFactoryArgs): Promise<Router> {
   return markRaw(typeof createRouter === 'function' ? await createRouter(args) : createRouter)
 }
 
+/**
+ * Resolves static or callback-based app factory options for a single SSG route.
+ */
 async function resolveOptions(
   options: QPressSsgAppFactoryOptions | undefined,
   route: SsgRoute,
@@ -113,6 +128,9 @@ async function resolveOptions(
   return options ?? {}
 }
 
+/**
+ * Exposes the router on Pinia stores for compatibility with Quasar app templates.
+ */
 function exposeRouterToStores(store: Pinia, router: Router): void {
   store.use(({ store }) => {
     const typedStore = store as typeof store & { router?: Router }
@@ -120,6 +138,9 @@ function exposeRouterToStores(store: Pinia, router: Router): void {
   })
 }
 
+/**
+ * Creates a fresh Vue/Quasar app instance for prerendering one Q-Press route.
+ */
 export async function createQPressSsgApp(
   route: SsgRoute,
   context: SsgRouteRenderContext,
@@ -151,6 +172,9 @@ export async function createQPressSsgApp(
   }
 }
 
+/**
+ * Creates a reusable app factory with shared route option defaults.
+ */
 export function createQPressSsgAppFactory(
   options?: QPressSsgAppFactoryOptions,
 ): (

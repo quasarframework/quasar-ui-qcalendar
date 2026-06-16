@@ -19,6 +19,9 @@ interface ComponentProxy {
   show?: () => void
 }
 
+/**
+ * Finds the Vue parent component proxy for nested Quasar expansion items.
+ */
 function getParentProxy(proxy: ComponentProxy): ComponentProxy | undefined {
   if (Object(proxy.$parent) === proxy.$parent) {
     return proxy.$parent
@@ -62,6 +65,9 @@ export default {
       childRefs = {}
     })
 
+    /**
+     * Opens the active drawer item and all parent expansion items.
+     */
     function showMenu(proxy: ComponentProxy | null): void {
       if (proxy !== undefined && proxy !== rootRef.value) {
         if (proxy.show !== undefined) proxy.show()
@@ -72,6 +78,9 @@ export default {
       }
     }
 
+    /**
+     * Resolves a child drawer route path against its parent route path.
+     */
     function resolveDrawerPath(parentPath: string, childPath?: string): string {
       if (childPath === void 0) {
         return parentPath
@@ -82,6 +91,9 @@ export default {
         : (parentPath + '/' + childPath).replace(/\/{2,}/g, '/')
     }
 
+    /**
+     * Recursively renders sidebar menu items and nested expansion groups.
+     */
     function getDrawerMenu(menu: MenuItem, path: string, level: number): VNode {
       if (menu.children !== void 0) {
         return h(
