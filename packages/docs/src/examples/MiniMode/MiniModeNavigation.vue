@@ -74,13 +74,17 @@ import NavigationBar from '@/components/NavigationBar.vue'
 
 const calendar = ref<QCalendarMonth>(),
   selectedDate = ref(today()),
-  selectedYear = ref(new Date().getFullYear()),
   locale = ref('en-US')
 
 const formattedMonth = computed(() => {
   const date = new Date(selectedDate.value)
   const formatter = monthFormatter()
   return formatter ? formatter.format(date) : ''
+})
+
+const selectedYear = computed(() => {
+  const ts = parseTimestamp(selectedDate.value)
+  return ts ? ts.year : new Date().getFullYear()
 })
 
 function monthFormatter() {
@@ -102,7 +106,6 @@ function addToYear(amount: number) {
     ts = addToDate(ts, { year: amount })
     // re-assign values
     selectedDate.value = ts.date
-    selectedYear.value = ts.year
   }
 }
 

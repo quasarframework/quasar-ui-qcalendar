@@ -43,7 +43,7 @@
           >
             <template #head-day-event="{ scope }">
               <div
-                v-if="hasWeekdayEvents(scope.weekday) && printScope(scope)"
+                v-if="hasWeekdayEvents(scope.weekday)"
                 style="
                   display: flex;
                   justify-content: space-evenly;
@@ -69,7 +69,7 @@
 
             <template #day="{ scope }">
               <div
-                v-if="hasEvents(scope.timestamp) && printScope(scope)"
+                v-if="hasEvents(scope.timestamp)"
                 style="
                   display: flex;
                   justify-content: space-evenly;
@@ -274,12 +274,6 @@ function onClickHeadDay(data: Timestamp) {
 }
 function onClickHeadWorkweek(data: Timestamp) {
   console.info('onClickHeadWorkweek', data)
-}
-
-// this method is used only to print the scope to dev tools
-function printScope({ scope }: Scope): boolean {
-  console.info('scope:', scope)
-  return true
 }
 </script>
 

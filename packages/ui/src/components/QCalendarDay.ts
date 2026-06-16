@@ -161,6 +161,10 @@ export default defineComponent({
       return parseTimestamp(props.modelValue, times.now) || parsedStart.value || times.today
     })
 
+    function getFocusDate(value: string): string | undefined {
+      return value.match(/^\d{4}-\d{2}-\d{2}/)?.[0]
+    }
+
     focusValue.value = parsedValue.value
     focusRef.value = parsedValue.value.date
 
@@ -280,7 +284,9 @@ export default defineComponent({
           }
           emittedValue.value = val
         }
-        focusRef.value = val
+        if (getFocusDate(focusRef.value) !== val) {
+          focusRef.value = val
+        }
       },
     )
 

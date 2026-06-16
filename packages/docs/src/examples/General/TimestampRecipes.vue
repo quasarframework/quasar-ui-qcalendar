@@ -91,10 +91,11 @@ import {
   mergeRanges,
   parseTimestamp,
   roundToInterval,
-  type Timestamp,
-  type TimestampRange,
 } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
+
+type Timestamp = NonNullable<ReturnType<typeof parseTimestamp>>
+type TimestampRange = ReturnType<typeof createTimestampRange>
 
 interface DayScope {
   scope: {

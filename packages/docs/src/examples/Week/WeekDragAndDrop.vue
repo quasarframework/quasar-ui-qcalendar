@@ -57,8 +57,7 @@
                     scope &&
                     scope.timestamp &&
                     allDayEventsMap[scope.timestamp.date] &&
-                    allDayEventsMap[scope.timestamp.date]!.length > 0 &&
-                    printScope(scope)
+                    allDayEventsMap[scope.timestamp.date]!.length > 0
                   "
                   style="
                     display: flex;
@@ -83,7 +82,7 @@
 
               <template #day-interval="{ scope }">
                 <div
-                  v-if="hasEvents(scope.timestamp) && printScope(scope)"
+                  v-if="hasEvents(scope.timestamp)"
                   style="
                     display: flex;
                     justify-content: space-evenly;
@@ -299,12 +298,6 @@ function onClickHeadIntervals(data: Timestamp) {
 }
 function onClickHeadDay(data: Timestamp) {
   console.info('onClickHeadDay', data)
-}
-// this method is used only to print the scope to dev tools
-/// @ts-expect-error ignore
-function printScope(scope) {
-  console.info('scope:', scope)
-  return true
 }
 </script>
 

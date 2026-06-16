@@ -226,7 +226,7 @@ export default function useNavigation(
     return false
   }
 
-  function tryFocus(): void {
+  function tryFocus(value = focusRef.value): void {
     cancelFocusRetry()
 
     let count = 0
@@ -237,8 +237,9 @@ export default function useNavigation(
       if (token !== focusRetryToken) return
 
       count += 1
-      const focusElement = datesRef.value[focusRef.value]
+      const focusElement = getFocusElement(value)
       if (focusElement) {
+        focusRef.value = value
         focusElement.focus()
         if (count === 50 || getDocument()?.activeElement === focusElement) {
           cancelFocusRetry()
@@ -280,17 +281,64 @@ export default function useNavigation(
     return value.match(/^\d{4}-\d{2}-\d{2}/)?.[0]
   }
 
+  function getFocusTime(value: string): string | undefined {
+    return value.match(/^\d{4}-\d{2}-\d{2} (\d{2}:\d{2})/)?.[1]
+  }
+
+  function applyFocusTime(timestamp: Timestamp, value: string): Timestamp {
+    const time = getFocusTime(value)
+    if (!time) {
+      return timestamp
+    }
+
+    const [hour, minute] = time.split(':').map(Number)
+
+    return {
+      ...timestamp,
+      time,
+      hour,
+      minute,
+      hasTime: true,
+    }
+  }
+
+  function getFocusElement(value = focusRef.value): HTMLElement | undefined {
+    const directFocusElement = datesRef.value[value]
+    if (directFocusElement) {
+      return directFocusElement
+    }
+
+    const focusDate = getFocusDate(value)
+    if (!focusDate) {
+      return undefined
+    }
+
+    const hasTimeSuffix = value.slice(focusDate.length).startsWith(' ')
+    const prefixes = hasTimeSuffix
+      ? [`${focusDate} `, `${focusDate}-`]
+      : [`${focusDate}-`, `${focusDate} `]
+
+    for (const prefix of prefixes) {
+      const key = Object.keys(datesRef.value).find((dateRef) => dateRef.startsWith(prefix))
+      if (key) {
+        return datesRef.value[key]
+      }
+    }
+
+    return undefined
+  }
+
   function getFocusableTimestamp(): Timestamp {
     const focusTimestamp = parseFocusTimestamp(focusRef.value)
     if (focusTimestamp) {
-      return focusTimestamp
+      return applyFocusTime(focusTimestamp, focusRef.value)
     }
 
     const refDate = getFocusDate(focusRef.value)
     if (refDate) {
       const timestamp = parseFocusTimestamp(refDate)
       if (timestamp) {
-        return timestamp
+        return applyFocusTime(timestamp, focusRef.value)
       }
     }
 
@@ -332,14 +380,20 @@ export default function useNavigation(
   function setFocusTimestamp(timestamp: Timestamp): void {
     const candidate = getFocusKey(timestamp)
 
-    focusRef.value = datesRef.value[candidate] !== undefined ? candidate : timestamp.date
+    const focusKey =
+      datesRef.value[candidate] !== undefined || candidate.includes(' ')
+        ? candidate
+        : timestamp.date
+
+    focusRef.value = focusKey
 
     void nextTick(() => {
-      const focusElement = datesRef.value[focusRef.value]
+      const focusElement = getFocusElement(focusKey)
       if (focusElement) {
+        focusRef.value = focusKey
         focusElement.focus()
       } else {
-        tryFocus()
+        tryFocus(focusKey)
       }
     })
   }
@@ -356,6 +410,21 @@ export default function useNavigation(
     }
 
     return tm
+  }
+
+  function isWeekView(): boolean {
+    return ['week', 'week-agenda', 'week-scheduler'].includes(parsedView.value)
+  }
+
+  function updateWeekBoundaryModelValue(from: Timestamp, to: Timestamp): void {
+    if (!isWeekView()) return
+
+    const start = getStartOfWeek(from, props.weekdays || [], times.today)
+    const end = getEndOfWeek(from, props.weekdays || [], times.today)
+
+    if (to.date < start.date || to.date > end.date) {
+      emittedValue.value = to.date
+    }
   }
 
   function onKeyDown(e: KeyboardEvent): void {
@@ -389,6 +458,7 @@ export default function useNavigation(
       if (month !== tm.month) {
         direction.value = 'prev'
         emittedValue.value = tm.date
+        setFocusTimestamp(tm)
         return
       }
     } else {
@@ -406,6 +476,7 @@ export default function useNavigation(
       if (month !== tm.month) {
         direction.value = 'next'
         emittedValue.value = tm.date
+        setFocusTimestamp(tm)
         return
       }
     } else {
@@ -416,16 +487,20 @@ export default function useNavigation(
   }
 
   function onLeftArrow(): void {
-    let tm = getFocusableTimestamp()
+    const current = getFocusableTimestamp()
+    let tm = current
     direction.value = 'prev'
     tm = moveToEnabledWeekday(addToDate(tm, { day: -1 }), -1)
+    updateWeekBoundaryModelValue(current, tm)
     setFocusTimestamp(tm)
   }
 
   function onRightArrow(): void {
-    let tm = getFocusableTimestamp()
+    const current = getFocusableTimestamp()
+    let tm = current
     direction.value = 'next'
     tm = moveToEnabledWeekday(addToDate(tm, { day: 1 }), 1)
+    updateWeekBoundaryModelValue(current, tm)
     setFocusTimestamp(tm)
   }
   function onPgUp(): void {
