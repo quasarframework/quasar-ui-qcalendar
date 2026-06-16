@@ -1,6 +1,6 @@
 {
   "name": "docs",
-  "version": "5.0.0-rc.0",
+  "version": "5.0.0-rc.1",
   "private": true,
   "description": "QCalendar Documentation and examples",
   "author": "Jeff <galbraith64@gmail.com>",
