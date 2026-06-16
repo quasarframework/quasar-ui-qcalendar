@@ -206,6 +206,10 @@ function stripCompilerMacros(content: string) {
     .trim()
 }
 
+function stripTemplateTypeScriptAssertions(content: string) {
+  return content.replace(/(\]|\)|[\w$])!(?=\.|\[|\()/g, '$1')
+}
+
 function getScriptBlock(script: string, setup: boolean) {
   const re = setup
     ? /<script\s+setup([^>]*)>([\s\S]*?)<\/script>/
@@ -406,7 +410,7 @@ const html = computed(() => {
     .replace(/^\s{2}/gm, '')
     .trim()
 
-  return rewriteRootRelativeUrls(content)
+  return rewriteRootRelativeUrls(stripTemplateTypeScriptAssertions(content))
 })
 
 const editors = computed(() => {
