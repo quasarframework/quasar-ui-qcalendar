@@ -983,7 +983,9 @@ export default defineComponent({
 
       const data: Record<string, any> = {
         key: dateTime,
-        // ref: (el) => { intervalsRef.value[ dateTime ] = el },
+        ref: (el: HTMLElement) => {
+          datesRef.value[dateTime] = el
+        },
         tabindex: isFocusable === true ? 0 : -1,
         class: {
           'q-calendar-day__day-interval': interval.minute === 0,
@@ -1009,6 +1011,11 @@ export default defineComponent({
           if (isKeyCode(event, [13, 32])) {
             event.stopPropagation()
             event.preventDefault()
+          }
+        },
+        onFocus: () => {
+          if (isFocusable === true) {
+            focusRef.value = dateTime
           }
         },
         onKeyup: (event: KeyboardEvent) => {

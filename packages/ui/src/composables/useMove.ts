@@ -48,6 +48,20 @@ export default function useMove(
     return copyTimestamp({ ...timestamp, day })
   }
 
+  function isAllowedWeekday(timestamp: Timestamp): boolean {
+    return props.weekdays.length === 0 || props.weekdays.includes(Number(timestamp.weekday))
+  }
+
+  function moveToAllowedWeekday(timestamp: Timestamp, forward: boolean): Timestamp {
+    let moved = timestamp
+
+    for (let i = 0; i < 7 && !isAllowedWeekday(moved); i += 1) {
+      moved = addToDate(moved, { day: forward ? 1 : -1 })
+    }
+
+    return moved
+  }
+
   /**
    * Moves the calendar the desired amount. This is based on the 'view'.
    * A month calendar moves by prev/next month
@@ -81,9 +95,7 @@ export default function useMove(
           moved = withDay(moved, limit)
           moved = mover(moved)
           moved = updateWeekday(moved)
-          while (!props.weekdays.includes(Number(moved.weekday))) {
-            moved = addToDate(moved, { day: forward ? 1 : -1 })
-          }
+          moved = moveToAllowedWeekday(moved, forward)
           break
 
         case 'week':

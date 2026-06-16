@@ -4,6 +4,7 @@ import useEvents from './useEvents'
 import {
   addToDate,
   copyTimestamp,
+  parseTimestamp,
   getStartOfMonth,
   getEndOfMonth,
   getStartOfWeek,
@@ -275,6 +276,88 @@ export default function useNavigation(
     focusRetryHandle = null
   }
 
+  function getFocusDate(value: string): string | undefined {
+    return value.match(/^\d{4}-\d{2}-\d{2}/)?.[0]
+  }
+
+  function getFocusableTimestamp(): Timestamp {
+    const focusTimestamp = parseFocusTimestamp(focusRef.value)
+    if (focusTimestamp) {
+      return focusTimestamp
+    }
+
+    const refDate = getFocusDate(focusRef.value)
+    if (refDate) {
+      const timestamp = parseFocusTimestamp(refDate)
+      if (timestamp) {
+        return timestamp
+      }
+    }
+
+    if (isValidTimestamp(focusValue.value)) {
+      return copyTimestamp(focusValue.value)
+    }
+
+    return copyTimestamp(times.today)
+  }
+
+  function parseFocusTimestamp(value: string): Timestamp | null {
+    const timestamp = parseTimestamp(value)
+    return timestamp ? copyTimestamp(timestamp as Timestamp) : null
+  }
+
+  function isValidTimestamp(timestamp: Timestamp | null | undefined): timestamp is Timestamp {
+    return (
+      timestamp !== null &&
+      timestamp !== undefined &&
+      typeof timestamp.date === 'string' &&
+      /^\d{4}-\d{2}-\d{2}$/.test(timestamp.date) &&
+      Number.isFinite(timestamp.year) &&
+      Number.isFinite(timestamp.month) &&
+      Number.isFinite(timestamp.day)
+    )
+  }
+
+  function getFocusKey(timestamp: Timestamp): string {
+    const currentDate = getFocusDate(focusRef.value)
+    const suffix = currentDate ? focusRef.value.slice(currentDate.length) : ''
+
+    if (suffix.startsWith(' ') && timestamp.time) {
+      return `${timestamp.date} ${timestamp.time}`
+    }
+
+    return suffix ? timestamp.date + suffix : timestamp.date
+  }
+
+  function setFocusTimestamp(timestamp: Timestamp): void {
+    const candidate = getFocusKey(timestamp)
+
+    focusRef.value = datesRef.value[candidate] !== undefined ? candidate : timestamp.date
+
+    void nextTick(() => {
+      const focusElement = datesRef.value[focusRef.value]
+      if (focusElement) {
+        focusElement.focus()
+      } else {
+        tryFocus()
+      }
+    })
+  }
+
+  function isEnabledWeekday(timestamp: Timestamp): boolean {
+    return props.weekdays.length === 0 || props.weekdays.includes(Number(timestamp.weekday))
+  }
+
+  function moveToEnabledWeekday(timestamp: Timestamp, amount: 1 | -1): Timestamp {
+    let tm = timestamp
+
+    for (let i = 0; i < 7 && !isEnabledWeekday(tm); i += 1) {
+      tm = addToDate(tm, { day: amount })
+    }
+
+    return tm
+  }
+
   function onKeyDown(e: KeyboardEvent): void {
     if (canNavigate(e) && isKeyCode(e, [33, 34, 35, 36, 37, 38, 39, 40])) {
       e.stopPropagation()
@@ -299,26 +382,28 @@ export default function useNavigation(
   }
 
   function onUpArrow(): void {
-    let tm = copyTimestamp(focusValue.value)
+    let tm = getFocusableTimestamp()
     if (parsedView.value === 'month') {
+      const month = tm.month
       tm = addToDate(tm, { day: -7 })
-      if (focusValue.value.month !== tm.month) {
+      if (month !== tm.month) {
         direction.value = 'prev'
         emittedValue.value = tm.date
         return
       }
     } else {
-      tm = addToDate(tm, { minute: Number(props.intervalMinutes) })
+      tm = addToDate(tm, { minute: -Number(props.intervalMinutes) })
     }
     direction.value = 'prev'
-    focusRef.value = tm.date
+    setFocusTimestamp(tm)
   }
 
   function onDownArrow(): void {
-    let tm = copyTimestamp(focusValue.value)
+    let tm = getFocusableTimestamp()
     if (parsedView.value === 'month') {
+      const month = tm.month
       tm = addToDate(tm, { day: 7 })
-      if (focusValue.value.month !== tm.month) {
+      if (month !== tm.month) {
         direction.value = 'next'
         emittedValue.value = tm.date
         return
@@ -327,68 +412,56 @@ export default function useNavigation(
       tm = addToDate(tm, { minute: Number(props.intervalMinutes) })
     }
     direction.value = 'next'
-    focusRef.value = tm.date
+    setFocusTimestamp(tm)
   }
 
   function onLeftArrow(): void {
-    let tm = copyTimestamp(focusValue.value)
+    let tm = getFocusableTimestamp()
     direction.value = 'prev'
-    // Keep moving one day back until the day is allowed.
-    do {
-      tm = addToDate(tm, { day: -1 })
-    } while (!props.weekdays.includes(Number(tm.weekday)))
-    focusRef.value = tm.date
+    tm = moveToEnabledWeekday(addToDate(tm, { day: -1 }), -1)
+    setFocusTimestamp(tm)
   }
 
   function onRightArrow(): void {
-    let tm = copyTimestamp(focusValue.value)
+    let tm = getFocusableTimestamp()
     direction.value = 'next'
-    // Keep moving one day forward until the day is allowed.
-    do {
-      tm = addToDate(tm, { day: 1 })
-    } while (!props.weekdays.includes(Number(tm.weekday)))
-    focusRef.value = tm.date
+    tm = moveToEnabledWeekday(addToDate(tm, { day: 1 }), 1)
+    setFocusTimestamp(tm)
   }
   function onPgUp(): void {
-    let tm = copyTimestamp(focusValue.value)
+    let tm = getFocusableTimestamp()
     tm = parsedView.value === 'month' ? addToDate(tm, { month: -1 }) : addToDate(tm, { day: -7 })
     direction.value = 'prev'
-    focusRef.value = tm.date
+    setFocusTimestamp(tm)
   }
 
   function onPgDown(): void {
-    let tm = copyTimestamp(focusValue.value)
+    let tm = getFocusableTimestamp()
     tm = parsedView.value === 'month' ? addToDate(tm, { month: 1 }) : addToDate(tm, { day: 7 })
     direction.value = 'next'
-    focusRef.value = tm.date
+    setFocusTimestamp(tm)
   }
 
   function onHome(): void {
-    let tm = copyTimestamp(focusValue.value)
+    let tm = getFocusableTimestamp()
     // For month view, start at the beginning of the month; for week view, get start of week.
     tm =
       parsedView.value === 'month'
         ? getStartOfMonth(tm)
         : getStartOfWeek(tm, props.weekdays || [], times.today)
-    // If the computed start is not an allowed day, move backwards until you hit an allowed day.
-    while (!props.weekdays.includes(Number(tm.weekday))) {
-      tm = addToDate(tm, { day: -1 })
-    }
-    focusRef.value = tm.date
+    tm = moveToEnabledWeekday(tm, 1)
+    setFocusTimestamp(tm)
   }
 
   function onEnd(): void {
-    let tm = copyTimestamp(focusValue.value)
+    let tm = getFocusableTimestamp()
     // For month view, get end of month; for week view, get end of week.
     tm =
       parsedView.value === 'month'
         ? getEndOfMonth(tm)
         : getEndOfWeek(tm, props.weekdays || [], times.today)
-    // If the computed end is not an allowed day, move backwards until you hit an allowed day.
-    while (!props.weekdays.includes(Number(tm.weekday))) {
-      tm = addToDate(tm, { day: -1 })
-    }
-    focusRef.value = tm.date
+    tm = moveToEnabledWeekday(tm, -1)
+    setFocusTimestamp(tm)
   }
   return {
     startNavigation,
