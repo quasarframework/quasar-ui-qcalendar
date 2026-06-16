@@ -641,17 +641,17 @@ const config = {
     globalPackages: [
       {
         packageName: '@quasar/quasar-ui-qcalendar',
-        globalName: '(globalThis as any).QCalendarPlugin',
+        globalName: '(globalThis as any).index',
       },
     ],
     modulePackages: [
       {
         packageName: '@timestamp-js/core',
-        importUrl: 'https://cdn.jsdelivr.net/npm/@timestamp-js/core@0.1.0-rc.0/dist/index.js',
+        importUrl: 'https://esm.sh/@timestamp-js/core@0.1.0-rc.0',
       },
     ],
     jsSetup: [
-      'const QCalendarPlugin = (globalThis as any).QCalendarPlugin',
+      'const QCalendarPlugin = (globalThis as any).QCalendarPlugin || (globalThis as any).index',
       'app.use(QCalendarPlugin)',
       `app.component('NavigationBar', {
   emits: ['today', 'prev', 'next'],

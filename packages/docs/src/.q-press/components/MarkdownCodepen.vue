@@ -366,6 +366,10 @@ const jsPreProcessor = computed(() => {
   return siteConfig.codepen?.jsPreProcessor ?? (/lang=["']ts["']/.test(attrs) ? 'typescript' : 'babel')
 })
 
+const jsModule = computed(() => {
+  return /^\s*import\s/m.test(js.value)
+})
+
 const html = computed(() => {
   const content = (def.parts.Template || '')
     .replace(/(<template>|<\/template>$)/g, '')
@@ -449,6 +453,7 @@ ${html.value}
     css_external: cssResources.value,
     js: js.value,
     js_pre_processor: jsPreProcessor.value,
+    ...(jsModule.value ? { js_module: true } : {}),
     js_external: jsResources.value,
     head: siteConfig.codepen?.head ?? '',
     editors: editors.value,
