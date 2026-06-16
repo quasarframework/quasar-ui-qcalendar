@@ -176,7 +176,7 @@ function getModulePackageImportLines(content: string) {
     .flatMap(({ packageName, importUrl }: CodepenModulePackage) => {
       const escapedPackageName = packageName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
       const importRe = new RegExp(
-        `^\\s*import\\s+([\\s\\S]*?\\s+from\\s+)['"]${escapedPackageName}['"];?\\s*$`,
+        `^\\s*import\\s+((?:[^\\n]|\\n(?!\\s*import\\s))*?\\s+from\\s+)['"]${escapedPackageName}['"];?\\s*$`,
         'gm',
       )
       const imports: string[] = []

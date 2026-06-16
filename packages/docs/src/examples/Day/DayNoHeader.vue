@@ -2,8 +2,10 @@
   <div class="subcontent">
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
-    <div class="row justify-center">
-      {{ selectedDate }}
+    <div class="column items-center">
+      <div class="text-subtitle1 text-weight-medium text-center q-mb-sm">
+        {{ selectedDate }}
+      </div>
       <div style="display: flex; max-width: 800px; width: 100%; height: 400px">
         <q-calendar-day
           ref="calendar"
