@@ -193,7 +193,9 @@ export interface TaskHeadSlotScope {
 export interface TaskItemSlotScope extends TaskHeadSlotScope {
   task: Task
   taskIndex: number
+  indentLevel: number
   expanded: boolean
+  droppable: boolean | string
 }
 
 export interface TaskDaySlotScope {

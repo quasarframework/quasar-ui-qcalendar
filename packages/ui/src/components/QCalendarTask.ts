@@ -77,6 +77,8 @@ export default defineComponent({
     'task-expanded',
     ...useCheckChangeEmits,
     ...useMoveEmits,
+    ...getRawMouseEvents('-head-tasks'),
+    ...getRawMouseEvents('-task'),
     ...getRawMouseEvents('-date'),
     ...getRawMouseEvents('-day'),
     ...getRawMouseEvents('-head-day'),
@@ -96,6 +98,7 @@ export default defineComponent({
       keyboardActive = ref(false),
       size = reactive<Size>({ width: 0, height: 0 }),
       dragOverHeadDayRef = ref(''),
+      dragOverTask = ref(''),
       dragOverResource = ref(''),
       // keep track of last seen start and end dates
       lastStart = ref(null),
@@ -293,7 +296,7 @@ export default defineComponent({
     // public functions
 
     function moveToToday(): void {
-      emittedValue.value = today()
+      move(0)
     }
 
     function next(amount = 1): void {
@@ -421,7 +424,9 @@ export default defineComponent({
         end: parsedEndDate.value,
         task,
         taskIndex,
+        indentLevel,
         expanded,
+        droppable: dragOverTask.value === task[props.taskKey],
       }
       const width = convertToUnit(props.taskWidth)
       const style: CSSProperties = {
@@ -435,6 +440,7 @@ export default defineComponent({
       return h(
         'div',
         {
+          tabindex: isFocusable === true ? 0 : -1,
           class: {
             'q-calendar-task__task--item': true,
             'q-calendar__sticky': isSticky.value === true,
@@ -442,6 +448,27 @@ export default defineComponent({
             'q-calendar__focusable': isFocusable === true,
           },
           style,
+          ...getDragEventHandlers(props, {
+            targetRef: dragOverTask,
+            value: task[props.taskKey],
+            resetValue: '',
+            type: 'task',
+            scope,
+          }),
+          onKeydown: (event: KeyboardEvent) => {
+            if (isKeyCode(event, [13, 32])) {
+              event.stopPropagation()
+              event.preventDefault()
+            }
+          },
+          onKeyup: (event: KeyboardEvent) => {
+            if (isKeyCode(event, [13, 32]) && emitListeners.value.onClickTask !== undefined) {
+              emit('click-task', { scope, event })
+            }
+          },
+          ...getDefaultMouseEventHandlers('-task', (event) => {
+            return { scope, event }
+          }),
         },
         [
           h(
@@ -716,6 +743,9 @@ export default defineComponent({
             'q-calendar__sticky': isSticky.value === true,
           },
           style,
+          ...getDefaultMouseEventHandlers('-head-tasks', (event) => {
+            return { scope, event }
+          }),
         },
         [slot && slot({ scope })],
       )

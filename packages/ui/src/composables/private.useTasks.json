@@ -212,9 +212,24 @@
                   "type": "Object",
                   "__exemption": ["examples"]
                 },
-                "index": {
+                "taskIndex": {
                   "desc": "The task index",
                   "type": "Number",
+                  "__exemption": ["examples"]
+                },
+                "indentLevel": {
+                  "desc": "The task nesting depth",
+                  "type": "Number",
+                  "__exemption": ["examples"]
+                },
+                "expanded": {
+                  "desc": "True if the task row is expanded",
+                  "type": "Boolean",
+                  "__exemption": ["examples"]
+                },
+                "droppable": {
+                  "desc": "The current drag/drop state for the task row",
+                  "type": ["Boolean", "String"],
                   "__exemption": ["examples"]
                 }
               }
@@ -449,6 +464,66 @@
           }
         }
       }
+    },
+    "click-task": {
+      "desc": "Occurs on a task row"
+    },
+    "contextmenu-task": {
+      "desc": "Occurs on a task row"
+    },
+    "mousedown-task": {
+      "desc": "Occurs on a task row"
+    },
+    "mousemove-task": {
+      "desc": "Occurs on a task row"
+    },
+    "mouseup-task": {
+      "desc": "Occurs on a task row"
+    },
+    "mouseenter-task": {
+      "desc": "Occurs on a task row"
+    },
+    "mouseleave-task": {
+      "desc": "Occurs on a task row"
+    },
+    "touchstart-task": {
+      "desc": "Occurs on a task row"
+    },
+    "touchmove-task": {
+      "desc": "Occurs on a task row"
+    },
+    "touchend-task": {
+      "desc": "Occurs on a task row"
+    },
+    "click-head-tasks": {
+      "desc": "Occurs on the task header area"
+    },
+    "contextmenu-head-tasks": {
+      "desc": "Occurs on the task header area"
+    },
+    "mousedown-head-tasks": {
+      "desc": "Occurs on the task header area"
+    },
+    "mousemove-head-tasks": {
+      "desc": "Occurs on the task header area"
+    },
+    "mouseup-head-tasks": {
+      "desc": "Occurs on the task header area"
+    },
+    "mouseenter-head-tasks": {
+      "desc": "Occurs on the task header area"
+    },
+    "mouseleave-head-tasks": {
+      "desc": "Occurs on the task header area"
+    },
+    "touchstart-head-tasks": {
+      "desc": "Occurs on the task header area"
+    },
+    "touchmove-head-tasks": {
+      "desc": "Occurs on the task header area"
+    },
+    "touchend-head-tasks": {
+      "desc": "Occurs on the task header area"
     }
   }
 }

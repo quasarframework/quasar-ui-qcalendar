@@ -2689,6 +2689,66 @@
     "task-expanded": {
       "passthrough": true
     },
+    "click-task": {
+      "passthrough": true
+    },
+    "contextmenu-task": {
+      "passthrough": true
+    },
+    "mousedown-task": {
+      "passthrough": true
+    },
+    "mousemove-task": {
+      "passthrough": true
+    },
+    "mouseup-task": {
+      "passthrough": true
+    },
+    "mouseenter-task": {
+      "passthrough": true
+    },
+    "mouseleave-task": {
+      "passthrough": true
+    },
+    "touchstart-task": {
+      "passthrough": true
+    },
+    "touchmove-task": {
+      "passthrough": true
+    },
+    "touchend-task": {
+      "passthrough": true
+    },
+    "click-head-tasks": {
+      "passthrough": true
+    },
+    "contextmenu-head-tasks": {
+      "passthrough": true
+    },
+    "mousedown-head-tasks": {
+      "passthrough": true
+    },
+    "mousemove-head-tasks": {
+      "passthrough": true
+    },
+    "mouseup-head-tasks": {
+      "passthrough": true
+    },
+    "mouseenter-head-tasks": {
+      "passthrough": true
+    },
+    "mouseleave-head-tasks": {
+      "passthrough": true
+    },
+    "touchstart-head-tasks": {
+      "passthrough": true
+    },
+    "touchmove-head-tasks": {
+      "passthrough": true
+    },
+    "touchend-head-tasks": {
+      "passthrough": true
+    },
     "click-head-day": {
       "passthrough": true
     },
