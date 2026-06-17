@@ -450,7 +450,7 @@ const html = computed(() => {
       return p1 + p2.replace(/>/g, '___TEMP_REPLACEMENT___') + p3
     })
     .replace(
-      /<([A-Z][\w-]*|[a-z][\w]*-[\w-]+|div)([^>]*?)\s*?([\n\r][\t ]+)?\/>/gs,
+      /<([A-Z][\w-]*|[a-z][\w]*-[\w-]+|div|span)([^>]*?)\s*?([\n\r][\t ]+)?\/>/gs,
       '<$1$2$3></$1>',
     )
     .replace(

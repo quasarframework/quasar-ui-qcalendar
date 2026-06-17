@@ -8,7 +8,7 @@
             class="custom-header-example__date-button custom-header-example__direction-button custom-header-example__direction-button--left"
             @click="onPrev"
           >
-            <span class="q-calendar__focus-helper" tabindex="-1" />
+            <span class="q-calendar__focus-helper" tabindex="-1"></span>
           </button>
           <div class="custom-header-example__dates-holder">
             <transition :name="transition">
@@ -24,7 +24,7 @@
                     :class="dayClass(day)"
                     @click="onSelectDate(day.date)"
                   >
-                    <span class="q-calendar__focus-helper" tabindex="-1" />
+                    <span class="q-calendar__focus-helper" tabindex="-1"></span>
                     <div style="width: 100%">
                       {{ formatMonth(day) }}
                     </div>
@@ -44,7 +44,7 @@
             class="custom-header-example__date-button custom-header-example__direction-button custom-header-example__direction-button--right"
             @click="onNext"
           >
-            <span class="q-calendar__focus-helper" tabindex="-1" />
+            <span class="q-calendar__focus-helper" tabindex="-1"></span>
           </button>
         </div>
         <q-calendar-day
