@@ -2,6 +2,10 @@
   <div class="subcontent">
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
+    <div class="q-ma-sm row justify-center">
+      <q-toggle v-model="isDark" label="Toggle Dark Mode" />
+    </div>
+
     <div class="row justify-center">
       <div style="display: flex; max-width: 800px; width: 100%">
         <q-calendar-task
@@ -10,7 +14,7 @@
           v-model:model-tasks="parsedTasks"
           v-model:model-footer="footerTasks"
           view="month"
-          dark
+          :dark="isDark"
           :task-width="240"
           :min-weekday-length="2"
           :weekday-class="weekdayClass"
@@ -128,6 +132,7 @@ const calendar = ref<QCalendarTask>(),
   selectedDate = ref(today()),
   startDate = ref(today()),
   endDate = ref(today()),
+  isDark = ref(true),
   tasks = ref<Task[]>([
     {
       title: 'Task 1',

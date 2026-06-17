@@ -82,12 +82,14 @@
           <template #footer-task="{ scope }">
             <div class="summary ellipsis">
               <div class="title ellipsis">{{ scope.footer.title }}</div>
-              <div class="total">{{ totals(scope.start, scope.end) }}</div>
+              <div class="total">{{ footerTotal(scope.footer, scope.start, scope.end) }}</div>
             </div>
           </template>
 
           <template #footer-day="{ scope }">
-            <div class="logged-time">{{ getLoggedSummary(scope.timestamp.date) }}</div>
+            <div class="logged-time">
+              {{ footerDayValue(scope.footer, scope.timestamp.date) }}
+            </div>
           </template>
         </q-calendar-task>
       </div>
@@ -121,6 +123,7 @@ interface Task {
 }
 interface FooterTask {
   title: string
+  type: 'hours' | 'entries'
 }
 
 const calendar = ref<QCalendarTask>(),
@@ -230,7 +233,10 @@ const calendar = ref<QCalendarTask>(),
       ],
     },
   ]),
-  footerTasks = ref<FooterTask[]>([{ title: 'TOTALS' }])
+  footerTasks = ref<FooterTask[]>([
+    { title: 'LOGGED HOURS', type: 'hours' },
+    { title: 'LOG ENTRIES', type: 'entries' },
+  ])
 
 /**
  * Returns tasks between startDate and endDate (captured via onChange event)
@@ -276,6 +282,12 @@ function getLoggedSummary(date: string): number {
   }, 0)
 }
 
+function getLoggedEntryCount(date: string): number {
+  return tasks.value.reduce((total, task) => {
+    return total + task.logged.filter((log) => log.date === date).length
+  }, 0)
+}
+
 /**
  * Sums up the amount of time spent on a task
  * This only sums it up if the logged date falls
@@ -308,6 +320,14 @@ function footerDayClass(/*data*/) {
   }
 }
 
+function footerDayValue(footer: FooterTask, date: string): number {
+  return footer.type === 'entries' ? getLoggedEntryCount(date) : getLoggedSummary(date)
+}
+
+function footerTotal(footer: FooterTask, start: Timestamp, end: Timestamp): number {
+  return footer.type === 'entries' ? logEntryCount(start, end) : totals(start, end)
+}
+
 /**
  * Sums up the amount of time spent for all tasks
  * between the start and end dates
@@ -317,6 +337,17 @@ function totals(start: Timestamp, end: Timestamp) {
     const loggedTimestamp = parsed(currentValue.date)
     return loggedTimestamp !== null && isBetweenDates(loggedTimestamp, start, end)
       ? accumulator + currentValue.logged
+      : accumulator
+  }
+
+  return tasks.value.reduce((total, task) => total + task.logged.reduce(reducer, 0), 0)
+}
+
+function logEntryCount(start: Timestamp, end: Timestamp): number {
+  const reducer = (accumulator: number, currentValue: { date: string }) => {
+    const loggedTimestamp = parsed(currentValue.date)
+    return loggedTimestamp !== null && isBetweenDates(loggedTimestamp, start, end)
+      ? accumulator + 1
       : accumulator
   }
 

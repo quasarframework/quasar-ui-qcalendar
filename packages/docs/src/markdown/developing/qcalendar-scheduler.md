@@ -8,7 +8,30 @@ examples: Scheduler
 import QCalendarSchedulerApi from '@quasar/quasar-ui-qcalendar/dist/api/QCalendarScheduler.json'
 </script>
 
+QCalendarScheduler groups a day-oriented calendar by resource while keeping date
+columns visible. It is designed for schedules where each resource owns work
+across one or more days.
+
+Use this calendar when users need a resource-first planning board with day cells
+instead of a detailed interval grid. Scheduler views work well for teams,
+locations, lanes, assets, or other resources where the main task is assigning and
+reviewing work by day.
+
 <MarkdownApi :api="QCalendarSchedulerApi" name="QCalendarScheduler"/>
+
+## Date Type
+
+Use `date-type` when scheduler dates need to match the format used by your data
+source. This keeps the rendered schedule anchored to the intended date.
+
+<MarkdownExample title="Date Type" file="SchedulerDateType"/>
+
+## Dark
+
+Use the Toggle Dark Mode control to compare the scheduler calendar in light and
+dark styling without changing the global site theme.
+
+<MarkdownExample title="Dark" file="SchedulerDark"/>
 
 ## Alignment
 
@@ -24,11 +47,111 @@ The calendar goes into a special `sticky` mode when this happens so you can scro
 
 <MarkdownExample title="Cell Width" file="SchedulerCellWidth"/>
 
-## Children
+## Disabled Before After
+
+All days before and after the current day have been disabled with the properties `disabled-before` and `disabled-after`.
+
+<MarkdownExample title="Disabled Before After" file="SchedulerDisabledBeforeAfter"/>
+
+## Disabled Days
+
+The example anchors its date to a visible week and disables a short run of visible days with the `disabled-days` property.
+
+The first example uses an array of dates to disable each specific date.
+
+The second example uses the object form with `from`, `to`, `color`, and `textColor` to create a reservation-style disabled range.
+
+<MarkdownExample title="Disabled Days" file="SchedulerDisabledDays"/>
+
+## Disabled Weekdays
+
+The weekends have been disabled with the `disabled-weekdays` property.
+
+<MarkdownExample title="Disabled Weekdays" file="SchedulerDisabledWeekdays"/>
+
+## First Day Monday
+
+Set `first-day-monday` when scheduler weeks should begin on Monday. This aligns
+the resource columns with regional or business calendar expectations.
+
+<MarkdownExample title="First Day Monday" file="SchedulerFirstDayMonday"/>
+
+## Five Day Workweek
+
+Use `weekdays` to show a resource schedule for working days only. This removes
+weekend columns when they are not part of the workflow.
+
+<MarkdownExample title="Five Day Workweek" file="SchedulerFiveDayWorkweek"/>
+
+## Focusable Hoverable
+
+::: tip
+If the property `focus-type` contains `weekday`, you can also use the <kbd>Enter</kbd> or <kbd>Space</kbd> keys for date selection.
+:::
+
+<MarkdownExample title="Focusable Hoverable" file="SchedulerFocusableHoverable"/>
+
+## Locale
+
+Locale controls generated date and weekday labels. Use it when scheduler headers
+should match the language and regional formatting of your app.
+
+<MarkdownExample title="Locale" file="SchedulerLocale"/>
+
+## No Active Date
+
+Use `no-active-date` when the model date should not be highlighted in the
+scheduler. This is helpful for read-only resource overviews.
+
+<MarkdownExample title="No Active Date" file="SchedulerNoActiveDate"/>
+
+## Now
+
+The current date has been set to tomorrow via the `now` property.
+
+<MarkdownExample title="Now" file="SchedulerNow"/>
+
+## Theme
+
+The theme example shows how scheduler CSS variables can be customized to create a
+branded resource schedule without changing component behavior.
+
+<MarkdownExample title="Theme" file="SchedulerTheme"/>
+
+## Width Height
+
+There is no dedicated `resource-width` prop on `QCalendarScheduler`.
+
+To control the left resources pane width, set the css variable `--calendar-resources-width` on the calendar, for example through `:style` or a custom class.
+
+The example below uses that css variable together with `resource-height`, `resource-min-height`, and `cell-width`.
+
+<MarkdownExample title="Width Height" file="SchedulerWidthHeight"/>
+
+## Slots
+
+Slots let you customize resource headers, resource labels, and day cells while
+the scheduler continues to manage the resource/date grid.
+
+### Head Resources
+
+<MarkdownExample title="Slot - Head Resources" file="SchedulerSlotHeadResources"/>
+
+### Resource Days
+
+<MarkdownExample title="Slot - Resource Days" file="SchedulerSlotResourceDays"/>
+
+### Resource Label
+
+<MarkdownExample title="Slot - Resource Label" file="SchedulerSlotResourceLabel"/>
+
+## Recipes
+
+### Children
 
 <MarkdownExample title="Children" file="SchedulerChildren"/>
 
-## Custom Height
+### Custom Height
 
 You can have each resource row have it's own specific height by including a `height` key (as a number of pixels, without the **px**) in each resource object. For example:
 
@@ -67,39 +190,7 @@ If the `resource-min-height` is more than your custom height, then you won't see
 
 <MarkdownExample title="Custom Height" file="SchedulerCustomHeight"/>
 
-## Dark
-
-This will only make sense if your browser is currently in light mode.
-
-<MarkdownExample title="Dark" file="SchedulerDark"/>
-
-## Date Type
-
-<MarkdownExample title="Date Type" file="SchedulerDateType"/>
-
-## Disabled Before After
-
-All days before and after the current day have been disabled with the properties `disabled-before` and `disabled-after`.
-
-<MarkdownExample title="Disabled Before After" file="SchedulerDisabledBeforeAfter"/>
-
-## Disabled Days
-
-The example anchors its date to a visible week and disables a short run of visible days with the `disabled-days` property.
-
-The first example uses an array of dates to disable each specific date.
-
-The second example uses the object form with `from`, `to`, `color`, and `textColor` to create a reservation-style disabled range.
-
-<MarkdownExample title="Disabled Days" file="SchedulerDisabledDays"/>
-
-## Disabled Weekdays
-
-The weekends have been disabled with the `disabled-weekdays` property.
-
-<MarkdownExample title="Disabled Weekdays" file="SchedulerDisabledWeekdays"/>
-
-## Drag And Drop
+### Drag And Drop
 
 Drag any items in the list to a calendar day or the top header.
 
@@ -111,58 +202,10 @@ Instead use `box-shadow` to create an inset like this `box-shadow: inset 0 0 0 1
 
 <MarkdownExample title="Drag And Drop" file="SchedulerDragAndDrop"/>
 
-## First Day Monday
+### Server Data
 
-<MarkdownExample title="First Day Monday" file="SchedulerFirstDayMonday"/>
+This recipe keeps the calendar empty until you click **Load visible range**. The
+button simulates waiting for a server response, then fills the visible calendar
+with data returned for the current range.
 
-## Five Day Workweek
-
-<MarkdownExample title="Five Day Workweek" file="SchedulerFiveDayWorkweek"/>
-
-## Focusable Hoverable
-
-::: tip
-If the property `focus-type` contains `weekday`, you can also use the <kbd>Enter</kbd> or <kbd>Space</kbd> keys for date selection.
-:::
-
-<MarkdownExample title="Focusable Hoverable" file="SchedulerFocusableHoverable"/>
-
-## Locale
-
-<MarkdownExample title="Locale" file="SchedulerLocale"/>
-
-## No Active Date
-
-<MarkdownExample title="No Active Date" file="SchedulerNoActiveDate"/>
-
-## Now
-
-The current date has been set to tomorrow via the `now` property.
-
-<MarkdownExample title="Now" file="SchedulerNow"/>
-
-## Slot - Head Resources
-
-<MarkdownExample title="Slot - Head Resources" file="SchedulerSlotHeadResources"/>
-
-## Slot - Resource Days
-
-<MarkdownExample title="Slot - Resource Days" file="SchedulerSlotResourceDays"/>
-
-## Slot - Resource Label
-
-<MarkdownExample title="Slot - Resource Label" file="SchedulerSlotResourceLabel"/>
-
-## Theme
-
-<MarkdownExample title="Theme" file="SchedulerTheme"/>
-
-## Width Height
-
-There is no dedicated `resource-width` prop on `QCalendarScheduler`.
-
-To control the left resources pane width, set the css variable `--calendar-resources-width` on the calendar, for example through `:style` or a custom class.
-
-The example below uses that css variable together with `resource-height`, `resource-min-height`, and `cell-width`.
-
-<MarkdownExample title="Width Height" file="SchedulerWidthHeight"/>
+<MarkdownExample title="Server Data" file="SchedulerServerData"/>

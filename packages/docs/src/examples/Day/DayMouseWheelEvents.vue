@@ -4,8 +4,8 @@
 
     <div class="q-mb-md text-caption">
       Wheel over an event:
-      <kbd>Ctrl</kbd> resizes, <kbd>Shift</kbd> resizes in 5 minute steps, <kbd>Alt</kbd> moves, and
-      <kbd>Ctrl</kbd> + <kbd>Alt</kbd> zooms the interval height.
+      <kbd>Ctrl</kbd> resizes in 1 minute steps, <kbd>Shift</kbd> resizes in 5 minute steps,
+      <kbd>Alt</kbd> moves, and <kbd>Ctrl</kbd> + <kbd>Alt</kbd> zooms the interval height.
     </div>
 
     <div class="row justify-center">

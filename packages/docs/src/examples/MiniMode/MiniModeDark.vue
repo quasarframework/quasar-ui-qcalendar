@@ -2,6 +2,10 @@
   <div class="subcontent">
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
+    <div class="q-ma-sm row justify-center">
+      <q-toggle v-model="isDark" label="Toggle Dark Mode" />
+    </div>
+
     <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap">
       <div style="display: flex; max-width: 280px; width: 100%">
         <q-calendar-month
@@ -10,7 +14,7 @@
           animated
           bordered
           mini-mode
-          dark
+          :dark="isDark"
           @change="onChange"
           @moved="onMoved"
           @click-date="onClickDate"
@@ -34,6 +38,7 @@ import NavigationBar from '@/components/NavigationBar.vue'
 
 const calendar = ref<QCalendarMonth>()
 const selectedDate = ref(today())
+const isDark = ref(true)
 
 function onToday() {
   if (calendar.value) {

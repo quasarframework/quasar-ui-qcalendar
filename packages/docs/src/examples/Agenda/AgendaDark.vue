@@ -2,13 +2,17 @@
   <div class="subcontent">
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
+    <div class="q-ma-sm row justify-center">
+      <q-toggle v-model="isDark" label="Toggle Dark Mode" />
+    </div>
+
     <div class="row justify-center">
       <div style="display: flex; max-width: 800px; width: 100%; height: 200px">
         <q-calendar-agenda
           ref="calendar"
           v-model="selectedDate"
           view="day"
-          dark
+          :dark="isDark"
           :left-column-options="leftColumnOptions"
           :right-column-options="rightColumnOptions"
           column-options-id="id"
@@ -38,6 +42,7 @@ import NavigationBar from '@/components/NavigationBar.vue'
 
 const calendar = ref<QCalendarAgenda>()
 const selectedDate = ref(today())
+const isDark = ref(true)
 const leftColumnOptions = ref([
   {
     id: 'overdue',

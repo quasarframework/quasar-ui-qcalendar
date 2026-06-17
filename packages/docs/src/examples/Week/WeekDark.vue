@@ -2,13 +2,17 @@
   <div class="subcontent">
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
+    <div class="q-ma-sm row justify-center">
+      <q-toggle v-model="isDark" label="Toggle Dark Mode" />
+    </div>
+
     <div class="row justify-center">
       <div style="display: flex; max-width: 800px; width: 100%; height: 400px">
         <q-calendar-day
           ref="calendar"
           v-model="selectedDate"
           view="week"
-          dark
+          :dark="isDark"
           animated
           bordered
           @change="onChange"
@@ -32,7 +36,8 @@ import { ref } from 'vue'
 import NavigationBar from '@/components/NavigationBar.vue'
 
 const calendar = ref<QCalendarDay>(),
-  selectedDate = ref(today())
+  selectedDate = ref(today()),
+  isDark = ref(true)
 
 function onToday() {
   if (calendar.value) {

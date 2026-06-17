@@ -2,6 +2,10 @@
   <div class="subcontent">
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
+    <div class="q-ma-sm row justify-center">
+      <q-toggle v-model="isDark" label="Toggle Dark Mode" />
+    </div>
+
     <div class="row justify-center">
       <div style="display: flex; max-width: 800px; width: 100%; max-height: 400px">
         <q-calendar-resource
@@ -12,7 +16,7 @@
           resource-label="name"
           animated
           bordered
-          dark
+          :dark="isDark"
           @change="onChange"
           @moved="onMoved"
           @resource-expanded="onResourceExpanded"
@@ -45,6 +49,7 @@ interface Resource {
 
 const calendar = ref<QCalendarResource>(),
   selectedDate = ref(today()),
+  isDark = ref(true),
   resources = ref<Resource[]>([
     { id: '1', name: 'John' },
     { id: '2', name: 'Board Room' },
