@@ -336,7 +336,7 @@ export default defineComponent({
     // public functions
 
     function moveToToday(): void {
-      emittedValue.value = today()
+      move(0)
     }
 
     function next(amount = 1): void {

@@ -8,6 +8,7 @@ import {
   updateRelative,
   updateWeekday,
   nextDay,
+  parsed,
   prevDay,
   today,
   type Timestamp,
@@ -72,7 +73,15 @@ export default function useMove(
    */
   function move(amount = 1): void {
     if (amount === 0) {
-      emittedValue.value = today()
+      let moved = parsed(today()) as Timestamp
+
+      moved = updateWeekday(moved)
+      moved = updateFormatted(moved)
+      moved = updateDayOfYear(moved)
+      moved = updateRelative(moved, times.now)
+
+      emittedValue.value = moved.date
+      emit('moved', moved)
       return
     }
 
