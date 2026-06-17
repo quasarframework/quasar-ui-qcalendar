@@ -1,18 +1,22 @@
 <template>
-  <div class="subcontent">
+  <div class="subcontent custom-header-example">
     <div style="display: flex; flex-direction: row; justify-content: center; width: 100%">
       <div style="max-width: 800px; width: 100%; display: flex; flex-direction: column">
-        <div class="title-bar">
+        <div class="custom-header-example__title-bar">
           <button
             tabindex="0"
-            class="date-button direction-button direction-button__left"
+            class="custom-header-example__date-button custom-header-example__direction-button custom-header-example__direction-button--left"
             @click="onPrev"
           >
             <span class="q-calendar__focus-helper" tabindex="-1" />
           </button>
-          <div class="dates-holder">
+          <div class="custom-header-example__dates-holder">
             <transition :name="transition">
-              <div v-if="parsedStart" :key="parsedStart.date" class="internal-dates-holder">
+              <div
+                v-if="parsedStart"
+                :key="parsedStart.date"
+                class="custom-header-example__internal-dates-holder"
+              >
                 <div v-for="day in days" :key="day.date" :style="dayStyle">
                   <button
                     tabindex="0"
@@ -37,7 +41,7 @@
           </div>
           <button
             tabindex="0"
-            class="date-button direction-button direction-button__right"
+            class="custom-header-example__date-button custom-header-example__direction-button custom-header-example__direction-button--right"
             @click="onNext"
           >
             <span class="q-calendar__focus-helper" tabindex="-1" />
@@ -172,8 +176,8 @@ function formatWeekday(day: CalendarTimestamp) {
 
 function dayClass(day: CalendarTimestamp) {
   return {
-    'date-button': true,
-    'selected-date-button': selectedDate.value === day.date,
+    'custom-header-example__date-button': true,
+    'custom-header-example__date-button--selected': selectedDate.value === day.date,
   }
 }
 
@@ -210,7 +214,7 @@ function onClickHeadDay(data: CalendarTimestamp) {
 </script>
 
 <style lang="scss" scoped>
-.title-bar {
+.custom-header-example__title-bar {
   position: relative;
   width: 100%;
   height: 70px;
@@ -224,7 +228,7 @@ function onClickHeadDay(data: CalendarTimestamp) {
   user-select: none;
 }
 
-.dates-holder {
+.custom-header-example__dates-holder {
   position: relative;
   flex: 1 1 auto;
   min-width: 0;
@@ -237,7 +241,7 @@ function onClickHeadDay(data: CalendarTimestamp) {
   user-select: none;
 }
 
-.internal-dates-holder {
+.custom-header-example__internal-dates-holder {
   position: relative;
   width: 100%;
   height: 100%;
@@ -250,7 +254,7 @@ function onClickHeadDay(data: CalendarTimestamp) {
   user-select: none;
 }
 
-.internal-dates-holder[class*='q-calendar--'][class*='-active'] {
+.custom-header-example__internal-dates-holder[class*='q-calendar--'][class*='-active'] {
   position: absolute;
   top: 0;
   left: 0; /* rtl:ignore */
@@ -258,7 +262,7 @@ function onClickHeadDay(data: CalendarTimestamp) {
   width: 100%;
 }
 
-.date-button.direction-button {
+.custom-header-example__date-button.custom-header-example__direction-button {
   background: #3f51b5;
   color: white;
   flex: 0 0 50px;
@@ -266,7 +270,7 @@ function onClickHeadDay(data: CalendarTimestamp) {
   max-width: 50px !important;
 }
 
-.direction-button__left:before {
+.custom-header-example__direction-button--left:before {
   content: '<';
   display: inline-flex;
   flex-direction: column;
@@ -276,7 +280,7 @@ function onClickHeadDay(data: CalendarTimestamp) {
   font-size: 3em;
 }
 
-.direction-button__right:before {
+.custom-header-example__direction-button--right:before {
   content: '>';
   display: inline-flex;
   flex-direction: column;
@@ -286,7 +290,7 @@ function onClickHeadDay(data: CalendarTimestamp) {
   font-size: 3em;
 }
 
-.date-button {
+.custom-header-example__date-button {
   color: white;
   background: #3f51b5;
   z-index: 2;
@@ -311,7 +315,7 @@ function onClickHeadDay(data: CalendarTimestamp) {
   user-select: none;
 }
 
-.selected-date-button {
+.custom-header-example__date-button--selected {
   color: #3f51b5 !important;
   background: white !important;
 }
