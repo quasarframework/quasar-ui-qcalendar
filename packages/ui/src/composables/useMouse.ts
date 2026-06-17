@@ -1,5 +1,14 @@
-import { EmitFn } from 'vue'
+import { EmitFn, getCurrentInstance, onBeforeUnmount } from 'vue'
 import { EmitListeners } from './useEmitListeners'
+
+interface QueuedMouseEmit {
+  event: MouseEvent | TouchEvent
+  eventName: string
+  frame: number
+  getEvent: GetEventFunction
+}
+
+const queuedMouseEmits = new WeakMap<EmitFn, Map<string, QueuedMouseEmit>>()
 /**
  * Converts a kebab-case string to camelCase.
  * @param {string} str - The kebab-case string.
@@ -22,6 +31,86 @@ interface MouseEventOptions {
  * Defines a function signature for event transformation.
  */
 type GetEventFunction = (_event: MouseEvent | TouchEvent, _eventName: string) => any
+
+function requestFrame(callback: FrameRequestCallback): number | undefined {
+  return typeof globalThis.requestAnimationFrame === 'function'
+    ? globalThis.requestAnimationFrame(callback)
+    : undefined
+}
+
+function cancelFrame(frame: number): void {
+  if (typeof globalThis.cancelAnimationFrame === 'function') {
+    globalThis.cancelAnimationFrame(frame)
+  }
+}
+
+function shouldCoalesceEmit(event: string): boolean {
+  return event === 'mousemove' || event === 'touchmove'
+}
+
+function emitMouseEvent(
+  emit: EmitFn,
+  eventName: string,
+  event: MouseEvent | TouchEvent,
+  getEvent: GetEventFunction,
+): void {
+  emit(eventName, getEvent(event, eventName))
+}
+
+function queueMouseEmit(
+  emit: EmitFn,
+  eventName: string,
+  event: MouseEvent | TouchEvent,
+  getEvent: GetEventFunction,
+): void {
+  let queuedForEmit = queuedMouseEmits.get(emit)
+
+  if (queuedForEmit === undefined) {
+    queuedForEmit = new Map()
+    queuedMouseEmits.set(emit, queuedForEmit)
+  }
+
+  const queued = queuedForEmit.get(eventName)
+
+  if (queued !== undefined) {
+    queued.event = event
+    queued.getEvent = getEvent
+    return
+  }
+
+  const frame = requestFrame(() => {
+    const queuedForEmit = queuedMouseEmits.get(emit)
+    const queued = queuedForEmit?.get(eventName)
+
+    if (queued === undefined) return
+
+    queuedForEmit!.delete(eventName)
+    if (queuedForEmit!.size === 0) {
+      queuedMouseEmits.delete(emit)
+    }
+
+    emitMouseEvent(emit, queued.eventName, queued.event, queued.getEvent)
+  })
+
+  if (frame === undefined) {
+    emitMouseEvent(emit, eventName, event, getEvent)
+    return
+  }
+
+  queuedForEmit.set(eventName, { event, eventName, frame, getEvent })
+}
+
+export function cancelQueuedMouseEmits(emit: EmitFn): void {
+  const queuedForEmit = queuedMouseEmits.get(emit)
+
+  if (queuedForEmit === undefined) return
+
+  for (const queued of queuedForEmit.values()) {
+    cancelFrame(queued.frame)
+  }
+
+  queuedMouseEmits.delete(emit)
+}
 
 /**
  * Generates mouse event handlers based on event listeners.
@@ -64,7 +153,11 @@ export function getMouseEventHandlers(
         if (eventOptions.stop) {
           event.stopPropagation()
         }
-        emit(eventName, getEvent(event, eventName))
+        if (shouldCoalesceEmit(eventOptions.event)) {
+          queueMouseEmit(emit, eventName, event, getEvent)
+        } else {
+          emitMouseEvent(emit, eventName, event, getEvent)
+        }
       }
       return eventOptions.result
     }
@@ -150,6 +243,12 @@ export default function useMouseEvents(
   getMouseEventName: (_suffix: string) => Record<string, MouseEventOptions>
   getRawMouseEvents: (_suffix: string) => string[]
 } {
+  if (getCurrentInstance() !== null) {
+    onBeforeUnmount(() => {
+      cancelQueuedMouseEmits(emit)
+    })
+  }
+
   return {
     getMouseEventHandlers: (
       events: Record<string, MouseEventOptions>,
