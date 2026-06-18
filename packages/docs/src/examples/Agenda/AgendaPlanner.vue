@@ -37,8 +37,11 @@
                   width: 100%;
                 "
               >
-                <CheckboxChecked v-if="overdueSelected" @click="overdueSelected = false" />
-                <Checkbox v-else @click="overdueSelected = true" />
+                <q-icon
+                  class="planner-select-icon"
+                  :name="overdueSelected ? 'check_box' : 'check_box_outline_blank'"
+                  @click="overdueSelected = !overdueSelected"
+                />
                 <span class="ellipsis">{{ label }}</span>
               </div>
             </template>
@@ -60,15 +63,11 @@
                 width: 100%;
               "
             >
-              <CheckboxChecked
-                v-if="selected[timestamp.weekday - 1]"
+              <q-icon
+                class="planner-select-icon"
+                :name="selected[timestamp.weekday - 1] ? 'check_box' : 'check_box_outline_blank'"
                 style="cursor: pointer"
-                @click="selected[timestamp.weekday - 1] = false"
-              />
-              <Checkbox
-                v-else
-                style="cursor: pointer"
-                @click="selected[timestamp.weekday - 1] = true"
+                @click="selected[timestamp.weekday - 1] = !selected[timestamp.weekday - 1]"
               />
               <span class="ellipsis"
                 >{{ weekdayFormatter(timestamp, false) }} {{ timestamp.day }}</span
@@ -110,7 +109,7 @@
                       font-size: 12px;
                     "
                   >
-                    <AddAlt />
+                    <q-icon name="add_circle_outline" />
                     Add Job
                   </div>
                   <div
@@ -123,7 +122,7 @@
                       font-size: 12px;
                     "
                   >
-                    <AddAlt />
+                    <q-icon name="add_circle_outline" />
                     Add Note
                   </div>
                 </div>
@@ -136,28 +135,77 @@
               >
                 <transition-group name="planner-item">
                   <template v-for="item in overdue" :key="item.id">
-                    <planner-item
-                      v-model="item.selected"
+                    <div
+                      class="q-mr-xs q-mb-xs q-px-sm planner-item"
+                      :class="{
+                        'planner-item--selected': item.selected,
+                        'planner-item--overdue': item.daysOver > 0,
+                      }"
                       :data-id="item.id"
-                      :name="item.name"
-                      :address="item.address"
-                      :email="item.email"
-                      :phone="item.phone"
-                      :work-done="item.workDone"
-                      :work-date="item.workDate"
-                      :amount="item.amount"
-                      :days-over="item.daysOver"
                       :draggable="true"
-                      @dragstart.stop="(e: DragEvent) => onDragStart(e, item)"
+                      @dragstart.stop="onDragStart($event, item)"
                       @dragend.stop="onDragEnd"
                       @dragenter.stop="onDragEnter"
                       @dragleave.stop="onDragLeave"
                       @dragover.stop="onDragOver"
                       @drop.stop="onDrop"
-                      @touchmove.stop="(e: TouchEvent) => onTouchMove(e, item)"
-                      @touchstart.stop="(/*e: TouchEvent*/) => onTouchStart(/*e, item*/)"
+                      @touchmove.stop="onTouchMove($event, item)"
+                      @touchstart.stop="onTouchStart"
                       @touchend.stop="onTouchEnd"
-                    />
+                    >
+                      <div class="planner-item__row">
+                        <div class="planner-item__icon">
+                          <q-icon
+                            class="planner-item__selectable"
+                            :name="item.selected ? 'check_box' : 'check_box_outline_blank'"
+                            @click.stop.prevent="toggleItem(item)"
+                          />
+                        </div>
+                        <div
+                          class="ellipsis planner-item__selectable"
+                          @click.stop.prevent="toggleItem(item)"
+                        >
+                          {{ item.name }}
+                        </div>
+                      </div>
+
+                      <div class="planner-item__row">
+                        <q-icon class="planner-item__icon" name="place" />
+                        <div class="ellipsis col">{{ item.address }}</div>
+                      </div>
+
+                      <div class="planner-item__row">
+                        <q-icon class="planner-item__icon" name="mail" />
+                        <div class="ellipsis col">{{ item.email }}</div>
+                      </div>
+
+                      <div class="planner-item__row">
+                        <q-icon class="planner-item__icon" name="phone" />
+                        <div class="ellipsis col">{{ item.phone }}</div>
+                      </div>
+
+                      <div class="planner-item__row">
+                        <q-icon class="planner-item__icon" name="construction" />
+                        <div class="ellipsis col">{{ item.workDone }}</div>
+                      </div>
+
+                      <div class="planner-item__row">
+                        <q-icon class="planner-item__icon" name="event" />
+                        <div class="ellipsis col">{{ item.workDate }}</div>
+                      </div>
+
+                      <div class="planner-item__row">
+                        <q-icon class="planner-item__icon" name="attach_money" />
+                        <div class="ellipsis col">{{ item.amount }}</div>
+                      </div>
+
+                      <div class="planner-item__row">
+                        <q-icon class="planner-item__icon planner-item__overdue" name="alarm" />
+                        <div class="ellipsis planner-item__overdue">
+                          {{ item.daysOver }} days overdue
+                        </div>
+                      </div>
+                    </div>
                   </template>
                 </transition-group>
               </div>
@@ -197,7 +245,7 @@
                     font-size: 12px;
                   "
                 >
-                  <AddAlt />
+                  <q-icon name="add_circle_outline" />
                   Add Job
                 </div>
                 <div
@@ -210,7 +258,7 @@
                     font-size: 12px;
                   "
                 >
-                  <AddAlt />
+                  <q-icon name="add_circle_outline" />
                   Add Note
                 </div>
               </div>
@@ -223,28 +271,77 @@
             >
               <transition-group name="planner-item">
                 <template v-for="item in getAgenda(timestamp)" :key="item.id">
-                  <planner-item
-                    v-model="item.selected"
+                  <div
+                    class="q-mr-xs q-mb-xs q-px-sm planner-item"
+                    :class="{
+                      'planner-item--selected': item.selected,
+                      'planner-item--overdue': item.daysOver > 0,
+                    }"
                     :data-id="item.id"
-                    :name="item.name"
-                    :address="item.address"
-                    :email="item.email"
-                    :phone="item.phone"
-                    :work-done="item.workDone"
-                    :work-date="item.workDate"
-                    :amount="item.amount"
-                    :days-over="item.daysOver"
                     :draggable="true"
-                    @dragstart.stop="(e: DragEvent) => onDragStart(e, item)"
+                    @dragstart.stop="onDragStart($event, item)"
                     @dragend.stop="onDragEnd"
                     @dragenter.stop="onDragEnter"
                     @dragleave.stop="onDragLeave"
                     @dragover.stop="onDragOver"
                     @drop.stop="onDrop"
-                    @touchmove.stop="(e: TouchEvent) => onTouchMove(e, item)"
-                    @touchstart.stop="(/*e: TouchEvent*/) => onTouchStart(/*e, item*/)"
+                    @touchmove.stop="onTouchMove($event, item)"
+                    @touchstart.stop="onTouchStart"
                     @touchend.stop="onTouchEnd"
-                  />
+                  >
+                    <div class="planner-item__row">
+                      <div class="planner-item__icon">
+                        <q-icon
+                          class="planner-item__selectable"
+                          :name="item.selected ? 'check_box' : 'check_box_outline_blank'"
+                          @click.stop.prevent="toggleItem(item)"
+                        />
+                      </div>
+                      <div
+                        class="ellipsis planner-item__selectable"
+                        @click.stop.prevent="toggleItem(item)"
+                      >
+                        {{ item.name }}
+                      </div>
+                    </div>
+
+                    <div class="planner-item__row">
+                      <q-icon class="planner-item__icon" name="place" />
+                      <div class="ellipsis col">{{ item.address }}</div>
+                    </div>
+
+                    <div class="planner-item__row">
+                      <q-icon class="planner-item__icon" name="mail" />
+                      <div class="ellipsis col">{{ item.email }}</div>
+                    </div>
+
+                    <div class="planner-item__row">
+                      <q-icon class="planner-item__icon" name="phone" />
+                      <div class="ellipsis col">{{ item.phone }}</div>
+                    </div>
+
+                    <div class="planner-item__row">
+                      <q-icon class="planner-item__icon" name="construction" />
+                      <div class="ellipsis col">{{ item.workDone }}</div>
+                    </div>
+
+                    <div class="planner-item__row">
+                      <q-icon class="planner-item__icon" name="event" />
+                      <div class="ellipsis col">{{ item.workDate }}</div>
+                    </div>
+
+                    <div class="planner-item__row">
+                      <q-icon class="planner-item__icon" name="attach_money" />
+                      <div class="ellipsis col">{{ item.amount }}</div>
+                    </div>
+
+                    <div class="planner-item__row">
+                      <q-icon class="planner-item__icon planner-item__overdue" name="alarm" />
+                      <div class="ellipsis planner-item__overdue">
+                        {{ item.daysOver }} days overdue
+                      </div>
+                    </div>
+                  </div>
                 </template>
               </transition-group>
             </div>
@@ -266,17 +363,12 @@ import {
   prevDay,
   daysBetween,
   createNativeLocaleFormatter,
-  Timestamp,
 } from '@timestamp-js/core'
+import type { Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
-import Checkbox from '@carbon/icons-vue/es/checkbox/24'
-import CheckboxChecked from '@carbon/icons-vue/es/checkbox--checked/24'
-import AddAlt from '@carbon/icons-vue/es/add--alt/16'
 
 import { ref, reactive, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
 import NavigationBar from '@/components/NavigationBar.vue'
-import PlannerItem from '@/components/PlannerItem.vue'
-import { getLocale } from '@/util/getLocale'
 
 type AgendaItem = {
   id: number
@@ -414,7 +506,7 @@ selected.forEach((_, index) => {
 })
 
 onMounted(() => {
-  locale.value = getLocale()
+  locale.value = getBrowserLocale()
   updateFormatters()
   onToday()
 })
@@ -436,8 +528,7 @@ function onNext() {
   generateLists()
 }
 
-function onChange({ start, end }: { start: string; end: string }) {
-  console.info('onChange', start, end)
+function onChange({ start }: { start: string }) {
   Object.assign(startTimestamp, parseTimestamp(start))
 }
 
@@ -526,6 +617,10 @@ function adjustSelected() {
       item.selected = sel
     })
   })
+}
+
+function toggleItem(item: AgendaItem) {
+  item.selected = !item.selected
 }
 
 function getAgenda(timestamp: Timestamp): AgendaItem[] {
@@ -624,7 +719,7 @@ function onTouchMove(e: TouchEvent, item: AgendaItem) {
     pageY = touchLocation.pageY
   }
 
-  const touchStart = copyElement === null
+  const touchStart = copyElement === undefined
 
   const { column, child } = findTargets()
   if (column || child) {
@@ -702,6 +797,10 @@ function cleanup() {
   dragEl = curColEl = curChildEl = currentItem = copyElement = undefined
 }
 
+function getBrowserLocale() {
+  return Intl.DateTimeFormat().resolvedOptions().locale || 'en-US'
+}
+
 function getCorrectTarget(el: HTMLElement, klass: string): HTMLElement | undefined {
   if (!el) return
   return el.classList.contains(klass)
@@ -758,7 +857,78 @@ function addToColumn(column: string, id: number, item: AgendaItem) {
 }
 
 .planner-item {
+  border: 1px solid transparent;
+  box-shadow:
+    0 1px 5px rgb(0 0 0 / 20%),
+    0 2px 2px rgb(0 0 0 / 14%),
+    0 3px 1px -2px rgb(0 0 0 / 12%);
+  border-radius: 4px;
+  vertical-align: top;
+  padding: 2px;
+  margin: 2px;
+  margin-bottom: 4px;
+  font-size: 12px;
   transition: all 0.5s;
+
+  &:hover {
+    border: 1px solid rgba(0, 140, 200, 0.8);
+  }
+}
+
+.planner-item__row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+}
+
+.planner-item__icon {
+  max-width: 25px;
+  min-width: 25px;
+}
+
+.planner-select-icon,
+.planner-item__selectable {
+  color: blue;
+  cursor: pointer;
+}
+
+.planner-item--selected {
+  .planner-item__selectable {
+    color: red;
+  }
+}
+
+.planner-item--overdue {
+  .planner-item__overdue {
+    color: red;
+  }
+}
+
+:global(body.body--dark) {
+  .planner-item {
+    box-shadow:
+      0 1px 5px rgb(255 255 255 / 20%),
+      0 2px 2px rgb(255 255 255 / 14%),
+      0 3px 1px -2px rgb(255 255 255 / 12%);
+  }
+
+  .planner-select-icon,
+  .planner-item__selectable {
+    color: #82b1ff;
+  }
+
+  .planner-item--selected {
+    .planner-item__selectable {
+      color: #ff8a80;
+    }
+  }
+
+  .planner-item--overdue {
+    .planner-item__overdue {
+      color: #ff8a80;
+    }
+  }
 }
 
 .planner-item-enter,

@@ -153,7 +153,7 @@ This is a rudimentary Planner using QCalendarAgenda.
 On this example, you can try out the <em>Drag &amp; Drop</em>.
 :::
 
-<MarkdownExample title="Planner" file="AgendaPlanner" no-edit />
+<MarkdownExample title="Planner" file="AgendaPlanner" />
 
 ### Server Data
 
