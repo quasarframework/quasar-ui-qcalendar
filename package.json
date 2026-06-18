@@ -1,6 +1,6 @@
 {
   "name": "qcalendar",
-  "version": "5.0.0-rc.2",
+  "version": "5.0.0-rc.3",
   "private": true,
   "description": "QCalendar mono-repo",
   "license": "MIT",
@@ -41,6 +41,6 @@
     "node": ">=22.13",
     "pnpm": ">=11.5.0"
   },
-  "packageManager": "pnpm@11.7.0",
+  "packageManager": "pnpm@11.8.0",
   "access": "private"
 }
