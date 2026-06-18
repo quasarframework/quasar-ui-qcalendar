@@ -68,7 +68,7 @@
         nav-class="text-uppercase text-size-16 letter-spacing-300"
       />
 
-      <!-- <MarkdownSearch /> -->
+      <MarkdownSearch class="markdown-header__search q-ml-sm" />
 
       <div
         v-if="showThemeChanger"
@@ -149,6 +149,8 @@
         />
       </div>
 
+      <MarkdownSearch class="markdown-header__search q-ml-sm" />
+
       <MarkdownHeaderIconLinks class="gt-1400" :menu="siteConfig.links.socialLinks" />
 
       <div
@@ -187,7 +189,7 @@ import siteConfig from '../../siteConfig'
 
 import DarkModeToggle from '../components/DarkModeToggle.vue'
 
-// import MarkdownSearch from './MarkdownSearch.vue'
+import MarkdownSearch from './MarkdownSearch.vue'
 import MarkdownHeaderTextLinks from './MarkdownHeaderTextLinks.vue'
 import MarkdownHeaderIconLinks from './MarkdownHeaderIconLinks.vue'
 
@@ -292,6 +294,12 @@ const hasMoreLinks = computed(() => siteConfig.links.moreLinks.length > 0)
     }
     .markdown-search {
       width: 100%;
+    }
+  }
+
+  @media (max-width: 374px) {
+    &__logo {
+      display: none;
     }
   }
 

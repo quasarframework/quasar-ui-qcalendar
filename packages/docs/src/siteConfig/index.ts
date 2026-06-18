@@ -198,7 +198,7 @@ const footerLinks = [
 
 const gettingStartedMenu: SiteMenuItem = {
   name: 'Getting Started',
-  mq: 470, // media query breakpoint
+  mq: 820, // media query breakpoint
   children: [
     { name: 'Introduction', path: '/getting-started/introduction' },
     { name: 'Installation', path: '/getting-started/installation' },
@@ -212,7 +212,7 @@ const gettingStartedMenu: SiteMenuItem = {
 
 const developingMenu = {
   name: 'Developing',
-  mq: 600, // media query breakpoint
+  mq: 960, // media query breakpoint
   children: [
     { name: 'QCalendar', path: '/developing/qcalendar' },
     { name: 'QCalendarAgenda', path: '/developing/qcalendar-agenda' },
@@ -231,7 +231,7 @@ const developingMenu = {
 
 const examplesMenu = {
   name: 'Examples',
-  mq: 750, // media query breakpoint
+  mq: 1080, // media query breakpoint
   children: [
     {
       name: 'Agenda',
@@ -600,7 +600,7 @@ const examplesMenu = {
 
 const otherMenu: SiteMenuItem = {
   name: 'Other',
-  mq: 1190, // media query breakpoint
+  mq: 1240, // media query breakpoint
   children: [
     {
       name: 'Releases',

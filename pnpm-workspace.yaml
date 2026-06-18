@@ -139,4 +139,23 @@ minimumReleaseAgeExclude:
   - '@vue/language-core@3.3.5'
   - vue-tsc@3.3.5
   - vite-plugin-checker@0.14.4
+  - '@md-plugins/search-ui@0.1.0-rc.9'
+  - '@md-plugins/vite-search-plugin@0.1.0-rc.9'
+  - '@oxc-project/types@0.137.0'
+  - '@rolldown/binding-android-arm64@1.1.2'
+  - '@rolldown/binding-darwin-arm64@1.1.2'
+  - '@rolldown/binding-darwin-x64@1.1.2'
+  - '@rolldown/binding-freebsd-x64@1.1.2'
+  - '@rolldown/binding-linux-arm-gnueabihf@1.1.2'
+  - '@rolldown/binding-linux-arm64-gnu@1.1.2'
+  - '@rolldown/binding-linux-arm64-musl@1.1.2'
+  - '@rolldown/binding-linux-ppc64-gnu@1.1.2'
+  - '@rolldown/binding-linux-s390x-gnu@1.1.2'
+  - '@rolldown/binding-linux-x64-gnu@1.1.2'
+  - '@rolldown/binding-linux-x64-musl@1.1.2'
+  - '@rolldown/binding-openharmony-arm64@1.1.2'
+  - '@rolldown/binding-wasm32-wasi@1.1.2'
+  - '@rolldown/binding-win32-arm64-msvc@1.1.2'
+  - '@rolldown/binding-win32-x64-msvc@1.1.2'
+  - rolldown@1.1.2
 trustLockfile: true

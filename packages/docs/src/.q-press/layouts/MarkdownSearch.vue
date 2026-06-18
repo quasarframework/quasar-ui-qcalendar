@@ -1,449 +1,117 @@
-<!-- <template>
+<template>
   <div
-    ref="rootRef"
-    class="markdown-search z-max self-center"
-    :class="classes"
-    @click.prevent="onClick"
-    @focusin="onFocusin"
-    @focusout="onFocusout"
-  >
-    <div class="markdown-search__field rounded-borders row items-center no-wrap q-pl-sm q-pr-md">
-      <input
-        class="col"
-        name="search"
-        ref="inputRef"
-        placeholder="Search Quasar v2..."
-        v-model="terms"
-        @keydown="onKeydown"
-      />
-
-      <q-icon class="markdown-search__icon cursor-pointer" :name="icon.name" size="24px" @click="icon.onClick" />
-      <q-no-ssr v-if="keysLabel">
-        <kbd class="markdown-search__kbd q-ma-none">{{ keysLabel }}</kbd>
-      </q-no-ssr>
-    </div>
-
-    <div :class="resultsClass">
-      <template v-if="results">
-        <component
-          v-if="results.masterComponent !== void 0"
-          :is="results.masterComponent"
-        />
-        <app-search-results
-          v-else
-          :results="results"
-          :search-active-id="activeId"
-        />
-      </template>
-    </div>
-  </div>
+    ref="hostRef"
+    class="markdown-search-host"
+    :class="{ 'markdown-search-host--dark': isDark }"
+  />
 </template>
 
 <script setup lang="ts">
-import { useQuasar } from 'quasar'
-import { computed, ref, watch, markRaw, onMounted, onBeforeUnmount } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import type { MdSearchElement, MdSearchSelectEventDetail } from '@md-plugins/search-ui'
+import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { useRouter } from 'vue-router'
+import siteConfig from '../../siteConfig'
+import { useDark } from '../composables/dark'
 
-import AppSearchResults from './search/SearchResults.vue'
-import ResultEmpty from './search/ResultEmpty.vue'
-import ResultError from './search/ResultError.vue'
-
-const $q = useQuasar()
-const route = useRoute()
 const router = useRouter()
+const { isDark } = useDark()
+const hostRef = ref<HTMLDivElement>()
+const searchTitle = siteConfig.title || 'Documentation'
+let searchElement: MdSearchElement | undefined
+let unmounted = false
 
-const rootRef = ref(null)
-const inputRef = ref(null)
-
-const terms = ref('')
-const results = ref(null)
-const activeId = ref(null)
-
-const icon = computed(() => (
-  terms.value.length !== 0
-    ? { name: 'clear', onClick: resetSearch }
-    : { name: 'search', onClick: () => {} }
-))
-
-const keysLabel = computed(() => $q.platform.is.desktop === true ? ($q.platform.is.mac ? '⌘K' : 'Ctrl+K') : null)
-
-let focusoutTimer
-const hasFocus = ref(false)
-
-function onFocusin () {
-  clearTimeout(focusoutTimer)
-  hasFocus.value = true
+function withBase(path: string): string {
+  const base = import.meta.env.BASE_URL || '/'
+  return `${base.replace(/\/$/, '')}/${path.replace(/^\//, '')}`.replace(/\/{2,}/g, '/')
 }
 
-function onFocusout () {
-  clearTimeout(focusoutTimer)
-  focusoutTimer = setTimeout(() => {
-    hasFocus.value = false
-  }, 150)
+function toRouterTarget(url: string): string {
+  const parsedUrl = new URL(url, window.location.origin)
+
+  if (parsedUrl.origin !== window.location.origin) {
+    return url
+  }
+
+  return `${parsedUrl.pathname}${parsedUrl.search}${parsedUrl.hash}`
 }
 
-const classes = computed(() => (hasFocus.value ? 'markdown-search--focused' : null))
-const resultsClass = computed(() => (
-  'markdown-search__results rounded-borders rounded-borders overflow-auto' +
-  ` markdown-search__results--${ results.value ? 'active' : 'hidden' }`
-))
-
-function closePopup () {
-  hasFocus.value = false
-  activeId.value = null
+function onSearchSelect(event: Event): void {
+  const customEvent = event as CustomEvent<MdSearchSelectEventDetail>
+  customEvent.preventDefault()
+  searchElement?.close()
+  void router.push(toRouterTarget(customEvent.detail.result.url))
 }
 
-function resetSearch () {
-  terms.value = ''
-  results.value = null
-  activeId.value = null
-}
+onMounted(async () => {
+  const { defineMdSearchElement } = await import('@md-plugins/search-ui')
 
-let requestId = 0, fetchTimer
-
-function fetchQuery (val, onResult, onError) {
-  const localRequestId = requestId
-  clearTimeout(fetchTimer)
-
-  fetchTimer = setTimeout(() => {
-    if (localRequestId !== requestId) { return }
-
-    const xhr = new XMLHttpRequest()
-    const data = JSON.stringify({
-      q: val, limit: 15, cropLength: 50, attributesToCrop: ['content'], attributesToHighlight: ['content']
-    })
-
-    xhr.addEventListener('load', function () {
-      localRequestId === requestId && onResult(JSON.parse(this.responseText))
-    })
-
-    xhr.addEventListener('error', () => {
-      localRequestId === requestId && onError()
-    })
-
-    xhr.open('POST', `https://search.quasar.dev/indexes/${import.meta.env.QCLI_SEARCH_INDEX}/search`)
-    xhr.setRequestHeader('Content-Type', 'application/json')
-    xhr.setRequestHeader('Authorization', 'Bearer b7a6ea9a9978a4e4d994c1f9451210327f207441adbcf04a4aada3d17d829359')
-    xhr.send(data)
-  }, 400)
-}
-
-const contentRE = /(<em>|<\/em>)/
-const startsWithRE = /^[a-z0-9]/
-const endsWithRE = /[a-z0-9]$/
-
-function parseContent (content) {
-  if (!content) {
+  if (unmounted || hostRef.value === undefined) {
     return
   }
 
-  let inToken = false
+  defineMdSearchElement()
 
-  const acc = []
-  const str = (
-    (startsWithRE.test(content) ? '...' : '') +
-    content +
-    (endsWithRE.test(content) ? '...' : '')
-  )
+  searchElement = document.createElement('md-search') as MdSearchElement
+  searchElement.setAttribute('src', withBase('search/search-index.json'))
+  searchElement.setAttribute('placeholder', `Search ${searchTitle} docs...`)
+  searchElement.setAttribute('trigger-label', 'Search docs')
+  searchElement.setAttribute('panel-title', `Search ${searchTitle}`)
+  searchElement.setAttribute('search-label', `Search ${searchTitle} documentation`)
+  searchElement.setAttribute('theme', isDark.value === true ? 'dark' : 'light')
+  searchElement.setAttribute('max-results', '15')
+  searchElement.addEventListener('md-search-select', onSearchSelect)
 
-  str.split(contentRE).forEach(str => {
-    if (str === '') {
-      inToken = true
-    }
-    else if (str !== '<em>' && str !== '</em>') {
-      acc.push({
-        str,
-        class: inToken ? 'app-search__result-token' : null
-      })
-      inToken = !inToken
-    }
-  })
-
-  return acc
-}
-
-const supportedHitTypes = [ 'page-content', 'page-link' ]
-
-function parseResults (hits) {
-  if (hits.length === 0) {
-    return { masterComponent: markRaw(ResultEmpty) }
-  }
-
-  const acc = {
-    entries: [],
-    ids: []
-  }
-
-  hits.forEach(hit => {
-    // if we don't know how to display this API type then just abort
-    if (supportedHitTypes.includes(hit.type) === false) {
-      return
-    }
-
-    const entry = {
-      page: hit.menu.join(' » '),
-      section: [ hit.l1, hit.l2, hit.l3, hit.l4, hit.l5, hit.l6 ].filter(e => e).join(' » ') || null,
-      content: parseContent(hit._formatted.content),
-
-      onMouseenter () {
-        activeId.value = entry.id
-      },
-      onClick () {
-        closePopup()
-        router.push(hit.url).catch(() => {})
-      }
-    }
-
-    acc.entries.push(entry)
-  })
-
-  // ensure that the ids are assigned in the right order
-  // otherwise keyboard up/down will not work correctly
-  let globalId = 0
-  acc.entries.forEach(hit => {
-    const id = 'search--' + (++globalId)
-    hit.id = id
-    acc.ids.push(id)
-  })
-
-  return acc
-}
-
-function onKeydown (evt) {
-  switch (evt.keyCode) {
-    case 27: // escape
-      evt.preventDefault()
-      if (hasFocus.value === true) {
-        closePopup()
-      }
-      else {
-        resetSearch()
-      }
-      break
-    case 38: // up
-    case 40: // down
-      evt.preventDefault()
-      if (results.value !== null && results.value.ids !== void 0) {
-        if (activeId.value === null) {
-          activeId.value = results.value.ids[ 0 ]
-        }
-        else {
-          const ids = results.value.ids
-          const index = ids.indexOf(activeId.value)
-          activeId.value = ids[ (ids.length + index + (evt.keyCode === 38 ? -1 : 1)) % ids.length ]
-        }
-
-        const target = document.getElementById(activeId.value)
-        if (target.scrollIntoViewIfNeeded !== void 0) {
-          target.scrollIntoViewIfNeeded()
-        }
-        else {
-          target.scrollIntoView({ block: 'center' })
-        }
-      }
-      break
-    case 13: // enter
-      evt.preventDefault()
-      evt.stopPropagation()
-      if (results.value !== null) {
-        if (hasFocus.value === false) {
-          hasFocus.value = true
-          return
-        }
-
-        if (activeId.value !== null) {
-          document.getElementById(activeId.value).click(evt)
-        }
-      }
-      break
-  }
-}
-
-function onResultSuccess (response) {
-  results.value = parseResults(response.hits)
-  hasFocus.value = true
-  activeId.value = results.value.ids?.[ 0 ] || null
-}
-
-function onResultError () {
-  results.value = { masterComponent: markRaw(ResultError) }
-}
-
-watch(terms, val => {
-  requestId++
-
-  if (!val) {
-    resetSearch()
-  }
-  else {
-    fetchQuery(val, onResultSuccess, onResultError)
-  }
-})
-
-function onClick () {
-  inputRef.value.focus()
-  onFocusin()
-}
-
-function onGlobalKeydown (e) {
-  if ((e.ctrlKey || e.metaKey) && e.keyCode === 75 /* K */) {
-    e.preventDefault()
-    inputRef.value.focus()
-  }
-}
-
-onMounted(() => {
-  // If we have a search string in the query (mostly from tab-to-search functionality),
-  // we need to open the drawer to fill in the search string in the input later
-  const searchQuery = route.query.search
-
-  window.addEventListener('keydown', onGlobalKeydown)
-
-  if (searchQuery) {
-    terms.value = searchQuery
-    inputRef.value.focus()
-  }
+  hostRef.value?.append(searchElement)
 })
 
 onBeforeUnmount(() => {
-  window.removeEventListener('keydown', onGlobalKeydown)
+  unmounted = true
+  searchElement?.removeEventListener('md-search-select', onSearchSelect)
+  searchElement?.remove()
+  searchElement = undefined
+})
+
+watch(isDark, (value) => {
+  searchElement?.setAttribute('theme', value === true ? 'dark' : 'light')
 })
 </script>
 
-<style lang="scss">
-body.desktop {
-  .markdown-search__icon {
-    display: none;
-  }
-}
+<style lang="scss" scoped>
+.markdown-search-host {
+  display: inline-flex;
+  align-items: center;
+  min-width: min(330px, 28vw);
 
-.markdown-search {
-  width: 400px;
-  height: 43px;
-
-  &__field {
-    height: inherit;
-    width: inherit;
-    cursor: text;
-    transition: box-shadow $header-quick-transition, background-color $header-quick-transition;
-  }
-
-  input {
-    font-size: $font-size;
-    width: 1px !important; // required when on narrow width window to not overflow the page
-    border: 0;
-    outline: 0;
-    background: none;
+  :deep(md-search) {
+    width: 100%;
+    --md-search-accent: var(--qpress-color-primary);
+    --md-search-trigger-bg: var(--qpress-action-ghost-bg);
+    --md-search-trigger-border: var(--qpress-border-strong);
+    --md-search-trigger-color: var(--qpress-action-ghost-text);
+    --md-search-surface: #ffffff;
+    --md-search-surface-raised: #f6f8fb;
+    --md-search-result-bg: #f8fafc;
+    --md-search-result-active-bg: #eef4ff;
+    --md-search-text: var(--qpress-text-primary);
+    --md-search-muted: var(--qpress-text-muted);
+    --md-search-border: var(--qpress-border-strong);
+    --md-search-radius: 18px;
   }
 
-  &__kbd {
-    box-shadow: none !important;
-    padding: 4px;
-    border: 1px solid $grey !important;
-    background: transparent !important;
-  }
-
-  &__results {
-    max-height: 80vh;
-    top: 45px;
-    left: 0;
-    right: 0;
-    transform: scale3d(1, 0, 1);
-    transform-origin: top;
-    transition: transform 0.14s ease-in-out, box-shadow $header-quick-transition;
-  }
-
-  &--focused {
-    .markdown-search__results--active {
-      transform: scale3d(1, 1, 1);
-    }
-
-    .markdown-search__icon {
-      display: inline-block !important;
-    }
-
-    .markdown-search__kbd {
-      display: none;
+  &--dark {
+    :deep(md-search) {
+      --md-search-backdrop: rgb(0 0 0 / 64%);
+      --md-search-surface: #111827;
+      --md-search-surface-raised: #1f2937;
+      --md-search-result-bg: #0b1220;
+      --md-search-result-active-bg: #241522;
     }
   }
 }
 
-@media (max-width: 445px) {
-  .markdown-search__results {
-    position: fixed;
-    top: 60px;
-    left: 16px;
-    right: 16px;
+@media (max-width: 1059px) {
+  .markdown-search-host {
+    min-width: auto;
   }
 }
-
-@media (min-width: 446px) {
-  .markdown-search {
-    position: relative;
-  }
-
-  .markdown-search__results {
-    position: absolute;
-  }
-}
-
-body.mobile {
-  .markdown-search__results {
-    max-height: 50vh;
-  }
-}
-
-body.body--light .markdown-search {
-  input {
-    color: $light-text;
-  }
-
-  &__field {
-    background: $grey-4;
-  }
-
-  &__results {
-    background: #fff;
-    color: $light-text;
-  }
-
-  &--focused {
-    .markdown-search__results--active {
-      border: 1px solid $separator-color;
-    }
-
-    .markdown-search__field {
-      background-color: rgba(#000, 0.28);
-    }
-  }
-}
-
-body.body--dark .markdown-search {
-  input {
-    color: #fff;
-  }
-
-  &__field {
-    background-color: rgba(#fff, 0.12);
-  }
-
-  &__icon {
-    color: $brand-primary;
-  }
-
-  &__results {
-    background: $dark-bg;
-    color: $dark-text;
-  }
-
-  &--focused {
-    .markdown-search__results--active {
-      border: 1px solid $separator-dark-color;
-    }
-
-    .markdown-search__field {
-      background-color: rgba(#fff, 0.28);
-    }
-  }
-}
-</style> -->
+</style>
