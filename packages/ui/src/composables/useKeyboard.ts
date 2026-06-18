@@ -427,6 +427,12 @@ export default function useNavigation(
     }
   }
 
+  function updateModelValueWhenFocusIsOutsideRenderedDates(timestamp: Timestamp): void {
+    if (getFocusElement(getFocusKey(timestamp)) === undefined) {
+      emittedValue.value = timestamp.date
+    }
+  }
+
   function onKeyDown(e: KeyboardEvent): void {
     if (canNavigate(e) && isKeyCode(e, [33, 34, 35, 36, 37, 38, 39, 40])) {
       e.stopPropagation()
@@ -492,6 +498,7 @@ export default function useNavigation(
     direction.value = 'prev'
     tm = moveToEnabledWeekday(addToDate(tm, { day: -1 }), -1)
     updateWeekBoundaryModelValue(current, tm)
+    updateModelValueWhenFocusIsOutsideRenderedDates(tm)
     setFocusTimestamp(tm)
   }
 
@@ -501,6 +508,7 @@ export default function useNavigation(
     direction.value = 'next'
     tm = moveToEnabledWeekday(addToDate(tm, { day: 1 }), 1)
     updateWeekBoundaryModelValue(current, tm)
+    updateModelValueWhenFocusIsOutsideRenderedDates(tm)
     setFocusTimestamp(tm)
   }
   function onPgUp(): void {
