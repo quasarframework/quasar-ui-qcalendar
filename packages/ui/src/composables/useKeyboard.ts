@@ -457,7 +457,8 @@ export default function useNavigation(
   }
 
   function onUpArrow(): void {
-    let tm = getFocusableTimestamp()
+    const current = getFocusableTimestamp()
+    let tm = current
     if (parsedView.value === 'month') {
       const month = tm.month
       tm = addToDate(tm, { day: -7 })
@@ -469,13 +470,19 @@ export default function useNavigation(
       }
     } else {
       tm = addToDate(tm, { minute: -Number(props.intervalMinutes) })
+      if (tm.date !== current.date) {
+        tm = moveToEnabledWeekday(tm, -1)
+      }
     }
     direction.value = 'prev'
+    updateWeekBoundaryModelValue(current, tm)
+    updateModelValueWhenFocusIsOutsideRenderedDates(tm)
     setFocusTimestamp(tm)
   }
 
   function onDownArrow(): void {
-    let tm = getFocusableTimestamp()
+    const current = getFocusableTimestamp()
+    let tm = current
     if (parsedView.value === 'month') {
       const month = tm.month
       tm = addToDate(tm, { day: 7 })
@@ -487,8 +494,13 @@ export default function useNavigation(
       }
     } else {
       tm = addToDate(tm, { minute: Number(props.intervalMinutes) })
+      if (tm.date !== current.date) {
+        tm = moveToEnabledWeekday(tm, 1)
+      }
     }
     direction.value = 'next'
+    updateWeekBoundaryModelValue(current, tm)
+    updateModelValueWhenFocusIsOutsideRenderedDates(tm)
     setFocusTimestamp(tm)
   }
 
