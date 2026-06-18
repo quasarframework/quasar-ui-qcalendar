@@ -1,5 +1,8 @@
 <template>
-  <div class="subcontent server-data-recipe">
+  <div
+    class="subcontent server-data-recipe q-pt-sm"
+    :class="{ 'server-data-recipe--dark': $q.dark.isActive }"
+  >
     <div class="server-data-recipe__panel">
       <div>
         <div class="text-h6">Load month summaries on demand</div>
@@ -18,7 +21,12 @@
         <q-btn flat color="primary" label="Reset" :disable="loading" @click="resetServerData" />
       </div>
       <q-linear-progress v-if="loading" indeterminate color="primary" />
-      <q-banner v-else rounded :class="loaded ? 'bg-blue-1 text-blue-10' : 'bg-grey-2 text-grey-8'">
+      <q-banner
+        v-else
+        rounded
+        class="server-data-recipe__status"
+        :class="loaded ? 'server-data-recipe__status--loaded' : 'server-data-recipe__status--idle'"
+      >
         {{ statusText }}
       </q-banner>
     </div>
@@ -55,6 +63,7 @@ import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar'
 import { today } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
+import { useQuasar } from 'quasar'
 import { computed, ref } from 'vue'
 
 interface CalendarEvent {
@@ -65,6 +74,7 @@ interface CalendarEvent {
 }
 
 const selectedDate = ref(today())
+const $q = useQuasar()
 const loading = ref(false)
 const loaded = ref(false)
 const events = ref<CalendarEvent[]>([])
@@ -120,7 +130,7 @@ function resetServerData() {
 }
 </script>
 
-<style scoped>
+<style>
 .server-data-recipe {
   display: grid;
   gap: 16px;
@@ -133,6 +143,7 @@ function resetServerData() {
   border: 1px solid #d6e0ea;
   border-radius: 8px;
   background: #fbfdff;
+  color: #102a43;
 }
 
 .server-data-recipe__panel p {
@@ -144,6 +155,20 @@ function resetServerData() {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+.server-data-recipe__status {
+  border: 1px solid transparent;
+}
+
+.server-data-recipe__status--loaded {
+  background: #e3f2fd;
+  color: #0d47a1;
+}
+
+.server-data-recipe__status--idle {
+  background: #eef2f6;
+  color: #546e7a;
 }
 
 .server-event {
@@ -171,5 +196,32 @@ function resetServerData() {
   height: 7px;
   flex: 0 0 7px;
   border-radius: 999px;
+}
+
+.server-data-recipe--dark .server-data-recipe__panel {
+  border-color: #4f5f6f;
+  background: #1f2937;
+  color: #f5f8fb;
+}
+
+.server-data-recipe--dark .server-data-recipe__panel p {
+  color: #c8d6e5;
+}
+
+.server-data-recipe--dark .server-data-recipe__status--loaded {
+  border-color: #1e4976;
+  background: #102a43;
+  color: #b7dcff;
+}
+
+.server-data-recipe--dark .server-data-recipe__status--idle {
+  border-color: #45515e;
+  background: #263241;
+  color: #d4dee8;
+}
+
+.server-data-recipe--dark .server-event {
+  background: #263241;
+  color: #dce8f5;
 }
 </style>
