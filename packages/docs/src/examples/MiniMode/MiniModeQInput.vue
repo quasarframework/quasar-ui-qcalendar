@@ -1,5 +1,10 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      This example connects mini-mode selection to a Quasar input so users can pick dates from a
+      compact calendar.
+    </p>
+
     <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap">
       <div class="q-pt-lg" style="display: flex; max-width: 280px; width: 100%">
         <q-input

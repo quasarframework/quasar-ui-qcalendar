@@ -1,5 +1,9 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      This slot example adds a current-time indicator inside the day container.
+    </p>
+
     <div class="line">
       The example below uses the <code class="markdown-token">day-container</code> slot to show a
       current time indicator absolutely positioned.

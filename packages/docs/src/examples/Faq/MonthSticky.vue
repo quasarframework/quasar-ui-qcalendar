@@ -1,5 +1,10 @@
 <template>
   <div class="my-sticky">
+    <p class="text-body2 text-center q-mb-md">
+      This FAQ recipe places the month calendar in a short scroll container so you can confirm
+      sticky headers remain visible.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="row justify-center">

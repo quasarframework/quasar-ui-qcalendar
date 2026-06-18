@@ -1,5 +1,9 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      Use the buttons or keyboard navigation to move through the month-style interval grid.
+    </p>
+
     <div class="line">
       This example uses the <code class="markdown-token">use-navigation</code> property along with
       the <code class="markdown-token">focusable</code> and

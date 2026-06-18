@@ -246,7 +246,9 @@ Now, we change interval minutes to 15 (for 15 minute segmented intervals). That 
 
 ### Selected Intervals
 
-The example below uses the `selected-dates` property in conjunction with mouse events to toggle selected intervals.
+The example below uses the `selected-dates` property with mouse events to toggle
+individual time intervals. Click an interval to select it, and click it again to
+remove it from the selected list.
 
 <MarkdownExample title="Selected Intervals" file="DaySelectedIntervals"/>
 

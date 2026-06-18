@@ -1,5 +1,10 @@
 <template>
   <div class="subcontent custom-header-example">
+    <p class="text-body2 text-center q-mb-md">
+      This recipe replaces the default header with custom date buttons while keeping the calendar
+      body synchronized.
+    </p>
+
     <div style="display: flex; flex-direction: row; justify-content: center; width: 100%">
       <div style="max-width: 800px; width: 100%; display: flex; flex-direction: column">
         <div class="custom-header-example__title-bar">

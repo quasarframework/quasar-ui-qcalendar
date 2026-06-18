@@ -1,5 +1,11 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      Click any 15-minute interval to toggle it in the
+      <code>selected-dates</code> array. Selected intervals are highlighted, and clicking the same
+      interval again clears it.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="row justify-center">

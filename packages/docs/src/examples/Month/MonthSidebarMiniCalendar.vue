@@ -1,5 +1,9 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      This recipe pairs a month calendar with a mini calendar sidebar for quick date navigation.
+    </p>
+
     <div class="calendar-shell">
       <aside class="calendar-sidebar">
         <q-btn unelevated color="primary" icon="add" label="Create" class="create-button" no-caps />

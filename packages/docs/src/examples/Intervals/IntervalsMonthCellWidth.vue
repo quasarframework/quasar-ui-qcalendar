@@ -1,5 +1,10 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      This example fixes each day column width so the month-style interval grid scrolls
+      horizontally.
+    </p>
+
     <div class="line">
       You can specify the <code class="markdown-token">cell-width</code> property to make your
       calendar overrun it's boundaries.<br />

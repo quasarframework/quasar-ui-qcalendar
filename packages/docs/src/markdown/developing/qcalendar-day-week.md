@@ -231,6 +231,10 @@ Now, we change interval minutes to 15 (for 15 minute segmented intervals). That 
 
 ### Selected Intervals
 
+The example below uses the `selected-dates` property with mouse events to toggle
+individual time intervals across the visible week. Click an interval to select
+it, and click it again to remove it from the selected list.
+
 <MarkdownExample title="Selected Intervals" file="WeekSelectedIntervals"/>
 
 ## Slots
