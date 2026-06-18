@@ -2,45 +2,50 @@
   <div class="subcontent">
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
-    <div class="row justify-center">
-      <div
-        class="q-gutter-md"
-        style="display: flex; flex-direction: column; max-width: 800px; width: 90%; height: 500px"
-      >
-        <q-calendar-day
-          ref="calendar"
-          v-model="selectedDate"
-          :disabled-days="disabledDays"
-          no-active-date
-          animated
-          bordered
-          transition-next="slide-left"
-          transition-prev="slide-right"
-          @change="onChange"
-          @moved="onMoved"
-          @click-date="onClickDate"
-          @click-time="onClickTime"
-          @click-interval="onClickInterval"
-          @click-head-intervals="onClickHeadIntervals"
-          @click-head-day="onClickHeadDay"
-        />
-        <q-calendar-day
-          ref="calendar2"
-          v-model="selectedDate"
-          :disabled-days="disabledDaysRange"
-          no-active-date
-          animated
-          bordered
-          transition-next="slide-left"
-          transition-prev="slide-right"
-          @change="onChange"
-          @moved="onMoved"
-          @click-date="onClickDate"
-          @click-time="onClickTime"
-          @click-interval="onClickInterval"
-          @click-head-intervals="onClickHeadIntervals"
-          @click-head-day="onClickHeadDay"
-        />
+    <div class="day-disabled-days">
+      <div class="day-disabled-days__demo">
+        <div class="day-disabled-days__label">Array of disabled dates</div>
+        <div class="day-disabled-days__calendar">
+          <q-calendar-day
+            ref="calendar"
+            v-model="selectedDate"
+            :disabled-days="disabledDays"
+            no-active-date
+            animated
+            bordered
+            transition-next="slide-left"
+            transition-prev="slide-right"
+            @change="onChange"
+            @moved="onMoved"
+            @click-date="onClickDate"
+            @click-time="onClickTime"
+            @click-interval="onClickInterval"
+            @click-head-intervals="onClickHeadIntervals"
+            @click-head-day="onClickHeadDay"
+          />
+        </div>
+      </div>
+
+      <div class="day-disabled-days__demo">
+        <div class="day-disabled-days__label">Styled disabled range</div>
+        <div class="day-disabled-days__calendar">
+          <q-calendar-day
+            v-model="selectedDate"
+            :disabled-days="disabledDaysRange"
+            no-active-date
+            animated
+            bordered
+            transition-next="slide-left"
+            transition-prev="slide-right"
+            @change="onChange"
+            @moved="onMoved"
+            @click-date="onClickDate"
+            @click-time="onClickTime"
+            @click-interval="onClickInterval"
+            @click-head-intervals="onClickHeadIntervals"
+            @click-head-day="onClickHeadDay"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -113,3 +118,29 @@ function onClickHeadDay(data: Timestamp) {
   console.info('onClickHeadDay', data)
 }
 </script>
+
+<style scoped lang="scss">
+.day-disabled-days {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 16px;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.day-disabled-days__demo {
+  min-width: 0;
+}
+
+.day-disabled-days__label {
+  margin-bottom: 8px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.day-disabled-days__calendar {
+  display: flex;
+  height: 420px;
+}
+</style>

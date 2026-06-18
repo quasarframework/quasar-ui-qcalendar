@@ -2,10 +2,25 @@
   <div class="subcontent">
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
-    <div class="q-mb-md text-caption">
-      Wheel over an event:
-      <kbd>Ctrl</kbd> resizes in 1 minute steps, <kbd>Shift</kbd> resizes in 5 minute steps,
-      <kbd>Alt</kbd> moves, and <kbd>Ctrl</kbd> + <kbd>Alt</kbd> zooms the interval height.
+    <div class="q-mb-md text-caption text-center">
+      Choose a wheel mode, then wheel over an event. Set the mode back to <kbd>Off</kbd> when you
+      want normal page scrolling.
+    </div>
+
+    <div class="wheel-controls q-mb-md">
+      <q-btn-toggle
+        v-model="wheelAction"
+        dense
+        unelevated
+        no-caps
+        toggle-color="primary"
+        color="grey-7"
+        text-color="white"
+        :options="wheelActionOptions"
+      />
+      <div class="wheel-controls__status text-caption">
+        {{ wheelStatus }}
+      </div>
     </div>
 
     <div class="row justify-center">
@@ -56,7 +71,7 @@ import { QCalendarDay } from '@quasar/quasar-ui-qcalendar'
 import { parseTime, today, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import NavigationBar from '@/components/NavigationBar.vue'
 
 interface Event {
@@ -71,6 +86,7 @@ interface Event {
 
 type TimeStartPos = (_time: string) => number | false
 type TimeDurationHeight = (_minutes: number) => number
+type WheelAction = 'off' | 'resize' | 'resize-step' | 'move' | 'zoom'
 
 const intervalRangeStart = '08:00'
 const intervalRangeEnd = '18:00'
@@ -84,6 +100,7 @@ const maxDuration = 300
 
 const calendar = ref<QCalendarDay>()
 const selectedDate = ref(today())
+const wheelAction = ref<WheelAction>('off')
 const intervalHeight = ref(28)
 const resizeTimeout = ref<ReturnType<typeof setTimeout>>()
 
@@ -114,6 +131,26 @@ const events = ref<Event[]>([
   },
 ])
 
+const wheelActionOptions: { label: string; value: WheelAction }[] = [
+  { label: 'Off', value: 'off' },
+  { label: 'Resize 1 min', value: 'resize' },
+  { label: 'Resize 5 min', value: 'resize-step' },
+  { label: 'Move 15 min', value: 'move' },
+  { label: 'Zoom rows', value: 'zoom' },
+]
+
+const wheelStatus = computed(() => {
+  const event = events.value[0]
+
+  return event === undefined
+    ? `Interval height: ${intervalHeight.value}px`
+    : `${wheelActionLabel.value}: ${event.title} ${event.time} for ${event.duration} mins · interval height ${intervalHeight.value}px`
+})
+
+const wheelActionLabel = computed(
+  () => wheelActionOptions.find((option) => option.value === wheelAction.value)?.label ?? 'Off',
+)
+
 function getEvents(date: string): Event[] {
   return events.value.filter((event) => event.date === date)
 }
@@ -133,12 +170,9 @@ function eventStyles(
 }
 
 function onEventWheel(evt: WheelEvent, event: Event): void {
-  if (evt.ctrlKey === true && evt.altKey === true) {
-    onPanelWheel(evt)
-    return
-  }
+  const action = getWheelAction(evt)
 
-  if (evt.ctrlKey !== true && evt.shiftKey !== true && evt.altKey !== true) {
+  if (action === false) {
     return
   }
 
@@ -151,10 +185,16 @@ function onEventWheel(evt: WheelEvent, event: Event): void {
     return
   }
 
-  if (evt.altKey === true) {
-    moveEvent(event, minutes)
+  if (action === 'zoom') {
+    adjustIntervalHeight(minutes)
+    showActiveTooltip(event, `Interval height: ${intervalHeight.value}px`)
+    return
+  }
+
+  if (action === 'move') {
+    moveEvent(event, minutes * 15)
   } else {
-    resizeEvent(event, evt.shiftKey === true ? minutes * 5 : minutes)
+    resizeEvent(event, action === 'resize-step' ? minutes * 5 : minutes)
   }
 
   showActiveTooltip(event)
@@ -169,8 +209,32 @@ function onPanelWheel(evt: WheelEvent): void {
   evt.stopPropagation()
 
   if (evt.ctrlKey === true && evt.altKey === true) {
-    intervalHeight.value = clamp(intervalHeight.value + getWheelMinutes(evt), 18, 48)
+    adjustIntervalHeight(getWheelMinutes(evt))
   }
+}
+
+function getWheelAction(evt: WheelEvent): WheelAction | false {
+  if (evt.ctrlKey === true && evt.altKey === true) {
+    return 'zoom'
+  }
+
+  if (evt.altKey === true) {
+    return 'move'
+  }
+
+  if (evt.shiftKey === true) {
+    return 'resize-step'
+  }
+
+  if (evt.ctrlKey === true) {
+    return 'resize'
+  }
+
+  return wheelAction.value === 'off' ? false : wheelAction.value
+}
+
+function adjustIntervalHeight(minutes: number): void {
+  intervalHeight.value = clamp(intervalHeight.value + minutes, 18, 48)
 }
 
 function moveEvent(event: Event, minutes: number): void {
@@ -193,10 +257,10 @@ function resizeEvent(event: Event, minutes: number): void {
   event.duration = nextDuration
 }
 
-function showActiveTooltip(event: Event): void {
+function showActiveTooltip(event: Event, message = eventSummary(event)): void {
   clearTimeout(resizeTimeout.value)
 
-  event.tooltip = eventSummary(event)
+  event.tooltip = message
   resizeTimeout.value = setTimeout(() => {
     event.tooltip = undefined
   }, 1000)
@@ -207,7 +271,11 @@ function eventSummary(event: Event): string {
 }
 
 function getWheelMinutes(evt: WheelEvent): number {
-  return Math.round(evt.deltaY / 100)
+  if (evt.deltaY === 0) {
+    return 0
+  }
+
+  return evt.deltaY > 0 ? 1 : -1
 }
 
 function toMinutes(time: string): number {
@@ -266,6 +334,16 @@ function onClickHeadDay(data: Timestamp) {
 </script>
 
 <style lang="scss" scoped>
+.wheel-controls {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+}
+
+.wheel-controls__status {
+  opacity: 0.8;
+}
+
 .wheel-event {
   position: absolute;
   left: 4px;

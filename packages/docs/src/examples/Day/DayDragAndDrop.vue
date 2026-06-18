@@ -1,15 +1,15 @@
 <template>
-  <div class="subcontent">
+  <div class="subcontent day-drag-and-drop">
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="row justify-center">
       <div style="display: flex; justify-content: center; width: 100%">
         <div class="q-mx-sm">
-          <ul class="column">
+          <ul class="column day-drag-and-drop__items">
             <li
               v-for="item in dragItems"
               :key="item.id"
-              class="button list-item"
+              class="day-drag-and-drop__item"
               draggable="true"
               @dragstart="onDragStart($event, item)"
             >
@@ -292,6 +292,40 @@ function onClickHeadDay(data: Timestamp) {
 </script>
 
 <style lang="scss">
+.day-drag-and-drop__items {
+  gap: 4px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.day-drag-and-drop__item {
+  display: block;
+  margin: 2px;
+  padding: 4px 8px;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: grab;
+  text-align: left;
+  text-decoration: none;
+  transition:
+    background-color 0.3s,
+    border-color 0.3s;
+
+  &:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+
+  &:active {
+    background-color: #004085;
+    border-color: #004085;
+    cursor: grabbing;
+  }
+}
+
 .droppable {
   box-shadow: inset 0 0 0 1px rgba(0, 140, 200, 0.8);
 }

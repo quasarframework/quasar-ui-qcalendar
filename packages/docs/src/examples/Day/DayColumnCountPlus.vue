@@ -2,9 +2,9 @@
   <div class="subcontent">
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
-    <div class="row justify-center">
-      <span style="font-size: 18px; font-weight: 800">{{ selectedDate }}</span>
-      <div style="display: flex; max-width: 800px; width: 100%; height: 400px">
+    <div class="column items-center">
+      <div class="day-column-count-plus__date">{{ selectedDate }}</div>
+      <div class="day-column-count-plus__calendar">
         <q-calendar-day
           ref="calendar"
           v-model="selectedDate"
@@ -86,3 +86,19 @@ function onClickHeadDay(data: Timestamp) {
   console.info('onClickHeadDay', data)
 }
 </script>
+
+<style scoped lang="scss">
+.day-column-count-plus__date {
+  margin-bottom: 8px;
+  font-size: 18px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.day-column-count-plus__calendar {
+  display: flex;
+  max-width: 800px;
+  width: 100%;
+  height: 400px;
+}
+</style>
