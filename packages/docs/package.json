@@ -22,7 +22,6 @@
     "preview:ssg": "quasar serve dist/spa --history"
   },
   "dependencies": {
-    "@carbon/icons-vue": "^10.130.0",
     "@quasar/extras": "2.0.1",
     "@timestamp-js/core": "0.1.0-rc.0",
     "date-holidays": "=3.30.2",

@@ -67,11 +67,13 @@
             <!-- Slot for top-level tasks -->
             <div class="header ellipsis">
               <div class="issue ellipsis">
-                <span v-if="scope.task.icon === 'done'" class="done"><Done /></span>
-                <span v-else-if="scope.task.icon === 'pending'" class="pending"><Pending /></span>
-                <span v-else-if="scope.task.icon === 'blocking'" class="blocking"
-                  ><Blocking
-                /></span>
+                <q-icon
+                  v-if="scope.task.icon === 'done'"
+                  class="done"
+                  name="check_circle_outline"
+                />
+                <q-icon v-else-if="scope.task.icon === 'pending'" class="pending" name="pending" />
+                <q-icon v-else-if="scope.task.icon === 'blocking'" class="blocking" name="block" />
                 {{ scope.task.title }}
               </div>
               <div class="key">{{ scope.task.key }}</div>
@@ -83,11 +85,13 @@
             <!-- Slot for subtasks (child tasks) -->
             <div class="header ellipsis">
               <div class="issue ellipsis">
-                <span v-if="scope.task.icon === 'done'" class="done"><Done /></span>
-                <span v-else-if="scope.task.icon === 'pending'" class="pending"><Pending /></span>
-                <span v-else-if="scope.task.icon === 'blocking'" class="blocking"
-                  ><Blocking
-                /></span>
+                <q-icon
+                  v-if="scope.task.icon === 'done'"
+                  class="done"
+                  name="check_circle_outline"
+                />
+                <q-icon v-else-if="scope.task.icon === 'pending'" class="pending" name="pending" />
+                <q-icon v-else-if="scope.task.icon === 'blocking'" class="blocking" name="block" />
                 {{ scope.task.title }}
               </div>
               <div class="key">{{ scope.task.key }}</div>
@@ -153,10 +157,6 @@ import { today, padNumber, isBetweenDates, parsed, Timestamp } from '@timestamp-
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import NavigationBar from '@/components/NavigationBar.vue'
-
-import Done from '@carbon/icons-vue/es/checkmark--outline/16'
-import Pending from '@carbon/icons-vue/es/pending/16'
-import Blocking from '@carbon/icons-vue/es/undefined/16'
 
 interface Logged {
   date: string

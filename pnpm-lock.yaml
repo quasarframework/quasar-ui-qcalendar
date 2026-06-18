@@ -54,9 +54,6 @@ importers:
 
   packages/docs:
     dependencies:
-      '@carbon/icons-vue':
-        specifier: ^10.130.0
-        version: 10.130.0
       '@quasar/extras':
         specifier: 2.0.1
         version: 2.0.1
@@ -305,12 +302,6 @@ packages:
 
   '@bufbuild/protobuf@2.12.0':
     resolution: {integrity: sha512-B/XlCaFIP8LOwzo+bz5uFzATYokcwCKQcghqnlfwSmM5eX/qTkvDBnDPs+gXtX/RyjxJ4DRikECcPJbyALA8FA==}
-
-  '@carbon/icon-helpers@10.76.0':
-    resolution: {integrity: sha512-DLxVV/NtEFauMbmKFW53cGKMs84RRdIp9AzHbasIxlCBjO0P4eZbPdO3gTzYxn02jDMo++2m3MsEAwNydzrzmQ==}
-
-  '@carbon/icons-vue@10.130.0':
-    resolution: {integrity: sha512-GRo6tthRp3itB0bm5unG2i1tpWH+hlmFA1Sbu9k0GP1oYro58TGboYQbQEopLaADKaPewDLhbjG2I4ejWbRZBw==}
 
   '@chevrotain/types@11.1.2':
     resolution: {integrity: sha512-U+HFai5+zmJCkK86QsaJtoITlboZHBqrVketcO2ROv865xfCMSFpELQoz1GkX5GzME8pTa+3kbKrZHQtI0gdbw==}
@@ -655,10 +646,6 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
-
-  '@ibm/telemetry-js@1.8.0':
-    resolution: {integrity: sha512-1u/8f5TtDHXWNQe+YfIESesZGX2PmhEfyU0znlyFvATch+xc5fPYjXj2gWKMTmdKsDawqAm/BkJBQjx2CDlZww==}
-    hasBin: true
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -4422,15 +4409,6 @@ snapshots:
 
   '@bufbuild/protobuf@2.12.0': {}
 
-  '@carbon/icon-helpers@10.76.0':
-    dependencies:
-      '@ibm/telemetry-js': 1.8.0
-
-  '@carbon/icons-vue@10.130.0':
-    dependencies:
-      '@carbon/icon-helpers': 10.76.0
-      '@ibm/telemetry-js': 1.8.0
-
   '@chevrotain/types@11.1.2': {}
 
   '@clack/core@1.4.1':
@@ -4634,8 +4612,6 @@ snapshots:
 
   '@esbuild/win32-x64@0.28.0':
     optional: true
-
-  '@ibm/telemetry-js@1.8.0': {}
 
   '@iconify/types@2.0.0': {}
 
