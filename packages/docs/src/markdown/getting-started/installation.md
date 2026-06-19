@@ -18,6 +18,23 @@ The components are:
 
 These are also many ways to add the calendar components to your project. You can install as a Quasar CLI app-extension. You might want to write your own boot file (for targeting one or more calendar components). You might want to use pre-compiled sources in dist or directly from the src folder (src folder access means your project needs to transpile QCalendar sources). Or, you may want to use a UMD variant.
 
+## Recommended Path
+
+::: steps
+
+## Choose the calendar components your app needs
+
+Install the full App Extension when you want every QCalendar component registered. Install the UI package directly when you only want selected calendar types such as `QCalendarDay` or `QCalendarMonth`.
+
+## Pick compiled or source entrypoints
+
+Use compiled entrypoints for normal app builds. Import from `src/` only when you need to customize or transpile the raw source files yourself.
+
+## Register styles with the same entrypoint
+
+Pair each component import with its matching compiled CSS or source SCSS file so the calendar layout, scrolling, and dark-mode styles are available.
+:::
+
 ## Quasar CLI
 
 ### App Extension

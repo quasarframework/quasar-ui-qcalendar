@@ -45,6 +45,21 @@ $dark-bg: $brand-dark-bg;
 $separator-color: $brand-accent;
 $separator-color-dark: $brand-accent;
 
+$steps-bg: color.mix($brand-light-bg, $brand-secondary, 92%);
+$steps-bg-dark: color.mix($brand-dark-bg, $brand-secondary, 88%);
+$steps-text: $brand-light-text;
+$steps-text-dark: $brand-dark-text;
+$steps-title-color: $brand-light-text;
+$steps-title-color-dark: $brand-dark-text;
+$steps-border-color: rgba($brand-secondary, 0.34);
+$steps-border-color-dark: rgba($brand-secondary, 0.48);
+$steps-marker-bg: $brand-primary;
+$steps-marker-bg-dark: $brand-secondary;
+$steps-marker-color: $brand-light;
+$steps-marker-color-dark: $brand-dark-bg;
+$steps-shadow: 0 10px 20px 0 rgba($brand-primary, 0.16);
+$steps-shadow-dark: 0 10px 20px 0 rgba($brand-secondary, 0.12);
+
 $font-size: 16px;
 $font-size-brand: 16px;
 $font-weight-brand: 500;

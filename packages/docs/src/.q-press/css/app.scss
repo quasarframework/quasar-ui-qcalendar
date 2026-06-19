@@ -202,6 +202,58 @@ ul {
   }
 }
 
+.markdown-steps {
+  display: grid;
+  gap: 20px;
+  margin: 24px 0;
+}
+
+.markdown-step {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 16px;
+  padding: 18px;
+  color: $steps-text;
+  background: $steps-bg;
+  border: 1px solid $steps-border-color;
+  border-radius: $generic-border-radius;
+  box-shadow: $steps-shadow;
+}
+
+.markdown-step__marker {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  color: $steps-marker-color;
+  background: $steps-marker-bg;
+  border-radius: 999px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.markdown-step__content {
+  min-width: 0;
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+}
+
+.markdown-step__title {
+  margin: 0 0 10px;
+  color: $steps-title-color;
+  font-size: 1.15em;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+@media (max-width: 600px) {
+  .markdown-step {
+    grid-template-columns: 1fr;
+  }
+}
+
 .markdown-heading {
   color: $brand-light-text;
   word-break: break-word;
@@ -778,6 +830,22 @@ body.body--dark {
       border-color: $negative;
       background-color: color.scale($negative, $lightness: -80%);
     }
+  }
+
+  .markdown-step {
+    color: $steps-text-dark;
+    background: $steps-bg-dark;
+    border-color: $steps-border-color-dark;
+    box-shadow: $steps-shadow-dark;
+  }
+
+  .markdown-step__marker {
+    color: $steps-marker-color-dark;
+    background: $steps-marker-bg-dark;
+  }
+
+  .markdown-step__title {
+    color: $steps-title-color-dark;
   }
 
   .markdown-h2 {

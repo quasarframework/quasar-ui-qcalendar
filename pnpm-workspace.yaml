@@ -158,4 +158,8 @@ minimumReleaseAgeExclude:
   - '@rolldown/binding-win32-arm64-msvc@1.1.2'
   - '@rolldown/binding-win32-x64-msvc@1.1.2'
   - rolldown@1.1.2
+  - '@md-plugins/md-plugin-steps@0.1.0-rc.10'
+  - '@md-plugins/search-ui@0.1.0-rc.10'
+  - '@md-plugins/vite-search-plugin@0.1.0-rc.10'
+  - semver@7.8.5
 trustLockfile: true
