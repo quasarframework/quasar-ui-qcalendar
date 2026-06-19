@@ -137,8 +137,29 @@ function autoLinkBareUrls(content: string): string {
     .join('')
 }
 
+function stashCodeBlocks(content: string, codeBlocks: string[]): string {
+  return content.replace(/```[^\n]*\n([\s\S]*?)```/g, (_match, code: string) => {
+    const index = codeBlocks.length
+
+    codeBlocks.push(
+      `<code class="markdown--code__inner markdown--code__inner--prerendered release__code">${code.trimEnd()}</code>`,
+    )
+
+    return `@@Q_PRESS_RELEASE_CODE_BLOCK_${index}@@`
+  })
+}
+
+function restoreCodeBlocks(content: string, codeBlocks: string[]): string {
+  return content.replace(/@@Q_PRESS_RELEASE_CODE_BLOCK_(\d+)@@/g, (_match, index: string) => {
+    return codeBlocks[Number(index)] ?? ''
+  })
+}
+
 function parse(body: string): string {
   let content = sanitize(body) + '\n'
+  const codeBlocks: string[] = []
+
+  content = stashCodeBlocks(content, codeBlocks)
 
   if (search.value !== '') {
     content = content.replace(
@@ -148,16 +169,11 @@ function parse(body: string): string {
   }
 
   content = content
-    .replace(/### ([\S ]+)/g, '<div class="text-h6">$1</div>')
-    .replace(/## ([\S ]+)/g, '<div class="text-h5">$1</div>')
-    .replace(/# ([\S ]+)/g, '<div class="text-h4">$1</div>')
+    .replace(/^### ([^\n]+)/gm, '<div class="text-h6">$1</div>')
+    .replace(/^## ([^\n]+)/gm, '<div class="text-h5">$1</div>')
+    .replace(/^# ([^\n]+)/gm, '<div class="text-h4">$1</div>')
     .replace(/\*\*([\S ]*?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*([\S ]*?)\*/g, '<em>$1</em>')
-    .replace(
-      /```([\S]+)/g,
-      '<code class="markdown--code__inner markdown--code__inner--prerendered release__code">',
-    )
-    .replace(/```\n/g, '</code>')
     .replace(/`(.*?)`/g, '<code class="markdown--token">$1</code>')
     .replace(
       /#([\d]+)/g,
@@ -173,6 +189,7 @@ function parse(body: string): string {
     .replace(/(<li(?: class="[^"]*")?>.*?<\/li>)+/g, '<ul class="release__list">$&</ul>')
     .replace(/\n/g, '<br>')
 
+  content = restoreCodeBlocks(content, codeBlocks)
   content = autoLinkBareUrls(content)
 
   return content.includes('| -') ? parseMdTable(content) : content
