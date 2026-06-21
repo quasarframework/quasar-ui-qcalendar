@@ -41,20 +41,23 @@ $dark-bg: $brand-dark-bg;
 $separator-color: $brand-accent;
 $separator-color-dark: $brand-accent;
 
-$steps-bg: color.mix($brand-light-bg, $brand-accent, 92%);
-$steps-bg-dark: color.mix($brand-dark-bg, $brand-primary, 88%);
+$steps-bg: $brand-light-codeblock-bg;
+$steps-bg-dark: $brand-dark-codeblock-bg;
 $steps-text: $brand-light-text;
 $steps-text-dark: $brand-dark-text;
 $steps-title-color: $brand-light-text;
 $steps-title-color-dark: $brand-dark-text;
-$steps-border-color: rgba($brand-accent, 0.34);
-$steps-border-color-dark: rgba($brand-primary, 0.42);
+$brand-border-color-light: $separator-color;
+$brand-border-color-dark: rgba($brand-dark-text, 0.28);
+
+$steps-border-color-light: $brand-border-color-light;
+$steps-border-color-dark: $brand-border-color-dark;
 $steps-marker-bg: $brand-primary;
 $steps-marker-bg-dark: color.mix($brand-primary, $brand-light, 82%);
 $steps-marker-color: $brand-light;
 $steps-marker-color-dark: $brand-dark-bg;
-$steps-shadow: 0 10px 20px 0 rgba($brand-primary, 0.14);
-$steps-shadow-dark: 0 10px 20px 0 rgba($brand-primary, 0.12);
+$steps-shadow: 0 10px 20px 0 rgba($brand-dark, 0.08);
+$steps-shadow-dark: 0 10px 20px 0 rgba(#000, 0.2);
 
 $font-size: 16px;
 $font-size-brand: 16px;

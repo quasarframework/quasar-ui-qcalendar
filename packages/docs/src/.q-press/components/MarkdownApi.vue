@@ -646,7 +646,7 @@ body.body--light {
 
   .markdown-api .markdown-token {
     background-color: #eee;
-    border: 1px solid $separator-color;
+    border: 1px solid $brand-border-color-light;
     color: $light-text;
   }
 
@@ -669,7 +669,7 @@ body.body--dark {
 
   .markdown-api .markdown-token {
     background-color: $dark-bg;
-    border: 1px solid $separator-dark-color;
+    border: 1px solid $brand-border-color-dark;
     color: $dark-text;
   }
 
@@ -682,7 +682,7 @@ body.body--dark {
 
     & + .markdown-api-entry,
     &__subitem > div {
-      border-color: $separator-dark-color !important;
+      border-color: $brand-border-color-dark !important;
     }
 
     &__value {

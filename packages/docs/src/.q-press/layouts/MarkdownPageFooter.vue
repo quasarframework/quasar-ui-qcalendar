@@ -169,7 +169,7 @@ const props = defineProps({
     linear-gradient(135deg, color.scale($brand-light-bg, $lightness: -2%), $brand-light-bg 64%);
   width: 100%;
   z-index: 1;
-  border-top: 1px solid rgba($separator-color, 0.5);
+  border-top: 1px solid rgba($brand-border-color-light, 0.5);
 
   &::before {
     position: absolute;
@@ -191,7 +191,7 @@ const props = defineProps({
 
   &__brand-card,
   &__group {
-    border: 1px solid rgba($separator-color, 0.32);
+    border: 1px solid rgba($brand-border-color-light, 0.32);
     border-radius: 28px;
     background: rgba($brand-light-bg, 0.74);
     box-shadow: 0 20px 80px rgba($brand-dark, 0.08);
@@ -289,7 +289,7 @@ const props = defineProps({
     align-items: flex-start;
     justify-content: space-between;
     padding-top: 24px;
-    border-top: 1px solid rgba($separator-color, 0.28);
+    border-top: 1px solid rgba($brand-border-color-light, 0.28);
   }
 
   &__copyright,
@@ -337,11 +337,11 @@ body.body--dark {
     background:
       radial-gradient(circle at 20% 0, rgba($brand-primary, 0.18), transparent 36%),
       linear-gradient(135deg, color.scale($dark-bg, $lightness: 8%), $dark-bg 68%);
-    border-top-color: rgba($separator-color-dark, 0.48);
+    border-top-color: rgba($brand-border-color-dark, 0.48);
 
     &__brand-card,
     &__group {
-      border-color: rgba($separator-color-dark, 0.26);
+      border-color: rgba($brand-border-color-dark, 0.26);
       background: rgba(color.scale($dark-bg, $lightness: 8%), 0.72);
       box-shadow: 0 22px 90px rgba(#000, 0.28);
     }

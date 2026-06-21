@@ -1,34 +1,34 @@
 @use 'sass:color';
 
-// Evergreen Theme Variables
-$primary: #0f766e;
-$secondary: #3f8f68;
-$accent: #f59e0b;
+// Copperline Theme Variables
+$primary: #a75d34;
+$secondary: #6d4b34;
+$accent: #d58a45;
 
 $positive: #2ecc71;
 $negative: #ff1732;
 $info: #10a0ff;
 $warning: #ffd52d;
 
-$brand-primary: #14b8a6;
-$brand-secondary: #3f8f68;
-$brand-accent: #f59e0b;
-$brand-dark: #173b2f;
-$brand-light: #e6f6ee;
-$brand-medium: #6b8f7a;
-$brand-light-text: #173b2f;
-$brand-light-bg: #f3faf6;
-$brand-dark-bg: #071914;
-$brand-dark-text: #d7f3e6;
-$brand-light-codeblock-bg: #e6f6ee;
-$brand-light-codeblock-text: #0f5132;
-$brand-dark-codeblock-bg: #0e2a22;
-$brand-dark-codeblock-text: #b8f5d4;
+$brand-primary: #b86535;
+$brand-secondary: #6d4b34;
+$brand-accent: #d58a45;
+$brand-dark: #2f1f17;
+$brand-light: #f6eadb;
+$brand-medium: #9b765d;
+$brand-light-text: #39271d;
+$brand-light-bg: #fff8ef;
+$brand-dark-bg: #1e1511;
+$brand-dark-text: #f4dec8;
+$brand-light-codeblock-bg: #f2dfca;
+$brand-light-codeblock-text: #4d3324;
+$brand-dark-codeblock-bg: #321f18;
+$brand-dark-codeblock-text: #f7dbc0;
 
-$header-btn-color--light: #0f766e;
-$header-btn-hover-color--light: #b45309;
-$header-btn-color--dark: #5eead4;
-$header-btn-hover-color--dark: #fbbf24;
+$header-btn-color--light: #8a4424;
+$header-btn-hover-color--light: #4b2618;
+$header-btn-color--dark: #f2a05e;
+$header-btn-hover-color--dark: #ffd7a3;
 
 $light-pill: $brand-light;
 $light-text: $brand-light-text;
@@ -38,7 +38,7 @@ $dark-pill: color.scale($brand-dark-bg, $lightness: 12%);
 $dark-text: $brand-dark-text;
 $dark-bg: $brand-dark-bg;
 
-$separator-color: $brand-accent;
+$separator-color: $brand-primary;
 $separator-color-dark: $brand-accent;
 
 $steps-bg: $brand-light-codeblock-bg;
@@ -47,23 +47,23 @@ $steps-text: $brand-light-text;
 $steps-text-dark: $brand-dark-text;
 $steps-title-color: $brand-light-text;
 $steps-title-color-dark: $brand-dark-text;
-$brand-border-color-light: $separator-color;
-$brand-border-color-dark: rgba($brand-medium, 0.68);
+$brand-border-color-light: rgba($brand-primary, 0.78);
+$brand-border-color-dark: rgba($brand-accent, 0.64);
 
 $steps-border-color-light: $brand-border-color-light;
 $steps-border-color-dark: $brand-border-color-dark;
 $steps-marker-bg: $brand-primary;
-$steps-marker-bg-dark: color.mix($brand-primary, $brand-light, 82%);
-$steps-marker-color: $brand-dark-bg;
+$steps-marker-bg-dark: color.mix($brand-accent, $brand-light, 76%);
+$steps-marker-color: $brand-light-bg;
 $steps-marker-color-dark: $brand-dark-bg;
 $steps-shadow: 0 10px 20px 0 rgba($brand-dark, 0.08);
-$steps-shadow-dark: 0 10px 20px 0 rgba(#000, 0.2);
+$steps-shadow-dark: 0 10px 20px 0 rgba(#000, 0.24);
 
 $font-size: 16px;
 $font-size-brand: 16px;
-$font-weight-brand: 500;
+$font-weight-brand: 600;
 $font-weight-technical: 400;
-$letter-spacing-brand: 0.7px;
+$letter-spacing-brand: 0.5px;
 
 $font-family-technical:
   'Roboto',
@@ -77,9 +77,9 @@ $font-family-technical:
 $font-family-examples: $font-family-technical;
 $font-family-brand: 'Montserrat', $font-family-technical;
 
-$shadow--large: 0 24px 24px 0 rgba($brand-primary, 0.24);
-$shadow--medium: 0 6px 6px 0 rgba($brand-primary, 0.38);
-$shadow--small: 0 6px 6px 0 rgba($brand-primary, 0.28);
+$shadow--large: 0 24px 24px 0 rgba($brand-primary, 0.18);
+$shadow--medium: 0 6px 6px 0 rgba($brand-primary, 0.28);
+$shadow--small: 0 6px 6px 0 rgba($brand-primary, 0.22);
 
 // also update QHeader :height-hint
 $header-height: 55px;

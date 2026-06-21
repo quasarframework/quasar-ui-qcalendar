@@ -1,10 +1,16 @@
 <template>
-  <div class="dark-mode-toggle" @click="toggleMode">
+  <button
+    type="button"
+    class="dark-mode-toggle"
+    :aria-label="toggleLabel"
+    :title="toggleLabel"
+    @click="toggleMode"
+  >
     <div class="toggle-container" :class="{ 'is-dark': isDark }">
-      <q-icon :name="props.lightIcon" class="toggle-icon light-icon" />
-      <q-icon :name="props.darkIcon" class="toggle-icon dark-icon" />
+      <q-icon :name="props.lightIcon" class="toggle-icon light-icon" aria-hidden="true" />
+      <q-icon :name="props.darkIcon" class="toggle-icon dark-icon" aria-hidden="true" />
     </div>
-  </div>
+  </button>
 </template>
 
 <script setup lang="ts">
@@ -30,6 +36,7 @@ const $q = useQuasar()
 const { toggleDark } = useDark()
 
 const isDark = computed(() => $q.dark.isActive)
+const toggleLabel = computed(() => (isDark.value ? 'Switch to light mode' : 'Switch to dark mode'))
 
 const toggleMode = () => {
   toggleDark()
@@ -50,6 +57,7 @@ watch(
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0;
   cursor: pointer;
   width: 60px;
   height: 30px;
@@ -58,6 +66,7 @@ watch(
   border-radius: 15px;
   position: relative;
   overflow: hidden;
+  appearance: none;
 }
 
 .toggle-container {

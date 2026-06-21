@@ -484,7 +484,7 @@ body.body--light {
   .c-lpref {
     color: $brand-light-codeblock-text;
     &:before {
-      border-right-color: $separator-color;
+      border-right-color: $brand-border-color-light;
       background: $brand-light-codeblock-bg;
     }
   }
@@ -610,7 +610,7 @@ body.body--dark {
   .c-lpref {
     color: $brand-light-codeblock-text;
     &:before {
-      border-right-color: $separator-dark-color;
+      border-right-color: $brand-border-color-dark;
       background: $brand-dark-codeblock-bg;
     }
   }

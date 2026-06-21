@@ -94,7 +94,7 @@ onBeforeUnmount(() => {
 
 <style lang="scss">
 .markdown-mermaid {
-  border: 1px solid var(--q-separator-color);
+  border: 1px solid $brand-border-color-light;
   border-radius: 8px;
   overflow-x: auto;
   padding: 1rem;
@@ -119,5 +119,9 @@ onBeforeUnmount(() => {
     color: var(--q-secondary);
     font-style: italic;
   }
+}
+
+body.body--dark .markdown-mermaid {
+  border-color: $brand-border-color-dark;
 }
 </style>

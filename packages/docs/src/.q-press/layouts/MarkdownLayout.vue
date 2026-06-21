@@ -143,7 +143,7 @@ const pageContentClass = computed(
     height: calc(100vh - #{$header-height});
     width: 330px;
     min-width: 330px;
-    border-right: 1px solid $separator-color;
+    border-right: 1px solid $brand-border-color-light;
 
     .markdown-page-menu {
       padding: 32px 16px 32px 0; // page top padding
@@ -224,7 +224,7 @@ const pageContentClass = computed(
 
 body.body--dark {
   .markdown-layout__menu {
-    border-right-color: $separator-dark-color;
+    border-right-color: $brand-border-color-dark;
   }
 
   // only show the shadow when the drawer is open

@@ -2,6 +2,13 @@
 @use 'sass:color';
 @use './fonts.scss';
 
+// Older custom themes may not define the newer border variables yet.
+// Keep the defaults tied to the existing separator colors so upgrades remain safe.
+$brand-border-color-light: $separator-color !default;
+$brand-border-color-dark: $separator-color-dark !default;
+$steps-border-color-light: $brand-border-color-light !default;
+$steps-border-color-dark: $brand-border-color-dark !default;
+
 // Keep this import so Shiki code blocks share the selected qPress theme variables.
 @import './code-theme.scss';
 
@@ -71,14 +78,14 @@ ul {
 .q-item {
   color: $brand-light-text !important;
   background: $brand-light-bg !important;
-  border-color: rgba(0, 0, 0, 0.28);
+  border-color: $brand-border-color-light;
 }
 
 .q-list--dark,
 .q-item--dark {
   color: $brand-dark-text !important;
   background: $brand-dark-bg !important;
-  border-color: rgba(255, 255, 255, 0.28);
+  border-color: $brand-border-color-dark;
 }
 
 .markdown-token {
@@ -111,7 +118,7 @@ ul {
   &:not(.markdown-note--tip, .markdown-note--warning, .markdown-note--danger) {
     color: $brand-light-text;
     background-color: $brand-light-bg;
-    border-color: $separator-color;
+    border-color: $brand-border-color-light;
     // .markdown-note__title,
     .markdown-link,
     .markdown-token {
@@ -215,7 +222,7 @@ ul {
   padding: 18px;
   color: $steps-text;
   background: $steps-bg;
-  border: 1px solid $steps-border-color;
+  border: 1px solid $steps-border-color-light;
   border-radius: $generic-border-radius;
   box-shadow: $steps-shadow;
 }
@@ -246,6 +253,11 @@ ul {
   font-size: 1.15em;
   font-weight: 700;
   line-height: 1.25;
+}
+
+.markdown-content .q-card--bordered,
+.markdown-page__content .q-card--bordered {
+  border-color: $brand-border-color-light;
 }
 
 @media (max-width: 600px) {
@@ -287,7 +299,7 @@ ul {
   font-size: 1.8em !important;
   font-weight: 600;
   padding-bottom: 8px !important;
-  border-bottom: 1px solid $separator-color;
+  border-bottom: 1px solid $brand-border-color-light;
 }
 
 .markdown-h3 {
@@ -555,6 +567,7 @@ body.q-scroll--lock .q-page > .q-scroll--anchor {
 .header-toolbar {
   color: $header-btn-color--light;
   background: $brand-light;
+  border-color: $brand-border-color-light;
 }
 
 .header-tabs,
@@ -623,39 +636,39 @@ body.body--light {
   --qpress-text-body: rgb(var(--qpress-rgb-text) / 0.84);
   --qpress-text-muted: rgb(var(--qpress-rgb-text) / 0.66);
   --qpress-text-soft: rgb(var(--qpress-rgb-text) / 0.78);
-  --qpress-border-subtle: rgb(var(--qpress-rgb-secondary) / 0.16);
-  --qpress-border-strong: rgb(var(--qpress-rgb-secondary) / 0.24);
+  --qpress-border-subtle: color-mix(in srgb, #{$brand-border-color-light} 42%, transparent);
+  --qpress-border-strong: #{$brand-border-color-light};
   --qpress-card-shadow: 0 16px 34px rgb(var(--qpress-rgb-secondary) / 0.12);
   --qpress-shadow-large: 0 28px 60px rgb(var(--qpress-rgb-primary) / 0.14);
   --qpress-chip-bg: rgb(var(--qpress-rgb-light) / 0.52);
-  --qpress-chip-text: var(--qpress-color-primary);
-  --qpress-action-solid-bg: var(--qpress-color-primary);
-  --qpress-action-solid-text: var(--qpress-color-light);
+  --qpress-chip-text: var(--qpress-text-primary);
+  --qpress-action-solid-bg: var(--qpress-text-primary);
+  --qpress-action-solid-text: var(--qpress-surface-page);
   --qpress-action-solid-shadow: 0 18px 30px rgb(var(--qpress-rgb-primary) / 0.24);
   --qpress-action-ghost-bg: rgb(var(--qpress-rgb-light) / 0.46);
   --qpress-action-ghost-text: var(--qpress-text-primary);
-  --qpress-pill-border: rgb(var(--qpress-rgb-secondary) / 0.14);
+  --qpress-pill-border: color-mix(in srgb, #{$brand-border-color-light} 42%, transparent);
   --qpress-pill-bg: rgb(var(--qpress-rgb-light) / 0.44);
-  --qpress-pill-text: var(--qpress-color-primary);
+  --qpress-pill-text: var(--qpress-text-primary);
   --qpress-panel-gradient-top: rgb(var(--qpress-rgb-light) / 0.7);
   --qpress-panel-gradient-bottom: rgb(var(--qpress-rgb-light) / 0.22);
-  --qpress-highlight-border: rgb(var(--qpress-rgb-secondary) / 0.16);
+  --qpress-highlight-border: color-mix(in srgb, #{$brand-border-color-light} 42%, transparent);
   --qpress-highlight-bg: rgb(var(--qpress-rgb-light) / 0.52);
-  --qpress-highlight-value: var(--qpress-color-primary);
+  --qpress-highlight-value: var(--qpress-text-primary);
   --qpress-highlight-label: var(--qpress-text-primary);
   --qpress-accent-line: rgb(var(--qpress-rgb-primary) / 0.4);
   --qpress-icon-bg: rgb(var(--qpress-rgb-primary) / 0.1);
-  --qpress-icon-color: var(--qpress-color-primary);
-  --qpress-tile-border: rgb(var(--qpress-rgb-secondary) / 0.12);
+  --qpress-icon-color: var(--qpress-text-primary);
+  --qpress-tile-border: color-mix(in srgb, #{$brand-border-color-light} 42%, transparent);
   --qpress-tile-bg: rgb(var(--qpress-rgb-light) / 0.42);
-  --qpress-tile-hover-border: rgb(var(--qpress-rgb-primary) / 0.28);
+  --qpress-tile-hover-border: #{$brand-border-color-light};
   --qpress-tile-hover-bg: rgb(var(--qpress-rgb-light) / 0.56);
   --qpress-tile-hover-shadow: 0 14px 28px rgb(var(--qpress-rgb-secondary) / 0.12);
-  --qpress-meta-text: var(--qpress-color-primary);
+  --qpress-meta-text: var(--qpress-text-primary);
   --qpress-spot-accent: rgb(var(--qpress-rgb-primary) / 0.14);
   --qpress-resource-link-bg: rgb(var(--qpress-rgb-light) / 0.48);
   --qpress-resource-link-text: var(--qpress-text-primary);
-  --qpress-resource-item-border: rgb(var(--qpress-rgb-secondary) / 0.1);
+  --qpress-resource-item-border: color-mix(in srgb, #{$brand-border-color-light} 38%, transparent);
   --qpress-resource-item-bg: rgb(var(--qpress-rgb-light) / 0.42);
   --qpress-mesh-color: rgb(var(--qpress-rgb-primary) / 0.16);
   --qpress-hero-glow-primary: rgb(var(--qpress-rgb-primary) / 0.18);
@@ -687,39 +700,39 @@ body.body--dark {
   --qpress-text-body: rgb(var(--qpress-rgb-text) / 0.8);
   --qpress-text-muted: rgb(var(--qpress-rgb-text) / 0.64);
   --qpress-text-soft: rgb(var(--qpress-rgb-text) / 0.82);
-  --qpress-border-subtle: rgb(var(--qpress-rgb-light) / 0.12);
-  --qpress-border-strong: rgb(var(--qpress-rgb-light) / 0.2);
+  --qpress-border-subtle: color-mix(in srgb, #{$brand-border-color-dark} 70%, transparent);
+  --qpress-border-strong: #{$brand-border-color-dark};
   --qpress-card-shadow: 0 16px 34px rgb(var(--qpress-rgb-dark) / 0.24);
   --qpress-shadow-large: 0 28px 60px rgb(var(--qpress-rgb-dark) / 0.28);
   --qpress-chip-bg: rgb(var(--qpress-rgb-light) / 0.08);
-  --qpress-chip-text: var(--qpress-color-primary);
+  --qpress-chip-text: var(--qpress-text-primary);
   --qpress-action-solid-bg: var(--qpress-color-light);
   --qpress-action-solid-text: var(--qpress-color-dark);
   --qpress-action-solid-shadow: 0 18px 30px rgb(var(--qpress-rgb-dark) / 0.28);
   --qpress-action-ghost-bg: rgb(var(--qpress-rgb-light) / 0.08);
   --qpress-action-ghost-text: var(--qpress-text-primary);
-  --qpress-pill-border: rgb(var(--qpress-rgb-light) / 0.12);
+  --qpress-pill-border: color-mix(in srgb, #{$brand-border-color-dark} 70%, transparent);
   --qpress-pill-bg: rgb(var(--qpress-rgb-light) / 0.05);
-  --qpress-pill-text: var(--qpress-color-primary);
+  --qpress-pill-text: var(--qpress-text-primary);
   --qpress-panel-gradient-top: rgb(var(--qpress-rgb-light) / 0.08);
   --qpress-panel-gradient-bottom: rgb(var(--qpress-rgb-light) / 0.02);
-  --qpress-highlight-border: rgb(var(--qpress-rgb-light) / 0.08);
+  --qpress-highlight-border: color-mix(in srgb, #{$brand-border-color-dark} 64%, transparent);
   --qpress-highlight-bg: rgb(var(--qpress-rgb-light) / 0.05);
-  --qpress-highlight-value: var(--qpress-color-primary);
+  --qpress-highlight-value: var(--qpress-text-primary);
   --qpress-highlight-label: var(--qpress-text-primary);
   --qpress-accent-line: rgb(var(--qpress-rgb-primary) / 0.55);
   --qpress-icon-bg: rgb(var(--qpress-rgb-primary) / 0.16);
-  --qpress-icon-color: var(--qpress-color-primary);
-  --qpress-tile-border: rgb(var(--qpress-rgb-light) / 0.08);
+  --qpress-icon-color: var(--qpress-text-primary);
+  --qpress-tile-border: color-mix(in srgb, #{$brand-border-color-dark} 62%, transparent);
   --qpress-tile-bg: rgb(var(--qpress-rgb-light) / 0.04);
-  --qpress-tile-hover-border: rgb(var(--qpress-rgb-primary) / 0.34);
+  --qpress-tile-hover-border: #{$brand-border-color-dark};
   --qpress-tile-hover-bg: rgb(var(--qpress-rgb-light) / 0.08);
   --qpress-tile-hover-shadow: 0 14px 28px rgb(var(--qpress-rgb-dark) / 0.2);
-  --qpress-meta-text: var(--qpress-color-primary);
+  --qpress-meta-text: var(--qpress-text-primary);
   --qpress-spot-accent: rgb(var(--qpress-rgb-primary) / 0.18);
   --qpress-resource-link-bg: rgb(var(--qpress-rgb-light) / 0.06);
   --qpress-resource-link-text: var(--qpress-text-primary);
-  --qpress-resource-item-border: rgb(var(--qpress-rgb-light) / 0.08);
+  --qpress-resource-item-border: color-mix(in srgb, #{$brand-border-color-dark} 62%, transparent);
   --qpress-resource-item-bg: rgb(var(--qpress-rgb-light) / 0.04);
   --qpress-mesh-color: rgb(var(--qpress-rgb-light) / 0.12);
   --qpress-hero-glow-primary: rgb(var(--qpress-rgb-primary) / 0.22);
@@ -764,6 +777,7 @@ body.body--dark {
   .header-toolbar {
     color: $header-btn-color--dark;
     background: $dark-bg;
+    border-color: $brand-border-color-dark;
   }
 
   .header-tabs,
@@ -848,8 +862,13 @@ body.body--dark {
     color: $steps-title-color-dark;
   }
 
+  .markdown-content .q-card--bordered,
+  .markdown-page__content .q-card--bordered {
+    border-color: $brand-border-color-dark;
+  }
+
   .markdown-h2 {
-    border-color: $separator-dark-color;
+    border-color: $brand-border-color-dark;
   }
 
   kbd {
