@@ -6,6 +6,8 @@
   "license": "MIT",
   "author": "Jeff Galbraith <jeff@quasar.dev>",
   "scripts": {
+    "api:generate": "pnpm --dir packages/docs exec qpress api generate --root ../..",
+    "api:check": "pnpm --dir packages/docs exec qpress api check --root ../..",
     "clean": "rm -rf node_modules pnpm-lock.yaml packages/ui/node_modules packages/docs/node_modules packages/app-extension/node_modules packages/app-extension/dist",
     "build": "pnpm run build:ui && pnpm run build:app-ext && pnpm run build:docs",
     "build:ui": "cd packages/ui && pnpm build",
