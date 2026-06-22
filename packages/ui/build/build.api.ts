@@ -1750,6 +1750,7 @@ export async function generate({ compact = false } = {}): Promise<{
   const encodeFn = compact === true ? JSON.stringify : (json) => JSON.stringify(json, null, 2)
 
   prepareRuntimeImports()
+  fse.emptyDirSync(dest)
 
   try {
     const list = []
