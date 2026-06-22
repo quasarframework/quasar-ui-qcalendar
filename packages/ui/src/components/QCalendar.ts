@@ -41,6 +41,19 @@ export interface CalendarProps {
   transitionPrev: string
 }
 
+/**
+ * Wrapper component that renders the active calendar view for the selected mode.
+ * Public slots and events are forwarded from the view components listed here.
+ *
+ * @api-source QCalendarAgenda
+ * @api-source QCalendarDay
+ * @api-source QCalendarMonth
+ * @api-source QCalendarResource
+ * @api-source QCalendarScheduler
+ * @api-source QCalendarTask
+ * @api-slots QCalendarAgenda, QCalendarDay, QCalendarMonth, QCalendarResource, QCalendarScheduler, QCalendarTask
+ * @api-events QCalendarAgenda, QCalendarDay, QCalendarMonth, QCalendarResource, QCalendarScheduler, QCalendarTask
+ */
 export default defineComponent({
   name: 'QCalendar',
 
