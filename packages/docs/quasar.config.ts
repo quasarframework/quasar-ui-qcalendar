@@ -1,12 +1,31 @@
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file
 
-import { defineConfig } from '#q-app'
+import { defineConfig, type ConfigureCallback } from '#q-app'
 import { viteMdPlugin, type MenuItem } from '@md-plugins/vite-md-plugin'
 import { viteSearchPlugin } from '@md-plugins/vite-search-plugin'
 import { viteExamplesPlugin, viteManualChunks } from '@md-plugins/vite-examples-plugin'
 
-export default defineConfig(async (ctx) => {
+type RolldownCodeSplittingGroup = {
+  name: (moduleId: string) => string | null
+}
+
+type DocsViteBuildConfig = {
+  chunkSizeWarningLimit?: number
+  rolldownOptions?: {
+    output?: {
+      codeSplitting?: {
+        groups?: RolldownCodeSplittingGroup[]
+      }
+    }
+  }
+}
+
+type DocsViteConfig = {
+  build?: DocsViteBuildConfig
+}
+
+const configure: ConfigureCallback = async (ctx) => {
   // Dynamically import siteConfig
   const siteConfig = await import('./src/siteConfig')
   const { sidebar } = siteConfig.default
@@ -65,7 +84,7 @@ export default defineConfig(async (ctx) => {
       // polyfillModulePreload: true,
       // distDir
 
-      extendViteConf(viteConf, { isClient }) {
+      extendViteConf(viteConf: DocsViteConfig, { isClient }: { isClient: boolean }) {
         if (ctx.prod && isClient) {
           viteConf.build = viteConf.build || {}
           viteConf.build.chunkSizeWarningLimit = 650
@@ -282,5 +301,7 @@ export default defineConfig(async (ctx) => {
        */
       extraScripts: [],
     },
-  }
-})
+  } as Awaited<ReturnType<ConfigureCallback>>
+}
+
+export default defineConfig(configure)
