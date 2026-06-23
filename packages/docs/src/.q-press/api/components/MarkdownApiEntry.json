@@ -1,76 +1,30 @@
 {
+  "generated_at": "2026-06-22T19:26:50.114Z",
   "type": "component",
   "meta": {
-    "docsUrl": "https://path-to-your-docs/markdown-api-entry"
+    "docsUrl": "/quasar-app-extensions/qpress/components"
   },
-  "functions": {
-    "getProp": {
-      "desc": "Function to get a property node for the API entry.",
-      "params": {
-        "openState": {
-          "type": "Object",
-          "desc": "The state object to manage open/close state of nodes."
-        },
-        "masterKey": {
-          "type": "String",
-          "desc": "The master key for the API entry."
-        },
-        "prop": {
-          "type": "Object",
-          "desc": "The property object to generate the node for."
-        },
-        "paramName": {
-          "type": "String",
-          "desc": "The name of the parameter."
-        },
-        "level": {
-          "type": "Number",
-          "desc": "The level of the property in the hierarchy."
-        }
-      },
-      "returns": {
-        "type": "Array<VNode>",
-        "desc": "An array of VNode elements representing the property."
-      }
+  "props": {
+    "type": {
+      "desc": "API section type being rendered.",
+      "type": "String",
+      "tsType": "string",
+      "required": true,
+      "category": "content",
+      "examples": [
+        "'props'",
+        "'methods'"
+      ]
     },
-    "getDiv": {
-      "desc": "Function to create a div element for the API entry.",
-      "params": {
-        "cols": {
-          "type": "Number",
-          "desc": "The number of columns the div should span."
-        },
-        "label": {
-          "type": "String",
-          "desc": "The label for the div."
-        },
-        "key": {
-          "type": "String",
-          "desc": "The key for the div."
-        },
-        "children": {
-          "type": "Array<VNode>",
-          "desc": "The child nodes for the div."
-        }
-      },
-      "returns": {
-        "type": "VNode",
-        "desc": "A VNode element representing the div."
-      }
-    },
-    "getStringType": {
-      "desc": "Function to get the string representation of a type.",
-      "params": {
-        "type": {
-          "type": "Object",
-          "desc": "The type object to get the string representation for."
-        }
-      },
-      "returns": {
-        "type": "String",
-        "desc": "The string representation of the type."
-      }
+    "definition": {
+      "desc": "API definition entries for the selected section.",
+      "type": "Object | String",
+      "tsType": "Record<string, any> | string",
+      "required": true,
+      "category": "content",
+      "examples": [
+        "{ modelValue: { type: 'String', desc: 'Current model value.' } }"
+      ]
     }
-  },
-  "types": {}
+  }
 }

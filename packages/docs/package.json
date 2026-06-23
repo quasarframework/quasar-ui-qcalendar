@@ -16,10 +16,11 @@
     "build": "pnpm run build:ssg",
     "postinstall": "quasar prepare",
     "build:spa": "quasar build",
-    "build:ssg": "quasar prepare && quasar build && qpress-ssg",
+    "build:ssg": "quasar prepare && quasar build && qpress ssg",
     "build:ssg:renderer": "quasar prepare && quasar build -m ssr",
-    "prerender:ssg": "qpress-ssg",
-    "preview:ssg": "quasar serve dist/spa --history"
+    "prerender:ssg": "qpress ssg",
+    "preview:ssg": "quasar serve dist/spa --history",
+    "check:qpress": "qpress check"
   },
   "dependencies": {
     "@quasar/extras": "2.0.1",
@@ -31,12 +32,12 @@
     "vue-router": "^5.1.0"
   },
   "devDependencies": {
-    "@md-plugins/quasar-app-extension-q-press": "0.1.0-rc.13",
-    "@md-plugins/search-ui": "0.1.0-rc.13",
-    "@md-plugins/vite-examples-plugin": "0.1.0-rc.13",
-    "@md-plugins/vite-md-plugin": "0.1.0-rc.13",
-    "@md-plugins/vite-search-plugin": "0.1.0-rc.13",
-    "@md-plugins/vite-ssg-plugin": "0.1.0-rc.13",
+    "@md-plugins/quasar-app-extension-q-press": "0.1.0-rc.14",
+    "@md-plugins/search-ui": "0.1.0-rc.14",
+    "@md-plugins/vite-examples-plugin": "0.1.0-rc.14",
+    "@md-plugins/vite-md-plugin": "0.1.0-rc.14",
+    "@md-plugins/vite-search-plugin": "0.1.0-rc.14",
+    "@md-plugins/vite-ssg-plugin": "0.1.0-rc.14",
     "@quasar/app-vite": "3.0.0-rc.3",
     "@quasar/quasar-ui-qcalendar": "workspace:*",
     "@types/markdown-it": "^14.1.2",

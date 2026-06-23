@@ -1,48 +1,28 @@
 {
+  "generated_at": "2026-06-22T19:26:50.091Z",
   "type": "component",
   "meta": {
-    "docsUrl": "https://path-to-your-docs/markdown-card-title"
+    "docsUrl": "/quasar-app-extensions/qpress/components"
   },
   "props": {
     "title": {
+      "desc": "The title text to display.",
       "type": "String",
-      "desc": "The title text to display",
+      "required": true,
+      "category": "content",
       "examples": [
         "'Introduction'",
         "'Chapter 1'"
-      ],
-      "category": "content"
+      ]
     },
     "prefix": {
+      "desc": "Prefix to add to the slugified title.",
       "type": "String",
-      "desc": "Prefix to add to the slugified title",
+      "default": "",
+      "category": "content",
       "examples": [
         "'section-'"
-      ],
-      "category": "content"
-    }
-  },
-  "events": {
-    "click": {
-      "desc": "Emitted when the title is clicked",
-      "params": {
-        "evt": {
-          "type": "Event",
-          "desc": "JS event object"
-        }
-      }
-    }
-  },
-  "methods": {
-    "onClick": {
-      "desc": "Handler for the click event on the title",
-      "params": {
-        "evt": {
-          "type": "Event",
-          "desc": "JS event object"
-        }
-      },
-      "returns": null
+      ]
     }
   }
 }

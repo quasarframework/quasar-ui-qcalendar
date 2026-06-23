@@ -1,11 +1,30 @@
 import { useQuasar } from 'quasar'
 import { useMarkdownStore } from '../stores/markdown'
-import { computed, watch } from 'vue'
+import { computed, watch, type ComputedRef } from 'vue'
+
+export type UseDarkReturn = {
+  /**
+   * Computed reference to the current Q-Press dark-mode state.
+   */
+  isDark: ComputedRef<boolean>
+
+  /**
+   * Initializes dark mode from the saved theme cookie.
+   */
+  initDark: () => void
+
+  /**
+   * Toggles dark mode and persists the chosen theme.
+   */
+  toggleDark: () => void
+}
 
 /**
  * Provides Q-Press dark-mode state, cookie persistence, and Quasar Dark sync.
+ *
+ * @returns Dark-mode state and helpers for Q-Press layouts.
  */
-export function useDark() {
+export function useDark(): UseDarkReturn {
   const $q = useQuasar()
   const markdownStore = useMarkdownStore()
 

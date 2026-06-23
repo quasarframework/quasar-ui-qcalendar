@@ -118,17 +118,51 @@ type MarkdownExamples = {
 }
 
 const props = defineProps({
+  /**
+   * Title displayed above the example.
+   *
+   * @category content
+   * @example 'Example 1'
+   * @example 'Sample Code'
+   */
   title: {
     type: String,
     required: true,
   },
+  /**
+   * Vue example file name without the .vue extension.
+   *
+   * @category content
+   * @example 'Basic'
+   * @example 'AdvancedUsage'
+   */
   file: {
     type: String,
     required: true,
   },
+  /**
+   * Hide the CodePen edit action.
+   *
+   * @category behavior
+   */
   noEdit: Boolean, // no codepen edit
+  /**
+   * Constrain the rendered example area to vertical scrolling.
+   *
+   * @category content
+   */
   scrollable: Boolean,
+  /**
+   * Allow the example content to manage overflow.
+   *
+   * @category behavior
+   */
   overflow: Boolean,
+  /**
+   * Hide the GitHub source action.
+   *
+   * @category behavior
+   */
   noGithub: Boolean, // no GitHub link
 })
 

@@ -1,23 +1,24 @@
 {
+  "generated_at": "2026-06-22T19:26:50.110Z",
   "type": "component",
   "meta": {
-    "docsUrl": "https://path-to-your-docs/markdown-link"
+    "docsUrl": "/quasar-app-extensions/qpress/components"
   },
   "props": {
     "to": {
+      "desc": "The target URL or path for the link.",
       "type": "String",
-      "desc": "The target URL or path for the link",
+      "required": true,
+      "category": "navigation",
       "examples": [
         "/home",
         "https://example.com"
-      ],
-      "required": true,
-      "category": "navigation"
+      ]
     }
   },
   "slots": {
     "default": {
-      "desc": "Slot for custom content inside the link"
+      "desc": "Slot for custom content inside the link."
     }
   }
 }

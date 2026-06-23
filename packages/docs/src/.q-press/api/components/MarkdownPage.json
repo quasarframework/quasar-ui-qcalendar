@@ -1,71 +1,99 @@
 {
+  "generated_at": "2026-06-22T19:26:50.132Z",
   "type": "component",
   "meta": {
-    "docsUrl": "https://path-to-your-docs/markdown-page"
+    "docsUrl": "/quasar-app-extensions/qpress/components"
   },
   "props": {
-    "overline": {
-      "type": "String",
-      "desc": "Text to display as an `overline` above the title",
-      "examples": [
-        "'Introduction'",
-        "'Chapter 1'"
-      ],
-      "category": "content"
-    },
     "title": {
+      "desc": "Title of the markdown page.",
       "type": "String",
-      "desc": "Title of the markdown page",
+      "default": "null",
+      "category": "content",
       "examples": [
         "'Getting Started'",
         "'API Reference'"
-      ],
-      "category": "content"
+      ]
+    },
+    "desc": {
+      "desc": "Description used for the page metadata.",
+      "type": "String",
+      "default": "null",
+      "category": "content",
+      "examples": [
+        "'Learn how to install and configure Q-Press.'"
+      ]
+    },
+    "overline": {
+      "desc": "Text to display as an overline above the title.",
+      "type": "String",
+      "default": "null",
+      "category": "content",
+      "examples": [
+        "'Introduction'",
+        "'Chapter 1'"
+      ]
     },
     "badge": {
+      "desc": "Badge text to display next to the title.",
       "type": "String",
-      "desc": "Badge text to display next to the title",
+      "default": "null",
+      "category": "content",
       "examples": [
         "'New'",
         "'Updated'"
-      ],
+      ]
+    },
+    "fullscreen": {
+      "desc": "Flag to indicate if the page is in fullscreen mode.",
+      "type": "Boolean",
+      "category": "state"
+    },
+    "heading": {
+      "desc": "Reserve heading behavior for generated markdown pages.",
+      "type": "Boolean",
       "category": "content"
     },
     "editLink": {
+      "desc": "Source markdown path used to build the edit link.",
       "type": "String",
-      "desc": "URL for the edit link",
+      "default": "null",
+      "category": "navigation",
       "examples": [
-        "'https://github.com/user/repo/edit/main/docs/page.md'"
-      ],
-      "category": "navigation"
+        "'quasar-app-extensions/qpress/overview'"
+      ]
     },
-    "isFullscreen": {
-      "type": "Boolean",
-      "desc": "Flag to indicate if the page is in `fullscreen` mode",
-      "category": "state"
+    "toc": {
+      "desc": "Table of contents entries for the page.",
+      "type": "Array<TocMenuItem>",
+      "default": "() => []",
+      "category": "navigation",
+      "examples": [
+        "[{ id: 'install', label: 'Install' }]"
+      ]
+    },
+    "related": {
+      "desc": "Related page links displayed near the top of the page.",
+      "type": "Array<RelatedItem>",
+      "default": "() => []",
+      "category": "navigation",
+      "examples": [
+        "[{ name: 'Overview', path: '/quasar-app-extensions/qpress/overview' }]"
+      ]
+    },
+    "nav": {
+      "desc": "Footer navigation links displayed after the page content.",
+      "type": "Array<NavItem>",
+      "default": "() => []",
+      "category": "navigation",
+      "examples": [
+        "[{ name: 'Next', path: '/quasar-app-extensions/qpress/advanced' }]"
+      ]
     }
   },
   "slots": {
     "default": {
-      "desc": "Slot for the main content of the markdown page"
-    }
-  },
-  "events": {
-    "edit": {
-      "desc": "Emitted when the edit button is clicked",
-      "params": {
-        "evt": {
-          "type": "Event",
-          "desc": "JS event object"
-        }
-      }
-    }
-  },
-  "methods": {
-    "toggleFullscreen": {
-      "desc": "Toggle the fullscreen mode of the markdown page",
-      "params": {},
-      "returns": null
+      "desc": "Slot for the main content of the markdown page."
     }
   }
 }

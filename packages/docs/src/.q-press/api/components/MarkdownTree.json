@@ -1,25 +1,28 @@
 {
+  "generated_at": "2026-06-22T19:26:50.112Z",
   "type": "component",
   "meta": {
-    "docsUrl": "https://path-to-your-docs/markdown-tree"
+    "docsUrl": "/quasar-app-extensions/qpress/components"
   },
   "props": {
-    "nodes": {
-      "type": "Array",
-      "desc": "Array of nodes to display in the tree",
+    "def": {
+      "desc": "Tree definition to display.",
+      "type": "Object",
+      "required": true,
+      "category": "content",
       "examples": [
-        "[{ id: 1, l: 'Node 1', c: [{ id: 2, l: 'Child Node' }] }]"
-      ],
-      "category": "content"
+        "{ id: 1, l: 'Node 1', c: [{ id: 2, l: 'Child Node' }] }"
+      ]
     }
   },
   "slots": {
     "default-header": {
-      "desc": "Slot for custom content in the tree node header",
+      "desc": "Slot for custom content in the tree node header.",
       "scope": {
         "prop": {
-          "type": "Object",
-          "desc": "Properties of the tree node"
+          "desc": "Properties of the tree node.",
+          "tsType": "{ node: unknown }",
+          "type": "Object"
         }
       }
     }

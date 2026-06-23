@@ -1,28 +1,38 @@
 {
-  "type": "component",
+  "generated_at": "2026-06-22T19:26:50.139Z",
+  "type": "plugin",
   "meta": {
-    "docsUrl": "https://path-to-your-docs/dark"
+    "docsUrl": "/quasar-app-extensions/qpress/overview"
   },
   "functions": {
     "useDark": {
-      "desc": "Composable function to manage dark mode settings.",
+      "desc": "Provides Q-Press dark-mode state, cookie persistence, and Quasar Dark sync.",
+      "tsSignature": "function useDark(): UseDarkReturn",
+      "type": "Function",
       "returns": {
-        "type": "Object",
-        "desc": "An object containing the dark mode state and functions to initialize and toggle dark mode.",
-        "properties": {
+        "definition": {
           "isDark": {
-            "type": "ComputedRef<boolean>",
-            "desc": "A computed reference to the current dark mode state."
+            "desc": "Computed reference to the current Q-Press dark-mode state.",
+            "required": true,
+            "tsType": "ComputedRef<boolean>",
+            "type": "ComputedRef<boolean>"
           },
           "initDark": {
-            "type": "Function",
-            "desc": "Function to initialize the dark mode state based on cookies."
+            "desc": "Initializes dark mode from the saved theme cookie.",
+            "required": true,
+            "tsType": "() => void",
+            "type": "() => void"
           },
           "toggleDark": {
-            "type": "Function",
-            "desc": "Function to toggle the dark mode state and update cookies."
+            "desc": "Toggles dark mode and persists the chosen theme.",
+            "required": true,
+            "tsType": "() => void",
+            "type": "() => void"
           }
-        }
+        },
+        "desc": "Dark-mode state and helpers for Q-Press layouts.",
+        "type": "UseDarkReturn",
+        "tsType": "UseDarkReturn"
       }
     }
   }

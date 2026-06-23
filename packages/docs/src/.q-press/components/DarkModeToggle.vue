@@ -20,17 +20,36 @@ import { useDark } from '../composables/dark'
 import { mdiMoonWaningCrescent, mdiWhiteBalanceSunny } from '@quasar/extras/mdi-v7'
 
 const props = defineProps({
+  /**
+   * Icon name displayed for the dark mode state.
+   *
+   * @category content
+   * @example mdiMoonWaningCrescent
+   */
   darkIcon: {
     type: String,
     default: mdiMoonWaningCrescent, // Default dark mode icon
   },
+  /**
+   * Icon name displayed for the light mode state.
+   *
+   * @category content
+   * @example mdiWhiteBalanceSunny
+   */
   lightIcon: {
     type: String,
     default: mdiWhiteBalanceSunny, // Default light mode icon
   },
 })
 
-const emit = defineEmits(['update:mode'])
+const emit = defineEmits({
+  /**
+   * Emitted when the mode is toggled.
+   *
+   * @param mode - The current mode ('dark' or 'light').
+   */
+  'update:mode': (mode: 'dark' | 'light') => mode === 'dark' || mode === 'light',
+})
 
 const $q = useQuasar()
 const { toggleDark } = useDark()

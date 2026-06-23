@@ -1,25 +1,35 @@
 {
+  "generated_at": "2026-06-22T19:26:50.107Z",
   "type": "component",
   "meta": {
-    "docsUrl": "https://path-to-your-docs/markdown-prerender"
+    "docsUrl": "/quasar-app-extensions/qpress/components"
   },
   "props": {
     "title": {
+      "desc": "Title of the prerendered content.",
       "type": "String",
-      "desc": "Title of the prerendered content",
+      "tsType": "string",
+      "required": false,
+      "category": "content",
       "examples": [
         "'Example Title'",
         "'Sample Content'"
-      ],
-      "category": "content"
+      ]
     },
     "tabs": {
+      "desc": "List of tabs to display.",
       "type": "Array",
-      "desc": "List of tabs to display",
+      "tsType": "string[]",
+      "required": false,
+      "category": "content",
       "examples": [
         "['Tab 1', 'Tab 2']"
-      ],
-      "category": "content"
+      ]
+    }
+  },
+  "slots": {
+    "default": {
+      "desc": "Prerendered Markdown or example content."
     }
   }
 }

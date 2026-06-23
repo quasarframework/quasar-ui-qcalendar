@@ -8,6 +8,9 @@ const rSpecial = /[\s~`!@#$%^&*()\-_+=[\]{}|\\;:"'“”‘’<>,.?/]+/g
 
 /**
  * Default slugification function used by qPress client helpers.
+ *
+ * @param str - Heading or label text to convert into a route-safe slug.
+ * @returns Stable lowercase slug suitable for headings, anchors, and generated routes.
  */
 export const slugify = (str: string): string =>
   str

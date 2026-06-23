@@ -11,10 +11,12 @@ import type { MdSearchElement, MdSearchSelectEventDetail } from '@md-plugins/sea
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useDark } from '../composables/dark'
+import siteConfig from '../../siteConfig'
 
 const router = useRouter()
 const { isDark } = useDark()
 const hostRef = ref<HTMLDivElement>()
+const searchTitle = siteConfig.title || 'Docs'
 let searchElement: MdSearchElement | undefined
 let unmounted = false
 
@@ -51,10 +53,10 @@ onMounted(async () => {
 
   searchElement = document.createElement('md-search') as MdSearchElement
   searchElement.setAttribute('src', withBase('search/search-index.json'))
-  searchElement.setAttribute('placeholder', 'Search MD-Plugins docs...')
+  searchElement.setAttribute('placeholder', `Search ${searchTitle} docs...`)
   searchElement.setAttribute('trigger-label', 'Search docs')
-  searchElement.setAttribute('panel-title', 'Search MD-Plugins')
-  searchElement.setAttribute('search-label', 'Search MD-Plugins documentation')
+  searchElement.setAttribute('panel-title', `Search ${searchTitle}`)
+  searchElement.setAttribute('search-label', `Search ${searchTitle} documentation`)
   searchElement.setAttribute('theme', isDark.value === true ? 'dark' : 'light')
   searchElement.setAttribute('max-results', '15')
   searchElement.addEventListener('md-search-select', onSearchSelect)

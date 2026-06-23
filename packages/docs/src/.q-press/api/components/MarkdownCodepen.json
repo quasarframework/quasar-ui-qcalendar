@@ -1,18 +1,19 @@
 {
+  "generated_at": "2026-06-22T19:26:50.092Z",
   "type": "component",
   "meta": {
-    "docsUrl": "https://path-to-your-docs/markdown-codepen"
+    "docsUrl": "/quasar-app-extensions/qpress/components"
   },
   "props": {
     "title": {
+      "desc": "Title used for the generated CodePen.",
       "type": "String",
-      "desc": "Title used for the generated CodePen",
       "required": true,
+      "category": "content",
       "examples": [
         "'Basic Example'",
         "'Advanced Playground'"
-      ],
-      "category": "content"
+      ]
     }
   }
 }

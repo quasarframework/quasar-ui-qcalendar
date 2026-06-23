@@ -1,17 +1,7 @@
 {
+  "generated_at": "2026-06-22T19:26:50.127Z",
   "type": "component",
   "meta": {
-    "docsUrl": "https://path-to-your-docs/markdown-drawer-toc"
-  },
-  "events": {
-    "toggleTocDrawer": {
-      "desc": "Emitted when the close button is clicked to toggle the Table of Contents drawer",
-      "params": {
-        "evt": {
-          "type": "Event",
-          "desc": "JS event object"
-        }
-      }
-    }
+    "docsUrl": "/quasar-app-extensions/qpress/components"
   }
 }

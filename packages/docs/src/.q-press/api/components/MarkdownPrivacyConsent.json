@@ -1,0 +1,43 @@
+{
+  "generated_at": "2026-06-22T19:26:50.135Z",
+  "type": "component",
+  "meta": {
+    "docsUrl": "/quasar-app-extensions/qpress/components"
+  },
+  "props": {
+    "config": {
+      "desc": "Privacy consent settings from `siteConfig.privacyConsent`.",
+      "required": false,
+      "tsType": "PrivacyConsentConfig | undefined",
+      "type": "PrivacyConsentConfig",
+      "category": "content"
+    }
+  },
+  "events": {
+    "qpress:privacy-consent": {
+      "desc": "Browser CustomEvent dispatched on window after a saved privacy choice is read or written.",
+      "params": {
+        "detail": {
+          "desc": "Stored consent id, accepted flag, category choices, savedAt, and optional expiresAt values.",
+          "required": true,
+          "tsType": "StoredPrivacyConsent",
+          "type": "StoredPrivacyConsent"
+        }
+      }
+    }
+  },
+  "methods": {
+    "savePrimaryChoice": {
+      "desc": "Stores the acknowledgement or accept-all choice.",
+      "tsSignature": "function savePrimaryChoice(): void",
+      "type": "Function",
+      "returns": null
+    },
+    "rejectOptional": {
+      "desc": "Stores required categories only and rejects optional categories.",
+      "tsSignature": "function rejectOptional(): void",
+      "type": "Function",
+      "returns": null
+    }
+  }
+}

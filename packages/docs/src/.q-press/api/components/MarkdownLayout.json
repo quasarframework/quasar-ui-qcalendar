@@ -1,52 +1,7 @@
 {
+  "generated_at": "2026-06-22T19:26:50.131Z",
   "type": "component",
   "meta": {
-    "docsUrl": "https://path-to-your-docs/markdown-layout"
-  },
-  "props": {
-    "pageClass": {
-      "type": "String",
-      "desc": "CSS class to apply to the q-page component",
-      "examples": [
-        "'custom-page-class'"
-      ],
-      "category": "style"
-    },
-    "pageContentClass": {
-      "type": "String",
-      "desc": "CSS class to apply to the page content container",
-      "examples": [
-        "'custom-page-content-class'"
-      ],
-      "category": "style"
-    },
-    "isFullscreen": {
-      "type": "Boolean",
-      "desc": "Flag to indicate if the page is in fullscreen mode",
-      "category": "state"
-    }
-  },
-  "events": {
-    "scroll": {
-      "desc": "Emitted when the page is scrolled",
-      "params": {
-        "evt": {
-          "type": "Event",
-          "desc": "JS event object"
-        }
-      }
-    }
-  },
-  "methods": {
-    "onPageScroll": {
-      "desc": "Handler for the page scroll event",
-      "params": {
-        "evt": {
-          "type": "Event",
-          "desc": "JS event object"
-        }
-      },
-      "returns": null
-    }
+    "docsUrl": "/quasar-app-extensions/qpress/components"
   }
 }

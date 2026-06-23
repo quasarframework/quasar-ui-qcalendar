@@ -12,7 +12,26 @@
 import { computed } from 'vue'
 import { mdiLaunch } from '@quasar/extras/mdi-v7'
 
-const props = defineProps({ to: { type: String, required: true } })
+const props = defineProps({
+  /**
+   * The target URL or path for the link.
+   *
+   * @category navigation
+   * @example /home
+   * @example https://example.com
+   */
+  to: {
+    type: String,
+    required: true,
+  },
+})
+
+defineSlots<{
+  /**
+   * Slot for custom content inside the link.
+   */
+  default(): unknown
+}>()
 const internal = computed(
   () => props.to.charAt(0) === '/' || props.to.charAt(0) === '.' || props.to.charAt(0) === '#',
 )

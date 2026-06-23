@@ -229,7 +229,7 @@
     "@timestamp-js/core": "0.1.0-rc.0"
   },
   "devDependencies": {
-    "@md-plugins/quasar-app-extension-q-press": "0.1.0-rc.13",
+    "@md-plugins/quasar-app-extension-q-press": "0.1.0-rc.14",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^26.0.0",
     "@types/rtlcss": "^3.5.4",

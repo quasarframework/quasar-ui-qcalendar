@@ -1,46 +1,48 @@
 {
+  "generated_at": "2026-06-22T19:26:50.103Z",
   "type": "component",
   "meta": {
-    "docsUrl": "https://path-to-your-docs/markdown-example"
+    "docsUrl": "/quasar-app-extensions/qpress/components"
   },
   "props": {
     "title": {
+      "desc": "Title displayed above the example.",
       "type": "String",
-      "desc": "Title of the example",
+      "required": true,
+      "category": "content",
       "examples": [
         "'Example 1'",
         "'Sample Code'"
-      ],
-      "category": "content"
+      ]
     },
     "file": {
+      "desc": "Vue example file name without the .vue extension.",
       "type": "String",
-      "desc": "Vue example file name without the .vue extension",
       "required": true,
+      "category": "content",
       "examples": [
         "'Basic'",
         "'AdvancedUsage'"
-      ],
-      "category": "content"
+      ]
     },
     "noEdit": {
+      "desc": "Hide the CodePen edit action.",
       "type": "Boolean",
-      "desc": "Hide the CodePen edit button",
-      "category": "behavior"
-    },
-    "noGithub": {
-      "type": "Boolean",
-      "desc": "Hide the GitHub source button",
       "category": "behavior"
     },
     "scrollable": {
+      "desc": "Constrain the rendered example area to vertical scrolling.",
       "type": "Boolean",
-      "desc": "Constrain the example content to a scrollable area",
       "category": "content"
     },
     "overflow": {
+      "desc": "Allow the example content to manage overflow.",
       "type": "Boolean",
-      "desc": "Allow the example content to manage overflow automatically",
+      "category": "behavior"
+    },
+    "noGithub": {
+      "desc": "Hide the GitHub source action.",
+      "type": "Boolean",
       "category": "behavior"
     }
   }

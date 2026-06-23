@@ -7,8 +7,19 @@ import githubDark from 'shiki/themes/github-dark.mjs'
 import githubLight from 'shiki/themes/github-light.mjs'
 
 interface HighlightedBlock {
+  /**
+   * CSS classes copied from the highlighted Shiki pre element.
+   */
   className: string
+
+  /**
+   * Highlighted HTML code content inside the pre/code wrapper.
+   */
   code: string
+
+  /**
+   * Inline style copied from the highlighted Shiki pre element.
+   */
   style: string
 }
 
@@ -30,6 +41,13 @@ const highlighter = createHighlighterCoreSync({
   },
 })
 
+/**
+ * Highlights a fenced code block with the shared Shiki highlighter.
+ *
+ * @param code - Source code to highlight.
+ * @param lang - Requested Markdown fence language.
+ * @returns Highlighted HTML with light and dark theme tokens.
+ */
 export function highlightCode(code: string, lang: string): string {
   const options = {
     lang: normalizeLang(lang),
@@ -50,6 +68,12 @@ export function highlightCode(code: string, lang: string): string {
   }
 }
 
+/**
+ * Extracts reusable render details from Shiki's pre/code HTML wrapper.
+ *
+ * @param html - Highlighted HTML returned by Shiki.
+ * @returns Parsed classes, inline style, and highlighted code content.
+ */
 export function parseHighlightedBlock(html: string): HighlightedBlock {
   const match = html.match(/^<pre(?<attrs>[^>]*)><code>(?<code>[\s\S]*)<\/code><\/pre>$/)
   const attrs = match?.groups?.attrs ?? ''
@@ -61,6 +85,12 @@ export function parseHighlightedBlock(html: string): HighlightedBlock {
   }
 }
 
+/**
+ * Normalizes Markdown fence language aliases for Shiki.
+ *
+ * @param lang - Markdown fence language.
+ * @returns Shiki language identifier.
+ */
 function normalizeLang(lang: string): string {
   return (
     {

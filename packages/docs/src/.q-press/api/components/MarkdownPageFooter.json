@@ -1,21 +1,14 @@
 {
+  "generated_at": "2026-06-22T19:26:50.133Z",
   "type": "component",
   "meta": {
-    "docsUrl": "https://path-to-your-docs/markdown-page-footer"
+    "docsUrl": "/quasar-app-extensions/qpress/components"
   },
   "props": {
     "fullscreen": {
+      "desc": "Flag to indicate if the page is in fullscreen mode.",
       "type": "Boolean",
-      "desc": "Flag to indicate if the page is in fullscreen mode",
       "category": "state"
-    },
-    "links": {
-      "type": "Array",
-      "desc": "Array of link objects to display in the footer",
-      "examples": [
-        "[{ name: 'Home', path: '/' }, { name: 'Docs', path: '/docs' }]"
-      ],
-      "category": "content"
     }
   }
 }

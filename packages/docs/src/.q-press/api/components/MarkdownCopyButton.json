@@ -1,44 +1,29 @@
 {
+  "generated_at": "2026-06-22T19:26:50.113Z",
   "type": "component",
   "meta": {
-    "docsUrl": "https://path-to-your-docs/markdown-copy-button"
+    "docsUrl": "/quasar-app-extensions/qpress/components"
   },
   "props": {
     "code": {
-      "type": "String",
       "desc": "Clean source code to copy. When omitted, the component falls back to reading the rendered code block.",
+      "type": "String",
+      "default": "",
+      "category": "content",
       "examples": [
         "'const count = 1'"
-      ],
-      "category": "content"
+      ]
     },
     "lang": {
+      "desc": "Language of the code block to copy.",
       "type": "String",
-      "desc": "Language of the code block to copy",
+      "default": "markdown",
+      "category": "content",
       "examples": [
         "'js'",
         "'html'",
         "'css'"
-      ],
-      "category": "content"
-    }
-  },
-  "events": {
-    "copy": {
-      "desc": "Emitted when the copy button is clicked",
-      "params": {
-        "evt": {
-          "type": "Event",
-          "desc": "JS event object"
-        }
-      }
-    }
-  },
-  "methods": {
-    "copy": {
-      "desc": "Method to copy the code block to the clipboard",
-      "params": {},
-      "returns": null
+      ]
     }
   }
 }

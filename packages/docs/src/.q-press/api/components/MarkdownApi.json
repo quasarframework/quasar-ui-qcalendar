@@ -1,67 +1,41 @@
 {
+  "generated_at": "2026-06-22T19:26:50.073Z",
   "type": "component",
   "meta": {
-    "docsUrl": "https://path-to-your-docs/markdown-api"
+    "docsUrl": "/quasar-app-extensions/qpress/components"
   },
   "props": {
-    "nameBanner": {
+    "api": {
+      "desc": "API JSON object to render directly.",
+      "required": false,
+      "tsType": "ApiFile | null",
+      "type": "ApiFile | null",
+      "category": "content",
+      "default": "null"
+    },
+    "file": {
+      "desc": "API file name to fetch from the generated Quasar API endpoint.",
+      "required": false,
+      "tsType": "string",
       "type": "String",
-      "desc": "Title to display in the banner",
-      "examples": [
-        "'API Documentation'",
-        "'Component API'"
-      ],
-      "category": "content"
+      "category": "content",
+      "default": ""
+    },
+    "name": {
+      "desc": "Display name shown in the API card header.",
+      "required": false,
+      "tsType": "string",
+      "type": "String",
+      "category": "content",
+      "default": "API Documentation"
     },
     "pageLink": {
-      "type": "String",
-      "desc": "URL for the page link",
-      "examples": [
-        "'https://github.com/user/repo/edit/main/docs/page.md'"
-      ],
-      "category": "navigation"
-    }
-  },
-  "events": {
-    "searchFieldClick": {
-      "desc": "Emitted when the search field is clicked",
-      "params": {
-        "evt": {
-          "type": "Event",
-          "desc": "JS event object"
-        }
-      }
-    },
-    "filterClick": {
-      "desc": "Emitted when the filter button is clicked",
-      "params": {
-        "evt": {
-          "type": "Event",
-          "desc": "JS event object"
-        }
-      }
-    }
-  },
-  "methods": {
-    "onSearchFieldClick": {
-      "desc": "Handler for the search field click event",
-      "params": {
-        "evt": {
-          "type": "Event",
-          "desc": "JS event object"
-        }
-      },
-      "returns": null
-    },
-    "onFilterClick": {
-      "desc": "Handler for the filter button click event",
-      "params": {
-        "evt": {
-          "type": "Event",
-          "desc": "JS event object"
-        }
-      },
-      "returns": null
+      "desc": "Whether to show the Docs button when `meta.docsUrl` is available.",
+      "required": false,
+      "tsType": "boolean",
+      "type": "Boolean",
+      "category": "navigation",
+      "default": "false"
     }
   }
 }

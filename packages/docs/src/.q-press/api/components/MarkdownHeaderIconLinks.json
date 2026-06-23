@@ -1,16 +1,19 @@
 {
+  "generated_at": "2026-06-22T19:26:50.132Z",
   "type": "component",
   "meta": {
-    "docsUrl": "https://path-to-your-docs/markdown-header-icon-links"
+    "docsUrl": "/quasar-app-extensions/qpress/components"
   },
   "props": {
     "menu": {
+      "desc": "Array of menu entries to display as icon links in the header.",
+      "required": true,
+      "tsType": "MenuEntry[]",
       "type": "Array",
-      "desc": "Array of menu entries to display as icon links in the header",
+      "category": "content",
       "examples": [
         "[{ icon: 'home', path: '/' }, { icon: 'info', path: '/about' }]"
-      ],
-      "category": "content"
+      ]
     }
   }
 }

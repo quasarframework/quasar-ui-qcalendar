@@ -14,10 +14,24 @@ import { copyToClipboard } from './markdown-utils'
 import { mdiClipboardOutline } from '@quasar/extras/mdi-v7'
 
 const props = defineProps({
+  /**
+   * Clean source code to copy. When omitted, the component falls back to reading the rendered code block.
+   *
+   * @category content
+   * @example 'const count = 1'
+   */
   code: {
     type: String,
     default: '',
   },
+  /**
+   * Language of the code block to copy.
+   *
+   * @category content
+   * @example 'js'
+   * @example 'html'
+   * @example 'css'
+   */
   lang: {
     type: String,
     default: 'markdown',

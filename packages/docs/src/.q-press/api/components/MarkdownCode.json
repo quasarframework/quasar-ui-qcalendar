@@ -1,37 +1,39 @@
 {
+  "generated_at": "2026-06-22T19:26:50.092Z",
   "type": "component",
   "meta": {
-    "docsUrl": "https://path-to-your-docs/markdown-code"
+    "docsUrl": "/quasar-app-extensions/qpress/components"
   },
   "props": {
     "code": {
+      "desc": "Code string to render with syntax highlighting.",
       "type": "String",
-      "desc": "The code to display with Shiki syntax highlighting",
+      "required": true,
+      "category": "content",
       "examples": [
         "'const a = 1;'",
         "'<div>Hello World</div>'"
-      ],
-      "category": "content"
+      ]
     },
     "maxHeight": {
+      "desc": "Maximum height for the rendered code block.",
       "type": "String",
-      "desc": "Maximum height for the code block",
+      "category": "style",
       "examples": [
         "'200px'",
         "'50vh'"
-      ],
-      "category": "style"
+      ]
     },
     "lang": {
+      "desc": "Language identifier used by the syntax highlighter.",
       "type": "String",
-      "desc": "Language of the code for syntax highlighting",
       "default": "js",
+      "category": "content",
       "examples": [
         "'js'",
         "'html'",
         "'css'"
-      ],
-      "category": "content"
+      ]
     }
   }
 }

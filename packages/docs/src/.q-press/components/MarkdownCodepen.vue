@@ -398,7 +398,19 @@ function createOptionsScript(script: string) {
     .join('\n\n')
 }
 
-const props = defineProps({ title: { type: String, required: true } })
+const props = defineProps({
+  /**
+   * Title used for the generated CodePen.
+   *
+   * @category content
+   * @example 'Basic Example'
+   * @example 'Advanced Playground'
+   */
+  title: {
+    type: String,
+    required: true,
+  },
+})
 
 const active = ref(false)
 const formRef = ref<HTMLFormElement | null>(null)

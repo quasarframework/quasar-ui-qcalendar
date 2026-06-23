@@ -38,11 +38,26 @@
 import { mdiLaunch, mdiInformationOutline } from '@quasar/extras/mdi-v7'
 
 const props = defineProps({
+  /**
+   * Tree definition to display.
+   *
+   * @category content
+   * @example { id: 1, l: 'Node 1', c: [{ id: 2, l: 'Child Node' }] }
+   */
   def: {
     type: Object,
     required: true,
   },
 })
+
+defineSlots<{
+  /**
+   * Slot for custom content in the tree node header.
+   *
+   * @param prop Properties of the tree node.
+   */
+  'default-header'(prop: { node: unknown }): unknown
+}>()
 
 let id = 0
 const addId = (node) => {

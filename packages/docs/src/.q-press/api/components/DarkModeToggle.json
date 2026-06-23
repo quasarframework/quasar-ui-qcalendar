@@ -1,35 +1,38 @@
 {
+  "generated_at": "2026-06-22T19:26:50.058Z",
   "type": "component",
   "meta": {
-    "docsUrl": "https://path-to-your-docs/dark-mode-toggle"
+    "docsUrl": "/quasar-app-extensions/qpress/components"
   },
   "props": {
     "darkIcon": {
+      "desc": "Icon name displayed for the dark mode state.",
       "type": "String",
-      "desc": "Icon name for dark mode",
+      "default": "mdiMoonWaningCrescent",
+      "category": "content",
       "examples": [
         "mdiMoonWaningCrescent"
-      ],
-      "default": "mdiMoonWaningCrescent",
-      "category": "content"
+      ]
     },
     "lightIcon": {
+      "desc": "Icon name displayed for the light mode state.",
       "type": "String",
-      "desc": "Icon name for light mode",
+      "default": "mdiWhiteBalanceSunny",
+      "category": "content",
       "examples": [
         "mdiWhiteBalanceSunny"
-      ],
-      "default": "mdiWhiteBalanceSunny",
-      "category": "content"
+      ]
     }
   },
   "events": {
     "update:mode": {
-      "desc": "Emitted when the mode is toggled",
+      "desc": "Emitted when the mode is toggled.",
       "params": {
         "mode": {
-          "type": "String",
-          "desc": "The current mode ('dark' or 'light')"
+          "desc": "The current mode ('dark' or 'light').",
+          "type": "'dark' | 'light'",
+          "required": true,
+          "tsType": "'dark' | 'light'"
         }
       }
     }

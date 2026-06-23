@@ -1,33 +1,49 @@
 {
+  "generated_at": "2026-06-22T19:26:50.137Z",
   "type": "plugin",
   "meta": {
-    "docsUrl": "https://path-to-your-docs/scroll"
+    "docsUrl": "/quasar-app-extensions/qpress/overview"
   },
   "functions": {
     "useScroll": {
-      "desc": "Composable function to manage scroll behavior.",
+      "desc": "Provides anchor scrolling and active table-of-contents tracking for Q-Press pages.",
+      "tsSignature": "function useScroll(): Object",
+      "type": "Function",
       "returns": {
-        "type": "Object",
-        "desc": "An object containing functions to manage scroll behavior.",
-        "properties": {
-          "scrollToCurrentAnchor": {
-            "type": "Function",
-            "desc": "Function to scroll to the current anchor in the route.",
+        "definition": {
+          "scrollTo": {
+            "desc": "Scrolls the page to the HTML element with the specified ID, updates the router's hash, and sets the active TOC (table of contents) item.",
             "params": {
-              "isRouteChange": {
-                "type": "boolean",
-                "desc": "Flag to indicate if the scroll is due to a route change."
+              "id": {
+                "desc": "The ID of the HTML element to scroll to.",
+                "required": true,
+                "tsType": "string",
+                "type": "string"
               }
             },
-            "returns": null
-          },
-          "scrollToTop": {
+            "tsSignature": "function scrollTo(id: string): void",
             "type": "Function",
-            "desc": "Function to scroll to the top of the page.",
-            "params": {},
-            "returns": null
+            "returns": null,
+            "required": true
+          },
+          "onPageScroll": {
+            "desc": "Handles the page scroll event and updates the active TOC (table of contents) item, unless the TOC update is prevented.",
+            "params": {
+              "position": {
+                "desc": "The current vertical scroll position of the page.",
+                "required": true,
+                "tsType": "number",
+                "type": "number"
+              }
+            },
+            "tsSignature": "function onPageScroll({ position }: { position: number }): void",
+            "type": "Function",
+            "returns": null,
+            "required": true
           }
-        }
+        },
+        "desc": "An object containing functions to manage scroll behavior.",
+        "type": "Object"
       }
     }
   }

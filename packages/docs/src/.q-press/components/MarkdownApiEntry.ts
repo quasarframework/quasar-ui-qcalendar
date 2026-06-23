@@ -111,7 +111,22 @@ function getMethodReturnValue(method: { returns?: { type: any } | null }): strin
  * @returns A string representation of the type. If the input is an array, it joins the types with ' | '.
  */
 function getStringType(type: any): string {
+  if (type === void 0 || type === null) {
+    return 'Any'
+  }
+
   return Array.isArray(type) ? type.join(' | ') : type
+}
+
+/**
+ * Returns the display type for an API property.
+ */
+function getPropertyType(prop: any, rawType: any): string {
+  if ((rawType === void 0 || rawType === null) && prop.extends !== void 0) {
+    return `extends ${prop.extends}`
+  }
+
+  return getStringType(rawType)
 }
 
 const NAME_PROP_COLOR = ['orange-8', 'brand-primary', 'green-5', 'purple-5']
@@ -133,6 +148,22 @@ function getDiv(col: number, propName: string, propValue?: string, slot?: any): 
       ? h('div', { class: 'markdown-api-entry__value' }, parseForInlineCode(propValue))
       : slot,
   ])
+}
+
+/**
+ * Creates a compact TypeScript display row for API signatures and types.
+ */
+function getTypeScriptDiv(value: string): VNode {
+  return getDiv(
+    12,
+    'TypeScript',
+    void 0,
+    h(
+      'pre',
+      { class: 'markdown-api-entry__typescript markdown-token' },
+      h('code', value),
+    ),
+  )
 }
 
 /**
@@ -204,11 +235,13 @@ function getNameDiv(
  */
 function getExpandable(
   openState: Ref<Record<string, boolean>>,
-  desc: string,
+  desc: string | undefined,
   isExpandable: boolean,
   key: string,
   getDetails: () => any[],
 ): VNode[] {
+  const description = desc ?? ''
+
   if (isExpandable === true) {
     const expanded = openState.value[key] === true
     const child = [
@@ -226,13 +259,13 @@ function getExpandable(
             },
           }),
         ]),
-        h('div', { class: 'markdown-api-entry__value' }, parseForInlineCode(desc)),
+        h('div', { class: 'markdown-api-entry__value' }, parseForInlineCode(description)),
       ]),
     ]
 
     return expanded === true ? child.concat(getDetails()) : child
   } else {
-    return [getDiv(12, 'Description', desc)]
+    return [getDiv(12, 'Description', description)]
   }
 }
 
@@ -282,6 +315,24 @@ function getPropDetails(
 ): VNode[] {
   const details: VNode[] = []
 
+  if (prop.extends !== void 0) {
+    details.push(getDiv(3, 'Extends', prop.extends))
+  }
+
+  if (prop.category !== void 0) {
+    details.push(getDiv(3, 'Category', prop.category))
+  }
+
+  if (prop.deprecated !== void 0) {
+    details.push(
+      getDiv(
+        12,
+        'Deprecated',
+        typeof prop.deprecated === 'string' ? prop.deprecated : 'Deprecated',
+      ),
+    )
+  }
+
   if (prop.sync === true) {
     details.push(getDiv(3, 'Note', 'Required to be used with v-model!'))
   }
@@ -299,6 +350,12 @@ function getPropDetails(
         ),
       ),
     )
+  }
+
+  if (prop.tsSignature !== void 0) {
+    details.push(getTypeScriptDiv(prop.tsSignature))
+  } else if (prop.tsType !== void 0) {
+    details.push(getTypeScriptDiv(prop.tsType))
   }
 
   if (prop.link === true) {
@@ -320,10 +377,12 @@ function getPropDetails(
     )
   }
 
-  if (prop.definition !== void 0) {
+  const definition = prop.definition ?? prop.properties
+
+  if (definition !== void 0) {
     const nodes: VNode[] = []
-    for (const propName in prop.definition) {
-      nodes.push(...getProp(openState, masterKey, prop.definition[propName], propName, level))
+    for (const propName in definition) {
+      nodes.push(...getProp(openState, masterKey, definition[propName], propName, level))
     }
 
     details.push(
@@ -419,11 +478,14 @@ function getProp(
       : prop.type
     : prop.type
   const type = getStringType(rawType)
+  const displayType = getPropertyType(prop, rawType)
   const child: VNode[] = []
 
   if (propName !== void 0) {
     const suffix =
-      type === 'Function' ? `${getMethodParams(prop, true)}${getMethodReturnValue(prop)}` : type
+      type === 'Function'
+        ? `${getMethodParams(prop, true)}${getMethodReturnValue(prop)}`
+        : displayType
 
     child.push(getNameDiv(prop, propName, level, suffix))
 
@@ -433,11 +495,17 @@ function getProp(
   }
 
   const isExpandable =
+    prop.extends !== void 0 ||
+    prop.category !== void 0 ||
+    prop.deprecated !== void 0 ||
     prop.sync === true ||
     prop.default !== void 0 ||
+    prop.tsSignature !== void 0 ||
+    prop.tsType !== void 0 ||
     prop.link === true ||
     prop.values !== void 0 ||
     prop.definition !== void 0 ||
+    prop.properties !== void 0 ||
     (prop.params !== void 0 && prop.params !== null) ||
     (prop.returns !== void 0 && prop.returns !== null) ||
     prop.scope !== void 0 ||
@@ -500,24 +568,12 @@ describe.events = (openState: Ref<Record<string, boolean>>, events: any): VNode[
         ...getExpandable(
           openState,
           event.desc,
-          event.params !== void 0 && event.params !== null,
+          event.params !== void 0 ||
+            event.examples !== void 0 ||
+            event.tsSignature !== void 0 ||
+            event.tsType !== void 0,
           masterKey,
-          () => {
-            const params: VNode[] = []
-
-            for (const paramName in event.params) {
-              params.push(...getProp(openState, masterKey, event.params[paramName], paramName, 1))
-            }
-
-            return [
-              getDiv(
-                12,
-                'Parameters',
-                void 0,
-                h('div', { class: 'markdown-api-entry__subitem' }, params),
-              ),
-            ]
-          },
+          () => getPropDetails(openState, masterKey, event, 1),
         ),
       ]),
     )
@@ -559,41 +615,13 @@ describe.methods = (openState: Ref<Record<string, boolean>>, methods: any) => {
       ...getExpandable(
         openState,
         desc,
-        method.params !== void 0 || method.returns !== void 0,
+        method.params !== void 0 ||
+          method.returns !== void 0 ||
+          method.examples !== void 0 ||
+          method.tsSignature !== void 0 ||
+          method.tsType !== void 0,
         masterKey,
-        () => {
-          const nodes: VNode[] = []
-
-          if (method.params !== void 0 && method.params !== null) {
-            const props: VNode[] = []
-            for (const paramName in method.params) {
-              props.push(...getProp(openState, masterKey, method.params[paramName], paramName, 1))
-            }
-            nodes.push(
-              getDiv(
-                12,
-                'Parameters',
-                void 0,
-                h('div', { class: 'markdown-api-entry__subitem' }, props),
-              ),
-            )
-          }
-
-          if (method.returns !== void 0 && method.returns !== null) {
-            nodes.push(
-              getDiv(
-                12,
-                `Return type: ${getStringType(method.returns.type)}`,
-                void 0,
-                h('div', { class: 'markdown-api-entry__subitem' }, [
-                  getProp(openState, masterKey, method.returns, void 0, 1),
-                ]),
-              ),
-            )
-          }
-
-          return nodes
-        },
+        () => getPropDetails(openState, masterKey, method, 1),
       ),
     ])
 
@@ -602,6 +630,7 @@ describe.methods = (openState: Ref<Record<string, boolean>>, methods: any) => {
 
   return child
 }
+describe.functions = describe.methods
 
 /**
  * Generates VNodes for describing a value in the API documentation.
@@ -697,8 +726,18 @@ describe.modifiers = (openState: Ref<Record<string, boolean>>, modifiers: any): 
  * @returns An array containing a single VNode representing the injection description,
  *          wrapped in a div with the class 'markdown-api-entry row'.
  */
-describe.injection = (_: Ref<Record<string, boolean>>, injection: any): VNode[] => {
-  return [h('div', { class: 'markdown-api-entry row' }, [getNameDiv(injection, injection, 0)])]
+describe.injection = (openState: Ref<Record<string, boolean>>, injection: any): VNode[] => {
+  if (typeof injection === 'string') {
+    return [h('div', { class: 'markdown-api-entry row' }, [getNameDiv({}, injection, 0)])]
+  }
+
+  const child: VNode[] = []
+
+  for (const injectionName in injection) {
+    child.push(...getProp(openState, 'injection', injection[injectionName], injectionName, 0))
+  }
+
+  return child
 }
 
 /**
@@ -808,10 +847,24 @@ export default defineComponent({
   name: 'DocApiEntry',
 
   props: {
+    /**
+     * API section type being rendered.
+     *
+     * @category content
+     * @example 'props'
+     * @example 'methods'
+     */
     type: {
       type: String as PropType<string>,
       required: true,
     },
+
+    /**
+     * API definition entries for the selected section.
+     *
+     * @category content
+     * @example { modelValue: { type: 'String', desc: 'Current model value.' } }
+     */
     definition: {
       type: [Object, String] as PropType<Record<string, any> | string>,
       required: true,
@@ -822,9 +875,10 @@ export default defineComponent({
     const openState = ref<Record<string, any>>({})
 
     return () => {
+      const describeFn = describe[props.type] ?? describePropsLike(props.type)
       const content =
         Object.keys(props.definition).length !== 0
-          ? describe[props.type](openState, props.definition)
+          ? describeFn(openState, props.definition)
           : [
               h('div', { class: 'q-pa-md markdown-api__nothing-to-show' }, [
                 h('div', 'No matching entries found on this tab.'),

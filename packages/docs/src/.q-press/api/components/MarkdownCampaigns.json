@@ -1,0 +1,16 @@
+{
+  "generated_at": "2026-06-22T19:26:50.122Z",
+  "type": "component",
+  "meta": {
+    "docsUrl": "/quasar-app-extensions/qpress/components"
+  },
+  "props": {
+    "campaigns": {
+      "desc": "Opt-in campaign settings from `siteConfig.campaigns`.",
+      "required": false,
+      "tsType": "CampaignConfig[] | undefined",
+      "type": "Array",
+      "category": "content"
+    }
+  }
+}

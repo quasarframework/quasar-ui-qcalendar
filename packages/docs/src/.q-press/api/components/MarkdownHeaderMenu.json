@@ -1,77 +1,26 @@
 {
+  "generated_at": "2026-06-22T19:26:50.127Z",
   "type": "component",
   "meta": {
-    "docsUrl": "https://path-to-your-docs/markdown-header-menu"
+    "docsUrl": "/quasar-app-extensions/qpress/components"
   },
   "props": {
     "elements": {
+      "desc": "Array of menu elements to display in the header menu.",
       "type": "Array",
-      "desc": "Array of menu elements to display in the header menu",
+      "category": "content",
       "examples": [
         "[{ name: 'Home', path: '/' }, { name: 'Docs', path: '/docs' }]"
-      ],
-      "category": "content"
+      ]
     },
-    "mqPrefix": {
+    "mq-prefix": {
+      "desc": "Prefix for media query classes.",
       "type": "String",
-      "desc": "Prefix for media query classes",
+      "category": "style",
       "examples": [
         "'md'",
         "'lg'"
-      ],
-      "category": "style"
-    }
-  },
-  "types": {
-    "MenuElement": {
-      "desc": "Interface representing a menu element.",
-      "properties": {
-        "header": {
-          "type": "String",
-          "desc": "Header text for the menu element."
-        },
-        "separator": {
-          "type": "Boolean",
-          "desc": "Flag to indicate if the element is a separator."
-        },
-        "path": {
-          "type": "String",
-          "desc": "Path for the menu element."
-        },
-        "external": {
-          "type": "Boolean",
-          "desc": "Flag to indicate if the path is external."
-        },
-        "icon": {
-          "type": "String",
-          "desc": "Icon name for the menu element."
-        },
-        "name": {
-          "type": "String",
-          "desc": "Name of the menu element."
-        },
-        "mq": {
-          "type": "String",
-          "desc": "Media query for the menu element."
-        },
-        "children": {
-          "type": "Array<MenuElement>",
-          "desc": "Array of child menu elements."
-        }
-      }
-    },
-    "Props": {
-      "desc": "Interface representing the props for the component.",
-      "properties": {
-        "elements": {
-          "type": "Array<MenuElement>",
-          "desc": "Array of menu elements to display in the header menu."
-        },
-        "mqPrefix": {
-          "type": "String",
-          "desc": "Prefix for media query classes."
-        }
-      }
+      ]
     }
   }
 }

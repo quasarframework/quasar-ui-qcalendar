@@ -30,14 +30,33 @@ import MarkdownHeaderMenu from './MarkdownHeaderMenu'
 import type { SiteMenuItem } from '../../siteConfig'
 
 const props = defineProps({
+  /**
+   * Array of menu items to display in the header.
+   *
+   * @category content
+   * @example [{ name: 'Home', path: '/' }, { name: 'Docs', path: '/docs' }]
+   */
   menu: {
     type: Array<SiteMenuItem>,
     required: true,
   },
+  /**
+   * Prefix for media query classes.
+   *
+   * @category style
+   * @example 'md'
+   * @example 'lg'
+   */
   mqPrefix: {
     type: String,
     default: '',
   },
+  /**
+   * Additional CSS class to apply to navigation items.
+   *
+   * @category style
+   * @example 'custom-nav-class'
+   */
   navClass: {
     type: String,
     default: '',

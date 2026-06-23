@@ -1,33 +1,37 @@
 {
+  "generated_at": "2026-06-22T19:26:50.131Z",
   "type": "component",
   "meta": {
-    "docsUrl": "https://path-to-your-docs/markdown-header-text-links"
+    "docsUrl": "/quasar-app-extensions/qpress/components"
   },
   "props": {
     "menu": {
-      "type": "Array",
-      "desc": "Array of menu items to display in the header",
+      "desc": "Array of menu items to display in the header.",
+      "type": "Array<SiteMenuItem>",
+      "required": true,
+      "category": "content",
       "examples": [
         "[{ name: 'Home', path: '/' }, { name: 'Docs', path: '/docs' }]"
-      ],
-      "category": "content"
+      ]
     },
     "mqPrefix": {
+      "desc": "Prefix for media query classes.",
       "type": "String",
-      "desc": "Prefix for media query classes",
+      "default": "",
+      "category": "style",
       "examples": [
         "'md'",
         "'lg'"
-      ],
-      "category": "style"
+      ]
     },
     "navClass": {
+      "desc": "Additional CSS class to apply to navigation items.",
       "type": "String",
-      "desc": "Additional CSS class to apply to navigation items",
+      "default": "",
+      "category": "style",
       "examples": [
         "'custom-nav-class'"
-      ],
-      "category": "style"
+      ]
     }
   }
 }

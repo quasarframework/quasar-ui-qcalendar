@@ -9,13 +9,32 @@
 
 <script setup lang="ts">
 const props = defineProps({
+  /**
+   * Target URL or route path for the card link.
+   *
+   * @category navigation
+   * @example /home
+   * @example https://example.com
+   */
   to: {
     type: String,
     required: true,
   },
 
+  /**
+   * Whether the link should open as an external anchor.
+   *
+   * @category navigation
+   */
   external: Boolean,
 })
+
+defineSlots<{
+  /**
+   * Slot for custom content inside the link.
+   */
+  default(): unknown
+}>()
 </script>
 
 <style lang="scss">

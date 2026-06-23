@@ -1,0 +1,16 @@
+{
+  "generated_at": "2026-06-22T19:26:50.120Z",
+  "type": "component",
+  "meta": {
+    "docsUrl": "/quasar-app-extensions/qpress/components"
+  },
+  "props": {
+    "config": {
+      "desc": "Announcement settings from `siteConfig.announcement`.",
+      "required": false,
+      "tsType": "AnnouncementBannerConfig | undefined",
+      "type": "AnnouncementBannerConfig",
+      "category": "content"
+    }
+  }
+}

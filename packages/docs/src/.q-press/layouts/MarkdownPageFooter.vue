@@ -154,6 +154,11 @@ const links = siteConfig.links.footerLinks.flatMap((nav) => ({
 }))
 
 const props = defineProps({
+  /**
+   * Flag to indicate if the page is in fullscreen mode.
+   *
+   * @category state
+   */
   fullscreen: Boolean,
 })
 </script>

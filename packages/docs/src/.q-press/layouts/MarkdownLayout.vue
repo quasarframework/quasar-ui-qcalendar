@@ -3,6 +3,7 @@
     <MarkdownHeader />
 
     <q-page-container>
+      <MarkdownAnnouncement :config="qpressShellConfig.announcement" />
       <q-page key="q-page" :class="pageClass">
         <router-view v-if="isFullscreen" key="page-fullscreen" />
         <div v-else key="page-standard" :class="pageContentClass">
@@ -29,12 +30,15 @@
     <q-no-ssr>
       <MarkdownDrawerSidebar v-if="siteConfig.config.useSidebar === true" />
       <MarkdownDrawerToc v-if="siteConfig.config.useToc === true" />
+      <MarkdownPrivacyConsent :config="qpressShellConfig.privacyConsent" />
+      <MarkdownCampaigns :campaigns="qpressShellConfig.campaigns" />
     </q-no-ssr>
   </q-layout>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import type { AnnouncementBannerConfig, CampaignConfig, PrivacyConsentConfig } from '../types/config'
 import { useRoute } from 'vue-router'
 import { mdiArrowUp } from '@quasar/extras/mdi-v7'
 
@@ -42,6 +46,9 @@ import { mdiArrowUp } from '@quasar/extras/mdi-v7'
 import { useScroll } from '../composables/scroll'
 
 import MarkdownHeader from './MarkdownHeader.vue'
+import MarkdownAnnouncement from './MarkdownAnnouncement.vue'
+import MarkdownPrivacyConsent from './MarkdownPrivacyConsent.vue'
+import MarkdownCampaigns from './MarkdownCampaigns.vue'
 import MarkdownDrawerSidebar from './MarkdownDrawerSidebar.vue'
 import MarkdownDrawerToc from './MarkdownDrawerToc.vue'
 import MarkdownPageSidebar from './MarkdownPageSidebar'
@@ -53,6 +60,11 @@ const { onPageScroll } = useScroll()
 
 const route = useRoute()
 // const markdownStore = useMarkdownStore()
+const qpressShellConfig = siteConfig as typeof siteConfig & {
+  announcement?: AnnouncementBannerConfig
+  privacyConsent?: PrivacyConsentConfig
+  campaigns?: CampaignConfig[]
+}
 
 const isFullscreen = computed(() => route.meta.fullscreen === true)
 const pageClass = computed(

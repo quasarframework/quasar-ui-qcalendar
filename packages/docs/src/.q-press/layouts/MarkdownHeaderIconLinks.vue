@@ -31,6 +31,12 @@ interface MenuEntry {
 }
 
 const props = defineProps<{
+  /**
+   * Array of menu entries to display as icon links in the header.
+   *
+   * @category content
+   * @example [{ icon: 'home', path: '/' }, { icon: 'info', path: '/about' }]
+   */
   menu: MenuEntry[]
 }>()
 </script>

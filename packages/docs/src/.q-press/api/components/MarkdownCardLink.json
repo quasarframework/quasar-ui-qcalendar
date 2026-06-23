@@ -1,28 +1,29 @@
 {
+  "generated_at": "2026-06-22T19:26:50.111Z",
   "type": "component",
   "meta": {
-    "docsUrl": "https://path-to-your-docs/markdown-card-link"
+    "docsUrl": "/quasar-app-extensions/qpress/components"
   },
   "props": {
     "to": {
+      "desc": "Target URL or route path for the card link.",
       "type": "String",
-      "desc": "The target URL or path for the link",
+      "required": true,
+      "category": "navigation",
       "examples": [
         "/home",
         "https://example.com"
-      ],
-      "required": true,
-      "category": "navigation"
+      ]
     },
     "external": {
+      "desc": "Whether the link should open as an external anchor.",
       "type": "Boolean",
-      "desc": "Flag to indicate if the link is external",
       "category": "navigation"
     }
   },
   "slots": {
     "default": {
-      "desc": "Slot for custom content inside the link"
+      "desc": "Slot for custom content inside the link."
     }
   }
 }
