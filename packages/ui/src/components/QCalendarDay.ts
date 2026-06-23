@@ -49,7 +49,13 @@ import useCheckChange, { useCheckChangeEmits } from '../composables/useCheckChan
 import useEvents from '../composables/useEvents'
 import useKeyboard, { useNavigationProps } from '../composables/useKeyboard'
 import { getDragEventHandlers } from '../composables/useDragAndDrop'
-import type { QCalendarDaySlots } from '../slots'
+import type {
+  HeadDayButtonSlotScope,
+  HeadIntervalsSlotScope,
+  IntervalSlotScope,
+  QCalendarDaySlots,
+  TimestampMouseScope,
+} from '../slots'
 
 // Directives
 import ResizeObserver from '../directives/ResizeObserver'
@@ -80,13 +86,60 @@ export default defineComponent({
   },
 
   emits: [
+    /**
+     * Emitted when the model value changes.
+     *
+     * @param value New model value.
+     * @param-type value String
+     * @param-tsType value string
+     */
     'update:model-value',
     ...useCheckChangeEmits,
     ...useMoveEmits,
+    /**
+     * Interact with a day view date button.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope HeadDayButtonSlotScope
+     * @param scope Day view date button scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-date'),
+    /**
+     * Interact with the day view interval gutter.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope TimestampMouseScope
+     * @param scope Day view interval timestamp scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-interval'),
+    /**
+     * Interact with the day view interval header.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope HeadIntervalsSlotScope
+     * @param scope Day view interval header scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-head-intervals'),
+    /**
+     * Interact with a day view header day.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope IntervalSlotScope
+     * @param scope Day view header day scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-head-day'),
+    /**
+     * Interact with a day view time interval.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope IntervalSlotScope
+     * @param scope Day view time interval scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-time'),
   ],
 
@@ -138,10 +191,10 @@ export default defineComponent({
 
     const { isSticky } = useCellWidth(props)
 
-    const { times, setCurrent, updateCurrent } = useTimes(props)
+    const { times, setCurrent, updateCurrent: updateCurrentTimes } = useTimes(props)
 
     // update dates
-    updateCurrent()
+    updateCurrentTimes()
     setCurrent()
 
     const {
@@ -198,10 +251,10 @@ export default defineComponent({
       getTimestampAtEventInterval,
       getTimestampAtEvent,
       getScopeForSlot,
-      scrollToTime,
-      heightToMinutes,
-      timeDurationHeight,
-      timeStartPos,
+      scrollToTime: scrollToTimeCalendar,
+      heightToMinutes: heightToMinutesCalendar,
+      timeDurationHeight: timeDurationHeightCalendar,
+      timeStartPos: timeStartPosCalendar,
       /// @ts-expect-error fix later
     } = useInterval(props, {
       times,
@@ -213,7 +266,7 @@ export default defineComponent({
       headerColumnRef,
     })
 
-    const { move } = useMove(props, {
+    const { move: moveCalendar } = useMove(props, {
       parsedView,
       parsedValue,
       direction,
@@ -337,16 +390,96 @@ export default defineComponent({
 
     // public functions
 
+    /**
+     * Moves the day view by a relative amount.
+     *
+     * @param amount Number of view units to move. Negative values move backward.
+     * @param-example amount -1
+     */
+    function move(amount: number = 1): void {
+      moveCalendar(amount)
+    }
+
+    /**
+     * Moves the day view to today.
+     */
     function moveToToday(): void {
       move(0)
     }
 
-    function next(amount = 1): void {
+    /**
+     * Moves the day view forward.
+     *
+     * @param amount Number of view units to move forward.
+     * @param-example amount 1
+     */
+    function next(amount: number = 1): void {
       move(amount)
     }
 
-    function prev(amount = 1): void {
+    /**
+     * Moves the day view backward.
+     *
+     * @param amount Number of view units to move backward.
+     * @param-example amount 1
+     */
+    function prev(amount: number = 1): void {
       move(-amount)
+    }
+
+    /**
+     * Refreshes the day view's current date/time state.
+     */
+    function updateCurrent(): void {
+      updateCurrentTimes()
+    }
+
+    /**
+     * Returns the vertical start position for a time.
+     *
+     * @param time Time in HH:mm format.
+     * @param clamp Clamp the result to the visible interval range.
+     * @param-example time '09:00'
+     * @param-example clamp true
+     * @returns Vertical pixel offset, or false when the time is outside the rendered range.
+     */
+    function timeStartPos(time: string, clamp: boolean = true): number | false {
+      return timeStartPosCalendar(time, clamp)
+    }
+
+    /**
+     * Returns the vertical height for a duration.
+     *
+     * @param minutes Duration in minutes.
+     * @param-example minutes 60
+     * @returns Rendered duration height in pixels.
+     */
+    function timeDurationHeight(minutes: number): number {
+      return timeDurationHeightCalendar(minutes)
+    }
+
+    /**
+     * Converts a rendered height into minutes.
+     *
+     * @param height Height in pixels.
+     * @param-example height 120
+     * @returns Duration in minutes represented by the rendered height.
+     */
+    function heightToMinutes(height: number): number {
+      return heightToMinutesCalendar(height)
+    }
+
+    /**
+     * Scrolls the day view vertically to a time.
+     *
+     * @param time Time in HH:mm format.
+     * @param duration Animation duration in milliseconds.
+     * @param-example time '09:00'
+     * @param-example duration 200
+     * @returns Whether the scroll request was handled.
+     */
+    function scrollToTime(time: string, duration: number = 0): boolean {
+      return scrollToTimeCalendar(time, duration)
     }
 
     // private functions
@@ -392,7 +525,7 @@ export default defineComponent({
     function __renderHeadIntervals(): VNode {
       const slot = slots['head-intervals']
 
-      const scope = {
+      const scope: HeadIntervalsSlotScope = {
         timestamps: days.value,
         days: days.value, // deprecated
         date: props.modelValue,
@@ -511,7 +644,7 @@ export default defineComponent({
       const headDateSlot = slots['head-date']
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
-      const scope = getScopeForSlot(day, columnIndex)
+      const scope: IntervalSlotScope = getScopeForSlot(day, columnIndex)
       scope.activeDate = activeDate
       scope.droppable = dragOverHeadDayRef.value === day.date
       scope.disabled = props.disabledWeekdays
@@ -673,7 +806,7 @@ export default defineComponent({
       const headDayEventSlot = slots['head-day-event']
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
-      const scope = getScopeForSlot(day, columnIndex)
+      const scope: IntervalSlotScope = getScopeForSlot(day, columnIndex)
       scope.activeDate = activeDate
       scope.disabled = props.disabledWeekdays
         ? props.disabledWeekdays.includes(Number(day.weekday))
@@ -710,7 +843,7 @@ export default defineComponent({
       const slot = slots['head-weekday-label']
       const shortWeekdayLabel = props.shortWeekdayLabel === true
 
-      const scope = getScopeForSlot(day, 0)
+      const scope: IntervalSlotScope = getScopeForSlot(day, 0)
       scope.shortWeekdayLabel = props.shortWeekdayLabel
       scope.disabled = props.disabledWeekdays
         ? props.disabledWeekdays.includes(Number(day.weekday))
@@ -765,7 +898,7 @@ export default defineComponent({
       const headDayLabelSlot = slots['head-day-label']
       const headDayButtonSlot = slots['head-day-button']
 
-      const scope = {
+      const scope: HeadDayButtonSlotScope = {
         dayLabel,
         timestamp: day,
         activeDate,
@@ -938,7 +1071,7 @@ export default defineComponent({
 
     function __renderDay(day: Timestamp, dayIndex: number, columnIndex: number): VNode {
       const slot = slots['day-body']
-      const scope = getScopeForSlot(day, columnIndex)
+      const scope: IntervalSlotScope = getScopeForSlot(day, columnIndex)
       const width = isSticky.value === true ? props.cellWidth : computedWidth.value
       const style: CSSProperties = {
         width,
@@ -974,7 +1107,7 @@ export default defineComponent({
       const styler = props.intervalStyle || styleDefault
       const slotDayInterval = slots['day-interval']
 
-      const scope = getScopeForSlot(interval, columnIndex)
+      const scope: IntervalSlotScope = getScopeForSlot(interval, columnIndex)
       scope.droppable = dragOverInterval.value === getDayTimeIdentifier(interval)
 
       const intervalClass =
@@ -1027,7 +1160,7 @@ export default defineComponent({
         onKeyup: (event: KeyboardEvent) => {
           // allow selection of date via Enter or Space keys
           if (isKeyCode(event, [13, 32])) {
-            const scope = getScopeForSlot(interval, columnIndex)
+            const scope: IntervalSlotScope = getScopeForSlot(interval, columnIndex)
             emittedValue.value = scope.timestamp.date
             if (emitListeners.value.onClickTime !== undefined) {
               emit('click-time', { scope, event })
@@ -1035,7 +1168,7 @@ export default defineComponent({
           }
         },
         ...getDefaultMouseEventHandlers('-time', (event: MouseEvent | TouchEvent) => {
-          const scope = getScopeForSlot(
+          const scope: IntervalSlotScope = getScopeForSlot(
             getTimestampAtEventInterval(
               event as MouseEvent & TouchEvent,
               interval,
@@ -1072,7 +1205,8 @@ export default defineComponent({
             props.timeClicksClamped,
             times.now,
           )
-          return { scope: { timestamp }, event }
+          const scope: TimestampMouseScope = { timestamp }
+          return { scope, event }
         }),
       }
 
@@ -1172,12 +1306,30 @@ export default defineComponent({
     expose({
       prev,
       next,
+      /**
+       * Moves the day view by a relative amount.
+       */
       move,
       moveToToday,
+      /**
+       * Refreshes the day view's current date/time state.
+       */
       updateCurrent,
+      /**
+       * Returns the vertical start position for a time.
+       */
       timeStartPos,
+      /**
+       * Returns the vertical height for a duration.
+       */
       timeDurationHeight,
+      /**
+       * Converts a rendered height into minutes.
+       */
       heightToMinutes,
+      /**
+       * Scrolls the day view vertically to a time.
+       */
       scrollToTime,
     })
 

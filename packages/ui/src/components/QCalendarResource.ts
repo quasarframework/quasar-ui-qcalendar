@@ -44,7 +44,13 @@ import useCheckChange, { useCheckChangeEmits } from '../composables/useCheckChan
 import useEvents from '../composables/useEvents'
 import useKeyboard, { useNavigationProps } from '../composables/useKeyboard'
 import { getDragEventHandlers } from '../composables/useDragAndDrop'
-import type { QCalendarResourceSlots } from '../slots'
+import type {
+  IntervalLabelSlotScope,
+  QCalendarResourceSlots,
+  ResourceHeadSlotScope,
+  ResourceLabelSlotScope,
+  ResourceIntervalsSlotScope,
+} from '../slots'
 
 // Directives
 import ResizeObserver from '../directives/ResizeObserver'
@@ -75,16 +81,70 @@ export default defineComponent({
   },
 
   emits: [
+    /**
+     * Emitted when the model value changes.
+     *
+     * @param value New model value.
+     * @param-type value String
+     * @param-tsType value string
+     */
     'update:model-value',
+    /**
+     * Emitted when the resources model changes.
+     *
+     * @param value New resources array.
+     * @param-type value Array
+     * @param-tsType value Resource[]
+     */
     'update:model-resources',
+    /**
+     * Emitted when a resource is expanded or collapsed.
+     *
+     * @param expanded Whether the resource is expanded.
+     * @param-type expanded Boolean
+     * @param-tsType expanded boolean
+     * @param scope Resource scope.
+     * @param-type scope Object
+     * @param-tsType scope ResourceLabelSlotScope
+     */
     'resource-expanded',
     ...useCheckChangeEmits,
     ...useMoveEmits,
-    ...getRawMouseEvents('-date'),
+    /**
+     * Interact with a resource interval.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope IntervalLabelSlotScope
+     * @param scope Resource interval scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-interval'),
-    ...getRawMouseEvents('-head-day'),
+    /**
+     * Interact with a resource time interval.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope ResourceIntervalsSlotScope
+     * @param scope Resource time interval scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-time'),
+    /**
+     * Interact with the resource header.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope ResourceHeadSlotScope
+     * @param scope Resource header scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-head-resources'),
+    /**
+     * Interact with a resource label.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope ResourceLabelSlotScope
+     * @param scope Resource label scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-resource'),
   ],
 
@@ -142,10 +202,10 @@ export default defineComponent({
 
     const { emitListeners } = useEmitListeners(vm)
 
-    const { times, setCurrent, updateCurrent } = useTimes(props)
+    const { times, setCurrent, updateCurrent: updateCurrentTimes } = useTimes(props)
 
     // update dates
-    updateCurrent()
+    updateCurrentTimes()
     setCurrent()
 
     const {
@@ -201,10 +261,10 @@ export default defineComponent({
       // bodyWidth,
       // methods
       styleDefault,
-      scrollToTimeX,
-      timeDurationWidth,
-      timeStartPosX,
-      widthToMinutes,
+      scrollToTimeX: scrollToTimeXCalendar,
+      timeDurationWidth: timeDurationWidthCalendar,
+      timeStartPosX: timeStartPosXCalendar,
+      widthToMinutes: widthToMinutesCalendar,
       // getTimestampAtEventX
       // getTimestampAtEventIntervalX
       /// @ts-expect-error fix later
@@ -218,7 +278,7 @@ export default defineComponent({
       headerColumnRef,
     })
 
-    const { move } = useMove(props, {
+    const { move: moveCalendar } = useMove(props, {
       parsedView,
       parsedValue,
       direction,
@@ -317,16 +377,96 @@ export default defineComponent({
 
     // public functions
 
+    /**
+     * Moves the resource view by a relative amount.
+     *
+     * @param amount Number of view units to move. Negative values move backward.
+     * @param-example amount -1
+     */
+    function move(amount: number = 1): void {
+      moveCalendar(amount)
+    }
+
+    /**
+     * Moves the resource view to today.
+     */
     function moveToToday(): void {
       move(0)
     }
 
-    function next(amount = 1): void {
+    /**
+     * Moves the resource view forward.
+     *
+     * @param amount Number of view units to move forward.
+     * @param-example amount 1
+     */
+    function next(amount: number = 1): void {
       move(amount)
     }
 
-    function prev(amount = 1): void {
+    /**
+     * Moves the resource view backward.
+     *
+     * @param amount Number of view units to move backward.
+     * @param-example amount 1
+     */
+    function prev(amount: number = 1): void {
       move(-amount)
+    }
+
+    /**
+     * Refreshes the resource view's current date/time state.
+     */
+    function updateCurrent(): void {
+      updateCurrentTimes()
+    }
+
+    /**
+     * Returns the horizontal start position for a time.
+     *
+     * @param time Time in HH:mm format.
+     * @param clamp Clamp the result to the visible interval range.
+     * @param-example time '09:00'
+     * @param-example clamp true
+     * @returns Horizontal pixel offset, or false when the time is outside the rendered range.
+     */
+    function timeStartPosX(time: string, clamp: boolean = true): number | false {
+      return timeStartPosXCalendar(time, clamp)
+    }
+
+    /**
+     * Returns the horizontal width for a duration.
+     *
+     * @param minutes Duration in minutes.
+     * @param-example minutes 60
+     * @returns Rendered duration width in pixels.
+     */
+    function timeDurationWidth(minutes: number): number {
+      return timeDurationWidthCalendar(minutes)
+    }
+
+    /**
+     * Converts a rendered width into minutes.
+     *
+     * @param width Width in pixels.
+     * @param-example width 120
+     * @returns Duration in minutes represented by the rendered width.
+     */
+    function widthToMinutes(width: number): number {
+      return widthToMinutesCalendar(width)
+    }
+
+    /**
+     * Scrolls the resource view horizontally to a time.
+     *
+     * @param time Time in HH:mm format.
+     * @param duration Animation duration in milliseconds.
+     * @param-example time '09:00'
+     * @param-example duration 200
+     * @returns Whether the scroll request was handled.
+     */
+    function scrollToTimeX(time: string, duration: number = 0): boolean {
+      return scrollToTimeXCalendar(time, duration)
     }
 
     // private functions
@@ -367,7 +507,7 @@ export default defineComponent({
 
       const height = convertToUnit(parsedIntervalHeaderHeight.value)
 
-      const scope = {
+      const scope: ResourceHeadSlotScope = {
         timestamps: intervals,
         date: props.modelValue,
         resources: props.modelResources,
@@ -418,7 +558,7 @@ export default defineComponent({
       const short = props.shortIntervalLabel
       const label = intervalFormatter.value(interval, short)
 
-      const scope = {
+      const scope: IntervalLabelSlotScope = {
         timestamp: interval,
         index,
         label,
@@ -627,7 +767,7 @@ export default defineComponent({
         props.focusable === true && props.focusType.includes('resource') && expanded === true
       const dragValue = resource[props.resourceKey]
 
-      const scope = {
+      const scope: ResourceLabelSlotScope = {
         resource,
         timestamps: intervals,
         resourceIndex,
@@ -726,7 +866,7 @@ export default defineComponent({
     function __renderResourceIntervals(resource: Resource, resourceIndex: number): VNode {
       const slot = slots['resource-intervals']
 
-      const scope = {
+      const scope: ResourceIntervalsSlotScope = {
         resource,
         timestamps: intervals,
         resourceIndex,
@@ -875,12 +1015,30 @@ export default defineComponent({
     expose({
       prev,
       next,
+      /**
+       * Moves the resource view by a relative amount.
+       */
       move,
       moveToToday,
+      /**
+       * Refreshes the resource view's current date/time state.
+       */
       updateCurrent,
+      /**
+       * Returns the horizontal start position for a time.
+       */
       timeStartPosX,
+      /**
+       * Returns the horizontal width for a duration.
+       */
       timeDurationWidth,
+      /**
+       * Converts a rendered width into minutes.
+       */
       widthToMinutes,
+      /**
+       * Scrolls the resource view horizontally to a time.
+       */
       scrollToTimeX,
     })
 

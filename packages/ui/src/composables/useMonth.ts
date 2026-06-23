@@ -39,45 +39,63 @@ export interface MonthProps {
 
 // Define prop types with validators
 export const useMonthProps = {
+  /** Height in pixels or CSS units for each month day cell. */
   dayHeight: {
     type: [Number, String],
     default: 0,
     validator: (v: any): boolean => validateNumber(v),
   },
+  /** Minimum height in pixels or CSS units for each month day cell. */
   dayMinHeight: {
     type: [Number, String],
     default: 0,
     validator: (v: any): boolean => validateNumber(v),
   },
+  /** Function that returns inline styles for month day cells. */
   dayStyle: Function,
+  /** Function that returns CSS classes for month day cells. */
   dayClass: Function,
+  /** Function that returns inline styles for weekday header cells. */
   weekdayStyle: Function,
+  /** Function that returns CSS classes for weekday header cells. */
   weekdayClass: Function,
+  /** Padding applied inside month day cells. */
   dayPadding: String,
+  /** Minimum number of weeks rendered by the month view. */
   minWeeks: {
     type: [Number, String],
     default: 1,
     validator: (v: any): boolean => validateNumber(v),
   },
+  /** Uses shortened month labels. */
   shortMonthLabel: Boolean,
+  /** Shows ISO work week labels. */
   showWorkWeeks: Boolean,
+  /** Shows the month label. */
   showMonthLabel: {
     type: Boolean,
     default: true,
   },
+  /** Shows the day-of-year label for each day. */
   showDayOfYearLabel: Boolean,
+  /** Enables rendering days outside the active month. */
   enableOutsideDays: Boolean,
+  /** Hides days outside the active month. */
   noOutsideDays: Boolean,
+  /** Enables hover state tracking for month day cells. */
   hover: Boolean,
+  /** Forces mini mode or lets mini mode follow the configured breakpoint. */
   miniMode: {
     type: [Boolean, String],
     validator: (v: any): boolean => [true, false, 'auto'].includes(v),
   },
+  /** Breakpoint used when `mini-mode` is set to `auto`. */
   breakpoint: {
     type: [Number, String],
     default: 'md',
     validator: (v: any): boolean => ['xs', 'sm', 'md', 'lg', 'xl'].includes(v) || validateNumber(v),
   },
+  /** Size token used for month labels. */
   monthLabelSize: {
     type: String,
     default: 'sm',

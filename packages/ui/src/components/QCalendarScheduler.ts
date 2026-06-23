@@ -41,7 +41,14 @@ import useCheckChange, { useCheckChangeEmits } from '../composables/useCheckChan
 import useEvents from '../composables/useEvents'
 import useKeyboard, { useNavigationProps } from '../composables/useKeyboard'
 import { getDragEventHandlers } from '../composables/useDragAndDrop'
-import type { QCalendarSchedulerSlots } from '../slots'
+import type {
+  HeadDayButtonSlotScope,
+  QCalendarSchedulerSlots,
+  ResourceHeadSlotScope,
+  ResourceLabelSlotScope,
+  SchedulerDaySlotScope,
+  SchedulerHeadDaySlotScope,
+} from '../slots'
 
 // Directives
 import ResizeObserver from '../directives/ResizeObserver'
@@ -71,15 +78,79 @@ export default defineComponent({
   },
 
   emits: [
+    /**
+     * Emitted when the model value changes.
+     *
+     * @param value New model value.
+     * @param-type value String
+     * @param-tsType value string
+     */
     'update:model-value',
+    /**
+     * Emitted when the resources model changes.
+     *
+     * @param value New resources array.
+     * @param-type value Array
+     * @param-tsType value Resource[]
+     */
     'update:model-resources',
+    /**
+     * Emitted when a resource is expanded or collapsed.
+     *
+     * @param expanded Whether the resource is expanded.
+     * @param-type expanded Boolean
+     * @param-tsType expanded boolean
+     * @param scope Resource scope.
+     * @param-type scope Object
+     * @param-tsType scope ResourceLabelSlotScope
+     */
     'resource-expanded',
     ...useCheckChangeEmits,
     ...useMoveEmits,
+    /**
+     * Interact with a scheduler date button.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope HeadDayButtonSlotScope
+     * @param scope Scheduler date button scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-date'),
+    /**
+     * Interact with a scheduler resource day cell.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope SchedulerDaySlotScope
+     * @param scope Scheduler resource day scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-day-resource'),
+    /**
+     * Interact with the scheduler resource header.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope ResourceHeadSlotScope
+     * @param scope Scheduler resource header scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-head-resources'),
+    /**
+     * Interact with a scheduler header day.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope SchedulerHeadDaySlotScope
+     * @param scope Scheduler header day scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-head-day'),
+    /**
+     * Interact with a scheduler resource label.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope ResourceLabelSlotScope
+     * @param scope Scheduler resource label scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-resource'),
   ],
 
@@ -133,10 +204,10 @@ export default defineComponent({
 
     const { isSticky } = useCellWidth(props)
 
-    const { times, setCurrent, updateCurrent } = useTimes(props)
+    const { times, setCurrent, updateCurrent: updateCurrentTimes } = useTimes(props)
 
     // update dates
-    updateCurrent()
+    updateCurrentTimes()
     setCurrent()
 
     const {
@@ -203,7 +274,7 @@ export default defineComponent({
       headerColumnRef,
     })
 
-    const { move } = useMove(props, {
+    const { move: moveCalendar } = useMove(props, {
       parsedView,
       parsedValue,
       direction,
@@ -341,16 +412,48 @@ export default defineComponent({
 
     // public functions
 
+    /**
+     * Moves the scheduler view by a relative amount.
+     *
+     * @param amount Number of view units to move. Negative values move backward.
+     * @param-example amount -1
+     */
+    function move(amount: number = 1): void {
+      moveCalendar(amount)
+    }
+
+    /**
+     * Moves the scheduler view to today.
+     */
     function moveToToday(): void {
       move(0)
     }
 
-    function next(amount = 1): void {
+    /**
+     * Moves the scheduler view forward.
+     *
+     * @param amount Number of view units to move forward.
+     * @param-example amount 1
+     */
+    function next(amount: number = 1): void {
       move(amount)
     }
 
-    function prev(amount = 1): void {
+    /**
+     * Moves the scheduler view backward.
+     *
+     * @param amount Number of view units to move backward.
+     * @param-example amount 1
+     */
+    function prev(amount: number = 1): void {
       move(-amount)
+    }
+
+    /**
+     * Refreshes the scheduler view's current date/time state.
+     */
+    function updateCurrent(): void {
+      updateCurrentTimes()
     }
 
     // private functions
@@ -396,7 +499,7 @@ export default defineComponent({
     function __renderHeadResources(): VNode {
       const slot = slots['head-resources']
 
-      const scope = {
+      const scope: ResourceHeadSlotScope = {
         days: days.value, // deprecated
         timestamps: days.value,
         date: props.modelValue,
@@ -525,7 +628,7 @@ export default defineComponent({
       const headDateSlot = slots['head-date']
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
-      const scope = {
+      const scope: SchedulerHeadDaySlotScope = {
         timestamp: day,
         activeDate,
         droppable: dragOverHeadDayRef.value === day.date,
@@ -693,7 +796,7 @@ export default defineComponent({
       const headDayEventSlot = slots['head-day-event']
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
-      const scope = {
+      const scope: SchedulerHeadDaySlotScope = {
         timestamp: day,
         activeDate,
         droppable: dragOverHeadDayRef.value === day.date,
@@ -786,7 +889,7 @@ export default defineComponent({
       const headDayLabelSlot = slots['head-day-label']
       const headDayButtonSlot = slots['head-day-button']
 
-      const scope = {
+      const scope: HeadDayButtonSlotScope = {
         dayLabel,
         timestamp: day,
         activeDate,
@@ -1034,7 +1137,7 @@ export default defineComponent({
         props.focusable === true && props.focusType.includes('resource') && expanded === true
       const dragValue = resource[props.resourceKey]
 
-      const scope = {
+      const scope: ResourceLabelSlotScope = {
         resource,
         timestamps: days.value,
         days: days.value, // deprecated
@@ -1210,7 +1313,7 @@ export default defineComponent({
         (columnIndex !== undefined ? ':' + columnIndex : '')
       const droppable = dragOverResource.value === dragValue
 
-      const scope = {
+      const scope: SchedulerDaySlotScope = {
         timestamp: day,
         columnIndex,
         resource,
@@ -1343,8 +1446,14 @@ export default defineComponent({
     expose({
       prev,
       next,
+      /**
+       * Moves the scheduler view by a relative amount.
+       */
       move,
       moveToToday,
+      /**
+       * Refreshes the scheduler view's current date/time state.
+       */
       updateCurrent,
     })
     // Object.assign(vm.proxy, {

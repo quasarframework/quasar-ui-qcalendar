@@ -37,7 +37,16 @@ import useEvents from '../composables/useEvents'
 import useKeyboard, { useNavigationProps } from '../composables/useKeyboard'
 import { getDragEventHandlers } from '../composables/useDragAndDrop'
 import { useCellWidthProps } from '../composables/useCellWidth'
-import type { QCalendarTaskSlots } from '../slots'
+import type {
+  QCalendarTaskSlots,
+  TaskDaySlotScope,
+  TaskDaysSlotScope,
+  TaskHeadDayLabelSlotScope,
+  TaskHeadDaySlotScope,
+  TaskHeadSlotScope,
+  TaskItemSlotScope,
+  TaskTitleDaySlotScope,
+} from '../slots'
 
 // Directives
 import ResizeObserver from '../directives/ResizeObserver'
@@ -70,17 +79,95 @@ export default defineComponent({
   },
 
   emits: [
+    /**
+     * Emitted when the model value changes.
+     *
+     * @param value New model value.
+     * @param-type value String
+     * @param-tsType value string
+     */
     'update:model-value',
+    /**
+     * Emitted when the tasks model changes.
+     *
+     * @param value New tasks array.
+     * @param-type value Array
+     * @param-tsType value Task[]
+     */
     'update:model-tasks',
+    /**
+     * Emitted when the title model changes.
+     *
+     * @param value New title rows array.
+     * @param-type value Array
+     * @param-tsType value any[]
+     */
     'update:model-title',
+    /**
+     * Emitted when the footer model changes.
+     *
+     * @param value New footer rows array.
+     * @param-type value Array
+     * @param-tsType value Task[]
+     */
     'update:model-footer',
+    /**
+     * Emitted when a task is expanded or collapsed.
+     *
+     * @param expanded Whether the task is expanded.
+     * @param-type expanded Boolean
+     * @param-tsType expanded boolean
+     * @param scope Task scope.
+     * @param-type scope Object
+     * @param-tsType scope TaskItemSlotScope
+     */
     'task-expanded',
     ...useCheckChangeEmits,
     ...useMoveEmits,
+    /**
+     * Interact with the task header.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope TaskHeadSlotScope
+     * @param scope Task header scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-head-tasks'),
+    /**
+     * Interact with a task row.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope TaskItemSlotScope
+     * @param scope Task row scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-task'),
+    /**
+     * Interact with a task date button.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope TaskHeadDayLabelSlotScope
+     * @param scope Task date button scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-date'),
+    /**
+     * Interact with a task day cell.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope TaskDaySlotScope
+     * @param scope Task day cell scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-day'),
+    /**
+     * Interact with a task header day.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope TaskHeadDaySlotScope
+     * @param scope Task header day scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-head-day'),
   ],
 
@@ -127,10 +214,10 @@ export default defineComponent({
     // initialize emit listeners
     const { emitListeners } = useEmitListeners(vm)
 
-    const { times, setCurrent, updateCurrent } = useTimes(props)
+    const { times, setCurrent, updateCurrent: updateCurrentTimes } = useTimes(props)
 
     // update dates
-    updateCurrent()
+    updateCurrentTimes()
     setCurrent()
 
     const {
@@ -176,7 +263,7 @@ export default defineComponent({
       times,
     })
 
-    const { move } = useMove(props, {
+    const { move: moveCalendar } = useMove(props, {
       parsedView,
       parsedValue,
       direction,
@@ -295,16 +382,48 @@ export default defineComponent({
 
     // public functions
 
+    /**
+     * Moves the task view by a relative amount.
+     *
+     * @param amount Number of view units to move. Negative values move backward.
+     * @param-example amount -1
+     */
+    function move(amount: number = 1): void {
+      moveCalendar(amount)
+    }
+
+    /**
+     * Moves the task view to today.
+     */
     function moveToToday(): void {
       move(0)
     }
 
-    function next(amount = 1): void {
+    /**
+     * Moves the task view forward.
+     *
+     * @param amount Number of view units to move forward.
+     * @param-example amount 1
+     */
+    function next(amount: number = 1): void {
       move(amount)
     }
 
-    function prev(amount = 1): void {
+    /**
+     * Moves the task view backward.
+     *
+     * @param amount Number of view units to move backward.
+     * @param-example amount 1
+     */
+    function prev(amount: number = 1): void {
       move(-amount)
+    }
+
+    /**
+     * Refreshes the task view's current date/time state.
+     */
+    function updateCurrent(): void {
+      updateCurrentTimes()
     }
 
     // private functions
@@ -331,7 +450,7 @@ export default defineComponent({
       const activeDate = props.noActiveDate !== true && parsedValue.value.date === day.date
       const dragValue = task[props.taskKey]
 
-      const scope = {
+      const scope: TaskDaySlotScope = {
         timestamp: day,
         task,
         taskIndex,
@@ -395,7 +514,7 @@ export default defineComponent({
 
     function __renderTaskDaysRow(task: Task, taskIndex: number): VNode {
       const slot = slots.days
-      const scope = {
+      const scope: TaskDaysSlotScope = {
         timestamps: days.value,
         days: days.value, // deprecated
         task,
@@ -419,7 +538,7 @@ export default defineComponent({
       expanded = true,
     ): VNode {
       const slot = indentLevel === 0 ? slots.task : slots.subtask
-      const scope = {
+      const scope: TaskItemSlotScope = {
         start: parsedStartDate.value,
         end: parsedEndDate.value,
         task,
@@ -724,7 +843,7 @@ export default defineComponent({
 
     function __renderHeadTask(): VNode {
       const slot = slots['head-tasks']
-      const scope = {
+      const scope: TaskHeadSlotScope = {
         start: parsedStartDate.value,
         end: parsedEndDate.value,
       }
@@ -848,7 +967,7 @@ export default defineComponent({
       const dayLabel = dayFormatter.value(day, false)
       const headDayLabelSlot = slots['head-day-label']
       const headDayButtonSlot = slots['head-day-button']
-      const scope = { dayLabel, timestamp: day, activeDate }
+      const scope: TaskHeadDayLabelSlotScope = { dayLabel, timestamp: day, activeDate }
 
       const key = day.date
 
@@ -996,7 +1115,7 @@ export default defineComponent({
         maxWidth: width,
       }
 
-      const scope = {
+      const scope: TaskTitleDaySlotScope = {
         timestamp: day,
         title,
         index,
@@ -1027,7 +1146,7 @@ export default defineComponent({
       const headDateSlot = slots['head-date']
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
-      const scope = {
+      const scope: TaskHeadDaySlotScope = {
         timestamp: day,
         activeDate,
         droppable: isTaskHeadDayDroppable(dragOverHeadDayRef.value, day),
@@ -1251,8 +1370,14 @@ export default defineComponent({
     expose({
       prev,
       next,
+      /**
+       * Moves the task view by a relative amount.
+       */
       move,
       moveToToday,
+      /**
+       * Refreshes the task view's current date/time state.
+       */
       updateCurrent,
     })
     // Object.assign(vm.proxy, {

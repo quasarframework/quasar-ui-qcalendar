@@ -64,83 +64,116 @@ export const isValidWeekdays = (v: unknown): boolean =>
 
 // Define prop types with validators
 export const useCommonProps = {
+  /** Date value used by `v-model`, formatted as `YYYY-MM-DD`. */
   modelValue: {
     type: String,
     default: today(),
     validator: (v: string): boolean => v === '' || validateTimestamp(v),
   },
+  /** Weekday indexes shown by the calendar, where `0` is Sunday and `6` is Saturday. */
   weekdays: {
     type: Array as PropType<number[]>,
     default: (): number[] => [0, 1, 2, 3, 4, 5, 6],
     validator: isValidWeekdays,
   },
+  /** Shape used for rendered date buttons. */
   dateType: {
     type: String as () => 'round' | 'rounded' | 'square',
     default: 'round',
     validator: (v: string): boolean => ['round', 'rounded', 'square'].includes(v),
   },
+  /** Horizontal alignment for weekday labels. */
   weekdayAlign: {
     type: String as () => 'left' | 'center' | 'right',
     default: 'center',
     validator: (v: string): boolean => ['left', 'center', 'right'].includes(v),
   },
+  /** Horizontal alignment for date labels. */
   dateAlign: {
     type: String as () => 'left' | 'center' | 'right',
     default: 'center',
     validator: (v: string): boolean => ['left', 'center', 'right'].includes(v),
   },
+  /** Adds borders around calendar sections and cells. */
   bordered: Boolean,
+  /** Forces dark mode styling. */
   dark: Boolean,
+  /** Disables generated ARIA attributes. */
   noAria: Boolean,
+  /** Hides the active date styling. */
   noActiveDate: Boolean,
+  /** Hides the calendar header. */
   noHeader: Boolean,
+  /** Disables internal scroll containers where supported. */
   noScroll: Boolean,
+  /** Uses shortened weekday labels. */
   shortWeekdayLabel: Boolean,
+  /** Hides the default header text. */
   noDefaultHeaderText: Boolean,
+  /** Hides the default header button. */
   noDefaultHeaderBtn: Boolean,
+  /** Minimum number of weekday label characters to display. */
   minWeekdayLabel: {
     type: [Number, String] as PropType<number | string>,
     default: 1,
   },
+  /** Cell width breakpoints used to shorten weekday labels. */
   weekdayBreakpoints: {
     type: Array as () => number[],
     default: (): number[] => [75, 35],
     validator: (v: number[]): boolean => v.length === 2,
   },
+  /** BCP 47 locale used for date and weekday formatting. */
   locale: {
     type: String,
     default: 'en-US',
   },
+  /** Enables animated transitions between calendar ranges. */
   animated: Boolean,
+  /** Transition name used when moving to the previous range. */
   transitionPrev: {
     type: String,
     default: 'slide-right',
   },
+  /** Transition name used when moving to the next range. */
   transitionNext: {
     type: String,
     default: 'slide-left',
   },
+  /** Explicit disabled day definitions. */
   disabledDays: Array as PropType<DisabledDays>,
+  /** Disables dates before this `YYYY-MM-DD` value. */
   disabledBefore: String,
+  /** Disables dates after this `YYYY-MM-DD` value. */
   disabledAfter: String,
+  /** Weekday indexes that should be disabled. */
   disabledWeekdays: {
     type: Array as () => number[],
     default: (): string[] | Set<string> => [],
   },
+  /** Drag-enter guard called before a dragged item enters a calendar target. */
   dragEnterFunc: Function as PropType<(_event: Event, _type: string, _scope: any) => boolean>,
+  /** Drag-over guard called while a dragged item is over a calendar target. */
   dragOverFunc: Function as PropType<(_event: Event, _type: string, _scope: any) => boolean>,
+  /** Drag-leave guard called before a dragged item leaves a calendar target. */
   dragLeaveFunc: Function as PropType<(_event: Event, _type: string, _scope: any) => boolean>,
+  /** Drop guard called before a dragged item is dropped on a calendar target. */
   dropFunc: Function as PropType<(_event: Event, _type: string, _scope: any) => boolean>,
+  /** Selected date strings highlighted by the calendar. */
   selectedDates: {
     type: [Array, Set] as PropType<string[] | Set<string>>,
     default: (): string[] | Set<string> => [],
   },
+  /** Start and end date strings used to highlight a selected range. */
   selectedStartEndDates: {
     type: Array as () => string[],
     default: (): string[] => [],
   },
+  /** Applies hover styling to interactive calendar cells. */
   hoverable: Boolean,
+  /** Makes supported calendar cells keyboard focusable. */
   focusable: Boolean,
+  /** Calendar target types that can receive keyboard focus. */
   focusType: {
     type: Array as () => ('day' | 'date' | 'weekday' | 'interval' | 'time' | 'resource' | 'task')[],
     default: (): ('day' | 'date' | 'weekday' | 'interval' | 'time' | 'resource' | 'task')[] => [

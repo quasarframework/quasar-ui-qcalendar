@@ -15,7 +15,16 @@ import {
 } from '@timestamp-js/core'
 import { Ref, EmitFn } from 'vue'
 
-export const useMoveEmits = ['moved']
+export const useMoveEmits = [
+  /**
+   * Emitted when the calendar moves to a new date.
+   *
+   * @param timestamp Timestamp moved to.
+   * @param-type timestamp Timestamp
+   * @param-tsType timestamp Timestamp
+   */
+  'moved',
+]
 
 /**
  * Type definition for props

@@ -35,20 +35,32 @@ export interface Resource {
 }
 
 export interface ScopeForSlot {
+  /** Timestamp represented by the slot. */
   timestamp: Timestamp
+  /** Helper that returns the vertical start position for a time. */
   timeStartPos: (_time: string, _clamp?: boolean) => number | false
+  /** Helper that returns the vertical height for a duration. */
   timeDurationHeight: (_minutes: number) => number
+  /** Zero-based rendered column index. */
   columnIndex?: number
+  /** Whether the timestamp is the active date. */
   activeDate?: boolean
+  /** Whether the slot content is disabled. */
   disabled?: boolean
+  /** Whether weekday labels are rendered in short form. */
   shortWeekdayLabel?: boolean
+  /** Whether the slot can accept dropped content. */
   droppable?: boolean
 }
 
 export interface ScopeForSlotX {
+  /** Timestamp represented by the slot. */
   timestamp: Timestamp
+  /** Helper that returns the horizontal start position for a time. */
   timeStartPosX: (_time: string, _clamp?: boolean) => number | false
+  /** Helper that returns the horizontal width for a duration. */
   timeDurationWidth: (_minutes: number) => number
+  /** Zero-based rendered interval index. */
   index?: number
 }
 
@@ -71,54 +83,68 @@ export interface IntervalProps
 }
 
 export const useIntervalProps = {
+  /** Calendar interval view mode. */
   view: {
     type: String as PropType<IntervalProps['view']>,
     validator: (v: string) => ['day', 'week', 'month', 'month-interval'].includes(v),
     default: 'day',
   },
+  /** Uses shortened interval labels where possible. */
   shortIntervalLabel: Boolean,
+  /** Height in pixels or CSS units for each time interval. */
   intervalHeight: {
     type: [Number, String] as PropType<IntervalProps['intervalHeight']>,
     default: 40,
     validator: validateNumber,
   },
+  /** Number of minutes represented by each interval. */
   intervalMinutes: {
     type: [Number, String] as PropType<IntervalProps['intervalMinutes']>,
     default: 60,
     validator: validateNumber,
   },
+  /** Starting interval hour. */
   intervalStart: {
     type: [Number, String] as PropType<IntervalProps['intervalStart']>,
     default: 0,
     validator: validateNumber,
   },
+  /** Number of intervals rendered in the day. */
   intervalCount: {
     type: [Number, String] as PropType<IntervalProps['intervalCount']>,
     default: 24,
     validator: validateNumber,
   },
+  /** Function that returns inline styles for interval cells. */
   intervalStyle: {
     type: Function as PropType<IntervalProps['intervalStyle']>,
     default: null,
   },
+  /** Function that returns CSS classes for interval cells. */
   intervalClass: {
     type: Function as PropType<IntervalProps['intervalClass']>,
     default: null,
   },
+  /** Function that returns inline styles for weekday header cells. */
   weekdayStyle: {
     type: Function as PropType<IntervalProps['weekdayStyle']>,
     default: null,
   },
+  /** Function that returns CSS classes for weekday header cells. */
   weekdayClass: {
     type: Function as PropType<IntervalProps['weekdayClass']>,
     default: null,
   },
+  /** Function that controls whether an interval label is shown. */
   showIntervalLabel: {
     type: Function as PropType<IntervalProps['showIntervalLabel']>,
     default: null,
   },
+  /** Uses 24-hour time labels. */
   hour24Format: Boolean,
+  /** Clamps time click calculations to interval boundaries. */
   timeClicksClamped: Boolean,
+  /** Header layout used for date labels. */
   dateHeader: {
     type: String as PropType<IntervalProps['dateHeader']>,
     default: 'stacked',
@@ -143,56 +169,69 @@ export interface SchedulerProps extends IntervalProps {
 }
 
 export const useSchedulerProps = {
+  /** Scheduler view mode. */
   view: {
     type: String as PropType<SchedulerProps['view']>,
     validator: (v: string) => ['day', 'week', 'month', 'month-interval'].includes(v),
     default: 'day',
   },
+  /** Resources rendered by the scheduler. */
   modelResources: {
     type: Array as PropType<SchedulerProps['modelResources']>,
   },
+  /** Resource field used as the unique key. */
   resourceKey: {
     type: String as PropType<SchedulerProps['resourceKey']>,
     default: 'id',
   },
+  /** Resource field used as the display label. */
   resourceLabel: {
     type: String as PropType<SchedulerProps['resourceLabel']>,
     default: 'label',
   },
+  /** Height in pixels or CSS units for each resource row. */
   resourceHeight: {
     type: [Number, String] as PropType<SchedulerProps['resourceHeight']>,
     default: 0,
     validator: validateNumber,
   },
+  /** Minimum height in pixels or CSS units for each resource row. */
   resourceMinHeight: {
     type: [Number, String] as PropType<SchedulerProps['resourceMinHeight']>,
     default: 70,
     validator: validateNumber,
   },
+  /** Function that returns inline styles for resource rows. */
   resourceStyle: {
     type: Function as PropType<SchedulerProps['resourceStyle']>,
     default: null,
   },
+  /** Function that returns CSS classes for resource rows. */
   resourceClass: {
     type: Function as PropType<SchedulerProps['resourceClass']>,
     default: null,
   },
+  /** Function that returns inline styles for weekday header cells. */
   weekdayStyle: {
     type: Function as PropType<SchedulerProps['weekdayStyle']>,
     default: null,
   },
+  /** Function that returns CSS classes for weekday header cells. */
   weekdayClass: {
     type: Function as PropType<SchedulerProps['weekdayClass']>,
     default: null,
   },
+  /** Function that returns inline styles for day cells. */
   dayStyle: {
     type: Function as PropType<SchedulerProps['dayStyle']>,
     default: null,
   },
+  /** Function that returns CSS classes for day cells. */
   dayClass: {
     type: Function as PropType<SchedulerProps['dayClass']>,
     default: null,
   },
+  /** Header layout used for date labels. */
   dateHeader: {
     type: String as PropType<SchedulerProps['dateHeader']>,
     default: 'stacked',
@@ -213,49 +252,61 @@ export interface AgendaProps extends IntervalProps {
 }
 
 export const useAgendaProps = {
+  /** Agenda view mode. */
   view: {
     type: String as PropType<AgendaProps['view']>,
     validator: (v: string) => ['day', 'week', 'month', 'month-interval'].includes(v),
     default: 'day',
   },
+  /** Column definitions rendered before the day columns. */
   leftColumnOptions: {
     type: Array as PropType<AgendaProps['leftColumnOptions']>,
   },
+  /** Column definitions rendered after the day columns. */
   rightColumnOptions: {
     type: Array as PropType<AgendaProps['rightColumnOptions']>,
   },
+  /** Field name used as each agenda column id. */
   columnOptionsId: {
     type: String as PropType<AgendaProps['columnOptionsId']>,
   },
+  /** Field name used as each agenda column label. */
   columnOptionsLabel: {
     type: String as PropType<AgendaProps['columnOptionsLabel']>,
   },
+  /** Function that returns inline styles for weekday header cells. */
   weekdayStyle: {
     type: Function as PropType<AgendaProps['weekdayStyle']>,
     default: null,
   },
+  /** Function that returns CSS classes for weekday header cells. */
   weekdayClass: {
     type: Function as PropType<AgendaProps['weekdayClass']>,
     default: null,
   },
+  /** Function that returns inline styles for day cells. */
   dayStyle: {
     type: Function as PropType<AgendaProps['dayStyle']>,
     default: null,
   },
+  /** Function that returns CSS classes for day cells. */
   dayClass: {
     type: Function as PropType<AgendaProps['dayClass']>,
     default: null,
   },
+  /** Header layout used for date labels. */
   dateHeader: {
     type: String as PropType<AgendaProps['dateHeader']>,
     default: 'stacked',
     validator: (v: string) => ['stacked', 'inline', 'inverted'].includes(v),
   },
+  /** Height in pixels or CSS units for each agenda day row. */
   dayHeight: {
     type: [Number, String] as PropType<AgendaProps['dayHeight']>,
     default: 0,
     validator: validateNumber,
   },
+  /** Minimum height in pixels or CSS units for each agenda day row. */
   dayMinHeight: {
     type: [Number, String] as PropType<AgendaProps['dayMinHeight']>,
     default: 40,
@@ -277,44 +328,54 @@ export interface ResourceProps extends IntervalProps {
 }
 
 export const useResourceProps = {
+  /** Resources rendered by the resource view. */
   modelResources: {
     type: Array as PropType<ResourceProps['modelResources']>,
   },
+  /** Resource field used as the unique key. */
   resourceKey: {
     type: String as PropType<ResourceProps['resourceKey']>,
     default: 'id',
   },
+  /** Resource field used as the display label. */
   resourceLabel: {
     type: String as PropType<ResourceProps['resourceLabel']>,
     default: 'label',
   },
+  /** Height in pixels or CSS units for each resource row. */
   resourceHeight: {
     type: [Number, String] as PropType<ResourceProps['resourceHeight']>,
     default: 0,
     validator: validateNumber,
   },
+  /** Minimum height in pixels or CSS units for each resource row. */
   resourceMinHeight: {
     type: [Number, String] as PropType<ResourceProps['resourceMinHeight']>,
     default: 70,
     validator: validateNumber,
   },
+  /** Function that returns inline styles for resource rows. */
   resourceStyle: {
     type: Function as PropType<ResourceProps['resourceStyle']>,
     default: null,
   },
+  /** Function that returns CSS classes for resource rows. */
   resourceClass: {
     type: Function as PropType<ResourceProps['resourceClass']>,
     default: null,
   },
+  /** Width in pixels or CSS units for each interval cell. */
   cellWidth: {
     type: [Number, String] as PropType<ResourceProps['cellWidth']>,
     default: 100,
   },
+  /** Height in pixels or CSS units for the interval header. */
   intervalHeaderHeight: {
     type: [Number, String] as PropType<ResourceProps['intervalHeaderHeight']>,
     default: 20,
     validator: validateNumber,
   },
+  /** Disables sticky resource headers and columns. */
   noSticky: Boolean as PropType<ResourceProps['noSticky']>,
 } as const
 

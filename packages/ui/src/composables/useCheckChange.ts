@@ -1,7 +1,16 @@
 import { Ref } from 'vue'
 import type { Timestamp } from '@timestamp-js/core'
 
-export const useCheckChangeEmits = ['change'] as const
+export const useCheckChangeEmits = [
+  /**
+   * Emitted when the view's visible date range changes.
+   *
+   * @param scope Changed visible range.
+   * @param-type scope Object
+   * @param-tsType scope CheckChangeEvent
+   */
+  'change',
+] as const
 
 export interface CheckChangeProps {
   days: Ref<Timestamp[]>
@@ -10,8 +19,11 @@ export interface CheckChangeProps {
 }
 
 export interface CheckChangeEvent {
+  /** First visible date in the range. */
   start: string
+  /** Last visible date in the range. */
   end: string
+  /** Visible timestamps in the range. */
   days: Timestamp[]
 }
 

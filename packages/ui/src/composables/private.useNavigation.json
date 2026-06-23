@@ -1,9 +1,0 @@
-{
-  "props": {
-    "use-navigation": {
-      "type": "Boolean",
-      "desc": "Allows keyboard navigation. When multiple calendars use keyboard navigation on the same page, key events are routed to the calendar that currently contains focus; that root receives the `q-calendar--keyboard-active` class.",
-      "category": "behavior"
-    }
-  }
-}

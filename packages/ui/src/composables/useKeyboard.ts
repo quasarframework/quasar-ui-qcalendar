@@ -121,6 +121,7 @@ function unregisterNavigationInstance(instance: NavigationInstance): void {
 }
 
 export const useNavigationProps = {
+  /** Enables keyboard navigation for supported calendar cells. */
   useNavigation: Boolean,
 }
 

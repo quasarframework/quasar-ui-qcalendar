@@ -46,7 +46,13 @@ import useCheckChange, { useCheckChangeEmits } from '../composables/useCheckChan
 import useEvents from '../composables/useEvents'
 import useKeyboard, { useNavigationProps } from '../composables/useKeyboard'
 import { getDragEventHandlers } from '../composables/useDragAndDrop'
-import type { QCalendarAgendaSlots } from '../slots'
+import type {
+  AgendaColumnSlotScope,
+  AgendaHeadColumnSlotScope,
+  HeadDayButtonSlotScope,
+  IntervalSlotScope,
+  QCalendarAgendaSlots,
+} from '../slots'
 
 // Directives
 import ResizeObserver from '../directives/ResizeObserver'
@@ -77,12 +83,61 @@ export default defineComponent({
   },
 
   emits: [
+    /**
+     * Emitted when the model value changes.
+     *
+     * @param value New model value.
+     * @param-type value String
+     * @param-tsType value string
+     */
     'update:model-value',
     ...useCheckChangeEmits,
     ...useMoveEmits,
+    /**
+     * Interact with an agenda date button.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope HeadDayButtonSlotScope
+     * @param scope Agenda date button scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-date'),
+    /**
+     * Interact with an agenda header day.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope IntervalSlotScope
+     * @param scope Agenda header day scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-head-day'),
+    /**
+     * Interact with an agenda time interval.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope IntervalSlotScope
+     * @param scope Agenda time interval scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-time'),
+    /**
+     * Interact with an agenda column header.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope AgendaHeadColumnSlotScope
+     * @param scope Agenda column header scope.
+     * @param event Native mouse or touch event.
+     */
+    ...getRawMouseEvents('-head-column'),
+    /**
+     * Interact with an agenda body column.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope AgendaColumnSlotScope
+     * @param scope Agenda column scope.
+     * @param event Native mouse or touch event.
+     */
+    ...getRawMouseEvents('-column'),
   ],
 
   setup(props: AgendaProps & SchedulerProps & ResourceProps, { slots, emit, expose }) {
@@ -134,10 +189,10 @@ export default defineComponent({
       // console.info('isSticky', isSticky.value)
     })
 
-    const { times, setCurrent, updateCurrent } = useTimes(props)
+    const { times, setCurrent, updateCurrent: updateCurrentTimes } = useTimes(props)
 
     // update dates
-    updateCurrent()
+    updateCurrentTimes()
     setCurrent()
 
     const {
@@ -194,7 +249,7 @@ export default defineComponent({
       headerColumnRef,
     })
 
-    const { move } = useMove(props, {
+    const { move: moveCalendar } = useMove(props, {
       parsedView,
       parsedValue,
       direction,
@@ -313,16 +368,48 @@ export default defineComponent({
 
     // public functions
 
+    /**
+     * Moves the agenda view by a relative amount.
+     *
+     * @param amount Number of view units to move. Negative values move backward.
+     * @param-example amount -1
+     */
+    function move(amount: number = 1): void {
+      moveCalendar(amount)
+    }
+
+    /**
+     * Moves the agenda view to today.
+     */
     function moveToToday(): void {
       move(0)
     }
 
-    function next(amount = 1): void {
+    /**
+     * Moves the agenda view forward.
+     *
+     * @param amount Number of view units to move forward.
+     * @param-example amount 1
+     */
+    function next(amount: number = 1): void {
       move(amount)
     }
 
-    function prev(amount = 1): void {
+    /**
+     * Moves the agenda view backward.
+     *
+     * @param amount Number of view units to move backward.
+     * @param-example amount 1
+     */
+    function prev(amount: number = 1): void {
       move(-amount)
+    }
+
+    /**
+     * Refreshes the agenda view's current date/time state.
+     */
+    function updateCurrent(): void {
+      updateCurrentTimes()
     }
 
     // private functions
@@ -340,7 +427,7 @@ export default defineComponent({
 
     function __renderHeadColumn(column: ColumnObject, index: number): VNode {
       const slot = slots['head-column']
-      const scope = { column, index, days: days.value }
+      const scope: AgendaHeadColumnSlotScope = { column, index, days: days.value }
       const width = isSticky.value === true ? props.cellWidth : computedWidth.value
       const isFocusable = props.focusable === true && props.focusType.includes('weekday')
       const id =
@@ -372,13 +459,13 @@ export default defineComponent({
             type: 'head-column',
             scope,
           }),
-          ...getDefaultMouseEventHandlers('-head-column', (event /*, eventName*/) => {
-            return { scope: { column, index }, event }
+          ...getDefaultMouseEventHandlers('-head-column', (event) => {
+            return { scope, event }
           }),
         },
         [
           props.noDefaultHeaderText !== true && __renderHeadColumnLabel(column),
-          slot && slot(scope),
+          slot && slot({ scope }),
           useFocusHelper(),
         ],
       )
@@ -571,7 +658,7 @@ export default defineComponent({
       const headDateSlot = slots['head-date']
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
-      const scope = getScopeForSlot(day, columnIndex ?? 0)
+      const scope: IntervalSlotScope = getScopeForSlot(day, columnIndex ?? 0)
       scope.activeDate = activeDate
       scope.droppable = dragOverHeadDayRef.value === day.date
       scope.disabled = props.disabledWeekdays
@@ -717,7 +804,7 @@ export default defineComponent({
       const headDayEventSlot = slots['head-day-event']
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
-      const scope = getScopeForSlot(day, columnIndex)
+      const scope: IntervalSlotScope = getScopeForSlot(day, columnIndex)
       scope.activeDate = activeDate
       scope.disabled = props.disabledWeekdays
         ? props.disabledWeekdays.includes(Number(day.weekday))
@@ -750,7 +837,7 @@ export default defineComponent({
 
     function __renderHeadWeekday(day: Timestamp): VNode {
       const slot = slots['head-weekday-label']
-      const scope = getScopeForSlot(day, 0)
+      const scope: IntervalSlotScope = getScopeForSlot(day, 0)
       scope.shortWeekdayLabel = props.shortWeekdayLabel
 
       const data: Record<string, any> = {
@@ -802,7 +889,7 @@ export default defineComponent({
       const headDayLabelSlot = slots['head-day-label']
       const headDayButtonSlot = slots['head-day-button']
 
-      const scope = {
+      const scope: HeadDayButtonSlotScope = {
         dayLabel,
         timestamp: day,
         activeDate,
@@ -976,7 +1063,7 @@ export default defineComponent({
 
     function __renderColumn(column: ColumnObject, index: number): VNode {
       const slot = slots.column
-      const scope = { column, days: days.value, index }
+      const scope: AgendaColumnSlotScope = { column, days: days.value, index }
       const width = isSticky.value === true ? props.cellWidth : computedWidth.value
       const isFocusable = props.focusable === true && props.focusType.includes('day')
       const id = props.columnOptionsId !== undefined ? column[props.columnOptionsId] : undefined
@@ -1003,7 +1090,7 @@ export default defineComponent({
             type: 'column',
             scope,
           }),
-          ...getDefaultMouseEventHandlers('-column', (event /*, eventName*/) => {
+          ...getDefaultMouseEventHandlers('-column', (event) => {
             return { scope, event }
           }),
         },
@@ -1015,7 +1102,7 @@ export default defineComponent({
       const dayHeight = parseInt(String(props.dayHeight), 10)
       const dayMinHeight = parseInt(String(props.dayMinHeight), 10)
       const slot = slots.day
-      const scope = getScopeForSlot(day, columnIndex)
+      const scope: IntervalSlotScope = getScopeForSlot(day, columnIndex)
       const width = isSticky.value === true ? props.cellWidth : computedWidth.value
       const style: CSSProperties = {
         width,
@@ -1097,8 +1184,14 @@ export default defineComponent({
     expose({
       prev,
       next,
+      /**
+       * Moves the agenda view by a relative amount.
+       */
       move,
       moveToToday,
+      /**
+       * Refreshes the agenda view's current date/time state.
+       */
       updateCurrent,
     })
 

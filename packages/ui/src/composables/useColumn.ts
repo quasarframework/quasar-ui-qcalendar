@@ -13,11 +13,13 @@ export interface ColumnProps {
 }
 
 export const useColumnProps = {
+  /** Number of columns rendered when a single day is split into columns. */
   columnCount: {
     type: [Number, String] as PropType<ColumnProps['columnCount']>,
     default: 0,
     validator: validateNumber,
   },
+  /** Starting column index used when rendering split day columns. */
   columnIndexStart: {
     type: [Number, String] as PropType<ColumnProps['columnIndexStart']>,
     default: 0,

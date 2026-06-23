@@ -152,6 +152,7 @@ type ApiCount = Record<string, { overall: number; category: Record<string, numbe
 type ApiFile = Record<string, any> & {
   addedIn?: string
   behavior?: unknown
+  generated_at?: string
   internal?: unknown
   meta?: {
     docsUrl?: string
@@ -480,7 +481,14 @@ const filteredApiCount = computed(() =>
  */
 function parseApiFile(
   name: string,
-  { type, behavior: _behavior, meta, addedIn: _addedIn, ...api }: ApiFile,
+  {
+    type,
+    behavior: _behavior,
+    generated_at: _generatedAt,
+    meta,
+    addedIn: _addedIn,
+    ...api
+  }: ApiFile,
 ) {
   nameBanner.value = `${name} API`
   apiPath.value = meta?.docsUrl ?? ''
@@ -624,6 +632,10 @@ if (qPressEnv.QUASAR_CLIENT === true) {
   .markdown-token {
     margin: 4px;
     display: inline-block;
+    max-width: calc(100% - 8px);
+    overflow-x: auto;
+    vertical-align: middle;
+    white-space: nowrap;
   }
 
   &__added-in,

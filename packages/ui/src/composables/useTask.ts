@@ -22,91 +22,111 @@ export interface Task {
 }
 
 export const useTaskProps = {
+  /** Date value used by `v-model`, formatted as `YYYY-MM-DD`. */
   modelValue: {
     type: String,
     default: today(),
     validator: (v: string): boolean => v === '' || validateTimestamp(v),
   },
+  /** Task rows rendered by the task view. */
   modelTasks: {
     type: Array as () => Array<any>,
     default: (): any[] => [],
   },
+  /** Title rows rendered above task rows. */
   modelTitle: {
     type: Array as () => Array<any>,
     default: (): any[] => [],
   },
+  /** Footer rows rendered below task rows. */
   modelFooter: {
     type: Array as () => Array<any>,
     default: (): any[] => [],
   },
+  /** Task field used as the unique key. */
   taskKey: {
     type: [String, Number] as PropType<string | number>,
     default: 'id',
   },
+  /** Weekday indexes shown by the task view, where `0` is Sunday and `6` is Saturday. */
   weekdays: {
     type: Array as PropType<number[]>,
     default: (): number[] => [0, 1, 2, 3, 4, 5, 6],
     validator: isValidWeekdays,
   },
+  /** Shape used for rendered date buttons. */
   dateType: {
     type: String as () => 'round' | 'rounded' | 'square',
     default: 'round',
     validator: (v: string): boolean => ['round', 'rounded', 'square'].includes(v),
   },
+  /** Header layout used for date labels. */
   dateHeader: {
     type: String as () => 'stacked' | 'inline' | 'inverted',
     default: 'stacked',
     validator: (v: string): boolean => ['stacked', 'inline', 'inverted'].includes(v),
   },
+  /** Horizontal alignment for weekday labels. */
   weekdayAlign: {
     type: String as () => 'left' | 'center' | 'right',
     default: 'center',
     validator: (v: string): boolean => ['left', 'center', 'right'].includes(v),
   },
+  /** Horizontal alignment for date labels. */
   dateAlign: {
     type: String as () => 'left' | 'center' | 'right',
     default: 'center',
     validator: (v: string): boolean => ['left', 'center', 'right'].includes(v),
   },
+  /** Height in pixels or CSS units for each task day cell. */
   dayHeight: {
     type: [Number, String],
     default: 0,
     validator: validateNumber,
   },
+  /** Minimum height in pixels or CSS units for each task day cell. */
   dayMinHeight: {
     type: [Number, String],
     default: 40,
     validator: validateNumber,
   },
+  /** Function that returns inline styles for weekday header cells. */
   weekdayStyle: {
     type: Function,
     default: null,
   },
+  /** Function that returns CSS classes for weekday header cells. */
   weekdayClass: {
     type: Function,
     default: null,
   },
+  /** Function that returns inline styles for task day cells. */
   dayStyle: {
     type: Function,
     default: null,
   },
+  /** Function that returns CSS classes for task day cells. */
   dayClass: {
     type: Function,
     default: null,
   },
+  /** Function that returns CSS classes for footer day cells. */
   footerDayClass: {
     type: Function,
     default: null,
   },
+  /** Task view mode. */
   view: {
     type: String as () => 'day' | 'week' | 'month',
     validator: (v: string): boolean => ['day', 'week', 'month'].includes(v),
   },
+  /** Number of task view ranges rendered from the model value. */
   viewCount: {
     type: Number,
     default: 1,
     validator: (v: number): boolean => validateNumber(v) && v > 0,
   },
+  /** Width in pixels for the task label column. */
   taskWidth: {
     type: Number,
     default: 200,

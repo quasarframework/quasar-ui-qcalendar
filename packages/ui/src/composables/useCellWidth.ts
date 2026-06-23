@@ -2,6 +2,7 @@
 import { computed, ComputedRef } from 'vue'
 
 export const useCellWidthProps = {
+  /** Fixed cell width used by sticky or horizontally scrolling views. */
   cellWidth: [Number, String],
 }
 

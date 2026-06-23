@@ -39,7 +39,14 @@ import useCheckChange, { useCheckChangeEmits } from '../composables/useCheckChan
 import useEvents from '../composables/useEvents'
 import useKeyboard, { useNavigationProps } from '../composables/useKeyboard'
 import { getDragEventHandlers } from '../composables/useDragAndDrop'
-import type { QCalendarMonthSlots } from '../slots'
+import type {
+  MonthDayLabelSlotScope,
+  MonthDaySlotScope,
+  MonthHeadDaySlotScope,
+  MonthHeadWorkweekSlotScope,
+  MonthWorkweekSlotScope,
+  QCalendarMonthSlots,
+} from '../slots'
 
 // Directives
 import ResizeObserver from '../directives/ResizeObserver'
@@ -75,14 +82,69 @@ export default defineComponent({
   },
 
   emits: [
+    /**
+     * Emitted when the model value changes.
+     *
+     * @param value New model value.
+     * @param-type value String
+     * @param-tsType value string
+     */
     'update:model-value',
     ...useCheckChangeEmits,
     ...useMoveEmits,
+    /**
+     * Emitted when the month view enters or exits mini mode.
+     *
+     * @applicable month
+     * @param value Whether mini mode is active.
+     * @param-type value Boolean
+     * @param-tsType value boolean
+     */
     'mini-mode',
+    /**
+     * Interact with a month date button.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope MonthDayLabelSlotScope
+     * @param scope Month date button scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-date'),
+    /**
+     * Interact with a month day cell.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope MonthDaySlotScope
+     * @param scope Month day cell scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-day'),
+    /**
+     * Interact with the month workweek header.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope MonthHeadWorkweekSlotScope
+     * @param scope Month workweek header scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-head-workweek'),
+    /**
+     * Interact with a month header day.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope MonthHeadDaySlotScope
+     * @param scope Month header day scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-head-day'),
+    /**
+     * Interact with a month workweek row.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope MonthWorkweekSlotScope
+     * @param scope Month workweek row scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-workweek'),
   ],
 
@@ -126,10 +188,10 @@ export default defineComponent({
       // console.info('isSticky', isSticky.value)
     })
 
-    const { times, setCurrent, updateCurrent } = useTimes(props)
+    const { times, setCurrent, updateCurrent: updateCurrentTimes } = useTimes(props)
 
     // update dates
-    updateCurrent()
+    updateCurrentTimes()
     setCurrent()
 
     const {
@@ -195,7 +257,7 @@ export default defineComponent({
       headerColumnRef,
     })
 
-    const { move } = useMove(props, {
+    const { move: moveCalendar } = useMove(props, {
       parsedView,
       parsedValue,
       direction,
@@ -335,16 +397,48 @@ export default defineComponent({
 
     // public functions
 
+    /**
+     * Moves the month view by a relative amount.
+     *
+     * @param amount Number of view units to move. Negative values move backward.
+     * @param-example amount -1
+     */
+    function move(amount: number = 1): void {
+      moveCalendar(amount)
+    }
+
+    /**
+     * Moves the month view to today.
+     */
     function moveToToday(): void {
       move(0)
     }
 
-    function next(amount = 1): void {
+    /**
+     * Moves the month view forward.
+     *
+     * @param amount Number of view units to move forward.
+     * @param-example amount 1
+     */
+    function next(amount: number = 1): void {
       move(amount)
     }
 
-    function prev(amount = 1): void {
+    /**
+     * Moves the month view backward.
+     *
+     * @param amount Number of view units to move backward.
+     * @param-example amount 1
+     */
+    function prev(amount: number = 1): void {
       move(-amount)
+    }
+
+    /**
+     * Refreshes the month view's current date/time state.
+     */
+    function updateCurrent(): void {
+      updateCurrentTimes()
     }
 
     function __onResize({ width, height }: Size): void {
@@ -441,7 +535,7 @@ export default defineComponent({
 
     function __renderWorkWeekHead(): VNode {
       const slot = slots['head-workweek']
-      const scope = {
+      const scope: MonthHeadWorkweekSlotScope = {
         start: parsedStart.value,
         end: parsedEnd.value,
         miniMode: isMiniMode.value,
@@ -470,7 +564,7 @@ export default defineComponent({
       const weekday = filteredDays[0].weekday
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
-      const scope = {
+      const scope: MonthHeadDaySlotScope = {
         activeDate,
         weekday,
         timestamp: day,
@@ -674,7 +768,7 @@ export default defineComponent({
       const day = week.length > 2 ? week[2] : week[0]
       const { timestamp } = isCurrentWeek(week)
       const workweekLabel = Number(day.workweek).toLocaleString(props.locale)
-      const scope = { workweekLabel, week, miniMode: isMiniMode.value }
+      const scope: MonthWorkweekSlotScope = { workweekLabel, week, miniMode: isMiniMode.value }
 
       return h(
         'div',
@@ -702,7 +796,7 @@ export default defineComponent({
         props.showMonthLabel === true &&
         days.value.find((d) => d.month === day.month)?.day === day.day
 
-      const scope = {
+      const scope: MonthDaySlotScope = {
         outside,
         timestamp: day,
         miniMode: isMiniMode.value,
@@ -867,7 +961,7 @@ export default defineComponent({
 
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
-      const scope = {
+      const scope: MonthDayLabelSlotScope = {
         dayLabel,
         timestamp: day,
         outside,
@@ -1043,8 +1137,14 @@ export default defineComponent({
     expose({
       prev,
       next,
+      /**
+       * Moves the month view by a relative amount.
+       */
       move,
       moveToToday,
+      /**
+       * Refreshes the month view's current date/time state.
+       */
       updateCurrent,
     })
     // Object.assign(vm.proxy, {

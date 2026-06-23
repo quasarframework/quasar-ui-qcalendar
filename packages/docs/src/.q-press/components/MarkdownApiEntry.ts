@@ -289,7 +289,7 @@ function getPropDetails(
   if (prop.default !== void 0) {
     details.push(
       getDiv(
-        3,
+        12,
         'Default value',
         void 0,
         h(
