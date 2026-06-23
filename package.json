@@ -26,8 +26,8 @@
     "format:check": "oxfmt --check",
     "check:all": "pnpm verify",
     "verify": "pnpm verify:fast && pnpm verify:build",
-    "verify:fast": "pnpm format:check && pnpm lint && pnpm test && pnpm api:check && pnpm check:qpress",
-    "verify:build": "pnpm build && pnpm typecheck"
+    "verify:fast": "pnpm format:check && pnpm lint && pnpm test && pnpm check:qpress",
+    "verify:build": "pnpm build && pnpm api:check && pnpm typecheck"
   },
   "devDependencies": {
     "@types/node": "^26.0.0",
