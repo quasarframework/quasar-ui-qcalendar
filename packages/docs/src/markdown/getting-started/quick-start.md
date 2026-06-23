@@ -186,7 +186,7 @@ Then you can use the `transition-prev` and `transition-next` properties to chang
 | transition-prev | String | slide-right |
 | transition-next | String | slide-left  |
 
-See the [QCalendar Transitions](/developing/qcalendar-transitions) for more information.
+See the [QCalendar Transitions](/getting-started/transitions) for more information.
 
 ## Hoverable and focusable
 

@@ -102,7 +102,7 @@ const eventsMap = computed<Record<string, CalendarEvent[]>>(() => {
 })
 
 function waitForServer() {
-  return new Promise((resolve) => window.setTimeout(resolve, 900))
+  return new Promise((resolve) => setTimeout(resolve, 900))
 }
 
 async function loadServerData() {

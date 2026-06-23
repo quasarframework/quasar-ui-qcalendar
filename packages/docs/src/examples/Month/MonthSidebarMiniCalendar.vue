@@ -219,7 +219,7 @@ const events = reactive<Event[]>([
   },
   {
     id: 7,
-    title: 'Release window',
+    title: 'Release period',
     details: 'Ship and monitor',
     date: getCurrentDay(30),
     calendarId: 'work',

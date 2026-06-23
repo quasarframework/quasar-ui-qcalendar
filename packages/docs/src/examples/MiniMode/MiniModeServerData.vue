@@ -97,7 +97,7 @@ function addDays(date: string, amount: number) {
 }
 
 function waitForServer() {
-  return new Promise((resolve) => window.setTimeout(resolve, 900))
+  return new Promise((resolve) => setTimeout(resolve, 900))
 }
 
 async function loadServerData() {

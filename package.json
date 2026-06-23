@@ -8,6 +8,7 @@
   "scripts": {
     "api:generate": "pnpm --dir packages/docs exec qpress api generate --root ../..",
     "api:check": "pnpm --dir packages/docs exec qpress api check --root ../..",
+    "check:qpress": "pnpm --dir packages/docs exec qpress check --root ../.. --src-dir packages/docs/src",
     "clean": "rm -rf node_modules pnpm-lock.yaml packages/ui/node_modules packages/docs/node_modules packages/app-extension/node_modules packages/app-extension/dist",
     "build": "pnpm run build:ui && pnpm run build:app-ext && pnpm run build:docs",
     "build:ui": "cd packages/ui && pnpm build",
@@ -25,7 +26,7 @@
     "format:check": "oxfmt --check",
     "check:all": "pnpm verify",
     "verify": "pnpm verify:fast && pnpm verify:build",
-    "verify:fast": "pnpm format:check && pnpm lint && pnpm test",
+    "verify:fast": "pnpm format:check && pnpm lint && pnpm test && pnpm api:check && pnpm check:qpress",
     "verify:build": "pnpm build && pnpm typecheck"
   },
   "devDependencies": {

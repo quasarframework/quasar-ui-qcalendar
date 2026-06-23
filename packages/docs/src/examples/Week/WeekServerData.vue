@@ -112,7 +112,7 @@ function addDays(date: string, amount: number) {
 }
 
 function waitForServer() {
-  return new Promise((resolve) => window.setTimeout(resolve, 900))
+  return new Promise((resolve) => setTimeout(resolve, 900))
 }
 
 async function loadServerData() {
@@ -146,7 +146,7 @@ async function loadServerData() {
     },
     {
       id: 4,
-      title: 'Deployment window',
+      title: 'Deployment period',
       date: addDays(selectedDate.value, 2),
       time: '15:00',
       duration: 60,

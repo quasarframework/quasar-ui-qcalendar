@@ -734,7 +734,7 @@ function onTouchMove(e: TouchEvent, item: AgendaItem) {
         copyElement = child.cloneNode(true) as HTMLElement
         copyElement.style.position = 'absolute'
         copyElement.style.opacity = '0.5'
-        document.body.appendChild(copyElement)
+        if (typeof document !== 'undefined') document.body.appendChild(copyElement)
       } else {
         cleanup()
         return
@@ -755,7 +755,7 @@ function onTouchStart() {
 
 function onTouchEnd(e: TouchEvent) {
   if (copyElement) {
-    document.body.removeChild(copyElement)
+    if (typeof document !== 'undefined') document.body.removeChild(copyElement)
     const { column, child } = findTargets()
     if (column || child) {
       onDragEnd(e as unknown as DragEvent)
@@ -775,7 +775,7 @@ function onTouchEnd(e: TouchEvent) {
 function findTargets() {
   let column: HTMLElement | undefined
   let child: HTMLElement | undefined
-  const elements = document.elementsFromPoint(pageX, pageY)
+  const elements = typeof document === 'undefined' ? [] : document.elementsFromPoint(pageX, pageY)
 
   elements.forEach((el) => {
     if (el.classList.contains('planner-item')) {

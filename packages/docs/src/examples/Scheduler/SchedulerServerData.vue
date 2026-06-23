@@ -101,7 +101,7 @@ const statusText = computed(() =>
 )
 
 function waitForServer() {
-  return new Promise((resolve) => window.setTimeout(resolve, 900))
+  return new Promise((resolve) => setTimeout(resolve, 900))
 }
 
 async function loadServerData() {
@@ -117,7 +117,7 @@ async function loadServerData() {
   assignments.value = [
     { id: 1, resourceId: 'alpha', title: 'Discovery', dow: 1, range: 2 },
     { id: 2, resourceId: 'bravo', title: 'Implementation', dow: 2, range: 3 },
-    { id: 3, resourceId: 'charlie', title: 'QA window', dow: 4, range: 2 },
+    { id: 3, resourceId: 'charlie', title: 'QA period', dow: 4, range: 2 },
     { id: 4, resourceId: 'delta', title: 'Support rotation', dow: 5 },
   ]
   loaded.value = true

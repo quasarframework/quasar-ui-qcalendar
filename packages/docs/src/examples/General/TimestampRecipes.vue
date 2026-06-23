@@ -12,7 +12,7 @@
         <q-list dense bordered separator class="rounded-borders">
           <q-item>
             <q-item-section>
-              <q-item-label caption>Booking window</q-item-label>
+              <q-item-label caption>Booking range</q-item-label>
               <q-item-label>{{ bookingWindowLabel }}</q-item-label>
             </q-item-section>
           </q-item>
@@ -177,7 +177,7 @@ function getDayClass(timestamp: Timestamp): Record<string, boolean> {
   return {
     'timestamp-reserved': reservedRanges.some((range) => isTimestampInRange(timestamp, range)),
     'timestamp-available': availableRanges.some((range) => isTimestampInRange(timestamp, range)),
-    'timestamp-selected-window': isTimestampInRange(timestamp, selectedTimestampRange.value),
+    'timestamp-selected-range': isTimestampInRange(timestamp, selectedTimestampRange.value),
   }
 }
 
@@ -244,7 +244,7 @@ function onChooseTime({ scope }: DayScope) {
   text-decoration: line-through;
 }
 
-:deep(.timestamp-selected-window) {
+:deep(.timestamp-selected-range) {
   box-shadow: inset 0 0 0 2px rgba(33, 150, 243, 0.8);
 }
 

@@ -28,4 +28,4 @@ For changes that are larger in scale, an RFC (request for comment) may be approp
 
 ## Need more help?
 
-If you have more questions about issues or requesting features, there are multiple ways to reach us at [Contact us](/help/contact-us).
+If you have more questions about issues or requesting features, there are multiple ways to reach us at [Contact us](/other/contact).

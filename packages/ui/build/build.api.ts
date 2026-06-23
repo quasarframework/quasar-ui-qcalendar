@@ -5,6 +5,9 @@ import fse from 'fs-extra'
 import { readJsonFile, resolveToRoot, writeFile } from './build.utils.js'
 
 type QPressApiEntry = {
+  docsUrl?: string
+  generatedSuffix?: string
+  group?: 'functions' | 'methods'
   input: string
   output: string
   type?: string
@@ -38,7 +41,7 @@ type BuiltApi = {
 }
 
 const repoRoot = resolve(resolveToRoot(), '../..')
-const qpressConfigPath = resolve(repoRoot, 'qpress.config.json')
+const qpressConfigCandidates = ['qpress.config.mjs', 'qpress.config.js', 'qpress.config.json']
 const apiDest = resolveToRoot('dist/api')
 const apiListDest = resolveToRoot('dist/transforms/api-list.json')
 
@@ -62,12 +65,28 @@ async function loadQPressApiModule(): Promise<QPressApiModule> {
   return import(resolveModuleSpecifier(specifier)) as Promise<QPressApiModule>
 }
 
-function getQPressEntries(): QPressApiEntry[] {
-  if (!existsSync(qpressConfigPath)) {
-    throw new Error(`Missing Q-Press config: ${qpressConfigPath}`)
+async function readQPressConfig(): Promise<QPressConfig> {
+  const qpressConfigPath = qpressConfigCandidates
+    .map((file) => resolve(repoRoot, file))
+    .find((file) => existsSync(file))
+
+  if (qpressConfigPath === undefined) {
+    throw new Error(`Missing Q-Press config: ${qpressConfigCandidates.join(', ')}`)
   }
 
-  const config = readJsonFile(qpressConfigPath) as QPressConfig
+  if (extname(qpressConfigPath) === '.json') {
+    return readJsonFile(qpressConfigPath) as QPressConfig
+  }
+
+  const configModule = (await import(pathToFileURL(qpressConfigPath).href)) as {
+    default?: QPressConfig
+  }
+
+  return configModule.default ?? (configModule as QPressConfig)
+}
+
+async function getQPressEntries(): Promise<QPressApiEntry[]> {
+  const config = await readQPressConfig()
   const entries = config.api?.entries ?? []
 
   if (entries.length === 0) {
@@ -106,7 +125,7 @@ async function writeApiIndex(entries: BuiltApiEntry[], compact: boolean): Promis
 }
 
 export async function generate({ compact = false } = {}): Promise<BuiltApi> {
-  const entries = getQPressEntries()
+  const entries = await getQPressEntries()
   const qpressApi = await loadQPressApiModule()
 
   fse.emptyDirSync(apiDest)
