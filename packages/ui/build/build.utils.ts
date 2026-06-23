@@ -12,6 +12,8 @@ const jsRE = /\.c?js$/
 const cssRE = /\.(css|sass|scss)$/
 const tsRE = /\.ts$/
 const jsonRE = /\.json$/
+const verboseBuild =
+  process.env.QCALENDAR_BUILD_VERBOSE === '1' || process.env.BUILD_VERBOSE === '1'
 
 interface TableDataEntry {
   0: string
@@ -61,7 +63,7 @@ export const ProductName = packageJson.productName ?? packageJson.ProductName ??
 export const banner = config.banner
 
 process.on('exit', (code) => {
-  if (code === 0 && tableData.length > 0) {
+  if (verboseBuild && code === 0 && tableData.length > 0) {
     tableData.sort((a, b) => {
       const aType = a[0]
       const aFile = a[1]
@@ -152,11 +154,13 @@ export function writeFile(dest: string, code: string, zip = false): Promise<stri
   return new Promise((resolve, reject) => {
     function report(gzippedString?: string, gzippedSize?: string) {
       if (gzippedString) {
-        console.log(
-          `${banner} ${filePath.padEnd(49)} ${fileSize.padStart(8)}${gzippedString || ''}`,
-        )
+        if (verboseBuild) {
+          console.log(
+            `${banner} ${filePath.padEnd(49)} ${fileSize.padStart(8)}${gzippedString || ''}`,
+          )
+        }
 
-        if (toTable) {
+        if (verboseBuild && toTable) {
           tableData.push([tableEntryType, filePath, fileSize, gzippedSize || '-'])
         }
       }
