@@ -99,9 +99,7 @@ async function writeApiIndex(entries: BuiltApiEntry[], compact: boolean): Promis
   await writeFile(
     apiListDest,
     encodeJson(
-      entries
-        .map((entry) => entry.name)
-        .sort((left, right) => left.localeCompare(right)),
+      entries.map((entry) => entry.name).sort((left, right) => left.localeCompare(right)),
       compact,
     ),
   )
