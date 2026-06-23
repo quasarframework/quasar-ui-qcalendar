@@ -470,7 +470,6 @@ const themesList = computed(() => {
       value: { ...themes[theme] },
     })
   })
-  console.info('themesList', list)
   return list
 })
 

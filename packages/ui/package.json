@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-ui-qcalendar",
-  "version": "5.0.0-rc.4",
+  "version": "5.0.0-rc.5",
   "description": "QCalendar - Day/Month/Week Calendars, Popups, Date Pickers, Schedules, Agendas, Planners and Tasks for your Vue Apps",
   "keywords": [
     "agenda",
@@ -229,7 +229,7 @@
     "@timestamp-js/core": "0.1.0-rc.0"
   },
   "devDependencies": {
-    "@md-plugins/quasar-app-extension-q-press": "0.1.0-rc.14",
+    "@md-plugins/quasar-app-extension-q-press": "0.1.0-rc.15",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^26.0.0",
     "@types/rtlcss": "^3.5.4",
