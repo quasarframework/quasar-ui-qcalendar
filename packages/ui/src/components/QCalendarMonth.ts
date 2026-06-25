@@ -225,7 +225,6 @@ export default defineComponent({
       return style
     })
 
-    /// @ts-expect-error fix later
     const { renderValues } = useRenderValues(props, {
       parsedView,
       times,
@@ -248,7 +247,6 @@ export default defineComponent({
       // methods
       isOutside,
       monthFormatter,
-      /// @ts-expect-error fix later
     } = useMonth(props, emit, {
       times,
       parsedStart,
@@ -273,7 +271,6 @@ export default defineComponent({
 
     const { isKeyCode } = useEvents()
 
-    /// @ts-expect-error fix later
     useKeyboard(props, {
       rootRef,
       keyboardActive,

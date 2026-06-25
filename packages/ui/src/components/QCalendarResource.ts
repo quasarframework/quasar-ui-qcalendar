@@ -267,7 +267,6 @@ export default defineComponent({
       widthToMinutes: widthToMinutesCalendar,
       // getTimestampAtEventX
       // getTimestampAtEventIntervalX
-      /// @ts-expect-error fix later
     } = useInterval(props, {
       times,
       scrollArea,

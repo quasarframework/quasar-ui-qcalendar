@@ -15,7 +15,7 @@ import {
  * Type definitions for the properties
  */
 interface UseRenderValuesProps {
-  maxDays: number
+  maxDays?: number
   weekdays: number[]
 }
 
@@ -45,7 +45,7 @@ export default function useRenderValues(
    */
   const renderValues = computed(() => {
     const around = parsedValue.value
-    let maxDays = props.maxDays
+    let maxDays = props.maxDays ?? 1
     let start = around
     let end = around
 

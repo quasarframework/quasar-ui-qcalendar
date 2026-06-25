@@ -159,7 +159,7 @@ export interface SchedulerProps extends IntervalProps {
   resourceLabel: string
   resourceHeight: number | string
   resourceMinHeight: number | string
-  resourceStyle?: (_timestamp: Timestamp) => any
+  resourceStyle?: (_scope: Scope) => any
   resourceClass?: (_scope: Scope) => string
   weekdayStyle?: (_scope: Scope) => any
   weekdayClass?: (_scope: Scope) => string
@@ -442,8 +442,16 @@ export interface UseIntervalReturn {
   timeStartPosX: (_time: string, _clamp?: boolean) => number | false
 }
 
+interface UseIntervalProps extends CommonProps, ColumnProps, CellWidthProps {
+  intervalHeight?: number | string
+  intervalMinutes?: number | string
+  intervalStart?: number | string
+  intervalCount?: number | string
+  hour24Format?: boolean
+}
+
 export default function useInterval(
-  props: IntervalProps & AgendaProps & SchedulerProps & ResourceProps & ColumnProps & CommonProps,
+  props: UseIntervalProps,
   {
     times,
     scrollArea,
@@ -462,10 +470,10 @@ export default function useInterval(
     headerColumnRef: Ref<HTMLElement | null>
   },
 ): UseIntervalReturn {
-  const parsedIntervalStart = computed(() => parseInt(String(props.intervalStart), 10))
-  const parsedIntervalMinutes = computed(() => parseInt(String(props.intervalMinutes), 10))
-  const parsedIntervalCount = computed(() => parseInt(String(props.intervalCount), 10))
-  const parsedIntervalHeight = computed(() => parseFloat(String(props.intervalHeight)))
+  const parsedIntervalStart = computed(() => parseInt(String(props.intervalStart ?? 0), 10))
+  const parsedIntervalMinutes = computed(() => parseInt(String(props.intervalMinutes ?? 60), 10))
+  const parsedIntervalCount = computed(() => parseInt(String(props.intervalCount ?? 24), 10))
+  const parsedIntervalHeight = computed(() => parseFloat(String(props.intervalHeight ?? 40)))
   const parsedCellWidth = computed(() => {
     let width = 0
     const columnCount = Number(props.columnCount)

@@ -11,7 +11,6 @@ import {
   getEndOfWeek,
 } from '@timestamp-js/core'
 import type { Timestamp } from '@timestamp-js/core'
-import { type IntervalProps } from './useInterval'
 
 const { isKeyCode } = useEvents()
 
@@ -127,8 +126,8 @@ export const useNavigationProps = {
 
 export interface NavigationProps {
   useNavigation: boolean
-  // intervalMinutes: number | string
-  // weekdays?: number[]
+  weekdays: number[]
+  intervalMinutes?: number | string
 }
 
 interface NavigationContext {
@@ -156,7 +155,7 @@ interface UseNavigationReturn {
  * @param context Various reactive references used for navigation.
  */
 export default function useNavigation(
-  props: NavigationProps & IntervalProps,
+  props: NavigationProps,
   {
     rootRef,
     keyboardActive,
@@ -480,7 +479,7 @@ export default function useNavigation(
         return
       }
     } else {
-      tm = addToDate(tm, { minute: -Number(props.intervalMinutes) })
+      tm = addToDate(tm, { minute: -Number(props.intervalMinutes ?? 60) })
       if (tm.date !== current.date) {
         tm = moveToEnabledWeekday(tm, -1)
       }
@@ -504,7 +503,7 @@ export default function useNavigation(
         return
       }
     } else {
-      tm = addToDate(tm, { minute: Number(props.intervalMinutes) })
+      tm = addToDate(tm, { minute: Number(props.intervalMinutes ?? 60) })
       if (tm.date !== current.date) {
         tm = moveToEnabledWeekday(tm, 1)
       }

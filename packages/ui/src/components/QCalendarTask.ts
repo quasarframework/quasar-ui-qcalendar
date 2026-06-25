@@ -258,7 +258,6 @@ export default defineComponent({
       parsedStartDate,
       parsedEndDate,
       // methods
-      /// @ts-expect-error fix later
     } = useTask(props, emit, {
       times,
     })
@@ -279,7 +278,6 @@ export default defineComponent({
 
     const { isKeyCode } = useEvents()
 
-    /// @ts-expect-error fix later
     useKeyboard(props, {
       rootRef,
       keyboardActive,

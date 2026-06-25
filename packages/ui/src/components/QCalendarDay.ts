@@ -255,7 +255,6 @@ export default defineComponent({
       heightToMinutes: heightToMinutesCalendar,
       timeDurationHeight: timeDurationHeightCalendar,
       timeStartPos: timeStartPosCalendar,
-      /// @ts-expect-error fix later
     } = useInterval(props, {
       times,
       scrollArea,

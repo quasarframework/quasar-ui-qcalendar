@@ -1,4 +1,4 @@
-import { computed, watch, Ref, EmitFn, ComputedRef } from 'vue'
+import { computed, watch, Ref, EmitFn, ComputedRef, PropType } from 'vue'
 import {
   createDayList,
   createNativeLocaleFormatterUTC,
@@ -32,7 +32,7 @@ export interface MonthProps {
   enableOutsideDays: boolean
   noOutsideDays: boolean
   hover: boolean
-  miniMode: boolean | 'auto'
+  miniMode?: boolean | 'auto'
   breakpoint: number | string
   monthLabelSize: string
 }
@@ -52,13 +52,13 @@ export const useMonthProps = {
     validator: (v: any): boolean => validateNumber(v),
   },
   /** Function that returns inline styles for month day cells. */
-  dayStyle: Function,
+  dayStyle: Function as PropType<MonthProps['dayStyle']>,
   /** Function that returns CSS classes for month day cells. */
-  dayClass: Function,
+  dayClass: Function as PropType<MonthProps['dayClass']>,
   /** Function that returns inline styles for weekday header cells. */
-  weekdayStyle: Function,
+  weekdayStyle: Function as PropType<MonthProps['weekdayStyle']>,
   /** Function that returns CSS classes for weekday header cells. */
-  weekdayClass: Function,
+  weekdayClass: Function as PropType<MonthProps['weekdayClass']>,
   /** Padding applied inside month day cells. */
   dayPadding: String,
   /** Minimum number of weeks rendered by the month view. */
@@ -86,7 +86,7 @@ export const useMonthProps = {
   hover: Boolean,
   /** Forces mini mode or lets mini mode follow the configured breakpoint. */
   miniMode: {
-    type: [Boolean, String],
+    type: [Boolean, String] as PropType<MonthProps['miniMode']>,
     validator: (v: any): boolean => [true, false, 'auto'].includes(v),
   },
   /** Breakpoint used when `mini-mode` is set to `auto`. */

@@ -142,7 +142,7 @@ interface TaskReturn {
 
 export default function useTask(
   props: {
-    view: 'day' | 'week' | 'month'
+    view?: 'day' | 'week' | 'month'
     modelValue: string
     viewCount: number
     weekdays: number[]

@@ -263,7 +263,6 @@ export default defineComponent({
       // scrollToTime,
       // timeDurationHeight,
       // timeStartPos
-      /// @ts-expect-error fix later
     } = useInterval(props, {
       times,
       scrollArea,
@@ -290,7 +289,6 @@ export default defineComponent({
 
     const { isKeyCode } = useEvents()
 
-    /// @ts-expect-error fix later
     useKeyboard(props, {
       rootRef,
       keyboardActive,
@@ -983,8 +981,7 @@ export default defineComponent({
               'q-calendar__scroll': true,
             },
           },
-          /// @ts-expect-error fix later
-          [isSticky.value !== true && __renderDayResources(), __renderDayContainer()],
+          [__renderDayContainer()],
         )
       } else if (props.noScroll === true) {
         return __renderPane()
@@ -1148,8 +1145,7 @@ export default defineComponent({
         {
           key: resource[props.resourceKey] + '-' + resourceIndex,
           ref: (el) => {
-            if (el !== null) {
-              /// @ts-expect-error fix later
+            if (el instanceof HTMLElement) {
               resourcesRef.value[resource[props.resourceKey]] = el
             }
           },
@@ -1164,7 +1160,6 @@ export default defineComponent({
           },
           style: {
             ...style,
-            /// @ts-expect-error fix later
             ...styler({ scope }),
           },
           ...getDragEventHandlers(props, {
