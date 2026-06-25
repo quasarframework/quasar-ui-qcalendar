@@ -12,6 +12,20 @@ export interface ColumnProps {
   columnIndexStart: number | string
 }
 
+export function getColumnIndexes(
+  columnCount: number | string,
+  columnIndexStart: number | string = 0,
+): number[] {
+  const count = parseInt(String(columnCount), 10)
+  const start = parseInt(String(columnIndexStart), 10)
+
+  if (count <= 0 || Number.isNaN(count)) {
+    return []
+  }
+
+  return Array.from({ length: count }, (_, index) => index + (Number.isNaN(start) ? 0 : start))
+}
+
 export const useColumnProps = {
   /** Number of columns rendered when a single day is split into columns. */
   columnCount: {

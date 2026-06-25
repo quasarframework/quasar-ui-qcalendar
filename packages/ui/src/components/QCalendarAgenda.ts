@@ -28,7 +28,12 @@ import useCalendar from '../composables/useCalendar'
 import useCommon, { useCommonProps, type CommonProps } from '../composables/useCommon'
 import { useAgendaProps, type AgendaProps } from '../composables/useInterval'
 import useCalendarDays from '../composables/useCalendarDays'
-import { useColumnProps, type ColumnObject, type ColumnProps } from '../composables/useColumn'
+import {
+  getColumnIndexes,
+  useColumnProps,
+  type ColumnObject,
+  type ColumnProps,
+} from '../composables/useColumn'
 import { useMaxDaysProps, type MaxDaysProps } from '../composables/useMaxDays'
 import useTimes, { useTimesProps, type TimesProps } from '../composables/useTimes'
 import useRenderValues from '../composables/useRenderValues'
@@ -594,7 +599,6 @@ export default defineComponent({
 
     function __renderHeadDays(): VNode | VNode[] {
       const columnCount = parseInt(String(props.columnCount), 10)
-      const columnIndexStart = parseInt(String(props.columnIndexStart), 10)
 
       if (days.value.length === 1 && columnCount > 0) {
         const day = days.value[0]!
@@ -606,9 +610,9 @@ export default defineComponent({
               )
             : [],
 
-          ...Array.apply(null, new Array(columnCount))
-            .map((_, i) => i + columnIndexStart)
-            .map((columnIndex) => __renderHeadDay(day, columnIndex)),
+          ...getColumnIndexes(columnCount, props.columnIndexStart).map((columnIndex) =>
+            __renderHeadDay(day, columnIndex),
+          ),
 
           isRightColumnOptionsValid.value === true
             ? props.rightColumnOptions!.map((column: ColumnObject, index: number) =>
@@ -641,9 +645,9 @@ export default defineComponent({
         const day = days.value[0]!
 
         return [
-          ...Array.apply(null, new Array(parseInt(String(props.columnCount), 10)))
-            .map((_, i) => i + columnCount)
-            .map((columnIndex) => __renderHeadDayEvent(day, columnIndex)),
+          ...getColumnIndexes(columnCount, props.columnIndexStart).map((columnIndex) =>
+            __renderHeadDayEvent(day, columnIndex),
+          ),
         ]
       } else {
         return days.value.map((day) => __renderHeadDayEvent(day, 0))
@@ -1020,7 +1024,6 @@ export default defineComponent({
 
     function __renderDays(): VNode[] | undefined {
       const columnCount = parseInt(String(props.columnCount), 10)
-      const columnIndexStart = parseInt(String(props.columnIndexStart), 10)
 
       if (days.value.length === 1 && columnCount > 0) {
         const day = days.value[0]!
@@ -1032,9 +1035,9 @@ export default defineComponent({
               )
             : [],
 
-          ...Array.apply(null, new Array(columnCount))
-            .map((_, i) => i + columnIndexStart)
-            .map((i) => __renderDay(day, 0, i)),
+          ...getColumnIndexes(columnCount, props.columnIndexStart).map((columnIndex) =>
+            __renderDay(day, 0, columnIndex),
+          ),
 
           isRightColumnOptionsValid.value === true
             ? props.rightColumnOptions!.map((column: ColumnObject, index: number) =>

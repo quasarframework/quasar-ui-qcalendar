@@ -48,6 +48,50 @@ describe('[QCALENDAR] drag and drop handlers', () => {
     expect(targetRef.value).toBe('')
   })
 
+  it('resets the active drag target when the dragged item leaves an accepted drop zone', () => {
+    const targetRef = ref('2026-06-15')
+    const event = { type: 'dragleave' } as DragEvent
+    const dragLeaveFunc = vi.fn(() => false)
+
+    getDragEventHandlers(
+      { dragLeaveFunc },
+      {
+        targetRef,
+        value: '2026-06-15',
+        resetValue: '',
+        type: 'day',
+        scope: { timestamp: { date: '2026-06-15' } },
+      },
+    ).onDragleave(event)
+
+    expect(dragLeaveFunc).toHaveBeenCalledWith(event, 'day', {
+      scope: { timestamp: { date: '2026-06-15' } },
+    })
+    expect(targetRef.value).toBe('')
+  })
+
+  it('sets the active drag target immediately when the user callback accepts a drop', () => {
+    const targetRef = ref('')
+    const event = { type: 'drop' } as DragEvent
+    const dropFunc = vi.fn(() => true)
+
+    getDragEventHandlers(
+      { dropFunc },
+      {
+        targetRef,
+        value: '2026-06-15',
+        resetValue: '',
+        type: 'day',
+        scope: { timestamp: { date: '2026-06-15' } },
+      },
+    ).onDrop(event)
+
+    expect(dropFunc).toHaveBeenCalledWith(event, 'day', {
+      scope: { timestamp: { date: '2026-06-15' } },
+    })
+    expect(targetRef.value).toBe('2026-06-15')
+  })
+
   it('coalesces drag target updates to the last target in the animation frame', () => {
     const frames: FrameRequestCallback[] = []
     const targetRef = ref('')
