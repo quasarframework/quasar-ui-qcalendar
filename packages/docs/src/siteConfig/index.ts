@@ -114,6 +114,10 @@ export interface SiteConfig {
 }
 
 function getSidebarPath(item: MenuItem): string {
+  if (item.path === '') {
+    return ''
+  }
+
   if (item.external === true) {
     return item.path ?? slugify(item.name)
   }
@@ -255,6 +259,7 @@ const examplesMenu = {
         { name: 'Transitions', path: '/examples/agenda/transitions' },
         {
           name: 'Recipes',
+          path: '',
           children: [
             { name: 'Planner', path: '/examples/agenda/planner' },
             { name: 'Server Data', path: '/examples/agenda/server-data' },
@@ -289,6 +294,7 @@ const examplesMenu = {
         { name: 'Transitions', path: '/examples/day/transitions' },
         {
           name: 'Intervals',
+          path: '',
           children: [
             { name: 'Interval Count', path: '/examples/day/interval-count' },
             { name: 'Interval Height', path: '/examples/day/interval-height' },
@@ -301,6 +307,7 @@ const examplesMenu = {
         },
         {
           name: 'Slots',
+          path: '',
           children: [
             { name: 'Column Header', path: '/examples/day/slot-column-header' },
             { name: 'Day Body', path: '/examples/day/slot-day-body' },
@@ -315,6 +322,7 @@ const examplesMenu = {
         },
         {
           name: 'Recipes',
+          path: '',
           children: [
             { name: 'Custom Header', path: '/examples/day/custom-header' },
             { name: 'Drag And Drop', path: '/examples/day/drag-and-drop' },
@@ -333,6 +341,7 @@ const examplesMenu = {
       children: [
         {
           name: 'Recipes',
+          path: '',
           children: [
             { name: 'Month Cell Width', path: '/examples/intervals/month-cell-width' },
             { name: 'Month Navigation', path: '/examples/intervals/month-navigation' },
@@ -364,6 +373,7 @@ const examplesMenu = {
         { name: 'Theme', path: '/examples/mini-mode/theme' },
         {
           name: 'Recipes',
+          path: '',
           children: [
             { name: 'QInput', path: '/examples/mini-mode/qinput' },
             { name: 'Workweeks', path: '/examples/mini-mode/workweeks' },
@@ -399,6 +409,7 @@ const examplesMenu = {
         { name: 'Transitions', path: '/examples/month/transitions' },
         {
           name: 'Slots',
+          path: '',
           children: [
             { name: 'Day', path: '/examples/month/slot-day' },
             { name: 'Day Holidays', path: '/examples/month/slot-day-holidays' },
@@ -407,6 +418,7 @@ const examplesMenu = {
         },
         {
           name: 'Recipes',
+          path: '',
           children: [
             { name: 'Drag And Drop', path: '/examples/month/drag-and-drop' },
             { name: 'Sidebar Mini Calendar', path: '/examples/month/sidebar-mini-calendar' },
@@ -428,10 +440,12 @@ const examplesMenu = {
         { name: 'Width Height', path: '/examples/resource/width-height' },
         {
           name: 'Intervals',
+          path: '',
           children: [{ name: 'Modify Intervals', path: '/examples/resource/modify-intervals' }],
         },
         {
           name: 'Slots',
+          path: '',
           children: [
             { name: 'Head Resources', path: '/examples/resource/slot-head-resources' },
             { name: 'Interval Label', path: '/examples/resource/slot-interval-label' },
@@ -441,6 +455,7 @@ const examplesMenu = {
         },
         {
           name: 'Recipes',
+          path: '',
           children: [
             { name: 'Children', path: '/examples/resource/children' },
             { name: 'Custom Height', path: '/examples/resource/custom-height' },
@@ -469,6 +484,7 @@ const examplesMenu = {
         { name: 'Width Height', path: '/examples/scheduler/width-height' },
         {
           name: 'Slots',
+          path: '',
           children: [
             { name: 'Head Resources', path: '/examples/scheduler/slot-head-resources' },
             { name: 'Resource Days', path: '/examples/scheduler/slot-resource-days' },
@@ -477,6 +493,7 @@ const examplesMenu = {
         },
         {
           name: 'Recipes',
+          path: '',
           children: [
             { name: 'Children', path: '/examples/scheduler/children' },
             { name: 'Custom Height', path: '/examples/scheduler/custom-height' },
@@ -505,6 +522,7 @@ const examplesMenu = {
         { name: 'Week', path: '/examples/task/week' },
         {
           name: 'Recipes',
+          path: '',
           children: [
             { name: 'Children', path: '/examples/task/children' },
             { name: 'Colored Weekends', path: '/examples/task/colored-weekends' },
@@ -542,6 +560,7 @@ const examplesMenu = {
         { name: 'Transitions', path: '/examples/week/transitions' },
         {
           name: 'Intervals',
+          path: '',
           children: [
             { name: 'Interval Count', path: '/examples/week/interval-count' },
             { name: 'Interval Height', path: '/examples/week/interval-height' },
@@ -554,6 +573,7 @@ const examplesMenu = {
         },
         {
           name: 'Slots',
+          path: '',
           children: [
             { name: 'Column Header', path: '/examples/week/slot-column-header' },
             { name: 'Day Body', path: '/examples/week/slot-day-body' },
@@ -573,6 +593,7 @@ const examplesMenu = {
         },
         {
           name: 'Recipes',
+          path: '',
           children: [
             { name: 'Drag And Drop', path: '/examples/week/drag-and-drop' },
             { name: 'Server Data', path: '/examples/week/server-data' },
