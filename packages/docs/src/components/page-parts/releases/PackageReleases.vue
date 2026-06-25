@@ -22,7 +22,6 @@
             v-model="selectedVersion"
             vertical
             active-color="primary"
-            active-bg-color="blue-1"
             indicator-color="primary"
           >
             <q-tab
@@ -203,8 +202,18 @@ const currentReleaseBody = computed(() => {
 </script>
 
 <style lang="scss">
-.release__splitter .q-scrollarea {
-  height: 600px;
+.release__splitter {
+  .q-scrollarea {
+    height: 600px;
+  }
+
+  .q-tab--active {
+    background: rgba($primary, 0.12);
+  }
+}
+
+.body--dark .release__splitter .q-tab--active {
+  background: rgba($primary, 0.2);
 }
 
 .release__body {
