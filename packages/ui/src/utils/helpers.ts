@@ -24,8 +24,37 @@ export function minCharWidth(str: string, count: number): string {
   return str.slice(0, count)
 }
 
+export function getResponsiveWeekdayLabel<TTimestamp>({
+  day,
+  formatter,
+  shortWeekdayLabel,
+  cellWidth,
+  breakpoints,
+  minWeekdayLabel,
+  forceMinWidth = false,
+}: {
+  day: TTimestamp
+  formatter: (_day: TTimestamp, _short: boolean) => string
+  shortWeekdayLabel: boolean
+  cellWidth: number
+  breakpoints: readonly number[]
+  minWeekdayLabel: number | string
+  forceMinWidth?: boolean
+}): string {
+  const [wideBreakpoint = 0, narrowBreakpoint = 0] = breakpoints
+  const weekdayLabel = formatter(
+    day,
+    shortWeekdayLabel || (wideBreakpoint > 0 && cellWidth <= wideBreakpoint),
+  )
+
+  return forceMinWidth || (narrowBreakpoint > 0 && cellWidth <= narrowBreakpoint)
+    ? minCharWidth(weekdayLabel, Number(minWeekdayLabel))
+    : weekdayLabel
+}
+
 export default {
   convertToUnit,
+  getResponsiveWeekdayLabel,
   indexOf,
   minCharWidth,
 }

@@ -20,7 +20,7 @@ import {
 // Utility
 import { getDayIdentifier, parsed, parseTimestamp, today, type Timestamp } from '@timestamp-js/core'
 
-import { convertToUnit, minCharWidth } from '../utils/helpers'
+import { convertToUnit, getResponsiveWeekdayLabel } from '../utils/helpers'
 
 import useMouse, { getRawMouseEvents } from '../composables/useMouse'
 
@@ -660,20 +660,21 @@ export default defineComponent({
     }
 
     function __renderHeadWeekdayLabel(day: Timestamp, shortWeekdayLabel: boolean): VNode {
-      const [wideBreakpoint = 0, narrowBreakpoint = 0] = props.weekdayBreakpoints
-      const weekdayLabel = weekdayFormatter.value(
+      const weekdayLabel = getResponsiveWeekdayLabel({
         day,
-        shortWeekdayLabel || (wideBreakpoint > 0 && parsedCellWidth.value <= wideBreakpoint),
-      )
+        formatter: weekdayFormatter.value,
+        shortWeekdayLabel,
+        cellWidth: parsedCellWidth.value,
+        breakpoints: props.weekdayBreakpoints,
+        minWeekdayLabel: props.minWeekdayLabel,
+        forceMinWidth: isMiniMode.value === true && props.shortWeekdayLabel === true,
+      })
       return h(
         'span',
         {
           class: 'q-calendar__ellipsis',
         },
-        (isMiniMode.value === true && props.shortWeekdayLabel === true) ||
-          (narrowBreakpoint > 0 && parsedCellWidth.value <= narrowBreakpoint)
-          ? minCharWidth(weekdayLabel, Number(props.minWeekdayLabel))
-          : weekdayLabel,
+        weekdayLabel,
       )
     }
 
