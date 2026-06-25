@@ -1,6 +1,6 @@
 {
   "name": "docs",
-  "version": "5.0.0-rc.5",
+  "version": "5.0.0-rc.6",
   "private": true,
   "description": "QCalendar Documentation and examples",
   "author": "Jeff <galbraith64@gmail.com>",
@@ -43,7 +43,7 @@
     "@types/markdown-it": "^14.1.2",
     "@types/node": "^26.0.0",
     "@vue/server-renderer": "^3.5.38",
-    "autoprefixer": "^10.5.0",
+    "autoprefixer": "^10.5.1",
     "markdown-it": "^14.2.0",
     "mermaid": "^11.15.0",
     "shiki": "^4.2.0",
