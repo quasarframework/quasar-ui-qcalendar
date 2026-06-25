@@ -196,6 +196,16 @@ export default function useNavigation(
     },
   )
 
+  watch(focusValue, () => {
+    const focusElement = focusRef.value ? datesRef.value[focusRef.value] : undefined
+
+    if (focusElement) {
+      focusElement.focus()
+    } else {
+      tryFocus()
+    }
+  })
+
   if (props.useNavigation === true) {
     startNavigation()
   }

@@ -280,7 +280,7 @@ export default defineComponent({
     const { isKeyCode } = useEvents()
 
     /// @ts-expect-error fix later
-    const { tryFocus } = useKeyboard(props, {
+    useKeyboard(props, {
       rootRef,
       keyboardActive,
       focusRef,
@@ -357,16 +357,6 @@ export default defineComponent({
     watch(focusRef, (val) => {
       if (val) {
         focusValue.value = parseTimestamp(val) as Timestamp
-      }
-    })
-
-    watch(focusValue, () => {
-      if (focusRef.value && datesRef.value && datesRef.value[focusRef.value]) {
-        datesRef.value[focusRef.value]!.focus()
-      } else {
-        // if focusRef is not in the list of current dates of dateRef,
-        // then assume month is changing
-        tryFocus()
       }
     })
 
