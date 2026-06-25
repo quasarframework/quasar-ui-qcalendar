@@ -8,14 +8,35 @@
       color="white"
       placeholder="Search..."
       clearable
-      class="q-mx-md"
+      class="release__search"
     >
       <template #prepend>
         <q-icon :name="mdiMagnify" />
       </template>
     </q-input>
     <q-separator />
-    <q-splitter :model-value="20" :limits="[14, 90]" class="release__splitter">
+    <div v-if="$q.screen.lt.sm" class="release__mobile">
+      <q-select
+        v-model="selectedVersion"
+        :options="releaseOptions"
+        emit-value
+        map-options
+        dense
+        outlined
+        options-dense
+        color="primary"
+        class="release__mobile-select"
+      />
+      <div class="q-pa-md release__body release__mobile-body" v-html="currentReleaseBody" />
+    </div>
+    <q-splitter
+      v-else
+      :model-value="releaseListWidth"
+      unit="px"
+      :limits="releaseListLimits"
+      :style="releaseListStyle"
+      class="release__splitter"
+    >
       <template #before>
         <q-scroll-area>
           <q-tabs
@@ -62,9 +83,10 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import { mdiMagnify } from '@quasar/extras/mdi-v7'
+import { useQuasar } from 'quasar'
 
+import { parseMarkdownSimple } from '../../../.q-press/components/MarkdownSimpleParser'
 import sanitize from './sanitize'
-import parseMdTable from './md-table-parser'
 
 export interface ReleaseInfo {
   version: string
@@ -75,16 +97,24 @@ export interface ReleaseInfo {
 
 const props = withDefaults(
   defineProps<{
-    latestVersion?: string
+    latestVersion?: string | undefined
     releases?: ReleaseInfo[]
+    repoUrl?: string
   }>(),
   {
     releases: () => [],
+    repoUrl: 'https://github.com/md-plugins/md-plugins',
   },
 )
 
 const search = ref('')
 const selectedVersion = ref<string | undefined>(props.latestVersion)
+const $q = useQuasar()
+const releaseListLimits = [120, Number.POSITIVE_INFINITY]
+const releaseListWidth = computed(() => ($q.screen.lt.sm ? 136 : 200))
+const releaseListStyle = computed<Record<string, string>>(() => ({
+  '--release-list-width': `${releaseListWidth.value}px`,
+}))
 
 watch(
   () => props.latestVersion,
@@ -103,105 +133,70 @@ const filteredReleases = computed(() => {
   return props.releases
 })
 
-function escapeRegExp(value: string): string {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-}
-
-function escapeHtmlAttribute(value: string): string {
-  return value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')
-}
-
-function createExternalLink(href: string, label: string): string {
-  if (!/^https?:\/\//.test(href)) {
-    return label
-  }
-
-  return `<a class="markdown-link" href="${escapeHtmlAttribute(href)}" target="_blank" rel="noopener noreferrer">${label}</a>`
-}
-
-function autoLinkBareUrls(content: string): string {
-  return content
-    .split(/(<a\b[^>]*>.*?<\/a>|<pre\b[^>]*>.*?<\/pre>|<code\b[^>]*>.*?<\/code>)/gis)
-    .map((part) => {
-      if (/^<(?:a|pre|code)\b/i.test(part)) {
-        return part
-      }
-
-      return part.replace(
-        /(^|[\s>])((?:https?:\/\/)[^\s<]+?)([),.;:!?]*)(?=$|\s|<)/g,
-        (_match, prefix: string, url: string, trailing: string) =>
-          `${prefix}${createExternalLink(url, url)}${trailing}`,
-      )
-    })
-    .join('')
-}
-
-function stashCodeBlocks(content: string, codeBlocks: string[]): string {
-  return content.replace(/```[^\n]*\n([\s\S]*?)```/g, (_match, code: string) => {
-    const index = codeBlocks.length
-
-    codeBlocks.push(
-      `<code class="markdown--code__inner markdown--code__inner--prerendered release__code">${code.trimEnd()}</code>`,
-    )
-
-    return `@@Q_PRESS_RELEASE_CODE_BLOCK_${index}@@`
-  })
-}
-
-function restoreCodeBlocks(content: string, codeBlocks: string[]): string {
-  return content.replace(/@@Q_PRESS_RELEASE_CODE_BLOCK_(\d+)@@/g, (_match, index: string) => {
-    return codeBlocks[Number(index)] ?? ''
-  })
-}
-
-function parse(body: string): string {
-  let content = sanitize(body) + '\n'
-  const codeBlocks: string[] = []
-
-  content = stashCodeBlocks(content, codeBlocks)
-
-  if (search.value !== '') {
-    content = content.replace(
-      new RegExp(`(${escapeRegExp(search.value)})`, 'gi'),
-      '<span class="bg-accent text-white">$1</span>',
-    )
-  }
-
-  content = content
-    .replace(/^### ([^\n]+)/gm, '<div class="text-h6">$1</div>')
-    .replace(/^## ([^\n]+)/gm, '<div class="text-h5">$1</div>')
-    .replace(/^# ([^\n]+)/gm, '<div class="text-h4">$1</div>')
-    .replace(/\*\*([\S ]*?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*([\S ]*?)\*/g, '<em>$1</em>')
-    .replace(/`(.*?)`/g, '<code class="markdown--token">$1</code>')
-    .replace(
-      /#([\d]+)/g,
-      createExternalLink('https://github.com/quasarframework/quasar-ui-qcalendar/issues/$1', '#$1'),
-    )
-    .replace(/^&gt; ([\S ]+)$/gm, '<div class="release__blockquote">$1</div>')
-    .replace(/\[([\S ]*?)\]\((\S*?)\)/g, (_match, label: string, href: string) =>
-      createExternalLink(href, label),
-    )
-    .replace(/^ {2}[-*] ([^\n]+)$/gm, '<li class="q-pl-md">$1</li>')
-    .replace(/^[-*] ([^\n]+)$/gm, '<li>$1</li>')
-    .replace(/<\/li>[\s\n\r]*<li/g, '</li><li')
-    .replace(/(<li(?: class="[^"]*")?>.*?<\/li>)+/g, '<ul class="release__list">$&</ul>')
-    .replace(/\n/g, '<br>')
-
-  content = restoreCodeBlocks(content, codeBlocks)
-  content = autoLinkBareUrls(content)
-
-  return content.includes('| -') ? parseMdTable(content) : content
-}
+const releaseOptions = computed(() =>
+  filteredReleases.value.map((release) => ({
+    label: `${release.version} (${release.date})`,
+    value: release.label,
+  })),
+)
 
 const currentReleaseBody = computed(() => {
   const release = props.releases.find((entry) => entry.label === selectedVersion.value)
 
-  return release ? parse(release.body) : ''
+  return release
+    ? parseMarkdownSimple(release.body, {
+        issueUrl: props.repoUrl,
+        sanitize,
+        search: search.value,
+        classes: {
+          blockquote: 'release__blockquote',
+          codeBlock: 'markdown-code release__code',
+          container: 'release__container',
+          containerTitle: 'release__container-title',
+          heading: 'release__heading',
+          list: 'release__list',
+          rule: 'release__rule',
+        },
+      })
+    : ''
 })
 </script>
 
 <style lang="scss">
+.release__search {
+  color: $light-text;
+  background: $light-bg;
+  border: 1px solid $brand-border-color-light;
+  border-bottom: 0;
+
+  .q-field__control {
+    padding: 0 16px;
+    background: transparent;
+  }
+
+  .q-field__native,
+  .q-field__prepend,
+  .q-field__append {
+    color: rgba($light-text, 0.72);
+  }
+}
+
+.body--dark .release__search {
+  color: $dark-text;
+  background: $dark-bg;
+  border-color: $brand-border-color-dark;
+
+  .q-field__control {
+    background: transparent;
+  }
+
+  .q-field__native,
+  .q-field__prepend,
+  .q-field__append {
+    color: rgba($dark-text, 0.78);
+  }
+}
+
 .release__splitter {
   color: $light-text;
   background: $light-bg;
@@ -215,12 +210,30 @@ const currentReleaseBody = computed(() => {
     background: rgba($brand-primary, 0.28);
   }
 
+  .q-tabs,
+  .q-tabs__content,
+  .q-tab {
+    width: var(--release-list-width);
+    max-width: var(--release-list-width);
+    min-width: 0;
+    overflow: hidden;
+  }
+
   .q-scrollarea {
     height: 600px;
   }
 
   .q-tab {
     color: $light-text;
+    justify-content: flex-start;
+    padding-left: 24px;
+    text-align: left;
+  }
+
+  .q-tab__content {
+    align-items: flex-start;
+    max-width: calc(var(--release-list-width) - 48px);
+    overflow: hidden;
   }
 
   .q-tab small {
@@ -271,14 +284,33 @@ const currentReleaseBody = computed(() => {
 }
 
 .release__body {
-  white-space: pre-line;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
+
+  .release__heading {
+    margin: 24px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid $brand-border-color-light;
+    overflow-wrap: anywhere;
+  }
+
+  .release__heading:first-child {
+    margin-top: 0;
+  }
+
+  .release__rule {
+    height: 2px;
+    margin: 28px 0;
+    border: 0;
+    background: $brand-border-color-light;
+  }
 
   a.markdown-link {
     color: $brand-primary;
   }
 
-  .markdown-token,
-  .markdown--token {
+  .markdown-token {
     color: $brand-light-codeblock-text;
     background: $brand-light-codeblock-bg;
     border: 1px solid $brand-border-color-light;
@@ -292,13 +324,38 @@ const currentReleaseBody = computed(() => {
   }
 }
 
+.release__mobile {
+  color: $light-text;
+  background: $light-bg;
+}
+
+.release__mobile-select {
+  padding: 12px 12px 0;
+}
+
+.release__mobile-body {
+  min-width: 0;
+}
+
+.body--dark .release__mobile {
+  color: $dark-text;
+  background: $dark-bg;
+}
+
 .body--dark .release__body {
+  .release__heading {
+    border-bottom-color: $brand-border-color-dark;
+  }
+
+  .release__rule {
+    background: $brand-border-color-dark;
+  }
+
   a.markdown-link {
     color: $header-btn-color--dark;
   }
 
-  .markdown-token,
-  .markdown--token {
+  .markdown-token {
     color: $brand-dark-codeblock-text;
     background: $brand-dark-codeblock-bg;
     border-color: $brand-border-color-dark;
@@ -328,13 +385,47 @@ const currentReleaseBody = computed(() => {
   border-radius: $generic-border-radius;
 }
 
+.release__container {
+  margin: 16px 0;
+  padding: 12px 14px;
+  color: $light-text;
+  background: rgba($primary, 0.06);
+  border: 1px solid rgba($primary, 0.24);
+  border-left: 4px solid $primary;
+  border-radius: $generic-border-radius;
+}
+
+.body--dark .release__container {
+  color: $dark-text;
+  background: rgba($primary, 0.16);
+  border-color: rgba($primary, 0.4);
+  border-left-color: $primary;
+}
+
+.release__container-title {
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
 .release__code {
+  display: block;
+  white-space: pre;
+  overflow-x: auto;
   color: $brand-light-codeblock-text;
   background: $brand-light-codeblock-bg;
   border: 1px solid $brand-border-color-light;
   border-radius: $generic-border-radius;
-  padding: 4px;
-  margin: 8px;
+  padding: 12px;
+  margin: 12px 0 16px;
+
+  code {
+    display: block;
+    padding: 0;
+    color: inherit;
+    background: transparent;
+    border: 0;
+    font: inherit;
+  }
 }
 
 .body--dark .release__code {

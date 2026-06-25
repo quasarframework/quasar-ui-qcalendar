@@ -604,6 +604,8 @@ export default defineComponent({
       const columnIndexStart = parseInt(String(props.columnIndexStart), 10)
 
       if (days.value.length === 1 && columnCount > 0) {
+        const day = days.value[0]!
+
         return [
           isLeftColumnOptionsValid.value === true
             ? props.leftColumnOptions!.map((column: ColumnObject, index: number) =>
@@ -613,7 +615,7 @@ export default defineComponent({
 
           ...Array.apply(null, new Array(columnCount))
             .map((_, i) => i + columnIndexStart)
-            .map((columnIndex) => __renderHeadDay(days.value[0], columnIndex)),
+            .map((columnIndex) => __renderHeadDay(day, columnIndex)),
 
           isRightColumnOptionsValid.value === true
             ? props.rightColumnOptions!.map((column: ColumnObject, index: number) =>
@@ -643,10 +645,12 @@ export default defineComponent({
     function __renderHeadDaysEvents(): VNode[] {
       const columnCount = parseInt(String(props.columnCount), 10)
       if (days.value.length === 1 && columnCount > 0) {
+        const day = days.value[0]!
+
         return [
           ...Array.apply(null, new Array(parseInt(String(props.columnCount), 10)))
             .map((_, i) => i + columnCount)
-            .map((columnIndex) => __renderHeadDayEvent(days.value[0], columnIndex)),
+            .map((columnIndex) => __renderHeadDayEvent(day, columnIndex)),
         ]
       } else {
         return days.value.map((day) => __renderHeadDayEvent(day, 0))
@@ -856,17 +860,17 @@ export default defineComponent({
     }
 
     function __renderHeadWeekdayLabel(day: Timestamp, shortWeekdayLabel: boolean): VNode {
+      const [wideBreakpoint = 0, narrowBreakpoint = 0] = props.weekdayBreakpoints
       const weekdayLabel = weekdayFormatter.value(
         day,
-        shortWeekdayLabel ||
-          (props.weekdayBreakpoints[0] > 0 && parsedCellWidth.value <= props.weekdayBreakpoints[0]),
+        shortWeekdayLabel || (wideBreakpoint > 0 && parsedCellWidth.value <= wideBreakpoint),
       )
       return h(
         'span',
         {
           class: 'q-calendar__ellipsis',
         },
-        props.weekdayBreakpoints[1] > 0 && parsedCellWidth.value <= props.weekdayBreakpoints[1]
+        narrowBreakpoint > 0 && parsedCellWidth.value <= narrowBreakpoint
           ? minCharWidth(weekdayLabel, Number(props.minWeekdayLabel))
           : weekdayLabel,
       )
@@ -1025,6 +1029,8 @@ export default defineComponent({
       const columnIndexStart = parseInt(String(props.columnIndexStart), 10)
 
       if (days.value.length === 1 && columnCount > 0) {
+        const day = days.value[0]!
+
         return [
           isLeftColumnOptionsValid.value === true
             ? props.leftColumnOptions!.map((column: ColumnObject, index: number) =>
@@ -1034,7 +1040,7 @@ export default defineComponent({
 
           ...Array.apply(null, new Array(columnCount))
             .map((_, i) => i + columnIndexStart)
-            .map((i) => __renderDay(days.value[0], 0, i)),
+            .map((i) => __renderDay(day, 0, i)),
 
           isRightColumnOptionsValid.value === true
             ? props.rightColumnOptions!.map((column: ColumnObject, index: number) =>

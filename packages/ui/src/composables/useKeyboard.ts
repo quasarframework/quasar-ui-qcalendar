@@ -292,7 +292,7 @@ export default function useNavigation(
       return timestamp
     }
 
-    const [hour, minute] = time.split(':').map(Number)
+    const [hour = timestamp.hour, minute = timestamp.minute] = time.split(':').map(Number)
 
     return {
       ...timestamp,

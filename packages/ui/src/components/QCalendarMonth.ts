@@ -372,8 +372,8 @@ export default defineComponent({
     })
 
     watch(focusValue, () => {
-      if (datesRef.value[focusRef.value]) {
-        datesRef.value[focusRef.value].focus()
+      if (focusRef.value && datesRef.value[focusRef.value]) {
+        datesRef.value[focusRef.value]!.focus()
       } else {
         // if focusRef is not in the list of current dates of dateRef,
         // then assume month is changing
@@ -451,9 +451,9 @@ export default defineComponent({
     }
 
     function isCurrentWeek(week: Timestamp[]): { timestamp: Timestamp | false } {
-      for (let i = 0; i < week.length; ++i) {
-        if (week[i].current === true) {
-          return { timestamp: week[i] }
+      for (const timestamp of week) {
+        if (timestamp.current === true) {
+          return { timestamp }
         }
       }
       return { timestamp: false }
@@ -561,7 +561,7 @@ export default defineComponent({
       const headDaySlot = slots['head-day']
 
       const filteredDays = days.value.filter((day2) => day2.weekday === day.weekday)
-      const weekday = filteredDays[0].weekday
+      const weekday = day.weekday
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
       const scope: MonthHeadDaySlotScope = {
@@ -636,7 +636,7 @@ export default defineComponent({
       const headDayEventSlot = slots['head-day-event']
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
       const filteredDays = days.value.filter((day2) => day2.weekday === day.weekday)
-      const weekday = filteredDays[0].weekday
+      const weekday = day.weekday
 
       const scope = {
         weekday,
@@ -673,10 +673,10 @@ export default defineComponent({
     }
 
     function __renderHeadWeekdayLabel(day: Timestamp, shortWeekdayLabel: boolean): VNode {
+      const [wideBreakpoint = 0, narrowBreakpoint = 0] = props.weekdayBreakpoints
       const weekdayLabel = weekdayFormatter.value(
         day,
-        shortWeekdayLabel ||
-          (props.weekdayBreakpoints[0] > 0 && parsedCellWidth.value <= props.weekdayBreakpoints[0]),
+        shortWeekdayLabel || (wideBreakpoint > 0 && parsedCellWidth.value <= wideBreakpoint),
       )
       return h(
         'span',
@@ -684,7 +684,7 @@ export default defineComponent({
           class: 'q-calendar__ellipsis',
         },
         (isMiniMode.value === true && props.shortWeekdayLabel === true) ||
-          (props.weekdayBreakpoints[1] > 0 && parsedCellWidth.value <= props.weekdayBreakpoints[1])
+          (narrowBreakpoint > 0 && parsedCellWidth.value <= narrowBreakpoint)
           ? minCharWidth(weekdayLabel, Number(props.minWeekdayLabel))
           : weekdayLabel,
       )
@@ -709,6 +709,7 @@ export default defineComponent({
       // this applies height properly, even if workweeks are displaying
       const dayHeight = parseInt(String(props.dayHeight), 10)
       const dayMinHeight = parseInt(String(props.dayMinHeight), 10)
+      const firstDay = week[0]!
 
       style.height = dayHeight > 0 && isMiniMode.value !== true ? convertToUnit(dayHeight) : 'auto'
       if (dayMinHeight > 0 && isMiniMode.value !== true) {
@@ -719,7 +720,7 @@ export default defineComponent({
       return h(
         'div',
         {
-          key: week[0].date,
+          key: firstDay.date,
           ref: (el) => {
             weekRef.value[weekNum] = el as Element | null
           },
@@ -765,7 +766,7 @@ export default defineComponent({
     function __renderWorkWeekGutter(week: Timestamp[]): VNode {
       const slot = slots.workweek
       // adjust day to account for Sunday/Monday start of week calendars
-      const day = week.length > 2 ? week[2] : week[0]
+      const day = (week.length > 2 ? week[2] : week[0])!
       const { timestamp } = isCurrentWeek(week)
       const workweekLabel = Number(day.workweek).toLocaleString(props.locale)
       const scope: MonthWorkweekSlotScope = { workweekLabel, week, miniMode: isMiniMode.value }

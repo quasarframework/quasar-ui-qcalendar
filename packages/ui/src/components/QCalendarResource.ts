@@ -357,8 +357,8 @@ export default defineComponent({
     })
 
     watch(focusValue, () => {
-      if (datesRef.value[focusRef.value]) {
-        datesRef.value[focusRef.value].focus()
+      if (focusRef.value && datesRef.value[focusRef.value]) {
+        datesRef.value[focusRef.value]!.focus()
       } else {
         // if focusRef is not in the list of current dates of dateRef,
         // then assume month is changing

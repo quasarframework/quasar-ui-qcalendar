@@ -298,6 +298,10 @@ function parseForInlineCode(code: string) {
   })
 }
 
+function formatTokenValue(value: unknown): string {
+  return value === '' || value === "''" || value === '""' ? 'empty string ("")' : String(value)
+}
+
 /**
  * Generates detailed property information for API documentation.
  *
@@ -354,7 +358,7 @@ function getPropDetails(
         h(
           'div',
           { class: 'markdown-api-entry--indent markdown-api-entry__value' },
-          h('div', { class: 'markdown-token' }, '' + prop.default),
+          h('div', { class: 'markdown-token' }, formatTokenValue(prop.default)),
         ),
       ),
     )

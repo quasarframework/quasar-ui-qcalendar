@@ -23,12 +23,21 @@ type DocsViteBuildConfig = {
 
 type DocsViteConfig = {
   build?: DocsViteBuildConfig
+  resolve?: {
+    alias?:
+      | Array<{
+          find: string | RegExp
+          replacement: string
+        }>
+      | Record<string, string>
+  }
 }
 
 const configure: ConfigureCallback = async (ctx) => {
   // Dynamically import siteConfig
   const siteConfig = await import('./src/siteConfig')
   const { sidebar } = siteConfig.default
+  const uiDir = ctx.appPaths.appDir + '/../ui'
 
   return {
     // https://v2.quasar.dev/quasar-cli-vite/prefetch-feature
@@ -66,6 +75,16 @@ const configure: ConfigureCallback = async (ctx) => {
       typescript: {
         strict: true,
         vueShim: true,
+        extendTsConfig(tsConfig) {
+          tsConfig.compilerOptions ??= {}
+          tsConfig.compilerOptions.paths ??= {}
+          tsConfig.compilerOptions.paths['@quasar/quasar-ui-qcalendar'] = [
+            './../../ui/src/index.ts',
+          ]
+          tsConfig.compilerOptions.paths['@quasar/quasar-ui-qcalendar/dist/api/*'] = [
+            './../../ui/dist/api/*',
+          ]
+        },
       },
 
       vueRouterMode: 'history', // available values: 'hash', 'history'
@@ -85,6 +104,29 @@ const configure: ConfigureCallback = async (ctx) => {
       // distDir
 
       extendViteConf(viteConf: DocsViteConfig, { isClient }: { isClient: boolean }) {
+        const alias = viteConf.resolve?.alias
+        viteConf.resolve = viteConf.resolve || {}
+        viteConf.resolve.alias = [
+          ...(Array.isArray(alias)
+            ? alias
+            : Object.entries(alias ?? {}).map(([find, replacement]) => ({ find, replacement }))),
+          // Consume workspace source in docs so examples track local UI edits.
+          {
+            find: /^@quasar\/quasar-ui-qcalendar$/,
+            replacement: uiDir + '/src/index.ts',
+          },
+          // Keep API docs in Vite's local module graph during development.
+          {
+            find: /^@quasar\/quasar-ui-qcalendar\/dist\/api\/(.+)\.json$/,
+            replacement: uiDir + '/dist/api/$1.json',
+          },
+          // Consume source styles in docs so local UI style edits HMR.
+          {
+            find: /^@quasar\/quasar-ui-qcalendar\/(?:dist\/)?index(?:\.rtl)?(?:\.min)?\.css$/,
+            replacement: uiDir + '/src/index.scss',
+          },
+        ]
+
         if (ctx.prod && isClient) {
           viteConf.build = viteConf.build || {}
           viteConf.build.chunkSizeWarningLimit = 650
