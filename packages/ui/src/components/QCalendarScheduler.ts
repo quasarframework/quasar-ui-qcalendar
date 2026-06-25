@@ -42,6 +42,7 @@ import useCheckChange, { useCheckChangeEmits } from '../composables/useCheckChan
 import useEvents from '../composables/useEvents'
 import useKeyboard, { useNavigationProps } from '../composables/useKeyboard'
 import { getDragEventHandlers } from '../composables/useDragAndDrop'
+import useResourceDimensions from '../composables/useResourceDimensions'
 import type {
   HeadDayButtonSlotScope,
   QCalendarSchedulerSlots,
@@ -324,17 +325,7 @@ export default defineComponent({
       return 0
     })
 
-    const parsedResourceHeight = computed(() => {
-      const height = parseInt(String(props.resourceHeight), 10)
-      if (height === 0) {
-        return 'auto'
-      }
-      return height
-    })
-
-    const parsedResourceMinHeight = computed(() => {
-      return parseInt(String(props.resourceMinHeight), 10)
-    })
+    const { getResourceHeightStyle } = useResourceDimensions(props)
 
     const computedWidth = computed(() => {
       if (rootRef.value) {
@@ -1047,16 +1038,7 @@ export default defineComponent({
       expanded = true,
     ): VNode[] {
       const slotResourceRow = slots['resource-row']
-      const style: CSSProperties = {}
-      style.height =
-        resource.height !== void 0
-          ? convertToUnit(parseInt(resource.height, 10))
-          : parsedResourceHeight.value
-            ? convertToUnit(parsedResourceHeight.value)
-            : 'auto'
-      if (parsedResourceMinHeight.value > 0) {
-        style.minHeight = convertToUnit(parsedResourceMinHeight.value)
-      }
+      const style = getResourceHeightStyle(resource)
 
       const scope = { resource, resourceIndex, indentLevel, expanded }
 
@@ -1108,18 +1090,7 @@ export default defineComponent({
       expanded = true,
     ): VNode {
       const slotResourceLabel = slots['resource-label']
-      const resourceMinHeight = parseInt(String(props.resourceMinHeight), 10)
-
-      const style: CSSProperties = {}
-      style.height =
-        resource.height !== void 0
-          ? convertToUnit(parseInt(resource.height, 10))
-          : parsedResourceHeight.value
-            ? convertToUnit(parsedResourceHeight.value)
-            : 'auto'
-      if (resourceMinHeight > 0) {
-        style.minHeight = convertToUnit(resourceMinHeight)
-      }
+      const style = getResourceHeightStyle(resource)
       const styler = props.resourceStyle || styleDefault
       const label = resource[props.resourceLabel]
 
@@ -1242,14 +1213,7 @@ export default defineComponent({
         days: days.value, // deprecated
       }
 
-      const style: CSSProperties = {}
-      style.height =
-        parseInt(String(props.resourceHeight), 10) > 0
-          ? convertToUnit(parseInt(String(props.resourceHeight), 10))
-          : 'auto'
-      if (parseInt(String(props.resourceMinHeight), 10) > 0) {
-        style.minHeight = convertToUnit(parseInt(String(props.resourceMinHeight), 10))
-      }
+      const style = getResourceHeightStyle()
 
       const data: Record<string, any> = {
         class: 'q-calendar-scheduler__resource--days',
@@ -1318,13 +1282,7 @@ export default defineComponent({
         ...styler({ scope }),
         ...getDisabledStyle(day),
       }
-      style.height =
-        parseInt(String(props.resourceHeight), 10) > 0
-          ? convertToUnit(parseInt(String(props.resourceHeight), 10))
-          : 'auto'
-      if (parseInt(String(props.resourceMinHeight), 10) > 0) {
-        style.minHeight = convertToUnit(parseInt(String(props.resourceMinHeight), 10))
-      }
+      Object.assign(style, getResourceHeightStyle())
       const dayClass = typeof props.dayClass === 'function' ? props.dayClass({ scope }) : {}
       const isFocusable = isFocusableType(props, 'day', expanded)
 

@@ -44,6 +44,7 @@ import useCheckChange, { useCheckChangeEmits } from '../composables/useCheckChan
 import useEvents from '../composables/useEvents'
 import useKeyboard, { useNavigationProps } from '../composables/useKeyboard'
 import { getDragEventHandlers } from '../composables/useDragAndDrop'
+import useResourceDimensions from '../composables/useResourceDimensions'
 import type {
   IntervalLabelSlotScope,
   QCalendarResourceSlots,
@@ -305,17 +306,7 @@ export default defineComponent({
       times,
     })
 
-    const parsedResourceHeight = computed(() => {
-      const height = parseInt(String(props.resourceHeight), 10)
-      if (height === 0) {
-        return 'auto'
-      }
-      return height
-    })
-
-    const parsedResourceMinHeight = computed(() => {
-      return parseInt(String(props.resourceMinHeight), 10)
-    })
+    const { getResourceHeightStyle } = useResourceDimensions(props)
 
     const parsedIntervalHeaderHeight = computed(() => {
       return parseInt(String(props.intervalHeaderHeight), 10)
@@ -679,14 +670,7 @@ export default defineComponent({
       expanded = true,
     ): VNode | VNode[] {
       const slotResourceRow = slots['resource-row']
-      const style: CSSProperties = {}
-      style.height =
-        parsedResourceHeight.value === 'auto'
-          ? parsedResourceHeight.value
-          : convertToUnit(parsedResourceHeight.value)
-      if (parsedResourceMinHeight.value > 0) {
-        style.minHeight = convertToUnit(parsedResourceMinHeight.value)
-      }
+      const style = getResourceHeightStyle()
 
       const scope = { resource, resourceIndex, indentLevel, expanded }
 
@@ -739,16 +723,7 @@ export default defineComponent({
     ): VNode {
       const slotResourceLabel = slots['resource-label']
 
-      const style: CSSProperties = {}
-      style.height =
-        resource.height !== void 0
-          ? convertToUnit(parseInt(resource.height, 10))
-          : parsedResourceHeight.value
-            ? convertToUnit(parsedResourceHeight.value)
-            : 'auto'
-      if (parsedResourceMinHeight.value > 0) {
-        style.minHeight = convertToUnit(parsedResourceMinHeight.value)
-      }
+      const style = getResourceHeightStyle(resource)
       const styler = props.resourceStyle || styleDefault
       const label = resource[props.resourceLabel]
 
@@ -908,15 +883,7 @@ export default defineComponent({
         ...styler({ scope }),
         ...getDisabledStyle(interval),
       }
-      style.height =
-        resource.height !== void 0
-          ? convertToUnit(parseInt(resource.height, 10))
-          : parsedResourceHeight.value === 'auto'
-            ? parsedResourceHeight.value
-            : convertToUnit(parsedResourceHeight.value)
-      if (parsedResourceMinHeight.value > 0) {
-        style.minHeight = convertToUnit(parsedResourceMinHeight.value)
-      }
+      Object.assign(style, getResourceHeightStyle(resource))
 
       return h(
         'div',
