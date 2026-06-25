@@ -23,7 +23,7 @@ import { convertToUnit, getResponsiveWeekdayLabel } from '../utils/helpers'
 import useMouse, { getRawMouseEvents } from '../composables/useMouse'
 
 import useCalendar from '../composables/useCalendar'
-import useCommon, { useCommonProps, CommonProps } from '../composables/useCommon'
+import useCommon, { isFocusableType, useCommonProps, CommonProps } from '../composables/useCommon'
 import useTask, { useTaskProps, type Task } from '../composables/useTask'
 import { useMaxDaysProps } from '../composables/useMaxDays'
 import useTimes, { useTimesProps } from '../composables/useTimes'
@@ -300,21 +300,13 @@ export default defineComponent({
       return 150 // default when not specified
     })
 
-    const isDayFocusable = computed(() => {
-      return props.focusable === true && props.focusType.includes('day')
-    })
+    const isDayFocusable = computed(() => isFocusableType(props, 'day'))
 
     const isDateFocusable = computed(() => {
-      return (
-        props.focusable === true &&
-        props.focusType.includes('date') &&
-        isDayFocusable.value !== true
-      )
+      return isFocusableType(props, 'date', isDayFocusable.value !== true)
     })
 
-    const isWeekdayFocusable = computed(() => {
-      return props.focusable === true && props.focusType.includes('weekday')
-    })
+    const isWeekdayFocusable = computed(() => isFocusableType(props, 'weekday'))
 
     const parsedHeight = computed(() => {
       return parseInt(String(props.dayHeight), 10)
@@ -542,7 +534,7 @@ export default defineComponent({
         maxWidth: width,
       }
 
-      const isFocusable = props.focusable === true && props.focusType.includes('task')
+      const isFocusable = isFocusableType(props, 'task')
 
       return h(
         'div',
@@ -785,7 +777,7 @@ export default defineComponent({
     }
 
     function __renderFooterRows(): VNode[] {
-      const isFocusable = props.focusable === true && props.focusType.includes('task')
+      const isFocusable = isFocusableType(props, 'task')
 
       return props.modelFooter.map((task, index) => {
         return h(
@@ -1106,7 +1098,7 @@ export default defineComponent({
       }
 
       const dayClass = typeof props.dayClass === 'function' ? props.dayClass({ scope }) : {}
-      const isFocusable = props.focusable === true && props.focusType.includes('day')
+      const isFocusable = isFocusableType(props, 'day')
 
       return h(
         'div',

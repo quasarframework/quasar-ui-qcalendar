@@ -24,7 +24,7 @@ import { convertToUnit } from '../utils/helpers'
 
 // Composables
 import useCalendar from '../composables/useCalendar'
-import useCommon, { useCommonProps } from '../composables/useCommon'
+import useCommon, { isFocusableType, useCommonProps } from '../composables/useCommon'
 import useInterval, {
   useIntervalProps,
   useResourceProps,
@@ -566,7 +566,7 @@ export default defineComponent({
 
       const intervalClass =
         typeof props.intervalClass === 'function' ? props.intervalClass({ scope }) : {}
-      const isFocusable = props.focusable === true && props.focusType.includes('interval')
+      const isFocusable = isFocusableType(props, 'interval')
 
       return h(
         'div',
@@ -752,8 +752,7 @@ export default defineComponent({
       const styler = props.resourceStyle || styleDefault
       const label = resource[props.resourceLabel]
 
-      const isFocusable =
-        props.focusable === true && props.focusType.includes('resource') && expanded === true
+      const isFocusable = isFocusableType(props, 'resource', expanded)
       const dragValue = resource[props.resourceKey]
 
       const scope: ResourceLabelSlotScope = {
@@ -890,7 +889,7 @@ export default defineComponent({
       const activeDate = props.noActiveDate !== true && __isActiveDate(interval)
       const resourceKey = resource[props.resourceKey]
       const dragValue = interval.time + '-' + resourceKey
-      const isFocusable = props.focusable === true && props.focusType.includes('time')
+      const isFocusable = isFocusableType(props, 'time')
 
       const scope = {
         activeDate,

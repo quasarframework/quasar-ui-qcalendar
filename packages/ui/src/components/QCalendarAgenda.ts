@@ -25,7 +25,11 @@ import { convertToUnit, getResponsiveWeekdayLabel } from '../utils/helpers'
 
 // Composables
 import useCalendar from '../composables/useCalendar'
-import useCommon, { useCommonProps, type CommonProps } from '../composables/useCommon'
+import useCommon, {
+  isFocusableType,
+  useCommonProps,
+  type CommonProps,
+} from '../composables/useCommon'
 import { useAgendaProps, type AgendaProps } from '../composables/useInterval'
 import useCalendarDays from '../composables/useCalendarDays'
 import {
@@ -427,7 +431,7 @@ export default defineComponent({
       const slot = slots['head-column']
       const scope: AgendaHeadColumnSlotScope = { column, index, days: days.value }
       const width = isSticky.value === true ? props.cellWidth : computedWidth.value
-      const isFocusable = props.focusable === true && props.focusType.includes('weekday')
+      const isFocusable = isFocusableType(props, 'weekday')
       const id =
         props.columnOptionsId !== undefined
           ? (column[props.columnOptionsId as keyof ColumnObject] as string)
@@ -679,7 +683,7 @@ export default defineComponent({
       }
       const weekdayClass =
         typeof props.weekdayClass === 'function' ? props.weekdayClass({ scope }) : {}
-      const isFocusable = props.focusable === true && props.focusType.includes('weekday')
+      const isFocusable = isFocusableType(props, 'weekday')
 
       const data: Record<string, any> = {
         key: day.date + (columnIndex !== undefined ? '-' + columnIndex : ''),
@@ -1068,7 +1072,7 @@ export default defineComponent({
       const slot = slots.column
       const scope: AgendaColumnSlotScope = { column, days: days.value, index }
       const width = isSticky.value === true ? props.cellWidth : computedWidth.value
-      const isFocusable = props.focusable === true && props.focusType.includes('day')
+      const isFocusable = isFocusableType(props, 'day')
       const id = props.columnOptionsId !== undefined ? column[props.columnOptionsId] : undefined
 
       return h(

@@ -51,10 +51,20 @@ export interface CommonProps {
   focusType: ('day' | 'date' | 'weekday' | 'interval' | 'time' | 'resource' | 'task')[]
 }
 
+export type FocusType = CommonProps['focusType'][number]
+
 const isValidFocusType = (v: string[]): boolean =>
   v.every((type) =>
     ['day', 'date', 'weekday', 'interval', 'time', 'resource', 'task'].includes(type),
   )
+
+export function isFocusableType(
+  props: Pick<CommonProps, 'focusable' | 'focusType'>,
+  type: FocusType,
+  enabled = true,
+): boolean {
+  return enabled === true && props.focusable === true && props.focusType.includes(type)
+}
 
 export const isValidWeekdays = (v: unknown): boolean =>
   Array.isArray(v) === true &&

@@ -25,7 +25,7 @@ import { convertToUnit, getResponsiveWeekdayLabel } from '../utils/helpers'
 
 // Composables
 import useCalendar from '../composables/useCalendar'
-import useCommon, { useCommonProps } from '../composables/useCommon'
+import useCommon, { isFocusableType, useCommonProps } from '../composables/useCommon'
 import { useSchedulerProps, type Resource } from '../composables/useInterval'
 import useCalendarDays from '../composables/useCalendarDays'
 import { getColumnIndexes, useColumnProps } from '../composables/useColumn'
@@ -643,7 +643,7 @@ export default defineComponent({
       }
       const weekdayClass =
         typeof props.weekdayClass === 'function' ? props.weekdayClass({ scope }) : {}
-      const isFocusable = props.focusable === true && props.focusType.includes('weekday')
+      const isFocusable = isFocusableType(props, 'weekday')
       const key = day.date + (columnIndex !== undefined ? '-' + columnIndex : '')
 
       const data: Record<string, any> = {
@@ -1123,8 +1123,7 @@ export default defineComponent({
       const styler = props.resourceStyle || styleDefault
       const label = resource[props.resourceLabel]
 
-      const isFocusable =
-        props.focusable === true && props.focusType.includes('resource') && expanded === true
+      const isFocusable = isFocusableType(props, 'resource', expanded)
       const dragValue = resource[props.resourceKey]
 
       const scope: ResourceLabelSlotScope = {
@@ -1327,8 +1326,7 @@ export default defineComponent({
         style.minHeight = convertToUnit(parseInt(String(props.resourceMinHeight), 10))
       }
       const dayClass = typeof props.dayClass === 'function' ? props.dayClass({ scope }) : {}
-      const isFocusable =
-        props.focusable === true && props.focusType.includes('day') && expanded === true
+      const isFocusable = isFocusableType(props, 'day', expanded)
 
       return h(
         'div',

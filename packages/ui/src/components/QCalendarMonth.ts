@@ -25,7 +25,7 @@ import { convertToUnit, getResponsiveWeekdayLabel } from '../utils/helpers'
 import useMouse, { getRawMouseEvents } from '../composables/useMouse'
 
 import useCalendar from '../composables/useCalendar'
-import useCommon, { useCommonProps } from '../composables/useCommon'
+import useCommon, { isFocusableType, useCommonProps } from '../composables/useCommon'
 import useMonth, { useMonthProps } from '../composables/useMonth'
 // import { useMaxDaysProps } from '../composables/useMaxDays'
 import useTimes, { useTimesProps } from '../composables/useTimes'
@@ -317,18 +317,10 @@ export default defineComponent({
       return 100 / parsedColumnCount.value + '%'
     })
 
-    const isDayFocusable = computed(() => {
-      return (
-        props.focusable === true && props.focusType.includes('day') && isMiniMode.value !== true
-      )
-    })
+    const isDayFocusable = computed(() => isFocusableType(props, 'day', isMiniMode.value !== true))
 
     const isDateFocusable = computed(() => {
-      return (
-        props.focusable === true &&
-        props.focusType.includes('date') &&
-        isDayFocusable.value !== true
-      )
+      return isFocusableType(props, 'date', isDayFocusable.value !== true)
     })
 
     watch([days], checkChange, { deep: true, immediate: true })
@@ -566,7 +558,7 @@ export default defineComponent({
 
       const weekdayClass =
         typeof props.weekdayClass === 'function' ? props.weekdayClass({ scope }) : {}
-      const isFocusable = props.focusable === true && props.focusType.includes('weekday')
+      const isFocusable = isFocusableType(props, 'weekday')
 
       const width = computedWidth.value
       const styler = props.weekdayStyle || dayStyleDefault

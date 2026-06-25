@@ -33,7 +33,7 @@ import { convertToUnit, getResponsiveWeekdayLabel } from '../utils/helpers'
 
 // Composables
 import useCalendar from '../composables/useCalendar'
-import useCommon, { useCommonProps } from '../composables/useCommon'
+import useCommon, { isFocusableType, useCommonProps } from '../composables/useCommon'
 import useInterval, { useIntervalProps, IntervalProps } from '../composables/useInterval'
 import { getColumnIndexes, useColumnProps } from '../composables/useColumn'
 import { useMaxDaysProps } from '../composables/useMaxDays'
@@ -655,7 +655,7 @@ export default defineComponent({
       }
       const weekdayClass =
         typeof props.weekdayClass === 'function' ? props.weekdayClass({ scope }) : {}
-      const isFocusable = props.focusable === true && props.focusType.includes('weekday')
+      const isFocusable = isFocusableType(props, 'weekday')
       const key = day.date + (columnIndex !== undefined ? '-' + columnIndex : '')
 
       const data: Record<string, any> = {
@@ -1104,7 +1104,7 @@ export default defineComponent({
 
       const intervalClass =
         typeof props.intervalClass === 'function' ? props.intervalClass({ scope }) : {}
-      const isFocusable = props.focusable === true && props.focusType.includes('interval')
+      const isFocusable = isFocusableType(props, 'interval')
       const dateTime = getDateTime(interval)
 
       const style: CSSProperties = {
