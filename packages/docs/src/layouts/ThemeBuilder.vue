@@ -179,13 +179,15 @@ const currentName = ref('')
 const currentStyle = ref('')
 // const defaultColor = ref('')
 // const currentColor = ref('')
-// const borderSize = ref('')
-// const borderColor = ref('')
-// const borderType = ref('')
+const cssColorPattern = /^(#|(rgb|hsl)a?\()/
+
+function hasColorToken(value: string) {
+  return value.split(/\s+/).some((part) => cssColorPattern.test(part))
+}
 
 function showBox(name: string, value: string) {
   return (
-    value.match(/^(#|(rgb|hsl)a?\()/) &&
+    hasColorToken(value) &&
     (name.indexOf('color') > -1 ||
       name.indexOf('background') > -1 ||
       name.indexOf('border') > -1 ||

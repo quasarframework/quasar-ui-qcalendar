@@ -8,14 +8,7 @@
         <div class="full-width text-caption q-pb-lg theme-editor__label">
           <strong>Border Width</strong>
         </div>
-        <q-slider
-          v-model="editorSize"
-          :min="1"
-          :max="5"
-          label
-          label-always
-          class="fill-width"
-        />
+        <q-slider v-model="editorSize" :min="1" :max="5" label label-always class="fill-width" />
         <q-separator class="q-mb-sm" />
       </div>
 
@@ -47,12 +40,7 @@
       </div>
 
       <div class="row justify-center">
-        <q-input
-          v-if="isValue"
-          v-model="editorValue"
-          :dark="isDarkMode"
-          label="Edit css value"
-        />
+        <q-input v-if="isValue" v-model="editorValue" :dark="isDarkMode" label="Edit css value" />
       </div>
 
       <div class="row justify-center">
@@ -105,6 +93,11 @@ const $q = useQuasar()
 const hints = computed(() => store.hints)
 const hint = computed(() => (props.itemName ? hints.value[props.itemName] : ''))
 const isDarkMode = computed(() => $q.dark.isActive)
+const cssColorPattern = /^(#|(rgb|hsl)a?\()/
+
+function findColorToken(value: string) {
+  return value.split(/\s+/).find((part) => cssColorPattern.test(part))
+}
 
 const classes = computed(() => ({
   'theme-editor column items-center q-pa-md': true,
@@ -113,21 +106,28 @@ const classes = computed(() => ({
 }))
 
 const currentStyle = computed(() => {
-  let style = ''
-  if (editorValue.value !== undefined) {
-    style += editorValue.value
-  } else {
-    if (editorColor.value) style += editorColor.value
-    if (editorSize.value && !isNaN(editorSize.value)) style += ` ${editorSize.value}px`
-    if (editorType.value) style += ` ${editorType.value}`
+  if (isValue.value === true) {
+    return editorValue.value ?? ''
   }
-  return style
+
+  const parts: string[] = []
+
+  if (editorColor.value !== undefined) {
+    parts.push(editorColor.value)
+  }
+  if (editorSize.value !== undefined && !isNaN(editorSize.value)) {
+    parts.push(`${editorSize.value}px`)
+  }
+  if (editorType.value !== undefined) {
+    parts.push(editorType.value)
+  }
+
+  return parts.join(' ')
 })
 
 const currentColor = computed(() => {
   if (!props.itemStyle) return
-  const parts = props.itemStyle.split(' ')
-  return parts.find((part) => /^(#|(rgb|hsl)a?\()/.test(part))
+  return findColorToken(props.itemStyle)
 })
 
 const currentBorderType = computed(() => {
@@ -144,13 +144,14 @@ const currentBorderSize = computed(() => {
 })
 
 const isValue = computed(() => {
-  return props.itemName && !currentBorderType.value && !currentColor.value
+  return Boolean(props.itemName) && !currentBorderType.value && !currentColor.value
 })
 
 const colorPalette = computed(() => {
   const uniqueColors = new Set<string>()
   Object.entries(styleCopy.value).forEach(([_name, value]) => {
-    if (value.match(/^(#|(rgb|hsl)a?\()/)) uniqueColors.add(value.toLowerCase())
+    const color = findColorToken(value)
+    if (color !== undefined) uniqueColors.add(color.toLowerCase())
   })
   return Array.from(uniqueColors).sort((a, b) => brightness(b) - brightness(a))
 })
@@ -159,7 +160,7 @@ const updateEditor = () => {
   editorSize.value = currentBorderSize.value
   editorType.value = currentBorderType.value
   editorColor.value = currentColor.value
-  editorValue.value = props.itemStyle
+  editorValue.value = isValue.value === true ? props.itemStyle : undefined
   if (itemNameOrig.value !== props.itemName) {
     itemNameOrig.value = props.itemName
     itemStyleOrig.value = props.itemStyle
