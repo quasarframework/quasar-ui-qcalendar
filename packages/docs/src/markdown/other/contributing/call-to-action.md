@@ -24,4 +24,4 @@ Each calendar component has an associated JSON API file. Several are still missi
 
 ### Examples
 
-A lot of the examples (in the `examples` folder) have been converted to Vue Composition API, and better yet, to use `<script setup lang="ts">`. Yet, there remains a lot using the Vue Options API. It's preferable to convert these latter ones to the Vue Composition API. And, if you are not quite familiar with the Vue Composition API, this will give you hands-on experience. Just look at another example that has been converted and extrapolate.
+The examples now use Vue Composition API with `<script setup lang="ts">`. Additional help is still welcome for tightening examples, adding interaction coverage, and keeping new examples aligned with the existing Composition API style.
