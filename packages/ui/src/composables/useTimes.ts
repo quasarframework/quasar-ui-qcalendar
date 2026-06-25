@@ -11,7 +11,11 @@ import {
  * export of useTimesProps
  */
 export const useTimesProps = {
-  /** Current timestamp override used for deterministic current-time rendering. */
+  /**
+   * Current timestamp override used for deterministic current-time rendering.
+   *
+   * @category behavior
+   */
   now: {
     type: String,
     validator: (v: string): boolean => v === '' || validateTimestamp(v),

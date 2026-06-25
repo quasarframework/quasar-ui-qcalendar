@@ -22,111 +22,191 @@ export interface Task {
 }
 
 export const useTaskProps = {
-  /** Date value used by `v-model`, formatted as `YYYY-MM-DD`. */
+  /**
+   * Date value used by `v-model`, formatted as `YYYY-MM-DD`.
+   *
+   * @category model
+   */
   modelValue: {
     type: String,
     default: today(),
     validator: (v: string): boolean => v === '' || validateTimestamp(v),
   },
-  /** Task rows rendered by the task view. */
+  /**
+   * Task rows rendered by the task view.
+   *
+   * @category model
+   */
   modelTasks: {
     type: Array as () => Array<any>,
     default: (): any[] => [],
   },
-  /** Title rows rendered above task rows. */
+  /**
+   * Title rows rendered above task rows.
+   *
+   * @category model
+   */
   modelTitle: {
     type: Array as () => Array<any>,
     default: (): any[] => [],
   },
-  /** Footer rows rendered below task rows. */
+  /**
+   * Footer rows rendered below task rows.
+   *
+   * @category model
+   */
   modelFooter: {
     type: Array as () => Array<any>,
     default: (): any[] => [],
   },
-  /** Task field used as the unique key. */
+  /**
+   * Task field used as the unique key.
+   *
+   * @category model
+   */
   taskKey: {
     type: [String, Number] as PropType<string | number>,
     default: 'id',
   },
-  /** Weekday indexes shown by the task view, where `0` is Sunday and `6` is Saturday. */
+  /**
+   * Weekday indexes shown by the task view, where `0` is Sunday and `6` is Saturday.
+   *
+   * @category display
+   */
   weekdays: {
     type: Array as PropType<number[]>,
     default: (): number[] => [0, 1, 2, 3, 4, 5, 6],
     validator: isValidWeekdays,
   },
-  /** Shape used for rendered date buttons. */
+  /**
+   * Shape used for rendered date buttons.
+   *
+   * @category style
+   */
   dateType: {
     type: String as () => 'round' | 'rounded' | 'square',
     default: 'round',
     validator: (v: string): boolean => ['round', 'rounded', 'square'].includes(v),
   },
-  /** Header layout used for date labels. */
+  /**
+   * Header layout used for date labels.
+   *
+   * @category display
+   */
   dateHeader: {
     type: String as () => 'stacked' | 'inline' | 'inverted',
     default: 'stacked',
     validator: (v: string): boolean => ['stacked', 'inline', 'inverted'].includes(v),
   },
-  /** Horizontal alignment for weekday labels. */
+  /**
+   * Horizontal alignment for weekday labels.
+   *
+   * @category style
+   */
   weekdayAlign: {
     type: String as () => 'left' | 'center' | 'right',
     default: 'center',
     validator: (v: string): boolean => ['left', 'center', 'right'].includes(v),
   },
-  /** Horizontal alignment for date labels. */
+  /**
+   * Horizontal alignment for date labels.
+   *
+   * @category style
+   */
   dateAlign: {
     type: String as () => 'left' | 'center' | 'right',
     default: 'center',
     validator: (v: string): boolean => ['left', 'center', 'right'].includes(v),
   },
-  /** Height in pixels or CSS units for each task day cell. */
+  /**
+   * Height in pixels or CSS units for each model day cell.
+   *
+   * @category layout
+   */
   dayHeight: {
     type: [Number, String],
     default: 0,
     validator: validateNumber,
   },
-  /** Minimum height in pixels or CSS units for each task day cell. */
+  /**
+   * Minimum height in pixels or CSS units for each model day cell.
+   *
+   * @category layout
+   */
   dayMinHeight: {
     type: [Number, String],
     default: 40,
     validator: validateNumber,
   },
-  /** Function that returns inline styles for weekday header cells. */
+  /**
+   * Function that returns inline styles for weekday header cells.
+   *
+   * @category style
+   */
   weekdayStyle: {
     type: Function,
     default: null,
   },
-  /** Function that returns CSS classes for weekday header cells. */
+  /**
+   * Function that returns CSS classes for weekday header cells.
+   *
+   * @category style
+   */
   weekdayClass: {
     type: Function,
     default: null,
   },
-  /** Function that returns inline styles for task day cells. */
+  /**
+   * Function that returns inline styles for model day cells.
+   *
+   * @category style
+   */
   dayStyle: {
     type: Function,
     default: null,
   },
-  /** Function that returns CSS classes for task day cells. */
+  /**
+   * Function that returns CSS classes for model day cells.
+   *
+   * @category style
+   */
   dayClass: {
     type: Function,
     default: null,
   },
-  /** Function that returns CSS classes for footer day cells. */
+  /**
+   * Function that returns CSS classes for footer day cells.
+   *
+   * @category style
+   */
   footerDayClass: {
     type: Function,
     default: null,
   },
-  /** Task view mode. */
+  /**
+   * Task view mode.
+   *
+   * @category display
+   */
   view: {
     type: String as () => 'day' | 'week' | 'month',
     validator: (v: string): boolean => ['day', 'week', 'month'].includes(v),
   },
-  /** Number of task view ranges rendered from the model value. */
+  /**
+   * Number of task view ranges rendered from the model value.
+   *
+   * @category display
+   */
   viewCount: {
     type: Number,
     default: 1,
     validator: (v: number): boolean => validateNumber(v) && v > 0,
   },
-  /** Width in pixels for the task label column. */
+  /**
+   * Width in pixels for the task label column.
+   *
+   * @category layout
+   */
   taskWidth: {
     type: Number,
     default: 200,

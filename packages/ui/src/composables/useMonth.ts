@@ -39,63 +39,135 @@ export interface MonthProps {
 
 // Define prop types with validators
 export const useMonthProps = {
-  /** Height in pixels or CSS units for each month day cell. */
+  /**
+   * Height in pixels or CSS units for each month day cell.
+   *
+   * @category layout
+   */
   dayHeight: {
     type: [Number, String],
     default: 0,
     validator: (v: any): boolean => validateNumber(v),
   },
-  /** Minimum height in pixels or CSS units for each month day cell. */
+  /**
+   * Minimum height in pixels or CSS units for each month day cell.
+   *
+   * @category layout
+   */
   dayMinHeight: {
     type: [Number, String],
     default: 0,
     validator: (v: any): boolean => validateNumber(v),
   },
-  /** Function that returns inline styles for month day cells. */
+  /**
+   * Function that returns inline styles for month day cells.
+   *
+   * @category style
+   */
   dayStyle: Function as PropType<MonthProps['dayStyle']>,
-  /** Function that returns CSS classes for month day cells. */
+  /**
+   * Function that returns CSS classes for month day cells.
+   *
+   * @category style
+   */
   dayClass: Function as PropType<MonthProps['dayClass']>,
-  /** Function that returns inline styles for weekday header cells. */
+  /**
+   * Function that returns inline styles for weekday header cells.
+   *
+   * @category style
+   */
   weekdayStyle: Function as PropType<MonthProps['weekdayStyle']>,
-  /** Function that returns CSS classes for weekday header cells. */
+  /**
+   * Function that returns CSS classes for weekday header cells.
+   *
+   * @category style
+   */
   weekdayClass: Function as PropType<MonthProps['weekdayClass']>,
-  /** Padding applied inside month day cells. */
+  /**
+   * Padding applied inside month day cells.
+   *
+   * @category layout
+   */
   dayPadding: String,
-  /** Minimum number of weeks rendered by the month view. */
+  /**
+   * Minimum number of weeks rendered by the month display.
+   *
+   * @category layout
+   */
   minWeeks: {
     type: [Number, String],
     default: 1,
     validator: (v: any): boolean => validateNumber(v),
   },
-  /** Uses shortened month labels. */
+  /**
+   * Uses shortened month labels.
+   *
+   * @category display
+   */
   shortMonthLabel: Boolean,
-  /** Shows ISO work week labels. */
+  /**
+   * Shows ISO work week labels.
+   *
+   * @category display
+   */
   showWorkWeeks: Boolean,
-  /** Shows the month label. */
+  /**
+   * Shows the month label.
+   *
+   * @category display
+   */
   showMonthLabel: {
     type: Boolean,
     default: true,
   },
-  /** Shows the day-of-year label for each day. */
+  /**
+   * Shows the day-of-year label for each day.
+   *
+   * @category display
+   */
   showDayOfYearLabel: Boolean,
-  /** Enables rendering days outside the active month. */
+  /**
+   * Enables rendering days outside the active month.
+   *
+   * @category display
+   */
   enableOutsideDays: Boolean,
-  /** Hides days outside the active month. */
+  /**
+   * Hides days outside the active month.
+   *
+   * @category display
+   */
   noOutsideDays: Boolean,
-  /** Enables hover state tracking for month day cells. */
+  /**
+   * Enables hover behavior tracking for month day cells.
+   *
+   * @category behavior
+   */
   hover: Boolean,
-  /** Forces mini mode or lets mini mode follow the configured breakpoint. */
+  /**
+   * Forces mini mode or lets mini mode follow the configured breakpoint.
+   *
+   * @category layout
+   */
   miniMode: {
     type: [Boolean, String] as PropType<MonthProps['miniMode']>,
     validator: (v: any): boolean => [true, false, 'auto'].includes(v),
   },
-  /** Breakpoint used when `mini-mode` is set to `auto`. */
+  /**
+   * Breakpoint used when `mini-mode` is set to `auto`.
+   *
+   * @category layout
+   */
   breakpoint: {
     type: [Number, String],
     default: 'md',
     validator: (v: any): boolean => ['xs', 'sm', 'md', 'lg', 'xl'].includes(v) || validateNumber(v),
   },
-  /** Size token used for month labels. */
+  /**
+   * Size token used for month labels.
+   *
+   * @category style
+   */
   monthLabelSize: {
     type: String,
     default: 'sm',

@@ -66,68 +66,124 @@ export interface IntervalProps
 }
 
 export const useIntervalProps = {
-  /** Calendar interval view mode. */
+  /**
+   * Calendar interval view mode.
+   *
+   * @category display
+   */
   view: {
     type: String as PropType<IntervalProps['view']>,
     validator: (v: string) => ['day', 'week', 'month', 'month-interval'].includes(v),
     default: 'day',
   },
-  /** Uses shortened interval labels where possible. */
+  /**
+   * Uses shortened interval labels where possible.
+   *
+   * @category display
+   */
   shortIntervalLabel: Boolean,
-  /** Height in pixels or CSS units for each time interval. */
+  /**
+   * Height in pixels or CSS units for each time interval.
+   *
+   * @category layout
+   */
   intervalHeight: {
     type: [Number, String] as PropType<IntervalProps['intervalHeight']>,
     default: 40,
     validator: validateNumber,
   },
-  /** Number of minutes represented by each interval. */
+  /**
+   * Number of minutes represented by each interval.
+   *
+   * @category layout
+   */
   intervalMinutes: {
     type: [Number, String] as PropType<IntervalProps['intervalMinutes']>,
     default: 60,
     validator: validateNumber,
   },
-  /** Starting interval hour. */
+  /**
+   * Starting interval hour.
+   *
+   * @category layout
+   */
   intervalStart: {
     type: [Number, String] as PropType<IntervalProps['intervalStart']>,
     default: 0,
     validator: validateNumber,
   },
-  /** Number of intervals rendered in the day. */
+  /**
+   * Number of intervals rendered in the day.
+   *
+   * @category layout
+   */
   intervalCount: {
     type: [Number, String] as PropType<IntervalProps['intervalCount']>,
     default: 24,
     validator: validateNumber,
   },
-  /** Function that returns inline styles for interval cells. */
+  /**
+   * Function that returns inline styles for interval cells.
+   *
+   * @category style
+   */
   intervalStyle: {
     type: Function as PropType<IntervalProps['intervalStyle']>,
     default: null,
   },
-  /** Function that returns CSS classes for interval cells. */
+  /**
+   * Function that returns CSS classes for interval cells.
+   *
+   * @category style
+   */
   intervalClass: {
     type: Function as PropType<IntervalProps['intervalClass']>,
     default: null,
   },
-  /** Function that returns inline styles for weekday header cells. */
+  /**
+   * Function that returns inline styles for weekday header cells.
+   *
+   * @category style
+   */
   weekdayStyle: {
     type: Function as PropType<IntervalProps['weekdayStyle']>,
     default: null,
   },
-  /** Function that returns CSS classes for weekday header cells. */
+  /**
+   * Function that returns CSS classes for weekday header cells.
+   *
+   * @category style
+   */
   weekdayClass: {
     type: Function as PropType<IntervalProps['weekdayClass']>,
     default: null,
   },
-  /** Function that controls whether an interval label is shown. */
+  /**
+   * Function that controls whether an interval label is shown.
+   *
+   * @category display
+   */
   showIntervalLabel: {
     type: Function as PropType<IntervalProps['showIntervalLabel']>,
     default: null,
   },
-  /** Uses 24-hour time labels. */
+  /**
+   * Uses 24-hour time labels.
+   *
+   * @category display
+   */
   hour24Format: Boolean,
-  /** Clamps time click calculations to interval boundaries. */
+  /**
+   * Clamps time click calculations to interval boundaries.
+   *
+   * @category behavior
+   */
   timeClicksClamped: Boolean,
-  /** Header layout used for date labels. */
+  /**
+   * Header layout used for date labels.
+   *
+   * @category display
+   */
   dateHeader: {
     type: String as PropType<IntervalProps['dateHeader']>,
     default: 'stacked',
@@ -152,69 +208,121 @@ export interface SchedulerProps {
 }
 
 export const useSchedulerProps = {
-  /** Scheduler view mode. */
+  /**
+   * Scheduler view mode.
+   *
+   * @category display
+   */
   view: {
     type: String as PropType<SchedulerProps['view']>,
     validator: (v: string) => ['day', 'week', 'month', 'month-interval'].includes(v),
     default: 'day',
   },
-  /** Resources rendered by the scheduler. */
+  /**
+   * Resources rendered by the scheduler.
+   *
+   * @category model
+   */
   modelResources: {
     type: Array as PropType<SchedulerProps['modelResources']>,
   },
-  /** Resource field used as the unique key. */
+  /**
+   * Resource field used as the unique key.
+   *
+   * @category model
+   */
   resourceKey: {
     type: String as PropType<SchedulerProps['resourceKey']>,
     default: 'id',
   },
-  /** Resource field used as the display label. */
+  /**
+   * Resource field used as the display label.
+   *
+   * @category model
+   */
   resourceLabel: {
     type: String as PropType<SchedulerProps['resourceLabel']>,
     default: 'label',
   },
-  /** Height in pixels or CSS units for each resource row. */
+  /**
+   * Height in pixels or CSS units for each resource row.
+   *
+   * @category layout
+   */
   resourceHeight: {
     type: [Number, String] as PropType<SchedulerProps['resourceHeight']>,
     default: 0,
     validator: validateNumber,
   },
-  /** Minimum height in pixels or CSS units for each resource row. */
+  /**
+   * Minimum height in pixels or CSS units for each resource row.
+   *
+   * @category layout
+   */
   resourceMinHeight: {
     type: [Number, String] as PropType<SchedulerProps['resourceMinHeight']>,
     default: 70,
     validator: validateNumber,
   },
-  /** Function that returns inline styles for resource rows. */
+  /**
+   * Function that returns inline styles for resource rows.
+   *
+   * @category style
+   */
   resourceStyle: {
     type: Function as PropType<SchedulerProps['resourceStyle']>,
     default: null,
   },
-  /** Function that returns CSS classes for resource rows. */
+  /**
+   * Function that returns CSS classes for resource rows.
+   *
+   * @category style
+   */
   resourceClass: {
     type: Function as PropType<SchedulerProps['resourceClass']>,
     default: null,
   },
-  /** Function that returns inline styles for weekday header cells. */
+  /**
+   * Function that returns inline styles for weekday header cells.
+   *
+   * @category style
+   */
   weekdayStyle: {
     type: Function as PropType<SchedulerProps['weekdayStyle']>,
     default: null,
   },
-  /** Function that returns CSS classes for weekday header cells. */
+  /**
+   * Function that returns CSS classes for weekday header cells.
+   *
+   * @category style
+   */
   weekdayClass: {
     type: Function as PropType<SchedulerProps['weekdayClass']>,
     default: null,
   },
-  /** Function that returns inline styles for day cells. */
+  /**
+   * Function that returns inline styles for day cells.
+   *
+   * @category style
+   */
   dayStyle: {
     type: Function as PropType<SchedulerProps['dayStyle']>,
     default: null,
   },
-  /** Function that returns CSS classes for day cells. */
+  /**
+   * Function that returns CSS classes for day cells.
+   *
+   * @category style
+   */
   dayClass: {
     type: Function as PropType<SchedulerProps['dayClass']>,
     default: null,
   },
-  /** Header layout used for date labels. */
+  /**
+   * Header layout used for date labels.
+   *
+   * @category display
+   */
   dateHeader: {
     type: String as PropType<SchedulerProps['dateHeader']>,
     default: 'stacked',
@@ -238,61 +346,109 @@ export interface AgendaProps {
 }
 
 export const useAgendaProps = {
-  /** Agenda view mode. */
+  /**
+   * Agenda view mode.
+   *
+   * @category display
+   */
   view: {
     type: String as PropType<AgendaProps['view']>,
     validator: (v: string) => ['day', 'week', 'month', 'month-interval'].includes(v),
     default: 'day',
   },
-  /** Column definitions rendered before the day columns. */
+  /**
+   * Column definitions rendered before the day columns.
+   *
+   * @category layout
+   */
   leftColumnOptions: {
     type: Array as PropType<AgendaProps['leftColumnOptions']>,
   },
-  /** Column definitions rendered after the day columns. */
+  /**
+   * Column definitions rendered after the day columns.
+   *
+   * @category layout
+   */
   rightColumnOptions: {
     type: Array as PropType<AgendaProps['rightColumnOptions']>,
   },
-  /** Field name used as each agenda column id. */
+  /**
+   * Field name used as each agenda column id.
+   *
+   * @category layout
+   */
   columnOptionsId: {
     type: String as PropType<AgendaProps['columnOptionsId']>,
   },
-  /** Field name used as each agenda column label. */
+  /**
+   * Field name used as each agenda column label.
+   *
+   * @category layout
+   */
   columnOptionsLabel: {
     type: String as PropType<AgendaProps['columnOptionsLabel']>,
   },
-  /** Function that returns inline styles for weekday header cells. */
+  /**
+   * Function that returns inline styles for weekday header cells.
+   *
+   * @category style
+   */
   weekdayStyle: {
     type: Function as PropType<AgendaProps['weekdayStyle']>,
     default: null,
   },
-  /** Function that returns CSS classes for weekday header cells. */
+  /**
+   * Function that returns CSS classes for weekday header cells.
+   *
+   * @category style
+   */
   weekdayClass: {
     type: Function as PropType<AgendaProps['weekdayClass']>,
     default: null,
   },
-  /** Function that returns inline styles for day cells. */
+  /**
+   * Function that returns inline styles for day cells.
+   *
+   * @category style
+   */
   dayStyle: {
     type: Function as PropType<AgendaProps['dayStyle']>,
     default: null,
   },
-  /** Function that returns CSS classes for day cells. */
+  /**
+   * Function that returns CSS classes for day cells.
+   *
+   * @category style
+   */
   dayClass: {
     type: Function as PropType<AgendaProps['dayClass']>,
     default: null,
   },
-  /** Header layout used for date labels. */
+  /**
+   * Header layout used for date labels.
+   *
+   * @category display
+   */
   dateHeader: {
     type: String as PropType<AgendaProps['dateHeader']>,
     default: 'stacked',
     validator: (v: string) => ['stacked', 'inline', 'inverted'].includes(v),
   },
-  /** Height in pixels or CSS units for each agenda day row. */
+  /**
+   * Height in pixels or CSS units for each agenda day row.
+   *
+   * @category layout
+   */
   dayHeight: {
     type: [Number, String] as PropType<AgendaProps['dayHeight']>,
     default: 0,
     validator: validateNumber,
   },
-  /** Minimum height in pixels or CSS units for each agenda day row. */
+  /**
+   * Minimum height in pixels or CSS units for each agenda day row.
+   *
+   * @category layout
+   */
   dayMinHeight: {
     type: [Number, String] as PropType<AgendaProps['dayMinHeight']>,
     default: 40,
@@ -314,54 +470,94 @@ export interface ResourceProps extends IntervalProps {
 }
 
 export const useResourceProps = {
-  /** Resources rendered by the resource view. */
+  /**
+   * Resources rendered by the resource view.
+   *
+   * @category model
+   */
   modelResources: {
     type: Array as PropType<ResourceProps['modelResources']>,
   },
-  /** Resource field used as the unique key. */
+  /**
+   * Resource field used as the unique key.
+   *
+   * @category model
+   */
   resourceKey: {
     type: String as PropType<ResourceProps['resourceKey']>,
     default: 'id',
   },
-  /** Resource field used as the display label. */
+  /**
+   * Resource field used as the display label.
+   *
+   * @category model
+   */
   resourceLabel: {
     type: String as PropType<ResourceProps['resourceLabel']>,
     default: 'label',
   },
-  /** Height in pixels or CSS units for each resource row. */
+  /**
+   * Height in pixels or CSS units for each resource row.
+   *
+   * @category layout
+   */
   resourceHeight: {
     type: [Number, String] as PropType<ResourceProps['resourceHeight']>,
     default: 0,
     validator: validateNumber,
   },
-  /** Minimum height in pixels or CSS units for each resource row. */
+  /**
+   * Minimum height in pixels or CSS units for each resource row.
+   *
+   * @category layout
+   */
   resourceMinHeight: {
     type: [Number, String] as PropType<ResourceProps['resourceMinHeight']>,
     default: 70,
     validator: validateNumber,
   },
-  /** Function that returns inline styles for resource rows. */
+  /**
+   * Function that returns inline styles for resource rows.
+   *
+   * @category style
+   */
   resourceStyle: {
     type: Function as PropType<ResourceProps['resourceStyle']>,
     default: null,
   },
-  /** Function that returns CSS classes for resource rows. */
+  /**
+   * Function that returns CSS classes for resource rows.
+   *
+   * @category style
+   */
   resourceClass: {
     type: Function as PropType<ResourceProps['resourceClass']>,
     default: null,
   },
-  /** Width in pixels or CSS units for each interval cell. */
+  /**
+   * Width in pixels or CSS units for each interval cell.
+   *
+   * @category layout
+   */
   cellWidth: {
     type: [Number, String] as PropType<ResourceProps['cellWidth']>,
     default: 100,
   },
-  /** Height in pixels or CSS units for the interval header. */
+  /**
+   * Height in pixels or CSS units for the interval header.
+   *
+   * @category layout
+   */
   intervalHeaderHeight: {
     type: [Number, String] as PropType<ResourceProps['intervalHeaderHeight']>,
     default: 20,
     validator: validateNumber,
   },
-  /** Disables sticky resource headers and columns. */
+  /**
+   * Disables sticky resource headers and columns.
+   *
+   * @category behavior
+   */
   noSticky: Boolean as PropType<ResourceProps['noSticky']>,
 } as const
 
@@ -549,7 +745,7 @@ export default function useInterval(
       'q-range-first': firstDay === true,
       'q-range': betweenDays === true,
       'q-range-last': lastDay === true,
-      'q-disabled-interval disabled': interval.disabled === true,
+      'q-disabled-interval behavior': interval.disabled === true,
     }
   }
 
@@ -622,7 +818,7 @@ export default function useInterval(
   /**
    * Returns a Timestamp based on mouse click position on the calendar
    * Also handles touch events
-   * This function is used for vertical intervals
+   * This function is used for vertical layout
    * @param {MouseEvent} e Browser MouseEvent
    * @param {Timestamp} day Timestamp associated with event
    * @param {Boolean} clamp Whether to clamp values to nearest interval
@@ -662,7 +858,7 @@ export default function useInterval(
   /**
    * Returns a Timestamp based on mouse click position on the calendar
    * Also handles touch events
-   * This function is used for vertical intervals
+   * This function is used for vertical layout
    * @param {MouseEvent} e Browser MouseEvent
    * @param {Timestamp} day Timestamp associated with event
    * @param {Boolean} clamp Whether to clamp values to nearest interval
@@ -699,7 +895,7 @@ export default function useInterval(
   /**
    * Returns a Timestamp based on mouse click position on the calendar
    * Also handles touch events
-   * This function is used for horizontal intervals
+   * This function is used for horizontal layout
    * @param {MouseEvent} e Browser MouseEvent
    * @param {Timestamp} day Timestamp associated with event
    * @param {Boolean} clamp Whether to clamp values to nearest interval
@@ -738,7 +934,7 @@ export default function useInterval(
 
   /**
    * Returns the scope for the associated Timestamp
-   * This function is used for vertical intervals
+   * This function is used for vertical layout
    * @param {Timestamp} timestamp
    * @param {Number} columnIndex
    */
@@ -757,7 +953,7 @@ export default function useInterval(
 
   /**
    * Returns the scope for the associated Timestamp
-   * This function is used for horizontal intervals
+   * This function is used for horizontal layout
    * @param {Timestamp} timestamp
    * @param {Number*} index
    */
@@ -776,7 +972,7 @@ export default function useInterval(
 
   /**
    * Forces the browser to scroll to the specified time
-   * This function is used for vertical intervals
+   * This function is used for vertical layout
    * @param {String} time in format HH:MM
    * @param {Number} duration in milliseconds
    * @returns {boolean} Whether the scroll operation was successful
@@ -795,9 +991,9 @@ export default function useInterval(
 
   /**
    * Forces the browser to scroll to the specified time horizontally.
-   * This function is used for horizontal intervals.
+   * This function is used for horizontal layout.
    * @param {String} time - The time to scroll to, in the format HH:MM.
-   * @param {Number} [duration=0] - The duration of the scroll animation in milliseconds.
+   * @param {Number} [duration=0] - The duration of the scroll behavior in milliseconds.
    * @returns {boolean} Whether the scroll operation was successful.
    */
   function scrollToTimeX(time: string, duration = 0): boolean {
@@ -813,7 +1009,7 @@ export default function useInterval(
   }
 
   /**
-   * Calculates the height of a time duration in the interval view.
+   * Calculates the height of a time duration in the interval display.
    * @param {number} minutes - The number of minutes to calculate the height for.
    * @returns {number} The height of the time duration in pixels.
    */
@@ -822,7 +1018,7 @@ export default function useInterval(
   }
 
   /**
-   * Calculates the width of a time duration in the interval view.
+   * Calculates the width of a time duration in the interval display.
    * @param {number} minutes - The number of minutes to calculate the width for.
    * @returns {number} The width of the time duration in pixels.
    */
@@ -831,7 +1027,7 @@ export default function useInterval(
   }
 
   /**
-   * Calculates the number of minutes represented by a given height in the interval view.
+   * Calculates the number of minutes represented by a given height in the interval display.
    * @param {number} height - The height in pixels to calculate the minutes for.
    * @returns {number} The number of minutes represented by the given height.
    */
@@ -840,7 +1036,7 @@ export default function useInterval(
   }
 
   /**
-   * Calculates the number of minutes represented by a given width in the interval view.
+   * Calculates the number of minutes represented by a given width in the interval display.
    * @param {number} width - The width in pixels to calculate the minutes for.
    * @returns {number} The number of minutes represented by the given width.
    */
@@ -849,9 +1045,9 @@ export default function useInterval(
   }
 
   /**
-   * Calculates the starting position (y-coordinate) of a time value in the interval view.
+   * Calculates the starting position (y-coordinate) of a time value in the interval display.
    * @param {string} time - The time value to calculate the starting position for.
-   * @param {boolean} [clamp=true] - Whether to clamp the calculated position to the bounds of the interval view.
+   * @param {boolean} [clamp=true] - Whether to clamp the calculated position to the bounds of the interval display.
    * @returns {number|false} The starting position (y-coordinate) of the time value, or `false` if the time value is invalid.
    */
   function timeStartPos(time: string, clamp = true): number | false {
@@ -876,9 +1072,9 @@ export default function useInterval(
   }
 
   /**
-   * Calculates the starting position (x-coordinate) of a time value in the interval view.
+   * Calculates the starting position (x-coordinate) of a time value in the interval display.
    * @param {string} time - The time value to calculate the starting position for.
-   * @param {boolean} [clamp=true] - Whether to clamp the calculated position to the bounds of the interval view.
+   * @param {boolean} [clamp=true] - Whether to clamp the calculated position to the bounds of the interval display.
    * @returns {number|false} The starting position (x-coordinate) of the time value, or `false` if the time value is invalid.
    */
   function timeStartPosX(time: string, clamp = true): number | false {

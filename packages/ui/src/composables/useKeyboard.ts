@@ -120,7 +120,11 @@ function unregisterNavigationInstance(instance: NavigationInstance): void {
 }
 
 export const useNavigationProps = {
-  /** Enables keyboard navigation for supported calendar cells. */
+  /**
+   * Enables keyboard navigation for supported calendar cells.
+   *
+   * @category behavior
+   */
   useNavigation: Boolean,
 }
 
@@ -151,8 +155,8 @@ interface UseNavigationReturn {
 
 /**
  * Hook for handling keyboard navigation in calendar components.
- * @param props The props related to navigation.
- * @param context Various reactive references used for navigation.
+ * @param props The props related to behavior.
+ * @param context Various reactive references used for behavior.
  */
 export default function useNavigation(
   props: NavigationProps,
@@ -549,7 +553,7 @@ export default function useNavigation(
 
   function onHome(): void {
     let tm = getFocusableTimestamp()
-    // For month view, start at the beginning of the month; for week view, get start of week.
+    // For month display, start at the beginning of the month; for week display, get start of week.
     tm =
       parsedView.value === 'month'
         ? getStartOfMonth(tm)
@@ -560,7 +564,7 @@ export default function useNavigation(
 
   function onEnd(): void {
     let tm = getFocusableTimestamp()
-    // For month view, get end of month; for week view, get end of week.
+    // For month display, get end of month; for week display, get end of week.
     tm =
       parsedView.value === 'month'
         ? getEndOfMonth(tm)
