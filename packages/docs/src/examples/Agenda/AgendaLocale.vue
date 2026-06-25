@@ -28,10 +28,6 @@
           v-model="selectedDate"
           view="week"
           :locale="locale"
-          :left-column-options="leftColumnOptions"
-          :right-column-options="rightColumnOptions"
-          column-options-id="id"
-          column-options-label="label"
           :day-min-height="200"
           animated
           bordered
@@ -57,18 +53,6 @@ import NavigationBar from '@/components/NavigationBar.vue'
 
 const calendar = ref<QCalendarAgenda>()
 const selectedDate = ref(today())
-const leftColumnOptions = ref([
-  {
-    id: 'overdue',
-    label: 'Overdue',
-  },
-])
-const rightColumnOptions = ref([
-  {
-    id: 'summary',
-    label: 'Summary',
-  },
-])
 const locale = ref('en-US')
 const locales = reactive([
   { value: 'ar', label: 'العربية' },

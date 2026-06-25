@@ -16,10 +16,6 @@
           v-model="selectedDate"
           view="week"
           :disabled-days="disabledDays"
-          :left-column-options="leftColumnOptions"
-          :right-column-options="rightColumnOptions"
-          column-options-id="id"
-          column-options-label="label"
           :day-min-height="200"
           animated
           bordered
@@ -37,10 +33,6 @@
           v-model="selectedDate"
           view="week"
           :disabled-days="disabledDaysRange"
-          :left-column-options="leftColumnOptions"
-          :right-column-options="rightColumnOptions"
-          column-options-id="id"
-          column-options-label="label"
           :day-min-height="200"
           animated
           bordered
@@ -67,18 +59,6 @@ import NavigationBar from '@/components/NavigationBar.vue'
 
 const calendar = ref<QCalendarAgenda>()
 const selectedDate = ref('2026-05-26')
-const leftColumnOptions = ref([
-  {
-    id: 'overdue',
-    label: 'Overdue',
-  },
-])
-const rightColumnOptions = ref([
-  {
-    id: 'summary',
-    label: 'Summary',
-  },
-])
 
 const disabledDays = computed(() => {
   const ts = parseTimestamp(selectedDate.value)

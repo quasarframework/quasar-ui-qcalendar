@@ -14,10 +14,6 @@
           v-model="selectedDate"
           view="day"
           :column-count="3"
-          :left-column-options="leftColumnOptions"
-          :right-column-options="rightColumnOptions"
-          column-options-id="id"
-          column-options-label="label"
           :day-min-height="200"
           bordered
           animated
@@ -42,18 +38,6 @@ import '@quasar/quasar-ui-qcalendar/index.css'
 import NavigationBar from '@/components/NavigationBar.vue'
 
 const selectedDate = ref(today())
-const leftColumnOptions = ref([
-  {
-    id: 'overdue',
-    label: 'Overdue',
-  },
-])
-const rightColumnOptions = ref([
-  {
-    id: 'summary',
-    label: 'Summary',
-  },
-])
 const calendar = ref<QCalendarAgenda>()
 
 const onChange = (date: string) => {

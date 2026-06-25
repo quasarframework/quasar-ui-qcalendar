@@ -14,10 +14,6 @@
           v-model="selectedDate"
           view="week"
           :now="nowDate"
-          :left-column-options="leftColumnOptions"
-          :right-column-options="rightColumnOptions"
-          column-options-id="id"
-          column-options-label="label"
           :day-min-height="200"
           animated
           bordered
@@ -46,18 +42,6 @@ const selectedDate = ref(today())
 const nowDate = ref(
   parseTimestamp(today()) ? addToDate(parseTimestamp(today()) as Timestamp, { day: 1 }).date : '',
 )
-const leftColumnOptions = ref([
-  {
-    id: 'overdue',
-    label: 'Overdue',
-  },
-])
-const rightColumnOptions = ref([
-  {
-    id: 'summary',
-    label: 'Summary',
-  },
-])
 
 function onToday() {
   if (calendar.value) {

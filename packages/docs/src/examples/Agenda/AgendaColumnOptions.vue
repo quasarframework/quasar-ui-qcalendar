@@ -191,14 +191,14 @@ const agenda = reactive<Record<number, AgendaItem[]>>({
 })
 const leftColumnOptions = reactive([
   {
-    id: 'over-due',
-    label: 'Over Due',
+    id: 'left-column',
+    label: 'Left column',
   },
 ])
 const rightColumnOptions = reactive([
   {
-    id: 'summary',
-    label: 'Summary',
+    id: 'right-column',
+    label: 'Right column',
   },
 ])
 

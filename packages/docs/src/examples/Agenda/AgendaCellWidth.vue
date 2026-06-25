@@ -16,10 +16,6 @@
           :max-days="10"
           cell-width="200px"
           day-min-height="100"
-          :left-column-options="leftColumnOptions"
-          :right-column-options="rightColumnOptions"
-          column-options-id="id"
-          column-options-label="label"
           weekday-align="center"
           date-align="center"
           date-header="inline"
@@ -46,18 +42,6 @@ import '@quasar/quasar-ui-qcalendar/index.css'
 import NavigationBar from '@/components/NavigationBar.vue'
 
 const selectedDate = ref(today())
-const leftColumnOptions = ref([
-  {
-    id: 'overdue',
-    label: 'Overdue',
-  },
-])
-const rightColumnOptions = ref([
-  {
-    id: 'summary',
-    label: 'Summary',
-  },
-])
 const calendar = ref<QCalendarAgenda>()
 
 const onChange = (date: string) => {

@@ -27,10 +27,6 @@
           ref="calendar"
           v-model="selectedDate"
           view="week"
-          :left-column-options="leftColumnOptions"
-          :right-column-options="rightColumnOptions"
-          column-options-id="id"
-          column-options-label="label"
           :day-min-height="200"
           animated
           bordered
@@ -449,18 +445,6 @@ const themes = reactive<Record<string, Theme>>({
     '--calendar-head-font-weight': '600',
   },
 })
-const leftColumnOptions = ref([
-  {
-    id: 'overdue',
-    label: 'Overdue',
-  },
-])
-const rightColumnOptions = ref([
-  {
-    id: 'summary',
-    label: 'Summary',
-  },
-])
 
 const themesList = computed(() => {
   const list: { label: string; value: Theme }[] = []
