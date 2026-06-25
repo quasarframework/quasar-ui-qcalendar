@@ -12,9 +12,21 @@
       class="toc"
     >
       <q-scroll-area class="fit">
-        <div class="row justify-center full-width q-ma-xs q-gutter-sm">
-          <q-btn dense no-caps label="Copy Theme" @click="copyTheme" />
-          <q-btn dense no-caps label="Import Theme..." @click="importTheme" />
+        <div class="theme-builder-actions row justify-center full-width q-pa-sm q-gutter-sm">
+          <q-btn
+            class="theme-builder-actions__button"
+            dense
+            no-caps
+            label="Copy Theme"
+            @click="copyTheme"
+          />
+          <q-btn
+            class="theme-builder-actions__button"
+            dense
+            no-caps
+            label="Import Theme..."
+            @click="importTheme"
+          />
         </div>
         <q-list dense>
           <template v-for="(value, name) in store.style">
@@ -258,6 +270,31 @@ function setCurrentStyleName(name: string) {
   width: 20px;
   height: 20px;
   border: #dedede 1px solid;
+}
+
+.theme-builder-actions {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.theme-builder-actions__button {
+  border: 1px solid rgba(25, 118, 210, 0.32);
+  background: rgba(25, 118, 210, 0.08);
+  color: var(--q-primary);
+}
+
+.body--dark .theme-builder-actions {
+  border-bottom-color: rgba(255, 255, 255, 0.14);
+}
+
+.body--dark .theme-builder-actions__button {
+  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.body--dark .theme-builder-actions__button:hover {
+  border-color: rgba(255, 255, 255, 0.34);
+  background: rgba(255, 255, 255, 0.13);
 }
 
 .small-text {
