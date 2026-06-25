@@ -25,26 +25,22 @@ import { convertToUnit, getResponsiveWeekdayLabel } from '../utils/helpers'
 
 // Composables
 import useCalendar from '../composables/useCalendar'
-import useCommon, { useCommonProps } from '../composables/useCommon'
-import useInterval, {
-  useAgendaProps,
-  type AgendaProps,
-  type SchedulerProps,
-  type ResourceProps,
-} from '../composables/useInterval'
-import { useColumnProps, type ColumnObject } from '../composables/useColumn'
-import { useMaxDaysProps } from '../composables/useMaxDays'
-import useTimes, { useTimesProps } from '../composables/useTimes'
+import useCommon, { useCommonProps, type CommonProps } from '../composables/useCommon'
+import { useAgendaProps, type AgendaProps } from '../composables/useInterval'
+import useCalendarDays from '../composables/useCalendarDays'
+import { useColumnProps, type ColumnObject, type ColumnProps } from '../composables/useColumn'
+import { useMaxDaysProps, type MaxDaysProps } from '../composables/useMaxDays'
+import useTimes, { useTimesProps, type TimesProps } from '../composables/useTimes'
 import useRenderValues from '../composables/useRenderValues'
 import useMouse, { getRawMouseEvents } from '../composables/useMouse'
 import useMove, { useMoveEmits } from '../composables/useMove'
 import useEmitListeners from '../composables/useEmitListeners'
 import useButton from '../composables/useButton'
 import useFocusHelper from '../composables/useFocusHelper'
-import useCellWidth, { useCellWidthProps } from '../composables/useCellWidth'
+import useCellWidth, { useCellWidthProps, type CellWidthProps } from '../composables/useCellWidth'
 import useCheckChange, { useCheckChangeEmits } from '../composables/useCheckChange'
 import useEvents from '../composables/useEvents'
-import useKeyboard, { useNavigationProps } from '../composables/useKeyboard'
+import useKeyboard, { useNavigationProps, type NavigationProps } from '../composables/useKeyboard'
 import { getDragEventHandlers } from '../composables/useDragAndDrop'
 import type {
   AgendaColumnSlotScope,
@@ -62,6 +58,14 @@ type Size = {
   width: number
   height: number
 }
+
+type AgendaSetupProps = CommonProps &
+  AgendaProps &
+  ColumnProps &
+  MaxDaysProps &
+  TimesProps &
+  CellWidthProps &
+  NavigationProps
 
 const { renderButton } = useButton()
 
@@ -140,7 +144,7 @@ export default defineComponent({
     ...getRawMouseEvents('-column'),
   ],
 
-  setup(props: AgendaProps & SchedulerProps & ResourceProps, { slots, emit, expose }) {
+  setup(props: AgendaSetupProps, { slots, emit, expose }) {
     const scrollArea = ref(null),
       pane = ref(null),
       headerColumnRef = ref(null),
@@ -239,9 +243,8 @@ export default defineComponent({
       // methods
       // styleDefault,
       getScopeForSlot,
-    } = useInterval(props, {
+    } = useCalendarDays(props, {
       times,
-      scrollArea,
       parsedStart,
       parsedEnd,
       maxDays: maxDaysRendered,

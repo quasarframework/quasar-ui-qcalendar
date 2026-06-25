@@ -26,7 +26,8 @@ import { convertToUnit, getResponsiveWeekdayLabel } from '../utils/helpers'
 // Composables
 import useCalendar from '../composables/useCalendar'
 import useCommon, { useCommonProps } from '../composables/useCommon'
-import useInterval, { useSchedulerProps, type Resource } from '../composables/useInterval'
+import { useSchedulerProps, type Resource } from '../composables/useInterval'
+import useCalendarDays from '../composables/useCalendarDays'
 import { useColumnProps } from '../composables/useColumn'
 import { useMaxDaysProps } from '../composables/useMaxDays'
 import useTimes, { useTimesProps } from '../composables/useTimes'
@@ -263,9 +264,8 @@ export default defineComponent({
       // scrollToTime,
       // timeDurationHeight,
       // timeStartPos
-    } = useInterval(props, {
+    } = useCalendarDays(props, {
       times,
-      scrollArea,
       parsedStart,
       parsedEnd,
       maxDays: maxDaysRendered,

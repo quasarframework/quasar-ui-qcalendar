@@ -2,7 +2,6 @@
 import { computed, Ref, PropType } from 'vue'
 import {
   addToDate,
-  createDayList,
   createIntervalList,
   createNativeLocaleFormatterUTC,
   copyTimestamp,
@@ -25,32 +24,16 @@ import { type CellWidthProps } from './useCellWidth'
 import { type TimesProps } from './useTimes'
 import { type MaxDaysProps } from './useMaxDays'
 import { type NavigationProps } from './useKeyboard'
+import useCalendarDays, {
+  type CalendarDaysProps,
+  type Scope,
+  type ScopeForSlot,
+} from './useCalendarDays'
 
-export interface Scope {
-  scope: any
-}
+export type { Scope, ScopeForSlot } from './useCalendarDays'
 
 export interface Resource {
   [key: string]: any
-}
-
-export interface ScopeForSlot {
-  /** Timestamp represented by the slot. */
-  timestamp: Timestamp
-  /** Helper that returns the vertical start position for a time. */
-  timeStartPos: (_time: string, _clamp?: boolean) => number | false
-  /** Helper that returns the vertical height for a duration. */
-  timeDurationHeight: (_minutes: number) => number
-  /** Zero-based rendered column index. */
-  columnIndex?: number
-  /** Whether the timestamp is the active date. */
-  activeDate?: boolean
-  /** Whether the slot content is disabled. */
-  disabled?: boolean
-  /** Whether weekday labels are rendered in short form. */
-  shortWeekdayLabel?: boolean
-  /** Whether the slot can accept dropped content. */
-  droppable?: boolean
 }
 
 export interface ScopeForSlotX {
@@ -152,7 +135,7 @@ export const useIntervalProps = {
   },
 } as const
 
-export interface SchedulerProps extends IntervalProps {
+export interface SchedulerProps {
   view: 'day' | 'week' | 'month' | 'month-interval'
   modelResources?: Resource[]
   resourceKey: string
@@ -239,14 +222,17 @@ export const useSchedulerProps = {
   },
 } as const
 
-export interface AgendaProps extends IntervalProps {
+export interface AgendaProps {
   view: 'day' | 'week' | 'month' | 'month-interval'
   leftColumnOptions?: any[] // Consider replacing `any[]` with a more specific type.
   rightColumnOptions?: any[]
   columnOptionsId?: string
   columnOptionsLabel?: string
+  weekdayStyle?: (_scope: Scope) => any
+  weekdayClass?: (_scope: Scope) => string
   dayStyle?: (_scope: Scope) => any
   dayClass?: (_scope: Scope) => string
+  dateHeader: 'stacked' | 'inline' | 'inverted'
   dayHeight: number | string
   dayMinHeight: number | string
 }
@@ -442,7 +428,7 @@ export interface UseIntervalReturn {
   timeStartPosX: (_time: string, _clamp?: boolean) => number | false
 }
 
-interface UseIntervalProps extends CommonProps, ColumnProps, CellWidthProps {
+interface UseIntervalProps extends CalendarDaysProps {
   intervalHeight?: number | string
   intervalMinutes?: number | string
   intervalStart?: number | string
@@ -470,43 +456,25 @@ export default function useInterval(
     headerColumnRef: Ref<HTMLElement | null>
   },
 ): UseIntervalReturn {
+  const { days, parsedCellWidth, styleDefault } = useCalendarDays(props, {
+    times,
+    parsedStart,
+    parsedEnd,
+    maxDays,
+    size,
+    headerColumnRef,
+  })
+
   const parsedIntervalStart = computed(() => parseInt(String(props.intervalStart ?? 0), 10))
   const parsedIntervalMinutes = computed(() => parseInt(String(props.intervalMinutes ?? 60), 10))
   const parsedIntervalCount = computed(() => parseInt(String(props.intervalCount ?? 24), 10))
   const parsedIntervalHeight = computed(() => parseFloat(String(props.intervalHeight ?? 40)))
-  const parsedCellWidth = computed(() => {
-    let width = 0
-    const columnCount = Number(props.columnCount)
-    if (props.cellWidth) {
-      width = Number(props.cellWidth)
-    } else if (size.width > 0 && headerColumnRef.value) {
-      width = headerColumnRef.value.offsetWidth / (columnCount > 1 ? columnCount : maxDays.value)
-    }
-    return width
-  })
   const parsedStartMinute = computed(() => parsedIntervalStart.value * parsedIntervalMinutes.value)
   const bodyHeight = computed(() => parsedIntervalCount.value * parsedIntervalHeight.value)
   const bodyWidth = computed(() => parsedIntervalCount.value * parsedCellWidth.value)
 
   const parsedWeekStart = computed(() => startOfWeek(parsedStart.value))
   const parsedWeekEnd = computed(() => endOfWeek(parsedEnd.value))
-
-  /**
-   * Returns the days of the specified week
-   */
-  const days = computed(() => {
-    return createDayList(
-      parsedStart.value,
-      parsedEnd.value,
-      times.today,
-      props.weekdays,
-      props.disabledBefore,
-      props.disabledAfter,
-      props.disabledWeekdays,
-      props.disabledDays,
-      maxDays.value,
-    )
-  })
 
   /**
    * Returns an interval list for each day
@@ -649,15 +617,6 @@ export default function useInterval(
 
   function showResourceLabelDefault(_resource: any): void {
     //
-  }
-
-  /**
-   * Returns an empty object.
-   * This is a default style function that does not apply any styles.
-   * @returns An empty object.
-   */
-  function styleDefault(_scope: Scope): {} {
-    return {}
   }
 
   /**
