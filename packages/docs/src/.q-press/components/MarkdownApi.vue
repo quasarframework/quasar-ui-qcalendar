@@ -68,7 +68,7 @@
       <q-tab-panels v-model="currentTab" animated>
         <q-tab-panel v-for="tab in tabsList" :key="tab" class="q-pa-none" :name="tab">
           <div
-            v-if="innerTabsList[tab]?.length !== 1"
+            v-if="hasApiCategories(innerTabsList[tab])"
             class="markdown-api__container row no-wrap"
           >
             <div class="col-auto">
@@ -89,7 +89,7 @@
                   :name="innerTab"
                 >
                   <div class="row no-wrap items-center self-stretch q-pl-sm">
-                    <span class="q-mr-xs text-capitalize">{{ innerTab }}</span>
+                    <span class="q-mr-xs text-capitalize">{{ getInnerTabLabel(innerTab) }}</span>
                     <div class="col" />
                     <q-badge
                       v-if="filteredApiCount[tab]?.category[innerTab]"
@@ -196,25 +196,46 @@ type QPressEnv = {
 const qPressEnv = (import.meta as ImportMeta & { env: QPressEnv }).env
 
 /**
- * Extracts and categorizes properties based on their categories.
+ * Extracts categories from an API entry group.
  *
- * @param {Object} props - The properties object where each key is a property name and each value is an object containing a `category` string.
- * @returns {Array<string>} - An array of unique category names sorted alphabetically. If there is only one unique category, returns an array with a default inner tab name.
+ * @param {Object} entries - The API group where each key is an entry name and each value can contain a `category` string.
+ * @returns {Array<string>} - Unique category names sorted alphabetically. If there are no explicit categories, returns the default inner tab name so the category rail stays hidden.
  */
-function getPropsCategories(props: ApiDefinition | undefined): string[] {
+function getApiCategories(entries: ApiDefinition | undefined): string[] {
   const acc = new Set<string>()
+  let hasExplicitCategory = false
 
-  for (const key in props ?? {}) {
-    if (props[key] !== void 0) {
-      const value = props[key]
+  for (const key in entries ?? {}) {
+    const value = entries?.[key]
 
-      ;(value.category ?? defaultInnerTabName).split('|').forEach((groupKey: string) => {
+    if (value !== void 0) {
+      const category = value.category
+
+      if (typeof category === 'string' && category !== '') {
+        hasExplicitCategory = true
+      }
+
+      ;(category ?? defaultInnerTabName).split('|').forEach((groupKey: string) => {
         acc.add(groupKey)
       })
     }
   }
 
-  return acc.size === 1 ? [defaultInnerTabName] : Array.from(acc).sort()
+  return hasExplicitCategory === true ? Array.from(acc).sort() : [defaultInnerTabName]
+}
+
+/**
+ * Returns whether an API group has explicit category tabs to show.
+ */
+function hasApiCategories(categories: string[] | undefined): boolean {
+  return categories?.some((category) => category !== defaultInnerTabName) === true
+}
+
+/**
+ * Returns a user-facing label for an API category tab.
+ */
+function getInnerTabLabel(category: string): string {
+  return category === defaultInnerTabName ? 'default' : category
 }
 
 /**
@@ -222,17 +243,13 @@ function getPropsCategories(props: ApiDefinition | undefined): string[] {
  *
  * @param {Object} api - The API object containing the data.
  * @param {Array} tabs - The array of tabs to be populated.
- * @param {string} apiType - The type of the API.
  * @returns {Array} - The array of inner tabs.
  */
-function getInnerTabs(api: ApiFile, tabs: string[], apiType?: string): InnerTabsMap {
+function getInnerTabs(api: ApiFile, tabs: string[]): InnerTabsMap {
   const acc: InnerTabsMap = {}
 
   tabs.forEach((tab: string) => {
-    acc[tab] =
-      apiType === 'component' && tab === 'props'
-        ? getPropsCategories(api[tab])
-        : [defaultInnerTabName]
+    acc[tab] = getApiCategories(api[tab])
   })
 
   return acc
@@ -252,7 +269,7 @@ function parseApi(api: ApiFile, tabs: string[], innerTabs: InnerTabsMap): Parsed
     const apiValue = api[tab]
     const tabInnerTabs = innerTabs[tab] ?? [defaultInnerTabName]
 
-    if (tabInnerTabs.length > 1) {
+    if (hasApiCategories(tabInnerTabs) === true) {
       const inner: Record<string, ApiDefinition> = {}
 
       tabInnerTabs.forEach((subTab: string) => {
@@ -554,7 +571,7 @@ function parseApiFile(
   tabsList.value = tabs
   currentTab.value = tabs[0]
 
-  const subTabs = getInnerTabs(api, tabs, type)
+  const subTabs = getInnerTabs(api, tabs)
   innerTabsList.value = subTabs
   apiDef.value = parseApi(api, tabs, subTabs)
 }

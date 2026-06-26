@@ -98,7 +98,6 @@ export interface SiteConfig {
   lang: string
   title: string
   description: string
-  theme: string
   version: string
   copyright: CopyrightConfig
   githubEditRootSrc: string
@@ -738,7 +737,6 @@ const config = {
   lang: 'en-US',
   title: productName,
   description: 'Build Beautiful, Responsive Calendars for Vue and Quasar',
-  theme: 'doc',
   version: version,
   copyright: {
     line1: `Copyright © 2018-${new Date().getFullYear()} Jeff Galbraith`,
