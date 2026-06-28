@@ -21,6 +21,7 @@ import {
 import { getDayIdentifier, parsed, parseTimestamp, today, type Timestamp } from '@timestamp-js/core'
 
 import { convertToUnit, getResponsiveWeekdayLabel } from '../utils/helpers'
+import { getCalendarScopeData } from '../utils/calendarSystem'
 
 import useMouse, { getRawMouseEvents } from '../composables/useMouse'
 
@@ -267,7 +268,12 @@ export default defineComponent({
 
     const { getDefaultMouseEventHandlers } = useMouse(emit, emitListeners)
 
-    const { checkChange } = useCheckChange(emit, { days, lastStart, lastEnd })
+    const { checkChange } = useCheckChange(emit, {
+      days,
+      lastStart,
+      lastEnd,
+      calendarSystem: () => props.calendarSystem,
+    })
 
     const { isKeyCode } = useEvents()
 
@@ -547,6 +553,7 @@ export default defineComponent({
         activeDate,
         weekday,
         timestamp: day,
+        ...getCalendarScopeData(day, props.calendarSystem),
         days: filteredDays,
         index,
         miniMode: isMiniMode.value,
@@ -620,6 +627,7 @@ export default defineComponent({
       const scope = {
         weekday,
         timestamp: day,
+        ...getCalendarScopeData(day, props.calendarSystem),
         days: filteredDays,
         index,
         miniMode: isMiniMode.value,
@@ -780,6 +788,7 @@ export default defineComponent({
       const scope: MonthDaySlotScope = {
         outside,
         timestamp: day,
+        ...getCalendarScopeData(day, props.calendarSystem),
         miniMode: isMiniMode.value,
         activeDate,
         hasMonth,
@@ -945,6 +954,7 @@ export default defineComponent({
       const scope: MonthDayLabelSlotScope = {
         dayLabel,
         timestamp: day,
+        ...getCalendarScopeData(day, props.calendarSystem),
         outside,
         activeDate,
         selectedDate,
@@ -1033,7 +1043,10 @@ export default defineComponent({
       }
 
       const slot = slots['day-of-year']
-      const scope = { timestamp: day }
+      const scope = {
+        timestamp: day,
+        ...getCalendarScopeData(day, props.calendarSystem),
+      }
 
       return h(
         'span',
@@ -1055,7 +1068,12 @@ export default defineComponent({
 
       const slot = slots['month-label']
       const monthLabel = monthFormatter.value(day, props.shortMonthLabel || size.width < 500)
-      const scope = { monthLabel, timestamp: day, miniMode: isMiniMode.value }
+      const scope = {
+        monthLabel,
+        timestamp: day,
+        ...getCalendarScopeData(day, props.calendarSystem),
+        miniMode: isMiniMode.value,
+      }
 
       const style: CSSProperties = {}
       if (isMiniMode.value !== true && parsedMonthLabelSize.value !== undefined) {

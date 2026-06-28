@@ -2,6 +2,11 @@ import { computed, watch, Ref, EmitFn, ComputedRef, PropType } from 'vue'
 import {
   createDayList,
   createNativeLocaleFormatterUTC,
+  getCalendarDayIdentifier,
+  getCalendarEndOfMonth,
+  getCalendarEndOfWeek,
+  getCalendarStartOfMonth,
+  getCalendarStartOfWeek,
   getDayIdentifier,
   getEndOfWeek,
   getStartOfWeek,
@@ -14,6 +19,11 @@ import {
 import { CommonProps } from './useCommon'
 import { CellWidthProps } from './useCellWidth'
 import { Scope } from './useInterval'
+import {
+  isGregorianCalendar,
+  toCalendarTimestamp,
+  toGregorianTimestamp,
+} from '../utils/calendarSystem'
 
 // Define props interface
 export interface MonthProps {
@@ -211,10 +221,42 @@ export default function useMonth(
 ): UseMonthReturn {
   const parsedMinWeeks = computed((): number => parseInt(props.minWeeks as string, 10))
   const parsedMinDays = computed((): number => parsedMinWeeks.value * props.weekdays.length)
-  const parsedMonthStart = computed(
-    (): Timestamp => __getStartOfWeek(__getStartOfMonth(parsedStart.value)),
-  )
-  const parsedMonthEnd = computed((): Timestamp => __getEndOfWeek(__getEndOfMonth(parsedEnd.value)))
+  const parsedMonthStart = computed((): Timestamp => {
+    if (isGregorianCalendar(props.calendarSystem) === true) {
+      return __getStartOfWeek(__getStartOfMonth(parsedStart.value))
+    }
+
+    const calendarStart = getCalendarStartOfMonth(
+      toCalendarTimestamp(parsedStart.value, props.calendarSystem),
+      props.calendarSystem,
+    )
+    const calendarGridStart = getCalendarStartOfWeek(
+      calendarStart,
+      props.weekdays,
+      props.calendarSystem,
+      toCalendarTimestamp(times.today, props.calendarSystem),
+    )
+
+    return toGregorianTimestamp(calendarGridStart, props.calendarSystem)
+  })
+  const parsedMonthEnd = computed((): Timestamp => {
+    if (isGregorianCalendar(props.calendarSystem) === true) {
+      return __getEndOfWeek(__getEndOfMonth(parsedEnd.value))
+    }
+
+    const calendarEnd = getCalendarEndOfMonth(
+      toCalendarTimestamp(parsedEnd.value, props.calendarSystem),
+      props.calendarSystem,
+    )
+    const calendarGridEnd = getCalendarEndOfWeek(
+      calendarEnd,
+      props.weekdays,
+      props.calendarSystem,
+      toCalendarTimestamp(times.today, props.calendarSystem),
+    )
+
+    return toGregorianTimestamp(calendarGridEnd, props.calendarSystem)
+  })
 
   const parsedCellWidth = computed((): number => {
     let width = 0
@@ -379,6 +421,24 @@ export default function useMonth(
    * @returns `true` if the day is outside the current month's range, `false` otherwise.
    */
   function isOutside(day: Timestamp): boolean {
+    if (isGregorianCalendar(props.calendarSystem) !== true) {
+      const calendarDay = toCalendarTimestamp(day, props.calendarSystem)
+      const calendarStart = getCalendarStartOfMonth(
+        toCalendarTimestamp(parsedStart.value, props.calendarSystem),
+        props.calendarSystem,
+      )
+      const calendarEnd = getCalendarEndOfMonth(
+        toCalendarTimestamp(parsedEnd.value, props.calendarSystem),
+        props.calendarSystem,
+      )
+      const dayIdentifier = getCalendarDayIdentifier(calendarDay, props.calendarSystem)
+
+      return (
+        dayIdentifier < getCalendarDayIdentifier(calendarStart, props.calendarSystem) ||
+        dayIdentifier > getCalendarDayIdentifier(calendarEnd, props.calendarSystem)
+      )
+    }
+
     const dayIdentifier = getDayIdentifier(day)
     return (
       dayIdentifier < getDayIdentifier(parsedStart.value) ||

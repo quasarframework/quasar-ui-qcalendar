@@ -30,6 +30,7 @@ import {
 } from '@timestamp-js/core'
 
 import { convertToUnit, getResponsiveWeekdayLabel } from '../utils/helpers'
+import { getCalendarScopeData } from '../utils/calendarSystem'
 
 // Composables
 import useCalendar from '../composables/useCalendar'
@@ -277,7 +278,12 @@ export default defineComponent({
 
     const { getDefaultMouseEventHandlers } = useMouse(emit, emitListeners)
 
-    const { checkChange } = useCheckChange(emit, { days, lastStart, lastEnd })
+    const { checkChange } = useCheckChange(emit, {
+      days,
+      lastStart,
+      lastEnd,
+      calendarSystem: () => props.calendarSystem,
+    })
 
     const { isKeyCode } = useEvents()
 
@@ -322,7 +328,6 @@ export default defineComponent({
       }
       return 100 / parsedColumnCount.value + '%'
     })
-
     watch([days], checkChange, { deep: true, immediate: true })
 
     watch(
@@ -492,6 +497,12 @@ export default defineComponent({
     // Render functions
 
     function __renderHead(): VNode {
+      const children = [__renderHeadIntervals(), __renderHeadDaysColumn()]
+
+      if (scrollWidth.value > 0) {
+        children.push(__renderHeadScrollbarSpace())
+      }
+
       return h(
         'div',
         {
@@ -500,12 +511,19 @@ export default defineComponent({
             'q-calendar-day__head': true,
             'q-calendar__sticky': isSticky.value === true,
           },
-          style: {
-            marginRight: scrollWidth.value + 'px',
-          },
         },
-        [__renderHeadIntervals(), __renderHeadDaysColumn()],
+        children,
       )
+    }
+
+    function __renderHeadScrollbarSpace(): VNode {
+      return h('div', {
+        class: 'q-calendar-day__head--scrollbar-space',
+        style: {
+          flex: 'none',
+          width: scrollWidth.value + 'px',
+        },
+      })
     }
 
     /*
@@ -892,6 +910,7 @@ export default defineComponent({
       const scope: HeadDayButtonSlotScope = {
         dayLabel,
         timestamp: day,
+        ...getCalendarScopeData(day, props.calendarSystem),
         activeDate,
         disabled: props.disabledWeekdays
           ? props.disabledWeekdays.includes(Number(day.weekday))
@@ -946,7 +965,11 @@ export default defineComponent({
     function __renderColumnHeaderBefore(day: Timestamp, columnIndex: number): VNode | void {
       const slot = slots['column-header-before']
       if (slot) {
-        const scope = { timestamp: day, columnIndex }
+        const scope = {
+          timestamp: day,
+          ...getCalendarScopeData(day, props.calendarSystem),
+          columnIndex,
+        }
         return h(
           'div',
           {
@@ -960,7 +983,11 @@ export default defineComponent({
     function __renderColumnHeaderAfter(day: Timestamp, columnIndex: number): VNode | void {
       const slot = slots['column-header-after']
       if (slot) {
-        const scope = { timestamp: day, columnIndex }
+        const scope = {
+          timestamp: day,
+          ...getCalendarScopeData(day, props.calendarSystem),
+          columnIndex,
+        }
         return h(
           'div',
           {
@@ -1197,7 +1224,10 @@ export default defineComponent({
             props.timeClicksClamped,
             times.now,
           )
-          const scope: TimestampMouseScope = { timestamp }
+          const scope: TimestampMouseScope = {
+            timestamp,
+            ...getCalendarScopeData(timestamp, props.calendarSystem),
+          }
           return { scope, event }
         }),
       }
@@ -1237,7 +1267,13 @@ export default defineComponent({
             },
             [
               slotIntervalLabel
-                ? slotIntervalLabel({ scope: { timestamp: interval, label } })
+                ? slotIntervalLabel({
+                    scope: {
+                      timestamp: interval,
+                      ...getCalendarScopeData(interval, props.calendarSystem),
+                      label,
+                    },
+                  })
                 : label,
             ],
           ),

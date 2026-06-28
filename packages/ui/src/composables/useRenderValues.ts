@@ -2,19 +2,31 @@ import { computed, ComputedRef } from 'vue'
 import {
   copyTimestamp,
   daysInMonth,
+  getCalendarEndOfMonth,
+  getCalendarStartOfMonth,
   getStartOfMonth,
   getEndOfMonth,
+  gregorianCalendar,
   getStartOfWeek,
   getEndOfWeek,
   moveRelativeDays,
   updateFormatted,
   nextDay,
+  type CalendarSystem,
+  type Timestamp,
 } from '@timestamp-js/core'
+
+import {
+  isGregorianCalendar,
+  toCalendarTimestamp,
+  toGregorianTimestamp,
+} from '../utils/calendarSystem'
 
 /**
  * Type definitions for the properties
  */
 interface UseRenderValuesProps {
+  calendarSystem?: CalendarSystem
   maxDays?: number
   weekdays: number[]
 }
@@ -40,6 +52,31 @@ export default function useRenderValues(
   props: UseRenderValuesProps,
   { parsedView, parsedValue, times }: UseRenderValuesContext,
 ): UseRenderValuesReturn {
+  function getMonthRange(around: Timestamp): { start: Timestamp; end: Timestamp; maxDays: number } {
+    const calendar = props.calendarSystem ?? gregorianCalendar
+
+    if (isGregorianCalendar(calendar) === true) {
+      const start = getStartOfMonth(around)
+      const end = getEndOfMonth(around)
+
+      return {
+        start,
+        end,
+        maxDays: daysInMonth(start.year, start.month),
+      }
+    }
+
+    const calendarAround = toCalendarTimestamp(around, calendar)
+    const calendarStart = getCalendarStartOfMonth(calendarAround, calendar)
+    const calendarEnd = getCalendarEndOfMonth(calendarAround, calendar)
+
+    return {
+      start: toGregorianTimestamp(calendarStart, calendar),
+      end: toGregorianTimestamp(calendarEnd, calendar),
+      maxDays: calendar.daysInMonth(calendarStart.year, calendarStart.month),
+    }
+  }
+
   /**
    * Computes the start, end, and maxDays based on the given view
    */
@@ -50,11 +87,13 @@ export default function useRenderValues(
     let end = around
 
     switch (parsedView.value) {
-      case 'month':
-        start = getStartOfMonth(around)
-        end = getEndOfMonth(around)
-        maxDays = daysInMonth(start.year, start.month)
+      case 'month': {
+        const monthRange = getMonthRange(around)
+        start = monthRange.start
+        end = monthRange.end
+        maxDays = monthRange.maxDays
         break
+      }
 
       case 'week':
       case 'week-agenda':
@@ -78,12 +117,14 @@ export default function useRenderValues(
 
       case 'month-interval':
       case 'month-scheduler':
-      case 'month-agenda':
-        start = getStartOfMonth(around)
-        end = getEndOfMonth(around)
+      case 'month-agenda': {
+        const monthRange = getMonthRange(around)
+        start = monthRange.start
+        end = monthRange.end
         end = updateFormatted(end)
-        maxDays = daysInMonth(start.year, start.month)
+        maxDays = monthRange.maxDays
         break
+      }
 
       case 'resource':
         maxDays = 1

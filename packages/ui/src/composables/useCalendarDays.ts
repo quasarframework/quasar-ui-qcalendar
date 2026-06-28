@@ -1,6 +1,7 @@
 import { computed, type Ref } from 'vue'
 import { createDayList, parseTime, type Timestamp } from '@timestamp-js/core'
 
+import { getCalendarScopeData, type CalendarScopeData } from '../utils/calendarSystem'
 import { type CommonProps } from './useCommon'
 import { type ColumnProps } from './useColumn'
 import { type CellWidthProps } from './useCellWidth'
@@ -10,7 +11,7 @@ export interface Scope {
   scope: any
 }
 
-export interface ScopeForSlot {
+export interface ScopeForSlot extends CalendarScopeData {
   /** Timestamp represented by the slot. */
   timestamp: Timestamp
   /** Helper that returns the vertical start position for a time. */
@@ -119,7 +120,12 @@ export default function useCalendarDays(
   }
 
   function getScopeForSlot(timestamp: Timestamp, columnIndex?: number): ScopeForSlot {
-    const scope: ScopeForSlot = { timestamp, timeStartPos, timeDurationHeight }
+    const scope: ScopeForSlot = {
+      timestamp,
+      ...getCalendarScopeData(timestamp, props.calendarSystem),
+      timeStartPos,
+      timeDurationHeight,
+    }
     if (columnIndex !== undefined) {
       scope.columnIndex = columnIndex
     }

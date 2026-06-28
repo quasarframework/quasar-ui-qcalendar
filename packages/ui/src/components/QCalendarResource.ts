@@ -21,6 +21,7 @@ import {
 import { getDayIdentifier, parsed, parseTimestamp, today, type Timestamp } from '@timestamp-js/core'
 
 import { convertToUnit } from '../utils/helpers'
+import { getCalendarScopeData } from '../utils/calendarSystem'
 
 // Composables
 import useCalendar from '../composables/useCalendar'
@@ -290,7 +291,12 @@ export default defineComponent({
 
     const { getDefaultMouseEventHandlers } = useMouse(emit, emitListeners)
 
-    const { checkChange } = useCheckChange(emit, { days, lastStart, lastEnd })
+    const { checkChange } = useCheckChange(emit, {
+      days,
+      lastStart,
+      lastEnd,
+      calendarSystem: () => props.calendarSystem,
+    })
 
     const { isKeyCode } = useEvents()
 
@@ -507,7 +513,7 @@ export default defineComponent({
             return { scope, event }
           }),
         },
-        [slot && slot({ scope })],
+        slot ? slot({ scope }) : 'Resources',
       )
     }
 
@@ -540,6 +546,7 @@ export default defineComponent({
 
       const scope: IntervalLabelSlotScope = {
         timestamp: interval,
+        ...getCalendarScopeData(interval, props.calendarSystem),
         index,
         label,
         droppable: dragOverHeadDayRef.value === label,
@@ -870,6 +877,7 @@ export default defineComponent({
         activeDate,
         resource,
         timestamp: interval,
+        ...getCalendarScopeData(interval, props.calendarSystem),
         resourceIndex,
         droppable: dragOverResourceInterval.value === dragValue,
       }

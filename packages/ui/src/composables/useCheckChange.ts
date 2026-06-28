@@ -1,5 +1,7 @@
 import { Ref } from 'vue'
-import type { Timestamp } from '@timestamp-js/core'
+import { type CalendarSystem, type Timestamp } from '@timestamp-js/core'
+
+import { getCalendarScopeData } from '../utils/calendarSystem'
 
 export const useCheckChangeEmits = [
   /**
@@ -16,6 +18,7 @@ export interface CheckChangeProps {
   days: Ref<Timestamp[]>
   lastStart: Ref<string | null>
   lastEnd: Ref<string | null>
+  calendarSystem: () => CalendarSystem
 }
 
 export interface CheckChangeEvent {
@@ -25,6 +28,14 @@ export interface CheckChangeEvent {
   end: string
   /** Visible timestamps in the range. */
   days: Timestamp[]
+  /** First visible date represented in the configured calendar system. */
+  calendarStart: string
+  /** Last visible date represented in the configured calendar system. */
+  calendarEnd: string
+  /** Visible timestamps represented in the configured calendar system. */
+  calendarDays: Timestamp[]
+  /** Calendar system used to create `calendarDays`. */
+  calendarSystem: CalendarSystem
 }
 
 interface CheckChangeReturn {
@@ -33,7 +44,7 @@ interface CheckChangeReturn {
 
 export default function useCheckChange(
   emit: (_event: 'change', _payload: CheckChangeEvent) => void,
-  { days, lastStart, lastEnd }: CheckChangeProps,
+  { days, lastStart, lastEnd, calendarSystem }: CheckChangeProps,
 ): CheckChangeReturn {
   function checkChange(): boolean {
     const dayList = days.value
@@ -45,7 +56,20 @@ export default function useCheckChange(
     if (!lastStart.value || !lastEnd.value || start !== lastStart.value || end !== lastEnd.value) {
       lastStart.value = start
       lastEnd.value = end
-      emit('change', { start, end, days: dayList })
+      const calendar = calendarSystem()
+      const calendarDays = dayList.map(
+        (day) => getCalendarScopeData(day, calendar).calendarTimestamp,
+      )
+
+      emit('change', {
+        start,
+        end,
+        days: dayList,
+        calendarStart: calendarDays[0]!.date,
+        calendarEnd: calendarDays[calendarDays.length - 1]!.date,
+        calendarDays,
+        calendarSystem: calendar,
+      })
       return true
     }
 

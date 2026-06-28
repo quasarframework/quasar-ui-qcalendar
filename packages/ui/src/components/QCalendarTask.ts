@@ -19,6 +19,7 @@ import {
 import { getDayIdentifier, parsed, parseTimestamp, type Timestamp, today } from '@timestamp-js/core'
 
 import { convertToUnit, getResponsiveWeekdayLabel } from '../utils/helpers'
+import { getCalendarScopeData } from '../utils/calendarSystem'
 
 import useMouse, { getRawMouseEvents } from '../composables/useMouse'
 
@@ -274,7 +275,12 @@ export default defineComponent({
 
     const { getDefaultMouseEventHandlers } = useMouse(emit, emitListeners)
 
-    const { checkChange } = useCheckChange(emit, { days, lastStart, lastEnd })
+    const { checkChange } = useCheckChange(emit, {
+      days,
+      lastStart,
+      lastEnd,
+      calendarSystem: () => props.calendarSystem,
+    })
 
     const { isKeyCode } = useEvents()
 
@@ -432,6 +438,7 @@ export default defineComponent({
 
       const scope: TaskDaySlotScope = {
         timestamp: day,
+        ...getCalendarScopeData(day, props.calendarSystem),
         task,
         taskIndex,
         activeDate,
@@ -732,6 +739,7 @@ export default defineComponent({
       const slot = slots['footer-day']
       const scope = {
         timestamp: day,
+        ...getCalendarScopeData(day, props.calendarSystem),
         footer: task,
         index,
       }
@@ -888,6 +896,7 @@ export default defineComponent({
       const scope = {
         activeDate,
         timestamp: day,
+        ...getCalendarScopeData(day, props.calendarSystem),
         disabled: props.disabledWeekdays
           ? props.disabledWeekdays.includes(Number(day.weekday))
           : false,
@@ -942,7 +951,12 @@ export default defineComponent({
       const dayLabel = dayFormatter.value(day, false)
       const headDayLabelSlot = slots['head-day-label']
       const headDayButtonSlot = slots['head-day-button']
-      const scope: TaskHeadDayLabelSlotScope = { dayLabel, timestamp: day, activeDate }
+      const scope: TaskHeadDayLabelSlotScope = {
+        dayLabel,
+        timestamp: day,
+        ...getCalendarScopeData(day, props.calendarSystem),
+        activeDate,
+      }
 
       const key = day.date
 
@@ -1092,6 +1106,7 @@ export default defineComponent({
 
       const scope: TaskTitleDaySlotScope = {
         timestamp: day,
+        ...getCalendarScopeData(day, props.calendarSystem),
         title,
         index,
         cellWidth: parsedCellWidth.value,
@@ -1123,6 +1138,7 @@ export default defineComponent({
 
       const scope: TaskHeadDaySlotScope = {
         timestamp: day,
+        ...getCalendarScopeData(day, props.calendarSystem),
         activeDate,
         droppable: isTaskHeadDayDroppable(dragOverHeadDayRef.value, day),
         disabled: props.disabledWeekdays

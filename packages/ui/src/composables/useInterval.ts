@@ -18,6 +18,7 @@ import {
 } from '@timestamp-js/core'
 
 import { animVerticalScrollTo, animHorizontalScrollTo } from '../utils/scroll'
+import { getCalendarScopeData, type CalendarScopeData } from '../utils/calendarSystem'
 import { type CommonProps } from './useCommon'
 import { type ColumnProps } from './useColumn'
 import { type CellWidthProps } from './useCellWidth'
@@ -36,7 +37,7 @@ export interface Resource {
   [key: string]: any
 }
 
-export interface ScopeForSlotX {
+export interface ScopeForSlotX extends CalendarScopeData {
   /** Timestamp represented by the slot. */
   timestamp: Timestamp
   /** Helper that returns the horizontal start position for a time. */
@@ -939,12 +940,12 @@ export default function useInterval(
    * @param {Number} columnIndex
    */
   function getScopeForSlot(timestamp: Timestamp, columnIndex?: number): ScopeForSlot {
-    const scope: {
-      timestamp: Timestamp
-      timeStartPos: (_time: string, _clamp?: boolean) => number | false
-      timeDurationHeight: (_minutes: number) => number
-      columnIndex?: number
-    } = { timestamp, timeStartPos, timeDurationHeight }
+    const scope: ScopeForSlot = {
+      timestamp,
+      ...getCalendarScopeData(timestamp, props.calendarSystem),
+      timeStartPos,
+      timeDurationHeight,
+    }
     if (columnIndex !== undefined) {
       scope.columnIndex = columnIndex
     }
@@ -958,12 +959,12 @@ export default function useInterval(
    * @param {Number*} index
    */
   function getScopeForSlotX(timestamp: Timestamp, index: number): ScopeForSlotX {
-    const scope: {
-      timestamp: Timestamp
-      timeStartPosX: (_time: string, _clamp?: boolean) => number | false
-      timeDurationWidth: (_minutes: number) => number
-      index?: number
-    } = { timestamp: copyTimestamp(timestamp), timeStartPosX, timeDurationWidth }
+    const scope: ScopeForSlotX = {
+      timestamp: copyTimestamp(timestamp),
+      ...getCalendarScopeData(timestamp, props.calendarSystem),
+      timeStartPosX,
+      timeDurationWidth,
+    }
     if (index !== undefined) {
       scope.index = index
     }

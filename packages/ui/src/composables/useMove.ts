@@ -1,19 +1,30 @@
 import {
+  getCalendarEndOfMonth,
+  getCalendarStartOfMonth,
   addToDate,
   copyTimestamp,
   getEndOfMonth,
   moveRelativeDays,
+  nextCalendarDay,
   updateDayOfYear,
   updateFormatted,
   updateRelative,
   updateWeekday,
   nextDay,
   parsed,
+  prevCalendarDay,
   prevDay,
   today,
+  type CalendarSystem,
   type Timestamp,
 } from '@timestamp-js/core'
 import { Ref, EmitFn } from 'vue'
+import {
+  getResolvedCalendarSystem,
+  isGregorianCalendar,
+  toCalendarTimestamp,
+  toGregorianTimestamp,
+} from '../utils/calendarSystem'
 
 export const useMoveEmits = [
   /**
@@ -30,6 +41,7 @@ export const useMoveEmits = [
  * Type definition for props
  */
 interface UseMoveProps {
+  calendarSystem?: CalendarSystem
   weekdays: number[]
 }
 
@@ -72,6 +84,21 @@ export default function useMove(
     return moved
   }
 
+  function getCalendarSystem(): CalendarSystem {
+    return getResolvedCalendarSystem(props.calendarSystem)
+  }
+
+  function moveCalendarToAllowedWeekday(timestamp: Timestamp, forward: boolean): Timestamp {
+    const calendar = getCalendarSystem()
+    let moved = timestamp
+
+    for (let i = 0; i < 7 && !isAllowedWeekday(moved); i += 1) {
+      moved = forward ? nextCalendarDay(moved, calendar) : prevCalendarDay(moved, calendar)
+    }
+
+    return moved
+  }
+
   /**
    * Moves the calendar the desired amount. This is based on the 'view'.
    * A month calendar moves by prev/next month
@@ -108,6 +135,23 @@ export default function useMove(
     while (--count >= 0) {
       switch (parsedView.value) {
         case 'month':
+          if (isGregorianCalendar(props.calendarSystem) !== true) {
+            const calendar = getCalendarSystem()
+            const calendarMoved = toCalendarTimestamp(moved, calendar)
+            const boundary =
+              forward === true
+                ? getCalendarEndOfMonth(calendarMoved, calendar)
+                : getCalendarStartOfMonth(calendarMoved, calendar)
+            let nextCalendarValue =
+              forward === true
+                ? nextCalendarDay(boundary, calendar)
+                : prevCalendarDay(boundary, calendar)
+
+            nextCalendarValue = moveCalendarToAllowedWeekday(nextCalendarValue, forward)
+            moved = toGregorianTimestamp(nextCalendarValue, calendar)
+            break
+          }
+
           // For month view, set to the first (or last) day of the month,
           // move one day, update the weekday, and adjust until an allowed day is reached.
           moved = withDay(moved, limit)

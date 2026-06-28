@@ -4,19 +4,24 @@ import {
   parseTimestamp,
   parsed,
   createNativeLocaleFormatterUTC,
+  gregorianCalendar,
   getStartOfWeek,
   getEndOfWeek,
   getDayIdentifier,
   today,
+  type CalendarSystem,
   type DisabledDays,
   type Timestamp,
   type TimestampClass,
   type TimestampStyle,
 } from '@timestamp-js/core'
 
+import { isGregorianCalendar, toCalendarTimestamp } from '../utils/calendarSystem'
+
 // Define props interface
 export interface CommonProps {
   modelValue: string
+  calendarSystem: CalendarSystem
   weekdays: number[]
   dateType: 'round' | 'rounded' | 'square'
   weekdayAlign: 'left' | 'center' | 'right'
@@ -83,6 +88,16 @@ export const useCommonProps = {
     type: String,
     default: today(),
     validator: (v: string): boolean => v === '' || validateTimestamp(v),
+  },
+  /**
+   * Calendar system used for month range math while keeping `model-value` and emitted dates Gregorian.
+   *
+   * @applicable month
+   * @category behavior
+   */
+  calendarSystem: {
+    type: Object as PropType<CalendarSystem>,
+    default: (): CalendarSystem => gregorianCalendar,
   },
   /**
    * Weekday indexes shown by the calendar, where `0` is Sunday and `6` is Saturday.
@@ -334,7 +349,7 @@ export const useCommonProps = {
 export interface CommonReturn {
   parsedStart: Ref<Timestamp>
   parsedEnd: Ref<Timestamp>
-  dayFormatter: Ref<ReturnType<typeof createNativeLocaleFormatterUTC>>
+  dayFormatter: Ref<(_timestamp: Timestamp, _short?: boolean) => string>
   weekdayFormatter: Ref<ReturnType<typeof createNativeLocaleFormatterUTC>>
   ariaDateFormatter: Ref<ReturnType<typeof createNativeLocaleFormatterUTC>>
   arrayHasDate: (_arr: string[], _timestamp: Timestamp) => boolean
@@ -375,12 +390,20 @@ export default function useCommon(
     return (parseTimestamp(endDate.value) as Timestamp) || parsedStart.value
   })
 
-  const dayFormatter = computed(() =>
-    createNativeLocaleFormatterUTC(props.locale, () => ({
+  const dayFormatter = computed(() => {
+    const formatter = createNativeLocaleFormatterUTC(props.locale, () => ({
       timeZone: 'UTC',
       day: 'numeric',
-    })),
-  )
+    }))
+
+    return (timestamp: Timestamp, short?: boolean): string => {
+      if (isGregorianCalendar(props.calendarSystem) === true) {
+        return formatter(timestamp, short === true)
+      }
+
+      return String(toCalendarTimestamp(timestamp, props.calendarSystem).day)
+    }
+  })
 
   const weekdayFormatter = computed(() =>
     createNativeLocaleFormatterUTC(props.locale, (_tms, short) => ({

@@ -22,6 +22,7 @@ import {
 import { getDayIdentifier, parsed, parseTimestamp, today, type Timestamp } from '@timestamp-js/core'
 
 import { convertToUnit, getResponsiveWeekdayLabel } from '../utils/helpers'
+import { getCalendarScopeData } from '../utils/calendarSystem'
 
 // Composables
 import useCalendar from '../composables/useCalendar'
@@ -273,7 +274,12 @@ export default defineComponent({
 
     const { getDefaultMouseEventHandlers } = useMouse(emit, emitListeners)
 
-    const { checkChange } = useCheckChange(emit, { days, lastStart, lastEnd })
+    const { checkChange } = useCheckChange(emit, {
+      days,
+      lastStart,
+      lastEnd,
+      calendarSystem: () => props.calendarSystem,
+    })
 
     const { isKeyCode } = useEvents()
 
@@ -318,7 +324,6 @@ export default defineComponent({
       }
       return 100 / parsedColumnCount.value + '%'
     })
-
     watch([days], checkChange, { deep: true, immediate: true })
 
     watch(
@@ -521,6 +526,12 @@ export default defineComponent({
     // ---
 
     function __renderHead(): VNode {
+      const children = [__renderHeadDaysColumn()]
+
+      if (scrollWidth.value > 0) {
+        children.push(__renderHeadScrollbarSpace())
+      }
+
       return h(
         'div',
         {
@@ -529,12 +540,19 @@ export default defineComponent({
             'q-calendar-agenda__head': true,
             'q-calendar__sticky': isSticky.value === true,
           },
-          style: {
-            marginRight: scrollWidth.value + 'px',
-          },
         },
-        [__renderHeadDaysColumn()],
+        children,
       )
+    }
+
+    function __renderHeadScrollbarSpace(): VNode {
+      return h('div', {
+        class: 'q-calendar-agenda__head--scrollbar-space',
+        style: {
+          flex: 'none',
+          width: scrollWidth.value + 'px',
+        },
+      })
     }
 
     function __renderHeadDaysColumn(): VNode {
@@ -898,6 +916,7 @@ export default defineComponent({
       const scope: HeadDayButtonSlotScope = {
         dayLabel,
         timestamp: day,
+        ...getCalendarScopeData(day, props.calendarSystem),
         activeDate,
         disabled: props.disabledWeekdays
           ? props.disabledWeekdays.includes(Number(day.weekday))

@@ -1,12 +1,19 @@
 import type { ColumnObject } from './composables/useColumn'
 import type { Resource, ScopeForSlot } from './composables/useInterval'
 import type { Task } from './composables/useTask'
-import type { Timestamp } from '@timestamp-js/core'
+import type { CalendarSystem, Timestamp } from '@timestamp-js/core'
 import type { Ref } from 'vue'
 
 type SlotProps<T> = { scope: T }
 
-export interface IntervalSlotScope extends ScopeForSlot {
+export interface CalendarSlotScope {
+  /** Timestamp represented in the configured calendar system. */
+  calendarTimestamp: Timestamp
+  /** Calendar system used to create `calendarTimestamp`. */
+  calendarSystem: CalendarSystem
+}
+
+export interface IntervalSlotScope extends ScopeForSlot, CalendarSlotScope {
   /** Zero-based interval index. */
   index?: number
   /** Formatted day label for the current timestamp. */
@@ -19,7 +26,7 @@ export interface IntervalSlotScope extends ScopeForSlot {
   selectedDate?: boolean
 }
 
-export interface HeadDayButtonSlotScope {
+export interface HeadDayButtonSlotScope extends CalendarSlotScope {
   /** Formatted day label displayed in the header button. */
   dayLabel: string
   /** Timestamp represented by the header button. */
@@ -30,19 +37,19 @@ export interface HeadDayButtonSlotScope {
   disabled?: boolean
 }
 
-export interface ColumnHeaderSlotScope {
+export interface ColumnHeaderSlotScope extends CalendarSlotScope {
   /** Timestamp represented by the column. */
   timestamp: Timestamp
   /** Zero-based column index. */
   columnIndex: number
 }
 
-export interface TimestampMouseScope {
+export interface TimestampMouseScope extends CalendarSlotScope {
   /** Timestamp represented by the event target. */
   timestamp: Timestamp
 }
 
-export interface SchedulerHeadDaySlotScope {
+export interface SchedulerHeadDaySlotScope extends CalendarSlotScope {
   /** Timestamp represented by the scheduler header day. */
   timestamp: Timestamp
   /** Whether the timestamp is the active date. */
@@ -55,7 +62,7 @@ export interface SchedulerHeadDaySlotScope {
   columnIndex: number
 }
 
-export interface SchedulerHeadWeekdaySlotScope {
+export interface SchedulerHeadWeekdaySlotScope extends CalendarSlotScope {
   /** Timestamp represented by the scheduler weekday header. */
   timestamp: Timestamp
   /** Whether the weekday label is rendered in short form. */
@@ -89,7 +96,7 @@ export interface MonthHeadWorkweekSlotScope {
   miniMode: boolean
 }
 
-export interface MonthHeadDaySlotScope {
+export interface MonthHeadDaySlotScope extends CalendarSlotScope {
   /** Whether the timestamp is the active date. */
   activeDate: boolean
   /** Weekday index for the header day. */
@@ -108,7 +115,7 @@ export interface MonthHeadDaySlotScope {
   disabled?: boolean
 }
 
-export interface MonthDaySlotScope {
+export interface MonthDaySlotScope extends CalendarSlotScope {
   /** Whether the day is outside the active month. */
   outside: boolean
   /** Timestamp represented by the day cell. */
@@ -125,7 +132,7 @@ export interface MonthDaySlotScope {
   disabled: boolean
 }
 
-export interface MonthDayLabelSlotScope {
+export interface MonthDayLabelSlotScope extends CalendarSlotScope {
   /** Formatted day label. */
   dayLabel: string
   /** Timestamp represented by the day label. */
@@ -142,12 +149,12 @@ export interface MonthDayLabelSlotScope {
   disabled: boolean
 }
 
-export interface MonthDayOfYearSlotScope {
+export interface MonthDayOfYearSlotScope extends CalendarSlotScope {
   /** Timestamp represented by the day-of-year label. */
   timestamp: Timestamp
 }
 
-export interface MonthLabelSlotScope {
+export interface MonthLabelSlotScope extends CalendarSlotScope {
   /** Formatted month label. */
   monthLabel: string
   /** Timestamp represented by the month label. */
@@ -156,7 +163,7 @@ export interface MonthLabelSlotScope {
   miniMode: boolean
 }
 
-export interface IntervalLabelSlotScope {
+export interface IntervalLabelSlotScope extends CalendarSlotScope {
   /** Timestamp represented by the interval. */
   timestamp: Timestamp
   /** Zero-based interval index. */
@@ -265,7 +272,7 @@ export interface ResourceIntervalsSlotScope {
   timeDurationWidth: (_minutes: number) => number
 }
 
-export interface ResourceIntervalSlotScope {
+export interface ResourceIntervalSlotScope extends CalendarSlotScope {
   /** Whether the interval timestamp is the active date. */
   activeDate: boolean
   /** Resource represented by the interval. */
@@ -295,7 +302,7 @@ export interface SchedulerResourceDaysSlotScope {
   days: Timestamp[]
 }
 
-export interface SchedulerDaySlotScope {
+export interface SchedulerDaySlotScope extends CalendarSlotScope {
   /** Timestamp represented by the scheduler day cell. */
   timestamp: Timestamp
   /** Zero-based scheduler column index. */
@@ -332,7 +339,7 @@ export interface TaskItemSlotScope extends TaskHeadSlotScope {
   droppable: boolean | string
 }
 
-export interface TaskDaySlotScope {
+export interface TaskDaySlotScope extends CalendarSlotScope {
   /** Timestamp represented by the task day cell. */
   timestamp: Timestamp
   /** Task represented by the day cell. */
@@ -367,7 +374,7 @@ export interface TaskTitleSlotScope extends TaskHeadSlotScope {
   index: number
 }
 
-export interface TaskTitleDaySlotScope {
+export interface TaskTitleDaySlotScope extends CalendarSlotScope {
   /** Timestamp represented by the title day cell. */
   timestamp: Timestamp
   /** Title value represented by the title day cell. */
@@ -385,7 +392,7 @@ export interface TaskFooterSlotScope extends TaskHeadSlotScope {
   index: number
 }
 
-export interface TaskFooterDaySlotScope {
+export interface TaskFooterDaySlotScope extends CalendarSlotScope {
   /** Timestamp represented by the footer day cell. */
   timestamp: Timestamp
   /** Footer task represented by the day cell. */
@@ -394,7 +401,7 @@ export interface TaskFooterDaySlotScope {
   index: number
 }
 
-export interface TaskHeadDaySlotScope {
+export interface TaskHeadDaySlotScope extends CalendarSlotScope {
   /** Timestamp represented by the task header day. */
   timestamp: Timestamp
   /** Whether the timestamp is the active date. */
@@ -405,7 +412,7 @@ export interface TaskHeadDaySlotScope {
   disabled: boolean
 }
 
-export interface TaskHeadWeekdayLabelSlotScope {
+export interface TaskHeadWeekdayLabelSlotScope extends CalendarSlotScope {
   /** Whether the timestamp is the active date. */
   activeDate: boolean
   /** Timestamp represented by the weekday label. */
@@ -414,7 +421,7 @@ export interface TaskHeadWeekdayLabelSlotScope {
   disabled: boolean
 }
 
-export interface TaskHeadDayLabelSlotScope {
+export interface TaskHeadDayLabelSlotScope extends CalendarSlotScope {
   /** Formatted day label. */
   dayLabel: string
   /** Timestamp represented by the day label. */
@@ -505,7 +512,7 @@ export interface QCalendarMonthSlots {
 }
 
 export interface QCalendarResourceSlots {
-  /** Customize the resource header. */
+  /** Customize the resource header. Defaults to "Resources". */
   'head-resources'?: SlotProps<ResourceHeadSlotScope>
   /** Customize an interval label. */
   'interval-label'?: SlotProps<IntervalLabelSlotScope>
@@ -520,7 +527,7 @@ export interface QCalendarResourceSlots {
 }
 
 export interface QCalendarSchedulerSlots {
-  /** Customize the scheduler resource header. */
+  /** Customize the scheduler resource header. Defaults to "Resources". */
   'head-resources'?: SlotProps<ResourceHeadSlotScope>
   /** Render content in the scheduler day header events container. */
   'head-days-events'?: SlotProps<HeadDaysEventsSlotScope>
