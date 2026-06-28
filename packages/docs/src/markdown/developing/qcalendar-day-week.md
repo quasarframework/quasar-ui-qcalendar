@@ -300,3 +300,11 @@ button simulates waiting for a server response, then fills the visible calendar
 with data returned for the current range.
 
 <MarkdownExample title="Server Data" file="WeekServerData"/>
+
+### Calendar Adapters
+
+Week views are still range-based, so adapters are usually applied in slots. This
+keeps QCalendar events and model values Gregorian while native users see Hijri,
+Saka, or other adapter labels in the header and cells.
+
+<MarkdownExample title="Calendar Adapters" file="WeekCalendarAdapter"/>

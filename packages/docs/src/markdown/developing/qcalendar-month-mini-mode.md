@@ -187,3 +187,11 @@ button simulates waiting for a server response, then fills the visible calendar
 with data returned for the current range.
 
 <MarkdownExample title="Server Data" file="MiniModeServerData"/>
+
+### Calendar Adapters
+
+Mini-mode supports the same native month adapter behavior as the full month
+view. The compact grid can use native month starts, native month ends, and
+native outside-day state while emitting Gregorian dates.
+
+<MarkdownExample title="Calendar Adapters" file="MiniModeCalendarAdapter"/>

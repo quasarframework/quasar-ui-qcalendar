@@ -38,3 +38,11 @@ import QCalendarApi from '@quasar/quasar-ui-qcalendar/dist/api/QCalendar.json'
 ## All
 
 <MarkdownExample title="All" file="CalendarAll" no-edit/>
+
+## Calendar Adapters
+
+QCalendar forwards the adapter-aware props to the selected view. This is useful
+when a wrapper is choosing the visible calendar type at runtime, but the app
+still stores and routes Gregorian model values.
+
+<MarkdownExample title="Calendar Adapters" file="CalendarAdapterWrapper"/>

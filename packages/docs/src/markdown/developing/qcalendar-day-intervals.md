@@ -28,3 +28,11 @@ month selector or custom navigation UI.
 ### Month Navigation
 
 <MarkdownExample title="Month Navigation" file="IntervalsMonthNavigation"/>
+
+## Calendar Adapters
+
+Interval views keep time-of-day labels Gregorian-neutral. Use Timestamp calendar
+adapters in interval and header slots when the interval surface needs native
+calendar context.
+
+<MarkdownExample title="Calendar Adapters" file="IntervalsCalendarAdapter"/>

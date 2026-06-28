@@ -43,7 +43,7 @@ QCalendar is actually an accumulation of several other dedicated components and 
 9. Optional drag and drop support (including mobile)
 10. Automatic localization / internationalization
 11. Responsive flex grid layout
-12. No external dependencies (momentjs, jQuery, etc) other than Vue and the shared timestamp primitives used by the package
+12. No external dependencies (momentjs, jQuery, etc) other than Vue and the shared `@timestamp-js/core` primitives used by the package
 13. User events support (date, day, interval, time, resource, etc)
 14. Define any day as beginning of week
 15. Show only certain days of the week (good for work week days)
@@ -53,11 +53,12 @@ QCalendar is actually an accumulation of several other dedicated components and 
 19. Easy to theme using CSS vars and Theme Builder
 20. Easy to customize with Vue slots
 21. Support for Dark mode
-22. Rich support of date functions that are also exported for making your own calendars
-23. Toggled date, range and interval selection
+22. Timestamp-powered date utilities for custom calendar workflows
+23. Opt-in Timestamp calendar adapters for native month math and non-Gregorian labels, while keeping QCalendar model values Gregorian
+24. Toggled date, range and interval selection
 
 ## QCalendar is not…
 
 - An event management system. However, QCalendar supports everything you need to create an event/reminder/task management system using slots.
 - An interactive navigation provider (next, previous, today). However, you can easily do this in devland with QCalendar’s methods (see examples).
-- Only the Gregorian calendar is supported (at this time).
+- A replacement for dedicated calendar adapter packages. Non-Gregorian calendars are opt-in through Timestamp adapters, and QCalendar keeps emitted app dates Gregorian for compatibility.

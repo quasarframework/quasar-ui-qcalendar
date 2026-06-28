@@ -45,6 +45,55 @@ import { parseTimestamp, today } from '@timestamp-js/core'
 
 This is a breaking change for applications that used QCalendar's previous Timestamp export surface directly. QCalendar components still provide timestamp-shaped objects through their documented slots and events where applicable.
 
+## Calendar adapter support
+
+QCalendar v5 can work with Timestamp calendar adapters, such as Islamic Civil
+(Hijri) or Indian National (Saka), but this is opt-in. The QCalendar UI package
+does not install non-Gregorian adapter packages. Add only the adapters your app
+uses:
+
+```bash
+pnpm add @timestamp-js/core @timestamp-js/calendar-islamic
+```
+
+Then pass the adapter to the relevant view:
+
+```vue
+<q-calendar-month
+  v-model="selectedDate"
+  :calendar-system="islamicCivilCalendar"
+  locale="ar"
+  :weekdays="[6, 0, 1, 2, 3, 4, 5]"
+  dir="rtl"
+/>
+```
+
+Existing Gregorian calendars do not need an adapter. When `calendar-system` is
+not provided, QCalendar uses Gregorian calendar behavior from `@timestamp-js/core`.
+Date-bearing slot and mouse-event scopes now include additive adapter-aware
+fields:
+
+- `calendarTimestamp`
+- `calendarSystem`
+
+The `change` event also includes additive fields:
+
+- `calendarStart`
+- `calendarEnd`
+- `calendarDays`
+- `calendarSystem`
+
+The existing Gregorian fields remain the source of truth for model values,
+routes, storage, and event handling:
+
+- `timestamp`
+- `start`
+- `end`
+- `days`
+
+See [Calendar Adapters](/developing/calendar-adapters) for the integration
+contract and view-specific examples.
+
 ## Installing the beta
 
 While QCalendar v5 is in beta, install packages from the `beta` dist tag:

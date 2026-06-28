@@ -3,6 +3,7 @@ title: Quick Start
 desc: General use and common properties
 keys: developing
 related:
+  - /developing/calendar-adapters
   - /developing/qcalendar-day
   - /developing/qcalendar-month
   - /developing/qcalendar-month-mini-mode
@@ -18,25 +19,58 @@ This section will highlight a number common properties and generalities amongst 
 
 | Property    | Type   | Example    |
 | ----------- | ------ | ---------- |
-| model-value | String | YYYY-DD-MM |
+| model-value | String | YYYY-MM-DD |
 
-`model-value` is how the date is set in QCalendar and is the User selected date when there is an interactive calendar. This is the current date and can be used to move the calendar to a previous or next view (ie: day, week, month, etc). Typically, you set this with something like `v-model="selectedDate"`. If your `selectedDate` contains a `null`, then the current date (today's date) will be used.
+`model-value` is how the date is set in QCalendar and is the user-selected date when there is an interactive calendar. This is the active date and can be used to move the calendar to a previous or next view (ie: day, week, month, etc). Typically, you set this with something like `v-model="selectedDate"`. If your `selectedDate` contains a `null`, then the current date (today's date) will be used.
+
+QCalendar model values are Gregorian `YYYY-MM-DD` strings. This stays true even when you use a non-Gregorian calendar adapter for display.
 
 ## Now
 
 | Property | Type   | Example    |
 | -------- | ------ | ---------- |
-| now      | String | YYYY-DD-MM |
+| now      | String | YYYY-MM-DD |
 
 If you do not set the `now` property, it will be set to the current date (today's date). This property represents **today**, but it doesn't have to be today.
 
 ## Localization
 
-Internally, QCalendar uses the browser's `Intl.DateTimeFormat` for all localization. Therefore, QCalendar can only display the localization properly if it is supported by the User's browser. If for some reason, it is not supported, then the fallback is to use American English (`en-US`). If you wanted to display French Canadian, you would use `fr-CA`, or Brazilian Portuguese `pt-BR`.
+Internally, QCalendar uses the browser's `Intl.DateTimeFormat` for all localization. Therefore, QCalendar can only display the localization properly if it is supported by the user's browser. If for some reason, it is not supported, then the fallback is to use American English (`en-US`). If you wanted to display French Canadian, you would use `fr-CA`, or Brazilian Portuguese `pt-BR`.
 
 | Property | Type   | Example |
 | -------- | ------ | ------- |
 | locale   | String | en-US   |
+
+`locale` changes language and formatting. It does not change the calendar math by itself.
+
+## Calendar systems
+
+Use `calendar-system` when a view should expose native calendar dates alongside QCalendar's Gregorian dates. This is an opt-in adapter object from Timestamp packages such as `@timestamp-js/calendar-islamic` or `@timestamp-js/calendar-saka`.
+
+| Property        | Type   | Example              |
+| --------------- | ------ | -------------------- |
+| calendar-system | Object | islamicCivilCalendar |
+
+```vue
+<script setup>
+import { ref } from 'vue'
+import { islamicCivilCalendar } from '@timestamp-js/calendar-islamic'
+
+const selectedDate = ref('2024-03-25')
+</script>
+
+<template>
+  <q-calendar-month
+    v-model="selectedDate"
+    :calendar-system="islamicCivilCalendar"
+    locale="ar"
+    :weekdays="[6, 0, 1, 2, 3, 4, 5]"
+    dir="rtl"
+  />
+</template>
+```
+
+In this example, `selectedDate` is still Gregorian. Date-bearing slots and mouse-event scopes receive `scope.timestamp` for the Gregorian date and `scope.calendarTimestamp` for the adapter-native date. See [Calendar Adapters](/developing/calendar-adapters) for week ranges, native month boundaries, RTL guidance, and adapter examples.
 
 ## Dark and bordered
 
@@ -49,7 +83,7 @@ If you want a calendar to display dark mode, then set the `dark` property. If yo
 
 ## Weekdays
 
-`weekdays` is a property that allows you to adjust the order of the days of the week. It is an array of numbers from 0 (Sunday) to 6 (Saturday). The default is `[0,1,2,3,4,5,6]`. If you wanted to have a 5 day work week, you would remove the Sunday and Saturday representations like this: `[1,2,3,4,5]`. If you wanted a calendar where Monday was the first day of the week, you would move Sunday to the end, like this: `[1,2,3,4,5,6,0]`. Don't get too funky with this, as you may get unexpected results and handling.
+`weekdays` is a property that allows you to adjust the order of the days of the week. It is an array of numbers from 0 (Sunday) to 6 (Saturday). The default is `[0,1,2,3,4,5,6]`. If you wanted to have a 5 day work week, you would remove the Sunday and Saturday representations like this: `[1,2,3,4,5]`. If you wanted a calendar where Monday was the first day of the week, you would move Sunday to the end, like this: `[1,2,3,4,5,6,0]`. Native calendar presentations often pair `weekdays` with `locale`, `dir`, and `calendar-system` so labels, direction, and calendar math agree.
 
 | Property | Type  | Example         |
 | -------- | ----- | --------------- |

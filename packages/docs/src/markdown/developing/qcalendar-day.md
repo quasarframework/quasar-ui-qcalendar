@@ -321,3 +321,11 @@ button simulates waiting for a server response, then fills the visible calendar
 with data returned for the current range.
 
 <MarkdownExample title="Server Data" file="DayServerData"/>
+
+### Calendar Adapters
+
+Day views keep their Gregorian visible range. Use Timestamp calendar adapters in
+slots when headers, badges, or native-keyed events need to display native
+calendar dates.
+
+<MarkdownExample title="Calendar Adapters" file="DayCalendarAdapter"/>

@@ -135,6 +135,9 @@ the scheduler continues to manage the resource/date grid.
 
 ### Head Resources
 
+The scheduler resource header defaults to `Resources`. Use this slot to localize
+the label or replace it with custom header content.
+
 <MarkdownExample title="Slot - Head Resources" file="SchedulerSlotHeadResources"/>
 
 ### Resource Days
@@ -209,3 +212,11 @@ button simulates waiting for a server response, then fills the visible calendar
 with data returned for the current range.
 
 <MarkdownExample title="Server Data" file="SchedulerServerData"/>
+
+### Calendar Adapters
+
+Scheduler views combine resources with visible days. Convert each slot
+timestamp before rendering native calendar labels or matching native-keyed
+resource data.
+
+<MarkdownExample title="Calendar Adapters" file="SchedulerCalendarAdapter"/>

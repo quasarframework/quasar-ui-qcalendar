@@ -162,3 +162,15 @@ button simulates waiting for a server response, then fills the visible calendar
 with data returned for the current range.
 
 <MarkdownExample title="Server Data" file="AgendaServerData"/>
+
+### Calendar Adapters
+
+Agenda views can use Timestamp adapters for native labels and native-keyed data
+without changing the Gregorian range that QCalendar renders and emits.
+
+This example converts each visible Gregorian day to Islamic Civil (Hijri) or
+Indian National (Saka) labels inside the header and day slots. It is useful for
+planning views where users need native calendar context, while the application
+continues to store and route Gregorian dates.
+
+<MarkdownExample title="Calendar Adapters" file="AgendaCalendarAdapter"/>

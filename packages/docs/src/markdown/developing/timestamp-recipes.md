@@ -4,6 +4,7 @@ desc: Use @timestamp-js/core with QCalendar
 keys: timestamp, ranges, duration, utc, intervals
 examples: General
 related:
+  - /developing/calendar-adapters
   - /developing/qcalendar-month
   - /developing/qcalendar-day-intervals
   - /other/upgrade-guide

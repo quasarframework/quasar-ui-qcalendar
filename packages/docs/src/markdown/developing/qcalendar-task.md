@@ -209,3 +209,11 @@ button simulates waiting for a server response, then fills the visible calendar
 with data returned for the current range.
 
 <MarkdownExample title="Server Data" file="TaskServerData"/>
+
+### Calendar Adapters
+
+Task views keep rows stable while day cells move across a date range. Convert
+day-cell timestamps before showing native labels or looking up native-keyed work
+items.
+
+<MarkdownExample title="Calendar Adapters" file="TaskCalendarAdapter"/>

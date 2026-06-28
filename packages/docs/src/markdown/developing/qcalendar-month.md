@@ -240,3 +240,17 @@ button simulates waiting for a server response, then fills the visible calendar
 with data returned for the current range.
 
 <MarkdownExample title="Server Data" file="MonthServerData"/>
+
+### Calendar Adapters
+
+Use `calendar-system` when a month grid should follow a non-Gregorian calendar
+system. QCalendar still emits Gregorian model values, but the native calendar
+adapter controls month boundaries, outside-day state, and previous/next month
+navigation.
+
+This example switches between Islamic Civil (Hijri) and Indian National (Saka)
+calendar adapters. The first native day appears in the first visible week, and
+outside days are disabled against the native month instead of the Gregorian
+month.
+
+<MarkdownExample title="Calendar Adapters" file="MonthCalendarAdapter"/>

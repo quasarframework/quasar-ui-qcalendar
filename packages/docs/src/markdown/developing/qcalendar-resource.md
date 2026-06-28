@@ -100,6 +100,9 @@ while the calendar continues to manage scrolling, sizing, and date math.
 
 ### Head Resources
 
+The resource header defaults to `Resources`. Use this slot to localize the label
+or replace it with custom header content.
+
 <MarkdownExample title="Slot - Head Resources" file="ResourceSlotHeadResources"/>
 
 ### Interval Label
@@ -166,3 +169,11 @@ button simulates waiting for a server response, then fills the visible calendar
 with data returned for the current range.
 
 <MarkdownExample title="Server Data" file="ResourceServerData"/>
+
+### Calendar Adapters
+
+Resource views are interval timelines for a selected Gregorian date. Use
+calendar adapters in the resource header, interval labels, and interval slots
+when the resource plan needs native calendar context.
+
+<MarkdownExample title="Calendar Adapters" file="ResourceCalendarAdapter"/>
