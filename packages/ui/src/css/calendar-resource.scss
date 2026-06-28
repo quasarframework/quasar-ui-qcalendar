@@ -148,22 +148,26 @@
 
 .q-calendar-resource {
   &__head {
-    // border-bottom: var(--calendar-border);
+    border-bottom: var(--calendar-border);
     color: var(--calendar-color);
     background: var(--calendar-background);
     font-weight: var(--calendar-head-font-weight);
 
     &--resources {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
       border-right: var(--calendar-border);
-      // border-bottom: var(--calendar-border);
+      border-bottom: var(--calendar-border);
       color: var(--calendar-color);
       background: var(--calendar-background);
       min-width: var(--calendar-resources-width);
       max-width: var(--calendar-resources-width);
-
-      &:last-child {
-        border-bottom: none;
-      }
+      padding: 0 4px;
+      text-align: center;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     &--interval {
@@ -226,6 +230,26 @@
   }
 }
 
+.q-calendar-resource:dir(rtl) {
+  .q-calendar-resource__head--resources,
+  .q-calendar-resource__resource,
+  .q-calendar-resource__resource--section {
+    border-right: none;
+    border-left: var(--calendar-border);
+  }
+
+  .q-calendar-resource__head--interval,
+  .q-calendar-resource__resource--interval {
+    &:first-child {
+      border-right: none;
+    }
+
+    &:last-child {
+      border-right: var(--calendar-border);
+    }
+  }
+}
+
 .q-dark div,
 .body--dark div,
 .q-calendar--dark {
@@ -233,11 +257,11 @@
     &__head {
       color: var(--calendar-color-dark);
       background: var(--calendar-background-dark);
-      // border-bottom: var(--calendar-border-dark);
+      border-bottom: var(--calendar-border-dark);
 
       &--resources {
         border-right: var(--calendar-border-dark);
-        // border-bottom: var(--calendar-border-dark);
+        border-bottom: var(--calendar-border-dark);
         color: var(--calendar-color-dark);
         background: var(--calendar-background-dark);
       }
@@ -279,6 +303,26 @@
 
     .q-calendar__child--expanded > .q-calendar-resource__resource--row {
       border-top: var(--calendar-border-dark) !important;
+    }
+  }
+
+  .q-calendar-resource:dir(rtl) {
+    .q-calendar-resource__head--resources,
+    .q-calendar-resource__resource,
+    .q-calendar-resource__resource--section {
+      border-right: none;
+      border-left: var(--calendar-border-dark);
+    }
+
+    .q-calendar-resource__head--interval,
+    .q-calendar-resource__resource--interval {
+      &:first-child {
+        border-right: none;
+      }
+
+      &:last-child {
+        border-right: var(--calendar-border-dark);
+      }
     }
   }
 }

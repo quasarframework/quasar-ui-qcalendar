@@ -329,6 +329,29 @@
   }
 }
 
+.q-calendar-task:dir(rtl) {
+  .q-calendar-task__head--tasks,
+  .q-calendar-task__title--task,
+  .q-calendar-task__task--item,
+  .q-calendar-task__footer--task {
+    border-right: none;
+    border-left: var(--calendar-border);
+  }
+
+  .q-calendar-task__head--day,
+  .q-calendar-task__title--day,
+  .q-calendar-task__task--day,
+  .q-calendar-task__footer--day {
+    &:first-child {
+      border-right: none !important;
+    }
+
+    &:last-child {
+      border-right: var(--calendar-border) !important;
+    }
+  }
+}
+
 // Dark mode
 .q-dark div,
 .body--dark div,
@@ -415,6 +438,29 @@
       &--day {
         background: var(--calendar-background-dark);
         border-right: var(--calendar-border-dark);
+      }
+    }
+  }
+
+  .q-calendar-task:dir(rtl) {
+    .q-calendar-task__head--tasks,
+    .q-calendar-task__title--task,
+    .q-calendar-task__task--item,
+    .q-calendar-task__footer--task {
+      border-right: none;
+      border-left: var(--calendar-border-dark);
+    }
+
+    .q-calendar-task__head--day,
+    .q-calendar-task__title--day,
+    .q-calendar-task__task--day,
+    .q-calendar-task__footer--day {
+      &:first-child {
+        border-right: none !important;
+      }
+
+      &:last-child {
+        border-right: var(--calendar-border-dark) !important;
       }
     }
   }

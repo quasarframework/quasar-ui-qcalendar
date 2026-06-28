@@ -325,6 +325,26 @@
   }
 }
 
+.q-calendar-agenda:dir(rtl) {
+  .q-calendar-agenda__head--intervals,
+  .q-calendar-agenda__intervals-column {
+    border-right: none;
+    border-left: var(--calendar-border);
+  }
+
+  .q-calendar-agenda__head--day,
+  .q-calendar-agenda__head--day__event,
+  .q-calendar-agenda__day {
+    &:first-child {
+      border-right: none !important;
+    }
+
+    &:last-child {
+      border-right: var(--calendar-border) !important;
+    }
+  }
+}
+
 .q-dark div,
 .body--dark div,
 .q-calendar--dark {
@@ -442,6 +462,26 @@
           color: var(--calendar-range-color-dark);
           background: var(--calendar-range-background-dark);
         }
+      }
+    }
+  }
+
+  .q-calendar-agenda:dir(rtl) {
+    .q-calendar-agenda__head--intervals,
+    .q-calendar-agenda__intervals-column {
+      border-right: none;
+      border-left: var(--calendar-border-dark);
+    }
+
+    .q-calendar-agenda__head--day,
+    .q-calendar-agenda__head--day__event,
+    .q-calendar-agenda__day {
+      &:first-child {
+        border-right: none !important;
+      }
+
+      &:last-child {
+        border-right: var(--calendar-border-dark) !important;
       }
     }
   }
