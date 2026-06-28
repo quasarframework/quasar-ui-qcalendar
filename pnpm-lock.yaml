@@ -57,9 +57,15 @@ importers:
       '@quasar/extras':
         specifier: 2.0.1
         version: 2.0.1
+      '@timestamp-js/calendar-islamic':
+        specifier: 0.1.0-rc.1
+        version: 0.1.0-rc.1
+      '@timestamp-js/calendar-saka':
+        specifier: 0.1.0-rc.1
+        version: 0.1.0-rc.1
       '@timestamp-js/core':
-        specifier: 0.1.0-rc.0
-        version: 0.1.0-rc.0
+        specifier: 0.1.0-rc.1
+        version: 0.1.0-rc.1
       date-holidays:
         specifier: ^3.30.2
         version: 3.30.2
@@ -134,8 +140,8 @@ importers:
   packages/ui:
     dependencies:
       '@timestamp-js/core':
-        specifier: 0.1.0-rc.0
-        version: 0.1.0-rc.0
+        specifier: 0.1.0-rc.1
+        version: 0.1.0-rc.1
     devDependencies:
       '@md-plugins/quasar-app-extension-q-press':
         specifier: 0.1.0-rc.17
@@ -1658,8 +1664,16 @@ packages:
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
 
-  '@timestamp-js/core@0.1.0-rc.0':
-    resolution: {integrity: sha512-194+sqP0GPGMRTq4K5gXLVrjSPhDNhsd4bCoH7pKucE36xpFOxxCp4LiYHCHLOIYPf2nfj7XoYDbX/05Z4w8+A==}
+  '@timestamp-js/calendar-islamic@0.1.0-rc.1':
+    resolution: {integrity: sha512-6gL9OhnJMNcKFNTlTmDlx4+qdE7SBlkW4iMK5wNKwktzoJ7HqXzShI/DKjEiKeYe6MD7EY77Dlk9Rnu+DtnWfw==}
+    engines: {node: '>=22.13', pnpm: '>=11.5.0'}
+
+  '@timestamp-js/calendar-saka@0.1.0-rc.1':
+    resolution: {integrity: sha512-q4sTrYFeoX/mhOcWihuryPIGQTBF9c065Ld9Wwnbsa0v9PNPDJSTFrtHVXj6jmnJnvvmci/NaNFgtyu4RFU1gQ==}
+    engines: {node: '>=22.13', pnpm: '>=11.5.0'}
+
+  '@timestamp-js/core@0.1.0-rc.1':
+    resolution: {integrity: sha512-lbvhD5CVxL54Zax3GaFDmKoetmi7tZtUXhC2udgCuhIva0s+EGp+EOJvl4ys87uiWCKkKlWLikE1ecOhxPKwkQ==}
     engines: {node: '>=22.13', pnpm: '>=11.5.0'}
 
   '@tybys/wasm-util@0.10.2':
@@ -5473,7 +5487,15 @@ snapshots:
 
   '@standard-schema/spec@1.1.0': {}
 
-  '@timestamp-js/core@0.1.0-rc.0': {}
+  '@timestamp-js/calendar-islamic@0.1.0-rc.1':
+    dependencies:
+      '@timestamp-js/core': 0.1.0-rc.1
+
+  '@timestamp-js/calendar-saka@0.1.0-rc.1':
+    dependencies:
+      '@timestamp-js/core': 0.1.0-rc.1
+
+  '@timestamp-js/core@0.1.0-rc.1': {}
 
   '@tybys/wasm-util@0.10.2':
     dependencies:

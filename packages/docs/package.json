@@ -24,7 +24,9 @@
   },
   "dependencies": {
     "@quasar/extras": "2.0.1",
-    "@timestamp-js/core": "0.1.0-rc.0",
+    "@timestamp-js/calendar-islamic": "0.1.0-rc.1",
+    "@timestamp-js/calendar-saka": "0.1.0-rc.1",
+    "@timestamp-js/core": "0.1.0-rc.1",
     "date-holidays": "^3.30.2",
     "pinia": "^3.0.4",
     "quasar": "^2.20.1",
