@@ -34,7 +34,6 @@
           bordered
           hoverable
           @click-day="onClickDay"
-          @click-date="onClickDay"
         >
           <template #head-day-event="{ scope }">
             <span class="calendar-adapter-agenda__head-label">
