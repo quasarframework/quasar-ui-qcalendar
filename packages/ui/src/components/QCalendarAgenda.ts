@@ -1130,9 +1130,12 @@ export default defineComponent({
       const slot = slots.day
       const scope: IntervalSlotScope = getScopeForSlot(day, columnIndex)
       const width = isSticky.value === true ? props.cellWidth : computedWidth.value
+      const styler = props.dayStyle || dayStyleDefault
+      const dayClass = typeof props.dayClass === 'function' ? props.dayClass({ scope }) : {}
       const style: CSSProperties = {
         width,
         maxWidth: width,
+        ...styler({ scope }),
         ...getDisabledStyle(day),
       }
       if (isSticky.value === true) {
@@ -1149,6 +1152,7 @@ export default defineComponent({
           key: day.date + (columnIndex !== undefined ? ':' + columnIndex : ''),
           class: {
             'q-calendar-agenda__day': true,
+            ...dayClass,
             ...getRelativeClasses(day),
           },
           style,
