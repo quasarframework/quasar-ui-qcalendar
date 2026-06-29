@@ -6,30 +6,19 @@
     </p>
 
     <div class="calendar-adapter-agenda__toolbar">
-      <div class="calendar-adapter-agenda__selector" role="group" aria-label="Calendar adapter">
-        <button
-          v-for="calendar in calendarExamples"
-          :key="calendar.id"
-          class="calendar-adapter-agenda__choice"
-          :class="{ 'calendar-adapter-agenda__choice--active': calendar.id === calendarId }"
-          type="button"
-          :aria-pressed="calendar.id === calendarId"
-          @click="calendarId = calendar.id"
-        >
-          <span class="calendar-adapter-agenda__choice-kicker">{{ calendar.shortLabel }}</span>
-          <span>{{ calendar.label }}</span>
-        </button>
-      </div>
+      <calendar-adapter-selector v-model="calendarId" :calendars="calendarExamples" />
 
       <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
     </div>
 
-    <q-banner rounded class="calendar-adapter-agenda__banner">
-      <strong>{{ activeCalendar.label }}</strong>
-      <span>{{ selectedNativeMonthLabel }}</span>
-    </q-banner>
+    <calendar-adapter-title
+      :calendar-label="activeCalendar.label"
+      :month-title="selectedNativeMonthTitle"
+      :range-label="selectedNativeMonthRange"
+      :direction="activeCalendar.direction"
+    />
 
-    <div class="row justify-center">
+    <div class="row justify-center full-width">
       <div class="calendar-adapter-agenda__calendar">
         <q-calendar-agenda
           ref="calendar"
@@ -40,6 +29,7 @@
           :locale="activeCalendar.locale"
           :weekdays="activeCalendar.weekdays"
           :dir="activeCalendar.direction"
+          :day-class="getDayClass"
           animated
           bordered
           hoverable
@@ -53,13 +43,7 @@
           </template>
 
           <template #day="{ scope: { timestamp, calendarTimestamp } }">
-            <article
-              class="calendar-adapter-agenda__day-card"
-              :class="{
-                'calendar-adapter-agenda__day-card--native-outside':
-                  isOutsideSelectedNativeMonth(calendarTimestamp),
-              }"
-            >
+            <article class="calendar-adapter-agenda__day-card">
               <div>
                 <strong>{{ getNativeDateLabel(calendarTimestamp) }}</strong>
                 <span>Gregorian {{ timestamp.date }}</span>
@@ -108,6 +92,8 @@ import { islamicCivilCalendar } from '@timestamp-js/calendar-islamic'
 import { indianNationalCalendar } from '@timestamp-js/calendar-saka'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
+import CalendarAdapterSelector from '@/components/CalendarAdapterSelector.vue'
+import CalendarAdapterTitle from '@/components/CalendarAdapterTitle.vue'
 import NavigationBar from '@/components/NavigationBar.vue'
 
 type CalendarId = 'islamic-civil' | 'saka'
@@ -164,8 +150,8 @@ const calendarExamples: CalendarExample[] = [
     ],
     items: {
       '1445-09-29': ['Native planning date', 'Confirm team capacity'],
-      '1445-09-30': ['Close Ramadan planning'],
-      '1445-10-01': ['Start Shawwal follow-up'],
+      '1445-09-30': ['Month close'],
+      '1445-10-01': ['Follow-up'],
     },
   },
   {
@@ -215,13 +201,18 @@ const selectedNativeMonthStart = computed(() =>
 const selectedNativeMonthEnd = computed(() =>
   getCalendarEndOfMonth(selectedNativeTimestamp.value, activeCalendar.value.calendar),
 )
-const selectedNativeMonthLabel = computed(() => {
+const selectedNativeMonthTitle = computed(() => {
+  const start = selectedNativeMonthStart.value
+
+  return `${getNativeMonthName(start)} ${start.year}`
+})
+const selectedNativeMonthRange = computed(() => {
   const start = selectedNativeMonthStart.value
   const end = selectedNativeMonthEnd.value
   const startGregorian = getGregorianTimestamp(start)
   const endGregorian = getGregorianTimestamp(end)
 
-  return `${getNativeMonthName(start)} ${start.year}: ${start.date} to ${end.date} (${startGregorian.date} to ${endGregorian.date} Gregorian)`
+  return `${start.date} to ${end.date} (${startGregorian.date} to ${endGregorian.date} Gregorian)`
 })
 
 function parseRequired(value: string): Timestamp {
@@ -269,15 +260,23 @@ function isOutsideSelectedNativeMonth(timestamp: Timestamp): boolean {
   return timestamp.year !== selected.year || timestamp.month !== selected.month
 }
 
+function getDayClass({ scope }: { scope: { calendarTimestamp: Timestamp } }) {
+  return {
+    'calendar-adapter-agenda__day--native-outside': isOutsideSelectedNativeMonth(
+      scope.calendarTimestamp,
+    ),
+  }
+}
+
 function getNativeBoundaryLabel(timestamp: Timestamp): string {
   if (timestamp.day === 1) {
-    return `Start of ${getNativeMonthName(timestamp)}`
+    return 'Month start'
   }
 
   if (
     timestamp.day === activeCalendar.value.calendar.daysInMonth(timestamp.year, timestamp.month)
   ) {
-    return `End of ${getNativeMonthName(timestamp)}`
+    return 'Month end'
   }
 
   return ''
@@ -307,7 +306,17 @@ function onClickDay({ scope }: { scope: { timestamp: Timestamp; outside?: boolea
 <style scoped lang="scss">
 .calendar-adapter-agenda {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 18px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.calendar-adapter-agenda > * {
+  min-width: 0;
+  max-width: 100%;
 }
 
 .calendar-adapter-agenda__toolbar {
@@ -316,56 +325,13 @@ function onClickDay({ scope }: { scope: { timestamp: Timestamp; outside?: boolea
   grid-template-columns: minmax(240px, 420px) auto;
   align-items: center;
   justify-content: space-between;
-}
-
-.calendar-adapter-agenda__selector {
-  display: grid;
-  gap: 10px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.calendar-adapter-agenda__choice {
-  background: color-mix(in srgb, currentColor 4%, transparent);
-  border: 1px solid color-mix(in srgb, var(--q-primary) 55%, currentColor 18%);
-  border-radius: 6px;
-  color: inherit;
-  cursor: pointer;
-  display: grid;
-  gap: 2px;
-  min-height: 58px;
-  padding: 9px 11px;
-  text-align: left;
-}
-
-.calendar-adapter-agenda__choice:hover,
-.calendar-adapter-agenda__choice:focus-visible {
-  border-color: var(--q-primary);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--q-primary) 22%, transparent);
-  outline: none;
-}
-
-.calendar-adapter-agenda__choice--active {
-  background: color-mix(in srgb, var(--q-primary) 18%, transparent);
-  border-color: var(--q-primary);
-}
-
-.calendar-adapter-agenda__choice-kicker {
-  color: var(--q-primary);
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.calendar-adapter-agenda__banner {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 12px;
+  width: 100%;
 }
 
 .calendar-adapter-agenda__calendar {
   display: flex;
   max-width: 920px;
+  min-width: 0;
   min-height: 260px;
   width: 100%;
 }
@@ -387,7 +353,7 @@ function onClickDay({ scope }: { scope: { timestamp: Timestamp; outside?: boolea
   padding: 8px;
 }
 
-.calendar-adapter-agenda__day-card--native-outside {
+.calendar-adapter-agenda__calendar :deep(.calendar-adapter-agenda__day--native-outside) {
   background: color-mix(in srgb, currentColor 5%, transparent);
 }
 

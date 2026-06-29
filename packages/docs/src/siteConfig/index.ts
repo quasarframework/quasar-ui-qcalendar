@@ -763,7 +763,15 @@ const config = {
     modulePackages: [
       {
         packageName: '@timestamp-js/core',
-        importUrl: 'https://esm.sh/@timestamp-js/core@0.1.0-rc.0',
+        importUrl: 'https://esm.sh/@timestamp-js/core@0.1.0-rc.1',
+      },
+      {
+        packageName: '@timestamp-js/calendar-islamic',
+        importUrl: 'https://esm.sh/@timestamp-js/calendar-islamic@0.1.0-rc.1',
+      },
+      {
+        packageName: '@timestamp-js/calendar-saka',
+        importUrl: 'https://esm.sh/@timestamp-js/calendar-saka@0.1.0-rc.1',
       },
     ],
     jsSetup: [

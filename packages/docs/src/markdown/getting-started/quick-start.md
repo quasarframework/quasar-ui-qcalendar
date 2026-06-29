@@ -13,7 +13,7 @@ related:
   - /developing/qcalendar-task
 ---
 
-This section will highlight a number common properties and generalities amongst the various calendars. Other, more specific properties, will be discussed in their respective calendar sections.
+This section highlights common properties and general behavior shared by the calendar views. View-specific properties are discussed in their respective calendar sections and on the API pages.
 
 ## Date format
 
@@ -40,12 +40,15 @@ Internally, QCalendar uses the browser's `Intl.DateTimeFormat` for all localizat
 | Property | Type   | Example |
 | -------- | ------ | ------- |
 | locale   | String | en-US   |
+| dir      | String | rtl     |
 
 `locale` changes language and formatting. It does not change the calendar math by itself.
 
+`dir` is the standard HTML direction attribute. QCalendar forwards it to the rendered view, so use `dir="rtl"` for right-to-left presentations such as Arabic Hijri calendars. If a slot mixes English or app data into an RTL calendar, isolate that content with `dir="ltr"` inside the slot.
+
 ## Calendar systems
 
-Use `calendar-system` when a view should expose native calendar dates alongside QCalendar's Gregorian dates. This is an opt-in adapter object from Timestamp packages such as `@timestamp-js/calendar-islamic` or `@timestamp-js/calendar-saka`.
+Use `calendar-system` when a view should expose native calendar dates alongside QCalendar's Gregorian dates. This is an opt-in adapter object from the Timestamp packages such as `@timestamp-js/calendar-islamic` or `@timestamp-js/calendar-saka`.
 
 | Property        | Type   | Example              |
 | --------------- | ------ | -------------------- |
@@ -57,6 +60,9 @@ import { ref } from 'vue'
 import { islamicCivilCalendar } from '@timestamp-js/calendar-islamic'
 
 const selectedDate = ref('2024-03-25')
+// QCalendar uses this array for week math. This Hijri example
+// starts on Saturday; with dir="rtl", Saturday renders on the right edge.
+const saturdayFirstWeekdays = [6, 0, 1, 2, 3, 4, 5]
 </script>
 
 <template>
@@ -64,7 +70,7 @@ const selectedDate = ref('2024-03-25')
     v-model="selectedDate"
     :calendar-system="islamicCivilCalendar"
     locale="ar"
-    :weekdays="[6, 0, 1, 2, 3, 4, 5]"
+    :weekdays="saturdayFirstWeekdays"
     dir="rtl"
   />
 </template>
@@ -167,9 +173,13 @@ The `disabled-weekdays` property uses the same input as the `weekdays` property.
 
 There may be some edge-cases where the header is not desirable. There is an example that shows how to build your own navigation with header information.
 
-| Property  | Type    | Example |
-| --------- | ------- | ------- |
-| no-header | Boolean |         |
+Use `no-header` to remove the full generated header. Use `no-default-header-text` or `no-default-header-btn` when you only want to replace part of the generated header with slots.
+
+| Property               | Type    | Example |
+| ---------------------- | ------- | ------- |
+| no-header              | Boolean |         |
+| no-default-header-text | Boolean |         |
+| no-default-header-btn  | Boolean |         |
 
 ## No scroll
 
@@ -178,6 +188,14 @@ All calendars try to take up 100% width and height. Either use styles to constra
 | Property  | Type    | Example |
 | --------- | ------- | ------- |
 | no-scroll | Boolean |         |
+
+## Accessibility
+
+QCalendar generates ARIA attributes for supported calendar cells. Leave this enabled unless you are replacing the generated structure with your own accessibility layer through slots.
+
+| Property | Type    | Example |
+| -------- | ------- | ------- |
+| no-aria  | Boolean |         |
 
 ## Labels
 
@@ -191,15 +209,15 @@ All labels in the calendars are formatted with the browsers internal `Intl.DateT
 
 ### Minimum label Length
 
-As explained above, the calendars can format weekday labels smaller than the `Intl.DateTimeFormat` short format. The edge-case for this is to create a very small calendar picker. In this case, you could set the `min-weekday-length` to 1, in which case only the first character of the label will be used. This may not be desirable for some languages, as the weekdays may all have the same first character. In this case, set it to 2 or 3, whatever best suits the locale you are aiming for.
+As explained above, the calendars can format weekday labels smaller than the `Intl.DateTimeFormat` short format. The edge-case for this is to create a very small calendar picker. In this case, you could set the `min-weekday-label` to 1, in which case only the first character of the label will be used. This may not be desirable for some languages, as the weekdays may all have the same first character. In this case, set it to 2 or 3, whatever best suits the locale you are aiming for.
 
-| Property           | Type             | Example |
-| ------------------ | ---------------- | ------- |
-| min-weekday-length | Number \| String |         |
+| Property          | Type             | Example |
+| ----------------- | ---------------- | ------- |
+| min-weekday-label | Number \| String |         |
 
 ### Label breakpoints
 
-The `weekday-breakpoints` property is an array of two numbers. The parent div that contains the label knows it's width. The array contains the values where you want label values to go from long format to short format automatically. The second value is when you want the values to start using extra short format based on the `min-weekday-length` property.
+The `weekday-breakpoints` property is an array of two numbers. The parent div that contains the label knows it's width. The array contains the values where you want label values to go from long format to short format automatically. The second value is when you want the values to start using extra short format based on the `min-weekday-label` property.
 
 | Property            | Type  | Example |
 | ------------------- | ----- | ------- |
@@ -228,17 +246,20 @@ The `hoverable` property allows each cell in a calendar to display a hovering ef
 
 The `focusable` property allows various cells within the calendar to have focus. This allows end-users to tab or shift-tab with navigation.
 
+The `use-navigation` property turns on keyboard movement between supported cells. Use it with `focusable` when users should be able to move through dates, intervals, resources, or tasks with the keyboard.
+
 The `focus-type` property works with the `focusable` property to determine what can have focus. This is an array of values. The values are: `day`, `date`, `weekday`, `interval`, and `resource`.
 
 ::: warning
 Not all `focus-type` values can be used with all calendars. For instance, `interval` won't work with QCalendarMonth and `day` won't work for interval-based calendars.
 :::
 
-| Property   | Type    | Example           |
-| ---------- | ------- | ----------------- |
-| hoverable  | Boolean |                   |
-| focusable  | Boolean |                   |
-| focus-type | Array   | ['day','weekday'] |
+| Property       | Type    | Example           |
+| -------------- | ------- | ----------------- |
+| hoverable      | Boolean |                   |
+| focusable      | Boolean |                   |
+| focus-type     | Array   | ['day','weekday'] |
+| use-navigation | Boolean |                   |
 
 ## Selection
 

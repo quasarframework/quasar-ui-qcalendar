@@ -6,19 +6,18 @@
     </p>
 
     <div class="calendar-adapter-week__toolbar">
-      <q-btn-toggle
-        v-model="calendarId"
-        :options="calendarToggleOptions"
-        dense
-        unelevated
-        toggle-color="primary"
-        color="grey-3"
-        text-color="dark"
-      />
+      <calendar-adapter-selector v-model="calendarId" :calendars="calendarExamples" />
       <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
     </div>
 
-    <div class="row justify-center">
+    <calendar-adapter-title
+      :calendar-label="activeCalendar.label"
+      :month-title="nativeMonthTitle"
+      :range-label="nativeMonthRange"
+      :direction="activeCalendar.direction"
+    />
+
+    <div class="row justify-center full-width">
       <div class="calendar-adapter-week__calendar">
         <q-calendar-day
           ref="calendar"
@@ -63,11 +62,16 @@ import { computed, ref } from 'vue'
 import { QCalendarDay } from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
+import CalendarAdapterSelector from '@/components/CalendarAdapterSelector.vue'
+import CalendarAdapterTitle from '@/components/CalendarAdapterTitle.vue'
 import NavigationBar from '@/components/NavigationBar.vue'
 import {
-  calendarToggleOptions,
+  calendarExamples,
   getCalendarExample,
   getNativeHeaderLabel,
+  getNativeMonthRangeLabel,
+  getNativeMonthTitleLabel,
+  parseGregorianDate,
   type CalendarExampleId,
 } from '@/utils/calendarAdapterExamples'
 import type { Timestamp } from '@timestamp-js/core'
@@ -77,12 +81,19 @@ const calendarId = ref<CalendarExampleId>('islamic-civil')
 const selectedDate = ref('2024-04-08')
 
 const activeCalendar = computed(() => getCalendarExample(calendarId.value))
+const selectedTimestamp = computed(() => parseGregorianDate(selectedDate.value))
+const nativeMonthTitle = computed(() =>
+  getNativeMonthTitleLabel(selectedTimestamp.value, activeCalendar.value),
+)
+const nativeMonthRange = computed(() =>
+  getNativeMonthRangeLabel(selectedTimestamp.value, activeCalendar.value),
+)
 
 const intervalItems: Record<CalendarExampleId, Record<string, string[]>> = {
   'islamic-civil': {
     '1445-09-29 09:00': ['Hijri planning'],
     '1445-09-30 10:00': ['Ramadan close'],
-    '1445-10-01 11:00': ['Shawwal follow-up'],
+    '1445-10-01 11:00': ['Follow-up'],
   },
   saka: {
     '1946-01-20 09:00': ['Saka planning'],
@@ -113,7 +124,17 @@ function onNext() {
 <style lang="scss" scoped>
 .calendar-adapter-week {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 16px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.calendar-adapter-week > * {
+  min-width: 0;
+  max-width: 100%;
 }
 
 .calendar-adapter-week__toolbar {
@@ -122,20 +143,27 @@ function onNext() {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+  width: 100%;
 }
 
 .calendar-adapter-week__calendar {
   display: flex;
   width: 100%;
   max-width: 920px;
+  min-width: 0;
   height: 420px;
 }
 
 .calendar-adapter-week__header {
   display: grid;
+  place-items: center;
   justify-items: center;
   gap: 2px;
+  width: 100%;
+  min-width: 0;
   line-height: 1.15;
+  text-align: center;
+  unicode-bidi: isolate;
 }
 
 .calendar-adapter-week__header span {

@@ -6,26 +6,18 @@
     </p>
 
     <div class="calendar-adapter-resource__toolbar">
-      <q-btn-toggle
-        v-model="calendarId"
-        :options="calendarToggleOptions"
-        dense
-        unelevated
-        toggle-color="primary"
-        color="grey-3"
-        text-color="dark"
-      />
+      <calendar-adapter-selector v-model="calendarId" :calendars="calendarExamples" />
       <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
     </div>
 
-    <q-banner rounded class="calendar-adapter-resource__banner">
-      <div class="calendar-adapter-resource__banner-content">
-        <strong>{{ activeCalendar.label }}</strong>
-        <span>{{ selectedNativeDate }}</span>
-      </div>
-    </q-banner>
+    <calendar-adapter-title
+      :calendar-label="activeCalendar.label"
+      :month-title="nativeMonthTitle"
+      :range-label="nativeMonthRange"
+      :direction="activeCalendar.direction"
+    />
 
-    <div class="row justify-center">
+    <div class="row justify-center full-width">
       <div class="calendar-adapter-resource__calendar">
         <q-calendar-resource
           ref="calendar"
@@ -85,14 +77,16 @@ import { QCalendarResource } from '@quasar/quasar-ui-qcalendar'
 import { type Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
+import CalendarAdapterSelector from '@/components/CalendarAdapterSelector.vue'
+import CalendarAdapterTitle from '@/components/CalendarAdapterTitle.vue'
 import NavigationBar from '@/components/NavigationBar.vue'
 import {
-  calendarToggleOptions,
+  calendarExamples,
   getCalendarExample,
-  getNativeDateLabel,
   getNativeHeaderLabel,
+  getNativeMonthRangeLabel,
+  getNativeMonthTitleLabel,
   parseGregorianDate,
-  toNativeTimestamp,
   type CalendarExampleId,
 } from '@/utils/calendarAdapterExamples'
 
@@ -111,23 +105,24 @@ const resources = ref<Resource[]>([
 ])
 
 const activeCalendar = computed(() => getCalendarExample(calendarId.value))
-const selectedNativeDate = computed(() =>
-  getNativeDateLabel(
-    toNativeTimestamp(parseGregorianDate(selectedDate.value), activeCalendar.value),
-    activeCalendar.value,
-  ),
+const selectedTimestamp = computed(() => parseGregorianDate(selectedDate.value))
+const nativeMonthTitle = computed(() =>
+  getNativeMonthTitleLabel(selectedTimestamp.value, activeCalendar.value),
+)
+const nativeMonthRange = computed(() =>
+  getNativeMonthRangeLabel(selectedTimestamp.value, activeCalendar.value),
 )
 
 const bookingItems: Record<CalendarExampleId, Record<string, string[]>> = {
   'islamic-civil': {
     'planning:1445-09-29 09:00': ['Planning'],
-    'design:1445-09-29 11:00': ['Design review'],
-    'release:1445-09-29 14:00': ['Release prep'],
+    'design:1445-09-29 11:00': ['Design'],
+    'release:1445-09-29 14:00': ['Release'],
   },
   saka: {
-    'planning:1946-01-20 09:00': ['Planning'],
-    'design:1946-01-20 11:00': ['Design review'],
-    'release:1946-01-20 14:00': ['Release prep'],
+    'planning:1946-01-19 09:00': ['Planning'],
+    'design:1946-01-19 11:00': ['Design'],
+    'release:1946-01-19 14:00': ['Release'],
   },
 }
 
@@ -161,7 +156,17 @@ function onClickDate(data: { scope: { timestamp: Timestamp } }) {
 <style lang="scss" scoped>
 .calendar-adapter-resource {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 16px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.calendar-adapter-resource > * {
+  min-width: 0;
+  max-width: 100%;
 }
 
 .calendar-adapter-resource__toolbar {
@@ -170,24 +175,17 @@ function onClickDate(data: { scope: { timestamp: Timestamp } }) {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-}
-
-.calendar-adapter-resource__banner {
-  padding: 8px 12px;
-}
-
-.calendar-adapter-resource__banner-content {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 12px;
-  align-items: baseline;
+  width: 100%;
 }
 
 .calendar-adapter-resource__calendar {
   display: flex;
   width: 100%;
   max-width: 820px;
+  min-width: 0;
   max-height: 430px;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .calendar-adapter-resource__head {
@@ -218,6 +216,11 @@ function onClickDate(data: { scope: { timestamp: Timestamp } }) {
   margin: 2px 4px;
   max-width: calc(100% - 8px);
   overflow: hidden;
+  min-width: 0;
   text-overflow: ellipsis;
+}
+
+.calendar-adapter-resource__calendar :deep(.q-calendar-resource) {
+  min-width: 820px;
 }
 </style>

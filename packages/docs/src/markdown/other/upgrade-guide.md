@@ -59,11 +59,19 @@ pnpm add @timestamp-js/core @timestamp-js/calendar-islamic
 Then pass the adapter to the relevant view:
 
 ```vue
+<script setup>
+import { islamicCivilCalendar } from '@timestamp-js/calendar-islamic'
+
+// QCalendar uses this array for week math. This Hijri example
+// starts on Saturday; with dir="rtl", Saturday renders on the right edge.
+const saturdayFirstWeekdays = [6, 0, 1, 2, 3, 4, 5]
+</script>
+
 <q-calendar-month
   v-model="selectedDate"
   :calendar-system="islamicCivilCalendar"
   locale="ar"
-  :weekdays="[6, 0, 1, 2, 3, 4, 5]"
+  :weekdays="saturdayFirstWeekdays"
   dir="rtl"
 />
 ```
@@ -191,7 +199,7 @@ Again, this means better in-editor auto-completion support amongst many other ad
 
 ### New calendar component
 
-QCalendarTask was added for writing task-oriented calendars, like timesheets and Gantt-like calendars. Use it to track tasks and events.
+QCalendarTask was added for writing task-oriented calendars, like timesheets and Gantt-like calendars. Use it to track tasks and events. See the [QCalendarTask recipes](/developing/qcalendar-task#recipes) for timesheet and Gantt-like planning examples.
 
 ### Calendar types
 
@@ -309,7 +317,7 @@ The emitted `change` event has changed. The passed object still contains `start`
 
 - `interval-style`, `day-style` and `day-class` all receive a scope object
 - new (QCalendarDay) `interval-class` that will be called when drawing each interval to add extra css classes in object form.
-- new `min-weekday-length` (default: `1`). This property is used for fluid text length. The browser supports `long` and `short` formats. This is an **extra short** format taken from the beginning characters of the browser's `short` format. There are some languages that begin with the same character, so having this set to 1 (one) may not work. In that case, depending on your locale, set it to two or more.
+- new `min-weekday-label` (default: `1`). This property is used for fluid text length. The browser supports `long` and `short` formats. This is an **extra short** format taken from the beginning characters of the browser's `short` format. There are some languages that begin with the same character, so having this set to 1 (one) may not work. In that case, depending on your locale, set it to two or more.
 - new `weekday-breakpoints` (default: `[75, 35]`). This is the cell width breakpoint for the fluid text length. At the first breakpoint, this is where the calendar will use the `short` format, unless `short-weekday-label` or `short-month-label` are already being used. The second breakpoint is for the **extra short** format will be used. To not use a breakpoint, set it to 0.
 - new `day-min-height` or `resource-min-height` property is to set the min-height of a calendar cell. Use this instead of static `day-height`, or `resource-height`, when you want calendar rows to automatically grow in height depending on content.
 - new `date-type` (default: `round`), values `['round', 'rounded', 'square']`

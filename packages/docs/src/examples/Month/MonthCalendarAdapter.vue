@@ -6,33 +6,19 @@
     </p>
 
     <div class="calendar-adapter__toolbar">
-      <div class="calendar-adapter__selector" role="group" aria-label="Calendar adapter">
-        <button
-          v-for="calendar in calendarExamples"
-          :key="calendar.id"
-          class="calendar-adapter__choice"
-          :class="{ 'calendar-adapter__choice--active': calendar.id === calendarId }"
-          type="button"
-          :aria-pressed="calendar.id === calendarId"
-          @click="calendarId = calendar.id"
-        >
-          <span class="calendar-adapter__choice-kicker">{{ calendar.shortLabel }}</span>
-          <span>{{ calendar.label }}</span>
-        </button>
-      </div>
+      <calendar-adapter-selector v-model="calendarId" :calendars="calendarExamples" />
 
       <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
     </div>
 
-    <div class="calendar-adapter__summary">
-      <q-banner rounded class="calendar-adapter__banner">
-        <strong>{{ activeCalendar.label }}</strong>
-        <span>{{ nativeVisibleRangeLabel }}</span>
-        <span>{{ selectedNativeMonthLabel }}</span>
-      </q-banner>
-    </div>
+    <calendar-adapter-title
+      :calendar-label="activeCalendar.label"
+      :month-title="selectedNativeMonthTitle"
+      :range-label="selectedNativeMonthRange"
+      :direction="activeCalendar.direction"
+    />
 
-    <div class="row justify-center">
+    <div class="row justify-center full-width">
       <div class="calendar-adapter__month" :dir="activeCalendar.direction">
         <q-calendar-month
           ref="calendar"
@@ -48,7 +34,6 @@
           :dir="activeCalendar.direction"
           :day-min-height="84"
           :day-height="0"
-          @change="onChange"
           @click-day="onClickDay"
           @click-date="onClickDay"
         >
@@ -60,7 +45,6 @@
               }"
             >
               <div class="calendar-adapter__gregorian">
-                <span>{{ getNativeMonthShort(calendarTimestamp) }}</span>
                 Gregorian {{ timestamp.month }}/{{ timestamp.day }}
               </div>
               <div class="calendar-adapter__badges">
@@ -105,6 +89,8 @@ import { islamicCivilCalendar } from '@timestamp-js/calendar-islamic'
 import { indianNationalCalendar } from '@timestamp-js/calendar-saka'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
+import CalendarAdapterSelector from '@/components/CalendarAdapterSelector.vue'
+import CalendarAdapterTitle from '@/components/CalendarAdapterTitle.vue'
 import NavigationBar from '@/components/NavigationBar.vue'
 
 type CalendarId = 'islamic-civil' | 'saka'
@@ -118,7 +104,6 @@ interface CalendarExample {
   direction: 'ltr' | 'rtl'
   weekdays: number[]
   months: string[]
-  monthShorts: string[]
   events: Record<string, string[]>
 }
 
@@ -144,20 +129,6 @@ const calendarExamples: CalendarExample[] = [
       'شوال',
       'ذو القعدة',
       'ذو الحجة',
-    ],
-    monthShorts: [
-      'محرم',
-      'صفر',
-      'ربيع ١',
-      'ربيع ٢',
-      'جمادى ١',
-      'جمادى ٢',
-      'رجب',
-      'شعبان',
-      'رمضان',
-      'شوال',
-      'قعدة',
-      'حجة',
     ],
     events: {
       '1445-09-01': ['Native date key'],
@@ -188,7 +159,6 @@ const calendarExamples: CalendarExample[] = [
       'माघ',
       'फाल्गुन',
     ],
-    monthShorts: ['चै', 'वै', 'ज्ये', 'आषा', 'श्रा', 'भा', 'आश्वि', 'का', 'अग्र', 'पौ', 'मा', 'फा'],
     events: {
       '1946-01-01': ['New Saka year'],
       '1946-01-05': ['Native date key'],
@@ -201,7 +171,6 @@ const calendarExamples: CalendarExample[] = [
 const calendar = ref<QCalendarMonth>()
 const calendarId = ref<CalendarId>('islamic-civil')
 const selectedDate = ref('2024-03-25')
-const visibleCalendarDays = ref<Timestamp[]>([])
 
 const activeCalendar = computed<CalendarExample>(
   () => calendarExamples.find((entry) => entry.id === calendarId.value) ?? calendarExamples[0]!,
@@ -215,23 +184,18 @@ const selectedNativeMonthStart = computed(() =>
 const selectedNativeMonthEnd = computed(() =>
   getCalendarEndOfMonth(selectedNativeTimestamp.value, activeCalendar.value.calendar),
 )
-const nativeVisibleRangeLabel = computed(() => {
-  const first = visibleCalendarDays.value[0]
-  const last = visibleCalendarDays.value[visibleCalendarDays.value.length - 1]
+const selectedNativeMonthTitle = computed(() => {
+  const start = selectedNativeMonthStart.value
 
-  if (first === undefined || last === undefined) {
-    return 'Move the calendar to see the native visible range.'
-  }
-
-  return `${getNativeDateLabel(first)} to ${getNativeDateLabel(last)}`
+  return `${getNativeMonthName(start)} ${start.year}`
 })
-const selectedNativeMonthLabel = computed(() => {
+const selectedNativeMonthRange = computed(() => {
   const start = selectedNativeMonthStart.value
   const end = selectedNativeMonthEnd.value
   const startGregorian = getGregorianTimestamp(start)
   const endGregorian = getGregorianTimestamp(end)
 
-  return `${getNativeMonthName(start)} ${start.year}: ${start.date} to ${end.date} (${startGregorian.date} to ${endGregorian.date} Gregorian)`
+  return `${start.date} to ${end.date} (${startGregorian.date} to ${endGregorian.date} Gregorian)`
 })
 
 function parseRequired(value: string): Timestamp {
@@ -254,19 +218,8 @@ function getGregorianTimestamp(nativeTimestamp: Timestamp): Timestamp {
   )
 }
 
-function getNativeDateLabel(timestamp: Timestamp): string {
-  return `${timestamp.date} ${getNativeMonthName(timestamp)}`
-}
-
 function getNativeMonthName(timestamp: Timestamp): string {
   return activeCalendar.value.months[timestamp.month - 1] ?? `Month ${timestamp.month}`
-}
-
-function getNativeMonthShort(timestamp: Timestamp): string {
-  return (
-    activeCalendar.value.monthShorts[timestamp.month - 1] ??
-    getNativeMonthName(timestamp).slice(0, 3)
-  )
 }
 
 function getNativeEvents(timestamp: Timestamp): string[] {
@@ -275,13 +228,13 @@ function getNativeEvents(timestamp: Timestamp): string[] {
 
 function getNativeBoundaryLabel(timestamp: Timestamp): string {
   if (timestamp.day === 1) {
-    return `Start of ${getNativeMonthName(timestamp)}`
+    return 'Month start'
   }
 
   if (
     timestamp.day === activeCalendar.value.calendar.daysInMonth(timestamp.year, timestamp.month)
   ) {
-    return `End of ${getNativeMonthName(timestamp)}`
+    return 'Month end'
   }
 
   return ''
@@ -299,10 +252,6 @@ function onNext() {
   calendar.value?.next()
 }
 
-function onChange(data: { calendarDays: Timestamp[] }) {
-  visibleCalendarDays.value = data.calendarDays
-}
-
 function onClickDay({ scope }: { scope: { timestamp: Timestamp; outside: boolean } }) {
   if (scope.outside === true) {
     return
@@ -315,7 +264,17 @@ function onClickDay({ scope }: { scope: { timestamp: Timestamp; outside: boolean
 <style scoped lang="scss">
 .calendar-adapter {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 18px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.calendar-adapter > * {
+  min-width: 0;
+  max-width: 100%;
 }
 
 .calendar-adapter__toolbar {
@@ -324,51 +283,7 @@ function onClickDay({ scope }: { scope: { timestamp: Timestamp; outside: boolean
   grid-template-columns: minmax(240px, 420px) auto;
   align-items: center;
   justify-content: space-between;
-}
-
-.calendar-adapter__selector {
-  display: grid;
-  gap: 10px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.calendar-adapter__choice {
-  background: color-mix(in srgb, currentColor 4%, transparent);
-  border: 1px solid color-mix(in srgb, var(--q-primary) 55%, currentColor 18%);
-  border-radius: 6px;
-  color: inherit;
-  cursor: pointer;
-  display: grid;
-  gap: 2px;
-  min-height: 58px;
-  padding: 9px 11px;
-  text-align: left;
-}
-
-.calendar-adapter__choice:hover,
-.calendar-adapter__choice:focus-visible {
-  border-color: var(--q-primary);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--q-primary) 22%, transparent);
-  outline: none;
-}
-
-.calendar-adapter__choice--active {
-  background: color-mix(in srgb, var(--q-primary) 18%, transparent);
-  border-color: var(--q-primary);
-}
-
-.calendar-adapter__choice-kicker {
-  color: var(--q-primary);
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.calendar-adapter__banner {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 12px;
+  width: 100%;
 }
 
 .calendar-adapter__month {

@@ -26,12 +26,14 @@
       <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
     </div>
 
-    <q-banner rounded class="calendar-adapter-wrapper__banner">
-      <strong>{{ activeCalendar.label }}</strong>
-      <span>Native month: {{ nativeMonthRange }}</span>
-    </q-banner>
+    <calendar-adapter-title
+      :calendar-label="activeCalendar.label"
+      :month-title="nativeMonthTitle"
+      :range-label="nativeMonthRange"
+      :direction="activeCalendar.direction"
+    />
 
-    <div class="row justify-center">
+    <div class="row justify-center full-width">
       <div class="calendar-adapter-wrapper__calendar" :dir="activeCalendar.direction">
         <q-calendar
           ref="calendar"
@@ -54,10 +56,7 @@
               class="calendar-adapter-wrapper__cell"
               :class="{ 'calendar-adapter-wrapper__cell--outside': outside }"
             >
-              <span>
-                {{ getNativeMonthShort(calendarTimestamp, activeCalendar) }}
-                · Gregorian {{ timestamp.month }}/{{ timestamp.day }}
-              </span>
+              <small>Gregorian {{ timestamp.month }}/{{ timestamp.day }}</small>
               <span v-if="outside" class="calendar-adapter-wrapper__badge">
                 Outside {{ activeCalendar.shortLabel }} month
               </span>
@@ -80,12 +79,13 @@ import { computed, ref } from 'vue'
 import { QCalendar } from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
+import CalendarAdapterTitle from '@/components/CalendarAdapterTitle.vue'
 import NavigationBar from '@/components/NavigationBar.vue'
 import {
   calendarExamples,
   getNativeBoundaryLabel,
   getNativeMonthRangeLabel,
-  getNativeMonthShort,
+  getNativeMonthTitleLabel,
   parseGregorianDate,
   type CalendarExampleId,
 } from '@/utils/calendarAdapterExamples'
@@ -100,6 +100,9 @@ const activeCalendar = computed(
 const selectedTimestamp = computed(() => parseGregorianDate(selectedDate.value))
 const nativeMonthRange = computed(() =>
   getNativeMonthRangeLabel(selectedTimestamp.value, activeCalendar.value),
+)
+const nativeMonthTitle = computed(() =>
+  getNativeMonthTitleLabel(selectedTimestamp.value, activeCalendar.value),
 )
 
 function onToday() {
@@ -118,7 +121,17 @@ function onNext() {
 <style lang="scss" scoped>
 .calendar-adapter-wrapper {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 16px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.calendar-adapter-wrapper > * {
+  min-width: 0;
+  max-width: 100%;
 }
 
 .calendar-adapter-wrapper__toolbar {
@@ -127,6 +140,7 @@ function onNext() {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+  width: 100%;
 }
 
 .calendar-adapter-wrapper__selector {
@@ -156,16 +170,11 @@ function onNext() {
   background: var(--q-primary);
 }
 
-.calendar-adapter-wrapper__banner {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
 .calendar-adapter-wrapper__calendar {
   display: flex;
   width: 100%;
   max-width: 900px;
+  min-width: 0;
 }
 
 .calendar-adapter-wrapper__cell {
@@ -175,17 +184,24 @@ function onNext() {
   font-size: 0.72rem;
 }
 
+.calendar-adapter-wrapper__cell small {
+  color: color-mix(in srgb, currentColor 58%, transparent);
+}
+
 .calendar-adapter-wrapper__cell--outside {
   opacity: 0.55;
 }
 
 .calendar-adapter-wrapper__badge {
-  width: max-content;
+  width: fit-content;
   max-width: 100%;
+  min-width: 0;
   padding: 1px 6px;
   border: 1px solid color-mix(in srgb, var(--q-primary), transparent 35%);
   border-radius: 999px;
   color: var(--q-primary);
   font-size: 0.65rem;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
 }
 </style>

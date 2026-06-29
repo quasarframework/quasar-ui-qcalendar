@@ -6,24 +6,18 @@
     </p>
 
     <div class="calendar-adapter-mini__toolbar">
-      <q-btn-toggle
-        v-model="calendarId"
-        :options="calendarToggleOptions"
-        dense
-        unelevated
-        toggle-color="primary"
-        color="grey-3"
-        text-color="dark"
-      />
+      <calendar-adapter-selector v-model="calendarId" :calendars="calendarExamples" />
       <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
     </div>
 
-    <div class="row justify-center">
+    <div class="row justify-center full-width">
       <div class="calendar-adapter-mini__shell">
-        <div class="calendar-adapter-mini__title">
-          <strong>{{ activeCalendar.label }}</strong>
-          <span>{{ nativeMonthRange }}</span>
-        </div>
+        <calendar-adapter-title
+          :calendar-label="activeCalendar.label"
+          :month-title="nativeMonthTitle"
+          :range-label="nativeMonthRange"
+          :direction="activeCalendar.direction"
+        />
 
         <q-calendar-month
           ref="calendar"
@@ -59,12 +53,15 @@ import { computed, ref } from 'vue'
 import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
+import CalendarAdapterSelector from '@/components/CalendarAdapterSelector.vue'
+import CalendarAdapterTitle from '@/components/CalendarAdapterTitle.vue'
 import NavigationBar from '@/components/NavigationBar.vue'
 import {
-  calendarToggleOptions,
+  calendarExamples,
   getCalendarExample,
   getNativeMonthRangeLabel,
   getNativeMonthShort,
+  getNativeMonthTitleLabel,
   parseGregorianDate,
   type CalendarExampleId,
 } from '@/utils/calendarAdapterExamples'
@@ -77,6 +74,9 @@ const activeCalendar = computed(() => getCalendarExample(calendarId.value))
 const selectedTimestamp = computed(() => parseGregorianDate(selectedDate.value))
 const nativeMonthRange = computed(() =>
   getNativeMonthRangeLabel(selectedTimestamp.value, activeCalendar.value),
+)
+const nativeMonthTitle = computed(() =>
+  getNativeMonthTitleLabel(selectedTimestamp.value, activeCalendar.value),
 )
 
 function onToday() {
@@ -95,7 +95,17 @@ function onNext() {
 <style lang="scss" scoped>
 .calendar-adapter-mini {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 16px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.calendar-adapter-mini > * {
+  min-width: 0;
+  max-width: 100%;
 }
 
 .calendar-adapter-mini__toolbar {
@@ -104,22 +114,13 @@ function onNext() {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+  width: 100%;
 }
 
 .calendar-adapter-mini__shell {
   display: grid;
   gap: 10px;
-  width: min(100%, 340px);
-}
-
-.calendar-adapter-mini__title {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.calendar-adapter-mini__title span {
-  opacity: 0.72;
+  width: min(100%, 380px);
 }
 
 .calendar-adapter-mini__day {

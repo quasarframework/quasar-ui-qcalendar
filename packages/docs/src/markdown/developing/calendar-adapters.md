@@ -47,11 +47,19 @@ That means the app can keep storage, route params, API payloads, and event handl
 Pass `calendar-system` to QCalendar when a view should expose adapter-native date data. Pair it with the matching presentation choices for native users: `locale` for weekday labels, `weekdays` for the visible week order, and `dir` for RTL calendars.
 
 ```vue
+<script setup>
+import { islamicCivilCalendar } from '@timestamp-js/calendar-islamic'
+
+// QCalendar uses this array for week math. This Hijri example
+// starts on Saturday; with dir="rtl", Saturday renders on the right edge.
+const saturdayFirstWeekdays = [6, 0, 1, 2, 3, 4, 5]
+</script>
+
 <q-calendar-month
   v-model="selectedGregorianDate"
   :calendar-system="islamicCivilCalendar"
   locale="ar"
-  :weekdays="[6, 0, 1, 2, 3, 4, 5]"
+  :weekdays="saturdayFirstWeekdays"
   dir="rtl"
 >
   <template #day="{ scope }">
@@ -75,7 +83,6 @@ The `change` event follows the same pattern. It includes `days` for the visible 
 
 ```ts [twoslash]
 import type { Timestamp } from '@timestamp-js/core'
-import { islamicCivilCalendar } from '@timestamp-js/calendar-islamic'
 
 interface QCalendarChangePayload {
   start: string
@@ -90,8 +97,6 @@ function onChange(payload: QCalendarChangePayload) {
   console.log(payload.start, payload.end)
   console.log(payload.calendarStart, payload.calendarEnd)
 }
-
-void islamicCivilCalendar
 ```
 
 ## Adapter Bridge
@@ -148,22 +153,31 @@ import {
 } from '@timestamp-js/core'
 import { islamicCivilCalendar } from '@timestamp-js/calendar-islamic'
 
+// Use the same visible weekday order that the QCalendar view receives.
+// This Hijri example starts on Saturday. With dir="rtl",
+// Saturday renders on the right edge of the calendar.
 const hijriWeekdays = [6, 0, 1, 2, 3, 4, 5]
 
 function toHijri(timestamp: Timestamp) {
+  // QCalendar dates are Gregorian. The epoch day lets the adapter describe
+  // the same absolute day in the native calendar system.
   return createCalendarTimestampFromEpochDay(getEpochDay(timestamp), islamicCivilCalendar)
 }
 
 function toGregorian(hijriTimestamp: Timestamp) {
+  // Convert native adapter boundaries back before using them as QCalendar
+  // model values, route params, or API query boundaries.
   return createCalendarTimestampFromEpochDay(getEpochDay(hijriTimestamp, islamicCivilCalendar))
 }
 
 const selectedGregorian = parseTimestamp('2024-03-25')!
 const selectedHijri = toHijri(selectedGregorian)
 
+// Calculate week boundaries in the native calendar, not the Gregorian calendar.
 const weekStartHijri = getCalendarStartOfWeek(selectedHijri, hijriWeekdays, islamicCivilCalendar)
 const weekEndHijri = getCalendarEndOfWeek(selectedHijri, hijriWeekdays, islamicCivilCalendar)
 
+// QCalendar still consumes Gregorian dates, so bridge the native range back.
 const weekStartGregorian = toGregorian(weekStartHijri)
 const weekEndGregorian = toGregorian(weekEndHijri)
 ```
@@ -200,25 +214,33 @@ import {
 } from '@timestamp-js/core'
 import { islamicCivilCalendar } from '@timestamp-js/calendar-islamic'
 
+// Keep this in sync with the QCalendar `weekdays` prop for the native view.
+// This Hijri example starts on Saturday. With dir="rtl",
+// Saturday renders on the right edge of the calendar.
 const hijriWeekdays = [6, 0, 1, 2, 3, 4, 5]
 
 function toHijri(timestamp: Timestamp) {
+  // Bridge from the stored Gregorian date to the same absolute day in Hijri.
   return createCalendarTimestampFromEpochDay(getEpochDay(timestamp), islamicCivilCalendar)
 }
 
 function toGregorian(hijriTimestamp: Timestamp) {
+  // Bridge native adapter results back for QCalendar and Gregorian-backed APIs.
   return createCalendarTimestampFromEpochDay(getEpochDay(hijriTimestamp, islamicCivilCalendar))
 }
 
 const selectedGregorian = parseTimestamp('2024-03-25')!
 const selectedHijri = toHijri(selectedGregorian)
 
+// These are the first and last days of the native month itself.
 const monthStart = getCalendarStartOfMonth(selectedHijri, islamicCivilCalendar)
 const monthEnd = getCalendarEndOfMonth(selectedHijri, islamicCivilCalendar)
 
+// These include leading/trailing outside days needed by a full month grid.
 const gridStart = getCalendarStartOfWeek(monthStart, hijriWeekdays, islamicCivilCalendar)
 const gridEnd = getCalendarEndOfWeek(monthEnd, hijriWeekdays, islamicCivilCalendar)
 
+// Use these Gregorian dates when querying or driving QCalendar-visible ranges.
 const gridStartGregorian = toGregorian(gridStart)
 const gridEndGregorian = toGregorian(gridEnd)
 ```

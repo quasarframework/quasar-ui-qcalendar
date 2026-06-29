@@ -23,6 +23,7 @@ export interface CalendarExample {
   months: string[]
   monthShorts: string[]
   items: Record<string, string[]>
+  taskItems: Record<string, string[]>
 }
 
 export const calendarExamples: CalendarExample[] = [
@@ -64,9 +65,15 @@ export const calendarExamples: CalendarExample[] = [
     ],
     items: {
       '1445-09-29': ['Hijri planning date'],
-      '1445-09-30': ['End of Ramadan'],
-      '1445-10-01': ['Start Shawwal follow-up'],
+      '1445-09-30': ['Month close'],
+      '1445-10-01': ['Follow-up'],
       '1445-10-03': ['Native date key'],
+    },
+    taskItems: {
+      '1445-09-29': ['Planning date'],
+      '1445-09-30': ['Follow-up'],
+      '1445-10-01': ['Native date key'],
+      '1445-10-03': ['Check-in'],
     },
   },
   {
@@ -95,16 +102,17 @@ export const calendarExamples: CalendarExample[] = [
     items: {
       '1946-01-01': ['New Saka year'],
       '1946-01-15': ['Native planning date'],
-      '1946-01-31': ['End of Chaitra'],
-      '1946-02-01': ['Start Vaisakha'],
+      '1946-01-31': ['Month close'],
+      '1946-02-01': ['Follow-up'],
+    },
+    taskItems: {
+      '1946-01-19': ['Planning date'],
+      '1946-01-20': ['Follow-up'],
+      '1946-01-21': ['Native date key'],
+      '1946-01-23': ['Check-in'],
     },
   },
 ]
-
-export const calendarToggleOptions = calendarExamples.map((calendar) => ({
-  label: calendar.shortLabel,
-  value: calendar.id,
-}))
 
 export function getCalendarExample(id: CalendarExampleId): CalendarExample {
   return calendarExamples.find((entry) => entry.id === id) ?? calendarExamples[0]!
@@ -138,6 +146,13 @@ export function getNativeMonthShort(timestamp: Timestamp, example: CalendarExamp
   )
 }
 
+export function getNativeMonthTitleLabel(timestamp: Timestamp, example: CalendarExample): string {
+  const native = toNativeTimestamp(timestamp, example)
+  const start = getCalendarStartOfMonth(native, example.calendar)
+
+  return `${getNativeMonthName(start, example)} ${start.year}`
+}
+
 export function getNativeDateLabel(timestamp: Timestamp, example: CalendarExample): string {
   return `${timestamp.date} ${getNativeMonthName(timestamp, example)}`
 }
@@ -148,11 +163,11 @@ export function getNativeHeaderLabel(timestamp: Timestamp, example: CalendarExam
 
 export function getNativeBoundaryLabel(timestamp: Timestamp, example: CalendarExample): string {
   if (timestamp.day === 1) {
-    return `Start of ${getNativeMonthName(timestamp, example)}`
+    return 'Month start'
   }
 
   if (timestamp.day === example.calendar.daysInMonth(timestamp.year, timestamp.month)) {
-    return `End of ${getNativeMonthName(timestamp, example)}`
+    return 'Month end'
   }
 
   return ''
@@ -179,4 +194,8 @@ export function isOutsideNativeMonth(
 
 export function getNativeItems(timestamp: Timestamp, example: CalendarExample): string[] {
   return example.items[timestamp.date] ?? []
+}
+
+export function getNativeTaskItems(timestamp: Timestamp, example: CalendarExample): string[] {
+  return example.taskItems[timestamp.date] ?? []
 }
