@@ -213,7 +213,7 @@ As explained above, the calendars can format weekday labels smaller than the `In
 
 | Property          | Type             | Example |
 | ----------------- | ---------------- | ------- |
-| min-weekday-label | Number \| String |         |
+| min-weekday-label | Number \| String | 2       |
 
 ### Label breakpoints
 
