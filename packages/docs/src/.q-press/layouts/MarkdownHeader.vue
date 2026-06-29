@@ -219,7 +219,7 @@ const hasToc = computed(
     route.meta.fullwidth !== true &&
     route.meta.fullscreen !== true &&
     siteConfig.config.useToc &&
-    markdownStore.toc.length !== 0,
+    markdownStore.toc.length > 1,
 )
 const hasMoreLinks = computed(() => siteConfig.links.moreLinks.length > 0)
 </script>

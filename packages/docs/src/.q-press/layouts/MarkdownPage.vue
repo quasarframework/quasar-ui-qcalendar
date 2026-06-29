@@ -239,7 +239,7 @@ const hasToc = computed(
     route.meta.fullscreen !== true &&
     props.fullscreen !== true &&
     siteConfig.config.useToc &&
-    markdownStore.toc.length !== 0,
+    markdownStore.toc.length > 1,
 )
 
 const tocClass = computed(

@@ -5,7 +5,8 @@
   border-radius: inherit;
 
   &.twoslash {
-    overflow: visible;
+    overflow-x: auto;
+    overflow-y: auto;
   }
 
   code {

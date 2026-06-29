@@ -37,7 +37,6 @@
     "oxfmt": "^0.56.0",
     "oxlint": "^1.71.0",
     "typescript": "~6.0.3",
-    "unbuild": "^3.6.1",
     "vitest": "^4.1.9"
   },
   "engines": {

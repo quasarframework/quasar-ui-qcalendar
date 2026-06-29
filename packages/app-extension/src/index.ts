@@ -15,8 +15,28 @@ export default defineIndexScript((api) => {
   api.compatibleWith('quasar', '^2.16.0')
   api.compatibleWith('@quasar/app-vite', '>=3.0.0-rc.3')
 
-  // Uncomment the line below if you provide a JSON API for your component
   api.registerDescribeApi('QCalendar', '~@quasar/quasar-ui-qcalendar/dist/api/QCalendar.json')
+  api.registerDescribeApi(
+    'QCalendarAgenda',
+    '~@quasar/quasar-ui-qcalendar/dist/api/QCalendarAgenda.json',
+  )
+  api.registerDescribeApi('QCalendarDay', '~@quasar/quasar-ui-qcalendar/dist/api/QCalendarDay.json')
+  api.registerDescribeApi(
+    'QCalendarMonth',
+    '~@quasar/quasar-ui-qcalendar/dist/api/QCalendarMonth.json',
+  )
+  api.registerDescribeApi(
+    'QCalendarResource',
+    '~@quasar/quasar-ui-qcalendar/dist/api/QCalendarResource.json',
+  )
+  api.registerDescribeApi(
+    'QCalendarScheduler',
+    '~@quasar/quasar-ui-qcalendar/dist/api/QCalendarScheduler.json',
+  )
+  api.registerDescribeApi(
+    'QCalendarTask',
+    '~@quasar/quasar-ui-qcalendar/dist/api/QCalendarTask.json',
+  )
 
   // We extend /quasar.conf.js
   api.extendQuasarConf(() => ({

@@ -80,12 +80,17 @@ export const useMarkdownStore = defineStore('markdown-store', {
               })),
             ] as TocMenuItem[])
           : []
+
+      if (this.toc.length <= 1) {
+        this.tocDrawer = false
+      }
     },
 
     injectToc() {
       const route = useRoute()
 
       this.toc = []
+      this.tocDrawer = false
       this.activeToc = route.hash.length > 1 ? route.hash.substring(1) : null
     },
 

@@ -226,10 +226,10 @@
     "prepack": "pnpm build"
   },
   "dependencies": {
-    "@timestamp-js/core": "0.1.0-rc.1"
+    "@timestamp-js/core": "0.1.0-rc.2"
   },
   "devDependencies": {
-    "@md-plugins/quasar-app-extension-q-press": "0.1.0-rc.17",
+    "@md-plugins/quasar-app-extension-q-press": "0.1.0-rc.18",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^26.0.1",
     "@types/rtlcss": "^3.5.4",

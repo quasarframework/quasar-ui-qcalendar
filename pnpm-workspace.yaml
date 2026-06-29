@@ -144,4 +144,6 @@ minimumReleaseAgeExclude:
   - 'vue-router@5.1.0'
   - 'vue-tsc@3.3.5'
   - vite@8.1.0
+  - '@timestamp-js/calendar-islamic@0.1.0-rc.2'
+  - '@timestamp-js/calendar-saka@0.1.0-rc.2'
 trustLockfile: true
