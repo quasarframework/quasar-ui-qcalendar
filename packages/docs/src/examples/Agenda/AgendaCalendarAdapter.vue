@@ -2,7 +2,7 @@
   <div class="subcontent calendar-adapter-agenda">
     <p class="text-body2 text-center q-mb-md">
       Agenda views can use adapter labels in headers and body cells while QCalendar still owns the
-      visible Gregorian week.
+      visible week, even when that week crosses a native month boundary.
     </p>
 
     <div class="calendar-adapter-agenda__toolbar">
@@ -29,7 +29,6 @@
           :locale="activeCalendar.locale"
           :weekdays="activeCalendar.weekdays"
           :dir="activeCalendar.direction"
-          :day-class="getDayClass"
           animated
           bordered
           hoverable
@@ -41,17 +40,14 @@
             </span>
           </template>
 
-          <template #day="{ scope: { timestamp, calendarTimestamp } }">
+          <template #day="{ scope: { timestamp, calendarTimestamp, outside } }">
             <article class="calendar-adapter-agenda__day-card">
               <div>
                 <strong>{{ getNativeDateLabel(calendarTimestamp) }}</strong>
                 <span>Gregorian {{ timestamp.date }}</span>
               </div>
               <div class="calendar-adapter-agenda__badges">
-                <span
-                  v-if="isOutsideSelectedNativeMonth(calendarTimestamp)"
-                  class="calendar-adapter-agenda__badge"
-                >
+                <span v-if="outside" class="calendar-adapter-agenda__badge">
                   Outside {{ activeCalendar.shortLabel }} month
                 </span>
                 <span
@@ -253,20 +249,6 @@ function getNativeItems(timestamp: Timestamp): string[] {
   return activeCalendar.value.items[timestamp.date] ?? []
 }
 
-function isOutsideSelectedNativeMonth(timestamp: Timestamp): boolean {
-  const selected = selectedNativeTimestamp.value
-
-  return timestamp.year !== selected.year || timestamp.month !== selected.month
-}
-
-function getDayClass({ scope }: { scope: { calendarTimestamp: Timestamp } }) {
-  return {
-    'calendar-adapter-agenda__day--native-outside': isOutsideSelectedNativeMonth(
-      scope.calendarTimestamp,
-    ),
-  }
-}
-
 function getNativeBoundaryLabel(timestamp: Timestamp): string {
   if (timestamp.day === 1) {
     return 'Month start'
@@ -350,10 +332,6 @@ function onClickDay({ scope }: { scope: { timestamp: Timestamp; outside?: boolea
   display: grid;
   gap: 8px;
   padding: 8px;
-}
-
-.calendar-adapter-agenda__calendar :deep(.calendar-adapter-agenda__day--native-outside) {
-  background: color-mix(in srgb, currentColor 5%, transparent);
 }
 
 .calendar-adapter-agenda__day-card span {

@@ -1,7 +1,17 @@
 import { computed, type Ref } from 'vue'
-import { createDayList, parseTime, type Timestamp } from '@timestamp-js/core'
+import {
+  createDayList,
+  parseTime,
+  updateDisabled,
+  updateFormatted,
+  type Timestamp,
+} from '@timestamp-js/core'
 
-import { getCalendarScopeData, type CalendarScopeData } from '../utils/calendarSystem'
+import {
+  getCalendarScopeData,
+  isOutsideCalendarMonth,
+  type CalendarScopeData,
+} from '../utils/calendarSystem'
 import { type CommonProps } from './useCommon'
 import { type ColumnProps } from './useColumn'
 import { type CellWidthProps } from './useCellWidth'
@@ -24,6 +34,8 @@ export interface ScopeForSlot extends CalendarScopeData {
   activeDate?: boolean
   /** Whether the slot content is disabled. */
   disabled?: boolean
+  /** Whether the timestamp is outside the active month. */
+  outside?: boolean
   /** Whether weekday labels are rendered in short form. */
   shortWeekdayLabel?: boolean
   /** Whether the slot can accept dropped content. */
@@ -52,6 +64,7 @@ export default function useCalendarDays(
     times,
     parsedStart,
     parsedEnd,
+    activeDate,
     maxDays,
     size,
     headerColumnRef,
@@ -59,6 +72,7 @@ export default function useCalendarDays(
     times: { today: Timestamp }
     parsedStart: Ref<Timestamp>
     parsedEnd: Ref<Timestamp>
+    activeDate?: Ref<Timestamp>
     maxDays: Ref<number>
     size: { width: number }
     headerColumnRef: Ref<HTMLElement | null>
@@ -119,12 +133,30 @@ export default function useCalendarDays(
     return y
   }
 
+  function isOutsideActiveMonth(timestamp: Timestamp): boolean {
+    const reference = activeDate?.value ?? parsedStart.value
+    return isOutsideCalendarMonth(timestamp, reference, props.calendarSystem)
+  }
+
   function getScopeForSlot(timestamp: Timestamp, columnIndex?: number): ScopeForSlot {
+    const formattedTimestamp = updateFormatted(timestamp)
+    const disabledTimestamp = updateDisabled(
+      formattedTimestamp,
+      props.disabledBefore,
+      props.disabledAfter,
+      props.disabledWeekdays,
+      props.disabledDays,
+    )
+    const outside = isOutsideActiveMonth(formattedTimestamp)
     const scope: ScopeForSlot = {
-      timestamp,
-      ...getCalendarScopeData(timestamp, props.calendarSystem),
+      timestamp: disabledTimestamp,
+      ...getCalendarScopeData(disabledTimestamp, props.calendarSystem),
       timeStartPos,
       timeDurationHeight,
+      outside,
+      disabled:
+        disabledTimestamp.disabled === true ||
+        (outside === true && (props as { enableOutsideDays?: boolean }).enableOutsideDays !== true),
     }
     if (columnIndex !== undefined) {
       scope.columnIndex = columnIndex

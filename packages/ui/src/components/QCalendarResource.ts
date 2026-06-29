@@ -21,7 +21,6 @@ import {
 import { getDayIdentifier, parsed, parseTimestamp, today, type Timestamp } from '@timestamp-js/core'
 
 import { convertToUnit } from '../utils/helpers'
-import { getCalendarScopeData } from '../utils/calendarSystem'
 
 // Composables
 import useCalendar from '../composables/useCalendar'
@@ -52,6 +51,7 @@ import type {
   ResourceHeadSlotScope,
   ResourceLabelSlotScope,
   ResourceIntervalsSlotScope,
+  ResourceIntervalSlotScope,
 } from '../slots'
 
 // Directives
@@ -263,6 +263,7 @@ export default defineComponent({
       // bodyWidth,
       // methods
       styleDefault,
+      getScopeForSlotX,
       scrollToTimeX: scrollToTimeXCalendar,
       timeDurationWidth: timeDurationWidthCalendar,
       timeStartPosX: timeStartPosXCalendar,
@@ -274,6 +275,7 @@ export default defineComponent({
       scrollArea,
       parsedStart,
       parsedEnd,
+      activeDate: parsedValue,
       maxDays: maxDaysRendered,
       size,
       headerColumnRef,
@@ -544,13 +546,9 @@ export default defineComponent({
       const short = props.shortIntervalLabel
       const label = intervalFormatter.value(interval, short)
 
-      const scope: IntervalLabelSlotScope = {
-        timestamp: interval,
-        ...getCalendarScopeData(interval, props.calendarSystem),
-        index,
-        label,
-        droppable: dragOverHeadDayRef.value === label,
-      }
+      const scope = getScopeForSlotX(interval, index) as IntervalLabelSlotScope
+      scope.label = label
+      scope.droppable = dragOverHeadDayRef.value === label
 
       const styler = props.intervalStyle || dayStyleDefault
       const style: CSSProperties = {
@@ -573,9 +571,11 @@ export default defineComponent({
           tabindex: isFocusable === true ? 0 : -1,
           class: {
             'q-calendar-resource__head--interval': true,
-            ...getRelativeClasses(interval),
+            ...getRelativeClasses(interval, scope.outside),
             ...intervalClass,
             'q-active-date': activeDate,
+            disabled: scope.disabled === true,
+            'q-disabled-day': scope.disabled === true,
             'q-calendar__hoverable': props.hoverable === true,
             'q-calendar__focusable': isFocusable === true,
           },
@@ -873,14 +873,14 @@ export default defineComponent({
       const dragValue = interval.time + '-' + resourceKey
       const isFocusable = isFocusableType(props, 'time')
 
-      const scope = {
-        activeDate,
-        resource,
-        timestamp: interval,
-        ...getCalendarScopeData(interval, props.calendarSystem),
+      const scope = getScopeForSlotX(
+        interval,
         resourceIndex,
-        droppable: dragOverResourceInterval.value === dragValue,
-      }
+      ) as unknown as ResourceIntervalSlotScope
+      scope.activeDate = activeDate
+      scope.resource = resource
+      scope.resourceIndex = resourceIndex
+      scope.droppable = dragOverResourceInterval.value === dragValue
 
       const styler = props.intervalStyle || dayStyleDefault
       const width = convertToUnit(parsedCellWidth.value)
@@ -905,8 +905,10 @@ export default defineComponent({
           tabindex: isFocusable === true ? 0 : -1,
           class: {
             'q-calendar-resource__resource--interval': true,
-            ...getRelativeClasses(interval),
+            ...getRelativeClasses(interval, scope.outside),
             'q-active-date': activeDate,
+            disabled: scope.disabled === true,
+            'q-disabled-day': scope.disabled === true,
             'q-calendar__hoverable': props.hoverable === true,
             'q-calendar__focusable': isFocusable === true,
           },

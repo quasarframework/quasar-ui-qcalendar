@@ -19,7 +19,7 @@ import {
 import { getDayIdentifier, parsed, parseTimestamp, type Timestamp, today } from '@timestamp-js/core'
 
 import { convertToUnit, getResponsiveWeekdayLabel } from '../utils/helpers'
-import { getCalendarScopeData } from '../utils/calendarSystem'
+import { getCalendarScopeData, isOutsideCalendarMonth } from '../utils/calendarSystem'
 
 import useMouse, { getRawMouseEvents } from '../composables/useMouse'
 
@@ -423,6 +423,18 @@ export default defineComponent({
       return day.date === emittedValue.value
     }
 
+    function __isOutside(day: Timestamp): boolean {
+      return isOutsideCalendarMonth(day, parsedValue.value, props.calendarSystem)
+    }
+
+    function __isDisabled(day: Timestamp, outside = __isOutside(day)): boolean {
+      return (
+        day.disabled === true ||
+        outside === true ||
+        (props.disabledWeekdays ? props.disabledWeekdays.includes(Number(day.weekday)) : false)
+      )
+    }
+
     /**
      * Renders the given day with the associated task
      * @param {Timestamp} day Timestamp representing the day
@@ -435,14 +447,17 @@ export default defineComponent({
       const styler = props.dayStyle || dayStyleDefault
       const activeDate = props.noActiveDate !== true && parsedValue.value.date === day.date
       const dragValue = task[props.taskKey]
+      const outside = __isOutside(day)
 
       const scope: TaskDaySlotScope = {
         timestamp: day,
         ...getCalendarScopeData(day, props.calendarSystem),
+        outside,
         task,
         taskIndex,
         activeDate,
         droppable: dragOverResource.value === dragValue,
+        disabled: __isDisabled(day, outside),
       }
 
       const width = convertToUnit(parsedCellWidth.value)
@@ -469,8 +484,10 @@ export default defineComponent({
           class: {
             'q-calendar-task__task--day': true,
             ...dayClass,
-            ...getRelativeClasses(day),
+            ...getRelativeClasses(day, scope.outside),
             'q-active-date': activeDate === true,
+            disabled: scope.disabled === true,
+            'q-disabled-day': scope.disabled === true,
             'q-calendar__hoverable': props.hoverable === true,
             'q-calendar__focusable': isDayFocusable.value === true,
           },
@@ -737,11 +754,14 @@ export default defineComponent({
 
     function __renderFooterDay(day: Timestamp, task: Task, index: number): VNode {
       const slot = slots['footer-day']
+      const outside = __isOutside(day)
       const scope = {
         timestamp: day,
         ...getCalendarScopeData(day, props.calendarSystem),
+        outside,
         footer: task,
         index,
+        disabled: __isDisabled(day, outside),
       }
       const width = convertToUnit(parsedCellWidth.value)
       const style: CSSProperties = {
@@ -759,7 +779,9 @@ export default defineComponent({
           class: {
             'q-calendar-task__footer--day': true,
             ...footerDayClass,
-            ...getRelativeClasses(day),
+            ...getRelativeClasses(day, scope.outside),
+            disabled: scope.disabled === true,
+            'q-disabled-day': scope.disabled === true,
             'q-calendar__hoverable': props.hoverable === true,
             'q-calendar__focusable': isDayFocusable.value === true,
           },
@@ -892,14 +914,14 @@ export default defineComponent({
     function __renderHeadWeekday(day: Timestamp): VNode {
       const slot = slots['head-weekday-label']
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
+      const outside = __isOutside(day)
 
       const scope = {
         activeDate,
         timestamp: day,
         ...getCalendarScopeData(day, props.calendarSystem),
-        disabled: props.disabledWeekdays
-          ? props.disabledWeekdays.includes(Number(day.weekday))
-          : false,
+        outside,
+        disabled: __isDisabled(day, outside),
       }
 
       const data: Record<string, any> = {
@@ -951,11 +973,14 @@ export default defineComponent({
       const dayLabel = dayFormatter.value(day, false)
       const headDayLabelSlot = slots['head-day-label']
       const headDayButtonSlot = slots['head-day-button']
+      const outside = __isOutside(day)
       const scope: TaskHeadDayLabelSlotScope = {
         dayLabel,
         timestamp: day,
         ...getCalendarScopeData(day, props.calendarSystem),
+        outside,
         activeDate,
+        disabled: __isDisabled(day, outside),
       }
 
       const key = day.date
@@ -972,16 +997,16 @@ export default defineComponent({
           'q-calendar__hoverable': props.hoverable === true,
           'q-calendar__focusable': isDateFocusable.value === true,
         },
-        disabled: day.disabled,
+        disabled: scope.disabled === true,
         onKeydown: (e: KeyboardEvent) => {
-          if (day.disabled !== true && isKeyCode(e, [13, 32])) {
+          if (scope.disabled !== true && isKeyCode(e, [13, 32])) {
             e.stopPropagation()
             e.preventDefault()
           }
         },
         onKeyup: (e: KeyboardEvent) => {
           // allow selection of date via Enter or Space keys
-          if (day.disabled !== true && isKeyCode(e, [13, 32])) {
+          if (scope.disabled !== true && isKeyCode(e, [13, 32])) {
             emittedValue.value = day.date
             if (emitListeners.value.onClickDate !== undefined) {
               emit('click-date', { scope })
@@ -1103,13 +1128,16 @@ export default defineComponent({
         minWidth: width,
         maxWidth: width,
       }
+      const outside = __isOutside(day)
 
       const scope: TaskTitleDaySlotScope = {
         timestamp: day,
         ...getCalendarScopeData(day, props.calendarSystem),
+        outside,
         title,
         index,
         cellWidth: parsedCellWidth.value,
+        disabled: __isDisabled(day, outside),
       }
 
       const dayClass = typeof props.dayClass === 'function' ? props.dayClass({ scope }) : {}
@@ -1121,7 +1149,9 @@ export default defineComponent({
           class: {
             'q-calendar-task__title--day': true,
             ...dayClass,
-            ...getRelativeClasses(day),
+            ...getRelativeClasses(day, scope.outside),
+            disabled: scope.disabled === true,
+            'q-disabled-day': scope.disabled === true,
             'q-calendar__hoverable': props.hoverable === true,
             'q-calendar__focusable': isFocusable === true,
           },
@@ -1135,15 +1165,15 @@ export default defineComponent({
       const headDaySlot = slots['head-day']
       const headDateSlot = slots['head-date']
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
+      const outside = __isOutside(day)
 
       const scope: TaskHeadDaySlotScope = {
         timestamp: day,
         ...getCalendarScopeData(day, props.calendarSystem),
+        outside,
         activeDate,
         droppable: isTaskHeadDayDroppable(dragOverHeadDayRef.value, day),
-        disabled: props.disabledWeekdays
-          ? props.disabledWeekdays.includes(Number(day.weekday))
-          : false,
+        disabled: __isDisabled(day, outside),
       }
 
       const styler = props.weekdayStyle || dayStyleDefault
@@ -1170,8 +1200,10 @@ export default defineComponent({
         class: {
           'q-calendar-task__head--day': true,
           ...weekdayClass,
-          ...getRelativeClasses(day),
+          ...getRelativeClasses(day, scope.outside),
           'q-active-date': activeDate,
+          disabled: scope.disabled === true,
+          'q-disabled-day': scope.disabled === true,
           'q-calendar__hoverable': props.hoverable === true,
           'q-calendar__focusable': isWeekdayFocusable.value === true,
         },
@@ -1182,14 +1214,14 @@ export default defineComponent({
           }
         },
         onKeydown: (e: KeyboardEvent) => {
-          if (day.disabled !== true && isKeyCode(e, [13, 32])) {
+          if (scope.disabled !== true && isKeyCode(e, [13, 32])) {
             e.stopPropagation()
             e.preventDefault()
           }
         },
         onKeyup: (e: KeyboardEvent) => {
           // allow selection of date via Enter or Space keys
-          if (day.disabled !== true && isKeyCode(e, [13, 32])) {
+          if (scope.disabled !== true && isKeyCode(e, [13, 32])) {
             emittedValue.value = day.date
           }
         },

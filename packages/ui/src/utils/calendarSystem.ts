@@ -1,6 +1,8 @@
 import {
   createCalendarTimestampFromEpochDay,
   getCalendarDayIdentifier,
+  getCalendarEndOfMonth,
+  getCalendarStartOfMonth,
   getEpochDay,
   gregorianCalendar,
   type CalendarSystem,
@@ -58,4 +60,27 @@ export function getCalendarScopeData(
     calendarTimestamp: toCalendarTimestamp(timestamp, calendar),
     calendarSystem: calendar,
   }
+}
+
+export function isOutsideCalendarMonth(
+  timestamp: Timestamp,
+  reference: Timestamp,
+  calendarSystem?: CalendarSystem,
+): boolean {
+  const calendar = getResolvedCalendarSystem(calendarSystem)
+
+  if (isGregorianCalendar(calendar) === true) {
+    return false
+  }
+
+  const calendarTimestamp = toCalendarTimestamp(timestamp, calendar)
+  const calendarReference = toCalendarTimestamp(reference, calendar)
+  const calendarStart = getCalendarStartOfMonth(calendarReference, calendar)
+  const calendarEnd = getCalendarEndOfMonth(calendarReference, calendar)
+  const dayIdentifier = getCalendarDayIdentifier(calendarTimestamp, calendar)
+
+  return (
+    dayIdentifier < getCalendarDayIdentifier(calendarStart, calendar) ||
+    dayIdentifier > getCalendarDayIdentifier(calendarEnd, calendar)
+  )
 }

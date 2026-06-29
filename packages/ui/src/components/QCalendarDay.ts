@@ -261,6 +261,7 @@ export default defineComponent({
       scrollArea,
       parsedStart,
       parsedEnd,
+      activeDate: parsedValue,
       maxDays: maxDaysRendered,
       size,
       headerColumnRef,
@@ -655,9 +656,9 @@ export default defineComponent({
       const scope: IntervalSlotScope = getScopeForSlot(day, columnIndex)
       scope.activeDate = activeDate
       scope.droppable = dragOverHeadDayRef.value === day.date
-      scope.disabled = props.disabledWeekdays
-        ? props.disabledWeekdays.includes(Number(day.weekday))
-        : false
+      scope.disabled =
+        scope.disabled === true ||
+        (props.disabledWeekdays ? props.disabledWeekdays.includes(Number(day.weekday)) : false)
 
       const width = isSticky.value === true ? props.cellWidth : computedWidth.value
       const styler = props.weekdayStyle || dayStyleDefault
@@ -685,8 +686,10 @@ export default defineComponent({
         class: {
           'q-calendar-day__head--day': true,
           ...weekdayClass,
-          ...getRelativeClasses(day),
+          ...getRelativeClasses(day, scope.outside),
           'q-active-date': activeDate,
+          disabled: scope.disabled === true,
+          'q-disabled-day': scope.disabled === true,
           'q-calendar__hoverable': props.hoverable === true,
           'q-calendar__focusable': isFocusable === true,
         },
@@ -697,14 +700,14 @@ export default defineComponent({
           }
         },
         onKeydown: (e: KeyboardEvent) => {
-          if (day.disabled !== true && isKeyCode(e, [13, 32])) {
+          if (scope.disabled !== true && isKeyCode(e, [13, 32])) {
             e.stopPropagation()
             e.preventDefault()
           }
         },
         onKeyup: (e: KeyboardEvent) => {
           // allow selection of date via Enter or Space keys
-          if (day.disabled !== true && isKeyCode(e, [13, 32])) {
+          if (scope.disabled !== true && isKeyCode(e, [13, 32])) {
             emittedValue.value = day.date
           }
         },
@@ -816,9 +819,9 @@ export default defineComponent({
 
       const scope: IntervalSlotScope = getScopeForSlot(day, columnIndex)
       scope.activeDate = activeDate
-      scope.disabled = props.disabledWeekdays
-        ? props.disabledWeekdays.includes(Number(day.weekday))
-        : false
+      scope.disabled =
+        scope.disabled === true ||
+        (props.disabledWeekdays ? props.disabledWeekdays.includes(Number(day.weekday)) : false)
 
       const width =
         isSticky.value === true ? convertToUnit(parsedCellWidth.value) : computedWidth.value
@@ -838,8 +841,10 @@ export default defineComponent({
           key: 'event-' + day.date + (columnIndex !== undefined ? '-' + columnIndex : ''),
           class: {
             'q-calendar-day__head--day__event': true,
-            ...getRelativeClasses(day),
+            ...getRelativeClasses(day, scope.outside),
             'q-active-date': activeDate,
+            disabled: scope.disabled === true,
+            'q-disabled-day': scope.disabled === true,
           },
           style,
         },
@@ -853,9 +858,9 @@ export default defineComponent({
 
       const scope: IntervalSlotScope = getScopeForSlot(day, 0)
       scope.shortWeekdayLabel = props.shortWeekdayLabel
-      scope.disabled = props.disabledWeekdays
-        ? props.disabledWeekdays.includes(Number(day.weekday))
-        : false
+      scope.disabled =
+        scope.disabled === true ||
+        (props.disabledWeekdays ? props.disabledWeekdays.includes(Number(day.weekday)) : false)
 
       const data: Record<string, any> = {
         class: {
@@ -906,15 +911,16 @@ export default defineComponent({
       const dayLabel = dayFormatter.value(day, false)
       const headDayLabelSlot = slots['head-day-label']
       const headDayButtonSlot = slots['head-day-button']
+      const intervalScope = getScopeForSlot(day, 0)
 
       const scope: HeadDayButtonSlotScope = {
         dayLabel,
         timestamp: day,
-        ...getCalendarScopeData(day, props.calendarSystem),
+        calendarTimestamp: intervalScope.calendarTimestamp,
+        calendarSystem: intervalScope.calendarSystem,
+        outside: intervalScope.outside,
         activeDate,
-        disabled: props.disabledWeekdays
-          ? props.disabledWeekdays.includes(Number(day.weekday))
-          : false,
+        disabled: intervalScope.disabled === true,
       }
 
       const data: Record<string, any> = {
@@ -926,16 +932,16 @@ export default defineComponent({
           'q-calendar__button--bordered': day.current === true,
           'q-calendar__focusable': true,
         },
-        disabled: day.disabled,
+        disabled: scope.disabled === true,
         onKeydown: (e: KeyboardEvent) => {
-          if (day.disabled !== true && isKeyCode(e, [13, 32])) {
+          if (scope.disabled !== true && isKeyCode(e, [13, 32])) {
             e.stopPropagation()
             e.preventDefault()
           }
         },
         onKeyup: (e: KeyboardEvent) => {
           // allow selection of date via Enter or Space keys
-          if (day.disabled !== true && isKeyCode(e, [13, 32])) {
+          if (scope.disabled !== true && isKeyCode(e, [13, 32])) {
             emittedValue.value = day.date
             if (emitListeners.value.onClickDate !== undefined) {
               emit('click-date', { scope })
@@ -1108,7 +1114,9 @@ export default defineComponent({
           key: day.date + (columnIndex !== undefined ? ':' + columnIndex : ''),
           class: {
             'q-calendar-day__day': true,
-            ...getRelativeClasses(day),
+            ...getRelativeClasses(day, scope.outside),
+            disabled: scope.disabled === true,
+            'q-disabled-day': scope.disabled === true,
           },
           style,
         },
@@ -1154,6 +1162,9 @@ export default defineComponent({
             Array.from(props.selectedDates),
             props.selectedStartEndDates,
           ),
+          'q-outside': scope.outside === true,
+          disabled: scope.disabled === true,
+          'q-disabled-day': scope.disabled === true,
           'q-calendar__hoverable': props.hoverable === true,
           'q-calendar__focusable': isFocusable === true,
         },
@@ -1166,7 +1177,7 @@ export default defineComponent({
           scope,
         }),
         onKeydown: (event: KeyboardEvent) => {
-          if (isKeyCode(event, [13, 32])) {
+          if (scope.disabled !== true && isKeyCode(event, [13, 32])) {
             event.stopPropagation()
             event.preventDefault()
           }
@@ -1178,7 +1189,7 @@ export default defineComponent({
         },
         onKeyup: (event: KeyboardEvent) => {
           // allow selection of date via Enter or Space keys
-          if (isKeyCode(event, [13, 32])) {
+          if (scope.disabled !== true && isKeyCode(event, [13, 32])) {
             const scope: IntervalSlotScope = getScopeForSlot(interval, columnIndex)
             emittedValue.value = scope.timestamp.date
             if (emitListeners.value.onClickTime !== undefined) {
@@ -1196,6 +1207,9 @@ export default defineComponent({
             ),
             columnIndex,
           )
+          if (scope.disabled === true) {
+            event.preventDefault()
+          }
           return { scope, event }
         }),
       }

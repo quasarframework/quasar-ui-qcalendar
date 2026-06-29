@@ -18,7 +18,7 @@ import {
 } from '@timestamp-js/core'
 
 import { animVerticalScrollTo, animHorizontalScrollTo } from '../utils/scroll'
-import { getCalendarScopeData, type CalendarScopeData } from '../utils/calendarSystem'
+import { type CalendarScopeData } from '../utils/calendarSystem'
 import { type CommonProps } from './useCommon'
 import { type ColumnProps } from './useColumn'
 import { type CellWidthProps } from './useCellWidth'
@@ -46,6 +46,10 @@ export interface ScopeForSlotX extends CalendarScopeData {
   timeDurationWidth: (_minutes: number) => number
   /** Zero-based rendered interval index. */
   index?: number
+  /** Whether the timestamp is outside the active month. */
+  outside?: boolean
+  /** Whether the slot content is disabled. */
+  disabled?: boolean
 }
 
 export interface IntervalProps
@@ -640,6 +644,7 @@ export default function useInterval(
     scrollArea,
     parsedStart,
     parsedEnd,
+    activeDate,
     maxDays,
     size,
     headerColumnRef,
@@ -648,15 +653,22 @@ export default function useInterval(
     scrollArea: Ref<HTMLElement | null>
     parsedStart: Ref<Timestamp>
     parsedEnd: Ref<Timestamp>
+    activeDate?: Ref<Timestamp>
     maxDays: Ref<number>
     size: { width: number; height: number }
     headerColumnRef: Ref<HTMLElement | null>
   },
 ): UseIntervalReturn {
-  const { days, parsedCellWidth, styleDefault } = useCalendarDays(props, {
+  const {
+    days,
+    parsedCellWidth,
+    styleDefault,
+    getScopeForSlot: getCalendarDayScope,
+  } = useCalendarDays(props, {
     times,
     parsedStart,
     parsedEnd,
+    activeDate,
     maxDays,
     size,
     headerColumnRef,
@@ -940,9 +952,10 @@ export default function useInterval(
    * @param {Number} columnIndex
    */
   function getScopeForSlot(timestamp: Timestamp, columnIndex?: number): ScopeForSlot {
+    const dayScope = getCalendarDayScope(timestamp, columnIndex)
     const scope: ScopeForSlot = {
+      ...dayScope,
       timestamp,
-      ...getCalendarScopeData(timestamp, props.calendarSystem),
       timeStartPos,
       timeDurationHeight,
     }
@@ -959,11 +972,15 @@ export default function useInterval(
    * @param {Number*} index
    */
   function getScopeForSlotX(timestamp: Timestamp, index: number): ScopeForSlotX {
+    const dayScope = getCalendarDayScope(timestamp, index)
     const scope: ScopeForSlotX = {
       timestamp: copyTimestamp(timestamp),
-      ...getCalendarScopeData(timestamp, props.calendarSystem),
+      calendarTimestamp: dayScope.calendarTimestamp,
+      calendarSystem: dayScope.calendarSystem,
       timeStartPosX,
       timeDurationWidth,
+      outside: dayScope.outside,
+      disabled: dayScope.disabled,
     }
     if (index !== undefined) {
       scope.index = index

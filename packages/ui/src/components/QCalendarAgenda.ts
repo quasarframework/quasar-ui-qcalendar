@@ -22,8 +22,6 @@ import {
 import { getDayIdentifier, parsed, parseTimestamp, today, type Timestamp } from '@timestamp-js/core'
 
 import { convertToUnit, getResponsiveWeekdayLabel } from '../utils/helpers'
-import { getCalendarScopeData } from '../utils/calendarSystem'
-
 // Composables
 import useCalendar from '../composables/useCalendar'
 import useCommon, {
@@ -257,6 +255,7 @@ export default defineComponent({
       times,
       parsedStart,
       parsedEnd,
+      activeDate: parsedValue,
       maxDays: maxDaysRendered,
       size,
       headerColumnRef,
@@ -684,9 +683,9 @@ export default defineComponent({
       const scope: IntervalSlotScope = getScopeForSlot(day, columnIndex ?? 0)
       scope.activeDate = activeDate
       scope.droppable = dragOverHeadDayRef.value === day.date
-      scope.disabled = props.disabledWeekdays
-        ? props.disabledWeekdays.includes(Number(day.weekday))
-        : false
+      scope.disabled =
+        scope.disabled === true ||
+        (props.disabledWeekdays ? props.disabledWeekdays.includes(Number(day.weekday)) : false)
 
       const width = isSticky.value === true ? props.cellWidth : computedWidth.value
       const styler = props.weekdayStyle || dayStyleDefault
@@ -712,8 +711,10 @@ export default defineComponent({
         class: {
           'q-calendar-agenda__head--day': true,
           ...weekdayClass,
-          ...getRelativeClasses(day),
+          ...getRelativeClasses(day, scope.outside),
           'q-active-date': activeDate,
+          disabled: scope.disabled === true,
+          'q-disabled-day': scope.disabled === true,
           'q-calendar__hoverable': props.hoverable === true,
           'q-calendar__focusable': isFocusable === true,
         },
@@ -829,9 +830,9 @@ export default defineComponent({
 
       const scope: IntervalSlotScope = getScopeForSlot(day, columnIndex)
       scope.activeDate = activeDate
-      scope.disabled = props.disabledWeekdays
-        ? props.disabledWeekdays.includes(Number(day.weekday))
-        : false
+      scope.disabled =
+        scope.disabled === true ||
+        (props.disabledWeekdays ? props.disabledWeekdays.includes(Number(day.weekday)) : false)
 
       const width = isSticky.value === true ? props.cellWidth : computedWidth.value
       const style: CSSProperties = {
@@ -849,8 +850,10 @@ export default defineComponent({
           key: 'event-' + day.date + (columnIndex !== undefined ? '-' + columnIndex : ''),
           class: {
             'q-calendar-agenda__head--day__event': true,
-            ...getRelativeClasses(day),
+            ...getRelativeClasses(day, scope.outside),
             'q-active-date': activeDate,
+            disabled: scope.disabled === true,
+            'q-disabled-day': scope.disabled === true,
           },
           style,
         },
@@ -912,15 +915,16 @@ export default defineComponent({
       const dayLabel = dayFormatter.value(day, false)
       const headDayLabelSlot = slots['head-day-label']
       const headDayButtonSlot = slots['head-day-button']
+      const intervalScope = getScopeForSlot(day, 0)
 
       const scope: HeadDayButtonSlotScope = {
         dayLabel,
         timestamp: day,
-        ...getCalendarScopeData(day, props.calendarSystem),
+        calendarTimestamp: intervalScope.calendarTimestamp,
+        calendarSystem: intervalScope.calendarSystem,
+        outside: intervalScope.outside,
         activeDate,
-        disabled: props.disabledWeekdays
-          ? props.disabledWeekdays.includes(Number(day.weekday))
-          : false,
+        disabled: intervalScope.disabled === true,
       }
 
       const data: Record<string, any> = {
@@ -932,16 +936,16 @@ export default defineComponent({
           'q-calendar__button--bordered': day.current === true,
           'q-calendar__focusable': true,
         },
-        disabled: day.disabled,
+        disabled: scope.disabled === true,
         onKeydown: (e: KeyboardEvent): void => {
-          if (day.disabled !== true && isKeyCode(e, [13, 32])) {
+          if (scope.disabled !== true && isKeyCode(e, [13, 32])) {
             e.stopPropagation()
             e.preventDefault()
           }
         },
         onKeyup: (e: KeyboardEvent): void => {
           // allow selection of date via Enter or Space keys
-          if (day.disabled !== true && isKeyCode(e, [13, 32])) {
+          if (scope.disabled !== true && isKeyCode(e, [13, 32])) {
             emittedValue.value = day.date
             if (emitListeners.value.onClickDate !== undefined) {
               emit('click-date', { scope })
@@ -1153,7 +1157,9 @@ export default defineComponent({
           class: {
             'q-calendar-agenda__day': true,
             ...dayClass,
-            ...getRelativeClasses(day),
+            ...getRelativeClasses(day, scope.outside),
+            disabled: scope.disabled === true,
+            'q-disabled-day': scope.disabled === true,
           },
           style,
         },

@@ -31,6 +31,8 @@ export interface HeadDayButtonSlotScope extends CalendarSlotScope {
   dayLabel: string
   /** Timestamp represented by the header button. */
   timestamp: Timestamp
+  /** Whether the timestamp is outside the active month. */
+  outside?: boolean
   /** Whether the timestamp is the active date. */
   activeDate: boolean
   /** Whether the header button is disabled. */
@@ -52,6 +54,8 @@ export interface TimestampMouseScope extends CalendarSlotScope {
 export interface SchedulerHeadDaySlotScope extends CalendarSlotScope {
   /** Timestamp represented by the scheduler header day. */
   timestamp: Timestamp
+  /** Whether the timestamp is outside the active month. */
+  outside?: boolean
   /** Whether the timestamp is the active date. */
   activeDate: boolean
   /** Whether the header day can accept dropped content. */
@@ -65,8 +69,12 @@ export interface SchedulerHeadDaySlotScope extends CalendarSlotScope {
 export interface SchedulerHeadWeekdaySlotScope extends CalendarSlotScope {
   /** Timestamp represented by the scheduler weekday header. */
   timestamp: Timestamp
+  /** Whether the timestamp is outside the active month. */
+  outside?: boolean
   /** Whether the weekday label is rendered in short form. */
   shortWeekdayLabel: boolean
+  /** Whether the weekday label is disabled. */
+  disabled?: boolean
 }
 
 export interface MonthWeekSlotScope {
@@ -166,12 +174,16 @@ export interface MonthLabelSlotScope extends CalendarSlotScope {
 export interface IntervalLabelSlotScope extends CalendarSlotScope {
   /** Timestamp represented by the interval. */
   timestamp: Timestamp
+  /** Whether the interval timestamp is outside the active month. */
+  outside?: boolean
   /** Zero-based interval index. */
   index?: number
   /** Formatted interval label. */
   label?: string
   /** Whether the interval can accept dropped content. */
   droppable?: boolean
+  /** Whether the interval is disabled. */
+  disabled?: boolean
 }
 
 export interface HeadDaysEventsSlotScope {
@@ -275,6 +287,8 @@ export interface ResourceIntervalsSlotScope {
 export interface ResourceIntervalSlotScope extends CalendarSlotScope {
   /** Whether the interval timestamp is the active date. */
   activeDate: boolean
+  /** Whether the interval timestamp is outside the active month. */
+  outside?: boolean
   /** Resource represented by the interval. */
   resource: Resource
   /** Timestamp represented by the interval. */
@@ -283,6 +297,8 @@ export interface ResourceIntervalSlotScope extends CalendarSlotScope {
   resourceIndex: number
   /** Whether the interval can accept dropped content. */
   droppable: boolean | string
+  /** Whether the interval is disabled. */
+  disabled?: boolean
 }
 
 export interface SchedulerResourceDaysSlotScope {
@@ -305,6 +321,8 @@ export interface SchedulerResourceDaysSlotScope {
 export interface SchedulerDaySlotScope extends CalendarSlotScope {
   /** Timestamp represented by the scheduler day cell. */
   timestamp: Timestamp
+  /** Whether the timestamp is outside the active month. */
+  outside?: boolean
   /** Zero-based scheduler column index. */
   columnIndex: number
   /** Resource represented by the scheduler day cell. */
@@ -317,6 +335,8 @@ export interface SchedulerDaySlotScope extends CalendarSlotScope {
   activeDate: boolean
   /** Whether the day cell can accept dropped content. */
   droppable: boolean | string
+  /** Whether the day cell is disabled. */
+  disabled?: boolean
 }
 
 export interface TaskHeadSlotScope {
@@ -342,6 +362,8 @@ export interface TaskItemSlotScope extends TaskHeadSlotScope {
 export interface TaskDaySlotScope extends CalendarSlotScope {
   /** Timestamp represented by the task day cell. */
   timestamp: Timestamp
+  /** Whether the timestamp is outside the active month. */
+  outside?: boolean
   /** Task represented by the day cell. */
   task: Task
   /** Zero-based task index. */
@@ -350,6 +372,8 @@ export interface TaskDaySlotScope extends CalendarSlotScope {
   activeDate: boolean
   /** Whether the task day can accept dropped content. */
   droppable: boolean | string
+  /** Whether the task day is disabled. */
+  disabled?: boolean
 }
 
 export interface TaskDaysSlotScope {
@@ -377,12 +401,16 @@ export interface TaskTitleSlotScope extends TaskHeadSlotScope {
 export interface TaskTitleDaySlotScope extends CalendarSlotScope {
   /** Timestamp represented by the title day cell. */
   timestamp: Timestamp
+  /** Whether the timestamp is outside the active month. */
+  outside?: boolean
   /** Title value represented by the title day cell. */
   title: string
   /** Zero-based title index. */
   index: number
   /** Rendered title day cell width. */
   cellWidth: number
+  /** Whether the title day is disabled. */
+  disabled?: boolean
 }
 
 export interface TaskFooterSlotScope extends TaskHeadSlotScope {
@@ -395,15 +423,21 @@ export interface TaskFooterSlotScope extends TaskHeadSlotScope {
 export interface TaskFooterDaySlotScope extends CalendarSlotScope {
   /** Timestamp represented by the footer day cell. */
   timestamp: Timestamp
+  /** Whether the timestamp is outside the active month. */
+  outside?: boolean
   /** Footer task represented by the day cell. */
   footer: Task
   /** Zero-based footer index. */
   index: number
+  /** Whether the footer day is disabled. */
+  disabled?: boolean
 }
 
 export interface TaskHeadDaySlotScope extends CalendarSlotScope {
   /** Timestamp represented by the task header day. */
   timestamp: Timestamp
+  /** Whether the timestamp is outside the active month. */
+  outside?: boolean
   /** Whether the timestamp is the active date. */
   activeDate: boolean
   /** Whether the task header day can accept dropped content. */
@@ -415,6 +449,8 @@ export interface TaskHeadDaySlotScope extends CalendarSlotScope {
 export interface TaskHeadWeekdayLabelSlotScope extends CalendarSlotScope {
   /** Whether the timestamp is the active date. */
   activeDate: boolean
+  /** Whether the timestamp is outside the active month. */
+  outside?: boolean
   /** Timestamp represented by the weekday label. */
   timestamp: Timestamp
   /** Whether the weekday label is disabled. */
@@ -426,8 +462,12 @@ export interface TaskHeadDayLabelSlotScope extends CalendarSlotScope {
   dayLabel: string
   /** Timestamp represented by the day label. */
   timestamp: Timestamp
+  /** Whether the timestamp is outside the active month. */
+  outside?: boolean
   /** Whether the timestamp is the active date. */
   activeDate: boolean
+  /** Whether the day label is disabled. */
+  disabled?: boolean
 }
 
 export interface QCalendarDaySlots {
