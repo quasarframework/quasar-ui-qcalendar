@@ -32,8 +32,8 @@
       </q-banner>
     </div>
 
-    <div class="row justify-center">
-      <div style="display: flex; max-width: 900px; width: 100%">
+    <div class="row justify-center server-data-recipe__calendar-row">
+      <div class="server-data-recipe__calendar-frame server-data-recipe__calendar-frame--scheduler">
         <q-calendar-scheduler
           v-model="selectedDate"
           v-model:model-resources="resources"
@@ -155,6 +155,10 @@ function assignmentStyle(assignment: Assignment, cellWidth: string) {
 .server-data-recipe {
   display: grid;
   gap: 16px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .server-data-recipe__panel {
@@ -165,11 +169,14 @@ function assignmentStyle(assignment: Assignment, cellWidth: string) {
   border-radius: 8px;
   background: #fbfdff;
   color: #102a43;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .server-data-recipe__panel p {
   margin: 4px 0 0;
   color: #4f6780;
+  overflow-wrap: anywhere;
 }
 
 .server-data-recipe__actions {
@@ -178,8 +185,14 @@ function assignmentStyle(assignment: Assignment, cellWidth: string) {
   gap: 8px;
 }
 
+.server-data-recipe__actions .q-btn {
+  min-width: 0;
+}
+
 .server-data-recipe__status {
   border: 1px solid transparent;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .server-data-recipe__status--loaded {
@@ -190,6 +203,27 @@ function assignmentStyle(assignment: Assignment, cellWidth: string) {
 .server-data-recipe__status--idle {
   background: #eef2f6;
   color: #546e7a;
+}
+
+.server-data-recipe__calendar-row {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.server-data-recipe__calendar-frame {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.server-data-recipe__calendar-frame--scheduler {
+  max-width: 900px;
+}
+
+.server-data-recipe__calendar-frame--scheduler .q-calendar {
+  min-width: 760px;
 }
 
 .server-assignment {
@@ -219,5 +253,23 @@ function assignmentStyle(assignment: Assignment, cellWidth: string) {
   border-color: #45515e;
   background: #263241;
   color: #d4dee8;
+}
+
+@media (max-width: 599px) {
+  .server-data-recipe {
+    gap: 12px;
+  }
+
+  .server-data-recipe__panel {
+    padding: 14px;
+  }
+
+  .server-data-recipe__actions .q-btn {
+    flex: 1 1 100%;
+  }
+
+  .server-data-recipe__calendar-frame {
+    max-width: 100%;
+  }
 }
 </style>

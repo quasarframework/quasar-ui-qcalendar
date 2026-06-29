@@ -32,15 +32,15 @@
       </q-banner>
     </div>
 
-    <div class="row justify-center">
+    <div class="row justify-center server-data-recipe__calendar-row">
       <div class="agenda-calendar-frame">
         <q-calendar-agenda
           v-model="selectedDate"
-          view="week"
+          :view="agendaView"
           bordered
           animated
           no-active-date
-          :day-min-height="260"
+          :day-min-height="dayMinHeight"
         >
           <template #day="{ scope: { timestamp } }">
             <div class="agenda-column">
@@ -88,6 +88,10 @@ const loading = ref(false)
 const loaded = ref(false)
 const items = ref<AgendaItem[]>([])
 const requestCount = ref(0)
+
+const agendaView = computed(() => ($q.screen.lt.sm ? 'day' : 'week'))
+
+const dayMinHeight = computed(() => ($q.screen.lt.sm ? 220 : 260))
 
 const statusText = computed(() =>
   loaded.value
@@ -160,6 +164,10 @@ function resetServerData() {
 .server-data-recipe {
   display: grid;
   gap: 16px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .server-data-recipe__panel {
@@ -170,11 +178,14 @@ function resetServerData() {
   border-radius: 8px;
   background: #fbfdff;
   color: #102a43;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .server-data-recipe__panel p {
   margin: 4px 0 0;
   color: #4f6780;
+  overflow-wrap: anywhere;
 }
 
 .server-data-recipe__actions {
@@ -183,8 +194,14 @@ function resetServerData() {
   gap: 8px;
 }
 
+.server-data-recipe__actions .q-btn {
+  min-width: 0;
+}
+
 .server-data-recipe__status {
   border: 1px solid transparent;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .server-data-recipe__status--loaded {
@@ -197,10 +214,17 @@ function resetServerData() {
   color: #546e7a;
 }
 
+.server-data-recipe__calendar-row {
+  min-width: 0;
+  max-width: 100%;
+}
+
 .agenda-calendar-frame {
   display: flex;
-  max-width: 900px;
   width: 100%;
+  max-width: 900px;
+  min-width: 0;
+  overflow-x: auto;
 }
 
 .agenda-column {
@@ -270,5 +294,36 @@ function resetServerData() {
 
 .server-data-recipe--dark .agenda-empty {
   color: #9fb3c8;
+}
+
+@media (max-width: 599px) {
+  .server-data-recipe {
+    gap: 12px;
+  }
+
+  .server-data-recipe__panel {
+    padding: 14px;
+  }
+
+  .server-data-recipe__actions {
+    align-items: stretch;
+  }
+
+  .server-data-recipe__actions .q-btn {
+    flex: 1 1 100%;
+  }
+
+  .server-data-recipe__calendar-row {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .agenda-calendar-frame {
+    max-width: 100%;
+  }
+
+  .agenda-column {
+    padding: 6px;
+  }
 }
 </style>

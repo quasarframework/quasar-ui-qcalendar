@@ -33,7 +33,7 @@
     </div>
 
     <div class="server-data-recipe__mini-layout">
-      <div style="display: flex; max-width: 300px; width: 100%">
+      <div class="server-data-recipe__mini-frame">
         <q-calendar-month
           v-model="selectedDate"
           mini-mode
@@ -124,6 +124,10 @@ function resetServerData() {
 .server-data-recipe {
   display: grid;
   gap: 16px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .server-data-recipe__panel {
@@ -134,11 +138,14 @@ function resetServerData() {
   border-radius: 8px;
   background: #fbfdff;
   color: #102a43;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .server-data-recipe__panel p {
   margin: 4px 0 0;
   color: #4f6780;
+  overflow-wrap: anywhere;
 }
 
 .server-data-recipe__actions,
@@ -149,13 +156,28 @@ function resetServerData() {
   align-items: flex-start;
 }
 
+.server-data-recipe__actions .q-btn {
+  min-width: 0;
+}
+
+.server-data-recipe__mini-frame {
+  display: flex;
+  width: 100%;
+  max-width: 300px;
+  min-width: 0;
+  overflow-x: auto;
+}
+
 .server-data-recipe__list {
+  flex: 1 1 240px;
   min-width: 240px;
   max-width: 100%;
 }
 
 .server-data-recipe__status {
   border: 1px solid transparent;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .server-data-recipe__status--loaded {
@@ -188,5 +210,25 @@ function resetServerData() {
   border-color: #45515e;
   background: #263241;
   color: #d4dee8;
+}
+
+@media (max-width: 599px) {
+  .server-data-recipe {
+    gap: 12px;
+  }
+
+  .server-data-recipe__panel {
+    padding: 14px;
+  }
+
+  .server-data-recipe__actions .q-btn {
+    flex: 1 1 100%;
+  }
+
+  .server-data-recipe__mini-frame,
+  .server-data-recipe__list {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
 }
 </style>

@@ -32,8 +32,8 @@
       </q-banner>
     </div>
 
-    <div class="row justify-center">
-      <div style="display: flex; max-width: 100%; width: 100%">
+    <div class="row justify-center server-data-recipe__calendar-row">
+      <div class="server-data-recipe__calendar-frame server-data-recipe__calendar-frame--task">
         <q-calendar-task
           v-model="selectedDate"
           v-model:model-tasks="tasks"
@@ -181,6 +181,10 @@ function dayTotal(date: string) {
 .server-data-recipe {
   display: grid;
   gap: 16px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .server-data-recipe__panel {
@@ -191,11 +195,14 @@ function dayTotal(date: string) {
   border-radius: 8px;
   background: #fbfdff;
   color: #102a43;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .server-data-recipe__panel p {
   margin: 4px 0 0;
   color: #4f6780;
+  overflow-wrap: anywhere;
 }
 
 .server-data-recipe__actions {
@@ -204,8 +211,14 @@ function dayTotal(date: string) {
   gap: 8px;
 }
 
+.server-data-recipe__actions .q-btn {
+  min-width: 0;
+}
+
 .server-data-recipe__status {
   border: 1px solid transparent;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .server-data-recipe__status--loaded {
@@ -216,6 +229,19 @@ function dayTotal(date: string) {
 .server-data-recipe__status--idle {
   background: #eef2f6;
   color: #546e7a;
+}
+
+.server-data-recipe__calendar-row {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.server-data-recipe__calendar-frame {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
 }
 
 .task-row {
@@ -265,5 +291,19 @@ function dayTotal(date: string) {
   border-color: #45515e;
   background: #263241;
   color: #d4dee8;
+}
+
+@media (max-width: 599px) {
+  .server-data-recipe {
+    gap: 12px;
+  }
+
+  .server-data-recipe__panel {
+    padding: 14px;
+  }
+
+  .server-data-recipe__actions .q-btn {
+    flex: 1 1 100%;
+  }
 }
 </style>
