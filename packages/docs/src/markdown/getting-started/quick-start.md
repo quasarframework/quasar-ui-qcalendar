@@ -267,17 +267,17 @@ Not all `focus-type` values can be used with all calendars. For instance, `inter
 
 The `selected-dates` property is an array of dates in the form of `YYYY-MM-DD`.
 
-| Property       | Type  | Example |
-| -------------- | ----- | ------- |
-| selected-dates | Array |         |
+| Property       | Type  | Example                        |
+| -------------- | ----- | ------------------------------ |
+| selected-dates | Array | `['2026-06-01', '2026-06-15']` |
 
 ### Selected start and end dates
 
 The property `selected-start-end-dates` takes an array of arrays. Each internal array contains a start and end date that is a selection. This allows you to have multiple selections if you wish.
 
-| Property                 | Type  | Example |
-| ------------------------ | ----- | ------- |
-| selected-start-end-dates | Array |         |
+| Property                 | Type  | Example                          |
+| ------------------------ | ----- | -------------------------------- |
+| selected-start-end-dates | Array | `[['2026-06-01', '2026-06-07']]` |
 
 ## Drag and drop
 
