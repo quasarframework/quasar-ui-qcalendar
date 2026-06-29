@@ -4,15 +4,15 @@ desc: Upgrade from v4 to v5
 keys: Help, upgrade, migration
 ---
 
-Use this guide to migrate from QCalendar v4.x to QCalendar v5.0.0-rc.6.
+Use this guide to migrate from QCalendar v4.x to QCalendar v5.0.0-rc.7.
 
 > QCalendar v5 remains a Vue 3 calendar package with Quasar 2 integration. The QCalendar app extension is Vite-only and targets Quasar CLI with `@quasar/app-vite` v3, but direct UI package imports can still be used in Vue/Vite projects without installing the app extension.
 
 > The information below is by no means an exhaustive list of changes and new functionality. If you see something that has been missed, please PR or let us know.
 
-## QCalendar v5.0.0-rc.6
+## QCalendar v5.0.0-rc.7
 
-Welcome to the QCalendar v5.0.0-rc.6 release.
+Welcome to the QCalendar v5.0.0-rc.7 release.
 
 This release prepares QCalendar for the next Quasar CLI Vite generation. The calendar component API is expected to remain compatible with QCalendar v4, but the supported app-extension runtime and project tooling have changed.
 
@@ -98,6 +98,11 @@ routes, storage, and event handling:
 - `start`
 - `end`
 - `days`
+
+When a calendar adapter is active, QCalendar now derives `outside` and disabled
+slot state from the adapter month boundary. The existing `disable-*` props still
+compare against Gregorian model dates, so stored dates and app logic do not need
+to change when an adapter is used for presentation.
 
 See [Calendar Adapters](/developing/calendar-adapters) for the integration
 contract and view-specific examples.
