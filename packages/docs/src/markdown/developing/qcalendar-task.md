@@ -193,6 +193,16 @@ such as logged hours and entry counts.
 
 <MarkdownExample title="Title Rows" file="TaskTitleRows" no-edit/>
 
+### Gantt-like Planning
+
+Use QCalendarTask for Gantt-like planning views when each row represents a work
+item and each date column represents a point in the schedule. This recipe uses
+the `days` slot to draw continuous bars and milestones over the task grid while
+QCalendarTask still owns the task labels, date headers, scrolling, and row
+layout.
+
+<MarkdownExample title="Gantt-like Planning" file="TaskGantt"/>
+
 ### Timesheet
 
 Use QCalendarTask as a dense timesheet when each row represents a work item and
