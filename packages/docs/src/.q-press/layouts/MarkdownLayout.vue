@@ -122,7 +122,7 @@ const pageContentClass = computed(
 
       @media (min-width: 1846px) {
         .markdown-layout__menu-container {
-          flex: 1 0 auto;
+          flex: 0 0 auto;
           width: auto;
           min-width: 0;
           max-width: 100%;
