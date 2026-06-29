@@ -36,7 +36,6 @@
           :locale="activeCalendar.locale"
           :weekdays="activeCalendar.weekdays"
           :dir="activeCalendar.direction"
-          @click-date="onClickDate"
         >
           <template #head-resources>
             <div class="calendar-adapter-resource__head">
@@ -146,10 +145,6 @@ function onPrev() {
 
 function onNext() {
   calendar.value?.next()
-}
-
-function onClickDate(data: { scope: { timestamp: Timestamp } }) {
-  selectedDate.value = data.scope.timestamp.date
 }
 </script>
 
