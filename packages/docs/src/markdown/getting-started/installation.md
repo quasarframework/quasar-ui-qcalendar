@@ -52,13 +52,13 @@ QCalendar v5's app extension targets Quasar CLI Vite projects using `@quasar/app
 To add as an App Extension to your Quasar application, run the following (in your Quasar app folder):
 
 ```
-$ quasar ext add @quasar/qcalendar@beta
+$ quasar ext add @quasar/qcalendar
 ```
 
-While QCalendar v5 is in beta, use the beta dist tag:
+QCalendar v5 is currently published as a release candidate on the `latest` dist tag:
 
 ```bash
-$ quasar ext add @quasar/qcalendar@beta
+$ quasar ext add @quasar/qcalendar
 ```
 
 #### Uninstall
@@ -85,16 +85,16 @@ If you plan on importing from `src/` directly, please read the [Upgrade Guide](/
 
 ```tabs
 <<| bash pnpm |>>
-pnpm add @quasar/quasar-ui-qcalendar@beta
+pnpm add @quasar/quasar-ui-qcalendar
 <<| bash bun |>>
-bun add @quasar/quasar-ui-qcalendar@beta
+bun add @quasar/quasar-ui-qcalendar
 <<| bash yarn |>>
-yarn add @quasar/quasar-ui-qcalendar@beta
+yarn add @quasar/quasar-ui-qcalendar
 <<| bash npm |>>
-npm install @quasar/quasar-ui-qcalendar@beta
+npm install @quasar/quasar-ui-qcalendar
 ```
 
-When QCalendar v5 is released as stable, remove the `@beta` tag from those commands.
+These commands install the current QCalendar v5 release candidate until v5 is released as stable.
 
 Now, you can access the compiled portions or access the sources directly. Choose which you want to use.
 

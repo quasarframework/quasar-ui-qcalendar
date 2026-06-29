@@ -102,24 +102,24 @@ routes, storage, and event handling:
 See [Calendar Adapters](/developing/calendar-adapters) for the integration
 contract and view-specific examples.
 
-## Installing the beta
+## Installing the RC
 
-While QCalendar v5 is in beta, install packages from the `beta` dist tag:
+QCalendar v5 is currently published as a release candidate on the `latest` dist tag:
 
 ```tabs
 <<| bash App Extension |>>
-quasar ext add @quasar/qcalendar@beta
+quasar ext add @quasar/qcalendar
 <<| bash pnpm |>>
-pnpm add @quasar/quasar-ui-qcalendar@beta
+pnpm add @quasar/quasar-ui-qcalendar
 <<| bash bun |>>
-bun add @quasar/quasar-ui-qcalendar@beta
+bun add @quasar/quasar-ui-qcalendar
 <<| bash yarn |>>
-yarn add @quasar/quasar-ui-qcalendar@beta
+yarn add @quasar/quasar-ui-qcalendar
 <<| bash npm |>>
-npm install @quasar/quasar-ui-qcalendar@beta
+npm install @quasar/quasar-ui-qcalendar
 ```
 
-When QCalendar v5 is released as stable, remove the `@beta` tag from those commands.
+These commands install the current QCalendar v5 release candidate until v5 is released as stable.
 
 ## App extension changes
 
