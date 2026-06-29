@@ -420,8 +420,8 @@
       }
 
       &.q-disabled-day {
-        color: var(--calendar-disabled-date-color);
-        background: var(--calendar-disabled-date-background) !important;
+        color: var(--calendar-disabled-date-color-dark);
+        background: var(--calendar-disabled-date-background-dark) !important;
       }
     }
 

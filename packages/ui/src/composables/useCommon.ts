@@ -516,7 +516,8 @@ export default function useCommon(
 
     if (timestamp.disabledColor !== undefined) {
       style['--calendar-disabled-date-background'] = timestamp.disabledColor
-      style['--calendar-disabled-date-background-dark'] = timestamp.disabledColor
+      style['--calendar-disabled-date-background-dark'] =
+        `color-mix(in srgb, ${timestamp.disabledColor} 54%, var(--calendar-background-dark))`
     }
 
     if (timestamp.disabledTextColor !== undefined) {

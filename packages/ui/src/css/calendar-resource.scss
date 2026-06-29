@@ -228,6 +228,13 @@
   .q-calendar__child--expanded > .q-calendar-resource__resource--row {
     border-top: var(--calendar-border) !important;
   }
+
+  .q-calendar-resource__resource--row:not(:first-child) .q-calendar-resource__resource--interval,
+  .q-calendar__child--expanded
+    > .q-calendar-resource__resource--row
+    .q-calendar-resource__resource--interval {
+    border-top: var(--calendar-border);
+  }
 }
 
 .q-calendar-resource:dir(rtl) {
@@ -303,6 +310,13 @@
 
     .q-calendar__child--expanded > .q-calendar-resource__resource--row {
       border-top: var(--calendar-border-dark) !important;
+    }
+
+    .q-calendar-resource__resource--row:not(:first-child) .q-calendar-resource__resource--interval,
+    .q-calendar__child--expanded
+      > .q-calendar-resource__resource--row
+      .q-calendar-resource__resource--interval {
+      border-top: var(--calendar-border-dark);
     }
   }
 
