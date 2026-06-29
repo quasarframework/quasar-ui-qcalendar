@@ -46,7 +46,7 @@
           animated
           bordered
           :task-width="240"
-          :min-weekday-length="2"
+          :min-weekday-label="2"
           @change="onChange"
         >
           <template v-if="selectedCalendar === 'task'" #title-task="{ scope }">

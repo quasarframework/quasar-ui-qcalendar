@@ -40,7 +40,7 @@
           view="month"
           :task-width="430"
           :cell-width="42"
-          :min-weekday-length="3"
+          :min-weekday-label="3"
           :weekday-class="weekdayClass"
           :day-class="dayClass"
           :footer-day-class="footerDayClass"

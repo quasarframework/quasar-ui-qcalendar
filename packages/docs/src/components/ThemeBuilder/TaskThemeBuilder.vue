@@ -9,7 +9,7 @@
         v-model:model-footer="footerTasks"
         view="month"
         :task-width="240"
-        :min-weekday-length="2"
+        :min-weekday-label="2"
         :focus-type="['weekday', 'date', 'task']"
         focusable
         hoverable

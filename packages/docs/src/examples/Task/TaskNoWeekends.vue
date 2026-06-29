@@ -16,7 +16,7 @@
           view="month"
           :weekdays="[1, 2, 3, 4, 5]"
           :task-width="240"
-          :min-weekday-length="2"
+          :min-weekday-label="2"
           :weekday-class="weekdayClass"
           :day-class="dayClass"
           :footer-day-class="footerDayClass"

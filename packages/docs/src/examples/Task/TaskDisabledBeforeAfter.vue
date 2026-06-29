@@ -18,7 +18,7 @@
           :disabled-before="disabledBefore"
           :disabled-after="disabledAfter"
           :task-width="240"
-          :min-weekday-length="2"
+          :min-weekday-label="2"
           :weekday-class="weekdayClass"
           :day-class="dayClass"
           :footer-day-class="footerDayClass"

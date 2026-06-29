@@ -18,7 +18,7 @@
           :task-width="240"
           :cell-width="75"
           task-key="key"
-          :min-weekday-length="2"
+          :min-weekday-label="2"
           :weekday-class="weekdayClass"
           :day-class="dayClass"
           :footer-day-class="footerDayClass"
