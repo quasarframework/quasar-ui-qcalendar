@@ -353,4 +353,10 @@ If the scope has a timestamp within it and that's all you need, then you can des
 <q-calendar-day #day="{ scope: { timestamp } }" />
 ```
 
+When `calendar-system` is set, date-bearing slot and event scopes also include `calendarTimestamp` and `calendarSystem`. The `timestamp` value remains Gregorian, while `calendarTimestamp` is the same day expressed in the adapter-native calendar.
+
+```html
+<q-calendar-day #day="{ scope: { timestamp, calendarTimestamp, calendarSystem } }" />
+```
+
 The pattern here is to **always** be recognizable to the developer and to know what to expect.
