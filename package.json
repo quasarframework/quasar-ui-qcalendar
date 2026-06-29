@@ -30,10 +30,10 @@
     "verify:build": "pnpm build && pnpm api:check && pnpm check:qpress && pnpm typecheck"
   },
   "devDependencies": {
-    "@types/node": "^26.0.0",
+    "@types/node": "^26.0.1",
     "@vitest/coverage-istanbul": "^4.1.9",
-    "@vue/server-renderer": "^3.5.38",
-    "npm-check-updates": "^22.2.7",
+    "@vue/server-renderer": "^3.5.39",
+    "npm-check-updates": "^22.2.9",
     "oxfmt": "^0.56.0",
     "oxlint": "^1.71.0",
     "typescript": "~6.0.3",
@@ -44,6 +44,6 @@
     "node": ">=22.13",
     "pnpm": ">=11.5.0"
   },
-  "packageManager": "pnpm@11.8.0",
+  "packageManager": "pnpm@11.9.0",
   "access": "private"
 }
