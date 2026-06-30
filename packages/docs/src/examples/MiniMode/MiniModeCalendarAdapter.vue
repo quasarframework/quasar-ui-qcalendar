@@ -57,21 +57,28 @@ import CalendarAdapterSelector from '@/components/CalendarAdapterSelector.vue'
 import CalendarAdapterTitle from '@/components/CalendarAdapterTitle.vue'
 import NavigationBar from '@/components/NavigationBar.vue'
 import {
+  calendarExampleDates,
   calendarExamples,
   getCalendarExample,
   getNativeMonthRangeLabel,
   getNativeMonthShort,
   getNativeMonthTitleLabel,
-  parseGregorianDate,
+  parseNativeDate,
   type CalendarExampleId,
 } from '@/utils/calendarAdapterExamples'
 
 const calendar = ref<QCalendarMonth>()
 const calendarId = ref<CalendarExampleId>('islamic-civil')
-const selectedDate = ref('2024-03-25')
+const selectedDates = ref<Record<CalendarExampleId, string>>({ ...calendarExampleDates })
+const selectedDate = computed({
+  get: () => selectedDates.value[calendarId.value],
+  set: (value: string) => {
+    selectedDates.value[calendarId.value] = value
+  },
+})
 
 const activeCalendar = computed(() => getCalendarExample(calendarId.value))
-const selectedTimestamp = computed(() => parseGregorianDate(selectedDate.value))
+const selectedTimestamp = computed(() => parseNativeDate(selectedDate.value, activeCalendar.value))
 const nativeMonthRange = computed(() =>
   getNativeMonthRangeLabel(selectedTimestamp.value, activeCalendar.value),
 )

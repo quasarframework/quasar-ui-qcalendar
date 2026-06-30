@@ -48,7 +48,11 @@
           <template #head-day-event="{ scope }">
             <div class="calendar-adapter-scheduler__header">
               <strong>{{ getNativeHeaderLabel(scope.calendarTimestamp, activeCalendar) }}</strong>
-              <span>{{ scope.timestamp.month }}/{{ scope.timestamp.day }}</span>
+              <span
+                >Gregorian {{ scope.calendarIdentity.gregorian.month }}/{{
+                  scope.calendarIdentity.gregorian.day
+                }}</span
+              >
             </div>
           </template>
 
@@ -78,12 +82,13 @@ import CalendarAdapterSelector from '@/components/CalendarAdapterSelector.vue'
 import CalendarAdapterTitle from '@/components/CalendarAdapterTitle.vue'
 import NavigationBar from '@/components/NavigationBar.vue'
 import {
+  calendarExampleDates,
   calendarExamples,
   getCalendarExample,
   getNativeHeaderLabel,
   getNativeMonthRangeLabel,
   getNativeMonthTitleLabel,
-  parseGregorianDate,
+  parseNativeDate,
   type CalendarExampleId,
 } from '@/utils/calendarAdapterExamples'
 
@@ -94,7 +99,13 @@ interface Resource {
 
 const calendar = ref<QCalendarScheduler>()
 const calendarId = ref<CalendarExampleId>('islamic-civil')
-const selectedDate = ref('2024-04-08')
+const selectedDates = ref<Record<CalendarExampleId, string>>({ ...calendarExampleDates })
+const selectedDate = computed({
+  get: () => selectedDates.value[calendarId.value],
+  set: (value: string) => {
+    selectedDates.value[calendarId.value] = value
+  },
+})
 const resources = ref<Resource[]>([
   { id: 'planning', name: 'Planning' },
   { id: 'content', name: 'Content' },
@@ -102,7 +113,7 @@ const resources = ref<Resource[]>([
 ])
 
 const activeCalendar = computed(() => getCalendarExample(calendarId.value))
-const selectedTimestamp = computed(() => parseGregorianDate(selectedDate.value))
+const selectedTimestamp = computed(() => parseNativeDate(selectedDate.value, activeCalendar.value))
 const nativeMonthTitle = computed(() =>
   getNativeMonthTitleLabel(selectedTimestamp.value, activeCalendar.value),
 )

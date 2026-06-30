@@ -8,6 +8,7 @@ import {
   getCalendarStartOfMonth,
   getCalendarWeekdays,
   getEpochDay,
+  parseCalendarTimestamp,
   parseTimestamp,
   type CalendarSystem,
   type Timestamp,
@@ -74,6 +75,11 @@ export const calendarExamples: CalendarExample[] = [
   },
 ]
 
+export const calendarExampleDates: Record<CalendarExampleId, string> = {
+  'islamic-civil': '1445-09-15',
+  saka: '1946-01-15',
+}
+
 export function getCalendarExample(id: CalendarExampleId): CalendarExample {
   return calendarExamples.find((entry) => entry.id === id) ?? calendarExamples[0]!
 }
@@ -83,6 +89,16 @@ export function parseGregorianDate(value: string): Timestamp {
 
   if (timestamp === null) {
     throw new Error(`Invalid Gregorian date: ${value}`)
+  }
+
+  return timestamp
+}
+
+export function parseNativeDate(value: string, example: CalendarExample): Timestamp {
+  const timestamp = parseCalendarTimestamp(value, example.calendar)
+
+  if (timestamp === null) {
+    throw new Error(`Invalid ${example.shortLabel} date: ${value}`)
   }
 
   return timestamp

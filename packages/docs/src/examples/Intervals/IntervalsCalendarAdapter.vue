@@ -44,7 +44,7 @@
           <template #head-day-event="{ scope }">
             <div class="calendar-adapter-intervals__header">
               <strong>{{ getNativeDateLabel(scope.calendarTimestamp, activeCalendar) }}</strong>
-              <span>Gregorian {{ scope.timestamp.date }}</span>
+              <span>Gregorian {{ scope.calendarIdentity.gregorianDate }}</span>
             </div>
           </template>
         </q-calendar-day>
@@ -62,22 +62,29 @@ import CalendarAdapterSelector from '@/components/CalendarAdapterSelector.vue'
 import CalendarAdapterTitle from '@/components/CalendarAdapterTitle.vue'
 import NavigationBar from '@/components/NavigationBar.vue'
 import {
+  calendarExampleDates,
   calendarExamples,
   getCalendarExample,
   getNativeDateLabel,
   getNativeHeaderLabel,
   getNativeMonthRangeLabel,
   getNativeMonthTitleLabel,
-  parseGregorianDate,
+  parseNativeDate,
   type CalendarExampleId,
 } from '@/utils/calendarAdapterExamples'
 
 const calendar = ref<QCalendarDay>()
 const calendarId = ref<CalendarExampleId>('islamic-civil')
-const selectedDate = ref('2024-04-08')
+const selectedDates = ref<Record<CalendarExampleId, string>>({ ...calendarExampleDates })
+const selectedDate = computed({
+  get: () => selectedDates.value[calendarId.value],
+  set: (value: string) => {
+    selectedDates.value[calendarId.value] = value
+  },
+})
 
 const activeCalendar = computed(() => getCalendarExample(calendarId.value))
-const selectedTimestamp = computed(() => parseGregorianDate(selectedDate.value))
+const selectedTimestamp = computed(() => parseNativeDate(selectedDate.value, activeCalendar.value))
 const nativeMonthTitle = computed(() =>
   getNativeMonthTitleLabel(selectedTimestamp.value, activeCalendar.value),
 )

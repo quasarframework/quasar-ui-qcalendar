@@ -40,11 +40,11 @@
             </span>
           </template>
 
-          <template #day="{ scope: { timestamp, calendarTimestamp, outside } }">
+          <template #day="{ scope: { calendarTimestamp, calendarIdentity, outside } }">
             <article class="calendar-adapter-agenda__day-card">
               <div>
                 <strong>{{ getNativeDateLabel(calendarTimestamp) }}</strong>
-                <span>Gregorian {{ timestamp.date }}</span>
+                <span>Gregorian {{ calendarIdentity.gregorianDate }}</span>
               </div>
               <div class="calendar-adapter-agenda__badges">
                 <span v-if="outside" class="calendar-adapter-agenda__badge">
@@ -79,7 +79,7 @@ import {
   getCalendarEndOfMonth,
   getCalendarStartOfMonth,
   getEpochDay,
-  parseTimestamp,
+  parseCalendarTimestamp,
   type CalendarSystem,
   type Timestamp,
 } from '@timestamp-js/core'
@@ -182,14 +182,22 @@ const calendarExamples: CalendarExample[] = [
 
 const calendar = ref<QCalendarAgenda>()
 const calendarId = ref<CalendarId>('islamic-civil')
-const selectedDate = ref('2024-04-08')
+const selectedDates = ref<Record<CalendarId, string>>({
+  'islamic-civil': '1445-09-15',
+  saka: '1946-01-15',
+})
+
+const selectedDate = computed({
+  get: () => selectedDates.value[calendarId.value],
+  set: (value: string) => {
+    selectedDates.value[calendarId.value] = value
+  },
+})
 
 const activeCalendar = computed<CalendarExample>(
   () => calendarExamples.find((entry) => entry.id === calendarId.value) ?? calendarExamples[0]!,
 )
-const selectedNativeTimestamp = computed(() =>
-  getNativeTimestamp(parseRequired(selectedDate.value)),
-)
+const selectedNativeTimestamp = computed(() => parseRequired(selectedDate.value))
 const selectedNativeMonthStart = computed(() =>
   getCalendarStartOfMonth(selectedNativeTimestamp.value, activeCalendar.value.calendar),
 )
@@ -211,17 +219,13 @@ const selectedNativeMonthRange = computed(() => {
 })
 
 function parseRequired(value: string): Timestamp {
-  const timestamp = parseTimestamp(value)
+  const timestamp = parseCalendarTimestamp(value, activeCalendar.value.calendar)
 
   if (timestamp === null) {
-    throw new Error(`Invalid QCalendar date: ${value}`)
+    throw new Error(`Invalid ${activeCalendar.value.shortLabel} date: ${value}`)
   }
 
   return timestamp
-}
-
-function getNativeTimestamp(timestamp: Timestamp): Timestamp {
-  return createCalendarTimestampFromEpochDay(getEpochDay(timestamp), activeCalendar.value.calendar)
 }
 
 function getGregorianTimestamp(nativeTimestamp: Timestamp): Timestamp {
