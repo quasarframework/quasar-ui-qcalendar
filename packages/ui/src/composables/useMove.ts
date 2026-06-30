@@ -23,7 +23,6 @@ import {
   getResolvedCalendarSystem,
   isGregorianCalendar,
   toCalendarTimestamp,
-  toGregorianTimestamp,
 } from '../utils/calendarSystem'
 
 export const useMoveEmits = [
@@ -150,7 +149,7 @@ export default function useMove(
                 : prevCalendarDay(boundary, calendar)
 
             nextCalendarValue = moveCalendarToAllowedWeekday(nextCalendarValue, forward)
-            moved = toGregorianTimestamp(nextCalendarValue, calendar)
+            moved = nextCalendarValue
             break
           }
 
