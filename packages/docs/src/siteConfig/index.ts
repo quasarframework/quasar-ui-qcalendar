@@ -753,9 +753,9 @@ const config = {
     ],
     jsExternal: [
       `https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@${codepenPackageVersion}/dist/index.umd.min.js`,
-      'https://cdn.jsdelivr.net/npm/@timestamp-js/core@0.1.0-rc.2/dist/index.global.min.js',
-      'https://cdn.jsdelivr.net/npm/@timestamp-js/calendar-islamic@0.1.0-rc.2/dist/index.global.min.js',
-      'https://cdn.jsdelivr.net/npm/@timestamp-js/calendar-saka@0.1.0-rc.2/dist/index.global.min.js',
+      'https://cdn.jsdelivr.net/npm/@timestamp-js/core@0.1.0-rc.3/dist/index.global.min.js',
+      'https://cdn.jsdelivr.net/npm/@timestamp-js/calendar-islamic@0.1.0-rc.3/dist/index.global.min.js',
+      'https://cdn.jsdelivr.net/npm/@timestamp-js/calendar-saka@0.1.0-rc.3/dist/index.global.min.js',
     ],
     globalPackages: [
       {

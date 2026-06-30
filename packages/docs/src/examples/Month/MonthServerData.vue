@@ -1,6 +1,6 @@
 <template>
   <div
-    class="subcontent server-data-recipe q-pt-sm"
+    class="subcontent server-data-recipe server-data-recipe--month q-pt-sm"
     :class="{ 'server-data-recipe--dark': $q.dark.isActive }"
   >
     <div class="server-data-recipe__panel">
@@ -253,6 +253,16 @@ function resetServerData() {
 .server-data-recipe--dark .server-event {
   background: #263241;
   color: #dce8f5;
+}
+
+.server-data-recipe--month {
+  grid-template-columns: minmax(0, 900px);
+  justify-content: center;
+}
+
+.server-data-recipe--month .server-data-recipe__panel,
+.server-data-recipe--month .server-data-recipe__calendar-row {
+  width: 100%;
 }
 
 @media (max-width: 599px) {

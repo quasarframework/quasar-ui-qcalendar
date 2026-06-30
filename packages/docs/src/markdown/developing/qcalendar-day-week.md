@@ -303,8 +303,8 @@ with data returned for the current range.
 
 ### Calendar Adapters
 
-Week views are still range-based, so adapters are usually applied in slots. This
-keeps QCalendar events and model values Gregorian while native users see Hijri,
-Saka, or other adapter labels in the header and cells.
+Week views are range-based, and adapters apply to the visible dates, slots, and
+events. Native users can see Hijri, Saka, or other adapter labels in the header
+and cells while Gregorian interop metadata remains available when needed.
 
 <MarkdownExample title="Calendar Adapters" file="WeekCalendarAdapter"/>

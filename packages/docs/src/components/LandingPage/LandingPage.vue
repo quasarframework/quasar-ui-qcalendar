@@ -70,6 +70,12 @@
               {{ pill }}
             </span>
           </div>
+
+          <div class="hero-pills hero-pills--calendars" aria-label="Supported calendar systems">
+            <span v-for="pill in calendarPills" :key="pill" class="hero-pill hero-pill--calendar">
+              {{ pill }}
+            </span>
+          </div>
         </div>
 
         <div class="hero__visual">
@@ -230,6 +236,7 @@ const sectionText =
   'QCalendar is intentionally wide in capability but consistent in structure: shared date logic, theming, slots, and view-specific surfaces for planning-heavy interfaces.'
 
 const heroPills = ['Day', 'Month', 'Agenda', 'Resource', 'Scheduler', 'Task']
+const calendarPills = ['Gregorian', 'Hijri', 'Saka']
 
 const previewFamilies = [
   {
@@ -278,6 +285,11 @@ const featureCards = [
     icon: 'timeline',
     title: 'Task and Planning Surfaces',
     body: 'Support timesheets, task views, and more planning-heavy layouts without leaving the QCalendar family.',
+  },
+  {
+    icon: 'public',
+    title: 'Calendar Systems',
+    body: 'Make calendars native to your users: use Gregorian, install a Timestamp adapter, or bring your own for QCalendar date math.',
   },
   {
     icon: 'palette',
@@ -430,6 +442,10 @@ const supportItems = [
   padding-top: 6px;
 }
 
+.hero-pills--calendars {
+  padding-top: 0;
+}
+
 .hero-button {
   min-height: 50px;
   padding: 0 18px;
@@ -507,6 +523,12 @@ const supportItems = [
   color: #d7eeff;
   font-size: 0.84rem;
   font-weight: 600;
+}
+
+.hero-pill--calendar {
+  border-color: rgba(246, 252, 255, 0.2);
+  background: rgba(246, 252, 255, 0.1);
+  color: #ffffff;
 }
 
 .preview-panel,
@@ -1018,6 +1040,12 @@ body.body--dark .landing-page {
   border-color: var(--landing-pill-border);
   background: var(--landing-pill-bg);
   color: var(--landing-pill-text);
+}
+
+.hero-pill--calendar {
+  border-color: var(--landing-border-strong);
+  background: var(--landing-chip-bg);
+  color: var(--landing-chip-text);
 }
 
 .preview-panel,

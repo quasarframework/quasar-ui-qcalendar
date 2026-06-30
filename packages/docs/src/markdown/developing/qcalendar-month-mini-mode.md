@@ -192,6 +192,6 @@ with data returned for the current range.
 
 Mini-mode supports the same native month adapter behavior as the full month
 view. The compact grid can use native month starts, native month ends, and
-native outside-day state while emitting Gregorian dates.
+native outside-day state while emitting adapter-native dates.
 
 <MarkdownExample title="Calendar Adapters" file="MiniModeCalendarAdapter"/>

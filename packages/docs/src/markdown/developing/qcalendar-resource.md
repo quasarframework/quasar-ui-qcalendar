@@ -172,8 +172,8 @@ with data returned for the current range.
 
 ### Calendar Adapters
 
-Resource views are interval timelines for a selected Gregorian date. Use
-calendar adapters in the resource header, interval labels, and interval slots
-when the resource plan needs native calendar context.
+Resource views are interval timelines for a selected date. Use calendar adapters
+with the resource header, interval labels, and interval slots when the resource
+plan needs native calendar context.
 
 <MarkdownExample title="Calendar Adapters" file="ResourceCalendarAdapter"/>

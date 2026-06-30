@@ -27,6 +27,7 @@
       <q-calendar-task
         id="calendar-task"
         ref="calendar"
+        v-model="startDate"
         v-model:model-tasks="parsedTasks"
         v-model:model-title="titleTasks"
         v-model:model-footer="footerTasks"

@@ -42,7 +42,8 @@ import QCalendarApi from '@quasar/quasar-ui-qcalendar/dist/api/QCalendar.json'
 ## Calendar Adapters
 
 QCalendar forwards the adapter-aware props to the selected view. This is useful
-when a wrapper is choosing the visible calendar type at runtime, but the app
-still stores and routes Gregorian model values.
+when a wrapper is choosing the visible calendar type at runtime. With
+`calendar-system`, date-bearing values are native to the active adapter, and
+Gregorian interop is available through `calendarIdentity` in date-bearing slots.
 
 <MarkdownExample title="Calendar Adapters" file="CalendarAdapterWrapper"/>

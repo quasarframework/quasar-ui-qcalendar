@@ -23,7 +23,9 @@ This section highlights common properties and general behavior shared by the cal
 
 `model-value` is how the date is set in QCalendar and is the user-selected date when there is an interactive calendar. This is the active date and can be used to move the calendar to a previous or next view (ie: day, week, month, etc). Typically, you set this with something like `v-model="selectedDate"`. If your `selectedDate` contains a `null`, then the current date (today's date) will be used.
 
-QCalendar model values are Gregorian `YYYY-MM-DD` strings. This stays true even when you use a non-Gregorian calendar adapter for display.
+QCalendar model values are Gregorian `YYYY-MM-DD` strings by default. When you pass
+`calendar-system`, date-bearing values for that component use the adapter-native `YYYY-MM-DD`
+calendar instead.
 
 ## Now
 
@@ -44,11 +46,13 @@ Internally, QCalendar uses the browser's `Intl.DateTimeFormat` for all localizat
 
 `locale` changes language and formatting. It does not change the calendar math by itself.
 
-`dir` is the standard HTML direction attribute. QCalendar forwards it to the rendered view, so use `dir="rtl"` for right-to-left presentations such as Arabic Hijri calendars. If a slot mixes English or app data into an RTL calendar, isolate that content with `dir="ltr"` inside the slot.
+`dir` is the standard HTML direction attribute. QCalendar forwards it to the rendered view. Calendar adapters can provide default locale and direction values, and explicit `locale` or `dir` props override those defaults when your app needs a different presentation. If a slot mixes English or app data into an RTL calendar, isolate that content with `dir="ltr"` inside the slot.
 
 ## Calendar systems
 
-Use `calendar-system` when a view should expose native calendar dates alongside QCalendar's Gregorian dates. This is an opt-in adapter object from the Timestamp packages such as `@timestamp-js/calendar-islamic` or `@timestamp-js/calendar-saka`.
+Use `calendar-system` when a view should use native calendar dates. This is an opt-in adapter object
+from the Timestamp packages such as `@timestamp-js/calendar-islamic` or
+`@timestamp-js/calendar-saka`.
 
 | Property        | Type   | Example              |
 | --------------- | ------ | -------------------- |
@@ -59,24 +63,15 @@ Use `calendar-system` when a view should expose native calendar dates alongside 
 import { ref } from 'vue'
 import { islamicCivilCalendar } from '@timestamp-js/calendar-islamic'
 
-const selectedDate = ref('2024-03-25')
-// QCalendar uses this array for week math. This Hijri example
-// starts on Saturday; with dir="rtl", Saturday renders on the right edge.
-const saturdayFirstWeekdays = [6, 0, 1, 2, 3, 4, 5]
+const selectedDate = ref('1445-09-15')
 </script>
 
 <template>
-  <q-calendar-month
-    v-model="selectedDate"
-    :calendar-system="islamicCivilCalendar"
-    locale="ar"
-    :weekdays="saturdayFirstWeekdays"
-    dir="rtl"
-  />
+  <q-calendar-month v-model="selectedDate" :calendar-system="islamicCivilCalendar" />
 </template>
 ```
 
-In this example, `selectedDate` is still Gregorian. Date-bearing slots and mouse-event scopes receive `scope.timestamp` for the Gregorian date and `scope.calendarTimestamp` for the adapter-native date. See [Calendar Adapters](/developing/calendar-adapters) for week ranges, native month boundaries, RTL guidance, and adapter examples.
+In this example, `selectedDate` is Hijri because the Islamic civil adapter is active. QCalendar also uses the adapter's default locale, direction, and visible weekday order unless you pass `locale`, `dir`, or `weekdays` yourself. Date-bearing slots and mouse-event scopes receive adapter-native timestamps plus `scope.calendarIdentity` for Gregorian interop metadata such as `gregorianDate` and `epochDay`. See [Calendar Adapters](/developing/calendar-adapters) for week ranges, native month boundaries, RTL guidance, and adapter examples.
 
 ## Dark and bordered
 
@@ -89,7 +84,7 @@ If you want a calendar to display dark mode, then set the `dark` property. If yo
 
 ## Weekdays
 
-`weekdays` is a property that allows you to adjust the order of the days of the week. It is an array of numbers from 0 (Sunday) to 6 (Saturday). The default is `[0,1,2,3,4,5,6]`. If you wanted to have a 5 day work week, you would remove the Sunday and Saturday representations like this: `[1,2,3,4,5]`. If you wanted a calendar where Monday was the first day of the week, you would move Sunday to the end, like this: `[1,2,3,4,5,6,0]`. Native calendar presentations often pair `weekdays` with `locale`, `dir`, and `calendar-system` so labels, direction, and calendar math agree.
+`weekdays` is a property that allows you to adjust the order of the days of the week. It is an array of numbers from 0 (Sunday) to 6 (Saturday). Gregorian calendars default to `[0,1,2,3,4,5,6]`; calendar adapters can provide their own default visible week order. If you wanted to have a 5 day work week, you would remove the Sunday and Saturday representations like this: `[1,2,3,4,5]`. If you wanted a calendar where Monday was the first day of the week, you would move Sunday to the end, like this: `[1,2,3,4,5,6,0]`. An explicit `weekdays` prop always overrides the adapter default.
 
 | Property | Type  | Example         |
 | -------- | ----- | --------------- |
@@ -353,10 +348,17 @@ If the scope has a timestamp within it and that's all you need, then you can des
 <q-calendar-day #day="{ scope: { timestamp } }" />
 ```
 
-When `calendar-system` is set, date-bearing slot and event scopes also include `calendarTimestamp` and `calendarSystem`. The `timestamp` value remains Gregorian, while `calendarTimestamp` is the same day expressed in the adapter-native calendar.
+When `calendar-system` is set, date-bearing slot and mouse-event scopes also include
+`calendarTimestamp`, `calendarIdentity`, and `calendarSystem`. The `timestamp` and
+`calendarTimestamp` values are native to the active adapter. Use
+`calendarIdentity.gregorianDate` when an external system still expects a Gregorian date, and
+`calendarIdentity.epochDay` when you need a neutral comparison key.
 
 ```html
-<q-calendar-day #day="{ scope: { timestamp, calendarTimestamp, calendarSystem } }" />
+<q-calendar-day #day="{ scope: { timestamp, calendarTimestamp, calendarIdentity } }" />
 ```
+
+Range-style events such as `change` expose adapter-aware range fields like `calendarStart`,
+`calendarEnd`, `calendarDays`, and `calendarSystem`.
 
 The pattern here is to **always** be recognizable to the developer and to know what to expect.

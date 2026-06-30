@@ -1,8 +1,8 @@
 <template>
   <div class="subcontent calendar-adapter-week">
     <p class="text-body2 text-center q-mb-md">
-      Week views are useful when the app stores Gregorian dates but users need native calendar
-      labels on each visible day.
+      Week views can render native calendar labels and native-keyed data on each visible day while
+      preserving Gregorian interop metadata.
     </p>
 
     <div class="calendar-adapter-week__toolbar">

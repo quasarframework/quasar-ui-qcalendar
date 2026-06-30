@@ -324,8 +324,8 @@ with data returned for the current range.
 
 ### Calendar Adapters
 
-Day views keep their Gregorian visible range. Use Timestamp calendar adapters in
-slots when headers, badges, or native-keyed events need to display native
+Day views use Timestamp calendar adapters for date-bearing values and expose
+native slot metadata when headers, badges, or native-keyed events need native
 calendar dates.
 
 <MarkdownExample title="Calendar Adapters" file="DayCalendarAdapter"/>

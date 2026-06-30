@@ -4,15 +4,15 @@ desc: Upgrade from v4 to v5
 keys: Help, upgrade, migration
 ---
 
-Use this guide to migrate from QCalendar v4.x to QCalendar v5.0.0-rc.7.
+Use this guide to migrate from QCalendar v4.x to QCalendar v5.0.0-rc.8.
 
 > QCalendar v5 remains a Vue 3 calendar package with Quasar 2 integration. The QCalendar app extension is Vite-only and targets Quasar CLI with `@quasar/app-vite` v3, but direct UI package imports can still be used in Vue/Vite projects without installing the app extension.
 
 > The information below is by no means an exhaustive list of changes and new functionality. If you see something that has been missed, please PR or let us know.
 
-## QCalendar v5.0.0-rc.7
+## QCalendar v5.0.0-rc.8
 
-Welcome to the QCalendar v5.0.0-rc.7 release.
+Welcome to the QCalendar v5.0.0-rc.8 release.
 
 This release prepares QCalendar for the next Quasar CLI Vite generation. The calendar component API is expected to remain compatible with QCalendar v4, but the supported app-extension runtime and project tooling have changed.
 
@@ -61,27 +61,20 @@ Then pass the adapter to the relevant view:
 ```vue
 <script setup>
 import { islamicCivilCalendar } from '@timestamp-js/calendar-islamic'
-
-// QCalendar uses this array for week math. This Hijri example
-// starts on Saturday; with dir="rtl", Saturday renders on the right edge.
-const saturdayFirstWeekdays = [6, 0, 1, 2, 3, 4, 5]
 </script>
 
-<q-calendar-month
-  v-model="selectedDate"
-  :calendar-system="islamicCivilCalendar"
-  locale="ar"
-  :weekdays="saturdayFirstWeekdays"
-  dir="rtl"
-/>
+<q-calendar-month v-model="selectedDate" :calendar-system="islamicCivilCalendar" />
 ```
 
 Existing Gregorian calendars do not need an adapter. When `calendar-system` is
 not provided, QCalendar uses Gregorian calendar behavior from `@timestamp-js/core`.
-Date-bearing slot and mouse-event scopes now include additive adapter-aware
-fields:
+When an adapter is provided, QCalendar uses the adapter's default locale,
+direction, and visible weekday order unless your app passes `locale`, `dir`, or
+`weekdays` explicitly.
+Date-bearing slot and mouse-event scopes now include adapter-aware fields:
 
 - `calendarTimestamp`
+- `calendarIdentity`
 - `calendarSystem`
 
 The `change` event also includes additive fields:
@@ -91,18 +84,24 @@ The `change` event also includes additive fields:
 - `calendarDays`
 - `calendarSystem`
 
-The existing Gregorian fields remain the source of truth for model values,
-routes, storage, and event handling:
+When `calendar-system` is active, the component's date-bearing values are native
+to that adapter. The existing timestamp-shaped fields remain the primary fields
+for model values, routes, storage, and event handling:
 
 - `timestamp`
 - `start`
 - `end`
 - `days`
 
+Use `calendarIdentity.gregorianDate` when an external API, database, export, or
+analytics boundary still expects Gregorian ISO dates. Use
+`calendarIdentity.epochDay` when you need a neutral cross-calendar comparison
+key.
+
 When a calendar adapter is active, QCalendar now derives `outside` and disabled
-slot state from the adapter month boundary. The existing `disable-*` props still
-compare against Gregorian model dates, so stored dates and app logic do not need
-to change when an adapter is used for presentation.
+slot state from the adapter month boundary. The existing `disable-*` props use
+the same native date contract as the active adapter, so Saka or Hijri disabled
+dates can be supplied in the same calendar as the view.
 
 See [Calendar Adapters](/developing/calendar-adapters) for the integration
 contract and view-specific examples.

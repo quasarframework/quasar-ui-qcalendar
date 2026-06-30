@@ -14,6 +14,8 @@ If you're looking to help out, check out our [Call to action](/other/contributin
 
 **QCalendar** allows for viewing of **day** (1-6 days), **week**, **monthly**, **scheduler**, **agenda**, **resource** and **task** views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.
 
+QCalendar uses Gregorian dates by default and can opt into Timestamp calendar adapters for native Hijri and Saka calendar workflows.
+
 QCalendar is a less-opinionated calendar component, as it does not keep track of things like events and reminders. This is in the hands of the developer, but QCalendar makes it easy via events, slots and methods (see examples how to accomplish these endeavors).
 
 The guiding philosophy has been to empower the developer and allow them to do what needs to be done without being overly opinionated.
@@ -54,11 +56,11 @@ QCalendar is actually an accumulation of several other dedicated components and 
 20. Easy to customize with Vue slots
 21. Support for Dark mode
 22. Timestamp-powered date utilities for custom calendar workflows
-23. Opt-in Timestamp calendar adapters for native month math and non-Gregorian labels, while keeping QCalendar model values Gregorian
+23. Gregorian calendar support by default, with opt-in Timestamp adapters for native Hijri and Saka date math, labels, and Gregorian interop metadata
 24. Toggled date, range and interval selection
 
 ## QCalendar is not…
 
 - An event management system. However, QCalendar supports everything you need to create an event/reminder/task management system using slots.
 - An interactive navigation provider (next, previous, today). However, you can easily do this in devland with QCalendar’s methods (see examples).
-- A replacement for dedicated calendar adapter packages. Non-Gregorian calendars are opt-in through Timestamp adapters, and QCalendar keeps emitted app dates Gregorian for compatibility.
+- A replacement for dedicated calendar adapter packages. Non-Gregorian calendars are opt-in through Timestamp adapters, and QCalendar exposes Gregorian interop metadata when external systems still need it.

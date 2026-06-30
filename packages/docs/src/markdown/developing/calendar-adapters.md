@@ -8,7 +8,10 @@ related:
   - /developing/qcalendar-agenda
 ---
 
-QCalendar works with Gregorian `model-value` strings for browser and app compatibility. Timestamp calendar adapters let a view calculate native calendar boundaries while still emitting stable Gregorian dates to the rest of your app.
+QCalendar uses Gregorian dates by default. When you pass a Timestamp calendar adapter with
+`calendar-system`, date-bearing component APIs use that adapter's native `YYYY-MM-DD` calendar
+dates while QCalendar keeps Gregorian interop metadata available for storage, APIs, export,
+analytics, and debugging.
 
 This is different from `locale`. Locale changes language and regional formatting. A calendar adapter changes the calendar math: year, month, day, month length, leap-year rules, and weekday calculation.
 
@@ -35,51 +38,85 @@ pnpm add @timestamp-js/calendar-saka
 
 ## Integration Boundary
 
-There are two date systems in play:
+There are two date identities in play:
 
-- QCalendar receives, emits, and routes dates as Gregorian `YYYY-MM-DD` strings.
 - A Timestamp calendar adapter owns native calendar math: month starts, month ends, month lengths, native day numbers, and native month names.
+- QCalendar parses and emits adapter-native `YYYY-MM-DD` values for model values, selections, disabled dates, slots, and events when `calendar-system` is active.
+- QCalendar also exposes stable identity metadata for the same day, including a Gregorian date and an `epochDay` serial key.
 
-That means the app can keep storage, route params, API payloads, and event handlers Gregorian while the visible calendar behaves like the user-facing native calendar.
+That means native calendar views can feel native end to end. When an app still stores or exchanges
+Gregorian dates, use the identity metadata from the slot or event scope as the bridge instead of
+making the visible calendar state Gregorian.
 
 ## QCalendar Contract
 
-Pass `calendar-system` to QCalendar when a view should expose adapter-native date data. Pair it with the matching presentation choices for native users: `locale` for weekday labels, `weekdays` for the visible week order, and `dir` for RTL calendars.
+Pass `calendar-system` to QCalendar when a view should expose adapter-native date data. QCalendar reads the adapter's default locale, text direction, and visible weekday order from Timestamp when those props are omitted. Pass `locale`, `dir`, or `weekdays` only when the app needs to override that presentation, such as rendering a five-day work week.
 
 ```vue
 <script setup>
+import { ref } from 'vue'
 import { islamicCivilCalendar } from '@timestamp-js/calendar-islamic'
 
-// QCalendar uses this array for week math. This Hijri example
-// starts on Saturday; with dir="rtl", Saturday renders on the right edge.
-const saturdayFirstWeekdays = [6, 0, 1, 2, 3, 4, 5]
+const selectedHijriDate = ref('1445-09-15')
 </script>
 
-<q-calendar-month
-  v-model="selectedGregorianDate"
-  :calendar-system="islamicCivilCalendar"
-  locale="ar"
-  :weekdays="saturdayFirstWeekdays"
-  dir="rtl"
->
+<q-calendar-month v-model="selectedHijriDate" :calendar-system="islamicCivilCalendar">
   <template #day="{ scope }">
     <strong>{{ scope.calendarTimestamp.day }}</strong>
-    <span>Gregorian {{ scope.timestamp.date }}</span>
+    <span>Gregorian {{ scope.calendarIdentity.gregorianDate }}</span>
   </template>
 </q-calendar-month>
 ```
 
-Date-bearing slot and mouse-event scopes include both date systems:
+Date-bearing slot and mouse-event scopes include native values and interop identity metadata:
 
-- `scope.timestamp` is the Gregorian QCalendar timestamp. Use it for `v-model`, routing, browser APIs, and persisted app data.
-- `scope.calendarTimestamp` is the same day represented in the configured calendar system. Use it for native labels and native-keyed data.
+- `scope.timestamp` is the timestamp used by the active view. With `calendar-system`, it is adapter-native.
+- `scope.calendarTimestamp` is the same day represented in the configured calendar system. With `calendar-system`, it matches the active native calendar.
+- `scope.calendarIdentity` contains stable identity metadata, including `nativeDate`, `gregorianDate`, and `epochDay`.
 - `scope.calendarSystem` is the adapter that created `calendarTimestamp`.
 
-If you do not pass `calendar-system`, QCalendar uses the Gregorian calendar from
-`@timestamp-js/core`. The adapter fields are still present, but
-`scope.calendarTimestamp` represents the same Gregorian day as `scope.timestamp`.
+Use `scope.timestamp` or `scope.calendarTimestamp` for labels, selected dates, disabled dates, and
+native-keyed app data. Use `scope.calendarIdentity.gregorianDate` only at integration boundaries
+that still require Gregorian dates.
 
-The `change` event follows the same pattern. It includes `days` for the visible Gregorian range and `calendarDays` for the same visible dates represented in the configured calendar system.
+If you do not pass `calendar-system`, QCalendar uses the Gregorian calendar from
+`@timestamp-js/core`. The adapter fields are still present, and both timestamp fields represent the
+same Gregorian day.
+
+If you do pass `calendar-system`, explicit presentation props still win. For example, a Saka or Hijri view can render a local five-day work week with `:weekdays="[1, 2, 3, 4, 5]"` while keeping adapter-native date math and model values.
+
+## Adapter Presentation Defaults
+
+Timestamp adapters can publish presentation defaults. QCalendar uses them only when the matching
+prop is omitted:
+
+| Timestamp adapter field | QCalendar prop | Used for                                  |
+| ----------------------- | -------------- | ----------------------------------------- |
+| `defaultLocale`         | `locale`       | Weekday, month, and date labels           |
+| `defaultDirection`      | `dir`          | The rendered calendar root direction      |
+| `defaultWeekdays`       | `weekdays`     | Visible weekday order and week navigation |
+
+This keeps the common case small:
+
+```vue
+<q-calendar-month v-model="selectedHijriDate" :calendar-system="islamicCivilCalendar" />
+```
+
+And it keeps application-specific presentation explicit:
+
+```vue
+<q-calendar-month
+  v-model="selectedHijriDate"
+  :calendar-system="islamicCivilCalendar"
+  :weekdays="[1, 2, 3, 4, 5]"
+/>
+```
+
+The second example still uses Hijri date math and Hijri `YYYY-MM-DD` model values, but it displays a
+five-day work week instead of the adapter's normal visible week.
+
+The `change` event follows the same pattern. It includes `days` for the visible range and
+`calendarDays` for the same visible dates represented in the configured calendar system.
 
 ```ts [twoslash]
 import type { Timestamp } from '@timestamp-js/core'
@@ -91,6 +128,7 @@ interface QCalendarChangePayload {
   calendarStart: string
   calendarEnd: string
   calendarDays: Timestamp[]
+  calendarSystem: unknown
 }
 
 function onChange(payload: QCalendarChangePayload) {
@@ -101,7 +139,7 @@ function onChange(payload: QCalendarChangePayload) {
 
 ## Adapter Bridge
 
-Use the epoch-day bridge only when you are outside a QCalendar slot or event, such as turning a stored Gregorian `v-model` value into a native timestamp for summary text:
+Use the epoch-day bridge only when you are outside a QCalendar slot or event, such as turning a stored Gregorian value into a native timestamp for summary text:
 
 ```ts [twoslash]
 import {
@@ -120,7 +158,7 @@ const selectedGregorian = parseTimestamp('2024-03-25')!
 const selectedHijri = toHijri(selectedGregorian)
 ```
 
-Use the same bridge in the other direction when you need a Gregorian date for QCalendar from a native adapter timestamp:
+Use the same bridge in the other direction when you need a Gregorian date for an external system from a native adapter timestamp:
 
 ```ts [twoslash]
 import {
@@ -137,15 +175,16 @@ function toGregorian(hijriTimestamp: Timestamp) {
 
 ## Native Week Ranges
 
-Week-style views still render a range of Gregorian timestamps. When a user
-chooses a native calendar date, calculate the native week first, then convert
-the boundaries back to Gregorian if you need to update `model-value`, query an
-API, or compare against stored app data.
+When a user chooses a native calendar date, calculate the native week with the
+same adapter and weekday order that the view receives. Convert the boundaries
+to Gregorian only when you need to query an API or compare against Gregorian
+stored app data.
 
 ```ts [twoslash]
 import {
   createCalendarTimestampFromEpochDay,
   getCalendarEndOfWeek,
+  getCalendarWeekdays,
   getCalendarStartOfWeek,
   getEpochDay,
   parseTimestamp,
@@ -153,20 +192,18 @@ import {
 } from '@timestamp-js/core'
 import { islamicCivilCalendar } from '@timestamp-js/calendar-islamic'
 
-// Use the same visible weekday order that the QCalendar view receives.
-// This Hijri example starts on Saturday. With dir="rtl",
-// Saturday renders on the right edge of the calendar.
-const hijriWeekdays = [6, 0, 1, 2, 3, 4, 5]
+// Use the same visible weekday order that the QCalendar view receives by default.
+const hijriWeekdays = getCalendarWeekdays(islamicCivilCalendar)
 
 function toHijri(timestamp: Timestamp) {
-  // QCalendar dates are Gregorian. The epoch day lets the adapter describe
-  // the same absolute day in the native calendar system.
+  // The epoch day lets the adapter describe the same absolute day in the
+  // native calendar system.
   return createCalendarTimestampFromEpochDay(getEpochDay(timestamp), islamicCivilCalendar)
 }
 
 function toGregorian(hijriTimestamp: Timestamp) {
-  // Convert native adapter boundaries back before using them as QCalendar
-  // model values, route params, or API query boundaries.
+  // Convert native adapter boundaries before using them as Gregorian-backed
+  // route params or API query boundaries.
   return createCalendarTimestampFromEpochDay(getEpochDay(hijriTimestamp, islamicCivilCalendar))
 }
 
@@ -177,17 +214,17 @@ const selectedHijri = toHijri(selectedGregorian)
 const weekStartHijri = getCalendarStartOfWeek(selectedHijri, hijriWeekdays, islamicCivilCalendar)
 const weekEndHijri = getCalendarEndOfWeek(selectedHijri, hijriWeekdays, islamicCivilCalendar)
 
-// QCalendar still consumes Gregorian dates, so bridge the native range back.
 const weekStartGregorian = toGregorian(weekStartHijri)
 const weekEndGregorian = toGregorian(weekEndHijri)
 ```
 
-Use the native range for native labels and native-keyed data. Use the converted
-Gregorian range for QCalendar model values, routes, and persisted app data.
+Use the native range for QCalendar model values, native labels, and native-keyed
+data. Use the converted Gregorian range for integrations that still expect
+Gregorian dates.
 
 ## Native Month Views
 
-With `calendar-system`, QCalendar still emits Gregorian dates, but supported month-style views use native calendar math for:
+With `calendar-system`, supported month-style views use native calendar math for:
 
 - the first and last native day of the visible month
 - the leading and trailing outside days
@@ -206,6 +243,7 @@ import {
   createCalendarTimestampFromEpochDay,
   getCalendarEndOfMonth,
   getCalendarEndOfWeek,
+  getCalendarWeekdays,
   getCalendarStartOfMonth,
   getCalendarStartOfWeek,
   getEpochDay,
@@ -214,10 +252,8 @@ import {
 } from '@timestamp-js/core'
 import { islamicCivilCalendar } from '@timestamp-js/calendar-islamic'
 
-// Keep this in sync with the QCalendar `weekdays` prop for the native view.
-// This Hijri example starts on Saturday. With dir="rtl",
-// Saturday renders on the right edge of the calendar.
-const hijriWeekdays = [6, 0, 1, 2, 3, 4, 5]
+// Use the same visible weekday order that the QCalendar view receives by default.
+const hijriWeekdays = getCalendarWeekdays(islamicCivilCalendar)
 
 function toHijri(timestamp: Timestamp) {
   // Bridge from the stored Gregorian date to the same absolute day in Hijri.
@@ -225,7 +261,7 @@ function toHijri(timestamp: Timestamp) {
 }
 
 function toGregorian(hijriTimestamp: Timestamp) {
-  // Bridge native adapter results back for QCalendar and Gregorian-backed APIs.
+  // Bridge native adapter results for Gregorian-backed APIs.
   return createCalendarTimestampFromEpochDay(getEpochDay(hijriTimestamp, islamicCivilCalendar))
 }
 
@@ -240,7 +276,7 @@ const monthEnd = getCalendarEndOfMonth(selectedHijri, islamicCivilCalendar)
 const gridStart = getCalendarStartOfWeek(monthStart, hijriWeekdays, islamicCivilCalendar)
 const gridEnd = getCalendarEndOfWeek(monthEnd, hijriWeekdays, islamicCivilCalendar)
 
-// Use these Gregorian dates when querying or driving QCalendar-visible ranges.
+// Use these Gregorian dates when querying Gregorian-backed integrations.
 const gridStartGregorian = toGregorian(gridStart)
 const gridEndGregorian = toGregorian(gridEnd)
 ```
@@ -248,7 +284,25 @@ const gridEndGregorian = toGregorian(gridEnd)
 Use `monthStart` and `monthEnd` when you need native month labels or native
 boundary badges. Use `gridStart` and `gridEnd` when you need the full visible
 native calendar grid, including outside days. Convert those values back to
-Gregorian before feeding ranges into QCalendar or a Gregorian-backed API.
+Gregorian before feeding ranges into a Gregorian-backed API.
+
+## Gregorian Interop
+
+Use native adapter dates for user-facing calendar state. Keep Gregorian interop available for the
+boundaries that still need it:
+
+- Existing apps may store records keyed by Gregorian dates.
+- APIs, databases, exports, and analytics often expect Gregorian ISO dates even when the UI is
+  native Saka, Hijri, or another calendar.
+- Cross-calendar comparisons need a neutral serial key. Use `scope.calendarIdentity.epochDay` rather
+  than a Gregorian display string.
+- Debugging and migration are easier when you can inspect
+  `scope.calendarIdentity.gregorianDate` beside the native date.
+- Integrations can move to native calendar UI without forcing every backend boundary to change at
+  the same time.
+
+In slots, prefer `scope.timestamp` or `scope.calendarTimestamp` for native UI and native-keyed data.
+Use `scope.calendarIdentity.gregorianDate` only when an external boundary needs a Gregorian date.
 
 ## Labels And Data
 
@@ -279,7 +333,7 @@ Calendar adapter examples live on the view pages where users are already learnin
 - [QCalendarDay intervals](/developing/qcalendar-day-intervals#calendar-adapters) shows native context in interval labels.
 - [QCalendarMonth](/developing/qcalendar-month#calendar-adapters) shows a native month grid where the first native day appears in the first visible week, outside days follow the native month, and previous/next navigation moves by native months.
 - [QCalendarMonth mini-mode](/developing/qcalendar-month-mini-mode#calendar-adapters) shows the same native month behavior in a compact picker.
-- [QCalendarAgenda](/developing/qcalendar-agenda#calendar-adapters) shows adapter labels in a week-style planning view while QCalendar still owns the visible Gregorian week.
+- [QCalendarAgenda](/developing/qcalendar-agenda#calendar-adapters) shows adapter labels in a week-style planning view.
 - [QCalendarResource](/developing/qcalendar-resource#calendar-adapters) shows adapter labels in a resource interval timeline.
 - [QCalendarScheduler](/developing/qcalendar-scheduler#calendar-adapters) shows native labels and native-keyed data in resource/day cells.
 - [QCalendarTask](/developing/qcalendar-task#calendar-adapters) shows native labels and native-keyed work items in task day cells.
@@ -292,12 +346,11 @@ rather than on this overview page.
 When you build a production non-Gregorian calendar view, check these pieces deliberately:
 
 - Choose the adapter package for the actual calendar rule set, not just the display language.
-- Choose a locale for labels and numbering.
-- Choose the visible weekday order expected by the target calendar users.
-- Set `dir="rtl"` for RTL calendar presentations such as Arabic Hijri views.
+- Let the adapter provide locale, text direction, and visible weekday defaults when they match the target users.
+- Override `locale`, `dir`, or `weekdays` when the app needs a different presentation, such as a five-day work week.
 - Pass `calendar-system` to views that should expose `scope.calendarTimestamp`.
-- Use `scope.calendarTimestamp` for native labels and native-keyed data.
-- Keep QCalendar model values Gregorian unless the rest of your app has also moved to native adapter dates.
-- Use the epoch-day bridge outside QCalendar slots/events when you need to convert stored app dates.
+- Use adapter-native `YYYY-MM-DD` strings for `v-model`, selected dates, disabled dates, native labels, and native-keyed data.
+- Use `scope.calendarIdentity.gregorianDate` for external systems that still expect Gregorian dates.
+- Use the epoch-day bridge outside QCalendar slots/events when you need to convert between stored Gregorian dates and native adapter dates.
 - Test the first and last day of the native month, especially when those days fall in the middle of a Gregorian month.
 - Test previous and next month navigation against native month names, not Gregorian month names.

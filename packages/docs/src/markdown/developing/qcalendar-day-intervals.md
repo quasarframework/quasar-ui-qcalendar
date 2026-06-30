@@ -31,7 +31,7 @@ month selector or custom navigation UI.
 
 ## Calendar Adapters
 
-Interval views keep time-of-day labels Gregorian-neutral. Use Timestamp calendar
+Interval views keep time-of-day labels calendar-neutral. Use Timestamp calendar
 adapters in interval and header slots when the interval surface needs native
 calendar context.
 

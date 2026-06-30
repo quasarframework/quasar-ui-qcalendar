@@ -1,8 +1,8 @@
 <template>
   <div class="subcontent calendar-adapter-wrapper">
     <p class="text-body2 text-center q-mb-md">
-      The QCalendar wrapper forwards the calendar adapter to the selected view while your app keeps
-      stable Gregorian model values.
+      The QCalendar wrapper forwards the calendar adapter to the selected view so date scopes stay
+      native while Gregorian interop remains available when your app needs it.
     </p>
 
     <div class="calendar-adapter-wrapper__toolbar">

@@ -1,7 +1,7 @@
 <template>
   <div class="subcontent calendar-adapter-agenda">
     <p class="text-body2 text-center q-mb-md">
-      Agenda views can use adapter labels in headers and body cells while QCalendar still owns the
+      Agenda views can use adapter labels in headers and body cells while QCalendar renders the
       visible week, even when that week crosses a native month boundary.
     </p>
 

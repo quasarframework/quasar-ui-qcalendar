@@ -2,7 +2,7 @@
   <div class="subcontent calendar-adapter-scheduler">
     <p class="text-body2 text-center q-mb-md">
       Scheduler views combine resource rows with adapter-aware labels, letting teams schedule
-      Gregorian resources against native calendar dates.
+      resources against native calendar dates.
     </p>
 
     <div class="calendar-adapter-scheduler__toolbar">

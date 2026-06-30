@@ -215,8 +215,8 @@ with data returned for the current range.
 
 ### Calendar Adapters
 
-Scheduler views combine resources with visible days. Convert each slot
-timestamp before rendering native calendar labels or matching native-keyed
-resource data.
+Scheduler views combine resources with visible days. Use the adapter-aware slot
+scope fields to render native calendar labels or match native-keyed resource
+data.
 
 <MarkdownExample title="Calendar Adapters" file="SchedulerCalendarAdapter"/>

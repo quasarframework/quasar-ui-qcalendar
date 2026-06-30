@@ -1,8 +1,8 @@
 <template>
   <div class="subcontent calendar-adapter-resource">
     <p class="text-body2 text-center q-mb-md">
-      Resource timelines stay interval-based. Convert the selected day and interval timestamps when
-      labels or bookings need native calendar context.
+      Resource timelines stay interval-based while interval scopes expose native calendar context
+      for labels and bookings.
     </p>
 
     <div class="calendar-adapter-resource__toolbar">

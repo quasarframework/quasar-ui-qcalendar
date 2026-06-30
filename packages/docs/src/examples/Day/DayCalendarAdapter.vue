@@ -1,8 +1,8 @@
 <template>
   <div class="subcontent calendar-adapter-day">
     <p class="text-body2 text-center q-mb-md">
-      Day views keep Gregorian model values while slot scopes expose native timestamps for labels
-      and native-keyed data.
+      Day views use adapter-aware date scopes for native labels and native-keyed data while keeping
+      Gregorian interop available for integrations.
     </p>
 
     <div class="calendar-adapter-day__toolbar">

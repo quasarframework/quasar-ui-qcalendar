@@ -1,7 +1,12 @@
 import {
   createCalendarTimestampFromEpochDay,
+  getCalendarDirection,
+  getCalendarDayIdentifier,
   getCalendarEndOfMonth,
+  getCalendarLocale,
+  getCalendarMonthFormatter,
   getCalendarStartOfMonth,
+  getCalendarWeekdays,
   getEpochDay,
   parseTimestamp,
   type CalendarSystem,
@@ -20,8 +25,6 @@ export interface CalendarExample {
   locale: string
   direction: 'ltr' | 'rtl'
   weekdays: number[]
-  months: string[]
-  monthShorts: string[]
   items: Record<string, string[]>
   taskItems: Record<string, string[]>
 }
@@ -32,37 +35,9 @@ export const calendarExamples: CalendarExample[] = [
     label: 'Islamic Civil (Hijri)',
     shortLabel: 'Hijri',
     calendar: islamicCivilCalendar,
-    locale: 'ar',
-    direction: 'rtl',
-    weekdays: [6, 0, 1, 2, 3, 4, 5],
-    months: [
-      'محرم',
-      'صفر',
-      'ربيع الأول',
-      'ربيع الآخر',
-      'جمادى الأولى',
-      'جمادى الآخرة',
-      'رجب',
-      'شعبان',
-      'رمضان',
-      'شوال',
-      'ذو القعدة',
-      'ذو الحجة',
-    ],
-    monthShorts: [
-      'محرم',
-      'صفر',
-      'ربيع ١',
-      'ربيع ٢',
-      'جمادى ١',
-      'جمادى ٢',
-      'رجب',
-      'شعبان',
-      'رمضان',
-      'شوال',
-      'قعدة',
-      'حجة',
-    ],
+    locale: getCalendarLocale(islamicCivilCalendar),
+    direction: getCalendarDirection(islamicCivilCalendar),
+    weekdays: getCalendarWeekdays(islamicCivilCalendar),
     items: {
       '1445-09-29': ['Hijri planning date'],
       '1445-09-30': ['Month close'],
@@ -81,24 +56,9 @@ export const calendarExamples: CalendarExample[] = [
     label: 'Indian National (Saka)',
     shortLabel: 'Saka',
     calendar: indianNationalCalendar,
-    locale: 'hi-IN',
-    direction: 'ltr',
-    weekdays: [0, 1, 2, 3, 4, 5, 6],
-    months: [
-      'चैत्र',
-      'वैशाख',
-      'ज्येष्ठ',
-      'आषाढ़',
-      'श्रावण',
-      'भाद्र',
-      'आश्विन',
-      'कार्तिक',
-      'अग्रहायण',
-      'पौष',
-      'माघ',
-      'फाल्गुन',
-    ],
-    monthShorts: ['चै', 'वै', 'ज्ये', 'आषा', 'श्रा', 'भा', 'आश्वि', 'का', 'अग्र', 'पौ', 'मा', 'फा'],
+    locale: getCalendarLocale(indianNationalCalendar),
+    direction: getCalendarDirection(indianNationalCalendar),
+    weekdays: getCalendarWeekdays(indianNationalCalendar),
     items: {
       '1946-01-01': ['New Saka year'],
       '1946-01-15': ['Native planning date'],
@@ -129,21 +89,31 @@ export function parseGregorianDate(value: string): Timestamp {
 }
 
 export function toNativeTimestamp(timestamp: Timestamp, example: CalendarExample): Timestamp {
+  if (timestamp.calendarId === example.calendar.id) {
+    return timestamp
+  }
+
   return createCalendarTimestampFromEpochDay(getEpochDay(timestamp), example.calendar)
 }
 
 export function toGregorianTimestamp(timestamp: Timestamp, example: CalendarExample): Timestamp {
-  return createCalendarTimestampFromEpochDay(getEpochDay(timestamp, example.calendar))
+  if (timestamp.calendarId !== example.calendar.id) {
+    return timestamp
+  }
+
+  return createCalendarTimestampFromEpochDay(getCalendarDayIdentifier(timestamp, example.calendar))
 }
 
 export function getNativeMonthName(timestamp: Timestamp, example: CalendarExample): string {
-  return example.months[timestamp.month - 1] ?? `Month ${timestamp.month}`
+  const formatter = getCalendarMonthFormatter(example.calendar)
+
+  return formatter(timestamp.month, 'long', example.locale, timestamp.year)
 }
 
 export function getNativeMonthShort(timestamp: Timestamp, example: CalendarExample): string {
-  return (
-    example.monthShorts[timestamp.month - 1] ?? getNativeMonthName(timestamp, example).slice(0, 3)
-  )
+  const formatter = getCalendarMonthFormatter(example.calendar)
+
+  return formatter(timestamp.month, 'short', example.locale, timestamp.year)
 }
 
 export function getNativeMonthTitleLabel(timestamp: Timestamp, example: CalendarExample): string {
