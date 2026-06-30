@@ -17,7 +17,6 @@ import {
 
 // Utility
 import {
-  getCalendarDayIdentifier,
   gregorianCalendar,
   parseCalendarTimestamp,
   type Timestamp,
@@ -25,7 +24,11 @@ import {
 } from '@timestamp-js/core'
 
 import { convertToUnit, getResponsiveWeekdayLabel } from '../utils/helpers'
-import { getCalendarScopeData, isOutsideCalendarMonth } from '../utils/calendarSystem'
+import {
+  getCalendarDateIdentifier,
+  getCalendarScopeData,
+  isOutsideCalendarMonth,
+} from '../utils/calendarSystem'
 
 import useMouse, { getRawMouseEvents } from '../composables/useMouse'
 
@@ -342,15 +345,11 @@ export default defineComponent({
       (val, oldVal) => {
         if (emittedValue.value !== val) {
           if (props.animated === true) {
-            const v1 = getCalendarDayIdentifier(
-              parseCalendarTimestamp(val, props.calendarSystem) as Timestamp,
-              props.calendarSystem,
-            )
-            const v2 = getCalendarDayIdentifier(
-              parseCalendarTimestamp(oldVal, props.calendarSystem) as Timestamp,
-              props.calendarSystem,
-            )
-            direction.value = v1 >= v2 ? 'next' : 'prev'
+            const v1 = getCalendarDateIdentifier(val, props.calendarSystem)
+            const v2 = getCalendarDateIdentifier(oldVal, props.calendarSystem)
+            if (v1 !== null && v2 !== null) {
+              direction.value = v1 >= v2 ? 'next' : 'prev'
+            }
           }
           emittedValue.value = val
         }
@@ -361,15 +360,11 @@ export default defineComponent({
     watch(emittedValue, (val, oldVal) => {
       if (emittedValue.value !== props.modelValue) {
         if (props.animated === true) {
-          const v1 = getCalendarDayIdentifier(
-            parseCalendarTimestamp(val, props.calendarSystem) as Timestamp,
-            props.calendarSystem,
-          )
-          const v2 = getCalendarDayIdentifier(
-            parseCalendarTimestamp(oldVal, props.calendarSystem) as Timestamp,
-            props.calendarSystem,
-          )
-          direction.value = v1 >= v2 ? 'next' : 'prev'
+          const v1 = getCalendarDateIdentifier(val, props.calendarSystem)
+          const v2 = getCalendarDateIdentifier(oldVal, props.calendarSystem)
+          if (v1 !== null && v2 !== null) {
+            direction.value = v1 >= v2 ? 'next' : 'prev'
+          }
         }
         emit('update:model-value', val)
       }

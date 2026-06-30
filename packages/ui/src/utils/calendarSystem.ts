@@ -6,6 +6,7 @@ import {
   getCalendarStartOfMonth,
   getEpochDay,
   gregorianCalendar,
+  parseCalendarTimestamp,
   type CalendarDateIdentity,
   type CalendarSystem,
   type Timestamp,
@@ -70,6 +71,15 @@ export function getCalendarScopeData(
     calendarIdentity: getCalendarDateIdentity(calendarTimestamp, calendar),
     calendarSystem: calendar,
   }
+}
+
+export function getCalendarDateIdentifier(
+  value: string | undefined,
+  calendarSystem?: CalendarSystem,
+): number | null {
+  const timestamp = value ? parseCalendarTimestamp(value, calendarSystem) : null
+
+  return timestamp === null ? null : getCalendarDayIdentifier(timestamp, calendarSystem)
 }
 
 export function isOutsideCalendarMonth(
