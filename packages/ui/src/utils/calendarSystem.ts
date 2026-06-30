@@ -1,10 +1,12 @@
 import {
   createCalendarTimestampFromEpochDay,
+  getCalendarDateIdentity,
   getCalendarDayIdentifier,
   getCalendarEndOfMonth,
   getCalendarStartOfMonth,
   getEpochDay,
   gregorianCalendar,
+  type CalendarDateIdentity,
   type CalendarSystem,
   type Timestamp,
 } from '@timestamp-js/core'
@@ -12,6 +14,8 @@ import {
 export interface CalendarScopeData {
   /** Timestamp represented in the configured calendar system. */
   calendarTimestamp: Timestamp
+  /** Stable native and Gregorian identity for the configured calendar system. */
+  calendarIdentity: CalendarDateIdentity
   /** Calendar system used to create `calendarTimestamp`. */
   calendarSystem: CalendarSystem
 }
@@ -30,7 +34,7 @@ export function toCalendarTimestamp(
 ): Timestamp {
   const calendar = getResolvedCalendarSystem(calendarSystem)
 
-  if (isGregorianCalendar(calendar) === true) {
+  if (timestamp.calendarId === calendar.id || isGregorianCalendar(calendar) === true) {
     return timestamp
   }
 
@@ -42,6 +46,10 @@ export function toGregorianTimestamp(
   calendarSystem?: CalendarSystem,
 ): Timestamp {
   const calendar = getResolvedCalendarSystem(calendarSystem)
+
+  if (isGregorianCalendar(calendar) === true && timestamp.calendarId !== undefined) {
+    return createCalendarTimestampFromEpochDay(getCalendarDayIdentifier(timestamp, calendar))
+  }
 
   if (isGregorianCalendar(calendar) === true) {
     return timestamp
@@ -55,9 +63,11 @@ export function getCalendarScopeData(
   calendarSystem?: CalendarSystem,
 ): CalendarScopeData {
   const calendar = getResolvedCalendarSystem(calendarSystem)
+  const calendarTimestamp = toCalendarTimestamp(timestamp, calendar)
 
   return {
-    calendarTimestamp: toCalendarTimestamp(timestamp, calendar),
+    calendarTimestamp,
+    calendarIdentity: getCalendarDateIdentity(calendarTimestamp, calendar),
     calendarSystem: calendar,
   }
 }

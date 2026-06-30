@@ -1,14 +1,15 @@
 import { computed, type Ref, type PropType } from 'vue'
 import {
   validateTimestamp,
-  parseTimestamp,
-  parsed,
+  parseCalendarTimestamp,
   createNativeLocaleFormatterUTC,
+  getCalendarDirection,
   gregorianCalendar,
-  getStartOfWeek,
-  getEndOfWeek,
-  getDayIdentifier,
-  today,
+  getCalendarLocale,
+  getCalendarWeekdays,
+  getCalendarEndOfWeek,
+  getCalendarSelectionState,
+  getCalendarStartOfWeek,
   type CalendarSystem,
   type DisabledDays,
   type Timestamp,
@@ -23,6 +24,7 @@ export interface CommonProps {
   modelValue: string
   calendarSystem: CalendarSystem
   weekdays: number[]
+  dir: 'ltr' | 'rtl' | 'auto'
   dateType: 'round' | 'rounded' | 'square'
   weekdayAlign: 'left' | 'center' | 'right'
   dateAlign: 'left' | 'center' | 'right'
@@ -77,6 +79,10 @@ export const isValidWeekdays = (v: unknown): boolean =>
   new Set(v).size === v.length &&
   v.every((weekday) => Number.isInteger(weekday) && weekday >= 0 && weekday <= 6)
 
+export interface CalendarDefaultProps {
+  calendarSystem?: CalendarSystem
+}
+
 // Define prop types with validators
 export const useCommonProps = {
   /**
@@ -86,28 +92,53 @@ export const useCommonProps = {
    */
   modelValue: {
     type: String,
-    default: today(),
+    default: '',
     validator: (v: string): boolean => v === '' || validateTimestamp(v),
   },
   /**
-   * Calendar system used for month range math while keeping `model-value` and emitted dates Gregorian.
+   * Calendar system used for calendar math and component date values. Defaults to Gregorian.
    *
-   * @applicable month
+   * When an adapter is provided, date-bearing values are native to that adapter, and the
+   * `locale`, `dir`, and `weekdays` props default from the adapter unless the app passes them.
+   *
    * @category behavior
+   * @example :calendar-system="islamicCivilCalendar"
    */
   calendarSystem: {
     type: Object as PropType<CalendarSystem>,
     default: (): CalendarSystem => gregorianCalendar,
   },
   /**
-   * Weekday indexes shown by the calendar, where `0` is Sunday and `6` is Saturday.
+   * Weekday indexes shown by the calendar, where `0` is Sunday and `6` is Saturday. Defaults to
+   * the active calendar system's recommended weekday order.
+   *
+   * Pass this prop explicitly to override the adapter default, such as rendering a five-day
+   * work week.
    *
    * @category display
+   * @example :weekdays="[1, 2, 3, 4, 5]"
    */
   weekdays: {
     type: Array as PropType<number[]>,
-    default: (): number[] => [0, 1, 2, 3, 4, 5, 6],
+    default: (props: CalendarDefaultProps): number[] => getCalendarWeekdays(props.calendarSystem),
     validator: isValidWeekdays,
+  },
+  /**
+   * Text direction used by the rendered calendar root. Defaults to the active calendar system's
+   * recommended direction.
+   *
+   * Pass this prop explicitly to override the adapter default.
+   *
+   * @category display
+   * @example dir="rtl"
+   * @example dir="ltr"
+   * @example dir="auto"
+   */
+  dir: {
+    type: String as PropType<'ltr' | 'rtl' | 'auto'>,
+    default: (props: CalendarDefaultProps): 'ltr' | 'rtl' =>
+      getCalendarDirection(props.calendarSystem),
+    validator: (v: string): boolean => ['ltr', 'rtl', 'auto'].includes(v),
   },
   /**
    * Shape used for rendered date buttons.
@@ -213,13 +244,19 @@ export const useCommonProps = {
     validator: (v: number[]): boolean => v.length === 2,
   },
   /**
-   * BCP 47 locale used for date and weekday formatting.
+   * BCP 47 locale used for date and weekday formatting. Defaults to the active calendar system's
+   * recommended locale.
+   *
+   * Pass this prop explicitly to override the adapter default.
    *
    * @category display
+   * @example locale="en-US"
+   * @example locale="ar"
+   * @example locale="hi-IN"
    */
   locale: {
     type: String,
-    default: 'en-US',
+    default: (props: CalendarDefaultProps): string => getCalendarLocale(props.calendarSystem),
   },
   /**
    * Enables animated transitions between calendar ranges.
@@ -382,12 +419,29 @@ export default function useCommon(
     times: { today: Timestamp }
   },
 ): CommonReturn {
-  const parsedStart = computed((): Timestamp => parseTimestamp(startDate.value) as Timestamp)
+  const parsedToday = computed(
+    (): Timestamp => toCalendarTimestamp(times.today, props.calendarSystem),
+  )
+  const parsedStart = computed(
+    (): Timestamp =>
+      parseCalendarTimestamp(startDate.value, props.calendarSystem, parsedToday.value) as Timestamp,
+  )
   const parsedEnd = computed((): Timestamp => {
     if (endDate.value === '0000-00-00') {
-      return getEndOfWeek(parsedStart.value, props.weekdays, times.today)
+      return getCalendarEndOfWeek(
+        parsedStart.value,
+        props.weekdays,
+        props.calendarSystem,
+        parsedToday.value,
+      )
     }
-    return (parseTimestamp(endDate.value) as Timestamp) || parsedStart.value
+    return (
+      (parseCalendarTimestamp(
+        endDate.value,
+        props.calendarSystem,
+        parsedToday.value,
+      ) as Timestamp) || parsedStart.value
+    )
   })
 
   const dayFormatter = computed(() => {
@@ -401,7 +455,7 @@ export default function useCommon(
         return formatter(timestamp, short === true)
       }
 
-      return String(toCalendarTimestamp(timestamp, props.calendarSystem).day)
+      return String(timestamp.day)
     }
   })
 
@@ -427,16 +481,17 @@ export default function useCommon(
     arr: string[],
     timestamp: Timestamp,
   ): { firstDay: boolean; betweenDays: boolean; lastDay: boolean } {
-    const days = { firstDay: false, betweenDays: false, lastDay: false }
-    if (arr.length === 2) {
-      const current = getDayIdentifier(timestamp)
-      const first = getDayIdentifier(parsed(arr[0]!) as Timestamp)
-      const last = getDayIdentifier(parsed(arr[1]!) as Timestamp)
-      days.firstDay = first === current
-      days.lastDay = last === current
-      days.betweenDays = first < current && last > current
+    const selection = getCalendarSelectionState(
+      timestamp,
+      { selectedStartEndDates: arr },
+      props.calendarSystem,
+    )
+
+    return {
+      firstDay: selection.rangeFirst,
+      betweenDays: selection.range,
+      lastDay: selection.rangeLast,
     }
-    return days
   }
 
   function getRelativeClasses(
@@ -446,8 +501,18 @@ export default function useCommon(
     startEndDays: string[] = [],
     hover = false,
   ): Record<string, boolean> {
-    const isSelected = arrayHasDate(selectedDays, timestamp)
-    const { firstDay, lastDay, betweenDays } = checkDays(startEndDays, timestamp)
+    const selection = getCalendarSelectionState(
+      timestamp,
+      {
+        selectedDates: selectedDays,
+        selectedStartEndDates: startEndDays,
+      },
+      props.calendarSystem,
+    )
+    const isSelected = selection.selectedDate
+    const firstDay = selection.rangeFirst
+    const betweenDays = selection.range
+    const lastDay = selection.rangeLast
 
     return {
       'q-past-day':
@@ -473,7 +538,12 @@ export default function useCommon(
    * @returns The timestamp representing the start of the week.
    */
   function startOfWeek(timestamp: Timestamp): Timestamp {
-    return getStartOfWeek(timestamp, props.weekdays, times.today)
+    return getCalendarStartOfWeek(
+      timestamp,
+      props.weekdays,
+      props.calendarSystem,
+      parsedToday.value,
+    )
   }
 
   /**
@@ -483,7 +553,7 @@ export default function useCommon(
    * @returns The timestamp representing the end of the week.
    */
   function endOfWeek(timestamp: Timestamp): Timestamp {
-    return getEndOfWeek(timestamp, props.weekdays, times.today)
+    return getCalendarEndOfWeek(timestamp, props.weekdays, props.calendarSystem, parsedToday.value)
   }
 
   /**

@@ -3,7 +3,9 @@ import {
   copyTimestamp,
   validateTimestamp,
   parseTimestamp,
+  parseCalendarTimestamp,
   parseDate,
+  type CalendarSystem,
   type Timestamp,
 } from '@timestamp-js/core'
 
@@ -25,6 +27,7 @@ export const useTimesProps = {
 
 export interface TimesProps {
   now: string
+  calendarSystem: CalendarSystem
 }
 
 interface UseTimesReturn {
@@ -43,7 +46,10 @@ interface UseTimesReturn {
 /**
  * Reactive timestamps & computed properties for time tracking
  */
-export default function useTimes(props: { now: string }): UseTimesReturn {
+export default function useTimes(props: {
+  now: string
+  calendarSystem?: CalendarSystem
+}): UseTimesReturn {
   /**
    * 'times' is a reactive object containing 'now' and 'today'
    */
@@ -55,7 +61,10 @@ export default function useTimes(props: { now: string }): UseTimesReturn {
   /**
    * Parsed current timestamp
    */
-  const parsedNow = computed(() => (props.now ? parseTimestamp(props.now) : getNow()) as Timestamp)
+  const parsedNow = computed(
+    () =>
+      (props.now ? parseCalendarTimestamp(props.now, props.calendarSystem) : getNow()) as Timestamp,
+  )
 
   /**
    * Watch for changes in parsedNow
@@ -95,7 +104,7 @@ export default function useTimes(props: { now: string }): UseTimesReturn {
    * Get the current date as a Timestamp
    */
   function getNow(): Timestamp {
-    return parseDate(new Date()) as Timestamp
+    return parseDate(new Date(), props.calendarSystem) as Timestamp
   }
 
   /**
@@ -108,6 +117,7 @@ export default function useTimes(props: { now: string }): UseTimesReturn {
         year: now.year,
         month: now.month,
         day: now.day,
+        calendarId: now.calendarId,
         weekday: now.weekday,
         date: now.date,
       })

@@ -36,6 +36,7 @@ export interface CalendarProps {
   minWeekdayLabel: number | string
   weekdayBreakpoints: number[]
   locale: string
+  dir: 'ltr' | 'rtl' | 'auto'
   animated: boolean
   transitionNext: string
   transitionPrev: string

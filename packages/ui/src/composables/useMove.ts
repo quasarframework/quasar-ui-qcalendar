@@ -6,12 +6,12 @@ import {
   getEndOfMonth,
   moveRelativeDays,
   nextCalendarDay,
+  parseCalendarTimestamp,
   updateDayOfYear,
   updateFormatted,
   updateRelative,
   updateWeekday,
   nextDay,
-  parsed,
   prevCalendarDay,
   prevDay,
   today,
@@ -75,10 +75,11 @@ export default function useMove(
   }
 
   function moveToAllowedWeekday(timestamp: Timestamp, forward: boolean): Timestamp {
+    const calendar = getCalendarSystem()
     let moved = timestamp
 
     for (let i = 0; i < 7 && !isAllowedWeekday(moved); i += 1) {
-      moved = addToDate(moved, { day: forward ? 1 : -1 })
+      moved = addToDate(moved, { day: forward ? 1 : -1 }, calendar)
     }
 
     return moved
@@ -108,13 +109,15 @@ export default function useMove(
    * @fires 'moved' with current Timestamp
    */
   function move(amount = 1): void {
-    if (amount === 0) {
-      let moved = parsed(today()) as Timestamp
+    const calendar = getCalendarSystem()
 
-      moved = updateWeekday(moved)
-      moved = updateFormatted(moved)
-      moved = updateDayOfYear(moved)
-      moved = updateRelative(moved, times.now)
+    if (amount === 0) {
+      let moved = parseCalendarTimestamp(today(calendar), calendar) as Timestamp
+
+      moved = updateWeekday(moved, calendar)
+      moved = updateFormatted(moved, calendar)
+      moved = updateDayOfYear(moved, calendar)
+      moved = updateRelative(moved, times.now, false, calendar)
 
       emittedValue.value = moved.date
       emit('moved', moved)
@@ -122,7 +125,7 @@ export default function useMove(
     }
 
     let moved = copyTimestamp(parsedValue.value)
-    const lastDayOfMonth = getEndOfMonth(moved)
+    const lastDayOfMonth = getEndOfMonth(moved, calendar)
     const forward = amount > 0
     const mover = forward ? nextDay : prevDay
     const limit = forward ? lastDayOfMonth.day : 1 // 1st day of month
@@ -136,7 +139,6 @@ export default function useMove(
       switch (parsedView.value) {
         case 'month':
           if (isGregorianCalendar(props.calendarSystem) !== true) {
-            const calendar = getCalendarSystem()
             const calendarMoved = toCalendarTimestamp(moved, calendar)
             const boundary =
               forward === true
@@ -155,8 +157,8 @@ export default function useMove(
           // For month view, set to the first (or last) day of the month,
           // move one day, update the weekday, and adjust until an allowed day is reached.
           moved = withDay(moved, limit)
-          moved = mover(moved)
-          moved = updateWeekday(moved)
+          moved = mover(moved, calendar)
+          moved = updateWeekday(moved, calendar)
           moved = moveToAllowedWeekday(moved, forward)
           break
 
@@ -164,14 +166,14 @@ export default function useMove(
         case 'week-agenda':
         case 'week-scheduler':
           // For week-based views, use moveRelativeDays with allowed weekdays.
-          moved = moveRelativeDays(moved, mover, dayCount, props.weekdays)
+          moved = moveRelativeDays(moved, mover, dayCount, props.weekdays, calendar)
           break
 
         case 'day':
         case 'scheduler':
         case 'agenda':
           // For day views, move a number of days determined by maxDays, taking allowed weekdays into account.
-          moved = moveRelativeDays(moved, mover, maxDays.value, props.weekdays)
+          moved = moveRelativeDays(moved, mover, maxDays.value, props.weekdays, calendar)
           break
 
         case 'month-interval':
@@ -179,21 +181,21 @@ export default function useMove(
         case 'month-scheduler':
           // For these month views, just set to the first or last day then move one day.
           moved = withDay(moved, limit)
-          moved = mover(moved)
+          moved = mover(moved, calendar)
           break
 
         case 'resource':
           // For resource view, similar to the day view.
-          moved = moveRelativeDays(moved, mover, maxDays.value, props.weekdays)
+          moved = moveRelativeDays(moved, mover, maxDays.value, props.weekdays, calendar)
           break
       }
     }
 
     // After moving, update weekday, formatted values, day-of-year, and relative data.
-    moved = updateWeekday(moved)
-    moved = updateFormatted(moved)
-    moved = updateDayOfYear(moved)
-    moved = updateRelative(moved, times.now)
+    moved = updateWeekday(moved, calendar)
+    moved = updateFormatted(moved, calendar)
+    moved = updateDayOfYear(moved, calendar)
+    moved = updateRelative(moved, times.now, false, calendar)
 
     emittedValue.value = moved.date
     emit('moved', moved)

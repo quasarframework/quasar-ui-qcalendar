@@ -1,17 +1,12 @@
 import { computed, watch, Ref, EmitFn, ComputedRef, PropType } from 'vue'
 import {
-  createDayList,
-  createNativeLocaleFormatterUTC,
-  getCalendarDayIdentifier,
+  createCalendarDayList,
+  getCalendarMonthFormatter,
   getCalendarEndOfMonth,
   getCalendarEndOfWeek,
   getCalendarStartOfMonth,
   getCalendarStartOfWeek,
-  getDayIdentifier,
-  getEndOfWeek,
-  getStartOfWeek,
-  getEndOfMonth,
-  getStartOfMonth,
+  isOutsideCalendarMonth,
   validateNumber,
   type Timestamp,
 } from '@timestamp-js/core'
@@ -19,11 +14,7 @@ import {
 import { CommonProps } from './useCommon'
 import { CellWidthProps } from './useCellWidth'
 import { Scope } from './useInterval'
-import {
-  isGregorianCalendar,
-  toCalendarTimestamp,
-  toGregorianTimestamp,
-} from '../utils/calendarSystem'
+import { toCalendarTimestamp } from '../utils/calendarSystem'
 
 // Define props interface
 export interface MonthProps {
@@ -197,7 +188,7 @@ interface UseMonthReturn {
   days: Ref<Timestamp[]>
   todayWeek: Ref<Timestamp[]>
   isMiniMode: ComputedRef<boolean>
-  monthFormatter: Ref<ReturnType<typeof createNativeLocaleFormatterUTC>>
+  monthFormatter: Ref<(_timestamp: Timestamp, _short?: boolean) => string>
   isOutside: (_timestamp: Timestamp) => boolean
 }
 
@@ -221,41 +212,26 @@ export default function useMonth(
 ): UseMonthReturn {
   const parsedMinWeeks = computed((): number => parseInt(props.minWeeks as string, 10))
   const parsedMinDays = computed((): number => parsedMinWeeks.value * props.weekdays.length)
+  const calendarToday = computed(() => toCalendarTimestamp(times.today, props.calendarSystem))
   const parsedMonthStart = computed((): Timestamp => {
-    if (isGregorianCalendar(props.calendarSystem) === true) {
-      return __getStartOfWeek(__getStartOfMonth(parsedStart.value))
-    }
+    const calendarStart = getCalendarStartOfMonth(parsedStart.value, props.calendarSystem)
 
-    const calendarStart = getCalendarStartOfMonth(
-      toCalendarTimestamp(parsedStart.value, props.calendarSystem),
-      props.calendarSystem,
-    )
-    const calendarGridStart = getCalendarStartOfWeek(
+    return getCalendarStartOfWeek(
       calendarStart,
       props.weekdays,
       props.calendarSystem,
-      toCalendarTimestamp(times.today, props.calendarSystem),
+      calendarToday.value,
     )
-
-    return toGregorianTimestamp(calendarGridStart, props.calendarSystem)
   })
   const parsedMonthEnd = computed((): Timestamp => {
-    if (isGregorianCalendar(props.calendarSystem) === true) {
-      return __getEndOfWeek(__getEndOfMonth(parsedEnd.value))
-    }
+    const calendarEnd = getCalendarEndOfMonth(parsedEnd.value, props.calendarSystem)
 
-    const calendarEnd = getCalendarEndOfMonth(
-      toCalendarTimestamp(parsedEnd.value, props.calendarSystem),
-      props.calendarSystem,
-    )
-    const calendarGridEnd = getCalendarEndOfWeek(
+    return getCalendarEndOfWeek(
       calendarEnd,
       props.weekdays,
       props.calendarSystem,
-      toCalendarTimestamp(times.today, props.calendarSystem),
+      calendarToday.value,
     )
-
-    return toGregorianTimestamp(calendarGridEnd, props.calendarSystem)
   })
 
   const parsedCellWidth = computed((): number => {
@@ -272,17 +248,20 @@ export default function useMonth(
    * Returns the days of the specified month
    */
   const days = computed(() =>
-    createDayList(
+    createCalendarDayList(
       parsedMonthStart.value,
       parsedMonthEnd.value,
-      times.today,
-      props.weekdays,
-      props.disabledBefore,
-      props.disabledAfter,
-      props.disabledWeekdays,
-      props.disabledDays,
-      Number.MAX_SAFE_INTEGER,
-      parsedMinDays.value,
+      calendarToday.value,
+      props.calendarSystem,
+      {
+        weekdays: props.weekdays,
+        disabledBefore: props.disabledBefore,
+        disabledAfter: props.disabledAfter,
+        disabledWeekdays: props.disabledWeekdays,
+        disabledDays: props.disabledDays,
+        max: Number.MAX_SAFE_INTEGER,
+        min: parsedMinDays.value,
+      },
     ),
   )
 
@@ -290,33 +269,30 @@ export default function useMonth(
    * Returns the first week of the month for calculating the weekday headers
    */
   const todayWeek = computed(() => {
-    const day = times.today
-    const start = __getStartOfWeek(day)
-    const end = __getEndOfWeek(day)
+    const day = calendarToday.value
+    const start = getCalendarStartOfWeek(day, props.weekdays, props.calendarSystem, day)
+    const end = getCalendarEndOfWeek(day, props.weekdays, props.calendarSystem, day)
 
-    return createDayList(
-      start,
-      end,
-      day,
-      props.weekdays,
-      props.disabledBefore,
-      props.disabledAfter,
-      props.disabledWeekdays,
-      props.disabledDays,
-      props.weekdays.length,
-      props.weekdays.length,
-    )
+    return createCalendarDayList(start, end, day, props.calendarSystem, {
+      weekdays: props.weekdays,
+      disabledBefore: props.disabledBefore,
+      disabledAfter: props.disabledAfter,
+      disabledWeekdays: props.disabledWeekdays,
+      disabledDays: props.disabledDays,
+      max: props.weekdays.length,
+      min: props.weekdays.length,
+    })
   })
 
   /**
    * Returns a function that formats the month name using the locale
    */
-  const monthFormatter = computed(() =>
-    createNativeLocaleFormatterUTC(props.locale, (_tms, short) => ({
-      timeZone: 'UTC',
-      month: short ? 'short' : 'long',
-    })),
-  )
+  const monthFormatter = computed(() => {
+    const formatter = getCalendarMonthFormatter(props.calendarSystem)
+
+    return (timestamp: Timestamp, short?: boolean): string =>
+      formatter(timestamp.month, short === true ? 'short' : 'long', props.locale, timestamp.year)
+  })
 
   const parsedBreakpoint = computed((): number => {
     switch (props.breakpoint) {
@@ -375,75 +351,13 @@ export default function useMonth(
   })
 
   /**
-   * Returns the start of the week for the given day.
-   *
-   * @param day - The day to get the start of the week for.
-   * @returns The timestamp for the start of the week.
-   */
-  function __getStartOfWeek(day: Timestamp): Timestamp {
-    return getStartOfWeek(day, props.weekdays, times.today)
-  }
-
-  /**
-   * Returns the end of the week for the given day.
-   *
-   * @param day - The day to get the end of the week for.
-   * @returns The timestamp for the end of the week.
-   */
-  function __getEndOfWeek(day: Timestamp): Timestamp {
-    return getEndOfWeek(day, props.weekdays, times.today)
-  }
-
-  /**
-   * Returns the start of the month for the given day.
-   *
-   * @param day - The day to get the start of the month for.
-   * @returns The timestamp for the start of the month.
-   */
-  function __getStartOfMonth(day: Timestamp): Timestamp {
-    return getStartOfMonth(day)
-  }
-
-  /**
-   * Returns the end of the month for the given day.
-   *
-   * @param day - The day to get the end of the month for.
-   * @returns The timestamp for the end of the month.
-   */
-  function __getEndOfMonth(day: Timestamp): Timestamp {
-    return getEndOfMonth(day)
-  }
-
-  /**
    * Checks if the given day is outside the current month's range.
    *
    * @param day - The day to check.
    * @returns `true` if the day is outside the current month's range, `false` otherwise.
    */
   function isOutside(day: Timestamp): boolean {
-    if (isGregorianCalendar(props.calendarSystem) !== true) {
-      const calendarDay = toCalendarTimestamp(day, props.calendarSystem)
-      const calendarStart = getCalendarStartOfMonth(
-        toCalendarTimestamp(parsedStart.value, props.calendarSystem),
-        props.calendarSystem,
-      )
-      const calendarEnd = getCalendarEndOfMonth(
-        toCalendarTimestamp(parsedEnd.value, props.calendarSystem),
-        props.calendarSystem,
-      )
-      const dayIdentifier = getCalendarDayIdentifier(calendarDay, props.calendarSystem)
-
-      return (
-        dayIdentifier < getCalendarDayIdentifier(calendarStart, props.calendarSystem) ||
-        dayIdentifier > getCalendarDayIdentifier(calendarEnd, props.calendarSystem)
-      )
-    }
-
-    const dayIdentifier = getDayIdentifier(day)
-    return (
-      dayIdentifier < getDayIdentifier(parsedStart.value) ||
-      dayIdentifier > getDayIdentifier(parsedEnd.value)
-    )
+    return isOutsideCalendarMonth(day, parsedStart.value, props.calendarSystem)
   }
 
   return {

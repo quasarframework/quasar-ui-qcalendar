@@ -16,11 +16,7 @@ import {
   type Timestamp,
 } from '@timestamp-js/core'
 
-import {
-  isGregorianCalendar,
-  toCalendarTimestamp,
-  toGregorianTimestamp,
-} from '../utils/calendarSystem'
+import { isGregorianCalendar, toCalendarTimestamp } from '../utils/calendarSystem'
 
 /**
  * Type definitions for the properties
@@ -71,8 +67,8 @@ export default function useRenderValues(
     const calendarEnd = getCalendarEndOfMonth(calendarAround, calendar)
 
     return {
-      start: toGregorianTimestamp(calendarStart, calendar),
-      end: toGregorianTimestamp(calendarEnd, calendar),
+      start: calendarStart,
+      end: calendarEnd,
       maxDays: calendar.daysInMonth(calendarStart.year, calendarStart.month),
     }
   }
@@ -98,8 +94,8 @@ export default function useRenderValues(
       case 'week':
       case 'week-agenda':
       case 'week-scheduler':
-        start = getStartOfWeek(around, props.weekdays, times.today)
-        end = getEndOfWeek(start, props.weekdays, times.today)
+        start = getStartOfWeek(around, props.weekdays, times.today, props.calendarSystem)
+        end = getEndOfWeek(start, props.weekdays, times.today, props.calendarSystem)
         maxDays = props.weekdays.length
         break
 
@@ -111,8 +107,9 @@ export default function useRenderValues(
           nextDay,
           maxDays > 1 ? maxDays - 1 : maxDays,
           props.weekdays,
+          props.calendarSystem,
         )
-        end = updateFormatted(end)
+        end = updateFormatted(end, props.calendarSystem)
         break
 
       case 'month-interval':
@@ -121,15 +118,21 @@ export default function useRenderValues(
         const monthRange = getMonthRange(around)
         start = monthRange.start
         end = monthRange.end
-        end = updateFormatted(end)
+        end = updateFormatted(end, props.calendarSystem)
         maxDays = monthRange.maxDays
         break
       }
 
       case 'resource':
         maxDays = 1
-        end = moveRelativeDays(copyTimestamp(end), nextDay, maxDays, props.weekdays)
-        end = updateFormatted(end)
+        end = moveRelativeDays(
+          copyTimestamp(end),
+          nextDay,
+          maxDays,
+          props.weekdays,
+          props.calendarSystem,
+        )
+        end = updateFormatted(end, props.calendarSystem)
         break
     }
 

@@ -701,11 +701,11 @@ export default function useInterval(
   })
 
   function startOfWeek(timestamp: Timestamp): Timestamp {
-    return getStartOfWeek(timestamp, props.weekdays, times.today)
+    return getStartOfWeek(timestamp, props.weekdays, times.today, props.calendarSystem)
   }
 
   function endOfWeek(timestamp: Timestamp): Timestamp {
-    return getEndOfWeek(timestamp, props.weekdays, times.today)
+    return getEndOfWeek(timestamp, props.weekdays, times.today, props.calendarSystem)
   }
 
   /**
@@ -858,11 +858,11 @@ export default function useInterval(
     )
 
     if (addMinutes !== 0) {
-      timestamp = addToDate(timestamp, { minute: addMinutes })
+      timestamp = addToDate(timestamp, { minute: addMinutes }, props.calendarSystem)
     }
 
     if (now) {
-      timestamp = updateRelative(timestamp, now, true)
+      timestamp = updateRelative(timestamp, now, true, props.calendarSystem)
     }
 
     return timestamp
@@ -895,11 +895,11 @@ export default function useInterval(
     )
 
     if (addMinutes !== 0) {
-      timestamp = addToDate(timestamp, { minute: addMinutes })
+      timestamp = addToDate(timestamp, { minute: addMinutes }, props.calendarSystem)
     }
 
     if (now) {
-      timestamp = updateRelative(timestamp, now, true)
+      timestamp = updateRelative(timestamp, now, true, props.calendarSystem)
     }
 
     return timestamp
@@ -935,11 +935,11 @@ export default function useInterval(
     )
 
     if (addMinutes !== 0) {
-      timestamp = addToDate(timestamp, { minute: addMinutes })
+      timestamp = addToDate(timestamp, { minute: addMinutes }, props.calendarSystem)
     }
 
     if (now) {
-      timestamp = updateRelative(timestamp, now, true)
+      timestamp = updateRelative(timestamp, now, true, props.calendarSystem)
     }
 
     return timestamp
@@ -976,6 +976,7 @@ export default function useInterval(
     const scope: ScopeForSlotX = {
       timestamp: copyTimestamp(timestamp),
       calendarTimestamp: dayScope.calendarTimestamp,
+      calendarIdentity: dayScope.calendarIdentity,
       calendarSystem: dayScope.calendarSystem,
       timeStartPosX,
       timeDurationWidth,

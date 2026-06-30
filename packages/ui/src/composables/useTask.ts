@@ -8,14 +8,19 @@ import {
   getStartOfWeek,
   getEndOfMonth,
   getStartOfMonth,
-  parseTimestamp,
-  today,
+  getCalendarWeekdays,
+  parseCalendarTimestamp,
   validateNumber,
   validateTimestamp,
+  type CalendarSystem,
   type DisabledDays,
   type Timestamp,
 } from '@timestamp-js/core'
 import { isValidWeekdays } from './useCommon'
+
+export interface CalendarDefaultProps {
+  calendarSystem?: CalendarSystem
+}
 
 export interface Task {
   [key: string]: any
@@ -29,7 +34,7 @@ export const useTaskProps = {
    */
   modelValue: {
     type: String,
-    default: today(),
+    default: '',
     validator: (v: string): boolean => v === '' || validateTimestamp(v),
   },
   /**
@@ -69,13 +74,18 @@ export const useTaskProps = {
     default: 'id',
   },
   /**
-   * Weekday indexes shown by the task view, where `0` is Sunday and `6` is Saturday.
+   * Weekday indexes shown by the task view, where `0` is Sunday and `6` is Saturday. Defaults to
+   * the active calendar system's recommended weekday order.
+   *
+   * Pass this prop explicitly to override the adapter default, such as rendering a five-day
+   * work week.
    *
    * @category display
+   * @example :weekdays="[1, 2, 3, 4, 5]"
    */
   weekdays: {
     type: Array as PropType<number[]>,
-    default: (): number[] => [0, 1, 2, 3, 4, 5, 6],
+    default: (props: CalendarDefaultProps): number[] => getCalendarWeekdays(props.calendarSystem),
     validator: isValidWeekdays,
   },
   /**
@@ -230,6 +240,7 @@ export default function useTask(
     disabledAfter?: string
     disabledWeekdays?: number[]
     disabledDays?: DisabledDays
+    calendarSystem?: CalendarSystem
   },
   emit: EmitFn,
   {
@@ -238,20 +249,24 @@ export default function useTask(
     times: { today: Timestamp }
   },
 ): TaskReturn {
+  const calendar = computed(() => props.calendarSystem)
+  const parsedModel = computed(() => parseCalendarTimestamp(props.modelValue, calendar.value))
+
   const parsedStartDate = computed(() => {
     if (!props.modelValue) {
       throw new Error(`QCalendarTask: no modelValue provided`)
     }
     if (props.view === 'day') {
-      return parseTimestamp(props.modelValue)
+      return parsedModel.value
     } else if (props.view === 'week') {
       return getStartOfWeek(
-        parseTimestamp(props.modelValue) as Timestamp,
+        parsedModel.value as Timestamp,
         props.weekdays,
         times.today,
+        calendar.value,
       )
     } else if (props.view === 'month') {
-      return getStartOfMonth(parseTimestamp(props.modelValue) as Timestamp)
+      return getStartOfMonth(parsedModel.value as Timestamp, calendar.value)
     } else {
       throw new Error(`QCalendarTask: unknown 'view' type (${props.view})`)
     }
@@ -266,27 +281,32 @@ export default function useTask(
         return parsedStartDate.value
       }
       let end = copyTimestamp(parsedStartDate.value!)
-      end = addToDate(end, { day: props.viewCount - 1 })
+      end = addToDate(end, { day: props.viewCount - 1 }, calendar.value)
       return end
     } else if (props.view === 'week') {
       if (props.viewCount === 1) {
         return getEndOfWeek(
-          parseTimestamp(props.modelValue) as Timestamp,
+          parsedModel.value as Timestamp,
           props.weekdays,
           times.today,
+          calendar.value,
         )
       } else {
         let end = copyTimestamp(parsedStartDate.value!)
-        end = addToDate(end, { day: (props.viewCount - 1) * TIME_CONSTANTS.DAYS_IN.WEEK })
-        return getEndOfWeek(end, props.weekdays, times.today)
+        end = addToDate(
+          end,
+          { day: (props.viewCount - 1) * TIME_CONSTANTS.DAYS_IN.WEEK },
+          calendar.value,
+        )
+        return getEndOfWeek(end, props.weekdays, times.today, calendar.value)
       }
     } else if (props.view === 'month') {
       if (props.viewCount === 1) {
-        return getEndOfMonth(parseTimestamp(props.modelValue) as Timestamp)
+        return getEndOfMonth(parsedModel.value as Timestamp, calendar.value)
       } else {
         let end = copyTimestamp(parsedStartDate.value!)
-        end = addToDate(end, { month: props.viewCount - 1 })
-        return getEndOfMonth(end)
+        end = addToDate(end, { month: props.viewCount - 1 }, calendar.value)
+        return getEndOfMonth(end, calendar.value)
       }
     } else {
       throw new Error(`QCalendarTask: unknown 'view' type (${props.view})`)
@@ -304,6 +324,8 @@ export default function useTask(
       props.disabledWeekdays || [],
       props.disabledDays || [],
       Number.MAX_SAFE_INTEGER,
+      0,
+      calendar.value,
     )
   })
 

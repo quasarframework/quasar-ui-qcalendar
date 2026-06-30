@@ -12,6 +12,7 @@ import ResizeObserver from '../directives/ResizeObserver'
 interface CalendarProps {
   noScroll?: boolean
   locale: string
+  dir?: 'ltr' | 'rtl' | 'auto'
   dark?: boolean
   bordered?: boolean
 }
@@ -80,6 +81,7 @@ export default function useCalendar(
       ref: rootRef,
       role: 'complementary',
       lang: props.locale,
+      dir: props.dir,
       class: {
         'q-calendar': true,
         'q-calendar--dark': props.dark === true,

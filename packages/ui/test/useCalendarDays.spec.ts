@@ -144,13 +144,13 @@ describe('[QCALENDAR] useCalendarDays', () => {
     expect(getScopeForSlot(parsed('2024-04-10') as Timestamp).disabled).toBe(true)
   })
 
-  it('keeps Gregorian disabled props active when a calendar adapter is used', () => {
+  it('keeps adapter-native disabled props active when a calendar adapter is used', () => {
     const { getScopeForSlot } = useCalendarDays(
       createCalendarDaysProps({
         calendarSystem: nativeBoundaryCalendar,
-        disabledDays: ['2024-04-07'],
-        disabledBefore: '2024-04-06',
-        disabledAfter: '2024-04-11',
+        disabledDays: ['1445-09-28'],
+        disabledBefore: '1445-09-28',
+        disabledAfter: '1445-10-01',
         disabledWeekdays: [1],
       }),
       {

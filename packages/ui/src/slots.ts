@@ -1,7 +1,7 @@
 import type { ColumnObject } from './composables/useColumn'
 import type { Resource, ScopeForSlot } from './composables/useInterval'
 import type { Task } from './composables/useTask'
-import type { CalendarSystem, Timestamp } from '@timestamp-js/core'
+import type { CalendarDateIdentity, CalendarSystem, Timestamp } from '@timestamp-js/core'
 import type { Ref } from 'vue'
 
 type SlotProps<T> = { scope: T }
@@ -9,6 +9,8 @@ type SlotProps<T> = { scope: T }
 export interface CalendarSlotScope {
   /** Timestamp represented in the configured calendar system. */
   calendarTimestamp: Timestamp
+  /** Stable native and Gregorian identity for the configured calendar system. */
+  calendarIdentity: CalendarDateIdentity
   /** Calendar system used to create `calendarTimestamp`. */
   calendarSystem: CalendarSystem
 }

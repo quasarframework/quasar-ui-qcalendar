@@ -4,11 +4,12 @@ import useEvents from './useEvents'
 import {
   addToDate,
   copyTimestamp,
-  parseTimestamp,
+  parseCalendarTimestamp,
   getStartOfMonth,
   getEndOfMonth,
   getStartOfWeek,
   getEndOfWeek,
+  type CalendarSystem,
 } from '@timestamp-js/core'
 import type { Timestamp } from '@timestamp-js/core'
 
@@ -132,6 +133,7 @@ export interface NavigationProps {
   useNavigation: boolean
   weekdays: number[]
   intervalMinutes?: number | string
+  calendarSystem: CalendarSystem
 }
 
 interface NavigationContext {
@@ -364,7 +366,7 @@ export default function useNavigation(
   }
 
   function parseFocusTimestamp(value: string): Timestamp | null {
-    const timestamp = parseTimestamp(value)
+    const timestamp = parseCalendarTimestamp(value, props.calendarSystem)
     return timestamp ? copyTimestamp(timestamp as Timestamp) : null
   }
 
@@ -420,7 +422,7 @@ export default function useNavigation(
     let tm = timestamp
 
     for (let i = 0; i < 7 && !isEnabledWeekday(tm); i += 1) {
-      tm = addToDate(tm, { day: amount })
+      tm = addToDate(tm, { day: amount }, props.calendarSystem)
     }
 
     return tm
@@ -433,8 +435,8 @@ export default function useNavigation(
   function updateWeekBoundaryModelValue(from: Timestamp, to: Timestamp): void {
     if (!isWeekView()) return
 
-    const start = getStartOfWeek(from, props.weekdays || [], times.today)
-    const end = getEndOfWeek(from, props.weekdays || [], times.today)
+    const start = getStartOfWeek(from, props.weekdays || [], times.today, props.calendarSystem)
+    const end = getEndOfWeek(from, props.weekdays || [], times.today, props.calendarSystem)
 
     if (to.date < start.date || to.date > end.date) {
       emittedValue.value = to.date
@@ -475,7 +477,7 @@ export default function useNavigation(
     let tm = current
     if (parsedView.value === 'month') {
       const month = tm.month
-      tm = addToDate(tm, { day: -7 })
+      tm = addToDate(tm, { day: -7 }, props.calendarSystem)
       if (month !== tm.month) {
         direction.value = 'prev'
         emittedValue.value = tm.date
@@ -483,7 +485,7 @@ export default function useNavigation(
         return
       }
     } else {
-      tm = addToDate(tm, { minute: -Number(props.intervalMinutes ?? 60) })
+      tm = addToDate(tm, { minute: -Number(props.intervalMinutes ?? 60) }, props.calendarSystem)
       if (tm.date !== current.date) {
         tm = moveToEnabledWeekday(tm, -1)
       }
@@ -499,7 +501,7 @@ export default function useNavigation(
     let tm = current
     if (parsedView.value === 'month') {
       const month = tm.month
-      tm = addToDate(tm, { day: 7 })
+      tm = addToDate(tm, { day: 7 }, props.calendarSystem)
       if (month !== tm.month) {
         direction.value = 'next'
         emittedValue.value = tm.date
@@ -507,7 +509,7 @@ export default function useNavigation(
         return
       }
     } else {
-      tm = addToDate(tm, { minute: Number(props.intervalMinutes ?? 60) })
+      tm = addToDate(tm, { minute: Number(props.intervalMinutes ?? 60) }, props.calendarSystem)
       if (tm.date !== current.date) {
         tm = moveToEnabledWeekday(tm, 1)
       }
@@ -522,7 +524,7 @@ export default function useNavigation(
     const current = getFocusableTimestamp()
     let tm = current
     direction.value = 'prev'
-    tm = moveToEnabledWeekday(addToDate(tm, { day: -1 }), -1)
+    tm = moveToEnabledWeekday(addToDate(tm, { day: -1 }, props.calendarSystem), -1)
     updateWeekBoundaryModelValue(current, tm)
     updateModelValueWhenFocusIsOutsideRenderedDates(tm)
     setFocusTimestamp(tm)
@@ -532,21 +534,27 @@ export default function useNavigation(
     const current = getFocusableTimestamp()
     let tm = current
     direction.value = 'next'
-    tm = moveToEnabledWeekday(addToDate(tm, { day: 1 }), 1)
+    tm = moveToEnabledWeekday(addToDate(tm, { day: 1 }, props.calendarSystem), 1)
     updateWeekBoundaryModelValue(current, tm)
     updateModelValueWhenFocusIsOutsideRenderedDates(tm)
     setFocusTimestamp(tm)
   }
   function onPgUp(): void {
     let tm = getFocusableTimestamp()
-    tm = parsedView.value === 'month' ? addToDate(tm, { month: -1 }) : addToDate(tm, { day: -7 })
+    tm =
+      parsedView.value === 'month'
+        ? addToDate(tm, { month: -1 }, props.calendarSystem)
+        : addToDate(tm, { day: -7 }, props.calendarSystem)
     direction.value = 'prev'
     setFocusTimestamp(tm)
   }
 
   function onPgDown(): void {
     let tm = getFocusableTimestamp()
-    tm = parsedView.value === 'month' ? addToDate(tm, { month: 1 }) : addToDate(tm, { day: 7 })
+    tm =
+      parsedView.value === 'month'
+        ? addToDate(tm, { month: 1 }, props.calendarSystem)
+        : addToDate(tm, { day: 7 }, props.calendarSystem)
     direction.value = 'next'
     setFocusTimestamp(tm)
   }
@@ -556,8 +564,8 @@ export default function useNavigation(
     // For month display, start at the beginning of the month; for week display, get start of week.
     tm =
       parsedView.value === 'month'
-        ? getStartOfMonth(tm)
-        : getStartOfWeek(tm, props.weekdays || [], times.today)
+        ? getStartOfMonth(tm, props.calendarSystem)
+        : getStartOfWeek(tm, props.weekdays || [], times.today, props.calendarSystem)
     tm = moveToEnabledWeekday(tm, 1)
     setFocusTimestamp(tm)
   }
@@ -567,8 +575,8 @@ export default function useNavigation(
     // For month display, get end of month; for week display, get end of week.
     tm =
       parsedView.value === 'month'
-        ? getEndOfMonth(tm)
-        : getEndOfWeek(tm, props.weekdays || [], times.today)
+        ? getEndOfMonth(tm, props.calendarSystem)
+        : getEndOfWeek(tm, props.weekdays || [], times.today, props.calendarSystem)
     tm = moveToEnabledWeekday(tm, -1)
     setFocusTimestamp(tm)
   }

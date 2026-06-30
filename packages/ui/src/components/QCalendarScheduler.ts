@@ -19,7 +19,13 @@ import {
 } from 'vue'
 
 // Utility
-import { getDayIdentifier, parsed, parseTimestamp, today, type Timestamp } from '@timestamp-js/core'
+import {
+  getCalendarDayIdentifier,
+  gregorianCalendar,
+  parseCalendarTimestamp,
+  today,
+  type Timestamp,
+} from '@timestamp-js/core'
 
 import { convertToUnit, getResponsiveWeekdayLabel } from '../utils/helpers'
 import { getCalendarScopeData } from '../utils/calendarSystem'
@@ -159,11 +165,14 @@ export default defineComponent({
   ],
 
   setup(props, { slots, emit, expose }) {
+    const initialDate = props.modelValue || today(props.calendarSystem)
     const scrollArea = ref(null),
       pane = ref(null),
       headerColumnRef = ref(null),
-      focusRef = ref<string>(props.modelValue || today()),
-      focusValue = ref<Timestamp>(parsed(props.modelValue || today()) as Timestamp),
+      focusRef = ref<string>(initialDate),
+      focusValue = ref<Timestamp>(
+        parseCalendarTimestamp(initialDate, props.calendarSystem) as Timestamp,
+      ),
       datesRef = ref<Record<string, HTMLElement>>({}),
       keyboardActive = ref(false),
       resourcesRef = ref<Record<string, HTMLElement>>({}),
@@ -173,7 +182,7 @@ export default defineComponent({
       // resourceFocusValue = ref(null),
       // resourcesHeadRef = ref(null),
       direction = ref<'next' | 'prev'>('next'),
-      startDate = ref(props.modelValue || today()),
+      startDate = ref(initialDate),
       endDate = ref('0000-00-00'),
       maxDaysRendered = ref(0),
       emittedValue = ref(props.modelValue),
@@ -228,7 +237,11 @@ export default defineComponent({
     } = useCommon(props, { startDate, endDate, times })
 
     const parsedValue = computed(() => {
-      return parseTimestamp(props.modelValue, times.now) || parsedStart.value || times.today
+      return (
+        parseCalendarTimestamp(props.modelValue, props.calendarSystem, parsedStart.value) ||
+        parsedStart.value ||
+        times.today
+      )
     })
 
     focusValue.value = parsedValue.value
@@ -351,8 +364,14 @@ export default defineComponent({
       (val, oldVal) => {
         if (emittedValue.value !== props.modelValue) {
           if (props.animated === true) {
-            const v1 = getDayIdentifier(parsed(val) as Timestamp)
-            const v2 = getDayIdentifier(parsed(oldVal) as Timestamp)
+            const v1 = getCalendarDayIdentifier(
+              parseCalendarTimestamp(val, props.calendarSystem) as Timestamp,
+              props.calendarSystem,
+            )
+            const v2 = getCalendarDayIdentifier(
+              parseCalendarTimestamp(oldVal, props.calendarSystem) as Timestamp,
+              props.calendarSystem,
+            )
             direction.value = v1 >= v2 ? 'next' : 'prev'
           }
           emittedValue.value = val
@@ -364,8 +383,14 @@ export default defineComponent({
     watch(emittedValue, (val, oldVal) => {
       if (emittedValue.value !== props.modelValue) {
         if (props.animated === true) {
-          const v1 = getDayIdentifier(parsed(val) as Timestamp)
-          const v2 = getDayIdentifier(parsed(oldVal) as Timestamp)
+          const v1 = getCalendarDayIdentifier(
+            parseCalendarTimestamp(val, props.calendarSystem) as Timestamp,
+            props.calendarSystem,
+          )
+          const v2 = getCalendarDayIdentifier(
+            parseCalendarTimestamp(oldVal, props.calendarSystem) as Timestamp,
+            props.calendarSystem,
+          )
           direction.value = v1 >= v2 ? 'next' : 'prev'
         }
         emit('update:model-value', val)
@@ -374,7 +399,7 @@ export default defineComponent({
 
     watch(focusRef, (val) => {
       if (val) {
-        focusValue.value = parseTimestamp(val) as Timestamp
+        focusValue.value = parseCalendarTimestamp(val, props.calendarSystem) as Timestamp
       }
     })
 
@@ -898,6 +923,7 @@ export default defineComponent({
         dayLabel,
         timestamp: day,
         calendarTimestamp: intervalScope.calendarTimestamp,
+        calendarIdentity: intervalScope.calendarIdentity,
         calendarSystem: intervalScope.calendarSystem,
         outside: intervalScope.outside,
         activeDate,
@@ -1382,12 +1408,13 @@ export default defineComponent({
 
       const hasWidth = size.width > 0
       const hasResources = props.modelResources && props.modelResources.length > 0
+      const calendarKey = props.calendarSystem?.id ?? gregorianCalendar.id
 
       const scheduler = withDirectives(
         h(
           'div',
           {
-            key: startDate.value,
+            key: `${calendarKey}:${startDate.value}`,
             class: 'q-calendar-scheduler',
           },
           [

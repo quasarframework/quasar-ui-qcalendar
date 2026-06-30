@@ -1,15 +1,16 @@
 import { computed, type Ref } from 'vue'
 import {
-  createDayList,
+  createCalendarDayList,
   parseTime,
-  updateDisabled,
-  updateFormatted,
+  updateCalendarDisabled,
+  updateCalendarFormatted,
   type Timestamp,
 } from '@timestamp-js/core'
 
 import {
   getCalendarScopeData,
   isOutsideCalendarMonth,
+  toCalendarTimestamp,
   type CalendarScopeData,
 } from '../utils/calendarSystem'
 import { type CommonProps } from './useCommon'
@@ -90,16 +91,19 @@ export default function useCalendarDays(
   })
 
   const days = computed(() => {
-    return createDayList(
+    return createCalendarDayList(
       parsedStart.value,
       parsedEnd.value,
-      times.today,
-      props.weekdays,
-      props.disabledBefore,
-      props.disabledAfter,
-      props.disabledWeekdays,
-      props.disabledDays,
-      maxDays.value,
+      toCalendarTimestamp(times.today, props.calendarSystem),
+      props.calendarSystem,
+      {
+        weekdays: props.weekdays,
+        disabledBefore: props.disabledBefore,
+        disabledAfter: props.disabledAfter,
+        disabledWeekdays: props.disabledWeekdays,
+        disabledDays: props.disabledDays,
+        max: maxDays.value,
+      },
     )
   })
 
@@ -139,13 +143,15 @@ export default function useCalendarDays(
   }
 
   function getScopeForSlot(timestamp: Timestamp, columnIndex?: number): ScopeForSlot {
-    const formattedTimestamp = updateFormatted(timestamp)
-    const disabledTimestamp = updateDisabled(
+    const calendarTimestamp = toCalendarTimestamp(timestamp, props.calendarSystem)
+    const formattedTimestamp = updateCalendarFormatted(calendarTimestamp, props.calendarSystem)
+    const disabledTimestamp = updateCalendarDisabled(
       formattedTimestamp,
       props.disabledBefore,
       props.disabledAfter,
       props.disabledWeekdays,
       props.disabledDays,
+      props.calendarSystem,
     )
     const outside = isOutsideActiveMonth(formattedTimestamp)
     const scope: ScopeForSlot = {
