@@ -1,6 +1,6 @@
 {
   "name": "docs",
-  "version": "5.0.0-rc.7",
+  "version": "5.0.0-rc.8",
   "private": true,
   "description": "QCalendar Documentation and examples",
   "author": "Jeff <galbraith64@gmail.com>",
@@ -24,22 +24,22 @@
   },
   "dependencies": {
     "@quasar/extras": "2.0.1",
-    "@timestamp-js/calendar-islamic": "0.1.0-rc.2",
-    "@timestamp-js/calendar-saka": "0.1.0-rc.2",
-    "@timestamp-js/core": "0.1.0-rc.2",
+    "@timestamp-js/calendar-islamic": "0.1.0-rc.3",
+    "@timestamp-js/calendar-saka": "0.1.0-rc.3",
+    "@timestamp-js/core": "0.1.0-rc.3",
     "date-holidays": "^3.32.0",
     "pinia": "^3.0.4",
-    "quasar": "^2.20.1",
+    "quasar": "^2.20.2",
     "vue": "^3.5.39",
     "vue-router": "^5.1.0"
   },
   "devDependencies": {
-    "@md-plugins/quasar-app-extension-q-press": "0.1.0-rc.18",
-    "@md-plugins/search-ui": "0.1.0-rc.18",
-    "@md-plugins/vite-examples-plugin": "0.1.0-rc.18",
-    "@md-plugins/vite-md-plugin": "0.1.0-rc.18",
-    "@md-plugins/vite-search-plugin": "0.1.0-rc.18",
-    "@md-plugins/vite-ssg-plugin": "0.1.0-rc.18",
+    "@md-plugins/quasar-app-extension-q-press": "0.1.0-rc.19",
+    "@md-plugins/search-ui": "0.1.0-rc.19",
+    "@md-plugins/vite-examples-plugin": "0.1.0-rc.19",
+    "@md-plugins/vite-md-plugin": "0.1.0-rc.19",
+    "@md-plugins/vite-search-plugin": "0.1.0-rc.19",
+    "@md-plugins/vite-ssg-plugin": "0.1.0-rc.19",
     "@quasar/app-vite": "3.0.0-rc.3",
     "@quasar/quasar-ui-qcalendar": "workspace:*",
     "@types/markdown-it": "^14.1.2",
@@ -51,7 +51,7 @@
     "shiki": "^4.3.0",
     "typescript": "~6.0.3",
     "vite-plugin-checker": "^0.14.4",
-    "vue-tsc": "^3.3.5"
+    "vue-tsc": "^3.3.6"
   },
   "engines": {
     "node": ">=22.13",
