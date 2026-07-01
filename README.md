@@ -23,7 +23,7 @@ QCalendar allows for viewing of **day** (1-6 days), **week**, **monthly**, **sch
 v5.0.0-rc.9
 
 - QCalendar v5 prepares the project for Quasar CLI Vite 3.
-- The app extension is now Vite-only and requires `@quasar/app-vite` >=3.0.0-rc.3.
+- The app extension is now Vite-only and requires `@quasar/app-vite` >=3.0.0-rc.4.
 - This repo now requires Node.js `>=22.13` and pnpm `>=11.3.0`.
 - QCalendar uses Gregorian dates by default and can opt into Timestamp calendar adapters for native Hijri, Saka, and Hebrew calendar workflows.
 - Be sure to read the [Upgrade Guide](https://qcalendar.netlify.app/other/upgrade-guide).
