@@ -2,6 +2,7 @@ import { computed, type Ref, type PropType } from 'vue'
 import {
   validateTimestamp,
   parseCalendarTimestamp,
+  createCalendarLocaleFormatterUTC,
   createNativeLocaleFormatterUTC,
   getCalendarDirection,
   gregorianCalendar,
@@ -460,14 +461,14 @@ export default function useCommon(
   })
 
   const weekdayFormatter = computed(() =>
-    createNativeLocaleFormatterUTC(props.locale, (_tms, short) => ({
+    createCalendarLocaleFormatterUTC(props.calendarSystem, props.locale, (_tms, short) => ({
       timeZone: 'UTC',
       weekday: short ? 'short' : 'long',
     })),
   )
 
   const ariaDateFormatter = computed(() =>
-    createNativeLocaleFormatterUTC(props.locale, () => ({
+    createCalendarLocaleFormatterUTC(props.calendarSystem, props.locale, () => ({
       timeZone: 'UTC',
       dateStyle: 'full',
     })),

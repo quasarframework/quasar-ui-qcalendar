@@ -16,6 +16,7 @@
 
     &--tasks {
       position: relative;
+      box-sizing: border-box;
       display: flex;
     }
 
@@ -30,6 +31,7 @@
 
     &--day {
       position: relative;
+      box-sizing: border-box;
       flex: 1 1 100%;
       flex-wrap: nowrap;
       overflow: hidden;
@@ -46,6 +48,7 @@
 
     &--task {
       position: relative;
+      box-sizing: border-box;
       display: flex;
     }
 
@@ -60,6 +63,7 @@
 
     &--day {
       position: relative;
+      box-sizing: border-box;
       flex: 1 1 100%;
       flex-wrap: nowrap;
       overflow: hidden;
@@ -70,6 +74,7 @@
 
   &__head--weekday,
   &__head--date {
+    box-sizing: border-box;
     display: flex;
     flex-wrap: nowrap;
     user-select: none;
@@ -100,6 +105,7 @@
 
   &__task {
     position: relative;
+    box-sizing: border-box;
     display: flex;
     flex: none;
     flex-direction: row;
@@ -107,6 +113,7 @@
 
     &--section {
       position: relative;
+      box-sizing: border-box;
       display: flex;
       flex: none;
       flex-direction: row;
@@ -115,11 +122,13 @@
 
     &--container {
       position: relative;
+      box-sizing: border-box;
       min-height: 22px;
     }
 
     &--item {
       position: relative;
+      box-sizing: border-box;
       display: flex;
       flex: none;
       flex-direction: row;
@@ -127,11 +136,13 @@
 
     &--days-row {
       position: relative;
+      box-sizing: border-box;
       display: flex;
       flex: none;
     }
 
     &--day {
+      box-sizing: border-box;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -154,6 +165,7 @@
     &--task,
     &--day-wrapper {
       position: relative;
+      box-sizing: border-box;
       display: flex;
       flex: none;
       flex-direction: row;

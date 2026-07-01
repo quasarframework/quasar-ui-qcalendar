@@ -2,6 +2,7 @@
 import { computed, Ref, PropType } from 'vue'
 import {
   addToDate,
+  createCalendarLocaleFormatterUTC,
   createIntervalList,
   createNativeLocaleFormatterUTC,
   copyTimestamp,
@@ -809,7 +810,7 @@ export default function useInterval(
   const ariaDateTimeFormatter = computed(() => {
     const longOptions = { timeZone: 'UTC', dateStyle: 'full', timeStyle: 'short' } as const
 
-    return createNativeLocaleFormatterUTC(props.locale, (/*_tms*/) => longOptions)
+    return createCalendarLocaleFormatterUTC(props.calendarSystem, props.locale, () => longOptions)
   })
 
   /**

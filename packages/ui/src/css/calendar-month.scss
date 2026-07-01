@@ -51,6 +51,7 @@
 
     &--weekday {
       position: relative;
+      box-sizing: border-box;
       display: flex;
       flex: 1 0 100%;
       flex-direction: column;
@@ -119,6 +120,7 @@
 
   &__day {
     position: relative;
+    box-sizing: border-box;
     display: flex;
     flex: 1 0 100%;
     flex-direction: column;
