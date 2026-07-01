@@ -5,8 +5,13 @@
   "keywords": [
     "agenda",
     "calendar",
+    "calendar adapter",
+    "calendar system",
     "daily",
     "events",
+    "gregorian",
+    "hebrew",
+    "hijri",
     "monthly",
     "planner",
     "quasar",
@@ -14,6 +19,7 @@
     "range selection",
     "reminders",
     "resource",
+    "saka",
     "schedule",
     "task",
     "weekly"
@@ -226,7 +232,7 @@
     "prepack": "pnpm build"
   },
   "dependencies": {
-    "@timestamp-js/core": "0.1.0-rc.3"
+    "@timestamp-js/core": "0.1.0-rc.4"
   },
   "devDependencies": {
     "@md-plugins/quasar-app-extension-q-press": "0.1.0-rc.19",

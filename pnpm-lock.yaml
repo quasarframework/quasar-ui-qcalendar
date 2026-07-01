@@ -44,7 +44,7 @@ importers:
     devDependencies:
       '@quasar/app-vite':
         specifier: 3.0.0-rc.3
-        version: 3.0.0-rc.3(@types/node@26.0.1)(esbuild@0.28.1)(pinia@3.0.4(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3)))(quasar@2.20.2)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.4)(typescript@6.0.3)(vue-router@5.1.0(@vue/compiler-sfc@3.5.39)(esbuild@0.28.1)(pinia@3.0.4(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3)))(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.0(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3)))(vue@3.5.39(typescript@6.0.3))(yaml@2.9.0)
+        version: 3.0.0-rc.3(@types/node@26.0.1)(esbuild@0.28.1)(pinia@3.0.4(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3)))(quasar@2.20.2)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.4)(typescript@6.0.3)(vue-router@5.1.0(@vue/compiler-sfc@3.5.39)(esbuild@0.28.1)(pinia@3.0.4(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3)))(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3)))(vue@3.5.39(typescript@6.0.3))(yaml@2.9.0)
       typescript:
         specifier: ~6.0.3
         version: 6.0.3
@@ -54,15 +54,18 @@ importers:
       '@quasar/extras':
         specifier: 2.0.1
         version: 2.0.1
+      '@timestamp-js/calendar-hebrew':
+        specifier: 0.1.0-rc.4
+        version: 0.1.0-rc.4
       '@timestamp-js/calendar-islamic':
-        specifier: 0.1.0-rc.3
-        version: 0.1.0-rc.3
+        specifier: 0.1.0-rc.4
+        version: 0.1.0-rc.4
       '@timestamp-js/calendar-saka':
-        specifier: 0.1.0-rc.3
-        version: 0.1.0-rc.3
+        specifier: 0.1.0-rc.4
+        version: 0.1.0-rc.4
       '@timestamp-js/core':
-        specifier: 0.1.0-rc.3
-        version: 0.1.0-rc.3
+        specifier: 0.1.0-rc.4
+        version: 0.1.0-rc.4
       date-holidays:
         specifier: ^3.32.0
         version: 3.32.0
@@ -137,8 +140,8 @@ importers:
   packages/ui:
     dependencies:
       '@timestamp-js/core':
-        specifier: 0.1.0-rc.3
-        version: 0.1.0-rc.3
+        specifier: 0.1.0-rc.4
+        version: 0.1.0-rc.4
     devDependencies:
       '@md-plugins/quasar-app-extension-q-press':
         specifier: 0.1.0-rc.19
@@ -1350,16 +1353,20 @@ packages:
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
 
-  '@timestamp-js/calendar-islamic@0.1.0-rc.3':
-    resolution: {integrity: sha512-gg0cX+D66LwEN2ma77GrlA019A/2nHdrWUMwbCc/sGWkNj9JpSCNaNJZ0Q4Br3KlrPY911bBxN5yBYXGz/Mc4w==}
+  '@timestamp-js/calendar-hebrew@0.1.0-rc.4':
+    resolution: {integrity: sha512-SbB5NQNZ34cKyys27s5I0/bHrtLTFk3DcUErL7Fdrdu0diAWDHQalRj0aEDrYw9B36nq0ZHhYHQHswPVr+kQRg==}
     engines: {node: '>=22.13', pnpm: '>=11.5.0'}
 
-  '@timestamp-js/calendar-saka@0.1.0-rc.3':
-    resolution: {integrity: sha512-7yLmA5mFfJu2EvW+ubFV3KgrQRLkYQ1QDUIkmLfPRnHtVe8lsWWyydkimGzEoHrh6eqp+Nr+K7POlu35r8VBSg==}
+  '@timestamp-js/calendar-islamic@0.1.0-rc.4':
+    resolution: {integrity: sha512-JFkVeSKZfJUoVBVBcez/Rlt9btrTToVe7W5S+VxZLvhZPKedEgJ/EMMo7t/bkhdaEfE13UOoIYPhUu1tfTAtgQ==}
     engines: {node: '>=22.13', pnpm: '>=11.5.0'}
 
-  '@timestamp-js/core@0.1.0-rc.3':
-    resolution: {integrity: sha512-VxA+AjXjVgAHYOo66DwRbu48SIIun8/8BKeMEv0Mpj8kXBDs/TRpQsTrQ7rNDOC0ZhDakR81jrP1LvXD3t/xQg==}
+  '@timestamp-js/calendar-saka@0.1.0-rc.4':
+    resolution: {integrity: sha512-iIA0yzeo0g5T3gr27VAeipRwPyONUNDPQZbZCvr4P1ptZp6wB7vC45hsM2gwJ9l9pla0ZXk5htYW5YMwgnTaBg==}
+    engines: {node: '>=22.13', pnpm: '>=11.5.0'}
+
+  '@timestamp-js/core@0.1.0-rc.4':
+    resolution: {integrity: sha512-dsHzrDHrvKAoad+8k+gzdCP9Vv9zA06CNjwe8ZrmVLG81ZFgfneDbVBSIs5/HzL9GDwvFOb/mhg0b4EfyBPrgA==}
     engines: {node: '>=22.13', pnpm: '>=11.5.0'}
 
   '@tybys/wasm-util@0.10.3':
@@ -3547,49 +3554,6 @@ packages:
       vue-tsc:
         optional: true
 
-  vite@8.1.0:
-    resolution: {integrity: sha512-BuJcQK/56NQTWDGn4ABea3q4SSBdNPWwNZKTkkUpcMPnLoquSYH8llRtSUIgoL1KSCpHt5eghLShn50mH36y7Q==}
-    engines: {node: ^20.19.0 || >=22.12.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': ^20.19.0 || >=22.12.0
-      '@vitejs/devtools': ^0.3.0
-      esbuild: ^0.27.0 || ^0.28.0
-      jiti: '>=1.21.0'
-      less: ^4.0.0
-      sass: ^1.70.0
-      sass-embedded: 1.100.0
-      stylus: '>=0.54.8'
-      sugarss: ^5.0.0
-      terser: ^5.16.0
-      tsx: ^4.8.1
-      yaml: ^2.4.2
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      '@vitejs/devtools':
-        optional: true
-      esbuild:
-        optional: true
-      jiti:
-        optional: true
-      less:
-        optional: true
-      sass:
-        optional: true
-      sass-embedded:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-      tsx:
-        optional: true
-      yaml:
-        optional: true
-
   vite@8.1.1:
     resolution: {integrity: sha512-X/05/cT+VITy2AeDc1der6smvGWWREtL4hPbPTaVbjSBuuWkmNOjR6HP3NzqcQA2nF6VHGUPaFRJyft/2AE9Kg==}
     engines: {node: ^20.19.0 || >=22.12.0}
@@ -4466,58 +4430,6 @@ snapshots:
       tslib: 2.8.1
       tsyringe: 4.10.0
 
-  '@quasar/app-vite@3.0.0-rc.3(@types/node@26.0.1)(esbuild@0.28.1)(pinia@3.0.4(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3)))(quasar@2.20.2)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.4)(typescript@6.0.3)(vue-router@5.1.0(@vue/compiler-sfc@3.5.39)(esbuild@0.28.1)(pinia@3.0.4(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3)))(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.0(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3)))(vue@3.5.39(typescript@6.0.3))(yaml@2.9.0)':
-    dependencies:
-      '@clack/prompts': 1.6.0
-      '@quasar/art': 1.0.0
-      '@quasar/render-ssr-error': 2.2.3
-      '@quasar/ssl-certificate': 2.0.0
-      '@quasar/vite-plugin': 1.12.0(@vitejs/plugin-vue@6.0.7(vite@8.1.0(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3)))(quasar@2.20.2)(vite@8.1.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3))
-      '@types/chrome': 0.1.43
-      '@types/cordova': 11.0.3
-      '@vitejs/plugin-vue': 6.0.7(vite@8.1.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3))
-      chokidar: 5.0.0
-      ci-info: 4.4.0
-      confbox: 0.2.4
-      cross-spawn: 7.0.6
-      dot-prop: 10.1.0
-      dotenv-expand: 13.0.0
-      elementtree: 0.1.7
-      fflate: 0.8.3
-      fs-extra: 11.3.6
-      html-minifier-terser: 7.2.0
-      jiti: 2.7.0
-      kolorist: 1.8.0
-      mlly: 1.8.2
-      open: 11.0.0
-      quasar: 2.20.2
-      rolldown: 1.1.3
-      sass-embedded: 1.100.0
-      semver: 7.8.5
-      serialize-javascript: 7.0.6
-      serve-static: 2.2.1
-      tinyglobby: 0.2.17
-      ts-essentials: 10.2.1(typescript@6.0.3)
-      vite: 8.1.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0)
-      vue: 3.5.39(typescript@6.0.3)
-      vue-router: 5.1.0(@vue/compiler-sfc@3.5.39)(esbuild@0.28.1)(pinia@3.0.4(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3)))(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.0(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3))
-      webpack-merge: 6.0.1
-    optionalDependencies:
-      pinia: 3.0.4(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3))
-      typescript: 6.0.3
-    transitivePeerDependencies:
-      - '@types/node'
-      - '@vitejs/devtools'
-      - esbuild
-      - less
-      - sass
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
-      - tsx
-      - yaml
-
   '@quasar/app-vite@3.0.0-rc.3(@types/node@26.0.1)(esbuild@0.28.1)(pinia@3.0.4(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3)))(quasar@2.20.2)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.4)(typescript@6.0.3)(vue-router@5.1.0(@vue/compiler-sfc@3.5.39)(esbuild@0.28.1)(pinia@3.0.4(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3)))(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3)))(vue@3.5.39(typescript@6.0.3))(yaml@2.9.0)':
     dependencies:
       '@clack/prompts': 1.6.0
@@ -4582,13 +4494,6 @@ snapshots:
     dependencies:
       fs-extra: 11.3.6
       selfsigned: 5.5.0
-
-  '@quasar/vite-plugin@1.12.0(@vitejs/plugin-vue@6.0.7(vite@8.1.0(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3)))(quasar@2.20.2)(vite@8.1.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3))':
-    dependencies:
-      '@vitejs/plugin-vue': 6.0.7(vite@8.1.0(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3))
-      quasar: 2.20.2
-      vite: 8.1.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0)
-      vue: 3.5.39(typescript@6.0.3)
 
   '@quasar/vite-plugin@1.12.0(@vitejs/plugin-vue@6.0.7(vite@8.1.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3)))(quasar@2.20.2)(vite@8.1.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3))':
     dependencies:
@@ -4779,15 +4684,19 @@ snapshots:
 
   '@standard-schema/spec@1.1.0': {}
 
-  '@timestamp-js/calendar-islamic@0.1.0-rc.3':
+  '@timestamp-js/calendar-hebrew@0.1.0-rc.4':
     dependencies:
-      '@timestamp-js/core': 0.1.0-rc.3
+      '@timestamp-js/core': 0.1.0-rc.4
 
-  '@timestamp-js/calendar-saka@0.1.0-rc.3':
+  '@timestamp-js/calendar-islamic@0.1.0-rc.4':
     dependencies:
-      '@timestamp-js/core': 0.1.0-rc.3
+      '@timestamp-js/core': 0.1.0-rc.4
 
-  '@timestamp-js/core@0.1.0-rc.3': {}
+  '@timestamp-js/calendar-saka@0.1.0-rc.4':
+    dependencies:
+      '@timestamp-js/core': 0.1.0-rc.4
+
+  '@timestamp-js/core@0.1.0-rc.4': {}
 
   '@tybys/wasm-util@0.10.3':
     dependencies:
@@ -4995,12 +4904,6 @@ snapshots:
     optionalDependencies:
       d3-selection: 3.0.0
       d3-transition: 3.0.1(d3-selection@3.0.0)
-
-  '@vitejs/plugin-vue@6.0.7(vite@8.1.0(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3))':
-    dependencies:
-      '@rolldown/pluginutils': 1.0.1
-      vite: 8.1.0(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0)
-      vue: 3.5.39(typescript@6.0.3)
 
   '@vitejs/plugin-vue@6.0.7(vite@8.1.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3))':
     dependencies:
@@ -7001,17 +6904,6 @@ snapshots:
       pathe: 2.0.3
       picomatch: 4.0.4
 
-  unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.0(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0)):
-    dependencies:
-      '@jridgewell/remapping': 2.3.5
-      picomatch: 4.0.4
-      webpack-virtual-modules: 0.6.2
-    optionalDependencies:
-      esbuild: 0.28.1
-      rolldown: 1.1.3
-      rollup: 4.62.2
-      vite: 8.1.0(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0)
-
   unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0)):
     dependencies:
       '@jridgewell/remapping': 2.3.5
@@ -7060,24 +6952,6 @@ snapshots:
       typescript: 6.0.3
       vue-tsc: 3.3.6(typescript@6.0.3)
 
-  vite@8.1.0(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0):
-    dependencies:
-      lightningcss: 1.32.0
-      picomatch: 4.0.4
-      postcss: 8.5.16
-      rolldown: 1.1.3
-      tinyglobby: 0.2.17
-    optionalDependencies:
-      '@types/node': 26.0.1
-      esbuild: 0.28.1
-      fsevents: 2.3.3
-      jiti: 2.7.0
-      sass: 1.100.0
-      sass-embedded: 1.100.0
-      terser: 5.48.0
-      tsx: 4.22.4
-      yaml: 2.9.0
-
   vite@8.1.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0):
     dependencies:
       lightningcss: 1.32.0
@@ -7125,40 +6999,6 @@ snapshots:
       - msw
 
   vscode-uri@3.1.0: {}
-
-  vue-router@5.1.0(@vue/compiler-sfc@3.5.39)(esbuild@0.28.1)(pinia@3.0.4(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3)))(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.0(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3)):
-    dependencies:
-      '@babel/generator': 8.0.0
-      '@vue-macros/common': 3.1.2(vue@3.5.39(typescript@6.0.3))
-      '@vue/devtools-api': 8.1.5
-      ast-walker-scope: 0.9.0
-      chokidar: 5.0.0
-      json5: 2.2.3
-      local-pkg: 1.2.1
-      magic-string: 0.30.21
-      mlly: 1.8.2
-      muggle-string: 0.4.1
-      pathe: 2.0.3
-      picomatch: 4.0.4
-      scule: 1.3.0
-      tinyglobby: 0.2.17
-      unplugin: 3.3.0(esbuild@0.28.1)(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.0(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0))
-      unplugin-utils: 0.3.1
-      vue: 3.5.39(typescript@6.0.3)
-      yaml: 2.9.0
-    optionalDependencies:
-      '@vue/compiler-sfc': 3.5.39
-      pinia: 3.0.4(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3))
-      vite: 8.1.0(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0)
-    transitivePeerDependencies:
-      - '@farmfe/core'
-      - '@rspack/core'
-      - bun-types-no-globals
-      - esbuild
-      - rolldown
-      - rollup
-      - unloader
-      - webpack
 
   vue-router@5.1.0(@vue/compiler-sfc@3.5.39)(esbuild@0.28.1)(pinia@3.0.4(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3)))(rolldown@1.1.3)(rollup@4.62.2)(vite@8.1.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(sass-embedded@1.100.0)(sass@1.100.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3)):
     dependencies:
@@ -7241,3 +7081,56 @@ snapshots:
   zlib@1.0.5: {}
 
   zwitch@2.0.4: {}
+
+time:
+  '@md-plugins/quasar-app-extension-q-press@0.1.0-rc.19': '2026-06-30T13:35:04.057Z'
+  '@md-plugins/search-ui@0.1.0-rc.19': '2026-06-30T13:34:11.003Z'
+  '@md-plugins/vite-examples-plugin@0.1.0-rc.19': '2026-06-30T13:34:16.327Z'
+  '@md-plugins/vite-md-plugin@0.1.0-rc.19': '2026-06-30T13:34:57.620Z'
+  '@md-plugins/vite-search-plugin@0.1.0-rc.19': '2026-06-30T13:34:54.450Z'
+  '@md-plugins/vite-ssg-plugin@0.1.0-rc.19': '2026-06-30T13:34:19.531Z'
+  '@quasar/app-vite@3.0.0-rc.3': '2026-06-15T06:19:48.096Z'
+  '@quasar/extras@2.0.1': '2026-06-12T08:49:12.804Z'
+  '@timestamp-js/calendar-hebrew@0.1.0-rc.4': '2026-07-01T12:11:14.024Z'
+  '@timestamp-js/calendar-islamic@0.1.0-rc.4': '2026-07-01T12:11:18.794Z'
+  '@timestamp-js/calendar-saka@0.1.0-rc.4': '2026-07-01T12:11:23.556Z'
+  '@timestamp-js/core@0.1.0-rc.4': '2026-07-01T12:11:09.005Z'
+  '@types/fs-extra@11.0.4': '2023-11-07T20:15:59.748Z'
+  '@types/markdown-it@14.1.2': '2024-07-25T05:07:30.523Z'
+  '@types/node@26.0.1': '2026-06-24T20:33:01.352Z'
+  '@types/rtlcss@3.5.4': '2023-11-07T15:46:47.578Z'
+  '@types/uglify-js@3.17.5': '2024-03-01T00:53:37.925Z'
+  '@vitest/coverage-istanbul@4.1.9': '2026-06-15T07:21:30.291Z'
+  '@vue/server-renderer@3.5.39': '2026-06-25T09:43:45.313Z'
+  autoprefixer@10.5.2: '2026-06-24T18:37:13.770Z'
+  cssnano@8.0.2: '2026-06-11T07:33:06.886Z'
+  date-holidays@3.32.0: '2026-06-28T09:44:45.760Z'
+  defu@6.1.7: '2026-04-07T09:28:09.388Z'
+  dotenv@17.4.2: '2026-04-12T16:41:11.574Z'
+  fs-extra@11.3.6: '2026-06-29T20:16:12.494Z'
+  kolorist@1.8.0: '2023-04-22T22:01:16.523Z'
+  markdown-it@14.2.0: '2026-05-23T23:23:51.513Z'
+  mermaid@11.16.0: '2026-06-25T11:30:40.280Z'
+  npm-check-updates@22.2.9: '2026-06-28T19:36:04.979Z'
+  open@11.0.0: '2025-11-15T08:22:54.225Z'
+  oxfmt@0.57.0: '2026-06-29T23:08:50.068Z'
+  oxlint@1.72.0: '2026-06-29T23:10:49.090Z'
+  pinia@3.0.4: '2025-11-05T09:25:13.853Z'
+  postcss@8.5.16: '2026-06-28T14:57:42.962Z'
+  quasar@2.20.2: '2026-06-30T14:15:27.017Z'
+  rimraf@6.1.3: '2026-02-16T00:59:39.538Z'
+  rolldown@1.1.3: '2026-06-24T10:48:51.753Z'
+  rtlcss@4.3.0: '2024-08-27T15:13:51.207Z'
+  sass-embedded@1.100.0: '2026-05-22T00:56:33.894Z'
+  shiki@4.3.0: '2026-06-25T04:00:23.076Z'
+  table@6.9.0: '2024-12-03T17:10:48.078Z'
+  tinyglobby@0.2.17: '2026-05-30T19:57:21.717Z'
+  tsx@4.22.4: '2026-05-31T12:22:19.330Z'
+  typescript@6.0.3: '2026-04-16T23:38:27.905Z'
+  uglify-js@3.19.3: '2024-08-29T13:49:01.316Z'
+  vite-plugin-checker@0.14.4: '2026-06-17T12:50:20.414Z'
+  vitest@4.1.9: '2026-06-15T07:23:00.326Z'
+  vue-router@5.1.0: '2026-05-28T14:32:47.343Z'
+  vue-tsc@3.3.6: '2026-06-30T14:47:15.838Z'
+  vue@3.5.39: '2026-06-25T09:44:00.706Z'
+  zlib@1.0.5: '2011-08-08T18:15:58.018Z'
