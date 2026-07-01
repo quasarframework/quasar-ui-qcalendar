@@ -10,13 +10,15 @@ import {
   getEpochDay,
   parseCalendarTimestamp,
   parseTimestamp,
+  today,
   type CalendarSystem,
   type Timestamp,
 } from '@timestamp-js/core'
 import { islamicCivilCalendar } from '@timestamp-js/calendar-islamic'
 import { indianNationalCalendar } from '@timestamp-js/calendar-saka'
+import { hebrewCalendar } from '@timestamp-js/calendar-hebrew'
 
-export type CalendarExampleId = 'islamic-civil' | 'saka'
+export type CalendarExampleId = 'islamic-civil' | 'saka' | 'hebrew'
 
 export interface CalendarExample {
   id: CalendarExampleId
@@ -73,12 +75,32 @@ export const calendarExamples: CalendarExample[] = [
       '1946-01-23': ['Check-in'],
     },
   },
+  {
+    id: 'hebrew',
+    label: 'Hebrew',
+    shortLabel: 'Hebrew',
+    calendar: hebrewCalendar,
+    locale: getCalendarLocale(hebrewCalendar),
+    direction: getCalendarDirection(hebrewCalendar),
+    weekdays: getCalendarWeekdays(hebrewCalendar),
+    items: {
+      '5785-01-01': ['Rosh Hashanah'],
+      '5785-01-15': ['Native planning date'],
+      '5785-01-30': ['Month close'],
+      '5785-02-01': ['Follow-up'],
+    },
+    taskItems: {
+      '5785-01-14': ['Planning date'],
+      '5785-01-15': ['Follow-up'],
+      '5785-01-17': ['Native date key'],
+      '5785-01-20': ['Check-in'],
+    },
+  },
 ]
 
-export const calendarExampleDates: Record<CalendarExampleId, string> = {
-  'islamic-civil': '1445-09-15',
-  saka: '1946-01-15',
-}
+export const calendarExampleDates: Record<CalendarExampleId, string> = Object.fromEntries(
+  calendarExamples.map((example) => [example.id, today(example.calendar)]),
+) as Record<CalendarExampleId, string>
 
 export function getCalendarExample(id: CalendarExampleId): CalendarExample {
   return calendarExamples.find((entry) => entry.id === id) ?? calendarExamples[0]!
@@ -118,6 +140,21 @@ export function toGregorianTimestamp(timestamp: Timestamp, example: CalendarExam
   }
 
   return createCalendarTimestampFromEpochDay(getCalendarDayIdentifier(timestamp, example.calendar))
+}
+
+export function getEquivalentNativeDate(
+  value: string,
+  fromExample: CalendarExample,
+  toExample: CalendarExample,
+): string {
+  if (fromExample.id === toExample.id) {
+    return value
+  }
+
+  const timestamp = parseNativeDate(value, fromExample)
+  const epochDay = getCalendarDayIdentifier(timestamp, fromExample.calendar)
+
+  return createCalendarTimestampFromEpochDay(epochDay, toExample.calendar).date
 }
 
 export function getNativeMonthName(timestamp: Timestamp, example: CalendarExample): string {

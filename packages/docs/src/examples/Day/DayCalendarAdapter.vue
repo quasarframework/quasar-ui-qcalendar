@@ -57,7 +57,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { QCalendarDay } from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
@@ -67,6 +67,7 @@ import NavigationBar from '@/components/NavigationBar.vue'
 import {
   calendarExampleDates,
   calendarExamples,
+  getEquivalentNativeDate,
   getCalendarExample,
   getNativeDateLabel,
   getNativeItems,
@@ -94,6 +95,14 @@ const nativeMonthRange = computed(() =>
 const nativeMonthTitle = computed(() =>
   getNativeMonthTitleLabel(selectedTimestamp.value, activeCalendar.value),
 )
+
+watch(calendarId, (nextId, previousId) => {
+  selectedDates.value[nextId] = getEquivalentNativeDate(
+    selectedDates.value[previousId],
+    getCalendarExample(previousId),
+    getCalendarExample(nextId),
+  )
+})
 
 function onToday() {
   calendar.value?.moveToToday()
@@ -125,10 +134,8 @@ function onNext() {
 }
 
 .calendar-adapter-day__toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  justify-items: center;
   gap: 12px;
   width: 100%;
 }

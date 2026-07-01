@@ -62,7 +62,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { QCalendarDay } from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
@@ -73,6 +73,7 @@ import {
   calendarExampleDates,
   calendarExamples,
   getCalendarExample,
+  getEquivalentNativeDate,
   getNativeHeaderLabel,
   getNativeMonthRangeLabel,
   getNativeMonthTitleLabel,
@@ -100,6 +101,14 @@ const nativeMonthRange = computed(() =>
   getNativeMonthRangeLabel(selectedTimestamp.value, activeCalendar.value),
 )
 
+watch(calendarId, (nextId, previousId) => {
+  selectedDates.value[nextId] = getEquivalentNativeDate(
+    selectedDates.value[previousId],
+    getCalendarExample(previousId),
+    getCalendarExample(nextId),
+  )
+})
+
 const intervalItems: Record<CalendarExampleId, Record<string, string[]>> = {
   'islamic-civil': {
     '1445-09-29 09:00': ['Hijri planning'],
@@ -110,6 +119,11 @@ const intervalItems: Record<CalendarExampleId, Record<string, string[]>> = {
     '1946-01-20 09:00': ['Saka planning'],
     '1946-01-21 10:00': ['Team review'],
     '1946-01-22 11:00': ['Native date key'],
+  },
+  hebrew: {
+    '5785-01-14 09:00': ['Hebrew planning'],
+    '5785-01-15 10:00': ['Team review'],
+    '5785-01-16 11:00': ['Native date key'],
   },
 }
 
@@ -149,10 +163,8 @@ function onNext() {
 }
 
 .calendar-adapter-week__toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  justify-items: center;
   gap: 12px;
   width: 100%;
 }

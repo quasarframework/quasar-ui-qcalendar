@@ -62,7 +62,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { QCalendarTask } from '@quasar/quasar-ui-qcalendar'
 import { type Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
@@ -74,6 +74,7 @@ import {
   calendarExampleDates,
   calendarExamples,
   getCalendarExample,
+  getEquivalentNativeDate,
   getNativeTaskItems,
   getNativeMonthRangeLabel,
   getNativeMonthTitleLabel,
@@ -110,6 +111,14 @@ const nativeMonthTitle = computed(() =>
 const nativeMonthRange = computed(() =>
   getNativeMonthRangeLabel(selectedTimestamp.value, activeCalendar.value),
 )
+
+watch(calendarId, (nextId, previousId) => {
+  selectedDates.value[nextId] = getEquivalentNativeDate(
+    selectedDates.value[previousId],
+    getCalendarExample(previousId),
+    getCalendarExample(nextId),
+  )
+})
 
 function getTaskItems(timestamp: Timestamp, taskId: string): string[] {
   if (taskId === 'review') {
@@ -149,10 +158,8 @@ function onNext() {
 }
 
 .calendar-adapter-task__toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  justify-items: center;
   gap: 12px;
   width: 100%;
 }

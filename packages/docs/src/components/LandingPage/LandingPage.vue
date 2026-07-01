@@ -236,7 +236,7 @@ const sectionText =
   'QCalendar is intentionally wide in capability but consistent in structure: shared date logic, theming, slots, and view-specific surfaces for planning-heavy interfaces.'
 
 const heroPills = ['Day', 'Month', 'Agenda', 'Resource', 'Scheduler', 'Task']
-const calendarPills = ['Gregorian', 'Hijri', 'Saka']
+const calendarPills = ['Gregorian', 'Hijri', 'Saka', 'Hebrew']
 
 const previewFamilies = [
   {

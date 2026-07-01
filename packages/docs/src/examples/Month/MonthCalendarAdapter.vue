@@ -73,25 +73,23 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar'
-import {
-  getCalendarEndOfMonth,
-  getCalendarStartOfMonth,
-  parseCalendarTimestamp,
-  type Timestamp,
-} from '@timestamp-js/core'
+import { getCalendarEndOfMonth, getCalendarStartOfMonth, type Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import CalendarAdapterSelector from '@/components/CalendarAdapterSelector.vue'
 import CalendarAdapterTitle from '@/components/CalendarAdapterTitle.vue'
 import NavigationBar from '@/components/NavigationBar.vue'
 import {
+  calendarExampleDates,
   calendarExamples,
   getCalendarExample,
+  getEquivalentNativeDate,
   getNativeBoundaryLabel,
   getNativeItems,
   getNativeMonthName,
+  parseNativeDate,
   toGregorianTimestamp,
   type CalendarExample,
   type CalendarExampleId,
@@ -99,10 +97,7 @@ import {
 
 const calendar = ref<QCalendarMonth>()
 const calendarId = ref<CalendarExampleId>('islamic-civil')
-const selectedDates = ref<Record<CalendarExampleId, string>>({
-  'islamic-civil': '1445-09-15',
-  saka: '1946-01-15',
-})
+const selectedDates = ref<Record<CalendarExampleId, string>>({ ...calendarExampleDates })
 
 const selectedDate = computed({
   get: () => selectedDates.value[calendarId.value],
@@ -133,14 +128,16 @@ const selectedNativeMonthRange = computed(() => {
   return `${start.date} to ${end.date} (${startGregorian.date} to ${endGregorian.date} Gregorian)`
 })
 
+watch(calendarId, (nextId, previousId) => {
+  selectedDates.value[nextId] = getEquivalentNativeDate(
+    selectedDates.value[previousId],
+    getCalendarExample(previousId),
+    getCalendarExample(nextId),
+  )
+})
+
 function parseNativeRequired(value: string): Timestamp {
-  const timestamp = parseCalendarTimestamp(value, activeCalendar.value.calendar)
-
-  if (timestamp === null) {
-    throw new Error(`Invalid ${activeCalendar.value.shortLabel} date: ${value}`)
-  }
-
-  return timestamp
+  return parseNativeDate(value, activeCalendar.value)
 }
 
 function getEvents(timestamp: Timestamp): string[] {
@@ -190,10 +187,8 @@ function onClickDay({ scope }: { scope: { timestamp: Timestamp; outside: boolean
 
 .calendar-adapter__toolbar {
   display: grid;
-  gap: 16px;
-  grid-template-columns: minmax(240px, 420px) auto;
-  align-items: center;
-  justify-content: space-between;
+  gap: 12px;
+  justify-items: center;
   width: 100%;
 }
 
@@ -242,11 +237,5 @@ function onClickDay({ scope }: { scope: { timestamp: Timestamp; outside: boolean
   border-radius: 3px;
   font-size: 0.72rem;
   padding: 2px 5px;
-}
-
-@media (max-width: 760px) {
-  .calendar-adapter__toolbar {
-    grid-template-columns: 1fr;
-  }
 }
 </style>

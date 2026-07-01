@@ -72,120 +72,33 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { QCalendarAgenda } from '@quasar/quasar-ui-qcalendar'
-import {
-  createCalendarTimestampFromEpochDay,
-  getCalendarEndOfMonth,
-  getCalendarStartOfMonth,
-  getEpochDay,
-  parseCalendarTimestamp,
-  type CalendarSystem,
-  type Timestamp,
-} from '@timestamp-js/core'
-import { islamicCivilCalendar } from '@timestamp-js/calendar-islamic'
-import { indianNationalCalendar } from '@timestamp-js/calendar-saka'
+import { getCalendarEndOfMonth, getCalendarStartOfMonth, type Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import CalendarAdapterSelector from '@/components/CalendarAdapterSelector.vue'
 import CalendarAdapterTitle from '@/components/CalendarAdapterTitle.vue'
 import NavigationBar from '@/components/NavigationBar.vue'
-
-type CalendarId = 'islamic-civil' | 'saka'
-
-interface CalendarExample {
-  id: CalendarId
-  label: string
-  shortLabel: string
-  calendar: CalendarSystem
-  locale: string
-  direction: 'ltr' | 'rtl'
-  weekdays: number[]
-  months: string[]
-  monthShorts: string[]
-  items: Record<string, string[]>
-}
-
-const calendarExamples: CalendarExample[] = [
-  {
-    id: 'islamic-civil',
-    label: 'Islamic Civil (Hijri)',
-    shortLabel: 'Hijri',
-    calendar: islamicCivilCalendar,
-    locale: 'ar',
-    direction: 'rtl',
-    weekdays: [6, 0, 1, 2, 3, 4, 5],
-    months: [
-      'محرم',
-      'صفر',
-      'ربيع الأول',
-      'ربيع الآخر',
-      'جمادى الأولى',
-      'جمادى الآخرة',
-      'رجب',
-      'شعبان',
-      'رمضان',
-      'شوال',
-      'ذو القعدة',
-      'ذو الحجة',
-    ],
-    monthShorts: [
-      'محرم',
-      'صفر',
-      'ربيع ١',
-      'ربيع ٢',
-      'جمادى ١',
-      'جمادى ٢',
-      'رجب',
-      'شعبان',
-      'رمضان',
-      'شوال',
-      'قعدة',
-      'حجة',
-    ],
-    items: {
-      '1445-09-29': ['Native planning date', 'Confirm team capacity'],
-      '1445-09-30': ['Month close'],
-      '1445-10-01': ['Follow-up'],
-    },
-  },
-  {
-    id: 'saka',
-    label: 'Indian National (Saka)',
-    shortLabel: 'Saka',
-    calendar: indianNationalCalendar,
-    locale: 'hi-IN',
-    direction: 'ltr',
-    weekdays: [0, 1, 2, 3, 4, 5, 6],
-    months: [
-      'चैत्र',
-      'वैशाख',
-      'ज्येष्ठ',
-      'आषाढ़',
-      'श्रावण',
-      'भाद्र',
-      'आश्विन',
-      'कार्तिक',
-      'अग्रहायण',
-      'पौष',
-      'माघ',
-      'फाल्गुन',
-    ],
-    monthShorts: ['चै', 'वै', 'ज्ये', 'आषा', 'श्रा', 'भा', 'आश्वि', 'का', 'अग्र', 'पौ', 'मा', 'फा'],
-    items: {
-      '1946-01-19': ['Native planning date', 'Confirm team capacity'],
-      '1946-01-21': ['Prepare release notes'],
-      '1946-01-23': ['Calendar adapter review'],
-    },
-  },
-]
+import {
+  calendarExampleDates,
+  calendarExamples,
+  getCalendarExample,
+  getEquivalentNativeDate,
+  getNativeBoundaryLabel as getCalendarNativeBoundaryLabel,
+  getNativeDateLabel as getCalendarNativeDateLabel,
+  getNativeItems as getCalendarNativeItems,
+  getNativeMonthName as getCalendarNativeMonthName,
+  getNativeMonthShort as getCalendarNativeMonthShort,
+  parseNativeDate,
+  toGregorianTimestamp,
+  type CalendarExample,
+  type CalendarExampleId,
+} from '@/utils/calendarAdapterExamples'
 
 const calendar = ref<QCalendarAgenda>()
-const calendarId = ref<CalendarId>('islamic-civil')
-const selectedDates = ref<Record<CalendarId, string>>({
-  'islamic-civil': '1445-09-15',
-  saka: '1946-01-15',
-})
+const calendarId = ref<CalendarExampleId>('islamic-civil')
+const selectedDates = ref<Record<CalendarExampleId, string>>({ ...calendarExampleDates })
 
 const selectedDate = computed({
   get: () => selectedDates.value[calendarId.value],
@@ -194,9 +107,7 @@ const selectedDate = computed({
   },
 })
 
-const activeCalendar = computed<CalendarExample>(
-  () => calendarExamples.find((entry) => entry.id === calendarId.value) ?? calendarExamples[0]!,
-)
+const activeCalendar = computed<CalendarExample>(() => getCalendarExample(calendarId.value))
 const selectedNativeTimestamp = computed(() => parseRequired(selectedDate.value))
 const selectedNativeMonthStart = computed(() =>
   getCalendarStartOfMonth(selectedNativeTimestamp.value, activeCalendar.value.calendar),
@@ -218,53 +129,40 @@ const selectedNativeMonthRange = computed(() => {
   return `${start.date} to ${end.date} (${startGregorian.date} to ${endGregorian.date} Gregorian)`
 })
 
+watch(calendarId, (nextId, previousId) => {
+  selectedDates.value[nextId] = getEquivalentNativeDate(
+    selectedDates.value[previousId],
+    getCalendarExample(previousId),
+    getCalendarExample(nextId),
+  )
+})
+
 function parseRequired(value: string): Timestamp {
-  const timestamp = parseCalendarTimestamp(value, activeCalendar.value.calendar)
-
-  if (timestamp === null) {
-    throw new Error(`Invalid ${activeCalendar.value.shortLabel} date: ${value}`)
-  }
-
-  return timestamp
+  return parseNativeDate(value, activeCalendar.value)
 }
 
 function getGregorianTimestamp(nativeTimestamp: Timestamp): Timestamp {
-  return createCalendarTimestampFromEpochDay(
-    getEpochDay(nativeTimestamp, activeCalendar.value.calendar),
-  )
+  return toGregorianTimestamp(nativeTimestamp, activeCalendar.value)
 }
 
 function getNativeDateLabel(timestamp: Timestamp): string {
-  return `${timestamp.date} ${getNativeMonthName(timestamp)}`
+  return getCalendarNativeDateLabel(timestamp, activeCalendar.value)
 }
 
 function getNativeMonthName(timestamp: Timestamp): string {
-  return activeCalendar.value.months[timestamp.month - 1] ?? `Month ${timestamp.month}`
+  return getCalendarNativeMonthName(timestamp, activeCalendar.value)
 }
 
 function getNativeMonthShort(timestamp: Timestamp): string {
-  return (
-    activeCalendar.value.monthShorts[timestamp.month - 1] ??
-    getNativeMonthName(timestamp).slice(0, 3)
-  )
+  return getCalendarNativeMonthShort(timestamp, activeCalendar.value)
 }
 
 function getNativeItems(timestamp: Timestamp): string[] {
-  return activeCalendar.value.items[timestamp.date] ?? []
+  return getCalendarNativeItems(timestamp, activeCalendar.value)
 }
 
 function getNativeBoundaryLabel(timestamp: Timestamp): string {
-  if (timestamp.day === 1) {
-    return 'Month start'
-  }
-
-  if (
-    timestamp.day === activeCalendar.value.calendar.daysInMonth(timestamp.year, timestamp.month)
-  ) {
-    return 'Month end'
-  }
-
-  return ''
+  return getCalendarNativeBoundaryLabel(timestamp, activeCalendar.value)
 }
 
 function onToday() {
@@ -306,10 +204,8 @@ function onClickDay({ scope }: { scope: { timestamp: Timestamp; outside?: boolea
 
 .calendar-adapter-agenda__toolbar {
   display: grid;
-  gap: 16px;
-  grid-template-columns: minmax(240px, 420px) auto;
-  align-items: center;
-  justify-content: space-between;
+  gap: 12px;
+  justify-items: center;
   width: 100%;
 }
 
@@ -317,7 +213,6 @@ function onClickDay({ scope }: { scope: { timestamp: Timestamp; outside?: boolea
   display: flex;
   max-width: 920px;
   min-width: 0;
-  min-height: 260px;
   width: 100%;
 }
 
@@ -372,11 +267,5 @@ function onClickDay({ scope }: { scope: { timestamp: Timestamp; outside?: boolea
   border-radius: 4px;
   font-size: 0.75rem;
   padding: 4px 6px;
-}
-
-@media (max-width: 760px) {
-  .calendar-adapter-agenda__toolbar {
-    grid-template-columns: 1fr;
-  }
 }
 </style>

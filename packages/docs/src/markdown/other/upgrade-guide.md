@@ -48,9 +48,9 @@ This is a breaking change for applications that used QCalendar's previous Timest
 ## Calendar adapter support
 
 QCalendar v5 can work with Timestamp calendar adapters, such as Islamic Civil
-(Hijri) or Indian National (Saka), but this is opt-in. The QCalendar UI package
-does not install non-Gregorian adapter packages. Add only the adapters your app
-uses:
+(Hijri), Indian National (Saka), or Hebrew, but this is opt-in. The QCalendar
+UI package does not install non-Gregorian adapter packages. Add only the
+adapters your app uses:
 
 ```bash
 pnpm add @timestamp-js/core @timestamp-js/calendar-islamic

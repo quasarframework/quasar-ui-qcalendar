@@ -1,17 +1,22 @@
 <template>
   <div class="calendar-adapter-selector" role="group" aria-label="Calendar adapter">
-    <button
+    <q-btn
       v-for="calendar in calendars"
       :key="calendar.id"
       class="calendar-adapter-selector__choice"
       :class="{ 'calendar-adapter-selector__choice--active': calendar.id === modelValue }"
       type="button"
+      no-caps
+      unelevated
+      :outline="calendar.id !== modelValue"
+      color="primary"
+      :text-color="calendar.id === modelValue ? 'white' : 'primary'"
       :aria-pressed="calendar.id === modelValue"
-      @click="$emit('update:modelValue', calendar.id)"
+      @click="selectCalendar(calendar.id)"
     >
       <span class="calendar-adapter-selector__choice-kicker">{{ calendar.shortLabel }}</span>
       <span>{{ calendar.label }}</span>
-    </button>
+    </q-btn>
   </div>
 </template>
 
@@ -29,9 +34,13 @@ defineProps<{
   calendars: CalendarChoice[]
 }>()
 
-defineEmits<{
+const emit = defineEmits<{
   'update:modelValue': [value: CalendarExampleId]
 }>()
+
+function selectCalendar(value: CalendarExampleId) {
+  emit('update:modelValue', value)
+}
 </script>
 
 <style lang="scss" scoped>
@@ -39,21 +48,30 @@ defineEmits<{
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  justify-content: center;
+  width: min(100%, 560px);
+  min-width: 0;
 }
 
 .calendar-adapter-selector__choice {
-  min-width: 150px;
+  flex: 1 1 136px;
+  min-width: 0;
+  min-height: 68px;
+  max-width: 180px;
   padding: 10px 12px;
-  border: 1px solid var(--q-primary);
   border-radius: 6px;
-  background: transparent;
-  color: var(--q-primary);
   text-align: start;
-  cursor: pointer;
   transition:
     background-color 0.16s ease,
     color 0.16s ease,
     box-shadow 0.16s ease;
+}
+
+.calendar-adapter-selector__choice :deep(.q-btn__content) {
+  display: grid;
+  justify-items: start;
+  width: 100%;
+  text-align: start;
 }
 
 .calendar-adapter-selector__choice:hover,
@@ -61,15 +79,13 @@ defineEmits<{
   box-shadow: 0 0 0 2px color-mix(in srgb, var(--q-primary) 22%, transparent);
 }
 
-.calendar-adapter-selector__choice--active {
-  background: var(--q-primary);
-  color: white;
-}
-
 .calendar-adapter-selector__choice-kicker {
   display: block;
-  margin-bottom: 4px;
   font-size: 0.95rem;
+}
+
+.calendar-adapter-selector__choice span {
+  pointer-events: none;
 }
 
 .calendar-adapter-selector__choice span:last-child {

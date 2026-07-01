@@ -248,9 +248,9 @@ system. With an adapter, model values and date-bearing slot data are native to
 that calendar, and the native calendar adapter controls month boundaries,
 outside-day state, and previous/next month navigation.
 
-This example switches between Islamic Civil (Hijri) and Indian National (Saka)
-calendar adapters. The first native day appears in the first visible week, and
-outside days are disabled against the native month instead of the Gregorian
-month.
+This example switches between Islamic Civil (Hijri), Indian National (Saka),
+and Hebrew calendar adapters. The first native day appears in the first visible
+week, and outside days are disabled against the native month instead of the
+Gregorian month.
 
 <MarkdownExample title="Calendar Adapters" file="MonthCalendarAdapter"/>

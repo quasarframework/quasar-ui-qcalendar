@@ -7,7 +7,7 @@
 
     <div class="calendar-adapter-wrapper__toolbar">
       <div class="calendar-adapter-wrapper__selector" role="group" aria-label="Calendar adapter">
-        <button
+        <q-btn
           v-for="calendarOption in calendarExamples"
           :key="calendarOption.id"
           class="calendar-adapter-wrapper__choice"
@@ -15,12 +15,17 @@
             'calendar-adapter-wrapper__choice--active': calendarOption.id === calendarId,
           }"
           type="button"
+          no-caps
+          unelevated
+          :outline="calendarOption.id !== calendarId"
+          color="primary"
+          :text-color="calendarOption.id === calendarId ? 'white' : 'primary'"
           :aria-pressed="calendarOption.id === calendarId"
           @click="calendarId = calendarOption.id"
         >
           <span>{{ calendarOption.shortLabel }}</span>
           <small>{{ calendarOption.label }}</small>
-        </button>
+        </q-btn>
       </div>
 
       <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
@@ -75,35 +80,50 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { QCalendar } from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import CalendarAdapterTitle from '@/components/CalendarAdapterTitle.vue'
 import NavigationBar from '@/components/NavigationBar.vue'
 import {
+  calendarExampleDates,
   calendarExamples,
+  getCalendarExample,
+  getEquivalentNativeDate,
   getNativeBoundaryLabel,
   getNativeMonthRangeLabel,
   getNativeMonthTitleLabel,
-  parseGregorianDate,
+  parseNativeDate,
   type CalendarExampleId,
 } from '@/utils/calendarAdapterExamples'
 
 const calendar = ref<QCalendar>()
 const calendarId = ref<CalendarExampleId>('islamic-civil')
-const selectedDate = ref('2024-03-25')
+const selectedDates = ref<Record<CalendarExampleId, string>>({ ...calendarExampleDates })
+const selectedDate = computed({
+  get: () => selectedDates.value[calendarId.value],
+  set: (value: string) => {
+    selectedDates.value[calendarId.value] = value
+  },
+})
 
-const activeCalendar = computed(
-  () => calendarExamples.find((entry) => entry.id === calendarId.value) ?? calendarExamples[0]!,
-)
-const selectedTimestamp = computed(() => parseGregorianDate(selectedDate.value))
+const activeCalendar = computed(() => getCalendarExample(calendarId.value))
+const selectedTimestamp = computed(() => parseNativeDate(selectedDate.value, activeCalendar.value))
 const nativeMonthRange = computed(() =>
   getNativeMonthRangeLabel(selectedTimestamp.value, activeCalendar.value),
 )
 const nativeMonthTitle = computed(() =>
   getNativeMonthTitleLabel(selectedTimestamp.value, activeCalendar.value),
 )
+
+watch(calendarId, (nextId, previousId) => {
+  selectedDates.value[nextId] = getEquivalentNativeDate(
+    selectedDates.value[previousId],
+    getCalendarExample(previousId),
+    getCalendarExample(nextId),
+  )
+})
 
 function onToday() {
   calendar.value?.moveToToday()
@@ -151,23 +171,23 @@ function onNext() {
 
 .calendar-adapter-wrapper__choice {
   min-width: 150px;
+  min-height: 68px;
   padding: 8px 12px;
-  border: 1px solid var(--q-primary);
   border-radius: 6px;
-  color: var(--q-primary);
-  background: transparent;
   text-align: left;
-  cursor: pointer;
+}
+
+.calendar-adapter-wrapper__choice :deep(.q-btn__content) {
+  display: grid;
+  justify-items: start;
+  width: 100%;
+  text-align: start;
 }
 
 .calendar-adapter-wrapper__choice span,
 .calendar-adapter-wrapper__choice small {
   display: block;
-}
-
-.calendar-adapter-wrapper__choice--active {
-  color: white;
-  background: var(--q-primary);
+  pointer-events: none;
 }
 
 .calendar-adapter-wrapper__calendar {

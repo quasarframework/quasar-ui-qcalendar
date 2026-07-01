@@ -1,7 +1,7 @@
 ---
 title: Calendar Adapters
 desc: Use Timestamp calendar adapters with QCalendar
-keys: calendar,adapters,timestamp,hijri,islamic,saka,indian
+keys: calendar,adapters,timestamp,hijri,islamic,saka,indian,hebrew
 related:
   - /developing/timestamp-recipes
   - /developing/qcalendar-month
@@ -19,6 +19,7 @@ Calendar-specific examples live with the Timestamp adapter docs:
 
 - [Islamic Civil (Hijri)](https://timestamp-js.netlify.app/developing/calendar-systems/islamic-civil) shows Hijri week and month ranges, RTL layout, localized weekday names, and selectable Hijri month names.
 - [Indian National (Saka)](https://timestamp-js.netlify.app/developing/calendar-systems/saka) shows Saka week and month ranges, localized labels, and selectable Saka month names.
+- [Hebrew](https://timestamp-js.netlify.app/developing/calendar-systems/hebrew) shows Hebrew week and month ranges, RTL layout, civil/CLDR month numbering, and Gregorian interop metadata.
 
 Use this page when you are ready to connect those adapters to QCalendar.
 
@@ -34,6 +35,10 @@ Add additional adapters explicitly when your app uses them:
 
 ```bash
 pnpm add @timestamp-js/calendar-saka
+```
+
+```bash
+pnpm add @timestamp-js/calendar-hebrew
 ```
 
 ## Integration Boundary
@@ -85,16 +90,28 @@ same Gregorian day.
 
 If you do pass `calendar-system`, explicit presentation props still win. For example, a Saka or Hijri view can render a local five-day work week with `:weekdays="[1, 2, 3, 4, 5]"` while keeping adapter-native date math and model values.
 
-## Adapter Presentation Defaults
+## Adapter Fields
 
-Timestamp adapters can publish presentation defaults. QCalendar uses them only when the matching
-prop is omitted:
+Timestamp adapters publish identity, presentation defaults, and native date math. QCalendar reads the adapter as one contract, but the fields show up in different parts of the integration:
 
-| Timestamp adapter field | QCalendar prop | Used for                                  |
-| ----------------------- | -------------- | ----------------------------------------- |
-| `defaultLocale`         | `locale`       | Weekday, month, and date labels           |
-| `defaultDirection`      | `dir`          | The rendered calendar root direction      |
-| `defaultWeekdays`       | `weekdays`     | Visible weekday order and week navigation |
+| Timestamp adapter field | Used for                                                                   |
+| ----------------------- | -------------------------------------------------------------------------- |
+| `id`                    | Stable adapter identity used by scope metadata and transition keys         |
+| `intlCalendar`          | Intl calendar id for locale-aware formatting when the adapter provides one |
+| `label`                 | Human-readable adapter name for docs, tools, and custom UI                 |
+| `defaultLocale`         | Fallback `locale` for weekday, month, and date labels                      |
+| `defaultDirection`      | Fallback `dir` for the rendered calendar root                              |
+| `defaultWeekdays`       | Fallback `weekdays` for visible weekday order and week navigation          |
+
+The adapter's date-math methods, such as `monthsInYear`, `daysInMonth`, `toEpochDay`, and `fromEpochDay`, drive native month boundaries, outside-day state, previous/next navigation, and cross-calendar identity metadata.
+
+QCalendar uses presentation defaults only when the matching prop is omitted:
+
+| Timestamp adapter field | QCalendar prop |
+| ----------------------- | -------------- |
+| `defaultLocale`         | `locale`       |
+| `defaultDirection`      | `dir`          |
+| `defaultWeekdays`       | `weekdays`     |
 
 This keeps the common case small:
 
