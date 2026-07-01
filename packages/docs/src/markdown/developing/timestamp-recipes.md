@@ -18,7 +18,7 @@ The calendar stays focused on rendering and interaction. Timestamp owns the reus
 
 Use Timestamp range helpers to normalize unavailable periods before passing them to `disabled-days`, `selected-start-end-dates`, or a `day-class` function.
 
-<MarkdownExample title="Timestamp Calendar Recipes" file="TimestampRecipes"/>
+<MarkdownExample title="Range Windows" file="TimestampRangeRecipes"/>
 
 The important pieces are:
 
@@ -47,6 +47,8 @@ const isAvailable = isTimestampInRange(parseTimestamp('2036-06-10')!, available[
 ## Snap Scheduler Intervals
 
 Use `time-clicks-clamped` when you want QCalendar to return the interval the pointer is inside. Use Timestamp rounding helpers when the application needs a different snapping rule than the visible interval grid.
+
+<MarkdownExample title="Interval Snapping" file="TimestampIntervalSnapping"/>
 
 The same pattern works for drag and drop, scheduler resources, and appointment builders:
 
