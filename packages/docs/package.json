@@ -41,7 +41,7 @@
     "@md-plugins/vite-md-plugin": "0.1.0-rc.19",
     "@md-plugins/vite-search-plugin": "0.1.0-rc.19",
     "@md-plugins/vite-ssg-plugin": "0.1.0-rc.19",
-    "@quasar/app-vite": "3.0.0-rc.4",
+    "@quasar/app-vite": "3.0.0-rc.5",
     "@quasar/quasar-ui-qcalendar": "workspace:*",
     "@types/markdown-it": "^14.1.2",
     "@types/node": "^26.0.1",
