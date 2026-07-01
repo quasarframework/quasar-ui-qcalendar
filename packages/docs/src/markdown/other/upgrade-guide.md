@@ -100,8 +100,8 @@ key.
 
 When a calendar adapter is active, QCalendar now derives `outside` and disabled
 slot state from the adapter month boundary. The existing `disable-*` props use
-the same native date contract as the active adapter, so Saka or Hijri disabled
-dates can be supplied in the same calendar as the view.
+the same native date contract as the active adapter, so Saka, Hijri, or Hebrew
+disabled dates can be supplied in the same calendar as the view.
 
 See [Calendar Adapters](/developing/calendar-adapters) for the integration
 contract and view-specific examples.

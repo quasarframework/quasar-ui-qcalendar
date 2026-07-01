@@ -88,7 +88,7 @@ If you do not pass `calendar-system`, QCalendar uses the Gregorian calendar from
 `@timestamp-js/core`. The adapter fields are still present, and both timestamp fields represent the
 same Gregorian day.
 
-If you do pass `calendar-system`, explicit presentation props still win. For example, a Saka or Hijri view can render a local five-day work week with `:weekdays="[1, 2, 3, 4, 5]"` while keeping adapter-native date math and model values.
+If you do pass `calendar-system`, explicit presentation props still win. For example, a Saka, Hijri, or Hebrew view can render a local five-day work week with `:weekdays="[1, 2, 3, 4, 5]"` while keeping adapter-native date math and model values.
 
 ## Adapter Fields
 

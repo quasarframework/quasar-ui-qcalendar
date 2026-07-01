@@ -304,7 +304,7 @@ with data returned for the current range.
 ### Calendar Adapters
 
 Week views are range-based, and adapters apply to the visible dates, slots, and
-events. Native users can see Hijri, Saka, or other adapter labels in the header
-and cells while Gregorian interop metadata remains available when needed.
+events. Native users can see Hijri, Saka, Hebrew, or other adapter labels in the
+header and cells while Gregorian interop metadata remains available when needed.
 
 <MarkdownExample title="Calendar Adapters" file="WeekCalendarAdapter"/>
