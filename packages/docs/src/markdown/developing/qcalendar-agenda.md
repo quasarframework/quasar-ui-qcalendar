@@ -168,7 +168,7 @@ with data returned for the current range.
 Agenda views can use Timestamp adapters for native labels and native-keyed data
 while keeping the same adapter-native date contract as the rest of QCalendar.
 
-This example renders Islamic Civil (Hijri), Indian National (Saka), or Hebrew
+This example renders Islamic Civil (Hijri), Indian National (Saka), Hebrew, or Persian
 labels inside the header and day slots. It is useful for planning views where
 users need native calendar context, while Gregorian interop remains available
 through slot identity metadata.

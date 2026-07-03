@@ -249,7 +249,7 @@ that calendar, and the native calendar adapter controls month boundaries,
 outside-day state, and previous/next month navigation.
 
 This example switches between Islamic Civil (Hijri), Indian National (Saka),
-and Hebrew calendar adapters. The first native day appears in the first visible
+Hebrew, and Persian calendar adapters. The first native day appears in the first visible
 week, and outside days are disabled against the native month instead of the
 Gregorian month.
 

@@ -51,8 +51,8 @@ Internally, QCalendar uses the browser's `Intl.DateTimeFormat` for all localizat
 ## Calendar systems
 
 Use `calendar-system` when a view should use native calendar dates. This is an opt-in adapter object
-from the Timestamp packages such as `@timestamp-js/calendar-islamic` or
-`@timestamp-js/calendar-saka`.
+from the Timestamp packages such as `@timestamp-js/calendar-islamic`,
+`@timestamp-js/calendar-saka`, or `@timestamp-js/calendar-persian`.
 
 | Property        | Type   | Example              |
 | --------------- | ------ | -------------------- |

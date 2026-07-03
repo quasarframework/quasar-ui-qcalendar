@@ -17,8 +17,9 @@ import {
 import { islamicCivilCalendar } from '@timestamp-js/calendar-islamic'
 import { indianNationalCalendar } from '@timestamp-js/calendar-saka'
 import { hebrewCalendar } from '@timestamp-js/calendar-hebrew'
+import { persianCalendar } from '@timestamp-js/calendar-persian'
 
-export type CalendarExampleId = 'islamic-civil' | 'saka' | 'hebrew'
+export type CalendarExampleId = 'islamic-civil' | 'saka' | 'hebrew' | 'persian'
 
 export interface CalendarExample {
   id: CalendarExampleId
@@ -94,6 +95,27 @@ export const calendarExamples: CalendarExample[] = [
       '5785-01-15': ['Follow-up'],
       '5785-01-17': ['Native date key'],
       '5785-01-20': ['Check-in'],
+    },
+  },
+  {
+    id: 'persian',
+    label: 'Persian (Jalali)',
+    shortLabel: 'Persian',
+    calendar: persianCalendar,
+    locale: getCalendarLocale(persianCalendar),
+    direction: getCalendarDirection(persianCalendar),
+    weekdays: getCalendarWeekdays(persianCalendar),
+    items: {
+      '1403-01-01': ['Nowruz'],
+      '1403-01-15': ['Native planning date'],
+      '1403-01-31': ['Month close'],
+      '1403-02-01': ['Follow-up'],
+    },
+    taskItems: {
+      '1403-01-12': ['Planning date'],
+      '1403-01-15': ['Follow-up'],
+      '1403-01-17': ['Native date key'],
+      '1403-01-20': ['Check-in'],
     },
   },
 ]

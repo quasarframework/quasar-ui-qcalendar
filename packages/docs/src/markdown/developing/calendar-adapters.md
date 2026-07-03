@@ -20,6 +20,7 @@ Calendar-specific examples live with the Timestamp adapter docs:
 - [Islamic Civil (Hijri)](https://timestamp-js.netlify.app/developing/calendar-systems/islamic-civil) shows Hijri week and month ranges, RTL layout, localized weekday names, and selectable Hijri month names.
 - [Indian National (Saka)](https://timestamp-js.netlify.app/developing/calendar-systems/saka) shows Saka week and month ranges, localized labels, and selectable Saka month names.
 - [Hebrew](https://timestamp-js.netlify.app/developing/calendar-systems/hebrew) shows Hebrew week and month ranges, RTL layout, civil/CLDR month numbering, and Gregorian interop metadata.
+- [Persian (Jalali)](https://timestamp-js.netlify.app/developing/calendar-systems/persian) shows Persian week and month ranges, RTL layout, localized month names, and Gregorian interop metadata.
 
 Use this page when you are ready to connect those adapters to QCalendar.
 
@@ -39,6 +40,10 @@ pnpm add @timestamp-js/calendar-saka
 
 ```bash
 pnpm add @timestamp-js/calendar-hebrew
+```
+
+```bash
+pnpm add @timestamp-js/calendar-persian
 ```
 
 ## Integration Boundary
@@ -88,7 +93,7 @@ If you do not pass `calendar-system`, QCalendar uses the Gregorian calendar from
 `@timestamp-js/core`. The adapter fields are still present, and both timestamp fields represent the
 same Gregorian day.
 
-If you do pass `calendar-system`, explicit presentation props still win. For example, a Saka, Hijri, or Hebrew view can render a local five-day work week with `:weekdays="[1, 2, 3, 4, 5]"` while keeping adapter-native date math and model values.
+If you do pass `calendar-system`, explicit presentation props still win. For example, a Saka, Hijri, Hebrew, or Persian view can render a local five-day work week with `:weekdays="[1, 2, 3, 4, 5]"` while keeping adapter-native date math and model values.
 
 ## Adapter Fields
 

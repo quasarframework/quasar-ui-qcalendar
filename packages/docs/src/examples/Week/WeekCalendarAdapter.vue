@@ -125,6 +125,11 @@ const intervalItems: Record<CalendarExampleId, Record<string, string[]>> = {
     '5785-01-15 10:00': ['Team review'],
     '5785-01-16 11:00': ['Native date key'],
   },
+  persian: {
+    '1403-01-14 09:00': ['Persian planning'],
+    '1403-01-15 10:00': ['Team review'],
+    '1403-01-16 11:00': ['Native date key'],
+  },
 }
 
 function getIntervalItems(timestamp: Timestamp, calendarTimestamp: Timestamp): string[] {

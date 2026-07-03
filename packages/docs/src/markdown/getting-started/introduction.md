@@ -14,7 +14,7 @@ If you're looking to help out, check out our [Call to action](/other/contributin
 
 **QCalendar** allows for viewing of **day** (1-6 days), **week**, **monthly**, **scheduler**, **agenda**, **resource** and **task** views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.
 
-QCalendar uses Gregorian dates by default and can opt into Timestamp calendar adapters for native Hijri, Saka, and Hebrew calendar workflows.
+QCalendar uses Gregorian dates by default and can opt into Timestamp calendar adapters for native Hijri, Saka, Hebrew, and Persian calendar workflows.
 
 QCalendar is a less-opinionated calendar component, as it does not keep track of things like events and reminders. This is in the hands of the developer, but QCalendar makes it easy via events, slots and methods (see examples how to accomplish these endeavors).
 
@@ -56,7 +56,7 @@ QCalendar is actually an accumulation of several other dedicated components and 
 20. Easy to customize with Vue slots
 21. Support for Dark mode
 22. Timestamp-powered date utilities for custom calendar workflows
-23. Gregorian calendar support by default, with opt-in Timestamp adapters for native Hijri, Saka, and Hebrew date math, labels, and Gregorian interop metadata
+23. Gregorian calendar support by default, with opt-in Timestamp adapters for native Hijri, Saka, Hebrew, and Persian date math, labels, and Gregorian interop metadata
 24. Toggled date, range and interval selection
 
 ## QCalendar is not…

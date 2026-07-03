@@ -757,6 +757,7 @@ const config = {
       'https://cdn.jsdelivr.net/npm/@timestamp-js/calendar-islamic@0.1.0-rc.4/dist/index.global.min.js',
       'https://cdn.jsdelivr.net/npm/@timestamp-js/calendar-saka@0.1.0-rc.4/dist/index.global.min.js',
       'https://cdn.jsdelivr.net/npm/@timestamp-js/calendar-hebrew@0.1.0-rc.4/dist/index.global.min.js',
+      'https://cdn.jsdelivr.net/npm/@timestamp-js/calendar-persian@0.1.0-rc.4/dist/index.global.min.js',
     ],
     globalPackages: [
       {
@@ -778,6 +779,10 @@ const config = {
       {
         packageName: '@timestamp-js/calendar-hebrew',
         globalName: '(globalThis as any).TimestampJsCalendarHebrew',
+      },
+      {
+        packageName: '@timestamp-js/calendar-persian',
+        globalName: '(globalThis as any).TimestampJsCalendarPersian',
       },
     ],
     jsSetup: [

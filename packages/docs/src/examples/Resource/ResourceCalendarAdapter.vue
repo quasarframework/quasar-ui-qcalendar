@@ -144,6 +144,11 @@ const bookingItems: Record<CalendarExampleId, Record<string, string[]>> = {
     'design:5785-01-14 11:00': ['Design'],
     'release:5785-01-14 14:00': ['Release'],
   },
+  persian: {
+    'planning:1403-01-14 09:00': ['Planning'],
+    'design:1403-01-14 11:00': ['Design'],
+    'release:1403-01-14 14:00': ['Release'],
+  },
 }
 
 function getBookingItems(

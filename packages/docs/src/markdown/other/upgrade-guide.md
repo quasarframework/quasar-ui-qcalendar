@@ -48,7 +48,7 @@ This is a breaking change for applications that used QCalendar's previous Timest
 ## Calendar adapter support
 
 QCalendar v5 can work with Timestamp calendar adapters, such as Islamic Civil
-(Hijri), Indian National (Saka), or Hebrew, but this is opt-in. The QCalendar
+(Hijri), Indian National (Saka), Hebrew, or Persian, but this is opt-in. The QCalendar
 UI package does not install non-Gregorian adapter packages. Add only the
 adapters your app uses:
 
@@ -100,7 +100,7 @@ key.
 
 When a calendar adapter is active, QCalendar now derives `outside` and disabled
 slot state from the adapter month boundary. The existing `disable-*` props use
-the same native date contract as the active adapter, so Saka, Hijri, or Hebrew
+the same native date contract as the active adapter, so Saka, Hijri, Hebrew, or Persian
 disabled dates can be supplied in the same calendar as the view.
 
 See [Calendar Adapters](/developing/calendar-adapters) for the integration

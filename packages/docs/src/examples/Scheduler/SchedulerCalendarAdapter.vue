@@ -149,6 +149,11 @@ const schedulerItems: Record<CalendarExampleId, Record<string, string[]>> = {
     '5785-01-15': ['Follow-up'],
     '5785-01-17': ['Native date key'],
   },
+  persian: {
+    '1403-01-14': ['Planning date'],
+    '1403-01-15': ['Follow-up'],
+    '1403-01-17': ['Native date key'],
+  },
 }
 
 function getResourceItems(timestamp: Timestamp, resourceId: string): string[] {
