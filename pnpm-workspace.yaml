@@ -144,9 +144,9 @@ minimumReleaseAgeExclude:
   - 'vue-router@5.1.0'
   - vue-tsc@3.3.5 || 3.3.6
   - vite@8.1.0 || 8.1.1
-  - '@timestamp-js/calendar-islamic@0.1.0-rc.4 || 0.1.0-rc.5'
-  - '@timestamp-js/calendar-saka@0.1.0-rc.4 || 0.1.0-rc.5'
+  - '@timestamp-js/calendar-islamic@0.1.0-rc.5'
+  - '@timestamp-js/calendar-saka@0.1.0-rc.5'
   - fs-extra@11.3.6
-  - '@timestamp-js/calendar-hebrew@0.1.0-rc.4 || 0.1.0-rc.5'
+  - '@timestamp-js/calendar-hebrew@0.1.0-rc.5'
   - '@timestamp-js/calendar-persian@0.1.0-rc.5'
 trustLockfile: true
