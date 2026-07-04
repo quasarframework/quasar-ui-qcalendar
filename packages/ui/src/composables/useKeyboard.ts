@@ -12,6 +12,7 @@ import {
   type CalendarSystem,
 } from '@timestamp-js/core'
 import type { Timestamp } from '@timestamp-js/core'
+import { toCalendarTimestamp } from '../utils/calendarSystem'
 
 const { isKeyCode } = useEvents()
 
@@ -362,7 +363,7 @@ export default function useNavigation(
       return copyTimestamp(focusValue.value)
     }
 
-    return copyTimestamp(times.today)
+    return copyTimestamp(toCalendarTimestamp(times.today, props.calendarSystem))
   }
 
   function parseFocusTimestamp(value: string): Timestamp | null {
@@ -435,8 +436,9 @@ export default function useNavigation(
   function updateWeekBoundaryModelValue(from: Timestamp, to: Timestamp): void {
     if (!isWeekView()) return
 
-    const start = getStartOfWeek(from, props.weekdays || [], times.today, props.calendarSystem)
-    const end = getEndOfWeek(from, props.weekdays || [], times.today, props.calendarSystem)
+    const calendarToday = toCalendarTimestamp(times.today, props.calendarSystem)
+    const start = getStartOfWeek(from, props.weekdays || [], calendarToday, props.calendarSystem)
+    const end = getEndOfWeek(from, props.weekdays || [], calendarToday, props.calendarSystem)
 
     if (to.date < start.date || to.date > end.date) {
       emittedValue.value = to.date
@@ -565,7 +567,12 @@ export default function useNavigation(
     tm =
       parsedView.value === 'month'
         ? getStartOfMonth(tm, props.calendarSystem)
-        : getStartOfWeek(tm, props.weekdays || [], times.today, props.calendarSystem)
+        : getStartOfWeek(
+            tm,
+            props.weekdays || [],
+            toCalendarTimestamp(times.today, props.calendarSystem),
+            props.calendarSystem,
+          )
     tm = moveToEnabledWeekday(tm, 1)
     setFocusTimestamp(tm)
   }
@@ -576,7 +583,12 @@ export default function useNavigation(
     tm =
       parsedView.value === 'month'
         ? getEndOfMonth(tm, props.calendarSystem)
-        : getEndOfWeek(tm, props.weekdays || [], times.today, props.calendarSystem)
+        : getEndOfWeek(
+            tm,
+            props.weekdays || [],
+            toCalendarTimestamp(times.today, props.calendarSystem),
+            props.calendarSystem,
+          )
     tm = moveToEnabledWeekday(tm, -1)
     setFocusTimestamp(tm)
   }

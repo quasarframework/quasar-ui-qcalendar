@@ -26,7 +26,11 @@ import {
 } from '@timestamp-js/core'
 
 import { convertToUnit, getResponsiveWeekdayLabel } from '../utils/helpers'
-import { getCalendarDateIdentifier, getCalendarScopeData } from '../utils/calendarSystem'
+import {
+  getCalendarDateIdentifier,
+  getCalendarScopeData,
+  parseCalendarTimestampSafe,
+} from '../utils/calendarSystem'
 
 import useMouse, { getRawMouseEvents } from '../composables/useMouse'
 
@@ -218,7 +222,7 @@ export default defineComponent({
 
     const parsedValue = computed(() => {
       return (
-        parseCalendarTimestamp(props.modelValue, props.calendarSystem, parsedStart.value) ||
+        parseCalendarTimestampSafe(props.modelValue, props.calendarSystem, parsedStart.value) ||
         parsedStart.value ||
         times.today
       )
@@ -375,7 +379,12 @@ export default defineComponent({
 
     watch(focusRef, (val) => {
       if (val) {
-        focusValue.value = parseCalendarTimestamp(val, props.calendarSystem) as Timestamp
+        const timestamp = parseCalendarTimestampSafe(val, props.calendarSystem)
+        if (timestamp === null) {
+          return
+        }
+
+        focusValue.value = timestamp
         if (emittedValue.value !== val) {
           emittedValue.value = val
         }

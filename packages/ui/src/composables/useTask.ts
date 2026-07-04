@@ -17,6 +17,7 @@ import {
   type Timestamp,
 } from '@timestamp-js/core'
 import { isValidWeekdays } from './useCommon'
+import { toCalendarTimestamp } from '../utils/calendarSystem'
 
 export interface CalendarDefaultProps {
   calendarSystem?: CalendarSystem
@@ -251,6 +252,7 @@ export default function useTask(
 ): TaskReturn {
   const calendar = computed(() => props.calendarSystem)
   const parsedModel = computed(() => parseCalendarTimestamp(props.modelValue, calendar.value))
+  const calendarToday = computed(() => toCalendarTimestamp(times.today, calendar.value))
 
   const parsedStartDate = computed(() => {
     if (!props.modelValue) {
@@ -262,7 +264,7 @@ export default function useTask(
       return getStartOfWeek(
         parsedModel.value as Timestamp,
         props.weekdays,
-        times.today,
+        calendarToday.value,
         calendar.value,
       )
     } else if (props.view === 'month') {
@@ -288,7 +290,7 @@ export default function useTask(
         return getEndOfWeek(
           parsedModel.value as Timestamp,
           props.weekdays,
-          times.today,
+          calendarToday.value,
           calendar.value,
         )
       } else {
@@ -298,7 +300,7 @@ export default function useTask(
           { day: (props.viewCount - 1) * TIME_CONSTANTS.DAYS_IN.WEEK },
           calendar.value,
         )
-        return getEndOfWeek(end, props.weekdays, times.today, calendar.value)
+        return getEndOfWeek(end, props.weekdays, calendarToday.value, calendar.value)
       }
     } else if (props.view === 'month') {
       if (props.viewCount === 1) {
@@ -317,7 +319,7 @@ export default function useTask(
     return createDayList(
       parsedStartDate.value!,
       parsedEndDate.value!,
-      times.today,
+      calendarToday.value,
       props.weekdays,
       props.disabledBefore,
       props.disabledAfter,

@@ -19,7 +19,7 @@ import {
 } from '@timestamp-js/core'
 
 import { animVerticalScrollTo, animHorizontalScrollTo } from '../utils/scroll'
-import { type CalendarScopeData } from '../utils/calendarSystem'
+import { toCalendarTimestamp, type CalendarScopeData } from '../utils/calendarSystem'
 import { type CommonProps } from './useCommon'
 import { type ColumnProps } from './useColumn'
 import { type CellWidthProps } from './useCellWidth'
@@ -702,11 +702,21 @@ export default function useInterval(
   })
 
   function startOfWeek(timestamp: Timestamp): Timestamp {
-    return getStartOfWeek(timestamp, props.weekdays, times.today, props.calendarSystem)
+    return getStartOfWeek(
+      timestamp,
+      props.weekdays,
+      toCalendarTimestamp(times.today, props.calendarSystem),
+      props.calendarSystem,
+    )
   }
 
   function endOfWeek(timestamp: Timestamp): Timestamp {
-    return getEndOfWeek(timestamp, props.weekdays, times.today, props.calendarSystem)
+    return getEndOfWeek(
+      timestamp,
+      props.weekdays,
+      toCalendarTimestamp(times.today, props.calendarSystem),
+      props.calendarSystem,
+    )
   }
 
   /**

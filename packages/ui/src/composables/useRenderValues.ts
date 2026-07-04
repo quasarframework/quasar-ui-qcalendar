@@ -48,6 +48,8 @@ export default function useRenderValues(
   props: UseRenderValuesProps,
   { parsedView, parsedValue, times }: UseRenderValuesContext,
 ): UseRenderValuesReturn {
+  const calendarToday = computed(() => toCalendarTimestamp(times.today, props.calendarSystem))
+
   function getMonthRange(around: Timestamp): { start: Timestamp; end: Timestamp; maxDays: number } {
     const calendar = props.calendarSystem ?? gregorianCalendar
 
@@ -94,8 +96,8 @@ export default function useRenderValues(
       case 'week':
       case 'week-agenda':
       case 'week-scheduler':
-        start = getStartOfWeek(around, props.weekdays, times.today, props.calendarSystem)
-        end = getEndOfWeek(start, props.weekdays, times.today, props.calendarSystem)
+        start = getStartOfWeek(around, props.weekdays, calendarToday.value, props.calendarSystem)
+        end = getEndOfWeek(start, props.weekdays, calendarToday.value, props.calendarSystem)
         maxDays = props.weekdays.length
         break
 

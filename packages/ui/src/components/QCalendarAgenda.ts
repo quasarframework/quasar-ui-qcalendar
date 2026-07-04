@@ -27,7 +27,7 @@ import {
 } from '@timestamp-js/core'
 
 import { convertToUnit, getResponsiveWeekdayLabel } from '../utils/helpers'
-import { getCalendarDateIdentifier } from '../utils/calendarSystem'
+import { getCalendarDateIdentifier, parseCalendarTimestampSafe } from '../utils/calendarSystem'
 // Composables
 import useCalendar from '../composables/useCalendar'
 import useCommon, {
@@ -231,7 +231,7 @@ export default defineComponent({
 
     const parsedValue = computed(() => {
       return (
-        parseCalendarTimestamp(props.modelValue, props.calendarSystem, parsedStart.value) ||
+        parseCalendarTimestampSafe(props.modelValue, props.calendarSystem, parsedStart.value) ||
         parsedStart.value ||
         times.today
       )
@@ -370,7 +370,12 @@ export default defineComponent({
 
     watch(focusRef, (val) => {
       if (val) {
-        focusValue.value = parseCalendarTimestamp(val, props.calendarSystem) as Timestamp
+        const timestamp = parseCalendarTimestampSafe(val, props.calendarSystem)
+        if (timestamp === null) {
+          return
+        }
+
+        focusValue.value = timestamp
       }
     })
 

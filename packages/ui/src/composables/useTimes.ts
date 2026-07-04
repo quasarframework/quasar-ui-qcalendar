@@ -69,7 +69,7 @@ export default function useTimes(props: {
   /**
    * Watch for changes in parsedNow
    */
-  watch(parsedNow, () => updateCurrent())
+  watch(parsedNow, () => updateCurrent(), { flush: 'sync' })
 
   /**
    * Sets 'times.now' (relative) to 'times.today' (relative)

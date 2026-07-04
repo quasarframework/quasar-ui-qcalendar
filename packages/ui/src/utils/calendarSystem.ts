@@ -77,9 +77,25 @@ export function getCalendarDateIdentifier(
   value: string | undefined,
   calendarSystem?: CalendarSystem,
 ): number | null {
-  const timestamp = value ? parseCalendarTimestamp(value, calendarSystem) : null
+  const timestamp = parseCalendarTimestampSafe(value, calendarSystem)
 
   return timestamp === null ? null : getCalendarDayIdentifier(timestamp, calendarSystem)
+}
+
+export function parseCalendarTimestampSafe(
+  value: string | undefined,
+  calendarSystem?: CalendarSystem,
+  fallback?: Timestamp,
+): Timestamp | null {
+  if (!value) {
+    return fallback ?? null
+  }
+
+  try {
+    return parseCalendarTimestamp(value, calendarSystem, fallback)
+  } catch {
+    return fallback ?? null
+  }
 }
 
 export function isOutsideCalendarMonth(

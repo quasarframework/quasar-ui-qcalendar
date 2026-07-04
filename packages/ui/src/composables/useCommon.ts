@@ -1,7 +1,6 @@
 import { computed, type Ref, type PropType } from 'vue'
 import {
   validateTimestamp,
-  parseCalendarTimestamp,
   createCalendarLocaleFormatterUTC,
   createNativeLocaleFormatterUTC,
   getCalendarDirection,
@@ -18,7 +17,11 @@ import {
   type TimestampStyle,
 } from '@timestamp-js/core'
 
-import { isGregorianCalendar, toCalendarTimestamp } from '../utils/calendarSystem'
+import {
+  isGregorianCalendar,
+  parseCalendarTimestampSafe,
+  toCalendarTimestamp,
+} from '../utils/calendarSystem'
 
 // Define props interface
 export interface CommonProps {
@@ -425,7 +428,8 @@ export default function useCommon(
   )
   const parsedStart = computed(
     (): Timestamp =>
-      parseCalendarTimestamp(startDate.value, props.calendarSystem, parsedToday.value) as Timestamp,
+      parseCalendarTimestampSafe(startDate.value, props.calendarSystem, parsedToday.value) ??
+      parsedToday.value,
   )
   const parsedEnd = computed((): Timestamp => {
     if (endDate.value === '0000-00-00') {
@@ -437,11 +441,8 @@ export default function useCommon(
       )
     }
     return (
-      (parseCalendarTimestamp(
-        endDate.value,
-        props.calendarSystem,
-        parsedToday.value,
-      ) as Timestamp) || parsedStart.value
+      parseCalendarTimestampSafe(endDate.value, props.calendarSystem, parsedToday.value) ||
+      parsedStart.value
     )
   })
 
