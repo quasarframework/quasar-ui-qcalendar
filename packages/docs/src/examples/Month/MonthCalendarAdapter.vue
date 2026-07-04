@@ -6,7 +6,11 @@
     </p>
 
     <div class="calendar-adapter__toolbar">
-      <calendar-adapter-selector v-model="calendarId" :calendars="calendarExamples" />
+      <calendar-adapter-selector
+        :model-value="calendarId"
+        :calendars="calendarExamples"
+        @update:model-value="onCalendarChange"
+      />
 
       <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
     </div>
@@ -73,7 +77,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar'
 import { getCalendarEndOfMonth, getCalendarStartOfMonth, type Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
@@ -128,13 +132,20 @@ const selectedNativeMonthRange = computed(() => {
   return `${start.date} to ${end.date} (${startGregorian.date} to ${endGregorian.date} Gregorian)`
 })
 
-watch(calendarId, (nextId, previousId) => {
+function onCalendarChange(nextId: CalendarExampleId) {
+  const previousId = calendarId.value
+
+  if (nextId === previousId) {
+    return
+  }
+
   selectedDates.value[nextId] = getEquivalentNativeDate(
     selectedDates.value[previousId],
     getCalendarExample(previousId),
     getCalendarExample(nextId),
   )
-})
+  calendarId.value = nextId
+}
 
 function parseNativeRequired(value: string): Timestamp {
   return parseNativeDate(value, activeCalendar.value)
