@@ -55,17 +55,20 @@ importers:
         specifier: 2.0.1
         version: 2.0.1
       '@timestamp-js/calendar-hebrew':
-        specifier: 0.1.0-rc.4
-        version: 0.1.0-rc.4
+        specifier: 0.1.0-rc.5
+        version: 0.1.0-rc.5
       '@timestamp-js/calendar-islamic':
-        specifier: 0.1.0-rc.4
-        version: 0.1.0-rc.4
+        specifier: 0.1.0-rc.5
+        version: 0.1.0-rc.5
+      '@timestamp-js/calendar-persian':
+        specifier: 0.1.0-rc.5
+        version: 0.1.0-rc.5
       '@timestamp-js/calendar-saka':
-        specifier: 0.1.0-rc.4
-        version: 0.1.0-rc.4
+        specifier: 0.1.0-rc.5
+        version: 0.1.0-rc.5
       '@timestamp-js/core':
-        specifier: 0.1.0-rc.4
-        version: 0.1.0-rc.4
+        specifier: 0.1.0-rc.5
+        version: 0.1.0-rc.5
       date-holidays:
         specifier: ^3.32.0
         version: 3.32.0
@@ -140,8 +143,8 @@ importers:
   packages/ui:
     dependencies:
       '@timestamp-js/core':
-        specifier: 0.1.0-rc.4
-        version: 0.1.0-rc.4
+        specifier: 0.1.0-rc.5
+        version: 0.1.0-rc.5
     devDependencies:
       '@md-plugins/quasar-app-extension-q-press':
         specifier: 1.0.0
@@ -1353,20 +1356,24 @@ packages:
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
 
-  '@timestamp-js/calendar-hebrew@0.1.0-rc.4':
-    resolution: {integrity: sha512-SbB5NQNZ34cKyys27s5I0/bHrtLTFk3DcUErL7Fdrdu0diAWDHQalRj0aEDrYw9B36nq0ZHhYHQHswPVr+kQRg==}
+  '@timestamp-js/calendar-hebrew@0.1.0-rc.5':
+    resolution: {integrity: sha512-GK/4Kw/an29u2x9bBy+Oxm7euTSAdC1h5D15F68Fjz5cj8n/PlDWAGPDJFLwia564kBPV1EufN2pvL2C50ERTg==}
     engines: {node: '>=22.13', pnpm: '>=11.5.0'}
 
-  '@timestamp-js/calendar-islamic@0.1.0-rc.4':
-    resolution: {integrity: sha512-JFkVeSKZfJUoVBVBcez/Rlt9btrTToVe7W5S+VxZLvhZPKedEgJ/EMMo7t/bkhdaEfE13UOoIYPhUu1tfTAtgQ==}
+  '@timestamp-js/calendar-islamic@0.1.0-rc.5':
+    resolution: {integrity: sha512-bS72F8WSu/rfX7oZHqCnc//5oh+6gLz8PinL98+Qwo5e2+ZQwo9RvGbE53YGf3siCp5qgLSMUqkcnlbL0KnS+A==}
     engines: {node: '>=22.13', pnpm: '>=11.5.0'}
 
-  '@timestamp-js/calendar-saka@0.1.0-rc.4':
-    resolution: {integrity: sha512-iIA0yzeo0g5T3gr27VAeipRwPyONUNDPQZbZCvr4P1ptZp6wB7vC45hsM2gwJ9l9pla0ZXk5htYW5YMwgnTaBg==}
+  '@timestamp-js/calendar-persian@0.1.0-rc.5':
+    resolution: {integrity: sha512-80US6oTyjQI8s/J+Q29iFHC2cLtTn3n02W7jPCdJmsRvjCQ1aF0YEZqnzLNYc8wVCaSmXEHiLaZ2lG3FWfxFlA==}
     engines: {node: '>=22.13', pnpm: '>=11.5.0'}
 
-  '@timestamp-js/core@0.1.0-rc.4':
-    resolution: {integrity: sha512-dsHzrDHrvKAoad+8k+gzdCP9Vv9zA06CNjwe8ZrmVLG81ZFgfneDbVBSIs5/HzL9GDwvFOb/mhg0b4EfyBPrgA==}
+  '@timestamp-js/calendar-saka@0.1.0-rc.5':
+    resolution: {integrity: sha512-xMxeHyLh+ZzlwTdFXmuTXlG3ac6ETc1+fx4XK+Kgt1nI3TiUiWlH96Vi0IU+kj31Upqmwl2jX71KkWN/SUC1Lw==}
+    engines: {node: '>=22.13', pnpm: '>=11.5.0'}
+
+  '@timestamp-js/core@0.1.0-rc.5':
+    resolution: {integrity: sha512-UA+xWllEmYdCAb9xkKKtgxe7Y89+YjvOBBkVkuNT3/YAzi+GoQJKfiUzQOjXjqwmYjjyPPK0GHHd0OCC/9JNeg==}
     engines: {node: '>=22.13', pnpm: '>=11.5.0'}
 
   '@tybys/wasm-util@0.10.3':
@@ -4684,19 +4691,23 @@ snapshots:
 
   '@standard-schema/spec@1.1.0': {}
 
-  '@timestamp-js/calendar-hebrew@0.1.0-rc.4':
+  '@timestamp-js/calendar-hebrew@0.1.0-rc.5':
     dependencies:
-      '@timestamp-js/core': 0.1.0-rc.4
+      '@timestamp-js/core': 0.1.0-rc.5
 
-  '@timestamp-js/calendar-islamic@0.1.0-rc.4':
+  '@timestamp-js/calendar-islamic@0.1.0-rc.5':
     dependencies:
-      '@timestamp-js/core': 0.1.0-rc.4
+      '@timestamp-js/core': 0.1.0-rc.5
 
-  '@timestamp-js/calendar-saka@0.1.0-rc.4':
+  '@timestamp-js/calendar-persian@0.1.0-rc.5':
     dependencies:
-      '@timestamp-js/core': 0.1.0-rc.4
+      '@timestamp-js/core': 0.1.0-rc.5
 
-  '@timestamp-js/core@0.1.0-rc.4': {}
+  '@timestamp-js/calendar-saka@0.1.0-rc.5':
+    dependencies:
+      '@timestamp-js/core': 0.1.0-rc.5
+
+  '@timestamp-js/core@0.1.0-rc.5': {}
 
   '@tybys/wasm-util@0.10.3':
     dependencies:
@@ -7084,10 +7095,6 @@ snapshots:
 
 time:
   '@quasar/extras@2.0.1': '2026-06-12T08:49:12.804Z'
-  '@timestamp-js/calendar-hebrew@0.1.0-rc.4': '2026-07-01T12:11:14.024Z'
-  '@timestamp-js/calendar-islamic@0.1.0-rc.4': '2026-07-01T12:11:18.794Z'
-  '@timestamp-js/calendar-saka@0.1.0-rc.4': '2026-07-01T12:11:23.556Z'
-  '@timestamp-js/core@0.1.0-rc.4': '2026-07-01T12:11:09.005Z'
   '@types/fs-extra@11.0.4': '2023-11-07T20:15:59.748Z'
   '@types/markdown-it@14.1.2': '2024-07-25T05:07:30.523Z'
   '@types/node@26.0.1': '2026-06-24T20:33:01.352Z'

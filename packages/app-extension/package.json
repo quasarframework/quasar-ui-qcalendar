@@ -50,11 +50,11 @@
     "@quasar/quasar-ui-qcalendar": "workspace:^"
   },
   "devDependencies": {
-    "@quasar/app-vite": "3.0.0-rc.5",
+    "@quasar/app-vite": "3.0.0-rc.6",
     "typescript": "~6.0.3"
   },
   "peerDependencies": {
-    "@quasar/app-vite": ">=3.0.0-rc.5"
+    "@quasar/app-vite": ">=3.0.0-rc.6"
   },
   "engines": {
     "node": ">=22.13",

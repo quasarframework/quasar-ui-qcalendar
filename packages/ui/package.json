@@ -232,7 +232,7 @@
     "prepack": "pnpm build"
   },
   "dependencies": {
-    "@timestamp-js/core": "0.1.0-rc.4"
+    "@timestamp-js/core": "0.1.0-rc.5"
   },
   "devDependencies": {
     "@md-plugins/quasar-app-extension-q-press": "1.0.0",
