@@ -2,7 +2,7 @@
   "generated_at": "2026-06-22T19:26:50.073Z",
   "type": "component",
   "meta": {
-    "docsUrl": "/quasar-app-extensions/qpress/components"
+    "docsUrl": "https://md-plugins.netlify.app/quasar-app-extensions/qpress/components"
   },
   "props": {
     "api": {

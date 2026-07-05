@@ -31,7 +31,9 @@
         padding="xs sm"
         no-caps
         outline
-        :to="apiPath"
+        :href="apiHref"
+        :target="apiHref ? '_blank' : undefined"
+        :to="apiRoute"
       >
         <q-icon name="launch" />
         <div class="q-ml-xs">Docs</div>
@@ -500,6 +502,8 @@ const nameBanner = ref(`Loading ${props.file || props.name} API...`)
 const nothingToShow = ref(false)
 
 const apiPath = ref('')
+const apiRoute = computed(() => getApiRoute(apiPath.value))
+const apiHref = computed(() => getApiHref(apiPath.value))
 
 const filter = ref('')
 const apiDef = ref<ParsedApi>({})
@@ -574,6 +578,36 @@ function parseApiFile(
   const subTabs = getInnerTabs(api, tabs)
   innerTabsList.value = subTabs
   apiDef.value = parseApi(api, tabs, subTabs)
+}
+
+function getApiRoute(value: string): string | undefined {
+  if (value === '') {
+    return undefined
+  }
+
+  if (!isAbsoluteUrl(value)) {
+    return value
+  }
+
+  if (typeof window === 'undefined') {
+    return undefined
+  }
+
+  const parsedUrl = new URL(value, window.location.origin)
+
+  if (parsedUrl.origin !== window.location.origin) {
+    return undefined
+  }
+
+  return `${parsedUrl.pathname}${parsedUrl.search}${parsedUrl.hash}`
+}
+
+function getApiHref(value: string): string | undefined {
+  return value !== '' && getApiRoute(value) === undefined ? value : undefined
+}
+
+function isAbsoluteUrl(value: string): boolean {
+  return /^[a-z][a-z\d+.-]*:/i.test(value)
 }
 
 function onSearchFieldClick() {
