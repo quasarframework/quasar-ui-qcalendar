@@ -3,15 +3,24 @@
   <desc id="desc">A compact calendar page with a highlighted date.</desc>
   <defs>
     <filter id="tileShadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#00101f" flood-opacity=".35" />
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#00101f" flood-opacity=".22" />
     </filter>
     <filter id="markShadow" x="-20%" y="-20%" width="140%" height="140%">
       <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0b2537" flood-opacity=".18" />
     </filter>
   </defs>
   <g filter="url(#tileShadow)">
-    <rect x="76" y="76" width="872" height="872" rx="148" fill="#071321" />
-    <rect x="112" y="112" width="800" height="800" rx="126" fill="#eef4f2" />
+    <rect
+      x="88"
+      y="88"
+      width="848"
+      height="848"
+      rx="142"
+      fill="#eef4f2"
+      stroke="#10263d"
+      stroke-opacity=".88"
+      stroke-width="18"
+    />
   </g>
   <g filter="url(#markShadow)">
     <rect x="264" y="282" width="496" height="474" rx="78" fill="#f9fbff" />

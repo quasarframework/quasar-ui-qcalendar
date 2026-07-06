@@ -4,6 +4,10 @@
 
 @import 'quasar/src/css/variables.sass';
 
+.markdown-header .markdown-header__logo-img {
+  border-radius: 10px !important;
+}
+
 .subcontent {
   display: flex;
   flex-direction: column;
