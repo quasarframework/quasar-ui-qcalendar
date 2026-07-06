@@ -31,7 +31,7 @@
     "@timestamp-js/core": "0.1.0-rc.5",
     "date-holidays": "^3.32.0",
     "pinia": "^3.0.4",
-    "quasar": "^2.21.0",
+    "quasar": "^2.21.1",
     "vue": "^3.5.39",
     "vue-router": "^5.1.0"
   },
@@ -42,7 +42,7 @@
     "@md-plugins/vite-md-plugin": "1.0.0",
     "@md-plugins/vite-search-plugin": "1.0.0",
     "@md-plugins/vite-ssg-plugin": "1.0.0",
-    "@quasar/app-vite": "3.0.0-rc.6",
+    "@quasar/app-vite": "3.0.0",
     "@quasar/quasar-ui-qcalendar": "workspace:*",
     "@types/markdown-it": "^14.1.2",
     "@types/node": "^26.0.1",

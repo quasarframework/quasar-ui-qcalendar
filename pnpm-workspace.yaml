@@ -7,6 +7,7 @@ allowBuilds:
   '@parcel/watcher': true
   esbuild: true
 minimumReleaseAgeExclude:
+  - '@quasar/app-vite@3.0.0'
   - '@clack/core'
   - '@clack/prompts'
   - '@md-plugins/md-plugin-blockquote'
@@ -133,7 +134,7 @@ minimumReleaseAgeExclude:
   - 'postcss-reduce-transforms@8.0.1'
   - 'postcss-svgo@8.0.1'
   - 'postcss-unique-selectors@8.0.1'
-  - quasar@2.21.0
+  - quasar@2.21.1
   - 'rolldown@1.1.2'
   - semver
   - 'stylehacks@8.0.1'

@@ -26,12 +26,12 @@ Welcome to the QCalendar v5.0.0-rc.10 release.
 
 ### QCalendar App Extension is now Vite-only
 
-QCalendar v5 prepares the app extension for Quasar CLI Vite 3. The app extension requires `@quasar/app-vite` >=3.0.0-rc.6 and no longer supports webpack-based Quasar apps. If your application is still using `@quasar/app-webpack`, migrate the application to Quasar CLI Vite before installing QCalendar v5.
+QCalendar v5 prepares the app extension for Quasar CLI Vite 3. The app extension requires `@quasar/app-vite` >=3.0.0 and no longer supports webpack-based Quasar apps. If your application is still using `@quasar/app-webpack`, migrate the application to Quasar CLI Vite before installing QCalendar v5.
 
 ## Requirements
 
 - Quasar v2.
-- `@quasar/app-vite` >=3.0.0-rc.6.
+- `@quasar/app-vite` >=3.0.0.
 
 # Documentation
 
