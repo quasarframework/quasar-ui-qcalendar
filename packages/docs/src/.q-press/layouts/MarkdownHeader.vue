@@ -68,7 +68,7 @@
         nav-class="text-uppercase text-size-16 letter-spacing-300"
       />
 
-      <!-- <MarkdownSearch /> -->
+      <MarkdownSearch class="markdown-header__search q-ml-sm" />
 
       <div
         v-if="showThemeChanger"
@@ -149,6 +149,8 @@
         />
       </div>
 
+      <MarkdownSearch class="markdown-header__search q-ml-sm" />
+
       <MarkdownHeaderIconLinks class="gt-1400" :menu="siteConfig.links.socialLinks" />
 
       <div
@@ -187,7 +189,7 @@ import siteConfig from '../../siteConfig'
 
 import DarkModeToggle from '../components/DarkModeToggle.vue'
 
-// import MarkdownSearch from './MarkdownSearch.vue'
+import MarkdownSearch from './MarkdownSearch.vue'
 import MarkdownHeaderTextLinks from './MarkdownHeaderTextLinks.vue'
 import MarkdownHeaderIconLinks from './MarkdownHeaderIconLinks.vue'
 
@@ -217,7 +219,7 @@ const hasToc = computed(
     route.meta.fullwidth !== true &&
     route.meta.fullscreen !== true &&
     siteConfig.config.useToc &&
-    markdownStore.toc.length !== 0,
+    markdownStore.toc.length > 1,
 )
 const hasMoreLinks = computed(() => siteConfig.links.moreLinks.length > 0)
 </script>
@@ -228,7 +230,7 @@ const hasMoreLinks = computed(() => siteConfig.links.moreLinks.length > 0)
 
   &__primary {
     height: 72px;
-    border-bottom: 1px solid $separator-color;
+    border-bottom: 1px solid $brand-border-color-light;
   }
 
   &__secondary {
@@ -290,8 +292,11 @@ const hasMoreLinks = computed(() => siteConfig.links.moreLinks.length > 0)
     &__logo {
       padding-right: 16px;
     }
-    .markdown-search {
-      width: 100%;
+  }
+
+  @media (max-width: 374px) {
+    &__logo {
+      display: none;
     }
   }
 
@@ -306,7 +311,7 @@ const hasMoreLinks = computed(() => siteConfig.links.moreLinks.length > 0)
   }
 
   &__links {
-    justify-content: end;
+    justify-content: flex-end;
 
     @media (min-width: 1921px) {
       justify-content: center;
@@ -316,7 +321,7 @@ const hasMoreLinks = computed(() => siteConfig.links.moreLinks.length > 0)
 
 .markdown-header-menu {
   letter-spacing: $letter-spacing-brand;
-  border: 1px solid $separator-color;
+  border: 1px solid $brand-border-color-light;
   font-size: ($font-size - 2px);
   box-shadow: none !important;
   background-color: #fff;
@@ -356,12 +361,12 @@ const hasMoreLinks = computed(() => siteConfig.links.moreLinks.length > 0)
 
 body.body--dark {
   .markdown-header__primary {
-    border-bottom-color: $separator-dark-color;
+    border-bottom-color: $brand-border-color-dark;
   }
 
   .markdown-header-menu {
     background: $dark-bg;
-    border-color: $separator-dark-color;
+    border-color: $brand-border-color-dark;
 
     .q-item.q-router-link--active,
     .q-item--active {
@@ -385,16 +390,28 @@ $mq-list:
   470,
   510,
   600,
+  750,
   780,
+  820,
+  850,
   860,
+  900,
   910,
+  960,
+  980,
   1000,
   1020,
+  1060,
+  1080,
   1100,
   1130,
+  1140,
   1190,
+  1220,
+  1240,
   1300 /* drawer */,
   1310,
+  1330,
   1400;
 @each $query in $mq-list {
   @media (min-width: #{$query}px) {

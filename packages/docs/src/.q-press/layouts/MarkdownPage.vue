@@ -49,7 +49,7 @@
 
     <slot />
 
-    <div v-if="props.nav" class="markdown-page__nav markdown-page__nav--footer">
+    <div v-if="showFooterNav" class="markdown-page__nav markdown-page__nav--footer">
       <div class="text-h6 q-pb-md markdown-heading">Ready for more?</div>
       <div class="q-gutter-sm flex">
         <router-link
@@ -94,7 +94,6 @@ import { useRoute } from 'vue-router'
 import { mdiPencil, mdiFlash, mdiLaunch } from '@quasar/extras/mdi-v7'
 
 import type { NavItem, RelatedItem } from '@md-plugins/vite-md-plugin'
-import type { TocItem } from '@md-plugins/md-plugin-headers'
 import MarkdownLink from '../components/MarkdownLink.vue'
 import MarkdownPageToc from './MarkdownPageToc.vue'
 
@@ -103,44 +102,112 @@ import { useMarkdownStore } from '../stores/markdown'
 import siteConfig from '../../siteConfig'
 
 const props = defineProps({
+  /**
+   * Title of the markdown page.
+   *
+   * @category content
+   * @example 'Getting Started'
+   * @example 'API Reference'
+   */
   title: {
     type: String,
     default: null,
   },
+  /**
+   * Description used for the page metadata.
+   *
+   * @category content
+   * @example 'Learn how to install and configure Q-Press.'
+   */
   desc: {
     type: String,
     default: null,
   },
+  /**
+   * Text to display as an overline above the title.
+   *
+   * @category content
+   * @example 'Introduction'
+   * @example 'Chapter 1'
+   */
   overline: {
     type: String,
     default: null,
   },
+  /**
+   * Badge text to display next to the title.
+   *
+   * @category content
+   * @example 'New'
+   * @example 'Updated'
+   */
   badge: {
     type: String,
     default: null,
   },
 
+  /**
+   * Flag to indicate if the page is in fullscreen mode.
+   *
+   * @category state
+   */
   fullscreen: Boolean,
 
+  /**
+   * Reserve heading behavior for generated markdown pages.
+   *
+   * @category content
+   */
   heading: Boolean,
+  /**
+   * Source markdown path used to build the edit link.
+   *
+   * @category navigation
+   * @example 'quasar-app-extensions/qpress/overview'
+   */
   editLink: {
     type: String,
     default: null,
   },
 
+  /**
+   * Table of contents entries for the page.
+   *
+   * @category navigation
+   * @example [{ id: 'install', label: 'Install' }]
+   */
   toc: {
-    type: Array<TocItem>,
+    type: Array<TocMenuItem>,
     default: () => [],
   },
+  /**
+   * Related page links displayed near the top of the page.
+   *
+   * @category navigation
+   * @example [{ name: 'Overview', path: '/quasar-app-extensions/qpress/overview' }]
+   */
   related: {
     type: Array<RelatedItem>,
     default: () => [],
   },
+  /**
+   * Footer navigation links displayed after the page content.
+   *
+   * @category navigation
+   * @example [{ name: 'Next', path: '/quasar-app-extensions/qpress/advanced' }]
+   */
   nav: {
     type: Array<NavItem>,
     default: () => [],
   },
 })
+
+defineSlots<{
+  /**
+   * Slot for the main content of the markdown page.
+   */
+  default(): unknown
+}>()
 
 useMeta(
   props.desc !== void 0
@@ -164,20 +231,21 @@ const editHref = computed(() => `${siteConfig.githubEditRootSrc}/markdown/${prop
 
 const isFullscreen = computed(() => route.meta.fullscreen === true || props.fullscreen)
 
+const showFooterNav = computed(() => isFullscreen.value !== true && props.nav.length > 0)
+
 const hasToc = computed(
   () =>
     route.meta.fullwidth !== true &&
     route.meta.fullscreen !== true &&
     props.fullscreen !== true &&
     siteConfig.config.useToc &&
-    markdownStore.toc.length !== 0,
+    markdownStore.toc.length > 1,
 )
 
 const tocClass = computed(
   () => `markdown-page__toc-container--${props.toc !== void 0 ? 'fixed' : 'flowing'}`,
 )
 
-console.log('MarkdownPage props', props)
 </script>
 
 <style lang="scss">

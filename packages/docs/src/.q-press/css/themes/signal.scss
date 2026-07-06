@@ -1,0 +1,87 @@
+@use 'sass:color';
+
+// Signal Theme Variables
+$primary: #0ea5e9;
+$secondary: #334155;
+$accent: #22d3ee;
+
+$positive: #2ecc71;
+$negative: #ff1732;
+$info: #10a0ff;
+$warning: #ffd52d;
+
+$brand-primary: #38bdf8;
+$brand-secondary: #334155;
+$brand-accent: #22d3ee;
+$brand-dark: #0f172a;
+$brand-light: #eaf6ff;
+$brand-medium: #64748b;
+$brand-light-text: #132033;
+$brand-light-bg: #f8fbff;
+$brand-dark-bg: #07111f;
+$brand-dark-text: #dbeafe;
+$brand-light-codeblock-bg: #eef6ff;
+$brand-light-codeblock-text: #12304f;
+$brand-dark-codeblock-bg: #0d1b2e;
+$brand-dark-codeblock-text: #c7e6ff;
+
+$header-btn-color--light: #0369a1;
+$header-btn-hover-color--light: #0f172a;
+$header-btn-color--dark: #67e8f9;
+$header-btn-hover-color--dark: #e0f2fe;
+
+$light-pill: $brand-light;
+$light-text: $brand-light-text;
+$light-bg: $brand-light-bg;
+
+$dark-pill: color.scale($brand-dark-bg, $lightness: 12%);
+$dark-text: $brand-dark-text;
+$dark-bg: $brand-dark-bg;
+
+$separator-color: $brand-primary;
+$separator-color-dark: $brand-accent;
+
+$steps-bg: $brand-light-codeblock-bg;
+$steps-bg-dark: $brand-dark-codeblock-bg;
+$steps-text: $brand-light-text;
+$steps-text-dark: $brand-dark-text;
+$steps-title-color: $brand-light-text;
+$steps-title-color-dark: $brand-dark-text;
+$brand-border-color-light: rgba($brand-primary, 0.7);
+$brand-border-color-dark: rgba($brand-accent, 0.62);
+
+$steps-border-color-light: $brand-border-color-light;
+$steps-border-color-dark: $brand-border-color-dark;
+$steps-marker-bg: $brand-primary;
+$steps-marker-bg-dark: color.mix($brand-accent, $brand-light, 82%);
+$steps-marker-color: $brand-dark;
+$steps-marker-color-dark: $brand-dark-bg;
+$steps-shadow: 0 10px 20px 0 rgba($brand-dark, 0.08);
+$steps-shadow-dark: 0 10px 20px 0 rgba(#000, 0.24);
+
+$font-size: 16px;
+$font-size-brand: 16px;
+$font-weight-brand: 600;
+$font-weight-technical: 400;
+$letter-spacing-brand: 0.8px;
+
+$font-family-technical:
+  'Roboto',
+  -apple-system,
+  Avenir,
+  BlinkMacSystemFont,
+  'Segoe UI',
+  Helvetica,
+  Arial,
+  sans-serif;
+$font-family-examples: $font-family-technical;
+$font-family-brand: 'Montserrat', $font-family-technical;
+
+$shadow--large: 0 24px 24px 0 rgba($brand-primary, 0.2);
+$shadow--medium: 0 6px 6px 0 rgba($brand-primary, 0.34);
+$shadow--small: 0 6px 6px 0 rgba($brand-primary, 0.26);
+
+// also update QHeader :height-hint
+$header-height: 55px;
+$header-transition: 0.6s cubic-bezier(0.25, 0.8, 0.5, 1);
+$header-quick-transition: 0.28s ease-in-out;

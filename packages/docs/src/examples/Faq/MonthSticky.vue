@@ -1,5 +1,10 @@
 <template>
   <div class="my-sticky">
+    <p class="text-body2 text-center q-mb-md">
+      This FAQ recipe places the month calendar in a short scroll container so you can confirm
+      sticky headers remain visible.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="row justify-center">
@@ -27,9 +32,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { QCalendarMonth, today, Timestamp } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar'
+import { today, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 const selectedDate = ref(today()),
   calendar = ref<QCalendarMonth>(),

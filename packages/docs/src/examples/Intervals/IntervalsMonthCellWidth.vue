@@ -1,5 +1,10 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      This example fixes each day column width so the month-style interval grid scrolls
+      horizontally.
+    </p>
+
     <div class="line">
       You can specify the <code class="markdown-token">cell-width</code> property to make your
       calendar overrun it's boundaries.<br />
@@ -35,10 +40,11 @@
 </template>
 
 <script setup lang="ts">
-import { QCalendarDay, today, Timestamp } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarDay } from '@quasar/quasar-ui-qcalendar'
+import { today, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 import { ref } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 const calendar = ref<QCalendarDay>(),
   selectedDate = ref(today())

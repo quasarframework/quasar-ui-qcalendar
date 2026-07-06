@@ -1,5 +1,9 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      Select dates or time ranges in the grid to see how selection state is reflected visually.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div style="display: flex; justify-content: center; align-items: center">
@@ -35,16 +39,11 @@
 </template>
 
 <script setup lang="ts">
-import {
-  QCalendarDay,
-  today,
-  getDayTimeIdentifier,
-  getDateTime,
-  Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+import { QCalendarDay } from '@quasar/quasar-ui-qcalendar'
+import { today, getDayTimeIdentifier, getDateTime, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 import { ref, computed } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 function leftClick(e: MouseEvent) {
   return e.button === 0

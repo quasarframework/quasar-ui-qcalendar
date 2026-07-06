@@ -3,6 +3,7 @@ import path from 'node:path'
 import { fileURLToPath, URL } from 'node:url'
 import fse from 'fs-extra'
 import zlib from 'zlib'
+import { createDefu } from 'defu'
 import { red, yellow, green, blue, magenta, gray, underline } from 'kolorist'
 import { table } from 'table'
 import config from './config'
@@ -11,6 +12,8 @@ const jsRE = /\.c?js$/
 const cssRE = /\.(css|sass|scss)$/
 const tsRE = /\.ts$/
 const jsonRE = /\.json$/
+const verboseBuild =
+  process.env.QCALENDAR_BUILD_VERBOSE === '1' || process.env.BUILD_VERBOSE === '1'
 
 interface TableDataEntry {
   0: string
@@ -32,7 +35,7 @@ export function camelCase(str: string) {
   return str.replace(camelCaseRE, (text) => text.replace(camelCaseInnerRE, '').toUpperCase())
 }
 
-const kebabRE = /([a-zA-Z])([A-Z])/g
+const kebabRE = /([a-zA-Z0-9])([A-Z])/g
 export function kebabCase(str: string) {
   // assumes pascal case "str"
   return str.replace(kebabRE, '$1-$2').toLowerCase()
@@ -53,13 +56,21 @@ export function relativeToRoot(...pathList: string[]): string {
   return path.relative(rootFolder, ...pathList)
 }
 
-export const { version, ProductName } = readJsonFile(new URL('../package.json', import.meta.url))
+const packageJson = readJsonFile(new URL('../package.json', import.meta.url))
+export const packageName = String(packageJson.name)
+export const version = packageJson.version
+export const ProductName = packageJson.productName ?? packageJson.ProductName ?? packageJson.name
 export const banner = config.banner
 
 process.on('exit', (code) => {
-  if (code === 0 && tableData.length > 0) {
+  if (verboseBuild && code === 0 && tableData.length > 0) {
     tableData.sort((a, b) => {
-      return a[0] === b[0] ? (a[1] < b[1] ? -1 : 1) : a[0] < b[0] ? -1 : 1
+      const aType = a[0]
+      const aFile = a[1]
+      const bType = b[0]
+      const bFile = b[1]
+
+      return aType === bType ? (aFile < bFile ? -1 : 1) : aType < bType ? -1 : 1
     })
 
     tableData.unshift([
@@ -143,11 +154,13 @@ export function writeFile(dest: string, code: string, zip = false): Promise<stri
   return new Promise((resolve, reject) => {
     function report(gzippedString?: string, gzippedSize?: string) {
       if (gzippedString) {
-        console.log(
-          `${banner} ${filePath.padEnd(49)} ${fileSize.padStart(8)}${gzippedString || ''}`,
-        )
+        if (verboseBuild) {
+          console.log(
+            `${banner} ${filePath.padEnd(49)} ${fileSize.padStart(8)}${gzippedString || ''}`,
+          )
+        }
 
-        if (toTable) {
+        if (verboseBuild && toTable) {
           tableData.push([tableEntryType, filePath, fileSize, gzippedSize || '-'])
         }
       }
@@ -172,6 +185,10 @@ export function writeFile(dest: string, code: string, zip = false): Promise<stri
 
 export function readFile(file: string) {
   return fse.readFileSync(file, 'utf-8')
+}
+
+export function fileExists(file: string): boolean {
+  return fse.existsSync(file)
 }
 
 export function readJsonFile(file: string | URL): Record<string, unknown> {
@@ -211,6 +228,23 @@ export function clone(data: string) {
   if (str) {
     return JSON.parse(str)
   }
+}
+
+const mergeWithArrays = createDefu((defaults, key, value) => {
+  const defaultsRecord = defaults as Record<PropertyKey, unknown>
+  const currentValue = defaultsRecord[key]
+
+  if (Array.isArray(currentValue) && Array.isArray(value)) {
+    defaultsRecord[key] = [...currentValue, ...value]
+    return true
+  }
+
+  return false
+})
+
+export function mergeObjects(...sources: Record<string, unknown>[]): Record<string, unknown> {
+  const [source = {}, ...defaults] = [...sources].reverse()
+  return mergeWithArrays(source, ...defaults) as Record<string, unknown>
 }
 
 const privateFileRE = /test|private/

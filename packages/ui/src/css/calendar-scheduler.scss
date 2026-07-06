@@ -15,6 +15,7 @@
     flex-direction: row;
 
     &--resources {
+      box-sizing: border-box;
       display: flex;
       flex-direction: row;
     }
@@ -66,6 +67,7 @@
 
     &--day {
       position: relative;
+      box-sizing: border-box;
       flex: 1 1 100%;
       flex-wrap: nowrap;
       overflow: hidden;
@@ -74,6 +76,7 @@
 
       &__event {
         position: relative;
+        box-sizing: border-box;
         flex: 1 1 auto;
         flex-wrap: nowrap;
         overflow: hidden;
@@ -85,6 +88,7 @@
   &__head--date,
   &__column-header--before,
   &__column-header--after {
+    box-sizing: border-box;
     display: flex;
     flex-wrap: nowrap;
     user-select: none;
@@ -143,12 +147,14 @@
 
   &__resource {
     position: relative;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     outline: 0;
 
     &--interval {
       position: relative;
+      box-sizing: border-box;
       display: flex;
       align-items: center;
       text-align: left;
@@ -158,6 +164,7 @@
 
     &--section {
       position: relative;
+      box-sizing: border-box;
       display: flex;
       align-items: center;
       text-align: left;
@@ -175,6 +182,7 @@
 
     &--row {
       position: relative;
+      box-sizing: border-box;
       display: flex;
       flex: 1 0 100%;
     }
@@ -189,6 +197,7 @@
 
   &__day {
     position: relative;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -196,6 +205,7 @@
 
     &--section {
       position: relative;
+      box-sizing: border-box;
       display: flex;
       flex-direction: column;
       flex: 1;
@@ -205,12 +215,14 @@
 
   &__day--resource {
     position: relative;
+    box-sizing: border-box;
     width: 100%;
     outline: 0;
     overflow: hidden;
 
     &__section {
       position: relative;
+      box-sizing: border-box;
       width: 100%;
       outline: 0;
       overflow: hidden;
@@ -249,11 +261,18 @@
     font-weight: var(--calendar-head-font-weight);
 
     &--resources {
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
       border-right: var(--calendar-border);
       color: var(--calendar-color);
       background: var(--calendar-background);
       min-width: var(--calendar-resources-width);
       max-width: var(--calendar-resources-width);
+      padding: 0 4px;
+      text-align: center;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
 
@@ -393,6 +412,29 @@
   }
 }
 
+.q-calendar-scheduler:dir(rtl) {
+  .q-calendar-scheduler__head--resources,
+  .q-calendar-scheduler__resources--column,
+  .q-calendar-scheduler__resource,
+  .q-calendar-scheduler__resource--section {
+    border-right: none;
+    border-left: var(--calendar-border);
+  }
+
+  .q-calendar-scheduler__head--day,
+  .q-calendar-scheduler__head--day__event,
+  .q-calendar-scheduler__day,
+  .q-calendar-scheduler__day--section {
+    &:first-child {
+      border-right: none !important;
+    }
+
+    &:last-child {
+      border-right: var(--calendar-border) !important;
+    }
+  }
+}
+
 .q-dark div,
 .body--dark div,
 .q-calendar--dark {
@@ -481,8 +523,8 @@
       }
 
       &.q-disabled-day {
-        color: var(--calendar-disabled-date-color);
-        background: var(--calendar-disabled-date-background) !important;
+        color: var(--calendar-disabled-date-color-dark);
+        background: var(--calendar-disabled-date-background-dark) !important;
       }
     }
 
@@ -528,6 +570,29 @@
 
     .q-calendar__child--expanded > .q-calendar-scheduler__resource--row {
       border-top: var(--calendar-border-dark) !important;
+    }
+  }
+
+  .q-calendar-scheduler:dir(rtl) {
+    .q-calendar-scheduler__head--resources,
+    .q-calendar-scheduler__resources--column,
+    .q-calendar-scheduler__resource,
+    .q-calendar-scheduler__resource--section {
+      border-right: none;
+      border-left: var(--calendar-border-dark);
+    }
+
+    .q-calendar-scheduler__head--day,
+    .q-calendar-scheduler__head--day__event,
+    .q-calendar-scheduler__day,
+    .q-calendar-scheduler__day--section {
+      &:first-child {
+        border-right: none !important;
+      }
+
+      &:last-child {
+        border-right: var(--calendar-border-dark) !important;
+      }
     }
   }
 }

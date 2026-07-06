@@ -1,5 +1,10 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      This slot example renders custom content inside the day body while keeping the calendar grid
+      underneath.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="row justify-center">
@@ -73,8 +78,8 @@
 </template>
 
 <script setup lang="ts">
+import { QCalendarDay } from '@quasar/quasar-ui-qcalendar'
 import {
-  QCalendarDay,
   addToDate,
   parseTimestamp,
   isBetweenDates,
@@ -83,10 +88,10 @@ import {
   parseDate,
   parseTime,
   Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+} from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 import { ref, reactive, computed } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 // The function below is used to set up our demo data
 const CURRENT_DAY = new Date()
@@ -264,15 +269,13 @@ function getEvents(dt: string) {
     // check if the two events overlap and if so, select
     // left or right side alignment to prevent overlap
     const parsedDate1 = parsed(evts[0].date)
+    const parsedTime1 = evts[0].time ? parseTime(evts[0].time) : false
     const startTime =
-      parsedDate1 && evts[0].time
-        ? addToDate(parsedDate1, { minute: parseTime(evts[0].time) })
-        : null
+      parsedDate1 && parsedTime1 !== false ? addToDate(parsedDate1, { minute: parsedTime1 }) : null
     const parsedDate2 = parsed(evts[1].date)
+    const parsedTime2 = evts[1].time ? parseTime(evts[1].time) : false
     const startTime2 =
-      parsedDate2 && evts[1].time
-        ? addToDate(parsedDate2, { minute: parseTime(evts[1].time) })
-        : null
+      parsedDate2 && parsedTime2 !== false ? addToDate(parsedDate2, { minute: parsedTime2 }) : null
 
     if (startTime && startTime2) {
       const endTime = addToDate(startTime, { minute: evts[0].duration ?? 0 })

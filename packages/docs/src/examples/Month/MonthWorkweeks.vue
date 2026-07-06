@@ -1,5 +1,9 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      This example shows workweek numbering so teams can orient schedules by week number.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="row justify-center">
@@ -7,6 +11,7 @@
         <q-calendar-month
           ref="calendar"
           v-model="selectedDate"
+          class="workweek-calendar"
           show-work-weeks
           :day-min-height="40"
           animated
@@ -18,18 +23,27 @@
           @click-workweek="onClickWorkweek"
           @click-head-workweek="onClickHeadWorkweek"
           @click-head-day="onClickHeadDay"
-        />
+        >
+          <template #head-workweek>
+            <span class="workweek-header">Week</span>
+          </template>
+
+          <template #workweek="{ scope }">
+            <span class="workweek-label">W{{ scope.workweekLabel }}</span>
+          </template>
+        </q-calendar-month>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { QCalendarMonth, today, Timestamp } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar'
+import { today, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 const calendar = ref<QCalendarMonth>(),
   selectedDate = ref(today())
@@ -71,3 +85,14 @@ function onClickHeadWorkweek(data: Timestamp) {
   console.info('onClickHeadWorkweek', data)
 }
 </script>
+
+<style scoped>
+.workweek-calendar {
+  --calendar-work-week-width: 64px;
+}
+
+.workweek-header,
+.workweek-label {
+  font-weight: 700;
+}
+</style>

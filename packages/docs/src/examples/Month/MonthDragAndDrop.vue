@@ -1,5 +1,9 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      Drag an item into the calendar to see how drop targets react and where the event is placed.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="row justify-center">
@@ -43,7 +47,7 @@
           >
             <template #head-day-event="{ scope }">
               <div
-                v-if="hasWeekdayEvents(scope.weekday) && printScope(scope)"
+                v-if="hasWeekdayEvents(scope.weekday)"
                 style="
                   display: flex;
                   justify-content: space-evenly;
@@ -56,7 +60,7 @@
               >
                 <template
                   v-for="(event, index) in getWeekdayEvents(scope.weekday)"
-                  :key="event.weekday + index"
+                  :key="event.id + '-' + index"
                 >
                   <span
                     style="border: 1px solid pink; border-radius: 2px; padding: 2px; margin: 1px"
@@ -69,7 +73,7 @@
 
             <template #day="{ scope }">
               <div
-                v-if="hasEvents(scope.timestamp) && printScope(scope)"
+                v-if="hasEvents(scope.timestamp)"
                 style="
                   display: flex;
                   justify-content: space-evenly;
@@ -97,11 +101,12 @@
 </template>
 
 <script setup lang="ts">
-import { QCalendarMonth, today, Timestamp } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar'
+import { today, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref, reactive, computed } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 interface Event {
   id: number
@@ -164,7 +169,6 @@ interface Scope {
 }
 
 function onDragStart(e: DragEvent, item: Event) {
-  console.info('onDragStart called')
   if (e.dataTransfer) {
     e.dataTransfer.dropEffect = 'copy'
     e.dataTransfer.effectAllowed = 'move'
@@ -173,24 +177,20 @@ function onDragStart(e: DragEvent, item: Event) {
 }
 
 function onDragEnter(e: DragEvent, type: string, { scope }: Scope) {
-  console.info('onDragEnter', type, scope)
   e.preventDefault()
   return true
 }
 
 function onDragOver(e: DragEvent, type: string, { scope }: Scope) {
-  console.info('onDragOver', type, scope)
   e.preventDefault()
   return true
 }
 
 function onDragLeave(_e: DragEvent, type: string, { scope }: Scope) {
-  console.info('onDragLeave', type, scope)
   return false
 }
 
 function onDrop(e: DragEvent, type: string, { scope }: Scope) {
-  console.info('onDrop')
   const itemID = parseInt(e.dataTransfer!.getData('ID'), 10)
   const event = { ...defaultEvent }
   event.id = events.length + 1
@@ -278,12 +278,6 @@ function onClickHeadDay(data: Timestamp) {
 }
 function onClickHeadWorkweek(data: Timestamp) {
   console.info('onClickHeadWorkweek', data)
-}
-
-// this method is used only to print the scope to dev tools
-function printScope({ scope }: Scope): boolean {
-  console.info('scope:', scope)
-  return true
 }
 </script>
 

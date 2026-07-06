@@ -1,5 +1,9 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      Use the previous and next buttons to compare animated transitions between visible ranges.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="q-ma-sm row justify-center q-gutter-sm">
@@ -51,10 +55,11 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { QCalendarAgenda, today } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarAgenda } from '@quasar/quasar-ui-qcalendar'
+import { today } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 const calendar = ref<QCalendarAgenda>(),
   selectedDate = ref(today()),
@@ -77,8 +82,8 @@ const calendar = ref<QCalendarAgenda>(),
     'spin',
     'flip',
   ]),
-  previousTransition = ref('slide-left'),
-  nextTransition = ref('slide-right')
+  previousTransition = ref('slide-right'),
+  nextTransition = ref('slide-left')
 
 const onChange = (date: string) => {
   console.info('Date changed:', date)

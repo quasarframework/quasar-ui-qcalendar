@@ -8,6 +8,15 @@ examples: MiniMode
 import QCalendarMonthApi from '@quasar/quasar-ui-qcalendar/dist/api/QCalendarMonth.json'
 </script>
 
+QCalendarMonth mini-mode is a compact version of the month calendar. It keeps the
+same date-grid model while reducing visual weight so the calendar can live
+inside denser layouts.
+
+Use mini-mode for date pickers, sidebars, filters, dashboards, and responsive
+layouts where a full month calendar would take too much space. It is especially
+useful when the calendar is a navigation or selection aid instead of the primary
+workspace.
+
 <MarkdownApi :api="QCalendarMonthApi" name="QCalendarMonth"/>
 
 ## Mini-Mode Breakpoint
@@ -27,63 +36,86 @@ The calendar will fire the event `@mini-mode` with `true` or `false`. This can b
 
 :::
 
-<MarkdownExample title="Mini-Mode Breakpoint" file="MiniModeBreakpoint" no-github no-edit/>
+<MarkdownExample title="Mini-Mode Breakpoint" file="MiniModeBreakpoint"/>
 
 ## Mini-Mode Dark
 
-<MarkdownExample title="Mini-Mode Dark" file="MiniModeDark" no-github no-edit/>
+Use the dark example to confirm mini-mode follows the same dark styling behavior
+as the full month calendar. Use the Toggle Dark Mode control to compare both
+states without changing the global site theme.
+
+<MarkdownExample title="Mini-Mode Dark" file="MiniModeDark"/>
 
 ## Mini-Mode Date Type
 
-<MarkdownExample title="Mini-Mode Date Type" file="MiniModeDateType" no-github no-edit/>
+Use `date-type` when mini-mode should interpret the model date in a specific way.
+This keeps compact date pickers aligned with the format your app stores.
+
+<MarkdownExample title="Mini-Mode Date Type" file="MiniModeDateType"/>
 
 ## Mini-Mode Disabled Before After
 
 All days before and after the current day have been disabled with the `disabled-before` and `disabled-after` properties.
 
-<MarkdownExample title="Mini-Mode Disabled Before After" file="MiniModeDisabledBeforeAfter" no-github no-edit/>
+<MarkdownExample title="Mini-Mode Disabled Before After" file="MiniModeDisabledBeforeAfter"/>
 
 ## Mini-Mode Disabled Days
 
-The next 4 days after the current day have been disabled with the `disabled-days` property.
+The example anchors its date to a visible month and disables a short run of visible days with the `disabled-days` property.
 
 The first example uses an array of dates to disable each specific date.
 
-The second example uses a range, which is an array within an array of start and end dates.
+The second example uses the object form with `from`, `to`, `color`, and `textColor` to create a reservation-style disabled range.
 
-<MarkdownExample title="Mini-Mode Disabled Days" file="MiniModeDisabledDays" no-github no-edit/>
+<MarkdownExample title="Mini-Mode Disabled Days" file="MiniModeDisabledDays"/>
 
 ## Mini-Mode Disabled Weekdays
 
 The weekends have been disabled with the `disabled-weekdays` property.
 
-<MarkdownExample title="Mini-Mode Disabled Weekdays" file="MiniModeDisabledWeekdays" no-github no-edit/>
+<MarkdownExample title="Mini-Mode Disabled Weekdays" file="MiniModeDisabledWeekdays"/>
 
 ## Mini-Mode First Day Monday
 
-<MarkdownExample title="Mini-Mode First Day Monday" file="MiniModeFirstDayMonday" no-github no-edit/>
+Set `first-day-monday` when the compact calendar should start weeks on Monday.
+This mirrors the full month behavior in a smaller layout.
+
+<MarkdownExample title="Mini-Mode First Day Monday" file="MiniModeFirstDayMonday"/>
 
 ## Mini-Mode Five Day Workweek
 
-<MarkdownExample title="Mini-Mode Five Day Workweek" file="MiniModeFiveDayWorkweek" no-github no-edit/>
+Use `weekdays` to show only workweek days in mini-mode. This is useful when the
+compact calendar sits beside scheduling tools that ignore weekends.
+
+<MarkdownExample title="Mini-Mode Five Day Workweek" file="MiniModeFiveDayWorkweek"/>
 
 ## Mini-Mode Locale
 
-<MarkdownExample title="Mini-Mode Locale" file="MiniModeLocale" no-github no-edit/>
+Locale controls generated labels in the compact calendar. Use it so mini-mode
+matches the language and regional formatting of your app.
+
+<MarkdownExample title="Mini-Mode Locale" file="MiniModeLocale"/>
 
 ## Mini-Mode Min Weekday Label
 
-<MarkdownExample title="Mini-Mode Min Weekday Label" file="MiniModeMinWeekdayLabel" no-github no-edit/>
+Use `min-weekday-label` to control how short the weekday labels become in tight
+layouts. This helps mini-mode stay readable at small widths.
+
+<MarkdownExample title="Mini-Mode Min Weekday Label" file="MiniModeMinWeekdayLabel"/>
 
 ## Mini-Mode Min Weeks
 
 You can use the `min-weeks` property to keep a consistent height for your calendar (no shifting up and down).
 
-<MarkdownExample title="Mini-Mode Min Weeks" file="MiniModeMinWeeks" no-github no-edit/>
+<MarkdownExample title="Mini-Mode Min Weeks" file="MiniModeMinWeeks"/>
 
 ## Mini-Mode Multi Month Selection
 
-<MarkdownExample title="Mini-Mode Multi Month Selection" file="MiniModeMultiMonthSelection" no-github no-edit/>
+Multi-month selection demonstrates how selected dates can remain visible while
+users move across months. This is useful for compact range pickers and
+availability tools.
+
+<MarkdownExample title="Mini-Mode Multi Month Selection" file="MiniModeMultiMonthSelection"/>
 
 ## Mini-Mode Navigation
 
@@ -93,40 +125,73 @@ When the calendar has focus use the <kbd>Home</kbd>, <kbd>End</kbd>, <kbd>&larr;
 
 You can also use <kbd>Tab</kbd> and <kbd>Shift</kbd>+<kbd>Tab</kbd> for regular browser navigation.
 
-<MarkdownExample title="Mini-Mode Navigation" file="MiniModeNavigation" no-github no-edit/>
+<MarkdownExample title="Mini-Mode Navigation" file="MiniModeNavigation"/>
 
 ## Mini-Mode No Active Date
 
-<MarkdownExample title="Mini-Mode No Active Date" file="MiniModeNoActiveDate" no-github no-edit/>
+Use `no-active-date` when mini-mode should not highlight the model date. This is
+useful when the compact calendar is acting as a navigator rather than a selector.
+
+<MarkdownExample title="Mini-Mode No Active Date" file="MiniModeNoActiveDate"/>
 
 ## Mini-Mode No Outside Days
 
-<MarkdownExample title="Mini-Mode No Outside Days" file="MiniModeNoOutsideDays" no-github no-edit/>
+Use `no-outside-days` to hide dates from adjacent months. In mini-mode, this can
+make the compact grid feel less crowded.
+
+<MarkdownExample title="Mini-Mode No Outside Days" file="MiniModeNoOutsideDays"/>
 
 ## Mini-Mode Now
 
 The current date has been set to tomorrow via the `now` property.
 
-<MarkdownExample title="Mini-Mode Now" file="MiniModeNow" no-github no-edit/>
-
-## Mini-Mode QInput
-
-This example uses Quasar's `QInput` component with a mask and regex. The navigation buttons are embedded into the popup.
-
-<MarkdownExample title="Mini-Mode QInput" file="MiniModeQInput" no-github no-edit/>
+<MarkdownExample title="Mini-Mode Now" file="MiniModeNow"/>
 
 ## Mini-Mode Selected Dates
 
-<MarkdownExample title="Mini-Mode Selected Dates" file="MiniModeSelectedDates" no-github no-edit/>
+Use `selected-dates` to mark important days in the compact month grid. This works
+well for small availability, event, or reminder indicators.
+
+<MarkdownExample title="Mini-Mode Selected Dates" file="MiniModeSelectedDates"/>
 
 ## Mini-Mode Selection
 
-<MarkdownExample title="Mini-Mode Selection" file="MiniModeSelection" no-github no-edit/>
+Selection shows how mini-mode can support picking a date or range from a compact
+calendar surface.
+
+<MarkdownExample title="Mini-Mode Selection" file="MiniModeSelection"/>
 
 ## Mini-Mode Theme
 
-<MarkdownExample title="Mini-Mode Theme" file="MiniModeTheme" no-github no-edit/>
+The theme example confirms mini-mode responds to the same calendar CSS variables
+as the full month view.
 
-## Mini-Mode Workweeks
+<MarkdownExample title="Mini-Mode Theme" file="MiniModeTheme"/>
 
-<MarkdownExample title="Mini-Mode Workweeks" file="MiniModeWorkweeks" no-github no-edit/>
+## Recipes
+
+### QInput
+
+This example uses Quasar's `QInput` component with a mask and regex. The navigation buttons are embedded into the popup.
+
+<MarkdownExample title="Mini-Mode QInput" file="MiniModeQInput"/>
+
+### Workweeks
+
+<MarkdownExample title="Mini-Mode Workweeks" file="MiniModeWorkweeks"/>
+
+### Server Data
+
+This recipe keeps the calendar empty until you click **Load visible range**. The
+button simulates waiting for a server response, then fills the visible calendar
+with data returned for the current range.
+
+<MarkdownExample title="Server Data" file="MiniModeServerData"/>
+
+### Calendar Adapters
+
+Mini-mode supports the same native month adapter behavior as the full month
+view. The compact grid can use native month starts, native month ends, and
+native outside-day state while emitting adapter-native dates.
+
+<MarkdownExample title="Calendar Adapters" file="MiniModeCalendarAdapter"/>

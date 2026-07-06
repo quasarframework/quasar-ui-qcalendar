@@ -1,5 +1,9 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      Drag an item into the calendar to see how drop targets react and where the event is placed.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div style="display: flex; justify-content: center; width: 100%">
@@ -112,11 +116,12 @@
 </template>
 
 <script setup lang="ts">
-import { QCalendarScheduler, today, type Timestamp } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarScheduler } from '@quasar/quasar-ui-qcalendar'
+import { today, type Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref, reactive, computed } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 interface Resource {
   id: number
@@ -204,7 +209,6 @@ interface DropScope extends Scope {
 }
 
 function onDragStart(e: DragEvent, item: Item) {
-  console.info('onDragStart called')
   if (e.dataTransfer) {
     e.dataTransfer.dropEffect = 'copy'
     e.dataTransfer.effectAllowed = 'move'
@@ -213,7 +217,6 @@ function onDragStart(e: DragEvent, item: Item) {
 }
 
 function onDragEnter(e: DragEvent, type: string, { scope }: DropScope) {
-  console.info('onDragEnter', type, scope)
   if (type === 'day' || type === 'head-day') {
     e.preventDefault()
     return true
@@ -221,7 +224,6 @@ function onDragEnter(e: DragEvent, type: string, { scope }: DropScope) {
 }
 
 function onDragOver(e: DragEvent, type: string, { scope }: DropScope) {
-  console.info('onDragOver', type, scope)
   if (type === 'day' || type === 'head-day') {
     e.preventDefault()
     return true
@@ -229,14 +231,12 @@ function onDragOver(e: DragEvent, type: string, { scope }: DropScope) {
 }
 
 function onDragLeave(e: DragEvent, type: string, { scope }: DropScope) {
-  console.info('onDragLeave', type, scope)
   if (type === 'day' || type === 'head-day') {
     return false
   }
 }
 
 function onDrop(e: DragEvent, type: string, { scope }: DropScope) {
-  console.info('onDrop', type, scope)
   if (type === 'day' || type === 'head-day') {
     if (!e.dataTransfer) {
       return

@@ -1,5 +1,9 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      This slot example customizes resource headers so resource names can use your own markup.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="row justify-center">
@@ -34,11 +38,12 @@
 </template>
 
 <script setup lang="ts">
-import { QCalendarScheduler, today, Timestamp } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarScheduler } from '@quasar/quasar-ui-qcalendar'
+import { today, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 interface Resource {
   id: string | number

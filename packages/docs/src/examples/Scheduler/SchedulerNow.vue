@@ -1,5 +1,10 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      This example marks a sample current date or time so you can see how the now indicator is
+      rendered.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="row justify-center">
@@ -26,17 +31,12 @@
 </template>
 
 <script setup lang="ts">
-import {
-  QCalendarScheduler,
-  addToDate,
-  parseTimestamp,
-  today,
-  Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+import { QCalendarScheduler } from '@quasar/quasar-ui-qcalendar'
+import { addToDate, parseTimestamp, today, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 interface Resource {
   id: string | number

@@ -1,5 +1,10 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      Dates outside the allowed before/after range are disabled to show unavailable navigation or
+      booking windows.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="row justify-center">
@@ -27,17 +32,12 @@
 </template>
 
 <script setup lang="ts">
-import {
-  QCalendarMonth,
-  addToDate,
-  parseTimestamp,
-  today,
-  Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar'
+import { addToDate, parseTimestamp, today, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref, computed } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 const calendar = ref<QCalendarMonth>(),
   selectedDate = ref(today())

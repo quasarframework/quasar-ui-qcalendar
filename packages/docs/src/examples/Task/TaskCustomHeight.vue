@@ -1,5 +1,10 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      This example gives the calendar a custom height so you can see how the grid adapts inside
+      fixed layouts.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="row justify-center">
@@ -13,7 +18,7 @@
           :task-width="240"
           :cell-width="75"
           task-key="key"
-          :min-weekday-length="2"
+          :min-weekday-label="2"
           :weekday-class="weekdayClass"
           :day-class="dayClass"
           :footer-day-class="footerDayClass"
@@ -93,18 +98,12 @@
 </template>
 
 <script setup lang="ts">
-import {
-  QCalendarTask,
-  today,
-  isBetweenDates,
-  parsed,
-  padNumber,
-  Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+import { QCalendarTask } from '@quasar/quasar-ui-qcalendar'
+import { today, isBetweenDates, parsed, padNumber, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref, computed, onBeforeMount } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 interface Logged {
   date: string

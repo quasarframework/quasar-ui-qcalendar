@@ -1,5 +1,9 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      This slot example adds holiday details inside month day cells.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="q-ma-sm row justify-center q-gutter-sm">
@@ -64,20 +68,20 @@
 </template>
 
 <script setup lang="ts">
+import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar'
 import {
-  QCalendarMonth,
-  /// @ts-expect-error ignore for now
-  PARSE_DATE, // regex for parsing out date
+  PARSE_DATE,
+  // regex for parsing out date
   addToDate,
   parseTimestamp,
   today,
   isBetweenDates,
   Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+} from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref, reactive, computed } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 import Holidays from 'date-holidays'
 
 interface Holiday {

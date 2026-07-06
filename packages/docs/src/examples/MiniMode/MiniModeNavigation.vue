@@ -1,5 +1,10 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      Use the buttons or keyboard navigation to move the active date and watch the visible range
+      update.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div style="display: flex; justify-content: center">
@@ -65,27 +70,26 @@
 </template>
 
 <script setup lang="ts">
-import {
-  QCalendarMonth,
-  addToDate,
-  parseTimestamp,
-  today,
-  Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar'
+import { addToDate, parseTimestamp, today, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref, computed } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 const calendar = ref<QCalendarMonth>(),
   selectedDate = ref(today()),
-  selectedYear = ref(new Date().getFullYear()),
   locale = ref('en-US')
 
 const formattedMonth = computed(() => {
   const date = new Date(selectedDate.value)
   const formatter = monthFormatter()
   return formatter ? formatter.format(date) : ''
+})
+
+const selectedYear = computed(() => {
+  const ts = parseTimestamp(selectedDate.value)
+  return ts ? ts.year : new Date().getFullYear()
 })
 
 function monthFormatter() {
@@ -107,7 +111,6 @@ function addToYear(amount: number) {
     ts = addToDate(ts, { year: amount })
     // re-assign values
     selectedDate.value = ts.date
-    selectedYear.value = ts.year
   }
 }
 

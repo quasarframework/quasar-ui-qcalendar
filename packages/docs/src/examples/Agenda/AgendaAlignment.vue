@@ -1,5 +1,10 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      This example changes label alignment so you can compare how dates and weekdays sit inside each
+      cell.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="q-ma-sm row justify-center q-gutter-sm">
@@ -56,10 +61,11 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { QCalendarAgenda, today } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarAgenda } from '@quasar/quasar-ui-qcalendar'
+import { today } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 const selectedDate = ref(today())
 const dateAlign = ref('center')

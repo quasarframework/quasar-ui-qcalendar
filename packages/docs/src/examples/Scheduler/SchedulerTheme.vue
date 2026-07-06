@@ -1,5 +1,10 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      This example applies custom theme colors so you can see which CSS variables affect the
+      calendar.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="q-ma-sm row justify-center q-gutter-sm">
@@ -40,11 +45,12 @@
 </template>
 
 <script setup lang="ts">
-import { QCalendarScheduler, today, Timestamp } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarScheduler } from '@quasar/quasar-ui-qcalendar'
+import { today, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref, reactive, computed } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 type Theme = Record<string, string>
 
@@ -458,7 +464,6 @@ const themesList = computed(() => {
       value: { ...themes[theme] },
     })
   })
-  console.info('themesList', list)
   return list
 })
 

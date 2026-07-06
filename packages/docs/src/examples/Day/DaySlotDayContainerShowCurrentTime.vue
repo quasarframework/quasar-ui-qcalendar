@@ -1,5 +1,9 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      This slot example adds a current-time indicator inside the day container.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="row justify-center">
@@ -37,17 +41,18 @@
 </template>
 
 <script setup lang="ts">
-import { QCalendarDay, today, parseDate, Timestamp } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarDay } from '@quasar/quasar-ui-qcalendar'
+import { today, parseDate, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 const calendar = ref<QCalendarDay>()
 
 const selectedDate = ref(today()),
   toggled = ref(false),
   currentDate = ref<string>(),
-  currentTime = ref<string>(),
+  currentTime = ref('00:00'),
   timeStartPos = ref(0)
 let intervalId: NodeJS.Timeout | undefined
 
@@ -115,7 +120,7 @@ function adjustCurrentTime() {
   const now = parseDate(new Date())
   if (now) {
     currentDate.value = now.date
-    currentTime.value = now.time
+    currentTime.value = now.time ?? '00:00'
     if (calendar.value) {
       timeStartPos.value = calendar.value.timeStartPos(currentTime.value, false)
     }

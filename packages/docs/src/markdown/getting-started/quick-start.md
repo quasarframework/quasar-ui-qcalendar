@@ -3,6 +3,7 @@ title: Quick Start
 desc: General use and common properties
 keys: developing
 related:
+  - /developing/calendar-adapters
   - /developing/qcalendar-day
   - /developing/qcalendar-month
   - /developing/qcalendar-month-mini-mode
@@ -12,60 +13,65 @@ related:
   - /developing/qcalendar-task
 ---
 
-This section will highlight a number common properties and generalities amongst the various calendars. Other, more specific properties, will be discussed in their respective calendar sections.
-
-## Timestamp
-
-**QCalendar** comes with a built-in `Timestamp` library that handles all of the needs and wants of each calendar type. In fact, you can use it too! Before including another date/time library, and possibly adding bloat to your app, verify the **Timestamp** library can handle what you need to do. If not, suggestions and PRs are welcomed.
-
-The two most important things to know what's happening behind the scenes are Timestamp's format, which is `YYYY-MM-DD`, and the actual `Timestamp` object. This object is used in many slots and events.
-
-```ts
-export interface Timestamp {
-  date: string // YYYY-MM-DD
-  time: string // HH:MM (optional)
-  year: number // YYYY
-  month: number // MM (Jan = 1, etc)
-  day: number // day of the month
-  weekday: number // week day  (0=Sunday...6=Saturday)
-  hour: number // 24-hr format
-  minute: number // mm
-  doy: number // day of year
-  workweek: number // workweek number
-  hasDay: boolean // if this timestamp is supposed to have a date
-  hasTime: boolean // if this timestamp is supposed to have a time
-  past: boolean // if timestamp is in the past (based on `now` property)
-  current: boolean // if timestamp is current date (based on `now` property)
-  future: boolean // if timestamp is in the future (based on `now` property)
-  disabled: boolean // if timestamp is disabled
-}
-```
-
-If you need your own Timestamps, to be used with other exported functions, then the exported function `parseTimestamp` will fill in most of these fields, give a date in format of `YYYY-MM-DD HH:mm` with optional time. However, that can be expensive time-wise, so if you use this and need the minimal, then use the exported `parsed` function. If you have a JavaScript `Date` you can use the exported `parseDate` function to generate your Timestamp object for you.
+This section highlights common properties and general behavior shared by the calendar views. View-specific properties are discussed in their respective calendar sections and on the API pages.
 
 ## Date format
 
 | Property    | Type   | Example    |
 | ----------- | ------ | ---------- |
-| model-value | String | YYYY-DD-MM |
+| model-value | String | YYYY-MM-DD |
 
-`model-value` is how the date is set in QCalendar and is the User selected date when there is an interactive calendar. This is the current date and can be used to move the calendar to a previous or next view (ie: day, week, month, etc). Typically, you set this with something like `v-model="selectedDate"`. If your `selectedDate` contains a `null`, then the current date (today's date) will be used.
+`model-value` is how the date is set in QCalendar and is the user-selected date when there is an interactive calendar. This is the active date and can be used to move the calendar to a previous or next view (ie: day, week, month, etc). Typically, you set this with something like `v-model="selectedDate"`. If your `selectedDate` contains a `null`, then the current date (today's date) will be used.
+
+QCalendar model values are Gregorian `YYYY-MM-DD` strings by default. When you pass
+`calendar-system`, date-bearing values for that component use the adapter-native `YYYY-MM-DD`
+calendar instead.
 
 ## Now
 
 | Property | Type   | Example    |
 | -------- | ------ | ---------- |
-| now      | String | YYYY-DD-MM |
+| now      | String | YYYY-MM-DD |
 
 If you do not set the `now` property, it will be set to the current date (today's date). This property represents **today**, but it doesn't have to be today.
 
 ## Localization
 
-Internally, QCalendar uses the browser's `Intl.DateTimeFormat` for all localization. Therefore, QCalendar can only display the localization properly if it is supported by the User's browser. If for some reason, it is not supported, then the fallback is to use American English (`en-US`). If you wanted to display French Canadian, you would use `fr-CA`, or Brazilian Portuguese `pt-BR`.
+Internally, QCalendar uses the browser's `Intl.DateTimeFormat` for all localization. Therefore, QCalendar can only display the localization properly if it is supported by the user's browser. If for some reason, it is not supported, then the fallback is to use American English (`en-US`). If you wanted to display French Canadian, you would use `fr-CA`, or Brazilian Portuguese `pt-BR`.
 
 | Property | Type   | Example |
 | -------- | ------ | ------- |
 | locale   | String | en-US   |
+| dir      | String | rtl     |
+
+`locale` changes language and formatting. It does not change the calendar math by itself.
+
+`dir` is the standard HTML direction attribute. QCalendar forwards it to the rendered view. Calendar adapters can provide default locale and direction values, and explicit `locale` or `dir` props override those defaults when your app needs a different presentation. If a slot mixes English or app data into an RTL calendar, isolate that content with `dir="ltr"` inside the slot.
+
+## Calendar systems
+
+Use `calendar-system` when a view should use native calendar dates. This is an opt-in adapter object
+from the Timestamp packages such as `@timestamp-js/calendar-islamic`,
+`@timestamp-js/calendar-saka`, or `@timestamp-js/calendar-persian`.
+
+| Property        | Type   | Example              |
+| --------------- | ------ | -------------------- |
+| calendar-system | Object | islamicCivilCalendar |
+
+```vue
+<script setup>
+import { ref } from 'vue'
+import { islamicCivilCalendar } from '@timestamp-js/calendar-islamic'
+
+const selectedDate = ref('1445-09-15')
+</script>
+
+<template>
+  <q-calendar-month v-model="selectedDate" :calendar-system="islamicCivilCalendar" />
+</template>
+```
+
+In this example, `selectedDate` is Hijri because the Islamic civil adapter is active. QCalendar also uses the adapter's default locale, direction, and visible weekday order unless you pass `locale`, `dir`, or `weekdays` yourself. Date-bearing slots and mouse-event scopes receive adapter-native timestamps plus `scope.calendarIdentity` for Gregorian interop metadata such as `gregorianDate` and `epochDay`. See [Calendar Adapters](/developing/calendar-adapters) for week ranges, native month boundaries, RTL guidance, and adapter examples.
 
 ## Dark and bordered
 
@@ -78,7 +84,7 @@ If you want a calendar to display dark mode, then set the `dark` property. If yo
 
 ## Weekdays
 
-`weekdays` is a property that allows you to adjust the order of the days of the week. It is an array of numbers from 0 (Sunday) to 6 (Saturday). The default is `[0,1,2,3,4,5,6]`. If you wanted to have a 5 day work week, you would remove the Sunday and Saturday representations like this: `[1,2,3,4,5]`. If you wanted a calendar where Monday was the first day of the week, you would move Sunday to the end, like this: `[1,2,3,4,5,6,0]`. Don't get too funky with this, as you may get unexpected results and handling.
+`weekdays` is a property that allows you to adjust the order of the days of the week. It is an array of numbers from 0 (Sunday) to 6 (Saturday). Gregorian calendars default to `[0,1,2,3,4,5,6]`; calendar adapters can provide their own default visible week order. If you wanted to have a 5 day work week, you would remove the Sunday and Saturday representations like this: `[1,2,3,4,5]`. If you wanted a calendar where Monday was the first day of the week, you would move Sunday to the end, like this: `[1,2,3,4,5,6,0]`. An explicit `weekdays` prop always overrides the adapter default.
 
 | Property | Type  | Example         |
 | -------- | ----- | --------------- |
@@ -128,11 +134,11 @@ The active date is changed when the user clicks on a date or navigates using pre
 
 ### Disabled days
 
-This property is an Array of dates in the format `YYYY-MM-DD`.
+This property is an Array of dates in the format `YYYY-MM-DD`. It also accepts ranges and object entries with optional color metadata for reservation-style disabled days.
 
-| Property      | Type  | Example                        |
-| ------------- | ----- | ------------------------------ |
-| disabled-days | Array | "['2019-04-01', '2019-04-02']" |
+| Property      | Type  | Example                                                                                  |
+| ------------- | ----- | ---------------------------------------------------------------------------------------- |
+| disabled-days | Array | "['2019-04-01', ['2019-04-03', '2019-04-05'], { date: '2019-04-08', color: '#ef5350' }]" |
 
 ### Disabled before
 
@@ -162,9 +168,13 @@ The `disabled-weekdays` property uses the same input as the `weekdays` property.
 
 There may be some edge-cases where the header is not desirable. There is an example that shows how to build your own navigation with header information.
 
-| Property  | Type    | Example |
-| --------- | ------- | ------- |
-| no-header | Boolean |         |
+Use `no-header` to remove the full generated header. Use `no-default-header-text` or `no-default-header-btn` when you only want to replace part of the generated header with slots.
+
+| Property               | Type    | Example |
+| ---------------------- | ------- | ------- |
+| no-header              | Boolean |         |
+| no-default-header-text | Boolean |         |
+| no-default-header-btn  | Boolean |         |
 
 ## No scroll
 
@@ -173,6 +183,14 @@ All calendars try to take up 100% width and height. Either use styles to constra
 | Property  | Type    | Example |
 | --------- | ------- | ------- |
 | no-scroll | Boolean |         |
+
+## Accessibility
+
+QCalendar generates ARIA attributes for supported calendar cells. Leave this enabled unless you are replacing the generated structure with your own accessibility layer through slots.
+
+| Property | Type    | Example |
+| -------- | ------- | ------- |
+| no-aria  | Boolean |         |
 
 ## Labels
 
@@ -186,15 +204,15 @@ All labels in the calendars are formatted with the browsers internal `Intl.DateT
 
 ### Minimum label Length
 
-As explained above, the calendars can format weekday labels smaller than the `Intl.DateTimeFormat` short format. The edge-case for this is to create a very small calendar picker. In this case, you could set the `min-weekday-length` to 1, in which case only the first character of the label will be used. This may not be desirable for some languages, as the weekdays may all have the same first character. In this case, set it to 2 or 3, whatever best suits the locale you are aiming for.
+As explained above, the calendars can format weekday labels smaller than the `Intl.DateTimeFormat` short format. The edge-case for this is to create a very small calendar picker. In this case, you could set the `min-weekday-label` to 1, in which case only the first character of the label will be used. This may not be desirable for some languages, as the weekdays may all have the same first character. In this case, set it to 2 or 3, whatever best suits the locale you are aiming for.
 
-| Property           | Type             | Example |
-| ------------------ | ---------------- | ------- |
-| min-weekday-length | Number \| String |         |
+| Property          | Type             | Example |
+| ----------------- | ---------------- | ------- |
+| min-weekday-label | Number \| String | 2       |
 
 ### Label breakpoints
 
-The `weekday-breakpoints` property is an array of two numbers. The parent div that contains the label knows it's width. The array contains the values where you want label values to go from long format to short format automatically. The second value is when you want the values to start using extra short format based on the `min-weekday-length` property.
+The `weekday-breakpoints` property is an array of two numbers. The parent div that contains the label knows it's width. The array contains the values where you want label values to go from long format to short format automatically. The second value is when you want the values to start using extra short format based on the `min-weekday-label` property.
 
 | Property            | Type  | Example |
 | ------------------- | ----- | ------- |
@@ -215,7 +233,7 @@ Then you can use the `transition-prev` and `transition-next` properties to chang
 | transition-prev | String | slide-right |
 | transition-next | String | slide-left  |
 
-See the [QCalendar Transitions](/developing/qcalendar-transitions) for more information.
+See the [QCalendar Transitions](/getting-started/transitions) for more information.
 
 ## Hoverable and focusable
 
@@ -223,17 +241,20 @@ The `hoverable` property allows each cell in a calendar to display a hovering ef
 
 The `focusable` property allows various cells within the calendar to have focus. This allows end-users to tab or shift-tab with navigation.
 
+The `use-navigation` property turns on keyboard movement between supported cells. Use it with `focusable` when users should be able to move through dates, intervals, resources, or tasks with the keyboard.
+
 The `focus-type` property works with the `focusable` property to determine what can have focus. This is an array of values. The values are: `day`, `date`, `weekday`, `interval`, and `resource`.
 
 ::: warning
 Not all `focus-type` values can be used with all calendars. For instance, `interval` won't work with QCalendarMonth and `day` won't work for interval-based calendars.
 :::
 
-| Property   | Type    | Example           |
-| ---------- | ------- | ----------------- |
-| hoverable  | Boolean |                   |
-| focusable  | Boolean |                   |
-| focus-type | Array   | ['day','weekday'] |
+| Property       | Type    | Example           |
+| -------------- | ------- | ----------------- |
+| hoverable      | Boolean |                   |
+| focusable      | Boolean |                   |
+| focus-type     | Array   | ['day','weekday'] |
+| use-navigation | Boolean |                   |
 
 ## Selection
 
@@ -241,17 +262,17 @@ Not all `focus-type` values can be used with all calendars. For instance, `inter
 
 The `selected-dates` property is an array of dates in the form of `YYYY-MM-DD`.
 
-| Property       | Type  | Example |
-| -------------- | ----- | ------- |
-| selected-dates | Array |         |
+| Property       | Type  | Example                        |
+| -------------- | ----- | ------------------------------ |
+| selected-dates | Array | `['2026-06-01', '2026-06-15']` |
 
 ### Selected start and end dates
 
 The property `selected-start-end-dates` takes an array of arrays. Each internal array contains a start and end date that is a selection. This allows you to have multiple selections if you wish.
 
-| Property                 | Type  | Example |
-| ------------------------ | ----- | ------- |
-| selected-start-end-dates | Array |         |
+| Property                 | Type  | Example                          |
+| ------------------------ | ----- | -------------------------------- |
+| selected-start-end-dates | Array | `[['2026-06-01', '2026-06-07']]` |
 
 ## Drag and drop
 
@@ -326,5 +347,18 @@ If the scope has a timestamp within it and that's all you need, then you can des
 ```html
 <q-calendar-day #day="{ scope: { timestamp } }" />
 ```
+
+When `calendar-system` is set, date-bearing slot and mouse-event scopes also include
+`calendarTimestamp`, `calendarIdentity`, and `calendarSystem`. The `timestamp` and
+`calendarTimestamp` values are native to the active adapter. Use
+`calendarIdentity.gregorianDate` when an external system still expects a Gregorian date, and
+`calendarIdentity.epochDay` when you need a neutral comparison key.
+
+```html
+<q-calendar-day #day="{ scope: { timestamp, calendarTimestamp, calendarIdentity } }" />
+```
+
+Range-style events such as `change` expose adapter-aware range fields like `calendarStart`,
+`calendarEnd`, `calendarDays`, and `calendarSystem`.
 
 The pattern here is to **always** be recognizable to the developer and to know what to expect.

@@ -1,5 +1,9 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      This example turns off sticky resource labels so rows scroll together with the schedule body.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="row justify-center">
@@ -28,11 +32,12 @@
 </template>
 
 <script setup lang="ts">
-import { QCalendarResource, today, Timestamp } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarResource } from '@quasar/quasar-ui-qcalendar'
+import { today, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 interface Resource {
   id: string

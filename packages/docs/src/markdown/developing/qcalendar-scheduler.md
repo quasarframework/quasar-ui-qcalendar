@@ -8,13 +8,36 @@ examples: Scheduler
 import QCalendarSchedulerApi from '@quasar/quasar-ui-qcalendar/dist/api/QCalendarScheduler.json'
 </script>
 
+QCalendarScheduler groups a day-oriented calendar by resource while keeping date
+columns visible. It is designed for schedules where each resource owns work
+across one or more days.
+
+Use this calendar when users need a resource-first planning board with day cells
+instead of a detailed interval grid. Scheduler views work well for teams,
+locations, lanes, assets, or other resources where the main task is assigning and
+reviewing work by day.
+
 <MarkdownApi :api="QCalendarSchedulerApi" name="QCalendarScheduler"/>
+
+## Date Type
+
+Use `date-type` when scheduler dates need to match the format used by your data
+source. This keeps the rendered schedule anchored to the intended date.
+
+<MarkdownExample title="Date Type" file="SchedulerDateType"/>
+
+## Dark
+
+Use the Toggle Dark Mode control to compare the scheduler calendar in light and
+dark styling without changing the global site theme.
+
+<MarkdownExample title="Dark" file="SchedulerDark"/>
 
 ## Alignment
 
 You can use the properties `date-header`, `date-align` and `weekday-align` to manipulate how the header area looks.
 
-<MarkdownExample title="Alignment" file="SchedulerAlignment" no-github no-edit/>
+<MarkdownExample title="Alignment" file="SchedulerAlignment"/>
 
 ## Cell Width
 
@@ -22,13 +45,116 @@ You can specify the `cell-width` property to make your calendar overrun it's hor
 
 The calendar goes into a special `sticky` mode when this happens so you can scroll vertically and/or horizontally.
 
-<MarkdownExample title="Cell Width" file="SchedulerCellWidth" no-github no-edit/>
+<MarkdownExample title="Cell Width" file="SchedulerCellWidth"/>
 
-## Children
+## Disabled Before After
 
-<MarkdownExample title="Children" file="SchedulerChildren" no-github no-edit/>
+All days before and after the current day have been disabled with the properties `disabled-before` and `disabled-after`.
 
-## Custom Height
+<MarkdownExample title="Disabled Before After" file="SchedulerDisabledBeforeAfter"/>
+
+## Disabled Days
+
+The example anchors its date to a visible week and disables a short run of visible days with the `disabled-days` property.
+
+The first example uses an array of dates to disable each specific date.
+
+The second example uses the object form with `from`, `to`, `color`, and `textColor` to create a reservation-style disabled range.
+
+<MarkdownExample title="Disabled Days" file="SchedulerDisabledDays"/>
+
+## Disabled Weekdays
+
+The weekends have been disabled with the `disabled-weekdays` property.
+
+<MarkdownExample title="Disabled Weekdays" file="SchedulerDisabledWeekdays"/>
+
+## First Day Monday
+
+Set `first-day-monday` when scheduler weeks should begin on Monday. This aligns
+the resource columns with regional or business calendar expectations.
+
+<MarkdownExample title="First Day Monday" file="SchedulerFirstDayMonday"/>
+
+## Five Day Workweek
+
+Use `weekdays` to show a resource schedule for working days only. This removes
+weekend columns when they are not part of the workflow.
+
+<MarkdownExample title="Five Day Workweek" file="SchedulerFiveDayWorkweek"/>
+
+## Focusable Hoverable
+
+::: tip
+If the property `focus-type` contains `weekday`, you can also use the <kbd>Enter</kbd> or <kbd>Space</kbd> keys for date selection.
+:::
+
+<MarkdownExample title="Focusable Hoverable" file="SchedulerFocusableHoverable"/>
+
+## Locale
+
+Locale controls generated date and weekday labels. Use it when scheduler headers
+should match the language and regional formatting of your app.
+
+<MarkdownExample title="Locale" file="SchedulerLocale"/>
+
+## No Active Date
+
+Use `no-active-date` when the model date should not be highlighted in the
+scheduler. This is helpful for read-only resource overviews.
+
+<MarkdownExample title="No Active Date" file="SchedulerNoActiveDate"/>
+
+## Now
+
+The current date has been set to tomorrow via the `now` property.
+
+<MarkdownExample title="Now" file="SchedulerNow"/>
+
+## Theme
+
+The theme example shows how scheduler CSS variables can be customized to create a
+branded resource schedule without changing component behavior.
+
+<MarkdownExample title="Theme" file="SchedulerTheme"/>
+
+## Width Height
+
+There is no dedicated `resource-width` prop on `QCalendarScheduler`.
+
+To control the left resources pane width, set the css variable `--calendar-resources-width` on the calendar, for example through `:style` or a custom class.
+
+The example below uses that css variable together with `resource-height`, `resource-min-height`, and `cell-width`.
+
+<MarkdownExample title="Width Height" file="SchedulerWidthHeight"/>
+
+## Slots
+
+Slots let you customize resource headers, resource labels, and day cells while
+the scheduler continues to manage the resource/date grid.
+
+### Head Resources
+
+The scheduler resource header defaults to `Resources`. Use this slot to localize
+the label or replace it with custom header content.
+
+<MarkdownExample title="Slot - Head Resources" file="SchedulerSlotHeadResources"/>
+
+### Resource Days
+
+<MarkdownExample title="Slot - Resource Days" file="SchedulerSlotResourceDays"/>
+
+### Resource Label
+
+<MarkdownExample title="Slot - Resource Label" file="SchedulerSlotResourceLabel"/>
+
+## Recipes
+
+### Children
+
+<MarkdownExample title="Children" file="SchedulerChildren"/>
+
+### Custom Height
 
 You can have each resource row have it's own specific height by including a `height` key (as a number of pixels, without the **px**) in each resource object. For example:
 
@@ -65,41 +191,9 @@ You can have each resource row have it's own specific height by including a `hei
 If the `resource-min-height` is more than your custom height, then you won't see the custom height work. Either set `resource-min-height` to a lower value or to 0 (for auto).
 :::
 
-<MarkdownExample title="Custom Height" file="SchedulerCustomHeight" no-github no-edit/>
+<MarkdownExample title="Custom Height" file="SchedulerCustomHeight"/>
 
-## Dark
-
-This will only make sense if your browser is currently in light mode.
-
-<MarkdownExample title="Dark" file="SchedulerDark" no-github no-edit/>
-
-## Date Type
-
-<MarkdownExample title="Date Type" file="SchedulerDateType" no-github no-edit/>
-
-## Disabled Before After
-
-All days before and after the current day have been disabled with the properties `disabled-before` and `disabled-after`.
-
-<MarkdownExample title="Disabled Before After" file="SchedulerDisabledBeforeAfter" no-github no-edit/>
-
-## Disabled Days
-
-The next 4 days after the current day have been disabled with the `disabled-days` property.
-
-The first example uses an array of dates to disable each specific date.
-
-The second example uses a range, which is an array within an array of start and end dates.
-
-<MarkdownExample title="Disabled Days" file="SchedulerDisabledDays" no-github no-edit/>
-
-## Disabled Weekdays
-
-The weekends have been disabled with the `disabled-weekdays` property.
-
-<MarkdownExample title="Disabled Weekdays" file="SchedulerDisabledWeekdays" no-github no-edit/>
-
-## Drag And Drop
+### Drag And Drop
 
 Drag any items in the list to a calendar day or the top header.
 
@@ -109,54 +203,20 @@ Don't use css `border` to outline a cell. It won't look right because the calend
 Instead use `box-shadow` to create an inset like this `box-shadow: inset 0 0 0 1px rgba(0,140,200,.8)`.
 :::
 
-<MarkdownExample title="Drag And Drop" file="SchedulerDragAndDrop" no-github no-edit/>
+<MarkdownExample title="Drag And Drop" file="SchedulerDragAndDrop"/>
 
-## First Day Monday
+### Server Data
 
-<MarkdownExample title="First Day Monday" file="SchedulerFirstDayMonday" no-github no-edit/>
+This recipe keeps the calendar empty until you click **Load visible range**. The
+button simulates waiting for a server response, then fills the visible calendar
+with data returned for the current range.
 
-## Five Day Workweek
+<MarkdownExample title="Server Data" file="SchedulerServerData"/>
 
-<MarkdownExample title="Five Day Workweek" file="SchedulerFiveDayWorkweek" no-github no-edit/>
+### Calendar Adapters
 
-## Focusable Hoverable
+Scheduler views combine resources with visible days. Use the adapter-aware slot
+scope fields to render native calendar labels or match native-keyed resource
+data.
 
-::: tip
-If the property `focus-type` contains `weekday`, you can also use the <kbd>Enter</kbd> or <kbd>Space</kbd> keys for date selection.
-:::
-
-<MarkdownExample title="Focusable Hoverable" file="SchedulerFocusableHoverable" no-github no-edit/>
-
-## Locale
-
-<MarkdownExample title="Locale" file="SchedulerLocale" no-github no-edit/>
-
-## No Active Date
-
-<MarkdownExample title="No Active Date" file="SchedulerNoActiveDate" no-github no-edit/>
-
-## Now
-
-The current date has been set to tomorrow via the `now` property.
-
-<MarkdownExample title="Now" file="SchedulerNow" no-github no-edit/>
-
-## Slot - Head Resources
-
-<MarkdownExample title="Slot - Head Resources" file="SchedulerSlotHeadResources" no-github no-edit/>
-
-## Slot - Resource Days
-
-<MarkdownExample title="Slot - Resource Days" file="SchedulerSlotResourceDays" no-github no-edit/>
-
-## Slot - Resource Label
-
-<MarkdownExample title="Slot - Resource Label" file="SchedulerSlotResourceLabel" no-github no-edit/>
-
-## Theme
-
-<MarkdownExample title="Theme" file="SchedulerTheme" no-github no-edit/>
-
-## Width Height
-
-<MarkdownExample title="Width Height" file="SchedulerWidthHeight" no-github no-edit/>
+<MarkdownExample title="Calendar Adapters" file="SchedulerCalendarAdapter"/>

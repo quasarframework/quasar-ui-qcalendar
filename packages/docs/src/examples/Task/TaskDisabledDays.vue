@@ -1,5 +1,9 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      Specific dates or ranges are disabled so unavailable days stand out from normal calendar days.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="row justify-center">
@@ -15,7 +19,7 @@
           view="month"
           :disabled-days="disabledDays"
           :task-width="240"
-          :min-weekday-length="2"
+          :min-weekday-label="2"
           :weekday-class="weekdayClass"
           :day-class="dayClass"
           :footer-day-class="footerDayClass"
@@ -46,11 +50,13 @@
           <template #task="{ scope }">
             <div class="header ellipsis">
               <div class="issue ellipsis">
-                <span v-if="scope.task.icon === 'done'" class="done"><Done /></span>
-                <span v-else-if="scope.task.icon === 'pending'" class="pending"><Pending /></span>
-                <span v-else-if="scope.task.icon === 'blocking'" class="blocking"
-                  ><Blocking
-                /></span>
+                <q-icon
+                  v-if="scope.task.icon === 'done'"
+                  class="done"
+                  name="check_circle_outline"
+                />
+                <q-icon v-else-if="scope.task.icon === 'pending'" class="pending" name="pending" />
+                <q-icon v-else-if="scope.task.icon === 'blocking'" class="blocking" name="block" />
                 {{ scope.task.title }}
               </div>
               <div class="key">{{ scope.task.key }}</div>
@@ -62,11 +68,13 @@
           <template #subtask="{ scope }">
             <div class="header ellipsis">
               <div class="issue ellipsis">
-                <span v-if="scope.task.icon === 'done'" class="done"><Done /></span>
-                <span v-else-if="scope.task.icon === 'pending'" class="pending"><Pending /></span>
-                <span v-else-if="scope.task.icon === 'blocking'" class="blocking"
-                  ><Blocking
-                /></span>
+                <q-icon
+                  v-if="scope.task.icon === 'done'"
+                  class="done"
+                  name="check_circle_outline"
+                />
+                <q-icon v-else-if="scope.task.icon === 'pending'" class="pending" name="pending" />
+                <q-icon v-else-if="scope.task.icon === 'blocking'" class="blocking" name="block" />
                 {{ scope.task.title }}
               </div>
               <div class="key">{{ scope.task.key }}</div>
@@ -102,7 +110,7 @@
           view="month"
           :disabled-days="disabledDaysRange"
           :task-width="240"
-          :min-weekday-length="2"
+          :min-weekday-label="2"
           :weekday-class="weekdayClass"
           :day-class="dayClass"
           :footer-day-class="footerDayClass"
@@ -133,11 +141,13 @@
           <template #task="{ scope }">
             <div class="header ellipsis">
               <div class="issue ellipsis">
-                <span v-if="scope.task.icon === 'done'" class="done"><Done /></span>
-                <span v-else-if="scope.task.icon === 'pending'" class="pending"><Pending /></span>
-                <span v-else-if="scope.task.icon === 'blocking'" class="blocking"
-                  ><Blocking
-                /></span>
+                <q-icon
+                  v-if="scope.task.icon === 'done'"
+                  class="done"
+                  name="check_circle_outline"
+                />
+                <q-icon v-else-if="scope.task.icon === 'pending'" class="pending" name="pending" />
+                <q-icon v-else-if="scope.task.icon === 'blocking'" class="blocking" name="block" />
                 {{ scope.task.title }}
               </div>
               <div class="key">{{ scope.task.key }}</div>
@@ -149,11 +159,13 @@
           <template #subtask="{ scope }">
             <div class="header ellipsis">
               <div class="issue ellipsis">
-                <span v-if="scope.task.icon === 'done'" class="done"><Done /></span>
-                <span v-else-if="scope.task.icon === 'pending'" class="pending"><Pending /></span>
-                <span v-else-if="scope.task.icon === 'blocking'" class="blocking"
-                  ><Blocking
-                /></span>
+                <q-icon
+                  v-if="scope.task.icon === 'done'"
+                  class="done"
+                  name="check_circle_outline"
+                />
+                <q-icon v-else-if="scope.task.icon === 'pending'" class="pending" name="pending" />
+                <q-icon v-else-if="scope.task.icon === 'blocking'" class="blocking" name="block" />
                 {{ scope.task.title }}
               </div>
               <div class="key">{{ scope.task.key }}</div>
@@ -187,24 +199,19 @@
 </template>
 
 <script setup lang="ts">
+import { QCalendarTask } from '@quasar/quasar-ui-qcalendar'
 import {
-  QCalendarTask,
-  today,
   isBetweenDates,
   parsed,
   padNumber,
   parseTimestamp,
   addToDate,
   Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+} from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref, computed, onBeforeMount } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
-
-import Done from '@carbon/icons-vue/es/checkmark--outline/16'
-import Pending from '@carbon/icons-vue/es/pending/16'
-import Blocking from '@carbon/icons-vue/es/undefined/16'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 interface Logged {
   date: string
@@ -223,9 +230,9 @@ interface FooterTask {
 }
 
 const calendar = ref<QCalendarTask>(),
-  selectedDate = ref(today()),
-  startDate = ref(today()),
-  endDate = ref(today()),
+  selectedDate = ref('2021-03-15'),
+  startDate = ref('2021-03-15'),
+  endDate = ref('2021-03-15'),
   tasks = ref<Task[]>([
     {
       title: 'Task 1',
@@ -332,15 +339,22 @@ const calendar = ref<QCalendarTask>(),
   footerTasks = ref<FooterTask[]>([{ title: 'TOTALS' }])
 
 const disabledDays = computed(() => {
-  const ts = parseTimestamp(today())
-  // make next 4 days, after today, disabled
-  return Array.from({ length: 4 }, (_, i) => addToDate(ts!, { day: i + 1 }).date)
+  const ts = parseTimestamp(selectedDate.value)
+  // make 4 visible days disabled, starting with the selected date
+  return Array.from({ length: 4 }, (_, i) => addToDate(ts!, { day: i }).date)
 })
 
 const disabledDaysRange = computed(() => {
-  // create the range for example 2
-  // Note: this is an array, within an array
-  return [[disabledDays.value[0], disabledDays.value[disabledDays.value.length - 1]]]
+  // create a reservation-style range for example 2
+  return [
+    {
+      from: disabledDays.value[0],
+      to: disabledDays.value[disabledDays.value.length - 1],
+      color: '#ef5350',
+      textColor: '#ffffff',
+      label: 'Reserved',
+    },
+  ]
 })
 
 /**

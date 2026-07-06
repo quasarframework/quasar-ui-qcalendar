@@ -1,5 +1,9 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      This slot example adds a current-time indicator inside the day container.
+    </p>
+
     <div class="line">
       The example below uses the <code class="markdown-token">day-container</code> slot to show a
       current time indicator absolutely positioned.
@@ -42,10 +46,11 @@
 </template>
 
 <script setup lang="ts">
-import { QCalendarDay, today, parseDate, Timestamp } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarDay } from '@quasar/quasar-ui-qcalendar'
+import { today, parseDate, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 const calendar = ref<QCalendarDay>(),
   selectedDate = ref(today()),
@@ -119,8 +124,8 @@ function adjustCurrentTime() {
   const now = parseDate(new Date())
   if (now) {
     currentDate.value = now.date
-    currentTime.value = now.time
-    if (calendar.value) {
+    currentTime.value = now.time ?? null
+    if (calendar.value && currentTime.value) {
       timeStartPos.value = calendar.value.timeStartPos(currentTime.value, false)
     }
   }

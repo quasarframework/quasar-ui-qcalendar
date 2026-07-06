@@ -13,19 +13,29 @@ import {
   watch,
   withDirectives,
   CSSProperties,
-  SetupContext,
+  type SlotsType,
   VNode,
 } from 'vue'
 
 // Utility
-import { getDayIdentifier, parsed, parseTimestamp, today, type Timestamp } from '../utils/Timestamp'
+import {
+  gregorianCalendar,
+  parseCalendarTimestamp,
+  today,
+  type Timestamp,
+} from '@timestamp-js/core'
 
-import { convertToUnit, minCharWidth } from '../utils/helpers'
+import { convertToUnit, getResponsiveWeekdayLabel } from '../utils/helpers'
+import {
+  getCalendarDateIdentifier,
+  getCalendarScopeData,
+  parseCalendarTimestampSafe,
+} from '../utils/calendarSystem'
 
 import useMouse, { getRawMouseEvents } from '../composables/useMouse'
 
 import useCalendar from '../composables/useCalendar'
-import useCommon, { useCommonProps } from '../composables/useCommon'
+import useCommon, { isFocusableType, useCommonProps } from '../composables/useCommon'
 import useMonth, { useMonthProps } from '../composables/useMonth'
 // import { useMaxDaysProps } from '../composables/useMaxDays'
 import useTimes, { useTimesProps } from '../composables/useTimes'
@@ -38,6 +48,15 @@ import useCellWidth, { useCellWidthProps } from '../composables/useCellWidth'
 import useCheckChange, { useCheckChangeEmits } from '../composables/useCheckChange'
 import useEvents from '../composables/useEvents'
 import useKeyboard, { useNavigationProps } from '../composables/useKeyboard'
+import { getDragEventHandlers } from '../composables/useDragAndDrop'
+import type {
+  MonthDayLabelSlotScope,
+  MonthDaySlotScope,
+  MonthHeadDaySlotScope,
+  MonthHeadWorkweekSlotScope,
+  MonthWorkweekSlotScope,
+  QCalendarMonthSlots,
+} from '../slots'
 
 // Directives
 import ResizeObserver from '../directives/ResizeObserver'
@@ -47,12 +66,22 @@ interface Size {
   height: number
 }
 
+export function shouldAdjustWeekEventHeight(
+  wrapperHeight: number,
+  weekEventHeight: number,
+  margin: number,
+): boolean {
+  return weekEventHeight + margin > wrapperHeight
+}
+
 const { renderButton } = useButton()
 
 export default defineComponent({
   name: 'QCalendarMonth',
 
   directives: { ResizeObserver },
+
+  slots: Object as SlotsType<QCalendarMonthSlots>,
 
   props: {
     ...useCommonProps,
@@ -63,28 +92,87 @@ export default defineComponent({
   },
 
   emits: [
+    /**
+     * Emitted when the model value changes.
+     *
+     * @param value New model value.
+     * @param-type value String
+     * @param-tsType value string
+     */
     'update:model-value',
     ...useCheckChangeEmits,
     ...useMoveEmits,
+    /**
+     * Emitted when the month view enters or exits mini mode.
+     *
+     * @applicable month
+     * @param value Whether mini mode is active.
+     * @param-type value Boolean
+     * @param-tsType value boolean
+     */
     'mini-mode',
+    /**
+     * Interact with a month date button.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope MonthDayLabelSlotScope
+     * @param scope Month date button scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-date'),
+    /**
+     * Interact with a month day cell.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope MonthDaySlotScope
+     * @param scope Month day cell scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-day'),
+    /**
+     * Interact with the month workweek header.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope MonthHeadWorkweekSlotScope
+     * @param scope Month workweek header scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-head-workweek'),
+    /**
+     * Interact with a month header day.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope MonthHeadDaySlotScope
+     * @param scope Month header day scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-head-day'),
+    /**
+     * Interact with a month workweek row.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope MonthWorkweekSlotScope
+     * @param scope Month workweek row scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-workweek'),
   ],
 
-  setup(props, { slots, emit, expose }: SetupContext) {
+  setup(props, { slots, emit, expose }) {
+    const initialDate = props.modelValue || today(props.calendarSystem)
     const scrollArea = ref(null),
       pane = ref(null),
       headerColumnRef = ref(null),
-      focusRef = ref<string>(props.modelValue || today()),
-      focusValue = ref<Timestamp>(parsed(props.modelValue || today()) as Timestamp),
+      focusRef = ref<string>(initialDate),
+      focusValue = ref<Timestamp>(
+        parseCalendarTimestamp(initialDate, props.calendarSystem) as Timestamp,
+      ),
       datesRef = ref<Record<string, HTMLElement>>({}),
+      keyboardActive = ref(false),
       weekEventRef = ref<(Element | null)[]>([]),
       weekRef = ref<(Element | null)[]>([]),
       direction = ref<'next' | 'prev'>('next'),
-      startDate = ref(props.modelValue || today()),
+      startDate = ref(initialDate),
       endDate = ref('0000-00-00'),
       maxDaysRendered = ref(0), // always 0
       emittedValue = ref(props.modelValue),
@@ -113,10 +201,10 @@ export default defineComponent({
       // console.info('isSticky', isSticky.value)
     })
 
-    const { times, setCurrent, updateCurrent } = useTimes(props)
+    const { times, setCurrent, updateCurrent: updateCurrentTimes } = useTimes(props)
 
     // update dates
-    updateCurrent()
+    updateCurrentTimes()
     setCurrent()
 
     const {
@@ -128,11 +216,16 @@ export default defineComponent({
       ariaDateFormatter,
       // methods
       dayStyleDefault,
+      getDisabledStyle,
       getRelativeClasses,
     } = useCommon(props, { startDate, endDate, times })
 
     const parsedValue = computed(() => {
-      return parseTimestamp(props.modelValue, times.now) || parsedStart.value || times.today
+      return (
+        parseCalendarTimestampSafe(props.modelValue, props.calendarSystem, parsedStart.value) ||
+        parsedStart.value ||
+        times.today
+      )
     })
 
     focusValue.value = parsedValue.value
@@ -149,7 +242,6 @@ export default defineComponent({
       return style
     })
 
-    /// @ts-expect-error fix later
     const { renderValues } = useRenderValues(props, {
       parsedView,
       times,
@@ -159,6 +251,7 @@ export default defineComponent({
     const { rootRef, __initCalendar, __renderCalendar } = useCalendar(props, __renderMonth, {
       scrollArea,
       pane,
+      keyboardActive,
     })
 
     const {
@@ -171,7 +264,6 @@ export default defineComponent({
       // methods
       isOutside,
       monthFormatter,
-      /// @ts-expect-error fix later
     } = useMonth(props, emit, {
       times,
       parsedStart,
@@ -180,7 +272,7 @@ export default defineComponent({
       headerColumnRef,
     })
 
-    const { move } = useMove(props, {
+    const { move: moveCalendar } = useMove(props, {
       parsedView,
       parsedValue,
       direction,
@@ -192,13 +284,18 @@ export default defineComponent({
 
     const { getDefaultMouseEventHandlers } = useMouse(emit, emitListeners)
 
-    const { checkChange } = useCheckChange(emit, { days, lastStart, lastEnd })
+    const { checkChange } = useCheckChange(emit, {
+      days,
+      lastStart,
+      lastEnd,
+      calendarSystem: () => props.calendarSystem,
+    })
 
     const { isKeyCode } = useEvents()
 
-    /// @ts-expect-error fix later
-    const { tryFocus } = useKeyboard(props, {
+    useKeyboard(props, {
       rootRef,
+      keyboardActive,
       focusRef,
       focusValue,
       datesRef,
@@ -242,18 +339,10 @@ export default defineComponent({
       return 100 / parsedColumnCount.value + '%'
     })
 
-    const isDayFocusable = computed(() => {
-      return (
-        props.focusable === true && props.focusType.includes('day') && isMiniMode.value !== true
-      )
-    })
+    const isDayFocusable = computed(() => isFocusableType(props, 'day', isMiniMode.value !== true))
 
     const isDateFocusable = computed(() => {
-      return (
-        props.focusable === true &&
-        props.focusType.includes('date') &&
-        isDayFocusable.value !== true
-      )
+      return isFocusableType(props, 'date', isDayFocusable.value !== true)
     })
 
     watch([days], checkChange, { deep: true, immediate: true })
@@ -263,9 +352,11 @@ export default defineComponent({
       (val, oldVal) => {
         if (emittedValue.value !== val) {
           if (props.animated === true) {
-            const v1 = getDayIdentifier(parsed(val) as Timestamp)
-            const v2 = getDayIdentifier(parsed(oldVal) as Timestamp)
-            direction.value = v1 >= v2 ? 'next' : 'prev'
+            const v1 = getCalendarDateIdentifier(val, props.calendarSystem)
+            const v2 = getCalendarDateIdentifier(oldVal, props.calendarSystem)
+            if (v1 !== null && v2 !== null) {
+              direction.value = v1 >= v2 ? 'next' : 'prev'
+            }
           }
           emittedValue.value = val
         }
@@ -276,9 +367,11 @@ export default defineComponent({
     watch(emittedValue, (val, oldVal) => {
       if (emittedValue.value !== props.modelValue) {
         if (props.animated === true) {
-          const v1 = getDayIdentifier(parsed(val) as Timestamp)
-          const v2 = getDayIdentifier(parsed(oldVal) as Timestamp)
-          direction.value = v1 >= v2 ? 'next' : 'prev'
+          const v1 = getCalendarDateIdentifier(val, props.calendarSystem)
+          const v2 = getCalendarDateIdentifier(oldVal, props.calendarSystem)
+          if (v1 !== null && v2 !== null) {
+            direction.value = v1 >= v2 ? 'next' : 'prev'
+          }
         }
         emit('update:model-value', val)
       }
@@ -286,20 +379,15 @@ export default defineComponent({
 
     watch(focusRef, (val) => {
       if (val) {
-        focusValue.value = parseTimestamp(val) as Timestamp
+        const timestamp = parseCalendarTimestampSafe(val, props.calendarSystem)
+        if (timestamp === null) {
+          return
+        }
+
+        focusValue.value = timestamp
         if (emittedValue.value !== val) {
           emittedValue.value = val
         }
-      }
-    })
-
-    watch(focusValue, () => {
-      if (datesRef.value[focusRef.value]) {
-        datesRef.value[focusRef.value].focus()
-      } else {
-        // if focusRef is not in the list of current dates of dateRef,
-        // then assume month is changing
-        tryFocus()
       }
     })
 
@@ -319,16 +407,48 @@ export default defineComponent({
 
     // public functions
 
-    function moveToToday(): void {
-      emittedValue.value = today()
+    /**
+     * Moves the month view by a relative amount.
+     *
+     * @param amount Number of view units to move. Negative values move backward.
+     * @param-example amount -1
+     */
+    function move(amount: number = 1): void {
+      moveCalendar(amount)
     }
 
-    function next(amount = 1): void {
+    /**
+     * Moves the month view to today.
+     */
+    function moveToToday(): void {
+      move(0)
+    }
+
+    /**
+     * Moves the month view forward.
+     *
+     * @param amount Number of view units to move forward.
+     * @param-example amount 1
+     */
+    function next(amount: number = 1): void {
       move(amount)
     }
 
-    function prev(amount = 1): void {
+    /**
+     * Moves the month view backward.
+     *
+     * @param amount Number of view units to move backward.
+     * @param-example amount 1
+     */
+    function prev(amount: number = 1): void {
       move(-amount)
+    }
+
+    /**
+     * Refreshes the month view's current date/time state.
+     */
+    function updateCurrent(): void {
+      updateCurrentTimes()
     }
 
     function __onResize({ width, height }: Size): void {
@@ -341,9 +461,9 @@ export default defineComponent({
     }
 
     function isCurrentWeek(week: Timestamp[]): { timestamp: Timestamp | false } {
-      for (let i = 0; i < week.length; ++i) {
-        if (week[i].current === true) {
-          return { timestamp: week[i] }
+      for (const timestamp of week) {
+        if (timestamp.current === true) {
+          return { timestamp }
         }
       }
       return { timestamp: false }
@@ -364,7 +484,13 @@ export default defineComponent({
           // this sucks to have to do it this way
           const styles = window.getComputedStyle(weekEvent as Element)
           const margin = parseFloat(styles.marginTop) + parseFloat(styles.marginBottom)
-          if ((wrapper as Element).clientHeight + margin > (wrapper as Element).clientHeight) {
+          if (
+            shouldAdjustWeekEventHeight(
+              (wrapper as Element).clientHeight,
+              (weekEvent as Element).clientHeight,
+              margin,
+            )
+          ) {
             ;(wrapper as HTMLElement).style.height =
               (weekEvent as Element).clientHeight + margin + 'px'
           }
@@ -419,7 +545,7 @@ export default defineComponent({
 
     function __renderWorkWeekHead(): VNode {
       const slot = slots['head-workweek']
-      const scope = {
+      const scope: MonthHeadWorkweekSlotScope = {
         start: parsedStart.value,
         end: parsedEnd.value,
         miniMode: isMiniMode.value,
@@ -445,13 +571,14 @@ export default defineComponent({
       const headDaySlot = slots['head-day']
 
       const filteredDays = days.value.filter((day2) => day2.weekday === day.weekday)
-      const weekday = filteredDays[0].weekday
+      const weekday = day.weekday
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
-      const scope = {
+      const scope: MonthHeadDaySlotScope = {
         activeDate,
         weekday,
         timestamp: day,
+        ...getCalendarScopeData(day, props.calendarSystem),
         days: filteredDays,
         index,
         miniMode: isMiniMode.value,
@@ -463,7 +590,7 @@ export default defineComponent({
 
       const weekdayClass =
         typeof props.weekdayClass === 'function' ? props.weekdayClass({ scope }) : {}
-      const isFocusable = props.focusable === true && props.focusType.includes('weekday')
+      const isFocusable = isFocusableType(props, 'weekday')
 
       const width = computedWidth.value
       const styler = props.weekdayStyle || dayStyleDefault
@@ -486,34 +613,13 @@ export default defineComponent({
           'q-calendar__focusable': isFocusable === true,
         },
         style,
-        onDragenter: (e: DragEvent) => {
-          if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
-            props.dragEnterFunc(e, 'head-day', { scope }) === true
-              ? (dragOverHeadDayRef.value = Number(day.weekday))
-              : (dragOverHeadDayRef.value = -1)
-          }
-        },
-        onDragover: (e: DragEvent) => {
-          if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
-            props.dragOverFunc(e, 'head-day', { scope }) === true
-              ? (dragOverHeadDayRef.value = Number(day.weekday))
-              : (dragOverHeadDayRef.value = -1)
-          }
-        },
-        onDragleave: (e: DragEvent) => {
-          if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
-            props.dragLeaveFunc(e, 'head-day', { scope }) === true
-              ? (dragOverHeadDayRef.value = Number(day.weekday))
-              : (dragOverHeadDayRef.value = -1)
-          }
-        },
-        onDrop: (e: DragEvent) => {
-          if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
-            props.dropFunc(e, 'head-day', { scope }) === true
-              ? (dragOverHeadDayRef.value = Number(day.weekday))
-              : (dragOverHeadDayRef.value = -1)
-          }
-        },
+        ...getDragEventHandlers(props, {
+          targetRef: dragOverHeadDayRef,
+          value: Number(day.weekday),
+          resetValue: -1,
+          type: 'head-day',
+          scope,
+        }),
         onFocus: () => {
           if (isFocusable === true) {
             focusRef.value = day.date
@@ -541,11 +647,12 @@ export default defineComponent({
       const headDayEventSlot = slots['head-day-event']
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
       const filteredDays = days.value.filter((day2) => day2.weekday === day.weekday)
-      const weekday = filteredDays[0].weekday
+      const weekday = day.weekday
 
       const scope = {
         weekday,
         timestamp: day,
+        ...getCalendarScopeData(day, props.calendarSystem),
         days: filteredDays,
         index,
         miniMode: isMiniMode.value,
@@ -578,26 +685,27 @@ export default defineComponent({
     }
 
     function __renderHeadWeekdayLabel(day: Timestamp, shortWeekdayLabel: boolean): VNode {
-      const weekdayLabel = weekdayFormatter.value(
+      const weekdayLabel = getResponsiveWeekdayLabel({
         day,
-        shortWeekdayLabel ||
-          (props.weekdayBreakpoints[0] > 0 && parsedCellWidth.value <= props.weekdayBreakpoints[0]),
-      )
+        formatter: weekdayFormatter.value,
+        shortWeekdayLabel,
+        cellWidth: parsedCellWidth.value,
+        breakpoints: props.weekdayBreakpoints,
+        minWeekdayLabel: props.minWeekdayLabel,
+        forceMinWidth: isMiniMode.value === true && props.shortWeekdayLabel === true,
+      })
       return h(
         'span',
         {
           class: 'q-calendar__ellipsis',
         },
-        (isMiniMode.value === true && props.shortWeekdayLabel === true) ||
-          (props.weekdayBreakpoints[1] > 0 && parsedCellWidth.value <= props.weekdayBreakpoints[1])
-          ? minCharWidth(weekdayLabel, Number(props.minWeekdayLabel))
-          : weekdayLabel,
+        weekdayLabel,
       )
     }
 
     function __renderWeeks(): VNode[] {
       const weekDays = props.weekdays.length
-      const weeks = []
+      const weeks: VNode[] = []
       for (let i = 0; i < days.value.length; i += weekDays) {
         weeks.push(__renderWeek(days.value.slice(i, i + weekDays), i / weekDays))
       }
@@ -614,6 +722,7 @@ export default defineComponent({
       // this applies height properly, even if workweeks are displaying
       const dayHeight = parseInt(String(props.dayHeight), 10)
       const dayMinHeight = parseInt(String(props.dayMinHeight), 10)
+      const firstDay = week[0]!
 
       style.height = dayHeight > 0 && isMiniMode.value !== true ? convertToUnit(dayHeight) : 'auto'
       if (dayMinHeight > 0 && isMiniMode.value !== true) {
@@ -624,7 +733,7 @@ export default defineComponent({
       return h(
         'div',
         {
-          key: week[0].date,
+          key: firstDay.date,
           ref: (el) => {
             weekRef.value[weekNum] = el as Element | null
           },
@@ -670,10 +779,10 @@ export default defineComponent({
     function __renderWorkWeekGutter(week: Timestamp[]): VNode {
       const slot = slots.workweek
       // adjust day to account for Sunday/Monday start of week calendars
-      const day = week.length > 2 ? week[2] : week[0]
+      const day = (week.length > 2 ? week[2] : week[0])!
       const { timestamp } = isCurrentWeek(week)
       const workweekLabel = Number(day.workweek).toLocaleString(props.locale)
-      const scope = { workweekLabel, week, miniMode: isMiniMode.value }
+      const scope: MonthWorkweekSlotScope = { workweekLabel, week, miniMode: isMiniMode.value }
 
       return h(
         'div',
@@ -701,9 +810,10 @@ export default defineComponent({
         props.showMonthLabel === true &&
         days.value.find((d) => d.month === day.month)?.day === day.day
 
-      const scope = {
+      const scope: MonthDaySlotScope = {
         outside,
         timestamp: day,
+        ...getCalendarScopeData(day, props.calendarSystem),
         miniMode: isMiniMode.value,
         activeDate,
         hasMonth,
@@ -713,7 +823,11 @@ export default defineComponent({
           : false,
       }
 
-      const style: CSSProperties = Object.assign({ ...computedStyles.value }, styler({ scope }))
+      const style: CSSProperties = Object.assign(
+        { ...computedStyles.value },
+        styler({ scope }),
+        getDisabledStyle(day),
+      )
       const dayClass = typeof props.dayClass === 'function' ? props.dayClass({ scope }) : {}
 
       const data: Record<string, any> = {
@@ -767,36 +881,13 @@ export default defineComponent({
         }),
       }
 
-      const dragAndDrop = {
-        onDragenter: (e: DragEvent): void => {
-          if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
-            props.dragEnterFunc(e, 'day', { scope }) === true
-              ? (dragOverDayRef.value = day.date)
-              : (dragOverDayRef.value = '')
-          }
-        },
-        onDragover: (e: DragEvent): void => {
-          if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
-            props.dragOverFunc(e, 'day', { scope }) === true
-              ? (dragOverDayRef.value = day.date)
-              : (dragOverDayRef.value = '')
-          }
-        },
-        onDragleave: (e: DragEvent): void => {
-          if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
-            props.dragLeaveFunc(e, 'day', { scope }) === true
-              ? (dragOverDayRef.value = day.date)
-              : (dragOverDayRef.value = '')
-          }
-        },
-        onDrop: (e: DragEvent): void => {
-          if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
-            props.dropFunc(e, 'day', { scope }) === true
-              ? (dragOverDayRef.value = day.date)
-              : (dragOverDayRef.value = '')
-          }
-        },
-      }
+      const dragAndDrop = getDragEventHandlers(props, {
+        targetRef: dragOverDayRef,
+        value: day.date,
+        resetValue: '',
+        type: 'day',
+        scope,
+      })
 
       if (outside !== true) {
         Object.assign(data, dragAndDrop)
@@ -855,8 +946,6 @@ export default defineComponent({
         monthLabel = undefined
       }
 
-      // TODO: if miniMode just return children?
-
       const data: Record<string, any> = {
         class: {
           'q-calendar-month__day--label__wrapper': true,
@@ -887,9 +976,10 @@ export default defineComponent({
 
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
-      const scope = {
+      const scope: MonthDayLabelSlotScope = {
         dayLabel,
         timestamp: day,
+        ...getCalendarScopeData(day, props.calendarSystem),
         outside,
         activeDate,
         selectedDate,
@@ -978,7 +1068,10 @@ export default defineComponent({
       }
 
       const slot = slots['day-of-year']
-      const scope = { timestamp: day }
+      const scope = {
+        timestamp: day,
+        ...getCalendarScopeData(day, props.calendarSystem),
+      }
 
       return h(
         'span',
@@ -1000,7 +1093,12 @@ export default defineComponent({
 
       const slot = slots['month-label']
       const monthLabel = monthFormatter.value(day, props.shortMonthLabel || size.width < 500)
-      const scope = { monthLabel, timestamp: day, miniMode: isMiniMode.value }
+      const scope = {
+        monthLabel,
+        timestamp: day,
+        ...getCalendarScopeData(day, props.calendarSystem),
+        miniMode: isMiniMode.value,
+      }
 
       const style: CSSProperties = {}
       if (isMiniMode.value !== true && parsedMonthLabelSize.value !== undefined) {
@@ -1021,6 +1119,7 @@ export default defineComponent({
       const { start, end } = renderValues.value
       startDate.value = start.date
       endDate.value = end.date
+      const calendarKey = props.calendarSystem?.id ?? gregorianCalendar.id
 
       const hasWidth = size.width > 0
 
@@ -1032,7 +1131,7 @@ export default defineComponent({
               'q-calendar-mini': isMiniMode.value === true,
               'q-calendar-month': true,
             },
-            key: startDate.value,
+            key: `${calendarKey}:${startDate.value}`,
           },
           [
             hasWidth === true && props.noHeader !== true && __renderHead(),
@@ -1063,8 +1162,14 @@ export default defineComponent({
     expose({
       prev,
       next,
+      /**
+       * Moves the month view by a relative amount.
+       */
       move,
       moveToToday,
+      /**
+       * Refreshes the month view's current date/time state.
+       */
       updateCurrent,
     })
     // Object.assign(vm.proxy, {

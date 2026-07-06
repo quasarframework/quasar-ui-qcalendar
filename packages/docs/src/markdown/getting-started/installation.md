@@ -15,9 +15,25 @@ The components are:
 5. QCalendarResource
 6. QCalendarScheduler
 7. QCalendarTask
-8. Timestamp (dedicated code for creating calendars)
 
 These are also many ways to add the calendar components to your project. You can install as a Quasar CLI app-extension. You might want to write your own boot file (for targeting one or more calendar components). You might want to use pre-compiled sources in dist or directly from the src folder (src folder access means your project needs to transpile QCalendar sources). Or, you may want to use a UMD variant.
+
+## Recommended Path
+
+::: steps
+
+## Choose the calendar components your app needs
+
+Install the full App Extension when you want every QCalendar component registered. Install the UI package directly when you only want selected calendar types such as `QCalendarDay` or `QCalendarMonth`.
+
+## Pick compiled or source entrypoints
+
+Use compiled entrypoints for normal app builds. Import from `src/` only when you need to customize or transpile the raw source files yourself.
+
+## Register styles with the same entrypoint
+
+Pair each component import with its matching compiled CSS or source SCSS file so the calendar layout, scrolling, and dark-mode styles are available.
+:::
 
 ## Quasar CLI
 
@@ -27,11 +43,21 @@ These are also many ways to add the calendar components to your project. You can
 By using the app extension, you will get **all** QCalendar components installed and registered within your application.
 :::
 
+::: tip
+QCalendar v5's app extension targets Quasar CLI Vite projects using `@quasar/app-vite` `>=3.0.0`. For non-Quasar Vue/Vite apps, install the UI package directly and skip the app extension.
+:::
+
 #### Install
 
 To add as an App Extension to your Quasar application, run the following (in your Quasar app folder):
 
 ```
+$ quasar ext add @quasar/qcalendar
+```
+
+QCalendar v5 is currently published as a release candidate on the `latest` dist tag:
+
+```bash
 $ quasar ext add @quasar/qcalendar
 ```
 
@@ -54,23 +80,27 @@ This is the preferred way if you are targeting one or more calendar components.
 :::
 
 ::: warning
-If you plan on importing from `src/` directly, please read the [Migration Guide](/other/migration-guide) on additional steps that may be needed.
+If you plan on importing from `src/` directly, please read the [Upgrade Guide](/other/upgrade-guide) on additional steps that may be needed.
 :::
 
 ```tabs
 <<| bash pnpm |>>
 pnpm add @quasar/quasar-ui-qcalendar
+<<| bash bun |>>
+bun add @quasar/quasar-ui-qcalendar
 <<| bash yarn |>>
 yarn add @quasar/quasar-ui-qcalendar
 <<| bash npm |>>
 npm install @quasar/quasar-ui-qcalendar
 ```
 
+These commands install the current QCalendar v5 release candidate until v5 is released as stable.
+
 Now, you can access the compiled portions or access the sources directly. Choose which you want to use.
 
 ```tabs
 <<| ts Compiled |>>
-import { defineBoot } from '#q-app/wrappers'
+import { defineBoot } from '#q-app'
 import VuePlugin from '@quasar/quasar-ui-qcalendar/QCalendarDay'
 import '@quasar/quasar-ui-qcalendar/QCalendarDay.css'
 
@@ -78,7 +108,7 @@ export default defineBoot(({ app }) => {
   app.use(VuePlugin)
 })
 <<| ts Source (direct) |>>
-import { defineBoot } from '#q-app/wrappers'
+import { defineBoot } from '#q-app'
 import VuePlugin from '@quasar/quasar-ui-qcalendar/src/QCalendarDay' // notice the `src` folder
 import '@quasar/quasar-ui-qcalendar/src/css/calendar-day.scss' // notice the path to raw scss file
 
@@ -97,21 +127,7 @@ css: [
 ],
 ```
 
-If using `app-webpack` you will need to make sure your project will transpile the code.
-
-In `quasar.config` update the following:
-
-```js
-// Note: using ~ tells Quasar the file resides in node_modules
-build: {
-  webpackTranspile: true,
-  webpackTranspileDependencies: [
-    /quasar-ui-qcalendar[\\/]src/
-  ]
-}
-```
-
-There are no extra steps to be taken with `app-vite`, it will automatically transpile your dependencies.
+There are no extra steps to be taken with Quasar CLI Vite 3, as it will automatically transpile your dependencies.
 
 #### Minified
 
@@ -120,7 +136,7 @@ Additionally, all compiled CSS has a minified version, so if you want `QCalendar
 ### Or target as a component import
 
 ::: tip
-There are several variants for each calendar component, including common, es (modern), and UMD as well as minified versions of each of those. The same goes for the css, including min and rtl.
+Each calendar component ships modern ESM entrypoints for bundlers and UMD bundles for browser-global usage. Compiled CSS is available in regular, minified, RTL, and RTL-minified variants.
 :::
 
 ```tabs
@@ -153,7 +169,7 @@ There are several variants for each calendar component, including common, es (mo
 
 ```tabs
 <<| js Vue project from src |>>
-import Plugin from '@quasar/quasar-ui-qcalendar/src/QCalendarDay.js'
+import Plugin from '@quasar/quasar-ui-qcalendar/src/QCalendarDay'
 import '@quasar/quasar-ui-qcalendar/src/css/calendar-day.scss'
 import App from './App.vue'
 
@@ -201,9 +217,6 @@ Add the following tag(s) after the Quasar ones:
 <body>
   <!-- at end of body, AFTER Quasar script(s): -->
   <script src="https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar/dist/QCalendarMonth.umd.min.js"></script>
-
-  <!-- If you need Timestamp functions: -->
-  <script src="https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar/dist/Timestamp.umd.min.js"></script>
 </body>
 ```
 
@@ -230,9 +243,6 @@ If you need the RTL variant of the CSS, then go for the following (instead of th
 <body>
   <!-- at end of body: -->
   <script src="https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar/dist/QCalendarMonth.umd.min.js"></script>
-
-  <!-- If you need Timestamp functions: -->
-  <script src="https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar/dist/Timestamp.umd.min.js"></script>
 </body>
 ```
 
@@ -259,28 +269,10 @@ app.component('QCalendarDay', QCalendarDay.QCalendarDay)
 app.mount('#app')
 ```
 
-## Testing on Codepen
+## Testing on CodePen
 
-[QCalendar v4 Collection](https://codepen.io/collection/qOBOEG)
-
-or
-
-[QCalendarDay UMD Example on Codepen](https://codepen.io/Hawkeye64/pen/ZEemBjm)
-
-[QCalendarDay (week) UMD Example on Codepen](https://codepen.io/Hawkeye64/pen/YzZRpdW)
-
-[QCalendarMonth UMD Example on Codepen](https://codepen.io/Hawkeye64/pen/dyvpYwW)
-
-[QCalendarMonth (minimode) UMD Example on Codepen](https://codepen.io/Hawkeye64/pen/VwpVmNj)
-
-[QCalendarAgenda UMD Example on Codepen](https://codepen.io/Hawkeye64/pen/MWpzbRZ)
-
-[QCalendarResource UMD Example on Codepen](https://codepen.io/Hawkeye64/pen/xxqQgbG)
-
-[QCalendarScheduler UMD Example on Codepen](https://codepen.io/Hawkeye64/pen/oNZQBLz)
-
-[QCalendarTask UMD Example on Codepen](https://codepen.io/Hawkeye64/pen/PoWLpoqL)
+Most documentation examples include a CodePen action in the example toolbar. Use it to open the current example in CodePen with the matching QCalendar version and dependencies.
 
 # Project source
 
-Can be found [here](https://github.com/quasarframework/quasar-ui-qcalendar/tree).
+Can be found [here](https://github.com/quasarframework/quasar-ui-qcalendar/tree/v5-beta).

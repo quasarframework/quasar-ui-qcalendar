@@ -1,5 +1,10 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      This slot example positions header events absolutely so overlapping header content can be
+      controlled.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="row justify-center">
@@ -44,17 +49,11 @@
 </template>
 
 <script setup lang="ts">
-import {
-  QCalendarDay,
-  addToDate,
-  parseTimestamp,
-  getStartOfWeek,
-  today,
-  Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+import { QCalendarDay } from '@quasar/quasar-ui-qcalendar'
+import { addToDate, parseTimestamp, getStartOfWeek, today, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 import { ref, reactive, computed, onBeforeMount } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 interface Event {
   id: number
@@ -109,7 +108,7 @@ onBeforeMount(() => {
   // set up dates for example events
   const todayTimestamp = parseTimestamp(today())
   if (todayTimestamp) {
-    let start = getStartOfWeek(todayTimestamp, weekdays.value)
+    let start = getStartOfWeek(todayTimestamp, weekdays.value, todayTimestamp)
     events[0]!.date = start.date
     start = addToDate(start, { day: 4 })
     events[1]!.date = start.date
@@ -125,7 +124,8 @@ function badgeClasses(event: Event) {
 
 function badgeStyles(day: Timestamp, event: Event) {
   const s: Record<string, any> = {}
-  s.left = day.weekday === 0 ? 0 : day.weekday * parsedCellWidth.value + '%'
+  const weekday = day.weekday ?? 0
+  s.left = weekday === 0 ? 0 : weekday * parsedCellWidth.value + '%'
   s.top = 0
   s.bottom = 0
   s.width = event.days * parsedCellWidth.value + '%'

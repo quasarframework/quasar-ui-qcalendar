@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ComponentOptions } from 'vue'
+import type { ComponentPublicInstance, ComponentOptions, Plugin } from 'vue'
 
 export interface QCalendar extends ComponentPublicInstance {
   /**
@@ -1993,9 +1993,6 @@ import {
   MonthFormatter,
 } from './types'
 
-declare module 'vue' {
-  interface ComponentCustomProperties {}
-}
 export * from './types'
 export as namespace QCalendar
 export as namespace QCalendarAgenda
@@ -2011,3 +2008,21 @@ export const QCalendarMonth: ComponentOptions
 export const QCalendarResource: ComponentOptions
 export const QCalendarScheduler: ComponentOptions
 export const QCalendarTask: ComponentOptions
+
+declare module 'vue' {
+  interface ComponentCustomProperties {}
+
+  interface GlobalComponents {
+    QCalendar: typeof QCalendar
+    QCalendarAgenda: typeof QCalendarAgenda
+    QCalendarDay: typeof QCalendarDay
+    QCalendarMonth: typeof QCalendarMonth
+    QCalendarResource: typeof QCalendarResource
+    QCalendarScheduler: typeof QCalendarScheduler
+    QCalendarTask: typeof QCalendarTask
+  }
+}
+
+declare const VuePlugin: Plugin
+
+export default VuePlugin

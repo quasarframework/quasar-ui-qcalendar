@@ -1,5 +1,11 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      Click any 15-minute interval to toggle it in the
+      <code>selected-dates</code> array. Selected intervals are highlighted, and clicking the same
+      interval again clears it.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="row justify-center">
@@ -29,16 +35,11 @@
 </template>
 
 <script setup lang="ts">
-import {
-  QCalendarDay,
-  today,
-  copyTimestamp,
-  getDateTime,
-  Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+import { QCalendarDay } from '@quasar/quasar-ui-qcalendar'
+import { today, copyTimestamp, getDateTime, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 import { ref } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 const calendar = ref<QCalendarDay>(),
   selectedDate = ref(today()),

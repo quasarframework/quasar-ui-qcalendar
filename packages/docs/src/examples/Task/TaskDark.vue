@@ -1,6 +1,15 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      Toggle dark mode to confirm the calendar, labels, borders, and event styles remain readable on
+      a dark surface.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
+
+    <div class="q-ma-sm row justify-center">
+      <q-toggle v-model="isDark" label="Toggle Dark Mode" />
+    </div>
 
     <div class="row justify-center">
       <div style="display: flex; max-width: 800px; width: 100%">
@@ -10,9 +19,9 @@
           v-model:model-tasks="parsedTasks"
           v-model:model-footer="footerTasks"
           view="month"
-          dark
+          :dark="isDark"
           :task-width="240"
-          :min-weekday-length="2"
+          :min-weekday-label="2"
           :weekday-class="weekdayClass"
           :day-class="dayClass"
           :footer-day-class="footerDayClass"
@@ -43,11 +52,13 @@
           <template #task="{ scope }">
             <div class="header ellipsis">
               <div class="issue ellipsis">
-                <span v-if="scope.task.icon === 'done'" class="done"><Done /></span>
-                <span v-else-if="scope.task.icon === 'pending'" class="pending"><Pending /></span>
-                <span v-else-if="scope.task.icon === 'blocking'" class="blocking"
-                  ><Blocking
-                /></span>
+                <q-icon
+                  v-if="scope.task.icon === 'done'"
+                  class="done"
+                  name="check_circle_outline"
+                />
+                <q-icon v-else-if="scope.task.icon === 'pending'" class="pending" name="pending" />
+                <q-icon v-else-if="scope.task.icon === 'blocking'" class="blocking" name="block" />
                 {{ scope.task.title }}
               </div>
               <div class="key">{{ scope.task.key }}</div>
@@ -59,11 +70,13 @@
           <template #subtask="{ scope }">
             <div class="header ellipsis">
               <div class="issue ellipsis">
-                <span v-if="scope.task.icon === 'done'" class="done"><Done /></span>
-                <span v-else-if="scope.task.icon === 'pending'" class="pending"><Pending /></span>
-                <span v-else-if="scope.task.icon === 'blocking'" class="blocking"
-                  ><Blocking
-                /></span>
+                <q-icon
+                  v-if="scope.task.icon === 'done'"
+                  class="done"
+                  name="check_circle_outline"
+                />
+                <q-icon v-else-if="scope.task.icon === 'pending'" class="pending" name="pending" />
+                <q-icon v-else-if="scope.task.icon === 'blocking'" class="blocking" name="block" />
                 {{ scope.task.title }}
               </div>
               <div class="key">{{ scope.task.key }}</div>
@@ -97,22 +110,12 @@
 </template>
 
 <script setup lang="ts">
-import {
-  QCalendarTask,
-  today,
-  isBetweenDates,
-  parsed,
-  padNumber,
-  Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+import { QCalendarTask } from '@quasar/quasar-ui-qcalendar'
+import { today, isBetweenDates, parsed, padNumber, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref, computed, onBeforeMount } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
-
-import Done from '@carbon/icons-vue/es/checkmark--outline/16'
-import Pending from '@carbon/icons-vue/es/pending/16'
-import Blocking from '@carbon/icons-vue/es/undefined/16'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 interface Logged {
   date: string
@@ -134,6 +137,7 @@ const calendar = ref<QCalendarTask>(),
   selectedDate = ref(today()),
   startDate = ref(today()),
   endDate = ref(today()),
+  isDark = ref(true),
   tasks = ref<Task[]>([
     {
       title: 'Task 1',

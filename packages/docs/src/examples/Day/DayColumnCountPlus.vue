@@ -1,10 +1,15 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      This example combines multiple columns with a custom header so each column can have its own
+      label.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
-    <div class="row justify-center">
-      <span style="font-size: 18px; font-weight: 800">{{ selectedDate }}</span>
-      <div style="display: flex; max-width: 800px; width: 100%; height: 400px">
+    <div class="column items-center">
+      <div class="day-column-count-plus__date">{{ selectedDate }}</div>
+      <div class="day-column-count-plus__calendar">
         <q-calendar-day
           ref="calendar"
           v-model="selectedDate"
@@ -32,13 +37,14 @@
 </template>
 
 <script setup lang="ts">
-import { QCalendarDay, today, Timestamp } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarDay } from '@quasar/quasar-ui-qcalendar'
+import { today, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 const calendar = ref<QCalendarDay>()
 
 import { ref } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 const selectedDate = ref(today())
 const persons = ref([
@@ -85,3 +91,19 @@ function onClickHeadDay(data: Timestamp) {
   console.info('onClickHeadDay', data)
 }
 </script>
+
+<style scoped lang="scss">
+.day-column-count-plus__date {
+  margin-bottom: 8px;
+  font-size: 18px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.day-column-count-plus__calendar {
+  display: flex;
+  max-width: 800px;
+  width: 100%;
+  height: 400px;
+}
+</style>

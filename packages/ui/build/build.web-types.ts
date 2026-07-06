@@ -1,4 +1,11 @@
-import { version, resolveToRoot, logError, writeFile, kebabCase } from './build.utils.js'
+import {
+  packageName,
+  version,
+  resolveToRoot,
+  logError,
+  writeFile,
+  kebabCase,
+} from './build.utils.js'
 
 const resolve = (file: string): string => resolveToRoot('dist/web-types', file)
 
@@ -127,7 +134,7 @@ export function generate({ api, compact = false }: { api: Api; compact?: boolean
     const webtypes = encodeFn({
       $schema: '',
       framework: 'vue',
-      name: 'qcalendar',
+      name: packageName,
       version,
       contributions: {
         html: {
@@ -135,38 +142,41 @@ export function generate({ api, compact = false }: { api: Api; compact?: boolean
 
           tags: api.components.map(({ api: { events, props, scopedSlots, slots, meta }, name }) => {
             const slotTypes: any[] = []
+            const addSlotType = (name: string, slotApi: SlotApi) => {
+              const result: any = {
+                name,
+                description: getDescription(slotApi),
+                'doc-url': meta.docsUrl || alternateUrl,
+              }
+
+              if (slotApi.scope) {
+                result['vue-properties'] = Object.entries(slotApi.scope).map(([name, api]) => ({
+                  name,
+                  type: resolveType(api),
+                  description: getDescription(api),
+                  'doc-url': meta.docsUrl || alternateUrl,
+                }))
+              }
+
+              slotTypes.push(result)
+            }
+
             if (slots) {
               Object.entries(slots).forEach(([name, slotApi]) => {
-                slotTypes.push({
-                  name,
-                  description: getDescription(slotApi),
-                  'doc-url': meta.docsUrl || alternateUrl,
-                })
+                addSlotType(name, slotApi)
               })
             }
 
             if (scopedSlots) {
               Object.entries(scopedSlots).forEach(([name, slotApi]) => {
-                slotTypes.push({
-                  name,
-                  'vue-properties':
-                    slotApi.scope &&
-                    Object.entries(slotApi.scope).map(([name, api]) => ({
-                      name,
-                      type: resolveType(api),
-                      description: getDescription(api),
-                      'doc-url': meta.docsUrl || alternateUrl,
-                    })),
-                  description: getDescription(slotApi),
-                  'doc-url': meta.docsUrl || alternateUrl,
-                })
+                addSlotType(name, slotApi)
               })
             }
 
             const result: any = {
               name,
               source: {
-                module: 'qcalendar',
+                module: packageName,
                 symbol: name,
               },
               attributes:
@@ -236,7 +246,7 @@ export function generate({ api, compact = false }: { api: Api; compact?: boolean
             const result: any = {
               name: 'v-' + kebabCase(name),
               source: {
-                module: 'qcalendar',
+                module: packageName,
                 symbol: name,
               },
               required: false,

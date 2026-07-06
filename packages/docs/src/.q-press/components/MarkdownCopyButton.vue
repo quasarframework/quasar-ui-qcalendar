@@ -8,12 +8,30 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, getCurrentInstance } from 'vue'
 import { copyToClipboard } from './markdown-utils'
 import { mdiClipboardOutline } from '@quasar/extras/mdi-v7'
 
 const props = defineProps({
+  /**
+   * Clean source code to copy. When omitted, the component falls back to reading the rendered code block.
+   *
+   * @category content
+   * @example 'const count = 1'
+   */
+  code: {
+    type: String,
+    default: '',
+  },
+  /**
+   * Language of the code block to copy.
+   *
+   * @category content
+   * @example 'js'
+   * @example 'html'
+   * @example 'css'
+   */
   lang: {
     type: String,
     default: 'markdown',
@@ -28,12 +46,18 @@ const copied = ref(false)
 function copy() {
   const target = proxy.$el.previousSibling
 
-  // We need to remove artifacts (like line numbers)
-  // before we copy the content.
-  // The markdown-code--copying class will do that for us
-  target.classList.add('markdown-code--copying')
-  let text = target.innerText
-  target.classList.remove('markdown-code--copying')
+  // Prefer the pristine Markdown source passed by the codeblocks plugin.
+  // Rendered Twoslash blocks include tooltip/signature DOM that should not
+  // become clipboard content.
+  let text = props.code
+
+  if (text.length === 0) {
+    // Fallback for older generated pages that do not pass `code`.
+    // We need to remove artifacts (like line numbers) before copying.
+    target.classList.add('markdown-code--copying')
+    text = target.innerText
+    target.classList.remove('markdown-code--copying')
+  }
 
   if (props.lang === 'bash') {
     const bashStartRE = /^\$ /

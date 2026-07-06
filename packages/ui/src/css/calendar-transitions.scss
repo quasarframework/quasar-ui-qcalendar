@@ -20,6 +20,9 @@ $transition-easing: cubic-bezier(0.215, 0.61, 0.355, 1); // easeOutCubic
   &--flip {
     &-leave-active {
       position: absolute;
+      top: 0;
+      left: 0; /* rtl:ignore */
+      right: 0; /* rtl:ignore */
     }
   }
 

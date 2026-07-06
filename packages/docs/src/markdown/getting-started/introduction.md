@@ -5,20 +5,22 @@ keys: All about QCalendar
 ---
 
 ::: warning
-Please note that the codepen links, in the documentation examples, do not work at this time.
-
-And, if you're looking to help out, check out our [Call to action](/other/contributing/call-to-action) in the **Contributing** section.
+If you're looking to help out, check out our [Call to action](/other/contributing/call-to-action) in the **Contributing** section.
 :::
 
-> If you are looking for a **Migration Guide** from v3 to v4, go [here](/other/migration-guide).
+> If you are looking for the **Upgrade Guide** for QCalendar v5, go [here](/other/upgrade-guide).
 
 ## Everything You Need for a Complete Calendar Solution
 
 **QCalendar** allows for viewing of **day** (1-6 days), **week**, **monthly**, **scheduler**, **agenda**, **resource** and **task** views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.
 
+QCalendar uses Gregorian dates by default and can opt into Timestamp calendar adapters for native Hijri, Saka, Hebrew, and Persian calendar workflows.
+
 QCalendar is a less-opinionated calendar component, as it does not keep track of things like events and reminders. This is in the hands of the developer, but QCalendar makes it easy via events, slots and methods (see examples how to accomplish these endeavors).
 
 The guiding philosophy has been to empower the developer and allow them to do what needs to be done without being overly opinionated.
+
+QCalendar can be installed directly in Vue/Vite projects using the UI package. The Quasar app extension is a convenience layer for Quasar CLI Vite projects that want automatic boot-file registration and Quasar-specific tooling integration.
 
 QCalendar is actually an accumulation of several other dedicated components and exported methods:
 
@@ -29,7 +31,6 @@ QCalendar is actually an accumulation of several other dedicated components and 
 1. QCalendarResource
 1. QCalendarScheduler
 1. QCalendarTask
-1. Timestamp (dedicated code for creating calendars)
 
 ## Features
 
@@ -44,7 +45,7 @@ QCalendar is actually an accumulation of several other dedicated components and 
 9. Optional drag and drop support (including mobile)
 10. Automatic localization / internationalization
 11. Responsive flex grid layout
-12. No external dependencies (momentjs, jQuery, etc) other than Vue
+12. No external dependencies (momentjs, jQuery, etc) other than Vue and the shared `@timestamp-js/core` primitives used by the package
 13. User events support (date, day, interval, time, resource, etc)
 14. Define any day as beginning of week
 15. Show only certain days of the week (good for work week days)
@@ -54,11 +55,12 @@ QCalendar is actually an accumulation of several other dedicated components and 
 19. Easy to theme using CSS vars and Theme Builder
 20. Easy to customize with Vue slots
 21. Support for Dark mode
-22. Rich support of date functions that are also exported for making your own calendars
-23. Toggled date, range and interval selection
+22. Timestamp-powered date utilities for custom calendar workflows
+23. Gregorian calendar support by default, with opt-in Timestamp adapters for native Hijri, Saka, Hebrew, and Persian date math, labels, and Gregorian interop metadata
+24. Toggled date, range and interval selection
 
 ## QCalendar is not…
 
 - An event management system. However, QCalendar supports everything you need to create an event/reminder/task management system using slots.
 - An interactive navigation provider (next, previous, today). However, you can easily do this in devland with QCalendar’s methods (see examples).
-- Only the Gregorian calendar is supported (at this time).
+- A replacement for dedicated calendar adapter packages. Non-Gregorian calendars are opt-in through Timestamp adapters, and QCalendar exposes Gregorian interop metadata when external systems still need it.

@@ -13,18 +13,24 @@ import {
   watch,
   withDirectives,
   CSSProperties,
-  SetupContext,
+  type SlotsType,
   VNode,
 } from 'vue'
 
 // Utility
-import { getDayIdentifier, parsed, parseTimestamp, today, Timestamp } from '../utils/Timestamp'
+import {
+  gregorianCalendar,
+  parseCalendarTimestamp,
+  today,
+  type Timestamp,
+} from '@timestamp-js/core'
 
 import { convertToUnit } from '../utils/helpers'
+import { getCalendarDateIdentifier, parseCalendarTimestampSafe } from '../utils/calendarSystem'
 
 // Composables
 import useCalendar from '../composables/useCalendar'
-import useCommon, { useCommonProps } from '../composables/useCommon'
+import useCommon, { isFocusableType, useCommonProps } from '../composables/useCommon'
 import useInterval, {
   useIntervalProps,
   useResourceProps,
@@ -43,6 +49,16 @@ import useFocusHelper from '../composables/useFocusHelper'
 import useCheckChange, { useCheckChangeEmits } from '../composables/useCheckChange'
 import useEvents from '../composables/useEvents'
 import useKeyboard, { useNavigationProps } from '../composables/useKeyboard'
+import { getDragEventHandlers } from '../composables/useDragAndDrop'
+import useResourceDimensions from '../composables/useResourceDimensions'
+import type {
+  IntervalLabelSlotScope,
+  QCalendarResourceSlots,
+  ResourceHeadSlotScope,
+  ResourceLabelSlotScope,
+  ResourceIntervalsSlotScope,
+  ResourceIntervalSlotScope,
+} from '../slots'
 
 // Directives
 import ResizeObserver from '../directives/ResizeObserver'
@@ -59,6 +75,8 @@ interface Size {
 export default defineComponent({
   name: 'QCalendarResource',
 
+  slots: Object as SlotsType<QCalendarResourceSlots>,
+
   props: {
     ...useCommonProps,
     ...useResourceProps,
@@ -71,35 +89,93 @@ export default defineComponent({
   },
 
   emits: [
+    /**
+     * Emitted when the model value changes.
+     *
+     * @param value New model value.
+     * @param-type value String
+     * @param-tsType value string
+     */
     'update:model-value',
+    /**
+     * Emitted when the resources model changes.
+     *
+     * @param value New resources array.
+     * @param-type value Array
+     * @param-tsType value Resource[]
+     */
     'update:model-resources',
+    /**
+     * Emitted when a resource is expanded or collapsed.
+     *
+     * @param expanded Whether the resource is expanded.
+     * @param-type expanded Boolean
+     * @param-tsType expanded boolean
+     * @param scope Resource scope.
+     * @param-type scope Object
+     * @param-tsType scope ResourceLabelSlotScope
+     */
     'resource-expanded',
     ...useCheckChangeEmits,
     ...useMoveEmits,
-    ...getRawMouseEvents('-date'),
+    /**
+     * Interact with a resource interval.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope IntervalLabelSlotScope
+     * @param scope Resource interval scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-interval'),
-    ...getRawMouseEvents('-head-day'),
+    /**
+     * Interact with a resource time interval.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope ResourceIntervalsSlotScope
+     * @param scope Resource time interval scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-time'),
+    /**
+     * Interact with the resource header.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope ResourceHeadSlotScope
+     * @param scope Resource header scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-head-resources'),
+    /**
+     * Interact with a resource label.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope ResourceLabelSlotScope
+     * @param scope Resource label scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-resource'),
   ],
 
-  setup(props, { slots, emit, expose }: SetupContext) {
+  setup(props, { slots, emit, expose }) {
+    const initialDate = props.modelValue || today(props.calendarSystem)
     const scrollArea = ref(null),
       pane = ref(null),
       headerRef = ref(null),
       headerColumnRef = ref(null),
-      focusRef = ref<string>(props.modelValue || today()),
-      focusValue = ref<Timestamp>(parsed(props.modelValue || today()) as Timestamp),
+      focusRef = ref<string>(initialDate),
+      focusValue = ref<Timestamp>(
+        parseCalendarTimestamp(initialDate, props.calendarSystem) as Timestamp,
+      ),
       // resourceFocusRef = ref(null),
       // resourceFocusValue = ref(null),
       datesRef = ref<Record<string, HTMLElement>>({}),
+      keyboardActive = ref(false),
       resourcesRef = ref<Record<string, HTMLElement>>({}),
       // headDayEventsParentRef = ref({}),
       // headDayEventsChildRef = ref({}),
       // resourcesHeadRef = ref(null),
       direction = ref<'next' | 'prev'>('next'),
-      startDate = ref(props.modelValue || today()),
+      startDate = ref(initialDate),
       endDate = ref('0000-00-00'),
       maxDaysRendered = ref(0),
       emittedValue = ref(props.modelValue),
@@ -137,10 +213,10 @@ export default defineComponent({
 
     const { emitListeners } = useEmitListeners(vm)
 
-    const { times, setCurrent, updateCurrent } = useTimes(props)
+    const { times, setCurrent, updateCurrent: updateCurrentTimes } = useTimes(props)
 
     // update dates
-    updateCurrent()
+    updateCurrentTimes()
     setCurrent()
 
     const {
@@ -152,11 +228,16 @@ export default defineComponent({
       // ariaDateFormatter,
       // methods
       dayStyleDefault,
-      // getRelativeClasses
+      getDisabledStyle,
+      getRelativeClasses,
     } = useCommon(props, { startDate, endDate, times })
 
     const parsedValue = computed(() => {
-      return parseTimestamp(props.modelValue, times.now) || parsedStart.value || times.today
+      return (
+        parseCalendarTimestampSafe(props.modelValue, props.calendarSystem, parsedStart.value) ||
+        parsedStart.value ||
+        times.today
+      )
     })
 
     focusValue.value = parsedValue.value
@@ -176,6 +257,7 @@ export default defineComponent({
     } = useCalendar(props, __renderResource, {
       scrollArea,
       pane,
+      keyboardActive,
     })
 
     const {
@@ -194,24 +276,25 @@ export default defineComponent({
       // bodyWidth,
       // methods
       styleDefault,
-      scrollToTimeX,
-      timeDurationWidth,
-      timeStartPosX,
-      widthToMinutes,
+      getScopeForSlotX,
+      scrollToTimeX: scrollToTimeXCalendar,
+      timeDurationWidth: timeDurationWidthCalendar,
+      timeStartPosX: timeStartPosXCalendar,
+      widthToMinutes: widthToMinutesCalendar,
       // getTimestampAtEventX
       // getTimestampAtEventIntervalX
-      /// @ts-expect-error fix later
     } = useInterval(props, {
       times,
       scrollArea,
       parsedStart,
       parsedEnd,
+      activeDate: parsedValue,
       maxDays: maxDaysRendered,
       size,
       headerColumnRef,
     })
 
-    const { move } = useMove(props, {
+    const { move: moveCalendar } = useMove(props, {
       parsedView,
       parsedValue,
       direction,
@@ -223,12 +306,18 @@ export default defineComponent({
 
     const { getDefaultMouseEventHandlers } = useMouse(emit, emitListeners)
 
-    const { checkChange } = useCheckChange(emit, { days, lastStart, lastEnd })
+    const { checkChange } = useCheckChange(emit, {
+      days,
+      lastStart,
+      lastEnd,
+      calendarSystem: () => props.calendarSystem,
+    })
 
     const { isKeyCode } = useEvents()
 
-    const { tryFocus } = useKeyboard(props, {
+    useKeyboard(props, {
       rootRef,
+      keyboardActive,
       focusRef,
       focusValue,
       datesRef,
@@ -238,17 +327,7 @@ export default defineComponent({
       times,
     })
 
-    const parsedResourceHeight = computed(() => {
-      const height = parseInt(String(props.resourceHeight), 10)
-      if (height === 0) {
-        return 'auto'
-      }
-      return height
-    })
-
-    const parsedResourceMinHeight = computed(() => {
-      return parseInt(String(props.resourceMinHeight), 10)
-    })
+    const { getResourceHeightStyle } = useResourceDimensions(props)
 
     const parsedIntervalHeaderHeight = computed(() => {
       return parseInt(String(props.intervalHeaderHeight), 10)
@@ -261,9 +340,11 @@ export default defineComponent({
       (val, oldVal) => {
         if (emittedValue.value !== val) {
           if (props.animated === true) {
-            const v1 = getDayIdentifier(parsed(val) as Timestamp)
-            const v2 = getDayIdentifier(parsed(oldVal) as Timestamp)
-            direction.value = v1 >= v2 ? 'next' : 'prev'
+            const v1 = getCalendarDateIdentifier(val, props.calendarSystem)
+            const v2 = getCalendarDateIdentifier(oldVal, props.calendarSystem)
+            if (v1 !== null && v2 !== null) {
+              direction.value = v1 >= v2 ? 'next' : 'prev'
+            }
           }
           emittedValue.value = val
         }
@@ -274,9 +355,11 @@ export default defineComponent({
     watch(emittedValue, (val, oldVal) => {
       if (emittedValue.value !== props.modelValue) {
         if (props.animated === true) {
-          const v1 = getDayIdentifier(parsed(val) as Timestamp)
-          const v2 = getDayIdentifier(parsed(oldVal) as Timestamp)
-          direction.value = v1 >= v2 ? 'next' : 'prev'
+          const v1 = getCalendarDateIdentifier(val, props.calendarSystem)
+          const v2 = getCalendarDateIdentifier(oldVal, props.calendarSystem)
+          if (v1 !== null && v2 !== null) {
+            direction.value = v1 >= v2 ? 'next' : 'prev'
+          }
         }
         emit('update:model-value', val)
       }
@@ -284,17 +367,12 @@ export default defineComponent({
 
     watch(focusRef, (val) => {
       if (val) {
-        focusValue.value = parseTimestamp(val) as Timestamp
-      }
-    })
+        const timestamp = parseCalendarTimestampSafe(val, props.calendarSystem)
+        if (timestamp === null) {
+          return
+        }
 
-    watch(focusValue, () => {
-      if (datesRef.value[focusRef.value]) {
-        datesRef.value[focusRef.value].focus()
-      } else {
-        // if focusRef is not in the list of current dates of dateRef,
-        // then assume month is changing
-        tryFocus()
+        focusValue.value = timestamp
       }
     })
 
@@ -309,16 +387,96 @@ export default defineComponent({
 
     // public functions
 
-    function moveToToday(): void {
-      emittedValue.value = today()
+    /**
+     * Moves the resource view by a relative amount.
+     *
+     * @param amount Number of view units to move. Negative values move backward.
+     * @param-example amount -1
+     */
+    function move(amount: number = 1): void {
+      moveCalendar(amount)
     }
 
-    function next(amount = 1): void {
+    /**
+     * Moves the resource view to today.
+     */
+    function moveToToday(): void {
+      move(0)
+    }
+
+    /**
+     * Moves the resource view forward.
+     *
+     * @param amount Number of view units to move forward.
+     * @param-example amount 1
+     */
+    function next(amount: number = 1): void {
       move(amount)
     }
 
-    function prev(amount = 1): void {
+    /**
+     * Moves the resource view backward.
+     *
+     * @param amount Number of view units to move backward.
+     * @param-example amount 1
+     */
+    function prev(amount: number = 1): void {
       move(-amount)
+    }
+
+    /**
+     * Refreshes the resource view's current date/time state.
+     */
+    function updateCurrent(): void {
+      updateCurrentTimes()
+    }
+
+    /**
+     * Returns the horizontal start position for a time.
+     *
+     * @param time Time in HH:mm format.
+     * @param clamp Clamp the result to the visible interval range.
+     * @param-example time '09:00'
+     * @param-example clamp true
+     * @returns Horizontal pixel offset, or false when the time is outside the rendered range.
+     */
+    function timeStartPosX(time: string, clamp: boolean = true): number | false {
+      return timeStartPosXCalendar(time, clamp)
+    }
+
+    /**
+     * Returns the horizontal width for a duration.
+     *
+     * @param minutes Duration in minutes.
+     * @param-example minutes 60
+     * @returns Rendered duration width in pixels.
+     */
+    function timeDurationWidth(minutes: number): number {
+      return timeDurationWidthCalendar(minutes)
+    }
+
+    /**
+     * Converts a rendered width into minutes.
+     *
+     * @param width Width in pixels.
+     * @param-example width 120
+     * @returns Duration in minutes represented by the rendered width.
+     */
+    function widthToMinutes(width: number): number {
+      return widthToMinutesCalendar(width)
+    }
+
+    /**
+     * Scrolls the resource view horizontally to a time.
+     *
+     * @param time Time in HH:mm format.
+     * @param duration Animation duration in milliseconds.
+     * @param-example time '09:00'
+     * @param-example duration 200
+     * @returns Whether the scroll request was handled.
+     */
+    function scrollToTimeX(time: string, duration: number = 0): boolean {
+      return scrollToTimeXCalendar(time, duration)
     }
 
     // private functions
@@ -359,7 +517,7 @@ export default defineComponent({
 
       const height = convertToUnit(parsedIntervalHeaderHeight.value)
 
-      const scope = {
+      const scope: ResourceHeadSlotScope = {
         timestamps: intervals,
         date: props.modelValue,
         resources: props.modelResources,
@@ -379,7 +537,7 @@ export default defineComponent({
             return { scope, event }
           }),
         },
-        [slot && slot({ scope })],
+        slot ? slot({ scope }) : 'Resources',
       )
     }
 
@@ -410,12 +568,9 @@ export default defineComponent({
       const short = props.shortIntervalLabel
       const label = intervalFormatter.value(interval, short)
 
-      const scope = {
-        timestamp: interval,
-        index,
-        label,
-        droppable: dragOverHeadDayRef.value === label,
-      }
+      const scope = getScopeForSlotX(interval, index) as IntervalLabelSlotScope
+      scope.label = label
+      scope.droppable = dragOverHeadDayRef.value === label
 
       const styler = props.intervalStyle || dayStyleDefault
       const style: CSSProperties = {
@@ -424,11 +579,12 @@ export default defineComponent({
         minWidth: width,
         height,
         ...styler({ scope }),
+        ...getDisabledStyle(interval),
       }
 
       const intervalClass =
         typeof props.intervalClass === 'function' ? props.intervalClass({ scope }) : {}
-      const isFocusable = props.focusable === true && props.focusType.includes('interval')
+      const isFocusable = isFocusableType(props, 'interval')
 
       return h(
         'div',
@@ -437,40 +593,22 @@ export default defineComponent({
           tabindex: isFocusable === true ? 0 : -1,
           class: {
             'q-calendar-resource__head--interval': true,
+            ...getRelativeClasses(interval, scope.outside),
             ...intervalClass,
             'q-active-date': activeDate,
+            disabled: scope.disabled === true,
+            'q-disabled-day': scope.disabled === true,
             'q-calendar__hoverable': props.hoverable === true,
             'q-calendar__focusable': isFocusable === true,
           },
           style,
-          onDragenter: (e: DragEvent) => {
-            if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
-              props.dragEnterFunc(e, 'interval', { scope }) === true
-                ? (dragOverHeadDayRef.value = label)
-                : (dragOverHeadDayRef.value = '')
-            }
-          },
-          onDragover: (e: DragEvent) => {
-            if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
-              props.dragOverFunc(e, 'interval', { scope }) === true
-                ? (dragOverHeadDayRef.value = label)
-                : (dragOverHeadDayRef.value = '')
-            }
-          },
-          onDragleave: (e: DragEvent) => {
-            if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
-              props.dragLeaveFunc(e, 'interval', { scope }) === true
-                ? (dragOverHeadDayRef.value = label)
-                : (dragOverHeadDayRef.value = '')
-            }
-          },
-          onDrop: (e: DragEvent) => {
-            if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
-              props.dropFunc(e, 'interval', { scope }) === true
-                ? (dragOverHeadDayRef.value = label)
-                : (dragOverHeadDayRef.value = '')
-            }
-          },
+          ...getDragEventHandlers(props, {
+            targetRef: dragOverHeadDayRef,
+            value: label,
+            resetValue: '',
+            type: 'interval',
+            scope,
+          }),
           onFocus: () => {
             if (isFocusable === true) {
               focusRef.value = label
@@ -561,14 +699,7 @@ export default defineComponent({
       expanded = true,
     ): VNode | VNode[] {
       const slotResourceRow = slots['resource-row']
-      const style: CSSProperties = {}
-      style.height =
-        parsedResourceHeight.value === 'auto'
-          ? parsedResourceHeight.value
-          : convertToUnit(parsedResourceHeight.value)
-      if (parsedResourceMinHeight.value > 0) {
-        style.minHeight = convertToUnit(parsedResourceMinHeight.value)
-      }
+      const style = getResourceHeightStyle()
 
       const scope = { resource, resourceIndex, indentLevel, expanded }
 
@@ -621,24 +752,14 @@ export default defineComponent({
     ): VNode {
       const slotResourceLabel = slots['resource-label']
 
-      const style: CSSProperties = {}
-      style.height =
-        resource.height !== void 0
-          ? convertToUnit(parseInt(resource.height, 10))
-          : parsedResourceHeight.value
-            ? convertToUnit(parsedResourceHeight.value)
-            : 'auto'
-      if (parsedResourceMinHeight.value > 0) {
-        style.minHeight = convertToUnit(parsedResourceMinHeight.value)
-      }
+      const style = getResourceHeightStyle(resource)
       const styler = props.resourceStyle || styleDefault
       const label = resource[props.resourceLabel]
 
-      const isFocusable =
-        props.focusable === true && props.focusType.includes('resource') && expanded === true
+      const isFocusable = isFocusableType(props, 'resource', expanded)
       const dragValue = resource[props.resourceKey]
 
-      const scope = {
+      const scope: ResourceLabelSlotScope = {
         resource,
         timestamps: intervals,
         resourceIndex,
@@ -672,34 +793,13 @@ export default defineComponent({
             ...style,
             ...styler({ scope }),
           },
-          onDragenter: (e: DragEvent) => {
-            if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
-              props.dragEnterFunc(e, 'resource', { scope }) === true
-                ? (dragOverResource.value = dragValue)
-                : (dragOverResource.value = '')
-            }
-          },
-          onDragover: (e: DragEvent) => {
-            if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
-              props.dragOverFunc(e, 'resource', { scope }) === true
-                ? (dragOverResource.value = dragValue)
-                : (dragOverResource.value = '')
-            }
-          },
-          onDragleave: (e: DragEvent) => {
-            if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
-              props.dragLeaveFunc(e, 'resource', { scope }) === true
-                ? (dragOverResource.value = dragValue)
-                : (dragOverResource.value = '')
-            }
-          },
-          onDrop: (e: DragEvent) => {
-            if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
-              props.dropFunc(e, 'resource', { scope }) === true
-                ? (dragOverResource.value = dragValue)
-                : (dragOverResource.value = '')
-            }
-          },
+          ...getDragEventHandlers(props, {
+            targetRef: dragOverResource,
+            value: dragValue,
+            resetValue: '',
+            type: 'resource',
+            scope,
+          }),
           onKeydown: (event) => {
             if (isKeyCode(event, [13, 32])) {
               event.stopPropagation()
@@ -758,7 +858,7 @@ export default defineComponent({
     function __renderResourceIntervals(resource: Resource, resourceIndex: number): VNode {
       const slot = slots['resource-intervals']
 
-      const scope = {
+      const scope: ResourceIntervalsSlotScope = {
         resource,
         timestamps: intervals,
         resourceIndex,
@@ -793,15 +893,16 @@ export default defineComponent({
       const activeDate = props.noActiveDate !== true && __isActiveDate(interval)
       const resourceKey = resource[props.resourceKey]
       const dragValue = interval.time + '-' + resourceKey
-      const isFocusable = props.focusable === true && props.focusType.includes('time')
+      const isFocusable = isFocusableType(props, 'time')
 
-      const scope = {
-        activeDate,
-        resource,
-        timestamp: interval,
+      const scope = getScopeForSlotX(
+        interval,
         resourceIndex,
-        droppable: dragOverResourceInterval.value === dragValue,
-      }
+      ) as unknown as ResourceIntervalSlotScope
+      scope.activeDate = activeDate
+      scope.resource = resource
+      scope.resourceIndex = resourceIndex
+      scope.droppable = dragOverResourceInterval.value === dragValue
 
       const styler = props.intervalStyle || dayStyleDefault
       const width = convertToUnit(parsedCellWidth.value)
@@ -810,16 +911,9 @@ export default defineComponent({
         maxWidth: width,
         minWidth: width,
         ...styler({ scope }),
+        ...getDisabledStyle(interval),
       }
-      style.height =
-        resource.height !== void 0
-          ? convertToUnit(parseInt(resource.height, 10))
-          : parsedResourceHeight.value === 'auto'
-            ? parsedResourceHeight.value
-            : convertToUnit(parsedResourceHeight.value)
-      if (parsedResourceMinHeight.value > 0) {
-        style.minHeight = convertToUnit(parsedResourceMinHeight.value)
-      }
+      Object.assign(style, getResourceHeightStyle(resource))
 
       return h(
         'div',
@@ -833,39 +927,21 @@ export default defineComponent({
           tabindex: isFocusable === true ? 0 : -1,
           class: {
             'q-calendar-resource__resource--interval': true,
+            ...getRelativeClasses(interval, scope.outside),
             'q-active-date': activeDate,
+            disabled: scope.disabled === true,
+            'q-disabled-day': scope.disabled === true,
             'q-calendar__hoverable': props.hoverable === true,
             'q-calendar__focusable': isFocusable === true,
           },
           style,
-          onDragenter: (e: DragEvent) => {
-            if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
-              props.dragEnterFunc(e, 'time', { scope }) === true
-                ? (dragOverResourceInterval.value = dragValue)
-                : (dragOverResourceInterval.value = '')
-            }
-          },
-          onDragover: (e: DragEvent) => {
-            if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
-              props.dragOverFunc(e, 'time', { scope }) === true
-                ? (dragOverResourceInterval.value = dragValue)
-                : (dragOverResourceInterval.value = '')
-            }
-          },
-          onDragleave: (e: DragEvent) => {
-            if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
-              props.dragLeaveFunc(e, 'time', { scope }) === true
-                ? (dragOverResourceInterval.value = dragValue)
-                : (dragOverResourceInterval.value = '')
-            }
-          },
-          onDrop: (e: DragEvent) => {
-            if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
-              props.dropFunc(e, 'time', { scope }) === true
-                ? (dragOverResourceInterval.value = dragValue)
-                : (dragOverResourceInterval.value = '')
-            }
-          },
+          ...getDragEventHandlers(props, {
+            targetRef: dragOverResourceInterval,
+            value: dragValue,
+            resetValue: '',
+            type: 'time',
+            scope,
+          }),
           onFocus: () => {
             if (isFocusable === true) {
               focusRef.value = dragValue
@@ -892,13 +968,14 @@ export default defineComponent({
       }
 
       const hasWidth = size.width > 0
+      const calendarKey = props.calendarSystem?.id ?? gregorianCalendar.id
 
       const resource = withDirectives(
         h(
           'div',
           {
             class: 'q-calendar-resource',
-            key: startDate.value,
+            key: `${calendarKey}:${startDate.value}`,
           },
           [hasWidth === true && __renderBody()],
         ),
@@ -926,12 +1003,30 @@ export default defineComponent({
     expose({
       prev,
       next,
+      /**
+       * Moves the resource view by a relative amount.
+       */
       move,
       moveToToday,
+      /**
+       * Refreshes the resource view's current date/time state.
+       */
       updateCurrent,
+      /**
+       * Returns the horizontal start position for a time.
+       */
       timeStartPosX,
+      /**
+       * Returns the horizontal width for a duration.
+       */
       timeDurationWidth,
+      /**
+       * Converts a rendered width into minutes.
+       */
       widthToMinutes,
+      /**
+       * Scrolls the resource view horizontally to a time.
+       */
       scrollToTimeX,
     })
 

@@ -1,31 +1,41 @@
 # Quasar App Extension QCalendar
 
-The **QCalendar App Extension** allows you to seamlessly add the [QCalendar](../ui) component into your Quasar application. It manages the boot file file and all other configuration for you.
+[![npm version](https://img.shields.io/npm/v/@quasar/quasar-app-extension-qcalendar?label=%40quasar%2Fquasar-app-extension-qcalendar)](https://www.npmjs.com/package/@quasar/quasar-app-extension-qcalendar)
+[![npm downloads](https://img.shields.io/npm/dt/@quasar/quasar-app-extension-qcalendar)](https://www.npmjs.com/package/@quasar/quasar-app-extension-qcalendar)
+[![npm monthly downloads](https://img.shields.io/npm/dm/@quasar/quasar-app-extension-qcalendar)](https://www.npmjs.com/package/@quasar/quasar-app-extension-qcalendar)
+[![license](https://img.shields.io/npm/l/@quasar/quasar-app-extension-qcalendar)](https://www.npmjs.com/package/@quasar/quasar-app-extension-qcalendar)
 
-[![npm](https://img.shields.io/npm/v/@quasar/quasar-app-extension-qcalendar?label=@quasar/quasar-app-extension-qcalendar)](https://www.npmjs.com/package/@quasar/quasar-app-extension-qcalendar)
-[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/quasarframework/quasar-ui-qcalendar)]()
-[![GitHub repo size in bytes](https://img.shields.io/github/repo-size/quasarframework/quasar-ui-qcalendar)]()
-[![npm](https://img.shields.io/npm/dt/@quasar/quasar-app-extension-qcalendar)](https://www.npmjs.com/package/@quasar/quasar-app-extension-qcalendar)
-![@quasar/quasar-app-extension-qcalendar](https://img.shields.io/npm/dm/@quasar/quasar-app-extension-qcalendar)
+<span class="badge-github-sponsors"><a href="https://github.com/sponsors/hawkeye64" title="Sponsor this project on GitHub"><img src="https://img.shields.io/badge/github-sponsors-ea4aaa.svg?logo=githubsponsors&logoColor=white" alt="GitHub Sponsors button" /></a></span>
+<span class="badge-paypal"><a href="https://paypal.me/hawkeye64" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a></span>
 
 [![Discord](https://img.shields.io/badge/discord-join%20server-738ADB?style=for-the-badge&logo=discord&logoColor=738ADB)](https://chat.quasar.dev)
-[![Discord](https://img.shields.io/badge/follow-@jgalbraith64-1DA1F2?style=for-the-badge&logo=twitter&logoColor=1DA1F2)](https://twitter.com/jgalbraith64)
+[![X](https://img.shields.io/badge/follow-@jgalbraith64-1DA1F2?style=for-the-badge&logo=x&logoColor=1DA1F2)](https://twitter.com/jgalbraith64)
+
+The **QCalendar App Extension** allows you to seamlessly add the [QCalendar](../ui) component into your Quasar application. It manages the boot file file and all other configuration for you.
+
+[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/quasarframework/quasar-ui-qcalendar)]()
+[![GitHub repo size in bytes](https://img.shields.io/github/repo-size/quasarframework/quasar-ui-qcalendar)]()
 
 ## Everything you need for a complete Calendar solution.
 
-QCalendar is a [Quasar](https://quasar.dev) component. It is a powerful calendar that plugs right into your Quasar application and allows for viewing of **day** (1-7 days for a week), **monthly**, **scheduler** and **agenda** views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.
+QCalendar is a [Quasar](https://quasar.dev) component. It is a powerful calendar that plugs right into your Quasar application and allows for viewing of **day** (1-7 days for a week), **monthly**, **scheduler**, **agenda**, **resource** and **task** views. Painstaking care has been given to make almost every aspect of QCalendar configurable and/or modifiable in some way and control given to the developer.
 
-# QCalendar v4.x
+# QCalendar v5.0.0-rc.10
 
-Welcome to the QCalendar v4.x release
+Welcome to the QCalendar v5.0.0-rc.10 release.
 
-### QCalendar is now converted to use Vue v3
+### QCalendar App Extension is now Vite-only
 
-With this update comes a lot of changes, with over 90% of QCalendar being rewritten. Please read below to understand these changes and how they will affect you for upgrading.
+QCalendar v5 prepares the app extension for Quasar CLI Vite 3. The app extension requires `@quasar/app-vite` >=3.0.0 and no longer supports webpack-based Quasar apps. If your application is still using `@quasar/app-webpack`, migrate the application to Quasar CLI Vite before installing QCalendar v5.
+
+## Requirements
+
+- Quasar v2.
+- `@quasar/app-vite` >=3.0.0.
 
 # Documentation
 
-Go to Netlify which is hosting QCalendar v4.0.0 docs https://qcalendar.netlify.app/.
+Go to Netlify which is hosting the QCalendar docs https://qcalendar.netlify.app/.
 
 ---
 
@@ -33,7 +43,7 @@ Go to Netlify which is hosting QCalendar v4.0.0 docs https://qcalendar.netlify.a
 
 **Month view with events**
 
-![QCalendar example month view](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/packages/docs/public/qcalendarmonth-event-slots.png)
+![QCalendar example month view](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/packages/docs/public/qcalendar-month-view.png)
 
 **Planner example**
 
@@ -79,18 +89,24 @@ quasar ext add @quasar/qcalendar
 
 Quasar CLI will retrieve it from NPM and install the extension.
 
+QCalendar v5 is currently published as a release candidate on the `latest` dist tag:
+
+```bash
+quasar ext add @quasar/qcalendar
+```
+
 # Uninstall
 
 ```bash
 quasar ext remove @quasar/qcalendar
 ```
 
-# Donations
+# Support
 
-QCalendar is an open source MIT project that has been made possible due to the **generous contributions** by [sponsors and backers](https://github.com/sponsors/hawkeye64). If you are interested in supporting this project, please consider:
+If QCalendar is useful in your workflow and you want to support ongoing maintenance:
 
-- [Becoming a sponsor on Github](https://github.com/users/hawkeye64/sponsorship)
-- [One-off donation via PayPal](https://paypal.me/hawkeye64)
+- GitHub Sponsors: https://github.com/sponsors/hawkeye64
+- PayPal: https://paypal.me/hawkeye64
 
 # License
 

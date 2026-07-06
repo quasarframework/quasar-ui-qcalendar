@@ -1,44 +1,63 @@
 {
   "name": "@quasar/quasar-app-extension-qcalendar",
-  "version": "4.1.2",
+  "version": "5.0.0-rc.10",
   "description": "A Quasar App Extension for @quasar/quasar-ui-qcalendar",
-  "author": "Jeff Galbraith <jeff@quasar.dev>",
-  "license": "MIT",
-  "type": "module",
-  "main": "src/index.js",
-  "funding": {
-    "type": "github",
-    "url": "https://github.com/sponsors/hawkeye64"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
+  "keywords": [
+    "app",
+    "app extension",
+    "calendar",
+    "calendar adapter",
+    "calendar system",
+    "daily",
+    "events",
+    "extension",
+    "gregorian",
+    "hebrew",
+    "hijri",
+    "monthly",
+    "quasar",
+    "quasarframework",
+    "reminders",
+    "saka",
+    "schedule",
+    "weekly"
+  ],
+  "homepage": "https://github.com/quasarframework/quasar-ui-qcalendar",
   "bugs": "https://github.com/quasarframework/quasar-ui-qcalendar/issues",
+  "license": "MIT",
+  "author": "Jeff Galbraith <jeff@quasar.dev>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/quasarframework/quasar-ui-qcalendar.git"
   },
-  "homepage": "https://github.com/quasarframework/quasar-ui-qcalendar",
-  "keywords": [
-    "quasar",
-    "quasarframework",
-    "app",
-    "app extension",
-    "extension",
-    "calendar",
-    "daily",
-    "weekly",
-    "monthly",
-    "events",
-    "reminders",
-    "schedule"
-  ],
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/hawkeye64"
+  },
+  "type": "module",
+  "main": "dist/index.js",
+  "imports": {
+    "#q-app": "@quasar/app-vite"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\" && tsc -p tsconfig.build.json",
+    "prepack": "pnpm build"
+  },
   "dependencies": {
-    "@quasar/quasar-ui-qcalendar": "^4.1.2"
+    "@quasar/quasar-ui-qcalendar": "workspace:^"
+  },
+  "devDependencies": {
+    "@quasar/app-vite": "3.0.0",
+    "typescript": "~6.0.3"
+  },
+  "peerDependencies": {
+    "@quasar/app-vite": ">=3.0.0"
   },
   "engines": {
-    "node": "^28 || ^26 || ^24 || ^22 || ^20 || ^18",
-    "npm": ">= 6.13.4",
-    "yarn": ">= 1.21.1"
+    "node": ">=22.13",
+    "pnpm": ">=11.3.0"
   }
 }

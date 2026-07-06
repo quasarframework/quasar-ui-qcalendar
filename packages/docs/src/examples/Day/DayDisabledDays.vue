@@ -1,77 +1,88 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      Specific dates or ranges are disabled so unavailable days stand out from normal calendar days.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
-    <div class="row justify-center">
-      <div
-        class="q-gutter-md"
-        style="display: flex; flex-direction: column; max-width: 800px; width: 90%; height: 500px"
-      >
-        <q-calendar-day
-          ref="calendar"
-          v-model="selectedDate"
-          :disabled-days="disabledDays"
-          no-active-date
-          animated
-          bordered
-          transition-next="slide-left"
-          transition-prev="slide-right"
-          @change="onChange"
-          @moved="onMoved"
-          @click-date="onClickDate"
-          @click-time="onClickTime"
-          @click-interval="onClickInterval"
-          @click-head-intervals="onClickHeadIntervals"
-          @click-head-day="onClickHeadDay"
-        />
-        <q-calendar-day
-          ref="calendar2"
-          v-model="selectedDate"
-          :disabled-days="disabledDaysRange"
-          no-active-date
-          animated
-          bordered
-          transition-next="slide-left"
-          transition-prev="slide-right"
-          @change="onChange"
-          @moved="onMoved"
-          @click-date="onClickDate"
-          @click-time="onClickTime"
-          @click-interval="onClickInterval"
-          @click-head-intervals="onClickHeadIntervals"
-          @click-head-day="onClickHeadDay"
-        />
+    <div class="day-disabled-days">
+      <div class="day-disabled-days__demo">
+        <div class="day-disabled-days__label">Array of disabled dates</div>
+        <div class="day-disabled-days__calendar">
+          <q-calendar-day
+            ref="calendar"
+            v-model="selectedDate"
+            :disabled-days="disabledDays"
+            no-active-date
+            animated
+            bordered
+            transition-next="slide-left"
+            transition-prev="slide-right"
+            @change="onChange"
+            @moved="onMoved"
+            @click-date="onClickDate"
+            @click-time="onClickTime"
+            @click-interval="onClickInterval"
+            @click-head-intervals="onClickHeadIntervals"
+            @click-head-day="onClickHeadDay"
+          />
+        </div>
+      </div>
+
+      <div class="day-disabled-days__demo">
+        <div class="day-disabled-days__label">Styled disabled range</div>
+        <div class="day-disabled-days__calendar">
+          <q-calendar-day
+            v-model="selectedDate"
+            :disabled-days="disabledDaysRange"
+            no-active-date
+            animated
+            bordered
+            transition-next="slide-left"
+            transition-prev="slide-right"
+            @change="onChange"
+            @moved="onMoved"
+            @click-date="onClickDate"
+            @click-time="onClickTime"
+            @click-interval="onClickInterval"
+            @click-head-intervals="onClickHeadIntervals"
+            @click-head-day="onClickHeadDay"
+          />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import {
-  QCalendarDay,
-  addToDate,
-  parseTimestamp,
-  today,
-  Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+import { QCalendarDay } from '@quasar/quasar-ui-qcalendar'
+import { addToDate, parseTimestamp, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 import { ref, computed } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 const calendar = ref<QCalendarDay>()
 
-const selectedDate = ref(today())
+const selectedDate = ref('2026-05-26')
 
 const disabledDays = computed(() => {
-  const ts = parseTimestamp(today())
-  // make next 4 days, after today, disabled
-  return Array.from({ length: 4 }, (_, i) => addToDate(ts!, { day: i + 1 }).date)
+  const ts = parseTimestamp(selectedDate.value)
+  // make 4 visible days disabled, starting with the selected date
+  return Array.from({ length: 4 }, (_, i) => addToDate(ts!, { day: i }).date)
 })
 
 const disabledDaysRange = computed(() => {
-  // create the range for example 2
-  // Note: this is an array, within an array
-  return [[disabledDays.value[0], disabledDays.value[disabledDays.value.length - 1]]]
+  // create a reservation-style range for example 2
+  return [
+    {
+      from: disabledDays.value[0],
+      to: disabledDays.value[disabledDays.value.length - 1],
+      color: '#ef5350',
+      textColor: '#ffffff',
+      label: 'Reserved',
+    },
+  ]
 })
 
 function onToday() {
@@ -111,3 +122,29 @@ function onClickHeadDay(data: Timestamp) {
   console.info('onClickHeadDay', data)
 }
 </script>
+
+<style scoped lang="scss">
+.day-disabled-days {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 16px;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.day-disabled-days__demo {
+  min-width: 0;
+}
+
+.day-disabled-days__label {
+  margin-bottom: 8px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.day-disabled-days__calendar {
+  display: flex;
+  height: 420px;
+}
+</style>

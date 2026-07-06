@@ -1,21 +1,19 @@
 {
+  "generated_at": "2026-06-22T19:26:50.092Z",
   "type": "component",
   "meta": {
-    "docsUrl": "https://path-to-your-docs/markdown-codepen"
+    "docsUrl": "https://md-plugins.netlify.app/quasar-app-extensions/qpress/components"
   },
   "props": {
-    "active": {
-      "type": "Boolean",
-      "desc": "Flag to indicate if the form should be active",
-      "category": "state"
-    },
-    "options": {
+    "title": {
+      "desc": "Title used for the generated CodePen.",
       "type": "String",
-      "desc": "JSON string containing the CodePen options",
+      "required": true,
+      "category": "content",
       "examples": [
-        "'{\"title\":\"My Pen\",\"html\":\"<div>Hello World</div>\"}'"
-      ],
-      "category": "content"
+        "'Basic Example'",
+        "'Advanced Playground'"
+      ]
     }
   }
 }

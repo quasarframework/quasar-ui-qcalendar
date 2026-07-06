@@ -14,28 +14,32 @@ import {
   watch,
   withDirectives,
   CSSProperties,
-  SetupContext,
+  type SlotsType,
   VNode,
 } from 'vue'
 
 // Utility
 import {
   getDateTime,
-  getDayIdentifier,
   getDayTimeIdentifier,
-  parsed,
-  parseTimestamp,
+  gregorianCalendar,
+  parseCalendarTimestamp,
   today,
-  Timestamp,
-} from '../utils/Timestamp'
+  type Timestamp,
+} from '@timestamp-js/core'
 
-import { convertToUnit, minCharWidth } from '../utils/helpers'
+import { convertToUnit, getResponsiveWeekdayLabel } from '../utils/helpers'
+import {
+  getCalendarDateIdentifier,
+  getCalendarScopeData,
+  parseCalendarTimestampSafe,
+} from '../utils/calendarSystem'
 
 // Composables
 import useCalendar from '../composables/useCalendar'
-import useCommon, { useCommonProps } from '../composables/useCommon'
+import useCommon, { isFocusableType, useCommonProps } from '../composables/useCommon'
 import useInterval, { useIntervalProps, IntervalProps } from '../composables/useInterval'
-import { useColumnProps } from '../composables/useColumn'
+import { getColumnIndexes, useColumnProps } from '../composables/useColumn'
 import { useMaxDaysProps } from '../composables/useMaxDays'
 import useTimes, { useTimesProps } from '../composables/useTimes'
 import useRenderValues from '../composables/useRenderValues'
@@ -48,6 +52,14 @@ import useCellWidth, { useCellWidthProps } from '../composables/useCellWidth'
 import useCheckChange, { useCheckChangeEmits } from '../composables/useCheckChange'
 import useEvents from '../composables/useEvents'
 import useKeyboard, { useNavigationProps } from '../composables/useKeyboard'
+import { getDragEventHandlers } from '../composables/useDragAndDrop'
+import type {
+  HeadDayButtonSlotScope,
+  HeadIntervalsSlotScope,
+  IntervalSlotScope,
+  QCalendarDaySlots,
+  TimestampMouseScope,
+} from '../slots'
 
 // Directives
 import ResizeObserver from '../directives/ResizeObserver'
@@ -65,6 +77,8 @@ export default defineComponent({
 
   directives: { ResizeObserver },
 
+  slots: Object as SlotsType<QCalendarDaySlots>,
+
   props: {
     ...useCommonProps,
     ...useIntervalProps,
@@ -76,32 +90,83 @@ export default defineComponent({
   },
 
   emits: [
+    /**
+     * Emitted when the model value changes.
+     *
+     * @param value New model value.
+     * @param-type value String
+     * @param-tsType value string
+     */
     'update:model-value',
     ...useCheckChangeEmits,
     ...useMoveEmits,
+    /**
+     * Interact with a day view date button.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope HeadDayButtonSlotScope
+     * @param scope Day view date button scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-date'),
+    /**
+     * Interact with the day view interval gutter.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope TimestampMouseScope
+     * @param scope Day view interval timestamp scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-interval'),
+    /**
+     * Interact with the day view interval header.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope HeadIntervalsSlotScope
+     * @param scope Day view interval header scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-head-intervals'),
+    /**
+     * Interact with a day view header day.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope IntervalSlotScope
+     * @param scope Day view header day scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-head-day'),
+    /**
+     * Interact with a day view time interval.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope IntervalSlotScope
+     * @param scope Day view time interval scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-time'),
   ],
 
-  setup(props: IntervalProps, { slots, emit, expose }: SetupContext) {
+  setup(props: IntervalProps, { slots, emit, expose }) {
+    const initialDate = props.modelValue || today(props.calendarSystem)
     const scrollArea = ref(null),
       pane = ref(null),
       headerColumnRef = ref(null),
-      focusRef = ref<string>(props.modelValue || today()),
-      focusValue = ref<Timestamp>(parsed(props.modelValue || today()) as Timestamp),
+      focusRef = ref<string>(initialDate),
+      focusValue = ref<Timestamp>(
+        parseCalendarTimestamp(initialDate, props.calendarSystem) as Timestamp,
+      ),
       datesRef = ref<Record<string, HTMLElement>>({}),
+      keyboardActive = ref(false),
       headDayEventsParentRef = ref<HTMLElement>(),
       headDayEventsChildRef = ref<HTMLElement>(),
       // intervalsHeadRef = ref(null),
       // intervalsRef = ref({}),
       direction = ref<'next' | 'prev'>('next'),
-      startDate = ref(props.modelValue || today()),
+      startDate = ref(initialDate),
       endDate = ref('0000-00-00'),
       maxDaysRendered = ref(0),
-      emittedValue = ref(props.modelValue || today()),
+      emittedValue = ref(props.modelValue || initialDate),
       size = reactive({ width: 0, height: 0 }),
       dragOverHeadDayRef = ref(''),
       dragOverInterval = ref(0),
@@ -133,10 +198,10 @@ export default defineComponent({
 
     const { isSticky } = useCellWidth(props)
 
-    const { times, setCurrent, updateCurrent } = useTimes(props)
+    const { times, setCurrent, updateCurrent: updateCurrentTimes } = useTimes(props)
 
     // update dates
-    updateCurrent()
+    updateCurrentTimes()
     setCurrent()
 
     const {
@@ -148,12 +213,21 @@ export default defineComponent({
       ariaDateFormatter,
       // methods
       dayStyleDefault,
+      getDisabledStyle,
       getRelativeClasses,
     } = useCommon(props, { startDate, endDate, times })
 
     const parsedValue = computed(() => {
-      return parseTimestamp(props.modelValue, times.now) || parsedStart.value || times.today
+      return (
+        parseCalendarTimestampSafe(props.modelValue, props.calendarSystem, parsedStart.value) ||
+        parsedStart.value ||
+        times.today
+      )
     })
+
+    function getFocusDate(value: string): string | undefined {
+      return value.match(/^\d{4}-\d{2}-\d{2}/)?.[0]
+    }
 
     focusValue.value = parsedValue.value
     focusRef.value = parsedValue.value.date
@@ -170,6 +244,7 @@ export default defineComponent({
       {
         scrollArea,
         pane,
+        keyboardActive,
       },
     )
 
@@ -187,22 +262,22 @@ export default defineComponent({
       getTimestampAtEventInterval,
       getTimestampAtEvent,
       getScopeForSlot,
-      scrollToTime,
-      heightToMinutes,
-      timeDurationHeight,
-      timeStartPos,
-      /// @ts-expect-error fix later
+      scrollToTime: scrollToTimeCalendar,
+      heightToMinutes: heightToMinutesCalendar,
+      timeDurationHeight: timeDurationHeightCalendar,
+      timeStartPos: timeStartPosCalendar,
     } = useInterval(props, {
       times,
       scrollArea,
       parsedStart,
       parsedEnd,
+      activeDate: parsedValue,
       maxDays: maxDaysRendered,
       size,
       headerColumnRef,
     })
 
-    const { move } = useMove(props, {
+    const { move: moveCalendar } = useMove(props, {
       parsedView,
       parsedValue,
       direction,
@@ -214,12 +289,18 @@ export default defineComponent({
 
     const { getDefaultMouseEventHandlers } = useMouse(emit, emitListeners)
 
-    const { checkChange } = useCheckChange(emit, { days, lastStart, lastEnd })
+    const { checkChange } = useCheckChange(emit, {
+      days,
+      lastStart,
+      lastEnd,
+      calendarSystem: () => props.calendarSystem,
+    })
 
     const { isKeyCode } = useEvents()
 
-    const { tryFocus } = useKeyboard(props, {
+    useKeyboard(props, {
       rootRef,
+      keyboardActive,
       focusRef,
       focusValue,
       datesRef,
@@ -258,7 +339,6 @@ export default defineComponent({
       }
       return 100 / parsedColumnCount.value + '%'
     })
-
     watch([days], checkChange, { deep: true, immediate: true })
 
     watch(
@@ -266,22 +346,28 @@ export default defineComponent({
       (val, oldVal) => {
         if (emittedValue.value !== props.modelValue) {
           if (props.animated === true) {
-            const v1 = getDayIdentifier(parsed(val) as Timestamp)
-            const v2 = getDayIdentifier(parsed(oldVal) as Timestamp)
-            direction.value = v1 >= v2 ? 'next' : 'prev'
+            const v1 = getCalendarDateIdentifier(val, props.calendarSystem)
+            const v2 = getCalendarDateIdentifier(oldVal, props.calendarSystem)
+            if (v1 !== null && v2 !== null) {
+              direction.value = v1 >= v2 ? 'next' : 'prev'
+            }
           }
           emittedValue.value = val
         }
-        focusRef.value = val
+        if (getFocusDate(focusRef.value) !== val) {
+          focusRef.value = val
+        }
       },
     )
 
     watch(emittedValue, (val, oldVal) => {
       if (emittedValue.value !== props.modelValue) {
         if (props.animated === true) {
-          const v1 = getDayIdentifier(parsed(val) as Timestamp)
-          const v2 = getDayIdentifier(parsed(oldVal) as Timestamp)
-          direction.value = v1 >= v2 ? 'next' : 'prev'
+          const v1 = getCalendarDateIdentifier(val, props.calendarSystem)
+          const v2 = getCalendarDateIdentifier(oldVal, props.calendarSystem)
+          if (v1 !== null && v2 !== null) {
+            direction.value = v1 >= v2 ? 'next' : 'prev'
+          }
         }
         emit('update:model-value', val)
       }
@@ -289,17 +375,12 @@ export default defineComponent({
 
     watch(focusRef, (val) => {
       if (val) {
-        focusValue.value = parseTimestamp(val) as Timestamp
-      }
-    })
+        const timestamp = parseCalendarTimestampSafe(val, props.calendarSystem)
+        if (timestamp === null) {
+          return
+        }
 
-    watch(focusValue, () => {
-      if (focusRef.value && datesRef.value[focusRef.value]) {
-        datesRef.value[focusRef.value]!.focus()
-      } else {
-        // if focusRef is not in the list of current dates of dateRef,
-        // then assume month is changing
-        tryFocus()
+        focusValue.value = timestamp
       }
     })
 
@@ -323,16 +404,96 @@ export default defineComponent({
 
     // public functions
 
-    function moveToToday(): void {
-      emittedValue.value = today()
+    /**
+     * Moves the day view by a relative amount.
+     *
+     * @param amount Number of view units to move. Negative values move backward.
+     * @param-example amount -1
+     */
+    function move(amount: number = 1): void {
+      moveCalendar(amount)
     }
 
-    function next(amount = 1): void {
+    /**
+     * Moves the day view to today.
+     */
+    function moveToToday(): void {
+      move(0)
+    }
+
+    /**
+     * Moves the day view forward.
+     *
+     * @param amount Number of view units to move forward.
+     * @param-example amount 1
+     */
+    function next(amount: number = 1): void {
       move(amount)
     }
 
-    function prev(amount = 1): void {
+    /**
+     * Moves the day view backward.
+     *
+     * @param amount Number of view units to move backward.
+     * @param-example amount 1
+     */
+    function prev(amount: number = 1): void {
       move(-amount)
+    }
+
+    /**
+     * Refreshes the day view's current date/time state.
+     */
+    function updateCurrent(): void {
+      updateCurrentTimes()
+    }
+
+    /**
+     * Returns the vertical start position for a time.
+     *
+     * @param time Time in HH:mm format.
+     * @param clamp Clamp the result to the visible interval range.
+     * @param-example time '09:00'
+     * @param-example clamp true
+     * @returns Vertical pixel offset, or false when the time is outside the rendered range.
+     */
+    function timeStartPos(time: string, clamp: boolean = true): number | false {
+      return timeStartPosCalendar(time, clamp)
+    }
+
+    /**
+     * Returns the vertical height for a duration.
+     *
+     * @param minutes Duration in minutes.
+     * @param-example minutes 60
+     * @returns Rendered duration height in pixels.
+     */
+    function timeDurationHeight(minutes: number): number {
+      return timeDurationHeightCalendar(minutes)
+    }
+
+    /**
+     * Converts a rendered height into minutes.
+     *
+     * @param height Height in pixels.
+     * @param-example height 120
+     * @returns Duration in minutes represented by the rendered height.
+     */
+    function heightToMinutes(height: number): number {
+      return heightToMinutesCalendar(height)
+    }
+
+    /**
+     * Scrolls the day view vertically to a time.
+     *
+     * @param time Time in HH:mm format.
+     * @param duration Animation duration in milliseconds.
+     * @param-example time '09:00'
+     * @param-example duration 200
+     * @returns Whether the scroll request was handled.
+     */
+    function scrollToTime(time: string, duration: number = 0): boolean {
+      return scrollToTimeCalendar(time, duration)
     }
 
     // private functions
@@ -356,6 +517,8 @@ export default defineComponent({
     // Render functions
 
     function __renderHead(): VNode {
+      const children = [__renderHeadIntervals(), __renderHeadDaysColumn()]
+
       return h(
         'div',
         {
@@ -364,11 +527,8 @@ export default defineComponent({
             'q-calendar-day__head': true,
             'q-calendar__sticky': isSticky.value === true,
           },
-          style: {
-            marginRight: scrollWidth.value + 'px',
-          },
         },
-        [__renderHeadIntervals(), __renderHeadDaysColumn()],
+        children,
       )
     }
 
@@ -378,7 +538,7 @@ export default defineComponent({
     function __renderHeadIntervals(): VNode {
       const slot = slots['head-intervals']
 
-      const scope = {
+      const scope: HeadIntervalsSlotScope = {
         timestamps: days.value,
         days: days.value, // deprecated
         date: props.modelValue,
@@ -455,15 +615,7 @@ export default defineComponent({
               'div',
               {
                 ref: headDayEventsParentRef,
-                // TODO: this needs to be a class
-                style: {
-                  position: 'absolute',
-                  left: 0,
-                  top: 0,
-                  right: 0,
-                  overflow: 'hidden',
-                  zIndex: 1,
-                },
+                class: 'q-calendar__head-days-event-slot',
               },
               [slot({ scope: { days: days.value, ref: headDayEventsChildRef } })],
             ),
@@ -474,12 +626,13 @@ export default defineComponent({
 
     function __renderHeadDays(): VNode[] {
       const columnCount = parseInt(String(props.columnCount), 10)
-      const columnIndexStart = parseInt(String(props.columnIndexStart), 10)
 
       if (days.value.length === 1 && columnCount > 0) {
-        return Array.apply(null, new Array(columnCount))
-          .map((_, i) => i + columnIndexStart)
-          .map((columnIndex) => __renderHeadDay(days.value[0], columnIndex))
+        const day = days.value[0]!
+
+        return getColumnIndexes(columnCount, props.columnIndexStart).map((columnIndex) =>
+          __renderHeadDay(day, columnIndex),
+        )
       } else {
         return days.value.map((day) => __renderHeadDay(day, 0))
       }
@@ -487,12 +640,12 @@ export default defineComponent({
 
     function __renderHeadDaysEvents(): VNode[] {
       const columnCount = parseInt(String(props.columnCount), 10)
-      const columnIndexStart = parseInt(String(props.columnIndexStart), 10)
 
       if (days.value.length === 1 && columnCount > 0) {
-        return Array.apply(null, new Array(columnCount))
-          .map((_, i) => i + columnIndexStart)
-          .map((columnIndex) => __renderHeadDayEvent(days.value[0], columnIndex))
+        const day = days.value[0]!
+
+        return getColumnIndexes(columnCount, props.columnIndexStart)
+          .map((columnIndex) => __renderHeadDayEvent(day, columnIndex))
           .filter((node): node is VNode => node !== undefined)
       } else {
         return days.value
@@ -505,12 +658,12 @@ export default defineComponent({
       const headDateSlot = slots['head-date']
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
-      const scope = getScopeForSlot(day, columnIndex)
+      const scope: IntervalSlotScope = getScopeForSlot(day, columnIndex)
       scope.activeDate = activeDate
       scope.droppable = dragOverHeadDayRef.value === day.date
-      scope.disabled = props.disabledWeekdays
-        ? props.disabledWeekdays.includes(Number(day.weekday))
-        : false
+      scope.disabled =
+        scope.disabled === true ||
+        (props.disabledWeekdays ? props.disabledWeekdays.includes(Number(day.weekday)) : false)
 
       const width = isSticky.value === true ? props.cellWidth : computedWidth.value
       const styler = props.weekdayStyle || dayStyleDefault
@@ -519,13 +672,14 @@ export default defineComponent({
         maxWidth: width,
         minWidth: width,
         ...styler({ scope }),
+        ...getDisabledStyle(day),
       }
       if (isSticky.value === true) {
         style.minWidth = width
       }
       const weekdayClass =
         typeof props.weekdayClass === 'function' ? props.weekdayClass({ scope }) : {}
-      const isFocusable = props.focusable === true && props.focusType.includes('weekday')
+      const isFocusable = isFocusableType(props, 'weekday')
       const key = day.date + (columnIndex !== undefined ? '-' + columnIndex : '')
 
       const data: Record<string, any> = {
@@ -537,8 +691,10 @@ export default defineComponent({
         class: {
           'q-calendar-day__head--day': true,
           ...weekdayClass,
-          ...getRelativeClasses(day),
+          ...getRelativeClasses(day, scope.outside),
           'q-active-date': activeDate,
+          disabled: scope.disabled === true,
+          'q-disabled-day': scope.disabled === true,
           'q-calendar__hoverable': props.hoverable === true,
           'q-calendar__focusable': isFocusable === true,
         },
@@ -549,48 +705,27 @@ export default defineComponent({
           }
         },
         onKeydown: (e: KeyboardEvent) => {
-          if (day.disabled !== true && isKeyCode(e, [13, 32])) {
+          if (scope.disabled !== true && isKeyCode(e, [13, 32])) {
             e.stopPropagation()
             e.preventDefault()
           }
         },
         onKeyup: (e: KeyboardEvent) => {
           // allow selection of date via Enter or Space keys
-          if (day.disabled !== true && isKeyCode(e, [13, 32])) {
+          if (scope.disabled !== true && isKeyCode(e, [13, 32])) {
             emittedValue.value = day.date
           }
         },
         ...getDefaultMouseEventHandlers('-head-day', (event) => {
           return { scope, event }
         }),
-        onDragenter: (e: DragEvent) => {
-          if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
-            props.dragEnterFunc(e, 'head-day', { scope }) === true
-              ? (dragOverHeadDayRef.value = day.date)
-              : (dragOverHeadDayRef.value = '')
-          }
-        },
-        onDragover: (e: DragEvent) => {
-          if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
-            props.dragOverFunc(e, 'head-day', { scope }) === true
-              ? (dragOverHeadDayRef.value = day.date)
-              : (dragOverHeadDayRef.value = '')
-          }
-        },
-        onDragleave: (e: DragEvent) => {
-          if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
-            props.dragLeaveFunc(e, 'head-day', { scope }) === true
-              ? (dragOverHeadDayRef.value = day.date)
-              : (dragOverHeadDayRef.value = '')
-          }
-        },
-        onDrop: (e: DragEvent) => {
-          if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
-            props.dropFunc(e, 'head-day', { scope }) === true
-              ? (dragOverHeadDayRef.value = day.date)
-              : (dragOverHeadDayRef.value = '')
-          }
-        },
+        ...getDragEventHandlers(props, {
+          targetRef: dragOverHeadDayRef,
+          value: day.date,
+          resetValue: '',
+          type: 'head-day',
+          scope,
+        }),
       }
 
       return h('div', data, [
@@ -687,11 +822,11 @@ export default defineComponent({
       const headDayEventSlot = slots['head-day-event']
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
-      const scope = getScopeForSlot(day, columnIndex)
+      const scope: IntervalSlotScope = getScopeForSlot(day, columnIndex)
       scope.activeDate = activeDate
-      scope.disabled = props.disabledWeekdays
-        ? props.disabledWeekdays.includes(Number(day.weekday))
-        : false
+      scope.disabled =
+        scope.disabled === true ||
+        (props.disabledWeekdays ? props.disabledWeekdays.includes(Number(day.weekday)) : false)
 
       const width =
         isSticky.value === true ? convertToUnit(parsedCellWidth.value) : computedWidth.value
@@ -699,6 +834,7 @@ export default defineComponent({
         width,
         maxWidth: width,
         minWidth: width,
+        ...getDisabledStyle(day),
       }
       if (isSticky.value === true) {
         style.minWidth = width
@@ -710,8 +846,10 @@ export default defineComponent({
           key: 'event-' + day.date + (columnIndex !== undefined ? '-' + columnIndex : ''),
           class: {
             'q-calendar-day__head--day__event': true,
-            ...getRelativeClasses(day),
+            ...getRelativeClasses(day, scope.outside),
             'q-active-date': activeDate,
+            disabled: scope.disabled === true,
+            'q-disabled-day': scope.disabled === true,
           },
           style,
         },
@@ -723,11 +861,11 @@ export default defineComponent({
       const slot = slots['head-weekday-label']
       const shortWeekdayLabel = props.shortWeekdayLabel === true
 
-      const scope = getScopeForSlot(day, 0)
+      const scope: IntervalSlotScope = getScopeForSlot(day, 0)
       scope.shortWeekdayLabel = props.shortWeekdayLabel
-      scope.disabled = props.disabledWeekdays
-        ? props.disabledWeekdays.includes(Number(day.weekday))
-        : false
+      scope.disabled =
+        scope.disabled === true ||
+        (props.disabledWeekdays ? props.disabledWeekdays.includes(Number(day.weekday)) : false)
 
       const data: Record<string, any> = {
         class: {
@@ -745,19 +883,20 @@ export default defineComponent({
     }
 
     function __renderHeadWeekdayLabel(day: Timestamp, shortWeekdayLabel: boolean): VNode {
-      const weekdayLabel = weekdayFormatter.value(
+      const weekdayLabel = getResponsiveWeekdayLabel({
         day,
-        shortWeekdayLabel ||
-          (props.weekdayBreakpoints[0] > 0 && parsedCellWidth.value <= props.weekdayBreakpoints[0]),
-      )
+        formatter: weekdayFormatter.value,
+        shortWeekdayLabel,
+        cellWidth: parsedCellWidth.value,
+        breakpoints: props.weekdayBreakpoints,
+        minWeekdayLabel: props.minWeekdayLabel,
+      })
       return h(
         'span',
         {
           class: 'q-calendar-day__head--weekday-label q-calendar__ellipsis',
         },
-        props.weekdayBreakpoints[1] > 0 && parsedCellWidth.value <= props.weekdayBreakpoints[1]
-          ? minCharWidth(weekdayLabel, Number(props.minWeekdayLabel))
-          : weekdayLabel,
+        weekdayLabel,
       )
     }
 
@@ -777,14 +916,17 @@ export default defineComponent({
       const dayLabel = dayFormatter.value(day, false)
       const headDayLabelSlot = slots['head-day-label']
       const headDayButtonSlot = slots['head-day-button']
+      const intervalScope = getScopeForSlot(day, 0)
 
-      const scope = {
+      const scope: HeadDayButtonSlotScope = {
         dayLabel,
         timestamp: day,
+        calendarTimestamp: intervalScope.calendarTimestamp,
+        calendarIdentity: intervalScope.calendarIdentity,
+        calendarSystem: intervalScope.calendarSystem,
+        outside: intervalScope.outside,
         activeDate,
-        disabled: props.disabledWeekdays
-          ? props.disabledWeekdays.includes(Number(day.weekday))
-          : false,
+        disabled: intervalScope.disabled === true,
       }
 
       const data: Record<string, any> = {
@@ -796,16 +938,16 @@ export default defineComponent({
           'q-calendar__button--bordered': day.current === true,
           'q-calendar__focusable': true,
         },
-        disabled: day.disabled,
+        disabled: scope.disabled === true,
         onKeydown: (e: KeyboardEvent) => {
-          if (day.disabled !== true && isKeyCode(e, [13, 32])) {
+          if (scope.disabled !== true && isKeyCode(e, [13, 32])) {
             e.stopPropagation()
             e.preventDefault()
           }
         },
         onKeyup: (e: KeyboardEvent) => {
           // allow selection of date via Enter or Space keys
-          if (day.disabled !== true && isKeyCode(e, [13, 32])) {
+          if (scope.disabled !== true && isKeyCode(e, [13, 32])) {
             emittedValue.value = day.date
             if (emitListeners.value.onClickDate !== undefined) {
               emit('click-date', { scope })
@@ -835,7 +977,11 @@ export default defineComponent({
     function __renderColumnHeaderBefore(day: Timestamp, columnIndex: number): VNode | void {
       const slot = slots['column-header-before']
       if (slot) {
-        const scope = { timestamp: day, columnIndex }
+        const scope = {
+          timestamp: day,
+          ...getCalendarScopeData(day, props.calendarSystem),
+          columnIndex,
+        }
         return h(
           'div',
           {
@@ -849,7 +995,11 @@ export default defineComponent({
     function __renderColumnHeaderAfter(day: Timestamp, columnIndex: number): VNode | void {
       const slot = slots['column-header-after']
       if (slot) {
-        const scope = { timestamp: day, columnIndex }
+        const scope = {
+          timestamp: day,
+          ...getCalendarScopeData(day, props.calendarSystem),
+          columnIndex,
+        }
         return h(
           'div',
           {
@@ -938,12 +1088,13 @@ export default defineComponent({
 
     function __renderDays(): VNode[] {
       const columnCount = parseInt(String(props.columnCount), 10)
-      const columnIndexStart = parseInt(String(props.columnIndexStart), 10)
 
       if (days.value.length === 1 && columnCount > 0) {
-        return Array.apply(null, new Array(columnCount))
-          .map((_, i) => i + columnIndexStart)
-          .map((i) => __renderDay(days.value[0], 0, i))
+        const day = days.value[0]!
+
+        return getColumnIndexes(columnCount, props.columnIndexStart).map((columnIndex) =>
+          __renderDay(day, 0, columnIndex),
+        )
       } else {
         return days.value.map((day, index) => __renderDay(day, index, 0))
       }
@@ -951,12 +1102,13 @@ export default defineComponent({
 
     function __renderDay(day: Timestamp, dayIndex: number, columnIndex: number): VNode {
       const slot = slots['day-body']
-      const scope = getScopeForSlot(day, columnIndex)
+      const scope: IntervalSlotScope = getScopeForSlot(day, columnIndex)
       const width = isSticky.value === true ? props.cellWidth : computedWidth.value
       const style: CSSProperties = {
         width,
         maxWidth: width,
         minWidth: width,
+        ...getDisabledStyle(day),
       }
       if (isSticky.value === true) {
         style.minWidth = width
@@ -968,7 +1120,9 @@ export default defineComponent({
           key: day.date + (columnIndex !== undefined ? ':' + columnIndex : ''),
           class: {
             'q-calendar-day__day': true,
-            ...getRelativeClasses(day),
+            ...getRelativeClasses(day, scope.outside),
+            disabled: scope.disabled === true,
+            'q-disabled-day': scope.disabled === true,
           },
           style,
         },
@@ -977,7 +1131,7 @@ export default defineComponent({
     }
 
     function __renderDayIntervals(index: number, columnIndex: number): VNode[] {
-      return intervals.value[index].map((interval) => __renderDayInterval(interval, columnIndex))
+      return intervals.value[index]!.map((interval) => __renderDayInterval(interval, columnIndex))
     }
 
     function __renderDayInterval(interval: Timestamp, columnIndex: number): VNode {
@@ -986,12 +1140,12 @@ export default defineComponent({
       const styler = props.intervalStyle || styleDefault
       const slotDayInterval = slots['day-interval']
 
-      const scope = getScopeForSlot(interval, columnIndex)
+      const scope: IntervalSlotScope = getScopeForSlot(interval, columnIndex)
       scope.droppable = dragOverInterval.value === getDayTimeIdentifier(interval)
 
       const intervalClass =
         typeof props.intervalClass === 'function' ? props.intervalClass({ scope }) : {}
-      const isFocusable = props.focusable === true && props.focusType.includes('interval')
+      const isFocusable = isFocusableType(props, 'interval')
       const dateTime = getDateTime(interval)
 
       const style: CSSProperties = {
@@ -1001,7 +1155,9 @@ export default defineComponent({
 
       const data: Record<string, any> = {
         key: dateTime,
-        // ref: (el) => { intervalsRef.value[ dateTime ] = el },
+        ref: (el: HTMLElement) => {
+          datesRef.value[dateTime] = el
+        },
         tabindex: isFocusable === true ? 0 : -1,
         class: {
           'q-calendar-day__day-interval': interval.minute === 0,
@@ -1012,48 +1168,35 @@ export default defineComponent({
             Array.from(props.selectedDates),
             props.selectedStartEndDates,
           ),
+          'q-outside': scope.outside === true,
+          disabled: scope.disabled === true,
+          'q-disabled-day': scope.disabled === true,
           'q-calendar__hoverable': props.hoverable === true,
           'q-calendar__focusable': isFocusable === true,
         },
         style,
-        onDragenter: (e: DragEvent) => {
-          if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
-            props.dragEnterFunc(e, 'interval', { scope }) === true
-              ? (dragOverInterval.value = getDayTimeIdentifier(interval))
-              : (dragOverInterval.value = 0)
-          }
-        },
-        onDragover: (e: DragEvent) => {
-          if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
-            props.dragOverFunc(e, 'interval', { scope }) === true
-              ? (dragOverInterval.value = getDayTimeIdentifier(interval))
-              : (dragOverInterval.value = 0)
-          }
-        },
-        onDragleave: (e: DragEvent) => {
-          if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
-            props.dragLeaveFunc(e, 'interval', { scope }) === true
-              ? (dragOverInterval.value = getDayTimeIdentifier(interval))
-              : (dragOverInterval.value = 0)
-          }
-        },
-        onDrop: (e: DragEvent) => {
-          if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
-            props.dropFunc(e, 'interval', { scope }) === true
-              ? (dragOverInterval.value = getDayTimeIdentifier(interval))
-              : (dragOverInterval.value = 0)
-          }
-        },
+        ...getDragEventHandlers(props, {
+          targetRef: dragOverInterval,
+          value: getDayTimeIdentifier(interval),
+          resetValue: 0,
+          type: 'interval',
+          scope,
+        }),
         onKeydown: (event: KeyboardEvent) => {
-          if (isKeyCode(event, [13, 32])) {
+          if (scope.disabled !== true && isKeyCode(event, [13, 32])) {
             event.stopPropagation()
             event.preventDefault()
           }
         },
+        onFocus: () => {
+          if (isFocusable === true) {
+            focusRef.value = dateTime
+          }
+        },
         onKeyup: (event: KeyboardEvent) => {
           // allow selection of date via Enter or Space keys
-          if (isKeyCode(event, [13, 32])) {
-            const scope = getScopeForSlot(interval, columnIndex)
+          if (scope.disabled !== true && isKeyCode(event, [13, 32])) {
+            const scope: IntervalSlotScope = getScopeForSlot(interval, columnIndex)
             emittedValue.value = scope.timestamp.date
             if (emitListeners.value.onClickTime !== undefined) {
               emit('click-time', { scope, event })
@@ -1061,7 +1204,7 @@ export default defineComponent({
           }
         },
         ...getDefaultMouseEventHandlers('-time', (event: MouseEvent | TouchEvent) => {
-          const scope = getScopeForSlot(
+          const scope: IntervalSlotScope = getScopeForSlot(
             getTimestampAtEventInterval(
               event as MouseEvent & TouchEvent,
               interval,
@@ -1070,6 +1213,9 @@ export default defineComponent({
             ),
             columnIndex,
           )
+          if (scope.disabled === true) {
+            event.preventDefault()
+          }
           return { scope, event }
         }),
       }
@@ -1098,7 +1244,11 @@ export default defineComponent({
             props.timeClicksClamped,
             times.now,
           )
-          return { scope: { timestamp }, event }
+          const scope: TimestampMouseScope = {
+            timestamp,
+            ...getCalendarScopeData(timestamp, props.calendarSystem),
+          }
+          return { scope, event }
         }),
       }
 
@@ -1106,7 +1256,7 @@ export default defineComponent({
     }
 
     function __renderIntervalLabels(): VNode[] {
-      return intervals.value[0].map((interval) => __renderIntervalLabel(interval))
+      return intervals.value[0]!.map((interval) => __renderIntervalLabel(interval))
     }
 
     function __renderIntervalLabel(interval: Timestamp): VNode {
@@ -1137,7 +1287,13 @@ export default defineComponent({
             },
             [
               slotIntervalLabel
-                ? slotIntervalLabel({ scope: { timestamp: interval, label } })
+                ? slotIntervalLabel({
+                    scope: {
+                      timestamp: interval,
+                      ...getCalendarScopeData(interval, props.calendarSystem),
+                      label,
+                    },
+                  })
                 : label,
             ],
           ),
@@ -1158,12 +1314,13 @@ export default defineComponent({
       }
 
       const hasWidth = size.width > 0
+      const calendarKey = props.calendarSystem?.id ?? gregorianCalendar.id
 
       const daily = withDirectives(
         h(
           'div',
           {
-            key: startDate.value,
+            key: `${calendarKey}:${startDate.value}`,
             class: 'q-calendar-day',
           },
           [
@@ -1198,12 +1355,30 @@ export default defineComponent({
     expose({
       prev,
       next,
+      /**
+       * Moves the day view by a relative amount.
+       */
       move,
       moveToToday,
+      /**
+       * Refreshes the day view's current date/time state.
+       */
       updateCurrent,
+      /**
+       * Returns the vertical start position for a time.
+       */
       timeStartPos,
+      /**
+       * Returns the vertical height for a duration.
+       */
       timeDurationHeight,
+      /**
+       * Converts a rendered height into minutes.
+       */
       heightToMinutes,
+      /**
+       * Scrolls the day view vertically to a time.
+       */
       scrollToTime,
     })
 

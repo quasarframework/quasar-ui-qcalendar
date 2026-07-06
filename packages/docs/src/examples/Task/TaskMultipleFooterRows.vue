@@ -1,5 +1,10 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      This example adds multiple footer rows so totals or summaries can be grouped below the task
+      grid.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="row justify-center">
@@ -11,7 +16,7 @@
           v-model:model-footer="footerTasks"
           view="month"
           :task-width="240"
-          :min-weekday-length="2"
+          :min-weekday-label="2"
           :weekday-class="weekdayClass"
           :day-class="dayClass"
           :footer-day-class="footerDayClass"
@@ -42,11 +47,13 @@
           <template #task="{ scope }">
             <div class="header ellipsis">
               <div class="issue ellipsis">
-                <span v-if="scope.task.icon === 'done'" class="done"><Done /></span>
-                <span v-else-if="scope.task.icon === 'pending'" class="pending"><Pending /></span>
-                <span v-else-if="scope.task.icon === 'blocking'" class="blocking"
-                  ><Blocking
-                /></span>
+                <q-icon
+                  v-if="scope.task.icon === 'done'"
+                  class="done"
+                  name="check_circle_outline"
+                />
+                <q-icon v-else-if="scope.task.icon === 'pending'" class="pending" name="pending" />
+                <q-icon v-else-if="scope.task.icon === 'blocking'" class="blocking" name="block" />
                 {{ scope.task.title }}
               </div>
               <div class="key">{{ scope.task.key }}</div>
@@ -58,11 +65,13 @@
           <template #subtask="{ scope }">
             <div class="header ellipsis">
               <div class="issue ellipsis">
-                <span v-if="scope.task.icon === 'done'" class="done"><Done /></span>
-                <span v-else-if="scope.task.icon === 'pending'" class="pending"><Pending /></span>
-                <span v-else-if="scope.task.icon === 'blocking'" class="blocking"
-                  ><Blocking
-                /></span>
+                <q-icon
+                  v-if="scope.task.icon === 'done'"
+                  class="done"
+                  name="check_circle_outline"
+                />
+                <q-icon v-else-if="scope.task.icon === 'pending'" class="pending" name="pending" />
+                <q-icon v-else-if="scope.task.icon === 'blocking'" class="blocking" name="block" />
                 {{ scope.task.title }}
               </div>
               <div class="key">{{ scope.task.key }}</div>
@@ -82,12 +91,14 @@
           <template #footer-task="{ scope }">
             <div class="summary ellipsis">
               <div class="title ellipsis">{{ scope.footer.title }}</div>
-              <div class="total">{{ totals(scope.start, scope.end) }}</div>
+              <div class="total">{{ footerTotal(scope.footer, scope.start, scope.end) }}</div>
             </div>
           </template>
 
           <template #footer-day="{ scope }">
-            <div class="logged-time">{{ getLoggedSummary(scope.timestamp.date) }}</div>
+            <div class="logged-time">
+              {{ footerDayValue(scope.footer, scope.timestamp.date) }}
+            </div>
           </template>
         </q-calendar-task>
       </div>
@@ -96,22 +107,12 @@
 </template>
 
 <script setup lang="ts">
-import {
-  QCalendarTask,
-  today,
-  isBetweenDates,
-  parsed,
-  padNumber,
-  Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+import { QCalendarTask } from '@quasar/quasar-ui-qcalendar'
+import { today, isBetweenDates, parsed, padNumber, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref, computed, onBeforeMount } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
-
-import Done from '@carbon/icons-vue/es/checkmark--outline/16'
-import Pending from '@carbon/icons-vue/es/pending/16'
-import Blocking from '@carbon/icons-vue/es/undefined/16'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 interface Logged {
   date: string
@@ -127,6 +128,7 @@ interface Task {
 }
 interface FooterTask {
   title: string
+  type: 'hours' | 'entries'
 }
 
 const calendar = ref<QCalendarTask>(),
@@ -236,7 +238,10 @@ const calendar = ref<QCalendarTask>(),
       ],
     },
   ]),
-  footerTasks = ref<FooterTask[]>([{ title: 'TOTALS' }])
+  footerTasks = ref<FooterTask[]>([
+    { title: 'LOGGED HOURS', type: 'hours' },
+    { title: 'LOG ENTRIES', type: 'entries' },
+  ])
 
 /**
  * Returns tasks between startDate and endDate (captured via onChange event)
@@ -282,6 +287,12 @@ function getLoggedSummary(date: string): number {
   }, 0)
 }
 
+function getLoggedEntryCount(date: string): number {
+  return tasks.value.reduce((total, task) => {
+    return total + task.logged.filter((log) => log.date === date).length
+  }, 0)
+}
+
 /**
  * Sums up the amount of time spent on a task
  * This only sums it up if the logged date falls
@@ -314,6 +325,14 @@ function footerDayClass(/*data*/) {
   }
 }
 
+function footerDayValue(footer: FooterTask, date: string): number {
+  return footer.type === 'entries' ? getLoggedEntryCount(date) : getLoggedSummary(date)
+}
+
+function footerTotal(footer: FooterTask, start: Timestamp, end: Timestamp): number {
+  return footer.type === 'entries' ? logEntryCount(start, end) : totals(start, end)
+}
+
 /**
  * Sums up the amount of time spent for all tasks
  * between the start and end dates
@@ -323,6 +342,17 @@ function totals(start: Timestamp, end: Timestamp) {
     const loggedTimestamp = parsed(currentValue.date)
     return loggedTimestamp !== null && isBetweenDates(loggedTimestamp, start, end)
       ? accumulator + currentValue.logged
+      : accumulator
+  }
+
+  return tasks.value.reduce((total, task) => total + task.logged.reduce(reducer, 0), 0)
+}
+
+function logEntryCount(start: Timestamp, end: Timestamp): number {
+  const reducer = (accumulator: number, currentValue: { date: string }) => {
+    const loggedTimestamp = parsed(currentValue.date)
+    return loggedTimestamp !== null && isBetweenDates(loggedTimestamp, start, end)
+      ? accumulator + 1
       : accumulator
   }
 

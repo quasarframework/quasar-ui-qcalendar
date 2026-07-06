@@ -1,14 +1,17 @@
 // app global css in SCSS form
 @import '../.q-press/css/app.scss';
 @import '../.q-press/css/fonts.scss';
-@import '../.q-press/css/prism-theme.scss';
 
 @import 'quasar/src/css/variables.sass';
+
+.markdown-header .markdown-header__logo-img {
+  border-radius: 10px !important;
+}
 
 .subcontent {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   width: 100%;
   margin: 0 6px 6px 6px;
 }

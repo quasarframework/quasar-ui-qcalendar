@@ -1,13 +1,22 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      Toggle dark mode to confirm the calendar, labels, borders, and event styles remain readable on
+      a dark surface.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
+
+    <div class="q-ma-sm row justify-center">
+      <q-toggle v-model="isDark" label="Toggle Dark Mode" />
+    </div>
 
     <div class="row justify-center">
       <div style="display: flex; max-width: 800px; width: 100%">
         <q-calendar-month
           ref="calendar"
           v-model="selectedDate"
-          dark
+          :dark="isDark"
           :day-min-height="40"
           animated
           bordered
@@ -25,14 +34,16 @@
 </template>
 
 <script setup lang="ts">
-import { QCalendarMonth, today, Timestamp } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar'
+import { today, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 const calendar = ref<QCalendarMonth>(),
-  selectedDate = ref(today())
+  selectedDate = ref(today()),
+  isDark = ref(true)
 
 function onToday() {
   if (calendar.value) {

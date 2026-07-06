@@ -1,5 +1,9 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      Specific dates or ranges are disabled so unavailable days stand out from normal calendar days.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="row justify-center">
@@ -12,10 +16,6 @@
           v-model="selectedDate"
           view="week"
           :disabled-days="disabledDays"
-          :left-column-options="leftColumnOptions"
-          :right-column-options="rightColumnOptions"
-          column-options-id="id"
-          column-options-label="label"
           :day-min-height="200"
           animated
           bordered
@@ -33,10 +33,6 @@
           v-model="selectedDate"
           view="week"
           :disabled-days="disabledDaysRange"
-          :left-column-options="leftColumnOptions"
-          :right-column-options="rightColumnOptions"
-          column-options-id="id"
-          column-options-label="label"
           :day-min-height="200"
           animated
           bordered
@@ -55,42 +51,32 @@
 </template>
 
 <script setup lang="ts">
-import {
-  QCalendarAgenda,
-  addToDate,
-  parseTimestamp,
-  today,
-  Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+import { QCalendarAgenda } from '@quasar/quasar-ui-qcalendar'
+import { addToDate, parseTimestamp, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 import { ref, computed } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 const calendar = ref<QCalendarAgenda>()
-const selectedDate = ref(today())
-const leftColumnOptions = ref([
-  {
-    id: 'overdue',
-    label: 'Overdue',
-  },
-])
-const rightColumnOptions = ref([
-  {
-    id: 'summary',
-    label: 'Summary',
-  },
-])
+const selectedDate = ref('2026-05-26')
 
 const disabledDays = computed(() => {
-  const ts = parseTimestamp(today())
-  // make next 4 days, after today, disabled
-  return Array.from({ length: 4 }, (_, i) => addToDate(ts!, { day: i + 1 }).date)
+  const ts = parseTimestamp(selectedDate.value)
+  // make 4 visible days disabled, starting with the selected date
+  return Array.from({ length: 4 }, (_, i) => addToDate(ts!, { day: i }).date)
 })
 
 const disabledDaysRange = computed(() => {
-  // create the range for example 2
-  // Note: this is an array, within an array
-  return [[disabledDays.value[0], disabledDays.value[disabledDays.value.length - 1]]]
+  // create a reservation-style range for example 2
+  return [
+    {
+      from: disabledDays.value[0],
+      to: disabledDays.value[disabledDays.value.length - 1],
+      color: '#ef5350',
+      textColor: '#ffffff',
+      label: 'Reserved',
+    },
+  ]
 })
 
 function onToday() {

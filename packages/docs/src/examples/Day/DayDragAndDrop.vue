@@ -1,15 +1,19 @@
 <template>
-  <div class="subcontent">
+  <div class="subcontent day-drag-and-drop">
+    <p class="text-body2 text-center q-mb-md">
+      Drag an item into the calendar to see how drop targets react and where the event is placed.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="row justify-center">
       <div style="display: flex; justify-content: center; width: 100%">
         <div class="q-mx-sm">
-          <ul class="column">
+          <ul class="column day-drag-and-drop__items">
             <li
               v-for="item in dragItems"
               :key="item.id"
-              class="button list-item"
+              class="day-drag-and-drop__item"
               draggable="true"
               @dragstart="onDragStart($event, item)"
             >
@@ -51,8 +55,7 @@
                   scope &&
                   scope.timestamp &&
                   allDayEventsMap[scope.timestamp.date] &&
-                  allDayEventsMap[scope.timestamp.date]!.length > 0 &&
-                  printScope(scope)
+                  allDayEventsMap[scope.timestamp.date]!.length > 0
                 "
                 style="
                   display: flex;
@@ -74,7 +77,7 @@
 
             <template #day-interval="{ scope }">
               <div
-                v-if="hasEvents(scope.timestamp) && printScope(scope)"
+                v-if="hasEvents(scope.timestamp)"
                 style="
                   display: flex;
                   justify-content: space-evenly;
@@ -99,10 +102,11 @@
 </template>
 
 <script setup lang="ts">
-import { QCalendarDay, today, Timestamp } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarDay } from '@quasar/quasar-ui-qcalendar'
+import { today, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 import { ref, computed } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 interface Event {
   id: number
@@ -178,7 +182,6 @@ interface Scope {
 }
 
 function onDragStart(e: DragEvent, item: DragItem) {
-  console.info('onDragStart called')
   if (e.dataTransfer) {
     e.dataTransfer.dropEffect = 'copy'
     e.dataTransfer.effectAllowed = 'move'
@@ -187,19 +190,16 @@ function onDragStart(e: DragEvent, item: DragItem) {
 }
 
 function onDragEnter(e: DragEvent, type: string, { scope }: Scope) {
-  console.info('onDragEnter', type, scope)
   e.preventDefault()
   return true
 }
 
 function onDragOver(e: DragEvent, type: string, { scope }: Scope) {
-  console.info('onDragOver', type, scope)
   e.preventDefault()
   return true
 }
 
 function onDragLeave(_e: DragEvent, type: string, { scope }: Scope) {
-  console.info('onDragLeave', type, scope)
   return false
 }
 
@@ -212,7 +212,6 @@ interface DropScope extends Scope {
 }
 
 function onDrop(e: DropEvent, type: string, { scope }: DropScope): boolean {
-  console.info('onDrop', type, scope)
   const itemID = parseInt(e.dataTransfer.getData('ID'), 10)
   const event: Event = { ...defaultEvent }
   event.id = events.value.length + 1
@@ -294,15 +293,43 @@ function onClickHeadIntervals(data: Timestamp) {
 function onClickHeadDay(data: Timestamp) {
   console.info('onClickHeadDay', data)
 }
-// this method is used only to print the scope to dev tools
-/// @ts-expect-error ignore
-function printScope(scope) {
-  console.info('scope:', scope)
-  return true
-}
 </script>
 
 <style lang="scss">
+.day-drag-and-drop__items {
+  gap: 4px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.day-drag-and-drop__item {
+  display: block;
+  margin: 2px;
+  padding: 4px 8px;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: grab;
+  text-align: left;
+  text-decoration: none;
+  transition:
+    background-color 0.3s,
+    border-color 0.3s;
+
+  &:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+
+  &:active {
+    background-color: #004085;
+    border-color: #004085;
+    cursor: grabbing;
+  }
+}
+
 .droppable {
   box-shadow: inset 0 0 0 1px rgba(0, 140, 200, 0.8);
 }

@@ -41,7 +41,8 @@
 
 <script setup lang="ts">
 import { ref, computed, watch, onBeforeMount } from 'vue'
-import { QCalendarMonth, getDayIdentifier } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar'
+import { getDayIdentifier } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 interface Props {

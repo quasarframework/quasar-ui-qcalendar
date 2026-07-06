@@ -12,9 +12,21 @@
       class="toc"
     >
       <q-scroll-area class="fit">
-        <div class="row justify-center full-width q-ma-xs q-gutter-sm">
-          <q-btn dense no-caps label="Copy Theme" @click="copyTheme" />
-          <q-btn dense no-caps label="Import Theme..." @click="importTheme" />
+        <div class="theme-builder-actions row justify-center full-width q-pa-sm q-gutter-sm">
+          <q-btn
+            class="theme-builder-actions__button"
+            dense
+            no-caps
+            label="Copy Theme"
+            @click="copyTheme"
+          />
+          <q-btn
+            class="theme-builder-actions__button"
+            dense
+            no-caps
+            label="Import Theme..."
+            @click="importTheme"
+          />
         </div>
         <q-list dense>
           <template v-for="(value, name) in store.style">
@@ -128,20 +140,20 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useQuasar } from 'quasar'
-import { useThemeBuilderStore } from 'stores/ThemeBuilder'
-import { today } from '@quasar/quasar-ui-qcalendar'
-import MarkdownHeader from 'src/.q-press/layouts/MarkdownHeader.vue'
-import MarkdownPageFooter from 'src/.q-press/layouts/MarkdownPageFooter.vue'
-import ThemeEditor from 'components/ThemeEditor.vue'
-import ThemeImporter from 'components/ThemeImporter.vue'
-import ThemeBuilderDay from 'components/ThemeBuilder/DayThemeBuilder.vue'
-import ThemeBuilderWeek from 'components/ThemeBuilder/WeekThemeBuilder.vue'
-import ThemeBuilderMonth from 'components/ThemeBuilder/MonthThemeBuilder.vue'
-import ThemeBuilderMinimode from 'components/ThemeBuilder/MiniModeThemeBuilder.vue'
-import ThemeBuilderScheduler from 'components/ThemeBuilder/SchedulerThemeBuilder.vue'
-import ThemeBuilderResource from 'components/ThemeBuilder/ResourceThemeBuilder.vue'
-import ThemeBuilderAgenda from 'components/ThemeBuilder/AgendaThemeBuilder.vue'
-import ThemeBuilderTask from 'components/ThemeBuilder/TaskThemeBuilder.vue'
+import { useThemeBuilderStore } from '@/stores/ThemeBuilder'
+import { today } from '@timestamp-js/core'
+import MarkdownHeader from '@/.q-press/layouts/MarkdownHeader.vue'
+import MarkdownPageFooter from '@/.q-press/layouts/MarkdownPageFooter.vue'
+import ThemeEditor from '@/components/ThemeEditor.vue'
+import ThemeImporter from '@/components/ThemeImporter.vue'
+import ThemeBuilderDay from '@/components/ThemeBuilder/DayThemeBuilder.vue'
+import ThemeBuilderWeek from '@/components/ThemeBuilder/WeekThemeBuilder.vue'
+import ThemeBuilderMonth from '@/components/ThemeBuilder/MonthThemeBuilder.vue'
+import ThemeBuilderMinimode from '@/components/ThemeBuilder/MiniModeThemeBuilder.vue'
+import ThemeBuilderScheduler from '@/components/ThemeBuilder/SchedulerThemeBuilder.vue'
+import ThemeBuilderResource from '@/components/ThemeBuilder/ResourceThemeBuilder.vue'
+import ThemeBuilderAgenda from '@/components/ThemeBuilder/AgendaThemeBuilder.vue'
+import ThemeBuilderTask from '@/components/ThemeBuilder/TaskThemeBuilder.vue'
 
 import {
   biCalendar2Date,
@@ -167,13 +179,15 @@ const currentName = ref('')
 const currentStyle = ref('')
 // const defaultColor = ref('')
 // const currentColor = ref('')
-// const borderSize = ref('')
-// const borderColor = ref('')
-// const borderType = ref('')
+const cssColorPattern = /^(#|(rgb|hsl)a?\()/
+
+function hasColorToken(value: string) {
+  return value.split(/\s+/).some((part) => cssColorPattern.test(part))
+}
 
 function showBox(name: string, value: string) {
   return (
-    value.match(/^(#|(rgb|hsl)a?\()/) &&
+    hasColorToken(value) &&
     (name.indexOf('color') > -1 ||
       name.indexOf('background') > -1 ||
       name.indexOf('border') > -1 ||
@@ -258,6 +272,31 @@ function setCurrentStyleName(name: string) {
   width: 20px;
   height: 20px;
   border: #dedede 1px solid;
+}
+
+.theme-builder-actions {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.theme-builder-actions__button {
+  border: 1px solid rgba(25, 118, 210, 0.32);
+  background: rgba(25, 118, 210, 0.08);
+  color: var(--q-primary);
+}
+
+.body--dark .theme-builder-actions {
+  border-bottom-color: rgba(255, 255, 255, 0.14);
+}
+
+.body--dark .theme-builder-actions__button {
+  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.body--dark .theme-builder-actions__button:hover {
+  border-color: rgba(255, 255, 255, 0.34);
+  background: rgba(255, 255, 255, 0.13);
 }
 
 .small-text {

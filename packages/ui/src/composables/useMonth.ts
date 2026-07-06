@@ -1,19 +1,20 @@
-import { computed, watch, Ref, EmitFn, ComputedRef } from 'vue'
+import { computed, watch, Ref, EmitFn, ComputedRef, PropType } from 'vue'
 import {
-  createDayList,
-  createNativeLocaleFormatter,
-  getDayIdentifier,
-  getEndOfWeek,
-  getStartOfWeek,
-  getEndOfMonth,
-  getStartOfMonth,
+  createCalendarDayList,
+  getCalendarMonthFormatter,
+  getCalendarEndOfMonth,
+  getCalendarEndOfWeek,
+  getCalendarStartOfMonth,
+  getCalendarStartOfWeek,
+  isOutsideCalendarMonth,
   validateNumber,
-  Timestamp,
-} from '../utils/Timestamp'
+  type Timestamp,
+} from '@timestamp-js/core'
 
 import { CommonProps } from './useCommon'
 import { CellWidthProps } from './useCellWidth'
 import { Scope } from './useInterval'
+import { toCalendarTimestamp } from '../utils/calendarSystem'
 
 // Define props interface
 export interface MonthProps {
@@ -32,52 +33,142 @@ export interface MonthProps {
   enableOutsideDays: boolean
   noOutsideDays: boolean
   hover: boolean
-  miniMode: boolean | 'auto'
+  miniMode?: boolean | 'auto'
   breakpoint: number | string
   monthLabelSize: string
 }
 
 // Define prop types with validators
 export const useMonthProps = {
+  /**
+   * Height in pixels or CSS units for each month day cell.
+   *
+   * @category layout
+   */
   dayHeight: {
     type: [Number, String],
     default: 0,
     validator: (v: any): boolean => validateNumber(v),
   },
+  /**
+   * Minimum height in pixels or CSS units for each month day cell.
+   *
+   * @category layout
+   */
   dayMinHeight: {
     type: [Number, String],
     default: 0,
     validator: (v: any): boolean => validateNumber(v),
   },
-  dayStyle: Function,
-  dayClass: Function,
-  weekdayStyle: Function,
-  weekdayClass: Function,
+  /**
+   * Function that returns inline styles for month day cells.
+   *
+   * @category style
+   */
+  dayStyle: Function as PropType<MonthProps['dayStyle']>,
+  /**
+   * Function that returns CSS classes for month day cells.
+   *
+   * @category style
+   */
+  dayClass: Function as PropType<MonthProps['dayClass']>,
+  /**
+   * Function that returns inline styles for weekday header cells.
+   *
+   * @category style
+   */
+  weekdayStyle: Function as PropType<MonthProps['weekdayStyle']>,
+  /**
+   * Function that returns CSS classes for weekday header cells.
+   *
+   * @category style
+   */
+  weekdayClass: Function as PropType<MonthProps['weekdayClass']>,
+  /**
+   * Padding applied inside month day cells.
+   *
+   * @category layout
+   */
   dayPadding: String,
+  /**
+   * Minimum number of weeks rendered by the month display.
+   *
+   * @category layout
+   */
   minWeeks: {
     type: [Number, String],
     default: 1,
     validator: (v: any): boolean => validateNumber(v),
   },
+  /**
+   * Uses shortened month labels.
+   *
+   * @category display
+   */
   shortMonthLabel: Boolean,
+  /**
+   * Shows ISO work week labels.
+   *
+   * @category display
+   */
   showWorkWeeks: Boolean,
+  /**
+   * Shows the month label.
+   *
+   * @category display
+   */
   showMonthLabel: {
     type: Boolean,
     default: true,
   },
+  /**
+   * Shows the day-of-year label for each day.
+   *
+   * @category display
+   */
   showDayOfYearLabel: Boolean,
+  /**
+   * Enables rendering days outside the active month.
+   *
+   * @category display
+   */
   enableOutsideDays: Boolean,
+  /**
+   * Hides days outside the active month.
+   *
+   * @category display
+   */
   noOutsideDays: Boolean,
+  /**
+   * Enables hover behavior tracking for month day cells.
+   *
+   * @category behavior
+   */
   hover: Boolean,
+  /**
+   * Forces mini mode or lets mini mode follow the configured breakpoint.
+   *
+   * @category layout
+   */
   miniMode: {
-    type: [Boolean, String],
+    type: [Boolean, String] as PropType<MonthProps['miniMode']>,
     validator: (v: any): boolean => [true, false, 'auto'].includes(v),
   },
+  /**
+   * Breakpoint used when `mini-mode` is set to `auto`.
+   *
+   * @category layout
+   */
   breakpoint: {
     type: [Number, String],
     default: 'md',
     validator: (v: any): boolean => ['xs', 'sm', 'md', 'lg', 'xl'].includes(v) || validateNumber(v),
   },
+  /**
+   * Size token used for month labels.
+   *
+   * @category style
+   */
   monthLabelSize: {
     type: String,
     default: 'sm',
@@ -97,7 +188,7 @@ interface UseMonthReturn {
   days: Ref<Timestamp[]>
   todayWeek: Ref<Timestamp[]>
   isMiniMode: ComputedRef<boolean>
-  monthFormatter: Ref<ReturnType<typeof createNativeLocaleFormatter>>
+  monthFormatter: Ref<(_timestamp: Timestamp, _short?: boolean) => string>
   isOutside: (_timestamp: Timestamp) => boolean
 }
 
@@ -121,10 +212,27 @@ export default function useMonth(
 ): UseMonthReturn {
   const parsedMinWeeks = computed((): number => parseInt(props.minWeeks as string, 10))
   const parsedMinDays = computed((): number => parsedMinWeeks.value * props.weekdays.length)
-  const parsedMonthStart = computed(
-    (): Timestamp => __getStartOfWeek(__getStartOfMonth(parsedStart.value)),
-  )
-  const parsedMonthEnd = computed((): Timestamp => __getEndOfWeek(__getEndOfMonth(parsedEnd.value)))
+  const calendarToday = computed(() => toCalendarTimestamp(times.today, props.calendarSystem))
+  const parsedMonthStart = computed((): Timestamp => {
+    const calendarStart = getCalendarStartOfMonth(parsedStart.value, props.calendarSystem)
+
+    return getCalendarStartOfWeek(
+      calendarStart,
+      props.weekdays,
+      props.calendarSystem,
+      calendarToday.value,
+    )
+  })
+  const parsedMonthEnd = computed((): Timestamp => {
+    const calendarEnd = getCalendarEndOfMonth(parsedEnd.value, props.calendarSystem)
+
+    return getCalendarEndOfWeek(
+      calendarEnd,
+      props.weekdays,
+      props.calendarSystem,
+      calendarToday.value,
+    )
+  })
 
   const parsedCellWidth = computed((): number => {
     let width = 0
@@ -140,17 +248,20 @@ export default function useMonth(
    * Returns the days of the specified month
    */
   const days = computed(() =>
-    createDayList(
+    createCalendarDayList(
       parsedMonthStart.value,
       parsedMonthEnd.value,
-      times.today,
-      props.weekdays,
-      props.disabledBefore,
-      props.disabledAfter,
-      props.disabledWeekdays,
-      props.disabledDays,
-      Number.MAX_SAFE_INTEGER,
-      parsedMinDays.value,
+      calendarToday.value,
+      props.calendarSystem,
+      {
+        weekdays: props.weekdays,
+        disabledBefore: props.disabledBefore,
+        disabledAfter: props.disabledAfter,
+        disabledWeekdays: props.disabledWeekdays,
+        disabledDays: props.disabledDays,
+        max: Number.MAX_SAFE_INTEGER,
+        min: parsedMinDays.value,
+      },
     ),
   )
 
@@ -158,33 +269,30 @@ export default function useMonth(
    * Returns the first week of the month for calculating the weekday headers
    */
   const todayWeek = computed(() => {
-    const day = times.today
-    const start = __getStartOfWeek(day)
-    const end = __getEndOfWeek(day)
+    const day = calendarToday.value
+    const start = getCalendarStartOfWeek(day, props.weekdays, props.calendarSystem, day)
+    const end = getCalendarEndOfWeek(day, props.weekdays, props.calendarSystem, day)
 
-    return createDayList(
-      start,
-      end,
-      day,
-      props.weekdays,
-      props.disabledBefore,
-      props.disabledAfter,
-      props.disabledWeekdays,
-      props.disabledDays,
-      props.weekdays.length,
-      props.weekdays.length,
-    )
+    return createCalendarDayList(start, end, day, props.calendarSystem, {
+      weekdays: props.weekdays,
+      disabledBefore: props.disabledBefore,
+      disabledAfter: props.disabledAfter,
+      disabledWeekdays: props.disabledWeekdays,
+      disabledDays: props.disabledDays,
+      max: props.weekdays.length,
+      min: props.weekdays.length,
+    })
   })
 
   /**
    * Returns a function that formats the month name using the locale
    */
-  const monthFormatter = computed(() =>
-    createNativeLocaleFormatter(props.locale, (_tms, short) => ({
-      timeZone: 'UTC',
-      month: short ? 'short' : 'long',
-    })),
-  )
+  const monthFormatter = computed(() => {
+    const formatter = getCalendarMonthFormatter(props.calendarSystem)
+
+    return (timestamp: Timestamp, short?: boolean): string =>
+      formatter(timestamp.month, short === true ? 'short' : 'long', props.locale, timestamp.year)
+  })
 
   const parsedBreakpoint = computed((): number => {
     switch (props.breakpoint) {
@@ -243,57 +351,13 @@ export default function useMonth(
   })
 
   /**
-   * Returns the start of the week for the given day.
-   *
-   * @param day - The day to get the start of the week for.
-   * @returns The timestamp for the start of the week.
-   */
-  function __getStartOfWeek(day: Timestamp): Timestamp {
-    return getStartOfWeek(day, props.weekdays, times.today)
-  }
-
-  /**
-   * Returns the end of the week for the given day.
-   *
-   * @param day - The day to get the end of the week for.
-   * @returns The timestamp for the end of the week.
-   */
-  function __getEndOfWeek(day: Timestamp): Timestamp {
-    return getEndOfWeek(day, props.weekdays, times.today)
-  }
-
-  /**
-   * Returns the start of the month for the given day.
-   *
-   * @param day - The day to get the start of the month for.
-   * @returns The timestamp for the start of the month.
-   */
-  function __getStartOfMonth(day: Timestamp): Timestamp {
-    return getStartOfMonth(day)
-  }
-
-  /**
-   * Returns the end of the month for the given day.
-   *
-   * @param day - The day to get the end of the month for.
-   * @returns The timestamp for the end of the month.
-   */
-  function __getEndOfMonth(day: Timestamp): Timestamp {
-    return getEndOfMonth(day)
-  }
-
-  /**
    * Checks if the given day is outside the current month's range.
    *
    * @param day - The day to check.
    * @returns `true` if the day is outside the current month's range, `false` otherwise.
    */
   function isOutside(day: Timestamp): boolean {
-    const dayIdentifier = getDayIdentifier(day)
-    return (
-      dayIdentifier < getDayIdentifier(parsedStart.value) ||
-      dayIdentifier > getDayIdentifier(parsedEnd.value)
-    )
+    return isOutsideCalendarMonth(day, parsedStart.value, props.calendarSystem)
   }
 
   return {

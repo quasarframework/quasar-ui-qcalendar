@@ -51,6 +51,7 @@
 
     &--weekday {
       position: relative;
+      box-sizing: border-box;
       display: flex;
       flex: 1 0 100%;
       flex-direction: column;
@@ -119,6 +120,7 @@
 
   &__day {
     position: relative;
+    box-sizing: border-box;
     display: flex;
     flex: 1 0 100%;
     flex-direction: column;
@@ -286,6 +288,20 @@
   }
 }
 
+.q-calendar-month:dir(rtl) {
+  .q-calendar-month__head--weekday,
+  .q-calendar-month__head--event,
+  .q-calendar-month__day {
+    &:first-child {
+      border-right: none !important;
+    }
+
+    &:last-child {
+      border-right: var(--calendar-border) !important;
+    }
+  }
+}
+
 .q-dark div,
 .body--dark div,
 .q-calendar--dark {
@@ -392,6 +408,20 @@
             border: var(--calendar-border-current) !important;
           }
         }
+      }
+    }
+  }
+
+  .q-calendar-month:dir(rtl) {
+    .q-calendar-month__head--weekday,
+    .q-calendar-month__head--event,
+    .q-calendar-month__day {
+      &:first-child {
+        border-right: none !important;
+      }
+
+      &:last-child {
+        border-right: var(--calendar-border-dark) !important;
       }
     }
   }

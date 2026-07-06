@@ -9,7 +9,7 @@
         v-model:model-footer="footerTasks"
         view="month"
         :task-width="240"
-        :min-weekday-length="2"
+        :min-weekday-label="2"
         :focus-type="['weekday', 'date', 'task']"
         focusable
         hoverable
@@ -38,9 +38,9 @@
         <template #task="{ scope }">
           <div class="header ellipsis">
             <div class="issue ellipsis">
-              <span v-if="scope.task.icon === 'done'" class="done"><Done /></span>
-              <span v-else-if="scope.task.icon === 'pending'" class="pending"><Pending /></span>
-              <span v-else-if="scope.task.icon === 'blocking'" class="blocking"><Blocking /></span>
+              <q-icon v-if="scope.task.icon === 'done'" class="done" name="check_circle_outline" />
+              <q-icon v-else-if="scope.task.icon === 'pending'" class="pending" name="pending" />
+              <q-icon v-else-if="scope.task.icon === 'blocking'" class="blocking" name="block" />
               {{ scope.task.title }}
             </div>
             <div class="key">{{ scope.task.key }}</div>
@@ -52,9 +52,9 @@
         <template #subtask="{ scope }">
           <div class="header ellipsis">
             <div class="issue ellipsis">
-              <span v-if="scope.task.icon === 'done'" class="done"><Done /></span>
-              <span v-else-if="scope.task.icon === 'pending'" class="pending"><Pending /></span>
-              <span v-else-if="scope.task.icon === 'blocking'" class="blocking"><Blocking /></span>
+              <q-icon v-if="scope.task.icon === 'done'" class="done" name="check_circle_outline" />
+              <q-icon v-else-if="scope.task.icon === 'pending'" class="pending" name="pending" />
+              <q-icon v-else-if="scope.task.icon === 'blocking'" class="blocking" name="block" />
               {{ scope.task.title }}
             </div>
             <div class="key">{{ scope.task.key }}</div>
@@ -91,19 +91,9 @@
 
 <script setup lang="ts">
 import { ref, computed, watch, onBeforeMount } from 'vue'
-import {
-  today,
-  isBetweenDates,
-  parsed,
-  padNumber,
-  QCalendarTask,
-  Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+import { QCalendarTask } from '@quasar/quasar-ui-qcalendar'
+import { today, isBetweenDates, parsed, padNumber, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
-
-import Done from '@carbon/icons-vue/es/checkmark--outline/16'
-import Pending from '@carbon/icons-vue/es/pending/16'
-import Blocking from '@carbon/icons-vue/es/undefined/16'
 
 interface Props {
   modelValue: string

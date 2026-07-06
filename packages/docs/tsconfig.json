@@ -1,6 +1,9 @@
 {
   "extends": "./.quasar/tsconfig.json",
   "compilerOptions": {
-    "resolveJsonModule": true
+    "exactOptionalPropertyTypes": false
+  },
+  "vueCompilerOptions": {
+    "strictTemplates": false
   }
 }

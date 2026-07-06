@@ -16,6 +16,7 @@
 
     &--tasks {
       position: relative;
+      box-sizing: border-box;
       display: flex;
     }
 
@@ -30,6 +31,7 @@
 
     &--day {
       position: relative;
+      box-sizing: border-box;
       flex: 1 1 100%;
       flex-wrap: nowrap;
       overflow: hidden;
@@ -46,6 +48,7 @@
 
     &--task {
       position: relative;
+      box-sizing: border-box;
       display: flex;
     }
 
@@ -60,6 +63,7 @@
 
     &--day {
       position: relative;
+      box-sizing: border-box;
       flex: 1 1 100%;
       flex-wrap: nowrap;
       overflow: hidden;
@@ -70,6 +74,7 @@
 
   &__head--weekday,
   &__head--date {
+    box-sizing: border-box;
     display: flex;
     flex-wrap: nowrap;
     user-select: none;
@@ -100,6 +105,7 @@
 
   &__task {
     position: relative;
+    box-sizing: border-box;
     display: flex;
     flex: none;
     flex-direction: row;
@@ -107,6 +113,7 @@
 
     &--section {
       position: relative;
+      box-sizing: border-box;
       display: flex;
       flex: none;
       flex-direction: row;
@@ -115,11 +122,13 @@
 
     &--container {
       position: relative;
+      box-sizing: border-box;
       min-height: 22px;
     }
 
     &--item {
       position: relative;
+      box-sizing: border-box;
       display: flex;
       flex: none;
       flex-direction: row;
@@ -127,11 +136,13 @@
 
     &--days-row {
       position: relative;
+      box-sizing: border-box;
       display: flex;
       flex: none;
     }
 
     &--day {
+      box-sizing: border-box;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -154,6 +165,7 @@
     &--task,
     &--day-wrapper {
       position: relative;
+      box-sizing: border-box;
       display: flex;
       flex: none;
       flex-direction: row;
@@ -329,6 +341,29 @@
   }
 }
 
+.q-calendar-task:dir(rtl) {
+  .q-calendar-task__head--tasks,
+  .q-calendar-task__title--task,
+  .q-calendar-task__task--item,
+  .q-calendar-task__footer--task {
+    border-right: none;
+    border-left: var(--calendar-border);
+  }
+
+  .q-calendar-task__head--day,
+  .q-calendar-task__title--day,
+  .q-calendar-task__task--day,
+  .q-calendar-task__footer--day {
+    &:first-child {
+      border-right: none !important;
+    }
+
+    &:last-child {
+      border-right: var(--calendar-border) !important;
+    }
+  }
+}
+
 // Dark mode
 .q-dark div,
 .body--dark div,
@@ -415,6 +450,29 @@
       &--day {
         background: var(--calendar-background-dark);
         border-right: var(--calendar-border-dark);
+      }
+    }
+  }
+
+  .q-calendar-task:dir(rtl) {
+    .q-calendar-task__head--tasks,
+    .q-calendar-task__title--task,
+    .q-calendar-task__task--item,
+    .q-calendar-task__footer--task {
+      border-right: none;
+      border-left: var(--calendar-border-dark);
+    }
+
+    .q-calendar-task__head--day,
+    .q-calendar-task__title--day,
+    .q-calendar-task__task--day,
+    .q-calendar-task__footer--day {
+      &:first-child {
+        border-right: none !important;
+      }
+
+      &:last-child {
+        border-right: var(--calendar-border-dark) !important;
       }
     }
   }

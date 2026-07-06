@@ -1,19 +1,56 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <title><%= productName %></title>
 
-    <meta charset="utf-8">
-    <meta name="description" content="<%= productDescription %>">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="msapplication-tap-highlight" content="no">
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width<% if (ctx.mode.cordova || ctx.mode.capacitor) { %>, viewport-fit=cover<% } %>">
+    <meta charset="utf-8" />
+    <meta name="description" content="<%= productDescription %>" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta
+      name="viewport"
+      content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width<% if (ctx.mode.cordova || ctx.mode.capacitor) { %>, viewport-fit=cover<% } %>"
+    />
 
-    <link rel="icon" type="image/png" sizes="128x128" href="icons/favicon-128x128.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="icons/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
-    <link rel="icon" type="image/ico" href="favicon.ico">
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://qcalendar.netlify.app/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="QCalendar - calendars for Vue and Quasar" />
+    <meta
+      name="twitter:description"
+      content="QCalendar builds day, week, month, scheduler, resource, agenda, and task calendar workflows for Vue and Quasar applications."
+    />
+    <meta
+      name="twitter:image"
+      content="https://qcalendar.netlify.app/qcalendar-social-preview.png?v=20260619"
+    />
+    <meta name="twitter:image:alt" content="QCalendar calendar views for Vue applications" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://qcalendar.netlify.app/" />
+    <meta property="og:site_name" content="QCalendar" />
+    <meta property="og:title" content="QCalendar - calendars for Vue and Quasar" />
+    <meta
+      property="og:description"
+      content="QCalendar builds day, week, month, scheduler, resource, agenda, and task calendar workflows for Vue and Quasar applications."
+    />
+    <meta
+      property="og:image"
+      content="https://qcalendar.netlify.app/qcalendar-social-preview.png?v=20260619"
+    />
+    <meta
+      property="og:image:secure_url"
+      content="https://qcalendar.netlify.app/qcalendar-social-preview.png?v=20260619"
+    />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1280" />
+    <meta property="og:image:height" content="640" />
+    <meta property="og:image:alt" content="QCalendar calendar views for Vue applications" />
+
+    <link rel="icon" type="image/png" sizes="128x128" href="icons/favicon-128x128.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="icons/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png" />
+    <link rel="icon" type="image/ico" href="favicon.ico" />
   </head>
   <body>
     <!-- quasar:entry-point -->

@@ -1,5 +1,10 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      This example applies custom theme colors so you can see which CSS variables affect the
+      calendar.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="q-ma-sm row justify-center q-gutter-sm">
@@ -22,10 +27,6 @@
           ref="calendar"
           v-model="selectedDate"
           view="week"
-          :left-column-options="leftColumnOptions"
-          :right-column-options="rightColumnOptions"
-          column-options-id="id"
-          column-options-label="label"
           :day-min-height="200"
           animated
           bordered
@@ -44,10 +45,11 @@
 </template>
 
 <script setup lang="ts">
-import { QCalendarAgenda, today, Timestamp } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarAgenda } from '@quasar/quasar-ui-qcalendar'
+import { today, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 import { ref, reactive, computed } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 type Theme = Record<string, string>
 
@@ -443,18 +445,6 @@ const themes = reactive<Record<string, Theme>>({
     '--calendar-head-font-weight': '600',
   },
 })
-const leftColumnOptions = ref([
-  {
-    id: 'overdue',
-    label: 'Overdue',
-  },
-])
-const rightColumnOptions = ref([
-  {
-    id: 'summary',
-    label: 'Summary',
-  },
-])
 
 const themesList = computed(() => {
   const list: { label: string; value: Theme }[] = []
@@ -464,7 +454,6 @@ const themesList = computed(() => {
       value: { ...themes[theme] },
     })
   })
-  console.info('themesList', list)
   return list
 })
 

@@ -8,33 +8,29 @@ jobs:
   vitest:
     name: Run Vitest
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [20] # Test against multiple Node.js versions
 
     steps:
       # Checkout the repository code
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       # Install pnpm
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
+        with:
+          run_install: false
 
       # Use Node.js
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+      - name: Use Node.js 24
+        uses: actions/setup-node@v5
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 24
           cache: 'pnpm'
+          cache-dependency-path: pnpm-lock.yaml
 
       # Install dependencies for all packages
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
-      # Build all packages except docs
-      - name: Build all packages
-        run: pnpm build
-
-      # Run Vitest tests
-      - name: Run Vitest tests
-        run: pnpm test
+      # Run checks in dependency-safe order
+      - name: Verify
+        run: pnpm verify

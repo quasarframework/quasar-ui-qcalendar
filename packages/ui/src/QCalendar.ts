@@ -8,11 +8,9 @@ import QCalendarScheduler from './components/QCalendarScheduler'
 import QCalendarTask from './components/QCalendarTask'
 import { version } from './version.js'
 
-import * as Timestamp from './utils/Timestamp'
 import * as helpers from './utils/helpers'
 
 // Explicitly export individual named properties
-export * from './utils/Timestamp'
 export * from './utils/helpers'
 
 export {
@@ -35,7 +33,6 @@ export default {
   QCalendarResource,
   QCalendarScheduler,
   QCalendarTask,
-  ...Timestamp,
   ...helpers,
 
   install(app: Application): void {

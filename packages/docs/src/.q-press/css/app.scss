@@ -1,7 +1,21 @@
 @use 'sass:math';
+@use 'sass:color';
+@use './fonts.scss';
 
-@import './fonts.scss';
-@import './prism-theme.scss';
+// Older custom themes may not define the newer border variables yet.
+// Keep the defaults tied to the existing separator colors so upgrades remain safe.
+$brand-border-color-light: $separator-color !default;
+$brand-border-color-dark: $separator-color-dark !default;
+$steps-border-color-light: $brand-border-color-light !default;
+$steps-border-color-dark: $brand-border-color-dark !default;
+
+// Keep this import so Shiki code blocks share the selected qPress theme variables.
+@import './code-theme.scss';
+
+@function qpress-rgb($value) {
+  @return #{color.channel($value, 'red', $space: rgb)}
+    #{color.channel($value, 'green', $space: rgb)} #{color.channel($value, 'blue', $space: rgb)};
+}
 
 .material-icons {
   font-family: 'Material Icons';
@@ -64,14 +78,14 @@ ul {
 .q-item {
   color: $brand-light-text !important;
   background: $brand-light-bg !important;
-  border-color: rgba(0, 0, 0, 0.28);
+  border-color: $brand-border-color-light;
 }
 
 .q-list--dark,
 .q-item--dark {
   color: $brand-dark-text !important;
   background: $brand-dark-bg !important;
-  border-color: rgba(255, 255, 255, 0.28);
+  border-color: $brand-border-color-dark;
 }
 
 .markdown-token {
@@ -82,9 +96,10 @@ ul {
   line-height: $font-size;
   border-radius: $generic-border-radius;
   font-family: inherit;
-  color: $brand-primary;
+  color: $brand-light-text;
+  background-color: rgba($brand-primary, 0.08);
   vertical-align: baseline;
-  border: 1px solid currentColor;
+  border: 1px solid rgba($brand-primary, 0.5);
 }
 
 .markdown-note {
@@ -103,60 +118,63 @@ ul {
   &:not(.markdown-note--tip, .markdown-note--warning, .markdown-note--danger) {
     color: $brand-light-text;
     background-color: $brand-light-bg;
-    border-color: $separator-color;
+    border-color: $brand-border-color-light;
     // .markdown-note__title,
     .markdown-link,
     .markdown-token {
-      color: $brand-primary;
+      color: $brand-light-text;
+    }
+    .markdown-link {
+      border-bottom-color: rgba($brand-primary, 0.78);
     }
     .markdown-token {
-      border-color: $brand-primary;
+      border-color: rgba($brand-primary, 0.5);
     }
     & strong {
       font-weight: 700;
-      color: scale-color($brand-light-text, $lightness: 90%);
+      color: inherit;
     }
   }
 
   &--tip {
-    color: scale-color($positive, $lightness: -40%) !important;
-    background-color: scale-color($positive, $lightness: 85%);
+    color: color.scale($positive, $lightness: -40%) !important;
+    background-color: color.scale($positive, $lightness: 85%);
     border-color: $positive;
     .markdown-note__title,
     .markdown-link,
     .markdown-token {
-      color: scale-color($positive, $lightness: -40%);
+      color: color.scale($positive, $lightness: -40%);
     }
     .markdown-token {
-      border-color: scale-color($positive, $lightness: -40%);
+      border-color: color.scale($positive, $lightness: -40%);
     }
     & strong {
       font-weight: 700;
-      color: scale-color($positive, $lightness: 90%);
+      color: inherit;
     }
   }
 
   &--warning {
-    color: scale-color($warning, $lightness: -40%);
-    background-color: scale-color($warning, $lightness: 85%);
-    border-color: scale-color($warning, $lightness: -30%);
+    color: color.scale($warning, $lightness: -40%);
+    background-color: color.scale($warning, $lightness: 85%);
+    border-color: color.scale($warning, $lightness: -30%);
     .markdown-note__title,
     .markdown-link,
     .markdown-token {
-      color: scale-color($warning, $lightness: -40%);
+      color: color.scale($warning, $lightness: -40%);
     }
     .markdown-token {
-      border-color: scale-color($warning, $lightness: -40%);
+      border-color: color.scale($warning, $lightness: -40%);
     }
     & strong {
       font-weight: 700;
-      color: scale-color($warning, $lightness: 90%);
+      color: inherit;
     }
   }
 
   &--danger {
-    color: scale-color($negative, $lightness: -40%);
-    background-color: scale-color($negative, $lightness: 90%);
+    color: color.scale($negative, $lightness: -40%);
+    background-color: color.scale($negative, $lightness: 90%);
     border-color: $negative;
     .markdown-note__title,
     .markdown-link,
@@ -169,7 +187,7 @@ ul {
 
     & strong {
       font-weight: 700;
-      color: scale-color($negative, $lightness: 90%);
+      color: inherit;
     }
   }
 
@@ -188,6 +206,63 @@ ul {
     font-weight: 700;
     letter-spacing: $letter-spacing-brand;
     padding-bottom: 8px;
+  }
+}
+
+.markdown-steps {
+  display: grid;
+  gap: 20px;
+  margin: 24px 0;
+}
+
+.markdown-step {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 16px;
+  padding: 18px;
+  color: $steps-text;
+  background: $steps-bg;
+  border: 1px solid $steps-border-color-light;
+  border-radius: $generic-border-radius;
+  box-shadow: $steps-shadow;
+}
+
+.markdown-step__marker {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  color: $steps-marker-color;
+  background: $steps-marker-bg;
+  border-radius: 999px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.markdown-step__content {
+  min-width: 0;
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+}
+
+.markdown-step__title {
+  margin: 0 0 10px;
+  color: $steps-title-color;
+  font-size: 1.15em;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.markdown-content .q-card--bordered,
+.markdown-page__content .q-card--bordered {
+  border-color: $brand-border-color-light;
+}
+
+@media (max-width: 600px) {
+  .markdown-step {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -224,7 +299,7 @@ ul {
   font-size: 1.8em !important;
   font-weight: 600;
   padding-bottom: 8px !important;
-  border-bottom: 1px solid $separator-color;
+  border-bottom: 1px solid $brand-border-color-light;
 }
 
 .markdown-h3 {
@@ -312,6 +387,260 @@ kbd {
   &,
   .q-btn {
     font-weight: 700;
+  }
+}
+
+.qpress-announcement {
+  color: var(--qpress-text-primary);
+  background: var(--qpress-surface-raised-strong);
+  border-bottom: 1px solid var(--qpress-border-strong);
+
+  &--success {
+    border-bottom-color: $positive;
+  }
+
+  &--warning {
+    border-bottom-color: $warning;
+  }
+
+  &--danger {
+    border-bottom-color: $negative;
+  }
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    width: min(1200px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 10px 0;
+  }
+
+  &__message {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    color: var(--qpress-text-body);
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  &__marker {
+    flex: 0 0 auto;
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    background: $brand-primary;
+    box-shadow: 0 0 0 4px rgb(var(--qpress-rgb-primary) / 0.14);
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 0 0 auto;
+  }
+
+  &__action {
+    color: var(--qpress-action-solid-text) !important;
+    background: var(--qpress-action-solid-bg) !important;
+    font-weight: 700;
+  }
+
+  &__close {
+    color: var(--qpress-text-primary);
+  }
+}
+
+.qpress-consent {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 4000;
+  width: min(460px, calc(100vw - 40px));
+  padding: 18px;
+  color: var(--qpress-text-primary);
+  background: var(--qpress-surface-raised-strong);
+  border: 1px solid var(--qpress-border-strong);
+  border-radius: $generic-border-radius;
+  box-shadow: var(--qpress-shadow-large);
+
+  &__title {
+    margin: 0 0 8px;
+    color: var(--qpress-text-primary);
+    font-size: 1.05rem;
+    font-weight: 800;
+  }
+
+  &__message {
+    margin: 0 0 10px;
+    color: var(--qpress-text-body);
+    line-height: 1.45;
+  }
+
+  &__policy {
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+
+  &__categories {
+    display: grid;
+    gap: 10px;
+    margin: 12px 0;
+    padding: 12px;
+    border: 1px solid var(--qpress-border-subtle);
+    border-radius: $generic-border-radius;
+    background: var(--qpress-surface-panel);
+  }
+
+  &__category-description {
+    margin: 4px 0 0 34px;
+    color: var(--qpress-text-muted);
+    font-size: 0.9em;
+    line-height: 1.35;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  &__button {
+    font-weight: 800;
+  }
+
+  &__button--primary {
+    color: var(--qpress-action-solid-text) !important;
+    background: var(--qpress-action-solid-bg) !important;
+  }
+
+  &__button--ghost {
+    color: var(--qpress-action-ghost-text) !important;
+    background: var(--qpress-action-ghost-bg) !important;
+  }
+}
+
+.qpress-consent-enter-active,
+.qpress-consent-leave-active {
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+.qpress-consent-enter-from,
+.qpress-consent-leave-to {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.qpress-campaign {
+  width: min(520px, calc(100vw - 32px));
+  color: var(--qpress-text-primary);
+  background: var(--qpress-surface-raised-strong);
+  border: 1px solid var(--qpress-border-strong);
+  border-radius: $generic-border-radius;
+  box-shadow: var(--qpress-shadow-large);
+
+  &--success {
+    border-color: $positive;
+  }
+
+  &--warning {
+    border-color: $warning;
+  }
+
+  &--danger {
+    border-color: $negative;
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 8px;
+  }
+
+  &__eyebrow {
+    margin: 0 0 6px;
+    color: $brand-primary;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    margin: 0;
+    color: var(--qpress-text-primary);
+    font-size: clamp(1.35rem, 4vw, 1.85rem);
+    font-weight: 800;
+    line-height: 1.14;
+  }
+
+  &__close {
+    color: var(--qpress-text-primary);
+  }
+
+  &__body {
+    color: var(--qpress-text-body);
+    line-height: 1.5;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &__actions {
+    gap: 8px;
+    padding: 8px 16px 16px;
+  }
+
+  &__button {
+    font-weight: 800;
+  }
+
+  &__button--primary {
+    color: var(--qpress-action-solid-text) !important;
+    background: var(--qpress-action-solid-bg) !important;
+  }
+
+  &__button--ghost {
+    color: var(--qpress-action-ghost-text) !important;
+    background: var(--qpress-action-ghost-bg) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .qpress-campaign,
+  .qpress-consent,
+  .qpress-announcement {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .qpress-announcement__inner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .qpress-announcement__actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .qpress-consent {
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+    width: auto;
   }
 }
 
@@ -492,6 +821,7 @@ body.q-scroll--lock .q-page > .q-scroll--anchor {
 .header-toolbar {
   color: $header-btn-color--light;
   background: $brand-light;
+  border-color: $brand-border-color-light;
 }
 
 .header-tabs,
@@ -511,7 +841,7 @@ body.q-scroll--lock .q-page > .q-scroll--anchor {
 .markdown-heading .q-badge,
 .header-badge {
   color: $brand-primary;
-  background: scale-color($light-bg, $lightness: 15%);
+  background: color.scale($light-bg, $lightness: 15%);
   vertical-align: super;
   letter-spacing: $letter-spacing-brand;
   padding: 4px 8px;
@@ -537,6 +867,134 @@ $additional-colors: (
   }
 }
 
+:root,
+body.body--light {
+  --qpress-color-primary: #{$brand-primary};
+  --qpress-color-secondary: #{$brand-secondary};
+  --qpress-color-accent: #{$brand-accent};
+  --qpress-color-light: #{$brand-light};
+  --qpress-color-dark: #{$brand-dark-bg};
+  --qpress-rgb-primary: #{qpress-rgb($brand-primary)};
+  --qpress-rgb-secondary: #{qpress-rgb($brand-secondary)};
+  --qpress-rgb-accent: #{qpress-rgb($brand-accent)};
+  --qpress-rgb-light: #{qpress-rgb($brand-light)};
+  --qpress-rgb-dark: #{qpress-rgb($brand-dark-bg)};
+  --qpress-rgb-text: #{qpress-rgb($brand-light-text)};
+  --qpress-rgb-surface: #{qpress-rgb($brand-light-bg)};
+  --qpress-surface-page: #{$brand-light-bg};
+  --qpress-surface-base: #{$brand-light};
+  --qpress-surface-raised: rgb(var(--qpress-rgb-light) / 0.78);
+  --qpress-surface-raised-strong: rgb(var(--qpress-rgb-light) / 0.92);
+  --qpress-surface-panel: rgb(var(--qpress-rgb-surface) / 0.88);
+  --qpress-text-primary: #{$brand-light-text};
+  --qpress-text-body: rgb(var(--qpress-rgb-text) / 0.84);
+  --qpress-text-muted: rgb(var(--qpress-rgb-text) / 0.66);
+  --qpress-text-soft: rgb(var(--qpress-rgb-text) / 0.78);
+  --qpress-border-subtle: color-mix(in srgb, #{$brand-border-color-light} 42%, transparent);
+  --qpress-border-strong: #{$brand-border-color-light};
+  --qpress-card-shadow: 0 16px 34px rgb(var(--qpress-rgb-secondary) / 0.12);
+  --qpress-shadow-large: 0 28px 60px rgb(var(--qpress-rgb-primary) / 0.14);
+  --qpress-chip-bg: rgb(var(--qpress-rgb-light) / 0.52);
+  --qpress-chip-text: var(--qpress-text-primary);
+  --qpress-action-solid-bg: var(--qpress-text-primary);
+  --qpress-action-solid-text: var(--qpress-surface-page);
+  --qpress-action-solid-shadow: 0 18px 30px rgb(var(--qpress-rgb-primary) / 0.24);
+  --qpress-action-ghost-bg: rgb(var(--qpress-rgb-light) / 0.46);
+  --qpress-action-ghost-text: var(--qpress-text-primary);
+  --qpress-pill-border: color-mix(in srgb, #{$brand-border-color-light} 42%, transparent);
+  --qpress-pill-bg: rgb(var(--qpress-rgb-light) / 0.44);
+  --qpress-pill-text: var(--qpress-text-primary);
+  --qpress-panel-gradient-top: rgb(var(--qpress-rgb-light) / 0.7);
+  --qpress-panel-gradient-bottom: rgb(var(--qpress-rgb-light) / 0.22);
+  --qpress-highlight-border: color-mix(in srgb, #{$brand-border-color-light} 42%, transparent);
+  --qpress-highlight-bg: rgb(var(--qpress-rgb-light) / 0.52);
+  --qpress-highlight-value: var(--qpress-text-primary);
+  --qpress-highlight-label: var(--qpress-text-primary);
+  --qpress-accent-line: rgb(var(--qpress-rgb-primary) / 0.4);
+  --qpress-icon-bg: rgb(var(--qpress-rgb-primary) / 0.1);
+  --qpress-icon-color: var(--qpress-text-primary);
+  --qpress-tile-border: color-mix(in srgb, #{$brand-border-color-light} 42%, transparent);
+  --qpress-tile-bg: rgb(var(--qpress-rgb-light) / 0.42);
+  --qpress-tile-hover-border: #{$brand-border-color-light};
+  --qpress-tile-hover-bg: rgb(var(--qpress-rgb-light) / 0.56);
+  --qpress-tile-hover-shadow: 0 14px 28px rgb(var(--qpress-rgb-secondary) / 0.12);
+  --qpress-meta-text: var(--qpress-text-primary);
+  --qpress-spot-accent: rgb(var(--qpress-rgb-primary) / 0.14);
+  --qpress-resource-link-bg: rgb(var(--qpress-rgb-light) / 0.48);
+  --qpress-resource-link-text: var(--qpress-text-primary);
+  --qpress-resource-item-border: color-mix(in srgb, #{$brand-border-color-light} 38%, transparent);
+  --qpress-resource-item-bg: rgb(var(--qpress-rgb-light) / 0.42);
+  --qpress-mesh-color: rgb(var(--qpress-rgb-primary) / 0.16);
+  --qpress-hero-glow-primary: rgb(var(--qpress-rgb-primary) / 0.18);
+  --qpress-hero-glow-secondary: rgb(var(--qpress-rgb-secondary) / 0.12);
+  --qpress-hero-start: rgb(var(--qpress-rgb-light) / 0.96);
+  --qpress-hero-end: rgb(var(--qpress-rgb-surface) / 0.96);
+}
+
+body.body--dark {
+  --qpress-color-primary: #{$brand-primary};
+  --qpress-color-secondary: #{$brand-secondary};
+  --qpress-color-accent: #{$brand-accent};
+  --qpress-color-light: #{$brand-light};
+  --qpress-color-dark: #{$brand-dark-bg};
+  --qpress-rgb-primary: #{qpress-rgb($brand-primary)};
+  --qpress-rgb-secondary: #{qpress-rgb($brand-secondary)};
+  --qpress-rgb-accent: #{qpress-rgb($brand-accent)};
+  --qpress-rgb-light: #{qpress-rgb($brand-light)};
+  --qpress-rgb-dark: #{qpress-rgb($brand-dark-bg)};
+  --qpress-rgb-text: #{qpress-rgb($brand-dark-text)};
+  --qpress-rgb-surface: #{qpress-rgb($brand-dark-bg)};
+  --qpress-rgb-surface-raised: #{qpress-rgb($dark-pill)};
+  --qpress-surface-page: #{$brand-dark-bg};
+  --qpress-surface-base: #{$dark-pill};
+  --qpress-surface-raised: rgb(var(--qpress-rgb-surface-raised) / 0.74);
+  --qpress-surface-raised-strong: rgb(var(--qpress-rgb-surface-raised) / 0.88);
+  --qpress-surface-panel: rgb(var(--qpress-rgb-surface) / 0.56);
+  --qpress-text-primary: #{$brand-dark-text};
+  --qpress-text-body: rgb(var(--qpress-rgb-text) / 0.8);
+  --qpress-text-muted: rgb(var(--qpress-rgb-text) / 0.64);
+  --qpress-text-soft: rgb(var(--qpress-rgb-text) / 0.82);
+  --qpress-border-subtle: color-mix(in srgb, #{$brand-border-color-dark} 70%, transparent);
+  --qpress-border-strong: #{$brand-border-color-dark};
+  --qpress-card-shadow: 0 16px 34px rgb(var(--qpress-rgb-dark) / 0.24);
+  --qpress-shadow-large: 0 28px 60px rgb(var(--qpress-rgb-dark) / 0.28);
+  --qpress-chip-bg: rgb(var(--qpress-rgb-light) / 0.08);
+  --qpress-chip-text: var(--qpress-text-primary);
+  --qpress-action-solid-bg: var(--qpress-color-light);
+  --qpress-action-solid-text: var(--qpress-color-dark);
+  --qpress-action-solid-shadow: 0 18px 30px rgb(var(--qpress-rgb-dark) / 0.28);
+  --qpress-action-ghost-bg: rgb(var(--qpress-rgb-light) / 0.08);
+  --qpress-action-ghost-text: var(--qpress-text-primary);
+  --qpress-pill-border: color-mix(in srgb, #{$brand-border-color-dark} 70%, transparent);
+  --qpress-pill-bg: rgb(var(--qpress-rgb-light) / 0.05);
+  --qpress-pill-text: var(--qpress-text-primary);
+  --qpress-panel-gradient-top: rgb(var(--qpress-rgb-light) / 0.08);
+  --qpress-panel-gradient-bottom: rgb(var(--qpress-rgb-light) / 0.02);
+  --qpress-highlight-border: color-mix(in srgb, #{$brand-border-color-dark} 64%, transparent);
+  --qpress-highlight-bg: rgb(var(--qpress-rgb-light) / 0.05);
+  --qpress-highlight-value: var(--qpress-text-primary);
+  --qpress-highlight-label: var(--qpress-text-primary);
+  --qpress-accent-line: rgb(var(--qpress-rgb-primary) / 0.55);
+  --qpress-icon-bg: rgb(var(--qpress-rgb-primary) / 0.16);
+  --qpress-icon-color: var(--qpress-text-primary);
+  --qpress-tile-border: color-mix(in srgb, #{$brand-border-color-dark} 62%, transparent);
+  --qpress-tile-bg: rgb(var(--qpress-rgb-light) / 0.04);
+  --qpress-tile-hover-border: #{$brand-border-color-dark};
+  --qpress-tile-hover-bg: rgb(var(--qpress-rgb-light) / 0.08);
+  --qpress-tile-hover-shadow: 0 14px 28px rgb(var(--qpress-rgb-dark) / 0.2);
+  --qpress-meta-text: var(--qpress-text-primary);
+  --qpress-spot-accent: rgb(var(--qpress-rgb-primary) / 0.18);
+  --qpress-resource-link-bg: rgb(var(--qpress-rgb-light) / 0.06);
+  --qpress-resource-link-text: var(--qpress-text-primary);
+  --qpress-resource-item-border: color-mix(in srgb, #{$brand-border-color-dark} 62%, transparent);
+  --qpress-resource-item-bg: rgb(var(--qpress-rgb-light) / 0.04);
+  --qpress-mesh-color: rgb(var(--qpress-rgb-light) / 0.12);
+  --qpress-hero-glow-primary: rgb(var(--qpress-rgb-primary) / 0.22);
+  --qpress-hero-glow-secondary: rgb(var(--qpress-rgb-light) / 0.08);
+  --qpress-hero-start: rgb(var(--qpress-rgb-surface) / 0.96);
+  --qpress-hero-end: rgb(var(--qpress-rgb-surface-raised) / 0.96);
+}
+
 $text-size-list: 12, 14, 16, 20, 24, 36;
 @each $text-size in $text-size-list {
   .text-size-#{$text-size} {
@@ -552,6 +1010,12 @@ $letter-spacing-list: 40, 100, 225, 263, 300, 375, 450;
 }
 
 body.body--dark {
+  .markdown-token {
+    color: $brand-dark-text;
+    background-color: rgba($brand-primary, 0.18);
+    border-color: rgba($brand-primary, 0.72);
+  }
+
   .markdown-technical {
     color: $brand-dark-text;
     background: $brand-dark-bg;
@@ -567,6 +1031,7 @@ body.body--dark {
   .header-toolbar {
     color: $header-btn-color--dark;
     background: $dark-bg;
+    border-color: $brand-border-color-dark;
   }
 
   .header-tabs,
@@ -591,18 +1056,21 @@ body.body--dark {
 
   .markdown-note {
     &:not(.markdown-note--tip, .markdown-note--warning, .markdown-note--danger) {
-      color: scale-color($dark-pill, $lightness: 80%);
+      color: color.scale($dark-pill, $lightness: 80%);
       background-color: $dark-pill;
-      border-color: scale-color($dark-pill, $lightness: 50%);
+      border-color: color.scale($dark-pill, $lightness: 50%);
       .markdown-token {
         border-color: #ddd;
         color: #ddd;
+      }
+      .markdown-link {
+        color: $brand-primary;
       }
     }
 
     &--tip {
       border-color: $positive;
-      background-color: scale-color($positive, $lightness: -85%);
+      background-color: color.scale($positive, $lightness: -85%);
       .markdown-note__title,
       .markdown-link,
       .markdown-token {
@@ -615,7 +1083,7 @@ body.body--dark {
 
     &--warning {
       border-color: $warning;
-      background-color: scale-color($warning, $lightness: -85%);
+      background-color: color.scale($warning, $lightness: -85%);
       .markdown-note__title,
       .markdown-link,
       .markdown-token {
@@ -628,12 +1096,33 @@ body.body--dark {
 
     &--danger {
       border-color: $negative;
-      background-color: scale-color($negative, $lightness: -80%);
+      background-color: color.scale($negative, $lightness: -80%);
     }
   }
 
+  .markdown-step {
+    color: $steps-text-dark;
+    background: $steps-bg-dark;
+    border-color: $steps-border-color-dark;
+    box-shadow: $steps-shadow-dark;
+  }
+
+  .markdown-step__marker {
+    color: $steps-marker-color-dark;
+    background: $steps-marker-bg-dark;
+  }
+
+  .markdown-step__title {
+    color: $steps-title-color-dark;
+  }
+
+  .markdown-content .q-card--bordered,
+  .markdown-page__content .q-card--bordered {
+    border-color: $brand-border-color-dark;
+  }
+
   .markdown-h2 {
-    border-color: $separator-dark-color;
+    border-color: $brand-border-color-dark;
   }
 
   kbd {
@@ -653,7 +1142,7 @@ body.body--dark {
   padding: 4px 8px 4px 28px;
   position: relative;
   border-radius: 3px 5px 5px 0;
-  background: scale-color($brand-light, $lightness: -15%);
+  background: color.scale($brand-light, $lightness: -15%);
   color: $brand-secondary;
   font-size: ($font-size + 2px);
   letter-spacing: $letter-spacing-brand;
@@ -667,7 +1156,7 @@ body.body--dark {
     height: 0;
     border: 0 solid transparent;
     border-width: 9px 0 0 11px;
-    border-top-color: scale-color($brand-light, $lightness: -25%);
+    border-top-color: color.scale($brand-light, $lightness: -25%);
   }
 }
 
@@ -675,6 +1164,79 @@ body.body--dark .markdown-card-title {
   background: $brand-secondary;
   color: $dark-text;
   &:after {
-    border-top-color: scale-color($brand-secondary, $lightness: -30%);
+    border-top-color: color.scale($brand-secondary, $lightness: -30%);
+  }
+}
+
+.qpress-error-page {
+  overflow: hidden;
+  color: $brand-light-text;
+  background:
+    radial-gradient(circle at top right, rgba($brand-primary, 0.24), transparent 34rem),
+    linear-gradient(135deg, color.scale($light-bg, $lightness: 8%), $light-bg);
+
+  &__content {
+    width: min(680px, 100%);
+  }
+
+  &__eyebrow {
+    margin: 0 0 10px;
+    color: $brand-secondary;
+    font-family: $font-family-brand;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  &__code {
+    margin: 0;
+    color: $brand-primary;
+    font-family: $font-family-brand;
+    font-size: clamp(6rem, 24vw, 18rem);
+    font-weight: 800;
+    line-height: 0.85;
+    text-shadow: 0 20px 52px rgba($brand-primary, 0.22);
+  }
+
+  &__message {
+    max-width: 34rem;
+    margin: 24px auto 0;
+    color: rgba($brand-light-text, 0.78);
+    font-size: clamp(1.25rem, 3vw, 2rem);
+    line-height: 1.35;
+  }
+
+  &__button {
+    color: $brand-light-bg !important;
+    background: $brand-primary !important;
+    border: 1px solid rgba($brand-primary, 0.45);
+    box-shadow: $shadow--small;
+  }
+}
+
+body.body--dark .qpress-error-page {
+  color: $brand-dark-text;
+  background:
+    radial-gradient(circle at top right, rgba($brand-accent, 0.18), transparent 34rem),
+    linear-gradient(135deg, color.scale($brand-dark-bg, $lightness: 8%), $brand-dark-bg);
+
+  .qpress-error-page__eyebrow {
+    color: $brand-accent;
+  }
+
+  .qpress-error-page__code {
+    color: $brand-accent;
+    text-shadow: 0 20px 52px rgba($brand-accent, 0.26);
+  }
+
+  .qpress-error-page__message {
+    color: rgba($brand-dark-text, 0.78);
+  }
+
+  .qpress-error-page__button {
+    color: $brand-dark-bg !important;
+    background: $brand-accent !important;
+    border-color: rgba($brand-accent, 0.5);
   }
 }

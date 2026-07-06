@@ -1,5 +1,9 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      Click dates across the mini calendars to see how selection can span more than one month.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div style="display: flex; justify-content: center; align-items: center">
@@ -56,18 +60,12 @@
 </template>
 
 <script setup lang="ts">
-import {
-  QCalendarMonth,
-  addToDate,
-  getDayIdentifier,
-  parseTimestamp,
-  today,
-  Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar'
+import { addToDate, getDayIdentifier, parseTimestamp, today, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref, computed, onBeforeMount } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 function leftClick(e: MouseEvent) {
   return e.button === 0

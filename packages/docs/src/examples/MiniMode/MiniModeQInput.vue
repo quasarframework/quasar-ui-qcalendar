@@ -1,5 +1,10 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      This example connects mini-mode selection to a Quasar input so users can pick dates from a
+      compact calendar.
+    </p>
+
     <div style="display: flex; justify-content: center; align-items: center; flex-wrap: nowrap">
       <div class="q-pt-lg" style="display: flex; max-width: 280px; width: 100%">
         <q-input
@@ -53,11 +58,12 @@
 </template>
 
 <script setup lang="ts">
-import { QCalendarMonth, today, getMonthFormatter, Timestamp } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar'
+import { today, getMonthFormatter, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref, onBeforeMount } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 const calendar = ref<QCalendarMonth>(),
   monthFormatter = getMonthFormatter(),
@@ -68,7 +74,6 @@ const calendar = ref<QCalendarMonth>(),
 onBeforeMount(() => {
   const parts = selectedDate.value.split('-')
   if (parts[1]) {
-    /// @ts-expect-error ignore for now
     month.value = monthFormatter(parseInt(parts[1], 10) - 1)
   }
 })
@@ -94,7 +99,6 @@ function onMoved(data: Timestamp) {
 function onChange(data: { start: Timestamp; end: Timestamp; days: Timestamp[] }) {
   console.info('onChange', data)
   if (data.days[8]) {
-    /// @ts-expect-error ignore for now
     month.value = monthFormatter(data.days[8].month - 1)
   }
 }

@@ -1,6 +1,9 @@
-import { fabGithub, fabXTwitter } from '@quasar/extras/fontawesome-v6'
-import { slugify } from '@md-plugins/shared'
+import { fabGithub, fabXTwitter } from '@quasar/extras/fontawesome-v7'
 import { version, productName } from '../../../ui/package.json'
+import { slugify } from '../.q-press/components/markdown-utils'
+
+const repoBranch = 'v5-beta'
+const codepenPackageVersion = version.includes('-beta.') ? 'beta' : version
 
 export interface SocialLink {
   name: string
@@ -70,14 +73,36 @@ export interface PrivacyConfig {
   link: string
 }
 
+export interface CodepenGlobalPackage {
+  packageName: string
+  globalName: string
+}
+
+export interface CodepenModulePackage {
+  packageName: string
+  importUrl: string
+}
+
+export interface CodepenConfig {
+  cssExternal?: string[]
+  jsExternal?: string[]
+  jsPreProcessor?: string
+  titleSuffix?: string
+  jsSetup?: string
+  head?: string
+  globalPackages?: CodepenGlobalPackage[]
+  modulePackages?: CodepenModulePackage[]
+}
+
 export interface SiteConfig {
   lang: string
   title: string
   description: string
-  theme: string
   version: string
   copyright: CopyrightConfig
   githubEditRootSrc: string
+  githubSourceRootSrc?: string
+  codepen?: CodepenConfig
   license: LicenseConfig
   privacy: PrivacyConfig
   logoConfig: LogoConfig
@@ -87,10 +112,23 @@ export interface SiteConfig {
   sidebar: MenuItem[]
 }
 
+function getSidebarPath(item: MenuItem): string {
+  if (item.path === '') {
+    return ''
+  }
+
+  if (item.external === true) {
+    return item.path ?? slugify(item.name)
+  }
+
+  const path = item.path?.replace(/^\/+/, '').split('/').filter(Boolean).pop()
+  return path ?? slugify(item.name)
+}
+
 function processMenuItem(item: MenuItem): MenuItem {
   return {
     name: item.name,
-    path: slugify(item.name),
+    path: getSidebarPath(item),
     expanded: item.expanded ?? false,
     children: item.children ? item.children.map(processMenuItem) : undefined,
   }
@@ -103,7 +141,7 @@ const socialLinks = {
     {
       name: 'GitHub',
       icon: fabGithub,
-      path: 'https://github.com/quasarframework/quasar-ui-qcalendar/tree/dev',
+      path: `https://github.com/quasarframework/quasar-ui-qcalendar/tree/${repoBranch}`,
       external: true,
     },
     {
@@ -118,11 +156,18 @@ const socialLinks = {
 const netlifyLink = {
   path: 'https://www.netlify.com',
   external: true,
-  image: 'https://www.netlify.com/img/global/badges/netlify-color-accent.svg',
+  image: 'https://www.netlify.com/assets/badges/netlify-badge-color-accent.svg',
   name: 'Deploys by Netlify',
   maxWidth: '120px',
 }
 
+const sponsorLink = {
+  path: 'https://github.com/sponsors/hawkeye64',
+  external: true,
+  image: 'https://github.com/hawkeye64.png?size=96',
+  name: 'Sponsor Jeff',
+  maxWidth: '24px',
+}
 const SponsorsLinks = {
   name: 'Sponsors',
   children: [
@@ -131,6 +176,14 @@ const SponsorsLinks = {
       path: netlifyLink.path,
       external: netlifyLink.external,
       image: netlifyLink.image,
+      maxWidth: netlifyLink.maxWidth,
+    },
+    {
+      name: sponsorLink.name,
+      path: sponsorLink.path,
+      external: sponsorLink.external,
+      image: sponsorLink.image,
+      maxWidth: sponsorLink.maxWidth,
     },
   ],
 }
@@ -148,7 +201,7 @@ const footerLinks = [
 
 const gettingStartedMenu: SiteMenuItem = {
   name: 'Getting Started',
-  mq: 470, // media query breakpoint
+  mq: 820, // media query breakpoint
   children: [
     { name: 'Introduction', path: '/getting-started/introduction' },
     { name: 'Installation', path: '/getting-started/installation' },
@@ -156,12 +209,13 @@ const gettingStartedMenu: SiteMenuItem = {
     { name: 'Anatomy of a Calendar', path: '/getting-started/anatomy-of-a-calendar' },
     { name: 'Transitions', path: '/getting-started/transitions' },
     { name: 'Themes', path: '/getting-started/themes' },
+    { name: 'Theme Builder', path: '/theme-builder' },
   ],
 }
 
 const developingMenu = {
   name: 'Developing',
-  mq: 600, // media query breakpoint
+  mq: 960, // media query breakpoint
   children: [
     { name: 'QCalendar', path: '/developing/qcalendar' },
     { name: 'QCalendarAgenda', path: '/developing/qcalendar-agenda' },
@@ -173,24 +227,25 @@ const developingMenu = {
     { name: 'QCalendarResource', path: '/developing/qcalendar-resource' },
     { name: 'QCalendarScheduler', path: '/developing/qcalendar-scheduler' },
     { name: 'QCalendarTask', path: '/developing/qcalendar-task' },
-    { name: 'Timestamp', path: '/developing/timestamp' },
+    { name: 'Calendar Adapters', path: '/developing/calendar-adapters' },
+    { name: 'Timestamp Recipes', path: '/developing/timestamp-recipes' },
     { name: 'FAQ', path: '/developing/faq' },
   ],
 }
 
 const examplesMenu = {
   name: 'Examples',
-  mq: 750, // media query breakpoint
+  mq: 1080, // media query breakpoint
   children: [
     {
       name: 'Agenda',
       children: [
+        { name: 'Date Type', path: '/examples/agenda/date-type' },
+        { name: 'Dark', path: '/examples/agenda/dark' },
         { name: 'Alignment', path: '/examples/agenda/alignment' },
         { name: 'Cell Width', path: '/examples/agenda/cell-width' },
         { name: 'Column Count', path: '/examples/agenda/column-count' },
         { name: 'Column Options', path: '/examples/agenda/column-options' },
-        { name: 'Dark', path: '/examples/agenda/dark' },
-        { name: 'Date Type', path: '/examples/agenda/date-type' },
         { name: 'Day Week Max Days', path: '/examples/agenda/day-week-max-days' },
         { name: 'Disabled Before After', path: '/examples/agenda/disabled-before-after' },
         { name: 'Disabled Days', path: '/examples/agenda/disabled-days' },
@@ -200,105 +255,151 @@ const examplesMenu = {
         { name: 'Locale', path: '/examples/agenda/locale' },
         { name: 'No Active Date', path: '/examples/agenda/no-active-date' },
         { name: 'Now', path: '/examples/agenda/now' },
-        { name: 'Planner', path: '/examples/agenda/planner' },
         { name: 'Theme', path: '/examples/agenda/theme' },
         { name: 'Transitions', path: '/examples/agenda/transitions' },
+        {
+          name: 'Recipes',
+          path: '',
+          children: [
+            { name: 'Planner', path: '/examples/agenda/planner' },
+            { name: 'Server Data', path: '/examples/agenda/server-data' },
+            { name: 'Calendar Adapters', path: '/examples/agenda/calendar-adapter' },
+          ],
+        },
       ],
     },
     {
       name: 'Day',
       children: [
+        { name: 'Date Type', path: '/examples/day/date-type' },
+        { name: 'Dark', path: '/examples/day/dark' },
         { name: '3 Day', path: '/examples/day/_3-day' },
         { name: 'Alignment', path: '/examples/day/alignment' },
         { name: 'Cell Width', path: '/examples/day/cell-width' },
         { name: 'Column Count', path: '/examples/day/column-count' },
         { name: 'Column Count Plus', path: '/examples/day/column-count-plus' },
-        { name: 'Custom Header', path: '/examples/day/custom-header' },
-        { name: 'Dark', path: '/examples/day/dark' },
-        { name: 'Date Type', path: '/examples/day/date-type' },
         { name: 'Disabled Before After', path: '/examples/day/disabled-before-after' },
         { name: 'Disabled Days', path: '/examples/day/disabled-days' },
         { name: 'Disabled Weekdays', path: '/examples/day/disabled-weekdays' },
-        { name: 'Drag And Drop', path: '/examples/day/drag-and-drop' },
         { name: 'Hour 24 Format', path: '/examples/day/hour-24-format' },
-        { name: 'Interval Count', path: '/examples/day/interval-count' },
-        { name: 'Interval Height', path: '/examples/day/interval-height' },
-        { name: 'Interval Minutes 15', path: '/examples/day/interval-minutes-15' },
-        { name: 'Interval Minutes 30', path: '/examples/day/interval-minutes-30' },
-        { name: 'Interval Start', path: '/examples/day/interval-start' },
         { name: 'Locale', path: '/examples/day/locale' },
         { name: 'Max Days', path: '/examples/day/max-days' },
-        { name: 'Modify Intervals', path: '/examples/day/modify-intervals' },
         { name: 'Month', path: '/examples/day/month' },
         { name: 'Navigation', path: '/examples/day/navigation' },
         { name: 'No Active Date', path: '/examples/day/no-active-date' },
         { name: 'No Header', path: '/examples/day/no-header' },
         { name: 'No Scroll', path: '/examples/day/no-scroll' },
         { name: 'Now', path: '/examples/day/now' },
-        { name: 'Selected Intervals', path: '/examples/day/selected-intervals' },
         { name: 'Selection', path: '/examples/day/selection' },
-        { name: 'Slot Column Header', path: '/examples/day/slot-column-header' },
-        { name: 'Slot Day Body', path: '/examples/day/slot-day-body' },
-        {
-          name: 'Slot Day Container Show Current Time',
-          path: '/examples/day/slot-day-container-show-current-time',
-        },
-        { name: 'Slot Head Day', path: '/examples/day/slot-head-day' },
-        { name: 'Slot Head Day Event', path: '/examples/day/slot-head-day-event' },
-        { name: 'Slot Head Intervals', path: '/examples/day/slot-head-intervals' },
         { name: 'Theme', path: '/examples/day/theme' },
         { name: 'Transitions', path: '/examples/day/transitions' },
+        {
+          name: 'Intervals',
+          path: '',
+          children: [
+            { name: 'Interval Count', path: '/examples/day/interval-count' },
+            { name: 'Interval Height', path: '/examples/day/interval-height' },
+            { name: 'Interval Minutes 15', path: '/examples/day/interval-minutes-15' },
+            { name: 'Interval Minutes 30', path: '/examples/day/interval-minutes-30' },
+            { name: 'Interval Start', path: '/examples/day/interval-start' },
+            { name: 'Modify Intervals', path: '/examples/day/modify-intervals' },
+            { name: 'Selected Intervals', path: '/examples/day/selected-intervals' },
+          ],
+        },
+        {
+          name: 'Slots',
+          path: '',
+          children: [
+            { name: 'Column Header', path: '/examples/day/slot-column-header' },
+            { name: 'Day Body', path: '/examples/day/slot-day-body' },
+            {
+              name: 'Day Container Show Current Time',
+              path: '/examples/day/slot-day-container-show-current-time',
+            },
+            { name: 'Head Day', path: '/examples/day/slot-head-day' },
+            { name: 'Head Day Event', path: '/examples/day/slot-head-day-event' },
+            { name: 'Head Intervals', path: '/examples/day/slot-head-intervals' },
+          ],
+        },
+        {
+          name: 'Recipes',
+          path: '',
+          children: [
+            { name: 'Custom Header', path: '/examples/day/custom-header' },
+            { name: 'Drag And Drop', path: '/examples/day/drag-and-drop' },
+            { name: 'Mouse Wheel Resize and Move', path: '/examples/day/mouse-wheel-events' },
+            { name: 'Server Data', path: '/examples/day/server-data' },
+            { name: 'Calendar Adapters', path: '/examples/day/calendar-adapter' },
+          ],
+        },
       ],
     },
     {
       name: 'General',
-      children: [{ name: 'Calendar All', path: '/examples/general/calendar-all' }],
+      children: [
+        { name: 'Calendar All', path: '/examples/general/calendar-all' },
+        { name: 'Calendar Adapters', path: '/examples/general/calendar-adapter-wrapper' },
+      ],
     },
     {
       name: 'Intervals',
       children: [
-        { name: 'Month Cell Width', path: '/examples/intervals/month-cell-width' },
-        { name: 'Month Navigation', path: '/examples/intervals/month-navigation' },
+        {
+          name: 'Recipes',
+          path: '',
+          children: [
+            { name: 'Month Cell Width', path: '/examples/intervals/month-cell-width' },
+            { name: 'Month Navigation', path: '/examples/intervals/month-navigation' },
+            { name: 'Calendar Adapters', path: '/examples/intervals/calendar-adapter' },
+          ],
+        },
       ],
     },
     {
       name: 'Mini Mode',
       children: [
-        { name: 'Breakpoint', path: '/examples/minimode/breakpoint' },
-        { name: 'Dark', path: '/examples/minimode/dark' },
-        { name: 'Date Type', path: '/examples/minimode/date-type' },
-        { name: 'Disabled Before After', path: '/examples/minimode/disabled-before-after' },
-        { name: 'Disabled Days', path: '/examples/minimode/disabled-days' },
-        { name: 'Disabled Weekdays', path: '/examples/minimode/disabled-weekdays' },
-        { name: 'First Day Monday', path: '/examples/minimode/first-day-monday' },
-        { name: 'Five Day Workweek', path: '/examples/minimode/five-day-workweek' },
-        { name: 'Locale', path: '/examples/minimode/locale' },
-        { name: 'Min Weekday Label', path: '/examples/minimode/min-weekday-label' },
-        { name: 'Min Weeks', path: '/examples/minimode/min-weeks' },
-        { name: 'Multi Month Selection', path: '/examples/minimode/multi-month-selection' },
-        { name: 'Navigation', path: '/examples/minimode/navigation' },
-        { name: 'No Active Date', path: '/examples/minimode/no-active-date' },
-        { name: 'No Outside Days', path: '/examples/minimode/no-outside-days' },
-        { name: 'Now', path: '/examples/minimode/now' },
-        { name: 'QInput', path: '/examples/minimode/qinput' },
-        { name: 'Selected Dates', path: '/examples/minimode/selected-dates' },
-        { name: 'Selection', path: '/examples/minimode/selection' },
-        { name: 'Theme', path: '/examples/minimode/theme' },
-        { name: 'Workweeks', path: '/examples/minimode/workweeks' },
+        { name: 'Breakpoint', path: '/examples/mini-mode/breakpoint' },
+        { name: 'Dark', path: '/examples/mini-mode/dark' },
+        { name: 'Date Type', path: '/examples/mini-mode/date-type' },
+        { name: 'Disabled Before After', path: '/examples/mini-mode/disabled-before-after' },
+        { name: 'Disabled Days', path: '/examples/mini-mode/disabled-days' },
+        { name: 'Disabled Weekdays', path: '/examples/mini-mode/disabled-weekdays' },
+        { name: 'First Day Monday', path: '/examples/mini-mode/first-day-monday' },
+        { name: 'Five Day Workweek', path: '/examples/mini-mode/five-day-workweek' },
+        { name: 'Locale', path: '/examples/mini-mode/locale' },
+        { name: 'Min Weekday Label', path: '/examples/mini-mode/min-weekday-label' },
+        { name: 'Min Weeks', path: '/examples/mini-mode/min-weeks' },
+        { name: 'Multi Month Selection', path: '/examples/mini-mode/multi-month-selection' },
+        { name: 'Navigation', path: '/examples/mini-mode/navigation' },
+        { name: 'No Active Date', path: '/examples/mini-mode/no-active-date' },
+        { name: 'No Outside Days', path: '/examples/mini-mode/no-outside-days' },
+        { name: 'Now', path: '/examples/mini-mode/now' },
+        { name: 'Selected Dates', path: '/examples/mini-mode/selected-dates' },
+        { name: 'Selection', path: '/examples/mini-mode/selection' },
+        { name: 'Theme', path: '/examples/mini-mode/theme' },
+        {
+          name: 'Recipes',
+          path: '',
+          children: [
+            { name: 'QInput', path: '/examples/mini-mode/qinput' },
+            { name: 'Workweeks', path: '/examples/mini-mode/workweeks' },
+            { name: 'Server Data', path: '/examples/mini-mode/server-data' },
+            { name: 'Calendar Adapters', path: '/examples/mini-mode/calendar-adapter' },
+          ],
+        },
       ],
     },
     {
       name: 'Month',
       children: [
-        { name: 'Alignment', path: '/examples/month/alignment' },
-        { name: 'Dark', path: '/examples/month/dark' },
         { name: 'Date Type', path: '/examples/month/date-type' },
+        { name: 'Dark', path: '/examples/month/dark' },
+        { name: 'Alignment', path: '/examples/month/alignment' },
         { name: 'Day Height', path: '/examples/month/day-height' },
         { name: 'Day Of Year', path: '/examples/month/day-of-year' },
         { name: 'Disabled Before After', path: '/examples/month/disabled-before-after' },
         { name: 'Disabled Days', path: '/examples/month/disabled-days' },
         { name: 'Disabled Weekdays', path: '/examples/month/disabled-weekdays' },
-        { name: 'Drag And Drop', path: '/examples/month/drag-and-drop' },
         { name: 'First Day Monday', path: '/examples/month/first-day-monday' },
         { name: 'Five Day Workweek', path: '/examples/month/five-day-workweek' },
         { name: 'Focusable Hoverable', path: '/examples/month/focusable-hoverable' },
@@ -311,126 +412,205 @@ const examplesMenu = {
         { name: 'Now', path: '/examples/month/now' },
         { name: 'Selected Dates', path: '/examples/month/selected-dates' },
         { name: 'Selection', path: '/examples/month/selection' },
-        { name: 'Slot Day', path: '/examples/month/slot-day' },
-        { name: 'Slot Day Holidays', path: '/examples/month/slot-day-holidays' },
-        { name: 'Slot Week', path: '/examples/month/slot-week' },
         { name: 'Theme', path: '/examples/month/theme' },
         { name: 'Transitions', path: '/examples/month/transitions' },
-        { name: 'Workweeks', path: '/examples/month/workweeks' },
+        {
+          name: 'Slots',
+          path: '',
+          children: [
+            { name: 'Day', path: '/examples/month/slot-day' },
+            { name: 'Day Holidays', path: '/examples/month/slot-day-holidays' },
+            { name: 'Week', path: '/examples/month/slot-week' },
+          ],
+        },
+        {
+          name: 'Recipes',
+          path: '',
+          children: [
+            { name: 'Drag And Drop', path: '/examples/month/drag-and-drop' },
+            { name: 'Sidebar Mini Calendar', path: '/examples/month/sidebar-mini-calendar' },
+            { name: 'Workweeks', path: '/examples/month/workweeks' },
+            { name: 'Server Data', path: '/examples/month/server-data' },
+            { name: 'Calendar Adapters', path: '/examples/month/calendar-adapter' },
+          ],
+        },
       ],
     },
     {
       name: 'Resource',
       children: [
-        { name: 'Children', path: '/examples/resource/children' },
-        { name: 'Custom Height', path: '/examples/resource/custom-height' },
         { name: 'Dark', path: '/examples/resource/dark' },
+        { name: 'Disabled Days', path: '/examples/resource/disabled-days' },
         { name: 'Focusable Hoverable', path: '/examples/resource/focusable-hoverable' },
         { name: 'Hour 24 Format', path: '/examples/resource/hour-24-format' },
-        { name: 'Modify Intervals', path: '/examples/resource/modify-intervals' },
         { name: 'No Sticky', path: '/examples/resource/no-sticky' },
-        { name: 'Slot Head Resources', path: '/examples/resource/slot-head-resources' },
-        { name: 'Slot Interval Label', path: '/examples/resource/slot-interval-label' },
-        { name: 'Slot Resource Intervals', path: '/examples/resource/slot-resource-intervals' },
-        { name: 'Slot Resource Label', path: '/examples/resource/slot-resource-label' },
         { name: 'Theme', path: '/examples/resource/theme' },
         { name: 'Width Height', path: '/examples/resource/width-height' },
+        {
+          name: 'Intervals',
+          path: '',
+          children: [{ name: 'Modify Intervals', path: '/examples/resource/modify-intervals' }],
+        },
+        {
+          name: 'Slots',
+          path: '',
+          children: [
+            { name: 'Head Resources', path: '/examples/resource/slot-head-resources' },
+            { name: 'Interval Label', path: '/examples/resource/slot-interval-label' },
+            { name: 'Resource Intervals', path: '/examples/resource/slot-resource-intervals' },
+            { name: 'Resource Label', path: '/examples/resource/slot-resource-label' },
+          ],
+        },
+        {
+          name: 'Recipes',
+          path: '',
+          children: [
+            { name: 'Children', path: '/examples/resource/children' },
+            { name: 'Custom Height', path: '/examples/resource/custom-height' },
+            { name: 'Server Data', path: '/examples/resource/server-data' },
+            { name: 'Calendar Adapters', path: '/examples/resource/calendar-adapter' },
+          ],
+        },
       ],
     },
     {
       name: 'Scheduler',
       children: [
+        { name: 'Date Type', path: '/examples/scheduler/date-type' },
+        { name: 'Dark', path: '/examples/scheduler/dark' },
         { name: 'Alignment', path: '/examples/scheduler/alignment' },
         { name: 'Cell Width', path: '/examples/scheduler/cell-width' },
-        { name: 'Children', path: '/examples/scheduler/children' },
-        { name: 'Custom Height', path: '/examples/scheduler/custom-height' },
-        { name: 'Dark', path: '/examples/scheduler/dark' },
-        { name: 'Date Type', path: '/examples/scheduler/date-type' },
         { name: 'Disabled Before After', path: '/examples/scheduler/disabled-before-after' },
         { name: 'Disabled Days', path: '/examples/scheduler/disabled-days' },
         { name: 'Disabled Weekdays', path: '/examples/scheduler/disabled-weekdays' },
-        { name: 'Drag And Drop', path: '/examples/scheduler/drag-and-drop' },
         { name: 'First Day Monday', path: '/examples/scheduler/first-day-monday' },
         { name: 'Five Day Workweek', path: '/examples/scheduler/five-day-workweek' },
         { name: 'Focusable Hoverable', path: '/examples/scheduler/focusable-hoverable' },
         { name: 'Locale', path: '/examples/scheduler/locale' },
         { name: 'No Active Date', path: '/examples/scheduler/no-active-date' },
         { name: 'Now', path: '/examples/scheduler/now' },
-        { name: 'Slot Head Resources', path: '/examples/scheduler/slot-head-resources' },
-        { name: 'Slot Resource Days', path: '/examples/scheduler/slot-resource-days' },
-        { name: 'Slot Resource Label', path: '/examples/scheduler/slot-resource-label' },
         { name: 'Theme', path: '/examples/scheduler/theme' },
         { name: 'Width Height', path: '/examples/scheduler/width-height' },
+        {
+          name: 'Slots',
+          path: '',
+          children: [
+            { name: 'Head Resources', path: '/examples/scheduler/slot-head-resources' },
+            { name: 'Resource Days', path: '/examples/scheduler/slot-resource-days' },
+            { name: 'Resource Label', path: '/examples/scheduler/slot-resource-label' },
+          ],
+        },
+        {
+          name: 'Recipes',
+          path: '',
+          children: [
+            { name: 'Children', path: '/examples/scheduler/children' },
+            { name: 'Custom Height', path: '/examples/scheduler/custom-height' },
+            { name: 'Drag And Drop', path: '/examples/scheduler/drag-and-drop' },
+            { name: 'Server Data', path: '/examples/scheduler/server-data' },
+            { name: 'Calendar Adapters', path: '/examples/scheduler/calendar-adapter' },
+          ],
+        },
       ],
     },
     {
       name: 'Task',
       children: [
-        { name: 'Alignment', path: '/examples/task/alignment' },
-        { name: 'Children', path: '/examples/task/children' },
-        { name: 'Colored Weekends', path: '/examples/task/colored-weekends' },
-        { name: 'Custom Height', path: '/examples/task/custom-height' },
-        { name: 'Dark', path: '/examples/task/dark' },
         { name: 'Date Type', path: '/examples/task/date-type' },
+        { name: 'Dark', path: '/examples/task/dark' },
+        { name: 'Alignment', path: '/examples/task/alignment' },
         { name: 'Disabled Before After', path: '/examples/task/disabled-before-after' },
         { name: 'Disabled Days', path: '/examples/task/disabled-days' },
         { name: 'Disabled Weekdays', path: '/examples/task/disabled-weekdays' },
         { name: 'Focusable Hoverable', path: '/examples/task/focusable-hoverable' },
         { name: 'Locale', path: '/examples/task/locale' },
         { name: 'Month', path: '/examples/task/month' },
-        { name: 'Multiple Footer Rows', path: '/examples/task/multiple-footer-rows' },
         { name: 'No Active Date', path: '/examples/task/no-active-date' },
         { name: 'No Weekends', path: '/examples/task/no-weekends' },
         { name: 'Now', path: '/examples/task/now' },
         { name: 'Theme', path: '/examples/task/theme' },
-        { name: 'Title Rows', path: '/examples/task/title-rows' },
         { name: 'Week', path: '/examples/task/week' },
+        {
+          name: 'Recipes',
+          path: '',
+          children: [
+            { name: 'Children', path: '/examples/task/children' },
+            { name: 'Colored Weekends', path: '/examples/task/colored-weekends' },
+            { name: 'Custom Height', path: '/examples/task/custom-height' },
+            { name: 'Multiple Footer Rows', path: '/examples/task/multiple-footer-rows' },
+            { name: 'Title Rows', path: '/examples/task/title-rows' },
+            { name: 'Timesheet', path: '/examples/task/timesheet' },
+            { name: 'Server Data', path: '/examples/task/server-data' },
+            { name: 'Calendar Adapters', path: '/examples/task/calendar-adapter' },
+          ],
+        },
       ],
     },
     {
       name: 'Week',
       children: [
-        { name: '24 Hour', path: '/examples/week/24-hour' },
+        { name: 'Date Type', path: '/examples/week/date-type' },
+        { name: 'Dark', path: '/examples/week/dark' },
         { name: 'Alignment', path: '/examples/week/alignment' },
         { name: 'Cell Width', path: '/examples/week/cell-width' },
-        { name: 'Dark', path: '/examples/week/dark' },
-        { name: 'Date Type', path: '/examples/week/date-type' },
         { name: 'Disabled Before After', path: '/examples/week/disabled-before-after' },
         { name: 'Disabled Days', path: '/examples/week/disabled-days' },
         { name: 'Disabled Weekdays', path: '/examples/week/disabled-weekdays' },
-        { name: 'Drag And Drop', path: '/examples/week/drag-and-drop' },
         { name: 'First Day Monday', path: '/examples/week/first-day-monday' },
         { name: 'Five Day Workweek', path: '/examples/week/five-day-workweek' },
         { name: 'Focusable Hoverable', path: '/examples/week/focusable-hoverable' },
-        { name: 'Interval Count', path: '/examples/week/interval-count' },
-        { name: 'Interval Height', path: '/examples/week/interval-height' },
-        { name: 'Interval Minutes 15', path: '/examples/week/interval-minutes-15' },
-        { name: 'Interval Minutes 30', path: '/examples/week/interval-minutes-30' },
-        { name: 'Interval Start', path: '/examples/week/interval-start' },
+        { name: 'Hour 24 Format', path: '/examples/week/_24-hour' },
         { name: 'Locale', path: '/examples/week/locale' },
-        { name: 'Modify Intervals', path: '/examples/week/modify-intervals' },
         { name: 'Navigation', path: '/examples/week/navigation' },
         { name: 'No Active Date', path: '/examples/week/no-active-date' },
         { name: 'No Header', path: '/examples/week/no-header' },
         { name: 'No Scroll', path: '/examples/week/no-scroll' },
         { name: 'Now', path: '/examples/week/now' },
-        { name: 'Selected Intervals', path: '/examples/week/selected-intervals' },
         { name: 'Selection', path: '/examples/week/selection' },
-        { name: 'Slot Column Header', path: '/examples/week/slot-column-header' },
-        { name: 'Slot Day Body', path: '/examples/week/slot-day-body' },
-        {
-          name: 'Slot Day Container Show Current Time',
-          path: '/examples/week/slot-day-container-show-current-time',
-        },
-        { name: 'Slot Day Interval', path: '/examples/week/slot-day-interval' },
-        { name: 'Slot Head Day', path: '/examples/week/slot-head-day' },
-        { name: 'Slot Head Day Event', path: '/examples/week/slot-head-day-event' },
-        {
-          name: 'Slot Head Days Event Absolute',
-          path: '/examples/week/slot-head-days-event-absolute',
-        },
-        { name: 'Slot Head Intervals', path: '/examples/week/slot-head-intervals' },
         { name: 'Theme', path: '/examples/week/theme' },
+        { name: 'Transitions', path: '/examples/week/transitions' },
+        {
+          name: 'Intervals',
+          path: '',
+          children: [
+            { name: 'Interval Count', path: '/examples/week/interval-count' },
+            { name: 'Interval Height', path: '/examples/week/interval-height' },
+            { name: 'Interval Minutes 15', path: '/examples/week/interval-minutes-15' },
+            { name: 'Interval Minutes 30', path: '/examples/week/interval-minutes-30' },
+            { name: 'Interval Start', path: '/examples/week/interval-start' },
+            { name: 'Modify Intervals', path: '/examples/week/modify-intervals' },
+            { name: 'Selected Intervals', path: '/examples/week/selected-intervals' },
+          ],
+        },
+        {
+          name: 'Slots',
+          path: '',
+          children: [
+            { name: 'Column Header', path: '/examples/week/slot-column-header' },
+            { name: 'Day Body', path: '/examples/week/slot-day-body' },
+            {
+              name: 'Day Container Show Current Time',
+              path: '/examples/week/slot-day-container-show-current-time',
+            },
+            { name: 'Day Interval', path: '/examples/week/slot-day-interval' },
+            { name: 'Head Day', path: '/examples/week/slot-head-day' },
+            { name: 'Head Day Event', path: '/examples/week/slot-head-day-event' },
+            {
+              name: 'Head Days Event Absolute',
+              path: '/examples/week/slot-head-days-event-absolute',
+            },
+            { name: 'Head Intervals', path: '/examples/week/slot-head-intervals' },
+          ],
+        },
+        {
+          name: 'Recipes',
+          path: '',
+          children: [
+            { name: 'Drag And Drop', path: '/examples/week/drag-and-drop' },
+            { name: 'Server Data', path: '/examples/week/server-data' },
+            { name: 'Calendar Adapters', path: '/examples/week/calendar-adapter' },
+          ],
+        },
       ],
     },
   ],
@@ -453,15 +633,15 @@ const examplesMenu = {
 
 const otherMenu: SiteMenuItem = {
   name: 'Other',
-  mq: 1190, // media query breakpoint
+  mq: 1240, // media query breakpoint
   children: [
     {
       name: 'Releases',
-      path: '/other/release-notes',
+      path: '/other/releases',
     },
     {
-      name: 'Migration Guide',
-      path: '/other/migration-guide',
+      name: 'Upgrade Guide',
+      path: '/other/upgrade-guide',
     },
     {
       name: 'Contact',
@@ -500,6 +680,13 @@ const otherMenu: SiteMenuItem = {
   ],
 }
 
+const processedGettingStartedMenu = {
+  name: gettingStartedMenu.name,
+  path: slugify(gettingStartedMenu.name),
+  expanded: false,
+  children: gettingStartedMenu.children ? gettingStartedMenu.children.map(processMenuItem) : [],
+}
+
 const processedDevelopingMenu = {
   name: developingMenu.name,
   path: slugify(developingMenu.name),
@@ -512,6 +699,13 @@ const processedExamplesMenu = {
   path: slugify(examplesMenu.name),
   expanded: false,
   children: examplesMenu.children ? examplesMenu.children.map(processMenuItem) : [],
+}
+
+const processedOtherMenu = {
+  name: otherMenu.name,
+  path: slugify(otherMenu.name),
+  expanded: false,
+  children: otherMenu.children ? otherMenu.children.map(processMenuItem) : [],
 }
 
 // const processedGuidesMenu = {
@@ -538,19 +732,10 @@ export const moreLinks: SiteMenuItem[] = [
 ]
 
 export const sidebar = [
-  {
-    name: gettingStartedMenu.name,
-    path: slugify(gettingStartedMenu.name),
-    expanded: false,
-    children: gettingStartedMenu.children
-      ? gettingStartedMenu.children.map((item) => ({
-          name: item.name,
-          path: slugify(item.name),
-        }))
-      : [],
-  },
+  processedGettingStartedMenu,
   processedDevelopingMenu,
   processedExamplesMenu,
+  processedOtherMenu,
   // {
   //   name: examplesMenu.name,
   //   path: '',
@@ -565,17 +750,65 @@ const config = {
   lang: 'en-US',
   title: productName,
   description: 'Build Beautiful, Responsive Calendars for Vue and Quasar',
-  theme: 'doc',
   version: version,
   copyright: {
     line1: `Copyright © 2018-${new Date().getFullYear()} Jeff Galbraith`,
     line2: '',
   } as CopyrightConfig,
-  githubEditRootSrc:
-    'https://github.com/quasarframework/quasar-ui-qcalendar/edit/dev/packages/docs/src',
+  githubEditRootSrc: `https://github.com/quasarframework/quasar-ui-qcalendar/edit/${repoBranch}/packages/docs/src`,
+  githubSourceRootSrc: `https://github.com/quasarframework/quasar-ui-qcalendar/tree/${repoBranch}/packages/docs/src`,
+  codepen: {
+    jsPreProcessor: 'typescript',
+    titleSuffix: `QCalendar v${version}`,
+    cssExternal: [
+      `https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@${codepenPackageVersion}/dist/index.min.css`,
+    ],
+    jsExternal: [
+      `https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@${codepenPackageVersion}/dist/index.umd.min.js`,
+      'https://cdn.jsdelivr.net/npm/@timestamp-js/core@0.1.0-rc.5/dist/index.global.min.js',
+      'https://cdn.jsdelivr.net/npm/@timestamp-js/calendar-islamic@0.1.0-rc.5/dist/index.global.min.js',
+      'https://cdn.jsdelivr.net/npm/@timestamp-js/calendar-saka@0.1.0-rc.5/dist/index.global.min.js',
+      'https://cdn.jsdelivr.net/npm/@timestamp-js/calendar-hebrew@0.1.0-rc.5/dist/index.global.min.js',
+      'https://cdn.jsdelivr.net/npm/@timestamp-js/calendar-persian@0.1.0-rc.5/dist/index.global.min.js',
+    ],
+    globalPackages: [
+      {
+        packageName: '@quasar/quasar-ui-qcalendar',
+        globalName: '(globalThis as any).QCalendarPlugin || (globalThis as any).index',
+      },
+      {
+        packageName: '@timestamp-js/core',
+        globalName: '(globalThis as any).TimestampJsCore',
+      },
+      {
+        packageName: '@timestamp-js/calendar-islamic',
+        globalName: '(globalThis as any).TimestampJsCalendarIslamic',
+      },
+      {
+        packageName: '@timestamp-js/calendar-saka',
+        globalName: '(globalThis as any).TimestampJsCalendarSaka',
+      },
+      {
+        packageName: '@timestamp-js/calendar-hebrew',
+        globalName: '(globalThis as any).TimestampJsCalendarHebrew',
+      },
+      {
+        packageName: '@timestamp-js/calendar-persian',
+        globalName: '(globalThis as any).TimestampJsCalendarPersian',
+      },
+    ],
+    jsSetup: [
+      'const QCalendarPlugin = (globalThis as any).QCalendarPlugin || (globalThis as any).index',
+      'app.use(QCalendarPlugin)',
+      `app.component('NavigationBar', {
+  emits: ['today', 'prev', 'next'],
+  template: '<div class="row justify-center"><div class="q-pa-md q-gutter-lg row"><q-btn no-caps dense @click="$emit(\\'today\\')">Today</q-btn><q-btn no-caps dense @click="$emit(\\'prev\\')">&lt; Prev</q-btn><q-btn no-caps dense @click="$emit(\\'next\\')">Next &gt;</q-btn></div></div>',
+})`,
+    ].join('\n'),
+  },
   license: {
     label: 'MIT License',
-    link: 'https://github.com/quasarframework/quasar-ui-qcalendar/blob/next/LICENSE.md',
+    link: `https://github.com/quasarframework/quasar-ui-qcalendar/blob/${repoBranch}/LICENSE.md`,
   } as LicenseConfig,
   privacy: {
     label: 'Privacy Policy',

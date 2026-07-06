@@ -1,5 +1,9 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      This slot example customizes month day cells so each date can render app-specific content.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="row justify-center">
@@ -44,18 +48,12 @@
 </template>
 
 <script setup lang="ts">
-import {
-  QCalendarMonth,
-  addToDate,
-  parseDate,
-  parseTimestamp,
-  today,
-  Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar'
+import { addToDate, parseDate, parseTimestamp, today, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref, reactive, computed } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 // The function below is used to set up our demo data
 const CURRENT_DAY = new Date()
@@ -261,7 +259,7 @@ function onClickHeadWorkweek(data: Timestamp) {
   max-width: 100%;
   margin: 1px 0 0 0;
   padding: 0 2px;
-  justify-content: start;
+  justify-content: flex-start;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;

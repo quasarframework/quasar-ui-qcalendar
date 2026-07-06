@@ -2,14 +2,18 @@
 
 ![@quasar/quasar-ui-qcalendar](https://img.shields.io/npm/v/@quasar/quasar-ui-qcalendar?label=@quasar/quasar-ui-qcalendar)
 ![@quasar/quasar-app-extension-qcalendar](https://img.shields.io/npm/v/@quasar/quasar-app-extension-qcalendar?label=@quasar/quasar-app-extension-qcalendar)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d1d3d132-6d34-47ef-b8eb-afeb8b0d0c4a/deploy-status)](https://app.netlify.com/projects/qcalendar/deploys)
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/quasarframework/quasar-ui-qcalendar)]()
 [![GitHub repo size in bytes](https://img.shields.io/github/repo-size/quasarframework/quasar-ui-qcalendar)]()
 [![npm](https://img.shields.io/npm/dt/@quasar/quasar-app-extension-qcalendar)](https://www.npmjs.com/package/@quasar/quasar-app-extension-qcalendar)
 ![@quasar/quasar-app-extension-qcalendar](https://img.shields.io/npm/dm/@quasar/quasar-app-extension-qcalendar)
 [![](https://data.jsdelivr.com/v1/package/npm/@quasar/quasar-ui-qcalendar/badge)](https://www.jsdelivr.com/package/npm/@quasar/quasar-ui-qcalendar)
 
+<span class="badge-github-sponsors"><a href="https://github.com/sponsors/hawkeye64" title="Sponsor this project on GitHub"><img src="https://img.shields.io/badge/github-sponsors-ea4aaa.svg?logo=githubsponsors&logoColor=white" alt="GitHub Sponsors button" /></a></span>
+<span class="badge-paypal"><a href="https://paypal.me/hawkeye64" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a></span>
+
 [![Discord](https://img.shields.io/badge/discord-join%20server-738ADB?style=for-the-badge&logo=discord&logoColor=738ADB)](https://chat.quasar.dev)
-[![Discord](https://img.shields.io/badge/follow-@jgalbraith64-1DA1F2?style=for-the-badge&logo=twitter&logoColor=1DA1F2)](https://twitter.com/jgalbraith64)
+[![X](https://img.shields.io/badge/follow-@jgalbraith64-1DA1F2?style=for-the-badge&logo=x&logoColor=1DA1F2)](https://twitter.com/jgalbraith64)
 
 ## Everything you need for a complete Calendar solution.
 
@@ -19,13 +23,17 @@ QCalendar allows for viewing of **day** (1-6 days), **week**, **monthly**, **sch
 
 ## Important Release Notes
 
-v4.0.0
+v5.0.0-rc.10
 
-- Be sure to read the [documentation](https://qcalendar.netlify.app/)
+- QCalendar v5 prepares the project for Quasar CLI Vite 3.
+- The app extension is now Vite-only and requires `@quasar/app-vite` >=3.0.0.
+- This repo now requires Node.js `>=22.13` and pnpm `>=11.3.0`.
+- QCalendar uses Gregorian dates by default and can opt into Timestamp calendar adapters for native Hijri, Saka, Hebrew, and Persian calendar workflows.
+- Be sure to read the [Upgrade Guide](https://qcalendar.netlify.app/other/upgrade-guide).
 
 ---
 
-[Live Demo](https://qcalendar.netlify.app/) - **live docs, demo and examples**
+[Live Demo](https://qcalendar.netlify.app/) - **live Q-Press docs, demos, and examples**
 
 ---
 
@@ -33,7 +41,7 @@ v4.0.0
 
 **Month view with events**
 
-![QCalendar example month view](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/refs/heads/dev/packages/docs/public/qcalendarmonth-event-slots.png)
+![QCalendar example month view](https://raw.githubusercontent.com/quasarframework/quasar-ui-qcalendar/refs/heads/dev/packages/docs/public/qcalendar-month-view.png)
 
 **Planner example**
 
@@ -77,8 +85,8 @@ This is a pnpm workspace mono-repo. You cannot use npm for building.
 
 - [/ui](packages/ui) - standalone npm package (go here for more information)
 - [/app-extension](packages/app-extension) - Quasar app extension
-- [/docs](packages/docs) - sources for docs, demo and examples project
-- [live demo](https://qcalendar.netlify.app/) - **live docs, demo and examples**
+- [/docs](packages/docs) - Q-Press documentation site with docs, demos, and examples
+- [live demo](https://qcalendar.netlify.app/) - **live Q-Press docs, demos, and examples**
 
 # Demo Workflow
 
@@ -98,14 +106,13 @@ $ cd ../docs
 $ quasar dev
 ```
 
-# Codepen
+## Support
 
-[UMD examples in Codepen collection](https://codepen.io/collection/qOBOEG)
+If QCalendar is useful in your workflow and you want to support ongoing maintenance:
 
-# Donate
+- GitHub Sponsors: https://github.com/sponsors/hawkeye64
+- PayPal: https://paypal.me/hawkeye64
 
-If you appreciate the work that went into this, please consider donating to [Quasar](https://donate.quasar.dev) or [Jeff](https://github.com/sponsors/hawkeye64).
-
-# License
+## License
 
 MIT (c) Jeff Galbraith <jeff@quasar.dev>

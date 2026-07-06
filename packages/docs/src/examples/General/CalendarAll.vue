@@ -1,5 +1,10 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      This example places the calendar variants together so you can compare their default layouts
+      side by side.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="q-ma-sm row justify-center q-gutter-sm">
@@ -41,7 +46,7 @@
           animated
           bordered
           :task-width="240"
-          :min-weekday-length="2"
+          :min-weekday-label="2"
           @change="onChange"
         >
           <template v-if="selectedCalendar === 'task'" #title-task="{ scope }">
@@ -67,11 +72,13 @@
             <!-- Slot for top-level tasks -->
             <div class="header ellipsis">
               <div class="issue ellipsis">
-                <span v-if="scope.task.icon === 'done'" class="done"><Done /></span>
-                <span v-else-if="scope.task.icon === 'pending'" class="pending"><Pending /></span>
-                <span v-else-if="scope.task.icon === 'blocking'" class="blocking"
-                  ><Blocking
-                /></span>
+                <q-icon
+                  v-if="scope.task.icon === 'done'"
+                  class="done"
+                  name="check_circle_outline"
+                />
+                <q-icon v-else-if="scope.task.icon === 'pending'" class="pending" name="pending" />
+                <q-icon v-else-if="scope.task.icon === 'blocking'" class="blocking" name="block" />
                 {{ scope.task.title }}
               </div>
               <div class="key">{{ scope.task.key }}</div>
@@ -83,11 +90,13 @@
             <!-- Slot for subtasks (child tasks) -->
             <div class="header ellipsis">
               <div class="issue ellipsis">
-                <span v-if="scope.task.icon === 'done'" class="done"><Done /></span>
-                <span v-else-if="scope.task.icon === 'pending'" class="pending"><Pending /></span>
-                <span v-else-if="scope.task.icon === 'blocking'" class="blocking"
-                  ><Blocking
-                /></span>
+                <q-icon
+                  v-if="scope.task.icon === 'done'"
+                  class="done"
+                  name="check_circle_outline"
+                />
+                <q-icon v-else-if="scope.task.icon === 'pending'" class="pending" name="pending" />
+                <q-icon v-else-if="scope.task.icon === 'blocking'" class="blocking" name="block" />
                 {{ scope.task.title }}
               </div>
               <div class="key">{{ scope.task.key }}</div>
@@ -101,7 +110,6 @@
             </template>
           </template>
 
-          <!-- eslint-disable-next-line vue/valid-v-slot -->
           <template v-if="selectedCalendar === 'agenda'" #day="{ scope: { timestamp } }">
             <template v-for="a in getAgenda(timestamp)" :key="timestamp.date + a.time">
               <div
@@ -149,21 +157,11 @@
 
 <script setup lang="ts">
 import { ref, computed, reactive, onBeforeMount } from 'vue'
-import {
-  QCalendar,
-  today,
-  padNumber,
-  isBetweenDates,
-  parsed,
-  Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+import { QCalendar } from '@quasar/quasar-ui-qcalendar'
+import { today, padNumber, isBetweenDates, parsed, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
-import NavigationBar from 'components/NavigationBar.vue'
-
-import Done from '@carbon/icons-vue/es/checkmark--outline/16'
-import Pending from '@carbon/icons-vue/es/pending/16'
-import Blocking from '@carbon/icons-vue/es/undefined/16'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 interface Logged {
   date: string

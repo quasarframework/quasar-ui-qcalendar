@@ -2,9 +2,9 @@
 import { computed, Ref, PropType } from 'vue'
 import {
   addToDate,
-  createDayList,
+  createCalendarLocaleFormatterUTC,
   createIntervalList,
-  createNativeLocaleFormatter,
+  createNativeLocaleFormatterUTC,
   copyTimestamp,
   getDateTime,
   getDayTimeIdentifier,
@@ -15,50 +15,46 @@ import {
   // updateMinutes,
   updateRelative,
   validateNumber,
-  Timestamp,
-} from '../utils/Timestamp'
+  type Timestamp,
+} from '@timestamp-js/core'
 
 import { animVerticalScrollTo, animHorizontalScrollTo } from '../utils/scroll'
+import { toCalendarTimestamp, type CalendarScopeData } from '../utils/calendarSystem'
 import { type CommonProps } from './useCommon'
 import { type ColumnProps } from './useColumn'
 import { type CellWidthProps } from './useCellWidth'
 import { type TimesProps } from './useTimes'
 import { type MaxDaysProps } from './useMaxDays'
 import { type NavigationProps } from './useKeyboard'
+import useCalendarDays, {
+  type CalendarDaysProps,
+  type Scope,
+  type ScopeForSlot,
+} from './useCalendarDays'
 
-export interface Scope {
-  scope: any
-}
+export type { Scope, ScopeForSlot } from './useCalendarDays'
 
 export interface Resource {
   [key: string]: any
 }
 
-export interface ScopeForSlot {
+export interface ScopeForSlotX extends CalendarScopeData {
+  /** Timestamp represented by the slot. */
   timestamp: Timestamp
-  timeStartPos: (_time: string, _clamp?: boolean) => number | false
-  timeDurationHeight: (_minutes: number) => number
-  columnIndex?: number
-  activeDate?: boolean
-  disabled?: boolean
-  shortWeekdayLabel?: boolean
-  droppable?: boolean
-}
-
-export interface ScopeForSlotX {
-  timestamp: Timestamp
+  /** Helper that returns the horizontal start position for a time. */
   timeStartPosX: (_time: string, _clamp?: boolean) => number | false
+  /** Helper that returns the horizontal width for a duration. */
   timeDurationWidth: (_minutes: number) => number
+  /** Zero-based rendered interval index. */
   index?: number
+  /** Whether the timestamp is outside the active month. */
+  outside?: boolean
+  /** Whether the slot content is disabled. */
+  disabled?: boolean
 }
 
 export interface IntervalProps
-  extends CommonProps,
-    ColumnProps,
-    CellWidthProps,
-    MaxDaysProps,
-    TimesProps,
-    NavigationProps {
+  extends CommonProps, ColumnProps, CellWidthProps, MaxDaysProps, TimesProps, NavigationProps {
   view: 'day' | 'week' | 'month' | 'month-interval'
   shortIntervalLabel?: boolean
   intervalHeight: number | string
@@ -76,54 +72,124 @@ export interface IntervalProps
 }
 
 export const useIntervalProps = {
+  /**
+   * Calendar interval view mode.
+   *
+   * @category display
+   */
   view: {
     type: String as PropType<IntervalProps['view']>,
     validator: (v: string) => ['day', 'week', 'month', 'month-interval'].includes(v),
     default: 'day',
   },
+  /**
+   * Uses shortened interval labels where possible.
+   *
+   * @category display
+   */
   shortIntervalLabel: Boolean,
+  /**
+   * Height in pixels or CSS units for each time interval.
+   *
+   * @category layout
+   */
   intervalHeight: {
     type: [Number, String] as PropType<IntervalProps['intervalHeight']>,
     default: 40,
     validator: validateNumber,
   },
+  /**
+   * Number of minutes represented by each interval.
+   *
+   * @category layout
+   */
   intervalMinutes: {
     type: [Number, String] as PropType<IntervalProps['intervalMinutes']>,
     default: 60,
     validator: validateNumber,
   },
+  /**
+   * Starting interval hour.
+   *
+   * @category layout
+   */
   intervalStart: {
     type: [Number, String] as PropType<IntervalProps['intervalStart']>,
     default: 0,
     validator: validateNumber,
   },
+  /**
+   * Number of intervals rendered in the day.
+   *
+   * @category layout
+   */
   intervalCount: {
     type: [Number, String] as PropType<IntervalProps['intervalCount']>,
     default: 24,
     validator: validateNumber,
   },
+  /**
+   * Function that returns inline styles for interval cells.
+   *
+   * @category style
+   */
   intervalStyle: {
     type: Function as PropType<IntervalProps['intervalStyle']>,
     default: null,
   },
+  /**
+   * Function that returns CSS classes for interval cells.
+   *
+   * @category style
+   */
   intervalClass: {
     type: Function as PropType<IntervalProps['intervalClass']>,
     default: null,
   },
+  /**
+   * Function that returns inline styles for weekday header cells.
+   *
+   * @category style
+   */
   weekdayStyle: {
     type: Function as PropType<IntervalProps['weekdayStyle']>,
     default: null,
   },
+  /**
+   * Function that returns CSS classes for weekday header cells.
+   *
+   * @category style
+   */
   weekdayClass: {
     type: Function as PropType<IntervalProps['weekdayClass']>,
     default: null,
   },
+  /**
+   * Function that controls whether an interval label is shown.
+   *
+   * @category display
+   */
   showIntervalLabel: {
     type: Function as PropType<IntervalProps['showIntervalLabel']>,
     default: null,
   },
+  /**
+   * Uses 24-hour time labels.
+   *
+   * @category display
+   */
   hour24Format: Boolean,
+  /**
+   * Clamps time click calculations to interval boundaries.
+   *
+   * @category behavior
+   */
   timeClicksClamped: Boolean,
+  /**
+   * Header layout used for date labels.
+   *
+   * @category display
+   */
   dateHeader: {
     type: String as PropType<IntervalProps['dateHeader']>,
     default: 'stacked',
@@ -131,14 +197,14 @@ export const useIntervalProps = {
   },
 } as const
 
-export interface SchedulerProps extends IntervalProps {
+export interface SchedulerProps {
   view: 'day' | 'week' | 'month' | 'month-interval'
   modelResources?: Resource[]
   resourceKey: string
   resourceLabel: string
   resourceHeight: number | string
   resourceMinHeight: number | string
-  resourceStyle?: (_timestamp: Timestamp) => any
+  resourceStyle?: (_scope: Scope) => any
   resourceClass?: (_scope: Scope) => string
   weekdayStyle?: (_scope: Scope) => any
   weekdayClass?: (_scope: Scope) => string
@@ -148,56 +214,121 @@ export interface SchedulerProps extends IntervalProps {
 }
 
 export const useSchedulerProps = {
+  /**
+   * Scheduler view mode.
+   *
+   * @category display
+   */
   view: {
     type: String as PropType<SchedulerProps['view']>,
     validator: (v: string) => ['day', 'week', 'month', 'month-interval'].includes(v),
     default: 'day',
   },
+  /**
+   * Resources rendered by the scheduler.
+   *
+   * @category model
+   */
   modelResources: {
     type: Array as PropType<SchedulerProps['modelResources']>,
   },
+  /**
+   * Resource field used as the unique key.
+   *
+   * @category model
+   */
   resourceKey: {
     type: String as PropType<SchedulerProps['resourceKey']>,
     default: 'id',
   },
+  /**
+   * Resource field used as the display label.
+   *
+   * @category model
+   */
   resourceLabel: {
     type: String as PropType<SchedulerProps['resourceLabel']>,
     default: 'label',
   },
+  /**
+   * Height in pixels or CSS units for each resource row.
+   *
+   * @category layout
+   */
   resourceHeight: {
     type: [Number, String] as PropType<SchedulerProps['resourceHeight']>,
     default: 0,
     validator: validateNumber,
   },
+  /**
+   * Minimum height in pixels or CSS units for each resource row.
+   *
+   * @category layout
+   */
   resourceMinHeight: {
     type: [Number, String] as PropType<SchedulerProps['resourceMinHeight']>,
     default: 70,
     validator: validateNumber,
   },
+  /**
+   * Function that returns inline styles for resource rows.
+   *
+   * @category style
+   */
   resourceStyle: {
     type: Function as PropType<SchedulerProps['resourceStyle']>,
     default: null,
   },
+  /**
+   * Function that returns CSS classes for resource rows.
+   *
+   * @category style
+   */
   resourceClass: {
     type: Function as PropType<SchedulerProps['resourceClass']>,
     default: null,
   },
+  /**
+   * Function that returns inline styles for weekday header cells.
+   *
+   * @category style
+   */
   weekdayStyle: {
     type: Function as PropType<SchedulerProps['weekdayStyle']>,
     default: null,
   },
+  /**
+   * Function that returns CSS classes for weekday header cells.
+   *
+   * @category style
+   */
   weekdayClass: {
     type: Function as PropType<SchedulerProps['weekdayClass']>,
     default: null,
   },
+  /**
+   * Function that returns inline styles for day cells.
+   *
+   * @category style
+   */
   dayStyle: {
     type: Function as PropType<SchedulerProps['dayStyle']>,
     default: null,
   },
+  /**
+   * Function that returns CSS classes for day cells.
+   *
+   * @category style
+   */
   dayClass: {
     type: Function as PropType<SchedulerProps['dayClass']>,
     default: null,
   },
+  /**
+   * Header layout used for date labels.
+   *
+   * @category display
+   */
   dateHeader: {
     type: String as PropType<SchedulerProps['dateHeader']>,
     default: 'stacked',
@@ -205,62 +336,125 @@ export const useSchedulerProps = {
   },
 } as const
 
-export interface AgendaProps extends IntervalProps {
+export interface AgendaProps {
   view: 'day' | 'week' | 'month' | 'month-interval'
   leftColumnOptions?: any[] // Consider replacing `any[]` with a more specific type.
   rightColumnOptions?: any[]
   columnOptionsId?: string
   columnOptionsLabel?: string
+  weekdayStyle?: (_scope: Scope) => any
+  weekdayClass?: (_scope: Scope) => string
   dayStyle?: (_scope: Scope) => any
   dayClass?: (_scope: Scope) => string
+  dateHeader: 'stacked' | 'inline' | 'inverted'
   dayHeight: number | string
   dayMinHeight: number | string
 }
 
 export const useAgendaProps = {
+  /**
+   * Agenda view mode.
+   *
+   * @category display
+   */
   view: {
     type: String as PropType<AgendaProps['view']>,
     validator: (v: string) => ['day', 'week', 'month', 'month-interval'].includes(v),
     default: 'day',
   },
+  /**
+   * Column definitions rendered before the day columns.
+   *
+   * @category layout
+   */
   leftColumnOptions: {
     type: Array as PropType<AgendaProps['leftColumnOptions']>,
   },
+  /**
+   * Column definitions rendered after the day columns.
+   *
+   * @category layout
+   */
   rightColumnOptions: {
     type: Array as PropType<AgendaProps['rightColumnOptions']>,
   },
+  /**
+   * Field name used as each agenda column id.
+   *
+   * @category layout
+   */
   columnOptionsId: {
     type: String as PropType<AgendaProps['columnOptionsId']>,
   },
+  /**
+   * Field name used as each agenda column label.
+   *
+   * @category layout
+   */
   columnOptionsLabel: {
     type: String as PropType<AgendaProps['columnOptionsLabel']>,
   },
+  /**
+   * Function that returns inline styles for weekday header cells.
+   *
+   * @category style
+   */
   weekdayStyle: {
     type: Function as PropType<AgendaProps['weekdayStyle']>,
     default: null,
   },
+  /**
+   * Function that returns CSS classes for weekday header cells.
+   *
+   * @category style
+   */
   weekdayClass: {
     type: Function as PropType<AgendaProps['weekdayClass']>,
     default: null,
   },
+  /**
+   * Function that returns inline styles for day cells.
+   *
+   * @category style
+   */
   dayStyle: {
     type: Function as PropType<AgendaProps['dayStyle']>,
     default: null,
   },
+  /**
+   * Function that returns CSS classes for day cells.
+   *
+   * @category style
+   */
   dayClass: {
     type: Function as PropType<AgendaProps['dayClass']>,
     default: null,
   },
+  /**
+   * Header layout used for date labels.
+   *
+   * @category display
+   */
   dateHeader: {
     type: String as PropType<AgendaProps['dateHeader']>,
     default: 'stacked',
     validator: (v: string) => ['stacked', 'inline', 'inverted'].includes(v),
   },
+  /**
+   * Height in pixels or CSS units for each agenda day row.
+   *
+   * @category layout
+   */
   dayHeight: {
     type: [Number, String] as PropType<AgendaProps['dayHeight']>,
     default: 0,
     validator: validateNumber,
   },
+  /**
+   * Minimum height in pixels or CSS units for each agenda day row.
+   *
+   * @category layout
+   */
   dayMinHeight: {
     type: [Number, String] as PropType<AgendaProps['dayMinHeight']>,
     default: 40,
@@ -282,44 +476,94 @@ export interface ResourceProps extends IntervalProps {
 }
 
 export const useResourceProps = {
+  /**
+   * Resources rendered by the resource view.
+   *
+   * @category model
+   */
   modelResources: {
     type: Array as PropType<ResourceProps['modelResources']>,
   },
+  /**
+   * Resource field used as the unique key.
+   *
+   * @category model
+   */
   resourceKey: {
     type: String as PropType<ResourceProps['resourceKey']>,
     default: 'id',
   },
+  /**
+   * Resource field used as the display label.
+   *
+   * @category model
+   */
   resourceLabel: {
     type: String as PropType<ResourceProps['resourceLabel']>,
     default: 'label',
   },
+  /**
+   * Height in pixels or CSS units for each resource row.
+   *
+   * @category layout
+   */
   resourceHeight: {
     type: [Number, String] as PropType<ResourceProps['resourceHeight']>,
     default: 0,
     validator: validateNumber,
   },
+  /**
+   * Minimum height in pixels or CSS units for each resource row.
+   *
+   * @category layout
+   */
   resourceMinHeight: {
     type: [Number, String] as PropType<ResourceProps['resourceMinHeight']>,
     default: 70,
     validator: validateNumber,
   },
+  /**
+   * Function that returns inline styles for resource rows.
+   *
+   * @category style
+   */
   resourceStyle: {
     type: Function as PropType<ResourceProps['resourceStyle']>,
     default: null,
   },
+  /**
+   * Function that returns CSS classes for resource rows.
+   *
+   * @category style
+   */
   resourceClass: {
     type: Function as PropType<ResourceProps['resourceClass']>,
     default: null,
   },
+  /**
+   * Width in pixels or CSS units for each interval cell.
+   *
+   * @category layout
+   */
   cellWidth: {
     type: [Number, String] as PropType<ResourceProps['cellWidth']>,
     default: 100,
   },
+  /**
+   * Height in pixels or CSS units for the interval header.
+   *
+   * @category layout
+   */
   intervalHeaderHeight: {
     type: [Number, String] as PropType<ResourceProps['intervalHeaderHeight']>,
     default: 20,
     validator: validateNumber,
   },
+  /**
+   * Disables sticky resource headers and columns.
+   *
+   * @category behavior
+   */
   noSticky: Boolean as PropType<ResourceProps['noSticky']>,
 } as const
 
@@ -337,7 +581,7 @@ export interface UseIntervalReturn {
   days: Ref<Timestamp[]>
   intervals: Ref<Timestamp[][]>
   intervalFormatter: Ref<(_tms: Timestamp, _short: boolean) => string>
-  ariaDateTimeFormatter: Ref<ReturnType<typeof createNativeLocaleFormatter>>
+  ariaDateTimeFormatter: Ref<ReturnType<typeof createNativeLocaleFormatterUTC>>
   arrayHasDateTime: (_arr: string[], _timestamp: Timestamp) => boolean
   checkIntervals: (
     _arr: string[],
@@ -355,7 +599,6 @@ export interface UseIntervalReturn {
   ) => string[]
   showIntervalLabelDefault: (_interval: Timestamp) => boolean
   showResourceLabelDefault: (_resource: any) => void
-  // eslint-disable-next-line no-unused-vars
   styleDefault: ({ scope }: { scope: any }) => {}
   getTimestampAtEventInterval: (
     _e: MouseEvent & TouchEvent,
@@ -387,13 +630,22 @@ export interface UseIntervalReturn {
   timeStartPosX: (_time: string, _clamp?: boolean) => number | false
 }
 
+interface UseIntervalProps extends CalendarDaysProps {
+  intervalHeight?: number | string
+  intervalMinutes?: number | string
+  intervalStart?: number | string
+  intervalCount?: number | string
+  hour24Format?: boolean
+}
+
 export default function useInterval(
-  props: IntervalProps & AgendaProps & SchedulerProps & ResourceProps & ColumnProps & CommonProps,
+  props: UseIntervalProps,
   {
     times,
     scrollArea,
     parsedStart,
     parsedEnd,
+    activeDate,
     maxDays,
     size,
     headerColumnRef,
@@ -402,48 +654,37 @@ export default function useInterval(
     scrollArea: Ref<HTMLElement | null>
     parsedStart: Ref<Timestamp>
     parsedEnd: Ref<Timestamp>
+    activeDate?: Ref<Timestamp>
     maxDays: Ref<number>
     size: { width: number; height: number }
     headerColumnRef: Ref<HTMLElement | null>
   },
 ): UseIntervalReturn {
-  const parsedIntervalStart = computed(() => parseInt(String(props.intervalStart), 10))
-  const parsedIntervalMinutes = computed(() => parseInt(String(props.intervalMinutes), 10))
-  const parsedIntervalCount = computed(() => parseInt(String(props.intervalCount), 10))
-  const parsedIntervalHeight = computed(() => parseFloat(String(props.intervalHeight)))
-  const parsedCellWidth = computed(() => {
-    let width = 0
-    const columnCount = Number(props.columnCount)
-    if (props.cellWidth) {
-      width = Number(props.cellWidth)
-    } else if (size.width > 0 && headerColumnRef.value) {
-      width = headerColumnRef.value.offsetWidth / (columnCount > 1 ? columnCount : maxDays.value)
-    }
-    return width
+  const {
+    days,
+    parsedCellWidth,
+    styleDefault,
+    getScopeForSlot: getCalendarDayScope,
+  } = useCalendarDays(props, {
+    times,
+    parsedStart,
+    parsedEnd,
+    activeDate,
+    maxDays,
+    size,
+    headerColumnRef,
   })
+
+  const parsedIntervalStart = computed(() => parseInt(String(props.intervalStart ?? 0), 10))
+  const parsedIntervalMinutes = computed(() => parseInt(String(props.intervalMinutes ?? 60), 10))
+  const parsedIntervalCount = computed(() => parseInt(String(props.intervalCount ?? 24), 10))
+  const parsedIntervalHeight = computed(() => parseFloat(String(props.intervalHeight ?? 40)))
   const parsedStartMinute = computed(() => parsedIntervalStart.value * parsedIntervalMinutes.value)
   const bodyHeight = computed(() => parsedIntervalCount.value * parsedIntervalHeight.value)
   const bodyWidth = computed(() => parsedIntervalCount.value * parsedCellWidth.value)
 
   const parsedWeekStart = computed(() => startOfWeek(parsedStart.value))
   const parsedWeekEnd = computed(() => endOfWeek(parsedEnd.value))
-
-  /**
-   * Returns the days of the specified week
-   */
-  const days = computed(() => {
-    return createDayList(
-      parsedStart.value,
-      parsedEnd.value,
-      times.today,
-      props.weekdays,
-      props.disabledBefore,
-      props.disabledAfter,
-      props.disabledWeekdays,
-      props.disabledDays,
-      maxDays.value,
-    )
-  })
 
   /**
    * Returns an interval list for each day
@@ -461,11 +702,21 @@ export default function useInterval(
   })
 
   function startOfWeek(timestamp: Timestamp): Timestamp {
-    return getStartOfWeek(timestamp, props.weekdays, times.today)
+    return getStartOfWeek(
+      timestamp,
+      props.weekdays,
+      toCalendarTimestamp(times.today, props.calendarSystem),
+      props.calendarSystem,
+    )
   }
 
   function endOfWeek(timestamp: Timestamp): Timestamp {
-    return getEndOfWeek(timestamp, props.weekdays, times.today)
+    return getEndOfWeek(
+      timestamp,
+      props.weekdays,
+      toCalendarTimestamp(times.today, props.calendarSystem),
+      props.calendarSystem,
+    )
   }
 
   /**
@@ -518,16 +769,13 @@ export default function useInterval(
       'q-range-first': firstDay === true,
       'q-range': betweenDays === true,
       'q-range-last': lastDay === true,
-      'q-disabled-interval disabled': interval.disabled === true,
+      'q-disabled-interval behavior': interval.disabled === true,
     }
   }
 
   function getResourceClasses(
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _interval: Timestamp,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _selectedDays: string[],
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _startEndDays: string[],
   ): string[] {
     return []
@@ -557,7 +805,7 @@ export default function useInterval(
       hour: 'numeric',
     } as const
 
-    return createNativeLocaleFormatter(props.locale, (tms, short) =>
+    return createNativeLocaleFormatterUTC(props.locale, (tms, short) =>
       short ? (tms.minute === 0 ? shortHourOptions : shortOptions) : longOptions,
     )
   })
@@ -572,7 +820,7 @@ export default function useInterval(
   const ariaDateTimeFormatter = computed(() => {
     const longOptions = { timeZone: 'UTC', dateStyle: 'full', timeStyle: 'short' } as const
 
-    return createNativeLocaleFormatter(props.locale, (/*_tms*/) => longOptions)
+    return createCalendarLocaleFormatterUTC(props.calendarSystem, props.locale, () => longOptions)
   })
 
   /**
@@ -587,25 +835,14 @@ export default function useInterval(
     return !isFirst && interval.minute === 0
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function showResourceLabelDefault(_resource: any): void {
     //
   }
 
   /**
-   * Returns an empty object.
-   * This is a default style function that does not apply any styles.
-   * @returns An empty object.
-   */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  function styleDefault(_scope: Scope): {} {
-    return {}
-  }
-
-  /**
    * Returns a Timestamp based on mouse click position on the calendar
    * Also handles touch events
-   * This function is used for vertical intervals
+   * This function is used for vertical layout
    * @param {MouseEvent} e Browser MouseEvent
    * @param {Timestamp} day Timestamp associated with event
    * @param {Boolean} clamp Whether to clamp values to nearest interval
@@ -632,11 +869,11 @@ export default function useInterval(
     )
 
     if (addMinutes !== 0) {
-      timestamp = addToDate(timestamp, { minute: addMinutes })
+      timestamp = addToDate(timestamp, { minute: addMinutes }, props.calendarSystem)
     }
 
     if (now) {
-      timestamp = updateRelative(timestamp, now, true)
+      timestamp = updateRelative(timestamp, now, true, props.calendarSystem)
     }
 
     return timestamp
@@ -645,7 +882,7 @@ export default function useInterval(
   /**
    * Returns a Timestamp based on mouse click position on the calendar
    * Also handles touch events
-   * This function is used for vertical intervals
+   * This function is used for vertical layout
    * @param {MouseEvent} e Browser MouseEvent
    * @param {Timestamp} day Timestamp associated with event
    * @param {Boolean} clamp Whether to clamp values to nearest interval
@@ -669,11 +906,11 @@ export default function useInterval(
     )
 
     if (addMinutes !== 0) {
-      timestamp = addToDate(timestamp, { minute: addMinutes })
+      timestamp = addToDate(timestamp, { minute: addMinutes }, props.calendarSystem)
     }
 
     if (now) {
-      timestamp = updateRelative(timestamp, now, true)
+      timestamp = updateRelative(timestamp, now, true, props.calendarSystem)
     }
 
     return timestamp
@@ -682,7 +919,7 @@ export default function useInterval(
   /**
    * Returns a Timestamp based on mouse click position on the calendar
    * Also handles touch events
-   * This function is used for horizontal intervals
+   * This function is used for horizontal layout
    * @param {MouseEvent} e Browser MouseEvent
    * @param {Timestamp} day Timestamp associated with event
    * @param {Boolean} clamp Whether to clamp values to nearest interval
@@ -709,11 +946,11 @@ export default function useInterval(
     )
 
     if (addMinutes !== 0) {
-      timestamp = addToDate(timestamp, { minute: addMinutes })
+      timestamp = addToDate(timestamp, { minute: addMinutes }, props.calendarSystem)
     }
 
     if (now) {
-      timestamp = updateRelative(timestamp, now, true)
+      timestamp = updateRelative(timestamp, now, true, props.calendarSystem)
     }
 
     return timestamp
@@ -721,17 +958,18 @@ export default function useInterval(
 
   /**
    * Returns the scope for the associated Timestamp
-   * This function is used for vertical intervals
+   * This function is used for vertical layout
    * @param {Timestamp} timestamp
    * @param {Number} columnIndex
    */
   function getScopeForSlot(timestamp: Timestamp, columnIndex?: number): ScopeForSlot {
-    const scope: {
-      timestamp: Timestamp
-      timeStartPos: (_time: string, _clamp?: boolean) => number | false
-      timeDurationHeight: (_minutes: number) => number
-      columnIndex?: number
-    } = { timestamp, timeStartPos, timeDurationHeight }
+    const dayScope = getCalendarDayScope(timestamp, columnIndex)
+    const scope: ScopeForSlot = {
+      ...dayScope,
+      timestamp,
+      timeStartPos,
+      timeDurationHeight,
+    }
     if (columnIndex !== undefined) {
       scope.columnIndex = columnIndex
     }
@@ -740,17 +978,22 @@ export default function useInterval(
 
   /**
    * Returns the scope for the associated Timestamp
-   * This function is used for horizontal intervals
+   * This function is used for horizontal layout
    * @param {Timestamp} timestamp
    * @param {Number*} index
    */
   function getScopeForSlotX(timestamp: Timestamp, index: number): ScopeForSlotX {
-    const scope: {
-      timestamp: Timestamp
-      timeStartPosX: (_time: string, _clamp?: boolean) => number | false
-      timeDurationWidth: (_minutes: number) => number
-      index?: number
-    } = { timestamp: copyTimestamp(timestamp), timeStartPosX, timeDurationWidth }
+    const dayScope = getCalendarDayScope(timestamp, index)
+    const scope: ScopeForSlotX = {
+      timestamp: copyTimestamp(timestamp),
+      calendarTimestamp: dayScope.calendarTimestamp,
+      calendarIdentity: dayScope.calendarIdentity,
+      calendarSystem: dayScope.calendarSystem,
+      timeStartPosX,
+      timeDurationWidth,
+      outside: dayScope.outside,
+      disabled: dayScope.disabled,
+    }
     if (index !== undefined) {
       scope.index = index
     }
@@ -759,7 +1002,7 @@ export default function useInterval(
 
   /**
    * Forces the browser to scroll to the specified time
-   * This function is used for vertical intervals
+   * This function is used for vertical layout
    * @param {String} time in format HH:MM
    * @param {Number} duration in milliseconds
    * @returns {boolean} Whether the scroll operation was successful
@@ -778,9 +1021,9 @@ export default function useInterval(
 
   /**
    * Forces the browser to scroll to the specified time horizontally.
-   * This function is used for horizontal intervals.
+   * This function is used for horizontal layout.
    * @param {String} time - The time to scroll to, in the format HH:MM.
-   * @param {Number} [duration=0] - The duration of the scroll animation in milliseconds.
+   * @param {Number} [duration=0] - The duration of the scroll behavior in milliseconds.
    * @returns {boolean} Whether the scroll operation was successful.
    */
   function scrollToTimeX(time: string, duration = 0): boolean {
@@ -796,7 +1039,7 @@ export default function useInterval(
   }
 
   /**
-   * Calculates the height of a time duration in the interval view.
+   * Calculates the height of a time duration in the interval display.
    * @param {number} minutes - The number of minutes to calculate the height for.
    * @returns {number} The height of the time duration in pixels.
    */
@@ -805,7 +1048,7 @@ export default function useInterval(
   }
 
   /**
-   * Calculates the width of a time duration in the interval view.
+   * Calculates the width of a time duration in the interval display.
    * @param {number} minutes - The number of minutes to calculate the width for.
    * @returns {number} The width of the time duration in pixels.
    */
@@ -814,7 +1057,7 @@ export default function useInterval(
   }
 
   /**
-   * Calculates the number of minutes represented by a given height in the interval view.
+   * Calculates the number of minutes represented by a given height in the interval display.
    * @param {number} height - The height in pixels to calculate the minutes for.
    * @returns {number} The number of minutes represented by the given height.
    */
@@ -823,7 +1066,7 @@ export default function useInterval(
   }
 
   /**
-   * Calculates the number of minutes represented by a given width in the interval view.
+   * Calculates the number of minutes represented by a given width in the interval display.
    * @param {number} width - The width in pixels to calculate the minutes for.
    * @returns {number} The number of minutes represented by the given width.
    */
@@ -832,9 +1075,9 @@ export default function useInterval(
   }
 
   /**
-   * Calculates the starting position (y-coordinate) of a time value in the interval view.
+   * Calculates the starting position (y-coordinate) of a time value in the interval display.
    * @param {string} time - The time value to calculate the starting position for.
-   * @param {boolean} [clamp=true] - Whether to clamp the calculated position to the bounds of the interval view.
+   * @param {boolean} [clamp=true] - Whether to clamp the calculated position to the bounds of the interval display.
    * @returns {number|false} The starting position (y-coordinate) of the time value, or `false` if the time value is invalid.
    */
   function timeStartPos(time: string, clamp = true): number | false {
@@ -859,9 +1102,9 @@ export default function useInterval(
   }
 
   /**
-   * Calculates the starting position (x-coordinate) of a time value in the interval view.
+   * Calculates the starting position (x-coordinate) of a time value in the interval display.
    * @param {string} time - The time value to calculate the starting position for.
-   * @param {boolean} [clamp=true] - Whether to clamp the calculated position to the bounds of the interval view.
+   * @param {boolean} [clamp=true] - Whether to clamp the calculated position to the bounds of the interval display.
    * @returns {number|false} The starting position (x-coordinate) of the time value, or `false` if the time value is invalid.
    */
   function timeStartPosX(time: string, clamp = true): number | false {

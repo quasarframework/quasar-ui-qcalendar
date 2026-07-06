@@ -13,38 +13,56 @@ import {
   Transition,
   watch,
   withDirectives,
-  SetupContext,
   CSSProperties,
+  type SlotsType,
   VNode,
 } from 'vue'
 
 // Utility
-import { getDayIdentifier, parsed, parseTimestamp, today, Timestamp } from '../utils/Timestamp'
+import {
+  gregorianCalendar,
+  parseCalendarTimestamp,
+  today,
+  type Timestamp,
+} from '@timestamp-js/core'
 
-import { convertToUnit, minCharWidth } from '../utils/helpers'
-
+import { convertToUnit, getResponsiveWeekdayLabel } from '../utils/helpers'
+import { getCalendarDateIdentifier, parseCalendarTimestampSafe } from '../utils/calendarSystem'
 // Composables
 import useCalendar from '../composables/useCalendar'
-import useCommon, { useCommonProps } from '../composables/useCommon'
-import useInterval, {
-  useAgendaProps,
-  type AgendaProps,
-  type SchedulerProps,
-  type ResourceProps,
-} from '../composables/useInterval'
-import { useColumnProps, type ColumnObject } from '../composables/useColumn'
-import { useMaxDaysProps } from '../composables/useMaxDays'
-import useTimes, { useTimesProps } from '../composables/useTimes'
+import useCommon, {
+  isFocusableType,
+  useCommonProps,
+  type CommonProps,
+} from '../composables/useCommon'
+import { useAgendaProps, type AgendaProps } from '../composables/useInterval'
+import useCalendarDays from '../composables/useCalendarDays'
+import {
+  getColumnIndexes,
+  useColumnProps,
+  type ColumnObject,
+  type ColumnProps,
+} from '../composables/useColumn'
+import { useMaxDaysProps, type MaxDaysProps } from '../composables/useMaxDays'
+import useTimes, { useTimesProps, type TimesProps } from '../composables/useTimes'
 import useRenderValues from '../composables/useRenderValues'
 import useMouse, { getRawMouseEvents } from '../composables/useMouse'
 import useMove, { useMoveEmits } from '../composables/useMove'
 import useEmitListeners from '../composables/useEmitListeners'
 import useButton from '../composables/useButton'
 import useFocusHelper from '../composables/useFocusHelper'
-import useCellWidth, { useCellWidthProps } from '../composables/useCellWidth'
+import useCellWidth, { useCellWidthProps, type CellWidthProps } from '../composables/useCellWidth'
 import useCheckChange, { useCheckChangeEmits } from '../composables/useCheckChange'
 import useEvents from '../composables/useEvents'
-import useKeyboard, { useNavigationProps } from '../composables/useKeyboard'
+import useKeyboard, { useNavigationProps, type NavigationProps } from '../composables/useKeyboard'
+import { getDragEventHandlers } from '../composables/useDragAndDrop'
+import type {
+  AgendaColumnSlotScope,
+  AgendaHeadColumnSlotScope,
+  HeadDayButtonSlotScope,
+  IntervalSlotScope,
+  QCalendarAgendaSlots,
+} from '../slots'
 
 // Directives
 import ResizeObserver from '../directives/ResizeObserver'
@@ -55,12 +73,22 @@ type Size = {
   height: number
 }
 
+type AgendaSetupProps = CommonProps &
+  AgendaProps &
+  ColumnProps &
+  MaxDaysProps &
+  TimesProps &
+  CellWidthProps &
+  NavigationProps
+
 const { renderButton } = useButton()
 
 export default defineComponent({
   name: 'QCalendarAgenda',
 
   directives: { ResizeObserver },
+
+  slots: Object as SlotsType<QCalendarAgendaSlots>,
 
   props: {
     ...useCommonProps,
@@ -73,28 +101,78 @@ export default defineComponent({
   },
 
   emits: [
+    /**
+     * Emitted when the model value changes.
+     *
+     * @param value New model value.
+     * @param-type value String
+     * @param-tsType value string
+     */
     'update:model-value',
     ...useCheckChangeEmits,
     ...useMoveEmits,
+    /**
+     * Interact with an agenda date button.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope HeadDayButtonSlotScope
+     * @param scope Agenda date button scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-date'),
+    /**
+     * Interact with an agenda header day.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope IntervalSlotScope
+     * @param scope Agenda header day scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-head-day'),
+    /**
+     * Interact with an agenda time interval.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope IntervalSlotScope
+     * @param scope Agenda time interval scope.
+     * @param event Native mouse or touch event.
+     */
     ...getRawMouseEvents('-time'),
+    /**
+     * Interact with an agenda column header.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope AgendaHeadColumnSlotScope
+     * @param scope Agenda column header scope.
+     * @param event Native mouse or touch event.
+     */
+    ...getRawMouseEvents('-head-column'),
+    /**
+     * Interact with an agenda body column.
+     *
+     * @api-follow getRawMouseEvents
+     * @api-scope AgendaColumnSlotScope
+     * @param scope Agenda column scope.
+     * @param event Native mouse or touch event.
+     */
+    ...getRawMouseEvents('-column'),
   ],
 
-  setup(
-    props: AgendaProps & SchedulerProps & ResourceProps,
-    { slots, emit, expose }: SetupContext,
-  ) {
+  setup(props: AgendaSetupProps, { slots, emit, expose }) {
+    const initialDate = props.modelValue || today(props.calendarSystem)
     const scrollArea = ref(null),
       pane = ref(null),
       headerColumnRef = ref(null),
-      focusRef = ref<string>(props.modelValue || today()),
-      focusValue = ref<Timestamp>(parsed(props.modelValue || today()) as Timestamp),
+      focusRef = ref<string>(initialDate),
+      focusValue = ref<Timestamp>(
+        parseCalendarTimestamp(initialDate, props.calendarSystem) as Timestamp,
+      ),
       datesRef = ref<Record<string, HTMLElement>>({}),
+      keyboardActive = ref(false),
       headDayEventsParentRef = ref<HTMLElement>(),
       headDayEventsChildRef = ref<HTMLElement>(),
       direction = ref<'next' | 'prev'>('next'),
-      startDate = ref(props.modelValue || today()),
+      startDate = ref(initialDate),
       endDate = ref('0000-00-00'),
       maxDaysRendered = ref(0),
       emittedValue = ref(props.modelValue),
@@ -132,10 +210,10 @@ export default defineComponent({
       // console.info('isSticky', isSticky.value)
     })
 
-    const { times, setCurrent, updateCurrent } = useTimes(props)
+    const { times, setCurrent, updateCurrent: updateCurrentTimes } = useTimes(props)
 
     // update dates
-    updateCurrent()
+    updateCurrentTimes()
     setCurrent()
 
     const {
@@ -147,11 +225,16 @@ export default defineComponent({
       ariaDateFormatter,
       // methods
       dayStyleDefault,
+      getDisabledStyle,
       getRelativeClasses,
     } = useCommon(props, { startDate, endDate, times })
 
     const parsedValue = computed(() => {
-      return parseTimestamp(props.modelValue, times.now) || parsedStart.value || times.today
+      return (
+        parseCalendarTimestampSafe(props.modelValue, props.calendarSystem, parsedStart.value) ||
+        parsedStart.value ||
+        times.today
+      )
     })
 
     focusValue.value = parsedValue.value
@@ -169,6 +252,7 @@ export default defineComponent({
       {
         scrollArea,
         pane,
+        keyboardActive,
       },
     )
 
@@ -180,17 +264,17 @@ export default defineComponent({
       // methods
       // styleDefault,
       getScopeForSlot,
-    } = useInterval(props, {
+    } = useCalendarDays(props, {
       times,
-      scrollArea,
       parsedStart,
       parsedEnd,
+      activeDate: parsedValue,
       maxDays: maxDaysRendered,
       size,
       headerColumnRef,
     })
 
-    const { move } = useMove(props, {
+    const { move: moveCalendar } = useMove(props, {
       parsedView,
       parsedValue,
       direction,
@@ -202,12 +286,18 @@ export default defineComponent({
 
     const { getDefaultMouseEventHandlers } = useMouse(emit, emitListeners)
 
-    const { checkChange } = useCheckChange(emit, { days, lastStart, lastEnd })
+    const { checkChange } = useCheckChange(emit, {
+      days,
+      lastStart,
+      lastEnd,
+      calendarSystem: () => props.calendarSystem,
+    })
 
     const { isKeyCode } = useEvents()
 
-    const { tryFocus } = useKeyboard(props, {
+    useKeyboard(props, {
       rootRef,
+      keyboardActive,
       focusRef,
       focusValue,
       datesRef,
@@ -218,13 +308,15 @@ export default defineComponent({
     })
 
     const parsedColumnCount = computed(() => {
-      return days.value.length +
-        (isLeftColumnOptionsValid.value === true ? props.leftColumnOptions!.length : 0) +
-        (isRightColumnOptionsValid.value === true ? props.rightColumnOptions!.length : 0) +
-        days.value.length ===
-        1 && parseInt(String(props.columnCount), 10) > 0
-        ? parseInt(String(props.columnCount), 10)
-        : 0
+      const columnCount = parseInt(String(props.columnCount), 10)
+      const visibleDayCount =
+        days.value.length === 1 && columnCount > 0 ? columnCount : days.value.length
+      const leftColumnCount =
+        isLeftColumnOptionsValid.value === true ? props.leftColumnOptions!.length : 0
+      const rightColumnCount =
+        isRightColumnOptionsValid.value === true ? props.rightColumnOptions!.length : 0
+
+      return Math.max(visibleDayCount + leftColumnCount + rightColumnCount, 1)
     })
 
     const isLeftColumnOptionsValid = computed(() => {
@@ -244,7 +336,6 @@ export default defineComponent({
       }
       return 100 / parsedColumnCount.value + '%'
     })
-
     watch([days], checkChange, { deep: true, immediate: true })
 
     watch(
@@ -252,9 +343,11 @@ export default defineComponent({
       (val, oldVal) => {
         if (emittedValue.value !== val) {
           if (props.animated === true) {
-            const v1 = getDayIdentifier(parsed(val) as Timestamp)
-            const v2 = getDayIdentifier(parsed(oldVal) as Timestamp)
-            direction.value = v1 >= v2 ? 'next' : 'prev'
+            const v1 = getCalendarDateIdentifier(val, props.calendarSystem)
+            const v2 = getCalendarDateIdentifier(oldVal, props.calendarSystem)
+            if (v1 !== null && v2 !== null) {
+              direction.value = v1 >= v2 ? 'next' : 'prev'
+            }
           }
           emittedValue.value = val
         }
@@ -265,9 +358,11 @@ export default defineComponent({
     watch(emittedValue, (val, oldVal) => {
       if (emittedValue.value !== props.modelValue) {
         if (props.animated === true) {
-          const v1 = getDayIdentifier(parsed(val) as Timestamp)
-          const v2 = getDayIdentifier(parsed(oldVal) as Timestamp)
-          direction.value = v1 >= v2 ? 'next' : 'prev'
+          const v1 = getCalendarDateIdentifier(val, props.calendarSystem)
+          const v2 = getCalendarDateIdentifier(oldVal, props.calendarSystem)
+          if (v1 !== null && v2 !== null) {
+            direction.value = v1 >= v2 ? 'next' : 'prev'
+          }
         }
         emit('update:model-value', val)
       }
@@ -275,17 +370,12 @@ export default defineComponent({
 
     watch(focusRef, (val) => {
       if (val) {
-        focusValue.value = parseTimestamp(val) as Timestamp
-      }
-    })
+        const timestamp = parseCalendarTimestampSafe(val, props.calendarSystem)
+        if (timestamp === null) {
+          return
+        }
 
-    watch(focusValue, () => {
-      if (focusRef.value && datesRef.value[focusRef.value]) {
-        datesRef.value[focusRef.value]!.focus()
-      } else {
-        // if focusRef is not in the list of current dates of dateRef,
-        // then assume month is changing
-        tryFocus()
+        focusValue.value = timestamp
       }
     })
 
@@ -306,16 +396,48 @@ export default defineComponent({
 
     // public functions
 
-    function moveToToday(): void {
-      emittedValue.value = today()
+    /**
+     * Moves the agenda view by a relative amount.
+     *
+     * @param amount Number of view units to move. Negative values move backward.
+     * @param-example amount -1
+     */
+    function move(amount: number = 1): void {
+      moveCalendar(amount)
     }
 
-    function next(amount = 1): void {
+    /**
+     * Moves the agenda view to today.
+     */
+    function moveToToday(): void {
+      move(0)
+    }
+
+    /**
+     * Moves the agenda view forward.
+     *
+     * @param amount Number of view units to move forward.
+     * @param-example amount 1
+     */
+    function next(amount: number = 1): void {
       move(amount)
     }
 
-    function prev(amount = 1): void {
+    /**
+     * Moves the agenda view backward.
+     *
+     * @param amount Number of view units to move backward.
+     * @param-example amount 1
+     */
+    function prev(amount: number = 1): void {
       move(-amount)
+    }
+
+    /**
+     * Refreshes the agenda view's current date/time state.
+     */
+    function updateCurrent(): void {
+      updateCurrentTimes()
     }
 
     // private functions
@@ -333,9 +455,9 @@ export default defineComponent({
 
     function __renderHeadColumn(column: ColumnObject, index: number): VNode {
       const slot = slots['head-column']
-      const scope = { column, index, days: days.value }
+      const scope: AgendaHeadColumnSlotScope = { column, index, days: days.value }
       const width = isSticky.value === true ? props.cellWidth : computedWidth.value
-      const isFocusable = props.focusable === true && props.focusType.includes('weekday')
+      const isFocusable = isFocusableType(props, 'weekday')
       const id =
         props.columnOptionsId !== undefined
           ? (column[props.columnOptionsId as keyof ColumnObject] as string)
@@ -358,41 +480,20 @@ export default defineComponent({
             'q-calendar__focusable': isFocusable === true,
           },
           style,
-          onDragenter: (e: DragEvent) => {
-            if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
-              props.dragEnterFunc(e, 'head-column', { scope }) === true
-                ? (dragOverHeadDayRef.value = id)
-                : (dragOverHeadDayRef.value = '')
-            }
-          },
-          onDragover: (e: DragEvent) => {
-            if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
-              props.dragOverFunc(e, 'head-column', { scope }) === true
-                ? (dragOverHeadDayRef.value = id)
-                : (dragOverHeadDayRef.value = '')
-            }
-          },
-          onDragleave: (e: DragEvent) => {
-            if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
-              props.dragLeaveFunc(e, 'head-column', { scope }) === true
-                ? (dragOverHeadDayRef.value = id)
-                : (dragOverHeadDayRef.value = '')
-            }
-          },
-          onDrop: (e: DragEvent) => {
-            if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
-              props.dropFunc(e, 'head-column', { scope }) === true
-                ? (dragOverHeadDayRef.value = id)
-                : (dragOverHeadDayRef.value = '')
-            }
-          },
-          ...getDefaultMouseEventHandlers('-head-column', (event /*, eventName*/) => {
-            return { scope: { column, index }, event }
+          ...getDragEventHandlers(props, {
+            targetRef: dragOverHeadDayRef,
+            value: id,
+            resetValue: '',
+            type: 'head-column',
+            scope,
+          }),
+          ...getDefaultMouseEventHandlers('-head-column', (event) => {
+            return { scope, event }
           }),
         },
         [
           props.noDefaultHeaderText !== true && __renderHeadColumnLabel(column),
-          slot && slot(scope),
+          slot && slot({ scope }),
           useFocusHelper(),
         ],
       )
@@ -446,6 +547,8 @@ export default defineComponent({
     // ---
 
     function __renderHead(): VNode {
+      const children = [__renderHeadDaysColumn()]
+
       return h(
         'div',
         {
@@ -454,11 +557,8 @@ export default defineComponent({
             'q-calendar-agenda__head': true,
             'q-calendar__sticky': isSticky.value === true,
           },
-          style: {
-            marginRight: scrollWidth.value + 'px',
-          },
         },
-        [__renderHeadDaysColumn()],
+        children,
       )
     }
 
@@ -516,16 +616,8 @@ export default defineComponent({
             h(
               'div',
               {
-                // TODO: need a class
                 ref: headDayEventsParentRef,
-                style: {
-                  position: 'absolute',
-                  left: 0,
-                  top: 0,
-                  right: 0,
-                  overflow: 'hidden',
-                  zIndex: 1,
-                },
+                class: 'q-calendar__head-days-event-slot',
               },
               [slot({ scope: { days: days.value, ref: headDayEventsChildRef } })],
             ),
@@ -536,9 +628,10 @@ export default defineComponent({
 
     function __renderHeadDays(): VNode | VNode[] {
       const columnCount = parseInt(String(props.columnCount), 10)
-      const columnIndexStart = parseInt(String(props.columnIndexStart), 10)
 
       if (days.value.length === 1 && columnCount > 0) {
+        const day = days.value[0]!
+
         return [
           isLeftColumnOptionsValid.value === true
             ? props.leftColumnOptions!.map((column: ColumnObject, index: number) =>
@@ -546,9 +639,9 @@ export default defineComponent({
               )
             : [],
 
-          ...Array.apply(null, new Array(columnCount))
-            .map((_, i) => i + columnIndexStart)
-            .map((columnIndex) => __renderHeadDay(days.value[0], columnIndex)),
+          ...getColumnIndexes(columnCount, props.columnIndexStart).map((columnIndex) =>
+            __renderHeadDay(day, columnIndex),
+          ),
 
           isRightColumnOptionsValid.value === true
             ? props.rightColumnOptions!.map((column: ColumnObject, index: number) =>
@@ -578,10 +671,12 @@ export default defineComponent({
     function __renderHeadDaysEvents(): VNode[] {
       const columnCount = parseInt(String(props.columnCount), 10)
       if (days.value.length === 1 && columnCount > 0) {
+        const day = days.value[0]!
+
         return [
-          ...Array.apply(null, new Array(parseInt(String(props.columnCount), 10)))
-            .map((_, i) => i + columnCount)
-            .map((columnIndex) => __renderHeadDayEvent(days.value[0], columnIndex)),
+          ...getColumnIndexes(columnCount, props.columnIndexStart).map((columnIndex) =>
+            __renderHeadDayEvent(day, columnIndex),
+          ),
         ]
       } else {
         return days.value.map((day) => __renderHeadDayEvent(day, 0))
@@ -593,12 +688,12 @@ export default defineComponent({
       const headDateSlot = slots['head-date']
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
-      const scope = getScopeForSlot(day, columnIndex ?? 0)
+      const scope: IntervalSlotScope = getScopeForSlot(day, columnIndex ?? 0)
       scope.activeDate = activeDate
       scope.droppable = dragOverHeadDayRef.value === day.date
-      scope.disabled = props.disabledWeekdays
-        ? props.disabledWeekdays.includes(Number(day.weekday))
-        : false
+      scope.disabled =
+        scope.disabled === true ||
+        (props.disabledWeekdays ? props.disabledWeekdays.includes(Number(day.weekday)) : false)
 
       const width = isSticky.value === true ? props.cellWidth : computedWidth.value
       const styler = props.weekdayStyle || dayStyleDefault
@@ -606,13 +701,14 @@ export default defineComponent({
         width,
         maxWidth: width,
         ...styler({ scope }),
+        ...getDisabledStyle(day),
       }
       if (isSticky.value === true) {
         style.minWidth = width
       }
       const weekdayClass =
         typeof props.weekdayClass === 'function' ? props.weekdayClass({ scope }) : {}
-      const isFocusable = props.focusable === true && props.focusType.includes('weekday')
+      const isFocusable = isFocusableType(props, 'weekday')
 
       const data: Record<string, any> = {
         key: day.date + (columnIndex !== undefined ? '-' + columnIndex : ''),
@@ -623,40 +719,21 @@ export default defineComponent({
         class: {
           'q-calendar-agenda__head--day': true,
           ...weekdayClass,
-          ...getRelativeClasses(day),
+          ...getRelativeClasses(day, scope.outside),
           'q-active-date': activeDate,
+          disabled: scope.disabled === true,
+          'q-disabled-day': scope.disabled === true,
           'q-calendar__hoverable': props.hoverable === true,
           'q-calendar__focusable': isFocusable === true,
         },
         style,
-        onDragenter: (e: DragEvent) => {
-          if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
-            props.dragEnterFunc(e, 'head-day', { scope }) === true
-              ? (dragOverHeadDayRef.value = day.date)
-              : (dragOverHeadDayRef.value = '')
-          }
-        },
-        onDragover: (e: DragEvent) => {
-          if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
-            props.dragOverFunc(e, 'head-day', { scope }) === true
-              ? (dragOverHeadDayRef.value = day.date)
-              : (dragOverHeadDayRef.value = '')
-          }
-        },
-        onDragleave: (e: DragEvent) => {
-          if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
-            props.dragLeaveFunc(e, 'head-day', { scope }) === true
-              ? (dragOverHeadDayRef.value = day.date)
-              : (dragOverHeadDayRef.value = '')
-          }
-        },
-        onDrop: (e: DragEvent) => {
-          if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
-            props.dropFunc(e, 'head-day', { scope }) === true
-              ? (dragOverHeadDayRef.value = day.date)
-              : (dragOverHeadDayRef.value = '')
-          }
-        },
+        ...getDragEventHandlers(props, {
+          targetRef: dragOverHeadDayRef,
+          value: day.date,
+          resetValue: '',
+          type: 'head-day',
+          scope,
+        }),
         onFocus: () => {
           if (isFocusable === true) {
             focusRef.value = day.date
@@ -759,16 +836,17 @@ export default defineComponent({
       const headDayEventSlot = slots['head-day-event']
       const activeDate = props.noActiveDate !== true && __isActiveDate(day)
 
-      const scope = getScopeForSlot(day, columnIndex)
+      const scope: IntervalSlotScope = getScopeForSlot(day, columnIndex)
       scope.activeDate = activeDate
-      scope.disabled = props.disabledWeekdays
-        ? props.disabledWeekdays.includes(Number(day.weekday))
-        : false
+      scope.disabled =
+        scope.disabled === true ||
+        (props.disabledWeekdays ? props.disabledWeekdays.includes(Number(day.weekday)) : false)
 
       const width = isSticky.value === true ? props.cellWidth : computedWidth.value
       const style: CSSProperties = {
         width,
         maxWidth: width,
+        ...getDisabledStyle(day),
       }
       if (isSticky.value === true) {
         style.minWidth = width
@@ -780,8 +858,10 @@ export default defineComponent({
           key: 'event-' + day.date + (columnIndex !== undefined ? '-' + columnIndex : ''),
           class: {
             'q-calendar-agenda__head--day__event': true,
-            ...getRelativeClasses(day),
+            ...getRelativeClasses(day, scope.outside),
             'q-active-date': activeDate,
+            disabled: scope.disabled === true,
+            'q-disabled-day': scope.disabled === true,
           },
           style,
         },
@@ -791,7 +871,7 @@ export default defineComponent({
 
     function __renderHeadWeekday(day: Timestamp): VNode {
       const slot = slots['head-weekday-label']
-      const scope = getScopeForSlot(day, 0)
+      const scope: IntervalSlotScope = getScopeForSlot(day, 0)
       scope.shortWeekdayLabel = props.shortWeekdayLabel
 
       const data: Record<string, any> = {
@@ -810,19 +890,20 @@ export default defineComponent({
     }
 
     function __renderHeadWeekdayLabel(day: Timestamp, shortWeekdayLabel: boolean): VNode {
-      const weekdayLabel = weekdayFormatter.value(
+      const weekdayLabel = getResponsiveWeekdayLabel({
         day,
-        shortWeekdayLabel ||
-          (props.weekdayBreakpoints[0] > 0 && parsedCellWidth.value <= props.weekdayBreakpoints[0]),
-      )
+        formatter: weekdayFormatter.value,
+        shortWeekdayLabel,
+        cellWidth: parsedCellWidth.value,
+        breakpoints: props.weekdayBreakpoints,
+        minWeekdayLabel: props.minWeekdayLabel,
+      })
       return h(
         'span',
         {
           class: 'q-calendar__ellipsis',
         },
-        props.weekdayBreakpoints[1] > 0 && parsedCellWidth.value <= props.weekdayBreakpoints[1]
-          ? minCharWidth(weekdayLabel, Number(props.minWeekdayLabel))
-          : weekdayLabel,
+        weekdayLabel,
       )
     }
 
@@ -842,14 +923,17 @@ export default defineComponent({
       const dayLabel = dayFormatter.value(day, false)
       const headDayLabelSlot = slots['head-day-label']
       const headDayButtonSlot = slots['head-day-button']
+      const intervalScope = getScopeForSlot(day, 0)
 
-      const scope = {
+      const scope: HeadDayButtonSlotScope = {
         dayLabel,
         timestamp: day,
+        calendarTimestamp: intervalScope.calendarTimestamp,
+        calendarIdentity: intervalScope.calendarIdentity,
+        calendarSystem: intervalScope.calendarSystem,
+        outside: intervalScope.outside,
         activeDate,
-        disabled: props.disabledWeekdays
-          ? props.disabledWeekdays.includes(Number(day.weekday))
-          : false,
+        disabled: intervalScope.disabled === true,
       }
 
       const data: Record<string, any> = {
@@ -861,16 +945,16 @@ export default defineComponent({
           'q-calendar__button--bordered': day.current === true,
           'q-calendar__focusable': true,
         },
-        disabled: day.disabled,
+        disabled: scope.disabled === true,
         onKeydown: (e: KeyboardEvent): void => {
-          if (day.disabled !== true && isKeyCode(e, [13, 32])) {
+          if (scope.disabled !== true && isKeyCode(e, [13, 32])) {
             e.stopPropagation()
             e.preventDefault()
           }
         },
         onKeyup: (e: KeyboardEvent): void => {
           // allow selection of date via Enter or Space keys
-          if (day.disabled !== true && isKeyCode(e, [13, 32])) {
+          if (scope.disabled !== true && isKeyCode(e, [13, 32])) {
             emittedValue.value = day.date
             if (emitListeners.value.onClickDate !== undefined) {
               emit('click-date', { scope })
@@ -976,9 +1060,10 @@ export default defineComponent({
 
     function __renderDays(): VNode[] | undefined {
       const columnCount = parseInt(String(props.columnCount), 10)
-      const columnIndexStart = parseInt(String(props.columnIndexStart), 10)
 
       if (days.value.length === 1 && columnCount > 0) {
+        const day = days.value[0]!
+
         return [
           isLeftColumnOptionsValid.value === true
             ? props.leftColumnOptions!.map((column: ColumnObject, index: number) =>
@@ -986,9 +1071,9 @@ export default defineComponent({
               )
             : [],
 
-          ...Array.apply(null, new Array(columnCount))
-            .map((_, i) => i + columnIndexStart)
-            .map((i) => __renderDay(days.value[0], 0, i)),
+          ...getColumnIndexes(columnCount, props.columnIndexStart).map((columnIndex) =>
+            __renderDay(day, 0, columnIndex),
+          ),
 
           isRightColumnOptionsValid.value === true
             ? props.rightColumnOptions!.map((column: ColumnObject, index: number) =>
@@ -1017,9 +1102,9 @@ export default defineComponent({
 
     function __renderColumn(column: ColumnObject, index: number): VNode {
       const slot = slots.column
-      const scope = { column, days: days.value, index }
+      const scope: AgendaColumnSlotScope = { column, days: days.value, index }
       const width = isSticky.value === true ? props.cellWidth : computedWidth.value
-      const isFocusable = props.focusable === true && props.focusType.includes('day')
+      const isFocusable = isFocusableType(props, 'day')
       const id = props.columnOptionsId !== undefined ? column[props.columnOptionsId] : undefined
 
       return h(
@@ -1037,35 +1122,14 @@ export default defineComponent({
             maxWidth: width,
             width,
           },
-          onDragenter: (e: DragEvent) => {
-            if (props.dragEnterFunc !== undefined && typeof props.dragEnterFunc === 'function') {
-              props.dragEnterFunc(e, 'column', { scope }) === true
-                ? (dragOverHeadDayRef.value = id)
-                : (dragOverHeadDayRef.value = '')
-            }
-          },
-          onDragover: (e: DragEvent) => {
-            if (props.dragOverFunc !== undefined && typeof props.dragOverFunc === 'function') {
-              props.dragOverFunc(e, 'column', { scope }) === true
-                ? (dragOverHeadDayRef.value = id)
-                : (dragOverHeadDayRef.value = '')
-            }
-          },
-          onDragleave: (e: DragEvent) => {
-            if (props.dragLeaveFunc !== undefined && typeof props.dragLeaveFunc === 'function') {
-              props.dragLeaveFunc(e, 'column', { scope }) === true
-                ? (dragOverHeadDayRef.value = id)
-                : (dragOverHeadDayRef.value = '')
-            }
-          },
-          onDrop: (e: DragEvent) => {
-            if (props.dropFunc !== undefined && typeof props.dropFunc === 'function') {
-              props.dropFunc(e, 'column', { scope }) === true
-                ? (dragOverHeadDayRef.value = id)
-                : (dragOverHeadDayRef.value = '')
-            }
-          },
-          ...getDefaultMouseEventHandlers('-column', (event /*, eventName*/) => {
+          ...getDragEventHandlers(props, {
+            targetRef: dragOverHeadDayRef,
+            value: id,
+            resetValue: '',
+            type: 'column',
+            scope,
+          }),
+          ...getDefaultMouseEventHandlers('-column', (event) => {
             return { scope, event }
           }),
         },
@@ -1077,11 +1141,15 @@ export default defineComponent({
       const dayHeight = parseInt(String(props.dayHeight), 10)
       const dayMinHeight = parseInt(String(props.dayMinHeight), 10)
       const slot = slots.day
-      const scope = getScopeForSlot(day, columnIndex)
+      const scope: IntervalSlotScope = getScopeForSlot(day, columnIndex)
       const width = isSticky.value === true ? props.cellWidth : computedWidth.value
+      const styler = props.dayStyle || dayStyleDefault
+      const dayClass = typeof props.dayClass === 'function' ? props.dayClass({ scope }) : {}
       const style: CSSProperties = {
         width,
         maxWidth: width,
+        ...styler({ scope }),
+        ...getDisabledStyle(day),
       }
       if (isSticky.value === true) {
         style.minWidth = width
@@ -1097,7 +1165,10 @@ export default defineComponent({
           key: day.date + (columnIndex !== undefined ? ':' + columnIndex : ''),
           class: {
             'q-calendar-agenda__day': true,
-            ...getRelativeClasses(day),
+            ...dayClass,
+            ...getRelativeClasses(day, scope.outside),
+            disabled: scope.disabled === true,
+            'q-disabled-day': scope.disabled === true,
           },
           style,
         },
@@ -1118,13 +1189,14 @@ export default defineComponent({
       }
 
       const hasWidth = size.width > 0
+      const calendarKey = props.calendarSystem?.id ?? gregorianCalendar.id
 
       const agenda = withDirectives(
         h(
           'div',
           {
             class: 'q-calendar-agenda',
-            key: startDate.value,
+            key: `${calendarKey}:${startDate.value}`,
           },
           [
             hasWidth === true &&
@@ -1158,8 +1230,14 @@ export default defineComponent({
     expose({
       prev,
       next,
+      /**
+       * Moves the agenda view by a relative amount.
+       */
       move,
       moveToToday,
+      /**
+       * Refreshes the agenda view's current date/time state.
+       */
       updateCurrent,
     })
 

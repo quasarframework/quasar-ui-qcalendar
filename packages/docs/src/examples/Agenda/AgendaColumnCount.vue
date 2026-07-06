@@ -1,5 +1,10 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      This example renders multiple columns for the same visible date so parallel schedules can
+      share one day.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="row justify-center">
@@ -9,10 +14,6 @@
           v-model="selectedDate"
           view="day"
           :column-count="3"
-          :left-column-options="leftColumnOptions"
-          :right-column-options="rightColumnOptions"
-          column-options-id="id"
-          column-options-label="label"
           :day-min-height="200"
           bordered
           animated
@@ -31,23 +32,12 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { QCalendarAgenda, today } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarAgenda } from '@quasar/quasar-ui-qcalendar'
+import { today } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 const selectedDate = ref(today())
-const leftColumnOptions = ref([
-  {
-    id: 'overdue',
-    label: 'Overdue',
-  },
-])
-const rightColumnOptions = ref([
-  {
-    id: 'summary',
-    label: 'Summary',
-  },
-])
 const calendar = ref<QCalendarAgenda>()
 
 const onChange = (date: string) => {

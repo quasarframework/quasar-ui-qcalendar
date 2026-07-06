@@ -1,5 +1,5 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "module": "esnext",
     "target": "esnext",
@@ -9,13 +9,14 @@
     "moduleResolution": "bundler",
     "esModuleInterop": true,
     "allowJs": true,
-    "outDir": "dist",
-    "baseUrl": ".",
+    "noImplicitAny": false,
+    "rootDir": "src",
+    "outDir": "dist/types",
     "paths": {
-      "components/*": ["src/components/*"],
-      "directives/*": ["src/directives/*"],
-      "composables/*": ["src/composables/*"],
-      "utils/*": ["src/utils/*"]
+      "components/*": ["./src/components/*"],
+      "directives/*": ["./src/directives/*"],
+      "composables/*": ["./src/composables/*"],
+      "utils/*": ["./src/utils/*"]
     }
   },
   "include": ["src/**/*"],

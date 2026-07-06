@@ -1,6 +1,15 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      Toggle dark mode to confirm the calendar, labels, borders, and event styles remain readable on
+      a dark surface.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
+
+    <div class="q-ma-sm row justify-center">
+      <q-toggle v-model="isDark" label="Toggle Dark Mode" />
+    </div>
 
     <div class="row justify-center">
       <div style="display: flex; max-width: 800px; width: 100%; height: 200px">
@@ -8,11 +17,7 @@
           ref="calendar"
           v-model="selectedDate"
           view="day"
-          dark
-          :left-column-options="leftColumnOptions"
-          :right-column-options="rightColumnOptions"
-          column-options-id="id"
-          column-options-label="label"
+          :dark="isDark"
           :day-min-height="200"
           animated
           bordered
@@ -30,25 +35,15 @@
 </template>
 
 <script setup lang="ts">
-import { QCalendarAgenda, Timestamp, today } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarAgenda } from '@quasar/quasar-ui-qcalendar'
+import { Timestamp, today } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 import { ref } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 const calendar = ref<QCalendarAgenda>()
 const selectedDate = ref(today())
-const leftColumnOptions = ref([
-  {
-    id: 'overdue',
-    label: 'Overdue',
-  },
-])
-const rightColumnOptions = ref([
-  {
-    id: 'summary',
-    label: 'Summary',
-  },
-])
+const isDark = ref(true)
 function onToday() {
   if (calendar.value) {
     calendar.value.moveToToday()

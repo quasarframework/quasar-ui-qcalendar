@@ -1,6 +1,7 @@
 /*global console process */
+import { execFileSync } from 'node:child_process'
 import { cpus } from 'node:os'
-import { createFolder, copyFolder } from './build.utils'
+import { createFolder } from './build.utils'
 import { green, blue } from 'kolorist'
 import { fileURLToPath } from 'node:url'
 import path from 'path'
@@ -24,11 +25,12 @@ async function buildApi() {
   import('./build.api').then(({ generate }) => generate())
 }
 
-async function copyTypesToDist() {
-  console.log('Copying types...')
-  const srcDir = path.resolve(__dirname, '../types')
-  const destDir = path.resolve(__dirname, '../dist/types')
-  await copyFolder(srcDir, destDir)
+function buildTypes() {
+  console.log('Generating types...')
+  execFileSync('pnpm', ['exec', 'tsc', '--project', 'tsconfig.json'], {
+    cwd: path.resolve(__dirname, '..'),
+    stdio: 'inherit',
+  })
 }
 
 // Dynamic imports to maintain order
@@ -39,7 +41,7 @@ import('./script.app-ext').then(async ({ syncAppExt }) => {
 await import('./script.clean.js')
 
 console.log(
-  ` 📦 Building QCalendar ${green('v' + version)}...${parallel ? blue(' [multi-threaded]') : ''}\n`,
+  ` 📦 Building QCalendar ${green('v' + version)} with ${blue('Rolldown')}...${parallel ? blue(' [multi-threaded]') : ''}\n`,
 )
 
 createFolder('dist')
@@ -48,12 +50,9 @@ createFolder('dist/types')
 createFolder('dist/api')
 createFolder('dist/web-types')
 
-await copyTypesToDist()
+buildTypes()
 await import('./script.version')
 const api = await import('./build.api.js').then(({ generate }) => generate({ compact: true }))
 import('./build.web-types.js').then(({ generate }) => generate({ api, compact: true }))
 import('./script.javascript')
 import('./script.css')
-
-// runJob(join(__dirname, './script.javascript'))
-// runJob(join(__dirname, './script.css'))

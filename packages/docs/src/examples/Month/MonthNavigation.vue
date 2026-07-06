@@ -1,6 +1,15 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      Use the buttons or keyboard navigation to move the active date and watch the visible range
+      update.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
+
+    <div class="text-h6 text-center q-mb-sm">
+      {{ formattedMonth }}
+    </div>
 
     <div class="row justify-center">
       <div style="display: flex; max-width: 800px; width: 100%">
@@ -28,14 +37,33 @@
 </template>
 
 <script setup lang="ts">
-import { QCalendarMonth, today, Timestamp } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar'
+import { today, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
-import { ref } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import { computed, ref } from 'vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 const calendar = ref<QCalendarMonth>(),
   selectedDate = ref(today())
+
+const formattedMonth = computed(() => {
+  const formatter = monthFormatter()
+  return formatter ? formatter.format(new Date(selectedDate.value)) : selectedDate.value
+})
+
+function monthFormatter() {
+  try {
+    return new Intl.DateTimeFormat('en-US', {
+      month: 'long',
+      year: 'numeric',
+      timeZone: 'UTC',
+    })
+  } catch {
+    //
+  }
+}
+
 function onToday() {
   if (calendar.value) {
     calendar.value.moveToToday()

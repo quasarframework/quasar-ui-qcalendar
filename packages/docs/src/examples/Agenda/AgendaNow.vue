@@ -1,5 +1,10 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      This example marks a sample current date or time so you can see how the now indicator is
+      rendered.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="row justify-center">
@@ -9,10 +14,6 @@
           v-model="selectedDate"
           view="week"
           :now="nowDate"
-          :left-column-options="leftColumnOptions"
-          :right-column-options="rightColumnOptions"
-          column-options-id="id"
-          column-options-label="label"
           :day-min-height="200"
           animated
           bordered
@@ -30,34 +31,17 @@
 </template>
 
 <script setup lang="ts">
-import {
-  QCalendarAgenda,
-  addToDate,
-  parseTimestamp,
-  today,
-  Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+import { QCalendarAgenda } from '@quasar/quasar-ui-qcalendar'
+import { addToDate, parseTimestamp, today, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 import { ref } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 const calendar = ref<QCalendarAgenda>()
 const selectedDate = ref(today())
 const nowDate = ref(
   parseTimestamp(today()) ? addToDate(parseTimestamp(today()) as Timestamp, { day: 1 }).date : '',
 )
-const leftColumnOptions = ref([
-  {
-    id: 'overdue',
-    label: 'Overdue',
-  },
-])
-const rightColumnOptions = ref([
-  {
-    id: 'summary',
-    label: 'Summary',
-  },
-])
 
 function onToday() {
   if (calendar.value) {

@@ -14,7 +14,7 @@ import * as buildUtils from './build.utils'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const postCssCompiler = postcss([autoprefixer])
+const postCssCompiler = postcss([autoprefixer()])
 const postCssRtlCompiler = postcss([rtl()])
 const nano = postcss([
   cssnano({

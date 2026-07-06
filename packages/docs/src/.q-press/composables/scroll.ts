@@ -4,6 +4,11 @@ import { useRoute, useRouter } from 'vue-router'
 import { useMarkdownStore } from '../stores/markdown'
 const { setVerticalScrollPosition, getVerticalScrollPosition } = scroll
 
+/**
+ * Provides anchor scrolling and active table-of-contents tracking for Q-Press pages.
+ *
+ * @returns An object containing functions to manage scroll behavior.
+ */
 export function useScroll() {
   let scrollTimer: ReturnType<typeof setTimeout> | undefined
   const scrollDuration = 500

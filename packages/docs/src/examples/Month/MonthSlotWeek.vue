@@ -1,5 +1,9 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      This slot example customizes month week rows so weekly summary content can be added.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="row justify-center">
@@ -52,20 +56,20 @@
 </template>
 
 <script setup lang="ts">
+import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar'
 import {
-  QCalendarMonth,
   daysBetween,
   isOverlappingDates,
   parsed,
   parseDate,
   today,
   Timestamp,
-} from '@quasar/quasar-ui-qcalendar'
+} from '@timestamp-js/core'
 import { indexOf } from '@quasar/quasar-ui-qcalendar/src/utils/helpers.js'
 import '@quasar/quasar-ui-qcalendar/index.css'
 
 import { ref, reactive } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 interface Event {
   id: number
@@ -250,11 +254,13 @@ function insertEvent(
   level: number,
 ) {
   const iEvent = infoWeek[index]
-  if (iEvent !== undefined && 'left' in iEvent && iEvent.left >= availableDays) {
+  const left = iEvent !== undefined && 'left' in iEvent ? (iEvent.left ?? 0) : undefined
+
+  if (iEvent !== undefined && left !== undefined && left >= availableDays) {
     // If you have space available, more events are placed
-    if (iEvent.left - availableDays) {
+    if (left - availableDays) {
       // It is filled with empty events
-      events.push({ size: iEvent.left - availableDays })
+      events.push({ size: left - availableDays })
     }
     // The event is built
     events.push({ size: iEvent.size, event: iEvent.event })
@@ -264,7 +270,7 @@ function insertEvent(
       infoWeek.splice(index, 1)
     }
 
-    const currentAvailableDays = iEvent.left + iEvent.size
+    const currentAvailableDays = left + iEvent.size
 
     if (currentAvailableDays <= weekLength) {
       const indexNextEvent = indexOf(
@@ -366,7 +372,7 @@ function onClickHeadWorkweek(data: Timestamp) {
   height: 20px;
   margin: 1px 0 0 0;
   padding: 2px 2px;
-  justify-content: start;
+  justify-content: flex-start;
   text-overflow: ellipsis;
   overflow: hidden;
   cursor: pointer;

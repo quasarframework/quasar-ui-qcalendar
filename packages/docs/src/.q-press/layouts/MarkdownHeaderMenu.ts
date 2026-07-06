@@ -34,7 +34,21 @@ const offset = [0, 4]
 
 export default {
   props: {
+    /**
+     * Array of menu elements to display in the header menu.
+     *
+     * @category content
+     * @example [{ name: 'Home', path: '/' }, { name: 'Docs', path: '/docs' }]
+     */
     elements: Array,
+
+    /**
+     * Prefix for media query classes.
+     *
+     * @category style
+     * @example 'md'
+     * @example 'lg'
+     */
     mqPrefix: String,
   },
 

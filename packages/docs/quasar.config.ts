@@ -1,14 +1,43 @@
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file
 
-import { defineConfig } from '#q-app/wrappers'
+import { defineConfig, type ConfigureCallback } from '#q-app'
 import { viteMdPlugin, type MenuItem } from '@md-plugins/vite-md-plugin'
+import { viteSearchPlugin } from '@md-plugins/vite-search-plugin'
 import { viteExamplesPlugin, viteManualChunks } from '@md-plugins/vite-examples-plugin'
 
-export default defineConfig(async (ctx) => {
+type RolldownCodeSplittingGroup = {
+  name: (moduleId: string) => string | null
+}
+
+type DocsViteBuildConfig = {
+  chunkSizeWarningLimit?: number
+  rolldownOptions?: {
+    output?: {
+      codeSplitting?: {
+        groups?: RolldownCodeSplittingGroup[]
+      }
+    }
+  }
+}
+
+type DocsViteConfig = {
+  build?: DocsViteBuildConfig
+  resolve?: {
+    alias?:
+      | Array<{
+          find: string | RegExp
+          replacement: string
+        }>
+      | Record<string, string>
+  }
+}
+
+const configure: ConfigureCallback = async (ctx) => {
   // Dynamically import siteConfig
   const siteConfig = await import('./src/siteConfig')
   const { sidebar } = siteConfig.default
+  const uiDir = ctx.appPaths.appDir + '/../ui'
 
   return {
     // https://v2.quasar.dev/quasar-cli-vite/prefetch-feature
@@ -26,7 +55,7 @@ export default defineConfig(async (ctx) => {
     extras: [
       // 'ionicons-v4',
       // 'mdi-v7',
-      'fontawesome-v6',
+      'fontawesome-v7',
       // 'eva-icons',
       // 'themify',
       // 'line-awesome',
@@ -46,7 +75,16 @@ export default defineConfig(async (ctx) => {
       typescript: {
         strict: true,
         vueShim: true,
-        // extendTsConfig (tsConfig) {}
+        extendTsConfig(tsConfig) {
+          tsConfig.compilerOptions ??= {}
+          tsConfig.compilerOptions.paths ??= {}
+          tsConfig.compilerOptions.paths['@quasar/quasar-ui-qcalendar'] = [
+            './../../ui/src/index.ts',
+          ]
+          tsConfig.compilerOptions.paths['@quasar/quasar-ui-qcalendar/dist/api/*'] = [
+            './../../ui/dist/api/*',
+          ]
+        },
       },
 
       vueRouterMode: 'history', // available values: 'hash', 'history'
@@ -65,12 +103,54 @@ export default defineConfig(async (ctx) => {
       // polyfillModulePreload: true,
       // distDir
 
-      extendViteConf(viteConf, { isClient }) {
+      extendViteConf(viteConf: DocsViteConfig, { isClient }: { isClient: boolean }) {
+        const alias = viteConf.resolve?.alias
+        viteConf.resolve = viteConf.resolve || {}
+        viteConf.resolve.alias = [
+          ...(Array.isArray(alias)
+            ? alias
+            : Object.entries(alias ?? {}).map(([find, replacement]) => ({ find, replacement }))),
+          // Consume workspace source in docs so examples track local UI edits.
+          {
+            find: /^@quasar\/quasar-ui-qcalendar$/,
+            replacement: uiDir + '/src/index.ts',
+          },
+          // Keep API docs in Vite's local module graph during development.
+          {
+            find: /^@quasar\/quasar-ui-qcalendar\/dist\/api\/(.+)\.json$/,
+            replacement: uiDir + '/dist/api/$1.json',
+          },
+          // Consume source styles in docs so local UI style edits HMR.
+          {
+            find: /^@quasar\/quasar-ui-qcalendar\/(?:dist\/)?index(?:\.rtl)?(?:\.min)?\.css$/,
+            replacement: uiDir + '/src/index.scss',
+          },
+        ]
+
         if (ctx.prod && isClient) {
           viteConf.build = viteConf.build || {}
           viteConf.build.chunkSizeWarningLimit = 650
-          viteConf.build.rollupOptions = {
-            output: { manualChunks: viteManualChunks },
+
+          const buildOptions = viteConf.build as typeof viteConf.build & {
+            rolldownOptions?: {
+              output?: {
+                codeSplitting?: {
+                  groups?: Array<{
+                    name: (moduleId: string) => string | null
+                  }>
+                }
+              }
+            }
+          }
+
+          buildOptions.rolldownOptions = buildOptions.rolldownOptions || {}
+          buildOptions.rolldownOptions.output = buildOptions.rolldownOptions.output || {}
+          buildOptions.rolldownOptions.output.codeSplitting = {
+            groups: [
+              {
+                name: (moduleId: string) => viteManualChunks(moduleId) ?? null,
+              },
+            ],
           }
         }
       },
@@ -96,14 +176,16 @@ export default defineConfig(async (ctx) => {
             path: ctx.appPaths.srcDir + '/examples',
           },
         ],
+        viteSearchPlugin({
+          markdown: {
+            root: ctx.appPaths.srcDir + '/markdown',
+            exclude: ['__*.md'],
+          },
+        }),
         [
           'vite-plugin-checker',
           {
             vueTsc: true,
-            eslint: {
-              lintCommand: 'eslint -c ./eslint.config.js "./src*/**/*.{ts,js,mjs,cjs,vue}"',
-              useFlatConfig: true,
-            },
           },
           { server: false },
         ],
@@ -261,5 +343,7 @@ export default defineConfig(async (ctx) => {
        */
       extraScripts: [],
     },
-  }
-})
+  } as Awaited<ReturnType<ConfigureCallback>>
+}
+
+export default defineConfig(configure)

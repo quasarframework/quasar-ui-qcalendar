@@ -13,55 +13,55 @@ Some selections may not show up correctly because of `sticky` being used, which 
 ## QCalendarDay
 
 <script import>
-  import QCalendarDayAnatomy from 'components/anatomy/QCalendarDayAnatomy.vue'
+  import QCalendarDayAnatomy from '@/components/anatomy/QCalendarDayAnatomy.vue'
 </script>
 <QCalendarDayAnatomy />
 
 ## QCalendarDay (week)
 
 <script import>
-  import QCalendarWeekAnatomy from 'components/anatomy/QCalendarWeekAnatomy.vue'
+  import QCalendarWeekAnatomy from '@/components/anatomy/QCalendarWeekAnatomy.vue'
 </script>
 <QCalendarWeekAnatomy />
 
 ## QCalendarMonth
 
 <script import>
-  import QCalendarMonthAnatomy from 'components/anatomy/QCalendarMonthAnatomy.vue'
+  import QCalendarMonthAnatomy from '@/components/anatomy/QCalendarMonthAnatomy.vue'
 </script>
 <QCalendarMonthAnatomy />
 
 ## QCalendarMonth (mini-mode)
 
 <script import>
-  import QCalendarMonthMiniModeAnatomy from 'components/anatomy/QCalendarMonthMiniModeAnatomy.vue'
+  import QCalendarMonthMiniModeAnatomy from '@/components/anatomy/QCalendarMonthMiniModeAnatomy.vue'
 </script>
 <QCalendarMonthMiniModeAnatomy />
 
 ## QCalendarScheduler
 
 <script import>
-  import QCalendarSchedulerAnatomy from 'components/anatomy/QCalendarSchedulerAnatomy.vue'
+  import QCalendarSchedulerAnatomy from '@/components/anatomy/QCalendarSchedulerAnatomy.vue'
 </script>
 <QCalendarSchedulerAnatomy />
 
 ## QCalendarResource
 
 <script import>
-  import QCalendarResourceAnatomy from 'components/anatomy/QCalendarResourceAnatomy.vue'
+  import QCalendarResourceAnatomy from '@/components/anatomy/QCalendarResourceAnatomy.vue'
 </script>
 <QCalendarResourceAnatomy />
 
 ## QCalendarAgenda
 
 <script import>
-  import QCalendarAgendaAnatomy from 'components/anatomy/QCalendarAgendaAnatomy.vue'
+  import QCalendarAgendaAnatomy from '@/components/anatomy/QCalendarAgendaAnatomy.vue'
 </script>
 <QCalendarAgendaAnatomy />
 
 ## QCalendarTask
 
 <script import>
-  import QCalendarTaskAnatomy from 'components/anatomy/QCalendarTaskAnatomy.vue'
+  import QCalendarTaskAnatomy from '@/components/anatomy/QCalendarTaskAnatomy.vue'
 </script>
 <QCalendarTaskAnatomy />

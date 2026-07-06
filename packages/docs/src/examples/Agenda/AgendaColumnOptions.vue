@@ -1,5 +1,9 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      This example compares agenda column options so you can tune how many days are visible at once.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="row justify-center">
@@ -56,9 +60,10 @@
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
-import { QCalendarAgenda, Timestamp, today } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarAgenda } from '@quasar/quasar-ui-qcalendar'
+import { Timestamp, today } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 interface AgendaItem {
   time: string
@@ -186,14 +191,14 @@ const agenda = reactive<Record<number, AgendaItem[]>>({
 })
 const leftColumnOptions = reactive([
   {
-    id: 'over-due',
-    label: 'Over Due',
+    id: 'left-column',
+    label: 'Left column',
   },
 ])
 const rightColumnOptions = reactive([
   {
-    id: 'summary',
-    label: 'Summary',
+    id: 'right-column',
+    label: 'Right column',
   },
 ])
 

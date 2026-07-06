@@ -1,5 +1,9 @@
 <template>
   <div class="subcontent">
+    <p class="text-body2 text-center q-mb-md">
+      Drag an item into the calendar to see how drop targets react and where the event is placed.
+    </p>
+
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div style="display: flex; justify-content: center">
@@ -57,8 +61,7 @@
                     scope &&
                     scope.timestamp &&
                     allDayEventsMap[scope.timestamp.date] &&
-                    allDayEventsMap[scope.timestamp.date]!.length > 0 &&
-                    printScope(scope)
+                    allDayEventsMap[scope.timestamp.date]!.length > 0
                   "
                   style="
                     display: flex;
@@ -83,7 +86,7 @@
 
               <template #day-interval="{ scope }">
                 <div
-                  v-if="hasEvents(scope.timestamp) && printScope(scope)"
+                  v-if="hasEvents(scope.timestamp)"
                   style="
                     display: flex;
                     justify-content: space-evenly;
@@ -109,10 +112,11 @@
 </template>
 
 <script setup lang="ts">
-import { QCalendarDay, today, Timestamp } from '@quasar/quasar-ui-qcalendar'
+import { QCalendarDay } from '@quasar/quasar-ui-qcalendar'
+import { today, Timestamp } from '@timestamp-js/core'
 import '@quasar/quasar-ui-qcalendar/index.css'
 import { ref, computed } from 'vue'
-import NavigationBar from 'components/NavigationBar.vue'
+import NavigationBar from '@/components/NavigationBar.vue'
 
 interface Event {
   id: number
@@ -188,7 +192,6 @@ interface Scope {
 }
 
 function onDragStart(e: DragEvent, item: DragItem) {
-  console.info('onDragStart called', item)
   if (e.dataTransfer) {
     e.dataTransfer.dropEffect = 'copy'
     e.dataTransfer.effectAllowed = 'move'
@@ -197,19 +200,16 @@ function onDragStart(e: DragEvent, item: DragItem) {
 }
 
 function onDragEnter(e: DragEvent, type: string, { scope }: Scope): boolean {
-  console.info('onDragEnter', type, scope)
   e.preventDefault()
   return true
 }
 
 function onDragOver(e: DragEvent, type: string, { scope }: Scope): boolean {
-  console.info('onDragOver', type, scope)
   e.preventDefault()
   return true
 }
 
 function onDragLeave(_e: DragEvent, type: string, { scope }: Scope): boolean {
-  console.info('onDragLeave', type, scope)
   return false
 }
 
@@ -222,7 +222,6 @@ interface DropScope extends Scope {
 }
 
 function onDrop(e: DropEvent, type: string, { scope }: DropScope): boolean {
-  console.info('onDrop', type, scope)
   const itemID = parseInt(e.dataTransfer.getData('ID'), 10)
   const event: Event = { ...defaultEvent }
   event.id = events.value.length + 1
@@ -303,12 +302,6 @@ function onClickHeadIntervals(data: Timestamp) {
 }
 function onClickHeadDay(data: Timestamp) {
   console.info('onClickHeadDay', data)
-}
-// this method is used only to print the scope to dev tools
-/// @ts-expect-error ignore
-function printScope(scope) {
-  console.info('scope:', scope)
-  return true
 }
 </script>
 

@@ -14,7 +14,7 @@
   .q-expansion-item__content {
     margin-left: 18px;
     padding-left: 4px;
-    border-left: 1px solid $separator-color;
+    border-left: 1px solid $brand-border-color-light;
 
     .q-expansion-item__content {
       margin-left: 26px;
@@ -50,5 +50,5 @@
 }
 
 body.body--dark .markdown-page-menu .q-expansion-item__content {
-  border-left-color: $separator-dark-color;
+  border-left-color: $brand-border-color-dark;
 }

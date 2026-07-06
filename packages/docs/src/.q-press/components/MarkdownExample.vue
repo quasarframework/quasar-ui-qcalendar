@@ -92,11 +92,11 @@
   </q-card>
 </template>
 
-<script setup>
-import { computed, inject, markRaw, ref, reactive, onMounted } from 'vue'
+<script setup lang="ts">
+import { computed, inject, markRaw, ref, reactive, onBeforeUnmount, onMounted } from 'vue'
 import { openURL } from 'quasar'
 
-import { fabGithub, fabCodepen } from '@quasar/extras/fontawesome-v6'
+import { fabGithub, fabCodepen } from '@quasar/extras/fontawesome-v7'
 // import { mdiCompare } from '@quasar/extras/mdi-v7'
 
 import MarkdownCode from './MarkdownCode.vue'
@@ -106,22 +106,67 @@ import MarkdownCardTitle from './MarkdownCardTitle.vue'
 
 import siteConfig from '../../siteConfig'
 
+type MarkdownExampleList = {
+  code?: Record<string, () => Promise<{ default: unknown }>>
+  source?: Record<string, () => Promise<string>>
+  [key: string]: unknown
+}
+
+type MarkdownExamples = {
+  name: string
+  list?: Promise<MarkdownExampleList> | MarkdownExampleList
+}
+
 const props = defineProps({
+  /**
+   * Title displayed above the example.
+   *
+   * @category content
+   * @example 'Example 1'
+   * @example 'Sample Code'
+   */
   title: {
     type: String,
     required: true,
   },
+  /**
+   * Vue example file name without the .vue extension.
+   *
+   * @category content
+   * @example 'Basic'
+   * @example 'AdvancedUsage'
+   */
   file: {
     type: String,
     required: true,
   },
+  /**
+   * Hide the CodePen edit action.
+   *
+   * @category behavior
+   */
   noEdit: Boolean, // no codepen edit
+  /**
+   * Constrain the rendered example area to vertical scrolling.
+   *
+   * @category content
+   */
   scrollable: Boolean,
+  /**
+   * Allow the example content to manage overflow.
+   *
+   * @category behavior
+   */
   overflow: Boolean,
+  /**
+   * Hide the GitHub source action.
+   *
+   * @category behavior
+   */
   noGithub: Boolean, // no GitHub link
 })
 
-const examples = inject('_markdown_examples_')
+const examples = inject<MarkdownExamples | null>('_markdown_examples_', null)
 
 // const dark = useDark()
 const codepenRef = ref(null)
@@ -134,6 +179,7 @@ const def = reactive({
 })
 const currentTab = ref('Template')
 const expanded = ref(false)
+let removeHmrListener = () => {}
 
 /**
  * A computed property that returns the CSS class for the component.
@@ -186,7 +232,9 @@ function parseComponent(comp) {
 }
 
 function openGitHub() {
-  openURL(`${siteConfig.githubEditRootSrc}/examples/${examples.name}/${props.file}.vue`)
+  const examplesConfig = getExamplesConfig()
+  const root = siteConfig.githubSourceRootSrc ?? siteConfig.githubEditRootSrc.replace('/edit/', '/tree/')
+  openURL(`${root}/examples/${examplesConfig.name}/${props.file}.vue`)
 }
 
 function openCodepen() {
@@ -197,24 +245,79 @@ function toggleExpand() {
   expanded.value = expanded.value === false
 }
 
-if (process.env.CLIENT) {
+async function loadExample() {
+  const examplesConfig = getExamplesConfig()
+  const list = await getExampleList(examplesConfig)
+  const devFile = `/src/examples/${examplesConfig.name}/${props.file}.vue`
+
+  if (import.meta.env.QUASAR_DEV) {
+    const loadComponent = list.code?.[devFile]
+    const loadSource = list.source?.[devFile]
+
+    if (loadComponent === void 0 || loadSource === void 0) {
+      throw new Error(`Markdown example not found: ${devFile}`)
+    }
+
+    const componentModule = await loadComponent()
+    const source = await loadSource()
+
+    component.value = markRaw(componentModule.default)
+    parseComponent(source)
+  } else {
+    component.value = markRaw(list[props.file])
+    parseComponent(list[`Raw${props.file}`])
+  }
+
+  isBusy.value = false
+}
+
+if (import.meta.env.QUASAR_CLIENT) {
   onMounted(() => {
-    examples.list.then((list) => {
-      component.value = markRaw(
-        process.env.DEV
-          ? list.code[`/src/examples/${examples.name}/${props.file}.vue`].default
-          : list[props.file],
-      )
+    void loadExample()
 
-      parseComponent(
-        process.env.DEV
-          ? list.source[`/src/examples/${examples.name}/${props.file}.vue`]
-          : list[`Raw${props.file}`],
-      )
+    if (import.meta.hot) {
+      const examplesConfig = getExamplesConfig()
+      const examplePath = `/src/examples/${examplesConfig.name}/${props.file}.vue`
+      const onAfterUpdate = (payload) => {
+        const shouldReload = payload.updates.some(
+          (update) => update.path === examplePath || update.acceptedPath === examplePath,
+        )
 
-      isBusy.value = false
-    })
+        if (shouldReload === true) {
+          void loadExample()
+        }
+      }
+
+      import.meta.hot.on('vite:afterUpdate', onAfterUpdate)
+      removeHmrListener = () => {
+        import.meta.hot?.off('vite:afterUpdate', onAfterUpdate)
+      }
+    }
   })
+
+  onBeforeUnmount(() => {
+    removeHmrListener()
+  })
+}
+
+function getExamplesConfig(): MarkdownExamples {
+  if (examples === null) {
+    throw new Error(
+      `Markdown example "${props.file}" is missing examples frontmatter on the current page.`,
+    )
+  }
+
+  return examples
+}
+
+async function getExampleList(examplesConfig: MarkdownExamples): Promise<MarkdownExampleList> {
+  if (examplesConfig.list === undefined) {
+    throw new Error(
+      `Markdown example group "${examplesConfig.name}" was not loaded for "${props.file}".`,
+    )
+  }
+
+  return examplesConfig.list
 }
 </script>
 

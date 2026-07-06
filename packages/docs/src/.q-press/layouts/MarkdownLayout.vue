@@ -3,6 +3,7 @@
     <MarkdownHeader />
 
     <q-page-container>
+      <MarkdownAnnouncement :config="qpressShellConfig.announcement" />
       <q-page key="q-page" :class="pageClass">
         <router-view v-if="isFullscreen" key="page-fullscreen" />
         <div v-else key="page-standard" :class="pageContentClass">
@@ -29,19 +30,25 @@
     <q-no-ssr>
       <MarkdownDrawerSidebar v-if="siteConfig.config.useSidebar === true" />
       <MarkdownDrawerToc v-if="siteConfig.config.useToc === true" />
+      <MarkdownPrivacyConsent :config="qpressShellConfig.privacyConsent" />
+      <MarkdownCampaigns :campaigns="qpressShellConfig.campaigns" />
     </q-no-ssr>
   </q-layout>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import type { AnnouncementBannerConfig, CampaignConfig, PrivacyConsentConfig } from '../types/config'
 import { useRoute } from 'vue-router'
 import { mdiArrowUp } from '@quasar/extras/mdi-v7'
 
-// import { useMarkdownStore } from 'src/.q-press/stores/doc'
+// import { useMarkdownStore } from '@/.q-press/stores/doc'
 import { useScroll } from '../composables/scroll'
 
 import MarkdownHeader from './MarkdownHeader.vue'
+import MarkdownAnnouncement from './MarkdownAnnouncement.vue'
+import MarkdownPrivacyConsent from './MarkdownPrivacyConsent.vue'
+import MarkdownCampaigns from './MarkdownCampaigns.vue'
 import MarkdownDrawerSidebar from './MarkdownDrawerSidebar.vue'
 import MarkdownDrawerToc from './MarkdownDrawerToc.vue'
 import MarkdownPageSidebar from './MarkdownPageSidebar'
@@ -53,6 +60,11 @@ const { onPageScroll } = useScroll()
 
 const route = useRoute()
 // const markdownStore = useMarkdownStore()
+const qpressShellConfig = siteConfig as typeof siteConfig & {
+  announcement?: AnnouncementBannerConfig
+  privacyConsent?: PrivacyConsentConfig
+  campaigns?: CampaignConfig[]
+}
 
 const isFullscreen = computed(() => route.meta.fullscreen === true)
 const pageClass = computed(
@@ -101,7 +113,7 @@ const pageContentClass = computed(
       }
 
       @media (max-width: 1845px) {
-        justify-content: start;
+        justify-content: flex-start;
 
         .markdown-page__toc-container--flowing {
           display: none;
@@ -110,7 +122,7 @@ const pageContentClass = computed(
 
       @media (min-width: 1846px) {
         .markdown-layout__menu-container {
-          flex: 1 0 auto;
+          flex: 0 0 auto;
           width: auto;
           min-width: 0;
           max-width: 100%;
@@ -143,7 +155,7 @@ const pageContentClass = computed(
     height: calc(100vh - #{$header-height});
     width: 330px;
     min-width: 330px;
-    border-right: 1px solid $separator-color;
+    border-right: 1px solid $brand-border-color-light;
 
     .markdown-page-menu {
       padding: 32px 16px 32px 0; // page top padding
@@ -224,7 +236,7 @@ const pageContentClass = computed(
 
 body.body--dark {
   .markdown-layout__menu {
-    border-right-color: $separator-dark-color;
+    border-right-color: $brand-border-color-dark;
   }
 
   // only show the shadow when the drawer is open

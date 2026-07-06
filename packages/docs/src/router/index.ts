@@ -1,4 +1,4 @@
-import { defineRouter } from '#q-app/wrappers'
+import { defineRouter } from '#q-app'
 import {
   createMemoryHistory,
   createRouter,
@@ -6,6 +6,9 @@ import {
   createWebHistory,
 } from 'vue-router'
 import routes from './routes'
+
+type RouterFactory = Parameters<typeof defineRouter>[0]
+type AppRouter = Awaited<ReturnType<RouterFactory>>
 
 /*
  * If not building with SSR mode, you can
@@ -16,23 +19,26 @@ import routes from './routes'
  * with the Router instance.
  */
 
-export default defineRouter(function (/* { store, ssrContext } */) {
-  const createHistory = process.env.SERVER
+const createAppRouter: RouterFactory = function (/* { store, ssrContext } */) {
+  const createHistory = import.meta.env.QUASAR_SERVER
     ? createMemoryHistory
-    : process.env.VUE_ROUTER_MODE === 'history'
+    : import.meta.env.QUASAR_VUE_ROUTER_MODE === 'history'
       ? createWebHistory
       : createWebHashHistory
 
-  const Router = createRouter({
+  const router = createRouter({
     scrollBehavior: () => ({ left: 0, top: 0 }),
-    /// @ts-expect-error later
     routes,
 
     // Leave this as is and make changes in quasar.conf.js instead!
     // quasar.conf.js -> build -> vueRouterMode
     // quasar.conf.js -> build -> publicPath
-    history: createHistory(process.env.VUE_ROUTER_BASE),
+    history: createHistory(import.meta.env.QUASAR_VUE_ROUTER_BASE),
   })
 
-  return Router
-})
+  // Quasar's RouteCallback can resolve Router from a different peer instance.
+  // Normalize to the wrapper's expected return type to avoid duplicate-type drift.
+  return router as AppRouter
+}
+
+export default defineRouter(createAppRouter)

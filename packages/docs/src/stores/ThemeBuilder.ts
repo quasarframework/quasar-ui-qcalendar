@@ -5,7 +5,6 @@ export type ThemeRecord = Record<string, string>
 export const useThemeBuilderStore = defineStore('themeBuilderStore', {
   state: () => ({
     currentStyleName: '',
-    // TODO: make css vars consistent with actual
     style: {
       '--calendar-border': '#e0e0e0 1px solid',
       '--calendar-border-dark': '#71755d 1px solid',
@@ -84,6 +83,7 @@ export const useThemeBuilderStore = defineStore('themeBuilderStore', {
       '--calendar-mini-range-firstlast-label-background': '#027BE3',
       '--calendar-mini-range-firstlast-label-background-dark': '#ffff66',
 
+      '--calendar-scrollbar-width-height': '10px',
       '--calendar-scrollbar-track': '#eeeeee',
       '--calendar-scrollbar-thumb': '#888888',
       '--calendar-scrollbar-thumb-hover': '#555555',
@@ -209,6 +209,7 @@ export const useThemeBuilderStore = defineStore('themeBuilderStore', {
       '--calendar-mini-range-firstlast-label-background-dark':
         '[DARK] The label background color of the first and last selected days for `monthly mini-mode`',
 
+      '--calendar-scrollbar-width-height': 'The width and height of the scrollbars',
       '--calendar-scrollbar-track': 'The color of the scroll track',
       '--calendar-scrollbar-thumb': 'The color of the scroll thumb',
       '--calendar-scrollbar-thumb-hover': 'The color of the scroll thumb when hovering',

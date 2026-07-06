@@ -1,10 +1,16 @@
 <template>
-  <div class="dark-mode-toggle" @click="toggleMode">
+  <button
+    type="button"
+    class="dark-mode-toggle"
+    :aria-label="toggleLabel"
+    :title="toggleLabel"
+    @click="toggleMode"
+  >
     <div class="toggle-container" :class="{ 'is-dark': isDark }">
-      <q-icon :name="props.lightIcon" class="toggle-icon light-icon" />
-      <q-icon :name="props.darkIcon" class="toggle-icon dark-icon" />
+      <q-icon :name="props.lightIcon" class="toggle-icon light-icon" aria-hidden="true" />
+      <q-icon :name="props.darkIcon" class="toggle-icon dark-icon" aria-hidden="true" />
     </div>
-  </div>
+  </button>
 </template>
 
 <script setup lang="ts">
@@ -14,22 +20,42 @@ import { useDark } from '../composables/dark'
 import { mdiMoonWaningCrescent, mdiWhiteBalanceSunny } from '@quasar/extras/mdi-v7'
 
 const props = defineProps({
+  /**
+   * Icon name displayed for the dark mode state.
+   *
+   * @category content
+   * @example mdiMoonWaningCrescent
+   */
   darkIcon: {
     type: String,
     default: mdiMoonWaningCrescent, // Default dark mode icon
   },
+  /**
+   * Icon name displayed for the light mode state.
+   *
+   * @category content
+   * @example mdiWhiteBalanceSunny
+   */
   lightIcon: {
     type: String,
     default: mdiWhiteBalanceSunny, // Default light mode icon
   },
 })
 
-const emit = defineEmits(['update:mode'])
+const emit = defineEmits({
+  /**
+   * Emitted when the mode is toggled.
+   *
+   * @param mode - The current mode ('dark' or 'light').
+   */
+  'update:mode': (mode: 'dark' | 'light') => mode === 'dark' || mode === 'light',
+})
 
 const $q = useQuasar()
 const { toggleDark } = useDark()
 
 const isDark = computed(() => $q.dark.isActive)
+const toggleLabel = computed(() => (isDark.value ? 'Switch to light mode' : 'Switch to dark mode'))
 
 const toggleMode = () => {
   toggleDark()
@@ -50,6 +76,7 @@ watch(
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0;
   cursor: pointer;
   width: 60px;
   height: 30px;
@@ -58,6 +85,7 @@ watch(
   border-radius: 15px;
   position: relative;
   overflow: hidden;
+  appearance: none;
 }
 
 .toggle-container {
