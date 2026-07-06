@@ -55,12 +55,6 @@ To add as an App Extension to your Quasar application, run the following (in you
 $ quasar ext add @quasar/qcalendar
 ```
 
-QCalendar v5 is currently published as a release candidate on the `latest` dist tag:
-
-```bash
-$ quasar ext add @quasar/qcalendar
-```
-
 #### Uninstall
 
 To remove as an App Extension from your Quasar application, run the following (in your Quasar app folder):
@@ -93,8 +87,6 @@ yarn add @quasar/quasar-ui-qcalendar
 <<| bash npm |>>
 npm install @quasar/quasar-ui-qcalendar
 ```
-
-These commands install the current QCalendar v5 release candidate until v5 is released as stable.
 
 Now, you can access the compiled portions or access the sources directly. Choose which you want to use.
 
@@ -275,4 +267,4 @@ Most documentation examples include a CodePen action in the example toolbar. Use
 
 # Project source
 
-Can be found [here](https://github.com/quasarframework/quasar-ui-qcalendar/tree/v5-beta).
+Can be found [here](https://github.com/quasarframework/quasar-ui-qcalendar/tree/dev).

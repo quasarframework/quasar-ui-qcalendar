@@ -27,7 +27,7 @@ If applicable, add screenshots to help explain your problem.
 
 **QCalendar (please complete the following information):**
 
-- Version [e.g. 5.0.0-beta.2]
+- Version [e.g. 5.0.0]
 
 **Desktop (please complete the following information):**
 

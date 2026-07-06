@@ -1,6 +1,6 @@
 {
   "name": "qcalendar",
-  "version": "5.0.0-rc.10",
+  "version": "5.0.0",
   "private": true,
   "description": "QCalendar mono-repo",
   "license": "MIT",
@@ -16,7 +16,6 @@
     "build:docs": "cd packages/docs && pnpm build",
     "ci:publish": "pnpm --filter @quasar/quasar-ui-qcalendar publish --access public --publish-branch dev && pnpm --filter @quasar/quasar-app-extension-qcalendar publish --access public --publish-branch dev",
     "ci:publish:latest": "pnpm --filter @quasar/quasar-ui-qcalendar publish --access public --publish-branch dev --tag latest && pnpm --filter @quasar/quasar-app-extension-qcalendar publish --access public --publish-branch dev --tag latest",
-    "ci:publish:beta": "pnpm --filter @quasar/quasar-ui-qcalendar publish --access public --publish-branch v5-beta --tag beta && pnpm --filter @quasar/quasar-app-extension-qcalendar publish --access public --publish-branch v5-beta --tag beta",
     "test": "vitest run",
     "typecheck": "pnpm --filter @quasar/quasar-ui-qcalendar typecheck && pnpm --filter docs typecheck",
     "deep": "ncu --configFilePath . --packageFile '{package.json,packages/*/package.json}'",

@@ -10,7 +10,7 @@ Have a question about QCalendar? We're here to help. Before you start, be sure t
 
 ### QCalendar GitHub issues
 
-As a first step, it's always good to search open and closed issues on the QCalendar [GitHub repo](https://github.com/quasarframework/quasar-ui-qcalendar/tree/v5-beta).
+As a first step, it's always good to search open and closed issues on the QCalendar [GitHub repo](https://github.com/quasarframework/quasar-ui-qcalendar/tree/dev).
 
 ### QCalendar GitHub discussions
 
@@ -24,7 +24,7 @@ File on the [GitHub Issues](https://github.com/quasarframework/quasar-ui-qcalend
 
 ### GitHub pull requests (PR)
 
-If you have a specific fix or contribution, you can generate a pull request on the [QCalendar repo](https://github.com/quasarframework/quasar-ui-qcalendar/tree/v5-beta).
+If you have a specific fix or contribution, you can generate a pull request on the [QCalendar repo](https://github.com/quasarframework/quasar-ui-qcalendar/tree/dev).
 
 ## Start a discussion
 

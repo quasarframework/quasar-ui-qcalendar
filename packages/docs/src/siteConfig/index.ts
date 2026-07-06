@@ -2,7 +2,7 @@ import { fabGithub, fabXTwitter } from '@quasar/extras/fontawesome-v7'
 import { version, productName } from '../../../ui/package.json'
 import { slugify } from '../.q-press/components/markdown-utils'
 
-const repoBranch = 'v5-beta'
+const repoBranch = 'dev'
 const codepenPackageVersion = version.includes('-beta.') ? 'beta' : version
 
 export interface SocialLink {

@@ -1,8 +1,8 @@
 ---
-name: Bug report (v5 beta)
+name: Bug report (v5)
 about: Create a report to help us improve
 title: ''
-labels: 'v5, beta'
+labels: 'v5'
 assignees: ''
 ---
 
@@ -27,7 +27,7 @@ If applicable, add screenshots to help explain your problem.
 
 **QCalendar (please complete the following information):**
 
-- Version [e.g. 5.0.0-beta.2]
+- Version [e.g. 5.0.0]
 - Install type [e.g. app extension, UI package]
 - Quasar CLI package [e.g. @quasar/app-vite 3.0.0]
 

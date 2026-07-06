@@ -25,9 +25,9 @@ QCalendar allows for viewing of **day** (1-6 days), **week**, **monthly**, **sch
 
 ## Important Release Notes
 
-v5.0.0-rc.10
+v5.0.0
 
-- QCalendar v5 prepares the project for Quasar CLI Vite 3.
+- QCalendar v5 is the stable Quasar CLI Vite 3-ready release.
 - The app extension is now Vite-only and requires `@quasar/app-vite` >=3.0.0.
 - This repo now requires Node.js `>=22.13` and pnpm `>=11.3.0`.
 - Be sure to read the [Upgrade Guide](https://qcalendar.netlify.app/other/upgrade-guide).
