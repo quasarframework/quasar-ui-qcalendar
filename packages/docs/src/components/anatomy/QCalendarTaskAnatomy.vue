@@ -40,11 +40,7 @@
         style="height: 300px"
         @change="onChange"
       >
-        <template
-          #head-tasks="{
-            /* scope */
-          }"
-        >
+        <template #head-tasks="{/* scope */}">
           <div class="header ellipsis" style="font-weight: 600">
             <div class="issue ellipsis">Issue</div>
             <div class="key">Key</div>

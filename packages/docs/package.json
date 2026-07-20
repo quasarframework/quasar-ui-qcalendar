@@ -1,6 +1,6 @@
 {
   "name": "docs",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "private": true,
   "description": "QCalendar Documentation and examples",
   "author": "Jeff <galbraith64@gmail.com>",
@@ -31,9 +31,9 @@
     "@timestamp-js/core": "0.1.0-rc.5",
     "date-holidays": "^3.33.0",
     "pinia": "^3.0.4",
-    "quasar": "^2.21.3",
-    "vue": "^3.5.39",
-    "vue-router": "^5.1.0"
+    "quasar": "^2.21.4",
+    "vue": "^3.5.40",
+    "vue-router": "^5.2.0"
   },
   "devDependencies": {
     "@md-plugins/quasar-app-extension-q-press": "1.1.0",
@@ -46,8 +46,8 @@
     "@quasar/quasar-ui-qcalendar": "workspace:*",
     "@types/markdown-it": "^14.1.2",
     "@types/node": "^26.1.1",
-    "@vue/server-renderer": "^3.5.39",
-    "autoprefixer": "^10.5.2",
+    "@vue/server-renderer": "^3.5.40",
+    "autoprefixer": "^10.5.4",
     "markdown-it": "^14.3.0",
     "mermaid": "^11.16.0",
     "shiki": "^4.3.1",

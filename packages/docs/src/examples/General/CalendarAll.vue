@@ -55,12 +55,7 @@
             </div>
           </template>
 
-          <template
-            v-if="selectedCalendar === 'task'"
-            #head-tasks="{
-              /* scope */
-            }"
-          >
+          <template v-if="selectedCalendar === 'task'" #head-tasks="{/* scope */}">
             <div class="header ellipsis" style="font-weight: 600">
               <div class="issue ellipsis">Issue</div>
               <div class="key">Key</div>

@@ -6,8 +6,8 @@
 [![license](https://img.shields.io/npm/l/@quasar/quasar-ui-qcalendar)](https://www.npmjs.com/package/@quasar/quasar-ui-qcalendar)
 
 ![@quasar/quasar-app-extension-qcalendar](https://img.shields.io/npm/v/@quasar/quasar-app-extension-qcalendar?label=@quasar/quasar-app-extension-qcalendar)
-[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/quasarframework/quasar-ui-qcalendar)]()
-[![GitHub repo size in bytes](https://img.shields.io/github/repo-size/quasarframework/quasar-ui-qcalendar)]()
+[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/quasarframework/quasar-ui-qcalendar)](https://github.com/quasarframework/quasar-ui-qcalendar)
+[![GitHub repo size in bytes](https://img.shields.io/github/repo-size/quasarframework/quasar-ui-qcalendar)](https://github.com/quasarframework/quasar-ui-qcalendar)
 [![npm](https://img.shields.io/npm/dt/@quasar/quasar-app-extension-qcalendar)](https://www.npmjs.com/package/@quasar/quasar-app-extension-qcalendar)
 ![@quasar/quasar-app-extension-qcalendar](https://img.shields.io/npm/dm/@quasar/quasar-app-extension-qcalendar)
 [![jsdelivr](https://data.jsdelivr.com/v1/package/npm/@quasar/quasar-ui-qcalendar/badge)](https://www.jsdelivr.com/package/npm/@quasar/quasar-ui-qcalendar)

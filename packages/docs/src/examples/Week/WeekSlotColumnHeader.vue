@@ -26,19 +26,11 @@
           @click-head-intervals="onClickHeadIntervals"
           @click-head-day="onClickHeadDay"
         >
-          <template
-            #column-header-before="{
-              /* timestamp, index */
-            }"
-          >
+          <template #column-header-before="{/* timestamp, index */}">
             <div style="margin: 2px">column-header-before slot</div>
           </template>
 
-          <template
-            #column-header-after="{
-              /* timestamp, index */
-            }"
-          >
+          <template #column-header-after="{/* timestamp, index */}">
             <div style="margin: 2px">column-header-after slot</div>
           </template>
         </q-calendar-day>

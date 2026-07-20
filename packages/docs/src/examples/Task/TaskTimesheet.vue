@@ -53,11 +53,7 @@
           @click-day="onClickDay"
           @click-head-day="onClickHeadDay"
         >
-          <template
-            #head-tasks="{
-              /* scope */
-            }"
-          >
+          <template #head-tasks="{/* scope */}">
             <div class="timesheet-work-header">
               <div class="timesheet-work-header__item">Work Item</div>
               <div class="timesheet-work-header__key">Key</div>
