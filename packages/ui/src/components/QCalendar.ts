@@ -286,6 +286,20 @@ export default defineComponent({
       }
     }
 
+    /**
+     * Scrolls to a date that is rendered by the active view.
+     *
+     * @param date Date in the active calendar system's format.
+     * @param duration Animation duration in milliseconds.
+     * @param-example date '2026-08-15'
+     * @param-example duration 200
+     * @applicable day, agenda, scheduler, task
+     * @returns Whether the requested date is rendered and can be scrolled to.
+     */
+    function scrollToDate(date: string, duration: number = 0): boolean {
+      return calendar.value?.scrollToDate?.(date, duration) === true
+    }
+
     // expose public methods
     expose({
       prev,
@@ -301,6 +315,7 @@ export default defineComponent({
       widthToMinutes,
       scrollToTime,
       scrollToTimeX,
+      scrollToDate,
     })
 
     return (): VNode =>

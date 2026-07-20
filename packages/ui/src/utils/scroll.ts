@@ -77,6 +77,12 @@ export function animHorizontalScrollTo(
   duration = 500, // Duration of the animation in milliseconds
 ): void {
   const startScrollLeft = element.scrollLeft // Current scroll position
+
+  if (duration <= 0 || startScrollLeft === targetScrollLeft) {
+    element.scrollLeft = targetScrollLeft
+    return
+  }
+
   const distance = targetScrollLeft - startScrollLeft // Distance to scroll
   let startTime: number | null = null
 

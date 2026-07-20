@@ -13,6 +13,7 @@ import {
   toCalendarTimestamp,
   type CalendarScopeData,
 } from '../utils/calendarSystem'
+import { resolveCssLength } from '../utils/helpers'
 import { type CommonProps } from './useCommon'
 import { type ColumnProps } from './useColumn'
 import { type CellWidthProps } from './useCellWidth'
@@ -83,7 +84,7 @@ export default function useCalendarDays(
     let width = 0
     const columnCount = Number(props.columnCount)
     if (props.cellWidth) {
-      width = Number(props.cellWidth)
+      width = resolveCssLength(props.cellWidth, headerColumnRef.value)
     } else if (size.width > 0 && headerColumnRef.value) {
       width = headerColumnRef.value.offsetWidth / (columnCount > 1 ? columnCount : maxDays.value)
     }

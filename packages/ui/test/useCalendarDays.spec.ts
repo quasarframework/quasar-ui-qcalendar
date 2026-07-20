@@ -103,6 +103,19 @@ describe('[QCALENDAR] useCalendarDays', () => {
     expect(parsedCellWidth.value).toBe(70)
   })
 
+  it('parses a cell width expressed in CSS pixels', () => {
+    const { parsedCellWidth } = useCalendarDays(createCalendarDaysProps({ cellWidth: '200px' }), {
+      times: { today: parsed('2026-06-01') as Timestamp },
+      parsedStart: ref(parsed('2026-06-01') as Timestamp),
+      parsedEnd: ref(parsed('2026-06-01') as Timestamp),
+      maxDays: ref(1),
+      size: { width: 300 },
+      headerColumnRef: ref(null),
+    })
+
+    expect(parsedCellWidth.value).toBe(200)
+  })
+
   it('keeps legacy slot time helpers deterministic for non-interval views', () => {
     const { getScopeForSlot, styleDefault } = useCalendarDays(createCalendarDaysProps(), {
       times: { today: parsed('2026-06-01') as Timestamp },

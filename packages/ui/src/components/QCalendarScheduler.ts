@@ -26,7 +26,7 @@ import {
   type Timestamp,
 } from '@timestamp-js/core'
 
-import { convertToUnit, getResponsiveWeekdayLabel } from '../utils/helpers'
+import { getResponsiveWeekdayLabel } from '../utils/helpers'
 import {
   getCalendarDateIdentifier,
   getCalendarScopeData,
@@ -49,6 +49,7 @@ import useButton from '../composables/useButton'
 import useFocusHelper from '../composables/useFocusHelper'
 import useCellWidth, { useCellWidthProps } from '../composables/useCellWidth'
 import useCheckChange, { useCheckChangeEmits } from '../composables/useCheckChange'
+import useScrollToDate from '../composables/useScrollToDate'
 import useEvents from '../composables/useEvents'
 import useKeyboard, { useNavigationProps } from '../composables/useKeyboard'
 import { getDragEventHandlers } from '../composables/useDragAndDrop'
@@ -169,7 +170,7 @@ export default defineComponent({
 
   setup(props, { slots, emit, expose }) {
     const initialDate = props.modelValue || today(props.calendarSystem)
-    const scrollArea = ref(null),
+    const scrollArea = ref<HTMLElement | null>(null),
       pane = ref(null),
       headerColumnRef = ref(null),
       focusRef = ref<string>(initialDate),
@@ -218,7 +219,7 @@ export default defineComponent({
 
     const { emitListeners } = useEmitListeners(vm)
 
-    const { isSticky } = useCellWidth(props)
+    const { isSticky, cellWidthStyle } = useCellWidth(props)
 
     const { times, setCurrent, updateCurrent: updateCurrentTimes } = useTimes(props)
 
@@ -304,6 +305,8 @@ export default defineComponent({
     })
 
     const { getDefaultMouseEventHandlers } = useMouse(emit, emitListeners)
+
+    const { registerDate, scrollToDate: scrollToDateCalendar } = useScrollToDate(props, scrollArea)
 
     const { checkChange } = useCheckChange(emit, {
       days,
@@ -438,6 +441,19 @@ export default defineComponent({
      */
     function moveToToday(): void {
       move(0)
+    }
+
+    /**
+     * Scrolls horizontally to a rendered date.
+     *
+     * @param date Date in the active calendar system's format.
+     * @param duration Animation duration in milliseconds.
+     * @param-example date '2026-08-15'
+     * @param-example duration 200
+     * @returns Whether the requested date is rendered and can be scrolled to.
+     */
+    function scrollToDate(date: string, duration: number = 0): boolean {
+      return scrollToDateCalendar(date, duration)
     }
 
     /**
@@ -661,8 +677,7 @@ export default defineComponent({
         scope.disabled === true ||
         (props.disabledWeekdays ? props.disabledWeekdays.includes(Number(day.weekday)) : false)
 
-      const width =
-        isSticky.value === true ? convertToUnit(parsedCellWidth.value) : computedWidth.value
+      const width = isSticky.value === true ? cellWidthStyle.value : computedWidth.value
       const styler = props.weekdayStyle || dayStyleDefault
       const style: CSSProperties = {
         width,
@@ -685,6 +700,7 @@ export default defineComponent({
           if (el !== null) {
             datesRef.value[key] = el
           }
+          registerDate(day, el)
         },
         tabindex: isFocusable === true ? 0 : -1,
         class: {
@@ -828,8 +844,7 @@ export default defineComponent({
         scope.disabled === true ||
         (props.disabledWeekdays ? props.disabledWeekdays.includes(Number(day.weekday)) : false)
 
-      const width =
-        isSticky.value === true ? convertToUnit(parsedCellWidth.value) : computedWidth.value
+      const width = isSticky.value === true ? cellWidthStyle.value : computedWidth.value
       const style: CSSProperties = {
         width,
         maxWidth: width,
@@ -1261,8 +1276,7 @@ export default defineComponent({
     ): VNode {
       const slot = slots['resource-days']
 
-      const width =
-        isSticky.value === true ? convertToUnit(parsedCellWidth.value) : computedWidth.value
+      const width = isSticky.value === true ? cellWidthStyle.value : computedWidth.value
 
       const scope = {
         resource,
@@ -1332,8 +1346,7 @@ export default defineComponent({
       scope.activeDate = activeDate
       scope.droppable = droppable
 
-      const width =
-        isSticky.value === true ? convertToUnit(parsedCellWidth.value) : computedWidth.value
+      const width = isSticky.value === true ? cellWidthStyle.value : computedWidth.value
       const style: CSSProperties = {
         width,
         maxWidth: width,
@@ -1348,6 +1361,7 @@ export default defineComponent({
         'div',
         {
           key: day.date + (columnIndex !== undefined ? ':' + columnIndex : ''),
+          ref: (el) => registerDate(day, el),
           tabindex: isFocusable === true ? 0 : -1,
           class: {
             'q-calendar-scheduler__day': indentLevel === 0,
@@ -1460,6 +1474,7 @@ export default defineComponent({
        * Refreshes the scheduler view's current date/time state.
        */
       updateCurrent,
+      scrollToDate,
     })
     // Object.assign(vm.proxy, {
     //   prev,

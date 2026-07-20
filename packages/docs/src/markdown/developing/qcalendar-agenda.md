@@ -43,7 +43,7 @@ You can use the properties `date-header`, `date-align` and `weekday-align` to ma
 
 ## Cell Width
 
-You can specify the `cell-width` property to make your calendar overrun it's horizontal boundaries.
+You can specify the `cell-width` property to make your calendar extend beyond its horizontal boundaries.
 
 The calendar goes into a special `sticky` mode when this happens so you can scroll vertically and/or horizontally.
 
