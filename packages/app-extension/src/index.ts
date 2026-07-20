@@ -41,6 +41,5 @@ export default defineIndexScript((api) => {
   // We extend /quasar.conf.js
   api.extendQuasarConf(() => ({
     boot: ['~@quasar/quasar-app-extension-qcalendar/dist/boot/vite-register.js'],
-    css: ['~@quasar/quasar-ui-qcalendar/src/index.scss'],
   }))
 })
