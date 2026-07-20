@@ -103,6 +103,18 @@ The current date has been set to tomorrow via the `now` property.
 
 <MarkdownExample title="Now" file="TaskNow" no-edit/>
 
+## Scroll to Date
+
+Use `scrollToDate()` when a task timeline renders more dates than fit in its
+viewport. The target must already be in the rendered range; scrolling does not
+change the model value or load another range. The optional second argument is
+the animation duration in milliseconds.
+
+This example renders the current quarter and scrolls horizontally to a selected
+date within it.
+
+<MarkdownExample title="Quarter Scroll to Date" file="TaskQuarterScroll"/>
+
 ## Theme
 
 The theme example shows how task calendar CSS variables can be customized without

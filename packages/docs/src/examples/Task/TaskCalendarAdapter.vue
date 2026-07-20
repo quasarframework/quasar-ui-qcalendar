@@ -8,6 +8,12 @@
     <div class="calendar-adapter-task__toolbar">
       <calendar-adapter-selector v-model="calendarId" :calendars="calendarExamples" />
       <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
+      <q-btn
+        color="primary"
+        outline
+        label="Scroll to selected date"
+        @click="scrollToSelectedDate"
+      />
     </div>
 
     <calendar-adapter-title
@@ -138,6 +144,10 @@ function onPrev() {
 
 function onNext() {
   calendar.value?.next()
+}
+
+function scrollToSelectedDate() {
+  calendar.value?.scrollToDate(selectedDate.value, 350)
 }
 </script>
 

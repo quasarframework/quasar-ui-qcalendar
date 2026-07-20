@@ -59,6 +59,18 @@ This example also uses the `max-days` property.
 
 <MarkdownExample title="Cell Width" file="DayCellWidth"/>
 
+## Scroll to Date
+
+Use the `scrollToDate()` method to bring a date that is already rendered in a
+wide calendar into view without changing the model value or rendered range. The
+optional second argument controls the animation duration in milliseconds. The
+method returns `false` when the date is invalid or is not part of the rendered
+range.
+
+This example uses the day calendar's month view with fixed-width date columns.
+
+<MarkdownExample title="Scroll to Date" file="DayScrollToDate"/>
+
 ## Column Count
 
 The `column-count` property allows for a single day to be displayed multiple times.

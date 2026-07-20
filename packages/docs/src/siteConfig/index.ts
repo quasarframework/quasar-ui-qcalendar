@@ -276,6 +276,7 @@ const examplesMenu = {
         { name: '3 Day', path: '/examples/day/_3-day' },
         { name: 'Alignment', path: '/examples/day/alignment' },
         { name: 'Cell Width', path: '/examples/day/cell-width' },
+        { name: 'Scroll to Date', path: '/examples/day/scroll-to-date' },
         { name: 'Column Count', path: '/examples/day/column-count' },
         { name: 'Column Count Plus', path: '/examples/day/column-count-plus' },
         { name: 'Disabled Before After', path: '/examples/day/disabled-before-after' },
@@ -528,6 +529,7 @@ const examplesMenu = {
         { name: 'No Active Date', path: '/examples/task/no-active-date' },
         { name: 'No Weekends', path: '/examples/task/no-weekends' },
         { name: 'Now', path: '/examples/task/now' },
+        { name: 'Quarter Scroll to Date', path: '/examples/task/quarter-scroll' },
         { name: 'Theme', path: '/examples/task/theme' },
         { name: 'Week', path: '/examples/task/week' },
         {

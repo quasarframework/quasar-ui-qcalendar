@@ -44,6 +44,7 @@ import useEmitListeners from '../composables/useEmitListeners'
 import useButton from '../composables/useButton'
 import useFocusHelper from '../composables/useFocusHelper'
 import useCheckChange, { useCheckChangeEmits } from '../composables/useCheckChange'
+import useScrollToDate from '../composables/useScrollToDate'
 import useEvents from '../composables/useEvents'
 import useKeyboard, { useNavigationProps } from '../composables/useKeyboard'
 import { getDragEventHandlers } from '../composables/useDragAndDrop'
@@ -184,7 +185,7 @@ export default defineComponent({
 
   setup(props, { slots, emit, expose }) {
     const initialDate = props.modelValue || today(props.calendarSystem)
-    const scrollArea = ref(null),
+    const scrollArea = ref<HTMLElement | null>(null),
       pane = ref(null),
       direction = ref<'next' | 'prev'>('next'),
       startDate = ref(initialDate),
@@ -291,6 +292,8 @@ export default defineComponent({
     })
 
     const { getDefaultMouseEventHandlers } = useMouse(emit, emitListeners)
+
+    const { registerDate, scrollToDate: scrollToDateCalendar } = useScrollToDate(props, scrollArea)
 
     const { checkChange } = useCheckChange(emit, {
       days,
@@ -412,6 +415,19 @@ export default defineComponent({
     }
 
     /**
+     * Scrolls horizontally to a rendered date.
+     *
+     * @param date Date in the active calendar system's format.
+     * @param duration Animation duration in milliseconds.
+     * @param-example date '2026-08-15'
+     * @param-example duration 200
+     * @returns Whether the requested date is rendered and can be scrolled to.
+     */
+    function scrollToDate(date: string, duration: number = 0): boolean {
+      return scrollToDateCalendar(date, duration)
+    }
+
+    /**
      * Moves the task view forward.
      *
      * @param amount Number of view units to move forward.
@@ -501,11 +517,7 @@ export default defineComponent({
         'div',
         {
           // key,
-          // ref: (el) => {
-          //   if (isDayFocusable.value === true) {
-          //     datesRef.value[ key ] = el
-          //   }
-          // },
+          ref: (el) => registerDate(day, el),
           tabindex: isDayFocusable.value === true ? 0 : -1,
           class: {
             'q-calendar-task__task--day': true,
@@ -1219,8 +1231,11 @@ export default defineComponent({
 
       const data: Record<string, any> = {
         key,
-        ref: (el: HTMLElement) => {
-          datesRef.value[key] = el
+        ref: (el: HTMLElement | null) => {
+          if (el !== null) {
+            datesRef.value[key] = el
+          }
+          registerDate(day, el)
         },
         tabindex: isWeekdayFocusable.value === true ? 0 : -1,
         class: {
@@ -1429,6 +1444,7 @@ export default defineComponent({
        * Refreshes the task view's current date/time state.
        */
       updateCurrent,
+      scrollToDate,
     })
     // Object.assign(vm.proxy, {
     //   prev,

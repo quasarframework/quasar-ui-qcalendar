@@ -45,6 +45,10 @@ type CalendarResourceInstance = CalendarNavigationInstance & {
   scrollToTimeX: (_time: string, _duration?: number) => void
 }
 
+type CalendarDateScrollInstance = {
+  scrollToDate: (_date: string, _duration?: number) => boolean
+}
+
 type RootCalendarComponent<Instance, Slots extends Record<string, any> = {}> = DefineComponent<
   Record<string, any>,
   any,
@@ -64,15 +68,16 @@ type RootCalendarComponent<Instance, Slots extends Record<string, any> = {}> = D
 }
 
 type QCalendarInstance = CalendarIntervalInstance &
-  CalendarResourceInstance & {
+  CalendarResourceInstance &
+  CalendarDateScrollInstance & {
     widthToMinutes: (_width: number) => number
   }
-type QCalendarAgendaInstance = CalendarNavigationInstance
-type QCalendarDayInstance = CalendarIntervalInstance
+type QCalendarAgendaInstance = CalendarNavigationInstance & CalendarDateScrollInstance
+type QCalendarDayInstance = CalendarIntervalInstance & CalendarDateScrollInstance
 type QCalendarMonthInstance = CalendarNavigationInstance
 type QCalendarResourceInstance = CalendarResourceInstance
-type QCalendarSchedulerInstance = CalendarNavigationInstance
-type QCalendarTaskInstance = CalendarNavigationInstance
+type QCalendarSchedulerInstance = CalendarNavigationInstance & CalendarDateScrollInstance
+type QCalendarTaskInstance = CalendarNavigationInstance & CalendarDateScrollInstance
 
 const QCalendar = QCalendarComponent as RootCalendarComponent<QCalendarInstance>
 const QCalendarAgenda = QCalendarAgendaComponent as RootCalendarComponent<
