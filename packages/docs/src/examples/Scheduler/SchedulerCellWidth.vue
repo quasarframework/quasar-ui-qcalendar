@@ -8,7 +8,7 @@
     <navigation-bar @today="onToday" @prev="onPrev" @next="onNext" />
 
     <div class="row justify-center">
-      <div style="display: flex; max-width: 800px; width: 100%; height: 300px">
+      <div style="display: flex; max-width: 800px; width: 100%; height: 400px">
         <q-calendar-scheduler
           ref="calendar"
           v-model="selectedDate"
@@ -17,6 +17,7 @@
           cell-width="200px"
           resource-key="id"
           resource-label="name"
+          resource-height="50"
           weekday-align="right"
           date-align="left"
           date-header="inline"

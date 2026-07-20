@@ -41,11 +41,19 @@ You can use the properties `date-header`, `date-align` and `weekday-align` to ma
 
 ## Cell Width
 
-You can specify the `cell-width` property to make your calendar overrun it's horizontal boundaries.
+You can specify the `cell-width` property to make your calendar extend beyond its horizontal boundaries.
 
 The calendar goes into a special `sticky` mode when this happens so you can scroll vertically and/or horizontally.
 
 <MarkdownExample title="Cell Width" file="SchedulerCellWidth"/>
+
+## Scroll to Date
+
+Use `scrollToDate()` to bring a date from the currently rendered range into view. It does not
+change the model value or load another range. The optional second argument sets the animation
+duration in milliseconds.
+
+<MarkdownExample title="Scroll to Date" file="SchedulerScrollToDate"/>
 
 ## Disabled Before After
 
