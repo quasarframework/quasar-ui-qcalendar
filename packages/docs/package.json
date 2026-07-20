@@ -36,12 +36,12 @@
     "vue-router": "^5.1.0"
   },
   "devDependencies": {
-    "@md-plugins/quasar-app-extension-q-press": "1.0.0",
-    "@md-plugins/search-ui": "1.0.0",
-    "@md-plugins/vite-examples-plugin": "1.0.0",
-    "@md-plugins/vite-md-plugin": "1.0.0",
-    "@md-plugins/vite-search-plugin": "1.0.0",
-    "@md-plugins/vite-ssg-plugin": "1.0.0",
+    "@md-plugins/quasar-app-extension-q-press": "1.1.0",
+    "@md-plugins/search-ui": "1.1.0",
+    "@md-plugins/vite-examples-plugin": "1.1.0",
+    "@md-plugins/vite-md-plugin": "1.1.0",
+    "@md-plugins/vite-search-plugin": "1.1.0",
+    "@md-plugins/vite-ssg-plugin": "1.1.0",
     "@quasar/app-vite": "3.0.1",
     "@quasar/quasar-ui-qcalendar": "workspace:*",
     "@types/markdown-it": "^14.1.2",
