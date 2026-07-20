@@ -10,6 +10,39 @@ export function convertToUnit(input: any, unit = 'px'): string | undefined {
   }
 }
 
+export function resolveCssLength(
+  value: number | string,
+  referenceElement?: HTMLElement | null,
+): number {
+  if (typeof value === 'number') {
+    return value
+  }
+
+  const normalizedValue = value.trim()
+  if (/^-?(?:\d+|\d*\.\d+)(?:px)?$/i.test(normalizedValue)) {
+    return parseFloat(normalizedValue)
+  }
+
+  if (referenceElement !== undefined && referenceElement !== null) {
+    const probe = document.createElement('div')
+    probe.style.position = 'absolute'
+    probe.style.visibility = 'hidden'
+    probe.style.pointerEvents = 'none'
+    probe.style.width = normalizedValue
+    referenceElement.appendChild(probe)
+    const width = probe.getBoundingClientRect().width
+    probe.remove()
+
+    if (width > 0) {
+      return width
+    }
+  }
+
+  // SSR cannot measure relative CSS units. This value is replaced with the
+  // measured width after mounting; rendered styles retain the original unit.
+  return parseFloat(normalizedValue)
+}
+
 export function indexOf(array: any[], cb: (_element: any, _index: number) => boolean): number {
   for (let i = 0; i < array.length; i++) {
     if (cb(array[i], i) === true) {
@@ -54,6 +87,7 @@ export function getResponsiveWeekdayLabel<TTimestamp>({
 
 export default {
   convertToUnit,
+  resolveCssLength,
   getResponsiveWeekdayLabel,
   indexOf,
   minCharWidth,

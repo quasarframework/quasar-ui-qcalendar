@@ -23,7 +23,7 @@ import {
   today,
 } from '@timestamp-js/core'
 
-import { convertToUnit, getResponsiveWeekdayLabel } from '../utils/helpers'
+import { convertToUnit, getResponsiveWeekdayLabel, resolveCssLength } from '../utils/helpers'
 import {
   getCalendarDateIdentifier,
   getCalendarScopeData,
@@ -186,6 +186,7 @@ export default defineComponent({
   setup(props, { slots, emit, expose }) {
     const initialDate = props.modelValue || today(props.calendarSystem)
     const scrollArea = ref<HTMLElement | null>(null),
+      headerColumnRef = ref<HTMLElement | null>(null),
       pane = ref(null),
       direction = ref<'next' | 'prev'>('next'),
       startDate = ref(initialDate),
@@ -320,11 +321,9 @@ export default defineComponent({
 
     const isSticky = ref(true)
     const parsedCellWidth = computed(() => {
-      if (props.cellWidth !== undefined) {
-        return parseInt(String(props.cellWidth), 10)
-      }
-      return 150 // default when not specified
+      return resolveCssLength(props.cellWidth ?? 150, headerColumnRef.value)
     })
+    const cellWidthStyle = computed(() => convertToUnit(props.cellWidth ?? 150))
 
     const isDayFocusable = computed(() => isFocusableType(props, 'day'))
 
@@ -502,7 +501,7 @@ export default defineComponent({
         disabled: __isDisabled(day, outside),
       }
 
-      const width = convertToUnit(parsedCellWidth.value)
+      const width = cellWidthStyle.value
       const style: CSSProperties = {
         width,
         minWidth: width,
@@ -801,7 +800,7 @@ export default defineComponent({
         index,
         disabled: __isDisabled(day, outside),
       }
-      const width = convertToUnit(parsedCellWidth.value)
+      const width = cellWidthStyle.value
       const style: CSSProperties = {
         width,
         minWidth: width,
@@ -1160,7 +1159,7 @@ export default defineComponent({
     function __renderTitleDay(day: Timestamp, title: string, index: number): VNode {
       const slot = slots['title-day']
 
-      const width = convertToUnit(parsedCellWidth.value)
+      const width = cellWidthStyle.value
       const style: CSSProperties = {
         width,
         minWidth: width,
@@ -1218,7 +1217,7 @@ export default defineComponent({
       const weekdayClass =
         typeof props.weekdayClass === 'function' ? props.weekdayClass({ scope }) : {}
 
-      const width = convertToUnit(parsedCellWidth.value)
+      const width = cellWidthStyle.value
       const style: CSSProperties = {
         width,
         minWidth: width,
@@ -1299,6 +1298,7 @@ export default defineComponent({
       return h(
         'div',
         {
+          ref: headerColumnRef,
           class: {
             'q-calendar-task__head--days': true,
           },

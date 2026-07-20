@@ -26,7 +26,7 @@ import {
   type Timestamp,
 } from '@timestamp-js/core'
 
-import { convertToUnit, getResponsiveWeekdayLabel } from '../utils/helpers'
+import { getResponsiveWeekdayLabel } from '../utils/helpers'
 import {
   getCalendarDateIdentifier,
   getCalendarScopeData,
@@ -219,7 +219,7 @@ export default defineComponent({
 
     const { emitListeners } = useEmitListeners(vm)
 
-    const { isSticky } = useCellWidth(props)
+    const { isSticky, cellWidthStyle } = useCellWidth(props)
 
     const { times, setCurrent, updateCurrent: updateCurrentTimes } = useTimes(props)
 
@@ -677,8 +677,7 @@ export default defineComponent({
         scope.disabled === true ||
         (props.disabledWeekdays ? props.disabledWeekdays.includes(Number(day.weekday)) : false)
 
-      const width =
-        isSticky.value === true ? convertToUnit(parsedCellWidth.value) : computedWidth.value
+      const width = isSticky.value === true ? cellWidthStyle.value : computedWidth.value
       const styler = props.weekdayStyle || dayStyleDefault
       const style: CSSProperties = {
         width,
@@ -845,8 +844,7 @@ export default defineComponent({
         scope.disabled === true ||
         (props.disabledWeekdays ? props.disabledWeekdays.includes(Number(day.weekday)) : false)
 
-      const width =
-        isSticky.value === true ? convertToUnit(parsedCellWidth.value) : computedWidth.value
+      const width = isSticky.value === true ? cellWidthStyle.value : computedWidth.value
       const style: CSSProperties = {
         width,
         maxWidth: width,
@@ -1278,8 +1276,7 @@ export default defineComponent({
     ): VNode {
       const slot = slots['resource-days']
 
-      const width =
-        isSticky.value === true ? convertToUnit(parsedCellWidth.value) : computedWidth.value
+      const width = isSticky.value === true ? cellWidthStyle.value : computedWidth.value
 
       const scope = {
         resource,
@@ -1349,8 +1346,7 @@ export default defineComponent({
       scope.activeDate = activeDate
       scope.droppable = droppable
 
-      const width =
-        isSticky.value === true ? convertToUnit(parsedCellWidth.value) : computedWidth.value
+      const width = isSticky.value === true ? cellWidthStyle.value : computedWidth.value
       const style: CSSProperties = {
         width,
         maxWidth: width,

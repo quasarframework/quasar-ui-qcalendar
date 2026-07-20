@@ -15,6 +15,7 @@ import { CommonProps } from './useCommon'
 import { CellWidthProps } from './useCellWidth'
 import { Scope } from './useInterval'
 import { toCalendarTimestamp } from '../utils/calendarSystem'
+import { resolveCssLength } from '../utils/helpers'
 
 // Define props interface
 export interface MonthProps {
@@ -237,7 +238,7 @@ export default function useMonth(
   const parsedCellWidth = computed((): number => {
     let width = 0
     if (props.cellWidth) {
-      width = Number(props.cellWidth)
+      width = resolveCssLength(props.cellWidth, headerColumnRef.value as HTMLElement | null)
     } else if (size.width > 0 && headerColumnRef.value) {
       width = headerColumnRef.value.offsetWidth / props.weekdays.length
     }

@@ -202,9 +202,7 @@ export default defineComponent({
       return props.view
     })
 
-    const parsedCellWidth = computed(() => {
-      return parseInt(String(props.cellWidth), 10)
-    })
+    const cellWidthStyle = computed(() => convertToUnit(props.cellWidth))
 
     const vm = getCurrentInstance()
     if (vm === null) {
@@ -562,7 +560,7 @@ export default defineComponent({
       const slot = slots['interval-label']
       const activeDate = props.noActiveDate !== true && __isActiveDate(interval)
 
-      const width = convertToUnit(parsedCellWidth.value)
+      const width = cellWidthStyle.value
       const height = convertToUnit(parsedIntervalHeaderHeight.value)
 
       const short = props.shortIntervalLabel
@@ -905,7 +903,7 @@ export default defineComponent({
       scope.droppable = dragOverResourceInterval.value === dragValue
 
       const styler = props.intervalStyle || dayStyleDefault
-      const width = convertToUnit(parsedCellWidth.value)
+      const width = cellWidthStyle.value
       const style: CSSProperties = {
         width,
         maxWidth: width,

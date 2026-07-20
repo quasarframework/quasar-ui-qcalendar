@@ -1,6 +1,8 @@
 // cellWidth composables
 import { computed, ComputedRef } from 'vue'
 
+import { convertToUnit } from '../utils/helpers'
+
 export const useCellWidthProps = {
   /**
    * Fixed cell width used by sticky or horizontally scrolling displays.
@@ -30,12 +32,15 @@ export interface CellWidthProps {
 
 interface UseCellWidthReturn {
   isSticky: ComputedRef<boolean>
+  cellWidthStyle: ComputedRef<string | undefined>
 }
 
 export default function useCellWidth(props: CellWidthProps): UseCellWidthReturn {
   const isSticky = computed(() => props.cellWidth !== undefined)
+  const cellWidthStyle = computed(() => convertToUnit(props.cellWidth))
 
   return {
     isSticky,
+    cellWidthStyle,
   }
 }
