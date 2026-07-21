@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-qcalendar",
-  "version": "5.1.0",
+  "version": "5.1.1",
   "description": "A Quasar App Extension for @quasar/quasar-ui-qcalendar",
   "keywords": [
     "app",
@@ -50,7 +50,7 @@
     "@quasar/quasar-ui-qcalendar": "workspace:^"
   },
   "devDependencies": {
-    "@quasar/app-vite": "3.0.1",
+    "@quasar/app-vite": "^3.1.0",
     "typescript": "~6.0.3"
   },
   "peerDependencies": {
