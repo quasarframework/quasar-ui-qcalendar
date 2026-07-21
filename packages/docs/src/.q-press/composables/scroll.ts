@@ -11,7 +11,14 @@ const { setVerticalScrollPosition, getVerticalScrollPosition } = scroll
  */
 export function useScroll() {
   let scrollTimer: ReturnType<typeof setTimeout> | undefined
+  let anchorStabilizationTimer: ReturnType<typeof setTimeout> | undefined
+  let anchorResizeObserver: ResizeObserver | undefined
+  let anchorFrame: number | undefined
+  let stabilizedAnchor: HTMLElement | null = null
+  let stabilizedHash = ''
   const scrollDuration = 500
+  const anchorOffset = 166 // TODO: dynamic header offset
+  const anchorStabilizationDuration = 10_000
   const route = useRoute()
   const router = useRouter()
   const markdownStore = useMarkdownStore()
@@ -50,10 +57,7 @@ export function useScroll() {
    */
   function scrollPage(el: HTMLElement, delay: number) {
     const { top } = el.getBoundingClientRect()
-    const offset = Math.max(
-      0,
-      top + getVerticalScrollPosition(window) - 166, // TODO: dynamic header offset
-    )
+    const offset = Math.max(0, top + getVerticalScrollPosition(window) - anchorOffset)
 
     clearTimeout(scrollTimer)
 
@@ -63,6 +67,86 @@ export function useScroll() {
     scrollTimer = setTimeout(() => {
       preventTocUpdate = false
     }, delay + 10)
+  }
+
+  /**
+   * Stops correcting an anchor after the initial page layout has settled or the user starts interacting.
+   */
+  function stopAnchorStabilization() {
+    clearTimeout(anchorStabilizationTimer)
+    anchorResizeObserver?.disconnect()
+
+    if (anchorFrame !== undefined) {
+      window.cancelAnimationFrame(anchorFrame)
+    }
+
+    window.removeEventListener('keydown', stopAnchorStabilization)
+    window.removeEventListener('pointerdown', stopAnchorStabilization)
+    window.removeEventListener('touchstart', stopAnchorStabilization)
+    window.removeEventListener('wheel', stopAnchorStabilization)
+
+    anchorResizeObserver = undefined
+    anchorFrame = undefined
+    stabilizedAnchor = null
+    stabilizedHash = ''
+  }
+
+  /**
+   * Keeps a linked heading at the header offset while asynchronous examples and media above it expand.
+   */
+  function stabilizeCurrentAnchor(el: HTMLElement) {
+    stopAnchorStabilization()
+
+    if (typeof ResizeObserver !== 'function') {
+      return
+    }
+
+    stabilizedAnchor = el
+    stabilizedHash = location.hash
+
+    const alignAnchor = () => {
+      anchorFrame = undefined
+
+      if (
+        stabilizedAnchor === null ||
+        stabilizedAnchor.isConnected === false ||
+        location.hash !== stabilizedHash
+      ) {
+        stopAnchorStabilization()
+        return
+      }
+
+      const { top } = stabilizedAnchor.getBoundingClientRect()
+
+      if (Math.abs(top - anchorOffset) > 1) {
+        const offset = Math.max(0, top + getVerticalScrollPosition(window) - anchorOffset)
+        setVerticalScrollPosition(window, offset, 0)
+      }
+    }
+
+    const scheduleAnchorAlignment = () => {
+      if (anchorFrame !== undefined) {
+        window.cancelAnimationFrame(anchorFrame)
+      }
+
+      anchorFrame = window.requestAnimationFrame(alignAnchor)
+    }
+
+    const contentEl =
+      el.closest<HTMLElement>('.markdown-page__content') ??
+      el.closest<HTMLElement>('.q-page') ??
+      document.documentElement
+
+    anchorResizeObserver = new ResizeObserver(scheduleAnchorAlignment)
+    anchorResizeObserver.observe(contentEl)
+
+    window.addEventListener('keydown', stopAnchorStabilization)
+    window.addEventListener('pointerdown', stopAnchorStabilization)
+    window.addEventListener('touchstart', stopAnchorStabilization, { passive: true })
+    window.addEventListener('wheel', stopAnchorStabilization, { passive: true })
+
+    anchorStabilizationTimer = setTimeout(stopAnchorStabilization, anchorStabilizationDuration)
+    scheduleAnchorAlignment()
   }
 
   /**
@@ -124,7 +208,9 @@ export function useScroll() {
       }
 
       scrollPage(el, immediate === true ? 0 : scrollDuration)
+      stabilizeCurrentAnchor(el)
     } else {
+      stopAnchorStabilization()
       preventTocUpdate = false
       markdownStore.setActiveToc()
     }
@@ -138,6 +224,7 @@ export function useScroll() {
 
   onBeforeUnmount(() => {
     clearTimeout(scrollTimer)
+    stopAnchorStabilization()
   })
 
   return {

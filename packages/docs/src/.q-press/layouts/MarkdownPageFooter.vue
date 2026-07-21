@@ -12,6 +12,8 @@
               :src="logo"
               :alt="siteConfig.logoConfig.logoAlt"
               class="markdown-page-footer__logo"
+              width="64"
+              height="64"
             />
           </router-link>
 

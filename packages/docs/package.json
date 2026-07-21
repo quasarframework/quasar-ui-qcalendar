@@ -19,7 +19,8 @@
     "build:ssg": "quasar prepare && quasar build && qpress ssg",
     "prerender:ssg": "qpress ssg",
     "preview:ssg": "quasar serve dist/spa --history",
-    "check:qpress": "qpress check"
+    "check:qpress": "qpress check",
+    "build:ssg:renderer": "quasar prepare && quasar build -m ssr"
   },
   "dependencies": {
     "@quasar/extras": "2.0.2",
@@ -35,12 +36,12 @@
     "vue-router": "^5.2.0"
   },
   "devDependencies": {
-    "@md-plugins/quasar-app-extension-q-press": "1.1.0",
-    "@md-plugins/search-ui": "1.1.0",
-    "@md-plugins/vite-examples-plugin": "1.1.0",
-    "@md-plugins/vite-md-plugin": "1.1.0",
-    "@md-plugins/vite-search-plugin": "1.1.0",
-    "@md-plugins/vite-ssg-plugin": "1.1.0",
+    "@md-plugins/quasar-app-extension-q-press": "1.2.0",
+    "@md-plugins/search-ui": "1.2.0",
+    "@md-plugins/vite-examples-plugin": "1.2.0",
+    "@md-plugins/vite-md-plugin": "1.2.0",
+    "@md-plugins/vite-search-plugin": "1.2.0",
+    "@md-plugins/vite-ssg-plugin": "1.2.0",
     "@quasar/app-vite": "3.1.0",
     "@quasar/quasar-ui-qcalendar": "workspace:*",
     "@types/markdown-it": "^14.1.2",
