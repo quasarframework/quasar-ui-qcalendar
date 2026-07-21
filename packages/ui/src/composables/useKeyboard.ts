@@ -203,6 +203,8 @@ export default function useNavigation(
   )
 
   watch(focusValue, () => {
+    if (canRestoreFocus() !== true) return
+
     const focusElement = focusRef.value ? datesRef.value[focusRef.value] : undefined
 
     if (focusElement) {
@@ -211,6 +213,15 @@ export default function useNavigation(
       tryFocus()
     }
   })
+
+  watch(
+    () => keyboardActive?.value,
+    (active) => {
+      if (active !== true) {
+        cancelFocusRetry()
+      }
+    },
+  )
 
   if (props.useNavigation === true) {
     startNavigation()
@@ -243,15 +254,20 @@ export default function useNavigation(
     return false
   }
 
+  function canRestoreFocus(): boolean {
+    return props.useNavigation === true && keyboardActive?.value === true
+  }
+
   function tryFocus(value = focusRef.value): void {
     cancelFocusRetry()
+    if (canRestoreFocus() !== true) return
 
     let count = 0
     const token = ++focusRetryToken
     const focus = (): void => {
       focusRetryHandle = null
 
-      if (token !== focusRetryToken) return
+      if (token !== focusRetryToken || canRestoreFocus() !== true) return
 
       count += 1
       const focusElement = getFocusElement(value)
@@ -405,6 +421,8 @@ export default function useNavigation(
     focusRef.value = focusKey
 
     void nextTick(() => {
+      if (canRestoreFocus() !== true) return
+
       const focusElement = getFocusElement(focusKey)
       if (focusElement) {
         focusRef.value = focusKey
