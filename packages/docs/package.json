@@ -1,6 +1,6 @@
 {
   "name": "docs",
-  "version": "5.1.1",
+  "version": "5.1.2",
   "private": true,
   "description": "QCalendar Documentation and examples",
   "author": "Jeff <galbraith64@gmail.com>",
@@ -42,7 +42,7 @@
     "@md-plugins/vite-md-plugin": "1.2.0",
     "@md-plugins/vite-search-plugin": "1.2.0",
     "@md-plugins/vite-ssg-plugin": "1.2.0",
-    "@quasar/app-vite": "3.1.0",
+    "@quasar/app-vite": "3.2.0",
     "@quasar/quasar-ui-qcalendar": "workspace:*",
     "@types/markdown-it": "^14.1.2",
     "@types/node": "^26.1.1",
@@ -52,8 +52,8 @@
     "mermaid": "^11.16.0",
     "shiki": "^4.3.1",
     "typescript": "~6.0.3",
-    "vite-plugin-checker": "^0.14.4",
-    "vue-tsc": "^3.3.7"
+    "vite-plugin-checker": "^0.14.5",
+    "vue-tsc": "^3.3.8"
   },
   "engines": {
     "node": ">=22.13",
