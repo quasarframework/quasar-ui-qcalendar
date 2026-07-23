@@ -65,7 +65,9 @@ Use the `scrollToDate()` method to bring a date that is already rendered in a
 wide calendar into view without changing the model value or rendered range. The
 optional second argument controls the animation duration in milliseconds. The
 method returns `false` when the date is invalid or is not part of the rendered
-range.
+range; those requests are not retained. A valid request made from a parent's
+`onMounted()` while date columns are still registering is completed after the
+current render flush.
 
 This example uses the day calendar's month view with fixed-width date columns.
 

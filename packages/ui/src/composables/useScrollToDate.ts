@@ -1,4 +1,10 @@
-import { onBeforeUpdate, type ComponentPublicInstance, type Ref } from 'vue'
+import {
+  nextTick,
+  onBeforeUnmount,
+  onBeforeUpdate,
+  type ComponentPublicInstance,
+  type Ref,
+} from 'vue'
 import { getCalendarDayIdentifier, type CalendarSystem, type Timestamp } from '@timestamp-js/core'
 
 import { getCalendarDateIdentifier } from '../utils/calendarSystem'
@@ -13,14 +19,26 @@ interface UseScrollToDateReturn {
   scrollToDate: (date: string, duration?: number) => boolean
 }
 
+interface PendingScroll {
+  identifier: number
+  duration: number
+}
+
 export default function useScrollToDate(
   props: ScrollToDateProps,
   scrollArea: Ref<HTMLElement | null>,
+  days: Ref<Timestamp[]>,
 ): UseScrollToDateReturn {
   const dateElements = new Map<number, HTMLElement>()
+  let pendingScroll: PendingScroll | null = null
+  let pendingFlushScheduled = false
 
   onBeforeUpdate(() => {
     dateElements.clear()
+  })
+
+  onBeforeUnmount(() => {
+    pendingScroll = null
   })
 
   function registerDate(timestamp: Timestamp, el: Element | ComponentPublicInstance | null): void {
@@ -36,11 +54,10 @@ export default function useScrollToDate(
     }
   }
 
-  function scrollToDate(date: string, duration = 0): boolean {
-    const identifier = getCalendarDateIdentifier(date, props.calendarSystem)
+  function scrollToIdentifier(identifier: number, duration: number): boolean {
     const scrollTarget = scrollArea.value
 
-    if (identifier === null || scrollTarget === null) {
+    if (scrollTarget === null) {
       return false
     }
 
@@ -54,6 +71,50 @@ export default function useScrollToDate(
     const offset = targetRect.left + targetRect.width / 2 - (scrollRect.left + scrollRect.width / 2)
 
     animHorizontalScrollTo(scrollTarget, scrollTarget.scrollLeft + offset, duration)
+
+    return true
+  }
+
+  function flushPendingScroll(): void {
+    const request = pendingScroll
+    pendingScroll = null
+
+    if (request !== null) {
+      scrollToIdentifier(request.identifier, request.duration)
+    }
+  }
+
+  function deferScroll(identifier: number, duration: number): void {
+    pendingScroll = { identifier, duration }
+
+    if (pendingFlushScheduled === false) {
+      pendingFlushScheduled = true
+
+      void nextTick(() => {
+        pendingFlushScheduled = false
+        flushPendingScroll()
+      })
+    }
+  }
+
+  function scrollToDate(date: string, duration = 0): boolean {
+    const identifier = getCalendarDateIdentifier(date, props.calendarSystem)
+
+    if (
+      identifier === null ||
+      days.value.some(
+        (day) => getCalendarDayIdentifier(day, props.calendarSystem) === identifier,
+      ) === false
+    ) {
+      pendingScroll = null
+      return false
+    }
+
+    if (scrollToIdentifier(identifier, duration) === true) {
+      pendingScroll = null
+    } else {
+      deferScroll(identifier, duration)
+    }
 
     return true
   }

@@ -51,6 +51,14 @@ This example also uses the `max-days` property.
 
 <MarkdownExample title="Cell Width" file="AgendaCellWidth"/>
 
+## Scroll to Date
+
+Use `scrollToDate()` to bring a date from the currently rendered range into view.
+The method returns `false` when the date is invalid or outside that range; those
+requests are not retained. A valid request made from a parent's `onMounted()`
+while date columns are still registering is completed after the current render
+flush.
+
 ## Column Count
 
 The `column-count` property allows for a single day to be displayed multiple times.

@@ -306,7 +306,11 @@ export default defineComponent({
 
     const { getDefaultMouseEventHandlers } = useMouse(emit, emitListeners)
 
-    const { registerDate, scrollToDate: scrollToDateCalendar } = useScrollToDate(props, scrollArea)
+    const { registerDate, scrollToDate: scrollToDateCalendar } = useScrollToDate(
+      props,
+      scrollArea,
+      days,
+    )
 
     const { checkChange } = useCheckChange(emit, {
       days,
@@ -450,7 +454,7 @@ export default defineComponent({
      * @param duration Animation duration in milliseconds.
      * @param-example date '2026-08-15'
      * @param-example duration 200
-     * @returns Whether the requested date is rendered and can be scrolled to.
+     * @returns Whether the requested date is rendered and the scroll was applied or queued.
      */
     function scrollToDate(date: string, duration: number = 0): boolean {
       return scrollToDateCalendar(date, duration)

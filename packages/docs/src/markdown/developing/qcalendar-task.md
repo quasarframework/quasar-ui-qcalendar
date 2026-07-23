@@ -108,7 +108,10 @@ The current date has been set to tomorrow via the `now` property.
 Use `scrollToDate()` when a task timeline renders more dates than fit in its
 viewport. The target must already be in the rendered range; scrolling does not
 change the model value or load another range. The optional second argument is
-the animation duration in milliseconds.
+the animation duration in milliseconds. The method returns `false` when the date
+is invalid or outside the rendered range; those requests are not retained. A
+valid request made from a parent's `onMounted()` while date columns are still
+registering is completed after the current render flush.
 
 This example renders the current quarter and scrolls horizontally to a selected
 date within it.

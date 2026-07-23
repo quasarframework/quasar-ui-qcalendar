@@ -344,7 +344,7 @@ export interface QCalendar extends ComponentPublicInstance {
    * Scrolls horizontally to a rendered date in the active calendar system
    * @param date Date in the active calendar system's format
    * @param duration Animation duration in milliseconds
-   * @returns Whether the requested date is rendered and can be scrolled to
+   * @returns Whether the requested date is rendered and the scroll was applied or queued
    */
   scrollToDate(date: string, duration?: number): boolean
 }
@@ -541,7 +541,7 @@ export interface QCalendarAgenda extends ComponentPublicInstance {
    * Scrolls horizontally to a rendered date in the active calendar system
    * @param date Date in the active calendar system's format
    * @param duration Animation duration in milliseconds
-   * @returns Whether the requested date is rendered and can be scrolled to
+   * @returns Whether the requested date is rendered and the scroll was applied or queued
    */
   scrollToDate(date: string, duration?: number): boolean
 }
@@ -738,7 +738,7 @@ export interface QCalendarDay extends ComponentPublicInstance {
    * Scrolls horizontally to a rendered date in the active calendar system
    * @param date Date in the active calendar system's format
    * @param duration Animation duration in milliseconds
-   * @returns Whether the requested date is rendered and can be scrolled to
+   * @returns Whether the requested date is rendered and the scroll was applied or queued
    */
   scrollToDate(date: string, duration?: number): boolean
 }
@@ -1303,7 +1303,7 @@ export interface QCalendarScheduler extends ComponentPublicInstance {
    * Scrolls horizontally to a rendered date in the active calendar system
    * @param date Date in the active calendar system's format
    * @param duration Animation duration in milliseconds
-   * @returns Whether the requested date is rendered and can be scrolled to
+   * @returns Whether the requested date is rendered and the scroll was applied or queued
    */
   scrollToDate(date: string, duration?: number): boolean
 }
@@ -1521,7 +1521,7 @@ export interface QCalendarTask extends ComponentPublicInstance {
    * Scrolls horizontally to a rendered date in the active calendar system
    * @param date Date in the active calendar system's format
    * @param duration Animation duration in milliseconds
-   * @returns Whether the requested date is rendered and can be scrolled to
+   * @returns Whether the requested date is rendered and the scroll was applied or queued
    */
   scrollToDate(date: string, duration?: number): boolean
 }

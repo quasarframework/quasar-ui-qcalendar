@@ -294,7 +294,7 @@ export default defineComponent({
      * @param-example date '2026-08-15'
      * @param-example duration 200
      * @applicable day, agenda, scheduler, task
-     * @returns Whether the requested date is rendered and can be scrolled to.
+     * @returns Whether the requested date is rendered and the scroll was applied or queued.
      */
     function scrollToDate(date: string, duration: number = 0): boolean {
       return calendar.value?.scrollToDate?.(date, duration) === true

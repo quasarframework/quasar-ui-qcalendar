@@ -51,7 +51,10 @@ The calendar goes into a special `sticky` mode when this happens so you can scro
 
 Use `scrollToDate()` to bring a date from the currently rendered range into view. It does not
 change the model value or load another range. The optional second argument sets the animation
-duration in milliseconds.
+duration in milliseconds. The method returns `false` when the date is invalid or outside the
+rendered range; those requests are not retained. A valid request made from a parent's
+`onMounted()` while date columns are still registering is completed after the current render
+flush.
 
 <MarkdownExample title="Scroll to Date" file="SchedulerScrollToDate"/>
 
