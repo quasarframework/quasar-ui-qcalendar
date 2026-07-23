@@ -2,7 +2,7 @@
 name: Feature request (v5)
 about: Suggest an idea for this project
 title: ''
-labels: 'v5'
+labels: 'enhancement'
 assignees: ''
 ---
 

@@ -2,11 +2,11 @@
 name: Bug report
 about: Create a report to help us improve
 title: ''
-labels: ''
+labels: 'bug'
 assignees: ''
 ---
 
-For a legitimate bug, in order to process faster, please open the closest matching documentation example, use its CodePen action to create a reproduction, add the code that reproduces the bug, and submit the saved CodePen link here:
+For a legitimate bug, find the closest matching example on the [QCalendar website](https://qcalendar.netlify.app/) and click its CodePen link. Make sure you are signed in to CodePen so your changes are saved, update the example to reproduce the problem, save the Pen, and paste its URL here:
 
 **Describe the bug**
 A clear and concise description of what the bug is.
