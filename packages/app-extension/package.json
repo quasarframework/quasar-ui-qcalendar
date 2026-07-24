@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-qcalendar",
-  "version": "5.1.2",
+  "version": "5.2.0",
   "description": "A Quasar App Extension for @quasar/quasar-ui-qcalendar",
   "keywords": [
     "app",

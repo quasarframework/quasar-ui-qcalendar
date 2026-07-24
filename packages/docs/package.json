@@ -1,6 +1,6 @@
 {
   "name": "docs",
-  "version": "5.1.2",
+  "version": "5.2.0",
   "private": true,
   "description": "QCalendar Documentation and examples",
   "author": "Jeff <galbraith64@gmail.com>",
@@ -31,7 +31,7 @@
     "@timestamp-js/core": "0.1.0-rc.5",
     "date-holidays": "^3.33.0",
     "pinia": "^4.0.2",
-    "quasar": "^2.22.0",
+    "quasar": "^2.23.1",
     "vue": "^3.5.40",
     "vue-router": "^5.2.0"
   },
