@@ -47,6 +47,10 @@ By using the app extension, you will get **all** QCalendar components installed 
 QCalendar v5's app extension targets Quasar CLI Vite projects using `@quasar/app-vite` `>=3.0.0`. For non-Quasar Vue/Vite apps, install the UI package directly and skip the app extension.
 :::
 
+::: tip
+The App Extension can register QCalendar components without an import from application source. If your application imports a component or type from `@quasar/quasar-ui-qcalendar`, add the UI package as a direct application dependency (for example, `pnpm add @quasar/quasar-ui-qcalendar`). Do not rely on the App Extension's transitive dependency, especially with strict package managers such as pnpm.
+:::
+
 #### Install
 
 To add as an App Extension to your Quasar application, run the following (in your Quasar app folder):

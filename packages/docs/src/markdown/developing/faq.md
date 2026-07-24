@@ -30,6 +30,29 @@ Use `@quasar/quasar-ui-qcalendar/index.css` when registering the full plugin, or
 
 :::
 
+:::details Q. How do I type an App Extension-registered QCalendar template ref?
+
+Keep runtime component registration in the App Extension and import only the concrete calendar instance type in `<script setup>`:
+
+```ts
+import { useTemplateRef } from 'vue'
+import type { QCalendarDay } from '@quasar/quasar-ui-qcalendar'
+
+const calendarRef = useTemplateRef<QCalendarDay>('calendar')
+```
+
+Use the type that matches your component, such as `QCalendarMonth`, `QCalendarScheduler`, or `QCalendar`. A normal value import creates a local component binding in `<script setup>` and takes precedence over the globally registered component. Use a normal import only when you intend to use the UI component directly, and follow the manual boot file installation path instead of registering it through both paths.
+
+Because application source imports the type, add the UI package as a direct application dependency:
+
+```bash
+pnpm add @quasar/quasar-ui-qcalendar
+```
+
+Applications that only use globally registered calendar components in templates do not need this extra direct dependency.
+
+:::
+
 :::details Q. Can I use QCalendar without Quasar?
 
 Yes, but use the UI package directly instead of the Quasar App Extension.
