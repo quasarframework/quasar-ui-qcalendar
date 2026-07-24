@@ -19,6 +19,17 @@ reviewing work by day.
 
 <MarkdownApi :api="QCalendarSchedulerApi" name="QCalendarScheduler"/>
 
+## Scroll Events
+
+Listen to `@scroll` for live updates from the internal scroll area and
+`@scrollend` for one update after scrolling settles. Both events receive a
+`CalendarScrollEvent` object with the native `event`, scrolling `target`,
+`scrollLeft`, `scrollTop`, `scrollWidth`, `scrollHeight`, `clientWidth`, and
+`clientHeight`.
+
+When `no-scroll` is enabled, listen for scroll events on the external scrolling
+element instead.
+
 ## Date Type
 
 Use `date-type` when scheduler dates need to match the format used by your data

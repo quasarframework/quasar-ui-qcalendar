@@ -22,6 +22,7 @@ import * as helpers from './utils/helpers.js'
 
 // Explicitly export individual named properties
 export * from './utils/helpers.js'
+export type { CalendarScrollEvent } from './composables/useScrollEvents.js'
 
 type CalendarNavigationInstance = {
   prev: (_amount?: number) => void

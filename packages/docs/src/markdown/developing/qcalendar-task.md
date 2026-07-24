@@ -19,6 +19,14 @@ rows.
 
 <MarkdownApi :api="QCalendarTaskApi" name="QCalendarTask"/>
 
+## Scroll Events
+
+Listen to `@scroll` for live updates from the internal scroll area and
+`@scrollend` for one update after scrolling settles. Both events receive a
+`CalendarScrollEvent` object with the native `event`, scrolling `target`,
+`scrollLeft`, `scrollTop`, `scrollWidth`, `scrollHeight`, `clientWidth`, and
+`clientHeight`.
+
 ## Date Type
 
 Use `date-type` when task calendar dates need to match the format used by your

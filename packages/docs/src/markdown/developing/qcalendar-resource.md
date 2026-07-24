@@ -19,6 +19,14 @@ the time.
 
 <MarkdownApi :api="QCalendarResourceApi" name="QCalendarResource"/>
 
+## Scroll Events
+
+Listen to `@scroll` for live updates from the internal scroll area and
+`@scrollend` for one update after scrolling settles. Both events receive a
+`CalendarScrollEvent` object with the native `event`, scrolling `target`,
+`scrollLeft`, `scrollTop`, `scrollWidth`, `scrollHeight`, `clientWidth`, and
+`clientHeight`.
+
 ## Dark
 
 Use the Toggle Dark Mode control to compare the resource calendar in light and

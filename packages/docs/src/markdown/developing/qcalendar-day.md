@@ -18,6 +18,17 @@ more than a broad month overview.
 
 <MarkdownApi :api="QCalendarDayApi" name="QCalendarDay"/>
 
+## Scroll Events
+
+Listen to `@scroll` for live updates from the internal scroll area and
+`@scrollend` for one update after scrolling settles. Both events receive a
+`CalendarScrollEvent` object with the native `event`, scrolling `target`,
+`scrollLeft`, `scrollTop`, `scrollWidth`, `scrollHeight`, `clientWidth`, and
+`clientHeight`.
+
+When `no-scroll` is enabled, listen for scroll events on the external scrolling
+element instead.
+
 ## Date Type
 
 Use `date-type` when the day calendar should interpret the model date in a

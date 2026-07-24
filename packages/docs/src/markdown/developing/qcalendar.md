@@ -35,6 +35,20 @@ import QCalendarApi from '@quasar/quasar-ui-qcalendar/dist/api/QCalendar.json'
 
 <MarkdownApi :api="QCalendarApi" name="QCalendar"/>
 
+## Scroll Events
+
+When the active `mode` has an internal scroll area (`day`, `agenda`,
+`resource`, `scheduler`, or `task`), listen to `@scroll` for live updates and
+`@scrollend` for one update after scrolling settles. Month mode does not have
+an internal scroll area and does not emit these events.
+
+Both events receive a `CalendarScrollEvent` object with the native `event`,
+scrolling `target`, `scrollLeft`, `scrollTop`, `scrollWidth`, `scrollHeight`,
+`clientWidth`, and `clientHeight`.
+
+When `no-scroll` removes the active view's internal scroll area, listen for
+scroll events on the external scrolling element instead.
+
 ## All
 
 <MarkdownExample title="All" file="CalendarAll" no-edit/>

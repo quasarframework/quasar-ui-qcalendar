@@ -45,6 +45,7 @@ import useRenderValues from '../composables/useRenderValues'
 import useMouse, { getRawMouseEvents } from '../composables/useMouse'
 import useMove, { useMoveEmits } from '../composables/useMove'
 import useEmitListeners from '../composables/useEmitListeners'
+import useScrollEvents, { useScrollEmits } from '../composables/useScrollEvents'
 import useButton from '../composables/useButton'
 import useFocusHelper from '../composables/useFocusHelper'
 import useCellWidth, { useCellWidthProps } from '../composables/useCellWidth'
@@ -121,6 +122,7 @@ export default defineComponent({
     'resource-expanded',
     ...useCheckChangeEmits,
     ...useMoveEmits,
+    ...useScrollEmits,
     /**
      * Interact with a scheduler date button.
      *
@@ -218,6 +220,7 @@ export default defineComponent({
     }
 
     const { emitListeners } = useEmitListeners(vm)
+    const { onScroll } = useScrollEvents(emit, emitListeners)
 
     const { isSticky, cellWidthStyle } = useCellWidth(props)
 
@@ -1050,6 +1053,7 @@ export default defineComponent({
               'q-calendar-scheduler__scroll-area': true,
               'q-calendar__scroll': true,
             },
+            onScroll,
           },
           [__renderDayContainer()],
         )
@@ -1064,6 +1068,7 @@ export default defineComponent({
               'q-calendar-scheduler__scroll-area': true,
               'q-calendar__scroll': true,
             },
+            onScroll,
           },
           [__renderPane()],
         )

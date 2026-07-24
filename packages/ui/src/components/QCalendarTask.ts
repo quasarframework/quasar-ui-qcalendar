@@ -41,6 +41,7 @@ import useTimes, { useTimesProps } from '../composables/useTimes'
 import useRenderValues from '../composables/useRenderValues'
 import useMove, { useMoveEmits } from '../composables/useMove'
 import useEmitListeners from '../composables/useEmitListeners'
+import useScrollEvents, { useScrollEmits } from '../composables/useScrollEvents'
 import useButton from '../composables/useButton'
 import useFocusHelper from '../composables/useFocusHelper'
 import useCheckChange, { useCheckChangeEmits } from '../composables/useCheckChange'
@@ -136,6 +137,7 @@ export default defineComponent({
     'task-expanded',
     ...useCheckChangeEmits,
     ...useMoveEmits,
+    ...useScrollEmits,
     /**
      * Interact with the task header.
      *
@@ -229,6 +231,7 @@ export default defineComponent({
 
     // initialize emit listeners
     const { emitListeners } = useEmitListeners(vm)
+    const { onScroll } = useScrollEvents(emit, emitListeners)
 
     const { times, setCurrent, updateCurrent: updateCurrentTimes } = useTimes(props)
 
@@ -1383,6 +1386,7 @@ export default defineComponent({
             'q-calendar-task__scroll-area': true,
             'q-calendar__scroll': true,
           },
+          onScroll,
         },
         [__renderContainer()],
       )

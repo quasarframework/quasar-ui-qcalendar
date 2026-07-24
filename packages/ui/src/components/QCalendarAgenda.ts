@@ -49,6 +49,7 @@ import useRenderValues from '../composables/useRenderValues'
 import useMouse, { getRawMouseEvents } from '../composables/useMouse'
 import useMove, { useMoveEmits } from '../composables/useMove'
 import useEmitListeners from '../composables/useEmitListeners'
+import useScrollEvents, { useScrollEmits } from '../composables/useScrollEvents'
 import useButton from '../composables/useButton'
 import useFocusHelper from '../composables/useFocusHelper'
 import useCellWidth, { useCellWidthProps, type CellWidthProps } from '../composables/useCellWidth'
@@ -112,6 +113,7 @@ export default defineComponent({
     'update:model-value',
     ...useCheckChangeEmits,
     ...useMoveEmits,
+    ...useScrollEmits,
     /**
      * Interact with an agenda date button.
      *
@@ -204,6 +206,7 @@ export default defineComponent({
     }
 
     const { emitListeners } = useEmitListeners(vm)
+    const { onScroll } = useScrollEvents(emit, emitListeners)
 
     const { isSticky } = useCellWidth(props)
 
@@ -1024,6 +1027,7 @@ export default defineComponent({
               'q-calendar-agenda__scroll-area': true,
               'q-calendar__scroll': true,
             },
+            onScroll,
           },
           [__renderDayContainer()],
         )
@@ -1038,6 +1042,7 @@ export default defineComponent({
               'q-calendar-agenda__scroll-area': true,
               'q-calendar__scroll': true,
             },
+            onScroll,
           },
           [__renderPane()],
         )
