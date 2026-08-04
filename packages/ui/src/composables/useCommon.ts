@@ -423,8 +423,8 @@ export default function useCommon(
     times: { today: Timestamp }
   },
 ): CommonReturn {
-  const parsedToday = computed(
-    (): Timestamp => toCalendarTimestamp(times.today, props.calendarSystem),
+  const parsedToday = computed((): Timestamp =>
+    toCalendarTimestamp(times.today, props.calendarSystem),
   )
   const parsedStart = computed(
     (): Timestamp =>
