@@ -31,7 +31,7 @@
   "devDependencies": {
     "@types/node": "^26.1.2",
     "@vitest/coverage-istanbul": "^4.1.10",
-    "@vue/server-renderer": "^3.5.40",
+    "@vue/server-renderer": "^3.5.41",
     "npm-check-updates": "^23.0.1",
     "oxfmt": "^0.62.0",
     "oxlint": "^1.77.0",
