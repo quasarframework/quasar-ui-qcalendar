@@ -19,6 +19,7 @@
           flat
           round
           :icon="fabGithub"
+          aria-label="View example on GitHub"
           @click="openGitHub"
         >
           <q-tooltip>View on GitHub</q-tooltip>
@@ -31,6 +32,7 @@
           round
           :icon="fabCodepen"
           :disable="isBusy"
+          aria-label="Edit example in CodePen"
           @click="openCodepen"
         >
           <q-tooltip>Edit in Codepen</q-tooltip>
@@ -42,6 +44,7 @@
           round
           icon="code"
           :disable="isBusy"
+          :aria-label="expanded ? 'Hide source' : 'View source'"
           @click="toggleExpand"
         >
           <q-tooltip>View Source</q-tooltip>

@@ -18,6 +18,7 @@
         :href="editHref"
         target="_blank"
         rel="noopener noreferrer"
+        aria-label="Edit this page in a new tab"
         flat
         round
         color="brand-primary"

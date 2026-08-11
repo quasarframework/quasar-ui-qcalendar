@@ -1,6 +1,6 @@
 {
   "name": "qcalendar",
-  "version": "5.2.0",
+  "version": "5.2.1",
   "private": true,
   "description": "QCalendar mono-repo",
   "license": "MIT",
@@ -29,12 +29,12 @@
     "verify:build": "pnpm build && pnpm api:check && pnpm check:qpress && pnpm typecheck"
   },
   "devDependencies": {
-    "@types/node": "^26.1.2",
+    "@types/node": "^26.2.0",
     "@vitest/coverage-istanbul": "^4.1.10",
     "@vue/server-renderer": "^3.5.41",
-    "npm-check-updates": "^23.0.1",
-    "oxfmt": "^0.62.0",
-    "oxlint": "^1.77.0",
+    "npm-check-updates": "^23.0.2",
+    "oxfmt": "^0.63.0",
+    "oxlint": "^1.78.0",
     "typescript": "~6.0.3",
     "vitest": "^4.1.10"
   },
@@ -42,6 +42,6 @@
     "node": ">=22.13",
     "pnpm": ">=11.5.0"
   },
-  "packageManager": "pnpm@11.20.0",
+  "packageManager": "pnpm@11.21.0",
   "access": "private"
 }

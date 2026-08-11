@@ -13,6 +13,7 @@
           class="col markdown-api__search text-right"
           name="filter"
           placeholder="Filter..."
+          aria-label="Filter API entries"
         />
         <q-btn
           :icon="inputIcon"
@@ -20,6 +21,7 @@
           dense
           flat
           round
+          :aria-label="filter ? 'Clear API filter' : 'Focus API filter'"
           @click="onFilterClick"
         />
       </div>
@@ -33,6 +35,7 @@
         outline
         :href="apiHref"
         :target="apiHref ? '_blank' : undefined"
+        :rel="apiHref ? 'noopener noreferrer' : undefined"
         :to="apiRoute"
       >
         <q-icon name="launch" />

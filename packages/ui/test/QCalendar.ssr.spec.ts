@@ -20,6 +20,7 @@ describe('[QCALENDAR] SSR rendering', () => {
         h(QCalendar, {
           mode,
           modelValue: '2026-07-21',
+          'aria-label': `${mode} calendar`,
           ...extraProps,
         }),
     })
@@ -28,5 +29,8 @@ describe('[QCALENDAR] SSR rendering', () => {
 
     expect(html).toContain('class="q-calendar"')
     expect(html).toContain(`q-calendar-${mode}`)
+    expect(html).toContain(`aria-label="${mode} calendar"`)
+    expect(html).toContain('role="complementary"')
+    expect(html).not.toMatch(/\s(?:arialabel|ariahidden|roll)=/)
   })
 })

@@ -2,7 +2,14 @@
   <router-link v-if="internal === true" v-bind="$attrs" class="markdown-link" :to="to">
     <slot />
   </router-link>
-  <a v-else v-bind="$attrs" class="markdown-link" :href="props.to" target="_blank" rel="noopener">
+  <a
+    v-else
+    v-bind="$attrs"
+    class="markdown-link"
+    :href="props.to"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
     <slot />
     <q-icon :name="mdiLaunch" />
   </a>

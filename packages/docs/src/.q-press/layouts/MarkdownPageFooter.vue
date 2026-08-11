@@ -37,6 +37,7 @@
                 :to="item.external ? void 0 : item.path"
                 :href="item.external ? item.path : void 0"
                 :target="item.external ? '_blank' : void 0"
+                :rel="item.external ? 'noopener noreferrer' : void 0"
                 class="markdown-page-footer__link"
               >
                 <img
@@ -71,6 +72,7 @@
             flat
             :href="siteConfig.license.link"
             target="_blank"
+            rel="noopener noreferrer"
             class="markdown-page-footer__legal-action text-weight-bold"
             :label="siteConfig.license.label"
           />
@@ -91,6 +93,7 @@
               flat
               :href="siteConfig.privacy.link"
               target="_blank"
+              rel="noopener noreferrer"
               class="markdown-page-footer__legal-action text-weight-bold"
               :label="siteConfig.privacy.label"
             />

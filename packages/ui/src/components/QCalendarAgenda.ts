@@ -28,6 +28,7 @@ import {
 
 import { convertToUnit, getResponsiveWeekdayLabel } from '../utils/helpers'
 import { getCalendarDateIdentifier, parseCalendarTimestampSafe } from '../utils/calendarSystem'
+import { presentationRoleAttrs, setAriaLabel } from '../utils/aria'
 // Composables
 import useCalendar from '../composables/useCalendar'
 import useCommon, {
@@ -575,7 +576,7 @@ export default defineComponent({
       return h(
         'div',
         {
-          roll: 'presentation',
+          ...presentationRoleAttrs,
           class: {
             'q-calendar-agenda__head': true,
             'q-calendar__sticky': isSticky.value === true,
@@ -998,9 +999,7 @@ export default defineComponent({
         }),
       }
 
-      if (props.noAria !== true) {
-        data.ariaLabel = ariaDateFormatter.value(day, false)
-      }
+      setAriaLabel(data, ariaDateFormatter.value(day, false), props.noAria !== true)
 
       return headDayButtonSlot
         ? headDayButtonSlot({ scope })

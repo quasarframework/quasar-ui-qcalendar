@@ -26,6 +26,7 @@ import {
 } from '@timestamp-js/core'
 
 import { convertToUnit, getResponsiveWeekdayLabel } from '../utils/helpers'
+import { presentationRoleAttrs, setAriaLabel } from '../utils/aria'
 import {
   getCalendarDateIdentifier,
   getCalendarScopeData,
@@ -514,7 +515,7 @@ export default defineComponent({
       return h(
         'div',
         {
-          role: 'presentation',
+          ...presentationRoleAttrs,
           class: 'q-calendar-month__head',
         },
         [
@@ -630,9 +631,7 @@ export default defineComponent({
         }),
       }
 
-      if (props.noAria !== true) {
-        data.ariaLabel = weekdayFormatter.value(day, false)
-      }
+      setAriaLabel(data, weekdayFormatter.value(day, false), props.noAria !== true)
 
       return h('div', data, [
         headDaySlot === undefined &&
@@ -893,9 +892,7 @@ export default defineComponent({
         Object.assign(data, dragAndDrop)
       }
 
-      if (props.noAria !== true) {
-        data.ariaLabel = ariaDateFormatter.value(day, false)
-      }
+      setAriaLabel(data, ariaDateFormatter.value(day, false), props.noAria !== true)
 
       return h('div', data, [
         __renderDayLabelContainer(day, outside, hasMonth),
@@ -1049,9 +1046,7 @@ export default defineComponent({
         }),
       }
 
-      if (props.noAria !== true) {
-        data.ariaLabel = ariaDateFormatter.value(day, false)
-      }
+      setAriaLabel(data, ariaDateFormatter.value(day, false), props.noAria !== true)
 
       return [
         dayBtnSlot

@@ -15,6 +15,7 @@
         dense
         flat
         color="brand-accent"
+        :aria-label="markdownStore.tocDrawer ? 'Hide table of contents' : 'Show table of contents'"
         @click="markdownStore.toggleTocDrawer"
       />
     </div>

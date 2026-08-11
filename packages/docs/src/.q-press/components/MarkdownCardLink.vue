@@ -1,5 +1,11 @@
 <template>
-  <a v-if="props.external" :href="props.to" target="_blank" class="card-link">
+  <a
+    v-if="props.external"
+    :href="props.to"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="card-link"
+  >
     <slot />
   </a>
   <router-link v-else :to="props.to" class="card-link">

@@ -27,6 +27,7 @@ import {
 
 import { convertToUnit } from '../utils/helpers'
 import { getCalendarDateIdentifier, parseCalendarTimestampSafe } from '../utils/calendarSystem'
+import { presentationRoleAttrs } from '../utils/aria'
 
 // Composables
 import useCalendar from '../composables/useCalendar'
@@ -502,7 +503,7 @@ export default defineComponent({
         'div',
         {
           ref: headerRef,
-          roll: 'presentation',
+          ...presentationRoleAttrs,
           class: {
             'q-calendar-resource__head': true,
             'q-calendar__sticky': props.noSticky !== true,

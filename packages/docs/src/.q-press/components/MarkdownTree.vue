@@ -12,6 +12,8 @@
         :icon="mdiLaunch"
         :href="prop.node.url"
         target="_blank"
+        rel="noopener noreferrer"
+        :aria-label="`Open ${prop.node.l} in a new tab`"
         @click.stop
       />
 

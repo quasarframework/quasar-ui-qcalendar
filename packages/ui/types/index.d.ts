@@ -43,7 +43,7 @@ export interface QCalendar extends ComponentPublicInstance {
    */
   weekdays?: NumberArray
   /**
-   * Turns off automatical generation of aria labels for timestamps
+   * Disables generated ARIA labels for timestamps
    */
   noAria?: boolean
   /**
@@ -391,7 +391,7 @@ export interface QCalendarAgenda extends ComponentPublicInstance {
    */
   dark?: boolean
   /**
-   * Turns off aria strings in the calendar
+   * Disables generated ARIA attributes in the calendar
    */
   noAria?: boolean
   /**
@@ -588,7 +588,7 @@ export interface QCalendarDay extends ComponentPublicInstance {
    */
   dark?: boolean
   /**
-   * Turns off aria strings in the calendar
+   * Disables generated ARIA attributes in the calendar
    */
   noAria?: boolean
   /**
@@ -781,7 +781,7 @@ export interface QCalendarMonth extends ComponentPublicInstance {
    */
   dark?: boolean
   /**
-   * Turns off aria strings in the calendar
+   * Disables generated ARIA attributes in the calendar
    */
   noAria?: boolean
   /**
@@ -967,7 +967,7 @@ export interface QCalendarResource extends ComponentPublicInstance {
    */
   dark?: boolean
   /**
-   * Turns off aria strings in the calendar
+   * Disables generated ARIA attributes in the calendar
    */
   noAria?: boolean
   /**
@@ -1153,7 +1153,7 @@ export interface QCalendarScheduler extends ComponentPublicInstance {
    */
   dark?: boolean
   /**
-   * Turns off aria strings in the calendar
+   * Disables generated ARIA attributes in the calendar
    */
   noAria?: boolean
   /**
@@ -1374,7 +1374,7 @@ export interface QCalendarTask extends ComponentPublicInstance {
    */
   dark?: boolean
   /**
-   * Turns off automatical generation of aria labels for timestamps
+   * Disables generated ARIA labels for timestamps
    */
   noAria?: boolean
   /**

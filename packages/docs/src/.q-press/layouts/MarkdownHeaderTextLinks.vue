@@ -14,6 +14,7 @@
       :to="entry.path"
       :href="entry.external ? entry.path : void 0"
       :target="entry.external ? '_blank' : void 0"
+      :rel="entry.external ? 'noopener noreferrer' : void 0"
     >
       <MarkdownHeaderMenu
         v-if="entry.children"

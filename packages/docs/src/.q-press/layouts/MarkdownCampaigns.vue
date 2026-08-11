@@ -3,15 +3,13 @@
     v-model="isOpen"
     :no-esc-dismiss="closeOnEsc === false"
     :no-backdrop-dismiss="closeOnBackdrop === false"
+    :aria-label="activeCampaign?.ariaLabel ?? activeCampaign?.title"
     @hide="onDialogHide"
   >
     <q-card
       v-if="activeCampaign"
       class="qpress-campaign markdown-brand"
       :class="`qpress-campaign--${tone}`"
-      role="dialog"
-      :aria-modal="true"
-      :aria-label="activeCampaign.ariaLabel ?? activeCampaign.title"
     >
       <q-card-section class="qpress-campaign__header">
         <div>

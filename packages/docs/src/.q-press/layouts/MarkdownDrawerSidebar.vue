@@ -15,6 +15,7 @@
         dense
         flat
         color="brand-accent"
+        :aria-label="markdownStore.menuDrawer ? 'Hide navigation menu' : 'Show navigation menu'"
         @click="markdownStore.toggleMenuDrawer"
       />
     </div>

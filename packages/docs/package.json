@@ -1,6 +1,6 @@
 {
   "name": "docs",
-  "version": "5.2.0",
+  "version": "5.2.1",
   "private": true,
   "description": "QCalendar Documentation and examples",
   "author": "Jeff <galbraith64@gmail.com>",
@@ -23,7 +23,7 @@
     "build:ssg:renderer": "quasar prepare && quasar build -m ssr"
   },
   "dependencies": {
-    "@quasar/extras": "2.0.2",
+    "@quasar/extras": "2.0.3",
     "@timestamp-js/calendar-hebrew": "0.1.0-rc.5",
     "@timestamp-js/calendar-islamic": "0.1.0-rc.5",
     "@timestamp-js/calendar-persian": "0.1.0-rc.5",
@@ -36,20 +36,20 @@
     "vue-router": "^5.2.0"
   },
   "devDependencies": {
-    "@md-plugins/quasar-app-extension-q-press": "2.0.3",
-    "@md-plugins/search-ui": "2.0.3",
-    "@md-plugins/vite-examples-plugin": "2.0.3",
-    "@md-plugins/vite-md-plugin": "2.0.3",
-    "@md-plugins/vite-search-plugin": "2.0.3",
-    "@md-plugins/vite-ssg-plugin": "2.0.3",
+    "@md-plugins/quasar-app-extension-q-press": "2.0.4",
+    "@md-plugins/search-ui": "2.0.4",
+    "@md-plugins/vite-examples-plugin": "2.0.4",
+    "@md-plugins/vite-md-plugin": "2.0.4",
+    "@md-plugins/vite-search-plugin": "2.0.4",
+    "@md-plugins/vite-ssg-plugin": "2.0.4",
     "@quasar/app-vite": "3.5.0",
     "@quasar/quasar-ui-qcalendar": "workspace:*",
-    "@types/node": "^26.1.2",
+    "@types/node": "^26.2.0",
     "@vue/server-renderer": "^3.5.41",
     "autoprefixer": "^10.5.4",
     "markdown-it": "^15.0.0",
     "mermaid": "^11.16.1",
-    "shiki": "^4.4.2",
+    "shiki": "^4.4.3",
     "typescript": "~6.0.3",
     "vite-plugin-checker": "^0.14.5",
     "vue-tsc": "^3.3.9"

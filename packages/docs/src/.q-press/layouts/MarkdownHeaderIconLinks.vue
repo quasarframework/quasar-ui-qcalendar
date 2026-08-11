@@ -11,10 +11,11 @@
       :color="entry.color ? entry.color : void 0"
       :href="entry.external ? entry.path : void 0"
       :target="entry.external ? '_blank' : void 0"
+      :rel="entry.external ? 'noopener noreferrer' : void 0"
       :aria-label="entry.name"
     >
       <q-avatar v-if="entry.image" size="28px">
-        <img :src="entry.icon" />
+        <img :src="entry.icon" alt="" />
       </q-avatar>
     </q-btn>
   </div>

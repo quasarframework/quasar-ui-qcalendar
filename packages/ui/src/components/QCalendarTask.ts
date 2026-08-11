@@ -24,6 +24,7 @@ import {
 } from '@timestamp-js/core'
 
 import { convertToUnit, getResponsiveWeekdayLabel, resolveCssLength } from '../utils/helpers'
+import { presentationRoleAttrs, setAriaLabel } from '../utils/aria'
 import {
   getCalendarDateIdentifier,
   getCalendarScopeData,
@@ -1068,9 +1069,7 @@ export default defineComponent({
         }),
       }
 
-      if (props.noAria !== true) {
-        data.ariaLabel = ariaDateFormatter.value(day, false)
-      }
+      setAriaLabel(data, ariaDateFormatter.value(day, false), props.noAria !== true)
 
       return headDayButtonSlot
         ? headDayButtonSlot({ scope })
@@ -1332,7 +1331,7 @@ export default defineComponent({
       return h(
         'div',
         {
-          roll: 'presentation',
+          ...presentationRoleAttrs,
           class: {
             'q-calendar-task__head': true,
             'q-calendar__sticky': isSticky.value === true,

@@ -14,13 +14,11 @@
         flat
         round
         icon="menu"
-        aria-label="Menu"
+        :aria-label="markdownStore.menuDrawer ? 'Hide navigation menu' : 'Show navigation menu'"
         :aria-expanded="markdownStore.menuDrawer ? 'true' : 'false'"
         aria-controls="menu-drawer"
         @click="markdownStore.toggleMenuDrawer"
-      >
-        <q-tooltip>Menu</q-tooltip>
-      </q-btn>
+      />
 
       <router-link
         v-if="siteConfig.logoConfig.showLogo"
@@ -88,13 +86,11 @@
         flat
         round
         icon="menu"
-        aria-label="Menu"
+        :aria-label="markdownStore.menuDrawer ? 'Hide navigation menu' : 'Show navigation menu'"
         :aria-expanded="markdownStore.menuDrawer ? 'true' : 'false'"
         aria-controls="menu-drawer"
         @click="markdownStore.toggleMenuDrawer"
-      >
-        <q-tooltip>Menu</q-tooltip>
-      </q-btn>
+      />
 
       <router-link
         v-if="!siteConfig.config.usePrimaryHeader && siteConfig.logoConfig.showLogo"
@@ -162,7 +158,7 @@
           flat
           round
           :icon="mdiFolderPound"
-          aria-label="Table of Contents"
+          :aria-label="markdownStore.tocDrawer ? 'Hide table of contents' : 'Show table of contents'"
           :aria-expanded="markdownStore.tocDrawer ? 'true' : 'false'"
           aria-controls="toc-drawer"
           @click="markdownStore.toggleTocDrawer"

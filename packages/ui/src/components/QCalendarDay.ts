@@ -29,6 +29,7 @@ import {
 } from '@timestamp-js/core'
 
 import { convertToUnit, getResponsiveWeekdayLabel } from '../utils/helpers'
+import { ariaHiddenAttrs, presentationRoleAttrs, setAriaLabel } from '../utils/aria'
 import {
   getCalendarDateIdentifier,
   getCalendarScopeData,
@@ -545,7 +546,7 @@ export default defineComponent({
       return h(
         'div',
         {
-          roll: 'presentation',
+          ...presentationRoleAttrs,
           class: {
             'q-calendar-day__head': true,
             'q-calendar__sticky': isSticky.value === true,
@@ -991,9 +992,7 @@ export default defineComponent({
         }),
       }
 
-      if (props.noAria !== true) {
-        data.ariaLabel = ariaDateFormatter.value(day, false)
-      }
+      setAriaLabel(data, ariaDateFormatter.value(day, false), props.noAria !== true)
 
       return headDayButtonSlot
         ? headDayButtonSlot({ scope })
@@ -1249,9 +1248,7 @@ export default defineComponent({
         }),
       }
 
-      if (props.noAria !== true) {
-        data.ariaLabel = ariaDateTimeFormatter.value(interval, false)
-      }
+      setAriaLabel(data, ariaDateTimeFormatter.value(interval, false), props.noAria !== true)
 
       const children = slotDayInterval ? slotDayInterval({ scope }) : undefined
 
@@ -1260,7 +1257,7 @@ export default defineComponent({
 
     function __renderBodyIntervals(): VNode {
       const data: Record<string, any> = {
-        ariaHidden: 'true',
+        ...ariaHiddenAttrs,
         class: {
           'q-calendar-day__intervals-column': true,
           'q-calendar__ellipsis': true,
