@@ -60,20 +60,20 @@ importers:
         specifier: 2.0.3
         version: 2.0.3
       '@timestamp-js/calendar-hebrew':
-        specifier: 0.1.0-rc.5
-        version: 0.1.0-rc.5
+        specifier: 1.0.0
+        version: 1.0.0
       '@timestamp-js/calendar-islamic':
-        specifier: 0.1.0-rc.5
-        version: 0.1.0-rc.5
+        specifier: 1.0.0
+        version: 1.0.0
       '@timestamp-js/calendar-persian':
-        specifier: 0.1.0-rc.5
-        version: 0.1.0-rc.5
+        specifier: 1.0.0
+        version: 1.0.0
       '@timestamp-js/calendar-saka':
-        specifier: 0.1.0-rc.5
-        version: 0.1.0-rc.5
+        specifier: 1.0.0
+        version: 1.0.0
       '@timestamp-js/core':
-        specifier: 0.1.0-rc.5
-        version: 0.1.0-rc.5
+        specifier: 1.0.0
+        version: 1.0.0
       date-holidays:
         specifier: ^3.34.1
         version: 3.34.1
@@ -145,8 +145,8 @@ importers:
   packages/ui:
     dependencies:
       '@timestamp-js/core':
-        specifier: 0.1.0-rc.5
-        version: 0.1.0-rc.5
+        specifier: 1.0.0
+        version: 1.0.0
     devDependencies:
       '@md-plugins/quasar-app-extension-q-press':
         specifier: 2.0.4
@@ -1350,24 +1350,24 @@ packages:
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
 
-  '@timestamp-js/calendar-hebrew@0.1.0-rc.5':
-    resolution: {integrity: sha512-GK/4Kw/an29u2x9bBy+Oxm7euTSAdC1h5D15F68Fjz5cj8n/PlDWAGPDJFLwia564kBPV1EufN2pvL2C50ERTg==}
+  '@timestamp-js/calendar-hebrew@1.0.0':
+    resolution: {integrity: sha512-ipIj0m93uKs0niUcZK8Sl5tljlMQnBRsRPNKGdWUQJZSyDk7oFmTh2fHL9qM8vqal5cwtxU9LmBSvNg3bjbFsA==}
     engines: {node: '>=22.13', pnpm: '>=11.5.0'}
 
-  '@timestamp-js/calendar-islamic@0.1.0-rc.5':
-    resolution: {integrity: sha512-bS72F8WSu/rfX7oZHqCnc//5oh+6gLz8PinL98+Qwo5e2+ZQwo9RvGbE53YGf3siCp5qgLSMUqkcnlbL0KnS+A==}
+  '@timestamp-js/calendar-islamic@1.0.0':
+    resolution: {integrity: sha512-3Ypo3rfiJcZNcofFjWHn/yfy33/85lUajbCO5rlZQQpjTNBtWQeK/TKvLYwxAY3/9Ktb+oDcdsHtqadS0fAYMw==}
     engines: {node: '>=22.13', pnpm: '>=11.5.0'}
 
-  '@timestamp-js/calendar-persian@0.1.0-rc.5':
-    resolution: {integrity: sha512-80US6oTyjQI8s/J+Q29iFHC2cLtTn3n02W7jPCdJmsRvjCQ1aF0YEZqnzLNYc8wVCaSmXEHiLaZ2lG3FWfxFlA==}
+  '@timestamp-js/calendar-persian@1.0.0':
+    resolution: {integrity: sha512-iUOdXzXhF00KP2E7A/6V2y7epn8svLmKLr7fnTx+FRlVFR4/ZJ871mnTGtG1aCYoAyDwMFDLAoQE/wb/UQ4ghQ==}
     engines: {node: '>=22.13', pnpm: '>=11.5.0'}
 
-  '@timestamp-js/calendar-saka@0.1.0-rc.5':
-    resolution: {integrity: sha512-xMxeHyLh+ZzlwTdFXmuTXlG3ac6ETc1+fx4XK+Kgt1nI3TiUiWlH96Vi0IU+kj31Upqmwl2jX71KkWN/SUC1Lw==}
+  '@timestamp-js/calendar-saka@1.0.0':
+    resolution: {integrity: sha512-TdcUYBmBeT4DoFKWtcZnON/lo6e5VyzYEA8Oya0X7xB+4V+KCq5YWMEuXrlgAXN5DFov/mh1FGM3Pp3hsTS+LQ==}
     engines: {node: '>=22.13', pnpm: '>=11.5.0'}
 
-  '@timestamp-js/core@0.1.0-rc.5':
-    resolution: {integrity: sha512-UA+xWllEmYdCAb9xkKKtgxe7Y89+YjvOBBkVkuNT3/YAzi+GoQJKfiUzQOjXjqwmYjjyPPK0GHHd0OCC/9JNeg==}
+  '@timestamp-js/core@1.0.0':
+    resolution: {integrity: sha512-Wed8du4NBL/j4fItmrn1TCXedFdUse//nTVlWiJzJzs3vXFbTCbxFaWQd0xQQkzGor+lrQTKw7xJSUwsr1/N5g==}
     engines: {node: '>=22.13', pnpm: '>=11.5.0'}
 
   '@types/chai@5.2.3':
@@ -4678,23 +4678,23 @@ snapshots:
 
   '@standard-schema/spec@1.1.0': {}
 
-  '@timestamp-js/calendar-hebrew@0.1.0-rc.5':
+  '@timestamp-js/calendar-hebrew@1.0.0':
     dependencies:
-      '@timestamp-js/core': 0.1.0-rc.5
+      '@timestamp-js/core': 1.0.0
 
-  '@timestamp-js/calendar-islamic@0.1.0-rc.5':
+  '@timestamp-js/calendar-islamic@1.0.0':
     dependencies:
-      '@timestamp-js/core': 0.1.0-rc.5
+      '@timestamp-js/core': 1.0.0
 
-  '@timestamp-js/calendar-persian@0.1.0-rc.5':
+  '@timestamp-js/calendar-persian@1.0.0':
     dependencies:
-      '@timestamp-js/core': 0.1.0-rc.5
+      '@timestamp-js/core': 1.0.0
 
-  '@timestamp-js/calendar-saka@0.1.0-rc.5':
+  '@timestamp-js/calendar-saka@1.0.0':
     dependencies:
-      '@timestamp-js/core': 0.1.0-rc.5
+      '@timestamp-js/core': 1.0.0
 
-  '@timestamp-js/core@0.1.0-rc.5': {}
+  '@timestamp-js/core@1.0.0': {}
 
   '@types/chai@5.2.3':
     dependencies:
