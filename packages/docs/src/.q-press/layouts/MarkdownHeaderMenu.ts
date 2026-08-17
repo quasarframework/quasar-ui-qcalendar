@@ -54,7 +54,7 @@ export default {
 
   setup(props: Props) {
     function getChildren(list: MenuElement[]) {
-      return h(QList, { dense: true, padding: true }, () =>
+      return h(QList, { dense: true, padding: true, role: 'menu' }, () =>
         list.map((entry) => {
           if (entry.header !== void 0) {
             return h(QItemLabel, { header: true }, () => entry.header)
