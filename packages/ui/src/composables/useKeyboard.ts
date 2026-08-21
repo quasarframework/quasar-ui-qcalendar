@@ -1,5 +1,5 @@
 /* global document window */
-import { nextTick, onBeforeUnmount, watch, Ref } from 'vue'
+import { getCurrentInstance, nextTick, onBeforeUnmount, watch, Ref } from 'vue'
 import useEvents from './useEvents'
 import {
   addToDate,
@@ -186,10 +186,12 @@ export default function useNavigation(
     onKeyUp,
   }
 
-  onBeforeUnmount(() => {
-    cancelFocusRetry()
-    endNavigation()
-  })
+  if (getCurrentInstance() !== null) {
+    onBeforeUnmount(() => {
+      cancelFocusRetry()
+      endNavigation()
+    })
+  }
 
   watch(
     () => props.useNavigation,

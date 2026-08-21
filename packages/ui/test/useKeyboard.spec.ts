@@ -172,6 +172,15 @@ function createKeyboardHarness({
 describe('[QCALENDAR] keyboard navigation', () => {
   afterEach(() => {
     vi.unstubAllGlobals()
+    vi.restoreAllMocks()
+  })
+
+  it('can be exercised directly without registering component lifecycle hooks', () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    const { stopNavigation } = createKeyboardHarness()
+
+    expect(warn).not.toHaveBeenCalled()
+    stopNavigation()
   })
 
   it('owns keyboard events only while focus is inside the calendar root', async () => {
