@@ -227,7 +227,7 @@
     "build:api": "tsx build/build.api.ts",
     "build:app-ext": "tsx build/script.app-ext.ts",
     "build:types": "rimraf dist/types && pnpm exec tsc --project tsconfig.json",
-    "typecheck": "pnpm build:api && tsc -p tsconfig.json --noEmit --pretty false && tsc -p tsconfig.build.json --noEmit --pretty false",
+    "typecheck": "pnpm build:api && tsc -p tsconfig.json --noEmit --pretty false && tsc -p tsconfig.build.json --noEmit --pretty false && tsc -p tsconfig.test.json --noEmit --pretty false",
     "test:types": "pnpm build && pnpm typecheck",
     "prepack": "pnpm build"
   },

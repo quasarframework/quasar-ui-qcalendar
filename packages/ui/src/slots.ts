@@ -4,7 +4,7 @@ import type { Task } from './composables/useTask'
 import type { CalendarDateIdentity, CalendarSystem, Timestamp } from '@timestamp-js/core'
 import type { Ref } from 'vue'
 
-type SlotProps<T> = { scope: T }
+type SlotProps<T> = (props: { scope: T }) => any
 
 export interface CalendarSlotScope {
   /** Timestamp represented in the configured calendar system. */

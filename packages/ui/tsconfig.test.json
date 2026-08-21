@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "lib": ["es2022", "dom"],
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "noEmit": true,
+    "target": "es2022",
+    "types": ["node", "vitest"]
+  },
+  "include": ["src/**/*", "test/slots.spec.ts"],
+  "exclude": ["node_modules", "dist", "build"]
+}

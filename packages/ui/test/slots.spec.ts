@@ -7,12 +7,14 @@ import type { Resource } from '../src/composables/useInterval'
 import type { Task } from '../src/composables/useTask'
 import type {
   QCalendarAgendaSlots,
+  QCalendarMonthSlots,
   QCalendarResourceSlots,
   QCalendarSchedulerSlots,
   QCalendarTaskSlots,
 } from '../src/slots'
 
-type SlotScope<Slot> = NonNullable<Slot> extends { scope: infer Scope } ? Scope : never
+type SlotScope<Slot> =
+  NonNullable<Slot> extends (props: { scope: infer Scope }) => any ? Scope : never
 
 describe('[QCALENDAR] slot payload contracts', () => {
   it('keeps agenda column and day slot scopes typed', () => {
@@ -24,7 +26,7 @@ describe('[QCALENDAR] slot payload contracts', () => {
     expectTypeOf<HeadColumnScope['days']>().toEqualTypeOf<Timestamp[]>()
 
     expectTypeOf<DayScope['timestamp']>().toEqualTypeOf<Timestamp>()
-    expectTypeOf<DayScope['columnIndex']>().toEqualTypeOf<number>()
+    expectTypeOf<DayScope['columnIndex']>().toEqualTypeOf<number | undefined>()
     expectTypeOf<DayScope['timeStartPos']>().toMatchTypeOf<(_time: string) => number | false>()
   })
 
@@ -37,6 +39,18 @@ describe('[QCALENDAR] slot payload contracts', () => {
     expectTypeOf<DayScope['resourceIndex']>().toEqualTypeOf<number>()
     expectTypeOf<DayScope['activeDate']>().toEqualTypeOf<boolean>()
     expectTypeOf<DayScope['droppable']>().toEqualTypeOf<boolean | string>()
+  })
+
+  it('keeps month day slots callable with a typed scope payload', () => {
+    type DaySlot = NonNullable<QCalendarMonthSlots['day']>
+    type IsCallable = DaySlot extends (...args: any[]) => any ? true : false
+    type DayScope = SlotScope<DaySlot>
+
+    expectTypeOf<IsCallable>().toEqualTypeOf<true>()
+    expectTypeOf<DaySlot>().toBeCallableWith({ scope: {} as DayScope })
+    expectTypeOf<DayScope['timestamp']>().toEqualTypeOf<Timestamp>()
+    expectTypeOf<DayScope['outside']>().toEqualTypeOf<boolean>()
+    expectTypeOf<DayScope['calendarIdentity']['nativeDate']>().toEqualTypeOf<string>()
   })
 
   it('keeps resource header and task day slot scopes typed', () => {
