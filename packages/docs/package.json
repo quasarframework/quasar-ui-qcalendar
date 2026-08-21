@@ -23,7 +23,7 @@
     "build:ssg:renderer": "quasar prepare && quasar build -m ssr"
   },
   "dependencies": {
-    "@quasar/extras": "2.0.3",
+    "@quasar/extras": "2.0.4",
     "@timestamp-js/calendar-hebrew": "1.0.0",
     "@timestamp-js/calendar-islamic": "1.0.0",
     "@timestamp-js/calendar-persian": "1.0.0",
@@ -31,7 +31,7 @@
     "@timestamp-js/core": "1.0.0",
     "date-holidays": "^3.35.0",
     "pinia": "^4.0.3",
-    "quasar": "^2.25.0",
+    "quasar": "^2.26.0",
     "vue": "^3.5.41",
     "vue-router": "^5.2.0"
   },
@@ -42,17 +42,17 @@
     "@md-plugins/vite-md-plugin": "2.1.0",
     "@md-plugins/vite-search-plugin": "2.1.0",
     "@md-plugins/vite-ssg-plugin": "2.1.0",
-    "@quasar/app-vite": "3.6.0",
+    "@quasar/app-vite": "3.8.0",
     "@quasar/quasar-ui-qcalendar": "workspace:*",
     "@types/node": "^26.2.0",
     "@vue/server-renderer": "^3.5.41",
     "autoprefixer": "^10.5.4",
     "markdown-it": "^15.0.0",
-    "mermaid": "^11.16.1",
+    "mermaid": "^11.17.0",
     "shiki": "^4.4.3",
     "typescript": "~6.0.3",
     "vite-plugin-checker": "^0.14.5",
-    "vue-tsc": "^3.3.10"
+    "vue-tsc": "^3.3.11"
   },
   "engines": {
     "node": ">=22.13",
