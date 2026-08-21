@@ -97,7 +97,6 @@ const calendar = ref<QCalendarResource>(),
     ],
     2: [
       // Board room
-
     ],
     2.1: [
       // Room-1
@@ -105,7 +104,6 @@ const calendar = ref<QCalendarResource>(),
     ],
     2.2: [
       // Room-2
-
     ],
     '2.2.1': [
       // Partition-A
@@ -113,11 +111,9 @@ const calendar = ref<QCalendarResource>(),
     ],
     '2.2.2': [
       // Partition-B
-
     ],
     '2.2.3': [
       // Partition-C
-
     ],
     3: [
       // Mary

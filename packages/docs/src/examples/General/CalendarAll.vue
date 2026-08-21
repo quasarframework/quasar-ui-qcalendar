@@ -100,7 +100,7 @@
           </template>
 
           <template v-if="selectedCalendar === 'task'" #day="{ scope: { timestamp, task } }">
-            <template v-for="time in getLogged(timestamp.date, task.logged)" :key="time">
+            <template v-for="time in getLogged(timestamp.date, task.logged)" :key="time.logged">
               <div class="logged-time">{{ time.logged }}</div>
             </template>
           </template>

@@ -83,7 +83,7 @@
           <template #day="{ scope }">
             <template
               v-for="time in getLogged(scope.timestamp.date, scope.task.logged)"
-              :key="time"
+              :key="time.logged"
             >
               <div class="logged-time">{{ time.logged }}</div>
             </template>
