@@ -17,6 +17,8 @@
     "ci:publish": "pnpm --filter @quasar/quasar-ui-qcalendar publish --access public --publish-branch dev && pnpm --filter @quasar/quasar-app-extension-qcalendar publish --access public --publish-branch dev",
     "ci:publish:latest": "pnpm --filter @quasar/quasar-ui-qcalendar publish --access public --publish-branch dev --tag latest && pnpm --filter @quasar/quasar-app-extension-qcalendar publish --access public --publish-branch dev --tag latest",
     "test": "vitest run",
+    "pretest:browser": "playwright install chromium",
+    "test:browser": "vitest run --config packages/ui/test/browser/vitest.config.ts",
     "typecheck": "pnpm --filter @quasar/quasar-ui-qcalendar typecheck && pnpm --filter docs typecheck",
     "deep": "ncu --configFilePath . --packageFile '{package.json,packages/*/package.json}'",
     "lint": "oxlint",
@@ -29,13 +31,19 @@
     "verify:build": "pnpm build && pnpm api:check && pnpm check:qpress && pnpm typecheck"
   },
   "devDependencies": {
+    "@quasar/vite-plugin": "^2.0.1",
     "@types/node": "^26.2.0",
+    "@vitejs/plugin-vue": "^6.0.8",
+    "@vitest/browser-playwright": "^4.1.11",
     "@vitest/coverage-istanbul": "^4.1.11",
     "@vue/server-renderer": "^3.5.41",
+    "@vue/test-utils": "^2.4.11",
     "npm-check-updates": "^23.0.2",
     "oxfmt": "^0.64.0",
     "oxlint": "^1.79.0",
+    "playwright": "^1.62.1",
     "typescript": "~6.0.3",
+    "vite": "^8.2.1",
     "vitest": "^4.1.11"
   },
   "engines": {
