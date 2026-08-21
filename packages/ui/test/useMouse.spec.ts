@@ -1,8 +1,11 @@
 import { computed } from 'vue'
 import type { EmitFn } from 'vue'
 import { afterEach, describe, expect, it, vi } from 'vitest'
+import { parseCalendarTimestamp, type Timestamp } from '@timestamp-js/core'
 
 import { getMouseEventHandlers } from '../src/composables/useMouse'
+import { getCalendarScopeData } from '../src/utils/calendarSystem'
+import { calendarAdapterCases } from './fixtures/calendarAdapters'
 
 describe('[QCALENDAR] mouse event handlers', () => {
   afterEach(() => {
@@ -90,4 +93,39 @@ describe('[QCALENDAR] mouse event handlers', () => {
       event: nativeEvent,
     })
   })
+
+  it.each(calendarAdapterCases)(
+    'preserves $name identity in mouse-event scopes',
+    ({ calendar, nativeDate, gregorianDate, epochDay }) => {
+      const emit = vi.fn() as unknown as EmitFn
+      const listeners = computed(() => ({ onClickDay: true }))
+      const nativeEvent = { type: 'click' } as MouseEvent
+      const timestamp = parseCalendarTimestamp(nativeDate, calendar) as Timestamp
+      const scope = {
+        timestamp,
+        ...getCalendarScopeData(timestamp, calendar),
+      }
+      const handlers = getMouseEventHandlers(
+        emit,
+        listeners,
+        { 'click-day': { event: 'click' } },
+        (event) => ({ scope, event }),
+      )
+
+      ;(handlers.onClick as Function)(nativeEvent)
+
+      expect(emit).toHaveBeenCalledWith('click-day', {
+        scope: expect.objectContaining({
+          calendarIdentity: expect.objectContaining({
+            calendarId: calendar.id,
+            nativeDate,
+            gregorianDate,
+            epochDay,
+          }),
+          calendarSystem: calendar,
+        }),
+        event: nativeEvent,
+      })
+    },
+  )
 })

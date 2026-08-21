@@ -2,6 +2,7 @@ import { ref } from 'vue'
 import { describe, expect, it } from 'vitest'
 import {
   getEpochDay,
+  parseCalendarTimestamp,
   parsed,
   type CalendarDateParts,
   type CalendarSystem,
@@ -9,6 +10,7 @@ import {
 } from '@timestamp-js/core'
 
 import useCalendarDays, { type CalendarDaysProps } from '../src/composables/useCalendarDays'
+import { calendarAdapterCases } from './fixtures/calendarAdapters'
 
 const nativeBoundaryCalendar: CalendarSystem = {
   id: 'native-boundary-test',
@@ -183,4 +185,51 @@ describe('[QCALENDAR] useCalendarDays', () => {
     expect(getScopeForSlot(parsed('2024-04-09') as Timestamp).disabled).toBe(false)
     expect(getScopeForSlot(parsed('2024-04-11') as Timestamp).disabled).toBe(true)
   })
+
+  it.each(calendarAdapterCases)(
+    'preserves $name native dates, disabled bounds, and interop identity',
+    ({ calendar, nativeDate, previousDate, nextDate, gregorianDate, epochDay, weekdays }) => {
+      const previous = parseCalendarTimestamp(previousDate, calendar) as Timestamp
+      const current = parseCalendarTimestamp(nativeDate, calendar) as Timestamp
+      const next = parseCalendarTimestamp(nextDate, calendar) as Timestamp
+      const props = {
+        ...createCalendarDaysProps({
+          calendarSystem: calendar,
+          weekdays: [...weekdays],
+          disabledBefore: previousDate,
+          disabledAfter: nextDate,
+        }),
+        enableOutsideDays: true,
+      }
+      const { days, getScopeForSlot } = useCalendarDays(props, {
+        times: { today: current },
+        parsedStart: ref(previous),
+        parsedEnd: ref(next),
+        activeDate: ref(current),
+        maxDays: ref(3),
+        size: { width: 300 },
+        headerColumnRef: ref(null),
+      })
+
+      expect(days.value.map((day) => day.date)).toEqual([previousDate, nativeDate, nextDate])
+
+      const previousScope = getScopeForSlot(previous)
+      const currentScope = getScopeForSlot(current)
+      const nextScope = getScopeForSlot(next)
+
+      expect(previousScope.disabled).toBe(true)
+      expect(currentScope.disabled).toBe(false)
+      expect(nextScope.disabled).toBe(true)
+      expect(currentScope.calendarTimestamp.date).toBe(nativeDate)
+      expect(currentScope.calendarIdentity).toEqual(
+        expect.objectContaining({
+          calendarId: calendar.id,
+          nativeDate,
+          gregorianDate,
+          epochDay,
+        }),
+      )
+      expect(currentScope.calendarSystem).toBe(calendar)
+    },
+  )
 })

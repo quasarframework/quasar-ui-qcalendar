@@ -10,6 +10,7 @@ import {
 } from '@timestamp-js/core'
 
 import useMove from '../src/composables/useMove'
+import { calendarAdapterCases } from './fixtures/calendarAdapters'
 
 const fixedThirtyDayCalendar: CalendarSystem = Object.freeze({
   id: 'fixed-thirty',
@@ -123,4 +124,37 @@ describe('[QCALENDAR] useMove', () => {
       }),
     )
   })
+
+  it.each(calendarAdapterCases)(
+    'moves $name month views to the next native month',
+    ({ calendar, nativeDate, nextMonthStart }) => {
+      const emit = vi.fn()
+      const emittedValue = ref(nativeDate)
+      const parsedValue = parseCalendarTimestamp(nativeDate, calendar) as Timestamp
+
+      const { move } = useMove(
+        { calendarSystem: calendar, weekdays: [...(calendar.defaultWeekdays ?? [])] },
+        {
+          parsedView: ref('month'),
+          parsedValue: ref(parsedValue),
+          direction: ref('next'),
+          maxDays: ref(1),
+          times: { now: parsed('2024-01-01') as Timestamp },
+          emittedValue,
+          emit,
+        },
+      )
+
+      move(1)
+
+      expect(emittedValue.value).toBe(nextMonthStart)
+      expect(emit).toHaveBeenCalledWith(
+        'moved',
+        expect.objectContaining({
+          calendarId: calendar.id,
+          date: nextMonthStart,
+        }),
+      )
+    },
+  )
 })
