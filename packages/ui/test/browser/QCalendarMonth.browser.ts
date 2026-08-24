@@ -38,3 +38,34 @@ describe('[QCALENDAR] rendered month keyboard navigation', () => {
     wrapper.unmount()
   })
 })
+
+describe('[QCALENDAR] rendered month sizing', () => {
+  it('stretches minimum-height weeks to the bottom of a fixed-height calendar', async () => {
+    const wrapper = mount(QCalendarMonth, {
+      attachTo: document.body,
+      attrs: {
+        style: 'width: 800px; height: 500px',
+      },
+      props: {
+        modelValue: '2026-06-02',
+        bordered: true,
+        dayHeight: 0,
+        dayMinHeight: 84,
+      },
+    })
+
+    await expect
+      .poll(() => wrapper.findAll('.q-calendar-month__week--wrapper').length)
+      .toBeGreaterThan(0)
+
+    const body = wrapper.get('.q-calendar-month__body').element
+    const weeks = wrapper.findAll('.q-calendar-month__week--wrapper')
+    const lastWeek = weeks.at(-1)!.element
+
+    expect(
+      Math.abs(body.getBoundingClientRect().bottom - lastWeek.getBoundingClientRect().bottom),
+    ).toBeLessThanOrEqual(1)
+
+    wrapper.unmount()
+  })
+})

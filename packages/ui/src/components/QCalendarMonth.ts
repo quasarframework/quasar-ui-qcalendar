@@ -727,7 +727,7 @@ export default defineComponent({
       if (dayMinHeight > 0 && isMiniMode.value !== true) {
         style.minHeight = convertToUnit(dayMinHeight)
       }
-      const useAutoHeight = dayHeight === 0 && dayMinHeight === 0
+      const useAutoHeight = dayHeight === 0
 
       return h(
         'div',
