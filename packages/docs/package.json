@@ -48,7 +48,7 @@
     "@vue/server-renderer": "^3.5.41",
     "autoprefixer": "^10.5.4",
     "markdown-it": "^15.0.0",
-    "mermaid": "^11.17.0",
+    "mermaid": "^11.17.1",
     "shiki": "^4.4.3",
     "typescript": "~6.0.3",
     "vite-plugin-checker": "^0.14.5",

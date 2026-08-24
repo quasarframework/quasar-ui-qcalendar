@@ -245,7 +245,7 @@
     "@types/rtlcss": "^3.5.4",
     "@types/uglify-js": "^3.17.5",
     "autoprefixer": "^10.5.4",
-    "cssnano": "^8.0.7",
+    "cssnano": "^8.0.8",
     "defu": "^6.1.7",
     "dotenv": "^17.4.2",
     "fs-extra": "^11.4.0",

@@ -38,18 +38,18 @@
     "@vitest/coverage-istanbul": "^4.1.11",
     "@vue/server-renderer": "^3.5.41",
     "@vue/test-utils": "^2.4.11",
-    "npm-check-updates": "^23.0.2",
+    "npm-check-updates": "^23.1.0",
     "oxfmt": "^0.64.0",
     "oxlint": "^1.79.0",
     "playwright": "^1.62.1",
     "typescript": "~6.0.3",
-    "vite": "^8.2.1",
+    "vite": "^8.2.2",
     "vitest": "^4.1.11"
   },
   "engines": {
     "node": ">=22.13",
     "pnpm": ">=11.5.0"
   },
-  "packageManager": "pnpm@11.22.0",
+  "packageManager": "pnpm@11.23.0",
   "access": "private"
 }
