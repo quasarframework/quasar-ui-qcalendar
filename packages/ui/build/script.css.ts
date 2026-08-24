@@ -43,15 +43,13 @@ const styles = [
   'QCalendarVariables',
 ]
 
-;(async () => {
-  try {
-    await Promise.all(styles.map((style) => generate(`src/${style}.scss`, `dist/${style}`)))
-    console.log('CSS generation completed successfully.')
-  } catch (e) {
-    console.error('Error during CSS generation:', e)
-    process.exit(1)
-  }
-})()
+try {
+  await Promise.all(styles.map((style) => generate(`src/${style}.scss`, `dist/${style}`)))
+  console.log('CSS generation completed successfully.')
+} catch (e) {
+  console.error('Error during CSS generation:', e)
+  process.exit(1)
+}
 
 /**
  * Resolve file paths relative to the project root.

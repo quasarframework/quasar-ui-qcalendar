@@ -84,7 +84,7 @@ const builds = buildEntries.flatMap((entry) =>
   })),
 )
 
-build(builds as any)
+await build(builds as any)
 
 function resolveTypeScriptSources(): Plugin {
   return {
