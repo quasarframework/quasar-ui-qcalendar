@@ -48,6 +48,14 @@ for keyboard or pointer actions.
 
 <MarkdownExample title="Focusable Hoverable" file="ResourceFocusableHoverable"/>
 
+## Navigation
+
+Set `focusable` and `use-navigation` to navigate interval labels and resource
+time cells with the keyboard. Focus remains in the same resource row when
+moving between time intervals.
+
+<MarkdownExample title="Navigation" file="ResourceNavigation"/>
+
 ## Hour 24 Format
 
 Use `hour24-format` when interval labels should display in 24-hour time. This is

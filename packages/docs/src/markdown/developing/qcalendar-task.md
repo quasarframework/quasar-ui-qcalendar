@@ -77,6 +77,14 @@ If the property `focus-type` contains `weekday`, you can also use the <kbd>Enter
 
 <MarkdownExample title="Focusable Hoverable" file="TaskFocusableHoverable" no-edit/>
 
+## Navigation
+
+Set `focusable` and `use-navigation` to let keyboard users move through the
+calendar while it owns focus. Programmatic focus changes do not move the parent
+page scroll position.
+
+<MarkdownExample title="Navigation" file="TaskNavigation" no-edit/>
+
 ## Locale
 
 Locale controls generated date and weekday labels. Use it when task timelines

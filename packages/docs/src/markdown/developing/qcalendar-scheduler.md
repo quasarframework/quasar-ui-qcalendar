@@ -113,6 +113,14 @@ If the property `focus-type` contains `weekday`, you can also use the <kbd>Enter
 
 <MarkdownExample title="Focusable Hoverable" file="SchedulerFocusableHoverable"/>
 
+## Navigation
+
+Set `focusable` and `use-navigation` to let keyboard users move through the
+scheduler while it owns focus. Programmatic focus changes do not move the
+parent page scroll position.
+
+<MarkdownExample title="Navigation" file="SchedulerNavigation"/>
+
 ## Locale
 
 Locale controls generated date and weekday labels. Use it when scheduler headers
