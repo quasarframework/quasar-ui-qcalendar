@@ -1,6 +1,6 @@
 {
   "name": "@quasar/quasar-app-extension-qcalendar",
-  "version": "5.2.2",
+  "version": "5.3.0",
   "description": "A Quasar App Extension for @quasar/quasar-ui-qcalendar",
   "keywords": [
     "app",
@@ -58,6 +58,6 @@
   },
   "engines": {
     "node": ">=22.13",
-    "pnpm": ">=11.3.0"
+    "pnpm": ">=11.5.0"
   }
 }

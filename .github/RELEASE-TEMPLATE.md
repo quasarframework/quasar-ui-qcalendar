@@ -35,8 +35,8 @@ Short user-facing summary of what changed for QCalendar component/app-extension 
 ## Compatibility
 
 - Node.js: `>=22.13`
-- Quasar: `^2.23.1`
-- Quasar App Vite target: `@quasar/app-vite@3.2.0`
+- Quasar: `^2.26.0`
+- Quasar App Vite target: `@quasar/app-vite@3.8.0`
 - Timestamp package: `@timestamp-js/core@1.0.0`
 - npm dist-tag: `latest`
 
