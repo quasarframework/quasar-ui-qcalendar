@@ -6,6 +6,10 @@ keys: All about QCalendar
 
 First off, it's important to know that QCalendar has many modular components that make up it's entirety. Installing as QCalendar **will install all these components**. However, you may want to install them individually.
 
+Named component imports from the package root are tree-shakable in modern bundlers. For example, `import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar'` excludes calendar views that are not used. Component subpaths such as `@quasar/quasar-ui-qcalendar/QCalendarMonth` remain the most explicit choice and provide the same focused result.
+
+The default package plugin and the `QCalendar` wrapper intentionally include every calendar view. The plugin registers the full component set, while the wrapper selects its concrete view at runtime. Use a named component import or component subpath when bundle size matters and the application does not need that full runtime surface.
+
 The components are:
 
 1. QCalendar (wrapper)

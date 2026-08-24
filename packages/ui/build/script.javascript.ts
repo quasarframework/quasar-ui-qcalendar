@@ -59,32 +59,59 @@ const umdGlobalNames: Record<string, string> = {
   index: 'QCalendarPlugin',
 }
 
-const builds = buildEntries.flatMap((entry) =>
-  ['esm', 'umd'].map((format) => ({
-    rolldown: {
-      input: {
-        input: pathResolve(`entry/${entry}.${format}.js`),
-        plugins: rolldownPlugins,
-        external: ['vue'],
-      },
-      output: {
-        file: pathResolve(`../dist/${entry}.${format}.js`),
-        format,
-        name: format === 'umd' ? (umdGlobalNames[entry] ?? entry) : undefined,
-        exports: 'auto' as const,
-        banner: buildConf.banner,
-        globals: { vue: 'Vue' },
-      },
+const builds = buildEntries.map((entry) => ({
+  rolldown: {
+    input: {
+      input: pathResolve(`entry/${entry}.umd.js`),
+      plugins: rolldownPlugins,
+      external: ['vue'],
     },
-    build: {
-      unminified: true,
-      minified: true,
-      minExt: true,
+    output: {
+      file: pathResolve(`../dist/${entry}.umd.js`),
+      format: 'umd',
+      name: umdGlobalNames[entry] ?? entry,
+      exports: 'auto' as const,
+      banner: buildConf.banner,
+      globals: { vue: 'Vue' },
     },
-  })),
-)
+  },
+  build: {
+    unminified: true,
+    minified: true,
+    minExt: true,
+  },
+}))
 
+await buildEsmEntries()
 await build(builds as any)
+
+async function buildEsmEntries(): Promise<void> {
+  const input = Object.fromEntries(
+    buildEntries.map((entry) => [entry, pathResolve(`entry/${entry}.esm.js`)]),
+  )
+
+  for (const minified of [false, true]) {
+    const bundle = await rolldown({
+      input,
+      plugins: rolldownPlugins,
+      external: ['vue', '@timestamp-js/core'],
+    })
+
+    await bundle.write({
+      dir: pathResolve('../dist'),
+      format: 'esm',
+      entryFileNames: (chunk) =>
+        chunk.facadeModuleId?.includes('/build/entry/') === true
+          ? `[name].esm${minified ? '.min' : ''}.js`
+          : `esm/[name]${minified ? '.min' : ''}.js`,
+      banner: buildConf.banner,
+      minify: minified,
+      preserveModules: true,
+      preserveModulesRoot: pathResolve('..'),
+    })
+    await bundle.close()
+  }
+}
 
 function resolveTypeScriptSources(): Plugin {
   return {

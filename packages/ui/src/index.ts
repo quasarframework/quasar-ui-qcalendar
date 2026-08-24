@@ -1,4 +1,4 @@
-import { App as Application, type DefineComponent, type SlotsType } from 'vue'
+import { type DefineComponent, type SlotsType } from 'vue'
 import './global.js'
 import QCalendarComponent from './components/QCalendar.js'
 import QCalendarAgendaComponent from './components/QCalendarAgenda.js'
@@ -18,11 +18,10 @@ import type {
 
 import { version } from './version.js'
 
-import * as helpers from './utils/helpers.js'
-
 // Explicitly export individual named properties
 export * from './utils/helpers.js'
 export type { CalendarScrollEvent } from './composables/useScrollEvents.js'
+export { default } from './plugin.js'
 
 type CalendarNavigationInstance = {
   prev: (_amount?: number) => void
@@ -123,27 +122,4 @@ export {
   QCalendarResource,
   QCalendarScheduler,
   QCalendarTask,
-}
-
-export default {
-  version,
-  QCalendar,
-  QCalendarAgenda,
-  QCalendarDay,
-  QCalendarMonth,
-  QCalendarResource,
-  QCalendarScheduler,
-  QCalendarTask,
-  ...helpers,
-
-  // Vue plugin
-  install(app: Application): void {
-    app.component(String(QCalendarComponent.name), QCalendarComponent)
-    app.component(String(QCalendarAgendaComponent.name), QCalendarAgendaComponent)
-    app.component(String(QCalendarDayComponent.name), QCalendarDayComponent)
-    app.component(String(QCalendarMonthComponent.name), QCalendarMonthComponent)
-    app.component(String(QCalendarResourceComponent.name), QCalendarResourceComponent)
-    app.component(String(QCalendarSchedulerComponent.name), QCalendarSchedulerComponent)
-    app.component(String(QCalendarTaskComponent.name), QCalendarTaskComponent)
-  },
 }

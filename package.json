@@ -28,7 +28,7 @@
     "check:all": "pnpm verify",
     "verify": "pnpm verify:fast && pnpm verify:build",
     "verify:fast": "pnpm format:check && pnpm lint && pnpm test",
-    "verify:build": "pnpm build && pnpm api:check && pnpm check:qpress && pnpm typecheck"
+    "verify:build": "pnpm build && pnpm --dir packages/ui test:tree-shaking && pnpm api:check && pnpm check:qpress && pnpm typecheck"
   },
   "devDependencies": {
     "@quasar/vite-plugin": "^2.0.1",

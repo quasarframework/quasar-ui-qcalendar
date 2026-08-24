@@ -41,6 +41,10 @@
     "src"
   ],
   "type": "module",
+  "sideEffects": [
+    "**/*.css",
+    "**/*.scss"
+  ],
   "main": "dist/index.esm.js",
   "module": "dist/index.esm.js",
   "types": "dist/types/index.d.ts",
@@ -227,6 +231,7 @@
     "build:api": "tsx build/build.api.ts",
     "build:app-ext": "tsx build/script.app-ext.ts",
     "build:types": "rimraf dist/types && pnpm exec tsc --project tsconfig.json",
+    "test:tree-shaking": "tsx test/tree-shaking.ts",
     "typecheck": "pnpm build:api && tsc -p tsconfig.json --noEmit --pretty false && tsc -p tsconfig.build.json --noEmit --pretty false && tsc -p tsconfig.test.json --noEmit --pretty false && tsc -p tsconfig.browser-test.json --noEmit --pretty false",
     "test:types": "pnpm build && pnpm typecheck",
     "prepack": "pnpm build"
