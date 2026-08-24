@@ -28,7 +28,7 @@ describe('[QCALENDAR] rendered month keyboard navigation', () => {
 
     expect(nextDay).toBeDefined()
 
-    activeDay.element.focus()
+    ;(activeDay.element as HTMLElement).focus()
     await activeDay.trigger('keydown', { key: 'ArrowRight', keyCode: 39 })
     await activeDay.trigger('keyup', { key: 'ArrowRight', keyCode: 39 })
     await nextTick()
@@ -62,7 +62,7 @@ describe('[QCALENDAR] rendered month keyboard navigation', () => {
 
     const renderedDays = wrapper.findAll('.q-calendar-month__day')
     const lastDay = renderedDays.at(-1)!
-    lastDay.element.focus()
+    ;(lastDay.element as HTMLElement).focus()
     expect(document.activeElement).toBe(lastDay.element)
     await lastDay.trigger('keydown', { key: 'ArrowRight', keyCode: 39 })
     await lastDay.trigger('keyup', { key: 'ArrowRight', keyCode: 39 })
@@ -116,12 +116,12 @@ describe('[QCALENDAR] rendered month keyboard navigation', () => {
     const firstActive = first.get('.q-calendar-month__day.q-active-date')
     const secondActive = second.get('.q-calendar-month__day.q-active-date')
 
-    firstActive.element.focus()
+    ;(firstActive.element as HTMLElement).focus()
     await firstActive.trigger('keyup', { key: 'ArrowRight', keyCode: 39 })
     await nextTick()
     expect(document.activeElement?.getAttribute('aria-label')).toContain('August 11')
 
-    secondActive.element.focus()
+    ;(secondActive.element as HTMLElement).focus()
     await secondActive.trigger('keyup', { key: 'ArrowRight', keyCode: 39 })
     await nextTick()
     expect(document.activeElement?.getAttribute('aria-label')).toContain('September 11')

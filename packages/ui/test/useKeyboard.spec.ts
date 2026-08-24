@@ -1,6 +1,6 @@
 import { nextTick, reactive, ref, shallowRef, type Ref } from 'vue'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { parsed, type Timestamp } from '@timestamp-js/core'
+import { gregorianCalendar, parsed, type Timestamp } from '@timestamp-js/core'
 
 import useKeyboard from '../src/composables/useKeyboard'
 
@@ -15,7 +15,10 @@ class TestNode {
   constructor(private onFocus?: (_node: TestNode) => void) {}
 
   contains(target: EventTarget | null): boolean {
-    return target === this || (target instanceof TestNode && this.children.has(target))
+    return (
+      target === (this as unknown as EventTarget) ||
+      (target instanceof TestNode && this.children.has(target))
+    )
   }
 
   add(child: TestNode): TestNode {
@@ -119,6 +122,7 @@ function createKeyboardHarness({
   const navigation = useKeyboard(
     reactive({
       useNavigation,
+      calendarSystem: gregorianCalendar,
       weekdays: [0, 1, 2, 3, 4, 5, 6],
       intervalMinutes: 60,
     }),

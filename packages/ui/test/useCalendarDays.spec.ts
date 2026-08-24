@@ -2,6 +2,7 @@ import { ref } from 'vue'
 import { describe, expect, it } from 'vitest'
 import {
   getEpochDay,
+  gregorianCalendar,
   parseCalendarTimestamp,
   parsed,
   type CalendarDateParts,
@@ -59,7 +60,9 @@ const nativeBoundaryCalendar: CalendarSystem = {
 function createCalendarDaysProps(overrides: Partial<CalendarDaysProps> = {}): CalendarDaysProps {
   return {
     modelValue: '2026-06-01',
+    calendarSystem: gregorianCalendar,
     weekdays: [0, 1, 2, 3, 4, 5, 6],
+    dir: 'auto',
     dateType: 'round',
     weekdayAlign: 'center',
     dateAlign: 'center',

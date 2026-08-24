@@ -3,7 +3,7 @@ import { resolve } from 'node:path'
 import { quasar, transformAssetUrls } from '@quasar/vite-plugin'
 import vue from '@vitejs/plugin-vue'
 import { playwright } from '@vitest/browser-playwright'
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 
 const root = resolve(import.meta.dirname, '../..')
 

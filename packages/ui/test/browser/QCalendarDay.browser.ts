@@ -3,6 +3,7 @@ import { h, nextTick } from 'vue'
 import { describe, expect, it, vi } from 'vitest'
 
 import QCalendarDay from '../../src/components/QCalendarDay'
+import type { IntervalSlotScope } from '../../src/slots'
 
 describe('[QCALENDAR] rendered interval interactions', () => {
   it('moves focus by one configured interval with ArrowDown', async () => {
@@ -23,7 +24,7 @@ describe('[QCALENDAR] rendered interval interactions', () => {
     await expect.poll(() => wrapper.findAll(intervalSelector).length).toBe(4)
 
     const intervals = wrapper.findAll(intervalSelector)
-    intervals[0]!.element.focus()
+    ;(intervals[0]!.element as HTMLElement).focus()
     await intervals[0]!.trigger('keyup', { key: 'ArrowDown', keyCode: 40 })
     await nextTick()
 
@@ -43,7 +44,7 @@ describe('[QCALENDAR] rendered interval interactions', () => {
         intervalCount: 2,
       },
       slots: {
-        'day-body': ({ scope }: { scope: { columnIndex: number } }) =>
+        'day-body': ({ scope }: { scope: IntervalSlotScope }) =>
           h('span', { 'data-column-index': scope.columnIndex }),
       },
     })
@@ -61,9 +62,15 @@ describe('[QCALENDAR] rendered interval interactions', () => {
 
 describe('[QCALENDAR] rendered drag and drop', () => {
   it('updates day drop feedback and forwards the rendered scope', async () => {
-    const dragEnterFunc = vi.fn(() => true)
-    const dragLeaveFunc = vi.fn(() => false)
-    const dropFunc = vi.fn(() => false)
+    const dragEnterFunc = vi.fn(
+      (_event: Event, _type: string, _scope: { scope: IntervalSlotScope }) => true,
+    )
+    const dragLeaveFunc = vi.fn(
+      (_event: Event, _type: string, _scope: { scope: IntervalSlotScope }) => false,
+    )
+    const dropFunc = vi.fn(
+      (_event: Event, _type: string, _scope: { scope: IntervalSlotScope }) => false,
+    )
     const wrapper = mount(QCalendarDay, {
       attachTo: document.body,
       attrs: { style: 'width: 800px; height: 500px' },
