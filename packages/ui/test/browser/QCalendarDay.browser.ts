@@ -33,6 +33,44 @@ describe('[QCALENDAR] rendered interval interactions', () => {
     wrapper.unmount()
   })
 
+  it('moves focus without changing the parent page scroll position', async () => {
+    const originalMinHeight = document.body.style.minHeight
+    document.body.style.minHeight = '2400px'
+
+    const wrapper = mount(QCalendarDay, {
+      attachTo: document.body,
+      attrs: { style: 'width: 800px; height: 500px' },
+      props: {
+        modelValue: '2026-08-21',
+        focusable: true,
+        focusType: ['interval'],
+        intervalCount: 4,
+        intervalMinutes: 30,
+        useNavigation: true,
+      },
+    })
+
+    try {
+      const selector = '.q-calendar-day__day-interval, .q-calendar-day__day-interval--section'
+      await expect.poll(() => wrapper.findAll(selector).length).toBe(4)
+
+      const intervals = wrapper.findAll(selector)
+      ;(intervals[0]!.element as HTMLElement).focus({ preventScroll: true })
+      window.scrollTo(0, 1200)
+      await expect.poll(() => window.scrollY).toBe(1200)
+
+      await intervals[0]!.trigger('keyup', { key: 'ArrowDown', keyCode: 40 })
+      await nextTick()
+
+      expect(document.activeElement).toBe(intervals[1]!.element)
+      expect(window.scrollY).toBe(1200)
+    } finally {
+      wrapper.unmount()
+      document.body.style.minHeight = originalMinHeight
+      window.scrollTo(0, 0)
+    }
+  })
+
   it('renders each configured column with its public scope index', async () => {
     const wrapper = mount(QCalendarDay, {
       attachTo: document.body,

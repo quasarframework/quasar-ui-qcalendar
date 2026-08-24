@@ -327,6 +327,8 @@ export default defineComponent({
       emittedValue,
       direction,
       times,
+      scrollFocusedElementIntoView,
+      limitNavigationToRenderedIntervals: true,
     })
 
     const { getResourceHeightStyle } = useResourceDimensions(props)
@@ -334,6 +336,27 @@ export default defineComponent({
     const parsedIntervalHeaderHeight = computed(() => {
       return parseInt(String(props.intervalHeaderHeight), 10)
     })
+
+    function scrollFocusedElementIntoView(element: HTMLElement): void {
+      const area = scrollArea.value as HTMLElement | null
+      if (!area) return
+
+      const areaRect = area.getBoundingClientRect()
+      const stickyResource = rootRef.value?.querySelector<HTMLElement>(
+        '.q-calendar-resource__head--resources',
+      )
+      const visibleLeft = Math.max(
+        areaRect.left,
+        stickyResource?.getBoundingClientRect().right ?? 0,
+      )
+      const elementRect = element.getBoundingClientRect()
+
+      if (elementRect.left < visibleLeft) {
+        area.scrollLeft += elementRect.left - visibleLeft
+      } else if (elementRect.right > areaRect.right) {
+        area.scrollLeft += elementRect.right - areaRect.right
+      }
+    }
 
     watch([days], checkChange, { deep: true, immediate: true })
 
@@ -350,7 +373,9 @@ export default defineComponent({
           }
           emittedValue.value = val
         }
-        focusRef.value = val
+        if (keyboardActive.value !== true) {
+          focusRef.value = val
+        }
       },
     )
 
@@ -569,6 +594,7 @@ export default defineComponent({
 
       const short = props.shortIntervalLabel
       const label = intervalFormatter.value(interval, short)
+      const focusKey = `${interval.date} ${interval.time}`
 
       const scope = getScopeForSlotX(interval, index) as IntervalLabelSlotScope
       scope.label = label
@@ -592,6 +618,11 @@ export default defineComponent({
         'div',
         {
           key: label,
+          ref: (el) => {
+            if (el instanceof HTMLElement) {
+              datesRef.value[focusKey] = el
+            }
+          },
           tabindex: isFocusable === true ? 0 : -1,
           class: {
             'q-calendar-resource__head--interval': true,
@@ -613,7 +644,7 @@ export default defineComponent({
           }),
           onFocus: () => {
             if (isFocusable === true) {
-              focusRef.value = label
+              focusRef.value = focusKey
             }
           },
           ...getDefaultMouseEventHandlers('-interval', (event) => {
@@ -896,6 +927,7 @@ export default defineComponent({
       const activeDate = props.noActiveDate !== true && __isActiveDate(interval)
       const resourceKey = resource[props.resourceKey]
       const dragValue = interval.time + '-' + resourceKey
+      const focusKey = `${interval.date} ${dragValue}`
       const isFocusable = isFocusableType(props, 'time')
 
       const scope = getScopeForSlotX(
@@ -924,7 +956,7 @@ export default defineComponent({
           key: dragValue,
           ref: (el) => {
             if (el instanceof HTMLElement) {
-              datesRef.value[resource[props.resourceKey]] = el
+              datesRef.value[focusKey] = el
             }
           },
           tabindex: isFocusable === true ? 0 : -1,
@@ -947,7 +979,7 @@ export default defineComponent({
           }),
           onFocus: () => {
             if (isFocusable === true) {
-              focusRef.value = dragValue
+              focusRef.value = focusKey
             }
           },
           ...getDefaultMouseEventHandlers('-time', (event) => {

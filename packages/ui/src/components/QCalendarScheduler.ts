@@ -386,7 +386,9 @@ export default defineComponent({
           }
           emittedValue.value = val
         }
-        focusRef.value = val
+        if (keyboardActive.value !== true) {
+          focusRef.value = val
+        }
       },
     )
 

@@ -8,7 +8,7 @@ type ListenerMap = Partial<Record<'focusin' | 'keydown' | 'keyup', EventListener
 
 class TestNode {
   children = new Set<TestNode>()
-  focus = vi.fn(() => {
+  focus = vi.fn((_options?: FocusOptions) => {
     this.onFocus?.(this)
   })
 
@@ -19,6 +19,10 @@ class TestNode {
       target === (this as unknown as EventTarget) ||
       (target instanceof TestNode && this.children.has(target))
     )
+  }
+
+  closest<E extends Element = Element>(_selectors: string): E | null {
+    return null
   }
 
   add(child: TestNode): TestNode {
@@ -188,7 +192,7 @@ describe('[QCALENDAR] keyboard navigation', () => {
   })
 
   it('owns keyboard events only while focus is inside the calendar root', async () => {
-    const { listeners, focusRef, keyboardActive, direction, stopNavigation } =
+    const { listeners, focusRef, secondDay, keyboardActive, direction, stopNavigation } =
       createKeyboardHarness()
     const keydown = {
       keyCode: 39,
@@ -210,11 +214,59 @@ describe('[QCALENDAR] keyboard navigation', () => {
     expect(keydown.stopPropagation).toHaveBeenCalledTimes(1)
     expect(keydown.preventDefault).toHaveBeenCalledTimes(1)
     expect(focusRef.value).toBe('2026-06-16')
+    expect(secondDay.focus).toHaveBeenLastCalledWith({ preventScroll: true })
     expect(direction.value).toBe('next')
 
     stopNavigation()
     expect(keyboardActive.value).toBe(false)
   })
+
+  it('preserves a timed target identity when moving between intervals', async () => {
+    const { listeners, firstDay, nextMonthDay, focusRef, focusValue, datesRef, stopNavigation } =
+      createKeyboardHarness()
+    const keyup = {
+      keyCode: 40,
+      stopPropagation: vi.fn(),
+      preventDefault: vi.fn(),
+    } as unknown as KeyboardEvent
+
+    focusRef.value = '2026-06-15 10:00-resource-1'
+    focusValue.value = parsed('2026-06-15 10:00') as Timestamp
+    datesRef.value = {
+      '2026-06-15 10:00-resource-1': firstDay as unknown as HTMLElement,
+      '2026-06-15 11:00-resource-1': nextMonthDay as unknown as HTMLElement,
+    }
+    firstDay.focusElement()
+
+    listeners.keyup?.(keyup)
+    await nextTick()
+
+    expect(focusRef.value).toBe('2026-06-15 11:00-resource-1')
+    expect(nextMonthDay.focus).toHaveBeenLastCalledWith({ preventScroll: true })
+    stopNavigation()
+  })
+
+  it.each([
+    ['Page Up', 33, '2026-06-08', 'prev'],
+    ['Page Down', 34, '2026-06-22', 'next'],
+  ] as const)(
+    'updates the model when %s leaves the rendered range',
+    async (_label, keyCode, expectedDate, expectedDirection) => {
+      const { listeners, emittedValue, direction, stopNavigation } = createKeyboardHarness()
+      const keyup = {
+        keyCode,
+        stopPropagation: vi.fn(),
+        preventDefault: vi.fn(),
+      } as unknown as KeyboardEvent
+
+      listeners.keyup?.(keyup)
+      await nextTick()
+
+      expect(emittedValue.value).toBe(expectedDate)
+      expect(direction.value).toBe(expectedDirection)
+      stopNavigation()
+    },
+  )
 
   it.each([
     ['an exact date target', '2026-07-15'],

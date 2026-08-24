@@ -147,6 +147,8 @@ interface NavigationContext {
   emittedValue: Ref<string>
   direction: Ref<'next' | 'prev'>
   times: { today: Timestamp }
+  scrollFocusedElementIntoView?: (element: HTMLElement) => void
+  limitNavigationToRenderedIntervals?: boolean
   [key: string]: unknown
 }
 
@@ -173,6 +175,8 @@ export default function useNavigation(
     emittedValue,
     direction,
     times,
+    scrollFocusedElementIntoView,
+    limitNavigationToRenderedIntervals,
   }: NavigationContext,
 ): UseNavigationReturn {
   let initialized = false
@@ -210,7 +214,7 @@ export default function useNavigation(
     const focusElement = focusRef.value ? datesRef.value[focusRef.value] : undefined
 
     if (focusElement) {
-      focusElement.focus()
+      focusWithoutScrolling(focusElement)
     } else {
       tryFocus()
     }
@@ -260,6 +264,45 @@ export default function useNavigation(
     return props.useNavigation === true && keyboardActive?.value === true
   }
 
+  function focusWithoutScrolling(element: HTMLElement): void {
+    element.focus({ preventScroll: true })
+    if (scrollFocusedElementIntoView) {
+      scrollFocusedElementIntoView(element)
+    } else {
+      scrollFocusedElementIntoCalendarView(element)
+    }
+  }
+
+  function scrollFocusedElementIntoCalendarView(element: HTMLElement): void {
+    const area = element.closest<HTMLElement>('.q-calendar__scroll')
+    if (!area || rootRef.value?.contains(area) !== true) return
+
+    const areaRect = area.getBoundingClientRect()
+    const elementRect = element.getBoundingClientRect()
+    let visibleLeft = areaRect.left
+
+    rootRef.value.querySelectorAll<HTMLElement>('.q-calendar__sticky').forEach((sticky) => {
+      const stickyRect = sticky.getBoundingClientRect()
+      const overlapsFocusedRow =
+        stickyRect.top < elementRect.bottom && stickyRect.bottom > elementRect.top
+
+      if (
+        overlapsFocusedRow &&
+        stickyRect.left <= areaRect.left + 1 &&
+        stickyRect.right > visibleLeft &&
+        stickyRect.right < areaRect.right
+      ) {
+        visibleLeft = stickyRect.right
+      }
+    })
+
+    if (elementRect.left < visibleLeft) {
+      area.scrollLeft += elementRect.left - visibleLeft
+    } else if (elementRect.right > areaRect.right) {
+      area.scrollLeft += elementRect.right - areaRect.right
+    }
+  }
+
   function tryFocus(value = focusRef.value): void {
     cancelFocusRetry()
     if (canRestoreFocus() !== true) return
@@ -275,7 +318,7 @@ export default function useNavigation(
       const focusElement = getFocusElement(value)
       if (focusElement) {
         focusRef.value = value
-        focusElement.focus()
+        focusWithoutScrolling(focusElement)
         if (count === 50 || getDocument()?.activeElement === focusElement) {
           cancelFocusRetry()
           return
@@ -406,7 +449,8 @@ export default function useNavigation(
     const suffix = currentDate ? focusRef.value.slice(currentDate.length) : ''
 
     if (suffix.startsWith(' ') && timestamp.time) {
-      return `${timestamp.date} ${timestamp.time}`
+      const targetIdentity = suffix.slice(6)
+      return `${timestamp.date} ${timestamp.time}${targetIdentity}`
     }
 
     return suffix ? timestamp.date + suffix : timestamp.date
@@ -428,11 +472,52 @@ export default function useNavigation(
       const focusElement = getFocusElement(focusKey)
       if (focusElement) {
         focusRef.value = focusKey
-        focusElement.focus()
+        focusWithoutScrolling(focusElement)
       } else {
         tryFocus(focusKey)
       }
     })
+  }
+
+  function resolveRenderedInterval(
+    current: Timestamp,
+    target: Timestamp,
+    amount: 1 | -1,
+  ): Timestamp | null {
+    const focusTime = getFocusTime(focusRef.value)
+    if (
+      limitNavigationToRenderedIntervals !== true ||
+      focusTime === undefined ||
+      datesRef.value[getFocusKey(target)] !== undefined
+    ) {
+      return target
+    }
+
+    const currentDate = getFocusDate(focusRef.value)
+    if (!currentDate) return null
+
+    const targetIdentity = focusRef.value.slice(currentDate.length + 6)
+    const renderedTimes = Object.keys(datesRef.value)
+      .filter((key) => {
+        const keyDate = getFocusDate(key)
+        const keyTime = getFocusTime(key)
+        return (
+          keyDate === current.date &&
+          keyTime !== undefined &&
+          key.slice(keyDate.length + 6) === targetIdentity
+        )
+      })
+      .map((key) => getFocusTime(key) as string)
+      .sort()
+
+    const boundaryTime = amount === 1 ? renderedTimes[0] : renderedTimes.at(-1)
+    if (!boundaryTime) return null
+
+    const boundaryDate = moveToEnabledWeekday(
+      addToDate(current, { day: amount }, props.calendarSystem),
+      amount,
+    )
+    return applyFocusTime(boundaryDate, `${boundaryDate.date} ${boundaryTime}`)
   }
 
   function isEnabledWeekday(timestamp: Timestamp): boolean {
@@ -512,6 +597,9 @@ export default function useNavigation(
         tm = moveToEnabledWeekday(tm, -1)
       }
     }
+    const renderedTarget = resolveRenderedInterval(current, tm, -1)
+    if (!renderedTarget) return
+    tm = renderedTarget
     direction.value = 'prev'
     updateWeekBoundaryModelValue(current, tm)
     updateModelValueWhenFocusIsOutsideRenderedDates(tm)
@@ -536,6 +624,9 @@ export default function useNavigation(
         tm = moveToEnabledWeekday(tm, 1)
       }
     }
+    const renderedTarget = resolveRenderedInterval(current, tm, 1)
+    if (!renderedTarget) return
+    tm = renderedTarget
     direction.value = 'next'
     updateWeekBoundaryModelValue(current, tm)
     updateModelValueWhenFocusIsOutsideRenderedDates(tm)
@@ -568,6 +659,7 @@ export default function useNavigation(
         ? addToDate(tm, { month: -1 }, props.calendarSystem)
         : addToDate(tm, { day: -7 }, props.calendarSystem)
     direction.value = 'prev'
+    updateModelValueWhenFocusIsOutsideRenderedDates(tm)
     setFocusTimestamp(tm)
   }
 
@@ -578,6 +670,7 @@ export default function useNavigation(
         ? addToDate(tm, { month: 1 }, props.calendarSystem)
         : addToDate(tm, { day: 7 }, props.calendarSystem)
     direction.value = 'next'
+    updateModelValueWhenFocusIsOutsideRenderedDates(tm)
     setFocusTimestamp(tm)
   }
 
@@ -594,6 +687,7 @@ export default function useNavigation(
             props.calendarSystem,
           )
     tm = moveToEnabledWeekday(tm, 1)
+    updateModelValueWhenFocusIsOutsideRenderedDates(tm)
     setFocusTimestamp(tm)
   }
 
@@ -610,6 +704,7 @@ export default function useNavigation(
             props.calendarSystem,
           )
     tm = moveToEnabledWeekday(tm, -1)
+    updateModelValueWhenFocusIsOutsideRenderedDates(tm)
     setFocusTimestamp(tm)
   }
   return {
