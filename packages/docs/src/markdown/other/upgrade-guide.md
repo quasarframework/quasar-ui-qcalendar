@@ -111,13 +111,13 @@ contract and view-specific examples.
 ```tabs
 <<| bash App Extension |>>
 quasar ext add @quasar/qcalendar
-<<| bash pnpm |>>
+<<| bash [icon=pnpm] pnpm |>>
 pnpm add @quasar/quasar-ui-qcalendar
-<<| bash bun |>>
+<<| bash [icon=bun] bun |>>
 bun add @quasar/quasar-ui-qcalendar
-<<| bash yarn |>>
+<<| bash [icon=yarn] yarn |>>
 yarn add @quasar/quasar-ui-qcalendar
-<<| bash npm |>>
+<<| bash [icon=npm] npm |>>
 npm install @quasar/quasar-ui-qcalendar
 ```
 

@@ -16,13 +16,13 @@ Markdown Plugins are tools that extend the functionality of Markdown, allowing y
 You can install Markdown Plugins using pnpm, yarn, npm, or bun:
 
 ```tabs
-<<| bash pnpm |>>
+<<| bash [icon=pnpm] pnpm |>>
 pnpm add @md-plugins/vite-md-plugin
 <<| bash Bun |>>
 bun add @md-plugins/vite-md-plugin
 <<| bash Yarn |>>
 yarn add @md-plugins/vite-md-plugin
-<<| bash npm |>>
+<<| bash [icon=npm] npm |>>
 npm install @md-plugins/vite-md-plugin
 ```
 
