@@ -5,7 +5,7 @@
   <a
     v-else
     v-bind="$attrs"
-    class="markdown-link"
+    class="markdown-link markdown-link--external"
     :href="props.to"
     target="_blank"
     rel="noopener noreferrer"
@@ -64,5 +64,9 @@ const internal = computed(
     margin-top: -2px;
     margin-left: 4px;
   }
+}
+
+.markdown-link--external {
+  white-space: nowrap;
 }
 </style>

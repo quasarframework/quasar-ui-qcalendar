@@ -240,7 +240,7 @@
     "@timestamp-js/core": "1.0.0"
   },
   "devDependencies": {
-    "@md-plugins/quasar-app-extension-q-press": "2.1.0",
+    "@md-plugins/quasar-app-extension-q-press": "2.2.0",
     "@timestamp-js/calendar-hebrew": "1.0.0",
     "@timestamp-js/calendar-islamic": "1.0.0",
     "@timestamp-js/calendar-persian": "1.0.0",
