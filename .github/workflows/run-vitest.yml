@@ -4,6 +4,9 @@ on:
   push: # Trigger on push to any branch
   pull_request: # Trigger on pull request to any branch
 
+permissions:
+  contents: read
+
 jobs:
   vitest:
     name: Run Vitest
