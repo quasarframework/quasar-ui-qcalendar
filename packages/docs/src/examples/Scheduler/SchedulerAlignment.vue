@@ -83,9 +83,9 @@ interface Resource {
 
 const calendar = ref<QCalendarScheduler>(),
   selectedDate = ref(today()),
-  dateAlign = ref('center'),
-  weekdayAlign = ref('center'),
-  dateHeader = ref('stacked'),
+  dateAlign = ref<InstanceType<typeof QCalendarScheduler>['$props']['dateAlign']>('center'),
+  weekdayAlign = ref<InstanceType<typeof QCalendarScheduler>['$props']['weekdayAlign']>('center'),
+  dateHeader = ref<InstanceType<typeof QCalendarScheduler>['$props']['dateHeader']>('stacked'),
   resources = ref<Resource[]>([
     { id: 1, label: 'John' },
     { id: 2, label: 'Mary' },

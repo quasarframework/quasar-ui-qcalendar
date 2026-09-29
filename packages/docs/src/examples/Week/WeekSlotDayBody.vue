@@ -244,13 +244,14 @@ function badgeClasses(event: Event, type: string) {
 function badgeStyles(
   event: Event,
   type: string,
-  timeStartPos?: (_time: string) => number,
+  timeStartPos?: (_time: string) => number | false,
   timeDurationHeight?: (_duration: number) => number,
 ): Record<string, string> {
   const s: Record<string, string> = {}
 
   if (timeStartPos && timeDurationHeight && event.time && event.duration) {
-    s.top = `${timeStartPos(event.time)}px`
+    const top = timeStartPos(event.time)
+    if (top !== false) s.top = `${top}px`
     s.height = `${timeDurationHeight(event.duration)}px`
   }
 

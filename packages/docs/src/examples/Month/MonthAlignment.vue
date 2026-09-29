@@ -63,8 +63,8 @@ import NavigationBar from '@/components/NavigationBar.vue'
 
 const calendar = ref<QCalendarMonth>(),
   selectedDate = ref(today()),
-  dateAlign = ref('center'),
-  weekdayAlign = ref('center')
+  dateAlign = ref<InstanceType<typeof QCalendarMonth>['$props']['dateAlign']>('center'),
+  weekdayAlign = ref<InstanceType<typeof QCalendarMonth>['$props']['weekdayAlign']>('center')
 function onToday() {
   if (calendar.value) {
     calendar.value.moveToToday()

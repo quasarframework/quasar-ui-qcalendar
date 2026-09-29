@@ -79,7 +79,7 @@ const calendar = ref<QCalendarResource>(),
     { id: '5', name: 'Olivia' },
   ])
 
-function showDate(scope: Timestamp) {
+function showDate(scope: { date: string }) {
   if (scope.date) {
     const date = new Date(scope.date)
     /// @ts-expect-error ignore for now

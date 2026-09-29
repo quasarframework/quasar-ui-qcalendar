@@ -62,9 +62,9 @@ export interface IntervalProps
   intervalStart: number | string
   intervalCount: number | string
   intervalStyle?: (_scope: Scope) => any
-  intervalClass?: (_scope: Scope) => string
+  intervalClass?: (_scope: Scope) => Record<string, boolean>
   weekdayStyle?: (_scope: Scope) => any
-  weekdayClass?: (_scope: Scope) => string
+  weekdayClass?: (_scope: Scope) => Record<string, boolean>
   showIntervalLabel?: (_timestamp: Timestamp) => any
   hour24Format?: boolean
   timeClicksClamped?: boolean
@@ -138,7 +138,7 @@ export const useIntervalProps = {
     default: null,
   },
   /**
-   * Function that returns CSS classes for interval cells.
+   * Function that returns a class-name-to-boolean map for interval cells.
    *
    * @category style
    */
@@ -156,7 +156,7 @@ export const useIntervalProps = {
     default: null,
   },
   /**
-   * Function that returns CSS classes for weekday header cells.
+   * Function that returns a class-name-to-boolean map for weekday header cells.
    *
    * @category style
    */
@@ -205,11 +205,11 @@ export interface SchedulerProps {
   resourceHeight: number | string
   resourceMinHeight: number | string
   resourceStyle?: (_scope: Scope) => any
-  resourceClass?: (_scope: Scope) => string
+  resourceClass?: (_scope: Scope) => Record<string, boolean>
   weekdayStyle?: (_scope: Scope) => any
-  weekdayClass?: (_scope: Scope) => string
+  weekdayClass?: (_scope: Scope) => Record<string, boolean>
   dayStyle?: (_scope: Scope) => any
-  dayClass?: (_scope: Scope) => string
+  dayClass?: (_scope: Scope) => Record<string, boolean>
   dateHeader: 'stacked' | 'inline' | 'inverted'
 }
 
@@ -280,7 +280,7 @@ export const useSchedulerProps = {
     default: null,
   },
   /**
-   * Function that returns CSS classes for resource rows.
+   * Function that returns a class-name-to-boolean map for resource rows.
    *
    * @category style
    */
@@ -298,7 +298,7 @@ export const useSchedulerProps = {
     default: null,
   },
   /**
-   * Function that returns CSS classes for weekday header cells.
+   * Function that returns a class-name-to-boolean map for weekday header cells.
    *
    * @category style
    */
@@ -316,7 +316,7 @@ export const useSchedulerProps = {
     default: null,
   },
   /**
-   * Function that returns CSS classes for day cells.
+   * Function that returns a class-name-to-boolean map for day cells.
    *
    * @category style
    */
@@ -343,9 +343,9 @@ export interface AgendaProps {
   columnOptionsId?: string
   columnOptionsLabel?: string
   weekdayStyle?: (_scope: Scope) => any
-  weekdayClass?: (_scope: Scope) => string
+  weekdayClass?: (_scope: Scope) => Record<string, boolean>
   dayStyle?: (_scope: Scope) => any
-  dayClass?: (_scope: Scope) => string
+  dayClass?: (_scope: Scope) => Record<string, boolean>
   dateHeader: 'stacked' | 'inline' | 'inverted'
   dayHeight: number | string
   dayMinHeight: number | string
@@ -404,7 +404,7 @@ export const useAgendaProps = {
     default: null,
   },
   /**
-   * Function that returns CSS classes for weekday header cells.
+   * Function that returns a class-name-to-boolean map for weekday header cells.
    *
    * @category style
    */
@@ -422,7 +422,7 @@ export const useAgendaProps = {
     default: null,
   },
   /**
-   * Function that returns CSS classes for day cells.
+   * Function that returns a class-name-to-boolean map for day cells.
    *
    * @category style
    */
@@ -532,7 +532,7 @@ export const useResourceProps = {
     default: null,
   },
   /**
-   * Function that returns CSS classes for resource rows.
+   * Function that returns a class-name-to-boolean map for resource rows.
    *
    * @category style
    */

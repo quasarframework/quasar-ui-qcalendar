@@ -69,7 +69,7 @@
               </div>
               <div class="timesheet-work-row__key">{{ scope.task.key }}</div>
               <div class="timesheet-work-row__logged">
-                {{ formatHours(taskTotal(scope.start, scope.end, scope.task)) }}
+                {{ formatHours(taskTotal(scope.start, scope.end, scope.task.logged)) }}
               </div>
             </div>
           </template>
@@ -332,8 +332,14 @@ function getLoggedHours(date: string, logged: Logged[]): number {
   return logged.find((log) => log.date === date)?.logged || 0
 }
 
-function taskTotal(start: CalendarTimestamp, end: CalendarTimestamp, task: TimesheetTask): number {
-  return task.logged.reduce((total, log) => {
+function taskTotal(
+  start: CalendarTimestamp | null,
+  end: CalendarTimestamp | null,
+  logged: TimesheetTask['logged'],
+): number {
+  if (start === null || end === null) return 0
+
+  return logged.reduce((total, log) => {
     const loggedTimestamp = parsed(log.date)
     return loggedTimestamp && isBetweenDates(loggedTimestamp, start, end)
       ? total + log.logged
@@ -347,8 +353,8 @@ function dayTotal(date: string): number {
   }, 0)
 }
 
-function footerTotal(start: CalendarTimestamp, end: CalendarTimestamp): number {
-  return tasks.value.reduce((total, task) => total + taskTotal(start, end, task), 0)
+function footerTotal(start: CalendarTimestamp | null, end: CalendarTimestamp | null): number {
+  return tasks.value.reduce((total, task) => total + taskTotal(start, end, task.logged), 0)
 }
 
 function formatHours(hours: number): string {

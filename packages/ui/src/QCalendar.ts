@@ -1,11 +1,13 @@
 import { App as Application } from 'vue'
-import QCalendar from './components/QCalendar'
-import QCalendarAgenda from './components/QCalendarAgenda'
-import QCalendarDay from './components/QCalendarDay'
-import QCalendarMonth from './components/QCalendarMonth'
-import QCalendarResource from './components/QCalendarResource'
-import QCalendarScheduler from './components/QCalendarScheduler'
-import QCalendarTask from './components/QCalendarTask'
+import {
+  QCalendar,
+  QCalendarAgenda,
+  QCalendarDay,
+  QCalendarMonth,
+  QCalendarResource,
+  QCalendarScheduler,
+  QCalendarTask,
+} from './index.js'
 import { version } from './version.js'
 
 import * as helpers from './utils/helpers'
@@ -24,7 +26,17 @@ export {
   QCalendarTask,
 }
 
-export default {
+const plugin: typeof helpers & {
+  version: string
+  QCalendar: typeof QCalendar
+  QCalendarAgenda: typeof QCalendarAgenda
+  QCalendarDay: typeof QCalendarDay
+  QCalendarMonth: typeof QCalendarMonth
+  QCalendarResource: typeof QCalendarResource
+  QCalendarScheduler: typeof QCalendarScheduler
+  QCalendarTask: typeof QCalendarTask
+  install: (_app: Application) => void
+} = {
   version,
   QCalendar,
   QCalendarAgenda,
@@ -39,3 +51,5 @@ export default {
     app.component(String(QCalendar.name), QCalendar)
   },
 }
+
+export default plugin

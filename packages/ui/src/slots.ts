@@ -395,7 +395,7 @@ export interface TaskTitleSlotScope extends TaskHeadSlotScope {
   /** Rendered title cell width. */
   cellWidth?: string
   /** Title value represented by the slot. */
-  title: string
+  title: Task | string
   /** Zero-based title index. */
   index: number
 }
@@ -406,7 +406,7 @@ export interface TaskTitleDaySlotScope extends CalendarSlotScope {
   /** Whether the timestamp is outside the active month. */
   outside?: boolean
   /** Title value represented by the title day cell. */
-  title: string
+  title: Task | string
   /** Zero-based title index. */
   index: number
   /** Rendered title day cell width. */

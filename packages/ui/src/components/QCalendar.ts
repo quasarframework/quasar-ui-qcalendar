@@ -178,7 +178,7 @@ export default defineComponent({
      * @applicable day, agenda, month-interval, scheduler
      * @returns Vertical pixel offset when the active view supports time positioning.
      */
-    function timeStartPos(time: string, clamp: boolean = true): number | void {
+    function timeStartPos(time: string, clamp: boolean = true): number | false | void {
       if (calendar.value) {
         return calendar.value.timeStartPos(time, clamp)
       }
@@ -194,7 +194,7 @@ export default defineComponent({
      * @applicable resource
      * @returns Horizontal pixel offset when the active view supports time positioning.
      */
-    function timeStartPosX(time: string, clamp: boolean = true): number | void {
+    function timeStartPosX(time: string, clamp: boolean = true): number | false | void {
       if (calendar.value) {
         return calendar.value.timeStartPosX(time, clamp)
       }

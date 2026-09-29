@@ -59,6 +59,7 @@
 </template>
 
 <script setup lang="ts">
+import type { Timestamp } from '@timestamp-js/core'
 import { ref, reactive, watch, onMounted } from 'vue'
 import { QCalendarAgenda } from '@quasar/quasar-ui-qcalendar'
 import '@quasar/quasar-ui-qcalendar/index.css'
@@ -174,7 +175,7 @@ function removeClass() {
   }
 }
 
-function getAgenda(day: { weekday: string }) {
-  return agenda.value[parseInt(day.weekday, 10)]
+function getAgenda(day: Timestamp) {
+  return day.weekday === undefined ? undefined : agenda.value[day.weekday]
 }
 </script>

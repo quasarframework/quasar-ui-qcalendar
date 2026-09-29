@@ -20,6 +20,7 @@
     "pretest:browser": "playwright install chromium",
     "test:browser": "vitest run --config packages/ui/test/browser/vitest.config.ts",
     "typecheck": "pnpm --filter @quasar/quasar-ui-qcalendar typecheck && pnpm --filter docs typecheck",
+    "test:types:consumer": "pnpm --dir packages/docs exec vue-tsc -p ../ui/test/types/tsconfig.json --noEmit --pretty false",
     "deep": "ncu --configFilePath . --packageFile '{package.json,packages/*/package.json}'",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
@@ -28,7 +29,7 @@
     "check:all": "pnpm verify",
     "verify": "pnpm verify:fast && pnpm verify:build",
     "verify:fast": "pnpm format:check && pnpm lint && pnpm test",
-    "verify:build": "pnpm build && pnpm --dir packages/ui test:tree-shaking && pnpm api:check && pnpm check:qpress && pnpm typecheck"
+    "verify:build": "pnpm build && pnpm test:types:consumer && pnpm --dir packages/ui test:tree-shaking && pnpm api:check && pnpm check:qpress && pnpm typecheck"
   },
   "devDependencies": {
     "@quasar/vite-plugin": "^2.0.2",

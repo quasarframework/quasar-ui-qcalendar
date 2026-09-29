@@ -76,7 +76,7 @@ function queueDragTargetUpdate<T>(targetRef: Ref<T>, value: T): void {
 }
 
 function runDragCallback<T>(
-  callback: ((_event: Event, _type: string, _scope: any) => boolean) | undefined,
+  callback: ((_event: DragEvent, _type: string, _scope: any) => boolean) | undefined,
   event: DragEvent,
   { targetRef, value, resetValue, type, scope }: DragAndDropOptions<T>,
   immediate = false,

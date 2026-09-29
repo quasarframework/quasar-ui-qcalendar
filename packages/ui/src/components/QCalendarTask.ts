@@ -927,7 +927,7 @@ export default defineComponent({
       )
     }
 
-    function __renderTitleTask(title: string, index: number): VNode {
+    function __renderTitleTask(title: Task | string, index: number): VNode {
       const slot = slots['title-task']
 
       const width = convertToUnit(parseInt(String(props.taskWidth), 10))
@@ -1164,7 +1164,7 @@ export default defineComponent({
      * @param {number} index The task index
      * @returns VNode
      */
-    function __renderTitleDay(day: Timestamp, title: string, index: number): VNode {
+    function __renderTitleDay(day: Timestamp, title: Task | string, index: number): VNode {
       const slot = slots['title-day']
 
       const width = cellWidthStyle.value
@@ -1298,7 +1298,7 @@ export default defineComponent({
       return days.value.map((day) => __renderHeadDay(day))
     }
 
-    function __renderTitleDays(title: string, index: number): VNode[] {
+    function __renderTitleDays(title: Task | string, index: number): VNode[] {
       return days.value.map((day) => __renderTitleDay(day, title, index))
     }
 
@@ -1315,7 +1315,7 @@ export default defineComponent({
       )
     }
 
-    function __renderTitleDaysRow(title: string, index: number): VNode {
+    function __renderTitleDaysRow(title: Task | string, index: number): VNode {
       return h(
         'div',
         {

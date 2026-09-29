@@ -47,7 +47,7 @@
           >
             <template #head-day-event="{ scope }">
               <div
-                v-if="hasWeekdayEvents(scope.weekday)"
+                v-if="scope.weekday !== undefined && hasWeekdayEvents(scope.weekday)"
                 style="
                   display: flex;
                   justify-content: space-evenly;

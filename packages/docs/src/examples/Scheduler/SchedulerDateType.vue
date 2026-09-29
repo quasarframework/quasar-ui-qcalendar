@@ -54,7 +54,7 @@ interface Resource {
 
 const calendar = ref<QCalendarScheduler>(),
   selectedDate = ref(today()),
-  dateType = ref('square'),
+  dateType = ref<InstanceType<typeof QCalendarScheduler>['$props']['dateType']>('square'),
   resources = ref<Resource[]>([
     { id: 1, label: 'John' },
     { id: 2, label: 'Mary' },

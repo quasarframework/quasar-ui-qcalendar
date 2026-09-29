@@ -72,7 +72,7 @@
                 {{ scope.task.title }}
               </div>
               <div class="key">{{ scope.task.key }}</div>
-              <div class="logged">{{ sum(scope.start, scope.end, scope.task) }}</div>
+              <div class="logged">{{ sum(scope.start, scope.end, scope.task.logged) }}</div>
             </div>
           </template>
 
@@ -90,7 +90,7 @@
                 {{ scope.task.title }}
               </div>
               <div class="key">{{ scope.task.key }}</div>
-              <div class="logged">{{ sum(scope.start, scope.end, scope.task) }}</div>
+              <div class="logged">{{ sum(scope.start, scope.end, scope.task.logged) }}</div>
             </div>
           </template>
 
@@ -305,8 +305,10 @@ function getLoggedSummary(date: string): number {
  * This only sums it up if the logged date falls
  * between the start and end times
  */
-function sum(start: Timestamp, end: Timestamp, task: Task) {
-  return task.logged.reduce((accumulator, currentValue) => {
+function sum(start: Timestamp | null, end: Timestamp | null, logged: Task['logged']) {
+  if (start === null || end === null) return 0
+
+  return logged.reduce((accumulator, currentValue) => {
     const loggedTimestamp = parsed(currentValue.date)
     return loggedTimestamp && isBetweenDates(loggedTimestamp, start, end)
       ? accumulator + currentValue.logged
@@ -336,7 +338,9 @@ function footerDayClass(/*data*/) {
  * Sums up the amount of time spent for all tasks
  * between the start and end dates
  */
-function totals(start: Timestamp, end: Timestamp) {
+function totals(start: Timestamp | null, end: Timestamp | null) {
+  if (start === null || end === null) return 0
+
   const reducer = (accumulator: number, currentValue: { date: string; logged: number }) => {
     const loggedTimestamp = parsed(currentValue.date)
     return loggedTimestamp !== null && isBetweenDates(loggedTimestamp, start, end)

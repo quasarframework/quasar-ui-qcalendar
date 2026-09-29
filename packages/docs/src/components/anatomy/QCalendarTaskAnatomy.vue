@@ -53,7 +53,7 @@
           <div class="header ellipsis">
             <div class="issue ellipsis">{{ scope.task.title }}</div>
             <div class="key">{{ scope.task.key }}</div>
-            <div class="logged">{{ sum(scope.start, scope.end, scope.task) }}</div>
+            <div class="logged">{{ sum(scope.start, scope.end, scope.task.logged) }}</div>
           </div>
         </template>
 
@@ -62,7 +62,7 @@
           <div class="header ellipsis">
             <div class="issue ellipsis">{{ scope.task.title }}</div>
             <div class="key">{{ scope.task.key }}</div>
-            <div class="logged">{{ sum(scope.start, scope.end, scope.task) }}</div>
+            <div class="logged">{{ sum(scope.start, scope.end, scope.task.logged) }}</div>
           </div>
         </template>
 
@@ -77,7 +77,9 @@
 
         <template #title-task="{ scope }">
           <div class="summary ellipsis">
-            <div class="title ellipsis">{{ scope.title.label }}</div>
+            <div class="title ellipsis">
+              {{ typeof scope.title === 'string' ? scope.title : scope.title.label }}
+            </div>
           </div>
         </template>
 
@@ -351,7 +353,9 @@ function getLoggedSummary(date: string) {
  * This only sums it up if the logged date falls
  * between the start and end times
  */
-function sum(start: Timestamp, end: Timestamp, task: Task) {
+function sum(start: Timestamp | null, end: Timestamp | null, logged: Task['logged']) {
+  if (start === null || end === null) return 0
+
   const reducer = (accumulator: number, currentValue: { date: string; logged: number }) => {
     const loggedTimestamp = parsed(currentValue.date)
     if (loggedTimestamp && isBetweenDates(loggedTimestamp, start, end)) {
@@ -359,7 +363,7 @@ function sum(start: Timestamp, end: Timestamp, task: Task) {
     }
     return accumulator
   }
-  return task.logged.reduce(reducer, 0)
+  return logged.reduce(reducer, 0)
 }
 
 function weekdayClass() {
@@ -384,7 +388,9 @@ function footerDayClass() {
  * Sums up the amount of time spent for all tasks
  * between the start and end dates
  */
-function totals(start: Timestamp, end: Timestamp) {
+function totals(start: Timestamp | null, end: Timestamp | null) {
+  if (start === null || end === null) return 0
+
   let total = 0
   const reducer = (accumulator: number, currentValue: { date: string; logged: number }) => {
     const loggedTimestamp = parsed(currentValue.date)

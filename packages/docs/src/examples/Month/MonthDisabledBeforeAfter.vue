@@ -12,8 +12,8 @@
         <q-calendar-month
           ref="calendar"
           v-model="selectedDate"
-          :disabled-before="disabledBefore"
-          :disabled-after="disabledAfter"
+          :disabled-before="disabledBefore ?? undefined"
+          :disabled-after="disabledAfter ?? undefined"
           no-outside-days
           :day-min-height="40"
           animated

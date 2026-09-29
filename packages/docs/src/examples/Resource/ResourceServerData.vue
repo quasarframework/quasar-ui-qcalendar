@@ -82,11 +82,9 @@ interface Booking {
   width: number
 }
 
-interface ResourceScope {
-  resource: ResourceRow
-  timeStartPosX: (_time: string) => number
-  timeDurationWidth: (_duration: number) => number
-}
+type ResourceScope = Parameters<
+  NonNullable<InstanceType<typeof QCalendarResource>['$slots']['resource-intervals']>
+>[0]['scope']
 
 const selectedDate = ref(today())
 const $q = useQuasar()
@@ -147,7 +145,7 @@ function getBookings(scope: ResourceScope) {
     .filter((booking) => booking.resourceId === scope.resource.id)
     .map((booking) => ({
       ...booking,
-      left: scope.timeStartPosX(booking.start),
+      left: scope.timeStartPosX(booking.start) || 0,
       width: scope.timeDurationWidth(booking.duration),
     }))
 }

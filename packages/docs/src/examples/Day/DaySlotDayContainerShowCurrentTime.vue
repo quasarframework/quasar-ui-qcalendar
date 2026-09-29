@@ -122,7 +122,8 @@ function adjustCurrentTime() {
     currentDate.value = now.date
     currentTime.value = now.time ?? '00:00'
     if (calendar.value) {
-      timeStartPos.value = calendar.value.timeStartPos(currentTime.value, false)
+      const position = calendar.value.timeStartPos(currentTime.value, false)
+      if (position !== false) timeStartPos.value = position
     }
   }
 }

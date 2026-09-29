@@ -68,11 +68,11 @@ import '@quasar/quasar-ui-qcalendar/index.css'
 import NavigationBar from '@/components/NavigationBar.vue'
 
 const selectedDate = ref(today())
-const dateAlign = ref('center')
-const weekdayAlign = ref('center')
+const dateAlign = ref<InstanceType<typeof QCalendarAgenda>['$props']['dateAlign']>('center')
+const weekdayAlign = ref<InstanceType<typeof QCalendarAgenda>['$props']['weekdayAlign']>('center')
 const leftColumnOptions = ref([])
 const rightColumnOptions = ref([])
-const dateHeader = ref('stacked')
+const dateHeader = ref<InstanceType<typeof QCalendarAgenda>['$props']['dateHeader']>('stacked')
 const calendar = ref<QCalendarAgenda>()
 
 const onChange = (date: string) => {

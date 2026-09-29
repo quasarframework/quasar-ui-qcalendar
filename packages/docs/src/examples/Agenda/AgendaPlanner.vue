@@ -69,6 +69,7 @@
               "
             >
               <q-icon
+                v-if="timestamp.weekday !== undefined"
                 class="planner-select-icon"
                 :name="selected[timestamp.weekday - 1] ? 'check_box' : 'check_box_outline_blank'"
                 style="cursor: pointer"

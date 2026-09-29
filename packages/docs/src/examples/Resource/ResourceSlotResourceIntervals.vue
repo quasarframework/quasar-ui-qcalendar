@@ -132,11 +132,9 @@ const calendar = ref<QCalendarResource>(),
     ],
   })
 
-interface Scope {
-  resource: Resource
-  timeStartPosX: (_time: string) => number
-  timeDurationWidth: (_duration: number) => number
-}
+type Scope = Parameters<
+  NonNullable<InstanceType<typeof QCalendarResource>['$slots']['resource-intervals']>
+>[0]['scope']
 
 interface EventWithPosition {
   left: number
@@ -154,7 +152,7 @@ function getEvents(scope: Scope): EventWithPosition[] {
       // for each events figure out start position and width
       for (let x = 0; x < resourceEvents.length; ++x) {
         evts.push({
-          left: scope.timeStartPosX(resourceEvents[x]!.start),
+          left: scope.timeStartPosX(resourceEvents[x]!.start) || 0,
           width: scope.timeDurationWidth(resourceEvents[x]!.duration),
           title: resourceEvents[x]!.title,
         })

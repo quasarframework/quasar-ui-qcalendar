@@ -51,10 +51,10 @@ export interface CommonProps {
   disabledBefore?: string
   disabledAfter?: string
   disabledWeekdays?: number[]
-  dragEnterFunc?: (_event: Event, _type: string, _scope: any) => boolean
-  dragOverFunc?: (_event: Event, _type: string, _scope: any) => boolean
-  dragLeaveFunc?: (_event: Event, _type: string, _scope: any) => boolean
-  dropFunc?: (_event: Event, _type: string, _scope: any) => boolean
+  dragEnterFunc?: (_event: DragEvent, _type: string, _scope: any) => boolean
+  dragOverFunc?: (_event: DragEvent, _type: string, _scope: any) => boolean
+  dragLeaveFunc?: (_event: DragEvent, _type: string, _scope: any) => boolean
+  dropFunc?: (_event: DragEvent, _type: string, _scope: any) => boolean
   selectedDates: string[] | Set<string>
   selectedStartEndDates: string[]
   hoverable: boolean
@@ -324,25 +324,25 @@ export const useCommonProps = {
    *
    * @category behavior
    */
-  dragEnterFunc: Function as PropType<(_event: Event, _type: string, _scope: any) => boolean>,
+  dragEnterFunc: Function as PropType<(_event: DragEvent, _type: string, _scope: any) => boolean>,
   /**
    * Drag-over guard called while a dragged item is over a calendar target.
    *
    * @category behavior
    */
-  dragOverFunc: Function as PropType<(_event: Event, _type: string, _scope: any) => boolean>,
+  dragOverFunc: Function as PropType<(_event: DragEvent, _type: string, _scope: any) => boolean>,
   /**
    * Drag-leave guard called before a dragged item leaves a calendar target.
    *
    * @category behavior
    */
-  dragLeaveFunc: Function as PropType<(_event: Event, _type: string, _scope: any) => boolean>,
+  dragLeaveFunc: Function as PropType<(_event: DragEvent, _type: string, _scope: any) => boolean>,
   /**
    * Drop guard called before a dragged item is dropped on a calendar target.
    *
    * @category behavior
    */
-  dropFunc: Function as PropType<(_event: Event, _type: string, _scope: any) => boolean>,
+  dropFunc: Function as PropType<(_event: DragEvent, _type: string, _scope: any) => boolean>,
   /**
    * Selected date strings highlighted by the calendar.
    *

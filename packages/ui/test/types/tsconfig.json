@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "target": "es2022",
+    "lib": ["es2022", "dom"],
+    "noEmit": true,
+    "types": []
+  },
+  "vueCompilerOptions": {
+    "strictTemplates": true
+  },
+  "include": ["./*.ts", "./*.vue"]
+}

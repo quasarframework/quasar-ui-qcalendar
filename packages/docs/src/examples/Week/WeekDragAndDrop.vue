@@ -177,11 +177,6 @@ const allDayEventsMap = computed<Record<string, any[]>>(() => {
   return map
 })
 
-interface CustomDragEvent extends Event {
-  dataTransfer: DataTransfer
-  preventDefault: () => void
-}
-
 interface DragItem {
   id: number
   name: string
@@ -213,15 +208,13 @@ function onDragLeave(_e: DragEvent, type: string, { scope }: Scope): boolean {
   return false
 }
 
-interface DropEvent extends CustomDragEvent {
-  dataTransfer: DataTransfer
-}
-
 interface DropScope extends Scope {
   timestamp: Timestamp
 }
 
-function onDrop(e: DropEvent, type: string, { scope }: DropScope): boolean {
+function onDrop(e: DragEvent, type: string, { scope }: DropScope): boolean {
+  if (e.dataTransfer === null) return false
+
   const itemID = parseInt(e.dataTransfer.getData('ID'), 10)
   const event: Event = { ...defaultEvent }
   event.id = events.value.length + 1

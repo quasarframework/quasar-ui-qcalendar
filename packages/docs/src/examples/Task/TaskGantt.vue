@@ -71,18 +71,20 @@
           <template #days="{ scope }">
             <div class="gantt-demo__overlay" aria-hidden="true">
               <div
-                v-if="getBarStyle(scope.timestamps, scope.task, scope.cellWidth)"
+                v-if="getBarStyle(scope.timestamps, scope.task as GanttTask, scope.cellWidth)"
                 class="gantt-demo__bar"
-                :class="getBarClass(scope.timestamps, scope.task)"
-                :style="getBarStyle(scope.timestamps, scope.task, scope.cellWidth)"
+                :class="getBarClass(scope.timestamps, scope.task as GanttTask)"
+                :style="getBarStyle(scope.timestamps, scope.task as GanttTask, scope.cellWidth)"
               >
-                <span>{{ getBarLabel(scope.timestamps, scope.task, scope.cellWidth) }}</span>
+                <span>{{
+                  getBarLabel(scope.timestamps, scope.task as GanttTask, scope.cellWidth)
+                }}</span>
               </div>
 
               <div
                 v-for="milestone in getVisibleMilestones(
                   scope.timestamps,
-                  scope.task,
+                  scope.task as GanttTask,
                   scope.cellWidth,
                 )"
                 :key="milestone.label"

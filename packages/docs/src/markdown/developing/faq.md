@@ -53,6 +53,24 @@ Applications that only use globally registered calendar components in templates 
 
 :::
 
+:::details Q. Do root imports and component subpaths have the same TypeScript support?
+
+Yes. Named imports from `@quasar/quasar-ui-qcalendar` and public subpaths such as `@quasar/quasar-ui-qcalendar/QCalendarDay` preserve the component's props, events, slots, and exposed methods. Global component declarations use these same types. Importing from `src/components/` is not needed for typing.
+
+For a locally imported component, use `InstanceType` when you need the full Vue instance type, including `$props` and `$slots`:
+
+```ts
+import { useTemplateRef } from 'vue'
+import { QCalendarDay } from '@quasar/quasar-ui-qcalendar'
+
+const calendarRef = useTemplateRef<InstanceType<typeof QCalendarDay>>('calendar')
+calendarRef.value?.scrollToTime('09:00')
+```
+
+The shorter `import type { QCalendarDay }` form above remains available for refs that only need the exposed calendar methods.
+
+:::
+
 :::details Q. Can I use QCalendar without Quasar?
 
 Yes, but use the UI package directly instead of the Quasar App Extension.

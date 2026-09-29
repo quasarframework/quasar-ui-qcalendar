@@ -1,5 +1,5 @@
 import { App as Application } from 'vue'
-import QCalendarResource from './components/QCalendarResource'
+import { QCalendarResource } from './index.js'
 import { version } from './version.js'
 
 import * as helpers from './utils/helpers'
@@ -9,7 +9,11 @@ export * from './utils/helpers'
 
 export { version, QCalendarResource }
 
-export default {
+const plugin: typeof helpers & {
+  version: string
+  QCalendarResource: typeof QCalendarResource
+  install: (_app: Application) => void
+} = {
   version,
   QCalendarResource,
   ...helpers,
@@ -18,3 +22,5 @@ export default {
     app.component(String(QCalendarResource.name), QCalendarResource)
   },
 }
+
+export default plugin

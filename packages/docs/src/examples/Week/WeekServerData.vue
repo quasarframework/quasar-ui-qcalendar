@@ -166,11 +166,12 @@ function resetServerData() {
 
 function eventStyle(
   event: CalendarEvent,
-  timeStartPos: (_time: string) => number,
+  timeStartPos: (_time: string) => number | false,
   timeDurationHeight: (_duration: number) => number,
 ) {
+  const top = timeStartPos(event.time)
   return {
-    top: `${timeStartPos(event.time)}px`,
+    top: top === false ? undefined : `${top}px`,
     height: `${timeDurationHeight(event.duration)}px`,
     backgroundColor: event.color,
   }

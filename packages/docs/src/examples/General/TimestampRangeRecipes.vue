@@ -107,7 +107,11 @@ function formatRange(range: TimestampRange): string {
   return `${getDate(range.start)} to ${getDate(range.end)}`
 }
 
-function getDayClass(timestamp: Timestamp): Record<string, boolean> {
+function getDayClass({
+  scope: { timestamp },
+}: {
+  scope: { timestamp: Timestamp }
+}): Record<string, boolean> {
   return {
     'timestamp-reserved': reservedRanges.some((range) => isTimestampInRange(timestamp, range)),
     'timestamp-available': availableRanges.some((range) => isTimestampInRange(timestamp, range)),

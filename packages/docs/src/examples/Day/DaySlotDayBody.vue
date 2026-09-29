@@ -198,12 +198,13 @@ function badgeClasses(event: Event, type: string) {
 function badgeStyles(
   event: Event,
   _type: string,
-  timeStartPos?: (_time: string) => number,
+  timeStartPos?: (_time: string) => number | false,
   timeDurationHeight?: (_minutes: number) => number,
 ) {
   const s: { [key: string]: string } = {}
   if (timeStartPos && timeDurationHeight) {
-    s.top = timeStartPos(event.time) + 'px'
+    const top = timeStartPos(event.time)
+    if (top !== false) s.top = `${top}px`
     s.height = timeDurationHeight(event.duration) + 'px'
   }
   s['align-items'] = 'flex-start'

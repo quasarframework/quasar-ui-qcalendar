@@ -81,10 +81,9 @@ interface Assignment {
   range?: number
 }
 
-interface SchedulerScope {
-  resource: ResourceRow
-  cellWidth: string
-}
+type SchedulerScope = Parameters<
+  NonNullable<InstanceType<typeof QCalendarScheduler>['$slots']['resource-days']>
+>[0]['scope']
 
 const selectedDate = ref(today())
 const $q = useQuasar()
@@ -134,13 +133,15 @@ function getAssignments(scope: SchedulerScope) {
   return assignments.value.filter((assignment) => assignment.resourceId === scope.resource.id)
 }
 
-function getCellWidth(cellWidth: string, amount: number) {
+function getCellWidth(cellWidth: string | undefined, amount: number) {
+  if (cellWidth === undefined) return undefined
+
   const value = Number.parseFloat(cellWidth)
   const unit = cellWidth.endsWith('%') ? '%' : 'px'
   return Number.isFinite(value) ? `${value * amount}${unit}` : undefined
 }
 
-function assignmentStyle(assignment: Assignment, cellWidth: string) {
+function assignmentStyle(assignment: Assignment, cellWidth: string | undefined) {
   const range = assignment.range ?? 1
 
   return {

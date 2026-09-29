@@ -43,7 +43,7 @@ import NavigationBar from '@/components/NavigationBar.vue'
 
 const calendar = ref<QCalendarAgenda>()
 const selectedDate = ref(today())
-const view = ref('week')
+const view = ref<InstanceType<typeof QCalendarAgenda>['$props']['view']>('week')
 function onToday() {
   if (calendar.value) {
     calendar.value.moveToToday()

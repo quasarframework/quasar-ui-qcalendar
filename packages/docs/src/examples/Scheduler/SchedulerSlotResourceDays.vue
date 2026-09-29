@@ -52,10 +52,9 @@ interface Event {
   range?: number
 }
 
-interface Scope {
-  resource: { id: string }
-  cellWidth: string
-}
+type Scope = Parameters<
+  NonNullable<InstanceType<typeof QCalendarScheduler>['$slots']['resource-days']>
+>[0]['scope']
 
 interface Resource {
   id: string
@@ -168,14 +167,14 @@ function getStyle(event: { left: string; width: string }): Record<string, string
   }
 }
 function getLeft(scope: Scope, event: Event): string {
-  const left = event.dow * parseFloat(scope.cellWidth)
-  const val = left + (scope.cellWidth.endsWith('%') ? '%' : 'px')
+  const left = event.dow * parseFloat(scope.cellWidth ?? '0')
+  const val = left + (scope.cellWidth?.endsWith('%') ? '%' : 'px')
   return val
 }
 
 function getWidth(scope: Scope, event: Event): string {
-  const width = (event.range ? event.range : 1) * parseFloat(scope.cellWidth)
-  const val = width + (scope.cellWidth.endsWith('%') ? '%' : 'px')
+  const width = (event.range ? event.range : 1) * parseFloat(scope.cellWidth ?? '0')
+  const val = width + (scope.cellWidth?.endsWith('%') ? '%' : 'px')
   return val
 }
 function onToday() {

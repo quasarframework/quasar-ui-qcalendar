@@ -22,9 +22,9 @@ export interface MonthProps {
   dayHeight: number | string
   dayMinHeight: number | string
   dayStyle?: (_scope: Scope) => any
-  dayClass?: (_scope: Scope) => string
+  dayClass?: (_scope: Scope) => Record<string, boolean>
   weekdayStyle?: (_scope: Scope) => any
-  weekdayClass?: (_scope: Scope) => string
+  weekdayClass?: (_scope: Scope) => Record<string, boolean>
   dayPadding?: string
   minWeeks: number | string
   shortMonthLabel: boolean
@@ -68,7 +68,7 @@ export const useMonthProps = {
    */
   dayStyle: Function as PropType<MonthProps['dayStyle']>,
   /**
-   * Function that returns CSS classes for month day cells.
+   * Function that returns a class-name-to-boolean map for month day cells.
    *
    * @category style
    */
@@ -80,7 +80,7 @@ export const useMonthProps = {
    */
   weekdayStyle: Function as PropType<MonthProps['weekdayStyle']>,
   /**
-   * Function that returns CSS classes for weekday header cells.
+   * Function that returns a class-name-to-boolean map for weekday header cells.
    *
    * @category style
    */

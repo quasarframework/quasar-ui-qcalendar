@@ -83,7 +83,7 @@
 
           <template #day="{ scope }">
             <div
-              v-if="hasEvents(scope.timestamp, scope.resource)"
+              v-if="hasEvents(scope.timestamp, scope.resource.id)"
               style="
                 display: flex;
                 flex: 1 0 auto;
@@ -93,7 +93,10 @@
                 font-size: 12px;
               "
             >
-              <template v-for="event in getEvents(scope.timestamp, scope.resource)" :key="event.id">
+              <template
+                v-for="event in getEvents(scope.timestamp, scope.resource.id)"
+                :key="event.id"
+              >
                 <span
                   v-if="event.resource"
                   style="
@@ -221,6 +224,7 @@ function onDragEnter(e: DragEvent, type: string, { scope }: DropScope) {
     e.preventDefault()
     return true
   }
+  return false
 }
 
 function onDragOver(e: DragEvent, type: string, { scope }: DropScope) {
@@ -228,18 +232,17 @@ function onDragOver(e: DragEvent, type: string, { scope }: DropScope) {
     e.preventDefault()
     return true
   }
+  return false
 }
 
-function onDragLeave(e: DragEvent, type: string, { scope }: DropScope) {
-  if (type === 'day' || type === 'head-day') {
-    return false
-  }
+function onDragLeave() {
+  return false
 }
 
 function onDrop(e: DragEvent, type: string, { scope }: DropScope) {
   if (type === 'day' || type === 'head-day') {
     if (!e.dataTransfer) {
-      return
+      return false
     }
     const itemID = parseInt(e.dataTransfer.getData('ID'), 10)
     const event: Event = { ...defaultEvent }
@@ -255,15 +258,16 @@ function onDrop(e: DragEvent, type: string, { scope }: DropScope) {
     events.push(event)
     return false
   }
+  return false
 }
 
-function getEvents(timestamp: Timestamp, resource: Resource) {
-  if (resource) {
+function getEvents(timestamp: Timestamp, resourceId: Resource['id']) {
+  if (resourceId !== undefined) {
     const events = eventsMap.value[timestamp.date]
     if (events) {
       return events.filter((item) => {
         if (item.resource) {
-          return item.date === timestamp.date && item.resource.id === resource.id
+          return item.date === timestamp.date && item.resource.id === resourceId
         }
         return item.date === timestamp.date
       })
@@ -272,8 +276,8 @@ function getEvents(timestamp: Timestamp, resource: Resource) {
   return []
 }
 
-function hasEvents(timestamp: Timestamp, resource: Resource) {
-  return getEvents(timestamp, resource).length > 0
+function hasEvents(timestamp: Timestamp, resourceId: Resource['id']) {
+  return getEvents(timestamp, resourceId).length > 0
 }
 
 function onDayClass({ scope }: { scope: { droppable: boolean } }) {

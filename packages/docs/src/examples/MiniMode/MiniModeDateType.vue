@@ -45,7 +45,7 @@ import NavigationBar from '@/components/NavigationBar.vue'
 
 const calendar = ref<QCalendarMonth>()
 const selectedDate = ref(today())
-const dateType = ref('square')
+const dateType = ref<InstanceType<typeof QCalendarMonth>['$props']['dateType']>('square')
 
 function onToday() {
   if (calendar.value) {

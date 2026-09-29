@@ -73,9 +73,9 @@ import NavigationBar from '@/components/NavigationBar.vue'
 
 const calendar = ref<QCalendarDay>(),
   selectedDate = ref(today()),
-  dateAlign = ref('center'),
-  weekdayAlign = ref('center'),
-  dateHeader = ref('stacked')
+  dateAlign = ref<InstanceType<typeof QCalendarDay>['$props']['dateAlign']>('center'),
+  weekdayAlign = ref<InstanceType<typeof QCalendarDay>['$props']['weekdayAlign']>('center'),
+  dateHeader = ref<InstanceType<typeof QCalendarDay>['$props']['dateHeader']>('stacked')
 
 function onToday() {
   if (calendar.value) {

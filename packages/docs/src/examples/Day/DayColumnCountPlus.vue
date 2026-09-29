@@ -26,7 +26,10 @@
           @click-head-day="onClickHeadDay"
         >
           <template #head-day="{ scope }">
-            <div style="text-align: center; font-weight: 800">
+            <div
+              v-if="scope.columnIndex !== undefined"
+              style="text-align: center; font-weight: 800"
+            >
               {{ persons[scope.columnIndex]?.name }}
             </div>
           </template>

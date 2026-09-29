@@ -8,6 +8,8 @@ First off, it's important to know that QCalendar has many modular components tha
 
 Named component imports from the package root are tree-shakable in modern bundlers. For example, `import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar'` excludes calendar views that are not used. Component subpaths such as `@quasar/quasar-ui-qcalendar/QCalendarMonth` remain the most explicit choice and provide the same focused result.
 
+Root imports, public component subpaths, and globally registered components share the same component types. You do not need a `src/components/` import for TypeScript support. See the [FAQ](/developing/faq) for typed template refs.
+
 The default package plugin and the `QCalendar` wrapper intentionally include every calendar view. The plugin registers the full component set, while the wrapper selects its concrete view at runtime. Use a named component import or component subpath when bundle size matters and the application does not need that full runtime surface.
 
 The components are:
