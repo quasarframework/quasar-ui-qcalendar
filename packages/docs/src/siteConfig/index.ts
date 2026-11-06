@@ -281,6 +281,7 @@ const examplesMenu = {
         { name: 'Column Count Plus', path: '/examples/day/column-count-plus' },
         { name: 'Disabled Before After', path: '/examples/day/disabled-before-after' },
         { name: 'Disabled Days', path: '/examples/day/disabled-days' },
+        { name: 'Disabled Intervals', path: '/examples/day/disabled-intervals' },
         { name: 'Disabled Weekdays', path: '/examples/day/disabled-weekdays' },
         { name: 'Hour 24 Format', path: '/examples/day/hour-24-format' },
         { name: 'Locale', path: '/examples/day/locale' },
@@ -442,6 +443,7 @@ const examplesMenu = {
       children: [
         { name: 'Dark', path: '/examples/resource/dark' },
         { name: 'Disabled Days', path: '/examples/resource/disabled-days' },
+        { name: 'Disabled Intervals', path: '/examples/resource/disabled-intervals' },
         { name: 'Focusable Hoverable', path: '/examples/resource/focusable-hoverable' },
         { name: 'Navigation', path: '/examples/resource/navigation' },
         { name: 'Hour 24 Format', path: '/examples/resource/hour-24-format' },
@@ -560,6 +562,7 @@ const examplesMenu = {
         { name: 'Cell Width', path: '/examples/week/cell-width' },
         { name: 'Disabled Before After', path: '/examples/week/disabled-before-after' },
         { name: 'Disabled Days', path: '/examples/week/disabled-days' },
+        { name: 'Disabled Intervals', path: '/examples/week/disabled-intervals' },
         { name: 'Disabled Weekdays', path: '/examples/week/disabled-weekdays' },
         { name: 'First Day Monday', path: '/examples/week/first-day-monday' },
         { name: 'Five Day Workweek', path: '/examples/week/five-day-workweek' },

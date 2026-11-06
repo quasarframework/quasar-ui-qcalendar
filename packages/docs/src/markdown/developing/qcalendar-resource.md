@@ -40,6 +40,16 @@ The example anchors its date to a visible week. The first example disables indiv
 
 <MarkdownExample title="Disabled Days" file="ResourceDisabledDays"/>
 
+## Disabled Intervals
+
+Use `disabled-intervals` to block time cells across every resource row and the
+corresponding interval header. Date/time strings and ranges use the
+[same format as the day calendar](/getting-started/quick-start#disabled-intervals).
+Use `{ from, to, start, end }` for the same daily window over several dates.
+Resource labels remain available.
+
+<MarkdownExample title="Disabled Intervals" file="ResourceDisabledIntervals"/>
+
 ## Focusable Hoverable
 
 Use focusable and hoverable states when resource rows or intervals need visible

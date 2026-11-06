@@ -49,6 +49,12 @@ scrolling `target`, `scrollLeft`, `scrollTop`, `scrollWidth`, `scrollHeight`,
 When `no-scroll` removes the active view's internal scroll area, listen for
 scroll events on the external scrolling element instead.
 
+## Disabled Intervals
+
+In `day` and `resource` modes, the wrapper forwards `disabled-intervals` to the
+active view. See [disabled interval formats](/getting-started/quick-start#disabled-intervals)
+and the day, week and resource examples.
+
 ## All
 
 <MarkdownExample title="All" file="CalendarAll" no-edit/>

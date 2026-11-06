@@ -112,6 +112,17 @@ The second example uses the object form with `from`, `to`, `color`, and `textCol
 
 <MarkdownExample title="Disabled Days" file="DayDisabledDays"/>
 
+## Disabled Intervals
+
+Use `disabled-intervals` to block individual time cells, a time window on one
+date, or a daily time window across an inclusive `from`/`to` date range. It works in every interval
+view of `QCalendarDay`, including week and month-interval views.
+
+See [disabled interval formats](/getting-started/quick-start#disabled-intervals)
+for range boundaries, calendar adapters and interaction behavior.
+
+<MarkdownExample title="Disabled Intervals" file="DayDisabledIntervals"/>
+
 ## Disabled Weekdays
 
 The weekends have been disabled with the `disabled-weekdays` property.

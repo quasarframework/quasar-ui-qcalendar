@@ -63,6 +63,15 @@ The second example uses the object form with `from`, `to`, `color`, and `textCol
 
 <MarkdownExample title="Disabled Days" file="WeekDisabledDays"/>
 
+## Disabled Intervals
+
+`disabled-intervals` applies the same date/time rules as the day view. Only
+matching dates and time cells are disabled; the remaining week stays available.
+Use `{ from, to, start, end }` to repeat a time window on every date in a range.
+See [disabled interval formats](/getting-started/quick-start#disabled-intervals).
+
+<MarkdownExample title="Disabled Intervals" file="WeekDisabledIntervals"/>
+
 ## Disabled Weekdays
 
 The weekends have been disabled with the `disabled-weekdays` property.

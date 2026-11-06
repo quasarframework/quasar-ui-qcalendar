@@ -164,6 +164,52 @@ The `disabled-weekdays` property uses the same input as the `weekdays` property.
 | ----------------- | ----- | ------- |
 | disabled-weekdays | Array | [0,6]   |
 
+### Disabled intervals
+
+Use `disabled-intervals` with `QCalendarDay` (including week and month-interval
+views) or `QCalendarResource`. The `QCalendar` wrapper forwards it in `day` and
+`resource` modes. It does not affect calendars whose cells represent whole days.
+
+```vue
+<q-calendar-day
+  v-model="selectedDate"
+  :disabled-intervals="['2026-11-06 14:00', { date: '2026-11-06', start: '09:00', end: '11:00' }]"
+/>
+```
+
+A `YYYY-MM-DD HH:mm` string disables the cell containing that time. An object
+disables every cell that overlaps its range: `start` is inclusive and `end` is
+exclusive. For example, `09:00`–`11:00` leaves the cell starting at `11:00`
+enabled. A partially overlapping cell is disabled in full; use a smaller
+`interval-minutes` value when finer control is needed.
+
+For the same time window on several dates, use `from` and `to` instead of `date`:
+
+```js
+{ from: '2026-11-06', to: '2026-11-10', start: '09:15', end: '10:15' }
+```
+
+Both dates are inclusive: this disables `09:15`–`10:15` on **each date** from
+November 6 through November 10. Other times on those dates remain available,
+subject to other disabled settings. A `from`/`to` pair can also name the same
+date. Supply either `date` or both `from` and `to` in an entry.
+
+Dates use the configured `calendar-system`, and times use the calendar grid's
+24-hour `HH:mm` format. `end` also accepts `24:00`. To cross midnight, split a
+range into two entries. Invalid entries, empty time ranges, reversed date or
+time ranges, and entries mixing `date` with `from`/`to` are ignored.
+
+Disabled cells use the disabled theme colors, expose `scope.disabled` and
+`scope.timestamp.disabled` to interval slots, and block pointer, touch,
+selection and drag/drop callbacks. They are removed from the tab order and
+up/down arrow navigation skips them. Existing disabled-day settings still apply.
+In resource calendars, each entry applies to all resource rows and the interval
+header for its date.
+
+See the [day](/developing/qcalendar-day#disabled-intervals),
+[week](/developing/qcalendar-day-week#disabled-intervals), and
+[resource](/developing/qcalendar-resource#disabled-intervals) examples.
+
 ## No header
 
 There may be some edge-cases where the header is not desirable. There is an example that shows how to build your own navigation with header information.
