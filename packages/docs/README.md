@@ -12,6 +12,8 @@ The docs app is a Quasar CLI Vite project inside the monorepo. Production docs s
 
 ## Development
 
+Use Node.js `>=22.22.0` and `pnpm@12.16.1`.
+
 From the repository root:
 
 ```bash

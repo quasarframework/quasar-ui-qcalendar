@@ -27,7 +27,7 @@ v5.0.0
 
 - QCalendar v5 is the stable Quasar CLI Vite 3-ready release.
 - The app extension is now Vite-only and requires `@quasar/app-vite` >=3.0.0.
-- This repo now requires Node.js `>=22.13` and pnpm `>=11.3.0`.
+- Repository development and docs builds require Node.js `>=22.22.0` and `pnpm@12.16.1`.
 - QCalendar uses Gregorian dates by default and can opt into Timestamp calendar adapters for native Hijri, Saka, Hebrew, and Persian calendar workflows.
 - Be sure to read the [Upgrade Guide](https://qcalendar.netlify.app/other/upgrade-guide).
 

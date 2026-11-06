@@ -33,24 +33,24 @@
   },
   "devDependencies": {
     "@quasar/vite-plugin": "^2.0.2",
-    "@types/node": "^26.6.1",
-    "@vitejs/plugin-vue": "^6.0.9",
-    "@vitest/browser-playwright": "^5.0.1",
-    "@vitest/coverage-istanbul": "^5.0.1",
-    "@vue/server-renderer": "^3.5.42",
+    "@types/node": "^26.6.6",
+    "@vitejs/plugin-vue": "^6.0.10",
+    "@vitest/browser-playwright": "^5.1.0",
+    "@vitest/coverage-istanbul": "^5.1.0",
+    "@vue/server-renderer": "^3.5.44",
     "@vue/test-utils": "^2.5.1",
-    "npm-check-updates": "^23.1.0",
-    "oxfmt": "^0.68.0",
-    "oxlint": "^1.83.0",
-    "playwright": "^1.63.0",
+    "npm-check-updates": "^23.1.1",
+    "oxfmt": "^0.76.0",
+    "oxlint": "^1.91.0",
+    "playwright": "^1.64.1",
     "typescript": "~6.0.3",
-    "vite": "^8.3.0",
-    "vitest": "^5.0.1"
+    "vite": "^8.3.5",
+    "vitest": "^5.1.0"
   },
   "engines": {
-    "node": ">=22.13",
+    "node": ">=22.22.0",
     "pnpm": ">=11.5.0"
   },
-  "packageManager": "pnpm@12.4.2",
+  "packageManager": "pnpm@12.16.1",
   "access": "private"
 }
