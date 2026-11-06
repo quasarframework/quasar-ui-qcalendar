@@ -265,6 +265,7 @@ export default function useNavigation(
   }
 
   function focusWithoutScrolling(element: HTMLElement): void {
+    if (element.classList?.contains('q-disabled-interval') === true) return
     element.focus({ preventScroll: true })
     if (scrollFocusedElementIntoView) {
       scrollFocusedElementIntoView(element)
@@ -458,6 +459,7 @@ export default function useNavigation(
 
   function setFocusTimestamp(timestamp: Timestamp): void {
     const candidate = getFocusKey(timestamp)
+    if (datesRef.value[candidate]?.classList?.contains('q-disabled-interval') === true) return
 
     const focusKey =
       datesRef.value[candidate] !== undefined || candidate.includes(' ')
@@ -518,6 +520,28 @@ export default function useNavigation(
       amount,
     )
     return applyFocusTime(boundaryDate, `${boundaryDate.date} ${boundaryTime}`)
+  }
+
+  function resolveEnabledInterval(
+    current: Timestamp,
+    target: Timestamp,
+    amount: 1 | -1,
+  ): Timestamp | null {
+    let next: Timestamp | null = target
+    // Bound the search when every rendered interval is disabled.
+    const limit = Object.keys(datesRef.value).length
+    for (let count = 0; count <= limit; count += 1) {
+      next = resolveRenderedInterval(current, next, amount)
+      if (next === null) return null
+      if (datesRef.value[getFocusKey(next)]?.classList?.contains('q-disabled-interval') !== true)
+        return next
+      next = addToDate(
+        next,
+        { minute: amount * Number(props.intervalMinutes ?? 60) },
+        props.calendarSystem,
+      )
+    }
+    return null
   }
 
   function isEnabledWeekday(timestamp: Timestamp): boolean {
@@ -597,7 +621,7 @@ export default function useNavigation(
         tm = moveToEnabledWeekday(tm, -1)
       }
     }
-    const renderedTarget = resolveRenderedInterval(current, tm, -1)
+    const renderedTarget = resolveEnabledInterval(current, tm, -1)
     if (!renderedTarget) return
     tm = renderedTarget
     direction.value = 'prev'
@@ -624,7 +648,7 @@ export default function useNavigation(
         tm = moveToEnabledWeekday(tm, 1)
       }
     }
-    const renderedTarget = resolveRenderedInterval(current, tm, 1)
+    const renderedTarget = resolveEnabledInterval(current, tm, 1)
     if (!renderedTarget) return
     tm = renderedTarget
     direction.value = 'next'

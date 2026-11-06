@@ -31,6 +31,13 @@ expectTypeOf<RootInstances>().toEqualTypeOf<GlobalInstances>()
 
 type ModelValues = { [Name in Names]: RootInstances[Name]['$props']['modelValue'] }
 expectTypeOf<ModelValues>().toEqualTypeOf<Record<Names, string | undefined>>()
+type IntervalNames = 'QCalendar' | 'QCalendarDay' | 'QCalendarResource'
+type DisabledIntervals = {
+  [Name in IntervalNames]: RootInstances[Name]['$props']['disabledIntervals']
+}
+expectTypeOf<DisabledIntervals>().toEqualTypeOf<
+  Record<IntervalNames, Root.DisabledInterval[] | undefined>
+>()
 expectTypeOf<RootInstances['QCalendar']['$props']['hour24Format']>().toEqualTypeOf<
   boolean | undefined
 >()
@@ -49,6 +56,13 @@ expectTypeOf<DayScope['timestamp']['date']>().toEqualTypeOf<string>()
 expectTypeOf<RootInstances['QCalendarDay']['$emit']>().not.toBeAny()
 
 type DayProps = RootInstances['QCalendarDay']['$props']
+const disabledIntervals: Root.DisabledInterval[] = [
+  '2026-11-06 14:00',
+  { date: '2026-11-06', start: '09:15', end: '10:15' },
+  { from: '2026-11-06', to: '2026-11-10', start: '09:15', end: '10:15' },
+]
+const intervalProps: Pick<DayProps, 'disabledIntervals'> = { disabledIntervals }
+void intervalProps
 const dayCallbacks: Pick<DayProps, 'dragEnterFunc' | 'weekdayClass'> = {
   dragEnterFunc(event) {
     expectTypeOf(event).toEqualTypeOf<DragEvent>()

@@ -15,9 +15,11 @@ import { useCellWidthProps } from '../composables/useCellWidth'
 import { useNavigationProps } from '../composables/useKeyboard'
 import { useMonthProps } from '../composables/useMonth'
 import { useTaskProps } from '../composables/useTask'
+import type { DisabledInterval } from '../utils/disabledIntervals'
 // import useCalendar from '../composables/useCalendar'
 
 export interface CalendarProps {
+  disabledIntervals?: DisabledInterval[]
   mode: string
   modelValue: string
   weekdays: number[]

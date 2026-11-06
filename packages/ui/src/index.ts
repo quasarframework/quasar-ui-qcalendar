@@ -13,6 +13,7 @@ import { version } from './version.js'
 // Explicitly export individual named properties
 export * from './utils/helpers.js'
 export type { CalendarScrollEvent } from './composables/useScrollEvents.js'
+export type { DisabledInterval, DisabledIntervalRange } from './utils/disabledIntervals.js'
 export { default } from './plugin.js'
 
 type CalendarNavigationInstance = {

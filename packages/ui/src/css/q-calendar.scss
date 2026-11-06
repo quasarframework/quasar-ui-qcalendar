@@ -217,6 +217,15 @@
   [disabled] {
     opacity: 0.6 !important;
   }
+
+  .q-disabled-interval {
+    color: var(--calendar-disabled-date-color);
+    background: var(--calendar-disabled-date-background) !important;
+
+    * {
+      pointer-events: none !important;
+    }
+  }
 }
 
 .q-calendar {
@@ -266,6 +275,11 @@
   &.q-calendar {
     color: var(--calendar-color-dark);
     background: var(--calendar-background-dark);
+
+    .q-disabled-interval {
+      color: var(--calendar-disabled-date-color-dark);
+      background: var(--calendar-disabled-date-background-dark) !important;
+    }
 
     &__bordered {
       border: var(--calendar-border-dark);

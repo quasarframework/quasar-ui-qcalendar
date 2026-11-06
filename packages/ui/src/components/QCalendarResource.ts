@@ -41,7 +41,7 @@ import { useColumnProps } from '../composables/useColumn'
 import { useMaxDaysProps } from '../composables/useMaxDays'
 import useTimes, { useTimesProps } from '../composables/useTimes'
 import useRenderValues from '../composables/useRenderValues'
-import useMouse, { getRawMouseEvents } from '../composables/useMouse'
+import useMouse, { disabledIntervalHandlers, getRawMouseEvents } from '../composables/useMouse'
 import useMove, { useMoveEmits } from '../composables/useMove'
 import useEmitListeners from '../composables/useEmitListeners'
 import useScrollEvents, { useScrollEmits } from '../composables/useScrollEvents'
@@ -612,7 +612,7 @@ export default defineComponent({
 
       const intervalClass =
         typeof props.intervalClass === 'function' ? props.intervalClass({ scope }) : {}
-      const isFocusable = isFocusableType(props, 'interval')
+      const isFocusable = isFocusableType(props, 'interval') === true && scope.disabled !== true
 
       return h(
         'div',
@@ -624,32 +624,38 @@ export default defineComponent({
             }
           },
           tabindex: isFocusable === true ? 0 : -1,
+          'aria-disabled': props.noAria !== true && scope.disabled === true ? 'true' : undefined,
           class: {
             'q-calendar-resource__head--interval': true,
+            'q-disabled-interval': scope.disabled === true,
             ...getRelativeClasses(interval, scope.outside),
             ...intervalClass,
             'q-active-date': activeDate,
             disabled: scope.disabled === true,
             'q-disabled-day': scope.disabled === true,
-            'q-calendar__hoverable': props.hoverable === true,
+            'q-calendar__hoverable': props.hoverable === true && scope.disabled !== true,
             'q-calendar__focusable': isFocusable === true,
           },
           style,
-          ...getDragEventHandlers(props, {
-            targetRef: dragOverHeadDayRef,
-            value: label,
-            resetValue: '',
-            type: 'interval',
-            scope,
-          }),
+          ...(scope.disabled === true
+            ? disabledIntervalHandlers
+            : getDragEventHandlers(props, {
+                targetRef: dragOverHeadDayRef,
+                value: label,
+                resetValue: '',
+                type: 'interval',
+                scope,
+              })),
           onFocus: () => {
             if (isFocusable === true) {
               focusRef.value = focusKey
             }
           },
-          ...getDefaultMouseEventHandlers('-interval', (event) => {
-            return { scope, event }
-          }),
+          ...(scope.disabled === true
+            ? {}
+            : getDefaultMouseEventHandlers('-interval', (event) => {
+                return { scope, event }
+              })),
         },
         [slot ? slot({ scope }) : label, useFocusHelper()],
       )
@@ -928,8 +934,6 @@ export default defineComponent({
       const resourceKey = resource[props.resourceKey]
       const dragValue = interval.time + '-' + resourceKey
       const focusKey = `${interval.date} ${dragValue}`
-      const isFocusable = isFocusableType(props, 'time')
-
       const scope = getScopeForSlotX(
         interval,
         resourceIndex,
@@ -938,6 +942,7 @@ export default defineComponent({
       scope.resource = resource
       scope.resourceIndex = resourceIndex
       scope.droppable = dragOverResourceInterval.value === dragValue
+      const isFocusable = isFocusableType(props, 'time') === true && scope.disabled !== true
 
       const styler = props.intervalStyle || dayStyleDefault
       const width = cellWidthStyle.value
@@ -960,31 +965,37 @@ export default defineComponent({
             }
           },
           tabindex: isFocusable === true ? 0 : -1,
+          'aria-disabled': props.noAria !== true && scope.disabled === true ? 'true' : undefined,
           class: {
             'q-calendar-resource__resource--interval': true,
+            'q-disabled-interval': scope.disabled === true,
             ...getRelativeClasses(interval, scope.outside),
             'q-active-date': activeDate,
             disabled: scope.disabled === true,
             'q-disabled-day': scope.disabled === true,
-            'q-calendar__hoverable': props.hoverable === true,
+            'q-calendar__hoverable': props.hoverable === true && scope.disabled !== true,
             'q-calendar__focusable': isFocusable === true,
           },
           style,
-          ...getDragEventHandlers(props, {
-            targetRef: dragOverResourceInterval,
-            value: dragValue,
-            resetValue: '',
-            type: 'time',
-            scope,
-          }),
+          ...(scope.disabled === true
+            ? disabledIntervalHandlers
+            : getDragEventHandlers(props, {
+                targetRef: dragOverResourceInterval,
+                value: dragValue,
+                resetValue: '',
+                type: 'time',
+                scope,
+              })),
           onFocus: () => {
             if (isFocusable === true) {
               focusRef.value = focusKey
             }
           },
-          ...getDefaultMouseEventHandlers('-time', (event) => {
-            return { scope, event }
-          }),
+          ...(scope.disabled === true
+            ? {}
+            : getDefaultMouseEventHandlers('-time', (event) => {
+                return { scope, event }
+              })),
         },
         [slot && slot({ scope }), useFocusHelper()],
       )

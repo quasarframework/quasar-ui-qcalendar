@@ -6,6 +6,7 @@ import * as helpers from './utils/helpers'
 
 // Explicitly export individual named properties
 export * from './utils/helpers'
+export type { DisabledInterval, DisabledIntervalRange } from './utils/disabledIntervals'
 
 export { version, QCalendarDay }
 

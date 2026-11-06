@@ -44,7 +44,7 @@ import { getColumnIndexes, useColumnProps } from '../composables/useColumn'
 import { useMaxDaysProps } from '../composables/useMaxDays'
 import useTimes, { useTimesProps } from '../composables/useTimes'
 import useRenderValues from '../composables/useRenderValues'
-import useMouse, { getRawMouseEvents } from '../composables/useMouse'
+import useMouse, { disabledIntervalHandlers, getRawMouseEvents } from '../composables/useMouse'
 import useMove, { useMoveEmits } from '../composables/useMove'
 import useEmitListeners from '../composables/useEmitListeners'
 import useScrollEvents, { useScrollEmits } from '../composables/useScrollEvents'
@@ -267,6 +267,7 @@ export default defineComponent({
       getTimestampAtEventInterval,
       getTimestampAtEvent,
       getScopeForSlot,
+      getIntervalScope,
       scrollToTime: scrollToTimeCalendar,
       heightToMinutes: heightToMinutesCalendar,
       timeDurationHeight: timeDurationHeightCalendar,
@@ -1168,12 +1169,12 @@ export default defineComponent({
       const styler = props.intervalStyle || styleDefault
       const slotDayInterval = slots['day-interval']
 
-      const scope: IntervalSlotScope = getScopeForSlot(interval, columnIndex)
+      const scope: IntervalSlotScope = getIntervalScope(interval, columnIndex)
       scope.droppable = dragOverInterval.value === getDayTimeIdentifier(interval)
 
       const intervalClass =
         typeof props.intervalClass === 'function' ? props.intervalClass({ scope }) : {}
-      const isFocusable = isFocusableType(props, 'interval')
+      const isFocusable = isFocusableType(props, 'interval') === true && scope.disabled !== true
       const dateTime = getDateTime(interval)
 
       const style: CSSProperties = {
@@ -1187,29 +1188,32 @@ export default defineComponent({
           datesRef.value[dateTime] = el
         },
         tabindex: isFocusable === true ? 0 : -1,
+        'aria-disabled': props.noAria !== true && scope.disabled === true ? 'true' : undefined,
         class: {
           'q-calendar-day__day-interval': interval.minute === 0,
           'q-calendar-day__day-interval--section': interval.minute !== 0,
           ...intervalClass,
           ...getIntervalClasses(
-            interval,
+            scope.timestamp,
             Array.from(props.selectedDates),
             props.selectedStartEndDates,
           ),
           'q-outside': scope.outside === true,
           disabled: scope.disabled === true,
           'q-disabled-day': scope.disabled === true,
-          'q-calendar__hoverable': props.hoverable === true,
+          'q-calendar__hoverable': props.hoverable === true && scope.disabled !== true,
           'q-calendar__focusable': isFocusable === true,
         },
         style,
-        ...getDragEventHandlers(props, {
-          targetRef: dragOverInterval,
-          value: getDayTimeIdentifier(interval),
-          resetValue: 0,
-          type: 'interval',
-          scope,
-        }),
+        ...(scope.disabled === true
+          ? disabledIntervalHandlers
+          : getDragEventHandlers(props, {
+              targetRef: dragOverInterval,
+              value: getDayTimeIdentifier(interval),
+              resetValue: 0,
+              type: 'interval',
+              scope,
+            })),
         onKeydown: (event: KeyboardEvent) => {
           if (scope.disabled !== true && isKeyCode(event, [13, 32])) {
             event.stopPropagation()
@@ -1224,28 +1228,29 @@ export default defineComponent({
         onKeyup: (event: KeyboardEvent) => {
           // allow selection of date via Enter or Space keys
           if (scope.disabled !== true && isKeyCode(event, [13, 32])) {
-            const scope: IntervalSlotScope = getScopeForSlot(interval, columnIndex)
             emittedValue.value = scope.timestamp.date
             if (emitListeners.value.onClickTime !== undefined) {
               emit('click-time', { scope, event })
             }
           }
         },
-        ...getDefaultMouseEventHandlers('-time', (event: MouseEvent | TouchEvent) => {
-          const scope: IntervalSlotScope = getScopeForSlot(
-            getTimestampAtEventInterval(
-              event as MouseEvent & TouchEvent,
-              interval,
-              props.timeClicksClamped,
-              times.now,
-            ),
-            columnIndex,
-          )
-          if (scope.disabled === true) {
-            event.preventDefault()
-          }
-          return { scope, event }
-        }),
+        ...(scope.disabled === true
+          ? {}
+          : getDefaultMouseEventHandlers('-time', (event: MouseEvent | TouchEvent) => {
+              const scope: IntervalSlotScope = getScopeForSlot(
+                getTimestampAtEventInterval(
+                  event as MouseEvent & TouchEvent,
+                  interval,
+                  props.timeClicksClamped,
+                  times.now,
+                ),
+                columnIndex,
+              )
+              if (scope.disabled === true) {
+                event.preventDefault()
+              }
+              return { scope, event }
+            })),
       }
 
       setAriaLabel(data, ariaDateTimeFormatter.value(interval, false), props.noAria !== true)

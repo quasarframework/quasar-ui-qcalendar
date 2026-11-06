@@ -222,6 +222,32 @@ export function getRawMouseEvents(suffix: string): string[] {
   return Object.keys(getMouseEventName(suffix))
 }
 
+function blockDisabledIntervalEvent(event: Event): void {
+  if (event.type.startsWith('key') && !['Enter', ' '].includes((event as KeyboardEvent).key)) return
+  event.stopPropagation()
+  // Preserve native touch scrolling while suppressing interval callbacks.
+  if (!event.type.startsWith('touch') && !event.type.startsWith('pointer')) event.preventDefault()
+}
+
+export const disabledIntervalHandlers = Object.fromEntries(
+  [
+    ...getRawMouseEvents(''),
+    'dblclick',
+    'pointerdown',
+    'pointermove',
+    'pointerup',
+    'dragenter',
+    'dragover',
+    'dragleave',
+    'drop',
+    'keydown',
+    'keyup',
+  ].map((event) => [
+    `on${event.charAt(0).toUpperCase()}${event.slice(1)}Capture`,
+    blockDisabledIntervalEvent,
+  ]),
+)
+
 /**
  * Default function export that provides mouse event handling utilities.
  * @param {Function} emit - Vue's emit function.

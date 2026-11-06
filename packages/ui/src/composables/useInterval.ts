@@ -20,6 +20,11 @@ import {
 
 import { animVerticalScrollTo, animHorizontalScrollTo } from '../utils/scroll'
 import { toCalendarTimestamp, type CalendarScopeData } from '../utils/calendarSystem'
+import {
+  isDisabledInterval,
+  normalizeDisabledIntervals,
+  type DisabledInterval,
+} from '../utils/disabledIntervals'
 import { type CommonProps } from './useCommon'
 import { type ColumnProps } from './useColumn'
 import { type CellWidthProps } from './useCellWidth'
@@ -61,6 +66,7 @@ export interface IntervalProps
   intervalMinutes: number | string
   intervalStart: number | string
   intervalCount: number | string
+  disabledIntervals?: DisabledInterval[]
   intervalStyle?: (_scope: Scope) => any
   intervalClass?: (_scope: Scope) => Record<string, boolean>
   weekdayStyle?: (_scope: Scope) => any
@@ -127,6 +133,20 @@ export const useIntervalProps = {
     type: [Number, String] as PropType<IntervalProps['intervalCount']>,
     default: 24,
     validator: validateNumber,
+  },
+  /**
+   * Disables time cells containing a `YYYY-MM-DD HH:mm` entry or overlapping a
+   * `{ date, start, end }` range. Use `{ from, to, start, end }` to repeat the time
+   * window on each date in an inclusive date range. The time `end` is exclusive;
+   * dates use `calendar-system`.
+   *
+   * @category behavior
+   * @example :disabled-intervals="['2026-11-06 14:00', { date: '2026-11-06', start: '09:00', end: '11:00' }]"
+   * @example :disabled-intervals="[{ from: '2026-11-06', to: '2026-11-10', start: '09:15', end: '10:15' }]"
+   */
+  disabledIntervals: {
+    type: Array as PropType<DisabledInterval[]>,
+    default: (): DisabledInterval[] => [],
   },
   /**
    * Function that returns inline styles for interval cells.
@@ -619,6 +639,7 @@ export interface UseIntervalReturn {
     _now?: Timestamp,
   ) => Timestamp
   getScopeForSlot: (_day: Timestamp, _columnIndex: number) => ScopeForSlot
+  getIntervalScope: (_day: Timestamp, _columnIndex: number) => ScopeForSlot
   getScopeForSlotX: (_day: Timestamp, _columnIndex: number) => ScopeForSlotX
   scrollToTime: (_time: string, _duration?: number) => boolean
   scrollToTimeX: (_time: string, _duration?: number) => boolean
@@ -635,6 +656,7 @@ interface UseIntervalProps extends CalendarDaysProps {
   intervalMinutes?: number | string
   intervalStart?: number | string
   intervalCount?: number | string
+  disabledIntervals?: DisabledInterval[]
   hour24Format?: boolean
 }
 
@@ -677,6 +699,9 @@ export default function useInterval(
 
   const parsedIntervalStart = computed(() => parseInt(String(props.intervalStart ?? 0), 10))
   const parsedIntervalMinutes = computed(() => parseInt(String(props.intervalMinutes ?? 60), 10))
+  const disabledIntervals = computed(() =>
+    normalizeDisabledIntervals(props.disabledIntervals ?? [], props.calendarSystem),
+  )
   const parsedIntervalCount = computed(() => parseInt(String(props.intervalCount ?? 24), 10))
   const parsedIntervalHeight = computed(() => parseFloat(String(props.intervalHeight ?? 40)))
   const parsedStartMinute = computed(() => parsedIntervalStart.value * parsedIntervalMinutes.value)
@@ -976,6 +1001,23 @@ export default function useInterval(
     return scope
   }
 
+  function getIntervalScope(timestamp: Timestamp, columnIndex?: number): ScopeForSlot {
+    const scope = getScopeForSlot(timestamp, columnIndex)
+    if (
+      isDisabledInterval(
+        timestamp,
+        parsedIntervalMinutes.value,
+        disabledIntervals.value,
+        props.calendarSystem,
+      )
+    ) {
+      scope.disabled = true
+      scope.timestamp = Object.freeze({ ...scope.timestamp, disabled: true })
+      scope.calendarTimestamp = Object.freeze({ ...scope.calendarTimestamp, disabled: true })
+    }
+    return scope
+  }
+
   /**
    * Returns the scope for the associated Timestamp
    * This function is used for horizontal layout
@@ -983,9 +1025,9 @@ export default function useInterval(
    * @param {Number*} index
    */
   function getScopeForSlotX(timestamp: Timestamp, index: number): ScopeForSlotX {
-    const dayScope = getCalendarDayScope(timestamp, index)
+    const dayScope = getIntervalScope(timestamp, index)
     const scope: ScopeForSlotX = {
-      timestamp: copyTimestamp(timestamp),
+      timestamp: copyTimestamp(dayScope.timestamp),
       calendarTimestamp: dayScope.calendarTimestamp,
       calendarIdentity: dayScope.calendarIdentity,
       calendarSystem: dayScope.calendarSystem,
@@ -1154,6 +1196,7 @@ export default function useInterval(
     getTimestampAtEvent,
     getTimestampAtEventX,
     getScopeForSlot,
+    getIntervalScope,
     getScopeForSlotX,
     scrollToTime,
     scrollToTimeX,
