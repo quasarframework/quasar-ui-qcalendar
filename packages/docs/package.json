@@ -32,7 +32,7 @@
     "date-holidays": "^3.38.0",
     "pinia": "^4.1.0",
     "quasar": "^2.35.2",
-    "vue": "^3.5.44",
+    "vue": "^3.5.45",
     "vue-router": "^5.4.0"
   },
   "devDependencies": {
@@ -45,7 +45,7 @@
     "@quasar/app-vite": "3.10.3",
     "@quasar/quasar-ui-qcalendar": "workspace:*",
     "@types/node": "^26.6.6",
-    "@vue/server-renderer": "^3.5.44",
+    "@vue/server-renderer": "^3.5.45",
     "autoprefixer": "^10.6.2",
     "markdown-it": "^15.0.3",
     "mermaid": "^12.3.0",
